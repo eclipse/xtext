@@ -14,8 +14,8 @@ import java.net.URLClassLoader;
 import java.util.Hashtable;
 import java.util.List;
 import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.xtend.core.conversion.JavaASTFlattener;
@@ -59,7 +59,7 @@ public class JavaConverter {
     }
   }
   
-  private final static int JLS = AST.JLS3;
+  private final static int JLS = JavaASTFlattener.JLS;
   
   /**
    * TODO Refactor this class. Remove state, extract common logic.
@@ -94,16 +94,40 @@ public class JavaConverter {
     }
   }
   
+  /**
+   * @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
+   * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+   * @param javaSrc Java source code as String
+   * @throws IllegalArgumentException if unitName is <code>null</code>
+   */
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc) {
-    return this.toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT);
+    JavaConverter.ConversionResult _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(unitName, null);
+      if (_equals) {
+        throw new IllegalArgumentException();
+      }
+      _xblockexpression = this.internalToXtend(unitName, javaSrc, null);
+    }
+    return _xblockexpression;
   }
   
   /**
-   * @param unitName some CU name e.g. Clazz. See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
-   * @param javaSrc Java source code as String
-   * @param javaSourceKind ASTParser.K_COMPILATION_UNIT || ASTParser.K_CLASS_BODY_DECLARATION
+   * @param javaSrc Java class source code as String
+   * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
+   * 			 configured with the system class loader to resolve bindings.
    */
-  public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc, final int javaSourceKind) {
+  public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final IJavaProject project) {
+    return this.internalToXtend(null, javaSrc, null);
+  }
+  
+  /**
+   * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
+   * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+   * @param javaSrc Java source code as String
+   * @param proj JavaProject where the java source code comes from
+   */
+  private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final IJavaProject proj) {
     final ASTParser parser = ASTParser.newParser(JavaConverter.JLS);
     final Hashtable options = JavaCore.getOptions();
     JavaCore.setComplianceOptions(this.complianceLevel, options);
@@ -111,23 +135,34 @@ public class JavaConverter {
     parser.setStatementsRecovery(true);
     parser.setResolveBindings(true);
     parser.setBindingsRecovery(true);
-    final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
-    URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
-    final Function1<URL, String> _function = new Function1<URL, String>() {
-      public String apply(final URL it) {
-        return it.getFile();
-      }
-    };
-    final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
-    parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
-    parser.setKind(javaSourceKind);
-    parser.setUnitName(unitName);
-    char[] _charArray = javaSrc.toCharArray();
+    boolean _notEquals = (!Objects.equal(proj, null));
+    if (_notEquals) {
+      parser.setProject(proj);
+    } else {
+      final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
+      URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
+      final Function1<URL, String> _function = new Function1<URL, String>() {
+        public String apply(final URL it) {
+          return it.getFile();
+        }
+      };
+      final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
+      parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
+    }
+    parser.setKind(ASTParser.K_COMPILATION_UNIT);
+    String preparedJavaSource = javaSrc;
+    boolean _equals = Objects.equal(unitName, null);
+    if (_equals) {
+      parser.setUnitName("MISSING");
+      preparedJavaSource = (("class MISSING {" + javaSrc) + "}");
+    } else {
+      parser.setUnitName(unitName);
+    }
+    char[] _charArray = preparedJavaSource.toCharArray();
     parser.setSource(_charArray);
     this.astFlattener.reset();
     this.astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
-    this.astFlattener.setJavaSourceKind(javaSourceKind);
-    this.astFlattener.setJavaSources(javaSrc);
+    this.astFlattener.setJavaSources(preparedJavaSource);
     ASTNode _createAST = parser.createAST(null);
     _createAST.accept(this.astFlattener);
     return JavaConverter.ConversionResult.create(this.astFlattener);

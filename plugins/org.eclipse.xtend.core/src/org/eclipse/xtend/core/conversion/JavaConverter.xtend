@@ -10,10 +10,10 @@ package org.eclipse.xtend.core.conversion
 import com.google.inject.Inject
 import java.net.URLClassLoader
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTParser
 
 import org.eclipse.jdt.core.ICompilationUnit
+import org.eclipse.jdt.core.IJavaProject
 
 /**
  * Converts Java code or an ICompilationUnit to Xtend code<br>
@@ -21,7 +21,7 @@ import org.eclipse.jdt.core.ICompilationUnit
  *  @author Dennis Hübner - Initial contribution and API
  */
 class JavaConverter {
-	final static int JLS = AST.JLS3
+	final static int JLS = JavaASTFlattener.JLS
 
 	/*TODO Refactor this class. Remove state, extract common logic. */
 	@Inject JavaASTFlattener astFlattener
@@ -46,16 +46,34 @@ class JavaConverter {
 
 	}
 
+	/**
+ 	* @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
+ 	* 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+ 	* @param javaSrc Java source code as String
+ 	* @throws IllegalArgumentException if unitName is <code>null</code> 
+ 	*/
 	def ConversionResult toXtend(String unitName, String javaSrc) {
-		toXtend(unitName, javaSrc, ASTParser.K_COMPILATION_UNIT)
+		if (unitName == null)
+			throw new IllegalArgumentException()
+		internalToXtend(unitName, javaSrc, null)
 	}
 
 	/**
- 	* @param unitName some CU name e.g. Clazz. See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+	* @param javaSrc Java class source code as String
+ 	* @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
+ 	* 			 configured with the system class loader to resolve bindings.
+	*/
+	def ConversionResult bodyDeclarationToXtend(String javaSrc, IJavaProject project) {
+		internalToXtend(null, javaSrc, null)
+	}
+
+	/**
+ 	* @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
+ 	* 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
  	* @param javaSrc Java source code as String
- 	* @param javaSourceKind ASTParser.K_COMPILATION_UNIT || ASTParser.K_CLASS_BODY_DECLARATION
+ 	* @param proj JavaProject where the java source code comes from
  	*/
-	def ConversionResult toXtend(String unitName, String javaSrc, int javaSourceKind) {
+	def private ConversionResult internalToXtend(String unitName, String javaSrc, IJavaProject proj) {
 		val parser = ASTParser.newParser(JLS)
 		val options = JavaCore.getOptions()
 		JavaCore.setComplianceOptions(complianceLevel, options)
@@ -63,18 +81,26 @@ class JavaConverter {
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
-		val sysClassLoader = ClassLoader.getSystemClassLoader();
-		val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
-		parser.setEnvironment(cpEntries, null, null, true)
-
-		parser.kind = javaSourceKind
-		parser.unitName = unitName
-		parser.source = javaSrc.toCharArray
+		if (proj != null) {
+			parser.project = proj;
+		} else {
+			val sysClassLoader = ClassLoader.getSystemClassLoader();
+			val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
+			parser.setEnvironment(cpEntries, null, null, true)
+		}
+		parser.kind = ASTParser.K_COMPILATION_UNIT
+		var preparedJavaSource = javaSrc
+		if (unitName == null) {
+			parser.unitName = "MISSING"
+			preparedJavaSource = "class MISSING {" + javaSrc + "}"
+		} else {
+			parser.unitName = unitName
+		}
+		parser.source = preparedJavaSource.toCharArray
 
 		astFlattener.reset
 		astFlattener.useFallBackStrategy = fallbackConversionStartegy
-		astFlattener.setJavaSourceKind(javaSourceKind)
-		astFlattener.setJavaSources(javaSrc)
+		astFlattener.setJavaSources(preparedJavaSource)
 		parser.createAST(null).accept(astFlattener)
 		return ConversionResult.create(astFlattener)
 	}
