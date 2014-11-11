@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -25,6 +26,9 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
+ * Base class for content assist parsers that can reduce the input preceding the cursor
+ * position without any impact on the follow set.
+ * 
  * @since 2.7
  * @author Sebastian Zarnekow
  */
@@ -72,6 +76,8 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 			}
 		} else if (grammarElement instanceof ParserRule) {
 			grammarElement = ((ParserRule) grammarElement).getAlternatives();
+		} else if (grammarElement instanceof CrossReference) {
+			grammarElement = GrammarUtil.containingAssignment(grammarElement);
 		}
 		AbstractElement result = (AbstractElement) grammarElement;
 		if (result instanceof Action) {
@@ -127,7 +133,8 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 		return null;
 	}
 
-	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser,
+	protected Collection<FollowElement> getFollowElements(
+			AbstractInternalContentAssistParser parser,
 			AbstractElement entryPoint) {
 		String ruleName = getRuleName(entryPoint);
 		if (ruleName == null) {
@@ -163,25 +170,6 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 			throw new RuntimeException(e);
 		} catch (SecurityException e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public Collection<FollowElement> getFollowElements(String input, boolean strict) {
-		TokenSource tokenSource = createTokenSource(input);
-		AbstractInternalContentAssistParser parser = createParser();
-		parser.setStrict(strict);
-		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
-		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
-		parser.setTokenStream(tokens);
-		IUnorderedGroupHelper helper = getUnorderedGroupHelper().get();
-		parser.setUnorderedGroupHelper(helper);
-		helper.initializeWith(parser);
-		tokens.setListener(parser);
-		try {
-			return Lists.newArrayList(getFollowElements(parser));
-		} catch (InfiniteRecursion infinite) {
-			return Lists.newArrayList(parser.getFollowElements());
 		}
 	}
 }
