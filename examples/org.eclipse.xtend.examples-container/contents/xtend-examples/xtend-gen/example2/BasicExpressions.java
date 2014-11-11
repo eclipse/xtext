@@ -40,6 +40,28 @@ public class BasicExpressions {
   }
   
   @Test
+  public void operators() {
+    int i = 5;
+    Assert.assertEquals(6, (i + 1));
+    Assert.assertEquals(4, (i - 1));
+    Assert.assertEquals(1, (i / 5));
+    Assert.assertEquals(15, (i * 3));
+    Assert.assertEquals(0, (i % 5));
+    int _i = i;
+    int _multiply = i = (_i * 2);
+    Assert.assertEquals(10, _multiply);
+    Assert.assertFalse((i < 0));
+    Assert.assertEquals(5, (i >> 1));
+    int j = 4;
+    int _minusMinus = j--;
+    Assert.assertEquals(4, _minusMinus);
+    Assert.assertEquals(3, j);
+    int _plusPlus = j++;
+    Assert.assertEquals(3, _plusPlus);
+    Assert.assertEquals(4, j);
+  }
+  
+  @Test
   public void collections() {
     final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Hello", "World"));
     final Function1<String, String> _function = new Function1<String, String>() {

@@ -28,6 +28,40 @@ class BasicExpressions {
 		assertEquals(getClass(), BasicExpressions)
 	}
 	
+	@Test def void operators() {
+		// infix Operators 
+		var i = 5
+		
+		// all Java infix operators are supported
+		
+		// additive
+		assertEquals(6, i + 1)
+		assertEquals(4, i - 1)
+		
+		// multiplicative
+		assertEquals(1, i / 5)
+		assertEquals(15, i * 3)
+		assertEquals(0, i % 5)
+		
+		// assignment operators
+		assertEquals(10, i *= 2)
+		
+		// relational operators
+		assertFalse(i < 0)
+		
+		// shift operators
+		assertEquals(5, i >> 1)
+		
+		// postfix operators are also the same as in Java
+		var j = 4
+		assertEquals(4, j--)
+		assertEquals(3, j)
+		assertEquals(3, j++)
+		assertEquals(4, j)
+		
+		// More operators in Xtend described here http://www.eclipse.org/xtend/documentation.html?operators#operators
+	}
+	
 	@Test def void collections() {
 		// There are literals for lists, sets and maps
 		// and numerous extension methods which make working with them
