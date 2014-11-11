@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.conversion
 
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTVisitor
+import org.eclipse.jdt.core.dom.AbstractTypeDeclaration
 import org.eclipse.jdt.core.dom.Annotation
 import org.eclipse.jdt.core.dom.Assignment
 import org.eclipse.jdt.core.dom.Block
@@ -43,8 +44,11 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement
  */
 class ASTFlattenerUtils {
 
-	def boolean isDummyType(TypeDeclaration it) {
-		return "MISSING".equals(getName().getIdentifier()) && !isInterface() && getModifiers() == 0
+	def boolean isDummyType(AbstractTypeDeclaration it) {
+		if (it instanceof TypeDeclaration) {
+			return "MISSING".equals(getName().getIdentifier()) && !isInterface() && getModifiers() == 0
+		}
+		return false;
 	}
 
 	def boolean isOverrideMethode(MethodDeclaration declaration) {
@@ -225,15 +229,15 @@ class ASTFlattenerUtils {
 		var scope = simpleName.findParentOfType(Block)
 		while (scope != null) {
 			val type = scope.findDeclaredType(simpleName)
-			if (!type.empty) {
-				return type.head
+			if (type != null) {
+				return type
 			}
 			scope = scope.findParentOfType(Block)
 		}
 		return null
 	}
 
-	def private Iterable<Type> findDeclaredType(Block scope, SimpleName simpleName) {
+	def private Type findDeclaredType(Block scope, SimpleName simpleName) {
 		val matchesFound = newArrayList
 		scope.accept(
 			new ASTVisitor() {
@@ -267,7 +271,7 @@ class ASTFlattenerUtils {
 				}
 
 			})
-		return matchesFound
+		return matchesFound.head
 	}
 
 	def private Iterable<Assignment> findAssigmentsInBlock(Block scope, (Assignment)=>Boolean constraint) {
