@@ -280,6 +280,27 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="org.eclipse.xtext.purexbase.PureXbase.OpenGeneratedCode"
+				style="push">
+					<visibleWhen checkEnabled="false">
+						<reference definitionId="org.eclipse.xtext.purexbase.PureXbase.Editor.opened" />
+					</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+				<activeWhen>
+					<reference definitionId="org.eclipse.xtext.purexbase.PureXbase.Editor.opened" />
+				</activeWhen>
+		</handler>
+	</extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -478,7 +499,7 @@
    </extension>
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution targetID="org.eclipse.xtext.purexbase.PureXbase" 
-                          id="org.eclipse.xtext.purexbase.PureXbase.ide.rulerActions">
+                          id="org.eclipse.xtext.purexbase.PureXbase.rulerActions">
 	     <action
 	             label="Not Used"
 	             class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
@@ -489,26 +510,26 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="org.eclipse.xtext.purexbase.PureXbase.ide.rulerContextMenu"
-         id="org.eclipse.xtext.purexbase.PureXbase.ide.RulerPopupActions">
+         targetID="org.eclipse.xtext.purexbase.PureXbase.RulerContext"
+         id="org.eclipse.xtext.purexbase.PureXbase.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="debug"
-            id="org.eclipse.xtext.purexbase.PureXbase.ide.rulerContextMenu.toggleBreakpointAction">
+            id="org.eclipse.xtext.purexbase.PureXbase.rulerContextMenu.toggleBreakpointAction">
          </action>
          <action
             label="Not used"
             class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
             menubarPath="debug"
-            id="org.eclipse.xtext.purexbase.PureXbase.ide.rulerContextMenu.enableDisableBreakpointAction">
+            id="org.eclipse.xtext.purexbase.PureXbase.rulerContextMenu.enableDisableBreakpointAction">
          </action>
          <action
            label="Breakpoint Properties"
            helpContextId="breakpoint_properties_action_context"
            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
            menubarPath="group.properties"
-           id="org.eclipse.xtext.purexbase.PureXbase.ide.rulerContextMenu.openBreapointPropertiesAction">
+           id="org.eclipse.xtext.purexbase.PureXbase.rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
