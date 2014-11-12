@@ -25,57 +25,52 @@ import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
 @SuppressWarnings("all")
 public class XbaseContentProposalPriorities extends ContentProposalPriorities {
   public void adjustCrossReferencePriority(final ICompletionProposal proposal, final String prefix) {
-    boolean _matched = false;
-    if (!_matched) {
-      if (proposal instanceof ConfigurableCompletionProposal) {
-        _matched=true;
-        Object _additionalData = ((ConfigurableCompletionProposal)proposal).getAdditionalData(XbaseProposalProvider.DESCRIPTION_KEY);
-        final Object desc = _additionalData;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (desc instanceof SimpleIdentifiableElementDescription) {
-            boolean _and = false;
-            String _replacementString = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-            boolean _notEquals = (!Objects.equal(_replacementString, "this"));
-            if (!_notEquals) {
-              _and = false;
-            } else {
-              String _replacementString_1 = ((ConfigurableCompletionProposal)proposal).getReplacementString();
-              boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
-              _and = _notEquals_1;
-            }
-            if (_and) {
+    if ((proposal instanceof ConfigurableCompletionProposal)) {
+      Object _additionalData = ((ConfigurableCompletionProposal)proposal).getAdditionalData(XbaseProposalProvider.DESCRIPTION_KEY);
+      final Object desc = _additionalData;
+      boolean _matched = false;
+      if (!_matched) {
+        if (desc instanceof SimpleIdentifiableElementDescription) {
+          boolean _and = false;
+          String _replacementString = ((ConfigurableCompletionProposal)proposal).getReplacementString();
+          boolean _notEquals = (!Objects.equal(_replacementString, "this"));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            String _replacementString_1 = ((ConfigurableCompletionProposal)proposal).getReplacementString();
+            boolean _notEquals_1 = (!Objects.equal(_replacementString_1, "super"));
+            _and = _notEquals_1;
+          }
+          if (_and) {
+            _matched=true;
+            this.adjustPriority(proposal, prefix, 570);
+            return;
+          }
+        }
+      }
+      if (!_matched) {
+        if (desc instanceof StaticFeatureDescriptionWithTypeLiteralReceiver) {
+          _matched=true;
+          this.adjustPriority(proposal, prefix, 560);
+        }
+      }
+      if (!_matched) {
+        if (desc instanceof IIdentifiableElementDescription) {
+          _matched=true;
+          JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)desc).getElementOrProxy();
+          boolean _matched_1 = false;
+          if (!_matched_1) {
+            if (_elementOrProxy instanceof JvmField) {
               _matched_1=true;
-              this.adjustPriority(proposal, prefix, 570);
+              this.adjustPriority(proposal, prefix, 550);
               return;
             }
           }
-        }
-        if (!_matched_1) {
-          if (desc instanceof StaticFeatureDescriptionWithTypeLiteralReceiver) {
-            _matched_1=true;
-            this.adjustPriority(proposal, prefix, 560);
-          }
-        }
-        if (!_matched_1) {
-          if (desc instanceof IIdentifiableElementDescription) {
-            _matched_1=true;
-            JvmIdentifiableElement _elementOrProxy = ((IIdentifiableElementDescription)desc).getElementOrProxy();
-            final JvmIdentifiableElement feature = _elementOrProxy;
-            boolean _matched_2 = false;
-            if (!_matched_2) {
-              if (feature instanceof JvmField) {
-                _matched_2=true;
-                this.adjustPriority(proposal, prefix, 550);
-                return;
-              }
-            }
-            if (!_matched_2) {
-              if (feature instanceof JvmExecutable) {
-                _matched_2=true;
-                this.adjustPriority(proposal, prefix, 520);
-                return;
-              }
+          if (!_matched_1) {
+            if (_elementOrProxy instanceof JvmExecutable) {
+              _matched_1=true;
+              this.adjustPriority(proposal, prefix, 520);
+              return;
             }
           }
         }

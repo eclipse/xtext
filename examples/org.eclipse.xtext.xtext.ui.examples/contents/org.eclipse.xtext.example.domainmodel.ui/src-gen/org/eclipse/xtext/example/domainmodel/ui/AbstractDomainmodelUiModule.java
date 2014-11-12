@@ -33,6 +33,11 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler> bindOpenGeneratedFileHandler() {
+		return org.eclipse.xtext.xbase.ui.generator.trace.XbaseOpenGeneratedFileHandler.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper> bindIProposalConflictHelper() {
 		return org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper.class;
@@ -244,6 +249,11 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities> bindIContentProposalPriorities() {
+		return org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler> bindFindReferencesHandler() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler.class;
 	}
@@ -309,11 +319,6 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 			binder.bind(org.eclipse.xtext.ui.editor.IURIEditorOpener.class).annotatedWith(org.eclipse.xtext.ui.LanguageSpecific.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); 
 			binder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); 
 		};
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.jface.text.hyperlink.IHyperlinkDetector> bindIHyperlinkDetector() {
-		return org.eclipse.xtext.xbase.ui.navigation.XbaseHyperlinkDetector.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

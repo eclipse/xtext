@@ -518,7 +518,7 @@
    </extension>
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution targetID="org.eclipse.xtend.core.Xtend" 
-                          id="org.eclipse.xtend.core.Xtend.ide.rulerActions">
+                          id="org.eclipse.xtend.core.Xtend.rulerActions">
 	     <action
 	             label="Not Used"
 	             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
@@ -529,26 +529,26 @@
    </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <viewerContribution
-         targetID="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu"
-         id="org.eclipse.xtend.core.Xtend.ide.RulerPopupActions">
+         targetID="org.eclipse.xtend.core.Xtend.RulerContext"
+         id="org.eclipse.xtend.core.Xtend.RulerPopupActions">
          <action
             label="Toggle Breakpoint"
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
             menubarPath="debug"
-            id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.toggleBreakpointAction">
+            id="org.eclipse.xtend.core.Xtend.rulerContextMenu.toggleBreakpointAction">
          </action>
          <action
             label="Not used"
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
             menubarPath="debug"
-            id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.enableDisableBreakpointAction">
+            id="org.eclipse.xtend.core.Xtend.rulerContextMenu.enableDisableBreakpointAction">
          </action>
          <action
            label="Breakpoint Properties"
            helpContextId="breakpoint_properties_action_context"
            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.jdt.debug.ui.actions.JavaBreakpointPropertiesRulerActionDelegate"
            menubarPath="group.properties"
-           id="org.eclipse.xtend.core.Xtend.ide.rulerContextMenu.openBreapointPropertiesAction">
+           id="org.eclipse.xtend.core.Xtend.rulerContextMenu.openBreapointPropertiesAction">
          </action>
       </viewerContribution>
    </extension>
