@@ -32,7 +32,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	
 	@Test def void testNoUpdateContentProcessOnReentrant(){
 		val s = newArrayList
-		val document = new XtextDocument(createTokenSource, createTextEditComposer, outdatedStateManager) {
+		val document = new XtextDocument(createTokenSource, createTextEditComposer, outdatedStateManager, operationCanceledManager) {
 			override protected boolean updateContentBeforeRead() {
 				s += 'x'
 			}
@@ -57,7 +57,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	}
 
 	@Test def void testModifySetsOutdatedFalse() {
-		val document = new XtextDocument(createTokenSource, createTextEditComposer, outdatedStateManager)
+		val document = new XtextDocument(createTokenSource, createTextEditComposer, outdatedStateManager, operationCanceledManager)
 		val resource = new XtextResource => [
 			new XtextResourceSet().resources += it
 		]
@@ -77,7 +77,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	}
 	
 	@Test def void testPriorityReadOnlyCancelsReaders() {
-		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager)
+		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager, operationCanceledManager)
 		document.input = new XtextResource => [
 			new XtextResourceSet().resources += it
 		]
@@ -110,7 +110,7 @@ class DocumentLockerTest extends AbstractXtextDocumentTest {
 	}
 	
 	@Test def void testReadOnlyDoesntCancelReaders() {
-		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager)
+		val document = new XtextDocument(createTokenSource(), null, outdatedStateManager, operationCanceledManager)
 		document.input = new XtextResource => [
 			new XtextResourceSet().resources += it
 		]

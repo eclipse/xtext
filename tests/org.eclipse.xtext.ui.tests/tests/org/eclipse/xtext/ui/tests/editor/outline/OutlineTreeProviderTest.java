@@ -14,6 +14,7 @@ import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -134,7 +135,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 			public Lexer get() {
 				return new InternalXtextLexer();
 			}});
-		XtextDocument xtextDocument = new XtextDocument(tokenSource, null, new OutdatedStateManager());
+		XtextDocument xtextDocument = new XtextDocument(tokenSource, null, new OutdatedStateManager(), new OperationCanceledManager());
 		xtextDocument.setInput(resource);
 		xtextDocument.set(modelAsText);
 		return xtextDocument;	

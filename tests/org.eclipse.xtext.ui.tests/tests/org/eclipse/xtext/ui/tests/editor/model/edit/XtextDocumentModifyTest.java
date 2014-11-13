@@ -17,6 +17,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -144,7 +145,7 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 				return new InternalXtextLexer();
 			}});
 		
-		final XtextDocument document = new XtextDocument(tokenSource, get(ITextEditComposer.class), new OutdatedStateManager()) {
+		final XtextDocument document = new XtextDocument(tokenSource, get(ITextEditComposer.class), new OutdatedStateManager(), new OperationCanceledManager()) {
 			@Override
 			public <T> T internalModify(IUnitOfWork<T, XtextResource> work) {
 				try {

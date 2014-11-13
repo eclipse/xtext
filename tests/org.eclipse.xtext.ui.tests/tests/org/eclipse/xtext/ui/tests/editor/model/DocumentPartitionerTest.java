@@ -13,6 +13,7 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.XtextAntlrTokenFileProvider;
 import org.eclipse.xtext.resource.OutdatedStateManager;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
@@ -101,7 +102,7 @@ public class DocumentPartitionerTest extends Assert {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}
 		});
-		XtextDocument document = new XtextDocument(tokenSource, null, new OutdatedStateManager());
+		XtextDocument document = new XtextDocument(tokenSource, null, new OutdatedStateManager(), new OperationCanceledManager());
 		document.setDocumentPartitioner(partitioner);
 		partitioner.connect(document);
 		document.set(s);
