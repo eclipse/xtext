@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function3;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
@@ -308,6 +309,43 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         }
       };
       final JvmEnumerationType myEnum = this._jvmTypesBuilder.toEnumerationType(e, "MyEnum", _function);
+      String _packageName = myEnum.getPackageName();
+      Assert.assertNull(_packageName);
+      String _simpleName = myEnum.getSimpleName();
+      Assert.assertEquals("MyEnum", _simpleName);
+      String _documentation = this._jvmTypesBuilder.getDocumentation(myEnum);
+      Assert.assertEquals("Foo", _documentation);
+      ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList("LITERAL0", "LITERAL1");
+      EList<JvmEnumerationLiteral> _literals = myEnum.getLiterals();
+      final Function1<JvmEnumerationLiteral, String> _function_1 = new Function1<JvmEnumerationLiteral, String>() {
+        public String apply(final JvmEnumerationLiteral it) {
+          return it.getSimpleName();
+        }
+      };
+      List<String> _map = ListExtensions.<JvmEnumerationLiteral, String>map(_literals, _function_1);
+      Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(_newArrayList, Object.class)), ((Object[])Conversions.unwrapArray(_map, Object.class)));
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEnumCreation2() {
+    try {
+      final XExpression e = this.expression("\'foo\'");
+      JvmEnumerationType _enumerationType = this._jvmTypesBuilder.toEnumerationType(e, "MyEnum");
+      final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
+        public void apply(final JvmEnumerationType it) {
+          JvmTypesBuilderTest.this._jvmTypesBuilder.setDocumentation(it, "Foo");
+          EList<JvmMember> _members = it.getMembers();
+          JvmEnumerationLiteral _enumerationLiteral = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationLiteral(e, "LITERAL0");
+          JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+          EList<JvmMember> _members_1 = it.getMembers();
+          JvmEnumerationLiteral _enumerationLiteral_1 = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationLiteral(e, "LITERAL1");
+          JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+        }
+      };
+      final JvmEnumerationType myEnum = ObjectExtensions.<JvmEnumerationType>operator_doubleArrow(_enumerationType, _function);
       String _packageName = myEnum.getPackageName();
       Assert.assertNull(_packageName);
       String _simpleName = myEnum.getSimpleName();

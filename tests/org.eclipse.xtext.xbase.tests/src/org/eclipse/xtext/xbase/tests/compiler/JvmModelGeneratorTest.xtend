@@ -196,6 +196,26 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def void testEnumeration2() {
+		val expression = expression("null", false);
+		/* explicitly use => here */
+		val enumeration = expression.toEnumerationType("my.test.Foo") => [
+			members += expression.toEnumerationLiteral("BAR") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+			members += expression.toEnumerationLiteral("BAZ") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+		]
+		val compiled = compile(expression.eResource, enumeration)
+		
+		val valuesMethod = compiled.getMethod("values")
+		val values = valuesMethod.invoke(null) as Object[]
+		assertEquals("BAR", values.get(0).toString())
+		assertEquals("BAZ", values.get(1).toString())
+	}
+	
+	@Test
 	def void testEnumerationWithCompleter() {
 		val expression = expression("null", false);
 		val enumeration = expression.toEnumerationType("my.test.Foo") [

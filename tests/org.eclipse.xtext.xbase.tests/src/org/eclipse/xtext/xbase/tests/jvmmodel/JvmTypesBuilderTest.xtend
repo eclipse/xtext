@@ -168,6 +168,21 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def void testEnumCreation2() {
+		val e = expression("'foo'")
+		/* explicitly use => here */
+		val myEnum = e.toEnumerationType("MyEnum") => [
+			documentation = "Foo"
+			members += toEnumerationLiteral(e, "LITERAL0")
+			members += toEnumerationLiteral(e, "LITERAL1")
+		]
+		assertNull(myEnum.packageName)
+		assertEquals("MyEnum", myEnum.simpleName)
+		assertEquals("Foo", myEnum.documentation)
+		assertArrayEquals(newArrayList("LITERAL0", "LITERAL1"), myEnum.literals.map[simpleName]);
+	}
+	
+	@Test
 	def void testSetBody() {
 		val op = typesFactory.createJvmOperation
 		op.body = [append('''foo''')]

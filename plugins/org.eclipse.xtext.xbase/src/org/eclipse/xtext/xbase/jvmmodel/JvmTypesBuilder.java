@@ -465,6 +465,24 @@ public class JvmTypesBuilder {
 	 *            the sourceElement the resulting element is associated with.
 	 * @param name
 	 *            the qualified name of the resulting enum type.
+	 * 
+	 * @return a result representing a Java enum type with the given name, <code>null</code> 
+	 *            if sourceElement or name are <code>null</code>.
+	 * @since 2.8
+	 */
+	/* @Nullable */ 
+	public JvmEnumerationType toEnumerationType(/* @Nullable */ EObject sourceElement, /* @Nullable */ String name) {
+		return toEnumerationType(sourceElement, name, null);
+	}
+	
+	/**
+	 * Creates a public enum declaration, associated to the given sourceElement. It sets the given name, which might be
+	 * fully qualified using the standard Java notation.
+	 * 
+	 * @param sourceElement
+	 *            the sourceElement the resulting element is associated with.
+	 * @param name
+	 *            the qualified name of the resulting enum type.
 	 * @param initializer
 	 *            the initializer to apply on the created enumeration type. If <code>null</code>, the enum won't be initialized.
 	 * 

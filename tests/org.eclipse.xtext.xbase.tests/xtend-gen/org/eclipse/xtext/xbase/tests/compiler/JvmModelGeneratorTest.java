@@ -62,6 +62,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider;
@@ -414,6 +415,50 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         }
       };
       final JvmEnumerationType enumeration = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final Class<?> compiled = this.compile(_eResource, enumeration);
+      final Method valuesMethod = compiled.getMethod("values");
+      Object _invoke = valuesMethod.invoke(null);
+      final Object[] values = ((Object[]) _invoke);
+      Object _get = values[0];
+      String _string = _get.toString();
+      Assert.assertEquals("BAR", _string);
+      Object _get_1 = values[1];
+      String _string_1 = _get_1.toString();
+      Assert.assertEquals("BAZ", _string_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEnumeration2() {
+    try {
+      final XExpression expression = this.expression("null", false);
+      JvmEnumerationType _enumerationType = this.builder.toEnumerationType(expression, "my.test.Foo");
+      final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
+        public void apply(final JvmEnumerationType it) {
+          EList<JvmMember> _members = it.getMembers();
+          final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+            public void apply(final JvmEnumerationLiteral literal) {
+              JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+              literal.setType(_createTypeRef);
+            }
+          };
+          JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAR", _function);
+          JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+          EList<JvmMember> _members_1 = it.getMembers();
+          final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
+            public void apply(final JvmEnumerationLiteral literal) {
+              JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+              literal.setType(_createTypeRef);
+            }
+          };
+          JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAZ", _function_1);
+          JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+        }
+      };
+      final JvmEnumerationType enumeration = ObjectExtensions.<JvmEnumerationType>operator_doubleArrow(_enumerationType, _function);
       Resource _eResource = expression.eResource();
       final Class<?> compiled = this.compile(_eResource, enumeration);
       final Method valuesMethod = compiled.getMethod("values");
