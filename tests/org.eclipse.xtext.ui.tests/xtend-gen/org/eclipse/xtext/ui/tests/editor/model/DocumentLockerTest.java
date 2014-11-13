@@ -44,7 +44,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final ArrayList<String> s = CollectionLiterals.<String>newArrayList();
     DocumentTokenSource _createTokenSource = this.createTokenSource();
     ITextEditComposer _createTextEditComposer = this.createTextEditComposer();
-    final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager) {
+    final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager, this.operationCanceledManager) {
       protected boolean updateContentBeforeRead() {
         return s.add("x");
       }
@@ -93,7 +93,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   public void testModifySetsOutdatedFalse() {
     DocumentTokenSource _createTokenSource = this.createTokenSource();
     ITextEditComposer _createTextEditComposer = this.createTextEditComposer();
-    final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager);
+    final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager, this.operationCanceledManager);
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
       public void apply(final XtextResource it) {
@@ -142,7 +142,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   public void testPriorityReadOnlyCancelsReaders() {
     try {
       DocumentTokenSource _createTokenSource = this.createTokenSource();
-      final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager);
+      final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
       XtextResource _xtextResource = new XtextResource();
       final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
         public void apply(final XtextResource it) {
@@ -196,7 +196,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   @Test
   public void testReadOnlyDoesntCancelReaders() {
     DocumentTokenSource _createTokenSource = this.createTokenSource();
-    final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager);
+    final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
       public void apply(final XtextResource it) {

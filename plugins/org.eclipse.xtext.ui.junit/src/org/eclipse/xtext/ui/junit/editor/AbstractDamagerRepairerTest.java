@@ -20,6 +20,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.OutdatedStateManager;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -70,7 +71,7 @@ public abstract class AbstractDamagerRepairerTest extends TestCase implements ID
 				return createLexer();
 			}
 		});
-		XtextDocument document = new XtextDocument(source, null, new OutdatedStateManager());
+		XtextDocument document = new XtextDocument(source, null, new OutdatedStateManager(), new OperationCanceledManager());
 		document.set(before);
 		return document;
 	}

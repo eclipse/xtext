@@ -197,7 +197,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
-      final XtextDocument document = new XtextDocument(source, null, this.outdatedStateManager);
+      final XtextDocument document = new XtextDocument(source, null, this.outdatedStateManager, this.operationCanceledManager);
       document.set(before);
       _xblockexpression = document;
     }

@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.ui.document.DocumentRewriter
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter
 import org.junit.Test
 import org.eclipse.xtext.resource.OutdatedStateManager
+import org.eclipse.xtext.service.OperationCanceledManager
 
 class DocumentRewriterTest extends AbstractXtendUITestCase {
 
@@ -38,6 +39,8 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 	@Inject FlexerFactory flexerFactory
 	
 	@Inject OutdatedStateManager outdatedStateManager
+
+	@Inject OperationCanceledManager operationCanceledManager
 	
 	@Test
 	def void testSectionOverlap() {
@@ -296,7 +299,7 @@ class DocumentRewriterTest extends AbstractXtendUITestCase {
 			lexer = [|new InternalXtendLexer() as Lexer]
 			it.flexerFactory = this.flexerFactory 
 		]
-		val document = new XtextDocument(source, null, outdatedStateManager)
+		val document = new XtextDocument(source, null, outdatedStateManager, operationCanceledManager)
 		document.set(content)
 		document.setInput(resource as XtextResource)
 		document

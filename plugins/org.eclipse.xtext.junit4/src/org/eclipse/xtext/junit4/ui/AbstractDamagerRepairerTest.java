@@ -18,6 +18,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.OutdatedStateManager;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -38,6 +39,8 @@ public abstract class AbstractDamagerRepairerTest extends Assert implements IDoc
 	protected IRegion lastRegion;
 	
 	protected OutdatedStateManager outdatedStateManager = new OutdatedStateManager();
+
+	protected OperationCanceledManager operationCanceledManager = new OperationCanceledManager(); 
 	
 	@Before
 	public void setUp() throws Exception {
@@ -71,7 +74,7 @@ public abstract class AbstractDamagerRepairerTest extends Assert implements IDoc
 				return createLexer();
 			}
 		});
-		XtextDocument document = new XtextDocument(source, null, outdatedStateManager);
+		XtextDocument document = new XtextDocument(source, null, outdatedStateManager, operationCanceledManager);
 		document.set(before);
 		return document;
 	}

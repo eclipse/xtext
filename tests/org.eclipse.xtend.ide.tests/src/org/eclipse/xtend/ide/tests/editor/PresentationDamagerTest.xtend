@@ -104,7 +104,7 @@ class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 			lexer = [|createLexer]
 			it.flexerFactory = this.flexerFactory
 		]
-		val document = new XtextDocument(source, null, outdatedStateManager)
+		val document = new XtextDocument(source, null, outdatedStateManager, operationCanceledManager)
 		document.set(before)
 		document
 	}

@@ -72,9 +72,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @since 2.8
 	 * @noreference This constructor is not intended to be referenced by clients. Only for testing
 	 */
-	public XtextDocument(DocumentTokenSource tokenSource, ITextEditComposer composer,OutdatedStateManager outdatedStateManager) {
+	public XtextDocument(DocumentTokenSource tokenSource, ITextEditComposer composer, OutdatedStateManager outdatedStateManager, OperationCanceledManager operationCanceledManager) {
 		this(tokenSource, composer);
 		this.outdatedStateManager = outdatedStateManager;
+		this.operationCanceledManager = operationCanceledManager;
 	}
 	
 	@Inject

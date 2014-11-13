@@ -27,6 +27,7 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -69,6 +70,9 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
   
   @Inject
   private OutdatedStateManager outdatedStateManager;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   @Test
   public void testSectionOverlap() {
@@ -621,7 +625,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         }
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
-      final XtextDocument document = new XtextDocument(source, null, this.outdatedStateManager);
+      final XtextDocument document = new XtextDocument(source, null, this.outdatedStateManager, this.operationCanceledManager);
       document.set(content);
       document.setInput(((XtextResource) resource));
       _xblockexpression = document;
