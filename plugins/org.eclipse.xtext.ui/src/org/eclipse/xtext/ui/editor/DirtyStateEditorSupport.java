@@ -16,7 +16,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -42,7 +41,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.internal.Activator;
@@ -62,8 +60,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class DirtyStateEditorSupport implements IResourceDescription.Event.Listener, VerifyListener {
-	
-	private final static Logger LOG = Logger.getLogger(DirtyStateEditorSupport.class);
 	
 	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	
@@ -325,9 +321,6 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
-	@Inject  
-	private OperationCanceledManager operationCanceledManager;
-
 	private volatile IDirtyStateEditorSupportClient currentClient;
 	
 	private volatile boolean isDirty;
@@ -502,8 +495,6 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	/**
 	 * @since 2.7
 	 */
-	@Deprecated
-	// use getResourceDescriptionManagerIfOwnLanguage(XtextResource)
 	protected IResourceDescription.Manager getResourceDescriptionManager(URI resourceURI) {
 		return resourceServiceProviderRegistry.getResourceServiceProvider(resourceURI).get(DirtyStateResourceDescription.Manager.class);
 	}
@@ -516,11 +507,10 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		if (rsp == null)
 			return null;
 		String uriLanguageName = rsp.get(LanguageInfo.class).getLanguageName();
-		String resourceLanguageName = resource.getResourceServiceProvider().get(LanguageInfo.class).getLanguageName();
+		String resourceLanguageName = resource.getLanguageName();
 		if (!uriLanguageName.equals(resourceLanguageName))
 			return null;
-		Manager result = rsp.get(DirtyStateResourceDescription.Manager.class);
-		return result;
+		return getResourceDescriptionManager(resource.getURI());
 	}
 
 	/**
