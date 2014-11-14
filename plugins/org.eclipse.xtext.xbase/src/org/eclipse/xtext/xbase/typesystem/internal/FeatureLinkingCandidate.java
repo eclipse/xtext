@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -623,6 +624,50 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return false;
 	}
 	
+	@SuppressWarnings("incomplete-switch")
+	@Override
+	protected CandidateCompareResult compareTo(AbstractPendingLinkingCandidate<?> right, boolean invalid) {
+		CandidateCompareResult compareResult = compareByAssignmentName(right);
+		switch(compareResult) {
+			case SUSPICIOUS_OTHER:
+				throw new IllegalStateException();
+			case EQUALLY_INVALID:
+				invalid = true;
+				break;
+			case OTHER:
+			case THIS:
+				return compareResult;
+		}
+		return super.compareTo(right, invalid);
+	}
+	
+	protected CandidateCompareResult compareByAssignmentName(AbstractPendingLinkingCandidate<?> right) {
+		if (getExpression() instanceof XAssignment) {
+			if (isValidAssignmentName(description)) {
+				if (!isValidAssignmentName(right.description)) {
+					return CandidateCompareResult.THIS;
+				}
+			} else if (isValidAssignmentName(right.description)) {
+				return CandidateCompareResult.OTHER;
+			} else {
+				return CandidateCompareResult.EQUALLY_INVALID;
+			}
+		}
+		return CandidateCompareResult.AMBIGUOUS;
+	}
+	
+	protected boolean isValidAssignmentName(IIdentifiableElementDescription description) {
+		JvmIdentifiableElement candidate = description.getElementOrProxy();
+		if (candidate.eClass() == TypesPackage.Literals.JVM_OPERATION) {
+			if (candidate.getSimpleName().equals(description.getName().getFirstSegment())) {
+				return false;
+			} else if (!candidate.getSimpleName().startsWith("set")) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	protected CandidateCompareResult compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
 		CandidateCompareResult result = super.compareByArityWith(right);
