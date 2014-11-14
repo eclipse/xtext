@@ -494,10 +494,22 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * right candidate was better, {@code CandidateCompareResult#AMBIGUOUS} if both candidates are valid
 	 * but ambiguous or {@code CandidateCompareResult#EQUALLY_INVALID} if both candidates are 
 	 * ambiguous but erroneous.
+	 * @see #compareTo(AbstractPendingLinkingCandidate, boolean)
+	 */
+	protected final CandidateCompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
+		return compareTo(right, false);
+	}
+
+	/**
+	 * Returns {@code CandidateCompareResult#THIS} if this candidate is better, {@code CandidateCompareResult#OTHER} if the 
+	 * right candidate was better, {@code CandidateCompareResult#AMBIGUOUS} if both candidates are valid
+	 * but ambiguous or {@code CandidateCompareResult#EQUALLY_INVALID} if both candidates are 
+	 * ambiguous but erroneous.
+	 * 
+	 * The invalid flag indicates if we already know that both candidates are equally invalid.
 	 */
 	@SuppressWarnings("incomplete-switch")
-	protected CandidateCompareResult compareTo(AbstractPendingLinkingCandidate<?> right) {
-		boolean invalid = false;
+	protected CandidateCompareResult compareTo(AbstractPendingLinkingCandidate<?> right, boolean invalid) {
 		{
 			CandidateCompareResult arityCompareResult = compareByArityWith(right);
 			switch(arityCompareResult) {
