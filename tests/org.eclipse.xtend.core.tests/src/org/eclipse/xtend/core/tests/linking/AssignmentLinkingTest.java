@@ -33,13 +33,78 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper validator;
 	
+	@Test public void testBug447982_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def m() {\n" + 
+				"		x = 1\n" + 
+				"	} \n" + 
+				"	def x(int x) {}\n" + 
+				"	def setX(int x) {}\n" + 
+				"}");
+		XAssignment assignment = getLastAssignment(clazz);
+		assertLinksTo("C.setX(int)", TypesPackage.Literals.JVM_OPERATION, assignment);
+	}
+	
+	@Test public void testBug447982_02() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def static m() {\n" + 
+				"		x = 1\n" + 
+				"	} \n" + 
+				"	def static x(int x) {}\n" + 
+				"	def static setX(int x) {}\n" + 
+				"}");
+		XAssignment assignment = getLastAssignment(clazz);
+		assertLinksTo("C.setX(int)", TypesPackage.Literals.JVM_OPERATION, assignment);
+	}
+
+	@Test public void testBug447982_03() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def m() {\n" + 
+				"		x = 1\n" + 
+				"	} \n" + 
+				"	int x\n" + 
+				"	def setX(int x) {}\n" + 
+				"}");
+		XAssignment assignment = getLastAssignment(clazz);
+		assertLinksTo("C.x", TypesPackage.Literals.JVM_FIELD, assignment);
+	}
+	
+	@Test public void testBug447982_04() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def static m() {\n" + 
+				"		x = 1\n" + 
+				"	} \n" + 
+				"	static int x\n" + 
+				"	def static setX(int x) {}\n" + 
+				"}");
+		XAssignment assignment = getLastAssignment(clazz);
+		assertLinksTo("C.x", TypesPackage.Literals.JVM_FIELD, assignment);
+	}
+	
+	@Test public void testBug447982_05() throws Exception {
+		XtendClass clazz = clazz(
+				"class C {\n" + 
+				"	def m(String it) {\n" + 
+				"		x = 1\n" + 
+				"	} \n" + 
+				"	def x(String s, int x) {}\n" + 
+				"	def setX(String s, int x) {}\n" + 
+				"}");
+		XAssignment assignment = getLastAssignment(clazz);
+		assertLinksTo("C.setX(java.lang.String,int)", TypesPackage.Literals.JVM_OPERATION, assignment);
+	}
+	
 	@Test public void testLocalVariable() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
-				"  def void method() {\n" + 
-				"    var aString = ''\n" +
-				"    aString = 'foo'\n" + 
-				"  }\n" + 
+						"  def void method() {\n" + 
+						"    var aString = ''\n" +
+						"    aString = 'foo'\n" + 
+						"  }\n" + 
 				"}");
 		XAssignment assignment = getLastAssignment(clazz);
 		assertLinksTo("aString", XbasePackage.Literals.XVARIABLE_DECLARATION, assignment);
