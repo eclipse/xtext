@@ -75,6 +75,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		resourceSet = new ResourceSetImpl();
 		resourceURI = URI.createURI("scheme://foo");
 		resource = new XtextResource(resourceURI);
+		resource.setLanguageName("FooLanguage");
 		final DefaultResourceServiceProvider resourceServiceProvider = new DefaultResourceServiceProvider() {
 			@Override
 			public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
@@ -257,13 +258,13 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertNotNull(verifyListener);
 	}
 	
-	@Test public void testannounceDirtyState_01() {
+	@Test public void testAnnounceDirtyState_01() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.announceDirtyState(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
 
-	@Test public void testannounceDirtyState_02() {
+	@Test public void testAnnounceDirtyState_02() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -275,7 +276,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(get(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	@Test public void testannounceDirtyState_03() {
+	@Test public void testAnnounceDirtyState_03() {
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -285,7 +286,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	@Test public void testannounceDirtyState_04() {
+	@Test public void testAnnounceDirtyState_04() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
@@ -296,14 +297,14 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 	}
 	
-	@Test public void testannounceDirtyState_05() {
+	@Test public void testAnnounceDirtyState_05() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		resource.setTrackingModification(true);
 		dirtyStateSupport.announceDirtyState(resource);
 		assertFalse(dirtyStateManager.hasContent(resourceURI));
 	}
 	
-	@Test public void testannounceDirtyState_06() {
+	@Test public void testAnnounceDirtyState_06() {
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		resource.setTrackingModification(true);
 		resource.setModified(true);
