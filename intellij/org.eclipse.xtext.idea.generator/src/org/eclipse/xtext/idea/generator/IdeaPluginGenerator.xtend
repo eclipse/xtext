@@ -18,6 +18,9 @@ import com.intellij.psi.stubs.IStubElementType
 import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.util.PsiModificationTracker
+import java.util.ArrayList
+import java.util.Arrays
+import java.util.List
 import java.util.Set
 import org.eclipse.xpand2.output.Outlet
 import org.eclipse.xpand2.output.Output
@@ -37,6 +40,8 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.idea.annotation.IssueAnnotator
 import org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider
+import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions
+import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions
 import org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator
 import org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
@@ -64,8 +69,6 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
 import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
-import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions
-import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
@@ -145,14 +148,14 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighterFactoryName.toJavaPath, grammar.compileSyntaxHighlighterFactory)
 		ctx.writeFile(outlet_src_gen, grammar.abstractIdeaModuleName.toJavaPath, grammar.compileGuiceModuleIdeaGenerated(bindings))
 		ctx.writeFile(outlet_src_gen, grammar.extensionFactoryName.toJavaPath, grammar.compileExtensionFactory)
-		ctx.writeFile(outlet_src_gen, grammar.buildProcessParametersProviderName.toXtendPath, grammar.compileBuildProcessParametersProvider)
-		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toXtendPath, grammar.compileCodeBlockModificationListener)
+		ctx.writeFile(outlet_src_gen, grammar.buildProcessParametersProviderName.toJavaPath, grammar.compileBuildProcessParametersProvider)
+		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toJavaPath, grammar.compileCodeBlockModificationListener)
 		ctx.writeFile(outlet_src_gen, grammar.elementDescriptionProviderName.toJavaPath, grammar.compileElementDescriptionProvider)
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
 		if (typesIntegrationRequired) {
-			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toXtendPath, grammar.compileJvmTypesElementFinder)
-			ctx.writeFile(outlet_src_gen, grammar.jvmTypesShortNamesCacheName.toXtendPath, grammar.compileJvmTypesShortNamesCache)
-			ctx.writeFile(outlet_src_gen, grammar.jvmElementsReferencesSearch.toXtendPath, grammar.compileJvmElementsReferencesSearch)
+			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toJavaPath, grammar.compileJvmTypesElementFinder)
+			ctx.writeFile(outlet_src_gen, grammar.jvmTypesShortNamesCacheName.toJavaPath, grammar.compileJvmTypesShortNamesCache)
+			ctx.writeFile(outlet_src_gen, grammar.jvmElementsReferencesSearch.toJavaPath, grammar.compileJvmElementsReferencesSearch)
 		}
 		
 		if (pathIdeaPluginProject != null) {
@@ -237,46 +240,47 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileBuildProcessParametersProvider(Grammar grammar) '''
-		package «grammar.buildProcessParametersProviderName.toPackageName»
+		package «grammar.buildProcessParametersProviderName.toPackageName»;
+
+		import «Arrays.name»;
+		import «List.name»;
 		
-		import «BuildProcessParametersProvider.name»
-		import «PluginManager.name»
-		import «PluginId.name»
+		import «BuildProcessParametersProvider.name»;
+		import «PluginManager.name»;
+		import «PluginId.name»;
 		
-		class «grammar.buildProcessParametersProviderName.toSimpleName» extends «BuildProcessParametersProvider.simpleName» {
+		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends «BuildProcessParametersProvider.simpleName» {
 		
-			override getClassPath() {
-				val plugin = PluginManager.getPlugin(PluginId.getId("«grammar.languageID»"));
-				val path = plugin.path.path
-		
-				#[
-					path + "/bin",
-					path + "/«pathRuntimePluginProject»/bin"
-				]
+			public List<String> getClassPath() {
+				String path = PluginManager.getPlugin(PluginId.getId("«grammar.languageID»")).getPath().getPath();
+				return Arrays.asList(
+					path + "/bin", 
+					path + "/../«pathRuntimePluginProject»/bin"
+				);
 			}
 		
 		}
 	'''
 	
 	def compileCodeBlockModificationListener(Grammar grammar) '''
-		package «grammar.codeBlockModificationListenerName.toPackageName»
+		package «grammar.codeBlockModificationListenerName.toPackageName»;
 		
 		«IF typesIntegrationRequired»
-		import «PsiTreeChangeEventImpl.name»
+		import «PsiTreeChangeEventImpl.name»;
 		«ENDIF»
-		import «PsiModificationTracker.name»
-		import «BaseXtextCodeBlockModificationListener.name»
-		import «grammar.languageName»
+		import «PsiModificationTracker.name»;
+		import «BaseXtextCodeBlockModificationListener.name»;
+		import «grammar.languageName»;
 		
-		class «grammar.codeBlockModificationListenerName.toSimpleName» extends «BaseXtextCodeBlockModificationListener.simpleName» {
+		public class «grammar.codeBlockModificationListenerName.toSimpleName» extends «BaseXtextCodeBlockModificationListener.simpleName» {
 		
-			new(«PsiModificationTracker.simpleName» psiModificationTracker) {
-				super(«grammar.languageName.toSimpleName».INSTANCE, psiModificationTracker)
+			public «grammar.codeBlockModificationListenerName.toSimpleName»(«PsiModificationTracker.simpleName» psiModificationTracker) {
+				super(«grammar.languageName.toSimpleName».INSTANCE, psiModificationTracker);
 			}
 		«IF typesIntegrationRequired»
 		
-			override protected hasJavaStructuralChanges(«PsiTreeChangeEventImpl.simpleName» event) {
-				true
+			protected boolean hasJavaStructuralChanges(«PsiTreeChangeEventImpl.simpleName» event) {
+				return true;
 			}
 		«ENDIF»
 		
@@ -342,47 +346,47 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def compileJvmTypesShortNamesCache(Grammar grammar) '''
-		package «grammar.jvmTypesShortNamesCacheName.toPackageName»
+		package «grammar.jvmTypesShortNamesCacheName.toPackageName»;
 		
-		import «Project.name»
-		import «JvmTypesShortNamesCache.name»
-		import «grammar.languageName»
+		import «Project.name»;
+		import «JvmTypesShortNamesCache.name»;
+		import «grammar.languageName»;
 		
 		class «grammar.jvmTypesShortNamesCacheName.toSimpleName» extends «JvmTypesShortNamesCache.simpleName» {
 		
-			new(«Project.simpleName» project) {
-				super(«grammar.languageName.toSimpleName».INSTANCE, project)
+			public «grammar.jvmTypesShortNamesCacheName.toSimpleName»(«Project.simpleName» project) {
+				super(«grammar.languageName.toSimpleName».INSTANCE, project);
 			}
 		
 		}
 	'''
 	
 	def compileJvmElementsReferencesSearch(Grammar grammar) '''
-		package «grammar.jvmElementsReferencesSearch.toPackageName»
+		package «grammar.jvmElementsReferencesSearch.toPackageName»;
 
-		import «JvmElementsReferencesSearch.name»
-		import «grammar.languageName»
+		import «JvmElementsReferencesSearch.name»;
+		import «grammar.languageName»;
 		
-		class «grammar.jvmElementsReferencesSearch.toSimpleName» extends «JvmElementsReferencesSearch.simpleName» {
+		public class «grammar.jvmElementsReferencesSearch.toSimpleName» extends «JvmElementsReferencesSearch.simpleName» {
 		
-			new() {
-				super(«grammar.languageName.toSimpleName».INSTANCE)
+			public «grammar.jvmElementsReferencesSearch.toSimpleName»() {
+				super(«grammar.languageName.toSimpleName».INSTANCE);
 			}
 		
 		}
 	'''
 	
 	def compileJvmTypesElementFinder(Grammar grammar) '''
-		package «grammar.jvmTypesElementFinderName.toPackageName»
+		package «grammar.jvmTypesElementFinderName.toPackageName»;
 		
-		import «Project.name»
-		import «JvmTypesElementFinder.name»
-		import «grammar.languageName»
+		import «Project.name»;
+		import «JvmTypesElementFinder.name»;
+		import «grammar.languageName»;
 		
-		class «grammar.jvmTypesElementFinderName.toSimpleName» extends «JvmTypesElementFinder.simpleName» {
+		public class «grammar.jvmTypesElementFinderName.toSimpleName» extends «JvmTypesElementFinder.simpleName» {
 		
-			new(«Project.simpleName» project) {
-				super(«grammar.languageName.toSimpleName».INSTANCE, project)
+			public «grammar.jvmTypesElementFinderName.toSimpleName»(«Project.simpleName» project) {
+				super(«grammar.languageName.toSimpleName».INSTANCE, project);
 			}
 		
 		}
