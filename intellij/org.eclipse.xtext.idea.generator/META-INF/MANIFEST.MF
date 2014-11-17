@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext IDEA Generator
+Bundle-SymbolicName: org.eclipse.xtext.idea.generator;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
+ org.eclipse.xtext.generator;visibility:=reexport,
+ org.eclipse.xtext.idea;visibility:=reexport
+Export-Package: org.eclipse.xtext.idea.generator,
+ org.eclipse.xtext.idea.generator.parser.antlr
