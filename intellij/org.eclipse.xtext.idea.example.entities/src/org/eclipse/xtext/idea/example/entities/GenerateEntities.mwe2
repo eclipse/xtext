@@ -9,7 +9,6 @@ var fileExtensions = "entities"
 var projectName = "org.eclipse.xtext.idea.example.entities"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
-var encoding = "UTF-8"
 var lineDelimiter = "\n"
 
 Workflow {
@@ -43,7 +42,6 @@ Workflow {
     	pathTestProject = "${runtimeProject}.tests"
     	projectNameRt = projectName
     	projectNameUi = "${projectName}.ui"
-    	encoding = encoding
     	language = auto-inject {
     		uri = grammarURI
     
