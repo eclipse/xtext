@@ -13,6 +13,5 @@ abstract class AbstractActiveAnnotationTest extends AbstractXtendTestCase {
 		processorProvider.setClassLoader(class.classLoader)
 		_xtendCompilerTester = compilerTester
 	}
-	
-	
+
 }
