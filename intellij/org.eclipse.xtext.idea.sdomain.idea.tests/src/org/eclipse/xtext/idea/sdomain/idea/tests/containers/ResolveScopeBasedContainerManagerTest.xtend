@@ -38,12 +38,12 @@ class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
 		val tempDirPath = myFixture.tempDirPath
 
 		val moduleFixtureBuilder = projectBuilder.addModule(EmptyModuleFixtureBuilder)
-		new File('''Â«tempDirPathÂ»/module''').mkdir
-		moduleFixtureBuilder.addSourceContentRoot('''Â«tempDirPathÂ»/module''')
+		new File('''«tempDirPath»/module''').mkdir
+		moduleFixtureBuilder.addSourceContentRoot('''«tempDirPath»/module''')
 		
 		val module2FixtureBuilder = projectBuilder.addModule(EmptyModuleFixtureBuilder)
-		new File('''Â«tempDirPathÂ»/module2''').mkdir
-		module2FixtureBuilder.addSourceContentRoot('''Â«tempDirPathÂ»/module2''')
+		new File('''«tempDirPath»/module2''').mkdir
+		module2FixtureBuilder.addSourceContentRoot('''«tempDirPath»/module2''')
 		
 		myFixture.setUp
 		
@@ -78,7 +78,7 @@ class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
 	}
 	
 	def void testGetContainer_02() {
-		val uri = URI.createFileURI(new File('''Â«myFixture.tempDirPathÂ»/module/doesNotExist''').absolutePath)
+		val uri = URI.createFileURI(new File('''«myFixture.tempDirPath»/module/doesNotExist''').absolutePath)
 		val description = new URIBasedTestResourceDescription(uri)
 		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.head.resource)
 		val container = containerManager.getContainer(description, resourceDescriptions)
@@ -101,7 +101,7 @@ class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
 	}
 	
 	def void testGetVisibleContainers_02() {
-		val uri = URI.createFileURI(new File('''Â«myFixture.tempDirPathÂ»/module/doesNotExist''').absolutePath)
+		val uri = URI.createFileURI(new File('''«myFixture.tempDirPath»/module/doesNotExist''').absolutePath)
 		val description = new URIBasedTestResourceDescription(uri)
 		val resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(files.head.resource)
 		val visibleContainers = containerManager.getVisibleContainers(description, resourceDescriptions)

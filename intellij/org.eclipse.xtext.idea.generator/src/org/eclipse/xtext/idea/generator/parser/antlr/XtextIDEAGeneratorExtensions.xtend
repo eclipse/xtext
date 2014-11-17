@@ -37,7 +37,11 @@ class XtextIDEAGeneratorExtensions {
 		val outlet = new Outlet(outletName)
 		outlet.name = outletName
 		outlet.overwrite = overwrite
-		outlet.fileEncoding = encoding
+		outlet.fileEncoding = if (encoding != null) {
+			encoding
+		} else {
+			getOutlet(defaultOutletName).fileEncoding
+		}
 		outlet.path = if (pathIdeaPluginProject != null) {
 			pathIdeaPluginProject + projectPath
 		} else {

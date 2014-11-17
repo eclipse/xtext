@@ -9,7 +9,6 @@ var fileExtensions = "sdomain"
 var projectName = "org.eclipse.xtext.idea.sdomain"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
-var encoding = "UTF-8"
 
 Workflow {
     bean = StandaloneSetup {
@@ -39,7 +38,6 @@ Workflow {
     	pathTestProject = "${runtimeProject}.tests"
     	projectNameRt = projectName
     	projectNameUi = "${projectName}.ui"
-    	encoding = encoding
     	language = auto-inject {
     		uri = grammarURI
     

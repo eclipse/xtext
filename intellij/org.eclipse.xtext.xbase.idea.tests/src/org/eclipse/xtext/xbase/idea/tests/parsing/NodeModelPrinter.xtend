@@ -9,10 +9,10 @@ import org.eclipse.xtext.nodemodel.INode
 class NodeModelPrinter {
 
 	def dispatch String print(ICompositeNode it) '''
-		Â«doPrintÂ» {
-			Â«FOR child : children SEPARATOR '\n'Â»
-				Â«child.printÂ»
-			Â«ENDFORÂ»
+		«doPrint» {
+			«FOR child : children SEPARATOR '\n'»
+				«child.print»
+			«ENDFOR»
 		}
 	'''
 
@@ -21,11 +21,11 @@ class NodeModelPrinter {
 	}
 
 	protected def String doPrint(INode it) '''
-		Â«classÂ» Â«textRegionÂ»
-		grammarElements: Â«grammarElement.printGrammarElementÂ»
-		hasDirectSemanticElement: Â«hasDirectSemanticElementÂ»
-		Â«IF it instanceof ICompositeNodeÂ»lookAhead: Â«lookAheadÂ»Â«ENDIFÂ»
-		syntaxErrorMessage: Â«syntaxErrorMessageÂ»'''
+		«class» «textRegion»
+		grammarElements: «grammarElement.printGrammarElement»
+		hasDirectSemanticElement: «hasDirectSemanticElement»
+		«IF it instanceof ICompositeNode»lookAhead: «lookAhead»«ENDIF»
+		syntaxErrorMessage: «syntaxErrorMessage»'''
 
 	protected dispatch def String printGrammarElement(Void grammarElement) {
 		'null'
@@ -36,15 +36,15 @@ class NodeModelPrinter {
 	}
 
 	protected dispatch def String printGrammarElement(AbstractRule rule) '''
-		Â«rule.class.simpleNameÂ» [Â«rule.nameÂ»]
+		«rule.class.simpleName» [«rule.name»]
 	'''
 
 	protected dispatch def String printGrammarElement(RuleCall grammarElement) '''
-		RuleCall --> Â«grammarElement.rule.printGrammarElementÂ»
+		RuleCall --> «grammarElement.rule.printGrammarElement»
 	'''
 
 	protected dispatch def String printGrammarElement(Keyword grammarElement) '''
-		Keyword [Â«grammarElement.valueÂ»]
+		Keyword [«grammarElement.value»]
 	'''
 
 }

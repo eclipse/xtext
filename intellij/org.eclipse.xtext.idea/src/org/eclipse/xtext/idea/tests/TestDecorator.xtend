@@ -21,7 +21,7 @@ class TestDecoratorProcessor extends AbstractClassProcessor {
 			simpleName.startsWith('test')
 		]) {
 			addMethod(declaredMethod.simpleName) [
-				body = '''delegate.Â«declaredMethod.simpleNameÂ»();'''
+				body = '''delegate.«declaredMethod.simpleName»();'''
 				exceptions = declaredMethod.exceptions
 			]
 		}

@@ -17,12 +17,12 @@ class NamingExtensions {
 	}
 
 	def String getGrammarFileName(Grammar it, String prefix) 
-		'''Â«parserPackageÂ».Â«prefixÂ»InternalÂ«getName(it)Â»'''
+		'''«parserPackage».«prefix»Internal«getName(it)»'''
 		
 	def String getInternalParserClassName(Grammar it)
-		'''Â«parserPackageÂ».InternalÂ«getName(it)Â»Parser'''
+		'''«parserPackage».Internal«getName(it)»Parser'''
 		
 	def String getParserPackage(Grammar it)
-		'''Â«basePackageRuntimeÂ».idea.parser.antlr.internal'''
+		'''«basePackageRuntime».idea.parser.antlr.internal'''
 
 }

@@ -53,15 +53,15 @@ class DefaultAntlrGrammarGenerator {
 	
 	protected def compile(Grammar it, AntlrOptions options) '''
 		/*
-		Â«fileHeaderÂ»
+		«fileHeader»
 		*/
-		grammar Â«grammarFileName.toSimpleNameÂ»;
-		Â«compileOptions(options)Â»
-		Â«compileLexerHeader(options)Â»
-		Â«compileParserHeader(options)Â»
-		Â«compileParserMembers(options)Â»
-		Â«compileRuleCatch(options)Â»
-		Â«compileRules(options)Â»
+		grammar «grammarFileName.toSimpleName»;
+		«compileOptions(options)»
+		«compileLexerHeader(options)»
+		«compileParserHeader(options)»
+		«compileParserMembers(options)»
+		«compileRuleCatch(options)»
+		«compileRules(options)»
 	'''
 	
 	protected def compileOptions(Grammar it, AntlrOptions options) {
@@ -71,8 +71,8 @@ class DefaultAntlrGrammarGenerator {
 	protected def compileLexerHeader(Grammar it, AntlrOptions options) '''
 		
 		@lexer::header {
-		package Â«grammarFileName.toPackageNameÂ»;
-		Â«compileLexerImports(options)Â»
+		package «grammarFileName.toPackageName»;
+		«compileLexerImports(options)»
 		}
 	'''
 	
@@ -86,8 +86,8 @@ class DefaultAntlrGrammarGenerator {
 	protected def compileParserHeader(Grammar it, AntlrOptions options) '''
 		
 		@parser::header {
-		package Â«grammarFileName.toPackageNameÂ»;
-		Â«compileParserImports(options)Â»
+		package «grammarFileName.toPackageName»;
+		«compileParserImports(options)»
 		}
 	'''
 	
@@ -104,18 +104,18 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected def compileRules(Grammar it, AntlrOptions options) '''
-		Â«FOR rule:allParserRules.filter[isCalled(grammar)]Â»
+		«FOR rule:allParserRules.filter[isCalled(grammar)]»
 
-			Â«rule.compileRule(it, options)Â»
-		Â«ENDFORÂ»
-		Â«FOR rule:allEnumRules.filter[isCalled(grammar)]Â»
+			«rule.compileRule(it, options)»
+		«ENDFOR»
+		«FOR rule:allEnumRules.filter[isCalled(grammar)]»
 
-			Â«rule.compileRule(it, options)Â»
-		Â«ENDFORÂ»
-		Â«FOR rule:allTerminalRulesÂ»
+			«rule.compileRule(it, options)»
+		«ENDFOR»
+		«FOR rule:allTerminalRules»
 
-			Â«rule.compileRule(it, options)Â»
-		Â«ENDFORÂ»
+			«rule.compileRule(it, options)»
+		«ENDFOR»
 	'''
 	
 	protected dispatch def compileRule(EnumRule it, Grammar grammar, AntlrOptions options) {
@@ -127,22 +127,22 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
-		Â«IF fragmentÂ»fragment Â«ENDIFÂ»Â«ruleNameÂ» : Â«toLexerBodyÂ»Â«IF shouldBeSkipped(grammar)Â» {skip();}Â«ENDIFÂ»;'''
+		«IF fragment»fragment «ENDIF»«ruleName» : «toLexerBody»«IF shouldBeSkipped(grammar)» {skip();}«ENDIF»;'''
 		
 	protected def shouldBeSkipped(TerminalRule it, Grammar grammar) {
 		grammar.initialHiddenTokens.contains(ruleName)
 	}
 	
 	protected def String compileEBNF(AbstractRule it, AntlrOptions options) '''
-		// Rule Â«nameÂ»
-		Â«ruleNameÂ»Â«compileInit(options)Â»:
-			Â«IF it instanceof ParserRule && datatypeRuleÂ»
-				Â«dataTypeEbnf(alternatives, true)Â»
-			Â«ELSEÂ»
-				Â«ebnf(alternatives, options, true)Â»
-			Â«ENDIFÂ»
+		// Rule «name»
+		«ruleName»«compileInit(options)»:
+			«IF it instanceof ParserRule && datatypeRule»
+				«dataTypeEbnf(alternatives, true)»
+			«ELSE»
+				«ebnf(alternatives, options, true)»
+			«ENDIF»
 		;
-		Â«compileFinally(options)Â»
+		«compileFinally(options)»
 	'''
 		
 	protected def compileInit(AbstractRule it, AntlrOptions options) {
@@ -154,37 +154,37 @@ class DefaultAntlrGrammarGenerator {
 	}
 		
 	protected def String ebnf(AbstractElement it, AntlrOptions options, boolean supportActions) '''
-		Â«IF mustBeParenthesizedÂ»(
-			Â«ebnfPredicate(options)Â»Â«ebnf2(options, supportActions)Â»
-		)Â«ELSEÂ»Â«ebnf2(options, supportActions)Â»Â«ENDIFÂ»Â«cardinalityÂ»
+		«IF mustBeParenthesized»(
+			«ebnfPredicate(options)»«ebnf2(options, supportActions)»
+		)«ELSE»«ebnf2(options, supportActions)»«ENDIF»«cardinality»
 	'''
 	
 	protected def String ebnfPredicate(AbstractElement it, AntlrOptions options) '''
-		Â«IF predicated() || firstSetPredicatedÂ»(Â«IF predicated()Â»Â«predicatedElement.ebnf2(options, false)Â»Â«ELSEÂ»Â«FOR e:firstSet SEPARATOR ' | 'Â»Â«e.ebnf2(options, false)Â»Â«ENDFORÂ»Â«ENDIFÂ»)=>Â«ENDIFÂ»
+		«IF predicated() || firstSetPredicated»(«IF predicated()»«predicatedElement.ebnf2(options, false)»«ELSE»«FOR e:firstSet SEPARATOR ' | '»«e.ebnf2(options, false)»«ENDFOR»«ENDIF»)=>«ENDIF»
 	'''
 	
 	protected def String dataTypeEbnf(AbstractElement it, boolean supportActions) '''
-		Â«IF mustBeParenthesizedÂ»(
-			Â«dataTypeEbnfPredicateÂ»Â«dataTypeEbnf2(supportActions)Â»
-		)Â«ELSEÂ»Â«dataTypeEbnf2(supportActions)Â»Â«ENDIFÂ»Â«cardinalityÂ»
+		«IF mustBeParenthesized»(
+			«dataTypeEbnfPredicate»«dataTypeEbnf2(supportActions)»
+		)«ELSE»«dataTypeEbnf2(supportActions)»«ENDIF»«cardinality»
 	'''
 	
 	protected def String dataTypeEbnfPredicate(AbstractElement it) '''
-		Â«IF predicated() || firstSetPredicatedÂ»(Â«IF predicated()Â»Â«predicatedElement.dataTypeEbnf2(false)Â»Â«ELSEÂ»Â«FOR e:firstSet SEPARATOR ' | 'Â»Â«e.dataTypeEbnf2(false)Â»Â«ENDFORÂ»Â«ENDIFÂ»)=>Â«ENDIFÂ»
+		«IF predicated() || firstSetPredicated»(«IF predicated()»«predicatedElement.dataTypeEbnf2(false)»«ELSE»«FOR e:firstSet SEPARATOR ' | '»«e.dataTypeEbnf2(false)»«ENDFOR»«ENDIF»)=>«ENDIF»
 	'''
 	
-	protected dispatch def String dataTypeEbnf2(AbstractElement it, boolean supportActions) '''ERROR Â«eClass.nameÂ» not matched'''
+	protected dispatch def String dataTypeEbnf2(AbstractElement it, boolean supportActions) '''ERROR «eClass.name» not matched'''
 
 	protected dispatch def String dataTypeEbnf2(Alternatives it, boolean supportActions) '''
-		Â«FOR e:elements SEPARATOR '\n    |'Â»Â«e.dataTypeEbnf(supportActions)Â»Â«ENDFORÂ»
+		«FOR e:elements SEPARATOR '\n    |'»«e.dataTypeEbnf(supportActions)»«ENDFOR»
 	'''
 
 	protected dispatch def String dataTypeEbnf2(Group it, boolean supportActions) '''
-		Â«FOR e:elementsÂ»Â«e.dataTypeEbnf(supportActions)Â»Â«ENDFORÂ»
+		«FOR e:elements»«e.dataTypeEbnf(supportActions)»«ENDFOR»
 	'''
 	
 	protected dispatch def String dataTypeEbnf2(UnorderedGroup it, boolean supportActions) '''
-		(Â«FOR e:elements SEPARATOR '\n    |'Â»Â«e.dataTypeEbnf2(supportActions)Â»Â«ENDFORÂ»)*
+		(«FOR e:elements SEPARATOR '\n    |'»«e.dataTypeEbnf2(supportActions)»«ENDFOR»)*
 	'''
 	
 	protected dispatch def String dataTypeEbnf2(Keyword it, boolean supportActions) {
@@ -195,23 +195,23 @@ class DefaultAntlrGrammarGenerator {
 		rule.ruleName
 	}
 	
-	protected dispatch def String ebnf2(AbstractElement it, AntlrOptions options, boolean supportActions) '''ERROR Â«eClass.nameÂ» not matched'''
+	protected dispatch def String ebnf2(AbstractElement it, AntlrOptions options, boolean supportActions) '''ERROR «eClass.name» not matched'''
 	
 	protected dispatch def String ebnf2(Alternatives it, AntlrOptions options, boolean supportActions) '''
-		Â«FOR element:elements SEPARATOR '\n    |'Â»Â«element.ebnf(options, supportActions)Â»Â«ENDFORÂ»
+		«FOR element:elements SEPARATOR '\n    |'»«element.ebnf(options, supportActions)»«ENDFOR»
 	'''
 	
 	protected dispatch def String ebnf2(Group it, AntlrOptions options, boolean supportActions) '''
-		Â«FOR element:elementsÂ»Â«element.ebnf(options, supportActions)Â»Â«ENDFORÂ»
+		«FOR element:elements»«element.ebnf(options, supportActions)»«ENDFOR»
 	'''
 	
 	protected dispatch def String ebnf2(UnorderedGroup it, AntlrOptions options, boolean supportActions) '''
-		(Â«FOR element:elements SEPARATOR '\n    |'Â»Â«element.ebnf(options, supportActions)Â»Â«ENDFORÂ»)*
+		(«FOR element:elements SEPARATOR '\n    |'»«element.ebnf(options, supportActions)»«ENDFOR»)*
 	'''
 	
 	protected dispatch def String ebnf2(Assignment it, AntlrOptions options, boolean supportActions) '''
 		(
-			Â«terminal.assignmentEbnf(it, options, supportActions)Â»
+			«terminal.assignmentEbnf(it, options, supportActions)»
 		)
 	'''
 	
@@ -232,7 +232,7 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected dispatch def String crossrefEbnf(Alternatives it, CrossReference ref, boolean supportActions) '''
-		Â«FOR element:elements SEPARATOR '\n    |'Â»Â«element.crossrefEbnf(ref, supportActions)Â»Â«ENDFORÂ»
+		«FOR element:elements SEPARATOR '\n    |'»«element.crossrefEbnf(ref, supportActions)»«ENDFOR»
 	'''
 	
 	protected dispatch def String crossrefEbnf(RuleCall it, CrossReference ref, boolean supportActions) {
@@ -270,7 +270,7 @@ class DefaultAntlrGrammarGenerator {
 	
 	protected dispatch def String assignmentEbnf(Alternatives it, Assignment assignment, AntlrOptions options, boolean supportActions) '''
 		(
-			Â«FOR element:elements SEPARATOR '\n    |'Â»Â«element.assignmentEbnf(assignment, options, supportActions)Â»Â«ENDFORÂ»
+			«FOR element:elements SEPARATOR '\n    |'»«element.assignmentEbnf(assignment, options, supportActions)»«ENDFOR»
 		)
 	'''
 	

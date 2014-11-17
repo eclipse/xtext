@@ -34,51 +34,51 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	override protected compileOptions(Grammar it, AntlrOptions options) '''
 
 		options {
-			superClass=Â«AbstractPsiAntlrParser.simpleNameÂ»;
-		Â«IF options.backtrack || options.memoize || options.k >= 0Â»
-			Â«IF options.backtrackÂ»
+			superClass=«AbstractPsiAntlrParser.simpleName»;
+		«IF options.backtrack || options.memoize || options.k >= 0»
+			«IF options.backtrack»
 			backtrack=true
-			Â«ENDIFÂ»
-			Â«IF options.memoizeÂ»
+			«ENDIF»
+			«IF options.memoize»
 			memoize=true
-			Â«ENDIFÂ»
-			Â«IF options.k >= 0Â»
-			memoize=Â«options.kÂ»
-			Â«ENDIFÂ»
-		Â«ENDIFÂ»
+			«ENDIF»
+			«IF options.k >= 0»
+			memoize=«options.k»
+			«ENDIF»
+		«ENDIF»
 		}
 	'''
 	
 	override protected compileParserImports(Grammar it, AntlrOptions options) '''
 
-		import Â«AbstractPsiAntlrParser.nameÂ»;
-		import Â«grammar.elementTypeProviderNameÂ»;
-		import Â«TokenTypeProvider.nameÂ»;
+		import «AbstractPsiAntlrParser.name»;
+		import «grammar.elementTypeProviderName»;
+		import «TokenTypeProvider.name»;
 
-		import Â«PsiBuilder.nameÂ»;
+		import «PsiBuilder.name»;
 	'''
 	
 	override protected compileParserMembers(Grammar it, AntlrOptions options) '''
 		
 		@parser::members {
 		
-		Â«IF options.backtrackÂ»
+		«IF options.backtrack»
 		/*
 		  This grammar contains a lot of empty actions to work around a bug in ANTLR.
 		  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
 		*/
 		
-		Â«ENDIFÂ»
-		public Â«grammar.elementTypeProviderName.toSimpleNameÂ» elementTypeProvider;
+		«ENDIF»
+		public «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
 		
-		public Â«grammar.psiInternalParserName.toSimpleNameÂ»(PsiBuilder builder, TokenStream input, Â«TokenTypeProvider.simpleNameÂ» tokenTypeProvider, Â«grammar.elementTypeProviderName.toSimpleNameÂ» elementTypeProvider) {
+		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, «TokenTypeProvider.simpleName» tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider) {
 			super(builder, input, tokenTypeProvider);
 			this.elementTypeProvider = elementTypeProvider;
 		}
 		
 		@Override
 		protected String getFirstRuleName() {
-			return "Â«allParserRules.head.nameÂ»";
+			return "«allParserRules.head.name»";
 		}
 		
 		}
@@ -89,26 +89,26 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	}
 	
 	override protected _compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		//Entry rule Â«entryRuleNameÂ»
-		Â«entryRuleNameÂ»:
-			{ Â«markCompositeÂ» }
-			Â«ruleNameÂ»
-			{ Â«doneCompositeÂ» }
+		//Entry rule «entryRuleName»
+		«entryRuleName»:
+			{ «markComposite» }
+			«ruleName»
+			{ «doneComposite» }
 			EOF;
 		finally {
 		}
 		
-		Â«compileEBNF(options)Â»
+		«compileEBNF(options)»
 	'''
 	
 	override protected _dataTypeEbnf2(Keyword it, boolean supportActions) {
 		if (supportActions) '''
 			{
-				Â«markLeafÂ»
+				«markLeaf»
 			}
-			kw=Â«super._dataTypeEbnf2(it, supportActions)Â»
+			kw=«super._dataTypeEbnf2(it, supportActions)»
 			{
-				Â«doneLeaf('kw')Â»
+				«doneLeaf('kw')»
 			}
 		'''
 		else {
@@ -125,20 +125,20 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				EnumRule, 
 				ParserRule: '''
 					{
-						Â«markCompositeÂ»
+						«markComposite»
 					}
-					Â«super._dataTypeEbnf2(it, supportActions)Â»
+					«super._dataTypeEbnf2(it, supportActions)»
 					{
-						Â«doneCompositeÂ»
+						«doneComposite»
 					}
 				'''
 				TerminalRule: '''
 					{
-						Â«markLeafÂ»
+						«markLeaf»
 					}
-					Â«localVarÂ»=Â«super._dataTypeEbnf2(it, supportActions)Â»
+					«localVar»=«super._dataTypeEbnf2(it, supportActions)»
 					{
-						Â«doneLeaf(localVar)Â»
+						«doneLeaf(localVar)»
 					}
 				'''
 				default:
@@ -153,14 +153,14 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		if (!supportActions)
 			return super._ebnf2(it, options, supportActions)
 		else '''
-			Â«IF options.backtrackÂ»
+			«IF options.backtrack»
 			{
 				/* */
 			}
-			Â«ENDIFÂ»
+			«ENDIF»
 			{
-				Â«markCompositeÂ»
-				Â«doneCompositeÂ»
+				«markComposite»
+				«doneComposite»
 			}
 		'''
 	}
@@ -170,20 +170,20 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 			return super._ebnf2(it, options, supportActions)
 		else if (assigned) '''
 			{
-				Â«markLeafÂ»
+				«markLeaf»
 			}
-			Â«containingAssignment.localVar(it)Â»=Â«super._ebnf2(it, options, supportActions)Â»
+			«containingAssignment.localVar(it)»=«super._ebnf2(it, options, supportActions)»
 			{
-				Â«doneLeaf(containingAssignment.localVar(it))Â»
+				«doneLeaf(containingAssignment.localVar(it))»
 			}
 		'''
 		else '''
 			{
-				Â«markLeafÂ»
+				«markLeaf»
 			}
-			Â«localVarÂ»=Â«super._ebnf2(it, options, supportActions)Â»
+			«localVar»=«super._ebnf2(it, options, supportActions)»
 			{
-				Â«doneLeaf(localVar)Â»
+				«doneLeaf(localVar)»
 			}
 		'''
 	}
@@ -196,26 +196,26 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 					super._ebnf2(it, options, supportActions)
 				EnumRule, 
 				ParserRule: '''
-					Â«IF options.backtrackÂ»
+					«IF options.backtrack»
 					{
 						/* */
 					}
-					Â«ENDIFÂ»
+					«ENDIF»
 					{
-						Â«markCompositeÂ»
+						«markComposite»
 					}
-					Â«super._ebnf2(it, options, supportActions)Â»
+					«super._ebnf2(it, options, supportActions)»
 					{
-						Â«doneCompositeÂ»
+						«doneComposite»
 					}
 				'''
 				TerminalRule: '''
 					{
-						Â«markLeafÂ»
+						«markLeaf»
 					}
-					Â«localVarÂ»=Â«super._ebnf2(it, options, supportActions)Â»
+					«localVar»=«super._ebnf2(it, options, supportActions)»
 					{
-						Â«doneLeaf(localVar)Â»
+						«doneLeaf(localVar)»
 					}
 				'''
 				default: 
@@ -232,20 +232,20 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				EnumRule,
 				ParserRule: '''
 					{
-						Â«ref.markCompositeÂ»
+						«ref.markComposite»
 					}
-					Â«super._crossrefEbnf(it, ref, supportActions)Â»
+					«super._crossrefEbnf(it, ref, supportActions)»
 					{
-						Â«ref.doneCompositeÂ»
+						«ref.doneComposite»
 					}
 				'''
 				TerminalRule: '''
 					{
-						Â«ref.markLeafÂ»
+						«ref.markLeaf»
 					}
-					Â«ref.containingAssignment.localVarÂ»=Â«super._crossrefEbnf(it, ref, supportActions)Â»
+					«ref.containingAssignment.localVar»=«super._crossrefEbnf(it, ref, supportActions)»
 					{
-						Â«ref.doneLeaf(ref.containingAssignment.localVar)Â»
+						«ref.doneLeaf(ref.containingAssignment.localVar)»
 					}
 				'''
 				default:
@@ -262,20 +262,20 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				EnumRule,
 				ParserRule: '''
 					{
-						Â«markCompositeÂ»
+						«markComposite»
 					}
-					Â«assignment.localVar(it)Â»=Â«super._assignmentEbnf(it, assignment, options, supportActions)Â»
+					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
-						Â«doneCompositeÂ»
+						«doneComposite»
 					}
 				'''
 				TerminalRule: '''
 					{
-						Â«markLeafÂ»
+						«markLeaf»
 					}
-					Â«assignment.localVar(it)Â»=Â«super._assignmentEbnf(it, assignment, options, supportActions)Â»
+					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
-						Â«doneLeaf(assignment.localVar(it))Â»
+						«doneLeaf(assignment.localVar(it))»
 					}
 				'''
 				default: 
@@ -288,10 +288,10 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	def protected markLeaf(EObject it) '''markLeaf();'''
 	
-	def protected doneLeaf(EObject it, String token) '''doneLeaf(Â«tokenÂ», elementTypeProvider.getÂ«grammarElementIdentifierÂ»ElementType());'''
+	def protected doneLeaf(EObject it, String token) '''doneLeaf(«token», elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	
 	def protected markComposite(EObject it) '''markComposite();'''
 	
-	def protected doneComposite(EObject it) '''doneComposite(elementTypeProvider.getÂ«grammarElementIdentifierÂ»ElementType());'''
+	def protected doneComposite(EObject it) '''doneComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	
 }

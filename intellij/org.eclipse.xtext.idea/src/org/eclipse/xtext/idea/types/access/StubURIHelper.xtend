@@ -61,12 +61,12 @@ class StubURIHelper implements URIHelperConstants {
 	
 	def getFullURI(PsiMethod method) {
 		val type = method.psiElementFactory.createType(method.containingClass)
-		createURIBuilder.appendFullURI(type).append('''.Â«method.nameÂ»()''').createURI
+		createURIBuilder.appendFullURI(type).append('''.«method.name»()''').createURI
 	}
 	
 	def getFullURI(PsiField field) {
 		val type = field.psiElementFactory.createType(field.containingClass)
-		createURIBuilder.appendFullURI(type).append('''.Â«field.nameÂ»''').createURI
+		createURIBuilder.appendFullURI(type).append('''.«field.name»''').createURI
 	}
 	
 	def getFullURI(PsiType type) {
@@ -128,7 +128,7 @@ class StubURIHelper implements URIHelperConstants {
 			PsiClass: builder.appendClassFragment(owner) 
 			PsiMethod: builder.appendMethodFragment(owner)
 		}
-		builder.append('''/Â«typeParameter.nameÂ»''')
+		builder.append('''/«typeParameter.name»''')
 	}
 	
 	protected def StringBuilder appendClassFragment(StringBuilder builder, PsiClass psiClass) {
@@ -142,7 +142,7 @@ class StubURIHelper implements URIHelperConstants {
 	
 	protected def appendMethodFragment(StringBuilder builder, PsiMethod method) {
 		builder.appendClassFragment(method.containingClass)
-		builder.append('''.Â«method.nameÂ»(''')
+		builder.append('''.«method.name»(''')
 		val parameterCount = method.parameterList.parametersCount
 		for (var i = 0; i < parameterCount; i++) {
 			if (i != 0) {

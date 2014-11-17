@@ -103,9 +103,9 @@ abstract class AbstractPsiAntlrParser extends Parser {
 			return entryRuleName
 		} 
 		if (entryRuleName.startsWith("rule")) {
-			return '''entryÂ«entryRuleName.toFirstUpperÂ»'''
+			return '''entry«entryRuleName.toFirstUpper»'''
 		}
-		'''entryRuleÂ«entryRuleNameÂ»'''
+		'''entryRule«entryRuleName»'''
 	}
 	
 

@@ -86,7 +86,7 @@ class XbaseParsingTest extends ParsingTestCase implements XExpressionChecker {
 				}
 
 			}
-			assertTrue('''Node Â«nodeÂ» is not a part of the tree''', belongsToTree)
+			assertTrue('''Node «node» is not a part of the tree''', belongsToTree)
 		}
 		val expression = actualResource.contents.head as XExpression
 		if (resolve) {

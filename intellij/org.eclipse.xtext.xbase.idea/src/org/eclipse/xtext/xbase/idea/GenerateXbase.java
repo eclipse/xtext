@@ -27,7 +27,6 @@ final class GenerateXbase {
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
-		final String encoding = "UTF-8";
 
 		new StandaloneSetup() {{
 			// the maven archetype contains a template file called .project
@@ -78,12 +77,10 @@ final class GenerateXbase {
 				ideaPluginGenerator.setPathIdeaPluginProject(ideaProject);
 				ideaPluginGenerator.setPathRuntimePluginProject(runtimeProject);
 				ideaPluginGenerator.setFileExtensions("___xtype");
-				ideaPluginGenerator.setEncoding(encoding);
 				addFragment(ideaPluginGenerator);
 				
 				XtextAntlrIDEAGeneratorFragment antlrIdeaGeneratorFragment = new XtextAntlrIDEAGeneratorFragment();
 				antlrIdeaGeneratorFragment.setPathIdeaPluginProject(ideaProject);
-				antlrIdeaGeneratorFragment.setEncoding(encoding);
 				addFragment(antlrIdeaGeneratorFragment);
 			}});
 			addLanguage(new LanguageConfig() {{
@@ -95,12 +92,10 @@ final class GenerateXbase {
 				ideaPluginGenerator.setPathIdeaPluginProject(ideaProject);
 				ideaPluginGenerator.setPathRuntimePluginProject(runtimeProject);
 				ideaPluginGenerator.setFileExtensions("___xbase");
-				ideaPluginGenerator.setEncoding(encoding);
 				addFragment(ideaPluginGenerator);
 				
 				XtextAntlrIDEAGeneratorFragment antlrIdeaGeneratorFragment = new XtextAntlrIDEAGeneratorFragment();
 				antlrIdeaGeneratorFragment.setPathIdeaPluginProject(ideaProject);
-				antlrIdeaGeneratorFragment.setEncoding(encoding);
 				addFragment(antlrIdeaGeneratorFragment);
 			}});
 			addLanguage(new LanguageConfig() {{
@@ -112,12 +107,10 @@ final class GenerateXbase {
 				ideaPluginGenerator.setPathIdeaPluginProject(ideaProject);
 				ideaPluginGenerator.setPathRuntimePluginProject(runtimeProject);
 				ideaPluginGenerator.setFileExtensions("___xbasewithannotations");
-				ideaPluginGenerator.setEncoding(encoding);
 				addFragment(ideaPluginGenerator);
 				
 				XtextAntlrIDEAGeneratorFragment antlrIdeaGeneratorFragment = new XtextAntlrIDEAGeneratorFragment();
 				antlrIdeaGeneratorFragment.setPathIdeaPluginProject(ideaProject);
-				antlrIdeaGeneratorFragment.setEncoding(encoding);
 				addFragment(antlrIdeaGeneratorFragment);
 			}});
 		}};

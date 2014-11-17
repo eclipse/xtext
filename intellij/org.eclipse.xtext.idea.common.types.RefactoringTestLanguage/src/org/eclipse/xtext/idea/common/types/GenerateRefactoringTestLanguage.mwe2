@@ -18,7 +18,6 @@ var grammarURI = "classpath:/org/eclipse/xtext/idea/common/types/RefactoringTest
 var fileExtensions = "typesRefactoring"
 var projectName = "org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
 var runtimeProject = "../${projectName}"
-var encoding = "UTF-8"
 
 Workflow {
 	bean = StandaloneSetup {
@@ -40,7 +39,6 @@ Workflow {
 		pathUiProject = runtimeProject
 		pathTestProject = runtimeProject
 		projectNameRt = projectName
-		encoding = encoding
 		language = auto-inject {
 			uri = grammarURI
 			fragment = ecore.EcoreGeneratorFragment auto-inject {}
