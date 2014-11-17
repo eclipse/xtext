@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.xbase.idea
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext.xbase;visibility:=reexport,
- org.xtext.idea.generator,
+ org.eclipse.xtext.idea.generator,
  org.eclipse.xtext,
  org.eclipse.xtext.util
 Import-Package: org.apache.log4j

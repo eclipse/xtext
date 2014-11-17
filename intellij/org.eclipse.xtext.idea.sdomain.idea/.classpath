@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="xtend-gen"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/intellij-dependencies"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea.sdomain"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

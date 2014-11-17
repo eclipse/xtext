@@ -59,13 +59,13 @@ Workflow {
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
 				options = auto-inject {}
 			}
-			fragment = org.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+			fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
 				pathIdeaPluginProject = runtimeProject
 				pathRuntimePluginProject = runtimeProject
 				fileExtensions = fileExtensions
 				typesIntegrationRequired = true
 			}
-			fragment = org.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
+			fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
 				pathIdeaPluginProject = runtimeProject
 			}
 		}

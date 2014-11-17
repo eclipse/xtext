@@ -1,0 +1,88 @@
+package org.eclipse.xtext.idea.generator.parser.antlr;
+
+import com.google.inject.Inject;
+import java.nio.charset.Charset;
+import java.util.List;
+import org.eclipse.xpand2.output.Outlet;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.Xtend2ExecutionContext;
+import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrXtendGeneratorFragment;
+import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
+import org.eclipse.xtext.generator.parser.antlr.AntlrToolFacade;
+import org.eclipse.xtext.idea.generator.parser.antlr.PsiAntlrGrammarGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+
+@SuppressWarnings("all")
+public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragment {
+  private String encoding;
+  
+  private String pathIdeaPluginProject;
+  
+  @Inject
+  @Extension
+  private Naming _naming;
+  
+  @Inject
+  @Extension
+  private PsiAntlrGrammarGenerator _psiAntlrGrammarGenerator;
+  
+  @Inject
+  @Extension
+  private XtextIDEAGeneratorExtensions _xtextIDEAGeneratorExtensions;
+  
+  public void setEncoding(final String encoding) {
+    this.encoding = encoding;
+  }
+  
+  public void setPathIdeaPluginProject(final String pathIdeaPluginProject) {
+    this.pathIdeaPluginProject = pathIdeaPluginProject;
+  }
+  
+  protected void generate(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.pathIdeaPluginProject, this.encoding);
+    final Object options = IterableExtensions.<Object>head(parameters);
+    if ((options instanceof AntlrOptions)) {
+      this._psiAntlrGrammarGenerator.generate(grammar, ((AntlrOptions)options), ctx);
+      final Outlet srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
+      final String srcGenPath = srcGenOutlet.getPath();
+      final String encoding = srcGenOutlet.getFileEncoding();
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append(srcGenPath, "");
+      _builder.append("/");
+      String _grammarFileName = this._psiAntlrGrammarGenerator.getGrammarFileName(grammar);
+      String _asPath = this._naming.asPath(_grammarFileName);
+      _builder.append(_asPath, "");
+      _builder.append(".g");
+      final String absoluteGrammarFileName = _builder.toString();
+      this.addAntlrParam("-fo");
+      int _lastIndexOf = absoluteGrammarFileName.lastIndexOf("/");
+      String _substring = absoluteGrammarFileName.substring(0, _lastIndexOf);
+      this.addAntlrParam(_substring);
+      AntlrToolFacade _antlrTool = this.getAntlrTool();
+      String[] _antlrParams = this.getAntlrParams();
+      _antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, _antlrParams);
+      final Charset charset = Charset.forName(encoding);
+      this.simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName, charset);
+      this.splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
+      this.suppressWarnings(absoluteGrammarFileName, charset);
+      this.normalizeLineDelimiters(absoluteGrammarFileName, charset);
+      this.normalizeTokens(absoluteGrammarFileName, charset);
+    }
+  }
+  
+  protected void addToPluginXmlRt(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
+  }
+  
+  protected void addToPluginXmlUi(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
+  }
+  
+  protected void addToPluginXmlTests(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
+  }
+  
+  protected void addToStandaloneSetup(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
+  }
+}

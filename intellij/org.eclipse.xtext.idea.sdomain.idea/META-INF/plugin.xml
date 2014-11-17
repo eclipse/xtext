@@ -1,0 +1,40 @@
+<idea-plugin version="2">
+	<id>org.eclipse.xtext.idea.sdomain.SDomain</id>
+	<name>SDomain Support</name>
+	<description>
+      This plugin enables smart editing of SDomain files.
+	</description>
+	<version>1.0.0</version>
+	<vendor>My Company</vendor>
+
+	<idea-version since-build="131"/>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.sdomain.idea.server.SDomainBuildProcessParametersProvider"/>
+
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.parser.SDomainParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainSyntaxHighlighterFactory" />
+      	<annotator language="org.eclipse.xtext.idea.sdomain.SDomain"
+      							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainElementDescriptionProvider" order="first"/>
+	</extensions>
+
+</idea-plugin>

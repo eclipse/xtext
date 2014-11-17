@@ -7,8 +7,8 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.LanguageConfig;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xtext.idea.generator.IdeaPluginGenerator;
-import org.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment;
+import org.eclipse.xtext.idea.generator.IdeaPluginGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

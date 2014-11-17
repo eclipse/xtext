@@ -1,0 +1,20 @@
+<idea-plugin version="2">
+	<id>org.eclipse.xtext.idea</id>
+	<name>Xtext IDEA Core</name>
+	<description>Xtext IDEA Core.</description>
+	<version>1.0.0</version>
+	<vendor>Eclipse Modeling Project</vendor>
+
+	<idea-version since-build="131"/>
+	
+	<extensions defaultExtensionNs="com.intellij">
+		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.server.XtextBuildProcessParametersProvider" /> 
+   	</extensions>
+
+	<project-components>
+		<component>
+			<implementation-class>org.eclipse.xtext.idea.build.XtextCompilerComponent</implementation-class>
+		</component>
+	</project-components>
+
+</idea-plugin>
