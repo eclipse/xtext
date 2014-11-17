@@ -129,14 +129,14 @@ Workflow {
     		// provides a compare view
     		fragment = compare.CompareFragment auto-inject {}
     		
-    		fragment = org.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
     			pathIdeaPluginProject = "${runtimeProject}.idea"
     			pathRuntimePluginProject = runtimeProject
 	            fileExtensions = fileExtensions
 	            typesIntegrationRequired = true
 	        }
 	        
-	        fragment = org.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment {
+	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment {
 	        	pathIdeaPluginProject = "${runtimeProject}.idea"
 	        } 
     	}
