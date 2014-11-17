@@ -308,6 +308,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (binaryOperation.isReassignFirstArgument()) {
 				return false;
 			}
+			if (expressionHelper.isShortCircuitOperation((XAbstractFeatureCall) expression)) {
+				if (isPreparationRequired(binaryOperation.getLeftOperand(), appendable)) {
+					return false;
+				}
+				if (isPreparationRequired(binaryOperation.getRightOperand(), appendable)) {
+					return false;
+				}
+			}
 		}
 		if (expression instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
@@ -889,6 +897,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(call);
 		String formatString = null;
 		List<JvmTypeReference> importedTypes = Lists.newArrayListWithCapacity(2);
+		
 		for(JvmAnnotationValue annotationValue: inlineAnnotation.getValues()) {
 			if ("value".equals(annotationValue.getValueName())) {
 				formatString = ((JvmStringAnnotationValue)annotationValue).getValues().get(0);
@@ -971,10 +980,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.newLine();
 		}
 		if (referenceName == null && isVariableDeclarationRequired(argument, b)) {
-			LightweightTypeReference type = getLightweightExpectedType(argument);
-			if (type == null)
-				type = getLightweightType(argument);
-			compileAsJavaExpression(argument, b, type);
+			if (canCompileToJavaExpression(argument, b)) {
+				internalToJavaExpression(argument, b);
+			} else {
+				LightweightTypeReference type = getLightweightExpectedType(argument);
+				if (type == null)
+					type = getLightweightType(argument);
+				compileAsJavaExpression(argument, b, type);
+			}
 		} else {
 			internalToJavaExpression(argument, b);
 		}
