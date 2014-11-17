@@ -971,10 +971,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			b.newLine();
 		}
 		if (referenceName == null && isVariableDeclarationRequired(argument, b)) {
-			LightweightTypeReference type = getLightweightExpectedType(argument);
-			if (type == null)
-				type = getLightweightType(argument);
-			compileAsJavaExpression(argument, b, type);
+			if (canCompileToJavaExpression(argument, b)) {
+				internalToJavaExpression(argument, b);
+			} else {
+				LightweightTypeReference type = getLightweightExpectedType(argument);
+				if (type == null)
+					type = getLightweightType(argument);
+				compileAsJavaExpression(argument, b, type);
+			}
 		} else {
 			internalToJavaExpression(argument, b);
 		}
