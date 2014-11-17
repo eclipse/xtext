@@ -30,17 +30,17 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		
 		options {
 			superClass=AbstractInternalAntlrParser;
-		Â«IF options.backtrack || options.memoize || options.k >= 0Â»
-			Â«IF options.backtrackÂ»
+		«IF options.backtrack || options.memoize || options.k >= 0»
+			«IF options.backtrack»
 			backtrack=true
-			Â«ENDIFÂ»
-			Â«IF options.memoizeÂ»
+			«ENDIF»
+			«IF options.memoize»
 			memoize=true
-			Â«ENDIFÂ»
-			Â«IF options.k >= 0Â»
-			memoize=Â«options.kÂ»
-			Â«ENDIFÂ»
-		Â«ENDIFÂ»
+			«ENDIF»
+			«IF options.k >= 0»
+			memoize=«options.k»
+			«ENDIF»
+		«ENDIF»
 		}
 	''' 
 	
@@ -51,17 +51,17 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		import org.eclipse.xtext.parser.impl.*;
 		import org.eclipse.emf.ecore.util.EcoreUtil;
 		import org.eclipse.emf.ecore.EObject;
-		Â«IF !allEnumRules.emptyÂ»
+		«IF !allEnumRules.empty»
 		import org.eclipse.emf.common.util.Enumerator;
-		Â«ENDIFÂ»
+		«ENDIF»
 		import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-		Â«IF !allParserRules.exists[!eAllContentsAsList.filter(UnorderedGroup).empty] && options.backtrackÂ»
+		«IF !allParserRules.exists[!eAllContentsAsList.filter(UnorderedGroup).empty] && options.backtrack»
 		import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
-		Â«ENDIFÂ»
+		«ENDIF»
 		import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
-		import Â«gaFQNameÂ»;
+		import «gaFQName»;
 
 	'''
 	
@@ -69,16 +69,16 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		
 		@parser::members {
 		
-		Â«IF options.backtrackÂ»
+		«IF options.backtrack»
 		/*
 		  This grammar contains a lot of empty actions to work around a bug in ANTLR.
 		  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
 		*/
 
-		Â«ENDIFÂ»
-		 	private Â«gaSimpleNameÂ» grammarAccess;
+		«ENDIF»
+		 	private «gaSimpleName» grammarAccess;
 
-		    public Â«internalParserClassName.toSimpleNameÂ»(TokenStream input, Â«gaSimpleNameÂ» grammarAccess) {
+		    public «internalParserClassName.toSimpleName»(TokenStream input, «gaSimpleName» grammarAccess) {
 		        this(input);
 		        this.grammarAccess = grammarAccess;
 		        registerRules(grammarAccess.getGrammar());
@@ -86,11 +86,11 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		
 		    @Override
 		    protected String getFirstRuleName() {
-		    	return "Â«allParserRules.head.nameÂ»";
+		    	return "«allParserRules.head.name»";
 		   	}
 		
 		   	@Override
-		   	protected Â«gaSimpleNameÂ» getGrammarAccess() {
+		   	protected «gaSimpleName» getGrammarAccess() {
 		   		return grammarAccess;
 		   	}
 		
@@ -112,28 +112,28 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	}
 	
 	protected override _compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		Â«compileEntryRule(grammar, options)Â»
+		«compileEntryRule(grammar, options)»
 		
-		Â«compileEBNF(options)Â»
+		«compileEBNF(options)»
 	'''
 	
 	protected def String compileEntryRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		// Entry rule Â«entryRuleNameÂ»
-		Â«entryRuleNameÂ»Â«compileEntryInit(options)Â»:
-			{ Â«newCompositeNodeÂ» }
-			iv_Â«ruleNameÂ»=Â«ruleNameÂ»
-			{ $current=$iv_Â«ruleNameÂ».currentÂ«IF datatypeRuleÂ».getText()Â«ENDIFÂ»; }
+		// Entry rule «entryRuleName»
+		«entryRuleName»«compileEntryInit(options)»:
+			{ «newCompositeNode» }
+			iv_«ruleName»=«ruleName»
+			{ $current=$iv_«ruleName».current«IF datatypeRule».getText()«ENDIF»; }
 			EOF;
-		Â«compileEntryFinally(options)Â»
+		«compileEntryFinally(options)»
 	'''
 	
 	protected def compileEntryInit(ParserRule it, AntlrOptions options) '''
-		 returns Â«compileEntryReturns(options)Â»
-		Â«IF definesHiddenTokens || definesUnorderedGroups(options)Â»
+		 returns «compileEntryReturns(options)»
+		«IF definesHiddenTokens || definesUnorderedGroups(options)»
 		@init {
-			Â«IF definesHiddenTokensÂ»Â«compileInitHiddenTokens(options)Â»Â«ENDIFÂ»
-			Â«IF definesUnorderedGroups(options)Â»Â«compileInitUnorderedGroups(options)Â»Â«ENDIFÂ»
-		}Â«ENDIFÂ»'''
+			«IF definesHiddenTokens»«compileInitHiddenTokens(options)»«ENDIF»
+			«IF definesUnorderedGroups(options)»«compileInitUnorderedGroups(options)»«ENDIF»
+		}«ENDIF»'''
 	
 	protected def compileEntryReturns(ParserRule it, AntlrOptions options) {
 		switch it {
@@ -148,25 +148,25 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		
 	protected def compileInitUnorderedGroups(ParserRule it, AntlrOptions options) '''
 		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-		Â«FOR group:eAllContentsAsList.filter(UnorderedGroup) SEPARATOR ', 'Â»
-			grammarAccess.Â«group.gaRuleElementAccessorÂ»
-		Â«ENDFORÂ»
+		«FOR group:eAllContentsAsList.filter(UnorderedGroup) SEPARATOR ', '»
+			grammarAccess.«group.gaRuleElementAccessor»
+		«ENDFOR»
 		);
 	'''
 		
 	protected def compileInitHiddenTokens(ParserRule it, AntlrOptions options) '''
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(Â«FOR hidden:hiddenTokens SEPARATOR ', 'Â»"Â«hidden.ruleNameÂ»"Â«ENDFORÂ»);
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOR hidden:hiddenTokens SEPARATOR ', '»"«hidden.ruleName»"«ENDFOR»);
 	'''
 	
 	protected def compileEntryFinally(ParserRule it, AntlrOptions options) '''
-		Â«IF definesHiddenTokens || definesUnorderedGroups(options)Â»
+		«IF definesHiddenTokens || definesUnorderedGroups(options)»
 		finally {
-			Â«IF definesHiddenTokensÂ»myHiddenTokenState.restore();Â«ENDIFÂ»
-			Â«IF definesUnorderedGroups(options)Â»myUnorderedGroupState.restore();Â«ENDIFÂ»
-		}Â«ENDIFÂ»'''
+			«IF definesHiddenTokens»myHiddenTokenState.restore();«ENDIF»
+			«IF definesUnorderedGroups(options)»myUnorderedGroupState.restore();«ENDIF»
+		}«ENDIF»'''
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
-		 returns Â«compileReturns(options)Â»
+		 returns «compileReturns(options)»
 		@init {
 			enterRule();
 		}
@@ -193,30 +193,30 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 			'''
 				(
 					{ 
-					  getUnorderedGroupHelper().enter(grammarAccess.Â«gaRuleElementAccessorÂ»);
+					  getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor»);
 					}
 					(
 						(
-				Â«FOR element:elements.indexed SEPARATOR '|'Â»
+				«FOR element:elements.indexed SEPARATOR '|'»
 							(
-								{getUnorderedGroupHelper().canSelect(grammarAccess.Â«gaRuleElementAccessorÂ», Â«element.keyÂ»)}?=>(
+								{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor», «element.key»)}?=>(
 									{
-										getUnorderedGroupHelper().select(grammarAccess.Â«gaRuleElementAccessorÂ», Â«element.keyÂ»);
+										getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor», «element.key»);
 									}
-			Â«Â«Â«	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
-									({true}?=>(Â«element.value.dataTypeEbnf2(supportActions)Â»))Â«IF element.value.multipleCardinalityÂ»+Â«ENDIFÂ»
+			«««	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
+									({true}?=>(«element.value.dataTypeEbnf2(supportActions)»))«IF element.value.multipleCardinality»+«ENDIF»
 									{ 
-										getUnorderedGroupHelper().returnFromSelection(grammarAccess.Â«gaRuleElementAccessorÂ»);
+										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor»);
 									}
 								)
 							)
-				Â«ENDFORÂ»
-						)Â«IF mandatoryContent != 0Â»+
-						{getUnorderedGroupHelper().canLeave(grammarAccess.Â«gaRuleElementAccessorÂ»)}?Â«ELSEÂ»*Â«ENDIFÂ»
+				«ENDFOR»
+						)«IF mandatoryContent != 0»+
+						{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
 					)
 				)
 					{ 
-					  getUnorderedGroupHelper().leave(grammarAccess.Â«gaRuleElementAccessorÂ»);
+					  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor»);
 					}
 			'''
 		} else {
@@ -226,10 +226,10 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	protected override String _dataTypeEbnf2(Keyword it, boolean supportActions) {
 		if (supportActions) '''
-			kw=Â«super._dataTypeEbnf2(it, supportActions)Â»
+			kw=«super._dataTypeEbnf2(it, supportActions)»
 			{
 				$current.merge(kw);
-				Â«newLeafNode("kw")Â»
+				«newLeafNode("kw")»
 			}
 		''' 
 		else
@@ -245,23 +245,23 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				EnumRule, 
 				ParserRule: '''
 					{
-						Â«newCompositeNodeÂ»
+						«newCompositeNode»
 					}
-					Â«localVarÂ»=Â«super._dataTypeEbnf2(it, supportActions)Â»
+					«localVar»=«super._dataTypeEbnf2(it, supportActions)»
 					{
-						$current.merge(Â«localVarÂ»);
+						$current.merge(«localVar»);
 					}
 					{
 						afterParserOrEnumRuleCall();
 					}
 				'''
 				TerminalRule: '''
-					Â«localVarÂ»=Â«super._dataTypeEbnf2(it, supportActions)Â»
+					«localVar»=«super._dataTypeEbnf2(it, supportActions)»
 					{
-						$current.merge(Â«localVarÂ»);
+						$current.merge(«localVar»);
 					}
 					{
-						Â«newLeafNode(localVar)Â»
+						«newLeafNode(localVar)»
 					}
 				'''
 				default:
@@ -277,30 +277,30 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 			'''
 				(
 					{ 
-					  getUnorderedGroupHelper().enter(grammarAccess.Â«gaRuleElementAccessorÂ»);
+					  getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor»);
 					}
 					(
 						(
-				Â«FOR element:elements.indexed SEPARATOR '|'Â»
+				«FOR element:elements.indexed SEPARATOR '|'»
 							(
-								{getUnorderedGroupHelper().canSelect(grammarAccess.Â«gaRuleElementAccessorÂ», Â«element.keyÂ»)}?=>(
+								{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor», «element.key»)}?=>(
 									{
-										getUnorderedGroupHelper().select(grammarAccess.Â«gaRuleElementAccessorÂ», Â«element.keyÂ»);
+										getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor», «element.key»);
 									}
-			Â«Â«Â«	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
-									({true}?=>(Â«element.value.ebnf(options, supportActions)Â»))Â«IF element.value.multipleCardinalityÂ»+Â«ENDIFÂ»
+			«««	Predicate {true}=> helps to workaround an issue in the Antlr grammar processing
+									({true}?=>(«element.value.ebnf(options, supportActions)»))«IF element.value.multipleCardinality»+«ENDIF»
 									{ 
-										getUnorderedGroupHelper().returnFromSelection(grammarAccess.Â«gaRuleElementAccessorÂ»);
+										getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor»);
 									}
 								)
 							)
-				Â«ENDFORÂ»
-						)Â«IF mandatoryContent != 0Â»+
-						{getUnorderedGroupHelper().canLeave(grammarAccess.Â«gaRuleElementAccessorÂ»)}?Â«ELSEÂ»*Â«ENDIFÂ»
+				«ENDFOR»
+						)«IF mandatoryContent != 0»+
+						{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor»)}?«ELSE»*«ENDIF»
 					)
 				)
 					{ 
-					  getUnorderedGroupHelper().leave(grammarAccess.Â«gaRuleElementAccessorÂ»);
+					  getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor»);
 					}
 				'''
 		} else {
@@ -310,14 +310,14 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	protected override String _ebnf2(Action it, AntlrOptions options, boolean supportActions) {
 		if (supportActions) '''
-			Â«IF options.backtrackÂ»
+			«IF options.backtrack»
 			{
 				/* */
 			}
-			Â«ENDIFÂ»
+			«ENDIF»
 			{
-				$current = forceCreateModelElementÂ«IF feature != nullÂ»AndÂ«setOrAdd.toFirstUpperÂ»Â«ENDIFÂ»(
-					grammarAccess.Â«grammarElementAccessÂ»,
+				$current = forceCreateModelElement«IF feature != null»And«setOrAdd.toFirstUpper»«ENDIF»(
+					grammarAccess.«grammarElementAccess»,
 					$current);
 			}
 		'''
@@ -329,15 +329,15 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		if (!supportActions) 
 			super._ebnf2(it, options, supportActions)
 		else if (assigned) '''
-			Â«super._ebnf2(it, options, supportActions)Â»
+			«super._ebnf2(it, options, supportActions)»
 			{
-				Â«newLeafNode(containingAssignment.localVar(it))Â»
+				«newLeafNode(containingAssignment.localVar(it))»
 			}
 		'''
 		else '''
-			Â«localVarÂ»=Â«super._ebnf2(it, options, supportActions)Â»
+			«localVar»=«super._ebnf2(it, options, supportActions)»
 			{
-				Â«newLeafNode(localVar)Â»
+				«newLeafNode(localVar)»
 			}
 		'''
 	}
@@ -352,38 +352,38 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 					super._ebnf2(it, options, supportActions)
 				EnumRule, 
 				ParserRule case rule.datatypeRule: '''
-					Â«IF options.backtrackÂ»
+					«IF options.backtrack»
 					{
 						/* */
 					}
-					Â«ENDIFÂ»
+					«ENDIF»
 					{
-						Â«newCompositeNodeÂ»
+						«newCompositeNode»
 					}
-					Â«super._ebnf2(it, options, supportActions)Â»
+					«super._ebnf2(it, options, supportActions)»
 					{
 						afterParserOrEnumRuleCall();
 					}
 				'''
 				ParserRule: '''
-					Â«IF options.backtrackÂ»
+					«IF options.backtrack»
 					{
 						/* */
 					}
-					Â«ENDIFÂ»
+					«ENDIF»
 					{
-						Â«newCompositeNodeÂ»
+						«newCompositeNode»
 					}
-					Â«localVarÂ»=Â«super._ebnf2(it, options, supportActions)Â»
+					«localVar»=«super._ebnf2(it, options, supportActions)»
 					{
-						$current = $Â«localVarÂ».current;
+						$current = $«localVar».current;
 						afterParserOrEnumRuleCall();
 					}
 				'''
 				TerminalRule: '''
-					Â«localVarÂ»=Â«super._ebnf2(it, options, supportActions)Â»
+					«localVar»=«super._ebnf2(it, options, supportActions)»
 					{
-						Â«newLeafNode(localVar)Â»
+						«newLeafNode(localVar)»
 					}
 				'''
 				default: 
@@ -397,17 +397,17 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				EnumRule,
 				ParserRule: '''
 					{
-						Â«ref.newCompositeNodeÂ»
+						«ref.newCompositeNode»
 					}
-					Â«ruleNameÂ»
+					«ruleName»
 					{
 						afterParserOrEnumRuleCall();
 					}
 				'''
 				TerminalRule: '''
-					Â«ref.containingAssignment.localVarÂ»=Â«ruleNameÂ»
+					«ref.containingAssignment.localVar»=«ruleName»
 					{
-						Â«ref.newLeafNode(ref.containingAssignment.localVar)Â»
+						«ref.newLeafNode(ref.containingAssignment.localVar)»
 					}
 				'''
 				default:
@@ -419,32 +419,32 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected _assignmentEbnf(CrossReference it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		if (supportActions) '''
-			Â«IF options.backtrackÂ»
+			«IF options.backtrack»
 			{
 				/* */
 			}
-			Â«ENDIFÂ»
+			«ENDIF»
 			{
 				if ($current==null) {
-					$current = Â«assignment.createModelElementÂ»;
+					$current = «assignment.createModelElement»;
 				}
 			}
-			Â«super._assignmentEbnf(it, assignment, options, supportActions)Â»'''
+			«super._assignmentEbnf(it, assignment, options, supportActions)»'''
 		else
 			super._assignmentEbnf(it, assignment, options, supportActions)
 	}
 
 	override protected _assignmentEbnf(AbstractElement it, Assignment assignment, AntlrOptions options, boolean supportActions) {
 		if (supportActions) '''
-			Â«assignment.localVar(it)Â»=Â«super._assignmentEbnf(it, assignment, options, supportActions)Â»
+			«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 			{
 				if ($current==null) {
-					$current = Â«assignment.createModelElementÂ»;
+					$current = «assignment.createModelElement»;
 				}
-				Â«assignment.setOrAddÂ»WithLastConsumed($current, "Â«assignment.featureÂ»", Â«
-	        		IF assignment.booleanÂ»trueÂ«
-	        		ELSEÂ»Â«assignment.localVar(it)Â»Â«
-	        		ENDIFÂ», Â«assignment.terminal.toStringLiteralÂ»);
+				«assignment.setOrAdd»WithLastConsumed($current, "«assignment.feature»", «
+	        		IF assignment.boolean»true«
+	        		ELSE»«assignment.localVar(it)»«
+	        		ENDIF», «assignment.terminal.toStringLiteral»);
 			}
 		'''
 		else
@@ -457,35 +457,35 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 				EnumRule,
 				ParserRule: '''
 					{
-						Â«newCompositeNodeÂ»
+						«newCompositeNode»
 					}
-					Â«assignment.localVar(it)Â»=Â«super._assignmentEbnf(it, assignment, options, supportActions)Â»
+					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
 						if ($current==null) {
-							$current = Â«assignment.createModelElementForParentÂ»;
+							$current = «assignment.createModelElementForParent»;
 						}
-						Â«assignment.setOrAddÂ»(
+						«assignment.setOrAdd»(
 							$current,
-							"Â«assignment.featureÂ»",
-							Â«IF assignment.booleanÂ»trueÂ«ELSEÂ»Â«assignment.localVar(it)Â»Â«ENDIFÂ»,
-							Â«toStringLiteralÂ»);
+							"«assignment.feature»",
+							«IF assignment.boolean»true«ELSE»«assignment.localVar(it)»«ENDIF»,
+							«toStringLiteral»);
 						afterParserOrEnumRuleCall();
 					}
 				'''
 				TerminalRule: '''
-					Â«assignment.localVar(it)Â»=Â«super._assignmentEbnf(it, assignment, options, supportActions)Â»
+					«assignment.localVar(it)»=«super._assignmentEbnf(it, assignment, options, supportActions)»
 					{
-						Â«newLeafNode(assignment.localVar(it))Â»
+						«newLeafNode(assignment.localVar(it))»
 					}
 					{
 						if ($current==null) {
-							$current = Â«assignment.createModelElementÂ»;
+							$current = «assignment.createModelElement»;
 						}
-						Â«assignment.setOrAddÂ»WithLastConsumed(
+						«assignment.setOrAdd»WithLastConsumed(
 							$current,
-							"Â«assignment.featureÂ»",
-							Â«IF assignment.isBooleanÂ»trueÂ«ELSEÂ»Â«assignment.localVar(it)Â»Â«ENDIFÂ»,
-							Â«toStringLiteralÂ»);
+							"«assignment.feature»",
+							«IF assignment.isBoolean»true«ELSE»«assignment.localVar(it)»«ENDIF»,
+							«toStringLiteral»);
 					}
 				'''
 				default: 
@@ -496,13 +496,13 @@ class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	}
 	
 	protected def createModelElement(EObject grammarElement) '''
-		createModelElement(grammarAccess.Â«grammarElement.containingParserRule.grammarElementAccessÂ»)'''
+		createModelElement(grammarAccess.«grammarElement.containingParserRule.grammarElementAccess»)'''
 	
 	protected def createModelElementForParent(EObject grammarElement) '''
-		createModelElementForParent(grammarAccess.Â«grammarElement.containingParserRule.grammarElementAccessÂ»)'''
+		createModelElementForParent(grammarAccess.«grammarElement.containingParserRule.grammarElementAccess»)'''
 	
-	protected def newCompositeNode(EObject it) '''newCompositeNode(grammarAccess.Â«grammarElementAccessÂ»);'''
+	protected def newCompositeNode(EObject it) '''newCompositeNode(grammarAccess.«grammarElementAccess»);'''
 
-	protected def newLeafNode(EObject it, String token) '''newLeafNode(Â«tokenÂ», grammarAccess.Â«grammarElementAccessÂ»);'''
+	protected def newLeafNode(EObject it, String token) '''newLeafNode(«token», grammarAccess.«grammarElementAccess»);'''
 
 }

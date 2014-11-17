@@ -42,7 +42,7 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragmen
 			val srcGenOutlet = ctx.srcGenOutlet
 			val srcGenPath = srcGenOutlet.path
 			val encoding = srcGenOutlet.fileEncoding
-			val absoluteGrammarFileName = '''Â«srcGenPathÂ»/Â«grammar.grammarFileName.asPathÂ».g'''
+			val absoluteGrammarFileName = '''«srcGenPath»/«grammar.grammarFileName.asPath».g'''
 			addAntlrParam('-fo')
 			addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')))
 			antlrTool.runWithEncodingAndParams(absoluteGrammarFileName, encoding, antlrParams)
