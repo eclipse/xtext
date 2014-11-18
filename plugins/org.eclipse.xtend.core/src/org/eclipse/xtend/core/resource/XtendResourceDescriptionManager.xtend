@@ -23,7 +23,9 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 import java.util.Collection
 import org.eclipse.xtext.resource.IResourceDescriptions
 import java.util.Collections
+import com.google.inject.Singleton
 
+@Singleton
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
 	
 	@Inject IBatchTypeResolver typeResolver
