@@ -1,5 +1,7 @@
 apply from: 'prepareIntellij.gradle'
 
+ext.xtextVersion = '2.8.0-SNAPSHOT'
+
 configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 	apply plugin: 'java'
 	
@@ -10,20 +12,33 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
     }
 	}
 	
+	configurations {
+		provided
+	}
+	
+	sourceSets.main.compileClasspath += configurations.provided
+	
 	dependencies {
-		def xtextVersion = '2.8.0-SNAPSHOT'
 		if (name != 'intellij-dependencies') {
-			compile project(':intellij-dependencies')
+			provided project(':intellij-dependencies')
 		}
-		compile "org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}"
-		compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
-		compile "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
+		provided "org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}"
+		provided "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"
+		provided "org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}"
 	}
 	
 	sourceSets {
 		main {
-			java.srcDirs = ['src', 'xtend-gen']
-			resources.srcDirs = ['src']
+			java.srcDirs = ['src', 'xtend-gen', 'src-gen']
+			resources.srcDirs = ['src', 'src-gen']
 		}
 	}
+	
+	jar {
+		metaInf {
+			from('META-INF')
+		}
+	}
+	
+	sourceCompatibility = 1.5
 }

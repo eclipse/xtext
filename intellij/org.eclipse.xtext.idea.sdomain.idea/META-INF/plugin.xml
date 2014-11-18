@@ -8,6 +8,7 @@
 	<vendor>My Company</vendor>
 
 	<idea-version since-build="131"/>
+	<depends>org.eclipse.xtext.idea</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.sdomain.idea.server.SDomainBuildProcessParametersProvider"/>
