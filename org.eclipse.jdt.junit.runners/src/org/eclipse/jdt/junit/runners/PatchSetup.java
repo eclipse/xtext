@@ -206,7 +206,7 @@ public class PatchSetup implements IStartup {
 			// we add the run/debug actions for cases where
 			// org.eclipse.jdt.internal.junit.ui.TestViewer.handleMenuAboutToShow(IMenuManager)
 			// doesn't do it.
-			if (testElement instanceof TestSuiteElement && !testClassExists(testElement.getClassName())) {
+			if (!Activator.CAN_RUN_SUBTREES && testElement instanceof TestSuiteElement && !testClassExists(testElement.getClassName())) {
 				IType type = TypeUtil.findType(testElement);
 				if (type != null) {
 					String className = type.getFullyQualifiedName();
