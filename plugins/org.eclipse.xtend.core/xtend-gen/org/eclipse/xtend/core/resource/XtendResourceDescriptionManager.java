@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.resource;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
+@Singleton
 @SuppressWarnings("all")
 public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
   @Inject
