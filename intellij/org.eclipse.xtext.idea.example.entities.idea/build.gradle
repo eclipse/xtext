@@ -1,0 +1,18 @@
+plugins {
+  id 'com.github.johnrengelman.shadow' version '1.1.2'
+}
+
+dependencies {
+	compile project(':org.eclipse.xtext.idea.example.entities')
+	provided project(':org.eclipse.xtext.idea')
+}
+
+shadowJar {
+	metaInf {
+		from('META-INF')
+	}
+}
+
+artifacts {
+	intellijShadowJars shadowJar
+}
