@@ -1,0 +1,4 @@
+dependencies {
+	compile project(':org.eclipse.xtext.idea.builder')
+	compile project(':org.eclipse.xtext.idea.generator')
+}

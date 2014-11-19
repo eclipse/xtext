@@ -1,1 +1,10 @@
-include 'intellij-dependencies','org.xtext.idea','org.xtext.idea.builder'
+include (
+	'intellij-dependencies',
+	'org.eclipse.xtext.idea',
+	'org.eclipse.xtext.idea.builder', 
+	'org.eclipse.xtext.idea.generator', 
+	'org.eclipse.xtext.xbase.idea',
+	'org.eclipse.xtext.idea.plugin',
+	'org.eclipse.xtext.idea.sdomain',
+	'org.eclipse.xtext.idea.sdomain.idea'
+)
