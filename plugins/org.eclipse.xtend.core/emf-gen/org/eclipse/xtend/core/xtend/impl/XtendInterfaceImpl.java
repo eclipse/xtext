@@ -30,12 +30,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * An implementation of the model object '<em><b>Interface</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendInterfaceImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendInterfaceImpl#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -37,13 +37,14 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  * An implementation of the model object '<em><b>XAnnotation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getElementValuePairs <em>Element Value Pairs</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getAnnotationType <em>Annotation Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

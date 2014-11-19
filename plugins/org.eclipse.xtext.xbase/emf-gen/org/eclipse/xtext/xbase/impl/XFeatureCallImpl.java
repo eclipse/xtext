@@ -31,14 +31,15 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XFeature Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isTypeLiteral <em>Type Literal</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

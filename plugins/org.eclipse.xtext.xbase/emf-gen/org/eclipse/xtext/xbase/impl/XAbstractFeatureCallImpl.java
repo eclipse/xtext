@@ -34,7 +34,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XAbstract Feature Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getTypeArguments <em>Type Arguments</em>}</li>
@@ -43,7 +45,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#isValidFeature <em>Valid Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAbstractFeatureCallImpl#getImplicitFirstArgument <em>Implicit First Argument</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -24,13 +24,13 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getSwitch <em>Switch</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getCases <em>Cases</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSwitchExpression#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXSwitchExpression()
  * @model

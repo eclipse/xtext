@@ -24,12 +24,13 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XSynchronized Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl#getParam <em>Param</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XSynchronizedExpressionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

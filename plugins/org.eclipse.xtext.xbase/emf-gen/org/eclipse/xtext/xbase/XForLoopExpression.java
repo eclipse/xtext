@@ -22,12 +22,12 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XForLoopExpression#getForExpression <em>For Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XForLoopExpression#getEachExpression <em>Each Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XForLoopExpression#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXForLoopExpression()
  * @model

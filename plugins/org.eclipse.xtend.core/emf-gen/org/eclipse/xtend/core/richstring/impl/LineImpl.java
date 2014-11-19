@@ -34,12 +34,13 @@ import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
  * An implementation of the model object '<em><b>Line</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.LineImpl#getParts <em>Parts</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.LineImpl#getRichString <em>Rich String</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

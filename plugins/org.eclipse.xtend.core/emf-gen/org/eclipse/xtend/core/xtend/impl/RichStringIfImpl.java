@@ -35,14 +35,15 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  * An implementation of the model object '<em><b>Rich String If</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringIfImpl#getIf <em>If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringIfImpl#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringIfImpl#getElseIfs <em>Else Ifs</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringIfImpl#getElse <em>Else</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

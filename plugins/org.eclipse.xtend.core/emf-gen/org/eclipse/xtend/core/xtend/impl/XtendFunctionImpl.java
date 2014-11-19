@@ -26,13 +26,14 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * An implementation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

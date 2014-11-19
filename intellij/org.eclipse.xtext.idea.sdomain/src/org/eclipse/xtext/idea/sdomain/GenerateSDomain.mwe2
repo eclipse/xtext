@@ -10,6 +10,9 @@ var projectName = "org.eclipse.xtext.idea.sdomain"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
 
+var ideaProjectName = "${projectName}.idea"
+var ideaProjectPath = "../${ideaProjectName}"
+
 Workflow {
     bean = StandaloneSetup {
     	scanClassPath = true
@@ -30,6 +33,10 @@ Workflow {
     
     component = DirectoryCleaner {
     	directory = "${runtimeProject}.tests/src-gen"
+    }
+    
+    component = DirectoryCleaner {
+    	directory = "${ideaProjectPath}/src-gen"
     }
     
     component = Generator {
@@ -115,14 +122,11 @@ Workflow {
     		fragment = compare.CompareFragment auto-inject {}
     		
     		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-    			pathIdeaPluginProject = "${runtimeProject}.idea"
-    			pathRuntimePluginProject = runtimeProject
-	            fileExtensions = fileExtensions
+    			runtimeProjectName = projectName
+    			runtimeProjectPath = runtimeProject
 	        }
 	        
-	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment {
-	        	pathIdeaPluginProject = "${runtimeProject}.idea"
-	        }
+	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
 		}
     }
 }

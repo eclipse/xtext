@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-	<id>org.eclipse.xtext.idea.sdomain.SDomain</id>
+	<id>org.eclipse.xtext.idea.sdomain.idea</id>
 	<name>SDomain Support</name>
 	<description>
       This plugin enables smart editing of SDomain files.
@@ -8,7 +8,7 @@
 	<vendor>My Company</vendor>
 
 	<idea-version since-build="131"/>
-	<depends>org.eclipse.xtext.idea</depends>
+	<depends optional="true">org.eclipse.xtext.idea</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.sdomain.idea.server.SDomainBuildProcessParametersProvider"/>

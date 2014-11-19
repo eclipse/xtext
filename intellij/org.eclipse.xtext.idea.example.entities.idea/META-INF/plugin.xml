@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-	<id>org.eclipse.xtext.idea.example.entities.Entities</id>
+	<id>org.eclipse.xtext.idea.example.entities.idea</id>
 	<name>Entities Support</name>
 	<description>
       This plugin enables smart editing of Entities files.
@@ -25,6 +25,7 @@
 		<targetElementEvaluator language="org.eclipse.xtext.idea.example.entities.Entities"
 								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
 								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
+
 		<fileTypeFactory implementation="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesFileTypeFactory"/>
 		<stubElementTypeHolder class="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider"/>
 		<lang.ast.factory language="org.eclipse.xtext.idea.example.entities.Entities"
@@ -44,6 +45,7 @@
       	<annotator language="org.eclipse.xtext.idea.example.entities.Entities"
       							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.example.entities.idea.lang.psi.EntitiesElementDescriptionProvider" order="first"/>
 	</extensions>
 
 </idea-plugin>

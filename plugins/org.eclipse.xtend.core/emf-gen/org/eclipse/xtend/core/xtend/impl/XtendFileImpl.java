@@ -34,13 +34,14 @@ import org.eclipse.xtext.xtype.XImportSection;
  * An implementation of the model object '<em><b>File</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getXtendTypes <em>Xtend Types</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFileImpl#getPackage <em>Package</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

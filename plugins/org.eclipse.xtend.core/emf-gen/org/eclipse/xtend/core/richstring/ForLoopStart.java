@@ -16,11 +16,11 @@ import org.eclipse.xtend.core.xtend.RichStringForLoop;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.ForLoopStart#getLoop <em>Loop</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.ForLoopStart#getEnd <em>End</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getForLoopStart()
  * @model

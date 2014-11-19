@@ -23,11 +23,12 @@ import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
  * An implementation of the model object '<em><b>End If</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.EndIfImpl#getIfConditionStart <em>If Condition Start</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

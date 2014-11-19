@@ -17,6 +17,9 @@ var uiProjectPath = "../${uiProjectName}"
 var backtrack = false
 var memoize = false
 
+var ideaProjectName = "org.eclipse.xtend.idea"
+var ideaProjectPath = "../../intellij/${ideaProjectName}"
+
 Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
@@ -59,6 +62,10 @@ Workflow {
 
 	component = DirectoryCleaner {
 		directory = "${uiProjectPath}/src-gen"
+	}
+
+	component = DirectoryCleaner {
+		directory = "${ideaProjectPath}/src-gen"
 	}
 	
 	component = parser.JFlexLoader : jFlexMain {}
@@ -133,6 +140,13 @@ Workflow {
 				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
 				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 			}
+	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
+    			runtimeProjectName = projectName
+    			runtimeProjectPath = projectPath
+	            fileExtensions = file.extensions
+	            typesIntegrationRequired = true
+	        }
 		}
 	}
 }

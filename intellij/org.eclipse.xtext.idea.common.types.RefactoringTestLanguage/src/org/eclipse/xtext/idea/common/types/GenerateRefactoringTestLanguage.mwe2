@@ -19,6 +19,9 @@ var fileExtensions = "typesRefactoring"
 var projectName = "org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"
 var runtimeProject = "../${projectName}"
 
+var ideaProjectName = projectName
+var ideaProjectPath = runtimeProject
+
 Workflow {
 	bean = StandaloneSetup {
 		scanClassPath = true
@@ -58,15 +61,11 @@ Workflow {
 				options = auto-inject {}
 			}
 			fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-				pathIdeaPluginProject = runtimeProject
-				pathRuntimePluginProject = runtimeProject
-				fileExtensions = fileExtensions
+				runtimeProjectName = projectName
+				runtimeProjectPath = runtimeProject
 				typesIntegrationRequired = true
 			}
-			fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
-				pathIdeaPluginProject = runtimeProject
-			}
+			fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
 		}
 	}
 }
-

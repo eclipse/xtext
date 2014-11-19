@@ -22,13 +22,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getEachExpression <em>Each Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getInitExpressions <em>Init Expressions</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBasicForLoopExpression#getUpdateExpressions <em>Update Expressions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXBasicForLoopExpression()
  * @model
