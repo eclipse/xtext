@@ -26,12 +26,13 @@ import org.eclipse.xtext.xbase.XExpression;
  * An implementation of the model object '<em><b>Create Extension Info</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.CreateExtensionInfoImpl#getCreateExpression <em>Create Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.CreateExtensionInfoImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

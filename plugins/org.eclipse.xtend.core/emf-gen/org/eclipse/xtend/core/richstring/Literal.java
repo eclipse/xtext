@@ -16,12 +16,12 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.Literal#getLiteral <em>Literal</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.Literal#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.Literal#getLength <em>Length</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getLiteral()
  * @model

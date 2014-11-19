@@ -24,13 +24,14 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XIf Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#getIf <em>If</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XIfExpressionImpl#getElse <em>Else</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

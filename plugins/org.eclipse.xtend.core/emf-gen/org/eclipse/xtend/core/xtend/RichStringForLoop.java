@@ -17,12 +17,12 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringForLoop#getSeparator <em>Separator</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringForLoop#getBefore <em>Before</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringForLoop#getAfter <em>After</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringForLoop()
  * @model

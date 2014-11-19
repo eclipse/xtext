@@ -21,11 +21,11 @@ package org.eclipse.xtext.xbase;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractWhileExpression#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAbstractWhileExpression#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractWhileExpression()
  * @model abstract="true"

@@ -18,11 +18,11 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.CreateExtensionInfo#getCreateExpression <em>Create Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.CreateExtensionInfo#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getCreateExtensionInfo()
  * @model

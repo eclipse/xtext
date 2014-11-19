@@ -24,10 +24,10 @@ import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.XComputedTypeReference#getTypeProvider <em>Type Provider</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtype.XtypePackage#getXComputedTypeReference()
  * @model

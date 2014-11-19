@@ -26,12 +26,12 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getElementValuePairs <em>Element Value Pairs</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getAnnotationType <em>Annotation Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation()
  * @model

@@ -29,91 +29,119 @@ public class RefactoringTestLanguageElementTypeProvider implements IElementTypeP
 	public static final IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> NAMED_EOBJECT_TYPE = new PsiNamedEObjectType("NAMED_EOBJECT", RefactoringTestLanguageLanguage.INSTANCE);
 
 	public static final IElementType CROSS_REFERENCE_TYPE = new IElementType("CROSS_REFERENCE", RefactoringTestLanguageLanguage.INSTANCE);
-	
-	public static final IGrammarAwareElementType Model_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType Model_ReferenceHolderAssignment_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_Group_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_NameAssignment_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_Group_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_Group_1_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_FullStopKeyword_1_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_Group_2_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_DollarSignKeyword_2_0_ELEMENT_TYPE;
-	
-	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE;
 
 	private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 
-	static {
-		RefactoringTestLanguageGrammarAccess grammarAccess = RefactoringTestLanguageLanguage.INSTANCE.getInstance(RefactoringTestLanguageGrammarAccess.class);
-		
-		Model_ELEMENT_TYPE =  new IGrammarAwareElementType("Model_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getModelRule());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getModelRule(), Model_ELEMENT_TYPE);
-		Model_ReferenceHolderAssignment_ELEMENT_TYPE =  new IGrammarAwareElementType("Model_ReferenceHolderAssignment_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getModelAccess().getReferenceHolderAssignment());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getModelAccess().getReferenceHolderAssignment(), Model_ReferenceHolderAssignment_ELEMENT_TYPE);
-		Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE =  new IGrammarAwareElementType("Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_0(), Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE);
-		
-		ReferenceHolder_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderRule());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderRule(), ReferenceHolder_ELEMENT_TYPE);
-		ReferenceHolder_Group_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_Group_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderAccess().getGroup());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderAccess().getGroup(), ReferenceHolder_Group_ELEMENT_TYPE);
-		ReferenceHolder_NameAssignment_0_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_NameAssignment_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderAccess().getNameAssignment_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderAccess().getNameAssignment_0(), ReferenceHolder_NameAssignment_0_ELEMENT_TYPE);
-		ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderAccess().getNameIDTerminalRuleCall_0_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderAccess().getNameIDTerminalRuleCall_0_0(), ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE);
-		ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderAccess().getDefaultReferenceAssignment_1());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderAccess().getDefaultReferenceAssignment_1(), ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE);
-		ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeCrossReference_1_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeCrossReference_1_0(), ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE);
-		ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE =  new IGrammarAwareElementType("ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getReferenceHolderAccess().getDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1(), ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE);
-		
-		FQN_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNRule());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNRule(), FQN_ELEMENT_TYPE);
-		FQN_Group_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_Group_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getGroup());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getGroup(), FQN_Group_ELEMENT_TYPE);
-		FQN_IDTerminalRuleCall_0_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_IDTerminalRuleCall_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0(), FQN_IDTerminalRuleCall_0_ELEMENT_TYPE);
-		FQN_Group_1_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_Group_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getGroup_1());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getGroup_1(), FQN_Group_1_ELEMENT_TYPE);
-		FQN_FullStopKeyword_1_0_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_FullStopKeyword_1_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getFullStopKeyword_1_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getFullStopKeyword_1_0(), FQN_FullStopKeyword_1_0_ELEMENT_TYPE);
-		FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1(), FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE);
-		FQN_Group_2_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_Group_2_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getGroup_2());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getGroup_2(), FQN_Group_2_ELEMENT_TYPE);
-		FQN_DollarSignKeyword_2_0_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_DollarSignKeyword_2_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getDollarSignKeyword_2_0());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getDollarSignKeyword_2_0(), FQN_DollarSignKeyword_2_0_ELEMENT_TYPE);
-		FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE =  new IGrammarAwareElementType("FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, grammarAccess.getFQNAccess().getIDTerminalRuleCall_2_1());
-		GRAMMAR_ELEMENT_TYPE.put(grammarAccess.getFQNAccess().getIDTerminalRuleCall_2_1(), FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE);
+	private static IGrammarAwareElementType associate(IGrammarAwareElementType grammarAwareElementType) {
+		GRAMMAR_ELEMENT_TYPE.put(grammarAwareElementType.getGrammarElement(), grammarAwareElementType);
+		return grammarAwareElementType;
 	}
+
+	private static final RefactoringTestLanguageGrammarAccess GRAMMAR_ACCESS = RefactoringTestLanguageLanguage.INSTANCE.getInstance(RefactoringTestLanguageGrammarAccess.class);
+
+	private static class ModelFactory {
+		public static IGrammarAwareElementType createModelElementType() {
+			return new IGrammarAwareElementType("Model_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelRule());
+		}
+		public static IGrammarAwareElementType createModel_ReferenceHolderAssignmentElementType() {
+			return new IGrammarAwareElementType("Model_ReferenceHolderAssignment_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getReferenceHolderAssignment());
+		}
+		public static IGrammarAwareElementType createModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getModelAccess().getReferenceHolderReferenceHolderParserRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Model_ELEMENT_TYPE = associate(ModelFactory.createModelElementType());
+
+	public static final IGrammarAwareElementType Model_ReferenceHolderAssignment_ELEMENT_TYPE = associate(ModelFactory.createModel_ReferenceHolderAssignmentElementType());
+
+	public static final IGrammarAwareElementType Model_ReferenceHolderReferenceHolderParserRuleCall_0_ELEMENT_TYPE = associate(ModelFactory.createModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType());
+
+	private static class ReferenceHolderFactory {
+		public static IGrammarAwareElementType createReferenceHolderElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderRule());
+		}
+		public static IGrammarAwareElementType createReferenceHolder_GroupElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_Group_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createReferenceHolder_NameAssignment_0ElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_NameAssignment_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderAccess().getNameAssignment_0());
+		}
+		public static IGrammarAwareElementType createReferenceHolder_NameIDTerminalRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderAccess().getNameIDTerminalRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createReferenceHolder_DefaultReferenceAssignment_1ElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderAccess().getDefaultReferenceAssignment_1());
+		}
+		public static IGrammarAwareElementType createReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderAccess().getDefaultReferenceJvmTypeCrossReference_1_0());
+		}
+		public static IGrammarAwareElementType createReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1ElementType() {
+			return new IGrammarAwareElementType("ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getReferenceHolderAccess().getDefaultReferenceJvmTypeFQNParserRuleCall_1_0_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType ReferenceHolder_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolderElementType());
+
+	public static final IGrammarAwareElementType ReferenceHolder_Group_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolder_GroupElementType());
+
+	public static final IGrammarAwareElementType ReferenceHolder_NameAssignment_0_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolder_NameAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType ReferenceHolder_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolder_NameIDTerminalRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType ReferenceHolder_DefaultReferenceAssignment_1_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolder_DefaultReferenceAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType ReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
+
+	public static final IGrammarAwareElementType ReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1_ELEMENT_TYPE = associate(ReferenceHolderFactory.createReferenceHolder_DefaultReferenceJvmTypeFQNParserRuleCall_1_0_1ElementType());
+
+	private static class FQNFactory {
+		public static IGrammarAwareElementType createFQNElementType() {
+			return new IGrammarAwareElementType("FQN_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNRule());
+		}
+		public static IGrammarAwareElementType createFQN_GroupElementType() {
+			return new IGrammarAwareElementType("FQN_Group_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createFQN_IDTerminalRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("FQN_IDTerminalRuleCall_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getIDTerminalRuleCall_0());
+		}
+		public static IGrammarAwareElementType createFQN_Group_1ElementType() {
+			return new IGrammarAwareElementType("FQN_Group_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getGroup_1());
+		}
+		public static IGrammarAwareElementType createFQN_FullStopKeyword_1_0ElementType() {
+			return new IGrammarAwareElementType("FQN_FullStopKeyword_1_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getFullStopKeyword_1_0());
+		}
+		public static IGrammarAwareElementType createFQN_IDTerminalRuleCall_1_1ElementType() {
+			return new IGrammarAwareElementType("FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getIDTerminalRuleCall_1_1());
+		}
+		public static IGrammarAwareElementType createFQN_Group_2ElementType() {
+			return new IGrammarAwareElementType("FQN_Group_2_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getGroup_2());
+		}
+		public static IGrammarAwareElementType createFQN_DollarSignKeyword_2_0ElementType() {
+			return new IGrammarAwareElementType("FQN_DollarSignKeyword_2_0_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getDollarSignKeyword_2_0());
+		}
+		public static IGrammarAwareElementType createFQN_IDTerminalRuleCall_2_1ElementType() {
+			return new IGrammarAwareElementType("FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE", RefactoringTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getFQNAccess().getIDTerminalRuleCall_2_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType FQN_ELEMENT_TYPE = associate(FQNFactory.createFQNElementType());
+
+	public static final IGrammarAwareElementType FQN_Group_ELEMENT_TYPE = associate(FQNFactory.createFQN_GroupElementType());
+
+	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_0_ELEMENT_TYPE = associate(FQNFactory.createFQN_IDTerminalRuleCall_0ElementType());
+
+	public static final IGrammarAwareElementType FQN_Group_1_ELEMENT_TYPE = associate(FQNFactory.createFQN_Group_1ElementType());
+
+	public static final IGrammarAwareElementType FQN_FullStopKeyword_1_0_ELEMENT_TYPE = associate(FQNFactory.createFQN_FullStopKeyword_1_0ElementType());
+
+	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE = associate(FQNFactory.createFQN_IDTerminalRuleCall_1_1ElementType());
+
+	public static final IGrammarAwareElementType FQN_Group_2_ELEMENT_TYPE = associate(FQNFactory.createFQN_Group_2ElementType());
+
+	public static final IGrammarAwareElementType FQN_DollarSignKeyword_2_0_ELEMENT_TYPE = associate(FQNFactory.createFQN_DollarSignKeyword_2_0ElementType());
+
+	public static final IGrammarAwareElementType FQN_IDTerminalRuleCall_2_1_ELEMENT_TYPE = associate(FQNFactory.createFQN_IDTerminalRuleCall_2_1ElementType());
 
 	public IFileElementType getFileType() {
 		return FILE_TYPE;

@@ -26,12 +26,13 @@ import org.eclipse.xtext.xbase.XExpression;
  * An implementation of the model object '<em><b>Rich String Else If</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringElseIfImpl#getIf <em>If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringElseIfImpl#getThen <em>Then</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

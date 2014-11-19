@@ -31,7 +31,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XMember Feature Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#getMemberCallArguments <em>Member Call Arguments</em>}</li>
@@ -42,7 +44,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XMemberFeatureCallImpl#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

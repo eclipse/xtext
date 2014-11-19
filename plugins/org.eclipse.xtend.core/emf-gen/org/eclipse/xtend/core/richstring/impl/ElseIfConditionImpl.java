@@ -26,12 +26,13 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf;
  * An implementation of the model object '<em><b>Else If Condition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.ElseIfConditionImpl#getRichStringElseIf <em>Rich String Else If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.ElseIfConditionImpl#getIfConditionStart <em>If Condition Start</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

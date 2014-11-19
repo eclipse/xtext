@@ -30,12 +30,13 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XType Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XTypeLiteralImpl#getArrayDimensions <em>Array Dimensions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

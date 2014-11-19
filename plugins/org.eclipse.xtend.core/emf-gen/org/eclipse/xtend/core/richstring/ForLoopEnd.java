@@ -15,10 +15,10 @@ package org.eclipse.xtend.core.richstring;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.ForLoopEnd#getStart <em>Start</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getForLoopEnd()
  * @model

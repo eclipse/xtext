@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.Line#getParts <em>Parts</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.Line#getRichString <em>Rich String</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getLine()
  * @model

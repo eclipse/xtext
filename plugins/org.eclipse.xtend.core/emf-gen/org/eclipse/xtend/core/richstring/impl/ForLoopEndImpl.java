@@ -24,11 +24,12 @@ import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
  * An implementation of the model object '<em><b>For Loop End</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.ForLoopEndImpl#getStart <em>Start</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

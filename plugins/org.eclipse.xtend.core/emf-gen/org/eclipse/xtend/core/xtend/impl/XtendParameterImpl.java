@@ -25,14 +25,15 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * An implementation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#getParameterType <em>Parameter Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#isVarArg <em>Var Arg</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#isExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

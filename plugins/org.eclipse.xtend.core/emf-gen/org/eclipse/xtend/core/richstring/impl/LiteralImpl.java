@@ -24,13 +24,14 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral;
  * An implementation of the model object '<em><b>Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.LiteralImpl#getLiteral <em>Literal</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.LiteralImpl#getOffset <em>Offset</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.LiteralImpl#getLength <em>Length</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

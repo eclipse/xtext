@@ -35,14 +35,15 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
  * An implementation of the model object '<em><b>If Condition Start</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.IfConditionStartImpl#getRichStringIf <em>Rich String If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.IfConditionStartImpl#getElseStart <em>Else Start</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.IfConditionStartImpl#getElseIfConditions <em>Else If Conditions</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.IfConditionStartImpl#getEndIf <em>End If</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import java.nio.charset.Charset;
 import java.util.List;
 import org.eclipse.xpand2.output.Outlet;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.Naming;
@@ -15,12 +16,14 @@ import org.eclipse.xtext.idea.generator.parser.antlr.PsiAntlrGrammarGenerator;
 import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragment {
   private String encoding;
   
-  private String pathIdeaPluginProject;
+  @Accessors
+  private String ideaProjectPath;
   
   @Inject
   @Extension
@@ -38,12 +41,8 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
     this.encoding = encoding;
   }
   
-  public void setPathIdeaPluginProject(final String pathIdeaPluginProject) {
-    this.pathIdeaPluginProject = pathIdeaPluginProject;
-  }
-  
   protected void generate(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
-    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.pathIdeaPluginProject, this.encoding);
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding);
     final Object options = IterableExtensions.<Object>head(parameters);
     if ((options instanceof AntlrOptions)) {
       this._psiAntlrGrammarGenerator.generate(grammar, ((AntlrOptions)options), ctx);
@@ -84,5 +83,14 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
   }
   
   protected void addToStandaloneSetup(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
+  }
+  
+  @Pure
+  public String getIdeaProjectPath() {
+    return this.ideaProjectPath;
+  }
+  
+  public void setIdeaProjectPath(final String ideaProjectPath) {
+    this.ideaProjectPath = ideaProjectPath;
   }
 }

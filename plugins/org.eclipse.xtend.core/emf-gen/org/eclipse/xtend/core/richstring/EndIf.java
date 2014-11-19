@@ -15,10 +15,10 @@ package org.eclipse.xtend.core.richstring;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.EndIf#getIfConditionStart <em>If Condition Start</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getEndIf()
  * @model
