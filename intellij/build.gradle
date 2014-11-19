@@ -1,7 +1,7 @@
 apply from: 'prepareIntellij.gradle'
 
-configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
-	apply plugin: 'java'
+allprojects {
+	apply plugin: 'base'
 	version = '2.8.0-SNAPSHOT'
 	
 	repositories {
@@ -15,13 +15,15 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 		provided
 		intellijShadowJars
 	}
+}
+
+configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
+	apply plugin: 'java'
 	
 	sourceSets.main.compileClasspath += configurations.provided
 	
 	dependencies {
-		if (name != 'intellij-dependencies') {
-			provided project(':intellij-dependencies')
-		}
+		provided project(':intellij-dependencies')
 		provided "org.eclipse.xtext:org.eclipse.xtext.xtext:${version}"
 		provided "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
 		provided "org.eclipse.xtend:org.eclipse.xtend.lib:${version}"
@@ -49,4 +51,11 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 	}
 	
 	sourceCompatibility = 1.5
+}
+
+//TODO generate this automatically
+task createIntellijRepository(type: Copy) {
+	dependsOn uploadIntellijShadowJars
+	from "updatePlugins.xml"
+	into "$rootDir/build/intellijRepository"
 }
