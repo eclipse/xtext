@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
 import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
+import org.eclipse.xtend.core.resource.XtendResourceDescriptionManager;
 import org.eclipse.xtend.ide.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
@@ -21,6 +22,7 @@ import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
 import org.eclipse.xtend.ide.builder.UIResourceChangeRegistry;
 import org.eclipse.xtend.ide.builder.XtendParallelBuilderParticipant;
 import org.eclipse.xtend.ide.builder.XtendResourceDescriptionsProvider;
+import org.eclipse.xtend.ide.builder.XtendUIResourceDescriptionManager;
 import org.eclipse.xtend.ide.codetemplates.ui.highlighting.FlexerBasedTemplateBodyHighlighter;
 import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
 import org.eclipse.xtend.ide.contentassist.OperatorAwareComparator;
@@ -545,5 +547,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends OutlineWithEditorLinker> bindOutlineWithEditorLinker() {
 		return XtendOutlineWithEditorLinker.class;
+	}
+	
+	public Class<? extends XtendResourceDescriptionManager> bindXtendUIResourceDescriptionManager() {
+		return XtendUIResourceDescriptionManager.class;
 	}
 }
