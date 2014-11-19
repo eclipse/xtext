@@ -234,6 +234,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		} else if (declaration instanceof XtendInterface) {
 			XtendInterface xtendInterface = (XtendInterface) declaration;
 			final JvmGenericType javaType = typesFactory.createJvmGenericType();
+			javaType.setInterface(true);
 			copyTypeParameters(xtendInterface.getTypeParameters(), javaType);
 			if (!preIndexingPhase) {
 				doLater.add(new Runnable() {
@@ -362,7 +363,6 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void initialize(XtendInterface source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
-		inferredJvmType.setInterface(true);
 		inferredJvmType.setAbstract(true);
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
