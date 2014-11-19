@@ -12,13 +12,24 @@ allprojects {
 	}
 	
 	configurations {
-		provided
 		intellijShadowJars
+	}
+	
+	uploadIntellijShadowJars {
+		repositories {
+			flatDir {
+				dirs "$rootDir/build/intellijRepository"
+			}
+		}
 	}
 }
 
 configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 	apply plugin: 'java'
+	
+	configurations {
+		provided
+	}
 	
 	sourceSets.main.compileClasspath += configurations.provided
 	
@@ -42,20 +53,12 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 		}
 	}
 	
-	uploadIntellijShadowJars {
-		repositories {
-			flatDir {
-				dirs "$rootDir/build/intellijRepository"
-			}
-		}
-	}
-	
 	sourceCompatibility = 1.5
 }
 
 //TODO generate this automatically
 task createIntellijRepository(type: Copy) {
-	dependsOn uploadIntellijShadowJars
+	dependsOn allprojects.collect{it.uploadIntellijShadowJars}
 	from "updatePlugins.xml"
 	into "$rootDir/build/intellijRepository"
 }
