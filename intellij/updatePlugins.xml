@@ -1,0 +1,10 @@
+<plugins>
+  <plugin 
+		id="org.eclipse.xtext.idea" 
+		url="https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/intellijRepository/org.eclipse.xtext.idea.plugin-2.8.0-SNAPSHOT-all.jar" 
+		version="2.8.0-SNAPSHOT"/>
+	<plugin 
+		id="org.eclipse.xtext.idea.sdomain.SDomain" 
+		url="https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/intellijRepository/org.eclipse.xtext.idea.sdomain.idea-2.8.0-SNAPSHOT-all.jar" 
+		version="2.8.0-SNAPSHOT"/>
+</plugins>
