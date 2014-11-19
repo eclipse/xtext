@@ -16,11 +16,11 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.ElseIfCondition#getRichStringElseIf <em>Rich String Else If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.ElseIfCondition#getIfConditionStart <em>If Condition Start</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getElseIfCondition()
  * @model

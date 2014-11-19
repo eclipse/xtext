@@ -17,10 +17,10 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.AnonymousClass#getConstructorCall <em>Constructor Call</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getAnonymousClass()
  * @model

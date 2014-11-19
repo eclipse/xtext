@@ -16,12 +16,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction()
  * @model

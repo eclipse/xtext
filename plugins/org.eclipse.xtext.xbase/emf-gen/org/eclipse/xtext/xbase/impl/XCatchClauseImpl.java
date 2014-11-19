@@ -27,12 +27,13 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XCatch Clause</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XCatchClauseImpl#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

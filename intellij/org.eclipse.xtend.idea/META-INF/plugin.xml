@@ -1,0 +1,50 @@
+<idea-plugin version="2">
+	<id>org.eclipse.xtend.idea</id>
+	<name>Xtend Support</name>
+	<description>
+      This plugin enables smart editing of Xtend files.
+	</description>
+	<version>1.0.0</version>
+	<vendor>My Company</vendor>
+
+	<idea-version since-build="131"/>
+	<depends optional="true">org.eclipse.xtext.idea</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<buildProcess.parametersProvider implementation="org.eclipse.xtend.core.idea.server.XtendBuildProcessParametersProvider"/>
+		
+		<java.elementFinder implementation="org.eclipse.xtend.core.idea.lang.types.psi.XtendJvmTypesElementFinder"/>
+		<java.shortNamesCache implementation="org.eclipse.xtend.core.idea.lang.types.XtendJvmTypesShortNamesCache"/>
+
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+		<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtend.core.idea.lang.psi.XtendCodeBlockModificationListener"/>
+
+		<referencesSearch implementation="org.eclipse.xtend.core.idea.lang.types.psi.search.XtendJvmElementsReferencesSearch"/>
+		<targetElementEvaluator language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtend.core.idea.lang.XtendFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="org.eclipse.xtend.core.idea.lang.parser.XtendParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.lang.XtendSyntaxHighlighterFactory" />
+      	<annotator language="org.eclipse.xtend.core.Xtend"
+      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtend.core.idea.lang.psi.XtendElementDescriptionProvider" order="first"/>
+	</extensions>
+
+</idea-plugin>

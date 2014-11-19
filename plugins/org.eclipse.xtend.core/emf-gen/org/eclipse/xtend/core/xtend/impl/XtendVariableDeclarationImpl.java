@@ -23,11 +23,12 @@ import org.eclipse.xtext.xbase.impl.XVariableDeclarationImplCustom;
  * An implementation of the model object '<em><b>Variable Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendVariableDeclarationImpl#isExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

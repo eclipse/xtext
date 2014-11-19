@@ -21,10 +21,10 @@ package org.eclipse.xtext.xbase;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XBooleanLiteral#isIsTrue <em>Is True</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXBooleanLiteral()
  * @model

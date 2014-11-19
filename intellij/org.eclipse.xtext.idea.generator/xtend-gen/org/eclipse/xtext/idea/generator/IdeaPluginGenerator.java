@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
 import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
@@ -40,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
@@ -53,12 +53,22 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   private Set<String> libraries = CollectionLiterals.<String>newHashSet();
   
-  private String pathIdeaPluginProject;
+  @Accessors
+  private String ideaProjectName;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
-  private String pathRuntimePluginProject;
+  @Accessors
+  private String runtimeProjectName;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
+  @Accessors
+  private String ideaProjectPath;
+  
+  @Accessors
+  private String runtimeProjectPath;
+  
+  @Accessors
+  private boolean deployable = true;
+  
+  @Accessors
   private boolean typesIntegrationRequired = false;
   
   @Inject
@@ -82,7 +92,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   private XtextIDEAGeneratorExtensions _xtextIDEAGeneratorExtensions;
   
   public void generate(final Grammar grammar, final Xtend2ExecutionContext ctx) {
-    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.pathIdeaPluginProject, this.encoding);
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding);
     Outlet _srcOutlet = this._xtextIDEAGeneratorExtensions.getSrcOutlet(ctx);
     String outlet_src = _srcOutlet.getName();
     Outlet _srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
@@ -194,23 +204,24 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       CharSequence _compileJvmElementsReferencesSearch = this.compileJvmElementsReferencesSearch(grammar);
       ctx.writeFile(outlet_src_gen, _javaPath_20, _compileJvmElementsReferencesSearch);
     }
-    boolean _notEquals = (!Objects.equal(this.pathIdeaPluginProject, null));
-    if (_notEquals) {
-      OutputImpl output = new OutputImpl();
-      this.addOutlet(output, IdeaPluginGenerator.PLUGIN, this.pathIdeaPluginProject);
-      this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, (this.pathIdeaPluginProject + "/META-INF"));
+    OutputImpl output = new OutputImpl();
+    this.addOutlet(output, IdeaPluginGenerator.PLUGIN, this.ideaProjectPath);
+    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, (this.ideaProjectPath + "/META-INF"));
+    if (this.deployable) {
       StringConcatenation _builder = new StringConcatenation();
       String _name = grammar.getName();
       String _simpleName = this._ideaPluginClassNames.toSimpleName(_name);
       _builder.append(_simpleName, "");
       _builder.append(" Launch Intellij.launch");
-      String[] _split = this.pathIdeaPluginProject.split("/");
-      String _last = IterableExtensions.<String>last(((Iterable<String>)Conversions.doWrapArray(_split)));
-      CharSequence _compileLaunchIntellij = this.compileLaunchIntellij(grammar, _last);
+      CharSequence _compileLaunchIntellij = this.compileLaunchIntellij(grammar);
       this.writeFile(output, IdeaPluginGenerator.PLUGIN, _builder.toString(), _compileLaunchIntellij);
       CharSequence _compilePluginXml = this.compilePluginXml(grammar);
       this.writeFile(output, IdeaPluginGenerator.META_INF_PLUGIN, "plugin.xml", _compilePluginXml);
     }
+    CharSequence _compileProjectXml = this.compileProjectXml(grammar);
+    this.writeFile(output, IdeaPluginGenerator.PLUGIN, ".project", _compileProjectXml);
+    CharSequence _compileClasspathXml = this.compileClasspathXml(grammar);
+    this.writeFile(output, IdeaPluginGenerator.PLUGIN, ".classpath", _compileClasspathXml);
   }
   
   public CharSequence compileGuiceModuleIdeaGenerated(final Grammar grammar, final Set<Binding> bindings) {
@@ -614,7 +625,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("path + \"/../");
-    _builder.append(this.pathRuntimePluginProject, "\t\t\t");
+    _builder.append(this.runtimeProjectPath, "\t\t\t");
     _builder.append("/bin\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -1015,10 +1026,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   public String iml() {
-    int _lastIndexOf = this.pathIdeaPluginProject.lastIndexOf("/");
-    int _plus = (_lastIndexOf + 1);
-    String _substring = this.pathIdeaPluginProject.substring(_plus);
-    return (_substring + ".iml");
+    return (this.ideaProjectPath + ".iml");
   }
   
   public void addOutlet(final Output output, final String outletName, final String path) {
@@ -1056,8 +1064,102 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     this.encoding = encoding;
   }
   
-  public String setPathIdeaPluginProject(final String pathIdeaPluginProject) {
-    return this.pathIdeaPluginProject = pathIdeaPluginProject;
+  public CharSequence compileClasspathXml(final Grammar grammar) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    _builder.newLine();
+    _builder.append("<classpath>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<classpathentry kind=\"src\" path=\"src\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<classpathentry kind=\"src\" path=\"src-gen\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<classpathentry kind=\"con\" path=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/org.eclipse.xtext.idea\"/>");
+    _builder.newLine();
+    {
+      if (this.typesIntegrationRequired) {
+        _builder.append("\t");
+        _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/org.eclipse.xtext.xbase.idea\"/>");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _notEquals = (!Objects.equal(this.runtimeProjectName, this.ideaProjectName));
+      if (_notEquals) {
+        _builder.append("\t");
+        _builder.append("<classpathentry combineaccessrules=\"false\" exported=\"true\" kind=\"src\" path=\"/");
+        _builder.append(this.runtimeProjectName, "\t");
+        _builder.append("\"/>");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t");
+    _builder.append("<classpathentry kind=\"output\" path=\"bin\"/>");
+    _builder.newLine();
+    _builder.append("</classpath>");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileProjectXml(final Grammar grammar) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    _builder.newLine();
+    _builder.append("<projectDescription>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<name>");
+    _builder.append(this.ideaProjectName, "\t");
+    _builder.append("</name>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("<comment></comment>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<projects>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</projects>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<buildSpec>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<buildCommand>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<name>org.eclipse.jdt.core.javabuilder</name>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<arguments>");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("</arguments>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("</buildCommand>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</buildSpec>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<natures>");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<nature>org.eclipse.jdt.core.javanature</nature>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</natures>");
+    _builder.newLine();
+    _builder.append("</projectDescription>");
+    _builder.newLine();
+    return _builder;
   }
   
   public CharSequence compilePluginXml(final Grammar grammar) {
@@ -1066,8 +1168,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<id>");
-    String _languageID = this._ideaPluginExtension.getLanguageID(grammar);
-    _builder.append(_languageID, "\t");
+    _builder.append(this.ideaProjectName, "\t");
     _builder.append("</id>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1097,6 +1198,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<idea-version since-build=\"131\"/>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<depends optional=\"true\">org.eclipse.xtext.idea</depends>");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
@@ -1191,8 +1295,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<lang.syntaxHighlighterFactory key=\"");
-    String _languageID_1 = this._ideaPluginExtension.getLanguageID(grammar);
-    _builder.append(_languageID_1, "      \t");
+    String _languageID = this._ideaPluginExtension.getLanguageID(grammar);
+    _builder.append(_languageID, "      \t");
     _builder.append("\" implementationClass=\"");
     String _syntaxHighlighterFactoryName = this._ideaPluginClassNames.getSyntaxHighlighterFactoryName(grammar);
     _builder.append(_syntaxHighlighterFactoryName, "      \t");
@@ -1240,7 +1344,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public CharSequence compileLaunchIntellij(final Grammar grammar, final String path) {
+  public CharSequence compileLaunchIntellij(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
     _builder.newLine();
@@ -1249,7 +1353,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<stringAttribute key=\"bad_container_name\" value=\"/");
-    _builder.append(path, "\t");
+    _builder.append(this.ideaProjectName, "\t");
     _builder.append("/");
     String _name = grammar.getName();
     String _simpleName = this._ideaPluginClassNames.toSimpleName(_name);
@@ -1262,7 +1366,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<listEntry value=\"/");
-    _builder.append(path, "\t\t");
+    _builder.append(this.ideaProjectName, "\t\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1288,7 +1392,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
-    _builder.append(path, "\t");
+    _builder.append(this.ideaProjectName, "\t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1868,127 +1972,148 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName_6, "\t");
     _builder.append(".INSTANCE);");
     _builder.newLineIfNotEmpty();
-    {
-      List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
-      for(final AbstractRule rule : _allRules) {
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public static final IGrammarAwareElementType ");
-        String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(rule);
-        _builder.append(_grammarElementIdentifier, "\t");
-        _builder.append("_ELEMENT_TYPE;");
-        _builder.newLineIfNotEmpty();
-        {
-          TreeIterator<EObject> _eAllContents = rule.eAllContents();
-          Iterator<AbstractElement> _filter = Iterators.<AbstractElement>filter(_eAllContents, AbstractElement.class);
-          Iterable<AbstractElement> _iterable = IteratorExtensions.<AbstractElement>toIterable(_filter);
-          for(final AbstractElement element : _iterable) {
-            _builder.append("\t");
-            _builder.newLine();
-            _builder.append("\t");
-            _builder.append("public static final IGrammarAwareElementType ");
-            String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(element);
-            _builder.append(_grammarElementIdentifier_1, "\t");
-            _builder.append("_ELEMENT_TYPE;");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-      }
-    }
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("static {");
+    _builder.append("private static IGrammarAwareElementType associate(IGrammarAwareElementType grammarAwareElementType) {");
     _builder.newLine();
     _builder.append("\t\t");
+    _builder.append("GRAMMAR_ELEMENT_TYPE.put(grammarAwareElementType.getGrammarElement(), grammarAwareElementType);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return grammarAwareElementType;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private static final ");
     String _grammarAccessName_1 = this._ideaPluginClassNames.getGrammarAccessName(grammar);
     String _simpleName_7 = this._ideaPluginClassNames.toSimpleName(_grammarAccessName_1);
-    _builder.append(_simpleName_7, "\t\t");
-    _builder.append(" grammarAccess = ");
+    _builder.append(_simpleName_7, "\t");
+    _builder.append(" GRAMMAR_ACCESS = ");
     String _languageName_5 = this._ideaPluginClassNames.getLanguageName(grammar);
     String _simpleName_8 = this._ideaPluginClassNames.toSimpleName(_languageName_5);
-    _builder.append(_simpleName_8, "\t\t");
+    _builder.append(_simpleName_8, "\t");
     _builder.append(".INSTANCE.getInstance(");
     String _grammarAccessName_2 = this._ideaPluginClassNames.getGrammarAccessName(grammar);
     String _simpleName_9 = this._ideaPluginClassNames.toSimpleName(_grammarAccessName_2);
-    _builder.append(_simpleName_9, "\t\t");
+    _builder.append(_simpleName_9, "\t");
     _builder.append(".class);");
     _builder.newLineIfNotEmpty();
     {
-      List<AbstractRule> _allRules_1 = this._ideaPluginExtension.getAllRules(grammar);
-      for(final AbstractRule rule_1 : _allRules_1) {
-        _builder.append("\t\t");
+      List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+      for(final AbstractRule rule : _allRules) {
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("private static class ");
+        String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+        _builder.append(_grammarElementIdentifier, "\t");
+        _builder.append("Factory {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("public static IGrammarAwareElementType create");
+        String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+        _builder.append(_grammarElementIdentifier_1, "\t\t");
+        _builder.append("ElementType() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.append("\t\t");
-        String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(rule_1);
-        _builder.append(_grammarElementIdentifier_2, "\t\t");
-        _builder.append("_ELEMENT_TYPE =  new IGrammarAwareElementType(\"");
-        String _grammarElementIdentifier_3 = this._grammarAccessExtensions.grammarElementIdentifier(rule_1);
-        _builder.append(_grammarElementIdentifier_3, "\t\t");
+        _builder.append("return new IGrammarAwareElementType(\"");
+        String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+        _builder.append(_grammarElementIdentifier_2, "\t\t\t");
         _builder.append("_ELEMENT_TYPE\", ");
         String _languageName_6 = this._ideaPluginClassNames.getLanguageName(grammar);
         String _simpleName_10 = this._ideaPluginClassNames.toSimpleName(_languageName_6);
-        _builder.append(_simpleName_10, "\t\t");
-        _builder.append(".INSTANCE, grammarAccess.");
-        String _gaRuleAccessor = this._grammarAccess.gaRuleAccessor(rule_1);
-        _builder.append(_gaRuleAccessor, "\t\t");
+        _builder.append(_simpleName_10, "\t\t\t");
+        _builder.append(".INSTANCE, GRAMMAR_ACCESS.");
+        String _gaRuleAccessor = this._grammarAccess.gaRuleAccessor(rule);
+        _builder.append(_gaRuleAccessor, "\t\t\t");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("GRAMMAR_ELEMENT_TYPE.put(grammarAccess.");
-        String _gaRuleAccessor_1 = this._grammarAccess.gaRuleAccessor(rule_1);
-        _builder.append(_gaRuleAccessor_1, "\t\t");
-        _builder.append(", ");
-        String _grammarElementIdentifier_4 = this._grammarAccessExtensions.grammarElementIdentifier(rule_1);
-        _builder.append(_grammarElementIdentifier_4, "\t\t");
-        _builder.append("_ELEMENT_TYPE);");
-        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
         {
-          TreeIterator<EObject> _eAllContents_1 = rule_1.eAllContents();
-          Iterator<AbstractElement> _filter_1 = Iterators.<AbstractElement>filter(_eAllContents_1, AbstractElement.class);
-          Iterable<AbstractElement> _iterable_1 = IteratorExtensions.<AbstractElement>toIterable(_filter_1);
-          for(final AbstractElement element_1 : _iterable_1) {
-            _builder.append("\t\t");
-            String _grammarElementIdentifier_5 = this._grammarAccessExtensions.grammarElementIdentifier(element_1);
-            _builder.append(_grammarElementIdentifier_5, "\t\t");
-            _builder.append("_ELEMENT_TYPE =  new IGrammarAwareElementType(\"");
-            String _grammarElementIdentifier_6 = this._grammarAccessExtensions.grammarElementIdentifier(element_1);
-            _builder.append(_grammarElementIdentifier_6, "\t\t");
+          TreeIterator<EObject> _eAllContents = rule.eAllContents();
+          Iterator<AbstractElement> _filter = Iterators.<AbstractElement>filter(_eAllContents, AbstractElement.class);
+          Iterable<AbstractElement> _iterable = IteratorExtensions.<AbstractElement>toIterable(_filter);
+          for(final AbstractElement element : _iterable) {
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("public static IGrammarAwareElementType create");
+            String _grammarElementIdentifier_3 = this._grammarAccessExtensions.grammarElementIdentifier(element);
+            _builder.append(_grammarElementIdentifier_3, "\t\t");
+            _builder.append("ElementType() {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return new IGrammarAwareElementType(\"");
+            String _grammarElementIdentifier_4 = this._grammarAccessExtensions.grammarElementIdentifier(element);
+            _builder.append(_grammarElementIdentifier_4, "\t\t\t");
             _builder.append("_ELEMENT_TYPE\", ");
             String _languageName_7 = this._ideaPluginClassNames.getLanguageName(grammar);
             String _simpleName_11 = this._ideaPluginClassNames.toSimpleName(_languageName_7);
-            _builder.append(_simpleName_11, "\t\t");
-            _builder.append(".INSTANCE, grammarAccess.");
-            String _gaElementsAccessor = this._grammarAccess.gaElementsAccessor(rule_1);
-            _builder.append(_gaElementsAccessor, "\t\t");
+            _builder.append(_simpleName_11, "\t\t\t");
+            _builder.append(".INSTANCE, GRAMMAR_ACCESS.");
+            String _gaElementsAccessor = this._grammarAccess.gaElementsAccessor(rule);
+            _builder.append(_gaElementsAccessor, "\t\t\t");
             _builder.append(".");
-            String _gaElementAccessor = this._grammarAccess.gaElementAccessor(element_1);
-            _builder.append(_gaElementAccessor, "\t\t");
+            String _gaElementAccessor = this._grammarAccess.gaElementAccessor(element);
+            _builder.append(_gaElementAccessor, "\t\t\t");
             _builder.append(");");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("GRAMMAR_ELEMENT_TYPE.put(grammarAccess.");
-            String _gaElementsAccessor_1 = this._grammarAccess.gaElementsAccessor(rule_1);
-            _builder.append(_gaElementsAccessor_1, "\t\t");
-            _builder.append(".");
-            String _gaElementAccessor_1 = this._grammarAccess.gaElementAccessor(element_1);
-            _builder.append(_gaElementAccessor_1, "\t\t");
-            _builder.append(", ");
-            String _grammarElementIdentifier_7 = this._grammarAccessExtensions.grammarElementIdentifier(element_1);
-            _builder.append(_grammarElementIdentifier_7, "\t\t");
-            _builder.append("_ELEMENT_TYPE);");
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public static final IGrammarAwareElementType ");
+        String _grammarElementIdentifier_5 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+        _builder.append(_grammarElementIdentifier_5, "\t");
+        _builder.append("_ELEMENT_TYPE = associate(");
+        String _grammarElementIdentifier_6 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+        _builder.append(_grammarElementIdentifier_6, "\t");
+        _builder.append("Factory.create");
+        String _grammarElementIdentifier_7 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+        _builder.append(_grammarElementIdentifier_7, "\t");
+        _builder.append("ElementType());");
+        _builder.newLineIfNotEmpty();
+        {
+          TreeIterator<EObject> _eAllContents_1 = rule.eAllContents();
+          Iterator<AbstractElement> _filter_1 = Iterators.<AbstractElement>filter(_eAllContents_1, AbstractElement.class);
+          Iterable<AbstractElement> _iterable_1 = IteratorExtensions.<AbstractElement>toIterable(_filter_1);
+          for(final AbstractElement element_1 : _iterable_1) {
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("public static final IGrammarAwareElementType ");
+            String _grammarElementIdentifier_8 = this._grammarAccessExtensions.grammarElementIdentifier(element_1);
+            _builder.append(_grammarElementIdentifier_8, "\t");
+            _builder.append("_ELEMENT_TYPE = associate(");
+            String _grammarElementIdentifier_9 = this._grammarAccessExtensions.grammarElementIdentifier(rule);
+            _builder.append(_grammarElementIdentifier_9, "\t");
+            _builder.append("Factory.create");
+            String _grammarElementIdentifier_10 = this._grammarAccessExtensions.grammarElementIdentifier(element_1);
+            _builder.append(_grammarElementIdentifier_10, "\t");
+            _builder.append("ElementType());");
             _builder.newLineIfNotEmpty();
           }
         }
       }
     }
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public IFileElementType getFileType() {");
@@ -2040,28 +2165,28 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     {
-      List<AbstractRule> _allRules_2 = this._ideaPluginExtension.getAllRules(grammar);
-      for(final AbstractRule rule_2 : _allRules_2) {
+      List<AbstractRule> _allRules_1 = this._ideaPluginExtension.getAllRules(grammar);
+      for(final AbstractRule rule_1 : _allRules_1) {
         _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public IGrammarAwareElementType get");
-        String _grammarElementIdentifier_8 = this._grammarAccessExtensions.grammarElementIdentifier(rule_2);
-        _builder.append(_grammarElementIdentifier_8, "\t");
+        String _grammarElementIdentifier_11 = this._grammarAccessExtensions.grammarElementIdentifier(rule_1);
+        _builder.append(_grammarElementIdentifier_11, "\t");
         _builder.append("ElementType() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("return ");
-        String _grammarElementIdentifier_9 = this._grammarAccessExtensions.grammarElementIdentifier(rule_2);
-        _builder.append(_grammarElementIdentifier_9, "\t\t");
+        String _grammarElementIdentifier_12 = this._grammarAccessExtensions.grammarElementIdentifier(rule_1);
+        _builder.append(_grammarElementIdentifier_12, "\t\t");
         _builder.append("_ELEMENT_TYPE;");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
         {
-          TreeIterator<EObject> _eAllContents_2 = rule_2.eAllContents();
+          TreeIterator<EObject> _eAllContents_2 = rule_1.eAllContents();
           Iterator<AbstractElement> _filter_2 = Iterators.<AbstractElement>filter(_eAllContents_2, AbstractElement.class);
           Iterable<AbstractElement> _iterable_2 = IteratorExtensions.<AbstractElement>toIterable(_filter_2);
           for(final AbstractElement element_2 : _iterable_2) {
@@ -2069,15 +2194,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
             _builder.newLine();
             _builder.append("\t");
             _builder.append("public IGrammarAwareElementType get");
-            String _grammarElementIdentifier_10 = this._grammarAccessExtensions.grammarElementIdentifier(element_2);
-            _builder.append(_grammarElementIdentifier_10, "\t");
+            String _grammarElementIdentifier_13 = this._grammarAccessExtensions.grammarElementIdentifier(element_2);
+            _builder.append(_grammarElementIdentifier_13, "\t");
             _builder.append("ElementType() {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("return ");
-            String _grammarElementIdentifier_11 = this._grammarAccessExtensions.grammarElementIdentifier(element_2);
-            _builder.append(_grammarElementIdentifier_11, "\t\t");
+            String _grammarElementIdentifier_14 = this._grammarAccessExtensions.grammarElementIdentifier(element_2);
+            _builder.append(_grammarElementIdentifier_14, "\t\t");
             _builder.append("_ELEMENT_TYPE;");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -2712,8 +2837,54 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public void setPathRuntimePluginProject(final String pathRuntimePluginProject) {
-    this.pathRuntimePluginProject = pathRuntimePluginProject;
+  @Pure
+  public String getIdeaProjectName() {
+    return this.ideaProjectName;
+  }
+  
+  public void setIdeaProjectName(final String ideaProjectName) {
+    this.ideaProjectName = ideaProjectName;
+  }
+  
+  @Pure
+  public String getRuntimeProjectName() {
+    return this.runtimeProjectName;
+  }
+  
+  public void setRuntimeProjectName(final String runtimeProjectName) {
+    this.runtimeProjectName = runtimeProjectName;
+  }
+  
+  @Pure
+  public String getIdeaProjectPath() {
+    return this.ideaProjectPath;
+  }
+  
+  public void setIdeaProjectPath(final String ideaProjectPath) {
+    this.ideaProjectPath = ideaProjectPath;
+  }
+  
+  @Pure
+  public String getRuntimeProjectPath() {
+    return this.runtimeProjectPath;
+  }
+  
+  public void setRuntimeProjectPath(final String runtimeProjectPath) {
+    this.runtimeProjectPath = runtimeProjectPath;
+  }
+  
+  @Pure
+  public boolean isDeployable() {
+    return this.deployable;
+  }
+  
+  public void setDeployable(final boolean deployable) {
+    this.deployable = deployable;
+  }
+  
+  @Pure
+  public boolean isTypesIntegrationRequired() {
+    return this.typesIntegrationRequired;
   }
   
   public void setTypesIntegrationRequired(final boolean typesIntegrationRequired) {

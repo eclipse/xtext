@@ -19,6 +19,8 @@ import org.eclipse.xtext.generator.serializer.SerializerFragment;
 import org.eclipse.xtext.generator.types.TypesGeneratorFragment;
 import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
 import org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment;
+import org.eclipse.xtext.idea.generator.IdeaPluginGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment;
 import org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment;
@@ -41,6 +43,9 @@ final class GenerateXbase {
 		final boolean backtrack = false;
 		final boolean memoize = false;
 		final String lineDelimiter = "\n";
+		
+		final String ideaProjectName = projectName + ".idea";
+		final String ideaProjectPath = "../../intellij/" + ideaProjectName;
 
 		new StandaloneSetup() {{
 			// the maven archetype contains a template file called .project
@@ -85,9 +90,11 @@ final class GenerateXbase {
 			setLineDelimiter(lineDelimiter);
 
 			addLanguage(new LanguageConfig() {{
+				String fileExtensions = "___xtype";
+				
 				setForcedResourceSet(xtypeResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xtype.xtext");
-				setFileExtensions("___xtype");
+				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment());
 				addFragment(new SerializerFragment());
 				addFragment(new FormatterFragment());
@@ -95,15 +102,20 @@ final class GenerateXbase {
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
+				
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions));
+				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
+				String fileExtensions = "___xbase";
+				
 				setForcedResourceSet(xbaseResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/Xbase.xtext");
-				setFileExtensions("___xbase");
+				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment());
 				addFragment(new SerializerFragment());
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
-				resourceFactory.setFileExtensions("___xbase");
+				resourceFactory.setFileExtensions(fileExtensions);
 				addFragment(resourceFactory);
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
@@ -136,15 +148,20 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
+				
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions));
+				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
+				String fileExtensions = "___xbasewithannotations";
+				
 				setForcedResourceSet(xannotationsResourceSet);
 				setUri("classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext");
-				setFileExtensions("___xbasewithannotations");
+				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment());
 				addFragment(new SerializerFragment());
 				ResourceFactoryFragment resourceFactory = new ResourceFactoryFragment();
-				resourceFactory.setFileExtensions("___xbasewithannotations");
+				resourceFactory.setFileExtensions(fileExtensions);
 				addFragment(resourceFactory);
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
@@ -175,6 +192,9 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("-Xconversiontimeout");
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
+				
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions));
+				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 		}};
 		
@@ -199,8 +219,34 @@ final class GenerateXbase {
 			setDirectory(runtimeProject + "/src-gen");
 		}}.invoke(null);
 		
+		new DirectoryCleaner() {{
+			setDirectory(ideaProjectPath + "/src-gen");
+		}}.invoke(null);
+		
 		generator.invoke(null);
 		generator.postInvoke();
 		Logger.getLogger(GenerateXbase.class).info("Done."); 
+	}
+
+	protected static IdeaPluginGenerator createIdeaPluginProject(
+			String runtimeProjectName, 
+			String runtimeProjectPath,
+			String ideaProjectName, 
+			String ideaProjectPath, 
+			String fileExtensions) {
+		IdeaPluginGenerator ideaPluginGenerator = new IdeaPluginGenerator();
+		ideaPluginGenerator.setDeployable(false);
+		ideaPluginGenerator.setRuntimeProjectName(runtimeProjectName);
+		ideaPluginGenerator.setRuntimeProjectPath(runtimeProjectPath);
+		ideaPluginGenerator.setIdeaProjectName(ideaProjectName);
+		ideaPluginGenerator.setIdeaProjectPath(ideaProjectPath);
+		ideaPluginGenerator.setFileExtensions(fileExtensions);
+		return ideaPluginGenerator;
+	}
+
+	protected static XtextAntlrIDEAGeneratorFragment createXtextAntlrIDEAGeneratorFragment(String ideaProjectPath) {
+		XtextAntlrIDEAGeneratorFragment antlrIdeaGeneratorFragment = new XtextAntlrIDEAGeneratorFragment();
+		antlrIdeaGeneratorFragment.setIdeaProjectPath(ideaProjectPath);
+		return antlrIdeaGeneratorFragment;
 	}
 }

@@ -18,12 +18,12 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendField#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendField()
  * @model

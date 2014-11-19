@@ -16,10 +16,10 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendVariableDeclaration#isExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendVariableDeclaration()
  * @model

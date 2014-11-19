@@ -15,10 +15,10 @@ package org.eclipse.xtend.core.xtend;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendEnumLiteral#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendEnumLiteral()
  * @model
