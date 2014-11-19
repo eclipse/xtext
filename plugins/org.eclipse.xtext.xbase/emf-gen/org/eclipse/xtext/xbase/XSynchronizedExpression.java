@@ -21,11 +21,11 @@ package org.eclipse.xtext.xbase;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XSynchronizedExpression#getParam <em>Param</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XSynchronizedExpression#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXSynchronizedExpression()
  * @model

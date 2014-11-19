@@ -18,13 +18,13 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.IfConditionStart#getRichStringIf <em>Rich String If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.IfConditionStart#getElseStart <em>Else Start</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.IfConditionStart#getElseIfConditions <em>Else If Conditions</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.IfConditionStart#getEndIf <em>End If</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.richstring.ProcessedRichStringPackage#getIfConditionStart()
  * @model

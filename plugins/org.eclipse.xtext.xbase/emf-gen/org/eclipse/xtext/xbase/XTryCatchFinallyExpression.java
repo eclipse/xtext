@@ -22,12 +22,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getFinallyExpression <em>Finally Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XTryCatchFinallyExpression#getCatchClauses <em>Catch Clauses</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXTryCatchFinallyExpression()
  * @model

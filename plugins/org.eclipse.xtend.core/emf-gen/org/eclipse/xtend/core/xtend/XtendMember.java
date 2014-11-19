@@ -18,12 +18,12 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getAnnotationInfo <em>Annotation Info</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getModifiers <em>Modifiers</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getDeclaringType <em>Declaring Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendMember()
  * @model

@@ -8,12 +8,14 @@ import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrXtendGeneratorFragment
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragment {
 	
 	String encoding
 	
-	String pathIdeaPluginProject
+	@Accessors
+	String ideaProjectPath
 	
 	@Inject
 	extension Naming
@@ -27,13 +29,9 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragmen
 	public def void setEncoding(String encoding) {
 		this.encoding = encoding
 	}
-	
-	public def void setPathIdeaPluginProject(String pathIdeaPluginProject) {
-		this.pathIdeaPluginProject = pathIdeaPluginProject
-	} 
 
 	override protected generate(Grammar grammar, List<Object> parameters, Xtend2ExecutionContext ctx) {
-		installOutlets(ctx, pathIdeaPluginProject, encoding)
+		installOutlets(ctx, ideaProjectPath, encoding)
 		
 		val options = parameters.head
 		if (options instanceof AntlrOptions) {

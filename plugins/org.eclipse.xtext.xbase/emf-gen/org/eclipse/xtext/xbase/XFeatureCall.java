@@ -22,13 +22,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isTypeLiteral <em>Type Literal</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XFeatureCall#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXFeatureCall()
  * @model

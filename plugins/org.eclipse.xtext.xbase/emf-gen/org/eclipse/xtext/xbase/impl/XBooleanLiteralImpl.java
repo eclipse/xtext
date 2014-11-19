@@ -21,11 +21,12 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XBoolean Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBooleanLiteralImpl#isIsTrue <em>Is True</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

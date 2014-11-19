@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallTarget <em>Member Call Target</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#getMemberCallArguments <em>Member Call Arguments</em>}</li>
@@ -32,7 +33,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XMemberFeatureCall#isPackageFragment <em>Package Fragment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXMemberFeatureCall()
  * @model

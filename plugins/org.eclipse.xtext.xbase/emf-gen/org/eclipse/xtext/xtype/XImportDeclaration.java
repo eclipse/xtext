@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isWildcard <em>Wildcard</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#isExtension <em>Extension</em>}</li>
@@ -32,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getMemberName <em>Member Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XImportDeclaration#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtype.XtypePackage#getXImportDeclaration()
  * @model

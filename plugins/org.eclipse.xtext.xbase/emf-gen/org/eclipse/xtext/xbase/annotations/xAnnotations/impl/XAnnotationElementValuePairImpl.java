@@ -28,12 +28,13 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
  * An implementation of the model object '<em><b>XAnnotation Element Value Pair</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValuePairImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValuePairImpl#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

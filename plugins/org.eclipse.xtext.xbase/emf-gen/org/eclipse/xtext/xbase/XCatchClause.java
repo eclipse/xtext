@@ -24,11 +24,11 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XCatchClause#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XCatchClause#getDeclaredParam <em>Declared Param</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXCatchClause()
  * @model

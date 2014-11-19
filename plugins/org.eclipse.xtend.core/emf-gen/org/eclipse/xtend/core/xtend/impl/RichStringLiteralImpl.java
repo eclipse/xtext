@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.impl.XStringLiteralImpl;
  * An implementation of the model object '<em><b>Rich String Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -26,13 +26,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getParamTypes <em>Param Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.XFunctionTypeRef#isInstanceContext <em>Instance Context</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef()
  * @model

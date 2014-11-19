@@ -27,13 +27,14 @@ import org.eclipse.xtext.xbase.impl.XForLoopExpressionImpl;
  * An implementation of the model object '<em><b>Rich String For Loop</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringForLoopImpl#getSeparator <em>Separator</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringForLoopImpl#getBefore <em>Before</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.RichStringForLoopImpl#getAfter <em>After</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -31,12 +31,13 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
  * An implementation of the model object '<em><b>Type Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl#getMembers <em>Members</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

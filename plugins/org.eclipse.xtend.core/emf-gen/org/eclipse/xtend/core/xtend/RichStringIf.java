@@ -18,13 +18,13 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringIf#getIf <em>If</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringIf#getThen <em>Then</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringIf#getElseIfs <em>Else Ifs</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.RichStringIf#getElse <em>Else</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getRichStringIf()
  * @model

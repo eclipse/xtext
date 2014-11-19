@@ -31,14 +31,15 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XBasic For Loop Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl#getEachExpression <em>Each Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl#getInitExpressions <em>Init Expressions</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XBasicForLoopExpressionImpl#getUpdateExpressions <em>Update Expressions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
