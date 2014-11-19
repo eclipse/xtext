@@ -44,7 +44,9 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  * An implementation of the model object '<em><b>Anonymous Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl#getAnnotations <em>Annotations</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
@@ -54,7 +56,6 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.AnonymousClassImpl#getConstructorCall <em>Constructor Call</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

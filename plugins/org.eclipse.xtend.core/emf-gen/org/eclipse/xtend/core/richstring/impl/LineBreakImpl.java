@@ -17,7 +17,6 @@ import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
  * An implementation of the model object '<em><b>Line Break</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

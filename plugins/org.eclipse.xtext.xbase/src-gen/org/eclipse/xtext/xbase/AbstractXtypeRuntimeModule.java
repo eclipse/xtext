@@ -13,9 +13,6 @@ import com.google.inject.name.Names;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.XtypeRuntimeModule}
- * 
- * @noreference This class is not intended to be referenced by clients.
- * @since 2.7
  */
  @SuppressWarnings("all")
 public abstract class AbstractXtypeRuntimeModule extends DefaultRuntimeModule {

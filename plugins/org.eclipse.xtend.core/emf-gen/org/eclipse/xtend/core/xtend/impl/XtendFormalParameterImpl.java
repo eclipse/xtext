@@ -23,11 +23,12 @@ import org.eclipse.xtext.common.types.impl.JvmFormalParameterImplCustom;
  * An implementation of the model object '<em><b>Formal Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFormalParameterImpl#isExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

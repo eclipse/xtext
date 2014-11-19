@@ -34,13 +34,14 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  * An implementation of the model object '<em><b>Member</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getModifiers <em>Modifiers</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

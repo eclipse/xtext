@@ -17,7 +17,6 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
  * An implementation of the model object '<em><b>Constructor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -24,14 +24,15 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XAssignment</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getAssignable <em>Assignable</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#isExplicitStatic <em>Explicit Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XAssignmentImpl#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

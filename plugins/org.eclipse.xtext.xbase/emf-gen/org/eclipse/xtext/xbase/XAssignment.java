@@ -21,13 +21,13 @@ package org.eclipse.xtext.xbase;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XAssignment#getAssignable <em>Assignable</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAssignment#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAssignment#isExplicitStatic <em>Explicit Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XAssignment#isStaticWithDeclaringType <em>Static With Declaring Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXAssignment()
  * @model
