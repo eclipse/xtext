@@ -16,13 +16,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
+import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Wrapper;
@@ -140,6 +141,19 @@ public class IndexingTest extends AbstractXtendTestCase {
 		assertFalse(iterator.hasNext()); 
 	}
 	
+	@Test public void testInterface() throws Exception {
+		Iterator<IEObjectDescription> iterator = getExportedObjects("package test\n" +
+				"interface Foo<T> {\n" +
+				"}");
+		IEObjectDescription interf = iterator.next();
+		assertEquals("true",interf.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE));
+		assertSame(JVM_GENERIC_TYPE, interf.getEClass());
+		assertEquals("test.Foo", interf.getQualifiedName().toString());
+		assertEquals("<T>", interf.getUserData(JvmTypesResourceDescriptionStrategy.TYPE_PARAMETERS));
+		assertFalse(iterator.hasNext()); 
+	}
+	
+	
 	@Test public void testResourceDescriptionWithoutGetContentsWithAnnotations() throws Exception {
 		String input = "import com.google.inject.Inject class C%d extends C%d { @Inject def void m(Map<String, String> m) {} }";
 		doTestResourceDescriptionWithoutGetContents(input);
@@ -192,8 +206,8 @@ public class IndexingTest extends AbstractXtendTestCase {
 	}
 
 	protected IResourceDescription getResourceDescription(String model) throws Exception {
-		XtendFile file = file(model);
-		IResourceDescription rd = resourceDescriptionManager.getResourceDescription(file.eResource());
+		XtextResource file = justLoad(model);
+		IResourceDescription rd = resourceDescriptionManager.getResourceDescription(file);
 		return rd;
 	}
 		
@@ -204,4 +218,11 @@ public class IndexingTest extends AbstractXtendTestCase {
 		return desc;
 	}
 
+	protected XtextResource justLoad(String contents) throws IOException {
+		XtextResourceSet set = getResourceSet();
+		String fileName = getFileName(contents);
+		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
+		resource.load(new StringInputStream(contents), null);
+		return (XtextResource) resource;
+	}
 }
