@@ -10,10 +10,10 @@ package org.eclipse.xtext.idea.sdomain.sDomain;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.sdomain.sDomain.Type#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage#getType()
  * @model

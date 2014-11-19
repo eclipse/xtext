@@ -2,8 +2,6 @@ package org.eclipse.xtext.idea.generator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -129,8 +127,7 @@ public class IdeaPluginClassNames {
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
-    String _simpleName_1 = JvmElementsReferencesSearch.class.getSimpleName();
-    return (_plus_1 + _simpleName_1);
+    return (_plus_1 + "JvmElementsReferencesSearch");
   }
   
   public String getCodeBlockModificationListenerName(final Grammar it) {
@@ -198,8 +195,7 @@ public class IdeaPluginClassNames {
     if (_parserDefinitionName != null) {
       _elvis = _parserDefinitionName;
     } else {
-      String _name = AbstractXtextParserDefinition.class.getName();
-      _elvis = _name;
+      _elvis = "org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition";
     }
     return _elvis;
   }

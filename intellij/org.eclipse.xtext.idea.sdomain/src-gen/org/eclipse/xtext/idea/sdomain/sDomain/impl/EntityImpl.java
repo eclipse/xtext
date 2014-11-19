@@ -23,11 +23,12 @@ import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
  * An implementation of the model object '<em><b>Entity</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.sdomain.sDomain.impl.EntityImpl#getProperties <em>Properties</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

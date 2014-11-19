@@ -2,7 +2,6 @@ package org.eclipse.xtext.idea.generator.parser.antlr;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.intellij.lang.PsiBuilder;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -20,8 +19,6 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames;
 import org.eclipse.xtext.idea.generator.parser.antlr.DefaultAntlrGrammarGenerator;
-import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -42,11 +39,8 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     _builder.append("options {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("superClass=");
-    String _simpleName = AbstractPsiAntlrParser.class.getSimpleName();
-    _builder.append(_simpleName, "\t");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("superClass=AbstractPsiAntlrParser;");
+    _builder.newLine();
     {
       boolean _or = false;
       boolean _or_1 = false;
@@ -99,28 +93,19 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
   protected String compileParserImports(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
-    _builder.append("import ");
-    String _name = AbstractPsiAntlrParser.class.getName();
-    _builder.append(_name, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;");
+    _builder.newLine();
     _builder.append("import ");
     Grammar _grammar = GrammarUtil.getGrammar(it);
     String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(_grammar);
     _builder.append(_elementTypeProviderName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    String _name_1 = TokenTypeProvider.class.getName();
-    _builder.append(_name_1, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.xtext.idea.parser.TokenTypeProvider;");
     _builder.newLine();
-    _builder.append("import ");
-    String _name_2 = PsiBuilder.class.getName();
-    _builder.append(_name_2, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import com.intellij.lang.PsiBuilder;");
+    _builder.newLine();
     return _builder.toString();
   }
   
@@ -159,14 +144,11 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     String _psiInternalParserName = this._ideaPluginClassNames.getPsiInternalParserName(_grammar_1);
     String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_psiInternalParserName);
     _builder.append(_simpleName_1, "");
-    _builder.append("(PsiBuilder builder, TokenStream input, ");
-    String _simpleName_2 = TokenTypeProvider.class.getSimpleName();
-    _builder.append(_simpleName_2, "");
-    _builder.append(" tokenTypeProvider, ");
+    _builder.append("(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, ");
     Grammar _grammar_2 = GrammarUtil.getGrammar(it);
     String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(_grammar_2);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
-    _builder.append(_simpleName_3, "");
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
+    _builder.append(_simpleName_2, "");
     _builder.append(" elementTypeProvider) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

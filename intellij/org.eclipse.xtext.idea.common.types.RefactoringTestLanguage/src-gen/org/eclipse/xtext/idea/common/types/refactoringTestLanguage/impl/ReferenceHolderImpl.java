@@ -20,12 +20,13 @@ import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.ReferenceHold
  * An implementation of the model object '<em><b>Reference Holder</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.common.types.refactoringTestLanguage.impl.ReferenceHolderImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.idea.common.types.refactoringTestLanguage.impl.ReferenceHolderImpl#getDefaultReference <em>Default Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

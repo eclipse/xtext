@@ -13,11 +13,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.Feature#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.Feature#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.idea.example.entities.domainmodel.DomainmodelPackage#getFeature()
  * @model

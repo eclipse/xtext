@@ -21,12 +21,13 @@ import org.eclipse.xtext.idea.example.entities.domainmodel.Feature;
  * An implementation of the model object '<em><b>Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.impl.FeatureImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.impl.FeatureImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

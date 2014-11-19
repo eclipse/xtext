@@ -15,11 +15,11 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.Operation#getParams <em>Params</em>}</li>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.Operation#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.idea.example.entities.domainmodel.DomainmodelPackage#getOperation()
  * @model

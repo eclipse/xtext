@@ -1,8 +1,6 @@
 package org.eclipse.xtext.idea.generator
 
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition
-import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch
 import org.eclipse.xtext.util.Strings
 
 class IdeaPluginClassNames {
@@ -68,7 +66,7 @@ class IdeaPluginClassNames {
 	}
 	
 	def String getJvmElementsReferencesSearch(Grammar it) {
-		basePackageName+'.lang.types.psi.search.'+it.name.toSimpleName+ JvmElementsReferencesSearch.simpleName
+		basePackageName+'.lang.types.psi.search.'+it.name.toSimpleName+ 'JvmElementsReferencesSearch'
 	}
 	
 	def String getCodeBlockModificationListenerName(Grammar it) {
@@ -96,7 +94,7 @@ class IdeaPluginClassNames {
 	}
 	
 	def String getSuperParserDefinitionName(Grammar it) {
-		usedGrammars.head?.parserDefinitionName ?: AbstractXtextParserDefinition.name
+		usedGrammars.head?.parserDefinitionName ?: 'org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition'
 	}
 	
 	def String getParserDefinitionName(Grammar it) {

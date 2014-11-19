@@ -29,12 +29,13 @@ import org.eclipse.xtext.xtype.XImportSection;
  * An implementation of the model object '<em><b>Entities</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.impl.EntitiesImpl#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link org.eclipse.xtext.idea.example.entities.domainmodel.impl.EntitiesImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
