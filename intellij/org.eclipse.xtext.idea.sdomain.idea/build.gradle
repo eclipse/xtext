@@ -12,3 +12,7 @@ shadowJar {
 		from('META-INF')
 	}
 }
+
+artifacts {
+	intellijShadowJars shadowJar
+}
