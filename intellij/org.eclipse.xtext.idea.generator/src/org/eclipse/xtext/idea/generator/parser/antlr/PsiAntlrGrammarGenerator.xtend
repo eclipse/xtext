@@ -2,9 +2,9 @@ package org.eclipse.xtext.idea.generator.parser.antlr
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import com.intellij.lang.PsiBuilder
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.EnumRule
@@ -14,12 +14,9 @@ import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
-import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser
-import org.eclipse.xtext.idea.parser.TokenTypeProvider
 import org.eclipse.xtext.idea.generator.IdeaPluginClassNames
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.Action
 
 @Singleton
 class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
@@ -34,7 +31,7 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	override protected compileOptions(Grammar it, AntlrOptions options) '''
 
 		options {
-			superClass=«AbstractPsiAntlrParser.simpleName»;
+			superClass=AbstractPsiAntlrParser;
 		«IF options.backtrack || options.memoize || options.k >= 0»
 			«IF options.backtrack»
 			backtrack=true
@@ -51,11 +48,11 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected compileParserImports(Grammar it, AntlrOptions options) '''
 
-		import «AbstractPsiAntlrParser.name»;
+		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 		import «grammar.elementTypeProviderName»;
-		import «TokenTypeProvider.name»;
+		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 
-		import «PsiBuilder.name»;
+		import com.intellij.lang.PsiBuilder;
 	'''
 	
 	override protected compileParserMembers(Grammar it, AntlrOptions options) '''
@@ -71,7 +68,7 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 		«ENDIF»
 		public «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
 		
-		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, «TokenTypeProvider.simpleName» tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider) {
+		public «grammar.psiInternalParserName.toSimpleName»(PsiBuilder builder, TokenStream input, TokenTypeProvider tokenTypeProvider, «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider) {
 			super(builder, input, tokenTypeProvider);
 			this.elementTypeProvider = elementTypeProvider;
 		}

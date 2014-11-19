@@ -1,24 +1,6 @@
 package org.eclipse.xtext.idea.generator
 
 import com.google.inject.Inject
-import com.intellij.compiler.server.BuildProcessParametersProvider
-import com.intellij.ide.plugins.PluginManager
-import com.intellij.lang.ASTNode
-import com.intellij.lang.ParserDefinition
-import com.intellij.lang.PsiParser
-import com.intellij.lexer.Lexer
-import com.intellij.openapi.extensions.PluginId
-import com.intellij.openapi.fileTypes.SyntaxHighlighter
-import com.intellij.openapi.project.Project
-import com.intellij.psi.FileViewProvider
-import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.intellij.psi.impl.PsiTreeChangeEventImpl
-import com.intellij.psi.stubs.IStubElementType
-import com.intellij.psi.tree.IElementType
-import com.intellij.psi.tree.IFileElementType
-import com.intellij.psi.util.PsiModificationTracker
-import java.util.ArrayList
 import java.util.Arrays
 import java.util.List
 import java.util.Set
@@ -31,44 +13,13 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider
-import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
-import org.eclipse.xtext.idea.annotation.IssueAnnotator
-import org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider
 import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions
 import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions
-import org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator
-import org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator
-import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
-import org.eclipse.xtext.idea.lang.IElementTypeProvider
-import org.eclipse.xtext.idea.parser.AbstractAntlrDelegatingIdeaLexer
-import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser
-import org.eclipse.xtext.idea.parser.TokenTypeProvider
-import org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider
-import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache
-import org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider
-import org.eclipse.xtext.idea.types.access.StubTypeProviderFactory
-import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder
-import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch
-import org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex
-import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener
-import org.eclipse.xtext.psi.BaseXtextElementDescriptionProvider
-import org.eclipse.xtext.psi.PsiNamedEObject
-import org.eclipse.xtext.psi.impl.PsiEObjectReference
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectType
-import org.eclipse.xtext.psi.stubs.XtextFileElementType
-import org.eclipse.xtext.psi.stubs.XtextFileStub
-import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
-import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker
-import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
@@ -118,19 +69,19 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		var outlet_src_gen = ctx.srcGenOutlet.name
 		
 		val bindFactory = new BindFactory();
-		bindFactory.addTypeToType(SyntaxHighlighter.name, grammar.syntaxHighlighterName)
-		bindFactory.addTypeToType(Lexer.name, grammar.lexerName)
-		bindFactory.addTypeToType(PsiParser.name, grammar.psiParserName)
-		bindFactory.addTypeToType(TokenTypeProvider.name, grammar.tokenTypeProviderName)
-		bindFactory.addTypeToType(ParserDefinition.name, grammar.parserDefinitionName)
-		bindFactory.addTypeToTypeSingleton(IElementTypeProvider.name, grammar.elementTypeProviderName)
+		bindFactory.addTypeToType('com.intellij.openapi.fileTypes.SyntaxHighlighter', grammar.syntaxHighlighterName)
+		bindFactory.addTypeToType('com.intellij.lexer.Lexer', grammar.lexerName)
+		bindFactory.addTypeToType('com.intellij.lang.PsiParser', grammar.psiParserName)
+		bindFactory.addTypeToType('org.eclipse.xtext.idea.parser.TokenTypeProvider', grammar.tokenTypeProviderName)
+		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
+		bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.lang.IElementTypeProvider', grammar.elementTypeProviderName)
 		
 		if (typesIntegrationRequired) {
-			bindFactory.addTypeToType(IJvmTypeProvider.Factory.name, StubTypeProviderFactory.name)
-			bindFactory.addTypeToType(AbstractTypeScopeProvider.name, StubBasedTypeScopeProvider.name)
-			bindFactory.addTypeToType(JvmModelAssociator.name, PsiJvmModelAssociator.name)
-			bindFactory.addTypeToTypeSingleton(JvmDeclaredTypeShortNameIndex.name, JvmDeclaredTypeShortNameIndex.name)
-			bindFactory.addTypeToType(IFeatureScopeTracker.Provider.name, OptimizingFeatureScopeTrackerProvider.name)
+			bindFactory.addTypeToType('org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory', 'org.eclipse.xtext.idea.types.access.StubTypeProviderFactory')
+			bindFactory.addTypeToType('org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider', 'org.eclipse.xtext.idea.types.StubBasedTypeScopeProvider')
+			bindFactory.addTypeToType('org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator', 'org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator')
+			bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex', 'org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex')
+			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider', 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider')
 		}
 		val bindings = bindFactory.bindings
 		
@@ -245,11 +196,11 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import «Arrays.name»;
 		import «List.name»;
 		
-		import «BuildProcessParametersProvider.name»;
-		import «PluginManager.name»;
-		import «PluginId.name»;
+		import com.intellij.compiler.server.BuildProcessParametersProvider;
+		import com.intellij.ide.plugins.PluginManager;
+		import com.intellij.openapi.extensions.PluginId;
 		
-		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends «BuildProcessParametersProvider.simpleName» {
+		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends BuildProcessParametersProvider {
 		
 			public List<String> getClassPath() {
 				String path = PluginManager.getPlugin(PluginId.getId("«grammar.languageID»")).getPath().getPath();
@@ -266,23 +217,23 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		package «grammar.codeBlockModificationListenerName.toPackageName»;
 		
 		«IF typesIntegrationRequired»
-		import «PsiTreeChangeEventImpl.name»;
+		import com.intellij.psi.impl.PsiTreeChangeEventImpl;
 		«ENDIF»
-		import «PsiModificationTracker.name»;
-		import «BaseXtextCodeBlockModificationListener.name»;
+		import com.intellij.psi.util.PsiModificationTracker;
+		import org.eclipse.xtext.psi.BaseXtextCodeBlockModificationListener;
 		import «grammar.languageName»;
 		
-		public class «grammar.codeBlockModificationListenerName.toSimpleName» extends «BaseXtextCodeBlockModificationListener.simpleName» {
+		public class «grammar.codeBlockModificationListenerName.toSimpleName» extends BaseXtextCodeBlockModificationListener {
 		
-			public «grammar.codeBlockModificationListenerName.toSimpleName»(«PsiModificationTracker.simpleName» psiModificationTracker) {
+			public «grammar.codeBlockModificationListenerName.toSimpleName»(PsiModificationTracker psiModificationTracker) {
 				super(«grammar.languageName.toSimpleName».INSTANCE, psiModificationTracker);
 			}
-		«IF typesIntegrationRequired»
-		
-			protected boolean hasJavaStructuralChanges(«PsiTreeChangeEventImpl.simpleName» event) {
+			«IF typesIntegrationRequired»
+
+			protected boolean hasJavaStructuralChanges(PsiTreeChangeEventImpl event) {
 				return true;
 			}
-		«ENDIF»
+			«ENDIF»
 		
 		}
 	'''
@@ -290,10 +241,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileElementDescriptionProvider(Grammar grammar) '''
 		package «grammar.elementDescriptionProviderName.toPackageName»;
 		
-		import «BaseXtextElementDescriptionProvider.name»;
+		import org.eclipse.xtext.psi.BaseXtextElementDescriptionProvider;
 		import «grammar.languageName»;
 		
-		public class «grammar.elementDescriptionProviderName.toSimpleName» extends «BaseXtextElementDescriptionProvider.simpleName» {
+		public class «grammar.elementDescriptionProviderName.toSimpleName» extends BaseXtextElementDescriptionProvider {
 		
 			public «grammar.elementDescriptionProviderName.toSimpleName»() {
 				super(«grammar.languageName.toSimpleName».INSTANCE);
@@ -310,7 +261,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import org.antlr.runtime.ANTLRReaderStream;
 		import org.antlr.runtime.TokenSource;
 		import org.antlr.runtime.TokenStream;
-		import «AbstractXtextPsiParser.name»;
+		import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 		import org.eclipse.xtext.xbase.lib.Exceptions;
 		import «grammar.elementTypeProviderName»;
@@ -348,13 +299,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileJvmTypesShortNamesCache(Grammar grammar) '''
 		package «grammar.jvmTypesShortNamesCacheName.toPackageName»;
 		
-		import «Project.name»;
-		import «JvmTypesShortNamesCache.name»;
+		import com.intellij.openapi.project.Project;
+		import org.eclipse.xtext.idea.types.JvmTypesShortNamesCache;
 		import «grammar.languageName»;
 		
-		class «grammar.jvmTypesShortNamesCacheName.toSimpleName» extends «JvmTypesShortNamesCache.simpleName» {
+		class «grammar.jvmTypesShortNamesCacheName.toSimpleName» extends JvmTypesShortNamesCache {
 		
-			public «grammar.jvmTypesShortNamesCacheName.toSimpleName»(«Project.simpleName» project) {
+			public «grammar.jvmTypesShortNamesCacheName.toSimpleName»(Project project) {
 				super(«grammar.languageName.toSimpleName».INSTANCE, project);
 			}
 		
@@ -364,10 +315,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileJvmElementsReferencesSearch(Grammar grammar) '''
 		package «grammar.jvmElementsReferencesSearch.toPackageName»;
 
-		import «JvmElementsReferencesSearch.name»;
+		import org.eclipse.xtext.idea.types.psi.search.JvmElementsReferencesSearch;
 		import «grammar.languageName»;
 		
-		public class «grammar.jvmElementsReferencesSearch.toSimpleName» extends «JvmElementsReferencesSearch.simpleName» {
+		public class «grammar.jvmElementsReferencesSearch.toSimpleName» extends JvmElementsReferencesSearch {
 		
 			public «grammar.jvmElementsReferencesSearch.toSimpleName»() {
 				super(«grammar.languageName.toSimpleName».INSTANCE);
@@ -379,13 +330,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileJvmTypesElementFinder(Grammar grammar) '''
 		package «grammar.jvmTypesElementFinderName.toPackageName»;
 		
-		import «Project.name»;
-		import «JvmTypesElementFinder.name»;
+		import com.intellij.openapi.project.Project;
+		import org.eclipse.xtext.idea.types.psi.JvmTypesElementFinder;
 		import «grammar.languageName»;
 		
-		public class «grammar.jvmTypesElementFinderName.toSimpleName» extends «JvmTypesElementFinder.simpleName» {
+		public class «grammar.jvmTypesElementFinderName.toSimpleName» extends JvmTypesElementFinder {
 		
-			public «grammar.jvmTypesElementFinderName.toSimpleName»(«Project.simpleName» project) {
+			public «grammar.jvmTypesElementFinderName.toSimpleName»(Project project) {
 				super(«grammar.languageName.toSimpleName».INSTANCE, project);
 			}
 		
@@ -458,17 +409,17 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«IF typesIntegrationRequired»
 
 				<referencesSearch implementation="«grammar.jvmElementsReferencesSearch»"/>
-				«grammar.compileExtension('targetElementEvaluator', PsiJvmTargetElementEvaluator.name)»
+				«grammar.compileExtension('targetElementEvaluator', 'org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator')»
 				«ENDIF»
 		
 				<fileTypeFactory implementation="«grammar.fileTypeFactoryName»"/>
 				<stubElementTypeHolder class="«grammar.elementTypeProviderName»"/>
-				«grammar.compileExtension('lang.ast.factory', BaseXtextASTFactory.name)»
+				«grammar.compileExtension('lang.ast.factory', 'org.eclipse.xtext.idea.lang.BaseXtextASTFactory')»
 				«grammar.compileExtension('lang.parserDefinition', grammar.parserDefinitionName)»
-				«grammar.compileExtension('lang.findUsagesProvider', BaseXtextFindUsageProvider.name)»
-				«grammar.compileExtension('lang.refactoringSupport', BaseXtextRefactoringSupportProvider.name)»
+				«grammar.compileExtension('lang.findUsagesProvider', 'org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider')»
+				«grammar.compileExtension('lang.refactoringSupport', 'org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider')»
 		      	<lang.syntaxHighlighterFactory key="«grammar.languageID»" implementationClass="«grammar.syntaxHighlighterFactoryName»" />
-		      	«grammar.compileExtension('annotator', IssueAnnotator.name)»
+		      	«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator')»
 		      	<elementDescriptionProvider implementation="«grammar.elementDescriptionProviderName»" order="first"/>
 			</extensions>
 		
@@ -660,37 +611,37 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import java.util.Map;
 		
 		import org.eclipse.emf.ecore.EObject;
-		import «IElementTypeProvider.name»;
-		import «psiNamedEObject.name»;
-		import «psiNamedEObjectStub.name»;
-		import «psiNamedEObjectType.name»;
-		import «XtextFileElementType.name»;
-		import «XtextFileStub.name»;
+		import org.eclipse.xtext.idea.lang.IElementTypeProvider;
+		import org.eclipse.xtext.psi.PsiNamedEObject;
+		import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
+		import org.eclipse.xtext.psi.stubs.PsiNamedEObjectType;
+		import org.eclipse.xtext.psi.stubs.XtextFileElementType;
+		import org.eclipse.xtext.psi.stubs.XtextFileStub;
 		import «grammar.fileImplName»;
 		
-		import «IStubElementType.name»;
-		import «IElementType.name»;
-		import «IFileElementType.name»;
-		import «IGrammarAwareElementType.name»;
+		import com.intellij.psi.stubs.IStubElementType;
+		import com.intellij.psi.tree.IElementType;
+		import com.intellij.psi.tree.IFileElementType;
+		import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 		import «grammar.grammarAccessName»;
 		
 		public class «grammar.elementTypeProviderName.toSimpleName» implements IElementTypeProvider {
 		
-			public static final IFileElementType FILE_TYPE = new «XtextFileElementType.simpleName»<«XtextFileStub.simpleName»<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
+			public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
 		
 			public static final IElementType NAME_TYPE = new IElementType("NAME", «grammar.languageName.toSimpleName».INSTANCE);
 		
 			public static final IElementType EOBJECT_TYPE = new IElementType("EOBJECT_TYPE", «grammar.languageName.toSimpleName».INSTANCE);
 		
-			public static final IStubElementType<«psiNamedEObjectStub.simpleName», «psiNamedEObject.simpleName»> NAMED_EOBJECT_TYPE = new «psiNamedEObjectType.simpleName»("NAMED_EOBJECT", «grammar.languageName.toSimpleName».INSTANCE);
+			public static final IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> NAMED_EOBJECT_TYPE = new PsiNamedEObjectType("NAMED_EOBJECT", «grammar.languageName.toSimpleName».INSTANCE);
 		
 			public static final IElementType CROSS_REFERENCE_TYPE = new IElementType("CROSS_REFERENCE", «grammar.languageName.toSimpleName».INSTANCE);
 			«FOR rule:grammar.allRules»
 			
-			public static final «IGrammarAwareElementType.simpleName» «rule.grammarElementIdentifier»_ELEMENT_TYPE;
+			public static final IGrammarAwareElementType «rule.grammarElementIdentifier»_ELEMENT_TYPE;
 			«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
 			
-			public static final «IGrammarAwareElementType.simpleName» «element.grammarElementIdentifier»_ELEMENT_TYPE;
+			public static final IGrammarAwareElementType «element.grammarElementIdentifier»_ELEMENT_TYPE;
 			«ENDFOR»
 			«ENDFOR»
 		
@@ -700,10 +651,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«grammar.grammarAccessName.toSimpleName» grammarAccess = «grammar.languageName.toSimpleName».INSTANCE.getInstance(«grammar.grammarAccessName.toSimpleName».class);
 				«FOR rule:grammar.allRules»
 				
-				«rule.grammarElementIdentifier»_ELEMENT_TYPE =  new «IGrammarAwareElementType.simpleName»("«rule.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, grammarAccess.«rule.gaRuleAccessor»);
+				«rule.grammarElementIdentifier»_ELEMENT_TYPE =  new IGrammarAwareElementType("«rule.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, grammarAccess.«rule.gaRuleAccessor»);
 				GRAMMAR_ELEMENT_TYPE.put(grammarAccess.«rule.gaRuleAccessor», «rule.grammarElementIdentifier»_ELEMENT_TYPE);
 				«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
-				«element.grammarElementIdentifier»_ELEMENT_TYPE =  new «IGrammarAwareElementType.simpleName»("«element.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, grammarAccess.«rule.gaElementsAccessor».«element.gaElementAccessor»);
+				«element.grammarElementIdentifier»_ELEMENT_TYPE =  new IGrammarAwareElementType("«element.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, grammarAccess.«rule.gaElementsAccessor».«element.gaElementAccessor»);
 				GRAMMAR_ELEMENT_TYPE.put(grammarAccess.«rule.gaElementsAccessor».«element.gaElementAccessor», «element.grammarElementIdentifier»_ELEMENT_TYPE);
 				«ENDFOR»
 				«ENDFOR»
@@ -725,17 +676,17 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				return NAME_TYPE;
 			}
 		
-			public IStubElementType<«psiNamedEObjectStub.simpleName», «psiNamedEObject.simpleName»> getNamedObjectType() {
+			public IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> getNamedObjectType() {
 				return NAMED_EOBJECT_TYPE;
 			}
 			«FOR rule:grammar.allRules»
 			
-			public «IGrammarAwareElementType.simpleName» get«rule.grammarElementIdentifier»ElementType() {
+			public IGrammarAwareElementType get«rule.grammarElementIdentifier»ElementType() {
 				return «rule.grammarElementIdentifier»_ELEMENT_TYPE;
 			}
 			«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
 			
-			public «IGrammarAwareElementType.simpleName» get«element.grammarElementIdentifier»ElementType() {
+			public IGrammarAwareElementType get«element.grammarElementIdentifier»ElementType() {
 				return «element.grammarElementIdentifier»_ELEMENT_TYPE;
 			}
 			«ENDFOR»
@@ -748,24 +699,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		}
 	'''
 	
-	def Class<?> getPsiNamedEObjectType() {
-		PsiNamedEObjectType
-	}
-	
-	def Class<?> getPsiNamedEObjectStub() {
-		PsiNamedEObjectStub
-	}
-	
-	def Class<?> getPsiNamedEObject() {
-		PsiNamedEObject
-	}
-	
 	def compileTokenTypeProvider(Grammar grammar)'''
 		package «grammar.tokenTypeProviderName.toPackageName»;
 		
 		import static «grammar.psiInternalParserName».*;
 		
-		import «TokenTypeProvider.name»;
+		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 		import «grammar.languageName»;
 		
 		import com.google.inject.Singleton;
@@ -817,7 +756,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		import org.antlr.runtime.ANTLRStringStream;
 		import org.antlr.runtime.Lexer;
-		import «AbstractAntlrDelegatingIdeaLexer.name»;
+		import org.eclipse.xtext.idea.parser.AbstractAntlrDelegatingIdeaLexer;
 		import «grammar.antlrLexerName»;
 		
 		public class «grammar.lexerName.toSimpleName» extends AbstractAntlrDelegatingIdeaLexer {
@@ -851,7 +790,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	def compileSyntaxHighlighter(Grammar grammar)'''
 		package «grammar.syntaxHighlighterName.toPackageName»;
 		
-		import «TokenTypeProvider.name»;
+		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 		import org.jetbrains.annotations.NotNull;
 		import «grammar.antlrLexerName»;
 		
@@ -898,7 +837,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		package «grammar.parserDefinitionName.toPackageName»;
 		
 		«IF !grammar.eAllContents.filter(CrossReference).filter[assigned].empty»
-		import «PsiEObjectReference.name»;
+		import org.eclipse.xtext.psi.impl.PsiEObjectReference;
 		«ENDIF»
 		import «grammar.elementTypeProviderName»;
 		import «grammar.fileImplName»;
@@ -906,15 +845,15 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		«IF grammar.eAllContents.filter(RuleCall).filter[assigned && containingAssignment.feature == 'name'].exists[ nameRuleCall |
 			!grammar.eAllContents.filter(RuleCall).filter[rule.eAllContents.exists[it == nameRuleCall]].empty
 		]»
-		import «PsiNamedEObjectImpl.name»;
+		import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 		«ENDIF»
 		
 		import «Inject.name»;
-		import «ASTNode.name»;
-		import «FileViewProvider.name»;
-		import «PsiElement.name»;
-		import «PsiFile.name»;
-		import «IElementType.name»;
+		import com.intellij.lang.ASTNode;
+		import com.intellij.psi.FileViewProvider;
+		import com.intellij.psi.PsiElement;
+		import com.intellij.psi.PsiFile;
+		import com.intellij.psi.tree.IElementType;
 
 		public class «grammar.parserDefinitionName.toSimpleName» extends «grammar.superParserDefinitionName.toSimpleName» {
 
@@ -932,13 +871,13 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«FOR nameRuleCall:grammar.eAllContents.filter(RuleCall).filter[assigned && containingAssignment.feature == 'name'].toIterable»
 				«FOR ruleCall:grammar.eAllContents.filter(RuleCall).filter[rule.eAllContents.exists[it == nameRuleCall]].toIterable»
 				if (elementType == elementTypeProvider.get«ruleCall.grammarElementIdentifier»ElementType()) {
-					return new «PsiNamedEObjectImpl.simpleName»(node, elementTypeProvider.get«nameRuleCall.grammarElementIdentifier»ElementType());
+					return new PsiNamedEObjectImpl(node, elementTypeProvider.get«nameRuleCall.grammarElementIdentifier»ElementType());
 				}
 				«ENDFOR»
 				«ENDFOR»
 				«FOR crossReference:grammar.eAllContents.filter(CrossReference).filter[assigned].toIterable»
 				if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
-					return new «PsiEObjectReference.simpleName»(node);
+					return new PsiEObjectReference(node);
 				}
 				«ENDFOR»
 				return super.createElement(node);
