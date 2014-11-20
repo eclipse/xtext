@@ -38,6 +38,8 @@ import org.eclipse.xtext.ui.editor.hyperlinking.SingleHoverShowingHyperlinkPrese
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
@@ -115,6 +117,7 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 				}
 			}
 		}
+		super.createHyperlinksByOffset(resource, offset, acceptor);
 		if (element instanceof XVariableDeclaration) {
 			XVariableDeclaration variableDeclaration = (XVariableDeclaration) element;
 			ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
@@ -129,7 +132,6 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 				addOpenInferredTypeHyperLink(resource, param, node, acceptor);
 			}
 		}
-		super.createHyperlinksByOffset(resource, offset, acceptor);
 	}
 
 	protected void addOpenInferredTypeHyperLink(final XtextResource resource, JvmIdentifiableElement typedElement,
@@ -197,7 +199,13 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 					if (targetElement instanceof JvmField) {
 						target = "Field";
 					} else if (targetElement instanceof JvmFormalParameter) {
-						target = "Parameter";
+						// special case for variables in switch and for loops
+						if (targetElement.eContainer() instanceof XSwitchExpression
+							|| targetElement.eContainer() instanceof XForLoopExpression) {
+							target = "Variable";
+						} else {
+							target = "Parameter";
+						}
 					} else if (targetElement instanceof XVariableDeclaration) {
 						target = "Variable";
 					}
