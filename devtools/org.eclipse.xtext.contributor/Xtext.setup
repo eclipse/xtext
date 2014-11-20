@@ -102,7 +102,7 @@
     <roots id="org.eclipse.jdt.feature.group" versionRange="[3.6.0,3.9.0)"/>
     <roots id="org.eclipse.pde.feature.group" versionRange="[3.6.0,3.9.0)"/>
     <roots id="org.eclipse.platform.feature.group" versionRange="[3.6.0,3.9.0)"/>
-    <roots id="org.eclipse.emf.sdk.feature.group" versionRange="2.10.0"/>
+    <roots id="org.eclipse.emf.sdk.feature.group" versionRange="2.11.0"/>
     <roots id="de.itemis.xtext.antlr.feature.feature.group" versionRange="2.0.0"/>
     <roots id="org.eclipse.draw2d.feature.group"/>
     <roots id="org.eclipse.m2e.core" versionRange="[1.0.0,1.0.100)"/>

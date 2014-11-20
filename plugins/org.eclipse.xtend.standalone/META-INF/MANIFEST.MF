@@ -10,4 +10,4 @@ Require-Bundle: org.eclipse.xtend.core;bundle-version="2.8.0";visibility:=reexpo
  org.eclipse.xtext.xbase.junit;bundle-version="2.8.0";visibility:=reexport,
  org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
  org.eclipse.jdt.core;bundle-version="3.6.0";visibility:=reexport,
- org.eclipse.emf.codegen;bundle-version="2.10.0";visibility:=reexport
+ org.eclipse.emf.codegen;bundle-version="2.11.0";visibility:=reexport

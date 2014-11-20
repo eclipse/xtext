@@ -36,7 +36,7 @@ Export-Package: org.eclipse.xtend.core;x-internal:=true,
  org.eclipse.xtend.core.xtend.impl;x-internal:=true,
  org.eclipse.xtend.core.xtend.util;x-internal:=true
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.6.0",
- org.eclipse.emf.ecore;bundle-version="2.10.0";visibility:=reexport,
+ org.eclipse.emf.ecore;bundle-version="2.11.0";visibility:=reexport,
  org.eclipse.xtext.common.types;bundle-version="2.8.0";visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.8.0";visibility:=reexport,
  org.eclipse.xtext;bundle-version="2.8.0",
