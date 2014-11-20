@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.xbase.tests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.junit4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.tests"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
