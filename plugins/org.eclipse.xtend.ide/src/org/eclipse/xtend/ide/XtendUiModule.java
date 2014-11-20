@@ -58,6 +58,7 @@ import org.eclipse.xtend.ide.hover.XtendAnnotationHover;
 import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
+import org.eclipse.xtend.ide.hyperlinking.HyperLinkingLabelProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
@@ -184,6 +185,14 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 				.to(OverrideIndicatorModelListener.class);
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("OverrideIndicatorRulerAction")).to( //$NON-NLS-1$
 				OverrideIndicatorRulerAction.class);
+	}
+	
+	
+	@Override
+	public void configureHyperlinkLabelProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
+				.annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class)
+				.to(HyperLinkingLabelProvider.class);
 	}
 	
 	public Class<? extends IFormattingPreferenceValuesProvider> bindIFormattingPreferenceValuesProvider() {
