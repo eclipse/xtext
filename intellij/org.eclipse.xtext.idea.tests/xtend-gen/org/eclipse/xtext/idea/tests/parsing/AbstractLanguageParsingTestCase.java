@@ -3,8 +3,11 @@ package org.eclipse.xtext.idea.tests.parsing;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageASTFactory;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.ParsingTestCase;
 import java.io.ByteArrayInputStream;
@@ -12,15 +15,20 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import junit.framework.TestCase;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
+import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -32,10 +40,11 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase {
+public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Extension
@@ -60,10 +69,40 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase {
   @Accessors(AccessorType.PROTECTED_GETTER)
   private XtextResource expectedResource;
   
+  @Inject
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  private BaseXtextASTFactory astFactory;
+  
+  @Inject
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  private ValidationTestHelper validationHelper;
+  
+  protected void setUp() throws Exception {
+    super.setUp();
+    this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
+  }
+  
   protected void tearDown() throws Exception {
     super.tearDown();
     this.actualResource = null;
     this.expectedResource = null;
+  }
+  
+  public AbstractLanguageParsingTestCase(final LanguageFileType fileType) {
+    this("", fileType);
+  }
+  
+  public AbstractLanguageParsingTestCase(final String dataPath, final LanguageFileType fileType) {
+    this(dataPath, fileType.getDefaultExtension(), ((IXtextLanguage) fileType.getLanguage()));
+  }
+  
+  public AbstractLanguageParsingTestCase(final String fileExt, final IXtextLanguage language) {
+    this("", fileExt, language.<ParserDefinition>getInstance(ParserDefinition.class));
+  }
+  
+  public AbstractLanguageParsingTestCase(final String dataPath, final String fileExt, final IXtextLanguage language) {
+    super(dataPath, fileExt, language.<ParserDefinition>getInstance(ParserDefinition.class));
+    language.injectMembers(this);
   }
   
   public AbstractLanguageParsingTestCase(final String dataPath, final String fileExt, final ParserDefinition... definitions) {
@@ -72,6 +111,25 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase {
   
   public AbstractLanguageParsingTestCase(final String dataPath, final String fileExt, final boolean lowercaseFirstLetter, final ParserDefinition... definitions) {
     super(dataPath, fileExt, lowercaseFirstLetter, definitions);
+  }
+  
+  public <T extends EObject> T checkModel(final String code, final boolean validate) {
+    try {
+      T _xblockexpression = null;
+      {
+        this.doCodeTest(code);
+        EList<EObject> _contents = this.actualResource.getContents();
+        EObject _head = IterableExtensions.<EObject>head(_contents);
+        final T model = ((T) _head);
+        if (validate) {
+          this.validationHelper.assertNoErrors(model);
+        }
+        _xblockexpression = model;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected boolean includeRanges() {
@@ -209,5 +267,15 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase {
   @Pure
   protected XtextResource getExpectedResource() {
     return this.expectedResource;
+  }
+  
+  @Pure
+  protected BaseXtextASTFactory getAstFactory() {
+    return this.astFactory;
+  }
+  
+  @Pure
+  protected ValidationTestHelper getValidationHelper() {
+    return this.validationHelper;
   }
 }

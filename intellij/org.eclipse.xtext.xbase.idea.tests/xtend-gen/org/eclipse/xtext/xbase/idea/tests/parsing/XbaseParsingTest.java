@@ -1,72 +1,24 @@
 package org.eclipse.xtext.xbase.idea.tests.parsing;
 
-import com.google.inject.Inject;
-import com.intellij.lang.ASTFactory;
-import com.intellij.lang.LanguageASTFactory;
-import com.intellij.lang.ParserDefinition;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.idea.lang.XbaseLanguage;
+import org.eclipse.xtext.xbase.idea.lang.XbaseFileType;
 import org.eclipse.xtext.xbase.idea.tests.parsing.IdeaXbaseParserTest;
-import org.eclipse.xtext.xbase.idea.tests.parsing.XExpressionChecker;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @TestDecorator
 @SuppressWarnings("all")
-public class XbaseParsingTest extends AbstractLanguageParsingTestCase implements XExpressionChecker {
+public class XbaseParsingTest extends AbstractLanguageParsingTestCase {
   private IdeaXbaseParserTest delegate;
   
-  @Inject
-  private ValidationTestHelper validationHelper;
-  
   public XbaseParsingTest() {
-    super("", "___xbase", XbaseLanguage.INSTANCE.<ParserDefinition>getInstance(ParserDefinition.class));
-    XbaseLanguage.INSTANCE.injectMembers(this);
+    super(XbaseFileType.INSTANCE);
     IdeaXbaseParserTest _ideaXbaseParserTest = new IdeaXbaseParserTest(this);
     this.delegate = _ideaXbaseParserTest;
   }
   
   @Override
-  protected void setUp() {
-    try {
-      super.setUp();
-      ASTFactory _instance = XbaseLanguage.INSTANCE.<ASTFactory>getInstance(BaseXtextASTFactory.class);
-      this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, XbaseLanguage.INSTANCE, _instance);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Override
   protected String getTestDataPath() {
     return "./testData/parsing";
-  }
-  
-  public XExpression testExpression(final String code, final boolean resolve) {
-    try {
-      XExpression _xblockexpression = null;
-      {
-        super.doCodeTest(code);
-        XtextResource _actualResource = this.getActualResource();
-        EList<EObject> _contents = _actualResource.getContents();
-        EObject _head = IterableExtensions.<EObject>head(_contents);
-        final XExpression expression = ((XExpression) _head);
-        if (resolve) {
-          this.validationHelper.assertNoErrors(expression);
-        }
-        _xblockexpression = expression;
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
   
   public void testAddition_1() throws Exception {

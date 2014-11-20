@@ -1,23 +1,17 @@
 package org.eclipse.xtext.idea.sdomain.idea.tests.parsing;
 
-import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
-import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainLanguage;
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
-
-import com.intellij.lang.LanguageASTFactory;
-import com.intellij.lang.ParserDefinition;
 
 public class MyDslParsingTest extends AbstractLanguageParsingTestCase {
 	
 	public MyDslParsingTest() {
-		super("", "sdomain", SDomainLanguage.INSTANCE.getInstance(ParserDefinition.class));
-		SDomainLanguage.INSTANCE.injectMembers(this);
+		super(SDomainFileType.INSTANCE);
 	}
 	
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		addExplicitExtension(LanguageASTFactory.INSTANCE, SDomainLanguage.INSTANCE, SDomainLanguage.INSTANCE.getInstance(BaseXtextASTFactory.class));
+	protected String getTestDataPath() {
+		return "./testData/parsing";
 	}
 	
 	public void testNamespaces() {
@@ -62,11 +56,6 @@ public class MyDslParsingTest extends AbstractLanguageParsingTestCase {
 	
 	public void testUnwantedTokenErrorRecovery2() {
 		doTest(true);
-	}
-	
-	@Override
-	protected String getTestDataPath() {
-		return "./testData/parsing";
 	}
 	
 }
