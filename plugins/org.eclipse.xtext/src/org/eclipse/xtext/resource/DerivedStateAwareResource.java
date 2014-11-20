@@ -7,8 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -68,10 +73,40 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	}
 
 	/**
+	 * @return the contents without the side effect of installing the derived the state.
 	 * @since 2.4
 	 */
 	protected EList<EObject> doGetContents() {
 		return super.getContents();
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	protected List<EObject> getUnloadingContents() {
+		return doGetContents();
+	}
+	
+	/**
+	 * Copied from {@link ResourceImpl#doUnload()} but doesn't call {@link #getContents()} to avoid derived state
+	 * computation.
+	 * 
+	 * @since 2.8
+	 */
+	@Override
+	protected void doUnload() {
+		Iterator<EObject> allContents = getAllProperContents(unloadingContents);
+		// This guard is needed to ensure that clear doesn't make the resource become loaded.
+		//
+		if (!doGetContents().isEmpty()) {
+			doGetContents().clear();
+		}
+		getErrors().clear();
+		getWarnings().clear();
+		while (allContents.hasNext()) {
+			unloaded((InternalEObject) allContents.next());
+		}
 	}
 	
 	/**
