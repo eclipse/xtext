@@ -117,7 +117,6 @@ class Community extends AbstractWebsite {
         <th>Description</th>
         <th>License</th>
         <th>Category</th>
-        <th>Xtext&nbsp;v.</th>
         <th>Author(s)</th>
       </tr></thead>
       <tbody>
@@ -128,7 +127,6 @@ class Community extends AbstractWebsite {
     devices such as Android, iPhone and iPad.</td>
         <td>EPL</td>
         <td>Language, Framework</td>
-        <td>1.x</td>
         <td>Heiko Behrens, Peter Friese, et al</td>
       </tr>
       
@@ -138,7 +136,6 @@ class Community extends AbstractWebsite {
     the Eclipse platform.</td>
         <td>LGPL</td>
         <td>Language</td>
-        <td>?</td>
         <td>Mohamed Bouragba, Mohamed Said, Maxime Kapusta and Yoann Vasseur</td>
       </tr>
       <tr>
@@ -147,7 +144,6 @@ class Community extends AbstractWebsite {
     systems. See the <a href="http://vimeo.com/16768196">very</a> <a href="http://vimeo.com/13154188">cool</a> <a href="http://vimeo.com/12080038">screencasts</a>.</td>
         <td>closed&nbsp;source</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Sebastian Benz, Dana Wong</td>
       </tr>
         <tr>
@@ -157,7 +153,6 @@ class Community extends AbstractWebsite {
     the Xtext Java integration.</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Martin Schnabel</td>
       </tr>
       <tr>
@@ -169,7 +164,6 @@ class Community extends AbstractWebsite {
          </td>
          <td>EPL</td>
          <td>Testing, Framework</td>
-         <td>1.x</td>
          <td>Florian Pirchner, Ekkehard Gentz</td>
      </tr>
        <tr>
@@ -182,7 +176,6 @@ class Community extends AbstractWebsite {
          </td>
          <td>Commercial</td>
          <td>Language</td>
-         <td>2.x</td>
          <td>Jean-Jacques Dubray</td>
      </tr>
      <tr>
@@ -194,7 +187,6 @@ class Community extends AbstractWebsite {
           </td>
           <td>GPL</td>
           <td>Language</td>
-          <td>2.x</td>
           <td>Larry Moore</td>
      </tr>
      <tr>
@@ -202,7 +194,6 @@ class Community extends AbstractWebsite {
         <td>A Graphviz-compatible DSL for the Eclipse Visualization Toolkit</td>
         <td>EPL</td>
         <td>Language, Framework</td>
-        <td>1.x</td>
         <td>Fabian Steeg, Michael Clay</td>
       </tr>
       <tr>
@@ -211,7 +202,6 @@ class Community extends AbstractWebsite {
     WSDLs)</td>
         <td>MIT license</td>
         <td>examples</td>
-        <td>2.0.x</td>
         <td><a href="http://www.dslconsultancy.com/">Meinte Boersma</a></td>
         <td>
       </td></tr>
@@ -222,7 +212,6 @@ class Community extends AbstractWebsite {
     targeting MDSD tool chains end users. </td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Cedric Vidal</td>
       </tr>
         <tr>
@@ -232,7 +221,6 @@ class Community extends AbstractWebsite {
     </td>
         <td>EPL</td>
         <td>Language, Framework</td>
-        <td>1.x</td>
         <td>Cedric Vidal and Jerome Benois</td>
       </tr>
         <tr>
@@ -241,7 +229,6 @@ class Community extends AbstractWebsite {
     and assembly.</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Henrik Lindberg</td>
       </tr>
       <tr>
@@ -249,7 +236,6 @@ class Community extends AbstractWebsite {
           <td>LilyPond IDE for Eclipse</td>
           <td>EPL</td>
           <td>Language</td>
-          <td>2.x</td>
           <td>Denes Harmath</td>
       </tr>
       <tr>
@@ -260,7 +246,6 @@ class Community extends AbstractWebsite {
     will be provided.</td>
         <td>EPL</td>
         <td>Language, Framework</td>
-        <td>1.x</td>
         <td>Henrik Rentz-Reichert, Thomas Schuetz</td>
       </tr>
       <tr>
@@ -268,7 +253,6 @@ class Community extends AbstractWebsite {
         <td>an Eclipse-based IDE for Featherweight Java, implemented using Xtext.</td>
         <td>GPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Lorenzo Bettini</td>
       </tr>
         <tr>
@@ -278,7 +262,6 @@ class Community extends AbstractWebsite {
                 language is Ruby like).</td>
        <td>EPL, Apache</td>
           <td>Language</td>
-       <td>2.x</td>
        <td>Henrik Lindberg, Cloudsmith Inc.</td>
       </tr>
         <tr>
@@ -287,7 +270,6 @@ class Community extends AbstractWebsite {
 The SQL Query Designer, in text mode, allows to edit simple and advanced SQL expressions.</td>
        <td>EPL</td>
           <td>Report Designer</td>
-       <td>2.x</td>
        <td>Jaspersoft Studio Team (Veaceslav Chicu, Massimo Rabbi, Marco Orlandin and Giulio Toffoli)</td>
       </tr>
       
@@ -301,7 +283,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     and support classes.</td>
           <td>GPL</td>
           <td>Language</td>
-          <td>1.x</td>
           <td>Diego Castronuovo (castronu at gmail dot com)</td>
       </tr>
       <tr>
@@ -311,7 +292,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     simulation, codegen,...)</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>2.x</td>
         <td>Rtsys group, Dep. of Computer Science, Uni Kiel</td>
       </tr>
       <tr>
@@ -319,7 +299,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           <td>A rich LLVM IR editor plugin for Eclipse.</td>
           <td>BSD</td>
           <td>Language</td>
-          <td>2.3.x</td>
           <td>Alon Mishne</td>
       </tr>
         <tr>
@@ -328,15 +307,13 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     Assembly Language *.ll files</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Cedric Vidal</td>
       </tr>
         <tr>
         <td><a href="http://logicals.com/">logi.CAD 3</a></td>
-        <td>ogi.CAD 3 is a tool for programming a wide variety of PLCs (Programmable Logic Controllers) according to the industry standard IEC 61131-3. It is an Eclipse RCP based (E3/E4) integrated development environment (IDE) using XText for implementing the editors for the IEC programming languages ST (Structured Text), FBD (Function Block Diagram) and SFC (Sequential Function Chart).</td>
+        <td>logi.CAD 3 is a tool for programming a wide variety of PLCs (Programmable Logic Controllers) according to the industry standard IEC 61131-3. It is an Eclipse RCP based (E3/E4) integrated development environment (IDE) using XText for implementing the editors for the IEC programming languages ST (Structured Text), FBD (Function Block Diagram) and SFC (Sequential Function Chart).</td>
         <td>Commercial</td>
         <td>Language</td>
-        <td>2.6</td>
         <td>logi.cals Austria (http://logicals.com)</td>
       </tr>
       <tr>
@@ -349,7 +326,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>EPL, GPL</td>
           <td>RCP application</td>
-          <td>2.0.1</td>
           <td>Michel Simeon</td>
       </tr>
       <tr>
@@ -358,7 +334,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     enterprise applications</td>
         <td>EPL</td>
         <td>Language, Framework</td>
-        <td>1.x</td>
         <td>Jos Warmer</td>
       </tr>
       <tr>
@@ -370,7 +345,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
        </td>
        <td>GPL</td>
        <td>language, documentation</td>
-          <td>1.x</td>
           <td>Siamak Haschemi (haschemi@informatik.hu-berlin.de), Martin Schmidt
      (schmidma@informatik.hu-berlin.de), Arif Wider
     (wider@informatik.hu-berlin.de)</td>
@@ -385,7 +359,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>EPL</td>
           <td>Language</td>
-          <td>1.x</td>
           <td><a href="mailto://siamak@haschemi.org">Siamak Haschemi</a></td>
       </tr>
       <tr>
@@ -394,7 +367,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     embedded in Ecore.</td>
           <td>EPL</td>
           <td>Language</td>
-          <td>2.x</td>
           <td>Ed Willink</td>
       </tr>
       <tr>
@@ -404,7 +376,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
          </td>
          <td>commercial</td>
          <td>Framework</td>
-         <td>1.x</td>
          <td>Gentleware AG</td>
      </tr>
        <tr>
@@ -413,7 +384,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     format. </td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Cedric Vidal</td>
       </tr>
       <tr>
@@ -421,7 +391,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           <td>Editors for QVT Core and Relational languages.</td>
           <td>EPL</td>
           <td>Language</td>
-          <td>2.4.x</td>
           <td>Ed Willink</td>
       </tr>
         <tr>
@@ -431,7 +400,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     validation of edited XML file based on it's RELAX NG schema.</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>0.7.x</td>
         <td>Dave Carver</td>
       </tr>
       <tr>
@@ -442,7 +410,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
         The default execution environment is the <a href="http://www.janusproject.io">Janus platform</a>.</td>
         <td>Apache 2 License</td>
         <td>Language, Framework</td>
-        <td>2.x</td>
         <td>Sebastian Rodriguez, Nicolas Gaud, Stéphane Galland</td>
       </tr>
         <tr>
@@ -451,7 +418,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     Sculptor generates high quality Java code and configuration.</td>
         <td>Apache 2 License</td>
         <td>Language, Framework</td>
-        <td>2.x</td>
         <td>Torsten Juergeleit, Patrik Nordwall and others</td>
       </tr>
         <tr>
@@ -461,7 +427,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     part of objects).</td>
         <td>GPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Fabio Strocco, Lorenzo Bettini</td>
       </tr>
         <tr>
@@ -473,7 +438,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     using the SADL language. </td>
         <td>EPL</td>
         <td>Language</td>
-        <td>1.x</td>
         <td>Andrew Crapo, John Interrante, David Bracewell, Saurabh Gupta</td>
       </tr>
       <tr>
@@ -484,7 +448,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     against the Graphiti framework.</td>
           <td>EPL 1.0</td>
           <td>Framework</td>
-          <td>2.0.1</td>
           <td>Jos Warmer, Karsten Thoms et. al.</td>
       </tr>
       <tr>
@@ -496,7 +459,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     control systems in the model development process.</td>
           <td>EPL</td>
           <td>Language</td>
-          <td>2.x</td>
           <td>Tim Geisler, Aleksey&nbsp;Shumilin</td>
       </tr>
       <tr>
@@ -507,7 +469,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>3-Clause BSD</td>
           <td>Language</td>
-          <td>2.x</td>
           <td>Leon Handreke, Chris Hiatt, Stefan Orf, Joachim Priesner, Fabian
     Ruch, Matthias Wagner</td>
     </tr>
@@ -523,7 +484,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     Framework.</td>
       <td>Commercial</td>
       <td>Language</td>
-      <td>1.x</td>
       <td><a href="mailto://shangab@gmail.com">Abubaker Mahmoud</a></td>
        </tr> 
        <tr>
@@ -536,7 +496,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>EPL</td>
           <td>Language</td>
-          <td>2.x</td>
           <td>Lorenzo Bettini</td>
     </tr>
     <tr>
@@ -548,7 +507,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>EPL</td>
           <td>Testing, Language</td>
-          <td>2.x</td>
           <td>Michael Barry</td>
       </tr>
        <tr>
@@ -557,7 +515,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     integrated within Eclipse UI forms</td>
         <td>EPL</td>
         <td>Framework</td>
-        <td>1.x</td>
         <td>Mikael Barbero</td>
       </tr>
        
@@ -568,7 +525,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
     expressions, statements, different (combinable) data types.</td>
         <td>EPL</td>
         <td>Framework</td>
-        <td>2.x</td>
         <td><a href="mailto:voelter@acm.org">Markus Voelter</a></td>
       </tr>
       
@@ -580,7 +536,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>GPL</td>
           <td>Language</td>
-          <td>1.x</td>
           <td>Lorenzo Bettini</td>
       </tr>
       <tr>
@@ -594,7 +549,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
           </td>
           <td>EPL</td>
           <td>Tool</td>
-          <td>2.0.X</td>
           <td>Axel Terfloth, Andreas M&uuml;lder, et al</td>
       </tr>
 
@@ -607,7 +561,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
         <td>http://www.eclipse.org/amp/</td>
         <td>EPL</td>
         <td>Framework</td>
-        <td>1.0.0</td>
         <td>Metascape, LLC</td>
       </tr>
       
@@ -619,7 +572,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
         <td>http://www.eclipse.org/modeling/emf/?project=query2</td>
         <td>EPL</td>
         <td>Language</td>
-        <td>0.7.x</td>
         <td>?</td>
       </tr>
       
@@ -629,7 +581,6 @@ The SQL Query Designer, in text mode, allows to edit simple and advanced SQL exp
         <td>http://code.google.com/p/camel-extra/wiki/CamelSpit</td>
         <td>?</td>
         <td>Language</td>
-        <td>?</td>
         <td>Oisin Hurley</td>
       </tr>
       

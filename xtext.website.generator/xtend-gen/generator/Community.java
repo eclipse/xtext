@@ -291,9 +291,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<th>Category</th>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<th>Xtext&nbsp;v.</th>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<th>Author(s)</th>");
     _builder.newLine();
     _builder.append("      ");
@@ -323,9 +320,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language, Framework</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Heiko Behrens, Peter Friese, et al</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -352,9 +346,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>?</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Mohamed Bouragba, Mohamed Said, Maxime Kapusta and Yoann Vasseur</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -377,9 +368,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Sebastian Benz, Dana Wong</td>");
@@ -407,9 +395,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Martin Schnabel</td>");
@@ -443,9 +428,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("         ");
     _builder.append("<td>Testing, Framework</td>");
-    _builder.newLine();
-    _builder.append("         ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("         ");
     _builder.append("<td>Florian Pirchner, Ekkehard Gentz</td>");
@@ -484,9 +466,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("         ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("         ");
     _builder.append("<td>Jean-Jacques Dubray</td>");
     _builder.newLine();
     _builder.append("     ");
@@ -520,9 +499,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Larry Moore</td>");
     _builder.newLine();
     _builder.append("     ");
@@ -542,9 +518,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language, Framework</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Fabian Steeg, Michael Clay</td>");
@@ -569,9 +542,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>examples</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>2.0.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td><a href=\"http://www.dslconsultancy.com/\">Meinte Boersma</a></td>");
@@ -604,9 +574,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Cedric Vidal</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -634,9 +601,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language, Framework</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Cedric Vidal and Jerome Benois</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -661,9 +625,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Henrik Lindberg</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -683,9 +644,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>2.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Denes Harmath</td>");
@@ -718,9 +676,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language, Framework</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Henrik Rentz-Reichert, Thomas Schuetz</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -740,9 +695,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Lorenzo Bettini</td>");
@@ -772,9 +724,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("       ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("       ");
     _builder.append("<td>Henrik Lindberg, Cloudsmith Inc.</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -796,9 +745,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Report Designer</td>");
-    _builder.newLine();
-    _builder.append("       ");
-    _builder.append("<td>2.x</td>");
     _builder.newLine();
     _builder.append("       ");
     _builder.append("<td>Jaspersoft Studio Team (Veaceslav Chicu, Massimo Rabbi, Marco Orlandin and Giulio Toffoli)</td>");
@@ -838,9 +784,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Diego Castronuovo (castronu at gmail dot com)</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -868,9 +811,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Rtsys group, Dep. of Computer Science, Uni Kiel</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -890,9 +830,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>2.3.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Alon Mishne</td>");
@@ -919,9 +856,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Cedric Vidal</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -934,16 +868,13 @@ public class Community extends AbstractWebsite {
     _builder.append("<td><a href=\"http://logicals.com/\">logi.CAD 3</a></td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>ogi.CAD 3 is a tool for programming a wide variety of PLCs (Programmable Logic Controllers) according to the industry standard IEC 61131-3. It is an Eclipse RCP based (E3/E4) integrated development environment (IDE) using XText for implementing the editors for the IEC programming languages ST (Structured Text), FBD (Function Block Diagram) and SFC (Sequential Function Chart).</td>");
+    _builder.append("<td>logi.CAD 3 is a tool for programming a wide variety of PLCs (Programmable Logic Controllers) according to the industry standard IEC 61131-3. It is an Eclipse RCP based (E3/E4) integrated development environment (IDE) using XText for implementing the editors for the IEC programming languages ST (Structured Text), FBD (Function Block Diagram) and SFC (Sequential Function Chart).</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Commercial</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>2.6</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>logi.cals Austria (http://logicals.com)</td>");
@@ -982,9 +913,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>RCP application</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>2.0.1</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Michel Simeon</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1007,9 +935,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language, Framework</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Jos Warmer</td>");
@@ -1043,9 +968,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("       ");
     _builder.append("<td>language, documentation</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Siamak Haschemi (haschemi@informatik.hu-berlin.de), Martin Schmidt");
@@ -1090,9 +1012,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td><a href=\"mailto://siamak@haschemi.org\">Siamak Haschemi</a></td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1115,9 +1034,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>2.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Ed Willink</td>");
@@ -1147,9 +1063,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Framework</td>");
     _builder.newLine();
     _builder.append("         ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("         ");
     _builder.append("<td>Gentleware AG</td>");
     _builder.newLine();
     _builder.append("     ");
@@ -1174,9 +1087,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Cedric Vidal</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1196,9 +1106,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>2.4.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Ed Willink</td>");
@@ -1226,9 +1133,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>0.7.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Dave Carver</td>");
@@ -1261,9 +1165,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language, Framework</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Sebastian Rodriguez, Nicolas Gaud, Stéphane Galland</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1286,9 +1187,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language, Framework</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>2.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Torsten Juergeleit, Patrik Nordwall and others</td>");
@@ -1316,9 +1214,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Fabio Strocco, Lorenzo Bettini</td>");
@@ -1354,9 +1249,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Andrew Crapo, John Interrante, David Bracewell, Saurabh Gupta</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1385,9 +1277,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Framework</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>2.0.1</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Jos Warmer, Karsten Thoms et. al.</td>");
@@ -1423,9 +1312,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Tim Geisler, Aleksey&nbsp;Shumilin</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1454,9 +1340,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>2.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Leon Handreke, Chris Hiatt, Stefan Orf, Joachim Priesner, Fabian");
@@ -1504,9 +1387,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("<td>1.x</td>");
-    _builder.newLine();
-    _builder.append("      ");
     _builder.append("<td><a href=\"mailto://shangab@gmail.com\">Abubaker Mahmoud</a></td>");
     _builder.newLine();
     _builder.append("       ");
@@ -1543,9 +1423,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Lorenzo Bettini</td>");
     _builder.newLine();
     _builder.append("    ");
@@ -1579,9 +1456,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Testing, Language</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>2.x</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Michael Barry</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1604,9 +1478,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Framework</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Mikael Barbero</td>");
@@ -1636,9 +1507,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Framework</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>2.x</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td><a href=\"mailto:voelter@acm.org\">Markus Voelter</a></td>");
@@ -1671,9 +1539,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("          ");
-    _builder.append("<td>1.x</td>");
     _builder.newLine();
     _builder.append("          ");
     _builder.append("<td>Lorenzo Bettini</td>");
@@ -1715,9 +1580,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Tool</td>");
     _builder.newLine();
     _builder.append("          ");
-    _builder.append("<td>2.0.X</td>");
-    _builder.newLine();
-    _builder.append("          ");
     _builder.append("<td>Axel Terfloth, Andreas M&uuml;lder, et al</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1752,9 +1614,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Framework</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>1.0.0</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>Metascape, LLC</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1787,9 +1646,6 @@ public class Community extends AbstractWebsite {
     _builder.append("<td>Language</td>");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("<td>0.7.x</td>");
-    _builder.newLine();
-    _builder.append("        ");
     _builder.append("<td>?</td>");
     _builder.newLine();
     _builder.append("      ");
@@ -1814,9 +1670,6 @@ public class Community extends AbstractWebsite {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Language</td>");
-    _builder.newLine();
-    _builder.append("        ");
-    _builder.append("<td>?</td>");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("<td>Oisin Hurley</td>");

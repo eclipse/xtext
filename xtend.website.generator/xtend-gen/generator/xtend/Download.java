@@ -16,7 +16,7 @@ public class Download extends AbstractXtendWebsite {
   
   public String getLink(final String platform) {
     String _fileExtension = this.fileExtension(platform);
-    String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-luna-R-" + platform) + _fileExtension);
+    String _plus = (("http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-luna-SR1-" + platform) + _fileExtension);
     return (_plus + "&r=1");
   }
   
@@ -50,11 +50,11 @@ public class Download extends AbstractXtendWebsite {
   
   public final static String WIN_32 = "win32";
   
-  private final String currentVersion = "2.7.1";
+  private final String currentVersion = "2.7.3";
   
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
-    String _headline = this.headline("Download");
+    CharSequence _headline = this.headline("Download");
     _builder.append(_headline, "");
     _builder.newLineIfNotEmpty();
     _builder.append("<div id=\"page\">");

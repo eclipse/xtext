@@ -11,7 +11,7 @@ class Download extends AbstractXtendWebsite {
 	}
 
 	def String getLink(String platform) {
-		'http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-luna-R-' + platform + platform.fileExtension+'&r=1'
+		'http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-dsl-luna-SR1-' + platform + platform.fileExtension+'&r=1'
 	}
 
 	def String fileExtension(String platform) {
@@ -28,7 +28,7 @@ class Download extends AbstractXtendWebsite {
 	public static val WIN_64 = 'win32-x86_64';
 	public static val WIN_32 = 'win32';
 	
-	val currentVersion = "2.7.1";
+	val currentVersion = "2.7.3";
 
 	override contents() '''
 		«headline('Download')»
