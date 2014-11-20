@@ -157,15 +157,6 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "PsiParser");
   }
   
-  public String getSyntaxHighlighterName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "SyntaxHighlighter");
-  }
-  
   public String getSyntaxHighlighterFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");
@@ -173,15 +164,6 @@ public class IdeaPluginClassNames {
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "SyntaxHighlighterFactory");
-  }
-  
-  public String getLexerName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.parser.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "Lexer");
   }
   
   public String getSuperParserDefinitionName(final Grammar it) {

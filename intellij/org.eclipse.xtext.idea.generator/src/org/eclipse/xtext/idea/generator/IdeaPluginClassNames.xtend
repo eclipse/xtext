@@ -81,16 +81,8 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.parser.'+it.name.toSimpleName+'PsiParser'
 	}
 	
-	def String getSyntaxHighlighterName(Grammar it) {
-		basePackageName+'.lang.'+it.name.toSimpleName+'SyntaxHighlighter'
-	}
-	
 	def String getSyntaxHighlighterFactoryName(Grammar it) {
 		basePackageName+'.lang.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
-	}
-	
-	def String getLexerName(Grammar it) {
-		basePackageName+'.lang.parser.'+it.name.toSimpleName+'Lexer'
 	}
 	
 	def String getSuperParserDefinitionName(Grammar it) {

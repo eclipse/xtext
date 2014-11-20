@@ -3,14 +3,6 @@ package org.eclipse.xtext.xbase.idea;
 public class AbstractXbaseIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaModule {
 	
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
-		return org.eclipse.xtext.xbase.idea.lang.XbaseSyntaxHighlighter.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtext.xbase.idea.lang.parser.XbaseLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtext.xbase.idea.lang.parser.XbasePsiParser.class;
 	}

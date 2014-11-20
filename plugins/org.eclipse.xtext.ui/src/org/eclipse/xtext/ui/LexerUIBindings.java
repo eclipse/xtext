@@ -9,10 +9,22 @@ package org.eclipse.xtext.ui;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * 
+ * @deprecated Use {@link org.eclipse.xtext.ide.LexerUIBindings} instead
  */
+@Deprecated
 public interface LexerUIBindings {
 
-	String CONTENT_ASSIST = "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.CONTENT_ASSIST"; //$NON-NLS-1$
-	String HIGHLIGHTING = "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.HIGHLIGHTING"; //$NON-NLS-1$
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.LexerUIBindings#CONTENT_ASSIST} instead
+	 */
+	@Deprecated
+	String CONTENT_ASSIST = org.eclipse.xtext.ide.LexerUIBindings.CONTENT_ASSIST;
+	
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.LexerUIBindings#HIGHLIGHTING} instead
+	 */
+	@Deprecated
+	String HIGHLIGHTING = org.eclipse.xtext.ide.LexerUIBindings.HIGHLIGHTING;
 	
 }
