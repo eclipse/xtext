@@ -315,14 +315,22 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     
     public ResolvedConstructor getSuperConstructor(final TypeDeclaration it) {
       if ((it instanceof ClassDeclaration)) {
+        boolean _or = false;
         TypeReference _extendedClass = ((ClassDeclaration)it).getExtendedClass();
         TypeReference _object = this.context.getObject();
-        boolean _equals = _extendedClass.equals(_object);
+        boolean _equals = Objects.equal(_extendedClass, _object);
         if (_equals) {
+          _or = true;
+        } else {
+          TypeReference _extendedClass_1 = ((ClassDeclaration)it).getExtendedClass();
+          boolean _equals_1 = Objects.equal(_extendedClass_1, null);
+          _or = _equals_1;
+        }
+        if (_or) {
           return null;
         }
-        TypeReference _extendedClass_1 = ((ClassDeclaration)it).getExtendedClass();
-        Iterable<? extends ResolvedConstructor> _declaredResolvedConstructors = _extendedClass_1.getDeclaredResolvedConstructors();
+        TypeReference _extendedClass_2 = ((ClassDeclaration)it).getExtendedClass();
+        Iterable<? extends ResolvedConstructor> _declaredResolvedConstructors = _extendedClass_2.getDeclaredResolvedConstructors();
         return IterableExtensions.head(_declaredResolvedConstructors);
       } else {
         return null;
