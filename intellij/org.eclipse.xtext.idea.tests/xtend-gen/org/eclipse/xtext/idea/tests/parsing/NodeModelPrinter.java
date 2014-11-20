@@ -1,4 +1,4 @@
-package org.eclipse.xtext.idea.sdomain.idea.tests.parsing;
+package org.eclipse.xtext.idea.tests.parsing;
 
 import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
