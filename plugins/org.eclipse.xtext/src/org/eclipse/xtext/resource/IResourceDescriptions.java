@@ -14,9 +14,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 
 /**
- * Represents a set of {@link IResourceDescription}
+ * Represents a set of {@link IResourceDescription}.
+ * 
+ * Instances of {@link IResourceDescriptions} should be obtained from the {@link ResourceDescriptionsProvider}
+ * since they are specific to the configuration of the resource set. Different scenarios will provide different
+ * implementations of the {@link IResourceDescriptions}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge - Initial contribution and API
