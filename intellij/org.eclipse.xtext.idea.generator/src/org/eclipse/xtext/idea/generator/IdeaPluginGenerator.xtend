@@ -80,7 +80,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		val bindFactory = new BindFactory();
 		bindFactory.addTypeToType('com.intellij.openapi.fileTypes.SyntaxHighlighter', grammar.syntaxHighlighterName)
-		bindFactory.addTypeToType('com.intellij.lexer.Lexer', grammar.lexerName)
 		bindFactory.addTypeToType('com.intellij.lang.PsiParser', grammar.psiParserName)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.parser.TokenTypeProvider', grammar.tokenTypeProviderName)
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
@@ -101,7 +100,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeName.toJavaPath, grammar.compileFileType)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeFactoryName.toJavaPath, grammar.compileFileTypeFactory)
 		ctx.writeFile(outlet_src_gen, grammar.fileImplName.toJavaPath, grammar.compileFileImpl)
-		ctx.writeFile(outlet_src_gen, grammar.lexerName.toJavaPath, grammar.compileLexer)
 		ctx.writeFile(outlet_src_gen, grammar.tokenTypeProviderName.toJavaPath, grammar.compileTokenTypeProvider)
 		ctx.writeFile(outlet_src_gen, grammar.elementTypeProviderName.toJavaPath, grammar.compileElementTypeProvider)
 		ctx.writeFile(outlet_src_gen, grammar.parserDefinitionName.toJavaPath, grammar.compileParserDefinition)
@@ -797,24 +795,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			@Override
 			public TokenSet getStringLiteralTokens() {
 				return STRING_TOKENS;
-			}
-		
-		}
-	'''
-	
-	def compileLexer(Grammar grammar)'''
-		package «grammar.lexerName.toPackageName»;
-		
-		import org.antlr.runtime.ANTLRStringStream;
-		import org.antlr.runtime.Lexer;
-		import org.eclipse.xtext.idea.parser.AbstractAntlrDelegatingIdeaLexer;
-		import «grammar.antlrLexerName»;
-		
-		public class «grammar.lexerName.toSimpleName» extends AbstractAntlrDelegatingIdeaLexer {
-		
-			@Override
-			public Lexer createAntlrLexer(String text) {
-				return new «grammar.antlrLexerName.toSimpleName»(new ANTLRStringStream(text));
 			}
 		
 		}

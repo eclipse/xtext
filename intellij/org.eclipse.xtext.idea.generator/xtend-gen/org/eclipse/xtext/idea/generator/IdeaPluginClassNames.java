@@ -175,15 +175,6 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "SyntaxHighlighterFactory");
   }
   
-  public String getLexerName(final Grammar it) {
-    String _basePackageName = this.getBasePackageName(it);
-    String _plus = (_basePackageName + ".lang.parser.");
-    String _name = it.getName();
-    String _simpleName = this.toSimpleName(_name);
-    String _plus_1 = (_plus + _simpleName);
-    return (_plus_1 + "Lexer");
-  }
-  
   public String getSuperParserDefinitionName(final Grammar it) {
     String _elvis = null;
     EList<Grammar> _usedGrammars = it.getUsedGrammars();

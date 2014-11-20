@@ -12,133 +12,133 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalXtendLexer extends Lexer {
-    public static final int RULE_COMMENT_RICH_TEXT_INBETWEEN=9;
-    public static final int RULE_ID=4;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int RULE_ANY_OTHER=24;
-    public static final int RULE_IDENTIFIER_PART_IMPL=20;
-    public static final int RULE_COMMENT_RICH_TEXT_END=11;
+    public static final int RULE_COMMENT_RICH_TEXT_INBETWEEN=114;
+    public static final int RULE_ID=109;
+    public static final int KW_Synchronized=35;
+    public static final int KW_Enum=15;
+    public static final int KW_SolidusEqualsSign=63;
+    public static final int KW_True=99;
+    public static final int KW_PlusSignPlusSign=86;
+    public static final int RULE_ANY_OTHER=129;
+    public static final int KW_LeftParenthesis=17;
+    public static final int RULE_IDENTIFIER_PART_IMPL=125;
+    public static final int RULE_COMMENT_RICH_TEXT_END=116;
+    public static final int KW_Abstract=28;
+    public static final int KW_CommercialAt=56;
     public static final int EOF=-1;
-    public static final int RULE_IDENTIFIER_START=15;
-    public static final int T__93=93;
-    public static final int T__94=94;
-    public static final int T__91=91;
-    public static final int RULE_HEX=12;
-    public static final int T__92=92;
-    public static final int T__90=90;
-    public static final int RULE_RICH_TEXT_END=10;
-    public static final int RULE_DECIMAL=14;
-    public static final int T__99=99;
-    public static final int T__98=98;
-    public static final int T__97=97;
-    public static final int T__96=96;
-    public static final int T__95=95;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int RULE_HEX_DIGIT=18;
-    public static final int T__85=85;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
-    public static final int RULE_IN_RICH_STRING=19;
-    public static final int T__89=89;
-    public static final int T__88=88;
-    public static final int RULE_ML_COMMENT=21;
-    public static final int T__126=126;
-    public static final int T__125=125;
-    public static final int T__128=128;
-    public static final int RULE_STRING=5;
-    public static final int T__127=127;
-    public static final int T__71=71;
-    public static final int T__129=129;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int RULE_RICH_TEXT_START=7;
-    public static final int T__79=79;
-    public static final int T__78=78;
-    public static final int T__77=77;
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int RULE_RICH_TEXT=6;
-    public static final int T__63=63;
-    public static final int T__118=118;
-    public static final int T__119=119;
-    public static final int T__116=116;
-    public static final int T__117=117;
-    public static final int T__114=114;
-    public static final int T__115=115;
-    public static final int T__124=124;
-    public static final int T__123=123;
-    public static final int T__122=122;
-    public static final int T__121=121;
-    public static final int T__120=120;
-    public static final int T__61=61;
-    public static final int T__60=60;
-    public static final int T__55=55;
-    public static final int T__56=56;
-    public static final int T__57=57;
-    public static final int T__58=58;
-    public static final int T__51=51;
-    public static final int T__52=52;
-    public static final int T__53=53;
-    public static final int T__54=54;
-    public static final int T__107=107;
-    public static final int T__108=108;
-    public static final int T__109=109;
-    public static final int T__103=103;
-    public static final int T__59=59;
-    public static final int T__104=104;
-    public static final int T__105=105;
-    public static final int T__106=106;
-    public static final int T__111=111;
-    public static final int T__110=110;
-    public static final int T__113=113;
-    public static final int RULE_INT=13;
-    public static final int RULE_UNICODE_ESCAPE=16;
-    public static final int T__112=112;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int RULE_IDENTIFIER_PART=17;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int T__102=102;
-    public static final int T__101=101;
-    public static final int T__100=100;
-    public static final int RULE_SL_COMMENT=22;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int T__33=33;
-    public static final int T__34=34;
-    public static final int T__35=35;
-    public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
-    public static final int RULE_RICH_TEXT_INBETWEEN=8;
-    public static final int RULE_WS=23;
+    public static final int KW_Extends=10;
+    public static final int KW_Strictfp=32;
+    public static final int KW_Finally=105;
+    public static final int RULE_IDENTIFIER_START=120;
+    public static final int KW_Native=33;
+    public static final int KW_LessThanSignGreaterThanSign=76;
+    public static final int RULE_HEX=117;
+    public static final int KW_VerticalLineVerticalLine=66;
+    public static final int KW_Import=46;
+    public static final int KW_HyphenMinusEqualsSign=61;
+    public static final int KW_Static=29;
+    public static final int RULE_RICH_TEXT_END=115;
+    public static final int KW_HyphenMinusHyphenMinus=87;
+    public static final int KW_Class=6;
+    public static final int RULE_DECIMAL=119;
+    public static final int KW_Typeof=101;
+    public static final int KW_Do=96;
+    public static final int KW_FullStop=24;
+    public static final int KW_Annotation=16;
+    public static final int KW_LessThanSign=7;
+    public static final int KW_EqualsSignEqualsSignEqualsSign=70;
+    public static final int KW_Solidus=82;
+    public static final int KW_PlusSignEqualsSign=60;
+    public static final int KW_HyphenMinus=79;
+    public static final int KW_VerticalLine=90;
+    public static final int RULE_HEX_DIGIT=123;
+    public static final int KW_ExclamationMarkEqualsSign=69;
+    public static final int KW_ExclamationMarkEqualsSignEqualsSign=71;
+    public static final int RULE_IN_RICH_STRING=124;
+    public static final int KW_Semicolon=5;
+    public static final int RULE_ML_COMMENT=126;
+    public static final int KW_PercentSignEqualsSign=64;
+    public static final int KW_Ampersand=108;
+    public static final int KW_Final=31;
+    public static final int KW_Comma=8;
+    public static final int KW_As=85;
+    public static final int KW_PlusSign=78;
+    public static final int RULE_STRING=110;
+    public static final int KW_Default=49;
+    public static final int KW_ColonColon=88;
+    public static final int KW_RightCurlyBracket=13;
+    public static final int KW_LeftSquareBracket=58;
+    public static final int KW_New=23;
+    public static final int KW_FullStopFullStopFullStop=47;
+    public static final int KW_Create=41;
+    public static final int KW_False=98;
+    public static final int KW_PercentSign=83;
+    public static final int KW_Asterisk=80;
+    public static final int RULE_RICH_TEXT_START=112;
+    public static final int KW_ELSE=53;
+    public static final int RULE_RICH_TEXT=111;
+    public static final int KW_Super=97;
+    public static final int KW_Def=39;
+    public static final int KW_EqualsSignGreaterThanSign=19;
+    public static final int KW_QuestionMarkColon=77;
+    public static final int KW_Colon=42;
+    public static final int KW_FullStopFullStop=75;
+    public static final int KW_Implements=11;
+    public static final int KW_If=91;
+    public static final int KW_Protected=27;
+    public static final int KW_Transient=36;
+    public static final int KW_EqualsSignEqualsSign=68;
+    public static final int KW_While=95;
+    public static final int KW_HyphenMinusGreaterThanSign=73;
+    public static final int KW_FOR=50;
+    public static final int KW_AFTER=43;
+    public static final int KW_AsteriskEqualsSign=62;
+    public static final int RULE_UNICODE_ESCAPE=121;
+    public static final int RULE_INT=118;
+    public static final int KW_Dispatch=30;
+    public static final int KW_IF=52;
+    public static final int KW_EqualsSign=20;
+    public static final int KW_FullStopFullStopLessThanSign=74;
+    public static final int KW_NumberSign=57;
+    public static final int KW_Throws=22;
+    public static final int KW_ENDFOR=51;
+    public static final int RULE_IDENTIFIER_PART=122;
+    public static final int KW_Else=92;
+    public static final int KW_Override=40;
+    public static final int KW_Public=25;
+    public static final int KW_AsteriskAsterisk=81;
+    public static final int KW_Volatile=34;
+    public static final int KW_Throw=102;
+    public static final int RULE_SL_COMMENT=127;
+    public static final int KW_GreaterThanSign=9;
+    public static final int KW_Package=4;
+    public static final int KW_Catch=106;
+    public static final int KW_Private=26;
+    public static final int KW_ExclamationMark=84;
+    public static final int KW_For=94;
+    public static final int KW_Extension=21;
+    public static final int KW_RightSquareBracket=59;
+    public static final int KW_Var=38;
+    public static final int KW_GreaterThanSignEqualsSign=65;
+    public static final int KW_ELSEIF=55;
+    public static final int KW_LeftCurlyBracket=12;
+    public static final int KW_Null=100;
+    public static final int KW_RightParenthesis=18;
+    public static final int KW_QuestionMark=107;
+    public static final int KW_QuestionMarkFullStop=89;
+    public static final int KW_BEFORE=44;
+    public static final int RULE_RICH_TEXT_INBETWEEN=113;
+    public static final int KW_Return=103;
+    public static final int KW_SEPARATOR=45;
+    public static final int KW_ENDIF=54;
+    public static final int KW_Switch=48;
+    public static final int KW_AmpersandAmpersand=67;
+    public static final int RULE_WS=128;
+    public static final int KW_Interface=14;
+    public static final int KW_Val=37;
+    public static final int KW_Case=93;
+    public static final int KW_Try=104;
+    public static final int KW_Instanceof=72;
 
     // delegates
     // delegators
@@ -153,13 +153,13 @@ public class PsiInternalXtendLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g"; }
 
-    // $ANTLR start "T__25"
-    public final void mT__25() throws RecognitionException {
+    // $ANTLR start "KW_Package"
+    public final void mKW_Package() throws RecognitionException {
         try {
-            int _type = T__25;
+            int _type = KW_Package;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:11:7: ( 'package' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:11:9: 'package'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:11:12: ( 'package' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:11:14: 'package'
             {
             match("package"); 
 
@@ -172,15 +172,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__25"
+    // $ANTLR end "KW_Package"
 
-    // $ANTLR start "T__26"
-    public final void mT__26() throws RecognitionException {
+    // $ANTLR start "KW_Semicolon"
+    public final void mKW_Semicolon() throws RecognitionException {
         try {
-            int _type = T__26;
+            int _type = KW_Semicolon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:12:7: ( ';' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:12:9: ';'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:12:14: ( ';' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:12:16: ';'
             {
             match(';'); 
 
@@ -192,15 +192,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__26"
+    // $ANTLR end "KW_Semicolon"
 
-    // $ANTLR start "T__27"
-    public final void mT__27() throws RecognitionException {
+    // $ANTLR start "KW_Class"
+    public final void mKW_Class() throws RecognitionException {
         try {
-            int _type = T__27;
+            int _type = KW_Class;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:13:7: ( 'class' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:13:9: 'class'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:13:10: ( 'class' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:13:12: 'class'
             {
             match("class"); 
 
@@ -213,15 +213,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__27"
+    // $ANTLR end "KW_Class"
 
-    // $ANTLR start "T__28"
-    public final void mT__28() throws RecognitionException {
+    // $ANTLR start "KW_LessThanSign"
+    public final void mKW_LessThanSign() throws RecognitionException {
         try {
-            int _type = T__28;
+            int _type = KW_LessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:14:7: ( '<' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:14:9: '<'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:14:17: ( '<' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:14:19: '<'
             {
             match('<'); 
 
@@ -233,15 +233,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__28"
+    // $ANTLR end "KW_LessThanSign"
 
-    // $ANTLR start "T__29"
-    public final void mT__29() throws RecognitionException {
+    // $ANTLR start "KW_Comma"
+    public final void mKW_Comma() throws RecognitionException {
         try {
-            int _type = T__29;
+            int _type = KW_Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:15:7: ( ',' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:15:9: ','
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:15:10: ( ',' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:15:12: ','
             {
             match(','); 
 
@@ -253,15 +253,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__29"
+    // $ANTLR end "KW_Comma"
 
-    // $ANTLR start "T__30"
-    public final void mT__30() throws RecognitionException {
+    // $ANTLR start "KW_GreaterThanSign"
+    public final void mKW_GreaterThanSign() throws RecognitionException {
         try {
-            int _type = T__30;
+            int _type = KW_GreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:16:7: ( '>' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:16:9: '>'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:16:20: ( '>' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:16:22: '>'
             {
             match('>'); 
 
@@ -273,15 +273,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__30"
+    // $ANTLR end "KW_GreaterThanSign"
 
-    // $ANTLR start "T__31"
-    public final void mT__31() throws RecognitionException {
+    // $ANTLR start "KW_Extends"
+    public final void mKW_Extends() throws RecognitionException {
         try {
-            int _type = T__31;
+            int _type = KW_Extends;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:17:7: ( 'extends' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:17:9: 'extends'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:17:12: ( 'extends' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:17:14: 'extends'
             {
             match("extends"); 
 
@@ -294,15 +294,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__31"
+    // $ANTLR end "KW_Extends"
 
-    // $ANTLR start "T__32"
-    public final void mT__32() throws RecognitionException {
+    // $ANTLR start "KW_Implements"
+    public final void mKW_Implements() throws RecognitionException {
         try {
-            int _type = T__32;
+            int _type = KW_Implements;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:18:7: ( 'implements' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:18:9: 'implements'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:18:15: ( 'implements' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:18:17: 'implements'
             {
             match("implements"); 
 
@@ -315,15 +315,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__32"
+    // $ANTLR end "KW_Implements"
 
-    // $ANTLR start "T__33"
-    public final void mT__33() throws RecognitionException {
+    // $ANTLR start "KW_LeftCurlyBracket"
+    public final void mKW_LeftCurlyBracket() throws RecognitionException {
         try {
-            int _type = T__33;
+            int _type = KW_LeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:19:7: ( '{' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:19:9: '{'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:19:21: ( '{' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:19:23: '{'
             {
             match('{'); 
 
@@ -335,15 +335,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__33"
+    // $ANTLR end "KW_LeftCurlyBracket"
 
-    // $ANTLR start "T__34"
-    public final void mT__34() throws RecognitionException {
+    // $ANTLR start "KW_RightCurlyBracket"
+    public final void mKW_RightCurlyBracket() throws RecognitionException {
         try {
-            int _type = T__34;
+            int _type = KW_RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:20:7: ( '}' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:20:9: '}'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:20:22: ( '}' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:20:24: '}'
             {
             match('}'); 
 
@@ -355,15 +355,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__34"
+    // $ANTLR end "KW_RightCurlyBracket"
 
-    // $ANTLR start "T__35"
-    public final void mT__35() throws RecognitionException {
+    // $ANTLR start "KW_Interface"
+    public final void mKW_Interface() throws RecognitionException {
         try {
-            int _type = T__35;
+            int _type = KW_Interface;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:21:7: ( 'interface' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:21:9: 'interface'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:21:14: ( 'interface' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:21:16: 'interface'
             {
             match("interface"); 
 
@@ -376,15 +376,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__35"
+    // $ANTLR end "KW_Interface"
 
-    // $ANTLR start "T__36"
-    public final void mT__36() throws RecognitionException {
+    // $ANTLR start "KW_Enum"
+    public final void mKW_Enum() throws RecognitionException {
         try {
-            int _type = T__36;
+            int _type = KW_Enum;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:22:7: ( 'enum' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:22:9: 'enum'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:22:9: ( 'enum' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:22:11: 'enum'
             {
             match("enum"); 
 
@@ -397,15 +397,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__36"
+    // $ANTLR end "KW_Enum"
 
-    // $ANTLR start "T__37"
-    public final void mT__37() throws RecognitionException {
+    // $ANTLR start "KW_Annotation"
+    public final void mKW_Annotation() throws RecognitionException {
         try {
-            int _type = T__37;
+            int _type = KW_Annotation;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:23:7: ( 'annotation' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:23:9: 'annotation'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:23:15: ( 'annotation' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:23:17: 'annotation'
             {
             match("annotation"); 
 
@@ -418,15 +418,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__37"
+    // $ANTLR end "KW_Annotation"
 
-    // $ANTLR start "T__38"
-    public final void mT__38() throws RecognitionException {
+    // $ANTLR start "KW_LeftParenthesis"
+    public final void mKW_LeftParenthesis() throws RecognitionException {
         try {
-            int _type = T__38;
+            int _type = KW_LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:24:7: ( '(' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:24:9: '('
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:24:20: ( '(' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:24:22: '('
             {
             match('('); 
 
@@ -438,15 +438,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__38"
+    // $ANTLR end "KW_LeftParenthesis"
 
-    // $ANTLR start "T__39"
-    public final void mT__39() throws RecognitionException {
+    // $ANTLR start "KW_RightParenthesis"
+    public final void mKW_RightParenthesis() throws RecognitionException {
         try {
-            int _type = T__39;
+            int _type = KW_RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:25:7: ( ')' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:25:9: ')'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:25:21: ( ')' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:25:23: ')'
             {
             match(')'); 
 
@@ -458,15 +458,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__39"
+    // $ANTLR end "KW_RightParenthesis"
 
-    // $ANTLR start "T__40"
-    public final void mT__40() throws RecognitionException {
+    // $ANTLR start "KW_EqualsSignGreaterThanSign"
+    public final void mKW_EqualsSignGreaterThanSign() throws RecognitionException {
         try {
-            int _type = T__40;
+            int _type = KW_EqualsSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:26:7: ( '=>' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:26:9: '=>'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:26:30: ( '=>' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:26:32: '=>'
             {
             match("=>"); 
 
@@ -479,15 +479,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__40"
+    // $ANTLR end "KW_EqualsSignGreaterThanSign"
 
-    // $ANTLR start "T__41"
-    public final void mT__41() throws RecognitionException {
+    // $ANTLR start "KW_EqualsSign"
+    public final void mKW_EqualsSign() throws RecognitionException {
         try {
-            int _type = T__41;
+            int _type = KW_EqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:27:7: ( '=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:27:9: '='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:27:15: ( '=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:27:17: '='
             {
             match('='); 
 
@@ -499,15 +499,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__41"
+    // $ANTLR end "KW_EqualsSign"
 
-    // $ANTLR start "T__42"
-    public final void mT__42() throws RecognitionException {
+    // $ANTLR start "KW_Extension"
+    public final void mKW_Extension() throws RecognitionException {
         try {
-            int _type = T__42;
+            int _type = KW_Extension;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:28:7: ( 'extension' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:28:9: 'extension'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:28:14: ( 'extension' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:28:16: 'extension'
             {
             match("extension"); 
 
@@ -520,15 +520,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__42"
+    // $ANTLR end "KW_Extension"
 
-    // $ANTLR start "T__43"
-    public final void mT__43() throws RecognitionException {
+    // $ANTLR start "KW_Throws"
+    public final void mKW_Throws() throws RecognitionException {
         try {
-            int _type = T__43;
+            int _type = KW_Throws;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:29:7: ( 'throws' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:29:9: 'throws'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:29:11: ( 'throws' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:29:13: 'throws'
             {
             match("throws"); 
 
@@ -541,15 +541,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__43"
+    // $ANTLR end "KW_Throws"
 
-    // $ANTLR start "T__44"
-    public final void mT__44() throws RecognitionException {
+    // $ANTLR start "KW_New"
+    public final void mKW_New() throws RecognitionException {
         try {
-            int _type = T__44;
+            int _type = KW_New;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:30:7: ( 'new' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:30:9: 'new'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:30:8: ( 'new' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:30:10: 'new'
             {
             match("new"); 
 
@@ -562,15 +562,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__44"
+    // $ANTLR end "KW_New"
 
-    // $ANTLR start "T__45"
-    public final void mT__45() throws RecognitionException {
+    // $ANTLR start "KW_FullStop"
+    public final void mKW_FullStop() throws RecognitionException {
         try {
-            int _type = T__45;
+            int _type = KW_FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:31:7: ( '.' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:31:9: '.'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:31:13: ( '.' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:31:15: '.'
             {
             match('.'); 
 
@@ -582,15 +582,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__45"
+    // $ANTLR end "KW_FullStop"
 
-    // $ANTLR start "T__46"
-    public final void mT__46() throws RecognitionException {
+    // $ANTLR start "KW_Public"
+    public final void mKW_Public() throws RecognitionException {
         try {
-            int _type = T__46;
+            int _type = KW_Public;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:32:7: ( 'public' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:32:9: 'public'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:32:11: ( 'public' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:32:13: 'public'
             {
             match("public"); 
 
@@ -603,15 +603,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__46"
+    // $ANTLR end "KW_Public"
 
-    // $ANTLR start "T__47"
-    public final void mT__47() throws RecognitionException {
+    // $ANTLR start "KW_Private"
+    public final void mKW_Private() throws RecognitionException {
         try {
-            int _type = T__47;
+            int _type = KW_Private;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:33:7: ( 'private' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:33:9: 'private'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:33:12: ( 'private' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:33:14: 'private'
             {
             match("private"); 
 
@@ -624,15 +624,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__47"
+    // $ANTLR end "KW_Private"
 
-    // $ANTLR start "T__48"
-    public final void mT__48() throws RecognitionException {
+    // $ANTLR start "KW_Protected"
+    public final void mKW_Protected() throws RecognitionException {
         try {
-            int _type = T__48;
+            int _type = KW_Protected;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:34:7: ( 'protected' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:34:9: 'protected'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:34:14: ( 'protected' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:34:16: 'protected'
             {
             match("protected"); 
 
@@ -645,15 +645,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__48"
+    // $ANTLR end "KW_Protected"
 
-    // $ANTLR start "T__49"
-    public final void mT__49() throws RecognitionException {
+    // $ANTLR start "KW_Abstract"
+    public final void mKW_Abstract() throws RecognitionException {
         try {
-            int _type = T__49;
+            int _type = KW_Abstract;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:35:7: ( 'abstract' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:35:9: 'abstract'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:35:13: ( 'abstract' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:35:15: 'abstract'
             {
             match("abstract"); 
 
@@ -666,15 +666,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__49"
+    // $ANTLR end "KW_Abstract"
 
-    // $ANTLR start "T__50"
-    public final void mT__50() throws RecognitionException {
+    // $ANTLR start "KW_Static"
+    public final void mKW_Static() throws RecognitionException {
         try {
-            int _type = T__50;
+            int _type = KW_Static;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:36:7: ( 'static' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:36:9: 'static'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:36:11: ( 'static' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:36:13: 'static'
             {
             match("static"); 
 
@@ -687,15 +687,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__50"
+    // $ANTLR end "KW_Static"
 
-    // $ANTLR start "T__51"
-    public final void mT__51() throws RecognitionException {
+    // $ANTLR start "KW_Dispatch"
+    public final void mKW_Dispatch() throws RecognitionException {
         try {
-            int _type = T__51;
+            int _type = KW_Dispatch;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:37:7: ( 'dispatch' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:37:9: 'dispatch'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:37:13: ( 'dispatch' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:37:15: 'dispatch'
             {
             match("dispatch"); 
 
@@ -708,15 +708,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__51"
+    // $ANTLR end "KW_Dispatch"
 
-    // $ANTLR start "T__52"
-    public final void mT__52() throws RecognitionException {
+    // $ANTLR start "KW_Final"
+    public final void mKW_Final() throws RecognitionException {
         try {
-            int _type = T__52;
+            int _type = KW_Final;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:38:7: ( 'final' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:38:9: 'final'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:38:10: ( 'final' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:38:12: 'final'
             {
             match("final"); 
 
@@ -729,15 +729,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__52"
+    // $ANTLR end "KW_Final"
 
-    // $ANTLR start "T__53"
-    public final void mT__53() throws RecognitionException {
+    // $ANTLR start "KW_Strictfp"
+    public final void mKW_Strictfp() throws RecognitionException {
         try {
-            int _type = T__53;
+            int _type = KW_Strictfp;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:39:7: ( 'strictfp' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:39:9: 'strictfp'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:39:13: ( 'strictfp' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:39:15: 'strictfp'
             {
             match("strictfp"); 
 
@@ -750,15 +750,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__53"
+    // $ANTLR end "KW_Strictfp"
 
-    // $ANTLR start "T__54"
-    public final void mT__54() throws RecognitionException {
+    // $ANTLR start "KW_Native"
+    public final void mKW_Native() throws RecognitionException {
         try {
-            int _type = T__54;
+            int _type = KW_Native;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:40:7: ( 'native' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:40:9: 'native'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:40:11: ( 'native' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:40:13: 'native'
             {
             match("native"); 
 
@@ -771,15 +771,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__54"
+    // $ANTLR end "KW_Native"
 
-    // $ANTLR start "T__55"
-    public final void mT__55() throws RecognitionException {
+    // $ANTLR start "KW_Volatile"
+    public final void mKW_Volatile() throws RecognitionException {
         try {
-            int _type = T__55;
+            int _type = KW_Volatile;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:41:7: ( 'volatile' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:41:9: 'volatile'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:41:13: ( 'volatile' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:41:15: 'volatile'
             {
             match("volatile"); 
 
@@ -792,15 +792,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__55"
+    // $ANTLR end "KW_Volatile"
 
-    // $ANTLR start "T__56"
-    public final void mT__56() throws RecognitionException {
+    // $ANTLR start "KW_Synchronized"
+    public final void mKW_Synchronized() throws RecognitionException {
         try {
-            int _type = T__56;
+            int _type = KW_Synchronized;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:42:7: ( 'synchronized' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:42:9: 'synchronized'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:42:17: ( 'synchronized' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:42:19: 'synchronized'
             {
             match("synchronized"); 
 
@@ -813,15 +813,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__56"
+    // $ANTLR end "KW_Synchronized"
 
-    // $ANTLR start "T__57"
-    public final void mT__57() throws RecognitionException {
+    // $ANTLR start "KW_Transient"
+    public final void mKW_Transient() throws RecognitionException {
         try {
-            int _type = T__57;
+            int _type = KW_Transient;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:43:7: ( 'transient' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:43:9: 'transient'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:43:14: ( 'transient' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:43:16: 'transient'
             {
             match("transient"); 
 
@@ -834,15 +834,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__57"
+    // $ANTLR end "KW_Transient"
 
-    // $ANTLR start "T__58"
-    public final void mT__58() throws RecognitionException {
+    // $ANTLR start "KW_Val"
+    public final void mKW_Val() throws RecognitionException {
         try {
-            int _type = T__58;
+            int _type = KW_Val;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:44:7: ( 'val' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:44:9: 'val'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:44:8: ( 'val' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:44:10: 'val'
             {
             match("val"); 
 
@@ -855,15 +855,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__58"
+    // $ANTLR end "KW_Val"
 
-    // $ANTLR start "T__59"
-    public final void mT__59() throws RecognitionException {
+    // $ANTLR start "KW_Var"
+    public final void mKW_Var() throws RecognitionException {
         try {
-            int _type = T__59;
+            int _type = KW_Var;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:45:7: ( 'var' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:45:9: 'var'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:45:8: ( 'var' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:45:10: 'var'
             {
             match("var"); 
 
@@ -876,15 +876,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__59"
+    // $ANTLR end "KW_Var"
 
-    // $ANTLR start "T__60"
-    public final void mT__60() throws RecognitionException {
+    // $ANTLR start "KW_Def"
+    public final void mKW_Def() throws RecognitionException {
         try {
-            int _type = T__60;
+            int _type = KW_Def;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:46:7: ( 'def' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:46:9: 'def'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:46:8: ( 'def' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:46:10: 'def'
             {
             match("def"); 
 
@@ -897,15 +897,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__60"
+    // $ANTLR end "KW_Def"
 
-    // $ANTLR start "T__61"
-    public final void mT__61() throws RecognitionException {
+    // $ANTLR start "KW_Override"
+    public final void mKW_Override() throws RecognitionException {
         try {
-            int _type = T__61;
+            int _type = KW_Override;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:47:7: ( 'override' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:47:9: 'override'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:47:13: ( 'override' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:47:15: 'override'
             {
             match("override"); 
 
@@ -918,15 +918,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__61"
+    // $ANTLR end "KW_Override"
 
-    // $ANTLR start "T__62"
-    public final void mT__62() throws RecognitionException {
+    // $ANTLR start "KW_Create"
+    public final void mKW_Create() throws RecognitionException {
         try {
-            int _type = T__62;
+            int _type = KW_Create;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:48:7: ( 'create' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:48:9: 'create'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:48:11: ( 'create' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:48:13: 'create'
             {
             match("create"); 
 
@@ -939,15 +939,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__62"
+    // $ANTLR end "KW_Create"
 
-    // $ANTLR start "T__63"
-    public final void mT__63() throws RecognitionException {
+    // $ANTLR start "KW_Colon"
+    public final void mKW_Colon() throws RecognitionException {
         try {
-            int _type = T__63;
+            int _type = KW_Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:49:7: ( ':' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:49:9: ':'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:49:10: ( ':' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:49:12: ':'
             {
             match(':'); 
 
@@ -959,15 +959,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__63"
+    // $ANTLR end "KW_Colon"
 
-    // $ANTLR start "T__64"
-    public final void mT__64() throws RecognitionException {
+    // $ANTLR start "KW_AFTER"
+    public final void mKW_AFTER() throws RecognitionException {
         try {
-            int _type = T__64;
+            int _type = KW_AFTER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:50:7: ( 'AFTER' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:50:9: 'AFTER'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:50:10: ( 'AFTER' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:50:12: 'AFTER'
             {
             match("AFTER"); 
 
@@ -980,15 +980,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__64"
+    // $ANTLR end "KW_AFTER"
 
-    // $ANTLR start "T__65"
-    public final void mT__65() throws RecognitionException {
+    // $ANTLR start "KW_BEFORE"
+    public final void mKW_BEFORE() throws RecognitionException {
         try {
-            int _type = T__65;
+            int _type = KW_BEFORE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:51:7: ( 'BEFORE' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:51:9: 'BEFORE'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:51:11: ( 'BEFORE' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:51:13: 'BEFORE'
             {
             match("BEFORE"); 
 
@@ -1001,15 +1001,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__65"
+    // $ANTLR end "KW_BEFORE"
 
-    // $ANTLR start "T__66"
-    public final void mT__66() throws RecognitionException {
+    // $ANTLR start "KW_SEPARATOR"
+    public final void mKW_SEPARATOR() throws RecognitionException {
         try {
-            int _type = T__66;
+            int _type = KW_SEPARATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:52:7: ( 'SEPARATOR' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:52:9: 'SEPARATOR'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:52:14: ( 'SEPARATOR' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:52:16: 'SEPARATOR'
             {
             match("SEPARATOR"); 
 
@@ -1022,15 +1022,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__66"
+    // $ANTLR end "KW_SEPARATOR"
 
-    // $ANTLR start "T__67"
-    public final void mT__67() throws RecognitionException {
+    // $ANTLR start "KW_Import"
+    public final void mKW_Import() throws RecognitionException {
         try {
-            int _type = T__67;
+            int _type = KW_Import;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:53:7: ( 'import' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:53:9: 'import'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:53:11: ( 'import' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:53:13: 'import'
             {
             match("import"); 
 
@@ -1043,15 +1043,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__67"
+    // $ANTLR end "KW_Import"
 
-    // $ANTLR start "T__68"
-    public final void mT__68() throws RecognitionException {
+    // $ANTLR start "KW_FullStopFullStopFullStop"
+    public final void mKW_FullStopFullStopFullStop() throws RecognitionException {
         try {
-            int _type = T__68;
+            int _type = KW_FullStopFullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:54:7: ( '...' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:54:9: '...'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:54:29: ( '...' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:54:31: '...'
             {
             match("..."); 
 
@@ -1064,15 +1064,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__68"
+    // $ANTLR end "KW_FullStopFullStopFullStop"
 
-    // $ANTLR start "T__69"
-    public final void mT__69() throws RecognitionException {
+    // $ANTLR start "KW_Switch"
+    public final void mKW_Switch() throws RecognitionException {
         try {
-            int _type = T__69;
+            int _type = KW_Switch;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:55:7: ( 'switch' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:55:9: 'switch'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:55:11: ( 'switch' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:55:13: 'switch'
             {
             match("switch"); 
 
@@ -1085,15 +1085,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__69"
+    // $ANTLR end "KW_Switch"
 
-    // $ANTLR start "T__70"
-    public final void mT__70() throws RecognitionException {
+    // $ANTLR start "KW_Default"
+    public final void mKW_Default() throws RecognitionException {
         try {
-            int _type = T__70;
+            int _type = KW_Default;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:56:7: ( 'default' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:56:9: 'default'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:56:12: ( 'default' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:56:14: 'default'
             {
             match("default"); 
 
@@ -1106,15 +1106,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__70"
+    // $ANTLR end "KW_Default"
 
-    // $ANTLR start "T__71"
-    public final void mT__71() throws RecognitionException {
+    // $ANTLR start "KW_FOR"
+    public final void mKW_FOR() throws RecognitionException {
         try {
-            int _type = T__71;
+            int _type = KW_FOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:57:7: ( 'FOR' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:57:9: 'FOR'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:57:8: ( 'FOR' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:57:10: 'FOR'
             {
             match("FOR"); 
 
@@ -1127,15 +1127,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__71"
+    // $ANTLR end "KW_FOR"
 
-    // $ANTLR start "T__72"
-    public final void mT__72() throws RecognitionException {
+    // $ANTLR start "KW_ENDFOR"
+    public final void mKW_ENDFOR() throws RecognitionException {
         try {
-            int _type = T__72;
+            int _type = KW_ENDFOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:58:7: ( 'ENDFOR' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:58:9: 'ENDFOR'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:58:11: ( 'ENDFOR' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:58:13: 'ENDFOR'
             {
             match("ENDFOR"); 
 
@@ -1148,12 +1148,12 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__72"
+    // $ANTLR end "KW_ENDFOR"
 
-    // $ANTLR start "T__73"
-    public final void mT__73() throws RecognitionException {
+    // $ANTLR start "KW_IF"
+    public final void mKW_IF() throws RecognitionException {
         try {
-            int _type = T__73;
+            int _type = KW_IF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:59:7: ( 'IF' )
             // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:59:9: 'IF'
@@ -1169,15 +1169,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__73"
+    // $ANTLR end "KW_IF"
 
-    // $ANTLR start "T__74"
-    public final void mT__74() throws RecognitionException {
+    // $ANTLR start "KW_ELSE"
+    public final void mKW_ELSE() throws RecognitionException {
         try {
-            int _type = T__74;
+            int _type = KW_ELSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:60:7: ( 'ELSE' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:60:9: 'ELSE'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:60:9: ( 'ELSE' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:60:11: 'ELSE'
             {
             match("ELSE"); 
 
@@ -1190,15 +1190,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__74"
+    // $ANTLR end "KW_ELSE"
 
-    // $ANTLR start "T__75"
-    public final void mT__75() throws RecognitionException {
+    // $ANTLR start "KW_ENDIF"
+    public final void mKW_ENDIF() throws RecognitionException {
         try {
-            int _type = T__75;
+            int _type = KW_ENDIF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:61:7: ( 'ENDIF' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:61:9: 'ENDIF'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:61:10: ( 'ENDIF' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:61:12: 'ENDIF'
             {
             match("ENDIF"); 
 
@@ -1211,15 +1211,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__75"
+    // $ANTLR end "KW_ENDIF"
 
-    // $ANTLR start "T__76"
-    public final void mT__76() throws RecognitionException {
+    // $ANTLR start "KW_ELSEIF"
+    public final void mKW_ELSEIF() throws RecognitionException {
         try {
-            int _type = T__76;
+            int _type = KW_ELSEIF;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:62:7: ( 'ELSEIF' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:62:9: 'ELSEIF'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:62:11: ( 'ELSEIF' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:62:13: 'ELSEIF'
             {
             match("ELSEIF"); 
 
@@ -1232,15 +1232,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__76"
+    // $ANTLR end "KW_ELSEIF"
 
-    // $ANTLR start "T__77"
-    public final void mT__77() throws RecognitionException {
+    // $ANTLR start "KW_CommercialAt"
+    public final void mKW_CommercialAt() throws RecognitionException {
         try {
-            int _type = T__77;
+            int _type = KW_CommercialAt;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:63:7: ( '@' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:63:9: '@'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:63:17: ( '@' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:63:19: '@'
             {
             match('@'); 
 
@@ -1252,15 +1252,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__77"
+    // $ANTLR end "KW_CommercialAt"
 
-    // $ANTLR start "T__78"
-    public final void mT__78() throws RecognitionException {
+    // $ANTLR start "KW_NumberSign"
+    public final void mKW_NumberSign() throws RecognitionException {
         try {
-            int _type = T__78;
+            int _type = KW_NumberSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:64:7: ( '#' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:64:9: '#'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:64:15: ( '#' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:64:17: '#'
             {
             match('#'); 
 
@@ -1272,15 +1272,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__78"
+    // $ANTLR end "KW_NumberSign"
 
-    // $ANTLR start "T__79"
-    public final void mT__79() throws RecognitionException {
+    // $ANTLR start "KW_LeftSquareBracket"
+    public final void mKW_LeftSquareBracket() throws RecognitionException {
         try {
-            int _type = T__79;
+            int _type = KW_LeftSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:65:7: ( '[' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:65:9: '['
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:65:22: ( '[' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:65:24: '['
             {
             match('['); 
 
@@ -1292,15 +1292,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__79"
+    // $ANTLR end "KW_LeftSquareBracket"
 
-    // $ANTLR start "T__80"
-    public final void mT__80() throws RecognitionException {
+    // $ANTLR start "KW_RightSquareBracket"
+    public final void mKW_RightSquareBracket() throws RecognitionException {
         try {
-            int _type = T__80;
+            int _type = KW_RightSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:66:7: ( ']' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:66:9: ']'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:66:23: ( ']' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:66:25: ']'
             {
             match(']'); 
 
@@ -1312,15 +1312,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__80"
+    // $ANTLR end "KW_RightSquareBracket"
 
-    // $ANTLR start "T__81"
-    public final void mT__81() throws RecognitionException {
+    // $ANTLR start "KW_PlusSignEqualsSign"
+    public final void mKW_PlusSignEqualsSign() throws RecognitionException {
         try {
-            int _type = T__81;
+            int _type = KW_PlusSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:67:7: ( '+=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:67:9: '+='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:67:23: ( '+=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:67:25: '+='
             {
             match("+="); 
 
@@ -1333,15 +1333,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__81"
+    // $ANTLR end "KW_PlusSignEqualsSign"
 
-    // $ANTLR start "T__82"
-    public final void mT__82() throws RecognitionException {
+    // $ANTLR start "KW_HyphenMinusEqualsSign"
+    public final void mKW_HyphenMinusEqualsSign() throws RecognitionException {
         try {
-            int _type = T__82;
+            int _type = KW_HyphenMinusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:68:7: ( '-=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:68:9: '-='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:68:26: ( '-=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:68:28: '-='
             {
             match("-="); 
 
@@ -1354,15 +1354,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__82"
+    // $ANTLR end "KW_HyphenMinusEqualsSign"
 
-    // $ANTLR start "T__83"
-    public final void mT__83() throws RecognitionException {
+    // $ANTLR start "KW_AsteriskEqualsSign"
+    public final void mKW_AsteriskEqualsSign() throws RecognitionException {
         try {
-            int _type = T__83;
+            int _type = KW_AsteriskEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:69:7: ( '*=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:69:9: '*='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:69:23: ( '*=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:69:25: '*='
             {
             match("*="); 
 
@@ -1375,15 +1375,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__83"
+    // $ANTLR end "KW_AsteriskEqualsSign"
 
-    // $ANTLR start "T__84"
-    public final void mT__84() throws RecognitionException {
+    // $ANTLR start "KW_SolidusEqualsSign"
+    public final void mKW_SolidusEqualsSign() throws RecognitionException {
         try {
-            int _type = T__84;
+            int _type = KW_SolidusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:70:7: ( '/=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:70:9: '/='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:70:22: ( '/=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:70:24: '/='
             {
             match("/="); 
 
@@ -1396,15 +1396,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__84"
+    // $ANTLR end "KW_SolidusEqualsSign"
 
-    // $ANTLR start "T__85"
-    public final void mT__85() throws RecognitionException {
+    // $ANTLR start "KW_PercentSignEqualsSign"
+    public final void mKW_PercentSignEqualsSign() throws RecognitionException {
         try {
-            int _type = T__85;
+            int _type = KW_PercentSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:71:7: ( '%=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:71:9: '%='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:71:26: ( '%=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:71:28: '%='
             {
             match("%="); 
 
@@ -1417,15 +1417,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__85"
+    // $ANTLR end "KW_PercentSignEqualsSign"
 
-    // $ANTLR start "T__86"
-    public final void mT__86() throws RecognitionException {
+    // $ANTLR start "KW_GreaterThanSignEqualsSign"
+    public final void mKW_GreaterThanSignEqualsSign() throws RecognitionException {
         try {
-            int _type = T__86;
+            int _type = KW_GreaterThanSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:72:7: ( '>=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:72:9: '>='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:72:30: ( '>=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:72:32: '>='
             {
             match(">="); 
 
@@ -1438,15 +1438,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__86"
+    // $ANTLR end "KW_GreaterThanSignEqualsSign"
 
-    // $ANTLR start "T__87"
-    public final void mT__87() throws RecognitionException {
+    // $ANTLR start "KW_VerticalLineVerticalLine"
+    public final void mKW_VerticalLineVerticalLine() throws RecognitionException {
         try {
-            int _type = T__87;
+            int _type = KW_VerticalLineVerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:73:7: ( '||' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:73:9: '||'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:73:29: ( '||' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:73:31: '||'
             {
             match("||"); 
 
@@ -1459,15 +1459,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__87"
+    // $ANTLR end "KW_VerticalLineVerticalLine"
 
-    // $ANTLR start "T__88"
-    public final void mT__88() throws RecognitionException {
+    // $ANTLR start "KW_AmpersandAmpersand"
+    public final void mKW_AmpersandAmpersand() throws RecognitionException {
         try {
-            int _type = T__88;
+            int _type = KW_AmpersandAmpersand;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:74:7: ( '&&' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:74:9: '&&'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:74:23: ( '&&' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:74:25: '&&'
             {
             match("&&"); 
 
@@ -1480,15 +1480,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__88"
+    // $ANTLR end "KW_AmpersandAmpersand"
 
-    // $ANTLR start "T__89"
-    public final void mT__89() throws RecognitionException {
+    // $ANTLR start "KW_EqualsSignEqualsSign"
+    public final void mKW_EqualsSignEqualsSign() throws RecognitionException {
         try {
-            int _type = T__89;
+            int _type = KW_EqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:75:7: ( '==' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:75:9: '=='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:75:25: ( '==' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:75:27: '=='
             {
             match("=="); 
 
@@ -1501,15 +1501,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__89"
+    // $ANTLR end "KW_EqualsSignEqualsSign"
 
-    // $ANTLR start "T__90"
-    public final void mT__90() throws RecognitionException {
+    // $ANTLR start "KW_ExclamationMarkEqualsSign"
+    public final void mKW_ExclamationMarkEqualsSign() throws RecognitionException {
         try {
-            int _type = T__90;
+            int _type = KW_ExclamationMarkEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:76:7: ( '!=' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:76:9: '!='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:76:30: ( '!=' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:76:32: '!='
             {
             match("!="); 
 
@@ -1522,15 +1522,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__90"
+    // $ANTLR end "KW_ExclamationMarkEqualsSign"
 
-    // $ANTLR start "T__91"
-    public final void mT__91() throws RecognitionException {
+    // $ANTLR start "KW_EqualsSignEqualsSignEqualsSign"
+    public final void mKW_EqualsSignEqualsSignEqualsSign() throws RecognitionException {
         try {
-            int _type = T__91;
+            int _type = KW_EqualsSignEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:77:7: ( '===' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:77:9: '==='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:77:35: ( '===' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:77:37: '==='
             {
             match("==="); 
 
@@ -1543,15 +1543,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__91"
+    // $ANTLR end "KW_EqualsSignEqualsSignEqualsSign"
 
-    // $ANTLR start "T__92"
-    public final void mT__92() throws RecognitionException {
+    // $ANTLR start "KW_ExclamationMarkEqualsSignEqualsSign"
+    public final void mKW_ExclamationMarkEqualsSignEqualsSign() throws RecognitionException {
         try {
-            int _type = T__92;
+            int _type = KW_ExclamationMarkEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:78:7: ( '!==' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:78:9: '!=='
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:78:40: ( '!==' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:78:42: '!=='
             {
             match("!=="); 
 
@@ -1564,15 +1564,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__92"
+    // $ANTLR end "KW_ExclamationMarkEqualsSignEqualsSign"
 
-    // $ANTLR start "T__93"
-    public final void mT__93() throws RecognitionException {
+    // $ANTLR start "KW_Instanceof"
+    public final void mKW_Instanceof() throws RecognitionException {
         try {
-            int _type = T__93;
+            int _type = KW_Instanceof;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:79:7: ( 'instanceof' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:79:9: 'instanceof'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:79:15: ( 'instanceof' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:79:17: 'instanceof'
             {
             match("instanceof"); 
 
@@ -1585,15 +1585,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__93"
+    // $ANTLR end "KW_Instanceof"
 
-    // $ANTLR start "T__94"
-    public final void mT__94() throws RecognitionException {
+    // $ANTLR start "KW_HyphenMinusGreaterThanSign"
+    public final void mKW_HyphenMinusGreaterThanSign() throws RecognitionException {
         try {
-            int _type = T__94;
+            int _type = KW_HyphenMinusGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:80:7: ( '->' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:80:9: '->'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:80:31: ( '->' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:80:33: '->'
             {
             match("->"); 
 
@@ -1606,15 +1606,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__94"
+    // $ANTLR end "KW_HyphenMinusGreaterThanSign"
 
-    // $ANTLR start "T__95"
-    public final void mT__95() throws RecognitionException {
+    // $ANTLR start "KW_FullStopFullStopLessThanSign"
+    public final void mKW_FullStopFullStopLessThanSign() throws RecognitionException {
         try {
-            int _type = T__95;
+            int _type = KW_FullStopFullStopLessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:81:7: ( '..<' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:81:9: '..<'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:81:33: ( '..<' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:81:35: '..<'
             {
             match("..<"); 
 
@@ -1627,15 +1627,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__95"
+    // $ANTLR end "KW_FullStopFullStopLessThanSign"
 
-    // $ANTLR start "T__96"
-    public final void mT__96() throws RecognitionException {
+    // $ANTLR start "KW_FullStopFullStop"
+    public final void mKW_FullStopFullStop() throws RecognitionException {
         try {
-            int _type = T__96;
+            int _type = KW_FullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:82:7: ( '..' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:82:9: '..'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:82:21: ( '..' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:82:23: '..'
             {
             match(".."); 
 
@@ -1648,15 +1648,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__96"
+    // $ANTLR end "KW_FullStopFullStop"
 
-    // $ANTLR start "T__97"
-    public final void mT__97() throws RecognitionException {
+    // $ANTLR start "KW_LessThanSignGreaterThanSign"
+    public final void mKW_LessThanSignGreaterThanSign() throws RecognitionException {
         try {
-            int _type = T__97;
+            int _type = KW_LessThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:83:7: ( '<>' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:83:9: '<>'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:83:32: ( '<>' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:83:34: '<>'
             {
             match("<>"); 
 
@@ -1669,15 +1669,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__97"
+    // $ANTLR end "KW_LessThanSignGreaterThanSign"
 
-    // $ANTLR start "T__98"
-    public final void mT__98() throws RecognitionException {
+    // $ANTLR start "KW_QuestionMarkColon"
+    public final void mKW_QuestionMarkColon() throws RecognitionException {
         try {
-            int _type = T__98;
+            int _type = KW_QuestionMarkColon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:84:7: ( '?:' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:84:9: '?:'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:84:22: ( '?:' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:84:24: '?:'
             {
             match("?:"); 
 
@@ -1690,15 +1690,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__98"
+    // $ANTLR end "KW_QuestionMarkColon"
 
-    // $ANTLR start "T__99"
-    public final void mT__99() throws RecognitionException {
+    // $ANTLR start "KW_PlusSign"
+    public final void mKW_PlusSign() throws RecognitionException {
         try {
-            int _type = T__99;
+            int _type = KW_PlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:85:7: ( '+' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:85:9: '+'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:85:13: ( '+' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:85:15: '+'
             {
             match('+'); 
 
@@ -1710,15 +1710,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__99"
+    // $ANTLR end "KW_PlusSign"
 
-    // $ANTLR start "T__100"
-    public final void mT__100() throws RecognitionException {
+    // $ANTLR start "KW_HyphenMinus"
+    public final void mKW_HyphenMinus() throws RecognitionException {
         try {
-            int _type = T__100;
+            int _type = KW_HyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:86:8: ( '-' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:86:10: '-'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:86:16: ( '-' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:86:18: '-'
             {
             match('-'); 
 
@@ -1730,15 +1730,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__100"
+    // $ANTLR end "KW_HyphenMinus"
 
-    // $ANTLR start "T__101"
-    public final void mT__101() throws RecognitionException {
+    // $ANTLR start "KW_Asterisk"
+    public final void mKW_Asterisk() throws RecognitionException {
         try {
-            int _type = T__101;
+            int _type = KW_Asterisk;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:87:8: ( '*' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:87:10: '*'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:87:13: ( '*' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:87:15: '*'
             {
             match('*'); 
 
@@ -1750,15 +1750,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__101"
+    // $ANTLR end "KW_Asterisk"
 
-    // $ANTLR start "T__102"
-    public final void mT__102() throws RecognitionException {
+    // $ANTLR start "KW_AsteriskAsterisk"
+    public final void mKW_AsteriskAsterisk() throws RecognitionException {
         try {
-            int _type = T__102;
+            int _type = KW_AsteriskAsterisk;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:88:8: ( '**' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:88:10: '**'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:88:21: ( '**' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:88:23: '**'
             {
             match("**"); 
 
@@ -1771,15 +1771,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__102"
+    // $ANTLR end "KW_AsteriskAsterisk"
 
-    // $ANTLR start "T__103"
-    public final void mT__103() throws RecognitionException {
+    // $ANTLR start "KW_Solidus"
+    public final void mKW_Solidus() throws RecognitionException {
         try {
-            int _type = T__103;
+            int _type = KW_Solidus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:89:8: ( '/' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:89:10: '/'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:89:12: ( '/' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:89:14: '/'
             {
             match('/'); 
 
@@ -1791,15 +1791,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__103"
+    // $ANTLR end "KW_Solidus"
 
-    // $ANTLR start "T__104"
-    public final void mT__104() throws RecognitionException {
+    // $ANTLR start "KW_PercentSign"
+    public final void mKW_PercentSign() throws RecognitionException {
         try {
-            int _type = T__104;
+            int _type = KW_PercentSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:90:8: ( '%' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:90:10: '%'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:90:16: ( '%' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:90:18: '%'
             {
             match('%'); 
 
@@ -1811,15 +1811,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__104"
+    // $ANTLR end "KW_PercentSign"
 
-    // $ANTLR start "T__105"
-    public final void mT__105() throws RecognitionException {
+    // $ANTLR start "KW_ExclamationMark"
+    public final void mKW_ExclamationMark() throws RecognitionException {
         try {
-            int _type = T__105;
+            int _type = KW_ExclamationMark;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:91:8: ( '!' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:91:10: '!'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:91:20: ( '!' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:91:22: '!'
             {
             match('!'); 
 
@@ -1831,15 +1831,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__105"
+    // $ANTLR end "KW_ExclamationMark"
 
-    // $ANTLR start "T__106"
-    public final void mT__106() throws RecognitionException {
+    // $ANTLR start "KW_As"
+    public final void mKW_As() throws RecognitionException {
         try {
-            int _type = T__106;
+            int _type = KW_As;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:92:8: ( 'as' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:92:10: 'as'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:92:7: ( 'as' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:92:9: 'as'
             {
             match("as"); 
 
@@ -1852,15 +1852,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__106"
+    // $ANTLR end "KW_As"
 
-    // $ANTLR start "T__107"
-    public final void mT__107() throws RecognitionException {
+    // $ANTLR start "KW_PlusSignPlusSign"
+    public final void mKW_PlusSignPlusSign() throws RecognitionException {
         try {
-            int _type = T__107;
+            int _type = KW_PlusSignPlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:93:8: ( '++' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:93:10: '++'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:93:21: ( '++' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:93:23: '++'
             {
             match("++"); 
 
@@ -1873,15 +1873,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__107"
+    // $ANTLR end "KW_PlusSignPlusSign"
 
-    // $ANTLR start "T__108"
-    public final void mT__108() throws RecognitionException {
+    // $ANTLR start "KW_HyphenMinusHyphenMinus"
+    public final void mKW_HyphenMinusHyphenMinus() throws RecognitionException {
         try {
-            int _type = T__108;
+            int _type = KW_HyphenMinusHyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:94:8: ( '--' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:94:10: '--'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:94:27: ( '--' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:94:29: '--'
             {
             match("--"); 
 
@@ -1894,15 +1894,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__108"
+    // $ANTLR end "KW_HyphenMinusHyphenMinus"
 
-    // $ANTLR start "T__109"
-    public final void mT__109() throws RecognitionException {
+    // $ANTLR start "KW_ColonColon"
+    public final void mKW_ColonColon() throws RecognitionException {
         try {
-            int _type = T__109;
+            int _type = KW_ColonColon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:95:8: ( '::' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:95:10: '::'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:95:15: ( '::' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:95:17: '::'
             {
             match("::"); 
 
@@ -1915,15 +1915,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__109"
+    // $ANTLR end "KW_ColonColon"
 
-    // $ANTLR start "T__110"
-    public final void mT__110() throws RecognitionException {
+    // $ANTLR start "KW_QuestionMarkFullStop"
+    public final void mKW_QuestionMarkFullStop() throws RecognitionException {
         try {
-            int _type = T__110;
+            int _type = KW_QuestionMarkFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:96:8: ( '?.' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:96:10: '?.'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:96:25: ( '?.' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:96:27: '?.'
             {
             match("?."); 
 
@@ -1936,15 +1936,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__110"
+    // $ANTLR end "KW_QuestionMarkFullStop"
 
-    // $ANTLR start "T__111"
-    public final void mT__111() throws RecognitionException {
+    // $ANTLR start "KW_VerticalLine"
+    public final void mKW_VerticalLine() throws RecognitionException {
         try {
-            int _type = T__111;
+            int _type = KW_VerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:97:8: ( '|' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:97:10: '|'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:97:17: ( '|' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:97:19: '|'
             {
             match('|'); 
 
@@ -1956,15 +1956,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__111"
+    // $ANTLR end "KW_VerticalLine"
 
-    // $ANTLR start "T__112"
-    public final void mT__112() throws RecognitionException {
+    // $ANTLR start "KW_If"
+    public final void mKW_If() throws RecognitionException {
         try {
-            int _type = T__112;
+            int _type = KW_If;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:98:8: ( 'if' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:98:10: 'if'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:98:7: ( 'if' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:98:9: 'if'
             {
             match("if"); 
 
@@ -1977,15 +1977,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__112"
+    // $ANTLR end "KW_If"
 
-    // $ANTLR start "T__113"
-    public final void mT__113() throws RecognitionException {
+    // $ANTLR start "KW_Else"
+    public final void mKW_Else() throws RecognitionException {
         try {
-            int _type = T__113;
+            int _type = KW_Else;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:99:8: ( 'else' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:99:10: 'else'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:99:9: ( 'else' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:99:11: 'else'
             {
             match("else"); 
 
@@ -1998,15 +1998,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__113"
+    // $ANTLR end "KW_Else"
 
-    // $ANTLR start "T__114"
-    public final void mT__114() throws RecognitionException {
+    // $ANTLR start "KW_Case"
+    public final void mKW_Case() throws RecognitionException {
         try {
-            int _type = T__114;
+            int _type = KW_Case;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:100:8: ( 'case' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:100:10: 'case'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:100:9: ( 'case' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:100:11: 'case'
             {
             match("case"); 
 
@@ -2019,12 +2019,12 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__114"
+    // $ANTLR end "KW_Case"
 
-    // $ANTLR start "T__115"
-    public final void mT__115() throws RecognitionException {
+    // $ANTLR start "KW_For"
+    public final void mKW_For() throws RecognitionException {
         try {
-            int _type = T__115;
+            int _type = KW_For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:101:8: ( 'for' )
             // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:101:10: 'for'
@@ -2040,15 +2040,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__115"
+    // $ANTLR end "KW_For"
 
-    // $ANTLR start "T__116"
-    public final void mT__116() throws RecognitionException {
+    // $ANTLR start "KW_While"
+    public final void mKW_While() throws RecognitionException {
         try {
-            int _type = T__116;
+            int _type = KW_While;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:102:8: ( 'while' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:102:10: 'while'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:102:10: ( 'while' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:102:12: 'while'
             {
             match("while"); 
 
@@ -2061,15 +2061,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__116"
+    // $ANTLR end "KW_While"
 
-    // $ANTLR start "T__117"
-    public final void mT__117() throws RecognitionException {
+    // $ANTLR start "KW_Do"
+    public final void mKW_Do() throws RecognitionException {
         try {
-            int _type = T__117;
+            int _type = KW_Do;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:103:8: ( 'do' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:103:10: 'do'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:103:7: ( 'do' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:103:9: 'do'
             {
             match("do"); 
 
@@ -2082,15 +2082,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__117"
+    // $ANTLR end "KW_Do"
 
-    // $ANTLR start "T__118"
-    public final void mT__118() throws RecognitionException {
+    // $ANTLR start "KW_Super"
+    public final void mKW_Super() throws RecognitionException {
         try {
-            int _type = T__118;
+            int _type = KW_Super;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:104:8: ( 'super' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:104:10: 'super'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:104:10: ( 'super' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:104:12: 'super'
             {
             match("super"); 
 
@@ -2103,15 +2103,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__118"
+    // $ANTLR end "KW_Super"
 
-    // $ANTLR start "T__119"
-    public final void mT__119() throws RecognitionException {
+    // $ANTLR start "KW_False"
+    public final void mKW_False() throws RecognitionException {
         try {
-            int _type = T__119;
+            int _type = KW_False;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:105:8: ( 'false' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:105:10: 'false'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:105:10: ( 'false' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:105:12: 'false'
             {
             match("false"); 
 
@@ -2124,15 +2124,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__119"
+    // $ANTLR end "KW_False"
 
-    // $ANTLR start "T__120"
-    public final void mT__120() throws RecognitionException {
+    // $ANTLR start "KW_True"
+    public final void mKW_True() throws RecognitionException {
         try {
-            int _type = T__120;
+            int _type = KW_True;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:106:8: ( 'true' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:106:10: 'true'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:106:9: ( 'true' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:106:11: 'true'
             {
             match("true"); 
 
@@ -2145,15 +2145,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__120"
+    // $ANTLR end "KW_True"
 
-    // $ANTLR start "T__121"
-    public final void mT__121() throws RecognitionException {
+    // $ANTLR start "KW_Null"
+    public final void mKW_Null() throws RecognitionException {
         try {
-            int _type = T__121;
+            int _type = KW_Null;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:107:8: ( 'null' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:107:10: 'null'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:107:9: ( 'null' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:107:11: 'null'
             {
             match("null"); 
 
@@ -2166,15 +2166,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__121"
+    // $ANTLR end "KW_Null"
 
-    // $ANTLR start "T__122"
-    public final void mT__122() throws RecognitionException {
+    // $ANTLR start "KW_Typeof"
+    public final void mKW_Typeof() throws RecognitionException {
         try {
-            int _type = T__122;
+            int _type = KW_Typeof;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:108:8: ( 'typeof' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:108:10: 'typeof'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:108:11: ( 'typeof' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:108:13: 'typeof'
             {
             match("typeof"); 
 
@@ -2187,15 +2187,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__122"
+    // $ANTLR end "KW_Typeof"
 
-    // $ANTLR start "T__123"
-    public final void mT__123() throws RecognitionException {
+    // $ANTLR start "KW_Throw"
+    public final void mKW_Throw() throws RecognitionException {
         try {
-            int _type = T__123;
+            int _type = KW_Throw;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:109:8: ( 'throw' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:109:10: 'throw'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:109:10: ( 'throw' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:109:12: 'throw'
             {
             match("throw"); 
 
@@ -2208,15 +2208,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__123"
+    // $ANTLR end "KW_Throw"
 
-    // $ANTLR start "T__124"
-    public final void mT__124() throws RecognitionException {
+    // $ANTLR start "KW_Return"
+    public final void mKW_Return() throws RecognitionException {
         try {
-            int _type = T__124;
+            int _type = KW_Return;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:110:8: ( 'return' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:110:10: 'return'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:110:11: ( 'return' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:110:13: 'return'
             {
             match("return"); 
 
@@ -2229,12 +2229,12 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__124"
+    // $ANTLR end "KW_Return"
 
-    // $ANTLR start "T__125"
-    public final void mT__125() throws RecognitionException {
+    // $ANTLR start "KW_Try"
+    public final void mKW_Try() throws RecognitionException {
         try {
-            int _type = T__125;
+            int _type = KW_Try;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:111:8: ( 'try' )
             // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:111:10: 'try'
@@ -2250,15 +2250,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__125"
+    // $ANTLR end "KW_Try"
 
-    // $ANTLR start "T__126"
-    public final void mT__126() throws RecognitionException {
+    // $ANTLR start "KW_Finally"
+    public final void mKW_Finally() throws RecognitionException {
         try {
-            int _type = T__126;
+            int _type = KW_Finally;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:112:8: ( 'finally' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:112:10: 'finally'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:112:12: ( 'finally' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:112:14: 'finally'
             {
             match("finally"); 
 
@@ -2271,15 +2271,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__126"
+    // $ANTLR end "KW_Finally"
 
-    // $ANTLR start "T__127"
-    public final void mT__127() throws RecognitionException {
+    // $ANTLR start "KW_Catch"
+    public final void mKW_Catch() throws RecognitionException {
         try {
-            int _type = T__127;
+            int _type = KW_Catch;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:113:8: ( 'catch' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:113:10: 'catch'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:113:10: ( 'catch' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:113:12: 'catch'
             {
             match("catch"); 
 
@@ -2292,15 +2292,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__127"
+    // $ANTLR end "KW_Catch"
 
-    // $ANTLR start "T__128"
-    public final void mT__128() throws RecognitionException {
+    // $ANTLR start "KW_QuestionMark"
+    public final void mKW_QuestionMark() throws RecognitionException {
         try {
-            int _type = T__128;
+            int _type = KW_QuestionMark;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:114:8: ( '?' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:114:10: '?'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:114:17: ( '?' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:114:19: '?'
             {
             match('?'); 
 
@@ -2312,15 +2312,15 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__128"
+    // $ANTLR end "KW_QuestionMark"
 
-    // $ANTLR start "T__129"
-    public final void mT__129() throws RecognitionException {
+    // $ANTLR start "KW_Ampersand"
+    public final void mKW_Ampersand() throws RecognitionException {
         try {
-            int _type = T__129;
+            int _type = KW_Ampersand;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:115:8: ( '&' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:115:10: '&'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:115:14: ( '&' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:115:16: '&'
             {
             match('&'); 
 
@@ -2332,17 +2332,17 @@ public class PsiInternalXtendLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__129"
+    // $ANTLR end "KW_Ampersand"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:9: ( ( '^' )? ( RULE_IDENTIFIER_START | RULE_UNICODE_ESCAPE ) ( RULE_IDENTIFIER_PART | RULE_UNICODE_ESCAPE )* )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:11: ( '^' )? ( RULE_IDENTIFIER_START | RULE_UNICODE_ESCAPE ) ( RULE_IDENTIFIER_PART | RULE_UNICODE_ESCAPE )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:9: ( ( '^' )? ( RULE_IDENTIFIER_START | RULE_UNICODE_ESCAPE ) ( RULE_IDENTIFIER_PART | RULE_UNICODE_ESCAPE )* )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:11: ( '^' )? ( RULE_IDENTIFIER_START | RULE_UNICODE_ESCAPE ) ( RULE_IDENTIFIER_PART | RULE_UNICODE_ESCAPE )*
             {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:11: ( '^' )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -2351,7 +2351,7 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:11: '^'
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:11: '^'
                     {
                     match('^'); 
 
@@ -2360,7 +2360,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
             }
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:16: ( RULE_IDENTIFIER_START | RULE_UNICODE_ESCAPE )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:16: ( RULE_IDENTIFIER_START | RULE_UNICODE_ESCAPE )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -2378,14 +2378,14 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:17: RULE_IDENTIFIER_START
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:17: RULE_IDENTIFIER_START
                     {
                     mRULE_IDENTIFIER_START(); 
 
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:39: RULE_UNICODE_ESCAPE
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:39: RULE_UNICODE_ESCAPE
                     {
                     mRULE_UNICODE_ESCAPE(); 
 
@@ -2394,7 +2394,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
             }
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:60: ( RULE_IDENTIFIER_PART | RULE_UNICODE_ESCAPE )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:60: ( RULE_IDENTIFIER_PART | RULE_UNICODE_ESCAPE )*
             loop3:
             do {
                 int alt3=3;
@@ -2410,14 +2410,14 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:61: RULE_IDENTIFIER_PART
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:61: RULE_IDENTIFIER_PART
             	    {
             	    mRULE_IDENTIFIER_PART(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10506:82: RULE_UNICODE_ESCAPE
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10614:82: RULE_UNICODE_ESCAPE
             	    {
             	    mRULE_UNICODE_ESCAPE(); 
 
@@ -2443,8 +2443,8 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR start "RULE_HEX_DIGIT"
     public final void mRULE_HEX_DIGIT() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10508:25: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10508:27: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10616:25: ( ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10616:27: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||(input.LA(1)>='a' && input.LA(1)<='f') ) {
                 input.consume();
@@ -2467,12 +2467,12 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR start "RULE_UNICODE_ESCAPE"
     public final void mRULE_UNICODE_ESCAPE() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:30: ( '\\\\' 'u' ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )? )? )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:32: '\\\\' 'u' ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )? )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:30: ( '\\\\' 'u' ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )? )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:32: '\\\\' 'u' ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )? )?
             {
             match('\\'); 
             match('u'); 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:41: ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )? )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:41: ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )? )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2481,10 +2481,10 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:42: RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:42: RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )?
                     {
                     mRULE_HEX_DIGIT(); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:57: ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:57: ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )? )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2493,10 +2493,10 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:58: RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:58: RULE_HEX_DIGIT ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )?
                             {
                             mRULE_HEX_DIGIT(); 
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:73: ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:73: ( RULE_HEX_DIGIT ( RULE_HEX_DIGIT )? )?
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
@@ -2505,10 +2505,10 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             switch (alt5) {
                                 case 1 :
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:74: RULE_HEX_DIGIT ( RULE_HEX_DIGIT )?
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:74: RULE_HEX_DIGIT ( RULE_HEX_DIGIT )?
                                     {
                                     mRULE_HEX_DIGIT(); 
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:89: ( RULE_HEX_DIGIT )?
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:89: ( RULE_HEX_DIGIT )?
                                     int alt4=2;
                                     int LA4_0 = input.LA(1);
 
@@ -2517,7 +2517,7 @@ public class PsiInternalXtendLexer extends Lexer {
                                     }
                                     switch (alt4) {
                                         case 1 :
-                                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10510:89: RULE_HEX_DIGIT
+                                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10618:89: RULE_HEX_DIGIT
                                             {
                                             mRULE_HEX_DIGIT(); 
 
@@ -2558,12 +2558,12 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:16: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:18: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:16: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:18: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             {
             match("'''"); 
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:27: ( RULE_IN_RICH_STRING )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:27: ( RULE_IN_RICH_STRING )*
             loop8:
             do {
                 int alt8=2;
@@ -2594,7 +2594,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:27: RULE_IN_RICH_STRING
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:27: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2606,7 +2606,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:48: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:48: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2629,7 +2629,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 alt11=2;}
             switch (alt11) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:49: '\\'\\'\\''
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:49: '\\'\\'\\''
                     {
                     match("'''"); 
 
@@ -2637,9 +2637,9 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:58: ( '\\'' ( '\\'' )? )? EOF
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:58: ( '\\'' ( '\\'' )? )? EOF
                     {
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:58: ( '\\'' ( '\\'' )? )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:58: ( '\\'' ( '\\'' )? )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -2648,10 +2648,10 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:59: '\\'' ( '\\'' )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:59: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:64: ( '\\'' )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:64: ( '\\'' )?
                             int alt9=2;
                             int LA9_0 = input.LA(1);
 
@@ -2660,7 +2660,7 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             switch (alt9) {
                                 case 1 :
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10512:64: '\\''
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10620:64: '\\''
                                     {
                                     match('\''); 
 
@@ -2698,12 +2698,12 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT_START;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:22: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:24: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:22: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:24: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
             {
             match("'''"); 
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:33: ( RULE_IN_RICH_STRING )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:33: ( RULE_IN_RICH_STRING )*
             loop12:
             do {
                 int alt12=2;
@@ -2734,7 +2734,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:33: RULE_IN_RICH_STRING
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:33: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2746,7 +2746,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:54: ( '\\'' ( '\\'' )? )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:54: ( '\\'' ( '\\'' )? )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -2755,10 +2755,10 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:55: '\\'' ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:55: '\\'' ( '\\'' )?
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:60: ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:60: ( '\\'' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -2767,7 +2767,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10514:60: '\\''
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10622:60: '\\''
                             {
                             match('\''); 
 
@@ -2799,11 +2799,11 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:20: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:22: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:20: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:22: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             {
             match('\u00BB'); 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:31: ( RULE_IN_RICH_STRING )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:31: ( RULE_IN_RICH_STRING )*
             loop15:
             do {
                 int alt15=2;
@@ -2834,7 +2834,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt15) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:31: RULE_IN_RICH_STRING
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:31: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2846,7 +2846,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:52: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:52: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -2869,7 +2869,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 alt18=2;}
             switch (alt18) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:53: '\\'\\'\\''
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:53: '\\'\\'\\''
                     {
                     match("'''"); 
 
@@ -2877,9 +2877,9 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:62: ( '\\'' ( '\\'' )? )? EOF
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:62: ( '\\'' ( '\\'' )? )? EOF
                     {
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:62: ( '\\'' ( '\\'' )? )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:62: ( '\\'' ( '\\'' )? )?
                     int alt17=2;
                     int LA17_0 = input.LA(1);
 
@@ -2888,10 +2888,10 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt17) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:63: '\\'' ( '\\'' )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:63: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:68: ( '\\'' )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:68: ( '\\'' )?
                             int alt16=2;
                             int LA16_0 = input.LA(1);
 
@@ -2900,7 +2900,7 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             switch (alt16) {
                                 case 1 :
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10516:68: '\\''
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10624:68: '\\''
                                     {
                                     match('\''); 
 
@@ -2938,11 +2938,11 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_RICH_TEXT_INBETWEEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:26: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:28: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:26: ( '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:28: '\\u00BB' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
             {
             match('\u00BB'); 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:37: ( RULE_IN_RICH_STRING )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:37: ( RULE_IN_RICH_STRING )*
             loop19:
             do {
                 int alt19=2;
@@ -2973,7 +2973,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt19) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:37: RULE_IN_RICH_STRING
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:37: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -2985,7 +2985,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:58: ( '\\'' ( '\\'' )? )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:58: ( '\\'' ( '\\'' )? )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -2994,10 +2994,10 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt21) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:59: '\\'' ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:59: '\\'' ( '\\'' )?
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:64: ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:64: ( '\\'' )?
                     int alt20=2;
                     int LA20_0 = input.LA(1);
 
@@ -3006,7 +3006,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt20) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10518:64: '\\''
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10626:64: '\\''
                             {
                             match('\''); 
 
@@ -3038,12 +3038,12 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_COMMENT_RICH_TEXT_INBETWEEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:34: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )? )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:36: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:34: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:36: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
             {
             match("\u00AB\u00AB"); 
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:51: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:51: (~ ( ( '\\n' | '\\r' ) ) )*
             loop22:
             do {
                 int alt22=2;
@@ -3056,7 +3056,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt22) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:51: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:51: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3076,7 +3076,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:67: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:67: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB' )?
             int alt27=2;
             int LA27_0 = input.LA(1);
 
@@ -3085,9 +3085,9 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt27) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:68: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:68: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'' ( '\\'' )? )? '\\u00AB'
                     {
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:68: ( '\\r' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:68: ( '\\r' )?
                     int alt23=2;
                     int LA23_0 = input.LA(1);
 
@@ -3096,7 +3096,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt23) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:68: '\\r'
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:68: '\\r'
                             {
                             match('\r'); 
 
@@ -3106,7 +3106,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
 
                     match('\n'); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:79: ( RULE_IN_RICH_STRING )*
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:79: ( RULE_IN_RICH_STRING )*
                     loop24:
                     do {
                         int alt24=2;
@@ -3137,7 +3137,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                         switch (alt24) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:79: RULE_IN_RICH_STRING
+                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:79: RULE_IN_RICH_STRING
                     	    {
                     	    mRULE_IN_RICH_STRING(); 
 
@@ -3149,7 +3149,7 @@ public class PsiInternalXtendLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:100: ( '\\'' ( '\\'' )? )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:100: ( '\\'' ( '\\'' )? )?
                     int alt26=2;
                     int LA26_0 = input.LA(1);
 
@@ -3158,10 +3158,10 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt26) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:101: '\\'' ( '\\'' )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:101: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:106: ( '\\'' )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:106: ( '\\'' )?
                             int alt25=2;
                             int LA25_0 = input.LA(1);
 
@@ -3170,7 +3170,7 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             switch (alt25) {
                                 case 1 :
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10520:106: '\\''
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10628:106: '\\''
                                     {
                                     match('\''); 
 
@@ -3208,12 +3208,12 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_COMMENT_RICH_TEXT_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:28: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:30: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:28: ( '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:30: '\\u00AB\\u00AB' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
             {
             match("\u00AB\u00AB"); 
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:45: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:45: (~ ( ( '\\n' | '\\r' ) ) )*
             loop28:
             do {
                 int alt28=2;
@@ -3226,7 +3226,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt28) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:45: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:45: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3246,7 +3246,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:61: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:61: ( ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) | EOF )
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -3257,9 +3257,9 @@ public class PsiInternalXtendLexer extends Lexer {
                 alt34=2;}
             switch (alt34) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:62: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:62: ( '\\r' )? '\\n' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
                     {
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:62: ( '\\r' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:62: ( '\\r' )?
                     int alt29=2;
                     int LA29_0 = input.LA(1);
 
@@ -3268,7 +3268,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt29) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:62: '\\r'
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:62: '\\r'
                             {
                             match('\r'); 
 
@@ -3278,7 +3278,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
 
                     match('\n'); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:73: ( RULE_IN_RICH_STRING )*
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:73: ( RULE_IN_RICH_STRING )*
                     loop30:
                     do {
                         int alt30=2;
@@ -3309,7 +3309,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                         switch (alt30) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:73: RULE_IN_RICH_STRING
+                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:73: RULE_IN_RICH_STRING
                     	    {
                     	    mRULE_IN_RICH_STRING(); 
 
@@ -3321,7 +3321,7 @@ public class PsiInternalXtendLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:94: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:94: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
                     int alt33=2;
                     int LA33_0 = input.LA(1);
 
@@ -3344,7 +3344,7 @@ public class PsiInternalXtendLexer extends Lexer {
                         alt33=2;}
                     switch (alt33) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:95: '\\'\\'\\''
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:95: '\\'\\'\\''
                             {
                             match("'''"); 
 
@@ -3352,9 +3352,9 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:104: ( '\\'' ( '\\'' )? )? EOF
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:104: ( '\\'' ( '\\'' )? )? EOF
                             {
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:104: ( '\\'' ( '\\'' )? )?
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:104: ( '\\'' ( '\\'' )? )?
                             int alt32=2;
                             int LA32_0 = input.LA(1);
 
@@ -3363,10 +3363,10 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             switch (alt32) {
                                 case 1 :
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:105: '\\'' ( '\\'' )?
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:105: '\\'' ( '\\'' )?
                                     {
                                     match('\''); 
-                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:110: ( '\\'' )?
+                                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:110: ( '\\'' )?
                                     int alt31=2;
                                     int LA31_0 = input.LA(1);
 
@@ -3375,7 +3375,7 @@ public class PsiInternalXtendLexer extends Lexer {
                                     }
                                     switch (alt31) {
                                         case 1 :
-                                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:110: '\\''
+                                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:110: '\\''
                                             {
                                             match('\''); 
 
@@ -3401,7 +3401,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10522:123: EOF
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10630:123: EOF
                     {
                     match(EOF); 
 
@@ -3424,10 +3424,10 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR start "RULE_IN_RICH_STRING"
     public final void mRULE_IN_RICH_STRING() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10524:30: ( ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10524:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10632:30: ( ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10632:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
             {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10524:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10632:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
             int alt35=3;
             int LA35_0 = input.LA(1);
 
@@ -3458,7 +3458,7 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt35) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10524:33: '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10632:33: '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     match("''"); 
 
@@ -3475,7 +3475,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10524:59: '\\'' ~ ( ( '\\u00AB' | '\\'' ) )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10632:59: '\\'' ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     match('\''); 
                     if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
@@ -3491,7 +3491,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10524:83: ~ ( ( '\\u00AB' | '\\'' ) )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10632:83: ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
@@ -3520,8 +3520,8 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR start "RULE_IDENTIFIER_START"
     public final void mRULE_IDENTIFIER_START() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10526:32: ( ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' | '\\u00A2' .. '\\u00A5' | '\\u00AA' | '\\u00B5' | '\\u00BA' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u0236' | '\\u0250' .. '\\u02C1' | '\\u02C6' .. '\\u02D1' | '\\u02E0' .. '\\u02E4' | '\\u02EE' | '\\u037A' | '\\u0386' | '\\u0388' .. '\\u038A' | '\\u038C' | '\\u038E' .. '\\u03A1' | '\\u03A3' .. '\\u03CE' | '\\u03D0' .. '\\u03F5' | '\\u03F7' .. '\\u03FB' | '\\u0400' .. '\\u0481' | '\\u048A' .. '\\u04CE' | '\\u04D0' .. '\\u04F5' | '\\u04F8' .. '\\u04F9' | '\\u0500' .. '\\u050F' | '\\u0531' .. '\\u0556' | '\\u0559' | '\\u0561' .. '\\u0587' | '\\u05D0' .. '\\u05EA' | '\\u05F0' .. '\\u05F2' | '\\u0621' .. '\\u063A' | '\\u0640' .. '\\u064A' | '\\u066E' .. '\\u066F' | '\\u0671' .. '\\u06D3' | '\\u06D5' | '\\u06E5' .. '\\u06E6' | '\\u06EE' .. '\\u06EF' | '\\u06FA' .. '\\u06FC' | '\\u06FF' | '\\u0710' | '\\u0712' .. '\\u072F' | '\\u074D' .. '\\u074F' | '\\u0780' .. '\\u07A5' | '\\u07B1' | '\\u0904' .. '\\u0939' | '\\u093D' | '\\u0950' | '\\u0958' .. '\\u0961' | '\\u0985' .. '\\u098C' | '\\u098F' .. '\\u0990' | '\\u0993' .. '\\u09A8' | '\\u09AA' .. '\\u09B0' | '\\u09B2' | '\\u09B6' .. '\\u09B9' | '\\u09BD' | '\\u09DC' .. '\\u09DD' | '\\u09DF' .. '\\u09E1' | '\\u09F0' .. '\\u09F3' | '\\u0A05' .. '\\u0A0A' | '\\u0A0F' .. '\\u0A10' | '\\u0A13' .. '\\u0A28' | '\\u0A2A' .. '\\u0A30' | '\\u0A32' .. '\\u0A33' | '\\u0A35' .. '\\u0A36' | '\\u0A38' .. '\\u0A39' | '\\u0A59' .. '\\u0A5C' | '\\u0A5E' | '\\u0A72' .. '\\u0A74' | '\\u0A85' .. '\\u0A8D' | '\\u0A8F' .. '\\u0A91' | '\\u0A93' .. '\\u0AA8' | '\\u0AAA' .. '\\u0AB0' | '\\u0AB2' .. '\\u0AB3' | '\\u0AB5' .. '\\u0AB9' | '\\u0ABD' | '\\u0AD0' | '\\u0AE0' .. '\\u0AE1' | '\\u0AF1' | '\\u0B05' .. '\\u0B0C' | '\\u0B0F' .. '\\u0B10' | '\\u0B13' .. '\\u0B28' | '\\u0B2A' .. '\\u0B30' | '\\u0B32' .. '\\u0B33' | '\\u0B35' .. '\\u0B39' | '\\u0B3D' | '\\u0B5C' .. '\\u0B5D' | '\\u0B5F' .. '\\u0B61' | '\\u0B71' | '\\u0B83' | '\\u0B85' .. '\\u0B8A' | '\\u0B8E' .. '\\u0B90' | '\\u0B92' .. '\\u0B95' | '\\u0B99' .. '\\u0B9A' | '\\u0B9C' | '\\u0B9E' .. '\\u0B9F' | '\\u0BA3' .. '\\u0BA4' | '\\u0BA8' .. '\\u0BAA' | '\\u0BAE' .. '\\u0BB5' | '\\u0BB7' .. '\\u0BB9' | '\\u0BF9' | '\\u0C05' .. '\\u0C0C' | '\\u0C0E' .. '\\u0C10' | '\\u0C12' .. '\\u0C28' | '\\u0C2A' .. '\\u0C33' | '\\u0C35' .. '\\u0C39' | '\\u0C60' .. '\\u0C61' | '\\u0C85' .. '\\u0C8C' | '\\u0C8E' .. '\\u0C90' | '\\u0C92' .. '\\u0CA8' | '\\u0CAA' .. '\\u0CB3' | '\\u0CB5' .. '\\u0CB9' | '\\u0CBD' | '\\u0CDE' | '\\u0CE0' .. '\\u0CE1' | '\\u0D05' .. '\\u0D0C' | '\\u0D0E' .. '\\u0D10' | '\\u0D12' .. '\\u0D28' | '\\u0D2A' .. '\\u0D39' | '\\u0D60' .. '\\u0D61' | '\\u0D85' .. '\\u0D96' | '\\u0D9A' .. '\\u0DB1' | '\\u0DB3' .. '\\u0DBB' | '\\u0DBD' | '\\u0DC0' .. '\\u0DC6' | '\\u0E01' .. '\\u0E30' | '\\u0E32' .. '\\u0E33' | '\\u0E3F' .. '\\u0E46' | '\\u0E81' .. '\\u0E82' | '\\u0E84' | '\\u0E87' .. '\\u0E88' | '\\u0E8A' | '\\u0E8D' | '\\u0E94' .. '\\u0E97' | '\\u0E99' .. '\\u0E9F' | '\\u0EA1' .. '\\u0EA3' | '\\u0EA5' | '\\u0EA7' | '\\u0EAA' .. '\\u0EAB' | '\\u0EAD' .. '\\u0EB0' | '\\u0EB2' .. '\\u0EB3' | '\\u0EBD' | '\\u0EC0' .. '\\u0EC4' | '\\u0EC6' | '\\u0EDC' .. '\\u0EDD' | '\\u0F00' | '\\u0F40' .. '\\u0F47' | '\\u0F49' .. '\\u0F6A' | '\\u0F88' .. '\\u0F8B' | '\\u1000' .. '\\u1021' | '\\u1023' .. '\\u1027' | '\\u1029' .. '\\u102A' | '\\u1050' .. '\\u1055' | '\\u10A0' .. '\\u10C5' | '\\u10D0' .. '\\u10F8' | '\\u1100' .. '\\u1159' | '\\u115F' .. '\\u11A2' | '\\u11A8' .. '\\u11F9' | '\\u1200' .. '\\u1206' | '\\u1208' .. '\\u1246' | '\\u1248' | '\\u124A' .. '\\u124D' | '\\u1250' .. '\\u1256' | '\\u1258' | '\\u125A' .. '\\u125D' | '\\u1260' .. '\\u1286' | '\\u1288' | '\\u128A' .. '\\u128D' | '\\u1290' .. '\\u12AE' | '\\u12B0' | '\\u12B2' .. '\\u12B5' | '\\u12B8' .. '\\u12BE' | '\\u12C0' | '\\u12C2' .. '\\u12C5' | '\\u12C8' .. '\\u12CE' | '\\u12D0' .. '\\u12D6' | '\\u12D8' .. '\\u12EE' | '\\u12F0' .. '\\u130E' | '\\u1310' | '\\u1312' .. '\\u1315' | '\\u1318' .. '\\u131E' | '\\u1320' .. '\\u1346' | '\\u1348' .. '\\u135A' | '\\u13A0' .. '\\u13F4' | '\\u1401' .. '\\u166C' | '\\u166F' .. '\\u1676' | '\\u1681' .. '\\u169A' | '\\u16A0' .. '\\u16EA' | '\\u16EE' .. '\\u16F0' | '\\u1700' .. '\\u170C' | '\\u170E' .. '\\u1711' | '\\u1720' .. '\\u1731' | '\\u1740' .. '\\u1751' | '\\u1760' .. '\\u176C' | '\\u176E' .. '\\u1770' | '\\u1780' .. '\\u17B3' | '\\u17D7' | '\\u17DB' .. '\\u17DC' | '\\u1820' .. '\\u1877' | '\\u1880' .. '\\u18A8' | '\\u1900' .. '\\u191C' | '\\u1950' .. '\\u196D' | '\\u1970' .. '\\u1974' | '\\u1D00' .. '\\u1D6B' | '\\u1E00' .. '\\u1E9B' | '\\u1EA0' .. '\\u1EF9' | '\\u1F00' .. '\\u1F15' | '\\u1F18' .. '\\u1F1D' | '\\u1F20' .. '\\u1F45' | '\\u1F48' .. '\\u1F4D' | '\\u1F50' .. '\\u1F57' | '\\u1F59' | '\\u1F5B' | '\\u1F5D' | '\\u1F5F' .. '\\u1F7D' | '\\u1F80' .. '\\u1FB4' | '\\u1FB6' .. '\\u1FBC' | '\\u1FBE' | '\\u1FC2' .. '\\u1FC4' | '\\u1FC6' .. '\\u1FCC' | '\\u1FD0' .. '\\u1FD3' | '\\u1FD6' .. '\\u1FDB' | '\\u1FE0' .. '\\u1FEC' | '\\u1FF2' .. '\\u1FF4' | '\\u1FF6' .. '\\u1FFC' | '\\u203F' .. '\\u2040' | '\\u2054' | '\\u2071' | '\\u207F' | '\\u20A0' .. '\\u20B1' | '\\u2102' | '\\u2107' | '\\u210A' .. '\\u2113' | '\\u2115' | '\\u2119' .. '\\u211D' | '\\u2124' | '\\u2126' | '\\u2128' | '\\u212A' .. '\\u212D' | '\\u212F' .. '\\u2131' | '\\u2133' .. '\\u2139' | '\\u213D' .. '\\u213F' | '\\u2145' .. '\\u2149' | '\\u2160' .. '\\u2183' | '\\u3005' .. '\\u3007' | '\\u3021' .. '\\u3029' | '\\u3031' .. '\\u3035' | '\\u3038' .. '\\u303C' | '\\u3041' .. '\\u3096' | '\\u309D' .. '\\u309F' | '\\u30A1' .. '\\u30FF' | '\\u3105' .. '\\u312C' | '\\u3131' .. '\\u318E' | '\\u31A0' .. '\\u31B7' | '\\u31F0' .. '\\u31FF' | '\\u3400' .. '\\u4DB5' | '\\u4E00' .. '\\u9FA5' | '\\uA000' .. '\\uA48C' | '\\uAC00' .. '\\uD7A3' | '\\uF900' .. '\\uFA2D' | '\\uFA30' .. '\\uFA6A' | '\\uFB00' .. '\\uFB06' | '\\uFB13' .. '\\uFB17' | '\\uFB1D' | '\\uFB1F' .. '\\uFB28' | '\\uFB2A' .. '\\uFB36' | '\\uFB38' .. '\\uFB3C' | '\\uFB3E' | '\\uFB40' .. '\\uFB41' | '\\uFB43' .. '\\uFB44' | '\\uFB46' .. '\\uFBB1' | '\\uFBD3' .. '\\uFD3D' | '\\uFD50' .. '\\uFD8F' | '\\uFD92' .. '\\uFDC7' | '\\uFDF0' .. '\\uFDFC' | '\\uFE33' .. '\\uFE34' | '\\uFE4D' .. '\\uFE4F' | '\\uFE69' | '\\uFE70' .. '\\uFE74' | '\\uFE76' .. '\\uFEFC' | '\\uFF04' | '\\uFF21' .. '\\uFF3A' | '\\uFF3F' | '\\uFF41' .. '\\uFF5A' | '\\uFF65' .. '\\uFFBE' | '\\uFFC2' .. '\\uFFC7' | '\\uFFCA' .. '\\uFFCF' | '\\uFFD2' .. '\\uFFD7' | '\\uFFDA' .. '\\uFFDC' | '\\uFFE0' .. '\\uFFE1' | '\\uFFE5' .. '\\uFFE6' ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10526:34: ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' | '\\u00A2' .. '\\u00A5' | '\\u00AA' | '\\u00B5' | '\\u00BA' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u0236' | '\\u0250' .. '\\u02C1' | '\\u02C6' .. '\\u02D1' | '\\u02E0' .. '\\u02E4' | '\\u02EE' | '\\u037A' | '\\u0386' | '\\u0388' .. '\\u038A' | '\\u038C' | '\\u038E' .. '\\u03A1' | '\\u03A3' .. '\\u03CE' | '\\u03D0' .. '\\u03F5' | '\\u03F7' .. '\\u03FB' | '\\u0400' .. '\\u0481' | '\\u048A' .. '\\u04CE' | '\\u04D0' .. '\\u04F5' | '\\u04F8' .. '\\u04F9' | '\\u0500' .. '\\u050F' | '\\u0531' .. '\\u0556' | '\\u0559' | '\\u0561' .. '\\u0587' | '\\u05D0' .. '\\u05EA' | '\\u05F0' .. '\\u05F2' | '\\u0621' .. '\\u063A' | '\\u0640' .. '\\u064A' | '\\u066E' .. '\\u066F' | '\\u0671' .. '\\u06D3' | '\\u06D5' | '\\u06E5' .. '\\u06E6' | '\\u06EE' .. '\\u06EF' | '\\u06FA' .. '\\u06FC' | '\\u06FF' | '\\u0710' | '\\u0712' .. '\\u072F' | '\\u074D' .. '\\u074F' | '\\u0780' .. '\\u07A5' | '\\u07B1' | '\\u0904' .. '\\u0939' | '\\u093D' | '\\u0950' | '\\u0958' .. '\\u0961' | '\\u0985' .. '\\u098C' | '\\u098F' .. '\\u0990' | '\\u0993' .. '\\u09A8' | '\\u09AA' .. '\\u09B0' | '\\u09B2' | '\\u09B6' .. '\\u09B9' | '\\u09BD' | '\\u09DC' .. '\\u09DD' | '\\u09DF' .. '\\u09E1' | '\\u09F0' .. '\\u09F3' | '\\u0A05' .. '\\u0A0A' | '\\u0A0F' .. '\\u0A10' | '\\u0A13' .. '\\u0A28' | '\\u0A2A' .. '\\u0A30' | '\\u0A32' .. '\\u0A33' | '\\u0A35' .. '\\u0A36' | '\\u0A38' .. '\\u0A39' | '\\u0A59' .. '\\u0A5C' | '\\u0A5E' | '\\u0A72' .. '\\u0A74' | '\\u0A85' .. '\\u0A8D' | '\\u0A8F' .. '\\u0A91' | '\\u0A93' .. '\\u0AA8' | '\\u0AAA' .. '\\u0AB0' | '\\u0AB2' .. '\\u0AB3' | '\\u0AB5' .. '\\u0AB9' | '\\u0ABD' | '\\u0AD0' | '\\u0AE0' .. '\\u0AE1' | '\\u0AF1' | '\\u0B05' .. '\\u0B0C' | '\\u0B0F' .. '\\u0B10' | '\\u0B13' .. '\\u0B28' | '\\u0B2A' .. '\\u0B30' | '\\u0B32' .. '\\u0B33' | '\\u0B35' .. '\\u0B39' | '\\u0B3D' | '\\u0B5C' .. '\\u0B5D' | '\\u0B5F' .. '\\u0B61' | '\\u0B71' | '\\u0B83' | '\\u0B85' .. '\\u0B8A' | '\\u0B8E' .. '\\u0B90' | '\\u0B92' .. '\\u0B95' | '\\u0B99' .. '\\u0B9A' | '\\u0B9C' | '\\u0B9E' .. '\\u0B9F' | '\\u0BA3' .. '\\u0BA4' | '\\u0BA8' .. '\\u0BAA' | '\\u0BAE' .. '\\u0BB5' | '\\u0BB7' .. '\\u0BB9' | '\\u0BF9' | '\\u0C05' .. '\\u0C0C' | '\\u0C0E' .. '\\u0C10' | '\\u0C12' .. '\\u0C28' | '\\u0C2A' .. '\\u0C33' | '\\u0C35' .. '\\u0C39' | '\\u0C60' .. '\\u0C61' | '\\u0C85' .. '\\u0C8C' | '\\u0C8E' .. '\\u0C90' | '\\u0C92' .. '\\u0CA8' | '\\u0CAA' .. '\\u0CB3' | '\\u0CB5' .. '\\u0CB9' | '\\u0CBD' | '\\u0CDE' | '\\u0CE0' .. '\\u0CE1' | '\\u0D05' .. '\\u0D0C' | '\\u0D0E' .. '\\u0D10' | '\\u0D12' .. '\\u0D28' | '\\u0D2A' .. '\\u0D39' | '\\u0D60' .. '\\u0D61' | '\\u0D85' .. '\\u0D96' | '\\u0D9A' .. '\\u0DB1' | '\\u0DB3' .. '\\u0DBB' | '\\u0DBD' | '\\u0DC0' .. '\\u0DC6' | '\\u0E01' .. '\\u0E30' | '\\u0E32' .. '\\u0E33' | '\\u0E3F' .. '\\u0E46' | '\\u0E81' .. '\\u0E82' | '\\u0E84' | '\\u0E87' .. '\\u0E88' | '\\u0E8A' | '\\u0E8D' | '\\u0E94' .. '\\u0E97' | '\\u0E99' .. '\\u0E9F' | '\\u0EA1' .. '\\u0EA3' | '\\u0EA5' | '\\u0EA7' | '\\u0EAA' .. '\\u0EAB' | '\\u0EAD' .. '\\u0EB0' | '\\u0EB2' .. '\\u0EB3' | '\\u0EBD' | '\\u0EC0' .. '\\u0EC4' | '\\u0EC6' | '\\u0EDC' .. '\\u0EDD' | '\\u0F00' | '\\u0F40' .. '\\u0F47' | '\\u0F49' .. '\\u0F6A' | '\\u0F88' .. '\\u0F8B' | '\\u1000' .. '\\u1021' | '\\u1023' .. '\\u1027' | '\\u1029' .. '\\u102A' | '\\u1050' .. '\\u1055' | '\\u10A0' .. '\\u10C5' | '\\u10D0' .. '\\u10F8' | '\\u1100' .. '\\u1159' | '\\u115F' .. '\\u11A2' | '\\u11A8' .. '\\u11F9' | '\\u1200' .. '\\u1206' | '\\u1208' .. '\\u1246' | '\\u1248' | '\\u124A' .. '\\u124D' | '\\u1250' .. '\\u1256' | '\\u1258' | '\\u125A' .. '\\u125D' | '\\u1260' .. '\\u1286' | '\\u1288' | '\\u128A' .. '\\u128D' | '\\u1290' .. '\\u12AE' | '\\u12B0' | '\\u12B2' .. '\\u12B5' | '\\u12B8' .. '\\u12BE' | '\\u12C0' | '\\u12C2' .. '\\u12C5' | '\\u12C8' .. '\\u12CE' | '\\u12D0' .. '\\u12D6' | '\\u12D8' .. '\\u12EE' | '\\u12F0' .. '\\u130E' | '\\u1310' | '\\u1312' .. '\\u1315' | '\\u1318' .. '\\u131E' | '\\u1320' .. '\\u1346' | '\\u1348' .. '\\u135A' | '\\u13A0' .. '\\u13F4' | '\\u1401' .. '\\u166C' | '\\u166F' .. '\\u1676' | '\\u1681' .. '\\u169A' | '\\u16A0' .. '\\u16EA' | '\\u16EE' .. '\\u16F0' | '\\u1700' .. '\\u170C' | '\\u170E' .. '\\u1711' | '\\u1720' .. '\\u1731' | '\\u1740' .. '\\u1751' | '\\u1760' .. '\\u176C' | '\\u176E' .. '\\u1770' | '\\u1780' .. '\\u17B3' | '\\u17D7' | '\\u17DB' .. '\\u17DC' | '\\u1820' .. '\\u1877' | '\\u1880' .. '\\u18A8' | '\\u1900' .. '\\u191C' | '\\u1950' .. '\\u196D' | '\\u1970' .. '\\u1974' | '\\u1D00' .. '\\u1D6B' | '\\u1E00' .. '\\u1E9B' | '\\u1EA0' .. '\\u1EF9' | '\\u1F00' .. '\\u1F15' | '\\u1F18' .. '\\u1F1D' | '\\u1F20' .. '\\u1F45' | '\\u1F48' .. '\\u1F4D' | '\\u1F50' .. '\\u1F57' | '\\u1F59' | '\\u1F5B' | '\\u1F5D' | '\\u1F5F' .. '\\u1F7D' | '\\u1F80' .. '\\u1FB4' | '\\u1FB6' .. '\\u1FBC' | '\\u1FBE' | '\\u1FC2' .. '\\u1FC4' | '\\u1FC6' .. '\\u1FCC' | '\\u1FD0' .. '\\u1FD3' | '\\u1FD6' .. '\\u1FDB' | '\\u1FE0' .. '\\u1FEC' | '\\u1FF2' .. '\\u1FF4' | '\\u1FF6' .. '\\u1FFC' | '\\u203F' .. '\\u2040' | '\\u2054' | '\\u2071' | '\\u207F' | '\\u20A0' .. '\\u20B1' | '\\u2102' | '\\u2107' | '\\u210A' .. '\\u2113' | '\\u2115' | '\\u2119' .. '\\u211D' | '\\u2124' | '\\u2126' | '\\u2128' | '\\u212A' .. '\\u212D' | '\\u212F' .. '\\u2131' | '\\u2133' .. '\\u2139' | '\\u213D' .. '\\u213F' | '\\u2145' .. '\\u2149' | '\\u2160' .. '\\u2183' | '\\u3005' .. '\\u3007' | '\\u3021' .. '\\u3029' | '\\u3031' .. '\\u3035' | '\\u3038' .. '\\u303C' | '\\u3041' .. '\\u3096' | '\\u309D' .. '\\u309F' | '\\u30A1' .. '\\u30FF' | '\\u3105' .. '\\u312C' | '\\u3131' .. '\\u318E' | '\\u31A0' .. '\\u31B7' | '\\u31F0' .. '\\u31FF' | '\\u3400' .. '\\u4DB5' | '\\u4E00' .. '\\u9FA5' | '\\uA000' .. '\\uA48C' | '\\uAC00' .. '\\uD7A3' | '\\uF900' .. '\\uFA2D' | '\\uFA30' .. '\\uFA6A' | '\\uFB00' .. '\\uFB06' | '\\uFB13' .. '\\uFB17' | '\\uFB1D' | '\\uFB1F' .. '\\uFB28' | '\\uFB2A' .. '\\uFB36' | '\\uFB38' .. '\\uFB3C' | '\\uFB3E' | '\\uFB40' .. '\\uFB41' | '\\uFB43' .. '\\uFB44' | '\\uFB46' .. '\\uFBB1' | '\\uFBD3' .. '\\uFD3D' | '\\uFD50' .. '\\uFD8F' | '\\uFD92' .. '\\uFDC7' | '\\uFDF0' .. '\\uFDFC' | '\\uFE33' .. '\\uFE34' | '\\uFE4D' .. '\\uFE4F' | '\\uFE69' | '\\uFE70' .. '\\uFE74' | '\\uFE76' .. '\\uFEFC' | '\\uFF04' | '\\uFF21' .. '\\uFF3A' | '\\uFF3F' | '\\uFF41' .. '\\uFF5A' | '\\uFF65' .. '\\uFFBE' | '\\uFFC2' .. '\\uFFC7' | '\\uFFCA' .. '\\uFFCF' | '\\uFFD2' .. '\\uFFD7' | '\\uFFDA' .. '\\uFFDC' | '\\uFFE0' .. '\\uFFE1' | '\\uFFE5' .. '\\uFFE6' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10634:32: ( ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' | '\\u00A2' .. '\\u00A5' | '\\u00AA' | '\\u00B5' | '\\u00BA' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u0236' | '\\u0250' .. '\\u02C1' | '\\u02C6' .. '\\u02D1' | '\\u02E0' .. '\\u02E4' | '\\u02EE' | '\\u037A' | '\\u0386' | '\\u0388' .. '\\u038A' | '\\u038C' | '\\u038E' .. '\\u03A1' | '\\u03A3' .. '\\u03CE' | '\\u03D0' .. '\\u03F5' | '\\u03F7' .. '\\u03FB' | '\\u0400' .. '\\u0481' | '\\u048A' .. '\\u04CE' | '\\u04D0' .. '\\u04F5' | '\\u04F8' .. '\\u04F9' | '\\u0500' .. '\\u050F' | '\\u0531' .. '\\u0556' | '\\u0559' | '\\u0561' .. '\\u0587' | '\\u05D0' .. '\\u05EA' | '\\u05F0' .. '\\u05F2' | '\\u0621' .. '\\u063A' | '\\u0640' .. '\\u064A' | '\\u066E' .. '\\u066F' | '\\u0671' .. '\\u06D3' | '\\u06D5' | '\\u06E5' .. '\\u06E6' | '\\u06EE' .. '\\u06EF' | '\\u06FA' .. '\\u06FC' | '\\u06FF' | '\\u0710' | '\\u0712' .. '\\u072F' | '\\u074D' .. '\\u074F' | '\\u0780' .. '\\u07A5' | '\\u07B1' | '\\u0904' .. '\\u0939' | '\\u093D' | '\\u0950' | '\\u0958' .. '\\u0961' | '\\u0985' .. '\\u098C' | '\\u098F' .. '\\u0990' | '\\u0993' .. '\\u09A8' | '\\u09AA' .. '\\u09B0' | '\\u09B2' | '\\u09B6' .. '\\u09B9' | '\\u09BD' | '\\u09DC' .. '\\u09DD' | '\\u09DF' .. '\\u09E1' | '\\u09F0' .. '\\u09F3' | '\\u0A05' .. '\\u0A0A' | '\\u0A0F' .. '\\u0A10' | '\\u0A13' .. '\\u0A28' | '\\u0A2A' .. '\\u0A30' | '\\u0A32' .. '\\u0A33' | '\\u0A35' .. '\\u0A36' | '\\u0A38' .. '\\u0A39' | '\\u0A59' .. '\\u0A5C' | '\\u0A5E' | '\\u0A72' .. '\\u0A74' | '\\u0A85' .. '\\u0A8D' | '\\u0A8F' .. '\\u0A91' | '\\u0A93' .. '\\u0AA8' | '\\u0AAA' .. '\\u0AB0' | '\\u0AB2' .. '\\u0AB3' | '\\u0AB5' .. '\\u0AB9' | '\\u0ABD' | '\\u0AD0' | '\\u0AE0' .. '\\u0AE1' | '\\u0AF1' | '\\u0B05' .. '\\u0B0C' | '\\u0B0F' .. '\\u0B10' | '\\u0B13' .. '\\u0B28' | '\\u0B2A' .. '\\u0B30' | '\\u0B32' .. '\\u0B33' | '\\u0B35' .. '\\u0B39' | '\\u0B3D' | '\\u0B5C' .. '\\u0B5D' | '\\u0B5F' .. '\\u0B61' | '\\u0B71' | '\\u0B83' | '\\u0B85' .. '\\u0B8A' | '\\u0B8E' .. '\\u0B90' | '\\u0B92' .. '\\u0B95' | '\\u0B99' .. '\\u0B9A' | '\\u0B9C' | '\\u0B9E' .. '\\u0B9F' | '\\u0BA3' .. '\\u0BA4' | '\\u0BA8' .. '\\u0BAA' | '\\u0BAE' .. '\\u0BB5' | '\\u0BB7' .. '\\u0BB9' | '\\u0BF9' | '\\u0C05' .. '\\u0C0C' | '\\u0C0E' .. '\\u0C10' | '\\u0C12' .. '\\u0C28' | '\\u0C2A' .. '\\u0C33' | '\\u0C35' .. '\\u0C39' | '\\u0C60' .. '\\u0C61' | '\\u0C85' .. '\\u0C8C' | '\\u0C8E' .. '\\u0C90' | '\\u0C92' .. '\\u0CA8' | '\\u0CAA' .. '\\u0CB3' | '\\u0CB5' .. '\\u0CB9' | '\\u0CBD' | '\\u0CDE' | '\\u0CE0' .. '\\u0CE1' | '\\u0D05' .. '\\u0D0C' | '\\u0D0E' .. '\\u0D10' | '\\u0D12' .. '\\u0D28' | '\\u0D2A' .. '\\u0D39' | '\\u0D60' .. '\\u0D61' | '\\u0D85' .. '\\u0D96' | '\\u0D9A' .. '\\u0DB1' | '\\u0DB3' .. '\\u0DBB' | '\\u0DBD' | '\\u0DC0' .. '\\u0DC6' | '\\u0E01' .. '\\u0E30' | '\\u0E32' .. '\\u0E33' | '\\u0E3F' .. '\\u0E46' | '\\u0E81' .. '\\u0E82' | '\\u0E84' | '\\u0E87' .. '\\u0E88' | '\\u0E8A' | '\\u0E8D' | '\\u0E94' .. '\\u0E97' | '\\u0E99' .. '\\u0E9F' | '\\u0EA1' .. '\\u0EA3' | '\\u0EA5' | '\\u0EA7' | '\\u0EAA' .. '\\u0EAB' | '\\u0EAD' .. '\\u0EB0' | '\\u0EB2' .. '\\u0EB3' | '\\u0EBD' | '\\u0EC0' .. '\\u0EC4' | '\\u0EC6' | '\\u0EDC' .. '\\u0EDD' | '\\u0F00' | '\\u0F40' .. '\\u0F47' | '\\u0F49' .. '\\u0F6A' | '\\u0F88' .. '\\u0F8B' | '\\u1000' .. '\\u1021' | '\\u1023' .. '\\u1027' | '\\u1029' .. '\\u102A' | '\\u1050' .. '\\u1055' | '\\u10A0' .. '\\u10C5' | '\\u10D0' .. '\\u10F8' | '\\u1100' .. '\\u1159' | '\\u115F' .. '\\u11A2' | '\\u11A8' .. '\\u11F9' | '\\u1200' .. '\\u1206' | '\\u1208' .. '\\u1246' | '\\u1248' | '\\u124A' .. '\\u124D' | '\\u1250' .. '\\u1256' | '\\u1258' | '\\u125A' .. '\\u125D' | '\\u1260' .. '\\u1286' | '\\u1288' | '\\u128A' .. '\\u128D' | '\\u1290' .. '\\u12AE' | '\\u12B0' | '\\u12B2' .. '\\u12B5' | '\\u12B8' .. '\\u12BE' | '\\u12C0' | '\\u12C2' .. '\\u12C5' | '\\u12C8' .. '\\u12CE' | '\\u12D0' .. '\\u12D6' | '\\u12D8' .. '\\u12EE' | '\\u12F0' .. '\\u130E' | '\\u1310' | '\\u1312' .. '\\u1315' | '\\u1318' .. '\\u131E' | '\\u1320' .. '\\u1346' | '\\u1348' .. '\\u135A' | '\\u13A0' .. '\\u13F4' | '\\u1401' .. '\\u166C' | '\\u166F' .. '\\u1676' | '\\u1681' .. '\\u169A' | '\\u16A0' .. '\\u16EA' | '\\u16EE' .. '\\u16F0' | '\\u1700' .. '\\u170C' | '\\u170E' .. '\\u1711' | '\\u1720' .. '\\u1731' | '\\u1740' .. '\\u1751' | '\\u1760' .. '\\u176C' | '\\u176E' .. '\\u1770' | '\\u1780' .. '\\u17B3' | '\\u17D7' | '\\u17DB' .. '\\u17DC' | '\\u1820' .. '\\u1877' | '\\u1880' .. '\\u18A8' | '\\u1900' .. '\\u191C' | '\\u1950' .. '\\u196D' | '\\u1970' .. '\\u1974' | '\\u1D00' .. '\\u1D6B' | '\\u1E00' .. '\\u1E9B' | '\\u1EA0' .. '\\u1EF9' | '\\u1F00' .. '\\u1F15' | '\\u1F18' .. '\\u1F1D' | '\\u1F20' .. '\\u1F45' | '\\u1F48' .. '\\u1F4D' | '\\u1F50' .. '\\u1F57' | '\\u1F59' | '\\u1F5B' | '\\u1F5D' | '\\u1F5F' .. '\\u1F7D' | '\\u1F80' .. '\\u1FB4' | '\\u1FB6' .. '\\u1FBC' | '\\u1FBE' | '\\u1FC2' .. '\\u1FC4' | '\\u1FC6' .. '\\u1FCC' | '\\u1FD0' .. '\\u1FD3' | '\\u1FD6' .. '\\u1FDB' | '\\u1FE0' .. '\\u1FEC' | '\\u1FF2' .. '\\u1FF4' | '\\u1FF6' .. '\\u1FFC' | '\\u203F' .. '\\u2040' | '\\u2054' | '\\u2071' | '\\u207F' | '\\u20A0' .. '\\u20B1' | '\\u2102' | '\\u2107' | '\\u210A' .. '\\u2113' | '\\u2115' | '\\u2119' .. '\\u211D' | '\\u2124' | '\\u2126' | '\\u2128' | '\\u212A' .. '\\u212D' | '\\u212F' .. '\\u2131' | '\\u2133' .. '\\u2139' | '\\u213D' .. '\\u213F' | '\\u2145' .. '\\u2149' | '\\u2160' .. '\\u2183' | '\\u3005' .. '\\u3007' | '\\u3021' .. '\\u3029' | '\\u3031' .. '\\u3035' | '\\u3038' .. '\\u303C' | '\\u3041' .. '\\u3096' | '\\u309D' .. '\\u309F' | '\\u30A1' .. '\\u30FF' | '\\u3105' .. '\\u312C' | '\\u3131' .. '\\u318E' | '\\u31A0' .. '\\u31B7' | '\\u31F0' .. '\\u31FF' | '\\u3400' .. '\\u4DB5' | '\\u4E00' .. '\\u9FA5' | '\\uA000' .. '\\uA48C' | '\\uAC00' .. '\\uD7A3' | '\\uF900' .. '\\uFA2D' | '\\uFA30' .. '\\uFA6A' | '\\uFB00' .. '\\uFB06' | '\\uFB13' .. '\\uFB17' | '\\uFB1D' | '\\uFB1F' .. '\\uFB28' | '\\uFB2A' .. '\\uFB36' | '\\uFB38' .. '\\uFB3C' | '\\uFB3E' | '\\uFB40' .. '\\uFB41' | '\\uFB43' .. '\\uFB44' | '\\uFB46' .. '\\uFBB1' | '\\uFBD3' .. '\\uFD3D' | '\\uFD50' .. '\\uFD8F' | '\\uFD92' .. '\\uFDC7' | '\\uFDF0' .. '\\uFDFC' | '\\uFE33' .. '\\uFE34' | '\\uFE4D' .. '\\uFE4F' | '\\uFE69' | '\\uFE70' .. '\\uFE74' | '\\uFE76' .. '\\uFEFC' | '\\uFF04' | '\\uFF21' .. '\\uFF3A' | '\\uFF3F' | '\\uFF41' .. '\\uFF5A' | '\\uFF65' .. '\\uFFBE' | '\\uFFC2' .. '\\uFFC7' | '\\uFFCA' .. '\\uFFCF' | '\\uFFD2' .. '\\uFFD7' | '\\uFFDA' .. '\\uFFDC' | '\\uFFE0' .. '\\uFFE1' | '\\uFFE5' .. '\\uFFE6' ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10634:34: ( '$' | 'A' .. 'Z' | '_' | 'a' .. 'z' | '\\u00A2' .. '\\u00A5' | '\\u00AA' | '\\u00B5' | '\\u00BA' | '\\u00C0' .. '\\u00D6' | '\\u00D8' .. '\\u00F6' | '\\u00F8' .. '\\u0236' | '\\u0250' .. '\\u02C1' | '\\u02C6' .. '\\u02D1' | '\\u02E0' .. '\\u02E4' | '\\u02EE' | '\\u037A' | '\\u0386' | '\\u0388' .. '\\u038A' | '\\u038C' | '\\u038E' .. '\\u03A1' | '\\u03A3' .. '\\u03CE' | '\\u03D0' .. '\\u03F5' | '\\u03F7' .. '\\u03FB' | '\\u0400' .. '\\u0481' | '\\u048A' .. '\\u04CE' | '\\u04D0' .. '\\u04F5' | '\\u04F8' .. '\\u04F9' | '\\u0500' .. '\\u050F' | '\\u0531' .. '\\u0556' | '\\u0559' | '\\u0561' .. '\\u0587' | '\\u05D0' .. '\\u05EA' | '\\u05F0' .. '\\u05F2' | '\\u0621' .. '\\u063A' | '\\u0640' .. '\\u064A' | '\\u066E' .. '\\u066F' | '\\u0671' .. '\\u06D3' | '\\u06D5' | '\\u06E5' .. '\\u06E6' | '\\u06EE' .. '\\u06EF' | '\\u06FA' .. '\\u06FC' | '\\u06FF' | '\\u0710' | '\\u0712' .. '\\u072F' | '\\u074D' .. '\\u074F' | '\\u0780' .. '\\u07A5' | '\\u07B1' | '\\u0904' .. '\\u0939' | '\\u093D' | '\\u0950' | '\\u0958' .. '\\u0961' | '\\u0985' .. '\\u098C' | '\\u098F' .. '\\u0990' | '\\u0993' .. '\\u09A8' | '\\u09AA' .. '\\u09B0' | '\\u09B2' | '\\u09B6' .. '\\u09B9' | '\\u09BD' | '\\u09DC' .. '\\u09DD' | '\\u09DF' .. '\\u09E1' | '\\u09F0' .. '\\u09F3' | '\\u0A05' .. '\\u0A0A' | '\\u0A0F' .. '\\u0A10' | '\\u0A13' .. '\\u0A28' | '\\u0A2A' .. '\\u0A30' | '\\u0A32' .. '\\u0A33' | '\\u0A35' .. '\\u0A36' | '\\u0A38' .. '\\u0A39' | '\\u0A59' .. '\\u0A5C' | '\\u0A5E' | '\\u0A72' .. '\\u0A74' | '\\u0A85' .. '\\u0A8D' | '\\u0A8F' .. '\\u0A91' | '\\u0A93' .. '\\u0AA8' | '\\u0AAA' .. '\\u0AB0' | '\\u0AB2' .. '\\u0AB3' | '\\u0AB5' .. '\\u0AB9' | '\\u0ABD' | '\\u0AD0' | '\\u0AE0' .. '\\u0AE1' | '\\u0AF1' | '\\u0B05' .. '\\u0B0C' | '\\u0B0F' .. '\\u0B10' | '\\u0B13' .. '\\u0B28' | '\\u0B2A' .. '\\u0B30' | '\\u0B32' .. '\\u0B33' | '\\u0B35' .. '\\u0B39' | '\\u0B3D' | '\\u0B5C' .. '\\u0B5D' | '\\u0B5F' .. '\\u0B61' | '\\u0B71' | '\\u0B83' | '\\u0B85' .. '\\u0B8A' | '\\u0B8E' .. '\\u0B90' | '\\u0B92' .. '\\u0B95' | '\\u0B99' .. '\\u0B9A' | '\\u0B9C' | '\\u0B9E' .. '\\u0B9F' | '\\u0BA3' .. '\\u0BA4' | '\\u0BA8' .. '\\u0BAA' | '\\u0BAE' .. '\\u0BB5' | '\\u0BB7' .. '\\u0BB9' | '\\u0BF9' | '\\u0C05' .. '\\u0C0C' | '\\u0C0E' .. '\\u0C10' | '\\u0C12' .. '\\u0C28' | '\\u0C2A' .. '\\u0C33' | '\\u0C35' .. '\\u0C39' | '\\u0C60' .. '\\u0C61' | '\\u0C85' .. '\\u0C8C' | '\\u0C8E' .. '\\u0C90' | '\\u0C92' .. '\\u0CA8' | '\\u0CAA' .. '\\u0CB3' | '\\u0CB5' .. '\\u0CB9' | '\\u0CBD' | '\\u0CDE' | '\\u0CE0' .. '\\u0CE1' | '\\u0D05' .. '\\u0D0C' | '\\u0D0E' .. '\\u0D10' | '\\u0D12' .. '\\u0D28' | '\\u0D2A' .. '\\u0D39' | '\\u0D60' .. '\\u0D61' | '\\u0D85' .. '\\u0D96' | '\\u0D9A' .. '\\u0DB1' | '\\u0DB3' .. '\\u0DBB' | '\\u0DBD' | '\\u0DC0' .. '\\u0DC6' | '\\u0E01' .. '\\u0E30' | '\\u0E32' .. '\\u0E33' | '\\u0E3F' .. '\\u0E46' | '\\u0E81' .. '\\u0E82' | '\\u0E84' | '\\u0E87' .. '\\u0E88' | '\\u0E8A' | '\\u0E8D' | '\\u0E94' .. '\\u0E97' | '\\u0E99' .. '\\u0E9F' | '\\u0EA1' .. '\\u0EA3' | '\\u0EA5' | '\\u0EA7' | '\\u0EAA' .. '\\u0EAB' | '\\u0EAD' .. '\\u0EB0' | '\\u0EB2' .. '\\u0EB3' | '\\u0EBD' | '\\u0EC0' .. '\\u0EC4' | '\\u0EC6' | '\\u0EDC' .. '\\u0EDD' | '\\u0F00' | '\\u0F40' .. '\\u0F47' | '\\u0F49' .. '\\u0F6A' | '\\u0F88' .. '\\u0F8B' | '\\u1000' .. '\\u1021' | '\\u1023' .. '\\u1027' | '\\u1029' .. '\\u102A' | '\\u1050' .. '\\u1055' | '\\u10A0' .. '\\u10C5' | '\\u10D0' .. '\\u10F8' | '\\u1100' .. '\\u1159' | '\\u115F' .. '\\u11A2' | '\\u11A8' .. '\\u11F9' | '\\u1200' .. '\\u1206' | '\\u1208' .. '\\u1246' | '\\u1248' | '\\u124A' .. '\\u124D' | '\\u1250' .. '\\u1256' | '\\u1258' | '\\u125A' .. '\\u125D' | '\\u1260' .. '\\u1286' | '\\u1288' | '\\u128A' .. '\\u128D' | '\\u1290' .. '\\u12AE' | '\\u12B0' | '\\u12B2' .. '\\u12B5' | '\\u12B8' .. '\\u12BE' | '\\u12C0' | '\\u12C2' .. '\\u12C5' | '\\u12C8' .. '\\u12CE' | '\\u12D0' .. '\\u12D6' | '\\u12D8' .. '\\u12EE' | '\\u12F0' .. '\\u130E' | '\\u1310' | '\\u1312' .. '\\u1315' | '\\u1318' .. '\\u131E' | '\\u1320' .. '\\u1346' | '\\u1348' .. '\\u135A' | '\\u13A0' .. '\\u13F4' | '\\u1401' .. '\\u166C' | '\\u166F' .. '\\u1676' | '\\u1681' .. '\\u169A' | '\\u16A0' .. '\\u16EA' | '\\u16EE' .. '\\u16F0' | '\\u1700' .. '\\u170C' | '\\u170E' .. '\\u1711' | '\\u1720' .. '\\u1731' | '\\u1740' .. '\\u1751' | '\\u1760' .. '\\u176C' | '\\u176E' .. '\\u1770' | '\\u1780' .. '\\u17B3' | '\\u17D7' | '\\u17DB' .. '\\u17DC' | '\\u1820' .. '\\u1877' | '\\u1880' .. '\\u18A8' | '\\u1900' .. '\\u191C' | '\\u1950' .. '\\u196D' | '\\u1970' .. '\\u1974' | '\\u1D00' .. '\\u1D6B' | '\\u1E00' .. '\\u1E9B' | '\\u1EA0' .. '\\u1EF9' | '\\u1F00' .. '\\u1F15' | '\\u1F18' .. '\\u1F1D' | '\\u1F20' .. '\\u1F45' | '\\u1F48' .. '\\u1F4D' | '\\u1F50' .. '\\u1F57' | '\\u1F59' | '\\u1F5B' | '\\u1F5D' | '\\u1F5F' .. '\\u1F7D' | '\\u1F80' .. '\\u1FB4' | '\\u1FB6' .. '\\u1FBC' | '\\u1FBE' | '\\u1FC2' .. '\\u1FC4' | '\\u1FC6' .. '\\u1FCC' | '\\u1FD0' .. '\\u1FD3' | '\\u1FD6' .. '\\u1FDB' | '\\u1FE0' .. '\\u1FEC' | '\\u1FF2' .. '\\u1FF4' | '\\u1FF6' .. '\\u1FFC' | '\\u203F' .. '\\u2040' | '\\u2054' | '\\u2071' | '\\u207F' | '\\u20A0' .. '\\u20B1' | '\\u2102' | '\\u2107' | '\\u210A' .. '\\u2113' | '\\u2115' | '\\u2119' .. '\\u211D' | '\\u2124' | '\\u2126' | '\\u2128' | '\\u212A' .. '\\u212D' | '\\u212F' .. '\\u2131' | '\\u2133' .. '\\u2139' | '\\u213D' .. '\\u213F' | '\\u2145' .. '\\u2149' | '\\u2160' .. '\\u2183' | '\\u3005' .. '\\u3007' | '\\u3021' .. '\\u3029' | '\\u3031' .. '\\u3035' | '\\u3038' .. '\\u303C' | '\\u3041' .. '\\u3096' | '\\u309D' .. '\\u309F' | '\\u30A1' .. '\\u30FF' | '\\u3105' .. '\\u312C' | '\\u3131' .. '\\u318E' | '\\u31A0' .. '\\u31B7' | '\\u31F0' .. '\\u31FF' | '\\u3400' .. '\\u4DB5' | '\\u4E00' .. '\\u9FA5' | '\\uA000' .. '\\uA48C' | '\\uAC00' .. '\\uD7A3' | '\\uF900' .. '\\uFA2D' | '\\uFA30' .. '\\uFA6A' | '\\uFB00' .. '\\uFB06' | '\\uFB13' .. '\\uFB17' | '\\uFB1D' | '\\uFB1F' .. '\\uFB28' | '\\uFB2A' .. '\\uFB36' | '\\uFB38' .. '\\uFB3C' | '\\uFB3E' | '\\uFB40' .. '\\uFB41' | '\\uFB43' .. '\\uFB44' | '\\uFB46' .. '\\uFBB1' | '\\uFBD3' .. '\\uFD3D' | '\\uFD50' .. '\\uFD8F' | '\\uFD92' .. '\\uFDC7' | '\\uFDF0' .. '\\uFDFC' | '\\uFE33' .. '\\uFE34' | '\\uFE4D' .. '\\uFE4F' | '\\uFE69' | '\\uFE70' .. '\\uFE74' | '\\uFE76' .. '\\uFEFC' | '\\uFF04' | '\\uFF21' .. '\\uFF3A' | '\\uFF3F' | '\\uFF41' .. '\\uFF5A' | '\\uFF65' .. '\\uFFBE' | '\\uFFC2' .. '\\uFFC7' | '\\uFFCA' .. '\\uFFCF' | '\\uFFD2' .. '\\uFFD7' | '\\uFFDA' .. '\\uFFDC' | '\\uFFE0' .. '\\uFFE1' | '\\uFFE5' .. '\\uFFE6' )
             {
             if ( input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u00A2' && input.LA(1)<='\u00A5')||input.LA(1)=='\u00AA'||input.LA(1)=='\u00B5'||input.LA(1)=='\u00BA'||(input.LA(1)>='\u00C0' && input.LA(1)<='\u00D6')||(input.LA(1)>='\u00D8' && input.LA(1)<='\u00F6')||(input.LA(1)>='\u00F8' && input.LA(1)<='\u0236')||(input.LA(1)>='\u0250' && input.LA(1)<='\u02C1')||(input.LA(1)>='\u02C6' && input.LA(1)<='\u02D1')||(input.LA(1)>='\u02E0' && input.LA(1)<='\u02E4')||input.LA(1)=='\u02EE'||input.LA(1)=='\u037A'||input.LA(1)=='\u0386'||(input.LA(1)>='\u0388' && input.LA(1)<='\u038A')||input.LA(1)=='\u038C'||(input.LA(1)>='\u038E' && input.LA(1)<='\u03A1')||(input.LA(1)>='\u03A3' && input.LA(1)<='\u03CE')||(input.LA(1)>='\u03D0' && input.LA(1)<='\u03F5')||(input.LA(1)>='\u03F7' && input.LA(1)<='\u03FB')||(input.LA(1)>='\u0400' && input.LA(1)<='\u0481')||(input.LA(1)>='\u048A' && input.LA(1)<='\u04CE')||(input.LA(1)>='\u04D0' && input.LA(1)<='\u04F5')||(input.LA(1)>='\u04F8' && input.LA(1)<='\u04F9')||(input.LA(1)>='\u0500' && input.LA(1)<='\u050F')||(input.LA(1)>='\u0531' && input.LA(1)<='\u0556')||input.LA(1)=='\u0559'||(input.LA(1)>='\u0561' && input.LA(1)<='\u0587')||(input.LA(1)>='\u05D0' && input.LA(1)<='\u05EA')||(input.LA(1)>='\u05F0' && input.LA(1)<='\u05F2')||(input.LA(1)>='\u0621' && input.LA(1)<='\u063A')||(input.LA(1)>='\u0640' && input.LA(1)<='\u064A')||(input.LA(1)>='\u066E' && input.LA(1)<='\u066F')||(input.LA(1)>='\u0671' && input.LA(1)<='\u06D3')||input.LA(1)=='\u06D5'||(input.LA(1)>='\u06E5' && input.LA(1)<='\u06E6')||(input.LA(1)>='\u06EE' && input.LA(1)<='\u06EF')||(input.LA(1)>='\u06FA' && input.LA(1)<='\u06FC')||input.LA(1)=='\u06FF'||input.LA(1)=='\u0710'||(input.LA(1)>='\u0712' && input.LA(1)<='\u072F')||(input.LA(1)>='\u074D' && input.LA(1)<='\u074F')||(input.LA(1)>='\u0780' && input.LA(1)<='\u07A5')||input.LA(1)=='\u07B1'||(input.LA(1)>='\u0904' && input.LA(1)<='\u0939')||input.LA(1)=='\u093D'||input.LA(1)=='\u0950'||(input.LA(1)>='\u0958' && input.LA(1)<='\u0961')||(input.LA(1)>='\u0985' && input.LA(1)<='\u098C')||(input.LA(1)>='\u098F' && input.LA(1)<='\u0990')||(input.LA(1)>='\u0993' && input.LA(1)<='\u09A8')||(input.LA(1)>='\u09AA' && input.LA(1)<='\u09B0')||input.LA(1)=='\u09B2'||(input.LA(1)>='\u09B6' && input.LA(1)<='\u09B9')||input.LA(1)=='\u09BD'||(input.LA(1)>='\u09DC' && input.LA(1)<='\u09DD')||(input.LA(1)>='\u09DF' && input.LA(1)<='\u09E1')||(input.LA(1)>='\u09F0' && input.LA(1)<='\u09F3')||(input.LA(1)>='\u0A05' && input.LA(1)<='\u0A0A')||(input.LA(1)>='\u0A0F' && input.LA(1)<='\u0A10')||(input.LA(1)>='\u0A13' && input.LA(1)<='\u0A28')||(input.LA(1)>='\u0A2A' && input.LA(1)<='\u0A30')||(input.LA(1)>='\u0A32' && input.LA(1)<='\u0A33')||(input.LA(1)>='\u0A35' && input.LA(1)<='\u0A36')||(input.LA(1)>='\u0A38' && input.LA(1)<='\u0A39')||(input.LA(1)>='\u0A59' && input.LA(1)<='\u0A5C')||input.LA(1)=='\u0A5E'||(input.LA(1)>='\u0A72' && input.LA(1)<='\u0A74')||(input.LA(1)>='\u0A85' && input.LA(1)<='\u0A8D')||(input.LA(1)>='\u0A8F' && input.LA(1)<='\u0A91')||(input.LA(1)>='\u0A93' && input.LA(1)<='\u0AA8')||(input.LA(1)>='\u0AAA' && input.LA(1)<='\u0AB0')||(input.LA(1)>='\u0AB2' && input.LA(1)<='\u0AB3')||(input.LA(1)>='\u0AB5' && input.LA(1)<='\u0AB9')||input.LA(1)=='\u0ABD'||input.LA(1)=='\u0AD0'||(input.LA(1)>='\u0AE0' && input.LA(1)<='\u0AE1')||input.LA(1)=='\u0AF1'||(input.LA(1)>='\u0B05' && input.LA(1)<='\u0B0C')||(input.LA(1)>='\u0B0F' && input.LA(1)<='\u0B10')||(input.LA(1)>='\u0B13' && input.LA(1)<='\u0B28')||(input.LA(1)>='\u0B2A' && input.LA(1)<='\u0B30')||(input.LA(1)>='\u0B32' && input.LA(1)<='\u0B33')||(input.LA(1)>='\u0B35' && input.LA(1)<='\u0B39')||input.LA(1)=='\u0B3D'||(input.LA(1)>='\u0B5C' && input.LA(1)<='\u0B5D')||(input.LA(1)>='\u0B5F' && input.LA(1)<='\u0B61')||input.LA(1)=='\u0B71'||input.LA(1)=='\u0B83'||(input.LA(1)>='\u0B85' && input.LA(1)<='\u0B8A')||(input.LA(1)>='\u0B8E' && input.LA(1)<='\u0B90')||(input.LA(1)>='\u0B92' && input.LA(1)<='\u0B95')||(input.LA(1)>='\u0B99' && input.LA(1)<='\u0B9A')||input.LA(1)=='\u0B9C'||(input.LA(1)>='\u0B9E' && input.LA(1)<='\u0B9F')||(input.LA(1)>='\u0BA3' && input.LA(1)<='\u0BA4')||(input.LA(1)>='\u0BA8' && input.LA(1)<='\u0BAA')||(input.LA(1)>='\u0BAE' && input.LA(1)<='\u0BB5')||(input.LA(1)>='\u0BB7' && input.LA(1)<='\u0BB9')||input.LA(1)=='\u0BF9'||(input.LA(1)>='\u0C05' && input.LA(1)<='\u0C0C')||(input.LA(1)>='\u0C0E' && input.LA(1)<='\u0C10')||(input.LA(1)>='\u0C12' && input.LA(1)<='\u0C28')||(input.LA(1)>='\u0C2A' && input.LA(1)<='\u0C33')||(input.LA(1)>='\u0C35' && input.LA(1)<='\u0C39')||(input.LA(1)>='\u0C60' && input.LA(1)<='\u0C61')||(input.LA(1)>='\u0C85' && input.LA(1)<='\u0C8C')||(input.LA(1)>='\u0C8E' && input.LA(1)<='\u0C90')||(input.LA(1)>='\u0C92' && input.LA(1)<='\u0CA8')||(input.LA(1)>='\u0CAA' && input.LA(1)<='\u0CB3')||(input.LA(1)>='\u0CB5' && input.LA(1)<='\u0CB9')||input.LA(1)=='\u0CBD'||input.LA(1)=='\u0CDE'||(input.LA(1)>='\u0CE0' && input.LA(1)<='\u0CE1')||(input.LA(1)>='\u0D05' && input.LA(1)<='\u0D0C')||(input.LA(1)>='\u0D0E' && input.LA(1)<='\u0D10')||(input.LA(1)>='\u0D12' && input.LA(1)<='\u0D28')||(input.LA(1)>='\u0D2A' && input.LA(1)<='\u0D39')||(input.LA(1)>='\u0D60' && input.LA(1)<='\u0D61')||(input.LA(1)>='\u0D85' && input.LA(1)<='\u0D96')||(input.LA(1)>='\u0D9A' && input.LA(1)<='\u0DB1')||(input.LA(1)>='\u0DB3' && input.LA(1)<='\u0DBB')||input.LA(1)=='\u0DBD'||(input.LA(1)>='\u0DC0' && input.LA(1)<='\u0DC6')||(input.LA(1)>='\u0E01' && input.LA(1)<='\u0E30')||(input.LA(1)>='\u0E32' && input.LA(1)<='\u0E33')||(input.LA(1)>='\u0E3F' && input.LA(1)<='\u0E46')||(input.LA(1)>='\u0E81' && input.LA(1)<='\u0E82')||input.LA(1)=='\u0E84'||(input.LA(1)>='\u0E87' && input.LA(1)<='\u0E88')||input.LA(1)=='\u0E8A'||input.LA(1)=='\u0E8D'||(input.LA(1)>='\u0E94' && input.LA(1)<='\u0E97')||(input.LA(1)>='\u0E99' && input.LA(1)<='\u0E9F')||(input.LA(1)>='\u0EA1' && input.LA(1)<='\u0EA3')||input.LA(1)=='\u0EA5'||input.LA(1)=='\u0EA7'||(input.LA(1)>='\u0EAA' && input.LA(1)<='\u0EAB')||(input.LA(1)>='\u0EAD' && input.LA(1)<='\u0EB0')||(input.LA(1)>='\u0EB2' && input.LA(1)<='\u0EB3')||input.LA(1)=='\u0EBD'||(input.LA(1)>='\u0EC0' && input.LA(1)<='\u0EC4')||input.LA(1)=='\u0EC6'||(input.LA(1)>='\u0EDC' && input.LA(1)<='\u0EDD')||input.LA(1)=='\u0F00'||(input.LA(1)>='\u0F40' && input.LA(1)<='\u0F47')||(input.LA(1)>='\u0F49' && input.LA(1)<='\u0F6A')||(input.LA(1)>='\u0F88' && input.LA(1)<='\u0F8B')||(input.LA(1)>='\u1000' && input.LA(1)<='\u1021')||(input.LA(1)>='\u1023' && input.LA(1)<='\u1027')||(input.LA(1)>='\u1029' && input.LA(1)<='\u102A')||(input.LA(1)>='\u1050' && input.LA(1)<='\u1055')||(input.LA(1)>='\u10A0' && input.LA(1)<='\u10C5')||(input.LA(1)>='\u10D0' && input.LA(1)<='\u10F8')||(input.LA(1)>='\u1100' && input.LA(1)<='\u1159')||(input.LA(1)>='\u115F' && input.LA(1)<='\u11A2')||(input.LA(1)>='\u11A8' && input.LA(1)<='\u11F9')||(input.LA(1)>='\u1200' && input.LA(1)<='\u1206')||(input.LA(1)>='\u1208' && input.LA(1)<='\u1246')||input.LA(1)=='\u1248'||(input.LA(1)>='\u124A' && input.LA(1)<='\u124D')||(input.LA(1)>='\u1250' && input.LA(1)<='\u1256')||input.LA(1)=='\u1258'||(input.LA(1)>='\u125A' && input.LA(1)<='\u125D')||(input.LA(1)>='\u1260' && input.LA(1)<='\u1286')||input.LA(1)=='\u1288'||(input.LA(1)>='\u128A' && input.LA(1)<='\u128D')||(input.LA(1)>='\u1290' && input.LA(1)<='\u12AE')||input.LA(1)=='\u12B0'||(input.LA(1)>='\u12B2' && input.LA(1)<='\u12B5')||(input.LA(1)>='\u12B8' && input.LA(1)<='\u12BE')||input.LA(1)=='\u12C0'||(input.LA(1)>='\u12C2' && input.LA(1)<='\u12C5')||(input.LA(1)>='\u12C8' && input.LA(1)<='\u12CE')||(input.LA(1)>='\u12D0' && input.LA(1)<='\u12D6')||(input.LA(1)>='\u12D8' && input.LA(1)<='\u12EE')||(input.LA(1)>='\u12F0' && input.LA(1)<='\u130E')||input.LA(1)=='\u1310'||(input.LA(1)>='\u1312' && input.LA(1)<='\u1315')||(input.LA(1)>='\u1318' && input.LA(1)<='\u131E')||(input.LA(1)>='\u1320' && input.LA(1)<='\u1346')||(input.LA(1)>='\u1348' && input.LA(1)<='\u135A')||(input.LA(1)>='\u13A0' && input.LA(1)<='\u13F4')||(input.LA(1)>='\u1401' && input.LA(1)<='\u166C')||(input.LA(1)>='\u166F' && input.LA(1)<='\u1676')||(input.LA(1)>='\u1681' && input.LA(1)<='\u169A')||(input.LA(1)>='\u16A0' && input.LA(1)<='\u16EA')||(input.LA(1)>='\u16EE' && input.LA(1)<='\u16F0')||(input.LA(1)>='\u1700' && input.LA(1)<='\u170C')||(input.LA(1)>='\u170E' && input.LA(1)<='\u1711')||(input.LA(1)>='\u1720' && input.LA(1)<='\u1731')||(input.LA(1)>='\u1740' && input.LA(1)<='\u1751')||(input.LA(1)>='\u1760' && input.LA(1)<='\u176C')||(input.LA(1)>='\u176E' && input.LA(1)<='\u1770')||(input.LA(1)>='\u1780' && input.LA(1)<='\u17B3')||input.LA(1)=='\u17D7'||(input.LA(1)>='\u17DB' && input.LA(1)<='\u17DC')||(input.LA(1)>='\u1820' && input.LA(1)<='\u1877')||(input.LA(1)>='\u1880' && input.LA(1)<='\u18A8')||(input.LA(1)>='\u1900' && input.LA(1)<='\u191C')||(input.LA(1)>='\u1950' && input.LA(1)<='\u196D')||(input.LA(1)>='\u1970' && input.LA(1)<='\u1974')||(input.LA(1)>='\u1D00' && input.LA(1)<='\u1D6B')||(input.LA(1)>='\u1E00' && input.LA(1)<='\u1E9B')||(input.LA(1)>='\u1EA0' && input.LA(1)<='\u1EF9')||(input.LA(1)>='\u1F00' && input.LA(1)<='\u1F15')||(input.LA(1)>='\u1F18' && input.LA(1)<='\u1F1D')||(input.LA(1)>='\u1F20' && input.LA(1)<='\u1F45')||(input.LA(1)>='\u1F48' && input.LA(1)<='\u1F4D')||(input.LA(1)>='\u1F50' && input.LA(1)<='\u1F57')||input.LA(1)=='\u1F59'||input.LA(1)=='\u1F5B'||input.LA(1)=='\u1F5D'||(input.LA(1)>='\u1F5F' && input.LA(1)<='\u1F7D')||(input.LA(1)>='\u1F80' && input.LA(1)<='\u1FB4')||(input.LA(1)>='\u1FB6' && input.LA(1)<='\u1FBC')||input.LA(1)=='\u1FBE'||(input.LA(1)>='\u1FC2' && input.LA(1)<='\u1FC4')||(input.LA(1)>='\u1FC6' && input.LA(1)<='\u1FCC')||(input.LA(1)>='\u1FD0' && input.LA(1)<='\u1FD3')||(input.LA(1)>='\u1FD6' && input.LA(1)<='\u1FDB')||(input.LA(1)>='\u1FE0' && input.LA(1)<='\u1FEC')||(input.LA(1)>='\u1FF2' && input.LA(1)<='\u1FF4')||(input.LA(1)>='\u1FF6' && input.LA(1)<='\u1FFC')||(input.LA(1)>='\u203F' && input.LA(1)<='\u2040')||input.LA(1)=='\u2054'||input.LA(1)=='\u2071'||input.LA(1)=='\u207F'||(input.LA(1)>='\u20A0' && input.LA(1)<='\u20B1')||input.LA(1)=='\u2102'||input.LA(1)=='\u2107'||(input.LA(1)>='\u210A' && input.LA(1)<='\u2113')||input.LA(1)=='\u2115'||(input.LA(1)>='\u2119' && input.LA(1)<='\u211D')||input.LA(1)=='\u2124'||input.LA(1)=='\u2126'||input.LA(1)=='\u2128'||(input.LA(1)>='\u212A' && input.LA(1)<='\u212D')||(input.LA(1)>='\u212F' && input.LA(1)<='\u2131')||(input.LA(1)>='\u2133' && input.LA(1)<='\u2139')||(input.LA(1)>='\u213D' && input.LA(1)<='\u213F')||(input.LA(1)>='\u2145' && input.LA(1)<='\u2149')||(input.LA(1)>='\u2160' && input.LA(1)<='\u2183')||(input.LA(1)>='\u3005' && input.LA(1)<='\u3007')||(input.LA(1)>='\u3021' && input.LA(1)<='\u3029')||(input.LA(1)>='\u3031' && input.LA(1)<='\u3035')||(input.LA(1)>='\u3038' && input.LA(1)<='\u303C')||(input.LA(1)>='\u3041' && input.LA(1)<='\u3096')||(input.LA(1)>='\u309D' && input.LA(1)<='\u309F')||(input.LA(1)>='\u30A1' && input.LA(1)<='\u30FF')||(input.LA(1)>='\u3105' && input.LA(1)<='\u312C')||(input.LA(1)>='\u3131' && input.LA(1)<='\u318E')||(input.LA(1)>='\u31A0' && input.LA(1)<='\u31B7')||(input.LA(1)>='\u31F0' && input.LA(1)<='\u31FF')||(input.LA(1)>='\u3400' && input.LA(1)<='\u4DB5')||(input.LA(1)>='\u4E00' && input.LA(1)<='\u9FA5')||(input.LA(1)>='\uA000' && input.LA(1)<='\uA48C')||(input.LA(1)>='\uAC00' && input.LA(1)<='\uD7A3')||(input.LA(1)>='\uF900' && input.LA(1)<='\uFA2D')||(input.LA(1)>='\uFA30' && input.LA(1)<='\uFA6A')||(input.LA(1)>='\uFB00' && input.LA(1)<='\uFB06')||(input.LA(1)>='\uFB13' && input.LA(1)<='\uFB17')||input.LA(1)=='\uFB1D'||(input.LA(1)>='\uFB1F' && input.LA(1)<='\uFB28')||(input.LA(1)>='\uFB2A' && input.LA(1)<='\uFB36')||(input.LA(1)>='\uFB38' && input.LA(1)<='\uFB3C')||input.LA(1)=='\uFB3E'||(input.LA(1)>='\uFB40' && input.LA(1)<='\uFB41')||(input.LA(1)>='\uFB43' && input.LA(1)<='\uFB44')||(input.LA(1)>='\uFB46' && input.LA(1)<='\uFBB1')||(input.LA(1)>='\uFBD3' && input.LA(1)<='\uFD3D')||(input.LA(1)>='\uFD50' && input.LA(1)<='\uFD8F')||(input.LA(1)>='\uFD92' && input.LA(1)<='\uFDC7')||(input.LA(1)>='\uFDF0' && input.LA(1)<='\uFDFC')||(input.LA(1)>='\uFE33' && input.LA(1)<='\uFE34')||(input.LA(1)>='\uFE4D' && input.LA(1)<='\uFE4F')||input.LA(1)=='\uFE69'||(input.LA(1)>='\uFE70' && input.LA(1)<='\uFE74')||(input.LA(1)>='\uFE76' && input.LA(1)<='\uFEFC')||input.LA(1)=='\uFF04'||(input.LA(1)>='\uFF21' && input.LA(1)<='\uFF3A')||input.LA(1)=='\uFF3F'||(input.LA(1)>='\uFF41' && input.LA(1)<='\uFF5A')||(input.LA(1)>='\uFF65' && input.LA(1)<='\uFFBE')||(input.LA(1)>='\uFFC2' && input.LA(1)<='\uFFC7')||(input.LA(1)>='\uFFCA' && input.LA(1)<='\uFFCF')||(input.LA(1)>='\uFFD2' && input.LA(1)<='\uFFD7')||(input.LA(1)>='\uFFDA' && input.LA(1)<='\uFFDC')||(input.LA(1)>='\uFFE0' && input.LA(1)<='\uFFE1')||(input.LA(1)>='\uFFE5' && input.LA(1)<='\uFFE6') ) {
                 input.consume();
@@ -3544,8 +3544,8 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR start "RULE_IDENTIFIER_PART"
     public final void mRULE_IDENTIFIER_PART() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10528:31: ( ( RULE_IDENTIFIER_START | RULE_IDENTIFIER_PART_IMPL ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10528:33: ( RULE_IDENTIFIER_START | RULE_IDENTIFIER_PART_IMPL )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10636:31: ( ( RULE_IDENTIFIER_START | RULE_IDENTIFIER_PART_IMPL ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10636:33: ( RULE_IDENTIFIER_START | RULE_IDENTIFIER_PART_IMPL )
             {
             if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001B')||input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||(input.LA(1)>='\u007F' && input.LA(1)<='\u009F')||(input.LA(1)>='\u00A2' && input.LA(1)<='\u00A5')||input.LA(1)=='\u00AA'||input.LA(1)=='\u00AD'||input.LA(1)=='\u00B5'||input.LA(1)=='\u00BA'||(input.LA(1)>='\u00C0' && input.LA(1)<='\u00D6')||(input.LA(1)>='\u00D8' && input.LA(1)<='\u00F6')||(input.LA(1)>='\u00F8' && input.LA(1)<='\u0236')||(input.LA(1)>='\u0250' && input.LA(1)<='\u02C1')||(input.LA(1)>='\u02C6' && input.LA(1)<='\u02D1')||(input.LA(1)>='\u02E0' && input.LA(1)<='\u02E4')||input.LA(1)=='\u02EE'||(input.LA(1)>='\u0300' && input.LA(1)<='\u0357')||(input.LA(1)>='\u035D' && input.LA(1)<='\u036F')||input.LA(1)=='\u037A'||input.LA(1)=='\u0386'||(input.LA(1)>='\u0388' && input.LA(1)<='\u038A')||input.LA(1)=='\u038C'||(input.LA(1)>='\u038E' && input.LA(1)<='\u03A1')||(input.LA(1)>='\u03A3' && input.LA(1)<='\u03CE')||(input.LA(1)>='\u03D0' && input.LA(1)<='\u03F5')||(input.LA(1)>='\u03F7' && input.LA(1)<='\u03FB')||(input.LA(1)>='\u0400' && input.LA(1)<='\u0481')||(input.LA(1)>='\u0483' && input.LA(1)<='\u0486')||(input.LA(1)>='\u048A' && input.LA(1)<='\u04CE')||(input.LA(1)>='\u04D0' && input.LA(1)<='\u04F5')||(input.LA(1)>='\u04F8' && input.LA(1)<='\u04F9')||(input.LA(1)>='\u0500' && input.LA(1)<='\u050F')||(input.LA(1)>='\u0531' && input.LA(1)<='\u0556')||input.LA(1)=='\u0559'||(input.LA(1)>='\u0561' && input.LA(1)<='\u0587')||(input.LA(1)>='\u0591' && input.LA(1)<='\u05A1')||(input.LA(1)>='\u05A3' && input.LA(1)<='\u05B9')||(input.LA(1)>='\u05BB' && input.LA(1)<='\u05BD')||input.LA(1)=='\u05BF'||(input.LA(1)>='\u05C1' && input.LA(1)<='\u05C2')||input.LA(1)=='\u05C4'||(input.LA(1)>='\u05D0' && input.LA(1)<='\u05EA')||(input.LA(1)>='\u05F0' && input.LA(1)<='\u05F2')||(input.LA(1)>='\u0600' && input.LA(1)<='\u0603')||(input.LA(1)>='\u0610' && input.LA(1)<='\u0615')||(input.LA(1)>='\u0621' && input.LA(1)<='\u063A')||(input.LA(1)>='\u0640' && input.LA(1)<='\u0658')||(input.LA(1)>='\u0660' && input.LA(1)<='\u0669')||(input.LA(1)>='\u066E' && input.LA(1)<='\u06D3')||(input.LA(1)>='\u06D5' && input.LA(1)<='\u06DD')||(input.LA(1)>='\u06DF' && input.LA(1)<='\u06E8')||(input.LA(1)>='\u06EA' && input.LA(1)<='\u06FC')||input.LA(1)=='\u06FF'||(input.LA(1)>='\u070F' && input.LA(1)<='\u074A')||(input.LA(1)>='\u074D' && input.LA(1)<='\u074F')||(input.LA(1)>='\u0780' && input.LA(1)<='\u07B1')||(input.LA(1)>='\u0901' && input.LA(1)<='\u0939')||(input.LA(1)>='\u093C' && input.LA(1)<='\u094D')||(input.LA(1)>='\u0950' && input.LA(1)<='\u0954')||(input.LA(1)>='\u0958' && input.LA(1)<='\u0963')||(input.LA(1)>='\u0966' && input.LA(1)<='\u096F')||(input.LA(1)>='\u0981' && input.LA(1)<='\u0983')||(input.LA(1)>='\u0985' && input.LA(1)<='\u098C')||(input.LA(1)>='\u098F' && input.LA(1)<='\u0990')||(input.LA(1)>='\u0993' && input.LA(1)<='\u09A8')||(input.LA(1)>='\u09AA' && input.LA(1)<='\u09B0')||input.LA(1)=='\u09B2'||(input.LA(1)>='\u09B6' && input.LA(1)<='\u09B9')||(input.LA(1)>='\u09BC' && input.LA(1)<='\u09C4')||(input.LA(1)>='\u09C7' && input.LA(1)<='\u09C8')||(input.LA(1)>='\u09CB' && input.LA(1)<='\u09CD')||input.LA(1)=='\u09D7'||(input.LA(1)>='\u09DC' && input.LA(1)<='\u09DD')||(input.LA(1)>='\u09DF' && input.LA(1)<='\u09E3')||(input.LA(1)>='\u09E6' && input.LA(1)<='\u09F3')||(input.LA(1)>='\u0A01' && input.LA(1)<='\u0A03')||(input.LA(1)>='\u0A05' && input.LA(1)<='\u0A0A')||(input.LA(1)>='\u0A0F' && input.LA(1)<='\u0A10')||(input.LA(1)>='\u0A13' && input.LA(1)<='\u0A28')||(input.LA(1)>='\u0A2A' && input.LA(1)<='\u0A30')||(input.LA(1)>='\u0A32' && input.LA(1)<='\u0A33')||(input.LA(1)>='\u0A35' && input.LA(1)<='\u0A36')||(input.LA(1)>='\u0A38' && input.LA(1)<='\u0A39')||input.LA(1)=='\u0A3C'||(input.LA(1)>='\u0A3E' && input.LA(1)<='\u0A42')||(input.LA(1)>='\u0A47' && input.LA(1)<='\u0A48')||(input.LA(1)>='\u0A4B' && input.LA(1)<='\u0A4D')||(input.LA(1)>='\u0A59' && input.LA(1)<='\u0A5C')||input.LA(1)=='\u0A5E'||(input.LA(1)>='\u0A66' && input.LA(1)<='\u0A74')||(input.LA(1)>='\u0A81' && input.LA(1)<='\u0A83')||(input.LA(1)>='\u0A85' && input.LA(1)<='\u0A8D')||(input.LA(1)>='\u0A8F' && input.LA(1)<='\u0A91')||(input.LA(1)>='\u0A93' && input.LA(1)<='\u0AA8')||(input.LA(1)>='\u0AAA' && input.LA(1)<='\u0AB0')||(input.LA(1)>='\u0AB2' && input.LA(1)<='\u0AB3')||(input.LA(1)>='\u0AB5' && input.LA(1)<='\u0AB9')||(input.LA(1)>='\u0ABC' && input.LA(1)<='\u0AC5')||(input.LA(1)>='\u0AC7' && input.LA(1)<='\u0AC9')||(input.LA(1)>='\u0ACB' && input.LA(1)<='\u0ACD')||input.LA(1)=='\u0AD0'||(input.LA(1)>='\u0AE0' && input.LA(1)<='\u0AE3')||(input.LA(1)>='\u0AE6' && input.LA(1)<='\u0AEF')||input.LA(1)=='\u0AF1'||(input.LA(1)>='\u0B01' && input.LA(1)<='\u0B03')||(input.LA(1)>='\u0B05' && input.LA(1)<='\u0B0C')||(input.LA(1)>='\u0B0F' && input.LA(1)<='\u0B10')||(input.LA(1)>='\u0B13' && input.LA(1)<='\u0B28')||(input.LA(1)>='\u0B2A' && input.LA(1)<='\u0B30')||(input.LA(1)>='\u0B32' && input.LA(1)<='\u0B33')||(input.LA(1)>='\u0B35' && input.LA(1)<='\u0B39')||(input.LA(1)>='\u0B3C' && input.LA(1)<='\u0B43')||(input.LA(1)>='\u0B47' && input.LA(1)<='\u0B48')||(input.LA(1)>='\u0B4B' && input.LA(1)<='\u0B4D')||(input.LA(1)>='\u0B56' && input.LA(1)<='\u0B57')||(input.LA(1)>='\u0B5C' && input.LA(1)<='\u0B5D')||(input.LA(1)>='\u0B5F' && input.LA(1)<='\u0B61')||(input.LA(1)>='\u0B66' && input.LA(1)<='\u0B6F')||input.LA(1)=='\u0B71'||(input.LA(1)>='\u0B82' && input.LA(1)<='\u0B83')||(input.LA(1)>='\u0B85' && input.LA(1)<='\u0B8A')||(input.LA(1)>='\u0B8E' && input.LA(1)<='\u0B90')||(input.LA(1)>='\u0B92' && input.LA(1)<='\u0B95')||(input.LA(1)>='\u0B99' && input.LA(1)<='\u0B9A')||input.LA(1)=='\u0B9C'||(input.LA(1)>='\u0B9E' && input.LA(1)<='\u0B9F')||(input.LA(1)>='\u0BA3' && input.LA(1)<='\u0BA4')||(input.LA(1)>='\u0BA8' && input.LA(1)<='\u0BAA')||(input.LA(1)>='\u0BAE' && input.LA(1)<='\u0BB5')||(input.LA(1)>='\u0BB7' && input.LA(1)<='\u0BB9')||(input.LA(1)>='\u0BBE' && input.LA(1)<='\u0BC2')||(input.LA(1)>='\u0BC6' && input.LA(1)<='\u0BC8')||(input.LA(1)>='\u0BCA' && input.LA(1)<='\u0BCD')||input.LA(1)=='\u0BD7'||(input.LA(1)>='\u0BE7' && input.LA(1)<='\u0BEF')||input.LA(1)=='\u0BF9'||(input.LA(1)>='\u0C01' && input.LA(1)<='\u0C03')||(input.LA(1)>='\u0C05' && input.LA(1)<='\u0C0C')||(input.LA(1)>='\u0C0E' && input.LA(1)<='\u0C10')||(input.LA(1)>='\u0C12' && input.LA(1)<='\u0C28')||(input.LA(1)>='\u0C2A' && input.LA(1)<='\u0C33')||(input.LA(1)>='\u0C35' && input.LA(1)<='\u0C39')||(input.LA(1)>='\u0C3E' && input.LA(1)<='\u0C44')||(input.LA(1)>='\u0C46' && input.LA(1)<='\u0C48')||(input.LA(1)>='\u0C4A' && input.LA(1)<='\u0C4D')||(input.LA(1)>='\u0C55' && input.LA(1)<='\u0C56')||(input.LA(1)>='\u0C60' && input.LA(1)<='\u0C61')||(input.LA(1)>='\u0C66' && input.LA(1)<='\u0C6F')||(input.LA(1)>='\u0C82' && input.LA(1)<='\u0C83')||(input.LA(1)>='\u0C85' && input.LA(1)<='\u0C8C')||(input.LA(1)>='\u0C8E' && input.LA(1)<='\u0C90')||(input.LA(1)>='\u0C92' && input.LA(1)<='\u0CA8')||(input.LA(1)>='\u0CAA' && input.LA(1)<='\u0CB3')||(input.LA(1)>='\u0CB5' && input.LA(1)<='\u0CB9')||(input.LA(1)>='\u0CBC' && input.LA(1)<='\u0CC4')||(input.LA(1)>='\u0CC6' && input.LA(1)<='\u0CC8')||(input.LA(1)>='\u0CCA' && input.LA(1)<='\u0CCD')||(input.LA(1)>='\u0CD5' && input.LA(1)<='\u0CD6')||input.LA(1)=='\u0CDE'||(input.LA(1)>='\u0CE0' && input.LA(1)<='\u0CE1')||(input.LA(1)>='\u0CE6' && input.LA(1)<='\u0CEF')||(input.LA(1)>='\u0D02' && input.LA(1)<='\u0D03')||(input.LA(1)>='\u0D05' && input.LA(1)<='\u0D0C')||(input.LA(1)>='\u0D0E' && input.LA(1)<='\u0D10')||(input.LA(1)>='\u0D12' && input.LA(1)<='\u0D28')||(input.LA(1)>='\u0D2A' && input.LA(1)<='\u0D39')||(input.LA(1)>='\u0D3E' && input.LA(1)<='\u0D43')||(input.LA(1)>='\u0D46' && input.LA(1)<='\u0D48')||(input.LA(1)>='\u0D4A' && input.LA(1)<='\u0D4D')||input.LA(1)=='\u0D57'||(input.LA(1)>='\u0D60' && input.LA(1)<='\u0D61')||(input.LA(1)>='\u0D66' && input.LA(1)<='\u0D6F')||(input.LA(1)>='\u0D82' && input.LA(1)<='\u0D83')||(input.LA(1)>='\u0D85' && input.LA(1)<='\u0D96')||(input.LA(1)>='\u0D9A' && input.LA(1)<='\u0DB1')||(input.LA(1)>='\u0DB3' && input.LA(1)<='\u0DBB')||input.LA(1)=='\u0DBD'||(input.LA(1)>='\u0DC0' && input.LA(1)<='\u0DC6')||input.LA(1)=='\u0DCA'||(input.LA(1)>='\u0DCF' && input.LA(1)<='\u0DD4')||input.LA(1)=='\u0DD6'||(input.LA(1)>='\u0DD8' && input.LA(1)<='\u0DDF')||(input.LA(1)>='\u0DF2' && input.LA(1)<='\u0DF3')||(input.LA(1)>='\u0E01' && input.LA(1)<='\u0E3A')||(input.LA(1)>='\u0E3F' && input.LA(1)<='\u0E4E')||(input.LA(1)>='\u0E50' && input.LA(1)<='\u0E59')||(input.LA(1)>='\u0E81' && input.LA(1)<='\u0E82')||input.LA(1)=='\u0E84'||(input.LA(1)>='\u0E87' && input.LA(1)<='\u0E88')||input.LA(1)=='\u0E8A'||input.LA(1)=='\u0E8D'||(input.LA(1)>='\u0E94' && input.LA(1)<='\u0E97')||(input.LA(1)>='\u0E99' && input.LA(1)<='\u0E9F')||(input.LA(1)>='\u0EA1' && input.LA(1)<='\u0EA3')||input.LA(1)=='\u0EA5'||input.LA(1)=='\u0EA7'||(input.LA(1)>='\u0EAA' && input.LA(1)<='\u0EAB')||(input.LA(1)>='\u0EAD' && input.LA(1)<='\u0EB9')||(input.LA(1)>='\u0EBB' && input.LA(1)<='\u0EBD')||(input.LA(1)>='\u0EC0' && input.LA(1)<='\u0EC4')||input.LA(1)=='\u0EC6'||(input.LA(1)>='\u0EC8' && input.LA(1)<='\u0ECD')||(input.LA(1)>='\u0ED0' && input.LA(1)<='\u0ED9')||(input.LA(1)>='\u0EDC' && input.LA(1)<='\u0EDD')||input.LA(1)=='\u0F00'||(input.LA(1)>='\u0F18' && input.LA(1)<='\u0F19')||(input.LA(1)>='\u0F20' && input.LA(1)<='\u0F29')||input.LA(1)=='\u0F35'||input.LA(1)=='\u0F37'||input.LA(1)=='\u0F39'||(input.LA(1)>='\u0F3E' && input.LA(1)<='\u0F47')||(input.LA(1)>='\u0F49' && input.LA(1)<='\u0F6A')||(input.LA(1)>='\u0F71' && input.LA(1)<='\u0F84')||(input.LA(1)>='\u0F86' && input.LA(1)<='\u0F8B')||(input.LA(1)>='\u0F90' && input.LA(1)<='\u0F97')||(input.LA(1)>='\u0F99' && input.LA(1)<='\u0FBC')||input.LA(1)=='\u0FC6'||(input.LA(1)>='\u1000' && input.LA(1)<='\u1021')||(input.LA(1)>='\u1023' && input.LA(1)<='\u1027')||(input.LA(1)>='\u1029' && input.LA(1)<='\u102A')||(input.LA(1)>='\u102C' && input.LA(1)<='\u1032')||(input.LA(1)>='\u1036' && input.LA(1)<='\u1039')||(input.LA(1)>='\u1040' && input.LA(1)<='\u1049')||(input.LA(1)>='\u1050' && input.LA(1)<='\u1059')||(input.LA(1)>='\u10A0' && input.LA(1)<='\u10C5')||(input.LA(1)>='\u10D0' && input.LA(1)<='\u10F8')||(input.LA(1)>='\u1100' && input.LA(1)<='\u1159')||(input.LA(1)>='\u115F' && input.LA(1)<='\u11A2')||(input.LA(1)>='\u11A8' && input.LA(1)<='\u11F9')||(input.LA(1)>='\u1200' && input.LA(1)<='\u1206')||(input.LA(1)>='\u1208' && input.LA(1)<='\u1246')||input.LA(1)=='\u1248'||(input.LA(1)>='\u124A' && input.LA(1)<='\u124D')||(input.LA(1)>='\u1250' && input.LA(1)<='\u1256')||input.LA(1)=='\u1258'||(input.LA(1)>='\u125A' && input.LA(1)<='\u125D')||(input.LA(1)>='\u1260' && input.LA(1)<='\u1286')||input.LA(1)=='\u1288'||(input.LA(1)>='\u128A' && input.LA(1)<='\u128D')||(input.LA(1)>='\u1290' && input.LA(1)<='\u12AE')||input.LA(1)=='\u12B0'||(input.LA(1)>='\u12B2' && input.LA(1)<='\u12B5')||(input.LA(1)>='\u12B8' && input.LA(1)<='\u12BE')||input.LA(1)=='\u12C0'||(input.LA(1)>='\u12C2' && input.LA(1)<='\u12C5')||(input.LA(1)>='\u12C8' && input.LA(1)<='\u12CE')||(input.LA(1)>='\u12D0' && input.LA(1)<='\u12D6')||(input.LA(1)>='\u12D8' && input.LA(1)<='\u12EE')||(input.LA(1)>='\u12F0' && input.LA(1)<='\u130E')||input.LA(1)=='\u1310'||(input.LA(1)>='\u1312' && input.LA(1)<='\u1315')||(input.LA(1)>='\u1318' && input.LA(1)<='\u131E')||(input.LA(1)>='\u1320' && input.LA(1)<='\u1346')||(input.LA(1)>='\u1348' && input.LA(1)<='\u135A')||(input.LA(1)>='\u1369' && input.LA(1)<='\u1371')||(input.LA(1)>='\u13A0' && input.LA(1)<='\u13F4')||(input.LA(1)>='\u1401' && input.LA(1)<='\u166C')||(input.LA(1)>='\u166F' && input.LA(1)<='\u1676')||(input.LA(1)>='\u1681' && input.LA(1)<='\u169A')||(input.LA(1)>='\u16A0' && input.LA(1)<='\u16EA')||(input.LA(1)>='\u16EE' && input.LA(1)<='\u16F0')||(input.LA(1)>='\u1700' && input.LA(1)<='\u170C')||(input.LA(1)>='\u170E' && input.LA(1)<='\u1714')||(input.LA(1)>='\u1720' && input.LA(1)<='\u1734')||(input.LA(1)>='\u1740' && input.LA(1)<='\u1753')||(input.LA(1)>='\u1760' && input.LA(1)<='\u176C')||(input.LA(1)>='\u176E' && input.LA(1)<='\u1770')||(input.LA(1)>='\u1772' && input.LA(1)<='\u1773')||(input.LA(1)>='\u1780' && input.LA(1)<='\u17D3')||input.LA(1)=='\u17D7'||(input.LA(1)>='\u17DB' && input.LA(1)<='\u17DD')||(input.LA(1)>='\u17E0' && input.LA(1)<='\u17E9')||(input.LA(1)>='\u180B' && input.LA(1)<='\u180D')||(input.LA(1)>='\u1810' && input.LA(1)<='\u1819')||(input.LA(1)>='\u1820' && input.LA(1)<='\u1877')||(input.LA(1)>='\u1880' && input.LA(1)<='\u18A9')||(input.LA(1)>='\u1900' && input.LA(1)<='\u191C')||(input.LA(1)>='\u1920' && input.LA(1)<='\u192B')||(input.LA(1)>='\u1930' && input.LA(1)<='\u193B')||(input.LA(1)>='\u1946' && input.LA(1)<='\u196D')||(input.LA(1)>='\u1970' && input.LA(1)<='\u1974')||(input.LA(1)>='\u1D00' && input.LA(1)<='\u1D6B')||(input.LA(1)>='\u1E00' && input.LA(1)<='\u1E9B')||(input.LA(1)>='\u1EA0' && input.LA(1)<='\u1EF9')||(input.LA(1)>='\u1F00' && input.LA(1)<='\u1F15')||(input.LA(1)>='\u1F18' && input.LA(1)<='\u1F1D')||(input.LA(1)>='\u1F20' && input.LA(1)<='\u1F45')||(input.LA(1)>='\u1F48' && input.LA(1)<='\u1F4D')||(input.LA(1)>='\u1F50' && input.LA(1)<='\u1F57')||input.LA(1)=='\u1F59'||input.LA(1)=='\u1F5B'||input.LA(1)=='\u1F5D'||(input.LA(1)>='\u1F5F' && input.LA(1)<='\u1F7D')||(input.LA(1)>='\u1F80' && input.LA(1)<='\u1FB4')||(input.LA(1)>='\u1FB6' && input.LA(1)<='\u1FBC')||input.LA(1)=='\u1FBE'||(input.LA(1)>='\u1FC2' && input.LA(1)<='\u1FC4')||(input.LA(1)>='\u1FC6' && input.LA(1)<='\u1FCC')||(input.LA(1)>='\u1FD0' && input.LA(1)<='\u1FD3')||(input.LA(1)>='\u1FD6' && input.LA(1)<='\u1FDB')||(input.LA(1)>='\u1FE0' && input.LA(1)<='\u1FEC')||(input.LA(1)>='\u1FF2' && input.LA(1)<='\u1FF4')||(input.LA(1)>='\u1FF6' && input.LA(1)<='\u1FFC')||(input.LA(1)>='\u200C' && input.LA(1)<='\u200F')||(input.LA(1)>='\u202A' && input.LA(1)<='\u202E')||(input.LA(1)>='\u203F' && input.LA(1)<='\u2040')||input.LA(1)=='\u2054'||(input.LA(1)>='\u2060' && input.LA(1)<='\u2063')||(input.LA(1)>='\u206A' && input.LA(1)<='\u206F')||input.LA(1)=='\u2071'||input.LA(1)=='\u207F'||(input.LA(1)>='\u20A0' && input.LA(1)<='\u20B1')||(input.LA(1)>='\u20D0' && input.LA(1)<='\u20DC')||input.LA(1)=='\u20E1'||(input.LA(1)>='\u20E5' && input.LA(1)<='\u20EA')||input.LA(1)=='\u2102'||input.LA(1)=='\u2107'||(input.LA(1)>='\u210A' && input.LA(1)<='\u2113')||input.LA(1)=='\u2115'||(input.LA(1)>='\u2119' && input.LA(1)<='\u211D')||input.LA(1)=='\u2124'||input.LA(1)=='\u2126'||input.LA(1)=='\u2128'||(input.LA(1)>='\u212A' && input.LA(1)<='\u212D')||(input.LA(1)>='\u212F' && input.LA(1)<='\u2131')||(input.LA(1)>='\u2133' && input.LA(1)<='\u2139')||(input.LA(1)>='\u213D' && input.LA(1)<='\u213F')||(input.LA(1)>='\u2145' && input.LA(1)<='\u2149')||(input.LA(1)>='\u2160' && input.LA(1)<='\u2183')||(input.LA(1)>='\u3005' && input.LA(1)<='\u3007')||(input.LA(1)>='\u3021' && input.LA(1)<='\u302F')||(input.LA(1)>='\u3031' && input.LA(1)<='\u3035')||(input.LA(1)>='\u3038' && input.LA(1)<='\u303C')||(input.LA(1)>='\u3041' && input.LA(1)<='\u3096')||(input.LA(1)>='\u3099' && input.LA(1)<='\u309A')||(input.LA(1)>='\u309D' && input.LA(1)<='\u309F')||(input.LA(1)>='\u30A1' && input.LA(1)<='\u30FF')||(input.LA(1)>='\u3105' && input.LA(1)<='\u312C')||(input.LA(1)>='\u3131' && input.LA(1)<='\u318E')||(input.LA(1)>='\u31A0' && input.LA(1)<='\u31B7')||(input.LA(1)>='\u31F0' && input.LA(1)<='\u31FF')||(input.LA(1)>='\u3400' && input.LA(1)<='\u4DB5')||(input.LA(1)>='\u4E00' && input.LA(1)<='\u9FA5')||(input.LA(1)>='\uA000' && input.LA(1)<='\uA48C')||(input.LA(1)>='\uAC00' && input.LA(1)<='\uD7A3')||(input.LA(1)>='\uF900' && input.LA(1)<='\uFA2D')||(input.LA(1)>='\uFA30' && input.LA(1)<='\uFA6A')||(input.LA(1)>='\uFB00' && input.LA(1)<='\uFB06')||(input.LA(1)>='\uFB13' && input.LA(1)<='\uFB17')||(input.LA(1)>='\uFB1D' && input.LA(1)<='\uFB28')||(input.LA(1)>='\uFB2A' && input.LA(1)<='\uFB36')||(input.LA(1)>='\uFB38' && input.LA(1)<='\uFB3C')||input.LA(1)=='\uFB3E'||(input.LA(1)>='\uFB40' && input.LA(1)<='\uFB41')||(input.LA(1)>='\uFB43' && input.LA(1)<='\uFB44')||(input.LA(1)>='\uFB46' && input.LA(1)<='\uFBB1')||(input.LA(1)>='\uFBD3' && input.LA(1)<='\uFD3D')||(input.LA(1)>='\uFD50' && input.LA(1)<='\uFD8F')||(input.LA(1)>='\uFD92' && input.LA(1)<='\uFDC7')||(input.LA(1)>='\uFDF0' && input.LA(1)<='\uFDFC')||(input.LA(1)>='\uFE00' && input.LA(1)<='\uFE0F')||(input.LA(1)>='\uFE20' && input.LA(1)<='\uFE23')||(input.LA(1)>='\uFE33' && input.LA(1)<='\uFE34')||(input.LA(1)>='\uFE4D' && input.LA(1)<='\uFE4F')||input.LA(1)=='\uFE69'||(input.LA(1)>='\uFE70' && input.LA(1)<='\uFE74')||(input.LA(1)>='\uFE76' && input.LA(1)<='\uFEFC')||input.LA(1)=='\uFEFF'||input.LA(1)=='\uFF04'||(input.LA(1)>='\uFF10' && input.LA(1)<='\uFF19')||(input.LA(1)>='\uFF21' && input.LA(1)<='\uFF3A')||input.LA(1)=='\uFF3F'||(input.LA(1)>='\uFF41' && input.LA(1)<='\uFF5A')||(input.LA(1)>='\uFF65' && input.LA(1)<='\uFFBE')||(input.LA(1)>='\uFFC2' && input.LA(1)<='\uFFC7')||(input.LA(1)>='\uFFCA' && input.LA(1)<='\uFFCF')||(input.LA(1)>='\uFFD2' && input.LA(1)<='\uFFD7')||(input.LA(1)>='\uFFDA' && input.LA(1)<='\uFFDC')||(input.LA(1)>='\uFFE0' && input.LA(1)<='\uFFE1')||(input.LA(1)>='\uFFE5' && input.LA(1)<='\uFFE6')||(input.LA(1)>='\uFFF9' && input.LA(1)<='\uFFFB') ) {
                 input.consume();
@@ -3568,8 +3568,8 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR start "RULE_IDENTIFIER_PART_IMPL"
     public final void mRULE_IDENTIFIER_PART_IMPL() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10530:36: ( ( '\\u0000' .. '\\b' | '\\u000E' .. '\\u001B' | '0' .. '9' | '\\u007F' .. '\\u009F' | '\\u00AD' | '\\u0300' .. '\\u0357' | '\\u035D' .. '\\u036F' | '\\u0483' .. '\\u0486' | '\\u0591' .. '\\u05A1' | '\\u05A3' .. '\\u05B9' | '\\u05BB' .. '\\u05BD' | '\\u05BF' | '\\u05C1' .. '\\u05C2' | '\\u05C4' | '\\u0600' .. '\\u0603' | '\\u0610' .. '\\u0615' | '\\u064B' .. '\\u0658' | '\\u0660' .. '\\u0669' | '\\u0670' | '\\u06D6' .. '\\u06DD' | '\\u06DF' .. '\\u06E4' | '\\u06E7' .. '\\u06E8' | '\\u06EA' .. '\\u06ED' | '\\u06F0' .. '\\u06F9' | '\\u070F' | '\\u0711' | '\\u0730' .. '\\u074A' | '\\u07A6' .. '\\u07B0' | '\\u0901' .. '\\u0903' | '\\u093C' | '\\u093E' .. '\\u094D' | '\\u0951' .. '\\u0954' | '\\u0962' .. '\\u0963' | '\\u0966' .. '\\u096F' | '\\u0981' .. '\\u0983' | '\\u09BC' | '\\u09BE' .. '\\u09C4' | '\\u09C7' .. '\\u09C8' | '\\u09CB' .. '\\u09CD' | '\\u09D7' | '\\u09E2' .. '\\u09E3' | '\\u09E6' .. '\\u09EF' | '\\u0A01' .. '\\u0A03' | '\\u0A3C' | '\\u0A3E' .. '\\u0A42' | '\\u0A47' .. '\\u0A48' | '\\u0A4B' .. '\\u0A4D' | '\\u0A66' .. '\\u0A71' | '\\u0A81' .. '\\u0A83' | '\\u0ABC' | '\\u0ABE' .. '\\u0AC5' | '\\u0AC7' .. '\\u0AC9' | '\\u0ACB' .. '\\u0ACD' | '\\u0AE2' .. '\\u0AE3' | '\\u0AE6' .. '\\u0AEF' | '\\u0B01' .. '\\u0B03' | '\\u0B3C' | '\\u0B3E' .. '\\u0B43' | '\\u0B47' .. '\\u0B48' | '\\u0B4B' .. '\\u0B4D' | '\\u0B56' .. '\\u0B57' | '\\u0B66' .. '\\u0B6F' | '\\u0B82' | '\\u0BBE' .. '\\u0BC2' | '\\u0BC6' .. '\\u0BC8' | '\\u0BCA' .. '\\u0BCD' | '\\u0BD7' | '\\u0BE7' .. '\\u0BEF' | '\\u0C01' .. '\\u0C03' | '\\u0C3E' .. '\\u0C44' | '\\u0C46' .. '\\u0C48' | '\\u0C4A' .. '\\u0C4D' | '\\u0C55' .. '\\u0C56' | '\\u0C66' .. '\\u0C6F' | '\\u0C82' .. '\\u0C83' | '\\u0CBC' | '\\u0CBE' .. '\\u0CC4' | '\\u0CC6' .. '\\u0CC8' | '\\u0CCA' .. '\\u0CCD' | '\\u0CD5' .. '\\u0CD6' | '\\u0CE6' .. '\\u0CEF' | '\\u0D02' .. '\\u0D03' | '\\u0D3E' .. '\\u0D43' | '\\u0D46' .. '\\u0D48' | '\\u0D4A' .. '\\u0D4D' | '\\u0D57' | '\\u0D66' .. '\\u0D6F' | '\\u0D82' .. '\\u0D83' | '\\u0DCA' | '\\u0DCF' .. '\\u0DD4' | '\\u0DD6' | '\\u0DD8' .. '\\u0DDF' | '\\u0DF2' .. '\\u0DF3' | '\\u0E31' | '\\u0E34' .. '\\u0E3A' | '\\u0E47' .. '\\u0E4E' | '\\u0E50' .. '\\u0E59' | '\\u0EB1' | '\\u0EB4' .. '\\u0EB9' | '\\u0EBB' .. '\\u0EBC' | '\\u0EC8' .. '\\u0ECD' | '\\u0ED0' .. '\\u0ED9' | '\\u0F18' .. '\\u0F19' | '\\u0F20' .. '\\u0F29' | '\\u0F35' | '\\u0F37' | '\\u0F39' | '\\u0F3E' .. '\\u0F3F' | '\\u0F71' .. '\\u0F84' | '\\u0F86' .. '\\u0F87' | '\\u0F90' .. '\\u0F97' | '\\u0F99' .. '\\u0FBC' | '\\u0FC6' | '\\u102C' .. '\\u1032' | '\\u1036' .. '\\u1039' | '\\u1040' .. '\\u1049' | '\\u1056' .. '\\u1059' | '\\u1369' .. '\\u1371' | '\\u1712' .. '\\u1714' | '\\u1732' .. '\\u1734' | '\\u1752' .. '\\u1753' | '\\u1772' .. '\\u1773' | '\\u17B4' .. '\\u17D3' | '\\u17DD' | '\\u17E0' .. '\\u17E9' | '\\u180B' .. '\\u180D' | '\\u1810' .. '\\u1819' | '\\u18A9' | '\\u1920' .. '\\u192B' | '\\u1930' .. '\\u193B' | '\\u1946' .. '\\u194F' | '\\u200C' .. '\\u200F' | '\\u202A' .. '\\u202E' | '\\u2060' .. '\\u2063' | '\\u206A' .. '\\u206F' | '\\u20D0' .. '\\u20DC' | '\\u20E1' | '\\u20E5' .. '\\u20EA' | '\\u302A' .. '\\u302F' | '\\u3099' .. '\\u309A' | '\\uFB1E' | '\\uFE00' .. '\\uFE0F' | '\\uFE20' .. '\\uFE23' | '\\uFEFF' | '\\uFF10' .. '\\uFF19' | '\\uFFF9' .. '\\uFFFB' ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10530:38: ( '\\u0000' .. '\\b' | '\\u000E' .. '\\u001B' | '0' .. '9' | '\\u007F' .. '\\u009F' | '\\u00AD' | '\\u0300' .. '\\u0357' | '\\u035D' .. '\\u036F' | '\\u0483' .. '\\u0486' | '\\u0591' .. '\\u05A1' | '\\u05A3' .. '\\u05B9' | '\\u05BB' .. '\\u05BD' | '\\u05BF' | '\\u05C1' .. '\\u05C2' | '\\u05C4' | '\\u0600' .. '\\u0603' | '\\u0610' .. '\\u0615' | '\\u064B' .. '\\u0658' | '\\u0660' .. '\\u0669' | '\\u0670' | '\\u06D6' .. '\\u06DD' | '\\u06DF' .. '\\u06E4' | '\\u06E7' .. '\\u06E8' | '\\u06EA' .. '\\u06ED' | '\\u06F0' .. '\\u06F9' | '\\u070F' | '\\u0711' | '\\u0730' .. '\\u074A' | '\\u07A6' .. '\\u07B0' | '\\u0901' .. '\\u0903' | '\\u093C' | '\\u093E' .. '\\u094D' | '\\u0951' .. '\\u0954' | '\\u0962' .. '\\u0963' | '\\u0966' .. '\\u096F' | '\\u0981' .. '\\u0983' | '\\u09BC' | '\\u09BE' .. '\\u09C4' | '\\u09C7' .. '\\u09C8' | '\\u09CB' .. '\\u09CD' | '\\u09D7' | '\\u09E2' .. '\\u09E3' | '\\u09E6' .. '\\u09EF' | '\\u0A01' .. '\\u0A03' | '\\u0A3C' | '\\u0A3E' .. '\\u0A42' | '\\u0A47' .. '\\u0A48' | '\\u0A4B' .. '\\u0A4D' | '\\u0A66' .. '\\u0A71' | '\\u0A81' .. '\\u0A83' | '\\u0ABC' | '\\u0ABE' .. '\\u0AC5' | '\\u0AC7' .. '\\u0AC9' | '\\u0ACB' .. '\\u0ACD' | '\\u0AE2' .. '\\u0AE3' | '\\u0AE6' .. '\\u0AEF' | '\\u0B01' .. '\\u0B03' | '\\u0B3C' | '\\u0B3E' .. '\\u0B43' | '\\u0B47' .. '\\u0B48' | '\\u0B4B' .. '\\u0B4D' | '\\u0B56' .. '\\u0B57' | '\\u0B66' .. '\\u0B6F' | '\\u0B82' | '\\u0BBE' .. '\\u0BC2' | '\\u0BC6' .. '\\u0BC8' | '\\u0BCA' .. '\\u0BCD' | '\\u0BD7' | '\\u0BE7' .. '\\u0BEF' | '\\u0C01' .. '\\u0C03' | '\\u0C3E' .. '\\u0C44' | '\\u0C46' .. '\\u0C48' | '\\u0C4A' .. '\\u0C4D' | '\\u0C55' .. '\\u0C56' | '\\u0C66' .. '\\u0C6F' | '\\u0C82' .. '\\u0C83' | '\\u0CBC' | '\\u0CBE' .. '\\u0CC4' | '\\u0CC6' .. '\\u0CC8' | '\\u0CCA' .. '\\u0CCD' | '\\u0CD5' .. '\\u0CD6' | '\\u0CE6' .. '\\u0CEF' | '\\u0D02' .. '\\u0D03' | '\\u0D3E' .. '\\u0D43' | '\\u0D46' .. '\\u0D48' | '\\u0D4A' .. '\\u0D4D' | '\\u0D57' | '\\u0D66' .. '\\u0D6F' | '\\u0D82' .. '\\u0D83' | '\\u0DCA' | '\\u0DCF' .. '\\u0DD4' | '\\u0DD6' | '\\u0DD8' .. '\\u0DDF' | '\\u0DF2' .. '\\u0DF3' | '\\u0E31' | '\\u0E34' .. '\\u0E3A' | '\\u0E47' .. '\\u0E4E' | '\\u0E50' .. '\\u0E59' | '\\u0EB1' | '\\u0EB4' .. '\\u0EB9' | '\\u0EBB' .. '\\u0EBC' | '\\u0EC8' .. '\\u0ECD' | '\\u0ED0' .. '\\u0ED9' | '\\u0F18' .. '\\u0F19' | '\\u0F20' .. '\\u0F29' | '\\u0F35' | '\\u0F37' | '\\u0F39' | '\\u0F3E' .. '\\u0F3F' | '\\u0F71' .. '\\u0F84' | '\\u0F86' .. '\\u0F87' | '\\u0F90' .. '\\u0F97' | '\\u0F99' .. '\\u0FBC' | '\\u0FC6' | '\\u102C' .. '\\u1032' | '\\u1036' .. '\\u1039' | '\\u1040' .. '\\u1049' | '\\u1056' .. '\\u1059' | '\\u1369' .. '\\u1371' | '\\u1712' .. '\\u1714' | '\\u1732' .. '\\u1734' | '\\u1752' .. '\\u1753' | '\\u1772' .. '\\u1773' | '\\u17B4' .. '\\u17D3' | '\\u17DD' | '\\u17E0' .. '\\u17E9' | '\\u180B' .. '\\u180D' | '\\u1810' .. '\\u1819' | '\\u18A9' | '\\u1920' .. '\\u192B' | '\\u1930' .. '\\u193B' | '\\u1946' .. '\\u194F' | '\\u200C' .. '\\u200F' | '\\u202A' .. '\\u202E' | '\\u2060' .. '\\u2063' | '\\u206A' .. '\\u206F' | '\\u20D0' .. '\\u20DC' | '\\u20E1' | '\\u20E5' .. '\\u20EA' | '\\u302A' .. '\\u302F' | '\\u3099' .. '\\u309A' | '\\uFB1E' | '\\uFE00' .. '\\uFE0F' | '\\uFE20' .. '\\uFE23' | '\\uFEFF' | '\\uFF10' .. '\\uFF19' | '\\uFFF9' .. '\\uFFFB' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10638:36: ( ( '\\u0000' .. '\\b' | '\\u000E' .. '\\u001B' | '0' .. '9' | '\\u007F' .. '\\u009F' | '\\u00AD' | '\\u0300' .. '\\u0357' | '\\u035D' .. '\\u036F' | '\\u0483' .. '\\u0486' | '\\u0591' .. '\\u05A1' | '\\u05A3' .. '\\u05B9' | '\\u05BB' .. '\\u05BD' | '\\u05BF' | '\\u05C1' .. '\\u05C2' | '\\u05C4' | '\\u0600' .. '\\u0603' | '\\u0610' .. '\\u0615' | '\\u064B' .. '\\u0658' | '\\u0660' .. '\\u0669' | '\\u0670' | '\\u06D6' .. '\\u06DD' | '\\u06DF' .. '\\u06E4' | '\\u06E7' .. '\\u06E8' | '\\u06EA' .. '\\u06ED' | '\\u06F0' .. '\\u06F9' | '\\u070F' | '\\u0711' | '\\u0730' .. '\\u074A' | '\\u07A6' .. '\\u07B0' | '\\u0901' .. '\\u0903' | '\\u093C' | '\\u093E' .. '\\u094D' | '\\u0951' .. '\\u0954' | '\\u0962' .. '\\u0963' | '\\u0966' .. '\\u096F' | '\\u0981' .. '\\u0983' | '\\u09BC' | '\\u09BE' .. '\\u09C4' | '\\u09C7' .. '\\u09C8' | '\\u09CB' .. '\\u09CD' | '\\u09D7' | '\\u09E2' .. '\\u09E3' | '\\u09E6' .. '\\u09EF' | '\\u0A01' .. '\\u0A03' | '\\u0A3C' | '\\u0A3E' .. '\\u0A42' | '\\u0A47' .. '\\u0A48' | '\\u0A4B' .. '\\u0A4D' | '\\u0A66' .. '\\u0A71' | '\\u0A81' .. '\\u0A83' | '\\u0ABC' | '\\u0ABE' .. '\\u0AC5' | '\\u0AC7' .. '\\u0AC9' | '\\u0ACB' .. '\\u0ACD' | '\\u0AE2' .. '\\u0AE3' | '\\u0AE6' .. '\\u0AEF' | '\\u0B01' .. '\\u0B03' | '\\u0B3C' | '\\u0B3E' .. '\\u0B43' | '\\u0B47' .. '\\u0B48' | '\\u0B4B' .. '\\u0B4D' | '\\u0B56' .. '\\u0B57' | '\\u0B66' .. '\\u0B6F' | '\\u0B82' | '\\u0BBE' .. '\\u0BC2' | '\\u0BC6' .. '\\u0BC8' | '\\u0BCA' .. '\\u0BCD' | '\\u0BD7' | '\\u0BE7' .. '\\u0BEF' | '\\u0C01' .. '\\u0C03' | '\\u0C3E' .. '\\u0C44' | '\\u0C46' .. '\\u0C48' | '\\u0C4A' .. '\\u0C4D' | '\\u0C55' .. '\\u0C56' | '\\u0C66' .. '\\u0C6F' | '\\u0C82' .. '\\u0C83' | '\\u0CBC' | '\\u0CBE' .. '\\u0CC4' | '\\u0CC6' .. '\\u0CC8' | '\\u0CCA' .. '\\u0CCD' | '\\u0CD5' .. '\\u0CD6' | '\\u0CE6' .. '\\u0CEF' | '\\u0D02' .. '\\u0D03' | '\\u0D3E' .. '\\u0D43' | '\\u0D46' .. '\\u0D48' | '\\u0D4A' .. '\\u0D4D' | '\\u0D57' | '\\u0D66' .. '\\u0D6F' | '\\u0D82' .. '\\u0D83' | '\\u0DCA' | '\\u0DCF' .. '\\u0DD4' | '\\u0DD6' | '\\u0DD8' .. '\\u0DDF' | '\\u0DF2' .. '\\u0DF3' | '\\u0E31' | '\\u0E34' .. '\\u0E3A' | '\\u0E47' .. '\\u0E4E' | '\\u0E50' .. '\\u0E59' | '\\u0EB1' | '\\u0EB4' .. '\\u0EB9' | '\\u0EBB' .. '\\u0EBC' | '\\u0EC8' .. '\\u0ECD' | '\\u0ED0' .. '\\u0ED9' | '\\u0F18' .. '\\u0F19' | '\\u0F20' .. '\\u0F29' | '\\u0F35' | '\\u0F37' | '\\u0F39' | '\\u0F3E' .. '\\u0F3F' | '\\u0F71' .. '\\u0F84' | '\\u0F86' .. '\\u0F87' | '\\u0F90' .. '\\u0F97' | '\\u0F99' .. '\\u0FBC' | '\\u0FC6' | '\\u102C' .. '\\u1032' | '\\u1036' .. '\\u1039' | '\\u1040' .. '\\u1049' | '\\u1056' .. '\\u1059' | '\\u1369' .. '\\u1371' | '\\u1712' .. '\\u1714' | '\\u1732' .. '\\u1734' | '\\u1752' .. '\\u1753' | '\\u1772' .. '\\u1773' | '\\u17B4' .. '\\u17D3' | '\\u17DD' | '\\u17E0' .. '\\u17E9' | '\\u180B' .. '\\u180D' | '\\u1810' .. '\\u1819' | '\\u18A9' | '\\u1920' .. '\\u192B' | '\\u1930' .. '\\u193B' | '\\u1946' .. '\\u194F' | '\\u200C' .. '\\u200F' | '\\u202A' .. '\\u202E' | '\\u2060' .. '\\u2063' | '\\u206A' .. '\\u206F' | '\\u20D0' .. '\\u20DC' | '\\u20E1' | '\\u20E5' .. '\\u20EA' | '\\u302A' .. '\\u302F' | '\\u3099' .. '\\u309A' | '\\uFB1E' | '\\uFE00' .. '\\uFE0F' | '\\uFE20' .. '\\uFE23' | '\\uFEFF' | '\\uFF10' .. '\\uFF19' | '\\uFFF9' .. '\\uFFFB' ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10638:38: ( '\\u0000' .. '\\b' | '\\u000E' .. '\\u001B' | '0' .. '9' | '\\u007F' .. '\\u009F' | '\\u00AD' | '\\u0300' .. '\\u0357' | '\\u035D' .. '\\u036F' | '\\u0483' .. '\\u0486' | '\\u0591' .. '\\u05A1' | '\\u05A3' .. '\\u05B9' | '\\u05BB' .. '\\u05BD' | '\\u05BF' | '\\u05C1' .. '\\u05C2' | '\\u05C4' | '\\u0600' .. '\\u0603' | '\\u0610' .. '\\u0615' | '\\u064B' .. '\\u0658' | '\\u0660' .. '\\u0669' | '\\u0670' | '\\u06D6' .. '\\u06DD' | '\\u06DF' .. '\\u06E4' | '\\u06E7' .. '\\u06E8' | '\\u06EA' .. '\\u06ED' | '\\u06F0' .. '\\u06F9' | '\\u070F' | '\\u0711' | '\\u0730' .. '\\u074A' | '\\u07A6' .. '\\u07B0' | '\\u0901' .. '\\u0903' | '\\u093C' | '\\u093E' .. '\\u094D' | '\\u0951' .. '\\u0954' | '\\u0962' .. '\\u0963' | '\\u0966' .. '\\u096F' | '\\u0981' .. '\\u0983' | '\\u09BC' | '\\u09BE' .. '\\u09C4' | '\\u09C7' .. '\\u09C8' | '\\u09CB' .. '\\u09CD' | '\\u09D7' | '\\u09E2' .. '\\u09E3' | '\\u09E6' .. '\\u09EF' | '\\u0A01' .. '\\u0A03' | '\\u0A3C' | '\\u0A3E' .. '\\u0A42' | '\\u0A47' .. '\\u0A48' | '\\u0A4B' .. '\\u0A4D' | '\\u0A66' .. '\\u0A71' | '\\u0A81' .. '\\u0A83' | '\\u0ABC' | '\\u0ABE' .. '\\u0AC5' | '\\u0AC7' .. '\\u0AC9' | '\\u0ACB' .. '\\u0ACD' | '\\u0AE2' .. '\\u0AE3' | '\\u0AE6' .. '\\u0AEF' | '\\u0B01' .. '\\u0B03' | '\\u0B3C' | '\\u0B3E' .. '\\u0B43' | '\\u0B47' .. '\\u0B48' | '\\u0B4B' .. '\\u0B4D' | '\\u0B56' .. '\\u0B57' | '\\u0B66' .. '\\u0B6F' | '\\u0B82' | '\\u0BBE' .. '\\u0BC2' | '\\u0BC6' .. '\\u0BC8' | '\\u0BCA' .. '\\u0BCD' | '\\u0BD7' | '\\u0BE7' .. '\\u0BEF' | '\\u0C01' .. '\\u0C03' | '\\u0C3E' .. '\\u0C44' | '\\u0C46' .. '\\u0C48' | '\\u0C4A' .. '\\u0C4D' | '\\u0C55' .. '\\u0C56' | '\\u0C66' .. '\\u0C6F' | '\\u0C82' .. '\\u0C83' | '\\u0CBC' | '\\u0CBE' .. '\\u0CC4' | '\\u0CC6' .. '\\u0CC8' | '\\u0CCA' .. '\\u0CCD' | '\\u0CD5' .. '\\u0CD6' | '\\u0CE6' .. '\\u0CEF' | '\\u0D02' .. '\\u0D03' | '\\u0D3E' .. '\\u0D43' | '\\u0D46' .. '\\u0D48' | '\\u0D4A' .. '\\u0D4D' | '\\u0D57' | '\\u0D66' .. '\\u0D6F' | '\\u0D82' .. '\\u0D83' | '\\u0DCA' | '\\u0DCF' .. '\\u0DD4' | '\\u0DD6' | '\\u0DD8' .. '\\u0DDF' | '\\u0DF2' .. '\\u0DF3' | '\\u0E31' | '\\u0E34' .. '\\u0E3A' | '\\u0E47' .. '\\u0E4E' | '\\u0E50' .. '\\u0E59' | '\\u0EB1' | '\\u0EB4' .. '\\u0EB9' | '\\u0EBB' .. '\\u0EBC' | '\\u0EC8' .. '\\u0ECD' | '\\u0ED0' .. '\\u0ED9' | '\\u0F18' .. '\\u0F19' | '\\u0F20' .. '\\u0F29' | '\\u0F35' | '\\u0F37' | '\\u0F39' | '\\u0F3E' .. '\\u0F3F' | '\\u0F71' .. '\\u0F84' | '\\u0F86' .. '\\u0F87' | '\\u0F90' .. '\\u0F97' | '\\u0F99' .. '\\u0FBC' | '\\u0FC6' | '\\u102C' .. '\\u1032' | '\\u1036' .. '\\u1039' | '\\u1040' .. '\\u1049' | '\\u1056' .. '\\u1059' | '\\u1369' .. '\\u1371' | '\\u1712' .. '\\u1714' | '\\u1732' .. '\\u1734' | '\\u1752' .. '\\u1753' | '\\u1772' .. '\\u1773' | '\\u17B4' .. '\\u17D3' | '\\u17DD' | '\\u17E0' .. '\\u17E9' | '\\u180B' .. '\\u180D' | '\\u1810' .. '\\u1819' | '\\u18A9' | '\\u1920' .. '\\u192B' | '\\u1930' .. '\\u193B' | '\\u1946' .. '\\u194F' | '\\u200C' .. '\\u200F' | '\\u202A' .. '\\u202E' | '\\u2060' .. '\\u2063' | '\\u206A' .. '\\u206F' | '\\u20D0' .. '\\u20DC' | '\\u20E1' | '\\u20E5' .. '\\u20EA' | '\\u302A' .. '\\u302F' | '\\u3099' .. '\\u309A' | '\\uFB1E' | '\\uFE00' .. '\\uFE0F' | '\\uFE20' .. '\\uFE23' | '\\uFEFF' | '\\uFF10' .. '\\uFF19' | '\\uFFF9' .. '\\uFFFB' )
             {
             if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001B')||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='\u007F' && input.LA(1)<='\u009F')||input.LA(1)=='\u00AD'||(input.LA(1)>='\u0300' && input.LA(1)<='\u0357')||(input.LA(1)>='\u035D' && input.LA(1)<='\u036F')||(input.LA(1)>='\u0483' && input.LA(1)<='\u0486')||(input.LA(1)>='\u0591' && input.LA(1)<='\u05A1')||(input.LA(1)>='\u05A3' && input.LA(1)<='\u05B9')||(input.LA(1)>='\u05BB' && input.LA(1)<='\u05BD')||input.LA(1)=='\u05BF'||(input.LA(1)>='\u05C1' && input.LA(1)<='\u05C2')||input.LA(1)=='\u05C4'||(input.LA(1)>='\u0600' && input.LA(1)<='\u0603')||(input.LA(1)>='\u0610' && input.LA(1)<='\u0615')||(input.LA(1)>='\u064B' && input.LA(1)<='\u0658')||(input.LA(1)>='\u0660' && input.LA(1)<='\u0669')||input.LA(1)=='\u0670'||(input.LA(1)>='\u06D6' && input.LA(1)<='\u06DD')||(input.LA(1)>='\u06DF' && input.LA(1)<='\u06E4')||(input.LA(1)>='\u06E7' && input.LA(1)<='\u06E8')||(input.LA(1)>='\u06EA' && input.LA(1)<='\u06ED')||(input.LA(1)>='\u06F0' && input.LA(1)<='\u06F9')||input.LA(1)=='\u070F'||input.LA(1)=='\u0711'||(input.LA(1)>='\u0730' && input.LA(1)<='\u074A')||(input.LA(1)>='\u07A6' && input.LA(1)<='\u07B0')||(input.LA(1)>='\u0901' && input.LA(1)<='\u0903')||input.LA(1)=='\u093C'||(input.LA(1)>='\u093E' && input.LA(1)<='\u094D')||(input.LA(1)>='\u0951' && input.LA(1)<='\u0954')||(input.LA(1)>='\u0962' && input.LA(1)<='\u0963')||(input.LA(1)>='\u0966' && input.LA(1)<='\u096F')||(input.LA(1)>='\u0981' && input.LA(1)<='\u0983')||input.LA(1)=='\u09BC'||(input.LA(1)>='\u09BE' && input.LA(1)<='\u09C4')||(input.LA(1)>='\u09C7' && input.LA(1)<='\u09C8')||(input.LA(1)>='\u09CB' && input.LA(1)<='\u09CD')||input.LA(1)=='\u09D7'||(input.LA(1)>='\u09E2' && input.LA(1)<='\u09E3')||(input.LA(1)>='\u09E6' && input.LA(1)<='\u09EF')||(input.LA(1)>='\u0A01' && input.LA(1)<='\u0A03')||input.LA(1)=='\u0A3C'||(input.LA(1)>='\u0A3E' && input.LA(1)<='\u0A42')||(input.LA(1)>='\u0A47' && input.LA(1)<='\u0A48')||(input.LA(1)>='\u0A4B' && input.LA(1)<='\u0A4D')||(input.LA(1)>='\u0A66' && input.LA(1)<='\u0A71')||(input.LA(1)>='\u0A81' && input.LA(1)<='\u0A83')||input.LA(1)=='\u0ABC'||(input.LA(1)>='\u0ABE' && input.LA(1)<='\u0AC5')||(input.LA(1)>='\u0AC7' && input.LA(1)<='\u0AC9')||(input.LA(1)>='\u0ACB' && input.LA(1)<='\u0ACD')||(input.LA(1)>='\u0AE2' && input.LA(1)<='\u0AE3')||(input.LA(1)>='\u0AE6' && input.LA(1)<='\u0AEF')||(input.LA(1)>='\u0B01' && input.LA(1)<='\u0B03')||input.LA(1)=='\u0B3C'||(input.LA(1)>='\u0B3E' && input.LA(1)<='\u0B43')||(input.LA(1)>='\u0B47' && input.LA(1)<='\u0B48')||(input.LA(1)>='\u0B4B' && input.LA(1)<='\u0B4D')||(input.LA(1)>='\u0B56' && input.LA(1)<='\u0B57')||(input.LA(1)>='\u0B66' && input.LA(1)<='\u0B6F')||input.LA(1)=='\u0B82'||(input.LA(1)>='\u0BBE' && input.LA(1)<='\u0BC2')||(input.LA(1)>='\u0BC6' && input.LA(1)<='\u0BC8')||(input.LA(1)>='\u0BCA' && input.LA(1)<='\u0BCD')||input.LA(1)=='\u0BD7'||(input.LA(1)>='\u0BE7' && input.LA(1)<='\u0BEF')||(input.LA(1)>='\u0C01' && input.LA(1)<='\u0C03')||(input.LA(1)>='\u0C3E' && input.LA(1)<='\u0C44')||(input.LA(1)>='\u0C46' && input.LA(1)<='\u0C48')||(input.LA(1)>='\u0C4A' && input.LA(1)<='\u0C4D')||(input.LA(1)>='\u0C55' && input.LA(1)<='\u0C56')||(input.LA(1)>='\u0C66' && input.LA(1)<='\u0C6F')||(input.LA(1)>='\u0C82' && input.LA(1)<='\u0C83')||input.LA(1)=='\u0CBC'||(input.LA(1)>='\u0CBE' && input.LA(1)<='\u0CC4')||(input.LA(1)>='\u0CC6' && input.LA(1)<='\u0CC8')||(input.LA(1)>='\u0CCA' && input.LA(1)<='\u0CCD')||(input.LA(1)>='\u0CD5' && input.LA(1)<='\u0CD6')||(input.LA(1)>='\u0CE6' && input.LA(1)<='\u0CEF')||(input.LA(1)>='\u0D02' && input.LA(1)<='\u0D03')||(input.LA(1)>='\u0D3E' && input.LA(1)<='\u0D43')||(input.LA(1)>='\u0D46' && input.LA(1)<='\u0D48')||(input.LA(1)>='\u0D4A' && input.LA(1)<='\u0D4D')||input.LA(1)=='\u0D57'||(input.LA(1)>='\u0D66' && input.LA(1)<='\u0D6F')||(input.LA(1)>='\u0D82' && input.LA(1)<='\u0D83')||input.LA(1)=='\u0DCA'||(input.LA(1)>='\u0DCF' && input.LA(1)<='\u0DD4')||input.LA(1)=='\u0DD6'||(input.LA(1)>='\u0DD8' && input.LA(1)<='\u0DDF')||(input.LA(1)>='\u0DF2' && input.LA(1)<='\u0DF3')||input.LA(1)=='\u0E31'||(input.LA(1)>='\u0E34' && input.LA(1)<='\u0E3A')||(input.LA(1)>='\u0E47' && input.LA(1)<='\u0E4E')||(input.LA(1)>='\u0E50' && input.LA(1)<='\u0E59')||input.LA(1)=='\u0EB1'||(input.LA(1)>='\u0EB4' && input.LA(1)<='\u0EB9')||(input.LA(1)>='\u0EBB' && input.LA(1)<='\u0EBC')||(input.LA(1)>='\u0EC8' && input.LA(1)<='\u0ECD')||(input.LA(1)>='\u0ED0' && input.LA(1)<='\u0ED9')||(input.LA(1)>='\u0F18' && input.LA(1)<='\u0F19')||(input.LA(1)>='\u0F20' && input.LA(1)<='\u0F29')||input.LA(1)=='\u0F35'||input.LA(1)=='\u0F37'||input.LA(1)=='\u0F39'||(input.LA(1)>='\u0F3E' && input.LA(1)<='\u0F3F')||(input.LA(1)>='\u0F71' && input.LA(1)<='\u0F84')||(input.LA(1)>='\u0F86' && input.LA(1)<='\u0F87')||(input.LA(1)>='\u0F90' && input.LA(1)<='\u0F97')||(input.LA(1)>='\u0F99' && input.LA(1)<='\u0FBC')||input.LA(1)=='\u0FC6'||(input.LA(1)>='\u102C' && input.LA(1)<='\u1032')||(input.LA(1)>='\u1036' && input.LA(1)<='\u1039')||(input.LA(1)>='\u1040' && input.LA(1)<='\u1049')||(input.LA(1)>='\u1056' && input.LA(1)<='\u1059')||(input.LA(1)>='\u1369' && input.LA(1)<='\u1371')||(input.LA(1)>='\u1712' && input.LA(1)<='\u1714')||(input.LA(1)>='\u1732' && input.LA(1)<='\u1734')||(input.LA(1)>='\u1752' && input.LA(1)<='\u1753')||(input.LA(1)>='\u1772' && input.LA(1)<='\u1773')||(input.LA(1)>='\u17B4' && input.LA(1)<='\u17D3')||input.LA(1)=='\u17DD'||(input.LA(1)>='\u17E0' && input.LA(1)<='\u17E9')||(input.LA(1)>='\u180B' && input.LA(1)<='\u180D')||(input.LA(1)>='\u1810' && input.LA(1)<='\u1819')||input.LA(1)=='\u18A9'||(input.LA(1)>='\u1920' && input.LA(1)<='\u192B')||(input.LA(1)>='\u1930' && input.LA(1)<='\u193B')||(input.LA(1)>='\u1946' && input.LA(1)<='\u194F')||(input.LA(1)>='\u200C' && input.LA(1)<='\u200F')||(input.LA(1)>='\u202A' && input.LA(1)<='\u202E')||(input.LA(1)>='\u2060' && input.LA(1)<='\u2063')||(input.LA(1)>='\u206A' && input.LA(1)<='\u206F')||(input.LA(1)>='\u20D0' && input.LA(1)<='\u20DC')||input.LA(1)=='\u20E1'||(input.LA(1)>='\u20E5' && input.LA(1)<='\u20EA')||(input.LA(1)>='\u302A' && input.LA(1)<='\u302F')||(input.LA(1)>='\u3099' && input.LA(1)<='\u309A')||input.LA(1)=='\uFB1E'||(input.LA(1)>='\uFE00' && input.LA(1)<='\uFE0F')||(input.LA(1)>='\uFE20' && input.LA(1)<='\uFE23')||input.LA(1)=='\uFEFF'||(input.LA(1)>='\uFF10' && input.LA(1)<='\uFF19')||(input.LA(1)>='\uFFF9' && input.LA(1)<='\uFFFB') ) {
                 input.consume();
@@ -3594,10 +3594,10 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:12: ( '0x' | '0X' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:12: ( '0x' | '0X' )
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -3625,7 +3625,7 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt36) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:13: '0x'
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:13: '0x'
                     {
                     match("0x"); 
 
@@ -3633,7 +3633,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:18: '0X'
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:18: '0X'
                     {
                     match("0X"); 
 
@@ -3643,7 +3643,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
             }
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt37=0;
             loop37:
             do {
@@ -3681,7 +3681,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 cnt37++;
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt39=2;
             int LA39_0 = input.LA(1);
 
@@ -3690,10 +3690,10 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt39) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt38=2;
                     int LA38_0 = input.LA(1);
 
@@ -3711,7 +3711,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt38) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -3735,7 +3735,7 @@ public class PsiInternalXtendLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10532:84: ( 'l' | 'L' )
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10640:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -3774,11 +3774,11 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10534:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10534:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10642:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10642:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10534:21: ( '0' .. '9' | '_' )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10642:21: ( '0' .. '9' | '_' )*
             loop40:
             do {
                 int alt40=2;
@@ -3827,11 +3827,11 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt42=2;
             int LA42_0 = input.LA(1);
 
@@ -3840,7 +3840,7 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt42) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -3851,7 +3851,7 @@ public class PsiInternalXtendLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:36: ( '+' | '-' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:36: ( '+' | '-' )?
                     int alt41=2;
                     int LA41_0 = input.LA(1);
 
@@ -3884,7 +3884,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
             }
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt43=3;
             int LA43_0 = input.LA(1);
 
@@ -3896,7 +3896,7 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt43) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -3920,7 +3920,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10536:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10644:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -3953,10 +3953,10 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt48=2;
             int LA48_0 = input.LA(1);
 
@@ -3974,10 +3974,10 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt48) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop44:
                     do {
                         int alt44=3;
@@ -3993,7 +3993,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                         switch (alt44) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:21: '\\\\' .
+                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -4001,7 +4001,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -4021,7 +4021,7 @@ public class PsiInternalXtendLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:44: ( '\"' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:44: ( '\"' )?
                     int alt45=2;
                     int LA45_0 = input.LA(1);
 
@@ -4030,7 +4030,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt45) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:44: '\"'
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:44: '\"'
                             {
                             match('\"'); 
 
@@ -4043,10 +4043,10 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop46:
                     do {
                         int alt46=3;
@@ -4062,7 +4062,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                         switch (alt46) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:55: '\\\\' .
+                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -4070,7 +4070,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -4090,7 +4090,7 @@ public class PsiInternalXtendLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:79: ( '\\'' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:79: ( '\\'' )?
                     int alt47=2;
                     int LA47_0 = input.LA(1);
 
@@ -4099,7 +4099,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt47) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10538:79: '\\''
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10646:79: '\\''
                             {
                             match('\''); 
 
@@ -4130,12 +4130,12 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10540:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10540:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10648:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10648:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10540:24: ( options {greedy=false; } : . )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10648:24: ( options {greedy=false; } : . )*
             loop49:
             do {
                 int alt49=2;
@@ -4160,7 +4160,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt49) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10540:52: .
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10648:52: .
             	    {
             	    matchAny(); 
 
@@ -4190,12 +4190,12 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop50:
             do {
                 int alt50=2;
@@ -4208,7 +4208,7 @@ public class PsiInternalXtendLexer extends Lexer {
 
                 switch (alt50) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -4228,7 +4228,7 @@ public class PsiInternalXtendLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:40: ( ( '\\r' )? '\\n' )?
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:40: ( ( '\\r' )? '\\n' )?
             int alt52=2;
             int LA52_0 = input.LA(1);
 
@@ -4237,9 +4237,9 @@ public class PsiInternalXtendLexer extends Lexer {
             }
             switch (alt52) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:41: ( '\\r' )? '\\n'
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:41: ( '\\r' )?
+                    // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:41: ( '\\r' )?
                     int alt51=2;
                     int LA51_0 = input.LA(1);
 
@@ -4248,7 +4248,7 @@ public class PsiInternalXtendLexer extends Lexer {
                     }
                     switch (alt51) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10542:41: '\\r'
+                            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10650:41: '\\r'
                             {
                             match('\r'); 
 
@@ -4280,10 +4280,10 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10544:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10544:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10652:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10652:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10544:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10652:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt53=0;
             loop53:
             do {
@@ -4337,8 +4337,8 @@ public class PsiInternalXtendLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10546:16: ( . )
-            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10546:18: .
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10654:16: ( . )
+            // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:10654:18: .
             {
             matchAny(); 
 
@@ -4353,845 +4353,845 @@ public class PsiInternalXtendLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:8: ( T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | T__121 | T__122 | T__123 | T__124 | T__125 | T__126 | T__127 | T__128 | T__129 | RULE_ID | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:8: ( KW_Package | KW_Semicolon | KW_Class | KW_LessThanSign | KW_Comma | KW_GreaterThanSign | KW_Extends | KW_Implements | KW_LeftCurlyBracket | KW_RightCurlyBracket | KW_Interface | KW_Enum | KW_Annotation | KW_LeftParenthesis | KW_RightParenthesis | KW_EqualsSignGreaterThanSign | KW_EqualsSign | KW_Extension | KW_Throws | KW_New | KW_FullStop | KW_Public | KW_Private | KW_Protected | KW_Abstract | KW_Static | KW_Dispatch | KW_Final | KW_Strictfp | KW_Native | KW_Volatile | KW_Synchronized | KW_Transient | KW_Val | KW_Var | KW_Def | KW_Override | KW_Create | KW_Colon | KW_AFTER | KW_BEFORE | KW_SEPARATOR | KW_Import | KW_FullStopFullStopFullStop | KW_Switch | KW_Default | KW_FOR | KW_ENDFOR | KW_IF | KW_ELSE | KW_ENDIF | KW_ELSEIF | KW_CommercialAt | KW_NumberSign | KW_LeftSquareBracket | KW_RightSquareBracket | KW_PlusSignEqualsSign | KW_HyphenMinusEqualsSign | KW_AsteriskEqualsSign | KW_SolidusEqualsSign | KW_PercentSignEqualsSign | KW_GreaterThanSignEqualsSign | KW_VerticalLineVerticalLine | KW_AmpersandAmpersand | KW_EqualsSignEqualsSign | KW_ExclamationMarkEqualsSign | KW_EqualsSignEqualsSignEqualsSign | KW_ExclamationMarkEqualsSignEqualsSign | KW_Instanceof | KW_HyphenMinusGreaterThanSign | KW_FullStopFullStopLessThanSign | KW_FullStopFullStop | KW_LessThanSignGreaterThanSign | KW_QuestionMarkColon | KW_PlusSign | KW_HyphenMinus | KW_Asterisk | KW_AsteriskAsterisk | KW_Solidus | KW_PercentSign | KW_ExclamationMark | KW_As | KW_PlusSignPlusSign | KW_HyphenMinusHyphenMinus | KW_ColonColon | KW_QuestionMarkFullStop | KW_VerticalLine | KW_If | KW_Else | KW_Case | KW_For | KW_While | KW_Do | KW_Super | KW_False | KW_True | KW_Null | KW_Typeof | KW_Throw | KW_Return | KW_Try | KW_Finally | KW_Catch | KW_QuestionMark | KW_Ampersand | RULE_ID | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt54=120;
         alt54 = dfa54.predict(input);
         switch (alt54) {
             case 1 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:10: T__25
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:10: KW_Package
                 {
-                mT__25(); 
+                mKW_Package(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:16: T__26
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:21: KW_Semicolon
                 {
-                mT__26(); 
+                mKW_Semicolon(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:22: T__27
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:34: KW_Class
                 {
-                mT__27(); 
+                mKW_Class(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:28: T__28
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:43: KW_LessThanSign
                 {
-                mT__28(); 
+                mKW_LessThanSign(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:34: T__29
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:59: KW_Comma
                 {
-                mT__29(); 
+                mKW_Comma(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:40: T__30
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:68: KW_GreaterThanSign
                 {
-                mT__30(); 
+                mKW_GreaterThanSign(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:46: T__31
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:87: KW_Extends
                 {
-                mT__31(); 
+                mKW_Extends(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:52: T__32
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:98: KW_Implements
                 {
-                mT__32(); 
+                mKW_Implements(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:58: T__33
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:112: KW_LeftCurlyBracket
                 {
-                mT__33(); 
+                mKW_LeftCurlyBracket(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:64: T__34
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:132: KW_RightCurlyBracket
                 {
-                mT__34(); 
+                mKW_RightCurlyBracket(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:70: T__35
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:153: KW_Interface
                 {
-                mT__35(); 
+                mKW_Interface(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:76: T__36
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:166: KW_Enum
                 {
-                mT__36(); 
+                mKW_Enum(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:82: T__37
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:174: KW_Annotation
                 {
-                mT__37(); 
+                mKW_Annotation(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:88: T__38
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:188: KW_LeftParenthesis
                 {
-                mT__38(); 
+                mKW_LeftParenthesis(); 
 
                 }
                 break;
             case 15 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:94: T__39
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:207: KW_RightParenthesis
                 {
-                mT__39(); 
+                mKW_RightParenthesis(); 
 
                 }
                 break;
             case 16 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:100: T__40
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:227: KW_EqualsSignGreaterThanSign
                 {
-                mT__40(); 
+                mKW_EqualsSignGreaterThanSign(); 
 
                 }
                 break;
             case 17 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:106: T__41
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:256: KW_EqualsSign
                 {
-                mT__41(); 
+                mKW_EqualsSign(); 
 
                 }
                 break;
             case 18 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:112: T__42
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:270: KW_Extension
                 {
-                mT__42(); 
+                mKW_Extension(); 
 
                 }
                 break;
             case 19 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:118: T__43
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:283: KW_Throws
                 {
-                mT__43(); 
+                mKW_Throws(); 
 
                 }
                 break;
             case 20 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:124: T__44
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:293: KW_New
                 {
-                mT__44(); 
+                mKW_New(); 
 
                 }
                 break;
             case 21 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:130: T__45
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:300: KW_FullStop
                 {
-                mT__45(); 
+                mKW_FullStop(); 
 
                 }
                 break;
             case 22 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:136: T__46
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:312: KW_Public
                 {
-                mT__46(); 
+                mKW_Public(); 
 
                 }
                 break;
             case 23 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:142: T__47
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:322: KW_Private
                 {
-                mT__47(); 
+                mKW_Private(); 
 
                 }
                 break;
             case 24 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:148: T__48
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:333: KW_Protected
                 {
-                mT__48(); 
+                mKW_Protected(); 
 
                 }
                 break;
             case 25 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:154: T__49
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:346: KW_Abstract
                 {
-                mT__49(); 
+                mKW_Abstract(); 
 
                 }
                 break;
             case 26 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:160: T__50
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:358: KW_Static
                 {
-                mT__50(); 
+                mKW_Static(); 
 
                 }
                 break;
             case 27 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:166: T__51
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:368: KW_Dispatch
                 {
-                mT__51(); 
+                mKW_Dispatch(); 
 
                 }
                 break;
             case 28 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:172: T__52
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:380: KW_Final
                 {
-                mT__52(); 
+                mKW_Final(); 
 
                 }
                 break;
             case 29 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:178: T__53
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:389: KW_Strictfp
                 {
-                mT__53(); 
+                mKW_Strictfp(); 
 
                 }
                 break;
             case 30 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:184: T__54
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:401: KW_Native
                 {
-                mT__54(); 
+                mKW_Native(); 
 
                 }
                 break;
             case 31 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:190: T__55
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:411: KW_Volatile
                 {
-                mT__55(); 
+                mKW_Volatile(); 
 
                 }
                 break;
             case 32 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:196: T__56
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:423: KW_Synchronized
                 {
-                mT__56(); 
+                mKW_Synchronized(); 
 
                 }
                 break;
             case 33 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:202: T__57
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:439: KW_Transient
                 {
-                mT__57(); 
+                mKW_Transient(); 
 
                 }
                 break;
             case 34 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:208: T__58
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:452: KW_Val
                 {
-                mT__58(); 
+                mKW_Val(); 
 
                 }
                 break;
             case 35 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:214: T__59
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:459: KW_Var
                 {
-                mT__59(); 
+                mKW_Var(); 
 
                 }
                 break;
             case 36 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:220: T__60
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:466: KW_Def
                 {
-                mT__60(); 
+                mKW_Def(); 
 
                 }
                 break;
             case 37 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:226: T__61
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:473: KW_Override
                 {
-                mT__61(); 
+                mKW_Override(); 
 
                 }
                 break;
             case 38 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:232: T__62
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:485: KW_Create
                 {
-                mT__62(); 
+                mKW_Create(); 
 
                 }
                 break;
             case 39 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:238: T__63
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:495: KW_Colon
                 {
-                mT__63(); 
+                mKW_Colon(); 
 
                 }
                 break;
             case 40 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:244: T__64
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:504: KW_AFTER
                 {
-                mT__64(); 
+                mKW_AFTER(); 
 
                 }
                 break;
             case 41 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:250: T__65
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:513: KW_BEFORE
                 {
-                mT__65(); 
+                mKW_BEFORE(); 
 
                 }
                 break;
             case 42 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:256: T__66
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:523: KW_SEPARATOR
                 {
-                mT__66(); 
+                mKW_SEPARATOR(); 
 
                 }
                 break;
             case 43 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:262: T__67
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:536: KW_Import
                 {
-                mT__67(); 
+                mKW_Import(); 
 
                 }
                 break;
             case 44 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:268: T__68
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:546: KW_FullStopFullStopFullStop
                 {
-                mT__68(); 
+                mKW_FullStopFullStopFullStop(); 
 
                 }
                 break;
             case 45 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:274: T__69
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:574: KW_Switch
                 {
-                mT__69(); 
+                mKW_Switch(); 
 
                 }
                 break;
             case 46 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:280: T__70
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:584: KW_Default
                 {
-                mT__70(); 
+                mKW_Default(); 
 
                 }
                 break;
             case 47 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:286: T__71
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:595: KW_FOR
                 {
-                mT__71(); 
+                mKW_FOR(); 
 
                 }
                 break;
             case 48 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:292: T__72
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:602: KW_ENDFOR
                 {
-                mT__72(); 
+                mKW_ENDFOR(); 
 
                 }
                 break;
             case 49 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:298: T__73
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:612: KW_IF
                 {
-                mT__73(); 
+                mKW_IF(); 
 
                 }
                 break;
             case 50 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:304: T__74
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:618: KW_ELSE
                 {
-                mT__74(); 
+                mKW_ELSE(); 
 
                 }
                 break;
             case 51 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:310: T__75
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:626: KW_ENDIF
                 {
-                mT__75(); 
+                mKW_ENDIF(); 
 
                 }
                 break;
             case 52 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:316: T__76
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:635: KW_ELSEIF
                 {
-                mT__76(); 
+                mKW_ELSEIF(); 
 
                 }
                 break;
             case 53 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:322: T__77
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:645: KW_CommercialAt
                 {
-                mT__77(); 
+                mKW_CommercialAt(); 
 
                 }
                 break;
             case 54 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:328: T__78
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:661: KW_NumberSign
                 {
-                mT__78(); 
+                mKW_NumberSign(); 
 
                 }
                 break;
             case 55 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:334: T__79
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:675: KW_LeftSquareBracket
                 {
-                mT__79(); 
+                mKW_LeftSquareBracket(); 
 
                 }
                 break;
             case 56 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:340: T__80
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:696: KW_RightSquareBracket
                 {
-                mT__80(); 
+                mKW_RightSquareBracket(); 
 
                 }
                 break;
             case 57 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:346: T__81
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:718: KW_PlusSignEqualsSign
                 {
-                mT__81(); 
+                mKW_PlusSignEqualsSign(); 
 
                 }
                 break;
             case 58 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:352: T__82
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:740: KW_HyphenMinusEqualsSign
                 {
-                mT__82(); 
+                mKW_HyphenMinusEqualsSign(); 
 
                 }
                 break;
             case 59 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:358: T__83
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:765: KW_AsteriskEqualsSign
                 {
-                mT__83(); 
+                mKW_AsteriskEqualsSign(); 
 
                 }
                 break;
             case 60 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:364: T__84
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:787: KW_SolidusEqualsSign
                 {
-                mT__84(); 
+                mKW_SolidusEqualsSign(); 
 
                 }
                 break;
             case 61 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:370: T__85
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:808: KW_PercentSignEqualsSign
                 {
-                mT__85(); 
+                mKW_PercentSignEqualsSign(); 
 
                 }
                 break;
             case 62 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:376: T__86
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:833: KW_GreaterThanSignEqualsSign
                 {
-                mT__86(); 
+                mKW_GreaterThanSignEqualsSign(); 
 
                 }
                 break;
             case 63 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:382: T__87
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:862: KW_VerticalLineVerticalLine
                 {
-                mT__87(); 
+                mKW_VerticalLineVerticalLine(); 
 
                 }
                 break;
             case 64 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:388: T__88
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:890: KW_AmpersandAmpersand
                 {
-                mT__88(); 
+                mKW_AmpersandAmpersand(); 
 
                 }
                 break;
             case 65 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:394: T__89
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:912: KW_EqualsSignEqualsSign
                 {
-                mT__89(); 
+                mKW_EqualsSignEqualsSign(); 
 
                 }
                 break;
             case 66 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:400: T__90
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:936: KW_ExclamationMarkEqualsSign
                 {
-                mT__90(); 
+                mKW_ExclamationMarkEqualsSign(); 
 
                 }
                 break;
             case 67 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:406: T__91
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:965: KW_EqualsSignEqualsSignEqualsSign
                 {
-                mT__91(); 
+                mKW_EqualsSignEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 68 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:412: T__92
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:999: KW_ExclamationMarkEqualsSignEqualsSign
                 {
-                mT__92(); 
+                mKW_ExclamationMarkEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 69 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:418: T__93
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1038: KW_Instanceof
                 {
-                mT__93(); 
+                mKW_Instanceof(); 
 
                 }
                 break;
             case 70 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:424: T__94
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1052: KW_HyphenMinusGreaterThanSign
                 {
-                mT__94(); 
+                mKW_HyphenMinusGreaterThanSign(); 
 
                 }
                 break;
             case 71 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:430: T__95
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1082: KW_FullStopFullStopLessThanSign
                 {
-                mT__95(); 
+                mKW_FullStopFullStopLessThanSign(); 
 
                 }
                 break;
             case 72 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:436: T__96
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1114: KW_FullStopFullStop
                 {
-                mT__96(); 
+                mKW_FullStopFullStop(); 
 
                 }
                 break;
             case 73 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:442: T__97
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1134: KW_LessThanSignGreaterThanSign
                 {
-                mT__97(); 
+                mKW_LessThanSignGreaterThanSign(); 
 
                 }
                 break;
             case 74 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:448: T__98
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1165: KW_QuestionMarkColon
                 {
-                mT__98(); 
+                mKW_QuestionMarkColon(); 
 
                 }
                 break;
             case 75 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:454: T__99
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1186: KW_PlusSign
                 {
-                mT__99(); 
+                mKW_PlusSign(); 
 
                 }
                 break;
             case 76 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:460: T__100
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1198: KW_HyphenMinus
                 {
-                mT__100(); 
+                mKW_HyphenMinus(); 
 
                 }
                 break;
             case 77 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:467: T__101
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1213: KW_Asterisk
                 {
-                mT__101(); 
+                mKW_Asterisk(); 
 
                 }
                 break;
             case 78 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:474: T__102
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1225: KW_AsteriskAsterisk
                 {
-                mT__102(); 
+                mKW_AsteriskAsterisk(); 
 
                 }
                 break;
             case 79 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:481: T__103
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1245: KW_Solidus
                 {
-                mT__103(); 
+                mKW_Solidus(); 
 
                 }
                 break;
             case 80 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:488: T__104
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1256: KW_PercentSign
                 {
-                mT__104(); 
+                mKW_PercentSign(); 
 
                 }
                 break;
             case 81 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:495: T__105
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1271: KW_ExclamationMark
                 {
-                mT__105(); 
+                mKW_ExclamationMark(); 
 
                 }
                 break;
             case 82 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:502: T__106
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1290: KW_As
                 {
-                mT__106(); 
+                mKW_As(); 
 
                 }
                 break;
             case 83 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:509: T__107
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1296: KW_PlusSignPlusSign
                 {
-                mT__107(); 
+                mKW_PlusSignPlusSign(); 
 
                 }
                 break;
             case 84 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:516: T__108
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1316: KW_HyphenMinusHyphenMinus
                 {
-                mT__108(); 
+                mKW_HyphenMinusHyphenMinus(); 
 
                 }
                 break;
             case 85 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:523: T__109
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1342: KW_ColonColon
                 {
-                mT__109(); 
+                mKW_ColonColon(); 
 
                 }
                 break;
             case 86 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:530: T__110
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1356: KW_QuestionMarkFullStop
                 {
-                mT__110(); 
+                mKW_QuestionMarkFullStop(); 
 
                 }
                 break;
             case 87 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:537: T__111
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1380: KW_VerticalLine
                 {
-                mT__111(); 
+                mKW_VerticalLine(); 
 
                 }
                 break;
             case 88 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:544: T__112
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1396: KW_If
                 {
-                mT__112(); 
+                mKW_If(); 
 
                 }
                 break;
             case 89 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:551: T__113
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1402: KW_Else
                 {
-                mT__113(); 
+                mKW_Else(); 
 
                 }
                 break;
             case 90 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:558: T__114
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1410: KW_Case
                 {
-                mT__114(); 
+                mKW_Case(); 
 
                 }
                 break;
             case 91 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:565: T__115
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1418: KW_For
                 {
-                mT__115(); 
+                mKW_For(); 
 
                 }
                 break;
             case 92 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:572: T__116
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1425: KW_While
                 {
-                mT__116(); 
+                mKW_While(); 
 
                 }
                 break;
             case 93 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:579: T__117
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1434: KW_Do
                 {
-                mT__117(); 
+                mKW_Do(); 
 
                 }
                 break;
             case 94 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:586: T__118
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1440: KW_Super
                 {
-                mT__118(); 
+                mKW_Super(); 
 
                 }
                 break;
             case 95 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:593: T__119
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1449: KW_False
                 {
-                mT__119(); 
+                mKW_False(); 
 
                 }
                 break;
             case 96 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:600: T__120
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1458: KW_True
                 {
-                mT__120(); 
+                mKW_True(); 
 
                 }
                 break;
             case 97 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:607: T__121
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1466: KW_Null
                 {
-                mT__121(); 
+                mKW_Null(); 
 
                 }
                 break;
             case 98 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:614: T__122
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1474: KW_Typeof
                 {
-                mT__122(); 
+                mKW_Typeof(); 
 
                 }
                 break;
             case 99 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:621: T__123
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1484: KW_Throw
                 {
-                mT__123(); 
+                mKW_Throw(); 
 
                 }
                 break;
             case 100 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:628: T__124
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1493: KW_Return
                 {
-                mT__124(); 
+                mKW_Return(); 
 
                 }
                 break;
             case 101 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:635: T__125
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1503: KW_Try
                 {
-                mT__125(); 
+                mKW_Try(); 
 
                 }
                 break;
             case 102 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:642: T__126
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1510: KW_Finally
                 {
-                mT__126(); 
+                mKW_Finally(); 
 
                 }
                 break;
             case 103 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:649: T__127
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1521: KW_Catch
                 {
-                mT__127(); 
+                mKW_Catch(); 
 
                 }
                 break;
             case 104 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:656: T__128
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1530: KW_QuestionMark
                 {
-                mT__128(); 
+                mKW_QuestionMark(); 
 
                 }
                 break;
             case 105 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:663: T__129
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1546: KW_Ampersand
                 {
-                mT__129(); 
+                mKW_Ampersand(); 
 
                 }
                 break;
             case 106 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:670: RULE_ID
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1559: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 107 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:678: RULE_RICH_TEXT
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1567: RULE_RICH_TEXT
                 {
                 mRULE_RICH_TEXT(); 
 
                 }
                 break;
             case 108 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:693: RULE_RICH_TEXT_START
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1582: RULE_RICH_TEXT_START
                 {
                 mRULE_RICH_TEXT_START(); 
 
                 }
                 break;
             case 109 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:714: RULE_RICH_TEXT_END
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1603: RULE_RICH_TEXT_END
                 {
                 mRULE_RICH_TEXT_END(); 
 
                 }
                 break;
             case 110 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:733: RULE_RICH_TEXT_INBETWEEN
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1622: RULE_RICH_TEXT_INBETWEEN
                 {
                 mRULE_RICH_TEXT_INBETWEEN(); 
 
                 }
                 break;
             case 111 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:758: RULE_COMMENT_RICH_TEXT_INBETWEEN
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1647: RULE_COMMENT_RICH_TEXT_INBETWEEN
                 {
                 mRULE_COMMENT_RICH_TEXT_INBETWEEN(); 
 
                 }
                 break;
             case 112 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:791: RULE_COMMENT_RICH_TEXT_END
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1680: RULE_COMMENT_RICH_TEXT_END
                 {
                 mRULE_COMMENT_RICH_TEXT_END(); 
 
                 }
                 break;
             case 113 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:818: RULE_HEX
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1707: RULE_HEX
                 {
                 mRULE_HEX(); 
 
                 }
                 break;
             case 114 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:827: RULE_INT
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1716: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 115 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:836: RULE_DECIMAL
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1725: RULE_DECIMAL
                 {
                 mRULE_DECIMAL(); 
 
                 }
                 break;
             case 116 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:849: RULE_STRING
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1738: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 117 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:861: RULE_ML_COMMENT
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1750: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 118 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:877: RULE_SL_COMMENT
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1766: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 119 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:893: RULE_WS
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1782: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 120 :
-                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:901: RULE_ANY_OTHER
+                // ../../intellij/org.eclipse.xtend.idea/src-gen/org/eclipse/xtend/core/idea/parser/antlr/internal/PsiInternalXtend.g:1:1790: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -5696,7 +5696,7 @@ public class PsiInternalXtendLexer extends Lexer {
             this.transition = DFA54_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | T__82 | T__83 | T__84 | T__85 | T__86 | T__87 | T__88 | T__89 | T__90 | T__91 | T__92 | T__93 | T__94 | T__95 | T__96 | T__97 | T__98 | T__99 | T__100 | T__101 | T__102 | T__103 | T__104 | T__105 | T__106 | T__107 | T__108 | T__109 | T__110 | T__111 | T__112 | T__113 | T__114 | T__115 | T__116 | T__117 | T__118 | T__119 | T__120 | T__121 | T__122 | T__123 | T__124 | T__125 | T__126 | T__127 | T__128 | T__129 | RULE_ID | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( KW_Package | KW_Semicolon | KW_Class | KW_LessThanSign | KW_Comma | KW_GreaterThanSign | KW_Extends | KW_Implements | KW_LeftCurlyBracket | KW_RightCurlyBracket | KW_Interface | KW_Enum | KW_Annotation | KW_LeftParenthesis | KW_RightParenthesis | KW_EqualsSignGreaterThanSign | KW_EqualsSign | KW_Extension | KW_Throws | KW_New | KW_FullStop | KW_Public | KW_Private | KW_Protected | KW_Abstract | KW_Static | KW_Dispatch | KW_Final | KW_Strictfp | KW_Native | KW_Volatile | KW_Synchronized | KW_Transient | KW_Val | KW_Var | KW_Def | KW_Override | KW_Create | KW_Colon | KW_AFTER | KW_BEFORE | KW_SEPARATOR | KW_Import | KW_FullStopFullStopFullStop | KW_Switch | KW_Default | KW_FOR | KW_ENDFOR | KW_IF | KW_ELSE | KW_ENDIF | KW_ELSEIF | KW_CommercialAt | KW_NumberSign | KW_LeftSquareBracket | KW_RightSquareBracket | KW_PlusSignEqualsSign | KW_HyphenMinusEqualsSign | KW_AsteriskEqualsSign | KW_SolidusEqualsSign | KW_PercentSignEqualsSign | KW_GreaterThanSignEqualsSign | KW_VerticalLineVerticalLine | KW_AmpersandAmpersand | KW_EqualsSignEqualsSign | KW_ExclamationMarkEqualsSign | KW_EqualsSignEqualsSignEqualsSign | KW_ExclamationMarkEqualsSignEqualsSign | KW_Instanceof | KW_HyphenMinusGreaterThanSign | KW_FullStopFullStopLessThanSign | KW_FullStopFullStop | KW_LessThanSignGreaterThanSign | KW_QuestionMarkColon | KW_PlusSign | KW_HyphenMinus | KW_Asterisk | KW_AsteriskAsterisk | KW_Solidus | KW_PercentSign | KW_ExclamationMark | KW_As | KW_PlusSignPlusSign | KW_HyphenMinusHyphenMinus | KW_ColonColon | KW_QuestionMarkFullStop | KW_VerticalLine | KW_If | KW_Else | KW_Case | KW_For | KW_While | KW_Do | KW_Super | KW_False | KW_True | KW_Null | KW_Typeof | KW_Throw | KW_Return | KW_Try | KW_Finally | KW_Catch | KW_QuestionMark | KW_Ampersand | RULE_ID | RULE_RICH_TEXT | RULE_RICH_TEXT_START | RULE_RICH_TEXT_END | RULE_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_INBETWEEN | RULE_COMMENT_RICH_TEXT_END | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

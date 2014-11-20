@@ -7,10 +7,6 @@ public class AbstractSDomainIdeaModule extends org.eclipse.xtext.idea.DefaultIde
 		return org.eclipse.xtext.idea.sdomain.idea.lang.SDomainSyntaxHighlighter.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtext.idea.sdomain.idea.lang.parser.SDomainLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtext.idea.sdomain.idea.lang.parser.SDomainPsiParser.class;
 	}

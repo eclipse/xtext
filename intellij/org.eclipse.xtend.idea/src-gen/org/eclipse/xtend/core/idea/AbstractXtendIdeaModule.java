@@ -7,10 +7,6 @@ public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtend.core.idea.lang.XtendSyntaxHighlighter.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtend.core.idea.lang.parser.XtendLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtend.core.idea.lang.parser.XtendPsiParser.class;
 	}

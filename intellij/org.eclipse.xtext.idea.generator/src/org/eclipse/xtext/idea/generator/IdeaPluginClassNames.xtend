@@ -89,10 +89,6 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
 	}
 	
-	def String getLexerName(Grammar it) {
-		basePackageName+'.lang.parser.'+it.name.toSimpleName+'Lexer'
-	}
-	
 	def String getSuperParserDefinitionName(Grammar it) {
 		usedGrammars.head?.parserDefinitionName ?: 'org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition'
 	}

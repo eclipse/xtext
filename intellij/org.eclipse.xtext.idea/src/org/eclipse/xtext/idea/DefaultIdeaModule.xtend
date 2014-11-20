@@ -11,8 +11,13 @@ import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
 
 class DefaultIdeaModule extends AbstractGenericModule {
+	
+	def Class<? extends com.intellij.lexer.Lexer> bindLexer() {
+		AntlrDelegatingIdeaLexer
+	}
 
 	def void configureIResourceDescriptions(Binder binder) {
 		binder.bind(IResourceDescriptions).to(ProjectScopeBasedResourceDescriptions)
