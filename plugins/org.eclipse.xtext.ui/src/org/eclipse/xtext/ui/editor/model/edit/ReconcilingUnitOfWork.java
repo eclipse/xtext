@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
+import com.google.inject.ImplementedBy;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.text.edits.TextEdit;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
 
 /**
  * Translates semantic changes to a document's EMF resource to text edits on 
@@ -87,5 +89,26 @@ public class ReconcilingUnitOfWork<T> implements IUnitOfWork<T, XtextResource> {
 		public boolean hasDocumentChanged() {
 			return documentChanged;
 		}
+	}
+	
+	/**
+	 * Provides a ReconcilingUnitOfWork
+	 * @author Christian Dietrich - Initial contribution and API
+	 * 
+	 * @since 2.8
+	 */
+	@ImplementedBy(ReconcilingUnitOfWorkProvider.DefaultImpl.class)
+	public static interface ReconcilingUnitOfWorkProvider {
+		
+		<T> ReconcilingUnitOfWork<T> get(IUnitOfWork<T, XtextResource> work, IXtextDocument document, ITextEditComposer composer);
+		
+		public static class DefaultImpl implements ReconcilingUnitOfWorkProvider {
+
+			public <T> ReconcilingUnitOfWork<T> get(IUnitOfWork<T, XtextResource> work, IXtextDocument document, ITextEditComposer composer) {
+				return new ReconcilingUnitOfWork<T>(work, document, composer);
+			}
+			
+		}
+		
 	}
 }
