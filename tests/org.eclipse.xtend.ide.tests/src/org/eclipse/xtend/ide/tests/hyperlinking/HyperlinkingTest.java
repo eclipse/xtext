@@ -39,11 +39,11 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
 		assertEquals(4, hyperlinks.length);
-		assertEquals("foo(Number) : Object", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - foo(Number) : Object", hyperlinks[0].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
-		assertEquals("foo(String) : Object", hyperlinks[1].getHyperlinkText());
+		assertEquals("Open Declaration - foo(String) : Object", hyperlinks[1].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[1]).getURI().isPlatformResource());
-		assertEquals("foo(Object) : Object", hyperlinks[2].getHyperlinkText());
+		assertEquals("Open Declaration - foo(Object) : Object", hyperlinks[2].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[2]).getURI().isPlatformResource());
 		assertEquals("Open Return Type - Object", hyperlinks[3].getHyperlinkText());
 		assertEquals("Object", ((JdtHyperlink) hyperlinks[3]).getJavaElement().getElementName());
@@ -57,7 +57,7 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("foo() : Object", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - foo() : Object", hyperlinks[0].getHyperlinkText());
 		assertTrue(((XtextHyperlink) hyperlinks[0]).getURI().isPlatformResource());
 		assertEquals("Open Return Type - Object", hyperlinks[1].getHyperlinkText());
 		assertEquals("Object", ((JdtHyperlink) hyperlinks[1]).getJavaElement().getElementName());
@@ -71,7 +71,7 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("Foo", 10), true);
 		assertEquals(1, hyperlinks.length);
-		assertEquals("Foo", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - Foo", hyperlinks[0].getHyperlinkText());
 		assertTrue(((XtextHyperlink)hyperlinks[0]).getURI().isPlatformResource());
 	}
 
@@ -191,32 +191,32 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		int indexOf_x_FieldRef = modelAsString.indexOf("x");
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("x : Baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - x : Baz", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Field Type - Baz", hyperlinks[1].getHyperlinkText());
 		
 		int indexOf_Baz_ParamRef = modelAsString.indexOf("baz", indexOf_x_FieldRef);
 		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_Baz_ParamRef, true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("Baz baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - Baz baz", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Parameter Type - Baz", hyperlinks[1].getHyperlinkText());
 		
 		int indexOf_j_FieldRef = modelAsString.indexOf("j", indexOf_Baz_ParamRef);
 		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_j_FieldRef, true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("j : String", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - j : String", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Field Type - String", hyperlinks[1].getHyperlinkText());
 		assertEquals("String", ((JdtHyperlink) hyperlinks[1]).getJavaElement().getElementName());
 
 		int indexOf_vv_VarRef = modelAsString.indexOf("vv", indexOf_j_FieldRef);
 		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_vv_VarRef, true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("String vv", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - String vv", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Variable Type - String", hyperlinks[1].getHyperlinkText());
 		
 		int indexOf_meth_MethodeCall = modelAsString.indexOf("meth", indexOf_vv_VarRef);
 		hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_meth_MethodeCall, true);
 		assertEquals(2, hyperlinks.length);
-		assertEquals("meth(Baz, String) : Baz", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Declaration - meth(Baz, String) : Baz", hyperlinks[0].getHyperlinkText());
 		assertEquals("Open Return Type - Baz", hyperlinks[1].getHyperlinkText());
 	}
 	
@@ -227,6 +227,16 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
 		assertEquals(1, hyperlinks.length);
 		assertEquals("Open Inferred Type - String", hyperlinks[0].getHyperlinkText());
+	}
+	
+	@Test public void testOpenInferredTypeOnReference() throws Exception {
+		String modelAsString = "class Baz { def void foo() { var myVar='' println(myVar) } }";
+		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
+		int indexOf_x_FieldRef = modelAsString.indexOf("myVar)");
+		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("Open Declaration - String myVar", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Variable Type - String", hyperlinks[1].getHyperlinkText());
 	}	
 	
 	@Test public void testOpenInferredType_01() throws Exception {
@@ -236,6 +246,16 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
 		assertEquals(1, hyperlinks.length);
 		assertEquals("Open Inferred Type - Integer", hyperlinks[0].getHyperlinkText());
+	}
+	
+	@Test public void testOpenInferredTypeOnReference_01() throws Exception {
+		String modelAsString = "class Baz { def void foo() { for (myVar : #[1,2,3]) { println(myVar) } } }";
+		XtextResource resource = (XtextResource) testHelper.xtendFile("Baz", modelAsString).eResource();
+		int indexOf_x_FieldRef = modelAsString.indexOf("myVar)");
+		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, indexOf_x_FieldRef, true);
+		assertEquals(2, hyperlinks.length);
+		assertEquals("Open Declaration - myVar", hyperlinks[0].getHyperlinkText());
+		assertEquals("Open Variable Type - Integer", hyperlinks[1].getHyperlinkText());
 	}	
 	
 	@Test public void testOpenInferredType_02() throws Exception {
