@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.idea.tests.parsing
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XCasePart
@@ -19,10 +20,10 @@ import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest
 @FinalFieldsConstructor
 class IdeaXbaseParserTest extends XbaseParserTest {
 	
-	val XExpressionChecker expresssionChecker
+	val ModelChecker expresssionChecker
 
 	override protected expression(CharSequence string) throws Exception {
-		expresssionChecker.testExpression(string.toString, false)
+		expresssionChecker.checkModel(string.toString, false)
 	}
 	
 	override protected expression(CharSequence string, boolean resolve) throws Exception {

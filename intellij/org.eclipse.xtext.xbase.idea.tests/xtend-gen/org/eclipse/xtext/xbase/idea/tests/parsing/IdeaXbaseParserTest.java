@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -18,18 +19,17 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.idea.tests.parsing.XExpressionChecker;
 import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest;
 import org.junit.Assert;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class IdeaXbaseParserTest extends XbaseParserTest {
-  private final XExpressionChecker expresssionChecker;
+  private final ModelChecker expresssionChecker;
   
   protected XExpression expression(final CharSequence string) throws Exception {
     String _string = string.toString();
-    return this.expresssionChecker.testExpression(_string, false);
+    return this.expresssionChecker.<XExpression>checkModel(_string, false);
   }
   
   protected XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
@@ -156,7 +156,7 @@ public class IdeaXbaseParserTest extends XbaseParserTest {
     this.assertFeatureCall("bar", _eachExpression);
   }
   
-  public IdeaXbaseParserTest(final XExpressionChecker expresssionChecker) {
+  public IdeaXbaseParserTest(final ModelChecker expresssionChecker) {
     super();
     this.expresssionChecker = expresssionChecker;
   }
