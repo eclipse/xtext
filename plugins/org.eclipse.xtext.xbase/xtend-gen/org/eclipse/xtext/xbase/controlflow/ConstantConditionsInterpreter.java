@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.controlflow;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,11 +48,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 
 /**
  * Interpreter for expressions at development time that uses the static linking
@@ -71,17 +70,16 @@ public class ConstantConditionsInterpreter {
   private NumberLiterals numberLiterals;
   
   @Inject
-  private IBatchTypeResolver typeResolver;
-  
-  @Inject
   private ConstantOperators constantOperators;
+  
+  @Accessors(AccessorType.NONE)
+  @Inject
+  private Provider<EvaluationContext> evaluationContextProvider;
   
   public BooleanResult getBooleanConstantOrNull(final XExpression it) {
     try {
-      final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(it);
-      RecursionGuard<EObject> _recursionGuard = new RecursionGuard<EObject>();
-      final EvaluationContext context = new EvaluationContext(resolvedTypes, _recursionGuard);
-      final EvaluationResult evaluationResult = this.evaluate(it, context);
+      EvaluationContext _newEvaluationContext = this.newEvaluationContext();
+      final EvaluationResult evaluationResult = this.evaluate(it, _newEvaluationContext);
       Object _value = evaluationResult.getValue();
       if ((_value instanceof Boolean)) {
         Object _value_1 = evaluationResult.getValue();
@@ -102,15 +100,17 @@ public class ConstantConditionsInterpreter {
     }
   }
   
+  protected EvaluationContext newEvaluationContext() {
+    return this.evaluationContextProvider.get();
+  }
+  
   public EvaluationResult evaluate(final XExpression expression, final EvaluationContext context) {
-    RecursionGuard<EObject> _visiting = context.getVisiting();
-    boolean _tryNext = _visiting.tryNext(expression);
+    boolean _tryNext = context.tryNext(expression);
     if (_tryNext) {
       try {
         return this.internalEvaluate(expression, context);
       } finally {
-        RecursionGuard<EObject> _visiting_1 = context.getVisiting();
-        _visiting_1.done(expression);
+        context.done(expression);
       }
     } else {
       return EvaluationResult.NOT_A_CONSTANT;
@@ -835,11 +835,6 @@ public class ConstantConditionsInterpreter {
   @Pure
   protected NumberLiterals getNumberLiterals() {
     return this.numberLiterals;
-  }
-  
-  @Pure
-  protected IBatchTypeResolver getTypeResolver() {
-    return this.typeResolver;
   }
   
   @Pure

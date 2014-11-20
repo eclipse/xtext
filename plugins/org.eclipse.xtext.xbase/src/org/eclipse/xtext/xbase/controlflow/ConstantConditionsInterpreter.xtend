@@ -9,9 +9,13 @@ package org.eclipse.xtext.xbase.controlflow
 
 import com.google.common.base.Optional
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.util.ArrayList
 import java.util.List
+import java.util.Map
+import java.util.Stack
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
@@ -54,15 +58,14 @@ class ConstantConditionsInterpreter {
 
 	@Inject extension NumberLiterals numberLiterals
 	
-	@Inject IBatchTypeResolver typeResolver
-	
 	@Inject ConstantOperators constantOperators
+	
+	@Accessors(NONE)
+	@Inject Provider<EvaluationContext> evaluationContextProvider
 
 	def BooleanResult getBooleanConstantOrNull(XExpression it) {
 		try {
-			val resolvedTypes = typeResolver.resolveTypes(it)
-			val context = new EvaluationContext(resolvedTypes, new RecursionGuard)
-			val evaluationResult = evaluate(context)
+			val evaluationResult = evaluate(newEvaluationContext())
 			if (evaluationResult.value instanceof Boolean) {
 				return new BooleanResult(evaluationResult.value as Boolean, evaluationResult.compileTimeConstant)
 			}
@@ -74,12 +77,16 @@ class ConstantConditionsInterpreter {
 		}
 	}
 	
+	protected def newEvaluationContext() {
+		evaluationContextProvider.get
+	}
+	
 	def EvaluationResult evaluate(XExpression expression, EvaluationContext context) {
-		if (context.visiting.tryNext(expression)) {
+		if (context.tryNext(expression)) {
 			try {
 				return internalEvaluate(expression, context)
 			} finally {
-				context.visiting.done(expression)
+				context.done(expression)
 			}
 		} else {
 			return EvaluationResult.NOT_A_CONSTANT
@@ -343,10 +350,36 @@ class ConstantConditionsInterpreter {
 
 }
 
-@Data
+
 class EvaluationContext {
-	IResolvedTypes resolvedTypes
-	RecursionGuard<EObject> visiting
+	@Inject IBatchTypeResolver typeResolver
+	RecursionGuard<EObject> visiting = new RecursionGuard
+	Map<Resource, IResolvedTypes> resolvedTypesPerResource = newHashMap
+	Stack<IResolvedTypes> resolvedTypesStack = new Stack
+	def tryNext(XExpression expression) {
+		if (visiting.tryNext(expression)) {
+			expression.resolveTypes
+			return true
+		}
+		return false
+	}
+	private def void resolveTypes(XExpression expression) {
+		val resource = expression.eResource
+		var resolvedTypes = resolvedTypesPerResource.get(resource)
+		if (resolvedTypes === null) {
+			resolvedTypes = typeResolver.resolveTypes(expression)
+			resolvedTypesPerResource.put(resource, resolvedTypes)
+		}
+		resolvedTypesStack.push(resolvedTypes)
+	}
+	def getResolvedTypes() {
+		resolvedTypesStack.peek
+	}
+	def void done(XExpression expression) {
+		resolvedTypesStack.pop
+		visiting.done(expression)
+	}
+	
 }
 
 @Data

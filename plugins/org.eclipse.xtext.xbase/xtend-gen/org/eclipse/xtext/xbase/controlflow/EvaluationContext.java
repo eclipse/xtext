@@ -7,75 +7,54 @@
  */
 package org.eclipse.xtext.xbase.controlflow;
 
+import com.google.inject.Inject;
+import java.util.Map;
+import java.util.Stack;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 
-@Data
 @SuppressWarnings("all")
 public class EvaluationContext {
-  private final IResolvedTypes resolvedTypes;
+  @Inject
+  private IBatchTypeResolver typeResolver;
   
-  private final RecursionGuard<EObject> visiting;
+  private RecursionGuard<EObject> visiting = new RecursionGuard<EObject>();
   
-  public EvaluationContext(final IResolvedTypes resolvedTypes, final RecursionGuard<EObject> visiting) {
-    super();
-    this.resolvedTypes = resolvedTypes;
-    this.visiting = visiting;
-  }
+  private Map<Resource, IResolvedTypes> resolvedTypesPerResource = CollectionLiterals.<Resource, IResolvedTypes>newHashMap();
   
-  @Override
-  @Pure
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.resolvedTypes== null) ? 0 : this.resolvedTypes.hashCode());
-    result = prime * result + ((this.visiting== null) ? 0 : this.visiting.hashCode());
-    return result;
-  }
+  private Stack<IResolvedTypes> resolvedTypesStack = new Stack<IResolvedTypes>();
   
-  @Override
-  @Pure
-  public boolean equals(final Object obj) {
-    if (this == obj)
+  public boolean tryNext(final XExpression expression) {
+    boolean _tryNext = this.visiting.tryNext(expression);
+    if (_tryNext) {
+      this.resolveTypes(expression);
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    EvaluationContext other = (EvaluationContext) obj;
-    if (this.resolvedTypes == null) {
-      if (other.resolvedTypes != null)
-        return false;
-    } else if (!this.resolvedTypes.equals(other.resolvedTypes))
-      return false;
-    if (this.visiting == null) {
-      if (other.visiting != null)
-        return false;
-    } else if (!this.visiting.equals(other.visiting))
-      return false;
-    return true;
+    }
+    return false;
   }
   
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("resolvedTypes", this.resolvedTypes);
-    b.add("visiting", this.visiting);
-    return b.toString();
+  private void resolveTypes(final XExpression expression) {
+    final Resource resource = expression.eResource();
+    IResolvedTypes resolvedTypes = this.resolvedTypesPerResource.get(resource);
+    if ((resolvedTypes == null)) {
+      IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(expression);
+      resolvedTypes = _resolveTypes;
+      this.resolvedTypesPerResource.put(resource, resolvedTypes);
+    }
+    this.resolvedTypesStack.push(resolvedTypes);
   }
   
-  @Pure
   public IResolvedTypes getResolvedTypes() {
-    return this.resolvedTypes;
+    return this.resolvedTypesStack.peek();
   }
   
-  @Pure
-  public RecursionGuard<EObject> getVisiting() {
-    return this.visiting;
+  public void done(final XExpression expression) {
+    this.resolvedTypesStack.pop();
+    this.visiting.done(expression);
   }
 }
