@@ -92,7 +92,7 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.ui.LexerUIBindings;
+import org.eclipse.xtext.ide.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
