@@ -7,10 +7,6 @@ public class AbstractRefactoringTestLanguageIdeaModule extends org.eclipse.xtext
 		return org.eclipse.xtext.idea.common.types.idea.lang.RefactoringTestLanguageSyntaxHighlighter.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtext.idea.common.types.idea.lang.parser.RefactoringTestLanguageLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtext.idea.common.types.idea.lang.parser.RefactoringTestLanguagePsiParser.class;
 	}

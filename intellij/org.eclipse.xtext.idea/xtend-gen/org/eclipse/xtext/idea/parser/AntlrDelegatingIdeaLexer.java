@@ -5,14 +5,15 @@ import com.google.inject.Inject;
 import com.intellij.lexer.LexerBase;
 import com.intellij.psi.tree.IElementType;
 import org.antlr.runtime.CommonToken;
-import org.antlr.runtime.Lexer;
 import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.TokenSourceProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
-public abstract class AbstractAntlrDelegatingIdeaLexer extends LexerBase {
-  private Lexer internalLexer;
+public class AntlrDelegatingIdeaLexer extends LexerBase {
+  private TokenSource tokenSource;
   
   private CommonToken token;
   
@@ -25,17 +26,17 @@ public abstract class AbstractAntlrDelegatingIdeaLexer extends LexerBase {
   @Inject
   private TokenTypeProvider tokenTypeProvider;
   
+  @Inject
+  private TokenSourceProvider tokenSourceProvider;
+  
   public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
     this.buffer = buffer;
     this.startOffset = startOffset;
     this.endOffset = endOffset;
-    CharSequence _subSequence = buffer.subSequence(startOffset, endOffset);
-    final String text = _subSequence.toString();
-    Lexer _createAntlrLexer = this.createAntlrLexer(text);
-    this.internalLexer = _createAntlrLexer;
+    final CharSequence text = buffer.subSequence(startOffset, endOffset);
+    TokenSource _createTokenSource = this.tokenSourceProvider.createTokenSource(text);
+    this.tokenSource = _createTokenSource;
   }
-  
-  public abstract Lexer createAntlrLexer(final String string);
   
   public int getState() {
     int _xifexpression = (int) 0;
@@ -88,7 +89,7 @@ public abstract class AbstractAntlrDelegatingIdeaLexer extends LexerBase {
     boolean _equals = Objects.equal(this.token, null);
     if (_equals) {
       try {
-        Token _nextToken = this.internalLexer.nextToken();
+        Token _nextToken = this.tokenSource.nextToken();
         this.token = ((CommonToken) _nextToken);
       } catch (final Throwable _t) {
         if (_t instanceof Exception) {

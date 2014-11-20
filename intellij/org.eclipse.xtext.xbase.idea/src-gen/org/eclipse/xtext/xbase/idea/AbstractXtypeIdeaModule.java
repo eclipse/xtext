@@ -7,10 +7,6 @@ public class AbstractXtypeIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 		return org.eclipse.xtext.xbase.idea.lang.XtypeSyntaxHighlighter.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtext.xbase.idea.lang.parser.XtypeLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtext.xbase.idea.lang.parser.XtypePsiParser.class;
 	}

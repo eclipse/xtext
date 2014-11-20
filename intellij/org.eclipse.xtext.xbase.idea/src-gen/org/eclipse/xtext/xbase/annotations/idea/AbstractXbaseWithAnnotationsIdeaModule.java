@@ -7,10 +7,6 @@ public class AbstractXbaseWithAnnotationsIdeaModule extends org.eclipse.xtext.id
 		return org.eclipse.xtext.xbase.annotations.idea.lang.XbaseWithAnnotationsSyntaxHighlighter.class;
 	}
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtext.xbase.annotations.idea.lang.parser.XbaseWithAnnotationsLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtext.xbase.annotations.idea.lang.parser.XbaseWithAnnotationsPsiParser.class;
 	}

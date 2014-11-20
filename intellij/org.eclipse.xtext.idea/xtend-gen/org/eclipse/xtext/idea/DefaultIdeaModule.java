@@ -2,7 +2,9 @@ package org.eclipse.xtext.idea;
 
 import com.google.inject.Binder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import com.intellij.lexer.Lexer;
 import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger;
+import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
@@ -15,6 +17,10 @@ import org.eclipse.xtext.service.SingletonBinding;
 
 @SuppressWarnings("all")
 public class DefaultIdeaModule extends AbstractGenericModule {
+  public Class<? extends Lexer> bindLexer() {
+    return AntlrDelegatingIdeaLexer.class;
+  }
+  
   public void configureIResourceDescriptions(final Binder binder) {
     AnnotatedBindingBuilder<IResourceDescriptions> _bind = binder.<IResourceDescriptions>bind(IResourceDescriptions.class);
     _bind.to(ProjectScopeBasedResourceDescriptions.class);

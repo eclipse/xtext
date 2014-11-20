@@ -93,6 +93,7 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 			fragment = parser.ParserGenerator auto-inject {
+				antlrParam = "-Xconversiontimeout" antlrParam = "20000"
 				options = auto-inject {}
 			}
 			fragment = DebugAntlrGeneratorFragment auto-inject {
@@ -140,7 +141,9 @@ Workflow {
 				patternPath = "/org/eclipse/xtend/core/parser/antlr/internal/patterns.incl"
 				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 			}
-	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+	        fragment = parser.XtendAntlrIDEAGeneratorFragment auto-inject {
+				antlrParam = "-Xconversiontimeout" antlrParam = "20000"
+			}
     		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
     			runtimeProjectName = projectName
     			runtimeProjectPath = projectPath

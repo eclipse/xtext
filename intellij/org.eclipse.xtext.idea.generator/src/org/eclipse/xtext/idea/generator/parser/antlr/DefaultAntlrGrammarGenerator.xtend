@@ -57,6 +57,7 @@ class DefaultAntlrGrammarGenerator {
 		*/
 		grammar «grammarFileName.toSimpleName»;
 		«compileOptions(options)»
+		«compileTokens(options)»
 		«compileLexerHeader(options)»
 		«compileParserHeader(options)»
 		«compileParserMembers(options)»
@@ -65,6 +66,10 @@ class DefaultAntlrGrammarGenerator {
 	'''
 	
 	protected def compileOptions(Grammar it, AntlrOptions options) {
+		''
+	}
+	
+	protected def compileTokens(Grammar it, AntlrOptions options) {
 		''
 	}
 	
