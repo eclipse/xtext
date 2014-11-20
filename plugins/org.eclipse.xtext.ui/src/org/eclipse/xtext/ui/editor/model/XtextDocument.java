@@ -45,6 +45,7 @@ import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork;
+import org.eclipse.xtext.ui.editor.model.edit.ReconcilingUnitOfWork.ReconcilingUnitOfWorkProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -67,6 +68,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
+	
+	@Inject
+	private ReconcilingUnitOfWorkProvider reconcilingUnitOfWorkProvider;
 	
 	/**
 	 * @since 2.8
@@ -134,7 +138,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		// do a dummy read only, to make sure any scheduled changes get applied.
 		readOnly(noWork);
-		IUnitOfWork<T, XtextResource> reconcilingUnitOfWork = new ReconcilingUnitOfWork<T>(work, this, composer);
+		IUnitOfWork<T, XtextResource> reconcilingUnitOfWork = reconcilingUnitOfWorkProvider.<T>get(work, this, composer);
 		return internalModify(reconcilingUnitOfWork);
 	}
 
