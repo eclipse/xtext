@@ -1,0 +1,9 @@
+org.eclipse.xtext.ui/debug=true
+
+# Reports service
+org.eclipse.xtext.ui/debug/services/folding=false
+org.eclipse.xtext.ui/debug/services/proposalProvider=false
+org.eclipse.xtext.ui/debug/services/parser=true
+org.eclipse.xtext.ui/debug/services/formatter=false
+org.eclipse.xtext.ui/debug/services/marker_creator=false
+org.eclipse.xtext.ui/debug/services/syntaxColoring=true
