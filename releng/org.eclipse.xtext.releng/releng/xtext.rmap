@@ -25,6 +25,17 @@
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="git"
+			mutable="false">
+			<rm:property key="buckminster.mutable" value="false" />
+			<rm:property key="git.remote.uri"
+				value="git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git" />
+			<rm:property key="git.auto.fetch" value="false" />
+			<rm:uri format="{0},intellij/{1}">
+				<bc:propertyRef key="git.clone.dest" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
 		<rm:provider componentTypes="eclipse.feature" readerType="git"
 			mutable="false">
 			<rm:property key="buckminster.mutable" value="false" />

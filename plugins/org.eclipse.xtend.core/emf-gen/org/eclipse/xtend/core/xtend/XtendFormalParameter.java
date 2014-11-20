@@ -16,10 +16,10 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFormalParameter#isExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFormalParameter()
  * @model

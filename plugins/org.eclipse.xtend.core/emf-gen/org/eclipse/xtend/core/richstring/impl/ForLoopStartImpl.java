@@ -26,12 +26,13 @@ import org.eclipse.xtend.core.xtend.RichStringForLoop;
  * An implementation of the model object '<em><b>For Loop Start</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.ForLoopStartImpl#getLoop <em>Loop</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.richstring.impl.ForLoopStartImpl#getEnd <em>End</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

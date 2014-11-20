@@ -10,5 +10,5 @@
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.intellij.idea.Main"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.xtext.idea.all"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx2g  -XX:MaxPermSize=320m  -Didea.plugins.path=../ -Didea.home.path=../intellij-ce -Dcompiler.process.debug.port=-1"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx2g -XX:MaxPermSize=320m -Didea.plugins.path=../ -Didea.home.path=../intellij-ce -Dcompiler.process.debug.port=-1"/>
 </launchConfiguration>

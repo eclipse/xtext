@@ -16,13 +16,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#getParameterType <em>Parameter Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#isVarArg <em>Var Arg</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendParameter#isExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendParameter()
  * @model

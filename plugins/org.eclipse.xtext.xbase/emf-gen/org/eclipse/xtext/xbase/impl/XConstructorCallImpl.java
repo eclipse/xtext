@@ -34,7 +34,9 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * An implementation of the model object '<em><b>XConstructor Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#getArguments <em>Arguments</em>}</li>
@@ -44,7 +46,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isExplicitConstructorCall <em>Explicit Constructor Call</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl#isAnonymousClassConstructorCall <em>Anonymous Class Constructor Call</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

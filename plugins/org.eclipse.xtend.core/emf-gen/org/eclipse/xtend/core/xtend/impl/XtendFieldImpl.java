@@ -27,13 +27,14 @@ import org.eclipse.xtext.xbase.XExpression;
  * An implementation of the model object '<em><b>Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

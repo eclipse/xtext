@@ -35,12 +35,22 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	private Set<String> libraries = newHashSet();
 	
-	private String pathIdeaPluginProject
+	@Accessors
+	private String ideaProjectName
 	
-	@Accessors(PUBLIC_SETTER)
-	private String pathRuntimePluginProject
+	@Accessors
+	private String runtimeProjectName
 	
-	@Accessors(PUBLIC_SETTER)
+	@Accessors
+	private String ideaProjectPath
+	
+	@Accessors
+	private String runtimeProjectPath
+	
+	@Accessors
+	private boolean deployable = true
+	
+	@Accessors
 	private boolean typesIntegrationRequired = false
 	
 	@Inject
@@ -63,7 +73,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 //			ctx.writeFile(Generator::SRC_GEN, grammar.getPsiElementPath(rule), grammar.compilePsiElement(rule))
 //			ctx.writeFile(Generator::SRC_GEN, grammar.getPsiElementImplPath(rule), grammar.compilePsiElementImpl(rule))	
 //		}
-		ctx.installOutlets(pathIdeaPluginProject, encoding)
+		ctx.installOutlets(ideaProjectPath, encoding)
 		
 		var outlet_src = ctx.srcOutlet.name
 		var outlet_src_gen = ctx.srcGenOutlet.name
@@ -109,14 +119,16 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			ctx.writeFile(outlet_src_gen, grammar.jvmElementsReferencesSearch.toJavaPath, grammar.compileJvmElementsReferencesSearch)
 		}
 		
-		if (pathIdeaPluginProject != null) {
-			var output = new OutputImpl();
-			output.addOutlet(PLUGIN, pathIdeaPluginProject);
-			output.addOutlet(META_INF_PLUGIN, pathIdeaPluginProject + "/META-INF");
-			
-			output.writeFile(PLUGIN, '''«grammar.name.toSimpleName» Launch Intellij.launch''', grammar.compileLaunchIntellij(pathIdeaPluginProject.split('/').last))
+		var output = new OutputImpl();
+		output.addOutlet(PLUGIN, ideaProjectPath);
+		output.addOutlet(META_INF_PLUGIN, ideaProjectPath + "/META-INF");
+		
+		if (deployable) {
+			output.writeFile(PLUGIN, '''«grammar.name.toSimpleName» Launch Intellij.launch''', grammar.compileLaunchIntellij)
 			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
 		}
+		output.writeFile(PLUGIN, ".project", grammar.compileProjectXml)
+		output.writeFile(PLUGIN, ".classpath", grammar.compileClasspathXml)
 	}
 	
 	def CharSequence compileGuiceModuleIdeaGenerated(Grammar grammar, Set<Binding> bindings) '''
@@ -206,7 +218,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				String path = PluginManager.getPlugin(PluginId.getId("«grammar.languageID»")).getPath().getPath();
 				return Arrays.asList(
 					path + "/bin", 
-					path + "/../«pathRuntimePluginProject»/bin"
+					path + "/../«runtimeProjectPath»/bin"
 				);
 			}
 		
@@ -344,7 +356,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def iml() {
-		pathIdeaPluginProject.substring(pathIdeaPluginProject.lastIndexOf("/") + 1) + ".iml"
+		ideaProjectPath + ".iml"
 	}
 	
 	def addOutlet(Output output, String outletName, String path) {
@@ -376,13 +388,46 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		this.encoding = encoding
 	}
 	
-	def setPathIdeaPluginProject(String pathIdeaPluginProject) {
-		this.pathIdeaPluginProject = pathIdeaPluginProject
-	}
+	def compileClasspathXml(Grammar grammar) '''
+		<?xml version="1.0" encoding="UTF-8"?>
+		<classpath>
+			<classpathentry kind="src" path="src"/>
+			<classpathentry kind="src" path="src-gen"/>
+			<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
+			«IF typesIntegrationRequired»
+			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
+			«ENDIF»
+			«IF runtimeProjectName != ideaProjectName»
+			<classpathentry combineaccessrules="false" exported="true" kind="src" path="/«runtimeProjectName»"/>
+			«ENDIF»
+			<classpathentry kind="output" path="bin"/>
+		</classpath>
+	'''
+	
+	def compileProjectXml(Grammar grammar) '''
+		<?xml version="1.0" encoding="UTF-8"?>
+		<projectDescription>
+			<name>«ideaProjectName»</name>
+			<comment></comment>
+			<projects>
+			</projects>
+			<buildSpec>
+				<buildCommand>
+					<name>org.eclipse.jdt.core.javabuilder</name>
+					<arguments>
+					</arguments>
+				</buildCommand>
+			</buildSpec>
+			<natures>
+				<nature>org.eclipse.jdt.core.javanature</nature>
+			</natures>
+		</projectDescription>
+	'''
 	
 	def compilePluginXml(Grammar grammar)'''
 		<idea-plugin version="2">
-			<id>«grammar.languageID»</id>
+			<id>«ideaProjectName»</id>
 			<name>«grammar.simpleName» Support</name>
 			<description>
 		      This plugin enables smart editing of «grammar.simpleName» files.
@@ -391,6 +436,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			<vendor>My Company</vendor>
 		
 			<idea-version since-build="131"/>
+			<depends optional="true">org.eclipse.xtext.idea</depends>
 
 			<extensions defaultExtensionNs="com.intellij">
 				<buildProcess.parametersProvider implementation="«grammar.buildProcessParametersProviderName»"/>
@@ -432,12 +478,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 								implementationClass="«implementationClass»"/>
 	'''
 	
-	def compileLaunchIntellij(Grammar grammar, String path)'''
+	def compileLaunchIntellij(Grammar grammar)'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 			<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
-			<stringAttribute key="bad_container_name" value="/«path»/«grammar.name.toSimpleName.toLowerCase»_launch_intellij.launch"/>
+			<stringAttribute key="bad_container_name" value="/«ideaProjectName»/«grammar.name.toSimpleName.toLowerCase»_launch_intellij.launch"/>
 			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-				<listEntry value="/«path»"/>
+				<listEntry value="/«ideaProjectName»"/>
 			</listAttribute>
 			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 				<listEntry value="4"/>
@@ -445,7 +491,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="false"/>
 			<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 6 [1.6.0_65-b14-462]"/>
 			<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.intellij.idea.Main"/>
-			<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«path»"/>
+			<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«ideaProjectName»"/>
 			<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx2g -XX:MaxPermSize=320m -Didea.plugins.path=${INTELLIJ_IDEA_PLUGINS} -Didea.home.path=${INTELLIJ_IDEA} -Didea.ProcessCanceledException=disabled -Dcompiler.process.debug.port=-1"/>
 		</launchConfiguration>
 	'''
@@ -626,7 +672,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		import «grammar.grammarAccessName»;
 		
 		public class «grammar.elementTypeProviderName.toSimpleName» implements IElementTypeProvider {
-		
+
 			public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
 		
 			public static final IElementType NAME_TYPE = new IElementType("NAME", «grammar.languageName.toSimpleName».INSTANCE);
@@ -636,29 +682,34 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			public static final IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> NAMED_EOBJECT_TYPE = new PsiNamedEObjectType("NAMED_EOBJECT", «grammar.languageName.toSimpleName».INSTANCE);
 		
 			public static final IElementType CROSS_REFERENCE_TYPE = new IElementType("CROSS_REFERENCE", «grammar.languageName.toSimpleName».INSTANCE);
-			«FOR rule:grammar.allRules»
-			
-			public static final IGrammarAwareElementType «rule.grammarElementIdentifier»_ELEMENT_TYPE;
-			«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
-			
-			public static final IGrammarAwareElementType «element.grammarElementIdentifier»_ELEMENT_TYPE;
-			«ENDFOR»
-			«ENDFOR»
 		
 			private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
+
+			private static IGrammarAwareElementType associate(IGrammarAwareElementType grammarAwareElementType) {
+				GRAMMAR_ELEMENT_TYPE.put(grammarAwareElementType.getGrammarElement(), grammarAwareElementType);
+				return grammarAwareElementType;
+			}
 		
-			static {
-				«grammar.grammarAccessName.toSimpleName» grammarAccess = «grammar.languageName.toSimpleName».INSTANCE.getInstance(«grammar.grammarAccessName.toSimpleName».class);
-				«FOR rule:grammar.allRules»
-				
-				«rule.grammarElementIdentifier»_ELEMENT_TYPE =  new IGrammarAwareElementType("«rule.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, grammarAccess.«rule.gaRuleAccessor»);
-				GRAMMAR_ELEMENT_TYPE.put(grammarAccess.«rule.gaRuleAccessor», «rule.grammarElementIdentifier»_ELEMENT_TYPE);
+			private static final «grammar.grammarAccessName.toSimpleName» GRAMMAR_ACCESS = «grammar.languageName.toSimpleName».INSTANCE.getInstance(«grammar.grammarAccessName.toSimpleName».class);
+			«FOR rule:grammar.allRules»
+
+			private static class «rule.grammarElementIdentifier»Factory {
+				public static IGrammarAwareElementType create«rule.grammarElementIdentifier»ElementType() {
+					return new IGrammarAwareElementType("«rule.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, GRAMMAR_ACCESS.«rule.gaRuleAccessor»);
+				}
 				«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
-				«element.grammarElementIdentifier»_ELEMENT_TYPE =  new IGrammarAwareElementType("«element.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, grammarAccess.«rule.gaElementsAccessor».«element.gaElementAccessor»);
-				GRAMMAR_ELEMENT_TYPE.put(grammarAccess.«rule.gaElementsAccessor».«element.gaElementAccessor», «element.grammarElementIdentifier»_ELEMENT_TYPE);
-				«ENDFOR»
+				public static IGrammarAwareElementType create«element.grammarElementIdentifier»ElementType() {
+					return new IGrammarAwareElementType("«element.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, GRAMMAR_ACCESS.«rule.gaElementsAccessor».«element.gaElementAccessor»);
+				}
 				«ENDFOR»
 			}
+
+			public static final IGrammarAwareElementType «rule.grammarElementIdentifier»_ELEMENT_TYPE = associate(«rule.grammarElementIdentifier»Factory.create«rule.grammarElementIdentifier»ElementType());
+			«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
+
+			public static final IGrammarAwareElementType «element.grammarElementIdentifier»_ELEMENT_TYPE = associate(«rule.grammarElementIdentifier»Factory.create«element.grammarElementIdentifier»ElementType());
+			«ENDFOR»
+			«ENDFOR»
 		
 			public IFileElementType getFileType() {
 				return FILE_TYPE;

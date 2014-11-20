@@ -36,14 +36,15 @@ import org.eclipse.xtext.xbase.XExpression;
  * An implementation of the model object '<em><b>Executable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendExecutableImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

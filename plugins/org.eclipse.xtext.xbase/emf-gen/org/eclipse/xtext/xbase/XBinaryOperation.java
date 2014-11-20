@@ -21,12 +21,12 @@ package org.eclipse.xtext.xbase;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#getLeftOperand <em>Left Operand</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#getRightOperand <em>Right Operand</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.XBinaryOperation#isReassignFirstArgument <em>Reassign First Argument</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXBinaryOperation()
  * @model

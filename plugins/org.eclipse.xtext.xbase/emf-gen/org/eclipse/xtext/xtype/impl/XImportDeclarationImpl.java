@@ -25,7 +25,9 @@ import org.eclipse.xtext.xtype.XtypePackage;
  * An implementation of the model object '<em><b>XImport Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl#isWildcard <em>Wildcard</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl#isExtension <em>Extension</em>}</li>
@@ -34,7 +36,6 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *   <li>{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl#getMemberName <em>Member Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtype.impl.XImportDeclarationImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

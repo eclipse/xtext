@@ -21,13 +21,13 @@ import org.eclipse.xtext.xbase.XExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendExecutable#getExceptions <em>Exceptions</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendExecutable#getTypeParameters <em>Type Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendExecutable#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendExecutable#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendExecutable()
  * @model abstract="true"
