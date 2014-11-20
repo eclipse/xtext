@@ -31,7 +31,7 @@
     <bundles name="org.apache.commons.lang.source"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/2.10/">
-    <features name="org.eclipse.emf.feature.group" versionRange="2.10.0"/>
+    <features name="org.eclipse.emf.feature.group" versionRange="2.11.0"/>
     <features name="org.eclipse.emf.source.feature.group"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
