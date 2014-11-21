@@ -17,7 +17,7 @@ import org.eclipse.xtext.util.StringInputStream
 import org.junit.Test
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 class Bug451668Test extends AbstractXtextTests {
 	
@@ -39,8 +39,7 @@ class Bug451668Test extends AbstractXtextTests {
 		val callsBeforeUnload = r.contentsCalls
 		r.unload()
 		assertEquals(callsBeforeUnload, r.contentsCalls)
+		assertFalse(r.isLoaded)
+		assertNull(r.parseResult)
 	}
-	
-	
-
 }
