@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -85,7 +86,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	 */
 	@Override
 	protected List<EObject> getUnloadingContents() {
-		return doGetContents();
+		return new BasicEList.FastCompare<EObject>(doGetContents());
 	}
 	
 	/**
@@ -107,6 +108,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		while (allContents.hasNext()) {
 			unloaded((InternalEObject) allContents.next());
 		}
+		setParseResult(null);
 	}
 	
 	/**
