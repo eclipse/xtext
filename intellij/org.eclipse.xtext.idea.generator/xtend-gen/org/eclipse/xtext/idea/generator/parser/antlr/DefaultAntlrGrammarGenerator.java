@@ -92,6 +92,9 @@ public class DefaultAntlrGrammarGenerator {
     String _compileOptions = this.compileOptions(it, options);
     _builder.append(_compileOptions, "");
     _builder.newLineIfNotEmpty();
+    String _compileTokens = this.compileTokens(it, options);
+    _builder.append(_compileTokens, "");
+    _builder.newLineIfNotEmpty();
     CharSequence _compileLexerHeader = this.compileLexerHeader(it, options);
     _builder.append(_compileLexerHeader, "");
     _builder.newLineIfNotEmpty();
@@ -111,6 +114,10 @@ public class DefaultAntlrGrammarGenerator {
   }
   
   protected String compileOptions(final Grammar it, final AntlrOptions options) {
+    return "";
+  }
+  
+  protected String compileTokens(final Grammar it, final AntlrOptions options) {
     return "";
   }
   

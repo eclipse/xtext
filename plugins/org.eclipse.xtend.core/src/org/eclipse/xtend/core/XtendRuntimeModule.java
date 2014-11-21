@@ -29,6 +29,7 @@ import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
 import org.eclipse.xtend.core.parser.XtendNodeModelBuilder;
 import org.eclipse.xtend.core.parser.XtendPartialParsingHelper;
+import org.eclipse.xtend.core.parser.antlr.XtendTokenSourceProvider;
 import org.eclipse.xtend.core.parser.antlr.internal.DisabledAntlrLexer;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
@@ -62,6 +63,7 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IPartialParsingHelper;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.TokenSourceProvider;
 import org.eclipse.xtext.parser.impl.TokenRegionProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
@@ -351,5 +353,9 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public Class<? extends IResourceChangeRegistry> bindResourceChangeRegistry() {
 		return NopResourceChangeRegistry.class;
+	}
+	
+	public Class<? extends TokenSourceProvider> bindTokenSourceProvider() {
+		return XtendTokenSourceProvider.class;
 	}
 }

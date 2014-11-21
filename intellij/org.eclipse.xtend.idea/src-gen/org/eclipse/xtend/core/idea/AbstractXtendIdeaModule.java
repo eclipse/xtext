@@ -3,14 +3,6 @@ package org.eclipse.xtend.core.idea;
 public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaModule {
 	
 	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.openapi.fileTypes.SyntaxHighlighter> bindSyntaxHighlighter() {
-		return org.eclipse.xtend.core.idea.lang.XtendSyntaxHighlighter.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lexer.Lexer> bindLexer() {
-		return org.eclipse.xtend.core.idea.lang.parser.XtendLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
 	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
 		return org.eclipse.xtend.core.idea.lang.parser.XtendPsiParser.class;
 	}
@@ -48,6 +40,5 @@ public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaM
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
 		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
 	}
-	
 	
 }
