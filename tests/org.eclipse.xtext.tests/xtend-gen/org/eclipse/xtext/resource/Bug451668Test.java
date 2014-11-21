@@ -12,6 +12,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.StringInputStream;
@@ -20,7 +21,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("all")
 public class Bug451668Test extends AbstractXtextTests {
@@ -48,6 +49,10 @@ public class Bug451668Test extends AbstractXtextTests {
       final int callsBeforeUnload = r.contentsCalls;
       r.unload();
       Assert.assertEquals(callsBeforeUnload, r.contentsCalls);
+      boolean _isLoaded_1 = r.isLoaded();
+      Assert.assertFalse(_isLoaded_1);
+      IParseResult _parseResult = r.getParseResult();
+      Assert.assertNull(_parseResult);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
