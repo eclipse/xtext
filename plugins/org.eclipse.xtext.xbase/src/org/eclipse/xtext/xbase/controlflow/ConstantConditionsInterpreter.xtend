@@ -462,6 +462,9 @@ package class EvaluationResult {
 		return NOT_A_CONSTANT.value
 	}
 	private def dispatch Object equalValue(List<?> myValue, List<?> otherValue) {
+		if (myValue != otherValue) {
+			return NOT_A_CONSTANT.value
+		}
 		return myValue == otherValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmIdentifiableElement otherValue) {
