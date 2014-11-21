@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
 /**
@@ -17,17 +18,48 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
  */
 public class DefaultHighlightingConfiguration implements IHighlightingConfiguration {
 	
-	public static final String KEYWORD_ID = "keyword";
-	public static final String PUNCTUATION_ID = "punctuation";
-	public static final String COMMENT_ID = "comment";
-	public static final String STRING_ID = "string";
-	public static final String NUMBER_ID = "number";
-	public static final String DEFAULT_ID = "default";
-	public static final String INVALID_TOKEN_ID = "error";
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#KEYWORD_ID} instead
+	 */
+	@Deprecated
+	public static final String KEYWORD_ID = HighlightingStyles.KEYWORD_ID;
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#PUNCTUATION_ID} instead
+	 */
+	@Deprecated
+	public static final String PUNCTUATION_ID = HighlightingStyles.PUNCTUATION_ID;
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#COMMENT_ID} instead
+	 */
+	@Deprecated
+	public static final String COMMENT_ID = HighlightingStyles.COMMENT_ID;
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#STRING_ID} instead
+	 */
+	@Deprecated
+	public static final String STRING_ID = HighlightingStyles.STRING_ID;
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#NUMBER_ID} instead
+	 */
+	@Deprecated
+	public static final String NUMBER_ID = HighlightingStyles.NUMBER_ID;
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#DEFAULT_ID} instead
+	 */
+	@Deprecated
+	public static final String DEFAULT_ID = HighlightingStyles.DEFAULT_ID;
+	/**
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#INVALID_TOKEN_ID} instead
+	 */
+	@Deprecated
+	public static final String INVALID_TOKEN_ID = HighlightingStyles.INVALID_TOKEN_ID;
 	/**
 	 * @since 2.6
+	 * 
+	 * @deprecated Use {@link org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles#INVALID_TOKEN_ID} instead
 	 */
-	public static final String TASK_ID = "task";
+	@Deprecated
+	public static final String TASK_ID = HighlightingStyles.TASK_ID;
 
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(KEYWORD_ID, "Keyword", keywordTextStyle());

@@ -79,8 +79,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		var outlet_src_gen = ctx.srcGenOutlet.name
 		
 		val bindFactory = new BindFactory();
-		bindFactory.addTypeToType('com.intellij.openapi.fileTypes.SyntaxHighlighter', grammar.syntaxHighlighterName)
-		bindFactory.addTypeToType('com.intellij.lexer.Lexer', grammar.lexerName)
 		bindFactory.addTypeToType('com.intellij.lang.PsiParser', grammar.psiParserName)
 		bindFactory.addTypeToType('org.eclipse.xtext.idea.parser.TokenTypeProvider', grammar.tokenTypeProviderName)
 		bindFactory.addTypeToType('com.intellij.lang.ParserDefinition', grammar.parserDefinitionName)
@@ -101,11 +99,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeName.toJavaPath, grammar.compileFileType)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeFactoryName.toJavaPath, grammar.compileFileTypeFactory)
 		ctx.writeFile(outlet_src_gen, grammar.fileImplName.toJavaPath, grammar.compileFileImpl)
-		ctx.writeFile(outlet_src_gen, grammar.lexerName.toJavaPath, grammar.compileLexer)
 		ctx.writeFile(outlet_src_gen, grammar.tokenTypeProviderName.toJavaPath, grammar.compileTokenTypeProvider)
 		ctx.writeFile(outlet_src_gen, grammar.elementTypeProviderName.toJavaPath, grammar.compileElementTypeProvider)
 		ctx.writeFile(outlet_src_gen, grammar.parserDefinitionName.toJavaPath, grammar.compileParserDefinition)
-		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighterName.toJavaPath, grammar.compileSyntaxHighlighter)
 		ctx.writeFile(outlet_src_gen, grammar.syntaxHighlighterFactoryName.toJavaPath, grammar.compileSyntaxHighlighterFactory)
 		ctx.writeFile(outlet_src_gen, grammar.abstractIdeaModuleName.toJavaPath, grammar.compileGuiceModuleIdeaGenerated(bindings))
 		ctx.writeFile(outlet_src_gen, grammar.extensionFactoryName.toJavaPath, grammar.compileExtensionFactory)
@@ -802,24 +798,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		}
 	'''
 	
-	def compileLexer(Grammar grammar)'''
-		package «grammar.lexerName.toPackageName»;
-		
-		import org.antlr.runtime.ANTLRStringStream;
-		import org.antlr.runtime.Lexer;
-		import org.eclipse.xtext.idea.parser.AbstractAntlrDelegatingIdeaLexer;
-		import «grammar.antlrLexerName»;
-		
-		public class «grammar.lexerName.toSimpleName» extends AbstractAntlrDelegatingIdeaLexer {
-		
-			@Override
-			public Lexer createAntlrLexer(String text) {
-				return new «grammar.antlrLexerName.toSimpleName»(new ANTLRStringStream(text));
-			}
-		
-		}
-	'''
-	
 	def compileSyntaxHighlighterFactory(Grammar grammar)'''
 		package «grammar.syntaxHighlighterFactoryName.toPackageName»;
 		
@@ -833,52 +811,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		    @NotNull
 		    protected SyntaxHighlighter createHighlighter() {
 		        return «grammar.languageName.toSimpleName».INSTANCE.getInstance(SyntaxHighlighter.class);
-		    }
-		
-		}
-	'''
-	
-	def compileSyntaxHighlighter(Grammar grammar)'''
-		package «grammar.syntaxHighlighterName.toPackageName»;
-		
-		import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-		import org.jetbrains.annotations.NotNull;
-		import «grammar.antlrLexerName»;
-		
-		import com.google.inject.Inject;
-		import com.google.inject.Provider;
-		import com.intellij.lexer.Lexer;
-		import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-		import com.intellij.openapi.editor.colors.TextAttributesKey;
-		import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-		import com.intellij.psi.tree.IElementType;
-		
-		public class «grammar.syntaxHighlighterName.toSimpleName» extends SyntaxHighlighterBase {
-		
-			@Inject TokenTypeProvider tokenTypeProvider;
-			@Inject Provider<Lexer> lexerProvider; 
-		
-		    @NotNull
-		    public Lexer getHighlightingLexer() {
-		        return lexerProvider.get();
-		    }
-		
-		    @NotNull
-		    public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
-		        if (tokenTypeProvider.getStringLiteralTokens().contains(tokenType)) {
-		            return pack(DefaultLanguageHighlighterColors.STRING);
-		        }
-				if (tokenTypeProvider.getIElementType(«grammar.antlrLexerName.toSimpleName».RULE_SL_COMMENT) == tokenType) {
-					return pack(DefaultLanguageHighlighterColors.LINE_COMMENT);
-				}
-				if (tokenTypeProvider.getIElementType(«grammar.antlrLexerName.toSimpleName».RULE_ML_COMMENT) == tokenType) {
-					return pack(DefaultLanguageHighlighterColors.BLOCK_COMMENT);
-				}
-		        String myDebugName = tokenType.toString();
-				if (myDebugName.matches("^'.*\\w.*'$")) {
-					return pack(DefaultLanguageHighlighterColors.KEYWORD);
-		        }
-		        return new TextAttributesKey[0];
 		    }
 		
 		}
