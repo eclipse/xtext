@@ -170,10 +170,12 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	/*
 	 * WARNING!!! Before changing here something, look at the commit history and read following bug reports.
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=339004
-	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=370411
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=370411 - o.a.commons.logging
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=446253 - org.eclipse.equinox.common
 	 */
 	protected List<String> getDslProjectRequiredBundles() {
 		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.equinox.common;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.xtext.xbase;resolution:=optional;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"org.apache.commons.logging;bundle-version=\"1.0.4\";resolution:=optional", //$NON-NLS-1$
