@@ -382,8 +382,9 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	public String toString() {
 		TextRegionsToString toString = new TextRegionsToString();
 		toString.setFrame(this.getRegion());
+		toString.setTitle(getClass().getSimpleName() + " with ITextReplacers");
 		for (ITextReplacer repl : replacers)
-			toString.add(repl.getRegion(), repl.toString());
+			toString.add(repl.getRegion(), repl.getClass().getSimpleName() + ": " + repl.toString());
 		return toString.toString();
 	}
 

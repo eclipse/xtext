@@ -83,6 +83,7 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 	@Override
 	public String toString() {
 		TextRegionsToString toString = new TextRegionsToString();
+		toString.setTitle(getClass().getSimpleName());
 		for (T t : this)
 			toString.add(getRegion(t), getTitle(t));
 		return toString.toString();

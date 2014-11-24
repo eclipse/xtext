@@ -34,6 +34,6 @@ public class TextReplacementList<T extends ITextReplacement> extends ArrayList<T
 
 	@Override
 	public String toString() {
-		return new TextRegionsToString().addAllReplacements(this).toString();
+		return new TextRegionsToString().setTitle(getClass().getSimpleName()).addAllReplacements(this).toString();
 	}
 }
