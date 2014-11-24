@@ -42,8 +42,8 @@ class GenericFormatterTestRequest extends FormatterTestRequest {
 }
 
 @Accessors abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
-	override protected format(IFormattableDocument document) {
-		format(resource.contents.head as T, request.textRegionAccess, document)
+	def dispatch format(EObject obj, IFormattableDocument document) {
+		format(obj as T, request.textRegionAccess, document)
 	}
 
 	def protected abstract void format(T model, ITextRegionAccess regionAccess, IFormattableDocument document)
