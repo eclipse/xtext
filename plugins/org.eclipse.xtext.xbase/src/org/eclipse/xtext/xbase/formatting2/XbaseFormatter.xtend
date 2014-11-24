@@ -79,7 +79,9 @@ class XbaseFormatter extends AbstractFormatter2 {
 		ISemanticRegion close,
 		extension IFormattableDocument format
 	) {
-		if (elements.empty) {
+		if (close == null || open == null) {
+			// broken, do nothing
+		} else if (elements.empty) {
 			open.append[noSpace]
 		} else if (close.previousHiddenRegion.multiline) {
 			open.append[newLine; increaseIndentation]
@@ -682,7 +684,9 @@ class XbaseFormatter extends AbstractFormatter2 {
 			XBlockExpression: x.expressions
 			default: newArrayList(x)
 		}
-		if (children.empty) {
+		if (open == null || close == null) {
+			// broken, do nothing
+		} else if (children.empty) {
 			if (open.nextHiddenRegion.containsComment)
 				open.append[newLine increaseIndentation decreaseIndentation]
 			else

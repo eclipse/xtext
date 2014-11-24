@@ -8,9 +8,11 @@
 package org.eclipse.xtext.formatting2;
 
 import java.util.Collection;
+import java.util.Collections;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
@@ -57,6 +59,8 @@ public class FormatterRequest {
 	}
 
 	public ITypedPreferenceValues getPreferences() {
+		if (preferenceValues == null)
+			return new MapBasedPreferenceValues(Collections.<String, String> emptyMap());
 		return preferenceValues;
 	}
 
