@@ -91,7 +91,7 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.ide.LexerUIBindings;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -484,7 +484,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 
 	@Override
 	public void configureContentAssistLexer(Binder binder) {
-		binder.bind(Lexer.class).annotatedWith(Names.named(LexerUIBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
+		binder.bind(Lexer.class).annotatedWith(Names.named(LexerIdeBindings.CONTENT_ASSIST)).to(DisabledInternalLexer.class);
 	}
 	
 	@Override
