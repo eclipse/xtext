@@ -3,7 +3,7 @@ section:continuousIntegration[Continuous Integration (with Maven)]
 There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language, 
 that runs all tests and creates an Eclipse update site and other needed artifacts and secondly you may want to have your language and its corresponding
 code generator integrated in your application builds. We will discuss both cases in the section along a set of example projects, which you
-can clone, inspect or download from link[https://github.com/svenefftinge/maven-xtext-example][https://github.com/svenefftinge/maven-xtext-example].
+can clone, inspect or download from link[https://github.com/xtext-dev/maven-xtext-example][https://github.com/xtext-dev/maven-xtext-example].
 
 To follow this section you need to have a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it.  
 
