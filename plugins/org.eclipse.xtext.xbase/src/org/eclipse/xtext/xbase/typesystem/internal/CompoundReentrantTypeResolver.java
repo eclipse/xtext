@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.RandomAccess;
 import java.util.Set;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -79,9 +78,6 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 				this.next++;
 			}
 			return this;
-		} catch(OperationCanceledException e) {
-			handleCancelation();
-			throw e;
 		} catch(OperationCanceledError e) {
 			handleCancelation();
 			throw e;

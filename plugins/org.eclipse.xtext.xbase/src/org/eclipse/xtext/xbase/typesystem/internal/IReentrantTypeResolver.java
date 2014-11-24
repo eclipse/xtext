@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
@@ -23,7 +24,7 @@ public interface IReentrantTypeResolver {
 
 	void initializeFrom(EObject root);
 
-	IResolvedTypes reentrantResolve(CancelIndicator monitor);
+	IResolvedTypes reentrantResolve(CancelIndicator monitor) throws OperationCanceledError;
 	
 	IReentrantTypeResolver NULL = new IReentrantTypeResolver() {
 		
