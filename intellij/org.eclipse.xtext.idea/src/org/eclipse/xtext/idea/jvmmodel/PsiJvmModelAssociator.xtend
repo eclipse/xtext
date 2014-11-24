@@ -44,7 +44,7 @@ class PsiJvmModelAssociator extends JvmModelAssociator {
 			JvmDeclaredType: {
 				return [
 					if (jvmElement.declaringType == null) {
-						new JvmPsiClassImpl(jvmElement, sourceElement.psiElement as PsiNamedElement)
+						new JvmPsiClassImpl(jvmElement, sourceElement.psiElement)
 					} else {
 						val psiClass = psiAssociations.getPsiElement(jvmElement.declaringType) as PsiClass
 						if (psiClass == null)
