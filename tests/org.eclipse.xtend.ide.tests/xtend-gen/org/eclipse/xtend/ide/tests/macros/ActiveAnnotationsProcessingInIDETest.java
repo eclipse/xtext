@@ -290,8 +290,14 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     try {
       IProject _project = pluginProject.getProject();
       final IFile manifestFile = _project.getFile("META-INF/MANIFEST.MF");
-      InputStream _contents = manifestFile.getContents();
-      final Manifest manifest = new Manifest(_contents);
+      final InputStream manifestContent = manifestFile.getContents();
+      Manifest _xtrycatchfinallyexpression = null;
+      try {
+        _xtrycatchfinallyexpression = new Manifest(manifestContent);
+      } finally {
+        manifestContent.close();
+      }
+      final Manifest manifest = _xtrycatchfinallyexpression;
       final Attributes attrs = manifest.getMainAttributes();
       boolean _containsKey = attrs.containsKey("Export-Package");
       if (_containsKey) {

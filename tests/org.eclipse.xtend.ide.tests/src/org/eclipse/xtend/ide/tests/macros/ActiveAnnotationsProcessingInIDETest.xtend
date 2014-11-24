@@ -163,7 +163,12 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 
 	def void addExportedPackage(IJavaProject pluginProject, String ... exportedPackages) {
 		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
-		val manifest = new Manifest(manifestFile.contents)
+		val manifestContent = manifestFile.contents
+		val manifest = try {
+			new Manifest(manifestContent)
+		} finally {
+			manifestContent.close
+		}
 		val attrs = manifest.getMainAttributes()
 		if (attrs.containsKey("Export-Package")) {
 			attrs.putValue("Export-Package", attrs.get("Export-Package") + "," + exportedPackages.join(","))
