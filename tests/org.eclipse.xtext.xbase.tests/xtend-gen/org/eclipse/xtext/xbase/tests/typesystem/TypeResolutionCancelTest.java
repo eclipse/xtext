@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -40,6 +41,8 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
       } catch (final Throwable _t) {
         if (_t instanceof OperationCanceledException) {
           final OperationCanceledException e = (OperationCanceledException)_t;
+        } else if (_t instanceof OperationCanceledError) {
+          final OperationCanceledError e_1 = (OperationCanceledError)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -63,6 +66,9 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
       } catch (final Throwable _t) {
         if (_t instanceof OperationCanceledException) {
           final OperationCanceledException e = (OperationCanceledException)_t;
+          Assert.fail("Type resolution should not have been canceled");
+        } else if (_t instanceof OperationCanceledError) {
+          final OperationCanceledError e_1 = (OperationCanceledError)_t;
           Assert.fail("Type resolution should not have been canceled");
         } else {
           throw Exceptions.sneakyThrow(_t);

@@ -73,10 +73,10 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	IJvmModelAssociations jvmAssocations
 
 	val JvmDeclaredType jvmType
-	val PsiNamedElement psiElement
+	val PsiElement psiElement
 	val ClassInnerStuffCache membersCache
 
-	new(JvmDeclaredType declaredType, PsiNamedElement psiElement) {
+	new(JvmDeclaredType declaredType, PsiElement psiElement) {
 		super(psiElement.manager, psiElement.language)
 		this.jvmType = declaredType
 		this.psiElement = psiElement

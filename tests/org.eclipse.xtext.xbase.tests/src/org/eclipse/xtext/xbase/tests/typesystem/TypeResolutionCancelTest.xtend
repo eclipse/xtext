@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
+import org.eclipse.xtext.service.OperationCanceledError
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,6 +28,8 @@ class TypeResolutionCancelTest extends AbstractXbaseTestCase {
 			fail('Type resolution should have been canceled')
 		} catch (OperationCanceledException e) {
 			// good
+		} catch (OperationCanceledError e) {
+			// good
 		}
 	}
 	
@@ -35,6 +38,8 @@ class TypeResolutionCancelTest extends AbstractXbaseTestCase {
 		try {
 			resolver.resolveTypes(exp, [|false])	
 		} catch (OperationCanceledException e) {
+			fail('Type resolution should not have been canceled')
+		} catch (OperationCanceledError e) {
 			fail('Type resolution should not have been canceled')
 		}
 	}

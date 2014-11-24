@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -85,71 +84,51 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	}
 	
 	protected AbstractRootedReentrantTypeResolver getOrCreateResolver(EObject root) {
-		final List<Adapter> adapters = root.eAdapters();
-		final TypeResolutionStateAdapter currentAdapter = (TypeResolutionStateAdapter) EcoreUtil.getAdapter(adapters, TypeResolutionStateAdapter.class);
-		if (currentAdapter == null) {
-			final AbstractRootedReentrantTypeResolver newResolver = createResolver();
-			final TypeResolutionStateAdapter newAdapter = new TypeResolutionStateAdapter(root, newResolver);
-			AbstractRootedReentrantTypeResolver result = new AbstractRootedReentrantTypeResolver() {
-				
-				private int reentrance = 0;
-				
-				public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
-					Throwable e = null;
-					try {
-						reentrance++;
-						IResolvedTypes result = newResolver.reentrantResolve(monitor);
-						return result;
-					} catch(Throwable caught) {
-						e = caught;
-						throw Exceptions.sneakyThrow(caught);
-					} finally {
-						reentrance--;
-						if (reentrance == 0 && !adapters.remove(newAdapter)) {
-							if (e != null) {
-								operationCanceledManager.propagateAsErrorIfCancelException(e);
-								throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving", e);
-							}
-							throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving");
-						}
-					}
+		final AbstractRootedReentrantTypeResolver newResolver = createResolver();
+		AbstractRootedReentrantTypeResolver result = new AbstractRootedReentrantTypeResolver() {
+			
+			public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
+				try {
+					IResolvedTypes result = newResolver.reentrantResolve(monitor);
+					return result;
+				} catch(Throwable caught) {
+					operationCanceledManager.propagateAsErrorIfCancelException(caught);
+					throw Exceptions.sneakyThrow(caught);
 				}
-				
-				public void initializeFrom(EObject root) {
-					newResolver.initializeFrom(root);
-				}
+			}
+			
+			public void initializeFrom(EObject root) {
+				newResolver.initializeFrom(root);
+			}
 
-				@Override
-				protected EObject getRoot() {
-					return newResolver.getRoot();
-				}
-				
-				@Override
-				protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
-					return newResolver.isHandled(identifiableElement);
-				}
-				
-				@Override
-				protected boolean isHandled(EObject context) {
-					return newResolver.isHandled(context);
-				}
-				
-				@Override
-				protected boolean isHandled(XExpression expression) {
-					return newResolver.isHandled(expression);
-				}
-				
-				@Override
-				protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
-					newResolver.setAllRootedExpressions(allRootedExpressions);
-				}
+			@Override
+			protected EObject getRoot() {
+				return newResolver.getRoot();
+			}
+			
+			@Override
+			protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
+				return newResolver.isHandled(identifiableElement);
+			}
+			
+			@Override
+			protected boolean isHandled(EObject context) {
+				return newResolver.isHandled(context);
+			}
+			
+			@Override
+			protected boolean isHandled(XExpression expression) {
+				return newResolver.isHandled(expression);
+			}
+			
+			@Override
+			protected void setAllRootedExpressions(Set<EObject> allRootedExpressions) {
+				newResolver.setAllRootedExpressions(allRootedExpressions);
+			}
 
-			};
-			result.initializeFrom(root);
-			return result;
-		} else {
-			return currentAdapter;	
-		}
+		};
+		result.initializeFrom(root);
+		return result;
 	}
 
 	protected AbstractRootedReentrantTypeResolver createResolver() {

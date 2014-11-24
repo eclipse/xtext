@@ -6,7 +6,6 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiParameter;
 import com.intellij.psi.PsiParameterList;
 import org.eclipse.emf.ecore.EObject;
@@ -65,7 +64,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
             boolean _equals = Objects.equal(_declaringType, null);
             if (_equals) {
               PsiElement _psiElement = PsiJvmModelAssociator.this.psiAssociations.getPsiElement(sourceElement);
-              _xifexpression = new JvmPsiClassImpl(((JvmDeclaredType)jvmElement), ((PsiNamedElement) _psiElement));
+              _xifexpression = new JvmPsiClassImpl(((JvmDeclaredType)jvmElement), _psiElement);
             } else {
               PsiClass _xblockexpression = null;
               {
