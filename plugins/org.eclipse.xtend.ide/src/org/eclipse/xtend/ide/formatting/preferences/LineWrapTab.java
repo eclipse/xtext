@@ -15,7 +15,7 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
+import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;

@@ -10,20 +10,19 @@ package org.eclipse.xtend.core.tests.smoke;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.eclipse.xtend.core.formatting.XtendFormatter;
+import org.eclipse.xtend.core.formatting2.XtendFormatter;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtext.formatting2.FormatterRequest;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
 import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
 import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
 import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.preferences.IPreferenceValues;
-import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
+import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.junit.ComparisonFailure;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
@@ -43,18 +42,18 @@ public class FormatterSmokeSuite {
 
 		@Inject
 		private XtendFormatter formatter;
-		
+
 		@Inject
 		private ParseHelper<XtendFile> parseHelper;
-		
+
 		private MessageDigest messageDigest;
 		private Set<BigInteger> seen;
-		
+
 		public FormatterSmokeTester() throws NoSuchAlgorithmException {
 			messageDigest = MessageDigest.getInstance("MD5");
 			seen = Sets.newSetFromMap(new ConcurrentHashMap<BigInteger, Boolean>());
 		}
-		
+
 		@Override
 		public void processFile(String data) throws Exception {
 			byte[] hash = ((MessageDigest) messageDigest.clone()).digest(data.getBytes("UTF-8"));
@@ -62,10 +61,14 @@ public class FormatterSmokeSuite {
 				XtendFile file = parseHelper.parse(data);
 				if (file != null) {
 					try {
-						IPreferenceValues cfg = new MapBasedPreferenceValues(new HashMap<String, String>());
-						formatter.setDiagnoseConflicts(false);
-						formatter.format((XtextResource) file.eResource(), 0, data.length(), new FormattingPreferenceValues(cfg));
-					} catch(Exception e) {
+						XtextResource resource = (XtextResource) file.eResource();
+						NodeModelBaseRegionAccess.Builder builder = new NodeModelBaseRegionAccess.Builder();
+						NodeModelBaseRegionAccess regions = builder.withResource(resource).create();
+						FormatterRequest request = new FormatterRequest().setTokens(regions);
+						request.setProblemHandler(ExceptionAcceptor.NULL);
+						formatter.format(request);
+					} catch (Exception e) {
+						e.printStackTrace();
 						ComparisonFailure error = new ComparisonFailure(e.getMessage(), data, "");
 						error.setStackTrace(e.getStackTrace());
 						throw error;
@@ -73,7 +76,7 @@ public class FormatterSmokeSuite {
 				}
 			}
 		}
-		
+
 	}
-	
+
 }
