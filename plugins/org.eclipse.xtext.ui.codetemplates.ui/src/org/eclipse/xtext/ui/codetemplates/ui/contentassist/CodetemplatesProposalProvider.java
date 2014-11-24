@@ -33,7 +33,7 @@ import org.eclipse.xtext.ui.codetemplates.templates.Codetemplate;
 import org.eclipse.xtext.ui.codetemplates.templates.Codetemplates;
 import org.eclipse.xtext.ui.codetemplates.templates.Variable;
 import org.eclipse.xtext.ui.codetemplates.ui.evaluator.EvaluatedTemplate;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.codetemplates.ui.projectedEditing.ProjectionAwareProposalAcceptor;
 import org.eclipse.xtext.ui.codetemplates.ui.projectedEditing.TemporaryResourceProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry;
@@ -42,10 +42,10 @@ import org.eclipse.xtext.ui.codetemplates.ui.resolvers.InspectableTemplateVariab
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
-import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.ModeAware;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.ModeAware;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
@@ -309,7 +309,7 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 						data.language, data.rule, evaluatedTemplate.getMappedString(), new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
-						PartialContentAssistContextFactory delegateFactory = languageRegistry.getPartialContentAssistContextFactory(data.language);
+						IPartialEditingContentAssistContextFactory delegateFactory = languageRegistry.getPartialContentAssistContextFactory(data.language);
 						delegateFactory.initializeFor(data.rule);
 						String mappedInput = evaluatedTemplate.getMappedString();
 						int mappedOffset = Math.min(mappedInput.length(), evaluatedTemplate.getMappedOffset(context.getOffset()));
