@@ -106,5 +106,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Import-Package: com.ibm.icu.text;version="4.0.0",
  org.apache.commons.lang,
- org.apache.log4j;version="1.2.15",
- org.eclipse.xtext.ide.editor.syntaxcoloring
+ org.apache.log4j;version="1.2.15"
