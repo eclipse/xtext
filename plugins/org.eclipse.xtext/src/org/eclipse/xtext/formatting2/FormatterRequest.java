@@ -11,11 +11,13 @@ import java.util.Collection;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.util.ExceptionAcceptor;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * A Request tells the formatter what and how to format. Don't implement or extend this interface. Use
@@ -57,6 +59,8 @@ public class FormatterRequest {
 	}
 
 	public ITypedPreferenceValues getPreferences() {
+		if (preferenceValues == null)
+			preferenceValues = new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap());
 		return preferenceValues;
 	}
 
