@@ -5,7 +5,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.testFramework.PsiTestCase;
-import com.intellij.testFramework.PsiTestUtil;
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
+import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
 
@@ -17,9 +18,9 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   public void setUp() throws Exception {
     super.setUp();
     Module _module = this.getModule();
-    PsiTestUtil.addLibrary(_module, "Guava", "/Users/kosyakov/.p2/pool/plugins", "com.google.guava_15.0.0.v201403281430.jar");
+    LibraryUtil.addGuavaLibrary(_module);
     Module _module_1 = this.getModule();
-    PsiTestUtil.addLibrary(_module_1, "TestData", "/Users/kosyakov/oomph/xtext/master/git/xtext/tests/org.eclipse.xtext.common.types.tests/testdata/org/eclipse/xtext/common/types/testSetups", "testData.jar");
+    LibraryUtil.addLibrary(_module_1, "org.eclipse.xtext.common.types.tests.testData", AbstractMethods.class);
     Project _project = this.getProject();
     this.delegate.setUp(_project);
   }

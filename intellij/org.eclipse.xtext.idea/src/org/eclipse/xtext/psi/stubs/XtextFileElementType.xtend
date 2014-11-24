@@ -40,7 +40,7 @@ class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileElementT
 	}
 
 	override getExternalId() {
-		"xtext.file"
+		'''«language.ID».FILE'''
 	}
 
 	override getBuilder() {
@@ -119,6 +119,7 @@ class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileElementT
 		if (stub instanceof XtextFileStub<?>) {
 			for (exportedObject : stub.exportedObjects) {
 				exportedObjectQualifiedNameIndex.key.occurrence(exportedObject.qualifiedName.toString)
+				// FIXME: It should not care about java stuff
 				if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_DECLARED_TYPE, exportedObject.EClass)) {
 					jvmDeclaredTypeShortNameIndex.key.occurrence(exportedObject.qualifiedName.lastSegment)
 				}

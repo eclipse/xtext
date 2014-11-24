@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.tests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtend.idea"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtend.core.tests"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.tests"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

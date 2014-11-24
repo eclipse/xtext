@@ -2,8 +2,10 @@ package org.eclipse.xtext.idea.types.access
 
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl
 import com.intellij.testFramework.PsiTestCase
-import com.intellij.testFramework.PsiTestUtil
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods
 import org.eclipse.xtext.idea.tests.TestDecorator
+
+import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 
 @TestDecorator
 class BinaryStubJvmTypeProviderTest extends PsiTestCase {
@@ -12,8 +14,8 @@ class BinaryStubJvmTypeProviderTest extends PsiTestCase {
 
 	override void setUp() throws Exception {
 		super.setUp
-		PsiTestUtil.addLibrary(module, "Guava", "/Users/kosyakov/.p2/pool/plugins", "com.google.guava_15.0.0.v201403281430.jar")
-		PsiTestUtil.addLibrary(module, "TestData", "/Users/kosyakov/oomph/xtext/master/git/xtext/tests/org.eclipse.xtext.common.types.tests/testdata/org/eclipse/xtext/common/types/testSetups", "testData.jar")
+		module.addGuavaLibrary
+		module.addLibrary("org.eclipse.xtext.common.types.tests.testData", AbstractMethods)
 		delegate.setUp(project)
 	}
 	

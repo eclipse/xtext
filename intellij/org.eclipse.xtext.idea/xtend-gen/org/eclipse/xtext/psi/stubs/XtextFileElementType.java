@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
@@ -51,7 +52,12 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
   }
   
   public String getExternalId() {
-    return "xtext.file";
+    StringConcatenation _builder = new StringConcatenation();
+    Language _language = this.getLanguage();
+    String _iD = _language.getID();
+    _builder.append(_iD, "");
+    _builder.append(".FILE");
+    return _builder.toString();
   }
   
   public StubBuilder getBuilder() {

@@ -9,26 +9,24 @@ package org.eclipse.xtend.idea.parsing;
 
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend.idea.parsing.IdeaXtendParserTest;
+import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.tests.TestDecorator;
-import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
+import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @TestDecorator
 @SuppressWarnings("all")
-public class XtendParsingTestCase extends AbstractLanguageParsingTestCase {
+public class XtendParsingTestCase extends AbstractModelTestCase {
   private IdeaXtendParserTest delegate;
   
   public XtendParsingTestCase() {
     super(XtendFileType.INSTANCE);
     IdeaXtendParserTest _ideaXtendParserTest = new IdeaXtendParserTest(this);
     this.delegate = _ideaXtendParserTest;
-  }
-  
-  @Override
-  protected String getTestDataPath() {
-    return "./testData/parsing";
+    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
+    _xtextLanguage.injectMembers(this.delegate);
   }
   
   public void testBug367949() throws Exception {

@@ -1,22 +1,21 @@
 package org.eclipse.xtext.idea.types.access;
 
-import com.google.common.base.Objects;
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.openapi.roots.LanguageLevelProjectExtension;
-import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.testFramework.PsiTestCase;
 import com.intellij.testFramework.PsiTestUtil;
+import com.intellij.util.PathUtil;
+import java.io.File;
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
+import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 @TestDecorator
 @SuppressWarnings("all")
@@ -25,29 +24,18 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
   
   public void setUp() throws Exception {
     super.setUp();
-    Module _module = this.getModule();
-    PsiTestUtil.addLibrary(_module, "Guava", "/Users/kosyakov/.p2/pool/plugins", "com.google.guava_15.0.0.v201403281430.jar");
     Project _project = this.myJavaFacade.getProject();
     LanguageLevelProjectExtension _instance = LanguageLevelProjectExtension.getInstance(_project);
     _instance.setLanguageLevel(LanguageLevel.JDK_1_5);
-    final String testPath = "/Users/kosyakov/oomph/xtext/master/git/xtext/tests/org.eclipse.xtext.common.types.tests/testdata";
-    Application _application = ApplicationManager.getApplication();
-    final Function0<VirtualFile> _function = new Function0<VirtualFile>() {
-      public VirtualFile apply() {
-        LocalFileSystem _instance = LocalFileSystem.getInstance();
-        return _instance.refreshAndFindFileByPath(testPath);
-      }
-    };
-    final VirtualFile testRoot = _application.<VirtualFile>runWriteAction(
-      ((Computable<VirtualFile>) new Computable<VirtualFile>() {
-          public VirtualFile compute() {
-            return _function.apply();
-          }
-      }));
-    boolean _notEquals = (!Objects.equal(testRoot, null));
-    if (_notEquals) {
-      PsiTestUtil.addSourceRoot(this.myModule, testRoot);
-    }
+    Module _module = this.getModule();
+    LibraryUtil.addGuavaLibrary(_module);
+    String _jarPathForClass = PathUtil.getJarPathForClass(AbstractMethods.class);
+    File _file = new File(_jarPathForClass);
+    final String testDataProject = _file.getParent();
+    final File testDataFolder = new File(testDataProject, "testdata");
+    LocalFileSystem _instance_1 = LocalFileSystem.getInstance();
+    final VirtualFile testDataSourceRoot = _instance_1.refreshAndFindFileByIoFile(testDataFolder);
+    PsiTestUtil.addSourceRoot(this.myModule, testDataSourceRoot);
     Project _project_1 = this.getProject();
     this.delegate.setUp(_project_1);
   }
