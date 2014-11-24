@@ -27,7 +27,7 @@ import org.eclipse.jdt.internal.ui.preferences.formatter.ProfileStore;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.preferences.PreferenceKeysProvider;
