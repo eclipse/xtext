@@ -34,6 +34,7 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.generator.IInheriting;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
 import org.eclipse.xtext.generator.serializer.JavaEMFFile;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -173,6 +174,7 @@ public class FormatterStubGenerator {
     Resource _eResource = this.grammar.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     String _stubPackageName = this.getStubPackageName();
+    @Extension
     final JavaEMFFile file = new JavaEMFFile(_resourceSet, _stubPackageName);
     file.imported(IFormattableDocument.class);
     final Multimap<EClass, EReference> type2ref = this.getLocalyAssignedContainmentReferences();
@@ -182,8 +184,20 @@ public class FormatterStubGenerator {
     _builder.append(_stubSimpleName, "");
     _builder.append(" extends ");
     String _stubSuperClassName = this.getStubSuperClassName();
-    _builder.append(_stubSuperClassName, "");
+    String _imported = file.imported(_stubSuperClassName);
+    _builder.append(_imported, "");
     _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@");
+    String _imported_1 = file.imported(Inject.class);
+    _builder.append(_imported_1, "\t");
+    _builder.append(" extension ");
+    String _grammarAccessFQName = GrammarAccessUtil.getGrammarAccessFQName(this.grammar, this.service.naming);
+    String _imported_2 = file.imported(_grammarAccessFQName);
+    _builder.append(_imported_2, "\t");
     _builder.newLineIfNotEmpty();
     {
       Set<EClass> _keySet = type2ref.keySet();
@@ -209,7 +223,7 @@ public class FormatterStubGenerator {
   
   public CharSequence generateFormatMethod(final EClass clazz, @Extension final JavaEMFFile file, final Collection<EReference> containmentRefs) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("def protected dispatch void format(");
+    _builder.append("def dispatch void format(");
     String _importedGenTypeName = file.importedGenTypeName(clazz);
     _builder.append(_importedGenTypeName, "");
     _builder.append(" ");

@@ -17,13 +17,14 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.generator.Naming
+import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil
 import org.eclipse.xtext.generator.serializer.JavaEMFFile
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.IInheriting.Util.*
-import org.eclipse.xtext.formatting2.AbstractFormatter2
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -92,12 +93,14 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2
 	}
 
 	def String generateStubFileContents() {
-		val file = new JavaEMFFile(grammar.eResource.resourceSet, stubPackageName);
+		val extension file = new JavaEMFFile(grammar.eResource.resourceSet, stubPackageName);
 		file.imported(IFormattableDocument)
 
 		val type2ref = getLocalyAssignedContainmentReferences
 		file.body = '''
-			class «stubSimpleName» extends «stubSuperClassName» {
+			class «stubSimpleName» extends «stubSuperClassName.imported» {
+				
+				@«Inject.imported» extension «GrammarAccessUtil.getGrammarAccessFQName(grammar, service.naming).imported»
 				«FOR type : type2ref.keySet»
 
 					«type.generateFormatMethod(file, type2ref.get(type))»
@@ -112,7 +115,7 @@ import org.eclipse.xtext.formatting2.AbstractFormatter2
 	}
 		
 	def generateFormatMethod(EClass clazz, extension JavaEMFFile file, Collection<EReference> containmentRefs) '''
-		def protected dispatch void format(«clazz.importedGenTypeName» «clazz.toName», extension IFormattableDocument document) {
+		def dispatch void format(«clazz.importedGenTypeName» «clazz.toName», extension IFormattableDocument document) {
 			// TODO: format HiddenRegions around keywords, attribtues, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
