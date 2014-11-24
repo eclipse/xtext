@@ -43,7 +43,12 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 	sourceSets {
 		main {
 			java.srcDirs = ['src', 'xtend-gen', 'src-gen']
-			resources.srcDirs = ['src', 'src-gen']
+			resources {
+				srcDirs = ['src', 'src-gen']
+				exclude '**/*.xtend'
+				exclude '**/*.xtext'
+				exclude '**/*.mwe2'
+			}
 		}
 	}
 	
