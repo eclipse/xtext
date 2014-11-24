@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import org.eclipse.core.runtime.OperationCanceledException
+import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
@@ -25,7 +25,7 @@ class TypeResolutionCancelTest extends AbstractXbaseTestCase {
 		try {
 			resolver.resolveTypes(exp, [|true])	
 			fail('Type resolution should have been canceled')
-		} catch (OperationCanceledException e) {
+		} catch (OperationCanceledError e) {
 			// good
 		}
 	}
@@ -34,7 +34,7 @@ class TypeResolutionCancelTest extends AbstractXbaseTestCase {
 		val exp = expression('true')
 		try {
 			resolver.resolveTypes(exp, [|false])	
-		} catch (OperationCanceledException e) {
+		} catch (OperationCanceledError e) {
 			fail('Type resolution should not have been canceled')
 		}
 	}

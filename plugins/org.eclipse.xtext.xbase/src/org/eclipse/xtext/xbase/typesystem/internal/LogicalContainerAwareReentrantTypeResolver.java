@@ -297,7 +297,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	@Override
 	protected void clear() {
-		rootedInstances = Collections.emptySet();
+		rootedInstances.clear();
 		super.clear();
 	}
 	
