@@ -15,4 +15,5 @@ Export-Package: org.eclipse.xtext.ide;x-internal:=true,
  org.eclipse.xtext.ide.editor.contentassist.antlr;x-internal:=true,
  org.eclipse.xtext.ide.editor.contentassist.antlr.internal;x-internal:=true,
  org.eclipse.xtext.ide.editor.model;x-internal:=true,
+ org.eclipse.xtext.ide.editor.partialEditing;x-internal:=true,
  org.eclipse.xtext.ide.editor.syntaxcoloring;x-internal:=true
