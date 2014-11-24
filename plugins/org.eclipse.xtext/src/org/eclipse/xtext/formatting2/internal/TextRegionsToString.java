@@ -47,7 +47,7 @@ public class TextRegionsToString {
 
 	public TextRegionsToString addReplacement(ITextSegment region, String replacement, String description) {
 		text.add(region, getReplacement(region, replacement));
-		list.add(region, quote(region.getText(), 20) + " -> " + quote(replacement, 20) + ":" + description);
+		list.add(region, quote(region.getText(), 20) + " -> " + quote(replacement, 20) + ": " + description);
 		return this;
 	}
 
@@ -64,6 +64,11 @@ public class TextRegionsToString {
 			string = string.substring(0, maxLenght - 3) + "...";
 		string = string.replace("\n", "\\n").replace("\r", "\\r");
 		return "\"" + string + "\"";
+	}
+
+	public TextRegionsToString setTitle(String title) {
+		text.setTitle(title + " (syntax: <offset|text>)");
+		return this;
 	}
 
 	public TextRegionsToString setFrame(ITextSegment frame) {

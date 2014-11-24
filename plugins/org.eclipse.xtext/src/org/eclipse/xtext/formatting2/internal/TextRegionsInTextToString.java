@@ -27,6 +27,7 @@ public class TextRegionsInTextToString {
 	private List<ITextReplacement> items = Lists.newArrayList();
 	private int leadingLines = 4;
 	private ITextRegionAccess textRegionAccess;
+	private String title = "document snippet";
 	private int trailingLines = 4;
 
 	public TextRegionsInTextToString add(ITextReplacement region) {
@@ -84,6 +85,10 @@ public class TextRegionsInTextToString {
 		return null;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
 	public int getTrailingLines() {
 		return trailingLines;
 	}
@@ -103,6 +108,11 @@ public class TextRegionsInTextToString {
 		return this;
 	}
 
+	public TextRegionsInTextToString setTitle(String title) {
+		this.title = title;
+		return this;
+	}
+
 	public TextRegionsInTextToString setTrailingLines(int trailingLines) {
 		this.trailingLines = trailingLines;
 		return this;
@@ -117,7 +127,7 @@ public class TextRegionsInTextToString {
 				return "(null)";
 			StringBuilder builder = new StringBuilder();
 			String vizualized = TextReplacements.apply(frame, items);
-			builder.append(box("document snippet", vizualized));
+			builder.append(box(title, vizualized));
 			return builder.toString();
 		} catch (Exception e) {
 			return box("error", e.getMessage() + "\n" + Throwables.getStackTraceAsString(e));

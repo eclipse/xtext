@@ -56,12 +56,14 @@ public class TextRegionListToString {
 		int offsetDigits = 0;
 		int lenghtDigits = 0;
 		for (Item item : items) {
-			int lenghtD = String.valueOf(item.region.getLength()).length();
-			if (lenghtDigits < lenghtD)
-				lenghtDigits = lenghtD;
-			int lenghtO = String.valueOf(item.region.getOffset()).length();
-			if (offsetDigits < lenghtO)
-				offsetDigits = lenghtO;
+			if (item.region != null) {
+				int lenghtD = String.valueOf(item.region.getLength()).length();
+				if (lenghtDigits < lenghtD)
+					lenghtDigits = lenghtD;
+				int lenghtO = String.valueOf(item.region.getOffset()).length();
+				if (offsetDigits < lenghtO)
+					offsetDigits = lenghtO;
+			}
 		}
 		List<String> result = Lists.newArrayListWithExpectedSize(items.size());
 		String prefix = Strings.repeat(" ", offsetDigits + lenghtDigits + 2);
