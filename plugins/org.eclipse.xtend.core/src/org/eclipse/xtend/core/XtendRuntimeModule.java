@@ -13,7 +13,6 @@ import org.eclipse.xtend.core.conversion.StringValueConverter;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.documentation.XtendDocumentationProvider;
 import org.eclipse.xtend.core.findReferences.XtendReferenceFinder;
-import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.imports.XtendTypeUsageCollector;
@@ -22,8 +21,8 @@ import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.RuntimeLinker;
 import org.eclipse.xtend.core.linking.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
-import org.eclipse.xtend.core.macro.declaration.NopResourceChangeRegistry;
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
+import org.eclipse.xtend.core.macro.declaration.NopResourceChangeRegistry;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.parser.CustomXtendParser;
 import org.eclipse.xtend.core.parser.FlexTokenRegionProvider;
@@ -84,7 +83,6 @@ import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
-import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.ImportedTypesCollector;
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
@@ -182,10 +180,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	@Override
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
 		return XtendLinkingDiagnosticMessageProvider.class;
-	}
-
-	public Class<? extends IBasicFormatter> bindIBasicFormatter() {
-		return XtendFormatter.class;
 	}
 
 	public Class<? extends IImportsConfiguration> bindIImportsConfiguration() {
