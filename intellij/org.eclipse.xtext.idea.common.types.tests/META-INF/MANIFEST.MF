@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext IDEA RefactoringTestLanguage
-Bundle-SymbolicName: org.eclipse.xtext.idea.common.types.RefactoringTestLanguage;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.idea.common.types.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.eclipse.xtext.idea.common.types,
  org.eclipse.xtext.idea.common.types.idea,
