@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.formatting;
 
-import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -37,7 +37,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatEmptyMethod2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -82,7 +82,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatEmptyMethod4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -127,7 +127,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithJustAComment2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -179,7 +179,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithJustAComment4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -224,7 +224,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithOneExpression2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -275,7 +275,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithOneExpression4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -301,7 +301,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithTryCatchExpression() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -367,7 +367,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithTwoExpressions2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -424,7 +424,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethodWithTwoExpressions4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
+        it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();

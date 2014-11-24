@@ -1,100 +1,80 @@
 package org.eclipse.xtext.idea.parser;
 
 import com.google.inject.Inject;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageUtil;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
 import javax.inject.Provider;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtext.psi.impl.PsiEObjectImpl;
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("all")
-public abstract class AbstractXtextParserDefinition implements ParserDefinition {
+public abstract class AbstractXtextParserDefinition /* implements ParserDefinition  */{
   @Inject
-  private Provider<Lexer> lexerProvider;
+  private /* Provider<Lexer> */Object lexerProvider;
   
   @Inject
   private TokenTypeProvider tokenTypeProvider;
   
   @Inject
-  private Provider<PsiParser> psiParserProvider;
+  private /* Provider<PsiParser> */Object psiParserProvider;
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   private IElementTypeProvider elementTypeProvider;
   
-  @NotNull
-  public Lexer createLexer(final Project project) {
+  /* @NotNull
+   */public /* Lexer */Object createLexer(final /* Project */Object project) {
     return this.lexerProvider.get();
   }
   
-  public IFileElementType getFileNodeType() {
-    return this.elementTypeProvider.getFileType();
+  public /* IFileElementType */Object getFileNodeType() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method getFileType is undefined for the type AbstractXtextParserDefinition");
   }
   
-  @NotNull
-  public TokenSet getWhitespaceTokens() {
-    return TokenSet.EMPTY;
+  /* @NotNull
+   */public /* TokenSet */Object getWhitespaceTokens() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field TokenSet is undefined for the type AbstractXtextParserDefinition"
+      + "\nEMPTY cannot be resolved");
   }
   
-  @NotNull
-  public TokenSet getCommentTokens() {
-    return TokenSet.EMPTY;
+  /* @NotNull
+   */public /* TokenSet */Object getCommentTokens() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field TokenSet is undefined for the type AbstractXtextParserDefinition"
+      + "\nEMPTY cannot be resolved");
   }
   
-  @NotNull
-  public TokenSet getStringLiteralElements() {
-    return this.tokenTypeProvider.getStringLiteralTokens();
+  /* @NotNull
+   */public /* TokenSet */Object getStringLiteralElements() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method getStringLiteralTokens is undefined for the type AbstractXtextParserDefinition");
   }
   
-  @NotNull
-  public PsiParser createParser(final Project project) {
+  /* @NotNull
+   */public /* PsiParser */Object createParser(final /* Project */Object project) {
     return this.psiParserProvider.get();
   }
   
-  public ParserDefinition.SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
-    Lexer _get = this.lexerProvider.get();
-    return LanguageUtil.canStickTokensTogetherByLexer(left, right, _get);
+  public /* SpaceRequirements */Object spaceExistanceTypeBetweenTokens(final /* ASTNode */Object left, final /* ASTNode */Object right) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field LanguageUtil is undefined for the type AbstractXtextParserDefinition"
+      + "\ncanStickTokensTogetherByLexer cannot be resolved");
   }
   
-  public PsiElement createElement(final ASTNode node) {
-    PsiEObjectImpl<StubElement> _xifexpression = null;
-    IElementType _elementType = node.getElementType();
-    boolean _isCrossReference = this.isCrossReference(_elementType);
-    if (_isCrossReference) {
-      _xifexpression = new PsiEObjectReference<StubElement>(node);
-    } else {
-      _xifexpression = new PsiEObjectImpl<StubElement>(node);
-    }
-    return _xifexpression;
+  public Object createElement(final /* ASTNode */Object node) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiEObjectReference cannot be resolved."
+      + "\nPsiEObjectImpl cannot be resolved."
+      + "\nelementType cannot be resolved"
+      + "\ncrossReference cannot be resolved");
   }
   
-  protected boolean isCrossReference(final IElementType type) {
-    boolean _xifexpression = false;
-    if ((type instanceof IGrammarAwareElementType)) {
-      EObject _grammarElement = ((IGrammarAwareElementType)type).getGrammarElement();
-      _xifexpression = (_grammarElement instanceof CrossReference);
-    } else {
-      _xifexpression = false;
-    }
-    return _xifexpression;
+  protected boolean isCrossReference(final /* IElementType */Object type) {
+    throw new Error("Unresolved compilation problems:"
+      + "\ngrammarElement cannot be resolved");
   }
   
   @Pure

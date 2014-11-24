@@ -1,13 +1,8 @@
 package org.eclipse.xtext.idea.containers;
 
-import com.google.common.base.Objects;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.search.GlobalSearchScope;
 import java.util.Collection;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable;
-import org.eclipse.xtext.idea.resource.impl.PsiFileBasedResourceDescription;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -17,16 +12,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ResolveScopeBasedContainer extends AbstractScopeBasedSelectable implements IContainer {
   public IResourceDescription getResourceDescription(final URI uri) {
-    Object _xblockexpression = null;
-    {
-      final BaseXtextFile psiFile = this.findFile(uri);
-      boolean _notEquals = (!Objects.equal(psiFile, null));
-      if (_notEquals) {
-        return new PsiFileBasedResourceDescription(psiFile);
-      }
-      _xblockexpression = null;
-    }
-    return ((IResourceDescription)_xblockexpression);
+    throw new Error("Unresolved compilation problems:"
+      + "\n!= cannot be resolved");
   }
   
   public int getResourceDescriptionCount() {
@@ -53,11 +40,11 @@ public class ResolveScopeBasedContainer extends AbstractScopeBasedSelectable imp
   }
   
   public boolean hasResourceDescription(final URI uri) {
-    BaseXtextFile _findFile = this.findFile(uri);
-    return (!Objects.equal(_findFile, null));
+    throw new Error("Unresolved compilation problems:"
+      + "\n!= cannot be resolved");
   }
   
-  public void setScope(final GlobalSearchScope resolveScope) {
+  public void setScope(final /* GlobalSearchScope */Object resolveScope) {
     super.setScope(resolveScope);
   }
 }

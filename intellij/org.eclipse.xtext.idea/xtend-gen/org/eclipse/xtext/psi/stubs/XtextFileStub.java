@@ -1,8 +1,5 @@
 package org.eclipse.xtext.psi.stubs;
 
-import com.intellij.psi.stubs.PsiFileStub;
-import com.intellij.psi.stubs.PsiFileStubImpl;
-import com.intellij.psi.tree.IStubFileElementType;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -12,7 +9,7 @@ import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> implements PsiFileStub<T> {
+public class XtextFileStub<T extends BaseXtextFile> /* implements PsiFileStubImpl<T>, PsiFileStub<T>  */{
   @Accessors
   private URI uri;
   
@@ -22,11 +19,11 @@ public class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> i
   private final XtextFileElementType<?> type;
   
   public XtextFileStub(final T file, final XtextFileElementType<?> type) {
-    super(file);
-    this.type = type;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super is undefined for the type XtextFileStub");
   }
   
-  public IStubFileElementType getType() {
+  public XtextFileElementType<?> getType() {
     return this.type;
   }
   

@@ -1,22 +1,7 @@
 package org.eclipse.xtext.idea.types.access;
 
 import com.google.common.base.Objects;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiArrayType;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementFactory;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiMethod;
-import com.intellij.psi.PsiParameter;
-import com.intellij.psi.PsiParameterList;
-import com.intellij.psi.PsiPrimitiveType;
-import com.intellij.psi.PsiType;
-import com.intellij.psi.PsiTypeParameter;
-import com.intellij.psi.PsiTypeParameterListOwner;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.access.impl.Primitives;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -103,345 +88,128 @@ public class StubURIHelper implements URIHelperConstants {
     return builder.append(name);
   }
   
-  public URI getFullURI(final PsiMethod method) {
-    URI _xblockexpression = null;
-    {
-      PsiElementFactory _psiElementFactory = this.getPsiElementFactory(method);
-      PsiClass _containingClass = method.getContainingClass();
-      final PsiClassType type = _psiElementFactory.createType(_containingClass);
-      StringBuilder _createURIBuilder = this.createURIBuilder();
-      StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, type);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append(".");
-      String _name = method.getName();
-      _builder.append(_name, "");
-      _builder.append("()");
-      StringBuilder _append = _appendFullURI.append(_builder);
-      _xblockexpression = this.createURI(_append);
-    }
-    return _xblockexpression;
+  public URI getFullURI(final /* PsiMethod */Object method) {
+    throw new Error("Unresolved compilation problems:"
+      + "\npsiElementFactory cannot be resolved"
+      + "\ncreateType cannot be resolved"
+      + "\ncontainingClass cannot be resolved"
+      + "\nname cannot be resolved");
   }
   
-  public URI getFullURI(final PsiField field) {
-    URI _xblockexpression = null;
-    {
-      PsiElementFactory _psiElementFactory = this.getPsiElementFactory(field);
-      PsiClass _containingClass = field.getContainingClass();
-      final PsiClassType type = _psiElementFactory.createType(_containingClass);
-      StringBuilder _createURIBuilder = this.createURIBuilder();
-      StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, type);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append(".");
-      String _name = field.getName();
-      _builder.append(_name, "");
-      StringBuilder _append = _appendFullURI.append(_builder);
-      _xblockexpression = this.createURI(_append);
-    }
-    return _xblockexpression;
+  public URI getFullURI(final /* PsiField */Object field) {
+    throw new Error("Unresolved compilation problems:"
+      + "\npsiElementFactory cannot be resolved"
+      + "\ncreateType cannot be resolved"
+      + "\ncontainingClass cannot be resolved"
+      + "\nname cannot be resolved");
   }
   
-  public URI getFullURI(final PsiType type) {
+  public URI getFullURI(final /* PsiType */Object type) {
     StringBuilder _createURIBuilder = this.createURIBuilder();
     StringBuilder _appendFullURI = this.appendFullURI(_createURIBuilder, type);
     return this.createURI(_appendFullURI);
   }
   
-  protected StringBuilder appendFullURI(final StringBuilder it, final PsiType type) {
+  protected StringBuilder appendFullURI(final StringBuilder it, final /* PsiType */Object type) {
     StringBuilder _appendTypeResourceURI = this.appendTypeResourceURI(it, type);
     StringBuilder _append = _appendTypeResourceURI.append("#");
     return this.appendTypeFragment(_append, type);
   }
   
-  protected StringBuilder appendTypeResourceURI(final StringBuilder builder, final PsiType type) {
-    StringBuilder _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiArrayType) {
-        _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        _switchResult = this.appendTypeResourceURI(builder, _componentType);
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiPrimitiveType) {
-        _matched=true;
-        _switchResult = builder.append(URIHelperConstants.PRIMITIVES);
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiClassType) {
-        _matched=true;
-        StringBuilder _switchResult_1 = null;
-        PsiClass _resolve = ((PsiClassType)type).resolve();
-        final PsiClass resolvedType = _resolve;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiTypeParameter) {
-            _matched_1=true;
-            _switchResult_1 = this.appendTypeParameterResourceURI(builder, ((PsiTypeParameter)resolvedType));
-          }
-        }
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiClass) {
-            _matched_1=true;
-            _switchResult_1 = this.appendClassResourceURI(builder, resolvedType);
-          }
-        }
-        if (!_matched_1) {
-          String _canonicalText = null;
-          if (((PsiClassType)type)!=null) {
-            _canonicalText=((PsiClassType)type).getCanonicalText();
-          }
-          String _plus = ("Unknown type: " + _canonicalText);
-          throw new IllegalStateException(_plus);
-        }
-        _switchResult = _switchResult_1;
-      }
-    }
-    if (!_matched) {
-      String _canonicalText = null;
-      if (type!=null) {
-        _canonicalText=type.getCanonicalText();
-      }
-      String _plus = ("Unknown type: " + _canonicalText);
-      throw new IllegalStateException(_plus);
-    }
-    return _switchResult;
+  protected StringBuilder appendTypeResourceURI(final StringBuilder builder, final /* PsiType */Object type) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiArrayType cannot be resolved to a type."
+      + "\nPsiPrimitiveType cannot be resolved to a type."
+      + "\nPsiClassType cannot be resolved to a type."
+      + "\nPsiTypeParameter cannot be resolved to a type."
+      + "\nPsiClass cannot be resolved to a type."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\ncomponentType cannot be resolved"
+      + "\nresolve cannot be resolved"
+      + "\ncanonicalText cannot be resolved"
+      + "\ncanonicalText cannot be resolved");
   }
   
-  protected StringBuilder appendTypeParameterResourceURI(final StringBuilder builder, final PsiTypeParameter typeParameter) {
-    StringBuilder _switchResult = null;
-    PsiTypeParameterListOwner _owner = typeParameter.getOwner();
-    final PsiTypeParameterListOwner owner = _owner;
-    boolean _matched = false;
-    if (!_matched) {
-      if (owner instanceof PsiClass) {
-        _matched=true;
-        _switchResult = this.appendClassResourceURI(builder, ((PsiClass)owner));
-      }
-    }
-    if (!_matched) {
-      if (owner instanceof PsiMethod) {
-        _matched=true;
-        PsiClass _containingClass = ((PsiMethod)owner).getContainingClass();
-        _switchResult = this.appendClassResourceURI(builder, _containingClass);
-      }
-    }
-    return _switchResult;
+  protected StringBuilder appendTypeParameterResourceURI(final StringBuilder builder, final /* PsiTypeParameter */Object typeParameter) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiClass cannot be resolved to a type."
+      + "\nPsiMethod cannot be resolved to a type."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nowner cannot be resolved"
+      + "\ncontainingClass cannot be resolved");
   }
   
-  protected StringBuilder appendClassResourceURI(final StringBuilder builder, final PsiClass psiClass) {
-    StringBuilder _xblockexpression = null;
-    {
-      final PsiClass containingClass = psiClass.getContainingClass();
-      StringBuilder _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(containingClass, null));
-      if (_notEquals) {
-        _xifexpression = this.appendClassResourceURI(builder, containingClass);
-      } else {
-        StringBuilder _append = builder.append(URIHelperConstants.OBJECTS);
-        String _qualifiedName = psiClass.getQualifiedName();
-        _xifexpression = _append.append(_qualifiedName);
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+  protected StringBuilder appendClassResourceURI(final StringBuilder builder, final /* PsiClass */Object psiClass) {
+    throw new Error("Unresolved compilation problems:"
+      + "\ncontainingClass cannot be resolved"
+      + "\n!= cannot be resolved"
+      + "\nqualifiedName cannot be resolved");
   }
   
-  protected StringBuilder appendTypeFragment(final StringBuilder builder, final PsiType type) {
-    StringBuilder _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiPrimitiveType) {
-        _matched=true;
-        String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText(false);
-        _switchResult = builder.append(_canonicalText);
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiClassType) {
-        _matched=true;
-        StringBuilder _switchResult_1 = null;
-        PsiClass _resolve = ((PsiClassType)type).resolve();
-        final PsiClass resolvedType = _resolve;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiTypeParameter) {
-            _matched_1=true;
-            _switchResult_1 = this.appendTypeParameterFragment(builder, ((PsiTypeParameter)resolvedType));
-          }
-        }
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiClass) {
-            _matched_1=true;
-            _switchResult_1 = this.appendClassFragment(builder, resolvedType);
-          }
-        }
-        if (!_matched_1) {
-          String _canonicalText = null;
-          if (((PsiClassType)type)!=null) {
-            _canonicalText=((PsiClassType)type).getCanonicalText();
-          }
-          String _plus = ("Unknown type: " + _canonicalText);
-          throw new IllegalStateException(_plus);
-        }
-        _switchResult = _switchResult_1;
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiArrayType) {
-        _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        StringBuilder _appendTypeFragment = this.appendTypeFragment(builder, _componentType);
-        _switchResult = _appendTypeFragment.append("[]");
-      }
-    }
-    if (!_matched) {
-      String _canonicalText = null;
-      if (type!=null) {
-        _canonicalText=type.getCanonicalText();
-      }
-      String _plus = ("Unknown type: " + _canonicalText);
-      throw new IllegalStateException(_plus);
-    }
-    return _switchResult;
+  protected StringBuilder appendTypeFragment(final StringBuilder builder, final /* PsiType */Object type) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiPrimitiveType cannot be resolved to a type."
+      + "\nPsiClassType cannot be resolved to a type."
+      + "\nPsiTypeParameter cannot be resolved to a type."
+      + "\nPsiClass cannot be resolved to a type."
+      + "\nPsiArrayType cannot be resolved to a type."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\ngetCanonicalText cannot be resolved"
+      + "\nresolve cannot be resolved"
+      + "\ncanonicalText cannot be resolved"
+      + "\ncomponentType cannot be resolved"
+      + "\ncanonicalText cannot be resolved");
   }
   
-  protected StringBuilder appendTypeParameterFragment(final StringBuilder builder, final PsiTypeParameter typeParameter) {
-    StringBuilder _xblockexpression = null;
-    {
-      PsiTypeParameterListOwner _owner = typeParameter.getOwner();
-      final PsiTypeParameterListOwner owner = _owner;
-      boolean _matched = false;
-      if (!_matched) {
-        if (owner instanceof PsiClass) {
-          _matched=true;
-          this.appendClassFragment(builder, ((PsiClass)owner));
-        }
-      }
-      if (!_matched) {
-        if (owner instanceof PsiMethod) {
-          _matched=true;
-          this.appendMethodFragment(builder, ((PsiMethod)owner));
-        }
-      }
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/");
-      String _name = typeParameter.getName();
-      _builder.append(_name, "");
-      _xblockexpression = builder.append(_builder);
-    }
-    return _xblockexpression;
+  protected StringBuilder appendTypeParameterFragment(final StringBuilder builder, final /* PsiTypeParameter */Object typeParameter) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiClass cannot be resolved to a type."
+      + "\nPsiMethod cannot be resolved to a type."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nowner cannot be resolved"
+      + "\nname cannot be resolved");
   }
   
-  protected StringBuilder appendClassFragment(final StringBuilder builder, final PsiClass psiClass) {
-    StringBuilder _xblockexpression = null;
-    {
-      final PsiClass containingClass = psiClass.getContainingClass();
-      StringBuilder _xifexpression = null;
-      boolean _equals = Objects.equal(containingClass, null);
-      if (_equals) {
-        String _qualifiedName = psiClass.getQualifiedName();
-        _xifexpression = builder.append(_qualifiedName);
-      } else {
-        StringBuilder _appendClassFragment = this.appendClassFragment(builder, containingClass);
-        StringBuilder _append = _appendClassFragment.append("$");
-        String _name = psiClass.getName();
-        _xifexpression = _append.append(_name);
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+  protected StringBuilder appendClassFragment(final StringBuilder builder, final /* PsiClass */Object psiClass) {
+    throw new Error("Unresolved compilation problems:"
+      + "\ncontainingClass cannot be resolved"
+      + "\n== cannot be resolved"
+      + "\nqualifiedName cannot be resolved"
+      + "\nname cannot be resolved");
   }
   
-  protected StringBuilder appendMethodFragment(final StringBuilder builder, final PsiMethod method) {
-    StringBuilder _xblockexpression = null;
-    {
-      PsiClass _containingClass = method.getContainingClass();
-      this.appendClassFragment(builder, _containingClass);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append(".");
-      String _name = method.getName();
-      _builder.append(_name, "");
-      _builder.append("(");
-      builder.append(_builder);
-      PsiParameterList _parameterList = method.getParameterList();
-      final int parameterCount = _parameterList.getParametersCount();
-      for (int i = 0; (i < parameterCount); i++) {
-        {
-          if ((i != 0)) {
-            builder.append(",");
-          }
-          PsiParameterList _parameterList_1 = method.getParameterList();
-          PsiParameter[] _parameters = _parameterList_1.getParameters();
-          PsiParameter _get = _parameters[i];
-          PsiType _type = _get.getType();
-          this.appendTypeName(builder, _type);
-        }
-      }
-      _xblockexpression = builder.append(")");
-    }
-    return _xblockexpression;
+  protected StringBuilder appendMethodFragment(final StringBuilder builder, final /* PsiMethod */Object method) {
+    throw new Error("Unresolved compilation problems:"
+      + "\ncontainingClass cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nparameterList cannot be resolved"
+      + "\nparametersCount cannot be resolved"
+      + "\nparameterList cannot be resolved"
+      + "\nparameters cannot be resolved"
+      + "\nget cannot be resolved"
+      + "\ntype cannot be resolved");
   }
   
-  public StringBuilder appendTypeName(final StringBuilder builder, final PsiType type) {
-    StringBuilder _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (type instanceof PsiPrimitiveType) {
-        _matched=true;
-        String _canonicalText = ((PsiPrimitiveType)type).getCanonicalText(false);
-        _switchResult = builder.append(_canonicalText);
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiClassType) {
-        _matched=true;
-        StringBuilder _switchResult_1 = null;
-        PsiClass _resolve = ((PsiClassType)type).resolve();
-        final PsiClass resolvedType = _resolve;
-        boolean _matched_1 = false;
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiTypeParameter) {
-            _matched_1=true;
-            String _name = ((PsiTypeParameter)resolvedType).getName();
-            _switchResult_1 = builder.append(_name);
-          }
-        }
-        if (!_matched_1) {
-          if (resolvedType instanceof PsiClass) {
-            _matched_1=true;
-            _switchResult_1 = this.appendClassFragment(builder, resolvedType);
-          }
-        }
-        if (!_matched_1) {
-          String _canonicalText = null;
-          if (((PsiClassType)type)!=null) {
-            _canonicalText=((PsiClassType)type).getCanonicalText();
-          }
-          String _plus = ("Unknown type: " + _canonicalText);
-          throw new IllegalStateException(_plus);
-        }
-        _switchResult = _switchResult_1;
-      }
-    }
-    if (!_matched) {
-      if (type instanceof PsiArrayType) {
-        _matched=true;
-        PsiType _componentType = ((PsiArrayType)type).getComponentType();
-        StringBuilder _appendTypeName = this.appendTypeName(builder, _componentType);
-        _switchResult = _appendTypeName.append("[]");
-      }
-    }
-    if (!_matched) {
-      String _canonicalText = null;
-      if (type!=null) {
-        _canonicalText=type.getCanonicalText();
-      }
-      String _plus = ("Unknown type: " + _canonicalText);
-      throw new IllegalStateException(_plus);
-    }
-    return _switchResult;
+  public StringBuilder appendTypeName(final StringBuilder builder, final /* PsiType */Object type) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiPrimitiveType cannot be resolved to a type."
+      + "\nPsiClassType cannot be resolved to a type."
+      + "\nPsiTypeParameter cannot be resolved to a type."
+      + "\nPsiClass cannot be resolved to a type."
+      + "\nPsiArrayType cannot be resolved to a type."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition."
+      + "\ngetCanonicalText cannot be resolved"
+      + "\nresolve cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\ncanonicalText cannot be resolved"
+      + "\ncomponentType cannot be resolved"
+      + "\ncanonicalText cannot be resolved");
   }
   
   protected StringBuilder createURIBuilder() {
@@ -459,12 +227,16 @@ public class StubURIHelper implements URIHelperConstants {
     return URI.createURI(_string);
   }
   
-  public PsiElementFactory getPsiElementFactory(final PsiElement it) {
-    Project _project = it.getProject();
-    return this.getPsiElementFactory(_project);
+  public Object getPsiElementFactory(final /* PsiElement */Object it) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field project is undefined for the type StubURIHelper"
+      + "\npsiElementFactory cannot be resolved");
   }
   
-  public PsiElementFactory getPsiElementFactory(final Project project) {
-    return PsiElementFactory.SERVICE.getInstance(project);
+  public Object getPsiElementFactory(final /* Project */Object project) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field PsiElementFactory is undefined for the type StubURIHelper"
+      + "\nSERVICE cannot be resolved"
+      + "\ngetInstance cannot be resolved");
   }
 }

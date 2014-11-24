@@ -1,27 +1,18 @@
 package org.eclipse.xtext.idea.types.psi.impl;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiAnnotation;
-import com.intellij.psi.PsiAnnotationMemberValue;
-import com.intellij.psi.PsiAnnotationOwner;
-import com.intellij.psi.PsiAnnotationParameterList;
-import com.intellij.psi.PsiJavaCodeReferenceElement;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.light.LightElement;
-import com.intellij.psi.meta.PsiMetaData;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class LightAnnotation extends LightElement implements PsiAnnotation {
+public class LightAnnotation /* implements LightElement, PsiAnnotation  */{
   private String qualifiedName;
   
   @Accessors
-  private PsiAnnotationOwner owner;
+  private /* PsiAnnotationOwner */Object owner;
   
-  public LightAnnotation(final PsiManager manager, final Language language, final String qualifiedName) {
-    super(manager, language);
-    this.qualifiedName = qualifiedName;
+  public LightAnnotation(final /* PsiManager */Object manager, final /* Language */Object language, final String qualifiedName) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super is undefined for the type LightAnnotation");
   }
   
   public String getQualifiedName() {
@@ -32,27 +23,27 @@ public class LightAnnotation extends LightElement implements PsiAnnotation {
     return this.qualifiedName;
   }
   
-  public PsiAnnotationMemberValue findAttributeValue(final String attributeName) {
+  public void findAttributeValue(final String attributeName) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  public PsiAnnotationMemberValue findDeclaredAttributeValue(final String attributeName) {
+  public void findDeclaredAttributeValue(final String attributeName) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  public PsiJavaCodeReferenceElement getNameReferenceElement() {
+  public void getNameReferenceElement() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  public PsiAnnotationParameterList getParameterList() {
+  public void getParameterList() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  public <T extends PsiAnnotationMemberValue> T setDeclaredAttributeValue(final String attributeName, final T value) {
+  public <T/*  extends PsiAnnotationMemberValue */> void setDeclaredAttributeValue(final String attributeName, final T value) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
-  public PsiMetaData getMetaData() {
+  public void getMetaData() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   

@@ -5,8 +5,6 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
@@ -27,7 +25,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 
 @SuppressWarnings("all")
 public class DefaultIdeaModule extends AbstractGenericModule {
-  public Class<? extends Lexer> bindLexer() {
+  public /* Class<? extends Lexer> */Object bindLexer() {
     return AntlrDelegatingIdeaLexer.class;
   }
   
@@ -59,7 +57,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   }
   
   @SingletonBinding
-  public Class<? extends SyntaxHighlighter> bindSyntaxHighlighter() {
+  public /* Class<? extends SyntaxHighlighter> */Object bindSyntaxHighlighter() {
     return DefaultSyntaxHighlighter.class;
   }
   

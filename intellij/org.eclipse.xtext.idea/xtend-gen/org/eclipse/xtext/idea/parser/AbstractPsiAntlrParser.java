@@ -1,11 +1,6 @@
 package org.eclipse.xtext.idea.parser;
 
 import com.google.common.base.Objects;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.openapi.progress.ProcessCanceledException;
-import com.intellij.psi.tree.IElementType;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,22 +8,16 @@ import java.util.List;
 import java.util.Map;
 import org.antlr.runtime.BitSet;
 import org.antlr.runtime.IntStream;
-import org.antlr.runtime.MismatchedTokenException;
-import org.antlr.runtime.MissingTokenException;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenStream;
-import org.antlr.runtime.UnwantedTokenException;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.lang.CreateElementType;
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -43,23 +32,23 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   @Extension
   private ISyntaxErrorMessageProvider _iSyntaxErrorMessageProvider;
   
-  private final PsiBuilder psiBuilder;
+  private final /* PsiBuilder */Object psiBuilder;
   
   private final TokenTypeProvider tokenTypeProvider;
   
-  private final LinkedList<PsiBuilder.Marker> leafMarkers = CollectionLiterals.<PsiBuilder.Marker>newLinkedList();
+  private final /* LinkedList<Marker> */Object leafMarkers /* Skipped initializer because of errors */;
   
-  private final LinkedList<PsiBuilder.Marker> compositeMarkers = CollectionLiterals.<PsiBuilder.Marker>newLinkedList();
+  private final /* LinkedList<Marker> */Object compositeMarkers /* Skipped initializer because of errors */;
   
-  private final HashMap<PsiBuilder.Marker, Integer> lookAheads = CollectionLiterals.<PsiBuilder.Marker, Integer>newHashMap();
+  private final /* HashMap<Marker, Integer> */Object lookAheads /* Skipped initializer because of errors */;
   
   private String currentError;
   
-  public AbstractPsiAntlrParser(final PsiBuilder builder, final TokenStream input, final TokenTypeProvider tokenTypeProvider) {
+  public AbstractPsiAntlrParser(final /* PsiBuilder */Object builder, final TokenStream input, final TokenTypeProvider tokenTypeProvider) {
     this(builder, input, tokenTypeProvider, new RecognizerSharedState());
   }
   
-  public AbstractPsiAntlrParser(final PsiBuilder builder, final TokenStream input, final TokenTypeProvider tokenTypeProvider, final RecognizerSharedState state) {
+  public AbstractPsiAntlrParser(final /* PsiBuilder */Object builder, final TokenStream input, final TokenTypeProvider tokenTypeProvider, final RecognizerSharedState state) {
     super(input, state);
     this.psiBuilder = builder;
     this.tokenTypeProvider = tokenTypeProvider;
@@ -80,38 +69,9 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   }
   
   public void parse(final String entryRuleName) throws RecognitionException {
-    try {
-      final String antlrEntryRuleName = this.normalizeEntryRuleName(entryRuleName);
-      try {
-        this.invokeEntryRule(antlrEntryRuleName);
-        this.appendAllTokens();
-      } catch (final Throwable _t) {
-        if (_t instanceof InvocationTargetException) {
-          final InvocationTargetException ite = (InvocationTargetException)_t;
-          Throwable _targetException = ite.getTargetException();
-          final Throwable targetException = _targetException;
-          boolean _matched = false;
-          if (!_matched) {
-            if (targetException instanceof RecognitionException) {
-              _matched=true;
-              this.appendAllTokens();
-              throw targetException;
-            }
-          }
-          if (!_matched) {
-            if (targetException instanceof ProcessCanceledException) {
-              _matched=true;
-              throw targetException;
-            }
-          }
-          throw ite;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nProcessCanceledException cannot be resolved to a type."
+      + "\nUnreachable code: The case can never match. It is already handled by a previous condition.");
   }
   
   protected Object invokeEntryRule(final String antlrEntryRuleName) {
@@ -130,24 +90,10 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   }
   
   protected String appendAllTokens() {
-    String _xblockexpression = null;
-    {
-      while ((!this.psiBuilder.eof())) {
-        this.input.consume();
-      }
-      String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(this.currentError, null));
-      if (_notEquals) {
-        String _xblockexpression_1 = null;
-        {
-          this.psiBuilder.error(this.currentError);
-          _xblockexpression_1 = this.currentError = null;
-        }
-        _xifexpression = _xblockexpression_1;
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\neof cannot be resolved"
+      + "\n! cannot be resolved"
+      + "\nerror cannot be resolved");
   }
   
   protected String normalizeEntryRuleName(final String entryRuleName) {
@@ -178,58 +124,40 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   }
   
   protected void markComposite() {
-    final PsiBuilder.Marker marker = this.psiBuilder.mark();
-    this.compositeMarkers.push(marker);
-    int _currentLookAhead = this.getCurrentLookAhead();
-    this.lookAheads.put(marker, Integer.valueOf(_currentLookAhead));
+    throw new Error("Unresolved compilation problems:"
+      + "\nmark cannot be resolved");
   }
   
   protected void markLeaf() {
-    final PsiBuilder.Marker marker = this.psiBuilder.mark();
-    this.leafMarkers.push(marker);
+    throw new Error("Unresolved compilation problems:"
+      + "\nmark cannot be resolved");
   }
   
-  protected void drop() {
-    PsiBuilder.Marker _pop = this.leafMarkers.pop();
-    _pop.drop();
+  protected Object drop() {
+    throw new Error("Unresolved compilation problems:"
+      + "\ndrop cannot be resolved");
   }
   
-  protected void doneComposite(final IElementType elementType) {
-    final PsiBuilder.Marker marker = this.compositeMarkers.pop();
-    final Integer lookAhead = this.lookAheads.remove(marker);
-    final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
-      public void onCreate(final ASTNode it) {
-        it.<Integer>putUserData(ASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead);
-      }
-    };
-    CreateElementType _createElementType = new CreateElementType(elementType, _function);
-    marker.done(_createElementType);
+  protected void doneComposite(final /* IElementType */Object elementType) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nCreateElementType cannot be resolved."
+      + "\nThe method putUserData is undefined for the type AbstractPsiAntlrParser"
+      + "\ndone cannot be resolved");
   }
   
-  protected void doneLeaf(final Token matchedToken, final IElementType elementType) {
-    boolean _equals = Objects.equal(matchedToken, null);
-    if (_equals) {
-      this.drop();
-      return;
-    }
-    final PsiBuilder.Marker marker = this.leafMarkers.pop();
-    final int endTokenIndex = this.psiBuilder.rawTokenIndex();
-    marker.rollbackTo();
-    final int startTokenIndex = this.psiBuilder.rawTokenIndex();
-    final int n = ((endTokenIndex - startTokenIndex) - 1);
-    for (int i = 0; (i < n); i++) {
-      this.psiBuilder.advanceLexer();
-    }
-    this.psiBuilder.remapCurrentToken(elementType);
-    boolean _notEquals = (!Objects.equal(this.currentError, null));
-    if (_notEquals) {
-      final PsiBuilder.Marker errorMarker = this.psiBuilder.mark();
-      this.psiBuilder.advanceLexer();
-      errorMarker.error(this.currentError);
-      this.currentError = null;
-    } else {
-      this.psiBuilder.advanceLexer();
-    }
+  protected void doneLeaf(final Token matchedToken, final /* IElementType */Object elementType) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nrawTokenIndex cannot be resolved"
+      + "\nrollbackTo cannot be resolved"
+      + "\nrawTokenIndex cannot be resolved"
+      + "\n- cannot be resolved"
+      + "\n- cannot be resolved"
+      + "\nadvanceLexer cannot be resolved"
+      + "\nremapCurrentToken cannot be resolved"
+      + "\nmark cannot be resolved"
+      + "\nadvanceLexer cannot be resolved"
+      + "\nerror cannot be resolved"
+      + "\nadvanceLexer cannot be resolved");
   }
   
   protected int getCurrentLookAhead() {
@@ -242,66 +170,22 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   }
   
   protected Object recoverFromMismatchedToken(final IntStream input, final int ttype, final BitSet follow) {
-    try {
-      boolean _mismatchIsUnwantedToken = this.mismatchIsUnwantedToken(input, ttype);
-      if (_mismatchIsUnwantedToken) {
-        boolean _isEmpty = this.leafMarkers.isEmpty();
-        final boolean marked = (!_isEmpty);
-        if (marked) {
-          this.drop();
-        }
-        final UnwantedTokenException unwantedTokenException = new UnwantedTokenException(ttype, input);
-        final int startTokenIndex = this.psiBuilder.rawTokenIndex();
-        final PsiBuilder.Marker marker = this.psiBuilder.mark();
-        this.beginResync();
-        input.consume();
-        this.endResync();
-        this.reportError(unwantedTokenException);
-        boolean _notEquals = (!Objects.equal(this.currentError, null));
-        if (_notEquals) {
-          final int endTokenIndex = this.psiBuilder.rawTokenIndex();
-          marker.rollbackTo();
-          final int n = ((endTokenIndex - startTokenIndex) - 1);
-          for (int i = 0; (i < n); i++) {
-            this.psiBuilder.advanceLexer();
-          }
-          final PsiBuilder.Marker errorMarker = this.psiBuilder.mark();
-          this.psiBuilder.advanceLexer();
-          String _errorMessage = this.getErrorMessage(unwantedTokenException, ((String[])Conversions.unwrapArray(this.readableTokenNames, String.class)));
-          errorMarker.error(_errorMessage);
-          this.currentError = null;
-        }
-        if (marked) {
-          this.markLeaf();
-        }
-        Object matchedSymbol = this.getCurrentInputSymbol(input);
-        input.consume();
-        return matchedSymbol;
-      }
-      boolean _mismatchIsMissingToken = this.mismatchIsMissingToken(input, follow);
-      if (_mismatchIsMissingToken) {
-        Object inserted = this.getMissingSymbol(input, null, ttype, follow);
-        MissingTokenException _missingTokenException = new MissingTokenException(ttype, input, inserted);
-        this.reportError(_missingTokenException);
-        return null;
-      }
-      throw new MismatchedTokenException(ttype, input);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nrawTokenIndex cannot be resolved"
+      + "\nmark cannot be resolved"
+      + "\nrawTokenIndex cannot be resolved"
+      + "\nrollbackTo cannot be resolved"
+      + "\n- cannot be resolved"
+      + "\n- cannot be resolved"
+      + "\nadvanceLexer cannot be resolved"
+      + "\nmark cannot be resolved"
+      + "\nadvanceLexer cannot be resolved"
+      + "\nerror cannot be resolved");
   }
   
   public void recover(final IntStream input, final RecognitionException re) {
-    boolean _equals = Objects.equal(this.currentError, null);
-    if (_equals) {
-      String _errorMessage = this.getErrorMessage(re, ((String[])Conversions.unwrapArray(this.readableTokenNames, String.class)));
-      this.currentError = _errorMessage;
-    }
-    for (final PsiBuilder.Marker leafMarker : this.leafMarkers) {
-      leafMarker.drop();
-    }
-    this.leafMarkers.clear();
-    super.recover(input, re);
+    throw new Error("Unresolved compilation problems:"
+      + "\ndrop cannot be resolved");
   }
   
   public void reportError(final RecognitionException e) {

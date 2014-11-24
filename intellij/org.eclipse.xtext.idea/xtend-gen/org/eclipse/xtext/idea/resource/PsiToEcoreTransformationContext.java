@@ -2,13 +2,6 @@ package org.eclipse.xtext.idea.resource;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.impl.source.tree.LeafElement;
-import java.util.List;
 import java.util.Map;
 import javax.inject.Provider;
 import org.eclipse.emf.ecore.EClassifier;
@@ -42,12 +35,8 @@ import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.impl.DatatypeRuleToken;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
-import org.eclipse.xtext.psi.PsiElementProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -59,7 +48,7 @@ public class PsiToEcoreTransformationContext {
     @Inject
     private Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider;
     
-    public PsiToEcoreTransformationContext newTransformationContext(final PsiFile it) {
+    public PsiToEcoreTransformationContext newTransformationContext(final /* PsiFile */Object it) {
       PsiToEcoreTransformationContext _xblockexpression = null;
       {
         final PsiToEcoreTransformationContext context = this.psiToEcoreTransformationContextProvider.get();
@@ -101,7 +90,7 @@ public class PsiToEcoreTransformationContext {
   @Extension
   private IASTNodeAwareNodeModelBuilder nodeModelBuilder;
   
-  public Map<ASTNode, INode> getNodesMapping() {
+  public /* Map<ASTNode, INode> */Object getNodesMapping() {
     return this.nodeModelBuilder.getNodesMapping();
   }
   
@@ -177,41 +166,23 @@ public class PsiToEcoreTransformationContext {
     return _xblockexpression;
   }
   
-  public void newLeafNode(final LeafElement it, final EObject grammarElement, final String ruleName) {
-    ILeafNode _newLeafNode = this.nodeModelBuilder.newLeafNode(it, grammarElement, this.currentNode);
-    this.lastConsumedNode = _newLeafNode;
-    this.mergeDatatypeRuleToken(it);
-    boolean _ensureModelElementCreated = this.ensureModelElementCreated(grammarElement);
-    if (_ensureModelElementCreated) {
-      final Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-      boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
-      if (_isBooleanAssignment) {
-        this.assign(Boolean.valueOf(true), grammarElement, ruleName);
-      } else {
-        String _text = it.getText();
-        this.assign(_text, grammarElement, ruleName);
-      }
-    }
+  public void newLeafNode(final /* LeafElement */Object it, final EObject grammarElement, final String ruleName) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field text is undefined for the type PsiToEcoreTransformationContext");
   }
   
-  public void newLeafNode(final ASTNode it) {
-    this.nodeModelBuilder.newLeafNode(it, this.currentNode);
+  public void newLeafNode(final /* ASTNode */Object it) {
+    this.newLeafNode(this.currentNode);
   }
   
-  public void newCompositeNode(final CompositeElement it) {
-    ICompositeNode _newCompositeNode = this.nodeModelBuilder.newCompositeNode(it, this.currentNode);
-    this.currentNode = _newCompositeNode;
+  public void newCompositeNode(final /* CompositeElement */Object it) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nType mismatch: cannot convert from void to ICompositeNode");
   }
   
-  public boolean newCompositeNodeAsParentOfCurrentNode(final CompositeElement compositeElement, final Action action) {
-    boolean _xblockexpression = false;
-    {
-      int _lookAhead = this.currentNode.getLookAhead();
-      ICompositeNode _newCompositeNodeAsParentOf = this.nodeModelBuilder.newCompositeNodeAsParentOf(compositeElement, action, _lookAhead, this.currentNode);
-      this.currentNode = _newCompositeNodeAsParentOf;
-      _xblockexpression = this.associateWithSemanticElement(this.currentNode);
-    }
-    return _xblockexpression;
+  public boolean newCompositeNodeAsParentOfCurrentNode(final /* CompositeElement */Object compositeElement, final Action action) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nnewCompositeNodeAsParentOf cannot be resolved");
   }
   
   public EObject forceCreateModelElement(final Action action) {
@@ -280,21 +251,10 @@ public class PsiToEcoreTransformationContext {
     return _xblockexpression;
   }
   
-  protected void mergeDatatypeRuleToken(final LeafElement it) {
-    boolean _notEquals = (!Objects.equal(this.datatypeRuleToken, null));
-    if (_notEquals) {
-      AntlrDatatypeRuleToken _antlrDatatypeRuleToken = new AntlrDatatypeRuleToken();
-      final Procedure1<AntlrDatatypeRuleToken> _function = new Procedure1<AntlrDatatypeRuleToken>() {
-        public void apply(final AntlrDatatypeRuleToken token) {
-          String _text = it.getText();
-          token.setText(_text);
-          int _startOffset = it.getStartOffset();
-          token.setStartOffset(_startOffset);
-        }
-      };
-      AntlrDatatypeRuleToken _doubleArrow = ObjectExtensions.<AntlrDatatypeRuleToken>operator_doubleArrow(_antlrDatatypeRuleToken, _function);
-      this.datatypeRuleToken.merge(_doubleArrow);
-    }
+  protected void mergeDatatypeRuleToken(final /* LeafElement */Object it) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field text is undefined for the type PsiToEcoreTransformationContext"
+      + "\nThe method or field startOffset is undefined for the type PsiToEcoreTransformationContext");
   }
   
   public ICompositeNode assign(final EObject value, final Action action) {
@@ -340,29 +300,9 @@ public class PsiToEcoreTransformationContext {
   }
   
   protected boolean associateWithSemanticElement(final ICompositeNode node) {
-    boolean _xblockexpression = false;
-    {
-      this.nodeModelBuilder.associateWithSemanticElement(node, this.current);
-      Map<INode, List<ASTNode>> _reverseNodesMapping = this.nodeModelBuilder.getReverseNodesMapping();
-      List<ASTNode> _get = _reverseNodesMapping.get(node);
-      ASTNode _last = null;
-      if (_get!=null) {
-        _last=IterableExtensions.<ASTNode>last(_get);
-      }
-      final ASTNode astNode = _last;
-      boolean _xifexpression = false;
-      boolean _notEquals = (!Objects.equal(astNode, null));
-      if (_notEquals) {
-        final PsiElementProvider _function = new PsiElementProvider() {
-          public PsiElement get() {
-            return astNode.getPsi();
-          }
-        };
-        _xifexpression = this.psiModelAssociator.associate(this.current, _function);
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\n!= cannot be resolved"
+      + "\npsi cannot be resolved");
   }
   
   protected ICompositeNode assign(final EObject parent, final Assignment assignment, final Object value, final String ruleName, final INode node) {
@@ -391,7 +331,7 @@ public class PsiToEcoreTransformationContext {
     return _xtrycatchfinallyexpression;
   }
   
-  public void appendSyntaxError(final PsiErrorElement errorElement) {
+  public void appendSyntaxError(final /* PsiErrorElement */Object errorElement) {
     this.hadErrors = true;
     final ISyntaxErrorMessageProvider.IParserErrorContext errorContext = this.createErrorContext(errorElement);
     final SyntaxErrorMessage error = this.syntaxErrorProvider.getSyntaxErrorMessage(errorContext);
@@ -423,7 +363,7 @@ public class PsiToEcoreTransformationContext {
     return _xblockexpression;
   }
   
-  protected ISyntaxErrorMessageProvider.IParserErrorContext createErrorContext(final PsiErrorElement errorElement) {
+  protected ISyntaxErrorMessageProvider.IParserErrorContext createErrorContext(final /* PsiErrorElement */Object errorElement) {
     return new ParserErrorContext(this, errorElement);
   }
   
@@ -484,7 +424,7 @@ public class PsiToEcoreTransformationContext {
     return _xifexpression;
   }
   
-  protected ICompositeNode newRootNode(final PsiFile psiFile) {
+  protected ICompositeNode newRootNode(final /* PsiFile */Object psiFile) {
     ICompositeNode _xblockexpression = null;
     {
       this.hadErrors = false;

@@ -2,8 +2,6 @@ package org.eclipse.xtext.idea.parser;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.lexer.LexerBase;
-import com.intellij.psi.tree.IElementType;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
@@ -12,7 +10,7 @@ import org.eclipse.xtext.parser.antlr.TokenSourceProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
-public class AntlrDelegatingIdeaLexer extends LexerBase {
+public class AntlrDelegatingIdeaLexer /* implements LexerBase  */{
   private TokenSource tokenSource;
   
   private CommonToken token;
@@ -49,14 +47,9 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     return _xifexpression;
   }
   
-  public IElementType getTokenType() {
-    this.locateToken();
-    boolean _equals = Objects.equal(this.token, null);
-    if (_equals) {
-      return null;
-    }
-    final int type = this.token.getType();
-    return this.tokenTypeProvider.getIElementType(type);
+  public /* IElementType */Object getTokenType() {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method getIElementType is undefined for the type AntlrDelegatingIdeaLexer");
   }
   
   public int getTokenStart() {

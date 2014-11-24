@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import com.google.inject.Inject
-import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys
+import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

@@ -1,7 +1,6 @@
 package org.eclipse.xtext.idea.resource;
 
 import com.google.common.collect.Iterables;
-import com.intellij.lang.ASTNode;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -17,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class PsiToEcoreAdapter extends AdapterImpl {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private final Map<ASTNode, INode> nodesMapping;
+  private final /* Map<ASTNode, INode> */Object nodesMapping;
   
   public PsiToEcoreAdapter(final PsiToEcoreTransformationContext context) {
     Map<ASTNode, INode> _nodesMapping = context.getNodesMapping();
@@ -36,7 +35,7 @@ public class PsiToEcoreAdapter extends AdapterImpl {
   }
   
   @Pure
-  public Map<ASTNode, INode> getNodesMapping() {
+  public /* Map<ASTNode, INode> */Object getNodesMapping() {
     return this.nodesMapping;
   }
 }

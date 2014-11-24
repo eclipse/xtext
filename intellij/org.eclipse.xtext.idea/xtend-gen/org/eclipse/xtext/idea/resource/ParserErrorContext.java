@@ -1,6 +1,5 @@
 package org.eclipse.xtext.idea.resource;
 
-import com.intellij.psi.PsiErrorElement;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.resource.ErrorContext;
@@ -10,7 +9,7 @@ import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ParserErrorContext extends ErrorContext implements ISyntaxErrorMessageProvider.IParserErrorContext {
-  private final PsiErrorElement errorElement;
+  private final /* PsiErrorElement */Object errorElement;
   
   public RecognitionException getRecognitionException() {
     return null;
@@ -21,7 +20,8 @@ public class ParserErrorContext extends ErrorContext implements ISyntaxErrorMess
   }
   
   public String getDefaultMessage() {
-    return this.errorElement.getErrorDescription();
+    throw new Error("Unresolved compilation problems:"
+      + "\nerrorDescription cannot be resolved");
   }
   
   public ParserErrorContext(final PsiToEcoreTransformationContext transformationContext, final PsiErrorElement errorElement) {

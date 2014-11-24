@@ -1,32 +1,25 @@
 package org.eclipse.xtext.idea.types.psi.impl;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiField;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiType;
-import com.intellij.psi.impl.light.LightVariableBuilder;
-import com.intellij.psi.javadoc.PsiDocComment;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class LightFieldBuilder extends LightVariableBuilder<LightFieldBuilder> implements PsiField {
+public class LightFieldBuilder /* implements LightVariableBuilder<LightFieldBuilder>, PsiField  */{
   @Accessors
-  private PsiClass containingClass;
+  private /* PsiClass */Object containingClass;
   
   @Accessors
-  private PsiExpression initializer;
+  private /* PsiExpression */Object initializer;
   
   @Accessors
-  private PsiDocComment docComment;
+  private /* PsiDocComment */Object docComment;
   
   @Accessors
   private boolean deprecated;
   
-  public LightFieldBuilder(final PsiManager manager, final Language language, final String name, final PsiType type) {
-    super(manager, name, type, language);
+  public LightFieldBuilder(final /* PsiManager */Object manager, final /* Language */Object language, final String name, final /* PsiType */Object type) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super is undefined for the type LightFieldBuilder");
   }
   
   @Pure

@@ -1,10 +1,6 @@
 package org.eclipse.xtext.idea.resource.impl;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.openapi.project.DumbService;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.search.GlobalSearchScope;
 import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.emf.common.notify.Notifier;
@@ -13,7 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.resource.AbstractScopeBasedSelectable;
-import org.eclipse.xtext.idea.resource.ProjectAdapter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -24,7 +19,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSelectable implements IResourceDescriptions.IContextAware {
   @Accessors(AccessorType.PUBLIC_GETTER)
-  private Project project;
+  private /* Project */Object project;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private Notifier context;
@@ -69,27 +64,17 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
   }
   
   public void setContext(final Notifier ctx) {
-    this.context = ctx;
-    Project _project = ProjectAdapter.getProject(ctx);
-    this.project = _project;
-    boolean _equals = Objects.equal(this.project, null);
-    if (_equals) {
-      throw new IllegalStateException("project is null");
-    }
-    GlobalSearchScope _projectScope = GlobalSearchScope.projectScope(this.project);
-    this.setScope(_projectScope);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method getProject is undefined for the type ProjectScopeBasedResourceDescriptions"
+      + "\nThe method or field GlobalSearchScope is undefined for the type ProjectScopeBasedResourceDescriptions"
+      + "\n== cannot be resolved"
+      + "\nprojectScope cannot be resolved");
   }
   
   public boolean isIndexing() {
-    boolean _xblockexpression = false;
-    {
-      boolean _isIndexing = this.compilerPhases.isIndexing(this.context);
-      if (_isIndexing) {
-        return true;
-      }
-      _xblockexpression = DumbService.isDumb(this.project);
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field DumbService is undefined for the type ProjectScopeBasedResourceDescriptions"
+      + "\nisDumb cannot be resolved");
   }
   
   @Pure

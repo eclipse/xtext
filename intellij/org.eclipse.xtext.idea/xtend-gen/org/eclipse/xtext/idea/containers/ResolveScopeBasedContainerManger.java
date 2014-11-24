@@ -3,26 +3,16 @@ package org.eclipse.xtext.idea.containers;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.search.GlobalSearchScope;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainer;
 import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions;
-import org.eclipse.xtext.idea.resource.impl.PsiFileBasedResourceDescription;
-import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.DescriptionAddingContainer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ResolveScopeBasedContainerManger implements IContainer.Manager {
@@ -71,98 +61,35 @@ public class ResolveScopeBasedContainerManger implements IContainer.Manager {
   }
   
   protected ResolveScopeBasedContainer findContainer(final IResourceDescriptions resourceDescriptions, final URI uri, final boolean withDependencies) {
-    ResolveScopeBasedContainer _xifexpression = null;
-    if ((resourceDescriptions instanceof ProjectScopeBasedResourceDescriptions)) {
-      ResolveScopeBasedContainer _xblockexpression = null;
-      {
-        IResourceDescription _resourceDescription = ((ProjectScopeBasedResourceDescriptions)resourceDescriptions).getResourceDescription(uri);
-        final ResolveScopeBasedContainer container = this.getContainer(_resourceDescription, withDependencies);
-        boolean _notEquals = (!Objects.equal(container, null));
-        if (_notEquals) {
-          return container;
-        }
-        Project _project = ((ProjectScopeBasedResourceDescriptions)resourceDescriptions).getProject();
-        _xblockexpression = this.findContainer(_project, uri, withDependencies);
-      }
-      _xifexpression = _xblockexpression;
-    }
-    return _xifexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nfindContainer cannot be resolved");
   }
   
   protected ResolveScopeBasedContainer getContainer(final IResourceDescription desc, final boolean withDependencies) {
-    ResolveScopeBasedContainer _xifexpression = null;
-    if ((desc instanceof PsiFileBasedResourceDescription)) {
-      ResolveScopeBasedContainer _xifexpression_1 = null;
-      if (withDependencies) {
-        ResolveScopeBasedContainer _get = this.resolveScopeBasedContainerProvider.get();
-        final Procedure1<ResolveScopeBasedContainer> _function = new Procedure1<ResolveScopeBasedContainer>() {
-          public void apply(final ResolveScopeBasedContainer it) {
-            BaseXtextFile _xtextFile = ((PsiFileBasedResourceDescription)desc).getXtextFile();
-            GlobalSearchScope _resolveScope = _xtextFile.getResolveScope();
-            it.setScope(_resolveScope);
-          }
-        };
-        return ObjectExtensions.<ResolveScopeBasedContainer>operator_doubleArrow(_get, _function);
-      } else {
-        BaseXtextFile _xtextFile = ((PsiFileBasedResourceDescription)desc).getXtextFile();
-        Project _project = _xtextFile.getProject();
-        URI _uRI = ((PsiFileBasedResourceDescription)desc).getURI();
-        _xifexpression_1 = this.findContainer(_project, _uRI, withDependencies);
-      }
-      _xifexpression = _xifexpression_1;
-    }
-    return _xifexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method resolveScope is undefined for the type ResolveScopeBasedContainerManger"
+      + "\nThe method project is undefined for the type ResolveScopeBasedContainerManger"
+      + "\nfindContainer cannot be resolved");
   }
   
-  protected ResolveScopeBasedContainer findContainer(final Project project, final URI uri, final boolean withDependencies) {
-    ResolveScopeBasedContainer _xblockexpression = null;
-    {
-      final Module module = this.findModule(project, uri);
-      ResolveScopeBasedContainer _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(module, null));
-      if (_notEquals) {
-        ResolveScopeBasedContainer _get = this.resolveScopeBasedContainerProvider.get();
-        final Procedure1<ResolveScopeBasedContainer> _function = new Procedure1<ResolveScopeBasedContainer>() {
-          public void apply(final ResolveScopeBasedContainer it) {
-            GlobalSearchScope _xifexpression = null;
-            if (withDependencies) {
-              _xifexpression = module.getModuleWithDependenciesAndLibrariesScope(true);
-            } else {
-              _xifexpression = module.getModuleScope(true);
-            }
-            it.setScope(_xifexpression);
-          }
-        };
-        _xifexpression = ObjectExtensions.<ResolveScopeBasedContainer>operator_doubleArrow(_get, _function);
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+  protected ResolveScopeBasedContainer findContainer(final /* Project */Object project, final URI uri, final boolean withDependencies) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nfindModule cannot be resolved"
+      + "\n!= cannot be resolved"
+      + "\ngetModuleWithDependenciesAndLibrariesScope cannot be resolved"
+      + "\ngetModuleScope cannot be resolved");
   }
   
-  protected Module findModule(final Project project, final URI uri) {
-    Module _xblockexpression = null;
-    {
-      int _segmentCount = uri.segmentCount();
-      boolean _equals = (_segmentCount == 0);
-      if (_equals) {
-        return null;
-      }
-      LocalFileSystem _instance = LocalFileSystem.getInstance();
-      String _path = uri.path();
-      final VirtualFile virtualFile = _instance.findFileByPath(_path);
-      boolean _notEquals = (!Objects.equal(virtualFile, null));
-      if (_notEquals) {
-        final Module module = ModuleUtil.findModuleForFile(virtualFile, project);
-        boolean _notEquals_1 = (!Objects.equal(module, null));
-        if (_notEquals_1) {
-          return module;
-        }
-      }
-      URI _trimSegments = uri.trimSegments(1);
-      _xblockexpression = this.findModule(project, _trimSegments);
-    }
-    return _xblockexpression;
+  protected /* Module */Object findModule(final /* Project */Object project, final URI uri) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field LocalFileSystem is undefined for the type ResolveScopeBasedContainerManger"
+      + "\nThe method or field ModuleUtil is undefined for the type ResolveScopeBasedContainerManger"
+      + "\ninstance cannot be resolved"
+      + "\nfindFileByPath cannot be resolved"
+      + "\n!= cannot be resolved"
+      + "\nfindModuleForFile cannot be resolved"
+      + "\n!= cannot be resolved"
+      + "\nfindModule cannot be resolved");
   }
   
   protected boolean isIndexing(final IResourceDescriptions resourceDescriptions) {

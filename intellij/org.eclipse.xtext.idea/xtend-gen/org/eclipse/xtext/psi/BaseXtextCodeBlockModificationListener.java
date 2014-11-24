@@ -1,79 +1,48 @@
 package org.eclipse.xtext.psi;
 
-import com.google.common.base.Objects;
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.PsiModificationTrackerImpl;
-import com.intellij.psi.impl.PsiTreeChangeEventImpl;
-import com.intellij.psi.impl.PsiTreeChangePreprocessor;
-import com.intellij.psi.util.PsiModificationTracker;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class BaseXtextCodeBlockModificationListener implements PsiTreeChangePreprocessor {
+public class BaseXtextCodeBlockModificationListener /* implements PsiTreeChangePreprocessor  */{
   @Accessors(AccessorType.PROTECTED_GETTER)
   private final IXtextLanguage language;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
-  private final PsiModificationTrackerImpl psiModificationTracker;
+  private final /* PsiModificationTrackerImpl */Object psiModificationTracker;
   
-  public BaseXtextCodeBlockModificationListener(final IXtextLanguage language, final PsiModificationTracker psiModificationTracker) {
-    this.language = language;
-    language.injectMembers(this);
-    this.psiModificationTracker = ((PsiModificationTrackerImpl) psiModificationTracker);
+  public BaseXtextCodeBlockModificationListener(final IXtextLanguage language, final /* PsiModificationTracker */Object psiModificationTracker) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nPsiModificationTrackerImpl cannot be resolved to a type.");
   }
   
-  public void treeChanged(final PsiTreeChangeEventImpl event) {
-    boolean _and = false;
-    PsiFile _file = event.getFile();
-    Language _language = null;
-    if (_file!=null) {
-      _language=_file.getLanguage();
-    }
-    boolean _equals = Objects.equal(_language, this.language);
-    if (!_equals) {
-      _and = false;
-    } else {
-      boolean _hasStructuralChanges = this.hasStructuralChanges(event);
-      _and = _hasStructuralChanges;
-    }
-    if (_and) {
-      boolean _hasJavaStructuralChanges = this.hasJavaStructuralChanges(event);
-      if (_hasJavaStructuralChanges) {
-        this.psiModificationTracker.incCounter();
-      } else {
-        this.psiModificationTracker.incOutOfCodeBlockModificationCounter();
-      }
-    }
+  public Object treeChanged(final /* PsiTreeChangeEventImpl */Object event) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nfile cannot be resolved"
+      + "\nlanguage cannot be resolved"
+      + "\n== cannot be resolved"
+      + "\n&& cannot be resolved"
+      + "\nhasStructuralChanges cannot be resolved"
+      + "\nhasJavaStructuralChanges cannot be resolved"
+      + "\nincCounter cannot be resolved"
+      + "\nincOutOfCodeBlockModificationCounter cannot be resolved");
   }
   
-  protected boolean hasStructuralChanges(final PsiTreeChangeEventImpl it) {
-    boolean _switchResult = false;
-    PsiTreeChangeEventImpl.PsiEventType _code = it.getCode();
-    if (_code != null) {
-      switch (_code) {
-        case CHILD_ADDED:
-        case CHILD_REMOVED:
-        case CHILD_REPLACED:
-        case CHILD_MOVED:
-        case CHILDREN_CHANGED:
-        case PROPERTY_CHANGED:
-          _switchResult = it.isGenericChange();
-          break;
-        default:
-          _switchResult = false;
-          break;
-      }
-    } else {
-      _switchResult = false;
-    }
-    return _switchResult;
+  protected boolean hasStructuralChanges(final /* PsiTreeChangeEventImpl */Object it) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field code is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field CHILD_ADDED is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field CHILD_REMOVED is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field CHILD_REPLACED is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field CHILD_MOVED is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field CHILDREN_CHANGED is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field PROPERTY_CHANGED is undefined for the type BaseXtextCodeBlockModificationListener"
+      + "\nThe method or field genericChange is undefined for the type BaseXtextCodeBlockModificationListener");
   }
   
-  protected boolean hasJavaStructuralChanges(final PsiTreeChangeEventImpl event) {
+  protected boolean hasJavaStructuralChanges(final /* PsiTreeChangeEventImpl */Object event) {
     return false;
   }
   

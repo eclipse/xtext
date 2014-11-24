@@ -1,17 +1,10 @@
 package org.eclipse.xtext.idea.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.antlr.runtime.BaseRecognizer;
-import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
-import org.eclipse.xtext.idea.lang.CreateElementType;
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -20,56 +13,37 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class PsiXtextTokenStream extends XtextTokenStream {
   private boolean afterSeek;
   
-  private final PsiBuilder builder;
+  private final /* PsiBuilder */Object builder;
   
-  private final List<PsiBuilder.Marker> markers;
+  private final /* List<PsiBuilder.Marker> */Object markers;
   
   private final Map<Integer, Integer> psiToOriginalMarkers;
   
-  public PsiXtextTokenStream(final PsiBuilder builder, final TokenSource tokenSource, final ITokenDefProvider tokenDefProvider) {
+  public PsiXtextTokenStream(final /* PsiBuilder */Object builder, final TokenSource tokenSource, final ITokenDefProvider tokenDefProvider) {
     super(tokenSource, tokenDefProvider);
     this.builder = builder;
     this.afterSeek = false;
-    ArrayList<PsiBuilder.Marker> _newArrayList = CollectionLiterals.<PsiBuilder.Marker>newArrayList();
+    ArrayList<Marker> _newArrayList = CollectionLiterals.<Marker>newArrayList();
     this.markers = _newArrayList;
     HashMap<Integer, Integer> _newHashMap = CollectionLiterals.<Integer, Integer>newHashMap();
     this.psiToOriginalMarkers = _newHashMap;
   }
   
   public void consume() {
-    if (this.afterSeek) {
-      super.consume();
-    } else {
-      final int rawTokenIndex = this.builder.rawTokenIndex();
-      if ((rawTokenIndex < this.p)) {
-        final int n = (this.p - rawTokenIndex);
-        for (int i = 0; (i < n); i++) {
-          this.advanceLexer();
-        }
-      }
-      super.consume();
-      this.advanceLexer();
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nrawTokenIndex cannot be resolved"
+      + "\n< cannot be resolved");
   }
   
   protected void advanceLexer() {
-    boolean _eof = this.builder.eof();
-    if (_eof) {
-      return;
-    }
-    int _rawTokenIndex = this.builder.rawTokenIndex();
-    final Token token = this.get(_rawTokenIndex);
-    int _channel = token.getChannel();
-    final boolean hidden = (_channel == BaseRecognizer.HIDDEN);
-    final IElementType tokenType = this.builder.getTokenType();
-    final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
-      public void onCreate(final ASTNode it) {
-        it.<Boolean>putUserData(ASTNodeAwareNodeModelBuilder.HIDDEN_KEY, Boolean.valueOf(hidden));
-      }
-    };
-    CreateElementType _createElementType = new CreateElementType(tokenType, _function);
-    this.builder.remapCurrentToken(_createElementType);
-    this.builder.advanceLexer();
+    throw new Error("Unresolved compilation problems:"
+      + "\nCreateElementType cannot be resolved."
+      + "\nThe method putUserData is undefined for the type PsiXtextTokenStream"
+      + "\neof cannot be resolved"
+      + "\nrawTokenIndex cannot be resolved"
+      + "\ntokenType cannot be resolved"
+      + "\nremapCurrentToken cannot be resolved"
+      + "\nadvanceLexer cannot be resolved");
   }
   
   public int mark() {
@@ -84,13 +58,8 @@ public class PsiXtextTokenStream extends XtextTokenStream {
   }
   
   protected int markPsi() {
-    int _xblockexpression = (int) 0;
-    {
-      PsiBuilder.Marker _mark = this.builder.mark();
-      this.markers.add(_mark);
-      _xblockexpression = this.getLastPsiMarker();
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nmark cannot be resolved");
   }
   
   protected int getLastPsiMarker() {
@@ -99,10 +68,8 @@ public class PsiXtextTokenStream extends XtextTokenStream {
   }
   
   public void release(final int psiMarker) {
-    Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
-    super.release((_get).intValue());
-    PsiBuilder.Marker _get_1 = this.markers.get(psiMarker);
-    _get_1.drop();
+    throw new Error("Unresolved compilation problems:"
+      + "\ndrop cannot be resolved");
   }
   
   public void rewind() {
@@ -114,11 +81,8 @@ public class PsiXtextTokenStream extends XtextTokenStream {
   }
   
   public void rewind(final int psiMarker) {
-    Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
-    super.rewind((_get).intValue());
-    PsiBuilder.Marker _get_1 = this.markers.get(psiMarker);
-    _get_1.rollbackTo();
-    this.afterSeek = false;
+    throw new Error("Unresolved compilation problems:"
+      + "\nrollbackTo cannot be resolved");
   }
   
   public void seek(final int index) {

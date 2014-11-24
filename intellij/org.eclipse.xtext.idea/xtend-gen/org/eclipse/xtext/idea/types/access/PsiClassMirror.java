@@ -1,6 +1,5 @@
 package org.eclipse.xtext.idea.types.access;
 
-import com.intellij.psi.PsiClass;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -10,17 +9,18 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 
 @SuppressWarnings("all")
 public class PsiClassMirror extends AbstractClassMirror {
-  private final PsiClass psiClass;
+  private final /* PsiClass */Object psiClass;
   
-  private final ITypeFactory<PsiClass, JvmDeclaredType> typeFactory;
+  private final /* ITypeFactory<PsiClass, JvmDeclaredType> */Object typeFactory;
   
-  public PsiClassMirror(final PsiClass psiClass, final ITypeFactory<PsiClass, JvmDeclaredType> typeFactory) {
+  public PsiClassMirror(final /* PsiClass */Object psiClass, final /* ITypeFactory<PsiClass, JvmDeclaredType> */Object typeFactory) {
     this.psiClass = psiClass;
     this.typeFactory = typeFactory;
   }
   
   protected String getTypeName() {
-    return this.psiClass.getQualifiedName();
+    throw new Error("Unresolved compilation problems:"
+      + "\nqualifiedName cannot be resolved");
   }
   
   public void initialize(final TypeResource typeResource) {

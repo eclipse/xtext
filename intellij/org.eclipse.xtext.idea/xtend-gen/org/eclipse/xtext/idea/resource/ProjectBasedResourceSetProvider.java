@@ -3,14 +3,8 @@ package org.eclipse.xtext.idea.resource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.search.GlobalSearchScope;
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.idea.resource.IResourceSetProvider;
-import org.eclipse.xtext.idea.resource.ProjectAdapter;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 @Singleton
@@ -20,26 +14,14 @@ public class ProjectBasedResourceSetProvider implements IResourceSetProvider {
   private Provider<XtextResourceSet> resourceSetProvider;
   
   public ResourceSet get(final Object context) {
-    XtextResourceSet _xblockexpression = null;
-    {
-      final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-      if ((context instanceof Project)) {
-        EList<Adapter> _eAdapters = resourceSet.eAdapters();
-        ProjectAdapter _projectAdapter = new ProjectAdapter(((Project)context));
-        _eAdapters.add(_projectAdapter);
-        GlobalSearchScope _allScope = GlobalSearchScope.allScope(((Project)context));
-        resourceSet.setClasspathURIContext(_allScope);
-      }
-      if ((context instanceof PsiFile)) {
-        EList<Adapter> _eAdapters_1 = resourceSet.eAdapters();
-        Project _project = ((PsiFile)context).getProject();
-        ProjectAdapter _projectAdapter_1 = new ProjectAdapter(_project);
-        _eAdapters_1.add(_projectAdapter_1);
-        GlobalSearchScope _resolveScope = ((PsiFile)context).getResolveScope();
-        resourceSet.setClasspathURIContext(_resolveScope);
-      }
-      _xblockexpression = resourceSet;
-    }
-    return _xblockexpression;
+    throw new Error("Unresolved compilation problems:"
+      + "\nProject cannot be resolved to a type."
+      + "\nPsiFile cannot be resolved to a type."
+      + "\nProjectAdapter cannot be resolved."
+      + "\nThe method or field GlobalSearchScope is undefined for the type ProjectBasedResourceSetProvider"
+      + "\nProjectAdapter cannot be resolved."
+      + "\nThe method project is undefined for the type ProjectBasedResourceSetProvider"
+      + "\nThe method resolveScope is undefined for the type ProjectBasedResourceSetProvider"
+      + "\nallScope cannot be resolved");
   }
 }

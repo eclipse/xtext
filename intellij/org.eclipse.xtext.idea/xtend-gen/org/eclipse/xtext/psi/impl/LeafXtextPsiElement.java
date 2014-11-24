@@ -1,9 +1,5 @@
 package org.eclipse.xtext.psi.impl;
 
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.tree.IElementType;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.nodemodel.INode;
@@ -11,20 +7,22 @@ import org.eclipse.xtext.psi.XtextPsiElement;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 
 @SuppressWarnings("all")
-public class LeafXtextPsiElement extends LeafPsiElement implements XtextPsiElement {
-  public LeafXtextPsiElement(final IElementType type, final CharSequence text) {
-    super(type, text);
+public class LeafXtextPsiElement implements /* LeafPsiElement */XtextPsiElement {
+  public LeafXtextPsiElement(final /* IElementType */Object type, final CharSequence text) {
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method super is undefined for the type LeafXtextPsiElement");
   }
   
   public IXtextLanguage getXtextLanguage() {
-    IElementType _elementType = this.getElementType();
-    Language _language = _elementType.getLanguage();
-    return ((IXtextLanguage) _language);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field elementType is undefined for the type LeafXtextPsiElement"
+      + "\nlanguage cannot be resolved");
   }
   
   public BaseXtextFile getContainingFile() {
-    PsiFile _containingFile = super.getContainingFile();
-    return ((BaseXtextFile) _containingFile);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field super is undefined for the type LeafXtextPsiElement"
+      + "\ngetContainingFile cannot be resolved");
   }
   
   public Resource getResource() {
@@ -33,7 +31,7 @@ public class LeafXtextPsiElement extends LeafPsiElement implements XtextPsiEleme
   }
   
   public INode getINode() {
-    BaseXtextFile _containingFile = this.getContainingFile();
-    return _containingFile.getINode(this);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method getINode is undefined for the type LeafXtextPsiElement");
   }
 }

@@ -1,10 +1,6 @@
 package org.eclipse.xtext.idea.nodemodel;
 
 import com.google.inject.ImplementedBy;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.impl.source.tree.CompositeElement;
-import com.intellij.psi.impl.source.tree.LeafElement;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
@@ -17,19 +13,19 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 @ImplementedBy(ASTNodeAwareNodeModelBuilder.class)
 @SuppressWarnings("all")
 public interface IASTNodeAwareNodeModelBuilder {
-  public abstract Map<ASTNode, INode> getNodesMapping();
+  public abstract /* Map<ASTNode, INode> */Object getNodesMapping();
   
-  public abstract Map<INode, List<ASTNode>> getReverseNodesMapping();
+  public abstract /* Map<INode, List<ASTNode>> */Object getReverseNodesMapping();
   
-  public abstract ILeafNode newLeafNode(final ASTNode astNode, final ICompositeNode parent);
+  public abstract ILeafNode newLeafNode(final /* ASTNode */Object astNode, final ICompositeNode parent);
   
-  public abstract ILeafNode newLeafNode(final LeafElement leafElement, final EObject grammarElement, final ICompositeNode parent);
+  public abstract ILeafNode newLeafNode(final /* LeafElement */Object leafElement, final EObject grammarElement, final ICompositeNode parent);
   
-  public abstract ICompositeNode newCompositeNode(final CompositeElement compositeElement, final ICompositeNode parent);
+  public abstract ICompositeNode newCompositeNode(final /* CompositeElement */Object compositeElement, final ICompositeNode parent);
   
-  public abstract ICompositeNode newCompositeNodeAsParentOf(final CompositeElement compositeElement, final EObject grammarElement, final int lookahead, final ICompositeNode existing);
+  public abstract ICompositeNode newCompositeNodeAsParentOf(final /* CompositeElement */Object compositeElement, final EObject grammarElement, final int lookahead, final ICompositeNode existing);
   
-  public abstract ICompositeNode newRootNode(final PsiFile psiFile);
+  public abstract ICompositeNode newRootNode(final /* PsiFile */Object psiFile);
   
   public abstract void associateWithSemanticElement(final ICompositeNode node, final EObject astElement);
   
