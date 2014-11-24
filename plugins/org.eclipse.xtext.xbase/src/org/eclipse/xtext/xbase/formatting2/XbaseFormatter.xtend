@@ -56,24 +56,14 @@ class XbaseFormatter extends AbstractFormatter2 {
 
 	@Inject @Accessors(PUBLIC_GETTER) extension XbaseGrammarAccess grammar
 
-	override protected format(IFormattableDocument document) {
-		format(document.request.textRegionAccess.resource.contents.head, document)
-	}
-
-	def protected dispatch void format(Void expr, extension IFormattableDocument format) {
-	}
-
-	def protected dispatch void format(EObject expr, extension IFormattableDocument format) {
-	}
-
-	def protected dispatch void format(XCollectionLiteral literal, extension IFormattableDocument document) {
+	def dispatch void format(XCollectionLiteral literal, extension IFormattableDocument document) {
 		literal.regionForKeyword('#').append[noSpace]
 		val open = literal.regionForKeyword("[") ?: literal.regionForKeyword("{")
 		val close = literal.regionForKeyword("]") ?: literal.regionForKeyword("}")
 		formatCommaSeparatedList(literal.elements, open, close, document)
 	}
 
-	def protected formatCommaSeparatedList(
+	def protected void formatCommaSeparatedList(
 		Collection<? extends EObject> elements,
 		ISemanticRegion open,
 		ISemanticRegion close,
@@ -111,7 +101,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XAnnotation ann, extension IFormattableDocument document) {
+	def dispatch void format(XAnnotation ann, extension IFormattableDocument document) {
 		ann.regionForKeyword("@").append[noSpace]
 		ann.regionForKeyword("(").surround[noSpace]
 		if (ann.value != null) {
@@ -127,12 +117,12 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(JvmGenericArrayTypeReference array, extension IFormattableDocument document) {
+	def dispatch void format(JvmGenericArrayTypeReference array, extension IFormattableDocument document) {
 		addReplacer(new ArrayBracketsFormattingReplacer(array.regionForRuleCallTo(arrayBracketsRule)))
 		array.componentType.format(document)
 	}
 
-	def protected dispatch void format(XFunctionTypeRef func, extension IFormattableDocument document) {
+	def dispatch void format(XFunctionTypeRef func, extension IFormattableDocument document) {
 		func.regionForKeyword("(").append[noSpace]
 		for (param : func.paramTypes) {
 			param.format(document)
@@ -143,14 +133,14 @@ class XbaseFormatter extends AbstractFormatter2 {
 		func.returnType.format(document)
 	}
 
-	def protected dispatch void format(JvmTypeParameter ref, extension IFormattableDocument document) {
+	def dispatch void format(JvmTypeParameter ref, extension IFormattableDocument document) {
 		for (c : ref.constraints) {
 			c.prepend[oneSpace]
 			c.format(document)
 		}
 	}
 
-	def protected dispatch void format(JvmParameterizedTypeReference ref, extension IFormattableDocument document) {
+	def dispatch void format(JvmParameterizedTypeReference ref, extension IFormattableDocument document) {
 		ref.regionForKeyword("<").surround[noSpace]
 		for (arg : ref.arguments) {
 			arg.format(document)
@@ -160,18 +150,18 @@ class XbaseFormatter extends AbstractFormatter2 {
 			ref.regionForKeyword(">").prepend[noSpace]
 	}
 
-	def protected dispatch void format(JvmWildcardTypeReference ref, extension IFormattableDocument document) {
+	def dispatch void format(JvmWildcardTypeReference ref, extension IFormattableDocument document) {
 		if (!ref.constraints.empty)
 			ref.regionForKeyword("?").append[oneSpace]
 		for (c : ref.constraints)
 			c.format(document)
 	}
 
-	def protected dispatch void format(JvmTypeConstraint constraint, extension IFormattableDocument document) {
+	def dispatch void format(JvmTypeConstraint constraint, extension IFormattableDocument document) {
 		constraint.typeReference.prepend[oneSpace].format(document)
 	}
 
-	def protected dispatch void format(XVariableDeclaration expr, extension IFormattableDocument format) {
+	def dispatch void format(XVariableDeclaration expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("val").append[oneSpace]
 		expr.regionForKeyword("var").append[oneSpace]
 		expr.type.append[oneSpace]
@@ -180,7 +170,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.right.format(format)
 	}
 
-	def protected dispatch void format(XAssignment expr, extension IFormattableDocument format) {
+	def dispatch void format(XAssignment expr, extension IFormattableDocument format) {
 		expr.regionForRuleCallTo(opSingleAssignRule).surround[oneSpace]
 		expr.regionForKeyword(if(expr.explicitStatic) '::' else '.').surround[noSpace]
 		expr.assignable.format(format)
@@ -238,7 +228,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		if(builder != null) params.take(params.size - 1) else params
 	}
 
-	def protected dispatch void format(XConstructorCall expr, extension IFormattableDocument format) {
+	def dispatch void format(XConstructorCall expr, extension IFormattableDocument format) {
 		expr.regionForFeature(XCONSTRUCTOR_CALL__CONSTRUCTOR).prepend[oneSpace]
 		if (!expr.typeArguments.empty) {
 			expr.regionForKeyword("<").surround[noSpace]
@@ -265,7 +255,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XFeatureCall expr, extension IFormattableDocument format) {
+	def dispatch void format(XFeatureCall expr, extension IFormattableDocument format) {
 		formatFeatureCallTypeParameters(expr, format)
 		if (expr.explicitOperationCall) {
 			val open = expr.regionForKeyword("(").prepend[noSpace]
@@ -276,7 +266,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 				format(arg, format)
 	}
 
-	def protected dispatch void format(XMemberFeatureCall expr, extension IFormattableDocument format) {
+	def dispatch void format(XMemberFeatureCall expr, extension IFormattableDocument format) {
 		var EObject top = expr
 		var calls = new SeparatorRegions<XMemberFeatureCall, ISemanticRegion>(expr.regionForEObject)
 		while (top instanceof XMemberFeatureCall) {
@@ -313,7 +303,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XBinaryOperation expr, extension IFormattableDocument format) {
+	def dispatch void format(XBinaryOperation expr, extension IFormattableDocument format) {
 		val precendece = expr.binaryOperationPrecedence
 		val calls = new SeparatorRegions<XBinaryOperation, ISemanticRegion>(expr.regionForEObject)
 		var EObject top = expr
@@ -345,7 +335,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XSynchronizedExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XSynchronizedExpression expr, extension IFormattableDocument format) {
 		if (expr.eContainer instanceof XVariableDeclaration) {
 			expr.regionForKeyword("synchronized").append[increaseIndentation]
 			expr.append[decreaseIndentation]
@@ -367,7 +357,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.expression.format(format)
 	}
 
-	def protected dispatch void format(XIfExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XIfExpression expr, extension IFormattableDocument format) {
 		if (expr.eContainer instanceof XVariableDeclaration) {
 			expr.regionForKeyword("if").append[increaseIndentation]
 			expr.append[decreaseIndentation]
@@ -407,7 +397,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 			expr.^else.format(format)
 	}
 
-	def protected dispatch void format(XForLoopExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XForLoopExpression expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("for").append[oneSpace]
 		expr.declaredParam.prepend[noSpace].append[oneSpace]
 		expr.forExpression.prepend[oneSpace].append[noSpace]
@@ -421,7 +411,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.eachExpression.format(format)
 	}
 
-	def protected dispatch void format(XBasicForLoopExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XBasicForLoopExpression expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("for").append[oneSpace]
 		expr.regionForKeyword("(").append[noSpace]
 		expr.regionsForKeywords(";").forEach[prepend[noSpace].append[noSpace lowPriority]]
@@ -441,7 +431,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.eachExpression.format(format)
 	}
 
-	def protected dispatch void format(XWhileExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XWhileExpression expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("while").append(whitespaceBetweenKeywordAndParenthesisML)
 		expr.predicate.prepend[noSpace].append[noSpace]
 		if (expr.body instanceof XBlockExpression) {
@@ -454,7 +444,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.body.format(format)
 	}
 
-	def protected dispatch void format(XDoWhileExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XDoWhileExpression expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("while").append(whitespaceBetweenKeywordAndParenthesisML)
 		expr.predicate.prepend[noSpace].append[noSpace]
 		if (expr.body instanceof XBlockExpression) {
@@ -466,7 +456,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.body.format(format)
 	}
 
-	def protected dispatch void format(XBlockExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XBlockExpression expr, extension IFormattableDocument format) {
 		val open = expr.regionForKeyword("{")
 		if (expr.eContainer == null)
 			open.prepend[noSpace]
@@ -489,7 +479,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		return false;
 	}
 
-	def protected dispatch void format(XTypeLiteral expr, extension IFormattableDocument format) {
+	def dispatch void format(XTypeLiteral expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("typeof").append[noSpace]
 		expr.regionForFeature(XTYPE_LITERAL__TYPE).prepend[noSpace].append[noSpace]
 		for (region : expr.regionsForRuleCallsTo(arrayBracketsRule)) {
@@ -498,17 +488,17 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XThrowExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XThrowExpression expr, extension IFormattableDocument format) {
 		expr.expression.prepend[oneSpace]
 		expr.expression.format(format)
 	}
 
-	def protected dispatch void format(XReturnExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XReturnExpression expr, extension IFormattableDocument format) {
 		expr.expression.prepend[oneSpace]
 		expr.expression.format(format)
 	}
 
-	def protected dispatch void format(XTryCatchFinallyExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XTryCatchFinallyExpression expr, extension IFormattableDocument format) {
 		if (expr.expression instanceof XBlockExpression) {
 			expr.expression.prepend(bracesInNewLine).append(bracesInNewLine)
 		} else {
@@ -534,7 +524,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def protected dispatch void format(XCatchClause expr, extension IFormattableDocument format) {
+	def dispatch void format(XCatchClause expr, extension IFormattableDocument format) {
 		expr.regionForKeyword("catch").append(whitespaceBetweenKeywordAndParenthesisML)
 		expr.declaredParam.prepend[noSpace].append[noSpace]
 
@@ -549,19 +539,19 @@ class XbaseFormatter extends AbstractFormatter2 {
 		expr.expression.format(format)
 	}
 
-	def protected dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
+	def dispatch void format(JvmFormalParameter expr, extension IFormattableDocument format) {
 		expr.parameterType?.append[oneSpace]
 		expr.parameterType.format(format)
 	}
 
-	def protected dispatch void format(XExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XExpression expr, extension IFormattableDocument format) {
 		for (obj : expr.eContents)
 			switch (obj) {
 				XExpression: obj.format(format)
 			}
 	}
 
-	def protected dispatch void format(XSwitchExpression expr, extension IFormattableDocument format) {
+	def dispatch void format(XSwitchExpression expr, extension IFormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.multiline
 		val caseSL = !containsBlockExpr && (!expr.cases.empty || expr.^default != null) &&
@@ -675,7 +665,7 @@ class XbaseFormatter extends AbstractFormatter2 {
 		return open
 	}
 
-	def protected dispatch void format(XClosure expr, extension IFormattableDocument format) {
+	def dispatch void format(XClosure expr, extension IFormattableDocument format) {
 		val open = expr.regionForKeyword("[") ?: expr.immediatelyPrecedingKeyword("(")
 		val close = expr.regionForKeyword("]") ?: expr.immediatelyFollowingKeyword(")")
 		val children = switch x:expr.expression {

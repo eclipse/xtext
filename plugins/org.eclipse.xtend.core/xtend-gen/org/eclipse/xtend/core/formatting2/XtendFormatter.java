@@ -47,6 +47,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -885,7 +886,7 @@ public class XtendFormatter extends XbaseFormatter {
     return _xifexpression;
   }
   
-  protected void format(final EObject anonymousClass, final IFormattableDocument format) {
+  public void format(final Object anonymousClass, final IFormattableDocument format) {
     if (anonymousClass instanceof AnonymousClass) {
       _format((AnonymousClass)anonymousClass, format);
       return;
@@ -918,6 +919,9 @@ public class XtendFormatter extends XbaseFormatter {
       return;
     } else if (anonymousClass instanceof JvmFormalParameter) {
       _format((JvmFormalParameter)anonymousClass, format);
+      return;
+    } else if (anonymousClass instanceof XtextResource) {
+      _format((XtextResource)anonymousClass, format);
       return;
     } else if (anonymousClass instanceof XAssignment) {
       _format((XAssignment)anonymousClass, format);
@@ -1015,11 +1019,11 @@ public class XtendFormatter extends XbaseFormatter {
     } else if (anonymousClass instanceof XImportSection) {
       _format((XImportSection)anonymousClass, format);
       return;
-    } else if (anonymousClass != null) {
-      _format(anonymousClass, format);
-      return;
     } else if (anonymousClass == null) {
       _format((Void)null, format);
+      return;
+    } else if (anonymousClass != null) {
+      _format(anonymousClass, format);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

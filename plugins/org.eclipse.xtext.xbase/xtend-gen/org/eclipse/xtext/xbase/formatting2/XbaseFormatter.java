@@ -22,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
-import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.FormattingNotApplicableException;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.internal.TextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -83,21 +81,6 @@ public class XbaseFormatter extends AbstractFormatter2 {
   @Extension
   private XbaseGrammarAccess grammar;
   
-  protected void format(final IFormattableDocument document) {
-    FormatterRequest _request = document.getRequest();
-    ITextRegionAccess _textRegionAccess = _request.getTextRegionAccess();
-    XtextResource _resource = _textRegionAccess.getResource();
-    EList<EObject> _contents = _resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
-    this.format(_head, document);
-  }
-  
-  protected void _format(final Void expr, @Extension final IFormattableDocument format) {
-  }
-  
-  protected void _format(final EObject expr, @Extension final IFormattableDocument format) {
-  }
-  
   protected void _format(final XCollectionLiteral literal, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(literal, "#");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
@@ -128,8 +111,7 @@ public class XbaseFormatter extends AbstractFormatter2 {
     this.formatCommaSeparatedList(_elements, open, close, document);
   }
   
-  protected Object formatCommaSeparatedList(final Collection<? extends EObject> elements, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
-    Object _xifexpression = null;
+  protected void formatCommaSeparatedList(final Collection<? extends EObject> elements, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
     boolean _isEmpty = elements.isEmpty();
     if (_isEmpty) {
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
@@ -137,129 +119,118 @@ public class XbaseFormatter extends AbstractFormatter2 {
           it.noSpace();
         }
       };
-      _xifexpression = format.append(open, _function);
+      format.append(open, _function);
     } else {
-      Object _xifexpression_1 = null;
       IHiddenRegion _previousHiddenRegion = close.getPreviousHiddenRegion();
       boolean _isMultiline = _previousHiddenRegion.isMultiline();
       if (_isMultiline) {
-        EObject _xblockexpression = null;
-        {
-          final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-            public void apply(final IHiddenRegionFormatter it) {
-              it.newLine();
-              it.increaseIndentation();
-            }
-          };
-          format.append(open, _function_1);
-          for (final EObject elem : elements) {
-            {
-              this.format(elem, format);
-              ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(elem, ",");
-              final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-                public void apply(final IHiddenRegionFormatter it) {
-                  it.noSpace();
-                }
-              };
-              ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
-              final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-                public void apply(final IHiddenRegionFormatter it) {
-                  it.newLine();
-                }
-              };
-              format.append(_prepend, _function_3);
-            }
+        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+          public void apply(final IHiddenRegionFormatter it) {
+            it.newLine();
+            it.increaseIndentation();
           }
-          EObject _last = IterableExtensions.last(elements);
-          final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-            public void apply(final IHiddenRegionFormatter it) {
-              it.newLine();
-              it.decreaseIndentation();
-            }
-          };
-          _xblockexpression = format.<EObject>append(_last, _function_2);
-        }
-        _xifexpression_1 = _xblockexpression;
-      } else {
-        ISemanticRegion _xblockexpression_1 = null;
-        {
-          IHiddenRegion _previousHiddenRegion_1 = close.getPreviousHiddenRegion();
-          final IndentOnceAutowrapFormatter indent = new IndentOnceAutowrapFormatter(_previousHiddenRegion_1);
-          int _endOffset = open.getEndOffset();
-          int _offset = close.getOffset();
-          int _endOffset_1 = open.getEndOffset();
-          int _minus = (_offset - _endOffset_1);
-          final TextSegment region = new TextSegment(this.regionAccess, _endOffset, _minus);
-          final SeparatorRegions<EObject, ISemanticRegion> items = new SeparatorRegions<EObject, ISemanticRegion>(region);
-          for (final EObject ele : elements) {
-            ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(ele, ",");
-            items.appendWithTrailingSeparator(ele, _immediatelyFollowingKeyword);
-          }
-          for (final ObjectEntry<EObject, ISemanticRegion> ele_1 : items) {
-            {
-              SeparatorEntry<EObject, ISemanticRegion> _leadingSeparator = ele_1.getLeadingSeparator();
-              ISemanticRegion _separator = null;
-              if (_leadingSeparator!=null) {
-                _separator=_leadingSeparator.getSeparator();
+        };
+        format.append(open, _function_1);
+        for (final EObject elem : elements) {
+          {
+            this.format(elem, format);
+            ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(elem, ",");
+            final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+              public void apply(final IHiddenRegionFormatter it) {
+                it.noSpace();
               }
-              final ISemanticRegion sep = _separator;
-              EObject _object = ele_1.getObject();
-              boolean _prependNewLineIfMultiline = this.prependNewLineIfMultiline(_object);
-              if (_prependNewLineIfMultiline) {
-                boolean _equals = Objects.equal(sep, null);
-                if (_equals) {
-                  final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-                    public void apply(final IHiddenRegionFormatter it) {
-                      it.noSpace();
-                      ITextSegment _region = ele_1.getRegion();
-                      int _length = _region.getLength();
-                      it.autowrap(_length);
-                      it.setOnAutowrap(indent);
-                    }
-                  };
-                  format.append(open, _function_1);
-                } else {
-                  final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-                    public void apply(final IHiddenRegionFormatter it) {
-                      it.oneSpace();
-                      ITextSegment _region = ele_1.getRegion();
-                      int _length = _region.getLength();
-                      it.autowrap(_length);
-                      it.setOnAutowrap(indent);
-                    }
-                  };
-                  format.append(sep, _function_2);
-                }
-              } else {
+            };
+            ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
+            final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+              public void apply(final IHiddenRegionFormatter it) {
+                it.newLine();
+              }
+            };
+            format.append(_prepend, _function_3);
+          }
+        }
+        EObject _last = IterableExtensions.last(elements);
+        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+          public void apply(final IHiddenRegionFormatter it) {
+            it.newLine();
+            it.decreaseIndentation();
+          }
+        };
+        format.<EObject>append(_last, _function_2);
+      } else {
+        IHiddenRegion _previousHiddenRegion_1 = close.getPreviousHiddenRegion();
+        final IndentOnceAutowrapFormatter indent = new IndentOnceAutowrapFormatter(_previousHiddenRegion_1);
+        int _endOffset = open.getEndOffset();
+        int _offset = close.getOffset();
+        int _endOffset_1 = open.getEndOffset();
+        int _minus = (_offset - _endOffset_1);
+        final TextSegment region = new TextSegment(this.regionAccess, _endOffset, _minus);
+        final SeparatorRegions<EObject, ISemanticRegion> items = new SeparatorRegions<EObject, ISemanticRegion>(region);
+        for (final EObject ele : elements) {
+          ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(ele, ",");
+          items.appendWithTrailingSeparator(ele, _immediatelyFollowingKeyword);
+        }
+        for (final ObjectEntry<EObject, ISemanticRegion> ele_1 : items) {
+          {
+            SeparatorEntry<EObject, ISemanticRegion> _leadingSeparator = ele_1.getLeadingSeparator();
+            ISemanticRegion _separator = null;
+            if (_leadingSeparator!=null) {
+              _separator=_leadingSeparator.getSeparator();
+            }
+            final ISemanticRegion sep = _separator;
+            EObject _object = ele_1.getObject();
+            boolean _prependNewLineIfMultiline = this.prependNewLineIfMultiline(_object);
+            if (_prependNewLineIfMultiline) {
+              boolean _equals = Objects.equal(sep, null);
+              if (_equals) {
                 final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
                   public void apply(final IHiddenRegionFormatter it) {
-                    it.oneSpace();
+                    it.noSpace();
+                    ITextSegment _region = ele_1.getRegion();
+                    int _length = _region.getLength();
+                    it.autowrap(_length);
+                    it.setOnAutowrap(indent);
                   }
                 };
-                format.append(sep, _function_3);
+                format.append(open, _function_3);
+              } else {
+                final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+                  public void apply(final IHiddenRegionFormatter it) {
+                    it.oneSpace();
+                    ITextSegment _region = ele_1.getRegion();
+                    int _length = _region.getLength();
+                    it.autowrap(_length);
+                    it.setOnAutowrap(indent);
+                  }
+                };
+                format.append(sep, _function_4);
               }
-              final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+            } else {
+              final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
                 public void apply(final IHiddenRegionFormatter it) {
-                  it.noSpace();
+                  it.oneSpace();
                 }
               };
-              format.prepend(sep, _function_4);
-              EObject _object_1 = ele_1.getObject();
-              this.format(_object_1, format);
+              format.append(sep, _function_5);
             }
+            final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
+              public void apply(final IHiddenRegionFormatter it) {
+                it.noSpace();
+              }
+            };
+            format.prepend(sep, _function_6);
+            EObject _object_1 = ele_1.getObject();
+            this.format(_object_1, format);
           }
-          final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-            public void apply(final IHiddenRegionFormatter it) {
-              it.noSpace();
-            }
-          };
-          _xblockexpression_1 = format.prepend(close, _function_1);
         }
-        _xifexpression_1 = _xblockexpression_1;
+        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          public void apply(final IHiddenRegionFormatter it) {
+            it.noSpace();
+          }
+        };
+        format.prepend(close, _function_3);
       }
-      _xifexpression = _xifexpression_1;
     }
-    return _xifexpression;
   }
   
   protected void _format(final XAnnotation ann, @Extension final IFormattableDocument document) {
@@ -2494,12 +2465,15 @@ public class XbaseFormatter extends AbstractFormatter2 {
     return _and;
   }
   
-  protected void format(final EObject ref, final IFormattableDocument document) {
+  public void format(final Object ref, final IFormattableDocument document) {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);
       return;
     } else if (ref instanceof JvmFormalParameter) {
       _format((JvmFormalParameter)ref, document);
+      return;
+    } else if (ref instanceof XtextResource) {
+      _format((XtextResource)ref, document);
       return;
     } else if (ref instanceof XAssignment) {
       _format((XAssignment)ref, document);
@@ -2585,11 +2559,11 @@ public class XbaseFormatter extends AbstractFormatter2 {
     } else if (ref instanceof XExpression) {
       _format((XExpression)ref, document);
       return;
-    } else if (ref != null) {
-      _format(ref, document);
-      return;
     } else if (ref == null) {
       _format((Void)null, document);
+      return;
+    } else if (ref != null) {
+      _format(ref, document);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

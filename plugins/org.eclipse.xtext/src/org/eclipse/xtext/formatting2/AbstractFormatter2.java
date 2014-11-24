@@ -9,6 +9,7 @@ package org.eclipse.xtext.formatting2;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.internal.FormattableDocument;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.preferences.ITypedPreferenceValues;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
@@ -38,6 +40,20 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	protected ITextRegionAccess regionAccess;
 
 	private FormatterRequest request = null;
+
+	protected void _format(Object obj, IFormattableDocument document) {
+	}
+
+	protected void _format(Void obj, IFormattableDocument document) {
+	}
+
+	protected void _format(XtextResource resource, IFormattableDocument document) {
+		EList<EObject> contents = resource.getContents();
+		if (!contents.isEmpty()) {
+			EObject model = contents.get(0);
+			format(model, document);
+		}
+	}
 
 	public ITextReplacer createCommentReplacer(IComment comment) {
 		EObject grammarElement = comment.getGrammarElement();
@@ -76,10 +92,6 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new HiddenRegionReplacer(region, formatting);
 	}
 
-	public ITextReplacer createWhitespaceReplacer(ITextSegment hiddens, IHiddenRegionFormatting formatting) {
-		return new WhitespaceReplacer(hiddens, formatting);
-	}
-
 	public ITextReplacement createTextReplacement(int offset, int length, String text) {
 		return new TextReplacement(getRequest().getTextRegionAccess(), offset, length, text);
 	}
@@ -92,19 +104,24 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new TextReplacerMerger(this);
 	}
 
-	protected abstract void format(IFormattableDocument document);
+	public ITextReplacer createWhitespaceReplacer(ITextSegment hiddens, IHiddenRegionFormatting formatting) {
+		return new WhitespaceReplacer(hiddens, formatting);
+	}
 
 	final public List<ITextReplacement> format(FormatterRequest request) {
 		try {
 			initalize(request);
 			IFormattableDocument document = createFormattableDocument();
-			format(document);
+			XtextResource xtextResource = request.getTextRegionAccess().getResource();
+			format(xtextResource, document);
 			List<ITextReplacement> replacements = document.renderToTextReplacements();
 			return replacements;
 		} finally {
 			reset();
 		}
 	}
+
+	public abstract void format(Object obj, IFormattableDocument document);
 
 	public ITypedPreferenceValues getPreferences() {
 		return request.getPreferences();

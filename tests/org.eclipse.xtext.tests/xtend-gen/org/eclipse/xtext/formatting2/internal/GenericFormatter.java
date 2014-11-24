@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.formatting2.internal;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
@@ -15,19 +15,34 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @Accessors
 @SuppressWarnings("all")
 public abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
-  protected void format(final IFormattableDocument document) {
-    XtextResource _resource = this.regionAccess.getResource();
-    EList<EObject> _contents = _resource.getContents();
-    EObject _head = IterableExtensions.<EObject>head(_contents);
+  protected void _format(final EObject obj, final IFormattableDocument document) {
     FormatterRequest _request = this.getRequest();
     ITextRegionAccess _textRegionAccess = _request.getTextRegionAccess();
-    this.format(((T) _head), _textRegionAccess, document);
+    this.format(((T) obj), _textRegionAccess, document);
   }
   
   protected abstract void format(final T model, final ITextRegionAccess regionAccess, final IFormattableDocument document);
+  
+  public void format(final Object obj, final IFormattableDocument document) {
+    if (obj instanceof XtextResource) {
+      _format((XtextResource)obj, document);
+      return;
+    } else if (obj instanceof EObject) {
+      _format((EObject)obj, document);
+      return;
+    } else if (obj == null) {
+      _format((Void)null, document);
+      return;
+    } else if (obj != null) {
+      _format(obj, document);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(obj, document).toString());
+    }
+  }
 }
