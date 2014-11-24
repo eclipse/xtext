@@ -5,14 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide
+package org.eclipse.xtext.ide.editor.contentassist.antlr.internal;
 
-/**
- * @author Anton Kosyakov - Initial contribution and API
- */
-interface LexerUIBindings {
-	
-	val CONTENT_ASSIST = "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.CONTENT_ASSIST" //$NON-NLS-1$
-	val HIGHLIGHTING = "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.HIGHLIGHTING" //$NON-NLS-1$
-	
-}
+@SuppressWarnings("serial") 
+public class InfiniteRecursion extends RuntimeException {}
