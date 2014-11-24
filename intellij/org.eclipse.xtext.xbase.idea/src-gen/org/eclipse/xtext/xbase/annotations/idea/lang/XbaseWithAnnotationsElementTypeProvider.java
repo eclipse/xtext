@@ -5,30 +5,17 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectType;
+import org.eclipse.xtext.xbase.annotations.idea.lang.psi.impl.XbaseWithAnnotationsFileImpl;
+import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
-import org.eclipse.xtext.xbase.annotations.idea.lang.psi.impl.XbaseWithAnnotationsFileImpl;
-
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarAccess;
+
+import com.intellij.psi.tree.IFileElementType;
 
 public class XbaseWithAnnotationsElementTypeProvider implements IElementTypeProvider {
 
 	public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<XbaseWithAnnotationsFileImpl>>(XbaseWithAnnotationsLanguage.INSTANCE);
-
-	public static final IElementType NAME_TYPE = new IElementType("NAME", XbaseWithAnnotationsLanguage.INSTANCE);
-
-	public static final IElementType EOBJECT_TYPE = new IElementType("EOBJECT_TYPE", XbaseWithAnnotationsLanguage.INSTANCE);
-
-	public static final IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> NAMED_EOBJECT_TYPE = new PsiNamedEObjectType("NAMED_EOBJECT", XbaseWithAnnotationsLanguage.INSTANCE);
-
-	public static final IElementType CROSS_REFERENCE_TYPE = new IElementType("CROSS_REFERENCE", XbaseWithAnnotationsLanguage.INSTANCE);
 
 	private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 
@@ -5057,20 +5044,8 @@ public class XbaseWithAnnotationsElementTypeProvider implements IElementTypeProv
 		return FILE_TYPE;
 	}
 
-	public IElementType getObjectType() {
-		return EOBJECT_TYPE;
-	}
-
-	public IElementType getCrossReferenceType() {
-		return CROSS_REFERENCE_TYPE;
-	}
-
-	public IElementType getNameType() {
-		return NAME_TYPE;
-	}
-
-	public IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> getNamedObjectType() {
-		return NAMED_EOBJECT_TYPE;
+	public IGrammarAwareElementType findElementType(EObject grammarElement) {
+		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
 	
 	public IGrammarAwareElementType getXAnnotationElementType() {
@@ -8883,10 +8858,6 @@ public class XbaseWithAnnotationsElementTypeProvider implements IElementTypeProv
 	
 	public IGrammarAwareElementType getQualifiedNameInStaticImport_FullStopKeyword_1ElementType() {
 		return QualifiedNameInStaticImport_FullStopKeyword_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType findElementType(EObject grammarElement) {
-		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
 
 }

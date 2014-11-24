@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.inject.Inject;
@@ -238,11 +239,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 		}
 		IResourceDescription resourceDescription = getResourceDescription();
 		if (resourceDescription != null) {
-			List<IEObjectDescription> exportedObjects = new ArrayList<IEObjectDescription>();
-			for (IEObjectDescription exportedObject : resourceDescription.getExportedObjects()) {
-				exportedObjects.add(createEObjectDescription(exportedObject.getEClass(), exportedObject.getEObjectURI(), exportedObject.getQualifiedName()));
-			}
-			return exportedObjects;
+			return IterableExtensions.toList(resourceDescription.getExportedObjects());
 		}
 		return Collections.emptyList();
 	}
