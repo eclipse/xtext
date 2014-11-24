@@ -1,23 +1,14 @@
 package org.eclipse.xtext.idea.lang;
 
-import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 
-// FIXME: get rid of this interface
 public interface IElementTypeProvider {
 
 	IFileElementType getFileType();
-
-	IElementType getObjectType();
-
-	IStubElementType<? extends PsiNamedEObjectStub, ? extends PsiNamedEObject> getNamedObjectType();
-
-	IElementType getCrossReferenceType();
-
-	IElementType getNameType();
+	
+	IGrammarAwareElementType findElementType(EObject grammarElement);
 
 }

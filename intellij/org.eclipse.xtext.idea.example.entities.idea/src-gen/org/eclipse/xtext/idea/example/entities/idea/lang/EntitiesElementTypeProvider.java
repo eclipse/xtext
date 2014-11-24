@@ -5,30 +5,17 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-import org.eclipse.xtext.psi.PsiNamedEObject;
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
-import org.eclipse.xtext.psi.stubs.PsiNamedEObjectType;
+import org.eclipse.xtext.idea.example.entities.idea.lang.psi.impl.EntitiesFileImpl;
+import org.eclipse.xtext.idea.example.entities.services.EntitiesGrammarAccess;
 import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
-import org.eclipse.xtext.idea.example.entities.idea.lang.psi.impl.EntitiesFileImpl;
-
-import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-import org.eclipse.xtext.idea.example.entities.services.EntitiesGrammarAccess;
+
+import com.intellij.psi.tree.IFileElementType;
 
 public class EntitiesElementTypeProvider implements IElementTypeProvider {
 
 	public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<EntitiesFileImpl>>(EntitiesLanguage.INSTANCE);
-
-	public static final IElementType NAME_TYPE = new IElementType("NAME", EntitiesLanguage.INSTANCE);
-
-	public static final IElementType EOBJECT_TYPE = new IElementType("EOBJECT_TYPE", EntitiesLanguage.INSTANCE);
-
-	public static final IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> NAMED_EOBJECT_TYPE = new PsiNamedEObjectType("NAMED_EOBJECT", EntitiesLanguage.INSTANCE);
-
-	public static final IElementType CROSS_REFERENCE_TYPE = new IElementType("CROSS_REFERENCE", EntitiesLanguage.INSTANCE);
 
 	private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 
@@ -5003,20 +4990,8 @@ public class EntitiesElementTypeProvider implements IElementTypeProvider {
 		return FILE_TYPE;
 	}
 
-	public IElementType getObjectType() {
-		return EOBJECT_TYPE;
-	}
-
-	public IElementType getCrossReferenceType() {
-		return CROSS_REFERENCE_TYPE;
-	}
-
-	public IElementType getNameType() {
-		return NAME_TYPE;
-	}
-
-	public IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> getNamedObjectType() {
-		return NAMED_EOBJECT_TYPE;
+	public IGrammarAwareElementType findElementType(EObject grammarElement) {
+		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
 	
 	public IGrammarAwareElementType getEntitiesElementType() {
@@ -8781,10 +8756,6 @@ public class EntitiesElementTypeProvider implements IElementTypeProvider {
 	
 	public IGrammarAwareElementType getQualifiedNameInStaticImport_FullStopKeyword_1ElementType() {
 		return QualifiedNameInStaticImport_FullStopKeyword_1_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType findElementType(EObject grammarElement) {
-		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
 
 }

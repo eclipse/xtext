@@ -654,31 +654,18 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		import org.eclipse.emf.ecore.EObject;
 		import org.eclipse.xtext.idea.lang.IElementTypeProvider;
-		import org.eclipse.xtext.psi.PsiNamedEObject;
-		import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
-		import org.eclipse.xtext.psi.stubs.PsiNamedEObjectType;
+		import «grammar.fileImplName»;
+		import «grammar.grammarAccessName»;
 		import org.eclipse.xtext.psi.stubs.XtextFileElementType;
 		import org.eclipse.xtext.psi.stubs.XtextFileStub;
-		import «grammar.fileImplName»;
-		
-		import com.intellij.psi.stubs.IStubElementType;
-		import com.intellij.psi.tree.IElementType;
-		import com.intellij.psi.tree.IFileElementType;
 		import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
-		import «grammar.grammarAccessName»;
+		
+		import com.intellij.psi.tree.IFileElementType;
 		
 		public class «grammar.elementTypeProviderName.toSimpleName» implements IElementTypeProvider {
 
 			public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<«grammar.fileImplName.toSimpleName»>>(«grammar.languageName.toSimpleName».INSTANCE);
-		
-			public static final IElementType NAME_TYPE = new IElementType("NAME", «grammar.languageName.toSimpleName».INSTANCE);
-		
-			public static final IElementType EOBJECT_TYPE = new IElementType("EOBJECT_TYPE", «grammar.languageName.toSimpleName».INSTANCE);
-		
-			public static final IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> NAMED_EOBJECT_TYPE = new PsiNamedEObjectType("NAMED_EOBJECT", «grammar.languageName.toSimpleName».INSTANCE);
-		
-			public static final IElementType CROSS_REFERENCE_TYPE = new IElementType("CROSS_REFERENCE", «grammar.languageName.toSimpleName».INSTANCE);
-		
+
 			private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
 
 			private static IGrammarAwareElementType associate(IGrammarAwareElementType grammarAwareElementType) {
@@ -711,20 +698,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				return FILE_TYPE;
 			}
 		
-			public IElementType getObjectType() {
-				return EOBJECT_TYPE;
-			}
-		
-			public IElementType getCrossReferenceType() {
-				return CROSS_REFERENCE_TYPE;
-			}
-		
-			public IElementType getNameType() {
-				return NAME_TYPE;
-			}
-		
-			public IStubElementType<PsiNamedEObjectStub, PsiNamedEObject> getNamedObjectType() {
-				return NAMED_EOBJECT_TYPE;
+			public IGrammarAwareElementType findElementType(EObject grammarElement) {
+				return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 			}
 			«FOR rule:grammar.allRules»
 			
@@ -738,10 +713,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			}
 			«ENDFOR»
 			«ENDFOR»
-		
-			public IGrammarAwareElementType findElementType(EObject grammarElement) {
-				return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
-			}
 		
 		}
 	'''
