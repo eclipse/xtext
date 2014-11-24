@@ -9,23 +9,20 @@ package org.eclipse.xtend.idea.parsing
 
 import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.idea.tests.TestDecorator
-import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase
+import org.eclipse.xtext.idea.tests.parsing.AbstractModelTestCase
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @TestDecorator
-class XtendParsingTestCase extends AbstractLanguageParsingTestCase {
+class XtendParsingTestCase extends AbstractModelTestCase {
 
 	IdeaXtendParserTest delegate
 
 	new() {
 		super(XtendFileType.INSTANCE)
 		delegate = new IdeaXtendParserTest(this)
-	}
-
-	@Override override protected String getTestDataPath() {
-		return "./testData/parsing"
+		xtextLanguage.injectMembers(delegate)
 	}
 
 }
