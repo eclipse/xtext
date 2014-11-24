@@ -4,7 +4,6 @@ import com.google.inject.Binder
 import com.google.inject.name.Names
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
-import org.eclipse.xtext.ide.LexerUIBindings
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper
 import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger
@@ -21,6 +20,7 @@ import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.service.SingletonBinding
+import org.eclipse.xtext.ide.LexerIdeBindings
 
 class DefaultIdeaModule extends AbstractGenericModule {
 
@@ -60,7 +60,7 @@ class DefaultIdeaModule extends AbstractGenericModule {
 	}
 
 	def void configureHighlightingTokenDefProvider(Binder binder) {
-		binder.bind(ITokenDefProvider).annotatedWith(Names.named(LexerUIBindings.HIGHLIGHTING)).to(AntlrTokenDefProvider)
+		binder.bind(ITokenDefProvider).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING)).to(AntlrTokenDefProvider)
 	}
 
 }
