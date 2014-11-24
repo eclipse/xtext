@@ -7,7 +7,7 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import org.eclipse.xtext.ide.LexerUIBindings;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger;
@@ -65,7 +65,7 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   
   public void configureHighlightingTokenDefProvider(final Binder binder) {
     AnnotatedBindingBuilder<ITokenDefProvider> _bind = binder.<ITokenDefProvider>bind(ITokenDefProvider.class);
-    Named _named = Names.named(LexerUIBindings.HIGHLIGHTING);
+    Named _named = Names.named(LexerIdeBindings.HIGHLIGHTING);
     LinkedBindingBuilder<ITokenDefProvider> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.to(AntlrTokenDefProvider.class);
   }

@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import com.google.inject.name.Named
 import java.util.Map
 import org.antlr.runtime.Token
-import org.eclipse.xtext.ide.LexerUIBindings
+import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 
@@ -23,7 +23,7 @@ abstract class TokenTypeToStringMapper {
 	String[] mappedValues
 
 	@Inject
-	def void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
+	def void setTokenDefProvider(@Named(LexerIdeBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		initIds(tokenDefProvider.tokenDefMap)
 	}
 
