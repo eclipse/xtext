@@ -44,7 +44,7 @@ public class XtendFormatter extends XbaseFormatter {
 	@Inject extension XtendGrammarAccess
 	@Inject RichStringFormatter.Factory richStringFormatterFactory
 
-	def protected dispatch void format(XtendFile xtendFile, extension IFormattableDocument format) {
+	def dispatch void format(XtendFile xtendFile, extension IFormattableDocument format) {
 		xtendFile.prepend[noSpace]
 		val pkg = xtendFile.regionForFeature(XTEND_FILE__PACKAGE)
 		pkg.prepend[oneSpace]
@@ -64,7 +64,7 @@ public class XtendFormatter extends XbaseFormatter {
 		xtendFile.append[newLine]
 	}
 
-	def protected dispatch format(XImportSection section, extension IFormattableDocument format) {
+	def dispatch format(XImportSection section, extension IFormattableDocument format) {
 		for (imp : section.importDeclarations) {
 			imp.format(format)
 			if (imp != section.importDeclarations.last)
@@ -84,7 +84,7 @@ public class XtendFormatter extends XbaseFormatter {
 		}
 	}
 
-	def protected dispatch void format(XImportDeclaration imp, extension IFormattableDocument document) {
+	def dispatch void format(XImportDeclaration imp, extension IFormattableDocument document) {
 		imp.regionForKeyword("import").append[oneSpace]
 		imp.regionForFeature(XIMPORT_DECLARATION__STATIC).append[oneSpace]
 		imp.regionForFeature(XIMPORT_DECLARATION__EXTENSION).append[oneSpace]
@@ -93,7 +93,7 @@ public class XtendFormatter extends XbaseFormatter {
 		imp.regionForKeyword(";").prepend[noSpace]
 	}
 
-	def protected dispatch void format(XtendClass clazz, extension IFormattableDocument format) {
+	def dispatch void format(XtendClass clazz, extension IFormattableDocument format) {
 		formatAnnotations(clazz, format, newLineAfterClassAnnotations)
 		formatModifiers(clazz, format)
 		formatTypeParameters(clazz, clazz.typeParameters, format)
@@ -151,7 +151,7 @@ public class XtendFormatter extends XbaseFormatter {
 		}
 	}
 
-	def protected dispatch void format(XtendInterface interfaze, extension IFormattableDocument format) {
+	def dispatch void format(XtendInterface interfaze, extension IFormattableDocument format) {
 		formatAnnotations(interfaze, format, newLineAfterClassAnnotations)
 		formatModifiers(interfaze, format)
 		formatTypeParameters(interfaze, interfaze.typeParameters, format)
@@ -164,14 +164,14 @@ public class XtendFormatter extends XbaseFormatter {
 		formatBody(interfaze, format)
 	}
 
-	def protected dispatch void format(XtendAnnotationType annotationType, extension IFormattableDocument format) {
+	def dispatch void format(XtendAnnotationType annotationType, extension IFormattableDocument format) {
 		formatAnnotations(annotationType, format, newLineAfterClassAnnotations)
 		formatModifiers(annotationType, format)
 		annotationType.regionForKeyword("annotation").append[oneSpace]
 		formatBody(annotationType, format)
 	}
 
-	def protected dispatch void format(XtendEnum enumeration, extension IFormattableDocument format) {
+	def dispatch void format(XtendEnum enumeration, extension IFormattableDocument format) {
 		formatAnnotations(enumeration, format, newLineAfterClassAnnotations)
 		formatModifiers(enumeration, format)
 		enumeration.regionForKeyword("enum").append[oneSpace]
@@ -195,7 +195,7 @@ public class XtendFormatter extends XbaseFormatter {
 		}
 	}
 
-	def protected dispatch void format(XtendConstructor func, extension IFormattableDocument format) {
+	def dispatch void format(XtendConstructor func, extension IFormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterConstructorAnnotations)
 		formatModifiers(func, format)
 		func.regionForKeyword("new").append[noSpace]
@@ -215,7 +215,7 @@ public class XtendFormatter extends XbaseFormatter {
 		func.expression.format(format)
 	}
 
-	def protected dispatch void format(XtendFunction func, extension IFormattableDocument format) {
+	def dispatch void format(XtendFunction func, extension IFormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterMethodAnnotations)
 		formatModifiers(func, format)
 		if (!func.typeParameters.empty) {
@@ -238,7 +238,7 @@ public class XtendFormatter extends XbaseFormatter {
 		func.expression.format(format)
 	}
 
-	def protected dispatch void format(XtendField field, extension IFormattableDocument document) {
+	def dispatch void format(XtendField field, extension IFormattableDocument document) {
 		formatAnnotations(field, document, newLineAfterFieldAnnotations)
 		formatModifiers(field, document)
 		if (field.name != null)
@@ -248,19 +248,19 @@ public class XtendFormatter extends XbaseFormatter {
 		field.initialValue.format(document)
 	}
 
-	def protected dispatch void format(XtendParameter param, extension IFormattableDocument format) {
+	def dispatch void format(XtendParameter param, extension IFormattableDocument format) {
 		formatAnnotations(param, format, newLineAfterParameterAnnotations)
 		param.parameterType.format(format)
 		val nameNode = param.regionForFeature(XTEND_PARAMETER__NAME)
 		nameNode.prepend[oneSpace]
 	}
 
-	def protected dispatch void format(RichString rs, extension IFormattableDocument format) {
+	def dispatch void format(RichString rs, extension IFormattableDocument format) {
 		val richStringFormatter = richStringFormatterFactory.create(request.textRegionAccess, this)
 		richStringFormatter.format(format, rs)
 	}
 
-	def protected dispatch void format(AnonymousClass anonymousClass, extension IFormattableDocument format) {
+	def dispatch void format(AnonymousClass anonymousClass, extension IFormattableDocument format) {
 		format(anonymousClass.constructorCall, format)
 		formatBody(anonymousClass, format)
 	}
