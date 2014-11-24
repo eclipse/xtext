@@ -144,7 +144,7 @@ public class XtendFormatter extends XbaseFormatter {
 				}
 			}
 		} else {
-			if (clazzOpenBrace.nextHiddenRegion.containsComment)
+			if (clazzOpenBrace?.nextHiddenRegion?.containsComment)
 				clazzOpenBrace.append[newLine increaseIndentation decreaseIndentation]
 			else
 				clazzOpenBrace.append[newLine]

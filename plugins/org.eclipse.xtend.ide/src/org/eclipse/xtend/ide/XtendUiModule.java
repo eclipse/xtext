@@ -10,7 +10,6 @@ import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
-import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
 import org.eclipse.xtend.core.linking.Linker;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
@@ -87,11 +86,11 @@ import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ide.LexerUIBindings;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.ide.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -146,7 +145,6 @@ import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
-import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
@@ -193,10 +191,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 				.to(HyperLinkingLabelProvider.class);
 	}
 	
-	public Class<? extends IFormattingPreferenceValuesProvider> bindIFormattingPreferenceValuesProvider() {
-		return FormatterPreferenceValuesProvider.class;
-	}
-
 	@Override
 	public Class<? extends IAnnotationHover> bindIAnnotationHover() {
 		return XtendAnnotationHover.class;

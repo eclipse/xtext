@@ -378,8 +378,14 @@ public class XtendFormatter extends XbaseFormatter {
         }
       } else {
         ISemanticRegion _xifexpression_1 = null;
-        IHiddenRegion _nextHiddenRegion = clazzOpenBrace.getNextHiddenRegion();
-        boolean _containsComment = _nextHiddenRegion.containsComment();
+        IHiddenRegion _nextHiddenRegion = null;
+        if (clazzOpenBrace!=null) {
+          _nextHiddenRegion=clazzOpenBrace.getNextHiddenRegion();
+        }
+        boolean _containsComment = false;
+        if (_nextHiddenRegion!=null) {
+          _containsComment=_nextHiddenRegion.containsComment();
+        }
         if (_containsComment) {
           final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
             public void apply(final IHiddenRegionFormatter it) {
