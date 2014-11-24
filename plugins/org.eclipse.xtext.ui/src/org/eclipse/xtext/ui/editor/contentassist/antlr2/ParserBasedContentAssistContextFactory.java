@@ -25,6 +25,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+/**
+ * @since 2.8
+ */
 @Singleton
 public class ParserBasedContentAssistContextFactory extends AbstractContentAssistContextFactory {
 	
@@ -80,6 +83,10 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		
 		protected void setPool(ExecutorService pool) {
 			delegate.setPool(pool);
+		}
+		
+		public ContentAssistContextFactory getDelegate() {
+			return delegate;
 		}
 
 		protected ContentAssistContext[] doCreateContexts(int offset) {

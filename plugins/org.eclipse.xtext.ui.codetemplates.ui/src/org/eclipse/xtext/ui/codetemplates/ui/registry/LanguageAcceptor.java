@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.codetemplates.ui.registry;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
+import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 
 import com.google.inject.Inject;
@@ -28,7 +28,7 @@ public class LanguageAcceptor {
 			Provider<TemplateBodyHighlighter> highlighter, 
 			ContextTypeRegistry registry, 
 			ContextTypeIdHelper helper,
-			Provider<PartialContentAssistContextFactory> contentAssistContextFactory,
+			Provider<IPartialEditingContentAssistContextFactory> contentAssistContextFactory,
 			String primaryFileExtension) {
 		this.registry.register(grammar, highlighter, registry, helper, contentAssistContextFactory, primaryFileExtension);
 	}
