@@ -87,8 +87,8 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 		String srcGen = Generator.SRC_GEN;
 		String src = Generator.SRC;
 		if (contentAssist || highlighting) {
-			srcGen = Generator.SRC_GEN_UI;
-			src = Generator.SRC_UI;
+			srcGen = Generator.SRC_GEN_IDE;
+			src = Generator.SRC_IDE;
 		}
 		String srcGenPath = ctx.getOutput().getOutlet(srcGen).getPath();
 		String srcPath = ctx.getOutput().getOutlet(src).getPath();
