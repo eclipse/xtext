@@ -8,7 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.formatting2.internal.FormatterTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate formattertestlanguage "http://simple/formattertestlanguage"
+generate formattertestlanguage "http://formatter2/formattertestlanguage"
 
 Root:
 	IDList | KWList;

@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.internal;
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -52,7 +53,8 @@ public class TextRegionsToString {
 	}
 
 	protected String getReplacement(ITextSegment region, String replacement) {
-		if (region.getText().equals(replacement))
+		String string = region.getText();
+		if (Strings.equal(string, replacement))
 			return "<" + region.getOffset() + "|" + replacement + ">";
 		return "<" + region.getOffset() + ":" + region.getLength() + "|" + replacement + ">";
 	}

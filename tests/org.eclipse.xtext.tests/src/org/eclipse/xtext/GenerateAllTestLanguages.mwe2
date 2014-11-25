@@ -370,6 +370,16 @@ Workflow {
 				backtrack = true
 			}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = generator.junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = generator.junit.Junit4Fragment {}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
