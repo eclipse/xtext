@@ -170,15 +170,15 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 				.addConfiguredBinding("HighlightingLexer",
 						"binder.bind(" + Lexer.class.getName() + ".class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
-						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
 						")).to(" + lexerGrammar +".class)")
 				.getBindings();
 		if (contentAssist)
 			return new BindFactory()
 				.addConfiguredBinding("ContentAssistLexer",
-						"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
+						"binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
-						"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
+						"org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST" +
 						")).to(" + lexerGrammar +".class)")
 				.getBindings();
 		return Collections.emptySet();
