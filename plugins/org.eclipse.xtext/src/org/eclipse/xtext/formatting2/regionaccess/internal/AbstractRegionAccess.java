@@ -264,7 +264,7 @@ public abstract class AbstractRegionAccess extends AbstractTextSegment implement
 	public List<ISemanticRegion> regionsForKeywords(EObject owner, String... keywords) {
 		EObjectTokens tokens = eObjectToTokens.get(owner);
 		if (tokens == null)
-			return null;
+			return Collections.emptyList();
 		Set<String> set = Sets.newHashSet(keywords);
 		List<ISemanticRegion> result = Lists.newArrayList();
 		for (ISemanticRegion token : tokens.getTokens())

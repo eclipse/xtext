@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.formatting.preferences;
 
-import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*;
+import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*;
 
 import java.util.Map;
 
