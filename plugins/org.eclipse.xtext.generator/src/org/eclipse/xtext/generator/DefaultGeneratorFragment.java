@@ -17,7 +17,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFragmentExtension, IGeneratorFragmentExtension2 {
+public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3 {
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 	}
 	
@@ -59,6 +59,13 @@ public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFr
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return null;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String[] getExportedPackagesIde(Grammar grammar) {
+		return null;
+	}
 
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return null;
@@ -75,12 +82,26 @@ public class DefaultGeneratorFragment implements IGeneratorFragment,IGeneratorFr
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		return null;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String[] getImportedPackagesIde(Grammar grammar) {
+		return null;
+	}
 
 	public String[] getImportedPackagesUi(Grammar grammar) {
 		return null;
 	}
 
 	public String[] getRequiredBundlesRt(Grammar grammar) {
+		return null;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String[] getRequiredBundlesIde(Grammar grammar) {
 		return null;
 	}
 
