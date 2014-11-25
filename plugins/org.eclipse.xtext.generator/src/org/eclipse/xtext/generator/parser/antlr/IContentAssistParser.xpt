@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::ContentAssistParser»
 
 «DEFINE parser(AntlrOptions options, boolean partialParsing) FOR Grammar»
-«FILE getParserClassName().asPath()+".java" SRC_GEN_UI-»
+«FILE getParserClassName().asPath()+".java" SRC_GEN_IDE-»
 /*
 «fileHeader()»
 */

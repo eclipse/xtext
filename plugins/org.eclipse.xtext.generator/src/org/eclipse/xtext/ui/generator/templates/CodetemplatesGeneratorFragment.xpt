@@ -28,7 +28,7 @@
 
 
 «DEFINE PartialContentAssistParser(boolean restriction) FOR Grammar»
-«FILE partialParser().asPath()+".java" SRC_GEN_UI-»
+«FILE partialParser().asPath()+".java" SRC_GEN_IDE-»
 /*
  «fileHeader()»
  */

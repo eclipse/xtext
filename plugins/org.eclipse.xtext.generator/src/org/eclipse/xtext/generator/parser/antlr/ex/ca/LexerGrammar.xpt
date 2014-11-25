@@ -17,7 +17,7 @@
 «EXTENSION org::eclipse::xtext::EcoreUtils»
 
 «DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
-«FILE helper.getContentAssistLexerGrammarFileName(this).asPath()+".g" SRC_GEN_UI-»
+«FILE helper.getContentAssistLexerGrammarFileName(this).asPath()+".g" SRC_GEN_IDE-»
 «EXPAND ParameterizedLexerGrammar::grammar(options, helper, helper.getContentAssistLexerGrammarFileName(this), helper.getContentAssistLexerSuperClass(this))»
 «ENDFILE»
 «ENDDEFINE»

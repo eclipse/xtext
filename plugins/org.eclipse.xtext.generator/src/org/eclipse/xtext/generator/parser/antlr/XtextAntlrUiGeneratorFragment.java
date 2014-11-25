@@ -102,13 +102,13 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
-		String srcUiGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_UI).getPath();
-		final String encoding = getEncoding(ctx, Generator.SRC_GEN_UI);
+		String srcUiGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_IDE).getPath();
+		final String encoding = getEncoding(ctx, Generator.SRC_GEN_IDE);
 		String absoluteGrammarFileName = srcUiGenPath + "/" + getGrammarFileName(grammar, getNaming()).replace('.', '/') + ".g";
 		addAntlrParam("-fo");
 		addAntlrParam(absoluteGrammarFileName.substring(0, absoluteGrammarFileName.lastIndexOf('/')));
 		getAntlrTool().runWithEncodingAndParams(absoluteGrammarFileName, encoding, getAntlrParams());
-		Charset charset = Charset.forName(getEncoding(ctx, Generator.SRC_GEN_UI));
+		Charset charset = Charset.forName(getEncoding(ctx, Generator.SRC_GEN_IDE));
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteGrammarFileName, charset);
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName, charset);
 		suppressWarnings(absoluteGrammarFileName, charset);
@@ -160,7 +160,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 
 	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
-		return new String[] { getNaming().basePackageUi(grammar) + ".contentassist.antlr" };
+		return new String[] { getNaming().basePackageIde(grammar) + ".contentassist.antlr" };
 	}
 	
 	@Override
@@ -169,21 +169,21 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	}
 
 	public static String getParserClassName(Grammar g, Naming naming) {
-		return naming.basePackageUi(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
 	}
 
 	public static String getInternalLexerClassName(Grammar g, Naming naming) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g)
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g)
 				+ "Lexer";
 	}
 
 	public static String getInternalParserClassName(Grammar g, Naming naming) {
-		return  naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g)
+		return  naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g)
 				+ "Parser";
 	}
 
 	public static String getGrammarFileName(Grammar g, Naming naming) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g);
 	}
 	
 	public static Collection<Alternatives> getAllAlternatives(Grammar g) {

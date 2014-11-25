@@ -66,7 +66,7 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getContentAssistParserClassName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
 	}
 
 	public String getInternalContentAssistLexerClassName(Grammar g) {
@@ -86,11 +86,11 @@ public class AntlrFragmentHelper {
 	}
 
 	public String getContentAssistLexerGrammarFileName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
+		return naming.basePackageIde(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
 	}
 
 	public String getContentAssistParserGrammarFileName(Grammar g) {
-		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
 	}
 
 	public Collection<? extends AbstractElement> getAllAlternatives(Grammar g) {
