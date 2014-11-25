@@ -13,6 +13,8 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.eclipse.xtext.xbase.XbasePackage
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,9 +26,11 @@ class ValidationBug452602Test extends AbstractXtendTestCase {
 	
 	@Test def void test_01() {
 		val c = parser.parse('''
-			@Data
 			class Test {
-			    String attrName
+			    val String attrName
+			    new(String s) {
+			    	attrName = s
+			    }
 			    
 			    def boolean test(Object o) {
 			        val x = o as Test
@@ -41,10 +45,32 @@ class ValidationBug452602Test extends AbstractXtendTestCase {
 	
 	@Test def void test_02() {
 		val c = parser.parse('''
-			@Data
 			class Test {
-			    String attrName
-			    String attrName2
+			    val String attrName
+			    new(String s) {
+			    	attrName = s
+			    }
+			    
+			    def boolean test(Object o) {
+			        val x = o as Test
+			        if ((o as Test).attrName != x.attrName) 
+			        	return false 
+			        return true
+			    }
+			}
+		''')
+		c.assertWarning(XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
+	}
+	
+	@Test def void test_03() {
+		val c = parser.parse('''
+			class Test {
+			    val String attrName
+			    val String attrName2
+			    new(String s1, String s2) {
+			    	attrName = s1
+			    	attrName2 = s2
+			    }
 			    
 			    def boolean test() {
 			        if (attrName === attrName2) 
