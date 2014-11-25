@@ -338,6 +338,10 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 * @since 2.7
 	 */
 	public void modelChanged(XtextResource resource, CancelIndicator cancelIndicator) {
+		if (resource == null) {
+			return;
+		}
+		
 		// ensure at most one thread can be reconciling at any time
 		synchronized (fReconcileLock) {
 			if (reconciling)
