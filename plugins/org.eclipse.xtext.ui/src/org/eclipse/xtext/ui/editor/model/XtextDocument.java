@@ -69,8 +69,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
 	
-	@Inject
-	private ReconcilingUnitOfWorkProvider reconcilingUnitOfWorkProvider;
+	@Inject(optional=true)
+	private ReconcilingUnitOfWorkProvider reconcilingUnitOfWorkProvider = new ReconcilingUnitOfWorkProvider();
 	
 	/**
 	 * @since 2.8
