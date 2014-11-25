@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Set;
+
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
@@ -36,6 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 
+import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 
 /**
@@ -77,6 +80,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	private EObject root;
 	
 	private boolean resolving = false;
+	
+	@Inject
+	private OperationCanceledManager operationCanceledManager;
 	
 	/**
 	 * A set of all root expressions that have been processed so far. May be shared among 
@@ -130,9 +136,12 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 			task.start();
 			resolving = true;
 			return resolve(monitor);
-		} catch(OperationCanceledException e) {
-			clear();
-			throw e;
+		} catch(Throwable e) {
+			if (operationCanceledManager.isOperationCanceledException(e)) {
+				clear();
+				operationCanceledManager.propagateAsErrorIfCancelException(e);
+			}
+			throw Throwables.propagate(e);
 		} finally {
 			resolving = false;
 			task.stop();
@@ -140,7 +149,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 	
 	protected void clear() {
-		allRootedExpressions = null;
+		allRootedExpressions.clear();
 	}
 
 	protected IResolvedTypes resolve(CancelIndicator monitor) {

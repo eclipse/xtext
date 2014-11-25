@@ -94,11 +94,11 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   
   private final JvmDeclaredType jvmType;
   
-  private final PsiNamedElement psiElement;
+  private final PsiElement psiElement;
   
   private final ClassInnerStuffCache membersCache;
   
-  public JvmPsiClassImpl(final JvmDeclaredType declaredType, final PsiNamedElement psiElement) {
+  public JvmPsiClassImpl(final JvmDeclaredType declaredType, final PsiElement psiElement) {
     super(psiElement.getManager(), psiElement.getLanguage());
     this.jvmType = declaredType;
     this.psiElement = psiElement;
