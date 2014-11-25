@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.AttributeExclusionTest#getAttr1 <em>Attr1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.AttributeExclusionTest#getAttr2 <em>Attr2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getAttributeExclusionTest()
  * @model

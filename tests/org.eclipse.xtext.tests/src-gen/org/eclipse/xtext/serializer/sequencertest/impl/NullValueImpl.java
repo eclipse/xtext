@@ -17,12 +17,13 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * An implementation of the model object '<em><b>Null Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.NullValueImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.NullValueImpl#getFoo <em>Foo</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

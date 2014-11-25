@@ -12,7 +12,6 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
  * An implementation of the model object '<em><b>Kind</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

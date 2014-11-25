@@ -26,12 +26,13 @@ import org.eclipse.xtext.parser.antlr.bug289524Test.ModelElement;
  * An implementation of the model object '<em><b>Model Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524Test.impl.ModelElementImpl#getContainments <em>Containments</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524Test.impl.ModelElementImpl#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

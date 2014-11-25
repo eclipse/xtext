@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.Property#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.Property#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage#getProperty()
  * @model

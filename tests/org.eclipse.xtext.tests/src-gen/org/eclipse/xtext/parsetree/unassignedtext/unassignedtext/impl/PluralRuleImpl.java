@@ -16,11 +16,12 @@ import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextP
  * An implementation of the model object '<em><b>Plural Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl.PluralRuleImpl#getCount <em>Count</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

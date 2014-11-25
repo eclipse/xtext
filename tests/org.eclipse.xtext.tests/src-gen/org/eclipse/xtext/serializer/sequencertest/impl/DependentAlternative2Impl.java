@@ -23,12 +23,13 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * An implementation of the model object '<em><b>Dependent Alternative2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl#getVal <em>Val</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.DependentAlternative2Impl#isFlag <em>Flag</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

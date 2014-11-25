@@ -17,13 +17,14 @@ import org.eclipse.xtext.parser.antlr.bug301935Test.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug301935Test.impl.ModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug301935Test.impl.ModelImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug301935Test.impl.ModelImpl#getValue2 <em>Value2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

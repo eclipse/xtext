@@ -14,7 +14,6 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTe
  * An implementation of the model object '<em><b>Content</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

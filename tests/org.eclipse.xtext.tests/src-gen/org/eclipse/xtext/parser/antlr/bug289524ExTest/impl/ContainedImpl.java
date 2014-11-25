@@ -17,11 +17,12 @@ import org.eclipse.xtext.parser.antlr.bug289524ExTest.Contained;
  * An implementation of the model object '<em><b>Contained</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524ExTest.impl.ContainedImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

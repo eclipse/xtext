@@ -10,10 +10,10 @@ package org.eclipse.xtext.parsetree.reconstr.complexrewritetest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C2#getY <em>Y</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage#getC2()
  * @model

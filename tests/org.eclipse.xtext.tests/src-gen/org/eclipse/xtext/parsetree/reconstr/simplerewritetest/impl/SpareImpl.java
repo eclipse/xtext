@@ -18,11 +18,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Spare;
  * An implementation of the model object '<em><b>Spare</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.SpareImpl#getId <em>Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

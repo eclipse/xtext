@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordBool;
  * An implementation of the model object '<em><b>Keyword Bool</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.KeywordBoolImpl#isKw <em>Kw</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

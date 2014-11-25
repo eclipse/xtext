@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
  * An implementation of the model object '<em><b>Single Keywords</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SingleKeywordsImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

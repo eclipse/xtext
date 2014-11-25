@@ -35,8 +35,8 @@ public class RegionAccessTestLanguageStandaloneSetupGenerated implements ISetup 
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("regionaccesstestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("regionaccesstestlanguage", serviceProvider);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/regionaccesstestlanguage")) {
-		EPackage.Registry.INSTANCE.put("http://simple/regionaccesstestlanguage", org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://formatter2/regionaccesstestlanguage")) {
+		EPackage.Registry.INSTANCE.put("http://formatter2/regionaccesstestlanguage", org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage.eINSTANCE);
 	}
 
 	}

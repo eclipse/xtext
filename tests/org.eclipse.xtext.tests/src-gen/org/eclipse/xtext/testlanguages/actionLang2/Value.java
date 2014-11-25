@@ -10,10 +10,10 @@ package org.eclipse.xtext.testlanguages.actionLang2;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang2.Value#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.actionLang2.ActionLang2Package#getValue()
  * @model

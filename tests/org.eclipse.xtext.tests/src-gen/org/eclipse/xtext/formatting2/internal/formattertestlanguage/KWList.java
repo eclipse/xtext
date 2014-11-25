@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.internal.formattertestlanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList#isKw1 <em>Kw1</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList#isKw2 <em>Kw2</em>}</li>
@@ -17,7 +18,6 @@ package org.eclipse.xtext.formatting2.internal.formattertestlanguage;
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList#isKw4 <em>Kw4</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList#isKw5 <em>Kw5</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguagePackage#getKWList()
  * @model

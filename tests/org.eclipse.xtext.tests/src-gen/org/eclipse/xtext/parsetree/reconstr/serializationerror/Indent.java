@@ -11,12 +11,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent#getReq <em>Req</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent#getOpt <em>Opt</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent#getIndent <em>Indent</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage#getIndent()
  * @model

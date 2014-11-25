@@ -23,7 +23,9 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * An implementation of the model object '<em><b>Long Alternative</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl#getVal1 <em>Val1</em>}</li>
@@ -35,7 +37,6 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl#getVal7 <em>Val7</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.LongAlternativeImpl#getVal8 <em>Val8</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -23,11 +23,12 @@ import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTe
  * An implementation of the model object '<em><b>Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.GroupImpl#getTokens <em>Tokens</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

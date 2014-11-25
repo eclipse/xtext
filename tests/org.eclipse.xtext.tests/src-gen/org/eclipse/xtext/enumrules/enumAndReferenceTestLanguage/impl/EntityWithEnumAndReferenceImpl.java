@@ -19,13 +19,14 @@ import org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.KindOfKeyword;
  * An implementation of the model object '<em><b>Entity With Enum And Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.impl.EntityWithEnumAndReferenceImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

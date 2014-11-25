@@ -11,10 +11,10 @@ import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.AType2#getAge <em>Age</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.grammarinheritance.foo.FooPackage#getAType2()
  * @model

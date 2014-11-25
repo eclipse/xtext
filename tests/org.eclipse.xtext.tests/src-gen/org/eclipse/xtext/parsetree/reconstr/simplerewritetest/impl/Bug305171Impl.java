@@ -22,14 +22,15 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Bug305171</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getY <em>Y</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getZ <em>Z</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Bug305171Impl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

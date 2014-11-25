@@ -27,7 +27,9 @@ import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getModel <em>Model</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getAttributeExclusion <em>Attribute Exclusion</em>}</li>
@@ -40,7 +42,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTest;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNodeExclusion <em>Node Exclusion</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNodeExclusionList <em>Node Exclusion List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble0 <em>Double0</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble1 <em>Double1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.OptionalDouble#getDouble2 <em>Double2</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getOptionalDouble()
  * @model

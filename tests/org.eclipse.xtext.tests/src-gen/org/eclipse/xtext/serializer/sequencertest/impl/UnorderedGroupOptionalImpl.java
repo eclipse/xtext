@@ -17,13 +17,14 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
  * An implementation of the model object '<em><b>Unordered Group Optional</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl#getVa2 <em>Va2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupOptionalImpl#getVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

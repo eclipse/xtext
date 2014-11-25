@@ -23,13 +23,14 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyD;
  * An implementation of the model object '<em><b>Tricky D</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyDImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyDImpl#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyDImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -16,12 +16,13 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoOptions;
  * An implementation of the model object '<em><b>Two Options</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.TwoOptionsImpl#getOne <em>One</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.TwoOptionsImpl#getTwo <em>Two</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

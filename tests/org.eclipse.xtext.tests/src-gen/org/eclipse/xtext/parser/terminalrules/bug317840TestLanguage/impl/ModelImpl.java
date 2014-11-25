@@ -25,11 +25,12 @@ import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl.ModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

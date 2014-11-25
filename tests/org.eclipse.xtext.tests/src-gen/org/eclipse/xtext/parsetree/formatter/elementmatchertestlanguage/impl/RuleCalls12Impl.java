@@ -27,12 +27,13 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCall
  * An implementation of the model object '<em><b>Rule Calls12</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl#getConstructor <em>Constructor</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCalls12Impl#getFields <em>Fields</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

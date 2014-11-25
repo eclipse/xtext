@@ -17,11 +17,12 @@ import org.eclipse.xtext.resource.locationprovidertest.Port;
  * An implementation of the model object '<em><b>Port</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.PortImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

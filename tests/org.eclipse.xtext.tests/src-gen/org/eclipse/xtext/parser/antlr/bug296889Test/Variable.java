@@ -10,10 +10,10 @@ package org.eclipse.xtext.parser.antlr.bug296889Test;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889Test.Variable#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.antlr.bug296889Test.Bug296889TestPackage#getVariable()
  * @model

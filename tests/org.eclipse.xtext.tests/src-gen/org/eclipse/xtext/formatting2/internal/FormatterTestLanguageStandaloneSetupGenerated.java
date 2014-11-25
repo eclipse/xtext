@@ -35,8 +35,8 @@ public class FormatterTestLanguageStandaloneSetupGenerated implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("formattertestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("formattertestlanguage", serviceProvider);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/formattertestlanguage")) {
-		EPackage.Registry.INSTANCE.put("http://simple/formattertestlanguage", org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguagePackage.eINSTANCE);
+	if (!EPackage.Registry.INSTANCE.containsKey("http://formatter2/formattertestlanguage")) {
+		EPackage.Registry.INSTANCE.put("http://formatter2/formattertestlanguage", org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguagePackage.eINSTANCE);
 	}
 
 	}

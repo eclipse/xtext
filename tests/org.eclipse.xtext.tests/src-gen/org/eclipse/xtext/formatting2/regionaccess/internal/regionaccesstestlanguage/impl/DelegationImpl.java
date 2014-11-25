@@ -19,11 +19,12 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
  * An implementation of the model object '<em><b>Delegation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.impl.DelegationImpl#getDelegate <em>Delegate</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

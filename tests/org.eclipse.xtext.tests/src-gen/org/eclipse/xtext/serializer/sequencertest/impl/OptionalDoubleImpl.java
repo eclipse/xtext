@@ -17,13 +17,14 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * An implementation of the model object '<em><b>Optional Double</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl#getDouble0 <em>Double0</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl#getDouble1 <em>Double1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalDoubleImpl#getDouble2 <em>Double2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

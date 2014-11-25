@@ -19,13 +19,14 @@ import org.eclipse.xtext.parser.antlr.bug378967Test.SecondEnum;
  * An implementation of the model object '<em><b>Rule1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug378967Test.impl.Rule1Impl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug378967Test.impl.Rule1Impl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug378967Test.impl.Rule1Impl#getUnit <em>Unit</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

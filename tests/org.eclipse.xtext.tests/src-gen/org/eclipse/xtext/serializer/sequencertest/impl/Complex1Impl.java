@@ -23,7 +23,9 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * An implementation of the model object '<em><b>Complex1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl#getVal2 <em>Val2</em>}</li>
@@ -32,7 +34,6 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl#getVal5 <em>Val5</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.Complex1Impl#getVal6 <em>Val6</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

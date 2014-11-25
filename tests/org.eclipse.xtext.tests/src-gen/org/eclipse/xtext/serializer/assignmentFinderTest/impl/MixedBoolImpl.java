@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.MixedBool;
  * An implementation of the model object '<em><b>Mixed Bool</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedBoolImpl#isVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

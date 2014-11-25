@@ -18,11 +18,12 @@ import org.eclipse.xtext.grammarinheritance.inheritanceTest2.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl.ModelImpl#getIds <em>Ids</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

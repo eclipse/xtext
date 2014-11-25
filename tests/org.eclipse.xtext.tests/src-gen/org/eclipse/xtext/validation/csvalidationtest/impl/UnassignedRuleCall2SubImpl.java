@@ -16,11 +16,12 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2Sub;
  * An implementation of the model object '<em><b>Unassigned Rule Call2 Sub</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedRuleCall2SubImpl#getVal2 <em>Val2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

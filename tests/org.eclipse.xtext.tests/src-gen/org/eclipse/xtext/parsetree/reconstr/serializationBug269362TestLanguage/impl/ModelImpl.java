@@ -17,12 +17,13 @@ import org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.S
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl.ModelImpl#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl.ModelImpl#getBar <em>Bar</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

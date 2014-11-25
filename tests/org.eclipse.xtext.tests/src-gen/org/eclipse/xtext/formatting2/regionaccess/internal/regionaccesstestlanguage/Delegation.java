@@ -10,10 +10,10 @@ package org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlang
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Delegation#getDelegate <em>Delegate</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage#getDelegation()
  * @model

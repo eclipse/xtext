@@ -20,13 +20,14 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Migration;
  * An implementation of the model object '<em><b>Migration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.MigrationImpl#getFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.MigrationImpl#getAsOp <em>As Op</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.MigrationImpl#getEachOp <em>Each Op</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

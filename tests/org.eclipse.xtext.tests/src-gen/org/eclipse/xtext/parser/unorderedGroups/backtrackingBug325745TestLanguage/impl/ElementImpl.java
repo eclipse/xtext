@@ -21,13 +21,14 @@ import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguag
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.ElementImpl#getDataType <em>Data Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.ElementImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

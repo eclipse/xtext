@@ -21,12 +21,13 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Optional
  * An implementation of the model object '<em><b>Optional Calls Sub1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub1Impl#getOpt2 <em>Opt2</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.OptionalCallsSub1Impl#getOpt3 <em>Opt3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

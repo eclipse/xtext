@@ -23,11 +23,12 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestLinewrap;
  * An implementation of the model object '<em><b>Test Linewrap</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestLinewrapImpl#getItems <em>Items</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

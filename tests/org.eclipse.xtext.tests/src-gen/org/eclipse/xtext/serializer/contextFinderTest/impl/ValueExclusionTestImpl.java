@@ -18,11 +18,12 @@ import org.eclipse.xtext.serializer.contextFinderTest.ValueExclusionTestEn;
  * An implementation of the model object '<em><b>Value Exclusion Test</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ValueExclusionTestImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

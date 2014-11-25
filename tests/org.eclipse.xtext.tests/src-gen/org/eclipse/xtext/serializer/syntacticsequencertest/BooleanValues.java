@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues#isVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getBooleanValues()
  * @model

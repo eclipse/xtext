@@ -17,11 +17,12 @@ import org.eclipse.xtext.linking.bug362902.Greeting;
  * An implementation of the model object '<em><b>Greeting</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug362902.impl.GreetingImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

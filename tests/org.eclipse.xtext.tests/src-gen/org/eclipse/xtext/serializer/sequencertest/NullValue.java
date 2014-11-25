@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.NullValue#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.NullValue#getFoo <em>Foo</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getNullValue()
  * @model

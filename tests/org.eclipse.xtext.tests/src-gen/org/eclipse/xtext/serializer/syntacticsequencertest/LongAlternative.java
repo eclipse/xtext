@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal1 <em>Val1</em>}</li>
@@ -24,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal7 <em>Val7</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative#getVal8 <em>Val8</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getLongAlternative()
  * @model

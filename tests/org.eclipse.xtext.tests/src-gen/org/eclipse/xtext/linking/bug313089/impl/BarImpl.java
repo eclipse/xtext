@@ -17,11 +17,12 @@ import org.eclipse.xtext.linking.bug313089.Bug313089Package;
  * An implementation of the model object '<em><b>Bar</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug313089.impl.BarImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

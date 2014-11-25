@@ -16,11 +16,12 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.MyInt;
  * An implementation of the model object '<em><b>My Int</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.impl.MyIntImpl#getInt <em>Int</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -18,11 +18,12 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * An implementation of the model object '<em><b>Rule Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.RuleCallImpl#getRule <em>Rule</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

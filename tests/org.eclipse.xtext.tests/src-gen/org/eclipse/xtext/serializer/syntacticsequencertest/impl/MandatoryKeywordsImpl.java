@@ -17,13 +17,14 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * An implementation of the model object '<em><b>Mandatory Keywords</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl#getVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

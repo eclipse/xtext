@@ -16,11 +16,12 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Value;
  * An implementation of the model object '<em><b>Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ValueImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

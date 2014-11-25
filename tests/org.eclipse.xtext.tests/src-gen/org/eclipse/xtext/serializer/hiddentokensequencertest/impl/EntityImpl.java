@@ -17,12 +17,13 @@ import org.eclipse.xtext.serializer.hiddentokensequencertest.Hiddentokensequence
  * An implementation of the model object '<em><b>Entity</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.hiddentokensequencertest.impl.EntityImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.hiddentokensequencertest.impl.EntityImpl#getDescription <em>Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

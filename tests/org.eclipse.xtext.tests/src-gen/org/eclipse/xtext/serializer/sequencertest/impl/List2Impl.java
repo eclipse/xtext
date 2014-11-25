@@ -20,11 +20,12 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * An implementation of the model object '<em><b>List2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.List2Impl#getVal1 <em>Val1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

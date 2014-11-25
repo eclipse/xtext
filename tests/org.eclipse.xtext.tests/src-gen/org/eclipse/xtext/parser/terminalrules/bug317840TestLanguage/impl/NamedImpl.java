@@ -17,11 +17,12 @@ import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Named;
  * An implementation of the model object '<em><b>Named</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.impl.NamedImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -18,11 +18,12 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum;
  * An implementation of the model object '<em><b>Mixed Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.MixedValueImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

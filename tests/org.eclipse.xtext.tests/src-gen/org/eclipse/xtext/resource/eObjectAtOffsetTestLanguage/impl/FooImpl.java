@@ -17,11 +17,12 @@ import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Foo;
  * An implementation of the model object '<em><b>Foo</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.impl.FooImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

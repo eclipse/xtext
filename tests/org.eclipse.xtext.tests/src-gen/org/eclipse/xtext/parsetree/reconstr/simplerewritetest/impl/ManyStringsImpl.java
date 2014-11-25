@@ -18,12 +18,13 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Many Strings</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.ManyStringsImpl#getStr1 <em>Str1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.ManyStringsImpl#getStr2 <em>Str2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

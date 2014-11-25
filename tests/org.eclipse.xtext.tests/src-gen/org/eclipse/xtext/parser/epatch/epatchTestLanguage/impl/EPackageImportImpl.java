@@ -16,11 +16,12 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePack
  * An implementation of the model object '<em><b>EPackage Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.EPackageImportImpl#getNsURI <em>Ns URI</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

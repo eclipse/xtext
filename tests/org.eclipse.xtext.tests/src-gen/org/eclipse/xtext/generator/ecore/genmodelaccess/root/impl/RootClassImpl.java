@@ -20,12 +20,13 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootPackage;
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.genmodelaccess.root.impl.RootClassImpl#getAttribute1 <em>Attribute1</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.genmodelaccess.root.impl.RootClassImpl#getReference1 <em>Reference1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

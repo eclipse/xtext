@@ -19,12 +19,13 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Mult;
  * An implementation of the model object '<em><b>Mult</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.MultImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.MultImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

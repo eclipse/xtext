@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug362902.Model#getGreetings <em>Greetings</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug362902.Model#getFavourite <em>Favourite</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.bug362902.Bug362902Package#getModel()
  * @model

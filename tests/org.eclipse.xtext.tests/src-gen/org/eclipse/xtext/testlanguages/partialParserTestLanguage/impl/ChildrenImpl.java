@@ -23,11 +23,12 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTe
  * An implementation of the model object '<em><b>Children</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.ChildrenImpl#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

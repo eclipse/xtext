@@ -20,11 +20,12 @@ import org.eclipse.xtext.parser.antlr.bug378967Test.Root;
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug378967Test.impl.RootImpl#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

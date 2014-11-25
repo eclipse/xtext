@@ -12,7 +12,6 @@ import org.eclipse.xtext.linking.bug287988Test.Bug287988TestPackage;
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

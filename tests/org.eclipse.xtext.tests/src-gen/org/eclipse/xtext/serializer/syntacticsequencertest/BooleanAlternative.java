@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative#getBool <em>Bool</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getBooleanAlternative()
  * @model

@@ -20,12 +20,13 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.Spielzeug;
  * An implementation of the model object '<em><b>Spielzeug</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.SpielzeugImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.SpielzeugImpl#getFarbe <em>Farbe</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

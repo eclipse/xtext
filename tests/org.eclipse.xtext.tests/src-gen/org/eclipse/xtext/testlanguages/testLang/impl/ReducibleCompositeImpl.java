@@ -23,11 +23,12 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  * An implementation of the model object '<em><b>Reducible Composite</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.impl.ReducibleCompositeImpl#getActionFeature <em>Action Feature</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

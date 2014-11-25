@@ -17,11 +17,12 @@ import org.eclipse.xtext.parser.antlr.bug378967Test.Bug378967TestPackage;
  * An implementation of the model object '<em><b>After Obj</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug378967Test.impl.AfterObjImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

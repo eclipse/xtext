@@ -23,14 +23,15 @@ import org.eclipse.xtext.serializer.sequencertest.SimpleMultiplicities;
  * An implementation of the model object '<em><b>Simple Multiplicities</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleMultiplicitiesImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleMultiplicitiesImpl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleMultiplicitiesImpl#getVal3 <em>Val3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleMultiplicitiesImpl#getVal4 <em>Val4</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

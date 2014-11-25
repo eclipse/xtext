@@ -12,7 +12,6 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
  * An implementation of the model object '<em><b>Unassigned</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

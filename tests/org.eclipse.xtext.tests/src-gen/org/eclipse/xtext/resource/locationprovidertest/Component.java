@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.Component#getMode <em>Mode</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.Component#getTransition <em>Transition</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.Component#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage#getComponent()
  * @model

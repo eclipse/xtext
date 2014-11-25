@@ -11,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.ParserRule#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.ParserRule#getHiddenTokens <em>Hidden Tokens</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getParserRule()
  * @model

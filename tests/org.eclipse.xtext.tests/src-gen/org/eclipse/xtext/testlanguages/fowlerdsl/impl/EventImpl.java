@@ -17,13 +17,14 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
  * An implementation of the model object '<em><b>Event</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.EventImpl#isResetting <em>Resetting</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.EventImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.EventImpl#getCode <em>Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -25,11 +25,12 @@ import org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.treeTestLanguage.impl.ModelImpl#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

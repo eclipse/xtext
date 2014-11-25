@@ -17,11 +17,12 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.Foo;
  * An implementation of the model object '<em><b>Foo</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug288432Test.impl.FooImpl#getFooValue <em>Foo Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

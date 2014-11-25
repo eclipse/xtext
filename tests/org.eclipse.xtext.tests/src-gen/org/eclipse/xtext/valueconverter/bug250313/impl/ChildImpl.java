@@ -17,11 +17,12 @@ import org.eclipse.xtext.valueconverter.bug250313.Child;
  * An implementation of the model object '<em><b>Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ChildImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

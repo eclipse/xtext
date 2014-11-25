@@ -18,12 +18,13 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Consumed1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Consumed1Impl#getV1 <em>V1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.Consumed1Impl#getV2 <em>V2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

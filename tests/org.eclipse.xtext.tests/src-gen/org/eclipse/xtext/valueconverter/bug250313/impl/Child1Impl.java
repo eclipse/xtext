@@ -12,7 +12,6 @@ import org.eclipse.xtext.valueconverter.bug250313.Child1;
  * An implementation of the model object '<em><b>Child1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

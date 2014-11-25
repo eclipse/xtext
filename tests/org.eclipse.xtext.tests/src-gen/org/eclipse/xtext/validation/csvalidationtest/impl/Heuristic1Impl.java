@@ -20,13 +20,14 @@ import org.eclipse.xtext.validation.csvalidationtest.Heuristic1;
  * An implementation of the model object '<em><b>Heuristic1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl#getA <em>A</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl#getB <em>B</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Heuristic1Impl#getC <em>C</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -12,7 +12,6 @@ import org.eclipse.xtext.parser.terminalrules.unicode.UnicodePackage;
  * An implementation of the model object '<em><b>Quoted String</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

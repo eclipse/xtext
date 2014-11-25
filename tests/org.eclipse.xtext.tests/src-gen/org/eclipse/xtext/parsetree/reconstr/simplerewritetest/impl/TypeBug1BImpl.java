@@ -17,11 +17,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1B;
  * An implementation of the model object '<em><b>Type Bug1 B</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TypeBug1BImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

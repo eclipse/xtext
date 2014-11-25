@@ -17,11 +17,12 @@ import org.eclipse.xtext.generator.ecore.superPackage.SuperPackagePackage;
  * An implementation of the model object '<em><b>Another Super Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.superPackage.impl.AnotherSuperMainImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

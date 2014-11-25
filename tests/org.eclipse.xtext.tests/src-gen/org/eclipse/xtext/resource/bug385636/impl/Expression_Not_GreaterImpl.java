@@ -20,12 +20,13 @@ import org.eclipse.xtext.resource.bug385636.Expression_VariableName;
  * An implementation of the model object '<em><b>Expression Not Greater</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.impl.Expression_Not_GreaterImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.impl.Expression_Not_GreaterImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

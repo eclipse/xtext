@@ -20,12 +20,13 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Inheri
  * An implementation of the model object '<em><b>Inheriting Hiddens</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.InheritingHiddensImpl#getCalled <em>Called</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.InheritingHiddensImpl#getHidingCalled <em>Hiding Called</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

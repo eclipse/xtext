@@ -19,13 +19,14 @@ import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage;
  * An implementation of the model object '<em><b>Assigned Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.AssignedActionImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.AssignedActionImpl#getChild <em>Child</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.AssignedActionImpl#getVal2 <em>Val2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

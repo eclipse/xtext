@@ -17,11 +17,12 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Elementm
  * An implementation of the model object '<em><b>Constructor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ConstructorImpl#isKw1 <em>Kw1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

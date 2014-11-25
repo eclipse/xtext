@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
  * An implementation of the model object '<em><b>Unassigned Datatype</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.UnassignedDatatypeImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

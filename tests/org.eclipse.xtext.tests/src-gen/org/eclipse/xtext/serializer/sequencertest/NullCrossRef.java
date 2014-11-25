@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef#getRef <em>Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.NullCrossRef#getFoo <em>Foo</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getNullCrossRef()
  * @model

@@ -20,13 +20,14 @@ import org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.impl.ModelImpl#getFix <em>Fix</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.impl.ModelImpl#getError <em>Error</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.impl.ModelImpl#getTick <em>Tick</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

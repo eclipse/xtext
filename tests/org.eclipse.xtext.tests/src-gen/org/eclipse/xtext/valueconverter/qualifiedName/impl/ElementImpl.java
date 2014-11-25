@@ -17,11 +17,12 @@ import org.eclipse.xtext.valueconverter.qualifiedName.QualifiedNamePackage;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.valueconverter.qualifiedName.impl.ElementImpl#getQualifiedName <em>Qualified Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

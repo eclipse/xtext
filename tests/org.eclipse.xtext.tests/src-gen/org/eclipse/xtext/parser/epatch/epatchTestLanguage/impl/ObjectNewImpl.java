@@ -18,12 +18,13 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectNew;
  * An implementation of the model object '<em><b>Object New</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectNewImpl#getImport <em>Import</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectNewImpl#getImpFrag <em>Imp Frag</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

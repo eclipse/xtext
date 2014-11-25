@@ -10,11 +10,11 @@ package org.eclipse.xtext.resource.bug385636;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.Expression_Smaller#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.Expression_Smaller#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.resource.bug385636.Bug385636Package#getExpression_Smaller()
  * @model

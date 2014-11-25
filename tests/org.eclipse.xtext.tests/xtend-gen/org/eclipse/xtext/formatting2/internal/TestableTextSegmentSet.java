@@ -45,11 +45,24 @@ public class TestableTextSegmentSet {
     String _join = IterableExtensions.join(this.issues, ", ");
     _builder.append(_join, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("set=[");
-    String _string = this.set.toString();
+    _builder.append("set=");
+    final Function1<ITextSegment, String> _function = new Function1<ITextSegment, String>() {
+      public String apply(final ITextSegment it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("[");
+        int _offset = it.getOffset();
+        _builder.append(_offset, "");
+        _builder.append(",");
+        int _length = it.getLength();
+        _builder.append(_length, "");
+        _builder.append("]");
+        return _builder.toString();
+      }
+    };
+    Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(this.set, _function);
+    String _string = _map.toString();
     String _replace = _string.replace("\n", ", ");
     _builder.append(_replace, "");
-    _builder.append("]");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }

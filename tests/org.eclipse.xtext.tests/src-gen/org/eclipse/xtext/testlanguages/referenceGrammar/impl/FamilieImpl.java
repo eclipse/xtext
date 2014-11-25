@@ -26,14 +26,15 @@ import org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage;
  * An implementation of the model object '<em><b>Familie</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.FamilieImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.FamilieImpl#getMutter <em>Mutter</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.FamilieImpl#getVater <em>Vater</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.referenceGrammar.impl.FamilieImpl#getKinder <em>Kinder</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

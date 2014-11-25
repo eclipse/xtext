@@ -23,12 +23,13 @@ import org.eclipse.xtext.validation.csvalidationtest.List3;
  * An implementation of the model object '<em><b>List3</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.List3Impl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.List3Impl#getVal2 <em>Val2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

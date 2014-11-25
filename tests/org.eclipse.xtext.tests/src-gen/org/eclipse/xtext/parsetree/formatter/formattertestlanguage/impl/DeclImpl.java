@@ -18,12 +18,13 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Formattertest
  * An implementation of the model object '<em><b>Decl</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DeclImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DeclImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

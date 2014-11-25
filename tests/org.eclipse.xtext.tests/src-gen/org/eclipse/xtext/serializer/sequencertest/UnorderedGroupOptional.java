@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVa2 <em>Va2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional#getVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedGroupOptional()
  * @model

@@ -20,11 +20,12 @@ import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReference;
  * An implementation of the model object '<em><b>Single Containment Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SingleContainmentReferenceImpl#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

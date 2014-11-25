@@ -13,13 +13,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal3 <em>Val3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternative#getVal4 <em>Val4</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedAlternative()
  * @model

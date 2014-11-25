@@ -18,13 +18,14 @@ import org.eclipse.xtext.linking.bug287988Test.Bug287988TestPackage;
  * An implementation of the model object '<em><b>Base Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug287988Test.impl.BaseAttributeImpl#getTypeRef <em>Type Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug287988Test.impl.BaseAttributeImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug287988Test.impl.BaseAttributeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

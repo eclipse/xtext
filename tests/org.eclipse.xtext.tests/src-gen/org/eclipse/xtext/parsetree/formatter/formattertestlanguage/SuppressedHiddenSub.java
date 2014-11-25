@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.SuppressedHiddenSub#getIdval <em>Idval</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage#getSuppressedHiddenSub()
  * @model

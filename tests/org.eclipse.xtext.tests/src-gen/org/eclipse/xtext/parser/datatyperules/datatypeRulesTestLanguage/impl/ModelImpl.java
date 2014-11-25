@@ -19,7 +19,9 @@ import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getValue <em>Value</em>}</li>
@@ -27,7 +29,6 @@ import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getDots <em>Dots</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getDouble <em>Double</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

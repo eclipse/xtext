@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * An implementation of the model object '<em><b>Mandatory Many Transition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryManyTransitionImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

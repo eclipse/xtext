@@ -20,11 +20,12 @@ import org.eclipse.xtext.serializer.hiddentokensequencertest.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.hiddentokensequencertest.impl.ModelImpl#getDomainModel <em>Domain Model</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

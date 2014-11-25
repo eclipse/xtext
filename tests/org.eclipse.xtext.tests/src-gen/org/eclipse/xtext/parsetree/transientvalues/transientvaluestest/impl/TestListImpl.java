@@ -18,11 +18,12 @@ import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Transient
  * An implementation of the model object '<em><b>Test List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl.TestListImpl#getItem <em>Item</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

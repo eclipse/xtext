@@ -20,11 +20,12 @@ import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.MultiValue;
  * An implementation of the model object '<em><b>Multi Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.impl.MultiValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

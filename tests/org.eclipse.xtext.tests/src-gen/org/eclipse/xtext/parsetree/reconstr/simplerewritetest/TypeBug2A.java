@@ -10,10 +10,10 @@ package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug2A#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage#getTypeBug2A()
  * @model

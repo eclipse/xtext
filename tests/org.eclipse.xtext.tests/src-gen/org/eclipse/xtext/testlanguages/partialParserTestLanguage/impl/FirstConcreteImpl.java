@@ -18,11 +18,12 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
  * An implementation of the model object '<em><b>First Concrete</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.FirstConcreteImpl#getReferencedContainer <em>Referenced Container</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

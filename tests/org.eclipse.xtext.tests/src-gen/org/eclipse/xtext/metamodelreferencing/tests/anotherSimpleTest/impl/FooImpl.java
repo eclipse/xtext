@@ -28,12 +28,13 @@ import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.Foo;
  * An implementation of the model object '<em><b>Foo</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.impl.FooImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.impl.FooImpl#getNameRefs <em>Name Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

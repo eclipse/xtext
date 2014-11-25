@@ -14,7 +14,6 @@ import org.eclipse.xtext.testlanguages.actionLang.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

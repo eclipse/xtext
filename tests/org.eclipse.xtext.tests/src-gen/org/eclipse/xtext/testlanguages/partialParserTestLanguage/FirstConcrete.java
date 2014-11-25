@@ -10,10 +10,10 @@ package org.eclipse.xtext.testlanguages.partialParserTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.FirstConcrete#getReferencedContainer <em>Referenced Container</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage#getFirstConcrete()
  * @model

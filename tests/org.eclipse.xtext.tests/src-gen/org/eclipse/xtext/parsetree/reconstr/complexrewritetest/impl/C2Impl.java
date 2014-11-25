@@ -19,11 +19,12 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyC;
  * An implementation of the model object '<em><b>C2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.C2Impl#getY <em>Y</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

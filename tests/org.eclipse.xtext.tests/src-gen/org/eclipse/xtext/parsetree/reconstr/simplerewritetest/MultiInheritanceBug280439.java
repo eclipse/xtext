@@ -10,10 +10,10 @@ package org.eclipse.xtext.parsetree.reconstr.simplerewritetest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.MultiInheritanceBug280439#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage#getMultiInheritanceBug280439()
  * @model

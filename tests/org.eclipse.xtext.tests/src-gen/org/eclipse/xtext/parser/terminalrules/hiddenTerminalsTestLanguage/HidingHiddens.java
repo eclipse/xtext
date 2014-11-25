@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HidingHiddens#getSpace <em>Space</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HidingHiddens#getCalled <em>Called</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.HiddenTerminalsTestLanguagePackage#getHidingHiddens()
  * @model

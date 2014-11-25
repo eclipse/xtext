@@ -18,11 +18,12 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.TestEnum;
  * An implementation of the model object '<em><b>Enum Val</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.EnumValImpl#getEn <em>En</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

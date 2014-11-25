@@ -13,11 +13,11 @@ import org.eclipse.xtext.generator.ecore.first.First;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.second.Second#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.second.Second#getFirst <em>First</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.ecore.second.SecondPackage#getSecond()
  * @model

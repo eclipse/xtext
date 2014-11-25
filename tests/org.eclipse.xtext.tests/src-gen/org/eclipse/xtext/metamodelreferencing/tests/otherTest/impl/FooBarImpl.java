@@ -17,11 +17,12 @@ import org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage;
  * An implementation of the model object '<em><b>Foo Bar</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.otherTest.impl.FooBarImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

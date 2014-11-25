@@ -17,11 +17,12 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Inheri
  * An implementation of the model object '<em><b>Inheriting Hiddens Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.InheritingHiddensCallImpl#isValid <em>Valid</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -12,7 +12,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeChild2;
  * An implementation of the model object '<em><b>Nested Type Child2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

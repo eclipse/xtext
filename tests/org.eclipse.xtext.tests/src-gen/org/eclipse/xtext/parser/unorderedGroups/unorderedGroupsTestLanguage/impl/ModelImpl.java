@@ -29,7 +29,9 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Unor
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#isFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#isSecond <em>Second</em>}</li>
@@ -43,7 +45,6 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Unor
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#getSerialized <em>Serialized</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#getNestedModel <em>Nested Model</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

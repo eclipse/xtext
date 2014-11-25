@@ -18,13 +18,14 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Duplicate Bug284491</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.DuplicateBug284491Impl#isTransient <em>Transient</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

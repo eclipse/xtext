@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSecond <em>Second</em>}</li>
@@ -21,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isSeventh <em>Seventh</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.keywords.keywordsTestLanguage.Model#isEighth <em>Eighth</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage#getModel()
  * @model

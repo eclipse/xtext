@@ -12,7 +12,6 @@ import org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage;
  * An implementation of the model object '<em><b>Another Super Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

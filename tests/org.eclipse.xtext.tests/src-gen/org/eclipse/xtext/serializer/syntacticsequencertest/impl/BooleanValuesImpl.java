@@ -17,13 +17,14 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * An implementation of the model object '<em><b>Boolean Values</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl#isVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl#isVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanValuesImpl#isVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

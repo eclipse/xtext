@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.ignoreCaseImportsTest.Import#getImportURI <em>Import URI</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage#getImport()
  * @model

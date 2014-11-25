@@ -23,11 +23,12 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Expression;
  * An implementation of the model object '<em><b>Add</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.AddImpl#getAddOperands <em>Add Operands</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

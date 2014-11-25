@@ -14,7 +14,6 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Field;
  * An implementation of the model object '<em><b>Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

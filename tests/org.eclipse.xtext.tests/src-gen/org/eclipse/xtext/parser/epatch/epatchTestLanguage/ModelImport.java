@@ -10,10 +10,10 @@ package org.eclipse.xtext.parser.epatch.epatchTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.ModelImport#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.epatch.epatchTestLanguage.EpatchTestLanguagePackage#getModelImport()
  * @model

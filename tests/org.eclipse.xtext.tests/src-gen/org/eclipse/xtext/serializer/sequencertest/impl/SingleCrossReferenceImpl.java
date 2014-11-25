@@ -18,12 +18,13 @@ import org.eclipse.xtext.serializer.sequencertest.SingleCrossReference;
  * An implementation of the model object '<em><b>Single Cross Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SingleCrossReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.SingleCrossReferenceImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

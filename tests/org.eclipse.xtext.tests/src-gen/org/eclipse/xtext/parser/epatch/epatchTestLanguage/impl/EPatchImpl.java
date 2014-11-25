@@ -29,14 +29,15 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef;
  * An implementation of the model object '<em><b>EPatch</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.EPatchImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.EPatchImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.EPatchImpl#getResources <em>Resources</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.EPatchImpl#getObjects <em>Objects</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

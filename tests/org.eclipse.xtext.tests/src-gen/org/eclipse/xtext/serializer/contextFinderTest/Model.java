@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getModel <em>Model</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getAttributeExclusion <em>Attribute Exclusion</em>}</li>
@@ -23,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusion <em>Node Exclusion</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNodeExclusionList <em>Node Exclusion List</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel()
  * @model

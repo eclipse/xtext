@@ -12,7 +12,6 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  * An implementation of the model object '<em><b>Look Ahead0</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -20,7 +20,9 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedResource;
  * An implementation of the model object '<em><b>Named Resource</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedResourceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedResourceImpl#getLeftUri <em>Left Uri</em>}</li>
@@ -28,7 +30,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedResource;
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedResourceImpl#getRightUri <em>Right Uri</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedResourceImpl#getRightRoot <em>Right Root</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

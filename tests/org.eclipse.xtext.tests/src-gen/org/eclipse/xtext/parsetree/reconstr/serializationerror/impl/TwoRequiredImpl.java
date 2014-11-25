@@ -16,12 +16,13 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
  * An implementation of the model object '<em><b>Two Required</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.TwoRequiredImpl#getOne <em>One</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.TwoRequiredImpl#getTwo <em>Two</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -16,12 +16,13 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub;
  * An implementation of the model object '<em><b>Unassigned Action2 Sub</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl#getVal2 <em>Val2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

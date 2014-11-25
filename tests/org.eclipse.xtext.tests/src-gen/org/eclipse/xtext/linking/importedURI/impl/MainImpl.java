@@ -26,12 +26,13 @@ import org.eclipse.xtext.linking.importedURI.Type;
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.importedURI.impl.MainImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.importedURI.impl.MainImpl#getTypes <em>Types</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

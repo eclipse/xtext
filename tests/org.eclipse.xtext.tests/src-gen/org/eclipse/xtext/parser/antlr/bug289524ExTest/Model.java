@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug289524ExTest.Model#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.antlr.bug289524ExTest.Bug289524ExTestPackage#getModel()
  * @model

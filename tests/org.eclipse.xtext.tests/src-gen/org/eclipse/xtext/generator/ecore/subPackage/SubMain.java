@@ -15,11 +15,11 @@ import org.eclipse.xtext.generator.ecore.superPackage.SuperMain;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.subPackage.SubMain#getSuperMains <em>Super Mains</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.subPackage.SubMain#getAnother <em>Another</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage#getSubMain()
  * @model

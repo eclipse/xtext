@@ -23,12 +23,13 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * An implementation of the model object '<em><b>Parser Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.ParserRuleImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.ParserRuleImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

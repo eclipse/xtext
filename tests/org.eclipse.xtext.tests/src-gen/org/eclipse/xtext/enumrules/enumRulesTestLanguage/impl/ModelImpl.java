@@ -20,12 +20,13 @@ import org.eclipse.xtext.enumrules.enums.ExistingEnum;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.enumRulesTestLanguage.impl.ModelImpl#getExisting <em>Existing</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enumRulesTestLanguage.impl.ModelImpl#getGenerated <em>Generated</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

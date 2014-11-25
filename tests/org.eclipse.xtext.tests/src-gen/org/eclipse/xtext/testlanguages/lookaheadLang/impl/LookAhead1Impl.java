@@ -19,12 +19,13 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  * An implementation of the model object '<em><b>Look Ahead1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead1Impl#getY <em>Y</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.impl.LookAhead1Impl#getZ <em>Z</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

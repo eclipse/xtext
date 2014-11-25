@@ -13,11 +13,11 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedCla
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootClass#getAttribute1 <em>Attribute1</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootClass#getReference1 <em>Reference1</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootPackage#getRootClass()
  * @model

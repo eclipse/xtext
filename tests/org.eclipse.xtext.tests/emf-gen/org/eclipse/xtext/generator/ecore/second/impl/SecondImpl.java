@@ -20,12 +20,13 @@ import org.eclipse.xtext.generator.ecore.second.SecondPackage;
  * An implementation of the model object '<em><b>Second</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.second.impl.SecondImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.second.impl.SecondImpl#getFirst <em>First</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -16,12 +16,13 @@ import org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.Transient
  * An implementation of the model object '<em><b>Test Required</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl.TestRequiredImpl#getRequired1 <em>Required1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.impl.TestRequiredImpl#getRequired2 <em>Required2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

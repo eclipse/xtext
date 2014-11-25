@@ -16,13 +16,14 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Formattertest
  * An implementation of the model object '<em><b>Datatypes</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.DatatypesImpl#getVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

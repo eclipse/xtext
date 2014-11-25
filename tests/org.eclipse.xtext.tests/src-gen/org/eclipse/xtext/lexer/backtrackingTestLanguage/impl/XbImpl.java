@@ -17,12 +17,13 @@ import org.eclipse.xtext.lexer.backtrackingTestLanguage.Xb;
  * An implementation of the model object '<em><b>Xb</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.XbImpl#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.impl.XbImpl#getY <em>Y</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

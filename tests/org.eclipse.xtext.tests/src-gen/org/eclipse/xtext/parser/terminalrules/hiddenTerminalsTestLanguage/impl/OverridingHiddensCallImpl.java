@@ -23,12 +23,13 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Overri
  * An implementation of the model object '<em><b>Overriding Hiddens Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.OverridingHiddensCallImpl#getSpaces <em>Spaces</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.OverridingHiddensCallImpl#isValid <em>Valid</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

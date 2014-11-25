@@ -10,10 +10,10 @@ package org.eclipse.xtext.parsetree.unassignedtext.unassignedtext;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.CaseInsensitiveKeywordRule#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage#getCaseInsensitiveKeywordRule()
  * @model

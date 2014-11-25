@@ -10,11 +10,11 @@ package org.eclipse.xtext.serializer.syntacticsequencertest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getAdd0()
  * @model

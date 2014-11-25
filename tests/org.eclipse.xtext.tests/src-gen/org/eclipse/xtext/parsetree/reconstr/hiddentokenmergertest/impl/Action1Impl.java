@@ -26,12 +26,13 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
  * An implementation of the model object '<em><b>Action1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Impl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.Action1Impl#getActions2 <em>Actions2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

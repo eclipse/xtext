@@ -22,13 +22,14 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TwoNumbers;
  * An implementation of the model object '<em><b>Two Numbers</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TwoNumbersImpl#getNum1 <em>Num1</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TwoNumbersImpl#getNum2 <em>Num2</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.TwoNumbersImpl#getNum3 <em>Num3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

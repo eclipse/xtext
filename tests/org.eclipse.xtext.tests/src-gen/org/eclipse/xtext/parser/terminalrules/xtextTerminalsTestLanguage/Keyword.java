@@ -10,10 +10,10 @@ package org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.Keyword#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTerminalsTestLanguagePackage#getKeyword()
  * @model

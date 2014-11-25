@@ -28,13 +28,14 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedObject;
  * An implementation of the model object '<em><b>Named Object</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedObjectImpl#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.NamedObjectImpl#getLeftMig <em>Left Mig</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

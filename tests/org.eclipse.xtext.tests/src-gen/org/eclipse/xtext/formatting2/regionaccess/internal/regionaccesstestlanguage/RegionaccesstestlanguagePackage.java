@@ -38,7 +38,7 @@ public interface RegionaccesstestlanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://simple/regionaccesstestlanguage";
+  String eNS_URI = "http://formatter2/regionaccesstestlanguage";
 
   /**
    * The package namespace name.

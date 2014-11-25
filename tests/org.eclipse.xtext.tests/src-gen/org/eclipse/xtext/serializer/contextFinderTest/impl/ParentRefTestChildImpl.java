@@ -19,11 +19,12 @@ import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
  * An implementation of the model object '<em><b>Parent Ref Test Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTestChildImpl#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

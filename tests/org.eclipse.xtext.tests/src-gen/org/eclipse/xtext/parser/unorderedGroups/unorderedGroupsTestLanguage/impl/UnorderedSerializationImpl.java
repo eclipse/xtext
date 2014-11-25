@@ -23,7 +23,9 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Unor
  * An implementation of the model object '<em><b>Unordered Serialization</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedSerializationImpl#isFirst <em>First</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedSerializationImpl#isSecond <em>Second</em>}</li>
@@ -32,7 +34,6 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Unor
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedSerializationImpl#getFirstAsList <em>First As List</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedSerializationImpl#getSecondAsList <em>Second As List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

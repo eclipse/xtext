@@ -16,11 +16,12 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FqnObj;
  * An implementation of the model object '<em><b>Fqn Obj</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.FqnObjImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

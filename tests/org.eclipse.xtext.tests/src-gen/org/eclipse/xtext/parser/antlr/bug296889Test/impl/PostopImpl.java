@@ -19,12 +19,13 @@ import org.eclipse.xtext.parser.antlr.bug296889Test.Postop;
  * An implementation of the model object '<em><b>Postop</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889Test.impl.PostopImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889Test.impl.PostopImpl#getFunctionName <em>Function Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

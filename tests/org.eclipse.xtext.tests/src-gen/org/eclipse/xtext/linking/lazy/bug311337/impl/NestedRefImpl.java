@@ -19,11 +19,12 @@ import org.eclipse.xtext.linking.lazy.bug311337.Reference;
  * An implementation of the model object '<em><b>Nested Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.NestedRefImpl#getLeft <em>Left</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

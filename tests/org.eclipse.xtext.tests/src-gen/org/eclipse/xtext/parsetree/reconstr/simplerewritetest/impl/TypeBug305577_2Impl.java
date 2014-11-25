@@ -12,7 +12,6 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug305577_2;
  * An implementation of the model object '<em><b>Type Bug305577 2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

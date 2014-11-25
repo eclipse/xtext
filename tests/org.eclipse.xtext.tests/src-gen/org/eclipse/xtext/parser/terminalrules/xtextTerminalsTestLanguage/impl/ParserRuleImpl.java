@@ -23,12 +23,13 @@ import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTe
  * An implementation of the model object '<em><b>Parser Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.ParserRuleImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.impl.ParserRuleImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

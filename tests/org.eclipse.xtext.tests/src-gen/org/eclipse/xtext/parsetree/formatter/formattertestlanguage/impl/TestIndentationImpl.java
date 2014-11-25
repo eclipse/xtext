@@ -26,12 +26,13 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentati
  * An implementation of the model object '<em><b>Test Indentation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#getItems <em>Items</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.TestIndentationImpl#isSemi <em>Semi</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

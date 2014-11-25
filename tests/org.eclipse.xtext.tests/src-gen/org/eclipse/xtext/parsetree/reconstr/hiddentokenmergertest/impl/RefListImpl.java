@@ -24,12 +24,13 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefObj;
  * An implementation of the model object '<em><b>Ref List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.RefListImpl#getObjs <em>Objs</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.RefListImpl#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

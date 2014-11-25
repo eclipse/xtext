@@ -14,7 +14,6 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
  * An implementation of the model object '<em><b>Unassigned Rule Call2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

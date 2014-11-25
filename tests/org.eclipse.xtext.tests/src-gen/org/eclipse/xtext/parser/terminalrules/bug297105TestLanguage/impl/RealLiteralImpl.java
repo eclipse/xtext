@@ -12,7 +12,6 @@ import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.RealLiteral;
  * An implementation of the model object '<em><b>Real Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

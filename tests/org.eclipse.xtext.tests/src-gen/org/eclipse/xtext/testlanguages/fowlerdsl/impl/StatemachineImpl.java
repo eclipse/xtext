@@ -27,13 +27,14 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.Statemachine;
  * An implementation of the model object '<em><b>Statemachine</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.StatemachineImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.StatemachineImpl#getCommands <em>Commands</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.fowlerdsl.impl.StatemachineImpl#getStates <em>States</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -14,7 +14,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElemen
  * An implementation of the model object '<em><b>My Named Element 03</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

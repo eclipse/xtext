@@ -14,7 +14,6 @@ import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterObject;
  * An implementation of the model object '<em><b>Parameter Object</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

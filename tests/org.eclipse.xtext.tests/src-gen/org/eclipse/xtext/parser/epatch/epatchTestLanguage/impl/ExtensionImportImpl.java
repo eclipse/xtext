@@ -18,11 +18,12 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ExtensionImport;
  * An implementation of the model object '<em><b>Extension Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ExtensionImportImpl#getPath <em>Path</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

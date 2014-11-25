@@ -21,14 +21,15 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupValDelegate;
  * An implementation of the model object '<em><b>Unordered Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl#getVal3 <em>Val3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.UnorderedGroupImpl#getVal4 <em>Val4</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -17,11 +17,12 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.EnumBool;
  * An implementation of the model object '<em><b>Enum Bool</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.EnumBoolImpl#isEn <em>En</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

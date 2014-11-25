@@ -16,11 +16,12 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ResourceImport;
  * An implementation of the model object '<em><b>Resource Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ResourceImportImpl#getUri <em>Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -19,11 +19,12 @@ import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion;
  * An implementation of the model object '<em><b>Node Exclusion</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NodeExclusionImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

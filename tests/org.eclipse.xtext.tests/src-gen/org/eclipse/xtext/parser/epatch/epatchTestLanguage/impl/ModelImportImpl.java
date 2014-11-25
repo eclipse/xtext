@@ -16,11 +16,12 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ModelImport;
  * An implementation of the model object '<em><b>Model Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ModelImportImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

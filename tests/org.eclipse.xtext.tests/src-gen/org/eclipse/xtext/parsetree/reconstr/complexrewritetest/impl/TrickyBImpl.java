@@ -23,12 +23,13 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyB;
  * An implementation of the model object '<em><b>Tricky B</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyBImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyBImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

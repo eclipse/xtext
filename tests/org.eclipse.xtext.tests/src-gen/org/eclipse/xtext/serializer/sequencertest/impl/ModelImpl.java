@@ -43,7 +43,9 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX1 <em>X1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX2 <em>X2</em>}</li>
@@ -75,7 +77,6 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX31 <em>X31</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX32 <em>X32</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

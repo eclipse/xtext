@@ -20,11 +20,12 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.Test;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.serializationerror.impl.ModelImpl#getTest <em>Test</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

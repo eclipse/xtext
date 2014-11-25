@@ -21,13 +21,14 @@ import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.impl.ModelImpl#getIntValues <em>Int Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.impl.ModelImpl#getDoubleValues <em>Double Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.impl.ModelImpl#getDateValues <em>Date Values</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

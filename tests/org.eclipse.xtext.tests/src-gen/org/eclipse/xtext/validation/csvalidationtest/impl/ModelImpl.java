@@ -46,7 +46,9 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX1 <em>X1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX2 <em>X2</em>}</li>
@@ -77,7 +79,6 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX27 <em>X27</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX28 <em>X28</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

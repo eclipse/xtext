@@ -16,11 +16,12 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  * An implementation of the model object '<em><b>Terminal Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.impl.TerminalElementImpl#getStringFeature <em>String Feature</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

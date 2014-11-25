@@ -18,13 +18,14 @@ import org.eclipse.xtext.enumrules.multiRuleenums.MyEnum;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.multiRuleenums.impl.ModelImpl#getA <em>A</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.multiRuleenums.impl.ModelImpl#getB <em>B</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.multiRuleenums.impl.ModelImpl#getC <em>C</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

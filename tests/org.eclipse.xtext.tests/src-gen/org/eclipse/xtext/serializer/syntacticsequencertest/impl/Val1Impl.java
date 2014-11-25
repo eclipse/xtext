@@ -16,11 +16,12 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Val1;
  * An implementation of the model object '<em><b>Val1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Val1Impl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

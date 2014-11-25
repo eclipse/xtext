@@ -25,11 +25,12 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
  * An implementation of the model object '<em><b>File</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.index.indexTestLanguage.impl.FileImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

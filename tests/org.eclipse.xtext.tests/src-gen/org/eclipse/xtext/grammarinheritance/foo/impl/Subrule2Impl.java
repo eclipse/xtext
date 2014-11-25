@@ -18,11 +18,12 @@ import org.eclipse.xtext.grammarinheritance.foo.Subrule2;
  * An implementation of the model object '<em><b>Subrule2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.impl.Subrule2Impl#getSub2 <em>Sub2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

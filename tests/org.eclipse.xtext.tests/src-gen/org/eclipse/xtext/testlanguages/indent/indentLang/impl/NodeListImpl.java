@@ -25,11 +25,12 @@ import org.eclipse.xtext.testlanguages.indent.indentLang.NodeList;
  * An implementation of the model object '<em><b>Node List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.indent.indentLang.impl.NodeListImpl#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

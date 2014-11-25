@@ -50,7 +50,7 @@ public class LiveContainerBuilderIntegerationTestLanguageSwitch<T> extends Switc
    * Checks whether this is a switch for the given package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @parameter ePackage the package in question.
+   * @param ePackage the package in question.
    * @return whether this is a switch for the given package.
    * @generated
    */

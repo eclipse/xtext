@@ -10,11 +10,11 @@ package org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug#getReturn <em>Return</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBug#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage#getEnumBug()
  * @model

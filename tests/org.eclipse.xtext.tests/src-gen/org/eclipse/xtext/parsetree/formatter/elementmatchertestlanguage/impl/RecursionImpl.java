@@ -12,7 +12,6 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Recursio
  * An implementation of the model object '<em><b>Recursion</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -14,7 +14,6 @@ import org.eclipse.xtext.linking.bug289059Test.UnassignedAction;
  * An implementation of the model object '<em><b>Unassigned Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

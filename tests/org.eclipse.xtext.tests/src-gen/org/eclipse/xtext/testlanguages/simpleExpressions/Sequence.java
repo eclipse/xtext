@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.Sequence#getExpressions <em>Expressions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackage#getSequence()
  * @model

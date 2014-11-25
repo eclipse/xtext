@@ -11,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList#getObjs <em>Objs</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage#getRefList()
  * @model

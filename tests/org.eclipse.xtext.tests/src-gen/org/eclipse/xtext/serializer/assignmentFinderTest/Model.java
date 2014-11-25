@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getKeywordVal <em>Keyword Val</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getTerminalVal <em>Terminal Val</em>}</li>
@@ -23,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getContainmentRef <em>Containment Ref</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.Model#getCrossRef <em>Cross Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage#getModel()
  * @model

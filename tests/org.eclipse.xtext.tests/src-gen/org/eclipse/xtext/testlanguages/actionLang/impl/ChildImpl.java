@@ -16,11 +16,12 @@ import org.eclipse.xtext.testlanguages.actionLang.Child;
  * An implementation of the model object '<em><b>Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang.impl.ChildImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

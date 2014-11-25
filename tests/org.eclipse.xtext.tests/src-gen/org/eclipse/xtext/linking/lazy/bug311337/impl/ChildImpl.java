@@ -19,12 +19,13 @@ import org.eclipse.xtext.linking.lazy.bug311337.Definition;
  * An implementation of the model object '<em><b>Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.ChildImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.ChildImpl#getLink <em>Link</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -29,12 +29,13 @@ import org.eclipse.xtext.generator.ecore.superPackage.SuperMain;
  * An implementation of the model object '<em><b>Sub Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.subPackage.impl.SubMainImpl#getSuperMains <em>Super Mains</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.ecore.subPackage.impl.SubMainImpl#getAnother <em>Another</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

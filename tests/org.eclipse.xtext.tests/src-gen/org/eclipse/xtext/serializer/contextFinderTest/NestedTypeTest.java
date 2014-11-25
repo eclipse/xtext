@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest#getNested <em>Nested</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getNestedTypeTest()
  * @model

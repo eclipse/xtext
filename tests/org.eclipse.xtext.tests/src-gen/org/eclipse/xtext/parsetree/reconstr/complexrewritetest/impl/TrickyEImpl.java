@@ -20,13 +20,14 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyE;
  * An implementation of the model object '<em><b>Tricky E</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyEImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyEImpl#getFoo <em>Foo</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyEImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

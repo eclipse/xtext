@@ -17,11 +17,12 @@ import org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.M
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.impl.ModelImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

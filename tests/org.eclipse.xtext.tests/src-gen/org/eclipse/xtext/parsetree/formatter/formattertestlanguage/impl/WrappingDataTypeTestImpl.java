@@ -16,11 +16,12 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.WrappingDataT
  * An implementation of the model object '<em><b>Wrapping Data Type Test</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.WrappingDataTypeTestImpl#getDatatype <em>Datatype</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

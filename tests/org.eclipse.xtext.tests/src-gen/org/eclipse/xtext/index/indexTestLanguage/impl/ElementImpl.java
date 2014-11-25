@@ -14,7 +14,6 @@ import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

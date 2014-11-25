@@ -17,11 +17,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Abstract Multi1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.AbstractMulti1Impl#getM1 <em>M1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,11 +20,12 @@ import org.eclipse.xtext.grammarinheritance.foo.FooPackage;
  * An implementation of the model object '<em><b>Call Extended Parser Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.impl.CallExtendedParserRuleImpl#getCall <em>Call</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

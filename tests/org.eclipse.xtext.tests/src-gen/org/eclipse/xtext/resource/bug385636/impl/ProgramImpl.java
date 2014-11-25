@@ -28,12 +28,13 @@ import org.eclipse.xtext.resource.bug385636.Program;
  * An implementation of the model object '<em><b>Program</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.impl.ProgramImpl#getDefine <em>Define</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.impl.ProgramImpl#getStatements <em>Statements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

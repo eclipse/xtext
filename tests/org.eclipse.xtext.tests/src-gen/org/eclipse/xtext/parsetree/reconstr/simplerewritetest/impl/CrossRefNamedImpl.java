@@ -17,11 +17,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Cross Ref Named</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.CrossRefNamedImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

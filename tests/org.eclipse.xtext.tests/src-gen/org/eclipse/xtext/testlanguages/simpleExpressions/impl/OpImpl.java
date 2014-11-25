@@ -26,12 +26,13 @@ import org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackag
  * An implementation of the model object '<em><b>Op</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.impl.OpImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.simpleExpressions.impl.OpImpl#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

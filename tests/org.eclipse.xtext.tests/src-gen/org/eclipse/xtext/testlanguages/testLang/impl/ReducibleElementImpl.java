@@ -12,7 +12,6 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  * An implementation of the model object '<em><b>Reducible Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

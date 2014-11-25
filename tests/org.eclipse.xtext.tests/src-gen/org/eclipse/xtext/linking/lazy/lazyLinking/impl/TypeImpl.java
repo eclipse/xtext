@@ -29,7 +29,9 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
  * An implementation of the model object '<em><b>Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getExtends <em>Extends</em>}</li>
@@ -38,7 +40,6 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getUnresolvedProxyProperty <em>Unresolved Proxy Property</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.lazy.lazyLinking.impl.TypeImpl#getSubtypes <em>Subtypes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

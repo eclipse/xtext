@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.actionLang2.ORing#getDisjuncts <em>Disjuncts</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.actionLang2.ActionLang2Package#getORing()
  * @model

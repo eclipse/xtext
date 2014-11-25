@@ -10,10 +10,10 @@ package org.eclipse.xtext.testlanguages.testLang;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.TerminalElement#getStringFeature <em>String Feature</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.testLang.TestLangPackage#getTerminalElement()
  * @model

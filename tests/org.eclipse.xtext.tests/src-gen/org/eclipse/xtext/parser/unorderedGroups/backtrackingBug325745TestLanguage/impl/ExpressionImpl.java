@@ -27,13 +27,14 @@ import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguag
  * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.ExpressionImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.ExpressionImpl#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguage.impl.ExpressionImpl#getPostfix <em>Postfix</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -19,12 +19,13 @@ import org.eclipse.xtext.parser.antlr.bug296889Test.Preop;
  * An implementation of the model object '<em><b>Preop</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889Test.impl.PreopImpl#getFunctionName <em>Function Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.antlr.bug296889Test.impl.PreopImpl#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

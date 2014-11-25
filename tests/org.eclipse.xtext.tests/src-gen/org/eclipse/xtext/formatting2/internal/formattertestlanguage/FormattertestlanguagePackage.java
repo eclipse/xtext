@@ -37,7 +37,7 @@ public interface FormattertestlanguagePackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_URI = "http://simple/formattertestlanguage";
+  String eNS_URI = "http://formatter2/formattertestlanguage";
 
   /**
    * The package namespace name.

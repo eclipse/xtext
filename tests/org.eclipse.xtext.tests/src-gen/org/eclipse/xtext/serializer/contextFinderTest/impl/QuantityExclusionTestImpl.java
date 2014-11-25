@@ -17,12 +17,13 @@ import org.eclipse.xtext.serializer.contextFinderTest.QuantityExclusionTest;
  * An implementation of the model object '<em><b>Quantity Exclusion Test</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.QuantityExclusionTestImpl#getAttr1 <em>Attr1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.QuantityExclusionTestImpl#getAttr2 <em>Attr2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

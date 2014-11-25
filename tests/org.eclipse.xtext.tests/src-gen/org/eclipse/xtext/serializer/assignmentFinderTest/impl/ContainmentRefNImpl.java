@@ -17,12 +17,13 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRefN;
  * An implementation of the model object '<em><b>Containment Ref N</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ContainmentRefNImpl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ContainmentRefNImpl#getVal2 <em>Val2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

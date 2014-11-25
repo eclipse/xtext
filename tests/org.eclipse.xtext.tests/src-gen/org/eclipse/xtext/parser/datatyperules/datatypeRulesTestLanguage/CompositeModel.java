@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.CompositeModel#getModel <em>Model</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage#getCompositeModel()
  * @model

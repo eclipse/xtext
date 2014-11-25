@@ -17,12 +17,13 @@ import org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub;
  * An implementation of the model object '<em><b>Transient Object Sub</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl#getVal3 <em>Val3</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

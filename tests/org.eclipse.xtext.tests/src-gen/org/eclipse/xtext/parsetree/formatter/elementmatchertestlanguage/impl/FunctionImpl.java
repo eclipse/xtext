@@ -26,12 +26,13 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Function
  * An implementation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.FunctionImpl#getFunc <em>Func</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.FunctionImpl#getParam <em>Param</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

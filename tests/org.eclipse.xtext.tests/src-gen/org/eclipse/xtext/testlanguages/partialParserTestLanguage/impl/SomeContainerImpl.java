@@ -28,13 +28,14 @@ import org.eclipse.xtext.testlanguages.partialParserTestLanguage.SomeContainer;
  * An implementation of the model object '<em><b>Some Container</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl#getNested <em>Nested</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.partialParserTestLanguage.impl.SomeContainerImpl#getContent <em>Content</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

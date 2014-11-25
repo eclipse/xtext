@@ -94,6 +94,8 @@ public enum EnumBug310435Enum implements Enumerator
    * Returns the '<em><b>Enum Bug310435 Enum</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param literal the literal.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBug310435Enum get(String literal)
@@ -113,6 +115,8 @@ public enum EnumBug310435Enum implements Enumerator
    * Returns the '<em><b>Enum Bug310435 Enum</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param name the name.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBug310435Enum getByName(String name)
@@ -132,6 +136,8 @@ public enum EnumBug310435Enum implements Enumerator
    * Returns the '<em><b>Enum Bug310435 Enum</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param value the integer value.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static EnumBug310435Enum get(int value)

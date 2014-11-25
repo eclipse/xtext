@@ -25,11 +25,12 @@ import org.eclipse.xtext.linking.lazy.bug311337.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.impl.ModelImpl#getDef <em>Def</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

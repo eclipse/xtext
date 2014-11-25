@@ -28,13 +28,14 @@ import org.eclipse.xtext.resource.locationprovidertest.Transition;
  * An implementation of the model object '<em><b>Component</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ComponentImpl#getMode <em>Mode</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ComponentImpl#getTransition <em>Transition</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ComponentImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

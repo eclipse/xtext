@@ -22,7 +22,9 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedObject;
  * An implementation of the model object '<em><b>Assignment Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.AssignmentValueImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.AssignmentValueImpl#getRefObject <em>Ref Object</em>}</li>
@@ -34,7 +36,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.NamedObject;
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.AssignmentValueImpl#getIndex <em>Index</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.AssignmentValueImpl#getKeyword <em>Keyword</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

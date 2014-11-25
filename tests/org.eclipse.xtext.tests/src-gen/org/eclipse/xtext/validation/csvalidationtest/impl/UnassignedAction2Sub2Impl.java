@@ -12,7 +12,6 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub2;
  * An implementation of the model object '<em><b>Unassigned Action2 Sub2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

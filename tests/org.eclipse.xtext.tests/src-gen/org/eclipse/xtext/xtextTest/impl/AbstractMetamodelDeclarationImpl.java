@@ -19,12 +19,13 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * An implementation of the model object '<em><b>Abstract Metamodel Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractMetamodelDeclarationImpl#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractMetamodelDeclarationImpl#getAlias <em>Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

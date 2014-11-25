@@ -26,13 +26,14 @@ import org.eclipse.xtext.linking.ignoreCaseLinkingTest.IgnoreCaseLinkingTestPack
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.ignoreCaseLinkingTest.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.ignoreCaseLinkingTest.impl.ElementImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.ignoreCaseLinkingTest.impl.ElementImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

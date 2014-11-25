@@ -26,12 +26,13 @@ import org.eclipse.xtext.parsetree.reconstr.partialserializationtest.Partialseri
  * An implementation of the model object '<em><b>Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.partialserializationtest.impl.NodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.partialserializationtest.impl.NodeImpl#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -19,11 +19,12 @@ import org.eclipse.xtext.parsetree.reconstr.partialserializationtest.Partialseri
  * An implementation of the model object '<em><b>Node Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.partialserializationtest.impl.NodeRootImpl#getNode <em>Node</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

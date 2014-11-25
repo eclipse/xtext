@@ -23,14 +23,15 @@ import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage;
  * An implementation of the model object '<em><b>Combination2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Combination2Impl#getVal1 <em>Val1</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Combination2Impl#getVal2 <em>Val2</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Combination2Impl#getVal3 <em>Val3</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.Combination2Impl#getVal4 <em>Val4</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

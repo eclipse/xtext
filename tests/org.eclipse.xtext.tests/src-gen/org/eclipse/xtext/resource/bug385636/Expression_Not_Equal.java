@@ -10,11 +10,11 @@ package org.eclipse.xtext.resource.bug385636;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.Expression_Not_Equal#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.bug385636.Expression_Not_Equal#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.resource.bug385636.Bug385636Package#getExpression_Not_Equal()
  * @model

@@ -23,11 +23,12 @@ import org.eclipse.xtext.resource.locationprovidertest.Processor;
  * An implementation of the model object '<em><b>Processor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ProcessorImpl#getData <em>Data</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

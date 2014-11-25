@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.multiRuleenums.Model#getA <em>A</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.multiRuleenums.Model#getB <em>B</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.multiRuleenums.Model#getC <em>C</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.enumrules.multiRuleenums.MultiRuleenumsPackage#getModel()
  * @model

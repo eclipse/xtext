@@ -11,10 +11,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.lazy.bug311337.Reference#getRefChild <em>Ref Child</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.linking.lazy.bug311337.Bug311337Package#getReference()
  * @model

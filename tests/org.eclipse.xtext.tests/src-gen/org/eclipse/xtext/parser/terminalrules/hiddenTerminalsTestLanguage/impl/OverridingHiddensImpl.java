@@ -19,11 +19,12 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Overri
  * An implementation of the model object '<em><b>Overriding Hiddens</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl.OverridingHiddensImpl#getCalled <em>Called</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

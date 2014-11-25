@@ -26,13 +26,14 @@ import org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage;
  * An implementation of the model object '<em><b>Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.treeTestLanguage.impl.NodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.treeTestLanguage.impl.NodeImpl#getAttrib <em>Attrib</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.treeTestLanguage.impl.NodeImpl#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

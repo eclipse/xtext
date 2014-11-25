@@ -17,11 +17,12 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCall
  * An implementation of the model object '<em><b>Rule Calls Ass1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.RuleCallsAss1Impl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

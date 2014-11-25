@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Ab#getX <em>X</em>}</li>
  *   <li>{@link org.eclipse.xtext.lexer.backtrackingTestLanguage.Ab#getY <em>Y</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguagePackage#getAb()
  * @model

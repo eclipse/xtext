@@ -16,7 +16,9 @@ import org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList;
  * An implementation of the model object '<em><b>KW List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.impl.KWListImpl#isKw1 <em>Kw1</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.impl.KWListImpl#isKw2 <em>Kw2</em>}</li>
@@ -24,7 +26,6 @@ import org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList;
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.impl.KWListImpl#isKw4 <em>Kw4</em>}</li>
  *   <li>{@link org.eclipse.xtext.formatting2.internal.formattertestlanguage.impl.KWListImpl#isKw5 <em>Kw5</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

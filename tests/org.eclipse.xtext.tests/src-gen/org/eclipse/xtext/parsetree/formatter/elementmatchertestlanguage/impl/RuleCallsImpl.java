@@ -12,7 +12,6 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.RuleCall
  * An implementation of the model object '<em><b>Rule Calls</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -14,7 +14,6 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
  * An implementation of the model object '<em><b>Line</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

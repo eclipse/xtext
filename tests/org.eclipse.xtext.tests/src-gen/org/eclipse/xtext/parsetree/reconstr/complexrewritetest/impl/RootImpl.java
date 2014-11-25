@@ -14,7 +14,6 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Root;
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -16,11 +16,12 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.Complexrewritetes
  * An implementation of the model object '<em><b>Atom</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.AtomImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

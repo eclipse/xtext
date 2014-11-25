@@ -20,11 +20,12 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.ContainmentRefN;
  * An implementation of the model object '<em><b>Containment Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.ContainmentRefImpl#getCtx <em>Ctx</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

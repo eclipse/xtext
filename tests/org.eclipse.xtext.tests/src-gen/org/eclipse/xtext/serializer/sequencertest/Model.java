@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX1 <em>X1</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX2 <em>X2</em>}</li>
@@ -42,7 +43,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX31 <em>X31</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX32 <em>X32</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel()
  * @model

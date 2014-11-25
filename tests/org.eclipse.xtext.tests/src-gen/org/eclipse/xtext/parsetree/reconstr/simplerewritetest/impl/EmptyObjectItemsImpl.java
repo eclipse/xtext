@@ -25,11 +25,12 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Empty Object Items</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.simplerewritetest.impl.EmptyObjectItemsImpl#getList <em>List</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

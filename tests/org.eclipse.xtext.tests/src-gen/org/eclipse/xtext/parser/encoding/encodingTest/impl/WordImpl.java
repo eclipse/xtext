@@ -17,11 +17,12 @@ import org.eclipse.xtext.parser.encoding.encodingTest.Word;
  * An implementation of the model object '<em><b>Word</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.encoding.encodingTest.impl.WordImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,7 +20,9 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef;
  * An implementation of the model object '<em><b>Object Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectRefImpl#getLeftRes <em>Left Res</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectRefImpl#getLeftFrag <em>Left Frag</em>}</li>
@@ -28,7 +30,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef;
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectRefImpl#getRightFrag <em>Right Frag</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.epatch.epatchTestLanguage.impl.ObjectRefImpl#getRightMig <em>Right Mig</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

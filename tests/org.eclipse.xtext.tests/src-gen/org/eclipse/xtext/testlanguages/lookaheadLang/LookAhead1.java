@@ -10,11 +10,11 @@ package org.eclipse.xtext.testlanguages.lookaheadLang;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getY <em>Y</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.lookaheadLang.LookAhead1#getZ <em>Z</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage#getLookAhead1()
  * @model

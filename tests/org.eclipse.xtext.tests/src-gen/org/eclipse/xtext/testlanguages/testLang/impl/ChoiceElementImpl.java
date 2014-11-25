@@ -16,12 +16,13 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  * An implementation of the model object '<em><b>Choice Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.impl.ChoiceElementImpl#isOptionalKeyword <em>Optional Keyword</em>}</li>
  *   <li>{@link org.eclipse.xtext.testlanguages.testLang.impl.ChoiceElementImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

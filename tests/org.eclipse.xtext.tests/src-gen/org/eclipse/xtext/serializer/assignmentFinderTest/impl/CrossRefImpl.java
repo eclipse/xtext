@@ -18,12 +18,13 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.CrossRef;
  * An implementation of the model object '<em><b>Cross Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.CrossRefImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.assignmentFinderTest.impl.CrossRefImpl#getCrossRef <em>Cross Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

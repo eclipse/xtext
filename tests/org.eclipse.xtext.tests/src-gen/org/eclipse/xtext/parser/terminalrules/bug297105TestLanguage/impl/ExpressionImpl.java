@@ -20,12 +20,13 @@ import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Literal;
  * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.impl.ExpressionImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.impl.ExpressionImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

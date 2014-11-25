@@ -26,12 +26,13 @@ import org.eclipse.xtext.resource.locationprovidertest.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ModelImpl#getElements <em>Elements</em>}</li>
  *   <li>{@link org.eclipse.xtext.resource.locationprovidertest.impl.ModelImpl#getComponents <em>Components</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

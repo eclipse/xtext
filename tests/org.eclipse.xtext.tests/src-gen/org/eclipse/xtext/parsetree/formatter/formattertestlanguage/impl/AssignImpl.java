@@ -22,13 +22,14 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Formattertest
  * An implementation of the model object '<em><b>Assign</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl#getVar <em>Var</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl#getOp <em>Op</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.formatter.formattertestlanguage.impl.AssignImpl#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

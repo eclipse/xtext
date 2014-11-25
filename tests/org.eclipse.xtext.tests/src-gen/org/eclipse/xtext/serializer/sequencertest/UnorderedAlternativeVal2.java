@@ -10,10 +10,10 @@ package org.eclipse.xtext.serializer.sequencertest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2#getVal <em>Val</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getUnorderedAlternativeVal2()
  * @model

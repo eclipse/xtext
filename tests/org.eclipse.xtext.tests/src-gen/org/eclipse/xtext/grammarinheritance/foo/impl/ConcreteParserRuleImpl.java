@@ -27,12 +27,13 @@ import org.eclipse.xtext.grammarinheritance.foo.FooPackage;
  * An implementation of the model object '<em><b>Concrete Parser Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.impl.ConcreteParserRuleImpl#getMagicNumber <em>Magic Number</em>}</li>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.foo.impl.ConcreteParserRuleImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

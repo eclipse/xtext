@@ -20,13 +20,14 @@ import org.eclipse.xtext.linking.bug289059Test.UnassignedAction;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.bug289059Test.impl.ModelImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug289059Test.impl.ModelImpl#getEnabled <em>Enabled</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.bug289059Test.impl.ModelImpl#getReference <em>Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

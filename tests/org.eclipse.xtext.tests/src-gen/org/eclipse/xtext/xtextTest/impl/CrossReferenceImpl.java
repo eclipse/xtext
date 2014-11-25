@@ -20,12 +20,13 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * An implementation of the model object '<em><b>Cross Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.CrossReferenceImpl#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
