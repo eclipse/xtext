@@ -126,7 +126,7 @@ class RegionSetTest {
 
 	override toString() '''
 		issues=«issues.join(", ")»
-		set=[«set.toString.replace("\n", ", ")»]
+		set=«set.map['''[«offset»,«length»]'''].toString.replace("\n", ", ")»
 	'''
 
 	def void add(ITextSegment segment) {

@@ -367,6 +367,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://eclipse.org/xtext/Bug443221TestLanguage" 
+       class = "org.eclipse.xtext.parser.antlr.bug443221Test.Bug443221TestPackage"
+       genModel = "org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest" 
        class = "org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.AssignmentsTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.genmodel" /> 
@@ -516,6 +525,24 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://formatter2/formattertestlanguage" 
+       class = "org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguagePackage"
+       genModel = "org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://formatter2/regionaccesstestlanguage" 
+       class = "org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.RegionaccesstestlanguagePackage"
+       genModel = "org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://simple/formattertestlanguage" 
        class = "org.eclipse.xtext.parsetree.formatter.formattertestlanguage.FormattertestlanguagePackage"
        genModel = "org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.genmodel" /> 
@@ -624,6 +651,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/hiddentokensequencertestlanguage" 
+       class = "org.eclipse.xtext.serializer.hiddentokensequencertest.HiddentokensequencertestPackage"
+       genModel = "org/eclipse/xtext/serializer/HiddenTokenSequencerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage" 
        class = "org.eclipse.xtext.serializer.sequencertest.SequencertestPackage"
        genModel = "org/eclipse/xtext/serializer/SequencerTestLanguage.genmodel" /> 
@@ -681,6 +717,15 @@
        uri = "http://www.eclipse.org/2008/tmf/xtext/ActionLang" 
        class = "org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage"
        genModel = "org/eclipse/xtext/testlanguages/ActionTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2008/tmf/xtext/ActionLang2" 
+       class = "org.eclipse.xtext.testlanguages.actionLang2.ActionLang2Package"
+       genModel = "org/eclipse/xtext/testlanguages/ActionTestLanguage2.genmodel" /> 
 	
   </extension>
 

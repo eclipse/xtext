@@ -9,7 +9,7 @@
 grammar org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage
 with org.eclipse.xtext.common.Terminals
 
-generate regionaccesstestlanguage "http://simple/regionaccesstestlanguage"
+generate regionaccesstestlanguage "http://formatter2/regionaccesstestlanguage"
 
 Root:
 	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
