@@ -13,8 +13,10 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
 
 /**
@@ -33,12 +35,19 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
   public void test_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@Data");
-      _builder.newLine();
       _builder.append("class Test {");
       _builder.newLine();
       _builder.append("    ");
-      _builder.append("String attrName");
+      _builder.append("val String attrName");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("new(String s) {");
+      _builder.newLine();
+      _builder.append("    \t");
+      _builder.append("attrName = s");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("    ");
       _builder.newLine();
@@ -73,15 +82,72 @@ public class ValidationBug452602Test extends AbstractXtendTestCase {
   public void test_02() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("@Data");
-      _builder.newLine();
       _builder.append("class Test {");
       _builder.newLine();
       _builder.append("    ");
-      _builder.append("String attrName");
+      _builder.append("val String attrName");
       _builder.newLine();
       _builder.append("    ");
-      _builder.append("String attrName2");
+      _builder.append("new(String s) {");
+      _builder.newLine();
+      _builder.append("    \t");
+      _builder.append("attrName = s");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("def boolean test(Object o) {");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("val x = o as Test");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("if ((o as Test).attrName != x.attrName) ");
+      _builder.newLine();
+      _builder.append("        \t");
+      _builder.append("return false ");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("return true");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile c = this.parser.parse(_builder);
+      this.helper.assertWarning(c, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.CONSTANT_BOOLEAN_CONDITION, "Constant condition is always false");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Test {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("val String attrName");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("val String attrName2");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("new(String s1, String s2) {");
+      _builder.newLine();
+      _builder.append("    \t");
+      _builder.append("attrName = s1");
+      _builder.newLine();
+      _builder.append("    \t");
+      _builder.append("attrName2 = s2");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
       _builder.newLine();
       _builder.append("    ");
       _builder.newLine();

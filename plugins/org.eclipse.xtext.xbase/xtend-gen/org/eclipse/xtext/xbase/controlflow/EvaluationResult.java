@@ -115,11 +115,11 @@ class EvaluationResult {
   }
   
   private Object _equalValue(final List<?> myValue, final List<?> otherValue) {
-    boolean _notEquals = (!Objects.equal(myValue, otherValue));
-    if (_notEquals) {
-      return EvaluationResult.NOT_A_CONSTANT.value;
+    final boolean equalLists = Objects.equal(myValue, otherValue);
+    if (equalLists) {
+      return Boolean.TRUE;
     }
-    return Boolean.valueOf(Objects.equal(myValue, otherValue));
+    return EvaluationResult.NOT_A_CONSTANT.value;
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmIdentifiableElement otherValue) {
