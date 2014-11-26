@@ -9,12 +9,12 @@ package org.eclipse.xtext.ui.codetemplates.ui.partialEditing;
 
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr2.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-public class PartialEditingContentAssistContextFactory extends ParserBasedContentAssistContextFactory implements IPartialEditingContentAssistContextFactory {
+public class PartialEditingContentAssistContextFactory extends DelegatingContentAssistContextFactory implements IPartialEditingContentAssistContextFactory {
 
 	private AbstractRule rule;
 	private IPartialEditingContentAssistParser partialContentAssistParser;
