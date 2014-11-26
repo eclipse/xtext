@@ -13,8 +13,8 @@ extension org::eclipse::xtext::generator::Naming;
 
 String getParserSuperClassName(boolean partialParsing) :
 	partialParsing
-	? "org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractPartialContentAssistParser"
-	: "org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser";
+	? "org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractPartialContentAssistParser"
+	: "org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser";
 
 String getParserClassName(Grammar grammar) :
 	getParserClassName(grammar, getNaming());
