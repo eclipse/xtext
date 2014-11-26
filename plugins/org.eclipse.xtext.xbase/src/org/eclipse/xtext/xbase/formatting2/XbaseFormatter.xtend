@@ -625,20 +625,12 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 		for (c : expr.cases) {
 			if (c.typeGuard != null && c.^case != null) {
-				val typenode = c.regionForFeature(XCASE_PART__TYPE_GUARD)
-				val casenode = c.regionForFeature(XCASE_PART__CASE)
-				typenode.append[oneSpace]
-				casenode.prepend[oneSpace]
-				casenode.append[noSpace]
+				c.typeGuard.append[oneSpace]
+				c.^case.prepend[oneSpace].append[noSpace]
 			} else if (c.typeGuard != null) {
-				val typenode = c.regionForFeature(XCASE_PART__TYPE_GUARD)
-				typenode.append[noSpace]
+				c.typeGuard.append[noSpace]
 			} else if (c.^case != null) {
 				c.^case.prepend[oneSpace].append[noSpace]
-
-			//				val casenode = c.tokenForFeature(XCASE_PART__CASE)
-			//				casenode.prepend[oneSpace]
-			//				casenode.append[noSpace]
 			}
 			c.^case.format(format)
 			c.then.format(format)

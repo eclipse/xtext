@@ -2096,59 +2096,59 @@ public class XbaseFormatter extends AbstractFormatter2 {
           _and_4 = _notEquals_10;
         }
         if (_and_4) {
-          final ISemanticRegion typenode = this.regionAccess.regionForFeature(c_3, XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
-          final ISemanticRegion casenode = this.regionAccess.regionForFeature(c_3, XbasePackage.Literals.XCASE_PART__CASE);
+          JvmTypeReference _typeGuard_1 = c_3.getTypeGuard();
           final Procedure1<IHiddenRegionFormatter> _function_29 = new Procedure1<IHiddenRegionFormatter>() {
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
           };
-          format.append(typenode, _function_29);
+          format.<JvmTypeReference>append(_typeGuard_1, _function_29);
+          XExpression _case_1 = c_3.getCase();
           final Procedure1<IHiddenRegionFormatter> _function_30 = new Procedure1<IHiddenRegionFormatter>() {
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
           };
-          format.prepend(casenode, _function_30);
+          XExpression _prepend_5 = format.<XExpression>prepend(_case_1, _function_30);
           final Procedure1<IHiddenRegionFormatter> _function_31 = new Procedure1<IHiddenRegionFormatter>() {
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
-          format.append(casenode, _function_31);
+          format.<XExpression>append(_prepend_5, _function_31);
         } else {
-          JvmTypeReference _typeGuard_1 = c_3.getTypeGuard();
-          boolean _notEquals_11 = (!Objects.equal(_typeGuard_1, null));
+          JvmTypeReference _typeGuard_2 = c_3.getTypeGuard();
+          boolean _notEquals_11 = (!Objects.equal(_typeGuard_2, null));
           if (_notEquals_11) {
-            final ISemanticRegion typenode_1 = this.regionAccess.regionForFeature(c_3, XbasePackage.Literals.XCASE_PART__TYPE_GUARD);
+            JvmTypeReference _typeGuard_3 = c_3.getTypeGuard();
             final Procedure1<IHiddenRegionFormatter> _function_32 = new Procedure1<IHiddenRegionFormatter>() {
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
-            format.append(typenode_1, _function_32);
+            format.<JvmTypeReference>append(_typeGuard_3, _function_32);
           } else {
-            XExpression _case_1 = c_3.getCase();
-            boolean _notEquals_12 = (!Objects.equal(_case_1, null));
+            XExpression _case_2 = c_3.getCase();
+            boolean _notEquals_12 = (!Objects.equal(_case_2, null));
             if (_notEquals_12) {
-              XExpression _case_2 = c_3.getCase();
+              XExpression _case_3 = c_3.getCase();
               final Procedure1<IHiddenRegionFormatter> _function_33 = new Procedure1<IHiddenRegionFormatter>() {
                 public void apply(final IHiddenRegionFormatter it) {
                   it.oneSpace();
                 }
               };
-              XExpression _prepend_5 = format.<XExpression>prepend(_case_2, _function_33);
+              XExpression _prepend_6 = format.<XExpression>prepend(_case_3, _function_33);
               final Procedure1<IHiddenRegionFormatter> _function_34 = new Procedure1<IHiddenRegionFormatter>() {
                 public void apply(final IHiddenRegionFormatter it) {
                   it.noSpace();
                 }
               };
-              format.<XExpression>append(_prepend_5, _function_34);
+              format.<XExpression>append(_prepend_6, _function_34);
             }
           }
         }
-        XExpression _case_3 = c_3.getCase();
-        this.format(_case_3, format);
+        XExpression _case_4 = c_3.getCase();
+        this.format(_case_4, format);
         XExpression _then_9 = c_3.getThen();
         this.format(_then_9, format);
       }
