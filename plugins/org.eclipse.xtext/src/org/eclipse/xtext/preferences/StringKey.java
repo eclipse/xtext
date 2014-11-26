@@ -5,13 +5,25 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2;
+package org.eclipse.xtext.preferences;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.8
  */
-public interface ITextReplacement extends ITextSegment {
+public class StringKey extends TypedPreferenceKey<String> {
 
-	String getReplacementText();
+	public StringKey(String id, String defaultValue) {
+		super(id, defaultValue);
+	}
+
+	@Override
+	public String toString(String value) {
+		return value;
+	}
+
+	@Override
+	public String toValue(String string) {
+		return string;
+	}
+
 }

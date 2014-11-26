@@ -42,7 +42,7 @@ public class FormatterTestRequest {
 			return (MapBasedPreferenceValues) preferences;
 		LinkedHashMap<String, String> newMap = Maps.<String, String> newLinkedHashMap();
 		MapBasedPreferenceValues result = new MapBasedPreferenceValues(preferences, newMap);
-		request.setPreferenceValues(result);
+		request.setPreferences(result);
 		return result;
 	}
 

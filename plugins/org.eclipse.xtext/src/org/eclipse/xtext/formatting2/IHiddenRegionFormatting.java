@@ -11,18 +11,17 @@ import org.eclipse.xtext.formatting2.internal.ConflictingFormattingException;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 
 /**
- * HiddenRegionFormatting specifies formatting information for a HiddenRegion. A HiddenRegion is the sum of all hidden
- * nodes (whitespace and commend) between to non-hidden nodes.
+ * HiddenRegionFormatting specifies formatting information for a HiddenRegion. A HiddenRegion is the group of all hidden
+ * tokens (whitespace and commend) between to non-hidden tokens.
  * 
  * HiddenRegionFormattings can sometimes be automatically merged when two are registered for the same region in an
  * {@link IFormattableDocument}.
  * 
- * Use {@link HiddenRegionFormatting}.
  * 
- * @noimplement This interface is not intended to be implemented by clients.
- * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients, use {@link HiddenRegionFormatting}
+ * @noextend This interface is not intended to be extended by clients, use {@link HiddenRegionFormatting}
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.7
+ * @since 2.8
  */
 public interface IHiddenRegionFormatting {
 

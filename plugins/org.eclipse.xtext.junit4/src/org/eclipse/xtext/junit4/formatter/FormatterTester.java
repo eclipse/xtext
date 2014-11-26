@@ -69,14 +69,14 @@ public class FormatterTester {
 		String document = req.getToBeFormatted().toString();
 		XtextResource parsed = parse(document);
 		if (req.isAllowSyntaxErrors()) {
-			request.setProblemHandler(ExceptionAcceptor.NULL);
+			request.setExceptionHandler(ExceptionAcceptor.NULL);
 		} else {
 			assertNoSyntaxErrors(parsed);
-			request.setProblemHandler(ExceptionAcceptor.THROWING);
+			request.setExceptionHandler(ExceptionAcceptor.THROWING);
 		}
-		request.setTokens(nodeModelTokenAccessBuilderProvider.get().withResource(parsed).create());
+		request.setTextRegionAccess(nodeModelTokenAccessBuilderProvider.get().withResource(parsed).create());
 		if (request.getPreferences() == null)
-			request.setPreferenceValues(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
+			request.setPreferences(new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap()));
 		List<ITextReplacement> format = createFormatter(req).format(request);
 		assertReplacementsAreInRegion(format, request.getRegions(), document);
 		assertAllHiddenRegionsAre(request.getTextRegionAccess(), format);

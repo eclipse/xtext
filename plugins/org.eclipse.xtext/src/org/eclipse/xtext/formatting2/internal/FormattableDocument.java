@@ -193,13 +193,13 @@ public abstract class FormattableDocument implements IFormattableDocument {
 			ITextSegment replacerRegion = replacer.getRegion();
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
 					Tuples.create(replacerTitle, replacerRegion));
-			getRequest().getProblemHandler().accept(exception);
+			getRequest().getExceptionHandler().accept(exception);
 			return;
 		}
 		try {
 			replacers.add(replacer, getFormatter().createTextReplacerMerger());
 		} catch (ConflictingRegionsException e) {
-			getRequest().getProblemHandler().accept(e);
+			getRequest().getExceptionHandler().accept(e);
 		}
 	}
 

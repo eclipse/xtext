@@ -14,7 +14,7 @@ import org.eclipse.xtext.util.ITextRegion;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.7
+ * @since 2.8
  */
 public interface ITextSegment extends Comparable<ITextSegment>, ITextRegion {
 	int getEndOffset();
