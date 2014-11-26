@@ -25,7 +25,7 @@
 «ENDDEFINE»
 
 «DEFINE generateUI(String macros, String rules, String parserName) FOR Grammar»
-«FILE parserName.asPath()+"Flexer.flex" SRC_GEN_UI-»
+«FILE parserName.asPath()+"Flexer.flex" SRC_GEN_IDE-»
 «EXPAND doGenerate(macros, rules, parserName)-»
 «ENDFILE»
 «ENDDEFINE»

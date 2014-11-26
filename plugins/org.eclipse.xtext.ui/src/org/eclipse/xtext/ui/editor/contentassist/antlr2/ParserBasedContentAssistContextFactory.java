@@ -40,12 +40,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		pool = Executors.newFixedThreadPool(3);
 	}
 	
-	public Provider<StatefulFactory> getStatefulFactoryProvider() {
+	public Provider<? extends StatefulFactory> getStatefulFactoryProvider() {
 		return statefulFactoryProvider;
-	}
-	
-	public void setStatefulFactoryProvider(Provider<StatefulFactory> statefulFactoryProvider) {
-		this.statefulFactoryProvider = statefulFactoryProvider;
 	}
 	
 	protected ExecutorService getPool() {
@@ -53,7 +49,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 	}
 	
 	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
-		StatefulFactory factory = statefulFactoryProvider.get();
+		StatefulFactory factory = getStatefulFactoryProvider().get();
 		factory.setPool(pool);
 		return factory.create(viewer, offset, resource);
 	}
@@ -64,7 +60,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected Provider<ContentAssistContext.Builder> contentAssistContextProvider;
 		
 		@Inject
-		protected ContentAssistContextFactory delegate;
+		private ContentAssistContextFactory delegate;
 		
 		@Inject
 		protected PrefixMatcher matcher;
@@ -81,18 +77,18 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return doCreateContexts(offset);
 		}
 		
-		protected void setPool(ExecutorService pool) {
-			delegate.setPool(pool);
+		public void setPool(ExecutorService pool) {
+			getDelegate().setPool(pool);
 		}
 		
 		public ContentAssistContextFactory getDelegate() {
 			return delegate;
 		}
-
+		
 		protected ContentAssistContext[] doCreateContexts(int offset) {
 			ITextSelection selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
 			TextRegionWithLineInformation region = new TextRegionWithLineInformation(selection.getOffset(), selection.getLength(), selection.getStartLine(), selection.getEndLine());
-			org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext[] delegateContexts = delegate.create(viewer.getDocument().get(), region, offset, resource);
+			org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext[] delegateContexts = getDelegate().create(viewer.getDocument().get(), region, offset, resource);
 			ContentAssistContext[] contexts = new ContentAssistContext[delegateContexts.length];
 			for (int i = 0; i < delegateContexts.length; i++) {
 				contexts[i] = convert(delegateContexts[i]).toContext();
