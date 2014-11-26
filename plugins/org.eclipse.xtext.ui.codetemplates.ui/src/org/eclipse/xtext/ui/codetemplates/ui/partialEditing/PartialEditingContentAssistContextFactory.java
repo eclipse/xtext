@@ -17,11 +17,17 @@ import com.google.inject.Provider;
 public class PartialEditingContentAssistContextFactory extends ParserBasedContentAssistContextFactory implements IPartialEditingContentAssistContextFactory {
 
 	private AbstractRule rule;
+	private IPartialEditingContentAssistParser partialContentAssistParser;
 
 	@Inject
 	public void setPartialEditingParser(final IPartialEditingContentAssistParser partialContentAssistParser) {
-		final Provider<StatefulFactory> delegate = super.getStatefulFactoryProvider();
-		super.setStatefulFactoryProvider(new Provider<StatefulFactory>() {
+		this.partialContentAssistParser = partialContentAssistParser;
+	}
+	
+	@Override
+	public Provider<? extends StatefulFactory> getStatefulFactoryProvider() {
+		final Provider<? extends StatefulFactory> delegate = super.getStatefulFactoryProvider();
+		return new Provider<StatefulFactory>() {
 			public StatefulFactory get() {
 				StatefulFactory result = delegate.get();
 				result.getDelegate().setParser(partialContentAssistParser);
@@ -30,7 +36,7 @@ public class PartialEditingContentAssistContextFactory extends ParserBasedConten
 				}
 				return result;
 			}
-		});
+		};
 	}
 
 	public void initializeFor(AbstractRule rule) {
