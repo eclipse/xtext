@@ -11,8 +11,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -36,8 +36,8 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext.Builder;
+import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -49,7 +49,6 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 
@@ -102,7 +101,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 
 	protected int completionOffset;
 
-	protected ITextRegionWithLineInformation selection;
+	protected ITextRegion selection;
 
 	private String document;
 
@@ -110,7 +109,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		return from.toContext();
 	}
 	
-	public ContentAssistContext[] create(String document, ITextRegionWithLineInformation selection, int offset, XtextResource resource) {
+	public ContentAssistContext[] create(String document, ITextRegion selection, int offset, XtextResource resource) {
 		this.document = document;
 		this.selection = selection;
 		this.resource = resource;
