@@ -144,6 +144,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		if (getProjectNameRt() == null)
 			issues.addError("The property 'projectNameRt' is mandatory");
+		if (isUiMergedIntoRt() && getPathIdeProject() != null && ! isIdeMergedIntoRt()) {
+			issues.addError("Cannot have a dedicated ide project when ui project is merged into runtime project");
+		}
 	}
 
 	@Override
