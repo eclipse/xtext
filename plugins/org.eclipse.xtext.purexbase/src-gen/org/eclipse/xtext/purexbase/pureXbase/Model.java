@@ -15,11 +15,11 @@ import org.eclipse.xtext.xtype.XImportSection;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.purexbase.pureXbase.Model#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link org.eclipse.xtext.purexbase.pureXbase.Model#getBlock <em>Block</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.purexbase.pureXbase.PureXbasePackage#getModel()
  * @model

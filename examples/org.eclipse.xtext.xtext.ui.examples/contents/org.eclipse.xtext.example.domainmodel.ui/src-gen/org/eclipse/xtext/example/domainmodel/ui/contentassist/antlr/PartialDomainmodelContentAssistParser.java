@@ -7,16 +7,16 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class PartialDomainmodelContentAssistParser extends DomainmodelParser implements IPartialContentAssistParser {
+public class PartialDomainmodelContentAssistParser extends DomainmodelParser implements IPartialEditingContentAssistParser {
 
 	private AbstractRule rule;
 

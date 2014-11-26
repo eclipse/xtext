@@ -27,12 +27,13 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
  * An implementation of the model object '<em><b>Function Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.FunctionCallImpl#getFunc <em>Func</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.FunctionCallImpl#getArgs <em>Args</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

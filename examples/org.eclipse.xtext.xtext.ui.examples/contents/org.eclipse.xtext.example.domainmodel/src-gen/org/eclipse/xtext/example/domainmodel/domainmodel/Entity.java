@@ -13,11 +13,11 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.Entity#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.Entity#getFeatures <em>Features</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage#getEntity()
  * @model

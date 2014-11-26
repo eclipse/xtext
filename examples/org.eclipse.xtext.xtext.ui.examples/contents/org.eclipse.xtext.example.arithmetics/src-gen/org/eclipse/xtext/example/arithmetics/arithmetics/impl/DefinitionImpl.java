@@ -28,13 +28,14 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
  * An implementation of the model object '<em><b>Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.DefinitionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.DefinitionImpl#getArgs <em>Args</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.DefinitionImpl#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

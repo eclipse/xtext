@@ -11,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall#getFunc <em>Func</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall#getArgs <em>Args</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getFunctionCall()
  * @model

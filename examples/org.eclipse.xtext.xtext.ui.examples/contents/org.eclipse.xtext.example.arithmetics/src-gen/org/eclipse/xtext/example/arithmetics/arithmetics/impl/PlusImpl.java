@@ -19,12 +19,13 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
  * An implementation of the model object '<em><b>Plus</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.PlusImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.PlusImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

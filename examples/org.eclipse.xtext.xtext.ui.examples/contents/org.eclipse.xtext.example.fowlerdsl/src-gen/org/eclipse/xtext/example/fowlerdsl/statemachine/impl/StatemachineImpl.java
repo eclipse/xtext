@@ -28,14 +28,15 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage;
  * An implementation of the model object '<em><b>Statemachine</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StatemachineImpl#getEvents <em>Events</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StatemachineImpl#getResetEvents <em>Reset Events</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StatemachineImpl#getCommands <em>Commands</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.StatemachineImpl#getStates <em>States</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

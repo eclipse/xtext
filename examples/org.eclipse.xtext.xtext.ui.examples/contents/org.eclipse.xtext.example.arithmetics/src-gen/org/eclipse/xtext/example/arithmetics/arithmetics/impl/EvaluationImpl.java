@@ -19,11 +19,12 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
  * An implementation of the model object '<em><b>Evaluation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.EvaluationImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,12 +20,13 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.Transition;
  * An implementation of the model object '<em><b>Transition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.TransitionImpl#getEvent <em>Event</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.TransitionImpl#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

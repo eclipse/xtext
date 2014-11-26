@@ -10,11 +10,11 @@ package org.eclipse.xtext.example.arithmetics.arithmetics;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.Minus#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.Minus#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getMinus()
  * @model
