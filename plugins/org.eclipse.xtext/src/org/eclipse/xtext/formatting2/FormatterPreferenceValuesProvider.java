@@ -8,6 +8,12 @@ import org.eclipse.xtext.preferences.PreferenceKey;
 
 import com.google.inject.Inject;
 
+/**
+ * Default {@link IPreferenceValuesProvider} for a formatter.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.8
+ */
 public class FormatterPreferenceValuesProvider implements IPreferenceValuesProvider {
 
 	private @Inject IWhitespaceInformationProvider whitespaceInfo;

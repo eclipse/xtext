@@ -19,3 +19,25 @@ public interface IFormattableSubDocument extends IFormattableDocument {
 	IFormattableSubDocument requireFitsInLine(int offset, int length, int maxLineWidth);
 
 }
+
+/*
+interface IFormattableDocumentBuilder {
+	//	IFormattableDocumentBuilder forRegion(ITextSegment region); // should be build constructor param
+
+	IFormattableDocumentBuilder withPreferences(ITypedPreferenceValues preferenes);
+
+	IFormattableDocumentBuilder withReplacerFilter(Predicate<ITextReplacer> replacer);
+
+	IFormattableDocument createDocument();
+}
+
+interface IConstraintDocumentBuilder extends IFormattableDocumentBuilder {
+
+	IFormattableDocumentBuilder requireDoesNotExceedMaxLineWidth();
+
+	IFormattableDocumentBuilder requireDoesNotWrap();
+
+	IFormattableDocumentBuilder requireFitsInLine();
+
+}
+*/

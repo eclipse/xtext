@@ -713,7 +713,7 @@ public class XtendFormatter extends XbaseFormatter {
   protected void _format(final RichString rs, @Extension final IFormattableDocument format) {
     FormatterRequest _request = this.getRequest();
     ITextRegionAccess _textRegionAccess = _request.getTextRegionAccess();
-    final RichStringFormatter richStringFormatter = this.richStringFormatterFactory.create(_textRegionAccess, this);
+    final RichStringFormatter richStringFormatter = this.richStringFormatterFactory.create(_textRegionAccess);
     richStringFormatter.format(format, rs);
   }
   

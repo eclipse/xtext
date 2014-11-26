@@ -64,8 +64,8 @@ public class FormatterSmokeSuite {
 						XtextResource resource = (XtextResource) file.eResource();
 						NodeModelBaseRegionAccess.Builder builder = new NodeModelBaseRegionAccess.Builder();
 						NodeModelBaseRegionAccess regions = builder.withResource(resource).create();
-						FormatterRequest request = new FormatterRequest().setTokens(regions);
-						request.setProblemHandler(ExceptionAcceptor.NULL);
+						FormatterRequest request = new FormatterRequest().setTextRegionAccess(regions);
+						request.setExceptionHandler(ExceptionAcceptor.NULL);
 						formatter.format(request);
 					} catch (Exception e) {
 						e.printStackTrace();
