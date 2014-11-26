@@ -133,7 +133,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		BindFactory binder = new BindFactory()
 			.addTypeToType(
 					"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory",
-					"org.eclipse.xtext.ui.editor.contentassist.antlr2.ParserBasedContentAssistContextFactory")
+					"org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory")
 			.addTypeToType(
 					"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser",
 					getParserClassName(grammar, getNaming()))
