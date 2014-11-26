@@ -187,6 +187,9 @@ public class Naming {
 	 * @since 2.8
 	 */
 	public String basePackageIde(Grammar g) {
+		if (!hasIde() && hasUI()) {
+			return basePackageUi(g);
+		}
 		if (!Strings.isEmpty(ideBasePackage))
 			return this.ideBasePackage;
 		return getNamespace(g) + ".ide";
