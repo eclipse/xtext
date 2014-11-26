@@ -29,7 +29,7 @@ import com.google.common.base.Function;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, NamingAware {
+public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3, NamingAware {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
 
@@ -224,6 +224,32 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		});
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	public String[] getImportedPackagesIde(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			public String[] apply(IGeneratorFragment param) {
+				return param instanceof IGeneratorFragmentExtension3 
+						? ((IGeneratorFragmentExtension3) param).getImportedPackagesIde(grammar)
+						: null;
+			}
+		});
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String[] getExportedPackagesIde(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			public String[] apply(IGeneratorFragment param) {
+				return param instanceof IGeneratorFragmentExtension3 
+						? ((IGeneratorFragmentExtension3) param).getExportedPackagesIde(grammar)
+						: null;
+			}
+		});
+	}
+	
 	public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
 			public Set<Binding> apply(IGeneratorFragment param) {
@@ -290,6 +316,19 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
 			public String[] apply(IGeneratorFragment f) {
 				return f.getRequiredBundlesRt(grammar);
+			}
+		});
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String[] getRequiredBundlesIde(final Grammar grammar) {
+		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			public String[] apply(IGeneratorFragment f) {
+				return (f instanceof IGeneratorFragmentExtension3)
+						? ((IGeneratorFragmentExtension3)f).getRequiredBundlesIde(grammar)
+						: null;
 			}
 		});
 	}

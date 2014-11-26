@@ -27,8 +27,11 @@ public class Naming {
 	private String grammarId;
 	private String projectNameRt;
 	private String projectNameUi;
+	private String projectNameIde;
+	private String ideBasePackage;
 	private String lineDelimiter = Strings.newLine();
 	private boolean hasUI;
+	private boolean hasIde;
 	
 	
 	/**
@@ -64,6 +67,27 @@ public class Naming {
 	 */
 	public String getProjectNameUi() {
 		return projectNameUi;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String getProjectNameIde() {
+		return projectNameIde;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setProjectNameIde(String projectNameIde) {
+		this.projectNameIde = projectNameIde;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setIdeBasePackage(String ideBasePackage) {
+		this.ideBasePackage = ideBasePackage;
 	}
 	
 	/**
@@ -160,6 +184,15 @@ public class Naming {
 	}
 	
 	/**
+	 * @since 2.8
+	 */
+	public String basePackageIde(Grammar g) {
+		if (!Strings.isEmpty(ideBasePackage))
+			return this.ideBasePackage;
+		return getNamespace(g) + ".ide";
+	}
+	
+	/**
 	 * @since 2.0
 	 */
 	public String toSimpleName(String name) {
@@ -186,4 +219,19 @@ public class Naming {
 	public void setHasUI(boolean hasUI) {
 		this.hasUI = hasUI;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public boolean hasIde() {
+		return hasIde;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setHasIde(boolean hasIde) {
+		this.hasIde = hasIde;
+	}
+	
 }

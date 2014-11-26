@@ -76,6 +76,18 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String SRC_GEN_UI = "SRC_GEN_UI";
 	public static final String SRC_UI = "SRC_UI";
 	public static final String PLUGIN_UI = "PLUGIN_UI";
+	/**
+	 * @since 2.8
+	 */
+	public static final String SRC_GEN_IDE = "SRC_GEN_IDE";
+	/**
+	 * @since 2.8
+	 */
+	public static final String SRC_IDE = "SRC_IDE";
+	/**
+	 * @since 2.8
+	 */
+	public static final String PLUGIN_IDE = "PLUGIN_IDE";
 	public static final String SRC = "SRC";
 	public static final String SRC_GEN = "SRC_GEN";
 	/**
@@ -87,6 +99,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private Naming naming = new Naming();
 	private String encoding;
 	private String pathRtProject = ".";
+	private String pathIdeProject = null;
 	private String pathUiProject = null;
 	private String pathTestProject = null;
 	private String srcPath = "/src";
@@ -104,11 +117,14 @@ public class Generator extends AbstractWorkflowComponent2 {
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
 		naming.setProjectNameRt(getProjectNameRt());
+		naming.setProjectNameIde(getProjectNameIde());
+		naming.setIdeBasePackage(!isIde() && isUi() ? getProjectNameUi() : getProjectNameIde());
 		naming.setProjectNameUi(getProjectNameUi());
 		naming.setUiBasePackage(getProjectNameUi());
 		naming.setActivatorName(getActivator());
 		naming.setPathTestProject(getPathTestProject());
 		naming.setHasUI(isUi());
+		naming.setHasIde(isIde());
 		Map<String, Grammar> uris = new HashMap<String, Grammar>();
 		for (LanguageConfig config : languageConfigs) {
 			config.registerNaming(naming);
@@ -150,6 +166,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 				generatePluginXmlUi(languageConfigs, exeCtx);
 				generateManifestUi(languageConfigs, exeCtx);
 				generateActivator(languageConfigs, exeCtx);
+			}
+			if (isIde()) {
+				generateManifestIde(languageConfigs, exeCtx);
 			}
 			if (isTest()) {
 				generateManifestTests(languageConfigs, exeCtx);
@@ -201,6 +220,20 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public void setPathRtProject(String pathRtProject) {
 		this.pathRtProject = pathRtProject;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public String getPathIdeProject() {
+		return pathIdeProject;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setPathIdeProject(String pathIdeProject) {
+		this.pathIdeProject = pathIdeProject;
+	}
 
 	public String getPathUiProject() {
 		return pathUiProject;
@@ -250,6 +283,19 @@ public class Generator extends AbstractWorkflowComponent2 {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcGenPath()));
+		}
+		if (getPathIdeProject() != null) {
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_IDE, false, getPathIdeProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_IDE, false, getPathIdeProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_IDE, true, getPathIdeProject() + getSrcGenPath()));
+		} else if (getPathUiProject() != null){
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_IDE, false, getPathUiProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_IDE, false, getPathUiProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_IDE, true, getPathUiProject() + getSrcGenPath()));
+		} else {
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_IDE, false, getPathRtProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_IDE, false, getPathRtProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_IDE, true, getPathRtProject() + getSrcGenPath()));
 		}
 		if (!Strings.isEmpty(getPathTestProject())) {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_TEST, false, getPathTestProject()));
@@ -318,7 +364,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 			facade.evaluate("org::eclipse::xtext::generator::Plugin::pre", grammars);
 			for (LanguageConfig conf : languageConfigs) {
 				conf.addToPluginXmlRt(conf, ctx);
-				if (isMergedProjects()) {
+				if (isUiMergedIntoRt()) {
 					conf.addToPluginXmlUi(conf, ctx);
 				}
 			}
@@ -340,7 +386,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void generatePluginXmlUi(List<LanguageConfig> configs, XpandExecutionContext ctx) {
-		if (isUi() && !isMergedProjects()) {
+		if (isUi() && !isUiMergedIntoRt()) {
 			String filePath = fileExists(ctx, "plugin.xml", PLUGIN_UI) ? "plugin.xml_gen" : "plugin.xml";
 			deleteFile(ctx, filePath, PLUGIN_UI);
 			ctx.getOutput().openFile(filePath, PLUGIN_UI);
@@ -388,6 +434,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private boolean isUi() {
 		return getPathUiProject() != null;
 	}
+	
+	private boolean isIde() {
+		return getPathIdeProject() != null;
+	}
 
 	private boolean isTest() {
 		return getPathTestProject() != null;
@@ -410,16 +460,21 @@ public class Generator extends AbstractWorkflowComponent2 {
 		Set<String> requiredBundles = new LinkedHashSet<String>();
 		Set<String> imported = new LinkedHashSet<String>();
 		String activator = null;
-		if (isMergedProjects())
+		if (isUiMergedIntoRt())
 			activator = getActivator();
 		for (LanguageConfig config : configs) {
 			exported.addAll(Arrays.asList(config.getExportedPackagesRt(config.getGrammar())));
 			requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesRt(config.getGrammar())));
 			imported.addAll(Arrays.asList(config.getImportedPackagesRt(config.getGrammar())));
-			if (isMergedProjects()) {
+			if (isUiMergedIntoRt()) {
 				exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
 				imported.addAll(Arrays.asList(config.getImportedPackagesUi(config.getGrammar())));
 				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
+			}
+			if (isIdeMergedIntoRt()) {
+				exported.addAll(Arrays.asList(config.getExportedPackagesIde(config.getGrammar())));
+				imported.addAll(Arrays.asList(config.getImportedPackagesIde(config.getGrammar())));
+				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesIde(config.getGrammar())));
 			}
 		}
 		if (isMergeManifest()) {
@@ -483,7 +538,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void generateManifestUi(List<LanguageConfig> configs, XpandExecutionContext ctx) {
-		if (isUi() && !isMergedProjects()) {
+		if (isUi() && !isUiMergedIntoRt()) {
 			String manifestPath = "META-INF/MANIFEST.MF";
 			Set<String> exported = new LinkedHashSet<String>();
 			Set<String> imported = new LinkedHashSet<String>();
@@ -505,6 +560,36 @@ public class Generator extends AbstractWorkflowComponent2 {
 					XpandFacade facade = XpandFacade.create(ctx);
 					generateManifest(facade, getProjectNameUi(), getProjectNameUi(), getBundleVersion(), exported,
 							requiredBundles, imported, getActivator());
+				} finally {
+					ctx.getOutput().closeFile();
+				}
+			}
+		}
+	}
+	
+	private void generateManifestIde(List<LanguageConfig> configs, XpandExecutionContext ctx) {
+		if (isIde() && !isIdeMergedIntoRt() ) {
+			String manifestPath = "META-INF/MANIFEST.MF";
+			Set<String> exported = new LinkedHashSet<String>();
+			Set<String> imported = new LinkedHashSet<String>();
+			Set<String> requiredBundles = new LinkedHashSet<String>();
+			for (LanguageConfig config : languageConfigs) {
+				exported.addAll(Arrays.asList(config.getExportedPackagesIde(config.getGrammar())));
+				imported.addAll(Arrays.asList(config.getImportedPackagesIde(config.getGrammar())));
+				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesIde(config.getGrammar())));
+			}
+
+			if (isMergeManifest()) {
+				String path = ctx.getOutput().getOutlet(PLUGIN_IDE).getPath() + "/" + manifestPath;
+				mergeManifest(getProjectNameIde(), path, exported, requiredBundles, imported, null);
+			} else {
+				manifestPath = manifestPath + "_gen";
+				deleteFile(ctx, manifestPath, PLUGIN_IDE);
+				ctx.getOutput().openFile(manifestPath, PLUGIN_IDE);
+				try {
+					XpandFacade facade = XpandFacade.create(ctx);
+					generateManifest(facade, getProjectNameIde(), getProjectNameIde(), getBundleVersion(), exported,
+							requiredBundles, imported, null);
 				} finally {
 					ctx.getOutput().closeFile();
 				}
@@ -560,10 +645,14 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return file.exists();
 	}
 
-	private boolean isMergedProjects() {
+	private boolean isUiMergedIntoRt() {
 		return getPathRtProject().equals(getPathUiProject());
 	}
-
+	
+	private boolean isIdeMergedIntoRt() {
+		return getPathRtProject().equals(getPathIdeProject());
+	}
+	
 	private String getBundleVersion() {
 		return "0.0.1";
 	}
@@ -588,6 +677,21 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (projectNameUi == null)
 			return getProjectNameRt() + ".ui";
 		return projectNameUi;
+	}
+	
+	private String projectNameIde;
+	
+	/**
+	 * @since 2.8
+	 */
+	public void setProjectNameIde(String projectNameIde) {
+		this.projectNameIde = projectNameIde;
+	}
+	
+	private String getProjectNameIde() {
+		if (projectNameIde == null)
+			return getProjectNameRt() + ".ide";
+		return projectNameIde;
 	}
 
 	private String getProjectNameTests() {
