@@ -11,9 +11,8 @@ import java.util.List;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.8
  */
 public interface IMerger<T> {
-
 	T merge(List<? extends T> conflicting);
-
 }

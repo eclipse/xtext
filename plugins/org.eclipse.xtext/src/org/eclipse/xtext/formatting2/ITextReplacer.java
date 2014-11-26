@@ -10,18 +10,14 @@ package org.eclipse.xtext.formatting2;
 import com.google.common.base.Function;
 
 /**
- * A TextReplacer is responsible for a certain region inside a {@link IFormattableDocument} and produces
+ * A TextReplacer is responsible for a text region inside a {@link IFormattableDocument} and produces
  * {@link ITextReplacement}s for that region.
  * 
- * The {@link IFormattableDocument} ensures that TextReplacers are executed in the correct order.
- * 
- * This interface is intentionally a single-method interface for convenient implementation using Xtexn't closures.
+ * The {@link IFormattableDocument} ensures that TextReplacers are executed in the correct order, i.e. from the
+ * beginning of the document to the end of the document.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.7
- * 
- * @noextend This interface is not intended to be extended by clients.
- * @noimplement This interface is not intended to be implemented by clients.
+ * @since 2.8
  */
 public interface ITextReplacer {
 

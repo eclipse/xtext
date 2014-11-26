@@ -81,7 +81,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	public String getIndentationString(int indentationLevel) {
-		return Strings.repeat(getPreferences().getPreference(FormatterPreferenceKeys.indentation), indentationLevel);
+		AbstractFormatter2 formatter = document.getFormatter();
+		return Strings.repeat(formatter.getPreference(FormatterPreferenceKeys.indentation), indentationLevel);
 	}
 
 	public int getLeadingCharsInLineCount() {
@@ -128,11 +129,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	public String getNewLinesString(int count) {
-		return Strings.repeat(getPreferences().getPreference(FormatterPreferenceKeys.lineSeparator), count);
-	}
-
-	public ITypedPreferenceValues getPreferences() {
-		return document.getPreferences();
+		return Strings.repeat(document.getFormatter().getPreference(FormatterPreferenceKeys.lineSeparator), count);
 	}
 
 	public ITextReplacerContext getPreviousContext() {
@@ -215,7 +212,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 			ITextSegment replacerRegion = replacement;
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
 					Tuples.create(replacerTitle, replacerRegion));
-			document.getRequest().getProblemHandler().accept(exception);
+			document.getRequest().getExceptionHandler().accept(exception);
 			return;
 		}
 		if (!isInRequestedRange(replacement)) {
@@ -224,7 +221,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		try {
 			replacements.add(replacement);
 		} catch (ConflictingRegionsException e) {
-			document.getRequest().getProblemHandler().accept(e);
+			document.getRequest().getExceptionHandler().accept(e);
 		}
 	}
 

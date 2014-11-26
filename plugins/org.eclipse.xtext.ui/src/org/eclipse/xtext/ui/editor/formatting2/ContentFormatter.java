@@ -123,12 +123,12 @@ public class ContentFormatter implements IContentFormatter {
 		ITextRegion textRegion = new TextRegion(region.getOffset(), region.getLength());
 		request.setAllowIdentityEdits(false);
 		request.setFormatUndenfinedTokensOnly(false);
-		request.setProblemHandler(getProblemHandler());
+		request.setExceptionHandler(getProblemHandler());
 		request.setRegions(singletonList(textRegion));
 		NodeModelBaseRegionAccess tokenAccess = nodeModelTokenAccessBuilder.withResource(resource).create();
 		IPreferenceValues preferenceValues = preferencesProvider.getPreferenceValues(resource);
-		request.setPreferenceValues(TypedPreferenceValues.castOrWrap(preferenceValues));
-		request.setTokens(tokenAccess);
+		request.setPreferences(TypedPreferenceValues.castOrWrap(preferenceValues));
+		request.setTextRegionAccess(tokenAccess);
 	}
 
 	public void setPreferencesProvider(IPreferenceValuesProvider cfgProvider) {

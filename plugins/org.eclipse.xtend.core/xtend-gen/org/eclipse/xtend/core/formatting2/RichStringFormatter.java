@@ -13,7 +13,6 @@ import org.eclipse.xtend.core.formatting2.LineModel;
 import org.eclipse.xtend.core.formatting2.RichStringToLineModel;
 import org.eclipse.xtend.core.formatting2.SemanticWhitespace;
 import org.eclipse.xtend.core.formatting2.TemplateWhitespace;
-import org.eclipse.xtend.core.formatting2.XtendFormatter;
 import org.eclipse.xtend.core.richstring.DefaultIndentationHandler;
 import org.eclipse.xtend.core.richstring.RichStringProcessor;
 import org.eclipse.xtend.core.xtend.RichString;
@@ -24,6 +23,7 @@ import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
@@ -33,7 +33,6 @@ import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
 import org.eclipse.xtext.formatting2.internal.TextSegment;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -57,8 +56,8 @@ public class RichStringFormatter {
     @Inject
     private RichStringProcessor richStringProcessor;
     
-    public RichStringFormatter create(final ITextRegionAccess regionAccess, final XtendFormatter formatter) {
-      return new RichStringFormatter(this, regionAccess, formatter);
+    public RichStringFormatter create(final ITextRegionAccess regionAccess) {
+      return new RichStringFormatter(this, regionAccess);
     }
   }
   
@@ -66,8 +65,6 @@ public class RichStringFormatter {
   
   @Extension
   private final ITextRegionAccess _iTextRegionAccess;
-  
-  private final XtendFormatter formatter;
   
   public void format(final IFormattableDocument doc, final RichString richString) {
     EObject _eContainer = richString.eContainer();
@@ -186,8 +183,8 @@ public class RichStringFormatter {
               if (!_matched) {
                 if (chunk instanceof TemplateWhitespace) {
                   _matched=true;
-                  ITypedPreferenceValues _preferences = doc.getPreferences();
-                  _switchResult = _preferences.getPreference(FormatterPreferenceKeys.indentation);
+                  AbstractFormatter2 _formatter = doc.getFormatter();
+                  _switchResult = _formatter.<String>getPreference(FormatterPreferenceKeys.indentation);
                 }
               }
               return _switchResult;
@@ -202,7 +199,8 @@ public class RichStringFormatter {
   }
   
   protected void setNewLines(final IFormattableDocument doc, final int offset, final int length, final int indentationIncrease, final int indentationDecrease, final int newLines) {
-    IHiddenRegionFormatting _createHiddenRegionFormatting = this.formatter.createHiddenRegionFormatting();
+    AbstractFormatter2 _formatter = doc.getFormatter();
+    IHiddenRegionFormatting _createHiddenRegionFormatting = _formatter.createHiddenRegionFormatting();
     final Procedure1<IHiddenRegionFormatting> _function = new Procedure1<IHiddenRegionFormatting>() {
       public void apply(final IHiddenRegionFormatting it) {
         it.setIndentationIncrease(Integer.valueOf(indentationIncrease));
@@ -213,21 +211,24 @@ public class RichStringFormatter {
       }
     };
     final IHiddenRegionFormatting fmt = ObjectExtensions.<IHiddenRegionFormatting>operator_doubleArrow(_createHiddenRegionFormatting, _function);
+    AbstractFormatter2 _formatter_1 = doc.getFormatter();
     TextSegment _textSegment = new TextSegment(this._iTextRegionAccess, offset, length);
-    final ITextReplacer replacer = this.formatter.createWhitespaceReplacer(_textSegment, fmt);
+    final ITextReplacer replacer = _formatter_1.createWhitespaceReplacer(_textSegment, fmt);
     doc.addReplacer(replacer);
   }
   
   protected void setSpace(final IFormattableDocument doc, final int offset, final int length, final String space) {
-    IHiddenRegionFormatting _createHiddenRegionFormatting = this.formatter.createHiddenRegionFormatting();
+    AbstractFormatter2 _formatter = doc.getFormatter();
+    IHiddenRegionFormatting _createHiddenRegionFormatting = _formatter.createHiddenRegionFormatting();
     final Procedure1<IHiddenRegionFormatting> _function = new Procedure1<IHiddenRegionFormatting>() {
       public void apply(final IHiddenRegionFormatting it) {
         it.setSpace(space);
       }
     };
     final IHiddenRegionFormatting fmt = ObjectExtensions.<IHiddenRegionFormatting>operator_doubleArrow(_createHiddenRegionFormatting, _function);
+    AbstractFormatter2 _formatter_1 = doc.getFormatter();
     TextSegment _textSegment = new TextSegment(this._iTextRegionAccess, offset, length);
-    final ITextReplacer replacer = this.formatter.createWhitespaceReplacer(_textSegment, fmt);
+    final ITextReplacer replacer = _formatter_1.createWhitespaceReplacer(_textSegment, fmt);
     doc.addReplacer(replacer);
   }
   
@@ -245,6 +246,7 @@ public class RichStringFormatter {
   }
   
   protected void format(final EObject obj, final IFormattableDocument doc) {
+    AbstractFormatter2 _formatter = doc.getFormatter();
     final Predicate<ITextReplacer> _function = new Predicate<ITextReplacer>() {
       public boolean apply(final ITextReplacer it) {
         boolean _xblockexpression = false;
@@ -256,7 +258,7 @@ public class RichStringFormatter {
       }
     };
     IFormattableDocument _withReplacerFilter = doc.withReplacerFilter(_function);
-    this.formatter.format(obj, _withReplacerFilter);
+    _formatter.format(obj, _withReplacerFilter);
   }
   
   protected void _suppressLineWraps(final ITextReplacer it) {
@@ -482,10 +484,9 @@ public class RichStringFormatter {
     }
   }
   
-  public RichStringFormatter(final RichStringFormatter.Factory factory, final ITextRegionAccess _iTextRegionAccess, final XtendFormatter formatter) {
+  public RichStringFormatter(final RichStringFormatter.Factory factory, final ITextRegionAccess _iTextRegionAccess) {
     super();
     this.factory = factory;
     this._iTextRegionAccess = _iTextRegionAccess;
-    this.formatter = formatter;
   }
 }

@@ -10,12 +10,17 @@ package org.eclipse.xtext.formatting2;
 import java.util.List;
 
 /**
- * This interface is the 'outer' view of of the formatter. If you want to invoke a formatter, have an implementation of
- * this interface injected via Guice, compose a {@link FormatterRequest}-object and call
- * {@link #format(FormatterRequest)}.
+ * Use this interface to invoke a formatter.
+ * 
+ * An Xtext language should have an implementation for this interface bound in their Guice Injector.
+ * 
+ * @see org.eclipse.xtext.formatting2 for an introduction to formatting
+ * @see AbstractFormatter2 to implement your own formatter
+ * @see FormatterRequest to specify what an how sould be formatted
+ * @see TextReplacements#apply(CharSequence, Iterable) to apply {@link ITextReplacement}s to a CharSequence or String.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.7
+ * @since 2.8
  */
 public interface IFormatter2 {
 

@@ -178,8 +178,8 @@ public class ConvertJavaCode {
 			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
 			FormatterRequest request = new FormatterRequest();
 			request.setAllowIdentityEdits(false);
-			request.setTokens(new NodeModelBaseRegionAccess.Builder().withResource(resource).create());
-			request.setPreferenceValues(TypedPreferenceValues.castOrWrap(cfgProvider.getPreferenceValues(resource)));
+			request.setTextRegionAccess(new NodeModelBaseRegionAccess.Builder().withResource(resource).create());
+			request.setPreferences(TypedPreferenceValues.castOrWrap(cfgProvider.getPreferenceValues(resource)));
 			List<ITextReplacement> replacements = formatter.format(request);
 			String formatted = TextReplacements.apply(xtendCode, replacements);
 			return formatted;

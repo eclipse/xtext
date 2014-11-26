@@ -9,8 +9,6 @@ package org.eclipse.xtext.formatting2;
 
 import java.util.List;
 
-import org.eclipse.xtext.preferences.ITypedPreferenceValues;
-
 /**
  * Relevant state and methods during execution of a TextReplacer.
  * 
@@ -36,8 +34,6 @@ public interface ITextReplacerContext {
 	int getLeadingCharsInLineCount();
 
 	Iterable<ITextReplacement> getLocalReplacements();
-
-	ITypedPreferenceValues getPreferences();
 
 	ITextReplacerContext getPreviousContext();
 

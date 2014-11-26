@@ -17,7 +17,7 @@ import org.eclipse.xtext.formatting2.internal.TextReplacementList;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TextReplacements {
-	public static String apply(CharSequence input, Iterable<ITextReplacement> replacements) {
+	public static String apply(CharSequence input, Iterable<? extends ITextReplacement> replacements) {
 		ArrayList<ITextReplacement> list = new TextReplacementList<ITextReplacement>(replacements);
 		Collections.sort(list);
 		int lastOffset = 0;
@@ -31,7 +31,7 @@ public class TextReplacements {
 		return result.toString();
 	}
 
-	public static String apply(ITextSegment input, Iterable<ITextReplacement> replacements) {
+	public static String apply(ITextSegment input, Iterable<? extends ITextReplacement> replacements) {
 		List<ITextReplacement> list = new TextReplacementList<ITextReplacement>(replacements);
 		Collections.sort(list);
 		String text = input.getText();

@@ -41,14 +41,13 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	public static class Factory {
 		@Inject RichStringProcessor richStringProcessor
 
-		def RichStringFormatter create(ITextRegionAccess regionAccess, XtendFormatter formatter) {
-			new RichStringFormatter(this, regionAccess, formatter)
+		def RichStringFormatter create(ITextRegionAccess regionAccess) {
+			new RichStringFormatter(this, regionAccess)
 		}
 	}
 
 	val Factory factory
 	val extension ITextRegionAccess
-	val XtendFormatter formatter
 
 	def void format(IFormattableDocument doc, RichString richString) {
 		if (EcoreUtil2.getContainerOfType(richString.eContainer, RichString) != null)
@@ -86,7 +85,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 					val text = line.chunks.map [ chunk |
 						switch chunk {
 							SemanticWhitespace: chunk.text
-							TemplateWhitespace: doc.preferences.getPreference(indentation)
+							TemplateWhitespace: doc.formatter.getPreference(indentation)
 						}
 					].join
 					doc.setSpace(offset, length, text)
@@ -97,22 +96,22 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 
 	def protected setNewLines(IFormattableDocument doc, int offset, int length, int indentationIncrease,
 		int indentationDecrease, int newLines) {
-		val fmt = formatter.createHiddenRegionFormatting => [
+		val fmt = doc.formatter.createHiddenRegionFormatting => [
 			it.indentationIncrease = indentationIncrease
 			it.indentationDecrease = indentationDecrease
 			it.newLinesMin = newLines
 			it.newLinesDefault = newLines
 			it.newLinesMax = newLines
 		]
-		val replacer = formatter.createWhitespaceReplacer(new TextSegment(_iTextRegionAccess, offset, length), fmt)
+		val replacer = doc.formatter.createWhitespaceReplacer(new TextSegment(_iTextRegionAccess, offset, length), fmt)
 		doc.addReplacer(replacer)
 	}
 
 	def protected setSpace(IFormattableDocument doc, int offset, int length, String space) {
-		val fmt = formatter.createHiddenRegionFormatting => [
+		val fmt = doc.formatter.createHiddenRegionFormatting => [
 			it.space = space
 		]
-		val replacer = formatter.createWhitespaceReplacer(new TextSegment(_iTextRegionAccess, offset, length), fmt)
+		val replacer = doc.formatter.createWhitespaceReplacer(new TextSegment(_iTextRegionAccess, offset, length), fmt)
 		doc.addReplacer(replacer)
 	}
 
@@ -128,7 +127,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	}
 
 	def protected void format(EObject obj, IFormattableDocument doc) {
-		formatter.format(obj, doc.withReplacerFilter[suppressLineWraps(it); true])
+		doc.formatter.format(obj, doc.withReplacerFilter[suppressLineWraps(it); true])
 	}
 
 	def protected dispatch void suppressLineWraps(ITextReplacer it) {
