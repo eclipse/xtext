@@ -67,10 +67,10 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 			template = getTemplate() + "::generate";
 			encoding = getEncoding(ctx, Generator.SRC_GEN);
 		} else {
-			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_UI).getPath();
+			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_IDE).getPath();
 			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageUi(grammar) + ".contentassist.antlr.internal");
 			template = getTemplate() + "::generateUI";
-			encoding = getEncoding(ctx, Generator.SRC_GEN_UI);
+			encoding = getEncoding(ctx, Generator.SRC_GEN_IDE);
 		}
 		XpandFacade.create(ctx).evaluate2(template, grammar, getParameters(grammar));
 		String fileName = "Internal" + GrammarUtil.getName(grammar)	+ "Flexer.flex";

@@ -14,12 +14,11 @@ import java.util.Collection;
 import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtend.core.parser.InternalFlexer;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
@@ -27,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FlexerBasedContentAssistContextFactory extends ParserBasedContentAssistContextFactory.PartialStatefulFactory {
+public class FlexerBasedContentAssistContextFactory extends PartialContentAssistContextFactory {
 
 	private static final Logger log = Logger.getLogger(FlexerBasedContentAssistContextFactory.class);
 	
@@ -35,7 +34,7 @@ public class FlexerBasedContentAssistContextFactory extends ParserBasedContentAs
 	private ContentAssistFlexerFactory flexerFactory;
 	
 	@Override
-	protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict) throws BadLocationException {
+	protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict){
 		String currentNodePrefix = getPrefix(currentNode);
 		if (!Strings.isEmpty(currentNodePrefix) && !currentNode.getText().equals(currentNodePrefix)) {
 			InternalFlexer flexer = flexerFactory.createFlexer(new StringReader(currentNodePrefix));
