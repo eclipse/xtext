@@ -87,12 +87,15 @@ import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRename
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -106,9 +109,6 @@ import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ui.editor.copyqualifiedname.CopyQualifiedNameService;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
@@ -482,7 +482,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 	
 	@Override
-	public Class<? extends StatefulFactory> bindParserBasedContentAssistContextFactory$StatefulFactory() {
+	public Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
 		return FlexerBasedContentAssistContextFactory.class;
 	}
 
@@ -532,7 +532,7 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	}
 	
 	@Override
-	public Class<? extends  IPartialContentAssistParser> bindIPartialContentAssistParser() {
+	public Class<? extends  IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
 		return FlexerBasedPartialXtendContentAssistParser.class;
 	}
 

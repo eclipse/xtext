@@ -7,15 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.contentassist.javadoc;
 
-import java.util.concurrent.ExecutorService;
-
-import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.contentassist.antlr2.ParserBasedContentAssistContextFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -26,26 +21,25 @@ import com.google.inject.Provider;
 public class XtendJavaDocContentAssistContextFactory extends ParserBasedContentAssistContextFactory {
 
 	@Inject
-	private Provider<JavaDocStateFullFactory> statefulFactoryProvider;
+	private Provider<XtendJavaDocStatefulFactory> statefulFactoryProvider;
 
 	@Override
-	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
-		try {
-			JavaDocStateFullFactory factory = statefulFactoryProvider.get();
-			factory.setPool(getPool());
-			return factory.create(viewer, offset, resource);
-		} catch (BadLocationException e) {
-			throw new RuntimeException(e);
+	public Provider<? extends org.eclipse.xtext.ui.editor.contentassist.antlr2.ParserBasedContentAssistContextFactory.StatefulFactory> getStatefulFactoryProvider() {
+		return statefulFactoryProvider;
+	}
+	
+	public static class XtendJavaDocStatefulFactory extends ParserBasedContentAssistContextFactory.StatefulFactory {
+		@Inject
+		private FlexerBasedJavaDocContentAssistContextFactory delegate;
+		
+		@Override
+		public ContentAssistContextFactory getDelegate() {
+			return delegate;
 		}
 	}
 
-	public static class JavaDocStateFullFactory extends FlexerBasedContentAssistContextFactory {
+	public static class FlexerBasedJavaDocContentAssistContextFactory extends FlexerBasedContentAssistContextFactory {
 
-		@Override
-		protected void setPool(ExecutorService pool) {
-			super.setPool(pool);
-		}
-		
 		@Override
 		public String getPrefix(INode node) {
 			if(node != null) {

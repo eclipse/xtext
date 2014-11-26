@@ -16,10 +16,10 @@ import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFac
 import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.InfiniteRecursion;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursion;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
