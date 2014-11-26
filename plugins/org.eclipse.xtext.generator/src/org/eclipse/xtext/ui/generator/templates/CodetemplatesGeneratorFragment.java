@@ -55,8 +55,10 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 				"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar")
 			.addTypeToType("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage", 
 				"org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")
-			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser",
+			.addTypeToType("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser",
 				getPartialContentAssistParser(grammar, getNaming()))
+			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory", 
+					"org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialEditingContentAssistContextFactory")
 			.getBindings();
 	}
 	

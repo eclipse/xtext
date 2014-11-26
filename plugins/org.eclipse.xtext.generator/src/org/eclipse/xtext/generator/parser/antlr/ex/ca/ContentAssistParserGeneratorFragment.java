@@ -79,22 +79,22 @@ public class ContentAssistParserGeneratorFragment extends AbstractAntlrGenerator
 		BindFactory binder = new BindFactory()
 			.addTypeToType(
 					"org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory",
-					"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory")
+					"org.eclipse.xtext.ui.editor.contentassist.antlr2.ParserBasedContentAssistContextFactory")
 			.addTypeToType(
-					"org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser",
+					"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser",
 					getFragmentHelper().getContentAssistParserClassName(grammar))
 			.addConfiguredBinding("ContentAssistLexerProvider",
 					"binder.bind(" + getFragmentHelper().getInternalContentAssistLexerClassName(grammar) +".class)"+
 					".toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(" + getFragmentHelper().getInternalContentAssistLexerClassName(grammar) + ".class))")
 			.addConfiguredBinding("ContentAssistLexer",
-					"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
+					"binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
+					"org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST" +
 					")).to(" + getFragmentHelper().getInternalContentAssistLexerClassName(grammar) +".class)");
 		if (partialParsing) {
 			binder.addTypeToType(
-				"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory", 
-				"org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.PartialStatefulFactory");
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory", 
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
 		}
 		return binder.getBindings();
 	}
