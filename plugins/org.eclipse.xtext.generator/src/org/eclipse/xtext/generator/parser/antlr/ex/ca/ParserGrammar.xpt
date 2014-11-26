@@ -20,7 +20,7 @@
 «EXTENSION org::eclipse::xtext::EcoreUtils»
 
 «DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
-«FILE helper.getContentAssistParserGrammarFileName(this).asPath()+".g" SRC_GEN_UI-»
+«FILE helper.getContentAssistParserGrammarFileName(this).asPath()+".g" SRC_GEN_IDE-»
 /*
 «fileHeader()»
 */

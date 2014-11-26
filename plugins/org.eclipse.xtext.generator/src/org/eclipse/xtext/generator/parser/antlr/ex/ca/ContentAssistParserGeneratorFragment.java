@@ -50,8 +50,8 @@ public class ContentAssistParserGeneratorFragment extends AbstractAntlrGenerator
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		KeywordHelper helper = new KeywordHelper(grammar, getOptions().isIgnoreCase());
 		super.generate(grammar, ctx);
-		final String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_UI).getPath();
-		final String encoding = getEncoding(ctx, Generator.SRC_GEN_UI);
+		final String srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_IDE).getPath();
+		final String encoding = getEncoding(ctx, Generator.SRC_GEN_IDE);
 		String libPath = srcGenPath + "/" + getFragmentHelper().getContentAssistLexerGrammarFileName(grammar).replace('.', '/');
 		libPath = libPath.substring(0, libPath.lastIndexOf('/'));
 		String absoluteLexerFileName = srcGenPath+"/"+getFragmentHelper().getContentAssistLexerGrammarFileName(grammar).replace('.', '/')+".g";

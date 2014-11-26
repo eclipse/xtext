@@ -18,7 +18,7 @@
 «EXTENSION org::eclipse::xtext::EcoreUtils»
 
 «DEFINE grammar(AntlrOptions options) FOR Grammar»
-«FILE getGrammarFileName().asPath()+".g" SRC_GEN_UI-»
+«FILE getGrammarFileName().asPath()+".g" SRC_GEN_IDE-»
 /*
 «fileHeader()»
 */
