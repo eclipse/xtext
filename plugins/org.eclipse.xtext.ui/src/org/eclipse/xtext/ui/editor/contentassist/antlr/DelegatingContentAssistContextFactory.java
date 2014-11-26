@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.contentassist.antlr2;
+package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,14 +29,14 @@ import com.google.inject.Singleton;
  * @since 2.8
  */
 @Singleton
-public class ParserBasedContentAssistContextFactory extends AbstractContentAssistContextFactory {
+public class DelegatingContentAssistContextFactory extends AbstractContentAssistContextFactory {
 	
 	@Inject
 	private Provider<StatefulFactory> statefulFactoryProvider;
 
 	private ExecutorService pool;
 	
-	public ParserBasedContentAssistContextFactory() {
+	public DelegatingContentAssistContextFactory() {
 		pool = Executors.newFixedThreadPool(3);
 	}
 	
