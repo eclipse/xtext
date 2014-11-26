@@ -6,7 +6,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 
-public class MyDslLinkingTest extends LightCodeInsightFixtureTestCase {
+public class SDomainLinkingTest extends LightCodeInsightFixtureTestCase {
 	
 	@Override
 	protected String getTestDataPath() {
@@ -24,7 +24,7 @@ public class MyDslLinkingTest extends LightCodeInsightFixtureTestCase {
 		PsiElement resolved = reference.resolve();
 		assertTrue("" + resolved, resolved instanceof PsiNamedEObject);
 		
-		PsiNamedEObject<?> namedEObject = (PsiNamedEObject<?>) resolved;
+		PsiNamedEObject namedEObject = (PsiNamedEObject) resolved;
 		assertEquals("Foo", namedEObject.getName());
 	}
 	
@@ -39,7 +39,7 @@ public class MyDslLinkingTest extends LightCodeInsightFixtureTestCase {
 		PsiElement resolved = reference.resolve();
 		assertTrue("" + resolved, resolved instanceof PsiNamedEObject);
 		
-		PsiNamedEObject<?> namedEObject = (PsiNamedEObject<?>) resolved;
+		PsiNamedEObject namedEObject = (PsiNamedEObject) resolved;
 		assertEquals("Foo", namedEObject.getName());
 	}
 

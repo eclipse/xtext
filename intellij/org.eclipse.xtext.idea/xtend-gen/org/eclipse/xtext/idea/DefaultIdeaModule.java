@@ -5,6 +5,7 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
+import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import org.eclipse.xtext.ide.LexerIdeBindings;
@@ -12,6 +13,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttribute
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.idea.containers.ResolveScopeBasedContainerManger;
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
+import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
 import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions;
 import org.eclipse.xtext.idea.syntaxcoloring.DefaultSyntaxHighlighter;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -68,5 +70,10 @@ public class DefaultIdeaModule extends AbstractGenericModule {
     Named _named = Names.named(LexerIdeBindings.HIGHLIGHTING);
     LinkedBindingBuilder<ITokenDefProvider> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.to(AntlrTokenDefProvider.class);
+  }
+  
+  @SingletonBinding
+  public Class<? extends NamesValidator> bindNamesValidator() {
+    return NullNamesValidator.class;
   }
 }

@@ -1,8 +1,5 @@
 package org.eclipse.xtext.psi;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -55,6 +52,11 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 			this.psiElementProvider = null;
 		}
 		
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return getClass() == type;
+		}
+		
 		public CompositeElement getComposite() {
 			return composite;
 		}
@@ -89,14 +91,7 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 			if (object == null) {
 				return null;
 			}
-			Iterator<Adapter> adapters = object.eAdapters().iterator();
-			while (adapters.hasNext()) {
-				Adapter adapter = adapters.next();
-				if (adapter instanceof PsiAdapter) {
-					return ((PsiAdapter) adapter);
-				}
-			}
-			return null;
+			return (PsiAdapter) EcoreUtil.getAdapter(object.eAdapters(), PsiAdapter.class);
 		}
 		
 	}

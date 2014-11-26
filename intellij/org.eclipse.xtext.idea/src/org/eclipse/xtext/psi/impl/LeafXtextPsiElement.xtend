@@ -15,16 +15,16 @@ class LeafXtextPsiElement extends LeafPsiElement implements XtextPsiElement {
 		elementType.language as IXtextLanguage
 	}
 
-	override BaseXtextFile getContainingFile() {
-		super.getContainingFile() as BaseXtextFile
+	override BaseXtextFile getXtextFile() {
+		containingFile as BaseXtextFile
 	}
 
 	override getResource() {
-		containingFile.resource
+		xtextFile.resource
 	}
 	
 	override getINode() {
-		containingFile.getINode(this)
+		xtextFile.getINode(this)
 	}
 
 }

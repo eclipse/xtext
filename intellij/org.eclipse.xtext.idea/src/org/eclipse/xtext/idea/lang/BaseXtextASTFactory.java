@@ -1,7 +1,7 @@
 package org.eclipse.xtext.idea.lang;
 
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.psi.impl.LeafXtextPsiElement;
 import org.eclipse.xtext.psi.impl.LeafXtextPsiReferenceElement;
@@ -39,7 +39,7 @@ public class BaseXtextASTFactory extends DefaultASTFactoryImpl {
 			return leafElement;
 		}
 		LeafElement leafElement = doCreateLeaf(type, text);
-		leafElement.putUserData(ASTNodeAwareNodeModelBuilder.TOKEN_TYPE_KEY, type);
+		leafElement.putUserData(IASTNodeAwareNodeModelBuilder.TOKEN_TYPE_KEY, type);
 		return leafElement;
 	}
 

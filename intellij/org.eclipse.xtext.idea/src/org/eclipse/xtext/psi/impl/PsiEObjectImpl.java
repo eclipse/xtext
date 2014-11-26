@@ -68,7 +68,7 @@ public class PsiEObjectImpl<T extends StubElement> extends StubBasedPsiElementBa
 	}
 
 	public INode getINode() {
-		return getContainingFile().getINode(getNode());
+		return getXtextFile().getINode(getNode());
 	}
 
 	public boolean isRoot() {
@@ -80,7 +80,7 @@ public class PsiEObjectImpl<T extends StubElement> extends StubBasedPsiElementBa
 	}
 
 	public Resource getResource() {
-		return getContainingFile().getResource();
+		return getXtextFile().getResource();
 	}
 
 	public IXtextLanguage getXtextLanguage() {
@@ -88,8 +88,8 @@ public class PsiEObjectImpl<T extends StubElement> extends StubBasedPsiElementBa
 	}
 
 	@Override
-	public BaseXtextFile getContainingFile() {
-		return (BaseXtextFile) super.getContainingFile();
+	public BaseXtextFile getXtextFile() {
+		return (BaseXtextFile) getContainingFile();
 	}
 
 	@Override

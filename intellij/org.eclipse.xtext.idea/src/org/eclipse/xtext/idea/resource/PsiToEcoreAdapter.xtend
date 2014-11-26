@@ -7,6 +7,8 @@ import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.emf.ecore.resource.Resource
 
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+
 class PsiToEcoreAdapter extends AdapterImpl {
 	
 	@Accessors(PUBLIC_GETTER)
@@ -20,8 +22,12 @@ class PsiToEcoreAdapter extends AdapterImpl {
 		eAdapters += this
 	}
 	
+	override isAdapterForType(Object type) {
+		class == type
+	}
+	
 	static def get(Resource it) {
-		eAdapters.filter(PsiToEcoreAdapter).head
+		getAdapter(eAdapters, PsiToEcoreAdapter) as PsiToEcoreAdapter
 	}
 	
 }

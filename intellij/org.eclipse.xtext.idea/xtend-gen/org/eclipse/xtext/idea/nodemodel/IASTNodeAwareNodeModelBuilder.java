@@ -2,9 +2,11 @@ package org.eclipse.xtext.idea.nodemodel;
 
 import com.google.inject.ImplementedBy;
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
+import com.intellij.psi.tree.IElementType;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
@@ -17,6 +19,12 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 @ImplementedBy(ASTNodeAwareNodeModelBuilder.class)
 @SuppressWarnings("all")
 public interface IASTNodeAwareNodeModelBuilder {
+  public final static Key<Boolean> HIDDEN_KEY = Key.<Boolean>create("HIDDEN_KEY");
+  
+  public final static Key<Integer> LOOK_AHEAD_KEY = Key.<Integer>create("LOOK_AHEAD_KEY");
+  
+  public final static Key<IElementType> TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
+  
   public abstract Map<ASTNode, INode> getNodesMapping();
   
   public abstract Map<INode, List<ASTNode>> getReverseNodesMapping();

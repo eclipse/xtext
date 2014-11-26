@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.parser;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -12,12 +13,18 @@ import java.util.List;
 import java.util.Map;
 import org.antlr.runtime.TokenSource;
 import org.antlr.runtime.TokenStream;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.TokenSourceProvider;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -37,12 +44,14 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
   @Accessors(AccessorType.PROTECTED_GETTER)
   private TokenTypeProvider tokenTypeProvider;
   
+  @Inject
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  private TokenSourceProvider tokenSourceProvider;
+  
   public ASTNode parse(final IElementType root, final PsiBuilder builder) {
     try {
       ASTNode _xblockexpression = null;
       {
-        builder.setDebugMode(true);
-        PsiBuilder.Marker rootMarker = builder.mark();
         PsiXtextTokenStream _createTokenStream = this.createTokenStream(builder);
         AbstractPsiAntlrParser _createParser = this.createParser(builder, _createTokenStream);
         final Procedure1<AbstractPsiAntlrParser> _function = new Procedure1<AbstractPsiAntlrParser>() {
@@ -52,7 +61,14 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
           }
         };
         final AbstractPsiAntlrParser parser = ObjectExtensions.<AbstractPsiAntlrParser>operator_doubleArrow(_createParser, _function);
-        parser.parse();
+        PsiBuilder.Marker rootMarker = builder.mark();
+        final String entryRuleName = this.getEntryRuleName(root);
+        boolean _notEquals = (!Objects.equal(entryRuleName, null));
+        if (_notEquals) {
+          parser.parse(entryRuleName);
+        } else {
+          parser.parse();
+        }
         rootMarker.done(root);
         _xblockexpression = builder.getTreeBuilt();
       }
@@ -60,6 +76,31 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected String getEntryRuleName(final IElementType type) {
+    String _xifexpression = null;
+    if ((type instanceof IGrammarAwareElementType)) {
+      String _switchResult = null;
+      EObject _grammarElement = ((IGrammarAwareElementType)type).getGrammarElement();
+      final EObject grammarElement = _grammarElement;
+      boolean _matched = false;
+      if (!_matched) {
+        if (grammarElement instanceof AbstractRule) {
+          _matched=true;
+          _switchResult = ((AbstractRule)grammarElement).getName();
+        }
+      }
+      if (!_matched) {
+        if (grammarElement instanceof RuleCall) {
+          _matched=true;
+          AbstractRule _rule = ((RuleCall)grammarElement).getRule();
+          _switchResult = _rule.getName();
+        }
+      }
+      _xifexpression = _switchResult;
+    }
+    return _xifexpression;
   }
   
   protected abstract AbstractPsiAntlrParser createParser(final PsiBuilder builder, final TokenStream tokenStream);
@@ -71,6 +112,11 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       PsiXtextTokenStream _psiXtextTokenStream = new PsiXtextTokenStream(builder, tokenSource, this.tokenDefProvider);
       final Procedure1<PsiXtextTokenStream> _function = new Procedure1<PsiXtextTokenStream>() {
         public void apply(final PsiXtextTokenStream it) {
+          final Integer lookAhead = builder.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
+          boolean _notEquals = (!Objects.equal(lookAhead, null));
+          if (_notEquals) {
+            it.initCurrentLookAhead((lookAhead).intValue());
+          }
           HashSet<String> _initialHiddenTokens = AbstractXtextPsiParser.this.getInitialHiddenTokens();
           it.setInitialHiddenTokens(((String[])Conversions.unwrapArray(_initialHiddenTokens, String.class)));
         }
@@ -80,7 +126,10 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
     return _xblockexpression;
   }
   
-  protected abstract TokenSource createTokenSource(final PsiBuilder builder);
+  protected TokenSource createTokenSource(final PsiBuilder builder) {
+    CharSequence _originalText = builder.getOriginalText();
+    return this.tokenSourceProvider.createTokenSource(_originalText);
+  }
   
   protected HashSet<String> getInitialHiddenTokens() {
     HashSet<String> _xblockexpression = null;
@@ -117,5 +166,10 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
   @Pure
   protected TokenTypeProvider getTokenTypeProvider() {
     return this.tokenTypeProvider;
+  }
+  
+  @Pure
+  protected TokenSourceProvider getTokenSourceProvider() {
+    return this.tokenSourceProvider;
   }
 }

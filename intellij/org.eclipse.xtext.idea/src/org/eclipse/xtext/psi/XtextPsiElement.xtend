@@ -5,12 +5,13 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import com.intellij.psi.PsiTarget
 
-interface XtextPsiElement extends PsiElement {
+interface XtextPsiElement extends PsiElement, PsiTarget {
 
 	def IXtextLanguage getXtextLanguage()
 
-	override BaseXtextFile getContainingFile()
+	def BaseXtextFile getXtextFile()
 
 	def Resource getResource()
 

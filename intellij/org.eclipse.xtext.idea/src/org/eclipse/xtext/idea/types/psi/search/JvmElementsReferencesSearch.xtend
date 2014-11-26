@@ -34,7 +34,7 @@ class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference, Refere
 			return
 		}
 		try {
-			if (element instanceof PsiNamedEObject<?>) {
+			if (element instanceof PsiNamedEObject) {
 				for (psiJvmElement : element.EObject.jvmElements.map[psiElement].filter(PsiNamedElement)) {
 					queryParameters.optimizer.searchWord(psiJvmElement.name, queryParameters.effectiveSearchScope, true, psiJvmElement)
 				}

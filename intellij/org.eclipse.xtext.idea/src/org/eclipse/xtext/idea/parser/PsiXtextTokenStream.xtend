@@ -6,9 +6,9 @@ import java.util.Map
 import org.antlr.runtime.BaseRecognizer
 import org.antlr.runtime.TokenSource
 import org.eclipse.xtext.idea.lang.CreateElementType
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider
 import org.eclipse.xtext.parser.antlr.XtextTokenStream
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder
 
 class PsiXtextTokenStream extends XtextTokenStream {
 
@@ -53,7 +53,7 @@ class PsiXtextTokenStream extends XtextTokenStream {
 		val tokenType = builder.tokenType
 		builder.remapCurrentToken(
 			new CreateElementType(tokenType) [
-				putUserData(ASTNodeAwareNodeModelBuilder.HIDDEN_KEY, hidden)
+				putUserData(IASTNodeAwareNodeModelBuilder.HIDDEN_KEY, hidden)
 			]
 		)
 		builder.advanceLexer

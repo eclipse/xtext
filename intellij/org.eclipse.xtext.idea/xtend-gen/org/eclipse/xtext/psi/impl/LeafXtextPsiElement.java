@@ -22,18 +22,18 @@ public class LeafXtextPsiElement extends LeafPsiElement implements XtextPsiEleme
     return ((IXtextLanguage) _language);
   }
   
-  public BaseXtextFile getContainingFile() {
-    PsiFile _containingFile = super.getContainingFile();
+  public BaseXtextFile getXtextFile() {
+    PsiFile _containingFile = this.getContainingFile();
     return ((BaseXtextFile) _containingFile);
   }
   
   public Resource getResource() {
-    BaseXtextFile _containingFile = this.getContainingFile();
-    return _containingFile.getResource();
+    BaseXtextFile _xtextFile = this.getXtextFile();
+    return _xtextFile.getResource();
   }
   
   public INode getINode() {
-    BaseXtextFile _containingFile = this.getContainingFile();
-    return _containingFile.getINode(this);
+    BaseXtextFile _xtextFile = this.getXtextFile();
+    return _xtextFile.getINode(this);
   }
 }

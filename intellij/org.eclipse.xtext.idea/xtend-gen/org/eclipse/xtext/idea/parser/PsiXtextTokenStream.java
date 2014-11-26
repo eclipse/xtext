@@ -11,7 +11,7 @@ import org.antlr.runtime.BaseRecognizer;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.idea.lang.CreateElementType;
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -64,7 +64,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     final IElementType tokenType = this.builder.getTokenType();
     final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
       public void onCreate(final ASTNode it) {
-        it.<Boolean>putUserData(ASTNodeAwareNodeModelBuilder.HIDDEN_KEY, Boolean.valueOf(hidden));
+        it.<Boolean>putUserData(IASTNodeAwareNodeModelBuilder.HIDDEN_KEY, Boolean.valueOf(hidden));
       }
     };
     CreateElementType _createElementType = new CreateElementType(tokenType, _function);

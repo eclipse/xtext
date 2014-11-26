@@ -2,11 +2,9 @@ package org.eclipse.xtext.idea.nodemodel
 
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
-import com.intellij.openapi.util.Key
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
-import com.intellij.psi.tree.IElementType
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
@@ -24,12 +22,6 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.parser.antlr.TokenTool.*
 
 class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeAwareNodeModelBuilder {
-
-	public static val HIDDEN_KEY = Key.<Boolean>create('HIDDEN_KEY')
-
-	public static val LOOK_AHEAD_KEY = Key.<Integer>create('LOOK_AHEAD_KEY')
-
-	public static val TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
 
 	@Inject
 	IGrammarAccess grammarAccess
@@ -97,7 +89,7 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeA
 				if (tokenType != null) {
 					val tokenName = tokenType.toString
 					if (tokenName.lexerRule) {
-						val ruleName = tokenName.getLexerRuleName
+						val ruleName = tokenName.lexerRuleName
 						grammarAccess.grammar.allRules.findFirst[name == ruleName]
 					}
 				}

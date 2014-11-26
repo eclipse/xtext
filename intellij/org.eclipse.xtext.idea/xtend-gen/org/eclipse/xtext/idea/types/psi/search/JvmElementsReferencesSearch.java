@@ -49,8 +49,8 @@ public class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference,
       return;
     }
     try {
-      if ((element instanceof PsiNamedEObject<?>)) {
-        EObject _eObject = ((PsiNamedEObject<?>)element).getEObject();
+      if ((element instanceof PsiNamedEObject)) {
+        EObject _eObject = ((PsiNamedEObject)element).getEObject();
         Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(_eObject);
         final Function1<EObject, PsiElement> _function = new Function1<EObject, PsiElement>() {
           public PsiElement apply(final EObject it) {
