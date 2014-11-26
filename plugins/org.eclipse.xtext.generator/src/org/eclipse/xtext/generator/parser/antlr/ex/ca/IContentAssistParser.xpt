@@ -19,7 +19,7 @@
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 
 «DEFINE parser(boolean partialParsing, AntlrFragmentHelper helper) FOR Grammar»
-«FILE helper.getContentAssistParserClassName(this).asPath()+".java" SRC_GEN_UI-»
+«FILE helper.getContentAssistParserClassName(this).asPath()+".java" SRC_GEN_IDE-»
 /*
 «fileHeader()»
 */
