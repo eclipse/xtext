@@ -44,8 +44,9 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		return statefulFactoryProvider;
 	}
 	
-	public void setStatefulFactoryProvider(Provider<StatefulFactory> statefulFactoryProvider) {
-		this.statefulFactoryProvider = statefulFactoryProvider;
+	@SuppressWarnings("unchecked") //safe cast
+	public void setStatefulFactoryProvider(Provider<? extends StatefulFactory> statefulFactoryProvider) {
+		this.statefulFactoryProvider = (Provider<StatefulFactory>) statefulFactoryProvider;
 	}
 	
 	protected ExecutorService getPool() {
@@ -64,7 +65,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected Provider<ContentAssistContext.Builder> contentAssistContextProvider;
 		
 		@Inject
-		protected ContentAssistContextFactory delegate;
+		private ContentAssistContextFactory delegate;
 		
 		@Inject
 		protected PrefixMatcher matcher;
@@ -81,12 +82,16 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return doCreateContexts(offset);
 		}
 		
-		protected void setPool(ExecutorService pool) {
+		public void setPool(ExecutorService pool) {
 			delegate.setPool(pool);
 		}
 		
 		public ContentAssistContextFactory getDelegate() {
 			return delegate;
+		}
+		
+		public void setDelegate(ContentAssistContextFactory delegate) {
+			this.delegate = delegate;
 		}
 
 		protected ContentAssistContext[] doCreateContexts(int offset) {

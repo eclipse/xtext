@@ -15,9 +15,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminal;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminalRuleCall;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.LookaheadKeyword;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.LookAheadTerminal;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.LookAheadTerminalRuleCall;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.LookaheadKeyword;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
