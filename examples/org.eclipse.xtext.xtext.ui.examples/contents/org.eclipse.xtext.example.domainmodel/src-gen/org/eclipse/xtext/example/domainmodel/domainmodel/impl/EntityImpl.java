@@ -28,12 +28,13 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
  * An implementation of the model object '<em><b>Entity</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.impl.EntityImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.impl.EntityImpl#getFeatures <em>Features</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

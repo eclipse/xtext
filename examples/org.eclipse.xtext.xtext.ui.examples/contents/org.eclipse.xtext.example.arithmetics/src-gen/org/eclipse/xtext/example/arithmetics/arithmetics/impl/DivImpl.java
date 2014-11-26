@@ -19,12 +19,13 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
  * An implementation of the model object '<em><b>Div</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.DivImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.DivImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

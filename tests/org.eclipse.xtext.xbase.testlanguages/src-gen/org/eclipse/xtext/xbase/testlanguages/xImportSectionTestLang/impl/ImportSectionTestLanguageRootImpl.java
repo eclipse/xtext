@@ -21,11 +21,12 @@ import org.eclipse.xtext.xtype.XImportSection;
  * An implementation of the model object '<em><b>Import Section Test Language Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.impl.ImportSectionTestLanguageRootImpl#getImportSection <em>Import Section</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

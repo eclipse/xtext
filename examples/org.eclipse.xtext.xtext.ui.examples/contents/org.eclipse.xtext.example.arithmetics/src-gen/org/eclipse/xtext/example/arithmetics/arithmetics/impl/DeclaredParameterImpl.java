@@ -12,7 +12,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
  * An implementation of the model object '<em><b>Declared Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -28,13 +28,14 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
  * An implementation of the model object '<em><b>Module</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.ModuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.ModuleImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.ModuleImpl#getStatements <em>Statements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

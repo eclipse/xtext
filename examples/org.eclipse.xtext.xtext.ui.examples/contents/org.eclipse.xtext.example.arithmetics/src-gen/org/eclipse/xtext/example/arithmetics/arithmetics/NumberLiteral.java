@@ -11,10 +11,10 @@ import java.math.BigDecimal;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getNumberLiteral()
  * @model

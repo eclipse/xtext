@@ -11,11 +11,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.Definition#getArgs <em>Args</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.Definition#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage#getDefinition()
  * @model

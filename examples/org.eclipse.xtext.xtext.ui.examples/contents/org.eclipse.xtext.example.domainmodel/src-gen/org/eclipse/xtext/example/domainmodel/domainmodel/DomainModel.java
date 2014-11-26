@@ -15,11 +15,11 @@ import org.eclipse.xtext.xtype.XImportSection;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel#getImportSection <em>Import Section</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage#getDomainModel()
  * @model

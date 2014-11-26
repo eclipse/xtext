@@ -13,10 +13,10 @@ import org.eclipse.xtext.xtype.XImportSection;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot#getImportSection <em>Import Section</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.XImportSectionTestLangPackage#getImportSectionTestLanguageRoot()
  * @model

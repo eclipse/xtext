@@ -17,11 +17,12 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
  * An implementation of the model object '<em><b>Abstract Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.AbstractDefinitionImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

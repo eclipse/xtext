@@ -17,12 +17,13 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage;
  * An implementation of the model object '<em><b>Command</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.CommandImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.CommandImpl#getCode <em>Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

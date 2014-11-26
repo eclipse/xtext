@@ -269,21 +269,26 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private StatemachineElements pStatemachine;
-	private EventElements pEvent;
-	private CommandElements pCommand;
-	private StateElements pState;
-	private TransitionElements pTransition;
+	private final StatemachineElements pStatemachine;
+	private final EventElements pEvent;
+	private final CommandElements pCommand;
+	private final StateElements pState;
+	private final TransitionElements pTransition;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public StatemachineGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pStatemachine = new StatemachineElements();
+		this.pEvent = new EventElements();
+		this.pCommand = new CommandElements();
+		this.pState = new StateElements();
+		this.pTransition = new TransitionElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -317,7 +322,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	//	{Statemachine} ("events" events+=Event+ "end")? ("resetEvents" resetEvents+=[Event]+ "end")? ("commands"
 	//	commands+=Command+ "end")? states+=State*;
 	public StatemachineElements getStatemachineAccess() {
-		return (pStatemachine != null) ? pStatemachine : (pStatemachine = new StatemachineElements());
+		return pStatemachine;
 	}
 	
 	public ParserRule getStatemachineRule() {
@@ -327,7 +332,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	//Event:
 	//	name=ID code=ID;
 	public EventElements getEventAccess() {
-		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
+		return pEvent;
 	}
 	
 	public ParserRule getEventRule() {
@@ -337,7 +342,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	//Command:
 	//	name=ID code=ID;
 	public CommandElements getCommandAccess() {
-		return (pCommand != null) ? pCommand : (pCommand = new CommandElements());
+		return pCommand;
 	}
 	
 	public ParserRule getCommandRule() {
@@ -347,7 +352,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	//State:
 	//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
 	public StateElements getStateAccess() {
-		return (pState != null) ? pState : (pState = new StateElements());
+		return pState;
 	}
 	
 	public ParserRule getStateRule() {
@@ -357,7 +362,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	//Transition:
 	//	event=[Event] "=>" state=[State];
 	public TransitionElements getTransitionAccess() {
-		return (pTransition != null) ? pTransition : (pTransition = new TransitionElements());
+		return pTransition;
 	}
 	
 	public ParserRule getTransitionRule() {

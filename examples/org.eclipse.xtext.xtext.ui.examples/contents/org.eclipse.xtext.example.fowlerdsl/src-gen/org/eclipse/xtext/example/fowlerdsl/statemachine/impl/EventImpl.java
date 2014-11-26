@@ -17,12 +17,13 @@ import org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage;
  * An implementation of the model object '<em><b>Event</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.EventImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.fowlerdsl.statemachine.impl.EventImpl#getCode <em>Code</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
