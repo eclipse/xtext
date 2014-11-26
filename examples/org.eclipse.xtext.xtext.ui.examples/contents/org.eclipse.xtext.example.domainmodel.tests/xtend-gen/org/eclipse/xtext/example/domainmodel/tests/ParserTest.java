@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -79,6 +81,35 @@ public class ParserTest {
       JvmTypeReference _type = property.getType();
       String _identifier = _type.getIdentifier();
       Assert.assertEquals("java.lang.String", _identifier);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeReferencesValidator() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.append("package example {");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("entity MyEntity {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("p : List<int>");
+      _builder.newLine();
+      _builder.append("  ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      DomainModel _parse = this._parseHelper.parse(_builder);
+      this._validationTestHelper.assertError(_parse, 
+        TypesPackage.Literals.JVM_TYPE_REFERENCE, 
+        IssueCodes.INVALID_USE_OF_TYPE, 
+        "The primitive \'int\' cannot be a type argument");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

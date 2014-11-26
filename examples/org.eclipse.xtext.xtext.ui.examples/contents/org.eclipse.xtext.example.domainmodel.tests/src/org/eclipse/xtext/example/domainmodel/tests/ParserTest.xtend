@@ -15,6 +15,8 @@ import org.junit.runner.RunWith
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.common.types.TypesPackage
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(InjectorProviderCustom))
@@ -43,6 +45,22 @@ class ParserTest {
 		val property = entity.getFeatures().get(0) as Property
 		Assert::assertEquals("property", property.getName());
 		Assert::assertEquals("java.lang.String", property.getType().getIdentifier());
+	}
+	
+	@Test
+	def void testJvmTypeReferencesValidator() {
+		'''
+			import java.util.List
+			package example {
+			  entity MyEntity {
+			    p : List<int>
+			  }
+			}
+		'''.parse.assertError(
+			TypesPackage.Literals.JVM_TYPE_REFERENCE,
+			IssueCodes.INVALID_USE_OF_TYPE,
+			"The primitive 'int' cannot be a type argument"
+		)
 	}
 	
 	@Test
