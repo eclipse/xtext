@@ -18,7 +18,7 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.TextReplacements;
-import org.eclipse.xtext.formatting2.internal.TextRegionsToString;
+import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
 import org.eclipse.xtext.junit4.util.ParseHelper;

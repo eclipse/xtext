@@ -5,13 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2.internal;
+package org.eclipse.xtext.formatting2.debug;
 
 import java.util.List;
 
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextSegment;
 import org.eclipse.xtext.formatting2.TextReplacements;
+import org.eclipse.xtext.formatting2.internal.TextReplacement;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 
 import com.google.common.base.Strings;

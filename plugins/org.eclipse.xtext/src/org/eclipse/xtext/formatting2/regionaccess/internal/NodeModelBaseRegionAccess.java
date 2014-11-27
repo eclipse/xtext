@@ -8,27 +8,20 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.internal.AbstractTextSegment;
 import org.eclipse.xtext.formatting2.internal.TextSegment;
-import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
-import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -36,9 +29,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
@@ -135,7 +126,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		}
 
 		@Override
-		protected Map<EObject, AbstractRegionAccess.EObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
+		protected Map<EObject, AbstractEObjectTokens> getEObjectToTokensMap(ITextRegionAccess tokenAccess) {
 			this.eObjToTokens = Maps.newHashMap();
 			this.lastTokenOrGap = null;
 			this.lastTokens = null;
@@ -170,7 +161,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 			}
 			setLeadingGaps();
 			setTrailingGaps();
-			return ImmutableMap.<EObject, AbstractRegionAccess.EObjectTokens> copyOf(this.eObjToTokens);
+			return ImmutableMap.<EObject, AbstractEObjectTokens> copyOf(this.eObjToTokens);
 		}
 
 		@Override
@@ -235,251 +226,6 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		public Builder withResource(XtextResource resource) {
 			this.resource = resource;
 			return this;
-		}
-	}
-
-	protected static class EObjectTokens extends AbstractRegionAccess.EObjectTokens {
-		private final INode node;
-		private final NodeModelBaseRegionAccess tokenAccess;
-
-		public EObjectTokens(NodeModelBaseRegionAccess tokenAccess, INode node) {
-			super();
-			this.tokenAccess = tokenAccess;
-			this.node = node;
-		}
-
-		@Override
-		public AbstractElement getGrammarElement() {
-			INode current = node;
-			while (current != null) {
-				EObject grammarElement = current.getGrammarElement();
-				if (GrammarUtil.isAssignedEObjectRuleCall(grammarElement))
-					return (AbstractElement) grammarElement;
-				if (grammarElement instanceof Action) {
-					Action action = (Action) grammarElement;
-					if (action.getFeature() != null)
-						return (AbstractElement) grammarElement;
-					else {
-						EObject grammarElement2 = ((ICompositeNode) current).getFirstChild().getGrammarElement();
-						if (GrammarUtil.isAssignedEObjectRuleCall(grammarElement2))
-							return (AbstractElement) grammarElement2;
-					}
-				}
-				current = current.getParent();
-			}
-			return null;
-		}
-
-		@Override
-		public EObject getSemanticElement() {
-			return tokenAccess.findSemanticElement(node);
-		}
-	}
-
-	public static class Gap extends AbstractTextSegment implements IHiddenRegion {
-
-		private List<NodeHidden> hiddens = Lists.newArrayList();
-		private ISemanticRegion next;
-		private ISemanticRegion previous;
-		private final ITextRegionAccess tokenAccess;
-
-		protected Gap(ITextRegionAccess tokenAccess) {
-			super();
-			this.tokenAccess = tokenAccess;
-		}
-
-		public boolean containsComment() {
-			for (IHiddenRegionPart hidden : hiddens)
-				if (hidden instanceof IComment)
-					return true;
-			return false;
-		}
-
-		public int getLength() {
-			if (hiddens.isEmpty())
-				return 0;
-			int start = hiddens.get(0).getNode().getOffset();
-			int end = hiddens.get(hiddens.size() - 1).getNode().getEndOffset();
-			return end - start;
-		}
-
-		public IHiddenRegion getNextHiddenRegion() {
-			return next == null ? null : next.getNextHiddenRegion();
-		}
-
-		public ISemanticRegion getNextSemanticRegion() {
-			return next;
-		}
-
-		public int getOffset() {
-			if (hiddens.isEmpty()) {
-				if (previous != null)
-					return previous.getOffset() + previous.getLength();
-				return 0;
-			} else {
-				return hiddens.get(0).getOffset();
-			}
-		}
-
-		public List<IHiddenRegionPart> getParts() {
-			return ImmutableList.<IHiddenRegionPart> copyOf(hiddens);
-		}
-
-		public IHiddenRegion getPreviousHiddenRegion() {
-			return previous == null ? null : previous.getPreviousHiddenRegion();
-		}
-
-		public ISemanticRegion getPreviousSemanticRegion() {
-			return previous;
-		}
-
-		public ITextRegionAccess getTextRegionAccess() {
-			return tokenAccess;
-		}
-
-		public boolean isUndefined() {
-			return false;
-		}
-
-		protected void setNext(ISemanticRegion next) {
-			this.next = next;
-		}
-
-		protected void setPrevious(ISemanticRegion previous) {
-			this.previous = previous;
-		}
-
-		@Override
-		public String toString() {
-			return new TokenAccessToString().withOrigin(this).hightlightOrigin().toString();
-		}
-
-	}
-
-	protected static class NodeComment extends NodeHidden implements IComment {
-		public NodeComment(Gap gap, INode node) {
-			super(gap, node);
-		}
-	}
-
-	public static class NodeHidden extends NodeRegion implements IHiddenRegionPart {
-
-		private final Gap gap;
-
-		protected NodeHidden(Gap gap, INode node) {
-			super((NodeModelBaseRegionAccess) gap.getTextRegionAccess(), node);
-			this.gap = gap;
-		}
-
-		@Override
-		public AbstractRule getGrammarElement() {
-			EObject element = super.getGrammarElement();
-			return element instanceof AbstractRule ? (AbstractRule) element : null;
-		}
-
-		public IHiddenRegion getHiddenRegion() {
-			return gap;
-		}
-
-		public IHiddenRegionPart getNextHiddenPart() {
-			int i = gap.hiddens.indexOf(this) + 1;
-			if (i < gap.hiddens.size())
-				return gap.hiddens.get(i);
-			return null;
-		}
-
-		public IHiddenRegionPart getPreviousHiddenPart() {
-			int i = gap.hiddens.indexOf(this) - 1;
-			if (i > 0)
-				return gap.hiddens.get(i);
-			return null;
-		}
-
-	}
-
-	public static class NodeRegion extends AbstractTextSegment {
-		private final INode node;
-		private final NodeModelBaseRegionAccess tokenAccess;
-
-		protected NodeRegion(NodeModelBaseRegionAccess tokenAccess, INode node) {
-			super();
-			this.tokenAccess = tokenAccess;
-			this.node = node;
-		}
-
-		public EObject getGrammarElement() {
-			return node.getGrammarElement();
-		}
-
-		public int getLength() {
-			return node.getLength();
-		}
-
-		public INode getNode() {
-			return node;
-		}
-
-		public int getOffset() {
-			return node.getOffset();
-		}
-
-		public EObject getSemanticElement() {
-			return tokenAccess.findSemanticElement(node);
-		}
-
-		public ITextRegionAccess getTextRegionAccess() {
-			return tokenAccess;
-		}
-
-		@Override
-		public String toString() {
-			return new TokenAccessToString().withOrigin(this).hightlightOrigin().toString();
-		}
-	}
-
-	public static class NodeToken extends NodeRegion implements ISemanticRegion {
-
-		private IHiddenRegion leading;
-		private IHiddenRegion trailing;
-
-		protected NodeToken(NodeModelBaseRegionAccess tokenAccess, INode node) {
-			super(tokenAccess, node);
-		}
-
-		@Override
-		public AbstractElement getGrammarElement() {
-			EObject element = super.getGrammarElement();
-			return element instanceof AbstractElement ? (AbstractElement) element : null;
-		}
-
-		public IHiddenRegion getNextHiddenRegion() {
-			return trailing;
-		}
-
-		public ISemanticRegion getNextSemanticRegion() {
-			return trailing != null ? trailing.getNextSemanticRegion() : null;
-		}
-
-		public IHiddenRegion getPreviousHiddenRegion() {
-			return leading;
-		}
-
-		public ISemanticRegion getPreviousSemanticRegion() {
-			return leading != null ? leading.getPreviousSemanticRegion() : null;
-		}
-
-		protected void setLeadingGap(IHiddenRegion leading) {
-			this.leading = leading;
-		}
-
-		protected void setTrailingGap(IHiddenRegion trailing) {
-			this.trailing = trailing;
-		}
-	}
-
-	public static class NodeWhitespace extends NodeHidden implements IWhitespace {
-		protected NodeWhitespace(Gap gap, INode node) {
-			super(gap, node);
 		}
 	}
 
