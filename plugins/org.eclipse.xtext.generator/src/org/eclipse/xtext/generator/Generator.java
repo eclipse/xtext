@@ -550,6 +550,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 				exported.addAll(Arrays.asList(config.getExportedPackagesUi(config.getGrammar())));
 				imported.addAll(Arrays.asList(config.getImportedPackagesUi(config.getGrammar())));
 				requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesUi(config.getGrammar())));
+				if (!isIde()) {
+					exported.addAll(Arrays.asList(config.getExportedPackagesIde(config.getGrammar())));
+					imported.addAll(Arrays.asList(config.getImportedPackagesIde(config.getGrammar())));
+					requiredBundles.addAll(Arrays.asList(config.getRequiredBundlesIde(config.getGrammar())));
+				}
 			}
 
 			if (isMergeManifest()) {
