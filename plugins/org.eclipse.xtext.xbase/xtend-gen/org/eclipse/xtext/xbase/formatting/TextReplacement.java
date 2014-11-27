@@ -1,9 +1,14 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * @Deprecated use {@link ITextReplacement}
+ */
+@Deprecated
 @Data
 @SuppressWarnings("all")
 public class TextReplacement {

@@ -9,6 +9,7 @@ import java.util.TreeMap;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
@@ -25,6 +26,10 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @Deprecated use {@link IFormattableDocument}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class FormattableDocument {
   private final static Logger log = Logger.getLogger(FormattableDocument.class);

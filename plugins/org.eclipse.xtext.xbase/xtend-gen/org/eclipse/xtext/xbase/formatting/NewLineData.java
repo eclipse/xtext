@@ -2,10 +2,15 @@ package org.eclipse.xtext.xbase.formatting;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated
 @Data
 @SuppressWarnings("all")
 public class NewLineData extends FormattingData {

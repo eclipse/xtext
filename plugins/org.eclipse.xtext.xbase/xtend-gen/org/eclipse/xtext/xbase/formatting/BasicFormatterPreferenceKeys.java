@@ -1,8 +1,13 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.IntegerKey;
 import org.eclipse.xtext.xbase.formatting.StringKey;
 
+/**
+ * @Deprecated use {@link FormatterPreferenceKeys}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class BasicFormatterPreferenceKeys {
   public final static StringKey lineSeparator = new StringKey("line.separator", System.getProperty("line.separator"));

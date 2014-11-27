@@ -33,12 +33,14 @@ import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
+import org.eclipse.xtext.xbase.XSynchronizedExpression
 import org.eclipse.xtext.xbase.XThrowExpression
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XWhileExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtext.xbase.formatting2.XbaseFormatter
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xtype.XFunctionTypeRef
 
@@ -46,9 +48,11 @@ import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
-import org.eclipse.xtext.xbase.XSynchronizedExpression
 
-class XbaseFormatter2 extends AbstractFormatter {
+/**
+ * @Deprecated use {@link XbaseFormatter}
+ */
+@Deprecated class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess
 	@Inject extension HiddenLeafAccess
 	@Inject extension FormattingDataFactory

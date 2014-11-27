@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -15,6 +16,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
+/**
+ * @Deprecated use {@link ITextRegionAccess}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class NodeModelAccess {
   public INode nodeForEObject(final EObject obj) {

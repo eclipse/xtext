@@ -1,8 +1,13 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class FormattingDataInit {
   public String space = null;

@@ -1,6 +1,11 @@
 package org.eclipse.xtext.xbase.formatting
 
-class BasicFormatterPreferenceKeys {
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
+
+/**
+ * @Deprecated use {@link FormatterPreferenceKeys}
+ */
+@Deprecated class BasicFormatterPreferenceKeys {
 	public static val lineSeparator = new StringKey("line.separator", System.getProperty("line.separator"))
 	public static val indentation = new StringKey("indentation", "\t")
 	public static val indentationLength = new IntegerKey("indentation.length", 4)

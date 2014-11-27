@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
@@ -17,6 +18,10 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @Deprecated use {@link AbstractFormatter2}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public abstract class AbstractFormatter implements IBasicFormatter {
   @Accessors

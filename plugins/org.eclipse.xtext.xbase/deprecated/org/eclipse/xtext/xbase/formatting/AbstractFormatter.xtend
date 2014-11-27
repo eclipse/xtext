@@ -3,8 +3,12 @@ package org.eclipse.xtext.xbase.formatting
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.formatting2.AbstractFormatter2
 
-abstract class AbstractFormatter implements IBasicFormatter {
+/**
+ * @Deprecated use {@link AbstractFormatter2}
+ */
+@Deprecated abstract class AbstractFormatter implements IBasicFormatter {
 
 	@Accessors boolean allowIdentityEdits = false
 	@Accessors boolean diagnoseConflicts = true
