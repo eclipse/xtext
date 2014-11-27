@@ -55,7 +55,7 @@ public class EntitiesCompletionContributor extends CompletionContributor {
 			}});
 		ContentAssistContextFactory delegate = delegates.get();
 		delegate.setPool(pool);
-		ContentAssistContext[] contexts = delegate.create(text, toTextRegion(parameters.getPosition().getTextRange()), parameters.getOffset(), resource);
+		ContentAssistContext[] contexts = delegate.create(text, toTextRegion(parameters.getOriginalPosition().getTextRange()), parameters.getOffset(), resource);
 		for (ContentAssistContext context : contexts) {
 			for (AbstractElement grammarElement : context.getFirstSetGrammarElements()) {
 				createProposal(grammarElement, sortedResult);
