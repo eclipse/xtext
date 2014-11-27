@@ -1,13 +1,17 @@
 package org.eclipse.xtext.xbase.formatting
 
 import com.google.inject.Inject
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.nodemodel.INode
-
-import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import org.eclipse.xtext.preferences.PreferenceKey
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
-class FormattingDataFactory {
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated class FormattingDataFactory {
 
 	@Inject extension HiddenLeafAccess
 
@@ -205,7 +209,10 @@ class FormattingDataFactory {
 	}
 }
 
-class FormattingDataInit {
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated class FormattingDataInit {
 	public String space = null
 	public Integer newLines = null
 	public int increaseIndentationChange = 0

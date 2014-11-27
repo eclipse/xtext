@@ -5,6 +5,7 @@ package org.eclipse.xtext.xbase.formatting;
 
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.xbase.formatting2.XbaseFormatter;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.JvmParameterizedTypeReferenceElements;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XFunctionTypeRefElements;
@@ -12,7 +13,7 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XFunctionTypeRefEleme
 /**
  * This class is deprecated since it uses Xtext's old formatter architecture.
  * 
- * use XbaseFormatter2.xtend
+ * @deprecated use {@link XbaseFormatter}
  */
 @Deprecated
 public class XtypeFormatter extends AbstractDeclarativeFormatter {

@@ -37,9 +37,9 @@ import com.google.inject.Inject;
 /**
  * This class is deprecated since it uses Xtext's old formatter architecture.
  * 
- * use XbaseFormatter2.xtend
+ * @deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatter}
  */
-@Deprecated()
+@Deprecated
 public class XbaseFormatter extends AbstractDeclarativeFormatter {
 
 	@Inject

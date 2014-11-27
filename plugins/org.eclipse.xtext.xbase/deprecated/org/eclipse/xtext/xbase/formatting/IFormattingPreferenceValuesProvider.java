@@ -8,10 +8,14 @@
 package org.eclipse.xtext.xbase.formatting;
 
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.ITypedPreferenceValues;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use {@link ITypedPreferenceValues}
  */
+@Deprecated
 public interface IFormattingPreferenceValuesProvider extends IPreferenceValuesProvider {
 
 }
