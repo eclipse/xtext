@@ -14,13 +14,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.internal.CommentReplacer;
-import org.eclipse.xtext.formatting2.internal.FormattableDocument;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
 import org.eclipse.xtext.formatting2.internal.MultilineCommentReplacer;
+import org.eclipse.xtext.formatting2.internal.RootDocument;
 import org.eclipse.xtext.formatting2.internal.SinglelineCodeCommentReplacer;
 import org.eclipse.xtext.formatting2.internal.SinglelineDocCommentReplacer;
+import org.eclipse.xtext.formatting2.internal.SubDocument;
 import org.eclipse.xtext.formatting2.internal.TextReplacement;
 import org.eclipse.xtext.formatting2.internal.TextReplacerContext;
 import org.eclipse.xtext.formatting2.internal.TextReplacerMerger;
@@ -165,11 +166,11 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	}
 
 	public IFormattableDocument createFormattableDocument() {
-		return new FormattableDocument.RootDocument(this);
+		return new RootDocument(this);
 	}
 
 	public IFormattableSubDocument createFormattableSubDocument(ITextSegment region, IFormattableDocument parent) {
-		return new FormattableDocument.SubDocument(region, parent);
+		return new SubDocument(region, parent);
 	}
 
 	public IHiddenRegionFormatting createHiddenRegionFormatting() {

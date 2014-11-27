@@ -8,6 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal
 
 import com.google.inject.Inject
+import org.eclipse.xtext.formatting2.debug.TokenAccessToString
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

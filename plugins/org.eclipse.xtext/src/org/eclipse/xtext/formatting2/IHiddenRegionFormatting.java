@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
-import org.eclipse.xtext.formatting2.internal.ConflictingFormattingException;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 
 /**
