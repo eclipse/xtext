@@ -100,7 +100,7 @@ public class ContentAssistParserGeneratorFragment extends AbstractAntlrGenerator
 	}
 
 	@Override
-	public String[] getRequiredBundlesUi(Grammar grammar) {
+	public String[] getRequiredBundlesIde(Grammar grammar) {
 		return new String[] { "org.antlr.runtime" };
 	}
 	
