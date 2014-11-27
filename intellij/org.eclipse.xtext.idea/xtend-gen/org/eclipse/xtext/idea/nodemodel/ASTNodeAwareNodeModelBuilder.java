@@ -3,7 +3,6 @@ package org.eclipse.xtext.idea.nodemodel;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
@@ -35,12 +34,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeAwareNodeModelBuilder {
-  public final static Key<Boolean> HIDDEN_KEY = Key.<Boolean>create("HIDDEN_KEY");
-  
-  public final static Key<Integer> LOOK_AHEAD_KEY = Key.<Integer>create("LOOK_AHEAD_KEY");
-  
-  public final static Key<IElementType> TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
-  
   @Inject
   private IGrammarAccess grammarAccess;
   
@@ -126,7 +119,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
       } else {
         AbstractRule _xblockexpression_1 = null;
         {
-          final IElementType tokenType = it.<IElementType>getUserData(ASTNodeAwareNodeModelBuilder.TOKEN_TYPE_KEY);
+          final IElementType tokenType = it.<IElementType>getUserData(IASTNodeAwareNodeModelBuilder.TOKEN_TYPE_KEY);
           AbstractRule _xifexpression_1 = null;
           boolean _notEquals = (!Objects.equal(tokenType, null));
           if (_notEquals) {
@@ -161,7 +154,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
       }
       final EObject grammarElement = _xifexpression;
       Boolean _elvis = null;
-      Boolean _userData = it.<Boolean>getUserData(ASTNodeAwareNodeModelBuilder.HIDDEN_KEY);
+      Boolean _userData = it.<Boolean>getUserData(IASTNodeAwareNodeModelBuilder.HIDDEN_KEY);
       if (_userData != null) {
         _elvis = _userData;
       } else {
@@ -186,7 +179,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
         ICompositeNode _xblockexpression_1 = null;
         {
           final EObject grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
-          final Integer lookAhead = it.<Integer>getUserData(ASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
+          final Integer lookAhead = it.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
           final ICompositeNode compositeNode = this.newCompositeNode(grammarElement, (lookAhead).intValue(), parent);
           this.associate(it, compositeNode);
           _xblockexpression_1 = compositeNode;

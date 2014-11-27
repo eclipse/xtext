@@ -121,9 +121,9 @@ public class XtextPsiReference extends PsiReferenceBase<XtextPsiElement> impleme
       IElementType _elementType = _node.getElementType();
       EObject _grammarElement = ((IGrammarAwareElementType) _elementType).getGrammarElement();
       final CrossReference crossReference = ((CrossReference) _grammarElement);
-      BaseXtextFile _containingFile = this.myElement.getContainingFile();
+      BaseXtextFile _xtextFile = this.myElement.getXtextFile();
       ASTNode _node_1 = this.myElement.getNode();
-      final INode node = _containingFile.getINode(_node_1);
+      final INode node = _xtextFile.getINode(_node_1);
       final EObject context = NodeModelUtils.findActualSemanticObjectFor(node);
       final EReference reference = GrammarUtil.getReference(crossReference);
       List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(context, reference);
@@ -174,15 +174,15 @@ public class XtextPsiReference extends PsiReferenceBase<XtextPsiElement> impleme
           ProgressIndicatorProvider.checkCanceled();
           QualifiedName _name = objectDescription.getName();
           String name = this.qualifiedNameConverter.toString(_name);
-          BaseXtextFile _containingFile = this.myElement.getContainingFile();
-          Resource _resource = _containingFile.getResource();
+          BaseXtextFile _xtextFile = this.myElement.getXtextFile();
+          Resource _resource = _xtextFile.getResource();
           PsiElement element = this.psiModelAssociations.getPsiElement(objectDescription, _resource);
           boolean _notEquals = (!Objects.equal(element, null));
           if (_notEquals) {
             LookupElementBuilder _create = LookupElementBuilder.create(name);
             PsiElement _navigationElement = element.getNavigationElement();
-            PsiFile _containingFile_1 = _navigationElement.getContainingFile();
-            String _name_1 = _containingFile_1.getName();
+            PsiFile _containingFile = _navigationElement.getContainingFile();
+            String _name_1 = _containingFile.getName();
             LookupElementBuilder _withTypeText = _create.withTypeText(_name_1);
             variants.add(_withTypeText);
           }

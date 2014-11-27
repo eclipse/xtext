@@ -18,7 +18,7 @@ import org.antlr.runtime.TokenStream
 import org.antlr.runtime.UnwantedTokenException
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.CreateElementType
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
 
 abstract class AbstractPsiAntlrParser extends Parser {
@@ -132,7 +132,7 @@ abstract class AbstractPsiAntlrParser extends Parser {
 		val marker = compositeMarkers.pop
 		val lookAhead = lookAheads.remove(marker)
 		marker.done(new CreateElementType(elementType) [
-			putUserData(ASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead)
+			putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead)
 		])
 	}
 

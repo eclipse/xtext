@@ -73,7 +73,7 @@ class XtextPsiReference extends PsiReferenceBase<XtextPsiElement> implements Psi
 	protected def getCrossReferenceDescription() {
 		val crossReference = (myElement.node.elementType as IGrammarAwareElementType).grammarElement as CrossReference
 
-		val node = myElement.containingFile.getINode(myElement.node)
+		val node = myElement.xtextFile.getINode(myElement.node)
 		val context = node.findActualSemanticObjectFor
 		val reference = crossReference.reference
 		val index = context.findNodesForFeature(reference).indexed.findFirst [
@@ -92,7 +92,7 @@ class XtextPsiReference extends PsiReferenceBase<XtextPsiElement> implements Psi
 		for (objectDescription : crossReferenceDescription.variants) {
 			ProgressIndicatorProvider.checkCanceled
 			var name = qualifiedNameConverter.toString(objectDescription.name)
-			var element = objectDescription.getPsiElement(myElement.containingFile.resource)
+			var element = objectDescription.getPsiElement(myElement.xtextFile.resource)
 			if (element != null) {
 				variants +=
 					LookupElementBuilder.create(name).withTypeText(element.navigationElement.containingFile.name)

@@ -24,7 +24,7 @@ import org.antlr.runtime.UnwantedTokenException;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.CreateElementType;
-import org.eclipse.xtext.idea.nodemodel.ASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
@@ -199,7 +199,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     final Integer lookAhead = this.lookAheads.remove(marker);
     final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
       public void onCreate(final ASTNode it) {
-        it.<Integer>putUserData(ASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead);
+        it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead);
       }
     };
     CreateElementType _createElementType = new CreateElementType(elementType, _function);

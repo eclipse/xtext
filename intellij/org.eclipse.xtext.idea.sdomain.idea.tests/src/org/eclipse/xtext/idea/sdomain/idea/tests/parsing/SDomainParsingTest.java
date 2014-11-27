@@ -3,9 +3,9 @@ package org.eclipse.xtext.idea.sdomain.idea.tests.parsing;
 import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType;
 import org.eclipse.xtext.idea.tests.parsing.AbstractLanguageParsingTestCase;
 
-public class MyDslParsingTest extends AbstractLanguageParsingTestCase {
+public class SDomainParsingTest extends AbstractLanguageParsingTestCase {
 	
-	public MyDslParsingTest() {
+	public SDomainParsingTest() {
 		super(SDomainFileType.INSTANCE);
 	}
 	

@@ -1,9 +1,12 @@
 package org.eclipse.xtext.idea.nodemodel
 
+import com.google.inject.ImplementedBy
 import com.intellij.lang.ASTNode
+import com.intellij.openapi.util.Key
 import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
+import com.intellij.psi.tree.IElementType
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
@@ -11,10 +14,15 @@ import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage
-import com.google.inject.ImplementedBy
 
 @ImplementedBy(ASTNodeAwareNodeModelBuilder)
 interface IASTNodeAwareNodeModelBuilder {
+
+	val HIDDEN_KEY = Key.<Boolean>create('HIDDEN_KEY')
+
+	val LOOK_AHEAD_KEY = Key.<Integer>create('LOOK_AHEAD_KEY')
+
+	val TOKEN_TYPE_KEY = Key.<IElementType>create("TOKEN_TYPE_KEY");
 
 	def Map<ASTNode, INode> getNodesMapping()
 
