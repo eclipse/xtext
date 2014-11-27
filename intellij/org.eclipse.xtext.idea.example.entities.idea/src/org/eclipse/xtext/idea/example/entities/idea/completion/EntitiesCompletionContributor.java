@@ -25,6 +25,7 @@ import com.intellij.codeInsight.lookup.LookupElementWeigher;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import com.intellij.util.Consumer;
 
 public class EntitiesCompletionContributor extends CompletionContributor {
@@ -49,9 +50,15 @@ public class EntitiesCompletionContributor extends CompletionContributor {
 			public String compute() {
 				return parameters.getOriginalFile().getText();
 			}});
-		TextRange textRange = ApplicationManager.getApplication().runReadAction(new Computable<TextRange>() {
-			public TextRange compute() {
-				return parameters.getOriginalPosition().getTextRange();
+		ITextRegion region = ApplicationManager.getApplication().runReadAction(new Computable<ITextRegion>() {
+			public ITextRegion compute() {
+				PsiElement originalPosition = parameters.getOriginalPosition();
+				if (originalPosition == null) {
+					return new TextRegion(parameters.getPosition().getTextRange().getStartOffset(), 0);
+				} else {
+					TextRange textRange = originalPosition.getTextRange();
+					return new TextRegion(textRange.getStartOffset(), textRange.getLength());
+				}
 		}});
 		XtextResource resource = ApplicationManager.getApplication().runReadAction(new Computable<XtextResource>() {
 			public XtextResource compute() {
@@ -59,16 +66,12 @@ public class EntitiesCompletionContributor extends CompletionContributor {
 		}});
 		ContentAssistContextFactory delegate = delegates.get();
 		delegate.setPool(pool);
-		ContentAssistContext[] contexts = delegate.create(text, toTextRegion(textRange), parameters.getOffset(), resource);
+		ContentAssistContext[] contexts = delegate.create(text, region, parameters.getOffset(), resource);
 		for (ContentAssistContext context : contexts) {
 			for (AbstractElement grammarElement : context.getFirstSetGrammarElements()) {
 				createProposal(grammarElement, sortedResult);
 			}
 		}
-	}
-
-	private ITextRegion toTextRegion(TextRange textRange) {
-		return new TextRegion(textRange.getStartOffset(), textRange.getLength());
 	}
 
 	private CompletionResultSet getSortedResult(final CompletionParameters parameters, CompletionResultSet result) {
