@@ -30,7 +30,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
+public class StaticFeatureScope extends AbstractStaticOrInstanceFeatureScope {
 
 	private final TypeBucket bucket;
 	private final XExpression receiver;
@@ -81,10 +81,11 @@ public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 		return allDescriptions;
 	}
 
+	@Override
 	protected void addDescription(QualifiedName name, JvmFeature feature, List<IEObjectDescription> result) {
-		if (feature.isStatic())
+		if (feature.isStatic()) {
 			result.add(createDescription(name, feature, bucket));
-		else if (receiver == null && receiverType == null) {
+		} else if (receiver == null && receiverType == null) {
 			result.add(createInstanceDescription(name, feature, bucket));
 		}
 	}
@@ -116,11 +117,8 @@ public class StaticFeatureScope extends AbstractSessionBasedExecutableScope {
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
-			addDescription(featureName, feature, allDescriptions);
-			QualifiedName operator = getOperatorMapping().getOperator(featureName);
-			if (operator != null) {
-				addDescription(operator, feature, allDescriptions);
+			if (feature.isStatic() || (receiver == null && receiverType == null)) {
+				addDescriptions(feature, allDescriptions);
 			}
 		}
 		return allDescriptions;
