@@ -31,11 +31,41 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	@Override override void fillCompletionVariants(CompletionParameters parameters, CompletionResultSet result) {
-		val sortedResult = applySorting(parameters, result)
-		LegacyCompletionContributor.completeReference(parameters, sortedResult)
+		val sortedResult = result.withRelevanceSorter(getCompletionSorter(parameters, result))
+		createMatcherBasedProposals(parameters, sortedResult)
+		createReferenceBasedProposals(parameters, sortedResult)
+		createParserBasedProposals(parameters, sortedResult)
+		result.stopHere
+	}
 
-		val text = parameters.readOnly[originalFile.text]
-		var region = parameters.readOnly [
+	protected def getCompletionSorter(CompletionParameters parameters, CompletionResultSet result) {
+		CompletionSorter.defaultSorter(parameters, result.prefixMatcher)
+			.weighBefore("liftShorter", new DispreferKeywordsWeigher)
+	}
+
+	protected def createMatcherBasedProposals(CompletionParameters parameters, CompletionResultSet sortedResult) {
+		super.fillCompletionVariants(parameters, sortedResult)
+	}
+
+	protected def createReferenceBasedProposals(CompletionParameters parameters, CompletionResultSet sortedResult) {
+		LegacyCompletionContributor.completeReference(parameters, sortedResult)
+	}
+
+	protected def createParserBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
+		val contexts = newParserBasedFactory.create(parameters.text, parameters.replaceRegion, parameters.offset,parameters.resource)
+		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, parameters, result)]]
+	}
+
+	protected def newParserBasedFactory() {
+		delegates.get => [it.pool = pool]
+	}
+
+	protected def getText(CompletionParameters parameters) {
+		parameters.readOnly[originalFile.text]
+	}
+
+	protected def getReplaceRegion(CompletionParameters parameters) {
+		parameters.readOnly [
 			if (originalPosition == null) {
 				new TextRegion(position.textRange.startOffset, 0)
 			} else {
@@ -43,28 +73,23 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 				new TextRegion(textRange.startOffset, textRange.length)
 			}
 		]
-		val resource = parameters.readOnly[(originalFile as BaseXtextFile).resource as XtextResource]
-
-		val delegate = delegates.get => [it.pool = pool]
-		val contexts = delegate.create(text, region, parameters.offset, resource)
-		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, sortedResult)]]
-		result.stopHere
 	}
 
-	def private applySorting(CompletionParameters parameters, CompletionResultSet result) {
-		val xtextSorter = CompletionSorter.defaultSorter(parameters, result.prefixMatcher)
-			.weighBefore("liftShorter",	new DispreferKeywordsWeigher)
-		result.withRelevanceSorter(xtextSorter)
+	protected def getResource(CompletionParameters parameters) {
+		parameters.readOnly[(originalFile as BaseXtextFile).resource as XtextResource]
 	}
 
-	def private <T> readOnly(CompletionParameters parameters, (CompletionParameters)=>T reader) {
+	protected final def <T> readOnly(CompletionParameters parameters, (CompletionParameters)=>T reader) {
 		ApplicationManager.application.<T>runReadAction[reader.apply(parameters)]
 	}
 
-	def private dispatch createProposal(AbstractElement grammarElement, ContentAssistContext context, CompletionResultSet result) {
+	protected def createProposal(AbstractElement grammarElement, ContentAssistContext context, CompletionParameters parameters, CompletionResultSet result) {
+		switch grammarElement {
+			Keyword: createKeyWordProposal(grammarElement, context, parameters, result)
+		}
 	}
 
-	def private dispatch createProposal(Keyword keyword, ContentAssistContext context, CompletionResultSet result) {
+	protected def createKeyWordProposal(Keyword keyword, ContentAssistContext context, CompletionParameters parameters,	CompletionResultSet result) {
 		result.addElement(new KeywordLookupElement(keyword))
 	}
 

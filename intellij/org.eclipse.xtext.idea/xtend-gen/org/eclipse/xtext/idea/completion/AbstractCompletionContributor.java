@@ -18,7 +18,6 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -119,16 +118,72 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   @Override
   public void fillCompletionVariants(final CompletionParameters parameters, final CompletionResultSet result) {
-    final CompletionResultSet sortedResult = this.applySorting(parameters, result);
-    LegacyCompletionContributor.completeReference(parameters, sortedResult);
+    CompletionSorter _completionSorter = this.getCompletionSorter(parameters, result);
+    final CompletionResultSet sortedResult = result.withRelevanceSorter(_completionSorter);
+    this.createMatcherBasedProposals(parameters, sortedResult);
+    this.createReferenceBasedProposals(parameters, sortedResult);
+    this.createParserBasedProposals(parameters, sortedResult);
+    result.stopHere();
+  }
+  
+  protected CompletionSorter getCompletionSorter(final CompletionParameters parameters, final CompletionResultSet result) {
+    PrefixMatcher _prefixMatcher = result.getPrefixMatcher();
+    CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, _prefixMatcher);
+    AbstractCompletionContributor.DispreferKeywordsWeigher _dispreferKeywordsWeigher = new AbstractCompletionContributor.DispreferKeywordsWeigher();
+    return _defaultSorter.weighBefore("liftShorter", _dispreferKeywordsWeigher);
+  }
+  
+  protected void createMatcherBasedProposals(final CompletionParameters parameters, final CompletionResultSet sortedResult) {
+    super.fillCompletionVariants(parameters, sortedResult);
+  }
+  
+  protected boolean createReferenceBasedProposals(final CompletionParameters parameters, final CompletionResultSet sortedResult) {
+    return LegacyCompletionContributor.completeReference(parameters, sortedResult);
+  }
+  
+  protected void createParserBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
+    ContentAssistContextFactory _newParserBasedFactory = this.newParserBasedFactory();
+    String _text = this.getText(parameters);
+    TextRegion _replaceRegion = this.getReplaceRegion(parameters);
+    int _offset = parameters.getOffset();
+    XtextResource _resource = this.getResource(parameters);
+    final ContentAssistContext[] contexts = _newParserBasedFactory.create(_text, _replaceRegion, _offset, _resource);
+    final Procedure1<ContentAssistContext> _function = new Procedure1<ContentAssistContext>() {
+      public void apply(final ContentAssistContext c) {
+        ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
+        final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
+          public void apply(final AbstractElement e) {
+            AbstractCompletionContributor.this.createProposal(e, c, parameters, result);
+          }
+        };
+        IterableExtensions.<AbstractElement>forEach(_firstSetGrammarElements, _function);
+      }
+    };
+    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
+  }
+  
+  protected ContentAssistContextFactory newParserBasedFactory() {
+    ContentAssistContextFactory _get = this.delegates.get();
+    final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
+      public void apply(final ContentAssistContextFactory it) {
+        it.setPool(AbstractCompletionContributor.this.pool);
+      }
+    };
+    return ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+  }
+  
+  protected String getText(final CompletionParameters parameters) {
     final Function1<CompletionParameters, String> _function = new Function1<CompletionParameters, String>() {
       public String apply(final CompletionParameters it) {
         PsiFile _originalFile = it.getOriginalFile();
         return _originalFile.getText();
       }
     };
-    final String text = this.<String>readOnly(parameters, _function);
-    final Function1<CompletionParameters, TextRegion> _function_1 = new Function1<CompletionParameters, TextRegion>() {
+    return this.<String>readOnly(parameters, _function);
+  }
+  
+  protected TextRegion getReplaceRegion(final CompletionParameters parameters) {
+    final Function1<CompletionParameters, TextRegion> _function = new Function1<CompletionParameters, TextRegion>() {
       public TextRegion apply(final CompletionParameters it) {
         TextRegion _xifexpression = null;
         PsiElement _originalPosition = it.getOriginalPosition();
@@ -152,52 +207,21 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         return _xifexpression;
       }
     };
-    TextRegion region = this.<TextRegion>readOnly(parameters, _function_1);
-    final Function1<CompletionParameters, XtextResource> _function_2 = new Function1<CompletionParameters, XtextResource>() {
+    return this.<TextRegion>readOnly(parameters, _function);
+  }
+  
+  protected XtextResource getResource(final CompletionParameters parameters) {
+    final Function1<CompletionParameters, XtextResource> _function = new Function1<CompletionParameters, XtextResource>() {
       public XtextResource apply(final CompletionParameters it) {
         PsiFile _originalFile = it.getOriginalFile();
         Resource _resource = ((BaseXtextFile) _originalFile).getResource();
         return ((XtextResource) _resource);
       }
     };
-    final XtextResource resource = this.<XtextResource>readOnly(parameters, _function_2);
-    ContentAssistContextFactory _get = this.delegates.get();
-    final Procedure1<ContentAssistContextFactory> _function_3 = new Procedure1<ContentAssistContextFactory>() {
-      public void apply(final ContentAssistContextFactory it) {
-        it.setPool(AbstractCompletionContributor.this.pool);
-      }
-    };
-    final ContentAssistContextFactory delegate = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function_3);
-    int _offset = parameters.getOffset();
-    final ContentAssistContext[] contexts = delegate.create(text, region, _offset, resource);
-    final Procedure1<ContentAssistContext> _function_4 = new Procedure1<ContentAssistContext>() {
-      public void apply(final ContentAssistContext c) {
-        ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
-        final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
-          public void apply(final AbstractElement e) {
-            AbstractCompletionContributor.this.createProposal(e, c, sortedResult);
-          }
-        };
-        IterableExtensions.<AbstractElement>forEach(_firstSetGrammarElements, _function);
-      }
-    };
-    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function_4);
-    result.stopHere();
+    return this.<XtextResource>readOnly(parameters, _function);
   }
   
-  private CompletionResultSet applySorting(final CompletionParameters parameters, final CompletionResultSet result) {
-    CompletionResultSet _xblockexpression = null;
-    {
-      PrefixMatcher _prefixMatcher = result.getPrefixMatcher();
-      CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, _prefixMatcher);
-      AbstractCompletionContributor.DispreferKeywordsWeigher _dispreferKeywordsWeigher = new AbstractCompletionContributor.DispreferKeywordsWeigher();
-      final CompletionSorter xtextSorter = _defaultSorter.weighBefore("liftShorter", _dispreferKeywordsWeigher);
-      _xblockexpression = result.withRelevanceSorter(xtextSorter);
-    }
-    return _xblockexpression;
-  }
-  
-  private <T extends Object> T readOnly(final CompletionParameters parameters, final Function1<? super CompletionParameters, ? extends T> reader) {
+  protected final <T extends Object> T readOnly(final CompletionParameters parameters, final Function1<? super CompletionParameters, ? extends T> reader) {
     Application _application = ApplicationManager.getApplication();
     final Computable<T> _function = new Computable<T>() {
       public T compute() {
@@ -207,24 +231,18 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     return _application.<T>runReadAction(_function);
   }
   
-  private Object _createProposal(final AbstractElement grammarElement, final ContentAssistContext context, final CompletionResultSet result) {
-    return null;
+  protected void createProposal(final AbstractElement grammarElement, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (grammarElement instanceof Keyword) {
+        _matched=true;
+        this.createKeyWordProposal(((Keyword)grammarElement), context, parameters, result);
+      }
+    }
   }
   
-  private Object _createProposal(final Keyword keyword, final ContentAssistContext context, final CompletionResultSet result) {
+  protected void createKeyWordProposal(final Keyword keyword, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
     AbstractCompletionContributor.KeywordLookupElement _keywordLookupElement = new AbstractCompletionContributor.KeywordLookupElement(keyword);
     result.addElement(_keywordLookupElement);
-    return null;
-  }
-  
-  private Object createProposal(final AbstractElement keyword, final ContentAssistContext context, final CompletionResultSet result) {
-    if (keyword instanceof Keyword) {
-      return _createProposal((Keyword)keyword, context, result);
-    } else if (keyword != null) {
-      return _createProposal(keyword, context, result);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(keyword, context, result).toString());
-    }
   }
 }
