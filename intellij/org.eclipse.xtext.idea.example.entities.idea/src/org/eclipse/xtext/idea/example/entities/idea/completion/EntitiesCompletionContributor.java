@@ -49,13 +49,17 @@ public class EntitiesCompletionContributor extends CompletionContributor {
 			public String compute() {
 				return parameters.getOriginalFile().getText();
 			}});
+		TextRange textRange = ApplicationManager.getApplication().runReadAction(new Computable<TextRange>() {
+			public TextRange compute() {
+				return parameters.getOriginalPosition().getTextRange();
+		}});
 		XtextResource resource = ApplicationManager.getApplication().runReadAction(new Computable<XtextResource>() {
 			public XtextResource compute() {
 				return (XtextResource) ((BaseXtextFile) parameters.getOriginalFile()).getResource();
-			}});
+		}});
 		ContentAssistContextFactory delegate = delegates.get();
 		delegate.setPool(pool);
-		ContentAssistContext[] contexts = delegate.create(text, toTextRegion(parameters.getPosition().getTextRange()), parameters.getOffset(), resource);
+		ContentAssistContext[] contexts = delegate.create(text, toTextRegion(textRange), parameters.getOffset(), resource);
 		for (ContentAssistContext context : contexts) {
 			for (AbstractElement grammarElement : context.getFirstSetGrammarElements()) {
 				createProposal(grammarElement, sortedResult);
