@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -67,6 +68,33 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 		return super.getLocalElementsByName(name);
 	}
 	
+	@Override
+	protected List<IEObjectDescription> getAllLocalElements() {
+		List<IEObjectDescription> result = super.getAllLocalElements();
+		if (getSession().isInstanceContext() && !isExplicitStaticFeatureCall()) {
+			ITypeReferenceOwner owner = getReceiverType().getOwner();
+			QualifiedThisOrSuperDescription thisDescription = new QualifiedThisOrSuperDescription(THIS, owner.newParameterizedTypeReference(getTypeLiteral()), getBucket().getId(), true, getReceiver());
+			result.add(thisDescription);
+			JvmType receiverRawType = getTypeLiteral();
+			if (receiverRawType instanceof JvmDeclaredType) {
+				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
+				if (superType != null) {
+					QualifiedThisOrSuperDescription superDescription = new QualifiedThisOrSuperDescription(SUPER, owner.newParameterizedTypeReference(superType.getType()), getBucket().getId(), true, getReceiver());
+					result.add(superDescription);
+				}
+			}
+		}
+		return result;
+	}
+	
+	private boolean isExplicitStaticFeatureCall() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XMemberFeatureCall) {
+			return ((XMemberFeatureCall) featureCall).isExplicitStatic();
+		}
+		return false;
+	}
+
 	/* @Nullable */
 	protected JvmTypeReference getExtendedClass(JvmDeclaredType type) {
 		// TODO move JvmGenericType.getExtendedClass to JvmDeclaredType
