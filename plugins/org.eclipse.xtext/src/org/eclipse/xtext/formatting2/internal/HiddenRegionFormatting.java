@@ -8,10 +8,12 @@
 package org.eclipse.xtext.formatting2.internal;
 
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
+import org.eclipse.xtext.formatting2.ConflictingFormattingException;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IAutowrapFormatter;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatting;
+import org.eclipse.xtext.formatting2.debug.HiddenRegionFormattingToString;
 
 import com.google.common.base.Preconditions;
 

@@ -210,6 +210,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 			ITextSegment frameRegion = replacer.getRegion();
 			String replacerTitle = replacement.getReplacementText();
 			ITextSegment replacerRegion = replacement;
+			@SuppressWarnings("unchecked")
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
 					Tuples.create(replacerTitle, replacerRegion));
 			document.getRequest().getExceptionHandler().accept(exception);

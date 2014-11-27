@@ -16,7 +16,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
-import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.FormattingNotApplicableException;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
 import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -45,139 +45,6 @@ import com.google.common.collect.Sets;
  */
 public abstract class FormattableDocument implements IFormattableDocument {
 
-	public static class FilteredSubDocument extends SubDocument {
-
-		private final Predicate<ITextReplacer> filter;
-
-		public FilteredSubDocument(ITextSegment region, IFormattableDocument parent, Predicate<ITextReplacer> filter) {
-			super(region, parent);
-			this.filter = filter;
-		}
-
-		@Override
-		public void addReplacer(ITextReplacer replacer) {
-			if (filter.apply(replacer))
-				super.addReplacer(replacer);
-		}
-
-	}
-
-	protected static class MaxLineWidthDocument extends SubDocument {
-		private final int maxLineWidth;
-
-		public MaxLineWidthDocument(ITextSegment region, FormattableDocument parent, int maxLineWidth) {
-			super(region, parent);
-			this.maxLineWidth = maxLineWidth;
-		}
-
-		@Override
-		public void addReplacer(ITextReplacer replacer) {
-			validate(replacer);
-			super.addReplacer(replacer);
-		}
-
-		@Override
-		public ITextReplacerContext createReplacements(ITextReplacerContext context) {
-			ITextReplacerContext last = super.createReplacements(context);
-			List<ITextReplacement> replacements = last.getReplacementsUntil(context);
-			String string = applyTextReplacements(replacements);
-			if (string.contains("\n"))
-				throw new FormattingNotApplicableException();
-			if (context != null) {
-				int leadingCharCount = context.getLeadingCharsInLineCount();
-				int formattedLength = string.length();
-				int lineLength = leadingCharCount + formattedLength;
-				if (lineLength > maxLineWidth)
-					throw new FormattingNotApplicableException();
-			}
-			return last;
-		}
-
-		protected void validate(HiddenRegionReplacer replacer) throws FormattingNotApplicableException {
-			IHiddenRegionFormatting formatting = replacer.getFormatting();
-			Integer newLineMin = formatting.getNewLineMin();
-			if (newLineMin != null && newLineMin > 0)
-				throw new FormattingNotApplicableException();
-		}
-
-		protected void validate(ITextReplacer replacer) throws FormattingNotApplicableException {
-			if (replacer instanceof HiddenRegionReplacer)
-				validate((HiddenRegionReplacer) replacer);
-		}
-	}
-
-	public static class RootDocument extends FormattableDocument {
-
-		private final AbstractFormatter2 formatter;
-
-		public RootDocument(AbstractFormatter2 formatter) {
-			super();
-			this.formatter = formatter;
-		}
-
-		public AbstractFormatter2 getFormatter() {
-			return formatter;
-		}
-
-		public ITextSegment getRegion() {
-			return (ITextSegment) formatter.getRequest().getTextRegionAccess();
-		}
-
-		public FormatterRequest getRequest() {
-			return formatter.getRequest();
-		}
-
-	}
-
-	public static class SubDocument extends FormattableDocument implements IFormattableSubDocument,
-			ICompositeTextReplacer {
-
-		private final IFormattableDocument parent;
-		private final ITextSegment region;
-
-		public SubDocument(ITextSegment region, IFormattableDocument parent) {
-			super();
-			this.region = region;
-			this.parent = parent;
-		}
-
-		@Override
-		public ITextReplacerContext createReplacements(ITextReplacerContext previous) {
-			ITextReplacerContext context = ((TextReplacerContext) previous).withDocument(this);
-			context.setNextReplacerIsChild();
-			return ((TextReplacerContext) super.createReplacements(context)).withDocument(previous.getDocument());
-		}
-
-		public AbstractFormatter2 getFormatter() {
-			return parent.getFormatter();
-		}
-
-		public ITextSegment getRegion() {
-			return region;
-		}
-
-		public FormatterRequest getRequest() {
-			return parent.getRequest();
-		}
-
-		public IFormattableSubDocument requireFitsInLine() {
-			return requireFitsInLine(region.getOffset(), region.getLength());
-		}
-
-		public IFormattableSubDocument requireFitsInLine(int offset, int length) {
-			Integer maxLineWidth = getRequest().getPreferences().getPreference(FormatterPreferenceKeys.maxLineWidth);
-			return requireFitsInLine(offset, length, maxLineWidth);
-		}
-
-		public IFormattableSubDocument requireFitsInLine(int offset, int length, int maxLineWidth) {
-			TextSegment segment = new TextSegment(getTextRegionAccess(), offset, length);
-			MaxLineWidthDocument document = new MaxLineWidthDocument(segment, this, maxLineWidth);
-			addReplacer(document);
-			return document;
-		}
-
-	}
-
 	private final TextSegmentSet<ITextReplacer> replacers;
 
 	protected FormattableDocument() {
@@ -191,6 +58,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 			ITextSegment frameRegion = getRegion();
 			String replacerTitle = replacer.getClass().getSimpleName();
 			ITextSegment replacerRegion = replacer.getRegion();
+			@SuppressWarnings("unchecked")
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
 					Tuples.create(replacerTitle, replacerRegion));
 			getRequest().getExceptionHandler().accept(exception);

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Use this interface to invoke a formatter.
  * 
- * An Xtext language should have an implementation for this interface bound in their Guice Injector.
+ * An Xtext language should have an implementation for this interface bound in its runtime module.
  * 
  * @see org.eclipse.xtext.formatting2 for an introduction to formatting
  * @see AbstractFormatter2 to implement your own formatter
