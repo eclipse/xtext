@@ -236,14 +236,12 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return assertTextAtCursorPosition(this.cursorPosition, expectedText);
 	}
 	
+	/**
+	 * Asserts the presence of at least single the proposal with the given replacement string
+	 * at the cursor position {@code <|>} in the currently configured {@link #model}.
+	 */
 	public ProposalTester assertProposalAtCursor(String expectedText) throws Exception {
-		String currentModelToParse = getFullTextToBeParsed();
-		int idx = currentModelToParse.indexOf("<|>");
-		currentModelToParse = currentModelToParse.substring(0, idx) + currentModelToParse.substring(idx + 3);
-		ICompletionProposal[] proposals = computeCompletionProposals(currentModelToParse, idx);
-
-		if (proposals == null)
-			proposals = new ICompletionProposal[0];
+		ICompletionProposal[] proposals = getProposalsAtCursorIndicator();
 		for(ICompletionProposal proposal: proposals) {
 			if (expectedText.equals(toString(proposal))) {
 				return new ProposalTester(proposal);
@@ -253,7 +251,24 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return null;
 	}
 	
-	public ProposalTester assertProposalDisplayedAtCursor(String displayString) throws Exception {
+	/**
+	 * Asserts the absence of a proposal with the given replacement string
+	 * at the cursor position {@code <|>} in the currently configured {@link #model}.
+	 * @since 2.8
+	 */
+	public void assertNoProposalAtCursor(String unexpectedText) throws Exception {
+		ICompletionProposal[] proposals = getProposalsAtCursorIndicator();
+		for(ICompletionProposal proposal: proposals) {
+			if (unexpectedText.equals(toString(proposal))) {
+				Assert.fail("Unexpected proposal: " + unexpectedText + " Found: " + toString(proposals));
+			}
+		}
+	}
+
+	/**
+	 * Computes all proposals at the cursor position {@code <|>} in the currently configured {@link #model}.
+	 */
+	public ICompletionProposal[] getProposalsAtCursorIndicator() throws Exception {
 		String currentModelToParse = getFullTextToBeParsed();
 		int idx = currentModelToParse.indexOf("<|>");
 		currentModelToParse = currentModelToParse.substring(0, idx) + currentModelToParse.substring(idx + 3);
@@ -261,6 +276,17 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 		if (proposals == null)
 			proposals = new ICompletionProposal[0];
+		return proposals;
+	}
+	
+	/**
+	 * Asserts the presence of at least single the proposal with the given display string
+	 * at the cursor position {@code <|>} in the currently configured {@link #model}.
+	 * 
+	 * @see #assertProposalAtCursor(String)
+	 */
+	public ProposalTester assertProposalDisplayedAtCursor(String displayString) throws Exception {
+		ICompletionProposal[] proposals = getProposalsAtCursorIndicator();
 		for(ICompletionProposal proposal: proposals) {
 			if (displayString.equals(proposal.getDisplayString())) {
 				return new ProposalTester(proposal);
@@ -270,6 +296,10 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return null;
 	}
 	
+	/**
+	 * Asserts the presence of at least single the proposal with the given replacement string
+	 * at the cursor position {@link #cursorPosition} in the currently configured {@link #model}.
+	 */
 	public ProposalTester assertProposal(String expectedText) throws Exception {
 		String currentModelToParse = getFullTextToBeParsed();
 
