@@ -14,9 +14,21 @@ import java.util.List;
 import org.eclipse.xtext.formatting2.internal.TextReplacementList;
 
 /**
+ * Utilities related to {@link ITextReplacement}.
+ * 
+ * @since 2.8
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class TextReplacements {
+	/**
+	 * Applies all 'replacements' on 'input'.
+	 * 
+	 * Replaces the text regions in 'input' identified by {@link ITextReplacement#getOffset()} and
+	 * {@link ITextReplacement#getLength()} with {@link ITextReplacement#getReplacementText()}.
+	 * 
+	 * @return The text after the replacements have been applied.
+	 */
 	public static String apply(CharSequence input, Iterable<? extends ITextReplacement> replacements) {
 		ArrayList<ITextReplacement> list = new TextReplacementList<ITextReplacement>(replacements);
 		Collections.sort(list);
@@ -31,6 +43,10 @@ public class TextReplacements {
 		return result.toString();
 	}
 
+	/**
+	 * Applies replacements similar to {@link #apply(CharSequence, Iterable)}, but {@link ITextReplacement#getOffset()}
+	 * is treated as relative to {@link ITextSegment#getOffset()} from 'input'.
+	 */
 	public static String apply(ITextSegment input, Iterable<? extends ITextReplacement> replacements) {
 		List<ITextReplacement> list = new TextReplacementList<ITextReplacement>(replacements);
 		Collections.sort(list);

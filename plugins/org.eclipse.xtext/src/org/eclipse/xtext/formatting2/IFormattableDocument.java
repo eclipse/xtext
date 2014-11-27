@@ -55,8 +55,6 @@ public interface IFormattableDocument {
 
 	void formatConditionally(EObject owner, ISubFormatter... formatters) throws FormattingNotApplicableException;
 
-	//	int getInitalIndentation();
-
 	void formatConditionally(int offset, int length, ISubFormatter... formatters)
 			throws FormattingNotApplicableException;
 
@@ -66,13 +64,7 @@ public interface IFormattableDocument {
 
 	Throwable getTrace(ITextReplacer replacer);
 
-	//	String renderToString();
-
-	//	String renderToString(int start, int lenght);
-
 	ISemanticRegion prepend(ISemanticRegion semanticRegion, Procedure1<IHiddenRegionFormatter> before);
-
-	//	List<ITextReplacement> renderToTextReplacements(int start, int lenght, boolean allowIdentityEdits);
 
 	<T extends EObject> T prepend(T semanticRegion, Procedure1<IHiddenRegionFormatter> before);
 
