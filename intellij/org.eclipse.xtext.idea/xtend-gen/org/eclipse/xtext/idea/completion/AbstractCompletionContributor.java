@@ -6,9 +6,9 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionResult;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.completion.CompletionSorter;
+import com.intellij.codeInsight.completion.LegacyCompletionContributor;
 import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementWeigher;
@@ -18,7 +18,6 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.util.Consumer;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,7 +45,6 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   public static class KeywordLookupElement extends LookupElement {
     private final Keyword keyword;
     
-    @Override
     public String getLookupString() {
       return this.keyword.getValue();
     }
@@ -100,6 +98,16 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     }
   }
   
+  public static class DispreferKeywordsWeigher extends LookupElementWeigher {
+    public DispreferKeywordsWeigher() {
+      super("dispreferKeywords");
+    }
+    
+    public Boolean weigh(final LookupElement element) {
+      return Boolean.valueOf((element instanceof AbstractCompletionContributor.KeywordLookupElement));
+    }
+  }
+  
   @Inject
   private Provider<ContentAssistContextFactory> delegates;
   
@@ -111,22 +119,16 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   @Override
   public void fillCompletionVariants(final CompletionParameters parameters, final CompletionResultSet result) {
-    final CompletionResultSet sortedResult = this.getSortedResult(parameters, result);
-    final Consumer<CompletionResult> _function = new Consumer<CompletionResult>() {
-      public void consume(final CompletionResult it) {
-        LookupElement _lookupElement = it.getLookupElement();
-        sortedResult.addElement(_lookupElement);
-      }
-    };
-    sortedResult.runRemainingContributors(parameters, _function);
-    final Function1<CompletionParameters, String> _function_1 = new Function1<CompletionParameters, String>() {
+    final CompletionResultSet sortedResult = this.applySorting(parameters, result);
+    LegacyCompletionContributor.completeReference(parameters, sortedResult);
+    final Function1<CompletionParameters, String> _function = new Function1<CompletionParameters, String>() {
       public String apply(final CompletionParameters it) {
         PsiFile _originalFile = it.getOriginalFile();
         return _originalFile.getText();
       }
     };
-    final String text = this.<String>readOnly(parameters, _function_1);
-    final Function1<CompletionParameters, TextRegion> _function_2 = new Function1<CompletionParameters, TextRegion>() {
+    final String text = this.<String>readOnly(parameters, _function);
+    final Function1<CompletionParameters, TextRegion> _function_1 = new Function1<CompletionParameters, TextRegion>() {
       public TextRegion apply(final CompletionParameters it) {
         TextRegion _xifexpression = null;
         PsiElement _originalPosition = it.getOriginalPosition();
@@ -150,25 +152,25 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         return _xifexpression;
       }
     };
-    TextRegion region = this.<TextRegion>readOnly(parameters, _function_2);
-    final Function1<CompletionParameters, XtextResource> _function_3 = new Function1<CompletionParameters, XtextResource>() {
+    TextRegion region = this.<TextRegion>readOnly(parameters, _function_1);
+    final Function1<CompletionParameters, XtextResource> _function_2 = new Function1<CompletionParameters, XtextResource>() {
       public XtextResource apply(final CompletionParameters it) {
         PsiFile _originalFile = it.getOriginalFile();
         Resource _resource = ((BaseXtextFile) _originalFile).getResource();
         return ((XtextResource) _resource);
       }
     };
-    final XtextResource resource = this.<XtextResource>readOnly(parameters, _function_3);
+    final XtextResource resource = this.<XtextResource>readOnly(parameters, _function_2);
     ContentAssistContextFactory _get = this.delegates.get();
-    final Procedure1<ContentAssistContextFactory> _function_4 = new Procedure1<ContentAssistContextFactory>() {
+    final Procedure1<ContentAssistContextFactory> _function_3 = new Procedure1<ContentAssistContextFactory>() {
       public void apply(final ContentAssistContextFactory it) {
         it.setPool(AbstractCompletionContributor.this.pool);
       }
     };
-    final ContentAssistContextFactory delegate = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function_4);
+    final ContentAssistContextFactory delegate = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function_3);
     int _offset = parameters.getOffset();
     final ContentAssistContext[] contexts = delegate.create(text, region, _offset, resource);
-    final Procedure1<ContentAssistContext> _function_5 = new Procedure1<ContentAssistContext>() {
+    final Procedure1<ContentAssistContext> _function_4 = new Procedure1<ContentAssistContext>() {
       public void apply(final ContentAssistContext c) {
         ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
         final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
@@ -179,25 +181,17 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         IterableExtensions.<AbstractElement>forEach(_firstSetGrammarElements, _function);
       }
     };
-    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function_5);
+    IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function_4);
+    result.stopHere();
   }
   
-  private CompletionResultSet getSortedResult(final CompletionParameters parameters, final CompletionResultSet result) {
+  private CompletionResultSet applySorting(final CompletionParameters parameters, final CompletionResultSet result) {
     CompletionResultSet _xblockexpression = null;
     {
       PrefixMatcher _prefixMatcher = result.getPrefixMatcher();
       CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, _prefixMatcher);
-      final CompletionSorter xtextSorter = _defaultSorter.weighBefore("liftShorter", 
-        new LookupElementWeigher("xtext") {
-          @Override
-          public Comparable<?> weigh(final LookupElement element) {
-            if ((element instanceof AbstractCompletionContributor.KeywordLookupElement)) {
-              return Integer.valueOf(1);
-            } else {
-              return Integer.valueOf((-1));
-            }
-          }
-        });
+      AbstractCompletionContributor.DispreferKeywordsWeigher _dispreferKeywordsWeigher = new AbstractCompletionContributor.DispreferKeywordsWeigher();
+      final CompletionSorter xtextSorter = _defaultSorter.weighBefore("liftShorter", _dispreferKeywordsWeigher);
       _xblockexpression = result.withRelevanceSorter(xtextSorter);
     }
     return _xblockexpression;

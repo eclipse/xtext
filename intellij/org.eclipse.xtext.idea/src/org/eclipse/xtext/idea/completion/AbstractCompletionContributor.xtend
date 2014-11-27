@@ -6,6 +6,7 @@ import com.intellij.codeInsight.completion.CompletionContributor
 import com.intellij.codeInsight.completion.CompletionParameters
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.completion.CompletionSorter
+import com.intellij.codeInsight.completion.LegacyCompletionContributor
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.LookupElementWeigher
 import com.intellij.openapi.application.ApplicationManager
@@ -30,8 +31,8 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	@Override override void fillCompletionVariants(CompletionParameters parameters, CompletionResultSet result) {
-		val sortedResult = getSortedResult(parameters, result)
-		sortedResult.runRemainingContributors(parameters)[sortedResult.addElement(lookupElement)]
+		val sortedResult = applySorting(parameters, result)
+		LegacyCompletionContributor.completeReference(parameters, sortedResult)
 
 		val text = parameters.readOnly[originalFile.text]
 		var region = parameters.readOnly [
@@ -47,19 +48,12 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 		val delegate = delegates.get => [it.pool = pool]
 		val contexts = delegate.create(text, region, parameters.offset, resource)
 		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, sortedResult)]]
+		result.stopHere
 	}
 
-	def private getSortedResult(CompletionParameters parameters, CompletionResultSet result) {
-		val xtextSorter = CompletionSorter.defaultSorter(parameters, result.prefixMatcher).weighBefore("liftShorter",
-			new LookupElementWeigher("xtext") {
-				@Override override Comparable<?> weigh(LookupElement element) {
-					if (element instanceof KeywordLookupElement) {
-						return 1
-					} else {
-						return -1
-					}
-				}
-			})
+	def private applySorting(CompletionParameters parameters, CompletionResultSet result) {
+		val xtextSorter = CompletionSorter.defaultSorter(parameters, result.prefixMatcher)
+			.weighBefore("liftShorter",	new DispreferKeywordsWeigher)
 		result.withRelevanceSorter(xtextSorter)
 	}
 
@@ -78,8 +72,18 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	static class KeywordLookupElement extends LookupElement {
 		Keyword keyword
 
-		@Override override getLookupString() {
+		override getLookupString() {
 			keyword.value
+		}
+	}
+
+	static class DispreferKeywordsWeigher extends LookupElementWeigher {
+		new() {
+			super("dispreferKeywords")
+		}
+
+		override Boolean weigh(LookupElement element) {
+			element instanceof KeywordLookupElement
 		}
 	}
 }
