@@ -47,8 +47,10 @@ Workflow {
     	pathRtProject = runtimeProject
     	pathUiProject = "${runtimeProject}.ui"
     	pathTestProject = "${runtimeProject}.tests"
+    	pathIdeProject = "${runtimeProject}.ide"
     	projectNameRt = projectName
     	projectNameUi = "${projectName}.ui"
+    	projectNameIde = "${projectName}.ide"
     	language = auto-inject {
     		uri = grammarURI
     
