@@ -7,6 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
+/**
+ * Represents a comment.
+ * 
+ * For Xtext languages extending common.Terminals, these are tokens parsed with the terminal rules 'ML_COMMENT' and
+ * 'SL_COMMENT'.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * 
+ * @see IWhitespace
+ * @see IHiddenRegionPart
+ * 
+ * @since 2.8
+ */
 public interface IComment extends IHiddenRegionPart {
 
 }

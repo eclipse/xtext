@@ -7,6 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2.regionaccess;
 
+/**
+ * Represents a whitespace token inside a {@link IHiddenRegion}.
+ * 
+ * Whitespace are usually hidden tokens for which all characters have {@link Character#isWhitespace(char)} == true.
+ * 
+ * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @see IComment
+ * @see IHiddenRegion
+ * @see ITextRegionAccess
+ *
+ * @since 2.8
+ */
 public interface IWhitespace extends IHiddenRegionPart {
 
 }

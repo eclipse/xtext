@@ -19,7 +19,7 @@ import org.eclipse.xtext.util.ITextRegion;
 public interface ITextSegment extends Comparable<ITextSegment>, ITextRegion {
 	int getEndOffset();
 
-	ITextSegment getIndentation();
+	ITextSegment getIndentation(); //TODO: redundant with ITextRegionAccess#getIndentation(int offset)?
 
 	int getLineCount();
 

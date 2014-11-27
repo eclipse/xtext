@@ -10,34 +10,5 @@ package org.eclipse.xtext.formatting2;
 public interface IFormattableSubDocument extends IFormattableDocument {
 	IFormattableSubDocument requireFitsInLine(); // TODO: fits in line completely vs. first line fits in line.
 
-	//		IFormattableSubDocument requireSingleLine();
-
-	//		IFormattableSubDocument requireFitsInLine(int maxLineWidth);
-
-	//		IFormattableSubDocument requireFitsInLine(int offset, int length);
-
 	IFormattableSubDocument requireFitsInLine(int offset, int length, int maxLineWidth);
-
 }
-
-/*
-interface IFormattableDocumentBuilder {
-	//	IFormattableDocumentBuilder forRegion(ITextSegment region); // should be build constructor param
-
-	IFormattableDocumentBuilder withPreferences(ITypedPreferenceValues preferenes);
-
-	IFormattableDocumentBuilder withReplacerFilter(Predicate<ITextReplacer> replacer);
-
-	IFormattableDocument createDocument();
-}
-
-interface IConstraintDocumentBuilder extends IFormattableDocumentBuilder {
-
-	IFormattableDocumentBuilder requireDoesNotExceedMaxLineWidth();
-
-	IFormattableDocumentBuilder requireDoesNotWrap();
-
-	IFormattableDocumentBuilder requireFitsInLine();
-
-}
-*/
