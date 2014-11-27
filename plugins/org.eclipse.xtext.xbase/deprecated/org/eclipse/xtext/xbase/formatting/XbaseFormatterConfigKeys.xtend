@@ -1,6 +1,9 @@
 package org.eclipse.xtext.xbase.formatting
 
-class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
+/**
+ * @Deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys}
+ */
+@Deprecated class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
 	public static val preserveBlankLines = new IntegerKey("preserve.blank.lines", 1)
 	public static val blankLinesAroundExpression = new BlankLineKey("blank.line.around.expressions", 0)
 

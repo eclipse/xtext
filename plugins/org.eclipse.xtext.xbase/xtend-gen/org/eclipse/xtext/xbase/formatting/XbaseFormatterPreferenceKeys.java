@@ -8,6 +8,10 @@ import org.eclipse.xtext.xbase.formatting.NewLineKey;
 import org.eclipse.xtext.xbase.formatting.NewLineOrPreserveKey;
 import org.eclipse.xtext.xbase.formatting.WhitespaceKey;
 
+/**
+ * @Deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
   public final static IntegerKey preserveBlankLines = new IntegerKey("preserve.blank.lines", Integer.valueOf(1));

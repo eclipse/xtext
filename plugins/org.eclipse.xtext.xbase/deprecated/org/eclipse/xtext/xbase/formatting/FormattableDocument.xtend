@@ -7,7 +7,13 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
+import org.eclipse.xtext.formatting2.IFormattableDocument
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 
+/**
+ * @Deprecated use {@link IFormattableDocument}
+ */
+@Deprecated
 class FormattableDocument {
 	private static val Logger log = Logger.getLogger(FormattableDocument)
 	@Accessors val FormattingPreferenceValues cfg
@@ -292,7 +298,10 @@ class FormattableDocument {
 	
 }
 
-@Data abstract class FormattingData {
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated @Data abstract class FormattingData {
 	int offset
 	int length
 	int increaseIndentationChange
@@ -305,7 +314,10 @@ class FormattableDocument {
 	}
 }
 
-@Data class WhitespaceData extends FormattingData {
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated @Data class WhitespaceData extends FormattingData {
 	String space
 
 	override isEmpty() {
@@ -313,7 +325,10 @@ class FormattableDocument {
 	}
 }
 
-@Data class NewLineData extends FormattingData {
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated @Data class NewLineData extends FormattingData {
 	Integer newLines
 	
 	override isEmpty() {

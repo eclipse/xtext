@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.formatting.BlankLineKey;
@@ -30,6 +31,10 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * @Deprecated use {@link IHiddenRegionFormatter}
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class FormattingDataFactory {
   @Inject
