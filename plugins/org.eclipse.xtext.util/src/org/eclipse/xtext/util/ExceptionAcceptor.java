@@ -26,7 +26,7 @@ public enum ExceptionAcceptor implements IAcceptor<Exception> {
 			Exceptions.throwUncheckedException(t);
 		}
 	},
-	NULL {
+	IGNORING {
 		public void accept(Exception t) {
 		}
 	};

@@ -65,9 +65,14 @@ public class FormatterRequest {
 		return textRegionAccess;
 	}
 
+	/**
+	 * Sets the {@link #textRegionAccess}. If the region has syntax errors and no explicit
+	 * {@link ExceptionAcceptor} is configured yet, the {@link ExceptionAcceptor#IGNORING ignoring acceptor}
+	 * will be configured.
+	 */
 	public FormatterRequest setTextRegionAccess(ITextRegionAccess tokens) {
 		if (tokens.hasSyntaxError() && this.exceptionHandler == null)
-			this.exceptionHandler = ExceptionAcceptor.NULL;
+			this.exceptionHandler = ExceptionAcceptor.IGNORING;
 		this.textRegionAccess = tokens;
 		return this;
 	}
@@ -133,9 +138,11 @@ public class FormatterRequest {
 	 * 
 	 * Ignoring exceptions is useful when formatting a document with syntax errors.
 	 * 
+	 * Defaults to the {@link ExceptionAcceptor#LOGGING Logging Acceptor}
+	 * 
 	 * @see ExceptionAcceptor#LOGGING
 	 * @see ExceptionAcceptor#THROWING
-	 * @see ExceptionAcceptor#NULL
+	 * @see ExceptionAcceptor#IGNORING
 	 */
 	private IAcceptor<Exception> exceptionHandler;
 
