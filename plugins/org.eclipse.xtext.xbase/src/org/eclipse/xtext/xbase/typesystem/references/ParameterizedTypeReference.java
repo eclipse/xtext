@@ -12,6 +12,7 @@ import java.lang.reflect.Modifier;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -522,12 +523,17 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			// if it is still a proxy or one of the super types is a proxy,
 			// it's faster to look it up in the resource set
 			// otherwise it's faster to traverse the model directly to the root
-			ResourceSet resourceSet = getOwner().getContextResourceSet();
-			Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
-			JvmType type = (JvmType) typeResource.getContents().get(0);
-			if (type == null)
+			try {
+				ResourceSet resourceSet = getOwner().getContextResourceSet();
+				Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
+				JvmType type = (JvmType) typeResource.getContents().get(0);
+				if (type == null)
+					return null;
+				return getOwner().newParameterizedTypeReference(type);
+			} catch(WrappedException e) {
+				/* no java project available */
 				return null;
-			return getOwner().newParameterizedTypeReference(type);
+			}
 		}
 		boolean interfaceType = Modifier.isInterface(rawType.getModifiers());
 		if (isInterfaceType() && !interfaceType) {

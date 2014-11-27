@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -641,13 +642,18 @@ public abstract class LightweightTypeReference {
 	 */
 	/* @Nullable */
 	protected LightweightTypeReference internalFindTopLevelType(Class<?> rawType) {
-		ResourceSet resourceSet = getOwner().getContextResourceSet();
-		Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
-		List<EObject> resourceContents = typeResource.getContents();
-		if (resourceContents.isEmpty())
+		try {
+			ResourceSet resourceSet = getOwner().getContextResourceSet();
+			Resource typeResource = resourceSet.getResource(URIHelperConstants.OBJECTS_URI.appendSegment(rawType.getName()), true);
+			List<EObject> resourceContents = typeResource.getContents();
+			if (resourceContents.isEmpty())
+				return null;
+			JvmType type = (JvmType) resourceContents.get(0);
+			return getOwner().newParameterizedTypeReference(type);
+		} catch(WrappedException e) {
+			/* no java project / classpath context available, e.g. opened from history view */
 			return null;
-		JvmType type = (JvmType) resourceContents.get(0);
-		return getOwner().newParameterizedTypeReference(type);
+		}
 	}
 	
 	protected JvmType findNonNullType(Class<?> type) {
