@@ -2,8 +2,8 @@ package org.eclipse.xtext.psi.impl;
 
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
-import org.eclipse.xtext.psi.XtextPsiReference;
 import org.eclipse.xtext.psi.impl.LeafXtextPsiElement;
+import org.eclipse.xtext.psi.impl.XtextPsiReferenceImpl;
 
 @SuppressWarnings("all")
 public class LeafXtextPsiReferenceElement extends LeafXtextPsiElement {
@@ -12,6 +12,6 @@ public class LeafXtextPsiReferenceElement extends LeafXtextPsiElement {
   }
   
   public PsiReference getReference() {
-    return new XtextPsiReference(this);
+    return new XtextPsiReferenceImpl(this);
   }
 }

@@ -6,8 +6,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -17,9 +19,20 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 	@Inject
 	private IScopeProvider scopeProvider;
 	
+	@Inject
+	private ILocationInFileProvider locationInFileProvider;
+	
 	private Integer index;
     private EObject context;
 	private EReference reference;
+
+	@Override
+	public ITextRegion getTextRegion() {
+		if (index == null) {
+			return locationInFileProvider.getSignificantTextRegion(context, reference, -1);	
+		}
+		return locationInFileProvider.getSignificantTextRegion(context, reference, index);
+	}
 
     @SuppressWarnings("unchecked")
 	public EObject resolve() {

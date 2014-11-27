@@ -1,7 +1,5 @@
 package org.eclipse.xtext.psi.impl;
 
-import org.eclipse.xtext.psi.XtextPsiReference;
-
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
@@ -20,7 +18,7 @@ public class PsiEObjectReference<T extends StubElement> extends PsiEObjectImpl<T
 
 	@Override
 	public PsiReference getReference() {
-		return new XtextPsiReference(this);
+		return new XtextPsiReferenceImpl(this);
 	}
 
 }

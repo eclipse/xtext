@@ -1,7 +1,6 @@
 package org.eclipse.xtext.psi.impl
 
 import com.intellij.psi.tree.IElementType
-import org.eclipse.xtext.psi.XtextPsiReference
 
 class LeafXtextPsiReferenceElement extends LeafXtextPsiElement {
 
@@ -10,7 +9,7 @@ class LeafXtextPsiReferenceElement extends LeafXtextPsiElement {
 	}
 
 	override getReference() {
-		return new XtextPsiReference(this)
+		return new XtextPsiReferenceImpl(this)
 	}
 
 }
