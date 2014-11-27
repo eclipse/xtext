@@ -37,7 +37,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope implements IVisibilityHelper {
+public class ReceiverFeatureScope extends AbstractStaticOrInstanceFeatureScope implements IVisibilityHelper {
 
 	private final TypeBucket bucket;
 	private final LightweightTypeReference receiverType;
@@ -88,8 +88,9 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			if (!feature.isStatic())
-				allDescriptions.add(createDescription(name, feature, bucket));
+			if (!feature.isStatic()) {
+				addDescription(name, feature, allDescriptions);
+			}
 		}
 		return allDescriptions;
 	}
@@ -132,24 +133,15 @@ public class ReceiverFeatureScope extends AbstractSessionBasedExecutableScope im
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
 			if (!feature.isStatic()) {
-				String simpleName = feature.getSimpleName();
-				QualifiedName featureName = QualifiedName.create(simpleName);
-				allDescriptions.add(createDescription(featureName, feature, bucket));
-				QualifiedName operator = getOperatorMapping().getOperator(featureName);
-				if (operator != null) {
-					allDescriptions.add(createDescription(operator, feature, bucket));
-					QualifiedName compoundOperator = getOperatorMapping().getCompoundOperator(operator);
-					if (compoundOperator != null) {
-						allDescriptions.add(createDescription(compoundOperator, feature, bucket));	
-					}
-				}
-				String propertyName = toProperty(simpleName, feature);
-				if (propertyName != null) {
-					allDescriptions.add(createDescription(QualifiedName.create(propertyName), feature, bucket));	
-				}
+				addDescriptions(feature, allDescriptions);
 			}
 		}
 		return allDescriptions;
+	}
+
+	@Override
+	protected void addDescription(QualifiedName name, JvmFeature feature, List<IEObjectDescription> result) {
+		result.add(createDescription(name, feature, bucket));
 	}
 
 }

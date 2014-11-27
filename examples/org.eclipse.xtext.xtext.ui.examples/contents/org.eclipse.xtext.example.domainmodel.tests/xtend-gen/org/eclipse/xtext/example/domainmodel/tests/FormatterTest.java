@@ -112,7 +112,7 @@ public class FormatterTest {
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
           public void apply(final MapBasedPreferenceValues it) {
-            it.put(FormatterPreferenceKeys.indentation, " ");
+            it.<String>put(FormatterPreferenceKeys.indentation, " ");
           }
         };
         it.preferences(_function);

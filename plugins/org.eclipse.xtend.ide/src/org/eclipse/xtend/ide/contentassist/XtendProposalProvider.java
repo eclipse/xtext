@@ -595,4 +595,13 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			return;
 		super.completeBinaryOperationFeature(model, assignment, context, acceptor);
 	}
+	
+	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=453453 */
+	@Override
+	protected String getConcreteSyntaxRuleName(RuleCall ruleCall) {
+		if (grammarAccess.getFeatureCallIDRule() == ruleCall.getRule()) {
+			return grammarAccess.getIdOrSuperRule().getName();
+		}
+		return super.getConcreteSyntaxRuleName(ruleCall);
+	}
 }
