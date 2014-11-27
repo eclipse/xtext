@@ -34,7 +34,7 @@ class ValidationTests {
 		val model = parse('''
 			import java.util.List
 			entity X {
-				sb: java.util.List
+				sb: java.util.List<String>
 			}
 		''');
 		assertWarning(model, XIMPORT_DECLARATION, IMPORT_UNUSED);
@@ -44,8 +44,8 @@ class ValidationTests {
 		val model = parse('''
 			import java.util.List
 			entity X {
-				sb : List
-				op foo() : List {
+				sb : List<String>
+				op foo() : List<String> {
 					sb
 				}
 			}
@@ -57,8 +57,8 @@ class ValidationTests {
 		val model = parse('''
 			import java.util.Map$Entry
 			entity X {
-				sb: Entry
-				op foo() : Entry {
+				sb: Entry<String, String>
+				op foo() : Entry<String, String> {
 					sb
 				}
 			}
@@ -70,8 +70,8 @@ class ValidationTests {
 		val model = parse('''
 			import java.util.Map
 			entity X { 
-				sb: Map$Entry 
-				op foo() : Map$Entry {
+				sb: Map$Entry<String, String> 
+				op foo() : Map$Entry<String, String> {
 					sb
 				}
 			}
@@ -83,8 +83,8 @@ class ValidationTests {
 		val model = parse('''
 			import java.util.Map$Entry
 			entity X {
-				sb: Map$Entry
-				op foo(): Map$Entry {
+				sb: Map$Entry<String, String>
+				op foo(): Map$Entry<String, String> {
 					sb
 				}
 			}
@@ -115,8 +115,8 @@ class ValidationTests {
 			import java.util.List
 			import java.util.List
 			entity X {
-				sb: List
-				op foo() : List {
+				sb: List<String>
+				op foo() : List<String> {
 					sb
 				}
 			}
@@ -143,8 +143,8 @@ class ValidationTests {
 			import java.util.*
 			import java.util.List
 			entity X {
-				sb: List
-				op foo() : List {
+				sb: List<String>
+				op foo() : List<String> {
 					sb
 				}
 			}
