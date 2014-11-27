@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.IMerger;
 import org.eclipse.xtext.formatting2.ITextSegment;
+import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -35,11 +36,11 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		return titleGetter.apply(t);
 	}
 
-	public void add(T segment) {
+	public void add(T segment) throws ConflictingRegionsException {
 		add(segment, null);
 	}
 
-	public abstract void add(T segment, IMerger<T> merger);
+	public abstract void add(T segment, IMerger<T> merger) throws ConflictingRegionsException;
 
 	protected ITextSegment getRegion(T t) {
 		return regionGetter.apply(t);
@@ -53,7 +54,7 @@ public abstract class TextSegmentSet<T> implements Iterable<T> {
 		return traces;
 	}
 
-	protected void handleConflict(List<T> conflicts, Exception cause) {
+	protected void handleConflict(List<T> conflicts, Exception cause) throws ConflictingRegionsException {
 		List<RegionTrace> causes = Lists.newArrayList();
 		for (T t : conflicts) {
 			RegionTrace exception = traces.get(t);
