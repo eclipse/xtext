@@ -4,7 +4,9 @@ plugins {
 
 
 dependencies {
-	compile "org.eclipse.xtend:org.eclipse.xtend.core:$version"
+	compile ("org.eclipse.xtend:org.eclipse.xtend.core:$version") {
+		transitive = false
+	}
 	provided project(':org.eclipse.xtext.idea')
 	provided project(':org.eclipse.xtext.xbase.idea')
 }
