@@ -18,11 +18,11 @@ Require-Bundle: org.eclipse.xtext.idea.example.entities;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.jdt.debug.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare
+ org.eclipse.compare,
+ org.eclipse.xtext.idea.example.entities.ide;bundle-version="1.0.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.xtext.idea.example.entities.ui.quickfix,
  org.eclipse.xtext.idea.example.entities.ui.contentassist,
- org.eclipse.xtext.idea.example.entities.ui.contentassist.antlr,
  org.eclipse.xtext.idea.example.entities.ui.internal
 Bundle-Activator: org.eclipse.xtext.idea.example.entities.ui.internal.EntitiesActivator

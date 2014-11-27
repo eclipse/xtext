@@ -6,7 +6,6 @@
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.xbase.idea"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/org.eclipse.xtext.idea.example.entities"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities.ui"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.ui"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.example.entities.ide"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
