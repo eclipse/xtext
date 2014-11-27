@@ -9,10 +9,14 @@ package org.eclipse.xtext.xbase.formatting;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.preferences.IPreferenceValues;
+import org.eclipse.xtext.preferences.TypedPreferenceValues;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * @deprecated use {@link TypedPreferenceValues}
  */
+@Deprecated
 public class FormattingPreferenceValues {
 	
 	private final static Logger log = Logger.getLogger(FormattingPreferenceValues.class);

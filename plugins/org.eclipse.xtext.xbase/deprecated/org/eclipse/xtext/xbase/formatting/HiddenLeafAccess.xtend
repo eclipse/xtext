@@ -8,8 +8,12 @@ import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 
-class HiddenLeafAccess {
+/**
+ * @Deprecated use {@link ITextRegionAccess}
+ */
+@Deprecated class HiddenLeafAccess {
 	
 	@Inject extension NodeModelAccess
 	

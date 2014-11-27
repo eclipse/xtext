@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.formatting;
 
 import java.util.List;
 
+import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -18,7 +19,10 @@ import org.eclipse.xtext.resource.XtextResource;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.4
+ * 
+ * @deprecated use {@link IFormatter2}
  */
+@Deprecated
 public interface IBasicFormatter {
 
 	List<TextReplacement> format(XtextResource res, int offset, int length, FormattingPreferenceValues cfg);
