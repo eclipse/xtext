@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.validation;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.CheckMode;
 
@@ -31,7 +32,7 @@ public interface IResourceUIValidatorExtension {
 	 * @param mode
 	 *            the mode (normal,fast,expensive) of the validation
 	 */
-	void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor);
+	void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) throws OperationCanceledException;
 
 	/**
 	 * Delete all validation markers corresponding to the given checkMode on the passed in file
@@ -41,5 +42,5 @@ public interface IResourceUIValidatorExtension {
 	 * @param checkMode
 	 *            the mode (normal,fast,expensive) of the validation
 	 */
-	void deleteValidationMarkers(IFile file, CheckMode checkMode, IProgressMonitor monitor);
+	void deleteValidationMarkers(IFile file, CheckMode checkMode, IProgressMonitor monitor) throws OperationCanceledException;
 }

@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
@@ -39,7 +40,7 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 	@Inject
 	private MarkerTypeProvider markerTypeProvider;
 
-	public void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) {
+	public void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) throws OperationCanceledException {
 		if (shouldProcess(file)) {
 			addMarkers(file, resource, mode, monitor);
 		}
@@ -53,7 +54,7 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 		super.deleteValidationMarkers(file, checkMode, monitor);
 	}
 
-	protected void addMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) {
+	protected void addMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) throws OperationCanceledException {
 		try {
 			List<Issue> list = resourceValidator.validate(resource, mode, getCancelIndicator(monitor));
 			if (monitor.isCanceled()) {
@@ -64,6 +65,8 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 				throw new OperationCanceledException();
 			}
 			createMarkers(file, list, monitor);
+		} catch (OperationCanceledError error) {
+			throw error.getWrapped();
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 		}
