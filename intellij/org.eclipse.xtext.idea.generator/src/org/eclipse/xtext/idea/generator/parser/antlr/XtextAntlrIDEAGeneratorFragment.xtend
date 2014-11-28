@@ -31,7 +31,7 @@ class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragmen
 	}
 
 	override protected generate(Grammar grammar, List<Object> parameters, Xtend2ExecutionContext ctx) {
-		installOutlets(ctx, ideaProjectPath, encoding)
+		installOutlets(ctx, ideaProjectPath, encoding, naming.lineDelimiter)
 		
 		val options = parameters.head
 		if (options instanceof AntlrOptions) {

@@ -6,6 +6,7 @@ import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.Output;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 
 @Singleton
@@ -29,7 +30,7 @@ public class XtextIDEAGeneratorExtensions {
     return this.getOutlet(it, this.IDEA_SRC_GEN);
   }
   
-  protected void installOutlet(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String outletName, final String projectPath, final String encoding, final boolean overwrite, final String defaultOutletName) {
+  protected void installOutlet(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String outletName, final String projectPath, final String encoding, final boolean overwrite, final String defaultOutletName, final String lineDelimiter) {
     Outlet _outlet = this.getOutlet(it, outletName);
     boolean _notEquals = (!Objects.equal(_outlet, null));
     if (_notEquals) {
@@ -56,13 +57,15 @@ public class XtextIDEAGeneratorExtensions {
       _xifexpression_1 = _outlet_2.getPath();
     }
     outlet.setPath(_xifexpression_1);
+    NewlineNormalizer _newlineNormalizer = new NewlineNormalizer(lineDelimiter);
+    outlet.addPostprocessor(_newlineNormalizer);
     XpandExecutionContext _xpandExecutionContext = it.getXpandExecutionContext();
     Output _output = _xpandExecutionContext.getOutput();
     _output.addOutlet(outlet);
   }
   
-  public void installOutlets(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String encoding) {
-    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC, "/src", encoding, false, Generator.SRC);
-    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC_GEN, "/src-gen", encoding, true, Generator.SRC_GEN);
+  public void installOutlets(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String encoding, final String lineDelimiter) {
+    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC, "/src", encoding, false, Generator.SRC, lineDelimiter);
+    this.installOutlet(it, pathIdeaPluginProject, this.IDEA_SRC_GEN, "/src-gen", encoding, true, Generator.SRC_GEN, lineDelimiter);
   }
 }

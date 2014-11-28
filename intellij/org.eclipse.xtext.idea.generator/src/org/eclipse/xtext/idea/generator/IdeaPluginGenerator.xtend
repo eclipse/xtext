@@ -73,7 +73,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 //			ctx.writeFile(Generator::SRC_GEN, grammar.getPsiElementPath(rule), grammar.compilePsiElement(rule))
 //			ctx.writeFile(Generator::SRC_GEN, grammar.getPsiElementImplPath(rule), grammar.compilePsiElementImpl(rule))	
 //		}
-		ctx.installOutlets(ideaProjectPath, encoding)
+		ctx.installOutlets(ideaProjectPath, encoding, naming.lineDelimiter)
 		
 		var outlet_src = ctx.srcOutlet.name
 		var outlet_src_gen = ctx.srcGenOutlet.name
@@ -95,6 +95,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		ctx.writeFile(outlet_src, grammar.standaloneSetupIdea.toJavaPath, grammar.compileStandaloneSetup)
 		ctx.writeFile(outlet_src, grammar.ideaModuleName.toJavaPath, grammar.compileIdeaModule)
+		ctx.writeFile(outlet_src, grammar.completionContributor.toXtendPath, grammar.compileCompletionContributor)
 		ctx.writeFile(outlet_src_gen, grammar.languageName.toJavaPath, grammar.compileLanguage)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeName.toJavaPath, grammar.compileFileType)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeFactoryName.toJavaPath, grammar.compileFileTypeFactory)
@@ -461,6 +462,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«grammar.compileExtension('lang.namesValidator', 'com.intellij.lang.refactoring.NamesValidator')»
 		      	<lang.syntaxHighlighterFactory key="«grammar.languageID»" implementationClass="«grammar.syntaxHighlighterFactoryName»" />
 		      	«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator')»
+		      	<completion.contributor language="«grammar.languageID»" implementationClass="«grammar.completionContributor»"/>
 		      	<elementDescriptionProvider implementation="«grammar.elementDescriptionProviderName»" order="first"/>
 		      	<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcherName»"/>
 			</extensions>
@@ -837,6 +839,19 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				return super.createElement(node);
 			}
 		
+		}
+	'''
+	
+	def compileCompletionContributor(Grammar grammar) '''
+		package «grammar.completionContributor.toPackageName»
+
+		import «grammar.languageName»
+		import org.eclipse.xtext.idea.completion.AbstractCompletionContributor
+		
+		class «grammar.completionContributor.toSimpleName» extends AbstractCompletionContributor {
+			new() {
+				super(«grammar.languageName.toSimpleName».INSTANCE)
+			}
 		}
 	'''
 
