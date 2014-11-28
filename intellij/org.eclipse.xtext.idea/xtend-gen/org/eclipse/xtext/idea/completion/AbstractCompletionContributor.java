@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.completion;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -108,7 +109,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     }
   }
   
-  @Inject
+  @Inject(optional = true)
   private Provider<ContentAssistContextFactory> delegates;
   
   private ExecutorService pool = Executors.newFixedThreadPool(3);
@@ -142,12 +143,16 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void createParserBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
-    ContentAssistContextFactory _newParserBasedFactory = this.newParserBasedFactory();
+    final ContentAssistContextFactory delegate = this.getParserBasedDelegate();
+    boolean _equals = Objects.equal(delegate, null);
+    if (_equals) {
+      return;
+    }
     String _text = this.getText(parameters);
     TextRegion _selection = this.getSelection(parameters);
     int _offset = parameters.getOffset();
     XtextResource _resource = this.getResource(parameters);
-    final ContentAssistContext[] contexts = _newParserBasedFactory.create(_text, _selection, _offset, _resource);
+    final ContentAssistContext[] contexts = delegate.create(_text, _selection, _offset, _resource);
     final Procedure1<ContentAssistContext> _function = new Procedure1<ContentAssistContext>() {
       public void apply(final ContentAssistContext c) {
         ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
@@ -162,14 +167,22 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     IterableExtensions.<ContentAssistContext>forEach(((Iterable<ContentAssistContext>)Conversions.doWrapArray(contexts)), _function);
   }
   
-  protected ContentAssistContextFactory newParserBasedFactory() {
-    ContentAssistContextFactory _get = this.delegates.get();
-    final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
-      public void apply(final ContentAssistContextFactory it) {
-        it.setPool(AbstractCompletionContributor.this.pool);
+  protected ContentAssistContextFactory getParserBasedDelegate() {
+    ContentAssistContextFactory _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(this.delegates, null);
+      if (_equals) {
+        return null;
       }
-    };
-    return ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+      ContentAssistContextFactory _get = this.delegates.get();
+      final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
+        public void apply(final ContentAssistContextFactory it) {
+          it.setPool(AbstractCompletionContributor.this.pool);
+        }
+      };
+      _xblockexpression = ObjectExtensions.<ContentAssistContextFactory>operator_doubleArrow(_get, _function);
+    }
+    return _xblockexpression;
   }
   
   protected String getText(final CompletionParameters parameters) {
@@ -179,7 +192,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         return _originalFile.getText();
       }
     };
-    return this.<String>readOnly(parameters, _function);
+    return this.<CompletionParameters, String>readOnly(parameters, _function);
   }
   
   protected TextRegion getSelection(final CompletionParameters parameters) {
@@ -201,7 +214,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         return ((CompletionContext) _userData).getOffsetMap();
       }
     };
-    return this.<OffsetMap>readOnly(parameters, _function);
+    return this.<CompletionParameters, OffsetMap>readOnly(parameters, _function);
   }
   
   protected XtextResource getResource(final CompletionParameters parameters) {
@@ -212,14 +225,14 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
         return ((XtextResource) _resource);
       }
     };
-    return this.<XtextResource>readOnly(parameters, _function);
+    return this.<CompletionParameters, XtextResource>readOnly(parameters, _function);
   }
   
-  protected final <T extends Object> T readOnly(final CompletionParameters parameters, final Function1<? super CompletionParameters, ? extends T> reader) {
+  protected final <S extends Object, T extends Object> T readOnly(final S input, final Function1<? super S, ? extends T> function) {
     Application _application = ApplicationManager.getApplication();
     final Computable<T> _function = new Computable<T>() {
       public T compute() {
-        return reader.apply(parameters);
+        return function.apply(input);
       }
     };
     return _application.<T>runReadAction(_function);
