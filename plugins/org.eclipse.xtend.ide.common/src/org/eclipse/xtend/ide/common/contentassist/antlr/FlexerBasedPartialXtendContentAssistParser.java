@@ -5,21 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import java.io.StringReader;
 import java.util.Collection;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.TokenSource;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.ContentAssistFlexerFactory;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursion;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;

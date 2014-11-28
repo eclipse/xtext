@@ -5,19 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import java.util.Map;
 
 import org.antlr.runtime.Token;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.LookAheadTerminal;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.LookAheadTerminalRuleCall;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.LookaheadKeyword;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

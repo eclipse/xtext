@@ -27,7 +27,8 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.ui.console;bundle-version="3.4.0",
  org.eclipse.jdt.launching;bundle-version="3.5.200",
  org.eclipse.core.expressions;bundle-version="3.3.0",
- org.eclipse.jdt.debug.ui;bundle-version="3.5.2"
+ org.eclipse.jdt.debug.ui;bundle-version="3.5.2",
+ org.eclipse.xtend.ide.common;visibility:=reexport
 Import-Package: com.ibm.icu.text,
  org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -39,7 +40,6 @@ Export-Package: org.eclipse.xtend.ide;x-internal:=true,
  org.eclipse.xtend.ide.codebuilder;x-internal:=true,
  org.eclipse.xtend.ide.contentassist;x-internal:=true,
  org.eclipse.xtend.ide.contentassist.antlr;x-internal:=true,
- org.eclipse.xtend.ide.contentassist.antlr.internal;x-internal:=true,
  org.eclipse.xtend.ide.contentassist.javadoc;x-internal:=true,
  org.eclipse.xtend.ide.edit;x-internal:=true,
  org.eclipse.xtend.ide.editor;x-internal:=true,

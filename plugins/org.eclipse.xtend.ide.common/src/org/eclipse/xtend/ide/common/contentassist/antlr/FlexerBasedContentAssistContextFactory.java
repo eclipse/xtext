@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -15,8 +15,8 @@ import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.parser.InternalFlexer;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.ContentAssistFlexerFactory;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.ContentAssistFlexerFactory;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory;
 import org.eclipse.xtext.util.Strings;
