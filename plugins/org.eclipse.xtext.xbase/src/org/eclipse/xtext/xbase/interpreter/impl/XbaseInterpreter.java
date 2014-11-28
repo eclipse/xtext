@@ -1209,11 +1209,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	protected Object assignValueTo(JvmIdentifiableElement feature, XAbstractFeatureCall assignment, Object value, IEvaluationContext context, CancelIndicator indicator) {
 		if (feature instanceof XVariableDeclaration) {
-			return _assigneValueTo((XVariableDeclaration) feature, assignment, value, context, indicator);
+			return _assignValueTo((XVariableDeclaration) feature, assignment, value, context, indicator);
 		} else if (feature instanceof JvmField) {
-			return _assigneValueTo((JvmField) feature, assignment, value, context, indicator);
+			return _assignValueTo((JvmField) feature, assignment, value, context, indicator);
 		} else if (feature instanceof JvmOperation) {
-			return _assigneValueTo((JvmOperation) feature, assignment, value, context, indicator);
+			return _assignValueTo((JvmOperation) feature, assignment, value, context, indicator);
 		} else {
 			throw new IllegalArgumentException("Couldn't invoke 'assignValueTo' for feature "+feature+"");
 		}
@@ -1223,7 +1223,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param assignment unused in this context but required for dispatching
 	 * @param indicator unused in this context but required for dispatching
 	 */
-	protected Object _assigneValueTo(XVariableDeclaration variable, XAbstractFeatureCall assignment, Object value,
+	protected Object _assignValueTo(XVariableDeclaration variable, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		if (variable.getType() != null) {
 			JvmTypeReference type = variable.getType();
@@ -1235,7 +1235,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return value;
 	}
 
-	protected Object _assigneValueTo(JvmField jvmField, XAbstractFeatureCall assignment, Object value,
+	protected Object _assignValueTo(JvmField jvmField, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		Object receiver = getReceiver(assignment, context, indicator);
 		if (receiver == null)
@@ -1263,7 +1263,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return result;
 	}
 
-	protected Object _assigneValueTo(JvmOperation jvmOperation, XAbstractFeatureCall assignment, Object value,
+	protected Object _assignValueTo(JvmOperation jvmOperation, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		List<Object> argumentValues;
 		if (assignment.getImplicitReceiver() != null 
