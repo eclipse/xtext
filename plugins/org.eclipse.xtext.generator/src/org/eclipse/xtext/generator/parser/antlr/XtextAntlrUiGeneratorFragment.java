@@ -154,11 +154,6 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	}
 
 	@Override
-	public String[] getRequiredBundlesIde(Grammar grammar) {
-		return new String[] { "org.antlr.runtime" };
-	}
-
-	@Override
 	public String[] getExportedPackagesIde(Grammar grammar) {
 		return new String[] { getNaming().basePackageIde(grammar) + ".contentassist.antlr" };
 	}

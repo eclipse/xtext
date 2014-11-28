@@ -162,8 +162,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       _builder.append(name, "");
       _builder.append("\' is an invalid ");
       _builder.append(ruleName, "");
-      String _string = _builder.toString();
-      throw new IncorrectOperationException(_string);
+      throw new IncorrectOperationException(_builder.toString());
     }
     Map<Integer, String> _tokenDefMap = this.tokenDefProvider.getTokenDefMap();
     int _type = token.getType();
@@ -176,8 +175,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       _builder_1.append(name, "");
       _builder_1.append("\' is an invalid ");
       _builder_1.append(ruleName, "");
-      String _string_1 = _builder_1.toString();
-      throw new IncorrectOperationException(_string_1);
+      throw new IncorrectOperationException(_builder_1.toString());
     }
   }
 }

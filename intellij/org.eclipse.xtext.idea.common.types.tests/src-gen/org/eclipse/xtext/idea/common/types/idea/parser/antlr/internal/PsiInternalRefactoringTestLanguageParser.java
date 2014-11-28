@@ -42,7 +42,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         
 
     public String[] getTokenNames() { return PsiInternalRefactoringTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g"; }
+    public String getGrammarFileName() { return "../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g"; }
 
 
 
@@ -62,11 +62,11 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:45:1: entryRuleModel : ruleModel EOF ;
+    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:45:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:45:15: ( ruleModel EOF )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:46:2: ruleModel EOF
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:45:15: ( ruleModel EOF )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:46:2: ruleModel EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel54);
@@ -94,13 +94,13 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:54:1: ruleModel : ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* ;
+    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:54:1: ruleModel : ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:54:10: ( ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:55:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:54:10: ( ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )* )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:55:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
             {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:55:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:55:2: ( (lv_referenceHolder_0_0= ruleReferenceHolder ) )*
             loop1:
             do {
                 int alt1=2;
@@ -113,10 +113,10 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:56:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
+            	    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:56:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
             	    {
-            	    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:56:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
-            	    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:57:4: lv_referenceHolder_0_0= ruleReferenceHolder
+            	    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:56:3: (lv_referenceHolder_0_0= ruleReferenceHolder )
+            	    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:57:4: lv_referenceHolder_0_0= ruleReferenceHolder
             	    {
 
             	    				markComposite();
@@ -157,11 +157,11 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleReferenceHolder"
-    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:69:1: entryRuleReferenceHolder : ruleReferenceHolder EOF ;
+    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:69:1: entryRuleReferenceHolder : ruleReferenceHolder EOF ;
     public final void entryRuleReferenceHolder() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:69:25: ( ruleReferenceHolder EOF )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:70:2: ruleReferenceHolder EOF
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:69:25: ( ruleReferenceHolder EOF )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:70:2: ruleReferenceHolder EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleReferenceHolder_in_entryRuleReferenceHolder115);
@@ -189,22 +189,22 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleReferenceHolder"
-    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:78:1: ruleReferenceHolder : ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) ;
+    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:78:1: ruleReferenceHolder : ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) ;
     public final void ruleReferenceHolder() throws RecognitionException {
         Token lv_name_0_0=null;
 
         try {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:78:20: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:79:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:78:20: ( ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:79:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
             {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:79:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:80:3: ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:79:2: ( ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:80:3: ( (lv_name_0_0= RULE_ID ) ) ( ( ruleFQN ) )
             {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:80:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:81:4: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:80:3: ( (lv_name_0_0= RULE_ID ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:81:4: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:81:4: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:82:5: lv_name_0_0= RULE_ID
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:81:4: (lv_name_0_0= RULE_ID )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:82:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf();
@@ -219,11 +219,11 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:91:3: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:92:4: ( ruleFQN )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:91:3: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:92:4: ( ruleFQN )
             {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:92:4: ( ruleFQN )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:93:5: ruleFQN
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:92:4: ( ruleFQN )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:93:5: ruleFQN
             {
 
             					markComposite();
@@ -261,11 +261,11 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:106:1: entryRuleFQN : ruleFQN EOF ;
+    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:106:1: entryRuleFQN : ruleFQN EOF ;
     public final void entryRuleFQN() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:106:13: ( ruleFQN EOF )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:107:2: ruleFQN EOF
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:106:13: ( ruleFQN EOF )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:107:2: ruleFQN EOF
             {
              markComposite(); 
             pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN224);
@@ -293,7 +293,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:115:1: ruleFQN : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
+    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:115:1: ruleFQN : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) ;
     public final void ruleFQN() throws RecognitionException {
         Token this_ID_0=null;
         Token kw=null;
@@ -301,11 +301,11 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
         Token this_ID_4=null;
 
         try {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:115:8: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:116:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:115:8: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* ) )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:116:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:116:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:117:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:116:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )* )
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:117:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '$' this_ID_4= RULE_ID )*
             {
 
             			markLeaf();
@@ -314,7 +314,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
             			doneLeaf(this_ID_0, elementTypeProvider.getFQN_IDTerminalRuleCall_0ElementType());
             		
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:124:3: (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:124:3: (kw= '.' this_ID_2= RULE_ID )*
             loop2:
             do {
                 int alt2=2;
@@ -327,7 +327,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:125:4: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:125:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf();
@@ -352,7 +352,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:140:3: (kw= '$' this_ID_4= RULE_ID )*
+            // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:140:3: (kw= '$' this_ID_4= RULE_ID )*
             loop3:
             do {
                 int alt3=2;
@@ -365,7 +365,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:141:4: kw= '$' this_ID_4= RULE_ID
+            	    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:141:4: kw= '$' this_ID_4= RULE_ID
             	    {
 
             	    				markLeaf();

@@ -157,6 +157,15 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "PsiParser");
   }
   
+  public String getPomDeclarationSearcherName(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".lang.pom.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "PomDeclarationSearcher");
+  }
+  
   public String getSyntaxHighlighterFactoryName(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".lang.");
