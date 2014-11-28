@@ -136,4 +136,8 @@ class IdeaPluginClassNames {
 	def String getAntlrLexerName(Grammar it) {
 		it.name.toPackageName+'.parser.antlr.internal.Internal'+it.name.toSimpleName+'Lexer'
 	}
+	
+	def String getCompletionContributor(Grammar it) {
+		name.toPackageName+'.completion.'+ name.toSimpleName+'CompletionContributor'
+	}
 }

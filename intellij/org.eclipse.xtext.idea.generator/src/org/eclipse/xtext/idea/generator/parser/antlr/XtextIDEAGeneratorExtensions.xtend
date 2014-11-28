@@ -4,6 +4,7 @@ import com.google.inject.Singleton
 import org.eclipse.xpand2.output.Outlet
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
+import org.eclipse.xtext.generator.NewlineNormalizer
 
 @Singleton
 class XtextIDEAGeneratorExtensions {
@@ -30,7 +31,8 @@ class XtextIDEAGeneratorExtensions {
 				String projectPath, 
 				String encoding,
 				boolean overwrite,
-				String defaultOutletName) {
+				String defaultOutletName,
+				String lineDelimiter) {
 		if (getOutlet(outletName) != null) {
 			return
 		}
@@ -47,12 +49,13 @@ class XtextIDEAGeneratorExtensions {
 		} else {
 			getOutlet(defaultOutletName).path
 		}
+		outlet.addPostprocessor(new NewlineNormalizer(lineDelimiter));
 		xpandExecutionContext.output.addOutlet(outlet)
 	}
 
-	def void installOutlets(Xtend2ExecutionContext it, String pathIdeaPluginProject, String encoding) {
-		installOutlet(pathIdeaPluginProject, IDEA_SRC, '/src', encoding, false, Generator.SRC)
-		installOutlet(pathIdeaPluginProject, IDEA_SRC_GEN, '/src-gen', encoding, true, Generator.SRC_GEN)
+	def void installOutlets(Xtend2ExecutionContext it, String pathIdeaPluginProject, String encoding, String lineDelimiter) {
+		installOutlet(pathIdeaPluginProject, IDEA_SRC, '/src', encoding, false, Generator.SRC, lineDelimiter)
+		installOutlet(pathIdeaPluginProject, IDEA_SRC_GEN, '/src-gen', encoding, true, Generator.SRC_GEN, lineDelimiter)
 	}
 
 }
