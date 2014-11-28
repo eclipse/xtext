@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.contentassist.javadoc;
 
-import org.eclipse.xtend.ide.contentassist.antlr.FlexerBasedContentAssistContextFactory;
+import org.eclipse.xtend.ide.common.contentassist.javadoc.FlexerBasedJavaDocContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
-import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory;
 
 import com.google.inject.Inject;
@@ -35,24 +34,6 @@ public class XtendJavaDocContentAssistContextFactory extends DelegatingContentAs
 		@Override
 		public ContentAssistContextFactory getDelegate() {
 			return delegate;
-		}
-	}
-
-	public static class FlexerBasedJavaDocContentAssistContextFactory extends FlexerBasedContentAssistContextFactory {
-
-		@Override
-		public String getPrefix(INode node) {
-			if(node != null) {
-				int offsetInNode = getCompletionOffset() - node.getOffset();
-				String textInFront = node.getText().substring(0, offsetInNode);
-				for (int i = offsetInNode - 1; i > 0; i--) {
-					char c = textInFront.charAt(i);
-					if (Character.isWhitespace(c)) {
-						return textInFront.substring(i + 1);
-					}
-				}
-			}
-			return "";
 		}
 	}
 }

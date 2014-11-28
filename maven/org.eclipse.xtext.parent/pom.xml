@@ -26,6 +26,7 @@
 		<module>../org.eclipse.xtext.xbase</module>
 		<module>../org.eclipse.xtext.xbase.lib.slim</module>
 		<module>../org.eclipse.xtend.core</module>
+		<module>../org.eclipse.xtend.ide.common</module>
 		<module>../org.eclipse.xtext.xtext</module>
 
 		<module>../../plugins/org.eclipse.xtext.builder.standalone</module>
