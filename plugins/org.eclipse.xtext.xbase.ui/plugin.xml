@@ -147,6 +147,7 @@
             id="org.eclipse.xtext.xbase.ui.propertypages.BreakpointCondition">
          <enabledWhen>
             <test
+                  forcePluginActivation="true"
                   property="org.eclipse.xtext.xbase.ui.debug.isXbaseBreakPoint">
             </test>
          </enabledWhen>
@@ -165,7 +166,8 @@
              </count>
              <iterate>
                 <test
-                  property="org.eclipse.xtext.xbase.ui.debug.isXbaseBreakPoint">
+                      forcePluginActivation="true"
+                      property="org.eclipse.xtext.xbase.ui.debug.isXbaseBreakPoint">
                 </test>
              </iterate>
           </with>
