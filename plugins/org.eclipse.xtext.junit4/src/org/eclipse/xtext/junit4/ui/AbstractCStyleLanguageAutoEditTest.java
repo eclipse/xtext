@@ -612,6 +612,28 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, '\n');
 		assertState("  /*\n\n| *\n */", editor);
 	}
+
+	@Test public void testBug453205_01() throws Exception {
+		XtextEditor editor = openEditor("/*|\n" + 
+				"* comment\n" + 
+				"*/");
+		pressKey(editor, '\n');
+		assertState("/*\n" + 
+				" * |\n" + 
+				"* comment\n" + 
+				"*/", editor);
+	}
+	
+	@Test public void testBug453205_02() throws Exception {
+		XtextEditor editor = openEditor("/**********|\n" + 
+				" * \"Fancy\"\n" + 
+				"**********/");
+		pressKey(editor, '\n');
+		assertState("/**********\n" + 
+				" * |\n" + 
+				" * \"Fancy\"\n" + 
+				"**********/", editor);
+	}
 	
 	@Test public void testBug341093_01() throws Exception {
 		XtextEditor editor = openEditor(
