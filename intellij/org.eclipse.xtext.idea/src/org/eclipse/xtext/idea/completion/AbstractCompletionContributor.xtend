@@ -25,7 +25,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.TextRegion
 
 abstract class AbstractCompletionContributor extends CompletionContributor {
-	@Inject Provider<ContentAssistContextFactory> delegates
+	@Inject(optional = true) Provider<ContentAssistContextFactory> delegates
 	ExecutorService pool = Executors.newFixedThreadPool(3)
 
 	new(AbstractXtextLanguage lang) {
@@ -54,11 +54,16 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def createParserBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
-		val contexts = newParserBasedFactory.create(parameters.text, parameters.selection, parameters.offset,parameters.resource)
+		val delegate = parserBasedDelegate
+		if (delegate == null)
+			return;
+		val contexts = delegate.create(parameters.text, parameters.selection, parameters.offset,parameters.resource)
 		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, parameters, result)]]
 	}
 
-	protected def newParserBasedFactory() {
+	protected def getParserBasedDelegate() {
+		if (delegates == null)
+			return null
 		delegates.get => [it.pool = pool]
 	}
 
@@ -83,8 +88,8 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 		parameters.readOnly[(originalFile as BaseXtextFile).resource as XtextResource]
 	}
 
-	protected final def <T> readOnly(CompletionParameters parameters, (CompletionParameters)=>T reader) {
-		ApplicationManager.application.<T>runReadAction[reader.apply(parameters)]
+	protected final def <S, T> readOnly(S input, (S)=>T function) {
+		ApplicationManager.application.<T>runReadAction[function.apply(input)]
 	}
 
 	protected def createProposal(AbstractElement grammarElement, ContentAssistContext context, CompletionParameters parameters, CompletionResultSet result) {
