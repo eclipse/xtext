@@ -14,6 +14,8 @@ var projectPath = "../${projectName}"
 var lineDelimiter = "\n"
 var uiProjectName = "org.eclipse.xtend.ide"
 var uiProjectPath = "../${uiProjectName}"
+var ideProjectName = "org.eclipse.xtend.ide.common"
+var ideProjectPath = "../${ideProjectName}"
 var backtrack = false
 var memoize = false
 
@@ -65,6 +67,10 @@ Workflow {
 	}
 
 	component = DirectoryCleaner {
+		directory = "${ideProjectPath}/src-gen"
+	}
+
+	component = DirectoryCleaner {
 		directory = "${ideaProjectPath}/src-gen"
 	}
 	
@@ -73,8 +79,10 @@ Workflow {
 	component = Generator auto-inject {
 		pathRtProject = projectPath
 		pathUiProject = uiProjectPath
+		pathIdeProject = ideProjectPath
 		projectNameRt = projectName
 		projectNameUi = uiProjectName
+		projectNameIde = ideProjectName
 		encoding = "ISO-8859-1"
 		naming = {
 			uiBasePackage = "org.eclipse.xtend.ide"

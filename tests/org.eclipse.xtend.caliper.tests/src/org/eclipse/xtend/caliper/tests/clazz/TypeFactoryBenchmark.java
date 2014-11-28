@@ -269,7 +269,7 @@ public class TypeFactoryBenchmark extends SimpleBenchmark {
 
 			@Override
 			Class<?> getType() {
-				return org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendParser.class;
+				return org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendParser.class;
 			}
 			
 		}

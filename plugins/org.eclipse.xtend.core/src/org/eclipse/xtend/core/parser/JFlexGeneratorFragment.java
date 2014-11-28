@@ -68,7 +68,7 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 			encoding = getEncoding(ctx, Generator.SRC_GEN);
 		} else {
 			srcGenPath = ctx.getOutput().getOutlet(Generator.SRC_GEN_IDE).getPath();
-			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageUi(grammar) + ".contentassist.antlr.internal");
+			directory = srcGenPath + '/' + getNaming().asPath(getNaming().basePackageIde(grammar) + ".contentassist.antlr.internal");
 			template = getTemplate() + "::generateUI";
 			encoding = getEncoding(ctx, Generator.SRC_GEN_IDE);
 		}

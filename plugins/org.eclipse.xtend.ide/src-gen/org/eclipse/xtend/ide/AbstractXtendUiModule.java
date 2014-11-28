@@ -135,17 +135,17 @@ public abstract class AbstractXtendUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtend.ide.contentassist.antlr.XtendParser.class;
+		return org.eclipse.xtend.ide.common.contentassist.antlr.XtendParser.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer.class));
+		binder.bind(org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer.class));
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST)).to(org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer.class);
+		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST)).to(org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
@@ -378,7 +378,7 @@ public abstract class AbstractXtendUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser> bindIPartialEditingContentAssistParser() {
-		return org.eclipse.xtend.ide.contentassist.antlr.PartialXtendContentAssistParser.class;
+		return org.eclipse.xtend.ide.common.contentassist.antlr.PartialXtendContentAssistParser.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment

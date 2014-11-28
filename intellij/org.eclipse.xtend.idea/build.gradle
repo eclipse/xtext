@@ -7,6 +7,9 @@ dependencies {
 	compile ("org.eclipse.xtend:org.eclipse.xtend.core:$version") {
 		transitive = false
 	}
+	compile ("org.eclipse.xtend:org.eclipse.xtend.ide.common:$version") {
+		transitive = false
+	}
 	provided project(':org.eclipse.xtext.idea')
 	provided project(':org.eclipse.xtext.xbase.idea')
 }

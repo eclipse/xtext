@@ -7,7 +7,7 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.xtext,
+Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15"
 Export-Package: org.eclipse.xtext.ide;x-internal:=true,
