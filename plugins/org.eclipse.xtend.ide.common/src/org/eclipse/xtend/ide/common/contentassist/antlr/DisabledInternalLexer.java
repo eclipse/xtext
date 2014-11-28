@@ -5,12 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr;
+package org.eclipse.xtend.ide.common.contentassist.antlr;
 
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.Token;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendLexer;
+import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
 
 /**
  * Just to make sure that we do not miss a call path.

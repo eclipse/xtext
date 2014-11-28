@@ -1,4 +1,4 @@
-package org.eclipse.xtend.ide.contentassist.antlr.internal;
+package org.eclipse.xtend.ide.common.contentassist.antlr.internal;
 
 import java.io.IOException;
 import java.io.Reader;

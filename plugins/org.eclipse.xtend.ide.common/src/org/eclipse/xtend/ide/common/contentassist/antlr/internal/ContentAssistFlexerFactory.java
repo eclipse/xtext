@@ -5,12 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.contentassist.antlr.internal;
+package org.eclipse.xtend.ide.common.contentassist.antlr.internal;
 
 import java.io.Reader;
 
 import org.eclipse.xtend.core.parser.InternalFlexer;
-import org.eclipse.xtend.ide.contentassist.antlr.internal.InternalXtendFlexer;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
