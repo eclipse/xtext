@@ -178,23 +178,27 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _javaPath_15 = this._ideaPluginClassNames.toJavaPath(_psiParserName_1);
     CharSequence _compilePsiParser = this.compilePsiParser(grammar);
     ctx.writeFile(outlet_src_gen, _javaPath_15, _compilePsiParser);
+    String _pomDeclarationSearcherName = this._ideaPluginClassNames.getPomDeclarationSearcherName(grammar);
+    String _javaPath_16 = this._ideaPluginClassNames.toJavaPath(_pomDeclarationSearcherName);
+    CharSequence _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
+    ctx.writeFile(outlet_src_gen, _javaPath_16, _compilePomDeclarationSearcher);
     if (this.typesIntegrationRequired) {
       String _jvmTypesElementFinderName = this._ideaPluginClassNames.getJvmTypesElementFinderName(grammar);
-      String _javaPath_16 = this._ideaPluginClassNames.toJavaPath(_jvmTypesElementFinderName);
+      String _javaPath_17 = this._ideaPluginClassNames.toJavaPath(_jvmTypesElementFinderName);
       CharSequence _compileJvmTypesElementFinder = this.compileJvmTypesElementFinder(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_16, _compileJvmTypesElementFinder);
+      ctx.writeFile(outlet_src_gen, _javaPath_17, _compileJvmTypesElementFinder);
       String _jvmTypesShortNamesCacheName = this._ideaPluginClassNames.getJvmTypesShortNamesCacheName(grammar);
-      String _javaPath_17 = this._ideaPluginClassNames.toJavaPath(_jvmTypesShortNamesCacheName);
+      String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_jvmTypesShortNamesCacheName);
       CharSequence _compileJvmTypesShortNamesCache = this.compileJvmTypesShortNamesCache(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_17, _compileJvmTypesShortNamesCache);
+      ctx.writeFile(outlet_src_gen, _javaPath_18, _compileJvmTypesShortNamesCache);
       String _jvmElementsReferencesSearch = this._ideaPluginClassNames.getJvmElementsReferencesSearch(grammar);
-      String _javaPath_18 = this._ideaPluginClassNames.toJavaPath(_jvmElementsReferencesSearch);
+      String _javaPath_19 = this._ideaPluginClassNames.toJavaPath(_jvmElementsReferencesSearch);
       CharSequence _compileJvmElementsReferencesSearch = this.compileJvmElementsReferencesSearch(grammar);
-      ctx.writeFile(outlet_src_gen, _javaPath_18, _compileJvmElementsReferencesSearch);
+      ctx.writeFile(outlet_src_gen, _javaPath_19, _compileJvmElementsReferencesSearch);
     }
     OutputImpl output = new OutputImpl();
-    this.addOutlet(output, IdeaPluginGenerator.PLUGIN, this.ideaProjectPath);
-    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, (this.ideaProjectPath + "/META-INF"));
+    this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
+    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, true, (this.ideaProjectPath + "/META-INF"));
     if (this.deployable) {
       StringConcatenation _builder = new StringConcatenation();
       String _name = grammar.getName();
@@ -745,6 +749,53 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
+  public CharSequence compilePomDeclarationSearcher(final Grammar it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _pomDeclarationSearcherName = this._ideaPluginClassNames.getPomDeclarationSearcherName(it);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_pomDeclarationSearcherName);
+    _builder.append(_packageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.idea.pom.AbstractXtextPomDeclarationSearcher;");
+    _builder.newLine();
+    _builder.append("import ");
+    String _languageName = this._ideaPluginClassNames.getLanguageName(it);
+    _builder.append(_languageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("public class ");
+    String _pomDeclarationSearcherName_1 = this._ideaPluginClassNames.getPomDeclarationSearcherName(it);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_pomDeclarationSearcherName_1);
+    _builder.append(_simpleName, "");
+    _builder.append(" extends AbstractXtextPomDeclarationSearcher {");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public ");
+    String _pomDeclarationSearcherName_2 = this._ideaPluginClassNames.getPomDeclarationSearcherName(it);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_pomDeclarationSearcherName_2);
+    _builder.append(_simpleName_1, "\t");
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("super(");
+    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(it);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    _builder.append(_simpleName_2, "\t\t");
+    _builder.append(".INSTANCE);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence compilePsiParser(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
@@ -754,29 +805,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import java.io.IOException;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("import org.antlr.runtime.ANTLRReaderStream;");
-    _builder.newLine();
-    _builder.append("import org.antlr.runtime.TokenSource;");
-    _builder.newLine();
     _builder.append("import org.antlr.runtime.TokenStream;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;");
     _builder.newLine();
-    _builder.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
-    _builder.newLine();
     _builder.append("import ");
     String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
     _builder.append(_elementTypeProviderName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    String _psiInternalLexerName = this._ideaPluginClassNames.getPsiInternalLexerName(grammar);
-    _builder.append(_psiInternalLexerName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("import ");
@@ -788,8 +825,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("import com.google.inject.Inject;");
     _builder.newLine();
     _builder.append("import com.intellij.lang.PsiBuilder;");
-    _builder.newLine();
-    _builder.append("import com.intellij.util.text.CharSequenceReader;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
@@ -824,41 +859,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_simpleName_2, "\t\t");
     _builder.append("(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider);");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected TokenSource createTokenSource(PsiBuilder builder) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("try {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("CharSequence originalText = builder.getOriginalText();");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("CharSequenceReader reader = new CharSequenceReader(originalText);");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("return new ");
-    String _psiInternalLexerName_1 = this._ideaPluginClassNames.getPsiInternalLexerName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_psiInternalLexerName_1);
-    _builder.append(_simpleName_3, "\t\t\t");
-    _builder.append("(new ANTLRReaderStream(reader));");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("} catch (IOException e) {");
-    _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("throw Exceptions.sneakyThrow(e);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("}");
-    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -1017,9 +1017,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return (this.ideaProjectPath + ".iml");
   }
   
-  public void addOutlet(final Output output, final String outletName, final String path) {
+  public void addOutlet(final Output output, final String outletName, final boolean overwrite, final String path) {
     String _encoding = this.getEncoding();
-    Outlet _outlet = new Outlet(false, _encoding, outletName, false, path);
+    Outlet _outlet = new Outlet(false, _encoding, outletName, overwrite, path);
     output.addOutlet(_outlet);
   }
   
@@ -1281,6 +1281,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     CharSequence _compileExtension_4 = this.compileExtension(grammar, "lang.refactoringSupport", "org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider");
     _builder.append(_compileExtension_4, "\t\t");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    CharSequence _compileExtension_5 = this.compileExtension(grammar, "lang.namesValidator", "com.intellij.lang.refactoring.NamesValidator");
+    _builder.append(_compileExtension_5, "\t\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<lang.syntaxHighlighterFactory key=\"");
     String _languageID = this._ideaPluginExtension.getLanguageID(grammar);
@@ -1291,14 +1295,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\" />");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
-    CharSequence _compileExtension_5 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
-    _builder.append(_compileExtension_5, "      \t");
+    CharSequence _compileExtension_6 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
+    _builder.append(_compileExtension_6, "      \t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<elementDescriptionProvider implementation=\"");
     String _elementDescriptionProviderName = this._ideaPluginClassNames.getElementDescriptionProviderName(grammar);
     _builder.append(_elementDescriptionProviderName, "      \t");
     _builder.append("\" order=\"first\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("      \t");
+    _builder.append("<pom.declarationSearcher implementation=\"");
+    String _pomDeclarationSearcherName = this._ideaPluginClassNames.getPomDeclarationSearcherName(grammar);
+    _builder.append(_pomDeclarationSearcherName, "      \t");
+    _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("</extensions>");

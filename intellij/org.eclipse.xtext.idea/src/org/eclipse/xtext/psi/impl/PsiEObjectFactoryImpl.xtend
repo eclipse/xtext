@@ -63,7 +63,7 @@ class PsiEObjectFactoryImpl implements PsiEObjectFactory {
 		treeElement.acceptTree([ TreeElement element |
 			if (element.elementType == TokenType.ERROR_ELEMENT) {
 				val errorElement = element as PsiErrorElement
-				throw new IncorrectOperationException(errorElement.getErrorDescription());
+				throw new IncorrectOperationException(errorElement.errorDescription)
 			}
 			true
 		] as RecursiveTreeElementVisitor)
@@ -75,12 +75,12 @@ class PsiEObjectFactoryImpl implements PsiEObjectFactory {
 		val tokenSource = name.createTokenSource
 		var token = tokenSource.nextToken
 		if (name != token.text) {
-			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»'''.toString);
+			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»''')
 		}
 
 		val lexerRuleName = tokenDefMap.get(token.type).lexerRuleName
 		if (ruleName != lexerRuleName) {
-			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»'''.toString);
+			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»''')
 		}
 	}
 	

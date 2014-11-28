@@ -31,7 +31,7 @@
 		<lang.refactoringSupport language="org.eclipse.xtext.idea.sdomain.SDomain"
 								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
 								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
-      	<lang.namesValidator language="org.eclipse.xtext.idea.sdomain.SDomain"
+		<lang.namesValidator language="org.eclipse.xtext.idea.sdomain.SDomain"
 								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
       	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainSyntaxHighlighterFactory" />
@@ -39,7 +39,7 @@
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainElementDescriptionProvider" order="first"/>
-    	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.sdomain.idea.pom.SDomainPomDeclarationSearcher"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.sdomain.idea.lang.pom.SDomainPomDeclarationSearcher"/>
 	</extensions>
 
 </idea-plugin>

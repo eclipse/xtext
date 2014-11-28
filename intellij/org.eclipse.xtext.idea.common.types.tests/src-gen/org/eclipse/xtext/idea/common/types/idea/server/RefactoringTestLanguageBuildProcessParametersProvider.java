@@ -13,7 +13,7 @@ public class RefactoringTestLanguageBuildProcessParametersProvider extends Build
 		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea.common.types.RefactoringTestLanguage")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
-			path + "/../../org.eclipse.xtext.idea.common.types.RefactoringTestLanguage/bin"
+			path + "/../../org.eclipse.xtext.idea.common.types.tests/bin"
 		);
 	}
 
