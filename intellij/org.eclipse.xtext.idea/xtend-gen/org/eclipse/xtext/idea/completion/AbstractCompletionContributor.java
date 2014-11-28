@@ -28,12 +28,13 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
+import org.eclipse.xtext.idea.completion.CompletionExtensions;
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -112,6 +113,10 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   @Inject(optional = true)
   private Provider<ContentAssistContextFactory> delegates;
   
+  @Inject
+  @Extension
+  protected CompletionExtensions _completionExtensions;
+  
   private ExecutorService pool = Executors.newFixedThreadPool(3);
   
   public AbstractCompletionContributor(final AbstractXtextLanguage lang) {
@@ -186,13 +191,13 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected String getText(final CompletionParameters parameters) {
-    final Function1<CompletionParameters, String> _function = new Function1<CompletionParameters, String>() {
-      public String apply(final CompletionParameters it) {
-        PsiFile _originalFile = it.getOriginalFile();
+    final Computable<String> _function = new Computable<String>() {
+      public String compute() {
+        PsiFile _originalFile = parameters.getOriginalFile();
         return _originalFile.getText();
       }
     };
-    return this.<CompletionParameters, String>readOnly(parameters, _function);
+    return this.<String>runReadAction(_function);
   }
   
   protected TextRegion getSelection(final CompletionParameters parameters) {
@@ -207,35 +212,30 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected OffsetMap getOffsets(final CompletionParameters parameters) {
-    final Function1<CompletionParameters, OffsetMap> _function = new Function1<CompletionParameters, OffsetMap>() {
-      public OffsetMap apply(final CompletionParameters it) {
+    final Computable<OffsetMap> _function = new Computable<OffsetMap>() {
+      public OffsetMap compute() {
         PsiElement _position = parameters.getPosition();
         CompletionContext _userData = _position.<CompletionContext>getUserData(CompletionContext.COMPLETION_CONTEXT_KEY);
         return ((CompletionContext) _userData).getOffsetMap();
       }
     };
-    return this.<CompletionParameters, OffsetMap>readOnly(parameters, _function);
+    return this.<OffsetMap>runReadAction(_function);
   }
   
   protected XtextResource getResource(final CompletionParameters parameters) {
-    final Function1<CompletionParameters, XtextResource> _function = new Function1<CompletionParameters, XtextResource>() {
-      public XtextResource apply(final CompletionParameters it) {
-        PsiFile _originalFile = it.getOriginalFile();
+    final Computable<XtextResource> _function = new Computable<XtextResource>() {
+      public XtextResource compute() {
+        PsiFile _originalFile = parameters.getOriginalFile();
         Resource _resource = ((BaseXtextFile) _originalFile).getResource();
         return ((XtextResource) _resource);
       }
     };
-    return this.<CompletionParameters, XtextResource>readOnly(parameters, _function);
+    return this.<XtextResource>runReadAction(_function);
   }
   
-  protected final <S extends Object, T extends Object> T readOnly(final S input, final Function1<? super S, ? extends T> function) {
+  protected <T extends Object> T runReadAction(final Computable<T> computable) {
     Application _application = ApplicationManager.getApplication();
-    final Computable<T> _function = new Computable<T>() {
-      public T compute() {
-        return function.apply(input);
-      }
-    };
-    return _application.<T>runReadAction(_function);
+    return _application.<T>runReadAction(computable);
   }
   
   protected void createProposal(final AbstractElement grammarElement, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
