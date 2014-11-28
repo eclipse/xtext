@@ -12,6 +12,7 @@ import com.intellij.codeInsight.completion.LegacyCompletionContributor
 import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.LookupElementWeigher
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.util.Computable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.xtend.lib.annotations.Data
@@ -26,6 +27,7 @@ import org.eclipse.xtext.util.TextRegion
 
 abstract class AbstractCompletionContributor extends CompletionContributor {
 	@Inject(optional = true) Provider<ContentAssistContextFactory> delegates
+	@Inject protected extension CompletionExtensions
 	ExecutorService pool = Executors.newFixedThreadPool(3)
 
 	new(AbstractXtextLanguage lang) {
@@ -68,7 +70,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def getText(CompletionParameters parameters) {
-		parameters.readOnly[originalFile.text]
+		runReadAction[parameters.originalFile.text]
 	}
 
 	protected def getSelection(CompletionParameters parameters) {
@@ -79,17 +81,17 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def getOffsets(CompletionParameters parameters) {
-		parameters.readOnly [
+		runReadAction [
 			(parameters.position.getUserData(CompletionContext.COMPLETION_CONTEXT_KEY) as CompletionContext).offsetMap
 		]
 	}
 
 	protected def getResource(CompletionParameters parameters) {
-		parameters.readOnly[(originalFile as BaseXtextFile).resource as XtextResource]
+		runReadAction[(parameters.originalFile as BaseXtextFile).resource as XtextResource]
 	}
-
-	protected final def <S, T> readOnly(S input, (S)=>T function) {
-		ApplicationManager.application.<T>runReadAction[function.apply(input)]
+	
+	protected def <T> runReadAction(Computable<T> computable) {
+		ApplicationManager.application.<T>runReadAction(computable)
 	}
 
 	protected def createProposal(AbstractElement grammarElement, ContentAssistContext context, CompletionParameters parameters, CompletionResultSet result) {
