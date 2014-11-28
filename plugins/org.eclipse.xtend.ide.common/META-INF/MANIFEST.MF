@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Version: 2.8.0.qualifier
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.eclipse.xtend.ide.common
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtend.core,
+ org.eclipse.xtext.ide
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr,
+ org.eclipse.xtend.ide.common.contentassist.antlr.internal,
+ org.eclipse.xtend.ide.common.contentassist.javadoc
+Import-Package: org.apache.log4j;version="1.2.15"
+
