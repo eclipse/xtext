@@ -13,7 +13,6 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-
 public class AutoEditInCodeBlockTest extends AutoEditTest {
 	
 	private static String PREFIX = "class Foo {\n\tfoo() ";
@@ -377,6 +376,30 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 		XtextEditor editor = openEditor("  /* foo|*/");
 		pressKey(editor, '\n');
 		assertState("  /* foo\n\t * |*/", editor);
+	}
+	
+	@Override
+	@Test public void testBug453205_01() throws Exception {
+		XtextEditor editor = openEditor("/*|\n" + 
+				"* comment\n" + 
+				"*/");
+		pressKey(editor, '\n');
+		assertState("/*\n" + 
+				"\t * |\n" + 
+				"* comment\n" + 
+				"*/", editor);
+	}
+	
+	@Override
+	@Test public void testBug453205_02() throws Exception {
+		XtextEditor editor = openEditor("/**********|\n" + 
+				" * \"Fancy\"\n" + 
+				"**********/");
+		pressKey(editor, '\n');
+		assertState("/**********\n" + 
+				"\t * |\n" + 
+				" * \"Fancy\"\n" + 
+				"**********/", editor);
 	}
 	
 	@Override
