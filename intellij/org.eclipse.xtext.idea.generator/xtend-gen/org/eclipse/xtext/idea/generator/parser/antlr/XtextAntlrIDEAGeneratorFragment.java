@@ -42,7 +42,9 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
   }
   
   protected void generate(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
-    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding);
+    Naming _naming = this.getNaming();
+    String _lineDelimiter = _naming.getLineDelimiter();
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, _lineDelimiter);
     final Object options = IterableExtensions.<Object>head(parameters);
     if ((options instanceof AntlrOptions)) {
       this._psiAntlrGrammarGenerator.generate(grammar, ((AntlrOptions)options), ctx);

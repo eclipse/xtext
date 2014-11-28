@@ -26,6 +26,7 @@ import org.eclipse.xtext.generator.BindKey;
 import org.eclipse.xtext.generator.BindValue;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
@@ -92,7 +93,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   private XtextIDEAGeneratorExtensions _xtextIDEAGeneratorExtensions;
   
   public void generate(final Grammar grammar, final Xtend2ExecutionContext ctx) {
-    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding);
+    Naming _naming = this.getNaming();
+    String _lineDelimiter = _naming.getLineDelimiter();
+    this._xtextIDEAGeneratorExtensions.installOutlets(ctx, this.ideaProjectPath, this.encoding, _lineDelimiter);
     Outlet _srcOutlet = this._xtextIDEAGeneratorExtensions.getSrcOutlet(ctx);
     String outlet_src = _srcOutlet.getName();
     Outlet _srcGenOutlet = this._xtextIDEAGeneratorExtensions.getSrcGenOutlet(ctx);
@@ -122,6 +125,10 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _javaPath_1 = this._ideaPluginClassNames.toJavaPath(_ideaModuleName);
     CharSequence _compileIdeaModule = this.compileIdeaModule(grammar);
     ctx.writeFile(outlet_src, _javaPath_1, _compileIdeaModule);
+    String _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
+    String _xtendPath = this._ideaPluginClassNames.toXtendPath(_completionContributor);
+    CharSequence _compileCompletionContributor = this.compileCompletionContributor(grammar);
+    ctx.writeFile(outlet_src, _xtendPath, _compileCompletionContributor);
     String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
     String _javaPath_2 = this._ideaPluginClassNames.toJavaPath(_languageName);
     CharSequence _compileLanguage = this.compileLanguage(grammar);
@@ -1019,8 +1026,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   public void addOutlet(final Output output, final String outletName, final boolean overwrite, final String path) {
     String _encoding = this.getEncoding();
-    Outlet _outlet = new Outlet(false, _encoding, outletName, overwrite, path);
-    output.addOutlet(_outlet);
+    final Outlet outlet = new Outlet(false, _encoding, outletName, overwrite, path);
+    Naming _naming = this.getNaming();
+    String _lineDelimiter = _naming.getLineDelimiter();
+    NewlineNormalizer _newlineNormalizer = new NewlineNormalizer(_lineDelimiter);
+    outlet.addPostprocessor(_newlineNormalizer);
+    output.addOutlet(outlet);
   }
   
   public void writeFile(final Output output, final String outletName, final String filename, final CharSequence contents) {
@@ -1297,6 +1308,15 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("      \t");
     CharSequence _compileExtension_6 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
     _builder.append(_compileExtension_6, "      \t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("      \t");
+    _builder.append("<completion.contributor language=\"");
+    String _languageID_1 = this._ideaPluginExtension.getLanguageID(grammar);
+    _builder.append(_languageID_1, "      \t");
+    _builder.append("\" implementationClass=\"");
+    String _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
+    _builder.append(_completionContributor, "      \t");
+    _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<elementDescriptionProvider implementation=\"");
@@ -2571,6 +2591,45 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileCompletionContributor(final Grammar grammar) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_completionContributor);
+    _builder.append(_packageName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import ");
+    String _languageName = this._ideaPluginClassNames.getLanguageName(grammar);
+    _builder.append(_languageName, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.xtext.idea.completion.AbstractCompletionContributor");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class ");
+    String _completionContributor_1 = this._ideaPluginClassNames.getCompletionContributor(grammar);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_completionContributor_1);
+    _builder.append(_simpleName, "");
+    _builder.append(" extends AbstractCompletionContributor {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super(");
+    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(grammar);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    _builder.append(_simpleName_1, "\t\t");
+    _builder.append(".INSTANCE)");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
