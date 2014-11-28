@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2.regionaccess.internal;
+package org.eclipse.xtext.formatting2.debug;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.ITextSegment;
-import org.eclipse.xtext.formatting2.internal.TextRegionListToString;
 import org.eclipse.xtext.formatting2.regionaccess.IComment;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegionPart;

@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting2.internal;
 import java.util.ArrayList;
 
 import org.eclipse.xtext.formatting2.ITextReplacement;
+import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 
 import com.google.common.collect.Lists;
 

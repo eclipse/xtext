@@ -25,14 +25,14 @@ import com.google.common.collect.Lists;
  */
 public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 
+	private final List<T> contents = Lists.newArrayList();
+	
 	public ArrayListTextSegmentSet(Function<? super T, ? extends ITextSegment> region, Function<? super T, String> title) {
 		super(region, title);
 	}
 
-	private final List<T> contents = Lists.newArrayList();
-
 	@Override
-	public void add(T segment, IMerger<T> merger) {
+	public void add(T segment, IMerger<T> merger) throws ConflictingRegionsException {
 		Preconditions.checkNotNull(segment);
 		getTraces().put(segment, new RegionTrace(getTitle(segment), getRegion(segment)));
 		if (contents.isEmpty()) {
@@ -46,7 +46,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		}
 	}
 
-	protected void insertAtIndex(T segment, int newIndex, IMerger<T> merger) {
+	protected void insertAtIndex(T segment, int newIndex, IMerger<T> merger) throws ConflictingRegionsException {
 		List<T> conflicting = null;
 		int low = newIndex;
 		while (--low >= 0) {
@@ -106,7 +106,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		return Iterables.unmodifiableIterable(contents).iterator();
 	}
 
-	protected void replaceExistingEntry(T segment, int index, IMerger<T> merger) {
+	protected void replaceExistingEntry(T segment, int index, IMerger<T> merger) throws ConflictingRegionsException {
 		T existing = contents.get(index);
 		List<T> conflicting = ImmutableList.of(segment, existing);
 		try {

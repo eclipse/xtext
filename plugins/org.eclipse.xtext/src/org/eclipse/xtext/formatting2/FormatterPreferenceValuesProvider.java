@@ -16,8 +16,10 @@ import com.google.inject.Inject;
  */
 public class FormatterPreferenceValuesProvider implements IPreferenceValuesProvider {
 
-	private @Inject IWhitespaceInformationProvider whitespaceInfo;
-	private @Inject IPreferenceValuesProvider valuesProvider;
+	@Inject 
+	private IWhitespaceInformationProvider whitespaceInfo;
+	@Inject
+	private IPreferenceValuesProvider valuesProvider;
 
 	public IPreferenceValues getPreferenceValues(final Resource resource) {
 		final IPreferenceValues preferenceValues = internalGetRawPreferenceValues(resource);

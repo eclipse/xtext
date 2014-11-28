@@ -5,25 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting2;
+package org.eclipse.xtext.formatting2.regionaccess.internal;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
-
-import com.google.inject.BindingAnnotation;
+import org.eclipse.xtext.formatting2.regionaccess.IWhitespace;
+import org.eclipse.xtext.nodemodel.INode;
 
 /**
- * A marker annotation for Google Guice.
- * 
- * Marks an instance of {@link IPreferenceValuesProvider} as the one that should be used by the formatter.
- * 
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.8
  */
-@BindingAnnotation
-@Retention(RetentionPolicy.RUNTIME)
-public @interface FormatterPreferences {
-
+public class NodeWhitespace extends NodeHidden implements IWhitespace {
+	protected NodeWhitespace(Gap gap, INode node) {
+		super(gap, node);
+	}
 }
