@@ -109,6 +109,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src_gen, grammar.codeBlockModificationListenerName.toJavaPath, grammar.compileCodeBlockModificationListener)
 		ctx.writeFile(outlet_src_gen, grammar.elementDescriptionProviderName.toJavaPath, grammar.compileElementDescriptionProvider)
 		ctx.writeFile(outlet_src_gen, grammar.psiParserName.toJavaPath, grammar.compilePsiParser)
+		ctx.writeFile(outlet_src_gen, grammar.pomDeclarationSearcherName.toJavaPath, grammar.compilePomDeclarationSearcher)
 		if (typesIntegrationRequired) {
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toJavaPath, grammar.compileJvmTypesElementFinder)
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesShortNamesCacheName.toJavaPath, grammar.compileJvmTypesShortNamesCache)
@@ -116,8 +117,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		}
 		
 		var output = new OutputImpl();
-		output.addOutlet(PLUGIN, ideaProjectPath);
-		output.addOutlet(META_INF_PLUGIN, ideaProjectPath + "/META-INF");
+		output.addOutlet(PLUGIN, false, ideaProjectPath);
+		output.addOutlet(META_INF_PLUGIN, true, ideaProjectPath + "/META-INF");
 		
 		if (deployable) {
 			output.writeFile(PLUGIN, '''«grammar.name.toSimpleName» Launch Intellij.launch''', grammar.compileLaunchIntellij)
@@ -261,24 +262,32 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		}
 	'''
 	
+	def compilePomDeclarationSearcher(Grammar it) '''
+		package «pomDeclarationSearcherName.toPackageName»;
+
+		import org.eclipse.xtext.idea.pom.AbstractXtextPomDeclarationSearcher;
+		import «languageName»;
+		
+		public class «pomDeclarationSearcherName.toSimpleName» extends AbstractXtextPomDeclarationSearcher {
+		
+			public «pomDeclarationSearcherName.toSimpleName»() {
+				super(«languageName.toSimpleName».INSTANCE);
+			}
+		
+		}
+	'''
+	
 	def compilePsiParser(Grammar grammar) '''
 		package «grammar.psiParserName.toPackageName»;
 		
-		import java.io.IOException;
-		
-		import org.antlr.runtime.ANTLRReaderStream;
-		import org.antlr.runtime.TokenSource;
 		import org.antlr.runtime.TokenStream;
 		import org.eclipse.xtext.idea.parser.AbstractXtextPsiParser;
 		import org.eclipse.xtext.idea.parser.AbstractPsiAntlrParser;
-		import org.eclipse.xtext.xbase.lib.Exceptions;
 		import «grammar.elementTypeProviderName»;
-		import «grammar.psiInternalLexerName»;
 		import «grammar.psiInternalParserName»;
 		
 		import com.google.inject.Inject;
 		import com.intellij.lang.PsiBuilder;
-		import com.intellij.util.text.CharSequenceReader;
 		
 		public class «grammar.psiParserName.toSimpleName» extends AbstractXtextPsiParser {
 			
@@ -288,17 +297,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			@Override
 			protected AbstractPsiAntlrParser createParser(PsiBuilder builder, TokenStream tokenStream) {
 				return new «grammar.psiInternalParserName.toSimpleName»(builder, tokenStream, getTokenTypeProvider(), elementTypeProvider);
-			}
-		
-			@Override
-			protected TokenSource createTokenSource(PsiBuilder builder) {
-				try {
-					CharSequence originalText = builder.getOriginalText();
-					CharSequenceReader reader = new CharSequenceReader(originalText);
-					return new «grammar.psiInternalLexerName.toSimpleName»(new ANTLRReaderStream(reader));
-				} catch (IOException e) {
-					throw Exceptions.sneakyThrow(e);
-				}
 			}
 		
 		}
@@ -355,8 +353,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ideaProjectPath + ".iml"
 	}
 	
-	def addOutlet(Output output, String outletName, String path) {
-		output.addOutlet(new Outlet(false, getEncoding(), outletName, false, path))
+	def addOutlet(Output output, String outletName, boolean overwrite, String path) {
+		output.addOutlet(new Outlet(false, getEncoding(), outletName, overwrite, path))
 	}
 	
 	def writeFile(Output output, String outletName, String filename, CharSequence contents) {
@@ -460,9 +458,11 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«grammar.compileExtension('lang.parserDefinition', grammar.parserDefinitionName)»
 				«grammar.compileExtension('lang.findUsagesProvider', 'org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider')»
 				«grammar.compileExtension('lang.refactoringSupport', 'org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider')»
+				«grammar.compileExtension('lang.namesValidator', 'com.intellij.lang.refactoring.NamesValidator')»
 		      	<lang.syntaxHighlighterFactory key="«grammar.languageID»" implementationClass="«grammar.syntaxHighlighterFactoryName»" />
 		      	«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator')»
 		      	<elementDescriptionProvider implementation="«grammar.elementDescriptionProviderName»" order="first"/>
+		      	<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcherName»"/>
 			</extensions>
 		
 		</idea-plugin>

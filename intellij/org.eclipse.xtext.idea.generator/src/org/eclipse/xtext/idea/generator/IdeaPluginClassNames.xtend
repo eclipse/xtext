@@ -81,6 +81,10 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.parser.'+it.name.toSimpleName+'PsiParser'
 	}
 	
+	def String getPomDeclarationSearcherName(Grammar it) {
+		basePackageName+'.lang.pom.'+it.name.toSimpleName+'PomDeclarationSearcher'
+	}
+	
 	def String getSyntaxHighlighterFactoryName(Grammar it) {
 		basePackageName+'.lang.'+it.name.toSimpleName+'SyntaxHighlighterFactory'
 	}
