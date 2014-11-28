@@ -93,7 +93,9 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 				}
 			}
 			if (util.isSameLine(document, startTerminal.getOffset(), command.offset)) {
-				if (stopTerminal != null && stopTerminal.getLength() < getRightTerminal().length())
+				if (stopTerminal != null 
+						&& stopTerminal.getLength() < getRightTerminal().length() 
+						&& util.isSameLine(document, stopTerminal.getOffset(), command.offset))
 					stopTerminal = null;
 				CommandInfo newC = handleCursorInFirstLine(document, command, startTerminal, stopTerminal);
 				if (newC != null)

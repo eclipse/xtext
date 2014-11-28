@@ -33,7 +33,6 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-
 public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 
 	private static final String TESTPROJECT_NAME = "foo";

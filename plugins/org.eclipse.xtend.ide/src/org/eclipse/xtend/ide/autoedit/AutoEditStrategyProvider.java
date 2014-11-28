@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.autoedit;
 
+import static org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper.*;
+
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -32,29 +34,29 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	@Override
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
 		super.configureIndentationEditStrategy(acceptor);
-		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
-		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), JAVA_DOC_PARTITION);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), RICH_STRING_LITERAL_PARTITION);
 	}
 	
 	@Override
 	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
 		super.configureMultilineComments(acceptor);
-		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"),TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
+		acceptor.accept(multiLineTerminals.newInstance("/*"," * ", " */"), JAVA_DOC_PARTITION);
 	}
 
 	@Override
 	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
 		super.configureCurlyBracesBlock(acceptor);
-		acceptor.accept(multiLineTerminalsInRichString.newInstance("{", null, "}"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(multiLineTerminalsInRichString.newInstance("{", null, "}"), RICH_STRING_LITERAL_PARTITION);
 	}
 	
 	@Override
 	protected void configureStringLiteral(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(partitionInsert.newInstance("'''", "'''"), IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(richStringPartitionEndSkippingEditStrategy.get(), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
-		acceptor.accept(partitionInsert.newInstance("\"","\""), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
-		acceptor.accept(partitionInsert.newInstance("\u00AB","\u00BB"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
-		acceptor.accept(partitionDeletion.newInstance("\u00AB","\u00BB"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(richStringPartitionEndSkippingEditStrategy.get(), RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionInsert.newInstance("\"","\""), RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionInsert.newInstance("\u00AB","\u00BB"), RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionDeletion.newInstance("\u00AB","\u00BB"), RICH_STRING_LITERAL_PARTITION);
 		acceptor.accept(singleLineTerminals.newInstance("\u00AB","\u00BB"), IDocument.DEFAULT_CONTENT_TYPE);
 		super.configureStringLiteral(acceptor);
 	}
