@@ -292,7 +292,7 @@ ol[
   item[in the case of code[&&] the operand on the right hand side is not evaluated if the left 
     operand evaluates to code[Xtend][false].]
   item[in the case of code[?:] the operand on the right hand side is not evaluated if the left 
-    operand evaluates to code[Xtend][null].]
+    operand evaluates to anything but code[Xtend][null].]
 ]
 
 Still you can overload these operators for your types or even override it for booleans, in which case
