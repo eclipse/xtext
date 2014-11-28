@@ -166,6 +166,21 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		}
 		return delegatedValue;
 	}
+	
+	@Override
+	protected void updateCombo(Combo curr) {
+		ControlData data = (ControlData) curr.getData();
+		String prefKey = data.getKey();
+		String currValue = getValue(prefKey);
+		if (currValue == null || currValue.isEmpty()) {
+			PreferenceKey preferenceKey = this.issueCodeProvider.getConfigurableIssueCodes().get(prefKey);
+			if (preferenceKey != null) {
+				currValue = preferenceKey.getDefaultValue();
+			}
+		}
+		int selection = data.getSelection(currValue);
+		curr.select(selection);
+	}
 
 	protected static final class ComboBoxBuilder {
 		private int defaultIndent;
