@@ -8,6 +8,7 @@ import com.intellij.psi.impl.source.tree.LeafElement
 import java.io.Reader
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Keyword
@@ -22,13 +23,12 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.util.ReplaceRegion
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.Action
 
 class PsiToEcoreTransformator implements IParser {
 
 	@Accessors(PUBLIC_SETTER)
 	BaseXtextFile xtextFile
-	
+
 	@Accessors(PUBLIC_GETTER)
 	var PsiToEcoreAdapter adapter
 
@@ -37,9 +37,9 @@ class PsiToEcoreTransformator implements IParser {
 
 	override parse(Reader reader) {
 		val transformationContext = transform
-		
+
 		adapter = new PsiToEcoreAdapter(transformationContext)
-		
+
 		val rootAstElement = transformationContext.current
 		val rootNode = transformationContext.currentNode
 		val hadErrors = transformationContext.hadErrors
@@ -62,7 +62,7 @@ class PsiToEcoreTransformator implements IParser {
 		extension PsiToEcoreTransformationContext transformationContext) {
 		val elementType = elementType
 		if (elementType instanceof IGrammarAwareElementType) {
-			transform(elementType.grammarElement, transformationContext)	
+			transform(elementType.grammarElement, transformationContext)
 		} else {
 			newLeafNode
 		}
@@ -107,13 +107,62 @@ class PsiToEcoreTransformator implements IParser {
 		transformChildren(transformationContext)
 		compress
 	}
-	
+
 	protected def dispatch void transform(CompositeElement it, Action action,
 		extension PsiToEcoreTransformationContext transformationContext) {
-		val value = current
-		action.forceCreateModelElement
-		assign(value, action)
-		newCompositeNodeAsParentOfCurrentNode(action)
+		val actionTransformationContext = transformationContext.branch 
+		transformActionLeftElement(action, actionTransformationContext)
+		actionTransformationContext.sync
+		
+		val actionRuleCall = actionTransformationContext.actionRuleCall
+		if (ensureModelElementCreated(actionRuleCall)) {
+			assign(actionTransformationContext.current, actionRuleCall, actionRuleCall.rule.name)
+		}
+		actionTransformationContext.merge
+		compress
+	}
+
+	protected def dispatch void transformActionLeftElement(ASTNode it,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		throw new IllegalStateException('Unexpected ast node: ' + it)
+	}
+
+	protected def dispatch void transformActionLeftElement(CompositeElement it,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		val elementType = elementType
+		if (elementType instanceof IGrammarAwareElementType) {
+			transformActionLeftElement(elementType.grammarElement, transformationContext)
+		}
+	}
+
+	protected def dispatch void transformActionLeftElement(CompositeElement it, EObject grammarElement,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		throw new IllegalStateException('Unexpected grammar element: ' + grammarElement + ', for node: ' + it)
+	}
+
+	protected def dispatch void transformActionLeftElement(CompositeElement it, Action action,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		newCompositeNode
+		ensureModelElementCreated(action)
+		
+		val children = getChildren(null)
+		
+		val leftElement = children.head
+		val leftElementTransformationContext = transformationContext.branch
+		leftElement.transformActionLeftElement(leftElementTransformationContext)
+		leftElementTransformationContext.compress.sync
+		leftElementTransformationContext.current.assign(action)
+		
+		actionRuleCall = leftElementTransformationContext.actionRuleCall
+
+		children.tail.transformChildren(transformationContext)
+	}
+
+	protected def dispatch void transformActionLeftElement(CompositeElement it, RuleCall ruleCall,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		newCompositeNode
+		transformationContext.actionRuleCall = ruleCall
+		transformChildren(transformationContext)
 	}
 
 	protected def dispatch void transform(CompositeElement it, RuleCall ruleCall,
@@ -121,7 +170,7 @@ class PsiToEcoreTransformator implements IParser {
 		switch rule : ruleCall.rule {
 			ParserRule case rule.datatypeRule: {
 				newCompositeNode
-				val childTransformationContext = transformationContext.branch.withDatatypeRule 
+				val childTransformationContext = transformationContext.branch.withDatatypeRule
 				transformChildren(childTransformationContext).sync
 				if (ruleCall.ensureModelElementCreated) {
 					val datatypeRuleToken = childTransformationContext.datatypeRuleToken
@@ -139,7 +188,7 @@ class PsiToEcoreTransformator implements IParser {
 					val child = childTransformationContext.current
 					if (child != null) {
 						assign(child, ruleCall, rule.name)
-					}	
+					}
 				}
 				childTransformationContext.merge
 				compress
@@ -162,9 +211,15 @@ class PsiToEcoreTransformator implements IParser {
 		transformChildren(transformationContext)
 		compress
 	}
-	
-	protected def transformChildren(CompositeElement it, extension PsiToEcoreTransformationContext transformationContext) {
-		for (child : getChildren(null)) {
+
+	protected def transformChildren(CompositeElement it,
+		extension PsiToEcoreTransformationContext transformationContext) {
+		val children = getChildren(null)
+		children.transformChildren(transformationContext)
+	}
+
+	protected def transformChildren(Iterable<ASTNode> children, PsiToEcoreTransformationContext transformationContext) {
+		for (child : children) {
 			child.transform(transformationContext)
 		}
 		transformationContext

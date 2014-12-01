@@ -205,7 +205,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     OutputImpl output = new OutputImpl();
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
-    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, true, (this.ideaProjectPath + "/META-INF"));
+    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, false, (this.ideaProjectPath + "/META-INF"));
     if (this.deployable) {
       StringConcatenation _builder = new StringConcatenation();
       String _name = grammar.getName();

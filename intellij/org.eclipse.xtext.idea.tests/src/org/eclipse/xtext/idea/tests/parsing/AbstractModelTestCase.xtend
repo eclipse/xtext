@@ -19,17 +19,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.resource.IResourceSetProvider
-import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.eclipse.xtext.nodemodel.ICompositeNode
-import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.nodemodel.impl.InvariantChecker
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResource
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
-import static extension org.eclipse.xtext.util.EmfFormatter.*
 
 class AbstractModelTestCase extends LightCodeInsightFixtureTestCase implements ModelChecker {
 
@@ -63,15 +58,11 @@ class AbstractModelTestCase extends LightCodeInsightFixtureTestCase implements M
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
-	extension NodeModelPrinter nodeModelPrinter
-
-	@Inject
-	@Accessors(PROTECTED_GETTER)
-	extension InvariantChecker invariantChecker
-
-	@Inject
-	@Accessors(PROTECTED_GETTER)
 	Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider
+	
+	@Inject
+	@Accessors(PROTECTED_GETTER)
+	extension XtextResourceAsserts xtextResourceAsserts
 
 	val LanguageFileType fileType
 
@@ -106,20 +97,7 @@ class AbstractModelTestCase extends LightCodeInsightFixtureTestCase implements M
 
 		val actualResource = actualResource
 		val expectedResource = createExpectedResource
-		val expectedRootNode = expectedResource.parseResult.rootNode
-		val actualRootNode = actualResource.parseResult.rootNode
-		assertEquals(expectedRootNode.print, actualRootNode.print)
-		assertEquals(expectedRootNode.semanticElement.objToStr, actualRootNode.semanticElement.objToStr)
-		actualRootNode.checkInvariant
-		val nodesMapping = PsiToEcoreAdapter.get(actualResource).nodesMapping
-		for (astNode : nodesMapping.keySet) {
-			val node = nodesMapping.get(astNode)
-			assertTrue('''Node «node» is not a part of the tree''', node.belongsTo(actualRootNode))
-		}
-	}
-
-	protected def belongsTo(INode node, ICompositeNode rootNode) {
-		rootNode.asTreeIterable.exists[it == node]
+		assertResource(expectedResource, actualResource)
 	}
 
 	def protected XtextResource getActualResource() {

@@ -1,13 +1,11 @@
 package org.eclipse.xtext.idea.parser;
 
 import com.google.common.base.Objects;
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.psi.tree.IElementType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +21,7 @@ import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.UnwantedTokenException;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.idea.lang.CreateElementType;
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder;
+import org.eclipse.xtext.idea.parser.CompositeMarker;
 import org.eclipse.xtext.idea.parser.PsiXtextTokenStream;
 import org.eclipse.xtext.idea.parser.TokenTypeProvider;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
@@ -49,9 +46,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
   
   private final LinkedList<PsiBuilder.Marker> leafMarkers = CollectionLiterals.<PsiBuilder.Marker>newLinkedList();
   
-  private final LinkedList<PsiBuilder.Marker> compositeMarkers = CollectionLiterals.<PsiBuilder.Marker>newLinkedList();
-  
-  private final HashMap<PsiBuilder.Marker, Integer> lookAheads = CollectionLiterals.<PsiBuilder.Marker, Integer>newHashMap();
+  private final LinkedList<CompositeMarker> compositeMarkers = CollectionLiterals.<CompositeMarker>newLinkedList();
   
   private String currentError;
   
@@ -177,11 +172,11 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     return this.input.getSourceName();
   }
   
-  protected void markComposite() {
-    final PsiBuilder.Marker marker = this.psiBuilder.mark();
-    this.compositeMarkers.push(marker);
+  protected void markComposite(final IElementType elementType) {
+    PsiBuilder.Marker _mark = this.psiBuilder.mark();
     int _currentLookAhead = this.getCurrentLookAhead();
-    this.lookAheads.put(marker, Integer.valueOf(_currentLookAhead));
+    CompositeMarker _compositeMarker = new CompositeMarker(_mark, _currentLookAhead, elementType);
+    this.compositeMarkers.push(_compositeMarker);
   }
   
   protected void markLeaf() {
@@ -189,21 +184,21 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     this.leafMarkers.push(marker);
   }
   
+  protected void precedeComposite(final IElementType elementType) {
+    final CompositeMarker compositeMarker = this.compositeMarkers.pop();
+    CompositeMarker _precede = compositeMarker.precede(elementType);
+    this.compositeMarkers.push(_precede);
+    this.compositeMarkers.push(compositeMarker);
+  }
+  
   protected void drop() {
     PsiBuilder.Marker _pop = this.leafMarkers.pop();
     _pop.drop();
   }
   
-  protected void doneComposite(final IElementType elementType) {
-    final PsiBuilder.Marker marker = this.compositeMarkers.pop();
-    final Integer lookAhead = this.lookAheads.remove(marker);
-    final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
-      public void onCreate(final ASTNode it) {
-        it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead);
-      }
-    };
-    CreateElementType _createElementType = new CreateElementType(elementType, _function);
-    marker.done(_createElementType);
+  protected void doneComposite() {
+    CompositeMarker _pop = this.compositeMarkers.pop();
+    _pop.done();
   }
   
   protected void doneLeaf(final Token matchedToken, final IElementType elementType) {

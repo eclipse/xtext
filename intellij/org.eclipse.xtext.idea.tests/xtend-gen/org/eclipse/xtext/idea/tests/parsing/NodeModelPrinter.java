@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.tests.parsing;
 
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -18,8 +19,9 @@ public class NodeModelPrinter {
     StringConcatenation _builder = new StringConcatenation();
     String _doPrint = this.doPrint(it);
     _builder.append(_doPrint, "");
-    _builder.append(" {");
     _builder.newLineIfNotEmpty();
+    _builder.append("{");
+    _builder.newLine();
     {
       BidiIterable<INode> _children = it.getChildren();
       boolean _hasElements = false;
@@ -57,9 +59,16 @@ public class NodeModelPrinter {
     String _printGrammarElement = this.printGrammarElement(_grammarElement);
     _builder.append(_printGrammarElement, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("hasDirectSemanticElement: ");
-    boolean _hasDirectSemanticElement = it.hasDirectSemanticElement();
-    _builder.append(_hasDirectSemanticElement, "");
+    {
+      boolean _hasDirectSemanticElement = it.hasDirectSemanticElement();
+      if (_hasDirectSemanticElement) {
+        _builder.append("directSemanticElement: ");
+        EObject _semanticElement = it.getSemanticElement();
+        Class<? extends EObject> _class_1 = _semanticElement.getClass();
+        String _name = _class_1.getName();
+        _builder.append(_name, "");
+      }
+    }
     _builder.newLineIfNotEmpty();
     {
       if ((it instanceof ICompositeNode)) {
@@ -69,9 +78,15 @@ public class NodeModelPrinter {
       }
     }
     _builder.newLineIfNotEmpty();
-    _builder.append("syntaxErrorMessage: ");
-    SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-    _builder.append(_syntaxErrorMessage, "");
+    {
+      SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
+      boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
+      if (_notEquals) {
+        _builder.append("syntaxErrorMessage: ");
+        SyntaxErrorMessage _syntaxErrorMessage_1 = it.getSyntaxErrorMessage();
+        _builder.append(_syntaxErrorMessage_1, "");
+      }
+    }
     return _builder.toString();
   }
   

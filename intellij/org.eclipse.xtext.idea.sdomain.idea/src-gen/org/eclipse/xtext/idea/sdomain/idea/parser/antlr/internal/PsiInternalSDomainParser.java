@@ -73,13 +73,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:45:14: ( ruleFile EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:46:2: ruleFile EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getFileElementType()); 
             pushFollow(FOLLOW_ruleFile_in_entryRuleFile54);
             ruleFile();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getFileElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleFile60); 
 
             }
@@ -124,7 +124,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             	    // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:57:4: lv_elements_0_0= ruleElement
             	    {
 
-            	    				markComposite();
+            	    				markComposite(elementTypeProvider.getFile_ElementsElementParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FOLLOW_ruleElement_in_ruleFile89);
             	    ruleElement();
@@ -132,7 +132,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             	    state._fsp--;
 
 
-            	    				doneComposite(elementTypeProvider.getFile_ElementsElementParserRuleCall_0ElementType());
+            	    				doneComposite();
             	    			
 
             	    }
@@ -168,13 +168,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:69:16: ( ruleImport EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:70:2: ruleImport EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getImportElementType()); 
             pushFollow(FOLLOW_ruleImport_in_entryRuleImport115);
             ruleImport();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getImportElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleImport121); 
 
             }
@@ -219,7 +219,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:89:5: lv_importedNamespace_1_0= ruleQualifiedNameWithWildCard
             {
 
-            					markComposite();
+            					markComposite(elementTypeProvider.getImport_ImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0ElementType());
             				
             pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_ruleImport171);
             ruleQualifiedNameWithWildCard();
@@ -227,7 +227,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             state._fsp--;
 
 
-            					doneComposite(elementTypeProvider.getImport_ImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0ElementType());
+            					doneComposite();
             				
 
             }
@@ -260,13 +260,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:102:35: ( ruleQualifiedNameWithWildCard EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:103:2: ruleQualifiedNameWithWildCard EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getQualifiedNameWithWildCardElementType()); 
             pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard202);
             ruleQualifiedNameWithWildCard();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getQualifiedNameWithWildCardElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard208); 
 
             }
@@ -298,7 +298,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:113:3: ruleQualifiedName (kw= '.*' )?
             {
 
-            			markComposite();
+            			markComposite(elementTypeProvider.getQualifiedNameWithWildCard_QualifiedNameParserRuleCall_0ElementType());
             		
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildCard229);
             ruleQualifiedName();
@@ -306,7 +306,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             state._fsp--;
 
 
-            			doneComposite(elementTypeProvider.getQualifiedNameWithWildCard_QualifiedNameParserRuleCall_0ElementType());
+            			doneComposite();
             		
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:120:3: (kw= '.*' )?
             int alt2=2;
@@ -357,13 +357,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:133:23: ( ruleQualifiedName EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:134:2: ruleQualifiedName EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getQualifiedNameElementType()); 
             pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName275);
             ruleQualifiedName();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getQualifiedNameElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName281); 
 
             }
@@ -466,13 +466,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:171:19: ( ruleNamespace EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:172:2: ruleNamespace EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getNamespaceElementType()); 
             pushFollow(FOLLOW_ruleNamespace_in_entryRuleNamespace367);
             ruleNamespace();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getNamespaceElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleNamespace373); 
 
             }
@@ -511,7 +511,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:184:5: lv_name_0_0= ruleQualifiedName
             {
 
-            					markComposite();
+            					markComposite(elementTypeProvider.getNamespace_NameQualifiedNameParserRuleCall_0_0ElementType());
             				
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleNamespace409);
             ruleQualifiedName();
@@ -519,7 +519,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             state._fsp--;
 
 
-            					doneComposite(elementTypeProvider.getNamespace_NameQualifiedNameParserRuleCall_0_0ElementType());
+            					doneComposite();
             				
 
             }
@@ -553,7 +553,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             	    // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:202:5: lv_elements_2_0= ruleElement
             	    {
 
-            	    					markComposite();
+            	    					markComposite(elementTypeProvider.getNamespace_ElementsElementParserRuleCall_2_0ElementType());
             	    				
             	    pushFollow(FOLLOW_ruleElement_in_ruleNamespace461);
             	    ruleElement();
@@ -561,7 +561,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             	    state._fsp--;
 
 
-            	    					doneComposite(elementTypeProvider.getNamespace_ElementsElementParserRuleCall_2_0ElementType());
+            	    					doneComposite();
             	    				
 
             	    }
@@ -607,13 +607,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:222:17: ( ruleElement EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:223:2: ruleElement EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getElementElementType()); 
             pushFollow(FOLLOW_ruleElement_in_entryRuleElement507);
             ruleElement();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getElementElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleElement513); 
 
             }
@@ -670,7 +670,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:233:3: ruleNamespace
                     {
 
-                    			markComposite();
+                    			markComposite(elementTypeProvider.getElement_NamespaceParserRuleCall_0ElementType());
                     		
                     pushFollow(FOLLOW_ruleNamespace_in_ruleElement534);
                     ruleNamespace();
@@ -678,7 +678,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     state._fsp--;
 
 
-                    			doneComposite(elementTypeProvider.getElement_NamespaceParserRuleCall_0ElementType());
+                    			doneComposite();
                     		
 
                     }
@@ -687,7 +687,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:241:3: ruleType
                     {
 
-                    			markComposite();
+                    			markComposite(elementTypeProvider.getElement_TypeParserRuleCall_1ElementType());
                     		
                     pushFollow(FOLLOW_ruleType_in_ruleElement554);
                     ruleType();
@@ -695,7 +695,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     state._fsp--;
 
 
-                    			doneComposite(elementTypeProvider.getElement_TypeParserRuleCall_1ElementType());
+                    			doneComposite();
                     		
 
                     }
@@ -704,7 +704,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:249:3: ruleImport
                     {
 
-                    			markComposite();
+                    			markComposite(elementTypeProvider.getElement_ImportParserRuleCall_2ElementType());
                     		
                     pushFollow(FOLLOW_ruleImport_in_ruleElement574);
                     ruleImport();
@@ -712,7 +712,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     state._fsp--;
 
 
-                    			doneComposite(elementTypeProvider.getElement_ImportParserRuleCall_2ElementType());
+                    			doneComposite();
                     		
 
                     }
@@ -742,13 +742,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:260:14: ( ruleType EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:261:2: ruleType EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getTypeElementType()); 
             pushFollow(FOLLOW_ruleType_in_entryRuleType594);
             ruleType();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getTypeElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleType600); 
 
             }
@@ -795,7 +795,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:271:3: ruleEntity
                     {
 
-                    			markComposite();
+                    			markComposite(elementTypeProvider.getType_EntityParserRuleCall_0ElementType());
                     		
                     pushFollow(FOLLOW_ruleEntity_in_ruleType621);
                     ruleEntity();
@@ -803,7 +803,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     state._fsp--;
 
 
-                    			doneComposite(elementTypeProvider.getType_EntityParserRuleCall_0ElementType());
+                    			doneComposite();
                     		
 
                     }
@@ -812,7 +812,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:279:3: ruleDatatype
                     {
 
-                    			markComposite();
+                    			markComposite(elementTypeProvider.getType_DatatypeParserRuleCall_1ElementType());
                     		
                     pushFollow(FOLLOW_ruleDatatype_in_ruleType641);
                     ruleDatatype();
@@ -820,7 +820,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
                     state._fsp--;
 
 
-                    			doneComposite(elementTypeProvider.getType_DatatypeParserRuleCall_1ElementType());
+                    			doneComposite();
                     		
 
                     }
@@ -850,13 +850,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:290:16: ( ruleEntity EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:291:2: ruleEntity EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getEntityElementType()); 
             pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity661);
             ruleEntity();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getEntityElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleEntity667); 
 
             }
@@ -942,7 +942,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             	    // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:328:5: lv_properties_3_0= ruleProperty
             	    {
 
-            	    					markComposite();
+            	    					markComposite(elementTypeProvider.getEntity_PropertiesPropertyParserRuleCall_3_0ElementType());
             	    				
             	    pushFollow(FOLLOW_ruleProperty_in_ruleEntity769);
             	    ruleProperty();
@@ -950,7 +950,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             	    state._fsp--;
 
 
-            	    					doneComposite(elementTypeProvider.getEntity_PropertiesPropertyParserRuleCall_3_0ElementType());
+            	    					doneComposite();
             	    				
 
             	    }
@@ -996,13 +996,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:348:18: ( ruleDatatype EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:349:2: ruleDatatype EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getDatatypeElementType()); 
             pushFollow(FOLLOW_ruleDatatype_in_entryRuleDatatype815);
             ruleDatatype();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getDatatypeElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleDatatype821); 
 
             }
@@ -1085,13 +1085,13 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:381:18: ( ruleProperty EOF )
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:382:2: ruleProperty EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getPropertyElementType()); 
             pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty902);
             ruleProperty();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getPropertyElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleProperty908); 
 
             }
@@ -1129,7 +1129,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.sdomain.idea/src-gen/org/eclipse/xtext/idea/sdomain/idea/parser/antlr/internal/PsiInternalSDomain.g:394:5: ruleQualifiedName
             {
 
-            					markComposite();
+            					markComposite(elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType());
             				
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleProperty942);
             ruleQualifiedName();
@@ -1137,7 +1137,7 @@ public class PsiInternalSDomainParser extends AbstractPsiAntlrParser {
             state._fsp--;
 
 
-            					doneComposite(elementTypeProvider.getProperty_TypeTypeCrossReference_0_0ElementType());
+            					doneComposite();
             				
 
             }

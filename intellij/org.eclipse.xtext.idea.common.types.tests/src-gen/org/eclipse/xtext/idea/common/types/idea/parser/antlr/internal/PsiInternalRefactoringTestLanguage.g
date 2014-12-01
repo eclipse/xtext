@@ -43,9 +43,9 @@ protected String getFirstRuleName() {
 
 //Entry rule entryRuleModel
 entryRuleModel:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getModelElementType()); }
 	ruleModel
-	{ doneComposite(elementTypeProvider.getModelElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -55,11 +55,11 @@ ruleModel:
 	(
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType());
 			}
 			lv_referenceHolder_0_0=ruleReferenceHolder
 			{
-				doneComposite(elementTypeProvider.getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType());
+				doneComposite();
 			}
 		)
 	)*
@@ -67,9 +67,9 @@ ruleModel:
 
 //Entry rule entryRuleReferenceHolder
 entryRuleReferenceHolder:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getReferenceHolderElementType()); }
 	ruleReferenceHolder
-	{ doneComposite(elementTypeProvider.getReferenceHolderElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -91,11 +91,11 @@ ruleReferenceHolder:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
 				}
 				ruleFQN
 				{
-					doneComposite(elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -104,9 +104,9 @@ ruleReferenceHolder:
 
 //Entry rule entryRuleFQN
 entryRuleFQN:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getFQNElementType()); }
 	ruleFQN
-	{ doneComposite(elementTypeProvider.getFQNElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }

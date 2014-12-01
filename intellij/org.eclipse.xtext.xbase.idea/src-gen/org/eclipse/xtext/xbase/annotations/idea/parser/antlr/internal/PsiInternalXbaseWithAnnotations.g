@@ -43,9 +43,9 @@ protected String getFirstRuleName() {
 
 //Entry rule entryRuleXAnnotation
 entryRuleXAnnotation:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAnnotationElementType()); }
 	ruleXAnnotation
-	{ doneComposite(elementTypeProvider.getXAnnotationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -55,8 +55,8 @@ ruleXAnnotation:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXAnnotation_XAnnotationAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXAnnotation_XAnnotationAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -69,11 +69,11 @@ ruleXAnnotation:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXAnnotation_AnnotationTypeJvmAnnotationTypeCrossReference_2_0ElementType());
 				}
 				ruleQualifiedName
 				{
-					doneComposite(elementTypeProvider.getXAnnotation_AnnotationTypeJvmAnnotationTypeCrossReference_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -102,11 +102,11 @@ ruleXAnnotation:
 						)=>
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXAnnotation_ElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_0_0ElementType());
 							}
 							lv_elementValuePairs_4_0=ruleXAnnotationElementValuePair
 							{
-								doneComposite(elementTypeProvider.getXAnnotation_ElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -130,11 +130,11 @@ ruleXAnnotation:
 							)=>
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXAnnotation_ElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0ElementType());
 								}
 								lv_elementValuePairs_6_0=ruleXAnnotationElementValuePair
 								{
-									doneComposite(elementTypeProvider.getXAnnotation_ElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -144,11 +144,11 @@ ruleXAnnotation:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXAnnotation_ValueXAnnotationElementValueOrCommaListParserRuleCall_3_1_1_0ElementType());
 						}
 						lv_value_7_0=ruleXAnnotationElementValueOrCommaList
 						{
-							doneComposite(elementTypeProvider.getXAnnotation_ValueXAnnotationElementValueOrCommaListParserRuleCall_3_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -166,9 +166,9 @@ ruleXAnnotation:
 
 //Entry rule entryRuleXAnnotationElementValuePair
 entryRuleXAnnotationElementValuePair:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAnnotationElementValuePairElementType()); }
 	ruleXAnnotationElementValuePair
-	{ doneComposite(elementTypeProvider.getXAnnotationElementValuePairElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -190,11 +190,11 @@ ruleXAnnotationElementValuePair:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXAnnotationElementValuePair_ElementJvmOperationCrossReference_0_0_0_0ElementType());
 						}
 						ruleValidID
 						{
-							doneComposite(elementTypeProvider.getXAnnotationElementValuePair_ElementJvmOperationCrossReference_0_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -210,11 +210,11 @@ ruleXAnnotationElementValuePair:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXAnnotationElementValuePair_ValueXAnnotationElementValueParserRuleCall_1_0ElementType());
 				}
 				lv_value_2_0=ruleXAnnotationElementValue
 				{
-					doneComposite(elementTypeProvider.getXAnnotationElementValuePair_ValueXAnnotationElementValueParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -223,9 +223,9 @@ ruleXAnnotationElementValuePair:
 
 //Entry rule entryRuleXAnnotationElementValueOrCommaList
 entryRuleXAnnotationElementValueOrCommaList:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAnnotationElementValueOrCommaListElementType()); }
 	ruleXAnnotationElementValueOrCommaList
-	{ doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaListElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -245,8 +245,8 @@ ruleXAnnotationElementValueOrCommaList:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XListLiteralAction_0_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XListLiteralAction_0_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					{
@@ -269,11 +269,11 @@ ruleXAnnotationElementValueOrCommaList:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_ElementsXAnnotationOrExpressionParserRuleCall_0_1_0_0ElementType());
 						}
 						lv_elements_3_0=ruleXAnnotationOrExpression
 						{
-							doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_ElementsXAnnotationOrExpressionParserRuleCall_0_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -288,11 +288,11 @@ ruleXAnnotationElementValueOrCommaList:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_ElementsXAnnotationOrExpressionParserRuleCall_0_1_1_1_0ElementType());
 							}
 							lv_elements_5_0=ruleXAnnotationOrExpression
 							{
-								doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_ElementsXAnnotationOrExpressionParserRuleCall_0_1_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -309,17 +309,17 @@ ruleXAnnotationElementValueOrCommaList:
 		    |
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XAnnotationOrExpressionParserRuleCall_1_0ElementType());
 			}
 			ruleXAnnotationOrExpression
 			{
-				doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XAnnotationOrExpressionParserRuleCall_1_0ElementType());
+				doneComposite();
 			}
 			(
 				(
 					{
-						markComposite();
-						doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XListLiteralElementsAction_1_1_0ElementType());
+						precedeComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_XListLiteralElementsAction_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 				(
@@ -333,11 +333,11 @@ ruleXAnnotationElementValueOrCommaList:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_ElementsXAnnotationOrExpressionParserRuleCall_1_1_1_1_0ElementType());
 							}
 							lv_elements_10_0=ruleXAnnotationOrExpression
 							{
-								doneComposite(elementTypeProvider.getXAnnotationElementValueOrCommaList_ElementsXAnnotationOrExpressionParserRuleCall_1_1_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -349,9 +349,9 @@ ruleXAnnotationElementValueOrCommaList:
 
 //Entry rule entryRuleXAnnotationElementValue
 entryRuleXAnnotationElementValue:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAnnotationElementValueElementType()); }
 	ruleXAnnotationElementValue
-	{ doneComposite(elementTypeProvider.getXAnnotationElementValueElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -371,8 +371,8 @@ ruleXAnnotationElementValue:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXAnnotationElementValue_XListLiteralAction_0_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXAnnotationElementValue_XListLiteralAction_0_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					{
@@ -395,11 +395,11 @@ ruleXAnnotationElementValue:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXAnnotationElementValue_ElementsXAnnotationOrExpressionParserRuleCall_0_1_0_0ElementType());
 						}
 						lv_elements_3_0=ruleXAnnotationOrExpression
 						{
-							doneComposite(elementTypeProvider.getXAnnotationElementValue_ElementsXAnnotationOrExpressionParserRuleCall_0_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -414,11 +414,11 @@ ruleXAnnotationElementValue:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXAnnotationElementValue_ElementsXAnnotationOrExpressionParserRuleCall_0_1_1_1_0ElementType());
 							}
 							lv_elements_5_0=ruleXAnnotationOrExpression
 							{
-								doneComposite(elementTypeProvider.getXAnnotationElementValue_ElementsXAnnotationOrExpressionParserRuleCall_0_1_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -434,20 +434,20 @@ ruleXAnnotationElementValue:
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXAnnotationElementValue_XAnnotationOrExpressionParserRuleCall_1ElementType());
 		}
 		ruleXAnnotationOrExpression
 		{
-			doneComposite(elementTypeProvider.getXAnnotationElementValue_XAnnotationOrExpressionParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleXAnnotationOrExpression
 entryRuleXAnnotationOrExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAnnotationOrExpressionElementType()); }
 	ruleXAnnotationOrExpression
-	{ doneComposite(elementTypeProvider.getXAnnotationOrExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -456,28 +456,28 @@ finally {
 ruleXAnnotationOrExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXAnnotationOrExpression_XAnnotationParserRuleCall_0ElementType());
 		}
 		ruleXAnnotation
 		{
-			doneComposite(elementTypeProvider.getXAnnotationOrExpression_XAnnotationParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXAnnotationOrExpression_XExpressionParserRuleCall_1ElementType());
 		}
 		ruleXExpression
 		{
-			doneComposite(elementTypeProvider.getXAnnotationOrExpression_XExpressionParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleXExpression
 entryRuleXExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXExpressionElementType()); }
 	ruleXExpression
-	{ doneComposite(elementTypeProvider.getXExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -485,19 +485,19 @@ finally {
 // Rule XExpression
 ruleXExpression:
 	{
-		markComposite();
+		markComposite(elementTypeProvider.getXExpression_XAssignmentParserRuleCallElementType());
 	}
 	ruleXAssignment
 	{
-		doneComposite(elementTypeProvider.getXExpression_XAssignmentParserRuleCallElementType());
+		doneComposite();
 	}
 ;
 
 //Entry rule entryRuleXAssignment
 entryRuleXAssignment:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAssignmentElementType()); }
 	ruleXAssignment
-	{ doneComposite(elementTypeProvider.getXAssignmentElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -508,36 +508,36 @@ ruleXAssignment:
 		(
 			(
 				{
-					markComposite();
-					doneComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
+					precedeComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
+					doneComposite();
 				}
 			)
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
 					}
 					ruleFeatureCallID
 					{
-						doneComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXAssignment_OpSingleAssignParserRuleCall_0_2ElementType());
 			}
 			ruleOpSingleAssign
 			{
-				doneComposite(elementTypeProvider.getXAssignment_OpSingleAssignParserRuleCall_0_2ElementType());
+				doneComposite();
 			}
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXAssignment_ValueXAssignmentParserRuleCall_0_3_0ElementType());
 					}
 					lv_value_3_0=ruleXAssignment
 					{
-						doneComposite(elementTypeProvider.getXAssignment_ValueXAssignmentParserRuleCall_0_3_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -545,11 +545,11 @@ ruleXAssignment:
 		    |
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXAssignment_XOrExpressionParserRuleCall_1_0ElementType());
 			}
 			ruleXOrExpression
 			{
-				doneComposite(elementTypeProvider.getXAssignment_XOrExpressionParserRuleCall_1_0ElementType());
+				doneComposite();
 			}
 			(
 				(
@@ -566,18 +566,18 @@ ruleXAssignment:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
 								}
 								ruleOpMultiAssign
 								{
-									doneComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -586,11 +586,11 @@ ruleXAssignment:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXAssignment_RightOperandXAssignmentParserRuleCall_1_1_1_0ElementType());
 						}
 						lv_rightOperand_7_0=ruleXAssignment
 						{
-							doneComposite(elementTypeProvider.getXAssignment_RightOperandXAssignmentParserRuleCall_1_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -601,9 +601,9 @@ ruleXAssignment:
 
 //Entry rule entryRuleOpSingleAssign
 entryRuleOpSingleAssign:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpSingleAssignElementType()); }
 	ruleOpSingleAssign
-	{ doneComposite(elementTypeProvider.getOpSingleAssignElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -621,9 +621,9 @@ ruleOpSingleAssign:
 
 //Entry rule entryRuleOpMultiAssign
 entryRuleOpMultiAssign:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpMultiAssignElementType()); }
 	ruleOpMultiAssign
-	{ doneComposite(elementTypeProvider.getOpMultiAssignElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -725,9 +725,9 @@ ruleOpMultiAssign:
 
 //Entry rule entryRuleXOrExpression
 entryRuleXOrExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXOrExpressionElementType()); }
 	ruleXOrExpression
-	{ doneComposite(elementTypeProvider.getXOrExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -736,11 +736,11 @@ finally {
 ruleXOrExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXOrExpression_XAndExpressionParserRuleCall_0ElementType());
 		}
 		ruleXAndExpression
 		{
-			doneComposite(elementTypeProvider.getXOrExpression_XAndExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -757,18 +757,18 @@ ruleXOrExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXOrExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXOrExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXOrExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
 							}
 							ruleOpOr
 							{
-								doneComposite(elementTypeProvider.getXOrExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -777,11 +777,11 @@ ruleXOrExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXOrExpression_RightOperandXAndExpressionParserRuleCall_1_1_0ElementType());
 					}
 					lv_rightOperand_3_0=ruleXAndExpression
 					{
-						doneComposite(elementTypeProvider.getXOrExpression_RightOperandXAndExpressionParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -791,9 +791,9 @@ ruleXOrExpression:
 
 //Entry rule entryRuleOpOr
 entryRuleOpOr:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpOrElementType()); }
 	ruleOpOr
-	{ doneComposite(elementTypeProvider.getOpOrElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -811,9 +811,9 @@ ruleOpOr:
 
 //Entry rule entryRuleXAndExpression
 entryRuleXAndExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAndExpressionElementType()); }
 	ruleXAndExpression
-	{ doneComposite(elementTypeProvider.getXAndExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -822,11 +822,11 @@ finally {
 ruleXAndExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXAndExpression_XEqualityExpressionParserRuleCall_0ElementType());
 		}
 		ruleXEqualityExpression
 		{
-			doneComposite(elementTypeProvider.getXAndExpression_XEqualityExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -843,18 +843,18 @@ ruleXAndExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXAndExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXAndExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXAndExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
 							}
 							ruleOpAnd
 							{
-								doneComposite(elementTypeProvider.getXAndExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -863,11 +863,11 @@ ruleXAndExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXAndExpression_RightOperandXEqualityExpressionParserRuleCall_1_1_0ElementType());
 					}
 					lv_rightOperand_3_0=ruleXEqualityExpression
 					{
-						doneComposite(elementTypeProvider.getXAndExpression_RightOperandXEqualityExpressionParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -877,9 +877,9 @@ ruleXAndExpression:
 
 //Entry rule entryRuleOpAnd
 entryRuleOpAnd:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpAndElementType()); }
 	ruleOpAnd
-	{ doneComposite(elementTypeProvider.getOpAndElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -897,9 +897,9 @@ ruleOpAnd:
 
 //Entry rule entryRuleXEqualityExpression
 entryRuleXEqualityExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXEqualityExpressionElementType()); }
 	ruleXEqualityExpression
-	{ doneComposite(elementTypeProvider.getXEqualityExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -908,11 +908,11 @@ finally {
 ruleXEqualityExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXEqualityExpression_XRelationalExpressionParserRuleCall_0ElementType());
 		}
 		ruleXRelationalExpression
 		{
-			doneComposite(elementTypeProvider.getXEqualityExpression_XRelationalExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -929,18 +929,18 @@ ruleXEqualityExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXEqualityExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXEqualityExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXEqualityExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
 							}
 							ruleOpEquality
 							{
-								doneComposite(elementTypeProvider.getXEqualityExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -949,11 +949,11 @@ ruleXEqualityExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXEqualityExpression_RightOperandXRelationalExpressionParserRuleCall_1_1_0ElementType());
 					}
 					lv_rightOperand_3_0=ruleXRelationalExpression
 					{
-						doneComposite(elementTypeProvider.getXEqualityExpression_RightOperandXRelationalExpressionParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -963,9 +963,9 @@ ruleXEqualityExpression:
 
 //Entry rule entryRuleOpEquality
 entryRuleOpEquality:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpEqualityElementType()); }
 	ruleOpEquality
-	{ doneComposite(elementTypeProvider.getOpEqualityElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1009,9 +1009,9 @@ ruleOpEquality:
 
 //Entry rule entryRuleXRelationalExpression
 entryRuleXRelationalExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXRelationalExpressionElementType()); }
 	ruleXRelationalExpression
-	{ doneComposite(elementTypeProvider.getXRelationalExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1020,11 +1020,11 @@ finally {
 ruleXRelationalExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXRelationalExpression_XOtherOperatorExpressionParserRuleCall_0ElementType());
 		}
 		ruleXOtherOperatorExpression
 		{
-			doneComposite(elementTypeProvider.getXRelationalExpression_XOtherOperatorExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -1038,8 +1038,8 @@ ruleXRelationalExpression:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getXRelationalExpression_XInstanceOfExpressionExpressionAction_1_0_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getXRelationalExpression_XInstanceOfExpressionExpressionAction_1_0_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						{
@@ -1054,11 +1054,11 @@ ruleXRelationalExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXRelationalExpression_TypeJvmTypeReferenceParserRuleCall_1_0_1_0ElementType());
 						}
 						lv_type_3_0=ruleJvmTypeReference
 						{
-							doneComposite(elementTypeProvider.getXRelationalExpression_TypeJvmTypeReferenceParserRuleCall_1_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -1079,18 +1079,18 @@ ruleXRelationalExpression:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getXRelationalExpression_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getXRelationalExpression_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXRelationalExpression_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
 								}
 								ruleOpCompare
 								{
-									doneComposite(elementTypeProvider.getXRelationalExpression_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -1099,11 +1099,11 @@ ruleXRelationalExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXRelationalExpression_RightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0ElementType());
 						}
 						lv_rightOperand_6_0=ruleXOtherOperatorExpression
 						{
-							doneComposite(elementTypeProvider.getXRelationalExpression_RightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -1114,9 +1114,9 @@ ruleXRelationalExpression:
 
 //Entry rule entryRuleOpCompare
 entryRuleOpCompare:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpCompareElementType()); }
 	ruleOpCompare
-	{ doneComposite(elementTypeProvider.getOpCompareElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1169,9 +1169,9 @@ ruleOpCompare:
 
 //Entry rule entryRuleXOtherOperatorExpression
 entryRuleXOtherOperatorExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXOtherOperatorExpressionElementType()); }
 	ruleXOtherOperatorExpression
-	{ doneComposite(elementTypeProvider.getXOtherOperatorExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1180,11 +1180,11 @@ finally {
 ruleXOtherOperatorExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0ElementType());
 		}
 		ruleXAdditiveExpression
 		{
-			doneComposite(elementTypeProvider.getXOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -1201,18 +1201,18 @@ ruleXOtherOperatorExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXOtherOperatorExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXOtherOperatorExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXOtherOperatorExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
 							}
 							ruleOpOther
 							{
-								doneComposite(elementTypeProvider.getXOtherOperatorExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -1221,11 +1221,11 @@ ruleXOtherOperatorExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXOtherOperatorExpression_RightOperandXAdditiveExpressionParserRuleCall_1_1_0ElementType());
 					}
 					lv_rightOperand_3_0=ruleXAdditiveExpression
 					{
-						doneComposite(elementTypeProvider.getXOtherOperatorExpression_RightOperandXAdditiveExpressionParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -1235,9 +1235,9 @@ ruleXOtherOperatorExpression:
 
 //Entry rule entryRuleOpOther
 entryRuleOpOther:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpOtherElementType()); }
 	ruleOpOther
-	{ doneComposite(elementTypeProvider.getOpOtherElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1408,9 +1408,9 @@ ruleOpOther:
 
 //Entry rule entryRuleXAdditiveExpression
 entryRuleXAdditiveExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXAdditiveExpressionElementType()); }
 	ruleXAdditiveExpression
-	{ doneComposite(elementTypeProvider.getXAdditiveExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1419,11 +1419,11 @@ finally {
 ruleXAdditiveExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0ElementType());
 		}
 		ruleXMultiplicativeExpression
 		{
-			doneComposite(elementTypeProvider.getXAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -1440,18 +1440,18 @@ ruleXAdditiveExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXAdditiveExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXAdditiveExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXAdditiveExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
 							}
 							ruleOpAdd
 							{
-								doneComposite(elementTypeProvider.getXAdditiveExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -1460,11 +1460,11 @@ ruleXAdditiveExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXAdditiveExpression_RightOperandXMultiplicativeExpressionParserRuleCall_1_1_0ElementType());
 					}
 					lv_rightOperand_3_0=ruleXMultiplicativeExpression
 					{
-						doneComposite(elementTypeProvider.getXAdditiveExpression_RightOperandXMultiplicativeExpressionParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -1474,9 +1474,9 @@ ruleXAdditiveExpression:
 
 //Entry rule entryRuleOpAdd
 entryRuleOpAdd:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpAddElementType()); }
 	ruleOpAdd
-	{ doneComposite(elementTypeProvider.getOpAddElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1504,9 +1504,9 @@ ruleOpAdd:
 
 //Entry rule entryRuleXMultiplicativeExpression
 entryRuleXMultiplicativeExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXMultiplicativeExpressionElementType()); }
 	ruleXMultiplicativeExpression
-	{ doneComposite(elementTypeProvider.getXMultiplicativeExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1515,11 +1515,11 @@ finally {
 ruleXMultiplicativeExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXMultiplicativeExpression_XUnaryOperationParserRuleCall_0ElementType());
 		}
 		ruleXUnaryOperation
 		{
-			doneComposite(elementTypeProvider.getXMultiplicativeExpression_XUnaryOperationParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -1536,18 +1536,18 @@ ruleXMultiplicativeExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXMultiplicativeExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXMultiplicativeExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
 							}
 							ruleOpMulti
 							{
-								doneComposite(elementTypeProvider.getXMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -1556,11 +1556,11 @@ ruleXMultiplicativeExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXMultiplicativeExpression_RightOperandXUnaryOperationParserRuleCall_1_1_0ElementType());
 					}
 					lv_rightOperand_3_0=ruleXUnaryOperation
 					{
-						doneComposite(elementTypeProvider.getXMultiplicativeExpression_RightOperandXUnaryOperationParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -1570,9 +1570,9 @@ ruleXMultiplicativeExpression:
 
 //Entry rule entryRuleOpMulti
 entryRuleOpMulti:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpMultiElementType()); }
 	ruleOpMulti
-	{ doneComposite(elementTypeProvider.getOpMultiElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1616,9 +1616,9 @@ ruleOpMulti:
 
 //Entry rule entryRuleXUnaryOperation
 entryRuleXUnaryOperation:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXUnaryOperationElementType()); }
 	ruleXUnaryOperation
-	{ doneComposite(elementTypeProvider.getXUnaryOperationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1629,49 +1629,49 @@ ruleXUnaryOperation:
 		(
 			(
 				{
-					markComposite();
-					doneComposite(elementTypeProvider.getXUnaryOperation_XUnaryOperationAction_0_0ElementType());
+					precedeComposite(elementTypeProvider.getXUnaryOperation_XUnaryOperationAction_0_0ElementType());
+					doneComposite();
 				}
 			)
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXUnaryOperation_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
 					}
 					ruleOpUnary
 					{
-						doneComposite(elementTypeProvider.getXUnaryOperation_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXUnaryOperation_OperandXUnaryOperationParserRuleCall_0_2_0ElementType());
 					}
 					lv_operand_2_0=ruleXUnaryOperation
 					{
-						doneComposite(elementTypeProvider.getXUnaryOperation_OperandXUnaryOperationParserRuleCall_0_2_0ElementType());
+						doneComposite();
 					}
 				)
 			)
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXUnaryOperation_XCastedExpressionParserRuleCall_1ElementType());
 		}
 		ruleXCastedExpression
 		{
-			doneComposite(elementTypeProvider.getXUnaryOperation_XCastedExpressionParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleOpUnary
 entryRuleOpUnary:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpUnaryElementType()); }
 	ruleOpUnary
-	{ doneComposite(elementTypeProvider.getOpUnaryElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1707,9 +1707,9 @@ ruleOpUnary:
 
 //Entry rule entryRuleXCastedExpression
 entryRuleXCastedExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXCastedExpressionElementType()); }
 	ruleXCastedExpression
-	{ doneComposite(elementTypeProvider.getXCastedExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1718,11 +1718,11 @@ finally {
 ruleXCastedExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXCastedExpression_XPostfixOperationParserRuleCall_0ElementType());
 		}
 		ruleXPostfixOperation
 		{
-			doneComposite(elementTypeProvider.getXCastedExpression_XPostfixOperationParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -1735,8 +1735,8 @@ ruleXCastedExpression:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getXCastedExpression_XCastedExpressionTargetAction_1_0_0_0ElementType());
+							precedeComposite(elementTypeProvider.getXCastedExpression_XCastedExpressionTargetAction_1_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 					{
@@ -1751,11 +1751,11 @@ ruleXCastedExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXCastedExpression_TypeJvmTypeReferenceParserRuleCall_1_1_0ElementType());
 					}
 					lv_type_3_0=ruleJvmTypeReference
 					{
-						doneComposite(elementTypeProvider.getXCastedExpression_TypeJvmTypeReferenceParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -1765,9 +1765,9 @@ ruleXCastedExpression:
 
 //Entry rule entryRuleXPostfixOperation
 entryRuleXPostfixOperation:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXPostfixOperationElementType()); }
 	ruleXPostfixOperation
-	{ doneComposite(elementTypeProvider.getXPostfixOperationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1776,11 +1776,11 @@ finally {
 ruleXPostfixOperation:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPostfixOperation_XMemberFeatureCallParserRuleCall_0ElementType());
 		}
 		ruleXMemberFeatureCall
 		{
-			doneComposite(elementTypeProvider.getXPostfixOperation_XMemberFeatureCallParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			((
@@ -1796,18 +1796,18 @@ ruleXPostfixOperation:
 			(
 				(
 					{
-						markComposite();
-						doneComposite(elementTypeProvider.getXPostfixOperation_XPostfixOperationOperandAction_1_0_0ElementType());
+						precedeComposite(elementTypeProvider.getXPostfixOperation_XPostfixOperationOperandAction_1_0_0ElementType());
+						doneComposite();
 					}
 				)
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXPostfixOperation_FeatureJvmIdentifiableElementCrossReference_1_0_1_0ElementType());
 						}
 						ruleOpPostfix
 						{
-							doneComposite(elementTypeProvider.getXPostfixOperation_FeatureJvmIdentifiableElementCrossReference_1_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -1818,9 +1818,9 @@ ruleXPostfixOperation:
 
 //Entry rule entryRuleOpPostfix
 entryRuleOpPostfix:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getOpPostfixElementType()); }
 	ruleOpPostfix
-	{ doneComposite(elementTypeProvider.getOpPostfixElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1848,9 +1848,9 @@ ruleOpPostfix:
 
 //Entry rule entryRuleXMemberFeatureCall
 entryRuleXMemberFeatureCall:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXMemberFeatureCallElementType()); }
 	ruleXMemberFeatureCall
-	{ doneComposite(elementTypeProvider.getXMemberFeatureCallElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -1859,11 +1859,11 @@ finally {
 ruleXMemberFeatureCall:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXMemberFeatureCall_XPrimaryExpressionParserRuleCall_0ElementType());
 		}
 		ruleXPrimaryExpression
 		{
-			doneComposite(elementTypeProvider.getXMemberFeatureCall_XPrimaryExpressionParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -1891,8 +1891,8 @@ ruleXMemberFeatureCall:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getXMemberFeatureCall_XAssignmentAssignableAction_1_0_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getXMemberFeatureCall_XAssignmentAssignableAction_1_0_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						(
@@ -1919,31 +1919,31 @@ ruleXMemberFeatureCall:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0ElementType());
 								}
 								ruleFeatureCallID
 								{
-									doneComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0ElementType());
+									doneComposite();
 								}
 							)
 						)
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXMemberFeatureCall_OpSingleAssignParserRuleCall_1_0_0_0_3ElementType());
 						}
 						ruleOpSingleAssign
 						{
-							doneComposite(elementTypeProvider.getXMemberFeatureCall_OpSingleAssignParserRuleCall_1_0_0_0_3ElementType());
+							doneComposite();
 						}
 					)
 				)
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXMemberFeatureCall_ValueXAssignmentParserRuleCall_1_0_1_0ElementType());
 						}
 						lv_value_6_0=ruleXAssignment
 						{
-							doneComposite(elementTypeProvider.getXMemberFeatureCall_ValueXAssignmentParserRuleCall_1_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -1974,8 +1974,8 @@ ruleXMemberFeatureCall:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getXMemberFeatureCall_XMemberFeatureCallMemberCallTargetAction_1_1_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getXMemberFeatureCall_XMemberFeatureCallMemberCallTargetAction_1_1_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						(
@@ -2024,11 +2024,11 @@ ruleXMemberFeatureCall:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0ElementType());
 							}
 							lv_typeArguments_12_0=ruleJvmArgumentTypeReference
 							{
-								doneComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -2043,11 +2043,11 @@ ruleXMemberFeatureCall:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0ElementType());
 								}
 								lv_typeArguments_14_0=ruleJvmArgumentTypeReference
 								{
-									doneComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -2063,11 +2063,11 @@ ruleXMemberFeatureCall:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0ElementType());
 						}
 						ruleIdOrSuper
 						{
-							doneComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -2116,11 +2116,11 @@ ruleXMemberFeatureCall:
 							)=>
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0ElementType());
 								}
 								lv_memberCallArguments_18_0=ruleXShortClosure
 								{
-									doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -2129,11 +2129,11 @@ ruleXMemberFeatureCall:
 							(
 								(
 									{
-										markComposite();
+										markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0ElementType());
 									}
 									lv_memberCallArguments_19_0=ruleXExpression
 									{
-										doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0ElementType());
+										doneComposite();
 									}
 								)
 							)
@@ -2148,11 +2148,11 @@ ruleXMemberFeatureCall:
 								(
 									(
 										{
-											markComposite();
+											markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0ElementType());
 										}
 										lv_memberCallArguments_21_0=ruleXExpression
 										{
-											doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0ElementType());
+											doneComposite();
 										}
 									)
 								)
@@ -2176,11 +2176,11 @@ ruleXMemberFeatureCall:
 					)=>
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXClosureParserRuleCall_1_1_4_0ElementType());
 						}
 						lv_memberCallArguments_23_0=ruleXClosure
 						{
-							doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXClosureParserRuleCall_1_1_4_0ElementType());
+							doneComposite();
 						}
 					)
 				)?
@@ -2191,9 +2191,9 @@ ruleXMemberFeatureCall:
 
 //Entry rule entryRuleXPrimaryExpression
 entryRuleXPrimaryExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXPrimaryExpressionElementType()); }
 	ruleXPrimaryExpression
-	{ doneComposite(elementTypeProvider.getXPrimaryExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2202,27 +2202,27 @@ finally {
 ruleXPrimaryExpression:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XConstructorCallParserRuleCall_0ElementType());
 		}
 		ruleXConstructorCall
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XConstructorCallParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XBlockExpressionParserRuleCall_1ElementType());
 		}
 		ruleXBlockExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XBlockExpressionParserRuleCall_1ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XSwitchExpressionParserRuleCall_2ElementType());
 		}
 		ruleXSwitchExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XSwitchExpressionParserRuleCall_2ElementType());
+			doneComposite();
 		}
 		    |
 		(
@@ -2234,36 +2234,36 @@ ruleXPrimaryExpression:
 			)
 			)=>
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXPrimaryExpression_XSynchronizedExpressionParserRuleCall_3ElementType());
 			}
 			ruleXSynchronizedExpression
 			{
-				doneComposite(elementTypeProvider.getXPrimaryExpression_XSynchronizedExpressionParserRuleCall_3ElementType());
+				doneComposite();
 			}
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XFeatureCallParserRuleCall_4ElementType());
 		}
 		ruleXFeatureCall
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XFeatureCallParserRuleCall_4ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XLiteralParserRuleCall_5ElementType());
 		}
 		ruleXLiteral
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XLiteralParserRuleCall_5ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XIfExpressionParserRuleCall_6ElementType());
 		}
 		ruleXIfExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XIfExpressionParserRuleCall_6ElementType());
+			doneComposite();
 		}
 		    |
 		(
@@ -2281,77 +2281,77 @@ ruleXPrimaryExpression:
 			)
 			)=>
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXPrimaryExpression_XForLoopExpressionParserRuleCall_7ElementType());
 			}
 			ruleXForLoopExpression
 			{
-				doneComposite(elementTypeProvider.getXPrimaryExpression_XForLoopExpressionParserRuleCall_7ElementType());
+				doneComposite();
 			}
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XBasicForLoopExpressionParserRuleCall_8ElementType());
 		}
 		ruleXBasicForLoopExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XBasicForLoopExpressionParserRuleCall_8ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XWhileExpressionParserRuleCall_9ElementType());
 		}
 		ruleXWhileExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XWhileExpressionParserRuleCall_9ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XDoWhileExpressionParserRuleCall_10ElementType());
 		}
 		ruleXDoWhileExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XDoWhileExpressionParserRuleCall_10ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XThrowExpressionParserRuleCall_11ElementType());
 		}
 		ruleXThrowExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XThrowExpressionParserRuleCall_11ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XReturnExpressionParserRuleCall_12ElementType());
 		}
 		ruleXReturnExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XReturnExpressionParserRuleCall_12ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XTryCatchFinallyExpressionParserRuleCall_13ElementType());
 		}
 		ruleXTryCatchFinallyExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XTryCatchFinallyExpressionParserRuleCall_13ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXPrimaryExpression_XParenthesizedExpressionParserRuleCall_14ElementType());
 		}
 		ruleXParenthesizedExpression
 		{
-			doneComposite(elementTypeProvider.getXPrimaryExpression_XParenthesizedExpressionParserRuleCall_14ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleXLiteral
 entryRuleXLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXLiteralElementType()); }
 	ruleXLiteral
-	{ doneComposite(elementTypeProvider.getXLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2360,11 +2360,11 @@ finally {
 ruleXLiteral:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXLiteral_XCollectionLiteralParserRuleCall_0ElementType());
 		}
 		ruleXCollectionLiteral
 		{
-			doneComposite(elementTypeProvider.getXLiteral_XCollectionLiteralParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		(
@@ -2375,61 +2375,61 @@ ruleXLiteral:
 			)
 			)=>
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXLiteral_XClosureParserRuleCall_1ElementType());
 			}
 			ruleXClosure
 			{
-				doneComposite(elementTypeProvider.getXLiteral_XClosureParserRuleCall_1ElementType());
+				doneComposite();
 			}
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXLiteral_XBooleanLiteralParserRuleCall_2ElementType());
 		}
 		ruleXBooleanLiteral
 		{
-			doneComposite(elementTypeProvider.getXLiteral_XBooleanLiteralParserRuleCall_2ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXLiteral_XNumberLiteralParserRuleCall_3ElementType());
 		}
 		ruleXNumberLiteral
 		{
-			doneComposite(elementTypeProvider.getXLiteral_XNumberLiteralParserRuleCall_3ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXLiteral_XNullLiteralParserRuleCall_4ElementType());
 		}
 		ruleXNullLiteral
 		{
-			doneComposite(elementTypeProvider.getXLiteral_XNullLiteralParserRuleCall_4ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXLiteral_XStringLiteralParserRuleCall_5ElementType());
 		}
 		ruleXStringLiteral
 		{
-			doneComposite(elementTypeProvider.getXLiteral_XStringLiteralParserRuleCall_5ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXLiteral_XTypeLiteralParserRuleCall_6ElementType());
 		}
 		ruleXTypeLiteral
 		{
-			doneComposite(elementTypeProvider.getXLiteral_XTypeLiteralParserRuleCall_6ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleXCollectionLiteral
 entryRuleXCollectionLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXCollectionLiteralElementType()); }
 	ruleXCollectionLiteral
-	{ doneComposite(elementTypeProvider.getXCollectionLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2438,28 +2438,28 @@ finally {
 ruleXCollectionLiteral:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXCollectionLiteral_XSetLiteralParserRuleCall_0ElementType());
 		}
 		ruleXSetLiteral
 		{
-			doneComposite(elementTypeProvider.getXCollectionLiteral_XSetLiteralParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXCollectionLiteral_XListLiteralParserRuleCall_1ElementType());
 		}
 		ruleXListLiteral
 		{
-			doneComposite(elementTypeProvider.getXCollectionLiteral_XListLiteralParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleXSetLiteral
 entryRuleXSetLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXSetLiteralElementType()); }
 	ruleXSetLiteral
-	{ doneComposite(elementTypeProvider.getXSetLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2469,8 +2469,8 @@ ruleXSetLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXSetLiteral_XSetLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXSetLiteral_XSetLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -2491,11 +2491,11 @@ ruleXSetLiteral:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
 					}
 					lv_elements_3_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -2510,11 +2510,11 @@ ruleXSetLiteral:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
 						}
 						lv_elements_5_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -2532,9 +2532,9 @@ ruleXSetLiteral:
 
 //Entry rule entryRuleXListLiteral
 entryRuleXListLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXListLiteralElementType()); }
 	ruleXListLiteral
-	{ doneComposite(elementTypeProvider.getXListLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2544,8 +2544,8 @@ ruleXListLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXListLiteral_XListLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXListLiteral_XListLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -2566,11 +2566,11 @@ ruleXListLiteral:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
 					}
 					lv_elements_3_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -2585,11 +2585,11 @@ ruleXListLiteral:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
 						}
 						lv_elements_5_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -2607,9 +2607,9 @@ ruleXListLiteral:
 
 //Entry rule entryRuleXClosure
 entryRuleXClosure:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXClosureElementType()); }
 	ruleXClosure
-	{ doneComposite(elementTypeProvider.getXClosureElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2627,8 +2627,8 @@ ruleXClosure:
 			(
 				(
 					{
-						markComposite();
-						doneComposite(elementTypeProvider.getXClosure_XClosureAction_0_0_0ElementType());
+						precedeComposite(elementTypeProvider.getXClosure_XClosureAction_0_0_0ElementType());
+						doneComposite();
 					}
 				)
 				{
@@ -2669,11 +2669,11 @@ ruleXClosure:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0ElementType());
 							}
 							lv_declaredFormalParameters_2_0=ruleJvmFormalParameter
 							{
-								doneComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -2688,11 +2688,11 @@ ruleXClosure:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0ElementType());
 								}
 								lv_declaredFormalParameters_4_0=ruleJvmFormalParameter
 								{
-									doneComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -2714,11 +2714,11 @@ ruleXClosure:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXClosure_ExpressionXExpressionInClosureParserRuleCall_2_0ElementType());
 				}
 				lv_expression_6_0=ruleXExpressionInClosure
 				{
-					doneComposite(elementTypeProvider.getXClosure_ExpressionXExpressionInClosureParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -2734,9 +2734,9 @@ ruleXClosure:
 
 //Entry rule entryRuleXExpressionInClosure
 entryRuleXExpressionInClosure:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXExpressionInClosureElementType()); }
 	ruleXExpressionInClosure
-	{ doneComposite(elementTypeProvider.getXExpressionInClosureElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2746,19 +2746,19 @@ ruleXExpressionInClosure:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXExpressionInClosure_XBlockExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXExpressionInClosure_XBlockExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXExpressionInClosure_ExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0ElementType());
 					}
 					lv_expressions_1_0=ruleXExpressionOrVarDeclaration
 					{
-						doneComposite(elementTypeProvider.getXExpressionInClosure_ExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -2777,9 +2777,9 @@ ruleXExpressionInClosure:
 
 //Entry rule entryRuleXShortClosure
 entryRuleXShortClosure:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXShortClosureElementType()); }
 	ruleXShortClosure
-	{ doneComposite(elementTypeProvider.getXShortClosureElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2816,19 +2816,19 @@ ruleXShortClosure:
 			(
 				(
 					{
-						markComposite();
-						doneComposite(elementTypeProvider.getXShortClosure_XClosureAction_0_0_0ElementType());
+						precedeComposite(elementTypeProvider.getXShortClosure_XClosureAction_0_0_0ElementType());
+						doneComposite();
 					}
 				)
 				(
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0ElementType());
 							}
 							lv_declaredFormalParameters_1_0=ruleJvmFormalParameter
 							{
-								doneComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -2843,11 +2843,11 @@ ruleXShortClosure:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0ElementType());
 								}
 								lv_declaredFormalParameters_3_0=ruleJvmFormalParameter
 								{
-									doneComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -2869,11 +2869,11 @@ ruleXShortClosure:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXShortClosure_ExpressionXExpressionParserRuleCall_1_0ElementType());
 				}
 				lv_expression_5_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXShortClosure_ExpressionXExpressionParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -2882,9 +2882,9 @@ ruleXShortClosure:
 
 //Entry rule entryRuleXParenthesizedExpression
 entryRuleXParenthesizedExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXParenthesizedExpressionElementType()); }
 	ruleXParenthesizedExpression
-	{ doneComposite(elementTypeProvider.getXParenthesizedExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2900,11 +2900,11 @@ ruleXParenthesizedExpression:
 			doneLeaf(otherlv_0, elementTypeProvider.getXParenthesizedExpression_LeftParenthesisKeyword_0ElementType());
 		}
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXParenthesizedExpression_XExpressionParserRuleCall_1ElementType());
 		}
 		ruleXExpression
 		{
-			doneComposite(elementTypeProvider.getXParenthesizedExpression_XExpressionParserRuleCall_1ElementType());
+			doneComposite();
 		}
 		{
 			markLeaf();
@@ -2918,9 +2918,9 @@ ruleXParenthesizedExpression:
 
 //Entry rule entryRuleXIfExpression
 entryRuleXIfExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXIfExpressionElementType()); }
 	ruleXIfExpression
-	{ doneComposite(elementTypeProvider.getXIfExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -2930,8 +2930,8 @@ ruleXIfExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXIfExpression_XIfExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXIfExpression_XIfExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -2951,11 +2951,11 @@ ruleXIfExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXIfExpression_IfXExpressionParserRuleCall_3_0ElementType());
 				}
 				lv_if_3_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXIfExpression_IfXExpressionParserRuleCall_3_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -2969,11 +2969,11 @@ ruleXIfExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXIfExpression_ThenXExpressionParserRuleCall_5_0ElementType());
 				}
 				lv_then_5_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXIfExpression_ThenXExpressionParserRuleCall_5_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -2991,11 +2991,11 @@ ruleXIfExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType());
 					}
 					lv_else_7_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3005,9 +3005,9 @@ ruleXIfExpression:
 
 //Entry rule entryRuleXSwitchExpression
 entryRuleXSwitchExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXSwitchExpressionElementType()); }
 	ruleXSwitchExpression
-	{ doneComposite(elementTypeProvider.getXSwitchExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3017,8 +3017,8 @@ ruleXSwitchExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXSwitchExpression_XSwitchExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXSwitchExpression_XSwitchExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -3052,11 +3052,11 @@ ruleXSwitchExpression:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0ElementType());
 								}
 								lv_declaredParam_3_0=ruleJvmFormalParameter
 								{
-									doneComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -3072,11 +3072,11 @@ ruleXSwitchExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_0_1_0ElementType());
 						}
 						lv_switch_5_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3104,11 +3104,11 @@ ruleXSwitchExpression:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0ElementType());
 								}
 								lv_declaredParam_7_0=ruleJvmFormalParameter
 								{
-									doneComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -3124,11 +3124,11 @@ ruleXSwitchExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_1_1_0ElementType());
 						}
 						lv_switch_9_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3144,11 +3144,11 @@ ruleXSwitchExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXSwitchExpression_CasesXCasePartParserRuleCall_4_0ElementType());
 				}
 				lv_cases_11_0=ruleXCasePart
 				{
-					doneComposite(elementTypeProvider.getXSwitchExpression_CasesXCasePartParserRuleCall_4_0ElementType());
+					doneComposite();
 				}
 			)
 		)*
@@ -3170,11 +3170,11 @@ ruleXSwitchExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0ElementType());
 					}
 					lv_default_14_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3191,9 +3191,9 @@ ruleXSwitchExpression:
 
 //Entry rule entryRuleXCasePart
 entryRuleXCasePart:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXCasePartElementType()); }
 	ruleXCasePart
-	{ doneComposite(elementTypeProvider.getXCasePartElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3203,18 +3203,18 @@ ruleXCasePart:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXCasePart_XCasePartAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXCasePart_XCasePartAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeGuard_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)?
@@ -3229,11 +3229,11 @@ ruleXCasePart:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType());
 					}
 					lv_case_3_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3250,11 +3250,11 @@ ruleXCasePart:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType());
 						}
 						lv_then_5_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3277,9 +3277,9 @@ ruleXCasePart:
 
 //Entry rule entryRuleXForLoopExpression
 entryRuleXForLoopExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXForLoopExpressionElementType()); }
 	ruleXForLoopExpression
-	{ doneComposite(elementTypeProvider.getXForLoopExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3304,8 +3304,8 @@ ruleXForLoopExpression:
 			(
 				(
 					{
-						markComposite();
-						doneComposite(elementTypeProvider.getXForLoopExpression_XForLoopExpressionAction_0_0_0ElementType());
+						precedeComposite(elementTypeProvider.getXForLoopExpression_XForLoopExpressionAction_0_0_0ElementType());
+						doneComposite();
 					}
 				)
 				{
@@ -3325,11 +3325,11 @@ ruleXForLoopExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXForLoopExpression_DeclaredParamJvmFormalParameterParserRuleCall_0_0_3_0ElementType());
 						}
 						lv_declaredParam_3_0=ruleJvmFormalParameter
 						{
-							doneComposite(elementTypeProvider.getXForLoopExpression_DeclaredParamJvmFormalParameterParserRuleCall_0_0_3_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3345,11 +3345,11 @@ ruleXForLoopExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXForLoopExpression_ForExpressionXExpressionParserRuleCall_1_0ElementType());
 				}
 				lv_forExpression_5_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXForLoopExpression_ForExpressionXExpressionParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3363,11 +3363,11 @@ ruleXForLoopExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXForLoopExpression_EachExpressionXExpressionParserRuleCall_3_0ElementType());
 				}
 				lv_eachExpression_7_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXForLoopExpression_EachExpressionXExpressionParserRuleCall_3_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3376,9 +3376,9 @@ ruleXForLoopExpression:
 
 //Entry rule entryRuleXBasicForLoopExpression
 entryRuleXBasicForLoopExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXBasicForLoopExpressionElementType()); }
 	ruleXBasicForLoopExpression
-	{ doneComposite(elementTypeProvider.getXBasicForLoopExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3388,8 +3388,8 @@ ruleXBasicForLoopExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXBasicForLoopExpression_XBasicForLoopExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXBasicForLoopExpression_XBasicForLoopExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -3410,11 +3410,11 @@ ruleXBasicForLoopExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_0_0ElementType());
 					}
 					lv_initExpressions_3_0=ruleXExpressionOrVarDeclaration
 					{
-						doneComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3429,11 +3429,11 @@ ruleXBasicForLoopExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_1_1_0ElementType());
 						}
 						lv_initExpressions_5_0=ruleXExpressionOrVarDeclaration
 						{
-							doneComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3449,11 +3449,11 @@ ruleXBasicForLoopExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXBasicForLoopExpression_ExpressionXExpressionParserRuleCall_5_0ElementType());
 				}
 				lv_expression_7_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXBasicForLoopExpression_ExpressionXExpressionParserRuleCall_5_0ElementType());
+					doneComposite();
 				}
 			)
 		)?
@@ -3468,11 +3468,11 @@ ruleXBasicForLoopExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_0_0ElementType());
 					}
 					lv_updateExpressions_9_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3487,11 +3487,11 @@ ruleXBasicForLoopExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_1_1_0ElementType());
 						}
 						lv_updateExpressions_11_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3507,11 +3507,11 @@ ruleXBasicForLoopExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXBasicForLoopExpression_EachExpressionXExpressionParserRuleCall_9_0ElementType());
 				}
 				lv_eachExpression_13_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXBasicForLoopExpression_EachExpressionXExpressionParserRuleCall_9_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3520,9 +3520,9 @@ ruleXBasicForLoopExpression:
 
 //Entry rule entryRuleXWhileExpression
 entryRuleXWhileExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXWhileExpressionElementType()); }
 	ruleXWhileExpression
-	{ doneComposite(elementTypeProvider.getXWhileExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3532,8 +3532,8 @@ ruleXWhileExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXWhileExpression_XWhileExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXWhileExpression_XWhileExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -3553,11 +3553,11 @@ ruleXWhileExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXWhileExpression_PredicateXExpressionParserRuleCall_3_0ElementType());
 				}
 				lv_predicate_3_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXWhileExpression_PredicateXExpressionParserRuleCall_3_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3571,11 +3571,11 @@ ruleXWhileExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXWhileExpression_BodyXExpressionParserRuleCall_5_0ElementType());
 				}
 				lv_body_5_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXWhileExpression_BodyXExpressionParserRuleCall_5_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3584,9 +3584,9 @@ ruleXWhileExpression:
 
 //Entry rule entryRuleXDoWhileExpression
 entryRuleXDoWhileExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXDoWhileExpressionElementType()); }
 	ruleXDoWhileExpression
-	{ doneComposite(elementTypeProvider.getXDoWhileExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3596,8 +3596,8 @@ ruleXDoWhileExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXDoWhileExpression_XDoWhileExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXDoWhileExpression_XDoWhileExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -3610,11 +3610,11 @@ ruleXDoWhileExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXDoWhileExpression_BodyXExpressionParserRuleCall_2_0ElementType());
 				}
 				lv_body_2_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXDoWhileExpression_BodyXExpressionParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3635,11 +3635,11 @@ ruleXDoWhileExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXDoWhileExpression_PredicateXExpressionParserRuleCall_5_0ElementType());
 				}
 				lv_predicate_5_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXDoWhileExpression_PredicateXExpressionParserRuleCall_5_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3655,9 +3655,9 @@ ruleXDoWhileExpression:
 
 //Entry rule entryRuleXBlockExpression
 entryRuleXBlockExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXBlockExpressionElementType()); }
 	ruleXBlockExpression
-	{ doneComposite(elementTypeProvider.getXBlockExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3667,8 +3667,8 @@ ruleXBlockExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXBlockExpression_XBlockExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXBlockExpression_XBlockExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -3682,11 +3682,11 @@ ruleXBlockExpression:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXBlockExpression_ExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0ElementType());
 					}
 					lv_expressions_2_0=ruleXExpressionOrVarDeclaration
 					{
-						doneComposite(elementTypeProvider.getXBlockExpression_ExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3712,9 +3712,9 @@ ruleXBlockExpression:
 
 //Entry rule entryRuleXExpressionOrVarDeclaration
 entryRuleXExpressionOrVarDeclaration:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXExpressionOrVarDeclarationElementType()); }
 	ruleXExpressionOrVarDeclaration
-	{ doneComposite(elementTypeProvider.getXExpressionOrVarDeclarationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3723,28 +3723,28 @@ finally {
 ruleXExpressionOrVarDeclaration:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XVariableDeclarationParserRuleCall_0ElementType());
 		}
 		ruleXVariableDeclaration
 		{
-			doneComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XVariableDeclarationParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XExpressionParserRuleCall_1ElementType());
 		}
 		ruleXExpression
 		{
-			doneComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XExpressionParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleXVariableDeclaration
 entryRuleXVariableDeclaration:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXVariableDeclarationElementType()); }
 	ruleXVariableDeclaration
-	{ doneComposite(elementTypeProvider.getXVariableDeclarationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3754,8 +3754,8 @@ ruleXVariableDeclaration:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXVariableDeclaration_XVariableDeclarationAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXVariableDeclaration_XVariableDeclarationAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
@@ -3798,22 +3798,22 @@ ruleXVariableDeclaration:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_2_0_0_0_0ElementType());
 							}
 							lv_type_3_0=ruleJvmTypeReference
 							{
-								doneComposite(elementTypeProvider.getXVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_2_0_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 					)
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_0_0_1_0ElementType());
 							}
 							lv_name_4_0=ruleValidID
 							{
-								doneComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_0_0_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -3823,11 +3823,11 @@ ruleXVariableDeclaration:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_1_0ElementType());
 					}
 					lv_name_5_0=ruleValidID
 					{
-						doneComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3843,11 +3843,11 @@ ruleXVariableDeclaration:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXVariableDeclaration_RightXExpressionParserRuleCall_3_1_0ElementType());
 					}
 					lv_right_7_0=ruleXExpression
 					{
-						doneComposite(elementTypeProvider.getXVariableDeclaration_RightXExpressionParserRuleCall_3_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3857,9 +3857,9 @@ ruleXVariableDeclaration:
 
 //Entry rule entryRuleJvmFormalParameter
 entryRuleJvmFormalParameter:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmFormalParameterElementType()); }
 	ruleJvmFormalParameter
-	{ doneComposite(elementTypeProvider.getJvmFormalParameterElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3870,22 +3870,22 @@ ruleJvmFormalParameter:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
 				}
 				lv_parameterType_0_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
+					doneComposite();
 				}
 			)
 		)?
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=ruleValidID
 				{
-					doneComposite(elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3894,9 +3894,9 @@ ruleJvmFormalParameter:
 
 //Entry rule entryRuleFullJvmFormalParameter
 entryRuleFullJvmFormalParameter:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getFullJvmFormalParameterElementType()); }
 	ruleFullJvmFormalParameter
-	{ doneComposite(elementTypeProvider.getFullJvmFormalParameterElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3907,22 +3907,22 @@ ruleFullJvmFormalParameter:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
 				}
 				lv_parameterType_0_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
+					doneComposite();
 				}
 			)
 		)
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getFullJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
 				}
 				lv_name_1_0=ruleValidID
 				{
-					doneComposite(elementTypeProvider.getFullJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -3931,9 +3931,9 @@ ruleFullJvmFormalParameter:
 
 //Entry rule entryRuleXFeatureCall
 entryRuleXFeatureCall:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXFeatureCallElementType()); }
 	ruleXFeatureCall
-	{ doneComposite(elementTypeProvider.getXFeatureCallElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -3943,8 +3943,8 @@ ruleXFeatureCall:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXFeatureCall_XFeatureCallAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXFeatureCall_XFeatureCallAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
@@ -3958,11 +3958,11 @@ ruleXFeatureCall:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
 					}
 					lv_typeArguments_2_0=ruleJvmArgumentTypeReference
 					{
-						doneComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -3977,11 +3977,11 @@ ruleXFeatureCall:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
 						}
 						lv_typeArguments_4_0=ruleJvmArgumentTypeReference
 						{
-							doneComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -3997,11 +3997,11 @@ ruleXFeatureCall:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0ElementType());
 				}
 				ruleIdOrSuper
 				{
-					doneComposite(elementTypeProvider.getXFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4050,11 +4050,11 @@ ruleXFeatureCall:
 					)=>
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0ElementType());
 						}
 						lv_featureCallArguments_8_0=ruleXShortClosure
 						{
-							doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -4063,11 +4063,11 @@ ruleXFeatureCall:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0ElementType());
 							}
 							lv_featureCallArguments_9_0=ruleXExpression
 							{
-								doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -4082,11 +4082,11 @@ ruleXFeatureCall:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0ElementType());
 								}
 								lv_featureCallArguments_11_0=ruleXExpression
 								{
-									doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -4110,11 +4110,11 @@ ruleXFeatureCall:
 			)=>
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXClosureParserRuleCall_4_0ElementType());
 				}
 				lv_featureCallArguments_13_0=ruleXClosure
 				{
-					doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXClosureParserRuleCall_4_0ElementType());
+					doneComposite();
 				}
 			)
 		)?
@@ -4123,9 +4123,9 @@ ruleXFeatureCall:
 
 //Entry rule entryRuleFeatureCallID
 entryRuleFeatureCallID:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getFeatureCallIDElementType()); }
 	ruleFeatureCallID
-	{ doneComposite(elementTypeProvider.getFeatureCallIDElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4134,11 +4134,11 @@ finally {
 ruleFeatureCallID:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getFeatureCallID_ValidIDParserRuleCall_0ElementType());
 		}
 		ruleValidID
 		{
-			doneComposite(elementTypeProvider.getFeatureCallID_ValidIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
@@ -4177,9 +4177,9 @@ ruleFeatureCallID:
 
 //Entry rule entryRuleIdOrSuper
 entryRuleIdOrSuper:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getIdOrSuperElementType()); }
 	ruleIdOrSuper
-	{ doneComposite(elementTypeProvider.getIdOrSuperElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4188,11 +4188,11 @@ finally {
 ruleIdOrSuper:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getIdOrSuper_FeatureCallIDParserRuleCall_0ElementType());
 		}
 		ruleFeatureCallID
 		{
-			doneComposite(elementTypeProvider.getIdOrSuper_FeatureCallIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
@@ -4207,9 +4207,9 @@ ruleIdOrSuper:
 
 //Entry rule entryRuleXConstructorCall
 entryRuleXConstructorCall:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXConstructorCallElementType()); }
 	ruleXConstructorCall
-	{ doneComposite(elementTypeProvider.getXConstructorCallElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4219,8 +4219,8 @@ ruleXConstructorCall:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXConstructorCall_XConstructorCallAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXConstructorCall_XConstructorCallAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -4233,11 +4233,11 @@ ruleXConstructorCall:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXConstructorCall_ConstructorJvmConstructorCrossReference_2_0ElementType());
 				}
 				ruleQualifiedName
 				{
-					doneComposite(elementTypeProvider.getXConstructorCall_ConstructorJvmConstructorCrossReference_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4255,11 +4255,11 @@ ruleXConstructorCall:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0ElementType());
 					}
 					lv_typeArguments_4_0=ruleJvmArgumentTypeReference
 					{
-						doneComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -4274,11 +4274,11 @@ ruleXConstructorCall:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0ElementType());
 						}
 						lv_typeArguments_6_0=ruleJvmArgumentTypeReference
 						{
-							doneComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -4336,11 +4336,11 @@ ruleXConstructorCall:
 					)=>
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXShortClosureParserRuleCall_4_1_0_0ElementType());
 						}
 						lv_arguments_9_0=ruleXShortClosure
 						{
-							doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXShortClosureParserRuleCall_4_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -4349,11 +4349,11 @@ ruleXConstructorCall:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_0_0ElementType());
 							}
 							lv_arguments_10_0=ruleXExpression
 							{
-								doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_0_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -4368,11 +4368,11 @@ ruleXConstructorCall:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_1_1_0ElementType());
 								}
 								lv_arguments_12_0=ruleXExpression
 								{
-									doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_1_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -4396,11 +4396,11 @@ ruleXConstructorCall:
 			)=>
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXClosureParserRuleCall_5_0ElementType());
 				}
 				lv_arguments_14_0=ruleXClosure
 				{
-					doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXClosureParserRuleCall_5_0ElementType());
+					doneComposite();
 				}
 			)
 		)?
@@ -4409,9 +4409,9 @@ ruleXConstructorCall:
 
 //Entry rule entryRuleXBooleanLiteral
 entryRuleXBooleanLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXBooleanLiteralElementType()); }
 	ruleXBooleanLiteral
-	{ doneComposite(elementTypeProvider.getXBooleanLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4421,8 +4421,8 @@ ruleXBooleanLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXBooleanLiteral_XBooleanLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXBooleanLiteral_XBooleanLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
@@ -4451,9 +4451,9 @@ ruleXBooleanLiteral:
 
 //Entry rule entryRuleXNullLiteral
 entryRuleXNullLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXNullLiteralElementType()); }
 	ruleXNullLiteral
-	{ doneComposite(elementTypeProvider.getXNullLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4463,8 +4463,8 @@ ruleXNullLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXNullLiteral_XNullLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXNullLiteral_XNullLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -4479,9 +4479,9 @@ ruleXNullLiteral:
 
 //Entry rule entryRuleXNumberLiteral
 entryRuleXNumberLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXNumberLiteralElementType()); }
 	ruleXNumberLiteral
-	{ doneComposite(elementTypeProvider.getXNumberLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4491,18 +4491,18 @@ ruleXNumberLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXNumberLiteral_XNumberLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXNumberLiteral_XNumberLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXNumberLiteral_ValueNumberParserRuleCall_1_0ElementType());
 				}
 				lv_value_1_0=ruleNumber
 				{
-					doneComposite(elementTypeProvider.getXNumberLiteral_ValueNumberParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4511,9 +4511,9 @@ ruleXNumberLiteral:
 
 //Entry rule entryRuleXStringLiteral
 entryRuleXStringLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXStringLiteralElementType()); }
 	ruleXStringLiteral
-	{ doneComposite(elementTypeProvider.getXStringLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4523,8 +4523,8 @@ ruleXStringLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXStringLiteral_XStringLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXStringLiteral_XStringLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		(
@@ -4543,9 +4543,9 @@ ruleXStringLiteral:
 
 //Entry rule entryRuleXTypeLiteral
 entryRuleXTypeLiteral:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXTypeLiteralElementType()); }
 	ruleXTypeLiteral
-	{ doneComposite(elementTypeProvider.getXTypeLiteralElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4555,8 +4555,8 @@ ruleXTypeLiteral:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXTypeLiteral_XTypeLiteralAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXTypeLiteral_XTypeLiteralAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -4576,22 +4576,22 @@ ruleXTypeLiteral:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXTypeLiteral_TypeJvmTypeCrossReference_3_0ElementType());
 				}
 				ruleQualifiedName
 				{
-					doneComposite(elementTypeProvider.getXTypeLiteral_TypeJvmTypeCrossReference_3_0ElementType());
+					doneComposite();
 				}
 			)
 		)
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXTypeLiteral_ArrayDimensionsArrayBracketsParserRuleCall_4_0ElementType());
 				}
 				lv_arrayDimensions_4_0=ruleArrayBrackets
 				{
-					doneComposite(elementTypeProvider.getXTypeLiteral_ArrayDimensionsArrayBracketsParserRuleCall_4_0ElementType());
+					doneComposite();
 				}
 			)
 		)*
@@ -4607,9 +4607,9 @@ ruleXTypeLiteral:
 
 //Entry rule entryRuleXThrowExpression
 entryRuleXThrowExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXThrowExpressionElementType()); }
 	ruleXThrowExpression
-	{ doneComposite(elementTypeProvider.getXThrowExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4619,8 +4619,8 @@ ruleXThrowExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXThrowExpression_XThrowExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXThrowExpression_XThrowExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -4633,11 +4633,11 @@ ruleXThrowExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXThrowExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
 				}
 				lv_expression_2_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXThrowExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4646,9 +4646,9 @@ ruleXThrowExpression:
 
 //Entry rule entryRuleXReturnExpression
 entryRuleXReturnExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXReturnExpressionElementType()); }
 	ruleXReturnExpression
-	{ doneComposite(elementTypeProvider.getXReturnExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4658,8 +4658,8 @@ ruleXReturnExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXReturnExpression_XReturnExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXReturnExpression_XReturnExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -4673,11 +4673,11 @@ ruleXReturnExpression:
 			('extends' | 'static' | 'import' | 'extension' | '!' | '-' | '+' | 'new' | '{' | 'switch' | 'synchronized' | '<' | 'super' | '#' | '[' | 'false' | 'true' | 'null' | 'typeof' | 'if' | 'for' | 'while' | 'do' | 'throw' | 'return' | 'try' | '(' | RULE_ID | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_STRING)=>
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXReturnExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
 				}
 				lv_expression_2_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXReturnExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)?
@@ -4686,9 +4686,9 @@ ruleXReturnExpression:
 
 //Entry rule entryRuleXTryCatchFinallyExpression
 entryRuleXTryCatchFinallyExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); }
 	ruleXTryCatchFinallyExpression
-	{ doneComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4698,8 +4698,8 @@ ruleXTryCatchFinallyExpression:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
+				precedeComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -4712,11 +4712,11 @@ ruleXTryCatchFinallyExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
 				}
 				lv_expression_2_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4726,11 +4726,11 @@ ruleXTryCatchFinallyExpression:
 					('catch')=>
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_3_0_0_0ElementType());
 						}
 						lv_catchClauses_3_0=ruleXCatchClause
 						{
-							doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_3_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)+
@@ -4748,11 +4748,11 @@ ruleXTryCatchFinallyExpression:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_0_1_1_0ElementType());
 							}
 							lv_finallyExpression_5_0=ruleXExpression
 							{
-								doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_0_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -4770,11 +4770,11 @@ ruleXTryCatchFinallyExpression:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_1_1_0ElementType());
 						}
 						lv_finallyExpression_7_0=ruleXExpression
 						{
-							doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -4785,9 +4785,9 @@ ruleXTryCatchFinallyExpression:
 
 //Entry rule entryRuleXSynchronizedExpression
 entryRuleXSynchronizedExpression:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXSynchronizedExpressionElementType()); }
 	ruleXSynchronizedExpression
-	{ doneComposite(elementTypeProvider.getXSynchronizedExpressionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4806,8 +4806,8 @@ ruleXSynchronizedExpression:
 			(
 				(
 					{
-						markComposite();
-						doneComposite(elementTypeProvider.getXSynchronizedExpression_XSynchronizedExpressionAction_0_0_0ElementType());
+						precedeComposite(elementTypeProvider.getXSynchronizedExpression_XSynchronizedExpressionAction_0_0_0ElementType());
+						doneComposite();
 					}
 				)
 				{
@@ -4829,11 +4829,11 @@ ruleXSynchronizedExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXSynchronizedExpression_ParamXExpressionParserRuleCall_1_0ElementType());
 				}
 				lv_param_3_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXSynchronizedExpression_ParamXExpressionParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4847,11 +4847,11 @@ ruleXSynchronizedExpression:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXSynchronizedExpression_ExpressionXExpressionParserRuleCall_3_0ElementType());
 				}
 				lv_expression_5_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXSynchronizedExpression_ExpressionXExpressionParserRuleCall_3_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4860,9 +4860,9 @@ ruleXSynchronizedExpression:
 
 //Entry rule entryRuleXCatchClause
 entryRuleXCatchClause:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXCatchClauseElementType()); }
 	ruleXCatchClause
-	{ doneComposite(elementTypeProvider.getXCatchClauseElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4890,11 +4890,11 @@ ruleXCatchClause:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXCatchClause_DeclaredParamFullJvmFormalParameterParserRuleCall_2_0ElementType());
 				}
 				lv_declaredParam_2_0=ruleFullJvmFormalParameter
 				{
-					doneComposite(elementTypeProvider.getXCatchClause_DeclaredParamFullJvmFormalParameterParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4908,11 +4908,11 @@ ruleXCatchClause:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXCatchClause_ExpressionXExpressionParserRuleCall_4_0ElementType());
 				}
 				lv_expression_4_0=ruleXExpression
 				{
-					doneComposite(elementTypeProvider.getXCatchClause_ExpressionXExpressionParserRuleCall_4_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -4921,9 +4921,9 @@ ruleXCatchClause:
 
 //Entry rule entryRuleQualifiedName
 entryRuleQualifiedName:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getQualifiedNameElementType()); }
 	ruleQualifiedName
-	{ doneComposite(elementTypeProvider.getQualifiedNameElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -4932,11 +4932,11 @@ finally {
 ruleQualifiedName:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
 		}
 		ruleValidID
 		{
-			doneComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			(
@@ -4950,11 +4950,11 @@ ruleQualifiedName:
 				}
 			)
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_1_1ElementType());
 			}
 			ruleValidID
 			{
-				doneComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_1_1ElementType());
+				doneComposite();
 			}
 		)*
 	)
@@ -4962,9 +4962,9 @@ ruleQualifiedName:
 
 //Entry rule entryRuleNumber
 entryRuleNumber:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getNumberElementType()); }
 	ruleNumber
-	{ doneComposite(elementTypeProvider.getNumberElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5030,9 +5030,9 @@ ruleNumber:
 
 //Entry rule entryRuleStaticQualifier
 entryRuleStaticQualifier:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getStaticQualifierElementType()); }
 	ruleStaticQualifier
-	{ doneComposite(elementTypeProvider.getStaticQualifierElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5041,11 +5041,11 @@ finally {
 ruleStaticQualifier:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getStaticQualifier_ValidIDParserRuleCall_0ElementType());
 		}
 		ruleValidID
 		{
-			doneComposite(elementTypeProvider.getStaticQualifier_ValidIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		{
 			markLeaf();
@@ -5059,9 +5059,9 @@ ruleStaticQualifier:
 
 //Entry rule entryRuleJvmTypeReference
 entryRuleJvmTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmTypeReferenceElementType()); }
 	ruleJvmTypeReference
-	{ doneComposite(elementTypeProvider.getJvmTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5071,11 +5071,11 @@ ruleJvmTypeReference:
 	(
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getJvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0ElementType());
 			}
 			ruleJvmParameterizedTypeReference
 			{
-				doneComposite(elementTypeProvider.getJvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0ElementType());
+				doneComposite();
 			}
 			(
 				((
@@ -5087,36 +5087,36 @@ ruleJvmTypeReference:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+							precedeComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1ElementType());
 					}
 					ruleArrayBrackets
 					{
-						doneComposite(elementTypeProvider.getJvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1ElementType());
+						doneComposite();
 					}
 				)
 			)*
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getJvmTypeReference_XFunctionTypeRefParserRuleCall_1ElementType());
 		}
 		ruleXFunctionTypeRef
 		{
-			doneComposite(elementTypeProvider.getJvmTypeReference_XFunctionTypeRefParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleArrayBrackets
 entryRuleArrayBrackets:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getArrayBracketsElementType()); }
 	ruleArrayBrackets
-	{ doneComposite(elementTypeProvider.getArrayBracketsElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5143,9 +5143,9 @@ ruleArrayBrackets:
 
 //Entry rule entryRuleXFunctionTypeRef
 entryRuleXFunctionTypeRef:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXFunctionTypeRefElementType()); }
 	ruleXFunctionTypeRef
-	{ doneComposite(elementTypeProvider.getXFunctionTypeRefElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5165,11 +5165,11 @@ ruleXFunctionTypeRef:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0ElementType());
 						}
 						lv_paramTypes_1_0=ruleJvmTypeReference
 						{
-							doneComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -5184,11 +5184,11 @@ ruleXFunctionTypeRef:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0ElementType());
 							}
 							lv_paramTypes_3_0=ruleJvmTypeReference
 							{
-								doneComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -5212,11 +5212,11 @@ ruleXFunctionTypeRef:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXFunctionTypeRef_ReturnTypeJvmTypeReferenceParserRuleCall_2_0ElementType());
 				}
 				lv_returnType_6_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getXFunctionTypeRef_ReturnTypeJvmTypeReferenceParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5225,9 +5225,9 @@ ruleXFunctionTypeRef:
 
 //Entry rule entryRuleJvmParameterizedTypeReference
 entryRuleJvmParameterizedTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); }
 	ruleJvmParameterizedTypeReference
-	{ doneComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5238,11 +5238,11 @@ ruleJvmParameterizedTypeReference:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType());
 				}
 				ruleQualifiedName
 				{
-					doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5260,11 +5260,11 @@ ruleJvmParameterizedTypeReference:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
 					}
 					lv_arguments_2_0=ruleJvmArgumentTypeReference
 					{
-						doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -5279,11 +5279,11 @@ ruleJvmParameterizedTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
 						}
 						lv_arguments_4_0=ruleJvmArgumentTypeReference
 						{
-							doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -5306,8 +5306,8 @@ ruleJvmParameterizedTypeReference:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						{
@@ -5322,11 +5322,11 @@ ruleJvmParameterizedTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType());
 						}
 						ruleValidID
 						{
-							doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -5344,11 +5344,11 @@ ruleJvmParameterizedTypeReference:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0ElementType());
 							}
 							lv_arguments_10_0=ruleJvmArgumentTypeReference
 							{
-								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -5363,11 +5363,11 @@ ruleJvmParameterizedTypeReference:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0ElementType());
 								}
 								lv_arguments_12_0=ruleJvmArgumentTypeReference
 								{
-									doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -5387,9 +5387,9 @@ ruleJvmParameterizedTypeReference:
 
 //Entry rule entryRuleJvmArgumentTypeReference
 entryRuleJvmArgumentTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); }
 	ruleJvmArgumentTypeReference
-	{ doneComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5398,28 +5398,28 @@ finally {
 ruleJvmArgumentTypeReference:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
 		}
 		ruleJvmTypeReference
 		{
-			doneComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmWildcardTypeReferenceParserRuleCall_1ElementType());
 		}
 		ruleJvmWildcardTypeReference
 		{
-			doneComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmWildcardTypeReferenceParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleJvmWildcardTypeReference
 entryRuleJvmWildcardTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); }
 	ruleJvmWildcardTypeReference
-	{ doneComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5429,8 +5429,8 @@ ruleJvmWildcardTypeReference:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+				precedeComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -5445,22 +5445,22 @@ ruleJvmWildcardTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundParserRuleCall_2_0_0_0ElementType());
 						}
 						lv_constraints_2_0=ruleJvmUpperBound
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundParserRuleCall_2_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0ElementType());
 						}
 						lv_constraints_3_0=ruleJvmUpperBoundAnded
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)*
@@ -5470,22 +5470,22 @@ ruleJvmWildcardTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundParserRuleCall_2_1_0_0ElementType());
 						}
 						lv_constraints_4_0=ruleJvmLowerBound
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundParserRuleCall_2_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0ElementType());
 						}
 						lv_constraints_5_0=ruleJvmLowerBoundAnded
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)*
@@ -5496,9 +5496,9 @@ ruleJvmWildcardTypeReference:
 
 //Entry rule entryRuleJvmUpperBound
 entryRuleJvmUpperBound:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmUpperBoundElementType()); }
 	ruleJvmUpperBound
-	{ doneComposite(elementTypeProvider.getJvmUpperBoundElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5516,11 +5516,11 @@ ruleJvmUpperBound:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmUpperBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmUpperBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5529,9 +5529,9 @@ ruleJvmUpperBound:
 
 //Entry rule entryRuleJvmUpperBoundAnded
 entryRuleJvmUpperBoundAnded:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); }
 	ruleJvmUpperBoundAnded
-	{ doneComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5549,11 +5549,11 @@ ruleJvmUpperBoundAnded:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmUpperBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmUpperBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5562,9 +5562,9 @@ ruleJvmUpperBoundAnded:
 
 //Entry rule entryRuleJvmLowerBound
 entryRuleJvmLowerBound:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmLowerBoundElementType()); }
 	ruleJvmLowerBound
-	{ doneComposite(elementTypeProvider.getJvmLowerBoundElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5582,11 +5582,11 @@ ruleJvmLowerBound:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmLowerBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmLowerBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5595,9 +5595,9 @@ ruleJvmLowerBound:
 
 //Entry rule entryRuleJvmLowerBoundAnded
 entryRuleJvmLowerBoundAnded:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); }
 	ruleJvmLowerBoundAnded
-	{ doneComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5615,11 +5615,11 @@ ruleJvmLowerBoundAnded:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmLowerBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmLowerBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5628,9 +5628,9 @@ ruleJvmLowerBoundAnded:
 
 //Entry rule entryRuleJvmTypeParameter
 entryRuleJvmTypeParameter:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmTypeParameterElementType()); }
 	ruleJvmTypeParameter
-	{ doneComposite(elementTypeProvider.getJvmTypeParameterElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5641,11 +5641,11 @@ ruleJvmTypeParameter:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=ruleValidID
 				{
-					doneComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -5653,22 +5653,22 @@ ruleJvmTypeParameter:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
 					}
 					lv_constraints_1_0=ruleJvmUpperBound
 					{
-						doneComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
 					}
 					lv_constraints_2_0=ruleJvmUpperBoundAnded
 					{
-						doneComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)*
@@ -5678,9 +5678,9 @@ ruleJvmTypeParameter:
 
 //Entry rule entryRuleQualifiedNameWithWildcard
 entryRuleQualifiedNameWithWildcard:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); }
 	ruleQualifiedNameWithWildcard
-	{ doneComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5689,11 +5689,11 @@ finally {
 ruleQualifiedNameWithWildcard:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
 		}
 		ruleQualifiedName
 		{
-			doneComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		{
 			markLeaf();
@@ -5714,9 +5714,9 @@ ruleQualifiedNameWithWildcard:
 
 //Entry rule entryRuleValidID
 entryRuleValidID:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getValidIDElementType()); }
 	ruleValidID
-	{ doneComposite(elementTypeProvider.getValidIDElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5734,9 +5734,9 @@ ruleValidID:
 
 //Entry rule entryRuleXImportSection
 entryRuleXImportSection:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXImportSectionElementType()); }
 	ruleXImportSection
-	{ doneComposite(elementTypeProvider.getXImportSectionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5746,11 +5746,11 @@ ruleXImportSection:
 	(
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
 			}
 			lv_importDeclarations_0_0=ruleXImportDeclaration
 			{
-				doneComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
+				doneComposite();
 			}
 		)
 	)+
@@ -5758,9 +5758,9 @@ ruleXImportSection:
 
 //Entry rule entryRuleXImportDeclaration
 entryRuleXImportDeclaration:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXImportDeclarationElementType()); }
 	ruleXImportDeclaration
-	{ doneComposite(elementTypeProvider.getXImportDeclarationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5802,11 +5802,11 @@ ruleXImportDeclaration:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType());
 						}
 						ruleQualifiedNameInStaticImport
 						{
-							doneComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -5826,11 +5826,11 @@ ruleXImportDeclaration:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXImportDeclaration_MemberNameValidIDParserRuleCall_1_0_3_1_0ElementType());
 							}
 							lv_memberName_5_0=ruleValidID
 							{
-								doneComposite(elementTypeProvider.getXImportDeclaration_MemberNameValidIDParserRuleCall_1_0_3_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -5840,11 +5840,11 @@ ruleXImportDeclaration:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType());
 					}
 					ruleQualifiedName
 					{
-						doneComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -5852,11 +5852,11 @@ ruleXImportDeclaration:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXImportDeclaration_ImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0ElementType());
 					}
 					lv_importedNamespace_7_0=ruleQualifiedNameWithWildcard
 					{
-						doneComposite(elementTypeProvider.getXImportDeclaration_ImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -5875,9 +5875,9 @@ ruleXImportDeclaration:
 
 //Entry rule entryRuleQualifiedNameInStaticImport
 entryRuleQualifiedNameInStaticImport:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); }
 	ruleQualifiedNameInStaticImport
-	{ doneComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -5886,11 +5886,11 @@ finally {
 ruleQualifiedNameInStaticImport:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());
 		}
 		ruleValidID
 		{
-			doneComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		{
 			markLeaf();

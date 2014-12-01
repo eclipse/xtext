@@ -2,7 +2,6 @@ package org.eclipse.xtext.idea.tests.parsing;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.module.Module;
@@ -20,10 +19,7 @@ import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
 import javax.inject.Provider;
-import junit.framework.TestCase;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,27 +27,18 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.resource.IResourceSetProvider;
-import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
-import org.eclipse.xtext.idea.tests.parsing.NodeModelPrinter;
+import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.nodemodel.BidiTreeIterable;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -87,17 +74,12 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
   
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
-  @Extension
-  private NodeModelPrinter nodeModelPrinter;
-  
-  @Inject
-  @Accessors(AccessorType.PROTECTED_GETTER)
-  @Extension
-  private InvariantChecker invariantChecker;
-  
-  @Inject
-  @Accessors(AccessorType.PROTECTED_GETTER)
   private Provider<PsiToEcoreTransformator> psiToEcoreTransformatorProvider;
+  
+  @Inject
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Extension
+  private XtextResourceAsserts xtextResourceAsserts;
   
   private final LanguageFileType fileType;
   
@@ -140,43 +122,7 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
     this.myFixture.configureByText(this.fileType, code);
     final XtextResource actualResource = this.getActualResource();
     final XtextResource expectedResource = this.createExpectedResource();
-    IParseResult _parseResult = expectedResource.getParseResult();
-    final ICompositeNode expectedRootNode = _parseResult.getRootNode();
-    IParseResult _parseResult_1 = actualResource.getParseResult();
-    final ICompositeNode actualRootNode = _parseResult_1.getRootNode();
-    String _print = this.nodeModelPrinter.print(expectedRootNode);
-    String _print_1 = this.nodeModelPrinter.print(actualRootNode);
-    TestCase.assertEquals(_print, _print_1);
-    EObject _semanticElement = expectedRootNode.getSemanticElement();
-    String _objToStr = EmfFormatter.objToStr(_semanticElement);
-    EObject _semanticElement_1 = actualRootNode.getSemanticElement();
-    String _objToStr_1 = EmfFormatter.objToStr(_semanticElement_1);
-    TestCase.assertEquals(_objToStr, _objToStr_1);
-    this.invariantChecker.checkInvariant(actualRootNode);
-    PsiToEcoreAdapter _get = PsiToEcoreAdapter.get(actualResource);
-    final Map<ASTNode, INode> nodesMapping = _get.getNodesMapping();
-    Set<ASTNode> _keySet = nodesMapping.keySet();
-    for (final ASTNode astNode : _keySet) {
-      {
-        final INode node = nodesMapping.get(astNode);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Node ");
-        _builder.append(node, "");
-        _builder.append(" is not a part of the tree");
-        boolean _belongsTo = this.belongsTo(node, actualRootNode);
-        TestCase.assertTrue(_builder.toString(), _belongsTo);
-      }
-    }
-  }
-  
-  protected boolean belongsTo(final INode node, final ICompositeNode rootNode) {
-    BidiTreeIterable<INode> _asTreeIterable = rootNode.getAsTreeIterable();
-    final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
-      public Boolean apply(final INode it) {
-        return Boolean.valueOf(Objects.equal(it, node));
-      }
-    };
-    return IterableExtensions.<INode>exists(_asTreeIterable, _function);
+    this.xtextResourceAsserts.assertResource(expectedResource, actualResource);
   }
   
   protected XtextResource getActualResource() {
@@ -232,17 +178,12 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
   }
   
   @Pure
-  protected NodeModelPrinter getNodeModelPrinter() {
-    return this.nodeModelPrinter;
-  }
-  
-  @Pure
-  protected InvariantChecker getInvariantChecker() {
-    return this.invariantChecker;
-  }
-  
-  @Pure
   protected Provider<PsiToEcoreTransformator> getPsiToEcoreTransformatorProvider() {
     return this.psiToEcoreTransformatorProvider;
+  }
+  
+  @Pure
+  protected XtextResourceAsserts getXtextResourceAsserts() {
+    return this.xtextResourceAsserts;
   }
 }

@@ -374,8 +374,8 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
       _builder.append("{");
       _builder.newLine();
       _builder.append("\t");
-      CharSequence _markComposite = this.markComposite(it);
-      _builder.append(_markComposite, "\t");
+      CharSequence _precedeComposite = this.precedeComposite(it);
+      _builder.append(_precedeComposite, "\t");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       CharSequence _doneComposite = this.doneComposite(it);
@@ -746,13 +746,22 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
   
   protected CharSequence markComposite(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("markComposite();");
+    _builder.append("markComposite(elementTypeProvider.get");
+    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
+    _builder.append(_grammarElementIdentifier, "");
+    _builder.append("ElementType());");
     return _builder;
   }
   
   protected CharSequence doneComposite(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("doneComposite(elementTypeProvider.get");
+    _builder.append("doneComposite();");
+    return _builder;
+  }
+  
+  protected CharSequence precedeComposite(final EObject it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("precedeComposite(elementTypeProvider.get");
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");

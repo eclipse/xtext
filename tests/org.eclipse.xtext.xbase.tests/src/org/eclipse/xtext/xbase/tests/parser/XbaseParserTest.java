@@ -87,9 +87,13 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testAddition_1() throws Exception {
-		XBinaryOperation operation = (XBinaryOperation) expression("3 + 4");
-		assertEquals("3", ((XNumberLiteral) operation.getExplicitArguments().get(0)).getValue());
-		assertEquals("4", ((XNumberLiteral) operation.getExplicitArguments().get(1)).getValue());
+		XBinaryOperation operation = (XBinaryOperation) expression("3 + 4 + 5");
+		
+		XBinaryOperation leftOperand = (XBinaryOperation) operation.getLeftOperand();
+		assertEquals("3", ((XNumberLiteral) leftOperand.getLeftOperand()).getValue());
+		assertEquals("4", ((XNumberLiteral) leftOperand.getRightOperand()).getValue());
+		
+		assertEquals("5", ((XNumberLiteral) operation.getRightOperand()).getValue());
 	}
 
 	@Test public void testAddition_2() throws Exception {

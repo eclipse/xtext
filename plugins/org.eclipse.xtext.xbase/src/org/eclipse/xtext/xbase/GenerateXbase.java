@@ -103,7 +103,7 @@ final class GenerateXbase {
 				antlr.setOptions(antlrOptions);
 				addFragment(antlr);
 				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions));
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions, false, false));
 				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
@@ -149,7 +149,7 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
 				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions));
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions, true, true));
 				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 			addLanguage(new LanguageConfig() {{
@@ -193,7 +193,7 @@ final class GenerateXbase {
 				antlrUI.addAntlrParam("10000");
 				addFragment(antlrUI);
 				
-				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions));
+				addFragment(createIdeaPluginProject(projectName, runtimeProject, ideaProjectName, ideaProjectPath, fileExtensions, false, true));
 				addFragment(createXtextAntlrIDEAGeneratorFragment(ideaProjectPath));
 			}});
 		}};
@@ -233,9 +233,12 @@ final class GenerateXbase {
 			String runtimeProjectPath,
 			String ideaProjectName, 
 			String ideaProjectPath, 
-			String fileExtensions) {
+			String fileExtensions,
+			boolean deploayble,
+			boolean typesIntegrationRequired) {
 		IdeaPluginGenerator ideaPluginGenerator = new IdeaPluginGenerator();
-		ideaPluginGenerator.setDeployable(false);
+		ideaPluginGenerator.setDeployable(deploayble);
+		ideaPluginGenerator.setTypesIntegrationRequired(typesIntegrationRequired);
 		ideaPluginGenerator.setRuntimeProjectName(runtimeProjectName);
 		ideaPluginGenerator.setRuntimeProjectPath(runtimeProjectPath);
 		ideaPluginGenerator.setIdeaProjectName(ideaProjectName);

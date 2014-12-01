@@ -9,7 +9,8 @@ import org.eclipse.xtext.nodemodel.INode
 class NodeModelPrinter {
 
 	def dispatch String print(ICompositeNode it) '''
-		«doPrint» {
+		«doPrint»
+		{
 			«FOR child : children SEPARATOR '\n'»
 				«child.print»
 			«ENDFOR»
@@ -23,9 +24,9 @@ class NodeModelPrinter {
 	protected def String doPrint(INode it) '''
 		«class» «textRegion»
 		grammarElements: «grammarElement.printGrammarElement»
-		hasDirectSemanticElement: «hasDirectSemanticElement»
+		«IF hasDirectSemanticElement»directSemanticElement: «semanticElement.class.name»«ENDIF»
 		«IF it instanceof ICompositeNode»lookAhead: «lookAhead»«ENDIF»
-		syntaxErrorMessage: «syntaxErrorMessage»'''
+		«IF syntaxErrorMessage != null»syntaxErrorMessage: «syntaxErrorMessage»«ENDIF»'''
 
 	protected dispatch def String printGrammarElement(Void grammarElement) {
 		'null'
