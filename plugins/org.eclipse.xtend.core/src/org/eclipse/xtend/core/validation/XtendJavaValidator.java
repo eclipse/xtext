@@ -117,7 +117,7 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
@@ -664,23 +664,23 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 		if (inferredType instanceof JvmGenericType) {
-			ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
+			ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType);
 			
 			Set<EObject> flaggedOperations = Sets.newHashSet();
-			doCheckDuplicateExecutables((JvmGenericType) inferredType, resolvedOperations, flaggedOperations);
-			doCheckOverriddenMethods(xtendType, (JvmGenericType) inferredType, resolvedOperations, flaggedOperations);
-			doCheckFunctionOverrides(resolvedOperations, flaggedOperations);
+			doCheckDuplicateExecutables((JvmGenericType) inferredType, resolvedFeatures, flaggedOperations);
+			doCheckOverriddenMethods(xtendType, (JvmGenericType) inferredType, resolvedFeatures, flaggedOperations);
+			doCheckFunctionOverrides(resolvedFeatures, flaggedOperations);
 		}
 	}
 	
-	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
-		List<IResolvedOperation> declaredOperations = resolvedOperations.getDeclaredOperations();
+	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+		List<IResolvedOperation> declaredOperations = resolvedFeatures.getDeclaredOperations();
 		doCheckDuplicateExecutables(inferredType, declaredOperations, new Function<String, List<IResolvedOperation>>() {
 			public List<IResolvedOperation> apply(String erasedSignature) {
-				return resolvedOperations.getDeclaredOperations(erasedSignature);
+				return resolvedFeatures.getDeclaredOperations(erasedSignature);
 			}
 		}, flaggedOperations);
-		final List<IResolvedConstructor> declaredConstructors = resolvedOperations.getDeclaredConstructors();
+		final List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
 		doCheckDuplicateExecutables(inferredType, declaredConstructors, new Function<String, List<IResolvedConstructor>>() {
 			public List<IResolvedConstructor> apply(String erasedSignature) {
 				if (declaredConstructors.size() == 1) {
@@ -776,21 +776,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType,
-			ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
+			ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
 		if (doCheckAbstract) {
 			operationsMissingImplementation = Lists.newArrayList();
 		}
-		IVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, resolvedOperations.getType());
-		for (IResolvedOperation operation : resolvedOperations.getAllOperations()) {
+		IVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, resolvedFeatures.getType());
+		for (IResolvedOperation operation : resolvedFeatures.getAllOperations()) {
 			if (operation.getDeclaration().getDeclaringType() != inferredType) {
 				if (operationsMissingImplementation != null && operation.getDeclaration().isAbstract()) {
 					operationsMissingImplementation.add(operation);
 				}
 				if (visibilityHelper.isVisible(operation.getDeclaration())) {
 					List<IResolvedOperation> declaredOperationsWithSameErasure = 
-							resolvedOperations.getDeclaredOperations(operation.getResolvedErasureSignature());
+							resolvedFeatures.getDeclaredOperations(operation.getResolvedErasureSignature());
 					for(IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
 							EObject source = findPrimarySourceElement(localOperation);
@@ -852,8 +852,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 	
-	protected void doCheckFunctionOverrides(ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
-		for(IResolvedOperation operation: resolvedOperations.getDeclaredOperations()) {
+	protected void doCheckFunctionOverrides(ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
+		for(IResolvedOperation operation: resolvedFeatures.getDeclaredOperations()) {
 			doCheckFunctionOverrides(operation, flaggedOperations);
 		}
 	}

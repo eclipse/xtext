@@ -76,7 +76,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo").numChildren(16);
+		sub = assertBuilder.child(1, "Foo - test").numChildren(16);
 		sub.child(0, "baz : Number - test.Foo").numChildren(0).hasTextRegion(true);
 		sub.child(1, "SubOfFoo - test.Super").hasTextRegion(false);
 		sub.child(2, "bar : String - test.Super").numChildren(0).hasTextRegion(false);
@@ -110,7 +110,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo").numChildren(15);
+		sub = assertBuilder.child(1, "Foo - test").numChildren(15);
 		sub.child(0, "baz() : Number - test.Foo").numChildren(0).hasTextRegion(true);
 		sub.child(1, "bar() : String - test.Super").hasTextRegion(false);
 		sub.child(2, "foo(String) : int - test.Super").hasTextRegion(false);
@@ -142,7 +142,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
-		sub = assertBuilder.child(1, "Foo").numChildren(13).hasTextRegion(true);
+		sub = assertBuilder.child(1, "Foo - test").numChildren(13).hasTextRegion(true);
 		AssertBuilder foo = sub.child(0, "foo(Serializable) : void - test.Foo").numChildren(2).hasTextRegion(true);
 		foo.child(0, "_foo(String) : void - test.Super").numChildren(0).hasTextRegion(false);
 		foo.child(1, "foo(Number) : void - test.Foo").numChildren(0).hasTextRegion(true);
@@ -160,6 +160,53 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(11, "wait(long) : void - java.lang.Object").hasTextRegion(false);
 		sub.child(12, "wait(long, int) : void - java.lang.Object").hasTextRegion(false);
 
+	}
+	
+	@Test
+	public void testResolvedSignatures() throws Exception {
+		setShowInherited(false);
+		getWorkbenchTestHelper().createFile("test/Super.java",
+				"package test; "
+			  + "import java.util.*;"	
+			  + "public class Super<T> {" 
+			  + "  T a;"
+			  + "  List<T> b;"
+			  + "  Map<List<T>,T> c;"
+			  + "  public Super(List<T> x) { }" 
+			  + "  protected T foo(List<T> x) { return null; }" 
+			  + "}");
+		waitForAutoBuild();
+		String model = "package test " 
+		+ "class Foo extends Super<String> {"
+		+ " new() { super(null) }"
+		+ "}";
+		AssertBuilder assertBuilder = newAssertBuilder(model).numChildren(2);
+		AssertBuilder sub = assertBuilder.child(1, "Foo").numChildren(1).hasTextRegion(true);
+		sub.child(0, "new()").hasTextRegion(true);
+		
+		setShowInherited(true);
+		assertBuilder = newAssertBuilder(model).numChildren(2);
+		sub = assertBuilder.child(1, "Foo - test").numChildren(18).hasTextRegion(true);
+		int i = 0;
+		sub.child(i++, "new() - test.Foo").hasTextRegion(true);
+		sub.child(i++, "a : String - test.Super").hasTextRegion(false);
+		sub.child(i++, "b : List<String> - test.Super").hasTextRegion(false);
+		sub.child(i++, "c : Map<List<String>, String> - test.Super").hasTextRegion(false);
+		sub.child(i++, "new(List<String>) - test.Super").hasTextRegion(false);
+		sub.child(i++, "foo(List<String>) : String - test.Super").hasTextRegion(false);
+		
+		sub.child(i++, "registerNatives() : void - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "clone() : Object - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "equals(Object) : boolean - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "finalize() : void - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "getClass() : Class<?> - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "hashCode() : int - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "notify() : void - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "notifyAll() : void - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "toString() : String - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "wait() : void - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "wait(long) : void - java.lang.Object").hasTextRegion(false);
+		sub.child(i++, "wait(long, int) : void - java.lang.Object").hasTextRegion(false);
 	}
 
 }

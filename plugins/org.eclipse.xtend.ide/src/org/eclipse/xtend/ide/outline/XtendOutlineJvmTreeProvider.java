@@ -16,7 +16,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.labeling.XtendJvmLabelProvider;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
@@ -46,7 +45,7 @@ public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreePro
 			if (eObject instanceof JvmDeclaredType) {
 				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) eObject;
 				String packageName = jvmDeclaredType.getPackageName();
-				EObjectNode typeNode = createNodeForType(parentNode, jvmDeclaredType, processedFeatures, 0);
+				EObjectNode typeNode = createNodeForType(parentNode, jvmDeclaredType, processedFeatures, 0, isShowInherited());
 				if (!isShowInherited() && packageName != null && (!packageName.equals(primaryPackage))) {
 					if (typeNode.getText() instanceof StyledString) {
 						typeNode.setText(((StyledString) typeNode.getText()).append(new StyledString(" - "
@@ -62,33 +61,22 @@ public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreePro
 		if (modelElement instanceof JvmDeclaredType) {
 			Set<JvmMember> processedFeatures = newHashSet();
 			createFeatureNodesForType(parentNode, (JvmDeclaredType) modelElement, (JvmDeclaredType) modelElement,
-					processedFeatures, 0);
+					processedFeatures, 0, isShowInherited());
 		} else {
 			super.internalCreateChildren(parentNode, modelElement);
 		}
 	}
 
 	@Override
-	protected void createInheritedFeatureNodes(IOutlineNode parentNode, JvmDeclaredType baseType,
-			Set<JvmMember> processedFeatures, int inheritanceDepth, JvmTypeReference superType) {
-		if (superType.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType superClass = ((JvmDeclaredType) superType.getType());
-			if (Object.class.getName().equals(superClass.getQualifiedName()))
-				inheritanceDepth += 10;
-			createFeatureNodesForType(parentNode, superClass, baseType, processedFeatures, inheritanceDepth + 1);
-		}
-	}
-
-	@Override
 	protected void createNodeForType(IOutlineNode parentNode, EObject someType, Set<JvmMember> processedFeatures,
-			int inheritanceDepth) {
+			int inheritanceDepth, boolean showInherited) {
 		if (someType instanceof JvmDeclaredType) {
 			JvmDeclaredType jvmType = (JvmDeclaredType) someType;
-			super.createNodeForType(parentNode, jvmType, processedFeatures, inheritanceDepth);
+			super.createNodeForType(parentNode, jvmType, processedFeatures, inheritanceDepth, showInherited);
 		} else if (someType instanceof XtendTypeDeclaration) {
 			EObject jvmElement = getAssociations().getPrimaryJvmElement(someType);
 			if (jvmElement instanceof JvmDeclaredType)
-				super.createNodeForType(parentNode, (JvmDeclaredType) jvmElement, processedFeatures, inheritanceDepth);
+				super.createNodeForType(parentNode, (JvmDeclaredType) jvmElement, processedFeatures, inheritanceDepth, showInherited);
 		}
 	}
 

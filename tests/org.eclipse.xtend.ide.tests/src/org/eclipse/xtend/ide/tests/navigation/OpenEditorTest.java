@@ -100,7 +100,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		tp.setCurrentMode(tp.getOutlineModes().get(1));
 		IOutlineNode outlineRoot = treeProvider.createRoot(bazXtendEditor.getDocument());
 		IOutlineNode bazNode = outlineRoot.getChildren().get(1);
-		assertEquals("Baz", bazNode.getText().toString());
+		assertEquals("Baz - outlinetest", bazNode.getText().toString());
 		assertTrue(bazNode.getChildren().size() > 2);
 		IOutlineNode baz = bazNode.getChildren().get(0);
 		assertEquals("baz : int - outlinetest.Baz", baz.getText().toString());

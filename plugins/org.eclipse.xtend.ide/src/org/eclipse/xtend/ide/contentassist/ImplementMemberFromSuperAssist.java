@@ -41,7 +41,7 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
@@ -89,18 +89,18 @@ public class ImplementMemberFromSuperAssist {
 		final JvmDeclaredType inferredType = associations.getInferredType(clazz);
 		if (inferredType == null || !(inferredType instanceof JvmGenericType))
 			return Collections.emptyList();
-		ResolvedOperations operations = overrideHelper.getResolvedOperations(inferredType);
+		ResolvedFeatures resolvedFeatures = overrideHelper.getResolvedFeatures(inferredType);
 		List<IResolvedExecutable> result = newArrayList();
-		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, operations.getType());
-		addOperationCandidates(operations, contextualVisibilityHelper, result);
+		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, resolvedFeatures.getType());
+		addOperationCandidates(resolvedFeatures, contextualVisibilityHelper, result);
 		if (!clazz.isAnonymous())
-			addConstructorCandidates(operations, contextualVisibilityHelper, result);
+			addConstructorCandidates(resolvedFeatures, contextualVisibilityHelper, result);
 		return result;
 	}
 
-	protected void addOperationCandidates(ResolvedOperations operations, IVisibilityHelper visibilityHelper, List<IResolvedExecutable> result) {
-		List<IResolvedOperation> allOperations = operations.getAllOperations();
-		LightweightTypeReference inferredType = operations.getType();
+	protected void addOperationCandidates(ResolvedFeatures resolvedFeatures, IVisibilityHelper visibilityHelper, List<IResolvedExecutable> result) {
+		List<IResolvedOperation> allOperations = resolvedFeatures.getAllOperations();
+		LightweightTypeReference inferredType = resolvedFeatures.getType();
 		for(IResolvedOperation operation: allOperations) {
 			if (isCandidate(inferredType, operation, visibilityHelper)) {
 				result.add(operation);
@@ -108,18 +108,18 @@ public class ImplementMemberFromSuperAssist {
 		}
 	}
 
-	protected void addConstructorCandidates(ResolvedOperations operations,
+	protected void addConstructorCandidates(ResolvedFeatures resolvedFeatures,
 			IVisibilityHelper visibilityHelper, List<IResolvedExecutable> result) {
-		LightweightTypeReference typeReference = operations.getType();
+		LightweightTypeReference typeReference = resolvedFeatures.getType();
 		List<LightweightTypeReference> superTypes = typeReference.getSuperTypes();
 		for(LightweightTypeReference superType: superTypes) {
 			if (!superType.isInterfaceType()) {
-				List<IResolvedConstructor> declaredConstructors = operations.getDeclaredConstructors();
+				List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
 				Set<String> erasedSignatures = Sets.newHashSet();
 				for(IResolvedConstructor constructor: declaredConstructors) {
 					erasedSignatures.add(constructor.getResolvedErasureSignature());
 				}
-				ResolvedOperations superClass = overrideHelper.getResolvedOperations(superType);
+				ResolvedFeatures superClass = overrideHelper.getResolvedFeatures(superType);
 				List<IResolvedConstructor> constructors = superClass.getDeclaredConstructors();
 				for(IResolvedConstructor constructor: constructors) {
 					IResolvedConstructor overriddenConstructor = new ResolvedConstructor(constructor.getDeclaration(), typeReference);
