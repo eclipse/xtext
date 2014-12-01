@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import static com.google.common.collect.Maps.*;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,8 +45,10 @@ import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -65,6 +69,12 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		super.setUp();
 		with(XtextStandaloneSetup.class);
 		EValidator.Registry.INSTANCE.put(EcorePackage.eINSTANCE, EcoreValidator.INSTANCE);
+	}
+	
+	private void configureValidator(XtextValidator validator, ValidationMessageAcceptor messageAcceptor, EObject currentObject) {
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = currentObject;
+		state.context = newHashMap();
 	}
 	
 	/**
@@ -243,7 +253,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		child.getRules().add(subRuleFoo);
 
 		XtextValidator validator = get(XtextValidator.class);
-		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		configureValidator(validator, this, subRuleFoo);
 		validator.checkRuleName(subRuleFoo);
 		assertEquals("A rule's name has to be unique even case insensitive. A used grammar contains another rule 'Foo'.", lastMessage);
 	}
@@ -258,7 +268,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		base.getRules().add(subRuleFoo);
 
 		XtextValidator validator = get(XtextValidator.class);
-		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		configureValidator(validator, this, subRuleFoo);
 		validator.checkRuleName(subRuleFoo);
 		assertEquals("A rule's name has to be unique even case insensitive. This grammar contains another rule 'Foo'.", lastMessage);
 	}
@@ -273,7 +283,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		base.getRules().add(subRuleFoo);
 
 		XtextValidator validator = get(XtextValidator.class);
-		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		configureValidator(validator, this, subRuleFoo);
 		validator.checkRuleName(subRuleFoo);
 		assertEquals("A rule's name has to be unique.", lastMessage);
 	}
@@ -294,7 +304,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		base.getRules().add(subRuleFoo3);
 
 		XtextValidator validator = get(XtextValidator.class);
-		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		configureValidator(validator, this, subRuleFoo);
 		validator.checkRuleName(subRuleFoo);
 		assertEquals("A rule's name has to be unique even case insensitive. The conflicting rules are 'FOO' and 'Foo'.", lastMessage);
 	}
@@ -315,7 +325,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		base.getRules().add(subRuleFoo3);
 
 		XtextValidator validator = get(XtextValidator.class);
-		validator.setMessageAcceptor(this).getState().currentObject = subRuleFoo;
+		configureValidator(validator, this, subRuleFoo);
 		validator.checkRuleName(subRuleFoo);
 		assertEquals("A rule's name has to be unique even case insensitive. The conflicting rules are 'FOO', 'Foo' and 'fOO'.", lastMessage);
 	}
@@ -914,7 +924,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Action action = XtextFactory.eINSTANCE.createAction();
 		unorderedGroup.getElements().add(action);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, action);
 		validator.checkActionInUnorderedGroup(action);
 		messageAcceptor.validate();
 	}
@@ -1189,7 +1199,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Grammar grammar = (Grammar) getModel(grammarAsText);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, grammar);
 		validator.checkHiddenTokenIsNotAFragment(grammar);
 		messageAcceptor.validate();
 	}
@@ -1205,7 +1215,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		ParserRule rule = (ParserRule) grammar.getRules().get(0);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, rule);
 		validator.checkHiddenTokenIsNotAFragment(rule);
 		messageAcceptor.validate();
 	}
@@ -1220,7 +1230,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Grammar grammar = (Grammar) getModel(grammarAsText);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, grammar);
 		validator.checkHiddenTokenIsNotAFragment(grammar);
 		messageAcceptor.validate();
 	}
@@ -1236,7 +1246,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		ParserRule rule = (ParserRule) grammar.getRules().get(0);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, rule);
 		validator.checkHiddenTokenIsNotAFragment(rule);
 		messageAcceptor.validate();
 	}
@@ -1485,7 +1495,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, false, true);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, rule);
 		validator.checkTerminalRuleNamingConventions(rule);
 		messageAcceptor.validate();
 	}
@@ -1547,7 +1557,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.expectedContext(
 				valueAssignment.getTerminal()
 		);
-		validator.setMessageAcceptor(messageAcceptor);
+		configureValidator(validator, messageAcceptor, valueAssignment);
 		validator.checkKeywordNotEmpty((Keyword) valueAssignment.getTerminal());
 		messageAcceptor.validate();
 	}
