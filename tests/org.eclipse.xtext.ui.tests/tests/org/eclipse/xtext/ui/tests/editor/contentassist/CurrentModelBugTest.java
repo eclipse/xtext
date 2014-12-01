@@ -14,17 +14,13 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.DomainModelTestLanguageProposalProvider;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DomainModelTestLanguageParser;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 
@@ -57,16 +53,6 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 					@Override
 					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 						return MockedProposals.class;
-					}
-					
-					@Override
-					public Class<? extends Factory> bindContentAssistContext$Factory() {
-						return ParserBasedContentAssistContextFactory.class;
-					}
-
-					@Override
-					public Class<? extends IContentAssistParser> bindIContentAssistParser() {
-						return DomainModelTestLanguageParser.class;
 					}
 					
 					@SuppressWarnings("unused")
