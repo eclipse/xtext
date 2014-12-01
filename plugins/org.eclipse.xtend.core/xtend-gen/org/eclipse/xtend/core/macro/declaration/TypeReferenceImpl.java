@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
@@ -197,8 +197,8 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     OverrideHelper _overrideHelper = _compilationUnit.getOverrideHelper();
     LightweightTypeReference _delegate = this.getDelegate();
-    ResolvedOperations _resolvedOperations = _overrideHelper.getResolvedOperations(_delegate);
-    List<IResolvedOperation> _declaredOperations = _resolvedOperations.getDeclaredOperations();
+    ResolvedFeatures _resolvedFeatures = _overrideHelper.getResolvedFeatures(_delegate);
+    List<IResolvedOperation> _declaredOperations = _resolvedFeatures.getDeclaredOperations();
     final Function1<IResolvedOperation, ResolvedMethod> _function = new Function1<IResolvedOperation, ResolvedMethod>() {
       public ResolvedMethod apply(final IResolvedOperation it) {
         CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
@@ -212,8 +212,8 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     OverrideHelper _overrideHelper = _compilationUnit.getOverrideHelper();
     LightweightTypeReference _delegate = this.getDelegate();
-    ResolvedOperations _resolvedOperations = _overrideHelper.getResolvedOperations(_delegate);
-    List<IResolvedConstructor> _declaredConstructors = _resolvedOperations.getDeclaredConstructors();
+    ResolvedFeatures _resolvedFeatures = _overrideHelper.getResolvedFeatures(_delegate);
+    List<IResolvedConstructor> _declaredConstructors = _resolvedFeatures.getDeclaredConstructors();
     final Function1<IResolvedConstructor, ResolvedConstructor> _function = new Function1<IResolvedConstructor, ResolvedConstructor>() {
       public ResolvedConstructor apply(final IResolvedConstructor it) {
         CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();
@@ -227,8 +227,8 @@ public class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReferenc
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     OverrideHelper _overrideHelper = _compilationUnit.getOverrideHelper();
     LightweightTypeReference _delegate = this.getDelegate();
-    ResolvedOperations _resolvedOperations = _overrideHelper.getResolvedOperations(_delegate);
-    List<IResolvedOperation> _allOperations = _resolvedOperations.getAllOperations();
+    ResolvedFeatures _resolvedFeatures = _overrideHelper.getResolvedFeatures(_delegate);
+    List<IResolvedOperation> _allOperations = _resolvedFeatures.getAllOperations();
     final Function1<IResolvedOperation, ResolvedMethod> _function = new Function1<IResolvedOperation, ResolvedMethod>() {
       public ResolvedMethod apply(final IResolvedOperation it) {
         CompilationUnitImpl _compilationUnit = TypeReferenceImpl.this.getCompilationUnit();

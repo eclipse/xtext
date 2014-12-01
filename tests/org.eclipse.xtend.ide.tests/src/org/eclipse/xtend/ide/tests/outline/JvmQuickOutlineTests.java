@@ -57,7 +57,7 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		super.testEnum();
 		setShowInherited(true);
 		AssertBuilder assertBuilder = newAssertBuilder("enum Foo { BAR, BAZ }");
-		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo").numChildren(30);
+		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo - (default package)").numChildren(30);
 		interfaze.child(0, "BAR - Foo").numChildren(0);
 		interfaze.child(1, "BAZ - Foo").numChildren(0);
 		
@@ -66,10 +66,10 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		interfaze.nextChild("ordinal : int - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("new(String, int) - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("clone() : Object - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("compareTo(E) : int - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("compareTo(Foo) : int - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("equals(Object) : boolean - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("finalize() : void - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("getDeclaringClass() : Class<E> - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("getDeclaringClass() : Class<Foo> - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("hashCode() : int - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("name() : String - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("ordinal() : int - java.lang.Enum").hasTextRegion(false);
@@ -77,7 +77,7 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		interfaze.nextChild("readObjectNoData() : void - java.lang.Enum").hasTextRegion(false);
 		interfaze.nextChild("toString() : String - java.lang.Enum").hasTextRegion(false);
 		
-		interfaze.nextChild("compareTo(T) : int - java.lang.Comparable").hasTextRegion(false);
+		interfaze.nextChild("compareTo(Foo) : int - java.lang.Comparable").hasTextRegion(false);
 		
 		interfaze.nextChild("registerNatives() : void - java.lang.Object").hasTextRegion(false);
 		interfaze.nextChild("clone() : Object - java.lang.Object").hasTextRegion(false);

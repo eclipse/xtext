@@ -3,6 +3,7 @@ package org.eclipse.xtext.xbase.ui.labeling;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
@@ -20,8 +21,14 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImages2;
@@ -93,9 +100,47 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     return this.images.forOperation(_visibility, _get);
   }
   
+  protected ImageDescriptor _imageDescriptor(final IResolvedOperation operation) {
+    JvmOperation _declaration = operation.getDeclaration();
+    return this.imageDescriptor(_declaration);
+  }
+  
   protected Object text(final JvmOperation element) {
     String _simpleName = element.getSimpleName();
     return this.signature(_simpleName, element);
+  }
+  
+  protected Object text(final IResolvedOperation element) {
+    LightweightTypeReference _resolvedReturnType = element.getResolvedReturnType();
+    final String returnTypeString = _resolvedReturnType.getSimpleName();
+    String decoratedPart = (" : " + returnTypeString);
+    List<JvmTypeParameter> _typeParameters = element.getTypeParameters();
+    boolean _isEmpty = _typeParameters.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      List<JvmTypeParameter> _typeParameters_1 = element.getTypeParameters();
+      String _string = this.uiStrings.toString(_typeParameters_1);
+      String _plus = (" <" + _string);
+      String _plus_1 = (_plus + "> : ");
+      String _plus_2 = (_plus_1 + returnTypeString);
+      decoratedPart = _plus_2;
+    }
+    JvmOperation _declaration = element.getDeclaration();
+    String _simpleName = _declaration.getSimpleName();
+    String _plus_3 = (_simpleName + "(");
+    List<LightweightTypeReference> _resolvedParameterTypes = element.getResolvedParameterTypes();
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+      public String apply(final LightweightTypeReference it) {
+        return it.getHumanReadableName();
+      }
+    };
+    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    String _plus_4 = (_plus_3 + _join);
+    String _plus_5 = (_plus_4 + ")");
+    StyledString _styledString = new StyledString(_plus_5);
+    StyledString _styledString_1 = new StyledString(decoratedPart, StyledString.DECORATIONS_STYLER);
+    return _styledString.append(_styledString_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmConstructor constructor) {
@@ -107,6 +152,39 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   protected String text(final JvmConstructor constructor) {
     String _parameters = this.uiStrings.parameters(constructor);
     return ("new" + _parameters);
+  }
+  
+  protected ImageDescriptor _imageDescriptor(final IResolvedConstructor constructor) {
+    JvmConstructor _declaration = constructor.getDeclaration();
+    return this._imageDescriptor(_declaration);
+  }
+  
+  protected Object text(final IResolvedConstructor constructor) {
+    List<LightweightTypeReference> _resolvedParameterTypes = constructor.getResolvedParameterTypes();
+    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+      public String apply(final LightweightTypeReference it) {
+        return it.getHumanReadableName();
+      }
+    };
+    List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
+    String _join = IterableExtensions.join(_map, ", ");
+    String _plus = ("new(" + _join);
+    String _plus_1 = (_plus + ")");
+    return new StyledString(_plus_1);
+  }
+  
+  protected ImageDescriptor _imageDescriptor(final IResolvedField field) {
+    JvmField _declaration = field.getDeclaration();
+    return this._imageDescriptor(_declaration);
+  }
+  
+  protected Object text(final IResolvedField field) {
+    String _simpleSignature = field.getSimpleSignature();
+    String _plus = (_simpleSignature + " : ");
+    LightweightTypeReference _resolvedType = field.getResolvedType();
+    String _humanReadableName = _resolvedType.getHumanReadableName();
+    String _plus_1 = (_plus + _humanReadableName);
+    return new StyledString(_plus_1);
   }
   
   protected ImageDescriptor _imageDescriptor(final JvmField field) {
@@ -275,10 +353,16 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       return _imageDescriptor((JvmFormalParameter)constructor);
     } else if (constructor instanceof XVariableDeclaration) {
       return _imageDescriptor((XVariableDeclaration)constructor);
+    } else if (constructor instanceof IResolvedConstructor) {
+      return _imageDescriptor((IResolvedConstructor)constructor);
+    } else if (constructor instanceof IResolvedOperation) {
+      return _imageDescriptor((IResolvedOperation)constructor);
     } else if (constructor instanceof XImportDeclaration) {
       return _imageDescriptor((XImportDeclaration)constructor);
     } else if (constructor instanceof XImportSection) {
       return _imageDescriptor((XImportSection)constructor);
+    } else if (constructor instanceof IResolvedField) {
+      return _imageDescriptor((IResolvedField)constructor);
     } else if (constructor != null) {
       return _imageDescriptor(constructor);
     } else {

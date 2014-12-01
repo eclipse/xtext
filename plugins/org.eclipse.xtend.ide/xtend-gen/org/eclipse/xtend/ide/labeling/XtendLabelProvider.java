@@ -42,6 +42,9 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -339,10 +342,16 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
       return _imageDescriptor((XVariableDeclaration)operation);
     } else if (operation instanceof XtendFile) {
       return _imageDescriptor((XtendFile)operation);
+    } else if (operation instanceof IResolvedConstructor) {
+      return _imageDescriptor((IResolvedConstructor)operation);
+    } else if (operation instanceof IResolvedOperation) {
+      return _imageDescriptor((IResolvedOperation)operation);
     } else if (operation instanceof XImportDeclaration) {
       return _imageDescriptor((XImportDeclaration)operation);
     } else if (operation instanceof XImportSection) {
       return _imageDescriptor((XImportSection)operation);
+    } else if (operation instanceof IResolvedField) {
+      return _imageDescriptor((IResolvedField)operation);
     } else if (operation != null) {
       return _imageDescriptor(operation);
     } else {

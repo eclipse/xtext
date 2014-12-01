@@ -70,7 +70,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.override.ResolvedConstructor;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters;
@@ -220,7 +220,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
 							JvmGenericType inferredType = associations.getInferredType(clazz);
-							ResolvedOperations operations = overrideHelper.getResolvedOperations(inferredType);
+							ResolvedFeatures features = overrideHelper.getResolvedFeatures(inferredType);
 							ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) clazz.eResource(),
 									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0, new OptionalParameters() {{ 
 										ensureEmptyLinesAround = true;
@@ -230,7 +230,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							if (constructor instanceof JvmConstructor) {
 								superMemberImplementor.appendConstructorFromSuper(
 										clazz,
-										new ResolvedConstructor((JvmConstructor) constructor, operations.getType()),
+										new ResolvedConstructor((JvmConstructor) constructor, features.getType()),
 										appendable);
 							}
 							appendable.commitChanges();
@@ -263,7 +263,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendTypeDeclaration clazz = (XtendTypeDeclaration) element;
 							JvmGenericType inferredType = (JvmGenericType) associations.getInferredType(clazz);
-							ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
+							ResolvedFeatures resolvedOperations = overrideHelper.getResolvedFeatures(inferredType);
 							IXtextDocument document = context.getXtextDocument();
 							final int offset = insertionOffsets.getNewMethodInsertOffset(null, clazz);
 							int currentIndentation = appendableFactory.getIndentationLevelAtOffset(offset, document, (XtextResource) clazz.eResource());

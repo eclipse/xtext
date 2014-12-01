@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -30,18 +31,19 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ResolvedOperations extends AbstractResolvedFeatures {
+public class ResolvedFeatures extends AbstractResolvedFeatures {
 
+	private List<IResolvedField> declaredFields;
+	private List<IResolvedConstructor> declaredConstructors;
 	private List<IResolvedOperation> allOperations;
 	private List<IResolvedOperation> declaredOperations;
-	private List<IResolvedConstructor> declaredConstructors;
 	private ListMultimap<String, IResolvedOperation> allOperationsPerErasure;
 	
-	public ResolvedOperations(LightweightTypeReference type, OverrideTester overrideTester) {
+	public ResolvedFeatures(LightweightTypeReference type, OverrideTester overrideTester) {
 		super(type, overrideTester);
 	}
 	
-	public ResolvedOperations(LightweightTypeReference type) {
+	public ResolvedFeatures(LightweightTypeReference type) {
 		this(type, new OverrideTester());
 	}
 	
@@ -54,6 +56,13 @@ public class ResolvedOperations extends AbstractResolvedFeatures {
 	
 	public IResolvedOperation getResolvedOperation(JvmOperation operation) {
 		return createResolvedOperation(operation);
+	}
+	
+	public List<IResolvedField> getDeclaredFields() {
+		if (declaredFields != null) {
+			return declaredFields;
+		}
+		return declaredFields = computeDeclaredFields();
 	}
 	
 	public List<IResolvedConstructor> getDeclaredConstructors() {
@@ -142,6 +151,18 @@ public class ResolvedOperations extends AbstractResolvedFeatures {
 			if (operation.getDeclaration().getDeclaringType() == rawType) {
 				result.add(operation);
 			}
+		}
+		return Collections.unmodifiableList(result);
+	}
+	
+	protected List<IResolvedField> computeDeclaredFields() {
+		JvmType rawType = getRawType();
+		if (!(rawType instanceof JvmGenericType)) {
+			return Collections.emptyList();
+		}
+		List<IResolvedField> result = Lists.newArrayList();
+		for(JvmField field: ((JvmGenericType)rawType).getDeclaredFields()) {
+			result.add(new ResolvedField(field, getType()));
 		}
 		return Collections.unmodifiableList(result);
 	}

@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -160,13 +160,13 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   
   protected IResolvedExecutable _resolveExecutable(final JvmConstructor constructor, final XConstructorCall it, @Extension final IResolvedTypes resolvedTypes) {
     LightweightTypeReference _actualType = resolvedTypes.getActualType(it);
-    ResolvedOperations _resolvedOperations = null;
+    ResolvedFeatures _resolvedFeatures = null;
     if (_actualType!=null) {
-      _resolvedOperations=this.overrideHelper.getResolvedOperations(_actualType);
+      _resolvedFeatures=this.overrideHelper.getResolvedFeatures(_actualType);
     }
     List<IResolvedConstructor> _declaredConstructors = null;
-    if (_resolvedOperations!=null) {
-      _declaredConstructors=_resolvedOperations.getDeclaredConstructors();
+    if (_resolvedFeatures!=null) {
+      _declaredConstructors=_resolvedFeatures.getDeclaredConstructors();
     }
     Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
@@ -191,13 +191,13 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     if (_actualReceiver!=null) {
       _actualType=resolvedTypes.getActualType(_actualReceiver);
     }
-    ResolvedOperations _resolvedOperations = null;
+    ResolvedFeatures _resolvedFeatures = null;
     if (_actualType!=null) {
-      _resolvedOperations=this.overrideHelper.getResolvedOperations(_actualType);
+      _resolvedFeatures=this.overrideHelper.getResolvedFeatures(_actualType);
     }
     List<IResolvedOperation> _allOperations = null;
-    if (_resolvedOperations!=null) {
-      _allOperations=_resolvedOperations.getAllOperations();
+    if (_resolvedFeatures!=null) {
+      _allOperations=_resolvedFeatures.getAllOperations();
     }
     Iterable<IResolvedOperation> _filter = null;
     if (_allOperations!=null) {
@@ -222,13 +222,13 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     if (_actualReceiver!=null) {
       _actualType=resolvedTypes.getActualType(_actualReceiver);
     }
-    ResolvedOperations _resolvedOperations = null;
+    ResolvedFeatures _resolvedFeatures = null;
     if (_actualType!=null) {
-      _resolvedOperations=this.overrideHelper.getResolvedOperations(_actualType);
+      _resolvedFeatures=this.overrideHelper.getResolvedFeatures(_actualType);
     }
     List<IResolvedConstructor> _declaredConstructors = null;
-    if (_resolvedOperations!=null) {
-      _declaredConstructors=_resolvedOperations.getDeclaredConstructors();
+    if (_resolvedFeatures!=null) {
+      _declaredConstructors=_resolvedFeatures.getDeclaredConstructors();
     }
     Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {

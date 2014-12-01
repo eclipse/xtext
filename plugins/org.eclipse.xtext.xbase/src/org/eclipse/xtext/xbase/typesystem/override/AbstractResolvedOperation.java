@@ -30,20 +30,14 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractResolvedOperation extends AbstractResolvedExecutable implements IResolvedOperation {
+public abstract class AbstractResolvedOperation extends AbstractResolvedExecutable<JvmOperation> implements IResolvedOperation {
 	
-	private final JvmOperation declaration;
 	private List<IResolvedOperation> validOverrides;
 	private List<JvmOperation> overrideCandidates;
 	private LightweightTypeReference returnType;
 
 	protected AbstractResolvedOperation(JvmOperation declaration, LightweightTypeReference contextType) {
-		super(contextType);
-		this.declaration = declaration;
-	}
-	
-	public JvmOperation getDeclaration() {
-		return declaration;
+		super(declaration, contextType);
 	}
 	
 	public List<IResolvedOperation> getOverriddenAndImplementedMethods() {
@@ -66,7 +60,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	
 	/* @Nullable */
 	public IResolvedOperation getOverriddenMethod() {
-		if (!declaration.isAbstract() && declaration.getVisibility() != JvmVisibility.PRIVATE) {
+		if (!getDeclaration().isAbstract() && getDeclaration().getVisibility() != JvmVisibility.PRIVATE) {
 			List<IResolvedOperation> overriddenAndImplemented = getOverriddenAndImplementedMethods();
 			for(IResolvedOperation candidate: overriddenAndImplemented) {
 				if (!candidate.getDeclaration().isAbstract()) {
@@ -78,7 +72,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	}
 	
 	public List<LightweightTypeReference> getIllegallyDeclaredExceptions() {
-		if (declaration.getExceptions().isEmpty())
+		if (getDeclaration().getExceptions().isEmpty())
 			return Collections.emptyList();
 		List<IResolvedOperation> overriddenAndImplemented = getOverriddenAndImplementedMethods();
 		if (overriddenAndImplemented.isEmpty())
@@ -134,13 +128,13 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 			return overrideCandidates;
 		// here we are only interested in the raw type thus the declarator is not substituted
 		// the found operation will be put in the right context by clients, e.g. #getOverriddenAndImplementedMethods
-		ParameterizedTypeReference currentDeclarator = getContextType().getOwner().newParameterizedTypeReference(declaration.getDeclaringType());
+		ParameterizedTypeReference currentDeclarator = getContextType().getOwner().newParameterizedTypeReference(getDeclaration().getDeclaringType());
 		List<LightweightTypeReference> superTypes = currentDeclarator.getSuperTypes();
 		List<JvmOperation> result = Lists.newArrayListWithCapacity(5);
 		for(LightweightTypeReference superType: superTypes) {
 			JvmDeclaredType declaredSuperType = (JvmDeclaredType) superType.getType();
 			if (declaredSuperType != null) {
-				Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(declaration.getSimpleName());
+				Iterable<JvmFeature> equallyNamedFeatures = declaredSuperType.findAllFeaturesByName(getDeclaration().getSimpleName());
 				for(JvmFeature equallyNamedFeature: equallyNamedFeatures) {
 					if (equallyNamedFeature instanceof JvmOperation) {
 						result.add((JvmOperation) equallyNamedFeature);
@@ -173,7 +167,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	public LightweightTypeReference getResolvedReturnType() {
 		if (returnType != null)
 			return returnType;
-		return returnType = getResolvedReference(declaration.getReturnType());
+		return returnType = getResolvedReference(getDeclaration().getReturnType());
 	}
 	
 	@Override

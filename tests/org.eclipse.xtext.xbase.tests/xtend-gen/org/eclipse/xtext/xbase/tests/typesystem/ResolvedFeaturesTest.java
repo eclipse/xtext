@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.UnmodifiableIterator;
 import com.google.inject.Inject;
@@ -31,9 +32,11 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
+import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,11 +44,11 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ResolvedOperationsTest extends AbstractXbaseTestCase {
+public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
   @Inject
   private OverrideHelper overrideHelper;
   
-  public ResolvedOperations toResolvedOperations(final Class<?> type) {
+  public ResolvedFeatures toResolvedOperations(final Class<?> type) {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("typeof(");
@@ -55,19 +58,19 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
       XExpression _expression = this.expression(_builder);
       final XTypeLiteral typeLiteral = ((XTypeLiteral) _expression);
       JvmType _type = typeLiteral.getType();
-      final ResolvedOperations result = this.overrideHelper.getResolvedOperations(((JvmDeclaredType) _type));
+      final ResolvedFeatures result = this.overrideHelper.getResolvedFeatures(((JvmDeclaredType) _type));
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public ResolvedOperations toResolvedOperations(final String castExpression) {
+  public ResolvedFeatures toResolvedOperations(final String castExpression) {
     try {
       XExpression _expression = this.expression(castExpression);
       final XCastedExpression cast = ((XCastedExpression) _expression);
       JvmTypeReference _type = cast.getType();
-      final ResolvedOperations result = this.overrideHelper.getResolvedOperations(_type);
+      final ResolvedFeatures result = this.overrideHelper.getResolvedFeatures(_type);
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -76,7 +79,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   
   @Test
   public void testArrayListHasNoAbstractMethods() {
-    final ResolvedOperations resolvedOperations = this.toResolvedOperations(ArrayList.class);
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ArrayList.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
@@ -92,7 +95,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   
   @Test
   public void testIterableIterator() {
-    final ResolvedOperations resolvedOperations = this.toResolvedOperations(Iterable.class);
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(Iterable.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
@@ -111,7 +114,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   
   @Test
   public void testUnmodifiableIterator() {
-    final ResolvedOperations resolvedOperations = this.toResolvedOperations(UnmodifiableIterator.class);
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(UnmodifiableIterator.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
@@ -142,7 +145,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   
   @Test
   public void testAbstractList() {
-    final ResolvedOperations resolvedOperations = this.toResolvedOperations(AbstractList.class);
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(AbstractList.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
@@ -170,7 +173,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   
   @Test
   public void testSoftReferenceConstructors() {
-    final ResolvedOperations resolvedOperations = this.toResolvedOperations(SoftReference.class);
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(SoftReference.class);
     List<IResolvedOperation> _declaredOperations = resolvedOperations.getDeclaredOperations();
     int _size = _declaredOperations.size();
     Assert.assertEquals(1, _size);
@@ -207,7 +210,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
   
   @Test
   public void testSoftReferenceOfString() {
-    final ResolvedOperations resolvedOperations = this.toResolvedOperations("null as java.lang.ref.SoftReference<String>");
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations("null as java.lang.ref.SoftReference<String>");
     List<IResolvedOperation> _declaredOperations = resolvedOperations.getDeclaredOperations();
     int _size = _declaredOperations.size();
     Assert.assertEquals(1, _size);
@@ -240,5 +243,32 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
       }
     };
     IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
+  }
+  
+  @Test
+  public void testReferenceOfString() {
+    final ResolvedFeatures resolvedFeatures = this.toResolvedOperations("null as java.lang.ref.Reference<String>");
+    List<IResolvedField> _declaredFields = resolvedFeatures.getDeclaredFields();
+    final List<IResolvedField> fields = IterableExtensions.<IResolvedField>toList(_declaredFields);
+    final Function1<IResolvedField, Boolean> _function = new Function1<IResolvedField, Boolean>() {
+      public Boolean apply(final IResolvedField it) {
+        String _simpleSignature = it.getSimpleSignature();
+        return Boolean.valueOf(Objects.equal(_simpleSignature, "referent"));
+      }
+    };
+    IResolvedField _findFirst = IterableExtensions.<IResolvedField>findFirst(fields, _function);
+    LightweightTypeReference _resolvedType = _findFirst.getResolvedType();
+    String _humanReadableName = _resolvedType.getHumanReadableName();
+    Assert.assertEquals("String", _humanReadableName);
+    final Function1<IResolvedField, Boolean> _function_1 = new Function1<IResolvedField, Boolean>() {
+      public Boolean apply(final IResolvedField it) {
+        String _simpleSignature = it.getSimpleSignature();
+        return Boolean.valueOf(Objects.equal(_simpleSignature, "queue"));
+      }
+    };
+    IResolvedField _findFirst_1 = IterableExtensions.<IResolvedField>findFirst(fields, _function_1);
+    LightweightTypeReference _resolvedType_1 = _findFirst_1.getResolvedType();
+    String _humanReadableName_1 = _resolvedType_1.getHumanReadableName();
+    Assert.assertEquals("ReferenceQueue<? super String>", _humanReadableName_1);
   }
 }

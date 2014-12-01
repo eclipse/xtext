@@ -231,18 +231,18 @@ class TypeReferenceImpl extends AbstractDelegator<LightweightTypeReference> impl
 	}
 	
 	override getDeclaredResolvedMethods() {
-		compilationUnit.overrideHelper.getResolvedOperations(delegate)
-			.declaredOperations.map[compilationUnit.toResolvedMethod(it)]
+		compilationUnit.overrideHelper.getResolvedFeatures(delegate)
+			.getDeclaredOperations.map[compilationUnit.toResolvedMethod(it)]
 	}
 	
 	override getDeclaredResolvedConstructors() {
-		compilationUnit.overrideHelper.getResolvedOperations(delegate)
-			.declaredConstructors.map[compilationUnit.toResolvedConstructor(it)]
+		compilationUnit.overrideHelper.getResolvedFeatures(delegate)
+			.getDeclaredConstructors.map[compilationUnit.toResolvedConstructor(it)]
 	}
 	
 	override getAllResolvedMethods() {
-		compilationUnit.overrideHelper.getResolvedOperations(delegate)
-			.allOperations.map[compilationUnit.toResolvedMethod(it)]
+		compilationUnit.overrideHelper.getResolvedFeatures(delegate)
+			.getAllOperations.map[compilationUnit.toResolvedMethod(it)]
 	}
 	
 	override isInferred() {
