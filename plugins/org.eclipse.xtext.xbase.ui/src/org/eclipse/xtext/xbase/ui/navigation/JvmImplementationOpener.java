@@ -180,7 +180,7 @@ public class JvmImplementationOpener {
 					ErrorDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 							"Open Implementation", "Problems finding implementations.", status);
 				} catch (InterruptedException e) {
-					if (e.getMessage() != dummyString) {
+					if (!dummyString.equals(e.getMessage())) {
 						return;
 					}
 				}
