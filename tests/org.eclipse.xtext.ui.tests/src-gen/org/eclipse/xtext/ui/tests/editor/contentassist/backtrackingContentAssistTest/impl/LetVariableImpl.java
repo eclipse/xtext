@@ -21,13 +21,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Let Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.LetVariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.LetVariableImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.LetVariableImpl#getInitExpression <em>Init Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

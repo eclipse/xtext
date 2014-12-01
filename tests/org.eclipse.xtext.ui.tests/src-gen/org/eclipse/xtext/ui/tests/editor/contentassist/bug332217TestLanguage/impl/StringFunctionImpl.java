@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

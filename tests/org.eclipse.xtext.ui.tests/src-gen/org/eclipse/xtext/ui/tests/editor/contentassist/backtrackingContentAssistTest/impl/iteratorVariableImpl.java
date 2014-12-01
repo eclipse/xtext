@@ -20,12 +20,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>iterator Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.iteratorVariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.iteratorVariableImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

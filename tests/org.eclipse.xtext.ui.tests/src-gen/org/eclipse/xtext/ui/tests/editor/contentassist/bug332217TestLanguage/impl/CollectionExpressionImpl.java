@@ -14,7 +14,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Col
  * An implementation of the model object '<em><b>Collection Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

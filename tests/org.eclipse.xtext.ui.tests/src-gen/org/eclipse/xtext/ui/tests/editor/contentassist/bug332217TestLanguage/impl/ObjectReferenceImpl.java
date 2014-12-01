@@ -19,12 +19,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Pro
  * An implementation of the model object '<em><b>Object Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.ObjectReferenceImpl#getObject <em>Object</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.ObjectReferenceImpl#getTail <em>Tail</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

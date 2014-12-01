@@ -95,18 +95,20 @@ public class OutlineTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
-	private ModelElements pModel;
-	private ElementElements pElement;
+	private final ModelElements pModel;
+	private final ElementElements pElement;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public OutlineTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pElement = new ElementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -139,7 +141,7 @@ public class OutlineTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//Model:
 	//	elements+=Element*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -149,7 +151,7 @@ public class OutlineTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//Element:
 	//	name=ID ("(" xrefs+=[Element]* ")")? "{" children+=Element* "}";
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {

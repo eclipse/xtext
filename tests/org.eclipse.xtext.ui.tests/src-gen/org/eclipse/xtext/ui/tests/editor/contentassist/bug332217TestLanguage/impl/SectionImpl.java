@@ -27,12 +27,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Sec
  * An implementation of the model object '<em><b>Section</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.SectionImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.SectionImpl#getCells <em>Cells</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

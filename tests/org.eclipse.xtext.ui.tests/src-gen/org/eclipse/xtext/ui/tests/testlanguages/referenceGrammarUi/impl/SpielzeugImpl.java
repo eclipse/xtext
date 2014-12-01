@@ -20,12 +20,13 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.Spielzeug;
  * An implementation of the model object '<em><b>Spielzeug</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.SpielzeugImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.SpielzeugImpl#getFarbe <em>Farbe</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

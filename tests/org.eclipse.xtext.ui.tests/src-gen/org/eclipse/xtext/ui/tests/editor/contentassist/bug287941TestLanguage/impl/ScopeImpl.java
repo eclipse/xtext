@@ -20,11 +20,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sco
  * An implementation of the model object '<em><b>Scope</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.ScopeImpl#getUris <em>Uris</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

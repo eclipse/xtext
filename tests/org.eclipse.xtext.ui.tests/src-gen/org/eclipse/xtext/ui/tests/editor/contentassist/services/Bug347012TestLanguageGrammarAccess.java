@@ -494,33 +494,54 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private MyProgramElements pMyProgram;
-	private IdentifierElements pIdentifier;
-	private FQNElements pFQN;
-	private VirtualSemiElements pVirtualSemi;
-	private LiteralElements pLiteral;
-	private MyPrimaryElements pMyPrimary;
-	private MyPackageElements pMyPackage;
-	private MyClassElements pMyClass;
-	private MyAttributeElements pMyAttribute;
-	private MyAttributesElements pMyAttributes;
-	private MyFieldElements pMyField;
-	private MyBindingElements pMyBinding;
-	private TerminalRule tID;
-	private TerminalRule tLT;
-	private TerminalRule tWS;
-	private TerminalRule tSTRING;
-	private TerminalRule tNUMBER;
-	private TerminalRule tDigit;
-	private TerminalRule tHex;
-	private TerminalRule tEscape;
-	private TerminalRule tIdPlainChar;
+	private final MyProgramElements pMyProgram;
+	private final IdentifierElements pIdentifier;
+	private final FQNElements pFQN;
+	private final VirtualSemiElements pVirtualSemi;
+	private final LiteralElements pLiteral;
+	private final MyPrimaryElements pMyPrimary;
+	private final MyPackageElements pMyPackage;
+	private final MyClassElements pMyClass;
+	private final MyAttributeElements pMyAttribute;
+	private final MyAttributesElements pMyAttributes;
+	private final MyFieldElements pMyField;
+	private final MyBindingElements pMyBinding;
+	private final TerminalRule tID;
+	private final TerminalRule tLT;
+	private final TerminalRule tWS;
+	private final TerminalRule tSTRING;
+	private final TerminalRule tNUMBER;
+	private final TerminalRule tDigit;
+	private final TerminalRule tHex;
+	private final TerminalRule tEscape;
+	private final TerminalRule tIdPlainChar;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public Bug347012TestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pMyProgram = new MyProgramElements();
+		this.pIdentifier = new IdentifierElements();
+		this.pFQN = new FQNElements();
+		this.pVirtualSemi = new VirtualSemiElements();
+		this.pLiteral = new LiteralElements();
+		this.pMyPrimary = new MyPrimaryElements();
+		this.pMyPackage = new MyPackageElements();
+		this.pMyClass = new MyClassElements();
+		this.pMyAttribute = new MyAttributeElements();
+		this.pMyAttributes = new MyAttributesElements();
+		this.pMyField = new MyFieldElements();
+		this.pMyBinding = new MyBindingElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
+		this.tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER");
+		this.tDigit = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "digit");
+		this.tHex = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "hex");
+		this.tEscape = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "escape");
+		this.tIdPlainChar = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "idPlainChar");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -549,7 +570,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyProgram:
 	//	{MyProgram} LT* package=MyPackage LT*;
 	public MyProgramElements getMyProgramAccess() {
-		return (pMyProgram != null) ? pMyProgram : (pMyProgram = new MyProgramElements());
+		return pMyProgram;
 	}
 	
 	public ParserRule getMyProgramRule() {
@@ -559,7 +580,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Identifier:
 	//	name=ID;
 	public IdentifierElements getIdentifierAccess() {
-		return (pIdentifier != null) ? pIdentifier : (pIdentifier = new IdentifierElements());
+		return pIdentifier;
 	}
 	
 	public ParserRule getIdentifierRule() {
@@ -569,7 +590,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FQN:
 	//	ID (LT* "." LT* ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
@@ -579,7 +600,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//VirtualSemi:
 	//	";" | LT;
 	public VirtualSemiElements getVirtualSemiAccess() {
-		return (pVirtualSemi != null) ? pVirtualSemi : (pVirtualSemi = new VirtualSemiElements());
+		return pVirtualSemi;
 	}
 	
 	public ParserRule getVirtualSemiRule() {
@@ -589,7 +610,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Literal:
 	//	num=NUMBER | str=STRING | bool="true" | bool="false";
 	public LiteralElements getLiteralAccess() {
-		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
+		return pLiteral;
 	}
 	
 	public ParserRule getLiteralRule() {
@@ -599,7 +620,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyPrimary:
 	//	Literal | Identifier;
 	public MyPrimaryElements getMyPrimaryAccess() {
-		return (pMyPrimary != null) ? pMyPrimary : (pMyPrimary = new MyPrimaryElements());
+		return pMyPrimary;
 	}
 	
 	public ParserRule getMyPrimaryRule() {
@@ -609,7 +630,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyPackage:
 	//	"package" LT* name=FQN LT* "{" LT* (directives+=MyClass LT*)* "}";
 	public MyPackageElements getMyPackageAccess() {
-		return (pMyPackage != null) ? pMyPackage : (pMyPackage = new MyPackageElements());
+		return pMyPackage;
 	}
 	
 	public ParserRule getMyPackageRule() {
@@ -619,7 +640,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyClass:
 	//	"public"? "class" LT* name=ID LT* "{" LT* (directives+=MyField LT*)* "}";
 	public MyClassElements getMyClassAccess() {
-		return (pMyClass != null) ? pMyClass : (pMyClass = new MyClassElements());
+		return pMyClass;
 	}
 	
 	public ParserRule getMyClassRule() {
@@ -629,7 +650,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyAttribute:
 	//	PUBLIC="public" | PRIVATE="private";
 	public MyAttributeElements getMyAttributeAccess() {
-		return (pMyAttribute != null) ? pMyAttribute : (pMyAttribute = new MyAttributeElements());
+		return pMyAttribute;
 	}
 	
 	public ParserRule getMyAttributeRule() {
@@ -639,7 +660,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyAttributes:
 	//	{MyAttributes} attributes+=MyAttribute*;
 	public MyAttributesElements getMyAttributesAccess() {
-		return (pMyAttributes != null) ? pMyAttributes : (pMyAttributes = new MyAttributesElements());
+		return pMyAttributes;
 	}
 	
 	public ParserRule getMyAttributesRule() {
@@ -649,7 +670,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyField:
 	//	attr=MyAttributes "var" LT* bindings+=MyBinding (LT* "," LT* bindings+=MyBinding)* VirtualSemi;
 	public MyFieldElements getMyFieldAccess() {
-		return (pMyField != null) ? pMyField : (pMyField = new MyFieldElements());
+		return pMyField;
 	}
 	
 	public ParserRule getMyFieldRule() {
@@ -659,7 +680,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//MyBinding:
 	//	name=ID (LT* ":" LT* type=FQN)? (LT* "=" LT* expression=MyPrimary)?;
 	public MyBindingElements getMyBindingAccess() {
-		return (pMyBinding != null) ? pMyBinding : (pMyBinding = new MyBindingElements());
+		return pMyBinding;
 	}
 	
 	public ParserRule getMyBindingRule() {
@@ -670,54 +691,54 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal ID:
 	//	idPlainChar (idPlainChar | digit)*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal LT:
 	//	"\r" "\n" | "\r" | "\n";
 	public TerminalRule getLTRule() {
-		return (tLT != null) ? tLT : (tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT"));
+		return tLT;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" escape | !("\\" | "\""))* "\"";
 	public TerminalRule getSTRINGRule() {
-		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return tSTRING;
 	} 
 
 	//terminal NUMBER returns ecore::EDouble:
 	//	digit+ ("." digit+)? | "." digit+;
 	public TerminalRule getNUMBERRule() {
-		return (tNUMBER != null) ? tNUMBER : (tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER"));
+		return tNUMBER;
 	} 
 
 	//terminal fragment digit:
 	//	"0".."9";
 	public TerminalRule getDigitRule() {
-		return (tDigit != null) ? tDigit : (tDigit = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "digit"));
+		return tDigit;
 	} 
 
 	//terminal fragment hex:
 	//	digit | "A".."F" | "a".."f";
 	public TerminalRule getHexRule() {
-		return (tHex != null) ? tHex : (tHex = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "hex"));
+		return tHex;
 	} 
 
 	//terminal fragment escape:
 	//	"b" | "t" | "n" | "f" | "v" | "r" | "\"" | "\'" | "\\" | "u" hex hex hex hex;
 	public TerminalRule getEscapeRule() {
-		return (tEscape != null) ? tEscape : (tEscape = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "escape"));
+		return tEscape;
 	} 
 
 	//terminal fragment idPlainChar:
 	//	"$" | "A".."Z" | "_" | "a".."z";
 	public TerminalRule getIdPlainCharRule() {
-		return (tIdPlainChar != null) ? tIdPlainChar : (tIdPlainChar = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "idPlainChar"));
+		return tIdPlainChar;
 	} 
 }

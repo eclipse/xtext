@@ -79,18 +79,20 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private FileElements pFile;
-	private StuffElements pStuff;
+	private final FileElements pFile;
+	private final StuffElements pStuff;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFile = new FileElements();
+		this.pStuff = new StuffElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -123,7 +125,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//File:
 	//	stuff+=Stuff*;
 	public FileElements getFileAccess() {
-		return (pFile != null) ? pFile : (pFile = new FileElements());
+		return pFile;
 	}
 	
 	public ParserRule getFileRule() {
@@ -133,7 +135,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//Stuff:
 	//	"stuff" name=ID ("refs" refs=[Stuff])?;
 	public StuffElements getStuffAccess() {
-		return (pStuff != null) ? pStuff : (pStuff = new StuffElements());
+		return pStuff;
 	}
 	
 	public ParserRule getStuffRule() {

@@ -295,24 +295,32 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private ModelElements pModel;
-	private ImportElements pImport;
-	private TypeElements pType;
-	private DataTypeElements pDataType;
-	private ClassElements pClass;
-	private PropertyElements pProperty;
-	private AttributeElements pAttribute;
-	private ReferenceElements pReference;
+	private final ModelElements pModel;
+	private final ImportElements pImport;
+	private final TypeElements pType;
+	private final DataTypeElements pDataType;
+	private final ClassElements pClass;
+	private final PropertyElements pProperty;
+	private final AttributeElements pAttribute;
+	private final ReferenceElements pReference;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DomainModelTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pImport = new ImportElements();
+		this.pType = new TypeElements();
+		this.pDataType = new DataTypeElements();
+		this.pClass = new ClassElements();
+		this.pProperty = new PropertyElements();
+		this.pAttribute = new AttributeElements();
+		this.pReference = new ReferenceElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -345,7 +353,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Model:
 	//	imports+=Import* elements+=Type*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -355,7 +363,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Import:
 	//	"import" importURI=STRING;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -365,7 +373,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Type:
 	//	DataType | Class;
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -375,7 +383,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//DataType:
 	//	"datatype" name=ID ";"?;
 	public DataTypeElements getDataTypeAccess() {
-		return (pDataType != null) ? pDataType : (pDataType = new DataTypeElements());
+		return pDataType;
 	}
 	
 	public ParserRule getDataTypeRule() {
@@ -385,7 +393,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Class:
 	//	"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}";
 	public ClassElements getClassAccess() {
-		return (pClass != null) ? pClass : (pClass = new ClassElements());
+		return pClass;
 	}
 	
 	public ParserRule getClassRule() {
@@ -395,7 +403,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Property:
 	//	Attribute | Reference;
 	public PropertyElements getPropertyAccess() {
-		return (pProperty != null) ? pProperty : (pProperty = new PropertyElements());
+		return pProperty;
 	}
 	
 	public ParserRule getPropertyRule() {
@@ -405,7 +413,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Attribute:
 	//	"attr" name=ID ":" type=[DataType] ";"?;
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -415,7 +423,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Reference:
 	//	"ref" name=ID ":" type=[Class] ";"?;
 	public ReferenceElements getReferenceAccess() {
-		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
+		return pReference;
 	}
 	
 	public ParserRule getReferenceRule() {

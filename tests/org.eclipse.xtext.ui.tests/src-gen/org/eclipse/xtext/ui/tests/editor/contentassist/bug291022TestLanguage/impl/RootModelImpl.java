@@ -18,11 +18,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Roo
  * An implementation of the model object '<em><b>Root Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.RootModelImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

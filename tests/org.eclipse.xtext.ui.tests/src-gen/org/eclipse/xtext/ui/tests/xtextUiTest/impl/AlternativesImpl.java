@@ -23,11 +23,12 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Alternatives</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.AlternativesImpl#getGroups <em>Groups</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

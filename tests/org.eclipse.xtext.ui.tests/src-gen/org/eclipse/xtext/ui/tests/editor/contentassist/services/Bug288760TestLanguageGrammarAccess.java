@@ -128,27 +128,42 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private WorkflowElementElements pWorkflowElement;
-	private AttributeElements pAttribute;
-	private TerminalRule tML_COMMENT;
-	private TerminalRule tSTART_TAG;
-	private TerminalRule tLT;
-	private TerminalRule tGT;
-	private TerminalRule tEQ;
-	private TerminalRule tEND_TAG_SHORT;
-	private TerminalRule tEND_TAG_START;
-	private TerminalRule tEND_TAG;
-	private TerminalRule tID;
-	private TerminalRule tINT;
-	private TerminalRule tSTRING;
-	private TerminalRule tWS;
-	private TerminalRule tANY_OTHER;
+	private final WorkflowElementElements pWorkflowElement;
+	private final AttributeElements pAttribute;
+	private final TerminalRule tML_COMMENT;
+	private final TerminalRule tSTART_TAG;
+	private final TerminalRule tLT;
+	private final TerminalRule tGT;
+	private final TerminalRule tEQ;
+	private final TerminalRule tEND_TAG_SHORT;
+	private final TerminalRule tEND_TAG_START;
+	private final TerminalRule tEND_TAG;
+	private final TerminalRule tID;
+	private final TerminalRule tINT;
+	private final TerminalRule tSTRING;
+	private final TerminalRule tWS;
+	private final TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public Bug288760TestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pWorkflowElement = new WorkflowElementElements();
+		this.pAttribute = new AttributeElements();
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
+		this.tSTART_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "START_TAG");
+		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT");
+		this.tGT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "GT");
+		this.tEQ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EQ");
+		this.tEND_TAG_SHORT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_SHORT");
+		this.tEND_TAG_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_START");
+		this.tEND_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -178,7 +193,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
 	//	children+=WorkflowElement* end=END_TAG;
 	public WorkflowElementElements getWorkflowElementAccess() {
-		return (pWorkflowElement != null) ? pWorkflowElement : (pWorkflowElement = new WorkflowElementElements());
+		return pWorkflowElement;
 	}
 	
 	public ParserRule getWorkflowElementRule() {
@@ -188,7 +203,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Attribute:
 	//	name=ID EQ value=STRING;
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -198,79 +213,79 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal ML_COMMENT:
 	//	"<!--"->"-->";
 	public TerminalRule getML_COMMENTRule() {
-		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return tML_COMMENT;
 	} 
 
 	//terminal START_TAG:
 	//	LT ID;
 	public TerminalRule getSTART_TAGRule() {
-		return (tSTART_TAG != null) ? tSTART_TAG : (tSTART_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "START_TAG"));
+		return tSTART_TAG;
 	} 
 
 	//terminal LT:
 	//	"<";
 	public TerminalRule getLTRule() {
-		return (tLT != null) ? tLT : (tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT"));
+		return tLT;
 	} 
 
 	//terminal GT:
 	//	">";
 	public TerminalRule getGTRule() {
-		return (tGT != null) ? tGT : (tGT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "GT"));
+		return tGT;
 	} 
 
 	//terminal EQ:
 	//	"=";
 	public TerminalRule getEQRule() {
-		return (tEQ != null) ? tEQ : (tEQ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EQ"));
+		return tEQ;
 	} 
 
 	//terminal END_TAG_SHORT:
 	//	"/>";
 	public TerminalRule getEND_TAG_SHORTRule() {
-		return (tEND_TAG_SHORT != null) ? tEND_TAG_SHORT : (tEND_TAG_SHORT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_SHORT"));
+		return tEND_TAG_SHORT;
 	} 
 
 	//terminal END_TAG_START:
 	//	"</";
 	public TerminalRule getEND_TAG_STARTRule() {
-		return (tEND_TAG_START != null) ? tEND_TAG_START : (tEND_TAG_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_START"));
+		return tEND_TAG_START;
 	} 
 
 	//terminal END_TAG:
 	//	END_TAG_START ID GT;
 	public TerminalRule getEND_TAGRule() {
-		return (tEND_TAG != null) ? tEND_TAG : (tEND_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG"));
+		return tEND_TAG;
 	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal INT returns ecore::EInt:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
-		return (tINT != null) ? tINT : (tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT"));
+		return tINT;
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
 	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
-		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return tSTRING;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return tANY_OTHER;
 	} 
 }

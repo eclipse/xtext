@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.Conten
  * An implementation of the model object '<em><b>Abstract Rule Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.impl.AbstractRuleCallImpl#getRule <em>Rule</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

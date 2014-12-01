@@ -18,12 +18,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Mod
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.AttributeImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.AttributeImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

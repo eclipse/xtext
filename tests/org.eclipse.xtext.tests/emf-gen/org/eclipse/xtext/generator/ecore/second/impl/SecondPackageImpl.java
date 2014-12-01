@@ -86,14 +86,17 @@ public class SecondPackageImpl extends EPackageImpl implements SecondPackage
 
     // Obtain or create and register interdependencies
     FirstPackageImpl theFirstPackage = (FirstPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FirstPackage.eNS_URI) instanceof FirstPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FirstPackage.eNS_URI) : FirstPackage.eINSTANCE);
+    SecondPackageImpl theSecondPackage_1 = (SecondPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SecondPackage.eNS_URI) instanceof SecondPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SecondPackage.eNS_URI) : SecondPackage.eINSTANCE);
 
     // Create package meta-data objects
     theSecondPackage.createPackageContents();
     theFirstPackage.createPackageContents();
+    theSecondPackage_1.createPackageContents();
 
     // Initialize created meta-data
     theSecondPackage.initializePackageContents();
     theFirstPackage.initializePackageContents();
+    theSecondPackage_1.initializePackageContents();
 
     // Mark meta-data to indicate it can't be changed
     theSecondPackage.freeze();

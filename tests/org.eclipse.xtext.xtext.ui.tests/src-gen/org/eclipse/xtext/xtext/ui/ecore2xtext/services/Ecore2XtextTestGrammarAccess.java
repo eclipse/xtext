@@ -273,24 +273,32 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private RootElements pRoot;
-	private AbstractElements pAbstract;
-	private Concrete0Elements pConcrete0;
-	private INT0Elements pINT0;
-	private Concrete0_ImplElements pConcrete0_Impl;
-	private EStringElements pEString;
-	private Concrete1_ImplElements pConcrete1_Impl;
-	private DiamondInheritanceElements pDiamondInheritance;
+	private final RootElements pRoot;
+	private final AbstractElements pAbstract;
+	private final Concrete0Elements pConcrete0;
+	private final INT0Elements pINT0;
+	private final Concrete0_ImplElements pConcrete0_Impl;
+	private final EStringElements pEString;
+	private final Concrete1_ImplElements pConcrete1_Impl;
+	private final DiamondInheritanceElements pDiamondInheritance;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Ecore2XtextTestGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pAbstract = new AbstractElements();
+		this.pConcrete0 = new Concrete0Elements();
+		this.pINT0 = new INT0Elements();
+		this.pConcrete0_Impl = new Concrete0_ImplElements();
+		this.pEString = new EStringElements();
+		this.pConcrete1_Impl = new Concrete1_ImplElements();
+		this.pDiamondInheritance = new DiamondInheritanceElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -324,7 +332,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//	{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
 	//	concrete0=Concrete0)? "}";
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -334,7 +342,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//Abstract:
 	//	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
 	public AbstractElements getAbstractAccess() {
-		return (pAbstract != null) ? pAbstract : (pAbstract = new AbstractElements());
+		return pAbstract;
 	}
 	
 	public ParserRule getAbstractRule() {
@@ -344,7 +352,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//Concrete0:
 	//	Concrete0_Impl | DiamondInheritance;
 	public Concrete0Elements getConcrete0Access() {
-		return (pConcrete0 != null) ? pConcrete0 : (pConcrete0 = new Concrete0Elements());
+		return pConcrete0;
 	}
 	
 	public ParserRule getConcrete0Rule() {
@@ -354,7 +362,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	/// * TODO: implement this rule and an appropriate IValueConverter * / INT0 returns INT:
 	//	"INT";
 	public INT0Elements getINT0Access() {
-		return (pINT0 != null) ? pINT0 : (pINT0 = new INT0Elements());
+		return pINT0;
 	}
 	
 	public ParserRule getINT0Rule() {
@@ -364,7 +372,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//Concrete0_Impl returns Concrete0:
 	//	{Concrete0} "Concrete0" name=EString;
 	public Concrete0_ImplElements getConcrete0_ImplAccess() {
-		return (pConcrete0_Impl != null) ? pConcrete0_Impl : (pConcrete0_Impl = new Concrete0_ImplElements());
+		return pConcrete0_Impl;
 	}
 	
 	public ParserRule getConcrete0_ImplRule() {
@@ -374,7 +382,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//EString returns ecore::EString:
 	//	STRING | ID;
 	public EStringElements getEStringAccess() {
-		return (pEString != null) ? pEString : (pEString = new EStringElements());
+		return pEString;
 	}
 	
 	public ParserRule getEStringRule() {
@@ -384,7 +392,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//Concrete1_Impl returns Concrete1:
 	//	{Concrete1} "Concrete1" name=EString;
 	public Concrete1_ImplElements getConcrete1_ImplAccess() {
-		return (pConcrete1_Impl != null) ? pConcrete1_Impl : (pConcrete1_Impl = new Concrete1_ImplElements());
+		return pConcrete1_Impl;
 	}
 	
 	public ParserRule getConcrete1_ImplRule() {
@@ -394,7 +402,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	//DiamondInheritance:
 	//	{DiamondInheritance} "DiamondInheritance" name=EString;
 	public DiamondInheritanceElements getDiamondInheritanceAccess() {
-		return (pDiamondInheritance != null) ? pDiamondInheritance : (pDiamondInheritance = new DiamondInheritanceElements());
+		return pDiamondInheritance;
 	}
 	
 	public ParserRule getDiamondInheritanceRule() {

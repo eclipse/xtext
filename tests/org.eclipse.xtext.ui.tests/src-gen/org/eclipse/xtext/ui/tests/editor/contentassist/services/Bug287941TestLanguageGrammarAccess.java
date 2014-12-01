@@ -1247,46 +1247,80 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getNotEqualExclamationMarkEqualsSignKeyword_1_0() { return cNotEqualExclamationMarkEqualsSignKeyword_1_0; }
 	}
 	
-	private ModelElements pModel;
-	private ImportElements pImport;
-	private MQLqueryElements pMQLquery;
-	private SelectEntryElements pSelectEntry;
-	private FromEntryElements pFromEntry;
-	private ScopeClauseElements pScopeClause;
-	private ScopeElements pScope;
-	private ResourceScopeElements pResourceScope;
-	private ElementScopeElements pElementScope;
-	private WhereEntryElements pWhereEntry;
-	private AndWhereEntryElements pAndWhereEntry;
-	private ConcreteWhereEntryElements pConcreteWhereEntry;
-	private ParWhereEntryElements pParWhereEntry;
-	private AttributeWhereEntryElements pAttributeWhereEntry;
-	private NumericAttributeWhereEntryElements pNumericAttributeWhereEntry;
-	private DoubleWhereEntryElements pDoubleWhereEntry;
-	private LongWhereEntryElements pLongWhereEntry;
-	private VariableWhereEntryElements pVariableWhereEntry;
-	private NumericOperatorElements unknownRuleNumericOperator;
-	private StringAttributeWhereEntryElements pStringAttributeWhereEntry;
-	private StringOperatorElements unknownRuleStringOperator;
-	private BooleanAttributeWhereEntryElements pBooleanAttributeWhereEntry;
-	private BooleanOperatorElements unknownRuleBooleanOperator;
-	private NullWhereEntryElements pNullWhereEntry;
-	private ReferenceAliasWhereEntryElements pReferenceAliasWhereEntry;
-	private SubselectWhereEntryElements pSubselectWhereEntry;
-	private AliasWhereEntryElements pAliasWhereEntry;
-	private TerminalRule tSINGED_LONG;
-	private TerminalRule tSIGNED_DOUBLE;
-	private TerminalRule tID;
-	private TerminalRule tSTRING;
-	private TerminalRule tML_COMMENT;
-	private TerminalRule tSL_COMMENT;
-	private TerminalRule tWS;
+	private final ModelElements pModel;
+	private final ImportElements pImport;
+	private final MQLqueryElements pMQLquery;
+	private final SelectEntryElements pSelectEntry;
+	private final FromEntryElements pFromEntry;
+	private final ScopeClauseElements pScopeClause;
+	private final ScopeElements pScope;
+	private final ResourceScopeElements pResourceScope;
+	private final ElementScopeElements pElementScope;
+	private final WhereEntryElements pWhereEntry;
+	private final AndWhereEntryElements pAndWhereEntry;
+	private final ConcreteWhereEntryElements pConcreteWhereEntry;
+	private final ParWhereEntryElements pParWhereEntry;
+	private final AttributeWhereEntryElements pAttributeWhereEntry;
+	private final NumericAttributeWhereEntryElements pNumericAttributeWhereEntry;
+	private final DoubleWhereEntryElements pDoubleWhereEntry;
+	private final LongWhereEntryElements pLongWhereEntry;
+	private final VariableWhereEntryElements pVariableWhereEntry;
+	private final NumericOperatorElements unknownRuleNumericOperator;
+	private final StringAttributeWhereEntryElements pStringAttributeWhereEntry;
+	private final StringOperatorElements unknownRuleStringOperator;
+	private final BooleanAttributeWhereEntryElements pBooleanAttributeWhereEntry;
+	private final BooleanOperatorElements unknownRuleBooleanOperator;
+	private final NullWhereEntryElements pNullWhereEntry;
+	private final ReferenceAliasWhereEntryElements pReferenceAliasWhereEntry;
+	private final SubselectWhereEntryElements pSubselectWhereEntry;
+	private final AliasWhereEntryElements pAliasWhereEntry;
+	private final TerminalRule tSINGED_LONG;
+	private final TerminalRule tSIGNED_DOUBLE;
+	private final TerminalRule tID;
+	private final TerminalRule tSTRING;
+	private final TerminalRule tML_COMMENT;
+	private final TerminalRule tSL_COMMENT;
+	private final TerminalRule tWS;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public Bug287941TestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.pImport = new ImportElements();
+		this.pMQLquery = new MQLqueryElements();
+		this.pSelectEntry = new SelectEntryElements();
+		this.pFromEntry = new FromEntryElements();
+		this.pScopeClause = new ScopeClauseElements();
+		this.pScope = new ScopeElements();
+		this.pResourceScope = new ResourceScopeElements();
+		this.pElementScope = new ElementScopeElements();
+		this.pWhereEntry = new WhereEntryElements();
+		this.pAndWhereEntry = new AndWhereEntryElements();
+		this.pConcreteWhereEntry = new ConcreteWhereEntryElements();
+		this.pParWhereEntry = new ParWhereEntryElements();
+		this.pAttributeWhereEntry = new AttributeWhereEntryElements();
+		this.pNumericAttributeWhereEntry = new NumericAttributeWhereEntryElements();
+		this.pDoubleWhereEntry = new DoubleWhereEntryElements();
+		this.pLongWhereEntry = new LongWhereEntryElements();
+		this.pVariableWhereEntry = new VariableWhereEntryElements();
+		this.unknownRuleNumericOperator = new NumericOperatorElements();
+		this.pStringAttributeWhereEntry = new StringAttributeWhereEntryElements();
+		this.unknownRuleStringOperator = new StringOperatorElements();
+		this.pBooleanAttributeWhereEntry = new BooleanAttributeWhereEntryElements();
+		this.unknownRuleBooleanOperator = new BooleanOperatorElements();
+		this.pNullWhereEntry = new NullWhereEntryElements();
+		this.pReferenceAliasWhereEntry = new ReferenceAliasWhereEntryElements();
+		this.pSubselectWhereEntry = new SubselectWhereEntryElements();
+		this.pAliasWhereEntry = new AliasWhereEntryElements();
+		this.tSINGED_LONG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SINGED_LONG");
+		this.tSIGNED_DOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SIGNED_DOUBLE");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1315,7 +1349,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	imports+=Import* query=MQLquery;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -1325,7 +1359,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Import:
 	//	"import" importURI=STRING;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -1336,7 +1370,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from" fromEntries+=FromEntry (","
 	//	fromEntries+=FromEntry)* ("where" whereEntries+=WhereEntry+)?;
 	public MQLqueryElements getMQLqueryAccess() {
-		return (pMQLquery != null) ? pMQLquery : (pMQLquery = new MQLqueryElements());
+		return pMQLquery;
 	}
 	
 	public ParserRule getMQLqueryRule() {
@@ -1346,7 +1380,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SelectEntry:
 	//	select=[FromEntry] ("." attribute=[ecore::EAttribute])?;
 	public SelectEntryElements getSelectEntryAccess() {
-		return (pSelectEntry != null) ? pSelectEntry : (pSelectEntry = new SelectEntryElements());
+		return pSelectEntry;
 	}
 	
 	public ParserRule getSelectEntryRule() {
@@ -1356,7 +1390,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FromEntry:
 	//	type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=ScopeClause?;
 	public FromEntryElements getFromEntryAccess() {
-		return (pFromEntry != null) ? pFromEntry : (pFromEntry = new FromEntryElements());
+		return pFromEntry;
 	}
 	
 	public ParserRule getFromEntryRule() {
@@ -1366,7 +1400,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ScopeClause:
 	//	notIn?="not"? "in" scope=Scope;
 	public ScopeClauseElements getScopeClauseAccess() {
-		return (pScopeClause != null) ? pScopeClause : (pScopeClause = new ScopeClauseElements());
+		return pScopeClause;
 	}
 	
 	public ParserRule getScopeClauseRule() {
@@ -1376,7 +1410,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scope:
 	//	ResourceScope | ElementScope;
 	public ScopeElements getScopeAccess() {
-		return (pScope != null) ? pScope : (pScope = new ScopeElements());
+		return pScope;
 	}
 	
 	public ParserRule getScopeRule() {
@@ -1386,7 +1420,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ResourceScope:
 	//	"resources" "{" uris+=STRING ("," uris+=STRING)* "}";
 	public ResourceScopeElements getResourceScopeAccess() {
-		return (pResourceScope != null) ? pResourceScope : (pResourceScope = new ResourceScopeElements());
+		return pResourceScope;
 	}
 	
 	public ParserRule getResourceScopeRule() {
@@ -1396,7 +1430,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ElementScope:
 	//	"elements" "{" uris+=STRING ("," uris+=STRING)* "}";
 	public ElementScopeElements getElementScopeAccess() {
-		return (pElementScope != null) ? pElementScope : (pElementScope = new ElementScopeElements());
+		return pElementScope;
 	}
 	
 	public ParserRule getElementScopeRule() {
@@ -1406,7 +1440,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//WhereEntry:
 	//	AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
 	public WhereEntryElements getWhereEntryAccess() {
-		return (pWhereEntry != null) ? pWhereEntry : (pWhereEntry = new WhereEntryElements());
+		return pWhereEntry;
 	}
 	
 	public ParserRule getWhereEntryRule() {
@@ -1416,7 +1450,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AndWhereEntry returns WhereEntry:
 	//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
 	public AndWhereEntryElements getAndWhereEntryAccess() {
-		return (pAndWhereEntry != null) ? pAndWhereEntry : (pAndWhereEntry = new AndWhereEntryElements());
+		return pAndWhereEntry;
 	}
 	
 	public ParserRule getAndWhereEntryRule() {
@@ -1427,7 +1461,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
 	//	SubselectWhereEntry;
 	public ConcreteWhereEntryElements getConcreteWhereEntryAccess() {
-		return (pConcreteWhereEntry != null) ? pConcreteWhereEntry : (pConcreteWhereEntry = new ConcreteWhereEntryElements());
+		return pConcreteWhereEntry;
 	}
 	
 	public ParserRule getConcreteWhereEntryRule() {
@@ -1437,7 +1471,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ParWhereEntry returns WhereEntry:
 	//	"(" WhereEntry ")";
 	public ParWhereEntryElements getParWhereEntryAccess() {
-		return (pParWhereEntry != null) ? pParWhereEntry : (pParWhereEntry = new ParWhereEntryElements());
+		return pParWhereEntry;
 	}
 	
 	public ParserRule getParWhereEntryRule() {
@@ -1447,7 +1481,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AttributeWhereEntry:
 	//	NumericAttributeWhereEntry | StringAttributeWhereEntry | BooleanAttributeWhereEntry | VariableWhereEntry;
 	public AttributeWhereEntryElements getAttributeWhereEntryAccess() {
-		return (pAttributeWhereEntry != null) ? pAttributeWhereEntry : (pAttributeWhereEntry = new AttributeWhereEntryElements());
+		return pAttributeWhereEntry;
 	}
 	
 	public ParserRule getAttributeWhereEntryRule() {
@@ -1457,7 +1491,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NumericAttributeWhereEntry:
 	//	DoubleWhereEntry | LongWhereEntry;
 	public NumericAttributeWhereEntryElements getNumericAttributeWhereEntryAccess() {
-		return (pNumericAttributeWhereEntry != null) ? pNumericAttributeWhereEntry : (pNumericAttributeWhereEntry = new NumericAttributeWhereEntryElements());
+		return pNumericAttributeWhereEntry;
 	}
 	
 	public ParserRule getNumericAttributeWhereEntryRule() {
@@ -1467,7 +1501,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//DoubleWhereEntry:
 	//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SIGNED_DOUBLE;
 	public DoubleWhereEntryElements getDoubleWhereEntryAccess() {
-		return (pDoubleWhereEntry != null) ? pDoubleWhereEntry : (pDoubleWhereEntry = new DoubleWhereEntryElements());
+		return pDoubleWhereEntry;
 	}
 	
 	public ParserRule getDoubleWhereEntryRule() {
@@ -1477,7 +1511,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//LongWhereEntry:
 	//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SINGED_LONG;
 	public LongWhereEntryElements getLongWhereEntryAccess() {
-		return (pLongWhereEntry != null) ? pLongWhereEntry : (pLongWhereEntry = new LongWhereEntryElements());
+		return pLongWhereEntry;
 	}
 	
 	public ParserRule getLongWhereEntryRule() {
@@ -1488,7 +1522,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator rightAlias=[FromEntry] "."
 	//	rightAttribute=[ecore::EAttribute];
 	public VariableWhereEntryElements getVariableWhereEntryAccess() {
-		return (pVariableWhereEntry != null) ? pVariableWhereEntry : (pVariableWhereEntry = new VariableWhereEntryElements());
+		return pVariableWhereEntry;
 	}
 	
 	public ParserRule getVariableWhereEntryRule() {
@@ -1498,7 +1532,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum NumericOperator:
 	//	lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual="!=";
 	public NumericOperatorElements getNumericOperatorAccess() {
-		return (unknownRuleNumericOperator != null) ? unknownRuleNumericOperator : (unknownRuleNumericOperator = new NumericOperatorElements());
+		return unknownRuleNumericOperator;
 	}
 	
 	public EnumRule getNumericOperatorRule() {
@@ -1508,7 +1542,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//StringAttributeWhereEntry:
 	//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=STRING;
 	public StringAttributeWhereEntryElements getStringAttributeWhereEntryAccess() {
-		return (pStringAttributeWhereEntry != null) ? pStringAttributeWhereEntry : (pStringAttributeWhereEntry = new StringAttributeWhereEntryElements());
+		return pStringAttributeWhereEntry;
 	}
 	
 	public ParserRule getStringAttributeWhereEntryRule() {
@@ -1518,7 +1552,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum StringOperator:
 	//	equal="=" | notEqual="!=" | like | notLike="notlike";
 	public StringOperatorElements getStringOperatorAccess() {
-		return (unknownRuleStringOperator != null) ? unknownRuleStringOperator : (unknownRuleStringOperator = new StringOperatorElements());
+		return unknownRuleStringOperator;
 	}
 	
 	public EnumRule getStringOperatorRule() {
@@ -1528,7 +1562,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//BooleanAttributeWhereEntry:
 	//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue?="true" | "false");
 	public BooleanAttributeWhereEntryElements getBooleanAttributeWhereEntryAccess() {
-		return (pBooleanAttributeWhereEntry != null) ? pBooleanAttributeWhereEntry : (pBooleanAttributeWhereEntry = new BooleanAttributeWhereEntryElements());
+		return pBooleanAttributeWhereEntry;
 	}
 	
 	public ParserRule getBooleanAttributeWhereEntryRule() {
@@ -1538,7 +1572,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum BooleanOperator:
 	//	equal="=" | notEqual="!=";
 	public BooleanOperatorElements getBooleanOperatorAccess() {
-		return (unknownRuleBooleanOperator != null) ? unknownRuleBooleanOperator : (unknownRuleBooleanOperator = new BooleanOperatorElements());
+		return unknownRuleBooleanOperator;
 	}
 	
 	public EnumRule getBooleanOperatorRule() {
@@ -1548,7 +1582,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NullWhereEntry:
 	//	alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator "null";
 	public NullWhereEntryElements getNullWhereEntryAccess() {
-		return (pNullWhereEntry != null) ? pNullWhereEntry : (pNullWhereEntry = new NullWhereEntryElements());
+		return pNullWhereEntry;
 	}
 	
 	public ParserRule getNullWhereEntryRule() {
@@ -1558,7 +1592,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ReferenceAliasWhereEntry:
 	//	alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry];
 	public ReferenceAliasWhereEntryElements getReferenceAliasWhereEntryAccess() {
-		return (pReferenceAliasWhereEntry != null) ? pReferenceAliasWhereEntry : (pReferenceAliasWhereEntry = new ReferenceAliasWhereEntryElements());
+		return pReferenceAliasWhereEntry;
 	}
 	
 	public ParserRule getReferenceAliasWhereEntryRule() {
@@ -1568,7 +1602,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SubselectWhereEntry:
 	//	alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=MQLquery ")";
 	public SubselectWhereEntryElements getSubselectWhereEntryAccess() {
-		return (pSubselectWhereEntry != null) ? pSubselectWhereEntry : (pSubselectWhereEntry = new SubselectWhereEntryElements());
+		return pSubselectWhereEntry;
 	}
 	
 	public ParserRule getSubselectWhereEntryRule() {
@@ -1578,7 +1612,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AliasWhereEntry:
 	//	alias=[FromEntry] "=" rightAlias=[FromEntry];
 	public AliasWhereEntryElements getAliasWhereEntryAccess() {
-		return (pAliasWhereEntry != null) ? pAliasWhereEntry : (pAliasWhereEntry = new AliasWhereEntryElements());
+		return pAliasWhereEntry;
 	}
 	
 	public ParserRule getAliasWhereEntryRule() {
@@ -1588,43 +1622,43 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal SINGED_LONG returns ecore::ELong:
 	//	"-"? "0".."9"+;
 	public TerminalRule getSINGED_LONGRule() {
-		return (tSINGED_LONG != null) ? tSINGED_LONG : (tSINGED_LONG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SINGED_LONG"));
+		return tSINGED_LONG;
 	} 
 
 	//terminal SIGNED_DOUBLE returns ecore::EDouble:
 	//	"-"? "0".."9"+ ("." "0".."9"+)?;
 	public TerminalRule getSIGNED_DOUBLERule() {
-		return (tSIGNED_DOUBLE != null) ? tSIGNED_DOUBLE : (tSIGNED_DOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SIGNED_DOUBLE"));
+		return tSIGNED_DOUBLE;
 	} 
 
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal STRING:
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
 	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
-		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+		return tSTRING;
 	} 
 
 	//terminal ML_COMMENT:
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
-		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+		return tML_COMMENT;
 	} 
 
 	//terminal SL_COMMENT:
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
-		return (tSL_COMMENT != null) ? tSL_COMMENT : (tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT"));
+		return tSL_COMMENT;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 }

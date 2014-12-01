@@ -23,12 +23,13 @@ import org.eclipse.xtext.builder.tests.builderTestLanguage.Element;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.ElementImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.impl.ElementImpl#getOtherRefs <em>Other Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,11 +10,11 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssis
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.QualifiedClassifierRef#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.QualifiedClassifierRef#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.BacktrackingContentAssistTestPackage#getQualifiedClassifierRef()
  * @model

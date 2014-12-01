@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage;
  * An implementation of the model object '<em><b>Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.referring.impl.ReferenceImpl#getReferenced <em>Referenced</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

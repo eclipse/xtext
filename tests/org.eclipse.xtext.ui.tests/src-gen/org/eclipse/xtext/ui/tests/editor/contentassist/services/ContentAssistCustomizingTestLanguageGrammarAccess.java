@@ -135,20 +135,24 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 	
 	
-	private ModelElements pModel;
-	private TypeElements pType;
-	private TypeRefElements pTypeRef;
-	private FQNElements pFQN;
+	private final ModelElements pModel;
+	private final TypeElements pType;
+	private final TypeRefElements pTypeRef;
+	private final FQNElements pFQN;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ContentAssistCustomizingTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pType = new TypeElements();
+		this.pTypeRef = new TypeRefElements();
+		this.pFQN = new FQNElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -181,7 +185,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	//Model:
 	//	types+=Type*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -191,7 +195,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	//Type:
 	//	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -201,7 +205,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	//TypeRef:
 	//	type=[Type|FQN];
 	public TypeRefElements getTypeRefAccess() {
-		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
+		return pTypeRef;
 	}
 	
 	public ParserRule getTypeRefRule() {
@@ -211,7 +215,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {

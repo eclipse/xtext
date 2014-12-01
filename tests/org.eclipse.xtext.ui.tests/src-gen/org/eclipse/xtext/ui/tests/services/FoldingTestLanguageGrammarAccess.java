@@ -71,18 +71,20 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
-	private FoldingModelElements pFoldingModel;
-	private ElementElements pElement;
+	private final FoldingModelElements pFoldingModel;
+	private final ElementElements pElement;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FoldingTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFoldingModel = new FoldingModelElements();
+		this.pElement = new ElementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -115,7 +117,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//FoldingModel:
 	//	elements+=Element*;
 	public FoldingModelElements getFoldingModelAccess() {
-		return (pFoldingModel != null) ? pFoldingModel : (pFoldingModel = new FoldingModelElements());
+		return pFoldingModel;
 	}
 	
 	public ParserRule getFoldingModelRule() {
@@ -125,7 +127,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//Element:
 	//	"element" name=ID subelements+=Element* "end";
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {

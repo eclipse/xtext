@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.foo.File#getStuff <em>Stuff</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.foo.FooPackage#getFile()
  * @model

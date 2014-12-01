@@ -17,7 +17,9 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Simple Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl#isStatic <em>Static</em>}</li>
@@ -26,7 +28,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

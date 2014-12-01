@@ -18,12 +18,13 @@ import org.eclipse.xtext.ui.tests.foo.Stuff;
  * An implementation of the model object '<em><b>Stuff</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.foo.impl.StuffImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.foo.impl.StuffImpl#getRefs <em>Refs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

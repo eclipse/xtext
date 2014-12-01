@@ -27,13 +27,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Whe
  * An implementation of the model object '<em><b>MQ Lquery</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.MQLqueryImpl#getSelectEntries <em>Select Entries</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.MQLqueryImpl#getFromEntries <em>From Entries</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.MQLqueryImpl#getWhereEntries <em>Where Entries</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

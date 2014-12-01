@@ -191,22 +191,28 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private MainElements pMain;
-	private AbstractElementElements pAbstractElement;
-	private ImportElements pImport;
-	private ElementElements pElement;
-	private FQNElements pFQN;
-	private FQNWithWCElements pFQNWithWC;
+	private final MainElements pMain;
+	private final AbstractElementElements pAbstractElement;
+	private final ImportElements pImport;
+	private final ElementElements pElement;
+	private final FQNElements pFQN;
+	private final FQNWithWCElements pFQNWithWC;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public RefactoringTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pMain = new MainElements();
+		this.pAbstractElement = new AbstractElementElements();
+		this.pImport = new ImportElements();
+		this.pElement = new ElementElements();
+		this.pFQN = new FQNElements();
+		this.pFQNWithWC = new FQNWithWCElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -239,7 +245,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Main:
 	//	elements+=AbstractElement*;
 	public MainElements getMainAccess() {
-		return (pMain != null) ? pMain : (pMain = new MainElements());
+		return pMain;
 	}
 	
 	public ParserRule getMainRule() {
@@ -249,7 +255,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	//AbstractElement:
 	//	Element | Import;
 	public AbstractElementElements getAbstractElementAccess() {
-		return (pAbstractElement != null) ? pAbstractElement : (pAbstractElement = new AbstractElementElements());
+		return pAbstractElement;
 	}
 	
 	public ParserRule getAbstractElementRule() {
@@ -259,7 +265,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Import:
 	//	"import" importedNamespace=FQNWithWC;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -269,7 +275,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Element:
 	//	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -279,7 +285,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
@@ -289,7 +295,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	//FQNWithWC:
 	//	FQN ".*"?;
 	public FQNWithWCElements getFQNWithWCAccess() {
-		return (pFQNWithWC != null) ? pFQNWithWC : (pFQNWithWC = new FQNWithWCElements());
+		return pFQNWithWC;
 	}
 	
 	public ParserRule getFQNWithWCRule() {

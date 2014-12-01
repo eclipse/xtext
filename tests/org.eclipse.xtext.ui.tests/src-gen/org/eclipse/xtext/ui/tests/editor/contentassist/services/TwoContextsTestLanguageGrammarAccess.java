@@ -79,18 +79,20 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private MainModelElements pMainModel;
-	private AnElementElements pAnElement;
+	private final MainModelElements pMainModel;
+	private final AnElementElements pAnElement;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TwoContextsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pMainModel = new MainModelElements();
+		this.pAnElement = new AnElementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -123,7 +125,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//MainModel:
 	//	elements+=AnElement*;
 	public MainModelElements getMainModelAccess() {
-		return (pMainModel != null) ? pMainModel : (pMainModel = new MainModelElements());
+		return pMainModel;
 	}
 	
 	public ParserRule getMainModelRule() {
@@ -133,7 +135,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 	//AnElement:
 	//	name=ID ("refersTo" referred=[AnElement])? ";";
 	public AnElementElements getAnElementAccess() {
-		return (pAnElement != null) ? pAnElement : (pAnElement = new AnElementElements());
+		return pAnElement;
 	}
 	
 	public ParserRule getAnElementRule() {

@@ -23,11 +23,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.Types;
  * An implementation of the model object '<em><b>Types</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.impl.TypesImpl#getTypes <em>Types</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

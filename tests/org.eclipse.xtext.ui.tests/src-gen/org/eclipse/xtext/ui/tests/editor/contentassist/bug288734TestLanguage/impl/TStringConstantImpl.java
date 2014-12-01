@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug288734TestLanguage.TSt
  * An implementation of the model object '<em><b>TString Constant</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

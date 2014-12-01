@@ -23,13 +23,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Con
  * An implementation of the model object '<em><b>Constraint Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl#getMessage <em>Message</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPa
  * An implementation of the model object '<em><b>Main Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl.MainModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

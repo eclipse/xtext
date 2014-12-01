@@ -29,7 +29,9 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Grammar</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.GrammarImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.GrammarImpl#getUsedGrammars <em>Used Grammars</em>}</li>
@@ -38,7 +40,6 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.GrammarImpl#getMetamodelDeclarations <em>Metamodel Declarations</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.GrammarImpl#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

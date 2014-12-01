@@ -17,11 +17,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Fea
  * An implementation of the model object '<em><b>Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.FeatureImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

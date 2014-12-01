@@ -19,13 +19,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Replace</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.StringReplaceImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.StringReplaceImpl#getMatch <em>Match</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.StringReplaceImpl#getReplacement <em>Replacement</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

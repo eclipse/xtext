@@ -16,11 +16,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Lon
  * An implementation of the model object '<em><b>Long Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.LongWhereEntryImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

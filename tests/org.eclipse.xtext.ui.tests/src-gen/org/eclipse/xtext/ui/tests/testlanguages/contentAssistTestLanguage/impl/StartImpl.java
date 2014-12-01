@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.Start;
  * An implementation of the model object '<em><b>Start</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.impl.StartImpl#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

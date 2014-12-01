@@ -17,11 +17,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Pro
  * An implementation of the model object '<em><b>Property Path Part</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.PropertyPathPartImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

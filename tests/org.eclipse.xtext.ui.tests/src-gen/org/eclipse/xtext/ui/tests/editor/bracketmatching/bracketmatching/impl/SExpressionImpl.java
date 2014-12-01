@@ -23,11 +23,12 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.SExpres
  * An implementation of the model object '<em><b>SExpression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl.SExpressionImpl#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

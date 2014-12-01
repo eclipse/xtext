@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pri
  * An implementation of the model object '<em><b>Primary Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -19,13 +19,14 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.ActionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.ActionImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.ActionImpl#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -27,14 +27,15 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug288760TestLanguage.Wor
  * An implementation of the model object '<em><b>Workflow Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288760TestLanguage.impl.WorkflowElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288760TestLanguage.impl.WorkflowElementImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288760TestLanguage.impl.WorkflowElementImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug288760TestLanguage.impl.WorkflowElementImpl#getEnd <em>End</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

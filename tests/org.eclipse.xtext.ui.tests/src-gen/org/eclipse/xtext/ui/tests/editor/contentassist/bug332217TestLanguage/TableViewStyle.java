@@ -94,6 +94,8 @@ public enum TableViewStyle implements Enumerator
    * Returns the '<em><b>Table View Style</b></em>' literal with the specified literal value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param literal the literal.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static TableViewStyle get(String literal)
@@ -113,6 +115,8 @@ public enum TableViewStyle implements Enumerator
    * Returns the '<em><b>Table View Style</b></em>' literal with the specified name.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param name the name.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static TableViewStyle getByName(String name)
@@ -132,6 +136,8 @@ public enum TableViewStyle implements Enumerator
    * Returns the '<em><b>Table View Style</b></em>' literal with the specified integer value.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
+   * @param value the integer value.
+   * @return the matching enumerator or <code>null</code>.
    * @generated
    */
   public static TableViewStyle get(int value)

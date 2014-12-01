@@ -18,12 +18,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.TwoContextsPa
  * An implementation of the model object '<em><b>An Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl.AnElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl.AnElementImpl#getReferred <em>Referred</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

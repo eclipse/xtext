@@ -17,11 +17,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Property;
  * An implementation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.impl.PropertyImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

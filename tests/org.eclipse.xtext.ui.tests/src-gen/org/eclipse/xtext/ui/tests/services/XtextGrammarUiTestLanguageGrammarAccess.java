@@ -1521,55 +1521,94 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	
-	private GrammarElements pGrammar;
-	private GrammarIDElements pGrammarID;
-	private AbstractRuleElements pAbstractRule;
-	private AbstractMetamodelDeclarationElements pAbstractMetamodelDeclaration;
-	private GeneratedMetamodelElements pGeneratedMetamodel;
-	private ReferencedMetamodelElements pReferencedMetamodel;
-	private ParserRuleElements pParserRule;
-	private TypeRefElements pTypeRef;
-	private AlternativesElements pAlternatives;
-	private GroupElements pGroup;
-	private AbstractTokenElements pAbstractToken;
-	private AbstractTokenWithCardinalityElements pAbstractTokenWithCardinality;
-	private ActionElements pAction;
-	private AbstractTerminalElements pAbstractTerminal;
-	private KeywordElements pKeyword;
-	private RuleCallElements pRuleCall;
-	private AssignmentElements pAssignment;
-	private AssignableTerminalElements pAssignableTerminal;
-	private ParenthesizedAssignableElementElements pParenthesizedAssignableElement;
-	private AssignableAlternativesElements pAssignableAlternatives;
-	private CrossReferenceElements pCrossReference;
-	private CrossReferenceableTerminalElements pCrossReferenceableTerminal;
-	private ParenthesizedCrossReferenceableElementElements pParenthesizedCrossReferenceableElement;
-	private CrossReferenceableAlternativesElements pCrossReferenceableAlternatives;
-	private ParenthesizedElementElements pParenthesizedElement;
-	private TerminalRuleElements pTerminalRule;
-	private TerminalAlternativesElements pTerminalAlternatives;
-	private TerminalGroupElements pTerminalGroup;
-	private TerminalTokenElements pTerminalToken;
-	private TerminalTokenElementElements pTerminalTokenElement;
-	private ParenthesizedTerminalElementElements pParenthesizedTerminalElement;
-	private AbstractNegatedTokenElements pAbstractNegatedToken;
-	private NegatedTokenElements pNegatedToken;
-	private UntilTokenElements pUntilToken;
-	private WildcardElements pWildcard;
-	private CharacterRangeElements pCharacterRange;
-	private EnumRuleElements pEnumRule;
-	private EnumLiteralsElements pEnumLiterals;
-	private EnumLiteralDeclarationElements pEnumLiteralDeclaration;
+	private final GrammarElements pGrammar;
+	private final GrammarIDElements pGrammarID;
+	private final AbstractRuleElements pAbstractRule;
+	private final AbstractMetamodelDeclarationElements pAbstractMetamodelDeclaration;
+	private final GeneratedMetamodelElements pGeneratedMetamodel;
+	private final ReferencedMetamodelElements pReferencedMetamodel;
+	private final ParserRuleElements pParserRule;
+	private final TypeRefElements pTypeRef;
+	private final AlternativesElements pAlternatives;
+	private final GroupElements pGroup;
+	private final AbstractTokenElements pAbstractToken;
+	private final AbstractTokenWithCardinalityElements pAbstractTokenWithCardinality;
+	private final ActionElements pAction;
+	private final AbstractTerminalElements pAbstractTerminal;
+	private final KeywordElements pKeyword;
+	private final RuleCallElements pRuleCall;
+	private final AssignmentElements pAssignment;
+	private final AssignableTerminalElements pAssignableTerminal;
+	private final ParenthesizedAssignableElementElements pParenthesizedAssignableElement;
+	private final AssignableAlternativesElements pAssignableAlternatives;
+	private final CrossReferenceElements pCrossReference;
+	private final CrossReferenceableTerminalElements pCrossReferenceableTerminal;
+	private final ParenthesizedCrossReferenceableElementElements pParenthesizedCrossReferenceableElement;
+	private final CrossReferenceableAlternativesElements pCrossReferenceableAlternatives;
+	private final ParenthesizedElementElements pParenthesizedElement;
+	private final TerminalRuleElements pTerminalRule;
+	private final TerminalAlternativesElements pTerminalAlternatives;
+	private final TerminalGroupElements pTerminalGroup;
+	private final TerminalTokenElements pTerminalToken;
+	private final TerminalTokenElementElements pTerminalTokenElement;
+	private final ParenthesizedTerminalElementElements pParenthesizedTerminalElement;
+	private final AbstractNegatedTokenElements pAbstractNegatedToken;
+	private final NegatedTokenElements pNegatedToken;
+	private final UntilTokenElements pUntilToken;
+	private final WildcardElements pWildcard;
+	private final CharacterRangeElements pCharacterRange;
+	private final EnumRuleElements pEnumRule;
+	private final EnumLiteralsElements pEnumLiterals;
+	private final EnumLiteralDeclarationElements pEnumLiteralDeclaration;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public XtextGrammarUiTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pGrammar = new GrammarElements();
+		this.pGrammarID = new GrammarIDElements();
+		this.pAbstractRule = new AbstractRuleElements();
+		this.pAbstractMetamodelDeclaration = new AbstractMetamodelDeclarationElements();
+		this.pGeneratedMetamodel = new GeneratedMetamodelElements();
+		this.pReferencedMetamodel = new ReferencedMetamodelElements();
+		this.pParserRule = new ParserRuleElements();
+		this.pTypeRef = new TypeRefElements();
+		this.pAlternatives = new AlternativesElements();
+		this.pGroup = new GroupElements();
+		this.pAbstractToken = new AbstractTokenElements();
+		this.pAbstractTokenWithCardinality = new AbstractTokenWithCardinalityElements();
+		this.pAction = new ActionElements();
+		this.pAbstractTerminal = new AbstractTerminalElements();
+		this.pKeyword = new KeywordElements();
+		this.pRuleCall = new RuleCallElements();
+		this.pAssignment = new AssignmentElements();
+		this.pAssignableTerminal = new AssignableTerminalElements();
+		this.pParenthesizedAssignableElement = new ParenthesizedAssignableElementElements();
+		this.pAssignableAlternatives = new AssignableAlternativesElements();
+		this.pCrossReference = new CrossReferenceElements();
+		this.pCrossReferenceableTerminal = new CrossReferenceableTerminalElements();
+		this.pParenthesizedCrossReferenceableElement = new ParenthesizedCrossReferenceableElementElements();
+		this.pCrossReferenceableAlternatives = new CrossReferenceableAlternativesElements();
+		this.pParenthesizedElement = new ParenthesizedElementElements();
+		this.pTerminalRule = new TerminalRuleElements();
+		this.pTerminalAlternatives = new TerminalAlternativesElements();
+		this.pTerminalGroup = new TerminalGroupElements();
+		this.pTerminalToken = new TerminalTokenElements();
+		this.pTerminalTokenElement = new TerminalTokenElementElements();
+		this.pParenthesizedTerminalElement = new ParenthesizedTerminalElementElements();
+		this.pAbstractNegatedToken = new AbstractNegatedTokenElements();
+		this.pNegatedToken = new NegatedTokenElements();
+		this.pUntilToken = new UntilTokenElements();
+		this.pWildcard = new WildcardElements();
+		this.pCharacterRange = new CharacterRangeElements();
+		this.pEnumRule = new EnumRuleElements();
+		this.pEnumLiterals = new EnumLiteralsElements();
+		this.pEnumLiteralDeclaration = new EnumLiteralDeclarationElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1604,7 +1643,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 	//	metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
 	public GrammarElements getGrammarAccess() {
-		return (pGrammar != null) ? pGrammar : (pGrammar = new GrammarElements());
+		return pGrammar;
 	}
 	
 	public ParserRule getGrammarRule() {
@@ -1614,7 +1653,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//GrammarID returns ecore::EString:
 	//	ID ("." ID)*;
 	public GrammarIDElements getGrammarIDAccess() {
-		return (pGrammarID != null) ? pGrammarID : (pGrammarID = new GrammarIDElements());
+		return pGrammarID;
 	}
 	
 	public ParserRule getGrammarIDRule() {
@@ -1624,7 +1663,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractRule:
 	//	ParserRule | TerminalRule | EnumRule;
 	public AbstractRuleElements getAbstractRuleAccess() {
-		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
+		return pAbstractRule;
 	}
 	
 	public ParserRule getAbstractRuleRule() {
@@ -1634,7 +1673,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractMetamodelDeclaration:
 	//	GeneratedMetamodel | ReferencedMetamodel;
 	public AbstractMetamodelDeclarationElements getAbstractMetamodelDeclarationAccess() {
-		return (pAbstractMetamodelDeclaration != null) ? pAbstractMetamodelDeclaration : (pAbstractMetamodelDeclaration = new AbstractMetamodelDeclarationElements());
+		return pAbstractMetamodelDeclaration;
 	}
 	
 	public ParserRule getAbstractMetamodelDeclarationRule() {
@@ -1646,7 +1685,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//GeneratedMetamodel:
 	//	"generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
 	public GeneratedMetamodelElements getGeneratedMetamodelAccess() {
-		return (pGeneratedMetamodel != null) ? pGeneratedMetamodel : (pGeneratedMetamodel = new GeneratedMetamodelElements());
+		return pGeneratedMetamodel;
 	}
 	
 	public ParserRule getGeneratedMetamodelRule() {
@@ -1658,7 +1697,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ReferencedMetamodel:
 	//	"import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
 	public ReferencedMetamodelElements getReferencedMetamodelAccess() {
-		return (pReferencedMetamodel != null) ? pReferencedMetamodel : (pReferencedMetamodel = new ReferencedMetamodelElements());
+		return pReferencedMetamodel;
 	}
 	
 	public ParserRule getReferencedMetamodelRule() {
@@ -1669,7 +1708,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//	name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
 	//	hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
 	public ParserRuleElements getParserRuleAccess() {
-		return (pParserRule != null) ? pParserRule : (pParserRule = new ParserRuleElements());
+		return pParserRule;
 	}
 	
 	public ParserRule getParserRuleRule() {
@@ -1679,7 +1718,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TypeRef:
 	//	(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
 	public TypeRefElements getTypeRefAccess() {
-		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
+		return pTypeRef;
 	}
 	
 	public ParserRule getTypeRefRule() {
@@ -1689,7 +1728,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Alternatives returns AbstractElement:
 	//	Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
 	public AlternativesElements getAlternativesAccess() {
-		return (pAlternatives != null) ? pAlternatives : (pAlternatives = new AlternativesElements());
+		return pAlternatives;
 	}
 	
 	public ParserRule getAlternativesRule() {
@@ -1699,7 +1738,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Group returns AbstractElement:
 	//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 	public GroupElements getGroupAccess() {
-		return (pGroup != null) ? pGroup : (pGroup = new GroupElements());
+		return pGroup;
 	}
 	
 	public ParserRule getGroupRule() {
@@ -1709,7 +1748,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractToken returns AbstractElement:
 	//	AbstractTokenWithCardinality | Action;
 	public AbstractTokenElements getAbstractTokenAccess() {
-		return (pAbstractToken != null) ? pAbstractToken : (pAbstractToken = new AbstractTokenElements());
+		return pAbstractToken;
 	}
 	
 	public ParserRule getAbstractTokenRule() {
@@ -1719,7 +1758,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractTokenWithCardinality returns AbstractElement:
 	//	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
-		return (pAbstractTokenWithCardinality != null) ? pAbstractTokenWithCardinality : (pAbstractTokenWithCardinality = new AbstractTokenWithCardinalityElements());
+		return pAbstractTokenWithCardinality;
 	}
 	
 	public ParserRule getAbstractTokenWithCardinalityRule() {
@@ -1729,7 +1768,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Action:
 	//	"{" type=TypeRef ("." feature=ID operator=("=" | "+=") "current")? "}";
 	public ActionElements getActionAccess() {
-		return (pAction != null) ? pAction : (pAction = new ActionElements());
+		return pAction;
 	}
 	
 	public ParserRule getActionRule() {
@@ -1739,7 +1778,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractTerminal returns AbstractElement:
 	//	Keyword | RuleCall | ParenthesizedElement;
 	public AbstractTerminalElements getAbstractTerminalAccess() {
-		return (pAbstractTerminal != null) ? pAbstractTerminal : (pAbstractTerminal = new AbstractTerminalElements());
+		return pAbstractTerminal;
 	}
 	
 	public ParserRule getAbstractTerminalRule() {
@@ -1749,7 +1788,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Keyword:
 	//	value=STRING;
 	public KeywordElements getKeywordAccess() {
-		return (pKeyword != null) ? pKeyword : (pKeyword = new KeywordElements());
+		return pKeyword;
 	}
 	
 	public ParserRule getKeywordRule() {
@@ -1759,7 +1798,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//RuleCall:
 	//	rule=[AbstractRule];
 	public RuleCallElements getRuleCallAccess() {
-		return (pRuleCall != null) ? pRuleCall : (pRuleCall = new RuleCallElements());
+		return pRuleCall;
 	}
 	
 	public ParserRule getRuleCallRule() {
@@ -1769,7 +1808,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Assignment:
 	//	feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
 	public AssignmentElements getAssignmentAccess() {
-		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
+		return pAssignment;
 	}
 	
 	public ParserRule getAssignmentRule() {
@@ -1779,7 +1818,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AssignableTerminal returns AbstractElement:
 	//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
 	public AssignableTerminalElements getAssignableTerminalAccess() {
-		return (pAssignableTerminal != null) ? pAssignableTerminal : (pAssignableTerminal = new AssignableTerminalElements());
+		return pAssignableTerminal;
 	}
 	
 	public ParserRule getAssignableTerminalRule() {
@@ -1789,7 +1828,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ParenthesizedAssignableElement returns AbstractElement:
 	//	"(" AssignableAlternatives ")";
 	public ParenthesizedAssignableElementElements getParenthesizedAssignableElementAccess() {
-		return (pParenthesizedAssignableElement != null) ? pParenthesizedAssignableElement : (pParenthesizedAssignableElement = new ParenthesizedAssignableElementElements());
+		return pParenthesizedAssignableElement;
 	}
 	
 	public ParserRule getParenthesizedAssignableElementRule() {
@@ -1799,7 +1838,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AssignableAlternatives returns AbstractElement:
 	//	AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?;
 	public AssignableAlternativesElements getAssignableAlternativesAccess() {
-		return (pAssignableAlternatives != null) ? pAssignableAlternatives : (pAssignableAlternatives = new AssignableAlternativesElements());
+		return pAssignableAlternatives;
 	}
 	
 	public ParserRule getAssignableAlternativesRule() {
@@ -1809,7 +1848,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CrossReference:
 	//	"[" type=TypeRef ("|" ^terminal=CrossReferenceableTerminal)? "]";
 	public CrossReferenceElements getCrossReferenceAccess() {
-		return (pCrossReference != null) ? pCrossReference : (pCrossReference = new CrossReferenceElements());
+		return pCrossReference;
 	}
 	
 	public ParserRule getCrossReferenceRule() {
@@ -1819,7 +1858,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CrossReferenceableTerminal returns AbstractElement:
 	//	Keyword | RuleCall | ParenthesizedCrossReferenceableElement;
 	public CrossReferenceableTerminalElements getCrossReferenceableTerminalAccess() {
-		return (pCrossReferenceableTerminal != null) ? pCrossReferenceableTerminal : (pCrossReferenceableTerminal = new CrossReferenceableTerminalElements());
+		return pCrossReferenceableTerminal;
 	}
 	
 	public ParserRule getCrossReferenceableTerminalRule() {
@@ -1829,7 +1868,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ParenthesizedCrossReferenceableElement returns AbstractElement:
 	//	"(" CrossReferenceableAlternatives ")";
 	public ParenthesizedCrossReferenceableElementElements getParenthesizedCrossReferenceableElementAccess() {
-		return (pParenthesizedCrossReferenceableElement != null) ? pParenthesizedCrossReferenceableElement : (pParenthesizedCrossReferenceableElement = new ParenthesizedCrossReferenceableElementElements());
+		return pParenthesizedCrossReferenceableElement;
 	}
 	
 	public ParserRule getParenthesizedCrossReferenceableElementRule() {
@@ -1839,7 +1878,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CrossReferenceableAlternatives returns AbstractElement:
 	//	CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?;
 	public CrossReferenceableAlternativesElements getCrossReferenceableAlternativesAccess() {
-		return (pCrossReferenceableAlternatives != null) ? pCrossReferenceableAlternatives : (pCrossReferenceableAlternatives = new CrossReferenceableAlternativesElements());
+		return pCrossReferenceableAlternatives;
 	}
 	
 	public ParserRule getCrossReferenceableAlternativesRule() {
@@ -1849,7 +1888,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ParenthesizedElement returns AbstractElement:
 	//	"(" Alternatives ")";
 	public ParenthesizedElementElements getParenthesizedElementAccess() {
-		return (pParenthesizedElement != null) ? pParenthesizedElement : (pParenthesizedElement = new ParenthesizedElementElements());
+		return pParenthesizedElement;
 	}
 	
 	public ParserRule getParenthesizedElementRule() {
@@ -1859,7 +1898,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TerminalRule:
 	//	"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
 	public TerminalRuleElements getTerminalRuleAccess() {
-		return (pTerminalRule != null) ? pTerminalRule : (pTerminalRule = new TerminalRuleElements());
+		return pTerminalRule;
 	}
 	
 	public ParserRule getTerminalRuleRule() {
@@ -1869,7 +1908,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TerminalAlternatives returns AbstractElement:
 	//	TerminalGroup ({Alternatives.groups+=current} ("|" groups+=TerminalGroup)+)?;
 	public TerminalAlternativesElements getTerminalAlternativesAccess() {
-		return (pTerminalAlternatives != null) ? pTerminalAlternatives : (pTerminalAlternatives = new TerminalAlternativesElements());
+		return pTerminalAlternatives;
 	}
 	
 	public ParserRule getTerminalAlternativesRule() {
@@ -1879,7 +1918,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TerminalGroup returns AbstractElement:
 	//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 	public TerminalGroupElements getTerminalGroupAccess() {
-		return (pTerminalGroup != null) ? pTerminalGroup : (pTerminalGroup = new TerminalGroupElements());
+		return pTerminalGroup;
 	}
 	
 	public ParserRule getTerminalGroupRule() {
@@ -1889,7 +1928,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TerminalToken returns AbstractElement:
 	//	TerminalTokenElement cardinality=("?" | "*" | "+")?;
 	public TerminalTokenElements getTerminalTokenAccess() {
-		return (pTerminalToken != null) ? pTerminalToken : (pTerminalToken = new TerminalTokenElements());
+		return pTerminalToken;
 	}
 	
 	public ParserRule getTerminalTokenRule() {
@@ -1899,7 +1938,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//TerminalTokenElement returns AbstractElement:
 	//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
 	public TerminalTokenElementElements getTerminalTokenElementAccess() {
-		return (pTerminalTokenElement != null) ? pTerminalTokenElement : (pTerminalTokenElement = new TerminalTokenElementElements());
+		return pTerminalTokenElement;
 	}
 	
 	public ParserRule getTerminalTokenElementRule() {
@@ -1909,7 +1948,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//ParenthesizedTerminalElement returns AbstractElement:
 	//	"(" TerminalAlternatives ")";
 	public ParenthesizedTerminalElementElements getParenthesizedTerminalElementAccess() {
-		return (pParenthesizedTerminalElement != null) ? pParenthesizedTerminalElement : (pParenthesizedTerminalElement = new ParenthesizedTerminalElementElements());
+		return pParenthesizedTerminalElement;
 	}
 	
 	public ParserRule getParenthesizedTerminalElementRule() {
@@ -1919,7 +1958,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//AbstractNegatedToken:
 	//	NegatedToken | UntilToken;
 	public AbstractNegatedTokenElements getAbstractNegatedTokenAccess() {
-		return (pAbstractNegatedToken != null) ? pAbstractNegatedToken : (pAbstractNegatedToken = new AbstractNegatedTokenElements());
+		return pAbstractNegatedToken;
 	}
 	
 	public ParserRule getAbstractNegatedTokenRule() {
@@ -1929,7 +1968,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//NegatedToken:
 	//	"!" ^terminal=TerminalTokenElement;
 	public NegatedTokenElements getNegatedTokenAccess() {
-		return (pNegatedToken != null) ? pNegatedToken : (pNegatedToken = new NegatedTokenElements());
+		return pNegatedToken;
 	}
 	
 	public ParserRule getNegatedTokenRule() {
@@ -1939,7 +1978,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//UntilToken:
 	//	"->" ^terminal=TerminalTokenElement;
 	public UntilTokenElements getUntilTokenAccess() {
-		return (pUntilToken != null) ? pUntilToken : (pUntilToken = new UntilTokenElements());
+		return pUntilToken;
 	}
 	
 	public ParserRule getUntilTokenRule() {
@@ -1949,7 +1988,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//Wildcard:
 	//	{Wildcard} ".";
 	public WildcardElements getWildcardAccess() {
-		return (pWildcard != null) ? pWildcard : (pWildcard = new WildcardElements());
+		return pWildcard;
 	}
 	
 	public ParserRule getWildcardRule() {
@@ -1959,7 +1998,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//CharacterRange returns AbstractElement:
 	//	Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
 	public CharacterRangeElements getCharacterRangeAccess() {
-		return (pCharacterRange != null) ? pCharacterRange : (pCharacterRange = new CharacterRangeElements());
+		return pCharacterRange;
 	}
 	
 	public ParserRule getCharacterRangeRule() {
@@ -1969,7 +2008,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EnumRule:
 	//	"enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
 	public EnumRuleElements getEnumRuleAccess() {
-		return (pEnumRule != null) ? pEnumRule : (pEnumRule = new EnumRuleElements());
+		return pEnumRule;
 	}
 	
 	public ParserRule getEnumRuleRule() {
@@ -1979,7 +2018,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EnumLiterals returns AbstractElement:
 	//	EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
 	public EnumLiteralsElements getEnumLiteralsAccess() {
-		return (pEnumLiterals != null) ? pEnumLiterals : (pEnumLiterals = new EnumLiteralsElements());
+		return pEnumLiterals;
 	}
 	
 	public ParserRule getEnumLiteralsRule() {
@@ -1989,7 +2028,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	//EnumLiteralDeclaration:
 	//	enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
 	public EnumLiteralDeclarationElements getEnumLiteralDeclarationAccess() {
-		return (pEnumLiteralDeclaration != null) ? pEnumLiteralDeclaration : (pEnumLiteralDeclaration = new EnumLiteralDeclarationElements());
+		return pEnumLiteralDeclaration;
 	}
 	
 	public ParserRule getEnumLiteralDeclarationRule() {

@@ -1068,42 +1068,68 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getCheckCheckKeyword_3_0() { return cCheckCheckKeyword_3_0; }
 	}
 	
-	private ModelElements pModel;
-	private PropertyPathPartElements pPropertyPathPart;
-	private TypeDescriptionElements pTypeDescription;
-	private ParameterElements pParameter;
-	private ObjectReferenceElements pObjectReference;
-	private NestedObjectReferenceElements pNestedObjectReference;
-	private ExpressionElements pExpression;
-	private ImageExpressionElements pImageExpression;
-	private ScalarExpressionElements pScalarExpression;
-	private CollectionExpressionElements pCollectionExpression;
-	private StringLiteralElements pStringLiteral;
-	private StringFunctionElements pStringFunction;
-	private CollectionLiteralElements pCollectionLiteral;
-	private CollectionFunctionElements pCollectionFunction;
-	private TableViewStyleElements unknownRuleTableViewStyle;
-	private TableViewElements pTableView;
-	private ViewContentElementElements pViewContentElement;
-	private SectionElements pSection;
-	private CellElements pCell;
-	private CellTypeElements unknownRuleCellType;
-	private CellAccessoryElements unknownRuleCellAccessory;
-	private CollectionIteratorElements pCollectionIterator;
-	private ViewActionElements pViewAction;
-	private SelectorNameElements pSelectorName;
-	private SelectorElements pSelector;
-	private ExternalOpenElements pExternalOpen;
+	private final ModelElements pModel;
+	private final PropertyPathPartElements pPropertyPathPart;
+	private final TypeDescriptionElements pTypeDescription;
+	private final ParameterElements pParameter;
+	private final ObjectReferenceElements pObjectReference;
+	private final NestedObjectReferenceElements pNestedObjectReference;
+	private final ExpressionElements pExpression;
+	private final ImageExpressionElements pImageExpression;
+	private final ScalarExpressionElements pScalarExpression;
+	private final CollectionExpressionElements pCollectionExpression;
+	private final StringLiteralElements pStringLiteral;
+	private final StringFunctionElements pStringFunction;
+	private final CollectionLiteralElements pCollectionLiteral;
+	private final CollectionFunctionElements pCollectionFunction;
+	private final TableViewStyleElements unknownRuleTableViewStyle;
+	private final TableViewElements pTableView;
+	private final ViewContentElementElements pViewContentElement;
+	private final SectionElements pSection;
+	private final CellElements pCell;
+	private final CellTypeElements unknownRuleCellType;
+	private final CellAccessoryElements unknownRuleCellAccessory;
+	private final CollectionIteratorElements pCollectionIterator;
+	private final ViewActionElements pViewAction;
+	private final SelectorNameElements pSelectorName;
+	private final SelectorElements pSelector;
+	private final ExternalOpenElements pExternalOpen;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug332217TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pPropertyPathPart = new PropertyPathPartElements();
+		this.pTypeDescription = new TypeDescriptionElements();
+		this.pParameter = new ParameterElements();
+		this.pObjectReference = new ObjectReferenceElements();
+		this.pNestedObjectReference = new NestedObjectReferenceElements();
+		this.pExpression = new ExpressionElements();
+		this.pImageExpression = new ImageExpressionElements();
+		this.pScalarExpression = new ScalarExpressionElements();
+		this.pCollectionExpression = new CollectionExpressionElements();
+		this.pStringLiteral = new StringLiteralElements();
+		this.pStringFunction = new StringFunctionElements();
+		this.pCollectionLiteral = new CollectionLiteralElements();
+		this.pCollectionFunction = new CollectionFunctionElements();
+		this.unknownRuleTableViewStyle = new TableViewStyleElements();
+		this.pTableView = new TableViewElements();
+		this.pViewContentElement = new ViewContentElementElements();
+		this.pSection = new SectionElements();
+		this.pCell = new CellElements();
+		this.unknownRuleCellType = new CellTypeElements();
+		this.unknownRuleCellAccessory = new CellAccessoryElements();
+		this.pCollectionIterator = new CollectionIteratorElements();
+		this.pViewAction = new ViewActionElements();
+		this.pSelectorName = new SelectorNameElements();
+		this.pSelector = new SelectorElements();
+		this.pExternalOpen = new ExternalOpenElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1136,7 +1162,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	elements+=TableView*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -1149,7 +1175,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//PropertyPathPart:
 	//	Parameter | CollectionIterator;
 	public PropertyPathPartElements getPropertyPathPartAccess() {
-		return (pPropertyPathPart != null) ? pPropertyPathPart : (pPropertyPathPart = new PropertyPathPartElements());
+		return pPropertyPathPart;
 	}
 	
 	public ParserRule getPropertyPathPartRule() {
@@ -1159,7 +1185,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TypeDescription:
 	//	type=ID many?="[]"?;
 	public TypeDescriptionElements getTypeDescriptionAccess() {
-		return (pTypeDescription != null) ? pTypeDescription : (pTypeDescription = new TypeDescriptionElements());
+		return pTypeDescription;
 	}
 	
 	public ParserRule getTypeDescriptionRule() {
@@ -1169,7 +1195,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Parameter:
 	//	description=TypeDescription name=ID;
 	public ParameterElements getParameterAccess() {
-		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+		return pParameter;
 	}
 	
 	public ParserRule getParameterRule() {
@@ -1179,7 +1205,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ObjectReference:
 	//	object=[PropertyPathPart] tail=NestedObjectReference?;
 	public ObjectReferenceElements getObjectReferenceAccess() {
-		return (pObjectReference != null) ? pObjectReference : (pObjectReference = new ObjectReferenceElements());
+		return pObjectReference;
 	}
 	
 	public ParserRule getObjectReferenceRule() {
@@ -1193,7 +1219,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//NestedObjectReference returns ObjectReference:
 	//	"." object=[PropertyPathPart] tail=NestedObjectReference?;
 	public NestedObjectReferenceElements getNestedObjectReferenceAccess() {
-		return (pNestedObjectReference != null) ? pNestedObjectReference : (pNestedObjectReference = new NestedObjectReferenceElements());
+		return pNestedObjectReference;
 	}
 	
 	public ParserRule getNestedObjectReferenceRule() {
@@ -1204,7 +1230,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Expression:
 	//	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -1214,7 +1240,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ImageExpression returns ScalarExpression:
 	//	ScalarExpression;
 	public ImageExpressionElements getImageExpressionAccess() {
-		return (pImageExpression != null) ? pImageExpression : (pImageExpression = new ImageExpressionElements());
+		return pImageExpression;
 	}
 	
 	public ParserRule getImageExpressionRule() {
@@ -1224,7 +1250,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ScalarExpression:
 	//	StringLiteral | StringFunction | ObjectReference;
 	public ScalarExpressionElements getScalarExpressionAccess() {
-		return (pScalarExpression != null) ? pScalarExpression : (pScalarExpression = new ScalarExpressionElements());
+		return pScalarExpression;
 	}
 	
 	public ParserRule getScalarExpressionRule() {
@@ -1234,7 +1260,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CollectionExpression:
 	//	CollectionLiteral | CollectionFunction | ObjectReference;
 	public CollectionExpressionElements getCollectionExpressionAccess() {
-		return (pCollectionExpression != null) ? pCollectionExpression : (pCollectionExpression = new CollectionExpressionElements());
+		return pCollectionExpression;
 	}
 	
 	public ParserRule getCollectionExpressionRule() {
@@ -1244,7 +1270,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//StringLiteral:
 	//	value=STRING;
 	public StringLiteralElements getStringLiteralAccess() {
-		return (pStringLiteral != null) ? pStringLiteral : (pStringLiteral = new StringLiteralElements());
+		return pStringLiteral;
 	}
 	
 	public ParserRule getStringLiteralRule() {
@@ -1256,7 +1282,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	match=ScalarExpression "," replacement=ScalarExpression ")" | {StringUrlConform} "urlconform(" value=ScalarExpression
 	//	")";
 	public StringFunctionElements getStringFunctionAccess() {
-		return (pStringFunction != null) ? pStringFunction : (pStringFunction = new StringFunctionElements());
+		return pStringFunction;
 	}
 	
 	public ParserRule getStringFunctionRule() {
@@ -1266,7 +1292,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CollectionLiteral:
 	//	"[" items+=ScalarExpression ("," items+=ScalarExpression)* "]";
 	public CollectionLiteralElements getCollectionLiteralAccess() {
-		return (pCollectionLiteral != null) ? pCollectionLiteral : (pCollectionLiteral = new CollectionLiteralElements());
+		return pCollectionLiteral;
 	}
 	
 	public ParserRule getCollectionLiteralRule() {
@@ -1276,7 +1302,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CollectionFunction:
 	//	{StringSplit} "split(" value=ScalarExpression "," delimiter=ScalarExpression ")";
 	public CollectionFunctionElements getCollectionFunctionAccess() {
-		return (pCollectionFunction != null) ? pCollectionFunction : (pCollectionFunction = new CollectionFunctionElements());
+		return pCollectionFunction;
 	}
 	
 	public ParserRule getCollectionFunctionRule() {
@@ -1288,7 +1314,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum TableViewStyle:
 	//	Plain | Grouped;
 	public TableViewStyleElements getTableViewStyleAccess() {
-		return (unknownRuleTableViewStyle != null) ? unknownRuleTableViewStyle : (unknownRuleTableViewStyle = new TableViewStyleElements());
+		return unknownRuleTableViewStyle;
 	}
 	
 	public EnumRule getTableViewStyleRule() {
@@ -1299,7 +1325,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"tableview" name=ID ("(" content=Parameter ")")? "{" (("title:" title=ScalarExpression)? & ("titleImage:"
 	//	titleImage=ImageExpression)? & ("style:" style=TableViewStyle)?) sections+=Section* "}";
 	public TableViewElements getTableViewAccess() {
-		return (pTableView != null) ? pTableView : (pTableView = new TableViewElements());
+		return pTableView;
 	}
 	
 	public ParserRule getTableViewRule() {
@@ -1309,7 +1335,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ViewContentElement:
 	//	Section | Cell;
 	public ViewContentElementElements getViewContentElementAccess() {
-		return (pViewContentElement != null) ? pViewContentElement : (pViewContentElement = new ViewContentElementElements());
+		return pViewContentElement;
 	}
 	
 	public ParserRule getViewContentElementRule() {
@@ -1319,7 +1345,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Section:
 	//	"section" iterator=CollectionIterator? "{" ("title:" title=ScalarExpression)? cells+=Cell+ "}";
 	public SectionElements getSectionAccess() {
-		return (pSection != null) ? pSection : (pSection = new SectionElements());
+		return pSection;
 	}
 	
 	public ParserRule getSectionRule() {
@@ -1331,7 +1357,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	details=ScalarExpression)? & ("image:" image=ScalarExpression)? & ("action:" action=ViewAction)? & ("accessory:"
 	//	accessory=CellAccessory)?) "}";
 	public CellElements getCellAccess() {
-		return (pCell != null) ? pCell : (pCell = new CellElements());
+		return pCell;
 	}
 	
 	public ParserRule getCellRule() {
@@ -1341,7 +1367,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum CellType:
 	//	default="Default" | value1="Value1" | value2="Value2" | subtitle="Subtitle";
 	public CellTypeElements getCellTypeAccess() {
-		return (unknownRuleCellType != null) ? unknownRuleCellType : (unknownRuleCellType = new CellTypeElements());
+		return unknownRuleCellType;
 	}
 	
 	public EnumRule getCellTypeRule() {
@@ -1351,7 +1377,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum CellAccessory:
 	//	None | Link | Detail | Check;
 	public CellAccessoryElements getCellAccessoryAccess() {
-		return (unknownRuleCellAccessory != null) ? unknownRuleCellAccessory : (unknownRuleCellAccessory = new CellAccessoryElements());
+		return unknownRuleCellAccessory;
 	}
 	
 	public EnumRule getCellAccessoryRule() {
@@ -1361,7 +1387,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//CollectionIterator:
 	//	"for" name=ID "in" collection=CollectionExpression;
 	public CollectionIteratorElements getCollectionIteratorAccess() {
-		return (pCollectionIterator != null) ? pCollectionIterator : (pCollectionIterator = new CollectionIteratorElements());
+		return pCollectionIterator;
 	}
 	
 	public ParserRule getCollectionIteratorRule() {
@@ -1371,7 +1397,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ViewAction:
 	//	ExternalOpen | Selector;
 	public ViewActionElements getViewActionAccess() {
-		return (pViewAction != null) ? pViewAction : (pViewAction = new ViewActionElements());
+		return pViewAction;
 	}
 	
 	public ParserRule getViewActionRule() {
@@ -1381,7 +1407,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SelectorName:
 	//	ID (":" ID)* ":"?;
 	public SelectorNameElements getSelectorNameAccess() {
-		return (pSelectorName != null) ? pSelectorName : (pSelectorName = new SelectorNameElements());
+		return pSelectorName;
 	}
 	
 	public ParserRule getSelectorNameRule() {
@@ -1391,7 +1417,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Selector:
 	//	"@selector" "(" name=SelectorName ")";
 	public SelectorElements getSelectorAccess() {
-		return (pSelector != null) ? pSelector : (pSelector = new SelectorElements());
+		return pSelector;
 	}
 	
 	public ParserRule getSelectorRule() {
@@ -1401,7 +1427,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ExternalOpen:
 	//	url=ScalarExpression;
 	public ExternalOpenElements getExternalOpenAccess() {
-		return (pExternalOpen != null) ? pExternalOpen : (pExternalOpen = new ExternalOpenElements());
+		return pExternalOpen;
 	}
 	
 	public ParserRule getExternalOpenRule() {

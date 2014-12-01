@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Pro
  * An implementation of the model object '<em><b>Program</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl.ProgramImpl#getDirectives <em>Directives</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

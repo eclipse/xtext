@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 import java.util.Collection;
 
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguageRuntimeModule;

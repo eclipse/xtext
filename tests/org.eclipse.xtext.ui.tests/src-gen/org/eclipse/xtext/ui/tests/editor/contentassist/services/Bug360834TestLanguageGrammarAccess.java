@@ -435,26 +435,36 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getPRIVATEPrivateKeyword_2_0() { return cPRIVATEPrivateKeyword_2_0; }
 	}
 	
-	private ModelElements pModel;
-	private AlternativeElements pAlternative;
-	private FQNElements pFQN;
-	private RecursiveClassDeclarationElements pRecursiveClassDeclaration;
-	private VisibilityElements unknownRuleVisibility;
-	private AlternativeClassModifiersElements pAlternativeClassModifiers;
-	private UnorderedElements pUnordered;
-	private SimpleClassDeclarationElements pSimpleClassDeclaration;
-	private ClassMemberElements pClassMember;
-	private UnorderedModifiersElements pUnorderedModifiers;
+	private final ModelElements pModel;
+	private final AlternativeElements pAlternative;
+	private final FQNElements pFQN;
+	private final RecursiveClassDeclarationElements pRecursiveClassDeclaration;
+	private final VisibilityElements unknownRuleVisibility;
+	private final AlternativeClassModifiersElements pAlternativeClassModifiers;
+	private final UnorderedElements pUnordered;
+	private final SimpleClassDeclarationElements pSimpleClassDeclaration;
+	private final ClassMemberElements pClassMember;
+	private final UnorderedModifiersElements pUnorderedModifiers;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug360834TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pAlternative = new AlternativeElements();
+		this.pFQN = new FQNElements();
+		this.pRecursiveClassDeclaration = new RecursiveClassDeclarationElements();
+		this.unknownRuleVisibility = new VisibilityElements();
+		this.pAlternativeClassModifiers = new AlternativeClassModifiersElements();
+		this.pUnordered = new UnorderedElements();
+		this.pSimpleClassDeclaration = new SimpleClassDeclarationElements();
+		this.pClassMember = new ClassMemberElements();
+		this.pUnorderedModifiers = new UnorderedModifiersElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -487,7 +497,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	"alternative" element=Alternative | "unordered" element=Unordered;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -497,7 +507,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Alternative:
 	//	"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration;
 	public AlternativeElements getAlternativeAccess() {
-		return (pAlternative != null) ? pAlternative : (pAlternative = new AlternativeElements());
+		return pAlternative;
 	}
 	
 	public ParserRule getAlternativeRule() {
@@ -507,7 +517,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {
@@ -517,7 +527,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RecursiveClassDeclaration:
 	//	modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}";
 	public RecursiveClassDeclarationElements getRecursiveClassDeclarationAccess() {
-		return (pRecursiveClassDeclaration != null) ? pRecursiveClassDeclaration : (pRecursiveClassDeclaration = new RecursiveClassDeclarationElements());
+		return pRecursiveClassDeclaration;
 	}
 	
 	public ParserRule getRecursiveClassDeclarationRule() {
@@ -527,7 +537,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum Visibility:
 	//	PUBLIC="public" | PROTECTED="protected" | PRIVATE="private";
 	public VisibilityElements getVisibilityAccess() {
-		return (unknownRuleVisibility != null) ? unknownRuleVisibility : (unknownRuleVisibility = new VisibilityElements());
+		return unknownRuleVisibility;
 	}
 	
 	public EnumRule getVisibilityRule() {
@@ -537,7 +547,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//AlternativeClassModifiers returns Modifiers:
 	//	{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?);
 	public AlternativeClassModifiersElements getAlternativeClassModifiersAccess() {
-		return (pAlternativeClassModifiers != null) ? pAlternativeClassModifiers : (pAlternativeClassModifiers = new AlternativeClassModifiersElements());
+		return pAlternativeClassModifiers;
 	}
 	
 	public ParserRule getAlternativeClassModifiersRule() {
@@ -547,7 +557,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Unordered:
 	//	"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration;
 	public UnorderedElements getUnorderedAccess() {
-		return (pUnordered != null) ? pUnordered : (pUnordered = new UnorderedElements());
+		return pUnordered;
 	}
 	
 	public ParserRule getUnorderedRule() {
@@ -557,7 +567,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//SimpleClassDeclaration:
 	//	modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}";
 	public SimpleClassDeclarationElements getSimpleClassDeclarationAccess() {
-		return (pSimpleClassDeclaration != null) ? pSimpleClassDeclaration : (pSimpleClassDeclaration = new SimpleClassDeclarationElements());
+		return pSimpleClassDeclaration;
 	}
 	
 	public ParserRule getSimpleClassDeclarationRule() {
@@ -567,7 +577,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ClassMember:
 	//	modifiers=UnorderedModifiers "var" name=ID ";";
 	public ClassMemberElements getClassMemberAccess() {
-		return (pClassMember != null) ? pClassMember : (pClassMember = new ClassMemberElements());
+		return pClassMember;
 	}
 	
 	public ParserRule getClassMemberRule() {
@@ -577,7 +587,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//UnorderedModifiers:
 	//	{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?);
 	public UnorderedModifiersElements getUnorderedModifiersAccess() {
-		return (pUnorderedModifiers != null) ? pUnorderedModifiers : (pUnorderedModifiers = new UnorderedModifiersElements());
+		return pUnorderedModifiers;
 	}
 	
 	public ParserRule getUnorderedModifiersRule() {

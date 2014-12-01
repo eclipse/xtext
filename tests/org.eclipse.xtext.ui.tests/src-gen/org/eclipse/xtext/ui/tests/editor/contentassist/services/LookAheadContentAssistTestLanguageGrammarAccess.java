@@ -253,19 +253,22 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	}
 	
 	
-	private ModelElements pModel;
-	private AttributeElements pAttribute;
-	private PairElements pPair;
+	private final ModelElements pModel;
+	private final AttributeElements pAttribute;
+	private final PairElements pPair;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LookAheadContentAssistTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pAttribute = new AttributeElements();
+		this.pPair = new PairElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -299,7 +302,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	//	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
 	//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -309,7 +312,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	//Attribute:
 	//	value=ID;
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -332,7 +335,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	//Pair:
 	//	name=ID "=" value=ID;
 	public PairElements getPairAccess() {
-		return (pPair != null) ? pPair : (pPair = new PairElements());
+		return pPair;
 	}
 	
 	public ParserRule getPairRule() {

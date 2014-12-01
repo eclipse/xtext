@@ -593,26 +593,40 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ProgramElements pProgram;
-	private ProgramDirectiveElements pProgramDirective;
-	private FunctionDefinitionElements pFunctionDefinition;
-	private AttributeElements pAttribute;
-	private ParametersElements pParameters;
-	private BlockElements pBlock;
-	private StatementElements pStatement;
-	private PostfixExpressionElements pPostfixExpression;
-	private ListExpressionElements pListExpression;
-	private PropertyOperatorElements pPropertyOperator;
-	private PrimaryExpressionElements pPrimaryExpression;
-	private TerminalRule tID;
-	private TerminalRule tWS;
-	private TerminalRule tLT;
+	private final ProgramElements pProgram;
+	private final ProgramDirectiveElements pProgramDirective;
+	private final FunctionDefinitionElements pFunctionDefinition;
+	private final AttributeElements pAttribute;
+	private final ParametersElements pParameters;
+	private final BlockElements pBlock;
+	private final StatementElements pStatement;
+	private final PostfixExpressionElements pPostfixExpression;
+	private final ListExpressionElements pListExpression;
+	private final PropertyOperatorElements pPropertyOperator;
+	private final PrimaryExpressionElements pPrimaryExpression;
+	private final TerminalRule tID;
+	private final TerminalRule tWS;
+	private final TerminalRule tLT;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public Bug303200TestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pProgram = new ProgramElements();
+		this.pProgramDirective = new ProgramDirectiveElements();
+		this.pFunctionDefinition = new FunctionDefinitionElements();
+		this.pAttribute = new AttributeElements();
+		this.pParameters = new ParametersElements();
+		this.pBlock = new BlockElements();
+		this.pStatement = new StatementElements();
+		this.pPostfixExpression = new PostfixExpressionElements();
+		this.pListExpression = new ListExpressionElements();
+		this.pPropertyOperator = new PropertyOperatorElements();
+		this.pPrimaryExpression = new PrimaryExpressionElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -641,7 +655,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Program:
 	//	{Program} (LT* directives+=ProgramDirective)* LT*;
 	public ProgramElements getProgramAccess() {
-		return (pProgram != null) ? pProgram : (pProgram = new ProgramElements());
+		return pProgram;
 	}
 	
 	public ParserRule getProgramRule() {
@@ -651,7 +665,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ProgramDirective:
 	//	FunctionDefinition | Statement;
 	public ProgramDirectiveElements getProgramDirectiveAccess() {
-		return (pProgramDirective != null) ? pProgramDirective : (pProgramDirective = new ProgramDirectiveElements());
+		return pProgramDirective;
 	}
 	
 	public ParserRule getProgramDirectiveRule() {
@@ -661,7 +675,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FunctionDefinition:
 	//	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
-		return (pFunctionDefinition != null) ? pFunctionDefinition : (pFunctionDefinition = new FunctionDefinitionElements());
+		return pFunctionDefinition;
 	}
 	
 	public ParserRule getFunctionDefinitionRule() {
@@ -671,7 +685,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Attribute:
 	//	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -681,7 +695,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Parameters:
 	//	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
 	public ParametersElements getParametersAccess() {
-		return (pParameters != null) ? pParameters : (pParameters = new ParametersElements());
+		return pParameters;
 	}
 	
 	public ParserRule getParametersRule() {
@@ -691,7 +705,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Block:
 	//	{Block} "{" (LT* directives+=Statement)* LT* "}";
 	public BlockElements getBlockAccess() {
-		return (pBlock != null) ? pBlock : (pBlock = new BlockElements());
+		return pBlock;
 	}
 	
 	public ParserRule getBlockRule() {
@@ -701,7 +715,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Statement:
 	//	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
 	public StatementElements getStatementAccess() {
-		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
+		return pStatement;
 	}
 	
 	public ParserRule getStatementRule() {
@@ -712,7 +726,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
 	//	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
 	public PostfixExpressionElements getPostfixExpressionAccess() {
-		return (pPostfixExpression != null) ? pPostfixExpression : (pPostfixExpression = new PostfixExpressionElements());
+		return pPostfixExpression;
 	}
 	
 	public ParserRule getPostfixExpressionRule() {
@@ -722,7 +736,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ListExpression:
 	//	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
 	public ListExpressionElements getListExpressionAccess() {
-		return (pListExpression != null) ? pListExpression : (pListExpression = new ListExpressionElements());
+		return pListExpression;
 	}
 	
 	public ParserRule getListExpressionRule() {
@@ -732,7 +746,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//PropertyOperator:
 	//	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
 	public PropertyOperatorElements getPropertyOperatorAccess() {
-		return (pPropertyOperator != null) ? pPropertyOperator : (pPropertyOperator = new PropertyOperatorElements());
+		return pPropertyOperator;
 	}
 	
 	public ParserRule getPropertyOperatorRule() {
@@ -742,7 +756,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//PrimaryExpression:
 	//	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
-		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
+		return pPrimaryExpression;
 	}
 	
 	public ParserRule getPrimaryExpressionRule() {
@@ -752,18 +766,18 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal ID:
 	//	("a".."z" | "A".."Z")+;
 	public TerminalRule getIDRule() {
-		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
+		return tID;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal LT:
 	//	"\r" | "\n";
 	public TerminalRule getLTRule() {
-		return (tLT != null) ? tLT : (tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT"));
+		return tLT;
 	} 
 }

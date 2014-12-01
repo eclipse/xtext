@@ -17,14 +17,15 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Vis
  * An implementation of the model object '<em><b>Modifiers</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.impl.ModifiersImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.impl.ModifiersImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.impl.ModifiersImpl#isExtern <em>Extern</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.impl.ModifiersImpl#getVisibility <em>Visibility</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

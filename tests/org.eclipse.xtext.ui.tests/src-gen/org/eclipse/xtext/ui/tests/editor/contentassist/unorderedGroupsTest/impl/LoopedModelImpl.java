@@ -23,7 +23,9 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Looped Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl#getStatic <em>Static</em>}</li>
@@ -32,7 +34,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl#getFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

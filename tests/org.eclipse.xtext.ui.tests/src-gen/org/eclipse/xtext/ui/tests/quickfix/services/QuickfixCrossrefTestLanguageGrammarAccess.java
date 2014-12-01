@@ -99,18 +99,20 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	
-	private MainElements pMain;
-	private ElementElements pElement;
+	private final MainElements pMain;
+	private final ElementElements pElement;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public QuickfixCrossrefTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pMain = new MainElements();
+		this.pElement = new ElementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -143,7 +145,7 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Main:
 	//	elements+=Element*;
 	public MainElements getMainAccess() {
-		return (pMain != null) ? pMain : (pMain = new MainElements());
+		return pMain;
 	}
 	
 	public ParserRule getMainRule() {
@@ -153,7 +155,7 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 	//Element:
 	//	doc=STRING? name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}";
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {

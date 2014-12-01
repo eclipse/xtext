@@ -23,11 +23,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Sta
  * An implementation of the model object '<em><b>Block</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl.BlockImpl#getDirectives <em>Directives</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

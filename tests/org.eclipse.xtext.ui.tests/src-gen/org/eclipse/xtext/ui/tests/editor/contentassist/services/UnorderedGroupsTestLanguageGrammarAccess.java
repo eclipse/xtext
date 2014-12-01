@@ -807,26 +807,36 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	
-	private ModelElements pModel;
-	private SimpleModelElements pSimpleModel;
-	private MandatoryModelElements pMandatoryModel;
-	private LoopedModelElements pLoopedModel;
-	private GroupLoopedModelElements pGroupLoopedModel;
-	private LoopedAlternativeModelElements pLoopedAlternativeModel;
-	private Bug304681ModelElements pBug304681Model;
-	private Bug304681FeatureElements pBug304681Feature;
-	private Bug304681AttributeElements pBug304681Attribute;
-	private Bug304681ReferenceElements pBug304681Reference;
+	private final ModelElements pModel;
+	private final SimpleModelElements pSimpleModel;
+	private final MandatoryModelElements pMandatoryModel;
+	private final LoopedModelElements pLoopedModel;
+	private final GroupLoopedModelElements pGroupLoopedModel;
+	private final LoopedAlternativeModelElements pLoopedAlternativeModel;
+	private final Bug304681ModelElements pBug304681Model;
+	private final Bug304681FeatureElements pBug304681Feature;
+	private final Bug304681AttributeElements pBug304681Attribute;
+	private final Bug304681ReferenceElements pBug304681Reference;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnorderedGroupsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pSimpleModel = new SimpleModelElements();
+		this.pMandatoryModel = new MandatoryModelElements();
+		this.pLoopedModel = new LoopedModelElements();
+		this.pGroupLoopedModel = new GroupLoopedModelElements();
+		this.pLoopedAlternativeModel = new LoopedAlternativeModelElements();
+		this.pBug304681Model = new Bug304681ModelElements();
+		this.pBug304681Feature = new Bug304681FeatureElements();
+		this.pBug304681Attribute = new Bug304681AttributeElements();
+		this.pBug304681Reference = new Bug304681ReferenceElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -860,7 +870,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
 	//	fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -871,7 +881,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
 	//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
 	public SimpleModelElements getSimpleModelAccess() {
-		return (pSimpleModel != null) ? pSimpleModel : (pSimpleModel = new SimpleModelElements());
+		return pSimpleModel;
 	}
 	
 	public ParserRule getSimpleModelRule() {
@@ -882,7 +892,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
 	//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
 	public MandatoryModelElements getMandatoryModelAccess() {
-		return (pMandatoryModel != null) ? pMandatoryModel : (pMandatoryModel = new MandatoryModelElements());
+		return pMandatoryModel;
 	}
 	
 	public ParserRule getMandatoryModelRule() {
@@ -893,7 +903,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
 	//	(abstract+="abstract" | final+="final")*) "class" name=ID "{" "}";
 	public LoopedModelElements getLoopedModelAccess() {
-		return (pLoopedModel != null) ? pLoopedModel : (pLoopedModel = new LoopedModelElements());
+		return pLoopedModel;
 	}
 	
 	public ParserRule getLoopedModelRule() {
@@ -904,7 +914,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
 	//	(abstract+="abstract" | final+="final"))* "class" name=ID "{" "}";
 	public GroupLoopedModelElements getGroupLoopedModelAccess() {
-		return (pGroupLoopedModel != null) ? pGroupLoopedModel : (pGroupLoopedModel = new GroupLoopedModelElements());
+		return pGroupLoopedModel;
 	}
 	
 	public ParserRule getGroupLoopedModelRule() {
@@ -915,7 +925,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
 	//	(abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}";
 	public LoopedAlternativeModelElements getLoopedAlternativeModelAccess() {
-		return (pLoopedAlternativeModel != null) ? pLoopedAlternativeModel : (pLoopedAlternativeModel = new LoopedAlternativeModelElements());
+		return pLoopedAlternativeModel;
 	}
 	
 	public ParserRule getLoopedAlternativeModelRule() {
@@ -926,7 +936,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
 	//	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
 	public Bug304681ModelElements getBug304681ModelAccess() {
-		return (pBug304681Model != null) ? pBug304681Model : (pBug304681Model = new Bug304681ModelElements());
+		return pBug304681Model;
 	}
 	
 	public ParserRule getBug304681ModelRule() {
@@ -936,7 +946,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Bug304681Feature:
 	//	Bug304681Attribute | Bug304681Reference;
 	public Bug304681FeatureElements getBug304681FeatureAccess() {
-		return (pBug304681Feature != null) ? pBug304681Feature : (pBug304681Feature = new Bug304681FeatureElements());
+		return pBug304681Feature;
 	}
 	
 	public ParserRule getBug304681FeatureRule() {
@@ -946,7 +956,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Bug304681Attribute:
 	//	"attr" name=ID ";";
 	public Bug304681AttributeElements getBug304681AttributeAccess() {
-		return (pBug304681Attribute != null) ? pBug304681Attribute : (pBug304681Attribute = new Bug304681AttributeElements());
+		return pBug304681Attribute;
 	}
 	
 	public ParserRule getBug304681AttributeRule() {
@@ -956,7 +966,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//Bug304681Reference:
 	//	"ref" name=ID ";";
 	public Bug304681ReferenceElements getBug304681ReferenceAccess() {
-		return (pBug304681Reference != null) ? pBug304681Reference : (pBug304681Reference = new Bug304681ReferenceElements());
+		return pBug304681Reference;
 	}
 	
 	public ParserRule getBug304681ReferenceRule() {

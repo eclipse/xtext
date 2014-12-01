@@ -59,20 +59,24 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private RootElements pRoot;
-	private ChildElements pChild;
-	private TerminalRule tWS;
-	private TerminalRule tNewLine;
+	private final RootElements pRoot;
+	private final ChildElements pChild;
+	private final TerminalRule tWS;
+	private final TerminalRule tNewLine;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug377311TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRoot = new RootElements();
+		this.pChild = new ChildElements();
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tNewLine = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NewLine");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -105,7 +109,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Root:
 	//	childs+=Child*;
 	public RootElements getRootAccess() {
-		return (pRoot != null) ? pRoot : (pRoot = new RootElements());
+		return pRoot;
 	}
 	
 	public ParserRule getRootRule() {
@@ -115,7 +119,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child hidden(WS, ID):
 	//	"child" name=STRING;
 	public ChildElements getChildAccess() {
-		return (pChild != null) ? pChild : (pChild = new ChildElements());
+		return pChild;
 	}
 	
 	public ParserRule getChildRule() {
@@ -125,13 +129,13 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal WS:
 	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal NewLine:
 	//	"\r"? "\n";
 	public TerminalRule getNewLineRule() {
-		return (tNewLine != null) ? tNewLine : (tNewLine = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NewLine"));
+		return tNewLine;
 	} 
 
 	//terminal ID:

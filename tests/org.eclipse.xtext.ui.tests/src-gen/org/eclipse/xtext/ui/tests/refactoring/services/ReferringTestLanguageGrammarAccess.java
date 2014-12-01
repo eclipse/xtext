@@ -91,19 +91,22 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private MainElements pMain;
-	private ReferenceElements pReference;
-	private FQNElements pFQN;
+	private final MainElements pMain;
+	private final ReferenceElements pReference;
+	private final FQNElements pFQN;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ReferringTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pMain = new MainElements();
+		this.pReference = new ReferenceElements();
+		this.pFQN = new FQNElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -136,7 +139,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Main:
 	//	referenced+=Reference*;
 	public MainElements getMainAccess() {
-		return (pMain != null) ? pMain : (pMain = new MainElements());
+		return pMain;
 	}
 	
 	public ParserRule getMainRule() {
@@ -146,7 +149,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Reference:
 	//	"ref" referenced=[ecore::EObject|FQN];
 	public ReferenceElements getReferenceAccess() {
-		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
+		return pReference;
 	}
 	
 	public ParserRule getReferenceRule() {
@@ -156,7 +159,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//FQN:
 	//	ID ("." ID)*;
 	public FQNElements getFQNAccess() {
-		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
+		return pFQN;
 	}
 	
 	public ParserRule getFQNRule() {

@@ -191,22 +191,28 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private TConstantElements pTConstant;
-	private TStringConstantElements pTStringConstant;
-	private TIntegerConstantElements pTIntegerConstant;
-	private TBooleanConstantElements pTBooleanConstant;
-	private TAnnotationElements pTAnnotation;
+	private final ModelElements pModel;
+	private final TConstantElements pTConstant;
+	private final TStringConstantElements pTStringConstant;
+	private final TIntegerConstantElements pTIntegerConstant;
+	private final TBooleanConstantElements pTBooleanConstant;
+	private final TAnnotationElements pTAnnotation;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug288734TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pTConstant = new TConstantElements();
+		this.pTStringConstant = new TStringConstantElements();
+		this.pTIntegerConstant = new TIntegerConstantElements();
+		this.pTBooleanConstant = new TBooleanConstantElements();
+		this.pTAnnotation = new TAnnotationElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -239,7 +245,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	constants+=TConstant;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -249,7 +255,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TConstant:
 	//	TStringConstant | TIntegerConstant | TBooleanConstant;
 	public TConstantElements getTConstantAccess() {
-		return (pTConstant != null) ? pTConstant : (pTConstant = new TConstantElements());
+		return pTConstant;
 	}
 	
 	public ParserRule getTConstantRule() {
@@ -259,7 +265,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TStringConstant:
 	//	annotations+=TAnnotation* "constant" "string" name=ID;
 	public TStringConstantElements getTStringConstantAccess() {
-		return (pTStringConstant != null) ? pTStringConstant : (pTStringConstant = new TStringConstantElements());
+		return pTStringConstant;
 	}
 	
 	public ParserRule getTStringConstantRule() {
@@ -269,7 +275,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TIntegerConstant:
 	//	annotations+=TAnnotation* "constant" "integer" name=ID;
 	public TIntegerConstantElements getTIntegerConstantAccess() {
-		return (pTIntegerConstant != null) ? pTIntegerConstant : (pTIntegerConstant = new TIntegerConstantElements());
+		return pTIntegerConstant;
 	}
 	
 	public ParserRule getTIntegerConstantRule() {
@@ -279,7 +285,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TBooleanConstant:
 	//	annotations+=TAnnotation* "constant" "boolean" name=ID;
 	public TBooleanConstantElements getTBooleanConstantAccess() {
-		return (pTBooleanConstant != null) ? pTBooleanConstant : (pTBooleanConstant = new TBooleanConstantElements());
+		return pTBooleanConstant;
 	}
 	
 	public ParserRule getTBooleanConstantRule() {
@@ -289,7 +295,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TAnnotation:
 	//	"@desc" description=STRING;
 	public TAnnotationElements getTAnnotationAccess() {
-		return (pTAnnotation != null) ? pTAnnotation : (pTAnnotation = new TAnnotationElements());
+		return pTAnnotation;
 	}
 	
 	public ParserRule getTAnnotationRule() {

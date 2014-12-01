@@ -111,19 +111,22 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
-	private MainElements pMain;
-	private ImportElements pImport;
-	private TypeElements pType;
+	private final MainElements pMain;
+	private final ImportElements pImport;
+	private final TypeElements pType;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ImportUriUiTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pMain = new MainElements();
+		this.pImport = new ImportElements();
+		this.pType = new TypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -156,7 +159,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Main:
 	//	imports+=Import* types+=Type*;
 	public MainElements getMainAccess() {
-		return (pMain != null) ? pMain : (pMain = new MainElements());
+		return pMain;
 	}
 	
 	public ParserRule getMainRule() {
@@ -166,7 +169,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Import:
 	//	"import" importURI=STRING;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -176,7 +179,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	//Type:
 	//	"type" name=ID "extends" extends=[Type];
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {

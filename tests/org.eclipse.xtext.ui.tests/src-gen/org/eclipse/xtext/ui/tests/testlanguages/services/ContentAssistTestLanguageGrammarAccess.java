@@ -167,21 +167,26 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
-	private StartElements pStart;
-	private AbstractRuleElements pAbstractRule;
-	private FirstAbstractRuleChildElements pFirstAbstractRuleChild;
-	private SecondAbstractRuleChildElements pSecondAbstractRuleChild;
-	private AbstractRuleCallElements pAbstractRuleCall;
+	private final StartElements pStart;
+	private final AbstractRuleElements pAbstractRule;
+	private final FirstAbstractRuleChildElements pFirstAbstractRuleChild;
+	private final SecondAbstractRuleChildElements pSecondAbstractRuleChild;
+	private final AbstractRuleCallElements pAbstractRuleCall;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ContentAssistTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pStart = new StartElements();
+		this.pAbstractRule = new AbstractRuleElements();
+		this.pFirstAbstractRuleChild = new FirstAbstractRuleChildElements();
+		this.pSecondAbstractRuleChild = new SecondAbstractRuleChildElements();
+		this.pAbstractRuleCall = new AbstractRuleCallElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -214,7 +219,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//Start:
 	//	"abstract rules" rules+=AbstractRule+ "end";
 	public StartElements getStartAccess() {
-		return (pStart != null) ? pStart : (pStart = new StartElements());
+		return pStart;
 	}
 	
 	public ParserRule getStartRule() {
@@ -224,7 +229,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AbstractRule:
 	//	FirstAbstractRuleChild | SecondAbstractRuleChild;
 	public AbstractRuleElements getAbstractRuleAccess() {
-		return (pAbstractRule != null) ? pAbstractRule : (pAbstractRule = new AbstractRuleElements());
+		return pAbstractRule;
 	}
 	
 	public ParserRule getAbstractRuleRule() {
@@ -234,7 +239,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//FirstAbstractRuleChild:
 	//	name=ID "(" elements+=AbstractRule+ ")" ";";
 	public FirstAbstractRuleChildElements getFirstAbstractRuleChildAccess() {
-		return (pFirstAbstractRuleChild != null) ? pFirstAbstractRuleChild : (pFirstAbstractRuleChild = new FirstAbstractRuleChildElements());
+		return pFirstAbstractRuleChild;
 	}
 	
 	public ParserRule getFirstAbstractRuleChildRule() {
@@ -244,7 +249,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//SecondAbstractRuleChild:
 	//	name=ID "rule" ":" rule=AbstractRuleCall ";";
 	public SecondAbstractRuleChildElements getSecondAbstractRuleChildAccess() {
-		return (pSecondAbstractRuleChild != null) ? pSecondAbstractRuleChild : (pSecondAbstractRuleChild = new SecondAbstractRuleChildElements());
+		return pSecondAbstractRuleChild;
 	}
 	
 	public ParserRule getSecondAbstractRuleChildRule() {
@@ -254,7 +259,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//AbstractRuleCall:
 	//	rule=[AbstractRule];
 	public AbstractRuleCallElements getAbstractRuleCallAccess() {
-		return (pAbstractRuleCall != null) ? pAbstractRuleCall : (pAbstractRuleCall = new AbstractRuleCallElements());
+		return pAbstractRuleCall;
 	}
 	
 	public ParserRule getAbstractRuleCallRule() {

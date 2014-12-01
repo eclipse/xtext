@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Reference#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage#getReference()
  * @model

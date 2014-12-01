@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.NumericAttributeWhereEntry#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Bug287941TestLanguagePackage#getNumericAttributeWhereEntry()
  * @model

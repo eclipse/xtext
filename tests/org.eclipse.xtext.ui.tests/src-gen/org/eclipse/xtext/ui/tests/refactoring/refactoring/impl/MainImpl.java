@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.impl.MainImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

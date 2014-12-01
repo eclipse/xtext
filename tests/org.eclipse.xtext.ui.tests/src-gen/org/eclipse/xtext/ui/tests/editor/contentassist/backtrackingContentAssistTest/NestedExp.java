@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssis
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.NestedExp#getSource <em>Source</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.BacktrackingContentAssistTestPackage#getNestedExp()
  * @model

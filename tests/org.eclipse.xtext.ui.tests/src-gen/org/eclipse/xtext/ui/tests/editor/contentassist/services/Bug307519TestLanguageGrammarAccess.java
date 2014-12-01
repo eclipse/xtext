@@ -123,20 +123,24 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getT2T2Keyword_1_0() { return cT2T2Keyword_1_0; }
 	}
 	
-	private ModelElements pModel;
-	private EnumTElements unknownRuleEnumT;
-	private Elem1Elements pElem1;
-	private Elem2Elements pElem2;
+	private final ModelElements pModel;
+	private final EnumTElements unknownRuleEnumT;
+	private final Elem1Elements pElem1;
+	private final Elem2Elements pElem2;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug307519TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.unknownRuleEnumT = new EnumTElements();
+		this.pElem1 = new Elem1Elements();
+		this.pElem2 = new Elem2Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -169,7 +173,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	(e1+=Elem1 | e2+=Elem2)+;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -179,7 +183,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum EnumT:
 	//	T1 | T2;
 	public EnumTElements getEnumTAccess() {
-		return (unknownRuleEnumT != null) ? unknownRuleEnumT : (unknownRuleEnumT = new EnumTElements());
+		return unknownRuleEnumT;
 	}
 	
 	public EnumRule getEnumTRule() {
@@ -189,7 +193,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Elem1:
 	//	value=EnumT;
 	public Elem1Elements getElem1Access() {
-		return (pElem1 != null) ? pElem1 : (pElem1 = new Elem1Elements());
+		return pElem1;
 	}
 	
 	public ParserRule getElem1Rule() {
@@ -199,7 +203,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Elem2:
 	//	value=EnumT "foo" "%" "$";
 	public Elem2Elements getElem2Access() {
-		return (pElem2 != null) ? pElem2 : (pElem2 = new Elem2Elements());
+		return pElem2;
 	}
 	
 	public ParserRule getElem2Rule() {

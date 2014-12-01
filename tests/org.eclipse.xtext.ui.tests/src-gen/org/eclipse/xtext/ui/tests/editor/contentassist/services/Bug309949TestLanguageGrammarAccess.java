@@ -758,28 +758,40 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private Error_1Elements pError_1;
-	private Operation_1Elements pOperation_1;
-	private Error_2Elements pError_2;
-	private Operation_2Elements pOperation_2;
-	private Error_3Elements pError_3;
-	private Operation_3Elements pOperation_3;
-	private Error_4Elements pError_4;
-	private Operation_4Elements pOperation_4;
-	private Error_5Elements pError_5;
-	private Operation_5Elements pOperation_5;
-	private AnnotationElements pAnnotation;
+	private final ModelElements pModel;
+	private final Error_1Elements pError_1;
+	private final Operation_1Elements pOperation_1;
+	private final Error_2Elements pError_2;
+	private final Operation_2Elements pOperation_2;
+	private final Error_3Elements pError_3;
+	private final Operation_3Elements pOperation_3;
+	private final Error_4Elements pError_4;
+	private final Operation_4Elements pOperation_4;
+	private final Error_5Elements pError_5;
+	private final Operation_5Elements pOperation_5;
+	private final AnnotationElements pAnnotation;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug309949TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pError_1 = new Error_1Elements();
+		this.pOperation_1 = new Operation_1Elements();
+		this.pError_2 = new Error_2Elements();
+		this.pOperation_2 = new Operation_2Elements();
+		this.pError_3 = new Error_3Elements();
+		this.pOperation_3 = new Operation_3Elements();
+		this.pError_4 = new Error_4Elements();
+		this.pOperation_4 = new Operation_4Elements();
+		this.pError_5 = new Error_5Elements();
+		this.pOperation_5 = new Operation_5Elements();
+		this.pAnnotation = new AnnotationElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -817,7 +829,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5*
 	//	operations+=Operation_5* "}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}");
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -827,7 +839,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Error_1 returns Error:
 	//	annotations+=Annotation* "error" name=ID;
 	public Error_1Elements getError_1Access() {
-		return (pError_1 != null) ? pError_1 : (pError_1 = new Error_1Elements());
+		return pError_1;
 	}
 	
 	public ParserRule getError_1Rule() {
@@ -837,7 +849,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Operation_1 returns Operation:
 	//	annotations+=Annotation* "operation" name=ID;
 	public Operation_1Elements getOperation_1Access() {
-		return (pOperation_1 != null) ? pOperation_1 : (pOperation_1 = new Operation_1Elements());
+		return pOperation_1;
 	}
 	
 	public ParserRule getOperation_1Rule() {
@@ -847,7 +859,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Error_2 returns Error:
 	//	annotations+=Annotation+ "error" name=ID;
 	public Error_2Elements getError_2Access() {
-		return (pError_2 != null) ? pError_2 : (pError_2 = new Error_2Elements());
+		return pError_2;
 	}
 	
 	public ParserRule getError_2Rule() {
@@ -857,7 +869,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Operation_2 returns Operation:
 	//	annotations+=Annotation+ "operation" name=ID;
 	public Operation_2Elements getOperation_2Access() {
-		return (pOperation_2 != null) ? pOperation_2 : (pOperation_2 = new Operation_2Elements());
+		return pOperation_2;
 	}
 	
 	public ParserRule getOperation_2Rule() {
@@ -867,7 +879,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Error_3 returns Error:
 	//	annotations+=Annotation? "error" name=ID;
 	public Error_3Elements getError_3Access() {
-		return (pError_3 != null) ? pError_3 : (pError_3 = new Error_3Elements());
+		return pError_3;
 	}
 	
 	public ParserRule getError_3Rule() {
@@ -877,7 +889,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Operation_3 returns Operation:
 	//	annotations+=Annotation? "operation" name=ID;
 	public Operation_3Elements getOperation_3Access() {
-		return (pOperation_3 != null) ? pOperation_3 : (pOperation_3 = new Operation_3Elements());
+		return pOperation_3;
 	}
 	
 	public ParserRule getOperation_3Rule() {
@@ -887,7 +899,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Error_4 returns Error:
 	//	annotations+=Annotation "error" name=ID;
 	public Error_4Elements getError_4Access() {
-		return (pError_4 != null) ? pError_4 : (pError_4 = new Error_4Elements());
+		return pError_4;
 	}
 	
 	public ParserRule getError_4Rule() {
@@ -897,7 +909,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Operation_4 returns Operation:
 	//	annotations+=Annotation "operation" name=ID;
 	public Operation_4Elements getOperation_4Access() {
-		return (pOperation_4 != null) ? pOperation_4 : (pOperation_4 = new Operation_4Elements());
+		return pOperation_4;
 	}
 	
 	public ParserRule getOperation_4Rule() {
@@ -907,7 +919,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Error_5 returns Error:
 	//	"error" name=ID;
 	public Error_5Elements getError_5Access() {
-		return (pError_5 != null) ? pError_5 : (pError_5 = new Error_5Elements());
+		return pError_5;
 	}
 	
 	public ParserRule getError_5Rule() {
@@ -917,7 +929,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Operation_5 returns Operation:
 	//	"operation" name=ID;
 	public Operation_5Elements getOperation_5Access() {
-		return (pOperation_5 != null) ? pOperation_5 : (pOperation_5 = new Operation_5Elements());
+		return pOperation_5;
 	}
 	
 	public ParserRule getOperation_5Rule() {
@@ -927,7 +939,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Annotation:
 	//	"@uuid" name=ID;
 	public AnnotationElements getAnnotationAccess() {
-		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
+		return pAnnotation;
 	}
 	
 	public ParserRule getAnnotationRule() {
