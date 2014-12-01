@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -49,28 +50,28 @@ public class XtextResourceSet extends ResourceSetImpl {
 		return Collections.unmodifiableMap(normalizationMap);
 	}
 	
-	private volatile int outdatedStamp = 0;
+	private volatile AtomicInteger outdatedStamp = new AtomicInteger(0);
 	private volatile int modificationStamp = 0;
 	
 	/**
 	 * @since 2.8
 	 */
 	public void markOutdated() {
-		this.outdatedStamp++;
+		this.outdatedStamp.incrementAndGet();
 	}
 	
 	/**
 	 * @since 2.8
 	 */
 	public void markSynced() {
-		this.modificationStamp = outdatedStamp;
+		this.modificationStamp = outdatedStamp.get();
 	}
 	
 	/**
 	 * @since 2.8
 	 */
 	public boolean isOutdated() {
-		return outdatedStamp != modificationStamp;
+		return outdatedStamp.get() != modificationStamp;
 	}
 	
 	/**
