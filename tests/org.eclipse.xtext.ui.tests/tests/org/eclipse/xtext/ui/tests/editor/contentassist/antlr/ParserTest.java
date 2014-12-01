@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 import java.util.Collection;
 
 import org.antlr.runtime.RecognitionException;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.tests.ui.contentassist.antlr.XtextGrammarUiTestLanguageParser;
 
 /**
