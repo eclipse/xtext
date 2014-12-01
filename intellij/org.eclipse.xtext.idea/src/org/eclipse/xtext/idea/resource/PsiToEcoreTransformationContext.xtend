@@ -51,6 +51,9 @@ class PsiToEcoreTransformationContext {
 
 	@Accessors(PUBLIC_GETTER)
 	EObject current
+	
+	@Accessors
+	RuleCall actionRuleCall
 
 	@Accessors(PUBLIC_GETTER)
 	DatatypeRuleToken datatypeRuleToken
@@ -129,16 +132,15 @@ class PsiToEcoreTransformationContext {
 		currentNode = newCompositeNode(currentNode)
 	}
 
-	def newCompositeNodeAsParentOfCurrentNode(CompositeElement compositeElement, Action action) {
-		currentNode = compositeElement.newCompositeNodeAsParentOf(action, currentNode.lookAhead, currentNode)
-		associateWithSemanticElement(currentNode)
-	}
-
-	def forceCreateModelElement(Action action) {
-		current = semanticModelBuilder.create(action.type.classifier)
-	}
-
 	def ensureModelElementCreated(EObject grammarElement) {
+		if (grammarElement == null) {
+			return false
+		}
+		if (grammarElement instanceof Action) {
+			current = semanticModelBuilder.create(grammarElement.type.classifier)
+			associateWithSemanticElement(currentNode)
+			return true
+		}
 		if (!grammarElement.assigned) {
 			return false
 		}
@@ -163,11 +165,10 @@ class PsiToEcoreTransformationContext {
 
 	protected def void mergeDatatypeRuleToken(LeafElement it) {
 		if (datatypeRuleToken != null) {
-			datatypeRuleToken.merge(
-				new AntlrDatatypeRuleToken => [ token |
-					token.text = text
-					token.startOffset = startOffset
-				])
+			datatypeRuleToken.merge(new AntlrDatatypeRuleToken => [ token |
+				token.text = text
+				token.startOffset = startOffset
+			])
 		}
 	}
 
@@ -178,6 +179,10 @@ class PsiToEcoreTransformationContext {
 	}
 
 	def void assign(Object value, EObject grammarElement, String ruleName) {
+		current.assign(value, grammarElement, ruleName)
+	}
+
+	protected def void assign(EObject parent, Object value, EObject grammarElement, String ruleName) {
 		if (grammarElement.assigned) {
 			val node = switch grammarElement {
 				RuleCall case grammarElement.rule instanceof EnumRule || grammarElement.rule instanceof ParserRule:
@@ -185,7 +190,7 @@ class PsiToEcoreTransformationContext {
 				default:
 					lastConsumedNode
 			}
-			current.assign(
+			parent.assign(
 				grammarElement.containingAssignment,
 				value,
 				ruleName,

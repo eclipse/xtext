@@ -32,7 +32,9 @@ import org.eclipse.xtext.parser.impl.DatatypeRuleToken;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -134,10 +136,58 @@ public class PsiToEcoreTransformator implements IParser {
   }
   
   protected void _transform(final CompositeElement it, final Action action, @Extension final PsiToEcoreTransformationContext transformationContext) {
-    final EObject value = transformationContext.getCurrent();
-    transformationContext.forceCreateModelElement(action);
-    transformationContext.assign(value, action);
-    transformationContext.newCompositeNodeAsParentOfCurrentNode(it, action);
+    final PsiToEcoreTransformationContext actionTransformationContext = transformationContext.branch();
+    this.transformActionLeftElement(it, action, actionTransformationContext);
+    transformationContext.sync(actionTransformationContext);
+    final RuleCall actionRuleCall = actionTransformationContext.getActionRuleCall();
+    boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(actionRuleCall);
+    if (_ensureModelElementCreated) {
+      EObject _current = actionTransformationContext.getCurrent();
+      AbstractRule _rule = actionRuleCall.getRule();
+      String _name = _rule.getName();
+      transformationContext.assign(_current, actionRuleCall, _name);
+    }
+    transformationContext.merge(actionTransformationContext);
+    transformationContext.compress();
+  }
+  
+  protected void _transformActionLeftElement(final ASTNode it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    throw new IllegalStateException(("Unexpected ast node: " + it));
+  }
+  
+  protected void _transformActionLeftElement(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    final IElementType elementType = it.getElementType();
+    if ((elementType instanceof IGrammarAwareElementType)) {
+      EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
+      this.transformActionLeftElement(it, _grammarElement, transformationContext);
+    }
+  }
+  
+  protected void _transformActionLeftElement(final CompositeElement it, final EObject grammarElement, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    throw new IllegalStateException(((("Unexpected grammar element: " + grammarElement) + ", for node: ") + it));
+  }
+  
+  protected void _transformActionLeftElement(final CompositeElement it, final Action action, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    transformationContext.newCompositeNode(it);
+    transformationContext.ensureModelElementCreated(action);
+    final ASTNode[] children = it.getChildren(null);
+    final ASTNode leftElement = IterableExtensions.<ASTNode>head(((Iterable<ASTNode>)Conversions.doWrapArray(children)));
+    final PsiToEcoreTransformationContext leftElementTransformationContext = transformationContext.branch();
+    this.transformActionLeftElement(leftElement, leftElementTransformationContext);
+    PsiToEcoreTransformationContext _compress = leftElementTransformationContext.compress();
+    transformationContext.sync(_compress);
+    EObject _current = leftElementTransformationContext.getCurrent();
+    transformationContext.assign(_current, action);
+    RuleCall _actionRuleCall = leftElementTransformationContext.getActionRuleCall();
+    transformationContext.setActionRuleCall(_actionRuleCall);
+    Iterable<ASTNode> _tail = IterableExtensions.<ASTNode>tail(((Iterable<ASTNode>)Conversions.doWrapArray(children)));
+    this.transformChildren(_tail, transformationContext);
+  }
+  
+  protected void _transformActionLeftElement(final CompositeElement it, final RuleCall ruleCall, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    transformationContext.newCompositeNode(it);
+    transformationContext.setActionRuleCall(ruleCall);
+    this.transformChildren(it, transformationContext);
   }
   
   protected void _transform(final CompositeElement it, final RuleCall ruleCall, @Extension final PsiToEcoreTransformationContext transformationContext) {
@@ -212,8 +262,16 @@ public class PsiToEcoreTransformator implements IParser {
   protected PsiToEcoreTransformationContext transformChildren(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     PsiToEcoreTransformationContext _xblockexpression = null;
     {
-      ASTNode[] _children = it.getChildren(null);
-      for (final ASTNode child : _children) {
+      final ASTNode[] children = it.getChildren(null);
+      _xblockexpression = this.transformChildren(((Iterable<ASTNode>)Conversions.doWrapArray(children)), transformationContext);
+    }
+    return _xblockexpression;
+  }
+  
+  protected PsiToEcoreTransformationContext transformChildren(final Iterable<ASTNode> children, final PsiToEcoreTransformationContext transformationContext) {
+    PsiToEcoreTransformationContext _xblockexpression = null;
+    {
+      for (final ASTNode child : children) {
         this.transform(child, transformationContext);
       }
       _xblockexpression = transformationContext;
@@ -281,6 +339,35 @@ public class PsiToEcoreTransformator implements IParser {
     } else if (it != null
          && action != null) {
       _transform(it, action, transformationContext);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, action, transformationContext).toString());
+    }
+  }
+  
+  protected void transformActionLeftElement(final ASTNode it, final PsiToEcoreTransformationContext transformationContext) {
+    if (it instanceof CompositeElement) {
+      _transformActionLeftElement((CompositeElement)it, transformationContext);
+      return;
+    } else if (it != null) {
+      _transformActionLeftElement(it, transformationContext);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, transformationContext).toString());
+    }
+  }
+  
+  protected void transformActionLeftElement(final CompositeElement it, final EObject action, final PsiToEcoreTransformationContext transformationContext) {
+    if (action instanceof Action) {
+      _transformActionLeftElement(it, (Action)action, transformationContext);
+      return;
+    } else if (action instanceof RuleCall) {
+      _transformActionLeftElement(it, (RuleCall)action, transformationContext);
+      return;
+    } else if (action != null) {
+      _transformActionLeftElement(it, action, transformationContext);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

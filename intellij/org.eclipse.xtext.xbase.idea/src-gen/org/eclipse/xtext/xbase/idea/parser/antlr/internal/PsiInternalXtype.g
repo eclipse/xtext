@@ -43,9 +43,9 @@ protected String getFirstRuleName() {
 
 //Entry rule entryRuleJvmTypeReference
 entryRuleJvmTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmTypeReferenceElementType()); }
 	ruleJvmTypeReference
-	{ doneComposite(elementTypeProvider.getJvmTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -55,11 +55,11 @@ ruleJvmTypeReference:
 	(
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getJvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0ElementType());
 			}
 			ruleJvmParameterizedTypeReference
 			{
-				doneComposite(elementTypeProvider.getJvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0ElementType());
+				doneComposite();
 			}
 			(
 				((
@@ -71,36 +71,36 @@ ruleJvmTypeReference:
 				(
 					(
 						{
-							markComposite();
-							doneComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+							precedeComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1ElementType());
 					}
 					ruleArrayBrackets
 					{
-						doneComposite(elementTypeProvider.getJvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1ElementType());
+						doneComposite();
 					}
 				)
 			)*
 		)
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getJvmTypeReference_XFunctionTypeRefParserRuleCall_1ElementType());
 		}
 		ruleXFunctionTypeRef
 		{
-			doneComposite(elementTypeProvider.getJvmTypeReference_XFunctionTypeRefParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleArrayBrackets
 entryRuleArrayBrackets:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getArrayBracketsElementType()); }
 	ruleArrayBrackets
-	{ doneComposite(elementTypeProvider.getArrayBracketsElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -127,9 +127,9 @@ ruleArrayBrackets:
 
 //Entry rule entryRuleXFunctionTypeRef
 entryRuleXFunctionTypeRef:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXFunctionTypeRefElementType()); }
 	ruleXFunctionTypeRef
-	{ doneComposite(elementTypeProvider.getXFunctionTypeRefElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -149,11 +149,11 @@ ruleXFunctionTypeRef:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0ElementType());
 						}
 						lv_paramTypes_1_0=ruleJvmTypeReference
 						{
-							doneComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -168,11 +168,11 @@ ruleXFunctionTypeRef:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0ElementType());
 							}
 							lv_paramTypes_3_0=ruleJvmTypeReference
 							{
-								doneComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -196,11 +196,11 @@ ruleXFunctionTypeRef:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getXFunctionTypeRef_ReturnTypeJvmTypeReferenceParserRuleCall_2_0ElementType());
 				}
 				lv_returnType_6_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getXFunctionTypeRef_ReturnTypeJvmTypeReferenceParserRuleCall_2_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -209,9 +209,9 @@ ruleXFunctionTypeRef:
 
 //Entry rule entryRuleJvmParameterizedTypeReference
 entryRuleJvmParameterizedTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); }
 	ruleJvmParameterizedTypeReference
-	{ doneComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -222,11 +222,11 @@ ruleJvmParameterizedTypeReference:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType());
 				}
 				ruleQualifiedName
 				{
-					doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -244,11 +244,11 @@ ruleJvmParameterizedTypeReference:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
 					}
 					lv_arguments_2_0=ruleJvmArgumentTypeReference
 					{
-						doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -263,11 +263,11 @@ ruleJvmParameterizedTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
 						}
 						lv_arguments_4_0=ruleJvmArgumentTypeReference
 						{
-							doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -290,8 +290,8 @@ ruleJvmParameterizedTypeReference:
 					(
 						(
 							{
-								markComposite();
-								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+								precedeComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+								doneComposite();
 							}
 						)
 						{
@@ -306,11 +306,11 @@ ruleJvmParameterizedTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType());
 						}
 						ruleValidID
 						{
-							doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -328,11 +328,11 @@ ruleJvmParameterizedTypeReference:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0ElementType());
 							}
 							lv_arguments_10_0=ruleJvmArgumentTypeReference
 							{
-								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -347,11 +347,11 @@ ruleJvmParameterizedTypeReference:
 						(
 							(
 								{
-									markComposite();
+									markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0ElementType());
 								}
 								lv_arguments_12_0=ruleJvmArgumentTypeReference
 								{
-									doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0ElementType());
+									doneComposite();
 								}
 							)
 						)
@@ -371,9 +371,9 @@ ruleJvmParameterizedTypeReference:
 
 //Entry rule entryRuleJvmArgumentTypeReference
 entryRuleJvmArgumentTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); }
 	ruleJvmArgumentTypeReference
-	{ doneComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -382,28 +382,28 @@ finally {
 ruleJvmArgumentTypeReference:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
 		}
 		ruleJvmTypeReference
 		{
-			doneComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		    |
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmWildcardTypeReferenceParserRuleCall_1ElementType());
 		}
 		ruleJvmWildcardTypeReference
 		{
-			doneComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmWildcardTypeReferenceParserRuleCall_1ElementType());
+			doneComposite();
 		}
 	)
 ;
 
 //Entry rule entryRuleJvmWildcardTypeReference
 entryRuleJvmWildcardTypeReference:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); }
 	ruleJvmWildcardTypeReference
-	{ doneComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -413,8 +413,8 @@ ruleJvmWildcardTypeReference:
 	(
 		(
 			{
-				markComposite();
-				doneComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+				precedeComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+				doneComposite();
 			}
 		)
 		{
@@ -429,22 +429,22 @@ ruleJvmWildcardTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundParserRuleCall_2_0_0_0ElementType());
 						}
 						lv_constraints_2_0=ruleJvmUpperBound
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundParserRuleCall_2_0_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0ElementType());
 						}
 						lv_constraints_3_0=ruleJvmUpperBoundAnded
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)*
@@ -454,22 +454,22 @@ ruleJvmWildcardTypeReference:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundParserRuleCall_2_1_0_0ElementType());
 						}
 						lv_constraints_4_0=ruleJvmLowerBound
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundParserRuleCall_2_1_0_0ElementType());
+							doneComposite();
 						}
 					)
 				)
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0ElementType());
 						}
 						lv_constraints_5_0=ruleJvmLowerBoundAnded
 						{
-							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0ElementType());
+							doneComposite();
 						}
 					)
 				)*
@@ -480,9 +480,9 @@ ruleJvmWildcardTypeReference:
 
 //Entry rule entryRuleJvmUpperBound
 entryRuleJvmUpperBound:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmUpperBoundElementType()); }
 	ruleJvmUpperBound
-	{ doneComposite(elementTypeProvider.getJvmUpperBoundElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -500,11 +500,11 @@ ruleJvmUpperBound:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmUpperBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmUpperBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -513,9 +513,9 @@ ruleJvmUpperBound:
 
 //Entry rule entryRuleJvmUpperBoundAnded
 entryRuleJvmUpperBoundAnded:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); }
 	ruleJvmUpperBoundAnded
-	{ doneComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -533,11 +533,11 @@ ruleJvmUpperBoundAnded:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmUpperBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmUpperBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -546,9 +546,9 @@ ruleJvmUpperBoundAnded:
 
 //Entry rule entryRuleJvmLowerBound
 entryRuleJvmLowerBound:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmLowerBoundElementType()); }
 	ruleJvmLowerBound
-	{ doneComposite(elementTypeProvider.getJvmLowerBoundElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -566,11 +566,11 @@ ruleJvmLowerBound:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmLowerBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmLowerBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -579,9 +579,9 @@ ruleJvmLowerBound:
 
 //Entry rule entryRuleJvmLowerBoundAnded
 entryRuleJvmLowerBoundAnded:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); }
 	ruleJvmLowerBoundAnded
-	{ doneComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -599,11 +599,11 @@ ruleJvmLowerBoundAnded:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmLowerBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
 				}
 				lv_typeReference_1_0=ruleJvmTypeReference
 				{
-					doneComposite(elementTypeProvider.getJvmLowerBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -612,9 +612,9 @@ ruleJvmLowerBoundAnded:
 
 //Entry rule entryRuleJvmTypeParameter
 entryRuleJvmTypeParameter:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getJvmTypeParameterElementType()); }
 	ruleJvmTypeParameter
-	{ doneComposite(elementTypeProvider.getJvmTypeParameterElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -625,11 +625,11 @@ ruleJvmTypeParameter:
 		(
 			(
 				{
-					markComposite();
+					markComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
 				}
 				lv_name_0_0=ruleValidID
 				{
-					doneComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
+					doneComposite();
 				}
 			)
 		)
@@ -637,22 +637,22 @@ ruleJvmTypeParameter:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
 					}
 					lv_constraints_1_0=ruleJvmUpperBound
 					{
-						doneComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
+						doneComposite();
 					}
 				)
 			)
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
 					}
 					lv_constraints_2_0=ruleJvmUpperBoundAnded
 					{
-						doneComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)*
@@ -662,9 +662,9 @@ ruleJvmTypeParameter:
 
 //Entry rule entryRuleQualifiedName
 entryRuleQualifiedName:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getQualifiedNameElementType()); }
 	ruleQualifiedName
-	{ doneComposite(elementTypeProvider.getQualifiedNameElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -673,11 +673,11 @@ finally {
 ruleQualifiedName:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
 		}
 		ruleValidID
 		{
-			doneComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		(
 			{
@@ -688,11 +688,11 @@ ruleQualifiedName:
 				doneLeaf(kw, elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
 			}
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_1_1ElementType());
 			}
 			ruleValidID
 			{
-				doneComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_1_1ElementType());
+				doneComposite();
 			}
 		)*
 	)
@@ -700,9 +700,9 @@ ruleQualifiedName:
 
 //Entry rule entryRuleQualifiedNameWithWildcard
 entryRuleQualifiedNameWithWildcard:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); }
 	ruleQualifiedNameWithWildcard
-	{ doneComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -711,11 +711,11 @@ finally {
 ruleQualifiedNameWithWildcard:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
 		}
 		ruleQualifiedName
 		{
-			doneComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		{
 			markLeaf();
@@ -736,9 +736,9 @@ ruleQualifiedNameWithWildcard:
 
 //Entry rule entryRuleValidID
 entryRuleValidID:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getValidIDElementType()); }
 	ruleValidID
-	{ doneComposite(elementTypeProvider.getValidIDElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -756,9 +756,9 @@ ruleValidID:
 
 //Entry rule entryRuleXImportSection
 entryRuleXImportSection:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXImportSectionElementType()); }
 	ruleXImportSection
-	{ doneComposite(elementTypeProvider.getXImportSectionElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -768,11 +768,11 @@ ruleXImportSection:
 	(
 		(
 			{
-				markComposite();
+				markComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
 			}
 			lv_importDeclarations_0_0=ruleXImportDeclaration
 			{
-				doneComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
+				doneComposite();
 			}
 		)
 	)+
@@ -780,9 +780,9 @@ ruleXImportSection:
 
 //Entry rule entryRuleXImportDeclaration
 entryRuleXImportDeclaration:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getXImportDeclarationElementType()); }
 	ruleXImportDeclaration
-	{ doneComposite(elementTypeProvider.getXImportDeclarationElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -824,11 +824,11 @@ ruleXImportDeclaration:
 				(
 					(
 						{
-							markComposite();
+							markComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType());
 						}
 						ruleQualifiedNameInStaticImport
 						{
-							doneComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType());
+							doneComposite();
 						}
 					)
 				)
@@ -848,11 +848,11 @@ ruleXImportDeclaration:
 					(
 						(
 							{
-								markComposite();
+								markComposite(elementTypeProvider.getXImportDeclaration_MemberNameValidIDParserRuleCall_1_0_3_1_0ElementType());
 							}
 							lv_memberName_5_0=ruleValidID
 							{
-								doneComposite(elementTypeProvider.getXImportDeclaration_MemberNameValidIDParserRuleCall_1_0_3_1_0ElementType());
+								doneComposite();
 							}
 						)
 					)
@@ -862,11 +862,11 @@ ruleXImportDeclaration:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType());
 					}
 					ruleQualifiedName
 					{
-						doneComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -874,11 +874,11 @@ ruleXImportDeclaration:
 			(
 				(
 					{
-						markComposite();
+						markComposite(elementTypeProvider.getXImportDeclaration_ImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0ElementType());
 					}
 					lv_importedNamespace_7_0=ruleQualifiedNameWithWildcard
 					{
-						doneComposite(elementTypeProvider.getXImportDeclaration_ImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0ElementType());
+						doneComposite();
 					}
 				)
 			)
@@ -897,9 +897,9 @@ ruleXImportDeclaration:
 
 //Entry rule entryRuleQualifiedNameInStaticImport
 entryRuleQualifiedNameInStaticImport:
-	{ markComposite(); }
+	{ markComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); }
 	ruleQualifiedNameInStaticImport
-	{ doneComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); }
+	{ doneComposite(); }
 	EOF;
 finally {
 }
@@ -908,11 +908,11 @@ finally {
 ruleQualifiedNameInStaticImport:
 	(
 		{
-			markComposite();
+			markComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());
 		}
 		ruleValidID
 		{
-			doneComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());
+			doneComposite();
 		}
 		{
 			markLeaf();

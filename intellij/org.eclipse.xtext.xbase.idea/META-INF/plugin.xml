@@ -1,0 +1,54 @@
+<idea-plugin version="2">
+	<id>org.eclipse.xtext.xbase.idea</id>
+	<name>Xbase Support</name>
+	<description>
+      This plugin enables smart editing of Xbase files.
+	</description>
+	<version>1.0.0</version>
+	<vendor>My Company</vendor>
+
+	<idea-version since-build="131"/>
+	<depends optional="true">org.eclipse.xtext.idea</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<buildProcess.parametersProvider implementation="org.eclipse.xtext.xbase.idea.server.XbaseBuildProcessParametersProvider"/>
+		
+		<java.elementFinder implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.XbaseJvmTypesElementFinder"/>
+		<java.shortNamesCache implementation="org.eclipse.xtext.xbase.idea.lang.types.XbaseJvmTypesShortNamesCache"/>
+
+		<stubIndex implementation="org.eclipse.xtext.psi.stubindex.ExportedObjectQualifiedNameIndex"/>
+		<stubIndex implementation="org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex"/>
+
+		<psi.treeChangePreprocessor implementation="org.eclipse.xtext.xbase.idea.lang.psi.XbaseCodeBlockModificationListener"/>
+
+		<referencesSearch implementation="org.eclipse.xtext.xbase.idea.lang.types.psi.search.XbaseJvmElementsReferencesSearch"/>
+		<targetElementEvaluator language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.jvmmodel.codeInsight.PsiJvmTargetElementEvaluator"/>
+
+		<fileTypeFactory implementation="org.eclipse.xtext.xbase.idea.lang.XbaseFileTypeFactory"/>
+		<stubElementTypeHolder class="org.eclipse.xtext.xbase.idea.lang.XbaseElementTypeProvider"/>
+		<lang.ast.factory language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"/>
+		<lang.parserDefinition language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.xbase.idea.lang.parser.XbaseParserDefinition"/>
+		<lang.findUsagesProvider language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"/>
+		<lang.refactoringSupport language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+		<lang.namesValidator language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
+      	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.xbase.Xbase" implementationClass="org.eclipse.xtext.xbase.idea.lang.XbaseSyntaxHighlighterFactory" />
+      	<annotator language="org.eclipse.xtext.xbase.Xbase"
+      							factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<elementDescriptionProvider implementation="org.eclipse.xtext.xbase.idea.lang.psi.XbaseElementDescriptionProvider" order="first"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.xbase.idea.lang.pom.XbasePomDeclarationSearcher"/>
+	</extensions>
+
+</idea-plugin>

@@ -147,7 +147,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:46:2: ruleEntities EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getEntitiesElementType()); 
             }
             pushFollow(FOLLOW_ruleEntities_in_entryRuleEntities54);
             ruleEntities();
@@ -155,7 +155,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getEntitiesElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleEntities60); if (state.failed) return ;
 
@@ -201,7 +201,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getEntities_ImportSectionXImportSectionParserRuleCall_0_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleXImportSection_in_ruleEntities96);
@@ -211,7 +211,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getEntities_ImportSectionXImportSectionParserRuleCall_0_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -243,7 +243,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					markComposite();
+            	      					markComposite(elementTypeProvider.getEntities_ElementsAbstractElementParserRuleCall_1_0ElementType());
             	      				
             	    }
             	    pushFollow(FOLLOW_ruleAbstractElement_in_ruleEntities135);
@@ -253,7 +253,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      					doneComposite(elementTypeProvider.getEntities_ElementsAbstractElementParserRuleCall_1_0ElementType());
+            	      					doneComposite();
             	      				
             	    }
 
@@ -294,7 +294,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:83:2: ruleAbstractElement EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getAbstractElementElementType()); 
             }
             pushFollow(FOLLOW_ruleAbstractElement_in_entryRuleAbstractElement167);
             ruleAbstractElement();
@@ -302,7 +302,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getAbstractElementElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractElement173); if (state.failed) return ;
 
@@ -352,7 +352,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getAbstractElement_PackageDeclarationParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_rulePackageDeclaration_in_ruleAbstractElement194);
@@ -362,7 +362,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getAbstractElement_PackageDeclarationParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -373,7 +373,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getAbstractElement_EntityParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleEntity_in_ruleAbstractElement214);
@@ -383,7 +383,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getAbstractElement_EntityParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -415,7 +415,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:113:2: rulePackageDeclaration EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getPackageDeclarationElementType()); 
             }
             pushFollow(FOLLOW_rulePackageDeclaration_in_entryRulePackageDeclaration234);
             rulePackageDeclaration();
@@ -423,7 +423,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getPackageDeclarationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRulePackageDeclaration240); if (state.failed) return ;
 
@@ -476,7 +476,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getPackageDeclaration_NameQualifiedNameParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleQualifiedName_in_rulePackageDeclaration290);
@@ -486,7 +486,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getPackageDeclaration_NameQualifiedNameParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -526,7 +526,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					markComposite();
+            	      					markComposite(elementTypeProvider.getPackageDeclaration_ElementsAbstractElementParserRuleCall_3_0ElementType());
             	      				
             	    }
             	    pushFollow(FOLLOW_ruleAbstractElement_in_rulePackageDeclaration342);
@@ -536,7 +536,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      					doneComposite(elementTypeProvider.getPackageDeclaration_ElementsAbstractElementParserRuleCall_3_0ElementType());
+            	      					doneComposite();
             	      				
             	    }
 
@@ -588,7 +588,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:171:2: ruleEntity EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getEntityElementType()); 
             }
             pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity388);
             ruleEntity();
@@ -596,7 +596,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getEntityElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleEntity394); if (state.failed) return ;
 
@@ -650,7 +650,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getEntity_NameValidIDParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleEntity444);
@@ -660,7 +660,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getEntity_NameValidIDParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -699,7 +699,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getEntity_SuperTypeJvmParameterizedTypeReferenceParserRuleCall_2_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleEntity507);
@@ -709,7 +709,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getEntity_SuperTypeJvmParameterizedTypeReferenceParserRuleCall_2_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -755,7 +755,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					markComposite();
+            	      					markComposite(elementTypeProvider.getEntity_FeaturesFeatureParserRuleCall_4_0ElementType());
             	      				
             	    }
             	    pushFollow(FOLLOW_ruleFeature_in_ruleEntity567);
@@ -765,7 +765,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      					doneComposite(elementTypeProvider.getEntity_FeaturesFeatureParserRuleCall_4_0ElementType());
+            	      					doneComposite();
             	      				
             	    }
 
@@ -817,7 +817,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:249:2: ruleFeature EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getFeatureElementType()); 
             }
             pushFollow(FOLLOW_ruleFeature_in_entryRuleFeature613);
             ruleFeature();
@@ -825,7 +825,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getFeatureElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleFeature619); if (state.failed) return ;
 
@@ -875,7 +875,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getFeature_PropertyParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleProperty_in_ruleFeature640);
@@ -885,7 +885,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getFeature_PropertyParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -896,7 +896,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getFeature_OperationParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleOperation_in_ruleFeature660);
@@ -906,7 +906,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getFeature_OperationParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -938,7 +938,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:279:2: ruleProperty EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getPropertyElementType()); 
             }
             pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty680);
             ruleProperty();
@@ -946,7 +946,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getPropertyElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleProperty686); if (state.failed) return ;
 
@@ -986,7 +986,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getProperty_NameValidIDParserRuleCall_0_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleProperty722);
@@ -996,7 +996,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getProperty_NameValidIDParserRuleCall_0_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -1024,7 +1024,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getProperty_TypeJvmTypeReferenceParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleProperty774);
@@ -1034,7 +1034,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getProperty_TypeJvmTypeReferenceParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -1069,7 +1069,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:323:2: ruleOperation EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOperationElementType()); 
             }
             pushFollow(FOLLOW_ruleOperation_in_entryRuleOperation805);
             ruleOperation();
@@ -1077,7 +1077,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOperationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOperation811); if (state.failed) return ;
 
@@ -1132,7 +1132,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getOperation_NameValidIDParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleOperation861);
@@ -1142,7 +1142,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getOperation_NameValidIDParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -1181,7 +1181,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getOperation_ParamsFullJvmFormalParameterParserRuleCall_3_0_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleOperation921);
@@ -1191,7 +1191,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getOperation_ParamsFullJvmFormalParameterParserRuleCall_3_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -1234,7 +1234,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getOperation_ParamsFullJvmFormalParameterParserRuleCall_3_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleOperation995);
@@ -1244,7 +1244,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getOperation_ParamsFullJvmFormalParameterParserRuleCall_3_1_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -1309,7 +1309,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getOperation_TypeJvmTypeReferenceParserRuleCall_5_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleOperation1089);
@@ -1319,7 +1319,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getOperation_TypeJvmTypeReferenceParserRuleCall_5_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -1342,7 +1342,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getOperation_BodyXBlockExpressionParserRuleCall_6_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXBlockExpression_in_ruleOperation1135);
@@ -1352,7 +1352,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getOperation_BodyXBlockExpressionParserRuleCall_6_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -1387,7 +1387,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:434:2: ruleXExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXExpression_in_entryRuleXExpression1166);
             ruleXExpression();
@@ -1395,7 +1395,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXExpression1172); if (state.failed) return ;
 
@@ -1424,7 +1424,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              		markComposite();
+              		markComposite(elementTypeProvider.getXExpression_XAssignmentParserRuleCallElementType());
               	
             }
             pushFollow(FOLLOW_ruleXAssignment_in_ruleXExpression1188);
@@ -1434,7 +1434,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              		doneComposite(elementTypeProvider.getXExpression_XAssignmentParserRuleCallElementType());
+              		doneComposite();
               	
             }
 
@@ -1460,7 +1460,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:454:2: ruleXAssignment EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXAssignmentElementType()); 
             }
             pushFollow(FOLLOW_ruleXAssignment_in_entryRuleXAssignment1204);
             ruleXAssignment();
@@ -1468,7 +1468,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXAssignmentElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXAssignment1210); if (state.failed) return ;
 
@@ -1644,8 +1644,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
-                      					doneComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
+                      					precedeComposite(elementTypeProvider.getXAssignment_XAssignmentAction_0_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -1659,7 +1659,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleFeatureCallID_in_ruleXAssignment1268);
@@ -1669,7 +1669,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -1680,7 +1680,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
 
                     if ( state.backtracking==0 ) {
 
-                      				markComposite();
+                      				markComposite(elementTypeProvider.getXAssignment_OpSingleAssignParserRuleCall_0_2ElementType());
                       			
                     }
                     pushFollow(FOLLOW_ruleOpSingleAssign_in_ruleXAssignment1296);
@@ -1690,7 +1690,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneComposite(elementTypeProvider.getXAssignment_OpSingleAssignParserRuleCall_0_2ElementType());
+                      				doneComposite();
                       			
                     }
                     // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:489:4: ( (lv_value_3_0= ruleXAssignment ) )
@@ -1701,7 +1701,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXAssignment_ValueXAssignmentParserRuleCall_0_3_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXAssignment_in_ruleXAssignment1328);
@@ -1711,7 +1711,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXAssignment_ValueXAssignmentParserRuleCall_0_3_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -1734,7 +1734,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markComposite();
+                      				markComposite(elementTypeProvider.getXAssignment_XOrExpressionParserRuleCall_1_0ElementType());
                       			
                     }
                     pushFollow(FOLLOW_ruleXOrExpression_in_ruleXAssignment1372);
@@ -1744,7 +1744,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneComposite(elementTypeProvider.getXAssignment_XOrExpressionParserRuleCall_1_0ElementType());
+                      				doneComposite();
                       			
                     }
                     // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:510:4: ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )?
@@ -1765,8 +1765,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              								markComposite();
-                              								doneComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+                              								precedeComposite(elementTypeProvider.getXAssignment_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+                              								doneComposite();
                               							
                             }
 
@@ -1780,7 +1780,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              									markComposite();
+                              									markComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
                               								
                             }
                             pushFollow(FOLLOW_ruleOpMultiAssign_in_ruleXAssignment1540);
@@ -1790,7 +1790,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              									doneComposite(elementTypeProvider.getXAssignment_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
+                              									doneComposite();
                               								
                             }
 
@@ -1813,7 +1813,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              							markComposite();
+                              							markComposite(elementTypeProvider.getXAssignment_RightOperandXAssignmentParserRuleCall_1_1_1_0ElementType());
                               						
                             }
                             pushFollow(FOLLOW_ruleXAssignment_in_ruleXAssignment1611);
@@ -1823,7 +1823,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              							doneComposite(elementTypeProvider.getXAssignment_RightOperandXAssignmentParserRuleCall_1_1_1_0ElementType());
+                              							doneComposite();
                               						
                             }
 
@@ -1870,7 +1870,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:560:2: ruleOpSingleAssign EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpSingleAssignElementType()); 
             }
             pushFollow(FOLLOW_ruleOpSingleAssign_in_entryRuleOpSingleAssign1658);
             ruleOpSingleAssign();
@@ -1878,7 +1878,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpSingleAssignElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpSingleAssign1664); if (state.failed) return ;
 
@@ -1941,7 +1941,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:580:2: ruleOpMultiAssign EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpMultiAssignElementType()); 
             }
             pushFollow(FOLLOW_ruleOpMultiAssign_in_entryRuleOpMultiAssign1698);
             ruleOpMultiAssign();
@@ -1949,7 +1949,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpMultiAssignElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpMultiAssign1704); if (state.failed) return ;
 
@@ -2243,7 +2243,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:684:2: ruleXOrExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXOrExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXOrExpression_in_entryRuleXOrExpression1983);
             ruleXOrExpression();
@@ -2251,7 +2251,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXOrExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXOrExpression1989); if (state.failed) return ;
 
@@ -2283,7 +2283,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXOrExpression_XAndExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXAndExpression_in_ruleXOrExpression2010);
@@ -2293,7 +2293,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXOrExpression_XAndExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:701:3: ( ( ( ( () ( ( ruleOpOr ) ) ) )=> ( () ( ( ruleOpOr ) ) ) ) ( (lv_rightOperand_3_0= ruleXAndExpression ) ) )*
@@ -2328,8 +2328,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXOrExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXOrExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -2343,7 +2343,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
+            	      								markComposite(elementTypeProvider.getXOrExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
             	      							
             	    }
             	    pushFollow(FOLLOW_ruleOpOr_in_ruleXOrExpression2157);
@@ -2353,7 +2353,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      								doneComposite(elementTypeProvider.getXOrExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -2376,7 +2376,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXOrExpression_RightOperandXAndExpressionParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXAndExpression_in_ruleXOrExpression2219);
@@ -2386,7 +2386,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXOrExpression_RightOperandXAndExpressionParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -2430,7 +2430,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:750:2: ruleOpOr EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpOrElementType()); 
             }
             pushFollow(FOLLOW_ruleOpOr_in_entryRuleOpOr2258);
             ruleOpOr();
@@ -2438,7 +2438,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpOrElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpOr2264); if (state.failed) return ;
 
@@ -2501,7 +2501,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:770:2: ruleXAndExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXAndExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXAndExpression_in_entryRuleXAndExpression2298);
             ruleXAndExpression();
@@ -2509,7 +2509,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXAndExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXAndExpression2304); if (state.failed) return ;
 
@@ -2541,7 +2541,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXAndExpression_XEqualityExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression2325);
@@ -2551,7 +2551,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXAndExpression_XEqualityExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:787:3: ( ( ( ( () ( ( ruleOpAnd ) ) ) )=> ( () ( ( ruleOpAnd ) ) ) ) ( (lv_rightOperand_3_0= ruleXEqualityExpression ) ) )*
@@ -2586,8 +2586,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXAndExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXAndExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -2601,7 +2601,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
+            	      								markComposite(elementTypeProvider.getXAndExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
             	      							
             	    }
             	    pushFollow(FOLLOW_ruleOpAnd_in_ruleXAndExpression2472);
@@ -2611,7 +2611,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      								doneComposite(elementTypeProvider.getXAndExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -2634,7 +2634,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXAndExpression_RightOperandXEqualityExpressionParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression2534);
@@ -2644,7 +2644,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXAndExpression_RightOperandXEqualityExpressionParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -2688,7 +2688,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:836:2: ruleOpAnd EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpAndElementType()); 
             }
             pushFollow(FOLLOW_ruleOpAnd_in_entryRuleOpAnd2573);
             ruleOpAnd();
@@ -2696,7 +2696,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpAndElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpAnd2579); if (state.failed) return ;
 
@@ -2759,7 +2759,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:856:2: ruleXEqualityExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXEqualityExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXEqualityExpression_in_entryRuleXEqualityExpression2613);
             ruleXEqualityExpression();
@@ -2767,7 +2767,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXEqualityExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXEqualityExpression2619); if (state.failed) return ;
 
@@ -2799,7 +2799,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXEqualityExpression_XRelationalExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression2640);
@@ -2809,7 +2809,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXEqualityExpression_XRelationalExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:873:3: ( ( ( ( () ( ( ruleOpEquality ) ) ) )=> ( () ( ( ruleOpEquality ) ) ) ) ( (lv_rightOperand_3_0= ruleXRelationalExpression ) ) )*
@@ -2879,8 +2879,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXEqualityExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXEqualityExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -2894,7 +2894,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
+            	      								markComposite(elementTypeProvider.getXEqualityExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
             	      							
             	    }
             	    pushFollow(FOLLOW_ruleOpEquality_in_ruleXEqualityExpression2787);
@@ -2904,7 +2904,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      								doneComposite(elementTypeProvider.getXEqualityExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -2927,7 +2927,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXEqualityExpression_RightOperandXRelationalExpressionParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression2849);
@@ -2937,7 +2937,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXEqualityExpression_RightOperandXRelationalExpressionParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -2981,7 +2981,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:922:2: ruleOpEquality EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpEqualityElementType()); 
             }
             pushFollow(FOLLOW_ruleOpEquality_in_entryRuleOpEquality2888);
             ruleOpEquality();
@@ -2989,7 +2989,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpEqualityElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpEquality2894); if (state.failed) return ;
 
@@ -3144,7 +3144,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:968:2: ruleXRelationalExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXRelationalExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXRelationalExpression_in_entryRuleXRelationalExpression3003);
             ruleXRelationalExpression();
@@ -3152,7 +3152,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXRelationalExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXRelationalExpression3009); if (state.failed) return ;
 
@@ -3186,7 +3186,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXRelationalExpression_XOtherOperatorExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression3030);
@@ -3196,7 +3196,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXRelationalExpression_XOtherOperatorExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:985:3: ( ( ( ( ( () 'instanceof' ) )=> ( () otherlv_2= 'instanceof' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) ) | ( ( ( ( () ( ( ruleOpCompare ) ) ) )=> ( () ( ( ruleOpCompare ) ) ) ) ( (lv_rightOperand_6_0= ruleXOtherOperatorExpression ) ) ) )*
@@ -3269,8 +3269,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
-            	      								doneComposite(elementTypeProvider.getXRelationalExpression_XInstanceOfExpressionExpressionAction_1_0_0_0_0ElementType());
+            	      								precedeComposite(elementTypeProvider.getXRelationalExpression_XInstanceOfExpressionExpressionAction_1_0_0_0_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -3301,7 +3301,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
+            	      							markComposite(elementTypeProvider.getXRelationalExpression_TypeJvmTypeReferenceParserRuleCall_1_0_1_0ElementType());
             	      						
             	    }
             	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXRelationalExpression3198);
@@ -3311,7 +3311,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      							doneComposite(elementTypeProvider.getXRelationalExpression_TypeJvmTypeReferenceParserRuleCall_1_0_1_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -3343,8 +3343,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
-            	      								doneComposite(elementTypeProvider.getXRelationalExpression_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+            	      								precedeComposite(elementTypeProvider.getXRelationalExpression_XBinaryOperationLeftOperandAction_1_1_0_0_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -3358,7 +3358,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      									markComposite();
+            	      									markComposite(elementTypeProvider.getXRelationalExpression_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
             	      								
             	    }
             	    pushFollow(FOLLOW_ruleOpCompare_in_ruleXRelationalExpression3396);
@@ -3368,7 +3368,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      									doneComposite(elementTypeProvider.getXRelationalExpression_FeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0ElementType());
+            	      									doneComposite();
             	      								
             	    }
 
@@ -3391,7 +3391,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
+            	      							markComposite(elementTypeProvider.getXRelationalExpression_RightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0ElementType());
             	      						
             	    }
             	    pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression3467);
@@ -3401,7 +3401,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      							doneComposite(elementTypeProvider.getXRelationalExpression_RightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -3448,7 +3448,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1073:2: ruleOpCompare EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpCompareElementType()); 
             }
             pushFollow(FOLLOW_ruleOpCompare_in_entryRuleOpCompare3514);
             ruleOpCompare();
@@ -3456,7 +3456,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpCompareElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpCompare3520); if (state.failed) return ;
 
@@ -3637,7 +3637,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1128:2: ruleXOtherOperatorExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXOtherOperatorExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_entryRuleXOtherOperatorExpression3657);
             ruleXOtherOperatorExpression();
@@ -3645,7 +3645,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXOtherOperatorExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXOtherOperatorExpression3663); if (state.failed) return ;
 
@@ -3677,7 +3677,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression3684);
@@ -3687,7 +3687,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1145:3: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*
@@ -3710,8 +3710,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXOtherOperatorExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXOtherOperatorExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -3725,7 +3725,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
+            	      								markComposite(elementTypeProvider.getXOtherOperatorExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
             	      							
             	    }
             	    pushFollow(FOLLOW_ruleOpOther_in_ruleXOtherOperatorExpression3831);
@@ -3735,7 +3735,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      								doneComposite(elementTypeProvider.getXOtherOperatorExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -3758,7 +3758,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXOtherOperatorExpression_RightOperandXAdditiveExpressionParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression3893);
@@ -3768,7 +3768,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXOtherOperatorExpression_RightOperandXAdditiveExpressionParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -3812,7 +3812,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1194:2: ruleOpOther EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpOtherElementType()); 
             }
             pushFollow(FOLLOW_ruleOpOther_in_entryRuleOpOther3932);
             ruleOpOther();
@@ -3820,7 +3820,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpOtherElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpOther3938); if (state.failed) return ;
 
@@ -4259,7 +4259,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1367:2: ruleXAdditiveExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXAdditiveExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXAdditiveExpression_in_entryRuleXAdditiveExpression4551);
             ruleXAdditiveExpression();
@@ -4267,7 +4267,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXAdditiveExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXAdditiveExpression4557); if (state.failed) return ;
 
@@ -4299,7 +4299,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression4578);
@@ -4309,7 +4309,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXAdditiveExpression_XMultiplicativeExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1384:3: ( ( ( ( () ( ( ruleOpAdd ) ) ) )=> ( () ( ( ruleOpAdd ) ) ) ) ( (lv_rightOperand_3_0= ruleXMultiplicativeExpression ) ) )*
@@ -4353,8 +4353,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXAdditiveExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXAdditiveExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -4368,7 +4368,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
+            	      								markComposite(elementTypeProvider.getXAdditiveExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
             	      							
             	    }
             	    pushFollow(FOLLOW_ruleOpAdd_in_ruleXAdditiveExpression4725);
@@ -4378,7 +4378,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      								doneComposite(elementTypeProvider.getXAdditiveExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -4401,7 +4401,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXAdditiveExpression_RightOperandXMultiplicativeExpressionParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression4787);
@@ -4411,7 +4411,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXAdditiveExpression_RightOperandXMultiplicativeExpressionParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -4455,7 +4455,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1433:2: ruleOpAdd EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpAddElementType()); 
             }
             pushFollow(FOLLOW_ruleOpAdd_in_entryRuleOpAdd4826);
             ruleOpAdd();
@@ -4463,7 +4463,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpAddElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpAdd4832); if (state.failed) return ;
 
@@ -4570,7 +4570,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1463:2: ruleXMultiplicativeExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXMultiplicativeExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_entryRuleXMultiplicativeExpression4897);
             ruleXMultiplicativeExpression();
@@ -4578,7 +4578,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXMultiplicativeExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXMultiplicativeExpression4903); if (state.failed) return ;
 
@@ -4610,7 +4610,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXMultiplicativeExpression_XUnaryOperationParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression4924);
@@ -4620,7 +4620,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXMultiplicativeExpression_XUnaryOperationParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1480:3: ( ( ( ( () ( ( ruleOpMulti ) ) ) )=> ( () ( ( ruleOpMulti ) ) ) ) ( (lv_rightOperand_3_0= ruleXUnaryOperation ) ) )*
@@ -4690,8 +4690,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXMultiplicativeExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXMultiplicativeExpression_XBinaryOperationLeftOperandAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -4705,7 +4705,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
+            	      								markComposite(elementTypeProvider.getXMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
             	      							
             	    }
             	    pushFollow(FOLLOW_ruleOpMulti_in_ruleXMultiplicativeExpression5071);
@@ -4715,7 +4715,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      								doneComposite(elementTypeProvider.getXMultiplicativeExpression_FeatureJvmIdentifiableElementCrossReference_1_0_0_1_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -4738,7 +4738,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXMultiplicativeExpression_RightOperandXUnaryOperationParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression5133);
@@ -4748,7 +4748,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXMultiplicativeExpression_RightOperandXUnaryOperationParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -4792,7 +4792,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1529:2: ruleOpMulti EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpMultiElementType()); 
             }
             pushFollow(FOLLOW_ruleOpMulti_in_entryRuleOpMulti5172);
             ruleOpMulti();
@@ -4800,7 +4800,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpMultiElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpMulti5178); if (state.failed) return ;
 
@@ -4955,7 +4955,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1575:2: ruleXUnaryOperation EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXUnaryOperationElementType()); 
             }
             pushFollow(FOLLOW_ruleXUnaryOperation_in_entryRuleXUnaryOperation5287);
             ruleXUnaryOperation();
@@ -4963,7 +4963,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXUnaryOperationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXUnaryOperation5293); if (state.failed) return ;
 
@@ -5019,8 +5019,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
-                      					doneComposite(elementTypeProvider.getXUnaryOperation_XUnaryOperationAction_0_0ElementType());
+                      					precedeComposite(elementTypeProvider.getXUnaryOperation_XUnaryOperationAction_0_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -5034,7 +5034,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXUnaryOperation_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleOpUnary_in_ruleXUnaryOperation5351);
@@ -5044,7 +5044,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXUnaryOperation_FeatureJvmIdentifiableElementCrossReference_0_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -5061,7 +5061,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXUnaryOperation_OperandXUnaryOperationParserRuleCall_0_2_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXUnaryOperation5396);
@@ -5071,7 +5071,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXUnaryOperation_OperandXUnaryOperationParserRuleCall_0_2_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -5091,7 +5091,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXUnaryOperation_XCastedExpressionParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation5434);
@@ -5101,7 +5101,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXUnaryOperation_XCastedExpressionParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -5133,7 +5133,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1628:2: ruleOpUnary EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpUnaryElementType()); 
             }
             pushFollow(FOLLOW_ruleOpUnary_in_entryRuleOpUnary5454);
             ruleOpUnary();
@@ -5141,7 +5141,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpUnaryElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpUnary5460); if (state.failed) return ;
 
@@ -5274,7 +5274,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1666:2: ruleXCastedExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXCastedExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXCastedExpression_in_entryRuleXCastedExpression5547);
             ruleXCastedExpression();
@@ -5282,7 +5282,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXCastedExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXCastedExpression5553); if (state.failed) return ;
 
@@ -5316,7 +5316,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXCastedExpression_XPostfixOperationParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXPostfixOperation_in_ruleXCastedExpression5574);
@@ -5326,7 +5326,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXCastedExpression_XPostfixOperationParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1683:3: ( ( ( ( () 'as' ) )=> ( () otherlv_2= 'as' ) ) ( (lv_type_3_0= ruleJvmTypeReference ) ) )*
@@ -5361,8 +5361,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
-            	      							doneComposite(elementTypeProvider.getXCastedExpression_XCastedExpressionTargetAction_1_0_0_0ElementType());
+            	      							precedeComposite(elementTypeProvider.getXCastedExpression_XCastedExpressionTargetAction_1_0_0_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -5393,7 +5393,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXCastedExpression_TypeJvmTypeReferenceParserRuleCall_1_1_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXCastedExpression5717);
@@ -5403,7 +5403,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXCastedExpression_TypeJvmTypeReferenceParserRuleCall_1_1_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -5447,7 +5447,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1724:2: ruleXPostfixOperation EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXPostfixOperationElementType()); 
             }
             pushFollow(FOLLOW_ruleXPostfixOperation_in_entryRuleXPostfixOperation5756);
             ruleXPostfixOperation();
@@ -5455,7 +5455,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXPostfixOperationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXPostfixOperation5762); if (state.failed) return ;
 
@@ -5487,7 +5487,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXPostfixOperation_XMemberFeatureCallParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXMemberFeatureCall_in_ruleXPostfixOperation5783);
@@ -5497,7 +5497,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXPostfixOperation_XMemberFeatureCallParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1741:3: ( ( ( () ( ( ruleOpPostfix ) ) ) )=> ( () ( ( ruleOpPostfix ) ) ) )?
@@ -5530,8 +5530,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
-                      						doneComposite(elementTypeProvider.getXPostfixOperation_XPostfixOperationOperandAction_1_0_0ElementType());
+                      						precedeComposite(elementTypeProvider.getXPostfixOperation_XPostfixOperationOperandAction_1_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -5545,7 +5545,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getXPostfixOperation_FeatureJvmIdentifiableElementCrossReference_1_0_1_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleOpPostfix_in_ruleXPostfixOperation5907);
@@ -5555,7 +5555,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getXPostfixOperation_FeatureJvmIdentifiableElementCrossReference_1_0_1_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -5599,7 +5599,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1777:2: ruleOpPostfix EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getOpPostfixElementType()); 
             }
             pushFollow(FOLLOW_ruleOpPostfix_in_entryRuleOpPostfix5954);
             ruleOpPostfix();
@@ -5607,7 +5607,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getOpPostfixElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleOpPostfix5960); if (state.failed) return ;
 
@@ -5714,7 +5714,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1807:2: ruleXMemberFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXMemberFeatureCallElementType()); 
             }
             pushFollow(FOLLOW_ruleXMemberFeatureCall_in_entryRuleXMemberFeatureCall6025);
             ruleXMemberFeatureCall();
@@ -5722,7 +5722,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXMemberFeatureCallElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXMemberFeatureCall6031); if (state.failed) return ;
 
@@ -5766,7 +5766,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXMemberFeatureCall_XPrimaryExpressionParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXPrimaryExpression_in_ruleXMemberFeatureCall6052);
@@ -5776,7 +5776,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXMemberFeatureCall_XPrimaryExpressionParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:1824:3: ( ( ( ( ( () ( '.' | ( ( '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) )=> ( () (otherlv_2= '.' | ( (lv_explicitStatic_3_0= '::' ) ) ) ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ) ) ( (lv_value_6_0= ruleXAssignment ) ) ) | ( ( ( ( () ( '.' | ( ( '?.' ) ) | ( ( '::' ) ) ) ) )=> ( () (otherlv_8= '.' | ( (lv_nullSafe_9_0= '?.' ) ) | ( (lv_explicitStatic_10_0= '::' ) ) ) ) ) (otherlv_11= '<' ( (lv_typeArguments_12_0= ruleJvmArgumentTypeReference ) ) (otherlv_13= ',' ( (lv_typeArguments_14_0= ruleJvmArgumentTypeReference ) ) )* otherlv_15= '>' )? ( ( ruleIdOrSuper ) ) ( ( ( ( '(' ) )=> (lv_explicitOperationCall_17_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_18_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_19_0= ruleXExpression ) ) (otherlv_20= ',' ( (lv_memberCallArguments_21_0= ruleXExpression ) ) )* ) )? otherlv_22= ')' )? ( ( ( () '[' ) )=> (lv_memberCallArguments_23_0= ruleXClosure ) )? ) )*
@@ -5844,8 +5844,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
-            	      								doneComposite(elementTypeProvider.getXMemberFeatureCall_XAssignmentAssignableAction_1_0_0_0_0ElementType());
+            	      								precedeComposite(elementTypeProvider.getXMemberFeatureCall_XAssignmentAssignableAction_1_0_0_0_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -5926,7 +5926,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      									markComposite();
+            	      									markComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0ElementType());
             	      								
             	    }
             	    pushFollow(FOLLOW_ruleFeatureCallID_in_ruleXMemberFeatureCall6449);
@@ -5936,7 +5936,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      									doneComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0ElementType());
+            	      									doneComposite();
             	      								
             	    }
 
@@ -5947,7 +5947,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
 
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
+            	      							markComposite(elementTypeProvider.getXMemberFeatureCall_OpSingleAssignParserRuleCall_1_0_0_0_3ElementType());
             	      						
             	    }
             	    pushFollow(FOLLOW_ruleOpSingleAssign_in_ruleXMemberFeatureCall6492);
@@ -5957,7 +5957,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      							doneComposite(elementTypeProvider.getXMemberFeatureCall_OpSingleAssignParserRuleCall_1_0_0_0_3ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -5974,7 +5974,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
+            	      							markComposite(elementTypeProvider.getXMemberFeatureCall_ValueXAssignmentParserRuleCall_1_0_1_0ElementType());
             	      						
             	    }
             	    pushFollow(FOLLOW_ruleXAssignment_in_ruleXMemberFeatureCall6544);
@@ -5984,7 +5984,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      							doneComposite(elementTypeProvider.getXMemberFeatureCall_ValueXAssignmentParserRuleCall_1_0_1_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -6016,8 +6016,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      								markComposite();
-            	      								doneComposite(elementTypeProvider.getXMemberFeatureCall_XMemberFeatureCallMemberCallTargetAction_1_1_0_0_0ElementType());
+            	      								precedeComposite(elementTypeProvider.getXMemberFeatureCall_XMemberFeatureCallMemberCallTargetAction_1_1_0_0_0ElementType());
+            	      								doneComposite();
             	      							
             	    }
 
@@ -6164,7 +6164,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	            {
             	            if ( state.backtracking==0 ) {
 
-            	              								markComposite();
+            	              								markComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0ElementType());
             	              							
             	            }
             	            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall7104);
@@ -6174,7 +6174,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	            if (state.failed) return ;
             	            if ( state.backtracking==0 ) {
 
-            	              								doneComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0ElementType());
+            	              								doneComposite();
             	              							
             	            }
 
@@ -6217,7 +6217,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	            	    {
             	            	    if ( state.backtracking==0 ) {
 
-            	            	      									markComposite();
+            	            	      									markComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0ElementType());
             	            	      								
             	            	    }
             	            	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall7200);
@@ -6227,7 +6227,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	            	    if (state.failed) return ;
             	            	    if ( state.backtracking==0 ) {
 
-            	            	      									doneComposite(elementTypeProvider.getXMemberFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0ElementType());
+            	            	      									doneComposite();
             	            	      								
             	            	    }
 
@@ -6270,7 +6270,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      							markComposite();
+            	      							markComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0ElementType());
             	      						
             	    }
             	    pushFollow(FOLLOW_ruleIdOrSuper_in_ruleXMemberFeatureCall7294);
@@ -6280,7 +6280,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      							doneComposite(elementTypeProvider.getXMemberFeatureCall_FeatureJvmIdentifiableElementCrossReference_1_1_2_0ElementType());
+            	      							doneComposite();
             	      						
             	    }
 
@@ -6334,7 +6334,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	                    {
             	                    if ( state.backtracking==0 ) {
 
-            	                      									markComposite();
+            	                      									markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0ElementType());
             	                      								
             	                    }
             	                    pushFollow(FOLLOW_ruleXShortClosure_in_ruleXMemberFeatureCall7743);
@@ -6344,7 +6344,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	                    if (state.failed) return ;
             	                    if ( state.backtracking==0 ) {
 
-            	                      									doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0ElementType());
+            	                      									doneComposite();
             	                      								
             	                    }
 
@@ -6370,7 +6370,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	                    {
             	                    if ( state.backtracking==0 ) {
 
-            	                      										markComposite();
+            	                      										markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0ElementType());
             	                      									
             	                    }
             	                    pushFollow(FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall7833);
@@ -6380,7 +6380,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	                    if (state.failed) return ;
             	                    if ( state.backtracking==0 ) {
 
-            	                      										doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0ElementType());
+            	                      										doneComposite();
             	                      									
             	                    }
 
@@ -6423,7 +6423,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	                    	    {
             	                    	    if ( state.backtracking==0 ) {
 
-            	                    	      											markComposite();
+            	                    	      											markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0ElementType());
             	                    	      										
             	                    	    }
             	                    	    pushFollow(FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall7951);
@@ -6433,7 +6433,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	                    	    if (state.failed) return ;
             	                    	    if ( state.backtracking==0 ) {
 
-            	                    	      											doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0ElementType());
+            	                    	      											doneComposite();
             	                    	      										
             	                    	    }
 
@@ -6489,7 +6489,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	            {
             	            if ( state.backtracking==0 ) {
 
-            	              							markComposite();
+            	              							markComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXClosureParserRuleCall_1_1_4_0ElementType());
             	              						
             	            }
             	            pushFollow(FOLLOW_ruleXClosure_in_ruleXMemberFeatureCall8118);
@@ -6499,7 +6499,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	            if (state.failed) return ;
             	            if ( state.backtracking==0 ) {
 
-            	              							doneComposite(elementTypeProvider.getXMemberFeatureCall_MemberCallArgumentsXClosureParserRuleCall_1_1_4_0ElementType());
+            	              							doneComposite();
             	              						
             	            }
 
@@ -6549,7 +6549,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2150:2: ruleXPrimaryExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXPrimaryExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXPrimaryExpression_in_entryRuleXPrimaryExpression8166);
             ruleXPrimaryExpression();
@@ -6557,7 +6557,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXPrimaryExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXPrimaryExpression8172); if (state.failed) return ;
 
@@ -6593,7 +6593,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XConstructorCallParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXConstructorCall_in_ruleXPrimaryExpression8193);
@@ -6603,7 +6603,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XConstructorCallParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6614,7 +6614,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XBlockExpressionParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXBlockExpression_in_ruleXPrimaryExpression8213);
@@ -6624,7 +6624,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XBlockExpressionParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6635,7 +6635,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XSwitchExpressionParserRuleCall_2ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXSwitchExpression_in_ruleXPrimaryExpression8233);
@@ -6645,7 +6645,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XSwitchExpressionParserRuleCall_2ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6659,7 +6659,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markComposite();
+                      				markComposite(elementTypeProvider.getXPrimaryExpression_XSynchronizedExpressionParserRuleCall_3ElementType());
                       			
                     }
                     pushFollow(FOLLOW_ruleXSynchronizedExpression_in_ruleXPrimaryExpression8300);
@@ -6669,7 +6669,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneComposite(elementTypeProvider.getXPrimaryExpression_XSynchronizedExpressionParserRuleCall_3ElementType());
+                      				doneComposite();
                       			
                     }
 
@@ -6683,7 +6683,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XFeatureCallParserRuleCall_4ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXFeatureCall_in_ruleXPrimaryExpression8325);
@@ -6693,7 +6693,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XFeatureCallParserRuleCall_4ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6704,7 +6704,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XLiteralParserRuleCall_5ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXLiteral_in_ruleXPrimaryExpression8345);
@@ -6714,7 +6714,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XLiteralParserRuleCall_5ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6725,7 +6725,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XIfExpressionParserRuleCall_6ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXIfExpression_in_ruleXPrimaryExpression8365);
@@ -6735,7 +6735,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XIfExpressionParserRuleCall_6ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6749,7 +6749,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markComposite();
+                      				markComposite(elementTypeProvider.getXPrimaryExpression_XForLoopExpressionParserRuleCall_7ElementType());
                       			
                     }
                     pushFollow(FOLLOW_ruleXForLoopExpression_in_ruleXPrimaryExpression8472);
@@ -6759,7 +6759,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneComposite(elementTypeProvider.getXPrimaryExpression_XForLoopExpressionParserRuleCall_7ElementType());
+                      				doneComposite();
                       			
                     }
 
@@ -6773,7 +6773,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XBasicForLoopExpressionParserRuleCall_8ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXBasicForLoopExpression_in_ruleXPrimaryExpression8497);
@@ -6783,7 +6783,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XBasicForLoopExpressionParserRuleCall_8ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6794,7 +6794,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XWhileExpressionParserRuleCall_9ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXWhileExpression_in_ruleXPrimaryExpression8517);
@@ -6804,7 +6804,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XWhileExpressionParserRuleCall_9ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6815,7 +6815,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XDoWhileExpressionParserRuleCall_10ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXDoWhileExpression_in_ruleXPrimaryExpression8537);
@@ -6825,7 +6825,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XDoWhileExpressionParserRuleCall_10ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6836,7 +6836,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XThrowExpressionParserRuleCall_11ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXThrowExpression_in_ruleXPrimaryExpression8557);
@@ -6846,7 +6846,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XThrowExpressionParserRuleCall_11ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6857,7 +6857,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XReturnExpressionParserRuleCall_12ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXReturnExpression_in_ruleXPrimaryExpression8577);
@@ -6867,7 +6867,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XReturnExpressionParserRuleCall_12ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6878,7 +6878,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XTryCatchFinallyExpressionParserRuleCall_13ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_ruleXPrimaryExpression8597);
@@ -6888,7 +6888,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XTryCatchFinallyExpressionParserRuleCall_13ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6899,7 +6899,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXPrimaryExpression_XParenthesizedExpressionParserRuleCall_14ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXParenthesizedExpression_in_ruleXPrimaryExpression8617);
@@ -6909,7 +6909,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXPrimaryExpression_XParenthesizedExpressionParserRuleCall_14ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -6941,7 +6941,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2308:2: ruleXLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXLiteral_in_entryRuleXLiteral8637);
             ruleXLiteral();
@@ -6949,7 +6949,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXLiteral8643); if (state.failed) return ;
 
@@ -7014,7 +7014,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXLiteral_XCollectionLiteralParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXCollectionLiteral_in_ruleXLiteral8664);
@@ -7024,7 +7024,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXLiteral_XCollectionLiteralParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7038,7 +7038,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markComposite();
+                      				markComposite(elementTypeProvider.getXLiteral_XClosureParserRuleCall_1ElementType());
                       			
                     }
                     pushFollow(FOLLOW_ruleXClosure_in_ruleXLiteral8725);
@@ -7048,7 +7048,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneComposite(elementTypeProvider.getXLiteral_XClosureParserRuleCall_1ElementType());
+                      				doneComposite();
                       			
                     }
 
@@ -7062,7 +7062,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXLiteral_XBooleanLiteralParserRuleCall_2ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXBooleanLiteral_in_ruleXLiteral8750);
@@ -7072,7 +7072,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXLiteral_XBooleanLiteralParserRuleCall_2ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7083,7 +7083,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXLiteral_XNumberLiteralParserRuleCall_3ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXNumberLiteral_in_ruleXLiteral8770);
@@ -7093,7 +7093,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXLiteral_XNumberLiteralParserRuleCall_3ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7104,7 +7104,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXLiteral_XNullLiteralParserRuleCall_4ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXNullLiteral_in_ruleXLiteral8790);
@@ -7114,7 +7114,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXLiteral_XNullLiteralParserRuleCall_4ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7125,7 +7125,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXLiteral_XStringLiteralParserRuleCall_5ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXStringLiteral_in_ruleXLiteral8810);
@@ -7135,7 +7135,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXLiteral_XStringLiteralParserRuleCall_5ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7146,7 +7146,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXLiteral_XTypeLiteralParserRuleCall_6ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXTypeLiteral_in_ruleXLiteral8830);
@@ -7156,7 +7156,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXLiteral_XTypeLiteralParserRuleCall_6ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7188,7 +7188,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2386:2: ruleXCollectionLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXCollectionLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXCollectionLiteral_in_entryRuleXCollectionLiteral8850);
             ruleXCollectionLiteral();
@@ -7196,7 +7196,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXCollectionLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXCollectionLiteral8856); if (state.failed) return ;
 
@@ -7257,7 +7257,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXCollectionLiteral_XSetLiteralParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXSetLiteral_in_ruleXCollectionLiteral8877);
@@ -7267,7 +7267,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXCollectionLiteral_XSetLiteralParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7278,7 +7278,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXCollectionLiteral_XListLiteralParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXListLiteral_in_ruleXCollectionLiteral8897);
@@ -7288,7 +7288,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXCollectionLiteral_XListLiteralParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -7320,7 +7320,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2416:2: ruleXSetLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXSetLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXSetLiteral_in_entryRuleXSetLiteral8917);
             ruleXSetLiteral();
@@ -7328,7 +7328,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXSetLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXSetLiteral8923); if (state.failed) return ;
 
@@ -7368,8 +7368,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXSetLiteral_XSetLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXSetLiteral_XSetLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -7416,7 +7416,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXSetLiteral9008);
@@ -7426,7 +7426,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -7469,7 +7469,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleXExpression_in_ruleXSetLiteral9082);
@@ -7479,7 +7479,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXSetLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -7540,7 +7540,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2491:2: ruleXListLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXListLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXListLiteral_in_entryRuleXListLiteral9144);
             ruleXListLiteral();
@@ -7548,7 +7548,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXListLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXListLiteral9150); if (state.failed) return ;
 
@@ -7588,8 +7588,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXListLiteral_XListLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXListLiteral_XListLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -7636,7 +7636,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXListLiteral9235);
@@ -7646,7 +7646,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -7689,7 +7689,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleXExpression_in_ruleXListLiteral9309);
@@ -7699,7 +7699,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXListLiteral_ElementsXExpressionParserRuleCall_3_1_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -7760,7 +7760,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2566:2: ruleXClosure EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXClosureElementType()); 
             }
             pushFollow(FOLLOW_ruleXClosure_in_entryRuleXClosure9371);
             ruleXClosure();
@@ -7768,7 +7768,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXClosureElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXClosure9377); if (state.failed) return ;
 
@@ -7814,8 +7814,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              						markComposite();
-              						doneComposite(elementTypeProvider.getXClosure_XClosureAction_0_0_0ElementType());
+              						precedeComposite(elementTypeProvider.getXClosure_XClosureAction_0_0_0ElementType());
+              						doneComposite();
               					
             }
 
@@ -7867,7 +7867,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              								markComposite();
+                              								markComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0ElementType());
                               							
                             }
                             pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXClosure9702);
@@ -7877,7 +7877,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              								doneComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0ElementType());
+                              								doneComposite();
                               							
                             }
 
@@ -7920,7 +7920,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    {
                             	    if ( state.backtracking==0 ) {
 
-                            	      									markComposite();
+                            	      									markComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0ElementType());
                             	      								
                             	    }
                             	    pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXClosure9798);
@@ -7930,7 +7930,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    if (state.failed) return ;
                             	    if ( state.backtracking==0 ) {
 
-                            	      									doneComposite(elementTypeProvider.getXClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0ElementType());
+                            	      									doneComposite();
                             	      								
                             	    }
 
@@ -7994,7 +7994,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXClosure_ExpressionXExpressionInClosureParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpressionInClosure_in_ruleXClosure9925);
@@ -8004,7 +8004,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXClosure_ExpressionXExpressionInClosureParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -8050,7 +8050,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2693:2: ruleXExpressionInClosure EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXExpressionInClosureElementType()); 
             }
             pushFollow(FOLLOW_ruleXExpressionInClosure_in_entryRuleXExpressionInClosure9970);
             ruleXExpressionInClosure();
@@ -8058,7 +8058,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXExpressionInClosureElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXExpressionInClosure9976); if (state.failed) return ;
 
@@ -8095,8 +8095,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXExpressionInClosure_XBlockExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXExpressionInClosure_XBlockExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -8125,7 +8125,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXExpressionInClosure_ExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_ruleXExpressionInClosure10033);
@@ -8135,7 +8135,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXExpressionInClosure_ExpressionsXExpressionOrVarDeclarationParserRuleCall_1_0_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -8207,7 +8207,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2736:2: ruleXShortClosure EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXShortClosureElementType()); 
             }
             pushFollow(FOLLOW_ruleXShortClosure_in_entryRuleXShortClosure10103);
             ruleXShortClosure();
@@ -8215,7 +8215,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXShortClosureElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXShortClosure10109); if (state.failed) return ;
 
@@ -8259,8 +8259,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              						markComposite();
-              						doneComposite(elementTypeProvider.getXShortClosure_XClosureAction_0_0_0ElementType());
+              						precedeComposite(elementTypeProvider.getXShortClosure_XClosureAction_0_0_0ElementType());
+              						doneComposite();
               					
             }
 
@@ -8285,7 +8285,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      								markComposite();
+                      								markComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0ElementType());
                       							
                     }
                     pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure10373);
@@ -8295,7 +8295,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      								doneComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0ElementType());
+                      								doneComposite();
                       							
                     }
 
@@ -8338,7 +8338,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      									markComposite();
+                    	      									markComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0ElementType());
                     	      								
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure10469);
@@ -8348,7 +8348,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      									doneComposite(elementTypeProvider.getXShortClosure_DeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0ElementType());
+                    	      									doneComposite();
                     	      								
                     	    }
 
@@ -8409,7 +8409,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXShortClosure_ExpressionXExpressionParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXShortClosure10595);
@@ -8419,7 +8419,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXShortClosure_ExpressionXExpressionParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -8454,7 +8454,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2841:2: ruleXParenthesizedExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXParenthesizedExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXParenthesizedExpression_in_entryRuleXParenthesizedExpression10626);
             ruleXParenthesizedExpression();
@@ -8462,7 +8462,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXParenthesizedExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXParenthesizedExpression10632); if (state.failed) return ;
 
@@ -8508,7 +8508,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             }
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getXParenthesizedExpression_XExpressionParserRuleCall_1ElementType());
               		
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXParenthesizedExpression10667);
@@ -8518,7 +8518,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getXParenthesizedExpression_XExpressionParserRuleCall_1ElementType());
+              			doneComposite();
               		
             }
             if ( state.backtracking==0 ) {
@@ -8558,7 +8558,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2877:2: ruleXIfExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXIfExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXIfExpression_in_entryRuleXIfExpression10701);
             ruleXIfExpression();
@@ -8566,7 +8566,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXIfExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXIfExpression10707); if (state.failed) return ;
 
@@ -8606,8 +8606,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXIfExpression_XIfExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXIfExpression_XIfExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -8643,7 +8643,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXIfExpression_IfXExpressionParserRuleCall_3_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXIfExpression10784);
@@ -8653,7 +8653,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXIfExpression_IfXExpressionParserRuleCall_3_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -8681,7 +8681,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXIfExpression_ThenXExpressionParserRuleCall_5_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXIfExpression10836);
@@ -8691,7 +8691,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXIfExpression_ThenXExpressionParserRuleCall_5_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -8740,7 +8740,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXIfExpression10921);
@@ -8750,7 +8750,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXIfExpression_ElseXExpressionParserRuleCall_6_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -8791,7 +8791,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:2964:2: ruleXSwitchExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXSwitchExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXSwitchExpression_in_entryRuleXSwitchExpression10960);
             ruleXSwitchExpression();
@@ -8799,7 +8799,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXSwitchExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXSwitchExpression10966); if (state.failed) return ;
 
@@ -8844,8 +8844,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXSwitchExpression_XSwitchExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXSwitchExpression_XSwitchExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -8897,7 +8897,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      									markComposite();
+                      									markComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0ElementType());
                       								
                     }
                     pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXSwitchExpression11176);
@@ -8907,7 +8907,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      									doneComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_0_0_0_1_0ElementType());
+                      									doneComposite();
                       								
                     }
 
@@ -8941,7 +8941,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_0_1_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXSwitchExpression11273);
@@ -8951,7 +8951,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_0_1_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -9001,7 +9001,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              									markComposite();
+                              									markComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0ElementType());
                               								
                             }
                             pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXSwitchExpression11460);
@@ -9011,7 +9011,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              									doneComposite(elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0ElementType());
+                              									doneComposite();
                               								
                             }
 
@@ -9048,7 +9048,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_1_1_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXSwitchExpression11558);
@@ -9058,7 +9058,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getXSwitchExpression_SwitchXExpressionParserRuleCall_2_1_1_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -9107,7 +9107,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					markComposite();
+            	      					markComposite(elementTypeProvider.getXSwitchExpression_CasesXCasePartParserRuleCall_4_0ElementType());
             	      				
             	    }
             	    pushFollow(FOLLOW_ruleXCasePart_in_ruleXSwitchExpression11625);
@@ -9117,7 +9117,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      					doneComposite(elementTypeProvider.getXSwitchExpression_CasesXCasePartParserRuleCall_4_0ElementType());
+            	      					doneComposite();
             	      				
             	    }
 
@@ -9173,7 +9173,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXSwitchExpression11706);
@@ -9183,7 +9183,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXSwitchExpression_DefaultXExpressionParserRuleCall_5_2_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -9235,7 +9235,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3150:2: ruleXCasePart EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXCasePartElementType()); 
             }
             pushFollow(FOLLOW_ruleXCasePart_in_entryRuleXCasePart11759);
             ruleXCasePart();
@@ -9243,7 +9243,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXCasePartElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXCasePart11765); if (state.failed) return ;
 
@@ -9282,8 +9282,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXCasePart_XCasePartAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXCasePart_XCasePartAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -9305,7 +9305,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXCasePart11814);
@@ -9315,7 +9315,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getXCasePart_TypeGuardJvmTypeReferenceParserRuleCall_1_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -9357,7 +9357,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXCasePart11878);
@@ -9367,7 +9367,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXCasePart_CaseXExpressionParserRuleCall_2_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -9425,7 +9425,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXCasePart11961);
@@ -9435,7 +9435,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getXCasePart_ThenXExpressionParserRuleCall_3_0_1_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -9508,7 +9508,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3236:2: ruleXForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXForLoopExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXForLoopExpression_in_entryRuleXForLoopExpression12061);
             ruleXForLoopExpression();
@@ -9516,7 +9516,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXForLoopExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXForLoopExpression12067); if (state.failed) return ;
 
@@ -9562,8 +9562,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              						markComposite();
-              						doneComposite(elementTypeProvider.getXForLoopExpression_XForLoopExpressionAction_0_0_0ElementType());
+              						precedeComposite(elementTypeProvider.getXForLoopExpression_XForLoopExpressionAction_0_0_0ElementType());
+              						doneComposite();
               					
             }
 
@@ -9599,7 +9599,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              							markComposite();
+              							markComposite(elementTypeProvider.getXForLoopExpression_DeclaredParamJvmFormalParameterParserRuleCall_0_0_3_0ElementType());
               						
             }
             pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXForLoopExpression12260);
@@ -9609,7 +9609,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              							doneComposite(elementTypeProvider.getXForLoopExpression_DeclaredParamJvmFormalParameterParserRuleCall_0_0_3_0ElementType());
+              							doneComposite();
               						
             }
 
@@ -9643,7 +9643,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXForLoopExpression_ForExpressionXExpressionParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXForLoopExpression12333);
@@ -9653,7 +9653,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXForLoopExpression_ForExpressionXExpressionParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -9681,7 +9681,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXForLoopExpression_EachExpressionXExpressionParserRuleCall_3_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXForLoopExpression12385);
@@ -9691,7 +9691,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXForLoopExpression_EachExpressionXExpressionParserRuleCall_3_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -9726,7 +9726,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3335:2: ruleXBasicForLoopExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXBasicForLoopExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXBasicForLoopExpression_in_entryRuleXBasicForLoopExpression12416);
             ruleXBasicForLoopExpression();
@@ -9734,7 +9734,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXBasicForLoopExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXBasicForLoopExpression12422); if (state.failed) return ;
 
@@ -9777,8 +9777,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXBasicForLoopExpression_XBasicForLoopExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXBasicForLoopExpression_XBasicForLoopExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -9825,7 +9825,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_0_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_ruleXBasicForLoopExpression12507);
@@ -9835,7 +9835,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -9878,7 +9878,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_ruleXBasicForLoopExpression12581);
@@ -9888,7 +9888,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXBasicForLoopExpression_InitExpressionsXExpressionOrVarDeclarationParserRuleCall_3_1_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -9939,7 +9939,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getXBasicForLoopExpression_ExpressionXExpressionParserRuleCall_5_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXBasicForLoopExpression12650);
@@ -9949,7 +9949,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getXBasicForLoopExpression_ExpressionXExpressionParserRuleCall_5_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -9991,7 +9991,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_0_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXBasicForLoopExpression12711);
@@ -10001,7 +10001,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -10044,7 +10044,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleXExpression_in_ruleXBasicForLoopExpression12785);
@@ -10054,7 +10054,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXBasicForLoopExpression_UpdateExpressionsXExpressionParserRuleCall_7_1_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -10097,7 +10097,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXBasicForLoopExpression_EachExpressionXExpressionParserRuleCall_9_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXBasicForLoopExpression12854);
@@ -10107,7 +10107,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXBasicForLoopExpression_EachExpressionXExpressionParserRuleCall_9_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -10142,7 +10142,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3479:2: ruleXWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXWhileExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXWhileExpression_in_entryRuleXWhileExpression12885);
             ruleXWhileExpression();
@@ -10150,7 +10150,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXWhileExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXWhileExpression12891); if (state.failed) return ;
 
@@ -10189,8 +10189,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXWhileExpression_XWhileExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXWhileExpression_XWhileExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -10226,7 +10226,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXWhileExpression_PredicateXExpressionParserRuleCall_3_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXWhileExpression12968);
@@ -10236,7 +10236,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXWhileExpression_PredicateXExpressionParserRuleCall_3_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -10264,7 +10264,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXWhileExpression_BodyXExpressionParserRuleCall_5_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXWhileExpression13020);
@@ -10274,7 +10274,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXWhileExpression_BodyXExpressionParserRuleCall_5_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -10309,7 +10309,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3543:2: ruleXDoWhileExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXDoWhileExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXDoWhileExpression_in_entryRuleXDoWhileExpression13051);
             ruleXDoWhileExpression();
@@ -10317,7 +10317,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXDoWhileExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXDoWhileExpression13057); if (state.failed) return ;
 
@@ -10357,8 +10357,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXDoWhileExpression_XDoWhileExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXDoWhileExpression_XDoWhileExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -10383,7 +10383,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXDoWhileExpression_BodyXExpressionParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXDoWhileExpression13120);
@@ -10393,7 +10393,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXDoWhileExpression_BodyXExpressionParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -10432,7 +10432,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXDoWhileExpression_PredicateXExpressionParserRuleCall_5_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXDoWhileExpression13186);
@@ -10442,7 +10442,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXDoWhileExpression_PredicateXExpressionParserRuleCall_5_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -10488,7 +10488,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3614:2: ruleXBlockExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXBlockExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXBlockExpression_in_entryRuleXBlockExpression13231);
             ruleXBlockExpression();
@@ -10496,7 +10496,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXBlockExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXBlockExpression13237); if (state.failed) return ;
 
@@ -10535,8 +10535,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXBlockExpression_XBlockExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXBlockExpression_XBlockExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -10576,7 +10576,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      						markComposite();
+            	      						markComposite(elementTypeProvider.getXBlockExpression_ExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0ElementType());
             	      					
             	    }
             	    pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_ruleXBlockExpression13308);
@@ -10586,7 +10586,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      						doneComposite(elementTypeProvider.getXBlockExpression_ExpressionsXExpressionOrVarDeclarationParserRuleCall_2_0_0ElementType());
+            	      						doneComposite();
             	      					
             	    }
 
@@ -10669,7 +10669,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3671:2: ruleXExpressionOrVarDeclaration EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXExpressionOrVarDeclarationElementType()); 
             }
             pushFollow(FOLLOW_ruleXExpressionOrVarDeclaration_in_entryRuleXExpressionOrVarDeclaration13392);
             ruleXExpressionOrVarDeclaration();
@@ -10677,7 +10677,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXExpressionOrVarDeclarationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXExpressionOrVarDeclaration13398); if (state.failed) return ;
 
@@ -10727,7 +10727,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XVariableDeclarationParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXVariableDeclaration_in_ruleXExpressionOrVarDeclaration13419);
@@ -10737,7 +10737,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XVariableDeclarationParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -10748,7 +10748,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XExpressionParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXExpressionOrVarDeclaration13439);
@@ -10758,7 +10758,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getXExpressionOrVarDeclaration_XExpressionParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -10790,7 +10790,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3701:2: ruleXVariableDeclaration EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXVariableDeclarationElementType()); 
             }
             pushFollow(FOLLOW_ruleXVariableDeclaration_in_entryRuleXVariableDeclaration13459);
             ruleXVariableDeclaration();
@@ -10798,7 +10798,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXVariableDeclarationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXVariableDeclaration13465); if (state.failed) return ;
 
@@ -10837,8 +10837,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXVariableDeclaration_XVariableDeclarationAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXVariableDeclaration_XVariableDeclarationAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -10963,7 +10963,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      								markComposite();
+                      								markComposite(elementTypeProvider.getXVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_2_0_0_0_0ElementType());
                       							
                     }
                     pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXVariableDeclaration13718);
@@ -10973,7 +10973,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      								doneComposite(elementTypeProvider.getXVariableDeclaration_TypeJvmTypeReferenceParserRuleCall_2_0_0_0_0ElementType());
+                      								doneComposite();
                       							
                     }
 
@@ -10990,7 +10990,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      								markComposite();
+                      								markComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_0_0_1_0ElementType());
                       							
                     }
                     pushFollow(FOLLOW_ruleValidID_in_ruleXVariableDeclaration13777);
@@ -11000,7 +11000,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      								doneComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_0_0_1_0ElementType());
+                      								doneComposite();
                       							
                     }
 
@@ -11029,7 +11029,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleValidID_in_ruleXVariableDeclaration13848);
@@ -11039,7 +11039,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXVariableDeclaration_NameValidIDParserRuleCall_2_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -11084,7 +11084,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXVariableDeclaration_RightXExpressionParserRuleCall_3_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXVariableDeclaration13918);
@@ -11094,7 +11094,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXVariableDeclaration_RightXExpressionParserRuleCall_3_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -11135,7 +11135,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3816:2: ruleJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmFormalParameterElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmFormalParameter_in_entryRuleJvmFormalParameter13957);
             ruleJvmFormalParameter();
@@ -11143,7 +11143,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmFormalParameterElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmFormalParameter13963); if (state.failed) return ;
 
@@ -11196,7 +11196,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmFormalParameter13999);
@@ -11206,7 +11206,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -11226,7 +11226,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleJvmFormalParameter14038);
@@ -11236,7 +11236,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -11271,7 +11271,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3853:2: ruleFullJvmFormalParameter EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getFullJvmFormalParameterElementType()); 
             }
             pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_entryRuleFullJvmFormalParameter14069);
             ruleFullJvmFormalParameter();
@@ -11279,7 +11279,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getFullJvmFormalParameterElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleFullJvmFormalParameter14075); if (state.failed) return ;
 
@@ -11317,7 +11317,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleFullJvmFormalParameter14111);
@@ -11327,7 +11327,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getFullJvmFormalParameter_ParameterTypeJvmTypeReferenceParserRuleCall_0_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -11344,7 +11344,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getFullJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleFullJvmFormalParameter14149);
@@ -11354,7 +11354,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getFullJvmFormalParameter_NameValidIDParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -11389,7 +11389,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:3890:2: ruleXFeatureCall EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXFeatureCallElementType()); 
             }
             pushFollow(FOLLOW_ruleXFeatureCall_in_entryRuleXFeatureCall14180);
             ruleXFeatureCall();
@@ -11397,7 +11397,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXFeatureCallElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXFeatureCall14186); if (state.failed) return ;
 
@@ -11439,8 +11439,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXFeatureCall_XFeatureCallAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXFeatureCall_XFeatureCallAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -11476,7 +11476,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall14260);
@@ -11486,7 +11486,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -11529,7 +11529,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall14334);
@@ -11539,7 +11539,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXFeatureCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -11582,7 +11582,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleIdOrSuper_in_ruleXFeatureCall14404);
@@ -11592,7 +11592,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -11646,7 +11646,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              							markComposite();
+                              							markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0ElementType());
                               						
                             }
                             pushFollow(FOLLOW_ruleXShortClosure_in_ruleXFeatureCall14763);
@@ -11656,7 +11656,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              							doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXShortClosureParserRuleCall_3_1_0_0ElementType());
+                              							doneComposite();
                               						
                             }
 
@@ -11682,7 +11682,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              								markComposite();
+                              								markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0ElementType());
                               							
                             }
                             pushFollow(FOLLOW_ruleXExpression_in_ruleXFeatureCall14835);
@@ -11692,7 +11692,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              								doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_0_0ElementType());
+                              								doneComposite();
                               							
                             }
 
@@ -11735,7 +11735,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    {
                             	    if ( state.backtracking==0 ) {
 
-                            	      									markComposite();
+                            	      									markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0ElementType());
                             	      								
                             	    }
                             	    pushFollow(FOLLOW_ruleXExpression_in_ruleXFeatureCall14931);
@@ -11745,7 +11745,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    if (state.failed) return ;
                             	    if ( state.backtracking==0 ) {
 
-                            	      									doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXExpressionParserRuleCall_3_1_1_1_1_0ElementType());
+                            	      									doneComposite();
                             	      								
                             	    }
 
@@ -11801,7 +11801,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXClosureParserRuleCall_4_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleXClosure_in_ruleXFeatureCall15058);
@@ -11811,7 +11811,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getXFeatureCall_FeatureCallArgumentsXClosureParserRuleCall_4_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -11849,7 +11849,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4082:2: ruleFeatureCallID EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getFeatureCallIDElementType()); 
             }
             pushFollow(FOLLOW_ruleFeatureCallID_in_entryRuleFeatureCallID15090);
             ruleFeatureCallID();
@@ -11857,7 +11857,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getFeatureCallIDElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleFeatureCallID15096); if (state.failed) return ;
 
@@ -11928,7 +11928,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getFeatureCallID_ValidIDParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleValidID_in_ruleFeatureCallID15117);
@@ -11938,7 +11938,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getFeatureCallID_ValidIDParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -12038,7 +12038,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4136:2: ruleIdOrSuper EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getIdOrSuperElementType()); 
             }
             pushFollow(FOLLOW_ruleIdOrSuper_in_entryRuleIdOrSuper15225);
             ruleIdOrSuper();
@@ -12046,7 +12046,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getIdOrSuperElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleIdOrSuper15231); if (state.failed) return ;
 
@@ -12098,7 +12098,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getIdOrSuper_FeatureCallIDParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleFeatureCallID_in_ruleIdOrSuper15252);
@@ -12108,7 +12108,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getIdOrSuper_FeatureCallIDParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -12157,7 +12157,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4166:2: ruleXConstructorCall EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXConstructorCallElementType()); 
             }
             pushFollow(FOLLOW_ruleXConstructorCall_in_entryRuleXConstructorCall15294);
             ruleXConstructorCall();
@@ -12165,7 +12165,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXConstructorCallElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXConstructorCall15300); if (state.failed) return ;
 
@@ -12208,8 +12208,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXConstructorCall_XConstructorCallAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXConstructorCall_XConstructorCallAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -12234,7 +12234,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXConstructorCall_ConstructorJvmConstructorCrossReference_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleXConstructorCall15361);
@@ -12244,7 +12244,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXConstructorCall_ConstructorJvmConstructorCrossReference_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -12285,7 +12285,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall15446);
@@ -12295,7 +12295,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -12338,7 +12338,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall15520);
@@ -12348,7 +12348,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXConstructorCall_TypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -12428,7 +12428,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              							markComposite();
+                              							markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXShortClosureParserRuleCall_4_1_0_0ElementType());
                               						
                             }
                             pushFollow(FOLLOW_ruleXShortClosure_in_ruleXConstructorCall15913);
@@ -12438,7 +12438,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              							doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXShortClosureParserRuleCall_4_1_0_0ElementType());
+                              							doneComposite();
                               						
                             }
 
@@ -12464,7 +12464,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              								markComposite();
+                              								markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_0_0ElementType());
                               							
                             }
                             pushFollow(FOLLOW_ruleXExpression_in_ruleXConstructorCall15985);
@@ -12474,7 +12474,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              								doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_0_0ElementType());
+                              								doneComposite();
                               							
                             }
 
@@ -12517,7 +12517,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    {
                             	    if ( state.backtracking==0 ) {
 
-                            	      									markComposite();
+                            	      									markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_1_1_0ElementType());
                             	      								
                             	    }
                             	    pushFollow(FOLLOW_ruleXExpression_in_ruleXConstructorCall16081);
@@ -12527,7 +12527,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    if (state.failed) return ;
                             	    if ( state.backtracking==0 ) {
 
-                            	      									doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXExpressionParserRuleCall_4_1_1_1_1_0ElementType());
+                            	      									doneComposite();
                             	      								
                             	    }
 
@@ -12583,7 +12583,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getXConstructorCall_ArgumentsXClosureParserRuleCall_5_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleXClosure_in_ruleXConstructorCall16208);
@@ -12593,7 +12593,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getXConstructorCall_ArgumentsXClosureParserRuleCall_5_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -12631,7 +12631,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4368:2: ruleXBooleanLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXBooleanLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXBooleanLiteral_in_entryRuleXBooleanLiteral16240);
             ruleXBooleanLiteral();
@@ -12639,7 +12639,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXBooleanLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXBooleanLiteral16246); if (state.failed) return ;
 
@@ -12677,8 +12677,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXBooleanLiteral_XBooleanLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXBooleanLiteral_XBooleanLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -12777,7 +12777,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4410:2: ruleXNullLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXNullLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXNullLiteral_in_entryRuleXNullLiteral16367);
             ruleXNullLiteral();
@@ -12785,7 +12785,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXNullLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXNullLiteral16373); if (state.failed) return ;
 
@@ -12822,8 +12822,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXNullLiteral_XNullLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXNullLiteral_XNullLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -12866,7 +12866,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4438:2: ruleXNumberLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXNumberLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXNumberLiteral_in_entryRuleXNumberLiteral16429);
             ruleXNumberLiteral();
@@ -12874,7 +12874,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXNumberLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXNumberLiteral16435); if (state.failed) return ;
 
@@ -12909,8 +12909,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXNumberLiteral_XNumberLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXNumberLiteral_XNumberLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -12924,7 +12924,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXNumberLiteral_ValueNumberParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleNumber_in_ruleXNumberLiteral16484);
@@ -12934,7 +12934,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXNumberLiteral_ValueNumberParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -12969,7 +12969,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4470:2: ruleXStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXStringLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral16515);
             ruleXStringLiteral();
@@ -12977,7 +12977,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXStringLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXStringLiteral16521); if (state.failed) return ;
 
@@ -13014,8 +13014,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXStringLiteral_XStringLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXStringLiteral_XStringLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -13070,7 +13070,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4502:2: ruleXTypeLiteral EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXTypeLiteralElementType()); 
             }
             pushFollow(FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral16601);
             ruleXTypeLiteral();
@@ -13078,7 +13078,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXTypeLiteralElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXTypeLiteral16607); if (state.failed) return ;
 
@@ -13117,8 +13117,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXTypeLiteral_XTypeLiteralAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXTypeLiteral_XTypeLiteralAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -13154,7 +13154,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXTypeLiteral_TypeJvmTypeCrossReference_3_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral16682);
@@ -13164,7 +13164,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXTypeLiteral_TypeJvmTypeCrossReference_3_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -13193,7 +13193,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      					markComposite();
+            	      					markComposite(elementTypeProvider.getXTypeLiteral_ArrayDimensionsArrayBracketsParserRuleCall_4_0ElementType());
             	      				
             	    }
             	    pushFollow(FOLLOW_ruleArrayBrackets_in_ruleXTypeLiteral16720);
@@ -13203,7 +13203,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      					doneComposite(elementTypeProvider.getXTypeLiteral_ArrayDimensionsArrayBracketsParserRuleCall_4_0ElementType());
+            	      					doneComposite();
             	      				
             	    }
 
@@ -13255,7 +13255,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4566:2: ruleXThrowExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXThrowExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression16766);
             ruleXThrowExpression();
@@ -13263,7 +13263,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXThrowExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXThrowExpression16772); if (state.failed) return ;
 
@@ -13300,8 +13300,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXThrowExpression_XThrowExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXThrowExpression_XThrowExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -13326,7 +13326,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXThrowExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXThrowExpression16835);
@@ -13336,7 +13336,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXThrowExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -13371,7 +13371,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4605:2: ruleXReturnExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXReturnExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression16866);
             ruleXReturnExpression();
@@ -13379,7 +13379,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXReturnExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXReturnExpression16872); if (state.failed) return ;
 
@@ -13416,8 +13416,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXReturnExpression_XReturnExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXReturnExpression_XReturnExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -13446,7 +13446,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      					markComposite();
+                      					markComposite(elementTypeProvider.getXReturnExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
                       				
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXReturnExpression17067);
@@ -13456,7 +13456,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      					doneComposite(elementTypeProvider.getXReturnExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
+                      					doneComposite();
                       				
                     }
 
@@ -13494,7 +13494,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4645:2: ruleXTryCatchFinallyExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression17099);
             ruleXTryCatchFinallyExpression();
@@ -13502,7 +13502,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXTryCatchFinallyExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression17105); if (state.failed) return ;
 
@@ -13541,8 +13541,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getXTryCatchFinallyExpression_XTryCatchFinallyExpressionAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -13567,7 +13567,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17168);
@@ -13577,7 +13577,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_ExpressionXExpressionParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -13637,7 +13637,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_3_0_0_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression17233);
@@ -13647,7 +13647,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_CatchClausesXCatchClauseParserRuleCall_3_0_0_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -13707,7 +13707,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              								markComposite();
+                              								markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_0_1_1_0ElementType());
                               							
                             }
                             pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17347);
@@ -13717,7 +13717,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              								doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_0_1_1_0ElementType());
+                              								doneComposite();
                               							
                             }
 
@@ -13763,7 +13763,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_1_1_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17448);
@@ -13773,7 +13773,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getXTryCatchFinallyExpression_FinallyExpressionXExpressionParserRuleCall_3_1_1_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -13817,7 +13817,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4744:2: ruleXSynchronizedExpression EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXSynchronizedExpressionElementType()); 
             }
             pushFollow(FOLLOW_ruleXSynchronizedExpression_in_entryRuleXSynchronizedExpression17494);
             ruleXSynchronizedExpression();
@@ -13825,7 +13825,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXSynchronizedExpressionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXSynchronizedExpression17500); if (state.failed) return ;
 
@@ -13870,8 +13870,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              						markComposite();
-              						doneComposite(elementTypeProvider.getXSynchronizedExpression_XSynchronizedExpressionAction_0_0_0ElementType());
+              						precedeComposite(elementTypeProvider.getXSynchronizedExpression_XSynchronizedExpressionAction_0_0_0ElementType());
+              						doneComposite();
               					
             }
 
@@ -13913,7 +13913,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXSynchronizedExpression_ParamXExpressionParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXSynchronizedExpression17654);
@@ -13923,7 +13923,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXSynchronizedExpression_ParamXExpressionParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -13951,7 +13951,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXSynchronizedExpression_ExpressionXExpressionParserRuleCall_3_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXSynchronizedExpression17706);
@@ -13961,7 +13961,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXSynchronizedExpression_ExpressionXExpressionParserRuleCall_3_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -13996,7 +13996,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4819:2: ruleXCatchClause EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXCatchClauseElementType()); 
             }
             pushFollow(FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause17737);
             ruleXCatchClause();
@@ -14004,7 +14004,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXCatchClauseElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXCatchClause17743); if (state.failed) return ;
 
@@ -14074,7 +14074,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXCatchClause_DeclaredParamFullJvmFormalParameterParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause17826);
@@ -14084,7 +14084,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXCatchClause_DeclaredParamFullJvmFormalParameterParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -14112,7 +14112,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXCatchClause_ExpressionXExpressionParserRuleCall_4_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleXExpression_in_ruleXCatchClause17878);
@@ -14122,7 +14122,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXCatchClause_ExpressionXExpressionParserRuleCall_4_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -14157,7 +14157,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4880:2: ruleQualifiedName EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getQualifiedNameElementType()); 
             }
             pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName17909);
             ruleQualifiedName();
@@ -14165,7 +14165,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getQualifiedNameElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName17915); if (state.failed) return ;
 
@@ -14199,7 +14199,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName17936);
@@ -14209,7 +14209,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4897:3: ( ( ( '.' )=>kw= '.' ) ruleValidID )*
@@ -14258,7 +14258,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
 
             	    if ( state.backtracking==0 ) {
 
-            	      				markComposite();
+            	      				markComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_1_1ElementType());
             	      			
             	    }
             	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName17993);
@@ -14268,7 +14268,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      				doneComposite(elementTypeProvider.getQualifiedName_ValidIDParserRuleCall_1_1ElementType());
+            	      				doneComposite();
             	      			
             	    }
 
@@ -14306,7 +14306,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4921:2: ruleNumber EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getNumberElementType()); 
             }
             pushFollow(FOLLOW_ruleNumber_in_entryRuleNumber18019);
             ruleNumber();
@@ -14314,7 +14314,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getNumberElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleNumber18025); if (state.failed) return ;
 
@@ -14563,7 +14563,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:4989:2: ruleStaticQualifier EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getStaticQualifierElementType()); 
             }
             pushFollow(FOLLOW_ruleStaticQualifier_in_entryRuleStaticQualifier18244);
             ruleStaticQualifier();
@@ -14571,7 +14571,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getStaticQualifierElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleStaticQualifier18250); if (state.failed) return ;
 
@@ -14618,7 +14618,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      			markComposite();
+            	      			markComposite(elementTypeProvider.getStaticQualifier_ValidIDParserRuleCall_0ElementType());
             	      		
             	    }
             	    pushFollow(FOLLOW_ruleValidID_in_ruleStaticQualifier18271);
@@ -14628,7 +14628,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      			doneComposite(elementTypeProvider.getStaticQualifier_ValidIDParserRuleCall_0ElementType());
+            	      			doneComposite();
             	      		
             	    }
             	    if ( state.backtracking==0 ) {
@@ -14679,7 +14679,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5018:2: ruleJvmTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmTypeReferenceElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference18306);
             ruleJvmTypeReference();
@@ -14687,7 +14687,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmTypeReferenceElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeReference18312); if (state.failed) return ;
 
@@ -14740,7 +14740,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markComposite();
+                      				markComposite(elementTypeProvider.getJvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0ElementType());
                       			
                     }
                     pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference18339);
@@ -14750,7 +14750,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneComposite(elementTypeProvider.getJvmTypeReference_JvmParameterizedTypeReferenceParserRuleCall_0_0ElementType());
+                      				doneComposite();
                       			
                     }
                     // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5036:4: ( ( ( () ruleArrayBrackets ) )=> ( () ruleArrayBrackets ) )*
@@ -14788,8 +14788,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
-                    	      							doneComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+                    	      							precedeComposite(elementTypeProvider.getJvmTypeReference_JvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -14797,7 +14797,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
 
                     	    if ( state.backtracking==0 ) {
 
-                    	      						markComposite();
+                    	      						markComposite(elementTypeProvider.getJvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1ElementType());
                     	      					
                     	    }
                     	    pushFollow(FOLLOW_ruleArrayBrackets_in_ruleJvmTypeReference18432);
@@ -14807,7 +14807,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      						doneComposite(elementTypeProvider.getJvmTypeReference_ArrayBracketsParserRuleCall_0_1_0_1ElementType());
+                    	      						doneComposite();
                     	      					
                     	    }
 
@@ -14833,7 +14833,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getJvmTypeReference_XFunctionTypeRefParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference18471);
@@ -14843,7 +14843,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getJvmTypeReference_XFunctionTypeRefParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -14875,7 +14875,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5073:2: ruleArrayBrackets EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getArrayBracketsElementType()); 
             }
             pushFollow(FOLLOW_ruleArrayBrackets_in_entryRuleArrayBrackets18491);
             ruleArrayBrackets();
@@ -14883,7 +14883,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getArrayBracketsElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleArrayBrackets18497); if (state.failed) return ;
 
@@ -14963,7 +14963,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5102:2: ruleXFunctionTypeRef EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXFunctionTypeRefElementType()); 
             }
             pushFollow(FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef18554);
             ruleXFunctionTypeRef();
@@ -14971,7 +14971,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXFunctionTypeRefElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXFunctionTypeRef18560); if (state.failed) return ;
 
@@ -15047,7 +15047,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              							markComposite();
+                              							markComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0ElementType());
                               						
                             }
                             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18630);
@@ -15057,7 +15057,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              							doneComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0ElementType());
+                              							doneComposite();
                               						
                             }
 
@@ -15100,7 +15100,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    {
                             	    if ( state.backtracking==0 ) {
 
-                            	      								markComposite();
+                            	      								markComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0ElementType());
                             	      							
                             	    }
                             	    pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18715);
@@ -15110,7 +15110,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             	    if (state.failed) return ;
                             	    if ( state.backtracking==0 ) {
 
-                            	      								doneComposite(elementTypeProvider.getXFunctionTypeRef_ParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0ElementType());
+                            	      								doneComposite();
                             	      							
                             	    }
 
@@ -15170,7 +15170,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getXFunctionTypeRef_ReturnTypeJvmTypeReferenceParserRuleCall_2_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18811);
@@ -15180,7 +15180,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getXFunctionTypeRef_ReturnTypeJvmTypeReferenceParserRuleCall_2_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -15215,7 +15215,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5184:2: ruleJvmParameterizedTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference18842);
             ruleJvmParameterizedTypeReference();
@@ -15223,7 +15223,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmParameterizedTypeReferenceElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference18848); if (state.failed) return ;
 
@@ -15269,7 +15269,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference18882);
@@ -15279,7 +15279,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_0_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -15320,7 +15320,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference18967);
@@ -15330,7 +15330,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -15373,7 +15373,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19041);
@@ -15383,7 +15383,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -15450,8 +15450,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      								markComposite();
-                    	      								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+                    	      								precedeComposite(elementTypeProvider.getJvmParameterizedTypeReference_JvmInnerTypeReferenceOuterAction_1_4_0_0_0ElementType());
+                    	      								doneComposite();
                     	      							
                     	    }
 
@@ -15482,7 +15482,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleValidID_in_ruleJvmParameterizedTypeReference19243);
@@ -15492,7 +15492,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_TypeJvmTypeCrossReference_1_4_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -15533,7 +15533,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	            {
                     	            if ( state.backtracking==0 ) {
 
-                    	              								markComposite();
+                    	              								markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0ElementType());
                     	              							
                     	            }
                     	            pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19356);
@@ -15543,7 +15543,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	            if (state.failed) return ;
                     	            if ( state.backtracking==0 ) {
 
-                    	              								doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_1_0ElementType());
+                    	              								doneComposite();
                     	              							
                     	            }
 
@@ -15586,7 +15586,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	            	    {
                     	            	    if ( state.backtracking==0 ) {
 
-                    	            	      									markComposite();
+                    	            	      									markComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0ElementType());
                     	            	      								
                     	            	    }
                     	            	    pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19452);
@@ -15596,7 +15596,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	            	    if (state.failed) return ;
                     	            	    if ( state.backtracking==0 ) {
 
-                    	            	      									doneComposite(elementTypeProvider.getJvmParameterizedTypeReference_ArgumentsJvmArgumentTypeReferenceParserRuleCall_1_4_2_2_1_0ElementType());
+                    	            	      									doneComposite();
                     	            	      								
                     	            	    }
 
@@ -15672,7 +15672,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5346:2: ruleJvmArgumentTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference19544);
             ruleJvmArgumentTypeReference();
@@ -15680,7 +15680,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmArgumentTypeReferenceElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference19550); if (state.failed) return ;
 
@@ -15730,7 +15730,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference19571);
@@ -15740,7 +15740,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmTypeReferenceParserRuleCall_0ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -15751,7 +15751,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      			markComposite();
+                      			markComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmWildcardTypeReferenceParserRuleCall_1ElementType());
                       		
                     }
                     pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference19591);
@@ -15761,7 +15761,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      			doneComposite(elementTypeProvider.getJvmArgumentTypeReference_JvmWildcardTypeReferenceParserRuleCall_1ElementType());
+                      			doneComposite();
                       		
                     }
 
@@ -15793,7 +15793,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5376:2: ruleJvmWildcardTypeReference EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference19611);
             ruleJvmWildcardTypeReference();
@@ -15801,7 +15801,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmWildcardTypeReferenceElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference19617); if (state.failed) return ;
 
@@ -15838,8 +15838,8 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              				markComposite();
-              				doneComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+              				precedeComposite(elementTypeProvider.getJvmWildcardTypeReference_JvmWildcardTypeReferenceAction_0ElementType());
+              				doneComposite();
               			
             }
 
@@ -15881,7 +15881,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundParserRuleCall_2_0_0_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference19697);
@@ -15891,7 +15891,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundParserRuleCall_2_0_0_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -15920,7 +15920,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmWildcardTypeReference19749);
@@ -15930,7 +15930,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmUpperBoundAndedParserRuleCall_2_0_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -15965,7 +15965,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundParserRuleCall_2_1_0_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference19821);
@@ -15975,7 +15975,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundParserRuleCall_2_1_0_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -16004,7 +16004,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      							markComposite();
+                    	      							markComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0ElementType());
                     	      						
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_ruleJvmWildcardTypeReference19873);
@@ -16014,7 +16014,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      							doneComposite(elementTypeProvider.getJvmWildcardTypeReference_ConstraintsJvmLowerBoundAndedParserRuleCall_2_1_1_0ElementType());
+                    	      							doneComposite();
                     	      						
                     	    }
 
@@ -16064,7 +16064,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5455:2: ruleJvmUpperBound EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmUpperBoundElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound19921);
             ruleJvmUpperBound();
@@ -16072,7 +16072,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmUpperBoundElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBound19927); if (state.failed) return ;
 
@@ -16123,7 +16123,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmUpperBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound19977);
@@ -16133,7 +16133,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmUpperBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -16168,7 +16168,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5488:2: ruleJvmUpperBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded20008);
             ruleJvmUpperBoundAnded();
@@ -16176,7 +16176,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmUpperBoundAndedElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded20014); if (state.failed) return ;
 
@@ -16227,7 +16227,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmUpperBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded20064);
@@ -16237,7 +16237,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmUpperBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -16272,7 +16272,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5521:2: ruleJvmLowerBound EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmLowerBoundElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound20095);
             ruleJvmLowerBound();
@@ -16280,7 +16280,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmLowerBoundElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBound20101); if (state.failed) return ;
 
@@ -16331,7 +16331,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmLowerBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound20151);
@@ -16341,7 +16341,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmLowerBound_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -16376,7 +16376,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5554:2: ruleJvmLowerBoundAnded EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmLowerBoundAnded_in_entryRuleJvmLowerBoundAnded20182);
             ruleJvmLowerBoundAnded();
@@ -16384,7 +16384,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmLowerBoundAndedElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmLowerBoundAnded20188); if (state.failed) return ;
 
@@ -16435,7 +16435,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmLowerBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBoundAnded20238);
@@ -16445,7 +16445,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmLowerBoundAnded_TypeReferenceJvmTypeReferenceParserRuleCall_1_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -16480,7 +16480,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5587:2: ruleJvmTypeParameter EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getJvmTypeParameterElementType()); 
             }
             pushFollow(FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter20269);
             ruleJvmTypeParameter();
@@ -16488,7 +16488,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getJvmTypeParameterElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleJvmTypeParameter20275); if (state.failed) return ;
 
@@ -16526,7 +16526,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              					markComposite();
+              					markComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
               				
             }
             pushFollow(FOLLOW_ruleValidID_in_ruleJvmTypeParameter20311);
@@ -16536,7 +16536,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              					doneComposite(elementTypeProvider.getJvmTypeParameter_NameValidIDParserRuleCall_0_0ElementType());
+              					doneComposite();
               				
             }
 
@@ -16564,7 +16564,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter20357);
@@ -16574,7 +16574,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundParserRuleCall_1_0_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -16603,7 +16603,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
 
-                    	      						markComposite();
+                    	      						markComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
                     	      					
                     	    }
                     	    pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter20402);
@@ -16613,7 +16613,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     	    if (state.failed) return ;
                     	    if ( state.backtracking==0 ) {
 
-                    	      						doneComposite(elementTypeProvider.getJvmTypeParameter_ConstraintsJvmUpperBoundAndedParserRuleCall_1_1_0ElementType());
+                    	      						doneComposite();
                     	      					
                     	    }
 
@@ -16660,7 +16660,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5637:2: ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); 
             }
             pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard20442);
             ruleQualifiedNameWithWildcard();
@@ -16668,7 +16668,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getQualifiedNameWithWildcardElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard20448); if (state.failed) return ;
 
@@ -16702,7 +16702,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             {
             if ( state.backtracking==0 ) {
 
-              			markComposite();
+              			markComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
               		
             }
             pushFollow(FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard20469);
@@ -16712,7 +16712,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
 
-              			doneComposite(elementTypeProvider.getQualifiedNameWithWildcard_QualifiedNameParserRuleCall_0ElementType());
+              			doneComposite();
               		
             }
             if ( state.backtracking==0 ) {
@@ -16763,7 +16763,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5673:2: ruleValidID EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getValidIDElementType()); 
             }
             pushFollow(FOLLOW_ruleValidID_in_entryRuleValidID20517);
             ruleValidID();
@@ -16771,7 +16771,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getValidIDElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleValidID20523); if (state.failed) return ;
 
@@ -16834,7 +16834,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5693:2: ruleXImportSection EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXImportSectionElementType()); 
             }
             pushFollow(FOLLOW_ruleXImportSection_in_entryRuleXImportSection20557);
             ruleXImportSection();
@@ -16842,7 +16842,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXImportSectionElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXImportSection20563); if (state.failed) return ;
 
@@ -16890,7 +16890,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      				markComposite();
+            	      				markComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
             	      			
             	    }
             	    pushFollow(FOLLOW_ruleXImportDeclaration_in_ruleXImportSection20592);
@@ -16900,7 +16900,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      				doneComposite(elementTypeProvider.getXImportSection_ImportDeclarationsXImportDeclarationParserRuleCall_0ElementType());
+            	      				doneComposite();
             	      			
             	    }
 
@@ -16943,7 +16943,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5717:2: ruleXImportDeclaration EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getXImportDeclarationElementType()); 
             }
             pushFollow(FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration20618);
             ruleXImportDeclaration();
@@ -16951,7 +16951,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getXImportDeclarationElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleXImportDeclaration20624); if (state.failed) return ;
 
@@ -17073,7 +17073,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      							markComposite();
+                      							markComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType());
                       						
                     }
                     pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_ruleXImportDeclaration20794);
@@ -17083,7 +17083,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      							doneComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0ElementType());
+                      							doneComposite();
                       						
                     }
 
@@ -17150,7 +17150,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             {
                             if ( state.backtracking==0 ) {
 
-                              								markComposite();
+                              								markComposite(elementTypeProvider.getXImportDeclaration_MemberNameValidIDParserRuleCall_1_0_3_1_0ElementType());
                               							
                             }
                             pushFollow(FOLLOW_ruleValidID_in_ruleXImportDeclaration20926);
@@ -17160,7 +17160,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                             if (state.failed) return ;
                             if ( state.backtracking==0 ) {
 
-                              								doneComposite(elementTypeProvider.getXImportDeclaration_MemberNameValidIDParserRuleCall_1_0_3_1_0ElementType());
+                              								doneComposite();
                               							
                             }
 
@@ -17192,7 +17192,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration20995);
@@ -17202,7 +17202,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXImportDeclaration_ImportedTypeJvmDeclaredTypeCrossReference_1_1_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -17225,7 +17225,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
 
-                      						markComposite();
+                      						markComposite(elementTypeProvider.getXImportDeclaration_ImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0ElementType());
                       					
                     }
                     pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration21049);
@@ -17235,7 +17235,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      						doneComposite(elementTypeProvider.getXImportDeclaration_ImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0ElementType());
+                      						doneComposite();
                       					
                     }
 
@@ -17304,7 +17304,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             // ../org.eclipse.xtext.idea.example.entities.idea/src-gen/org/eclipse/xtext/idea/example/entities/idea/parser/antlr/internal/PsiInternalEntities.g:5834:2: ruleQualifiedNameInStaticImport EOF
             {
             if ( state.backtracking==0 ) {
-               markComposite(); 
+               markComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); 
             }
             pushFollow(FOLLOW_ruleQualifiedNameInStaticImport_in_entryRuleQualifiedNameInStaticImport21113);
             ruleQualifiedNameInStaticImport();
@@ -17312,7 +17312,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               doneComposite(elementTypeProvider.getQualifiedNameInStaticImportElementType()); 
+               doneComposite(); 
             }
             match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameInStaticImport21119); if (state.failed) return ;
 
@@ -17365,7 +17365,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    {
             	    if ( state.backtracking==0 ) {
 
-            	      			markComposite();
+            	      			markComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());
             	      		
             	    }
             	    pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedNameInStaticImport21140);
@@ -17375,7 +17375,7 @@ public class PsiInternalEntitiesParser extends AbstractPsiAntlrParser {
             	    if (state.failed) return ;
             	    if ( state.backtracking==0 ) {
 
-            	      			doneComposite(elementTypeProvider.getQualifiedNameInStaticImport_ValidIDParserRuleCall_0ElementType());
+            	      			doneComposite();
             	      		
             	    }
             	    if ( state.backtracking==0 ) {

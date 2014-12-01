@@ -9,29 +9,17 @@ import com.intellij.testFramework.ParsingTestCase
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.eclipse.xtext.nodemodel.impl.InvariantChecker
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 
-import static extension org.eclipse.xtext.util.EmfFormatter.*
-import org.eclipse.emf.ecore.EObject
-
 abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implements ModelChecker {
-
-	@Inject
-	@Accessors(PROTECTED_GETTER)
-	extension NodeModelPrinter nodeModelPrinter
-
-	@Inject
-	@Accessors(PROTECTED_GETTER)
-	extension InvariantChecker invariantChecker
 
 	@Inject
 	@Accessors(PROTECTED_GETTER)
@@ -50,10 +38,14 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	@Inject
 	@Accessors(PROTECTED_GETTER)
 	BaseXtextASTFactory astFactory
-	
+
 	@Inject
 	@Accessors(PROTECTED_GETTER)
 	ValidationTestHelper validationHelper
+
+	@Inject
+	@Accessors(PROTECTED_GETTER)
+	extension XtextResourceAsserts xtextResourceAsserts
 
 	override protected setUp() throws Exception {
 		super.setUp()
@@ -90,7 +82,7 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	new(String dataPath, String fileExt, boolean lowercaseFirstLetter, ParserDefinition... definitions) {
 		super(dataPath, fileExt, lowercaseFirstLetter, definitions)
 	}
-	
+
 	override <T extends EObject> checkModel(String code, boolean validate) {
 		doCodeTest(code)
 		val model = actualResource.contents.head as T
@@ -119,48 +111,27 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 	protected def void assertResource() {
 		actualResource = createActualResource
 		expectedResource = createExpectedResource
-		val expectedRootNode = expectedResource.parseResult.rootNode
-		val actualRootNode = actualResource.parseResult.rootNode
-		assertEquals(expectedRootNode.print, actualRootNode.print)
-		assertEquals(expectedRootNode.semanticElement.objToStr, actualRootNode.semanticElement.objToStr)
-		actualRootNode.checkInvariant
-		val nodesMapping = PsiToEcoreAdapter.get(actualResource).nodesMapping
-		for (astNode : nodesMapping.keySet) {
-			val node = nodesMapping.get(astNode)
-			var belongsToTree = false
-			for (child : actualRootNode.asTreeIterable) {
-				if (child == node) {
-					belongsToTree = true /* FIXME unsupported BreakStatement: */
-				}
-			}
-			assertTrue('''Node «node» is not a part of the tree''', belongsToTree)
-		}
+		assertResource(expectedResource, actualResource)
 	}
 
-	def protected XtextResource createActualResource() {
-		var PsiToEcoreTransformator psiToEcoreTransformator = psiToEcoreTransformatorProvider.get()
-		psiToEcoreTransformator.setXtextFile(myFile as BaseXtextFile)
-		var XtextResourceSet resourceSet = xtextResourceSetProvider.get()
-		var XtextResource resource = resourceSet.createResource(URI.createURI(myFile.getVirtualFile().getUrl())) as XtextResource
-		resource.setParser(psiToEcoreTransformator)
-		try {
-			resource.load(new ByteArrayInputStream(newByteArrayOfSize(0)), null)
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		psiToEcoreTransformator.getAdapter().install(resource)
-		return resource
+	def protected createActualResource() {
+		val psiToEcoreTransformator = psiToEcoreTransformatorProvider.get => [
+			xtextFile = myFile as BaseXtextFile
+		]
+		val uri = URI.createURI(myFile.virtualFile.url)
+		xtextResourceSetProvider.get.createResource(uri) as XtextResource => [
+			parser = psiToEcoreTransformator
+			load(new ByteArrayInputStream(newByteArrayOfSize(0)), null)
+			psiToEcoreTransformator.adapter.install(it)
+		]
 	}
 
-	def protected XtextResource createExpectedResource() {
-		var XtextResourceSet resourceSet = xtextResourceSetProvider.get()
-		var XtextResource resource = resourceSet.createResource(URI.createURI(myFile.getVirtualFile().getUrl())) as XtextResource
-		try {
-			resource.load(new ByteArrayInputStream(myFile.getText().getBytes()), null)
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-		return resource
+	def protected createExpectedResource() {
+		var resourceSet = xtextResourceSetProvider.get
+		val uri = URI.createURI(myFile.virtualFile.url)
+		resourceSet.createResource(uri) as XtextResource => [
+			load(new ByteArrayInputStream(myFile.text.bytes), null)
+		]
 	}
 
 }

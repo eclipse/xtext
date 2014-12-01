@@ -68,13 +68,13 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:45:15: ( ruleModel EOF )
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:46:2: ruleModel EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getModelElementType()); 
             pushFollow(FOLLOW_ruleModel_in_entryRuleModel54);
             ruleModel();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getModelElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleModel60); 
 
             }
@@ -119,7 +119,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             	    // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:57:4: lv_referenceHolder_0_0= ruleReferenceHolder
             	    {
 
-            	    				markComposite();
+            	    				markComposite(elementTypeProvider.getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType());
             	    			
             	    pushFollow(FOLLOW_ruleReferenceHolder_in_ruleModel89);
             	    ruleReferenceHolder();
@@ -127,7 +127,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             	    state._fsp--;
 
 
-            	    				doneComposite(elementTypeProvider.getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType());
+            	    				doneComposite();
             	    			
 
             	    }
@@ -163,13 +163,13 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:69:25: ( ruleReferenceHolder EOF )
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:70:2: ruleReferenceHolder EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getReferenceHolderElementType()); 
             pushFollow(FOLLOW_ruleReferenceHolder_in_entryRuleReferenceHolder115);
             ruleReferenceHolder();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getReferenceHolderElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleReferenceHolder121); 
 
             }
@@ -226,7 +226,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:93:5: ruleFQN
             {
 
-            					markComposite();
+            					markComposite(elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
             				
             pushFollow(FOLLOW_ruleFQN_in_ruleReferenceHolder193);
             ruleFQN();
@@ -234,7 +234,7 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             state._fsp--;
 
 
-            					doneComposite(elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType());
+            					doneComposite();
             				
 
             }
@@ -267,13 +267,13 @@ public class PsiInternalRefactoringTestLanguageParser extends AbstractPsiAntlrPa
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:106:13: ( ruleFQN EOF )
             // ../org.eclipse.xtext.idea.common.types.tests/src-gen/org/eclipse/xtext/idea/common/types/idea/parser/antlr/internal/PsiInternalRefactoringTestLanguage.g:107:2: ruleFQN EOF
             {
-             markComposite(); 
+             markComposite(elementTypeProvider.getFQNElementType()); 
             pushFollow(FOLLOW_ruleFQN_in_entryRuleFQN224);
             ruleFQN();
 
             state._fsp--;
 
-             doneComposite(elementTypeProvider.getFQNElementType()); 
+             doneComposite(); 
             match(input,EOF,FOLLOW_EOF_in_entryRuleFQN230); 
 
             }

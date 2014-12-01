@@ -156,7 +156,7 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 			}
 			«ENDIF»
 			{
-				«markComposite»
+				«precedeComposite»
 				«doneComposite»
 			}
 		'''
@@ -287,8 +287,10 @@ class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
 	
 	def protected doneLeaf(EObject it, String token) '''doneLeaf(«token», elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	
-	def protected markComposite(EObject it) '''markComposite();'''
+	def protected markComposite(EObject it) '''markComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	
-	def protected doneComposite(EObject it) '''doneComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
+	def protected doneComposite(EObject it) '''doneComposite();'''
+	
+	def protected precedeComposite(EObject it) '''precedeComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
 	
 }

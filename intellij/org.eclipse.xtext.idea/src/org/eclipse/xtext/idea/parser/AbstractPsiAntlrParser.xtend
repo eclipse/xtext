@@ -17,8 +17,6 @@ import org.antlr.runtime.Token
 import org.antlr.runtime.TokenStream
 import org.antlr.runtime.UnwantedTokenException
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.idea.lang.CreateElementType
-import org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
 
 abstract class AbstractPsiAntlrParser extends Parser {
@@ -34,9 +32,7 @@ abstract class AbstractPsiAntlrParser extends Parser {
 
 	val leafMarkers = <PsiBuilder.Marker>newLinkedList
 	
-	val compositeMarkers = <PsiBuilder.Marker>newLinkedList
-	
-	val lookAheads = <PsiBuilder.Marker, Integer>newHashMap
+	val compositeMarkers = <CompositeMarker>newLinkedList
 	
 	String currentError
 
@@ -113,10 +109,8 @@ abstract class AbstractPsiAntlrParser extends Parser {
 		input.sourceName
 	}
 
-	protected def void markComposite() {
-		val marker = psiBuilder.mark
-		compositeMarkers.push(marker)
-		lookAheads.put(marker, currentLookAhead)
+	protected def void markComposite(IElementType elementType) {
+		compositeMarkers.push(new CompositeMarker(psiBuilder.mark, currentLookAhead, elementType))
 	}
 
 	protected def void markLeaf() {
@@ -124,16 +118,18 @@ abstract class AbstractPsiAntlrParser extends Parser {
 		leafMarkers.push(marker)
 	}
 	
+	protected def void precedeComposite(IElementType elementType) {
+		val compositeMarker = compositeMarkers.pop
+		compositeMarkers.push(compositeMarker.precede(elementType))
+		compositeMarkers.push(compositeMarker)
+	}
+	
 	protected def drop() {
 		leafMarkers.pop.drop
 	}
 
-	protected def void doneComposite(IElementType elementType) {
-		val marker = compositeMarkers.pop
-		val lookAhead = lookAheads.remove(marker)
-		marker.done(new CreateElementType(elementType) [
-			putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, lookAhead)
-		])
+	protected def void doneComposite() {
+		compositeMarkers.pop.done()
 	}
 
 	protected def void doneLeaf(Token matchedToken, IElementType elementType) {

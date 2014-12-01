@@ -120,7 +120,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
-		output.addOutlet(META_INF_PLUGIN, true, ideaProjectPath + "/META-INF");
+		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
 		
 		if (deployable) {
 			output.writeFile(PLUGIN, '''«grammar.name.toSimpleName» Launch Intellij.launch''', grammar.compileLaunchIntellij)
