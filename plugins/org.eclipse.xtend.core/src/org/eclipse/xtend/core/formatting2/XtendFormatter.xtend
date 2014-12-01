@@ -257,7 +257,7 @@ public class XtendFormatter extends XbaseFormatter {
 
 	def dispatch void format(RichString rs, extension IFormattableDocument format) {
 		val richStringFormatter = richStringFormatterFactory.create(request.textRegionAccess)
-		richStringFormatter.format(format, rs)
+		richStringFormatter.format(rs, format)
 	}
 
 	def dispatch void format(AnonymousClass anonymousClass, extension IFormattableDocument format) {
