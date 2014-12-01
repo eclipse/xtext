@@ -18,11 +18,11 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 
-	private final Gap gap;
+	private final HiddenRegion hiddenRegion;
 
-	protected NodeHidden(Gap gap, INode node) {
+	protected NodeHidden(HiddenRegion gap, INode node) {
 		super((NodeModelBaseRegionAccess) gap.getTextRegionAccess(), node);
-		this.gap = gap;
+		this.hiddenRegion = gap;
 	}
 
 	@Override
@@ -32,20 +32,20 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 	}
 
 	public IHiddenRegion getHiddenRegion() {
-		return gap;
+		return hiddenRegion;
 	}
 
 	public IHiddenRegionPart getNextHiddenPart() {
-		int i = gap.hiddens.indexOf(this) + 1;
-		if (i < gap.hiddens.size())
-			return gap.hiddens.get(i);
+		int i = hiddenRegion.hiddens.indexOf(this) + 1;
+		if (i < hiddenRegion.hiddens.size())
+			return hiddenRegion.hiddens.get(i);
 		return null;
 	}
 
 	public IHiddenRegionPart getPreviousHiddenPart() {
-		int i = gap.hiddens.indexOf(this) - 1;
+		int i = hiddenRegion.hiddens.indexOf(this) - 1;
 		if (i > 0)
-			return gap.hiddens.get(i);
+			return hiddenRegion.hiddens.get(i);
 		return null;
 	}
 

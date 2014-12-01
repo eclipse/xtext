@@ -16,12 +16,12 @@ import org.eclipse.xtext.nodemodel.INode;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeToken extends NodeRegion implements ISemanticRegion {
+public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 
 	private IHiddenRegion leading;
 	private IHiddenRegion trailing;
 
-	protected NodeToken(NodeModelBaseRegionAccess tokenAccess, INode node) {
+	protected NodeSemanticRegion(NodeModelBaseRegionAccess tokenAccess, INode node) {
 		super(tokenAccess, node);
 	}
 
