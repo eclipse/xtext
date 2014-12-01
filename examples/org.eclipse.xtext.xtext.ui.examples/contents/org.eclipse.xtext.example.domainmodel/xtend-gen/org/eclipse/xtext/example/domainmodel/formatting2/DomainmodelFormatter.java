@@ -47,11 +47,11 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatter;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
 @SuppressWarnings("all")
@@ -355,9 +355,6 @@ public class DomainmodelFormatter extends XbaseFormatter {
     } else if (entity instanceof XVariableDeclaration) {
       _format((XVariableDeclaration)entity, document);
       return;
-    } else if (entity instanceof XAnnotation) {
-      _format((XAnnotation)entity, document);
-      return;
     } else if (entity instanceof JvmTypeConstraint) {
       _format((JvmTypeConstraint)entity, document);
       return;
@@ -369,6 +366,12 @@ public class DomainmodelFormatter extends XbaseFormatter {
       return;
     } else if (entity instanceof XExpression) {
       _format((XExpression)entity, document);
+      return;
+    } else if (entity instanceof XImportDeclaration) {
+      _format((XImportDeclaration)entity, document);
+      return;
+    } else if (entity instanceof XImportSection) {
+      _format((XImportSection)entity, document);
       return;
     } else if (entity == null) {
       _format((Void)null, document);

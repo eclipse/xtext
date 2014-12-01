@@ -30,16 +30,13 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.formatting2.XbaseFormatter
-import org.eclipse.xtext.xtype.XImportDeclaration
-import org.eclipse.xtext.xtype.XImportSection
+import org.eclipse.xtext.xbase.annotations.formatting2.XbaseWithAnnotationsFormatter
 
 import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
-import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
 
-public class XtendFormatter extends XbaseFormatter {
+public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 
 	@Inject extension XtendGrammarAccess
 	@Inject RichStringFormatter.Factory richStringFormatterFactory
@@ -64,16 +61,6 @@ public class XtendFormatter extends XbaseFormatter {
 		xtendFile.append[newLine]
 	}
 
-	def dispatch format(XImportSection section, extension IFormattableDocument format) {
-		for (imp : section.importDeclarations) {
-			imp.format(format)
-			if (imp != section.importDeclarations.last)
-				imp.append(blankLinesBetweenImports)
-			else
-				imp.append(blankLinesAfterImports)
-		}
-	}
-
 	def protected void formatAnnotations(XtendAnnotationTarget target, extension IFormattableDocument document,
 		(IHiddenRegionFormatter)=>void configKey) {
 		if (target.annotations.isEmpty)
@@ -82,15 +69,6 @@ public class XtendFormatter extends XbaseFormatter {
 			a.format(document)
 			a.append(configKey)
 		}
-	}
-
-	def dispatch void format(XImportDeclaration imp, extension IFormattableDocument document) {
-		imp.regionForKeyword("import").append[oneSpace]
-		imp.regionForFeature(XIMPORT_DECLARATION__STATIC).append[oneSpace]
-		imp.regionForFeature(XIMPORT_DECLARATION__EXTENSION).append[oneSpace]
-		for (node : imp.regionsForKeywords("."))
-			node.surround[noSpace]
-		imp.regionForKeyword(";").prepend[noSpace]
 	}
 
 	def dispatch void format(XtendClass clazz, extension IFormattableDocument format) {

@@ -70,8 +70,8 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.annotations.formatting2.XbaseWithAnnotationsFormatter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.formatting2.XbaseFormatter;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -81,10 +81,9 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
-import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
-public class XtendFormatter extends XbaseFormatter {
+public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   @Inject
   @Extension
   private XtendGrammarAccess _xtendGrammarAccess;
@@ -143,23 +142,6 @@ public class XtendFormatter extends XbaseFormatter {
     format.<XtendFile>append(xtendFile, _function_3);
   }
   
-  protected void _format(final XImportSection section, @Extension final IFormattableDocument format) {
-    EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
-    for (final XImportDeclaration imp : _importDeclarations) {
-      {
-        this.format(imp, format);
-        EList<XImportDeclaration> _importDeclarations_1 = section.getImportDeclarations();
-        XImportDeclaration _last = IterableExtensions.<XImportDeclaration>last(_importDeclarations_1);
-        boolean _notEquals = (!Objects.equal(imp, _last));
-        if (_notEquals) {
-          format.<XImportDeclaration>append(imp, XtendFormatterPreferenceKeys.blankLinesBetweenImports);
-        } else {
-          format.<XImportDeclaration>append(imp, XtendFormatterPreferenceKeys.blankLinesAfterImports);
-        }
-      }
-    }
-  }
-  
   protected void formatAnnotations(final XtendAnnotationTarget target, @Extension final IFormattableDocument document, final Procedure1<? super IHiddenRegionFormatter> configKey) {
     EList<XAnnotation> _annotations = target.getAnnotations();
     boolean _isEmpty = _annotations.isEmpty();
@@ -173,46 +155,6 @@ public class XtendFormatter extends XbaseFormatter {
         document.<XAnnotation>append(a, ((Procedure1<IHiddenRegionFormatter>)configKey));
       }
     }
-  }
-  
-  protected void _format(final XImportDeclaration imp, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(imp, "import");
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
-    };
-    document.append(_regionForKeyword, _function);
-    ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(imp, XtypePackage.Literals.XIMPORT_DECLARATION__STATIC);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
-    };
-    document.append(_regionForFeature, _function_1);
-    ISemanticRegion _regionForFeature_1 = this.regionAccess.regionForFeature(imp, XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
-    };
-    document.append(_regionForFeature_1, _function_2);
-    List<ISemanticRegion> _regionsForKeywords = this.regionAccess.regionsForKeywords(imp, ".");
-    for (final ISemanticRegion node : _regionsForKeywords) {
-      final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-        public void apply(final IHiddenRegionFormatter it) {
-          it.noSpace();
-        }
-      };
-      document.surround(node, _function_3);
-    }
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(imp, ";");
-    final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.prepend(_regionForKeyword_1, _function_4);
   }
   
   protected void _format(final XtendClass clazz, @Extension final IFormattableDocument format) {

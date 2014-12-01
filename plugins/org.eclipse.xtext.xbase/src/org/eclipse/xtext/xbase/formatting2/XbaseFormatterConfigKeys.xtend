@@ -17,6 +17,9 @@ class XbaseFormatterPreferenceKeys extends FormatterPreferenceKeys {
 
 	public static val whitespaceBetweenKeywordAndParenthesisSL = new WhitespaceKey("whitespace.between.keyword.and.parenthesis", false)
 	public static val whitespaceBetweenKeywordAndParenthesisML = new WhitespaceKey("whitespace.between.keyword.and.parenthesis", true)
+	
+	public static val blankLinesBetweenImports = new BlankLineKey("blank.lines.between.imports", 0)
+	public static val blankLinesAfterImports = new BlankLineKey("blank.lines.after.imports", 1)
 
 	public static val bracesInNewLine = new NewLineKey("braces.in.new.line", false)
 }

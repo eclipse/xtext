@@ -23,6 +23,11 @@ public abstract class AbstractXtypeUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
 	}
 
+	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	public Class<? extends org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory> bindIContentFormatterFactory() {
+		return org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.xbase.ui.contentassist.XtypeProposalProvider.class;

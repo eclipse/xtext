@@ -8,8 +8,6 @@ import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys
 @Singleton
 class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
 	public static val blankLinesAfterPackageDecl = new BlankLineKey("blank.lines.after.packagedecl", 1)
-	public static val blankLinesBetweenImports = new BlankLineKey("blank.lines.between.imports", 0)
-	public static val blankLinesAfterImports = new BlankLineKey("blank.lines.after.imports", 1)
 	public static val blankLinesBetweenClasses = new BlankLineKey("blank.lines.between.classes", 1)
 	public static val blankLinesBeforeFirstMember = new BlankLineKey("blank.lines.before.first.member", 0)
 	public static val blankLinesAfterLastMember = new BlankLineKey("blank.lines.after.last.member", 0)
