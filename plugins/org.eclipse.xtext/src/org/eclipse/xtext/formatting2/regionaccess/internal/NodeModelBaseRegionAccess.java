@@ -55,36 +55,36 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 			if (result) {
 				if (node instanceof ILeafNode && ((ILeafNode) node).isHidden()) {
 					ILeafNode leafNode = (ILeafNode) node;
-					if (lastTokenOrGap instanceof NodeToken) {
-						NodeToken lastToken = (NodeToken) lastTokenOrGap;
-						Gap gap = createGap(tokenAccess);
+					if (lastTokenOrGap instanceof NodeSemanticRegion) {
+						NodeSemanticRegion lastToken = (NodeSemanticRegion) lastTokenOrGap;
+						HiddenRegion gap = createGap(tokenAccess);
 						lastToken.setTrailingGap(gap);
 						gap.setPrevious(lastToken);
 						gap.hiddens.add(createHidden(gap, leafNode));
 						lastTokenOrGap = gap;
-					} else if (lastTokenOrGap instanceof Gap) {
-						Gap lastGap = (Gap) lastTokenOrGap;
+					} else if (lastTokenOrGap instanceof HiddenRegion) {
+						HiddenRegion lastGap = (HiddenRegion) lastTokenOrGap;
 						lastGap.hiddens.add(createHidden(lastGap, leafNode));
 					} else if (lastTokenOrGap == null) {
-						Gap gap = createGap(tokenAccess);
+						HiddenRegion gap = createGap(tokenAccess);
 						gap.hiddens.add(createHidden(gap, leafNode));
 						lastTokenOrGap = gap;
 					} else {
 						throw new IllegalStateException();
 					}
 				} else {
-					NodeToken newToken = createToken(tokenAccess, node);
+					NodeSemanticRegion newToken = createToken(tokenAccess, node);
 					if (lastTokenOrGap == null)
 						lastTokenOrGap = createGap(tokenAccess);
-					if (lastTokenOrGap instanceof NodeToken) {
-						NodeToken lastToken = (NodeToken) lastTokenOrGap;
-						Gap gap = createGap(tokenAccess);
+					if (lastTokenOrGap instanceof NodeSemanticRegion) {
+						NodeSemanticRegion lastToken = (NodeSemanticRegion) lastTokenOrGap;
+						HiddenRegion gap = createGap(tokenAccess);
 						lastToken.setTrailingGap(gap);
 						gap.setPrevious(lastToken);
 						newToken.setLeadingGap(gap);
 						gap.setNext(newToken);
-					} else if (lastTokenOrGap instanceof Gap) {
-						Gap lastGap = (Gap) lastTokenOrGap;
+					} else if (lastTokenOrGap instanceof HiddenRegion) {
+						HiddenRegion lastGap = (HiddenRegion) lastTokenOrGap;
 						lastGap.setNext(newToken);
 						newToken.setLeadingGap(lastGap);
 					} else {
@@ -106,19 +106,19 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 			return tokenAccess;
 		}
 
-		protected Gap createGap(ITextRegionAccess tokenAccess) {
-			return new Gap(tokenAccess);
+		protected HiddenRegion createGap(ITextRegionAccess tokenAccess) {
+			return new HiddenRegion(tokenAccess);
 		}
 
-		protected NodeHidden createHidden(Gap gap, ILeafNode node) {
+		protected NodeHidden createHidden(HiddenRegion gap, ILeafNode node) {
 			if (isComment(node))
 				return new NodeComment(gap, node);
 			else
 				return new NodeWhitespace(gap, node);
 		}
 
-		protected NodeToken createToken(NodeModelBaseRegionAccess tokenAccess, INode node) {
-			return new NodeToken(tokenAccess, node);
+		protected NodeSemanticRegion createToken(NodeModelBaseRegionAccess tokenAccess, INode node) {
+			return new NodeSemanticRegion(tokenAccess, node);
 		}
 
 		protected EObjectTokens createTokens(NodeModelBaseRegionAccess access, INode node) {
@@ -153,9 +153,9 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 				if (this.add(access, next))
 					iterator.prune();
 			}
-			if (lastTokenOrGap instanceof NodeToken) {
-				NodeToken last = (NodeToken) lastTokenOrGap;
-				Gap gap = createGap(tokenAccess);
+			if (lastTokenOrGap instanceof NodeSemanticRegion) {
+				NodeSemanticRegion last = (NodeSemanticRegion) lastTokenOrGap;
+				HiddenRegion gap = createGap(tokenAccess);
 				last.setTrailingGap(gap);
 				gap.setPrevious(last);
 			}
