@@ -49,7 +49,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	val Factory factory
 	val extension ITextRegionAccess
 
-	def void format(IFormattableDocument doc, RichString richString) {
+	def dispatch void format(RichString richString, IFormattableDocument doc) {
 		if (EcoreUtil2.getContainerOfType(richString.eContainer, RichString) != null)
 			return;
 		if (richString.hasSyntaxError)
@@ -58,13 +58,14 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 		factory.richStringProcessor.process(richString, impl, new DefaultIndentationHandler())
 		impl.finish()
 
-		//		println()
-		//		println("-------------------------")
-		//		println(richString.nodeForEObject.text)
-		//		println("-------------------------")
-		//		println(impl.model)
-		//		println("-------------------------")
-		fmt(doc, richString)
+		// println()
+		// println("-------------------------")
+		// println(richString.nodeForEObject.text)
+		// println("-------------------------")
+		// println(impl.model)
+		// println("-------------------------")
+		for (e : richString.expressions)
+			format(e, doc)
 		val lines = impl.model.lines
 		val canIndent = !lines.empty && lines.last.content.nullOrEmpty
 		for (line : lines) {
@@ -115,18 +116,13 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 		doc.addReplacer(replacer)
 	}
 
-	def protected dispatch void fmt(IFormattableDocument doc, RichString expr) {
-		for (e : expr.expressions)
-			fmt(doc, e)
+	def  dispatch void format(RichStringLiteral expr, IFormattableDocument doc) {
 	}
 
-	def protected dispatch void fmt(IFormattableDocument doc, RichStringLiteral expr) {
+	def dispatch void format(Void expr, IFormattableDocument doc) {
 	}
 
-	def protected dispatch void fmt(IFormattableDocument doc, Void expr) {
-	}
-
-	def protected void format(EObject obj, IFormattableDocument doc) {
+	def protected void formatIntoSingleLine(IFormattableDocument doc, EObject obj) {
 		doc.formatter.format(obj, doc.withReplacerFilter[suppressLineWraps(it); true])
 	}
 
@@ -146,41 +142,41 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 		autowrap = null
 	}
 
-	def protected dispatch void fmt(extension IFormattableDocument doc, XExpression expr) {
+	def dispatch void format(XExpression expr, extension IFormattableDocument doc) {
 		expr.surround[noSpace]
-		format(expr, doc)
+		formatIntoSingleLine(doc, expr)
 	}
 
-	def protected dispatch void fmt(extension IFormattableDocument doc, RichStringIf expr) {
+	def dispatch void format(RichStringIf expr, extension IFormattableDocument doc) {
 		expr.regionForKeyword("IF").prepend[noSpace].append[oneSpace]
 		expr.elseIfs.last.append[noSpace]
-		format(expr.^if, doc)
-		fmt(doc, expr.then)
+		formatIntoSingleLine(doc, expr.^if)
+		format(expr.then, doc)
 		for (elseif : expr.elseIfs)
-			fmt(doc, elseif)
+			format(elseif, doc)
 		expr.regionForKeyword("ELSE").surround[noSpace]
-		fmt(doc, expr.^else)
+		format(expr.^else, doc)
 		expr.regionForKeyword("ENDIF").surround[noSpace]
 	}
 
-	def protected dispatch void fmt(extension IFormattableDocument doc, RichStringElseIf expr) {
+	def dispatch void format(RichStringElseIf expr, extension IFormattableDocument doc) {
 		expr.regionForKeyword("ELSEIF").prepend[noSpace].append[oneSpace]
 		expr.^if.append[noSpace]
-		format(expr.^if, doc)
+		formatIntoSingleLine(doc, expr.^if)
 	}
 
-	def protected dispatch void fmt(extension IFormattableDocument doc, RichStringForLoop expr) {
+	def dispatch void format(RichStringForLoop expr, extension IFormattableDocument doc) {
 		expr.regionForKeyword("FOR").prepend[noSpace].append[oneSpace]
 		expr.regionForKeyword(":").prepend[oneSpace].append[oneSpace]
-		format(expr.declaredParam, doc)
-		format(expr.forExpression, doc)
-		fmt(doc, expr.eachExpression)
+		formatIntoSingleLine(doc, expr.declaredParam)
+		formatIntoSingleLine(doc, expr.forExpression)
+		format(expr.eachExpression, doc)
 		expr.regionForKeyword("BEFORE").surround[oneSpace]
-		format(expr.before, doc)
+		formatIntoSingleLine(doc, expr.before)
 		expr.regionForKeyword("SEPARATOR").surround[oneSpace]
-		format(expr.separator, doc)
+		formatIntoSingleLine(doc, expr.separator)
 		expr.regionForKeyword("AFTER").surround[oneSpace]
-		format(expr.after, doc)
+		formatIntoSingleLine(doc, expr.after)
 		expr.eachExpression.prepend[noSpace]
 		expr.regionForKeyword("ENDFOR").surround[noSpace]
 	}
@@ -238,7 +234,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	override announceNextLiteral(RichStringLiteral object) {
 		super.announceNextLiteral(object)
 
-		//		println("announceNextLiteral()")
+		// println("announceNextLiteral()")
 		if (lastLiteralEndOffset > 0 && contentStartOffset < 0)
 			contentStartOffset = lastLiteralEndOffset
 		val node = nodeModelAccess.regionForFeature(object, XbasePackage.Literals.XSTRING_LITERAL__VALUE)
@@ -252,7 +248,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	override acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 		super.acceptSemanticLineBreak(charCount, origin, controlStructureSeen)
 
-		//		println("acceptSemanticLineBreak()")
+		// println("acceptSemanticLineBreak()")
 		acceptLineBreak(charCount, true, true)
 		offset = offset + charCount
 	}
@@ -260,7 +256,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	override acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 		super.acceptTemplateLineBreak(charCount, origin)
 
-		//		println("acceptTemplateLineBreak()")
+		// println("acceptTemplateLineBreak()")
 		acceptLineBreak(charCount, false, true)
 		offset = offset + charCount
 	}
@@ -336,10 +332,11 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	override acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 		super.acceptSemanticText(text, origin)
 
-		//		println('''acceptSemanticText("«text»")''')
+		// println('''acceptSemanticText("«text»")''')
 		if (!content) {
-			if (text.length > 0 &&
-				(0 .. (text.length - 1)).fold(false, [v, i|v || !Character.isWhitespace(text.charAt(i))]))
+			if (text.length > 0 && (0 .. (text.length - 1)).fold(false, [ v, i |
+				v || !Character.isWhitespace(text.charAt(i))
+			]))
 				startContent()
 		}
 		offset = offset + text.length
@@ -348,7 +345,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 	override acceptTemplateText(CharSequence text, RichStringLiteral origin) {
 		super.acceptTemplateText(text, origin)
 
-		//		println('''acceptTemplateText("«text»")''')
+		// println('''acceptTemplateText("«text»")''')
 		if (!content) {
 			if (model.rootIndentLenght < 0) {
 				model.rootIndentLenght = text.length
@@ -360,7 +357,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 
 	override acceptExpression(XExpression expression, CharSequence indentation) {
 
-		//		println("acceptExpression()")
+		// println("acceptExpression()")
 		super.acceptExpression(expression, indentation)
 		startContent()
 	}
