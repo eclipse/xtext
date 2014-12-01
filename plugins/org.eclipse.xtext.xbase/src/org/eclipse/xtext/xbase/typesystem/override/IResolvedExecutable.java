@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IResolvedExecutable {
+public interface IResolvedExecutable extends IResolvedFeature {
 
 	/**
 	 * Returns the resolved parameter types in the current context. That is, all free type variables are bound according
@@ -35,33 +35,6 @@ public interface IResolvedExecutable {
 	List<LightweightTypeReference> getResolvedParameterTypes();
 	
 	/**
-	 * Returns the resolved signature of this operation. The resolved representation of
-	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
-	 * <code>addAll(int,java.util.Collection&lt;String&gt;)</code>.
-	 * 
-	 * @return the resolved signature.
-	 */
-	String getResolvedSignature();
-
-	/**
-	 * Returns the simple signature of this operation. The simple signature of
-	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
-	 * <code>addAll(int, Collection&lt;String&gt;)</code>.
-	 * 
-	 * @return the simple, human readable signature.
-	 */
-	String getSimpleSignature();
-
-	/**
-	 * Returns the resolved erased signature of this operation. The resolved representation of
-	 * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is 
-	 * <code>addAll(int,Collection)</code>.
-	 * 
-	 * @return the erased signature.
-	 */
-	String getResolvedErasureSignature();
-	
-	/**
 	 * Returns the resolved declared exceptions in the current context. That is, all free type variables are bound
 	 * according the the bottom of this method hierarchy.
 	 * 
@@ -70,6 +43,7 @@ public interface IResolvedExecutable {
 	 */
 	List<LightweightTypeReference> getResolvedExceptions();
 
+	
 	/**
 	 * Returns the declared executable that is resolved.
 	 * 
@@ -77,18 +51,7 @@ public interface IResolvedExecutable {
 	 */
 	JvmExecutable getDeclaration();
 
-	/**
-	 * Returns the current context type.
-	 * 
-	 * @return the context.
-	 */
-	LightweightTypeReference getContextType();
-	
-	/**
-	 * Returns the resolved type of the declarator of this {@link #getDeclaration() declaration}.
-	 */
-	LightweightTypeReference getResolvedDeclarator();
-	
+
 	/**
 	 * Returns the list of declared type parameters of the {@link #getDeclaration() executable}.
 	 * 

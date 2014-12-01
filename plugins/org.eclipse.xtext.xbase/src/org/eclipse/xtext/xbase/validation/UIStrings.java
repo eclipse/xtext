@@ -104,7 +104,7 @@ public class UIStrings {
 		return "<" + referencesToString(constructorCall.getTypeArguments()) + ">";
 	}
 
-	protected String toString(Iterable<? extends JvmTypeParameter> elements) {
+	public String toString(Iterable<? extends JvmTypeParameter> elements) {
 		StringBuilder buffer = new StringBuilder();
 		boolean needsSeparator = false;
 		for (JvmTypeParameter type : elements) {

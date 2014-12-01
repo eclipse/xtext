@@ -9,21 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.override;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
-import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.collect.Lists;
 
@@ -32,24 +23,13 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractResolvedExecutable implements IResolvedExecutable {
+public abstract class AbstractResolvedExecutable<T extends JvmExecutable> extends AbstractResolvedFeature<T> implements IResolvedExecutable {
 
-	private final LightweightTypeReference contextType;
 	private List<LightweightTypeReference> parameterTypes;
 	private List<LightweightTypeReference> declaredExceptions;
 	
-	protected AbstractResolvedExecutable(LightweightTypeReference contextType) {
-		this.contextType = contextType;
-	}
-	
-	public LightweightTypeReference getContextType() {
-		return contextType;
-	}
-	
-	public LightweightTypeReference getResolvedDeclarator() {
-		JvmExecutable declaration = getDeclaration();
-		JvmDeclaredType declarator = declaration.getDeclaringType();
-		return getContextType().getSuperType(declarator);
+	protected AbstractResolvedExecutable(T declaration, LightweightTypeReference contextType) {
+		super(declaration, contextType);
 	}
 	
 	public List<JvmTypeParameter> getTypeParameters() {
@@ -118,29 +98,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		return result.toString();
 	}
 	
-	protected LightweightTypeReference getResolvedReference(/* @Nullable */ JvmTypeReference unresolved) {
-		if (unresolved == null) {
-			ITypeReferenceOwner owner = getContextType().getOwner();
-			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
-			return owner.newParameterizedTypeReference(objectType);
-		}
-		ITypeReferenceOwner owner = getContextType().getOwner();
-		LightweightTypeReference unresolvedLightweight = owner.toLightweightTypeReference(unresolved);
-		if (unresolvedLightweight.isPrimitive() || unresolvedLightweight.isPrimitiveVoid())
-			return unresolvedLightweight;
-		TypeParameterSubstitutor<?> substitutor = getSubstitutor();
-		LightweightTypeReference result = substitutor.substitute(unresolvedLightweight);
-		return result;
-	}
 	
-	protected List<LightweightTypeReference> getResolvedReferences(List<JvmTypeReference> unresolved) {
-		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(unresolved.size());
-		for(JvmTypeReference resolveMe: unresolved) {
-			result.add(getResolvedReference(resolveMe));
-		}
-		return result;
-	}
-
 	public List<LightweightTypeReference> getResolvedExceptions() {
 		JvmExecutable declaration = getDeclaration();
 		if (declaration.getExceptions().isEmpty())
@@ -148,75 +106,6 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		if (declaredExceptions != null)
 			return declaredExceptions;
 		return declaredExceptions = getResolvedReferences(declaration.getExceptions());
-	}
-	
-	protected abstract Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping();
-	
-	/**
-	 * Allows to refuse a certain type parameter to be substituted.
-	 * @param typeParameter the type parameter that should be substituted.
-	 * @return <code>false</code> if the parameter may be substituted. <code>true</code> if it should be preserved.
-	 */
-	protected boolean isResolvedTypeParameter(JvmTypeParameter typeParameter) {
-		return isResolvedTypeParameter(getContextType(), typeParameter);
-	}
-	
-	protected boolean isResolvedTypeParameter(LightweightTypeReference typeReference, JvmTypeParameter typeParameter) {
-		List<LightweightTypeReference> typeArguments = typeReference.getTypeArguments();
-		for(int i = 0, size = typeArguments.size(); i < size; i++) {
-			LightweightTypeReference typeArgument = typeArguments.get(i);
-			if (typeParameter.equals(typeArgument.getType()) || isResolvedTypeParameter(typeArgument, typeParameter)) {
-				return true;
-			}
-		}
-		LightweightTypeReference outer = typeReference.getOuter();
-		if (outer != null) {
-			if (isResolvedTypeParameter(outer, typeParameter)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	protected TypeParameterSubstitutor<?> getSubstitutor() {
-		if (getContextType().getType() != getDeclaration().getDeclaringType()) {
-			if (isRawTypeInheritance()) {
-				return new RawTypeSubstitutor(getContextType().getOwner());
-			}
-		}
-		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = getContextTypeParameterMapping();
-		TypeParameterSubstitutor<?> result = new TypeParameterByConstraintSubstitutor(mapping, getContextType().getOwner()) {
-			@Override
-			protected boolean isDeclaredTypeParameter(JvmTypeParameter typeParameter) {
-				if (super.isDeclaredTypeParameter(typeParameter) 
-						|| isResolvedTypeParameter(typeParameter)
-						|| getTypeParameterMapping().containsKey(typeParameter))
-					return true;
-				return false;
-			}
-			@Override
-			/* @Nullable */
-			protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter type,
-					ConstraintVisitingInfo info) {
-				LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(type, info);
-				if (result != null && result.getTypeReference().getType() == type) {
-					return null;
-				}
-				return result; 
-			}
-		};
-		return result;
-	}
-	
-	protected boolean isRawTypeInheritance() {
-		List<LightweightTypeReference> superTypes = getContextType().getAllSuperTypes();
-		JvmDeclaredType declaringType = getDeclaration().getDeclaringType();
-		for(LightweightTypeReference superType: superTypes) {
-			if (superType.getType() == declaringType && superType.isRawType()) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 	@Override

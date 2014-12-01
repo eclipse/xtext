@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2014 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,16 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
-import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class ResolvedConstructor extends AbstractResolvedExecutable<JvmConstructor> implements IResolvedConstructor {
+public interface IResolvedField extends IResolvedFeature {
 
-	public ResolvedConstructor(JvmConstructor constructor, LightweightTypeReference contextType) {
-		super(constructor, contextType);
-	}
+	/**
+	 * Returns the resolved type in the current context. That is, all free type variables are bound according
+	 * the the bottom of this hierarchy.
+	 * 
+	 * @see #getContextType()
+	 * @return the return type.
+	 */
+	LightweightTypeReference getResolvedType();
 	
+	JvmField getDeclaration();
 }

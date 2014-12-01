@@ -179,35 +179,35 @@ public class OverrideHelper {
 	}
 
 	/**
-	 * Returns the resolved operations that are defined in the given <code>type</code> and its supertypes.
+	 * Returns the resolved features that are defined in the given <code>type</code> and its supertypes.
 	 * Considers private methods of super types, too.
 	 * @param type the type. Has to be contained in a resource.
-	 * @return the resolved operations. 
+	 * @return the resolved features. 
 	 */
-	public ResolvedOperations getResolvedOperations(JvmDeclaredType type) {
+	public ResolvedFeatures getResolvedFeatures(JvmDeclaredType type) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type.eResource().getResourceSet());
 		LightweightTypeReference contextType = owner.toLightweightTypeReference(type);
-		return getResolvedOperations(contextType);
+		return getResolvedFeatures(contextType);
 	}
 	
 	/**
-	 * Returns the resolved operations that are defined in the given <code>context type</code> and its supertypes.
+	 * Returns the resolved features that are defined in the given <code>context type</code> and its supertypes.
 	 * Considers private methods of super types, too.
 	 * @param contextType the context type. Has to be contained in a resource.
-	 * @return the resolved operations. 
+	 * @return the resolved features. 
 	 */
-	public ResolvedOperations getResolvedOperations(JvmTypeReference contextType) {
+	public ResolvedFeatures getResolvedFeatures(JvmTypeReference contextType) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, contextType.eResource().getResourceSet());
-		return getResolvedOperations(owner.toLightweightTypeReference(contextType));
+		return getResolvedFeatures(owner.toLightweightTypeReference(contextType));
 	}
 
 	/**
-	 * Returns the resolved operations that are defined in the given <code>context type</code> and its supertypes.
+	 * Returns the resolved features that are defined in the given <code>context type</code> and its supertypes.
 	 * Considers private methods of super types, too.
-	 * @return the resolved operations. 
+	 * @return the resolved features. 
 	 */
-	public ResolvedOperations getResolvedOperations(LightweightTypeReference contextType) {
-		return new ResolvedOperations(contextType, overrideTester);
+	public ResolvedFeatures getResolvedFeatures(LightweightTypeReference contextType) {
+		return new ResolvedFeatures(contextType, overrideTester);
 	}
 	
 }

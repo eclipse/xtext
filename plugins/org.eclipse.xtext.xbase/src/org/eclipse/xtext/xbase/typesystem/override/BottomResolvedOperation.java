@@ -7,16 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
-import java.util.Collections;
 import java.util.EnumSet;
-import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 
 /**
  * Resolved bottom representation of a {@link JvmOperation}.
@@ -25,7 +20,6 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
  */
 public class BottomResolvedOperation extends AbstractResolvedOperation {
 	
-	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 	private OverrideTester overrideTester;
 	
 	public BottomResolvedOperation(JvmOperation declaration, LightweightTypeReference contextType, OverrideTester overrideTester) {
@@ -46,20 +40,6 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 		return this;
 	}
 
-	@Override
-	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getContextTypeParameterMapping() {
-		if (typeParameterMapping != null)
-			return typeParameterMapping;
-		return typeParameterMapping = Collections.unmodifiableMap(computeContextTypeParameterMapping());
-	}
-
-	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> computeContextTypeParameterMapping() {
-		if (getDeclaration().isStatic()) {
-			return Collections.emptyMap();
-		}
-		return new DeclaratorTypeArgumentCollector().getTypeParameterMapping(getContextType());
-	}
-	
 	@Override
 	protected OverrideTester getOverrideTester() {
 		return overrideTester;

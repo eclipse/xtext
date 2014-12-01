@@ -18,33 +18,33 @@ import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
-import org.eclipse.xtext.xbase.typesystem.^override.ResolvedOperations
 import org.junit.Test
+import org.eclipse.xtext.xbase.typesystem.^override.ResolvedFeatures
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class ResolvedOperationsTest extends AbstractXbaseTestCase {
+class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	OverrideHelper overrideHelper
 	
-	def ResolvedOperations toResolvedOperations(Class<?> type) {
+	def ResolvedFeatures toResolvedOperations(Class<?> type) {
 		val typeLiteral = '''typeof(«type.canonicalName»)'''.expression as XTypeLiteral
-		val result = overrideHelper.getResolvedOperations(typeLiteral.type as JvmDeclaredType)
+		val result = overrideHelper.getResolvedFeatures(typeLiteral.type as JvmDeclaredType)
 		return result
 	}
 	
-	def ResolvedOperations toResolvedOperations(String castExpression) {
+	def ResolvedFeatures toResolvedOperations(String castExpression) {
 		val cast = castExpression.expression as XCastedExpression
-		val result = overrideHelper.getResolvedOperations(cast.type)
+		val result = overrideHelper.getResolvedFeatures(cast.type)
 		return result
 	}
 	
 	@Test
 	def void testArrayListHasNoAbstractMethods() {
 		val resolvedOperations = typeof(ArrayList).toResolvedOperations
-		val all = resolvedOperations.allOperations
+		val all = resolvedOperations.getAllOperations
 		assertFalse(all.empty)
 		all.forEach [
 			assertFalse(declaration.isAbstract)
@@ -54,7 +54,7 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 	@Test
 	def void testIterableIterator() {
 		val resolvedOperations = typeof(Iterable).toResolvedOperations
-		val all = resolvedOperations.allOperations
+		val all = resolvedOperations.getAllOperations
 		assertFalse(all.empty)
 		val iterator = Iterables::getOnlyElement(all.filter [ declaration.isAbstract ])
 		assertEquals("java.lang.Iterable.iterator()", iterator.declaration.identifier)
@@ -63,30 +63,30 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 	@Test
 	def void testUnmodifiableIterator() {
 		val resolvedOperations = typeof(UnmodifiableIterator).toResolvedOperations
-		val all = resolvedOperations.allOperations
+		val all = resolvedOperations.getAllOperations
 		assertFalse(all.empty)
 		assertEquals(all.toString, 2, all.filter [ declaration.isAbstract ].size)
 		assertEquals(all.toString, 1 /* remove */ + 6 /* from Object */, all.filter [ declaration.final ].size)
-		val declared = resolvedOperations.declaredOperations
+		val declared = resolvedOperations.getDeclaredOperations
 		assertEquals(1, declared.size)
 	}
 	
 	@Test
 	def void testAbstractList() {
 		val resolvedOperations = typeof(AbstractList).toResolvedOperations
-		val all = resolvedOperations.allOperations
+		val all = resolvedOperations.getAllOperations
 		assertFalse(all.empty)
 		assertEquals(all.toString, 1 /* AbstractList.get */ + 1 /* AbstractCollection.size */, all.filter [ declaration.isAbstract ].size)
-		val declared = resolvedOperations.declaredOperations
+		val declared = resolvedOperations.getDeclaredOperations
 		assertEquals(1, declared.filter [ declaration.isAbstract ].size)
 	}
 	
 	@Test
 	def void testSoftReferenceConstructors() {
 		val resolvedOperations = typeof(SoftReference).toResolvedOperations
-		assertEquals(1, resolvedOperations.declaredOperations.size)
-		assertEquals(2, resolvedOperations.declaredConstructors.size)
-		resolvedOperations.declaredConstructors.forEach [
+		assertEquals(1, resolvedOperations.getDeclaredOperations.size)
+		assertEquals(2, resolvedOperations.getDeclaredConstructors.size)
+		resolvedOperations.getDeclaredConstructors.forEach [
 			switch(declaration.parameters.size) {
 				case 1: {
 					assertEquals("SoftReference(T)", resolvedSignature)
@@ -105,9 +105,9 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 	@Test
 	def void testSoftReferenceOfString() {
 		val resolvedOperations = "null as java.lang.ref.SoftReference<String>".toResolvedOperations
-		assertEquals(1, resolvedOperations.declaredOperations.size)
-		assertEquals(2, resolvedOperations.declaredConstructors.size)
-		resolvedOperations.declaredConstructors.forEach [
+		assertEquals(1, resolvedOperations.getDeclaredOperations.size)
+		assertEquals(2, resolvedOperations.getDeclaredConstructors.size)
+		resolvedOperations.getDeclaredConstructors.forEach [
 			switch(declaration.parameters.size) {
 				case 1: {
 					assertEquals("SoftReference(java.lang.String)", resolvedSignature)
@@ -120,6 +120,14 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 				default: fail("Unexpected constructor: " + it)
 			}
 		]
+	}
+	
+	@Test
+	def void testReferenceOfString() {
+		val resolvedFeatures = "null as java.lang.ref.Reference<String>".toResolvedOperations
+		val fields = resolvedFeatures.declaredFields.toList
+		assertEquals("String", fields.findFirst[simpleSignature == 'referent'].resolvedType.humanReadableName)
+		assertEquals("ReferenceQueue<? super String>", fields.findFirst[simpleSignature == 'queue'].resolvedType.humanReadableName)
 	}
 	
 }
