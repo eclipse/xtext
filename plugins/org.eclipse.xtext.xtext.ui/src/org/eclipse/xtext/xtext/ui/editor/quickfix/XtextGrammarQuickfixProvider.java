@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.quickfix;
 
+import static org.eclipse.xtext.xtext.XtextConfigurableIssueCodes.*;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -73,7 +75,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtext.XtextLinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.xtext.XtextValidator;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Predicate;
@@ -133,7 +134,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 		createLinkingIssueResolutions(issue, acceptor);
 	}
 
-	@Fix(XtextValidator.INVALID_METAMODEL_NAME)
+	@Fix(INVALID_METAMODEL_NAME)
 	public void fixInvalidMetaModelName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		final String metaModelName = issue.getData()[0];
 		acceptor.accept(issue, "Fix metamodel name '" + metaModelName + "'", "Fix metamodel name '" + metaModelName
@@ -145,7 +146,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 
-	@Fix(XtextValidator.EMPTY_ENUM_LITERAL)
+	@Fix(EMPTY_ENUM_LITERAL)
 	public void fixEmptyEnumLiteral(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
 				new ISemanticModification() {
@@ -158,7 +159,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				});
 	}
 
-	@Fix(XtextValidator.INVALID_ACTION_USAGE)
+	@Fix(INVALID_ACTION_USAGE)
 	public void fixInvalidActionUsage(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix invalid action usage", "Fix invalid action usage", NULL_QUICKFIX_IMAGE,
 				new IModification() {
@@ -168,7 +169,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				});
 	}
 	
-	@Fix(XtextValidator.INVALID_PACKAGE_REFERENCE_INHERITED)
+	@Fix(INVALID_PACKAGE_REFERENCE_INHERITED)
 	public void fixImportedPackageFromSuperGrammar(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData().length == 1)
 			acceptor.accept(issue, 
@@ -188,7 +189,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					});
 	}
 	
-	@Fix(XtextValidator.INVALID_PACKAGE_REFERENCE_EXTERNAL)
+	@Fix(INVALID_PACKAGE_REFERENCE_EXTERNAL)
 	public void fixExternalImportedPackage(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData().length == 1)
 			acceptor.accept(issue, 
@@ -398,7 +399,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					});
 	}
 
-	@Fix(XtextValidator.INVALID_TERMINALRULE_NAME)
+	@Fix(INVALID_TERMINALRULE_NAME)
 	public void fixTerminalRuleName(final Issue issue, IssueResolutionAcceptor acceptor){
 		if(issue.getData().length == 1){
 			final String upperCase = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE,issue.getData()[0]).toString();
