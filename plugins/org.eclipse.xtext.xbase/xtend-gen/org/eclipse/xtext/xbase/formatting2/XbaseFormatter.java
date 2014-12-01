@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormattingNotApplicableException;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IFormattableSubDocument;
@@ -57,14 +56,13 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.formatting2.ArrayBracketsFormattingReplacer;
 import org.eclipse.xtext.xbase.formatting2.IndentOnceAutowrapFormatter;
 import org.eclipse.xtext.xbase.formatting2.ObjectEntry;
 import org.eclipse.xtext.xbase.formatting2.SeparatorEntry;
 import org.eclipse.xtext.xbase.formatting2.SeparatorRegions;
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
+import org.eclipse.xtext.xbase.formatting2.XtypeFormatter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -73,9 +71,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
 @SuppressWarnings("all")
-public class XbaseFormatter extends AbstractFormatter2 {
+public class XbaseFormatter extends XtypeFormatter {
   @Inject
   @Accessors(AccessorType.PUBLIC_GETTER)
   @Extension
@@ -244,76 +244,6 @@ public class XbaseFormatter extends AbstractFormatter2 {
     }
   }
   
-  protected void _format(final XAnnotation ann, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(ann, "@");
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.append(_regionForKeyword, _function);
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(ann, "(");
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.surround(_regionForKeyword_1, _function_1);
-    XExpression _value = ann.getValue();
-    boolean _notEquals = (!Objects.equal(_value, null));
-    if (_notEquals) {
-      XExpression _value_1 = ann.getValue();
-      this.format(_value_1, document);
-      ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(ann, ")");
-      final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-        public void apply(final IHiddenRegionFormatter it) {
-          it.noSpace();
-        }
-      };
-      document.prepend(_regionForKeyword_2, _function_2);
-    } else {
-      EList<XAnnotationElementValuePair> _elementValuePairs = ann.getElementValuePairs();
-      boolean _isEmpty = _elementValuePairs.isEmpty();
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        EList<XAnnotationElementValuePair> _elementValuePairs_1 = ann.getElementValuePairs();
-        for (final XAnnotationElementValuePair pair : _elementValuePairs_1) {
-          {
-            ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(pair, "=");
-            final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-              public void apply(final IHiddenRegionFormatter it) {
-                it.noSpace();
-              }
-            };
-            document.surround(_regionForKeyword_3, _function_3);
-            XExpression _value_2 = pair.getValue();
-            this.format(_value_2, document);
-            ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(pair, ",");
-            final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
-              public void apply(final IHiddenRegionFormatter it) {
-                it.noSpace();
-              }
-            };
-            ISemanticRegion _prepend = document.prepend(_immediatelyFollowingKeyword, _function_4);
-            final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
-              public void apply(final IHiddenRegionFormatter it) {
-                it.oneSpace();
-              }
-            };
-            document.append(_prepend, _function_5);
-          }
-        }
-        ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(ann, ")");
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        document.prepend(_regionForKeyword_3, _function_3);
-      }
-    }
-  }
-  
   protected void _format(final JvmGenericArrayTypeReference array, @Extension final IFormattableDocument document) {
     ParserRule _arrayBracketsRule = this.grammar.getArrayBracketsRule();
     ISemanticRegion _regionForRuleCallTo = this.regionAccess.regionForRuleCallTo(array, _arrayBracketsRule);
@@ -321,137 +251,6 @@ public class XbaseFormatter extends AbstractFormatter2 {
     document.addReplacer(_arrayBracketsFormattingReplacer);
     JvmTypeReference _componentType = array.getComponentType();
     this.format(_componentType, document);
-  }
-  
-  protected void _format(final XFunctionTypeRef func, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(func, "(");
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.append(_regionForKeyword, _function);
-    EList<JvmTypeReference> _paramTypes = func.getParamTypes();
-    for (final JvmTypeReference param : _paramTypes) {
-      {
-        this.format(param, document);
-        ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(param, ",");
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        ISemanticRegion _prepend = document.prepend(_immediatelyFollowingKeyword, _function_1);
-        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.append(_prepend, _function_2);
-      }
-    }
-    ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(func, ")");
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        EList<JvmTypeReference> _paramTypes = func.getParamTypes();
-        boolean _isEmpty = _paramTypes.isEmpty();
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          it.noSpace();
-        }
-      }
-    };
-    ISemanticRegion _prepend = document.prepend(_regionForKeyword_1, _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.append(_prepend, _function_2);
-    ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(func, "=>");
-    final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.append(_regionForKeyword_2, _function_3);
-    JvmTypeReference _returnType = func.getReturnType();
-    this.format(_returnType, document);
-  }
-  
-  protected void _format(final JvmTypeParameter ref, @Extension final IFormattableDocument document) {
-    EList<JvmTypeConstraint> _constraints = ref.getConstraints();
-    for (final JvmTypeConstraint c : _constraints) {
-      {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.<JvmTypeConstraint>prepend(c, _function);
-        this.format(c, document);
-      }
-    }
-  }
-  
-  protected void _format(final JvmParameterizedTypeReference ref, @Extension final IFormattableDocument document) {
-    ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(ref, "<");
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
-    };
-    document.surround(_regionForKeyword, _function);
-    EList<JvmTypeReference> _arguments = ref.getArguments();
-    for (final JvmTypeReference arg : _arguments) {
-      {
-        this.format(arg, document);
-        ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
-        };
-        ISemanticRegion _prepend = document.prepend(_immediatelyFollowingKeyword, _function_1);
-        final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.append(_prepend, _function_2);
-      }
-    }
-    EList<JvmTypeReference> _arguments_1 = ref.getArguments();
-    boolean _isEmpty = _arguments_1.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(ref, ">");
-      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-        public void apply(final IHiddenRegionFormatter it) {
-          it.noSpace();
-        }
-      };
-      document.prepend(_regionForKeyword_1, _function_1);
-    }
-  }
-  
-  protected void _format(final JvmWildcardTypeReference ref, @Extension final IFormattableDocument document) {
-    EList<JvmTypeConstraint> _constraints = ref.getConstraints();
-    boolean _isEmpty = _constraints.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(ref, "?");
-      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword, _function);
-    }
-    EList<JvmTypeConstraint> _constraints_1 = ref.getConstraints();
-    for (final JvmTypeConstraint c : _constraints_1) {
-      this.format(c, document);
-    }
   }
   
   protected void _format(final JvmTypeConstraint constraint, @Extension final IFormattableDocument document) {
@@ -2487,109 +2286,112 @@ public class XbaseFormatter extends AbstractFormatter2 {
     return _and;
   }
   
-  public void format(final Object ref, final IFormattableDocument document) {
-    if (ref instanceof JvmTypeParameter) {
-      _format((JvmTypeParameter)ref, document);
+  public void format(final Object expr, final IFormattableDocument format) {
+    if (expr instanceof JvmTypeParameter) {
+      _format((JvmTypeParameter)expr, format);
       return;
-    } else if (ref instanceof JvmFormalParameter) {
-      _format((JvmFormalParameter)ref, document);
+    } else if (expr instanceof JvmFormalParameter) {
+      _format((JvmFormalParameter)expr, format);
       return;
-    } else if (ref instanceof XtextResource) {
-      _format((XtextResource)ref, document);
+    } else if (expr instanceof XtextResource) {
+      _format((XtextResource)expr, format);
       return;
-    } else if (ref instanceof XAssignment) {
-      _format((XAssignment)ref, document);
+    } else if (expr instanceof XAssignment) {
+      _format((XAssignment)expr, format);
       return;
-    } else if (ref instanceof XBinaryOperation) {
-      _format((XBinaryOperation)ref, document);
+    } else if (expr instanceof XBinaryOperation) {
+      _format((XBinaryOperation)expr, format);
       return;
-    } else if (ref instanceof XDoWhileExpression) {
-      _format((XDoWhileExpression)ref, document);
+    } else if (expr instanceof XDoWhileExpression) {
+      _format((XDoWhileExpression)expr, format);
       return;
-    } else if (ref instanceof XFeatureCall) {
-      _format((XFeatureCall)ref, document);
+    } else if (expr instanceof XFeatureCall) {
+      _format((XFeatureCall)expr, format);
       return;
-    } else if (ref instanceof XMemberFeatureCall) {
-      _format((XMemberFeatureCall)ref, document);
+    } else if (expr instanceof XMemberFeatureCall) {
+      _format((XMemberFeatureCall)expr, format);
       return;
-    } else if (ref instanceof XWhileExpression) {
-      _format((XWhileExpression)ref, document);
+    } else if (expr instanceof XWhileExpression) {
+      _format((XWhileExpression)expr, format);
       return;
-    } else if (ref instanceof XFunctionTypeRef) {
-      _format((XFunctionTypeRef)ref, document);
+    } else if (expr instanceof XFunctionTypeRef) {
+      _format((XFunctionTypeRef)expr, format);
       return;
-    } else if (ref instanceof JvmGenericArrayTypeReference) {
-      _format((JvmGenericArrayTypeReference)ref, document);
+    } else if (expr instanceof JvmGenericArrayTypeReference) {
+      _format((JvmGenericArrayTypeReference)expr, format);
       return;
-    } else if (ref instanceof JvmParameterizedTypeReference) {
-      _format((JvmParameterizedTypeReference)ref, document);
+    } else if (expr instanceof JvmParameterizedTypeReference) {
+      _format((JvmParameterizedTypeReference)expr, format);
       return;
-    } else if (ref instanceof JvmWildcardTypeReference) {
-      _format((JvmWildcardTypeReference)ref, document);
+    } else if (expr instanceof JvmWildcardTypeReference) {
+      _format((JvmWildcardTypeReference)expr, format);
       return;
-    } else if (ref instanceof XBasicForLoopExpression) {
-      _format((XBasicForLoopExpression)ref, document);
+    } else if (expr instanceof XBasicForLoopExpression) {
+      _format((XBasicForLoopExpression)expr, format);
       return;
-    } else if (ref instanceof XBlockExpression) {
-      _format((XBlockExpression)ref, document);
+    } else if (expr instanceof XBlockExpression) {
+      _format((XBlockExpression)expr, format);
       return;
-    } else if (ref instanceof XClosure) {
-      _format((XClosure)ref, document);
+    } else if (expr instanceof XClosure) {
+      _format((XClosure)expr, format);
       return;
-    } else if (ref instanceof XCollectionLiteral) {
-      _format((XCollectionLiteral)ref, document);
+    } else if (expr instanceof XCollectionLiteral) {
+      _format((XCollectionLiteral)expr, format);
       return;
-    } else if (ref instanceof XConstructorCall) {
-      _format((XConstructorCall)ref, document);
+    } else if (expr instanceof XConstructorCall) {
+      _format((XConstructorCall)expr, format);
       return;
-    } else if (ref instanceof XForLoopExpression) {
-      _format((XForLoopExpression)ref, document);
+    } else if (expr instanceof XForLoopExpression) {
+      _format((XForLoopExpression)expr, format);
       return;
-    } else if (ref instanceof XIfExpression) {
-      _format((XIfExpression)ref, document);
+    } else if (expr instanceof XIfExpression) {
+      _format((XIfExpression)expr, format);
       return;
-    } else if (ref instanceof XReturnExpression) {
-      _format((XReturnExpression)ref, document);
+    } else if (expr instanceof XReturnExpression) {
+      _format((XReturnExpression)expr, format);
       return;
-    } else if (ref instanceof XSwitchExpression) {
-      _format((XSwitchExpression)ref, document);
+    } else if (expr instanceof XSwitchExpression) {
+      _format((XSwitchExpression)expr, format);
       return;
-    } else if (ref instanceof XSynchronizedExpression) {
-      _format((XSynchronizedExpression)ref, document);
+    } else if (expr instanceof XSynchronizedExpression) {
+      _format((XSynchronizedExpression)expr, format);
       return;
-    } else if (ref instanceof XThrowExpression) {
-      _format((XThrowExpression)ref, document);
+    } else if (expr instanceof XThrowExpression) {
+      _format((XThrowExpression)expr, format);
       return;
-    } else if (ref instanceof XTryCatchFinallyExpression) {
-      _format((XTryCatchFinallyExpression)ref, document);
+    } else if (expr instanceof XTryCatchFinallyExpression) {
+      _format((XTryCatchFinallyExpression)expr, format);
       return;
-    } else if (ref instanceof XTypeLiteral) {
-      _format((XTypeLiteral)ref, document);
+    } else if (expr instanceof XTypeLiteral) {
+      _format((XTypeLiteral)expr, format);
       return;
-    } else if (ref instanceof XVariableDeclaration) {
-      _format((XVariableDeclaration)ref, document);
+    } else if (expr instanceof XVariableDeclaration) {
+      _format((XVariableDeclaration)expr, format);
       return;
-    } else if (ref instanceof XAnnotation) {
-      _format((XAnnotation)ref, document);
+    } else if (expr instanceof JvmTypeConstraint) {
+      _format((JvmTypeConstraint)expr, format);
       return;
-    } else if (ref instanceof JvmTypeConstraint) {
-      _format((JvmTypeConstraint)ref, document);
+    } else if (expr instanceof XCatchClause) {
+      _format((XCatchClause)expr, format);
       return;
-    } else if (ref instanceof XCatchClause) {
-      _format((XCatchClause)ref, document);
+    } else if (expr instanceof XExpression) {
+      _format((XExpression)expr, format);
       return;
-    } else if (ref instanceof XExpression) {
-      _format((XExpression)ref, document);
+    } else if (expr instanceof XImportDeclaration) {
+      _format((XImportDeclaration)expr, format);
       return;
-    } else if (ref == null) {
-      _format((Void)null, document);
+    } else if (expr instanceof XImportSection) {
+      _format((XImportSection)expr, format);
       return;
-    } else if (ref != null) {
-      _format(ref, document);
+    } else if (expr == null) {
+      _format((Void)null, format);
+      return;
+    } else if (expr != null) {
+      _format(expr, format);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(ref, document).toString());
+        Arrays.<Object>asList(expr, format).toString());
     }
   }
   

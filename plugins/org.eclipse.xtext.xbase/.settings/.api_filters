@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.xbase" version="2">
+    <resource path="src-gen/org/eclipse/xtext/xbase/AbstractXbaseRuntimeModule.java" type="org.eclipse.xtext.xbase.AbstractXbaseRuntimeModule">
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="bindIFormatter2()"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="configureFormatterPreferences(Binder)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/xbase/AbstractXtypeRuntimeModule.java" type="org.eclipse.xtext.xbase.AbstractXtypeRuntimeModule">
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="bindIFormatter2()"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="configureFormatterPreferences(Binder)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/xbase/jvmmodel/JvmModelAssociator.java" type="org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator">
         <filter id="338792546">
             <message_arguments>

@@ -193,6 +193,11 @@ public abstract class AbstractXbaseWithAnnotationsUiModule extends DefaultUiModu
 		return org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
+	public Class<? extends org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory> bindIContentFormatterFactory() {
+		return org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
 		return org.eclipse.xtext.xbase.annotations.ui.quickfix.XbaseWithAnnotationsQuickfixProvider.class;
