@@ -1,6 +1,7 @@
 package org.eclipse.xtext.idea.generator;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
@@ -2350,49 +2352,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   public CharSequence compileParserDefinition(final Grammar grammar) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package ");
-    String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    String _packageName = this._ideaPluginClassNames.toPackageName(_parserDefinitionName);
-    _builder.append(_packageName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
+    CharSequence _xblockexpression = null;
     {
+      final HashMultimap<String, String> namedGrammarElement = HashMultimap.<String, String>create();
       TreeIterator<EObject> _eAllContents = grammar.eAllContents();
-      Iterator<CrossReference> _filter = Iterators.<CrossReference>filter(_eAllContents, CrossReference.class);
-      final Function1<CrossReference, Boolean> _function = new Function1<CrossReference, Boolean>() {
-        public Boolean apply(final CrossReference it) {
-          return Boolean.valueOf(GrammarUtil.isAssigned(it));
-        }
-      };
-      Iterator<CrossReference> _filter_1 = IteratorExtensions.<CrossReference>filter(_filter, _function);
-      boolean _isEmpty = IteratorExtensions.isEmpty(_filter_1);
-      boolean _not = (!_isEmpty);
-      if (_not) {
-        _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectReference;");
-        _builder.newLine();
-      }
-    }
-    _builder.append("import ");
-    String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    _builder.append(_elementTypeProviderName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    String _fileImplName = this._ideaPluginClassNames.getFileImplName(grammar);
-    _builder.append(_fileImplName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    String _superParserDefinitionName = this._ideaPluginClassNames.getSuperParserDefinitionName(grammar);
-    _builder.append(_superParserDefinitionName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    {
-      TreeIterator<EObject> _eAllContents_1 = grammar.eAllContents();
-      Iterator<RuleCall> _filter_2 = Iterators.<RuleCall>filter(_eAllContents_1, RuleCall.class);
-      final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
+      Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
+      final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
         public Boolean apply(final RuleCall it) {
           boolean _and = false;
           boolean _isAssigned = GrammarUtil.isAssigned(it);
@@ -2407,194 +2372,230 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           return Boolean.valueOf(_and);
         }
       };
-      Iterator<RuleCall> _filter_3 = IteratorExtensions.<RuleCall>filter(_filter_2, _function_1);
-      final Function1<RuleCall, Boolean> _function_2 = new Function1<RuleCall, Boolean>() {
-        public Boolean apply(final RuleCall nameRuleCall) {
-          TreeIterator<EObject> _eAllContents = grammar.eAllContents();
-          Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
-          final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-            public Boolean apply(final RuleCall it) {
-              AbstractRule _rule = it.getRule();
-              TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-              final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-                public Boolean apply(final EObject it) {
-                  return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-                }
-              };
-              return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-            }
-          };
-          Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
-          boolean _isEmpty = IteratorExtensions.isEmpty(_filter_1);
-          return Boolean.valueOf((!_isEmpty));
-        }
-      };
-      boolean _exists = IteratorExtensions.<RuleCall>exists(_filter_3, _function_2);
-      if (_exists) {
-        _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
-        _builder.newLine();
-      }
-    }
-    _builder.newLine();
-    _builder.append("import ");
-    String _name = Inject.class.getName();
-    _builder.append(_name, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import com.intellij.lang.ASTNode;");
-    _builder.newLine();
-    _builder.append("import com.intellij.psi.FileViewProvider;");
-    _builder.newLine();
-    _builder.append("import com.intellij.psi.PsiElement;");
-    _builder.newLine();
-    _builder.append("import com.intellij.psi.PsiFile;");
-    _builder.newLine();
-    _builder.append("import com.intellij.psi.tree.IElementType;");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("public class ");
-    String _parserDefinitionName_1 = this._ideaPluginClassNames.getParserDefinitionName(grammar);
-    String _simpleName = this._ideaPluginClassNames.toSimpleName(_parserDefinitionName_1);
-    _builder.append(_simpleName, "");
-    _builder.append(" extends ");
-    String _superParserDefinitionName_1 = this._ideaPluginClassNames.getSuperParserDefinitionName(grammar);
-    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_superParserDefinitionName_1);
-    _builder.append(_simpleName_1, "");
-    _builder.append(" {");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject ");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private ");
-    String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
-    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
-    _builder.append(_simpleName_2, "\t");
-    _builder.append(" elementTypeProvider;");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public PsiFile createFile(FileViewProvider viewProvider) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return new ");
-    String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
-    String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
-    _builder.append(_simpleName_3, "\t\t");
-    _builder.append("(viewProvider);");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@SuppressWarnings(\"rawtypes\")");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public PsiElement createElement(ASTNode node) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("IElementType elementType = node.getElementType();");
-    _builder.newLine();
-    {
-      TreeIterator<EObject> _eAllContents_2 = grammar.eAllContents();
-      Iterator<RuleCall> _filter_4 = Iterators.<RuleCall>filter(_eAllContents_2, RuleCall.class);
-      final Function1<RuleCall, Boolean> _function_3 = new Function1<RuleCall, Boolean>() {
-        public Boolean apply(final RuleCall it) {
-          boolean _and = false;
-          boolean _isAssigned = GrammarUtil.isAssigned(it);
-          if (!_isAssigned) {
-            _and = false;
-          } else {
-            Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
-            String _feature = _containingAssignment.getFeature();
-            boolean _equals = Objects.equal(_feature, "name");
-            _and = _equals;
+      Iterator<RuleCall> _filter_1 = IteratorExtensions.<RuleCall>filter(_filter, _function);
+      Iterable<RuleCall> _iterable = IteratorExtensions.<RuleCall>toIterable(_filter_1);
+      for (final RuleCall nameRuleCall : _iterable) {
+        TreeIterator<EObject> _eAllContents_1 = grammar.eAllContents();
+        Iterator<RuleCall> _filter_2 = Iterators.<RuleCall>filter(_eAllContents_1, RuleCall.class);
+        final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
+          public Boolean apply(final RuleCall it) {
+            AbstractRule _rule = it.getRule();
+            TreeIterator<EObject> _eAllContents = _rule.eAllContents();
+            final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+              public Boolean apply(final EObject it) {
+                return Boolean.valueOf(Objects.equal(it, nameRuleCall));
+              }
+            };
+            return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
           }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterator<RuleCall> _filter_5 = IteratorExtensions.<RuleCall>filter(_filter_4, _function_3);
-      Iterable<RuleCall> _iterable = IteratorExtensions.<RuleCall>toIterable(_filter_5);
-      for(final RuleCall nameRuleCall : _iterable) {
-        {
-          TreeIterator<EObject> _eAllContents_3 = grammar.eAllContents();
-          Iterator<RuleCall> _filter_6 = Iterators.<RuleCall>filter(_eAllContents_3, RuleCall.class);
-          final Function1<RuleCall, Boolean> _function_4 = new Function1<RuleCall, Boolean>() {
-            public Boolean apply(final RuleCall it) {
-              AbstractRule _rule = it.getRule();
-              TreeIterator<EObject> _eAllContents = _rule.eAllContents();
-              final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-                public Boolean apply(final EObject it) {
-                  return Boolean.valueOf(Objects.equal(it, nameRuleCall));
-                }
-              };
-              return Boolean.valueOf(IteratorExtensions.<EObject>exists(_eAllContents, _function));
-            }
-          };
-          Iterator<RuleCall> _filter_7 = IteratorExtensions.<RuleCall>filter(_filter_6, _function_4);
-          Iterable<RuleCall> _iterable_1 = IteratorExtensions.<RuleCall>toIterable(_filter_7);
-          for(final RuleCall ruleCall : _iterable_1) {
-            _builder.append("\t\t");
-            _builder.append("if (elementType == elementTypeProvider.get");
+        };
+        Iterator<RuleCall> _filter_3 = IteratorExtensions.<RuleCall>filter(_filter_2, _function_1);
+        Iterable<RuleCall> _iterable_1 = IteratorExtensions.<RuleCall>toIterable(_filter_3);
+        for (final RuleCall ruleCall : _iterable_1) {
+          {
             String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(ruleCall);
-            _builder.append(_grammarElementIdentifier, "\t\t");
-            _builder.append("ElementType()) {");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("\t");
-            _builder.append("return new PsiNamedEObjectImpl(node, elementTypeProvider.get");
             String _grammarElementIdentifier_1 = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
-            _builder.append(_grammarElementIdentifier_1, "\t\t\t");
-            _builder.append("ElementType());");
-            _builder.newLineIfNotEmpty();
-            _builder.append("\t\t");
-            _builder.append("}");
-            _builder.newLine();
+            namedGrammarElement.put(_grammarElementIdentifier, _grammarElementIdentifier_1);
+            AbstractRule _rule = ruleCall.getRule();
+            TreeIterator<EObject> _eAllContents_2 = _rule.eAllContents();
+            Iterator<Action> _filter_4 = Iterators.<Action>filter(_eAllContents_2, Action.class);
+            Iterable<Action> _iterable_2 = IteratorExtensions.<Action>toIterable(_filter_4);
+            for (final Action action : _iterable_2) {
+              String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(action);
+              String _grammarElementIdentifier_3 = this._grammarAccessExtensions.grammarElementIdentifier(nameRuleCall);
+              namedGrammarElement.put(_grammarElementIdentifier_2, _grammarElementIdentifier_3);
+            }
           }
         }
       }
-    }
-    {
-      TreeIterator<EObject> _eAllContents_4 = grammar.eAllContents();
-      Iterator<CrossReference> _filter_8 = Iterators.<CrossReference>filter(_eAllContents_4, CrossReference.class);
-      final Function1<CrossReference, Boolean> _function_5 = new Function1<CrossReference, Boolean>() {
-        public Boolean apply(final CrossReference it) {
-          return Boolean.valueOf(GrammarUtil.isAssigned(it));
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package ");
+      String _parserDefinitionName = this._ideaPluginClassNames.getParserDefinitionName(grammar);
+      String _packageName = this._ideaPluginClassNames.toPackageName(_parserDefinitionName);
+      _builder.append(_packageName, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      {
+        TreeIterator<EObject> _eAllContents_2 = grammar.eAllContents();
+        Iterator<CrossReference> _filter_4 = Iterators.<CrossReference>filter(_eAllContents_2, CrossReference.class);
+        final Function1<CrossReference, Boolean> _function_2 = new Function1<CrossReference, Boolean>() {
+          public Boolean apply(final CrossReference it) {
+            return Boolean.valueOf(GrammarUtil.isAssigned(it));
+          }
+        };
+        Iterator<CrossReference> _filter_5 = IteratorExtensions.<CrossReference>filter(_filter_4, _function_2);
+        boolean _isEmpty = IteratorExtensions.isEmpty(_filter_5);
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          _builder.append("import org.eclipse.xtext.psi.impl.PsiEObjectReference;");
+          _builder.newLine();
         }
-      };
-      Iterator<CrossReference> _filter_9 = IteratorExtensions.<CrossReference>filter(_filter_8, _function_5);
-      Iterable<CrossReference> _iterable_2 = IteratorExtensions.<CrossReference>toIterable(_filter_9);
-      for(final CrossReference crossReference : _iterable_2) {
-        _builder.append("\t\t");
-        _builder.append("if (elementType == elementTypeProvider.get");
-        String _grammarElementIdentifier_2 = this._grammarAccessExtensions.grammarElementIdentifier(crossReference);
-        _builder.append(_grammarElementIdentifier_2, "\t\t");
-        _builder.append("ElementType()) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("return new PsiEObjectReference(node);");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
       }
+      _builder.append("import ");
+      String _elementTypeProviderName = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
+      _builder.append(_elementTypeProviderName, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("import ");
+      String _fileImplName = this._ideaPluginClassNames.getFileImplName(grammar);
+      _builder.append(_fileImplName, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("import ");
+      String _superParserDefinitionName = this._ideaPluginClassNames.getSuperParserDefinitionName(grammar);
+      _builder.append(_superParserDefinitionName, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      {
+        boolean _isEmpty_1 = namedGrammarElement.isEmpty();
+        boolean _not_1 = (!_isEmpty_1);
+        if (_not_1) {
+          _builder.append("import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;");
+          _builder.newLine();
+        }
+      }
+      _builder.newLine();
+      _builder.append("import ");
+      String _name = Inject.class.getName();
+      _builder.append(_name, "");
+      _builder.append(";");
+      _builder.newLineIfNotEmpty();
+      _builder.append("import com.intellij.lang.ASTNode;");
+      _builder.newLine();
+      _builder.append("import com.intellij.psi.FileViewProvider;");
+      _builder.newLine();
+      _builder.append("import com.intellij.psi.PsiElement;");
+      _builder.newLine();
+      _builder.append("import com.intellij.psi.PsiFile;");
+      _builder.newLine();
+      _builder.append("import com.intellij.psi.tree.IElementType;");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("public class ");
+      String _parserDefinitionName_1 = this._ideaPluginClassNames.getParserDefinitionName(grammar);
+      String _simpleName = this._ideaPluginClassNames.toSimpleName(_parserDefinitionName_1);
+      _builder.append(_simpleName, "");
+      _builder.append(" extends ");
+      String _superParserDefinitionName_1 = this._ideaPluginClassNames.getSuperParserDefinitionName(grammar);
+      String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_superParserDefinitionName_1);
+      _builder.append(_simpleName_1, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Inject ");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("private ");
+      String _elementTypeProviderName_1 = this._ideaPluginClassNames.getElementTypeProviderName(grammar);
+      String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_elementTypeProviderName_1);
+      _builder.append(_simpleName_2, "\t");
+      _builder.append(" elementTypeProvider;");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public PsiFile createFile(FileViewProvider viewProvider) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return new ");
+      String _fileImplName_1 = this._ideaPluginClassNames.getFileImplName(grammar);
+      String _simpleName_3 = this._ideaPluginClassNames.toSimpleName(_fileImplName_1);
+      _builder.append(_simpleName_3, "\t\t");
+      _builder.append("(viewProvider);");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Override");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@SuppressWarnings(\"rawtypes\")");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public PsiElement createElement(ASTNode node) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("IElementType elementType = node.getElementType();");
+      _builder.newLine();
+      {
+        Set<String> _keySet = namedGrammarElement.keySet();
+        for(final String namedElementType : _keySet) {
+          _builder.append("\t\t");
+          _builder.append("if (elementType == elementTypeProvider.get");
+          _builder.append(namedElementType, "\t\t");
+          _builder.append("ElementType()) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("return new PsiNamedEObjectImpl(node,");
+          _builder.newLine();
+          {
+            Set<String> _get = namedGrammarElement.get(namedElementType);
+            boolean _hasElements = false;
+            for(final String nameType : _get) {
+              if (!_hasElements) {
+                _hasElements = true;
+              } else {
+                _builder.appendImmediate(",", "\t\t\t\t");
+              }
+              _builder.append("\t\t");
+              _builder.append("\t\t");
+              _builder.append("elementTypeProvider.get");
+              _builder.append(nameType, "\t\t\t\t");
+              _builder.append("ElementType()");
+              _builder.newLineIfNotEmpty();
+            }
+          }
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append(");");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      {
+        TreeIterator<EObject> _eAllContents_3 = grammar.eAllContents();
+        Iterator<CrossReference> _filter_6 = Iterators.<CrossReference>filter(_eAllContents_3, CrossReference.class);
+        final Function1<CrossReference, Boolean> _function_3 = new Function1<CrossReference, Boolean>() {
+          public Boolean apply(final CrossReference it) {
+            return Boolean.valueOf(GrammarUtil.isAssigned(it));
+          }
+        };
+        Iterator<CrossReference> _filter_7 = IteratorExtensions.<CrossReference>filter(_filter_6, _function_3);
+        Iterable<CrossReference> _iterable_2 = IteratorExtensions.<CrossReference>toIterable(_filter_7);
+        for(final CrossReference crossReference : _iterable_2) {
+          _builder.append("\t\t");
+          _builder.append("if (elementType == elementTypeProvider.get");
+          String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(crossReference);
+          _builder.append(_grammarElementIdentifier, "\t\t");
+          _builder.append("ElementType()) {");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t\t");
+          _builder.append("\t");
+          _builder.append("return new PsiEObjectReference(node);");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("}");
+          _builder.newLine();
+        }
+      }
+      _builder.append("\t\t");
+      _builder.append("return super.createElement(node);");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = _builder;
     }
-    _builder.append("\t\t");
-    _builder.append("return super.createElement(node);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+    return _xblockexpression;
   }
   
   public CharSequence compileCompletionContributor(final Grammar grammar) {

@@ -26,16 +26,24 @@ public class EntitiesParserDefinition extends XbaseParserDefinition {
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
 		if (elementType == elementTypeProvider.getAbstractElement_PackageDeclarationParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node, elementTypeProvider.getPackageDeclaration_NameQualifiedNameParserRuleCall_1_0ElementType());
-		}
-		if (elementType == elementTypeProvider.getAbstractElement_EntityParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node, elementTypeProvider.getEntity_NameValidIDParserRuleCall_1_0ElementType());
-		}
-		if (elementType == elementTypeProvider.getFeature_PropertyParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node, elementTypeProvider.getProperty_NameValidIDParserRuleCall_0_0ElementType());
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getPackageDeclaration_NameQualifiedNameParserRuleCall_1_0ElementType()
+			);
 		}
 		if (elementType == elementTypeProvider.getFeature_OperationParserRuleCall_1ElementType()) {
-			return new PsiNamedEObjectImpl(node, elementTypeProvider.getOperation_NameValidIDParserRuleCall_1_0ElementType());
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getOperation_NameValidIDParserRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getAbstractElement_EntityParserRuleCall_1ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getEntity_NameValidIDParserRuleCall_1_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getFeature_PropertyParserRuleCall_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getProperty_NameValidIDParserRuleCall_0_0ElementType()
+			);
 		}
 		return super.createElement(node);
 	}

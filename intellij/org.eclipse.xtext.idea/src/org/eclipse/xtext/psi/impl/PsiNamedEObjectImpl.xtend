@@ -1,5 +1,6 @@
 package org.eclipse.xtext.psi.impl
 
+import com.google.common.base.Preconditions
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
 import com.intellij.psi.stubs.IStubElementType
@@ -10,7 +11,7 @@ import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.resource.ILocationInFileProvider
 
-import static extension org.eclipse.xtext.GrammarUtil.isTerminalRuleCall
+import static extension org.eclipse.xtext.GrammarUtil.*
 
 class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectImpl<T> implements PsiNamedEObject {
 
@@ -24,12 +25,16 @@ class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectIm
 
 	new(T stub, IStubElementType<?, ?> nodeType, IGrammarAwareElementType nameType) {
 		super(stub, nodeType)
+		Preconditions.checkNotNull(nameType)
 		this.nameType = nameType
 	}
 
-	new(ASTNode node, IGrammarAwareElementType nameType) {
+	new(ASTNode node, IGrammarAwareElementType ... nameTypes) {
 		super(node)
-		this.nameType = nameType
+		Preconditions.checkArgument(!nameTypes.empty)
+		this.nameType = nameTypes.findFirst [ nameType |
+			node.findChildByType(nameType) != null
+		]
 	}
 
 	override getNameIdentifier() {

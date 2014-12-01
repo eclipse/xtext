@@ -1,12 +1,14 @@
 package org.eclipse.xtext.psi.impl;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
+import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.psi.PsiEObjectFactory;
@@ -18,7 +20,10 @@ import org.eclipse.xtext.psi.stubs.PsiNamedEObjectStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEObjectImpl<T> implements PsiNamedEObject {
@@ -34,12 +39,23 @@ public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEO
   
   public PsiNamedEObjectImpl(final T stub, final IStubElementType<?, ?> nodeType, final IGrammarAwareElementType nameType) {
     super(stub, nodeType);
+    Preconditions.<IGrammarAwareElementType>checkNotNull(nameType);
     this.nameType = nameType;
   }
   
-  public PsiNamedEObjectImpl(final ASTNode node, final IGrammarAwareElementType nameType) {
+  public PsiNamedEObjectImpl(final ASTNode node, final IGrammarAwareElementType... nameTypes) {
     super(node);
-    this.nameType = nameType;
+    boolean _isEmpty = ((List<IGrammarAwareElementType>)Conversions.doWrapArray(nameTypes)).isEmpty();
+    boolean _not = (!_isEmpty);
+    Preconditions.checkArgument(_not);
+    final Function1<IGrammarAwareElementType, Boolean> _function = new Function1<IGrammarAwareElementType, Boolean>() {
+      public Boolean apply(final IGrammarAwareElementType nameType) {
+        ASTNode _findChildByType = node.findChildByType(nameType);
+        return Boolean.valueOf((!Objects.equal(_findChildByType, null)));
+      }
+    };
+    IGrammarAwareElementType _findFirst = IterableExtensions.<IGrammarAwareElementType>findFirst(((Iterable<IGrammarAwareElementType>)Conversions.doWrapArray(nameTypes)), _function);
+    this.nameType = _findFirst;
   }
   
   public PsiEObjectIdentifier getNameIdentifier() {

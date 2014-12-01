@@ -27,7 +27,9 @@ public class RefactoringTestLanguageParserDefinition extends TerminalsParserDefi
 	public PsiElement createElement(ASTNode node) {
 		IElementType elementType = node.getElementType();
 		if (elementType == elementTypeProvider.getModel_ReferenceHolderReferenceHolderParserRuleCall_0ElementType()) {
-			return new PsiNamedEObjectImpl(node, elementTypeProvider.getReferenceHolder_NameIDTerminalRuleCall_0_0ElementType());
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getReferenceHolder_NameIDTerminalRuleCall_0_0ElementType()
+			);
 		}
 		if (elementType == elementTypeProvider.getReferenceHolder_DefaultReferenceJvmTypeCrossReference_1_0ElementType()) {
 			return new PsiEObjectReference(node);
