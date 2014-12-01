@@ -11,11 +11,7 @@ import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmTypeConstraint
-import org.eclipse.xtext.common.types.JvmTypeParameter
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference
-import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 import org.eclipse.xtext.formatting2.ITextReplacer
@@ -45,14 +41,12 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XWhileExpression
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
-import org.eclipse.xtext.xtype.XFunctionTypeRef
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
 
-class XbaseFormatter extends AbstractFormatter2 {
+class XbaseFormatter extends XtypeFormatter {
 
 	@Inject @Accessors(PUBLIC_GETTER) extension XbaseGrammarAccess grammar
 
@@ -103,60 +97,9 @@ class XbaseFormatter extends AbstractFormatter2 {
 		}
 	}
 
-	def dispatch void format(XAnnotation ann, extension IFormattableDocument document) {
-		ann.regionForKeyword("@").append[noSpace]
-		ann.regionForKeyword("(").surround[noSpace]
-		if (ann.value != null) {
-			ann.value.format(document)
-			ann.regionForKeyword(")").prepend[noSpace]
-		} else if (!ann.elementValuePairs.empty) {
-			for (pair : ann.elementValuePairs) {
-				pair.regionForKeyword("=").surround[noSpace]
-				pair.value.format(document)
-				pair.immediatelyFollowingKeyword(",").prepend[noSpace].append[oneSpace]
-			}
-			ann.regionForKeyword(")").prepend[noSpace]
-		}
-	}
-
 	def dispatch void format(JvmGenericArrayTypeReference array, extension IFormattableDocument document) {
 		addReplacer(new ArrayBracketsFormattingReplacer(array.regionForRuleCallTo(arrayBracketsRule)))
 		array.componentType.format(document)
-	}
-
-	def dispatch void format(XFunctionTypeRef func, extension IFormattableDocument document) {
-		func.regionForKeyword("(").append[noSpace]
-		for (param : func.paramTypes) {
-			param.format(document)
-			param.immediatelyFollowingKeyword(",").prepend[noSpace].append[oneSpace]
-		}
-		func.regionForKeyword(")").prepend[if(!func.paramTypes.empty) noSpace].append[noSpace]
-		func.regionForKeyword("=>").append[noSpace]
-		func.returnType.format(document)
-	}
-
-	def dispatch void format(JvmTypeParameter ref, extension IFormattableDocument document) {
-		for (c : ref.constraints) {
-			c.prepend[oneSpace]
-			c.format(document)
-		}
-	}
-
-	def dispatch void format(JvmParameterizedTypeReference ref, extension IFormattableDocument document) {
-		ref.regionForKeyword("<").surround[noSpace]
-		for (arg : ref.arguments) {
-			arg.format(document)
-			arg.immediatelyFollowingKeyword(",").prepend[noSpace].append[oneSpace]
-		}
-		if (!ref.arguments.empty)
-			ref.regionForKeyword(">").prepend[noSpace]
-	}
-
-	def dispatch void format(JvmWildcardTypeReference ref, extension IFormattableDocument document) {
-		if (!ref.constraints.empty)
-			ref.regionForKeyword("?").append[oneSpace]
-		for (c : ref.constraints)
-			c.format(document)
 	}
 
 	def dispatch void format(JvmTypeConstraint constraint, extension IFormattableDocument document) {
