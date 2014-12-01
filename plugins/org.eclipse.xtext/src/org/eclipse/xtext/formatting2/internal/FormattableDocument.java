@@ -179,10 +179,6 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return getRequest().getTextRegionAccess();
 	}
 
-	public Throwable getTrace(ITextReplacer replacer) {
-		return replacers.getTraces().get(replacer);
-	}
-
 	protected boolean needsAutowrap(ITextReplacerContext wrappable, ITextReplacerContext context, int maxLineWidth) {
 		if (context.getLeadingCharsInLineCount() > maxLineWidth)
 			return true;

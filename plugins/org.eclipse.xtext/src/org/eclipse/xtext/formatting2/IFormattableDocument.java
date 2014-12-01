@@ -62,8 +62,6 @@ public interface IFormattableDocument {
 
 	FormatterRequest getRequest();
 
-	Throwable getTrace(ITextReplacer replacer);
-
 	ISemanticRegion prepend(ISemanticRegion semanticRegion, Procedure1<IHiddenRegionFormatter> before);
 
 	<T extends EObject> T prepend(T semanticRegion, Procedure1<IHiddenRegionFormatter> before);
@@ -75,5 +73,4 @@ public interface IFormattableDocument {
 	ISemanticRegion surround(ISemanticRegion semanticRegion, Procedure1<IHiddenRegionFormatter> beforeAndAfter);
 
 	<T extends EObject> T surround(T owner, Procedure1<IHiddenRegionFormatter> beforeAndAfter);
-
 }
