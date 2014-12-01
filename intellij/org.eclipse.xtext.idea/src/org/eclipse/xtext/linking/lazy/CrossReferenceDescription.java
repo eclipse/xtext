@@ -1,5 +1,6 @@
 package org.eclipse.xtext.linking.lazy;
 
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
@@ -7,6 +8,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.ITextRegion;
@@ -87,9 +89,12 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 
 	protected Iterable<IEObjectDescription> getAllElements() {
 		try {
-			return scopeProvider.getScope(context, reference).getAllElements();
+			IScope scope = scopeProvider.getScope(context, reference);
+			return scope.getAllElements();
 		} catch (OperationCanceledError e) {
     		throw e.getWrapped();
+    	} catch (UnsupportedOperationException e) {
+    		return Collections.emptyList();
     	}
 	}
     
