@@ -7,7 +7,7 @@ import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.LanguageConfig;
 import org.eclipse.xtext.generator.builder.BuilderIntegrationFragment;
-import org.eclipse.xtext.generator.formatting.FormatterFragment;
+import org.eclipse.xtext.generator.formatting2.Formatter2Fragment;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.generator.parser.antlr.DebugAntlrGeneratorFragment;
@@ -97,7 +97,7 @@ final class GenerateXbase {
 				setFileExtensions(fileExtensions);
 				addFragment(new GrammarAccessFragment());
 				addFragment(new SerializerFragment());
-				addFragment(new FormatterFragment());
+				addFragment(new Formatter2Fragment());
 				addFragment(new JavaBasedContentAssistFragment());
 				XtextAntlrGeneratorFragment antlr = new XtextAntlrGeneratorFragment();
 				antlr.setOptions(antlrOptions);
@@ -136,7 +136,7 @@ final class GenerateXbase {
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment());
-				addFragment(new FormatterFragment());
+				addFragment(new Formatter2Fragment());
 				addFragment(new QuickfixProviderFragment());
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateStub(false);
@@ -180,7 +180,7 @@ final class GenerateXbase {
 				xbase.setJdtTypeHierarchy(false);
 				addFragment(xbase);
 				addFragment(new BuilderIntegrationFragment());
-				addFragment(new FormatterFragment());
+				addFragment(new Formatter2Fragment());
 				addFragment(new QuickfixProviderFragment());
 				LabelProviderFragment label = new LabelProviderFragment();
 				label.setGenerateXtendStub(true);
