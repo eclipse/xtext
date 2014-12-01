@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.generator
 
+import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import java.util.Arrays
 import java.util.List
@@ -10,11 +11,13 @@ import org.eclipse.xpand2.output.OutputImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Binding
+import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
@@ -22,7 +25,6 @@ import org.eclipse.xtext.idea.generator.parser.antlr.GrammarAccessExtensions
 import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtensions
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.generator.NewlineNormalizer
 
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
@@ -792,58 +794,74 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		}
 	'''
 	
-	def compileParserDefinition(Grammar grammar)'''
-		package «grammar.parserDefinitionName.toPackageName»;
-		
-		«IF !grammar.eAllContents.filter(CrossReference).filter[assigned].empty»
-		import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-		«ENDIF»
-		import «grammar.elementTypeProviderName»;
-		import «grammar.fileImplName»;
-		import «grammar.superParserDefinitionName»;
-		«IF grammar.eAllContents.filter(RuleCall).filter[assigned && containingAssignment.feature == 'name'].exists[ nameRuleCall |
-			!grammar.eAllContents.filter(RuleCall).filter[rule.eAllContents.exists[it == nameRuleCall]].empty
-		]»
-		import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
-		«ENDIF»
-		
-		import «Inject.name»;
-		import com.intellij.lang.ASTNode;
-		import com.intellij.psi.FileViewProvider;
-		import com.intellij.psi.PsiElement;
-		import com.intellij.psi.PsiFile;
-		import com.intellij.psi.tree.IElementType;
-
-		public class «grammar.parserDefinitionName.toSimpleName» extends «grammar.superParserDefinitionName.toSimpleName» {
-
-			@Inject 
-			private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
-		
-			public PsiFile createFile(FileViewProvider viewProvider) {
-				return new «grammar.fileImplName.toSimpleName»(viewProvider);
-			}
-		
-			@Override
-			@SuppressWarnings("rawtypes")
-			public PsiElement createElement(ASTNode node) {
-				IElementType elementType = node.getElementType();
-				«FOR nameRuleCall:grammar.eAllContents.filter(RuleCall).filter[assigned && containingAssignment.feature == 'name'].toIterable»
-				«FOR ruleCall:grammar.eAllContents.filter(RuleCall).filter[rule.eAllContents.exists[it == nameRuleCall]].toIterable»
-				if (elementType == elementTypeProvider.get«ruleCall.grammarElementIdentifier»ElementType()) {
-					return new PsiNamedEObjectImpl(node, elementTypeProvider.get«nameRuleCall.grammarElementIdentifier»ElementType());
+	def compileParserDefinition(Grammar grammar) {
+		val namedGrammarElement = HashMultimap.<String, String>create
+		for (nameRuleCall : grammar.eAllContents.filter(RuleCall).filter [
+			assigned && containingAssignment.feature == 'name'
+		].toIterable) {
+			for (ruleCall : grammar.eAllContents.filter(RuleCall).filter [
+				rule.eAllContents.exists[it == nameRuleCall]
+			].toIterable) {
+				namedGrammarElement.put(ruleCall.grammarElementIdentifier, nameRuleCall.grammarElementIdentifier)
+				for (action : ruleCall.rule.eAllContents.filter(Action).toIterable) {
+					namedGrammarElement.put(action.grammarElementIdentifier, nameRuleCall.grammarElementIdentifier)
 				}
-				«ENDFOR»
-				«ENDFOR»
-				«FOR crossReference:grammar.eAllContents.filter(CrossReference).filter[assigned].toIterable»
-				if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
-					return new PsiEObjectReference(node);
-				}
-				«ENDFOR»
-				return super.createElement(node);
 			}
-		
 		}
-	'''
+		
+		'''
+			package «grammar.parserDefinitionName.toPackageName»;
+			
+			«IF !grammar.eAllContents.filter(CrossReference).filter[assigned].empty»
+				import org.eclipse.xtext.psi.impl.PsiEObjectReference;
+			«ENDIF»
+			import «grammar.elementTypeProviderName»;
+			import «grammar.fileImplName»;
+			import «grammar.superParserDefinitionName»;
+			«IF !namedGrammarElement.empty»
+				import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
+			«ENDIF»
+			
+			import «Inject.name»;
+			import com.intellij.lang.ASTNode;
+			import com.intellij.psi.FileViewProvider;
+			import com.intellij.psi.PsiElement;
+			import com.intellij.psi.PsiFile;
+			import com.intellij.psi.tree.IElementType;
+			
+			public class «grammar.parserDefinitionName.toSimpleName» extends «grammar.superParserDefinitionName.toSimpleName» {
+			
+				@Inject 
+				private «grammar.elementTypeProviderName.toSimpleName» elementTypeProvider;
+			
+				public PsiFile createFile(FileViewProvider viewProvider) {
+					return new «grammar.fileImplName.toSimpleName»(viewProvider);
+				}
+			
+				@Override
+				@SuppressWarnings("rawtypes")
+				public PsiElement createElement(ASTNode node) {
+					IElementType elementType = node.getElementType();
+					«FOR namedElementType:namedGrammarElement.keySet»
+					if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
+						return new PsiNamedEObjectImpl(node,
+							«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
+							elementTypeProvider.get«nameType»ElementType()
+							«ENDFOR»
+						);
+					}
+					«ENDFOR»
+					«FOR crossReference : grammar.eAllContents.filter(CrossReference).filter[assigned].toIterable»
+					if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
+						return new PsiEObjectReference(node);
+					}
+					«ENDFOR»
+					return super.createElement(node);
+				}
+			
+			}
+		'''
+	}
 	
 	def compileCompletionContributor(Grammar grammar) '''
 		package «grammar.completionContributor.toPackageName»
