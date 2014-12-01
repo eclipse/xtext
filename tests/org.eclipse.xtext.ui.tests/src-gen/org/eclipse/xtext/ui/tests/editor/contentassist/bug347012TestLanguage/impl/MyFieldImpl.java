@@ -28,12 +28,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyF
  * An implementation of the model object '<em><b>My Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.impl.MyFieldImpl#getAttr <em>Attr</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.impl.MyFieldImpl#getBindings <em>Bindings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

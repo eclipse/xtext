@@ -20,12 +20,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingT
  * An implementation of the model object '<em><b>Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl.TypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl.TypeImpl#getSuperType <em>Super Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

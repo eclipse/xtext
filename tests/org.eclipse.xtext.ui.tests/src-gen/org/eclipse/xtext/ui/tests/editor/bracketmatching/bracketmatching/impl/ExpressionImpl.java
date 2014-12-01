@@ -14,7 +14,6 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.Express
  * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

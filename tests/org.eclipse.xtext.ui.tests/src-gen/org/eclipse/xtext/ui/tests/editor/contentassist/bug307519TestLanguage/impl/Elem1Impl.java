@@ -18,11 +18,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.Enu
  * An implementation of the model object '<em><b>Elem1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.impl.Elem1Impl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

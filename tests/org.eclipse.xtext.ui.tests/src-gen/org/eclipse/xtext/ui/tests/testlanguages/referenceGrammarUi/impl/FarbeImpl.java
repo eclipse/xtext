@@ -17,11 +17,12 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * An implementation of the model object '<em><b>Farbe</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.FarbeImpl#getWert <em>Wert</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

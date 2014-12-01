@@ -2,7 +2,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.i
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 
 
 import org.antlr.runtime.*;
@@ -1229,36 +1229,19 @@ public class InternalBug348427TestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\23\1\25\1\27\1\22\1\uffff\3\22\1\27\1\21\2\uffff\3\21"+
-        "\4\uffff\1\22\3\uffff\1\22\1\uffff\3\22\5\uffff\1\22\4\uffff\2\22"+
-        "\1\66\1\22\10\uffff\1\70\1\71\1\22\1\uffff\1\22\2\uffff\2\22\1\100"+
-        "\1\101\1\102\1\22\3\uffff\1\104\1\uffff";
+        "\1\uffff\1\23\1\25\1\27\1\22\1\uffff\3\22\1\27\1\21\2\uffff\3\21\4\uffff\1\22\3\uffff\1\22\1\uffff\3\22\5\uffff\1\22\4\uffff\2\22\1\66\1\22\10\uffff\1\70\1\71\1\22\1\uffff\1\22\2\uffff\2\22\1\100\1\101\1\102\1\22\3\uffff\1\104\1\uffff";
     static final String DFA12_eofS =
         "\105\uffff";
     static final String DFA12_minS =
-        "\1\0\2\60\1\56\1\145\1\uffff\1\150\1\156\1\145\1\56\1\101\2\uffff"+
-        "\2\0\1\52\4\uffff\1\157\1\uffff\1\61\1\uffff\1\170\1\uffff\1\151"+
-        "\1\144\1\171\1\61\4\uffff\1\154\4\uffff\1\164\1\154\1\60\1\167\10"+
-        "\uffff\2\60\1\144\1\uffff\1\157\2\uffff\1\61\1\162\3\60\1\144\3"+
-        "\uffff\1\60\1\uffff";
+        "\1\0\2\60\1\56\1\145\1\uffff\1\150\1\156\1\145\1\56\1\101\2\uffff\2\0\1\52\4\uffff\1\157\1\uffff\1\61\1\uffff\1\170\1\uffff\1\151\1\144\1\171\1\61\4\uffff\1\154\4\uffff\1\164\1\154\1\60\1\167\10\uffff\2\60\1\144\1\uffff\1\157\2\uffff\1\61\1\162\3\60\1\144\3\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\2\172\1\56\1\145\1\uffff\1\150\1\156\1\145\1\56\1\172\2"+
-        "\uffff\2\uffff\1\57\4\uffff\1\157\1\uffff\1\64\1\uffff\1\170\1\uffff"+
-        "\1\151\1\144\1\171\1\70\4\uffff\1\154\4\uffff\1\164\1\154\1\172"+
-        "\1\167\10\uffff\2\172\1\144\1\uffff\1\157\2\uffff\1\63\1\162\3\172"+
-        "\1\144\3\uffff\1\172\1\uffff";
+        "\1\uffff\2\172\1\56\1\145\1\uffff\1\150\1\156\1\145\1\56\1\172\2\uffff\2\uffff\1\57\4\uffff\1\157\1\uffff\1\64\1\uffff\1\170\1\uffff\1\151\1\144\1\171\1\70\4\uffff\1\154\4\uffff\1\164\1\154\1\172\1\167\10\uffff\2\172\1\144\1\uffff\1\157\2\uffff\1\63\1\162\3\172\1\144\3\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\5\uffff\1\10\5\uffff\1\27\1\30\3\uffff\1\34\1\35\1\27\1\1\1\uffff"+
-        "\1\2\1\uffff\1\30\1\uffff\1\10\4\uffff\1\31\1\32\1\33\1\34\1\uffff"+
-        "\1\3\1\5\1\6\1\7\4\uffff\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25"+
-        "\3\uffff\1\12\1\uffff\1\26\1\4\6\uffff\1\11\1\14\1\15\1\uffff\1"+
-        "\13";
+        "\5\uffff\1\10\5\uffff\1\27\1\30\3\uffff\1\34\1\35\1\27\1\1\1\uffff\1\2\1\uffff\1\30\1\uffff\1\10\4\uffff\1\31\1\32\1\33\1\34\1\uffff\1\3\1\5\1\6\1\7\4\uffff\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\3\uffff\1\12\1\uffff\1\26\1\4\6\uffff\1\11\1\14\1\15\1\uffff\1\13";
     static final String DFA12_specialS =
         "\1\1\14\uffff\1\2\1\0\66\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\4\21\1\16\7\21\1"+
-            "\17\1\14\1\3\1\11\7\14\1\5\6\21\32\13\3\21\1\12\1\13\1\21\1"+
-            "\1\1\2\1\6\1\13\1\7\5\13\1\10\2\13\1\4\14\13\uff85\21",
+            "\11\21\2\20\2\21\1\20\22\21\1\20\1\21\1\15\4\21\1\16\7\21\1\17\1\14\1\3\1\11\7\14\1\5\6\21\32\13\3\21\1\12\1\13\1\21\1\1\1\2\1\6\1\13\1\7\5\13\1\10\2\13\1\4\14\13\uff85\21",
             "\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\32\22",
             "\12\22\7\uffff\32\22\4\uffff\1\22\1\uffff\16\22\1\24\13\22",
             "\1\26",

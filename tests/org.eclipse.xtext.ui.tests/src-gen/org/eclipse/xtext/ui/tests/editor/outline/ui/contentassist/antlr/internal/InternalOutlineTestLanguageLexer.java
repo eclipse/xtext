@@ -2,7 +2,7 @@ package org.eclipse.xtext.ui.tests.editor.outline.ui.contentassist.antlr.interna
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 
 
 import org.antlr.runtime.*;
@@ -714,14 +714,11 @@ public class InternalOutlineTestLanguageLexer extends Lexer {
     static final String DFA12_maxS =
         "\1\uffff\4\uffff\1\172\2\uffff\2\uffff\1\57\14\uffff";
     static final String DFA12_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\uffff\1\5\1\6\3\uffff\1\12\1\13\1\1\1"+
-        "\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12";
+        "\1\uffff\1\1\1\2\1\3\1\4\1\uffff\1\5\1\6\3\uffff\1\12\1\13\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12";
     static final String DFA12_specialS =
         "\1\0\7\uffff\1\2\1\1\15\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\4\14\1\11\1\3\1\4"+
-            "\5\14\1\12\12\7\7\14\32\6\3\14\1\5\1\6\1\14\32\6\1\1\1\14\1"+
-            "\2\uff82\14",
+            "\11\14\2\13\2\14\1\13\22\14\1\13\1\14\1\10\4\14\1\11\1\3\1\4\5\14\1\12\12\7\7\14\32\6\3\14\1\5\1\6\1\14\32\6\1\1\1\14\1\2\uff82\14",
             "",
             "",
             "",

@@ -215,23 +215,30 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 	
 	
-	private FirstLevelElements pFirstLevel;
-	private SecondLevelAElements pSecondLevelA;
-	private SecondLevelBElements pSecondLevelB;
-	private ThirdLevelA1Elements pThirdLevelA1;
-	private ThirdLevelA2Elements pThirdLevelA2;
-	private ThirdLevelB1Elements pThirdLevelB1;
-	private ThirdLevelB2Elements pThirdLevelB2;
+	private final FirstLevelElements pFirstLevel;
+	private final SecondLevelAElements pSecondLevelA;
+	private final SecondLevelBElements pSecondLevelB;
+	private final ThirdLevelA1Elements pThirdLevelA1;
+	private final ThirdLevelA2Elements pThirdLevelA2;
+	private final ThirdLevelB1Elements pThirdLevelB1;
+	private final ThirdLevelB2Elements pThirdLevelB2;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ContentAssistContextTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFirstLevel = new FirstLevelElements();
+		this.pSecondLevelA = new SecondLevelAElements();
+		this.pSecondLevelB = new SecondLevelBElements();
+		this.pThirdLevelA1 = new ThirdLevelA1Elements();
+		this.pThirdLevelA2 = new ThirdLevelA2Elements();
+		this.pThirdLevelB1 = new ThirdLevelB1Elements();
+		this.pThirdLevelB2 = new ThirdLevelB2Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -264,7 +271,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//FirstLevel:
 	//	secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*;
 	public FirstLevelElements getFirstLevelAccess() {
-		return (pFirstLevel != null) ? pFirstLevel : (pFirstLevel = new FirstLevelElements());
+		return pFirstLevel;
 	}
 	
 	public ParserRule getFirstLevelRule() {
@@ -274,7 +281,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//SecondLevelA:
 	//	thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+;
 	public SecondLevelAElements getSecondLevelAAccess() {
-		return (pSecondLevelA != null) ? pSecondLevelA : (pSecondLevelA = new SecondLevelAElements());
+		return pSecondLevelA;
 	}
 	
 	public ParserRule getSecondLevelARule() {
@@ -284,7 +291,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//SecondLevelB:
 	//	thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+;
 	public SecondLevelBElements getSecondLevelBAccess() {
-		return (pSecondLevelB != null) ? pSecondLevelB : (pSecondLevelB = new SecondLevelBElements());
+		return pSecondLevelB;
 	}
 	
 	public ParserRule getSecondLevelBRule() {
@@ -294,7 +301,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//ThirdLevelA1:
 	//	"A1" {ThirdLevelA1} name=ID?;
 	public ThirdLevelA1Elements getThirdLevelA1Access() {
-		return (pThirdLevelA1 != null) ? pThirdLevelA1 : (pThirdLevelA1 = new ThirdLevelA1Elements());
+		return pThirdLevelA1;
 	}
 	
 	public ParserRule getThirdLevelA1Rule() {
@@ -304,7 +311,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//ThirdLevelA2:
 	//	"A2" {ThirdLevelA2} name=ID?;
 	public ThirdLevelA2Elements getThirdLevelA2Access() {
-		return (pThirdLevelA2 != null) ? pThirdLevelA2 : (pThirdLevelA2 = new ThirdLevelA2Elements());
+		return pThirdLevelA2;
 	}
 	
 	public ParserRule getThirdLevelA2Rule() {
@@ -314,7 +321,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//ThirdLevelB1:
 	//	"B1" {ThirdLevelB1} name=ID?;
 	public ThirdLevelB1Elements getThirdLevelB1Access() {
-		return (pThirdLevelB1 != null) ? pThirdLevelB1 : (pThirdLevelB1 = new ThirdLevelB1Elements());
+		return pThirdLevelB1;
 	}
 	
 	public ParserRule getThirdLevelB1Rule() {
@@ -324,7 +331,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	//ThirdLevelB2:
 	//	"B2" {ThirdLevelB2} name=ID?;
 	public ThirdLevelB2Elements getThirdLevelB2Access() {
-		return (pThirdLevelB2 != null) ? pThirdLevelB2 : (pThirdLevelB2 = new ThirdLevelB2Elements());
+		return pThirdLevelB2;
 	}
 	
 	public ParserRule getThirdLevelB2Rule() {

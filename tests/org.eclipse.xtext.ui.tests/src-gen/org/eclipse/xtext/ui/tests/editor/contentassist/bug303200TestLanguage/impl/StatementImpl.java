@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Sta
  * An implementation of the model object '<em><b>Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

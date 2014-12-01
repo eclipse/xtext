@@ -171,21 +171,26 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private FileElements pFile;
-	private ExpressionElements pExpression;
-	private SExpressionElements pSExpression;
-	private AtomElements pAtom;
-	private VALUEElements pVALUE;
+	private final FileElements pFile;
+	private final ExpressionElements pExpression;
+	private final SExpressionElements pSExpression;
+	private final AtomElements pAtom;
+	private final VALUEElements pVALUE;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public BmTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pFile = new FileElements();
+		this.pExpression = new ExpressionElements();
+		this.pSExpression = new SExpressionElements();
+		this.pAtom = new AtomElements();
+		this.pVALUE = new VALUEElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -218,7 +223,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//File:
 	//	expression+=Expression*;
 	public FileElements getFileAccess() {
-		return (pFile != null) ? pFile : (pFile = new FileElements());
+		return pFile;
 	}
 	
 	public ParserRule getFileRule() {
@@ -228,7 +233,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//Expression:
 	//	SExpression | Atom | "[" Expression "]";
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -238,7 +243,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//SExpression:
 	//	{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end");
 	public SExpressionElements getSExpressionAccess() {
-		return (pSExpression != null) ? pSExpression : (pSExpression = new SExpressionElements());
+		return pSExpression;
 	}
 	
 	public ParserRule getSExpressionRule() {
@@ -248,7 +253,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//Atom:
 	//	value=VALUE;
 	public AtomElements getAtomAccess() {
-		return (pAtom != null) ? pAtom : (pAtom = new AtomElements());
+		return pAtom;
 	}
 	
 	public ParserRule getAtomRule() {
@@ -258,7 +263,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	//VALUE:
 	//	ID | INT | STRING;
 	public VALUEElements getVALUEAccess() {
-		return (pVALUE != null) ? pVALUE : (pVALUE = new VALUEElements());
+		return pVALUE;
 	}
 	
 	public ParserRule getVALUERule() {

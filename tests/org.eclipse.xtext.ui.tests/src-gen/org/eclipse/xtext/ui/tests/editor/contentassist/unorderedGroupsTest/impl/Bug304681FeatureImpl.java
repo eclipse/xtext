@@ -17,11 +17,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * An implementation of the model object '<em><b>Bug304681 Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681FeatureImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Ele
  * An implementation of the model object '<em><b>Element Scope</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.ExternalOpen#getUrl <em>Url</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Bug332217TestLanguagePackage#getExternalOpen()
  * @model

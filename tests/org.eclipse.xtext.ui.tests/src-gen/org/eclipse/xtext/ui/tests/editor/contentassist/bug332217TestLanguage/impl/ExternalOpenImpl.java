@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Sca
  * An implementation of the model object '<em><b>External Open</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.ExternalOpenImpl#getUrl <em>Url</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

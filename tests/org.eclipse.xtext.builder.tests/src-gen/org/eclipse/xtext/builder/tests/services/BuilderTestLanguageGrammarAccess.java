@@ -225,21 +225,26 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
-	private NamedElementElements pNamedElement;
-	private NamespaceElements pNamespace;
-	private ImportElements pImport;
-	private ElementElements pElement;
-	private QualifiedNameElements pQualifiedName;
+	private final NamedElementElements pNamedElement;
+	private final NamespaceElements pNamespace;
+	private final ImportElements pImport;
+	private final ElementElements pElement;
+	private final QualifiedNameElements pQualifiedName;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public BuilderTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pNamedElement = new NamedElementElements();
+		this.pNamespace = new NamespaceElements();
+		this.pImport = new ImportElements();
+		this.pElement = new ElementElements();
+		this.pQualifiedName = new QualifiedNameElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -272,7 +277,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//NamedElement:
 	//	Namespace | Element;
 	public NamedElementElements getNamedElementAccess() {
-		return (pNamedElement != null) ? pNamedElement : (pNamedElement = new NamedElementElements());
+		return pNamedElement;
 	}
 	
 	public ParserRule getNamedElementRule() {
@@ -282,7 +287,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//Namespace:
 	//	"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
 	public NamespaceElements getNamespaceAccess() {
-		return (pNamespace != null) ? pNamespace : (pNamespace = new NamespaceElements());
+		return pNamespace;
 	}
 	
 	public ParserRule getNamespaceRule() {
@@ -292,7 +297,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//Import:
 	//	"import" importedNamespace=QualifiedName;
 	public ImportElements getImportAccess() {
-		return (pImport != null) ? pImport : (pImport = new ImportElements());
+		return pImport;
 	}
 	
 	public ParserRule getImportRule() {
@@ -303,7 +308,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//	"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName]
 	//	("," otherRefs+=[Element|QualifiedName])*)?;
 	public ElementElements getElementAccess() {
-		return (pElement != null) ? pElement : (pElement = new ElementElements());
+		return pElement;
 	}
 	
 	public ParserRule getElementRule() {
@@ -313,7 +318,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	//QualifiedName:
 	//	ID ("." ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
-		return (pQualifiedName != null) ? pQualifiedName : (pQualifiedName = new QualifiedNameElements());
+		return pQualifiedName;
 	}
 	
 	public ParserRule getQualifiedNameRule() {

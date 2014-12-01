@@ -1335,39 +1335,62 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getBBKeyword_1_0() { return cBBKeyword_1_0; }
 	}
 	
-	private ModelElements pModel;
-	private Scenario1_1Elements pScenario1_1;
-	private Scenario1_2Elements pScenario1_2;
-	private Scenario1_3Elements pScenario1_3;
-	private Scenario1_4Elements pScenario1_4;
-	private Child1_1Elements pChild1_1;
-	private Child1_2Elements pChild1_2;
-	private Child1_3Elements pChild1_3;
-	private EnumTypeElements unknownRuleEnumType;
-	private Scenario2_1Elements pScenario2_1;
-	private Scenario2_2Elements pScenario2_2;
-	private Scenario2_3Elements pScenario2_3;
-	private Scenario2_4Elements pScenario2_4;
-	private Scenario2_5Elements pScenario2_5;
-	private Scenario2_6Elements pScenario2_6;
-	private Scenario2_7Elements pScenario2_7;
-	private Scenario2_8Elements pScenario2_8;
-	private Child2_1Elements pChild2_1;
-	private Child2_2Elements pChild2_2;
-	private Child2_3Elements pChild2_3;
-	private Child2_4Elements pChild2_4;
-	private Child2_5Elements pChild2_5;
-	private Child2_6Elements pChild2_6;
+	private final ModelElements pModel;
+	private final Scenario1_1Elements pScenario1_1;
+	private final Scenario1_2Elements pScenario1_2;
+	private final Scenario1_3Elements pScenario1_3;
+	private final Scenario1_4Elements pScenario1_4;
+	private final Child1_1Elements pChild1_1;
+	private final Child1_2Elements pChild1_2;
+	private final Child1_3Elements pChild1_3;
+	private final EnumTypeElements unknownRuleEnumType;
+	private final Scenario2_1Elements pScenario2_1;
+	private final Scenario2_2Elements pScenario2_2;
+	private final Scenario2_3Elements pScenario2_3;
+	private final Scenario2_4Elements pScenario2_4;
+	private final Scenario2_5Elements pScenario2_5;
+	private final Scenario2_6Elements pScenario2_6;
+	private final Scenario2_7Elements pScenario2_7;
+	private final Scenario2_8Elements pScenario2_8;
+	private final Child2_1Elements pChild2_1;
+	private final Child2_2Elements pChild2_2;
+	private final Child2_3Elements pChild2_3;
+	private final Child2_4Elements pChild2_4;
+	private final Child2_5Elements pChild2_5;
+	private final Child2_6Elements pChild2_6;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug348427TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pScenario1_1 = new Scenario1_1Elements();
+		this.pScenario1_2 = new Scenario1_2Elements();
+		this.pScenario1_3 = new Scenario1_3Elements();
+		this.pScenario1_4 = new Scenario1_4Elements();
+		this.pChild1_1 = new Child1_1Elements();
+		this.pChild1_2 = new Child1_2Elements();
+		this.pChild1_3 = new Child1_3Elements();
+		this.unknownRuleEnumType = new EnumTypeElements();
+		this.pScenario2_1 = new Scenario2_1Elements();
+		this.pScenario2_2 = new Scenario2_2Elements();
+		this.pScenario2_3 = new Scenario2_3Elements();
+		this.pScenario2_4 = new Scenario2_4Elements();
+		this.pScenario2_5 = new Scenario2_5Elements();
+		this.pScenario2_6 = new Scenario2_6Elements();
+		this.pScenario2_7 = new Scenario2_7Elements();
+		this.pScenario2_8 = new Scenario2_8Elements();
+		this.pChild2_1 = new Child2_1Elements();
+		this.pChild2_2 = new Child2_2Elements();
+		this.pChild2_3 = new Child2_3Elements();
+		this.pChild2_4 = new Child2_4Elements();
+		this.pChild2_5 = new Child2_5Elements();
+		this.pChild2_6 = new Child2_6Elements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1402,7 +1425,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	element2=Scenario2_2 | element2=Scenario2_3 | element2=Scenario2_4 | element2=Scenario2_5 | element2=Scenario2_6 |
 	//	element2=Scenario2_7 | element2=Scenario2_8;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -1412,7 +1435,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario1_1 returns Scenario1:
 	//	"1.1" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) "next";
 	public Scenario1_1Elements getScenario1_1Access() {
-		return (pScenario1_1 != null) ? pScenario1_1 : (pScenario1_1 = new Scenario1_1Elements());
+		return pScenario1_1;
 	}
 	
 	public ParserRule getScenario1_1Rule() {
@@ -1422,7 +1445,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario1_2 returns Scenario1:
 	//	"1.2" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ "next";
 	public Scenario1_2Elements getScenario1_2Access() {
-		return (pScenario1_2 != null) ? pScenario1_2 : (pScenario1_2 = new Scenario1_2Elements());
+		return pScenario1_2;
 	}
 	
 	public ParserRule getScenario1_2Rule() {
@@ -1432,7 +1455,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario1_3 returns Scenario1:
 	//	{Scenario1} "1.3" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* "next";
 	public Scenario1_3Elements getScenario1_3Access() {
-		return (pScenario1_3 != null) ? pScenario1_3 : (pScenario1_3 = new Scenario1_3Elements());
+		return pScenario1_3;
 	}
 	
 	public ParserRule getScenario1_3Rule() {
@@ -1442,7 +1465,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario1_4 returns Scenario1:
 	//	{Scenario1} "1.4" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? "next";
 	public Scenario1_4Elements getScenario1_4Access() {
-		return (pScenario1_4 != null) ? pScenario1_4 : (pScenario1_4 = new Scenario1_4Elements());
+		return pScenario1_4;
 	}
 	
 	public ParserRule getScenario1_4Rule() {
@@ -1453,7 +1476,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
 	//	EnumType "child1" "end";
 	public Child1_1Elements getChild1_1Access() {
-		return (pChild1_1 != null) ? pChild1_1 : (pChild1_1 = new Child1_1Elements());
+		return pChild1_1;
 	}
 	
 	public ParserRule getChild1_1Rule() {
@@ -1464,7 +1487,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
 	//	EnumType "child2" "end";
 	public Child1_2Elements getChild1_2Access() {
-		return (pChild1_2 != null) ? pChild1_2 : (pChild1_2 = new Child1_2Elements());
+		return pChild1_2;
 	}
 	
 	public ParserRule getChild1_2Rule() {
@@ -1475,7 +1498,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
 	//	EnumType "child3" "end";
 	public Child1_3Elements getChild1_3Access() {
-		return (pChild1_3 != null) ? pChild1_3 : (pChild1_3 = new Child1_3Elements());
+		return pChild1_3;
 	}
 	
 	public ParserRule getChild1_3Rule() {
@@ -1485,7 +1508,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum EnumType:
 	//	a | b;
 	public EnumTypeElements getEnumTypeAccess() {
-		return (unknownRuleEnumType != null) ? unknownRuleEnumType : (unknownRuleEnumType = new EnumTypeElements());
+		return unknownRuleEnumType;
 	}
 	
 	public EnumRule getEnumTypeRule() {
@@ -1495,7 +1518,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_1 returns Scenario2:
 	//	"2.1" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) "next";
 	public Scenario2_1Elements getScenario2_1Access() {
-		return (pScenario2_1 != null) ? pScenario2_1 : (pScenario2_1 = new Scenario2_1Elements());
+		return pScenario2_1;
 	}
 	
 	public ParserRule getScenario2_1Rule() {
@@ -1505,7 +1528,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_2 returns Scenario2:
 	//	"2.2" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ "next";
 	public Scenario2_2Elements getScenario2_2Access() {
-		return (pScenario2_2 != null) ? pScenario2_2 : (pScenario2_2 = new Scenario2_2Elements());
+		return pScenario2_2;
 	}
 	
 	public ParserRule getScenario2_2Rule() {
@@ -1515,7 +1538,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_3 returns Scenario2:
 	//	"2.3" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) "next";
 	public Scenario2_3Elements getScenario2_3Access() {
-		return (pScenario2_3 != null) ? pScenario2_3 : (pScenario2_3 = new Scenario2_3Elements());
+		return pScenario2_3;
 	}
 	
 	public ParserRule getScenario2_3Rule() {
@@ -1525,7 +1548,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_4 returns Scenario2:
 	//	"2.4" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ "next";
 	public Scenario2_4Elements getScenario2_4Access() {
-		return (pScenario2_4 != null) ? pScenario2_4 : (pScenario2_4 = new Scenario2_4Elements());
+		return pScenario2_4;
 	}
 	
 	public ParserRule getScenario2_4Rule() {
@@ -1535,7 +1558,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_5 returns Scenario2:
 	//	{Scenario2} "2.5" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? "next";
 	public Scenario2_5Elements getScenario2_5Access() {
-		return (pScenario2_5 != null) ? pScenario2_5 : (pScenario2_5 = new Scenario2_5Elements());
+		return pScenario2_5;
 	}
 	
 	public ParserRule getScenario2_5Rule() {
@@ -1545,7 +1568,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_6 returns Scenario2:
 	//	{Scenario2} "2.6" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* "next";
 	public Scenario2_6Elements getScenario2_6Access() {
-		return (pScenario2_6 != null) ? pScenario2_6 : (pScenario2_6 = new Scenario2_6Elements());
+		return pScenario2_6;
 	}
 	
 	public ParserRule getScenario2_6Rule() {
@@ -1555,7 +1578,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_7 returns Scenario2:
 	//	{Scenario2} "2.7" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? "next";
 	public Scenario2_7Elements getScenario2_7Access() {
-		return (pScenario2_7 != null) ? pScenario2_7 : (pScenario2_7 = new Scenario2_7Elements());
+		return pScenario2_7;
 	}
 	
 	public ParserRule getScenario2_7Rule() {
@@ -1565,7 +1588,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Scenario2_8 returns Scenario2:
 	//	{Scenario2} "2.8" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* "next";
 	public Scenario2_8Elements getScenario2_8Access() {
-		return (pScenario2_8 != null) ? pScenario2_8 : (pScenario2_8 = new Scenario2_8Elements());
+		return pScenario2_8;
 	}
 	
 	public ParserRule getScenario2_8Rule() {
@@ -1575,7 +1598,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_1 returns Child2:
 	//	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child1" "end";
 	public Child2_1Elements getChild2_1Access() {
-		return (pChild2_1 != null) ? pChild2_1 : (pChild2_1 = new Child2_1Elements());
+		return pChild2_1;
 	}
 	
 	public ParserRule getChild2_1Rule() {
@@ -1585,7 +1608,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_2 returns Child2:
 	//	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child2" "end";
 	public Child2_2Elements getChild2_2Access() {
-		return (pChild2_2 != null) ? pChild2_2 : (pChild2_2 = new Child2_2Elements());
+		return pChild2_2;
 	}
 	
 	public ParserRule getChild2_2Rule() {
@@ -1595,7 +1618,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_3 returns Child2:
 	//	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child3" "end";
 	public Child2_3Elements getChild2_3Access() {
-		return (pChild2_3 != null) ? pChild2_3 : (pChild2_3 = new Child2_3Elements());
+		return pChild2_3;
 	}
 	
 	public ParserRule getChild2_3Rule() {
@@ -1605,7 +1628,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_4 returns Child2:
 	//	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child1" "end";
 	public Child2_4Elements getChild2_4Access() {
-		return (pChild2_4 != null) ? pChild2_4 : (pChild2_4 = new Child2_4Elements());
+		return pChild2_4;
 	}
 	
 	public ParserRule getChild2_4Rule() {
@@ -1615,7 +1638,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_5 returns Child2:
 	//	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child2" "end";
 	public Child2_5Elements getChild2_5Access() {
-		return (pChild2_5 != null) ? pChild2_5 : (pChild2_5 = new Child2_5Elements());
+		return pChild2_5;
 	}
 	
 	public ParserRule getChild2_5Rule() {
@@ -1625,7 +1648,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Child2_6 returns Child2:
 	//	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child3" "end";
 	public Child2_6Elements getChild2_6Access() {
-		return (pChild2_6 != null) ? pChild2_6 : (pChild2_6 = new Child2_6Elements());
+		return pChild2_6;
 	}
 	
 	public ParserRule getChild2_6Rule() {

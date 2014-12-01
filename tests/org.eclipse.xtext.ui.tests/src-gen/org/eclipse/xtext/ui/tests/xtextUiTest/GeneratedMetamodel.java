@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.xtextUiTest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.GeneratedMetamodel#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage#getGeneratedMetamodel()
  * @model

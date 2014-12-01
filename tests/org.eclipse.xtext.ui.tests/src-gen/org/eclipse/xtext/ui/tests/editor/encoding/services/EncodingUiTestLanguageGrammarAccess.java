@@ -50,17 +50,22 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	
-	private ModelElements pModel;
-	private WordElements pWord;
-	private TerminalRule tLEXEME;
-	private TerminalRule tWS;
-	private TerminalRule tANY_OTHER;
+	private final ModelElements pModel;
+	private final WordElements pWord;
+	private final TerminalRule tLEXEME;
+	private final TerminalRule tWS;
+	private final TerminalRule tANY_OTHER;
 	
 	private final Grammar grammar;
 
 	@Inject
 	public EncodingUiTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
+		this.pModel = new ModelElements();
+		this.pWord = new WordElements();
+		this.tLEXEME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LEXEME");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -89,7 +94,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	//Model:
 	//	words+=Word*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -99,7 +104,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	//Word:
 	//	value=LEXEME;
 	public WordElements getWordAccess() {
-		return (pWord != null) ? pWord : (pWord = new WordElements());
+		return pWord;
 	}
 	
 	public ParserRule getWordRule() {
@@ -109,18 +114,18 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	//terminal LEXEME:
 	//	("a".."z" | "A".."Z" | "0".."9" | "ä" | "ö" | "ü" | "ß" | "Ä" | "Ö" | "Ü")*;
 	public TerminalRule getLEXEMERule() {
-		return (tLEXEME != null) ? tLEXEME : (tLEXEME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LEXEME"));
+		return tLEXEME;
 	} 
 
 	//terminal WS:
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return (tANY_OTHER != null) ? tANY_OTHER : (tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER"));
+		return tANY_OTHER;
 	} 
 }

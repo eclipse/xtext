@@ -2,7 +2,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.i
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 
 
 import org.antlr.runtime.*;
@@ -728,19 +728,14 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
     static final String DFA9_minS =
         "\1\0\1\41\2\uffff\1\76\1\101\2\uffff\2\0\3\uffff\1\101\13\uffff";
     static final String DFA9_maxS =
-        "\1\uffff\1\172\2\uffff\1\76\1\172\2\uffff\2\uffff\3\uffff\1\172"+
-        "\13\uffff";
+        "\1\uffff\1\172\2\uffff\1\76\1\172\2\uffff\2\uffff\3\uffff\1\172\13\uffff";
     static final String DFA9_acceptS =
-        "\2\uffff\1\4\1\5\2\uffff\1\11\1\12\2\uffff\1\14\1\15\1\1\1\uffff"+
-        "\1\3\1\2\1\4\1\5\1\6\1\11\1\12\1\13\1\14\1\7\1\10";
+        "\2\uffff\1\4\1\5\2\uffff\1\11\1\12\2\uffff\1\14\1\15\1\1\1\uffff\1\3\1\2\1\4\1\5\1\6\1\11\1\12\1\13\1\14\1\7\1\10";
     static final String DFA9_specialS =
         "\1\0\7\uffff\1\1\1\2\17\uffff}>";
     static final String[] DFA9_transitionS = {
-            "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\10\4\13\1\11\7\13\1"+
-            "\4\12\7\2\13\1\1\1\3\1\2\2\13\32\6\3\13\1\5\1\6\1\13\32\6\uff85"+
-            "\13",
-            "\1\14\15\uffff\1\15\21\uffff\32\17\3\uffff\2\17\1\uffff\32"+
-            "\17",
+            "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\10\4\13\1\11\7\13\1\4\12\7\2\13\1\1\1\3\1\2\2\13\32\6\3\13\1\5\1\6\1\13\32\6\uff85\13",
+            "\1\14\15\uffff\1\15\21\uffff\32\17\3\uffff\2\17\1\uffff\32\17",
             "",
             "",
             "\1\22",

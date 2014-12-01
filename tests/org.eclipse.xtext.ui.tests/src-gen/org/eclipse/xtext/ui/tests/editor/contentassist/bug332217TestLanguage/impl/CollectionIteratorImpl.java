@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Col
  * An implementation of the model object '<em><b>Collection Iterator</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.CollectionIteratorImpl#getCollection <em>Collection</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

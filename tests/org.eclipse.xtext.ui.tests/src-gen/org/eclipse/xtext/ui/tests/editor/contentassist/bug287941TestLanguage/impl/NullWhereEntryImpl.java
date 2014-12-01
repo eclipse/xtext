@@ -20,13 +20,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Nul
  * An implementation of the model object '<em><b>Null Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.NullWhereEntryImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.NullWhereEntryImpl#getFeature <em>Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.NullWhereEntryImpl#getOperator <em>Operator</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

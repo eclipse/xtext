@@ -17,12 +17,13 @@ import org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGram
  * An implementation of the model object '<em><b>Person</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.PersonImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.impl.PersonImpl#getAge <em>Age</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

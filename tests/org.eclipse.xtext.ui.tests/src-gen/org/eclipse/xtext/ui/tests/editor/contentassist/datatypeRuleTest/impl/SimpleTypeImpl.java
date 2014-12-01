@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.SimpleTy
  * An implementation of the model object '<em><b>Simple Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

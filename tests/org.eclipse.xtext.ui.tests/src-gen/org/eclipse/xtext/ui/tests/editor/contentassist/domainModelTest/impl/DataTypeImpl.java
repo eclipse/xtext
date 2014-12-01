@@ -12,7 +12,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainMod
  * An implementation of the model object '<em><b>Data Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

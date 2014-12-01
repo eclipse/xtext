@@ -14,7 +14,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Uno
  * An implementation of the model object '<em><b>Unordered Modifiers</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

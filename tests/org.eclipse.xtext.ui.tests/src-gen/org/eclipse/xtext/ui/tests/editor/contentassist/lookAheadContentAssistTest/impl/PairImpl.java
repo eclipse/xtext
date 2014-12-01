@@ -17,12 +17,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTes
  * An implementation of the model object '<em><b>Pair</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.impl.PairImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.lookAheadContentAssistTest.impl.PairImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

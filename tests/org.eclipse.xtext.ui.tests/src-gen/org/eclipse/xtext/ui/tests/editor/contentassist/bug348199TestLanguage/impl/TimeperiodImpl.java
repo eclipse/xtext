@@ -26,13 +26,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Tim
  * An implementation of the model object '<em><b>Timeperiod</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.impl.TimeperiodImpl#getTime <em>Time</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.impl.TimeperiodImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.impl.TimeperiodImpl#getAlias <em>Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -27,13 +27,14 @@ import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.outline.outlineTest.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.outline.outlineTest.impl.ElementImpl#getXrefs <em>Xrefs</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.outline.outlineTest.impl.ElementImpl#getChildren <em>Children</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

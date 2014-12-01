@@ -17,12 +17,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Bug
  * An implementation of the model object '<em><b>Boolean Attribute Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.BooleanAttributeWhereEntryImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.BooleanAttributeWhereEntryImpl#isIsTrue <em>Is True</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

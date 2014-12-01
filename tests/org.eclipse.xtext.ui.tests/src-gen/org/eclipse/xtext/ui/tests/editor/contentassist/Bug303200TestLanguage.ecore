@@ -29,7 +29,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" eSuperTypes="#//ProgramDirective"/>
   <eClassifiers xsi:type="ecore:EClass" name="PostfixExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//PrimaryExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//PostfixExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="#//PropertyOperator"
         containment="true"/>

@@ -26,7 +26,9 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Con
  * An implementation of the model object '<em><b>Attribut</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl#getShortDescription <em>Short Description</em>}</li>
@@ -35,7 +37,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Con
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl#isRequired <em>Required</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl#isTechnical <em>Technical</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

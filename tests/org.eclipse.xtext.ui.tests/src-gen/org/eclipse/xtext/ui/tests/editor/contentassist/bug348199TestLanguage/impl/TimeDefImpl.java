@@ -17,11 +17,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.Tim
  * An implementation of the model object '<em><b>Time Def</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348199TestLanguage.impl.TimeDefImpl#getDay <em>Day</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

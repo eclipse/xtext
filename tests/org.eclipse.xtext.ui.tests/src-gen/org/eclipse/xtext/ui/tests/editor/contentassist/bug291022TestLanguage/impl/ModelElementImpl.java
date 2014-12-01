@@ -26,14 +26,15 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.Mod
  * An implementation of the model object '<em><b>Model Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.ModelElementImpl#getFirstReference <em>First Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.ModelElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.ModelElementImpl#getSecondReference <em>Second Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug291022TestLanguage.impl.ModelElementImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

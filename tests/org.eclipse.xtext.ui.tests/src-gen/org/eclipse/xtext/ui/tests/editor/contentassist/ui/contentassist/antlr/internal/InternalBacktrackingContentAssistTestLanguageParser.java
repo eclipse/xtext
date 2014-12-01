@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.BacktrackingContentAssistTestLanguageGrammarAccess;
 
 
@@ -43529,14 +43529,11 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
     static final String DFA44_maxS =
         "\1\115\3\0\7\uffff\6\0\17\uffff";
     static final String DFA44_acceptS =
-        "\4\uffff\1\3\1\4\13\uffff\1\10\7\uffff\1\11\1\12\1\1\1\2\1\7\1\5"+
-        "\1\6";
+        "\4\uffff\1\3\1\4\13\uffff\1\10\7\uffff\1\11\1\12\1\1\1\2\1\7\1\5\1\6";
     static final String DFA44_specialS =
         "\1\uffff\1\0\1\1\1\2\7\uffff\1\3\1\4\1\5\1\6\1\7\1\10\17\uffff}>";
     static final String[] DFA44_transitionS = {
-            "\1\5\1\1\1\5\10\uffff\1\2\1\3\2\uffff\10\21\1\14\1\15\1\16\1"+
-            "\17\1\20\1\5\15\uffff\1\32\16\uffff\1\13\2\5\5\uffff\1\4\1\31"+
-            "\6\uffff\1\5",
+            "\1\5\1\1\1\5\10\uffff\1\2\1\3\2\uffff\10\21\1\14\1\15\1\16\1\17\1\20\1\5\15\uffff\1\32\16\uffff\1\13\2\5\5\uffff\1\4\1\31\6\uffff\1\5",
             "\1\uffff",
             "\1\uffff",
             "\1\uffff",
@@ -43774,24 +43771,16 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
     static final String DFA98_specialS =
         "\12\uffff}>";
     static final String[] DFA98_transitionS = {
-            "\1\4\1\1\1\4\10\uffff\1\2\1\3\1\uffff\17\4\10\uffff\1\4\4\uffff"+
-            "\2\4\15\uffff\3\4\5\uffff\2\4\3\uffff\1\4\2\uffff\1\4",
-            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\2\4\1\6"+
-            "\7\uffff\1\4\7\uffff\1\4\2\5\1\4\12\uffff\4\4",
-            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\2\4\1\6"+
-            "\7\uffff\1\4\7\uffff\1\4\2\5\1\4\12\uffff\4\4",
-            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\2\4\1\6"+
-            "\7\uffff\1\4\7\uffff\1\4\2\5\1\4\12\uffff\4\4",
+            "\1\4\1\1\1\4\10\uffff\1\2\1\3\1\uffff\17\4\10\uffff\1\4\4\uffff\2\4\15\uffff\3\4\5\uffff\2\4\3\uffff\1\4\2\uffff\1\4",
+            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\2\4\1\6\7\uffff\1\4\7\uffff\1\4\2\5\1\4\12\uffff\4\4",
+            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\2\4\1\6\7\uffff\1\4\7\uffff\1\4\2\5\1\4\12\uffff\4\4",
+            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\2\4\1\6\7\uffff\1\4\7\uffff\1\4\2\5\1\4\12\uffff\4\4",
             "",
             "",
-            "\1\4\1\7\1\4\10\uffff\1\10\1\11\1\uffff\17\4\10\uffff\1\4\4"+
-            "\uffff\1\4\16\uffff\3\4\5\uffff\2\4\3\uffff\1\4\2\uffff\1\4",
-            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\3\4\7\uffff"+
-            "\1\4\7\uffff\1\4\1\5\1\uffff\1\4\12\uffff\4\4",
-            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\3\4\7\uffff"+
-            "\1\4\7\uffff\1\4\1\5\1\uffff\1\4\12\uffff\4\4",
-            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\3\4\7\uffff"+
-            "\1\4\7\uffff\1\4\1\5\1\uffff\1\4\12\uffff\4\4"
+            "\1\4\1\7\1\4\10\uffff\1\10\1\11\1\uffff\17\4\10\uffff\1\4\4\uffff\1\4\16\uffff\3\4\5\uffff\2\4\3\uffff\1\4\2\uffff\1\4",
+            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\3\4\7\uffff\1\4\7\uffff\1\4\1\5\1\uffff\1\4\12\uffff\4\4",
+            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\3\4\7\uffff\1\4\7\uffff\1\4\1\5\1\uffff\1\4\12\uffff\4\4",
+            "\4\4\2\uffff\2\4\16\uffff\10\4\2\uffff\1\5\2\uffff\3\4\7\uffff\1\4\7\uffff\1\4\1\5\1\uffff\1\4\12\uffff\4\4"
     };
 
     static final short[] DFA98_eot = DFA.unpackEncodedString(DFA98_eotS);

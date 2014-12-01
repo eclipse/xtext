@@ -337,21 +337,26 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getPUBLICPUBLICKeyword_3_0() { return cPUBLICPUBLICKeyword_3_0; }
 	}
 	
-	private ModelElements pModel;
-	private ClassElements pClass;
-	private AttributeElements pAttribute;
-	private OperationElements pOperation;
-	private VisibilityElements unknownRuleVisibility;
+	private final ModelElements pModel;
+	private final ClassElements pClass;
+	private final AttributeElements pAttribute;
+	private final OperationElements pOperation;
+	private final VisibilityElements unknownRuleVisibility;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug289187TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pClass = new ClassElements();
+		this.pAttribute = new AttributeElements();
+		this.pOperation = new OperationElements();
+		this.unknownRuleVisibility = new VisibilityElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -384,7 +389,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	classes+=Class*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -397,7 +402,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
 	//	operations+=Operation* "}";
 	public ClassElements getClassAccess() {
-		return (pClass != null) ? pClass : (pClass = new ClassElements());
+		return pClass;
 	}
 	
 	public ParserRule getClassRule() {
@@ -407,7 +412,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Attribute:
 	//	visibility=Visibility? "attribute" name=ID;
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -417,7 +422,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Operation:
 	//	visibility=Visibility? "operation" name=ID;
 	public OperationElements getOperationAccess() {
-		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
+		return pOperation;
 	}
 	
 	public ParserRule getOperationRule() {
@@ -427,7 +432,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum Visibility:
 	//	PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
 	public VisibilityElements getVisibilityAccess() {
-		return (unknownRuleVisibility != null) ? unknownRuleVisibility : (unknownRuleVisibility = new VisibilityElements());
+		return unknownRuleVisibility;
 	}
 	
 	public EnumRule getVisibilityRule() {

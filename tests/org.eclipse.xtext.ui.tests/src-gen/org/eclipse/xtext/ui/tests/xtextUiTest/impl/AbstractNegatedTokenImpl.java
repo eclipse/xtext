@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage;
  * An implementation of the model object '<em><b>Abstract Negated Token</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.impl.AbstractNegatedTokenImpl#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

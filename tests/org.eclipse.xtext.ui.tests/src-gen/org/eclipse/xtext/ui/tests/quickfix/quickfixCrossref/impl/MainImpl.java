@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPack
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

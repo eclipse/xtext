@@ -178,18 +178,20 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Keyword getTEXTUALTextualKeyword_3_0() { return cTEXTUALTextualKeyword_3_0; }
 	}
 	
-	private StateElements pState;
-	private StateTypeElements unknownRuleStateType;
+	private final StateElements pState;
+	private final StateTypeElements unknownRuleStateType;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug286935TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pState = new StateElements();
+		this.unknownRuleStateType = new StateTypeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -223,7 +225,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
 	//	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
 	public StateElements getStateAccess() {
-		return (pState != null) ? pState : (pState = new StateElements());
+		return pState;
 	}
 	
 	public ParserRule getStateRule() {
@@ -233,7 +235,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//enum StateType:
 	//	NORMAL | PSEUDO="cond" | REFERENCE="reference" | TEXTUAL="textual";
 	public StateTypeElements getStateTypeAccess() {
-		return (unknownRuleStateType != null) ? unknownRuleStateType : (unknownRuleStateType = new StateTypeElements());
+		return unknownRuleStateType;
 	}
 	
 	public EnumRule getStateTypeRule() {

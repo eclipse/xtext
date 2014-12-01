@@ -17,14 +17,15 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Ref
  * An implementation of the model object '<em><b>Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#isMany <em>Many</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#getShortDescription <em>Short Description</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ReferenceImpl#getLongDescription <em>Long Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

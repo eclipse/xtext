@@ -212,20 +212,24 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private RootModelElements pRootModel;
-	private ModelElementElements pModelElement;
-	private ModelAttributeElements pModelAttribute;
-	private AttributeElements pAttribute;
+	private final RootModelElements pRootModel;
+	private final ModelElementElements pModelElement;
+	private final ModelAttributeElements pModelAttribute;
+	private final AttributeElements pAttribute;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug291022TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pRootModel = new RootModelElements();
+		this.pModelElement = new ModelElementElements();
+		this.pModelAttribute = new ModelAttributeElements();
+		this.pAttribute = new AttributeElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -258,7 +262,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//RootModel returns ModelElement:
 	//	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
 	public RootModelElements getRootModelAccess() {
-		return (pRootModel != null) ? pRootModel : (pRootModel = new RootModelElements());
+		return pRootModel;
 	}
 	
 	public ParserRule getRootModelRule() {
@@ -269,7 +273,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
 	//	"}");
 	public ModelElementElements getModelElementAccess() {
-		return (pModelElement != null) ? pModelElement : (pModelElement = new ModelElementElements());
+		return pModelElement;
 	}
 	
 	public ParserRule getModelElementRule() {
@@ -279,7 +283,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ModelAttribute:
 	//	ModelElement | Attribute;
 	public ModelAttributeElements getModelAttributeAccess() {
-		return (pModelAttribute != null) ? pModelAttribute : (pModelAttribute = new ModelAttributeElements());
+		return pModelAttribute;
 	}
 	
 	public ParserRule getModelAttributeRule() {
@@ -289,7 +293,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Attribute:
 	//	feature=[ModelElement] "=" value=STRING;
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {

@@ -1053,22 +1053,28 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private TimeperiodElements pTimeperiod;
-	private TimeDef1Elements pTimeDef1;
-	private TimeDef2Elements pTimeDef2;
-	private TimeDef3Elements pTimeDef3;
-	private TerminalRule tNL;
-	private TerminalRule tWS;
+	private final TimeperiodElements pTimeperiod;
+	private final TimeDef1Elements pTimeDef1;
+	private final TimeDef2Elements pTimeDef2;
+	private final TimeDef3Elements pTimeDef3;
+	private final TerminalRule tNL;
+	private final TerminalRule tWS;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug348199TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pTimeperiod = new TimeperiodElements();
+		this.pTimeDef1 = new TimeDef1Elements();
+		this.pTimeDef2 = new TimeDef2Elements();
+		this.pTimeDef3 = new TimeDef3Elements();
+		this.tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1111,7 +1117,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	| "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
 	//	name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}");
 	public TimeperiodElements getTimeperiodAccess() {
-		return (pTimeperiod != null) ? pTimeperiod : (pTimeperiod = new TimeperiodElements());
+		return pTimeperiod;
 	}
 	
 	public ParserRule getTimeperiodRule() {
@@ -1121,7 +1127,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TimeDef1 returns TimeDef:
 	//	"july" day=INT;
 	public TimeDef1Elements getTimeDef1Access() {
-		return (pTimeDef1 != null) ? pTimeDef1 : (pTimeDef1 = new TimeDef1Elements());
+		return pTimeDef1;
 	}
 	
 	public ParserRule getTimeDef1Rule() {
@@ -1131,7 +1137,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TimeDef2 returns TimeDef:
 	//	"august" day=INT;
 	public TimeDef2Elements getTimeDef2Access() {
-		return (pTimeDef2 != null) ? pTimeDef2 : (pTimeDef2 = new TimeDef2Elements());
+		return pTimeDef2;
 	}
 	
 	public ParserRule getTimeDef2Rule() {
@@ -1141,7 +1147,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//TimeDef3 returns TimeDef:
 	//	"september" day=INT;
 	public TimeDef3Elements getTimeDef3Access() {
-		return (pTimeDef3 != null) ? pTimeDef3 : (pTimeDef3 = new TimeDef3Elements());
+		return pTimeDef3;
 	}
 	
 	public ParserRule getTimeDef3Rule() {
@@ -1151,13 +1157,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//terminal NL:
 	//	"\r"? "\n";
 	public TerminalRule getNLRule() {
-		return (tNL != null) ? tNL : (tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL"));
+		return tNL;
 	} 
 
 	//terminal WS:
 	//	" " | "\t";
 	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+		return tWS;
 	} 
 
 	//terminal ID:

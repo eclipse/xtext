@@ -16,11 +16,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Dou
  * An implementation of the model object '<em><b>Double Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.DoubleWhereEntryImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -27,14 +27,15 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPack
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getDoc <em>Doc</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getContained <em>Contained</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getReferenced <em>Referenced</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -19,12 +19,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.Str
  * An implementation of the model object '<em><b>String Split</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.StringSplitImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl.StringSplitImpl#getDelimiter <em>Delimiter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

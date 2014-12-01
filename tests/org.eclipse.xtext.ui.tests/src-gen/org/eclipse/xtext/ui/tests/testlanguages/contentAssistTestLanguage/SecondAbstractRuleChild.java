@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.SecondAbstractRuleChild#getRule <em>Rule</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.testlanguages.contentAssistTestLanguage.ContentAssistTestLanguagePackage#getSecondAbstractRuleChild()
  * @model

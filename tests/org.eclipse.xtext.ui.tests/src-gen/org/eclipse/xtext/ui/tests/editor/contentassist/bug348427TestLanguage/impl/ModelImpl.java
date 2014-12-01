@@ -21,12 +21,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Sce
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.ModelImpl#getElement1 <em>Element1</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.ModelImpl#getElement2 <em>Element2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

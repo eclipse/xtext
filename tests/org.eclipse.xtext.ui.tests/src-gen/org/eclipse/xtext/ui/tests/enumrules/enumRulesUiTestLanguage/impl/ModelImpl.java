@@ -20,12 +20,13 @@ import org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.Model;
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.impl.ModelImpl#getExisting <em>Existing</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.enumrules.enumRulesUiTestLanguage.impl.ModelImpl#getGenerated <em>Generated</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

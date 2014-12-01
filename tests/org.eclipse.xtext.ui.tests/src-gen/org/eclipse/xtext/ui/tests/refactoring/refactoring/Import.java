@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.refactoring.refactoring;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.refactoring.refactoring.Import#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage#getImport()
  * @model

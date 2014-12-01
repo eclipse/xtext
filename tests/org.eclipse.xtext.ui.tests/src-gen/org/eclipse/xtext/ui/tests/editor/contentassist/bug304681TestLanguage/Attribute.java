@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribute#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage#getAttribute()
  * @model

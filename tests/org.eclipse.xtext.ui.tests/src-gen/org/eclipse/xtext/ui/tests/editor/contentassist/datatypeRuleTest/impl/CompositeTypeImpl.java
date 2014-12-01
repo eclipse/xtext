@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.Datatype
  * An implementation of the model object '<em><b>Composite Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.datatypeRuleTest.impl.CompositeTypeImpl#getBaseType <em>Base Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

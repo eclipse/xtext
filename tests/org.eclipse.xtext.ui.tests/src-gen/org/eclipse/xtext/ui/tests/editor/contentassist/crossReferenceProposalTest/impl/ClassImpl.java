@@ -17,12 +17,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTes
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl.ClassImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

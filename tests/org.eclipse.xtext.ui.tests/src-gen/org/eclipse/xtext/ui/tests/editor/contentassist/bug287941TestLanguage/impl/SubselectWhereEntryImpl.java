@@ -21,14 +21,15 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.Sub
  * An implementation of the model object '<em><b>Subselect Where Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.SubselectWhereEntryImpl#getAlias <em>Alias</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.SubselectWhereEntryImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.SubselectWhereEntryImpl#isNotIn <em>Not In</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug287941TestLanguage.impl.SubselectWhereEntryImpl#getSubQuery <em>Sub Query</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

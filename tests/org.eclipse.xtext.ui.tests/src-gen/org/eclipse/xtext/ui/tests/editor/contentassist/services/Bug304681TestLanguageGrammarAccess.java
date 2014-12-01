@@ -1043,28 +1043,40 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private PackageDefinitionElements pPackageDefinition;
-	private ObjectElements pObject;
-	private FeatureElements pFeature;
-	private AttributeElements pAttribute;
-	private ReferenceElements pReference;
-	private PackageDefinition2Elements pPackageDefinition2;
-	private Object2Elements pObject2;
-	private Feature2Elements pFeature2;
-	private Attribute2Elements pAttribute2;
-	private Reference2Elements pReference2;
-	private ConstraintDefinitionElements pConstraintDefinition;
+	private final ModelElements pModel;
+	private final PackageDefinitionElements pPackageDefinition;
+	private final ObjectElements pObject;
+	private final FeatureElements pFeature;
+	private final AttributeElements pAttribute;
+	private final ReferenceElements pReference;
+	private final PackageDefinition2Elements pPackageDefinition2;
+	private final Object2Elements pObject2;
+	private final Feature2Elements pFeature2;
+	private final Attribute2Elements pAttribute2;
+	private final Reference2Elements pReference2;
+	private final ConstraintDefinitionElements pConstraintDefinition;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug304681TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pPackageDefinition = new PackageDefinitionElements();
+		this.pObject = new ObjectElements();
+		this.pFeature = new FeatureElements();
+		this.pAttribute = new AttributeElements();
+		this.pReference = new ReferenceElements();
+		this.pPackageDefinition2 = new PackageDefinition2Elements();
+		this.pObject2 = new Object2Elements();
+		this.pFeature2 = new Feature2Elements();
+		this.pAttribute2 = new Attribute2Elements();
+		this.pReference2 = new Reference2Elements();
+		this.pConstraintDefinition = new ConstraintDefinitionElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1097,7 +1109,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	"1" definition=PackageDefinition | "2" definition=PackageDefinition2;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -1107,7 +1119,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//PackageDefinition:
 	//	{PackageDefinition} "package" namespace=ID ";" contents+=Object*;
 	public PackageDefinitionElements getPackageDefinitionAccess() {
-		return (pPackageDefinition != null) ? pPackageDefinition : (pPackageDefinition = new PackageDefinitionElements());
+		return pPackageDefinition;
 	}
 	
 	public ParserRule getPackageDefinitionRule() {
@@ -1120,7 +1132,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	";")? & (cloneable?="cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & ("optionalLoop"
 	//	features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
 	public ObjectElements getObjectAccess() {
-		return (pObject != null) ? pObject : (pObject = new ObjectElements());
+		return pObject;
 	}
 	
 	public ParserRule getObjectRule() {
@@ -1130,7 +1142,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Feature:
 	//	Attribute | Reference;
 	public FeatureElements getFeatureAccess() {
-		return (pFeature != null) ? pFeature : (pFeature = new FeatureElements());
+		return pFeature;
 	}
 	
 	public ParserRule getFeatureRule() {
@@ -1140,7 +1152,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Attribute:
 	//	"Attribute" type=ID name=ID ";";
 	public AttributeElements getAttributeAccess() {
-		return (pAttribute != null) ? pAttribute : (pAttribute = new AttributeElements());
+		return pAttribute;
 	}
 	
 	public ParserRule getAttributeRule() {
@@ -1151,7 +1163,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription" shortDescription=STRING ";")? &
 	//	("longDescription" longDescription=STRING ";")?) "}" | ";");
 	public ReferenceElements getReferenceAccess() {
-		return (pReference != null) ? pReference : (pReference = new ReferenceElements());
+		return pReference;
 	}
 	
 	public ParserRule getReferenceRule() {
@@ -1161,7 +1173,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//PackageDefinition2 returns PackageDefinition:
 	//	{PackageDefinition} "package" namespace=ID ";" contents+=Object2*;
 	public PackageDefinition2Elements getPackageDefinition2Access() {
-		return (pPackageDefinition2 != null) ? pPackageDefinition2 : (pPackageDefinition2 = new PackageDefinition2Elements());
+		return pPackageDefinition2;
 	}
 	
 	public ParserRule getPackageDefinition2Rule() {
@@ -1173,7 +1185,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT
 	//	";")? & (cloneable?="cloneable" ";")? & features+=Feature2*) "}";
 	public Object2Elements getObject2Access() {
-		return (pObject2 != null) ? pObject2 : (pObject2 = new Object2Elements());
+		return pObject2;
 	}
 	
 	public ParserRule getObject2Rule() {
@@ -1183,7 +1195,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Feature2 returns Feature:
 	//	Attribute2 | Reference2;
 	public Feature2Elements getFeature2Access() {
-		return (pFeature2 != null) ? pFeature2 : (pFeature2 = new Feature2Elements());
+		return pFeature2;
 	}
 	
 	public ParserRule getFeature2Rule() {
@@ -1195,7 +1207,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	longDescription=STRING ";")? & constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? &
 	//	(technical?="technical" ";")?) "}" | ";");
 	public Attribute2Elements getAttribute2Access() {
-		return (pAttribute2 != null) ? pAttribute2 : (pAttribute2 = new Attribute2Elements());
+		return pAttribute2;
 	}
 	
 	public ParserRule getAttribute2Rule() {
@@ -1206,7 +1218,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription" shortDescription=STRING ";")? &
 	//	("longDescription" longDescription=STRING ";")?) "}" | ";");
 	public Reference2Elements getReference2Access() {
-		return (pReference2 != null) ? pReference2 : (pReference2 = new Reference2Elements());
+		return pReference2;
 	}
 	
 	public ParserRule getReference2Rule() {
@@ -1216,7 +1228,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//ConstraintDefinition:
 	//	"constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=STRING ";") "}";
 	public ConstraintDefinitionElements getConstraintDefinitionAccess() {
-		return (pConstraintDefinition != null) ? pConstraintDefinition : (pConstraintDefinition = new ConstraintDefinitionElements());
+		return pConstraintDefinition;
 	}
 	
 	public ParserRule getConstraintDefinitionRule() {

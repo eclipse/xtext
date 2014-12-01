@@ -17,13 +17,14 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Chi
  * An implementation of the model object '<em><b>Child2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.Child2Impl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.Child2Impl#isBool <em>Bool</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.Child2Impl#getString <em>String</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

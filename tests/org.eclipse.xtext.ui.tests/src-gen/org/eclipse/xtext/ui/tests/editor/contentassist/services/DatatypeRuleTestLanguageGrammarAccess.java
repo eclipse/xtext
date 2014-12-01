@@ -211,23 +211,30 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	
-	private ModelElements pModel;
-	private TypesElements pTypes;
-	private TypeElements pType;
-	private SimpleTypeElements pSimpleType;
-	private CompositeTypeElements pCompositeType;
-	private CompositeTypeEntryElements pCompositeTypeEntry;
-	private TypeIdElements pTypeId;
+	private final ModelElements pModel;
+	private final TypesElements pTypes;
+	private final TypeElements pType;
+	private final SimpleTypeElements pSimpleType;
+	private final CompositeTypeElements pCompositeType;
+	private final CompositeTypeEntryElements pCompositeTypeEntry;
+	private final TypeIdElements pTypeId;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DatatypeRuleTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pTypes = new TypesElements();
+		this.pType = new TypeElements();
+		this.pSimpleType = new SimpleTypeElements();
+		this.pCompositeType = new CompositeTypeElements();
+		this.pCompositeTypeEntry = new CompositeTypeEntryElements();
+		this.pTypeId = new TypeIdElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -260,7 +267,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//Model:
 	//	Types;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -270,7 +277,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//Types:
 	//	{Types} "Types" types+=Type*;
 	public TypesElements getTypesAccess() {
-		return (pTypes != null) ? pTypes : (pTypes = new TypesElements());
+		return pTypes;
 	}
 	
 	public ParserRule getTypesRule() {
@@ -280,7 +287,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//Type:
 	//	SimpleType | CompositeType;
 	public TypeElements getTypeAccess() {
-		return (pType != null) ? pType : (pType = new TypeElements());
+		return pType;
 	}
 	
 	public ParserRule getTypeRule() {
@@ -290,7 +297,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//SimpleType:
 	//	"Type" name=ID ";";
 	public SimpleTypeElements getSimpleTypeAccess() {
-		return (pSimpleType != null) ? pSimpleType : (pSimpleType = new SimpleTypeElements());
+		return pSimpleType;
 	}
 	
 	public ParserRule getSimpleTypeRule() {
@@ -300,7 +307,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//CompositeType:
 	//	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
 	public CompositeTypeElements getCompositeTypeAccess() {
-		return (pCompositeType != null) ? pCompositeType : (pCompositeType = new CompositeTypeElements());
+		return pCompositeType;
 	}
 	
 	public ParserRule getCompositeTypeRule() {
@@ -310,7 +317,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//CompositeTypeEntry:
 	//	dataType=[Type|TypeId];
 	public CompositeTypeEntryElements getCompositeTypeEntryAccess() {
-		return (pCompositeTypeEntry != null) ? pCompositeTypeEntry : (pCompositeTypeEntry = new CompositeTypeEntryElements());
+		return pCompositeTypeEntry;
 	}
 	
 	public ParserRule getCompositeTypeEntryRule() {
@@ -320,7 +327,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//TypeId:
 	//	ID ("<" TypeId ("," TypeId)* ">")?;
 	public TypeIdElements getTypeIdAccess() {
-		return (pTypeId != null) ? pTypeId : (pTypeId = new TypeIdElements());
+		return pTypeId;
 	}
 	
 	public ParserRule getTypeIdRule() {

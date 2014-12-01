@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyA
  * An implementation of the model object '<em><b>My Attributes</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.impl.MyAttributesImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

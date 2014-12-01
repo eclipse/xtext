@@ -25,11 +25,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.Sce
  * An implementation of the model object '<em><b>Scenario1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug348427TestLanguage.impl.Scenario1Impl#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

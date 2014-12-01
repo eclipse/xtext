@@ -27,12 +27,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.MyP
  * An implementation of the model object '<em><b>My Package</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.impl.MyPackageImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug347012TestLanguage.impl.MyPackageImpl#getDirectives <em>Directives</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

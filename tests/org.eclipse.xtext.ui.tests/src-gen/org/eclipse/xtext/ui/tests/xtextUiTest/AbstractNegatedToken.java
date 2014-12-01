@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.xtextUiTest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.xtextUiTest.AbstractNegatedToken#getTerminal <em>Terminal</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.ui.tests.xtextUiTest.XtextUiTestPackage#getAbstractNegatedToken()
  * @model

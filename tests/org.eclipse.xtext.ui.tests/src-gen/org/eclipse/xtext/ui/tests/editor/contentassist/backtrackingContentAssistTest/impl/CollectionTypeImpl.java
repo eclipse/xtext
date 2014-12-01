@@ -27,12 +27,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssist
  * An implementation of the model object '<em><b>Collection Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.CollectionTypeImpl#getCollectionLiteralParts <em>Collection Literal Parts</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.backtrackingContentAssistTest.impl.CollectionTypeImpl#getTypeIdentifier <em>Type Identifier</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

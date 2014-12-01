@@ -19,11 +19,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.Lis
  * An implementation of the model object '<em><b>Invocation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug303200TestLanguage.impl.InvocationImpl#getArguments <em>Arguments</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

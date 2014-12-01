@@ -145,18 +145,20 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
-	private ModelElements pModel;
-	private CopyFieldNameToVariableStmtElements pCopyFieldNameToVariableStmt;
+	private final ModelElements pModel;
+	private final CopyFieldNameToVariableStmtElements pCopyFieldNameToVariableStmt;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug381381TestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pCopyFieldNameToVariableStmt = new CopyFieldNameToVariableStmtElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -189,7 +191,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//Model:
 	//	stmt=CopyFieldNameToVariableStmt;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -200,7 +202,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	"FIELD-NAME-TO-VARIABLE" ("," "SCREEN" "=" "(" line=INT "," column=INT ")" & "," "VAR" "=" name=ID & ("," "TYPE" "="
 	//	"REPLACE")?);
 	public CopyFieldNameToVariableStmtElements getCopyFieldNameToVariableStmtAccess() {
-		return (pCopyFieldNameToVariableStmt != null) ? pCopyFieldNameToVariableStmt : (pCopyFieldNameToVariableStmt = new CopyFieldNameToVariableStmtElements());
+		return pCopyFieldNameToVariableStmt;
 	}
 	
 	public ParserRule getCopyFieldNameToVariableStmtRule() {

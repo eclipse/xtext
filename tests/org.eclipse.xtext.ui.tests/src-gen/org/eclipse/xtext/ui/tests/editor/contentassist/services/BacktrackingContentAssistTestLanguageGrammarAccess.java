@@ -3120,92 +3120,168 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	
-	private DocumentElements pDocument;
-	private BodyElements pBody;
-	private ClassifierContextDeclElements pClassifierContextDecl;
-	private ClassifierRefElements pClassifierRef;
-	private ContextDeclElements pContextDecl;
-	private DefinitionElements pDefinition;
-	private DerElements pDer;
-	private InitElements pInit;
-	private InvariantElements pInvariant;
-	private OperationContextDeclElements pOperationContextDecl;
-	private OperationRefElements pOperationRef;
-	private PackageDeclarationElements pPackageDeclaration;
-	private PackageRefElements pPackageRef;
-	private ParameterElements pParameter;
-	private PostElements pPost;
-	private PreElements pPre;
-	private PropertyContextDeclElements pPropertyContextDecl;
-	private PropertyRefElements pPropertyRef;
-	private QualifiedClassifierRefElements pQualifiedClassifierRef;
-	private QualifiedOperationRefElements pQualifiedOperationRef;
-	private QualifiedPropertyRefElements pQualifiedPropertyRef;
-	private QualifiedPackageRefElements pQualifiedPackageRef;
-	private SimpleClassifierRefElements pSimpleClassifierRef;
-	private SimpleOperationRefElements pSimpleOperationRef;
-	private SimplePackageRefElements pSimplePackageRef;
-	private SimplePropertyRefElements pSimplePropertyRef;
-	private NavigationExpElements pNavigationExp;
-	private NavigatingExpElements pNavigatingExp;
-	private OclMessageArgElements pOclMessageArg;
-	private NUMBER_LITERALElements pNUMBER_LITERAL;
-	private EssentialOCLRestrictedKeywordsElements pEssentialOCLRestrictedKeywords;
-	private RestrictedKeywordsElements pRestrictedKeywords;
-	private IdentifierElements pIdentifier;
-	private StringLiteralElements pStringLiteral;
-	private SimpleNameElements pSimpleName;
-	private PrimitiveTypeIdentifierElements pPrimitiveTypeIdentifier;
-	private PrimitiveTypeElements pPrimitiveType;
-	private CollectionTypeIdentifierElements pCollectionTypeIdentifier;
-	private TypeExpElements pTypeExp;
-	private CollectionTypeElements pCollectionType;
-	private TupleTypeElements pTupleType;
-	private TuplePartElements pTuplePart;
-	private CollectionLiteralExpElements pCollectionLiteralExp;
-	private CollectionLiteralPartElements pCollectionLiteralPart;
-	private PrimitiveLiteralExpElements pPrimitiveLiteralExp;
-	private TupleLiteralExpElements pTupleLiteralExp;
-	private TupleLiteralPartElements pTupleLiteralPart;
-	private NumberLiteralExpElements pNumberLiteralExp;
-	private StringLiteralExpElements pStringLiteralExp;
-	private BooleanLiteralExpElements pBooleanLiteralExp;
-	private InvalidLiteralExpElements pInvalidLiteralExp;
-	private NullLiteralExpElements pNullLiteralExp;
-	private ExpressionElements pExpression;
-	private ImpliesElements pImplies;
-	private XorElements pXor;
-	private OrElements pOr;
-	private AndElements pAnd;
-	private EqualityElements pEquality;
-	private RelationalElements pRelational;
-	private AdditiveElements pAdditive;
-	private MultiplicativeElements pMultiplicative;
-	private UnaryElements pUnary;
-	private SubNavigationExpElements pSubNavigationExp;
-	private SubNavigatingExpElements pSubNavigatingExp;
-	private IteratorVariableElements pIteratorVariable;
-	private IteratorAccumulatorElements pIteratorAccumulator;
-	private RoundBracketExpElements pRoundBracketExp;
-	private SquareBracketExpElements pSquareBracketExp;
-	private PreExpElements pPreExp;
-	private SelfExpElements pSelfExp;
-	private NameExpElements pNameExp;
-	private PathNameExpElements pPathNameExp;
-	private SimpleNameExpElements pSimpleNameExp;
-	private IfExpElements pIfExp;
-	private LetExpElements pLetExp;
-	private LetVariableElements pLetVariable;
+	private final DocumentElements pDocument;
+	private final BodyElements pBody;
+	private final ClassifierContextDeclElements pClassifierContextDecl;
+	private final ClassifierRefElements pClassifierRef;
+	private final ContextDeclElements pContextDecl;
+	private final DefinitionElements pDefinition;
+	private final DerElements pDer;
+	private final InitElements pInit;
+	private final InvariantElements pInvariant;
+	private final OperationContextDeclElements pOperationContextDecl;
+	private final OperationRefElements pOperationRef;
+	private final PackageDeclarationElements pPackageDeclaration;
+	private final PackageRefElements pPackageRef;
+	private final ParameterElements pParameter;
+	private final PostElements pPost;
+	private final PreElements pPre;
+	private final PropertyContextDeclElements pPropertyContextDecl;
+	private final PropertyRefElements pPropertyRef;
+	private final QualifiedClassifierRefElements pQualifiedClassifierRef;
+	private final QualifiedOperationRefElements pQualifiedOperationRef;
+	private final QualifiedPropertyRefElements pQualifiedPropertyRef;
+	private final QualifiedPackageRefElements pQualifiedPackageRef;
+	private final SimpleClassifierRefElements pSimpleClassifierRef;
+	private final SimpleOperationRefElements pSimpleOperationRef;
+	private final SimplePackageRefElements pSimplePackageRef;
+	private final SimplePropertyRefElements pSimplePropertyRef;
+	private final NavigationExpElements pNavigationExp;
+	private final NavigatingExpElements pNavigatingExp;
+	private final OclMessageArgElements pOclMessageArg;
+	private final NUMBER_LITERALElements pNUMBER_LITERAL;
+	private final EssentialOCLRestrictedKeywordsElements pEssentialOCLRestrictedKeywords;
+	private final RestrictedKeywordsElements pRestrictedKeywords;
+	private final IdentifierElements pIdentifier;
+	private final StringLiteralElements pStringLiteral;
+	private final SimpleNameElements pSimpleName;
+	private final PrimitiveTypeIdentifierElements pPrimitiveTypeIdentifier;
+	private final PrimitiveTypeElements pPrimitiveType;
+	private final CollectionTypeIdentifierElements pCollectionTypeIdentifier;
+	private final TypeExpElements pTypeExp;
+	private final CollectionTypeElements pCollectionType;
+	private final TupleTypeElements pTupleType;
+	private final TuplePartElements pTuplePart;
+	private final CollectionLiteralExpElements pCollectionLiteralExp;
+	private final CollectionLiteralPartElements pCollectionLiteralPart;
+	private final PrimitiveLiteralExpElements pPrimitiveLiteralExp;
+	private final TupleLiteralExpElements pTupleLiteralExp;
+	private final TupleLiteralPartElements pTupleLiteralPart;
+	private final NumberLiteralExpElements pNumberLiteralExp;
+	private final StringLiteralExpElements pStringLiteralExp;
+	private final BooleanLiteralExpElements pBooleanLiteralExp;
+	private final InvalidLiteralExpElements pInvalidLiteralExp;
+	private final NullLiteralExpElements pNullLiteralExp;
+	private final ExpressionElements pExpression;
+	private final ImpliesElements pImplies;
+	private final XorElements pXor;
+	private final OrElements pOr;
+	private final AndElements pAnd;
+	private final EqualityElements pEquality;
+	private final RelationalElements pRelational;
+	private final AdditiveElements pAdditive;
+	private final MultiplicativeElements pMultiplicative;
+	private final UnaryElements pUnary;
+	private final SubNavigationExpElements pSubNavigationExp;
+	private final SubNavigatingExpElements pSubNavigatingExp;
+	private final IteratorVariableElements pIteratorVariable;
+	private final IteratorAccumulatorElements pIteratorAccumulator;
+	private final RoundBracketExpElements pRoundBracketExp;
+	private final SquareBracketExpElements pSquareBracketExp;
+	private final PreExpElements pPreExp;
+	private final SelfExpElements pSelfExp;
+	private final NameExpElements pNameExp;
+	private final PathNameExpElements pPathNameExp;
+	private final SimpleNameExpElements pSimpleNameExp;
+	private final IfExpElements pIfExp;
+	private final LetExpElements pLetExp;
+	private final LetVariableElements pLetVariable;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public BacktrackingContentAssistTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pDocument = new DocumentElements();
+		this.pBody = new BodyElements();
+		this.pClassifierContextDecl = new ClassifierContextDeclElements();
+		this.pClassifierRef = new ClassifierRefElements();
+		this.pContextDecl = new ContextDeclElements();
+		this.pDefinition = new DefinitionElements();
+		this.pDer = new DerElements();
+		this.pInit = new InitElements();
+		this.pInvariant = new InvariantElements();
+		this.pOperationContextDecl = new OperationContextDeclElements();
+		this.pOperationRef = new OperationRefElements();
+		this.pPackageDeclaration = new PackageDeclarationElements();
+		this.pPackageRef = new PackageRefElements();
+		this.pParameter = new ParameterElements();
+		this.pPost = new PostElements();
+		this.pPre = new PreElements();
+		this.pPropertyContextDecl = new PropertyContextDeclElements();
+		this.pPropertyRef = new PropertyRefElements();
+		this.pQualifiedClassifierRef = new QualifiedClassifierRefElements();
+		this.pQualifiedOperationRef = new QualifiedOperationRefElements();
+		this.pQualifiedPropertyRef = new QualifiedPropertyRefElements();
+		this.pQualifiedPackageRef = new QualifiedPackageRefElements();
+		this.pSimpleClassifierRef = new SimpleClassifierRefElements();
+		this.pSimpleOperationRef = new SimpleOperationRefElements();
+		this.pSimplePackageRef = new SimplePackageRefElements();
+		this.pSimplePropertyRef = new SimplePropertyRefElements();
+		this.pNavigationExp = new NavigationExpElements();
+		this.pNavigatingExp = new NavigatingExpElements();
+		this.pOclMessageArg = new OclMessageArgElements();
+		this.pNUMBER_LITERAL = new NUMBER_LITERALElements();
+		this.pEssentialOCLRestrictedKeywords = new EssentialOCLRestrictedKeywordsElements();
+		this.pRestrictedKeywords = new RestrictedKeywordsElements();
+		this.pIdentifier = new IdentifierElements();
+		this.pStringLiteral = new StringLiteralElements();
+		this.pSimpleName = new SimpleNameElements();
+		this.pPrimitiveTypeIdentifier = new PrimitiveTypeIdentifierElements();
+		this.pPrimitiveType = new PrimitiveTypeElements();
+		this.pCollectionTypeIdentifier = new CollectionTypeIdentifierElements();
+		this.pTypeExp = new TypeExpElements();
+		this.pCollectionType = new CollectionTypeElements();
+		this.pTupleType = new TupleTypeElements();
+		this.pTuplePart = new TuplePartElements();
+		this.pCollectionLiteralExp = new CollectionLiteralExpElements();
+		this.pCollectionLiteralPart = new CollectionLiteralPartElements();
+		this.pPrimitiveLiteralExp = new PrimitiveLiteralExpElements();
+		this.pTupleLiteralExp = new TupleLiteralExpElements();
+		this.pTupleLiteralPart = new TupleLiteralPartElements();
+		this.pNumberLiteralExp = new NumberLiteralExpElements();
+		this.pStringLiteralExp = new StringLiteralExpElements();
+		this.pBooleanLiteralExp = new BooleanLiteralExpElements();
+		this.pInvalidLiteralExp = new InvalidLiteralExpElements();
+		this.pNullLiteralExp = new NullLiteralExpElements();
+		this.pExpression = new ExpressionElements();
+		this.pImplies = new ImpliesElements();
+		this.pXor = new XorElements();
+		this.pOr = new OrElements();
+		this.pAnd = new AndElements();
+		this.pEquality = new EqualityElements();
+		this.pRelational = new RelationalElements();
+		this.pAdditive = new AdditiveElements();
+		this.pMultiplicative = new MultiplicativeElements();
+		this.pUnary = new UnaryElements();
+		this.pSubNavigationExp = new SubNavigationExpElements();
+		this.pSubNavigatingExp = new SubNavigatingExpElements();
+		this.pIteratorVariable = new IteratorVariableElements();
+		this.pIteratorAccumulator = new IteratorAccumulatorElements();
+		this.pRoundBracketExp = new RoundBracketExpElements();
+		this.pSquareBracketExp = new SquareBracketExpElements();
+		this.pPreExp = new PreExpElements();
+		this.pSelfExp = new SelfExpElements();
+		this.pNameExp = new NameExpElements();
+		this.pPathNameExp = new PathNameExpElements();
+		this.pSimpleNameExp = new SimpleNameExpElements();
+		this.pIfExp = new IfExpElements();
+		this.pLetExp = new LetExpElements();
+		this.pLetVariable = new LetVariableElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -3238,7 +3314,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Document:
 	//	(packages+=PackageDeclaration | contexts+=ContextDecl)*;
 	public DocumentElements getDocumentAccess() {
-		return (pDocument != null) ? pDocument : (pDocument = new DocumentElements());
+		return pDocument;
 	}
 	
 	public ParserRule getDocumentRule() {
@@ -3248,7 +3324,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Body:
 	//	"body" constraintName=Identifier? ":" expression=Expression;
 	public BodyElements getBodyAccess() {
-		return (pBody != null) ? pBody : (pBody = new BodyElements());
+		return pBody;
 	}
 	
 	public ParserRule getBodyRule() {
@@ -3258,7 +3334,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//ClassifierContextDecl:
 	//	"context" (selfName=Identifier ":")? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*;
 	public ClassifierContextDeclElements getClassifierContextDeclAccess() {
-		return (pClassifierContextDecl != null) ? pClassifierContextDecl : (pClassifierContextDecl = new ClassifierContextDeclElements());
+		return pClassifierContextDecl;
 	}
 	
 	public ParserRule getClassifierContextDeclRule() {
@@ -3268,7 +3344,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//ClassifierRef:
 	//	QualifiedClassifierRef | SimpleClassifierRef;
 	public ClassifierRefElements getClassifierRefAccess() {
-		return (pClassifierRef != null) ? pClassifierRef : (pClassifierRef = new ClassifierRefElements());
+		return pClassifierRef;
 	}
 	
 	public ParserRule getClassifierRefRule() {
@@ -3278,7 +3354,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//ContextDecl:
 	//	PropertyContextDecl | ClassifierContextDecl | OperationContextDecl;
 	public ContextDeclElements getContextDeclAccess() {
-		return (pContextDecl != null) ? pContextDecl : (pContextDecl = new ContextDeclElements());
+		return pContextDecl;
 	}
 	
 	public ParserRule getContextDeclRule() {
@@ -3289,7 +3365,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	static?="static"? "def" constraintName=Identifier? ":" constrainedName=Identifier ("(" (parameters+=Parameter (","
 	//	parameters+=Parameter)*)? ")")? ":" type=TypeExp? "=" expression=Expression;
 	public DefinitionElements getDefinitionAccess() {
-		return (pDefinition != null) ? pDefinition : (pDefinition = new DefinitionElements());
+		return pDefinition;
 	}
 	
 	public ParserRule getDefinitionRule() {
@@ -3299,7 +3375,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Der:
 	//	"derive" ":" expression=Expression;
 	public DerElements getDerAccess() {
-		return (pDer != null) ? pDer : (pDer = new DerElements());
+		return pDer;
 	}
 	
 	public ParserRule getDerRule() {
@@ -3309,7 +3385,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Init:
 	//	"init" ":" expression=Expression;
 	public InitElements getInitAccess() {
-		return (pInit != null) ? pInit : (pInit = new InitElements());
+		return pInit;
 	}
 	
 	public ParserRule getInitRule() {
@@ -3319,7 +3395,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Invariant:
 	//	"inv" constraintName=Identifier? ":" expression=Expression;
 	public InvariantElements getInvariantAccess() {
-		return (pInvariant != null) ? pInvariant : (pInvariant = new InvariantElements());
+		return pInvariant;
 	}
 	
 	public ParserRule getInvariantRule() {
@@ -3330,7 +3406,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	"context" operation=OperationRef "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ":" type=TypeExp?
 	//	(pres+=Pre | posts+=Post | bodies+=Body)*;
 	public OperationContextDeclElements getOperationContextDeclAccess() {
-		return (pOperationContextDecl != null) ? pOperationContextDecl : (pOperationContextDecl = new OperationContextDeclElements());
+		return pOperationContextDecl;
 	}
 	
 	public ParserRule getOperationContextDeclRule() {
@@ -3340,7 +3416,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//OperationRef:
 	//	QualifiedOperationRef | SimpleOperationRef;
 	public OperationRefElements getOperationRefAccess() {
-		return (pOperationRef != null) ? pOperationRef : (pOperationRef = new OperationRefElements());
+		return pOperationRef;
 	}
 	
 	public ParserRule getOperationRefRule() {
@@ -3350,7 +3426,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PackageDeclaration:
 	//	"package" package=PackageRef contexts+=ContextDecl* "endpackage";
 	public PackageDeclarationElements getPackageDeclarationAccess() {
-		return (pPackageDeclaration != null) ? pPackageDeclaration : (pPackageDeclaration = new PackageDeclarationElements());
+		return pPackageDeclaration;
 	}
 	
 	public ParserRule getPackageDeclarationRule() {
@@ -3360,7 +3436,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PackageRef:
 	//	QualifiedPackageRef | SimplePackageRef;
 	public PackageRefElements getPackageRefAccess() {
-		return (pPackageRef != null) ? pPackageRef : (pPackageRef = new PackageRefElements());
+		return pPackageRef;
 	}
 	
 	public ParserRule getPackageRefRule() {
@@ -3370,7 +3446,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Parameter:
 	//	(name=Identifier ":")? type=TypeExp;
 	public ParameterElements getParameterAccess() {
-		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+		return pParameter;
 	}
 	
 	public ParserRule getParameterRule() {
@@ -3380,7 +3456,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Post:
 	//	"post" constraintName=Identifier? ":" expression=Expression;
 	public PostElements getPostAccess() {
-		return (pPost != null) ? pPost : (pPost = new PostElements());
+		return pPost;
 	}
 	
 	public ParserRule getPostRule() {
@@ -3390,7 +3466,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Pre:
 	//	"pre" constraintName=Identifier? ":" expression=Expression;
 	public PreElements getPreAccess() {
-		return (pPre != null) ? pPre : (pPre = new PreElements());
+		return pPre;
 	}
 	
 	public ParserRule getPreRule() {
@@ -3400,7 +3476,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PropertyContextDecl:
 	//	"context" property=PropertyRef ":" type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?);
 	public PropertyContextDeclElements getPropertyContextDeclAccess() {
-		return (pPropertyContextDecl != null) ? pPropertyContextDecl : (pPropertyContextDecl = new PropertyContextDeclElements());
+		return pPropertyContextDecl;
 	}
 	
 	public ParserRule getPropertyContextDeclRule() {
@@ -3410,7 +3486,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PropertyRef:
 	//	QualifiedPropertyRef | SimplePropertyRef;
 	public PropertyRefElements getPropertyRefAccess() {
-		return (pPropertyRef != null) ? pPropertyRef : (pPropertyRef = new PropertyRefElements());
+		return pPropertyRef;
 	}
 	
 	public ParserRule getPropertyRefRule() {
@@ -3420,7 +3496,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//QualifiedClassifierRef:
 	//	namespace=Identifier "::" element=ClassifierRef;
 	public QualifiedClassifierRefElements getQualifiedClassifierRefAccess() {
-		return (pQualifiedClassifierRef != null) ? pQualifiedClassifierRef : (pQualifiedClassifierRef = new QualifiedClassifierRefElements());
+		return pQualifiedClassifierRef;
 	}
 	
 	public ParserRule getQualifiedClassifierRefRule() {
@@ -3430,7 +3506,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//QualifiedOperationRef:
 	//	namespace=Identifier "::" element=OperationRef;
 	public QualifiedOperationRefElements getQualifiedOperationRefAccess() {
-		return (pQualifiedOperationRef != null) ? pQualifiedOperationRef : (pQualifiedOperationRef = new QualifiedOperationRefElements());
+		return pQualifiedOperationRef;
 	}
 	
 	public ParserRule getQualifiedOperationRefRule() {
@@ -3440,7 +3516,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//QualifiedPropertyRef:
 	//	namespace=Identifier "::" element=PropertyRef;
 	public QualifiedPropertyRefElements getQualifiedPropertyRefAccess() {
-		return (pQualifiedPropertyRef != null) ? pQualifiedPropertyRef : (pQualifiedPropertyRef = new QualifiedPropertyRefElements());
+		return pQualifiedPropertyRef;
 	}
 	
 	public ParserRule getQualifiedPropertyRefRule() {
@@ -3450,7 +3526,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//QualifiedPackageRef:
 	//	namespace=Identifier "::" element=PackageRef;
 	public QualifiedPackageRefElements getQualifiedPackageRefAccess() {
-		return (pQualifiedPackageRef != null) ? pQualifiedPackageRef : (pQualifiedPackageRef = new QualifiedPackageRefElements());
+		return pQualifiedPackageRef;
 	}
 	
 	public ParserRule getQualifiedPackageRefRule() {
@@ -3460,7 +3536,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SimpleClassifierRef:
 	//	classifier=Identifier;
 	public SimpleClassifierRefElements getSimpleClassifierRefAccess() {
-		return (pSimpleClassifierRef != null) ? pSimpleClassifierRef : (pSimpleClassifierRef = new SimpleClassifierRefElements());
+		return pSimpleClassifierRef;
 	}
 	
 	public ParserRule getSimpleClassifierRefRule() {
@@ -3470,7 +3546,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SimpleOperationRef:
 	//	operation=Identifier;
 	public SimpleOperationRefElements getSimpleOperationRefAccess() {
-		return (pSimpleOperationRef != null) ? pSimpleOperationRef : (pSimpleOperationRef = new SimpleOperationRefElements());
+		return pSimpleOperationRef;
 	}
 	
 	public ParserRule getSimpleOperationRefRule() {
@@ -3480,7 +3556,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SimplePackageRef:
 	//	package=Identifier;
 	public SimplePackageRefElements getSimplePackageRefAccess() {
-		return (pSimplePackageRef != null) ? pSimplePackageRef : (pSimplePackageRef = new SimplePackageRefElements());
+		return pSimplePackageRef;
 	}
 	
 	public ParserRule getSimplePackageRefRule() {
@@ -3490,7 +3566,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SimplePropertyRef:
 	//	feature=Identifier;
 	public SimplePropertyRefElements getSimplePropertyRefAccess() {
-		return (pSimplePropertyRef != null) ? pSimplePropertyRef : (pSimplePropertyRef = new SimplePropertyRefElements());
+		return pSimplePropertyRef;
 	}
 	
 	public ParserRule getSimplePropertyRefRule() {
@@ -3504,7 +3580,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	SubNavigationExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
 	//	op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?;
 	public NavigationExpElements getNavigationExpAccess() {
-		return (pNavigationExp != null) ? pNavigationExp : (pNavigationExp = new NavigationExpElements());
+		return pNavigationExp;
 	}
 	
 	public ParserRule getNavigationExpRule() {
@@ -3516,7 +3592,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	SubNavigatingExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
 	//	op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?;
 	public NavigatingExpElements getNavigatingExpAccess() {
-		return (pNavigatingExp != null) ? pNavigatingExp : (pNavigatingExp = new NavigatingExpElements());
+		return pNavigatingExp;
 	}
 	
 	public ParserRule getNavigatingExpRule() {
@@ -3527,7 +3603,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//OclMessageArg:
 	//	{OclMessageArg} "?" (":" type=TypeExp)? | Expression;
 	public OclMessageArgElements getOclMessageArgAccess() {
-		return (pOclMessageArg != null) ? pOclMessageArg : (pOclMessageArg = new OclMessageArgElements());
+		return pOclMessageArg;
 	}
 	
 	public ParserRule getOclMessageArgRule() {
@@ -3537,7 +3613,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//NUMBER_LITERAL:
 	//	INT ("." INT)? (("e" | "E") ("+" | "-")? INT)?;
 	public NUMBER_LITERALElements getNUMBER_LITERALAccess() {
-		return (pNUMBER_LITERAL != null) ? pNUMBER_LITERAL : (pNUMBER_LITERAL = new NUMBER_LITERALElements());
+		return pNUMBER_LITERAL;
 	}
 	
 	public ParserRule getNUMBER_LITERALRule() {
@@ -3547,7 +3623,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//EssentialOCLRestrictedKeywords:
 	//	"e" | "E";
 	public EssentialOCLRestrictedKeywordsElements getEssentialOCLRestrictedKeywordsAccess() {
-		return (pEssentialOCLRestrictedKeywords != null) ? pEssentialOCLRestrictedKeywords : (pEssentialOCLRestrictedKeywords = new EssentialOCLRestrictedKeywordsElements());
+		return pEssentialOCLRestrictedKeywords;
 	}
 	
 	public ParserRule getEssentialOCLRestrictedKeywordsRule() {
@@ -3558,7 +3634,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//RestrictedKeywords:
 	//	EssentialOCLRestrictedKeywords;
 	public RestrictedKeywordsElements getRestrictedKeywordsAccess() {
-		return (pRestrictedKeywords != null) ? pRestrictedKeywords : (pRestrictedKeywords = new RestrictedKeywordsElements());
+		return pRestrictedKeywords;
 	}
 	
 	public ParserRule getRestrictedKeywordsRule() {
@@ -3568,7 +3644,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Identifier:
 	//	ID | RestrictedKeywords;
 	public IdentifierElements getIdentifierAccess() {
-		return (pIdentifier != null) ? pIdentifier : (pIdentifier = new IdentifierElements());
+		return pIdentifier;
 	}
 	
 	public ParserRule getIdentifierRule() {
@@ -3578,7 +3654,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//StringLiteral:
 	//	STRING;
 	public StringLiteralElements getStringLiteralAccess() {
-		return (pStringLiteral != null) ? pStringLiteral : (pStringLiteral = new StringLiteralElements());
+		return pStringLiteral;
 	}
 	
 	public ParserRule getStringLiteralRule() {
@@ -3588,7 +3664,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SimpleName:
 	//	Identifier;
 	public SimpleNameElements getSimpleNameAccess() {
-		return (pSimpleName != null) ? pSimpleName : (pSimpleName = new SimpleNameElements());
+		return pSimpleName;
 	}
 	
 	public ParserRule getSimpleNameRule() {
@@ -3598,7 +3674,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PrimitiveTypeIdentifier:
 	//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
 	public PrimitiveTypeIdentifierElements getPrimitiveTypeIdentifierAccess() {
-		return (pPrimitiveTypeIdentifier != null) ? pPrimitiveTypeIdentifier : (pPrimitiveTypeIdentifier = new PrimitiveTypeIdentifierElements());
+		return pPrimitiveTypeIdentifier;
 	}
 	
 	public ParserRule getPrimitiveTypeIdentifierRule() {
@@ -3608,7 +3684,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PrimitiveType:
 	//	name=PrimitiveTypeIdentifier;
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
-		return (pPrimitiveType != null) ? pPrimitiveType : (pPrimitiveType = new PrimitiveTypeElements());
+		return pPrimitiveType;
 	}
 	
 	public ParserRule getPrimitiveTypeRule() {
@@ -3618,7 +3694,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//CollectionTypeIdentifier:
 	//	"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet";
 	public CollectionTypeIdentifierElements getCollectionTypeIdentifierAccess() {
-		return (pCollectionTypeIdentifier != null) ? pCollectionTypeIdentifier : (pCollectionTypeIdentifier = new CollectionTypeIdentifierElements());
+		return pCollectionTypeIdentifier;
 	}
 	
 	public ParserRule getCollectionTypeIdentifierRule() {
@@ -3628,7 +3704,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//TypeExp:
 	//	PrimitiveType | NameExp | CollectionType | TupleType;
 	public TypeExpElements getTypeExpAccess() {
-		return (pTypeExp != null) ? pTypeExp : (pTypeExp = new TypeExpElements());
+		return pTypeExp;
 	}
 	
 	public ParserRule getTypeExpRule() {
@@ -3638,7 +3714,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//CollectionType:
 	//	typeIdentifier=CollectionTypeIdentifier ("(" type=TypeExp ")")?;
 	public CollectionTypeElements getCollectionTypeAccess() {
-		return (pCollectionType != null) ? pCollectionType : (pCollectionType = new CollectionTypeElements());
+		return pCollectionType;
 	}
 	
 	public ParserRule getCollectionTypeRule() {
@@ -3648,7 +3724,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//TupleType:
 	//	name="Tuple" "(" (part+=tuplePart ("," part+=tuplePart)*)? ")";
 	public TupleTypeElements getTupleTypeAccess() {
-		return (pTupleType != null) ? pTupleType : (pTupleType = new TupleTypeElements());
+		return pTupleType;
 	}
 	
 	public ParserRule getTupleTypeRule() {
@@ -3658,7 +3734,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//tuplePart:
 	//	name=Identifier ":" type=TypeExp;
 	public TuplePartElements getTuplePartAccess() {
-		return (pTuplePart != null) ? pTuplePart : (pTuplePart = new TuplePartElements());
+		return pTuplePart;
 	}
 	
 	public ParserRule getTuplePartRule() {
@@ -3669,7 +3745,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	CollectionType ({CollectionLiteralExp.type=current} "{" (collectionLiteralParts+=CollectionLiteralPart (","
 	//	collectionLiteralParts+=CollectionLiteralPart)*)? "}")?;
 	public CollectionLiteralExpElements getCollectionLiteralExpAccess() {
-		return (pCollectionLiteralExp != null) ? pCollectionLiteralExp : (pCollectionLiteralExp = new CollectionLiteralExpElements());
+		return pCollectionLiteralExp;
 	}
 	
 	public ParserRule getCollectionLiteralExpRule() {
@@ -3679,7 +3755,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//CollectionLiteralPart:
 	//	expression=Expression (".." lastExpression=Expression)?;
 	public CollectionLiteralPartElements getCollectionLiteralPartAccess() {
-		return (pCollectionLiteralPart != null) ? pCollectionLiteralPart : (pCollectionLiteralPart = new CollectionLiteralPartElements());
+		return pCollectionLiteralPart;
 	}
 	
 	public ParserRule getCollectionLiteralPartRule() {
@@ -3689,7 +3765,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PrimitiveLiteralExp:
 	//	NumberLiteralExp | StringLiteralExp | BooleanLiteralExp | InvalidLiteralExp | NullLiteralExp;
 	public PrimitiveLiteralExpElements getPrimitiveLiteralExpAccess() {
-		return (pPrimitiveLiteralExp != null) ? pPrimitiveLiteralExp : (pPrimitiveLiteralExp = new PrimitiveLiteralExpElements());
+		return pPrimitiveLiteralExp;
 	}
 	
 	public ParserRule getPrimitiveLiteralExpRule() {
@@ -3699,7 +3775,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//TupleLiteralExp:
 	//	{TupleLiteralExp} "Tuple" ("{" part+=TupleLiteralPart ("," part+=TupleLiteralPart)* "}")?;
 	public TupleLiteralExpElements getTupleLiteralExpAccess() {
-		return (pTupleLiteralExp != null) ? pTupleLiteralExp : (pTupleLiteralExp = new TupleLiteralExpElements());
+		return pTupleLiteralExp;
 	}
 	
 	public ParserRule getTupleLiteralExpRule() {
@@ -3709,7 +3785,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//TupleLiteralPart:
 	//	name=Identifier (":" type=TypeExp)? "=" initExpression=Expression;
 	public TupleLiteralPartElements getTupleLiteralPartAccess() {
-		return (pTupleLiteralPart != null) ? pTupleLiteralPart : (pTupleLiteralPart = new TupleLiteralPartElements());
+		return pTupleLiteralPart;
 	}
 	
 	public ParserRule getTupleLiteralPartRule() {
@@ -3719,7 +3795,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//NumberLiteralExp:
 	//	name=NUMBER_LITERAL;
 	public NumberLiteralExpElements getNumberLiteralExpAccess() {
-		return (pNumberLiteralExp != null) ? pNumberLiteralExp : (pNumberLiteralExp = new NumberLiteralExpElements());
+		return pNumberLiteralExp;
 	}
 	
 	public ParserRule getNumberLiteralExpRule() {
@@ -3729,7 +3805,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//StringLiteralExp:
 	//	values+=StringLiteral+;
 	public StringLiteralExpElements getStringLiteralExpAccess() {
-		return (pStringLiteralExp != null) ? pStringLiteralExp : (pStringLiteralExp = new StringLiteralExpElements());
+		return pStringLiteralExp;
 	}
 	
 	public ParserRule getStringLiteralExpRule() {
@@ -3739,7 +3815,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//BooleanLiteralExp:
 	//	{BooleanLiteralExp} (isTrue?="true" | "false");
 	public BooleanLiteralExpElements getBooleanLiteralExpAccess() {
-		return (pBooleanLiteralExp != null) ? pBooleanLiteralExp : (pBooleanLiteralExp = new BooleanLiteralExpElements());
+		return pBooleanLiteralExp;
 	}
 	
 	public ParserRule getBooleanLiteralExpRule() {
@@ -3749,7 +3825,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//InvalidLiteralExp:
 	//	{InvalidLiteralExp} "invalid";
 	public InvalidLiteralExpElements getInvalidLiteralExpAccess() {
-		return (pInvalidLiteralExp != null) ? pInvalidLiteralExp : (pInvalidLiteralExp = new InvalidLiteralExpElements());
+		return pInvalidLiteralExp;
 	}
 	
 	public ParserRule getInvalidLiteralExpRule() {
@@ -3759,7 +3835,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//NullLiteralExp:
 	//	{NullLiteralExp} "null";
 	public NullLiteralExpElements getNullLiteralExpAccess() {
-		return (pNullLiteralExp != null) ? pNullLiteralExp : (pNullLiteralExp = new NullLiteralExpElements());
+		return pNullLiteralExp;
 	}
 	
 	public ParserRule getNullLiteralExpRule() {
@@ -3769,7 +3845,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//Expression:
 	//	implies | LetExp;
 	public ExpressionElements getExpressionAccess() {
-		return (pExpression != null) ? pExpression : (pExpression = new ExpressionElements());
+		return pExpression;
 	}
 	
 	public ParserRule getExpressionRule() {
@@ -3779,7 +3855,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//implies returns Expression:
 	//	xor ({InfixExp.source=current} op="implies" argument=(xor | LetExp))*;
 	public ImpliesElements getImpliesAccess() {
-		return (pImplies != null) ? pImplies : (pImplies = new ImpliesElements());
+		return pImplies;
 	}
 	
 	public ParserRule getImpliesRule() {
@@ -3789,7 +3865,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//xor returns Expression:
 	//	or ({InfixExp.source=current} op="xor" argument=(or | LetExp))*;
 	public XorElements getXorAccess() {
-		return (pXor != null) ? pXor : (pXor = new XorElements());
+		return pXor;
 	}
 	
 	public ParserRule getXorRule() {
@@ -3799,7 +3875,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//or returns Expression:
 	//	and ({InfixExp.source=current} op="or" argument=(and | LetExp))*;
 	public OrElements getOrAccess() {
-		return (pOr != null) ? pOr : (pOr = new OrElements());
+		return pOr;
 	}
 	
 	public ParserRule getOrRule() {
@@ -3809,7 +3885,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//and returns Expression:
 	//	equality ({InfixExp.source=current} op="and" argument=(equality | LetExp))*;
 	public AndElements getAndAccess() {
-		return (pAnd != null) ? pAnd : (pAnd = new AndElements());
+		return pAnd;
 	}
 	
 	public ParserRule getAndRule() {
@@ -3819,7 +3895,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//equality returns Expression:
 	//	relational ({InfixExp.source=current} op=("=" | "<>") argument=(relational | LetExp))*;
 	public EqualityElements getEqualityAccess() {
-		return (pEquality != null) ? pEquality : (pEquality = new EqualityElements());
+		return pEquality;
 	}
 	
 	public ParserRule getEqualityRule() {
@@ -3829,7 +3905,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//relational returns Expression:
 	//	additive ({InfixExp.source=current} op=(">" | "<" | ">=" | "<=") argument=(additive | LetExp))*;
 	public RelationalElements getRelationalAccess() {
-		return (pRelational != null) ? pRelational : (pRelational = new RelationalElements());
+		return pRelational;
 	}
 	
 	public ParserRule getRelationalRule() {
@@ -3839,7 +3915,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//additive returns Expression:
 	//	multiplicative ({InfixExp.source=current} op=("+" | "-") argument=(multiplicative | LetExp))*;
 	public AdditiveElements getAdditiveAccess() {
-		return (pAdditive != null) ? pAdditive : (pAdditive = new AdditiveElements());
+		return pAdditive;
 	}
 	
 	public ParserRule getAdditiveRule() {
@@ -3849,7 +3925,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//multiplicative returns Expression:
 	//	unary ({InfixExp.source=current} op=("*" | "/") argument=(unary | LetExp))*;
 	public MultiplicativeElements getMultiplicativeAccess() {
-		return (pMultiplicative != null) ? pMultiplicative : (pMultiplicative = new MultiplicativeElements());
+		return pMultiplicative;
 	}
 	
 	public ParserRule getMultiplicativeRule() {
@@ -3859,7 +3935,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//unary returns Expression:
 	//	NavigationExp | {PrefixExp} op=("-" | "not") source=unary;
 	public UnaryElements getUnaryAccess() {
-		return (pUnary != null) ? pUnary : (pUnary = new UnaryElements());
+		return pUnary;
 	}
 	
 	public ParserRule getUnaryRule() {
@@ -3870,7 +3946,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	RoundBracketExp | SquareBracketExp | SelfExp | PrimitiveLiteralExp | TupleLiteralExp | CollectionLiteralExp | PreExp |
 	//	TypeExp | IfExp | "(" {NestedExp} source=Expression ")";
 	public SubNavigationExpElements getSubNavigationExpAccess() {
-		return (pSubNavigationExp != null) ? pSubNavigationExp : (pSubNavigationExp = new SubNavigationExpElements());
+		return pSubNavigationExp;
 	}
 	
 	public ParserRule getSubNavigationExpRule() {
@@ -3880,7 +3956,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SubNavigatingExp returns Expression:
 	//	RoundBracketExp | SquareBracketExp | PreExp | NameExp;
 	public SubNavigatingExpElements getSubNavigatingExpAccess() {
-		return (pSubNavigatingExp != null) ? pSubNavigatingExp : (pSubNavigatingExp = new SubNavigatingExpElements());
+		return pSubNavigatingExp;
 	}
 	
 	public ParserRule getSubNavigatingExpRule() {
@@ -3890,7 +3966,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//iteratorVariable:
 	//	name=Identifier (":" type=TypeExp)?;
 	public IteratorVariableElements getIteratorVariableAccess() {
-		return (pIteratorVariable != null) ? pIteratorVariable : (pIteratorVariable = new IteratorVariableElements());
+		return pIteratorVariable;
 	}
 	
 	public ParserRule getIteratorVariableRule() {
@@ -3900,7 +3976,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//iteratorAccumulator:
 	//	name=Identifier ":" type=TypeExp "=" initExpression=Expression;
 	public IteratorAccumulatorElements getIteratorAccumulatorAccess() {
-		return (pIteratorAccumulator != null) ? pIteratorAccumulator : (pIteratorAccumulator = new IteratorAccumulatorElements());
+		return pIteratorAccumulator;
 	}
 	
 	public ParserRule getIteratorAccumulatorRule() {
@@ -3911,7 +3987,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//	name=NameExp ("@" pre?="pre")? "(" (variable1=iteratorVariable ("," variable2=iteratorVariable | ";"
 	//	variable2=iteratorAccumulator)? "|")? (arguments+=Expression ("," arguments+=Expression)*)? ")";
 	public RoundBracketExpElements getRoundBracketExpAccess() {
-		return (pRoundBracketExp != null) ? pRoundBracketExp : (pRoundBracketExp = new RoundBracketExpElements());
+		return pRoundBracketExp;
 	}
 	
 	public ParserRule getRoundBracketExpRule() {
@@ -3921,7 +3997,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SquareBracketExp:
 	//	name=NameExp "[" arguments+=Expression ("," arguments+=Expression)* "]" ("@" pre?="pre")?;
 	public SquareBracketExpElements getSquareBracketExpAccess() {
-		return (pSquareBracketExp != null) ? pSquareBracketExp : (pSquareBracketExp = new SquareBracketExpElements());
+		return pSquareBracketExp;
 	}
 	
 	public ParserRule getSquareBracketExpRule() {
@@ -3931,7 +4007,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PreExp:
 	//	name=NameExp "@" "pre";
 	public PreExpElements getPreExpAccess() {
-		return (pPreExp != null) ? pPreExp : (pPreExp = new PreExpElements());
+		return pPreExp;
 	}
 	
 	public ParserRule getPreExpRule() {
@@ -3941,7 +4017,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SelfExp:
 	//	{SelfExp} "self";
 	public SelfExpElements getSelfExpAccess() {
-		return (pSelfExp != null) ? pSelfExp : (pSelfExp = new SelfExpElements());
+		return pSelfExp;
 	}
 	
 	public ParserRule getSelfExpRule() {
@@ -3951,7 +4027,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//NameExp:
 	//	PathNameExp | SimpleNameExp;
 	public NameExpElements getNameExpAccess() {
-		return (pNameExp != null) ? pNameExp : (pNameExp = new NameExpElements());
+		return pNameExp;
 	}
 	
 	public ParserRule getNameExpRule() {
@@ -3961,7 +4037,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//PathNameExp:
 	//	namespace=Identifier "::" element=NameExp;
 	public PathNameExpElements getPathNameExpAccess() {
-		return (pPathNameExp != null) ? pPathNameExp : (pPathNameExp = new PathNameExpElements());
+		return pPathNameExp;
 	}
 	
 	public ParserRule getPathNameExpRule() {
@@ -3971,7 +4047,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//SimpleNameExp:
 	//	element=Identifier;
 	public SimpleNameExpElements getSimpleNameExpAccess() {
-		return (pSimpleNameExp != null) ? pSimpleNameExp : (pSimpleNameExp = new SimpleNameExpElements());
+		return pSimpleNameExp;
 	}
 	
 	public ParserRule getSimpleNameExpRule() {
@@ -3981,7 +4057,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//IfExp:
 	//	"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression "endif";
 	public IfExpElements getIfExpAccess() {
-		return (pIfExp != null) ? pIfExp : (pIfExp = new IfExpElements());
+		return pIfExp;
 	}
 	
 	public ParserRule getIfExpRule() {
@@ -3991,7 +4067,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//LetExp:
 	//	"let" variable+=LetVariable ("," variable+=LetVariable)* "in" in=Expression;
 	public LetExpElements getLetExpAccess() {
-		return (pLetExp != null) ? pLetExp : (pLetExp = new LetExpElements());
+		return pLetExp;
 	}
 	
 	public ParserRule getLetExpRule() {
@@ -4001,7 +4077,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	//LetVariable:
 	//	name=Identifier ":" type=TypeExp "=" initExpression=Expression;
 	public LetVariableElements getLetVariableAccess() {
-		return (pLetVariable != null) ? pLetVariable : (pLetVariable = new LetVariableElements());
+		return pLetVariable;
 	}
 	
 	public ParserRule getLetVariableRule() {

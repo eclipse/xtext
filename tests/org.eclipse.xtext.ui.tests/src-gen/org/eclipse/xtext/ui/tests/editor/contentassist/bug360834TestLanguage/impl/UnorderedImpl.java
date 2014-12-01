@@ -20,12 +20,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.Uno
  * An implementation of the model object '<em><b>Unordered</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.impl.UnorderedImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug360834TestLanguage.impl.UnorderedImpl#getRootDeclaration <em>Root Declaration</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -26,12 +26,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.
  * An implementation of the model object '<em><b>Second Level B</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl.SecondLevelBImpl#getThirdLevelB1 <em>Third Level B1</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistContextTest.impl.SecondLevelBImpl#getThirdLevelB2 <em>Third Level B2</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

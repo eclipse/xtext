@@ -83,18 +83,20 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	}
 	
 	
-	private ModelElements pModel;
-	private ClassElements pClass;
+	private final ModelElements pModel;
+	private final ClassElements pClass;
 	
 	private final Grammar grammar;
 
-	private TerminalsGrammarAccess gaTerminals;
+	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public CrossReferenceProposalTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
+		this.pModel = new ModelElements();
+		this.pClass = new ClassElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -127,7 +129,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	//Model:
 	//	elements+=Class*;
 	public ModelElements getModelAccess() {
-		return (pModel != null) ? pModel : (pModel = new ModelElements());
+		return pModel;
 	}
 	
 	public ParserRule getModelRule() {
@@ -137,7 +139,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	//Class:
 	//	(superClass=[Class] "<-")? name=ID "{" "}";
 	public ClassElements getClassAccess() {
-		return (pClass != null) ? pClass : (pClass = new ClassElements());
+		return pClass;
 	}
 	
 	public ParserRule getClassRule() {
