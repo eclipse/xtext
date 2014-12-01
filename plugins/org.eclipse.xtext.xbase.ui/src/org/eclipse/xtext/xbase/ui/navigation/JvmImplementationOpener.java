@@ -115,7 +115,7 @@ public class JvmImplementationOpener {
 					return;
 				}
 
-				final String dummyString = new String("MyDummyString");
+				final String earlyExitIndicator = "EarlyExitIndicator";
 				final ArrayList<IJavaElement> links = Lists.newArrayList();
 				IRunnableWithProgress runnable = new IRunnableWithProgress() {
 
@@ -136,7 +136,7 @@ public class JvmImplementationOpener {
 										if (element instanceof IMethod && !JdtFlags.isAbstract((IMethod) element)) {
 											links.add(element);
 											if (links.size() > 1) {
-												throw new OperationCanceledException(dummyString);
+												throw new OperationCanceledException(earlyExitIndicator);
 											}
 										}
 									}
@@ -180,7 +180,7 @@ public class JvmImplementationOpener {
 					ErrorDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 							"Open Implementation", "Problems finding implementations.", status);
 				} catch (InterruptedException e) {
-					if (e.getMessage() != dummyString) {
+					if (e.getMessage() != earlyExitIndicator) {
 						return;
 					}
 				}
