@@ -23,14 +23,14 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class Gap extends AbstractTextSegment implements IHiddenRegion {
+public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 
 	List<NodeHidden> hiddens = Lists.newArrayList();
 	private ISemanticRegion next;
 	private ISemanticRegion previous;
 	private final ITextRegionAccess tokenAccess;
 
-	protected Gap(ITextRegionAccess tokenAccess) {
+	protected HiddenRegion(ITextRegionAccess tokenAccess) {
 		super();
 		this.tokenAccess = tokenAccess;
 	}
