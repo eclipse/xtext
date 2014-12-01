@@ -272,7 +272,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		if (replacements != null)
 			for (ITextReplacement r : replacements) {
 				String fmt = "replacement=[%d-%d|%s]";
-				items.add(format(fmt, r.getOffset(), r.getLength(), r.getText(), r.getReplacementText()));
+				items.add(format(fmt, r.getOffset(), r.getLength(), r.getReplacementText()));
 			}
 		return Joiner.on("; ").join(items);
 	}
