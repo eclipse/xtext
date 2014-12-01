@@ -56,18 +56,16 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 				EditorsUI.getPreferenceStore()});
 	}
 
-	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(new InstanceScope(), getQualifier());
+		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(InstanceScope.INSTANCE, getQualifier());
 		result.setSearchContexts(new IScopeContext[] {
-			new InstanceScope(),
-			new ConfigurationScope()
+			InstanceScope.INSTANCE,
+			ConfigurationScope.INSTANCE
 		});
 		return result;
 	}
 
-	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore(Object context) {
 		lazyInitialize();
 		IProject project = getProject(context);
@@ -78,8 +76,8 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(projectScope, getQualifier());
 		result.setSearchContexts(new IScopeContext[] {
 			projectScope,
-			new InstanceScope(),
-			new ConfigurationScope()
+			InstanceScope.INSTANCE,
+			ConfigurationScope.INSTANCE
 		});
 		return result;
 	}

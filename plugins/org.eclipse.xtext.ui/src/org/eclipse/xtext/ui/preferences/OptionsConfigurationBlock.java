@@ -47,6 +47,7 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -64,6 +65,9 @@ import com.google.inject.Inject;
 public abstract class OptionsConfigurationBlock {
 	@Inject
 	AbstractUIPlugin uiPlugin;
+	
+	@Inject
+	protected PreferenceStoreAccessImpl preferenceStoreAccessImpl;
 
 	public static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
 	private static final String SETTINGS_EXPANDED = "expanded"; //$NON-NLS-1$
@@ -228,7 +232,11 @@ public abstract class OptionsConfigurationBlock {
 	}
 
 	public boolean hasProjectSpecificOptions(IProject project) {
-		return preferenceStore.getBoolean(IS_PROJECT_SPECIFIC);
+		IPreferenceStore ps = preferenceStore;
+		if (project != getProject()) {
+			ps = preferenceStoreAccessImpl.getWritablePreferenceStore(project);
+		}
+		return ps.getBoolean(IS_PROJECT_SPECIFIC);
 	}
 
 	protected void setShell(Shell shell) {
