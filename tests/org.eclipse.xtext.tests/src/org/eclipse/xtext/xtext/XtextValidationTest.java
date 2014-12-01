@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import static com.google.common.collect.Maps.*;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -43,6 +45,7 @@ import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptingTestCase;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
 import org.junit.Ignore;
@@ -914,7 +917,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Action action = XtextFactory.eINSTANCE.createAction();
 		unorderedGroup.getElements().add(action);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = action;
+		state.context = newHashMap();
 		validator.checkActionInUnorderedGroup(action);
 		messageAcceptor.validate();
 	}
@@ -1189,7 +1194,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Grammar grammar = (Grammar) getModel(grammarAsText);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = grammar;
+		state.context = newHashMap();
 		validator.checkHiddenTokenIsNotAFragment(grammar);
 		messageAcceptor.validate();
 	}
@@ -1205,7 +1212,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		ParserRule rule = (ParserRule) grammar.getRules().get(0);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = rule;
+		state.context = newHashMap();
 		validator.checkHiddenTokenIsNotAFragment(rule);
 		messageAcceptor.validate();
 	}
@@ -1220,7 +1229,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Grammar grammar = (Grammar) getModel(grammarAsText);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(grammar, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = grammar;
+		state.context = newHashMap();
 		validator.checkHiddenTokenIsNotAFragment(grammar);
 		messageAcceptor.validate();
 	}
@@ -1236,7 +1247,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		ParserRule rule = (ParserRule) grammar.getRules().get(0);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = rule;
+		state.context = newHashMap();
 		validator.checkHiddenTokenIsNotAFragment(rule);
 		messageAcceptor.validate();
 	}
@@ -1485,7 +1498,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		TerminalRule rule = (TerminalRule) grammar.getRules().get(1);
 		XtextValidator validator = get(XtextValidator.class);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(rule, false, true);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = rule;
+		state.context = newHashMap();
 		validator.checkTerminalRuleNamingConventions(rule);
 		messageAcceptor.validate();
 	}
@@ -1547,7 +1562,9 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		messageAcceptor.expectedContext(
 				valueAssignment.getTerminal()
 		);
-		validator.setMessageAcceptor(messageAcceptor);
+		State state = validator.setMessageAcceptor(messageAcceptor).getState();
+		state.currentObject = valueAssignment;
+		state.context = newHashMap();
 		validator.checkKeywordNotEmpty((Keyword) valueAssignment.getTerminal());
 		messageAcceptor.validate();
 	}

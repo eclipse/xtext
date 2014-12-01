@@ -70,6 +70,13 @@
             name="%Templates">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
+        <page
+            category="org.eclipse.xtext.Xtext"
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+            id="org.eclipse.xtext.Xtext.validator.preferencePage"
+            name="%Errors_Warnings">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
