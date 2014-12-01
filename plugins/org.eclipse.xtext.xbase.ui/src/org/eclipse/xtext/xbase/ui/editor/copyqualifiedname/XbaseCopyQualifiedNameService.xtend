@@ -77,17 +77,17 @@ class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameService {
 
 	protected def dispatch IResolvedExecutable resolveExecutable(JvmConstructor constructor, XConstructorCall it,
 		extension IResolvedTypes resolvedTypes) {
-		actualType?.resolvedOperations?.declaredConstructors?.filter[declaration.equals(constructor)]?.head
+		actualType?.resolvedFeatures?.getDeclaredConstructors?.filter[declaration.equals(constructor)]?.head
 	}
 
 	protected def dispatch IResolvedExecutable resolveExecutable(JvmOperation operation, XAbstractFeatureCall it,
 		extension IResolvedTypes resolvedTypes) {
-		actualReceiver?.actualType?.resolvedOperations?.allOperations?.filter[declaration.equals(operation)]?.head
+		actualReceiver?.actualType?.resolvedFeatures?.getAllOperations?.filter[declaration.equals(operation)]?.head
 	}
 
 	protected def dispatch IResolvedExecutable resolveExecutable(JvmConstructor consturctor, XAbstractFeatureCall it,
 		extension IResolvedTypes resolvedTypes) {
-		actualReceiver?.actualType?.resolvedOperations?.declaredConstructors?.filter[declaration.equals(consturctor)]?.
+		actualReceiver?.actualType?.resolvedFeatures?.getDeclaredConstructors?.filter[declaration.equals(consturctor)]?.
 			head
 	}
 

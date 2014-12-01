@@ -19,6 +19,9 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedField
 
 class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
@@ -65,9 +68,24 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	protected def dispatch ImageDescriptor imageDescriptor(JvmOperation operation) {
 		images.forOperation(operation.visibility, adornments.get(operation))
 	}
+	
+	protected def dispatch ImageDescriptor imageDescriptor(IResolvedOperation operation) {
+		imageDescriptor(operation.declaration)
+	}
 
 	protected def Object text(JvmOperation element) {
 		signature(element.simpleName, element)
+	}
+	
+	protected def Object text(IResolvedOperation element) {
+		val returnTypeString = element.resolvedReturnType.simpleName
+		var decoratedPart = " : " + returnTypeString
+		if (!element.typeParameters.isEmpty) {
+			decoratedPart = " <" + uiStrings.toString(element.typeParameters) + "> : " + returnTypeString
+		}
+		
+		return new StyledString(element.declaration.simpleName+"("+element.resolvedParameterTypes.map[humanReadableName].join(', ')+")").append(
+			new StyledString(decoratedPart, StyledString.DECORATIONS_STYLER))
 	}
 
 	protected def dispatch ImageDescriptor imageDescriptor(JvmConstructor constructor) {
@@ -76,6 +94,22 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 
 	protected def String text(JvmConstructor constructor) {
 		"new" + uiStrings.parameters(constructor)
+	}
+	
+	protected def dispatch ImageDescriptor imageDescriptor(IResolvedConstructor constructor) {
+		_imageDescriptor(constructor.declaration)
+	}
+
+	protected def Object text(IResolvedConstructor constructor) {
+		return new StyledString("new("+constructor.resolvedParameterTypes.map[humanReadableName].join(', ')+")")
+	}
+	
+	protected def dispatch ImageDescriptor imageDescriptor(IResolvedField field) {
+		_imageDescriptor(field.declaration)
+	}
+
+	protected def Object text(IResolvedField field) {
+		return new StyledString(field.simpleSignature+" : "+field.resolvedType.humanReadableName)
 	}
 
 	protected def dispatch ImageDescriptor imageDescriptor(JvmField field) {
