@@ -40,13 +40,11 @@ public class MaxLineWidthDocument extends SubDocument {
 		String string = applyTextReplacements(replacements);
 		if (string.contains("\n"))
 			throw new FormattingNotApplicableException();
-		if (context != null) {
-			int leadingCharCount = context.getLeadingCharsInLineCount();
-			int formattedLength = string.length();
-			int lineLength = leadingCharCount + formattedLength;
-			if (lineLength > maxLineWidth)
-				throw new FormattingNotApplicableException();
-		}
+		int leadingCharCount = context.getLeadingCharsInLineCount();
+		int formattedLength = string.length();
+		int lineLength = leadingCharCount + formattedLength;
+		if (lineLength > maxLineWidth)
+			throw new FormattingNotApplicableException();
 		return last;
 	}
 
