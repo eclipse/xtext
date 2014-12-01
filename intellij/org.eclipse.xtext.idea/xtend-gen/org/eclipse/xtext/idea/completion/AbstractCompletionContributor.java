@@ -8,7 +8,9 @@ import com.intellij.codeInsight.completion.CompletionContext;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionInitializationContext;
 import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResult;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.CompletionService;
 import com.intellij.codeInsight.completion.CompletionSorter;
 import com.intellij.codeInsight.completion.LegacyCompletionContributor;
 import com.intellij.codeInsight.completion.OffsetMap;
@@ -20,6 +22,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.Computable;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.util.Consumer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -126,9 +129,26 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   public void fillCompletionVariants(final CompletionParameters parameters, final CompletionResultSet result) {
     CompletionSorter _completionSorter = this.getCompletionSorter(parameters, result);
     final CompletionResultSet sortedResult = result.withRelevanceSorter(_completionSorter);
-    this.createMatcherBasedProposals(parameters, sortedResult);
-    this.createReferenceBasedProposals(parameters, sortedResult);
-    this.createParserBasedProposals(parameters, sortedResult);
+    final Procedure1<CompletionResult> _function = new Procedure1<CompletionResult>() {
+      public void apply(final CompletionResult it) {
+        LookupElement _lookupElement = it.getLookupElement();
+        boolean _isValidProposal = AbstractCompletionContributor.this.isValidProposal(_lookupElement, parameters);
+        if (_isValidProposal) {
+          LookupElement _lookupElement_1 = it.getLookupElement();
+          sortedResult.addElement(_lookupElement_1);
+        }
+      }
+    };
+    final Procedure1<CompletionResult> filteredConsumer = _function;
+    CompletionService _completionService = CompletionService.getCompletionService();
+    final CompletionResultSet filteredResult = _completionService.createResultSet(parameters, new Consumer<CompletionResult>() {
+        public void consume(CompletionResult t) {
+          filteredConsumer.apply(t);
+        }
+    }, this);
+    this.createMatcherBasedProposals(parameters, filteredResult);
+    this.createReferenceBasedProposals(parameters, filteredResult);
+    this.createParserBasedProposals(parameters, filteredResult);
     result.stopHere();
   }
   
@@ -139,12 +159,16 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     return _defaultSorter.weighBefore("liftShorter", _dispreferKeywordsWeigher);
   }
   
-  protected void createMatcherBasedProposals(final CompletionParameters parameters, final CompletionResultSet sortedResult) {
-    super.fillCompletionVariants(parameters, sortedResult);
+  protected boolean isValidProposal(final LookupElement proposal, final CompletionParameters parameters) {
+    return true;
   }
   
-  protected boolean createReferenceBasedProposals(final CompletionParameters parameters, final CompletionResultSet sortedResult) {
-    return LegacyCompletionContributor.completeReference(parameters, sortedResult);
+  protected void createMatcherBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
+    super.fillCompletionVariants(parameters, result);
+  }
+  
+  protected boolean createReferenceBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
+    return LegacyCompletionContributor.completeReference(parameters, result);
   }
   
   protected void createParserBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
@@ -250,6 +274,6 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected void createKeyWordProposal(final Keyword keyword, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
     AbstractCompletionContributor.KeywordLookupElement _keywordLookupElement = new AbstractCompletionContributor.KeywordLookupElement(keyword);
-    result.addElement(_keywordLookupElement);
+    this._completionExtensions.operator_add(result, _keywordLookupElement);
   }
 }

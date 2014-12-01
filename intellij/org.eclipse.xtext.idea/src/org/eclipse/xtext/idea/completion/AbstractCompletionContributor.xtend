@@ -6,7 +6,9 @@ import com.intellij.codeInsight.completion.CompletionContext
 import com.intellij.codeInsight.completion.CompletionContributor
 import com.intellij.codeInsight.completion.CompletionInitializationContext
 import com.intellij.codeInsight.completion.CompletionParameters
+import com.intellij.codeInsight.completion.CompletionResult
 import com.intellij.codeInsight.completion.CompletionResultSet
+import com.intellij.codeInsight.completion.CompletionService
 import com.intellij.codeInsight.completion.CompletionSorter
 import com.intellij.codeInsight.completion.LegacyCompletionContributor
 import com.intellij.codeInsight.lookup.LookupElement
@@ -36,9 +38,11 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 
 	override void fillCompletionVariants(CompletionParameters parameters, CompletionResultSet result) {
 		val sortedResult = result.withRelevanceSorter(getCompletionSorter(parameters, result))
-		createMatcherBasedProposals(parameters, sortedResult)
-		createReferenceBasedProposals(parameters, sortedResult)
-		createParserBasedProposals(parameters, sortedResult)
+		val filteredConsumer = [CompletionResult it| if(isValidProposal(lookupElement,parameters)) sortedResult.addElement(lookupElement)]
+		val filteredResult = CompletionService.completionService.createResultSet(parameters, filteredConsumer, this)
+		createMatcherBasedProposals(parameters, filteredResult)
+		createReferenceBasedProposals(parameters, filteredResult)
+		createParserBasedProposals(parameters, filteredResult)
 		result.stopHere
 	}
 
@@ -46,13 +50,17 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 		CompletionSorter.defaultSorter(parameters, result.prefixMatcher)
 			.weighBefore("liftShorter", new DispreferKeywordsWeigher)
 	}
-
-	protected def createMatcherBasedProposals(CompletionParameters parameters, CompletionResultSet sortedResult) {
-		super.fillCompletionVariants(parameters, sortedResult)
+	
+	protected def isValidProposal(LookupElement proposal, CompletionParameters parameters) {
+		true
 	}
 
-	protected def createReferenceBasedProposals(CompletionParameters parameters, CompletionResultSet sortedResult) {
-		LegacyCompletionContributor.completeReference(parameters, sortedResult)
+	protected def createMatcherBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
+		super.fillCompletionVariants(parameters, result)
+	}
+
+	protected def createReferenceBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
+		LegacyCompletionContributor.completeReference(parameters, result)
 	}
 
 	protected def createParserBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
@@ -101,7 +109,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def createKeyWordProposal(Keyword keyword, ContentAssistContext context, CompletionParameters parameters,	CompletionResultSet result) {
-		result.addElement(new KeywordLookupElement(keyword))
+		result += new KeywordLookupElement(keyword)
 	}
 
 	@Data
