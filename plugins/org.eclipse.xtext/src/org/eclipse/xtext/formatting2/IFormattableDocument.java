@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.formatting2;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.regionaccess.IHiddenRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
@@ -39,7 +37,7 @@ import com.google.common.base.Predicate;
  * 
  * @noextend This interface is not intended to be extended by clients.
  * @noimplement This interface is not intended to be implemented by clients.
- * @since 2.7
+ * @since 2.8
  */
 public interface IFormattableDocument {
 
@@ -65,8 +63,6 @@ public interface IFormattableDocument {
 	ISemanticRegion prepend(ISemanticRegion semanticRegion, Procedure1<IHiddenRegionFormatter> before);
 
 	<T extends EObject> T prepend(T semanticRegion, Procedure1<IHiddenRegionFormatter> before);
-
-	List<ITextReplacement> renderToTextReplacements();
 
 	IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<IHiddenRegionFormatter> init);
 
