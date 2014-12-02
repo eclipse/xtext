@@ -468,11 +468,14 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		context.setOffset(completionOffset);
 		context.setPrefix(prefix);
 		int regionLength = prefix.length();
-		if (selection.getLength() > 0)
+		if (selection.getLength() > 0) {
 			regionLength = regionLength + selection.getLength();
+		}
 		ITextRegion region = new TextRegion(completionOffset - prefix.length(), regionLength);
+		if (selection.getOffset() >= 0 && selection.getLength() >= 0) {
+			context.setSelectedText(document.substring(selection.getOffset(), selection.getOffset() + selection.getLength()));
+		}
 		context.setReplaceRegion(region);
-		context.setSelectedText(document.substring(selection.getOffset(), selection.getOffset() + selection.getLength()));
 		context.setResource(resource);
 		return context;
 	}
