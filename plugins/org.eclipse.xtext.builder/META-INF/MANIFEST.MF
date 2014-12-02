@@ -16,6 +16,7 @@ Export-Package: org.eclipse.xtext.builder,
  org.eclipse.xtext.builder.impl.javasupport;x-internal:=true,
  org.eclipse.xtext.builder.internal;x-internal:=true,
  org.eclipse.xtext.builder.nature;x-friends:="org.eclipse.xtend.ide",
+ org.eclipse.xtext.builder.ng;x-friends:="org.eclipse.xtext.ui.shared",
  org.eclipse.xtext.builder.preferences;x-friends:="org.eclipse.xtend.m2e,org.eclipse.xtext.m2e",
  org.eclipse.xtext.builder.resourceloader;x-internal:=true,
  org.eclipse.xtext.builder.smap;x-friends:="org.eclipse.xtext.xbase.ui",
@@ -43,7 +44,9 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.8.0",
  org.eclipse.debug.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.debug.ui;bundle-version="3.6.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.jdt.debug;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.jdt.debug.ui;bundle-version="3.5.2";resolution:=optional
+ org.eclipse.jdt.debug.ui;bundle-version="3.5.2";resolution:=optional,
+ org.eclipse.xtend.lib;bundle-version="2.8.0",
+ org.eclipse.ui.console;bundle-version="3.5.100"
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator

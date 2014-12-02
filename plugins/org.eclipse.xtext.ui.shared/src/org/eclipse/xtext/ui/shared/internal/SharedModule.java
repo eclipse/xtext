@@ -24,6 +24,7 @@ import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.impl.RegistryBuilderParticipant;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
+import org.eclipse.xtext.builder.ng.XtextWorkspaceListener;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
@@ -198,6 +199,8 @@ public class SharedModule extends AbstractModule {
 				expose(ReferenceSearchViewPage.class);
 			}
 		});
+		
+		bind(XtextWorkspaceListener.class).asEagerSingleton();
 	}
 
 }
