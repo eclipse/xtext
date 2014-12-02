@@ -343,6 +343,28 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testBasicForStatementCase_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void visit() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (int a = 1, int b = 2; true; a++) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.toValidXtendClass(_builder.toString());
+  }
+  
+  @Test
   public void testOverride() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Iterator;");

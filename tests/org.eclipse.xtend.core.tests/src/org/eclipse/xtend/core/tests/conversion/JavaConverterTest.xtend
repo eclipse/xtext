@@ -187,6 +187,19 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("void", xtendMember.getReturnType().getSimpleName())
 		assertEquals("visit", xtendMember.getName())
 	}
+	
+	@Test def void testBasicForStatementCase_02() throws Exception {
+
+		toValidXtendClass('''
+			public class JavaToConvert {
+				public void visit() {
+					for (int a = 1, int b = 2; true; a++) {
+					}
+				}
+			}
+		''')
+
+	}
 
 	@Test def void testOverride() throws Exception {
 

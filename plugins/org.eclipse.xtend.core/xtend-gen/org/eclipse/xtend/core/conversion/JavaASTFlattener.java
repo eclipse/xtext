@@ -757,8 +757,8 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public boolean visit(final VariableDeclarationExpression it) {
     List _fragments = it.fragments();
-    final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
-      public void apply(final VariableDeclarationFragment frag) {
+    final Procedure2<VariableDeclarationFragment, Integer> _function = new Procedure2<VariableDeclarationFragment, Integer>() {
+      public void apply(final VariableDeclarationFragment frag, final Integer counter) {
         List _modifiers = it.modifiers();
         JavaASTFlattener.this.appendModifieres(it, _modifiers);
         List _modifiers_1 = it.modifiers();
@@ -770,6 +770,13 @@ public class JavaASTFlattener extends ASTVisitor {
         JavaASTFlattener.this.appendSpaceToBuffer();
         frag.accept(JavaASTFlattener.this);
         JavaASTFlattener.this.appendSpaceToBuffer();
+        List _fragments = it.fragments();
+        int _size = _fragments.size();
+        int _minus = (_size - 1);
+        boolean _lessThan = ((counter).intValue() < _minus);
+        if (_lessThan) {
+          JavaASTFlattener.this.appendToBuffer(",");
+        }
       }
     };
     IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
@@ -1275,7 +1282,7 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendLineWrapToBuffer();
     this.appendToBuffer("for (");
     List _initializers = it.initializers();
-    this.visitAll(_initializers, "");
+    this.visitAll(_initializers);
     this.appendToBuffer("; ");
     Expression _expression = it.getExpression();
     boolean _notEquals = (!Objects.equal(_expression, null));

@@ -493,7 +493,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(VariableDeclarationExpression it) {
-		fragments.forEach [ VariableDeclarationFragment frag |
+		fragments.forEach [ VariableDeclarationFragment frag, counter |
 			appendModifieres(modifiers())
 			appendToBuffer(handleVariableDeclaration(modifiers()))
 			appendSpaceToBuffer
@@ -501,7 +501,11 @@ class JavaASTFlattener extends ASTVisitor {
 			appendSpaceToBuffer
 			frag.accept(this)
 			appendSpaceToBuffer
+			if (counter < fragments.size - 1) {
+				appendToBuffer(",")
+			}
 		]
+		
 		return false
 	}
 
@@ -784,7 +788,7 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(ForStatement it) {
 		appendLineWrapToBuffer
 		appendToBuffer("for (")
-		initializers.visitAll("")
+		initializers.visitAll
 		appendToBuffer("; ")
 		if (getExpression() != null) {
 			getExpression.accept(this)
