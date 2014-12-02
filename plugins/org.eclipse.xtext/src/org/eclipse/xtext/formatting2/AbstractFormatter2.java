@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.formatting2.internal.CommentReplacer;
+import org.eclipse.xtext.formatting2.internal.FormattableDocument;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormatting;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionFormattingMerger;
 import org.eclipse.xtext.formatting2.internal.HiddenRegionReplacer;
@@ -207,7 +208,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 			IFormattableDocument document = createFormattableDocument();
 			XtextResource xtextResource = request.getTextRegionAccess().getResource();
 			format(xtextResource, document);
-			List<ITextReplacement> replacements = document.renderToTextReplacements();
+			List<ITextReplacement> replacements = ((FormattableDocument) document).renderToTextReplacements();
 			return replacements;
 		} finally {
 			reset();
