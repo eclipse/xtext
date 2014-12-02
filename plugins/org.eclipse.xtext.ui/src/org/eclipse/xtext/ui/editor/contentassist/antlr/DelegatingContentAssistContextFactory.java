@@ -19,7 +19,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -87,13 +88,42 @@ public class DelegatingContentAssistContextFactory extends AbstractContentAssist
 		
 		protected ContentAssistContext[] doCreateContexts(int offset) {
 			ITextSelection selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
-			TextRegionWithLineInformation region = new TextRegionWithLineInformation(selection.getOffset(), selection.getLength(), selection.getStartLine(), selection.getEndLine());
+			ITextRegion region = new SelectionBasedRegion(selection);
 			org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext[] delegateContexts = getDelegate().create(viewer.getDocument().get(), region, offset, resource);
 			ContentAssistContext[] contexts = new ContentAssistContext[delegateContexts.length];
 			for (int i = 0; i < delegateContexts.length; i++) {
 				contexts[i] = convert(delegateContexts[i]).toContext();
 			}
 			return contexts;
+		}
+		
+		protected static class SelectionBasedRegion implements ITextRegion {
+			
+			private ITextSelection selection;
+
+			public SelectionBasedRegion(ITextSelection selection) {
+				this.selection = selection;
+			}
+
+			public int getOffset() {
+				return selection.getOffset();
+			}
+
+			public int getLength() {
+				return selection.getLength();
+			}
+
+			public ITextRegion merge(ITextRegion region) {
+				throw new UnsupportedOperationException();
+			}
+
+			public boolean contains(ITextRegion other) {
+				throw new UnsupportedOperationException();
+			}
+
+			public boolean contains(int offset) {
+				throw new UnsupportedOperationException();
+			}
 		}
 
 		protected ContentAssistContext.Builder convert(org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext delegateContext) {
