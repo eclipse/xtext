@@ -104,6 +104,7 @@ import org.eclipse.xtext.ui.preferences.EclipsePreferencesProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
+import org.eclipse.xtext.ui.validation.ConfigurableIssueCodesPreferenceStoreInitializer;
 import org.eclipse.xtext.ui.validation.LanguageAwareMarkerTypeProvider;
 import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
 
@@ -407,4 +408,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(IQuickOutlineContribution.All.class)
 				.to(IQuickOutlineContribution.Composite.class);
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void configureIssueCodesPreferenceInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("issueCodesPreferenceInitializer")) //$NON-NLS-1$
+			.to(ConfigurableIssueCodesPreferenceStoreInitializer.class);
+	}
+	
 }
