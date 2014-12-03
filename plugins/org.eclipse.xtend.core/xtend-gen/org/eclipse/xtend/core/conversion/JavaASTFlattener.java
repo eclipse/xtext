@@ -1058,27 +1058,21 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final SingleVariableDeclaration it) {
-    ASTNode _parent = it.getParent();
-    if ((_parent instanceof MethodDeclaration)) {
-      List _modifiers = it.modifiers();
-      final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-        public Boolean apply(final Object e) {
-          boolean _and = false;
-          if (!(e instanceof Modifier)) {
-            _and = false;
-          } else {
-            boolean _isFinal = ((Modifier) e).isFinal();
-            _and = _isFinal;
-          }
-          return Boolean.valueOf((!_and));
+    List _modifiers = it.modifiers();
+    final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+      public Boolean apply(final Object e) {
+        boolean _and = false;
+        if (!(e instanceof Modifier)) {
+          _and = false;
+        } else {
+          boolean _isFinal = ((Modifier) e).isFinal();
+          _and = _isFinal;
         }
-      };
-      Iterable<IExtendedModifier> _filter = IterableExtensions.<IExtendedModifier>filter(_modifiers, _function);
-      this.appendModifieres(it, _filter);
-    } else {
-      List _modifiers_1 = it.modifiers();
-      this.appendModifieres(it, _modifiers_1);
-    }
+        return Boolean.valueOf((!_and));
+      }
+    };
+    Iterable<IExtendedModifier> _filter = IterableExtensions.<IExtendedModifier>filter(_modifiers, _function);
+    this.appendModifieres(it, _filter);
     Type _type = it.getType();
     _type.accept(this);
     boolean _isVarargs = it.isVarargs();
