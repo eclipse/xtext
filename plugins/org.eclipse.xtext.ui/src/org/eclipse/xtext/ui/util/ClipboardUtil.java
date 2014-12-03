@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 
+import org.eclipse.jdt.internal.ui.javaeditor.ClipboardOperationAction.ClipboardData;
 import org.eclipse.swt.dnd.ByteArrayTransfer;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.DND;
@@ -143,7 +142,7 @@ public class ClipboardUtil {
 			byte[] bytes = (byte[]) super.nativeToJava(transferData);
 			if (bytes != null) {
 				try {
-					return new JavaImportData(bytes);
+					return new JavaImportData(new ClipboardData(bytes));
 				} catch (IOException e) {
 				}
 			}
@@ -155,35 +154,20 @@ public class ClipboardUtil {
 	 * Holds JDT Informations about imports
 	 * 
 	 * @author dhuebner - Initial contribution and API
-	 * 
+	 * @noextend This class is not intended to be subclassed by clients.
 	 */
-	public static final class JavaImportData {
-		private String handle;
+	public static class JavaImportData {
 		private String[] imports;
 		private String[] staticImports;
 
-		public JavaImportData(byte[] bytes) throws IOException {
-			DataInputStream dataIn = new DataInputStream(new ByteArrayInputStream(bytes));
-			try {
-				handle = dataIn.readUTF();
-				imports = readArray(dataIn);
-				staticImports = readArray(dataIn);
-			} finally {
-				dataIn.close();
-			}
+		public JavaImportData(String[] imports, String[] staticImports) {
+			this.imports = imports;
+			this.staticImports = staticImports;
 		}
 
-		private String[] readArray(DataInputStream dataIn) throws IOException {
-			int count = dataIn.readInt();
-			String[] array = new String[count];
-			for (int i = 0; i < count; i++) {
-				array[i] = dataIn.readUTF();
-			}
-			return array;
-		}
-
-		public String getHandle() {
-			return handle;
+		JavaImportData(ClipboardData jdtClipboardData) {
+			this.imports = jdtClipboardData.getTypeImports();
+			this.staticImports = jdtClipboardData.getStaticImports();
 		}
 
 		public String[] getImports() {
