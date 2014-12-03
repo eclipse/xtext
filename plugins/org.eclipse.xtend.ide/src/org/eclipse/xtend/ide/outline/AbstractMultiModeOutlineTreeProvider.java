@@ -15,7 +15,6 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.internal.ui.viewsupport.ColoringLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
@@ -38,10 +37,8 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedExecutable;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeature;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -251,7 +248,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		}
 		if (isShowInherited()) {
 			if (modelElement instanceof IResolvedFeature) {
-				String qualifier = createQualifier(((IResolvedFeature) modelElement).getDeclaration());
+				String qualifier = createQualifier((IResolvedFeature) modelElement);
 				appendQualifier(styledText, qualifier);
 			} else if (modelElement instanceof JvmMember) {
 				String qualifier = createQualifier((JvmMember) modelElement);
@@ -295,10 +292,11 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 	private String createQualifier(JvmMember jvmMember) {
 		String qualifier = null;
 		if (jvmMember instanceof JvmFeature) {
-			qualifier = jvmMember.getDeclaringType().getIdentifier();
+			JvmDeclaredType declaringType = jvmMember.getDeclaringType();
+			qualifier = getPackageFreeNameForType(declaringType);
 		} else if (jvmMember instanceof JvmDeclaredType) {
 			if (jvmMember.eContainer() instanceof JvmDeclaredType) {
-				qualifier = ((JvmDeclaredType) jvmMember.eContainer()).getQualifiedName('.');
+				qualifier = getPackageFreeNameForType((JvmDeclaredType) jvmMember.eContainer());
 			} else {
 				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) jvmMember;
 				if (StringUtils.isEmpty(jvmDeclaredType.getPackageName())) {
@@ -311,6 +309,21 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		return qualifier;
 	}
 
+	private String getPackageFreeNameForType(JvmDeclaredType declaringType) {
+		String qualifier;
+		qualifier = declaringType.getSimpleName();
+		while (declaringType.eContainer() instanceof JvmDeclaredType) {
+			declaringType = (JvmDeclaredType) declaringType.eContainer();
+			qualifier = declaringType.getSimpleName()+'.'+qualifier;
+		}
+		return qualifier;
+	}
+	
+	private String createQualifier(IResolvedFeature feature) {
+		String qualifier = feature.getContextType().getHumanReadableName();
+		return qualifier;
+	}
+
 	private String createQualifier(XtendTypeDeclaration xtendType, char innerClassDelimiter) {
 		if (xtendType.getName() == null)
 			return null;
@@ -319,24 +332,14 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 			declaringType = (XtendTypeDeclaration) xtendType.eContainer();
 		}
 		if (declaringType == null) {
-			String packageName = createPackagename(xtendType);
-			if (Strings.isEmpty(packageName))
-				return xtendType.getName();
-			return packageName + "." + xtendType.getName();
+			return xtendType.getName();
 		}
-		String parentName = createQualifier(declaringType, innerClassDelimiter);
-		if (parentName == null)
-			return null;
-		return parentName + innerClassDelimiter + xtendType.getName();
-	}
-
-	private String createPackagename(XtendTypeDeclaration xtendType) {
-		XtendFile xtendFile = EcoreUtil2.getContainerOfType(xtendType, XtendFile.class);
-		if (xtendFile != null) {
-			return xtendFile.getPackage();
+		String qualifier = xtendType.getName();
+		while (xtendType.eContainer() instanceof XtendTypeDeclaration) {
+			XtendTypeDeclaration parent = (XtendTypeDeclaration) xtendType.eContainer(); 
+			qualifier = parent.getName() + innerClassDelimiter + qualifier;
 		}
-		return "";
-
+		return qualifier;
 	}
 
 	@Override
