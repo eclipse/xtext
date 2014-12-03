@@ -40,6 +40,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
@@ -158,7 +159,7 @@ public class RewritableImportSection {
 		return addedImportDeclarations.add(createImport(fqn, null));
 	}
 
-	protected XImportDeclaration createImport(String importedNamespace, String member) {
+	protected XImportDeclaration createImport(String importedNamespace, final String member) {
 		XImportDeclaration importDeclaration = XtypeFactory.eINSTANCE.createXImportDeclaration();
 		importDeclaration.setImportedNamespace(importedNamespace);
 		if (member != null) {
@@ -170,7 +171,18 @@ public class RewritableImportSection {
 	protected boolean needsImport(final String fqn) {
 		for (String string : implicitlyImportedPackages) {
 			if (fqn.startsWith(string)) {
-				return fqn.substring(string.length()).lastIndexOf('.') > 0;
+				return fqn.substring(string.length() + 1).lastIndexOf('.') > 0;
+			}
+		}
+		for (XImportDeclaration importDeclr : originalImportDeclarations) {
+			if (!importDeclr.isStatic() && fqn.equals(importDeclr.getImportedTypeName())) {
+				return false;
+			}
+		}
+		for (XImportDeclaration importDeclr : addedImportDeclarations) {
+			String identifier = importDeclr.getImportedTypeName();
+			if (!importDeclr.isStatic() && fqn.equals(identifier)) {
+				return false;
 			}
 		}
 		return true;
@@ -264,9 +276,44 @@ public class RewritableImportSection {
 		return true;
 	}
 
-	public boolean addStaticImport(String typeFqn, String member) {
+	/**
+	 * @param typeFqn
+	 *            The fully qualified name of the type to import. E.g. <code>java.util.List</code>. May not be
+	 *            <code>null</code>.
+	 * @param member
+	 *            member name to import. May not be <code>null</code>. For wildcard use <code>*</code>
+	 * 
+	 */
+	public boolean addStaticImport(final String typeFqn, final String member) {
+		if (typeFqn == null || member == null) {
+			throw new IllegalArgumentException("Type name " + typeFqn + ". Member name: " + member);
+		}
+		if (hasStaticImport(typeFqn, member, false)) {
+			return false;
+		}
 		XImportDeclaration importDecl = createImport(typeFqn, member);
 		importDecl.setStatic(true);
+		return addedImportDeclarations.add(importDecl);
+	}
+
+	/**
+	 * @param typeFqn
+	 *            The fully qualified name of the type to import. E.g. <code>java.util.List</code>. May not be
+	 *            <code>null</code>.
+	 * @param member
+	 *            member name to import. May not be <code>null</code>. For wildcard use <code>*</code>
+	 * 
+	 */
+	public boolean addStaticExtensionImport(final String typeFqn, final String member) {
+		if (typeFqn == null || member == null) {
+			throw new IllegalArgumentException("Type name " + typeFqn + ". Member name: " + member);
+		}
+		if (hasStaticImport(typeFqn, member, true)) {
+			return false;
+		}
+		XImportDeclaration importDecl = createImport(typeFqn, member);
+		importDecl.setStatic(true);
+		importDecl.setExtension(true);
 		return addedImportDeclarations.add(importDecl);
 	}
 
@@ -529,4 +576,30 @@ public class RewritableImportSection {
 		return false;
 	}
 
+	private boolean hasStaticImport(String typeName, String memberName, boolean extension) {
+		for (String string : implicitlyImportedPackages) {
+			if (typeName.startsWith(string)) {
+				return typeName.substring(string.length()).lastIndexOf('.') == 0;
+			}
+		}
+		Map<JvmDeclaredType, Set<String>> imports = staticImports;
+		if (extension) {
+			imports = staticExtensionImports;
+		}
+		for (JvmDeclaredType type : imports.keySet()) {
+			if (typeName.equals(type.getIdentifier())) {
+				Set<String> members = imports.get(type);
+				return members != null && ((members.contains(memberName) || members.contains(null)));
+			}
+		}
+		for (XImportDeclaration importDeclr : addedImportDeclarations) {
+			String identifier = importDeclr.getImportedTypeName();
+			if (importDeclr.isStatic() && typeName.equals(identifier)) {
+				if (Objects.equal(importDeclr.getMemberName(), memberName) || importDeclr.isWildcard() || "*".equals(importDeclr.getMemberName())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

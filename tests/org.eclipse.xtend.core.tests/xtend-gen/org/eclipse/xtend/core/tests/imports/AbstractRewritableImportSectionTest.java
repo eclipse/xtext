@@ -29,7 +29,7 @@ import org.junit.Test;
 public abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase {
   @Inject
   @Extension
-  private RewritableImportSection.Factory _rewritableImportSection$Factory;
+  private RewritableImportSection.Factory _factory;
   
   @Inject
   @Extension
@@ -52,6 +52,78 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     _builder.append("import java.util.List");
     _builder.newLine();
     this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testSimpleAddAsString() {
+    final RewritableImportSection section = this.getSection(Set.class);
+    section.addImport("java.util.List");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Set");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testSimpleAddAsString_1() {
+    final RewritableImportSection section = this.getSection(Set.class);
+    section.addImport("org.eclipse.xtext.xbase.lib.InputOutput");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Set");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testAddNullMemberAsString() {
+    final RewritableImportSection section = this.getSection(Set.class);
+    try {
+      section.addStaticImport("java.util.List", null);
+      Assert.fail();
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalArgumentException) {
+        final IllegalArgumentException e = (IllegalArgumentException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    try {
+      section.addStaticExtensionImport("java.util.List", null);
+      Assert.fail();
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof IllegalArgumentException) {
+        final IllegalArgumentException e_1 = (IllegalArgumentException)_t_1;
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
+      }
+    }
+  }
+  
+  @Test
+  public void testAddNullTypeAsString() {
+    final RewritableImportSection section = this.getSection(Set.class);
+    try {
+      section.addStaticExtensionImport(((String) null), "");
+      Assert.fail();
+    } catch (final Throwable _t) {
+      if (_t instanceof IllegalArgumentException) {
+        final IllegalArgumentException e = (IllegalArgumentException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    try {
+      section.addStaticImport(((String) null), "");
+      Assert.fail();
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof IllegalArgumentException) {
+        final IllegalArgumentException e_1 = (IllegalArgumentException)_t_1;
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
+      }
+    }
   }
   
   @Test
@@ -85,6 +157,83 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
   }
   
   @Test
+  public void testVariousAdd_3() {
+    final RewritableImportSection section = this.getSection();
+    this.addStaticImport(section, Set.class);
+    this.addExtensionImport(section, Set.class);
+    this.addImport(section, Set.class);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension java.util.Set.*");
+    _builder.newLine();
+    _builder.append("import java.util.Set");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testVariousAddAsString() {
+    final RewritableImportSection section = this.getSection();
+    section.addStaticExtensionImport("java.util.Set", "*");
+    section.addStaticImport("java.util.Collections", "*");
+    section.addStaticImport("org.eclipse.xtext.xbase.lib.InputOutput", "println");
+    section.addImport("java.util.List");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension java.util.Set.*");
+    _builder.newLine();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testVariousAddAsString_2() {
+    final RewritableImportSection section = this.getSection();
+    section.addStaticExtensionImport("java.util.Set", "*");
+    section.addStaticImport("java.util.Collections", "*");
+    section.addStaticImport("org.eclipse.xtext.xbase.lib.InputOutput", "println");
+    section.addImport("java.util.List");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension java.util.Set.*");
+    _builder.newLine();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testVariousAddAsString_3() {
+    final RewritableImportSection section = this.getSection();
+    section.addStaticExtensionImport("com.google.common.base.Strings", "*");
+    section.addStaticImport("com.google.common.base.Strings", "*");
+    section.addStaticImport("com.google.common.base.Strings", "emptyToNull");
+    section.addImport("com.google.common.base.Strings");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension com.google.common.base.Strings.*");
+    _builder.newLine();
+    _builder.append("import com.google.common.base.Strings");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testVariousAddAsString_4() {
+    final RewritableImportSection section = this.getStaticSection(Collections.class);
+    section.addStaticImport("java.util.Collections", "*");
+    section.addStaticImport("java.util.Collections", "sort");
+    section.addImport("java.util.Collections");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("import java.util.Collections");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
   public void testDoubleAdd() {
     final RewritableImportSection section = this.getSection(List.class);
     this.addImport(section, List.class);
@@ -113,6 +262,95 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     this.addStaticImport(section, Collections.class);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString() {
+    final RewritableImportSection section = this.getSection(List.class);
+    section.addImport("java.util.List");
+    section.addImport("java.util.List");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString_2() {
+    final RewritableImportSection section = this.getSection();
+    section.addStaticExtensionImport("java.util.Collections", "*");
+    section.addStaticExtensionImport("java.util.Collections", "*");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static extension java.util.Collections.*");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString_3() {
+    final RewritableImportSection section = this.getSection();
+    section.addStaticImport("java.util.Collections", "*");
+    section.addStaticImport("java.util.Collections", "*");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString_4() {
+    final RewritableImportSection section = this.getSection(Collections.class);
+    section.addStaticImport("java.util.Collections", "*");
+    section.addStaticImport("java.util.Collections", "sort");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Collections");
+    _builder.newLine();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString_5() {
+    final RewritableImportSection section = this.getSection(Collections.class);
+    section.addStaticImport("java.util.Collections", "sort");
+    section.addStaticImport("java.util.Collections", "*");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Collections");
+    _builder.newLine();
+    _builder.append("import static java.util.Collections.sort");
+    _builder.newLine();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString_6() {
+    final RewritableImportSection section = this.getSection(Collections.class);
+    section.addStaticExtensionImport("java.util.Collections", "*");
+    section.addStaticExtensionImport("java.util.Collections", "sort");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Collections");
+    _builder.newLine();
+    _builder.append("import static extension java.util.Collections.*");
+    _builder.newLine();
+    this.assertEquals(section, _builder);
+  }
+  
+  @Test
+  public void testDoubleAddAsString_7() {
+    final RewritableImportSection section = this.getSection(Collections.class);
+    section.addStaticExtensionImport("java.util.Collections", "sort");
+    section.addStaticExtensionImport("java.util.Collections", "*");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Collections");
+    _builder.newLine();
+    _builder.append("import static extension java.util.Collections.sort");
+    _builder.newLine();
+    _builder.append("import static extension java.util.Collections.*");
     _builder.newLine();
     this.assertEquals(section, _builder);
   }
@@ -249,7 +487,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
       String _string = model.toString();
       XtendFile _file = this.file(_string);
       Resource _eResource = _file.eResource();
-      return this._rewritableImportSection$Factory.parse(((XtextResource) _eResource));
+      return this._factory.parse(((XtextResource) _eResource));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -299,13 +537,31 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     try {
       RewritableImportSection _xblockexpression = null;
       {
-        CharSequence _model = this.getModel(types);
+        CharSequence _model = this.getModel(false, types);
         String _string = _model.toString();
         this.model = _string;
         XtendFile _file = this.file(this.model);
         this.xtendFile = _file;
         Resource _eResource = this.xtendFile.eResource();
-        _xblockexpression = this._rewritableImportSection$Factory.parse(((XtextResource) _eResource));
+        _xblockexpression = this._factory.parse(((XtextResource) _eResource));
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected RewritableImportSection getStaticSection(final Class<?>... types) {
+    try {
+      RewritableImportSection _xblockexpression = null;
+      {
+        CharSequence _model = this.getModel(true, types);
+        String _string = _model.toString();
+        this.model = _string;
+        XtendFile _file = this.file(this.model);
+        this.xtendFile = _file;
+        Resource _eResource = this.xtendFile.eResource();
+        _xblockexpression = this._factory.parse(((XtextResource) _eResource));
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -362,7 +618,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     return false;
   }
   
-  protected abstract CharSequence getModel(final Class<?>[] types);
+  protected abstract CharSequence getModel(final boolean isStatic, final Class<?>[] types);
   
   protected abstract CharSequence getExpectedModel(final String sectionAsString);
 }
