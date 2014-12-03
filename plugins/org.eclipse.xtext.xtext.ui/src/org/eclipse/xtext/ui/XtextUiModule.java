@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
+import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+import org.eclipse.xtext.xtext.ui.editor.validation.XtextValidatorConfigurationBlock;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextDependentElementsCalculator;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameContextFactory;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameStrategyProvider;
@@ -174,4 +176,9 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return StateBasedContainerManager.class;
 	}
+	
+	public Class<? extends AbstractValidatorConfigurationBlock> bindAbstractValidatorConfigurationBlock() {
+		return XtextValidatorConfigurationBlock.class;
+	}
+	
 }
