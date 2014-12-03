@@ -62,7 +62,11 @@ public class TypeUsages {
 	public Iterable<TypeUsage> getUsages(JvmDeclaredType type) {
 		return types2usages.get(type);
 	}
-
+	
+	public Iterable<TypeUsage> getAllTypeUsages() {
+		return types2usages.values();
+	}
+	
 	public List<TypeUsage> getUnresolvedTypeUsages() {
 		return unresolvedTypes;
 	}
