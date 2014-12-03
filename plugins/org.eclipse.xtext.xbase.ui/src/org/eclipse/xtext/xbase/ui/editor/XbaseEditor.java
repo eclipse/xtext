@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.editor;
 
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -20,9 +21,12 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.ITextEditorActionConstants;
+import org.eclipse.ui.texteditor.TextEditorAction;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -33,41 +37,49 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
+import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory;
 
 import com.google.inject.Inject;
 
 /**
- * This enhances the Xtext editor with functionality that allows to reveal the originating offsets 
- * for selected java elements. Thus the XbaseEditor is capable to work with {@link IEditorInput input}
- * that points to {@link JavaCore#isJavaLikeFileName(String) java resources}.
+ * This enhances the Xtext editor with functionality that allows to reveal the originating offsets for selected java
+ * elements. Thus the XbaseEditor is capable to work with {@link IEditorInput input} that points to
+ * {@link JavaCore#isJavaLikeFileName(String) java resources}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XbaseEditor extends XtextEditor {
 
-
 	private final static Logger log = Logger.getLogger(XbaseEditor.class);
-	
+
 	protected static final String HANDLER_IDENTIFIER = "HANDLER_IDENTIFIER"; //$NON-NLS-1$
-	
+
 	@Inject
 	private ITraceForTypeRootProvider traceInformation;
-	
+
 	@Inject
 	private StacktraceBasedEditorDecider calleeAnalyzer;
-	
-	@Inject 
+
+	@Inject
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
-	
+
 	@Inject
 	private XbaseEditorInputRedirector editorInputRedirector;
-
+	/**
+	 * {@link IClipboardActionFactory} may be optional. If so, the default CCP {@link TextEditorAction}'s added in
+	 * {@link org.eclipse.ui.texteditor.AbstractTextEditor} will be used.
+	 * 
+	 * @see #createClipboardActions()
+	 * @see org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction.Factory
+	 */
+	@Inject(optional = true)
+	private IClipboardActionFactory clipboardActionFactory;
 	private ITypeRoot typeRoot = null;
-	
+
 	private int expectJavaSelection = 0;
 	private boolean expectLineSelection = false;
 	private boolean isIgnoreCall = false;
-	
+
 	@Override
 	public void saveState(IMemento memento) {
 		super.saveState(memento);
@@ -75,7 +87,7 @@ public class XbaseEditor extends XtextEditor {
 			memento.putString(HANDLER_IDENTIFIER, typeRoot.getHandleIdentifier());
 		}
 	}
-	
+
 	@Override
 	protected void doRestoreState(IMemento memento) {
 		super.doRestoreState(memento);
@@ -87,12 +99,12 @@ public class XbaseEditor extends XtextEditor {
 			}
 		}
 	}
-	
+
 	@Override
 	protected boolean containsSavedState(IMemento memento) {
 		boolean result = super.containsSavedState(memento);
 		if (!result) {
-			return memento.getString(HANDLER_IDENTIFIER) != null;	
+			return memento.getString(HANDLER_IDENTIFIER) != null;
 		}
 		return result;
 	}
@@ -113,7 +125,7 @@ public class XbaseEditor extends XtextEditor {
 		}
 		super.doSetInput(input);
 	}
-	
+
 	private Exception lastCall = null;
 
 	public void markNextSelectionAsJavaOffset(ITypeRoot typeRoot) {
@@ -128,7 +140,7 @@ public class XbaseEditor extends XtextEditor {
 				this.expectJavaSelection = 0;
 			}
 		}
-		
+
 		lastCall = new Exception();
 		this.expectJavaSelection++;
 		if (calleeAnalyzer.isEditorUtilityIsOpenInEditor() || calleeAnalyzer.isOpenEditorAction())
@@ -139,9 +151,9 @@ public class XbaseEditor extends XtextEditor {
 			this.expectJavaSelection++;
 		this.typeRoot = typeRoot;
 	}
-	
+
 	int reentrantCallFromSelf = 0;
-	
+
 	@Override
 	protected void safelySanityCheckState(IEditorInput input) {
 		try {
@@ -151,7 +163,7 @@ public class XbaseEditor extends XtextEditor {
 			reentrantCallFromSelf--;
 		}
 	}
-	
+
 	@Override
 	public boolean isDirty() {
 		try {
@@ -161,7 +173,7 @@ public class XbaseEditor extends XtextEditor {
 			reentrantCallFromSelf--;
 		}
 	}
-	
+
 	@Override
 	public IDocumentProvider getDocumentProvider() {
 		if (expectJavaSelection > 0 && reentrantCallFromSelf == 0) {
@@ -182,14 +194,16 @@ public class XbaseEditor extends XtextEditor {
 								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
 								final Document document = new Document(string);
 								return document;
-							} catch(CoreException e) {
+							} catch (CoreException e) {
 								return XbaseEditor.super.getDocumentProvider().getDocument(element);
 							}
 						}
+
 						@Override
 						public void connect(Object element) throws CoreException {
 							// do nothing
 						}
+
 						@Override
 						public void disconnect(Object element) {
 							// do nothing
@@ -200,9 +214,10 @@ public class XbaseEditor extends XtextEditor {
 		}
 		return super.getDocumentProvider();
 	}
-	
+
 	@Override
-	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart, final int revealLength) {
+	protected void selectAndReveal(final int selectionStart, final int selectionLength, final int revealStart,
+			final int revealLength) {
 		try {
 			reentrantCallFromSelf++;
 			if (expectJavaSelection > 0) {
@@ -219,14 +234,19 @@ public class XbaseEditor extends XtextEditor {
 									if (line != -1) {
 										int startOffsetOfContents = getStartOffsetOfContentsInJava(javaDocument, line);
 										if (startOffsetOfContents != -1) {
-											ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
+											ILocationInResource bestSelection = traceToSource
+													.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
 											if (bestSelection != null) {
-												final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
+												final ITextRegionWithLineInformation textRegion = bestSelection
+														.getTextRegion();
 												if (textRegion != null) {
 													int lineToSelect = textRegion.getLineNumber();
 													try {
-														IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
-														super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
+														IRegion lineInfo = getDocument().getLineInformation(
+																lineToSelect);
+														super.selectAndReveal(lineInfo.getOffset(),
+																lineInfo.getLength(), lineInfo.getOffset(),
+																lineInfo.getLength());
 														return;
 													} catch (BadLocationException e) {
 														log.error(e.getMessage(), e);
@@ -235,18 +255,20 @@ public class XbaseEditor extends XtextEditor {
 											}
 										}
 									}
-								} catch(BadLocationException e) {
+								} catch (BadLocationException e) {
 									// do nothing
-								} catch(CoreException e) {
+								} catch (CoreException e) {
 									// do nothing
 								}
 							}
 						} else if (selectionStart >= 0 && selectionLength >= 0) {
-							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
+							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(
+									selectionStart, selectionLength));
 							if (bestSelection != null) {
 								ILocationInResource bestReveal = bestSelection;
 								if (selectionStart != revealStart || selectionLength != revealLength) {
-									bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart, revealLength));
+									bestReveal = traceToSource.getBestAssociatedLocation(new TextRegion(revealStart,
+											revealLength));
 									if (bestReveal == null) {
 										bestReveal = bestSelection;
 									}
@@ -257,7 +279,8 @@ public class XbaseEditor extends XtextEditor {
 									if (fixedReveal == null) {
 										fixedReveal = fixedSelection;
 									}
-									super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(), fixedReveal.getOffset(), fixedReveal.getLength());
+									super.selectAndReveal(fixedSelection.getOffset(), fixedSelection.getLength(),
+											fixedReveal.getOffset(), fixedReveal.getLength());
 									return;
 								}
 							}
@@ -290,14 +313,15 @@ public class XbaseEditor extends XtextEditor {
 		}
 		return null;
 	}
-	
+
 	protected boolean isCompiledWithJSR45() {
 		//TODO the information whether this was compiled with JSR-45, needs to be done on a per resource base, since a project might 
 		// have a different configuration than its jars. Storing it in the trace file (together with other compilation options and version information) seems appropriate.
 		// is this editor is not based on a resource it doesn't live in a project. We don't know whether it was compiled with JSR-45.
-		if (getResource()==null)
+		if (getResource() == null)
 			return true;
-		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(getResource().getProject());
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(getResource()
+				.getProject());
 		for (OutputConfiguration config : configurations) {
 			if (config.isInstallDslAsPrimarySource()) {
 				return false;
@@ -307,11 +331,13 @@ public class XbaseEditor extends XtextEditor {
 	}
 
 	/**
-	 * Returns the line of the given selection. It is assumed that it covers an entire line in the
-	 * Java file.
-	 * @return the line in the Java file (zero based) or <code>-1</code> if the selection does not cover a complete line.
+	 * Returns the line of the given selection. It is assumed that it covers an entire line in the Java file.
+	 * 
+	 * @return the line in the Java file (zero based) or <code>-1</code> if the selection does not cover a complete
+	 *         line.
 	 */
-	protected int getLineInJavaDocument(Document document, int selectionStart, int selectionLength) throws BadLocationException {
+	protected int getLineInJavaDocument(Document document, int selectionStart, int selectionLength)
+			throws BadLocationException {
 		int line = document.getLineOfOffset(selectionStart);
 		int length = document.getLineLength(line);
 		int lineOffset = document.getLineOffset(line);
@@ -324,7 +350,7 @@ public class XbaseEditor extends XtextEditor {
 		}
 		return -1;
 	}
-	
+
 	protected int getStartOffsetOfContentsInJava(Document document, int line) throws BadLocationException {
 		IRegion lineInformation = document.getLineInformation(line);
 		String lineText = document.get(lineInformation.getOffset(), lineInformation.getLength());
@@ -348,4 +374,29 @@ public class XbaseEditor extends XtextEditor {
 		super.reveal(offset, length);
 	}
 
+	@Override
+	protected void createActions() {
+		super.createActions();
+		createClipboardActions();
+	}
+
+	/**
+	 * replace default cut/copy/paste actions with a version that provided by the factory, if one is injected
+	 */
+	protected void createClipboardActions() {
+		IClipboardActionFactory actionsFactory = getClipboardActionFactory();
+		if (actionsFactory != null) {
+			ResourceBundle bundle = XbaseEditorMessages.getBundleForConstructedKeys();
+			TextEditorAction action = actionsFactory.create(bundle, "Editor.Cut.", this, ITextOperationTarget.CUT); //$NON-NLS-1$
+			setAction(ITextEditorActionConstants.CUT, action);
+			action = actionsFactory.create(bundle, "Editor.Copy.", this, ITextOperationTarget.COPY); //$NON-NLS-1$
+			setAction(ITextEditorActionConstants.COPY, action);
+			action = actionsFactory.create(bundle, "Editor.Paste.", this, ITextOperationTarget.PASTE); //$NON-NLS-1$
+			setAction(ITextEditorActionConstants.PASTE, action);
+		}
+	}
+
+	protected IClipboardActionFactory getClipboardActionFactory() {
+		return clipboardActionFactory;
+	}
 }
