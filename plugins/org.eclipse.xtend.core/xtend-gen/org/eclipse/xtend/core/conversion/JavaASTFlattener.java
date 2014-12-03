@@ -1058,8 +1058,15 @@ public class JavaASTFlattener extends ASTVisitor {
   }
   
   public boolean visit(final SingleVariableDeclaration it) {
+    boolean _or = false;
     ASTNode _parent = it.getParent();
     if ((_parent instanceof MethodDeclaration)) {
+      _or = true;
+    } else {
+      ASTNode _parent_1 = it.getParent();
+      _or = (_parent_1 instanceof CatchClause);
+    }
+    if (_or) {
       List _modifiers = it.modifiers();
       final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
         public Boolean apply(final Object e) {
