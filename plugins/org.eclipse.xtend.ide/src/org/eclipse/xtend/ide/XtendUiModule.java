@@ -148,6 +148,8 @@ import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
+import org.eclipse.xtext.xbase.ui.editor.actions.IClipboardActionFactory;
+import org.eclipse.xtext.xbase.ui.editor.actions.ImportsAwareClipboardAction;
 import org.eclipse.xtext.xbase.ui.file.EclipseFileSystemSupportImpl;
 import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
@@ -546,5 +548,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends XtendResourceDescriptionManager> bindXtendUIResourceDescriptionManager() {
 		return XtendUIResourceDescriptionManager.class;
+	}
+
+	public Class<? extends IClipboardActionFactory> bindIClipboardActionFactory() {
+		return ImportsAwareClipboardAction.Factory.class;
 	}
 }

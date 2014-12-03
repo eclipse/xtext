@@ -8,23 +8,27 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.junit.Test
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 
 class RewritableImportSectionTest_0 extends AbstractRewritableImportSectionTest {
-	
-	override protected getModel(Class<? extends Object>[] types) '''
+
+	override protected getModel(boolean isStatic, Class<? extends Object>[] types) '''
 		package foo
 		
-		«FOR type: types»
-			import «type.canonicalName»
+		«FOR type : types»
+			«IF(isStatic)»
+				import static «type.canonicalName».*
+			«ELSE»
+				import «type.canonicalName»
+			«ENDIF»
 		«ENDFOR»
 		
 		class Foo{}
 	'''
-	
+
 	override protected getExpectedModel(String sectionAsString) '''
 		package foo
 		
@@ -35,17 +39,21 @@ class RewritableImportSectionTest_0 extends AbstractRewritableImportSectionTest 
 }
 
 class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest {
-	
-	override protected getModel(Class<? extends Object>[] types) '''
+
+	override protected getModel(boolean isStatic, Class<? extends Object>[] types) '''
 		«IF types.size > 0»
 			«FOR type: types»
-				import «type.canonicalName»
+				«IF(isStatic)»
+					import static «type.canonicalName».*
+				«ELSE»
+					import «type.canonicalName»
+				«ENDIF»
 			«ENDFOR»
 			
 		«ENDIF»
 		class Foo{}
 	'''
-	
+
 	override protected getExpectedModel(String sectionAsString) '''
 		«sectionAsString»
 		
@@ -54,22 +62,26 @@ class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest 
 }
 
 class RewritableImportSectionTest_2 extends AbstractRewritableImportSectionTest {
-	
+
 	override protected isIgnoreLinebreaks() {
 		// The RIS will insert newlines before and after the section depending on added / removed imports.
 		// It doesn't make sense to check for those, but we must make sure there is at least one whitespace
 		// to separate elements  
 		true
 	}
-	
-	override protected getModel(Class<? extends Object>[] types) '''
+
+	override protected getModel(boolean isStatic, Class<? extends Object>[] types) '''
 		package foo
-		«FOR type: types»
-			import «type.canonicalName»
+		«FOR type : types»
+			«IF(isStatic)»
+				import static «type.canonicalName».*
+			«ELSE»
+				import «type.canonicalName»
+			«ENDIF»
 		«ENDFOR»
 		class Foo{}
 	'''
-	
+
 	override protected getExpectedModel(String sectionAsString) '''
 		package foo
 		«sectionAsString»
@@ -79,17 +91,16 @@ class RewritableImportSectionTest_2 extends AbstractRewritableImportSectionTest 
 }
 
 abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase {
-	
-	@Inject extension RewritableImportSection$Factory 
-	
+
+	@Inject extension RewritableImportSection.Factory
+
 	@Inject extension TypeReferences
-	
 	XtendFile xtendFile
-	
+
 	String model
-	
+
 	@Inject IWhitespaceInformationProvider whitespaceInformationProvider
-	
+
 	@Test def testSimpleAdd() {
 		val section = getSection(typeof(Set))
 		section.addImport(typeof(List))
@@ -97,6 +108,51 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.Set
 			import java.util.List
 		''')
+	}
+
+	@Test def testSimpleAddAsString() {
+		val section = getSection(typeof(Set))
+		section.addImport("java.util.List")
+		section.assertEquals('''
+			import java.util.Set
+			import java.util.List
+		''')
+	}
+
+	@Test def testSimpleAddAsString_1() {
+		val section = getSection(typeof(Set))
+		section.addImport("org.eclipse.xtext.xbase.lib.InputOutput")
+		section.assertEquals('''
+			import java.util.Set
+		''')
+	}
+
+	@Test def void testAddNullMemberAsString() {
+		val section = getSection(typeof(Set))
+		try {
+			section.addStaticImport("java.util.List", null)
+			fail
+		} catch (IllegalArgumentException e) {
+		}
+		try {
+			section.addStaticExtensionImport("java.util.List", null)
+			fail
+		} catch (IllegalArgumentException e) {
+		}
+	}
+
+	@Test def void testAddNullTypeAsString() {
+		val section = getSection(typeof(Set))
+		try {
+			section.addStaticExtensionImport(null as String, "")
+			fail
+		} catch (IllegalArgumentException e) {
+		}
+		try {
+			section.addStaticImport(null as String, "")
+			fail
+		} catch (IllegalArgumentException e) {
+		}
 	}
 
 	@Test def testVariousAdd() {
@@ -110,7 +166,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.List
 		''')
 	}
-	
+
 	@Test def testVariousAdd_2() {
 		val section = getSection()
 		section.addExtensionImport(typeof(Set))
@@ -121,7 +177,68 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.Set
 		''')
 	}
-	
+
+	@Test def testVariousAdd_3() {
+		val section = getSection()
+		section.addStaticImport(typeof(Set))
+		section.addExtensionImport(typeof(Set))
+		section.addImport(typeof(Set))
+		section.assertEquals('''
+			import static extension java.util.Set.*
+			import java.util.Set
+		''')
+	}
+
+	@Test def testVariousAddAsString() {
+		val section = getSection()
+		section.addStaticExtensionImport('java.util.Set', '*')
+		section.addStaticImport('java.util.Collections', '*')
+		section.addStaticImport('org.eclipse.xtext.xbase.lib.InputOutput', 'println')
+		section.addImport('java.util.List')
+		section.assertEquals('''
+			import static extension java.util.Set.*
+			import static java.util.Collections.*
+			import java.util.List
+		''')
+	}
+
+	@Test def testVariousAddAsString_2() {
+		val section = getSection()
+		section.addStaticExtensionImport('java.util.Set', '*')
+		section.addStaticImport('java.util.Collections', '*')
+		section.addStaticImport('org.eclipse.xtext.xbase.lib.InputOutput', 'println')
+		section.addImport('java.util.List')
+		section.assertEquals('''
+			import static extension java.util.Set.*
+			import static java.util.Collections.*
+			import java.util.List
+		''')
+	}
+
+	@Test def testVariousAddAsString_3() {
+		val section = getSection()
+		section.addStaticExtensionImport('com.google.common.base.Strings', '*')
+		section.addStaticImport('com.google.common.base.Strings', '*')
+		section.addStaticImport('com.google.common.base.Strings', 'emptyToNull')
+		section.addImport('com.google.common.base.Strings')
+		section.assertEquals('''
+			import static extension com.google.common.base.Strings.*
+			import com.google.common.base.Strings
+		''')
+	}
+
+	@Test def testVariousAddAsString_4() {
+		val section = getStaticSection(typeof(Collections))
+		section.addStaticImport('java.util.Collections', '*')
+		section.addStaticImport('java.util.Collections', 'sort')
+		section.addImport('java.util.Collections')
+		section.assertEquals(
+		'''
+			import static java.util.Collections.*
+			import java.util.Collections
+		''')
+	}
+
 	@Test def testDoubleAdd() {
 		val section = getSection(typeof(List))
 		section.addImport(typeof(List))
@@ -130,7 +247,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.List
 		''')
 	}
-	
+
 	@Test def testDoubleAdd_2() {
 		val section = getSection()
 		section.addExtensionImport(typeof(Collections))
@@ -139,13 +256,82 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import static extension java.util.Collections.*
 		''')
 	}
-	
+
 	@Test def testDoubleAdd_3() {
 		val section = getSection()
 		section.addStaticImport(typeof(Collections))
 		section.addStaticImport(typeof(Collections))
 		section.assertEquals('''
 			import static java.util.Collections.*
+		''')
+	}
+
+	@Test def testDoubleAddAsString() {
+		val section = getSection(typeof(List))
+		section.addImport('java.util.List')
+		section.addImport('java.util.List')
+		section.assertEquals('''
+			import java.util.List
+		''')
+	}
+
+	@Test def testDoubleAddAsString_2() {
+		val section = getSection()
+		section.addStaticExtensionImport('java.util.Collections', '*')
+		section.addStaticExtensionImport('java.util.Collections', '*')
+		section.assertEquals('''
+			import static extension java.util.Collections.*
+		''')
+	}
+
+	@Test def testDoubleAddAsString_3() {
+		val section = getSection()
+		section.addStaticImport('java.util.Collections', '*')
+		section.addStaticImport('java.util.Collections', '*')
+		section.assertEquals('''
+			import static java.util.Collections.*
+		''')
+	}
+
+	@Test def testDoubleAddAsString_4() {
+		val section = getSection(typeof(Collections))
+		section.addStaticImport('java.util.Collections', '*')
+		section.addStaticImport('java.util.Collections', 'sort')
+		section.assertEquals('''
+			import java.util.Collections
+			import static java.util.Collections.*
+		''')
+	}
+
+	@Test def testDoubleAddAsString_5() {
+		val section = getSection(typeof(Collections))
+		section.addStaticImport('java.util.Collections', 'sort')
+		section.addStaticImport('java.util.Collections', '*')
+		section.assertEquals('''
+			import java.util.Collections
+			import static java.util.Collections.sort
+			import static java.util.Collections.*
+		''')
+	}
+
+	@Test def testDoubleAddAsString_6() {
+		val section = getSection(typeof(Collections))
+		section.addStaticExtensionImport('java.util.Collections', '*')
+		section.addStaticExtensionImport('java.util.Collections', 'sort')
+		section.assertEquals('''
+			import java.util.Collections
+			import static extension java.util.Collections.*
+		''')
+	}
+
+	@Test def testDoubleAddAsString_7() {
+		val section = getSection(typeof(Collections))
+		section.addStaticExtensionImport('java.util.Collections', 'sort')
+		section.addStaticExtensionImport('java.util.Collections', '*')
+		section.assertEquals('''
+			import java.util.Collections
+			import static extension java.util.Collections.sort
+			import static extension java.util.Collections.*
 		''')
 	}
 
@@ -161,7 +347,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.Set
 			
 			import static java.util.Collections.*
-
+			
 			import static extension java.util.Set.*
 		''')
 	}
@@ -220,7 +406,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.List
 		''')
 	}
-	
+
 	@Test def testRemoveAdd_3() {
 		val section = getSection(typeof(List))
 		section.removeImport(typeof(List))
@@ -256,7 +442,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	def protected getImportSection(CharSequence model) {
 		parse(file(model.toString).eResource as XtextResource)
 	}
-	
+
 	def protected addImport(RewritableImportSection section, Class<?> javaClass) {
 		section.addImport(jvmType(javaClass))
 	}
@@ -285,10 +471,16 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 		val type = findDeclaredType(javaClass, xtendFile)
 		assertTrue(type instanceof JvmDeclaredType)
 		type as JvmDeclaredType
-	} 
+	}
 
 	def protected getSection(Class<?>... types) {
-		model = getModel(types).toString
+		model = getModel(false, types).toString
+		xtendFile = file(model)
+		parse(xtendFile.eResource as XtextResource)
+	}
+
+	def protected getStaticSection(Class<?>... types) {
+		model = getModel(true, types).toString
 		xtendFile = file(model)
 		parse(xtendFile.eResource as XtextResource)
 	}
@@ -296,24 +488,25 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	def protected assertEquals(RewritableImportSection section, CharSequence sectionAsString) {
 		val builder = new StringBuilder(model)
 		val changes = section.rewrite
-		for(it: changes.sortBy[offset].reverse)
+		for (it : changes.sortBy[offset].reverse)
 			builder.replace(offset, offset + length, text)
-		assertEquals(getExpectedModel(sectionAsString.toString).processLinebreaks, builder.processLinebreaks)		
+		assertEquals(getExpectedModel(sectionAsString.toString).processLinebreaks, builder.processLinebreaks)
 	}
-	
+
 	def protected processLinebreaks(CharSequence sequence) {
-		val lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(xtendFile.eResource.URI).lineSeparator
-		if(ignoreLinebreaks)
+		val lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(xtendFile.eResource.URI).
+			lineSeparator
+		if (ignoreLinebreaks)
 			sequence.toString.replaceAll("(" + lineSeparator + ")+", " ")
 		else
 			sequence.toString
 	}
-	
+
 	def protected isIgnoreLinebreaks() {
 		false
 	}
-	
-	def protected CharSequence getModel(Class<? extends Object>[] types) 
-	
-	def protected CharSequence getExpectedModel(String sectionAsString) 
+
+	def protected CharSequence getModel(boolean isStatic, Class<? extends Object>[] types)
+
+	def protected CharSequence getExpectedModel(String sectionAsString)
 }
