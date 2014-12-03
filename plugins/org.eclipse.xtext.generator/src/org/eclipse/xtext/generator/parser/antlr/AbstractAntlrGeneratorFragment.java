@@ -9,6 +9,7 @@ package org.eclipse.xtext.generator.parser.antlr;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -74,7 +75,16 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	}
 
 	public String[] getAntlrParams() {
-		String[] result = antlrParams.toArray(new String[antlrParams.size()]);
+		ArrayList<String> params = new ArrayList<String>(antlrParams);
+		// setting the default conversion timeout to 100secs.
+		// There seem to be no practical situations where the NFA conversion would hang,
+		// so Terence suggested here [1] to remove the option all together
+		// [1] - http://antlr.1301665.n2.nabble.com/Xconversiontimeout-td5294411.html
+		if (!params.contains("-Xconversiontimeout")) {
+			params.add("-Xconversiontimeout");
+			params.add("100000");
+		}
+		String[] result = params.toArray(new String[params.size()]);
 		return result;
 	}
 	
