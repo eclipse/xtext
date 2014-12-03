@@ -61,54 +61,54 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		interfaze.child(0, "BAR - Foo").numChildren(0);
 		interfaze.child(1, "BAZ - Foo").numChildren(0);
 		
-		interfaze.nextChild("valueOf(Class<T>, String) <T extends Enum<T>> : T - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("name : String - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("ordinal : int - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("new(String, int) - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("clone() : Object - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("compareTo(Foo) : int - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("equals(Object) : boolean - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("finalize() : void - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("getDeclaringClass() : Class<Foo> - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("hashCode() : int - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("name() : String - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("ordinal() : int - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("readObject(ObjectInputStream) : void - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("readObjectNoData() : void - java.lang.Enum").hasTextRegion(false);
-		interfaze.nextChild("toString() : String - java.lang.Enum").hasTextRegion(false);
+		interfaze.nextChild("valueOf(Class<T>, String) <T extends Enum<T>> : T - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("name : String - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("ordinal : int - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("new(String, int) - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("clone() : Object - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("compareTo(Foo) : int - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("equals(Object) : boolean - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("finalize() : void - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("getDeclaringClass() : Class<Foo> - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("hashCode() : int - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("name() : String - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("ordinal() : int - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("readObject(ObjectInputStream) : void - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("readObjectNoData() : void - Enum<Foo>").hasTextRegion(false);
+		interfaze.nextChild("toString() : String - Enum<Foo>").hasTextRegion(false);
 		
-		interfaze.nextChild("compareTo(Foo) : int - java.lang.Comparable").hasTextRegion(false);
+		interfaze.nextChild("compareTo(Foo) : int - Comparable<Foo>").hasTextRegion(false);
 		
-		interfaze.nextChild("registerNatives() : void - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("clone() : Object - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("equals(Object) : boolean - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("finalize() : void - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("getClass() : Class<?> - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("hashCode() : int - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("notify() : void - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("notifyAll() : void - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("toString() : String - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("wait() : void - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("wait(long) : void - java.lang.Object").hasTextRegion(false);
-		interfaze.nextChild("wait(long, int) : void - java.lang.Object").hasTextRegion(false);
+		interfaze.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		interfaze.nextChild("clone() : Object - Object").hasTextRegion(false);
+		interfaze.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
+		interfaze.nextChild("finalize() : void - Object").hasTextRegion(false);
+		interfaze.nextChild("getClass() : Class<?> - Object").hasTextRegion(false);
+		interfaze.nextChild("hashCode() : int - Object").hasTextRegion(false);
+		interfaze.nextChild("notify() : void - Object").hasTextRegion(false);
+		interfaze.nextChild("notifyAll() : void - Object").hasTextRegion(false);
+		interfaze.nextChild("toString() : String - Object").hasTextRegion(false);
+		interfaze.nextChild("wait() : void - Object").hasTextRegion(false);
+		interfaze.nextChild("wait(long) : void - Object").hasTextRegion(false);
+		interfaze.nextChild("wait(long, int) : void - Object").hasTextRegion(false);
 	}
 
 	private void checkExtendedMethods(AssertBuilder sub, String parentName) {
-		sub.child(0, "baz : Number - test." + parentName).numChildren(0).hasTextRegion(true);
-		sub.nextChild("bar : String - test.Super").numChildren(0).hasTextRegion(false);
-		sub.nextChild("foo : int - test.Super").numChildren(0).hasTextRegion(false);
-		sub.nextChild("registerNatives() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("clone() : Object - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("equals(Object) : boolean - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("finalize() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("getClass() : Class<?> - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("hashCode() : int - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("notify() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("notifyAll() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("toString() : String - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait(long) : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait(long, int) : void - java.lang.Object").hasTextRegion(false);
+		sub.child(0, "baz : Number - " + parentName).numChildren(0).hasTextRegion(true);
+		sub.nextChild("bar : String - Super").numChildren(0).hasTextRegion(false);
+		sub.nextChild("foo : int - Super").numChildren(0).hasTextRegion(false);
+		sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		sub.nextChild("clone() : Object - Object").hasTextRegion(false);
+		sub.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.nextChild("finalize() : void - Object").hasTextRegion(false);
+		sub.nextChild("getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.nextChild("hashCode() : int - Object").hasTextRegion(false);
+		sub.nextChild("notify() : void - Object").hasTextRegion(false);
+		sub.nextChild("notifyAll() : void - Object").hasTextRegion(false);
+		sub.nextChild("toString() : String - Object").hasTextRegion(false);
+		sub.nextChild("wait() : void - Object").hasTextRegion(false);
+		sub.nextChild("wait(long) : void - Object").hasTextRegion(false);
+		sub.nextChild("wait(long, int) : void - Object").hasTextRegion(false);
 	}
 
 	@Override
@@ -130,22 +130,22 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		sub = assertBuilder.child(1, "Foo - test").numChildren(16);
-		sub.child(0, "baz() : Number - test.Foo").numChildren(0).hasTextRegion(true);
-		sub.nextChild("toString() : String - test.Foo").numChildren(0).hasTextRegion(true);
-		sub.nextChild("bar() : String - test.Super").hasTextRegion(false);
-		sub.nextChild("foo(String) : int - test.Super").hasTextRegion(false);
-		sub.nextChild("registerNatives() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("clone() : Object - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("equals(Object) : boolean - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("finalize() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("getClass() : Class<?> - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("hashCode() : int - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("notify() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("notifyAll() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("toString() : String - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait(long) : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait(long, int) : void - java.lang.Object").hasTextRegion(false);
+		sub.child(0, "baz() : Number - Foo").numChildren(0).hasTextRegion(true);
+		sub.nextChild("toString() : String - Foo").numChildren(0).hasTextRegion(true);
+		sub.nextChild("bar() : String - Super").hasTextRegion(false);
+		sub.nextChild("foo(String) : int - Super").hasTextRegion(false);
+		sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		sub.nextChild("clone() : Object - Object").hasTextRegion(false);
+		sub.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.nextChild("finalize() : void - Object").hasTextRegion(false);
+		sub.nextChild("getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.nextChild("hashCode() : int - Object").hasTextRegion(false);
+		sub.nextChild("notify() : void - Object").hasTextRegion(false);
+		sub.nextChild("notifyAll() : void - Object").hasTextRegion(false);
+		sub.nextChild("toString() : String - Object").hasTextRegion(false);
+		sub.nextChild("wait() : void - Object").hasTextRegion(false);
+		sub.nextChild("wait(long) : void - Object").hasTextRegion(false);
+		sub.nextChild("wait(long, int) : void - Object").hasTextRegion(false);
 	}
 
 	@Override
@@ -164,21 +164,21 @@ public class JvmQuickOutlineTests extends QuickOutlineTests {
 		setShowInherited(true);
 		assertBuilder = newAssertBuilder(model).numChildren(2);
 		sub = assertBuilder.child(1, "Foo - test").numChildren(15).hasTextRegion(true);
-		sub.nextChild("_foo(Number) : void - test.Foo").hasTextRegion(true);
-		sub.nextChild("foo(Serializable) : void - test.Foo");
-		sub.nextChild("_foo(String) : void - test.Super").numChildren(0).hasTextRegion(false);
-		sub.nextChild("registerNatives() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("clone() : Object - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("equals(Object) : boolean - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("finalize() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("getClass() : Class<?> - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("hashCode() : int - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("notify() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("notifyAll() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("toString() : String - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait() : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait(long) : void - java.lang.Object").hasTextRegion(false);
-		sub.nextChild("wait(long, int) : void - java.lang.Object").hasTextRegion(false);
+		sub.nextChild("_foo(Number) : void - Foo").hasTextRegion(true);
+		sub.nextChild("foo(Serializable) : void - Foo");
+		sub.nextChild("_foo(String) : void - Super").numChildren(0).hasTextRegion(false);
+		sub.nextChild("registerNatives() : void - Object").hasTextRegion(false);
+		sub.nextChild("clone() : Object - Object").hasTextRegion(false);
+		sub.nextChild("equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.nextChild("finalize() : void - Object").hasTextRegion(false);
+		sub.nextChild("getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.nextChild("hashCode() : int - Object").hasTextRegion(false);
+		sub.nextChild("notify() : void - Object").hasTextRegion(false);
+		sub.nextChild("notifyAll() : void - Object").hasTextRegion(false);
+		sub.nextChild("toString() : String - Object").hasTextRegion(false);
+		sub.nextChild("wait() : void - Object").hasTextRegion(false);
+		sub.nextChild("wait(long) : void - Object").hasTextRegion(false);
+		sub.nextChild("wait(long, int) : void - Object").hasTextRegion(false);
 
 	}
 
