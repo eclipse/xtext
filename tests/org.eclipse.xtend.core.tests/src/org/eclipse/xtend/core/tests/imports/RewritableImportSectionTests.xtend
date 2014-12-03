@@ -8,23 +8,23 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
 import org.junit.Test
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider
 
 class RewritableImportSectionTest_0 extends AbstractRewritableImportSectionTest {
-	
+
 	override protected getModel(Class<? extends Object>[] types) '''
 		package foo
 		
-		«FOR type: types»
+		«FOR type : types»
 			import «type.canonicalName»
 		«ENDFOR»
 		
 		class Foo{}
 	'''
-	
+
 	override protected getExpectedModel(String sectionAsString) '''
 		package foo
 		
@@ -35,7 +35,7 @@ class RewritableImportSectionTest_0 extends AbstractRewritableImportSectionTest 
 }
 
 class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest {
-	
+
 	override protected getModel(Class<? extends Object>[] types) '''
 		«IF types.size > 0»
 			«FOR type: types»
@@ -45,7 +45,7 @@ class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest 
 		«ENDIF»
 		class Foo{}
 	'''
-	
+
 	override protected getExpectedModel(String sectionAsString) '''
 		«sectionAsString»
 		
@@ -54,22 +54,22 @@ class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest 
 }
 
 class RewritableImportSectionTest_2 extends AbstractRewritableImportSectionTest {
-	
+
 	override protected isIgnoreLinebreaks() {
 		// The RIS will insert newlines before and after the section depending on added / removed imports.
 		// It doesn't make sense to check for those, but we must make sure there is at least one whitespace
 		// to separate elements  
 		true
 	}
-	
+
 	override protected getModel(Class<? extends Object>[] types) '''
 		package foo
-		«FOR type: types»
+		«FOR type : types»
 			import «type.canonicalName»
 		«ENDFOR»
 		class Foo{}
 	'''
-	
+
 	override protected getExpectedModel(String sectionAsString) '''
 		package foo
 		«sectionAsString»
@@ -79,22 +79,45 @@ class RewritableImportSectionTest_2 extends AbstractRewritableImportSectionTest 
 }
 
 abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase {
-	
-	@Inject extension RewritableImportSection$Factory 
-	
+
+	@Inject extension RewritableImportSection.Factory
+
 	@Inject extension TypeReferences
-	
+
 	XtendFile xtendFile
-	
+
 	String model
-	
+
 	@Inject IWhitespaceInformationProvider whitespaceInformationProvider
-	
+
 	@Test def testSimpleAdd() {
 		val section = getSection(typeof(Set))
 		section.addImport(typeof(List))
 		section.assertEquals('''
 			import java.util.Set
+			import java.util.List
+		''')
+	}
+
+	@Test def testSimpleAddAsString() {
+		val section = getSection()
+		section.addImport("java.util.Set")
+		section.addImport("java.util.List")
+		section.assertEquals('''
+			import java.util.Set
+			import java.util.List
+		''')
+	}
+
+	@Test def testVariousAddAsString() {
+		val section = getSection()
+		section.addStaticExtensionImport('java.util.Set', '*')
+		section.addStaticImport('java.util.Collections', '*')
+		section.addStaticImport('org.eclipse.xtext.xbase.lib.InputOutput', 'println')
+		section.addImport('java.util.List')
+		section.assertEquals('''
+			import static extension java.util.Set.*
+			import static java.util.Collections.*
 			import java.util.List
 		''')
 	}
@@ -110,7 +133,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.List
 		''')
 	}
-	
+
 	@Test def testVariousAdd_2() {
 		val section = getSection()
 		section.addExtensionImport(typeof(Set))
@@ -121,7 +144,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.Set
 		''')
 	}
-	
+
 	@Test def testDoubleAdd() {
 		val section = getSection(typeof(List))
 		section.addImport(typeof(List))
@@ -130,7 +153,16 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.List
 		''')
 	}
-	
+
+	@Test def testDoubleAddAsString() {
+		val section = getSection()
+		section.addImport('java.util.List')
+		section.addImport('java.util.List')
+		section.assertEquals('''
+			import java.util.List
+		''')
+	}
+
 	@Test def testDoubleAdd_2() {
 		val section = getSection()
 		section.addExtensionImport(typeof(Collections))
@@ -139,7 +171,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import static extension java.util.Collections.*
 		''')
 	}
-	
+
 	@Test def testDoubleAdd_3() {
 		val section = getSection()
 		section.addStaticImport(typeof(Collections))
@@ -161,7 +193,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.Set
 			
 			import static java.util.Collections.*
-
+			
 			import static extension java.util.Set.*
 		''')
 	}
@@ -220,7 +252,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 			import java.util.List
 		''')
 	}
-	
+
 	@Test def testRemoveAdd_3() {
 		val section = getSection(typeof(List))
 		section.removeImport(typeof(List))
@@ -256,7 +288,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	def protected getImportSection(CharSequence model) {
 		parse(file(model.toString).eResource as XtextResource)
 	}
-	
+
 	def protected addImport(RewritableImportSection section, Class<?> javaClass) {
 		section.addImport(jvmType(javaClass))
 	}
@@ -285,7 +317,7 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 		val type = findDeclaredType(javaClass, xtendFile)
 		assertTrue(type instanceof JvmDeclaredType)
 		type as JvmDeclaredType
-	} 
+	}
 
 	def protected getSection(Class<?>... types) {
 		model = getModel(types).toString
@@ -296,24 +328,25 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 	def protected assertEquals(RewritableImportSection section, CharSequence sectionAsString) {
 		val builder = new StringBuilder(model)
 		val changes = section.rewrite
-		for(it: changes.sortBy[offset].reverse)
+		for (it : changes.sortBy[offset].reverse)
 			builder.replace(offset, offset + length, text)
-		assertEquals(getExpectedModel(sectionAsString.toString).processLinebreaks, builder.processLinebreaks)		
+		assertEquals(getExpectedModel(sectionAsString.toString).processLinebreaks, builder.processLinebreaks)
 	}
-	
+
 	def protected processLinebreaks(CharSequence sequence) {
-		val lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(xtendFile.eResource.URI).lineSeparator
-		if(ignoreLinebreaks)
+		val lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(xtendFile.eResource.URI).
+			lineSeparator
+		if (ignoreLinebreaks)
 			sequence.toString.replaceAll("(" + lineSeparator + ")+", " ")
 		else
 			sequence.toString
 	}
-	
+
 	def protected isIgnoreLinebreaks() {
 		false
 	}
-	
-	def protected CharSequence getModel(Class<? extends Object>[] types) 
-	
-	def protected CharSequence getExpectedModel(String sectionAsString) 
+
+	def protected CharSequence getModel(Class<? extends Object>[] types)
+
+	def protected CharSequence getExpectedModel(String sectionAsString)
 }
