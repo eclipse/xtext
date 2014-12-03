@@ -93,6 +93,8 @@ public interface IResourceDescription extends ISelectable {
 				throws IllegalArgumentException;
 
 		/**
+		 * Implement this interface if your language should be notified of all {@link Delta}s, even
+		 * if they don't contain any changed {@link EObjectDescription}s
 		 * @since 2.7
 		 */
 		interface AllChangeAware extends Manager {

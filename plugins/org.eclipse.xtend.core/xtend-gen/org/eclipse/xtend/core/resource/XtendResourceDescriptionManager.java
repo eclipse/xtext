@@ -56,6 +56,10 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
     return IterableExtensions.<IEObjectDescription>exists(_exportedObjects, _function);
   }
   
+  /**
+   * When an annotation processor changes, even if it is just its implementation, the downstream classes should be rebuilt. That is why we are interested even in
+   * deltas that have no changed EObjectDescriptions
+   */
   public boolean isAffectedByAny(final Collection<IResourceDescription.Delta> deltas, final IResourceDescription candidate, final IResourceDescriptions context) throws IllegalArgumentException {
     return this.isAffected(deltas, candidate, context);
   }
