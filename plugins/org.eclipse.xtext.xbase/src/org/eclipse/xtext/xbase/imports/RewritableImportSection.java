@@ -173,6 +173,11 @@ public class RewritableImportSection {
 				return fqn.substring(string.length()).lastIndexOf('.') > 0;
 			}
 		}
+		for (XImportDeclaration importDeclr : originalImportDeclarations) {
+			if (!importDeclr.isStatic() && fqn.equals(importDeclr.getImportedType().getIdentifier())) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -265,8 +270,21 @@ public class RewritableImportSection {
 	}
 
 	public boolean addStaticImport(String typeFqn, String member) {
+		if (hasStaticImport(typeFqn, member, false)) {
+			return false;
+		}
 		XImportDeclaration importDecl = createImport(typeFqn, member);
 		importDecl.setStatic(true);
+		return addedImportDeclarations.add(importDecl);
+	}
+
+	public boolean addStaticExtensionImport(String typeFqn, String member) {
+		if (hasStaticImport(typeFqn, member, true)) {
+			return false;
+		}
+		XImportDeclaration importDecl = createImport(typeFqn, member);
+		importDecl.setStatic(true);
+		importDecl.setExtension(true);
 		return addedImportDeclarations.add(importDecl);
 	}
 
@@ -529,4 +547,21 @@ public class RewritableImportSection {
 		return false;
 	}
 
+	private boolean hasStaticImport(String typeName, String memberName, boolean extension) {
+		if (extension) {
+			return hasStaticImport(staticExtensionImports, typeName, memberName);
+		}
+		return hasStaticImport(staticImports, typeName, memberName);
+	}
+
+	private boolean hasStaticImport(Map<JvmDeclaredType, Set<String>> imports, String typeName, String memberName) {
+		for (JvmDeclaredType type : imports.keySet()) {
+			if (type.getIdentifier().equals(typeName)) {
+				Set<String> members = imports.get(type);
+				//TODO if members contains a null entry it's probably a wildcard import, handle this
+				return members != null && members.contains(memberName);
+			}
+		}
+		return false;
+	}
 }
