@@ -101,7 +101,6 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 			fragment = parser.ParserGenerator auto-inject {
-				antlrParam = "-Xconversiontimeout" antlrParam = "20000"
 				options = auto-inject {}
 			}
 			fragment = DebugAntlrGeneratorFragment auto-inject {
@@ -125,7 +124,6 @@ Workflow {
 			fragment = parser.ContentAssistParserGenerator auto-inject {
 				removeBacktrackingGuards = true
 				lookaheadThreshold = '5'
-				antlrParam = "-Xconversiontimeout" antlrParam = "20000"
 				options = auto-inject {
 					classSplitting = true
 				}
@@ -151,7 +149,6 @@ Workflow {
 				additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 			}
 	        fragment = parser.XtendAntlrIDEAGeneratorFragment auto-inject {
-				antlrParam = "-Xconversiontimeout" antlrParam = "20000"
 			}
     		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
     			runtimeProjectName = projectName
