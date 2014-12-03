@@ -7,7 +7,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 
 @SuppressWarnings("all")
 public class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest {
-  protected CharSequence getModel(final Class<?>[] types) {
+  protected CharSequence getModel(final boolean isStatic, final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();
     {
       int _size = ((List<Class<?>>)Conversions.doWrapArray(types)).size();
@@ -15,10 +15,20 @@ public class RewritableImportSectionTest_1 extends AbstractRewritableImportSecti
       if (_greaterThan) {
         {
           for(final Class<?> type : types) {
-            _builder.append("import ");
-            String _canonicalName = type.getCanonicalName();
-            _builder.append(_canonicalName, "");
-            _builder.newLineIfNotEmpty();
+            {
+              if (isStatic) {
+                _builder.append("import static ");
+                String _canonicalName = type.getCanonicalName();
+                _builder.append(_canonicalName, "");
+                _builder.append(".*");
+                _builder.newLineIfNotEmpty();
+              } else {
+                _builder.append("import ");
+                String _canonicalName_1 = type.getCanonicalName();
+                _builder.append(_canonicalName_1, "");
+                _builder.newLineIfNotEmpty();
+              }
+            }
           }
         }
         _builder.newLine();
