@@ -283,6 +283,8 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 			walker.traverse(root, false);
 			if (walker.getBundleSymbolicName() != null)
 				data.uriPrefix = URI.createPlatformResourceURI(walker.getBundleSymbolicName()+"/", true);
+		} catch (RuntimeException e) {
+			log.error(e.getMessage(), e);
 		} catch (JavaModelException e) {
 			log.error(e.getMessage(), e);
 		}
