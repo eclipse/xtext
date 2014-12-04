@@ -34,11 +34,17 @@ public class UniqueNameUtil {
 			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current", "fragment", "EOF" });
 
 	public static String uniqueName(ENamedElement element) {
-		return uniqueName(element, element.getName(), element2uniqueName);
+		String name = element.getName();
+		if (name == null)
+			name = element.eClass().getName();
+		return uniqueName(element, name, element2uniqueName);
 	}
 
 	public static String uniqueImplName(ENamedElement element) {
-		return uniqueName(element, element.getName() + IMPL_NAME_SUFFIX, element2uniqueImplName);
+		String name = element.getName();
+		if (name == null)
+			name = element.eClass().getName();
+		return uniqueName(element, name + IMPL_NAME_SUFFIX, element2uniqueImplName);
 	}
 
 	private static String uniqueName(ENamedElement element, String originalName,
@@ -54,7 +60,7 @@ public class UniqueNameUtil {
 		uniqueNameMap.put(element, uniqueName);
 		return uniqueName;
 	}
-
+	
 	public static void clearUniqueNames(EPackageInfo defaultPackageInfo) {
 		element2uniqueName.clear();
 		element2uniqueImplName.clear();

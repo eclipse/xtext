@@ -164,7 +164,8 @@ public class Ecore2XtextExtensions {
       }
     };
     Iterable<EPackage> _map = IterableExtensions.<EClassifier, EPackage>map(_allReferencedClassifiers, _function);
-    return IterableExtensions.<EPackage>toSet(_map);
+    Iterable<EPackage> _filterNull = IterableExtensions.<EPackage>filterNull(_map);
+    return IterableExtensions.<EPackage>toSet(_filterNull);
   }
   
   public static Set<EClassifier> allReferencedClassifiers(final EPackage ePack, final boolean includeCrossRefs) {
@@ -256,7 +257,10 @@ public class Ecore2XtextExtensions {
   public static String fqn(final EClassifier it) {
     String _xifexpression = null;
     EPackage _ePackage = it.getEPackage();
-    String _uniqueName = UniqueNameUtil.uniqueName(_ePackage);
+    String _uniqueName = null;
+    if (_ePackage!=null) {
+      _uniqueName=UniqueNameUtil.uniqueName(_ePackage);
+    }
     boolean _equals = Objects.equal(_uniqueName, null);
     if (_equals) {
       String _name = it.getName();
@@ -662,7 +666,10 @@ public class Ecore2XtextExtensions {
   
   public static boolean isEcoreType(final EClassifier it) {
     EPackage _ePackage = it.getEPackage();
-    String _nsURI = _ePackage.getNsURI();
+    String _nsURI = null;
+    if (_ePackage!=null) {
+      _nsURI=_ePackage.getNsURI();
+    }
     return Objects.equal(_nsURI, "http://www.eclipse.org/emf/2002/Ecore");
   }
   
@@ -808,16 +815,24 @@ public class Ecore2XtextExtensions {
    * EPackage.EClassifiers.typeSelect(EClass).select(c|c.EAllSuperTypes.contains(this));
    */
   public static Iterable<EClass> subClasses(final EClass it) {
+    Iterable<EClass> _xifexpression = null;
     EPackage _ePackage = it.getEPackage();
-    EList<EClassifier> _eClassifiers = _ePackage.getEClassifiers();
-    Iterable<EClass> _filter = Iterables.<EClass>filter(_eClassifiers, EClass.class);
-    final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
-      public Boolean apply(final EClass c) {
-        EList<EClass> _eAllSuperTypes = c.getEAllSuperTypes();
-        return Boolean.valueOf(_eAllSuperTypes.contains(it));
-      }
-    };
-    return IterableExtensions.<EClass>filter(_filter, _function);
+    boolean _equals = Objects.equal(_ePackage, null);
+    if (_equals) {
+      _xifexpression = CollectionLiterals.<EClass>emptyList();
+    } else {
+      EPackage _ePackage_1 = it.getEPackage();
+      EList<EClassifier> _eClassifiers = _ePackage_1.getEClassifiers();
+      Iterable<EClass> _filter = Iterables.<EClass>filter(_eClassifiers, EClass.class);
+      final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
+        public Boolean apply(final EClass c) {
+          EList<EClass> _eAllSuperTypes = c.getEAllSuperTypes();
+          return Boolean.valueOf(_eAllSuperTypes.contains(it));
+        }
+      };
+      _xifexpression = IterableExtensions.<EClass>filter(_filter, _function);
+    }
+    return _xifexpression;
   }
   
   /**
