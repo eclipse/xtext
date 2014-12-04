@@ -12,7 +12,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 
 import com.google.common.annotations.Beta;
 
@@ -24,7 +23,7 @@ import com.google.common.annotations.Beta;
  * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
-public interface TypeLookup {
+public interface TypeLookup extends GlobalTypeLookup {
 
 	/**
 	 * @param qualifiedName
@@ -63,21 +62,4 @@ public interface TypeLookup {
 	 *         <code>CompilationUnit</code>
 	 */
 	MutableAnnotationTypeDeclaration findAnnotationType(String qualifiedName);
-
-	/**
-	 * @param clazz
-	 *            the clazz representing the type to look up
-	 * @return the type with the same qualified name as the given
-	 *         <code>Class</code> object, or <code>null</code> if that type
-	 *         couldn't be found on the compilation units classpath.
-	 */
-	Type findTypeGlobally(Class<?> clazz);
-
-	/**
-	 * @param typeName
-	 *            the qualified name of the type to look up. Nested class delimiter is expected to be the '.' (dot).
-	 * @return the type with the given qualified name, or <code>null</code> if such a type
-	 *         couldn't be found on the compilation units classpath.
-	 */
-	Type findTypeGlobally(String typeName);
 }
