@@ -9,6 +9,8 @@ package org.eclipse.xtend.lib.macro;
 
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
+import org.eclipse.xtend.lib.macro.services.GlobalTypeLookup;
+import org.eclipse.xtend.lib.macro.services.Tracability;
 
 import com.google.common.annotations.Beta;
 
@@ -21,6 +23,6 @@ import com.google.common.annotations.Beta;
  * @noimplement This interface is not intended to be implemented by clients.
  */
 @Beta
-public interface CodeGenerationContext extends MutableFileSystemSupport, FileLocations {
+public interface CodeGenerationContext extends MutableFileSystemSupport, FileLocations, GlobalTypeLookup, Tracability {
 
 }

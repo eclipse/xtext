@@ -9,12 +9,17 @@ package org.eclipse.xtend.core.macro;
 
 import java.io.InputStream;
 import java.net.URI;
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
+import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtend.lib.macro.services.GlobalTypeLookup;
+import org.eclipse.xtend.lib.macro.services.Tracability;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -23,92 +28,130 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class CodeGenerationContextImpl implements CodeGenerationContext {
   @Accessors
+  private CompilationUnitImpl unit;
+  
   @Delegate
-  private MutableFileSystemSupport fileSystemSupport;
-  
-  @Accessors
-  @Delegate
-  private FileLocations fileLocations;
-  
-  @Pure
-  public MutableFileSystemSupport getFileSystemSupport() {
-    return this.fileSystemSupport;
-  }
-  
-  public void setFileSystemSupport(final MutableFileSystemSupport fileSystemSupport) {
-    this.fileSystemSupport = fileSystemSupport;
-  }
-  
-  @Pure
   public FileLocations getFileLocations() {
-    return this.fileLocations;
+    return this.unit.getFileLocations();
   }
   
-  public void setFileLocations(final FileLocations fileLocations) {
-    this.fileLocations = fileLocations;
+  @Delegate
+  public MutableFileSystemSupport getFileSystemSupport() {
+    return this.unit.getFileSystemSupport();
   }
   
-  public void delete(final Path path) {
-    this.fileSystemSupport.delete(path);
+  @Delegate
+  public GlobalTypeLookup getGlobalTypeLookup() {
+    return this.unit.getTypeLookup();
   }
   
-  public void mkdir(final Path path) {
-    this.fileSystemSupport.mkdir(path);
+  @Delegate
+  public Tracability getTracability() {
+    return this.unit.getTracability();
   }
   
-  public void setContents(final Path path, final CharSequence contents) {
-    this.fileSystemSupport.setContents(path, contents);
+  @Pure
+  public CompilationUnitImpl getUnit() {
+    return this.unit;
   }
   
-  public void setContentsAsStream(final Path path, final InputStream source) {
-    this.fileSystemSupport.setContentsAsStream(path, source);
-  }
-  
-  public boolean exists(final Path path) {
-    return this.fileSystemSupport.exists(path);
-  }
-  
-  public String getCharset(final Path path) {
-    return this.fileSystemSupport.getCharset(path);
-  }
-  
-  public Iterable<? extends Path> getChildren(final Path path) {
-    return this.fileSystemSupport.getChildren(path);
-  }
-  
-  public CharSequence getContents(final Path path) {
-    return this.fileSystemSupport.getContents(path);
-  }
-  
-  public InputStream getContentsAsStream(final Path path) {
-    return this.fileSystemSupport.getContentsAsStream(path);
-  }
-  
-  public long getLastModification(final Path path) {
-    return this.fileSystemSupport.getLastModification(path);
-  }
-  
-  public boolean isFile(final Path path) {
-    return this.fileSystemSupport.isFile(path);
-  }
-  
-  public boolean isFolder(final Path path) {
-    return this.fileSystemSupport.isFolder(path);
-  }
-  
-  public URI toURI(final Path path) {
-    return this.fileSystemSupport.toURI(path);
+  public void setUnit(final CompilationUnitImpl unit) {
+    this.unit = unit;
   }
   
   public Path getProjectFolder(final Path path) {
-    return this.fileLocations.getProjectFolder(path);
+    return this.getFileLocations().getProjectFolder(path);
   }
   
   public Path getSourceFolder(final Path path) {
-    return this.fileLocations.getSourceFolder(path);
+    return this.getFileLocations().getSourceFolder(path);
   }
   
   public Path getTargetFolder(final Path sourceFolder) {
-    return this.fileLocations.getTargetFolder(sourceFolder);
+    return this.getFileLocations().getTargetFolder(sourceFolder);
+  }
+  
+  public void delete(final Path path) {
+    this.getFileSystemSupport().delete(path);
+  }
+  
+  public void mkdir(final Path path) {
+    this.getFileSystemSupport().mkdir(path);
+  }
+  
+  public void setContents(final Path path, final CharSequence contents) {
+    this.getFileSystemSupport().setContents(path, contents);
+  }
+  
+  public void setContentsAsStream(final Path path, final InputStream source) {
+    this.getFileSystemSupport().setContentsAsStream(path, source);
+  }
+  
+  public boolean exists(final Path path) {
+    return this.getFileSystemSupport().exists(path);
+  }
+  
+  public String getCharset(final Path path) {
+    return this.getFileSystemSupport().getCharset(path);
+  }
+  
+  public Iterable<? extends Path> getChildren(final Path path) {
+    return this.getFileSystemSupport().getChildren(path);
+  }
+  
+  public CharSequence getContents(final Path path) {
+    return this.getFileSystemSupport().getContents(path);
+  }
+  
+  public InputStream getContentsAsStream(final Path path) {
+    return this.getFileSystemSupport().getContentsAsStream(path);
+  }
+  
+  public long getLastModification(final Path path) {
+    return this.getFileSystemSupport().getLastModification(path);
+  }
+  
+  public boolean isFile(final Path path) {
+    return this.getFileSystemSupport().isFile(path);
+  }
+  
+  public boolean isFolder(final Path path) {
+    return this.getFileSystemSupport().isFolder(path);
+  }
+  
+  public URI toURI(final Path path) {
+    return this.getFileSystemSupport().toURI(path);
+  }
+  
+  public Type findTypeGlobally(final Class<?> clazz) {
+    return this.getGlobalTypeLookup().findTypeGlobally(clazz);
+  }
+  
+  public Type findTypeGlobally(final String typeName) {
+    return this.getGlobalTypeLookup().findTypeGlobally(typeName);
+  }
+  
+  public Element getPrimaryGeneratedJavaElement(final Element source) {
+    return this.getTracability().getPrimaryGeneratedJavaElement(source);
+  }
+  
+  public Element getPrimarySourceElement(final Element target) {
+    return this.getTracability().getPrimarySourceElement(target);
+  }
+  
+  public boolean isExternal(final Element element) {
+    return this.getTracability().isExternal(element);
+  }
+  
+  public boolean isGenerated(final Element element) {
+    return this.getTracability().isGenerated(element);
+  }
+  
+  public boolean isSource(final Element element) {
+    return this.getTracability().isSource(element);
+  }
+  
+  public boolean isThePrimaryGeneratedJavaElement(final Element target) {
+    return this.getTracability().isThePrimaryGeneratedJavaElement(target);
   }
 }

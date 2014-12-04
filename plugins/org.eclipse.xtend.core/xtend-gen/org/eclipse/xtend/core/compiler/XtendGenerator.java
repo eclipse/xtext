@@ -32,8 +32,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.CodeGenerationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
-import org.eclipse.xtend.lib.macro.file.FileLocations;
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -107,11 +105,7 @@ public class XtendGenerator extends JvmModelGenerator {
               final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
                 public void apply(final CodeGenerationContextImpl it) {
                   CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                  MutableFileSystemSupport _fileSystemSupport = _compilationUnit.getFileSystemSupport();
-                  it.setFileSystemSupport(_fileSystemSupport);
-                  CompilationUnitImpl _compilationUnit_1 = context.getCompilationUnit();
-                  FileLocations _fileLocations = _compilationUnit_1.getFileLocations();
-                  it.setFileLocations(_fileLocations);
+                  it.setUnit(_compilationUnit);
                 }
               };
               final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
