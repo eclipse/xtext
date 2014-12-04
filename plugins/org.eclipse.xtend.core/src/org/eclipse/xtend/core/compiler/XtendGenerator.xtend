@@ -60,8 +60,7 @@ class XtendGenerator extends JvmModelGenerator {
 					switch processor : context.processorInstance {
 						CodeGenerationParticipant<NamedElement> : {
 							val codeGenServices = new CodeGenerationContextImpl => [
-								fileSystemSupport = context.compilationUnit.fileSystemSupport
-								fileLocations = context.compilationUnit.fileLocations
+								unit = context.compilationUnit
 							]
 							val elements = context.annotatedSourceElements.map[context.compilationUnit.toXtendMemberDeclaration(it as XtendMember)]
 							processor.doGenerateCode(elements, codeGenServices)
