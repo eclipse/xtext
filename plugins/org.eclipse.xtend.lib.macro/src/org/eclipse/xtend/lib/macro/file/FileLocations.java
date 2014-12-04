@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.file;
 
+import java.util.Set;
+
 import com.google.common.annotations.Beta;
 
 /**
@@ -48,4 +50,11 @@ public interface FileLocations {
 	 * @return the project's root
 	 */
 	Path getProjectFolder(Path path);
+	
+	/**
+	 * @param path an absolute path
+	 * @return the source folders of the project the given path is contained in
+	 * @since 2.8
+	 */
+	Set<Path> getProjectSourceFolders(Path path);
 }
