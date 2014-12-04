@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Delegate;
@@ -290,6 +291,10 @@ public class TransformationContextImpl implements TransformationContext {
   
   public Path getProjectFolder(final Path path) {
     return this.getFileLocations().getProjectFolder(path);
+  }
+  
+  public Set<Path> getProjectSourceFolders(final Path path) {
+    return this.getFileLocations().getProjectSourceFolders(path);
   }
   
   public Path getSourceFolder(final Path path) {

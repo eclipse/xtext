@@ -55,4 +55,10 @@ class FileLocationsImpl implements FileLocations {
 		val config = getProjectConfig(path)
 		return config.rootPath
 	}
+	
+	override getProjectSourceFolders(Path path) {
+		val config = getProjectConfig(path)
+		return config.sourceFolderMappings.keySet.immutableCopy
+	}
+	
 }

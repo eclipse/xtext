@@ -12,6 +12,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -236,6 +237,10 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   
   public Path getProjectFolder(final Path path) {
     return this.getFileLocations().getProjectFolder(path);
+  }
+  
+  public Set<Path> getProjectSourceFolders(final Path path) {
+    return this.getFileLocations().getProjectSourceFolders(path);
   }
   
   public Path getSourceFolder(final Path path) {

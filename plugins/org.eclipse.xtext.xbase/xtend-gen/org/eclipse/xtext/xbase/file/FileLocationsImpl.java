@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.file;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
@@ -72,6 +73,13 @@ public class FileLocationsImpl implements FileLocations {
   public Path getProjectFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
     return config.getRootPath();
+  }
+  
+  public Set<Path> getProjectSourceFolders(final Path path) {
+    final ProjectConfig config = this.getProjectConfig(path);
+    Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
+    Set<Path> _keySet = _sourceFolderMappings.keySet();
+    return ImmutableSet.<Path>copyOf(_keySet);
   }
   
   @Pure
