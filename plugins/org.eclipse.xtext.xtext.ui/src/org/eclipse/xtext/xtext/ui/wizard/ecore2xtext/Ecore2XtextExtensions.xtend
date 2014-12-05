@@ -60,7 +60,7 @@ class Ecore2XtextExtensions {
 	 *  allReferencedClassifiers(includeCrossRefs).EPackage.toSet();
 	 */
 	def static allReferencedEPackages(EPackage ePack, boolean includeCrossRefs) {
-		allReferencedClassifiers(ePack,includeCrossRefs).map([EPackage]).toSet
+		allReferencedClassifiers(ePack,includeCrossRefs).map[EPackage].filterNull.toSet
 	}
 
 	// EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).add(eString()).toSet();
@@ -98,7 +98,7 @@ class Ecore2XtextExtensions {
 
 	
 	def static fqn(EClassifier it) {
-		if (EPackage.uniqueName == null) 
+		if (EPackage?.uniqueName == null) 
 			quoteIfNeccesary(name)
 		else 
 			EPackage.uniqueName + "::" + quoteIfNeccesary(name)
@@ -229,7 +229,7 @@ def static isString(EClassifier it) {
 }
 
 def static isEcoreType(EClassifier it) {
-	EPackage.nsURI == "http://www.eclipse.org/emf/2002/Ecore";
+	EPackage?.nsURI == "http://www.eclipse.org/emf/2002/Ecore";
 }
 
 def static boolean isID(EStructuralFeature it) {
@@ -285,7 +285,10 @@ def static boolean isID(EStructuralFeature it) {
 		EPackage.EClassifiers.typeSelect(EClass).select(c|c.EAllSuperTypes.contains(this));	
  	*/
 	def static subClasses(EClass it) {
-		EPackage.EClassifiers.filter(EClass).filter(c|c.EAllSuperTypes.contains(it));
+		if (EPackage == null)
+			emptyList
+		else
+			EPackage.EClassifiers.filter(EClass).filter(c|c.EAllSuperTypes.contains(it));
 	}
 
 	/*
