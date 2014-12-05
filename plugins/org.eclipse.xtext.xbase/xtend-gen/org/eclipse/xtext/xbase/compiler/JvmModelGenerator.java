@@ -1843,12 +1843,12 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected void _toJavaLiteral(final JvmCustomAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    EList<Object> _values = it.getValues();
+    EList<EObject> _values = it.getValues();
     boolean _isEmpty = _values.isEmpty();
     if (_isEmpty) {
       appendable.append("{}");
     } else {
-      EList<Object> _values_1 = it.getValues();
+      EList<EObject> _values_1 = it.getValues();
       Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values_1, XExpression.class);
       final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
         public void apply(final XExpression it) {

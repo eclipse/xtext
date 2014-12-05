@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.typesystem.util.PendingLinkingCandidateResolver
 import org.eclipse.xtext.xbase.typesystem.util.TypeLiteralLinkingCandidateResolver
 import org.eclipse.xtext.xtype.XComputedTypeReference
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
 
 /**
  * An interpreter for evaluating constant expressions in annotation values.
@@ -215,9 +216,16 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			}
 		return Conversions.unwrapArray(elements, componentType)
 	}
+	
+	protected def isResolveProxies(EObject ctx) {
+		return switch res: ctx.eResource {
+			StorageAwareResource: res.isLoadedFromStorage 
+			default : false
+		}
+	}
 
 	def dispatch Object internalEvaluate(XFeatureCall it, Context ctx) {
-		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false) as EObject
+		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, resolveProxies) as EObject
 		if (!feature.eIsProxy) {
 			return switch feature {
 				JvmEnumerationLiteral: feature
@@ -291,7 +299,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	}
 
 	def dispatch Object internalEvaluate(XMemberFeatureCall it, Context ctx) {
-		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false) as EObject
+		val feature = eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, isResolveProxies) as EObject
 		if (!feature.eIsProxy) {
 			return switch feature {
 				JvmEnumerationLiteral: feature

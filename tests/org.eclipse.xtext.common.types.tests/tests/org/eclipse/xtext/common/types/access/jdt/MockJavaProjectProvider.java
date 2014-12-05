@@ -160,17 +160,17 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 			project.open(null);
 			project.setDescription(projectDescription, null);
 
-			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType").append(JREContainerProvider.PREFERRED_BREE)));
 			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins")));
 
 			javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 					null);
+			JavaProjectSetupUtil.addJreClasspathEntry(javaProject);
 			
 			makeJava5Compliant(javaProject);
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
 			createManifest(projectName, project);
-//			project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+
 			refreshExternalArchives(javaProject);
 			refresh(javaProject);
 		}

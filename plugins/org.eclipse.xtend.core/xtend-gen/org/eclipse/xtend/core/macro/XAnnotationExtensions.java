@@ -229,8 +229,8 @@ public class XAnnotationExtensions {
     if (!_matched) {
       if (annoVal instanceof JvmCustomAnnotationValue) {
         _matched=true;
-        EList<Object> _values_1 = ((JvmCustomAnnotationValue)annoVal).getValues();
-        Object _head = IterableExtensions.<Object>head(_values_1);
+        EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annoVal).getValues();
+        EObject _head = IterableExtensions.<EObject>head(_values_1);
         JvmOperation _operation = ((JvmCustomAnnotationValue)annoVal).getOperation();
         JvmTypeReference _returnType = null;
         if (_operation!=null) {
