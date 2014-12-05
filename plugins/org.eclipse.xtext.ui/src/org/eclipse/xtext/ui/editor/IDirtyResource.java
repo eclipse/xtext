@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 
 /**
  * Representation of a resource that is currently edited. The accessible 
@@ -41,6 +42,7 @@ public interface IDirtyResource {
 
 	/**
 	 * An extension interface for {@link IDirtyResource}
+	 * 
 	 * @since 2.4
 	 */
 	interface NormalizedURISupportExtension extends IDirtyResource {
@@ -48,5 +50,23 @@ public interface IDirtyResource {
 		 * @return the normalized URI of the resource, never <code>null</code>.
 		 */
 		URI getNormalizedURI();
+	}
+	
+	/**
+	 * An extension interface for {@link IDirtyResource}
+	 * 
+	 * @since 2.8
+	 * 
+	 * Still provisional
+	 * 
+	 * @noreference This interface is not intended to be referenced by clients.
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 */
+	interface ICurrentStateProvidingExtension {
+		
+		/**
+		 * @noreference This method is not intended to be referenced by clients.
+		 */
+		public ResourceStorageLoadable getResourceStorageLoadable(); 
 	}
 }

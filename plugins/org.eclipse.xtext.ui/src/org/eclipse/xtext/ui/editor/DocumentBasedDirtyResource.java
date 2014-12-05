@@ -12,6 +12,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -20,12 +21,13 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, Provider<IResourceDescription> {
+public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension, Provider<IResourceDescription> {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
 	private String content;
 	private URI normalizedUri;
+	private Provider<ResourceStorageLoadable> storageAwareResourceInputStreamProvider;
 	
 	public void connect(IXtextDocument document) {
 		if (document == null)
@@ -151,5 +153,21 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	public URI getNormalizedURI() {
 		return normalizedUri;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public ResourceStorageLoadable getResourceStorageLoadable() {
+		if (this.storageAwareResourceInputStreamProvider == null)
+			return null;
+		return this.storageAwareResourceInputStreamProvider.get();
+	}
 
+	/**
+	 * @since 2.8
+	 */
+	public void setResourceStorageLoadableProvider(Provider<ResourceStorageLoadable> provider) {
+		this.storageAwareResourceInputStreamProvider = provider;
+	}
 }

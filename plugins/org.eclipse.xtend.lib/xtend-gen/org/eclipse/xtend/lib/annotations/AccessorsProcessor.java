@@ -2,6 +2,7 @@ package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -180,11 +181,45 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public List<String> getPossibleGetterNames(final FieldDeclaration it) {
-      List<String> _xifexpression = null;
+      final ArrayList<String> names = CollectionLiterals.<String>newArrayList();
+      boolean _and = false;
+      boolean _and_1 = false;
+      boolean _and_2 = false;
       TypeReference _type = it.getType();
       TypeReference _orObject = this.orObject(_type);
       boolean _isBooleanType = this.isBooleanType(_orObject);
-      if (_isBooleanType) {
+      if (!_isBooleanType) {
+        _and_2 = false;
+      } else {
+        String _simpleName = it.getSimpleName();
+        boolean _startsWith = _simpleName.startsWith("is");
+        _and_2 = _startsWith;
+      }
+      if (!_and_2) {
+        _and_1 = false;
+      } else {
+        String _simpleName_1 = it.getSimpleName();
+        int _length = _simpleName_1.length();
+        boolean _greaterThan = (_length > 2);
+        _and_1 = _greaterThan;
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        String _simpleName_2 = it.getSimpleName();
+        char _charAt = _simpleName_2.charAt(2);
+        boolean _isUpperCase = Character.isUpperCase(_charAt);
+        _and = _isUpperCase;
+      }
+      if (_and) {
+        String _simpleName_3 = it.getSimpleName();
+        names.add(_simpleName_3);
+      }
+      List<String> _xifexpression = null;
+      TypeReference _type_1 = it.getType();
+      TypeReference _orObject_1 = this.orObject(_type_1);
+      boolean _isBooleanType_1 = this.isBooleanType(_orObject_1);
+      if (_isBooleanType_1) {
         _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("is", "get"));
       } else {
         _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("get"));
@@ -196,7 +231,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           return (prefix + _firstUpper);
         }
       };
-      return ListExtensions.<String, String>map(_xifexpression, _function);
+      List<String> _map = ListExtensions.<String, String>map(_xifexpression, _function);
+      names.addAll(_map);
+      return names;
     }
     
     public boolean isBooleanType(final TypeReference it) {

@@ -216,8 +216,15 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   }
   
   public void registerAllTypes(final JvmType type, final Function1<? super String, ? extends Boolean> acceptor) {
+    boolean _or = false;
     boolean _equals = Objects.equal(type, null);
     if (_equals) {
+      _or = true;
+    } else {
+      boolean _eIsProxy = type.eIsProxy();
+      _or = _eIsProxy;
+    }
+    if (_or) {
       return;
     }
     boolean _and = false;
