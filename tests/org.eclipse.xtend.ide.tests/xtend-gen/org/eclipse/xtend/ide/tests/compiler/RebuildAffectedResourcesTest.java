@@ -2,6 +2,7 @@ package org.eclipse.xtend.ide.tests.compiler;
 
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -35,14 +37,26 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
   
+  private Set<IResource> cleanUp = CollectionLiterals.<IResource>newHashSet();
+  
+  public <T extends IResource> T registerForCleanUp(final T t) {
+    this.cleanUp.add(t);
+    return t;
+  }
+  
   @Rule
   public StopwatchRule rule = new StopwatchRule(true);
   
   @After
   public void tearDown() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      _project.delete(true, null);
+      this.workbenchTestHelper.tearDown();
+      for (final IResource res : this.cleanUp) {
+        boolean _exists = res.exists();
+        if (_exists) {
+          res.delete(true, null);
+        }
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -272,8 +286,9 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   @Test
   public void testChangeInAnnotationProcessor() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      final IJavaProject macroProject = JavaCore.create(_project);
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-anno"));
+      IProject _registerForCleanUp = this.<IProject>registerForCleanUp(_createPluginProject);
+      final IJavaProject macroProject = JavaCore.create(_registerForCleanUp);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package anno");
       _builder.newLine();
@@ -284,7 +299,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("annotation Anno {}");
       _builder.newLine();
-      this.workbenchTestHelper.createFile("anno/Anno.xtend", _builder.toString());
+      this.createFile(macroProject, "src/anno/Anno.xtend", _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package anno");
       _builder_1.newLine();
@@ -305,17 +320,12 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      final IFile processorClass = this.workbenchTestHelper.createFile("anno/AnnoProcessor.xtend", _builder_1.toString());
-      IProject _project_1 = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project_1, "anno");
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
-      final IJavaProject clientProject = JavaCore.create(_createPluginProject);
+      final IFile processorClass = this.createFile(macroProject, "src/anno/AnnoProcessor.xtend", _builder_1.toString());
+      IProject _project = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project, "anno");
+      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
+      final IJavaProject clientProject = JavaCore.create(_createPluginProject_1);
       JavaProjectSetupUtil.addProjectReference(clientProject, macroProject);
-      IProject _project_2 = clientProject.getProject();
-      IPath _fullPath = _project_2.getFullPath();
-      String _string = _fullPath.toString();
-      String _plus = (_string + "/src/");
-      String _plus_1 = (_plus + "Foo.xtend");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("import anno.Anno");
       _builder_2.newLine();
@@ -337,7 +347,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      final IFile clientClass = this.workbenchTestHelper.createFileImpl(_plus_1, _builder_2.toString());
+      final IFile clientClass = this.createFile(clientProject, "src/Foo.xtend", _builder_2.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertHasErrors(clientClass, "- cannot be resolved");
       StringConcatenation _builder_3 = new StringConcatenation();
@@ -367,8 +377,8 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       processorClass.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
-      IProject _project_3 = clientProject.getProject();
-      WorkbenchTestHelper.deleteProject(_project_3);
+      IProject _project_1 = clientProject.getProject();
+      WorkbenchTestHelper.deleteProject(_project_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -377,8 +387,9 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   @Test
   public void testChangeInResourceReadFromAnnotationProcessor() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      final IJavaProject macroProject = JavaCore.create(_project);
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-anno"));
+      IProject _registerForCleanUp = this.<IProject>registerForCleanUp(_createPluginProject);
+      final IJavaProject macroProject = JavaCore.create(_registerForCleanUp);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package anno");
       _builder.newLine();
@@ -442,27 +453,18 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this.workbenchTestHelper.createFile("anno/Anno.xtend", _builder.toString());
-      IProject _project_1 = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project_1, "anno");
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
-      final IJavaProject clientProject = JavaCore.create(_createPluginProject);
+      this.createFile(macroProject, "src/anno/Anno.xtend", _builder.toString());
+      IProject _project = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project, "anno");
+      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
+      IProject _registerForCleanUp_1 = this.<IProject>registerForCleanUp(_createPluginProject_1);
+      final IJavaProject clientProject = JavaCore.create(_registerForCleanUp_1);
       JavaProjectSetupUtil.addProjectReference(clientProject, macroProject);
-      IProject _project_2 = clientProject.getProject();
-      IPath _fullPath = _project_2.getFullPath();
-      String _string = _fullPath.toString();
-      String _plus = (_string + "/src/");
-      String _plus_1 = (_plus + "constants.txt");
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("A");
       _builder_1.newLine();
       _builder_1.append("B");
-      final IFile constants = this.workbenchTestHelper.createFileImpl(_plus_1, _builder_1.toString());
-      IProject _project_3 = clientProject.getProject();
-      IPath _fullPath_1 = _project_3.getFullPath();
-      String _string_1 = _fullPath_1.toString();
-      String _plus_2 = (_string_1 + "/src/");
-      String _plus_3 = (_plus_2 + "Foo.xtend");
+      final IFile constants = this.createFile(clientProject, "src/constants.txt", _builder_1.toString());
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("import anno.Anno");
       _builder_2.newLine();
@@ -481,7 +483,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      final IFile fooClass = this.workbenchTestHelper.createFileImpl(_plus_3, _builder_2.toString());
+      final IFile fooClass = this.createFile(clientProject, "src/Foo.xtend", _builder_2.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertHasErrors(fooClass, "C is undefined");
       StringConcatenation _builder_3 = new StringConcatenation();
@@ -494,8 +496,8 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       constants.setContents(_stringInputStream, true, true, null);
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
-      IProject _project_4 = clientProject.getProject();
-      WorkbenchTestHelper.deleteProject(_project_4);
+      IProject _project_1 = clientProject.getProject();
+      WorkbenchTestHelper.deleteProject(_project_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -504,8 +506,9 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   @Test
   public void testChangeJavaClassLookedUpInAnnotationProcessor() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      final IJavaProject macroProject = JavaCore.create(_project);
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-macro"));
+      IProject _registerForCleanUp = this.<IProject>registerForCleanUp(_createPluginProject);
+      final IJavaProject macroProject = JavaCore.create(_registerForCleanUp);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package anno");
       _builder.newLine();
@@ -545,23 +548,19 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this.workbenchTestHelper.createFile("anno/Anno.xtend", _builder.toString());
+      this.createFile(macroProject, "src/anno/Anno.xtend", _builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package anno");
       _builder_1.newLine();
       _builder_1.append("class B {}");
       _builder_1.newLine();
-      this.workbenchTestHelper.createFile("anno/B.xtend", _builder_1.toString());
-      IProject _project_1 = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project_1, "anno");
-      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
-      final IJavaProject clientProject = JavaCore.create(_createPluginProject);
+      this.createFile(macroProject, "src/anno/B.xtend", _builder_1.toString());
+      IProject _project = macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project, "anno");
+      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject((WorkbenchTestHelper.TESTPROJECT_NAME + "-client"));
+      IProject _registerForCleanUp_1 = this.<IProject>registerForCleanUp(_createPluginProject_1);
+      final IJavaProject clientProject = JavaCore.create(_registerForCleanUp_1);
       JavaProjectSetupUtil.addProjectReference(clientProject, macroProject);
-      IProject _project_2 = clientProject.getProject();
-      IPath _fullPath = _project_2.getFullPath();
-      String _string = _fullPath.toString();
-      String _plus = (_string + "/src/");
-      String _plus_1 = (_plus + "Foo.xtend");
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("import anno.Anno");
       _builder_2.newLine();
@@ -580,7 +579,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      final IFile fooClass = this.workbenchTestHelper.createFileImpl(_plus_1, _builder_2.toString());
+      final IFile fooClass = this.createFile(clientProject, "src/Foo.xtend", _builder_2.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertHasErrors(fooClass, "bar is undefined");
       StringConcatenation _builder_3 = new StringConcatenation();
@@ -593,11 +592,24 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       _builder_3.newLine();
       _builder_3.append("}");
       _builder_3.newLine();
-      this.workbenchTestHelper.createFile("anno/A.xtend", _builder_3.toString());
+      this.createFile(macroProject, "src/anno/A.xtend", _builder_3.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
-      IProject _project_3 = clientProject.getProject();
-      WorkbenchTestHelper.deleteProject(_project_3);
+      IProject _project_1 = clientProject.getProject();
+      WorkbenchTestHelper.deleteProject(_project_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public IFile createFile(final IJavaProject jp, final String path, final String contents) {
+    try {
+      IProject _project = jp.getProject();
+      IPath _fullPath = _project.getFullPath();
+      String _string = _fullPath.toString();
+      String _plus = (_string + "/");
+      String _plus_1 = (_plus + path);
+      return this.workbenchTestHelper.createFileImpl(_plus_1, contents);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

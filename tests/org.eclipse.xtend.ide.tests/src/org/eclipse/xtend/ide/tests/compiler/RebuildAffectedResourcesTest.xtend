@@ -1,13 +1,16 @@
 package org.eclipse.xtend.ide.tests.compiler
 
 import com.google.inject.Inject
+import java.util.Set
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Rule
@@ -16,18 +19,28 @@ import org.junit.Test
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
-import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
-import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.core.IJavaProject
 
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;
 	
+	private Set<IResource> cleanUp = newHashSet();
+	
+	def <T extends IResource> T registerForCleanUp(T t) {
+		cleanUp.add(t)
+		return t
+	}
+	
 	@Rule public StopwatchRule rule = new StopwatchRule(true)
 	
 	@After override void tearDown() {
-		workbenchTestHelper.project.delete(true, null)
+		workbenchTestHelper.tearDown
+		for (res : cleanUp) {
+			if (res.exists)
+				res.delete(true, null)
+		}
 	}
 	
 	@Test def void testRemoveReferencedType() {
@@ -163,15 +176,15 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testChangeInAnnotationProcessor() {
-		val macroProject = JavaCore.create(workbenchTestHelper.project)
-		workbenchTestHelper.createFile('anno/Anno.xtend', '''
+		val macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-anno").registerForCleanUp)
+		macroProject.createFile('src/anno/Anno.xtend', '''
 			package anno
 			import org.eclipse.xtend.lib.macro.Active
 			
 			@Active(AnnoProcessor)
 			annotation Anno {}
 		''')
-		val processorClass = workbenchTestHelper.createFile('anno/AnnoProcessor.xtend', '''
+		val processorClass = macroProject.createFile('src/anno/AnnoProcessor.xtend', '''
 			package anno
 			import org.eclipse.xtend.lib.macro.AbstractFieldProcessor
 			import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
@@ -186,7 +199,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		
 		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client"))
 		JavaProjectSetupUtil.addProjectReference(clientProject, macroProject)
-		val clientClass = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'Foo.xtend', '''
+		val clientClass = clientProject.createFile('src/Foo.xtend', '''
 			import anno.Anno
 			class Foo {
 				@Anno String foo
@@ -218,8 +231,8 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testChangeInResourceReadFromAnnotationProcessor() {
-		val macroProject = JavaCore.create(workbenchTestHelper.project)
-		workbenchTestHelper.createFile('anno/Anno.xtend', '''
+		val macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-anno").registerForCleanUp)
+		macroProject.createFile('src/anno/Anno.xtend', '''
 			package anno
 			import com.google.common.base.Splitter
 			import java.util.regex.Pattern
@@ -249,12 +262,12 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		''')
 		WorkbenchTestHelper.addExportedPackages(macroProject.project, "anno")
 		
-		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client"))
+		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client").registerForCleanUp)
 		JavaProjectSetupUtil.addProjectReference(clientProject, macroProject)
-		val constants = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'constants.txt', '''
+		val constants = clientProject.createFile('src/constants.txt', '''
 			A
 			B''')
-		val fooClass = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'Foo.xtend', '''
+		val fooClass = clientProject.createFile('src/Foo.xtend', '''
 			import anno.Anno
 			@Anno
 			class Foo {
@@ -277,8 +290,8 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testChangeJavaClassLookedUpInAnnotationProcessor() {
-		val macroProject = JavaCore.create(workbenchTestHelper.project)
-		workbenchTestHelper.createFile('anno/Anno.xtend', '''
+		val macroProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-macro").registerForCleanUp)
+		macroProject.createFile('src/anno/Anno.xtend', '''
 			package anno
 			import org.eclipse.xtend.lib.macro.Active
 			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
@@ -297,15 +310,15 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		workbenchTestHelper.createFile('anno/B.xtend', '''
+		macroProject.createFile('src/anno/B.xtend', '''
 			package anno
 			class B {}
 		''')
 		WorkbenchTestHelper.addExportedPackages(macroProject.project, "anno")
 		
-		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client"))
+		val clientProject = JavaCore.create(WorkbenchTestHelper.createPluginProject(WorkbenchTestHelper.TESTPROJECT_NAME + "-client").registerForCleanUp)
 		JavaProjectSetupUtil.addProjectReference(clientProject, macroProject)
-		val fooClass = workbenchTestHelper.createFileImpl(clientProject.project.fullPath.toString + "/src/" + 'Foo.xtend', '''
+		val fooClass = clientProject.createFile('src/Foo.xtend', '''
 			import anno.Anno
 			@Anno
 			class Foo {
@@ -317,7 +330,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		waitForAutoBuild
 		fooClass.assertHasErrors("bar is undefined")
 		
-		workbenchTestHelper.createFile('anno/A.xtend', '''
+		macroProject.createFile('src/anno/A.xtend', '''
 			package anno
 			class A {
 				def bar() {}
@@ -328,18 +341,22 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		WorkbenchTestHelper.deleteProject(clientProject.project)
 	}
 	
+	def IFile createFile(IJavaProject jp, String path, String contents) {
+		workbenchTestHelper.createFileImpl(jp.project.fullPath.toString + "/"+ path, contents)
+	}
+	
 	
 	def void assertNoErrorsInWorkspace() {
-		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
+		val findMarkers = ResourcesPlugin.workspace.root.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
-			assertFalse(iMarker.message, iMarker.severity == IMarker::SEVERITY_ERROR)
+			assertFalse(iMarker.message, iMarker.severity == IMarker.SEVERITY_ERROR)
 		}
 	}
 	
 	def void assertHasErrors(IFile file, String msgPart) {
-		val findMarkers = file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
+		val findMarkers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
-			if (iMarker.severity == IMarker::SEVERITY_ERROR && iMarker.message.contains(msgPart)) {
+			if (iMarker.severity == IMarker.SEVERITY_ERROR && iMarker.message.contains(msgPart)) {
 				return;
 			}
 		}

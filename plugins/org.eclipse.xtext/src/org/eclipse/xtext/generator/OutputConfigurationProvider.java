@@ -11,11 +11,13 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.resource.Resource;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public class OutputConfigurationProvider implements IOutputConfigurationProvider {
+public class OutputConfigurationProvider implements IOutputConfigurationProvider, IContextualOutputConfigurationProvider {
 
 	/**
 	 * @return a set of {@link OutputConfiguration} available for the generator
@@ -31,5 +33,13 @@ public class OutputConfigurationProvider implements IOutputConfigurationProvider
 		defaultOutput.setSetDerivedProperty(true);
 		defaultOutput.setKeepLocalHistory(true);
 		return newHashSet(defaultOutput);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public Set<OutputConfiguration> getOutputConfigurations(Resource context) {
+		return getOutputConfigurations();
 	}
 }
