@@ -43,6 +43,7 @@ import org.eclipse.xtext.ui.generator.ImplicitUiFragment;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -222,7 +223,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			if (res == null || res.getContents().isEmpty())
 				LOG.error("Error loading '" + loadedResource + "'");
 			else if (!res.getErrors().isEmpty())
-				LOG.error("Error loading '" + loadedResource + "': " + res.getErrors().toString());
+				LOG.error("Error loading '" + loadedResource + "':\n" + Joiner.on('\n').join(res.getErrors()));
 		}
 		EcoreUtil.resolveAll(rs);
 		XtextResource resource = (XtextResource) rs.getResource(URI.createURI(uri), true);
@@ -231,7 +232,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		}
 		if (!resource.getErrors().isEmpty()) {
 			LOG.error(resource.getErrors());
-			throw new IllegalStateException("Problem parsing '"+uri+"':"+resource.getErrors().toString());
+			throw new IllegalStateException("Problem parsing '" + uri + "':\n" + Joiner.on('\n').join(resource.getErrors()));
 		}
 
 		final Grammar grammar = (Grammar) resource.getContents().get(0);
