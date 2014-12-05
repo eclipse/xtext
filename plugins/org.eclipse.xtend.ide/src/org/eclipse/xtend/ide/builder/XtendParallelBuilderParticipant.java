@@ -64,6 +64,7 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 		if (!getResourceServiceProvider().canHandle(delta.getUri()))
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
+		saveResourceStorage(resource, access);
 		IFile file = getFile(resource, context);
 		if (file != null) {
 			getGenerator().doGenerate(resource, access);

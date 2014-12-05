@@ -30,7 +30,9 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Assert;
 
 import com.google.common.io.ByteStreams;
 
@@ -52,6 +54,13 @@ public class IResourcesSetupUtil {
 			project.create(monitor());
 		project.open(monitor());
 		return project;
+	}
+	
+	public static void assertNoErrorsInWorkspace() throws CoreException {
+		IMarker[] findMarkers = ResourcesPlugin.getWorkspace().getRoot().findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+		for (IMarker iMarker : findMarkers) {
+			Assert.assertFalse(MarkerUtilities.getMarkerType(iMarker)+"-"+MarkerUtilities.getMessage(iMarker), MarkerUtilities.getSeverity(iMarker) == IMarker.SEVERITY_ERROR);
+		}
 	}
 
 	public static void addNature(IProject project, String nature)

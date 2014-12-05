@@ -5,13 +5,12 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.builder.clustering.CurrentDescriptions
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
-import org.eclipse.xtend.lib.annotations.Data
 
 class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
@@ -25,32 +24,8 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	override getResourceDescriptions(ResourceSet resourceSet) {
 		val result = super.getResourceDescriptions(resourceSet)
 		val project = projectProvider.getJavaProject(resourceSet)
-		switch result {
-			CurrentDescriptions.ResourceSetAware : {
-				switch result.delegate {
-					// in the builder we don't want to see upstream Xtend files.
-					CurrentDescriptions : {
-						// we expect platform:/resource URIs here, where the second segment denotes the project's name.
-						val encodedProjectName = URI.encodeSegment(project.project.name, true)
-						if (compilerPhases.isIndexing(resourceSet)) {
-							// during indexing we don't want to see any local files at all
-							return new FilteringResourceDescriptions(result, [ uri |
-								if (uri == null || uri.segmentCount<2)
-									return false
-								return uri.segment(1) != encodedProjectName && uri.fileExtension != 'xtend'
-							])
-						}
-						return new FilteringResourceDescriptions(result, [ uri |
-							if (uri == null || uri.segmentCount<2)
-								return false
-							return uri.segment(1) == encodedProjectName || uri.fileExtension != 'xtend'
-						])
-					}
-				}
-			}
-		}
 		if (compilerPhases.isIndexing(resourceSet)) {
-			// during indexing we don't want to see any local xtend files
+			// during indexing we don't want to see any local files
 			val encodedProjectName = URI.encodeSegment(project.project.name, true)
 			return new FilteringResourceDescriptions(result, [ uri |
 				// we expect platform://resource URIs here, where the second segment denotes the project's name.
