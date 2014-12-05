@@ -31,6 +31,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;

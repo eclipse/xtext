@@ -43,6 +43,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 	protected void handleChangedContents(Delta delta, IBuildContext context, IFileSystemAccess access)
 			throws CoreException {
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
+		saveResourceStorage(resource, access);
 		if (shouldGenerate(resource, context)) {
 			getGenerator().doGenerate(resource, access);
 		}
