@@ -31,10 +31,13 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.builder.ParallelBuilderParticipant;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.FileSystemAccessQueue;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
@@ -64,6 +67,9 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 		if (!getResourceServiceProvider().canHandle(delta.getUri()))
 			return;
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
+		if (resource instanceof StorageAwareResource && access instanceof IFileSystemAccessExtension3) {
+			((StorageAwareResource) resource).getStorage().saveResource((StorageAwareResource)resource, (IFileSystemAccessExtension3)access);
+		}
 		IFile file = getFile(resource, context);
 		if (file != null) {
 			getGenerator().doGenerate(resource, access);

@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
@@ -76,8 +77,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       if (annotationValue instanceof JvmCustomAnnotationValue) {
         _matched=true;
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-        EList<Object> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
-        Object _head = IterableExtensions.<Object>head(_values_1);
+        EList<EObject> _values_1 = ((JvmCustomAnnotationValue)annotationValue).getValues();
+        EObject _head = IterableExtensions.<EObject>head(_values_1);
         return _compilationUnit.toExpression(((XExpression) _head));
       }
     }

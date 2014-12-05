@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
@@ -621,7 +622,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmCustomAnnotationValue it, final XtendAnnotationReferenceImpl value, final String componentType, final boolean mustBeArray) {
-    EList<Object> _values = it.getValues();
+    EList<EObject> _values = it.getValues();
     XAnnotation _delegate = value.getDelegate();
     _values.add(_delegate);
   }
