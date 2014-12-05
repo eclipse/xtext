@@ -34,6 +34,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
@@ -93,6 +94,9 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 		if (resource.isValidationDisabled()) {
 			highlightSpecialIdentifiers(acceptor, parseResult.getRootNode());
 			return;
+		}
+		if (resource instanceof DerivedStateAwareResource) {
+			resource.getContents(); // trigger derived state computation
 		}
 		doProvideHighlightingFor(resource, acceptor);
 	}

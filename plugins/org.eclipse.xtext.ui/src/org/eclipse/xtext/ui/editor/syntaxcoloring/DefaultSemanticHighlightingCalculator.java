@@ -17,6 +17,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tasks.ITaskFinder;
 import org.eclipse.xtext.tasks.Task;
@@ -39,6 +40,9 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null || parseResult.getRootASTElement() == null)
 			return;
+		if (resource instanceof DerivedStateAwareResource) {
+			resource.getContents(); // trigger derived state computation
+		}
 		doProvideHighlightingFor(resource, acceptor);
 	}
 
