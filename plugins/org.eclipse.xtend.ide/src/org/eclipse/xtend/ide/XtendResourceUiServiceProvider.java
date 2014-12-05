@@ -7,18 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide;
 
+import static java.util.Collections.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
+import org.eclipse.jdt.internal.core.JarEntryFile;
 import org.eclipse.jdt.internal.core.util.Util;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
 import com.google.inject.Inject;
@@ -28,6 +34,9 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("restriction")
 public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProvider {
+	
+	@Inject 
+	private ResourceStorageFacade resourceStorageFacade;
 
 	@Inject
 	public XtendResourceUiServiceProvider(IResourceServiceProvider delegate) {
@@ -47,6 +56,10 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 			IProject project = file.getProject();
 			IJavaProject javaProject = JavaCore.create(project);
 			return isInSourceFolder(javaProject, file);
+		}
+		// also load and index if it has storage data attached
+		if (new ExtensibleURIConverterImpl().exists(resourceStorageFacade.getBinaryStrorageURI(uri), emptyMap())) {
+			return true;
 		}
 		return false;
 	}

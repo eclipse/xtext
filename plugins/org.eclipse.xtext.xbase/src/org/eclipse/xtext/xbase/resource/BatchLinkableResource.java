@@ -110,7 +110,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 						return null;
 					}
 				}
-				return basicGetEObject(uriFragment);
+				return super.getEObject(uriFragment);
 			} catch (RuntimeException e) {
 				operationCanceledManager.propagateAsErrorIfCancelException(e);
 				getErrors().add(new ExceptionDiagnostic(e));
@@ -131,7 +131,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	@Override
 	public EList<EObject> getContents() {
 		synchronized (getLock()) {
-			if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized) {
+			if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage) {
 				try {
 					eSetDeliver(false);
 					installDerivedState(false);
