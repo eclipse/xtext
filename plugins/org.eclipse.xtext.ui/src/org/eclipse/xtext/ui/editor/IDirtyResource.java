@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
@@ -48,5 +49,14 @@ public interface IDirtyResource {
 		 * @return the normalized URI of the resource, never <code>null</code>.
 		 */
 		URI getNormalizedURI();
+	}
+	
+	/**
+	 * An extension interface for {@link IDirtyResource}
+	 * @since 2.8
+	 */
+	interface ICurrentStateProvidingExtension {
+		
+		public void installState(Resource unloadedResource); 
 	}
 }
