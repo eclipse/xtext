@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.tests.editor
 import com.google.inject.Inject
 import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jface.text.source.Annotation
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
@@ -19,6 +20,8 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Test
+
+import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -66,6 +69,76 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		editor.document.set(content)
 		editor.waitForReconciler()
 		editor.assertNumberOfErrorAnnotations(0)
+	}
+	
+	@Test def void testBug410575() {
+		val projectA = JavaCore.create(createPluginProject("projectA", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.lib"))
+		addExportedPackages(projectA.project, "mypack")
+		JavaCore.create(createPluginProject("projectB", "projectA" , "org.eclipse.xtext.xbase.lib"))
+		val declaration = createFileImpl('projectA/src/mypack/MyClass.xtend', '''
+			package mypack
+			
+			import org.eclipse.xtend.lib.macro.Data
+			
+			@Data class MyClass {
+				String myProperty
+			}
+		''')
+		
+		val file = createFileImpl('projectB/src/otherpack/OtherClass.xtend', '''
+			package otherpack
+			
+			class OtherClass {
+				def void myMethod() {
+					val my = new mypack.MyClass("hello")
+					println(my.getMyProperty())
+				}
+			}
+		''')
+		waitForBuild(null)
+		val markers = file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
+		if (markers.length > 0) {
+			fail(markers.map[getAttribute(IMarker.MESSAGE)].join(','))
+		}
+		
+		val editor = openEditor(declaration)
+		editor.document.set('''
+			package mypack
+			
+			import org.eclipse.xtend.lib.macro.Data
+			
+			@Data class MyClass {
+				boolean foo
+			}
+		''')
+		editor.waitForReconciler()
+		editor.assertNumberOfErrorAnnotations(0)
+		
+		val editor2 = openEditor(file)
+		editor2.waitForReconciler()
+		editor2.assertNumberOfErrorAnnotations(2)
+		editor2.document.set('''
+			package otherpack
+			
+			class OtherClass {
+				def void myMethod() {
+					val my = new mypack.MyClass("hello")
+					println(my.getMyProperty())
+				}
+			}
+		''')
+		editor2.waitForReconciler()
+		editor2.assertNumberOfErrorAnnotations(0)
+		
+		// finally assure that @Data is really not directly visible from editor2
+		editor2.document.set('''
+			package otherpack
+			
+			@org.eclipse.xtend.lib.macro.Data class OtherClass {
+			}
+		''')
+		editor2.waitForReconciler()
+		editor2.assertNumberOfErrorAnnotations(1)
 	}
 	
 	/**
@@ -231,7 +304,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 	private def assertNumberOfErrorAnnotations(XtextEditor editor, int expectedNumber) {
 		helper.awaitUIUpdate([editor.errorAnnotations.size == expectedNumber], VALIDATION_TIMEOUT)
 		val errors = editor.errorAnnotations
-		assertEquals(errors.toString, expectedNumber, errors.size)
+		assertEquals(errors.map[text + "("+ persistent +")"].join(', '), expectedNumber, errors.size)
 	}
 	
 	private def getErrorAnnotations(XtextEditor editor) {
