@@ -165,11 +165,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.7
 	 */
 	protected void postParse(XtextResource resource, final IProgressMonitor monitor) throws OperationCanceledError, OperationCanceledException {
-		if (editor != null) {
-			DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
-			if (dirtyStateEditorSupport != null)
-				dirtyStateEditorSupport.announceDirtyState(resource);
-		}
 		CancelIndicator cancelIndicator = new CancelIndicator() {
 			@Override
 			public boolean isCanceled() {
@@ -181,6 +176,11 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 				((DerivedStateAwareResource) resource).installDerivedState(false);
 			if (resource instanceof IBatchLinkableResource) {
 				((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
+			}
+			if (editor != null) {
+				DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
+				if (dirtyStateEditorSupport != null)
+					dirtyStateEditorSupport.announceDirtyState(resource);
 			}
 		} catch(OperationCanceledException e) {
 			throw e;

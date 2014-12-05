@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -60,16 +59,7 @@ public class DirtyStateResourceDescription extends AbstractResourceDescription {
 		
 		@Override
 		public IResourceDescription getResourceDescription(Resource resource) {
-			try {
-				resource.eSetDeliver(false);
-				if (resource instanceof DerivedStateAwareResource)
-					((DerivedStateAwareResource) resource).installDerivedState(true);
-				return createResourceDescription(resource);
-			} finally {
-				if (resource instanceof DerivedStateAwareResource)
-					((DerivedStateAwareResource) resource).discardDerivedState();
-				resource.eSetDeliver(true);
-			}
+			return createResourceDescription(resource);
 		}
 
 		protected IResourceDescription createResourceDescription(Resource resource) {

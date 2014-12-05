@@ -43,6 +43,7 @@ import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -403,8 +404,11 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
 		List<IResourceDescription.Delta> result = newArrayList();
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
-			if (resourceServiceProvider.canHandle(delta.getUri()))
+			if (resourceServiceProvider.canHandle(delta.getUri())
+					&& (resourceServiceProvider instanceof IResourceServiceProviderExtension) 
+					&& !((IResourceServiceProviderExtension)resourceServiceProvider).isReadOnly(delta.getUri())) {
 				result.add(delta);
+			}
 		}
 		return result;
 	}
