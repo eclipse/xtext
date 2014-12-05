@@ -158,8 +158,14 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 			possibleGetterNames.head
 		}
 		
-		def getPossibleGetterNames(FieldDeclaration it) {
-			(if(type.orObject.isBooleanType) #["is", "get"] else #["get"]).map[prefix|prefix + simpleName.toFirstUpper]
+		def List<String> getPossibleGetterNames(FieldDeclaration it) {
+			val names = newArrayList
+			// common case: a boolean field already starts with 'is'. Allow field name as getter method name
+			if (type.orObject.isBooleanType && simpleName.startsWith('is') && simpleName.length>2 && Character.isUpperCase(simpleName.charAt(2))) {
+				names += simpleName
+			}
+			names.addAll((if(type.orObject.isBooleanType) #["is", "get"] else #["get"]).map[prefix|prefix + simpleName.toFirstUpper])
+			return names
 		}
 
 		def isBooleanType(TypeReference it) {
