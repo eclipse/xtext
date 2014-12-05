@@ -81,7 +81,7 @@ public class WorkbenchTestHelper extends Assert {
 			"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit");
 
 	private Set<IFile> files = newHashSet();
-
+	
 	@Inject
 	private XtextEditorInfo editorInfo;
 
@@ -100,7 +100,8 @@ public class WorkbenchTestHelper extends Assert {
 	private boolean isLazyCreatedProject = false;
 
 	public void tearDown() throws Exception {
-		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+		if (workbench.getActiveWorkbenchWindow() != null)
+			workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		new WorkspaceModifyOperation() {
 
 			@Override
@@ -118,7 +119,7 @@ public class WorkbenchTestHelper extends Assert {
 				if (binFolder.exists()) {
 					for (IResource binMember : binFolder.members()) {
 						try {
-							binMember.delete(IResource.DEPTH_INFINITE, null);
+							binMember.delete(true, null);
 						} catch (Exception exc) {
 							throw new RuntimeException(exc);
 						}
@@ -130,6 +131,7 @@ public class WorkbenchTestHelper extends Assert {
 				}
 			}
 		}.run(null);
+		IResourcesSetupUtil.waitForAutoBuild();
 	}
 
 	public Set<IFile> getFiles() {
