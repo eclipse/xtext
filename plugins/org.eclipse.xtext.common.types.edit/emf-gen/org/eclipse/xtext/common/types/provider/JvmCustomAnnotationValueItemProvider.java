@@ -13,10 +13,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -75,7 +76,7 @@ public class JvmCustomAnnotationValueItemProvider extends JvmAnnotationValueItem
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
 				 null,
 				 null));
 	}

@@ -17,6 +17,7 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
@@ -165,11 +166,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	 * @since 2.7
 	 */
 	protected void postParse(XtextResource resource, final IProgressMonitor monitor) throws OperationCanceledError, OperationCanceledException {
-		if (editor != null) {
-			DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
-			if (dirtyStateEditorSupport != null)
-				dirtyStateEditorSupport.announceDirtyState(resource);
-		}
 		CancelIndicator cancelIndicator = new CancelIndicator() {
 			@Override
 			public boolean isCanceled() {
@@ -181,6 +177,17 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 				((DerivedStateAwareResource) resource).installDerivedState(false);
 			if (resource instanceof IBatchLinkableResource) {
 				((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
+			}
+			EcoreUtil2.resolveLazyCrossReferences(resource, new CancelIndicator() {
+				@Override
+				public boolean isCanceled() {
+					return monitor.isCanceled();
+				}
+			});
+			if (editor != null) {
+				DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
+				if (dirtyStateEditorSupport != null)
+					dirtyStateEditorSupport.announceDirtyState(resource);
 			}
 		} catch(OperationCanceledException e) {
 			throw e;

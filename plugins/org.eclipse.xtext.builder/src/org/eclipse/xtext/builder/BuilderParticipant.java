@@ -37,13 +37,17 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2.IFileCallback;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
@@ -396,15 +400,18 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	protected boolean isEnabled(final IBuildContext context) {
 		return builderPreferenceAccess.isAutoBuildEnabled(context.getBuiltProject());
 	}
-
+	
 	/**
 	 * @since 2.3
 	 */
 	protected List<IResourceDescription.Delta> getRelevantDeltas(IBuildContext context) {
 		List<IResourceDescription.Delta> result = newArrayList();
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
-			if (resourceServiceProvider.canHandle(delta.getUri()))
+			if (resourceServiceProvider.canHandle(delta.getUri())
+					&& (resourceServiceProvider instanceof IResourceServiceProviderExtension) 
+					&& !((IResourceServiceProviderExtension)resourceServiceProvider).isReadOnly(delta.getUri())) {
 				result.add(delta);
+			}
 		}
 		return result;
 	}
@@ -513,6 +520,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			EclipseResourceFileSystemAccess2 fileSystemAccess) throws CoreException {
 		// TODO: we will run out of memory here if the number of deltas is large enough
 		Resource resource = context.getResourceSet().getResource(delta.getUri(), true);
+		saveResourceStorage(resource, fileSystemAccess);
 		if (shouldGenerate(resource, context)) {
 			try {
 				registerCurrentSourceFolder(context, delta, fileSystemAccess);
@@ -592,5 +600,17 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			outputs.add(output);
 		}
 		return outputs;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void saveResourceStorage(Resource resource, IFileSystemAccess access) {
+		if (resource instanceof StorageAwareResource && access instanceof IFileSystemAccessExtension3) {
+			IResourceStorageFacade storageFacade = ((StorageAwareResource) resource).getResourceStorageFacade();
+			if (storageFacade != null) {
+				storageFacade.saveResource((StorageAwareResource)resource, (IFileSystemAccessExtension3)access);
+			}
+		}
 	}
 }
