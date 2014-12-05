@@ -4353,16 +4353,16 @@ public interface TypesPackage extends EPackage
 	EClass getJvmCustomAnnotationValue();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues <em>Values</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Values</em>'.
 	 * @see org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues()
 	 * @see #getJvmCustomAnnotationValue()
 	 * @generated
-	 * @since 2.1
+	 * @since 2.8
 	 */
-	EAttribute getJvmCustomAnnotationValue_Values();
+	EReference getJvmCustomAnnotationValue_Values();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmInnerTypeReference <em>Jvm Inner Type Reference</em>}'.
@@ -5566,7 +5566,7 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 * @since 2.1
 		 */
-		EAttribute JVM_CUSTOM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmCustomAnnotationValue_Values();
+		EReference JVM_CUSTOM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmCustomAnnotationValue_Values();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmInnerTypeReferenceImpl <em>Jvm Inner Type Reference</em>}' class.

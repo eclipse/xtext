@@ -35,14 +35,20 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   @Inject
   private WorkbenchTestHelper workbenchTestHelper;
   
+  @Inject
+  private IWorkspace workspace;
+  
   @Rule
   public StopwatchRule rule = new StopwatchRule(true);
   
   @After
   public void tearDown() {
     try {
-      IProject _project = this.workbenchTestHelper.getProject();
-      _project.delete(true, null);
+      IWorkspaceRoot _root = this.workspace.getRoot();
+      IProject[] _projects = _root.getProjects();
+      for (final IProject p : _projects) {
+        p.delete(true, true, null);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

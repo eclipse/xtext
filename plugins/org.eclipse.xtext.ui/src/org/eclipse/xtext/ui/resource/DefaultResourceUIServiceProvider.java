@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
@@ -14,10 +16,12 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
@@ -25,12 +29,15 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider, IResourceUIServiceProviderExtension {
+public class DefaultResourceUIServiceProvider implements IResourceServiceProviderExtension, IResourceUIServiceProvider, IResourceUIServiceProviderExtension {
 
 	private IResourceServiceProvider delegate;
 	
 	@Inject
 	private IJdtHelper jdtHelper;
+	
+	@Inject
+	private IStorage2UriMapper storage2UriMapper;
 
 	@Inject
 	public DefaultResourceUIServiceProvider(IResourceServiceProvider delegate) {
@@ -142,5 +149,26 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	@Override
 	public <T> T get(Class<T> t) {
 		return delegate.get(t);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public boolean isReadOnly(URI uri) {
+		if (delegate instanceof IResourceServiceProviderExtension) {
+			if (((IResourceServiceProviderExtension) delegate).isReadOnly(uri))
+				return true;
+		}
+		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(uri);
+		for (Pair<IStorage, IProject> pair : storages) {
+			IStorage storage = pair.getFirst();
+			if (storage instanceof IFile) {
+				return storage.isReadOnly();
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 }
