@@ -42,11 +42,19 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.IVMInstall2;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.collect.Lists;
+import com.google.common.io.ByteStreams;
+import com.google.common.primitives.Bytes;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -78,6 +86,22 @@ public class JavaProjectSetupUtil {
 				jo.putNextEntry(je);
 				byte[] bytes = textFile.content.getBytes();
 				jo.write(bytes, 0, bytes.length);
+			}
+			jo.close();
+			return new ByteArrayInputStream(out2.toByteArray());
+		} catch (IOException e) {
+			throw new WrappedException(e);
+		}
+	}
+	
+	public static InputStream jarInputStream(Pair<String, InputStream> ...entries) {
+		try {
+			ByteArrayOutputStream out2 = new ByteArrayOutputStream();
+			JarOutputStream jo = new JarOutputStream(new BufferedOutputStream(out2));
+			for (Pair<String, InputStream> entry : entries) {
+				JarEntry je = new JarEntry(entry.getKey());
+				jo.putNextEntry(je);
+				ByteStreams.copy(entry.getValue(), jo);
 			}
 			jo.close();
 			return new ByteArrayInputStream(out2.toByteArray());
@@ -274,9 +298,36 @@ public class JavaProjectSetupUtil {
 	}
 	
 	public static void addJreClasspathEntry(IJavaProject javaProject) throws JavaModelException {
+		// init default mappings
+		makeJava7Default();
 		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
 		if (existingJreContainerClasspathEntry == null) {
 			addToClasspath(javaProject, JREContainerProvider.getDefaultJREContainerEntry());
+		}
+	}
+
+	
+	private static boolean isJava7Default = false;
+	
+	public static void makeJava7Default() {
+		if (!isJava7Default) {
+			IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
+			IExecutionEnvironment[] environments = manager.getExecutionEnvironments();
+			for (int i = 0; i < environments.length; i++) {
+				IExecutionEnvironment environment = environments[i];
+				if (environment.getId().equals("JavaSE-1.6") && environment.getDefaultVM() == null) {
+					IVMInstall[] compatibleVMs = environment.getCompatibleVMs();
+					for (IVMInstall ivmInstall : compatibleVMs) {
+						if (ivmInstall instanceof IVMInstall2) {
+							IVMInstall2 install2 = (IVMInstall2) ivmInstall;
+							if (install2.getJavaVersion().startsWith("1.7")) {
+								environment.setDefaultVM(ivmInstall);
+							}
+						}
+					}
+				}
+			}
+			isJava7Default = true;
 		}
 	}
 	
