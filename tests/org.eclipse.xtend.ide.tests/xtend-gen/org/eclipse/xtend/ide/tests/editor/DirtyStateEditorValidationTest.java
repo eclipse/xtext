@@ -35,7 +35,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -405,9 +407,19 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
     };
     this.helper.awaitUIUpdate(_function, DirtyStateEditorValidationTest.VALIDATION_TIMEOUT);
     final List<Annotation> errors = this.getErrorAnnotations(editor);
-    String _string = errors.toString();
+    final Function1<Annotation, String> _function_1 = new Function1<Annotation, String>() {
+      public String apply(final Annotation it) {
+        String _text = it.getText();
+        String _plus = (_text + "(");
+        boolean _isPersistent = it.isPersistent();
+        String _plus_1 = (_plus + Boolean.valueOf(_isPersistent));
+        return (_plus_1 + ")");
+      }
+    };
+    List<String> _map = ListExtensions.<Annotation, String>map(errors, _function_1);
+    String _join = IterableExtensions.join(_map, ", ");
     int _size = errors.size();
-    Assert.assertEquals(_string, expectedNumber, _size);
+    Assert.assertEquals(_join, expectedNumber, _size);
   }
   
   private List<Annotation> getErrorAnnotations(final XtextEditor editor) {

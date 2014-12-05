@@ -231,7 +231,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 	private def assertNumberOfErrorAnnotations(XtextEditor editor, int expectedNumber) {
 		helper.awaitUIUpdate([editor.errorAnnotations.size == expectedNumber], VALIDATION_TIMEOUT)
 		val errors = editor.errorAnnotations
-		assertEquals(errors.toString, expectedNumber, errors.size)
+		assertEquals(errors.map[text + "("+ persistent +")"].join(', '), expectedNumber, errors.size)
 	}
 	
 	private def getErrorAnnotations(XtextEditor editor) {

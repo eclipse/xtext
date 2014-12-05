@@ -42,6 +42,11 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.IVMInstall2;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.osgi.service.prefs.BackingStoreException;
@@ -274,6 +279,23 @@ public class JavaProjectSetupUtil {
 	}
 	
 	public static void addJreClasspathEntry(IJavaProject javaProject) throws JavaModelException {
+		// init default mappings
+		IExecutionEnvironmentsManager manager = JavaRuntime.getExecutionEnvironmentsManager();
+		IExecutionEnvironment[] environments = manager.getExecutionEnvironments();
+		for (int i = 0; i < environments.length; i++) {
+			IExecutionEnvironment environment = environments[i];
+			if (environment.getId().equals("JavaSE-1.6") && environment.getDefaultVM() == null) {
+				IVMInstall[] compatibleVMs = environment.getCompatibleVMs();
+				for (IVMInstall ivmInstall : compatibleVMs) {
+					if (ivmInstall instanceof IVMInstall2) {
+						IVMInstall2 install2 = (IVMInstall2) ivmInstall;
+						if (install2.getJavaVersion().startsWith("1.7")) {
+							environment.setDefaultVM(ivmInstall);
+						}
+					}
+				}
+			}
+		}
 		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
 		if (existingJreContainerClasspathEntry == null) {
 			addToClasspath(javaProject, JREContainerProvider.getDefaultJREContainerEntry());

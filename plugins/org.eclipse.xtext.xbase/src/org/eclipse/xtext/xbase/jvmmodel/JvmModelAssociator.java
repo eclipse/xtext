@@ -87,8 +87,12 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		this.inferrerProvider = inferrerProvider;
 	}
 
-	protected static class Adapter extends AdapterImpl {
-
+	/**
+	 * @noreference 
+	 * @noextend This class is not intended to be subclassed by clients.
+	 * @since 2.8
+	 */
+	public static class Adapter extends AdapterImpl {
 		public Map<EObject, Set<EObject>> sourceToTargetMap = Maps2.newLinkedHashMapWithExpectedSize(40);
 		public Map<EObject, Set<EObject>> targetToSourceMap = Maps2.newLinkedHashMapWithExpectedSize(40);
 		public Map<EObject, JvmIdentifiableElement> logicalContainerMap = Maps2.newLinkedHashMapWithExpectedSize(40);
