@@ -22,6 +22,8 @@ import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvid
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.resource.persistence.ResourceStorageInputStream;
+import org.eclipse.xtext.ui.editor.IDirtyResource.ICurrentStateProvidingExtension;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -125,6 +127,17 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		IDirtyResource dirtyResource = findDirtyResourcebyURIorNormalizedURI(uri);
 		if (dirtyResource != null)
 			return dirtyResource.getContents();
+		return null;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public ResourceStorageInputStream getResourceStorageInputStream(URI uri) {
+		IDirtyResource dirtyResource = findDirtyResourcebyURIorNormalizedURI(uri);
+		if (dirtyResource instanceof IDirtyResource.ICurrentStateProvidingExtension) {
+			return ((IDirtyResource.ICurrentStateProvidingExtension)dirtyResource).getResourceStorageInputStream();
+		}
 		return null;
 	}
 

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -40,6 +42,11 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.ResourceStorageInputStream;
+import org.eclipse.xtext.resource.persistence.ResourceStorageOutputStream;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -54,6 +61,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -260,7 +268,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 * resources which would otherwise cause unexpected conflicts
 	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
 	 */
-	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension {
+	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension {
 
 		@Override
 		public String getContents() {
@@ -294,6 +302,10 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		public URI getNormalizedURI() {
 			return dirtyResource.getNormalizedURI();
 		}
+
+		public ResourceStorageInputStream getResourceStorageInputStream() {
+			return dirtyResource.getResourceStorageInputStream();
+		}
 		
 	}
 	
@@ -305,6 +317,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	
 	@Inject
 	private DocumentBasedDirtyResource dirtyResource;
+	
+	@Inject(optional=true)
+	private IResourceStorageFacade resoureStorageFacade;
 	
 	/*
 	 * The client aware dirty resource is used as a delegate
@@ -478,6 +493,27 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
 					if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
 						dirtyResource.copyState(newDescription);
+						if (resoureStorageFacade != null && (resource instanceof StorageAwareResource)) {
+							StorageAwareResource storageAwareResource = (StorageAwareResource) resource;
+							class MyByteArrayOutputStream extends ByteArrayOutputStream {
+								@Override
+								public synchronized byte[] toByteArray() {
+									return buf;
+								}
+								public int length() { 
+									return count;
+								}
+							}
+							final MyByteArrayOutputStream bout = new MyByteArrayOutputStream();
+							ResourceStorageOutputStream resourceOutputStream = resoureStorageFacade.createResourceStorageOutputStream(bout);
+							resourceOutputStream.writeResource(storageAwareResource);
+							dirtyResource.setResourceStorageInputStreamProvider(new Provider<ResourceStorageInputStream>() {
+								@Override
+								public ResourceStorageInputStream get() {
+									return resoureStorageFacade.createResourceStorageInputStream(new ByteArrayInputStream(bout.toByteArray(), 0 , bout.length()));
+								}
+							});
+						}
 						dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
 					}
 				}
@@ -534,7 +570,8 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 * @since 2.3
 	 */
 	public boolean haveEObjectDescriptionsChanged(final IResourceDescription newDescription, IResourceDescription.Manager resourceDescriptionManager) {
-		return resourceDescriptionManager.createDelta(dirtyResource.getDescription(), newDescription).haveEObjectDescriptionsChanged();
+		boolean haveEObjectDescriptionsChanged = resourceDescriptionManager.createDelta(dirtyResource.getDescription(), newDescription).haveEObjectDescriptionsChanged();
+		return haveEObjectDescriptionsChanged;
 	}
 
 	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event) {

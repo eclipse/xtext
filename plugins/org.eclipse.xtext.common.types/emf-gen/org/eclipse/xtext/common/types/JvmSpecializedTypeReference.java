@@ -38,7 +38,7 @@ public interface JvmSpecializedTypeReference extends JvmTypeReference
 	 * @return the value of the '<em>Equivalent</em>' containment reference.
 	 * @see #setEquivalent(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmSpecializedTypeReference_Equivalent()
-	 * @model containment="true" transient="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getEquivalent();
