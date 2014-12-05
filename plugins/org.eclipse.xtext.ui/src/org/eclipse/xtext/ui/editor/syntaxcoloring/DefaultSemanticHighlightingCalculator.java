@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -94,7 +95,7 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 	protected void highlightTasks(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		List<Task> tasks = taskFinder.findTasks(resource);
 		for (Task task : tasks) {
-			acceptor.addPosition(task.getOffset(), task.getTagLength(), DefaultHighlightingConfiguration.TASK_ID);
+			acceptor.addPosition(task.getOffset(), task.getTagLength(), HighlightingStyles.TASK_ID);
 		}
 	}
 
