@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
+import java.util.Collections;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
@@ -24,7 +26,10 @@ import org.eclipse.ui.IURIEditorInput;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
@@ -45,6 +50,9 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 
 	@Inject
 	private IExternalContentProvider externalContentProvider;
+	
+	@Inject
+	private IResourceServiceProvider resourceServiceProvider;
 	
 	@Inject(optional = true)
 	private IWorkspace workspace;
@@ -149,6 +157,10 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	protected void configureResourceSet(ResourceSet resourceSet, URI primaryURI) {
 		// TODO: Filter external content - primary resource should not use dirty state
 		externalContentSupport.configureResourceSet(resourceSet, externalContentProvider);
+		if (!(resourceServiceProvider instanceof IResourceServiceProviderExtension) 
+				|| !((IResourceServiceProviderExtension)resourceServiceProvider).isReadOnly(primaryURI)) {
+			SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.singleton(primaryURI));
+		}
 	}
 
 	protected IResourceSetProvider getResourceSetProvider() {

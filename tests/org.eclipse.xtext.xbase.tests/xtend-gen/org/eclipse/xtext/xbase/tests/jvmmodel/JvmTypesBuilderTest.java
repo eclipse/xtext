@@ -129,8 +129,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       JvmAnnotationValue _head_2 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      EList<Object> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
-      Object _head_3 = IterableExtensions.<Object>head(_values_1);
+      EList<EObject> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
+      EObject _head_3 = IterableExtensions.<EObject>head(_values_1);
       Assert.assertTrue((_head_3 instanceof XStringLiteral));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
@@ -157,8 +157,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations_1);
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       JvmAnnotationValue _head_2 = IterableExtensions.<JvmAnnotationValue>head(_values);
-      EList<Object> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
-      Object _head_3 = IterableExtensions.<Object>head(_values_1);
+      EList<EObject> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
+      EObject _head_3 = IterableExtensions.<EObject>head(_values_1);
       Assert.assertTrue((_head_3 instanceof XStringLiteral));
       EList<JvmAnnotationReference> _annotations_2 = type.getAnnotations();
       JvmAnnotationReference _head_4 = IterableExtensions.<JvmAnnotationReference>head(_annotations_2);
@@ -238,8 +238,8 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<JvmAnnotationValue> _values_1 = _head_3.getValues();
       JvmAnnotationValue _head_4 = IterableExtensions.<JvmAnnotationValue>head(_values_1);
       final JvmCustomAnnotationValue value = ((JvmCustomAnnotationValue) _head_4);
-      EList<Object> _values_2 = value.getValues();
-      Object _head_5 = IterableExtensions.<Object>head(_values_2);
+      EList<EObject> _values_2 = value.getValues();
+      EObject _head_5 = IterableExtensions.<EObject>head(_values_2);
       Assert.assertTrue((_head_5 instanceof XNumberLiteral));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

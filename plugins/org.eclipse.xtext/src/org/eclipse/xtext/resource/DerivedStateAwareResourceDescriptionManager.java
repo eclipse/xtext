@@ -12,8 +12,8 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
+import org.eclipse.xtext.resource.persistence.StorageAwareResourceDescriptionManager;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.RuntimeIOException;
 
@@ -28,7 +28,7 @@ import com.google.inject.Singleton;
  * @since 2.1
  */
 @Singleton
-public class DerivedStateAwareResourceDescriptionManager extends DefaultResourceDescriptionManager {
+public class DerivedStateAwareResourceDescriptionManager extends StorageAwareResourceDescriptionManager {
 	
 	private final static Logger log = Logger.getLogger(DerivedStateAwareResourceDescriptionManager.class);
 	
