@@ -1,29 +1,29 @@
 package org.eclipse.xtend.core.resource
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
+import java.util.Collection
+import java.util.Collections
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy
 import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceDescription.Delta
+import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp
 import org.eclipse.xtext.util.IResourceScopeCache
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
-import org.eclipse.xtext.resource.IResourceDescription.Delta
-import java.util.Collection
-import org.eclipse.xtext.resource.IResourceDescriptions
-import java.util.Collections
-import com.google.inject.Singleton
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 
 @Singleton
 class XtendResourceDescriptionManager extends DerivedStateAwareResourceDescriptionManager implements IResourceDescription.Manager.AllChangeAware {
@@ -139,7 +139,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	}
 	
 	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
-		if (type == null)
+		if (type == null || type.eIsProxy)
 			return;
 		if (!type.local && acceptor.apply(type.identifier)) {
 			switch type {

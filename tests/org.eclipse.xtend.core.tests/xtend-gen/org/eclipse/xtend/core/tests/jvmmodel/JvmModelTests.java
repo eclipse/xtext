@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.jvmmodel;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -171,8 +172,8 @@ public class JvmModelTests extends AbstractXtendTestCase {
       JvmAnnotationValue _defaultValue = inferred.getDefaultValue();
       Assert.assertTrue((_defaultValue instanceof JvmCustomAnnotationValue));
       JvmAnnotationValue _defaultValue_1 = inferred.getDefaultValue();
-      EList<Object> _values = ((JvmCustomAnnotationValue) _defaultValue_1).getValues();
-      Object _head_1 = IterableExtensions.<Object>head(_values);
+      EList<EObject> _values = ((JvmCustomAnnotationValue) _defaultValue_1).getValues();
+      EObject _head_1 = IterableExtensions.<EObject>head(_values);
       Assert.assertTrue((_head_1 instanceof XListLiteral));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
