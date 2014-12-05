@@ -12,8 +12,13 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider.Delegate;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -70,6 +75,9 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	
 	private EclipseSourceFolderProvider sourceFolderProvider;
+	
+	@Inject private IJavaProjectProvider projectProvider;
+	@Inject(optional=true) private IWorkspace workspace; 
 
 	public IPreferenceStoreAccess getPreferenceStoreAccess() {
 		return preferenceStoreAccess;
@@ -93,6 +101,19 @@ public class EclipseOutputConfigurationProvider extends Delegate {
 		super(delegate);
 	}
 
+	@Override
+	public Set<OutputConfiguration> getOutputConfigurations(Resource resource) {
+		if (resource.getURI().isPlatformResource() && workspace!=null) {
+			String projectname = URI.decode(resource.getURI().segment(1));
+			IProject project = workspace.getRoot().getProject(projectname);
+			if (project.exists() && project.isAccessible()) {
+				return getOutputConfigurations(project);
+			}
+		}
+		IJavaProject javaProject = projectProvider.getJavaProject(resource.getResourceSet());
+		return getOutputConfigurations(javaProject.getProject());
+	}
+	
 	public Set<OutputConfiguration> getOutputConfigurations(IProject project) {
 		IPreferenceStore store = getPreferenceStoreAccess().getContextPreferenceStore(project);
 		Set<OutputConfiguration> outputConfigurations = new LinkedHashSet<OutputConfiguration>(getOutputConfigurations().size());
