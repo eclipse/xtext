@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -40,6 +42,9 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.resource.persistence.CompleteCopier;
+import org.eclipse.xtext.resource.persistence.ResourceStateProviderAdapter;
+import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -258,7 +263,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 * resources which would otherwise cause unexpected conflicts
 	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
 	 */
-	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension {
+	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension {
 
 		public String getContents() {
 			return dirtyResource.getContents();
@@ -286,6 +291,10 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 		public URI getNormalizedURI() {
 			return dirtyResource.getNormalizedURI();
+		}
+
+		public void installState(Resource unloadedResource) {
+			dirtyResource.installState(unloadedResource);
 		}
 		
 	}
@@ -389,6 +398,23 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 	protected void initDirtyResource(IXtextDocument document) {
 		dirtyResource.connect(document);
+		document.readOnly(new IUnitOfWork<Void, XtextResource>(){
+			public java.lang.Void exec(XtextResource resource) throws Exception {
+				SourceLevelURIsAdapter.setSourceLevelUris(resource.getResourceSet(), Collections.singleton(resource.getURI()));
+				resource.getResourceSet().eAdapters().add(new ResourceStateProviderAdapter() {
+					@Override
+					public boolean hasStateFor(URI uri) {
+						return dirtyStateManager.hasContent(uri);
+					}
+					
+					@Override
+					public void installState(Resource resource) {
+						((DirtyStateManager)dirtyStateManager).installFullState(resource);
+					}
+				});
+				return null;
+			}
+		});
 		delegatingClientAwareResource = new ClientAwareDirtyResource();
 	}
 	
@@ -469,6 +495,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
 					if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
 						dirtyResource.copyState(newDescription);
+						
+						Collection<? extends EObject> copyOfAll = CompleteCopier.completeCopy(resource.getContents());
+						dirtyResource.copyFullState(copyOfAll);
 						dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
 					}
 				}

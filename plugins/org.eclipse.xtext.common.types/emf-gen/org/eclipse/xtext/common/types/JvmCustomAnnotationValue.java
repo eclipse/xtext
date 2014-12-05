@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Jvm Custom Annotation Value</b></em>'.
@@ -16,33 +18,31 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmCustomAnnotationValue#getValues <em>Values</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.TypesPackage#getJvmCustomAnnotationValue()
  * @model
  * @generated
- * @since 2.1
- * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface JvmCustomAnnotationValue extends JvmAnnotationValue
 {
 	/**
-	 * Returns the value of the '<em><b>Values</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Object}.
+	 * Returns the value of the '<em><b>Values</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Values</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Values</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Values</em>' attribute list.
+	 * @return the value of the '<em>Values</em>' reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmCustomAnnotationValue_Values()
-	 * @model unique="false" transient="true"
+	 * @model
 	 * @generated
 	 */
-	EList<Object> getValues();
+	EList<EObject> getValues();
 
 } // JvmCustomAnnotationValue
