@@ -28,6 +28,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
+ * A scope that contains static features. The features may be obtained implicitly from a given type ({@code receiver} is
+ * {@code null}), or the features may be obtained from an instance which would render them invalidly accessed.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StaticFeatureScope extends AbstractStaticOrInstanceFeatureScope {
@@ -36,7 +39,7 @@ public class StaticFeatureScope extends AbstractStaticOrInstanceFeatureScope {
 	private final XExpression receiver;
 	private final LightweightTypeReference receiverType;
 
-	protected StaticFeatureScope(
+	public StaticFeatureScope(
 			IScope parent,
 			IFeatureScopeSession session,
 			XAbstractFeatureCall featureCall,

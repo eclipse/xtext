@@ -26,6 +26,9 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import com.google.common.collect.Lists;
 
 /**
+ * A constructor delegate scope provides the descriptions for {@code this()} and {@code super()}
+ * calls in a constructor body.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ConstructorDelegateScope extends AbstractSessionBasedScope implements IFeatureNames {

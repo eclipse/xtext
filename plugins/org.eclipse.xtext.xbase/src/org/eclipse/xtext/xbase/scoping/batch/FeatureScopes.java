@@ -106,7 +106,7 @@ public class FeatureScopes implements IFeatureNames {
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			if (!featureCall.isExplicitOperationCallOrBuilderSyntax()) {
-				root = createTypeLiteralScope(context, root, session, resolvedTypes, QualifiedName.EMPTY);
+				root = createTypeLiteralScope(context, QualifiedName.EMPTY, root, session, resolvedTypes);
 				if (isDefiniteTypeLiteral(featureCall)) {
 					return root;
 				}
@@ -133,13 +133,6 @@ public class FeatureScopes implements IFeatureNames {
 		return localVariables;
 	}
 
-	/**
-	 * @param resolvedTypes may be used by inheritors. 
-	 */
-	protected LocalVariableScope createLocalVariableScope(EObject context, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
-		return new LocalVariableScope(parent, session, asAbstractFeatureCall(context));
-	}
-	
 	protected boolean isDefiniteTypeLiteral(XFeatureCall featureCall) {
 		return typeLiteralHelper.isDefiniteTypeLiteral(featureCall);
 	}
@@ -151,7 +144,7 @@ public class FeatureScopes implements IFeatureNames {
 				JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 				LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 				if (type != null && !type.isUnknown()) {
-					return new ConstructorDelegateScope(parent, type, session, asAbstractFeatureCall(context));
+					return createConstructorDelegateScope(context, type, parent, session);
 				}
 			}
 		}
@@ -185,7 +178,7 @@ public class FeatureScopes implements IFeatureNames {
 				CompoundTypeReference compoundTypeReference = synonymType.getOwner().newCompoundTypeReference(true);
 				compoundTypeReference.addComponent(featureDeclarator);
 				compoundTypeReference.addComponent(synonymType);
-				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, compoundTypeReference, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping, validStaticScope));
+				wrapper.set(createReceiverFeatureScope(featureCall, receiver, compoundTypeReference, receiverFeature, implicit, validStaticScope, bucket, wrapper.get(), session));
 				return true;
 			}
 			
@@ -197,13 +190,13 @@ public class FeatureScopes implements IFeatureNames {
 				LightweightTypeReference component = components.get(i);
 				List<JvmType> rawTypes = component.getRawTypes();
 				TypeBucket typeBucket = new TypeBucket(-1 - i, rawTypes, resolvedFeaturesProvider);
-				result = new ReceiverFeatureScope(result, session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping, validStaticScope);
+				result = createReceiverFeatureScope(featureCall, receiver, featureDeclarator, receiverFeature, implicit, validStaticScope, typeBucket, result, session);
 			}
 			return result;
 		} else {
 			List<JvmType> rawTypes = featureDeclarator.getRawTypes();
 			TypeBucket typeBucket = new TypeBucket(-1, rawTypes, resolvedFeaturesProvider);
-			IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping, validStaticScope);
+			IScope result = createReceiverFeatureScope(featureCall, receiver, featureDeclarator, receiverFeature, implicit, validStaticScope, typeBucket, wrapper.get(), session);
 			return result;
 		}
 	}
@@ -255,20 +248,20 @@ public class FeatureScopes implements IFeatureNames {
 			if (prefix == null) {
 				return errorScope;
 			}
-			return createTypeLiteralScope(featureCall, errorScope, session, resolvedTypes, QualifiedName.create(prefix));
+			return createTypeLiteralScope(featureCall, QualifiedName.create(prefix), errorScope, session, resolvedTypes);
 		} else {
 			return createFollowUpErrorScope(receiverType);
 		}
 	}
 
 	/* @Nullable */
-	private IScope createTypeLiteralScope(XExpression featureCall, XExpression receiver, IFeatureScopeSession session,
+	protected IScope createTypeLiteralScope(XExpression featureCall, XExpression receiver, IFeatureScopeSession session,
 			IResolvedTypes resolvedTypes, LightweightTypeReference receiverType, JvmIdentifiableElement linkedReceiver) {
 		if (linkedReceiver instanceof JvmDeclaredType) {
 			IFeatureLinkingCandidate candidate = resolvedTypes.getLinkingCandidate(asAbstractFeatureCall(receiver));
 			if (candidate != null && candidate.isTypeLiteral()) {
 				JvmDeclaredType declaringType = (JvmDeclaredType) linkedReceiver;
-				IScope result = new NestedTypeLiteralScope(IScope.NULLSCOPE, session, asAbstractFeatureCall(featureCall), receiverType, declaringType);
+				IScope result = createNestedTypeLiteralScope(featureCall, receiverType, declaringType, IScope.NULLSCOPE, session);
 				result = createStaticFeatureOnTypeLiteralScope(asAbstractFeatureCall(featureCall), declaringType, receiver, receiverType, result, session);
 				return result;
 			}
@@ -291,15 +284,6 @@ public class FeatureScopes implements IFeatureNames {
 		return false;
 	}
 
-	protected IScope createFollowUpErrorScope(/* @Nullable */ final LightweightTypeReference receiverType) {
-		return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
-			@Override
-			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-				return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription(receiverType));
-			}
-		};
-	}
-	
 	/**
 	 * Returns <code>true</code> if the linked receiver may be passed as an argument. Basically everything could
 	 * be passed as an argument except the linked receiver is null, a proxy or a reference to <code>super</code>.
@@ -330,7 +314,7 @@ public class FeatureScopes implements IFeatureNames {
 			if (receiverType == null) {
 				throw new IllegalStateException("Unknown receiver type");
 			}
-			result = createStaticExtensionsScope(receiver, receiverType, false, featureCall, parent, session);
+			result = createStaticExtensionsScope(featureCall, receiver, receiverType, false, parent, session);
 		}
 		return result;
 	}
@@ -344,16 +328,16 @@ public class FeatureScopes implements IFeatureNames {
 			return result;
 		} else {
 			TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(receiverType.getType()), resolvedFeaturesProvider);
-			return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
+			return createStaticFeatureScope(featureCall, receiver, receiverType, receiverBucket, parent, session);
 		}
 	}
 
 	protected IScope createStaticFeatureOnTypeLiteralScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
 			IScope parent, IFeatureScopeSession session) {
 		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type), resolvedFeaturesProvider);
-		return new StaticFeatureOnTypeLiteralScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
+		return createStaticFeatureOnTypeLiteralScope(featureCall, receiver, receiverType, receiverBucket, parent, session);
 	}
-	
+
 	protected IScope createDynamicExtensionsScope(XExpression firstArgument, LightweightTypeReference firstArgumentType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		return createDynamicExtensionsScope(firstArgument, firstArgumentType, featureCall, parent, session, session, resolvedTypes);
 	}
@@ -373,7 +357,7 @@ public class FeatureScopes implements IFeatureNames {
 			result = createDynamicExtensionsScope(IT, featureCall, captureLayer, session, resolvedTypes, result, false);
 			return result;
 		} else {
-			result = createDynamicExtensionsScope(firstArgument, firstArgumentType, false, featureCall, parent, captureLayer);
+			result = createDynamicExtensionsScope(featureCall, firstArgument, firstArgumentType, false, parent, captureLayer);
 		}
 		return result;
 	}
@@ -384,12 +368,12 @@ public class FeatureScopes implements IFeatureNames {
 			List<IEObjectDescription> firstArguments = getDeepLocalElements(session, implicitFirstArgumentName);
 			switch(firstArguments.size()) {
 				case 0:
-					return createDynamicExtensionsScope(null, null, true, featureCall, parent, captureLayer);
+					return createDynamicExtensionsScope(featureCall, null, null, true, parent, captureLayer);
 				case 1:
 					return createDynamicExtensionsScope(implicitFirstArgumentName, firstArguments.get(0), featureCall, captureLayer, session, resolvedTypes,
 							parent);
 				default:
-					CompositeScope result = new CompositeScope(parent, session, asAbstractFeatureCall(featureCall));
+					CompositeScope result = createCompositeScope(featureCall, parent, session);
 					for(IEObjectDescription firstArgumentDescription: firstArguments) {
 						IScope extensionsScope = createDynamicExtensionsScope(implicitFirstArgumentName, firstArgumentDescription, featureCall, captureLayer, session, resolvedTypes,
 								IScope.NULLSCOPE);
@@ -407,11 +391,11 @@ public class FeatureScopes implements IFeatureNames {
 				return createDynamicExtensionsScope(implicitFirstArgumentName, firstArgumentDescription, featureCall, captureLayer, session, resolvedTypes,
 						parent);
 			} else {
-				return createDynamicExtensionsScope(null, null, true, featureCall, parent, captureLayer);
+				return createDynamicExtensionsScope(featureCall, null, null, true, parent, captureLayer);
 			}
 		}
 	}
-	
+
 	protected IEObjectDescription getDeepLocalElement(IFeatureScopeSession session, QualifiedName name) {
 		while(session != null) {
 			IEObjectDescription element = session.getLocalElement(name);
@@ -445,33 +429,15 @@ public class FeatureScopes implements IFeatureNames {
 		if (type != null && !type.isUnknown()) {
 			XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
 			implicitArgument.setFeature(feature);
-			return createDynamicExtensionsScope(implicitArgument, type, true, featureCall, parent, captureLayer);
+			return createDynamicExtensionsScope(featureCall, implicitArgument, type, true, parent, captureLayer);
 		}
 		return parent;
-	}
-
-	protected DynamicExtensionsScope createDynamicExtensionsScope(XExpression firstArgument,
-			LightweightTypeReference argumentType, boolean implicit, EObject featureCall, IScope parent, IFeatureScopeSession session) {
-		return new DynamicExtensionsScope(parent, session, firstArgument, argumentType, implicit, asAbstractFeatureCall(featureCall), operatorMapping);
-	}
-
-	protected StaticExtensionImportsScope createStaticExtensionsScope(XExpression receiver,
-			LightweightTypeReference receiverType, boolean implicit, EObject featureCall, IScope parent, IFeatureScopeSession session) {
-		return new StaticExtensionImportsScope(parent, session, receiver, receiverType, implicit, asAbstractFeatureCall(featureCall), operatorMapping);
 	}
 
 	protected XExpression getSyntacticalReceiver(final XAbstractFeatureCall call) {
 		return new FeatureLinkHelper().getSyntacticReceiver(call);
 	}
 
-	protected IScope createTypeLiteralScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes, QualifiedName parentSegments) {
-		return new TypeLiteralScope(parent, session, asAbstractFeatureCall(featureCall), resolvedTypes, parentSegments);
-	}
-	
-	protected IScope createStaticFeaturesScope(EObject featureCall, IScope parent, IFeatureScopeSession session) {
-		return new StaticImportsScope(parent, session, asAbstractFeatureCall(featureCall));
-	}
-	
 	protected IScope createImplicitFeatureCallScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
 		result = createImplicitFeatureCallScope(THIS, featureCall, session, resolvedTypes, result);
@@ -507,7 +473,7 @@ public class FeatureScopes implements IFeatureNames {
 			if (type != null && !type.isUnknown()) {
 				XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
 				implicitReceiver.setFeature(thisElement);
-				return createStaticExtensionsScope(implicitReceiver, type, true, featureCall, parent, session);
+				return createStaticExtensionsScope(featureCall, implicitReceiver, type, true, parent, session);
 			}
 		}
 		return parent;
@@ -521,9 +487,215 @@ public class FeatureScopes implements IFeatureNames {
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
 			if (type != null && !type.isUnknown()) {
 				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()), resolvedFeaturesProvider);
-				return new StaticFeatureScope(parent, session, featureCall, null, type, receiverBucket, operatorMapping);
+				return createStaticFeatureScope(featureCall, null, type, receiverBucket, parent, session);
 			}
 		}
 		return parent;
+	}
+
+	/**
+	 * Create a scope that contains static features. The features may be obtained implicitly from a given type ({@code receiver} is
+	 * {@code null}), or the features may be obtained from a concrete instance.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param receiver an optionally available receiver expression
+	 * @param receiverType the type of the receiver. It may be available even if the receiver itself is null, which indicates an implicit receiver.
+	 * @param receiverBucket the types that contribute the static features.
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createStaticFeatureScope(
+			XAbstractFeatureCall featureCall,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
+			TypeBucket receiverBucket,
+			IScope parent,
+			IFeatureScopeSession session) {
+		return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
+	}
+	
+	/**
+	 * Creates a scope for the static features that are exposed by a type that was used, e.g.
+	 * {@code java.lang.String.valueOf(1)} where {@code valueOf(1)} is to be linked.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param receiver an optionally available receiver expression
+	 * @param receiverType the type of the receiver. It may be available even if the receiver itself is null, which indicates an implicit receiver.
+	 * @param receiverBucket the types that contribute the static features.
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createStaticFeatureOnTypeLiteralScope(
+			EObject featureCall,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
+			TypeBucket receiverBucket,
+			IScope parent,
+			IFeatureScopeSession session) {
+		return new StaticFeatureOnTypeLiteralScope(parent, session, asAbstractFeatureCall(featureCall), receiver, receiverType, receiverBucket, operatorMapping);
+	}
+	
+	/**
+	 * Create a scope that contains dynamic extension features, which are features that are contributed by an instance of a type.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param firstArgument an optionally available first argument expression.
+	 * @param firstArgumentType optionally the type of the first argument
+	 * @param implicitArgument if the argument is an implicit argument or explicitly given (in concrete syntax)
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createDynamicExtensionsScope(
+			EObject featureCall,
+			XExpression firstArgument,
+			LightweightTypeReference firstArgumentType,
+			boolean implicitArgument,
+			IScope parent,
+			IFeatureScopeSession session) {
+		return new DynamicExtensionsScope(parent, session, firstArgument, firstArgumentType, implicitArgument, asAbstractFeatureCall(featureCall), operatorMapping);
+	}
+
+	/**
+	 * Create a scope that contains static extension features, which are features that are contributed statically via an import.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param firstArgument an optionally available first argument expression.
+	 * @param firstArgumentType optionally the type of the first argument
+	 * @param implicitArgument if the argument is an implicit argument or explicitly given (in concrete syntax)
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createStaticExtensionsScope(
+			EObject featureCall,
+			XExpression firstArgument,
+			LightweightTypeReference firstArgumentType,
+			boolean implicitArgument,
+			IScope parent,
+			IFeatureScopeSession session) {
+		return new StaticExtensionImportsScope(parent, session, firstArgument, firstArgumentType, implicitArgument, asAbstractFeatureCall(featureCall), operatorMapping);
+	}
+	
+	/**
+	 * Create a scope that returns types, e.g. for member feature calls that are actually type references like
+	 * {@code java.lang.String}.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param parentSegments the segments of the fully qualified type name that are already known. The queried element name will be appended to them.
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createTypeLiteralScope(EObject featureCall, QualifiedName parentSegments, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		return new TypeLiteralScope(parent, session, asAbstractFeatureCall(featureCall), resolvedTypes, parentSegments);
+	}
+	
+	/**
+	 * Create a scope that returns nested types.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param enclosingType the enclosing type including type parameters for the nested type literal scope.
+	 * @param rawEnclosingType the raw type that is used to query the nested types.
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createNestedTypeLiteralScope(
+			EObject featureCall,
+			LightweightTypeReference enclosingType,
+			JvmDeclaredType rawEnclosingType,
+			IScope parent,
+			IFeatureScopeSession session) {
+		return new NestedTypeLiteralScope(parent, session, asAbstractFeatureCall(featureCall), enclosingType, rawEnclosingType);
+	}
+	
+	/**
+	 * Creates a scope for the statically imported features.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createStaticFeaturesScope(EObject featureCall, IScope parent, IFeatureScopeSession session) {
+		return new StaticImportsScope(parent, session, asAbstractFeatureCall(featureCall));
+	}
+	
+	/**
+	 * Creates a scope for the local variables that have been registered in the given session.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 * @param resolvedTypes may be used by inheritors. 
+	 */
+	protected IScope createLocalVariableScope(EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		return new LocalVariableScope(parent, session, asAbstractFeatureCall(featureCall));
+	}
+	
+	/**
+	 * A constructor delegate scope provides the descriptions for {@code this()} and {@code super()}
+	 * calls in a constructor body.
+	 */
+	protected IScope createConstructorDelegateScope(EObject featureCall, LightweightTypeReference type, IScope parent, IFeatureScopeSession session) {
+		return new ConstructorDelegateScope(parent, type, session, asAbstractFeatureCall(featureCall));
+	}
+	
+	/**
+	 * Create a composite scope that returns description from multiple other scopes without applying shadowing semantics to then.
+	 */
+	protected CompositeScope createCompositeScope(EObject featureCall, IScope parent, IFeatureScopeSession session) {
+		return new CompositeScope(parent, session, asAbstractFeatureCall(featureCall));
+	}
+	
+	/**
+	 * Creates a scope that returns the features of a given receiver type.
+	 * 
+	 * @param featureCall the feature call that is currently processed by the scoping infrastructure
+	 * @param receiver an optionally available receiver expression
+	 * @param receiverType the type of the receiver. It may be available even if the receiver itself is null, which indicates an implicit receiver.
+	 * @param receiverFeature the feature that was linked as the receiver
+	 * @param implicitReceiver true if the receiver is an implicit receiver
+	 * @param validStatic true if the receiver is valid according the its static flag, e.g an implicit this in a static method is invalid
+	 * @param receiverBucket the types that contribute the static features.
+	 * @param parent the parent scope. Is never null.
+	 * @param session the currently known scope session. Is never null.
+	 */
+	protected IScope createReceiverFeatureScope(
+			EObject featureCall,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
+			JvmIdentifiableElement receiverFeature,
+			boolean implicitReceiver,
+			boolean validStatic,
+			TypeBucket receiverBucket,
+			IScope parent,
+			IFeatureScopeSession session) {
+		return new ReceiverFeatureScope(parent, session, receiver, receiverType, implicitReceiver, asAbstractFeatureCall(featureCall), receiverBucket, receiverFeature, operatorMapping, validStatic);
+	}
+	
+	protected IScope createFollowUpErrorScope(/* @Nullable */ final LightweightTypeReference receiverType) {
+		return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
+			@Override
+			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+				return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription(receiverType));
+			}
+		};
+	}
+	
+	protected OperatorMapping getOperatorMapping() {
+		return operatorMapping;
+	}
+	
+	protected IResolvedFeatures.Provider getResolvedFeaturesProvider() {
+		return resolvedFeaturesProvider;
+	}
+	
+	protected SynonymTypesProvider getSynonymProvider() {
+		return synonymProvider;
+	}
+	
+	protected FeatureCallAsTypeLiteralHelper getTypeLiteralHelper() {
+		return typeLiteralHelper;
+	}
+	
+	protected XbaseFactory getXbaseFactory() {
+		return xbaseFactory;
 	}
 }

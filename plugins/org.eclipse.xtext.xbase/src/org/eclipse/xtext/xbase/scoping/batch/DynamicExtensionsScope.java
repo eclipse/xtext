@@ -37,6 +37,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
+ * A scope that contains dynamic extension features, which are features that are contributed by an instance of a type.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope {

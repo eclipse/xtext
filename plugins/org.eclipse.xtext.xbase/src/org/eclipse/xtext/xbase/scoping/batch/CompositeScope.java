@@ -17,6 +17,8 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import com.google.common.collect.Lists;
 
 /**
+ * A composite scope returns description from multiple other scopes without applying shadowing semantics to then.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class CompositeScope extends AbstractSessionBasedScope {
@@ -28,11 +30,11 @@ public class CompositeScope extends AbstractSessionBasedScope {
 		delegates = Lists.newArrayList();
 	}
 	
-	protected void addDelegate(AbstractSessionBasedScope delegate) {
+	public void addDelegate(AbstractSessionBasedScope delegate) {
 		this.delegates.add(delegate);
 	}
 	
-	protected boolean hasDelegates() {
+	public boolean hasDelegates() {
 		return !delegates.isEmpty();
 	}
 

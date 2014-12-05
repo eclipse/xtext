@@ -26,11 +26,16 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
+ * A scope for the static features that are exposed by a type that was used, e.g.
+ * {@code java.lang.String.valueOf(1)} where {@code valueOf(1)} is to be linked.
+ * 
+ * This scope includes qualified references to {@code this} and {@code super}. 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implements IFeatureNames {
 
-	protected StaticFeatureOnTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, XExpression receiver,
+	public StaticFeatureOnTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, XExpression receiver,
 			LightweightTypeReference receiverType, TypeBucket bucket, OperatorMapping operatorMapping) {
 		super(parent, session, featureCall, receiver, receiverType, bucket, operatorMapping);
 		if (bucket.getTypes().size() != 1) {

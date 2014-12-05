@@ -35,6 +35,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
+ * A scope that returns the features of a given receiver type.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ReceiverFeatureScope extends AbstractStaticOrInstanceFeatureScope implements IVisibilityHelper {
@@ -47,7 +49,7 @@ public class ReceiverFeatureScope extends AbstractStaticOrInstanceFeatureScope i
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
 	private final boolean validStaticState;
 
-	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
+	public ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
 			XAbstractFeatureCall featureCall, TypeBucket bucket, JvmIdentifiableElement receiverFeature, OperatorMapping operatorMapping, boolean validStaticState) {
 		super(parent, session, featureCall, operatorMapping);
 		this.receiver = receiver;
