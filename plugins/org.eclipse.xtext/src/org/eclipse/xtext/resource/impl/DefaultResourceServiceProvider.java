@@ -13,6 +13,7 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.ConfigurationException;
@@ -22,7 +23,7 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultResourceServiceProvider implements IResourceServiceProvider {
+public class DefaultResourceServiceProvider implements IResourceServiceProvider, IResourceServiceProviderExtension {
 	
 	@Inject
 	private IContainer.Manager containerManager;
@@ -68,6 +69,14 @@ public class DefaultResourceServiceProvider implements IResourceServiceProvider 
 		} catch (ConfigurationException e) {
 			return null;
 		}
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public boolean isReadOnly(URI uri) {
+		return uri.isArchive();
 	}
 	
 }

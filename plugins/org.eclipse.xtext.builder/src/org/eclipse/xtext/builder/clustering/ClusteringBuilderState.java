@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.clustering;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -42,11 +44,15 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Manager.AllChangeAware;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.IResourceServiceProviderExtension;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -84,6 +90,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     private IWorkspace workspace;
     
     @Inject
+    private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+    
+    @Inject
 	private CompilerPhases compilerPhases;
 
     private static final int MONITOR_DO_UPDATE_CHUNK = 10;
@@ -116,6 +125,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         ResourceSet resourceSet = buildData.getResourceSet();
         final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, newData, buildData);
 
+        installSourceLevelURIs(buildData);
         // Step 3: Create a queue; write new temporary resource descriptions for the added or updated resources so that we can link
         // subsequently; put all the added or updated resources into the queue.
         writeNewResourceDescriptions(buildData, this, newState, progress.newChild(20));
@@ -156,6 +166,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         Collection<Delta> pendingDeltas = buildData.getAndRemovePendingDeltas();
         allDeltas.addAll(pendingDeltas);
         queueAffectedResources(allRemainingURIs, this, newState, allDeltas, allDeltas, buildData, progress.newChild(1));
+        installSourceLevelURIs(buildData);
 
         IProject currentProject = getBuiltProject(buildData);
         LoadOperation loadOperation = null;
@@ -287,7 +298,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 loadOperation.cancel();
 
                 queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, allDeltas, buildData, subProgress.newChild(1));
-
+                installSourceLevelURIs(buildData);
                 if(queue.size() > 0) {
                     loadOperation = crossLinkingResourceLoader.create(resourceSet, currentProject);
                     loadOperation.load(queue);
@@ -304,6 +315,21 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         }
         return allDeltas;
     }
+
+	protected void installSourceLevelURIs(BuildData buildData) {
+		ResourceSet resourceSet = buildData.getResourceSet();
+		Iterable<URI> sourceLevelUris = Iterables.concat(buildData.getToBeUpdated(), buildData.getURIQueue());
+		Set<URI> sourceUris = newHashSet();
+		for (URI uri : sourceLevelUris) {
+			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
+			if ((provider instanceof IResourceServiceProviderExtension) 
+					&& ((IResourceServiceProviderExtension) provider).isReadOnly(uri)) {
+				continue;
+			}
+			sourceUris.add(uri);
+		}
+		SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, sourceUris);
+	}
     
     private static final int MONITOR_WRITE_CHUNK = 50;
     
