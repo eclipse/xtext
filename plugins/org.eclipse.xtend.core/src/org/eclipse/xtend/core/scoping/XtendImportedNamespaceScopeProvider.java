@@ -39,6 +39,8 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
@@ -87,6 +89,9 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 	@Inject
 	private AnonymousClassUtil anonymousClassUtil;
 	
+	@Inject
+	private IResourceDescriptions descriptions;
+	
 	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
 		EClass referenceType = reference.getEReferenceType();
@@ -95,6 +100,10 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				Resource resource = context.eResource();
 				IJvmTypeProvider typeProvider = typeScopeProvider.getTypeProvider(resource.getResourceSet());
 				AbstractTypeScope typeScope = typeScopeProvider.createTypeScope(typeProvider, null);
+				IResourceDescription resourceDescription = descriptions.getResourceDescription(resource.getURI());
+				if (resourceDescription != null) {
+					typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
+				}
 				RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
 				//TODO this scope doesn't support binary syntax for inner types. It should be a KnownTypes scope which doesn't allow simple names
 				// Unfortunately I cannot use a RecordingTypeScope as a parent as it is not compatible...
@@ -108,6 +117,13 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 				public AbstractScope get() {
 					IJvmTypeProvider typeProvider = typeScopeProvider.getTypeProvider(resource.getResourceSet());
 					AbstractTypeScope typeScope = typeScopeProvider.createTypeScope(typeProvider, null);
+					if (descriptions instanceof IResourceDescriptions.IContextAware) {
+						((IResourceDescriptions.IContextAware) descriptions).setContext(resource);
+					}
+					IResourceDescription resourceDescription = descriptions.getResourceDescription(resource.getURI());
+					if (resourceDescription != null) {
+						typeScope = new LocalResourceFilteringTypeScope(typeScope, resourceDescription);
+					}
 					RecordingTypeScope recordingTypeScope = new RecordingTypeScope(typeScope, getImportedNamesSet(resource));
 					AbstractScope rootTypeScope = getRootTypeScope(xtendFile, recordingTypeScope);
 					AbstractScope importScope = getImportScope(xtendFile.getImportSection(), rootTypeScope, recordingTypeScope);
