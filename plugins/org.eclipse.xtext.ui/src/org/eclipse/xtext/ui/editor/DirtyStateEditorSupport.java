@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +43,12 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.resource.persistence.ResourceStorageInputStream;
+import org.eclipse.xtext.resource.persistence.ResourceStorageOutputStream;
+import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.ResourceStorageProviderAdapter;
+import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
@@ -258,7 +267,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 * resources which would otherwise cause unexpected conflicts
 	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
 	 */
-	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension {
+	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension {
 
 		public String getContents() {
 			return dirtyResource.getContents();
@@ -287,6 +296,10 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		public URI getNormalizedURI() {
 			return dirtyResource.getNormalizedURI();
 		}
+
+		public ResourceStorageInputStream getResourceStorageInputStream() {
+			return dirtyResource.getResourceStorageInputStream();
+		}
 		
 	}
 	
@@ -298,6 +311,9 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	
 	@Inject
 	private DocumentBasedDirtyResource dirtyResource;
+	
+	@Inject
+	private ResourceStorageFacade resoureStorageProvider;
 	
 	/*
 	 * The client aware dirty resource is used as a delegate
@@ -389,6 +405,22 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 	protected void initDirtyResource(IXtextDocument document) {
 		dirtyResource.connect(document);
+		document.readOnly(new IUnitOfWork<Void, XtextResource>(){
+			public java.lang.Void exec(XtextResource resource) throws Exception {
+				SourceLevelURIsAdapter.setSourceLevelUris(resource.getResourceSet(), Collections.singleton(resource.getURI()));
+				resource.getResourceSet().eAdapters().add(new ResourceStorageProviderAdapter() {
+					
+					@Override
+					public ResourceStorageInputStream getResourceStorageInputStream(StorageAwareResource resource) {
+						if (!dirtyStateManager.hasContent(resource.getURI())) {
+							return null;
+						}
+						return ((DirtyStateManager)dirtyStateManager).getResourceStorageInputStream(resource.getURI());
+					}
+				});
+				return null;
+			}
+		});
 		delegatingClientAwareResource = new ClientAwareDirtyResource();
 	}
 	
@@ -469,6 +501,23 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 					final IResourceDescription newDescription = resourceDescriptionManager.getResourceDescription(resource);
 					if (haveEObjectDescriptionsChanged(newDescription, resourceDescriptionManager)) {
 						dirtyResource.copyState(newDescription);
+						if (resource instanceof StorageAwareResource) {
+							StorageAwareResource storageAwareResource = (StorageAwareResource) resource;
+							class MyByteArrayOutputStream extends ByteArrayOutputStream {
+								@Override
+								public synchronized byte[] toByteArray() {
+									return buf;
+								}
+								public int length() { 
+									return count;
+								}
+							}
+							MyByteArrayOutputStream bout = new MyByteArrayOutputStream();
+							ResourceStorageOutputStream resourceOutputStream = resoureStorageProvider.createResourceStorageOutputStream(bout);
+							resourceOutputStream.writeResource(storageAwareResource);
+							ResourceStorageInputStream resourceInputStream = resoureStorageProvider.createResourceStorageInputStream(new ByteArrayInputStream(bout.toByteArray(), 0 , bout.length()));
+							dirtyResource.setResourceStorageInputStream(resourceInputStream);
+						}
 						dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
 					}
 				}
