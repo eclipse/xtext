@@ -24,6 +24,8 @@ import org.eclipse.jface.text.TextPresentation;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -316,6 +318,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 						@Override
 						public java.lang.Void exec(XtextResource state, CancelIndicator cancelIndicator)
 								throws Exception {
+							beforeRefresh(state, cancelIndicator);
 							modelChanged(state, cancelIndicator);
 							return null;
 						}
@@ -328,6 +331,16 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			Display display = getDisplay();
 			display.asyncExec(presenter.createSimpleUpdateRunnable());
 		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void beforeRefresh(XtextResource resource, CancelIndicator cancelIndicator) {
+		if (resource instanceof DerivedStateAwareResource)
+			resource.getContents(); // trigger derived state computation
+		if (resource instanceof IBatchLinkableResource)
+			((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
 	}
 
 	public void modelChanged(XtextResource resource) {
