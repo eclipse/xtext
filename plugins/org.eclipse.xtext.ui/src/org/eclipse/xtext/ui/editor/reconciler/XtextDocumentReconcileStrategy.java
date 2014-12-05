@@ -21,7 +21,6 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
-import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -52,9 +51,6 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	@Inject
 	private XtextSpellingReconcileStrategy.Factory spellingReconcileStrategyFactory;
 	
-	@Inject
-	private OperationCanceledManager canceledManager;
-
 	private XtextSpellingReconcileStrategy spellingReconcileStrategy;
 
 	private XtextResource resource;
@@ -150,7 +146,9 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			resource.setModificationStamp(replaceRegionToBeProcessed.getModificationStamp());
 			postParse(resource, monitor);
 		} catch (OperationCanceledException e) {
+			resource.getCache().clear(resource);
 		} catch (OperationCanceledError e) {
+			resource.getCache().clear(resource);
 		} catch (RuntimeException exc) {
 			log.error("Parsing in reconciler failed.", exc);
 			throw exc;
@@ -160,7 +158,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	/**
 	 * @since 2.7
 	 */
-	protected void postParse(XtextResource resource, final IProgressMonitor monitor) {
+	protected void postParse(XtextResource resource, final IProgressMonitor monitor) throws OperationCanceledError, OperationCanceledException {
 		if (editor != null) {
 			DirtyStateEditorSupport dirtyStateEditorSupport = editor.getDirtyStateEditorSupport();
 			if (dirtyStateEditorSupport != null)
@@ -177,11 +175,11 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 			if (resource instanceof IBatchLinkableResource) {
 				((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
 			}
-		} catch (OperationCanceledException exc) {
+		} catch(OperationCanceledException e) {
+			throw e;
+		} catch(RuntimeException e) {
+			log.error("Error post-processing resource", e);
 			resource.getCache().clear(resource);
-			throw exc;
-		} catch (RuntimeException exc) {
-			log.error("Error post-processing reosurce", exc);
 		}
 	}
 	
