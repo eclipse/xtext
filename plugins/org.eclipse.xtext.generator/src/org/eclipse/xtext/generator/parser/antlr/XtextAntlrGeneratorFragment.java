@@ -106,12 +106,12 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 			.addConfiguredBinding("HighlightingLexer",
 					"binder.bind(" + Lexer.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+					"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
 					")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
 			.addConfiguredBinding("HighlightingTokenDefProvider",
 					"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
-					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
+					"org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING" +
 					")).to(" + AntlrTokenDefProvider.class.getName() +".class)")
 			.getBindings();
 	}

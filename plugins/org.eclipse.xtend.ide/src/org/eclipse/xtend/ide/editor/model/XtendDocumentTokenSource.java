@@ -16,8 +16,8 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexTokenSource;
 import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 
 import com.google.inject.Inject;
@@ -36,7 +36,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 	private FlexerFactory flexerFactory;
 
 	@Inject
-	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
+	public void setTokenDefProvider(@Named(LexerIdeBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		Map<Integer, String> tokenDefMap = tokenDefProvider.getTokenDefMap();
 		Set<Entry<Integer, String>> entrySet = tokenDefMap.entrySet();
 		for(Entry<Integer, String> entry : entrySet){

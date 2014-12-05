@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,7 +31,7 @@ public class DefaultTokenScanner extends AbstractTokenScanner {
 	public IToken nextToken() {
 		if (!tokenReturned) {
 			tokenReturned = true;
-			return new Token(getAttribute(DefaultHighlightingConfiguration.DEFAULT_ID));
+			return new Token(getAttribute(HighlightingStyles.DEFAULT_ID));
 		}
 		return Token.EOF;
 	}

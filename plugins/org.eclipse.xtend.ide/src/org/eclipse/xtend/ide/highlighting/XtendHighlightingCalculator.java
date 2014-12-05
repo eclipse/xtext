@@ -47,12 +47,12 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XExpression;
@@ -194,7 +194,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 				for(ILeafNode leaf: compositeNode.getLeafNodes()) {
 					if (leaf.getGrammarElement() == xtendGrammarAccess.getMemberAccess().getNewKeyword_2_2_2()) {
 						highlightNode(acceptor, leaf, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
-						highlightNode(acceptor, leaf, DefaultHighlightingConfiguration.KEYWORD_ID);
+						highlightNode(acceptor, leaf, HighlightingStyles.KEYWORD_ID);
 						return;
 					}
 				}
@@ -230,7 +230,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		if (contextualKeywords != null && contextualKeywords.contains(leafNode.getGrammarElement())) {
 			ITextRegion leafRegion = leafNode.getTextRegion();
 			acceptor.addPosition(leafRegion.getOffset(), leafRegion.getLength(),
-					DefaultHighlightingConfiguration.DEFAULT_ID);
+					HighlightingStyles.DEFAULT_ID);
 		}
 	}
 	
@@ -321,7 +321,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 							start = start - 1;
 							length = length + 1;
 						}
-						acceptor.addPosition(start, length, DefaultHighlightingConfiguration.COMMENT_ID);
+						acceptor.addPosition(start, length, HighlightingStyles.COMMENT_ID);
 						highlightClosingQuotes(node);
 						currentOffset = start + length + 1;
 						if (lineFeed == carriageReturn + 1)

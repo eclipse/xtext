@@ -12,8 +12,8 @@ import java.util.Map;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
-import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
 
@@ -96,7 +96,7 @@ public class RichStringAwareTokenScanner extends TokenScanner {
 	private String[] allTokenTypesAsString;
 	
 	@Inject
-	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
+	public void setTokenDefProvider(@Named(LexerIdeBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		Map<Integer, String> map = tokenDefProvider.getTokenDefMap();
 		int minTokenType = org.antlr.runtime.Token.MIN_TOKEN_TYPE;
 		allTokenTypesAsString = new String[map.size() + minTokenType];
