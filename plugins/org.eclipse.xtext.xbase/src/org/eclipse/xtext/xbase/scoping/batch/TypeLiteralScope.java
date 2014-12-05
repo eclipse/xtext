@@ -22,6 +22,9 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 /**
+ * A scope that returns types, e.g. for member feature calls that are actually type references like
+ * {@code java.lang.String}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TypeLiteralScope extends AbstractSessionBasedScope {
@@ -29,7 +32,7 @@ public class TypeLiteralScope extends AbstractSessionBasedScope {
 	private final QualifiedName parentSegments;
 	private final IResolvedTypes resolvedTypes;
 
-	protected TypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, IResolvedTypes resolvedTypes, QualifiedName parentSegments) {
+	public TypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, IResolvedTypes resolvedTypes, QualifiedName parentSegments) {
 		super(parent, session, featureCall);
 		this.resolvedTypes = resolvedTypes;
 		this.parentSegments = parentSegments;

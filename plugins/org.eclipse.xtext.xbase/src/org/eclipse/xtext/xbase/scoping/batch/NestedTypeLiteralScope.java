@@ -25,17 +25,19 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import com.google.common.collect.Lists;
 
 /**
+ * A scope that returns nested types.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 
-	private final JvmType outerType;
-	private final LightweightTypeReference receiverType;
+	private final JvmType rawEnclosingType;
+	private final LightweightTypeReference enclosingType;
 
-	protected NestedTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, LightweightTypeReference receiverType, JvmType outerType) {
+	public NestedTypeLiteralScope(IScope parent, IFeatureScopeSession session, XAbstractFeatureCall featureCall, LightweightTypeReference enclosingType, JvmType rawEnclosingType) {
 		super(parent, session, featureCall);
-		this.outerType = outerType;
-		this.receiverType = receiverType;
+		this.rawEnclosingType = rawEnclosingType;
+		this.enclosingType = enclosingType;
 	}
 
 	@Override
@@ -43,16 +45,16 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall.isExplicitOperationCallOrBuilderSyntax())
 			return Collections.emptyList();
-		if (outerType instanceof JvmDeclaredType && name.getSegmentCount() == 1) {
+		if (rawEnclosingType instanceof JvmDeclaredType && name.getSegmentCount() == 1) {
 			String singleSegment = name.getFirstSegment();
 			List<String> lookup = Collections.singletonList(singleSegment);
 			if (singleSegment.indexOf('$') != -1) {
 				lookup = Strings.split(singleSegment, '$');
 			}
-			JvmType result = findNestedType((JvmDeclaredType)outerType, lookup.iterator());
+			JvmType result = findNestedType((JvmDeclaredType)rawEnclosingType, lookup.iterator());
 			if (result != null) {
 				IEObjectDescription description = EObjectDescription.create(name, result);
-				return Collections.<IEObjectDescription>singletonList(new TypeLiteralDescription(description, receiverType, isVisible(result)));
+				return Collections.<IEObjectDescription>singletonList(new TypeLiteralDescription(description, enclosingType, isVisible(result)));
 			}
 		}
 		return Collections.emptyList();
@@ -80,11 +82,11 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 	@Override
 	protected List<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayListWithExpectedSize(2);
-		if (outerType instanceof JvmDeclaredType) {
-			for(JvmMember member: ((JvmDeclaredType) outerType).getMembers()) {
+		if (rawEnclosingType instanceof JvmDeclaredType) {
+			for(JvmMember member: ((JvmDeclaredType) rawEnclosingType).getMembers()) {
 				if (member instanceof JvmDeclaredType) {
 					IEObjectDescription description = EObjectDescription.create(member.getSimpleName(), member);
-					result.add(new TypeLiteralDescription(description, receiverType, isVisible((JvmType) member)));
+					result.add(new TypeLiteralDescription(description, enclosingType, isVisible((JvmType) member)));
 				}
 			}
 		}

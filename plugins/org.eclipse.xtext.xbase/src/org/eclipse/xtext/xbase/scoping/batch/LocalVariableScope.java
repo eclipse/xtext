@@ -21,6 +21,8 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Provider;
 
 /**
+ * A scope for the local variables that have been registered in the given session.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class LocalVariableScope extends AbstractSessionBasedScope {

@@ -28,6 +28,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import com.google.common.collect.Lists;
 
 /**
+ * A scope that contains static extension features, which are features that are contributed statically via an import.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
