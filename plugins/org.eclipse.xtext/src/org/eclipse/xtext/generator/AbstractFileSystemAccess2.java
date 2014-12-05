@@ -40,4 +40,11 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 	}
 
 	
+	/**
+	 * @since 2.8
+	 */
+	public void setContext(Object context) {
+		// do nothing
+	}
+	
 }
