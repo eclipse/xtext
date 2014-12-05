@@ -45,6 +45,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
@@ -192,6 +193,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter")
 				.addTypeToType(MutableFileSystemSupport.class.getCanonicalName(), "org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport")
 				.addTypeToType(FileLocations.class.getCanonicalName(), "org.eclipse.xtext.xbase.file.FileLocationsImpl")
+				.addConfiguredBinding(ITransientValueService.class.getCanonicalName(), "binder.bind("+ITransientValueService.class.getName()+".class).to(org.eclipse.xtext.xbase.serializer.XbaseTransientValueService.class);")
 				.addTypeToProvider("org.eclipse.xtext.xbase.file.WorkspaceConfig", "org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider");
 		if (doesUseXbaseWithAnnotations(grammar)) {
 			config = config

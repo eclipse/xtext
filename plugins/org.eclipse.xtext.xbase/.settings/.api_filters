@@ -11,6 +11,11 @@
                 <message_argument value="configureFormatterPreferences(Binder)"/>
             </message_arguments>
         </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="configureITransientValueService(Binder)"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src-gen/org/eclipse/xtext/xbase/AbstractXtypeRuntimeModule.java" type="org.eclipse.xtext.xbase.AbstractXtypeRuntimeModule">
         <filter id="1143996420">
