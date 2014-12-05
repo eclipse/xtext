@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 
@@ -28,7 +29,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public class DerivedStateAwareResource extends LazyLinkingResource {
+public class DerivedStateAwareResource extends StorageAwareResource {
 
 	@Inject(optional=true)
 	private IDerivedStateComputer derivedStateComputer;
@@ -62,7 +63,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	 */
 	@Override
 	public synchronized EList<EObject> getContents() {
-		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized) {
+		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage) {
 			try {
 				eSetDeliver(false);
 				installDerivedState(false);
@@ -189,7 +190,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	public void installDerivedState(boolean preIndexingPhase) {
 		if (!isLoaded)
 			throw new IllegalStateException("The resource must be loaded, before installDerivedState can be called.");
-		if (!fullyInitialized && !isInitializing) {
+		if (!fullyInitialized && !isInitializing && !isLoadedFromStorage) {
 			try {
 				isInitializing = true;
 				if (derivedStateComputer != null)
