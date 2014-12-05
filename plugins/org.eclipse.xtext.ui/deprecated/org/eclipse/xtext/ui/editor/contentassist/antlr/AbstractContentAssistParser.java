@@ -29,8 +29,8 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
-import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.InfiniteRecursion;
@@ -47,7 +47,7 @@ import com.google.inject.name.Named;
 public abstract class AbstractContentAssistParser implements IContentAssistParser {
 
 	@Inject
-	@Named(LexerUIBindings.CONTENT_ASSIST)
+	@Named(LexerIdeBindings.CONTENT_ASSIST)
 	private Provider<Lexer> lexerProvider;
 	
 	@Inject
