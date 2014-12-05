@@ -19,8 +19,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.Lexer;
-import org.eclipse.xtext.ui.LexerUIBindings;
 
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Lists;
@@ -193,7 +193,7 @@ public class DocumentTokenSource {
 	private DocumentEvent previousEvent;
 
 	@Inject
-	@Named(LexerUIBindings.HIGHLIGHTING)
+	@Named(LexerIdeBindings.HIGHLIGHTING)
 	private Provider<Lexer> lexer;
 
 	public Iterable<ILexerTokenRegion> getTokenInfos() {
