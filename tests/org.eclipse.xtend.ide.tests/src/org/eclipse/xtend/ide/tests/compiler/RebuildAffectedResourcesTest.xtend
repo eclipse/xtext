@@ -18,16 +18,22 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.core.resources.IWorkspace
 
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;
 	
+	@Inject 
+	private IWorkspace workspace
+	
 	@Rule public StopwatchRule rule = new StopwatchRule(true)
 	
 	@After override void tearDown() {
-		workbenchTestHelper.project.delete(true, null)
+		for (p : workspace.root.projects) {
+			p.delete(true, true, null)
+		}
 	}
 	
 	@Test def void testRemoveReferencedType() {

@@ -1397,7 +1397,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     if (!_matched) {
       if (value instanceof JvmCustomAnnotationValue) {
         boolean _and = false;
-        EList<Object> _values = ((JvmCustomAnnotationValue)value).getValues();
+        EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
         boolean _isEmpty = _values.isEmpty();
         if (!_isEmpty) {
           _and = false;
@@ -1417,7 +1417,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       if (value instanceof JvmCustomAnnotationValue) {
         _matched=true;
         final JvmTypeReference expectedType = this.findExpectedType(value);
-        EList<Object> _values = ((JvmCustomAnnotationValue)value).getValues();
+        EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
         Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
         final Function1<XExpression, Object> _function = new Function1<XExpression, Object>() {
           public Object apply(final XExpression it) {

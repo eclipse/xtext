@@ -31,8 +31,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -87,6 +90,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 
 	@Inject
 	private IWorkspace workspace;
+	
+	@Inject
+	private IJavaProjectProvider javaProjectProvider;
 
 	private Multimap<URI, IPath> sourceTraces;
 
@@ -120,6 +126,27 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 
 	public void setProject(IProject project) {
 		this.project = project;
+	}
+	
+	@Override
+	public void setContext(Object context) {
+		if (context instanceof IProject) {
+			setProject((IProject) context);
+		} else if (context instanceof Resource) {
+			Resource resource = (Resource) context;
+			if (resource.getURI().isPlatformResource()) {
+				String projectName = URI.decode(resource.getURI().segment(1));
+				IProject project = workspace.getRoot().getProject(projectName);
+				if (project.exists() && project.isAccessible()) {
+					setProject(project);
+					return;
+				} 
+			}
+			IJavaProject javaProject = javaProjectProvider.getJavaProject(resource.getResourceSet());
+			setProject(javaProject.getProject());
+		} else {
+			throw new IllegalArgumentException("Couldn't handle context "+context);
+		}
 	}
 	
 	/**

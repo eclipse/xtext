@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.ResourceStorageInputStream;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -20,12 +24,14 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, Provider<IResourceDescription> {
+public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension, Provider<IResourceDescription> {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
 	private String content;
 	private URI normalizedUri;
+	private Collection<? extends EObject> fullState;
+	private ResourceStorageInputStream storageAwareResourceInputStream;
 	
 	public void connect(IXtextDocument document) {
 		if (document == null)
@@ -151,5 +157,18 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	public URI getNormalizedURI() {
 		return normalizedUri;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public ResourceStorageInputStream getResourceStorageInputStream() {
+		return this.storageAwareResourceInputStream;
+	}
 
+	/**
+	 * @since 2.8
+	 */
+	public void setResourceStorageInputStream(ResourceStorageInputStream storageAwareResourceInputStream) {
+		this.storageAwareResourceInputStream = storageAwareResourceInputStream;
+	}
 }
