@@ -15,6 +15,7 @@ import java.util.concurrent.ConcurrentMap;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvid
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
+import org.eclipse.xtext.ui.editor.IDirtyResource.ICurrentStateProvidingExtension;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -113,6 +115,15 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		if (dirtyResource != null)
 			return dirtyResource.getContents();
 		return null;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void installFullState(Resource emptyResource) {
+		IDirtyResource.ICurrentStateProvidingExtension dirtyResource = (ICurrentStateProvidingExtension) findDirtyResourcebyURIorNormalizedURI(emptyResource.getURI());
+		if (dirtyResource != null)
+			dirtyResource.installState(emptyResource);
 	}
 
 	/**
