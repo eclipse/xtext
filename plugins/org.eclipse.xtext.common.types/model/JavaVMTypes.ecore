@@ -391,9 +391,8 @@
         eType="#//JvmTypeReference" containment="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmCustomAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" unique="false"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
-        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmInnerTypeReference" eSuperTypes="#//JvmParameterizedTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outer" eType="#//JvmParameterizedTypeReference"

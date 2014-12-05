@@ -3,6 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.linking;
 
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+
 import com.google.inject.Binder;
 
 /**
@@ -16,5 +19,9 @@ public class LangATestLanguageRuntimeModule extends AbstractLangATestLanguageRun
 		
 		// extend configuration here
 	}
-	
+
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return StorageAwareResource.class;
+	}
 }

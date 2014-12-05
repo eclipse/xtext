@@ -45,6 +45,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -409,8 +410,26 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
     }
   }
   
+  protected boolean isResolveProxies(final EObject ctx) {
+    boolean _switchResult = false;
+    Resource _eResource = ctx.eResource();
+    final Resource res = _eResource;
+    boolean _matched = false;
+    if (!_matched) {
+      if (res instanceof StorageAwareResource) {
+        _matched=true;
+        _switchResult = ((StorageAwareResource)res).isIsLoadedFromStorage();
+      }
+    }
+    if (!_matched) {
+      _switchResult = false;
+    }
+    return _switchResult;
+  }
+  
   protected Object _internalEvaluate(final XFeatureCall it, final Context ctx) {
-    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+    boolean _isResolveProxies = this.isResolveProxies(it);
+    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, _isResolveProxies);
     final EObject feature = ((EObject) _eGet);
     boolean _eIsProxy = feature.eIsProxy();
     boolean _not = (!_eIsProxy);
@@ -576,7 +595,8 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected Object _internalEvaluate(final XMemberFeatureCall it, final Context ctx) {
-    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+    boolean _isResolveProxies = this.isResolveProxies(it);
+    Object _eGet = it.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, _isResolveProxies);
     final EObject feature = ((EObject) _eGet);
     boolean _eIsProxy = feature.eIsProxy();
     boolean _not = (!_eIsProxy);

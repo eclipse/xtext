@@ -10,6 +10,10 @@ package org.eclipse.xtend.ide.tests.refactoring;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -70,6 +74,9 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	
 	@Inject 
 	private SyncUtil syncUtil;
+	
+	@Inject
+	private IWorkspace workspace;
 	
 	@Inject 
 	private CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess;
