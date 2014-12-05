@@ -19,6 +19,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ClasspathEntry;
 import org.eclipse.jdt.internal.core.util.Util;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 
 import com.google.inject.Inject;
@@ -28,6 +29,9 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("restriction")
 public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProvider {
+	
+	@Inject(optional=true) 
+	private IResourceStorageFacade resourceStorageFacade;
 
 	@Inject
 	public XtendResourceUiServiceProvider(IResourceServiceProvider delegate) {
@@ -47,6 +51,10 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 			IProject project = file.getProject();
 			IJavaProject javaProject = JavaCore.create(project);
 			return isInSourceFolder(javaProject, file);
+		}
+		// also load and index if it has storage data attached
+		if (resourceStorageFacade != null && resourceStorageFacade.hasStorageFor(uri)) {
+			return true;
 		}
 		return false;
 	}
