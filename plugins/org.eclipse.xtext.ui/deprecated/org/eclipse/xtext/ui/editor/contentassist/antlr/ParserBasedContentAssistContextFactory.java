@@ -45,6 +45,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -123,7 +124,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		 * @since 2.5
 		 */
 		@Inject
-		@Named(LexerUIBindings.CONTENT_ASSIST)
+		@Named(LexerIdeBindings.CONTENT_ASSIST)
 		protected Lexer lexer; 
 		
 		/**

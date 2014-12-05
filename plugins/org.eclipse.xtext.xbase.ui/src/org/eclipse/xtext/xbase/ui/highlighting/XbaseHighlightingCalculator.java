@@ -29,13 +29,13 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
@@ -251,7 +251,7 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected void highlightNumberLiterals(XNumberLiteral literal, IHighlightedPositionAcceptor acceptor) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(literal);
 		ITextRegion textRegion = node.getTextRegion();
-		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), DefaultHighlightingConfiguration.NUMBER_ID);
+		acceptor.addPosition(textRegion.getOffset(), textRegion.getLength(), HighlightingStyles.NUMBER_ID);
 	}
 	
 
@@ -292,11 +292,11 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 	protected Map<String, String> initializeHighlightedIdentifiers() {
 		Map<String, String> result = Maps.newHashMap();
 		for (Primitive p : Primitives.Primitive.values()) {
-			result.put(p.name().toLowerCase(), DefaultHighlightingConfiguration.KEYWORD_ID);
+			result.put(p.name().toLowerCase(), HighlightingStyles.KEYWORD_ID);
 		}
-		result.put("this", DefaultHighlightingConfiguration.KEYWORD_ID);
-		result.put("it", DefaultHighlightingConfiguration.KEYWORD_ID);
-		result.put("self", DefaultHighlightingConfiguration.KEYWORD_ID);
+		result.put("this", HighlightingStyles.KEYWORD_ID);
+		result.put("it", HighlightingStyles.KEYWORD_ID);
+		result.put("self", HighlightingStyles.KEYWORD_ID);
 		return result;
 	}
 	
