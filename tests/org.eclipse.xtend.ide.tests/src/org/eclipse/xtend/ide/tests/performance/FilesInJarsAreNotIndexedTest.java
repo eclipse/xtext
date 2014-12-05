@@ -11,8 +11,10 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.InputStream;
+import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -21,10 +23,12 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.junit.Test;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -35,7 +39,7 @@ public class FilesInJarsAreNotIndexedTest extends AbstractXtendUITestCase {
 	private WorkbenchTestHelper workbenchTestHelper;
 	
 	@Inject
-	private IResourceDescriptions descriptions;
+	private Provider<IResourceDescriptions> descriptionsProvider;
 	
 	@Test
 	public void testXtendInSourceIsIndexed() throws Exception {
@@ -44,6 +48,7 @@ public class FilesInJarsAreNotIndexedTest extends AbstractXtendUITestCase {
 		addSourceFolder(javaProject, "src");
 		IFile file = workbenchTestHelper.createFile("src/my/XtendClass.xtend", "package my class XtendClass { } ");
 		waitForAutoBuild();
+		IResourceDescriptions descriptions = descriptionsProvider.get();
 		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(), true), descriptions.getAllResourceDescriptions().iterator().next().getURI());
 	}
 	
@@ -52,7 +57,7 @@ public class FilesInJarsAreNotIndexedTest extends AbstractXtendUITestCase {
 		IProject project = workbenchTestHelper.getProject();
 		IJavaProject javaProject = JavaCore.create(project);
 		addSourceFolder(javaProject, "src");
-		IFile file = workbenchTestHelper.createFile("src/my/XtendClass.xtend", "package my\n" +
+		IFile file = workbenchTestHelper.createFile("my/XtendClass.xtend", "package my\n" +
 				"import static extension example5.Distance.*\n" + 
 				"import static extension example5.Time.*\n" + 
 				"import static extension example5.Speed.*\n" +
@@ -65,7 +70,14 @@ public class FilesInJarsAreNotIndexedTest extends AbstractXtendUITestCase {
 				" } ");
 		addJarToClasspath(javaProject, copyAndGetXtendExampleJar(javaProject));
 		waitForAutoBuild();
-		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(), true), descriptions.getAllResourceDescriptions().iterator().next().getURI());
+		IMarker[] markers = file.findMarkers(IMarker.PROBLEM, true, -1);
+		if (markers.length>0) {
+			fail("No markers expected but got: "+markers[0].getAttribute(IMarker.MESSAGE));
+		}
+		IResourceDescriptions descriptions = descriptionsProvider.get();
+		Iterator<IResourceDescription> iterator = descriptions.getAllResourceDescriptions().iterator();
+		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(), true), iterator.next().getURI());
+		assertFalse(iterator.hasNext());
 	}
 	
 	private IFile copyAndGetXtendExampleJar(IJavaProject javaProject1) throws CoreException {
