@@ -25,7 +25,7 @@ Export-Package: foo;x-friends:="org.eclipse.xtext.xbase.tests",
  org.eclipse.xtext.xbase.tests.file;x-internal:=true,
  org.eclipse.xtext.xbase.tests.interpreter
 Import-Package: javax.inject;version="1.0.0",
- org.junit;version="4.5.0",
+ org.junit,
  org.junit.rules;version="4.7.0",
  org.junit.runner;version="4.7.0",
  org.junit.runners;version="4.7.0"
