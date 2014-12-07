@@ -3,7 +3,6 @@ package org.eclipse.xtext.idea.nodemodel;
 import com.google.inject.ImplementedBy;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Key;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
@@ -29,6 +28,8 @@ public interface IASTNodeAwareNodeModelBuilder {
   
   public abstract Map<INode, List<ASTNode>> getReverseNodesMapping();
   
+  public abstract ICompositeNode newRootNode(final String text);
+  
   public abstract ILeafNode newLeafNode(final ASTNode astNode, final ICompositeNode parent);
   
   public abstract ILeafNode newLeafNode(final LeafElement leafElement, final EObject grammarElement, final ICompositeNode parent);
@@ -36,8 +37,6 @@ public interface IASTNodeAwareNodeModelBuilder {
   public abstract ICompositeNode newCompositeNode(final CompositeElement compositeElement, final ICompositeNode parent);
   
   public abstract ICompositeNode newCompositeNodeAsParentOf(final CompositeElement compositeElement, final EObject grammarElement, final int lookahead, final ICompositeNode existing);
-  
-  public abstract ICompositeNode newRootNode(final PsiFile psiFile);
   
   public abstract void associateWithSemanticElement(final ICompositeNode node, final EObject astElement);
   

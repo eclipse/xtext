@@ -2,7 +2,6 @@ package org.eclipse.xtext.idea.nodemodel
 
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
 import java.util.List
@@ -51,20 +50,12 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeA
 		}
 	}
 	
-	protected def removeAssociations(INode node) {
-		val mapping = reverseNodesMapping.remove(node)
-		if (mapping != null) {
-			for (astNode : mapping) {
-				nodesMapping.remove(astNode)
-			}
-		}
-	}
-	
 	override protected replaceByRootNode(CompositeNode oldNode, RootNode rootNode) {
+		replaceAssociations(oldNode, rootNode)
 		val firstChild = rootNode.firstChild
 		super.replaceByRootNode(oldNode, rootNode)
-		if (firstChild != null) {
-			removeAssociations(firstChild)
+		if (firstChild != oldNode) {
+			replaceAssociations(firstChild, oldNode)
 		}
 		replaceAssociations(oldNode, rootNode)
 	}
@@ -117,10 +108,6 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeA
 		val compositeNode = grammarElement.newCompositeNodeAsParentOf(lookahead, existing) 
 		associate(compositeNode)
 		compositeNode
-	}
-	
-	override newRootNode(PsiFile psiFile) {
-		newRootNode(psiFile.text)
 	}
 
 }

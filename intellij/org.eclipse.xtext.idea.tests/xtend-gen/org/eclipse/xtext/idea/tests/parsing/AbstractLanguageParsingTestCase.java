@@ -6,9 +6,12 @@ import com.intellij.lang.ASTFactory;
 import com.intellij.lang.LanguageASTFactory;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.ParsingTestCase;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -200,6 +203,11 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
         ((XtextResource) _createResource), _function);
     }
     return _xblockexpression;
+  }
+  
+  protected String loadFile(final String name) throws IOException {
+    File _file = new File(this.myFullDataPath, name);
+    return FileUtil.loadFile(_file, CharsetToolkit.UTF8, true);
   }
   
   @Pure

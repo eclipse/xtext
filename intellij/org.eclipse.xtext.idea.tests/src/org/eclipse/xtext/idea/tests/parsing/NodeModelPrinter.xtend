@@ -22,7 +22,7 @@ class NodeModelPrinter {
 	}
 
 	protected def String doPrint(INode it) '''
-		«class» «textRegion»
+		«class» «totalTextRegion»
 		grammarElements: «grammarElement.printGrammarElement»
 		«IF hasDirectSemanticElement»directSemanticElement: «semanticElement.class.name»«ENDIF»
 		«IF it instanceof ICompositeNode»lookAhead: «lookAhead»«ENDIF»

@@ -51,8 +51,8 @@ public class NodeModelPrinter {
     Class<? extends INode> _class = it.getClass();
     _builder.append(_class, "");
     _builder.append(" ");
-    ITextRegion _textRegion = it.getTextRegion();
-    _builder.append(_textRegion, "");
+    ITextRegion _totalTextRegion = it.getTotalTextRegion();
+    _builder.append(_totalTextRegion, "");
     _builder.newLineIfNotEmpty();
     _builder.append("grammarElements: ");
     EObject _grammarElement = it.getGrammarElement();

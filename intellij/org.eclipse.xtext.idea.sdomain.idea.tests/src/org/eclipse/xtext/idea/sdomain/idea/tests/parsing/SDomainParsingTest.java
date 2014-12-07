@@ -14,6 +14,10 @@ public class SDomainParsingTest extends AbstractLanguageParsingTestCase {
 		return "./testData/parsing";
 	}
 	
+	public void testEmpty() {
+		doTest(true);
+	}
+	
 	public void testNamespaces() {
 		doTest(true);
 	}

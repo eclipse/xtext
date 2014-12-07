@@ -3,7 +3,6 @@ package org.eclipse.xtext.idea.resource
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiErrorElement
-import com.intellij.psi.PsiFile
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.impl.source.tree.LeafElement
 import javax.inject.Provider
@@ -29,6 +28,7 @@ import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider
 import org.eclipse.xtext.parser.impl.DatatypeRuleToken
 import org.eclipse.xtext.psi.IPsiModelAssociator
+import org.eclipse.xtext.psi.impl.BaseXtextFile
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 
@@ -45,6 +45,9 @@ class PsiToEcoreTransformationContext {
 
 	@Inject
 	Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider
+	
+	@Accessors(PUBLIC_GETTER)
+	BaseXtextFile xtextFile
 
 	@Accessors(PUBLIC_GETTER)
 	boolean hadErrors
@@ -67,6 +70,10 @@ class PsiToEcoreTransformationContext {
 
 	def getNodesMapping() {
 		nodeModelBuilder.nodesMapping
+	}
+	
+	def getReverseNodesMapping() {
+		nodeModelBuilder.reverseNodesMapping
 	}
 
 	def branch() {
@@ -274,9 +281,10 @@ class PsiToEcoreTransformationContext {
 		}
 	}
 
-	protected def newRootNode(PsiFile psiFile) {
+	protected def newRootNode(BaseXtextFile xtextFile) {
 		hadErrors = false
-		currentNode = nodeModelBuilder.newRootNode(psiFile)
+		this.xtextFile = xtextFile
+		currentNode = nodeModelBuilder.newRootNode(xtextFile.text)
 	}
 
 	static class PsiToEcoreTransformationContextProvider {
@@ -287,10 +295,10 @@ class PsiToEcoreTransformationContext {
 		@Inject
 		Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider
 
-		def newTransformationContext(PsiFile it) {
+		def newTransformationContext(BaseXtextFile xtextFile) {
 			val context = psiToEcoreTransformationContextProvider.get
 			context.nodeModelBuilder = astNodeModelBuilderProvider.get
-			context.newRootNode(it)
+			context.newRootNode(xtextFile)
 			context
 		}
 
