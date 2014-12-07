@@ -59,6 +59,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.types.psi.JvmPsiClass
 import org.eclipse.xtext.psi.PsiModelAssociations
+import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
@@ -241,10 +242,14 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 
 	private def PsiType toPsiType(JvmTypeReference type) {
-		if (type instanceof XComputedTypeReference) {
-			type.equivalent.toPsiType
-		} else {
-			PsiImplUtil.buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
+		try {
+			if (type instanceof XComputedTypeReference) {
+				type.equivalent.toPsiType
+			} else {
+				PsiImplUtil.buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
+			}
+		} catch (OperationCanceledError t) {
+			throw t.wrapped
 		}
 	}
 

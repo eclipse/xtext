@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import java.util.List;
@@ -43,6 +42,7 @@ import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import org.eclipse.xtext.parser.impl.DatatypeRuleToken;
 import org.eclipse.xtext.psi.IPsiModelAssociator;
 import org.eclipse.xtext.psi.PsiElementProvider;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -59,13 +59,13 @@ public class PsiToEcoreTransformationContext {
     @Inject
     private Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider;
     
-    public PsiToEcoreTransformationContext newTransformationContext(final PsiFile it) {
+    public PsiToEcoreTransformationContext newTransformationContext(final BaseXtextFile xtextFile) {
       PsiToEcoreTransformationContext _xblockexpression = null;
       {
         final PsiToEcoreTransformationContext context = this.psiToEcoreTransformationContextProvider.get();
         IASTNodeAwareNodeModelBuilder _get = this.astNodeModelBuilderProvider.get();
         context.nodeModelBuilder = _get;
-        context.newRootNode(it);
+        context.newRootNode(xtextFile);
         _xblockexpression = context;
       }
       return _xblockexpression;
@@ -83,6 +83,9 @@ public class PsiToEcoreTransformationContext {
   
   @Inject
   private Provider<PsiToEcoreTransformationContext> psiToEcoreTransformationContextProvider;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private BaseXtextFile xtextFile;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private boolean hadErrors;
@@ -106,6 +109,10 @@ public class PsiToEcoreTransformationContext {
   
   public Map<ASTNode, INode> getNodesMapping() {
     return this.nodeModelBuilder.getNodesMapping();
+  }
+  
+  public Map<INode, List<ASTNode>> getReverseNodesMapping() {
+    return this.nodeModelBuilder.getReverseNodesMapping();
   }
   
   public PsiToEcoreTransformationContext branch() {
@@ -344,7 +351,7 @@ public class PsiToEcoreTransformationContext {
     boolean _xblockexpression = false;
     {
       this.nodeModelBuilder.associateWithSemanticElement(node, this.current);
-      Map<INode, List<ASTNode>> _reverseNodesMapping = this.nodeModelBuilder.getReverseNodesMapping();
+      Map<INode, List<ASTNode>> _reverseNodesMapping = this.getReverseNodesMapping();
       List<ASTNode> _get = _reverseNodesMapping.get(node);
       ASTNode _last = null;
       if (_get!=null) {
@@ -485,14 +492,21 @@ public class PsiToEcoreTransformationContext {
     return _xifexpression;
   }
   
-  protected ICompositeNode newRootNode(final PsiFile psiFile) {
+  protected ICompositeNode newRootNode(final BaseXtextFile xtextFile) {
     ICompositeNode _xblockexpression = null;
     {
       this.hadErrors = false;
-      ICompositeNode _newRootNode = this.nodeModelBuilder.newRootNode(psiFile);
+      this.xtextFile = xtextFile;
+      String _text = xtextFile.getText();
+      ICompositeNode _newRootNode = this.nodeModelBuilder.newRootNode(_text);
       _xblockexpression = this.currentNode = _newRootNode;
     }
     return _xblockexpression;
+  }
+  
+  @Pure
+  public BaseXtextFile getXtextFile() {
+    return this.xtextFile;
   }
   
   @Pure

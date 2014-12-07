@@ -3,7 +3,6 @@ package org.eclipse.xtext.idea.nodemodel;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.tree.IElementType;
@@ -72,22 +71,13 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
     }
   }
   
-  protected void removeAssociations(final INode node) {
-    final List<ASTNode> mapping = this.reverseNodesMapping.remove(node);
-    boolean _notEquals = (!Objects.equal(mapping, null));
-    if (_notEquals) {
-      for (final ASTNode astNode : mapping) {
-        this.nodesMapping.remove(astNode);
-      }
-    }
-  }
-  
   protected void replaceByRootNode(final CompositeNode oldNode, final RootNode rootNode) {
+    this.replaceAssociations(oldNode, rootNode);
     final INode firstChild = rootNode.getFirstChild();
     super.replaceByRootNode(oldNode, rootNode);
-    boolean _notEquals = (!Objects.equal(firstChild, null));
+    boolean _notEquals = (!Objects.equal(firstChild, oldNode));
     if (_notEquals) {
-      this.removeAssociations(firstChild);
+      this.replaceAssociations(firstChild, oldNode);
     }
     this.replaceAssociations(oldNode, rootNode);
   }
@@ -201,11 +191,6 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
       _xblockexpression = compositeNode;
     }
     return _xblockexpression;
-  }
-  
-  public ICompositeNode newRootNode(final PsiFile psiFile) {
-    String _text = psiFile.getText();
-    return this.newRootNode(_text);
   }
   
   @Pure

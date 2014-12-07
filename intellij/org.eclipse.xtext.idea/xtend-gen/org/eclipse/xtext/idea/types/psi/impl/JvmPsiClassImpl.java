@@ -74,8 +74,10 @@ import org.eclipse.xtext.idea.types.psi.impl.AnnotatableModifierList;
 import org.eclipse.xtext.idea.types.psi.impl.LightAnnotation;
 import org.eclipse.xtext.idea.types.psi.impl.LightFieldBuilder;
 import org.eclipse.xtext.psi.PsiModelAssociations;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -387,16 +389,27 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   }
   
   private PsiType toPsiType(final JvmTypeReference type) {
-    PsiType _xifexpression = null;
-    if ((type instanceof XComputedTypeReference)) {
-      JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
-      _xifexpression = this.toPsiType(_equivalent);
-    } else {
-      String _qualifiedName = type.getQualifiedName('.');
-      PsiFile _containingFile = this.getContainingFile();
-      _xifexpression = PsiImplUtil.buildTypeFromTypeString(_qualifiedName, this.psiElement, _containingFile);
+    PsiType _xtrycatchfinallyexpression = null;
+    try {
+      PsiType _xifexpression = null;
+      if ((type instanceof XComputedTypeReference)) {
+        JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
+        _xifexpression = this.toPsiType(_equivalent);
+      } else {
+        String _qualifiedName = type.getQualifiedName('.');
+        PsiFile _containingFile = this.getContainingFile();
+        _xifexpression = PsiImplUtil.buildTypeFromTypeString(_qualifiedName, this.psiElement, _containingFile);
+      }
+      _xtrycatchfinallyexpression = _xifexpression;
+    } catch (final Throwable _t) {
+      if (_t instanceof OperationCanceledError) {
+        final OperationCanceledError t = (OperationCanceledError)_t;
+        throw t.getWrapped();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
-    return _xifexpression;
+    return _xtrycatchfinallyexpression;
   }
   
   public List<PsiClass> getOwnInnerClasses() {

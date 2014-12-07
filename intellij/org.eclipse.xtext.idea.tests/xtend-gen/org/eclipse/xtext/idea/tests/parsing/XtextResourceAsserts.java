@@ -3,8 +3,10 @@ package org.eclipse.xtext.idea.tests.parsing;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.FileASTNode;
+import com.intellij.psi.PsiErrorElement;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
@@ -14,6 +16,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -47,19 +50,39 @@ public class XtextResourceAsserts extends Assert {
     String _objToStr_1 = EmfFormatter.objToStr(actualRootASTElement);
     Assert.assertEquals(_objToStr, _objToStr_1);
     this.invariantChecker.checkInvariant(actualRootNode);
-    PsiToEcoreAdapter _get = PsiToEcoreAdapter.get(actualResource);
-    final Map<ASTNode, INode> nodesMapping = _get.getNodesMapping();
-    Set<ASTNode> _keySet = nodesMapping.keySet();
-    for (final ASTNode astNode : _keySet) {
-      {
-        final INode node = nodesMapping.get(astNode);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Node ");
-        _builder.append(node, "");
-        _builder.append(" is not a part of the tree");
-        boolean _belongsTo = this.belongsTo(node, actualRootNode);
-        Assert.assertTrue(_builder.toString(), _belongsTo);
-      }
+    final PsiToEcoreAdapter psiToEcoreAdapter = PsiToEcoreAdapter.get(actualResource);
+    BaseXtextFile _xtextFile = psiToEcoreAdapter.getXtextFile();
+    FileASTNode _node = _xtextFile.getNode();
+    ASTNode[] _children = _node.getChildren(null);
+    for (final ASTNode child : _children) {
+      this.assertASTNode(child, actualRootNode, psiToEcoreAdapter);
+    }
+  }
+  
+  protected void assertASTNode(final ASTNode astNode, final ICompositeNode rootNode, final PsiToEcoreAdapter psiToEcoreAdapter) {
+    if ((!(astNode instanceof PsiErrorElement))) {
+      Map<ASTNode, INode> _nodesMapping = psiToEcoreAdapter.getNodesMapping();
+      final INode node = _nodesMapping.get(astNode);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("The node is null the ast node: ");
+      _builder.append(astNode, "");
+      Assert.assertNotNull(_builder.toString(), node);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("The node ");
+      _builder_1.append(node, "");
+      _builder_1.append(" is not a part of the tree for the ast node: ");
+      _builder_1.append(astNode, "");
+      boolean _belongsTo = this.belongsTo(node, rootNode);
+      Assert.assertTrue(_builder_1.toString(), _belongsTo);
+      Map<INode, List<ASTNode>> _reverseNodesMapping = psiToEcoreAdapter.getReverseNodesMapping();
+      final List<ASTNode> reverseNodesMapping = _reverseNodesMapping.get(node);
+      Assert.assertNotNull(reverseNodesMapping);
+      boolean _contains = reverseNodesMapping.contains(astNode);
+      Assert.assertTrue(_contains);
+    }
+    ASTNode[] _children = astNode.getChildren(null);
+    for (final ASTNode child : _children) {
+      this.assertASTNode(child, rootNode, psiToEcoreAdapter);
     }
   }
   

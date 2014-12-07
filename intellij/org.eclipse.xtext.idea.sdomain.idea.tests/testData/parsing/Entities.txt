@@ -1,4 +1,4 @@
-org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:Entities.sdomain(0,30)
+org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:Entities.sdomain(0,31)
   org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,30)
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ElementsElementParserRuleCall_0_ELEMENT_TYPE)(0,14)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Element_TypeParserRuleCall_1_ELEMENT_TYPE)(0,14)
@@ -21,3 +21,4 @@ org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:Entities.sdoma
           PsiElement(Entity_LeftCurlyBracketKeyword_2_ELEMENT_TYPE)('{')(27,28)
           PsiWhiteSpace('\n')(28,29)
           PsiElement(Entity_RightCurlyBracketKeyword_4_ELEMENT_TYPE)('}')(29,30)
+  PsiWhiteSpace('\n')(30,31)

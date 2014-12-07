@@ -5,8 +5,11 @@ import com.google.inject.Provider
 import com.intellij.lang.LanguageASTFactory
 import com.intellij.lang.ParserDefinition
 import com.intellij.openapi.fileTypes.LanguageFileType
+import com.intellij.openapi.util.io.FileUtil
+import com.intellij.openapi.vfs.CharsetToolkit
 import com.intellij.testFramework.ParsingTestCase
 import java.io.ByteArrayInputStream
+import java.io.File
 import java.io.IOException
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
@@ -132,6 +135,10 @@ abstract class AbstractLanguageParsingTestCase extends ParsingTestCase implement
 		resourceSet.createResource(uri) as XtextResource => [
 			load(new ByteArrayInputStream(myFile.text.bytes), null)
 		]
+	}
+	
+	override protected loadFile(String name) throws IOException {
+		FileUtil.loadFile(new File(myFullDataPath, name), CharsetToolkit.UTF8, true)
 	}
 
 }
