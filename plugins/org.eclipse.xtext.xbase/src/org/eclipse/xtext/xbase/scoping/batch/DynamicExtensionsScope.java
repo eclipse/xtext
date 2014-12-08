@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.beans.Introspector;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -85,29 +84,38 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 		}
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for (ExpressionBucket bucket : buckets) {
-			Map<XExpression, LightweightTypeReference> extensionProviders = bucket.getExtensionProviders();
-			for (Map.Entry<XExpression, LightweightTypeReference> extensionProvider : extensionProviders.entrySet()) {
-				Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
-				LightweightTypeReference extensionType = extensionProvider.getValue();
-				List<JvmType> types = extensionType.getRawTypes();
-				for (JvmType type : types) {
-					if (type instanceof JvmDeclaredType) {
-						IResolvedFeatures resolvedFeatures = bucket.getResolvedFeaturesProvider().getResolvedFeatures(type).getParameterizedView(extensionType);
-						List<JvmFeature> features = resolvedFeatures.getAllFeatures();
-						allFeatures.addAll(features);
-					}
-				}
-				if (!allFeatures.isEmpty()) {
-					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
-					for (JvmFeature feature : allFeatures) {
-						if (!feature.isStatic()) {
-							addDescriptions(feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket, result);
-						}
+			getAllLocalElements(bucket, result);
+		}
+		return result;
+	}
+
+	protected void getAllLocalElements(ExpressionBucket bucket, List<IEObjectDescription> result) {
+		Map<XExpression, LightweightTypeReference> extensionProviders = bucket.getExtensionProviders();
+		for (Map.Entry<XExpression, LightweightTypeReference> extensionProvider : extensionProviders.entrySet()) {
+			LightweightTypeReference extensionType = extensionProvider.getValue();
+			Set<JvmFeature> allFeatures = getAllFeatures(extensionType, bucket.getResolvedFeaturesProvider());
+			if (!allFeatures.isEmpty()) {
+				Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
+				for (JvmFeature feature : allFeatures) {
+					if (!feature.isStatic()) {
+						addDescriptions(feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket, result);
 					}
 				}
 			}
 		}
-		return result;
+	}
+
+	protected Set<JvmFeature> getAllFeatures(LightweightTypeReference extensionType, IResolvedFeatures.Provider resolvedFeaturesProvider) {
+		Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
+		List<JvmType> types = extensionType.getRawTypes();
+		for (JvmType type : types) {
+			if (type instanceof JvmDeclaredType) {
+				IResolvedFeatures resolvedFeatures = resolvedFeaturesProvider.getResolvedFeatures(type).getParameterizedView(extensionType);
+				List<JvmFeature> features = resolvedFeatures.getAllFeatures();
+				allFeatures.addAll(features);
+			}
+		}
+		return allFeatures;
 	}
 
 	protected void addDescriptions(JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
@@ -118,33 +126,33 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 		if (firstArgument != null && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
 			IEObjectDescription description = doCreateExtensionDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 			if (description != null) {
-				result.add(description);
+				addToList(description, result);
 				String propertyName = toProperty(simpleName, feature);
 				if (propertyName != null) {
-					result.add(doCreateExtensionDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
+					addToList(doCreateExtensionDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState), result);
 				}
 			}
 		}
 		if (implicit) {
 			IEObjectDescription description = createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState);
 			if (description != null) {
-				result.add(description);
+				addToList(description, result);
 				String propertyName = super.toProperty(simpleName, feature);
 				if (propertyName != null) {
-					result.add(createReceiverDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
+					addToList(createReceiverDescription(QualifiedName.create(propertyName), feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState), result);
 				}
 			}
 		}
 		QualifiedName operator = getOperatorMapping().getOperator(featureName);
 		if (operator != null) {
 			if (firstArgument != null)
-				result.add(doCreateExtensionDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
+				addToList(doCreateExtensionDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState), result);
 			if (implicit) {
-				result.add(createReceiverDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState));
+				addToList(createReceiverDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket, validStaticState), result);
 			}
 		}
 	}
-	
+
 	protected List<ExpressionBucket> getBuckets() {
 		return getSession().getExtensionProviders();
 	}
@@ -194,10 +202,10 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 							if (firstArgument != null) {
 								IIdentifiableElementDescription description = createExtensionDescription(name, feature, receiver, extensionType, receiverTypeParameterMapping, bucket, validStaticState);
 								if (description != null)
-									result.add(description);
+									addToList(description, result);
 							}
 							if (implicit) {
-								result.add(createReceiverDescription(name, feature, receiver, extensionType, receiverTypeParameterMapping, bucket, validStaticState));
+								addToList(createReceiverDescription(name, feature, receiver, extensionType, receiverTypeParameterMapping, bucket, validStaticState), result);
 							}
 						}
 					}
@@ -276,15 +284,6 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 	
 	@Override
 	protected String toProperty(String methodName, JvmFeature feature) {
-		if (feature instanceof JvmOperation) {
-			JvmOperation operation = (JvmOperation) feature;
-			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == 1 || methodName.startsWith("set") && operation.getParameters().size() == 2) && Character.isUpperCase(methodName.charAt(3))) {
-				return Introspector.decapitalize(methodName.substring(3));
-			}
-			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == 1) {
-				return Introspector.decapitalize(methodName.substring(2));
-			}
-		}
-		return null;
+		return toProperty(methodName, feature, 1, 2);
 	}
 }

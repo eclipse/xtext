@@ -44,8 +44,8 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 	@Override
 	protected List<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
-		result.addAll(getLocalElementsByName(THIS));
-		result.addAll(getLocalElementsByName(SUPER));
+		addToList(getLocalElementsByName(THIS), result);
+		addToList(getLocalElementsByName(SUPER), result);
 		return result;
 	}
 	
@@ -77,7 +77,7 @@ public class ConstructorDelegateScope extends AbstractSessionBasedScope implemen
 		Iterable<JvmConstructor> constructors = type.getDeclaredConstructors();
 		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
 		for(JvmConstructor constructor: constructors) {
-			result.add(createDescription(name, constructor, superType));
+			addToList(createDescription(name, constructor, superType), result);
 		}
 		return result;
 	}

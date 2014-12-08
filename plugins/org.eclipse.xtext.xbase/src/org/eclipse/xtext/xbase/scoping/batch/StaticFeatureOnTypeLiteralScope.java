@@ -79,13 +79,13 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 		if (getSession().isInstanceContext() && !isExplicitStaticFeatureCall()) {
 			ITypeReferenceOwner owner = getReceiverType().getOwner();
 			QualifiedThisOrSuperDescription thisDescription = new QualifiedThisOrSuperDescription(THIS, owner.newParameterizedTypeReference(getTypeLiteral()), getBucket().getId(), true, getReceiver());
-			result.add(thisDescription);
+			addToList(thisDescription, result);
 			JvmType receiverRawType = getTypeLiteral();
 			if (receiverRawType instanceof JvmDeclaredType) {
 				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
 				if (superType != null) {
 					QualifiedThisOrSuperDescription superDescription = new QualifiedThisOrSuperDescription(SUPER, owner.newParameterizedTypeReference(superType.getType()), getBucket().getId(), true, getReceiver());
-					result.add(superDescription);
+					addToList(superDescription, result);
 				}
 			}
 		}

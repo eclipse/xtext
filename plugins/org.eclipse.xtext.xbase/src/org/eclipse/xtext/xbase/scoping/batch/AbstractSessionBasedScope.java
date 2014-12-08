@@ -30,6 +30,13 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Provider;
 
 /**
+ * Abstract scope implementation that is based on an {@link IFeatureScopeSession}.
+ * The scope can only handle {@link XAbstractFeatureCall#getFeature() feature} references.
+ * It does not support case insensitivity.
+ * 
+ * Clients may extend concrete subtypes and adjust the name processing or apply general
+ * filtering by overriding {@link #addToList(IEObjectDescription, List)} or {@link #addToList(List, List)}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractSessionBasedScope extends AbstractScope {
@@ -72,6 +79,11 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		return resolvedFeatures.getAllFeatures(simpleName);
 	}
 	
+	/**
+	 * Considers the given name to be a property name. If the concrete syntax of the
+	 * processed feature matches a feature call or assignment, a prefix is added to the
+	 * name and that one is used as a variant that should be processed. 
+	 */
 	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {
 		String nameAsPropertyName = tryGetAsPropertyName(name.toString());
 		if (nameAsPropertyName != null) {
@@ -91,12 +103,16 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	protected String toProperty(String methodName, JvmFeature feature) {
+		return toProperty(methodName, feature, 0, 1);
+	}
+	
+	protected String toProperty(String methodName, JvmFeature feature, int getterParams, int setterParams) {
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
-			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().isEmpty() || methodName.startsWith("set") && operation.getParameters().size() == 1) && Character.isUpperCase(methodName.charAt(3))) {
+			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == getterParams || methodName.startsWith("set") && operation.getParameters().size() == setterParams) && Character.isUpperCase(methodName.charAt(3))) {
 				return Introspector.decapitalize(methodName.substring(3));
 			}
-			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().isEmpty()) {
+			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == getterParams) {
 				return Introspector.decapitalize(methodName.substring(2));
 			}
 		}
@@ -138,6 +154,26 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		}
 		// length 0 is invalid
 		return null;
+	}
+	
+	/**
+	 * Clients may override to reject certain descriptions from the result. All subtypes of {@link AbstractSessionBasedScope}
+	 * in the framework code will delegate to this method to accumulate descriptions in a list.
+	 * 
+	 * @see #addToList(List, List)
+	 */
+	protected void addToList(IEObjectDescription description, List<IEObjectDescription> result) {
+		result.add(description);
+	}
+	
+	/**
+	 * Clients may override to reject certain descriptions from the result. All subtypes of {@link AbstractSessionBasedScope}
+	 * in the framework code will delegate to this method to accumulate descriptions in a list.
+	 * 
+	 * @see #addToList(IEObjectDescription, List)
+	 */
+	protected void addToList(List<IEObjectDescription> descriptions, List<IEObjectDescription> result) {
+		result.addAll(descriptions);
 	}
 	
 	@Override

@@ -7,16 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.beans.Introspector;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -24,8 +21,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-
-import com.google.common.collect.Lists;
 
 /**
  * A scope that contains static extension features, which are features that are contributed statically via an import.
@@ -56,42 +51,31 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	
 	@Override
 	protected List<IEObjectDescription> getAllLocalElements() {
-		List<TypeBucket> buckets = getBuckets();
-		if (buckets.isEmpty()) {
-			return Collections.emptyList();
-		}
 		if (receiverType != null && !receiverType.isResolved()) {
 			return Collections.emptyList();
 		}
-		List<IEObjectDescription> result = Lists.newArrayList();
-		for(TypeBucket bucket: buckets) {
-			if (bucket.isRestrictingNames()) {
-				for(Map.Entry<? extends JvmType, ? extends Set<String>> entry: bucket.getTypesToNames().entrySet()) {
-					JvmType type = entry.getKey();
-					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
-						for(JvmFeature feature: features) {
-							if (feature.isStatic() && entry.getValue().contains(feature.getSimpleName())
-									&& helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
-								fastAddDescriptions(feature, bucket, result);
-							}
-						}
-					}
-				}
-			} else {
-				for(JvmType type: bucket.getTypes()) {
-					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
-						for(JvmFeature feature: features) {
-							if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
-								fastAddDescriptions(feature, bucket, result);
-							}
-						}
-					}
-				}
+		return super.getAllLocalElements();
+	}
+
+	@Override
+	protected void getAllLocalElements(TypeBucket bucket, JvmDeclaredType type, List<IEObjectDescription> result) {
+		Iterable<JvmFeature> features = type.getAllFeatures();
+		for(JvmFeature feature: features) {
+			if (feature.isStatic() && helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+				fastAddDescriptions(feature, bucket, result);
 			}
 		}
-		return result;
+	}
+
+	@Override
+	protected void getAllLocalElements(TypeBucket bucket, JvmDeclaredType type, Set<String> restrictedNames, List<IEObjectDescription> result) {
+		Iterable<JvmFeature> features = type.getAllFeatures();
+		for(JvmFeature feature: features) {
+			if (feature.isStatic() && restrictedNames.contains(feature.getSimpleName())
+					&& helper.isPossibleExtension(feature) && helper.isMatchingFirstParameter((JvmOperation) feature)) {
+				fastAddDescriptions(feature, bucket, result);
+			}
+		}
 	}
 	
 	@Override
@@ -117,15 +101,15 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		String simpleName = feature.getSimpleName();
 		QualifiedName featureName = QualifiedName.create(simpleName);
 		BucketedEObjectDescription description = doCreateDescription(featureName, feature, bucket);
-		result.add(description);
+		addToList(description, result);
 		String propertyName = toProperty(simpleName, feature);
 		if (propertyName != null) {
-			result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
+			addToList(doCreateDescription(QualifiedName.create(propertyName), feature, bucket), result);
 		}
 		if (!implicit) {
 			QualifiedName operator = getOperatorMapping().getOperator(featureName);
 			if (operator != null) {
-				result.add(createDescription(operator, feature, bucket));
+				addToList(doCreateDescription(operator, feature, bucket), result);
 			}
 		}
 	}
@@ -136,15 +120,15 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 		QualifiedName featureName = QualifiedName.create(simpleName);
 		BucketedEObjectDescription description = createDescription(featureName, feature, bucket);
 		if (description != null) {
-			result.add(description);
+			addToList(description, result);
 			String propertyName = toProperty(simpleName, feature);
 			if (propertyName != null) {
-				result.add(doCreateDescription(QualifiedName.create(propertyName), feature, bucket));
+				addToList(doCreateDescription(QualifiedName.create(propertyName), feature, bucket), result);
 			}
 			if (!implicit) {
 				QualifiedName operator = getOperatorMapping().getOperator(featureName);
 				if (operator != null) {
-					result.add(doCreateDescription(operator, feature, bucket));
+					addToList(doCreateDescription(operator, feature, bucket), result);
 				}
 			}
 		}
@@ -152,15 +136,6 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 	
 	@Override
 	protected String toProperty(String methodName, JvmFeature feature) {
-		if (feature instanceof JvmOperation) {
-			JvmOperation operation = (JvmOperation) feature;
-			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == 1 || methodName.startsWith("set") && operation.getParameters().size() == 2) && Character.isUpperCase(methodName.charAt(3))) {
-				return Introspector.decapitalize(methodName.substring(3));
-			}
-			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == 1) {
-				return Introspector.decapitalize(methodName.substring(2));
-			}
-		}
-		return null;
+		return toProperty(methodName, feature, 1, 2);
 	}
 }

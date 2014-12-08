@@ -86,7 +86,7 @@ public class NestedTypeLiteralScope extends AbstractSessionBasedScope {
 			for(JvmMember member: ((JvmDeclaredType) rawEnclosingType).getMembers()) {
 				if (member instanceof JvmDeclaredType) {
 					IEObjectDescription description = EObjectDescription.create(member.getSimpleName(), member);
-					result.add(new TypeLiteralDescription(description, enclosingType, isVisible((JvmType) member)));
+					addToList(new TypeLiteralDescription(description, enclosingType, isVisible((JvmType) member)), result);
 				}
 			}
 		}

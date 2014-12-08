@@ -87,9 +87,9 @@ public class StaticFeatureScope extends AbstractStaticOrInstanceFeatureScope {
 	@Override
 	protected void addDescription(QualifiedName name, JvmFeature feature, List<IEObjectDescription> result) {
 		if (feature.isStatic()) {
-			result.add(createDescription(name, feature, bucket));
+			addToList(createDescription(name, feature, bucket), result);
 		} else if (receiver == null && receiverType == null) {
-			result.add(createInstanceDescription(name, feature, bucket));
+			addToList(createInstanceDescription(name, feature, bucket), result);
 		}
 	}
 	

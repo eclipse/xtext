@@ -41,42 +41,54 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExe
 		}
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for (TypeBucket bucket : buckets) {
-			if (bucket.isRestrictingNames()) {
-				for (Map.Entry<? extends JvmType, ? extends Set<String>> entry : bucket.getTypesToNames().entrySet()) {
-					JvmType type = entry.getKey();
-					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
-						for (JvmFeature feature : features) {
-							if (feature.isStatic() && entry.getValue().contains(feature.getSimpleName())) {
-								addDescriptions(feature, bucket, result);
-							}
-						}
-					}
-				}
-			} else {
-				for (JvmType type : bucket.getTypes()) {
-					if (type instanceof JvmDeclaredType) {
-						Iterable<JvmFeature> features = ((JvmDeclaredType) type).getAllFeatures();
-						for (JvmFeature feature : features) {
-							if (feature.isStatic()) {
-								addDescriptions(feature, bucket, result);
-							}
-						}
-					}
-				}
-			}
+			getAllLocalElements(bucket, result);
 		}
 		return result;
 	}
 
+	protected void getAllLocalElements(TypeBucket bucket, List<IEObjectDescription> result) {
+		if (bucket.isRestrictingNames()) {
+			for (Map.Entry<? extends JvmType, ? extends Set<String>> entry : bucket.getTypesToNames().entrySet()) {
+				JvmType type = entry.getKey();
+				if (type instanceof JvmDeclaredType) {
+					getAllLocalElements(bucket, (JvmDeclaredType) type, entry.getValue(), result);
+				}
+			}
+		} else {
+			for (JvmType type : bucket.getTypes()) {
+				if (type instanceof JvmDeclaredType) {
+					getAllLocalElements(bucket, (JvmDeclaredType) type, result);
+				}
+			}
+		}
+	}
+
+	protected void getAllLocalElements(TypeBucket bucket, JvmDeclaredType type, List<IEObjectDescription> result) {
+		Iterable<JvmFeature> features = type.getAllFeatures();
+		for (JvmFeature feature : features) {
+			if (feature.isStatic()) {
+				addDescriptions(feature, bucket, result);
+			}
+		}
+	}
+
+	protected void getAllLocalElements(TypeBucket bucket, JvmDeclaredType type, Set<String> restrictedNames, List<IEObjectDescription> result) {
+		Iterable<JvmFeature> features = type.getAllFeatures();
+		for (JvmFeature feature : features) {
+			if (feature.isStatic() && restrictedNames.contains(feature.getSimpleName())) {
+				addDescriptions(feature, bucket, result);
+			}
+		}
+	}
+	
 	protected void addDescriptions(JvmFeature feature, TypeBucket bucket, List<IEObjectDescription> result) {
 		String simpleName = feature.getSimpleName();
 		IEObjectDescription description = createDescription(QualifiedName.create(simpleName), feature, bucket);
 		if (description != null) {
-			result.add(description);
+			addToList(description, result);
 			String propertyName = toProperty(simpleName, feature);
 			if (propertyName != null) {
-				result.add(createDescription(QualifiedName.create(propertyName), feature, bucket));
+				addToList(createDescription(QualifiedName.create(propertyName), feature, bucket), result);
 			}
 		}
 	}
@@ -115,7 +127,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExe
 						if (feature.isStatic() && (order == 1 || feature instanceof JvmOperation)) {
 							IIdentifiableElementDescription description = createDescription(name, feature, bucket);
 							if (description != null)
-								result.add(description);
+								addToList(description, result);
 						}
 					}
 				}

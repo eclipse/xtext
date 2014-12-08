@@ -28,6 +28,11 @@ public abstract class AbstractSessionBasedExecutableScope extends AbstractSessio
 		return operatorMapping;
 	}
 	
+	/**
+	 * From a given name, other variants are computed, e.g. the name may be a property name
+	 * such as a prefix may be added to the name. Or it may be an operator such as the original
+	 * method name should be used, too, to find a declaration.
+	 */
 	@Override
 	protected void processFeatureNames(QualifiedName name, NameAcceptor acceptor) {
 		QualifiedName methodName = operatorMapping == null? null : operatorMapping.getMethodName(name);
