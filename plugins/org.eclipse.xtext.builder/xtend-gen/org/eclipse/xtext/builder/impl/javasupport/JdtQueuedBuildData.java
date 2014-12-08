@@ -34,7 +34,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   private Map<String, JavaBuilderState> javaBuildState;
   
+  private Map<String, JavaBuilderState> javaBuildStateCopy;
+  
   private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas;
+  
+  private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltasCopy;
   
   public void reset() {
     HashMap<String, JavaBuilderState> _newHashMap = CollectionLiterals.<String, JavaBuilderState>newHashMap();
@@ -177,5 +181,24 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       _xblockexpression = false;
     }
     return _xblockexpression;
+  }
+  
+  public void createCheckpoint() {
+    HashMap<String, JavaBuilderState> _hashMap = new HashMap<String, JavaBuilderState>(this.javaBuildState);
+    this.javaBuildStateCopy = _hashMap;
+    ArrayList<UnconfirmedStructuralChangesDelta> _arrayList = new ArrayList<UnconfirmedStructuralChangesDelta>(this.unconfirmedDeltas);
+    this.unconfirmedDeltasCopy = _arrayList;
+  }
+  
+  public void discardCheckpoint() {
+    this.javaBuildStateCopy = null;
+    this.unconfirmedDeltasCopy = null;
+  }
+  
+  public void rollback() {
+    this.javaBuildState.clear();
+    this.javaBuildState.putAll(this.javaBuildStateCopy);
+    this.unconfirmedDeltas.clear();
+    this.unconfirmedDeltas.addAll(this.unconfirmedDeltasCopy);
   }
 }

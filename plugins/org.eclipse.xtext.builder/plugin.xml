@@ -66,5 +66,12 @@
       <attribute name="path"/>
       <attribute name="generatorName"/>
    </extension>
+   <extension
+        point="org.eclipse.ui.console.consoleFactories">
+     <consoleFactory
+           class="org.eclipse.xtext.builder.ng.debug.XtextCompilerConsoleFactory"
+           label="Xtext Compiler">
+     </consoleFactory>
+  </extension>
    
 </plugin>
