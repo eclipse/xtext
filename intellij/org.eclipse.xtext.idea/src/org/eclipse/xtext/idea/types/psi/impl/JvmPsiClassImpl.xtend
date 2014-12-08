@@ -62,6 +62,8 @@ import org.eclipse.xtext.psi.PsiModelAssociations
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
+import org.eclipse.xtext.service.OperationCanceledError
+import com.intellij.openapi.progress.ProcessCanceledException
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
 
@@ -173,7 +175,9 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			m.parameters.forEach [ p |
 				addParameter(
 					new LightParameter(p.simpleName, p.parameterType.toPsiType, psiElement, language) => [
-						navigationElement = p.navigationElement
+						val navElement = p.navigationElement
+						if (navElement != null)
+							navigationElement = navElement
 						putUserData(JVM_ELEMENT_KEY, p)
 					]
 				)
@@ -242,7 +246,11 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 
 	private def PsiType toPsiType(JvmTypeReference type) {
 		if (type instanceof XComputedTypeReference) {
-			type.equivalent.toPsiType
+			try {
+				type.equivalent.toPsiType
+			} catch (OperationCanceledError e) {
+				throw e.wrapped
+			}
 		} else {
 			PsiImplUtil.buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
 		}

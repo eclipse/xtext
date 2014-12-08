@@ -1,5 +1,6 @@
 package org.eclipse.xtext.idea.types.psi.impl;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.lang.Language;
@@ -74,8 +75,10 @@ import org.eclipse.xtext.idea.types.psi.impl.AnnotatableModifierList;
 import org.eclipse.xtext.idea.types.psi.impl.LightAnnotation;
 import org.eclipse.xtext.idea.types.psi.impl.LightFieldBuilder;
 import org.eclipse.xtext.psi.PsiModelAssociations;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -256,8 +259,11 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             LightParameter _lightParameter = new LightParameter(_simpleName, _psiType, JvmPsiClassImpl.this.psiElement, _language);
             final Procedure1<LightParameter> _function = new Procedure1<LightParameter>() {
               public void apply(final LightParameter it) {
-                PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(p);
-                it.setNavigationElement(_navigationElement);
+                final PsiElement navElement = JvmPsiClassImpl.this.getNavigationElement(p);
+                boolean _notEquals = (!Objects.equal(navElement, null));
+                if (_notEquals) {
+                  it.setNavigationElement(navElement);
+                }
                 it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
               }
             };
@@ -389,8 +395,19 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   private PsiType toPsiType(final JvmTypeReference type) {
     PsiType _xifexpression = null;
     if ((type instanceof XComputedTypeReference)) {
-      JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
-      _xifexpression = this.toPsiType(_equivalent);
+      PsiType _xtrycatchfinallyexpression = null;
+      try {
+        JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
+        _xtrycatchfinallyexpression = this.toPsiType(_equivalent);
+      } catch (final Throwable _t) {
+        if (_t instanceof OperationCanceledError) {
+          final OperationCanceledError e = (OperationCanceledError)_t;
+          throw e.getWrapped();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      _xifexpression = _xtrycatchfinallyexpression;
     } else {
       String _qualifiedName = type.getQualifiedName('.');
       PsiFile _containingFile = this.getContainingFile();
