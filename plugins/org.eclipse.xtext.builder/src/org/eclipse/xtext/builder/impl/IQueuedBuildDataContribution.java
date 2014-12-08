@@ -51,4 +51,9 @@ public interface IQueuedBuildDataContribution {
 	 */
 	boolean needsRebuild(IProject project, Collection<Delta> deltas);
 
+	void createCheckpoint();
+
+	void discardCheckpoint();
+	
+	void rollback();
 }

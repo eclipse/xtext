@@ -25,6 +25,7 @@ import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -74,6 +75,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		long startTime = System.currentTimeMillis();
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
+			queuedBuildData.createCheckpoint();
 			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
@@ -81,6 +83,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					@Override
 					public void subTask(String name) {
 						super.subTask(taskName + name);
+					}
+					
+					@Override
+					public boolean isCanceled() {
+						return isInterrupted() || super.isCanceled();
 					}
 				};
 			}
@@ -99,12 +106,18 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			log.error(e.getMessage(), e);
 			throw e;
 		} catch (OperationCanceledException e) {
-			forgetLastBuiltState();
-			throw e;
+			rememberLastBuiltState();
+			queuedBuildData.rollback();
+			// do not re-throw the exception to avoid deletion of the build state
+		} catch (OperationCanceledError err) {
+			rememberLastBuiltState();
+			queuedBuildData.rollback();
+			// do not re-throw the exception to avoid deletion of the build state
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			forgetLastBuiltState();
 		} finally {
+			queuedBuildData.discardCheckpoint();
 			if (monitor != null)
 				monitor.done();
 			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
@@ -179,7 +192,6 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		boolean indexingOnly = type == BuildType.RECOVERY;
 		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly).isEmpty())
 			return;
-		
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);

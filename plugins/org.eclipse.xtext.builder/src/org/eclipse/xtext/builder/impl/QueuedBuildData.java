@@ -8,7 +8,9 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.util.AbstractQueue;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -98,6 +100,26 @@ public class QueuedBuildData {
 			return result;
 		}
 
+		public void createCheckpoint() {
+			for (int i = 0; i < components.size(); i++) {
+				IQueuedBuildDataContribution contribution = components.get(i);
+				contribution.createCheckpoint();
+			}
+		}
+		
+		public void discardCheckpoint() {
+			for (int i = 0; i < components.size(); i++) {
+				IQueuedBuildDataContribution contribution = components.get(i);
+				contribution.discardCheckpoint();
+			}
+		}
+		
+		public void rollback() {
+			for (int i = 0; i < components.size(); i++) {
+				IQueuedBuildDataContribution contribution = components.get(i);
+				contribution.rollback();
+			}
+		}
 	}
 
 	public static class NullContribution implements IQueuedBuildDataContribution {
@@ -116,11 +138,25 @@ public class QueuedBuildData {
 			return false;
 		}
 
+		public void createCheckpoint() {
+			// nothing to do			
+		}
+		
+		public void discardCheckpoint() {
+			// nothing to do			
+		}
+		
+		public void rollback() {
+			// nothing to do			
+		}
 	}
 
 	private LinkedList<URI> uris;
+	private LinkedList<URI> urisCopy;
 	private Collection<IResourceDescription.Delta> deltas;
+	private Collection<IResourceDescription.Delta> deltasCopy;
 	private Map<String, LinkedList<URI>> projectNameToChangedResource;
+	private Map<String, LinkedList<URI>> projectNameToChangedResourceCopy;
 
 	private IQueuedBuildDataContribution contribution = new NullContribution();
 	private final IStorage2UriMapper mapper;
@@ -272,4 +308,24 @@ public class QueuedBuildData {
 		return Iterables.concat(uris, Iterables.concat(projectNameToChangedResource.values()));
 	}
 
+	public void createCheckpoint() {
+		deltasCopy = new ArrayList<Delta>(deltas);
+		urisCopy = new LinkedList<URI>(uris);
+		projectNameToChangedResourceCopy = new HashMap<String, LinkedList<URI>>(projectNameToChangedResource);
+	}
+
+	public void discardCheckpoint() {
+		deltasCopy = null;
+		urisCopy = null;
+		projectNameToChangedResourceCopy = null;
+	}
+
+	public void rollback() {
+		deltas.clear();
+		deltas.addAll(deltasCopy);
+		uris.clear();
+		uris.addAll(urisCopy);
+		projectNameToChangedResource.clear();
+		projectNameToChangedResource.putAll(projectNameToChangedResourceCopy);
+	}
 }
