@@ -286,11 +286,10 @@ public class IdeaPluginClassNames {
   }
   
   public String getCompletionContributor(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".completion.");
     String _name = it.getName();
-    String _packageName = this.toPackageName(_name);
-    String _plus = (_packageName + ".completion.");
-    String _name_1 = it.getName();
-    String _simpleName = this.toSimpleName(_name_1);
+    String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CompletionContributor");
   }
