@@ -138,6 +138,6 @@ class IdeaPluginClassNames {
 	}
 	
 	def String getCompletionContributor(Grammar it) {
-		name.toPackageName+'.completion.'+ name.toSimpleName+'CompletionContributor'
+		basePackageName +'.completion.'+ name.toSimpleName+'CompletionContributor'
 	}
 }
