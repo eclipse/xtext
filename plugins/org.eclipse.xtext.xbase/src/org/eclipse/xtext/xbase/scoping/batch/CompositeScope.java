@@ -42,7 +42,7 @@ public class CompositeScope extends AbstractSessionBasedScope {
 	protected List<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for(AbstractSessionBasedScope delegate: delegates) {
-			result.addAll(delegate.getAllLocalElements());
+			addToList(delegate.getAllLocalElements(), result);
 		}
 		return result;
 	}
@@ -51,7 +51,7 @@ public class CompositeScope extends AbstractSessionBasedScope {
 	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		for(AbstractSessionBasedScope delegate: delegates) {
-			result.addAll(delegate.getLocalElementsByName(name));
+			addToList(delegate.getLocalElementsByName(name), result);
 		}
 		return result;
 	}

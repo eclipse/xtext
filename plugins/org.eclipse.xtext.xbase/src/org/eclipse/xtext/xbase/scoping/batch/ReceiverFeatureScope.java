@@ -143,7 +143,7 @@ public class ReceiverFeatureScope extends AbstractStaticOrInstanceFeatureScope i
 
 	@Override
 	protected void addDescription(QualifiedName name, JvmFeature feature, List<IEObjectDescription> result) {
-		result.add(createDescription(name, feature, bucket));
+		addToList(createDescription(name, feature, bucket), result);
 	}
 
 }
