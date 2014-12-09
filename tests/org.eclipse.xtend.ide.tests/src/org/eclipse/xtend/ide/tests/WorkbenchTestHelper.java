@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
@@ -58,6 +59,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Assert;
 
 import com.google.common.collect.ImmutableList;
@@ -322,6 +324,33 @@ public class WorkbenchTestHelper extends Assert {
 
 	public boolean saveEditor(IEditorPart editor, boolean confirm) {
 		return workbench.getActiveWorkbenchWindow().getActivePage().saveEditor(editor, confirm);
+	}
+	
+	/**
+	 * Wait for an update in the UI.
+	 * 
+	 * @param test
+	 * 		tester function that returns true if the target state of the UI has been reached
+	 * @param timeout
+	 * 		the time after which waiting is canceled
+	 */
+	public void awaitUIUpdate(Functions.Function0<Boolean> test, final long timeout) {
+		long startTime = System.currentTimeMillis();
+		final Display display = Display.getCurrent();
+		new Thread("Display alarm") {
+			@Override public void run() {
+				try {
+					Thread.sleep(timeout);
+					display.wake();
+				} catch (InterruptedException e) { }
+			}
+		}.start();
+		while (!test.apply() && System.currentTimeMillis() - startTime < timeout) {
+			boolean hasWork = display.sleep();
+			while (hasWork) {
+				hasWork = display.readAndDispatch();
+			}
+		}
 	}
 
 }
