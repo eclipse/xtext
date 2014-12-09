@@ -7,6 +7,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.ImportOrganizer;
@@ -923,10 +924,10 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("val bar = new Iterable<Serializable>() {");
+    _builder.append("val bar = new java.util.Iterator<Serializable>() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("override Iterator<Serializable> iterator() { null }");
+    _builder.append("override java.util.Iterator<Serializable> iterator() { null }");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -942,7 +943,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("val bar = new Iterable<Serializable>() {");
+    _builder_1.append("val bar = new Iterator<Serializable>() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("override Iterator<Serializable> iterator() { null }");
@@ -992,5 +993,126 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug447227() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class InnerTypeLostOnImport {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("enum E {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("A, B, C");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo extends InnerTypeLostOnImport {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def bar(E e) { // <--- Point B");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val Map m // <--- Point A");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class InnerTypeLostOnImport {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("enum E {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("A, B, C");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo extends InnerTypeLostOnImport {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("def bar(E e) { // <--- Point B");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val Map m // <--- Point A");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug447227_2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package p");
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static class Inner {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._workbenchTestHelper.xtendFile("Outer", _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package p");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import p.Outer.Inner");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("public class Client {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("Inner inner;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package p");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import p.Outer.Inner");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("public class Client {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("Inner inner;");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.assertIsOrganizedTo(_builder_1, _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

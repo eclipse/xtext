@@ -6,6 +6,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -504,8 +505,8 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 	@Test def void testAnonymousClass_2() {
 		'''
 			class Foo {
-				val bar = new Iterable<Serializable>() {
-					override Iterator<Serializable> iterator() { null }
+				val bar = new java.util.Iterator<Serializable>() {
+					override java.util.Iterator<Serializable> iterator() { null }
 				}
 			}
 		'''.assertIsOrganizedTo('''
@@ -513,7 +514,7 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			import java.util.Iterator
 			
 			class Foo {
-				val bar = new Iterable<Serializable>() {
+				val bar = new Iterator<Serializable>() {
 					override Iterator<Serializable> iterator() { null }
 				}
 			}
@@ -539,7 +540,69 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	@Test 
+	def void testBug447227(){
+		'''		
+			class InnerTypeLostOnImport {
+			    enum E {
+			        A, B, C
+			    }
+			}
+			
+			class Foo extends InnerTypeLostOnImport {
+			    def bar(E e) { // <--- Point B
+			        
+			    }
+			    
+			    val Map m // <--- Point A
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Map
 
+			class InnerTypeLostOnImport {
+			    enum E {
+			        A, B, C
+			    }
+			}
+			
+			class Foo extends InnerTypeLostOnImport {
+			    def bar(E e) { // <--- Point B
+			        
+			    }
+			    
+			    val Map m // <--- Point A
+			}
+		''')
+	}
+
+	@Test 
+	def void testBug447227_2(){
+		xtendFile("Outer",
+		'''
+			package p
+			class Outer {
+				static class Inner {}
+			}
+		''')
+		waitForAutoBuild
+		'''		
+			package p
+
+			import p.Outer.Inner
+			
+			public class Client {
+				Inner inner;
+			}
+		'''.assertIsOrganizedTo('''
+			package p
+
+			import p.Outer.Inner
+			
+			public class Client {
+				Inner inner;
+			}
+		''')
+	}
 	
 
 }
