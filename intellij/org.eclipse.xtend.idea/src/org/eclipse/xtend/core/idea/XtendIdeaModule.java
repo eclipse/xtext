@@ -1,5 +1,7 @@
 package org.eclipse.xtend.core.idea;
 
+import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistContextFactory;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistParser;
@@ -30,5 +32,9 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	
 	public Class<? extends ContentAssistContextFactory> bindContentAssistContextFactory() {
 		return FlexerBasedContentAssistContextFactory.class;
+	}
+	
+	public Class<? extends ProcessorInstanceForJvmTypeProvider> bindProcessorInstanceForJvmTypeProvider() {
+		return IdeaProcessorProvider.class;
 	}
 }
