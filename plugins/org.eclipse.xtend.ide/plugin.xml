@@ -407,6 +407,12 @@
             extensions="xtend">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="xtend"
+            type="text">
+    </fileTypes>
+  </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 

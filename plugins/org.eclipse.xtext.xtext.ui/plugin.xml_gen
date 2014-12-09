@@ -256,6 +256,16 @@
             extensions="xtext,xtext2">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="xtext"
+            type="text">
+    </fileTypes>
+    <fileTypes
+            extension="xtext2"
+            type="text">
+    </fileTypes>
+  </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
