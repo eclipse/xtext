@@ -4,15 +4,18 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.intellij.lang.Language;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.HierarchicalMethodSignature;
 import com.intellij.psi.JavaElementVisitor;
+import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiClassInitializer;
 import com.intellij.psi.PsiClassType;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementFactory;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
@@ -21,6 +24,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiModifier;
 import com.intellij.psi.PsiModifierList;
+import com.intellij.psi.PsiNameHelper;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.PsiReferenceList;
 import com.intellij.psi.PsiSubstitutor;
@@ -32,6 +36,7 @@ import com.intellij.psi.impl.InheritanceImplUtil;
 import com.intellij.psi.impl.PsiClassImplUtil;
 import com.intellij.psi.impl.PsiImplUtil;
 import com.intellij.psi.impl.PsiSuperMethodImplUtil;
+import com.intellij.psi.impl.light.LightClassReference;
 import com.intellij.psi.impl.light.LightElement;
 import com.intellij.psi.impl.light.LightMethodBuilder;
 import com.intellij.psi.impl.light.LightParameter;
@@ -44,6 +49,7 @@ import com.intellij.psi.impl.source.PsiExtensibleClass;
 import com.intellij.psi.impl.source.javadoc.PsiDocCommentImpl;
 import com.intellij.psi.javadoc.PsiDocComment;
 import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtil;
 import com.intellij.util.IncorrectOperationException;
 import java.util.Collection;
@@ -393,27 +399,92 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   }
   
   private PsiType toPsiType(final JvmTypeReference type) {
-    PsiType _xifexpression = null;
-    if ((type instanceof XComputedTypeReference)) {
-      PsiType _xtrycatchfinallyexpression = null;
-      try {
+    PsiType _xtrycatchfinallyexpression = null;
+    try {
+      PsiType _xifexpression = null;
+      if ((type instanceof XComputedTypeReference)) {
         JvmTypeReference _equivalent = ((XComputedTypeReference)type).getEquivalent();
-        _xtrycatchfinallyexpression = this.toPsiType(_equivalent);
+        _xifexpression = this.toPsiType(_equivalent);
+      } else {
+        String _qualifiedName = type.getQualifiedName('.');
+        PsiFile _containingFile = this.getContainingFile();
+        _xifexpression = this.buildTypeFromTypeString(_qualifiedName, this.psiElement, _containingFile);
+      }
+      _xtrycatchfinallyexpression = _xifexpression;
+    } catch (final Throwable _t) {
+      if (_t instanceof OperationCanceledError) {
+        final OperationCanceledError e = (OperationCanceledError)_t;
+        throw e.getWrapped();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return _xtrycatchfinallyexpression;
+  }
+  
+  /**
+   * Copied from PsiClassImplUtil for Android Studio compatibility
+   */
+  private PsiType buildTypeFromTypeString(final String typeName, final PsiElement context, final PsiFile psiFile) {
+    PsiType resultType = null;
+    final PsiManager psiManager = psiFile.getManager();
+    boolean _or = false;
+    boolean _or_1 = false;
+    Character _valueOf = Character.valueOf('<');
+    char _charValue = _valueOf.charValue();
+    int _indexOf = typeName.indexOf(_charValue);
+    boolean _notEquals = (_indexOf != (-1));
+    if (_notEquals) {
+      _or_1 = true;
+    } else {
+      Character _valueOf_1 = Character.valueOf('[');
+      char _charValue_1 = _valueOf_1.charValue();
+      int _indexOf_1 = typeName.indexOf(_charValue_1);
+      boolean _notEquals_1 = (_indexOf_1 != (-1));
+      _or_1 = _notEquals_1;
+    }
+    if (_or_1) {
+      _or = true;
+    } else {
+      Character _valueOf_2 = Character.valueOf('.');
+      char _charValue_2 = _valueOf_2.charValue();
+      int _indexOf_2 = typeName.indexOf(_charValue_2);
+      boolean _equals = (_indexOf_2 == (-1));
+      _or = _equals;
+    }
+    if (_or) {
+      try {
+        Project _project = psiManager.getProject();
+        JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
+        PsiElementFactory _elementFactory = _instance.getElementFactory();
+        return _elementFactory.createTypeFromText(typeName, context);
       } catch (final Throwable _t) {
-        if (_t instanceof OperationCanceledError) {
-          final OperationCanceledError e = (OperationCanceledError)_t;
-          throw e.getWrapped();
+        if (_t instanceof Exception) {
+          final Exception ex = (Exception)_t;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-      _xifexpression = _xtrycatchfinallyexpression;
-    } else {
-      String _qualifiedName = type.getQualifiedName('.');
-      PsiFile _containingFile = this.getContainingFile();
-      _xifexpression = PsiImplUtil.buildTypeFromTypeString(_qualifiedName, this.psiElement, _containingFile);
     }
-    return _xifexpression;
+    Project _project_1 = psiManager.getProject();
+    JavaPsiFacade _instance_1 = JavaPsiFacade.getInstance(_project_1);
+    GlobalSearchScope _resolveScope = context.getResolveScope();
+    PsiClass aClass = _instance_1.findClass(typeName, _resolveScope);
+    boolean _equals_1 = Objects.equal(aClass, null);
+    if (_equals_1) {
+      String _shortClassName = PsiNameHelper.getShortClassName(typeName);
+      final LightClassReference ref = new LightClassReference(psiManager, _shortClassName, typeName, PsiSubstitutor.EMPTY, psiFile);
+      PsiClassReferenceType _psiClassReferenceType = new PsiClassReferenceType(ref, null);
+      resultType = _psiClassReferenceType;
+    } else {
+      Project _project_2 = psiManager.getProject();
+      JavaPsiFacade _instance_2 = JavaPsiFacade.getInstance(_project_2);
+      PsiElementFactory factory = _instance_2.getElementFactory();
+      PsiSubstitutor substitutor = factory.createRawSubstitutor(aClass);
+      PsiClassType _createType = factory.createType(aClass, substitutor);
+      resultType = _createType;
+    }
+    return resultType;
   }
   
   public List<PsiClass> getOwnInnerClasses() {
