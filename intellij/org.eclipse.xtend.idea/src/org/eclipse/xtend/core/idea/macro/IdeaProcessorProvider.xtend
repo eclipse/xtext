@@ -8,7 +8,8 @@
 package org.eclipse.xtend.core.idea.macro
 
 import com.google.inject.Inject
-import com.intellij.openapi.roots.ProjectRootManager
+import com.intellij.openapi.module.ModuleUtil
+import com.intellij.openapi.roots.OrderEnumerator
 import java.io.File
 import java.net.URLClassLoader
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
@@ -17,17 +18,16 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.psi.IPsiModelAssociations
 
 class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
-	
+
 	@Inject
 	extension IPsiModelAssociations
-	
+
 	override getProcessorInstance(JvmType type) {
-		val file = type.psiElement.containingFile
-		val project = type.psiElement.project
-		val path = ProjectRootManager.getInstance(project).fileIndex.getClassRootForFile(file.virtualFile).path
-		val url = new File(path).toURL
-		val classLoader = new URLClassLoader(#[url], TransformationContext.classLoader)
+		val psiElement = type.eResource.resourceSet.resources.head.contents.head.psiElement
+		val module = ModuleUtil.findModuleForPsiElement(psiElement)
+		val roots = OrderEnumerator.orderEntries(module).recursively.classesRoots
+		val urls = roots.map[new File(path).toURL]
+		val classLoader = new URLClassLoader(urls, TransformationContext.classLoader)
 		classLoader.loadClass(type.identifier).newInstance
 	}
-	
 }

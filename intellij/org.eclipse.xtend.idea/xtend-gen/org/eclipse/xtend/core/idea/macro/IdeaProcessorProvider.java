@@ -8,21 +8,29 @@
 package org.eclipse.xtend.core.idea.macro;
 
 import com.google.inject.Inject;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.roots.OrderEnumerator;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
@@ -34,19 +42,31 @@ public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
     try {
       Object _xblockexpression = null;
       {
-        PsiElement _psiElement = this._iPsiModelAssociations.getPsiElement(type);
-        final PsiFile file = _psiElement.getContainingFile();
-        PsiElement _psiElement_1 = this._iPsiModelAssociations.getPsiElement(type);
-        final Project project = _psiElement_1.getProject();
-        ProjectRootManager _instance = ProjectRootManager.getInstance(project);
-        ProjectFileIndex _fileIndex = _instance.getFileIndex();
-        VirtualFile _virtualFile = file.getVirtualFile();
-        VirtualFile _classRootForFile = _fileIndex.getClassRootForFile(_virtualFile);
-        final String path = _classRootForFile.getPath();
-        File _file = new File(path);
-        final URL url = _file.toURL();
+        Resource _eResource = type.eResource();
+        ResourceSet _resourceSet = _eResource.getResourceSet();
+        EList<Resource> _resources = _resourceSet.getResources();
+        Resource _head = IterableExtensions.<Resource>head(_resources);
+        EList<EObject> _contents = _head.getContents();
+        EObject _head_1 = IterableExtensions.<EObject>head(_contents);
+        final PsiElement psiElement = this._iPsiModelAssociations.getPsiElement(_head_1);
+        final Module module = ModuleUtil.findModuleForPsiElement(psiElement);
+        OrderEnumerator _orderEntries = OrderEnumerator.orderEntries(module);
+        OrderEnumerator _recursively = _orderEntries.recursively();
+        final VirtualFile[] roots = _recursively.getClassesRoots();
+        final Function1<VirtualFile, URL> _function = new Function1<VirtualFile, URL>() {
+          public URL apply(final VirtualFile it) {
+            try {
+              String _path = it.getPath();
+              File _file = new File(_path);
+              return _file.toURL();
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+        final List<URL> urls = ListExtensions.<VirtualFile, URL>map(((List<VirtualFile>)Conversions.doWrapArray(roots)), _function);
         ClassLoader _classLoader = TransformationContext.class.getClassLoader();
-        final URLClassLoader classLoader = new URLClassLoader(new URL[] { url }, _classLoader);
+        final URLClassLoader classLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
         String _identifier = type.getIdentifier();
         Class<?> _loadClass = classLoader.loadClass(_identifier);
         _xblockexpression = _loadClass.newInstance();
