@@ -8,14 +8,13 @@
 package org.eclipse.xtend.ide.tests.editor;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
@@ -26,7 +25,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -35,8 +33,8 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.junit.After;
 import org.junit.Assert;
@@ -47,6 +45,8 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
+  private final static long VALIDATION_TIMEOUT = 10000L;
+  
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
@@ -396,28 +396,33 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
   }
   
   private void assertNumberOfErrorAnnotations(final XtextEditor editor, final int expectedNumber) {
-    try {
-      IXtextDocument _document = editor.getDocument();
-      Job _validationJob = ((XtextDocument) _document).getValidationJob();
-      _validationJob.join();
-      IDocumentProvider _documentProvider = editor.getDocumentProvider();
-      IEditorInput _editorInput = editor.getEditorInput();
-      IAnnotationModel _annotationModel = _documentProvider.getAnnotationModel(_editorInput);
-      Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
-      final List<Object> annotations = IteratorExtensions.<Object>toList(_annotationIterator);
-      Iterable<Annotation> _filter = Iterables.<Annotation>filter(annotations, Annotation.class);
-      final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
-        public Boolean apply(final Annotation it) {
-          String _type = it.getType();
-          return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
-        }
-      };
-      final Iterable<Annotation> errors = IterableExtensions.<Annotation>filter(_filter, _function);
-      String _string = errors.toString();
-      int _size = IterableExtensions.size(errors);
-      Assert.assertEquals(_string, expectedNumber, _size);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    final Function0<Boolean> _function = new Function0<Boolean>() {
+      public Boolean apply() {
+        List<Annotation> _errorAnnotations = DirtyStateEditorValidationTest.this.getErrorAnnotations(editor);
+        int _size = _errorAnnotations.size();
+        return Boolean.valueOf((_size == expectedNumber));
+      }
+    };
+    this.helper.awaitUIUpdate(_function, DirtyStateEditorValidationTest.VALIDATION_TIMEOUT);
+    final List<Annotation> errors = this.getErrorAnnotations(editor);
+    String _string = errors.toString();
+    int _size = errors.size();
+    Assert.assertEquals(_string, expectedNumber, _size);
+  }
+  
+  private List<Annotation> getErrorAnnotations(final XtextEditor editor) {
+    IDocumentProvider _documentProvider = editor.getDocumentProvider();
+    IEditorInput _editorInput = editor.getEditorInput();
+    IAnnotationModel _annotationModel = _documentProvider.getAnnotationModel(_editorInput);
+    Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
+    Iterator<Annotation> _filter = Iterators.<Annotation>filter(_annotationIterator, Annotation.class);
+    final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+      public Boolean apply(final Annotation it) {
+        String _type = it.getType();
+        return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
+      }
+    };
+    Iterator<Annotation> _filter_1 = IteratorExtensions.<Annotation>filter(_filter, _function);
+    return IteratorExtensions.<Annotation>toList(_filter_1);
   }
 }
