@@ -8,6 +8,8 @@
 package org.eclipse.xtext.ui.editor;
 
 import java.util.Iterator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -57,6 +59,13 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
+	
+	private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+	
+	@Override
+	protected void finalize() {
+		executorService.shutdown();
+	}
 
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
@@ -70,15 +79,19 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		return open(uri, null, -1, select);
 	}
 
-	public IEditorPart open(URI uri, EReference crossReference, int indexInList, boolean select) {
+	public IEditorPart open(final URI uri, final EReference crossReference, final int indexInList, final boolean select) {
 		Iterator<Pair<IStorage, IProject>> storages = mapper.getStorages(uri.trimFragment()).iterator();
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next().getFirst();
 				IEditorInput editorInput = EditorUtils.createEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
-				IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
-				selectAndReveal(editor, uri, crossReference, indexInList, select);
+				final IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
+				executorService.submit(new Runnable() {
+					public void run() {
+						selectAndReveal(editor, uri, crossReference, indexInList, select);
+					}
+				});
 				return EditorUtils.getXtextEditor(editor);
 			} catch (WrappedException e) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
@@ -103,11 +116,16 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 							if (resource != null) {
 								EObject object = findEObjectByURI(uri, resource);
 								if (object != null) {
-									ITextRegion location = (crossReference != null) ? locationProvider
+									final ITextRegion location = (crossReference != null) ? locationProvider
 											.getSignificantTextRegion(object, crossReference, indexInList)
 											: locationProvider.getSignificantTextRegion(object);
-									if (select)
-										xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+									if (select) {
+										workbench.getDisplay().asyncExec(new Runnable() {
+											public void run() {
+												xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+											}
+										});
+									}
 								}
 							}
 						}

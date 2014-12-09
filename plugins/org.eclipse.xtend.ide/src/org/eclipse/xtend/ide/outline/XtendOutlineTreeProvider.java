@@ -22,7 +22,7 @@ import com.google.inject.Provider;
  * @author Dennis Huebner
  */
 public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider,
-		IOutlineTreeProvider.ModeAware {
+		IOutlineTreeProvider.ModeAware, IOutlineTreeProvider.Background {
 
 	@Inject
 	private Provider<XtendOutlineSourceTreeProvider> sourceProvider;
