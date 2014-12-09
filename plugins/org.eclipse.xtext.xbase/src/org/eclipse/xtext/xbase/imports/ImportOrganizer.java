@@ -16,6 +16,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -111,7 +112,8 @@ public class ImportOrganizer {
 			RewritableImportSection importSection) {
 		// if the resource contains two types with the same simple name, we don't add any import
 		// but we can still use the package local name within the same package.
-		if (equal(usage.getContextPackageName(), type.getPackageName())) {
+		// Except for inner types
+		if (equal(usage.getContextPackageName(), type.getPackageName()) && type.getDeclaringType() == null) {
 			if (type.eContainer() != null) {
 				String declarationLocalName = getLocalName(type, usage.getContext());
 				nameToUse = declarationLocalName;
@@ -199,7 +201,8 @@ public class ImportOrganizer {
 	protected boolean isUsedInLocalContextOnly(JvmDeclaredType type, Iterable<TypeUsage> usages, NonOverridableTypesProvider nonOverridableTypesProvider,
 			String name) {
 		for (TypeUsage usage : usages) {
-			if (nonOverridableTypesProvider.getVisibleType(usage.getContext(), name) == null && !equal(usage.getContextPackageName(), type.getPackageName()))
+			JvmIdentifiableElement visibleType = nonOverridableTypesProvider.getVisibleType(usage.getContext(), name);
+			if (visibleType == null && (!equal(usage.getContextPackageName(), type.getPackageName()) || type.getDeclaringType() != null))
 				return false;
 		}
 		return true;
