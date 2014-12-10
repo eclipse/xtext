@@ -30,6 +30,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=454786
  */
 public class ResolvedFeatures extends AbstractResolvedFeatures {
 
@@ -111,13 +112,16 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 		if (!(rawType instanceof JvmDeclaredType)) {
 			return Collections.emptyList();
 		}
-		List<IResolvedOperation> result = Lists.newArrayList();
+		List<IResolvedOperation> result = Lists.newArrayList(getDeclaredOperations());
 		Multimap<String, AbstractResolvedOperation> processed = HashMultimap.create();
-		Set<JvmDeclaredType> processedTypes = Sets.newHashSet();
-		computeAllOperations((JvmDeclaredType)rawType, processed, processedTypes, result);
+		for (IResolvedOperation resolvedOperation : result) {
+			processed.put(resolvedOperation.getDeclaration().getSimpleName(), (AbstractResolvedOperation)resolvedOperation);
+		}
+		Set<JvmDeclaredType> processedTypes = Sets.newHashSet((JvmDeclaredType)rawType);
+		computeAllOperationsFromSuperTypes((JvmDeclaredType)rawType, processed, processedTypes, result);
 		return Collections.unmodifiableList(result);
 	}
-	
+
 	protected void computeAllOperations(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations, Set<JvmDeclaredType> processedTypes, List<IResolvedOperation> result) {
 		if (type != null && !type.eIsProxy() && processedTypes.add(type)) {
 			Iterable<JvmOperation> operations = type.getDeclaredOperations();
@@ -132,25 +136,30 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 				processedOperations.put(simpleName, resolvedOperation);
 				result.add(resolvedOperation);
 			}
-			for(JvmTypeReference superType: type.getSuperTypes()) {
-				JvmType rawSuperType = superType.getType();
-				if (rawSuperType instanceof JvmDeclaredType) {
-					computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations, processedTypes, result);
-				}
+			computeAllOperationsFromSuperTypes(type, processedOperations, processedTypes, result);
+		}
+	}
+
+	protected void computeAllOperationsFromSuperTypes(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations,
+			Set<JvmDeclaredType> processedTypes, List<IResolvedOperation> result) {
+		for(JvmTypeReference superType: type.getSuperTypes()) {
+			JvmType rawSuperType = superType.getType();
+			if (rawSuperType instanceof JvmDeclaredType) {
+				computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations, processedTypes, result);
 			}
 		}
 	}
-	
+
 	protected List<IResolvedOperation> computeDeclaredOperations() {
 		JvmType rawType = getRawType();
 		if (!(rawType instanceof JvmDeclaredType)) {
 			return Collections.emptyList();
 		}
 		List<IResolvedOperation> result = Lists.newArrayList();
-		for(IResolvedOperation operation: getAllOperations()) {
-			if (operation.getDeclaration().getDeclaringType() == rawType) {
-				result.add(operation);
-			}
+		Iterable<JvmOperation> operations = ((JvmDeclaredType)rawType).getDeclaredOperations();
+		for(JvmOperation operation: operations) {
+			BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
+			result.add(resolvedOperation);
 		}
 		return Collections.unmodifiableList(result);
 	}

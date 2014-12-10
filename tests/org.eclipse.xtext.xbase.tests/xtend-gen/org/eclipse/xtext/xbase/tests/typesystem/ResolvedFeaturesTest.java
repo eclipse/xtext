@@ -45,6 +45,18 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
+  public static class BaseClass {
+    public Object baseClassMethod() {
+      return null;
+    }
+  }
+  
+  public static class DerivedClass extends ResolvedFeaturesTest.BaseClass {
+    public Object derivedClassMethod() {
+      return null;
+    }
+  }
+  
   @Inject
   private OverrideHelper overrideHelper;
   
@@ -75,6 +87,34 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testAllOperationsIncludeDeclaredOperations() {
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ResolvedFeaturesTest.DerivedClass.class);
+    final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
+    final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
+    boolean _isEmpty = all.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    int _size = declared.size();
+    Assert.assertEquals(1, _size);
+    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(declared);
+    IResolvedOperation _head_1 = IterableExtensions.<IResolvedOperation>head(all);
+    Assert.assertSame(_head, _head_1);
+  }
+  
+  @Test
+  public void testDeclaredOperationsAreIncludedInAllOperations() {
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ResolvedFeaturesTest.DerivedClass.class);
+    final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
+    final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
+    boolean _isEmpty = all.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    int _size = declared.size();
+    Assert.assertEquals(1, _size);
+    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(declared);
+    IResolvedOperation _head_1 = IterableExtensions.<IResolvedOperation>head(all);
+    Assert.assertSame(_head, _head_1);
   }
   
   @Test
