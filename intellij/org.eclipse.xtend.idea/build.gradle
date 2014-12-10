@@ -1,8 +1,3 @@
-plugins {
-  id 'com.github.johnrengelman.shadow' version '1.1.2'
-}
-
-
 dependencies {
 	compile ("org.eclipse.xtend:org.eclipse.xtend.core:$version") {
 		transitive = false
@@ -12,14 +7,4 @@ dependencies {
 	}
 	provided project(':org.eclipse.xtext.idea')
 	provided project(':org.eclipse.xtext.xbase.idea')
-}
-
-shadowJar {
-	metaInf {
-		from('META-INF')
-	}
-}
-
-artifacts {
-	intellijShadowJars shadowJar
 }
