@@ -72,6 +72,8 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	 * @since 2.3
 	 */
 	protected ITextRegion doGetTextRegion(EObject obj, /* @NonNull */ RegionDescription query) {
+		if (obj == null)
+			return ITextRegion.EMPTY_REGION;
 		ICompositeNode node = findNodeFor(obj);
 		if (node == null) {
 			if (obj.eContainer() == null)
