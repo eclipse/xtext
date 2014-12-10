@@ -50,6 +50,7 @@ import com.intellij.psi.util.CachedValue;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
+import com.intellij.util.indexing.FileBasedIndexImpl;
 import com.intellij.util.indexing.IndexingDataKeys;
 
 public abstract class BaseXtextFile extends PsiFileBase {
@@ -139,9 +140,15 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	protected void installResourceDescription(Resource resource) {
 		try {
 			compilerPhases.setIndexing(resource, true);
+			/*
+			 * Avoid deadlocks when a language accesses the index during indexing, 
+			 * e.g. Xtend active annotations
+			 */
+			FileBasedIndexImpl.disableUpToDateCheckForCurrentThread();
 			ResourceDescriptionAdapter.install(resource);
 		} finally {
 			compilerPhases.setIndexing(resource, false);
+			FileBasedIndexImpl.enableUpToDateCheckForCurrentThread();
 		}
 	}
 
