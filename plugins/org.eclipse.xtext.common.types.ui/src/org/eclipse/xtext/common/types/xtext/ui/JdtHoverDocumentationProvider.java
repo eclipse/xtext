@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
@@ -30,6 +31,7 @@ public class JdtHoverDocumentationProvider implements IEObjectHoverDocumentation
 	
 	private static Logger log = Logger.getLogger(JdtHoverDocumentationProvider.class);
 	
+	@SuppressWarnings({ "cast", "hiding" })
 	public String getDocumentation(EObject object) {
 		if(object instanceof JvmIdentifiableElement){
 			IJavaElement element = javaElementFinder.findElementFor((JvmIdentifiableElement) object);
@@ -37,6 +39,8 @@ public class JdtHoverDocumentationProvider implements IEObjectHoverDocumentation
 				try {
 					return JavadocContentAccess2.getHTMLContent((IMember) element, true);
 				} catch (JavaModelException e) {
+					log.error(e.getMessage(), e);
+				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
 				}
 		}  
