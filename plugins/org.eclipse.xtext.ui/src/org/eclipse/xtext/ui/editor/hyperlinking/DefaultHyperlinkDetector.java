@@ -35,7 +35,7 @@ public class DefaultHyperlinkDetector implements IHyperlinkDetector {
 	private IHyperlinkHelper helper;
 
 	public IHyperlink[] detectHyperlinks(final ITextViewer textViewer, final IRegion region, final boolean canShowMultipleHyperlinks) {
-		return ((IXtextDocument)textViewer.getDocument()).priorityReadOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
+		return ((IXtextDocument)textViewer.getDocument()).readOnly(new IUnitOfWork<IHyperlink[],XtextResource>() {
 			public IHyperlink[] exec(XtextResource resource) throws Exception {
 				if (helper instanceof ISourceViewerAware && textViewer instanceof ISourceViewer) {
 					((ISourceViewerAware) helper).setSourceViewer((ISourceViewer) textViewer);
