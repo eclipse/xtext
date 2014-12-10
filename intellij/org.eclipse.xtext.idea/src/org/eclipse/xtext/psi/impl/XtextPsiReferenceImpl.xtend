@@ -20,6 +20,7 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
+import org.eclipse.xtext.service.OperationCanceledError
 
 class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements XtextPsiReference {
 	
@@ -44,10 +45,18 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 	}
 
 	override create {
-		val textRegion = crossReferenceDescription.textRegion
-		val startOffset = textRegion.offset - myElement.textRange.startOffset
-		val endOffset = startOffset + textRegion.length
-		new TextRange(startOffset, endOffset)
+		val textRegion = try {
+			crossReferenceDescription.textRegion
+		} catch (OperationCanceledError e) {
+			throw e.wrapped
+		}
+		var startOffset = textRegion.offset - myElement.textRange.startOffset
+		if (startOffset < 0) {
+			rangeInElement
+		} else {
+			val endOffset = startOffset + textRegion.length
+			new TextRange(startOffset, endOffset)
+		}
 	} getRangeToHighlightInElement() {
 	}
 

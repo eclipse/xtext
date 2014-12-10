@@ -37,9 +37,11 @@ import org.eclipse.xtext.psi.XtextPsiReference;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -78,15 +80,36 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
       }
       TextRange _xblockexpression = null;
       {
-        ICrossReferenceDescription _crossReferenceDescription = this.getCrossReferenceDescription();
-        final ITextRegion textRegion = _crossReferenceDescription.getTextRegion();
+        ITextRegion _xtrycatchfinallyexpression = null;
+        try {
+          ICrossReferenceDescription _crossReferenceDescription = this.getCrossReferenceDescription();
+          _xtrycatchfinallyexpression = _crossReferenceDescription.getTextRegion();
+        } catch (final Throwable _t) {
+          if (_t instanceof OperationCanceledError) {
+            final OperationCanceledError e = (OperationCanceledError)_t;
+            throw e.getWrapped();
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        final ITextRegion textRegion = _xtrycatchfinallyexpression;
         int _offset = textRegion.getOffset();
         TextRange _textRange = this.myElement.getTextRange();
         int _startOffset = _textRange.getStartOffset();
-        final int startOffset = (_offset - _startOffset);
-        int _length = textRegion.getLength();
-        final int endOffset = (startOffset + _length);
-        _xblockexpression = new TextRange(startOffset, endOffset);
+        int startOffset = (_offset - _startOffset);
+        TextRange _xifexpression = null;
+        if ((startOffset < 0)) {
+          _xifexpression = this.getRangeInElement();
+        } else {
+          TextRange _xblockexpression_1 = null;
+          {
+            int _length = textRegion.getLength();
+            final int endOffset = (startOffset + _length);
+            _xblockexpression_1 = new TextRange(startOffset, endOffset);
+          }
+          _xifexpression = _xblockexpression_1;
+        }
+        _xblockexpression = _xifexpression;
       }
       _result = _xblockexpression;
       _createCache_getRangeToHighlightInElement.put(_cacheKey, _result);
