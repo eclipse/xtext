@@ -28,6 +28,14 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	OverrideHelper overrideHelper
+
+	static class BaseClass {
+		def baseClassMethod() {}
+	}
+	
+	static class DerivedClass extends BaseClass {
+		def derivedClassMethod() {}
+	}
 	
 	def ResolvedFeatures toResolvedOperations(Class<?> type) {
 		val typeLiteral = '''typeof(«type.canonicalName»)'''.expression as XTypeLiteral
@@ -40,7 +48,29 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		val result = overrideHelper.getResolvedFeatures(cast.type)
 		return result
 	}
-	
+
+	@Test
+	def void testAllOperationsIncludeDeclaredOperations() {
+		// declared operations are computed before all operations
+		val resolvedOperations = typeof(DerivedClass).toResolvedOperations
+		val declared = resolvedOperations.getDeclaredOperations
+		val all = resolvedOperations.getAllOperations
+		assertFalse(all.empty)
+		assertEquals(1, declared.size)
+		assertSame(declared.head, all.head)
+	}
+
+	@Test
+	def void testDeclaredOperationsAreIncludedInAllOperations() {
+		// all operations are computed before declared operations
+		val resolvedOperations = typeof(DerivedClass).toResolvedOperations
+		val all = resolvedOperations.getAllOperations
+		val declared = resolvedOperations.getDeclaredOperations
+		assertFalse(all.empty)
+		assertEquals(1, declared.size)
+		assertSame(declared.head, all.head)
+	}
+
 	@Test
 	def void testArrayListHasNoAbstractMethods() {
 		val resolvedOperations = typeof(ArrayList).toResolvedOperations
