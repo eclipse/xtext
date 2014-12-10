@@ -16,7 +16,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbench;
@@ -29,6 +29,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -38,6 +39,8 @@ import com.google.inject.Inject;
  */
 
 public class OpenEditorTest extends AbstractXtendUITestCase {
+	
+	private static final long SELECTION_TIMEOUT = 10000;
 
 	@Inject
 	private WorkbenchTestHelper workbenchTestHelper;
@@ -58,7 +61,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 	private IWorkbench workbench;
 
 	private IJavaProject javaProject;
-
+	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -94,7 +97,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 	}
 
 	@Test public void testOpenFromOutline() throws Exception {
-		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("outlinetest.Baz.xtend",
+		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("outlinetest/Baz.xtend",
 				"package outlinetest class Baz extends Foo { int baz }");
 		IOutlineTreeProvider.ModeAware tp = (IOutlineTreeProvider.ModeAware) treeProvider;
 		tp.setCurrentMode(tp.getOutlineModes().get(1));
@@ -105,22 +108,32 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		IOutlineNode baz = bazNode.getChildren().get(0);
 		assertEquals("baz : int - Baz", baz.getText().toString());
 		outlineNodeElementOpener.open(baz, bazXtendEditor.getInternalSourceViewer());
-		assertActiveEditor("org.eclipse.xtend.core.Xtend", "baz");
+		assertActiveEditor("org.eclipse.xtend.core.Xtend", "Baz.xtend", "baz");
 		IOutlineNode foo = bazNode.getChildren().get(1);
 		assertEquals("foo : int - Foo", foo.getText().toString());
 		outlineNodeElementOpener.open(foo, bazXtendEditor.getInternalSourceViewer());
-		assertActiveEditor("org.eclipse.xtend.core.Xtend", "foo");
+		assertActiveEditor("org.eclipse.xtend.core.Xtend", "Foo.xtend", "foo");
 		IOutlineNode bar = bazNode.getChildren().get(2);
 		assertEquals("bar : int - Bar", bar.getText().toString());
 		outlineNodeElementOpener.open(bar, bazXtendEditor.getInternalSourceViewer());
-		assertActiveEditor(JavaUI.ID_CU_EDITOR, "bar");
+		assertActiveEditor(JavaUI.ID_CU_EDITOR, "Bar.java", "bar");
 	}
 
-	protected void assertActiveEditor(String expectedEditorID, String expectedSelection) {
-		IEditorSite editorSite = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor().getEditorSite();
+	protected void assertActiveEditor(String expectedEditorID, String expectedEditorTitle, final String expectedSelection) {
+		IEditorPart editorPart = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		assertEquals(expectedEditorTitle, editorPart.getTitle());
+		IEditorSite editorSite = editorPart.getEditorSite();
 		assertEquals(expectedEditorID, editorSite.getId());
-		ISelection s = editorSite.getSelectionProvider().getSelection();
-		assertTrue(s instanceof ITextSelection);
-		assertEquals(expectedSelection, ((ITextSelection)s).getText());
+		final ISelectionProvider selectionProvider = editorSite.getSelectionProvider();
+		assertTrue(selectionProvider.getSelection() instanceof ITextSelection);
+		
+		// The selection may be updated asynchronously, so we may have to wait until the selection changes
+		workbenchTestHelper.awaitUIUpdate(new Functions.Function0<Boolean>() {
+			public Boolean apply() {
+				return expectedSelection.equals(((ITextSelection) selectionProvider.getSelection()).getText());
+			}
+		}, SELECTION_TIMEOUT);
+		assertEquals(expectedSelection, ((ITextSelection) selectionProvider.getSelection()).getText());
 	}
+	
 }

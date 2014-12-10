@@ -14,17 +14,18 @@ import org.eclipse.jface.text.source.Annotation
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
-import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
 import org.junit.After
 import org.junit.Test
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.validation.CheckMode
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
+	
+	static val VALIDATION_TIMEOUT = 10000L
 	
 	@Inject extension WorkbenchTestHelper helper
 	
@@ -228,9 +229,14 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 	}
 	
 	private def assertNumberOfErrorAnnotations(XtextEditor editor, int expectedNumber) {
-		(editor.document as XtextDocument).validationJob.join
-		val annotations = editor.documentProvider.getAnnotationModel(editor.editorInput).annotationIterator.toList
-		val errors = annotations.filter(Annotation).filter[type == 'org.eclipse.xtext.ui.editor.error']
+		helper.awaitUIUpdate([editor.errorAnnotations.size == expectedNumber], VALIDATION_TIMEOUT)
+		val errors = editor.errorAnnotations
 		assertEquals(errors.toString, expectedNumber, errors.size)
 	}
+	
+	private def getErrorAnnotations(XtextEditor editor) {
+		editor.documentProvider.getAnnotationModel(editor.editorInput).annotationIterator
+			.filter(Annotation).filter[type == 'org.eclipse.xtext.ui.editor.error'].toList
+	}
+	
 }
