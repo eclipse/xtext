@@ -4,26 +4,32 @@ import com.google.inject.Inject
 import com.intellij.lang.Language
 import com.intellij.openapi.util.Key
 import com.intellij.psi.JavaElementVisitor
+import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiAnnotation
 import com.intellij.psi.PsiAnnotationMemberValue
 import com.intellij.psi.PsiAnnotationOwner
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiClassType
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiElementFactory
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiExpression
 import com.intellij.psi.PsiField
+import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiModifier
+import com.intellij.psi.PsiNameHelper
 import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.PsiReferenceList
+import com.intellij.psi.PsiSubstitutor
 import com.intellij.psi.PsiType
 import com.intellij.psi.ResolveState
 import com.intellij.psi.impl.InheritanceImplUtil
 import com.intellij.psi.impl.PsiClassImplUtil
 import com.intellij.psi.impl.PsiImplUtil
 import com.intellij.psi.impl.PsiSuperMethodImplUtil
+import com.intellij.psi.impl.light.LightClassReference
 import com.intellij.psi.impl.light.LightElement
 import com.intellij.psi.impl.light.LightMethodBuilder
 import com.intellij.psi.impl.light.LightModifierList
@@ -59,11 +65,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.idea.types.psi.JvmPsiClass
 import org.eclipse.xtext.psi.PsiModelAssociations
+import org.eclipse.xtext.service.OperationCanceledError
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xtype.XComputedTypeReference
-import org.eclipse.xtext.service.OperationCanceledError
-import com.intellij.openapi.progress.ProcessCanceledException
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
 
@@ -245,16 +250,45 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 
 	private def PsiType toPsiType(JvmTypeReference type) {
-		if (type instanceof XComputedTypeReference) {
-			try {
+		try {
+			if (type instanceof XComputedTypeReference) {
 				type.equivalent.toPsiType
-			} catch (OperationCanceledError e) {
-				throw e.wrapped
+			} else {
+				buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
 			}
-		} else {
-			PsiImplUtil.buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
+		} catch (OperationCanceledError e) {
+			throw e.wrapped
 		}
 	}
+	
+	/*
+	 * Copied from PsiClassImplUtil for Android Studio compatibility
+	 */
+	private def PsiType buildTypeFromTypeString(String typeName,  PsiElement context, PsiFile psiFile) {
+		var PsiType resultType
+		val PsiManager psiManager = psiFile.getManager()
+		if (typeName.indexOf(Character.valueOf('<').charValue) != -1 ||
+			typeName.indexOf(Character.valueOf('[').charValue) != -1 ||
+			typeName.indexOf(Character.valueOf('.').charValue) == -1) {
+			try {
+				return JavaPsiFacade.getInstance(psiManager.getProject()).getElementFactory().createTypeFromText(typeName, context)
+			} catch (Exception ex) {
+			}
+		}
+
+		var PsiClass aClass = JavaPsiFacade.getInstance(psiManager.getProject()).findClass(typeName,
+			context.getResolveScope())
+		if (aClass == null) {
+			val LightClassReference ref = new LightClassReference(psiManager, PsiNameHelper.getShortClassName(typeName), typeName, PsiSubstitutor.EMPTY, psiFile)
+			resultType = new PsiClassReferenceType(ref, null)
+		} else {
+			var PsiElementFactory factory = JavaPsiFacade.getInstance(psiManager.getProject()).getElementFactory()
+			var PsiSubstitutor substitutor = factory.createRawSubstitutor(aClass)
+			resultType = factory.createType(aClass, substitutor)
+		}
+		return resultType
+	}
+
 
 	override getOwnInnerClasses() {
 		jvmType.allNestedTypes.map [ inner |
