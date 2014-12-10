@@ -66,7 +66,7 @@ public class OutlineRefreshJob extends Job {
 	protected IOutlineNode refreshOutlineModel(final IProgressMonitor monitor, final OutlineTreeState formerState,
 			final OutlineTreeState newState) {
 		final IOutlineTreeProvider treeProvider = outlinePage.getTreeProvider();
-		if(treeProvider instanceof BackgroundOutlineTreeProvider) {
+		if (treeProvider instanceof IOutlineTreeProvider.Background) {
 			return internalRefreshOutlineModel(formerState, newState, treeProvider);
 		} else {
 			return new DisplayRunnableWithResult<IOutlineNode>() {

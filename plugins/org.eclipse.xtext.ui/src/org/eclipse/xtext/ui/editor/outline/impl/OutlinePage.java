@@ -102,7 +102,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		treeViewer.setUseHashlookup(true);
 		// access EMF's image registry now, since it needs a UI-thread.
 		ExtendedImageRegistry.getInstance();
-		if(treeProvider instanceof BackgroundOutlineTreeProvider) {
+		if (treeProvider instanceof IOutlineTreeProvider.Background) {
 			new Job("Initializing outline") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {

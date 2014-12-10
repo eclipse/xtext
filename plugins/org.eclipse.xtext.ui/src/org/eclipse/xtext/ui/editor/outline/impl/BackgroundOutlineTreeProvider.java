@@ -41,7 +41,8 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
-public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider, IOutlineTreeProvider.Cancelable {
+public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvider, IOutlineTreeProvider,
+		IOutlineTreeProvider.Background, IOutlineTreeProvider.Cancelable {
 
 	@Inject
 	private ILabelProvider labelProvider;

@@ -28,7 +28,7 @@ public interface IOutlineTreeProvider {
 	IOutlineNode createRoot(IXtextDocument document);
 
 	/**
-	 * For outline tree providers that support multimple modes, e.g. show elements from superclasses or not.
+	 * For outline tree providers that support multiple modes, e.g. show elements from superclasses or not.
 	 * 
 	 * @author Jan Koehnlein - Initial contribution and API
 	 * @since 2.4
@@ -49,4 +49,13 @@ public interface IOutlineTreeProvider {
 	interface Cancelable {
 		IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator);
 	}
+
+	/**
+	 * For outline tree providers that can be executed in background jobs.
+	 * 
+	 * @since 2.8
+	 */
+	interface Background {
+	}
+	
 }
