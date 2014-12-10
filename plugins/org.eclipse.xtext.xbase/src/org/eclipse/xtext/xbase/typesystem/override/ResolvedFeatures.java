@@ -147,10 +147,10 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 			return Collections.emptyList();
 		}
 		List<IResolvedOperation> result = Lists.newArrayList();
-		for(IResolvedOperation operation: getAllOperations()) {
-			if (operation.getDeclaration().getDeclaringType() == rawType) {
-				result.add(operation);
-			}
+		Iterable<JvmOperation> operations = ((JvmDeclaredType)rawType).getDeclaredOperations();
+		for(JvmOperation operation: operations) {
+			BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
+			result.add(resolvedOperation);
 		}
 		return Collections.unmodifiableList(result);
 	}
