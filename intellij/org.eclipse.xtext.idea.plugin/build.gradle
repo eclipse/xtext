@@ -1,26 +1,17 @@
-plugins {
-  id 'com.github.johnrengelman.shadow' version '1.1.2'
-}
-
 configurations.compile {
 	exclude module:'guava'
 	exclude module:'cglib'
 	exclude module:'log4j'
+	exclude module:'icu4j'
 	exclude group:'org.ow2.asm'
 }
 
 dependencies {
 	compile (project(':org.eclipse.xtext.idea'))
-	compile (project(':org.eclipse.xtext.idea.generator'))
 	compile (project(':org.eclipse.xtext.idea.builder'))
 	compile (project(':org.eclipse.xtext.xbase.idea'))
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext:${version}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:${version}"
 	compile 'org.eclipse.core:runtime:3.10.0-v20140318-2214'
-}
-
-artifacts {
-	intellijShadowJars shadowJar
 }

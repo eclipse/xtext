@@ -13,18 +13,6 @@ allprojects {
 			url "https://oss.sonatype.org/content/repositories/snapshots/"
 		}
 	}
-	
-	configurations {
-		intellijShadowJars
-	}
-	
-	uploadIntellijShadowJars {
-		repositories {
-			flatDir {
-				dirs "$rootDir/build/intellijRepository"
-			}
-		}
-	}
 }
 
 configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
@@ -65,9 +53,23 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 	sourceCompatibility = 1.5
 }
 
+def intellijPluginProjects = [
+	project(':org.eclipse.xtext.idea.plugin'),
+	project(':org.eclipse.xtext.idea.sdomain.idea'),
+	project(':org.eclipse.xtext.idea.example.entities.idea'),
+	project(':org.eclipse.xtend.idea'),
+]
+configure(intellijPluginProjects) {
+	task zip(dependsOn: jar, type: Zip) {
+    from configurations.runtime.allArtifacts.files
+		from configurations.runtime
+    into(project.name + '-' + project.version + '/lib')
+	}
+}
+
 //TODO generate this automatically
 task createIntellijRepository(type: Copy) {
-	dependsOn allprojects.collect{it.uploadIntellijShadowJars}
 	from "updatePlugins.xml"
+	from intellijPluginProjects*.zip
 	into "$rootDir/build/intellijRepository"
 }
