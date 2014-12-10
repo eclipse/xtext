@@ -78,7 +78,7 @@
 		<fileset dir="${bundles.folder}" id="binJars">
 			<include name="*.jar" />
 			<exclude name="*xtext*.jar" if="copy.local.classes" />
-			<exclude name="*xtend*.jar" if="copy.local.classes" />
+			<exclude name="*xtend.*.jar" if="copy.local.classes" />
 			<exclude name="*source_*" />
 		</fileset>
 
