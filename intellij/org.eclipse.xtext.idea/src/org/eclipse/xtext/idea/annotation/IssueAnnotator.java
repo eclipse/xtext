@@ -52,8 +52,13 @@ public class IssueAnnotator implements Annotator {
 				if (highlightSeverity == null) {
 					continue;
 				}
-				int endOffset = issue.getOffset() + issue.getLength();
-				holder.createAnnotation(highlightSeverity, new TextRange(issue.getOffset(), endOffset), issue.getMessage());
+				int startOffset = 0;
+				int endOffset = 0;
+				if (issue.getOffset() != null) {
+					startOffset = issue.getOffset();
+					endOffset = startOffset + issue.getLength();
+				}
+				holder.createAnnotation(highlightSeverity, new TextRange(startOffset, endOffset), issue.getMessage());
 			}
 		} catch (OperationCanceledError e) {
 			throw e.getWrapped();
