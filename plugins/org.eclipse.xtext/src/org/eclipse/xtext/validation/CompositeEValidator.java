@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.xtext.service.OperationCanceledError;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -111,6 +113,12 @@ public class CompositeEValidator implements EValidator {
 			try {
 				result &= val.getDelegate().validate(eObject, diagnostics, context);
 			}
+			catch (OperationCanceledException e) {
+				throw e;
+			}
+			catch (OperationCanceledError e) {
+				throw e;
+			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
@@ -126,6 +134,12 @@ public class CompositeEValidator implements EValidator {
 			try {
 				result &= val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
+			catch (OperationCanceledException e) {
+				throw e;
+			}
+			catch (OperationCanceledError e) {
+				throw e;
+			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
@@ -140,6 +154,12 @@ public class CompositeEValidator implements EValidator {
 			EValidatorEqualitySupport val = getContents().get(i);
 			try {
 				result &= val.getDelegate().validate(eDataType, value, diagnostics, context);
+			}
+			catch (OperationCanceledException e) {
+				throw e;
+			}
+			catch (OperationCanceledError e) {
+				throw e;
 			}
 			catch (Exception e) {
 				logger.error("Error executing EValidator", e);
