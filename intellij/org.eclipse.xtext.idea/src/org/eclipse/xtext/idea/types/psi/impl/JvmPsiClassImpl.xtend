@@ -11,7 +11,6 @@ import com.intellij.psi.PsiAnnotationOwner
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiClassType
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiElementFactory
 import com.intellij.psi.PsiElementVisitor
 import com.intellij.psi.PsiExpression
 import com.intellij.psi.PsiField
@@ -264,29 +263,25 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	/*
 	 * Copied from PsiClassImplUtil for Android Studio compatibility
 	 */
-	private def PsiType buildTypeFromTypeString(String typeName,  PsiElement context, PsiFile psiFile) {
-		var PsiType resultType
-		val PsiManager psiManager = psiFile.getManager()
-		if (typeName.indexOf(Character.valueOf('<').charValue) != -1 ||
-			typeName.indexOf(Character.valueOf('[').charValue) != -1 ||
-			typeName.indexOf(Character.valueOf('.').charValue) == -1) {
+	private def buildTypeFromTypeString(String typeName,  PsiElement context, PsiFile psiFile) {
+		val psiManager = psiFile.manager
+		if (typeName.indexOf('<') != -1 || typeName.indexOf('[') != -1 || typeName.indexOf('.') == -1) {
 			try {
-				return JavaPsiFacade.getInstance(psiManager.getProject()).getElementFactory().createTypeFromText(typeName, context)
+				return JavaPsiFacade.getInstance(psiManager.project).elementFactory.createTypeFromText(typeName,
+					context)
 			} catch (Exception ex) {
 			}
 		}
 
-		var PsiClass aClass = JavaPsiFacade.getInstance(psiManager.getProject()).findClass(typeName,
-			context.getResolveScope())
+		val aClass = JavaPsiFacade.getInstance(psiManager.project).findClass(typeName, context.resolveScope)
 		if (aClass == null) {
-			val LightClassReference ref = new LightClassReference(psiManager, PsiNameHelper.getShortClassName(typeName), typeName, PsiSubstitutor.EMPTY, psiFile)
-			resultType = new PsiClassReferenceType(ref, null)
+			val ref = new LightClassReference(psiManager, PsiNameHelper.getShortClassName(typeName), typeName, PsiSubstitutor.EMPTY, psiFile)
+			return new PsiClassReferenceType(ref, null)
 		} else {
-			var PsiElementFactory factory = JavaPsiFacade.getInstance(psiManager.getProject()).getElementFactory()
-			var PsiSubstitutor substitutor = factory.createRawSubstitutor(aClass)
-			resultType = factory.createType(aClass, substitutor)
+			val factory = JavaPsiFacade.getInstance(psiManager.project).elementFactory
+			val substitutor = factory.createRawSubstitutor(aClass)
+			return factory.createType(aClass, substitutor)
 		}
-		return resultType
 	}
 
 

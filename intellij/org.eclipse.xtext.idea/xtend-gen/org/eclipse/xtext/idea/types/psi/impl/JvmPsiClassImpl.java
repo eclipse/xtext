@@ -426,29 +426,22 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
    * Copied from PsiClassImplUtil for Android Studio compatibility
    */
   private PsiType buildTypeFromTypeString(final String typeName, final PsiElement context, final PsiFile psiFile) {
-    PsiType resultType = null;
     final PsiManager psiManager = psiFile.getManager();
     boolean _or = false;
     boolean _or_1 = false;
-    Character _valueOf = Character.valueOf('<');
-    char _charValue = _valueOf.charValue();
-    int _indexOf = typeName.indexOf(_charValue);
+    int _indexOf = typeName.indexOf("<");
     boolean _notEquals = (_indexOf != (-1));
     if (_notEquals) {
       _or_1 = true;
     } else {
-      Character _valueOf_1 = Character.valueOf('[');
-      char _charValue_1 = _valueOf_1.charValue();
-      int _indexOf_1 = typeName.indexOf(_charValue_1);
+      int _indexOf_1 = typeName.indexOf("[");
       boolean _notEquals_1 = (_indexOf_1 != (-1));
       _or_1 = _notEquals_1;
     }
     if (_or_1) {
       _or = true;
     } else {
-      Character _valueOf_2 = Character.valueOf('.');
-      char _charValue_2 = _valueOf_2.charValue();
-      int _indexOf_2 = typeName.indexOf(_charValue_2);
+      int _indexOf_2 = typeName.indexOf(".");
       boolean _equals = (_indexOf_2 == (-1));
       _or = _equals;
     }
@@ -469,22 +462,19 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
     Project _project_1 = psiManager.getProject();
     JavaPsiFacade _instance_1 = JavaPsiFacade.getInstance(_project_1);
     GlobalSearchScope _resolveScope = context.getResolveScope();
-    PsiClass aClass = _instance_1.findClass(typeName, _resolveScope);
+    final PsiClass aClass = _instance_1.findClass(typeName, _resolveScope);
     boolean _equals_1 = Objects.equal(aClass, null);
     if (_equals_1) {
       String _shortClassName = PsiNameHelper.getShortClassName(typeName);
       final LightClassReference ref = new LightClassReference(psiManager, _shortClassName, typeName, PsiSubstitutor.EMPTY, psiFile);
-      PsiClassReferenceType _psiClassReferenceType = new PsiClassReferenceType(ref, null);
-      resultType = _psiClassReferenceType;
+      return new PsiClassReferenceType(ref, null);
     } else {
       Project _project_2 = psiManager.getProject();
       JavaPsiFacade _instance_2 = JavaPsiFacade.getInstance(_project_2);
-      PsiElementFactory factory = _instance_2.getElementFactory();
-      PsiSubstitutor substitutor = factory.createRawSubstitutor(aClass);
-      PsiClassType _createType = factory.createType(aClass, substitutor);
-      resultType = _createType;
+      final PsiElementFactory factory = _instance_2.getElementFactory();
+      final PsiSubstitutor substitutor = factory.createRawSubstitutor(aClass);
+      return factory.createType(aClass, substitutor);
     }
-    return resultType;
   }
   
   public List<PsiClass> getOwnInnerClasses() {
