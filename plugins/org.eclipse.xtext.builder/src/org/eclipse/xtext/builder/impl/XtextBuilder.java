@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
@@ -23,8 +25,10 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.ng.debug.XtextCompilerConsole;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -67,6 +71,8 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+		if(isInterrupted())
+			throw new OperationCanceledException();
 		if (IBuildFlag.FORGET_BUILD_STATE_ONLY.isSet(args)) {
 			forgetLastBuiltState();
 			return getProject().getReferencedProjects();
@@ -74,6 +80,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		long startTime = System.currentTimeMillis();
 		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
+			queuedBuildData.createCheckpoint();
 			task.start();
 			if (monitor != null) {
 				final String taskName = Messages.XtextBuilder_Building + getProject().getName() + ": "; //$NON-NLS-1$
@@ -81,6 +88,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					@Override
 					public void subTask(String name) {
 						super.subTask(taskName + name);
+					}
+					
+					@Override
+					public boolean isCanceled() {
+						if(isInterrupted()) 
+							XtextCompilerConsole.log("interupted");
+						return isInterrupted() || super.isCanceled();
 					}
 				};
 			}
@@ -99,12 +113,14 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			log.error(e.getMessage(), e);
 			throw e;
 		} catch (OperationCanceledException e) {
-			forgetLastBuiltState();
-			throw e;
+			handleInterruption();
+		} catch (OperationCanceledError err) {
+			handleInterruption();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			forgetLastBuiltState();
 		} finally {
+			queuedBuildData.discardCheckpoint();
 			if (monitor != null)
 				monitor.done();
 			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
@@ -113,6 +129,26 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		return getProject().getReferencedProjects();
 	}
 
+	private void handleInterruption() {
+		// Don't pass an OperationCanceledException on to the BuildManager as it would
+		// force a full build in the next round. Instead, save the resource deltas to 
+		// be reprocessed next time.
+		// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=454716
+		queuedBuildData.rollback();
+		doRememberLastBuiltState();
+		((Workspace) getProject().getWorkspace()).getBuildManager().interrupt();
+	}
+	
+	private void doRememberLastBuiltState() {
+		try {
+			Method method = getClass().getMethod("rememberLastBuiltState");
+			method.invoke(this);
+		} catch (Exception e) {
+			// not available prior to Eclipse 3.7. Sorry: full build next time
+			throw new OperationCanceledException();
+		}
+	}
+	
 	private String getKindAsString(int kind) {
 		if (kind == FULL_BUILD) {
 			return "FULL";
@@ -173,13 +209,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
+		XtextCompilerConsole.log("Building " + getProject().getName());
 		// return early if there's nothing to do.
 		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
 		// and would be expensive to create.
 		boolean indexingOnly = type == BuildType.RECOVERY;
 		if (new BuildData(getProject().getName(), null, toBeBuilt, queuedBuildData, indexingOnly).isEmpty())
 			return;
-		
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 		resourceSet.getLoadOptions().put(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);

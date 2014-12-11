@@ -20,6 +20,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta
 import static extension java.util.Collections.*
 import static extension org.eclipse.xtext.common.types.ui.notification.JavaBuilderState.*
 import org.eclipse.xtext.builder.impl.IQueuedBuildDataContribution
+import java.util.HashMap
+import java.util.ArrayList
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -28,8 +30,10 @@ import org.eclipse.xtext.builder.impl.IQueuedBuildDataContribution
 class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 
 	var Map<String, JavaBuilderState> javaBuildState
+	var Map<String, JavaBuilderState> javaBuildStateCopy
 
 	var Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltas
+	var Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltasCopy
 	
 	override reset() {
 		javaBuildState = newHashMap
@@ -101,5 +105,21 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 		}
 		false
 	}
-
+	
+	override createCheckpoint() {
+		javaBuildStateCopy = new HashMap(javaBuildState)
+		unconfirmedDeltasCopy = new ArrayList(unconfirmedDeltas)
+	}
+	
+	override discardCheckpoint() {
+		javaBuildStateCopy = null
+		unconfirmedDeltasCopy = null
+	}
+	
+	override rollback() {
+		javaBuildState.clear
+		javaBuildState.putAll(javaBuildStateCopy)
+		unconfirmedDeltas.clear
+		unconfirmedDeltas.addAll(unconfirmedDeltasCopy)
+	}
 }
