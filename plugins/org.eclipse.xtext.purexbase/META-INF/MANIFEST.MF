@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.8.0";visibility:=reexport,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.15"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.purexbase,
  org.eclipse.xtext.purexbase.formatting,
  org.eclipse.xtext.purexbase.jvmmodel,
