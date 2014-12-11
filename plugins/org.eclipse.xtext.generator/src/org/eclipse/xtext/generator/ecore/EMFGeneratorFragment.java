@@ -135,6 +135,8 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	private GenRuntimeVersion emfRuntimeVerison;
 	
+	private boolean suppressLoadInitialization = false;
+	
 	private String getLineDelimiter() {
 		return getNaming().getLineDelimiter();
 	}
@@ -720,6 +722,9 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 		genModel.initialize(packs);
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			genPackage.setBasePackage(getBasePackage(grammar));
+			if (isSuppressLoadInitialization()) {
+				genPackage.setLoadInitialization(false);
+			}
 			if (getFileExtensions() != null && packs.contains(genPackage.getEcorePackage())) {
 				genPackage.setFileExtensions(getFileExtensions());
 			}
@@ -950,6 +955,25 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 
 	public String getFileExtensions() {
 		return fileExtensions;
+	}
+
+	/**
+	 * The generated package implementation uses 'load initialization' if it becomes very large, which means
+	 * that an additional ecore file is generated and the package content is loaded at runtime from that file.
+	 * This is to prevent the compiled class file from becoming too large. Set this property to true in order
+	 * to suppress this behavior.
+	 * 
+	 * @since 2.8
+	 */
+	public void setSuppressLoadInitialization(boolean suppressLoadInitialization) {
+		this.suppressLoadInitialization = suppressLoadInitialization;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public boolean isSuppressLoadInitialization() {
+		return suppressLoadInitialization;
 	}
 	
 }
