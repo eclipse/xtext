@@ -5,7 +5,7 @@ Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.util
 Bundle-Version: 2.8.0.qualifier
 Bundle-Vendor: %providerName
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.util,
  org.eclipse.xtext.util.concurrent,
  org.eclipse.xtext.util.formallang;x-internal:=true,
