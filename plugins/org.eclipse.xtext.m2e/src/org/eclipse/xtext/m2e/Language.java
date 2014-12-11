@@ -9,6 +9,8 @@ public class Language {
 			.<OutputConfiguration> newArrayList();
 
 	private String setup;
+	
+	private boolean javaSupport = true;
 
 	public List<OutputConfiguration> getOutputConfigurations() {
 		return this.outputConfigurations;
@@ -17,7 +19,7 @@ public class Language {
 	public String getSetup() {
 		return this.setup;
 	}
-
+	
 	public String name() {
 		return setup.replace("StandaloneSetup", "");
 	}
@@ -29,5 +31,13 @@ public class Language {
 
 	public void setSetup(String setup) {
 		this.setup = setup;
+	}
+	
+	public boolean isJavaSupport() {
+		return javaSupport;
+	}
+	
+	public void setJavaSupport(boolean javaSupport) {
+		this.javaSupport = javaSupport;
 	}
 }
