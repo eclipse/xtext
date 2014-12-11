@@ -38,6 +38,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenRuntimeVersion;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
 import org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl;
+import org.eclipse.emf.codegen.ecore.genmodel.impl.GenPackageImpl;
 import org.eclipse.emf.codegen.merge.java.JControlModel;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -619,7 +620,19 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 				genModel = (GenModel) genModelFile.getContents().get(0);
 			}
 		} else {
-			genModel = GenModelPackage.eINSTANCE.getGenModelFactory().createGenModel();
+			// The name of the additional ecore file used for load initialization is hard-coded in GenPackageImpl.
+			// We want to override it to avoid validation of that file, which uses NS URIs for references.
+			genModel = new GenModelImpl() {
+				@Override
+				public GenPackage createGenPackage() {
+					return new GenPackageImpl() {
+						@Override
+						public String getSerializedPackageFilename() {
+							return getName() + ".loadinitialization_ecore";
+						}
+					};
+				}
+			};
 			genModel.setModelDirectory(toGenModelProjectPath(getJavaModelDirectory(ctx)));
 			genModel.setModelName(getModelName(grammar));
 			genModel.setModelPluginID(getModelPluginID(ctx));
