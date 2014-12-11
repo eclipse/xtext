@@ -4,7 +4,7 @@ Bundle-Name: Xtend SWT Tests
 Bundle-SymbolicName: org.eclipse.xtend.ide.swtbot.tests
 Bundle-Version: 2.5.0.qualifier
 Bundle-Vendor: Eclipse Modeling
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
  org.junit.rules;version="4.5.0",
