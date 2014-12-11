@@ -8,4 +8,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtend.lib;uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro",
  org.eclipse.xtend.lib.annotations;uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro"
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.8.0";visibility:=reexport,
- org.eclipse.xtend.lib.macro;bundle-version="2.7.0";visibility:=reexport
+ org.eclipse.xtend.lib.macro;bundle-version="2.8.0";visibility:=reexport
