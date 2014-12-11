@@ -11,4 +11,4 @@ Require-Bundle: org.eclipse.xtext.example.tutorial;visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="3.6.0"
 Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

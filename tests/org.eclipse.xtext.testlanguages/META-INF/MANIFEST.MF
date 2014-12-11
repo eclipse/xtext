@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.8.0",
  org.antlr.runtime,
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j;version="1.2.15"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.backtracking.services,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage,

@@ -24,6 +24,6 @@ Import-Package: org.apache.log4j;version="1.2.15",
  org.junit.runners;version="4.5.0",
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Activator: org.eclipse.xtext.example.tutorial.ui.internal.TutorialActivator
 Export-Package: org.eclipse.xtext.example.tutorial

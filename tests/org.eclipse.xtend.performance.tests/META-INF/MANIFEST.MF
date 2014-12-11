@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Benchmarks
 Bundle-SymbolicName: org.eclipse.xtend.performance.tests
 Bundle-Version: 2.8.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-ClassPath: .
 Require-Bundle: com.google.inject;bundle-version="3.0.0",
