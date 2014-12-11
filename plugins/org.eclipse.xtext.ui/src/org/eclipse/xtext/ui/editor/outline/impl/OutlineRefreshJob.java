@@ -37,7 +37,7 @@ public class OutlineRefreshJob extends Job {
 	private IOutlineNodeComparer nodeComparer;
 	
 	public OutlineRefreshJob() {
-		super("Refreshing outline");
+		super("Refreshing Outline");
 	}
 
 	public void setOutlinePage(OutlinePage outlinePage) {

@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 
 import static com.google.common.collect.Lists.*;
 
+import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -22,11 +23,14 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TreeNode;
+import org.eclipse.jface.viewers.TreeNodeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
@@ -40,6 +44,8 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.label.AbstractLabelProvider;
 import org.eclipse.xtext.ui.util.DisplayRunHelper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -60,6 +66,9 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	@Inject
 	private OutlineNodeLabelProvider labelProvider;
+	
+	@Inject
+	private BusyLabelProvider busyLabelProvider;
 
 	@Inject
 	private OutlineNodeContentProvider contentProvider;
@@ -96,14 +105,13 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	protected void configureTree() {
 		TreeViewer treeViewer = getTreeViewer();
-		treeViewer.setLabelProvider(labelProvider);
-		treeViewer.setContentProvider(contentProvider);
 		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setUseHashlookup(true);
 		// access EMF's image registry now, since it needs a UI-thread.
 		ExtendedImageRegistry.getInstance();
 		if (treeProvider instanceof IOutlineTreeProvider.Background) {
-			new Job("Initializing outline") {
+			showBusyStatus();
+			new Job("Initializing Outline") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					try {
@@ -119,6 +127,16 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		} else {
 			initializeTreeContent();
 		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void showBusyStatus() {
+		TreeViewer treeViewer = getTreeViewer();
+		treeViewer.setLabelProvider(busyLabelProvider);
+		treeViewer.setContentProvider(new TreeNodeContentProvider());
+		treeViewer.setInput(new TreeNode[] { new TreeNode("Loading...") });
 	}
 
 	/**
@@ -146,9 +164,9 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	}
 
 	protected void addChildren(List<IOutlineNode> nodes, List<IOutlineNode> allChildren, int depth) {
-		for (IOutlineNode node : nodes) {
-			List<IOutlineNode> children = node.getChildren();
-			if (depth > 1) {
+		if (depth > 1) {
+			for (IOutlineNode node : nodes) {
+				List<IOutlineNode> children = node.getChildren();
 				allChildren.addAll(children);
 				addChildren(children, allChildren, depth - 1);
 			}
@@ -273,6 +291,16 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 				try {
 					TreeViewer treeViewer = getTreeViewer();
 					if (!treeViewer.getTree().isDisposed()) {
+						if (treeViewer.getLabelProvider() != labelProvider) {
+							if (treeViewer.getInput() != null && treeViewer.getContentProvider() != null)
+								treeViewer.setInput(null);
+							treeViewer.setLabelProvider(labelProvider);
+						}
+						if (treeViewer.getContentProvider() != contentProvider) {
+							if (treeViewer.getInput() != null && treeViewer.getContentProvider() != null)
+								treeViewer.setInput(null);
+							treeViewer.setContentProvider(contentProvider);
+						}
 						treeViewer.setInput(rootNode);
 						treeViewer.expandToLevel(1);
 						treeViewer.setExpandedElements(Iterables.toArray(nodesToBeExpanded, IOutlineNode.class));
@@ -293,6 +321,28 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	 * For testing.
 	 */
 	protected void treeUpdated() {
+	}
+	
+	/**
+	 * A label provider used for showing the busy status. It relies on {@link TreeNode}s to retrieve the text content.
+	 * @since 2.8
+	 */
+	protected static class BusyLabelProvider extends AbstractLabelProvider {
+		@Override
+		public String doGetText(Object element) {
+			if (element instanceof TreeNode) {
+				TreeNode node = (TreeNode) element;
+				return String.valueOf(node.getValue());
+			}
+			return super.getText(element);
+		}
+		@Override
+		protected Object getDefaultImage() {
+			URL imgUrl = Activator.getDefault().getBundle().getEntry("icons/defaultoutlinenode.gif");
+			if (imgUrl != null)
+				return ImageDescriptor.createFromURL(imgUrl);
+			return null;
+		}
 	}
 
 }
