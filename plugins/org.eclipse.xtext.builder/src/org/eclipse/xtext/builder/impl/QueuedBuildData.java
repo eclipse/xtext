@@ -20,7 +20,6 @@ import java.util.Queue;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.builder.ng.debug.XtextCompilerConsole;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -324,7 +323,6 @@ public class QueuedBuildData {
 	}
 
 	public void rollback() {
-		XtextCompilerConsole.log("Build canceled");
 		deltas.clear();
 		deltas.addAll(deltasCopy);
 		uris.clear();
