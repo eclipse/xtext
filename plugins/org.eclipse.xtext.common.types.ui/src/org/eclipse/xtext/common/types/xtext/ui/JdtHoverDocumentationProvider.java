@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.EObject;
@@ -31,18 +34,44 @@ public class JdtHoverDocumentationProvider implements IEObjectHoverDocumentation
 	
 	private static Logger log = Logger.getLogger(JdtHoverDocumentationProvider.class);
 	
-	@SuppressWarnings({ "cast", "hiding" })
 	public String getDocumentation(EObject object) {
 		if(object instanceof JvmIdentifiableElement){
 			IJavaElement element = javaElementFinder.findElementFor((JvmIdentifiableElement) object);
-			if(element instanceof IMember && element.exists())
+			if(element instanceof IMember && element.exists()){
+				/**
+				 * Since there is a incompatible change in the signature of the method we have to check at runtime
+				 * which signature to use.
+				 */
+				Method methodToInvoke = null;
 				try {
-					return JavadocContentAccess2.getHTMLContent((IMember) element, true);
-				} catch (JavaModelException e) {
-					log.error(e.getMessage(), e);
-				} catch (CoreException e) {
-					log.error(e.getMessage(), e);
+					// Old signature 
+					// org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(IMember, boolean)
+					methodToInvoke = JavadocContentAccess2.class.getDeclaredMethod("getHTMLContent",  new Class[] { IMember.class, boolean.class });
+				} catch (SecurityException e) {
+					// Ignore since we know that it is public
+				} catch (NoSuchMethodException e) {
+					try {
+						// New signature
+						// org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(IJavaElement, boolean)
+						methodToInvoke = JavadocContentAccess2.class.getDeclaredMethod("getHTMLContent",  new Class[] { IJavaElement.class, boolean.class });
+					} catch (SecurityException e1) {
+						// Ignore since we know that it is public
+					} catch (NoSuchMethodException e1) {
+						log.error(e.getMessage(), e);
+					}
 				}
+				if(methodToInvoke != null){
+					try {
+						return (String) methodToInvoke.invoke(null, element,true);
+					} catch (IllegalArgumentException e) {
+						log.error(e.getMessage(), e);
+					} catch (IllegalAccessException e) {
+						log.error(e.getMessage(), e);
+					} catch (InvocationTargetException e) {
+						log.error(e.getMessage(), e);
+					}
+				}
+			}			
 		}  
 		return "";
 		
