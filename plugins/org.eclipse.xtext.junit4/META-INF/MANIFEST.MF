@@ -4,7 +4,7 @@ Bundle-Name: Xtext Junit4 Support
 Bundle-SymbolicName: org.eclipse.xtext.junit4
 Bundle-Version: 2.8.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.junit4,
  org.eclipse.xtext.junit4.formatter;x-friends:="org.eclipse.xtext.xbase.tests",
  org.eclipse.xtext.junit4.internal;x-internal:=true,

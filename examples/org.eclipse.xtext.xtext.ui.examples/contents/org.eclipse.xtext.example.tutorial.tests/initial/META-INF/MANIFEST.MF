@@ -18,4 +18,4 @@ Import-Package: org.apache.commons.logging,
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",
  org.junit.runners;version="4.5.0"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

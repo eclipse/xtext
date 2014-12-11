@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.xtext,
 Import-Package: com.ibm.icu.text;version="4.0.0";resolution:=optional,
  org.apache.commons.logging,
  org.apache.log4j;version="1.2.15"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.ui.codetemplates;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
  org.eclipse.xtext.ui.codetemplates.conversion;x-internal:=true,
  org.eclipse.xtext.ui.codetemplates.formatting;x-internal:=true,

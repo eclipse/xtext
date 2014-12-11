@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.8.0";visibility:=reexport,
  org.eclipse.xtext.common.types;bundle-version="2.8.0",
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.xbase.lib;bundle-version="2.8.0"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.interpreter,
  org.eclipse.xtext.example.arithmetics.validation,
