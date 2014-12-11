@@ -36,6 +36,31 @@ class CompilerTest {
 			assertEquals("Hello Foo", obj.invoke('doStuff','Hello'))
 		]
 	}
+
+	@Test
+	def void testGeneratedJavaFromSeveralInputs() {
+		#[
+		'''
+			entity Foo {
+				bar : Bar
+				op doStuff(String x) : String {
+					return x + ' ' + bar.getName()
+				}
+			}
+		''',
+		'''
+			entity Bar {
+				name : String
+			}
+		'''
+		].compile [
+			val barObj = it.getCompiledClass("Bar").newInstance
+			barObj.invoke('setName', 'Bar')
+			val fooObj = it.getCompiledClass("Foo").newInstance
+			fooObj.invoke('setBar', barObj)
+			assertEquals("Hello Bar", fooObj.invoke('doStuff','Hello'))
+		]
+	}
 	
 	@Test
 	def void compareGeneratedJava() {

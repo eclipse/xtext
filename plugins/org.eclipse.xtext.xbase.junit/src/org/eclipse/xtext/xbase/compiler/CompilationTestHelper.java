@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFil
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
@@ -167,6 +168,27 @@ public class CompilationTestHelper {
 	public void compile(CharSequence source, IAcceptor<Result> acceptor) throws IOException {
 		String fileName = "MyFile."+extensionProvider.getPrimaryFileExtension();
 		compile(resourceSet(new Pair<String, CharSequence>(fileName, source)), acceptor);
+	}
+
+	/**
+	 * Parses, validates and compiles the given sources. Calls the given acceptor for each
+	 * resource which is generated from the source.
+	 *  
+	 * @param sources some inputs written in the language under test.
+	 * @param acceptor gets called once for each file generated in {@link IGenerator}
+	 * @throws IOException if the resource loading fails
+	 * 
+	 * @since 2.8
+	 */
+	@SuppressWarnings("unchecked")
+	public void compile(Iterable<? extends CharSequence> sources, IAcceptor<Result> acceptor) throws IOException {
+		int index = 0;
+		List<Pair<String, ? extends CharSequence>> pairs = newArrayList();
+		for (CharSequence source : sources) {
+			String fileName = "MyFile" + (++index) + "." + extensionProvider.getPrimaryFileExtension();
+			pairs.add(new Pair<String, CharSequence>(fileName, source));
+		}
+		compile(resourceSet(((Pair<String, ? extends CharSequence>[])Conversions.unwrapArray(pairs, Pair.class))), acceptor);
 	}
 
 	/**
