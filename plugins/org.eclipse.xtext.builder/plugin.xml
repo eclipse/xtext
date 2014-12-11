@@ -69,8 +69,8 @@
    <extension
         point="org.eclipse.ui.console.consoleFactories">
      <consoleFactory
-           class="org.eclipse.xtext.builder.ng.debug.XtextCompilerConsoleFactory"
-           label="Xtext Compiler">
+           class="org.eclipse.xtext.builder.debug.XtextBuildConsole$Factory"
+           label="Xtext Build">
      </consoleFactory>
   </extension>
    
