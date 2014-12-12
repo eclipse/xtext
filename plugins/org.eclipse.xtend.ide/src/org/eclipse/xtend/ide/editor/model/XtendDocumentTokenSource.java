@@ -53,6 +53,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 		final FlexTokenSource delegate = flexerFactory.createTokenSource(new StringReader(string));
 		return new TokenSource() {
 
+			@Override
 			public Token nextToken() {
 				Token token = delegate.nextToken();
 				if(token.getType() == multilineTokenType) {
@@ -64,6 +65,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 				return token;
 			}
 
+			@Override
 			public String getSourceName() {
 				return delegate.getSourceName();
 			}

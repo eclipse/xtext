@@ -53,6 +53,7 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 		this.dispatchOperation = dispatchOperation;
 	}
 
+	@Override
 	public void apply(/* @Nullable */ ITreeAppendable a) {
 		if (a == null)
 			throw new IllegalArgumentException("a is never null");
@@ -84,12 +85,14 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				final String name = getVarName(dispatchParam, operationAppendable);
 				if (caseParamType.isType(Void.class)) {
 					laters.add(new Later() {
+						@Override
 						public void exec(ITreeAppendable appendable) {
 							appendable.append(name).append(" == null");
 						}
 					});
 				} else if (!allCasesSameType[i]) {
 					laters.add(new Later() {
+						@Override
 						public void exec(ITreeAppendable appendable) {
 							if (caseParamType.isAssignableFrom(dispatchParamType, 
 									new TypeConformanceComputationArgument(true, false, true, true, false, false)) && !dispatchParamType.isPrimitive()) {

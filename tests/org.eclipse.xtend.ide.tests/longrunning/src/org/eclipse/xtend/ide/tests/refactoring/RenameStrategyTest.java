@@ -73,6 +73,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		final ISourceViewer sourceViewer = openEditor.getInternalSourceViewer();
 		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
+			@Override
 			public OverrideIndicatorAnnotation get() {
 				annotationBeforeFileRename[0] = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
 				return annotationBeforeFileRename[0];
@@ -89,6 +90,7 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 		IResourcesSetupUtil.waitForAutoBuild();
 		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
+			@Override
 			public OverrideIndicatorAnnotation get() {
 				OverrideIndicatorAnnotation ann = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
 				if (ann != annotationBeforeFileRename[0])

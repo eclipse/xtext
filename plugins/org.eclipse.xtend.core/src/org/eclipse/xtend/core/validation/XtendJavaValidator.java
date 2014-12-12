@@ -367,6 +367,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		
 		ImmutableListMultimap<String, XAnnotation> groupByIdentifier = Multimaps.index(annotationTarget.getAnnotations(),
 				new Function<XAnnotation, String>() {
+					@Override
 					public String apply(XAnnotation input) {
 						return input.getAnnotationType().getIdentifier();
 					}
@@ -392,6 +393,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	private boolean isRelevantAnnotationTarget(final XtendAnnotationTarget annotationTarget) {
 		return any(targetInfos.keySet(), new Predicate<Class<?>>() {
+			@Override
 			public boolean apply(Class<?> input) {
 				return input.isInstance(annotationTarget);
 			}
@@ -676,12 +678,14 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedFeatures resolvedFeatures, Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> declaredOperations = resolvedFeatures.getDeclaredOperations();
 		doCheckDuplicateExecutables(inferredType, declaredOperations, new Function<String, List<IResolvedOperation>>() {
+			@Override
 			public List<IResolvedOperation> apply(String erasedSignature) {
 				return resolvedFeatures.getDeclaredOperations(erasedSignature);
 			}
 		}, flaggedOperations);
 		final List<IResolvedConstructor> declaredConstructors = resolvedFeatures.getDeclaredConstructors();
 		doCheckDuplicateExecutables(inferredType, declaredConstructors, new Function<String, List<IResolvedConstructor>>() {
+			@Override
 			public List<IResolvedConstructor> apply(String erasedSignature) {
 				if (declaredConstructors.size() == 1) {
 					if (erasedSignature.equals(declaredConstructors.get(0).getResolvedErasureSignature())) {
@@ -839,6 +843,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if(numUnshownOperations >0)
 			errorMsg.append("\nand " +  numUnshownOperations + " more.");
 		List<String> uris = transform(operationsMissingImplementation, new Function<IResolvedOperation, String>() {
+			@Override
 			public String apply(IResolvedOperation from) {
 				return EcoreUtil.getURI(from.getDeclaration()).toString();
 			}
@@ -1053,6 +1058,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected String doGetReadableSignature(String simpleName, List<JvmFormalParameter> parameters) {
 		return getReadableSignature(simpleName,
 				Lists.transform(parameters, new Function<JvmFormalParameter, JvmTypeReference>() {
+					@Override
 					public JvmTypeReference apply(JvmFormalParameter from) {
 						return from.getParameterType();
 					}
@@ -1301,6 +1307,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 							Collection<JvmOperation> ops = signatures.get(paramTypes);
 							if (ops.size() > 1) {
 								if (Iterables.any(ops, new Predicate<JvmOperation>() {
+									@Override
 									public boolean apply(JvmOperation input) {
 										return !getParamTypes(input, false).equals(paramTypes);
 									}
@@ -1902,6 +1909,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (types.getActualType(jvmOperation).isPrimitiveVoid()) 
 			return;
 		implicitReturnFinder.findImplicitReturns(method.getExpression(), new Acceptor() {
+			@Override
 			public void accept(XExpression implicitReturn) {
 				if (method.getExpression() == implicitReturn) return;
 				addIssue("Implicit return", implicitReturn, IMPLICIT_RETURN);

@@ -22,6 +22,7 @@ public class NewXtendAnnotationWizardPage extends AbstractNewXtendElementWizardP
 		this.setDescription(Messages.XTEND_ANNOTATION_WIZARD_DESCRIPTION);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		setControl(createCommonControls(parent));
 	}

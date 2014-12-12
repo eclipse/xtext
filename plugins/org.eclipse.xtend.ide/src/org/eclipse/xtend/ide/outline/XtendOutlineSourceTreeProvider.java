@@ -166,6 +166,7 @@ public class XtendOutlineSourceTreeProvider extends AbstractMultiModeOutlineTree
 					else {
 						dispatchCases = newArrayList(dispatchHelper.getLocalDispatchCases(dispatcher));
 						sort((List<JvmOperation>) dispatchCases, new Comparator<JvmOperation>() {
+							@Override
 							public int compare(JvmOperation o1, JvmOperation o2) {
 								return baseType.getMembers().indexOf(o1) - baseType.getMembers().indexOf(o2);
 							}

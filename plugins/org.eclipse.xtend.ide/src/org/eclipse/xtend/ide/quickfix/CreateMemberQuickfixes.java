@@ -100,6 +100,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	@Inject
 	private CodeBuilderQuickfix quickfixFactory;
 	
+	@Override
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, EObject referenceOwner, EReference unresolvedReference)
 			throws Exception {
@@ -252,6 +253,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create local variable '" + variableName + "'",
 				localVarDescriptionBuilder.toString(), "fix_local_var.png",
 				new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
+					@Override
 					public void apply(/* @Nullable */ final EObject element, /* @Nullable */ final IModificationContext context) throws Exception {
 						if (element != null) {
 							XtendMember xtendMember = EcoreUtil2.getContainerOfType(element, XtendMember.class);

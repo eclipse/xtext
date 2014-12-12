@@ -624,6 +624,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		notExpect(offset + getPrefixLength(), length, highlightID);
 	}
 
+	@Override
 	public void addPosition(int offset, int length, String... ids) {
 //		System.out.print("acceptor.addPosition(" + offset + ", " + length);
 //		for(String id: ids) {

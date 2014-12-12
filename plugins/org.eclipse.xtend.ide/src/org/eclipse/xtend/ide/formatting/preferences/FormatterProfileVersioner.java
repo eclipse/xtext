@@ -19,18 +19,22 @@ public class FormatterProfileVersioner implements IProfileVersioner {
 
 	public static String VERSION_KEY = ".version";
 
+	@Override
 	public int getFirstVersion() {
 		return 1;
 	}
 
+	@Override
 	public int getCurrentVersion() {
 		return 1;
 	}
 
+	@Override
 	public String getProfileKind() {
 		return FormatterProfileStore.XTEND_PROFILES_KEY;
 	}
 
+	@Override
 	public void update(CustomProfile profile) {
 		//Nothing to do
 	}

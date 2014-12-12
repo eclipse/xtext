@@ -55,6 +55,7 @@ public class DerivedSourceDropDownAction extends Action implements IMenuCreator 
 		setMenuCreator(this);
 	}
 
+	@Override
 	public Menu getMenu(Control parent) {
 		if (menu != null) {
 			menu.dispose();
@@ -79,10 +80,12 @@ public class DerivedSourceDropDownAction extends Action implements IMenuCreator 
 		return menu;
 	}
 
+	@Override
 	public Menu getMenu(Menu parent) {
 		return null;
 	}
 
+	@Override
 	public void dispose() {
 		if (menu != null) {
 			menu.dispose();

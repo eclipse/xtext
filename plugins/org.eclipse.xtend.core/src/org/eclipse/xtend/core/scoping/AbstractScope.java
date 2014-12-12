@@ -23,14 +23,17 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractScope implements IScope {
 
+	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IEObjectDescription getSingleElement(EObject object) {
 		Iterator<IEObjectDescription> elements = getElements(object).iterator();
 		if (elements.hasNext()) {
@@ -55,6 +58,7 @@ public abstract class AbstractScope implements IScope {
 		return null;
 	}
 
+	@Override
 	public final Iterable<IEObjectDescription> getElements(EObject object) {
 		if (!(object instanceof JvmType) || object.eIsProxy()) {
 			throw new IllegalArgumentException(String.valueOf(object));
@@ -74,6 +78,7 @@ public abstract class AbstractScope implements IScope {
 
 	protected abstract void doGetElements(JvmType type, List<IEObjectDescription> result);
 
+	@Override
 	public Iterable<IEObjectDescription> getAllElements() {
 		throw new UnsupportedOperationException();
 	}

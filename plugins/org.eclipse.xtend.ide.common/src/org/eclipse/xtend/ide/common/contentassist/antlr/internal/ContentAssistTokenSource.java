@@ -26,6 +26,7 @@ public class ContentAssistTokenSource implements TokenSource {
 		offset = 0;
 	}
 
+	@Override
 	public Token nextToken() {
 		try {
 			int type = flexer.advance();
@@ -41,6 +42,7 @@ public class ContentAssistTokenSource implements TokenSource {
 		}
 	}
 
+	@Override
 	public String getSourceName() {
 		return "FlexTokenSource";
 	}

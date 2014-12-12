@@ -159,6 +159,7 @@ public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
 		
 		JvmConstructor constructor = Iterables.find(superClass.getDeclaredConstructors(), new Predicate<JvmConstructor>() {
+			@Override
 			public boolean apply(JvmConstructor c) {
 				if (firstParamType == null)
 					return c.getParameters().isEmpty();
@@ -188,6 +189,7 @@ public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 
 	protected JvmExecutable findExecutable(JvmGenericType owner, final String name) {
 		return (JvmExecutable) find(owner.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return input instanceof JvmExecutable && equal(name, input.getSimpleName());
 			}

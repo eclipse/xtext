@@ -53,6 +53,7 @@ public class XtendCompilerAntTaskTest {
 		Assert.assertTrue("Gen folder not empty", genFolder.list() != null);
 		Assert.assertEquals("Gen folder contains 7 compiled java files", 7, genFolder.list(new FilenameFilter() {
 
+			@Override
 			public boolean accept(File dir, String name) {
 				return name.endsWith(".java");
 			}
@@ -68,6 +69,7 @@ public class XtendCompilerAntTaskTest {
 		Assert.assertTrue("Gen folder not empty", genFolder.list() != null);
 		Assert.assertEquals("Gen folder contains 8 compiled java files", 8, genFolder.list(new FilenameFilter() {
 
+			@Override
 			public boolean accept(File dir, String name) {
 				return name.endsWith(".java");
 			}
@@ -213,6 +215,7 @@ public class XtendCompilerAntTaskTest {
 		/**
 		 * Fired before any targets are started.
 		 */
+		@Override
 		public void buildStarted(BuildEvent event) {
 		}
 
@@ -222,6 +225,7 @@ public class XtendCompilerAntTaskTest {
 		 * 
 		 * @see BuildEvent#getException()
 		 */
+		@Override
 		public void buildFinished(BuildEvent event) {
 		}
 
@@ -230,6 +234,7 @@ public class XtendCompilerAntTaskTest {
 		 * 
 		 * @see BuildEvent#getTarget()
 		 */
+		@Override
 		public void targetStarted(BuildEvent event) {
 			//System.out.println("targetStarted " + event.getTarget().getName());
 		}
@@ -239,6 +244,7 @@ public class XtendCompilerAntTaskTest {
 		 * 
 		 * @see BuildEvent#getException()
 		 */
+		@Override
 		public void targetFinished(BuildEvent event) {
 			//System.out.println("targetFinished " + event.getTarget().getName());
 		}
@@ -248,6 +254,7 @@ public class XtendCompilerAntTaskTest {
 		 * 
 		 * @see BuildEvent#getTask()
 		 */
+		@Override
 		public void taskStarted(BuildEvent event) {
 			//System.out.println("taskStarted " + event.getTask().getTaskName());
 		}
@@ -257,6 +264,7 @@ public class XtendCompilerAntTaskTest {
 		 * 
 		 * @see BuildEvent#getException()
 		 */
+		@Override
 		public void taskFinished(BuildEvent event) {
 			//System.out.println("taskFinished " + event.getTask().getTaskName());
 		}
@@ -267,6 +275,7 @@ public class XtendCompilerAntTaskTest {
 		 * @see BuildEvent#getMessage()
 		 * @see BuildEvent#getPriority()
 		 */
+		@Override
 		public void messageLogged(BuildEvent event) {
 			if (event.getPriority() > logLevel) {
 				// ignore event

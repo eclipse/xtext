@@ -97,46 +97,55 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	@Singleton
 	static class Impl extends JvmModelAssociator implements IXtendJvmAssociations {
 
+		@Override
 		public JvmDeclaredType getInferredType(XtendTypeDeclaration xtendType) {
 			final JvmDeclaredType firstOrNull = getFirstOrNull(getJvmElements(xtendType), JvmDeclaredType.class);
 			return firstOrNull;
 		}
 		
+		@Override
 		public JvmGenericType getInferredType(AnonymousClass anonymousClass) {
 			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(anonymousClass), JvmGenericType.class);
 			return firstOrNull;
 		}
 		
+		@Override
 		public JvmGenericType getInferredType(XtendClass xtendClass) {
 			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmGenericType.class);
 			return firstOrNull;
 		}
 
+		@Override
 		public JvmGenericType getInferredType(XtendInterface xtendInterface) {
 			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendInterface), JvmGenericType.class);
 			return firstOrNull;
 		}
 
+		@Override
 		public JvmAnnotationType getInferredAnnotationType(XtendAnnotationType xtendAnnotation) {
 			final JvmAnnotationType firstOrNull = getFirstOrNull(getJvmElements(xtendAnnotation), JvmAnnotationType.class);
 			return firstOrNull;
 		}
 
+		@Override
 		public JvmEnumerationType getInferredEnumerationType(XtendEnum xtendEnum) {
 			final JvmEnumerationType firstOrNull = getFirstOrNull(getJvmElements(xtendEnum), JvmEnumerationType.class);
 			return firstOrNull;
 		}
 
+		@Override
 		public JvmConstructor getInferredConstructor(XtendClass xtendClass) {
 			final JvmConstructor firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmConstructor.class);
 			return firstOrNull;
 		}
 
+		@Override
 		public JvmConstructor getInferredConstructor(XtendConstructor xtendConstructor) {
 			final JvmConstructor firstOrNull = getFirstOrNull(getJvmElements(xtendConstructor), JvmConstructor.class);
 			return firstOrNull;
 		}
 
+		@Override
 		public JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction) {
 			final Iterable<JvmOperation> jvmElements = filter(getJvmElements(xtendFunction), JvmOperation.class);
 			String expectedName = xtendFunction.getName();
@@ -151,6 +160,7 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return null;
 		}
 		
+		@Override
 		public JvmOperation getDispatchOperation(XtendFunction dispatchFunction) {
 			if (!dispatchFunction.isDispatch())
 				throw new IllegalArgumentException("Function " + dispatchFunction.getName() + " is not a dispatch function");
@@ -166,6 +176,7 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return null;
 		}
 
+		@Override
 		public XtendClass getXtendClass(JvmGenericType jvmType) {
 			final EObject primarySourceElement = getPrimarySourceElement(jvmType);
 			if (primarySourceElement instanceof XtendClass) 
@@ -173,6 +184,7 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return null;
 		}
 		
+		@Override
 		public AnonymousClass getAnonymousClass(JvmDeclaredType type) {
 			final EObject primarySourceElement = getPrimarySourceElement(type);
 			if (primarySourceElement instanceof AnonymousClass) 
@@ -180,6 +192,7 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return null;
 		}
 
+		@Override
 		public XtendInterface getXtendInterface(JvmGenericType jvmType) {
 			final EObject primarySourceElement = getPrimarySourceElement(jvmType);
 			if (primarySourceElement instanceof XtendInterface) 
@@ -187,10 +200,12 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return null;
 		}
 
+		@Override
 		public XtendFunction getXtendFunction(JvmOperation jvmOperation) {
 			return (XtendFunction) getPrimarySourceElement(jvmOperation);
 		}
 
+		@Override
 		public XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor) {
 			EObject primarySourceElement = getPrimarySourceElement(jvmConstructor);
 			return primarySourceElement instanceof XtendConstructor ? (XtendConstructor) primarySourceElement : null;
@@ -201,18 +216,22 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return iterator.hasNext() ? iterator.next() : null;
 		}
 
+		@Override
 		public JvmField getJvmField(XtendField field) {
 			return getFirstOrNull(getJvmElements(field), JvmField.class);
 		}
 		
+		@Override
 		public JvmField getJvmField(XtendEnumLiteral field) {
 			return getFirstOrNull(getJvmElements(field), JvmField.class);
 		}
 		
+		@Override
 		public JvmFormalParameter getJvmParameter(XtendParameter parameter) {
 			return getFirstOrNull(getJvmElements(parameter), JvmFormalParameter.class);
 		}
 
+		@Override
 		public XtendField getXtendField(JvmField jvmField) {
 			EObject primarySourceElement = getPrimarySourceElement(jvmField);
 			if (primarySourceElement instanceof XtendField)

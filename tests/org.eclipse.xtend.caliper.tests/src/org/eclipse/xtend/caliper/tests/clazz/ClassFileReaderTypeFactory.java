@@ -156,6 +156,7 @@ class ClassFileReaderTypeFactory implements ITypeFactory<BinaryClass, JvmDeclare
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Override
 	public JvmDeclaredType createType(BinaryClass binaryClass) {
 		try {
 			createTypeTask.start();

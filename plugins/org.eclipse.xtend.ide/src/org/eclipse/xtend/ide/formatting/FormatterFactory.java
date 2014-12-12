@@ -47,6 +47,7 @@ public class FormatterFactory implements IContentFormatterFactory {
 		@Inject
 		private IFormattingPreferenceValuesProvider cfgProvider;
 		
+		@Override
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
 			
@@ -59,6 +60,7 @@ public class FormatterFactory implements IContentFormatterFactory {
 			}
 		}
 
+		@Override
 		public IFormattingStrategy getFormattingStrategy(String contentType) {
 			return null;
 		}
@@ -78,6 +80,7 @@ public class FormatterFactory implements IContentFormatterFactory {
 			this.formatter = formatter;
 		}
 
+		@Override
 		public TextEdit exec(XtextResource state) throws Exception {
 			IParseResult parseResult = state.getParseResult();
 			if (parseResult == null)
@@ -100,6 +103,7 @@ public class FormatterFactory implements IContentFormatterFactory {
 	
 	@Inject private ContentFormatter formatter;
 
+	@Override
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
 		return formatter;

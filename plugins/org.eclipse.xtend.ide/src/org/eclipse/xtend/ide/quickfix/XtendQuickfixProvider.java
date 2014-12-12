@@ -163,6 +163,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	public void fixIndentation(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Correct indentation", "Correctly indents this line in this rich string",
 				"fix_indent.gif", new IModification() {
+					@Override
 					public void apply(IModificationContext context) throws Exception {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), issue.getData()[0]);
 					}
@@ -173,6 +174,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	public void fixMissingOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Change 'def' to 'override'", "Marks this function as 'override'", "fix_indent.gif",
 				new ISemanticModification() {
+					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						replaceKeyword(grammarAccess.getMethodModifierAccess().findKeywords("def").get(0), "override", element,
 								context.getXtextDocument());
@@ -184,6 +186,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	public void fixObsoleteOverride(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Change 'override' to 'def'", "Removes 'override' from this function", "fix_indent.gif",
 				new ISemanticModification() {
+					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						replaceKeyword(grammarAccess.getMethodModifierAccess().findKeywords("override").get(0), "def", element,
 								context.getXtextDocument());
@@ -217,6 +220,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				String xtendSignature = "new" + javaSignature.substring(javaSignature.indexOf('('));
 				acceptor.accept(issue, "Add constructor " + xtendSignature, "Add constructor " + xtendSignature, "fix_indent.gif",
 					new ISemanticModification() {
+						@Override
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
 							JvmGenericType inferredType = associations.getInferredType(clazz);
@@ -245,6 +249,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		doImplementAbstractMethods(issue, acceptor);
 		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
 				new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				internalDoAddAbstractKeyword(element, context);
 			}
@@ -260,6 +265,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length > 0) {
 			acceptor.accept(issue, "Add unimplemented methods", "Add unimplemented methods", "fix_indent.gif",
 					new ISemanticModification() {
+						@Override
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendTypeDeclaration clazz = (XtendTypeDeclaration) element;
 							JvmGenericType inferredType = (JvmGenericType) associations.getInferredType(clazz);
@@ -297,6 +303,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length > 0)
 			acceptor.accept(issue, "Add throws declaration", "Add throws declaration", "fix_indent.gif",
 					new ISemanticModification() {
+						@Override
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							String[] issueData = issue.getData(); 
 							XtendExecutable xtendExecutable = EcoreUtil2.getContainerOfType(element, XtendExecutable.class);
@@ -368,6 +375,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 		acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
 				new ISemanticModification() {
+					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						String[] issueData = issue.getData();
 						URI childURI = URI.createURI(issueData[issueData.length - 1]);
@@ -414,6 +422,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	private Boolean isJvmConstructorCall(IXtextDocument xtextDocument, final Issue issue) {
 		return xtextDocument.readOnly(new IUnitOfWork<Boolean, XtextResource>() {
 
+			@Override
 			public Boolean exec(XtextResource xtextResource) throws Exception {
 				String[] issueData = issue.getData();
 				URI childURI = URI.createURI(issueData[issueData.length - 1]);
@@ -434,6 +443,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			final String expectedPackage = issue.getData()[0];
 			acceptor.accept(issue, "Change package declaration to '" + expectedPackage + "'", "Change package declaration to '" + expectedPackage + "'", "package_obj.gif",
 					new ISemanticModification() {
+						@Override
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							((XtendFile) element).setPackage(isEmpty(expectedPackage) ? null : expectedPackage);
 						}
@@ -454,6 +464,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Fix(IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH)
 	public void putXtendOnClasspath(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add Xtend libs to classpath", "Add Xtend libs to classpath", "fix_indent.gif", new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ResourceSet resourceSet = element.eResource().getResourceSet();
 				IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
@@ -466,6 +477,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	public void makeClassAbstract(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
 				new ISemanticModification() {
+					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						internalDoAddAbstractKeyword(element, context);
 					}
@@ -475,6 +487,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Fix(IssueCodes.API_TYPE_INFERENCE)
 	public void specifyTypeExplicitly(Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Infer type", "Infer type", null, new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				EStructuralFeature featureAfterType = null;
 				JvmIdentifiableElement jvmElement = null;
@@ -513,6 +526,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Fix(IssueCodes.IMPLICIT_RETURN) 
 	public void fixImplicitReturn(final Issue issue, IssueResolutionAcceptor acceptor){
 		acceptor.accept(issue, "Add \"return\" keyword", "Add \"return\" keyword", null, new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
 				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), node.getOffset(), 0);

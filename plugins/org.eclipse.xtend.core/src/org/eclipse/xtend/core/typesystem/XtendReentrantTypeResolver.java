@@ -721,6 +721,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				if (type == null) {
 					JvmUnknownTypeReference superTypeReference = TypesFactory.eINSTANCE.createJvmUnknownTypeReference();
 					requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
+						@Override
 						public void accept(JvmTypeReference capturingTypeReference) {
 							casted.setEquivalent(capturingTypeReference);
 							inferAnonymousClassConstructor(anonymousClass, localClass);
@@ -729,6 +730,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 				} else {
 					final JvmParameterizedTypeReference superTypeReference = createSuperTypeReference(type, constructorCall);
 					requestCapturedLocalVariables(superTypeReference, localClass, resolvedTypes, resolvedTypesByContext, new IAcceptor<JvmTypeReference>() {
+						@Override
 						@SuppressWarnings("deprecation")
 						public void accept(JvmTypeReference capturingTypeReference) {
 							casted.setEquivalent(capturingTypeReference);
@@ -781,6 +783,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		
 		if (!parameters.isEmpty()) {
 			typesBuilder.setBody(constructor, new Procedures.Procedure1<ITreeAppendable>() {
+				@Override
 				public void apply(ITreeAppendable a) {
 					a.append("super(");
 					for(int i = 0; i < parameters.size(); i++) {

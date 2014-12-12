@@ -34,6 +34,7 @@ public class XtendJavaDocContentAssistProcessor extends AbstractJavaDocContentAs
 	@Inject
 	private XtendJavaDocProposalFactory proposalFactory;
 
+	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if(viewer instanceof XtextSourceViewer){
 			IXtextDocument document = (IXtextDocument) viewer.getDocument();
@@ -47,18 +48,22 @@ public class XtendJavaDocContentAssistProcessor extends AbstractJavaDocContentAs
 		return new XtendJavaDocCompletionProposalComputer(this, viewer, offset);
 	}
 
+	@Override
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
 	}
 
+	@Override
 	public ContentAssistContext.Factory getContextFactory() {
 		return contentAssistFactory;
 	}
 
+	@Override
 	public ITypesProposalProvider getTypesProposalProvider() {
 		return typeProposalProvider;
 	}
 
+	@Override
 	public XtendJavaDocProposalFactory getProposalFactory() {
 		return proposalFactory;
 	}

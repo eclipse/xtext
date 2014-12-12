@@ -20,6 +20,7 @@ public abstract class AbstractJavaDocContentAssistProcessor implements IContentA
 	/**
 	 * Not needed in JavaDoc
 	 */
+	@Override
 	public IContextInformation[] computeContextInformation(final ITextViewer viewer, final int offset) {
 		return null;
 	}
@@ -27,6 +28,7 @@ public abstract class AbstractJavaDocContentAssistProcessor implements IContentA
 	/**
 	 * Not needed in JavaDoc
 	 */
+	@Override
 	public char[] getCompletionProposalAutoActivationCharacters() {
 		return null;
 	}
@@ -34,18 +36,21 @@ public abstract class AbstractJavaDocContentAssistProcessor implements IContentA
 	/**
 	 * Not needed in JavaDoc
 	 */
+	@Override
 	public char[] getContextInformationAutoActivationCharacters() {
 		return null;
 	}
 	/**
 	 * Not needed in JavaDoc
 	 */
+	@Override
 	public String getErrorMessage() {
 		return null;
 	}
 	/**
 	 * Not needed in JavaDoc
 	 */
+	@Override
 	public IContextInformationValidator getContextInformationValidator() {
 		return null;
 	}

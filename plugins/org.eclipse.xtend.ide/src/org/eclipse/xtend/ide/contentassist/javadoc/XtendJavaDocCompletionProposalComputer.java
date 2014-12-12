@@ -43,6 +43,7 @@ public class XtendJavaDocCompletionProposalComputer implements IUnitOfWork<IComp
 		this.proposals = new LinkedHashSet<ICompletionProposal>(30);
 	}
 
+	@Override
 	public ICompletionProposal[] exec(XtextResource resource) throws Exception {
 
 		List<ContentAssistContext> contexts = Arrays.asList(protocol.getContextFactory().create(viewer, offset, resource));
@@ -56,12 +57,14 @@ public class XtendJavaDocCompletionProposalComputer implements IUnitOfWork<IComp
 		return proposals.toArray(new ICompletionProposal[proposals.size()]);
 	}
 
+	@Override
 	public void accept(ICompletionProposal proposal) {
 		if (proposal == null)
 			return;
 		proposals.add(proposal);
 	}
 
+	@Override
 	public boolean canAcceptMoreProposals() {
 		return true;
 	}

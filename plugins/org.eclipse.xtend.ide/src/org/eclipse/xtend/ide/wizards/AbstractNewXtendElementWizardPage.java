@@ -182,6 +182,7 @@ public abstract class AbstractNewXtendElementWizardPage extends NewTypeWizardPag
 
 	protected void displayError(final String title, final String message) {
 		Display.getDefault().syncExec(new Runnable() {
+			@Override
 			public void run() {
 				MessageDialog.openError(getShell(), title, message);
 			}

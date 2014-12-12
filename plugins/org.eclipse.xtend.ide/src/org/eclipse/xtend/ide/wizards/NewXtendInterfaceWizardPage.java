@@ -22,6 +22,7 @@ public class NewXtendInterfaceWizardPage extends AbstractNewXtendElementWizardPa
 		this.setDescription(Messages.XTEND_INTERFACE_WIZARD_DESCRIPTION);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite composite = createCommonControls(parent);
 		createSuperInterfacesControls(composite, COLS);

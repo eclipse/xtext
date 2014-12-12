@@ -293,6 +293,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 			OperationCanceledException {
 		StatusWrapper status = statusProvider.get();
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(firstExpression, new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return pm.isCanceled();
 			}
@@ -497,6 +498,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 		List<ReplaceRegion> parameterRenames = newArrayList();
 		for(final String parameterName: externalFeatureCalls.keySet()) {
 			ParameterInfo parameter = find(parameterInfos, new Predicate<ParameterInfo>() {
+				@Override
 				public boolean apply(ParameterInfo info) {
 					return equal(info.getOldName(), parameterName);
 				}
@@ -509,6 +511,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 			}
 		}
 		sort(parameterRenames, new Comparator<ReplaceRegion>() {
+			@Override
 			public int compare(ReplaceRegion o1, ReplaceRegion o2) {
 				return o2.getOffset() - o1.getOffset();
 			}

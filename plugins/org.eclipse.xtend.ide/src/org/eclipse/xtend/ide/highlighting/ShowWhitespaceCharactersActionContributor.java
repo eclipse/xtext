@@ -25,8 +25,9 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 
 	@Inject
 	private IImageDescriptorHelper imageHelper;
+	
+	@Override
 	public void contributeActions(XtextEditor editor) {
-		
 		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
 		IAction action = editor.getAction(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
 		action.setImageDescriptor(imageHelper
@@ -38,6 +39,7 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 		}
 	}
 	
+	@Override
 	public void editorDisposed(XtextEditor editor) {
 	}
 

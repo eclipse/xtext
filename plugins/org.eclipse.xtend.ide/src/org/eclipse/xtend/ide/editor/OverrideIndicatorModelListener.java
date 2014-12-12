@@ -93,6 +93,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		}
 	}
 
+	@Override
 	public void modelChanged(XtextResource resource) {
 		asyncUpdateAnnotationModel();
 	}

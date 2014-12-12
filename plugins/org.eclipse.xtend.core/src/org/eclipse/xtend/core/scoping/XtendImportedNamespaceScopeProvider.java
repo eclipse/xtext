@@ -104,6 +104,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 			final XtendFile xtendFile = getXtendFile(context);
 			final Resource resource = xtendFile.eResource();
 			AbstractScope result = resourceScopeCache.get("type.scope", xtendFile.eResource(), new Provider<AbstractScope>() {
+				@Override
 				public AbstractScope get() {
 					IJvmTypeProvider typeProvider = typeScopeProvider.getTypeProvider(resource.getResourceSet());
 					AbstractTypeScope typeScope = typeScopeProvider.createTypeScope(typeProvider, null);

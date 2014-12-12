@@ -39,6 +39,7 @@ public class FunctionIDValueConverter extends AbstractValueConverter<String> {
 		this.grammarAccess = grammarAccess;
 	}
 	
+	@Override
 	public String toValue(String string, INode node) throws ValueConverterException {
 		QualifiedName operatorMethodName = operatorMapping.getMethodName(QualifiedName.create(string));
 		if (operatorMethodName != null) {
@@ -53,6 +54,7 @@ public class FunctionIDValueConverter extends AbstractValueConverter<String> {
 		return delegate = service.getConverter(grammarAccess.getValidIDRule().getName());
 	}
 
+	@Override
 	public String toString(String value) throws ValueConverterException {
 		QualifiedName operatorName = operatorMapping.getOperator(QualifiedName.create(value));
 		if (operatorName != null) {

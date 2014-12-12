@@ -129,6 +129,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		
 		// The selection may be updated asynchronously, so we may have to wait until the selection changes
 		workbenchTestHelper.awaitUIUpdate(new Functions.Function0<Boolean>() {
+			@Override
 			public Boolean apply() {
 				return expectedSelection.equals(((ITextSelection) selectionProvider.getSelection()).getText());
 			}

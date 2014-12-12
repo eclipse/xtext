@@ -806,6 +806,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		Method method = compiledClazz.getDeclaredMethods()[0];
 		List<String> list = Lists.newArrayList("a", "b");
 		Function1<String, String> function = new Functions.Function1<String, String>() {
+			@Override
 			public String apply(String p) {
 				return p.toUpperCase();
 			}
@@ -1990,6 +1991,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		final Method method = clazz.getDeclaredMethod("aBuilder", String.class);
 		final Set<Object> elements = Collections.synchronizedSet(Sets.newHashSet());
 		Runnable runnable = new Runnable() {
+			@Override
 			public void run() {
 				try {
 					for (int i = 0; i < 50; i++) {

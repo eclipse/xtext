@@ -218,8 +218,10 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		issueResolutionAcceptor.accept(issue, "Create Xtend class '" + typeName + "'" + packageDescription,
 				"Opens the new Xtend class wizard to create the type '" + typeName + "'" + packageDescription, "xtend_file.png",
 				new IModification() {
+					@Override
 					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
+							@Override
 							public void run() {
 								NewElementWizard newXtendClassWizard = newXtendClassWizardProvider.get();
 								WizardDialog dialog = createWizardDialog(newXtendClassWizard);
@@ -238,8 +240,10 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		issueResolutionAcceptor.accept(issue, "Create Xtend interface '" + typeName + "'" + packageDescription,
 				"Opens the new Xtend interface wizard to create the type '" + typeName + "'" + packageDescription, "xtend_file.png",
 				new IModification() {
+					@Override
 					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
+							@Override
 							public void run() {
 								NewElementWizard newXtendInterfaceWizard = newXtendInterfaceWizardProvider.get();
 								WizardDialog dialog = createWizardDialog(newXtendInterfaceWizard);
@@ -258,8 +262,10 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 		issueResolutionAcceptor.accept(issue, "Create Xtend annotation '" + typeName + "'" + packageDescription,
 				"Opens the new Xtend annotation wizard to create the type '" + typeName + "'" + packageDescription, "xtend_file.png",
 				new IModification() {
+					@Override
 					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
+							@Override
 							public void run() {
 								NewElementWizard newXtendAnnotationWizard = newXtendAnnotationWizardProvider.get();
 								WizardDialog dialog = createWizardDialog(newXtendAnnotationWizard);

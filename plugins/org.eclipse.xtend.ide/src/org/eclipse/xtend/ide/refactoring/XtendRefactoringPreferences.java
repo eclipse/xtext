@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 public class XtendRefactoringPreferences extends RefactoringPreferences {
 	
 	public static class Initializer implements IPreferenceStoreInitializer {
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			access.getWritablePreferenceStore().setDefault(SAVE_ALL_BEFORE_REFACTORING, true);
 			access.getWritablePreferenceStore().setDefault(USE_INLINE_REFACTORING, true);

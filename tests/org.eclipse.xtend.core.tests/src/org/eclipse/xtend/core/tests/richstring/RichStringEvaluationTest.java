@@ -173,6 +173,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			}
 		}
 		
+		@Override
 		public boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, /* @NonNull */ CharSequence indentation) {
 			if (!ignore()) {
 				if (forLoopStack.peek() != null) {

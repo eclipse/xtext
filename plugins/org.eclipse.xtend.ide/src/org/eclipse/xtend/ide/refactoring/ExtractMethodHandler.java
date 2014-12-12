@@ -55,6 +55,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 	@Inject
 	private RefactoredResourceCopier resourceCopier;
 	
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			syncUtil.totalSync(false);
@@ -63,6 +64,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
 				XtextResource copiedResource = document.priorityReadOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+					@Override
 					public XtextResource exec(XtextResource state) throws Exception {
 						return resourceCopier.loadIntoNewResourceSet(state);
 					}

@@ -15,6 +15,7 @@ public class ConcreteBuilder<B extends ConcreteBuilder<B>> implements Builder<St
 	private String s = "";
 	protected B b;
 	
+	@Override
 	public String build() {
 		return s;
 	}

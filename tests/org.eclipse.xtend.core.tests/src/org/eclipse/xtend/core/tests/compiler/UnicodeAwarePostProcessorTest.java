@@ -76,22 +76,27 @@ public class UnicodeAwarePostProcessorTest extends Assert implements IJvmModelAs
 		assertEquals("\\u03b1\\u03c1\\u03b5\\u03c4\\u03b7", result.toString());
 	}
 
+	@Override
 	public Set<EObject> getSourceElements(EObject jvmElement) {
 		return Collections.emptySet();
 	}
 
+	@Override
 	public Set<EObject> getJvmElements(EObject sourceElement) {
 		return Collections.emptySet();
 	}
 
+	@Override
 	public EObject getPrimarySourceElement(EObject jvmElement) {
 		return null;
 	}
 
+	@Override
 	public ITextRegion getSignificantTextRegion(EObject obj) {
 		return getDummyTextRegion();
 	}
 
+	@Override
 	public ITextRegion getSignificantTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
 		return getDummyTextRegion();
 	}
@@ -100,18 +105,22 @@ public class UnicodeAwarePostProcessorTest extends Assert implements IJvmModelAs
 		return new TextRegionWithLineInformation(1, 1, 1, 1);
 	}
 
+	@Override
 	public ITextRegion getFullTextRegion(EObject obj) {
 		return getDummyTextRegion();
 	}
 
+	@Override
 	public ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
 		return getDummyTextRegion();
 	}
 
+	@Override
 	public EObject getPrimaryJvmElement(EObject sourceElement) {
 		return null;
 	}
 
+	@Override
 	public boolean isPrimaryJvmElement(EObject jvmElement) {
 		return false;
 	}

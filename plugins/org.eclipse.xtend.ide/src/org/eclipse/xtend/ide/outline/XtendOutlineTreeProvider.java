@@ -42,11 +42,13 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 
 	private boolean showJvmModel;
 
+	@Override
 	public IOutlineNode createRoot(IXtextDocument document) {
 		readCurrentModeFromPrefStore();
 		return treeProviderInUse().createRoot(document);
 	}
 
+	@Override
 	public void createChildren(IOutlineNode parentNode, EObject modelElement) {
 		readCurrentModeFromPrefStore();
 		treeProviderInUse().createChildren(parentNode, modelElement);
@@ -80,18 +82,22 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 		return sourceTreeProvider;
 	}
 
+	@Override
 	public List<OutlineMode> getOutlineModes() {
 		return modeAware.getOutlineModes();
 	}
 
+	@Override
 	public OutlineMode getCurrentMode() {
 		return modeAware.getCurrentMode();
 	}
 
+	@Override
 	public OutlineMode getNextMode() {
 		return modeAware.getNextMode();
 	}
 
+	@Override
 	public void setCurrentMode(OutlineMode outlineMode) {
 		modeAware.setCurrentMode(outlineMode);
 	}

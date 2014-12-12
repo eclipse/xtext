@@ -81,6 +81,7 @@ public class ConvertJavaCode {
 			return;
 		}
 		boolean hasConversionFailures = any(conversionResults.values(), new Predicate<ConversionResult>() {
+			@Override
 			public boolean apply(ConversionResult input) {
 				return input.getProblems().iterator().hasNext();
 			}
@@ -131,6 +132,7 @@ public class ConvertJavaCode {
 	private boolean convertAllWithProgress(final Shell shell, final Set<ICompilationUnit> compilationUnits,
 			final Map<ICompilationUnit, ConversionResult> conversionResults) throws ExecutionException {
 		IRunnableWithProgress op = new IRunnableWithProgress() {
+			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				monitor.beginTask("Converting files.", compilationUnits.size());
 				try {
@@ -225,6 +227,7 @@ public class ConvertJavaCode {
 			List<Issue> issues = Lists.newArrayList(filter(((XtextResource) resource).getResourceServiceProvider()
 					.getResourceValidator().validate(resource, CheckMode.ALL, CancelIndicator.NullImpl),
 					new Predicate<Issue>() {
+						@Override
 						public boolean apply(Issue issue) {
 							return issue.getSeverity() == Severity.ERROR;
 						}

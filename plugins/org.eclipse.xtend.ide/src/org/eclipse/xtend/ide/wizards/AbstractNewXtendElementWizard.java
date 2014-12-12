@@ -65,6 +65,7 @@ public class AbstractNewXtendElementWizard extends NewElementWizard {
 			selectAndReveal(resource);
 			final Display display= getShell().getDisplay();
 			display.asyncExec(new Runnable() {
+				@Override
 				public void run() {
 					IEditorPart editor;
 					try {

@@ -73,6 +73,7 @@ public class SearchFilterTest extends AbstractXtendUITestCase {
 		IResourceDescription rd = resourceDescriptionManager.getResourceDescription(file.eResource());
 		Iterable<IEObjectDescription> exportedObjects = rd.getExportedObjects();
 		return filter(exportedObjects, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription element) {
 				return !searchFilter.reject(element);
 			}

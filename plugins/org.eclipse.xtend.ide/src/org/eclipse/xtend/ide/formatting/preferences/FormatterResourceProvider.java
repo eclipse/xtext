@@ -23,6 +23,7 @@ public class FormatterResourceProvider implements IEditedResourceProvider {
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
 	
+	@Override
 	public XtextResource createResource() {
 		ResourceSet resourceSet = resourceSetProvider.get(null);
 		@SuppressWarnings("restriction")

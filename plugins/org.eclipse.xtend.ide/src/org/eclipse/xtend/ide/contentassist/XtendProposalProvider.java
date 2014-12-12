@@ -100,6 +100,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 				alreadyTaken.addAll(getAllKeywords());
 				completions.getVariableProposals(model, XtendPackage.Literals.XTEND_FIELD__TYPE,
 						VariableType.INSTANCE_FIELD, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
+							@Override
 							public void accept(String replaceText, StyledString label, Image img) {
 								acceptor.accept(createCompletionProposal(replaceText, label, img, context));
 							}
@@ -260,6 +261,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			alreadyTaken.addAll(getAllKeywords());
 			completions.getVariableProposals(model, XtendPackage.Literals.XTEND_PARAMETER__PARAMETER_TYPE,
 					VariableType.PARAMETER, alreadyTaken, new JdtVariableCompletions.CompletionDataAcceptor() {
+						@Override
 						public void accept(String replaceText, StyledString label, Image img) {
 							acceptor.accept(createCompletionProposal(replaceText, label, img, context));
 						}
@@ -276,6 +278,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 		final Predicate<IEObjectDescription> delegate = super.getFeatureDescriptionPredicate(contentAssistContext);
 		return new Predicate<IEObjectDescription>() {
 
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				boolean result = !input.getName().getFirstSegment().startsWith("_") && delegate.apply(input);
 				if (result) {
@@ -316,10 +319,12 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
 				new ITypesProposalProvider.Filter() {
+					@Override
 					public int getSearchFor() {
 						return IJavaSearchConstants.CLASS;
 					}
 
+					@Override
 					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path) {
 						if (TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames))

@@ -27,6 +27,7 @@ public class RuntimeInjectorProvider implements IInjectorProvider, IRegistryConf
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector()
 	{
 		if (injector == null) {
@@ -41,10 +42,12 @@ public class RuntimeInjectorProvider implements IInjectorProvider, IRegistryConf
 	    return new RuntimeTestSetup().createInjectorAndDoEMFRegistration();
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

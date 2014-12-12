@@ -66,6 +66,7 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 	@Inject
 	private FlexerFactory flexerFactory;
 
+	@Override
 	public IParseResult reparse(IParser parser, IParseResult previousParseResult, ReplaceRegion changedRegion) {
 		if (isBrokenPreviousState(previousParseResult, changedRegion.getOffset())) {
 			return fullyReparse(parser, previousParseResult, changedRegion);

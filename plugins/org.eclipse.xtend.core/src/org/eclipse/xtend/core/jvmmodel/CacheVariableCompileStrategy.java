@@ -22,6 +22,7 @@ public class CacheVariableCompileStrategy implements Procedures.Procedure1<ITree
 
 	private XtendFunction context;
 
+	@Override
 	public void apply(ITreeAppendable builder) {
 		builder.append(typeReferences.findDeclaredType(CollectionLiterals.class, context));
 		builder.append(".newHashMap()");

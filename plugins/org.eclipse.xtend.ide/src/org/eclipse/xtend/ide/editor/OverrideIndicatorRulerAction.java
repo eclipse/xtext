@@ -68,6 +68,7 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 		setActionDefinitionId(getId());
 	}
 
+	@Override
 	public void contributeActions(XtextEditor editor) {
 		this.editor = editor;
 		selectMarkerRulerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
@@ -76,9 +77,11 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 		setEnabled(true);
 	}
 
+	@Override
 	public void editorDisposed(XtextEditor editor) {
 	}
 
+	@Override
 	public void update() {
 		overrideIndicatorAnnotation = findOverrideIndicatorAnnotation();
 		selectMarkerRulerAction.update();

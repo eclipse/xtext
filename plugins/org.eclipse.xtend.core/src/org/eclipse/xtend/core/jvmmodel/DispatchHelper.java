@@ -301,6 +301,7 @@ public class DispatchHelper {
 
 	protected void sort(List<JvmOperation> operations) {
 		Collections.sort(operations, new Comparator<JvmOperation>() {
+			@Override
 			public int compare(JvmOperation o1, JvmOperation o2) {
 				return DispatchHelper.this.compare(o1, o2);
 			}

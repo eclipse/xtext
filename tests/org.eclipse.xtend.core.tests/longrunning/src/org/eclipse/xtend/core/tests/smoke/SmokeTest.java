@@ -71,6 +71,7 @@ public class SmokeTest extends AbstractSmokeTest {
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
 	
 	private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
+		@Override
 		public Lexer get() {
 			return new InternalXtendLexer(null);
 		}
@@ -237,6 +238,7 @@ public class SmokeTest extends AbstractSmokeTest {
 		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
 		validator.setDiagnosticConverter(new IDiagnosticConverter() {
+			@Override
 			public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof BasicDiagnostic) {
 					List<?> data = diagnostic.getData();
@@ -256,6 +258,7 @@ public class SmokeTest extends AbstractSmokeTest {
 				throw result;
 			}
 			
+			@Override
 			public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof ExceptionDiagnostic) {
 					Exception e = ((ExceptionDiagnostic) diagnostic).getException();

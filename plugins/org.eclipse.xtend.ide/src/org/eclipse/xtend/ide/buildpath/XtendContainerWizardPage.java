@@ -33,6 +33,7 @@ public class XtendContainerWizardPage extends NewElementWizardPage implements IC
 		this.containerEntry = JavaCore.newContainerEntry(XtendContainerInitializer.XTEND_LIBRARY_PATH);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new FillLayout());
@@ -50,15 +51,18 @@ public class XtendContainerWizardPage extends NewElementWizardPage implements IC
 		return builder.toString();
 	}
 
+	@Override
 	public boolean finish() {
 		return true;
 	}
 
+	@Override
 	public IClasspathEntry getSelection() {
 		return containerEntry;
 
 	}
 
+	@Override
 	public void setSelection(IClasspathEntry containerEntry) {
 		//do nothing
 	}
