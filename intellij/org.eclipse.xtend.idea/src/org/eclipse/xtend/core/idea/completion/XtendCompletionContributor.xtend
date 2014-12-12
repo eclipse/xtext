@@ -1,10 +1,17 @@
 package org.eclipse.xtend.core.idea.completion
 
+import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
-import org.eclipse.xtext.idea.completion.AbstractCompletionContributor
 
-class XtendCompletionContributor extends AbstractCompletionContributor {
+class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 	new() {
-		super(XtendLanguage.INSTANCE)
+		this(XtendLanguage.INSTANCE)
+	}
+	
+	new(AbstractXtextLanguage lang) {
+		super(lang)
+		//custom rules here
 	}
 }
+
+
