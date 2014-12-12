@@ -11,14 +11,18 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
@@ -57,6 +61,11 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
     return ((MutableFieldDeclaration) _findDeclaredField);
   }
   
+  public MutableTypeDeclaration findDeclaredType(final String name) {
+    TypeDeclaration _findDeclaredType = super.findDeclaredType(name);
+    return ((MutableTypeDeclaration) _findDeclaredType);
+  }
+  
   public MutableConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     ConstructorDeclaration _findDeclaredConstructor = super.findDeclaredConstructor(parameterTypes);
     return ((MutableConstructorDeclaration) _findDeclaredConstructor);
@@ -85,6 +94,21 @@ public class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationI
   public Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends InterfaceDeclaration> _declaredInterfaces = super.getDeclaredInterfaces();
     return ((Iterable<? extends MutableInterfaceDeclaration>) _declaredInterfaces);
+  }
+  
+  public Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+    Iterable<? extends AnnotationTypeDeclaration> _declaredAnnotationTypes = super.getDeclaredAnnotationTypes();
+    return ((Iterable<? extends MutableAnnotationTypeDeclaration>) _declaredAnnotationTypes);
+  }
+  
+  public Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+    Iterable<? extends EnumerationTypeDeclaration> _declaredEnumerationTypes = super.getDeclaredEnumerationTypes();
+    return ((Iterable<? extends MutableEnumerationTypeDeclaration>) _declaredEnumerationTypes);
+  }
+  
+  public Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
+    Iterable<? extends TypeDeclaration> _declaredTypes = super.getDeclaredTypes();
+    return ((Iterable<? extends MutableTypeDeclaration>) _declaredTypes);
   }
   
   public MutableTypeDeclaration getDeclaringType() {

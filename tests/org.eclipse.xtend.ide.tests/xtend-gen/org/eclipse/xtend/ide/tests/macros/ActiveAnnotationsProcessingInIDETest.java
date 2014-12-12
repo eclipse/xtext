@@ -69,11 +69,6 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   private IResourceValidator validator;
   
   @Test
-  public void testSimpleModification() {
-    super.testSimpleModification();
-  }
-  
-  @Test
   public void testDocumentationProvider() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package annotation");

@@ -17,8 +17,10 @@ import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -144,6 +146,17 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return IterableExtensions.findFirst(_declaredFields, _function);
   }
   
+  public TypeDeclaration findDeclaredType(final String name) {
+    Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
+    final Function1<TypeDeclaration, Boolean> _function = new Function1<TypeDeclaration, Boolean>() {
+      public Boolean apply(final TypeDeclaration type) {
+        String _simpleName = type.getSimpleName();
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
+      }
+    };
+    return IterableExtensions.findFirst(_declaredTypes, _function);
+  }
+  
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
     final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
@@ -195,5 +208,20 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<InterfaceDeclaration>filter(_declaredMembers, InterfaceDeclaration.class);
+  }
+  
+  public Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    return Iterables.<AnnotationTypeDeclaration>filter(_declaredMembers, AnnotationTypeDeclaration.class);
+  }
+  
+  public Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    return Iterables.<EnumerationTypeDeclaration>filter(_declaredMembers, EnumerationTypeDeclaration.class);
+  }
+  
+  public Iterable<? extends TypeDeclaration> getDeclaredTypes() {
+    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    return Iterables.<TypeDeclaration>filter(_declaredMembers, TypeDeclaration.class);
   }
 }

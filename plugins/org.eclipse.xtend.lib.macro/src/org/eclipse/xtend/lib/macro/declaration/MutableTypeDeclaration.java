@@ -32,7 +32,27 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	
 	Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces();
 	
+	/**
+	 * @since 2.8
+	 */
+	Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes();
+	
+	/**
+	 * @since 2.8
+	 */
+	Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes();
+	
+	/**
+	 * @since 2.8
+	 */
+	Iterable<? extends MutableTypeDeclaration> getDeclaredTypes();
+	
 	MutableFieldDeclaration findDeclaredField(String name);
+	
+	/**
+	 * @since 2.8
+	 */
+	MutableTypeDeclaration findDeclaredType(String name);
 
 	MutableMethodDeclaration findDeclaredMethod(String name, TypeReference... parameterTypes);
 
