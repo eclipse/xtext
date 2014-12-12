@@ -9,11 +9,11 @@ package org.eclipse.xtext.ui.codetemplates.ui.highlighting;
 
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.Token;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.TokenTool;
-import org.eclipse.xtext.ui.LexerUIBindings;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -24,7 +24,7 @@ import com.google.inject.name.Named;
 public class TemplateBodyHighlighter {
 
 	@Inject
-	@Named(LexerUIBindings.HIGHLIGHTING)
+	@Named(LexerIdeBindings.HIGHLIGHTING)
 	private Lexer lexer;
 
 	@Inject

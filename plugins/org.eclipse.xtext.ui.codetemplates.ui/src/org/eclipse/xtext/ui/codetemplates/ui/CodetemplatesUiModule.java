@@ -6,11 +6,11 @@ package org.eclipse.xtext.ui.codetemplates.ui;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
+import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesProposalConflictHelper;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SemanticHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
@@ -45,7 +45,7 @@ public class CodetemplatesUiModule extends org.eclipse.xtext.ui.codetemplates.ui
 
 	@Override
 	public void configureHighlightingTokenDefProvider(Binder binder) {
-		binder.bind(ITokenDefProvider.class).annotatedWith(Names.named(LexerUIBindings.HIGHLIGHTING))
+		binder.bind(ITokenDefProvider.class).annotatedWith(Names.named(LexerIdeBindings.HIGHLIGHTING))
 				.to(TemplatesTokenDefProvider.class);
 	}
 
