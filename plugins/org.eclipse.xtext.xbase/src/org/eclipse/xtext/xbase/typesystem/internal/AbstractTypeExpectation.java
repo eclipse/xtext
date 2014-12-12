@@ -29,18 +29,22 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		this.state = state;
 	}
 	
+	@Override
 	public ITypeReferenceOwner getReferenceOwner() {
 		return state.getReferenceOwner();
 	}
 
+	@Override
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 		acceptActualType(type, ConformanceHint.toFlags(hints));
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints) {
 		acceptActualType(type, ConformanceHint.toFlags(hints));
 	}
 	
+	@Override
 	public boolean isVoidTypeAllowed() {
 		LightweightTypeReference expectedType = getExpectedType();
 		if (expectedType != null && expectedType.isType(Void.TYPE)) {
@@ -49,6 +53,7 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		return false;
 	}
 	
+	@Override
 	public boolean isOwnedBy(ITypeReferenceOwner referenceOwner) {
 		LightweightTypeReference expectedType = getExpectedType();
 		return expectedType == null || expectedType.isOwnedBy(referenceOwner);
@@ -62,6 +67,7 @@ public abstract class AbstractTypeExpectation implements ITypeExpectation {
 		return state.getResolvedTypes();
 	}
 	
+	@Override
 	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
 		return getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
 	}

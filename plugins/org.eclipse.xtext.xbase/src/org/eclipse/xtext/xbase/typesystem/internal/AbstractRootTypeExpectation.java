@@ -20,6 +20,7 @@ public abstract class AbstractRootTypeExpectation extends AbstractTypeExpectatio
 		super(state);
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, int flags) {
 		if ((flags & ConformanceFlags.NO_IMPLICIT_RETURN) == 0)
 			getState().acceptType(getResolvedTypes(), this, type, true, flags);

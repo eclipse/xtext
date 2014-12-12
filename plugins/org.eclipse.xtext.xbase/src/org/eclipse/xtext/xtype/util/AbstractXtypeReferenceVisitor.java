@@ -16,10 +16,12 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
  */
 public abstract class AbstractXtypeReferenceVisitor<Result> extends AbstractTypeReferenceVisitor.InheritanceAware<Result> implements XtypeReferenceVisitor<Result> {
 
+	@Override
 	public Result doVisitFunctionTypeReference(XFunctionTypeRef reference) {
 		return doVisitSpecializedTypeReference(reference);
 	}
 
+	@Override
 	public Result doVisitComputedTypeReference(XComputedTypeReference reference) {
 		return doVisitSpecializedTypeReference(reference);
 	}

@@ -58,17 +58,21 @@ public interface IFeatureScopeTracker {
 
 	IFeatureScopeTracker NULL = new IFeatureScopeTracker() {
 
+		@Override
 		public IExpressionScope getExpressionScope(EObject context, Anchor anchor) {
 			throw new UnsupportedOperationException("The resource '"+context.eResource().getURI()+"' has been loaded without tracking the feature scope. Please check the implementation of IFeatureScopeTracker.Provider.");
 		}
 
+		@Override
 		public boolean hasExpressionScope(EObject context, Anchor anchor) {
 			throw new UnsupportedOperationException("The resource '"+context.eResource().getURI()+"' has been loaded without tracking the feature scope. Please check the implementation of IFeatureScopeTracker.Provider.");
 		}
 
+		@Override
 		public void addExpressionScope(ResolvedTypes current, EObject context, IFeatureScopeSession session, Anchor anchor) {
 		}
 
+		@Override
 		public void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, Anchor anchor) {
 		}
 		

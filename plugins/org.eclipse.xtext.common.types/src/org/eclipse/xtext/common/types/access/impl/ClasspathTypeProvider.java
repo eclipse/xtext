@@ -45,6 +45,7 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			this.existing = existing;
 		}
 
+		@Override
 		public URI normalize(URI uri) {
 			if (URIHelperConstants.PROTOCOL.equals(uri.scheme())) {
 				String qualifiedName = uri.lastSegment();
@@ -57,54 +58,67 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 			return existing.normalize(uri);
 		}
 
+		@Override
 		public Map<URI, URI> getURIMap() {
 			return existing.getURIMap();
 		}
 
+		@Override
 		public EList<URIHandler> getURIHandlers() {
 			return existing.getURIHandlers();
 		}
 
+		@Override
 		public URIHandler getURIHandler(URI uri) {
 			return existing.getURIHandler(uri);
 		}
 
+		@Override
 		public EList<ContentHandler> getContentHandlers() {
 			return existing.getContentHandlers();
 		}
 
+		@Override
 		public InputStream createInputStream(URI uri) throws IOException {
 			return existing.createInputStream(uri);
 		}
 
+		@Override
 		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
 			return existing.createInputStream(uri, options);
 		}
 
+		@Override
 		public OutputStream createOutputStream(URI uri) throws IOException {
 			return existing.createOutputStream(uri);
 		}
 
+		@Override
 		public OutputStream createOutputStream(URI uri, Map<?, ?> options) throws IOException {
 			return existing.createOutputStream(uri, options);
 		}
 
+		@Override
 		public void delete(URI uri, Map<?, ?> options) throws IOException {
 			existing.delete(uri, options);
 		}
 
+		@Override
 		public Map<String, ?> contentDescription(URI uri, Map<?, ?> options) throws IOException {
 			return existing.contentDescription(uri, options);
 		}
 
+		@Override
 		public boolean exists(URI uri, Map<?, ?> options) {
 			return existing.exists(uri, options);
 		}
 
+		@Override
 		public Map<String, ?> getAttributes(URI uri, Map<?, ?> options) {
 			return existing.getAttributes(uri, options);
 		}
 
+		@Override
 		public void setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
 			existing.setAttributes(uri, attributes, options);
 		}

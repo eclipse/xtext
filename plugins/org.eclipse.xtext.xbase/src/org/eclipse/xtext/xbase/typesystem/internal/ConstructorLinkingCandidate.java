@@ -51,10 +51,12 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		super(constructorCall, description, expectation, state);
 	}
 
+	@Override
 	public JvmConstructor getConstructor() {
 		return (JvmConstructor) getFeature();
 	}
 	
+	@Override
 	public XConstructorCall getConstructorCall() {
 		return getExpression();
 	}
@@ -129,6 +131,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return "constructor";
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return description.isAnonymousClassConstructorCall();
 	}
@@ -138,6 +141,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return getConstructorCall().getTypeArguments();
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
 		if (isAnonymousClassConstructorCall())

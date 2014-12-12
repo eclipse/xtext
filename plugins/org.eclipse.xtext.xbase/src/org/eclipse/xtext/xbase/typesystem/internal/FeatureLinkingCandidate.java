@@ -382,6 +382,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return !isStatic();
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return description.isStatic();
 	}
@@ -836,6 +837,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		}
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return getExpression();
 	}
@@ -1062,6 +1064,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return false;
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
 		XAbstractFeatureCall featureCall = getFeatureCall();

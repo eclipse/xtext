@@ -37,6 +37,7 @@ public class BinaryClassMirror extends AbstractClassMirror {
 		return binaryClass.getName();
 	}
 
+	@Override
 	public void initialize(TypeResource typeResource) {
 		typeResource.getContents().add(typeFactory.createType(binaryClass));
 	}
@@ -53,6 +54,7 @@ public class BinaryClassMirror extends AbstractClassMirror {
 		}
 	}
 
+	@Override
 	public boolean isSealed() {
 		return true;
 	}

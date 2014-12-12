@@ -42,6 +42,7 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 		addCandidate(second);
 	}
 	
+	@Override
 	public List<? extends ILinkingCandidate> getAlternatives() {
 		return Collections.unmodifiableList(candidates);
 	}
@@ -50,6 +51,7 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 		this.candidates.add(next);
 	}
 	
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
 			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;
@@ -79,16 +81,19 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 		return (Candidate) candidates.getFirst();
 	}
 
+	@Override
 	public void applyToComputationState() {
 		Candidate candidate = getPrimaryCandidate();
 		candidate.getState().getResolvedTypes().reassignLinkingInformation(candidate.getExpression(), this);
 		candidate.applyToComputationState();
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		getPrimaryCandidate().applyToModel(resolvedTypes);
 	}
 
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		Candidate candidate = getPrimaryCandidate();
 		if (candidate.validate(result)) {
@@ -155,14 +160,17 @@ public abstract class AbstractAmbiguousLinkingCandidate<Candidate extends Abstra
 	protected abstract EStructuralFeature getFeatureToMark();
 	
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getFeature() {
 		return getPrimaryCandidate().getFeature();
 	}
 
+	@Override
 	public XExpression getExpression() {
 		return getPrimaryCandidate().getExpression();
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		return getPrimaryCandidate().getTypeArguments();
 	}

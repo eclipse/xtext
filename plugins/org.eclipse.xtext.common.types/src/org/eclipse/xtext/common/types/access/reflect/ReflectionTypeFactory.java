@@ -116,6 +116,7 @@ public class ReflectionTypeFactory implements ITypeFactory<Class<?>, JvmDeclared
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Override
 	public JvmDeclaredType createType(final Class<?> clazz) {
 		try {
 			createTypeTask.start();

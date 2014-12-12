@@ -235,6 +235,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return owner.getServices();
 	}
 
+	@Override
 	public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
 		if (diagnostics == null)
 			return Collections.emptyList();
@@ -250,11 +251,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
 		return getServices().getEarlyExitComputer().getThrownExceptions(obj, this, this.getReferenceOwner());
 	}
 	
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		if (!shared.allLinking.contains(featureCall)) {
 			return null;
@@ -263,6 +266,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 		if (!shared.allLinking.contains(constructorCall)) {
 			return null;
@@ -271,6 +275,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
+	@Override
 	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		if (!shared.allLinking.contains(featureCall)) {
 			return null;
@@ -279,6 +284,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
+	@Override
 	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 		if (!shared.allLinking.contains(constructorCall)) {
 			return null;
@@ -536,6 +542,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualType(XExpression expression) {
 		LightweightTypeReference result = doGetActualType(expression);
 		return toOwnedReference(result);
@@ -545,6 +552,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	protected abstract LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression);
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		LightweightTypeReference result = doGetReturnType(expression);
 		return toOwnedReference(result);
@@ -572,6 +580,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, false);
 		return toOwnedReference(result);
@@ -597,11 +606,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, true);
 		return toOwnedReference(result);
 	}
 	
+	@Override
 	public boolean isVoidTypeAllowed(XExpression expression) {
 		TypeData typeData = getTypeData(expression, false);
 		if (typeData != null)
@@ -625,6 +636,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return null;
 	}
 	
+	@Override
 	public final List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 		if (!shared.allLinking.contains(expression)) {
 			return Collections.emptyList();
@@ -862,8 +874,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return linkingMap != null ? linkingMap : Collections.<XExpression, IApplicableCandidate>emptyMap();
 	}
 	
+	@Override
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
 		Collection<?> rawResult = Collections2.filter(basicGetLinkingMap().values(), new Predicate<IApplicableCandidate>() {
+			@Override
 			public boolean apply(/* @Nullable */ IApplicableCandidate input) {
 				if (input == null)
 					throw new IllegalArgumentException();
@@ -877,8 +891,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return result;
 	}
 	
+	@Override
 	public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
 		Collection<?> rawResult = Collections2.filter(basicGetLinkingMap().values(), new Predicate<IApplicableCandidate>() {
+			@Override
 			public boolean apply(/* @Nullable */ IApplicableCandidate input) {
 				if (input == null)
 					throw new IllegalArgumentException();
@@ -893,6 +909,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		LightweightTypeReference result = doGetActualType(identifiable, false);
 		return toOwnedReference(result);
@@ -1252,6 +1269,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return propagatedTypes != null && propagatedTypes.contains(expression);
 	}
 	
+	@Override
 	public boolean isRefinedType(XExpression expression) {
 		return refinedTypes != null && refinedTypes.contains(expression);
 	}
@@ -1409,10 +1427,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		getFeatureScopeTracker().replacePreviousExpressionScope(context, session, anchor);
 	}
 	
+	@Override
 	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		return getFeatureScopeTracker().getExpressionScope(context, anchor);
 	}
 	
+	@Override
 	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		return getFeatureScopeTracker().hasExpressionScope(context, anchor);
 	}

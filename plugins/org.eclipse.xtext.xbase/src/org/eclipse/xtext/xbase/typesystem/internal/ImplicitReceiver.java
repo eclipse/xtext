@@ -53,6 +53,7 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 		}
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		getOwner().setImplicitReceiver(getFeatureCall());
 	}

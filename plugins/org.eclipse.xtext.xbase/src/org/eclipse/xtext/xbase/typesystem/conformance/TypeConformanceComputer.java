@@ -346,6 +346,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 			this.rawTypeToReference = all;
 		}
 		
+		@Override
 		public boolean accept(LightweightTypeReference superType, int distance) {
 			if (superType == null)
 				throw new IllegalStateException("superType may not be null");
@@ -393,6 +394,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 
 	protected void inplaceSortByDistanceAndName(List<Entry<JvmType>> candidates) {
 		Collections.sort(candidates,new Comparator<Entry<JvmType>>() {
+			@Override
 			public int compare(Entry<JvmType> o1, Entry<JvmType> o2) {
 				if (o1.getCount() == o2.getCount()) {
 					JvmType element1 = o1.getElement();

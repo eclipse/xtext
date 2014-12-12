@@ -25,6 +25,7 @@ public class EnumLiteralImporter implements ITypeImporter.Client {
 		this.enumType = enumType;
 	}
 
+	@Override
 	public void doAddImports(ITypeImporter importer) {
 		for (JvmMember member : enumType.getMembers()) {
 			if (member instanceof JvmEnumerationLiteral) {

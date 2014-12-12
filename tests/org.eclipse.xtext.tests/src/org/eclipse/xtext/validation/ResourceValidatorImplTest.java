@@ -37,6 +37,7 @@ public class ResourceValidatorImplTest extends AbstractXtextTests {
 		with(new LangATestLanguageStandaloneSetup());
 		EValidator.Registry.INSTANCE.put(LangATestLanguagePackage.eINSTANCE, new EValidator(){
 
+			@Override
 			public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 				if (eObject instanceof Type) {
 					String name = ((Type)eObject).getName();
@@ -48,11 +49,13 @@ public class ResourceValidatorImplTest extends AbstractXtextTests {
 				return true;
 			}
 
+			@Override
 			public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics,
 					Map<Object, Object> context) {
 				return validate(eObject,diagnostics,context);
 			}
 
+			@Override
 			public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics,
 					Map<Object, Object> context) {
 				return false;

@@ -44,6 +44,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 		this.typeResourceServices = typeResourceServices;
 	}
 	
+	@Override
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof JvmTypeParameter)
 			return getFragment(obj.eContainer(), fallback) + "/" + ((JvmTypeParameter) obj).getName();
@@ -62,6 +63,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 		return fallback.getFragment(obj);
 	}
 	
+	@Override
 	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		if (fragment.endsWith("[]")) {
 			return getArrayEObject(resource, fragment, fallback);

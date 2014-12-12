@@ -48,6 +48,7 @@ public class EcoreSupport extends AbstractGenericResourceSupport implements ISet
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
 		Injector injector = Guice.createInjector(getGuiceModule());
 		injector.injectMembers(this);

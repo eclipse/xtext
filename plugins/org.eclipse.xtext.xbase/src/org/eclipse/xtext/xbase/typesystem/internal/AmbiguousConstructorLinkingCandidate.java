@@ -27,15 +27,18 @@ public class AmbiguousConstructorLinkingCandidate extends AbstractAmbiguousLinki
 		return "constructor call";
 	}
 
+	@Override
 	public XConstructorCall getConstructorCall() {
 		return getPrimaryCandidate().getConstructorCall();
 	}
 
 	/* @Nullable */
+	@Override
 	public JvmConstructor getConstructor() {
 		return getPrimaryCandidate().getConstructor();
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return getPrimaryCandidate().isAnonymousClassConstructorCall();
 	}

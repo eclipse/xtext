@@ -22,10 +22,12 @@ public class NoExpectation extends AbstractReturnAwareTypeExpectation {
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType() {
 		return null;
 	}
 
+	@Override
 	public boolean isNoTypeExpectation() {
 		return true;
 	}
@@ -35,6 +37,7 @@ public class NoExpectation extends AbstractReturnAwareTypeExpectation {
 		return true;
 	}
 	
+	@Override
 	public ITypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return this;
 	}

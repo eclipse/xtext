@@ -67,14 +67,17 @@ public class TypeImporter implements ITypeImporter {
 		return result;
 	}
 
+	@Override
 	public void importStatic(JvmDeclaredType type) {
 		staticImports.add(type);
 	}
 
+	@Override
 	public void importStatic(JvmDeclaredType type, String memberName) {
 		Maps2.putIntoSetMap(type, memberName, namedStaticImports);
 	}
 
+	@Override
 	public void importStaticExtension(JvmDeclaredType type, boolean strict) {
 		staticExtensionImports.add(type);
 		if (!strict) {
@@ -82,6 +85,7 @@ public class TypeImporter implements ITypeImporter {
 		}
 	}
 
+	@Override
 	public void importStaticExtension(JvmDeclaredType type, String memberName, boolean strict) {
 		Maps2.putIntoSetMap(type, memberName, namedStaticExtensionImports);
 		if (!strict) {

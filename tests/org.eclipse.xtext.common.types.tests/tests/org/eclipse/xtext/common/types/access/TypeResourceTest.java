@@ -113,17 +113,20 @@ public class TypeResourceTest extends Assert implements IMirror {
 		return resource;
 	}
 	
+	@Override
 	public void initialize(TypeResource typeResource) {
 		initializeCalled = true;
 		assertEquals(expectedURI, typeResource.getURI());
 	}
 
+	@Override
 	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		assertEquals(expectedURI, resource.getURI());
 		assertEquals(expectedFragment, fragment);
 		return expectedObject;
 	}
 
+	@Override
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		assertEquals(expectedObject, obj);
 		return expectedFragment;

@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
  */
 public class OptimizingFeatureScopeTrackerProvider implements IFeatureScopeTracker.Provider {
 
+	@Override
 	public IFeatureScopeTracker track(EObject root) {
 		Resource resource = root.eResource();
 		if (resource != null) {

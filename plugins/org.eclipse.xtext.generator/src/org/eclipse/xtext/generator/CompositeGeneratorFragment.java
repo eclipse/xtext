@@ -57,6 +57,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		addFragment(message);
 	}
 
+	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToPluginXmlRt(grammar, ctx);
@@ -66,6 +67,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.6
 	 */
+	@Override
 	public void addToPluginXmlRt(LanguageConfig config, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			if (fragment instanceof IGeneratorFragmentExtension2) {
@@ -76,6 +78,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		}
 	}
 
+	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToPluginXmlUi(grammar, ctx);
@@ -85,6 +88,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.6
 	 */
+	@Override
 	public void addToPluginXmlUi(LanguageConfig config, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			if (fragment instanceof IGeneratorFragmentExtension2) {
@@ -99,6 +103,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	 * @since 2.3
 	 * @deprecated 
 	 */
+	@Override
 	@Deprecated
 	public void addToPluginXmlTests(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
@@ -108,6 +113,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		}
 	}
 	
+	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.addToStandaloneSetup(grammar, ctx);
@@ -117,6 +123,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.6
 	 */
+	@Override
 	public void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
 		for (IGeneratorFragment fragment : fragments) {
 			if (fragment instanceof IGeneratorFragmentExtension2) {
@@ -127,6 +134,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		}
 	}
 
+	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) throws CompositeGeneratorException {
 		CompositeGeneratorException cgEx = new CompositeGeneratorException();
 		for (IGeneratorFragment fragment : fragments) {
@@ -146,6 +154,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.6
 	 */
+	@Override
 	public void generate(LanguageConfig config, XpandExecutionContext ctx) throws CompositeGeneratorException {
 		CompositeGeneratorException cgEx = new CompositeGeneratorException();
 		for (IGeneratorFragment fragment : fragments) {
@@ -166,32 +175,40 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		}
 	}
 
+	@Override
 	public String[] getExportedPackagesRt(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesRt(grammar);
 			}
 		});
 	}
 
+	@Override
 	public String[] getImportedPackagesRt(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getImportedPackagesRt(grammar);
 			}
 		});
 	}
 
+	@Override
 	public String[] getExportedPackagesUi(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getExportedPackagesUi(grammar);
 			}
 		});
 	}
 
+	@Override
 	public String[] getImportedPackagesUi(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param.getImportedPackagesUi(grammar);
 			}
@@ -201,8 +218,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public String[] getImportedPackagesTests(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param instanceof IGeneratorFragmentExtension 
 						? ((IGeneratorFragmentExtension) param).getImportedPackagesTests(grammar)
@@ -214,8 +233,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public String[] getExportedPackagesTests(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param instanceof IGeneratorFragmentExtension 
 						? ((IGeneratorFragmentExtension) param).getExportedPackagesTests(grammar)
@@ -227,8 +248,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	public String[] getImportedPackagesIde(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param instanceof IGeneratorFragmentExtension3 
 						? ((IGeneratorFragmentExtension3) param).getImportedPackagesIde(grammar)
@@ -240,8 +263,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	public String[] getExportedPackagesIde(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]>() {
+			@Override
 			public String[] apply(IGeneratorFragment param) {
 				return param instanceof IGeneratorFragmentExtension3 
 						? ((IGeneratorFragmentExtension3) param).getExportedPackagesIde(grammar)
@@ -250,16 +275,20 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		});
 	}
 	
+	@Override
 	public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
+			@Override
 			public Set<Binding> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsRt(grammar);
 			}
 		});
 	}
 
+	@Override
 	public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
+			@Override
 			public Set<Binding> apply(IGeneratorFragment param) {
 				return param.getGuiceBindingsUi(grammar);
 			}
@@ -312,8 +341,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		return bindings;
 	}
 	
+	@Override
 	public String[] getRequiredBundlesRt(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
 			public String[] apply(IGeneratorFragment f) {
 				return f.getRequiredBundlesRt(grammar);
 			}
@@ -323,8 +354,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	public String[] getRequiredBundlesIde(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
 			public String[] apply(IGeneratorFragment f) {
 				return (f instanceof IGeneratorFragmentExtension3)
 						? ((IGeneratorFragmentExtension3)f).getRequiredBundlesIde(grammar)
@@ -333,8 +366,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		});
 	}
 
+	@Override
 	public String[] getRequiredBundlesUi(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
 			public String[] apply(IGeneratorFragment f) {
 				return f.getRequiredBundlesUi(grammar);
 			}
@@ -344,8 +379,10 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public String[] getRequiredBundlesTests(final Grammar grammar) {
 		return collectAllStrings(grammar, new Function<IGeneratorFragment, String[]> () {
+			@Override
 			public String[] apply(IGeneratorFragment f) {
 				return (f instanceof IGeneratorFragmentExtension)
 						? ((IGeneratorFragmentExtension)f).getRequiredBundlesTests(grammar)
@@ -354,6 +391,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 		});
 	}
 	
+	@Override
 	public void checkConfiguration(Issues issues) {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.checkConfiguration(issues);
@@ -362,6 +400,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 
 	private Naming naming;
 
+	@Override
 	public void registerNaming(Naming n) {
 		this.naming = n;
 		for (IGeneratorFragment f : fragments) {

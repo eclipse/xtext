@@ -57,18 +57,22 @@ public class AmbiguousFeatureLinkingCandidate extends AbstractAmbiguousLinkingCa
 		return super.getFeatureTypeName();
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return getPrimaryCandidate().getFeatureCall();
 	}
 
+	@Override
 	public boolean isStatic() {
 		return getPrimaryCandidate().isStatic();
 	}
 
+	@Override
 	public boolean isExtension() {
 		return getPrimaryCandidate().isExtension();
 	}
 
+	@Override
 	public boolean isTypeLiteral() {
 		return getPrimaryCandidate().isTypeLiteral();
 	}

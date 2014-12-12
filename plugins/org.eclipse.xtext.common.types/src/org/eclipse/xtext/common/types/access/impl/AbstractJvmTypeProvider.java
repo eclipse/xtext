@@ -86,6 +86,7 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(URIHelperConstants.PROTOCOL, this);
 	}
 
+	@Override
 	public abstract JvmType findTypeByName(String name);
 	
 	protected boolean isBinaryNestedTypeDelimiter(String name, boolean binaryNestedTypeDelimiter) {
@@ -95,8 +96,10 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public abstract JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter);
 
+	@Override
 	public TypeResource createResource(URI uri) {
 		TypeResource result = doCreateResource(uri);
 		final IMirror createMirror = createMirror(uri);
@@ -112,6 +115,7 @@ public abstract class AbstractJvmTypeProvider implements IJvmTypeProvider, Resou
 		return result;
 	}
 
+	@Override
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}

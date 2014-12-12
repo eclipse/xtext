@@ -283,5 +283,6 @@ public interface IResolvedOperation extends IResolvedExecutable {
 	 * 
 	 * @return the declaration.
 	 */
+	@Override
 	JvmOperation getDeclaration();
 }

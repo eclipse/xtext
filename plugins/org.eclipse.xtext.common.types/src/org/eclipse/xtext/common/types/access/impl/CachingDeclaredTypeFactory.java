@@ -49,6 +49,7 @@ public class CachingDeclaredTypeFactory implements ITypeFactory<BinaryClass, Jvm
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public JvmDeclaredType createType(BinaryClass clazz) {
 		try {
 			JvmDeclaredType cachedResult = get(clazz);

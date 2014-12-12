@@ -41,10 +41,12 @@ public abstract class AbstractResolvedReference<Expression extends XExpression> 
 		return typeParameterMapping;
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		// nothing to do
 	}
 	
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
 		return true;

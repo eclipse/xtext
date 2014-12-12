@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
  */
 public abstract class AbstractClosureInvocationHandler implements InvocationHandler {
 
+	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		if (isEquals(method)) {
 			return proxy == args[0];

@@ -62,6 +62,7 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public boolean isInheritImplementation() {
 		return isInheritImplementation;
 	}
@@ -69,6 +70,7 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void setInheritImplementation(boolean isInheritImplementation) {
 		this.isInheritImplementation = isInheritImplementation;
 	}

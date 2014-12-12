@@ -92,6 +92,7 @@ public class DefaultResourceDescription2Test extends AbstractXtextTests {
 	protected IResourceDescription createResourceDescription(Resource testResource) {
 		DefaultResourceDescriptionStrategy strategy = new DefaultResourceDescriptionStrategy();
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				String name = SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
 				return (name != null) ? QualifiedName.create(name) : null;

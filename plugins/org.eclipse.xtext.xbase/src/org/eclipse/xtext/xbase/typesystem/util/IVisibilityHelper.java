@@ -40,6 +40,7 @@ public interface IVisibilityHelper {
 		/**
 		 * @return always <code>true</code>.
 		 */
+		@Override
 		public boolean isVisible(/* @NonNull */ JvmMember member) {
 			return true;
 		}

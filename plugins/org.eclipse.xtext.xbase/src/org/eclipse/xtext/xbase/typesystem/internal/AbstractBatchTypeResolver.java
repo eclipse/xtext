@@ -38,16 +38,19 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	}
 	
 	/* @NonNull */
+	@Override
 	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource) {
 		return resolveTypes(resource, null);
 	}
 
 	/* @NonNull */
+	@Override
 	public final IResolvedTypes resolveTypes(final /* @Nullable */ EObject object) {
 		return resolveTypes(object, null);
 	}
 	
 	/* @NonNull */
+	@Override
 	public final IResolvedTypes resolveTypes(final /* @Nullable */ EObject object, CancelIndicator monitor) {
 		if (object == null || object.eIsProxy()) {
 			return IResolvedTypes.NULL;
@@ -56,6 +59,7 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	}
 	
 	/* @NonNull */
+	@Override
 	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource, /* @Nullable */ CancelIndicator monitor) {
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {

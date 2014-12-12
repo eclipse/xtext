@@ -152,6 +152,7 @@ public class PolymorphicDispatcherTest extends Assert {
 		};
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", 1, 2,
 				Lists.newArrayList(o1), new PolymorphicDispatcher.ErrorHandler<String>() {
+					@Override
 					public String handle(Object[] params, Throwable throwable) {
 						return null;
 					}
@@ -254,6 +255,7 @@ public class PolymorphicDispatcherTest extends Assert {
 		};
 		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>(Lists.newArrayList(o1),
 				new Predicate<Method>() {
+					@Override
 					public boolean apply(Method param) {
 						return ((param.getName().equals("label")) || (param.getAnnotation(TestLabelAnnotation.class) != null));
 					}

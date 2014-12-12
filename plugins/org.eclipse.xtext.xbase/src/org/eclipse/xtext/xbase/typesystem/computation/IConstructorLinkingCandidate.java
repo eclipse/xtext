@@ -44,5 +44,6 @@ public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 	 * An invocation of the constructor {@code C} will return three type arguments, the bound
 	 * values of for {@code P}, {@code T} and {@code V}.
 	 */
+	@Override
 	List<LightweightTypeReference> getTypeArguments();
 }

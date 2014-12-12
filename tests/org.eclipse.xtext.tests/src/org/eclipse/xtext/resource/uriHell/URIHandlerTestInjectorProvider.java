@@ -29,6 +29,7 @@ public class URIHandlerTestInjectorProvider implements IInjectorProvider, IRegis
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector()
 	{
 		if (injector == null) {
@@ -48,10 +49,12 @@ public class URIHandlerTestInjectorProvider implements IInjectorProvider, IRegis
 	    });
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

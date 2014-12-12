@@ -61,20 +61,24 @@ public interface IExpressionScope {
 	class NullExpressionScope implements IExpressionScope {
 		protected NullExpressionScope() {}
 
+		@Override
 		public IScope getFeatureScope() {
 			return IScope.NULLSCOPE;
 		}
 		
 		/* @NonNull */
+		@Override
 		public IScope getFeatureScope(XAbstractFeatureCall currentFeatureCall) {
 			return IScope.NULLSCOPE;
 		}
 
 		/* @NonNull */
+		@Override
 		public List<String> getTypeNamePrefix() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public boolean isPotentialTypeLiteral() {
 			return false;
 		}

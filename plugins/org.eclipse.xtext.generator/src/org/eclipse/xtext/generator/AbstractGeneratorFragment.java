@@ -31,6 +31,7 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 
 	private Naming naming;
 
+	@Override
 	public void registerNaming(Naming naming) {
 		this.naming = naming;
 	}

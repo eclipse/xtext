@@ -29,23 +29,28 @@ public abstract class AbstractNullLinkingCandidate implements ILinkingCandidate 
 		this.featureOrConstructorCall = featureOrConstructorCall;
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		// no op
 	}
 	
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// no op
 		return true;
 	}
 	
+	@Override
 	public XExpression getExpression() {
 		return featureOrConstructorCall;
 	}
 
+	@Override
 	public JvmIdentifiableElement getFeature() {
 		return null;
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		return Collections.emptyList();
 	}

@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
  */
 public class PrimitiveTypeFactory implements ITypeFactory<Class<?>, JvmType> {
 
+	@Override
 	public JvmType createType(Class<?> clazz) {
 		if (Void.TYPE.equals(clazz))
 			return TypesFactory.eINSTANCE.createJvmVoid();

@@ -21,6 +21,7 @@ public class AssignmentFinderTestLanguageRuntimeModule extends AbstractAssignmen
 		public IValueConverter<TestEnum> DatEnum() {
 			return new IValueConverter<TestEnum>() {
 
+				@Override
 				public TestEnum toValue(String string, INode node) throws ValueConverterException {
 					if ("lit3".equals(string))
 						return TestEnum.LIT3;
@@ -28,6 +29,7 @@ public class AssignmentFinderTestLanguageRuntimeModule extends AbstractAssignmen
 						throw new ValueConverterException(null, null, null);
 				}
 
+				@Override
 				public String toString(TestEnum value) throws ValueConverterException {
 					if (value == TestEnum.LIT3)
 						return TestEnum.LIT3.getName();

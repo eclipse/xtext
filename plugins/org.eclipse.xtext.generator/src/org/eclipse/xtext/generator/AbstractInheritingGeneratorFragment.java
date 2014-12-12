@@ -19,10 +19,12 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 
 	private boolean isInheritImplementation = true;
 
+	@Override
 	public boolean isInheritImplementation() {
 		return isInheritImplementation;
 	}
 
+	@Override
 	public void setInheritImplementation(boolean isInheritImplementation) {
 		this.isInheritImplementation = isInheritImplementation;
 	}

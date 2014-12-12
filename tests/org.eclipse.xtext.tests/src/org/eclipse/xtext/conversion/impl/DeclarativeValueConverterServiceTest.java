@@ -35,11 +35,13 @@ public class DeclarativeValueConverterServiceTest extends AbstractXtextTests {
 			this.test = test;
 		}
 		
+		@Override
 		public T toValue(String string, INode node) throws ValueConverterException {
 			test.announceToValue(ident);
 			return null;
 		}
 
+		@Override
 		public String toString(T value) throws ValueConverterException {
 			test.announceToString(ident);
 			return null;

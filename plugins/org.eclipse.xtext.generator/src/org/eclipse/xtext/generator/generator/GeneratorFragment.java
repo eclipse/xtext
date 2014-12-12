@@ -65,10 +65,12 @@ public class GeneratorFragment extends AbstractGeneratorFragment implements IStu
 		setGenerateStub(isGenerateStub);
 	}		
 	
+	@Override
 	public void setGenerateStub(boolean isGenerateStub) {
 		this.generateStub = isGenerateStub;
 	}
 	
+	@Override
 	public boolean isGenerateStub() {
 		return generateStub;
 	}

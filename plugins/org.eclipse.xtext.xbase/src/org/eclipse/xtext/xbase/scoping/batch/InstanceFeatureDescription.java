@@ -71,10 +71,12 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 		return receiverConformanceFlags;
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return false;
 	}

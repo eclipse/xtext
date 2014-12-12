@@ -73,6 +73,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	}
 
 	/* @Nullable */
+	@Override
 	public IEObjectDescription getLocalElement(QualifiedName name) {
 		return null;
 	}
@@ -92,6 +93,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, a session is not an instance context.
 	 */
+	@Override
 	public boolean isInstanceContext() {
 		return false;
 	}
@@ -101,6 +103,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, a session is not a constructor context.
 	 */
+	@Override
 	public boolean isConstructorContext() {
 		return false;
 	}
@@ -110,6 +113,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
+	@Override
 	public boolean isVisible(JvmMember member) {
 		return visibilityHelper.isVisible(member);
 	}
@@ -119,6 +123,7 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
+	@Override
 	public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 		return visibilityHelper.isVisible(member);
 	}

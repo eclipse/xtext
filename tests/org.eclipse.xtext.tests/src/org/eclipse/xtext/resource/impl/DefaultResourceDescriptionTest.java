@@ -49,6 +49,7 @@ public class DefaultResourceDescriptionTest extends Assert {
 		resource = new XMLResourceImpl();
 		resource.setURI(URI.createURI("foo:/test"));
 		nameProvider = new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
 					return QualifiedName.create(((ENamedElement) obj).getName());
@@ -73,6 +74,7 @@ public class DefaultResourceDescriptionTest extends Assert {
 
 	@Test public void testGetExportedObject_1() throws Exception {
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EPackage)
 					return QualifiedName.create(((EPackage) obj).getName());
@@ -89,6 +91,7 @@ public class DefaultResourceDescriptionTest extends Assert {
 
 	@Test public void testGetExportedObject_2() throws Exception {
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof EClassifier)
 					return QualifiedName.create(((EClassifier) obj).getName());

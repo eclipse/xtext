@@ -60,6 +60,7 @@ public class ReceiverFeatureScope extends AbstractStaticOrInstanceFeatureScope i
 		this.validStaticState = validStaticState;
 	}
 	
+	@Override
 	public boolean isVisible(/* @NonNull */ JvmMember member) {
 		return getSession().isVisible(member, receiverType, receiverFeature);
 	}
@@ -68,6 +69,7 @@ public class ReceiverFeatureScope extends AbstractStaticOrInstanceFeatureScope i
 	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		final Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		processFeatureNames(name, new NameAcceptor() {
+			@Override
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {

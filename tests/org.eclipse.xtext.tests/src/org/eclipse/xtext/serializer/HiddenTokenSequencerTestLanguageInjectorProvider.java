@@ -27,6 +27,7 @@ public class HiddenTokenSequencerTestLanguageInjectorProvider implements IInject
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector() {
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
@@ -40,10 +41,12 @@ public class HiddenTokenSequencerTestLanguageInjectorProvider implements IInject
 		return new HiddenTokenSequencerTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

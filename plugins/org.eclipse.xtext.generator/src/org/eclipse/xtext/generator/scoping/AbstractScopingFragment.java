@@ -43,6 +43,7 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public boolean isGenerateXtendStub() {
 		return isGenerateXtendStub;
 	}
@@ -50,14 +51,17 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void setGenerateXtendStub(boolean isGenerateXtendStub) {
 		this.isGenerateXtendStub = isGenerateXtendStub;
 	}
 
+	@Override
 	public boolean isGenerateStub() {
 		return isGenerateStub;
 	}
 
+	@Override
 	public void setGenerateStub(boolean isGenerateStub) {
 		this.isGenerateStub = isGenerateStub;
 	}

@@ -34,6 +34,7 @@ public class FollowUpError extends AbstractUnresolvableReference implements IFea
 		super(featureCall, state);
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		Resource resource = getExpression().eResource();
 		if (resource instanceof LazyLinkingResource) {
@@ -43,6 +44,7 @@ public class FollowUpError extends AbstractUnresolvableReference implements IFea
 		}
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return (XAbstractFeatureCall) getExpression();
 	}
@@ -53,14 +55,17 @@ public class FollowUpError extends AbstractUnresolvableReference implements IFea
 		return getFeatureCall().getExplicitArguments();
 	}
 
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 
+	@Override
 	public boolean isExtension() {
 		return false;
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return false;
 	}
@@ -69,6 +74,7 @@ public class FollowUpError extends AbstractUnresolvableReference implements IFea
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();

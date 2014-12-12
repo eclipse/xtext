@@ -43,6 +43,7 @@ public class XbaseWithAnnotationsBatchScopeProvider extends XbaseBatchScopeProvi
 			}
 			Iterable<JvmOperation> operations = ((JvmAnnotationType) annotationType).getDeclaredOperations();
 			Iterable<IEObjectDescription> descriptions = transform(operations, new Function<JvmOperation, IEObjectDescription>() {
+				@Override
 				public IEObjectDescription apply(JvmOperation from) {
 					return EObjectDescription.create(QualifiedName.create(from.getSimpleName()), from);
 				}

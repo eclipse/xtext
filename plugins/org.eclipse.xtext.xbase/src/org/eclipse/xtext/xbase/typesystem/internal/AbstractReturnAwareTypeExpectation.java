@@ -21,6 +21,7 @@ public abstract class AbstractReturnAwareTypeExpectation extends AbstractTypeExp
 		this.returnType = returnType;
 	}
 
+	@Override
 	public void acceptActualType(LightweightTypeReference type, int flags) {
 		getState().acceptType(getResolvedTypes(), this, type, returnType, flags);
 	}

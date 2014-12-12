@@ -111,6 +111,7 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 		return false;
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
@@ -120,6 +121,7 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 		return true;
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return getExpression();
 	}
@@ -249,10 +251,12 @@ public class TypeLiteralLinkingCandidate extends AbstractPendingLinkingCandidate
 		}
 	}
 	
+	@Override
 	public JvmType getType() {
 		return (JvmType) getFeature();
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
 	}

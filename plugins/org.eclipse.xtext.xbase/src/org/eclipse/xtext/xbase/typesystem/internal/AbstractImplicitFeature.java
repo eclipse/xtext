@@ -44,6 +44,7 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 		return state;
 	}
 	
+	@Override
 	public void applyToComputationState() {
 		state.acceptCandidate(implicit, this);
 		getState().markAsRefinedTypeIfNecessary(this);
@@ -53,14 +54,17 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 		return featureCall;
 	}
 
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}
 
+	@Override
 	public JvmIdentifiableElement getFeature() {
 		return implicit.getFeature();
 	}
 	
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		JvmIdentifiableElement implicitFeature = getFeature();
 		if (implicitFeature instanceof XVariableDeclaration) {
@@ -87,26 +91,32 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 		return true;
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return implicit;
 	}
 	
+	@Override
 	public XExpression getExpression() {
 		return implicit;
 	}
 
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return false;
 	}
 
+	@Override
 	public boolean isExtension() {
 		return false;
 	}

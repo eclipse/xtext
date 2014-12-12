@@ -57,10 +57,12 @@ public class JdtBasedModule extends ClasspathBasedModule {
 			return emptyMap();
 		}
 
+		@Override
 		public Map<URI, IStorage> getAllEntries(IPackageFragmentRoot root) {
 			return emptyMap();
 		}
 
+		@Override
 		public Pair<URI, URI> getURIMapping(IPackageFragmentRoot root) throws JavaModelException {
 			return null;
 		}

@@ -12,6 +12,7 @@ package overrides;
  */
 public class ConcreteForCharSequence extends AbstractForCharSequence {
 
+	@Override
 	public <X extends CharSequence, Y extends X> X method(Class<? extends X> c) {
 		return null;
 	}

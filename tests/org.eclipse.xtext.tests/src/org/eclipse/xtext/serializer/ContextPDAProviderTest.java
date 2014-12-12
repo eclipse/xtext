@@ -40,6 +40,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments()
 				.hideCardinality().showQualified();
 
+		@Override
 		public String apply(ISerState from) {
 			switch (from.getType()) {
 				case START:
@@ -63,6 +64,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		for (EObject ctx : contextProvider.getAllContexts(grammar))
 			result.add(Tuples.create(ctx, ctx2name.getContextName(ctx)));
 		Collections.sort(result, new Comparator<Pair<EObject, String>>() {
+			@Override
 			public int compare(Pair<EObject, String> o1, Pair<EObject, String> o2) {
 				return o1.getSecond().compareTo(o2.getSecond());
 			}

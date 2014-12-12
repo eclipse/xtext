@@ -68,6 +68,7 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		}
 		final RawResolvedFeatures newAdapter = new RawResolvedFeatures(type, services);
 		requestNotificationOnChange(type, new Runnable() {
+			@Override
 			public void run() {
 				newAdapter.clear();
 				adapterList.remove(newAdapter);
@@ -129,10 +130,12 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		this.featureIndex = Maps.newHashMapWithExpectedSize(4);
 	}
 	
+	@Override
 	public IResolvedFeatures getParameterizedView(LightweightTypeReference concrete) {
 		return new ParameterizedResolvedFeatures(concrete, this);
 	}
 	
+	@Override
 	public List<JvmFeature> getAllFeatures(String simpleName) {
 		List<JvmFeature> result = featureIndex.get(simpleName);
 		if (result == null) {
@@ -141,6 +144,7 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		return result;
 	}
 	
+	@Override
 	public List<JvmFeature> getAllFeatures() {
 		if (!allFeaturesComputed) {
 			ListMultimap<String, JvmFeature> featureIndex = computeAllFeatures();
@@ -232,17 +236,21 @@ public class RawResolvedFeatures extends AbstractResolvedFeatures implements Ada
 		}
 	}
 
+	@Override
 	public void notifyChanged(/* @Nullable */ Notification notification) {
 	}
 
 	/* @Nullable */
+	@Override
 	public Notifier getTarget() {
 		return null;
 	}
 
+	@Override
 	public void setTarget(/* @Nullable */ Notifier newTarget) {
 	}
 
+	@Override
 	public boolean isAdapterForType(/* @Nullable */ Object type) {
 		return RawResolvedFeatures.class.equals(type);
 	}

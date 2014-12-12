@@ -88,6 +88,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 		}
 		class DiagnosticAcceptor implements IAcceptor<AbstractDiagnostic> {
 
+			@Override
 			public void accept(/* @Nullable */ AbstractDiagnostic diagnostic) {
 				if (diagnostic instanceof EObjectDiagnosticImpl) {
 					Severity severity = ((EObjectDiagnosticImpl) diagnostic).getSeverity();

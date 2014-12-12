@@ -25,22 +25,27 @@ public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidat
 		this.state = state;
 	}
 	
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return other;
 	}
 
+	@Override
 	public XConstructorCall getConstructorCall() {
 		return (XConstructorCall) featureOrConstructorCall;
 	}
 
+	@Override
 	public JvmConstructor getConstructor() {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return false;
 	}
 	
+	@Override
 	public void applyToComputationState() {
 		for(XExpression argument: getConstructorCall().getArguments()) {
 			state.withNonVoidExpectation().computeTypes(argument);

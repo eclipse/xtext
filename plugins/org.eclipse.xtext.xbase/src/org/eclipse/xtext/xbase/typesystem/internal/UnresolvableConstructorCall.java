@@ -31,14 +31,17 @@ public class UnresolvableConstructorCall extends AbstractUnresolvableReferenceWi
 		super(constructorCall, node, text, state);
 	}
 	
+	@Override
 	public JvmConstructor getConstructor() {
 		throw new UnsupportedOperationException("TODO return some error feature that is compatible to everything");
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return false;
 	}
 	
+	@Override
 	public XConstructorCall getConstructorCall() {
 		return (XConstructorCall) getExpression();
 	}
@@ -48,10 +51,12 @@ public class UnresolvableConstructorCall extends AbstractUnresolvableReferenceWi
 		return getConstructorCall().getArguments();
 	}
 	
+	@Override
 	public EReference getReference() {
 		return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		XConstructorCall constructorCall = getConstructorCall();
 		List<JvmTypeReference> typeArguments = constructorCall.getTypeArguments();

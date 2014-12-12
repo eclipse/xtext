@@ -62,6 +62,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private final static class EmptyPluginXmlVeto implements VetoStrategy {
 		static Pattern PLUGIN_ELEMENT = Pattern.compile("<plugin>(.*?)</plugin>", Pattern.DOTALL);
 
+		@Override
 		public boolean hasVeto(FileHandle handle) {
 			Matcher matcher = PLUGIN_ELEMENT.matcher(handle.getBuffer());
 			return matcher.find() && Strings.isEmpty(matcher.group(1).trim());

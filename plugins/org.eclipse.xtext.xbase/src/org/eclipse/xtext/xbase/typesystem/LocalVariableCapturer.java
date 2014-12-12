@@ -74,6 +74,7 @@ public abstract class LocalVariableCapturer implements IJvmTypeReferenceProvider
 	
 	protected abstract void capture(ITypeComputationState state);
 	
+	@Override
 	public JvmTypeReference getTypeReference(/* @NonNull */ XComputedTypeReferenceImplCustom context) {
 		if (!captured) {
 			throw new IllegalStateException("Not yet captured but navigated: " + this);

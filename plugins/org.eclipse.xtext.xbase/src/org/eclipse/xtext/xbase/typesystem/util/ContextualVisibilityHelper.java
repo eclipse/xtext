@@ -69,6 +69,7 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 		return rawContextType;
 	}
 	
+	@Override
 	public boolean isVisible(JvmMember member) {
 		// TODO private visibility?
 		JvmVisibility visibility = member.getVisibility();

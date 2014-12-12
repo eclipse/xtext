@@ -361,6 +361,7 @@ public class RewritableImportSection {
 				}
 			}
 			addSectionToAppend(new IAcceptor<ReplaceRegion>() {
+				@Override
 				public void accept(ReplaceRegion t) {
 					replaceRegions.add(t);
 				}
@@ -445,16 +446,19 @@ public class RewritableImportSection {
 		if (needsPreceedingBlankLine())
 			builder.append(lineSeparator).append(lineSeparator);
 		boolean needNewline = appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
+			@Override
 			public boolean apply(XImportDeclaration input) {
 				return !input.isStatic();
 			}
 		}), false);
 		needNewline = appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
+			@Override
 			public boolean apply(XImportDeclaration input) {
 				return input.isStatic() && !input.isExtension();
 			}
 		}), needNewline);
 		appendSubsection(builder, filter(allDeclarations, new Predicate<XImportDeclaration>() {
+			@Override
 			public boolean apply(XImportDeclaration input) {
 				return input.isStatic() && input.isExtension();
 			}
@@ -482,11 +486,13 @@ public class RewritableImportSection {
 
 	protected List<XImportDeclaration> sort(Iterable<XImportDeclaration> declarations) {
 		List<XImportDeclaration> sortMe = newArrayList(filter(declarations, new Predicate<XImportDeclaration>() {
+			@Override
 			public boolean apply(XImportDeclaration in) {
 				return !isEmpty(in.getImportedTypeName());
 			}
 		}));
 		Collections.sort(sortMe, new Comparator<XImportDeclaration>() {
+			@Override
 			public int compare(XImportDeclaration o1, XImportDeclaration o2) {
 				return o1.getImportedName().compareTo(o2.getImportedName());
 			}

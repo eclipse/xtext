@@ -21,6 +21,7 @@ public class LiveContainerBuilderIntegerationTestLanguageInjectorProvider implem
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector() {
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
@@ -31,10 +32,12 @@ public class LiveContainerBuilderIntegerationTestLanguageInjectorProvider implem
 		return injector;
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

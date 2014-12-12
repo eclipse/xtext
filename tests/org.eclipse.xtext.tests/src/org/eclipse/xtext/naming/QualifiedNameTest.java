@@ -185,6 +185,7 @@ public class QualifiedNameTest extends Assert {
 	
 	@Test public void testWrapper() throws Exception {
 		Function<String, String> identity = new Function<String, String>() {
+			@Override
 			public String apply(String from) {
 				return from;
 			}

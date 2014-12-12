@@ -42,14 +42,17 @@ public abstract class AbstractResolvedFeature<T extends JvmFeature> implements I
 		this.declaration = declaration;
 	}
 	
+	@Override
 	public T getDeclaration() {
 		return declaration;
 	}
 	
+	@Override
 	public LightweightTypeReference getContextType() {
 		return contextType;
 	}
 	
+	@Override
 	public LightweightTypeReference getResolvedDeclarator() {
 		JvmFeature declaration = getDeclaration();
 		JvmDeclaredType declarator = declaration.getDeclaringType();

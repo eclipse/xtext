@@ -37,6 +37,7 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 
 		private Grammar grammar;
 
+		@Override
 		public Grammar getGrammar() {
 			return grammar;
 		}
@@ -46,6 +47,7 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 
 	protected Module createModule(final Grammar grammar) {
 		return new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(Grammar.class).toInstance(grammar);
 				binder.bind(Naming.class).toInstance(naming);
@@ -78,6 +80,7 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 	public void generate(Xtend2ExecutionContext ctx) {
 	}
 
+	@Override
 	public void registerNaming(Naming n) {
 		naming = n;
 	}

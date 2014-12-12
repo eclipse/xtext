@@ -113,6 +113,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	protected MutableTokenDefProvider createLexerTokensProvider(final String lexerBaseFileName, KeywordHelper helper, Charset encoding) {
 		MutableTokenDefProvider provider = new MutableTokenDefProvider(helper, encoding);
 		provider.setAntlrTokenFileProvider(new IAntlrTokenFileProvider() {
+			@Override
 			public InputStream getAntlrTokenFile() {
 				try {
 					return new FileInputStream(lexerBaseFileName + ".tokens");

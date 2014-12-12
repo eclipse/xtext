@@ -35,6 +35,7 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 		super(featureCall, node, text, state);
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return (XAbstractFeatureCall) getExpression();
 	}
@@ -45,22 +46,27 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 		return getFeatureCall().getExplicitArguments();
 	}
 
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 
+	@Override
 	public boolean isExtension() {
 		return false;
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return false;
 	}
 	
+	@Override
 	public EReference getReference() {
 		return XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		List<JvmTypeReference> typeArguments = featureCall.getTypeArguments();

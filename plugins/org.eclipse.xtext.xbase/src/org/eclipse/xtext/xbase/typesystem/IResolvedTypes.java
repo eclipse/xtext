@@ -192,83 +192,101 @@ public interface IResolvedTypes {
 		protected NullResolvedTypes() {
 		}
 		
+		@Override
 		public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
 			return Collections.emptyList();
 		}
 		
+		@Override
 		public Collection<ILinkingCandidate> getFollowUpErrors() {
 			return Collections.emptyList();
 		}
 		
+		@Override
 		public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
 			return Collections.emptyList();
 		}
 		
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getExpectedType(XExpression expression) {
 			return null;
 		}
 		
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 			return null;
 		}
 		
+		@Override
 		public List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 			return Collections.emptyList();
 		}
 		
+		@Override
 		public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
 			return Collections.emptyList();
 		}
 		
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getActualType(XExpression expression) {
 			return null;
 		}
 		
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getReturnType(XExpression expression) {
 			return null;
 		}
 
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
 		}
 		
+		@Override
 		public boolean isVoidTypeAllowed(XExpression expression) {
 			return false;
 		}
 		
 		/* @Nullable */
+		@Override
 		public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 			return null;
 		}
 		
 		/* @Nullable */
+		@Override
 		public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 			return null;
 		}
 		
 		/* @Nullable */
+		@Override
 		public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 			return null;
 		}
 		
 		/* @Nullable */
+		@Override
 		public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 			return null;
 		}
 		
+		@Override
 		public boolean isRefinedType(XExpression expression) {
 			return false;
 		}
 		
+		@Override
 		public IExpressionScope getExpressionScope(EObject context, Anchor anchor) {
 			return IExpressionScope.NULL;
 		}
 		
+		@Override
 		public boolean hasExpressionScope(EObject context, Anchor anchor) {
 			return false;
 		}

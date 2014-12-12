@@ -141,6 +141,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return new LightweightTypeReferenceSerializer(this);
 	}
 	
+	@Override
 	public boolean isJava() {
 		return true;
 	}
@@ -152,16 +153,19 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public ErrorTreeAppendable errorChild() {
 		ErrorTreeAppendable errorChild = new ErrorTreeAppendable(state, traceURIConverter, locationProvider, jvmModelAssociations, getLocationData(), useForDebugging);
 		children.add(errorChild);
 		return errorChild;
 	}
 
+	@Override
 	public TreeAppendable trace(EObject object) {
 		return trace(object, false);
 	}
 	
+	@Override
 	public TreeAppendable trace(EObject object, boolean useForDebugging) {
 		return trace(object, ILocationInFileProviderExtension.RegionDescription.FULL, useForDebugging);
 	}
@@ -191,10 +195,12 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return new TreeAppendable(state, traceURIConverter, locationProvider, jvmModelAssociations, newData, useForDebugging);
 	}
 	
+	@Override
 	public ITreeAppendable trace(ILocationData location) {
 		return trace(location, false);
 	}
 	
+	@Override
 	public ITreeAppendable trace(ILocationData location, boolean useForDebugging) {
 		return trace(Collections.singleton(location), useForDebugging);
 	}
@@ -249,6 +255,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return createAllLocationData(converter, locationProvider, jvmModelAssociations, object, query, true);
 	}
 	
+	@Override
 	public ITreeAppendable trace(Iterable<? extends EObject> objects) {
 		if (Iterables.isEmpty(objects))
 			throw new IllegalArgumentException("List of objects may not be empty");
@@ -266,6 +273,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return trace(newData, false);
 	}
 	
+	@Override
 	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
 		ITextRegion textRegion = locationProvider.getFullTextRegion(object, feature, indexInList);
 		if (!(textRegion instanceof ITextRegionWithLineInformation)) {
@@ -308,6 +316,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Override
 	public void accept(/* @Nullable */ String text) {
 		children.add(text);
 	}
@@ -335,18 +344,21 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return closed;
 	}
 	
+	@Override
 	public TreeAppendable append(JvmType type) {
 		closeLastChild();
 		state.appendType(type, this);
 		return this;
 	}
 	
+	@Override
 	public ITreeAppendable append(Class<?> type) {
 		closeLastChild();
 		state.appendType(type, this);
 		return this;
 	}
 	
+	@Override
 	public TreeAppendable append(LightweightTypeReference typeRef) {
 		typeRef.accept(lightweightTypeReferenceSerializer);
 		return this;
@@ -364,6 +376,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return this;
 	}
 
+	@Override
 	public ITreeAppendable append(CharSequence content) {
 		if (content instanceof ITreeAppendable) {
 			return appendTreeAppendable((ITreeAppendable)content);
@@ -378,79 +391,96 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		return this;
 	}
 
+	@Override
 	public TreeAppendable newLine() {
 		closeLastChild();
 		state.appendNewLineAndIndentation(this);
 		return this;
 	}
 
+	@Override
 	public TreeAppendable increaseIndentation() {
 		closeLastChild();
 		state.increaseIndentation();
 		return this;
 	}
 
+	@Override
 	public TreeAppendable decreaseIndentation() {
 		closeLastChild();
 		state.decreaseIndentation();
 		return this;
 	}
 
+	@Override
 	@Deprecated
 	public List<String> getImports() {
 		return state.getImports();
 	}
 
+	@Override
 	public void openScope() {
 		state.openScope();
 	}
 
+	@Override
 	public void openPseudoScope() {
 		state.openPseudoScope();
 	}
 
+	@Override
 	public String declareVariable(Object key, String proposedName) {
 		return state.declareVariable(key, proposedName);
 	}
 
+	@Override
 	public String declareSyntheticVariable(Object key, String proposedName) {
 		return state.declareSyntheticVariable(key, proposedName);
 	}
 	
+	@Override
 	public String removeName(Object key) {
 		return state.removeName(key);
 	}
 
+	@Override
 	public String getName(Object key) {
 		return state.getName(key);
 	}
 
+	@Override
 	public boolean hasName(Object key) {
 		return state.hasName(key);
 	}
 
+	@Override
 	public Object getObject(String name) {
 		return state.getObject(name);
 	}
 
+	@Override
 	public boolean hasObject(String name) {
 		return state.hasObject(name);
 	}
 
+	@Override
 	public void closeScope() {
 		state.closeScope();
 	}
 
+	@Override
 	public String getContent() {
 		StringBuilder result = new StringBuilder(8 * 1024);
 		doGetContent(result);
 		return result.toString();
 	}
 	
+	@Override
 	public char charAt(int index) {
 		return toString().charAt(index);
 	}
 	
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		return toString().subSequence(start, end);
 	}
@@ -470,10 +500,12 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		}
 	}
 
+	@Override
 	public int length() {
 		return toString().length();
 	}
 
+	@Override
 	public AbstractTraceRegion getTraceRegion() {
 		if (locationData == null) {
 			throw new IllegalStateException("tree appendable was used without tracing");

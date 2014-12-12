@@ -258,6 +258,7 @@ public class ScopeProviderAccess {
 			return followUp;
 		}
 		
+		@Override
 		public QualifiedName getName() {
 			return name;
 		}
@@ -266,98 +267,119 @@ public class ScopeProviderAccess {
 			return node;
 		}
 
+		@Override
 		public QualifiedName getQualifiedName() {
 			return name;
 		}
 
+		@Override
 		public EObject getEObjectOrProxy() {
 			return null;
 		}
 
+		@Override
 		public URI getEObjectURI() {
 			return null;
 		}
 
+		@Override
 		public EClass getEClass() {
 			return null;
 		}
 
+		@Override
 		public String getUserData(String key) {
 			return null;
 		}
 
+		@Override
 		public String[] getUserDataKeys() {
 			return Strings.EMPTY_ARRAY;
 		}
 
 		/* @NonNull */ 
+		@Override
 		public JvmIdentifiableElement getElementOrProxy() {
 			throw new UnsupportedOperationException();
 		}
 
 		/* @NonNull */ 
+		@Override
 		public String getShadowingKey() {
 			return "ErrorDescription";
 		}
 
+		@Override
 		public int getBucketId() {
 			return 0;
 		}
 
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getImplicitReceiverType() {
 			return null;
 		}
 
 		/* @Nullable */
+		@Override
 		public XExpression getImplicitReceiver() {
 			return null;
 		}
 
 		/* @NonNull */
+		@Override
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
 		
 		/* @NonNull */
+		@Override
 		public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
 		}
 		
+		@Override
 		public int getImplicitReceiverConformanceFlags() {
 			return ConformanceFlags.NONE;
 		}
 
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getSyntacticReceiverType() {
 			return syntacticReceiverType;
 		}
 
 		/* @Nullable */
+		@Override
 		public XExpression getSyntacticReceiver() {
 			return null;
 		}
 		
+		@Override
 		public boolean isSyntacticReceiverPossibleArgument() {
 			return false;
 		}
 
 		/* @NonNull */
+		@Override
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
 		
 		/* @NonNull */
+		@Override
 		public int getSyntacticReceiverConformanceFlags() {
 			return ConformanceFlags.NONE;
 		}
 
 		/* @Nullable */
+		@Override
 		public XExpression getImplicitFirstArgument() {
 			return null;
 		}
 
 		/* @Nullable */
+		@Override
 		public LightweightTypeReference getImplicitFirstArgumentType() {
 			return null;
 		}
@@ -368,6 +390,7 @@ public class ScopeProviderAccess {
 		}
 		
 		/* @NonNull */
+		@Override
 		public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
 			return EnumSet.noneOf(ConformanceHint.class);
 		}
@@ -376,34 +399,42 @@ public class ScopeProviderAccess {
 			return ConformanceFlags.NONE;
 		}
 
+		@Override
 		public boolean isVisible() {
 			return true;
 		}
 
+		@Override
 		public boolean isStatic() {
 			return false;
 		}
 
+		@Override
 		public boolean isExtension() {
 			return false;
 		}
 		
+		@Override
 		public boolean isTypeLiteral() {
 			return false;
 		}
 		
+		@Override
 		public boolean isAnonymousClassConstructorCall() {
 			return false;
 		}
 		
+		@Override
 		public int getNumberOfIrrelevantParameters() {
 			return 0;
 		}
 		
+		@Override
 		public int getNumberOfParameters() {
 			return 0;
 		}
 		
+		@Override
 		public boolean isValidStaticState() {
 			return false;
 		}

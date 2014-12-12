@@ -536,6 +536,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	 */
 	protected void checkFinalFieldInitialization(JvmGenericType type) {
 		final Set<JvmField> finalFields = Sets.newLinkedHashSet(Iterables.filter(type.getDeclaredFields(), new Predicate<JvmField>() {
+			@Override
 			public boolean apply(JvmField input) {
 				return input.isFinal();
 			}
@@ -543,6 +544,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (finalFields.isEmpty())
 			return;
 		final Set<JvmField> initializedFields = Sets.newLinkedHashSet(Iterables.filter(finalFields, new Predicate<JvmField>() {
+			@Override
 			public boolean apply(JvmField input) {
 				return isInitialized(input);
 			}
@@ -1611,6 +1613,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		JvmEnumerationType enumerationType = (JvmEnumerationType) switchType.getType();
 		List<String> expectedEnumerationLiterals = toList(map(enumerationType.getLiterals(), new Functions.Function1<JvmEnumerationLiteral, String>() {
 
+			@Override
 			public String apply(JvmEnumerationLiteral enumerationLiteral) {
 				return enumerationLiteral.getSimpleName();
 			}

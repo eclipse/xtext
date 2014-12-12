@@ -140,6 +140,7 @@ public class EcoreResourceDescriptionManagerTest extends Assert {
 		checkEntry(index, EcorePackage.Literals.ECLASS__ABSTRACT, isNsURI, ePackageName, "EClass", "abstract");
 		checkEntry(index, EcorePackage.Literals.ECLASS__ESUPER_TYPES, isNsURI, ePackageName, "EClass", "eSuperTypes");
 		EOperation isSuperTypeOf = find(EcorePackage.Literals.ECLASS.getEOperations(), new Predicate<EOperation>() {
+			@Override
 			public boolean apply(EOperation input) {
 				return input.getName().equals("isSuperTypeOf");
 			}

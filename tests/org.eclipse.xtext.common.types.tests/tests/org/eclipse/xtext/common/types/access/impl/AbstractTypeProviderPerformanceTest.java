@@ -41,11 +41,13 @@ public abstract class AbstractTypeProviderPerformanceTest {
 	public Iterable<String> getClassNamesToLoad() throws Exception {
 		List<String> resource = MockJavaProjectProvider.readResource("/org/eclipse/xtext/common/types/testSetups/files.list");
 		return filter(transform(resource, new Function<String, String>() {
+			@Override
 			public String apply(String arg) {
 				return "org.eclipse.xtext.common.types.testSetups."+arg.substring(0, arg.length()-".java.txt".length());
 			}
 		}), new Predicate<String>() {
 			// filter out the one with the dollar
+			@Override
 			public boolean apply(String s) {
 				return !s.contains("$");
 			}

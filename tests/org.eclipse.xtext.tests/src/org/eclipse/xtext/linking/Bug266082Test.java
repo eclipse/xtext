@@ -72,58 +72,72 @@ public class Bug266082Test extends AbstractXtextTests {
 		final URIConverter converter = resourceSet.getURIConverter();
 		resourceSet.setURIConverter(new URIConverter() {
 
+			@Override
 			public Map<String, ?> contentDescription(URI uri, Map<?, ?> options) throws IOException {
 				return converter.contentDescription(uri, options);
 			}
 
+			@Override
 			public InputStream createInputStream(URI uri) throws IOException {
 				return new StringInputStream(modelAsString);
 			}
 
+			@Override
 			public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
 				return new StringInputStream(modelAsString);
 			}
 
+			@Override
 			public OutputStream createOutputStream(URI uri) throws IOException {
 				return converter.createOutputStream(uri);
 			}
 
+			@Override
 			public OutputStream createOutputStream(URI uri, Map<?, ?> options) throws IOException {
 				return converter.createOutputStream(uri, options);
 			}
 
+			@Override
 			public void delete(URI uri, Map<?, ?> options) throws IOException {
 				converter.delete(uri, options);
 			}
 
+			@Override
 			public boolean exists(URI uri, Map<?, ?> options) {
 				return true;
 			}
 
+			@Override
 			public Map<String, ?> getAttributes(URI uri, Map<?, ?> options) {
 				return converter.getAttributes(uri, options);
 			}
 
+			@Override
 			public EList<ContentHandler> getContentHandlers() {
 				return converter.getContentHandlers();
 			}
 
+			@Override
 			public URIHandler getURIHandler(URI uri) {
 				return converter.getURIHandler(uri);
 			}
 
+			@Override
 			public EList<URIHandler> getURIHandlers() {
 				return converter.getURIHandlers();
 			}
 
+			@Override
 			public Map<URI, URI> getURIMap() {
 				return converter.getURIMap();
 			}
 
+			@Override
 			public URI normalize(URI uri) {
 				return converter.normalize(uri);
 			}
 
+			@Override
 			public void setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
 				converter.setAttributes(uri, attributes, options);
 			}

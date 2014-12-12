@@ -27,10 +27,12 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 		this.overrideTester = overrideTester;
 	}
 	
+	@Override
 	public boolean isBottomInContext() {
 		return true;
 	}
 
+	@Override
 	public IResolvedOperation getAsBottom() {
 		return this;
 	}
@@ -45,6 +47,7 @@ public class BottomResolvedOperation extends AbstractResolvedOperation {
 		return overrideTester;
 	}
 	
+	@Override
 	public IOverrideCheckResult getOverrideCheckResult() {
 		return new LazyOverrideCheckResult(this, getDeclaration(), OverrideCheckDetails.CURRENT) {
 			@Override

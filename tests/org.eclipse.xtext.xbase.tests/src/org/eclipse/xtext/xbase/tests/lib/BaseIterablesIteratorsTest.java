@@ -79,6 +79,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindFirst_empty() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return true;
 			}
@@ -91,6 +92,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindFirst_noMatch() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return false;
 			}
@@ -103,6 +105,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindFirst_allMatches() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return true;
 			}
@@ -115,6 +118,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindFirst_oneMatch() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return second.equals(p);
 			}
@@ -128,6 +132,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testFindFirst_exceptionInFilter() {
 		final RuntimeException expectedException = new RuntimeException();
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				throw expectedException;
 			}
@@ -145,6 +150,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testFindFirst_exceptionInFilter_emptyInput() {
 		final RuntimeException expectedException = new RuntimeException();
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				throw expectedException;
 			}
@@ -168,6 +174,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testFindFirst_NPE_noInput() {
 		try {
 			findLast(null, new Functions.Function1<Integer, Boolean>() {
+				@Override
 				public Boolean apply(Integer p) {
 					return true;
 				}
@@ -182,6 +189,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindLast_empty() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return true;
 			}
@@ -194,6 +202,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindLast_noMatch() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return false;
 			}
@@ -206,6 +215,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindLast_allMatches() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return true;
 			}
@@ -218,6 +228,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	
 	@Test public void testFindLast_oneMatch() {
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				return second.equals(p);
 			}
@@ -231,6 +242,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testFindLast_exceptionInFilter() {
 		final RuntimeException expectedException = new RuntimeException();
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				throw expectedException;
 			}
@@ -248,6 +260,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testFindLast_exceptionInFilter_emptyInput() {
 		final RuntimeException expectedException = new RuntimeException();
 		Function1<Integer, Boolean> filter = new Functions.Function1<Integer, Boolean>() {
+			@Override
 			public Boolean apply(Integer p) {
 				throw expectedException;
 			}
@@ -272,6 +285,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testFindLast_NPE_noInput() {
 		try {
 			findLast(null, new Functions.Function1<Integer, Boolean>() {
+				@Override
 				public Boolean apply(Integer p) {
 					return true;
 				}
@@ -371,6 +385,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 			this.values = values;
 		}
 		
+		@Override
 		public void apply(Integer value, Integer index) {
 			assertEquals(expectedIndex, index.intValue());
 			assertEquals(values[expectedIndex], value);
@@ -443,6 +458,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testTakeWhile() {
 		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
 			IterableOrIterator taken = takeWhile(testMe, new Function1<Integer, Boolean>() {
+				@Override
 				public Boolean apply(Integer p) {
 					return p <= 3;
 				}
@@ -454,6 +470,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testDropWhile() {
 		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
 			IterableOrIterator tail = dropWhile(testMe, new Function1<Integer, Boolean>() {
+				@Override
 				public Boolean apply(Integer p) {
 					return p <= 3;
 				}
@@ -507,6 +524,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testMinBy() {
 		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
 			Integer min = minBy(testMe, new Function1<Integer, String>() {
+				@Override
 				public String apply(Integer p) {
 					return Integer.toBinaryString(p);
 				}
@@ -518,6 +536,7 @@ public abstract class BaseIterablesIteratorsTest<IterableOrIterator> extends Ass
 	@Test public void testMaxBy() {
 		for (IterableOrIterator testMe : testData(first, second, third, forth, fifth)) {
 			Integer max = maxBy(testMe, new Function1<Integer, String>() {
+				@Override
 				public String apply(Integer p) {
 					return Integer.toBinaryString(p);
 				}

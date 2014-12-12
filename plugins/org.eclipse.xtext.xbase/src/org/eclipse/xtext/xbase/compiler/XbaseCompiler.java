@@ -872,6 +872,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(";");
 		} else if (isVariableDeclarationRequired(expr, b)) {
 			Later later = new Later() {
+				@Override
 				public void exec(ITreeAppendable appendable) {
 					constructorCallToJavaExpression(expr, appendable);
 				}

@@ -30,35 +30,42 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualExpressionType() {
 		return resolution.getActualType(expression);
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getReturnType() {
 		return resolution.getReturnType(expression);
 	}
 
 	/* @NonNull */
+	@Override
 	public XExpression getExpression() {
 		return expression;
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedExpressionType() {
 		return resolution.getExpectedType(expression);
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedReturnType() {
 		return resolution.getExpectedReturnType(expression);
 	}
 	
 	/* @NonNull */
+	@Override
 	public EnumSet<ConformanceHint> getConformanceHints() {
 		return ConformanceHint.fromFlags(getConformanceFlags());
 	}
 	
+	@Override
 	public int getConformanceFlags() {
 		TypeData typeData = resolution.getTypeData(expression, false);
 		if (typeData == null)
@@ -67,10 +74,12 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 	}
 
 	/* @NonNull */
+	@Override
 	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
 		return ConformanceHint.fromFlags(getCheckedConformanceFlags());
 	}
 	
+	@Override
 	public int getCheckedConformanceFlags() {
 		TypeData typeData = resolution.getTypeData(expression, false);
 		if (typeData == null)

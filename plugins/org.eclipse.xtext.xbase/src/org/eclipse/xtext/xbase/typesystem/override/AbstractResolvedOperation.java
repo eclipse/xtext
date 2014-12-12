@@ -40,6 +40,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		super(declaration, contextType);
 	}
 	
+	@Override
 	public List<IResolvedOperation> getOverriddenAndImplementedMethods() {
 		if (validOverrides != null)
 			return validOverrides;
@@ -59,6 +60,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	}
 	
 	/* @Nullable */
+	@Override
 	public IResolvedOperation getOverriddenMethod() {
 		if (!getDeclaration().isAbstract() && getDeclaration().getVisibility() != JvmVisibility.PRIVATE) {
 			List<IResolvedOperation> overriddenAndImplemented = getOverriddenAndImplementedMethods();
@@ -71,6 +73,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		return null;
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getIllegallyDeclaredExceptions() {
 		if (getDeclaration().getExceptions().isEmpty())
 			return Collections.emptyList();
@@ -123,6 +126,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		return result;
 	}
 
+	@Override
 	public List<JvmOperation> getOverriddenAndImplementedMethodCandidates() {
 		if (overrideCandidates != null)
 			return overrideCandidates;
@@ -145,14 +149,17 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		return overrideCandidates = Collections.unmodifiableList(result);
 	}
 	
+	@Override
 	public IOverrideCheckResult isOverridingOrImplementing(final JvmOperation operation) {
 		return getOverrideTester().isSubsignature(this, operation, true);
 	}
 	
+	@Override
 	public List<JvmTypeParameter> getResolvedTypeParameters() {
 		return getBottom().getTypeParameters();
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getResolvedTypeParameterConstraints(int idx) throws IndexOutOfBoundsException {
 		JvmTypeParameter typeParameter = getResolvedTypeParameters().get(idx);
 		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
@@ -164,6 +171,7 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 		return result;
 	}
 
+	@Override
 	public LightweightTypeReference getResolvedReturnType() {
 		if (returnType != null)
 			return returnType;

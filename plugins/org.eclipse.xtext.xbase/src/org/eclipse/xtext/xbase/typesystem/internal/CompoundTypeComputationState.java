@@ -51,6 +51,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		this.components = components;
 	}
 
+	@Override
 	public List<? extends IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {
 		List<IConstructorLinkingCandidate> result = Lists.newArrayList();
 		for (ITypeComputationState component : components) {
@@ -59,6 +60,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return result;
 	}
 
+	@Override
 	public List<? extends IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall) {
 		List<IFeatureLinkingCandidate> result = Lists.newArrayList();
 		for (ITypeComputationState component : components) {
@@ -67,6 +69,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return result;
 	}
 
+	@Override
 	public ITypeComputationState withExpectation(LightweightTypeReference expectation) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -75,12 +78,14 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
+	@Override
 	public void refineExpectedType(XExpression expression, LightweightTypeReference expectation) {
 		for (ITypeComputationState component : components) {
 			component.refineExpectedType(expression, expectation);
 		}
 	}
 	
+	@Override
 	public ITypeComputationState withRootExpectation(LightweightTypeReference expectation) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -89,6 +94,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
+	@Override
 	public ITypeComputationState withoutRootExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -97,6 +103,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
+	@Override
 	public ITypeComputationState withNonVoidExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -105,6 +112,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
+	@Override
 	public ITypeComputationState withReturnExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -113,6 +121,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
+	@Override
 	public ITypeComputationState withoutExpectation() {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -121,6 +130,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
+	@Override
 	public ITypeComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -129,6 +139,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
+	@Override
 	public ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
 		if (expression == null) {
 			throw new IllegalArgumentException("XExpression may not be null");
@@ -162,6 +173,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return 0;
 	}
 
+	@Override
 	public ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -170,6 +182,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
+	@Override
 	public ITypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference type, boolean addToChildScope) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -178,36 +191,42 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
+	@Override
 	public void addExtensionToCurrentScope(JvmIdentifiableElement extensionProvider) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addExtensionToCurrentScope(extensionProvider);
 		}
 	}
 	
+	@Override
 	public void addTypeToStaticImportScope(JvmDeclaredType type) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addTypeToStaticImportScope(type);
 		}
 	}
 	
+	@Override
 	public void addImports(ITypeImporter.Client importer) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addImports(importer);
 		}
 	}
 	
+	@Override
 	public void addTypeToStaticExtensionImportScope(JvmDeclaredType type) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addTypeToStaticExtensionImportScope(type);
 		}
 	}
 	
+	@Override
 	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addExtensionsToCurrentScope(extensionProviders);
 		}
 	}
 
+	@Override
 	public ITypeAssigner assignTypes() {
 		TypeAssigner[] array = new TypeAssigner[components.length];
 		for (int i = 0; i < array.length; i++) {
@@ -216,12 +235,14 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeAssigner(owner, array);
 	}
 	
+	@Override
 	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addDiagnostic(diagnostic);
 		}
 	}
 
+	@Override
 	public ITypeReferenceOwner getReferenceOwner() {
 		return owner;
 	}
@@ -230,18 +251,21 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return owner.toLightweightTypeReference(reference);
 	}
 
+	@Override
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addLocalToCurrentScope(element);
 		}
 	}
 	
+	@Override
 	public void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].assignType(name, rawType, actualType);
 		}
 	}
 
+	@Override
 	public List<? extends ITypeExpectation> getExpectations() {
 		List<ITypeExpectation> result = Lists.newArrayList();
 		for (int i = 0; i < components.length; i++) {
@@ -250,52 +274,61 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return result;
 	}
 	
+	@Override
 	public void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].acceptCandidate(expression, candidate);
 		}
 	}
 
+	@Override
 	public void acceptActualType(LightweightTypeReference type) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].acceptActualType(type);
 		}
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, int flags) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].acceptActualType(type, flags);
 		}
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].acceptActualType(type, hints);
 		}
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].acceptActualType(type, hints);
 		}
 	}
 
+	@Override
 	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].reassignType(refinable, type);
 		}
 	}
 
+	@Override
 	public void discardReassignedTypes(JvmIdentifiableElement refinable) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].discardReassignedTypes(refinable);
 		}
 	}
 	
+	@Override
 	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getExpectedExceptions() {
 		List<LightweightTypeReference> result = Lists.newArrayList();
 		for (int i = 0; i < components.length; i++) {
@@ -304,6 +337,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return result;
 	}
 	
+	@Override
 	public ITypeComputationState withExpectedExceptions(List<LightweightTypeReference> declaredExceptionTypes) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
@@ -312,30 +346,35 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 	
+	@Override
 	public Severity getSeverity(String issueCode) {
 		for (AbstractTypeComputationState state : components)
 			return state.getSeverity(issueCode);
 		throw new IllegalStateException("no components available.");
 	}
 
+	@Override
 	public boolean isIgnored(String issueCode) {
 		for (AbstractTypeComputationState state : components)
 			return state.isIgnored(issueCode);
 		throw new IllegalStateException("no components available.");
 	}
 	
+	@Override
 	public void withinScope(EObject context) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].withinScope(context);
 		}
 	}
 	
+	@Override
 	public void afterScope(EObject context) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].afterScope(context);
 		}
 	}
 	
+	@Override
 	public void rewriteScope(EObject context) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].rewriteScope(context);

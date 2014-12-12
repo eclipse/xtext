@@ -174,6 +174,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		}
 	}
 
+	@Override
 	public IEvaluationResult evaluate(XExpression expression) {
 		return evaluate(expression, createContext(), CancelIndicator.NullImpl);
 	}
@@ -182,6 +183,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		return contextProvider.get();
 	}
 	
+	@Override
 	public IEvaluationResult evaluate(XExpression expression, IEvaluationContext context, CancelIndicator indicator) {
 		try {
 			Object result = internalEvaluate(expression, context,indicator!=null?indicator:CancelIndicator.NullImpl);

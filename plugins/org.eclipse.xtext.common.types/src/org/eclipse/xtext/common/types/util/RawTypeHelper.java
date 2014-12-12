@@ -298,11 +298,13 @@ public class RawTypeHelper implements IRawTypeHelper {
 		}
 	}
 
+	@Override
 	public List<JvmType> getAllRawTypes(JvmTypeReference reference, Resource resource) {
 		List<JvmType> result = typeImplementation.getAllRawTypes(reference, resource);
 		return result;
 	}
 
+	@Override
 	public JvmTypeReference getRawTypeReference(JvmTypeReference reference, Resource resource) {
 		JvmTypeReference result = typeReferenceImplementation.getRawTypeReference(reference, resource);
 		return result;

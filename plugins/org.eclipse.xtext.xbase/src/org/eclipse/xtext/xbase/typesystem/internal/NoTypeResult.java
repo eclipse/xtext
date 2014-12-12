@@ -31,43 +31,52 @@ public class NoTypeResult implements ITypeComputationResult {
 		this.owner = owner;
 	}
 	
+	@Override
 	public LightweightTypeReference getReturnType() {
 		return owner.newAnyTypeReference();
 	}
 	
 	/* @Nullable */
+	@Override
 	public XExpression getExpression() {
 		return null;
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualExpressionType() {
 		return null;
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
+	@Override
 	public LightweightTypeReference getExpectedReturnType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 	
 	/* @NonNull */
+	@Override
 	public EnumSet<ConformanceHint> getConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 	
+	@Override
 	public int getConformanceFlags() {
 		return ConformanceFlags.NONE;
 	}
 	
 	/* @NonNull */
+	@Override
 	public EnumSet<ConformanceHint> getCheckedConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
 	
+	@Override
 	public int getCheckedConformanceFlags() {
 		return ConformanceFlags.NONE;
 	}

@@ -46,6 +46,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 	
 	private PolymorphicDispatcher<Collection<ExitPoint>> dispatcher = PolymorphicDispatcher.createForSingleTarget("_exitPoints", this);
 	
+	@Override
 	public boolean isEarlyExit(XExpression expression) {
 		Collection<ExitPoint> exitPoints = getExitPoints(expression);
 		if (isNotEmpty(exitPoints))
@@ -57,6 +58,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		return exitPoints != null && !exitPoints.isEmpty();
 	}
 
+	@Override
 	public Collection<ExitPoint> getExitPoints(XExpression expression) {
 		if (expression == null)
 			return Collections.emptyList();

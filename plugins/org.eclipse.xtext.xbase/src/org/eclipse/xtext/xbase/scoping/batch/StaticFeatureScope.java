@@ -57,6 +57,7 @@ public class StaticFeatureScope extends AbstractStaticOrInstanceFeatureScope {
 	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		final Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 		processFeatureNames(name, new NameAcceptor() {
+			@Override
 			public void accept(String simpleName, int order) {
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {

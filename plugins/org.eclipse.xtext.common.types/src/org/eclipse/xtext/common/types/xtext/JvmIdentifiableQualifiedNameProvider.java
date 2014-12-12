@@ -23,6 +23,7 @@ public class JvmIdentifiableQualifiedNameProvider extends IQualifiedNameProvider
 	@Inject
 	private IQualifiedNameConverter converter;
 	
+	@Override
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		if (obj instanceof JvmIdentifiableElement) {
 			return converter.toQualifiedName(((JvmIdentifiableElement) obj).getQualifiedName('.'));

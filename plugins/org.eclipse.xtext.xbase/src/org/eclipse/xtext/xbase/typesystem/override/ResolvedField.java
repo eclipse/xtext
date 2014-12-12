@@ -21,18 +21,22 @@ public class ResolvedField extends AbstractResolvedFeature<JvmField> implements 
 		super(field, contextType);
 	}
 
+	@Override
 	public String getResolvedSignature() {
 		return getDeclaration().getSimpleName();
 	}
 
+	@Override
 	public String getSimpleSignature() {
 		return getDeclaration().getSimpleName();
 	}
 
+	@Override
 	public String getResolvedErasureSignature() {
 		return getDeclaration().getSimpleName();
 	}
 
+	@Override
 	public LightweightTypeReference getResolvedType() {
 		if (resolvedType != null)
 			return resolvedType;

@@ -58,10 +58,12 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		resolver.setAllRootedExpressions(allRootedExpressions);
 	}
 	
+	@Override
 	public void initializeFrom(EObject root) {
 		throw new IllegalStateException();
 	}
 	
+	@Override
 	public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
 		try {
 			this.monitor = monitor;
@@ -111,6 +113,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		throw new IndexOutOfBoundsException("Index: "+idx+", Size: "+delegates.length);
 	}
 
+	@Override
 	public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
 		List<AbstractDiagnostic> result = Lists.newArrayList();
 		for(IResolvedTypes delegate: this) {
@@ -119,11 +122,13 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return result;
 	}
 	
+	@Override
 	public boolean isRefinedType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.isRefinedType(expression);
 	}
 	
+	@Override
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
 		List<ILinkingCandidate> result = Lists.newArrayList();
 		for(IResolvedTypes delegate: this) {
@@ -132,6 +137,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return result;
 	}
 	
+	@Override
 	public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
 		List<IAmbiguousLinkingCandidate> result = Lists.newArrayList();
 		for(IResolvedTypes delegate: this) {
@@ -141,6 +147,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getActualType(expression);
@@ -166,23 +173,27 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		return IResolvedTypes.NULL;
 	}
 	
+	@Override
 	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		IResolvedTypes delegate = getDelegate(context);
 		return delegate.getExpressionScope(context, anchor);
 	}
 	
+	@Override
 	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		IResolvedTypes delegate = getDelegate(context);
 		return delegate.hasExpressionScope(context, anchor);
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getReturnType(expression);
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		for(int i = 0; i < resolvers.size(); i++) {
 			AbstractRootedReentrantTypeResolver resolver = resolvers.get(i);
@@ -195,33 +206,39 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getExpectedType(expression);
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
 		IResolvedTypes delegate = getDelegate(obj);
 		return delegate.getThrownExceptions(obj);
 	}
 
+	@Override
 	public boolean isVoidTypeAllowed(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.isVoidTypeAllowed(expression);
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getExpectedReturnType(expression);
 	}
 
+	@Override
 	public List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 		IResolvedTypes delegate = getDelegate(expression);
 		return delegate.getActualTypeArguments(expression);
 	}
 
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		if (featureCall == null)
 			return null;
@@ -230,6 +247,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 	
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 		if (constructorCall == null)
 			return null;
@@ -238,6 +256,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 	
 	/* @Nullable */
+	@Override
 	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		if (featureCall == null)
 			return null;
@@ -246,6 +265,7 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 	
 	/* @Nullable */
+	@Override
 	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 		if (constructorCall == null)
 			return null;

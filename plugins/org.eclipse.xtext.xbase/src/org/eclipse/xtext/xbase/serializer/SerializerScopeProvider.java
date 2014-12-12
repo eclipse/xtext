@@ -76,6 +76,7 @@ public class SerializerScopeProvider implements IScopeProvider, IFeatureNames {
 	@Inject 
 	private IBatchScopeProvider delegate;
 	
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (delegate.isFeatureCallScope(reference)) {
 			IScope result = createFeatureCallSerializationScope(context);

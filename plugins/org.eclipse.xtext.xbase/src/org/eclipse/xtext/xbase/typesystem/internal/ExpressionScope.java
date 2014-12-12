@@ -70,20 +70,24 @@ public class ExpressionScope implements IExpressionScope {
 		return new IExpressionScope() {
 
 			/* @NonNull */
+			@Override
 			public IScope getFeatureScope() {
 				return ExpressionScope.this.getFeatureScope(anchor);
 			}
 
 			/* @NonNull */
+			@Override
 			public IScope getFeatureScope(/* @Nullable */ XAbstractFeatureCall currentFeatureCall) {
 				return ExpressionScope.this.getFeatureScope(currentFeatureCall, anchor);
 			}
 
 			/* @NonNull */
+			@Override
 			public List<String> getTypeNamePrefix() {
 				return ExpressionScope.this.getTypeNamePrefix();
 			}
 
+			@Override
 			public boolean isPotentialTypeLiteral() {
 				return ExpressionScope.this.isPotentialTypeLiteral();
 			}
@@ -184,11 +188,13 @@ public class ExpressionScope implements IExpressionScope {
 	}
 	
 	/* @NonNull */
+	@Override
 	public IScope getFeatureScope() {
 		return getFeatureScope(this.anchor);
 	}
 	
 	/* @NonNull */
+	@Override
 	public IScope getFeatureScope(/* @Nullable */ XAbstractFeatureCall currentFeatureCall) {
 		return getFeatureScope(currentFeatureCall, this.anchor);
 	}
@@ -206,10 +212,12 @@ public class ExpressionScope implements IExpressionScope {
 	}
 
 	/* @NonNull */
+	@Override
 	public List<String> getTypeNamePrefix() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public boolean isPotentialTypeLiteral() {
 		return false;
 	}
@@ -277,10 +285,12 @@ public class ExpressionScope implements IExpressionScope {
 			this.owner = owner;
 		}
 		
+		@Override
 		public IEObjectDescription getSingleElement(QualifiedName name) {
 			return delegate.getSingleElement(name);
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 			ensureInitialized();
 			List<IEObjectDescription> result = allElementsByName.get(name);
@@ -290,14 +300,17 @@ public class ExpressionScope implements IExpressionScope {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public IEObjectDescription getSingleElement(EObject object) {
 			return delegate.getSingleElement(object);
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getElements(EObject object) {
 			return delegate.getElements(object);
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getAllElements() {
 			ensureInitialized();
 			return allElements;

@@ -869,6 +869,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		XtextResource resource = doGetResource(new org.eclipse.xtext.util.StringInputStream("A: value=B; B: name=ID;"),URI.createURI("testBug_293110"));
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		Collection<Diagnostic> runtimeExceptions = Collections2.filter(diagnostic.getChildren(), new Predicate<Diagnostic>(){
+			@Override
 			public boolean apply(Diagnostic input) {
 				return input.getException() instanceof RuntimeException;
 			}});

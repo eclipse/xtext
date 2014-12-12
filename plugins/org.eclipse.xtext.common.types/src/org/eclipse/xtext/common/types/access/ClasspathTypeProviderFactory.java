@@ -28,6 +28,7 @@ public class ClasspathTypeProviderFactory extends AbstractTypeProviderFactory {
 		this.services = services;
 	}
 	
+	@Override
 	public ClasspathTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");

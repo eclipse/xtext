@@ -26,10 +26,12 @@ public class TypeAssigner implements ITypeAssigner {
 		this.state = state;
 	}
 
+	@Override
 	public AbstractTypeComputationState getForkedState() {
 		return state;
 	}
 
+	@Override
 	public void assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference actualType) {
 		assignType(element, actualType, true);
 	}
@@ -44,10 +46,12 @@ public class TypeAssigner implements ITypeAssigner {
 			state.addLocalToCurrentScope(element);
 	}
 
+	@Override
 	public ITypeReferenceOwner getReferenceOwner() {
 		return state.getReferenceOwner();
 	}
 
+	@Override
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
 		return getReferenceOwner().toLightweightTypeReference(reference);
 	}

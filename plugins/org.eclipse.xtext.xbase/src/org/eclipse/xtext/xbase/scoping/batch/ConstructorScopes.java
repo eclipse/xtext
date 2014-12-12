@@ -77,6 +77,7 @@ public class ConstructorScopes {
 	protected IScope createAnonymousClassConstructorScope(final JvmGenericType anonymousType, EObject context, final IFeatureScopeSession session) {
 		// we don't care about the type scope since the type is well known here
 		IVisibilityHelper protectedIsVisible = new IVisibilityHelper() {
+			@Override
 			public boolean isVisible(/* @NonNull */ JvmMember member) {
 				return member.getVisibility() != JvmVisibility.PRIVATE;
 			}

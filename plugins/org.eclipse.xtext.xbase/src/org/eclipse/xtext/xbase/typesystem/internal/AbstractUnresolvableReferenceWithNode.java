@@ -35,6 +35,7 @@ public abstract class AbstractUnresolvableReferenceWithNode extends AbstractUnre
 		this.text = text;
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		Resource resource = getExpression().eResource();
 		if (resource instanceof LazyLinkingResource) {
@@ -76,6 +77,7 @@ public abstract class AbstractUnresolvableReferenceWithNode extends AbstractUnre
 		return node;
 	}
 
+	@Override
 	public String getLinkText() {
 		return text;
 	}

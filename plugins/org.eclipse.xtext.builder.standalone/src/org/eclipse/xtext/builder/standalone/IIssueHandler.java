@@ -31,6 +31,7 @@ public interface IIssueHandler {
 		 *         {@link Severity#ERROR} was found, <code>false</code>
 		 *         otherwise
 		 */
+		@Override
 		public boolean handleIssue(Iterable<Issue> issues) {
 			boolean errorFree = true;
 			for (Issue issue : issues) {

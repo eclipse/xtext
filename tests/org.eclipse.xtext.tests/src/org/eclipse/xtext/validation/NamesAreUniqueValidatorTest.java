@@ -59,6 +59,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		validator.setHelper(this);
 		final DefaultResourceDescriptionStrategy strategy  = new DefaultResourceDescriptionStrategy();
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				return QualifiedName.create(SimpleAttributeResolver.NAME_RESOLVER.getValue(obj));
 			}
@@ -87,10 +88,12 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		assertEquals(1, callCount);
 	}
 
+	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, ValidationMessageAcceptor acceptor) {
 		fail("Unexpected call");
 	}
 
+	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, CancelIndicator cancelIndicator,
 			ValidationMessageAcceptor acceptor) {
 		callCount++;
@@ -99,6 +102,7 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		assertSame(validator, acceptor);
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		return new DefaultResourceServiceProvider() {
 			@Override
@@ -108,18 +112,22 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		}; 
 	}
 
+	@Override
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		return null;
 	}
 
+	@Override
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return null;
 	}
 
+	@Override
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return null;
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}

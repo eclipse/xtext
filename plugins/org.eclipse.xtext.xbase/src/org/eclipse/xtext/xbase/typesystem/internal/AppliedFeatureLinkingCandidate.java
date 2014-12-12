@@ -30,48 +30,59 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public void applyToComputationState() {
 		// nothing to do
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		// nothing to do
 	}
 	
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
 		return true;
 	}
 
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}
 
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getFeature() {
 		return delegate.getFeature();
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		return delegate.getTypeArguments();
 	}
 	
+	@Override
 	public XExpression getExpression() {
 		return delegate.getExpression();
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return delegate.getFeatureCall();
 	}
 
+	@Override
 	public boolean isStatic() {
 		return delegate.isStatic();
 	}
 
+	@Override
 	public boolean isExtension() {
 		return delegate.isExtension();
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return delegate.isTypeLiteral();
 	}

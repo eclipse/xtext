@@ -134,6 +134,7 @@ public class ExtendedEarlyExitComputer {
 	protected abstract class AbstractThrownExceptionDelegate implements IThrownExceptionDelegate {
 		private Switch<Boolean> collector;
 
+		@Override
 		public void collectThrownExceptions(XExpression expression) {
 			if (expression != null) {
 				TreeIterator<EObject> iterator = EcoreUtil2.eAll(expression);
@@ -145,6 +146,7 @@ public class ExtendedEarlyExitComputer {
 			}
 		}
 
+		@Override
 		public IThrownExceptionDelegate catchExceptions(List<LightweightTypeReference> caughtExceptions) {
 			if (caughtExceptions.isEmpty()) {
 				return this;
@@ -175,16 +177,19 @@ public class ExtendedEarlyExitComputer {
 			this.seen = Sets.newHashSet();
 		}
 
+		@Override
 		public LightweightTypeReference toLightweightReference(JvmTypeReference exception) {
 			return owner.toLightweightTypeReference(exception);
 		}
 
+		@Override
 		public void accept(LightweightTypeReference type) {
 			if (type != null && seen.add(type.getIdentifier())) {
 				result.add(type);
 			}
 		}
 
+		@Override
 		public LightweightTypeReference getActualType(XExpression expr) {
 			return types.getActualType(expr);
 		}
@@ -202,10 +207,12 @@ public class ExtendedEarlyExitComputer {
 			
 		}
 		
+		@Override
 		public LightweightTypeReference toLightweightReference(JvmTypeReference exception) {
 			return delegate.toLightweightReference(exception);
 		}
 
+		@Override
 		public void accept(LightweightTypeReference type) {
 			for(LightweightTypeReference caughtException: caughtExceptions) {
 				if (type.isSubtypeOf(caughtException.getType())) {
@@ -215,6 +222,7 @@ public class ExtendedEarlyExitComputer {
 			delegate.accept(type);
 		}
 
+		@Override
 		public LightweightTypeReference getActualType(XExpression expr) {
 			return delegate.getActualType(expr);
 		}

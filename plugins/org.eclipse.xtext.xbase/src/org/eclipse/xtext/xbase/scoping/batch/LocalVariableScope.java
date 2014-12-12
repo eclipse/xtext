@@ -86,6 +86,7 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 			return localElements;
 		}
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> get() {
 				return getParent().getElements(name);
 			}

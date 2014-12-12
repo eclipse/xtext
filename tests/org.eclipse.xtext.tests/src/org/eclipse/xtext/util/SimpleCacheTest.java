@@ -31,6 +31,7 @@ public class SimpleCacheTest extends Assert implements Function<String, String>{
 		callCount = 0;
 	}
 
+	@Override
 	public String apply(String param) {
 		assertEquals(expectedParam, param);
 		callCount++;

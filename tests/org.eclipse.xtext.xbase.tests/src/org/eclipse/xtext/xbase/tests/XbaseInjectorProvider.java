@@ -42,6 +42,7 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector() {
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
@@ -55,10 +56,12 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		return new XbaseTestStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

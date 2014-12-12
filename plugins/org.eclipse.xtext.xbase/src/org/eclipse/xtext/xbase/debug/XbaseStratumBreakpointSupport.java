@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  */
 public class XbaseStratumBreakpointSupport implements IStratumBreakpointSupport {
 
+	@Override
 	public boolean isValidLineForBreakPoint(XtextResource resource, int line) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null)

@@ -53,10 +53,12 @@ public class StaticExtensionFeatureDescription extends BucketedEObjectDescriptio
 		return ConformanceFlags.NONE;
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return true;
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return true;
 	}

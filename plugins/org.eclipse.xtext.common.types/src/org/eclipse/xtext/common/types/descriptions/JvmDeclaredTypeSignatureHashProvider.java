@@ -67,6 +67,7 @@ public class JvmDeclaredTypeSignatureHashProvider {
 				return type.getIdentifier();
 		}
 		return cache.get(Tuples.create(HASH_CACHE_KEY, type), type.eResource(), new Provider<String>() {
+			@Override
 			public String get() {
 				return signatureBuilderProvider.get().appendSignature(type).hash();
 			}

@@ -42,6 +42,7 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractFeatureScopeSession implements IFeatureScopeSession {
 
+	@Override
 	public IScope getScope(EObject context, EReference reference, IResolvedTypes types) {
 		if (getFeatureScopes().isFeatureCallScope(reference)) {
 			return createFeatureCallScope(context, reference, types);
@@ -54,6 +55,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		}
 	}
 	
+	@Override
 	public IFeatureScopeSession addTypesToStaticScope(List<? extends JvmType> staticFeatureProviders,
 			List<? extends JvmType> extensionProviders) {
 		if (staticFeatureProviders.isEmpty() && extensionProviders.isEmpty())
@@ -62,6 +64,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return result;
 	}
 	
+	@Override
 	public IFeatureScopeSession addImports(ITypeImporter.Client importer) {
 		return new TypeImporter().process(this, importer);
 	}
@@ -77,6 +80,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	 */
 	protected abstract int getId();
 
+	@Override
 	public IFeatureScopeSession addToExtensionScope(Map<XExpression, LightweightTypeReference> extensionProviders) {
 		if (extensionProviders.isEmpty())
 			return this;
@@ -84,43 +88,53 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return result;
 	}
 	
+	@Override
 	public IFeatureScopeSession addNestedTypesToScope(JvmDeclaredType type) {
 		return new FeatureScopeSessionWithNestedTypes(this, type);
 	}
 	
+	@Override
 	public List<JvmDeclaredType> getEnclosingTypes() {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public List<JvmDeclaredType> getNestedTypeDeclarators() {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public IFeatureScopeSession getNextCaptureLayer() {
 		return null;
 	}
 	
+	@Override
 	public IFeatureScopeSession toInstanceContext() {
 		return new InstanceFeatureScopeSession(this);
 	}
 	
+	@Override
 	public IFeatureScopeSession toConstructorContext() {
 		return new ConstructorFeatureScopeSession(this);
 	}
 	
+	@Override
 	public IFeatureScopeSession dropLocalElements() {
 		return new FeatureScopeSessionWithoutLocalElements(this);
 	}
 	
+	@Override
 	public IFeatureScopeSession captureLocalElements() {
 		return new FeatureScopeSessionWithCapturedLocalElements(this);
 	}
 
+	@Override
 	public IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element, ITypeReferenceOwner owner) {
 		IFeatureScopeSession result = addLocalElements(Collections.singletonMap(name, element), owner);
 		return result;
 	}
 	
+	@Override
 	public IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner) {
 		if (elements.isEmpty())
 			return this;
@@ -171,6 +185,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		return getTypeScopes().createTypeScope(context, reference, this, resolvedTypes);
 	}
 	
+	@Override
 	public List<IEObjectDescription> getLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayListWithCapacity(3);
 		addLocalElements(result);
@@ -183,14 +198,17 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	protected void addLocalElements(List<IEObjectDescription> result) {
 	}
 	
+	@Override
 	public List<TypeBucket> getStaticallyImportedTypes() {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public List<TypeBucket> getStaticallyImportedExtensionTypes() {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public List<ExpressionBucket> getExtensionProviders() {
 		return Collections.emptyList();
 	}

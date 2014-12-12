@@ -257,6 +257,7 @@ public class ConcurrentAccessTest extends Assert {
 				@Override
 				public void run() {
 					boolean failed = stateAccess.readOnly(new IUnitOfWork<Boolean, EPackage>() {
+						@Override
 						public Boolean exec(EPackage state) throws Exception {
 							return doResolveAllSupertypes(pack);
 						}

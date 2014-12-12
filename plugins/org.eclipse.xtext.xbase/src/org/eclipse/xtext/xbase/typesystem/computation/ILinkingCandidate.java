@@ -49,6 +49,7 @@ public interface ILinkingCandidate extends IApplicableCandidate {
 	 * {@link EcoreUtil#resolve(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject) resolve}
 	 * of EMF. This implies that the linked feature call may still point to a proxy afterwards.
 	 */
+	@Override
 	void applyToModel(IResolvedTypes resolvedTypes);
 	
 	/**

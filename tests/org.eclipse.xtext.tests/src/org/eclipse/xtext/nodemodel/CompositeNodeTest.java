@@ -109,6 +109,7 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 	
 	protected Iterable<ILeafNode> getReverseLeafNodes(final AbstractNode node) {
 		return Iterables.filter(new Iterable<INode>() {
+			@Override
 			public Iterator<INode> iterator() {
 				return new AbstractIterator<INode>() {
 

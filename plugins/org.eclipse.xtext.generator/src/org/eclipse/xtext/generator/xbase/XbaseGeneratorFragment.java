@@ -106,6 +106,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 		Set<AbstractRule> usedRules = newHashSet();
 		new UsedRulesFinder(usedRules).compute(grammar);
 		return any(usedRules, new Predicate<AbstractRule>() {
+			@Override
 			public boolean apply(AbstractRule rule) {
 				return equal(rule.getName(), "XImportSection") 
 						&& equal(GrammarUtil.getGrammar(rule).getName(), "org.eclipse.xtext.xbase.Xtype");

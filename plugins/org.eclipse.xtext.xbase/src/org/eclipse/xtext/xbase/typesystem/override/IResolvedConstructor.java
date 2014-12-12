@@ -24,6 +24,7 @@ public interface IResolvedConstructor extends IResolvedExecutable {
 	 * 
 	 * @return the declaration.
 	 */
+	@Override
 	JvmConstructor getDeclaration();
 	
 	/**
@@ -33,6 +34,7 @@ public interface IResolvedConstructor extends IResolvedExecutable {
 	 * 
 	 * @return the list of declared type parameters.
 	 */
+	@Override
 	List<JvmTypeParameter> getTypeParameters();
 	
 }
