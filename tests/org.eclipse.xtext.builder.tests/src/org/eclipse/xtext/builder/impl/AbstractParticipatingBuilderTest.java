@@ -25,7 +25,6 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	private boolean logging = false;
 	protected int invocationCount = 0;
 	private IBuildContext context;
-	private OperationCanceledException cancelWith;
 	
 	@Override
 	public void setUp() throws Exception {
@@ -50,9 +49,6 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 		if (logging) {
 			invocationCount++;
 			this.context = context;
-		}
-		if (cancelWith != null) {
-			throw cancelWith;
 		}
 	}
 	
@@ -80,10 +76,6 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 	public void reset() {
 		invocationCount = 0;
 		context = null;
-		cancelWith = null;
 	}
 
-	public void cancel(OperationCanceledException cancelWith) {
-		this.cancelWith = cancelWith;
-	}
 }

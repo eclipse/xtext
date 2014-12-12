@@ -29,6 +29,7 @@ import org.eclipse.xtext.builder.debug.IBuildLogger;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.OperationCanceledError;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
@@ -66,6 +67,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private IBuildLogger buildLogger;
+	
+	@Inject 
+	private OperationCanceledManager operationCanceledManager;
 	
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -116,9 +120,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			log.error(e.getMessage(), e);
 			throw e;
 		} catch (OperationCanceledException e) {
-			handleInterruption();
+			handleCanceled(e);
 		} catch (OperationCanceledError err) {
-			handleInterruption();
+			handleCanceled(err);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			forgetLastBuiltState();
@@ -132,15 +136,17 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		return getProject().getReferencedProjects();
 	}
 
-	private void handleInterruption() {
-		// Don't pass an OperationCanceledException on to the BuildManager as it would
-		// force a full build in the next round. Instead, save the resource deltas to 
-		// be reprocessed next time.
+	private void handleCanceled(Throwable t) {
+		// If the cancelation happens due to an external interruption, don't pass an 
+		// OperationCanceledException on to the BuildManager as it would force a full 
+		// build in the next round. Instead, save the resource deltas to be reprocessed 
+		// next time.
 		// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=454716
+		if(!isInterrupted())
+			operationCanceledManager.propagateIfCancelException(t);
 		buildLogger.log("Build interrupted.");
 		queuedBuildData.rollback();
 		doRememberLastBuiltState();
-		((Workspace) getProject().getWorkspace()).getBuildManager().interrupt();
 	}
 	
 	private void doRememberLastBuiltState() {
