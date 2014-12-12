@@ -85,6 +85,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(xtextProjectInfo);
 		contributor.createGrammarFile(new IFileCreator() {
 
+			@Override
 			public IFile writeToFile(CharSequence chars, String fileName) {
 				try {
 					Files.write(chars, new File(genPath, fileName), Charset.defaultCharset());

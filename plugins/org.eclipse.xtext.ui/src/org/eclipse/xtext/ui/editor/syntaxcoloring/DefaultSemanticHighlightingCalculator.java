@@ -34,6 +34,7 @@ public class DefaultSemanticHighlightingCalculator implements ISemanticHighlight
 	@Inject
 	private ITaskFinder taskFinder;
 
+	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		if (resource == null)
 			return;

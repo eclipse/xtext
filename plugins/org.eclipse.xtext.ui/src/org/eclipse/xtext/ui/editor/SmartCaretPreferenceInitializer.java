@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.editor.preferences.PreferenceConstants;
  */
 public class SmartCaretPreferenceInitializer implements IPreferenceStoreInitializer {
 
+	@Override
 	public void initialize(IPreferenceStoreAccess access) {
 		access.getWritablePreferenceStore().setDefault(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION, true);
 	}

@@ -61,6 +61,7 @@ public class InheritanceTest extends AbstractXtextTests {
 		assertEquals(2, clazz.getESuperTypes().size());
 		Set<String> expectedNames = new HashSet<String>(Arrays.asList(new String[]{"AType", "RootRule"}));
 		Iterator<String> iter = Iterables.transform(clazz.getESuperTypes(), new Function<EClass, String>(){
+			@Override
 			public String apply(EClass param) {
 				return param.getName();
 			}

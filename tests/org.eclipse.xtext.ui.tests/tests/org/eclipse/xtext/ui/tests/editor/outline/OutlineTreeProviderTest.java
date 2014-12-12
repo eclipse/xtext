@@ -42,6 +42,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
+			@Override
 			public Injector createInjectorAndDoEMFRegistration() {
 				return injector;
 			}
@@ -132,6 +133,7 @@ public class OutlineTreeProviderTest extends AbstractXtextTests {
 		final XtextResource resource = getResource(modelAsText, "test.outlinetestlanguage");
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>(){
+			@Override
 			public Lexer get() {
 				return new InternalXtextLexer();
 			}});

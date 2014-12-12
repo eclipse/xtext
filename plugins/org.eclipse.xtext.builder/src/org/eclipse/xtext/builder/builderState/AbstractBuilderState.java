@@ -85,11 +85,13 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		return resourceDescriptionData.copy();
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		ensureLoaded();
 		return resourceDescriptionData.getAllResourceDescriptions();
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		ensureLoaded();
 		return resourceDescriptionData.getResourceDescription(uri);
@@ -99,6 +101,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		this.persister = persister;
 	}
 
+	@Override
 	public synchronized ImmutableList<IResourceDescription.Delta> update(BuildData buildData, IProgressMonitor monitor) {
 		ensureLoaded();
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_0, 1);
@@ -125,6 +128,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 	private static int MONITOR_CHUNK_SIZE_CLEAN = 50;
 	
+	@Override
 	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) throws OperationCanceledException {
 		ensureLoaded();
 		toBeRemoved = ensureNotNull(toBeRemoved);
@@ -183,26 +187,31 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		return result;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjects();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjects(type, name, ignoreCase);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjectsByType(type);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		ensureLoaded();
 		return resourceDescriptionData.getExportedObjectsByObject(object);
 	}
 
+	@Override
 	public boolean isEmpty() {
 		ensureLoaded();
 		return resourceDescriptionData.isEmpty();

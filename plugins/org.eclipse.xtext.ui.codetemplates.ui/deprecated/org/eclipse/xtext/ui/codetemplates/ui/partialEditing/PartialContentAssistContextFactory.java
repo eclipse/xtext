@@ -24,6 +24,7 @@ public class PartialContentAssistContextFactory extends ParserBasedContentAssist
 	public void setPartialParser(final IPartialContentAssistParser partialContentAssistParser) {
 		final Provider<StatefulFactory> delegate = super.getStatefulFactoryProvider();
 		super.setStatefulFactoryProvider(new Provider<StatefulFactory>() {
+			@Override
 			public StatefulFactory get() {
 				StatefulFactory result = delegate.get();
 				result.setParser(partialContentAssistParser);
@@ -35,6 +36,7 @@ public class PartialContentAssistContextFactory extends ParserBasedContentAssist
 		});
 	}
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

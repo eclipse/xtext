@@ -78,6 +78,7 @@ public class AllContentsPerformanceTest extends AbstractXtextTests {
 	private void doTestUoW(EObject object) throws Exception {
 		final int callCount[] = new int[]{0};
 		IUnitOfWork<Boolean, EObject> uow = new IUnitOfWork<Boolean, EObject>(){
+			@Override
 			public Boolean exec(EObject state) throws Exception {
 				callCount[0]++;
 				return false;

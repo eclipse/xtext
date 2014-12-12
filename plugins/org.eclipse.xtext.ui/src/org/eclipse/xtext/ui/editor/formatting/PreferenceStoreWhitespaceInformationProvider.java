@@ -46,13 +46,16 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 	@Inject
 	private IWorkspace workspace;
 
+	@Override
 	public IIndentationInformation getIndentationInformation(URI uri) {
 		return indentInfo;
 	}
 
+	@Override
 	public ILineSeparatorInformation getLineSeparatorInformation(URI uri) {
 		final String lineSeparator = getLineSeparatorPreference(uri);
 		return new ILineSeparatorInformation() {
+			@Override
 			public String getLineSeparator() {
 				return lineSeparator;
 			}

@@ -245,6 +245,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	protected Iterable<IReferenceDescription> getImportTypeReferences(Iterable<IReferenceDescription> referenceDescriptions) {
 		return IterableExtensions.filter(referenceDescriptions, new Functions.Function1<IReferenceDescription, Boolean>() {
 
+			@Override
 			public Boolean apply(IReferenceDescription p) {
 				return isImportTypeReference(p);
 			}
@@ -255,6 +256,7 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	protected Iterable<IReferenceDescription> getNotImportTypeReferences(Iterable<IReferenceDescription> referenceDescriptions) {
 		return IterableExtensions.filter(referenceDescriptions, new Functions.Function1<IReferenceDescription, Boolean>() {
 
+			@Override
 			public Boolean apply(IReferenceDescription p) {
 				return !isImportTypeReference(p);
 			}
@@ -372,22 +374,27 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 			this.importSection = importSectionFactory.parse(resource);
 		}
 
+		@Override
 		public void accept(URI resourceURI, TextEdit textEdit) {
 			delegate.accept(resourceURI, textEdit);
 		}
 
+		@Override
 		public void accept(URI resourceURI, Change change) {
 			delegate.accept(resourceURI, change);
 		}
 
+		@Override
 		public StatusWrapper getRefactoringStatus() {
 			return delegate.getRefactoringStatus();
 		}
 
+		@Override
 		public IRefactoringDocument getDocument(URI resourceURI) {
 			return delegate.getDocument(resourceURI);
 		}
 
+		@Override
 		public Change createCompositeChange(String name, IProgressMonitor monitor) {
 			return delegate.createCompositeChange(name, monitor);
 		}

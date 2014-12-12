@@ -56,6 +56,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 
 	private Map<String, IXtextBuilderParticipant> classToParticipant;
 
+	@Override
 	public void build(IBuildContext buildContext, IProgressMonitor monitor) throws CoreException {
 		ImmutableList<IXtextBuilderParticipant> participants = getParticipants();
 		if (participants.isEmpty())
@@ -138,6 +139,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 	}
 
 	private static class NoOpBuilderParticipant implements IXtextBuilderParticipant {
+		@Override
 		public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		}
 	}
@@ -154,6 +156,7 @@ public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 			this.handledFileExtensions = ImmutableList.copyOf(FILE_EXTENSION_SPLITTER.split(fileExtensionsAtt));
 		}
 
+		@Override
 		public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 			getDelegate(context).build(context, monitor);
 		}

@@ -61,6 +61,7 @@ public class PrimitiveTypeFactoryTest extends Assert implements ITypeFactory<Cla
 		assertTrue(provider.createType(Void.TYPE) instanceof org.eclipse.xtext.common.types.JvmVoid);
 	}
 
+	@Override
 	public JvmType createType(Class<?> clazz) {
 		JvmType result = provider.createType(clazz);
 		assertTrue(result instanceof JvmPrimitiveType);

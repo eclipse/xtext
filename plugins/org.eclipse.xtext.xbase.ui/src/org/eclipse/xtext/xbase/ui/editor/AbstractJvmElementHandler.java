@@ -34,11 +34,13 @@ public abstract class AbstractJvmElementHandler extends AbstractHandler {
 	@Inject
 	private JvmElementAtOffsetHelper jvmElementAtOffsetHelper;
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 		if (editor != null) {
 			final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 			editor.getDocument().priorityReadOnly(new IUnitOfWork<Void, XtextResource>() {
+				@Override
 				public java.lang.Void exec(XtextResource resource) throws Exception {
 					JvmIdentifiableElement jvmIdentifiable = jvmElementAtOffsetHelper.getJvmIdentifiableElement(resource, selection.getOffset());
 					if (jvmIdentifiable != null) {

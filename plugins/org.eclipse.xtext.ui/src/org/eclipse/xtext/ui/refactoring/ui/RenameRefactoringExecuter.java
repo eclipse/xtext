@@ -80,6 +80,7 @@ public class RenameRefactoringExecuter {
 		try {
 			try {
 				Runnable r = new Runnable() {
+					@Override
 					public void run() {
 						manager.beginRule(rule, null);
 					}
@@ -135,6 +136,7 @@ public class RenameRefactoringExecuter {
 			this.refactoring = refactoring;
 		}
 
+		@Override
 		public void run(IProgressMonitor pm) throws CoreException {
 			try {
 				pm.beginTask("", 11);
@@ -144,6 +146,7 @@ public class RenameRefactoringExecuter {
 				if (status.getSeverity() >= RefactoringStatus.WARNING) {
 					final boolean[] canceled = { false };
 					shell.getDisplay().syncExec(new Runnable() {
+						@Override
 						public void run() {
 							canceled[0] = showStatusDialog(status);
 						}

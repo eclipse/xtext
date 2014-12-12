@@ -22,6 +22,7 @@ public class Bug362902ValueConverters extends DefaultTerminalConverters {
 	public IValueConverter<String> ID() {
 		return new IValueConverter<String>() {
 
+			@Override
 			public String toValue(String string, INode node) throws ValueConverterException {
 				if (string != null && string.length() > 3) {
 					throw new ValueConverterException("ID too long", node, null);
@@ -29,6 +30,7 @@ public class Bug362902ValueConverters extends DefaultTerminalConverters {
 				return string;
 			}
 
+			@Override
 			public String toString(String value) throws ValueConverterException {
 				return value;
 			}

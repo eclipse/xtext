@@ -1826,6 +1826,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(2, declaredType.getMembers().size());
 		// default constructor
 		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
 						&& input.getSimpleName().equals(TypeWithInnerEnum.class.getSimpleName());
@@ -1833,6 +1834,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		}));
 		// inner enum type
 		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmEnumerationType)
 						&& input.getIdentifier().equals(TypeWithInnerEnum.MyEnum.class.getName())
@@ -1847,6 +1849,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(2, declaredType.getMembers().size());
 		// default constructor
 		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
 						&& input.getSimpleName().equals(TypeWithInnerAnnotation.class.getSimpleName());
@@ -1854,6 +1857,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		}));
 		// inner annotation type
 		assertTrue(Iterables.any(declaredType.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmAnnotationType)
 						&& input.getIdentifier().equals(TypeWithInnerAnnotation.MyAnnotation.class.getName())
@@ -1878,6 +1882,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals(2, Iterables.size(wrappedIterator.getDeclaredConstructors()));
 		// default constructor
 		assertTrue(Iterables.any(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
 						&& input.getSimpleName().equals("Iter")
@@ -1886,6 +1891,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		}));
 		// second constructor
 		JvmConstructor secondConstructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
 						&& input.getSimpleName().equals("Iter")
@@ -1910,6 +1916,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	protected void doTestInnerType_WrappedIterator_02(JvmGenericType wrappedIterator) {
 		assertEquals(3, Iterables.size(wrappedIterator.getDeclaredConstructors()));
 		JvmConstructor constructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
 						&& input.getSimpleName().equals("WrappedIterator")
@@ -1943,6 +1950,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	protected void doTestInnerType_WrappedIterator_03(JvmGenericType wrappedIterator) {
 		assertEquals(3, Iterables.size(wrappedIterator.getDeclaredConstructors()));
 		JvmConstructor constructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				return (input instanceof JvmConstructor)
 						&& input.getSimpleName().equals("WrappedIterator")
@@ -3106,6 +3114,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	private void doTestFindTypeByName_$StartsWithDollar(JvmGenericType type) {
 		assertNotNull(type);
 		Iterable<String> innerTypes = Iterables.transform(Iterables.filter(type.getMembers(), JvmType.class), new Function<JvmType, String>() {
+			@Override
 			public String apply(JvmType input) {
 				return input.getSimpleName();
 			}

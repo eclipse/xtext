@@ -47,6 +47,7 @@ public abstract class AstSelectionAction extends Action {
 
 	protected IUnitOfWork<ITextRegion, XtextResource> createTextSelectionWork(final ITextRegion selection) {
 		return new IUnitOfWork<ITextRegion, XtextResource>() {
+			@Override
 			public ITextRegion exec(XtextResource xtextResource) throws Exception {
 				ITextRegion result = selection;
 				if (xtextResource != null) {

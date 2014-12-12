@@ -109,6 +109,7 @@ public class DefaultReferenceFinder extends ReferenceFinder implements org.eclip
 		return this;
 	}
 
+	@Override
 	public void findReferences(Iterable<URI> targetURIs, final Iterable<URI> sourceResourceURIs,
 			ILocalResourceAccess localResourceAccess, IAcceptor<IReferenceDescription> referenceAcceptor,
 			IProgressMonitor monitor) {
@@ -122,6 +123,7 @@ public class DefaultReferenceFinder extends ReferenceFinder implements org.eclip
 		}
 	}
 	
+	@Override
 	public void findAllReferences(
 			Iterable<URI> targetURIs,
 			ILocalResourceAccess localResourceAccess,
@@ -292,6 +294,7 @@ public class DefaultReferenceFinder extends ReferenceFinder implements org.eclip
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void findReferences(Set<URI> targetURIs, IResourceDescription resourceDescription, IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor, ILocalResourceAccess localResourceAccess) {
 		super.findReferences(converter.fromIterable(targetURIs), resourceDescription, localResourceAccess, toAcceptor(acceptor), monitor);
 	}

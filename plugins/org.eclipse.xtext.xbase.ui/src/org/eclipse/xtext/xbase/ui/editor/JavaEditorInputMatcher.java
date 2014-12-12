@@ -47,6 +47,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 	@Inject
 	private XbaseEditorInputRedirector editorInputRedirector;
 	
+	@Override
 	public boolean matches(IEditorReference editorRef, IEditorInput inputToCheck) {
 		try {
 			if (!editorInfo.getEditorId().equals(editorRef.getId())) {

@@ -53,6 +53,7 @@ public final class ResourceLoaderProviders {
 
 	public static Provider<IResourceLoader> getParallelLoader(final int nrOfThreads, final int bufferSize) {
 		return new AbstractResourceLoaderProvider() {
+			@Override
 			public IResourceLoader get() {
 				ParallelResourceLoader resourceLoader = new ParallelResourceLoader(getResourceSetProvider(), getResourceSorter(), nrOfThreads, bufferSize);
 				return resourceLoader;
@@ -62,6 +63,7 @@ public final class ResourceLoaderProviders {
 
 	public static Provider<IResourceLoader> getSerialLoader() {
 		return new AbstractResourceLoaderProvider() {
+			@Override
 			public IResourceLoader get() {
 				return new SerialResourceLoader(getResourceSetProvider(), getResourceSorter());
 			}

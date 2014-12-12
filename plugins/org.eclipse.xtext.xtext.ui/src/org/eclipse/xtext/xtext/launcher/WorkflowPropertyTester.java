@@ -30,6 +30,7 @@ import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
  */
 public class WorkflowPropertyTester extends PropertyTester {
 
+	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (receiver == null)
 			return false;

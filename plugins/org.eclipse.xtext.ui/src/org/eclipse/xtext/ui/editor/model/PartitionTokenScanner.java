@@ -69,10 +69,12 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 		this.mapper = mapper;
 	}
 
+	@Override
 	public void setRange(IDocument document, int offset, int length) {
 		setPartialRange(document, offset, length, null, 0);
 	}
 
+	@Override
 	public void setPartialRange(IDocument document, int offset, int length, String contentType, int partitionOffset) {
 		int overlapOffset = partitionOffset;
 		int overlapLength = offset + length - partitionOffset;
@@ -86,6 +88,7 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 		return ((XtextDocument) document).getTokens();
 	}
 
+	@Override
 	public IToken nextToken() {
 		if (nextToken==null) {
 			return Token.EOF;
@@ -114,10 +117,12 @@ public class PartitionTokenScanner implements IPartitionTokenScanner {
 		return IDocument.DEFAULT_CONTENT_TYPE.equals(contentType);
 	}
 
+	@Override
 	public int getTokenOffset() {
 		return currentPartitionOffset;
 	}
 
+	@Override
 	public int getTokenLength() {
 		return currentPartitionLength;
 	}

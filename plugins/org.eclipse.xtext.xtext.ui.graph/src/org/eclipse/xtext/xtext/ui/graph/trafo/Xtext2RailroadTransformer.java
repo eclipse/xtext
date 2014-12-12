@@ -41,6 +41,7 @@ public class Xtext2RailroadTransformer {
 	private PolymorphicDispatcher<ISegmentFigure> transformer = new PolymorphicDispatcher<ISegmentFigure>(
 			"transformInternal", 1, 1, Collections.singletonList(this),
 			new PolymorphicDispatcher.ErrorHandler<ISegmentFigure>() {
+				@Override
 				public ISegmentFigure handle(Object[] params, Throwable throwable) {
 					EObject grammarElement = (params[0] instanceof EObject) ? (EObject) params[0] : null;
 					return factory.createNodeSegment(grammarElement, throwable);

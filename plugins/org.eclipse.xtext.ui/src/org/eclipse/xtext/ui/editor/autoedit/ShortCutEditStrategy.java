@@ -50,6 +50,7 @@ public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourc
 		}
 	}
 
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		if (sourceViewer instanceof SourceViewer)
 			this.sourceViewer = sourceViewer;

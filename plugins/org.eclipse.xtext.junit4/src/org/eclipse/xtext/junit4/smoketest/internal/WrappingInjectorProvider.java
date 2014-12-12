@@ -63,6 +63,7 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 		Injector delegateInjector = delegate.getInjector();
 		final Map<Key<?>, Binding<?>> bindings = delegateInjector.getBindings();
 		Injector injector = Guice.createInjector(Modules.override(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				for(Binding<?> binding: bindings.values()) {
 					Type typeLiteral = binding.getKey().getTypeLiteral().getType();
@@ -72,6 +73,7 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 				}
 			}
 		}).with(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(IParser.class).toInstance(new TestDataProvider());
 			}
@@ -83,14 +85,17 @@ public class WrappingInjectorProvider implements IInjectorProvider, IRegistryCon
 		return delegate;
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		stateAfterInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public Injector getInjector() {
 		return injector;
 	}

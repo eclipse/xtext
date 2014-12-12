@@ -36,10 +36,12 @@ public class IssueModificationContext implements IModificationContext {
 		return issue;
 	}
 
+	@Override
 	public IXtextDocument getXtextDocument() {
 		return getXtextDocument(issue.getUriToProblem());
 	}
 
+	@Override
 	public IXtextDocument getXtextDocument(URI uri) {
 		IEditorPart editor = editorOpener.open(uri, false);
 		if (editor instanceof XtextEditor) {
@@ -58,6 +60,7 @@ public class IssueModificationContext implements IModificationContext {
 			@Inject
 			private Provider<IssueModificationContext> provider;
 			
+			@Override
 			public IModificationContext createModificationContext(Issue issue) {
 				IssueModificationContext modificationContext = provider.get();
 				modificationContext.setIssue(issue);

@@ -182,6 +182,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 			assertTrue(added.toString(), added.isEmpty());
 		}
 
+		@Override
 		public void modelChanged(AnnotationModelEvent event) {
 			if (event.getAddedAnnotations().length != event.getRemovedAnnotations().length) {
 				this.event = event;
@@ -189,6 +190,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 			}
 		}
 
+		@Override
 		public void modelChanged(IAnnotationModel model) {
 		}
 	}

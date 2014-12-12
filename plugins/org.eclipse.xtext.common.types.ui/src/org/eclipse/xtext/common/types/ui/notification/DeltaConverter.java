@@ -60,18 +60,22 @@ public class DeltaConverter {
 			this.cause = cause;
 		}
 
+		@Override
 		public URI getUri() {
 			return URI.createURI(location);
 		}
 
+		@Override
 		public IResourceDescription getOld() {
 			return null;
 		}
 
+		@Override
 		public IResourceDescription getNew() {
 			return null;
 		}
 
+		@Override
 		public boolean haveEObjectDescriptionsChanged() {
 			return true;
 		}

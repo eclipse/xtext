@@ -66,6 +66,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		this.issueResolutionProvider = issueResolutionProvider;
 	}
 
+	@Override
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		updateMarkersOnModelChange = false;
 		List<Annotation> toBeRemoved = getAnnotationsToRemove(monitor);
@@ -228,6 +229,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE) || type.equals(XtextEditor.INFO_ANNOTATION_TYPE);
 	}
 
+	@Override
 	public void modelChanged(IAnnotationModel model) {
 		if (updateMarkersOnModelChange) {
 			updateMarkerAnnotations(new NullProgressMonitor());

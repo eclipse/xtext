@@ -57,6 +57,7 @@ public class SyncUtil {
 		if (Display.getCurrent() != null && workbench != null) {
 			if (useProgressDialog) {
 				workbench.getProgressService().run(fork, true, new IRunnableWithProgress() {
+					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 						doReconcileAndBuild(saveAll, monitor);
 					}
@@ -112,6 +113,7 @@ public class SyncUtil {
 						if (editor.isDirty() && saveAll) {
 							Display display = workbench.getDisplay();
 							display.syncExec(new Runnable() {
+								@Override
 								public void run() {
 									editor.doSave(monitor);
 								}

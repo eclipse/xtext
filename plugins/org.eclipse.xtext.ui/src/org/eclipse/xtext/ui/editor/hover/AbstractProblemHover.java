@@ -49,6 +49,7 @@ public abstract class AbstractProblemHover extends AbstractHover {
 
 	protected abstract IRegion getHoverRegionInternal(int lineNumber, int offset);
 
+	@Override
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
 		int lineNumber;
 		try {

@@ -74,6 +74,7 @@ public class Activator extends Plugin {
 
 		injector = Guice.createInjector(module);
 		injector.createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(EagerContributionInitializer.class);
 			}

@@ -107,6 +107,7 @@ public class JavaSearchHelper {
 	protected void searchIn(final URI uri, IResourceDescription resourceDescription) {
 		Iterable<IReferenceDescription> matchingReferenceDescriptors = Iterables.filter(resourceDescription
 				.getReferenceDescriptions(), new Predicate<IReferenceDescription>() {
+			@Override
 			public boolean apply(IReferenceDescription input) {
 				return uri.equals(input.getTargetEObjectUri());
 			}

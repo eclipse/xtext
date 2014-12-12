@@ -75,6 +75,7 @@ public class JdtRenameSupport implements IRenameSupport {
 		renameSupport = RenameSupport.create(renameDescriptor);
 	}
 
+	@Override
 	public void startRefactoringWithDialog(boolean previewOnly) throws InterruptedException {
 		try {
 			renameSupport.openDialog(getShell(), previewOnly);
@@ -83,6 +84,7 @@ public class JdtRenameSupport implements IRenameSupport {
 		}
 	}
 
+	@Override
 	public void startDirectRefactoring() throws InterruptedException {
 		try {
 			renameSupport.perform(getShell(), PlatformUI.getWorkbench().getActiveWorkbenchWindow());

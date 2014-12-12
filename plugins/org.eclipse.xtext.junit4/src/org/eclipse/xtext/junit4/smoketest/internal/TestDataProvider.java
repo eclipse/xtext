@@ -24,6 +24,7 @@ import com.google.common.io.CharStreams;
  */
 @Beta
 public class TestDataProvider extends AbstractParser { 
+	@Override
 	public IParseResult parse(ParserRule rule, Reader reader) throws TestDataCarrier {
 		try {
 			throw new TestDataCarrier(CharStreams.toString(reader));
@@ -33,6 +34,7 @@ public class TestDataProvider extends AbstractParser {
 		}
 	}
 
+	@Override
 	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) throws TestDataCarrier {
 		try {
 			throw new TestDataCarrier(CharStreams.toString(reader));

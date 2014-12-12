@@ -35,6 +35,7 @@ public interface IResourceClusteringPolicy extends org.eclipse.xtext.resource.cl
 	 * @return <code>true</code> if another resource should be processed, <code>false</code> if a new cluster should be
 	 *         created.
 	 */
+	@Override
 	boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed);
 
 }

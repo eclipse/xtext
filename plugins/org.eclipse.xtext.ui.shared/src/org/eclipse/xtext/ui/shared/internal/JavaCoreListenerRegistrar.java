@@ -21,10 +21,12 @@ public class JavaCoreListenerRegistrar implements IEagerContribution {
 	@Inject
 	private ProjectClasspathChangeListener classpathChangeListener;
 
+	@Override
 	public void initialize() {
 		JavaCore.addElementChangedListener(classpathChangeListener);
 	}
 
+	@Override
 	public void discard() {
 		JavaCore.removeElementChangedListener(classpathChangeListener);
 	}

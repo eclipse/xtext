@@ -124,10 +124,12 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 			return getColumnText(element, 0);
 		}
 
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
 
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			TaskTag task = (TaskTag) element;
 			if (columnIndex == 0) {
@@ -144,6 +146,7 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 			}
 		}
 
+		@Override
 		public Font getFont(Object element) {
 			return null;
 		}
@@ -164,16 +167,19 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 			return selectedElements.size() == 1;
 		}
 
+		@Override
 		public void customButtonPressed(ListDialogField field, int index) {
 			taskTagButtonPressed(index);
 		}
 
+		@Override
 		public void selectionChanged(ListDialogField field) {
 			@SuppressWarnings("unchecked")
 			List<TaskTag> selectedElements = field.getSelectedElements();
 			field.enableButton(IDX_EDIT, canEdit(selectedElements));
 		}
 
+		@Override
 		public void doubleClicked(ListDialogField field) {
 			@SuppressWarnings("unchecked")
 			List<TaskTag> selectedElements = field.getSelectedElements();
@@ -182,6 +188,7 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 			}
 		}
 
+		@Override
 		public void dialogFieldChanged(DialogField field) {
 			updateModel(field);
 		}

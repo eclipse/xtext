@@ -62,6 +62,7 @@ public class ImportURINavigationTest {
 	@Test
 	public void testNavigateToFileURI() throws Exception {
 		doTestNavigation(new IUnitOfWork<URI, IFile>() {
+			@Override
 			public URI exec(IFile file) throws Exception {
 				return URI.createURI(file.getLocationURI().toURL().toString());
 			}
@@ -71,6 +72,7 @@ public class ImportURINavigationTest {
 	@Test
 	public void testNavigateToClasspathURI() throws Exception {
 		doTestNavigation(new IUnitOfWork<URI, IFile>() {
+			@Override
 			public URI exec(IFile file) throws Exception {
 				return URI.createURI("classpath:/first.importuriuitestlanguage");
 			}
@@ -127,6 +129,7 @@ public class ImportURINavigationTest {
 	
 	public static class InjectorProvider implements IInjectorProvider {
 		
+		@Override
 		public Injector getInjector() {
 			return Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_LINKING_IMPORTURIUITESTLANGUAGE);
 		}

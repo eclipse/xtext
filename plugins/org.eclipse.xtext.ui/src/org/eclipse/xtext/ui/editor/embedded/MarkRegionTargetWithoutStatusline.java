@@ -30,6 +30,7 @@ public class MarkRegionTargetWithoutStatusline implements IMarkRegionTarget {
 		fViewer = viewer;
 	}
 
+	@Override
 	public void setMarkAtCursor(boolean set) {
 
 		if (!(fViewer instanceof ITextViewerExtension))
@@ -45,6 +46,7 @@ public class MarkRegionTargetWithoutStatusline implements IMarkRegionTarget {
 		}
 	}
 
+	@Override
 	public void swapMarkAndCursor() {
 
 		if (!(fViewer instanceof ITextViewerExtension))

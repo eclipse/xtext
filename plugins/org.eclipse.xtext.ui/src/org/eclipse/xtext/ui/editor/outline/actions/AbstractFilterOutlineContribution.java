@@ -29,10 +29,12 @@ public abstract class AbstractFilterOutlineContribution extends AbstractToggleOu
 	protected IFilter getFilter() {
 		if (filter == null) {
 			filter = new IFilter() {
+				@Override
 				public boolean apply(IOutlineNode node) {
 					return AbstractFilterOutlineContribution.this.apply(node);
 				}
 
+				@Override
 				public boolean isEnabled() {
 					return isPropertySet();
 				}

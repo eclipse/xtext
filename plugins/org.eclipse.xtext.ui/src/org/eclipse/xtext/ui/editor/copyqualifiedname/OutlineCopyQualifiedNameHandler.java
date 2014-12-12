@@ -29,6 +29,7 @@ public class OutlineCopyQualifiedNameHandler extends AbstractCopyQualifiedNameHa
 		}
 		return outlineNode.readOnly(new IUnitOfWork<String, EObject>() {
 
+			@Override
 			public String exec(EObject selectedElement) throws Exception {
 				return getQualifiedName(selectedElement);
 			}

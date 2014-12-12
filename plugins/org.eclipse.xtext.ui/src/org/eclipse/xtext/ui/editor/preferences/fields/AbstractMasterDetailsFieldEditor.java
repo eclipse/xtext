@@ -94,6 +94,7 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 				}
 			});
 			masterList.addDisposeListener(new DisposeListener() {
+				@Override
 				public void widgetDisposed(DisposeEvent event) {
 					masterList = null;
 				}

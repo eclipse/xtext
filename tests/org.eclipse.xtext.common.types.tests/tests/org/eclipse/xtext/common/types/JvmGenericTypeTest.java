@@ -78,6 +78,7 @@ public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 		Iterable<JvmTypeReference> interfaces = genericType.getExtendedInterfaces();
 		assertEquals(2, Iterables.size(interfaces));
 		assertTrue(Iterables.elementsEqual(Iterables.transform(interfaces, new Function<JvmTypeReference, JvmType>() {
+			@Override
 			public JvmType apply(JvmTypeReference from) {
 				return from.getType();
 			}

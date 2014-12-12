@@ -17,6 +17,7 @@ import com.google.common.base.Predicate;
  */
 public class JvmModelReferenceFilter implements Predicate<IReferenceDescription> {
 
+	@Override
 	public boolean apply(IReferenceDescription input) {
 		return !isInferredJvmElement(input.getSourceEObjectUri());
 	}

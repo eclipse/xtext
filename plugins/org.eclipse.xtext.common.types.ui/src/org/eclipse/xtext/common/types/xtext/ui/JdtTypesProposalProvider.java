@@ -144,6 +144,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		}
 	}
 	
+	@Override
 	public void createSubTypeProposals(final JvmType superType, ICompletionProposalFactory proposalFactory, 
 			ContentAssistContext context, EReference typeReference, final Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		if (superType == null || superType.eIsProxy())
@@ -170,6 +171,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
 			IJavaSearchScope scope = createSearchScope(project, superType, superTypeNames);
 			searchAndCreateProposals(scope, proposalFactory, context, typeReference, TypeMatchFilters.and(filter, new ITypesProposalProvider.Filter() {
+				@Override
 				public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 						char[][] enclosingTypeNames, String path) {
 					if (path == null || path.endsWith(".class") || path.endsWith(".java")) { // Java index match
@@ -208,6 +210,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					return result.toString();
 				}
 				
+				@Override
 				public int getSearchFor() {
 					return filter.getSearchFor();
 				}
@@ -315,6 +318,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				typeName, SearchPattern.R_PREFIX_MATCH | SearchPattern.R_CAMELCASE_MATCH, 
 				filter.getSearchFor(), scope, 
 				new IRestrictedAccessTypeRequestor() {
+					@Override
 					public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path, AccessRestriction access) {
 						if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path) && (!checkAccessRestriction() || (access == null || access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter()))) {
@@ -372,6 +376,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		return new FQNShortener(context.getResource(), typeScope, qualifiedNameConverter, valueConverter);
 	}
 	
+	@Override
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
 			EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		EObject model = context.getCurrentModel();
@@ -420,6 +425,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				ConfigurableCompletionProposal theProposal = (ConfigurableCompletionProposal) proposal;
 				// calculate the type lazy, as this require a lot of time for large completion lists
 				theProposal.setAdditionalProposalInfo(new Provider<EObject>(){
+					@Override
 					public EObject get() {
 						return jvmTypeProvider.findTypeByName(typeName);
 					}});

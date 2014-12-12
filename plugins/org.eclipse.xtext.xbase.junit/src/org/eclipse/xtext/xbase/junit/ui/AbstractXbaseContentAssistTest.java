@@ -89,6 +89,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	
 	protected abstract Injector getInjector();
 	
+	@Override
 	public abstract IJavaProject getJavaProject(ResourceSet resourceSet);
 	
 	public <T> T get(Class<T> clazz) {
@@ -110,6 +111,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		return resourceSet;
 	}
 	
+	@Override
 	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			XtextResource result = (XtextResource) getResourceSet().createResource(URI.createURI("Test." + fileExtension));

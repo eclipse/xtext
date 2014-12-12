@@ -279,6 +279,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		return result;
 	}
 
+	@Override
 	public boolean isCanceled() {
 		callCount++;
 		if (callCount == maxCallCount)

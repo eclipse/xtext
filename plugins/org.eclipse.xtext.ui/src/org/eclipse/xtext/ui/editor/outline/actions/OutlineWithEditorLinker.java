@@ -52,11 +52,13 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 	private OutlineNodeElementOpener elementOpener;
 	
 	protected class TreeListener implements ISelectionChangedListener, IDoubleClickListener {
+		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			if (isLinkingEnabled && isOutlineViewActive())
 				selectInTextEditor(event.getSelection());
 		}
 
+		@Override
 		public void doubleClick(DoubleClickEvent event) {
 			selectInTextEditor(event.getSelection());
 			textViewer.getTextWidget().setFocus();
@@ -64,6 +66,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 	}
 
 	protected class TextListener implements ISelectionChangedListener {
+		@Override
 		public void selectionChanged(SelectionChangedEvent event) {
 			if (isLinkingEnabled && !isOutlineViewActive())
 				selectInTreeView(event.getSelection());
@@ -160,6 +163,7 @@ public class OutlineWithEditorLinker implements IPropertyChangeListener {
 		return activePart instanceof ContentOutline;
 	}
 
+	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if(LinkWithEditorOutlineContribution.PREFERENCE_KEY.equals(event.getProperty())) {
 			setLinkingEnabled(Boolean.parseBoolean(event.getNewValue().toString()));

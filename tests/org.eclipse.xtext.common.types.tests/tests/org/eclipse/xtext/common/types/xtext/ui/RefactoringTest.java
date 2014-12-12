@@ -195,6 +195,7 @@ public class RefactoringTest extends AbstractEditorTest {
 			return null;
 		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
+					@Override
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						Model model = (Model) state.getContents().get(0);
 						JvmType defaultReference = model.getReferenceHolder().get(0).getDefaultReference();
@@ -212,6 +213,7 @@ public class RefactoringTest extends AbstractEditorTest {
 			return null;
 		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
+					@Override
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						Model model = (Model) state.getContents().get(0);
 						ReferenceHolder referenceHolder = model.getReferenceHolder().get(0);

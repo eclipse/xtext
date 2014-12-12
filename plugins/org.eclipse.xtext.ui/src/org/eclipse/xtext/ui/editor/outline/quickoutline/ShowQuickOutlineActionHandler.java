@@ -29,6 +29,7 @@ public class ShowQuickOutlineActionHandler extends AbstractHandler {
 	@Inject
 	private Injector injector;
 	
+	@Override
 	public Object execute(final ExecutionEvent event) throws ExecutionException {
 		final XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {

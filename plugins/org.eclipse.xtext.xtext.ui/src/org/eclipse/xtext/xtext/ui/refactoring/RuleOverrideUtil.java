@@ -53,6 +53,7 @@ public class RuleOverrideUtil {
 
 		final List<IEObjectDescription> overridingRules = newArrayList();
 		IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
+			@Override
 			public void accept(IReferenceDescription referenceToGrammar) {
 				if (referenceToGrammar.getEReference() == XtextPackage.Literals.GRAMMAR__USED_GRAMMARS) {
 					IResourceDescription resourceDescription = resourceDescriptions
@@ -75,6 +76,7 @@ public class RuleOverrideUtil {
 		Grammar grammar = GrammarUtil.getGrammar(originalRule);
 		final List<IEObjectDescription> overriddenRules = newArrayList();
 		IAcceptor<AbstractRule> acceptor = new IAcceptor<AbstractRule>() {
+			@Override
 			public void accept(AbstractRule overriddenRule) {
 				if (overriddenRule != null) {
 					IEObjectDescription description = EObjectDescription.create(

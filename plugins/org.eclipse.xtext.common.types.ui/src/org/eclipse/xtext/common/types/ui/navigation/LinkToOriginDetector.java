@@ -47,6 +47,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	@Inject
 	private IResourceUIServiceProvider.Registry serviceProviderRegistry;
 	
+	@Override
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 		try {
 			// very pessimistic guards - most things should never happen

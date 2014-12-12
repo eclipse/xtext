@@ -26,12 +26,14 @@ import com.google.common.base.Function;
 @SuppressWarnings("restriction")
 public class XtextDependentElementsCalculator implements IDependentElementsCalculator {
 
+	@Override
 	public Iterable<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 		return Collections.<URI> emptySet();
 	}
 
 	protected Iterable<URI> uris(Iterable<? extends EObject> elements) {
 		return transform(elements, new Function<EObject, URI>() {
+			@Override
 			public URI apply(EObject from) {
 				return EcoreUtil.getURI(from);
 			}

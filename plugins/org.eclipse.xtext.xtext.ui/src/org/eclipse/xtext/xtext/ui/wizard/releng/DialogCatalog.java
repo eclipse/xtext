@@ -62,6 +62,7 @@ public class DialogCatalog {
 			dialog.addFilter(additionalFilter);
 		dialog.setValidator(new ISelectionStatusValidator() {
 
+			@Override
 			public IStatus validate(Object[] selection) {
 				if (selection.length == 1) {
 					IResource resource = (IResource) selection[0];

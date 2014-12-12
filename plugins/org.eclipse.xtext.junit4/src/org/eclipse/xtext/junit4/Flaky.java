@@ -48,6 +48,7 @@ public @interface Flaky {
 	 */
 	class Rule implements TestRule {
 
+		@Override
 		public Statement apply(Statement base, Description description) {
 			Flaky flaky = description.getAnnotation(Flaky.class);
 			if (flaky == null) {

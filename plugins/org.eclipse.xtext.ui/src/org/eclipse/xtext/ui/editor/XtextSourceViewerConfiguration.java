@@ -170,6 +170,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 		if (inheritedDetectors != null) {
 			for (final IHyperlinkDetector detector : inheritedDetectors) {
 				detectors.add(new IHyperlinkDetector() {
+					@Override
 					public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region,
 							boolean canShowMultipleHyperlinks) {
 						try {

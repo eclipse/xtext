@@ -45,6 +45,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	
 	public static class DefaultFactory implements Factory {
 
+		@Override
 		public XtextSourceViewer createSourceViewer(Composite parent, IVerticalRuler ruler,
 				IOverviewRuler overviewRuler, boolean showsAnnotationOverview, int styles) {
 			return new XtextSourceViewer(parent, ruler, overviewRuler, showsAnnotationOverview, styles);
@@ -134,6 +135,7 @@ public class XtextSourceViewer extends ProjectionViewer implements IAdaptable {
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
 		if (IReconciler.class.isAssignableFrom(adapter)) {

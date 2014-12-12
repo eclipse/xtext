@@ -20,14 +20,17 @@ public class DefaultTokenScanner extends AbstractTokenScanner {
 	private int length;
 	private boolean tokenReturned;
 
+	@Override
 	public int getTokenLength() {
 		return length;
 	}
 
+	@Override
 	public int getTokenOffset() {
 		return 0;
 	}
 
+	@Override
 	public IToken nextToken() {
 		if (!tokenReturned) {
 			tokenReturned = true;
@@ -36,6 +39,7 @@ public class DefaultTokenScanner extends AbstractTokenScanner {
 		return Token.EOF;
 	}
 
+	@Override
 	public void setRange(IDocument document, int offset, int length) {
 		this.length = length;
 		this.tokenReturned = false;

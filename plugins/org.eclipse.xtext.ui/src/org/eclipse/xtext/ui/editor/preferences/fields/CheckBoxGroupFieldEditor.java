@@ -138,6 +138,7 @@ public abstract class CheckBoxGroupFieldEditor extends FieldEditor {
 				});
 			}
 			checkBoxBox.addDisposeListener(new DisposeListener() {
+				@Override
 				public void widgetDisposed(DisposeEvent event) {
 					checkBoxBox = null;
 					checkBoxButtons = null;

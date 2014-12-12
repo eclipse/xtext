@@ -93,6 +93,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 * 
 	 * @return The index' contents.
 	 */
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return newData.getAllResourceDescriptions();
 	}
@@ -104,26 +105,32 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 *            The URI
 	 * @return The resource description, or null if there is none.
 	 */
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		return newData.getResourceDescription(uri);
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return newData.isEmpty();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return newData.getExportedObjects();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return newData.getExportedObjects(type, name, ignoreCase);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return newData.getExportedObjectsByType(type);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return newData.getExportedObjectsByObject(object);
 	}
@@ -154,6 +161,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 		 * @param ctx
 		 *            The context
 		 */
+		@Override
 		public void setContext(Notifier ctx) {
 			final ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
 			delegate = (IResourceDescriptions) EcoreUtil.getAdapter(resourceSet.eAdapters(), CurrentDescriptions.class);
@@ -164,6 +172,7 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 		 * 
 		 * @return The index' contents.
 		 */
+		@Override
 		public Iterable<IResourceDescription> getAllResourceDescriptions() {
 			return delegate.getAllResourceDescriptions();
 		}
@@ -175,26 +184,32 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 		 *            The URI
 		 * @return The resource description, or null if there is none.
 		 */
+		@Override
 		public IResourceDescription getResourceDescription(URI uri) {
 			return delegate.getResourceDescription(uri);
 		}
 
+		@Override
 		public boolean isEmpty() {
 			return delegate.isEmpty();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects() {
 			return delegate.getExportedObjects();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 			return delegate.getExportedObjects(type, name, ignoreCase);
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 			return delegate.getExportedObjectsByType(type);
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 			return delegate.getExportedObjectsByObject(object);
 		}

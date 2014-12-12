@@ -22,6 +22,7 @@ public class CompletionProposalBasedModification implements IModification {
 		this.proposal = proposal;
 	}
 	
+	@Override
 	public void apply(IModificationContext context) throws Exception {
 		proposal.apply(context.getXtextDocument());
 	}

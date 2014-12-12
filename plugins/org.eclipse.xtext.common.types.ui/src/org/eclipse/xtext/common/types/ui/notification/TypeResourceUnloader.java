@@ -38,6 +38,7 @@ public class TypeResourceUnloader extends AbstractResourceDescriptionChangeEvent
 		this.deltaConverter = deltaConverter;
 	}
 	
+	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		IResourceDescription.Event resourceDescriptionEvent = getAsResourceDescriptionChange(event.getDelta());
 		if (resourceDescriptionEvent != null)

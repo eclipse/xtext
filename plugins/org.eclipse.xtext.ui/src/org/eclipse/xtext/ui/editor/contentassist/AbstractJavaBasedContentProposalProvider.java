@@ -84,6 +84,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			}
 		}
 
+		@Override
 		public ICompletionProposal apply(IEObjectDescription candidate) {
 			if (candidate == null)
 				return null;

@@ -56,10 +56,12 @@ public class RefactoringCrossReferenceSerializerTest extends AbstractXtextTests 
 	
 	@Test public void testSerializer() throws Exception {
 		RefactoringCrossReferenceSerializer.RefTextEvaluator evaluator = new RefactoringCrossReferenceSerializer.RefTextEvaluator() {
+			@Override
 			public boolean isValid(IEObjectDescription target) {
 				return true;
 			}
 			
+			@Override
 			public boolean isBetterThan(String newText, String currentText) {
 				return newText.length() < currentText.length();
 			}

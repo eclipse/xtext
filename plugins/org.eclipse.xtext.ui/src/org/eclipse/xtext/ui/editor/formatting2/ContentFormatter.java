@@ -52,6 +52,7 @@ public class ContentFormatter implements IContentFormatter {
 			this.region = region;
 		}
 
+		@Override
 		public TextEdit exec(XtextResource state) throws Exception {
 			return ContentFormatter.this.exec(document, region, state);
 		}
@@ -96,6 +97,7 @@ public class ContentFormatter implements IContentFormatter {
 		return new MultiTextEdit();
 	}
 
+	@Override
 	public void format(IDocument document, IRegion region) {
 		IXtextDocument doc = (IXtextDocument) document;
 		TextEdit r = doc.priorityReadOnly(new FormattingUnitOfWork(doc, region));
@@ -107,6 +109,7 @@ public class ContentFormatter implements IContentFormatter {
 		}
 	}
 
+	@Override
 	public IFormattingStrategy getFormattingStrategy(String contentType) {
 		return null;
 	}

@@ -35,6 +35,7 @@ public class XtextTemplateProposal extends TemplateProposal implements ICompleti
 		super(template, context, region, image, relevance);
 	}
 
+	@Override
 	public boolean isAutoInsertable() {
 		return getTemplate().isAutoInsertable();
 	}

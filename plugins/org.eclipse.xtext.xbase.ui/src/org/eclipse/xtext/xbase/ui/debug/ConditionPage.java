@@ -59,6 +59,7 @@ public class ConditionPage extends JavaBreakpointPage {
 				editor = new JavaBreakpointConditionEditor();
 				editor.createControl(parent);
 				editor.addPropertyListener(new IPropertyListener() {
+					@Override
 					public void propertyChanged(Object source, int propId) {
 						IStatus status = editor.getStatus();
 						if (status.isOK()) {

@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 public class PathTraverserTest extends Assert {
 	public static Predicate<URI> everythingButDummy = new Predicate<URI>() {
 
+		@Override
 		public boolean apply(URI input) {
 			return !input.fileExtension().equals("dummy");
 		}

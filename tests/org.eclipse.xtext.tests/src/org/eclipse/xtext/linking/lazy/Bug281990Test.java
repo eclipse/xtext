@@ -44,6 +44,7 @@ public class Bug281990Test extends AbstractXtextTests {
 
 	@Test public void testRecursionErrorMessage() throws Exception {
 		int loggings = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
+			@Override
 			public void run() {
 				try {
 					EObject model = getModelAndExpect("type Foo extends Foo.bar { Foo foo; }", 2);

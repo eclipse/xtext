@@ -45,6 +45,7 @@ public abstract class AbstractParticipatingBuilderTest extends AbstractBuilderTe
 		super.tearDown();
 	}
 	
+	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (logging) {
 			invocationCount++;

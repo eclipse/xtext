@@ -75,6 +75,7 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 
 	protected ISourceViewer sourceViewer;
 	
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		this.sourceViewer = sourceViewer; 
 	}
@@ -140,6 +141,7 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 		final LightweightTypeReference type = resolveTypes.getActualType(typedElement);
 		if (type != null && !type.isUnknown()) {
 			createHyperlinksTo(resource, new Region(node.getOffset(), node.getLength()), type.getType(), new IHyperlinkAcceptor() {
+				@Override
 				public void accept(IHyperlink hyperlink) {
 					if (hyperlink instanceof AbstractHyperlink) {
 						AbstractHyperlink abstractHyperlink = (AbstractHyperlink) hyperlink;
@@ -185,6 +187,7 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 			}
 			final JvmType type = typeReference.getType();
 			createHyperlinksTo(resource, crossRefNode, type, new IHyperlinkAcceptor() {
+				@Override
 				public void accept(IHyperlink hyperlink) {
 					if (hyperlink instanceof AbstractHyperlink) {
 						String target = labelForTargetElement(targetElement);

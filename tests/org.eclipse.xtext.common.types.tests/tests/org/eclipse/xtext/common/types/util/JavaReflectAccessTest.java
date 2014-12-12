@@ -65,6 +65,7 @@ public class JavaReflectAccessTest extends Assert {
 	@Test public void testGetMethod_1() throws Exception {
 		JvmDeclaredType type = getType(List.class);
 		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				if (input instanceof JvmOperation) {
 					return input.getSimpleName().equals("add") && ((JvmOperation) input).getParameters().size() == 1;
@@ -80,6 +81,7 @@ public class JavaReflectAccessTest extends Assert {
 	@Test public void testGetMethod_2() throws Exception {
 		JvmDeclaredType type = getType(X.class);
 		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				if (input instanceof JvmOperation) {
 					return input.getSimpleName().equals("a");
@@ -95,6 +97,7 @@ public class JavaReflectAccessTest extends Assert {
 	@Test public void testGetConstructor_1() throws Exception {
 		JvmGenericType type = (JvmGenericType) getType(X.class);
 		JvmMember firstConstructor = Iterables.find(type.getDeclaredConstructors(),new Predicate<JvmConstructor>() {
+			@Override
 			public boolean apply(JvmConstructor input) {
 				return input.getParameters().size() == 1;
 			}
@@ -106,6 +109,7 @@ public class JavaReflectAccessTest extends Assert {
 	@Test public void testGetConstructor_2() throws Exception {
 		JvmGenericType type = (JvmGenericType) getType(X.class);
 		JvmMember secondConstructor = Iterables.find(type.getDeclaredConstructors(),new Predicate<JvmConstructor>() {
+			@Override
 			public boolean apply(JvmConstructor input) {
 				return input.getParameters().size() == 2;
 			}
@@ -117,6 +121,7 @@ public class JavaReflectAccessTest extends Assert {
 	@Test public void testGetField_1() throws Exception {
 		JvmDeclaredType type = getType(Y.class);
 		JvmMember addMethod = Iterables.find(type.getMembers(), new Predicate<JvmMember>() {
+			@Override
 			public boolean apply(JvmMember input) {
 				if (input instanceof JvmField) {
 					return input.getSimpleName().equals("z");

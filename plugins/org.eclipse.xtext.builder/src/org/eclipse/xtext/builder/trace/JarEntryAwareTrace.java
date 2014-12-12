@@ -34,6 +34,7 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 	@Inject
 	private IStorage2UriMapperJdtExtensions uriMapperExtensions;
 	
+	@Override
 	public URI tryResolvePath(IStorage localStorage, URI path) {
 		if (localStorage instanceof IFile) {
 			IProject project = ((IFile) localStorage).getProject();

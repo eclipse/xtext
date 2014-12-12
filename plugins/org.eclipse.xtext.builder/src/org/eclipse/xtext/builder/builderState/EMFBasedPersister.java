@@ -57,6 +57,7 @@ public class EMFBasedPersister implements PersistedStateProvider {
 
 	private IPath cachedPath;
 	
+	@Override
 	public Iterable<IResourceDescription> load() {
 		File location = getBuilderStateLocation();
 		try {
@@ -206,13 +207,16 @@ public class EMFBasedPersister implements PersistedStateProvider {
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	private static class NoOpURIHandler implements XMLResource.URIHandler {
+		@Override
 		public void setBaseURI(URI uri) {
 		}
 	
+		@Override
 		public URI resolve(URI uri) {
 			return uri;
 		}
 	
+		@Override
 		public URI deresolve(URI uri) {
 			return uri;
 		}

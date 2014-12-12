@@ -88,6 +88,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 		return children.remove(outlineNode);
 	}
 
+	@Override
 	public List<IOutlineNode> getChildren() {
 		if (isLeaf)
 			return Collections.emptyList();
@@ -107,14 +108,17 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 		return Collections.unmodifiableList(children);
 	}
 
+	@Override
 	public IOutlineNode getParent() {
 		return parent;
 	}
 
+	@Override
 	public boolean hasChildren() {
 		return !isLeaf;
 	}
 
+	@Override
 	public Object getText() {
 		return text;
 	}
@@ -126,6 +130,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	/**
 	 * @deprecated use {@link #getImageDescriptor()} instead.
 	 */
+	@Override
 	@Deprecated
 	public Image getImage() {
 		return image;
@@ -138,6 +143,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return imageDescriptor;
 	}
@@ -167,10 +173,12 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 		this.textRegion = textRegion;
 	}
 
+	@Override
 	public ITextRegion getFullTextRegion() {
 		return textRegion;
 	}
 
+	@Override
 	public ITextRegion getSignificantTextRegion() {
 		return textRegion;
 	}
@@ -180,6 +188,7 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 		return "[" + getClass().getSimpleName() + "] " + text.toString();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapterType) {
 		return Platform.getAdapterManager().getAdapter(this, adapterType);
@@ -189,9 +198,11 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 		return null;
 	}
 
+	@Override
 	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
 		if (getEObjectURI() != null) {
 			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
+				@Override
 				public T exec(XtextResource state) throws Exception {
 					EObject eObject;
 					if (state.getResourceSet() != null)

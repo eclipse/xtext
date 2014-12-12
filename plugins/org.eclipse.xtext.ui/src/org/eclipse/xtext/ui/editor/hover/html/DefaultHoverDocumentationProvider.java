@@ -21,6 +21,7 @@ public class DefaultHoverDocumentationProvider implements IEObjectHoverDocumenta
 	@Inject
 	protected IEObjectDocumentationProvider documentationProvider;
 	
+	@Override
 	public String getDocumentation(EObject object) {
 		return documentationProvider.getDocumentation(object);
 	}

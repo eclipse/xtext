@@ -67,6 +67,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 		if (c.getSemanticTypesToCheck() != null) {
 			List<String> names = Lists.newArrayList(Iterables.transform(c.getSemanticTypesToCheck(),
 					new Function<EClass, String>() {
+						@Override
 						public String apply(EClass from) {
 							return from.getName();
 						}
@@ -75,6 +76,7 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 			t = "<" + Joiner.on(", ").join(names) + ">";
 		}
 		Iterable<String> contents = Iterables.transform(c.getContents(), new Function<ISyntaxConstraint, String>() {
+			@Override
 			public String apply(ISyntaxConstraint from) {
 				return ConcreteSyntaxConstraintProviderTest.this.toString(from);
 			}

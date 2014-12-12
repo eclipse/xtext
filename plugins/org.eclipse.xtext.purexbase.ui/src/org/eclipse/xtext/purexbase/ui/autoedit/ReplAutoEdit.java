@@ -54,6 +54,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 	@Inject
 	private IResourceValidator validator;
 
+	@Override
 	public void customizeDocumentCommand(final IDocument document, final DocumentCommand command) {
 		if (!isLineDelimiter(document, command)) {
 			return;
@@ -61,6 +62,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		try {
 			IXtextDocument doc = (IXtextDocument) document;
 			String result = doc.readOnly(new IUnitOfWork<String, XtextResource>() {
+				@Override
 				public String exec(XtextResource resource) throws Exception {
 					return computeResultText(document, command, resource);
 				}
@@ -110,6 +112,7 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 				new CancelIndicator() {
 					private long stopAt = System.currentTimeMillis() + 2000;
 
+					@Override
 					public boolean isCanceled() {
 						return System.currentTimeMillis() > stopAt;
 					}

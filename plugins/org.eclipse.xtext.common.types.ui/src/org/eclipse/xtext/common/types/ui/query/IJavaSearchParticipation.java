@@ -21,12 +21,14 @@ public interface IJavaSearchParticipation {
 	boolean canContainJvmReferences(URI uri);
 	
 	class Yes implements IJavaSearchParticipation {
+		@Override
 		public boolean canContainJvmReferences(URI uri) {
 			return true;
 		}
 	}
 
 	class No implements IJavaSearchParticipation {
+		@Override
 		public boolean canContainJvmReferences(URI uri) {
 			return false;
 		}

@@ -39,11 +39,13 @@ public interface IBuildFlag {
 			this.key = key;
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public void addToMap(Map buildArgs) {
 			buildArgs.put(key, Boolean.TRUE);
 		}
 
+		@Override
 		public boolean isSet(Map buildArgs) {
 			return buildArgs != null && buildArgs.containsKey(key);
 		}

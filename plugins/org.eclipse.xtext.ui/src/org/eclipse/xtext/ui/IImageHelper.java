@@ -25,10 +25,12 @@ public interface IImageHelper {
 	
 	class NullImageHelper implements IImageHelper, IImageDescriptorHelper {
 
+		@Override
 		public Image getImage(String name) {
 			return null;
 		}
 
+		@Override
 		public Image getImage(ImageDescriptor imageDescriptor) {
 			return null;
 		}
@@ -36,6 +38,7 @@ public interface IImageHelper {
 		/**
 		 * @since 2.4
 		 */
+		@Override
 		public ImageDescriptor getImageDescriptor(String name) {
 			return null;
 		}
@@ -43,6 +46,7 @@ public interface IImageHelper {
 		/**
 		 * @since 2.4
 		 */
+		@Override
 		public ImageDescriptor getImageDescriptor(Image image) {
 			return null;
 		}

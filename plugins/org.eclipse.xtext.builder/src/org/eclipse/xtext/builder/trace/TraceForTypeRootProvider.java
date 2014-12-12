@@ -122,6 +122,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	}
 
 	/* @Nullable */
+	@Override
 	public ITrace getTraceToSource(final ITypeRoot derivedJavaType) {
 		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
 			return lruCache.getSecond();
@@ -172,6 +173,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		}
 		final AbstractTrace result = trace1;
 		result.setTraceRegionProvider(new ITraceRegionProvider() {
+			@Override
 			public AbstractTraceRegion getTraceRegion() {
 				String traceSimpleFileName = getTraceSimpleFileName(classFile);
 				if (traceSimpleFileName == null)

@@ -42,6 +42,7 @@ public class FoldingActionGroup extends ActionGroup {
 			super(bundle, prefix, IAction.AS_PUSH_BUTTON);
 		}
 
+		@Override
 		public void update() {
 			setEnabled(FoldingActionGroup.this.isEnabled() && viewer.isProjectionMode());
 		}
@@ -83,10 +84,12 @@ public class FoldingActionGroup extends ActionGroup {
 
 		projectionListener = new IProjectionListener() {
 
+			@Override
 			public void projectionEnabled() {
 				update();
 			}
 
+			@Override
 			public void projectionDisabled() {
 				update();
 			}

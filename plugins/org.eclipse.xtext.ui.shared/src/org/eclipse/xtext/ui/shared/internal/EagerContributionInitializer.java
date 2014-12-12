@@ -25,12 +25,14 @@ public class EagerContributionInitializer implements IEagerContribution {
 		contributions = registry.getContributedInstances(IEagerContribution.class);
 	}
 	
+	@Override
 	public void initialize() {
 		for(int i = 0; i < contributions.size(); i++) {
 			contributions.get(i).initialize();
 		}
 	}
 
+	@Override
 	public void discard() {
 		for(int i = contributions.size() - 1; i >= 0; i--) {
 			contributions.get(i).discard();

@@ -30,6 +30,7 @@ public class DefaultViewerCreator implements IViewerCreator {
 	@Inject
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
 
+	@Override
 	public Viewer createViewer(Composite parent, CompareConfiguration compareConfiguration) {
 		if (compareConfiguration == null) {
 			return createContentViever(parent, compareConfiguration);

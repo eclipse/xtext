@@ -148,6 +148,7 @@ public class CompilationTestHelper {
 	public void assertCompilesTo(CharSequence source, final CharSequence expected) throws IOException {
 		final boolean[] called = {false};
 		compile(source, new IAcceptor<CompilationTestHelper.Result>() {
+			@Override
 			public void accept(Result r) {
 				Assert.assertEquals(expected.toString(), r.getSingleGeneratedCode());
 				called[0] = true;
@@ -378,6 +379,7 @@ public class CompilationTestHelper {
 				separator = "\n";
 			List<GeneratedFile> files = newArrayList(access.getTextFiles());
 			Collections.sort(files, new Comparator<GeneratedFile>() {
+				@Override
 				public int compare(GeneratedFile o1,
 						GeneratedFile o2) {
 					return o1.getPath().toString().compareTo(o2.getPath().toString());

@@ -81,6 +81,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(IssueCodes.OPERATION_WITHOUT_PARENTHESES)
 	public void fixMissingParentheses(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add parentheses", "Add parentheses", null, new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), issue.getOffset() + issue.getLength(), 0);
 				appendable.append("()");
@@ -119,6 +120,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			fixup = "Remove invalid type argument";
 		}
 		acceptor.accept(issue, fixup, fixup, null, new IModification() {
+			@Override
 			public void apply(IModificationContext context) throws Exception {
 				IXtextDocument document = context.getXtextDocument();
 				document.replace(issue.getOffset(), issue.getLength(), "");
@@ -131,6 +133,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		acceptor.accept(issue, "Remove redundant case.", "Remove redundant case.", null, new ReplaceModification(issue, ""));
 		acceptor.accept(issue, "Assign empty expression.", "Assign empty expression.", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
 				if (switchExpression == null) {
@@ -162,6 +165,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixIncompleteCasesOnEnum(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add 'default' case", "Add 'default' case", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
 				if (switchExpression == null) {
@@ -181,6 +185,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			
 		});
 		acceptor.accept(issue, "Add missing cases", "Add missing cases", null, new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
 				if (switchExpression == null) {
@@ -215,6 +220,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixUnreachableCase(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove case", "Remove case", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				remove(element, XCasePart.class, context);
 			}
@@ -222,6 +228,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		});
 		acceptor.accept(issue, "Move case up", "Move case up", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XCasePart casePart = EcoreUtil2.getContainerOfType(element, XCasePart.class);
 				if (casePart == null) {
@@ -264,6 +271,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixUnreachableCatchBlock(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove catch block", "Remove catch block", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				remove(element, XCatchClause.class, context);
 			}
@@ -271,6 +279,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		});
 		acceptor.accept(issue, "Move catch block up", "Move catch block up", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XCatchClause catchClause = EcoreUtil2.getContainerOfType(element, XCatchClause.class);
 				if (catchClause == null) {
@@ -309,6 +318,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixUnreachableIfBlock(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove if block", "Remove if block", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XIfExpression ifExpression = EcoreUtil2.getContainerOfType(element, XIfExpression.class);
 				if (ifExpression == null) {
@@ -325,6 +335,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		});
 		acceptor.accept(issue, "Move if block up", "Move if block up", null, new ISemanticModification() {
 			
+			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XIfExpression ifExpression = EcoreUtil2.getContainerOfType(element, XIfExpression.class);
 				if (ifExpression == null) {
@@ -468,6 +479,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		acceptor.accept(issue, "Organize imports",
 				"Organizes the whole import section. Removes wildcard imports as well as duplicates and unused ones.",
 				getOrganizeImportsImage(), new IModification() {
+					@Override
 					public void apply(IModificationContext context) throws Exception {
 						organizeImportsHandler.doOrganizeImports(context.getXtextDocument());
 					}

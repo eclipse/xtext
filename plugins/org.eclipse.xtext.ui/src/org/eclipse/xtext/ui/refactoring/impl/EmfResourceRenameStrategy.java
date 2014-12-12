@@ -35,6 +35,7 @@ public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 	@Inject
 	private EmfResourceChangeUtil changeUtil;
 	
+	@Override
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		Resource targetResource = resourceSet.getResource(getTargetElementOriginalURI().trimFragment(), false);

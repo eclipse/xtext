@@ -54,6 +54,7 @@ public class SharedStateContributionRegistryImpl implements ISharedStateContribu
 	 */
 	public Injector createInjectorWithoutJITBindings(final Module childModule) {
 		Injector childInjector = injector.createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.requireExplicitBindings();
 			}
@@ -61,6 +62,7 @@ public class SharedStateContributionRegistryImpl implements ISharedStateContribu
 		return childInjector;
 	}
 	
+	@Override
 	public ImmutableList<? extends SharedStateContribution> getContributions() {
 		if (contributions == null) {
 			return initializeContributions();
@@ -68,6 +70,7 @@ public class SharedStateContributionRegistryImpl implements ISharedStateContribu
 		return contributions;
 	}
 	
+	@Override
 	public <T> ImmutableList<? extends T> getContributedInstances(Class<T> type) {
 		ImmutableList.Builder<T> listBuilder = ImmutableList.builder();
 		for(SharedStateContribution contribution: getContributions()) {
@@ -78,6 +81,7 @@ public class SharedStateContributionRegistryImpl implements ISharedStateContribu
 		return listBuilder.build();
 	}
 	
+	@Override
 	public <T> Provider<? extends T> getLazySingleContributedInstance(Class<T> type) {
 		Provider<? extends T> result = null;
 		for(SharedStateContribution contribution: getContributions()) {
@@ -95,10 +99,12 @@ public class SharedStateContributionRegistryImpl implements ISharedStateContribu
 		return result;
 	}
 	
+	@Override
 	public <T> T getSingleContributedInstance(Class<T> type) {
 		return getLazySingleContributedInstance(type).get();
 	}
 	
+	@Override
 	public <T> ImmutableList<? extends Provider<? extends T>> getLazyContributedInstances(Class<T> type) {
 		ImmutableList.Builder<Provider<? extends T>> listBuilder = ImmutableList.builder();
 		for(SharedStateContribution contribution: getContributions()) {
@@ -144,6 +150,7 @@ public class SharedStateContributionRegistryImpl implements ISharedStateContribu
 
 	protected Module getWrappedModule(final Module childModule) {
 		return new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(SharedStateContribution.class);
 				binder.install(childModule);

@@ -28,6 +28,7 @@ public class TaskTagInputDialog extends StatusDialog {
 	public static final String DISABLED = "false";
 
 	private class TaskTagInputAdapter implements IDialogFieldListener {
+		@Override
 		public void dialogFieldChanged(DialogField field) {
 			doValidation();
 		}

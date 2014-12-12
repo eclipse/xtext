@@ -55,11 +55,13 @@ public interface IQuickOutlineContribution extends IPreferenceStoreInitializer {
 			}
 		}
 
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			for (IQuickOutlineContribution contribution : contributions)
 				contribution.initialize(access);
 		}
 
+		@Override
 		public void register(QuickOutlinePopup quickOutline, IMenuManager dialogMenu) {
 			for (IQuickOutlineContribution contribution : contributions)
 				contribution.register(quickOutline, dialogMenu);
@@ -68,6 +70,7 @@ public interface IQuickOutlineContribution extends IPreferenceStoreInitializer {
 				treeViewer.refresh();
 		}
 
+		@Override
 		public void deregister(QuickOutlinePopup quickOutline) {
 			for (IQuickOutlineContribution contribution : contributions)
 				contribution.deregister(quickOutline);

@@ -55,8 +55,10 @@ public class DeclarativeQuickfixProviderTest extends Assert {
 
 		};
 		provider.setIssueResolutionAcceptorProvider(new Provider<IssueResolutionAcceptor>() {
+			@Override
 			public IssueResolutionAcceptor get() {
 				return new IssueResolutionAcceptor(new IssueModificationContext.Factory() {
+					@Override
 					public IModificationContext createModificationContext(Issue issue) {
 						return null;
 					}

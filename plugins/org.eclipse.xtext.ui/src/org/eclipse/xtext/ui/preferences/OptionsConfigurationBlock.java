@@ -402,9 +402,11 @@ public abstract class OptionsConfigurationBlock {
 	protected SelectionListener getSelectionListener() {
 		if (selectionListener == null) {
 			selectionListener = new SelectionListener() {
+				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
 				}
 
+				@Override
 				public void widgetSelected(SelectionEvent e) {
 					controlChanged(e.widget);
 				}
@@ -416,6 +418,7 @@ public abstract class OptionsConfigurationBlock {
 	protected ModifyListener getTextModifyListener() {
 		if (textModifyListener == null) {
 			textModifyListener = new ModifyListener() {
+				@Override
 				public void modifyText(ModifyEvent e) {
 					textChanged((Text) e.widget);
 				}

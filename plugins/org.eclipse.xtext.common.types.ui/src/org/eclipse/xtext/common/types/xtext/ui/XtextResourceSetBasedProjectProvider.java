@@ -17,6 +17,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
  */
 public class XtextResourceSetBasedProjectProvider implements IJavaProjectProvider {
 
+	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		if (resourceSet instanceof XtextResourceSet) {
 			XtextResourceSet xtextResourceSet = (XtextResourceSet) resourceSet;

@@ -103,6 +103,7 @@ public abstract class TextViewerAction extends ResourceAction implements IUpdate
 	 * Always enables this action if it is connected to a text editor. If the associated editor is <code>null</code>,
 	 * the action is disabled. Subclasses may override.
 	 */
+	@Override
 	public void update() {
 		setEnabled(getTextViewer() != null);
 	}

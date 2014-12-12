@@ -47,6 +47,7 @@ public class BinaryClassMirrorTest extends Assert implements ITypeFactory<Binary
 		assertNotNull(mirror);
 	}
 
+	@Override
 	public JvmDeclaredType createType(BinaryClass clazz) {
 		fail("Unexpected call");
 		return null;

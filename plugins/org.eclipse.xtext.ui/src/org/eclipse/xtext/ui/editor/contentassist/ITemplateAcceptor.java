@@ -22,10 +22,12 @@ public interface ITemplateAcceptor {
 
 		private ITemplateAcceptor delegate;
 		
+		@Override
 		public void accept(TemplateProposal template) {
 			delegate.accept(template);
 		}
 
+		@Override
 		public boolean canAcceptMoreTemplates() {
 			return delegate.canAcceptMoreTemplates();
 		}

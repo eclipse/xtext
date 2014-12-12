@@ -119,6 +119,7 @@ public class JvmImplementationOpener {
 				final ArrayList<IJavaElement> links = Lists.newArrayList();
 				IRunnableWithProgress runnable = new IRunnableWithProgress() {
 
+					@Override
 					public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 						if (monitor == null) {
 							monitor = new NullProgressMonitor();

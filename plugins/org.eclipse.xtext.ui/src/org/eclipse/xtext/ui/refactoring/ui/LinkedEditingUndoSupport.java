@@ -58,6 +58,7 @@ public class LinkedEditingUndoSupport {
 		final ISourceViewer viewer = editor.getInternalSourceViewer();
 		try {
 			editor.getSite().getWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
+				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					if (viewer instanceof ITextViewerExtension6) {
 						IUndoManager undoManager = ((ITextViewerExtension6) viewer).getUndoManager();

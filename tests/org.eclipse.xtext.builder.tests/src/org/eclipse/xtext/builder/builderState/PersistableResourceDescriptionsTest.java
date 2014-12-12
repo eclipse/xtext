@@ -75,18 +75,22 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		resourceSetImpl.setURIConverter(uriConverter);
 		resourceSetImpl.eAdapters().add(new DelegatingIAllContainerAdapter(new IAllContainersState(){
 
+			@Override
 			public List<String> getVisibleContainerHandles(String handle) {
 				return null;
 			}
 
+			@Override
 			public Collection<URI> getContainedURIs(String containerHandle) {
 				return null;
 			}
 
+			@Override
 			public String getContainerHandle(URI uri) {
 				return null;
 			}
 			
+			@Override
 			public boolean isEmpty(String containerHandle) {
 				return true;
 			}
@@ -254,6 +258,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 
 		public List<IResourceDescription> descriptions = Lists.newArrayList();
 		
+		@Override
 		public Iterable<IResourceDescription> load() {
 			return descriptions;
 		}
@@ -291,6 +296,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 			BuildData buildData = new BuildData("", resourceSet, toBeBuilt, builderInjector.getInstance(QueuedBuildData.class));
 			ImmutableList<Delta> update = builderState.update(buildData, new NullProgressMonitor());
 			return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
+				@Override
 				public URI apply(IResourceDescription.Delta from) {
 					return from.getUri();
 				}

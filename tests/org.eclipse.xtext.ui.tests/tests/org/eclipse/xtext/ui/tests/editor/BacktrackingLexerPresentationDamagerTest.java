@@ -24,6 +24,7 @@ public class BacktrackingLexerPresentationDamagerTest extends PresentationDamage
 	protected Document createDocument(String before) throws Exception {
 		DocumentTokenSource source = new BacktrackingLexerDocumentTokenSource();
 		source.setLexer(new Provider<Lexer>() {
+			@Override
 			public Lexer get() {
 				return createLexer();
 			}

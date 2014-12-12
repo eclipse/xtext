@@ -102,6 +102,7 @@ public class CodetemplatesUiModule extends org.eclipse.xtext.ui.codetemplates.ui
 	@Override
 	public Provider<TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return new Provider<TemplatesLanguageConfiguration>() {
+			@Override
 			public TemplatesLanguageConfiguration get() {
 				return AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider().get();
 			}

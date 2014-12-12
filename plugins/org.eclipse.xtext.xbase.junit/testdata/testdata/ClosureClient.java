@@ -89,6 +89,7 @@ public class ClosureClient {
 	
 	public Runnable asRunnable(final Procedures.Procedure0 procedure) {
 		return new Runnable() {
+			@Override
 			public void run() {
 				procedure.apply();
 			}
@@ -97,6 +98,7 @@ public class ClosureClient {
 	
 	public Procedures.Procedure0 asProcedure(final Runnable runnable) {
 		return new Procedures.Procedure0() {
+			@Override
 			public void apply() {
 				runnable.run();
 			}
@@ -105,6 +107,7 @@ public class ClosureClient {
 	
 	public <Obj> Functions.Function1<Obj, Obj> getIdentityFunction() {
 		return new Functions.Function1<Obj, Obj>() {
+			@Override
 			public Obj apply(Obj p) {
 				return p;
 			}

@@ -60,6 +60,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 		return open(uri, select);
 	}
 	
+	@Override
 	public IEditorPart open(URI uri, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri.trimFragment());
 		if(resourceServiceProvider instanceof IResourceUIServiceProvider) {
@@ -68,6 +69,7 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 		return openDefaultEditor(uri, null, -1, select);
 	}
 
+	@Override
 	public IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(referenceOwnerURI.trimFragment());
 		if(resourceServiceProvider instanceof IResourceUIServiceProvider) {

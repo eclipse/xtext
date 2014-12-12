@@ -145,6 +145,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	protected void initializeTreeContent() {
 		List<IOutlineNode> initiallyExpandedNodes = xtextDocument
 				.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
+					@Override
 					public List<IOutlineNode> exec(XtextResource resource) throws Exception {
 						return getInitiallyExpandedNodes();
 					}
@@ -176,6 +177,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	protected void configureModelListener() {
 		if (xtextDocument != null) { // possibly disposed in the meantime
 			modelListener = new IXtextModelListener() {
+				@Override
 				public void modelChanged(XtextResource resource) {
 					try {
 						scheduleRefresh();
@@ -218,6 +220,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		super.dispose();
 	}
 
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		this.sourceViewer = sourceViewer;
 		IDocument document = sourceViewer.getDocument();
@@ -231,6 +234,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	 */
 	protected void configureTextInputListener() {
 		textInputListener = new ITextInputListener() {
+			@Override
 			public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 				try {
 					if (xtextDocument != null && modelListener != null)
@@ -245,6 +249,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 				}
 			}
 
+			@Override
 			public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 			}
 		};
@@ -287,6 +292,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	protected void refreshViewer(final IOutlineNode rootNode, final Collection<IOutlineNode> nodesToBeExpanded,
 			final Collection<IOutlineNode> selectedNodes) {
 		DisplayRunHelper.runAsyncInDisplayThread(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					TreeViewer treeViewer = getTreeViewer();

@@ -54,6 +54,7 @@ public class AnnotationWithQuickFixesHoverTest extends AbstractEditorTest {
 		hover = Activator.getInstance().getInjector(getEditorId()).getInstance(AnnotationWithQuickFixesHover.class);
 		hover.setSourceViewer(editor.getInternalSourceViewer());
 		List<Issue> issues = document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
+			@Override
 			public List<Issue> exec(XtextResource state) throws Exception {
 				return state.getResourceServiceProvider().getResourceValidator().validate(state, CheckMode.ALL, null);
 			}

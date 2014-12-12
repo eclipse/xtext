@@ -31,6 +31,7 @@ public interface IProposalConflictHelper {
 
 	public static class NullHelper implements IProposalConflictHelper {
 
+		@Override
 		public boolean existsConflict(String proposal, ContentAssistContext context) {
 			return false;
 		}

@@ -205,6 +205,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		 */
 		protected ITextSelection selection;
 
+		@Override
 		public ContentAssistContext apply(Builder from) {
 			return from.toContext();
 		}
@@ -242,6 +243,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			List<Future<?>> futures = Lists.newArrayList();
 			if (!datatypeNode.equals(lastCompleteNode)) {
 				futures.add(pool.submit(new Callable<Void>() {
+					@Override
 					public Void call() throws Exception {
 //						long time = System.currentTimeMillis();
 						handleLastCompleteNodeAsPartOfDatatypeNode();
@@ -255,6 +257,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			// any valid grammar element by removing the current token and using it as prefix
 			if (datatypeNode.equals(lastCompleteNode) && completionOffset != lastCompleteNode.getOffset()) {
 				futures.add(pool.submit(new Callable<Void>() {
+					@Override
 					public Void call() throws Exception {
 //						long time = System.currentTimeMillis();
 						handleLastCompleteNodeIsAtEndOfDatatypeNode();
@@ -268,6 +271,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			// 4th context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
 			if (!(lastCompleteNode instanceof ILeafNode) || lastCompleteNode.getGrammarElement() != null) {
 				futures.add(pool.submit(new Callable<Void>() {
+					@Override
 					public Void call() throws Exception {
 //						long time = System.currentTimeMillis();
 						handleLastCompleteNodeIsPartOfLookahead();
@@ -446,6 +450,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		protected void computeFollowElements(Collection<FollowElement> followElements, final Collection<AbstractElement> result) {
 			FollowElementCalculator calculator = new FollowElementCalculator();
 			calculator.acceptor = new IFollowElementAcceptor(){
+				@Override
 				public void accept(AbstractElement element) {
 					ParserRule rule = GrammarUtil.containingParserRule(element);
 					if (rule == null || !GrammarUtil.isDatatypeRule(rule))
@@ -766,6 +771,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 	}
 
+	@Override
 	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
 		try { 
 			StatefulFactory factory = statefulFactoryProvider.get();

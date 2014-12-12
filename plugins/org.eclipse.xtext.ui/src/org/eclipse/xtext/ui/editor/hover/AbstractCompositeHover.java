@@ -47,6 +47,7 @@ public abstract class AbstractCompositeHover implements ITextHover, ITextHoverEx
 
 	abstract protected List<ITextHover> createHovers();
 
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		if (getHovers() != null) {
 			for (ITextHover hover : getHovers()) {
@@ -56,6 +57,7 @@ public abstract class AbstractCompositeHover implements ITextHover, ITextHoverEx
 		}
 	}
 
+	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
 		if (getHovers() != null) {
 			for (ITextHover hover : getHovers()) {
@@ -74,6 +76,7 @@ public abstract class AbstractCompositeHover implements ITextHover, ITextHoverEx
 		return null;
 	}
 
+	@Override
 	@Deprecated
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
 		// should never be called
@@ -83,6 +86,7 @@ public abstract class AbstractCompositeHover implements ITextHover, ITextHoverEx
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public Object getHoverInfo2(ITextViewer textViewer, IRegion hoverRegion) {
 		if (currentHover != null) {
@@ -95,6 +99,7 @@ public abstract class AbstractCompositeHover implements ITextHover, ITextHoverEx
 		return null;
 	}
 
+	@Override
 	public IInformationControlCreator getHoverControlCreator() {
 		if (currentHover instanceof ITextHoverExtension)
 			return ((ITextHoverExtension) currentHover).getHoverControlCreator();

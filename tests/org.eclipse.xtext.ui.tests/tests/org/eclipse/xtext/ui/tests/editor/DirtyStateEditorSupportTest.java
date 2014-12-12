@@ -312,6 +312,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
 	
+	@Override
 	public void addVerifyListener(VerifyListener listener) {
 		assertNull(this.verifyListener);
 		this.verifyListener = listener;
@@ -325,6 +326,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	public void removeModelListener(IXtextModelListener listener) {
 	}
 
+	@Override
 	public IXtextDocument getDocument() {
 		return document;
 	}
@@ -343,39 +345,47 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		}
 	}
 
+	@Override
 	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
 		return readOnly(work);
 	}
 
+	@Override
 	public Shell getShell() {
 		fail("Unexpected call");
 		return null;
 	}
 
+	@Override
 	public void removeVerifyListener(VerifyListener listener) {
 		assertSame(this.verifyListener, listener);
 		this.verifyListener = null;
 	}
 
+	@Override
 	public boolean isConcurrentEditingIgnored(IDirtyStateEditorSupportClient client) {
 		assertFalse(ignoreConcurrentEditing.isEmpty());
 		return ignoreConcurrentEditing.removeFirst();
 	}
 
+	@Override
 	public String getContents() {
 		return "otherContents";
 	}
 	
+	@Override
 	public String getActualContents() {
 		fail("Unexpected call");
 		return null;
 	}
 
+	@Override
 	public IResourceDescription getDescription() {
 		fail("Unexpected call");
 		return null;
 	}
 
+	@Override
 	public URI getURI() {
 		return resourceURI;
 	}
@@ -385,6 +395,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		return null;
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new DefaultResourceDescription(resource, null) {
 			@Override
@@ -394,47 +405,58 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		};
 	}
 
+	@Override
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		return false;
 	}
 	
+	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
 			IResourceDescriptions descriptions) throws IllegalArgumentException {
 		return false;
 	}
 
+	@Override
 	public boolean isDirty() {
 		return true;
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		return null;
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return true;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}

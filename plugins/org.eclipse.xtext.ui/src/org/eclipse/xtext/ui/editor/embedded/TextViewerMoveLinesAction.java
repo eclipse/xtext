@@ -83,6 +83,7 @@ public class TextViewerMoveLinesAction extends TextViewerAction {
 		String[] commandIds= copy ? new String[] {ITextEditorActionDefinitionIds.COPY_LINES_UP, ITextEditorActionDefinitionIds.COPY_LINES_DOWN } : new String[] {ITextEditorActionDefinitionIds.MOVE_LINES_UP, ITextEditorActionDefinitionIds.MOVE_LINES_DOWN };
 		fStrategy= new CompoundEditExitStrategy(commandIds);
 		fStrategy.addCompoundListener(new ICompoundEditListener() {
+			@Override
 			public void endCompoundEdit() {
 				TextViewerMoveLinesAction.this.endCompoundEdit();
 			}

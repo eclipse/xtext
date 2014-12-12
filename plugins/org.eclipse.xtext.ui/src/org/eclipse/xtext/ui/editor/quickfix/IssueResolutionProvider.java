@@ -24,10 +24,12 @@ public interface IssueResolutionProvider {
 
 	public static class NullImpl implements IssueResolutionProvider {
 
+		@Override
 		public List<IssueResolution> getResolutions(Issue issue) {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public boolean hasResolutionFor(String issueCode) {
 			return false;
 		}

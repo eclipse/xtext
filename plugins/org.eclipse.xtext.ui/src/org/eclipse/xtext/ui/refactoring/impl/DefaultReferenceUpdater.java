@@ -146,10 +146,12 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			int indexInList, EObject newTargetElement) {
 		// by default choose the shortest text
 		return new RefTextEvaluator() {
+			@Override
 			public boolean isValid(IEObjectDescription target) {
 				return true;
 			}
 			
+			@Override
 			public boolean isBetterThan(String newText, String currentText) {
 				return newText.length() < currentText.length();
 			}

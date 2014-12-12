@@ -18,7 +18,9 @@ public class Concrete<T> extends Abstract<T> {
 }
 
 abstract class Abstract<T> implements Interface<T> {
+	@Override
 	public abstract void overriddenByAll(T element);
+	@Override
 	public T inherited() { return null; }
 }
 

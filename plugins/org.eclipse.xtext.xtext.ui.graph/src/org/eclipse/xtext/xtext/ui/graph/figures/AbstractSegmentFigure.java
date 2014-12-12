@@ -33,16 +33,19 @@ public abstract class AbstractSegmentFigure extends Figure implements ISegmentFi
 		setLayoutManager(createLayoutManager());
 	}
 	
+	@Override
 	public URI getEObjectURI() {
 		return eObjectURI;
 	}
 
 	protected abstract LayoutManager createLayoutManager();
 
+	@Override
 	public CrossPoint getEntry() {
 		return entry;
 	}
 
+	@Override
 	public CrossPoint getExit() {
 		return exit;
 	}

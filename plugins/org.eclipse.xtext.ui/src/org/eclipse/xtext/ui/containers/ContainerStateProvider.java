@@ -15,6 +15,7 @@ public class ContainerStateProvider implements IAllContainersState.Provider {
 	@Inject
 	private LiveShadowedAllContainerState.Provider liveShadowedAllContainerStateProvider;
 
+	@Override
 	public IAllContainersState get(IResourceDescriptions context) {
 		if (context instanceof LiveShadowedResourceDescriptions) {
 			IResourceDescriptions local = ((LiveShadowedResourceDescriptions) context).getLocalDescriptions();

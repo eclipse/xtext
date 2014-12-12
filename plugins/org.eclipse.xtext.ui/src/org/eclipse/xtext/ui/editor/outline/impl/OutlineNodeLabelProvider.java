@@ -77,6 +77,7 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 		}
 	}
 
+	@Override
 	public String getText(Object element) {
 		final StyledString styledText = getStyledText(element);
 		return styledText != null? styledText.toString() : null;

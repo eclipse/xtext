@@ -95,6 +95,7 @@ public class Bug369087Test extends AbstractAutoEditTest {
 
 	protected Object getContentTypeCategory(IXtextDocument xtextDocument) {
 		return find(newArrayList(xtextDocument.getPositionCategories()), new Predicate<Object>() {
+			@Override
 			public boolean apply(Object input) {
 				return input.toString().startsWith("__content_types_category");
 			}

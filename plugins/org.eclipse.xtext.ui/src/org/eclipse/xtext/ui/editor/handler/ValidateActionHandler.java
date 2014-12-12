@@ -42,6 +42,7 @@ public class ValidateActionHandler extends AbstractHandler {
 	@Inject
 	private IssueResolutionProvider issueResolutionProvider;
 	
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (xtextEditor != null) {

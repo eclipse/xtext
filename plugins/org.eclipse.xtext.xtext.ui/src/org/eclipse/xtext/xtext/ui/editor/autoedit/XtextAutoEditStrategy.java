@@ -31,6 +31,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor);
 		acceptor.accept(singleLineTerminals.newInstance(":", ";", new StrategyPredicate() {
+			@Override
 			public boolean isInsertClosingBracket(IDocument doc, final int offset) throws BadLocationException {
 				String currentRuleUptoOffset = getCurrentRuleUptoOffset(offset, doc);
 				Matcher matcher = singleColonPattern.matcher(currentRuleUptoOffset);

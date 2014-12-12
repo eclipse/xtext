@@ -51,6 +51,7 @@ public class SaveHelper {
 			@Override
 			protected void run() throws Exception {
 				workspace.run(new IWorkspaceRunnable() {
+					@Override
 					public void run(IProgressMonitor monitor) throws CoreException {
 						IWorkbenchPage workbenchPage = getWorkbenchPage(context);
 						if (prefs.isSaveAllBeforeRefactoring()) 

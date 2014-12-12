@@ -91,10 +91,12 @@ public class XtextProjectInfo implements IProjectInfo {
 		this.languageName = languageName;
 	}
 
+	@Override
 	public String getProjectName() {
 		return projectName;
 	}
 
+	@Override
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}

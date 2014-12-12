@@ -88,6 +88,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 		editor.getSelectionProvider().setSelection(selection);
 		waitForDisplay();
 		IRenameElementContext context = editor.getDocument().readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
+			@Override
 			public IRenameElementContext exec(XtextResource state) throws Exception {
 				Reference ref = (Reference) state.getContents().get(0).eContents().get(0);
 				EObject referenced = ref.getReferenced();

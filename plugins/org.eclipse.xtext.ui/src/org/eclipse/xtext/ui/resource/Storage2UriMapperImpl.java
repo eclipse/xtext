@@ -49,16 +49,20 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	@Inject private UriValidator uriValidator;
 
 	private IStorage2UriMapperContribution contribution = new IStorage2UriMapperContribution() {
+		@Override
 		public void initializeCache() {
 			// nothing to do
 		}
+		@Override
 		public boolean isRejected(/* @NonNull */ IFolder folder) {
 			return false;
 		}
 		/* @NonNull */ 
+		@Override
 		public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
 			return Collections.emptyList();
 		}
+		@Override
 		public URI getUri(/* @NonNull */ IStorage storage) {
 			return null;
 		}
@@ -106,11 +110,13 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 				break;
 			default:
 				contribution = new IStorage2UriMapperContribution() {
+					@Override
 					public void initializeCache() {
 						for(IStorage2UriMapperContribution contribution: allContributions) {
 							contribution.initializeCache();
 						}
 					}
+					@Override
 					public boolean isRejected(/* @NonNull */ IFolder folder) {
 						for(int i = 0; i < size; i++) {
 							if (allContributions.get(i).isRejected(folder)) {
@@ -120,15 +126,18 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 						return false;
 					}
 					/* @NonNull */
+					@Override
 					public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ final URI uri) {
 						return Iterables.concat(Lists.transform(allContributions, new Function<IStorage2UriMapperContribution, Iterable<Pair<IStorage, IProject>>>() {
 							/* @NonNull */
+							@Override
 							public Iterable<Pair<IStorage, IProject>> apply(IStorage2UriMapperContribution contribution) {
 								return contribution.getStorages(uri);
 							}
 						}));
 					}
 					/* @Nullable */
+					@Override
 					public URI getUri(/* @NonNull */ IStorage storage) {
 						for(int i = 0; i < size; i++) {
 							URI result = allContributions.get(i).getUri(storage);
@@ -145,6 +154,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public void initializeCache() {
 		contribution.initializeCache();
 	}
@@ -152,10 +162,12 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public Map<URI, IStorage> getAllEntries(IContainer container) {
 		final Map<URI,IStorage> result = newLinkedHashMap();
 		try {
 			container.accept(new IResourceVisitor() {
+				@Override
 				public boolean visit(IResource resource) throws CoreException {
 					if (resource instanceof IFile) {
 						final IFile storage = (IFile) resource;
@@ -185,6 +197,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		return !contribution.isRejected(folder);
 	}
 
+	@Override
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
 		if (!uri.isPlatformResource()) {
 			// support storage lookup by absolute file URI as it is possibly resolved by importURI references
@@ -212,6 +225,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapperExtension {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 
+	@Override
 	public URI getUri(IStorage storage) {
 		if (!uriValidator.isPossiblyManaged(storage))
 			return null;

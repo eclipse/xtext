@@ -125,6 +125,7 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		ModifyListener listener= new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				doTextWidgetChanged(e.widget);
 			}
@@ -183,11 +184,13 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 		fInsertVariableButton.setLayoutData(getButtonGridData());
 		fInsertVariableButton.setText(TemplateDialogMessages.EditTemplateDialog_insert_variable);
 		fInsertVariableButton.addSelectionListener(new SelectionListener() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				fPatternEditor.getTextWidget().setFocus();
 				fPatternEditor.doOperation(ISourceViewer.CONTENTASSIST_PROPOSALS);
 			}
 
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
 
@@ -285,6 +288,7 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 	protected SourceViewer createViewer(Composite parent) {
 		Builder editorBuilder = configuration.getEmbeddedEditorFactory().newEditor(resourceProvider);
 		editorBuilder.processIssuesBy(new IValidationIssueProcessor() {
+			@Override
 			public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 				IStatus result = Status.OK_STATUS;
 				StringBuilder messages = new StringBuilder();
@@ -300,6 +304,7 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 				}
 				final IStatus toBeUpdated = result;
 				getShell().getDisplay().asyncExec(new Runnable() {
+					@Override
 					public void run() {
 						updateStatus(toBeUpdated);
 					}
@@ -343,6 +348,7 @@ public class EditTemplateDialog extends StatusDialog implements IEditTemplateDia
 		super.okPressed();
 	}
 
+	@Override
 	public Template getTemplate() {
 		return fTemplate;
 	}

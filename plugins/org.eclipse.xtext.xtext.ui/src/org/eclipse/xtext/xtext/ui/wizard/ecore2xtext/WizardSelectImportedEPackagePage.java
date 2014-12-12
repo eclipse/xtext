@@ -64,6 +64,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		setDescription(Messages.WizardSelectImportedEPackagePage_Description);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
@@ -73,12 +74,15 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		importedEPackagesViewer = new TableViewer(composite, SWT.BORDER);
 		importedEPackagesViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3));
 		importedEPackagesViewer.setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				return Iterables.toArray(ePackageInfos, EPackageInfo.class);
 			}
@@ -166,21 +170,26 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 			}
 		});
 		rootElementComboViewer.setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				Iterable<EClass> eClasses = Iterables.filter(Iterables.concat(Iterables.transform(ePackageInfos,
 						new Function<EPackageInfo, List<EClassifier>>() {
+							@Override
 							public List<EClassifier> apply(EPackageInfo from) {
 								return from.getEPackage().getEClassifiers();
 							}
 						})), EClass.class);
 				List<EClass> result = Lists.newArrayList(eClasses);
 				Collections.sort(result, new Comparator<EClass>() {
+					@Override
 					public int compare(EClass o1, EClass o2) {
 						return o1.getName().compareTo(o2.getName());
 					}

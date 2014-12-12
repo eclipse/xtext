@@ -29,6 +29,7 @@ public class StandaloneBuilderInjectorProvider implements IInjectorProvider, IRe
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector() {
 		if (injector == null) {
 			stateBeforeInjectorCreation = GlobalRegistries.makeCopyOfGlobalState();
@@ -43,10 +44,12 @@ public class StandaloneBuilderInjectorProvider implements IInjectorProvider, IRe
 		return Guice.createInjector(new StandaloneBuilderModule());
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

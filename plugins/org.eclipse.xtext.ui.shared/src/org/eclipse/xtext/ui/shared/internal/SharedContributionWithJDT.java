@@ -39,6 +39,7 @@ import com.google.inject.Scopes;
  */
 public class SharedContributionWithJDT implements Module {
 
+	@Override
 	public void configure(Binder binder) {
 		if (Activator.isJavaEnabled()) {
 			binder.install(new Delegate());
@@ -47,6 +48,7 @@ public class SharedContributionWithJDT implements Module {
 	
 	private static class Delegate implements Module {
 
+		@Override
 		public void configure(Binder binder) {
 			binder.bind(JarEntryLocator.class);
 			

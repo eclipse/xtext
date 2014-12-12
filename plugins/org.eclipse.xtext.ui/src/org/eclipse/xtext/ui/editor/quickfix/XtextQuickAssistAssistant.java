@@ -43,15 +43,18 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 	protected void setRestoreSelection() {
 		addCompletionListener(new ICompletionListener() {
 
+			@Override
 			public void assistSessionStarted(ContentAssistEvent event) {
 				Point selectedRange = viewer.getSelectedRange();
 				storePosition(selectedRange.x, selectedRange.y);
 			}
 
+			@Override
 			public void assistSessionEnded(ContentAssistEvent event) {
 				restorePosition();
 			}
 
+			@Override
 			public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
 			}
 		});

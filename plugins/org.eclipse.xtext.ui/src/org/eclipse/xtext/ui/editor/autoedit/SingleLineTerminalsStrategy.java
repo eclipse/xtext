@@ -51,6 +51,7 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 	}
 
 	public static StrategyPredicate DEFAULT = new StrategyPredicate() {
+		@Override
 		public boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException {
 			if (doc.getLength() <= offset)
 				return true;

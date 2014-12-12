@@ -40,6 +40,7 @@ public class EclipseResourceFileSystemAccessTest extends Assert {
 		fileSystemAccess.setOutputPath("test");
 		final List<String> newFiles = newArrayList();
 		fileSystemAccess.setNewFileAcceptor(new IAcceptor<String>() {
+			@Override
 			public void accept(String t) {
 				newFiles.add(t);
 			}

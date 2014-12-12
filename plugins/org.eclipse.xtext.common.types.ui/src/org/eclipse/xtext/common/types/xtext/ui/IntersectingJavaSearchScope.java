@@ -32,6 +32,7 @@ public class IntersectingJavaSearchScope implements IJavaSearchScope {
 		this.dontAsk = new boolean[scopes.length];
 	}
 
+	@Override
 	public boolean encloses(String resourcePath) {
 		boolean result = false;
 		for (int i = 0; i < scopes.length; i++) {
@@ -50,6 +51,7 @@ public class IntersectingJavaSearchScope implements IJavaSearchScope {
 		return result;
 	}
 
+	@Override
 	public boolean encloses(IJavaElement element) {
 		boolean result = false;
 		for (int i = 0; i < scopes.length; i++) {
@@ -68,6 +70,7 @@ public class IntersectingJavaSearchScope implements IJavaSearchScope {
 		return result;
 	}
 
+	@Override
 	public IPath[] enclosingProjectsAndJars() {
 		if (scopes.length == 0)
 			return new IPath[0];
@@ -86,6 +89,7 @@ public class IntersectingJavaSearchScope implements IJavaSearchScope {
 		return result.toArray(new IPath[result.size()]);
 	}
 
+	@Override
 	@Deprecated
 	public boolean includesBinaries() {
 		for (IJavaSearchScope scope : scopes)
@@ -94,6 +98,7 @@ public class IntersectingJavaSearchScope implements IJavaSearchScope {
 		return true;
 	}
 
+	@Override
 	@Deprecated
 	public boolean includesClasspaths() {
 		for (IJavaSearchScope scope : scopes)
@@ -102,12 +107,14 @@ public class IntersectingJavaSearchScope implements IJavaSearchScope {
 		return true;
 	}
 
+	@Override
 	@Deprecated
 	public void setIncludesBinaries(boolean includesBinaries) {
 		for (IJavaSearchScope scope : scopes)
 			scope.setIncludesBinaries(includesBinaries);
 	}
 
+	@Override
 	@Deprecated
 	public void setIncludesClasspaths(boolean includesClasspaths) {
 		for (IJavaSearchScope scope : scopes)

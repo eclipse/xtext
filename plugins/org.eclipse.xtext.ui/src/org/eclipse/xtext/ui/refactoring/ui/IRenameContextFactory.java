@@ -38,6 +38,7 @@ public interface IRenameContextFactory {
 		@Inject
 		private IResourceServiceProvider resourceServiceProvider;
 
+		@Override
 		public IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
 				final ITextSelection selection, XtextResource resource) {
 			if(!resourceServiceProvider.canHandle(EcoreUtil2.getPlatformResourceOrNormalizedURI(targetElement))) {

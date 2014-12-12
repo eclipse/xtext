@@ -41,8 +41,10 @@ public class OutlineFilterAndSorter {
 			filteredNodes = nodes;
 		} else {
 			filteredNodes = Iterables.filter(nodes, new Predicate<IOutlineNode>() {
+				@Override
 				public boolean apply(final IOutlineNode node) {
 					return Iterables.all(enabledFilters, new Predicate<IFilter>() {
+						@Override
 						public boolean apply(IFilter filter) {
 							return filter.apply(node);
 						}
@@ -65,6 +67,7 @@ public class OutlineFilterAndSorter {
 
 	protected Iterable<IFilter> getEnabledFilters() {
 		return Iterables.filter(filters, new Predicate<IFilter>() {
+			@Override
 			public boolean apply(IFilter filter) {
 				return filter.isEnabled();
 			}

@@ -71,14 +71,17 @@ public class PartitionTokenScannerTest extends Assert {
 			this.offset = offset;
 		}
 
+		@Override
 		public int getLength() {
 			return length;
 		}
 
+		@Override
 		public int getOffset() {
 			return offset;
 		}
 
+		@Override
 		public int getLexerTokenType() {
 			return type;
 		}
@@ -104,10 +107,12 @@ public class PartitionTokenScannerTest extends Assert {
 		};
 		tokenScanner.setMapper(new ITokenTypeToPartitionTypeMapper() {
 			
+			@Override
 			public String[] getSupportedPartitionTypes() {
 				throw new UnsupportedOperationException();
 			}
 			
+			@Override
 			public String getPartitionType(int antlrTokenType) {
 				return ""+antlrTokenType;
 			}

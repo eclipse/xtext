@@ -91,7 +91,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
             }
         });
         res.setLinkingService(new ILinkingService() {
-            public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
+            @Override
+			public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
                     throws IllegalNodeException {
                 return Lists.newArrayList(referencedObject);
             }
@@ -116,7 +117,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
             }
         });
         res.setLinkingService(new ILinkingService() {
-            public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
+            @Override
+			public List<EObject> getLinkedObjects(EObject context, EReference reference, INode node)
                     throws IllegalNodeException {
                 return Collections.emptyList();
             }
@@ -180,6 +182,7 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
 		res1.eAdapters().add(notificationAlert);
 		
 		Entity e = (Entity) find(EcoreUtil2.eAllContents(res1.getContents().get(0)),new Predicate<EObject>() {
+			@Override
 			public boolean apply(EObject input) {
 				return input instanceof Entity;
 			}
@@ -216,7 +219,8 @@ public class LazyLinkingResourceTest extends AbstractXtextTests {
     			+ "}"), null);
     	res1.eAdapters().add(notificationAlert);
     	Entity e = (Entity) find(EcoreUtil2.eAllContents(res1.getContents().get(0)),new Predicate<EObject>() {
-    		public boolean apply(EObject input) {
+    		@Override
+			public boolean apply(EObject input) {
     			return input instanceof Entity;
     		}
     	});

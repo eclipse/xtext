@@ -22,6 +22,7 @@ public interface IChangeRedirector {
 
 	IChangeRedirector NULL = new IChangeRedirector() {
 
+		@Override
 		public IPath getRedirectedPath(IPath source) {
 			return source;
 		}

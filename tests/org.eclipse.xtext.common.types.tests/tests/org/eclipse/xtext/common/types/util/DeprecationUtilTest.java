@@ -38,6 +38,7 @@ public class DeprecationUtilTest extends Assert {
 	
 	protected JvmOperation getOperation(JvmDeclaredType type, final String name) {
 		JvmOperation operation = find(type.getDeclaredOperations(), new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation op) {
 				return equal(name, op.getSimpleName());
 			}

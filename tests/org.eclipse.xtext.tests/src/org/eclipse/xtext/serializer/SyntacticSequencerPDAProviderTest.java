@@ -49,6 +49,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		private Function<AbstractElement, String> ts = new GrammarElementTitleSwitch().showAssignments()
 				.hideCardinality().showQualified();
 
+		@Override
 		public String apply(ISynState from) {
 			return from.getType().getSimpleType() == PDAStateType.ELEMENT ? ts.apply(from.getGrammarElement()) : from
 					.toString();
@@ -91,6 +92,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 			for (EClass type : contextProvider.getTypesForContext(ctx))
 				result.add(Tuples.create(type, ctx, ctx2name.getContextName(ctx)));
 		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
+			@Override
 			public int compare(Triple<EClass, EObject, String> o1, Triple<EClass, EObject, String> o2) {
 				String n1 = o1.getFirst() == null ? "null" : o1.getFirst().getName();
 				String n2 = o2.getFirst() == null ? "null" : o2.getFirst().getName();

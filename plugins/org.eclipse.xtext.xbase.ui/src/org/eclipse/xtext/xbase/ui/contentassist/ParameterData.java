@@ -41,6 +41,7 @@ public class ParameterData {
 		if (sorted)
 			return;
 		Collections.sort(variants, new Comparator<Pair<String, Boolean>>() {
+			@Override
 			public int compare(Pair<String, Boolean> o1, Pair<String, Boolean> o2) {
 				return o1.getFirst().compareTo(o2.getFirst());
 			}
@@ -63,6 +64,7 @@ public class ParameterData {
 	public List<String> getRawDisplayString() {
 		sort();
 		return Lists.transform(variants, new Function<Pair<String, Boolean>, String>() {
+			@Override
 			public String apply(Pair<String, Boolean> input) {
 				return input.getFirst();
 			}

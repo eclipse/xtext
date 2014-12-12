@@ -19,16 +19,20 @@ public abstract class ModeAwareOutlineTreeProvider extends DefaultOutlineTreePro
 
 	private int currentModeIndex = 0;
 	
+	@Override
 	public abstract List<OutlineMode> getOutlineModes();
 	
+	@Override
 	public OutlineMode getCurrentMode() {
 		return getOutlineModes().get(currentModeIndex);
 	}
 	
+	@Override
 	public OutlineMode getNextMode() {
 		return getOutlineModes().get((currentModeIndex + 1) % getOutlineModes().size());
 	}
 	
+	@Override
 	public void setCurrentMode(OutlineMode outlineMode) {
 		int newIndex = getOutlineModes().indexOf(outlineMode);
 		if(newIndex != -1)

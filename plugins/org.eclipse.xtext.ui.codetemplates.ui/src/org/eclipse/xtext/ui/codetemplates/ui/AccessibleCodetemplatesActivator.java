@@ -40,6 +40,7 @@ public class AccessibleCodetemplatesActivator extends CodetemplatesActivator {
 
 	public static Provider<TemplatesLanguageConfiguration> getTemplatesLanguageConfigurationProvider() {
 		return new Provider<TemplatesLanguageConfiguration>() {
+			@Override
 			public TemplatesLanguageConfiguration get() {
 				return ((AccessibleCodetemplatesActivator) getInstance()).getTemplatesLanguageConfigurationInstance();
 			}
@@ -52,6 +53,7 @@ public class AccessibleCodetemplatesActivator extends CodetemplatesActivator {
 
 	public static Provider<LanguageRegistry> getLanguageRegistry() {
 		return new Provider<LanguageRegistry>() {
+			@Override
 			public LanguageRegistry get() {
 				return ((AccessibleCodetemplatesActivator) getInstance()).languageRegistry;
 			}

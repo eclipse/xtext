@@ -51,6 +51,7 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 
 	protected List<Issue> getIssues(IXtextDocument document) {
 		return document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
+			@Override
 			public List<Issue> exec(XtextResource state) throws Exception {
 				return state.getResourceServiceProvider().getResourceValidator().validate(state, CheckMode.ALL, null);
 			}

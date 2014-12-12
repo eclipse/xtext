@@ -53,27 +53,33 @@ public interface ITypesProposalProvider {
 	
 	public class Null implements ITypesProposalProvider {
 
+		@Override
 		public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
 				EReference typeReference, ICompletionProposalAcceptor acceptor) {
 		}
 		
+		@Override
 		public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
 				EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
 		}
 		
+		@Override
 		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 				ContentAssistContext context, EReference typeReference, ICompletionProposalAcceptor acceptor) {
 		}
 
+		@Override
 		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 				ContentAssistContext context, EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
 		}
 
+		@Override
 		public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
 				EReference typeReference, Filter filter, IValueConverter<String> valueConverter,
 				ICompletionProposalAcceptor acceptor) {
 		}
 
+		@Override
 		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 				ContentAssistContext context, EReference typeReference, Filter filter,
 				IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {

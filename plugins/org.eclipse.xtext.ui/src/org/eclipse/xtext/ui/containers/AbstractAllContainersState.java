@@ -86,6 +86,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 		}
 	}
 	
+	@Override
 	public String getContainerHandle(URI uri) {
 		String result = null;
 		try {
@@ -113,6 +114,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 	
 	protected abstract String doInitHandle(URI uri);
 	
+	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		Collection<URI> result = null;
 		try {
@@ -128,6 +130,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 		return initContainedURIs(containerHandle, result);
 	}
 	
+	@Override
 	public boolean isEmpty(String containerHandle) {
 		Collection<URI> uris = null;
 		try {
@@ -162,6 +165,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 	
 	protected abstract Collection<URI> doInitContainedURIs(String containerHandle);
 
+	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		List<String> visibleHandles = null;
 		try {
@@ -192,6 +196,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 	
 	protected abstract List<String> doInitVisibleHandles(String handle);
 	
+	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE 
 				|| event.getType() == IResourceChangeEvent.PRE_DELETE) {
@@ -203,6 +208,7 @@ public abstract class AbstractAllContainersState extends AbstractStorage2UriMapp
 			final Wrapper<Boolean> clear = Wrapper.wrap(Boolean.FALSE);
 			try {
 				delta.accept(new IResourceDeltaVisitor() {
+					@Override
 					public boolean visit(IResourceDelta delta) throws CoreException {
 						if (clear.get().booleanValue())
 							return false;

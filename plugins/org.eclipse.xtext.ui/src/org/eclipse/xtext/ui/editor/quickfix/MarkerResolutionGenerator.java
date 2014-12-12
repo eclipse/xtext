@@ -67,10 +67,12 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		return editorId;
 	}
 
+	@Override
 	public boolean hasResolutions(IMarker marker) {
 		return getResolutionProvider().hasResolutionFor(getIssueUtil().getCode(marker));
 	}
 
+	@Override
 	public IMarkerResolution[] getResolutions(IMarker marker) {
 		final IMarkerResolution[] emptyResult = new IMarkerResolution[0];
 		try {
@@ -99,6 +101,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 		return Iterators.any(iterator, new Predicate<Annotation>() {
 
+			@Override
 			public boolean apply(Annotation annotation) {
 				if (annotation.isMarkedDeleted())
 					return false;
@@ -164,18 +167,22 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			this.resolution = resolution;
 		}
 
+		@Override
 		public String getLabel() {
 			return resolution.getLabel();
 		}
 
+		@Override
 		public void run(IMarker marker) {
 			resolution.apply();
 		}
 
+		@Override
 		public String getDescription() {
 			return resolution.getDescription();
 		}
 
+		@Override
 		public Image getImage() {
 			return MarkerResolutionGenerator.this.getImage(resolution);
 		}

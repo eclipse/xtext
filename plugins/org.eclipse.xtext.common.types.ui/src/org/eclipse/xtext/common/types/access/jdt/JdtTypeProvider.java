@@ -373,10 +373,12 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return new JdtTypeMirror(type, typeFactory, services);
 	}
 	
+	@Override
 	public IJavaProject getJavaProject() {
 		return javaProject;
 	}
 	
+	@Override
 	public TypeURIHelper getTypeUriHelper() {
 		return typeUriHelper;
 	}

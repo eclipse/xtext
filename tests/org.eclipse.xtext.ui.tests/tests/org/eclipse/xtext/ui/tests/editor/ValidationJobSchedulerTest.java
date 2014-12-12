@@ -93,14 +93,17 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		documentResource = new TestableDocumentResource();
 		targetResource = new AbstractResourceDescription() {
 			
+			@Override
 			public URI getURI() {
 				return targetURI;
 			}
 			
+			@Override
 			public Iterable<IReferenceDescription> getReferenceDescriptions() {
 				throw new UnsupportedOperationException();
 			}
 			
+			@Override
 			public Iterable<QualifiedName> getImportedNames() {
 				throw new UnsupportedOperationException();
 			}
@@ -223,14 +226,17 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		return referenceDescriptions;
 	}
 
+	@Override
 	public IResourceDescription getDescription() {
 		return targetResource;
 	}
 
+	@Override
 	public URI getURI() {
 		return targetURI;
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI normalizedURI) {
 		if (noDocumentDescription)
 			return null;
@@ -239,22 +245,27 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		throw new UnsupportedOperationException();
 	}
@@ -263,14 +274,17 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
 	public String getContents() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getActualContents() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		throw new UnsupportedOperationException();
 	}
@@ -279,14 +293,17 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		
 		private String importedName;
 		
+		@Override
 		public URI getURI() {
 			return documentURI;
 		}
 
+		@Override
 		public Iterable<IReferenceDescription> getReferenceDescriptions() {
 			return referenceDescriptions;
 		}
 
+		@Override
 		public Iterable<QualifiedName> getImportedNames() {
 			if (importedName == null)
 				throw new UnsupportedOperationException();
@@ -307,41 +324,51 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 			this.exportedName = exportedName;
 		}
 		
+		@Override
 		public boolean isEmpty() {
 			return false;
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects() {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Iterable<IResourceDescription> getAllResourceDescriptions() {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public IResourceDescription getResourceDescription(final URI uri) {
 			return new AbstractResourceDescription() {
 
+				@Override
 				public Iterable<QualifiedName> getImportedNames() {
 					return Collections.emptyList();
 				}
 
+				@Override
 				public Iterable<IReferenceDescription> getReferenceDescriptions() {
 					return Collections.emptyList();
 				}
 
+				@Override
 				public URI getURI() {
 					return uri;
 				}

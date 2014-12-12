@@ -38,6 +38,7 @@ public class RealXtextDocumentModifyTest extends AbstractEditorTest {
 		final IXtextDocument document = createDocument(grammar);
 		final int[] changeCounter = new int[] { 0 };
 		document.addModelListener(new IXtextModelListener() {
+			@Override
 			public void modelChanged(XtextResource resource) {
 				++changeCounter[0]; 
 			}

@@ -169,7 +169,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             // resources that are not yet in the delta. Validate resources. Do this in chunks.
             final SubMonitor subProgress = progress.newChild(80);
             CancelIndicator cancelMonitor = new CancelIndicator() {
-                public boolean isCanceled() {
+                @Override
+				public boolean isCanceled() {
                     return progress.isCanceled();
                 }
             };

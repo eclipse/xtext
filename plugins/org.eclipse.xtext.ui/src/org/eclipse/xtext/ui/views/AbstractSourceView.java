@@ -143,10 +143,12 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 		return JFaceResources.DEFAULT_FONT;
 	}
 
+	@Override
 	public void selectionChanged(IWorkbenchPart workbenchPart, ISelection selection) {
 		computeAndSetInput(new DefaultWorkbenchPartSelection(workbenchPart, selection));
 	}
 
+	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (getSourceViewer() == null) {
 			return;
@@ -158,6 +160,7 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 		}
 	}
 	
+	@Override
 	public void partVisible(IWorkbenchPartReference ref) {
 		if (ref.getId().equals(getSite().getId())) {
 			IWorkbenchPart activePart = ref.getPage().getActivePart();
@@ -168,12 +171,14 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 		}
 	}
 
+	@Override
 	public void partHidden(IWorkbenchPartReference ref) {
 		if (ref.getId().equals(getSite().getId())) {
 			removePostSelectionListener();
 		}
 	}
 
+	@Override
 	public void partInputChanged(IWorkbenchPartReference ref) {
 		if (!ref.getId().equals(getSite().getId())) {
 			IWorkbenchPart workbenchPart = ref.getPart(false);
@@ -189,18 +194,23 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 		}
 	}
 
+	@Override
 	public void partActivated(IWorkbenchPartReference ref) {
 	}
 
+	@Override
 	public void partBroughtToTop(IWorkbenchPartReference ref) {
 	}
 
+	@Override
 	public void partClosed(IWorkbenchPartReference ref) {
 	}
 
+	@Override
 	public void partDeactivated(IWorkbenchPartReference ref) {
 	}
 
+	@Override
 	public void partOpened(IWorkbenchPartReference ref) {
 	}
 
@@ -231,6 +241,7 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 		final int currentCount = ++computeCount;
 		ThreadFactory threadFactory = Executors.defaultThreadFactory();
 		Thread thread = threadFactory.newThread(new Runnable() {
+			@Override
 			public void run() {
 				if (currentCount != computeCount) {
 					return;
@@ -244,6 +255,7 @@ public abstract class AbstractSourceView extends ViewPart implements IPartListen
 					return;
 				}
 				runAsyncInDisplayThread(new Runnable() {
+					@Override
 					public void run() {
 						if (computeCount != currentCount || getViewSite().getShell().isDisposed()) {
 							return;

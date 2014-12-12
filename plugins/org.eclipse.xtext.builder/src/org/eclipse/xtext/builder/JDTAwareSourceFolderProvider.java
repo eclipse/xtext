@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
  */
 public class JDTAwareSourceFolderProvider implements EclipseSourceFolderProvider {
 
+	@Override
 	public List<? extends IContainer> getSourceFolders(IProject project) {
 		List<IContainer> sourceFolders = Lists.newArrayList();
 		IJavaProject javaProject = JavaCore.create(project);

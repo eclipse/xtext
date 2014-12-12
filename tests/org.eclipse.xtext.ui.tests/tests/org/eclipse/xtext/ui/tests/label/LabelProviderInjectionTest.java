@@ -25,6 +25,7 @@ public class LabelProviderInjectionTest extends Assert {
 
 	@org.junit.Test public void testLabelProviderInjection() throws Exception {
 		Module module = new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(ILabelProvider.class).annotatedWith(ResourceServiceDescriptionLabelProvider.class).to(LabelProvider.class);
 			}

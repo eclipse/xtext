@@ -31,6 +31,7 @@ public class ActivationCodeTrigger implements VerifyKeyListener {
 		this.activationCodes = activationCodes;
 	}
 
+	@Override
 	public void verifyKey(VerifyEvent event) {
 
 		ActionActivationCode code= null;

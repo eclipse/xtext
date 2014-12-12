@@ -101,6 +101,7 @@ public class StopwatchRule implements TestRule {
 		return sb.toString();
 	}
 
+	@Override
 	public Statement apply(final Statement base, final Description description) {
 		if (!watchAll && description.getAnnotation(Timed.class) == null)
 			return base;

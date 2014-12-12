@@ -52,12 +52,14 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 		}
 	}
 
+	@Override
 	public void contributeActions(XtextEditor editor) {
 		this.editor = editor;
 		setEnabled(true);
 		editor.setAction(getId(), this);
 	}
 	
+	@Override
 	public void editorDisposed(XtextEditor editor) {
 	}
 }

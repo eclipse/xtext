@@ -216,6 +216,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	public void scheduleRefresh() {
 		if (getTreeViewer() != null) {
 			IOutlineNode rootNode = document.priorityReadOnly(new IUnitOfWork<IOutlineNode, XtextResource>() {
+				@Override
 				public IOutlineNode exec(XtextResource state) throws Exception {
 					IOutlineNode rootNode = treeProvider.createRoot(document);
 					createChildrenRecursively(rootNode.getChildren());
@@ -275,6 +276,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		filterText.setText(""); //$NON-NLS-1$
 
 		filterText.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				String text = ((Text) e.widget).getText();
 				setMatcherString(text, true);
@@ -370,6 +372,7 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		getShell().removeDisposeListener(listener);
 	}
 
+	@Override
 	public void widgetDisposed(DisposeEvent event) {
 		treeViewer = null;
 		filterText = null;

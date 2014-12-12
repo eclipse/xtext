@@ -67,6 +67,7 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	@Inject
 	private TypeNameGuesser typeNameGuesser;
 	
+	@Override
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
 			EObject referenceOwner, EReference unresolvedReference)
@@ -97,8 +98,10 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create Java interface '" + typeName + "'" + packageDescription,
 				"Opens the new Java interface wizard to create the type '" + typeName + "'" + packageDescription,
 				"java_interface.gif", new IModification() {
+					@Override
 					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
+							@Override
 							public void run() {
 								NewInterfaceWizardPage classWizardPage = new NewInterfaceWizardPage();
 								NewInterfaceCreationWizard wizard = new NewInterfaceCreationWizard(classWizardPage, true);
@@ -117,8 +120,10 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create Java class '" + typeName + "'" + packageDescription,
 				"Opens the new Java class wizard to create the type '" + typeName + "'" + packageDescription, "java_file.gif",
 				new ISemanticModification() {
+					@Override
 					public void apply(EObject element, IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
+							@Override
 							public void run() {
 								NewClassWizardPage classWizardPage = new NewClassWizardPage();
 								NewClassCreationWizard wizard = new NewClassCreationWizard(classWizardPage, true);
@@ -143,8 +148,10 @@ public class CreateJavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create Java annotation '@" + typeName + "'" + packageDescription,
 				"Opens the new Java annotation wizard to create the type '@" + typeName + "'" + packageDescription, "java_file.gif",
 				new IModification() {
+					@Override
 					public void apply(/* @Nullable */ IModificationContext context) throws Exception {
 						runAsyncInDisplayThread(new Runnable() {
+							@Override
 							public void run() {
 								NewAnnotationWizardPage annotationWizardPage = new NewAnnotationWizardPage();
 								NewAnnotationCreationWizard wizard = new NewAnnotationCreationWizard(annotationWizardPage, true);

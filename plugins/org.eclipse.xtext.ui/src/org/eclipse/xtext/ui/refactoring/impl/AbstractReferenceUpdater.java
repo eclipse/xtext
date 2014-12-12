@@ -51,6 +51,7 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 	@Inject
 	private RefactoringResourceSetProvider resourceSetProvider;
 
+	@Override
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
 			Iterable<IReferenceDescription> referenceDescriptions, IRefactoringUpdateAcceptor updateAcceptor,
 			IProgressMonitor monitor) {

@@ -106,6 +106,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	@Inject 
 	private ReplaceConverter replaceConverter;
 
+	@Override
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
 			EObject referenceOwner, EReference unresolvedReference)
@@ -194,10 +195,12 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			XImportSection importSection = importsConfiguration.getImportSection((XtextResource) model.eResource());
 			if(importSection != null) {
 				parseImportSection(importSection, new IAcceptor<String>() {
+					@Override
 					public void accept(String t) {
 						visiblePackages.add(t);
 					}
 				}, new IAcceptor<String>() {
+					@Override
 					public void accept(String t) {
 						importedTypes.add(t);
 					}
@@ -319,6 +322,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
 					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor() {
 						
+						@Override
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
 								String path, org.eclipse.jdt.internal.compiler.env.AccessRestriction access) {
 							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
@@ -339,6 +343,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 									}
 									label.append(")");
 									acceptor.accept(issue, label.toString(), label.toString(), "impc_obj.gif", new ISemanticModification() {
+										@Override
 										public void apply(EObject element, IModificationContext context) throws Exception {
 											ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
 													(XtextResource) element.eResource(), 0, 0);
@@ -377,6 +382,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			searchEngine.searchAllTypeNames(wantedPackageChars, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
 					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor() {
 						
+						@Override
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
 								String path, org.eclipse.jdt.internal.compiler.env.AccessRestriction access) {
 							final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,
@@ -401,6 +407,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 										label.append(")");
 									}
 									acceptor.accept(issue, label.toString(), label.toString(), "impc_obj.gif", new ISemanticModification() {
+										@Override
 										public void apply(EObject element, IModificationContext context) throws Exception {
 											IXtextDocument document = context.getXtextDocument();
 											DocumentRewriter rewriter = rewriterFactory.create(document,

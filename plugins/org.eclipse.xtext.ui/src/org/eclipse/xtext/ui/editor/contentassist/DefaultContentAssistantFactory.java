@@ -34,6 +34,7 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	@Named("xtext.enable.styledLables")
 	private boolean enableStyledLabels = true;
 	
+	@Override
 	public IContentAssistant createConfiguredAssistant(SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
 		ContentAssistant assistant = createAssistant();

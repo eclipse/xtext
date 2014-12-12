@@ -74,14 +74,17 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 	private static final int NESTED = 2;
 	private static final int NORMAL = 1;
 	
+	@Override
 	public void reset() {
 		mode = 2;
 	}
 	
+	@Override
 	public void nextMode() {
 		mode = (mode % 3) + 1;
 	}
 	
+	@Override
 	public String getNextCategory() {
 		switch(mode) {
 			case 1: return "target language proposals";
@@ -90,6 +93,7 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 		}
 	}
 	
+	@Override
 	public boolean isLastMode() {
 		return mode == 2;
 	}
@@ -525,6 +529,7 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 			return Boolean.TRUE;
 		}
 
+		@Override
 		public void accept(AbstractElement element) {
 			doSwitch(element);
 		}

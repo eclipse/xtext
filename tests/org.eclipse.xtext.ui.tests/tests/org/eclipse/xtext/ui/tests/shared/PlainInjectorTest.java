@@ -34,6 +34,7 @@ public class PlainInjectorTest {
 	@Test(expected = ConfigurationException.class)
 	public void testEmptyInjectorNoJIT() {
 		Injector injector = Guice.createInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.requireExplicitBindings();
 			}
@@ -57,6 +58,7 @@ public class PlainInjectorTest {
 	public void testChildInjector() {
 		Injector parentInjector = Guice.createInjector();
 		Injector injector = parentInjector.createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(CharSequence.class).to(String.class);
 			}
@@ -73,6 +75,7 @@ public class PlainInjectorTest {
 	@Test(expected = ConfigurationException.class)
 	public void testEmptyChildInjectorNoJIT() {
 		Injector injector = Guice.createInjector().createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.requireExplicitBindings();
 			}
@@ -85,6 +88,7 @@ public class PlainInjectorTest {
 	public void testChildInjectorNoJIT() {
 		Injector parentInjector = Guice.createInjector();
 		Injector injector = parentInjector.createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.requireExplicitBindings();
 				binder.bind(CharSequence.class).to(String.class);
@@ -100,10 +104,12 @@ public class PlainInjectorTest {
 	public void testGrandChildInjectorNoJIT() {
 		Injector parentInjector = Guice.createInjector();
 		Injector injector = parentInjector.createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.requireExplicitBindings();
 			}
 		}).createChildInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(CharSequence.class).to(String.class);				
 			}

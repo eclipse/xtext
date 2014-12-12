@@ -172,6 +172,7 @@ public class DelegatingReferenceFinderTest extends AbstractXtextTests {
 			assertTrue(expectationQueue.isEmpty());
 		}
 
+		@Override
 		public void accept(IReferenceDescription description) {
 			IReferenceDescription nextExpected = expectationQueue.poll();
 			assertNotNull(nextExpected);

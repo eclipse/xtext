@@ -16,29 +16,35 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
  */
 public abstract class AbstractValidationMessageAcceptingTestCase extends AbstractXtextTests implements ValidationMessageAcceptor {
 
+	@Override
 	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		fail(message);
 	}
 
+	@Override
 	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
 		fail(message);
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		fail(message);
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
 		fail(message);
 	}
 
+	@Override
 	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		fail(message);
 	}
 
+	@Override
 	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
 		fail(message);
 	}

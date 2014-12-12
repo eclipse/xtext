@@ -25,6 +25,7 @@ public class SimpleLocalResourceAccess implements IReferenceFinder.ILocalResourc
 		this.resourceSet = resourceSet;
 	}
 
+	@Override
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		try {
 			return work.exec(resourceSet);

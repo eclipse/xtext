@@ -103,6 +103,7 @@ public class ReferenceUpdaterDispatcher {
 			this.status = status;
 		}
 
+		@Override
 		public void accept(IReferenceDescription referenceDescription) {
 			if (referenceDescription.getSourceEObjectUri() == null
 					|| referenceDescription.getTargetEObjectUri() == null
@@ -118,6 +119,7 @@ public class ReferenceUpdaterDispatcher {
 			}
 		}
 		
+		@Override
 		public void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy,
 				URI targetURI) {
 			accept(new DefaultReferenceDescription(sourceURI, targetURI, eReference, index, null));

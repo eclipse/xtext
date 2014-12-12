@@ -49,6 +49,7 @@ public class ValidationTestHelper {
 	public void assertNoErrors(final EObject model) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				return Severity.ERROR == input.getSeverity();
 			}
@@ -60,6 +61,7 @@ public class ValidationTestHelper {
 	public void assertNoError(final EObject model, final String issuecode) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				return issuecode.equals(input.getCode());
 			}
@@ -89,6 +91,7 @@ public class ValidationTestHelper {
 	public void assertNoIssues(final EObject root, final EClass objectType) {
 		final List<Issue> validate = validate(root);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				EObject object = root.eResource().getEObject(input.getUriToProblem().fragment());
 				if (objectType.isInstance(object)) {
@@ -107,6 +110,7 @@ public class ValidationTestHelper {
 	public void assertNoIssue(final EObject root, final EClass objectType, final String issuecode) {
 		final List<Issue> validate = validate(root);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				if (issuecode.equals(input.getCode())) {
 					EObject object = root.eResource().getEObject(input.getUriToProblem().fragment());
@@ -200,6 +204,7 @@ public class ValidationTestHelper {
 			final int offset, final int length, final Severity severity, final List<Issue> validate,
 			final String... messageParts) {
 		return Iterables.filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				if (Strings.equal(input.getCode(), code) && input.getSeverity()==severity) {
 					if ((offset < 0 || offset == input.getOffset()) && (length < 0 || length == input.getLength())) {

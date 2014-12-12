@@ -116,6 +116,7 @@ public abstract class AbstractParallelScenarioRunner extends AbstractScenarioRun
 	private void runChildren(final RunNotifier notifier) {
 		for (final FrameworkMethod each : getChildren())
 			scheduler.schedule(new Runnable() {			
+				@Override
 				public void run() {
 					AbstractParallelScenarioRunner.this.runChild(each, notifier);
 				}
@@ -175,7 +176,8 @@ public abstract class AbstractParallelScenarioRunner extends AbstractScenarioRun
             futures = Collections.synchronizedList(new ArrayList<Future<?>>());
         }
 
-        public void finished() {
+        @Override
+		public void finished() {
         	executor.shutdown();
             for(Future<?> future: futures) {
             	try {
@@ -199,7 +201,8 @@ public abstract class AbstractParallelScenarioRunner extends AbstractScenarioRun
 			}
         }
 
-        public void schedule(Runnable childStatement) {
+        @Override
+		public void schedule(Runnable childStatement) {
             futures.add(executor.submit(childStatement));
         }
     }

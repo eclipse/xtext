@@ -23,22 +23,27 @@ public abstract class InspectableTemplateVariableResolverDecorator implements II
 		this.decorated = decorated;
 	}
 	
+	@Override
 	public String getDescription() {
 		return decorated.getDescription();
 	}
 	
+	@Override
 	public String getType() {
 		return decorated.getType();
 	}
 	
+	@Override
 	public boolean canHaveParameters() {
 		return false;
 	}
 	
+	@Override
 	public boolean hasMandatoryParameters() {
 		return false;
 	}
 	
+	@Override
 	public void validateParameters(Variable variable, ValidationMessageAcceptor validationMessageAcceptor) {
 		if (!canHaveParameters()) {
 			if (variable.getParameters().size() > 0)

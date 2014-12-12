@@ -34,6 +34,7 @@ public class FilteringIteratorTest extends Assert implements Predicate<String> {
 		list = new ArrayList<String>();
 	}
 
+	@Override
 	public boolean apply(String param) {
 		return param.equals(matchMe);
 	}

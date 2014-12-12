@@ -26,10 +26,12 @@ public class SchedulingRuleFactory {
 	 */
 	public static class Sequence implements ISchedulingRule {
 
+		@Override
 		public boolean contains(ISchedulingRule rule) {
 			return rule == this;
 		}
 
+		@Override
 		public boolean isConflicting(ISchedulingRule rule) {
 			return rule instanceof Sequence;
 		}
@@ -45,10 +47,12 @@ public class SchedulingRuleFactory {
 			lockObject = lock;
 		}
 
+		@Override
 		public boolean contains(ISchedulingRule rule) {
 			return rule == this;
 		}
 
+		@Override
 		public boolean isConflicting(ISchedulingRule rule) {
 			if (rule instanceof SerialPerObjectRule) {
 				SerialPerObjectRule serialPerObjectRule = (SerialPerObjectRule) rule;

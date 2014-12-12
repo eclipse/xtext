@@ -20,6 +20,7 @@ public class MyGenerator implements IGenerator {
 	/**
 	 * poor man's generator used in {@link org.eclipse.xtext.builder.impl.BuilderParticipantTest}
 	 */
+	@Override
 	public void doGenerate(Resource input, IFileSystemAccess fsa) {
 		Element ele = (Element) input.getContents().get(0);
 		fsa.generateFile(ele.getName()+".txt", "object "+ele.getName());

@@ -19,63 +19,78 @@ import org.eclipse.ui.texteditor.IElementStateListener;
  */
 public class DocumentProviderStub implements IDocumentProvider {
 
+	@Override
 	public void connect(Object element) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void disconnect(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IDocument getDocument(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void resetDocument(Object element) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void saveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite)
 			throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public long getModificationStamp(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public long getSynchronizationStamp(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean isDeleted(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean mustSaveDocument(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean canSaveDocument(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IAnnotationModel getAnnotationModel(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void aboutToChange(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void changed(Object element) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void addElementStateListener(IElementStateListener listener) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void removeElementStateListener(IElementStateListener listener) {
 		throw new UnsupportedOperationException();
 	}

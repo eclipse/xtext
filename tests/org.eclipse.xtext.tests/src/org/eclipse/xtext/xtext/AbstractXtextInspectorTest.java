@@ -53,6 +53,7 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 	
 	protected abstract boolean isExpectingInfos();
 
+	@Override
 	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		if (!isExpectingErrors())
 			fail("unexpected call to acceptError");
@@ -60,6 +61,7 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 		errors.add(error);
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		if (!isExpectingWarnings())
 			fail("unexpected call to acceptWarning");
@@ -67,6 +69,7 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 		warnings.add(warning);
 	}
 	
+	@Override
 	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code, String... issueData) {
 		if (!isExpectingInfos())
 			fail("unexpected call to acceptInfo");
@@ -85,14 +88,17 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 		return (Grammar) resourceFromString.getContents().get(0);
 	}
 
+	@Override
 	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
 		fail(message);
 	}
 	
+	@Override
 	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
 		fail(message);
 	}
 	
+	@Override
 	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
 		fail(message);
 	}

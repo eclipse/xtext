@@ -103,10 +103,12 @@ public class SequencerTestLanguageRuntimeModule extends AbstractSequencerTestLan
 		@ValueConverter(rule = "NULL_STRING")
 		public IValueConverter<String> NULL_STRING() {
 			return new IValueConverter<String>() {
+				@Override
 				public String toString(String value) throws ValueConverterException {
 					return "''";
 				}
 
+				@Override
 				public String toValue(String string, INode node) throws ValueConverterException {
 					return null;
 				}

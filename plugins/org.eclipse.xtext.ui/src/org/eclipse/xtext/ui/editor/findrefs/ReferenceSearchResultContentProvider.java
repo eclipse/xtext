@@ -54,6 +54,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		}
 	}
 
+	@Override
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ReferenceSearchViewTreeNode) {
 			return Iterables.toArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(),
@@ -62,6 +63,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return null;
 	}
 
+	@Override
 	public Object getParent(Object element) {
 		if (element instanceof ReferenceSearchViewTreeNode) {
 			return ((ReferenceSearchViewTreeNode) element).getParent();
@@ -69,6 +71,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return null;
 	}
 
+	@Override
 	public boolean hasChildren(Object element) {
 		if (element instanceof ReferenceSearchViewTreeNode) {
 			return !((ReferenceSearchViewTreeNode) element).getChildren().isEmpty();
@@ -76,6 +79,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return false;
 	}
 
+	@Override
 	public Object[] getElements(Object inputElement) {
 		if (rootNodes == null || rootNodes.isEmpty()) {
 			return new Object[0];
@@ -83,10 +87,12 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return Iterables.toArray(rootNodes, ReferenceSearchViewTreeNode.class);
 	}
 
+	@Override
 	public void dispose() {
 		rootNodes = null;
 	}
 
+	@Override
 	public void inputChanged(final Viewer viewer, Object oldInput, Object newInput) {
 		synchronized (viewer) {
 			if (rootNodes != null) {
@@ -148,6 +154,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		return node;
 	}
 
+	@Override
 	public void searchResultChanged(final SearchResultEvent e) {
 		synchronized (batchedSearchResultEvents) {
 			batchedSearchResultEvents.add(e);
@@ -195,8 +202,10 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		}
 	}
 
+	@Override
 	public void descriptionsChanged(final Event event) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (rootNodes != null) {
 					for (Delta delta : event.getDeltas()) {
@@ -217,6 +226,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 													.getDescription()).getSourceEObjectUri();
 											if (!Iterables.any(newReferenceDescriptions,
 													new Predicate<IReferenceDescription>() {
+														@Override
 														public boolean apply(IReferenceDescription input) {
 															return input.getSourceEObjectUri().equals(
 																	referenceSourceURI);

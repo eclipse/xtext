@@ -45,6 +45,7 @@ public class WorkspaceEncodingProvider implements IEncodingProvider {
 	@DispatchingProvider.Runtime
 	private IEncodingProvider runtimeEncodingProvider;
 
+	@Override
 	public String getEncoding(URI uri) {
 		if (workspace != null) {
 			if (uri != null) {

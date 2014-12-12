@@ -213,6 +213,7 @@ public abstract class ProfilerAbstractBuilderTest extends Assert implements IRes
 		return Lists.newArrayList(getBuilderState().getAllResourceDescriptions()).size();
 	}
 
+	@Override
 	public void descriptionsChanged(Event event) {
 		this.events.add(event);
 	}

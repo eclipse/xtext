@@ -20,6 +20,7 @@ public class IgnoreCaseNamespacesTestLanguageRuntimeModule extends org.eclipse.x
 	
 	public ICaseInsensitivityHelper bindCaseInsensitivityHelper() {
 		return new ICaseInsensitivityHelper() {
+			@Override
 			public boolean isIgnoreCase(EReference reference) {
 				return true;
 			}

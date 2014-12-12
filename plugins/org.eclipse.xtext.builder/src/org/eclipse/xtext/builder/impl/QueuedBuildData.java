@@ -66,6 +66,7 @@ public class QueuedBuildData {
 		/**
 		 * Resets all known components.
 		 */
+		@Override
 		public void reset() {
 			for (int i = 0; i < components.size(); i++) {
 				components.get(i).reset();
@@ -75,6 +76,7 @@ public class QueuedBuildData {
 		/**
 		 * Ask each component to handle the delta. Stop on the first success.
 		 */
+		@Override
 		public boolean queueChange(Delta delta) {
 			for (int i = 0; i < components.size(); i++) {
 				IQueuedBuildDataContribution contribution = components.get(i);
@@ -89,6 +91,7 @@ public class QueuedBuildData {
 		 * Ask each component whether a rebuild is necessary. Each contribution gets the chance to enhance the given
 		 * list of deltas.
 		 */
+		@Override
 		public boolean needsRebuild(IProject project, Collection<Delta> deltas) {
 			boolean result = false;
 			for (int i = 0; i < components.size(); i++) {
@@ -100,6 +103,7 @@ public class QueuedBuildData {
 			return result;
 		}
 
+		@Override
 		public void createCheckpoint() {
 			for (int i = 0; i < components.size(); i++) {
 				IQueuedBuildDataContribution contribution = components.get(i);
@@ -107,6 +111,7 @@ public class QueuedBuildData {
 			}
 		}
 		
+		@Override
 		public void discardCheckpoint() {
 			for (int i = 0; i < components.size(); i++) {
 				IQueuedBuildDataContribution contribution = components.get(i);
@@ -114,6 +119,7 @@ public class QueuedBuildData {
 			}
 		}
 		
+		@Override
 		public void rollback() {
 			for (int i = 0; i < components.size(); i++) {
 				IQueuedBuildDataContribution contribution = components.get(i);
@@ -124,28 +130,34 @@ public class QueuedBuildData {
 
 	public static class NullContribution implements IQueuedBuildDataContribution {
 
+		@Override
 		public void reset() {
 			// nothing to do
 		}
 
+		@Override
 		public boolean queueChange(Delta delta) {
 			// nothing to do
 			return false;
 		}
 
+		@Override
 		public boolean needsRebuild(IProject project, Collection<Delta> deltas) {
 			// nothing to do
 			return false;
 		}
 
+		@Override
 		public void createCheckpoint() {
 			// nothing to do			
 		}
 		
+		@Override
 		public void discardCheckpoint() {
 			// nothing to do			
 		}
 		
+		@Override
 		public void rollback() {
 			// nothing to do			
 		}
@@ -276,16 +288,19 @@ public class QueuedBuildData {
 			return uris;
 		return new AbstractQueue<URI>() {
 
+			@Override
 			public boolean offer(URI o) {
 				return list.offer(o);
 			}
 
+			@Override
 			public URI poll() {
 				if (uris.isEmpty())
 					return list.poll();
 				return uris.poll();
 			}
 
+			@Override
 			public URI peek() {
 				if (uris.isEmpty())
 					return list.peek();

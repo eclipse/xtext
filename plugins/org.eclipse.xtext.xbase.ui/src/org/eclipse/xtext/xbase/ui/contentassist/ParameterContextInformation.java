@@ -69,6 +69,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return (getInformationDisplayString().hashCode() << 16) | low;
 	}
 
+	@Override
 	public String getInformationDisplayString() {
 		return data.getDisplayString();
 	}
@@ -77,19 +78,23 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		return data.getRawDisplayString();
 	}
 
+	@Override
 	public Image getImage() {
 		// TODO implement
 		return null;
 	}
 
+	@Override
 	public String getContextDisplayString() {
 		return contextDisplayString;
 	}
 
+	@Override
 	public int getContextInformationPosition() {
 		return initialCarretOffset;
 	}
 
+	@Override
 	public boolean isContextInformationValid(ITextViewer viewer, int position) {
 		try {
 			if (position < this.parameterListOffset)
@@ -108,6 +113,7 @@ public class ParameterContextInformation implements ISmartContextInformation {
 		}
 	}
 
+	@Override
 	public boolean updatePresentation(ITextViewer viewer, int position, TextPresentation presentation) {
 		int currentParameter= -1;
 

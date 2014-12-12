@@ -39,6 +39,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
+			@Override
 			public Injector createInjectorAndDoEMFRegistration() {
 				return injector;
 			}
@@ -113,10 +114,12 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 			this.rejected = rejected;
 		}
 		
+		@Override
 		public boolean apply(IOutlineNode input) {
 			return !rejected.equals(input.getText().toString());
 		}
 
+		@Override
 		public boolean isEnabled() {
 			return isEnabled;
 		}
@@ -130,10 +133,12 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 
 		private boolean isEnabled = false;
 
+		@Override
 		public int compare(IOutlineNode o1, IOutlineNode o2) {
 			return o2.getText().toString().compareTo(o1.getText().toString());
 		}
 
+		@Override
 		public boolean isEnabled() {
 			return isEnabled;
 		}

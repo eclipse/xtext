@@ -83,6 +83,7 @@ public class Bug281198ParserTest extends AbstractXtextTests {
 	private Set<AbstractElement> computeSearchElements(Collection<FollowElement> followSet) {
 		return  Sets.newHashSet(
 				Iterables.transform(followSet, new Function<FollowElement, AbstractElement>(){
+					@Override
 					public AbstractElement apply(FollowElement from) {
 						return from.getGrammarElement();
 					}

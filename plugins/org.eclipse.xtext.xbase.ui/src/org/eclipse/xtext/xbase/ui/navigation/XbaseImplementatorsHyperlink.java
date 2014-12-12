@@ -30,18 +30,22 @@ public class XbaseImplementatorsHyperlink implements IHyperlink {
 		this.opener = opener;
 	}
 
+	@Override
 	public IRegion getHyperlinkRegion() {
 		return region;
 	}
 
+	@Override
 	public String getTypeLabel() {
 		return SingleHoverShowingHyperlinkPresenter.SHOW_ALWAYS;
 	}
 
+	@Override
 	public String getHyperlinkText() {
 		return "Open Implementation";
 	}
 
+	@Override
 	public void open() {
 		opener.openImplementations(element, textViewer, region);
 	}

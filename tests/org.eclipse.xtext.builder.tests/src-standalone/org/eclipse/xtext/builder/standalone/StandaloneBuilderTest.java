@@ -181,10 +181,12 @@ public class StandaloneBuilderTest {
 		}
 
 		/* @NonNull */
+		@Override
 		public String getSetup() {
 			return "org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup";
 		}
 
+		@Override
 		public Set<OutputConfiguration> getOutputConfigurations() {
 			OutputConfiguration config = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
 			config.setOutputDirectory("src-gen");
@@ -201,6 +203,7 @@ public class StandaloneBuilderTest {
 			this.javaSupport = javaSupport;
 		}
 
+		@Override
 		public boolean isJavaSupport() {
 			return javaSupport;
 		}

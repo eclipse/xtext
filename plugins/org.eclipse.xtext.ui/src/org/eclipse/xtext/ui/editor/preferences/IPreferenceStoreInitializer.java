@@ -38,6 +38,7 @@ public interface IPreferenceStoreInitializer {
 			this.injector = injector;
 		}
 		
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			List<Binding<IPreferenceStoreInitializer>> list = injector.findBindingsByType(TypeLiteral
 					.get(IPreferenceStoreInitializer.class));

@@ -92,6 +92,7 @@ public class ProjectInfoBinder {
 			this.suffix = suffix;
 		}
 
+		@Override
 		public Object convert(Object fromObject) {
 			return calculateProjectName();
 		}
@@ -121,6 +122,7 @@ public class ProjectInfoBinder {
 
 	static private class FeatureProjectValidator implements IValidator {
 
+		@Override
 		public IStatus validate(Object value) {
 			if (value == null || Strings.isEmpty(value.toString())) {
 				return ValidationStatus.error(Messages.ProjectInfoBinder_errorFeatureNotSelected);
@@ -137,6 +139,7 @@ public class ProjectInfoBinder {
 
 	static private class BuckminsterLocationValidator implements IValidator {
 
+		@Override
 		public IStatus validate(Object value) {
 			if (value == null || Strings.isEmpty(value.toString())) {
 				return ValidationStatus.warning(Messages.ProjectInfoBinder_warnBuckyHeadlessNotSet);

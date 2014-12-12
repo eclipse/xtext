@@ -49,6 +49,7 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 	public boolean performFinish() {
 		final IProjectInfo projectInfo = getProjectInfo();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
+			@Override
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
 					doFinish(projectInfo, monitor);
@@ -92,6 +93,7 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 		}
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;

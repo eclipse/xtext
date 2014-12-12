@@ -119,6 +119,7 @@ public class TextViewerOperationAction extends TextViewerAction {
 			display = shell.getDisplay();
 
 		BusyIndicator.showWhile(display, new Runnable() {
+			@Override
 			public void run() {
 				fOperationTarget.doOperation(fOperationCode);
 			}

@@ -198,54 +198,66 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		}
 	}
 	
+	@Override
 	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
 		return readOnly(work);
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(Resource resource) {
 		assertSame(this.resource, resource);
 		return description;
 	}
 	
+	@Override
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}
 
+	@Override
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		fail("Unexpected invocation");
 		return false;
 	}
 	
+	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
 			IResourceDescriptions descriptions) throws IllegalArgumentException {
 		fail("Unexpected invocation");
 		return false;
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return true;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		fail("Unexpected invocation");
 		return null;
@@ -256,6 +268,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		return null;
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return Collections.emptyList();
 	}
@@ -266,6 +279,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 
 	protected IXtextDocument getDummyDocument() {
 		return (IXtextDocument) Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[]{IXtextDocument.class}, new InvocationHandler() {
+			@Override
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 				return null;
 			}

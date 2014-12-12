@@ -46,6 +46,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	@Test public void testGetContents_01() {
 		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return List.class.getName().equals(input.getName().toString());
 			}
@@ -55,6 +56,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	@Test public void testGetContents_02() {
 		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return "int".equals(input.getName().toString());
 			}
@@ -64,6 +66,7 @@ public class JdtBasedSimpleTypeScopeTest extends AbstractTypeScopeTest {
 	@Test public void testGetContents_03() {
 		Iterable<IEObjectDescription> contents = typeScope.getAllElements();
 		assertTrue(Iterables.any(contents, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return "java.util.Map.Entry".equals(input.getName().toString());
 			}

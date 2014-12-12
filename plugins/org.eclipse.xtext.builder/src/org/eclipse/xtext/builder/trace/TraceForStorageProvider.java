@@ -161,11 +161,13 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	}
 
 	/* @Nullable */
+	@Override
 	public ITrace getTraceToSource(final IStorage derivedResource) {
 		StorageAwareTrace result = traceToSourceProvider.get();
 		result.setLocalStorage(derivedResource);
 		result.setTraceRegionProvider(new ITraceRegionProvider() {
 			
+			@Override
 			public AbstractTraceRegion getTraceRegion() {
 				IStorage resource = derivedResource;
 				if (resource instanceof IFile) {
@@ -181,6 +183,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 	}
 
 	/* @Nullable */
+	@Override
 	public ITrace getTraceToTarget(final IStorage sourceResource) {
 		if (sourceResource instanceof IFile) {
 			try {
@@ -191,6 +194,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 					result.setLocalStorage(sourceResource);
 					final URI sourceFileURI = storage2UriMapper.getUri(sourceResource);
 					result.setTraceRegionProvider(new ITraceRegionProvider() {
+						@Override
 						public AbstractTraceRegion getTraceRegion() {
 							List<AbstractTraceRegion> result = newArrayList();
 							for (IPath tracePath : traceFiles) {
@@ -221,6 +225,7 @@ public class TraceForStorageProvider implements ITraceForStorageProvider {
 									AbstractTraceRegion root = new AbstractStatefulTraceRegion(rootLocation, new ArrayList<ILocationData>(), null) {};
 									Collections.sort(result, new Comparator<AbstractTraceRegion>() {
 										
+										@Override
 										public int compare(/* @Nullable */ AbstractTraceRegion o1, /* @Nullable */ AbstractTraceRegion o2) {
 											if (o1 == null || o2 == null)
 												throw new NullPointerException();

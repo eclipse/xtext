@@ -36,21 +36,27 @@ public class UIParticipant implements IMatchPresentation {
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
+	@Override
 	public ILabelProvider createLabelProvider() {
 		return new ILabelProvider() {
+			@Override
 			public void removeListener(ILabelProviderListener listener) {
 			}
 
+			@Override
 			public boolean isLabelProperty(Object element, String property) {
 				return false;
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public void addListener(ILabelProviderListener listener) {
 			}
 
+			@Override
 			public String getText(Object element) {
 				IReferenceDescription referenceDescription = (IReferenceDescription) element;
 				URI containerEObjectURI = referenceDescription.getContainerEObjectURI();
@@ -68,6 +74,7 @@ public class UIParticipant implements IMatchPresentation {
 				return "unknown";
 			}
 
+			@Override
 			public Image getImage(Object element) {
 				IReferenceDescription referenceDescription = (IReferenceDescription) element;
 				URI containerEObjectURI = referenceDescription.getContainerEObjectURI();
@@ -87,6 +94,7 @@ public class UIParticipant implements IMatchPresentation {
 		};
 	}
 
+	@Override
 	public void showMatch(Match match, int currentOffset, int currentLength, boolean activate) {
 		Object o = match.getElement();
 		if (o instanceof IReferenceDescription) {

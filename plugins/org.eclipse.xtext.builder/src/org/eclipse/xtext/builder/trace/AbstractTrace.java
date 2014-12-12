@@ -55,16 +55,19 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 			this.uri = uri;
 		}
 
+		@Override
 		public Iterator<AbstractTraceRegion> iterator() {
 			Iterator<AbstractTraceRegion> result = allTraceRegions.iterator();
 			Iterator<AbstractTraceRegion> languageSpecificWithDuplicates = Iterators.transform(result, new Function<AbstractTraceRegion, AbstractTraceRegion>() {
 				/* @Nullable */
+				@Override
 				public AbstractTraceRegion apply(/* @Nullable */ AbstractTraceRegion input) {
 					return findParentByURI(input, uri);
 				}
 			});
 			Iterator<AbstractTraceRegion> withoutDuplicates = Iterators.filter(languageSpecificWithDuplicates, new Predicate<AbstractTraceRegion>() {
 				private AbstractTraceRegion previous = null;
+				@Override
 				public boolean apply(/* @Nullable */ AbstractTraceRegion input) {
 					if (input == null || input.equals(previous))
 						return false;
@@ -103,6 +106,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	 * @return the root trace region. May be <code>null</code> if no trace data is available.
 	 */
 	/* @Nullable */
+	@Override
 	public final AbstractTraceRegion getRootTraceRegion() {
 		if (rootTraceRegion == null) {
 			rootTraceRegion = doGetRootTraceRegion();
@@ -128,6 +132,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 
 	/* @Nullable */
+	@Override
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region) {
 		AbstractTraceRegion right = findTraceRegionAtRightOffset(region.getOffset() + region.getLength());
 		if (right != null && encloses(right, region.getOffset(), true)) {
@@ -289,12 +294,14 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		return result;
 	}
 
+	@Override
 	public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion localRegion) {
 		Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions(localRegion);
 		return toLocations(allTraceRegions);
 	}
 	
 	/* @Nullable */
+	@Override
 	public ILocationInResource getBestAssociatedLocation(ITextRegion region, IStorage storage) {
 		URI uri = getURIForStorage(storage);
 		AbstractTraceRegion left = findTraceRegionAtLeftOffset(region.getOffset());
@@ -319,6 +326,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		return region;
 	}
 
+	@Override
 	public Iterable<ILocationInResource> getAllAssociatedLocations(ITextRegion region, IStorage storage) {
 		URI uri = getURIForStorage(storage);
 		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions(region);
@@ -326,6 +334,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		return toLocations(filteredByURI);
 	}
 
+	@Override
 	public Iterable<ILocationInResource> getAllAssociatedLocations(IStorage storage) {
 		URI uri = getURIForStorage(storage);
 		final Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
@@ -334,10 +343,12 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 	
 	/* @Nullable */
+	@Override
 	public LanguageInfo getLanguage() {
 		return findLanguage(getLocalURI());
 	}
 	
+	@Override
 	public abstract URI getLocalURI();
 
 	protected URI getURIForStorage(IStorage storage) {
@@ -348,11 +359,13 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		return URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 	}
 	
+	@Override
 	public abstract IProject getLocalProject();
 	
 	protected Iterable<ILocationInResource> toLocations(final Iterable<AbstractTraceRegion> allTraceRegions) {
 		return new Iterable<ILocationInResource>() {
 
+			@Override
 			public Iterator<ILocationInResource> iterator() {
 				return new AbstractIterator<ILocationInResource>() {
 
@@ -397,6 +410,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		}
 		return new Iterable<AbstractTraceRegion>() {
 
+			@Override
 			public Iterator<AbstractTraceRegion> iterator() {
 				AbstractTraceRegion root = getRootTraceRegion();
 				if (root == null)
@@ -437,6 +451,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		};
 	}
 
+	@Override
 	public Iterable<ILocationInResource> getAllAssociatedLocations() {
 		Iterable<AbstractTraceRegion> allTraceRegions = getAllTraceRegions();
 		return toLocations(allTraceRegions);		
@@ -444,6 +459,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	
 	protected Iterable<AbstractTraceRegion> getAllTraceRegions() {
 		return new Iterable<AbstractTraceRegion>() {
+			@Override
 			public Iterator<AbstractTraceRegion> iterator() {
 				AbstractTraceRegion root = getRootTraceRegion();
 				if (root == null)

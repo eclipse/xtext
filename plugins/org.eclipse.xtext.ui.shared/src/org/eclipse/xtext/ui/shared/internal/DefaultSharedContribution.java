@@ -25,6 +25,7 @@ import com.google.inject.Module;
  */
 public class DefaultSharedContribution implements Module {
 
+	@Override
 	public void configure(Binder binder) {
 		binder.bind(ProjectOpenedOrClosedListener.class);
 		binder.bind(IEagerContribution.class).to(ListenerRegistrar.class);

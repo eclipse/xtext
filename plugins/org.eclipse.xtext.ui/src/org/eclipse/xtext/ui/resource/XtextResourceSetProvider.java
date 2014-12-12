@@ -38,6 +38,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 		initializers = contributionRegistry.getContributedInstances(IResourceSetInitializer.class);
 	}
 
+	@Override
 	public ResourceSet get(IProject project) {
 		XtextResourceSet set = resourceSetProvider.get();
 		for(int i = 0; i < initializers.size(); i++) {

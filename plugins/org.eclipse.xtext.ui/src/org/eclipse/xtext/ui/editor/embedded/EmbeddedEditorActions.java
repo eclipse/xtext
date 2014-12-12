@@ -127,6 +127,7 @@ public class EmbeddedEditorActions {
 		final ActiveShellExpression expression = new ActiveShellExpression(shell);
 		final IContextActivation contextActivation = contextService.activateContext(EMBEDDED_TEXT_EDITOR_SCOPE, expression);
 		shell.addDisposeListener(new DisposeListener() {
+			@Override
 			public void widgetDisposed(DisposeEvent e) {
 				handlerService.deactivateHandlers(handlerActivations);
 				contextService.deactivateContext(contextActivation);
@@ -134,11 +135,13 @@ public class EmbeddedEditorActions {
 		});
 
 		viewer.getTextWidget().addFocusListener(new FocusListener() {
+			@Override
 			public void focusLost(FocusEvent e) {
 				handlerService.deactivateHandlers(handlerActivations);
 				handlerActivations.clear();
 			}
 
+			@Override
 			public void focusGained(FocusEvent e) {
 				for(final IAction action: allActions.values()) {
 					handlerActivations.add(handlerService.activateHandler(
@@ -154,6 +157,7 @@ public class EmbeddedEditorActions {
 		MenuManager manager = new MenuManager(null, null);
 		manager.setRemoveAllWhenShown(true);
 		manager.addMenuListener(new IMenuListener() {
+			@Override
 			public void menuAboutToShow(IMenuManager mgr) {
 				fillContextMenu(mgr);
 			}

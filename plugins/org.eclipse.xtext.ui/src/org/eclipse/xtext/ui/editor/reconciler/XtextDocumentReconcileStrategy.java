@@ -59,6 +59,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 
 	private XtextEditor editor;
 
+	@Override
 	public void reconcile(final IRegion region) {
 		if (log.isTraceEnabled()) {
 			log.trace("reconcile region: " + region);
@@ -69,6 +70,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		}
 	}
 
+	@Override
 	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
 		reconcile(subRegion);
 	}
@@ -80,6 +82,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 		this.editor = editor;
 	}
 
+	@Override
 	public void setDocument(IDocument document) {
 		if (!(document instanceof XtextDocument)) {
 			throw new IllegalArgumentException("Document must be an " + XtextDocument.class.getSimpleName());
@@ -92,6 +95,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public void setSourceViewer(ISourceViewer sourceViewer) {
 		spellingReconcileStrategy = spellingReconcileStrategyFactory.create(sourceViewer);
 	}
@@ -99,6 +103,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public void setProgressMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
 		if (spellingReconcileStrategy != null) {
@@ -109,6 +114,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public void initialReconcile() {
 		if (spellingReconcileStrategy != null) {
 			spellingReconcileStrategy.initialReconcile();
@@ -165,6 +171,7 @@ public class XtextDocumentReconcileStrategy implements IReconcilingStrategy, IRe
 				dirtyStateEditorSupport.announceDirtyState(resource);
 		}
 		CancelIndicator cancelIndicator = new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return monitor.isCanceled();
 			}

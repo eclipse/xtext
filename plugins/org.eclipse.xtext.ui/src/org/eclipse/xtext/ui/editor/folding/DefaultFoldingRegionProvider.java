@@ -68,6 +68,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	public DefaultFoldingRegionProvider() {
 	}
 	
+	@Override
 	public Collection<FoldedPosition> getFoldingRegions(final IXtextDocument xtextDocument) {
 		return xtextDocument.readOnly(new CancelableUnitOfWork<Collection<FoldedPosition>, XtextResource>() {
 			@Override

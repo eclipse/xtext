@@ -33,6 +33,7 @@ public class ProblemAnnotationHover extends AbstractProblemHover implements IAnn
 	
 	// IAnnotationHover
 	
+	@Override
 	public String getHoverInfo(final ISourceViewer sourceViewer, final int lineNumber) {
 		Object o = getHoverInfoInternal(sourceViewer, lineNumber, -1);
 		if (o!=null)

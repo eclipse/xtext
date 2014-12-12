@@ -45,6 +45,7 @@ public class SemanticHighlighter implements ISemanticHighlightingCalculator {
 	@Inject
 	private LanguageRegistry registry;
 	
+	@Override
 	public void provideHighlightingFor(XtextResource resource, final IHighlightedPositionAcceptor acceptor) {
 		if (resource == null || resource.getContents().isEmpty())
 			return;
@@ -59,6 +60,7 @@ public class SemanticHighlighter implements ISemanticHighlightingCalculator {
 					if (template.getBody() != null) {
 						final EvaluatedTemplate evaluatedTemplate = new EvaluatedTemplate(template);
 						highlighter.provideHighlightingFor(evaluatedTemplate.getMappedString(), new IHighlightedPositionAcceptor() {
+							@Override
 							public void addPosition(int offset, int length, String... id) {
 								int beginOffset = evaluatedTemplate.getOriginalOffset(offset);
 								int endOffset = evaluatedTemplate.getOriginalOffset(offset + length);

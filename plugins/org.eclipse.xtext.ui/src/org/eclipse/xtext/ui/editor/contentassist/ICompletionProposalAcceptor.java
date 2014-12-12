@@ -30,10 +30,12 @@ public interface ICompletionProposalAcceptor {
 			return delegate;
 		}
 		
+		@Override
 		public void accept(ICompletionProposal proposal) {
 			delegate.accept(proposal);
 		}
 
+		@Override
 		public boolean canAcceptMoreProposals() {
 			return delegate.canAcceptMoreProposals();
 		}

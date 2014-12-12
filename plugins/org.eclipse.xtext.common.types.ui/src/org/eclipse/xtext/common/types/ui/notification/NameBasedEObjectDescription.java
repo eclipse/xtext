@@ -28,32 +28,39 @@ public class NameBasedEObjectDescription implements IEObjectDescription {
 		this.name = name;
 	}
 	
+	@Override
 	public QualifiedName getName() {
 		return name;
 	}
 
+	@Override
 	public QualifiedName getQualifiedName() {
 		return name;
 	}
 
+	@Override
 	public EObject getEObjectOrProxy() {
 		throw new UnsupportedOperationException("getEObjectOrProxy");
 //		return null;
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		throw new UnsupportedOperationException("getEObjectURI");
 //		return null;
 	}
 
+	@Override
 	public EClass getEClass() {
 		return null;
 	}
 
+	@Override
 	public String getUserData(String name) {
 		return null;
 	}
 
+	@Override
 	public String[] getUserDataKeys() {
 		return Strings.EMPTY_ARRAY;
 	}

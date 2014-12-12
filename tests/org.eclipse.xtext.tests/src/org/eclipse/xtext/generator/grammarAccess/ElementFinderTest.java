@@ -36,6 +36,7 @@ public class ElementFinderTest extends AbstractXtextTests {
 		rs.setClasspathURIContext(getClass());
 		final Resource r = rs.getResource(URI.createURI(file), true);
 		return new AbstractGrammarElementFinder() {
+			@Override
 			public Grammar getGrammar() {
 				return (Grammar) r.getContents().get(0);
 			}

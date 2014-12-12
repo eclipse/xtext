@@ -66,6 +66,7 @@ public class IteratorJob extends Job {
 	private Collection<IEObjectDescription> sortedCopy(Iterable<IEObjectDescription> list) {
 		List<IEObjectDescription> result = Lists.newArrayList(matches);
 		Collections.sort(result, new Comparator<IEObjectDescription>() {
+			@Override
 			public int compare(IEObjectDescription o1, IEObjectDescription o2) {
 				int diff = o1.getQualifiedName().compareToIgnoreCase(o2.getQualifiedName());
 				if (diff == 0) {

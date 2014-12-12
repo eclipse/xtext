@@ -41,6 +41,7 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		super.setUp();
 		final Injector injector = Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage");
 		with(new ISetup() {
+			@Override
 			public Injector createInjectorAndDoEMFRegistration() {
 				return injector;
 			}
@@ -87,6 +88,7 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		EStructuralFeatureNode featureNode = new EStructuralFeatureNode(parentElement,
 				OutlineTestPackage.Literals.ELEMENT__XREFS, parentNode, (ImageDescriptor) null, "eClassifiers", true);
 		IUnitOfWork<Boolean, EObject> work = new IUnitOfWork<Boolean, EObject>() {
+			@Override
 			public Boolean exec(EObject state) throws Exception {
 				return state != null;
 			}
@@ -106,6 +108,7 @@ public class OutlineNodeTest extends AbstractXtextTests {
 		XtextDocument document = get(XtextDocument.class);
 		document.setInput(resource);
 		IOutlineTreeStructureProvider treeStructureProvider = new IOutlineTreeStructureProvider() {
+			@Override
 			public void createChildren(IOutlineNode parentNode, EObject modelElement) {
 				new EObjectNode(child0Element, parentNode, (ImageDescriptor) null, "child", false);
 			}

@@ -31,6 +31,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 
 	private IJavaElement javaElement;
 
+	@Override
 	public URI resolve(Object context, URI classpathUri) {
 		if (!(context instanceof IJavaElement)) {
 			throw new IllegalArgumentException("Context must implement IResource");

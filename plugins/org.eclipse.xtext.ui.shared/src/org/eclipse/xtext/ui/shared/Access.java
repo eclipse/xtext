@@ -39,6 +39,7 @@ public class Access {
 			this.clazz = clazz;
 		}
 
+		@Override
 		public T get() {
 			if (Activator.getDefault()==null) {
 				throw new IllegalStateException("The bundle has not been started!");
@@ -61,6 +62,7 @@ public class Access {
 			delegate = registry.getLazySingleContributedInstance(clazz);
 		}
 
+		@Override
 		public T get() {
 			return delegate.get();
 		}
@@ -83,6 +85,7 @@ public class Access {
 			}
 		}
 
+		@Override
 		public T get() {
 			if (delegate == null) {
 				throw new ProvisionException("Missing contribution for " + clazz.getName());

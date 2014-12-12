@@ -34,6 +34,7 @@ public class XtextTemplateContextTypeRegistryTest extends AbstractXtextTests imp
 		grammarAccess = get(XtextGrammarAccess.class);
 	}
 
+	@Override
 	public XtextTemplateContextType get() {
 		return new XtextTemplateContextType();
 	}

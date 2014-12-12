@@ -13,6 +13,7 @@ import org.eclipse.xtext.ui.search.IXtextSearchFilter;
 
 public class EcoreSearchFilter implements IXtextSearchFilter {
 
+	@Override
 	public boolean reject(IEObjectDescription element) {
 		return "true".equals(element.getUserData(EcoreResourceDescriptionStrategy.NS_URI_INDEX_ENTRY));
 	}

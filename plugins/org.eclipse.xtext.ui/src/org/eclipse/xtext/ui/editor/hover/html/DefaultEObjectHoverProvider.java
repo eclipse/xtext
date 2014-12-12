@@ -298,6 +298,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	protected void addLinkListener(final IXtextBrowserInformationControl control) {
 		control.addLocationListener(elementLinks.createLocationListener(new XtextElementLinks.ILinkHandler() {
 
+			@Override
 			public void handleXtextdocViewLink(URI linkTarget) {
 				// TODO: enable when XtextDoc view available
 				//				control.notifyDelayedInputChange(null);
@@ -311,6 +312,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				//				}
 			}
 
+			@Override
 			public void handleInlineXtextdocLink(URI linkTarget) {
 				XtextBrowserInformationControlInput hoverInfo = getHoverInfo(getTarget(linkTarget), null,
 						(XtextBrowserInformationControlInput) control.getInput());
@@ -320,6 +322,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 					control.setInput(hoverInfo);
 			}
 
+			@Override
 			public void handleDeclarationLink(URI linkTarget) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
@@ -327,6 +330,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 					uriEditorOpener.open(linkTarget, true);
 			}
 
+			@Override
 			public boolean handleExternalLink(URL url, Display display) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
@@ -336,6 +340,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				return true;
 			}
 
+			@Override
 			public void handleTextSet() {
 			}
 
@@ -381,6 +386,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				//				final SimpleSelectionProvider selectionProvider= new SimpleSelectionProvider();
 
 				IInputChangedListener inputChangeListener = new IInputChangedListener() {
+					@Override
 					public void inputChanged(Object newInput) {
 						backAction.update();
 						forwardAction.update();
@@ -508,17 +514,21 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		return null;
 	}
 
+	@Override
 	public IInformationControlCreatorProvider getHoverInfo(final EObject object, final ITextViewer viewer, final IRegion region) {
 		return new IInformationControlCreatorProvider2() {
 
+			@Override
 			public IInformationControlCreator getHoverControlCreator() {
 				return DefaultEObjectHoverProvider.this.getHoverControlCreator();
 			}
 
+			@Override
 			public Object getInfo() {
 				return getHoverInfo(object, region, null);
 			}
 
+			@Override
 			public IInformationControlCreator getInformationPresenterControlCreator() {
 				return DefaultEObjectHoverProvider.this.getInformationPresenterControlCreator();
 			}};

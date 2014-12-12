@@ -35,6 +35,7 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptorExten
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	public void accept(int offset, int length, boolean initiallyFolded, ITextRegion significantRegion) {
 		IRegion position = getLineRegion(offset, length);
 		try {
@@ -54,6 +55,7 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptorExten
 		}
 	}
 	
+	@Override
 	public void accept(int offset, int length, ITextRegion significantRegion) {
 		accept(offset, length, false, significantRegion);
 	}
@@ -61,10 +63,12 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptorExten
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	public void accept(int offset, int length, boolean initiallyFolded) {
 		accept(offset, length, initiallyFolded, null);
 	}
 	
+	@Override
 	public void accept(int offset, int length) {
 		accept(offset, length, false, null);
 	}

@@ -42,6 +42,7 @@ public class CompareInputResourceProvider implements IResourceProvider {
 		this.typedElement = typedElement;
 	}
 
+	@Override
 	public IResource getResource() {
 		IResource resource = getResource(typedElement);
 		if (resource == null) {

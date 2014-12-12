@@ -41,6 +41,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 			this.links = links;
 		}
 		
+		@Override
 		public void accept(IHyperlink hyperlink) {
 			if (hyperlink != null)
 				links.add(hyperlink);
@@ -73,6 +74,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		return eObjectAtOffsetHelper;
 	}
 	
+	@Override
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
 		List<IHyperlink> links = Lists.newArrayList();
 		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);

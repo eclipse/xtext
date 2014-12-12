@@ -54,14 +54,17 @@ public class JavaDebugHoverProvider {
 			return null;
 
 		return new IEObjectHoverProvider.IInformationControlCreatorProvider2() {
+			@Override
 			public IInformationControlCreator getHoverControlCreator() {
 				return javaDebugHover.getHoverControlCreator();
 			}
 
+			@Override
 			public Object getInfo() {
 				return hoverInfo;
 			}
 
+			@Override
 			public IInformationControlCreator getInformationPresenterControlCreator() {
 				return javaDebugHover.getInformationPresenterControlCreator();
 			}

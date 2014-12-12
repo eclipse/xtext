@@ -119,6 +119,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return new XtextDocumentLocker();
 	}
 
+	@Override
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		T readOnly = stateAccess.readOnly(work);
 		return readOnly;
@@ -127,6 +128,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public <T> T priorityReadOnly(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.priorityReadOnly(work);
 	}
@@ -136,6 +138,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		public void process(XtextResource state) throws Exception {}
 	};
 
+	@Override
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 		// do a dummy read only, to make sure any scheduled changes get applied.
 		readOnly(noWork);
@@ -162,6 +165,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		// }
 	}
 
+	@Override
 	public void addModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
 		synchronized (modelListeners) {
@@ -175,6 +179,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
+	@Override
 	public void removeModelListener(IXtextModelListener listener) {
 		Assert.isNotNull(listener);
 		synchronized (modelListeners) {
@@ -212,11 +217,13 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
+	@Override
 	public void addXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
 		addDocumentListener(observer);
 		xtextDocumentObservers.add(observer);
 	}
 
+	@Override
 	public void removeXtextDocumentContentObserver(IXtextDocumentContentObserver observer) {
 		xtextDocumentObservers.remove(observer);
 		removeDocumentListener(observer);
@@ -303,6 +310,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 * @noreference
 		 * @since 2.7
 		 */
+		@Override
 		public <T> T process(IUnitOfWork<T,XtextResource> transaction) {
 			if (getReadHoldCount() != 1 || getWriteHoldCount() != 0) {
 				throw new IllegalStateException(
@@ -585,6 +593,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Class<T> adapterType) {
 		XtextResource resource = this.resource;

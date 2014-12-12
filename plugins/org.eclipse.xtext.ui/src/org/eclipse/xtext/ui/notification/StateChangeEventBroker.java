@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSou
  */
 public class StateChangeEventBroker extends AbstractResourceDescriptionChangeEventSource implements IStateChangeEventBroker {
 
+	@Override
 	public void descriptionsChanged(IResourceDescription.Event event) {
 		notifyListeners(event);
 	}

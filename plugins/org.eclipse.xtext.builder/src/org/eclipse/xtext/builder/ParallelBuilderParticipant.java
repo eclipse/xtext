@@ -130,6 +130,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			final IProgressMonitor progressMonitor) {
 		return new Runnable() {
 
+			@Override
 			public void run() {
 				try {
 					Set<IFile> derivedResources = getDerivedResources(delta, outputConfigurations, generatorMarkers);
@@ -161,6 +162,7 @@ public class ParallelBuilderParticipant extends BuilderParticipant {
 			final IProgressMonitor progressMonitor) {
 		return new Procedure0() {
 
+			@Override
 			public void apply() {
 				try {
 					if (delegate instanceof EclipseResourceFileSystemAccess2) {

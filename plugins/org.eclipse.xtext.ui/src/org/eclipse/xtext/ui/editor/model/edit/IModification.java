@@ -15,6 +15,7 @@ public interface IModification {
 	void apply(IModificationContext context) throws Exception;
 	
 	IModification NULL = new IModification() {
+		@Override
 		public void apply(IModificationContext context) {
 		}
 	};

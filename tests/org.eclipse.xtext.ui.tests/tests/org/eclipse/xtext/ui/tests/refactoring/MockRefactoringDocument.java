@@ -21,6 +21,7 @@ public class MockRefactoringDocument implements IRefactoringDocument {
 
 	public static class Provider implements IRefactoringDocument.Provider {
 
+		@Override
 		public IRefactoringDocument get(URI resourceURI, StatusWrapper status) {
 			return new MockRefactoringDocument(resourceURI, "");
 		}
@@ -39,14 +40,17 @@ public class MockRefactoringDocument implements IRefactoringDocument {
 		this(null, null);
 	}
 
+	@Override
 	public Change createChange(String name, TextEdit textEdit) {
 		return new MockChange(name, textEdit);
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}
 
+	@Override
 	public String getOriginalContents() {
 		return content;
 	}

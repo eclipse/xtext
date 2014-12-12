@@ -32,8 +32,10 @@ import com.google.common.collect.Iterables;
  */
 public class PresentationDamager implements IPresentationDamager {
 
+	@Override
 	public void setDocument(IDocument document) {}
 
+	@Override
 	public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent e, boolean documentPartitioningChanged) {
 		if (!(e.getDocument() instanceof IXtextDocument)) {
 			return new Region(0, 0);

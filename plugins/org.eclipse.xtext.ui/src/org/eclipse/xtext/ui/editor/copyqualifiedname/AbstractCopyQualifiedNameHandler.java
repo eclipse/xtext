@@ -25,6 +25,7 @@ public abstract class AbstractCopyQualifiedNameHandler extends AbstractHandler {
 	@Inject
 	private IResourceServiceProvider.Registry registry;
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		String qualifiedName = getQualifiedName(event);
 		return ClipboardUtil.copy(qualifiedName);

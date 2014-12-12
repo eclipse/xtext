@@ -41,6 +41,7 @@ public class JavaProjectResourceSetInitializer implements IResourceSetInitialize
 	@Inject
 	private IStorage2UriMapperJdtExtensions storage2UriMapper;
 	
+	@Override
 	public void initialize(ResourceSet resourceSet, IProject project) {
 		if (resourceSet instanceof XtextResourceSet) {
 			XtextResourceSet casted = (XtextResourceSet) resourceSet;

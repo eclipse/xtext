@@ -108,6 +108,7 @@ public class StatusWrapper {
 
 	protected String format(String message, Object... elements) {
 		Object[] strings = toArray(transform(newArrayList(elements), new Function<Object, String>() {
+			@Override
 			public String apply(Object from) {
 				return toString.invoke(from);
 			}

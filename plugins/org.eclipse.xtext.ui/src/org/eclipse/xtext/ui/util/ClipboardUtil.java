@@ -38,6 +38,7 @@ public class ClipboardUtil {
 			return null;
 		}
 		return clipboardOperation(new Function<Clipboard, Object>() {
+			@Override
 			public Object apply(Clipboard clipboard) {
 				clipboard.setContents(new Object[] { data }, new Transfer[] { TextTransfer.getInstance() });
 				return null;
@@ -52,6 +53,7 @@ public class ClipboardUtil {
 	 */
 	public static String getTextFromClipboard() {
 		return clipboardOperation(new Function<Clipboard, String>() {
+			@Override
 			public String apply(Clipboard input) {
 				return (String) input.getContents(TextTransfer.getInstance());
 			}
@@ -87,6 +89,7 @@ public class ClipboardUtil {
 	public static JavaImportData getJavaImportsContent() {
 		return clipboardOperation(new Function<Clipboard, JavaImportData>() {
 
+			@Override
 			public JavaImportData apply(Clipboard clipboard) {
 				for (int i = 0; i < clipboard.getAvailableTypeNames().length; i++) {
 					final String formatName = clipboard.getAvailableTypeNames()[i];

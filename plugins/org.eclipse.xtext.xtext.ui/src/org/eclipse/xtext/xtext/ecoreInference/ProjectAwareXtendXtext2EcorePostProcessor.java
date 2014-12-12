@@ -135,6 +135,7 @@ public class ProjectAwareXtendXtext2EcorePostProcessor extends XtendXtext2EcoreP
 		return result;
 	}
 
+	@Override
 	public synchronized void resourceChanged(IResourceChangeEvent event) {
 		super.clearCachedXtendFile();
 		resourceLoader = null;

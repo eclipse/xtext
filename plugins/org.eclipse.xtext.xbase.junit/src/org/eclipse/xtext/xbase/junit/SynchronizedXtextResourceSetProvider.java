@@ -28,6 +28,7 @@ public class SynchronizedXtextResourceSetProvider implements Provider<Synchroniz
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
 
+	@Override
 	public SynchronizedXtextResourceSet get() {
 		SynchronizedXtextResourceSet result = new SynchronizedXtextResourceSet();
 		result.setClasspathURIContext(classLoader);

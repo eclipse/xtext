@@ -43,6 +43,7 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 		this.offset = offset;
 	}
 
+	@Override
 	public ICompletionProposal[] exec(XtextResource resource) throws Exception {
 		ICompletionProposalAcceptor proposalAcceptor = state.decorateAcceptor((ICompletionProposalAcceptor)this);
 		ContentAssistContext[] contexts = createContentAssistContexts(resource);
@@ -66,22 +67,26 @@ public class CompletionProposalComputer implements IUnitOfWork<ICompletionPropos
 		return state.getContextFactory().create(viewer, offset, resource);
 	}
 
+	@Override
 	public void accept(ICompletionProposal proposal) {
 		if (proposal == null)
 			throw new NullPointerException("proposal may not be null");
 		proposals.add(proposal);
 	}
 
+	@Override
 	public boolean canAcceptMoreProposals() {
 		return true;
 	}
 
+	@Override
 	public void accept(TemplateProposal template) {
 		if (template == null)
 			throw new NullPointerException("template may not be null");
 		proposals.add(template);
 	}
 
+	@Override
 	public boolean canAcceptMoreTemplates() {
 		return true;
 	}

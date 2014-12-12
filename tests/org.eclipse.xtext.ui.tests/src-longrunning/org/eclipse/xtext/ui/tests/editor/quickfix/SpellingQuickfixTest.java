@@ -106,6 +106,7 @@ public class SpellingQuickfixTest extends AbstractQuickfixTest {
 
 	public Predicate<ICompletionProposal> classNameEquals(final String simpleName) {
 		return new Predicate<ICompletionProposal>() {
+			@Override
 			public boolean apply(ICompletionProposal input) {
 				return input.getClass().getSimpleName().equals(simpleName);
 			}

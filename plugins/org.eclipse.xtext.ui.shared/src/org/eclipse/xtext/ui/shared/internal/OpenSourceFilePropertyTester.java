@@ -24,6 +24,7 @@ import com.google.inject.Inject;
 public class OpenSourceFilePropertyTester extends PropertyTester {
 
 	private static class ExceptionThrowingOpenerAcceptor implements IAcceptor<FileOpener> {
+		@Override
 		public void accept(FileOpener t) {
 			throw new SourceFileFound();
 		}
@@ -51,6 +52,7 @@ public class OpenSourceFilePropertyTester extends PropertyTester {
 		oppositeFileOpenerContributors = registry.getContributedInstances(OppositeFileOpenerContributor.class);
 	}
 
+	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (receiver instanceof IEditorPart) {
 			if ("canOpenSourceFile".equals(property))

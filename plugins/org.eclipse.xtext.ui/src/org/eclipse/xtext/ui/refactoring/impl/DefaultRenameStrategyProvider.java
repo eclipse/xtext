@@ -27,6 +27,7 @@ public class DefaultRenameStrategyProvider implements IRenameStrategy.Provider {
 	@Inject(optional = true)
 	private com.google.inject.Provider<IRenameStrategy> guiceStrategyProvider;
 
+	@Override
 	public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
 		IRenameStrategy renameStrategy = createRenameStrategy(targetEObject, renameElementContext);
 		if (renameStrategy instanceof DefaultRenameStrategyProvider.IInitializable

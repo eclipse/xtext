@@ -23,6 +23,7 @@ public class JdtHyperlink extends AbstractHyperlink {
 	
 	private IJavaElement javaElement;
 
+	@Override
 	public void open() {
 		try {
 			JavaUI.openInEditor(javaElement);
