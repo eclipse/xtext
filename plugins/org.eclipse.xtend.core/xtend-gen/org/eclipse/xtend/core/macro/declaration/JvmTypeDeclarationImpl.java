@@ -17,8 +17,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.ConditionUtils;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -28,6 +30,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -194,6 +197,17 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return IterableExtensions.findFirst(_declaredFields, _function);
   }
   
+  public TypeDeclaration findDeclaredType(final String name) {
+    Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
+    final Function1<TypeDeclaration, Boolean> _function = new Function1<TypeDeclaration, Boolean>() {
+      public Boolean apply(final TypeDeclaration type) {
+        String _simpleName = type.getSimpleName();
+        return Boolean.valueOf(Objects.equal(_simpleName, name));
+      }
+    };
+    return IterableExtensions.findFirst(_declaredTypes, _function);
+  }
+  
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;
     {
@@ -250,6 +264,21 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<InterfaceDeclaration>filter(_declaredMembers, InterfaceDeclaration.class);
+  }
+  
+  public Iterable<? extends TypeDeclaration> getDeclaredTypes() {
+    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    return Iterables.<TypeDeclaration>filter(_declaredMembers, TypeDeclaration.class);
+  }
+  
+  public Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    return Iterables.<AnnotationTypeDeclaration>filter(_declaredMembers, AnnotationTypeDeclaration.class);
+  }
+  
+  public Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+    Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    return Iterables.<EnumerationTypeDeclaration>filter(_declaredMembers, EnumerationTypeDeclaration.class);
   }
   
   public void setSimpleName(final String name) {

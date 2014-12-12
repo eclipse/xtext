@@ -46,11 +46,6 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	
 	@Inject IResourceValidator validator
 
-	// dummy override, to make launch config available
-	@Test override testSimpleModification() {
-		super.testSimpleModification()
-	}
-
 	@Test
 	def void testDocumentationProvider() {
 		assertProcessing(

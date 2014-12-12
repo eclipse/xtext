@@ -27,6 +27,7 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtend.core.macro.declaration.ExpressionImpl
 
+
 abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Inject XtendGenerator generator
@@ -45,7 +46,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 				
 				interface GenericInterface {
-				  def <T> T m()
+					def <T> T m()
 				}
 				
 				@Active(Bug441081Processor)
@@ -53,14 +54,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 				}
 				
 				class Bug441081Processor extends AbstractClassProcessor {
-				  override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
-				    annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[findTypeGlobally(GenericInterface).newTypeReference]
-				    annotatedClass.addMethod("m") [
-				      returnType = addTypeParameter("T", object).newTypeReference
-				      body = '«»''return null;'«»''
-				      primarySourceElement = annotatedClass
-				    ]
-				  }
+					override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+						annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[findTypeGlobally(GenericInterface).newTypeReference]
+						annotatedClass.addMethod("m") [
+							returnType = addTypeParameter("T", object).newTypeReference
+							body = '«»''return null;'«»''
+							primarySourceElement = annotatedClass
+						]
+					}
 				}
 			''',
 			'UserCode.xtend' -> '''
@@ -336,7 +337,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					
 					override doValidate(ClassDeclaration cls, extension ValidationContext context) {
 						cls.addWarning("Baz")
-						cls.addWarning("There were " + cls.problems.size +  " problems")
+						cls.addWarning("There were " + cls.problems.size + " problems")
 					}
 				}
 			''',
@@ -725,14 +726,14 @@ abstract class AbstractReusableActiveAnnotationTests {
 			
 			assertEquals(colorEnum.findDeclaredValue('BLACK'), annotation.getValue('color'))
 			
-			val colors =  annotation.getValue('colors') as Object[]
+			val colors = annotation.getValue('colors') as Object[]
 			assertEquals(2, colors.length)
 			assertEquals(colorEnum.findDeclaredValue('BLACK'), colors.get(0))
 			assertEquals(colorEnum.findDeclaredValue('WHITE'), colors.get(1))
 			
 			assertEquals(typeReferenceProvider.newTypeReference(clazz), annotation.getValue('type'))
 			
-			val types =  annotation.getClassArrayValue('types')
+			val types = annotation.getClassArrayValue('types')
 			assertEquals(1, types.length)
 			assertEquals(typeReferenceProvider.primitiveBoolean, types.get(0))
 			
@@ -832,8 +833,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 							set('stringArrayValue', classAnnotation.getValue('stringArrayValue'))
 							set('typeValue', classAnnotation.getValue('typeValue'))
 							set('typeArrayValue', classAnnotation.getValue('typeArrayValue'))
-				  			set('annotation2Value', classAnnotation.getValue('annotation2Value'))
-				  			set('annotation2ArrayValue', classAnnotation.getValue('annotation2ArrayValue'))
+							set('annotation2Value', classAnnotation.getValue('annotation2Value'))
+							set('annotation2ArrayValue', classAnnotation.getValue('annotation2ArrayValue'))
 							set('enumValue', classAnnotation.getValue('enumValue'))
 							set('enumArrayValue', classAnnotation.getValue('enumArrayValue'))
 						])
@@ -1125,8 +1126,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 							set('stringArrayValue', classAnnotation.getExpression('stringArrayValue'))
 							set('typeValue', classAnnotation.getExpression('typeValue'))
 							set('typeArrayValue', classAnnotation.getExpression('typeArrayValue'))
-				  			set('annotation2Value', classAnnotation.getExpression('annotation2Value'))
-				  			set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
+							set('annotation2Value', classAnnotation.getExpression('annotation2Value'))
+							set('annotation2ArrayValue', classAnnotation.getExpression('annotation2ArrayValue'))
 							set('enumValue', classAnnotation.getExpression('enumValue'))
 							set('enumArrayValue', classAnnotation.getExpression('enumArrayValue'))
 						])
@@ -2164,7 +2165,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				@MyAnnotation("FOO") class MyClient {
 					def myMethod() {
 						FOO.FOO
-					}  
+					}
 				}
 			'''
 		) [
@@ -3277,3 +3278,4 @@ abstract class AbstractReusableActiveAnnotationTests {
 		}
 	}
 }
+
