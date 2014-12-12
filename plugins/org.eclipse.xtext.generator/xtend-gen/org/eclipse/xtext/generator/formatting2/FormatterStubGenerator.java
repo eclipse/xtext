@@ -232,7 +232,7 @@ public class FormatterStubGenerator {
     _builder.append(", extension IFormattableDocument document) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("// TODO: format HiddenRegions around keywords, attribtues, cross references, etc. ");
+    _builder.append("// TODO: format HiddenRegions around keywords, attributes, cross references, etc. ");
     _builder.newLine();
     {
       for(final EReference ref : containmentRefs) {

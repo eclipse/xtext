@@ -113,6 +113,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	}
 	
 	def genMethodCreateSequence(JavaEMFFile file) '''
+		@Override
 		public void createSequence(EObject context, EObject semanticObject) {
 			«val superConstraints = grammar.superGrammar.grammarConstraints.map[it->it].toMap»
 			«var pkgi = 0 »

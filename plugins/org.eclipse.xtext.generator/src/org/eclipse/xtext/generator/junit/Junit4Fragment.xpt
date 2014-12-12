@@ -73,6 +73,7 @@ public class «qualifiedInjectorProviderName().toSimpleName()» implements IInject
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector()
 	{
 		if (injector == null) {
@@ -87,10 +88,12 @@ public class «qualifiedInjectorProviderName().toSimpleName()» implements IInject
 	    return new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();
@@ -112,6 +115,7 @@ import com.google.inject.Injector;
 
 public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInjectorProvider {
 	
+	@Override
 	public Injector getInjector() {
 		return «activatorName()».getInstance().getInjector("«name»");
 	}

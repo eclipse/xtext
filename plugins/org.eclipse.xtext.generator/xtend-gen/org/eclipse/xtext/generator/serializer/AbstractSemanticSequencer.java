@@ -258,6 +258,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public CharSequence genMethodCreateSequence(final JavaEMFFile file) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Override");
+    _builder.newLine();
     _builder.append("public void createSequence(EObject context, EObject semanticObject) {");
     _builder.newLine();
     _builder.append("\t");
