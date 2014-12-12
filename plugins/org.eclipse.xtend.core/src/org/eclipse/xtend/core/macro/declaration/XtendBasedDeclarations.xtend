@@ -155,6 +155,10 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
+	override findDeclaredType(String name) {
+		declaredTypes.findFirst[type | type.simpleName == name]
+	}
+	
 	override findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
@@ -177,6 +181,18 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 	
 	override getDeclaredInterfaces() {
 		declaredMembers.filter(InterfaceDeclaration)
+	}
+	
+	override getDeclaredAnnotationTypes() {
+		declaredMembers.filter(AnnotationTypeDeclaration)
+	}
+	
+	override getDeclaredEnumerationTypes() {
+		declaredMembers.filter(EnumerationTypeDeclaration)
+	}
+	
+	override getDeclaredTypes() {
+		declaredMembers.filter(TypeDeclaration)
 	}
 	
 }

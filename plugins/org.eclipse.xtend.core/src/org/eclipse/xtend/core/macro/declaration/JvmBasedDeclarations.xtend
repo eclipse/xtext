@@ -72,6 +72,7 @@ import static org.eclipse.xtend.core.macro.ConditionUtils.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts.AnnotationCallback
 import org.eclipse.xtext.common.types.util.DeprecationUtil
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 
 abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> {
 	
@@ -279,6 +280,10 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
+	def findDeclaredType(String name) {
+		declaredTypes.findFirst[type | type.simpleName == name]
+	}
+	
 	def findDeclaredMethod(String name, TypeReference... parameterTypes) {
 		checkIterable(parameterTypes, "parameterTypes")
 		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
@@ -302,6 +307,18 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	
 	def Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
 		declaredMembers.filter(InterfaceDeclaration)
+	}
+	
+	def Iterable<? extends TypeDeclaration> getDeclaredTypes() {
+		declaredMembers.filter(TypeDeclaration)
+	}
+	
+	def Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+		declaredMembers.filter(AnnotationTypeDeclaration)
+	}
+	
+	def Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+		declaredMembers.filter(EnumerationTypeDeclaration)
 	}
 	
 	override setSimpleName(String name) {
@@ -329,6 +346,10 @@ class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl imp
 		super.findDeclaredField(name) as MutableFieldDeclaration
 	}
 	
+	override MutableTypeDeclaration findDeclaredType(String name) {
+		super.findDeclaredType(name) as MutableTypeDeclaration
+	}
+	
 	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
 		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
 	}
@@ -351,6 +372,18 @@ class MutableJvmInterfaceDeclarationImpl extends JvmInterfaceDeclarationImpl imp
 	
 	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+		super.declaredAnnotationTypes as Iterable<? extends MutableAnnotationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+		super.declaredEnumerationTypes as Iterable<? extends MutableEnumerationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
+		super.declaredTypes as Iterable<? extends MutableTypeDeclaration>
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
@@ -443,6 +476,10 @@ class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarati
 		super.findDeclaredField(name) as MutableFieldDeclaration
 	}
 	
+	override MutableTypeDeclaration findDeclaredType(String name) {
+		super.findDeclaredType(name) as MutableTypeDeclaration
+	}
+	
 	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
 		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
 	}
@@ -465,6 +502,18 @@ class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarati
 	
 	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+		super.declaredAnnotationTypes as Iterable<? extends MutableAnnotationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+		super.declaredEnumerationTypes as Iterable<? extends MutableEnumerationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
+		super.declaredTypes as Iterable<? extends MutableTypeDeclaration>
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
@@ -537,6 +586,10 @@ class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclara
 		super.findDeclaredField(name) as MutableFieldDeclaration
 	}
 	
+	override MutableTypeDeclaration findDeclaredType(String name) {
+		super.findDeclaredType(name) as MutableTypeDeclaration
+	}
+	
 	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
 		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
 	}
@@ -559,6 +612,18 @@ class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclara
 	
 	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+		super.declaredAnnotationTypes as Iterable<? extends MutableAnnotationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+		super.declaredEnumerationTypes as Iterable<? extends MutableEnumerationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
+		super.declaredTypes as Iterable<? extends MutableTypeDeclaration>
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
@@ -619,6 +684,10 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 		super.findDeclaredField(name) as MutableFieldDeclaration
 	}
 	
+	override MutableTypeDeclaration findDeclaredType(String name) {
+		super.findDeclaredType(name) as MutableTypeDeclaration
+	}
+	
 	override MutableConstructorDeclaration findDeclaredConstructor(TypeReference... parameterTypes) {
 		super.findDeclaredConstructor(parameterTypes) as MutableConstructorDeclaration
 	}
@@ -641,6 +710,18 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 	
 	override Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
 		super.declaredInterfaces as Iterable<? extends MutableInterfaceDeclaration>
+	}
+	
+	override Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
+		super.declaredAnnotationTypes as Iterable<? extends MutableAnnotationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
+		super.declaredEnumerationTypes as Iterable<? extends MutableEnumerationTypeDeclaration>
+	}
+	
+	override Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
+		super.declaredTypes as Iterable<? extends MutableTypeDeclaration>
 	}
 	
 	override MutableTypeDeclaration getDeclaringType() {
