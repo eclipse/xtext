@@ -54,10 +54,35 @@ public interface TypeDeclaration extends Type, MemberDeclaration {
 	Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces();
 	
 	/**
+	 * @return the enumeration types directly declared and contained in this type declaration
+	 * @since 2.8
+	 */
+	Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes();
+	
+	/**
+	 * @return the annotation types directly declared and contained in this type declaration
+	 * @since 2.8
+	 */
+	Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes();
+	
+	/**
+	 * @return the types directly declared and contained in this type declaration
+	 * @since 2.8
+	 */
+	Iterable<? extends TypeDeclaration> getDeclaredTypes();
+	
+	/**
 	 * @param name of the feature
 	 * @return the declared field with the given name or <code>null</code> of no such field exists.
 	 */
 	FieldDeclaration findDeclaredField(String name);
+	
+	/**
+	 * @param name of the nested type
+	 * @return the declared, nested type with the given name or <code>null</code> of no such type exists.
+	 * @since 2.8
+	 */
+	TypeDeclaration findDeclaredType(String name);
 	
 	/**
 	 * @param name of the method
