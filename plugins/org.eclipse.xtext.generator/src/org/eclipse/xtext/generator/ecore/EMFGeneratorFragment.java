@@ -30,6 +30,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -137,6 +138,8 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	private GenRuntimeVersion emfRuntimeVerison;
 	
 	private boolean suppressLoadInitialization = false;
+	
+	private GenJDKLevel jdkLevel = GenJDKLevel.JDK50_LITERAL;
 	
 	private String getLineDelimiter() {
 		return getNaming().getLineDelimiter();
@@ -647,7 +650,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 			genModel.setFacadeHelperClass(null);
 			genModel.setBundleManifest(true);
 			genModel.setUpdateClasspath(false);
-			genModel.setComplianceLevel(GenJDKLevel.JDK50_LITERAL);
+			genModel.setComplianceLevel(jdkLevel);
 			genModel.setRuntimeVersion(emfRuntimeVerison);
 			genModel.setRootExtendsClass("org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container");
 			genModel.setLineDelimiter(getLineDelimiter());
@@ -988,6 +991,32 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 */
 	public boolean isSuppressLoadInitialization() {
 		return suppressLoadInitialization;
+	}
+
+	/**
+	 * Set the JDK compatibility level. The following values are valid:
+	 * <ul>
+	 *   <li>"JDK14"</li>
+	 *   <li>"JDK50"</li>
+	 *   <li>"JDK60"</li>
+	 *   <li>"JDK70"</li>
+	 *   <li>"JDK80"</li>
+	 * </ul>
+	 * The default level is "JDK50".
+	 * 
+	 * @since 2.8
+	 */
+	public void setJdkLevel(String jdkLevel) {
+		GenJDKLevel l = GenJDKLevel.getByName(jdkLevel);
+		Assert.isNotNull(l, "Invalid JDK level");
+		this.jdkLevel = l;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String getJdkLevel() {
+		return jdkLevel.getName();
 	}
 	
 }
