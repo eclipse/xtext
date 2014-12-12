@@ -21,6 +21,7 @@ public class ResourceSetBasedAllContainersStateProvider implements IAllContainer
 
 	private final static Logger log = Logger.getLogger(ResourceSetBasedAllContainersStateProvider.class);
 
+	@Override
 	public IAllContainersState get(IResourceDescriptions context) {
 		ResourceSet resourceSet = getResourceSet(context);
 		IAllContainersState adapter = (IAllContainersState) EcoreUtil.getAdapter(resourceSet.eAdapters(),

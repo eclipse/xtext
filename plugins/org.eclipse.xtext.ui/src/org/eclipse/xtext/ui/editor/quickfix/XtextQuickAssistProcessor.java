@@ -50,10 +50,12 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 	
 	private String errorMessage;
 
+	@Override
 	public String getErrorMessage() {
 		return errorMessage;
 	}
 
+	@Override
 	public boolean canFix(Annotation annotation) {
 		if (annotation.isMarkedDeleted())
 			return false;
@@ -80,10 +82,12 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		return false;
 	}
 
+	@Override
 	public boolean canAssist(IQuickAssistInvocationContext invocationContext) {
 		return false;
 	}
 
+	@Override
 	public ICompletionProposal[] computeQuickAssistProposals(IQuickAssistInvocationContext invocationContext) {
 		ISourceViewer sourceViewer = invocationContext.getSourceViewer();
 		if (sourceViewer == null)

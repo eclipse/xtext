@@ -49,16 +49,21 @@ public interface ITreeAppendable extends IAppendable, ITraceRegionProvider {
 	
 	ErrorTreeAppendable errorChild();
 	
+	@Override
 	ITreeAppendable append(JvmType type);
 	
 	ITreeAppendable append(Class<?> type);
 	
+	@Override
 	ITreeAppendable append(CharSequence content);
 	
+	@Override
 	ITreeAppendable decreaseIndentation();
 	
+	@Override
 	ITreeAppendable increaseIndentation();
 	
+	@Override
 	ITreeAppendable newLine();
 
 }

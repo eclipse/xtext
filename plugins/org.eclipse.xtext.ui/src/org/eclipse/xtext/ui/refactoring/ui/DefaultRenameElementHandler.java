@@ -62,6 +62,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 	
 	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
@@ -70,6 +71,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				IRenameElementContext renameElementContext = editor.getDocument().priorityReadOnly(
 						new IUnitOfWork<IRenameElementContext, XtextResource>() {
+							@Override
 							public IRenameElementContext exec(XtextResource resource) throws Exception {
 								EObject selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource,
 										selection.getOffset());
@@ -103,6 +105,7 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 	/** 
 	 * To maintain binary compatibility only.
 	 */
+	@Override
 	public IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor triggeringEditor,
 			final ITextSelection selection, XtextResource triggeringResource) {
 		return renameContextFactory.createRenameElementContext(targetElement, triggeringEditor, selection, triggeringResource);

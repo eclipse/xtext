@@ -63,6 +63,7 @@ public class FindReferencesTestUtil extends Assert {
 			filter = getFilter(target);
 			assertEquals(expectedLabel, getLabel(target));
 			this.filteringAcceptor = new IAcceptor<IReferenceDescription>() {
+				@Override
 				public void accept(IReferenceDescription t) {
 					if (filter.apply(t))
 						acceptor.accept(t);
@@ -102,6 +103,7 @@ public class FindReferencesTestUtil extends Assert {
 					+ expectationQueue.size() + "\n";
 		}
 
+		@Override
 		public void accept(IReferenceDescription description) {
 			IReferenceDescription nextExpected = expectationQueue.poll();
 			assertNotNull(nextExpected);

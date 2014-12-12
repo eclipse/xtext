@@ -22,6 +22,7 @@ import com.google.inject.ImplementedBy;
 public interface ICompletionProposalComparator extends Comparator<ICompletionProposal> {
 
 	class NaturalOrder implements ICompletionProposalComparator {
+		@Override
 		public int compare(ICompletionProposal o1, ICompletionProposal o2) {
 			Integer relevance1 = getRelevance(o1);
 			Integer relevance2 = getRelevance(o2);

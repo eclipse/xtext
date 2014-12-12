@@ -70,10 +70,12 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		return locationProvider;
 	}
 
+	@Override
 	public IEditorPart open(URI uri, boolean select) {
 		return open(uri, null, -1, select);
 	}
 
+	@Override
 	public IEditorPart open(final URI uri, final EReference crossReference, final int indexInList, final boolean select) {
 		Iterator<Pair<IStorage, IProject>> storages = mapper.getStorages(uri.trimFragment()).iterator();
 		if (storages != null && storages.hasNext()) {
@@ -123,6 +125,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 											: locationProvider.getSignificantTextRegion(object);
 									if (select) {
 										workbench.getDisplay().asyncExec(new Runnable() {
+											@Override
 											public void run() {
 												xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
 											}

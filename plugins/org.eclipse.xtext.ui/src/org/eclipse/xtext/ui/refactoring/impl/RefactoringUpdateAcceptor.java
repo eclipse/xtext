@@ -47,16 +47,19 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 	private Multimap<IRefactoringDocument, TextEdit> document2textEdits = LinkedHashMultimap.create();
 	private Multimap<IRefactoringDocument, Change> document2change = LinkedHashMultimap.create();
 
+	@Override
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		IRefactoringDocument document = getDocument(resourceURI);
 		document2textEdits.put(document, textEdit);
 	}
 
+	@Override
 	public void accept(URI resourceURI, Change change) {
 		IRefactoringDocument document = getDocument(resourceURI);
 		document2change.put(document, change);
 	}
 	
+	@Override
 	public IRefactoringDocument getDocument(URI resourceURI) {
 		IRefactoringDocument document = uri2document.get(resourceURI);
 		if(document != null) 
@@ -66,10 +69,12 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 		return newDocument;
 	}
 
+	@Override
 	public StatusWrapper getRefactoringStatus() {
 		return status;
 	}
 	
+	@Override
 	public Change createCompositeChange(String name, IProgressMonitor monitor) {
 		if(document2change.isEmpty() && document2textEdits.isEmpty())
 			return null;
@@ -98,11 +103,13 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor, IC
 		return compositeChange;
 	}
 
+	@Override
 	public void setChangeRedirector(IChangeRedirector changeRedirector) {
 		if(refactoringDocumentProvider instanceof IChangeRedirector.Aware) 
 			((IChangeRedirector.Aware) refactoringDocumentProvider).setChangeRedirector(changeRedirector);
 	}
 
+	@Override
 	public IChangeRedirector getChangeRedirector() {
 		if(refactoringDocumentProvider instanceof IChangeRedirector.Aware) 
 			return ((IChangeRedirector.Aware) refactoringDocumentProvider).getChangeRedirector();

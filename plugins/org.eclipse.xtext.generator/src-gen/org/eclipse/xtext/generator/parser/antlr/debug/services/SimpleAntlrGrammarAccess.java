@@ -32,6 +32,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//AntlrGrammar:
 		//	"grammar" name=ID ";" options=Options? rules+=Rule*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"grammar" name=ID ";" options=Options? rules+=Rule*
@@ -74,6 +75,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Options:
 		//	{Options} "options" "{" optionValues+=OptionValue+ "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Options} "options" "{" optionValues+=OptionValue+ "}"
@@ -110,6 +112,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//OptionValue:
 		//	key=ID "=" value=IdOrInt ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//key=ID "=" value=IdOrInt ";"
@@ -142,6 +145,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//IdOrInt:
 		//	ID | INT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID | INT
@@ -168,6 +172,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Rule:
 		//	^fragment?="fragment"? name=ID ":" body=Alternatives ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//^fragment?="fragment"? name=ID ":" body=Alternatives ";"
@@ -211,6 +216,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Alternatives returns RuleElement:
 		//	Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?
@@ -249,6 +255,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Group returns RuleElement:
 		//	Atom ({Group.elements+=current} elements+=Atom+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Atom ({Group.elements+=current} elements+=Atom+)?
@@ -286,6 +293,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Atom returns RuleElement:
 		//	OtherElement ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))? | RuleOptions;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//OtherElement ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))? | RuleOptions
@@ -345,6 +353,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		//OtherElement returns RuleElement:
 		//	{NegatedElement} "~" element=(Parenthesized | Literal) | Predicated | Parenthesized | Literal
 		//	({UntilElement.left=current} ".." right=Literal)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{NegatedElement} "~" element=(Parenthesized | Literal) | Predicated | Parenthesized | Literal
@@ -408,6 +417,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EmptyParenthesis:
 		//	"(" ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" ")"
@@ -431,6 +441,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Parenthesized returns RuleElement:
 		//	"(" EmptyParenthesis* Alternatives ")" EmptyParenthesis*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" EmptyParenthesis* Alternatives ")" EmptyParenthesis*
@@ -469,6 +480,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Predicated:
 		//	"(" "(" EmptyParenthesis* predicate=Alternatives ")" EmptyParenthesis* "=>" element=OtherElement ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" "(" EmptyParenthesis* predicate=Alternatives ")" EmptyParenthesis* "=>" element=OtherElement ")"
@@ -523,6 +535,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RuleOptions:
 		//	options=Options ":" element=Atom | {Skip} "{skip();}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//options=Options ":" element=Atom | {Skip} "{skip();}"
@@ -565,6 +578,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Literal returns RuleElement:
 		//	RuleCall | Keyword | Wildcard;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//RuleCall | Keyword | Wildcard
@@ -589,6 +603,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RuleCall:
 		//	rule=ID EmptyParenthesis*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//rule=ID EmptyParenthesis*
@@ -613,6 +628,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Keyword:
 		//	value=STRING EmptyParenthesis*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=STRING EmptyParenthesis*
@@ -637,6 +653,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Wildcard:
 		//	{Wildcard} "." EmptyParenthesis*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Wildcard} "." EmptyParenthesis*
@@ -699,6 +716,7 @@ public class SimpleAntlrGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

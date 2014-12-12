@@ -48,6 +48,7 @@ public class XtendFileRenameParticipant extends AbstractProcessorBasedRenamePart
 									(XtextResource) resource);
 							if(renameElementContext instanceof IChangeRedirector.Aware) 
 								((IChangeRedirector.Aware) renameElementContext).setChangeRedirector(new IChangeRedirector() {
+									@Override
 									public IPath getRedirectedPath(IPath source) {
 										return source.equals(filePath) ? newPath : filePath;
 									}

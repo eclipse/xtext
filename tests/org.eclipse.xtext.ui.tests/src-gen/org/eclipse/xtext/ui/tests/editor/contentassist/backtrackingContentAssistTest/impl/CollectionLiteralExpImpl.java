@@ -70,7 +70,8 @@ public class CollectionLiteralExpImpl extends ExpressionImpl implements Collecti
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<CollectionLiteralPart> getCollectionLiteralParts()
+  @Override
+public EList<CollectionLiteralPart> getCollectionLiteralParts()
   {
     if (collectionLiteralParts == null)
     {

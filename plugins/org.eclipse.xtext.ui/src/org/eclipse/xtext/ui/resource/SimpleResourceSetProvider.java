@@ -22,6 +22,7 @@ public class SimpleResourceSetProvider implements IResourceSetProvider {
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 	
+	@Override
 	public ResourceSet get(IProject project) {
 		return resourceSetProvider.get();
 	}

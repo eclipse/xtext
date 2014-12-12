@@ -146,6 +146,7 @@ public class ProjectFactory {
 			if (contributors != null) {
 				IFileCreator fileCreator = new IFileCreator() {
 
+					@Override
 					public IFile writeToFile(CharSequence chars, String fileName) {
 						return ProjectFactory.this.writeToFile(chars, fileName, project, subMonitor);
 					}
@@ -190,6 +191,7 @@ public class ProjectFactory {
 			final boolean[] result = new boolean[1];
 			if (workbench != null && theShell != null) {
 				workbench.getDisplay().syncExec(new Runnable() {
+					@Override
 					public void run() {
 						result[0] = MessageDialog.openQuestion(theShell, Messages.ProjectFactory_1 + projectName,
 								Messages.ProjectFactory_2 + projectName + Messages.ProjectFactory_3);

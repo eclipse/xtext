@@ -51,6 +51,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void updateMarkers(Delta delta, /* @Nullable */ ResourceSet resourceSet, IProgressMonitor monitor) throws OperationCanceledException {
 		if (monitor.isCanceled()) {
 			throw new OperationCanceledException();

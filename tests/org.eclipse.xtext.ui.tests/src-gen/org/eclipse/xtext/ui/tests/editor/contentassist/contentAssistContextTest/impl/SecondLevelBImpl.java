@@ -84,7 +84,8 @@ public class SecondLevelBImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ThirdLevelB1> getThirdLevelB1()
+  @Override
+public EList<ThirdLevelB1> getThirdLevelB1()
   {
     if (thirdLevelB1 == null)
     {
@@ -98,7 +99,8 @@ public class SecondLevelBImpl extends MinimalEObjectImpl.Container implements Se
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ThirdLevelB2> getThirdLevelB2()
+  @Override
+public EList<ThirdLevelB2> getThirdLevelB2()
   {
     if (thirdLevelB2 == null)
     {

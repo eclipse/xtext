@@ -108,7 +108,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getType()
+  @Override
+public TypeRef getType()
   {
     return type;
   }
@@ -135,7 +136,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeRef newType)
+  @Override
+public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -156,7 +158,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFeature()
+  @Override
+public String getFeature()
   {
     return feature;
   }
@@ -166,7 +169,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeature(String newFeature)
+  @Override
+public void setFeature(String newFeature)
   {
     String oldFeature = feature;
     feature = newFeature;
@@ -179,7 +183,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOperator()
+  @Override
+public String getOperator()
   {
     return operator;
   }
@@ -189,7 +194,8 @@ public class ActionImpl extends AbstractElementImpl implements Action
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(String newOperator)
+  @Override
+public void setOperator(String newOperator)
   {
     String oldOperator = operator;
     operator = newOperator;

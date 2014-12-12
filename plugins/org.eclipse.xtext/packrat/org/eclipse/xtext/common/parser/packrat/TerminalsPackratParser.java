@@ -32,10 +32,12 @@ public class TerminalsPackratParser extends AbstractPackratParser {
 		return (TerminalsGrammarAccess)super.getGrammarAccess();
 	}
 
+	@Override
 	public IParseResult parse(ParserRule rule, Reader reader) {
 		throw new UnsupportedOperationException();
 	}
 	
+	@Override
 	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 		throw new UnsupportedOperationException();
 	}

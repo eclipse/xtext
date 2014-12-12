@@ -32,6 +32,7 @@ public class DefaultCommentAssociater extends AbstractCommentAssociater {
 	@Inject
 	protected TokenUtil tokenUtil;
 
+	@Override
 	public Map<ILeafNode, EObject> associateCommentsWithSemanticEObjects(EObject model, Set<ICompositeNode> roots) {
 		Map<ILeafNode, EObject> mapping = new HashMap<ILeafNode, EObject>();
 		for (ICompositeNode rootNode : roots)

@@ -32,12 +32,15 @@ public class RecursionGuardBenchmark extends SimpleBenchmark {
 			Guard createGuard(int size) {
 				final Set<JvmTypeParameter> set = new HashSet<JvmTypeParameter>(size);
 				return new Guard() {
+					@Override
 					public boolean tryNext(JvmTypeParameter typeParameter) {
 						return set.add(typeParameter);
 					}
+					@Override
 					public void done(JvmTypeParameter typeParameter) {
 						set.remove(typeParameter);
 					}
+					@Override
 					public void clear() {
 						set.clear();
 					}
@@ -50,14 +53,17 @@ public class RecursionGuardBenchmark extends SimpleBenchmark {
 				final RecursionGuard<JvmTypeParameter> implementation = new RecursionGuard<JvmTypeParameter>();
 				return new Guard() {
 
+					@Override
 					public boolean tryNext(JvmTypeParameter typeParameter) {
 						return implementation.tryNext(typeParameter);
 					}
 
+					@Override
 					public void done(JvmTypeParameter typeParameter) {
 						implementation.done(typeParameter);
 					}
 					
+					@Override
 					public void clear() {
 						implementation.clear();
 					}
@@ -91,6 +97,7 @@ public class RecursionGuardBenchmark extends SimpleBenchmark {
 				final LinkedList<JvmTypeParameter> list = new LinkedList<JvmTypeParameter>();
 				return new Guard() {
 
+					@Override
 					public boolean tryNext(JvmTypeParameter typeParameter) {
 						if (list.contains(typeParameter)) {
 							return false;
@@ -99,10 +106,12 @@ public class RecursionGuardBenchmark extends SimpleBenchmark {
 						return true;
 					}
 
+					@Override
 					public void done(JvmTypeParameter typeParameter) {
 						list.remove(typeParameter);
 					}
 					
+					@Override
 					public void clear() {
 						list.clear();
 					}
@@ -114,6 +123,7 @@ public class RecursionGuardBenchmark extends SimpleBenchmark {
 		Guard createListGuard(final List<JvmTypeParameter> list) {
 			return new Guard() {
 
+				@Override
 				public boolean tryNext(JvmTypeParameter typeParameter) {
 					if (list.contains(typeParameter)) {
 						return false;
@@ -122,11 +132,13 @@ public class RecursionGuardBenchmark extends SimpleBenchmark {
 					return true;
 				}
 
+				@Override
 				public void done(JvmTypeParameter typeParameter) {
 					int idx = list.lastIndexOf(typeParameter);
 					list.remove(idx);
 				}
 				
+				@Override
 				public void clear() {
 					list.clear();
 				}

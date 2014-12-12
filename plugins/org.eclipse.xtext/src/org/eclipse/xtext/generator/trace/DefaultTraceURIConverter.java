@@ -17,11 +17,13 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class DefaultTraceURIConverter implements ITraceURIConverter {
 	
+	@Override
 	public URI getURIForTrace(XtextResource context) {
 		URI uri = context.getURI();
 		return getURIForTrace(uri);
 	}
 
+	@Override
 	public URI getURIForTrace(URI uri) {
 		if (uri.isPlatform()) {
 			// create a URI that is relative to the contained projects.

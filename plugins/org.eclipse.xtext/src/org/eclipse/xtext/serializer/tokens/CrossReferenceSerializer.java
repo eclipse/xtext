@@ -59,6 +59,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	private IValueConverterService valueConverter;
 
+	@Override
 	public boolean isValid(EObject semanticObject, CrossReference crossref, EObject target, INode node, Acceptor errors) {
 		if (target.eIsProxy() && node != null) {
 			CrossReference crossrefFromNode = GrammarUtil.containingCrossReference(node.getGrammarElement());
@@ -74,6 +75,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		return getCrossReferenceNameFromScope(semanticObject, crossref, target, scope, errors) != null;
 	}
 
+	@Override
 	public String serializeCrossRef(EObject semanticObject, CrossReference crossref, EObject target, INode node,
 			Acceptor errors) {
 

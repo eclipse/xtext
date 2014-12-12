@@ -110,7 +110,8 @@ public class EnumRulesUiTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -143,7 +144,8 @@ public class EnumRulesUiTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumRulesUiTestLanguagePackage getEnumRulesUiTestLanguagePackage()
+  @Override
+public EnumRulesUiTestLanguagePackage getEnumRulesUiTestLanguagePackage()
   {
     return (EnumRulesUiTestLanguagePackage)getEPackage();
   }

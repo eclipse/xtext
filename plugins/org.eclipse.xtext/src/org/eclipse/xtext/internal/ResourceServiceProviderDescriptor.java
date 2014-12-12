@@ -33,6 +33,7 @@ public class ResourceServiceProviderDescriptor implements IResourceServiceProvid
 		return element;
 	}
 
+	@Override
 	public synchronized IResourceServiceProvider get(URI uri, String contentType) {
 		if (this.extension == null) {
 			try {

@@ -99,6 +99,7 @@ public class SyntacticSequencerUtil {
 		for (Map.Entry<AbstractElementAlias, List<ISynTransition>> e : result.entrySet())
 			ambiguousTransitions.add(Tuples.create(elementAliasToIdentifyer(e.getKey()), e.getKey(), e.getValue()));
 		Collections.sort(ambiguousTransitions, new Comparator<Pair<String, AbstractElementAlias>>() {
+			@Override
 			public int compare(Pair<String, AbstractElementAlias> o1, Pair<String, AbstractElementAlias> o2) {
 				return o1.getFirst().compareTo(o2.getFirst());
 			}

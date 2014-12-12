@@ -186,14 +186,17 @@ public class Linker extends AbstractCleaningLinker {
 			this.linkingHelper = helper;
 		}
 
+		@Override
 		public EObject getContext() {
 			return obj;
 		}
 
+		@Override
 		public EReference getReference() {
 			return eRef;
 		}
 
+		@Override
 		public String getLinkText() {
 			return linkingHelper.getCrossRefNodeAsString(node, true);
 		}

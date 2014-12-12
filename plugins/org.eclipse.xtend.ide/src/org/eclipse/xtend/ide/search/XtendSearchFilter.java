@@ -22,6 +22,7 @@ public class XtendSearchFilter implements IXtextSearchFilter {
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
 
+	@Override
 	public boolean reject(IEObjectDescription element) {
 		if (fileExtensionProvider.isValid(element.getEObjectURI().fileExtension())) {
 			return element.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE

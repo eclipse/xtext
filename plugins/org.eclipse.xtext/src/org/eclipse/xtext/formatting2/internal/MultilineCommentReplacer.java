@@ -38,6 +38,7 @@ public class MultilineCommentReplacer extends CommentReplacer {
 		}
 	}
 
+	@Override
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		if (!multiline)
 			return context;

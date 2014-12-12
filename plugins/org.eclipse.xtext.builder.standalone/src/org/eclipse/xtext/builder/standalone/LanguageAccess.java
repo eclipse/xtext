@@ -83,6 +83,7 @@ public class LanguageAccess {
 		Map<String, OutputConfiguration> asMap = IterableExtensions.toMap(
 				Iterables.transform(confsForFsa, new Function<OutputConfiguration, OutputConfiguration>() {
 
+					@Override
 					public OutputConfiguration apply(OutputConfiguration output) {
 						output.setOutputDirectory(resolveToBaseDir(output.getOutputDirectory()));
 						for (SourceMapping sourceMapping : output.getSourceMappings()) {
@@ -91,6 +92,7 @@ public class LanguageAccess {
 						return output;
 					}
 				}), new Function1<OutputConfiguration, String>() {
+					@Override
 					public String apply(final OutputConfiguration it) {
 						return it.getName();
 					}

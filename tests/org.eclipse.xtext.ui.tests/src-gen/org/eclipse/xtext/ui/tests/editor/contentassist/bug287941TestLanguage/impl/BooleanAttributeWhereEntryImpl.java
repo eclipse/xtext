@@ -95,7 +95,8 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public BooleanOperator getOperator()
+  @Override
+public BooleanOperator getOperator()
   {
     return operator;
   }
@@ -105,7 +106,8 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(BooleanOperator newOperator)
+  @Override
+public void setOperator(BooleanOperator newOperator)
   {
     BooleanOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -118,7 +120,8 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isIsTrue()
+  @Override
+public boolean isIsTrue()
   {
     return isTrue;
   }
@@ -128,7 +131,8 @@ public class BooleanAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIsTrue(boolean newIsTrue)
+  @Override
+public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
     isTrue = newIsTrue;

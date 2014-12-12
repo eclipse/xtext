@@ -29,6 +29,7 @@ public abstract class OpenOppositeFileHandler extends AbstractHandler {
 
 	protected abstract void collectOpeners(IEditorPart editor, IAcceptor<FileOpener> acceptor);
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editor = HandlerUtil.getActiveEditor(event);
 		IWorkbenchPage page = editor.getSite().getPage();

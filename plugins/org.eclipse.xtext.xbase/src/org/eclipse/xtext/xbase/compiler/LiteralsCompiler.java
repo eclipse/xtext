@@ -97,6 +97,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	 */
 	protected void toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced, final boolean useUnicodeEscapes) {
 		generateComment(new Later() {
+			@Override
 			public void exec(ITreeAppendable appendable) {
 				// we have to escape closing comments in string literals
 				String escapedClosingComments = expr.getValue().replace("*/", "* /");
@@ -108,6 +109,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	protected void generateComment(final XExpression expr, ITreeAppendable b, boolean isReferenced) {
 		generateComment(new Later() {
+			@Override
 			public void exec(ITreeAppendable appendable) {
 				internalToJavaExpression(expr, appendable);
 			}

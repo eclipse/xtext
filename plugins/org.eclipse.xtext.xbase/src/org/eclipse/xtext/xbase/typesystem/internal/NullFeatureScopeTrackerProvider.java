@@ -21,6 +21,7 @@ public class NullFeatureScopeTrackerProvider implements IFeatureScopeTracker.Pro
 	 * 
 	 * @param root to-be-ignored by the null implementation
 	 */
+	@Override
 	public IFeatureScopeTracker track(EObject root) {
 		return IFeatureScopeTracker.NULL;
 	}

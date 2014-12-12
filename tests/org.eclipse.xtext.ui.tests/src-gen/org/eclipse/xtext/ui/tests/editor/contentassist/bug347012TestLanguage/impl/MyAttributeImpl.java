@@ -95,7 +95,8 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getPUBLIC()
+  @Override
+public String getPUBLIC()
   {
     return public_;
   }
@@ -105,7 +106,8 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPUBLIC(String newPUBLIC)
+  @Override
+public void setPUBLIC(String newPUBLIC)
   {
     String oldPUBLIC = public_;
     public_ = newPUBLIC;
@@ -118,7 +120,8 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getPRIVATE()
+  @Override
+public String getPRIVATE()
   {
     return private_;
   }
@@ -128,7 +131,8 @@ public class MyAttributeImpl extends MinimalEObjectImpl.Container implements MyA
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPRIVATE(String newPRIVATE)
+  @Override
+public void setPRIVATE(String newPRIVATE)
   {
     String oldPRIVATE = private_;
     private_ = newPRIVATE;

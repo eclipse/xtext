@@ -67,7 +67,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public PackageDefinition getDefinition()
+  @Override
+public PackageDefinition getDefinition()
   {
     return definition;
   }
@@ -94,7 +95,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDefinition(PackageDefinition newDefinition)
+  @Override
+public void setDefinition(PackageDefinition newDefinition)
   {
     if (newDefinition != definition)
     {

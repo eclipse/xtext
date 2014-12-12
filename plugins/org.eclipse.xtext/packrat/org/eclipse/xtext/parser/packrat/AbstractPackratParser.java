@@ -71,6 +71,7 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 			this.hiddens = previousHiddens;
 		}
 
+		@Override
 		public void restore() {
 			setHiddens(this.hiddens);
 		}
@@ -82,6 +83,7 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 	}
 
 	private static final IHiddenTokenState NULL_HIDDEN_TOKEN_STATE = new IHiddenTokenState() {
+		@Override
 		public void restore() {
 		}
 	};
@@ -134,21 +136,27 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 		final IBacktracker localBacktracker = DebugUtil.BACKTRACKER_DEBUG ? new DebugBacktracker(backtracker) : backtracker;
 
 		IParserConfiguration result = createParserConfiguration(new IInternalParserConfiguration() {
+			@Override
 			public IConsumerUtility getConsumerUtil() {
 				return localConsumerUtil;
 			}
+			@Override
 			public IHiddenTokenHandler getHiddenTokenHandler() {
 				return localHiddenTokenHandler;
 			}
+			@Override
 			public ICharSequenceWithOffset getInput() {
 				return localInput;
 			}
+			@Override
 			public IMarkerFactory getMarkerFactory() {
 				return localMarkerFactory;
 			}
+			@Override
 			public IParsedTokenAcceptor getTokenAcceptor() {
 				return localTokenAcceptor;
 			}
+			@Override
 			public IBacktracker getBacktracker() {
 				return localBacktracker;
 			}
@@ -173,10 +181,12 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 		return input;
 	}
 
+	@Override
 	public final IParseResult parse(CharSequence input) {
 		return parse(input, getRootConsumer());
 	}
 
+	@Override
 	public final IParseResult parse(CharSequence input, INonTerminalConsumer consumer) {
 		this.input = input;
 		this.offset = 0;
@@ -187,6 +197,7 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 
 	private class RootConsumerListener implements IRootConsumerListener {
 
+		@Override
 		public void beforeNonTerminalEnd(INonTerminalConsumer nonTerminalConsumer, int result, INonTerminalConsumerConfiguration configuration) {
 			if (result == ConsumeResult.SUCCESS) {
 				if (offset != length())
@@ -198,10 +209,12 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 			}
 		}
 
+		@Override
 		public void afterNonTerminalBegin(INonTerminalConsumer nonTerminalConsumer, INonTerminalConsumerConfiguration configuration) {
 			consumeHiddens();
 		}
 
+		@Override
 		public void handleException(NonTerminalConsumer nonTerminalConsumer, Exception e, INonTerminalConsumerConfiguration configuration) {
 			log.error("handle Exception: " + e.getMessage(), e);
 			configuration.getTokenAcceptor().accept(new ErrorToken(offset, length() - offset, null, e.getMessage()));
@@ -246,39 +259,47 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 		}
 	}
 
+	@Override
 	public IMarker mark() {
 		return getNextMarker(activeMarker, offset);
 	}
 
+	@Override
 	public Marker getActiveMarker() {
 		return activeMarker;
 	}
 
+	@Override
 	public Marker getNextMarker(Marker parent, int offset) {
 		return markerBufferSize > 0 ?
 				markerBuffer[--markerBufferSize].reInit(offset, parent, this, this) :
 				new Marker(parent, offset, this, this);
 	}
 
+	@Override
 	public void setActiveMarker(Marker marker) {
 		this.activeMarker = marker;
 	}
 
+	@Override
 	public void releaseMarker(Marker marker) {
 		if (markerBufferSize < MARKER_BUFFER_SIZE)
 			markerBuffer[markerBufferSize++] = marker;
 	}
 
+	@Override
 	public int consumeKeyword(Keyword keyword, String feature, boolean isMany, boolean isBoolean, ICharacterClass notFollowedBy, boolean optional) {
 		keywordConsumer.configure(keyword, notFollowedBy);
 		return consumeTerminal(keywordConsumer, feature, isMany, isBoolean, keyword, ISequenceMatcher.Factory.nullMatcher(), optional);
 	}
 
+	@Override
 	public int consumeEnum(EnumLiteralDeclaration literal, ICharacterClass notFollowedBy) {
 		literalConsumer.configure(literal, notFollowedBy);
 		return consumeTerminal(literalConsumer, null, false, false, literal, ISequenceMatcher.Factory.nullMatcher(), false);
 	}
 
+	@Override
 	public int consumeTerminal(ITerminalConsumer consumer, String feature, boolean isMany, boolean isBoolean,
 			AbstractElement grammarElement, ISequenceMatcher notMatching, boolean optional) {
 		IMarker marker = mark();
@@ -293,6 +314,7 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 		return result;
 	}
 
+	@Override
 	public int consumeNonTerminal(INonTerminalConsumer consumer, String feature, boolean isMany,
 			boolean isDatatype, boolean isBoolean, AbstractElement grammarElement, boolean optional) throws Exception {
 		if (!consumer.isDefiningHiddens())
@@ -330,8 +352,10 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 		return result;
 	}
 
+	@Override
 	public void consumeAction(final Action action, final boolean isMany) {
 		accept(new ParsedAction(offset, action, isMany, new IParsedTokenSource(){
+			@Override
 			public int parseAgain(ParsedToken token) throws Exception {
 				consumeAction(action, isMany);
 				return ConsumeResult.SUCCESS;
@@ -347,38 +371,47 @@ public abstract class AbstractPackratParser extends AbstractParser implements
 		return grammarAccess;
 	}
 
+	@Override
 	public int getOffset() {
 		return offset;
 	}
 
+	@Override
 	public char charAt(int index) {
 		return input.charAt(index);
 	}
 
+	@Override
 	public int length() {
 		return input.length();
 	}
 
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		return input.subSequence(start, end);
 	}
 
+	@Override
 	public void incOffset() {
 		offset++;
 	}
 
+	@Override
 	public void incOffset(int amount) {
 		offset+=amount;
 	}
 
+	@Override
 	public void accept(AbstractParsedToken token) {
 		activeMarker.accept(token);
 	}
 
+	@Override
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
 
+	@Override
 	public IHiddenTokenState replaceHiddenTokens(ITerminalConsumer... consumers) {
 		if (consumers == null)
 			return NULL_HIDDEN_TOKEN_STATE;

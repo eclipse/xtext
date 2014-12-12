@@ -24,5 +24,6 @@ public interface IResolvedField extends IResolvedFeature {
 	 */
 	LightweightTypeReference getResolvedType();
 	
+	@Override
 	JvmField getDeclaration();
 }

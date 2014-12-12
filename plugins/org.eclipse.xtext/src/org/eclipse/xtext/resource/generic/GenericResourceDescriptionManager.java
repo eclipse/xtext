@@ -43,18 +43,22 @@ public class GenericResourceDescriptionManager implements IResourceDescription.M
 	@Inject
 	private IResourceScopeCache cache = new IResourceScopeCache.NullImpl();
 
+	@Override
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new DefaultResourceDescription(resource, resourceDescriptionStrategy, cache);
 	}
 
+	@Override
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
 
+	@Override
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		return isAffected(singleton(delta), candidate, null);
 	}
 
+	@Override
 	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context)
 			throws IllegalArgumentException {
 		Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);

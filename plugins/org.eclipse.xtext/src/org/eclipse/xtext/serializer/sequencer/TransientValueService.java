@@ -39,6 +39,7 @@ public class TransientValueService implements ITransientValueService {
 		return false;
 	}
 
+	@Override
 	public ListTransient isListTransient(EObject semanticObject, EStructuralFeature feature) {
 		if (feature.isTransient() || isContainerReferenceInSameResource(semanticObject, feature))
 			return ListTransient.YES;
@@ -46,10 +47,12 @@ public class TransientValueService implements ITransientValueService {
 			return ListTransient.NO;
 	}
 
+	@Override
 	public boolean isValueInListTransient(EObject semanticObject, int index, EStructuralFeature feature) {
 		return false;
 	}
 
+	@Override
 	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature) {
 		if (feature.isTransient() || !semanticObject.eIsSet(feature)
 				|| isContainerReferenceInSameResource(semanticObject, feature)) {

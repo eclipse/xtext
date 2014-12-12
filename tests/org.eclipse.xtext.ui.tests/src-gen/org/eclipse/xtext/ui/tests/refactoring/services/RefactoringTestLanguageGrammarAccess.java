@@ -25,6 +25,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Main:
 		//	elements+=AbstractElement*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=AbstractElement*
@@ -42,6 +43,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//AbstractElement:
 		//	Element | Import;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Element | Import
@@ -63,6 +65,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Import:
 		//	"import" importedNamespace=FQNWithWC;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=FQNWithWC
@@ -97,6 +100,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Element:
 		//	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
@@ -152,6 +156,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//FQN:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -178,6 +183,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//FQNWithWC:
 		//	FQN ".*"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//FQN ".*"?
@@ -232,6 +238,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

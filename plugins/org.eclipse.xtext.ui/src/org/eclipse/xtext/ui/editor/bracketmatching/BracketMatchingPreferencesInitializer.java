@@ -18,6 +18,7 @@ public class BracketMatchingPreferencesInitializer implements IPreferenceStoreIn
 	public final static String IS_ACTIVE_KEY = "CharacterMatching";
 	public final static String COLOR_KEY = "CharacterMatching.Color";
 
+	@Override
 	public void initialize(IPreferenceStoreAccess access) {
 		access.getWritablePreferenceStore().setDefault(IS_ACTIVE_KEY, true);
 		access.getWritablePreferenceStore().setDefault(COLOR_KEY, getDefautColor());

@@ -104,7 +104,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -114,7 +115,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Stmt()
+  @Override
+public EReference getModel_Stmt()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCopyFieldNameToVariableStmt()
+  @Override
+public EClass getCopyFieldNameToVariableStmt()
   {
     return copyFieldNameToVariableStmtEClass;
   }
@@ -134,7 +137,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCopyFieldNameToVariableStmt_Line()
+  @Override
+public EAttribute getCopyFieldNameToVariableStmt_Line()
   {
     return (EAttribute)copyFieldNameToVariableStmtEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCopyFieldNameToVariableStmt_Column()
+  @Override
+public EAttribute getCopyFieldNameToVariableStmt_Column()
   {
     return (EAttribute)copyFieldNameToVariableStmtEClass.getEStructuralFeatures().get(1);
   }
@@ -154,7 +159,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCopyFieldNameToVariableStmt_Name()
+  @Override
+public EAttribute getCopyFieldNameToVariableStmt_Name()
   {
     return (EAttribute)copyFieldNameToVariableStmtEClass.getEStructuralFeatures().get(2);
   }
@@ -164,7 +170,8 @@ public class Bug381381TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug381381TestLanguageFactory getBug381381TestLanguageFactory()
+  @Override
+public Bug381381TestLanguageFactory getBug381381TestLanguageFactory()
   {
     return (Bug381381TestLanguageFactory)getEFactoryInstance();
   }

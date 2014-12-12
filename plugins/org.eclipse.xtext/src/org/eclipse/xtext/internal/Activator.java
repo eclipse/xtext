@@ -18,6 +18,7 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator implements BundleActivator {
 	
+	@Override
 	public void start(BundleContext context) throws Exception {
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
 			initializeResourceServiceProviderRegistry(context);
@@ -32,6 +33,7 @@ public class Activator implements BundleActivator {
 		new ProtocolResourceServiceProviderRegistryReader(eReg, symbolicName).readRegistry();
 	}
 
+	@Override
 	public void stop(BundleContext context) throws Exception {
 	}
 

@@ -20,6 +20,7 @@ public class XtendQuickOutlineFilterAndSorter extends QuickOutlineFilterAndSorte
 	public XtendQuickOutlineFilterAndSorter() {
 		addFilter(new IFilter() {
 			
+			@Override
 			public boolean apply(IOutlineNode input) {
 				if (input instanceof XtendFeatureNode) {
 					return !((XtendFeatureNode) input).isSynthetic();
@@ -27,6 +28,7 @@ public class XtendQuickOutlineFilterAndSorter extends QuickOutlineFilterAndSorte
 				return !equal("import declarations", input.getText().toString());
 			}
 			
+			@Override
 			public boolean isEnabled() {
 				return true;
 			}

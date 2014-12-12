@@ -37,14 +37,17 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		this.delegate = delegate;
 	}
 
+	@Override
 	public Manager getContainerManager() {
 		return delegate.getContainerManager();
 	}
 
+	@Override
 	public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
 		return delegate.getResourceDescriptionManager();
 	}
 
+	@Override
 	public IResourceValidator getResourceValidator() {
 		return delegate.getResourceValidator();
 	}
@@ -53,6 +56,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	@ResourceServiceDescriptionLabelProvider
 	private ILabelProvider descriptionLabelProvider;
 
+	@Override
 	public ILabelProvider getLabelProvider() {
 		return descriptionLabelProvider;
 	}
@@ -61,6 +65,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		this.descriptionLabelProvider = descriptionLabelProvider;
 	}
 
+	@Override
 	public boolean canHandle(URI uri) {
 		boolean result = delegate.canHandle(uri);
 		return result;
@@ -72,6 +77,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	 * check to filter storages from Java target folders.
 	 * @return <code>true</code> if the <code>uri / storage</code> pair should be processed.
 	 */
+	@Override
 	public boolean canHandle(URI uri, IStorage storage) {
 		if (delegate.canHandle(uri)) {
 			if (isJavaCoreAvailable()) {
@@ -85,6 +91,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public boolean canBuild(URI uri, IStorage storage) {
 		return canHandle(uri, storage);
 	}
@@ -109,6 +116,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	@Inject 
 	private IEncodingProvider encodingProvider;
 	
+	@Override
 	public IEncodingProvider getEncodingProvider() {
 		return encodingProvider;
 	}
@@ -117,6 +125,7 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	@LanguageSpecific
 	private IURIEditorOpener uriEditorOpener;
 
+	@Override
 	public IURIEditorOpener getURIEditorOpener() {
 		return uriEditorOpener;
 	}
@@ -124,11 +133,13 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	/**
 	 * @deprecated use <code>get(IReferenceUpdater.class)</code> instead
 	 */
+	@Override
 	@Deprecated
 	public IReferenceUpdater getReferenceUpdater() {
 		return get(IReferenceUpdater.class);
 	}
 	
+	@Override
 	public <T> T get(Class<T> t) {
 		return delegate.get(t);
 	}

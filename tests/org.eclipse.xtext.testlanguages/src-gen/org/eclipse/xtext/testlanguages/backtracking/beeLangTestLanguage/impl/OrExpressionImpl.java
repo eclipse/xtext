@@ -76,7 +76,8 @@ public class OrExpressionImpl extends ExpressionImpl implements OrExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getLeftExpr()
+  @Override
+public Expression getLeftExpr()
   {
     return leftExpr;
   }
@@ -103,7 +104,8 @@ public class OrExpressionImpl extends ExpressionImpl implements OrExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLeftExpr(Expression newLeftExpr)
+  @Override
+public void setLeftExpr(Expression newLeftExpr)
   {
     if (newLeftExpr != leftExpr)
     {
@@ -124,7 +126,8 @@ public class OrExpressionImpl extends ExpressionImpl implements OrExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getRightExpr()
+  @Override
+public Expression getRightExpr()
   {
     return rightExpr;
   }
@@ -151,7 +154,8 @@ public class OrExpressionImpl extends ExpressionImpl implements OrExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRightExpr(Expression newRightExpr)
+  @Override
+public void setRightExpr(Expression newRightExpr)
   {
     if (newRightExpr != rightExpr)
     {

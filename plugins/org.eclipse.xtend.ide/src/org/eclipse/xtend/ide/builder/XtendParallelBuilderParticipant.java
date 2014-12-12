@@ -103,6 +103,7 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 		}
 		return new Runnable() {
 
+			@Override
 			public void run() {
 				try {
 					try {
@@ -116,6 +117,7 @@ public class XtendParallelBuilderParticipant extends ParallelBuilderParticipant 
 						if (file != null) {
 							fileSystemAccessQueue.sendAsync(delta.getUri(), new Procedure0() {
 		
+								@Override
 								public void apply() {
 									elementIssueProviderFactory.detachData(resource);
 								}

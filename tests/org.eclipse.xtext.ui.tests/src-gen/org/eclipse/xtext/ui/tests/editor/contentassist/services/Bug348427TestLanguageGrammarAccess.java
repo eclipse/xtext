@@ -50,6 +50,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	element1=Scenario1_1 | element1=Scenario1_2 | element1=Scenario1_3 | element1=Scenario1_4 | element2=Scenario2_1 |
 		//	element2=Scenario2_2 | element2=Scenario2_3 | element2=Scenario2_4 | element2=Scenario2_5 | element2=Scenario2_6 |
 		//	element2=Scenario2_7 | element2=Scenario2_8;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//element1=Scenario1_1 | element1=Scenario1_2 | element1=Scenario1_3 | element1=Scenario1_4 | element2=Scenario2_1 |
@@ -145,6 +146,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario1_1 returns Scenario1:
 		//	"1.1" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"1.1" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) "next"
@@ -193,6 +195,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario1_2 returns Scenario1:
 		//	"1.2" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"1.2" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ "next"
@@ -242,6 +245,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario1_3 returns Scenario1:
 		//	{Scenario1} "1.3" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Scenario1} "1.3" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* "next"
@@ -294,6 +298,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario1_4 returns Scenario1:
 		//	{Scenario1} "1.4" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Scenario1} "1.4" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? "next"
@@ -348,6 +353,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child1_1 returns Child1:
 		//	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
 		//	EnumType "child1" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
@@ -408,6 +414,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child1_2 returns Child1:
 		//	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
 		//	EnumType "child2" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
@@ -468,6 +475,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Child1_3 returns Child1:
 		//	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
 		//	EnumType "child3" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
@@ -525,6 +533,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_1 returns Scenario2:
 		//	"2.1" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"2.1" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) "next"
@@ -573,6 +582,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_2 returns Scenario2:
 		//	"2.2" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"2.2" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ "next"
@@ -621,6 +631,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_3 returns Scenario2:
 		//	"2.3" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"2.3" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) "next"
@@ -669,6 +680,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_4 returns Scenario2:
 		//	"2.4" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"2.4" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ "next"
@@ -718,6 +730,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_5 returns Scenario2:
 		//	{Scenario2} "2.5" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Scenario2} "2.5" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? "next"
@@ -770,6 +783,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_6 returns Scenario2:
 		//	{Scenario2} "2.6" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Scenario2} "2.6" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* "next"
@@ -822,6 +836,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_7 returns Scenario2:
 		//	{Scenario2} "2.7" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Scenario2} "2.7" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? "next"
@@ -874,6 +889,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scenario2_8 returns Scenario2:
 		//	{Scenario2} "2.8" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* "next";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Scenario2} "2.8" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* "next"
@@ -929,6 +945,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_1 returns Child2:
 		//	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child1" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child1" "end"
@@ -993,6 +1010,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_2 returns Child2:
 		//	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child2" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child2" "end"
@@ -1057,6 +1075,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_3 returns Child2:
 		//	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child3" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child3" "end"
@@ -1122,6 +1141,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_4 returns Child2:
 		//	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child1" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child1" "end"
@@ -1190,6 +1210,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_5 returns Child2:
 		//	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child2" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child2" "end"
@@ -1258,6 +1279,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child2_6 returns Child2:
 		//	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child3" "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child3" "end"
@@ -1317,6 +1339,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum EnumType:
 		//	a | b;
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//a | b
@@ -1410,6 +1433,7 @@ public class Bug348427TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

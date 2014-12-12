@@ -119,7 +119,8 @@ public interface Maybe<A> extends Iterable<A>, Effect.Applicant<A> {
    */
   boolean exists(final Predicate<? super A> p);
 
-  /**
+  @Override
+/**
    * @return an iterator over the contained value {@link #isDefined() if
    * defined}, or an empty one otherwise.
    */

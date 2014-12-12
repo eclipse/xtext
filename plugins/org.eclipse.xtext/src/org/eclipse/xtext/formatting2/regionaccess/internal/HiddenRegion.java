@@ -35,6 +35,7 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 		this.tokenAccess = tokenAccess;
 	}
 
+	@Override
 	public boolean containsComment() {
 		for (IHiddenRegionPart hidden : hiddens)
 			if (hidden instanceof IComment)
@@ -42,6 +43,7 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 		return false;
 	}
 
+	@Override
 	public int getLength() {
 		if (hiddens.isEmpty())
 			return 0;
@@ -50,14 +52,17 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 		return end - start;
 	}
 
+	@Override
 	public IHiddenRegion getNextHiddenRegion() {
 		return next == null ? null : next.getNextHiddenRegion();
 	}
 
+	@Override
 	public ISemanticRegion getNextSemanticRegion() {
 		return next;
 	}
 
+	@Override
 	public int getOffset() {
 		if (hiddens.isEmpty()) {
 			if (previous != null)
@@ -68,22 +73,27 @@ public class HiddenRegion extends AbstractTextSegment implements IHiddenRegion {
 		}
 	}
 
+	@Override
 	public List<IHiddenRegionPart> getParts() {
 		return ImmutableList.<IHiddenRegionPart> copyOf(hiddens);
 	}
 
+	@Override
 	public IHiddenRegion getPreviousHiddenRegion() {
 		return previous == null ? null : previous.getPreviousHiddenRegion();
 	}
 
+	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return previous;
 	}
 
+	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return tokenAccess;
 	}
 
+	@Override
 	public boolean isUndefined() {
 		return false;
 	}

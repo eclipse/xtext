@@ -95,7 +95,8 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -105,7 +106,8 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -118,7 +120,8 @@ public class MyPackageImpl extends MinimalEObjectImpl.Container implements MyPac
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<MyClass> getDirectives()
+  @Override
+public EList<MyClass> getDirectives()
   {
     if (directives == null)
     {

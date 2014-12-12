@@ -69,7 +69,8 @@ public class GroupImpl extends RuleElementImpl implements Group
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RuleElement> getElements()
+  @Override
+public EList<RuleElement> getElements()
   {
     if (elements == null)
     {

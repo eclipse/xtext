@@ -31,6 +31,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Codetemplates:
 		//	"templates" "for" language=[xtext::Grammar|FQN] templates+=Codetemplate;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"templates" "for" language=[xtext::Grammar|FQN] templates+=Codetemplate
@@ -75,6 +76,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Codetemplate:
 		//	name=STRING "for" (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=STRING "for" (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes
@@ -122,6 +124,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		
 		//TemplateBodyWithQuotes returns TemplateBody hidden(): // EOL
 		//	">>" TemplateBody;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//// EOL
@@ -145,6 +148,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 		
 		//LiteralValue hidden():
 		//	(WS | ANY_OTHER | ID)+;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(WS | ANY_OTHER | ID)+
@@ -194,6 +198,7 @@ public class SingleCodetemplateGrammarAccess extends AbstractGrammarElementFinde
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

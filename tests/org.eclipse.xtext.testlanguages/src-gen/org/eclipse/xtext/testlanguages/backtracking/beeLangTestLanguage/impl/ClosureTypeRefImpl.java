@@ -110,7 +110,8 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getParameterTypes()
+  @Override
+public EList<String> getParameterTypes()
   {
     if (parameterTypes == null)
     {
@@ -124,7 +125,8 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isVarArgs()
+  @Override
+public boolean isVarArgs()
   {
     return varArgs;
   }
@@ -134,7 +136,8 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVarArgs(boolean newVarArgs)
+  @Override
+public void setVarArgs(boolean newVarArgs)
   {
     boolean oldVarArgs = varArgs;
     varArgs = newVarArgs;
@@ -147,7 +150,8 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getReturnType()
+  @Override
+public String getReturnType()
   {
     return returnType;
   }
@@ -157,7 +161,8 @@ public class ClosureTypeRefImpl extends TypeRefImpl implements ClosureTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReturnType(String newReturnType)
+  @Override
+public void setReturnType(String newReturnType)
   {
     String oldReturnType = returnType;
     returnType = newReturnType;

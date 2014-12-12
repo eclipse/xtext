@@ -115,7 +115,8 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getNum()
+  @Override
+public double getNum()
   {
     return num;
   }
@@ -125,7 +126,8 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNum(double newNum)
+  @Override
+public void setNum(double newNum)
   {
     double oldNum = num;
     num = newNum;
@@ -138,7 +140,8 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getStr()
+  @Override
+public String getStr()
   {
     return str;
   }
@@ -148,7 +151,8 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStr(String newStr)
+  @Override
+public void setStr(String newStr)
   {
     String oldStr = str;
     str = newStr;
@@ -161,7 +165,8 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getBool()
+  @Override
+public String getBool()
   {
     return bool;
   }
@@ -171,7 +176,8 @@ public class LiteralImpl extends MyPrimaryImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBool(String newBool)
+  @Override
+public void setBool(String newBool)
   {
     String oldBool = bool;
     bool = newBool;

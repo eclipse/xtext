@@ -67,7 +67,8 @@ public class ViewContentElementImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionIterator getIterator()
+  @Override
+public CollectionIterator getIterator()
   {
     return iterator;
   }
@@ -94,7 +95,8 @@ public class ViewContentElementImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIterator(CollectionIterator newIterator)
+  @Override
+public void setIterator(CollectionIterator newIterator)
   {
     if (newIterator != iterator)
     {

@@ -57,6 +57,7 @@ public class DocumentRootNode extends AbstractOutlineNode {
 	@Override
 	public <T> T readOnly(final IUnitOfWork<T, EObject> work) {
 		return document.readOnly(new IUnitOfWork<T, XtextResource>() {
+			@Override
 			public T exec(XtextResource resource) throws Exception {
 				if(resource != null && !resource.getContents().isEmpty()) {
 					work.exec(resource.getContents().get(0));

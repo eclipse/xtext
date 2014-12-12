@@ -44,16 +44,19 @@ public class AssertableDiagnostics {
 			iteratorStack.add(root.getChildren().iterator());
 		}
 
+		@Override
 		public boolean hasNext() {
 			while (iteratorStack.size() > 0 && !iteratorStack.get(iteratorStack.size() - 1).hasNext())
 				iteratorStack.remove(iteratorStack.size() - 1);
 			return iteratorStack.size() != 0;
 		}
 
+		@Override
 		public Iterator<Diagnostic> iterator() {
 			return this;
 		}
 
+		@Override
 		public Diagnostic next() {
 			Diagnostic d = iteratorStack.get(iteratorStack.size() - 1).next();
 			if (d.getChildren().size() > 0)
@@ -61,6 +64,7 @@ public class AssertableDiagnostics {
 			return d;
 		}
 
+		@Override
 		public void remove() {
 			throw new RuntimeException("operation not supported");
 		}
@@ -84,6 +88,7 @@ public class AssertableDiagnostics {
 			this.msg = msg;
 		}
 
+		@Override
 		public boolean apply(Diagnostic d) {
 			if (severity != null && d.getSeverity() != severity)
 				return false;

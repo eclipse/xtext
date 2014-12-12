@@ -119,6 +119,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return getOrInstall(resource).logicalContainerMap;
 	}
 
+	@Override
 	public XExpression getAssociatedExpression(JvmIdentifiableElement element) {
 		if (element == null)
 			return null;
@@ -131,10 +132,12 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
+	@Override
 	public JvmIdentifiableElement getLogicalContainer(XExpression context) {
 		return getLogicalContainer(context, false);
 	}
 
+	@Override
 	public JvmIdentifiableElement getNearestLogicalContainer(EObject context) {
 		return getLogicalContainer(context, true);
 	}
@@ -167,6 +170,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
+	@Override
 	public void associateLogicalContainer(XExpression logicalChild, JvmIdentifiableElement element) {
 		if (logicalChild == null)
 			return;
@@ -174,6 +178,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		mapping.put(logicalChild, element);
 	}
 
+	@Override
 	public void removeLogicalChildAssociation(JvmIdentifiableElement container) {
 		if (container == null)
 			return;
@@ -210,6 +215,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return res;
 	}
 
+	@Override
 	public void associate(EObject sourceElement, EObject jvmElement) {
 		if (sourceElement != null) {
 			checkLanguageResource(sourceElement.eResource());
@@ -252,6 +258,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 	}
 
+	@Override
 	public void associatePrimary(EObject sourceElement, EObject jvmElement) {
 		if (sourceElement != null) {
 			checkLanguageResource(sourceElement.eResource());
@@ -315,6 +322,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	}
 
+	@Override
 	public Set<EObject> getJvmElements(EObject sourceElement) {
 		if (sourceElement == null)
 			return Collections.emptySet();
@@ -325,6 +333,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return Collections.emptySet();
 	}
 
+	@Override
 	public Set<EObject> getSourceElements(EObject jvmElement) {
 		if (jvmElement == null)
 			return Collections.emptySet();
@@ -336,6 +345,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return Collections.emptySet();
 	}
 
+	@Override
 	public EObject getPrimarySourceElement(EObject jvmElement) {
 		if (jvmElement == null)
 			return null;
@@ -346,6 +356,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
+	@Override
 	public void installDerivedState(final DerivedStateAwareResource resource, boolean preIndexingPhase) {
 		if (resource.getContents().isEmpty())
 			return;
@@ -386,6 +397,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 	}
 
+	@Override
 	public void discardDerivedState(DerivedStateAwareResource resource) {
 		cleanAssociationState(resource);
 	}
@@ -405,6 +417,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		getLogicalContainerMapping(resource).clear();
 	}
 
+	@Override
 	public void removeAssociation(EObject sourceElement, EObject jvmElement) {
 		Preconditions.checkArgument(sourceElement != null, "source element cannot be null");
 		Preconditions.checkArgument(jvmElement != null, "jvm element cannot be null");
@@ -423,6 +436,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 	}
 
+	@Override
 	public void removeAllAssociation(EObject jvmElement) {
 		Preconditions.checkArgument(jvmElement != null, "jvm element cannot be null");
 		
@@ -453,6 +467,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			this.resource = resource;
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
 			if (type != null && type.eContainer() == null)
@@ -468,6 +483,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 				this.type = type;
 			}
 
+			@Override
 			public void initializeLater(Procedure1<? super JvmDeclaredType> lateInitialization) {
 				if (lateInitialization != null && type != null) {
 					later.add(new Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>>(type, lateInitialization));
@@ -476,6 +492,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public <T extends JvmDeclaredType> void accept(T type, Procedure1<? super T> lateInitialization) {
 			if (type != null && type.eContainer() == null)
@@ -487,6 +504,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	}
 
+	@Override
 	public EObject getPrimaryJvmElement(EObject sourceElement) {
 		Iterator<EObject> iterator = getJvmElements(sourceElement).iterator();
 		if (iterator.hasNext())
@@ -494,6 +512,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		return null;
 	}
 
+	@Override
 	public boolean isPrimaryJvmElement(EObject jvmElement) {
 		Set<EObject> sourceElements = getSourceElements(jvmElement);
 		if (!sourceElements.isEmpty()) {

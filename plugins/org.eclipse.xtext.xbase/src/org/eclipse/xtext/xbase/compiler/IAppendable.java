@@ -17,16 +17,22 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 public interface IAppendable extends ISourceAppender {
 	
+	@Override
 	IAppendable append(CharSequence string);
 
+	@Override
 	IAppendable append(JvmType type);
 
+	@Override
 	IAppendable append(LightweightTypeReference typeRef);
 
+	@Override
 	IAppendable newLine();
 
+	@Override
 	IAppendable increaseIndentation();
 
+	@Override
 	IAppendable decreaseIndentation();
 	
 	/**

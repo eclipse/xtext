@@ -27,6 +27,7 @@ public interface BidiTreeIterator<T> extends TreeIterator<T>, BidiIterator<T> {
 	 * 
 	 * @exception NoSuchElementException iteration has no next element.
 	 */
+	@Override
 	T next();
 	
 	/**
@@ -38,6 +39,7 @@ public interface BidiTreeIterator<T> extends TreeIterator<T>, BidiIterator<T> {
 	 * 
 	 * @exception NoSuchElementException iteration has no previous element.
 	 */
+	@Override
 	T previous();
 	
 }

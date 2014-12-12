@@ -161,6 +161,7 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		ContentAssistContext context = builder.toContext();
 		ContentProposalProvider proposalProvider = get(ContentProposalProvider.class);
 		proposalProvider.setConflictHelper(new IProposalConflictHelper(){
+			@Override
 			public boolean existsConflict(String proposal, ContentAssistContext context) {
 				return false;
 			}});

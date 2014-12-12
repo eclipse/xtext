@@ -52,26 +52,32 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 		this(id, semanticObject, (EStructuralFeature) null, message);
 	}
 
+	@Override
 	public boolean breaksSyntax() {
 		return true;
 	}
 
+	@Override
 	public Throwable getException() {
 		return null;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}
 
+	@Override
 	public EObject getSemanticObject() {
 		return semanticObject;
 	}
 
+	@Override
 	public EObject getContext() {
 		return context;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}

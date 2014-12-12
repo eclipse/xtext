@@ -67,18 +67,22 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 		final String testModel = "stuff foo stuff bar refs foo";
 		IDirtyResource mockDirtyResource = new IDirtyResource() {
 
+			@Override
 			public String getActualContents() {
 				return testModel;
 			}
 
+			@Override
 			public String getContents() {
 				return testModel;
 			}
 
+			@Override
 			public IResourceDescription getDescription() {
 				return new URIBasedTestResourceDescription(dirtyResourceURI);
 			}
 
+			@Override
 			public URI getURI() {
 				return dirtyResourceURI;
 			}

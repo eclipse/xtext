@@ -137,6 +137,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstract() {
 		return abstractEClass;
 	}
@@ -146,6 +147,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAbstract_Name() {
 		return (EAttribute)abstractEClass.getEStructuralFeatures().get(0);
 	}
@@ -155,6 +157,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConcrete0() {
 		return concrete0EClass;
 	}
@@ -164,6 +167,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getConcrete1() {
 		return concrete1EClass;
 	}
@@ -173,6 +177,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRoot() {
 		return rootEClass;
 	}
@@ -182,6 +187,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRoot_Classes() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
 	}
@@ -191,6 +197,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRoot_Name() {
 		return (EAttribute)rootEClass.getEStructuralFeatures().get(1);
 	}
@@ -200,6 +207,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDiamondInheritance() {
 		return diamondInheritanceEClass;
 	}
@@ -209,6 +217,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getINT() {
 		return intEDataType;
 	}
@@ -218,6 +227,7 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Ecore2xtextFactory getEcore2xtextFactory() {
 		return (Ecore2xtextFactory)getEFactoryInstance();
 	}

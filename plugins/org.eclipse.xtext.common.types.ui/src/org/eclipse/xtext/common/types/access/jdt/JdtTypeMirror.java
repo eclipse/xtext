@@ -52,6 +52,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 		this.typeFactory = typeFactory;
 	}
 	
+	@Override
 	public void initialize(TypeResource typeResource) {
 		initialize(typeResource, null);
 	}
@@ -59,6 +60,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public void initialize(TypeResource typeResource, Map<?, ?> options) {
 		try {
 			if (typeFactory instanceof ITypeFactory.OptionsAware<?, ?>) {
@@ -91,18 +93,22 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 		mirroredType = null;
 	}
 
+	@Override
 	public Notifier getTarget() {
 		return null;
 	}
 
+	@Override
 	public boolean isAdapterForType(Object object) {
 		return false;
 	}
 
+	@Override
 	public void notifyChanged(Notification notification) {
 		// ignore
 	}
 
+	@Override
 	public void setTarget(Notifier notifier) {
 		// ignore
 	}
@@ -110,6 +116,7 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter, IMirr
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public boolean isSealed() {
 		return mirroredType.isReadOnly();
 	}

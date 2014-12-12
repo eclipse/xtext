@@ -84,7 +84,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Elem1> getE1()
+  @Override
+public EList<Elem1> getE1()
   {
     if (e1 == null)
     {
@@ -98,7 +99,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Elem2> getE2()
+  @Override
+public EList<Elem2> getE2()
   {
     if (e2 == null)
     {

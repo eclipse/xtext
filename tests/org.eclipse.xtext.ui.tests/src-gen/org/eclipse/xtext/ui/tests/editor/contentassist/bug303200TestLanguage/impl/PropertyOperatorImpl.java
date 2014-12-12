@@ -88,7 +88,8 @@ public class PropertyOperatorImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -98,7 +99,8 @@ public class PropertyOperatorImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,7 +113,8 @@ public class PropertyOperatorImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ListExpression getExpressions()
+  @Override
+public ListExpression getExpressions()
   {
     return expressions;
   }
@@ -138,7 +141,8 @@ public class PropertyOperatorImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpressions(ListExpression newExpressions)
+  @Override
+public void setExpressions(ListExpression newExpressions)
   {
     if (newExpressions != expressions)
     {

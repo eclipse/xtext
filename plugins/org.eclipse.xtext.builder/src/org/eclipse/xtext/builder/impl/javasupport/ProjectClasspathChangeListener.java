@@ -51,6 +51,7 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 	@Inject 
 	private IDirtyStateManager dirtyStateManager;
 
+	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		if (workspace != null && workspace.isAutoBuilding()) {
 			try {
@@ -59,6 +60,7 @@ public class ProjectClasspathChangeListener implements IElementChangedListener {
 					if (!javaProjects.isEmpty()) {
 						Set<IProject> projects = Sets.newHashSet(Iterables.filter(Iterables.transform(javaProjects,
 								new Function<IJavaProject, IProject>() {
+									@Override
 									public IProject apply(IJavaProject from) {
 										return from.getProject();
 									}

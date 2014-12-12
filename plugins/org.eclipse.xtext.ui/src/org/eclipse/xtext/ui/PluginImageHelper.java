@@ -54,6 +54,7 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 	 * @return the image associated with the image descriptor or <code>null</code> if the image descriptor can't create
 	 *         the requested image.
 	 */
+	@Override
 	public Image getImage(ImageDescriptor descriptor) {
 		if (descriptor == null) {
 			descriptor = ImageDescriptor.getMissingImageDescriptor();
@@ -86,6 +87,7 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 		plugin.getBundle().getBundleContext().addBundleListener(this);
 	}
 
+	@Override
 	public Image getImage(String imageName) {
 		String imgname = imageName == null ? defaultImage : imageName;
 		if (imgname != null) {
@@ -113,6 +115,7 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public ImageDescriptor getImageDescriptor(String imageName) {
 		String imgname = imageName == null ? defaultImage : imageName;
 		if (imgname != null) {
@@ -130,6 +133,7 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public ImageDescriptor getImageDescriptor(Image image) {
 		for(Map.Entry<ImageDescriptor, Image> entry : registry.entrySet()) {
 			if(entry.getValue().equals(image))
@@ -172,6 +176,7 @@ public class PluginImageHelper implements IImageHelper, IImageDescriptorHelper, 
 		this.defaultImage = defaultImage;
 	}
 
+	@Override
 	public void bundleChanged(BundleEvent event) {
 		if (event.getType() == BundleEvent.STOPPING
 				&& event.getBundle().getBundleId() == getPlugin().getBundle().getBundleId()) {

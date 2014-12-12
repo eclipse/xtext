@@ -72,7 +72,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Reference> getReferenced()
+  @Override
+public EList<Reference> getReferenced()
   {
     if (referenced == null)
     {

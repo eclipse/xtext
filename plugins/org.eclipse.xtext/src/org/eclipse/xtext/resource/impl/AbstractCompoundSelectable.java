@@ -23,12 +23,15 @@ import com.google.common.collect.Iterables;
  */
 public abstract class AbstractCompoundSelectable implements ISelectable {
 
+	@Override
 	public boolean isEmpty() {
 		return Iterables.isEmpty(getSelectables());
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Iterables.concat(Iterables.transform(getSelectables(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjects();
@@ -39,8 +42,10 @@ public abstract class AbstractCompoundSelectable implements ISelectable {
 	
 	protected abstract Iterable<? extends ISelectable> getSelectables();
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
 		return Iterables.concat(Iterables.transform(getSelectables(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjectsByType(type);
@@ -49,8 +54,10 @@ public abstract class AbstractCompoundSelectable implements ISelectable {
 		}));
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
 		return Iterables.concat(Iterables.transform(getSelectables(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjectsByObject(object);
@@ -59,8 +66,10 @@ public abstract class AbstractCompoundSelectable implements ISelectable {
 		}));
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName qualifiedName, final boolean ignoreCase) {
 		return Iterables.concat(Iterables.transform(getSelectables(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjects(type, qualifiedName, ignoreCase);

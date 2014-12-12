@@ -86,7 +86,8 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -96,7 +97,8 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -109,7 +111,8 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterList getParameterList()
+  @Override
+public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -136,7 +139,8 @@ public class CallNamedFunctionImpl extends CallExpressionImpl implements CallNam
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setParameterList(ParameterList newParameterList)
+  @Override
+public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {

@@ -174,6 +174,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("relative.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
@@ -197,6 +198,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("relative.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
@@ -222,6 +224,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("testReexports2.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
@@ -245,6 +248,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "  datatype Context" 
 				+ "}"), URI.createURI("foo23.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
@@ -266,6 +270,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("withoutwildcard.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
@@ -294,11 +299,13 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("withoutwildcard.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
 		};
 		Entity foo = find(Iterables.filter(allContents, Entity.class), new Predicate<Entity>(){
+			@Override
 			public boolean apply(Entity input) {
 				return input.getName().equals("Baz");
 			}});
@@ -309,6 +316,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(7,list.size());
 		assertTrue(any(list, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return input.getName().equals(QualifiedName.create("Foo"));
 			}
@@ -331,11 +339,13 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("withoutwildcard.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
 		};
 		Entity foo = find(Iterables.filter(allContents, Entity.class), new Predicate<Entity>(){
+			@Override
 			public boolean apply(Entity input) {
 				return input.getName().equals("Baz");
 			}});
@@ -346,6 +356,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(6,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return input.getName().equals(QualifiedName.create("Foo"));
 			}
@@ -367,11 +378,13 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("withoutwildcard.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
 		};
 		Entity foo = find(Iterables.filter(allContents, Entity.class), new Predicate<Entity>(){
+			@Override
 			public boolean apply(Entity input) {
 				return input.getName().equals("Baz");
 			}});
@@ -382,6 +395,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(6,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return input.getName().equals(QualifiedName.create("Foo"));
 			}
@@ -403,11 +417,13 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), URI
 				.createURI("withoutwildcard.indextestlanguage"));
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}
 		};
 		Entity foo = find(Iterables.filter(allContents, Entity.class), new Predicate<Entity>(){
+			@Override
 			public boolean apply(Entity input) {
 				return input.getName().equals("Baz");
 			}});
@@ -418,6 +434,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		ArrayList<IEObjectDescription> list = newArrayList(scope.getAllElements());
 		assertEquals(5,list.size());
 		assertFalse(any(list, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return input.getName().equals(QualifiedName.create("Foo"));
 			}
@@ -432,6 +449,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 		res2.load(new StringInputStream("bar {" + "  entity Bar{}" + "}"), null);
 
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return res1.getAllContents();
 			}
@@ -462,6 +480,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 				+ "}"), null);
 
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return res1.getAllContents();
 			}
@@ -499,6 +518,7 @@ public class ImportedNamespaceAwareLocalScopeProviderTest extends AbstractXtextT
 
 	protected Entity getEntityByName(final Resource res2, String name) {
 		Iterable<EObject> allContents = new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return res2.getAllContents();
 			}

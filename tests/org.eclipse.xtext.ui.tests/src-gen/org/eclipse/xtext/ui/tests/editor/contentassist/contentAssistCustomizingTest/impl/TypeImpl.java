@@ -88,7 +88,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -98,7 +99,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,7 +113,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getSuperType()
+  @Override
+public TypeRef getSuperType()
   {
     return superType;
   }
@@ -138,7 +141,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSuperType(TypeRef newSuperType)
+  @Override
+public void setSuperType(TypeRef newSuperType)
   {
     if (newSuperType != superType)
     {

@@ -30,6 +30,7 @@ public class PureXbaseUiModule extends org.eclipse.xtext.purexbase.ui.AbstractPu
 		return NoFolding.class;
 	}
 	public static class NoFolding implements IFoldingRegionProvider {
+		@Override
 		public Collection<FoldedPosition> getFoldingRegions(
 				IXtextDocument xtextDocument) {
 			return Collections.emptySet();

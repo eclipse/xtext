@@ -96,6 +96,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 	@Inject
 	private Provider<LocalResourceRefactoringUpdateAcceptor> updateAcceptorProvider;
 
+	@Override
 	public Provider<LinkedPositionGroup> getLinkedPositionGroup(
 			IRenameElementContext renameElementContext,
 			IProgressMonitor monitor) {
@@ -150,9 +151,11 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 				renameElementContext.getTargetElementURI(), newName, renameStrategy, original2newEObjectURI, resourceSetProvider);
 		final List<IReferenceDescription> referenceDescriptions = newArrayList();
 		IReferenceFinder.Acceptor referenceAcceptor = new IReferenceFinder.Acceptor() {
+			@Override
 			public void accept(IReferenceDescription referenceDescription) {
 				referenceDescriptions.add(referenceDescription);
 			}
+			@Override
 			public void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy,
 					URI targetURI) {
 				referenceDescriptions.add(new DefaultReferenceDescription(sourceURI, targetURI, eReference, index, null));
@@ -177,6 +180,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		final IRenameStrategy renameStrategy2 = renameStrategy;
 		return new Provider<LinkedPositionGroup>() {
 
+			@Override
 			public LinkedPositionGroup get() {
 				LinkedPositionGroup linkedGroup = createLinkedGroupFromReplaceEdits(textEdits, editor,
 						renameStrategy2.getOriginalName(), progress.newChild(10));
@@ -193,6 +197,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 		LinkedPositionGroup group = new LinkedPositionGroup();
 		Iterable<LinkedPosition> linkedPositions = filter(
 				Iterables.transform(edits, new Function<ReplaceEdit, LinkedPosition>() {
+					@Override
 					public LinkedPosition apply(ReplaceEdit edit) {
 						try {
 							String textToReplace = document.get(edit.getOffset(), edit.getLength());
@@ -227,6 +232,7 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 			final int invocationOffset) {
 		Comparator<LinkedPosition> comparator = new Comparator<LinkedPosition>() {
 
+			@Override
 			public int compare(LinkedPosition left, LinkedPosition right) {
 				return rank(left) - rank(right);
 			}
@@ -261,22 +267,27 @@ public class DefaultLinkedPositionGroupCalculator implements ILinkedPositionGrou
 			return textEdits;
 		}
 
+		@Override
 		public StatusWrapper getRefactoringStatus() {
 			return status;
 		}
 
+		@Override
 		public IRefactoringDocument getDocument(URI resourceURI) {
 			return refactoringDocumentProvider.get(resourceURI, status);
 		}
 
+		@Override
 		public Change createCompositeChange(String name, IProgressMonitor monitor) {
 			return null;
 		}
 
+		@Override
 		public void accept(URI resourceURI, Change change) {
 			// ignore
 		}
 
+		@Override
 		public void accept(URI resourceURI, TextEdit textEdit) {
 			if (localResourceURI.equals(resourceURI) && textEdit instanceof ReplaceEdit) {
 				textEdits.add((ReplaceEdit) textEdit);

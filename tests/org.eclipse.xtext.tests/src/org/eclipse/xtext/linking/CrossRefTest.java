@@ -147,6 +147,7 @@ public class CrossRefTest extends AbstractXtextTests {
 		
 		final XtextResource r = CrossRefTest.this.getResourceFromStringAndExpect("type TypeA {} type TypeB { TypeA TypeC TypeB p1; }", 1);
 		int number = LoggingTester.countErrorLogging(LazyLinkingResource.class, new Runnable() {
+			@Override
 			public void run() {
 				Model model = (Model) r.getContents().get(0);
 				assertEquals(2, model.getTypes().size());

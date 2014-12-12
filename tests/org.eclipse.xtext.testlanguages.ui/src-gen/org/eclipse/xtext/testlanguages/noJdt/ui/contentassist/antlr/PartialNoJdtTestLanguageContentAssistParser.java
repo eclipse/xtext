@@ -19,6 +19,7 @@ public class PartialNoJdtTestLanguageContentAssistParser extends NoJdtTestLangua
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

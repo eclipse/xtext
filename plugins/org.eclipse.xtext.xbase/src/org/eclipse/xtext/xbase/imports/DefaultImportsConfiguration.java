@@ -62,6 +62,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
 
+	@Override
 	public XImportSection getImportSection(XtextResource resource) {
 		EList<EObject> contents = resource.getContents();
 		if (!contents.isEmpty())
@@ -75,6 +76,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		return null;
 	}
 
+	@Override
 	public Iterable<JvmDeclaredType> getLocallyDefinedTypes(XtextResource resource) {
 		final List<JvmDeclaredType> locallyDefinedTypes = newArrayList();
 		for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext();) {
@@ -83,6 +85,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 				JvmDeclaredType declaredType = (JvmDeclaredType) next;
 				locallyDefinedTypes.add(declaredType);
 				addInnerTypes(declaredType, new IAcceptor<JvmDeclaredType>() {
+					@Override
 					public void accept(JvmDeclaredType t) {
 						locallyDefinedTypes.add(t);
 					}
@@ -96,6 +99,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		return locallyDefinedTypes;
 	}
 	
+	@Override
 	public JvmDeclaredType getContextJvmDeclaredType(EObject model) {
 		if(model != null) {
 			JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(model);
@@ -122,12 +126,14 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		}
 	}
 	
+	@Override
 	public Set<String> getImplicitlyImportedPackages(XtextResource resource) {
 		Set<String> implicitlyImportedPackages = newHashSetWithExpectedSize(2);
 		implicitlyImportedPackages.add("java.lang");
 		return implicitlyImportedPackages;
 	}
 
+	@Override
 	public int getImportSectionOffset(XtextResource resource) {
 		if(resource.getParseResult() != null && resource.getParseResult().getRootNode() != null) {
 			List<EObject> pathToImportSection = findPathToImportSection();
@@ -144,6 +150,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 	 * We cannot just use importDeclaration.getImportedTypeName since that would return the name from
 	 * the resolved type rather than the concrete syntax. 
 	 */
+	@Override
 	public String getLegacyImportSyntax(XImportDeclaration importDeclaration) {
 		List<INode> list = NodeModelUtils.findNodesForFeature(importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE);
 		if (list.isEmpty()) {
@@ -232,6 +239,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		return false;
 	}
 
+	@Override
 	public String getPackageName(XtextResource xtextResource) {
 		return null;
 	}

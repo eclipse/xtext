@@ -33,6 +33,7 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 
 	private static final Logger log = Logger.getLogger(AbstractCleaningLinker.class);
 	
+	@Override
 	public void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		StoppedTask task = Stopwatches.forTask("installing proxies (AbstractCleaningLinker.linkModel)");
 		task.start();

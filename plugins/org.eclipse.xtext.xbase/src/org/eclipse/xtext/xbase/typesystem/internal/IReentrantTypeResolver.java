@@ -28,10 +28,12 @@ public interface IReentrantTypeResolver {
 	
 	IReentrantTypeResolver NULL = new IReentrantTypeResolver() {
 		
+		@Override
 		public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
 			return IResolvedTypes.NULL;
 		}
 		
+		@Override
 		public void initializeFrom(EObject root) {
 			// ignore
 		}

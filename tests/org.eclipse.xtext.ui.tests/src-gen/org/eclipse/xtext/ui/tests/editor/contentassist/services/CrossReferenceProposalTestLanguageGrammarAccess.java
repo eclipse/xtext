@@ -25,6 +25,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		
 		//Model:
 		//	elements+=Class*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Class*
@@ -49,6 +50,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		
 		//Class:
 		//	(superClass=[Class] "<-")? name=ID "{" "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(superClass=[Class] "<-")? name=ID "{" "}"
@@ -116,6 +118,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

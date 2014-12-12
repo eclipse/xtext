@@ -232,6 +232,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		resolveAgainstActualType(expectedType, actual, expectation.getState());
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		if (typeArguments == null) {
 			List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
@@ -263,6 +264,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public void applyToComputationState() {
 		preApply();
 		JvmIdentifiableElement feature = getFeature();
@@ -638,8 +640,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected abstract List<JvmTypeReference> getPlainSyntacticTypeArguments();
 	
+	@Override
 	public abstract JvmIdentifiableElement getFeature();
 	
+	@Override
 	public Expression getExpression() {
 		return expression;
 	}

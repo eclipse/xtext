@@ -40,6 +40,7 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 	@Inject
 	private MarkerTypeProvider markerTypeProvider;
 
+	@Override
 	public void updateValidationMarkers(IFile file, Resource resource, CheckMode mode, IProgressMonitor monitor) throws OperationCanceledException {
 		if (shouldProcess(file)) {
 			addMarkers(file, resource, mode, monitor);
@@ -80,6 +81,7 @@ public class DefaultResourceUIValidatorExtension extends MarkerEraser implements
 
 	protected CancelIndicator getCancelIndicator(final IProgressMonitor monitor) {
 		return new CancelIndicator() {
+			@Override
 			public boolean isCanceled() {
 				return monitor.isCanceled();
 			}

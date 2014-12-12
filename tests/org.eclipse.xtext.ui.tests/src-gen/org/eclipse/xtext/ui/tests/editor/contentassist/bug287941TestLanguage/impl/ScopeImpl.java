@@ -67,7 +67,8 @@ public class ScopeImpl extends MinimalEObjectImpl.Container implements Scope
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getUris()
+  @Override
+public EList<String> getUris()
   {
     if (uris == null)
     {

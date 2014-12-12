@@ -69,7 +69,8 @@ public class AlternativesImpl extends RuleElementImpl implements Alternatives
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RuleElement> getGroups()
+  @Override
+public EList<RuleElement> getGroups()
   {
     if (groups == null)
     {

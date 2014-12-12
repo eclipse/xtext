@@ -28,6 +28,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Main:
 		//	imports+=Import* types+=Type*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* types+=Type*
@@ -55,6 +56,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Import:
 		//	"import" importURI=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
@@ -83,6 +85,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Type:
 		//	"type" name=ID "extends" extends=[Type];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"type" name=ID "extends" extends=[Type]
@@ -146,6 +149,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

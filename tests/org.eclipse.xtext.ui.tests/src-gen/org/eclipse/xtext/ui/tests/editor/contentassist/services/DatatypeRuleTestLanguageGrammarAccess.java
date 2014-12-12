@@ -24,6 +24,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Model:
 		//	Types;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Types
@@ -40,6 +41,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Types:
 		//	{Types} "Types" types+=Type*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Types} "Types" types+=Type*
@@ -66,6 +68,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Type:
 		//	SimpleType | CompositeType;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//SimpleType | CompositeType
@@ -88,6 +91,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//SimpleType:
 		//	"Type" name=ID ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Type" name=ID ";"
@@ -119,6 +123,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//CompositeType:
 		//	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Composite" name=ID "base" baseType=CompositeTypeEntry ";"
@@ -154,6 +159,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//CompositeTypeEntry:
 		//	dataType=[Type|TypeId];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//dataType=[Type|TypeId]
@@ -180,6 +186,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//TypeId:
 		//	ID ("<" TypeId ("," TypeId)* ">")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("<" TypeId ("," TypeId)* ">")?
@@ -254,6 +261,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -61,6 +61,7 @@ public class URIsInEcoreFilesTest extends AbstractXbaseTestCase {
 			List<GenPackage> packages = Lists.newArrayList(model.getGenPackages());
 			assertEquals(packageNames.length, packages.size());
 			ListExtensions.sortInplaceBy(packages, new Functions.Function1<GenPackage, String>() {
+				@Override
 				public String apply(GenPackage p) {
 					return p.getEcorePackage().getName();
 				}

@@ -181,6 +181,7 @@ public abstract class AbstractTraceRegion {
 
 	protected void inplaceSortByOffset(List<Pair<ILocationData, AbstractTraceRegion>> locations) {
 		Collections.sort(locations, new Comparator<Pair<ILocationData, AbstractTraceRegion>>() {
+			@Override
 			public int compare(/* @Nullable */ Pair<ILocationData, AbstractTraceRegion> o1, /* @Nullable */ Pair<ILocationData, AbstractTraceRegion> o2) {
 				if (o1 == null || o2 == null)
 					throw new IllegalArgumentException("o1 == null || o2 == null");

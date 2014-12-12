@@ -62,6 +62,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		JvmArrayType result = super.getArrayType();
 		if (result == null) {
 			result = doSynchronized(new Provider<JvmArrayType>() {
+				@Override
 				public JvmArrayType get() {
 					JvmArrayType result = TypesFactory.eINSTANCE.createJvmArrayType();
 					boolean wasDeliver = eDeliver();
@@ -169,6 +170,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	public Iterable<JvmTypeReference> getExtendedInterfaces() {
 		if (extendedInterfaces == null) {
 			extendedInterfaces = Iterables.filter(getSuperTypes(), new Predicate<JvmTypeReference>() {
+				@Override
 				public boolean apply(JvmTypeReference typeReference) {
 					JvmType type = typeReference.getType();
 					if (type != null && type.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
@@ -218,6 +220,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		if (allNestedTypesByName == null) {
 			final Set<JvmDeclaredType> processedSuperTypes = processedTypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedTypes;
 			allNestedTypesByName = doSynchronized(new Provider<Map<String, Set<JvmDeclaredType>>>() {
+				@Override
 				public Map<String, Set<JvmDeclaredType>> get() {
 					if (allNestedTypesByName != null)
 						return allNestedTypesByName;
@@ -241,8 +244,10 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 					}
 					result.putAll(cumulated);
 					Runnable runnable = new Runnable() {
+						@Override
 						public void run() {
 							doSynchronized(new Provider<Object>() {
+								@Override
 								public Object get() {
 									allNestedTypesByName = null;
 									return null;
@@ -278,6 +283,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	@Override
 	public Iterable<JvmFeature> findAllFeaturesByName(final String simpleName) {
 		return doSynchronized(new Provider<Iterable<JvmFeature>>() {
+			@Override
 			public Iterable<JvmFeature> get() {
 				Map<String, Set<JvmFeature>> allFeaturesByName = getAllFeaturesMap();
 				Set<JvmFeature> result = allFeaturesByName.get(simpleName);
@@ -341,6 +347,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		if (eResource instanceof ISynchronizable<?>) {
 			try {
 				T result = ((ISynchronizable<?>) eResource).execute(new IUnitOfWork<T, Object>() {
+					@Override
 					public T exec(Object state) throws Exception {
 						T result = provider.get();
 						return result;
@@ -366,6 +373,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		if (allFeaturesByName == null) {
 			final Set<JvmDeclaredType> processedSuperTypes = processedtypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedtypes;
 			allFeaturesByName = doSynchronized(new Provider<Map<String, Set<JvmFeature>>>() {
+				@Override
 				public Map<String, Set<JvmFeature>> get() {
 					if (allFeaturesByName != null)
 						return allFeaturesByName;
@@ -384,8 +392,10 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 						}
 					}
 					Runnable runnable = new Runnable() {
+						@Override
 						public void run() {
 							doSynchronized(new Provider<Object>() {
+								@Override
 								public Object get() {
 									removedOverridden = null;
 									allFeaturesByName = null;
@@ -441,6 +451,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	public Iterable<JvmFeature> getAllFeatures() {
 		if (allFeatures == null) {
 			allFeatures = doSynchronized(new Provider<Set<JvmFeature>>() {
+				@Override
 				public Set<JvmFeature> get() {
 					if (allFeatures != null)
 						return allFeatures;
@@ -450,8 +461,10 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 						Iterables.addAll(result, findAllFeaturesByName(name));
 					}
 					Runnable runnable = new Runnable() {
+						@Override
 						public void run() {
 							doSynchronized(new Provider<Object>() {
+								@Override
 								public Object get() {
 									allFeatures = null;
 									return null;

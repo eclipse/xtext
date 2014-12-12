@@ -54,8 +54,10 @@ public class FilterUriContainer extends AbstractContainer {
 		return delegateCount;
 	}
 	
+	@Override
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return Iterables.filter(delegate.getResourceDescriptions(), new Predicate<IResourceDescription>() {
+			@Override
 			public boolean apply(IResourceDescription input) {
 				return !input.getURI().equals(filterMe);
 			}
@@ -66,6 +68,7 @@ public class FilterUriContainer extends AbstractContainer {
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName qualifiedName, boolean ignoreCase) {
 		Iterable<IEObjectDescription> unfiltered = delegate.getExportedObjects(type, qualifiedName, ignoreCase);
 		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				URI resourceURI = input.getEObjectURI().trimFragment();
 				return !resourceURI.equals(filterMe);
@@ -77,6 +80,7 @@ public class FilterUriContainer extends AbstractContainer {
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		Iterable<IEObjectDescription> unfiltered = delegate.getExportedObjectsByType(type);
 		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				URI resourceURI = input.getEObjectURI().trimFragment();
 				return !resourceURI.equals(filterMe);

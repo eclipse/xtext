@@ -81,6 +81,7 @@ public class XtendFormatterPreview implements Observer {
 		return this;
 	}
 
+	@Override
 	public void update(Observable o, Object arg) {
 		final ProfileManager manager = (ProfileManager) o;
 		final int value = ((Integer) arg).intValue();

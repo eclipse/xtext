@@ -82,6 +82,7 @@ public abstract class AbstractRichTextValueConverter extends AbstractLexerBasedC
 			set.add(value);
 	}
 	
+	@Override
 	public String toValue(String string, INode node) {
 		if (string == null)
 			return null;

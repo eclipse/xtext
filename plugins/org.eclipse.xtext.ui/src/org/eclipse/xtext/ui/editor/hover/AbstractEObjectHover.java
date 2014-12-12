@@ -55,6 +55,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		// returning the region on a per token basis would be better.
 		try {
 			return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
+				@Override
 				public IRegion exec(XtextResource state) throws Exception {
 					// resource can be null e.g. read only zip/jar entry
 					if (state == null) {
@@ -75,6 +76,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		}
 	}
 
+	@Override
 	public Object getHoverInfo2(final ITextViewer textViewer, final IRegion hoverRegion) {
 		if (hoverRegion == null)
 			return null;
@@ -83,6 +85,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 			return null;
 		try {
 			return xtextDocument.readOnly(new IUnitOfWork<Object, XtextResource>() {
+				@Override
 				public Object exec(XtextResource state) throws Exception {
 					// resource can be null e.g. read only zip/jar entry
 					if (state == null) {
@@ -102,6 +105,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		}
 	}
 
+	@Override
 	public abstract Object getHoverInfo(final EObject eObject, final ITextViewer textViewer,
 			final IRegion hoverRegion);
 

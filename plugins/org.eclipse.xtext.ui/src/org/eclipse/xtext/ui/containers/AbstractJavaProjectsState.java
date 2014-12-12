@@ -40,6 +40,7 @@ public abstract class AbstractJavaProjectsState extends AbstractAllContainersSta
 		super.unregisterAsListener();
 	}
 
+	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		if (event.getDelta() != null) {
 			if (isAffectingPackageFragmentRoots(event.getDelta())) {

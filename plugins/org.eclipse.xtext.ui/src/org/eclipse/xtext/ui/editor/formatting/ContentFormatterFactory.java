@@ -27,6 +27,7 @@ import com.google.inject.Inject;
 public class ContentFormatterFactory implements IContentFormatterFactory {
 
 	public class ContentFormatter implements IContentFormatter {
+		@Override
 		public void format(IDocument document, IRegion region) {
 			IXtextDocument doc = (IXtextDocument) document;
 			ReplaceRegion r = doc.priorityReadOnly(new FormattingUnitOfWork(region));
@@ -38,6 +39,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 			}
 		}
 
+		@Override
 		public IFormattingStrategy getFormattingStrategy(String contentType) {
 			return null;
 		}
@@ -56,6 +58,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 			this.region = region;
 		}
 
+		@Override
 		public ReplaceRegion exec(XtextResource state) throws Exception {
 			IParseResult parseResult = state.getParseResult();
 			if (parseResult == null)
@@ -68,6 +71,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	@Inject
 	protected INodeModelFormatter formatter;
 
+	@Override
 	public IContentFormatter createConfiguredFormatter(
 			SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
 		return new ContentFormatter();

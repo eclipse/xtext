@@ -98,6 +98,7 @@ public class RailroadView extends ViewPart {
 
 	public void setContents(final IFigure newContents) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (contents != null)
 					if(contents.getParent() == rootFigure)

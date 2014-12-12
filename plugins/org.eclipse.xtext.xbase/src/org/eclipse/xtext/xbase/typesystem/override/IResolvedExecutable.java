@@ -49,6 +49,7 @@ public interface IResolvedExecutable extends IResolvedFeature {
 	 * 
 	 * @return the declaration.
 	 */
+	@Override
 	JvmExecutable getDeclaration();
 
 

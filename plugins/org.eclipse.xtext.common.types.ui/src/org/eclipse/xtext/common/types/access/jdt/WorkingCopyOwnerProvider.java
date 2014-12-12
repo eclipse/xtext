@@ -42,6 +42,7 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	
 	@Inject private EObjectDescriptionBasedStubGenerator stubGenerator;
 
+	@Override
 	public WorkingCopyOwner getWorkingCopyOwner(final IJavaProject javaProject, final ResourceSet resourceSet) {
 		return new WorkingCopyOwner() {
 			@Override

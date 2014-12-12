@@ -42,6 +42,7 @@ public class OpenXtextElementHandler extends AbstractHandler {
 	
 	private static final Logger LOG = Logger.getLogger(OpenXtextElementHandler.class);
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell = HandlerUtil.getActiveShell(event);
 		ListDialog searchDialog = createSearchDialog(event, activeShell, searchEngine);

@@ -149,6 +149,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			this.element = element;
 		}
 
+		@Override
 		public int consume() throws Exception {
 			IMarker marker = mark();
 			int result = doConsume(false);
@@ -180,6 +181,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return result;
 		}
 
+		@Override
 		public int parseAgain(ParsedToken token) throws Exception {
 			return consume();
 		}
@@ -242,6 +244,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 		
+		@Override
 		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
 			final UnorderedGroupToken groupToken = token.getToken();
 			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
@@ -272,6 +275,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 
+		@Override
 		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
 			final AlternativesToken alternativesToken = token.getToken();
 			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
@@ -360,6 +364,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 		
+		@Override
 		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
 			final UnorderedGroupToken groupToken = token.getToken();
 			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
@@ -390,6 +395,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 
+		@Override
 		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
 			final AlternativesToken alternativesToken = token.getToken();
 			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
@@ -477,6 +483,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 		
+		@Override
 		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
 			final UnorderedGroupToken groupToken = token.getToken();
 			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
@@ -507,6 +514,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 
+		@Override
 		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
 			final AlternativesToken alternativesToken = token.getToken();
 			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
@@ -639,6 +647,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 		
+		@Override
 		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
 			final UnorderedGroupToken groupToken = token.getToken();
 			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
@@ -669,6 +678,7 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return consumers;
 		}
 
+		@Override
 		public int parseFurther(IFurtherParsable<AlternativesToken> token) throws Exception {
 			final AlternativesToken alternativesToken = token.getToken();
 			return doConsumeAlternatives(this, getConsumers(), this, alternativesToken.isOptional(), alternativesToken.getAlternative() + 1);
@@ -863,16 +873,19 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		getTokenAcceptor().accept(new PlaceholderToken(getOffset(), consumer.getElement(), consumer, true));
 	}
 
+	@Override
 	public boolean isDefiningHiddens() {
 		return hiddenTokens != null;
 	}
 
+	@Override
 	public int consume(final String feature, final boolean isMany, final boolean isDatatype, final boolean isBoolean,
 			final AbstractElement grammarElement, final boolean optional) throws Exception {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
 		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), grammarElement != null ? grammarElement : getGrammarElement(),
 				getDefaultType(), new IParsedTokenSource(){
+					@Override
 					public int parseAgain(ParsedToken token) throws Exception {
 						return consume(feature, isMany, isDatatype, isBoolean, grammarElement, optional);
 					}
@@ -884,11 +897,13 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 		return result;
 	}
 
+	@Override
 	public void consumeAsRoot(final IRootConsumerListener listener) {
 		IHiddenTokenState prevState = hiddenTokenHandler.replaceHiddenTokens(hiddenTokens);
 		IMarker marker = mark();
 		getTokenAcceptor().accept(new ParsedNonTerminal(getInput().getOffset(), getGrammarElement(),
 				getDefaultType(), new IParsedTokenSource(){
+					@Override
 					public int parseAgain(ParsedToken token) throws Exception {
 						throw new IllegalStateException("Cannot reparse root token");
 					}
@@ -944,18 +959,22 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 	protected abstract AbstractRule getGrammarElement();
 
+	@Override
 	public IConsumerUtility getConsumerUtil() {
 		return consumerUtil;
 	}
 
+	@Override
 	public IHiddenTokenHandler getHiddenTokenHandler() {
 		return hiddenTokenHandler;
 	}
 
+	@Override
 	public IMarkerFactory getMarkerFactory() {
 		return markerFactory;
 	}
 
+	@Override
 	public IBacktracker getBacktracker() {
 		return backtracker;
 	}

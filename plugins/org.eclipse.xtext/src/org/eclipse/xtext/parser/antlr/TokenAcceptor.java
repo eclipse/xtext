@@ -16,14 +16,17 @@ public class TokenAcceptor implements ITokenAcceptor, Iterator<Token> {
 
 	private Queue<Token> queue = new LinkedList<Token>();
 	
+	@Override
 	public void accept(Token token) {
 		queue.offer(token);
 	}
 	
+	@Override
 	public boolean hasNext() {
 		return queue.peek() != null;
 	}
 	
+	@Override
 	public Token next() {
 		return queue.remove();
 	}
@@ -70,6 +73,7 @@ public class TokenAcceptor implements ITokenAcceptor, Iterator<Token> {
 //		return result;
 //	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

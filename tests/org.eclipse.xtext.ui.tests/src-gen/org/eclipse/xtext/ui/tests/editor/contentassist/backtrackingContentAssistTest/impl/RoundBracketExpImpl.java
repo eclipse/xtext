@@ -130,7 +130,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public NameExp getName()
+  @Override
+public NameExp getName()
   {
     return name;
   }
@@ -157,7 +158,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(NameExp newName)
+  @Override
+public void setName(NameExp newName)
   {
     if (newName != name)
     {
@@ -178,7 +180,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isPre()
+  @Override
+public boolean isPre()
   {
     return pre;
   }
@@ -188,7 +191,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPre(boolean newPre)
+  @Override
+public void setPre(boolean newPre)
   {
     boolean oldPre = pre;
     pre = newPre;
@@ -201,7 +205,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public iteratorVariable getVariable1()
+  @Override
+public iteratorVariable getVariable1()
   {
     return variable1;
   }
@@ -228,7 +233,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVariable1(iteratorVariable newVariable1)
+  @Override
+public void setVariable1(iteratorVariable newVariable1)
   {
     if (newVariable1 != variable1)
     {
@@ -249,7 +255,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getVariable2()
+  @Override
+public EObject getVariable2()
   {
     return variable2;
   }
@@ -276,7 +283,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVariable2(EObject newVariable2)
+  @Override
+public void setVariable2(EObject newVariable2)
   {
     if (newVariable2 != variable2)
     {
@@ -297,7 +305,8 @@ public class RoundBracketExpImpl extends ExpressionImpl implements RoundBracketE
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Expression> getArguments()
+  @Override
+public EList<Expression> getArguments()
   {
     if (arguments == null)
     {

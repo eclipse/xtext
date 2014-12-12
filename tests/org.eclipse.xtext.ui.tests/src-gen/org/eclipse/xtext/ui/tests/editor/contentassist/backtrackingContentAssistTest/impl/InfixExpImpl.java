@@ -99,7 +99,8 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getSource()
+  @Override
+public Expression getSource()
   {
     return source;
   }
@@ -126,7 +127,8 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSource(Expression newSource)
+  @Override
+public void setSource(Expression newSource)
   {
     if (newSource != source)
     {
@@ -147,7 +149,8 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOp()
+  @Override
+public String getOp()
   {
     return op;
   }
@@ -157,7 +160,8 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOp(String newOp)
+  @Override
+public void setOp(String newOp)
   {
     String oldOp = op;
     op = newOp;
@@ -170,7 +174,8 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public NavigatingExp getArgument()
+  @Override
+public NavigatingExp getArgument()
   {
     return argument;
   }
@@ -197,7 +202,8 @@ public class InfixExpImpl extends ExpressionImpl implements InfixExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setArgument(NavigatingExp newArgument)
+  @Override
+public void setArgument(NavigatingExp newArgument)
   {
     if (newArgument != argument)
     {

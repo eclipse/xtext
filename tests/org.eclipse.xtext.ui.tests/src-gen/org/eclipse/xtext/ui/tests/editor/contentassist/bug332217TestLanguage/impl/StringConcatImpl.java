@@ -70,7 +70,8 @@ public class StringConcatImpl extends StringFunctionImpl implements StringConcat
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ScalarExpression> getValues()
+  @Override
+public EList<ScalarExpression> getValues()
   {
     if (values == null)
     {

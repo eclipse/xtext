@@ -104,7 +104,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getState()
+  @Override
+public EClass getState()
   {
     return stateEClass;
   }
@@ -114,7 +115,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getState_IsInitial()
+  @Override
+public EAttribute getState_IsInitial()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getState_IsFinal()
+  @Override
+public EAttribute getState_IsFinal()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(1);
   }
@@ -134,7 +137,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getState_StateKind()
+  @Override
+public EAttribute getState_StateKind()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
   }
@@ -144,7 +148,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getState_StateName()
+  @Override
+public EAttribute getState_StateName()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
   }
@@ -154,7 +159,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getState_Label()
+  @Override
+public EAttribute getState_Label()
   {
     return (EAttribute)stateEClass.getEStructuralFeatures().get(4);
   }
@@ -164,7 +170,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getStateType()
+  @Override
+public EEnum getStateType()
   {
     return stateTypeEEnum;
   }
@@ -174,7 +181,8 @@ public class Bug286935TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug286935TestLanguageFactory getBug286935TestLanguageFactory()
+  @Override
+public Bug286935TestLanguageFactory getBug286935TestLanguageFactory()
   {
     return (Bug286935TestLanguageFactory)getEFactoryInstance();
   }

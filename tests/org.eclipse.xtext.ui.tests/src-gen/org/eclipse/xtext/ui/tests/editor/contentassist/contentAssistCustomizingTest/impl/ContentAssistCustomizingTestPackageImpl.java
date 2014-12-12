@@ -112,7 +112,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -122,7 +123,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Types()
+  @Override
+public EReference getModel_Types()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -132,7 +134,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getType()
+  @Override
+public EClass getType()
   {
     return typeEClass;
   }
@@ -142,7 +145,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getType_Name()
+  @Override
+public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -152,7 +156,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getType_SuperType()
+  @Override
+public EReference getType_SuperType()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
   }
@@ -162,7 +167,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypeRef()
+  @Override
+public EClass getTypeRef()
   {
     return typeRefEClass;
   }
@@ -172,7 +178,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeRef_Type()
+  @Override
+public EReference getTypeRef_Type()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -182,7 +189,8 @@ public class ContentAssistCustomizingTestPackageImpl extends EPackageImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistCustomizingTestFactory getContentAssistCustomizingTestFactory()
+  @Override
+public ContentAssistCustomizingTestFactory getContentAssistCustomizingTestFactory()
   {
     return (ContentAssistCustomizingTestFactory)getEFactoryInstance();
   }

@@ -113,6 +113,7 @@ public class GrammarAccessUtil {
 			return result;
 		}
 		final ILineSeparatorInformation lineSeparatorInformation = new ILineSeparatorInformation() {
+			@Override
 			public String getLineSeparator() {
 				return delimiter;
 			}

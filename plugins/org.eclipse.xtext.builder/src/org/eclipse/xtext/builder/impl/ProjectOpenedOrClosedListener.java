@@ -80,12 +80,14 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 	@Inject
 	private IWorkspace workspace;
 
+	@Override
 	public void resourceChanged(final IResourceChangeEvent event) {
 		if (workspace != null && workspace.isAutoBuilding()) {
 			if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 				try {
 					final Set<IProject> toUpdate = Sets.newLinkedHashSet();
 					event.getDelta().accept(new IResourceDeltaVisitor() {
+						@Override
 						public boolean visit(IResourceDelta delta) throws CoreException {
 							if (delta.getResource() instanceof IWorkspaceRoot)
 								return true;

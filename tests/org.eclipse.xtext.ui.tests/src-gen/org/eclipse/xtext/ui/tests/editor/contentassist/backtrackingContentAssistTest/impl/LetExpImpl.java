@@ -85,7 +85,8 @@ public class LetExpImpl extends ExpressionImpl implements LetExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<LetVariable> getVariable()
+  @Override
+public EList<LetVariable> getVariable()
   {
     if (variable == null)
     {
@@ -99,7 +100,8 @@ public class LetExpImpl extends ExpressionImpl implements LetExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getIn()
+  @Override
+public Expression getIn()
   {
     return in;
   }
@@ -126,7 +128,8 @@ public class LetExpImpl extends ExpressionImpl implements LetExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIn(Expression newIn)
+  @Override
+public void setIn(Expression newIn)
   {
     if (newIn != in)
     {

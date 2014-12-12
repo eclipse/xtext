@@ -77,7 +77,8 @@ public class RuleOptionsImpl extends RuleElementImpl implements RuleOptions
    * <!-- end-user-doc -->
    * @generated
    */
-  public Options getOptions()
+  @Override
+public Options getOptions()
   {
     return options;
   }
@@ -104,7 +105,8 @@ public class RuleOptionsImpl extends RuleElementImpl implements RuleOptions
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOptions(Options newOptions)
+  @Override
+public void setOptions(Options newOptions)
   {
     if (newOptions != options)
     {
@@ -125,7 +127,8 @@ public class RuleOptionsImpl extends RuleElementImpl implements RuleOptions
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getElement()
+  @Override
+public RuleElement getElement()
   {
     return element;
   }
@@ -152,7 +155,8 @@ public class RuleOptionsImpl extends RuleElementImpl implements RuleOptions
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement(RuleElement newElement)
+  @Override
+public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {

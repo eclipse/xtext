@@ -39,6 +39,7 @@ public interface IActionContributor {
 
 		private List<IActionContributor> children = newArrayList();
 
+		@Override
 		public void contributeActions(XtextEditor editor) {
 			List<Binding<IActionContributor>> bindingsByType = injector.findBindingsByType(TypeLiteral.get(IActionContributor.class));
 			for (Binding<IActionContributor> binding : bindingsByType) {
@@ -48,6 +49,7 @@ public interface IActionContributor {
 			}
 		}
 		
+		@Override
 		public void editorDisposed(XtextEditor editor) {
 			for (IActionContributor actionContributor: children) {
 				actionContributor.editorDisposed(editor);

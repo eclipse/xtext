@@ -47,6 +47,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public XtextConfigurableIssueCodes() {
 		final Map<String, PreferenceKey> map = Maps.newLinkedHashMap();
 		initialize(new IAcceptor<PreferenceKey>() {
+			@Override
 			public void accept(PreferenceKey prefKey) {
 				map.put(prefKey.getId(), prefKey);
 			}

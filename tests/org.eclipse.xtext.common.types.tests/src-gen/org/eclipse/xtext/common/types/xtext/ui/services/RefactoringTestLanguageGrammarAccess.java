@@ -25,6 +25,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	referenceHolder+=ReferenceHolder*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//referenceHolder+=ReferenceHolder*
@@ -45,6 +46,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//ReferenceHolder:
 		//	name=ID defaultReference=[types::JvmType|FQN];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID defaultReference=[types::JvmType|FQN]
@@ -79,6 +81,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//FQN:
 		//	ID ("." ID)* ("$" ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)* ("$" ID)*
@@ -139,6 +142,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

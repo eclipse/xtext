@@ -55,6 +55,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//Model:
 		//	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
 		//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
@@ -160,6 +161,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		
 		//Attribute:
 		//	value=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=ID
@@ -193,6 +195,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		////        name=ID "=" value=ID;
 		//Pair:
 		//	name=ID "=" value=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID "=" value=ID //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
@@ -288,6 +291,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

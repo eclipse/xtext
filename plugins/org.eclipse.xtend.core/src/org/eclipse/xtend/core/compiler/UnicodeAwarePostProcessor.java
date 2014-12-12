@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
  */
 public class UnicodeAwarePostProcessor extends TraceAwarePostProcessor implements IFilePostProcessorExtension {
 
+	@Override
 	public CharSequence postProcess(URI fileURI, CharSequence content, /* @Nullable */ Charset targetCharset) {
 		if (targetCharset != null && "java".equalsIgnoreCase(fileURI.fileExtension())) {
 			final String lineSeparator = getWhitespaceInformationProvider().getLineSeparatorInformation(fileURI).getLineSeparator();

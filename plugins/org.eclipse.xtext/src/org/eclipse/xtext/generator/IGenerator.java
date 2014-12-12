@@ -25,6 +25,7 @@ public interface IGenerator {
 	 * @since 2.4
 	 */
 	public static class NullGenerator implements IGenerator {
+		@Override
 		public void doGenerate(Resource input, IFileSystemAccess fsa) {}
 	}
 }

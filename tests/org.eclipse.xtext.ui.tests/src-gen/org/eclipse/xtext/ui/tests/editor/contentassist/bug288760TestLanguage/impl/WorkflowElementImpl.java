@@ -127,7 +127,8 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -137,7 +138,8 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -150,7 +152,8 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Attribute> getAttributes()
+  @Override
+public EList<Attribute> getAttributes()
   {
     if (attributes == null)
     {
@@ -164,7 +167,8 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<WorkflowElement> getChildren()
+  @Override
+public EList<WorkflowElement> getChildren()
   {
     if (children == null)
     {
@@ -178,7 +182,8 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getEnd()
+  @Override
+public String getEnd()
   {
     return end;
   }
@@ -188,7 +193,8 @@ public class WorkflowElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setEnd(String newEnd)
+  @Override
+public void setEnd(String newEnd)
   {
     String oldEnd = end;
     end = newEnd;

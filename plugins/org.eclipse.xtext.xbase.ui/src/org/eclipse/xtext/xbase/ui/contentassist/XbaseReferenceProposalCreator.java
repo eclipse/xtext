@@ -60,10 +60,12 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 
 	private int mode;
 	
+	@Override
 	public void reset() {
 		mode = 0;
 	}
 	
+	@Override
 	public void nextMode() {
 		switch(mode) {
 			case 0: 
@@ -76,6 +78,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		}
 	}
 	
+	@Override
 	public String getNextCategory() {
 		switch(mode) {
 			case 0:
@@ -88,6 +91,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		}
 	}
 	
+	@Override
 	public boolean isLastMode() {
 		return isShowAllProposals();
 	}
@@ -136,6 +140,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		if (!TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(model, reference))) {
 			return new Function<IEObjectDescription, ICompletionProposal>() {
 
+				@Override
 				public ICompletionProposal apply(IEObjectDescription from) {
 					ICompletionProposal result = proposalFactory.apply(from);
 					if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_FEATURE, from.getEClass())) {

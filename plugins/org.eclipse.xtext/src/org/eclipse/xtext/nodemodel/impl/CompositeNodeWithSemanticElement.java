@@ -45,14 +45,17 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 		this.semanticElement = element;
 	}
 
+	@Override
 	public void notifyChanged(Notification notification) {
 		// ignore
 	}
 
+	@Override
 	public Notifier getTarget() {
 		return semanticElement;
 	}
 
+	@Override
 	public void setTarget(Notifier newTarget) {
 		if (newTarget == null || newTarget instanceof EObject)
 			semanticElement = (EObject) newTarget;
@@ -60,6 +63,7 @@ public class CompositeNodeWithSemanticElement extends CompositeNode implements A
 			throw new IllegalArgumentException("Notifier must be an Eobject");
 	}
 
+	@Override
 	public boolean isAdapterForType(Object type) {
 		return type instanceof Class<?> && INode.class.isAssignableFrom((Class<?>)type);
 	}

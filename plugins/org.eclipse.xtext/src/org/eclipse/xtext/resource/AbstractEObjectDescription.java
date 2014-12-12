@@ -23,10 +23,12 @@ public abstract class AbstractEObjectDescription implements IEObjectDescription 
 		return getName().toString();
 	}
 	
+	@Override
 	public String getUserData(String name) {
 		return null;
 	}
 	
+	@Override
 	public String[] getUserDataKeys() {
 		return Strings.EMPTY_ARRAY;
 	}

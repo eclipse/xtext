@@ -89,14 +89,17 @@ public class TokenScannerTest extends Assert {
 			final int currentOffset = offset;
 			tokens.add(new ILexerTokenRegion() {
 
+				@Override
 				public int getLength() {
 					return length;
 				}
 
+				@Override
 				public int getLexerTokenType() {
 					return 4711;
 				}
 				
+				@Override
 				public int getOffset() {
 					return currentOffset;
 				}

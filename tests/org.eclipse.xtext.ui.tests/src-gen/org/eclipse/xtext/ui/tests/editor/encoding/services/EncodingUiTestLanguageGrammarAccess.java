@@ -24,6 +24,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 		
 		//Model:
 		//	words+=Word*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//words+=Word*
@@ -40,6 +41,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 		
 		//Word:
 		//	value=LEXEME;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=LEXEME
@@ -85,6 +87,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

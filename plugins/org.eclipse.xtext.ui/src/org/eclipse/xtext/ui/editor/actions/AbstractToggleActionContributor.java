@@ -108,6 +108,7 @@ public abstract class AbstractToggleActionContributor {
 
 	protected void addPropertyChangeListener() {
 		propertyChangeListener = new IPropertyChangeListener() {
+			@Override
 			public void propertyChange(PropertyChangeEvent event) {
 				if (getPreferenceKey().equals(event.getProperty()) && event.getOldValue() != event.getNewValue()) {
 					boolean newValue = Boolean.parseBoolean(event.getNewValue().toString());

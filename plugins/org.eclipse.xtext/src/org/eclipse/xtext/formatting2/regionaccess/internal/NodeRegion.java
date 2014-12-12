@@ -30,6 +30,7 @@ public class NodeRegion extends AbstractTextSegment {
 		return node.getGrammarElement();
 	}
 
+	@Override
 	public int getLength() {
 		return node.getLength();
 	}
@@ -38,6 +39,7 @@ public class NodeRegion extends AbstractTextSegment {
 		return node;
 	}
 
+	@Override
 	public int getOffset() {
 		return node.getOffset();
 	}
@@ -46,6 +48,7 @@ public class NodeRegion extends AbstractTextSegment {
 		return tokenAccess.findSemanticElement(node);
 	}
 
+	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return tokenAccess;
 	}

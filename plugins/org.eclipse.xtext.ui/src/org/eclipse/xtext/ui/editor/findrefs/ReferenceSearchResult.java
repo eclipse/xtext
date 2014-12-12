@@ -36,12 +36,14 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 		listeners = Lists.newArrayList();
 	}
 
+	@Override
 	public void addListener(ISearchResultListener l) {
 		synchronized (listeners) {
 			listeners.add(l);
 		}
 	}
 
+	@Override
 	public void removeListener(ISearchResultListener l) {
 		synchronized (listeners) {
 			listeners.remove(l);
@@ -56,22 +58,27 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 		}
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return null;
 	}
 
+	@Override
 	public String getLabel() {
 		return query.getLabel();
 	}
 
+	@Override
 	public ISearchQuery getQuery() {
 		return query;
 	}
 
+	@Override
 	public String getTooltip() {
 		return getLabel();
 	}
 
+	@Override
 	public void accept(IReferenceDescription referenceDescription) {
 		if(query.getFilter().apply(referenceDescription)) {
 			matchingReferences.add(referenceDescription);

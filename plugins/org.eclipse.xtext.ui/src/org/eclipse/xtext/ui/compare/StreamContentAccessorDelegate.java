@@ -33,6 +33,7 @@ public class StreamContentAccessorDelegate implements IResourceProvider, IEncode
 		this.resourceProvider = resourceProvider;
 	}
 
+	@Override
 	public InputStream getContents() throws CoreException {
 		return streamContentAccessor.getContents();
 	}
@@ -47,10 +48,12 @@ public class StreamContentAccessorDelegate implements IResourceProvider, IEncode
 		return streamContentAccessor.hashCode();
 	}
 
+	@Override
 	public IResource getResource() {
 		return resourceProvider.getResource();
 	}
 
+	@Override
 	public String getCharset() throws CoreException {
 		if(streamContentAccessor instanceof IEncodedStreamContentAccessor)
 			return ((IEncodedStreamContentAccessor) streamContentAccessor).getCharset();

@@ -81,7 +81,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Codetemplates createCodetemplates()
+  @Override
+public Codetemplates createCodetemplates()
   {
     CodetemplatesImpl codetemplates = new CodetemplatesImpl();
     return codetemplates;
@@ -92,7 +93,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Codetemplate createCodetemplate()
+  @Override
+public Codetemplate createCodetemplate()
   {
     CodetemplateImpl codetemplate = new CodetemplateImpl();
     return codetemplate;
@@ -103,7 +105,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public TemplateBody createTemplateBody()
+  @Override
+public TemplateBody createTemplateBody()
   {
     TemplateBodyImpl templateBody = new TemplateBodyImpl();
     return templateBody;
@@ -114,7 +117,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public TemplatePart createTemplatePart()
+  @Override
+public TemplatePart createTemplatePart()
   {
     TemplatePartImpl templatePart = new TemplatePartImpl();
     return templatePart;
@@ -125,7 +129,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Variable createVariable()
+  @Override
+public Variable createVariable()
   {
     VariableImpl variable = new VariableImpl();
     return variable;
@@ -136,7 +141,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Literal createLiteral()
+  @Override
+public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
     return literal;
@@ -147,7 +153,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Dollar createDollar()
+  @Override
+public Dollar createDollar()
   {
     DollarImpl dollar = new DollarImpl();
     return dollar;
@@ -158,7 +165,8 @@ public class TemplatesFactoryImpl extends EFactoryImpl implements TemplatesFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public TemplatesPackage getTemplatesPackage()
+  @Override
+public TemplatesPackage getTemplatesPackage()
   {
     return (TemplatesPackage)getEPackage();
   }

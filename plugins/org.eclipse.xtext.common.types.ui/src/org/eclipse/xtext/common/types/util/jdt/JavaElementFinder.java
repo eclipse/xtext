@@ -38,6 +38,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 	@Inject
 	private IJavaProjectProvider projectProvider;
 	
+	@Override
 	public IJavaElement findElementFor(JvmIdentifiableElement element) {
 		return internalFindElementFor(element, false);
 	}
@@ -45,6 +46,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public IJavaElement findExactElementFor(JvmIdentifiableElement element) {
 		return internalFindElementFor(element, true);
 	}

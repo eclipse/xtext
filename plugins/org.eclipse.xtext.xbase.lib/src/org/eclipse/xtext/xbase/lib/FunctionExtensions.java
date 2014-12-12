@@ -39,6 +39,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (function == null)
 			throw new NullPointerException("function");
 		return new Function0<RESULT>() {
+			@Override
 			public RESULT apply() {
 				return function.apply(argument);
 			}
@@ -60,6 +61,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (function == null)
 			throw new NullPointerException("function");
 		return new Function1<P2, RESULT>() {
+			@Override
 			public RESULT apply(P2 p) {
 				return function.apply(argument, p);
 			}
@@ -81,6 +83,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (function == null)
 			throw new NullPointerException("function");
 		return new Function2<P2, P3, RESULT>() {
+			@Override
 			public RESULT apply(P2 p2, P3 p3) {
 				return function.apply(argument, p2, p3);
 			}
@@ -102,6 +105,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (function == null)
 			throw new NullPointerException("function");
 		return new Function3<P2, P3, P4, RESULT>() {
+			@Override
 			public RESULT apply(P2 p2, P3 p3, P4 p4) {
 				return function.apply(argument, p2, p3, p4);
 			}
@@ -123,6 +127,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (function == null)
 			throw new NullPointerException("function");
 		return new Function4<P2, P3, P4, P5, RESULT>() {
+			@Override
 			public RESULT apply(P2 p2, P3 p3, P4 p4, P5 p5) {
 				return function.apply(argument, p2, p3, p4, p5);
 			}
@@ -144,6 +149,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (function == null)
 			throw new NullPointerException("function");
 		return new Function5<P2, P3, P4, P5, P6, RESULT>() {
+			@Override
 			public RESULT apply(P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
 				return function.apply(argument, p2, p3, p4, p5, p6);
 			}

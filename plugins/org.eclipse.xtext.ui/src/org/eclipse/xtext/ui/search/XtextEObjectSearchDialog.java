@@ -87,12 +87,15 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		// super class needs an IStructuredContentProvider so we register this dummy and 
 		// register the lazy one later
 		setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				return null;
 			}
@@ -174,6 +177,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 			final IStyledLabelProvider styledLabelProvider = (IStyledLabelProvider) labelProvider;
 			TableOwnerDrawSupport.install(table);
 			Listener listener= new Listener() {
+				@Override
 				public void handleEvent(Event event) {
 					handleSetData(event);
 				}
@@ -196,6 +200,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider();
 		getTableViewer().setContentProvider(contentProvider);
 		getTableViewer().addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				ISelection selection = event.getSelection();
 				if (selection instanceof IStructuredSelection) {
@@ -250,6 +255,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 
 		ModifyListener textModifyListener = new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				applyFilter();
 			}
@@ -317,6 +323,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 	public void updateMatches(final Collection<IEObjectDescription> matches, final boolean isFinished) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (getShell() != null) {
 					if (getTableViewer() != null) {

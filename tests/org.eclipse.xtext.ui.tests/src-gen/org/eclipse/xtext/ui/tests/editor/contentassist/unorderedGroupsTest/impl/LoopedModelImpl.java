@@ -135,7 +135,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getVisibility()
+  @Override
+public EList<String> getVisibility()
   {
     if (visibility == null)
     {
@@ -149,7 +150,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getStatic()
+  @Override
+public EList<String> getStatic()
   {
     if (static_ == null)
     {
@@ -163,7 +165,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getSynchronized()
+  @Override
+public EList<String> getSynchronized()
   {
     if (synchronized_ == null)
     {
@@ -177,7 +180,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getAbstract()
+  @Override
+public EList<String> getAbstract()
   {
     if (abstract_ == null)
     {
@@ -191,7 +195,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getFinal()
+  @Override
+public EList<String> getFinal()
   {
     if (final_ == null)
     {
@@ -205,7 +210,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -215,7 +221,8 @@ public class LoopedModelImpl extends MinimalEObjectImpl.Container implements Loo
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

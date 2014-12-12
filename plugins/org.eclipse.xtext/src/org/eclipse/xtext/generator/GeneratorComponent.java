@@ -68,6 +68,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 		this.slotNames.add(slot);
 	}
 
+	@Override
 	public void preInvoke() {
 		if (injector == null)
 			throw new IllegalStateException("no Injector has been configured. Use 'register' with an ISetup or 'injector' directly.");
@@ -111,6 +112,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 		outlets.put(out.outletName,out.path);
 	}
 	
+	@Override
 	public void invoke(IWorkflowContext ctx) {
 		IGenerator instance = getCompiler();
 		IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess();
@@ -148,6 +150,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 		return configuredFileSystemAccess;
 	}
 
+	@Override
 	public void postInvoke() {
 		
 	}
@@ -160,6 +163,7 @@ public class GeneratorComponent implements IWorkflowComponent {
 				.getInstance(IOutputConfigurationProvider.class);
 		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations();
 		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
+			@Override
 			public String apply(OutputConfiguration from) {
 				return from.getName();
 			}

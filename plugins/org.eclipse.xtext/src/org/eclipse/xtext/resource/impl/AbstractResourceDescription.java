@@ -25,22 +25,27 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 	
 	protected EObjectDescriptionLookUp lookup;
 	
+	@Override
 	public boolean isEmpty() {
 		return getLookUp().isEmpty();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return getLookUp().getExportedObjects();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return getLookUp().getExportedObjectsByType(type);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return getLookUp().getExportedObjectsByObject(object);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return getLookUp().getExportedObjects(type, name, ignoreCase);
 	}

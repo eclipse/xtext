@@ -159,7 +159,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isIsInitial()
+  @Override
+public boolean isIsInitial()
   {
     return isInitial;
   }
@@ -169,7 +170,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIsInitial(boolean newIsInitial)
+  @Override
+public void setIsInitial(boolean newIsInitial)
   {
     boolean oldIsInitial = isInitial;
     isInitial = newIsInitial;
@@ -182,7 +184,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isIsFinal()
+  @Override
+public boolean isIsFinal()
   {
     return isFinal;
   }
@@ -192,7 +195,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIsFinal(boolean newIsFinal)
+  @Override
+public void setIsFinal(boolean newIsFinal)
   {
     boolean oldIsFinal = isFinal;
     isFinal = newIsFinal;
@@ -205,7 +209,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public StateType getStateKind()
+  @Override
+public StateType getStateKind()
   {
     return stateKind;
   }
@@ -215,7 +220,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStateKind(StateType newStateKind)
+  @Override
+public void setStateKind(StateType newStateKind)
   {
     StateType oldStateKind = stateKind;
     stateKind = newStateKind == null ? STATE_KIND_EDEFAULT : newStateKind;
@@ -228,7 +234,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getStateName()
+  @Override
+public String getStateName()
   {
     return stateName;
   }
@@ -238,7 +245,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStateName(String newStateName)
+  @Override
+public void setStateName(String newStateName)
   {
     String oldStateName = stateName;
     stateName = newStateName;
@@ -251,7 +259,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getLabel()
+  @Override
+public String getLabel()
   {
     return label;
   }
@@ -261,7 +270,8 @@ public class StateImpl extends MinimalEObjectImpl.Container implements State
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLabel(String newLabel)
+  @Override
+public void setLabel(String newLabel)
   {
     String oldLabel = label;
     label = newLabel;

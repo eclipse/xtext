@@ -67,14 +67,17 @@ public class ImportsVariableResolver extends AbstractTemplateVariableResolver im
 		return new String[0];
 	}
 
+	@Override
 	public boolean hasMandatoryParameters() {
 		return true;
 	}
 
+	@Override
 	public boolean canHaveParameters() {
 		return true;
 	}
 
+	@Override
 	public void validateParameters(Variable variable, ValidationMessageAcceptor validationMessageAcceptor) {
 		if (variable.getParameters().isEmpty()) {
 			validationMessageAcceptor.acceptError(getType() + "-variables have mandatory parameters.", variable,

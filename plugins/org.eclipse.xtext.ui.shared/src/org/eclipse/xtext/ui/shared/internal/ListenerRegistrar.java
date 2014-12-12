@@ -23,10 +23,12 @@ public class ListenerRegistrar implements IEagerContribution {
 	@Inject
 	private IWorkspace workspace;
 
+	@Override
 	public void initialize() {
 		workspace.addResourceChangeListener(listener);
 	}
 
+	@Override
 	public void discard() {
 		workspace.removeResourceChangeListener(listener);
 	}

@@ -103,7 +103,8 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMain()
+  @Override
+public EClass getMain()
   {
     return mainEClass;
   }
@@ -113,7 +114,8 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMain_Referenced()
+  @Override
+public EReference getMain_Referenced()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
   }
@@ -123,7 +125,8 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getReference()
+  @Override
+public EClass getReference()
   {
     return referenceEClass;
   }
@@ -133,7 +136,8 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReference_Referenced()
+  @Override
+public EReference getReference_Referenced()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
   }
@@ -143,7 +147,8 @@ public class ReferringPackageImpl extends EPackageImpl implements ReferringPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferringFactory getReferringFactory()
+  @Override
+public ReferringFactory getReferringFactory()
   {
     return (ReferringFactory)getEFactoryInstance();
   }

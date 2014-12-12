@@ -603,6 +603,7 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected void declareSyntheticVariable(final XExpression expr, ITreeAppendable b) {
 		declareFreshLocalVariable(expr, b, new Later() {
+			@Override
 			public void exec(ITreeAppendable appendable) {
 				appendable.append(getDefaultValueLiteral(expr));
 			}

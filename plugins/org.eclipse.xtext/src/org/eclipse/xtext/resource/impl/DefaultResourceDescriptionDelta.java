@@ -40,16 +40,19 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		this._new = _new;
 	}
 
+	@Override
 	public IResourceDescription getNew() {
 		return _new;
 	}
 
+	@Override
 	public IResourceDescription getOld() {
 		return old;
 	}
 
 	private Boolean hasChanges;
 
+	@Override
 	public boolean haveEObjectDescriptionsChanged() {
 		if (hasChanges == null) {
 			hasChanges = internalHasChanges();
@@ -103,6 +106,7 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		return true;
 	}
 
+	@Override
 	public URI getUri() {
 		return old == null ? _new.getURI() : old.getURI();
 	}

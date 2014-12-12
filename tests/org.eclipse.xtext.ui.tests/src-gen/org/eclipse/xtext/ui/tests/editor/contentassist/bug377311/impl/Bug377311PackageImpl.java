@@ -104,7 +104,8 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRoot()
+  @Override
+public EClass getRoot()
   {
     return rootEClass;
   }
@@ -114,7 +115,8 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRoot_Childs()
+  @Override
+public EReference getRoot_Childs()
   {
     return (EReference)rootEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getChild()
+  @Override
+public EClass getChild()
   {
     return childEClass;
   }
@@ -134,7 +137,8 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild_Name()
+  @Override
+public EAttribute getChild_Name()
   {
     return (EAttribute)childEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class Bug377311PackageImpl extends EPackageImpl implements Bug377311Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug377311Factory getBug377311Factory()
+  @Override
+public Bug377311Factory getBug377311Factory()
   {
     return (Bug377311Factory)getEFactoryInstance();
   }

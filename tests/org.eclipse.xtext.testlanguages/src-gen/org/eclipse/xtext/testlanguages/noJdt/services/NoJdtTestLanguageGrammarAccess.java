@@ -25,6 +25,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Model:
 		//	greetings+=Greeting;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//greetings+=Greeting
@@ -51,6 +52,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Greeting:
 		//	"Hello" name=ID ("(" "from" other=[Greeting] ")")? "!";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Hello" name=ID ("(" "from" other=[Greeting] ")")? "!"
@@ -122,6 +124,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -42,6 +42,7 @@ public class TreeConstructionNFAProvider extends AbstractNFAProvider<TreeConstSt
 			return false;
 		}
 
+		@Override
 		public NFADirection getDirection() {
 			return NFADirection.BACKWARD;
 		}

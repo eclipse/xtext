@@ -66,7 +66,8 @@ public class CompositeTypeImpl extends TypeImpl implements CompositeType
    * <!-- end-user-doc -->
    * @generated
    */
-  public CompositeTypeEntry getBaseType()
+  @Override
+public CompositeTypeEntry getBaseType()
   {
     return baseType;
   }
@@ -93,7 +94,8 @@ public class CompositeTypeImpl extends TypeImpl implements CompositeType
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBaseType(CompositeTypeEntry newBaseType)
+  @Override
+public void setBaseType(CompositeTypeEntry newBaseType)
   {
     if (newBaseType != baseType)
     {

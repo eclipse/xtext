@@ -31,18 +31,22 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 		super(constructorCall, constructor, expectation, state);
 	}
 	
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}
 	
+	@Override
 	public JvmConstructor getConstructor() {
 		return (JvmConstructor) getFeature();
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return getConstructorCall().isAnonymousClassConstructorCall();
 	}
 	
+	@Override
 	public XConstructorCall getConstructorCall() {
 		return getExpression();
 	}

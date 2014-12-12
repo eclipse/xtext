@@ -104,7 +104,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWorkflowElement()
+  @Override
+public EClass getWorkflowElement()
   {
     return workflowElementEClass;
   }
@@ -114,7 +115,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkflowElement_Name()
+  @Override
+public EAttribute getWorkflowElement_Name()
   {
     return (EAttribute)workflowElementEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWorkflowElement_Attributes()
+  @Override
+public EReference getWorkflowElement_Attributes()
   {
     return (EReference)workflowElementEClass.getEStructuralFeatures().get(1);
   }
@@ -134,7 +137,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWorkflowElement_Children()
+  @Override
+public EReference getWorkflowElement_Children()
   {
     return (EReference)workflowElementEClass.getEStructuralFeatures().get(2);
   }
@@ -144,7 +148,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWorkflowElement_End()
+  @Override
+public EAttribute getWorkflowElement_End()
   {
     return (EAttribute)workflowElementEClass.getEStructuralFeatures().get(3);
   }
@@ -154,7 +159,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAttribute()
+  @Override
+public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -164,7 +170,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Name()
+  @Override
+public EAttribute getAttribute_Name()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -174,7 +181,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Value()
+  @Override
+public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
   }
@@ -184,7 +192,8 @@ public class Bug288760TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug288760TestLanguageFactory getBug288760TestLanguageFactory()
+  @Override
+public Bug288760TestLanguageFactory getBug288760TestLanguageFactory()
   {
     return (Bug288760TestLanguageFactory)getEFactoryInstance();
   }

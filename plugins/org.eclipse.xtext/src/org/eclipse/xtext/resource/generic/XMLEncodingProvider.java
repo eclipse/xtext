@@ -26,6 +26,7 @@ public class XMLEncodingProvider implements IEncodingProvider {
 	
 	private static final Logger LOG = Logger.getLogger(XMLEncodingProvider.class);
 
+	@Override
 	public String getEncoding(URI uri) {
 		if (uri == null) {
 			return Charset.defaultCharset().name();

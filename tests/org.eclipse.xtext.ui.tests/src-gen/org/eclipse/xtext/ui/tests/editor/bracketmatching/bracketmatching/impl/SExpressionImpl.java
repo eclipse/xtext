@@ -70,7 +70,8 @@ public class SExpressionImpl extends ExpressionImpl implements SExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Expression> getElement()
+  @Override
+public EList<Expression> getElement()
   {
     if (element == null)
     {

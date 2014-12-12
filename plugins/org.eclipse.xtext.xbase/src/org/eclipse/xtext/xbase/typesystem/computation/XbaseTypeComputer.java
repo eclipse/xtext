@@ -105,6 +105,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	@Inject 
 	private CommonTypeComputationServices services;
 	
+	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
 		if (expression instanceof XAssignment) {
 			_computeTypes((XAssignment)expression, state);

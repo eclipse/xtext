@@ -49,6 +49,7 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 	
 	private List<JvmOperation> dispatchers = newArrayList();
 	
+	@Override
 	public boolean initialize(EObject xtendMethod, IRenameElementContext context) {
 		Assert.isLegal(xtendMethod instanceof XtendFunction);
 		Assert.isLegal(((XtendFunction) xtendMethod).isDispatch());
@@ -92,10 +93,12 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 		}
 	}
 	
+	@Override
 	public String getOriginalName() {
 		return children.get(0).getOriginalName();
 	}
 
+	@Override
 	public RefactoringStatus validateNewName(String newName) {
 		RefactoringStatus status = new RefactoringStatus();
 		for(IRenameStrategy child: children)
@@ -103,6 +106,7 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 		return status;
 	}
 
+	@Override
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
 		for(IRenameStrategy child: children)
 			child.applyDeclarationChange(newName, resourceSet);
@@ -111,6 +115,7 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 		}
 	}
 
+	@Override
 	public void revertDeclarationChange(ResourceSet resourceSet) {
 		for(IRenameStrategy child: children)
 			child.revertDeclarationChange(resourceSet);
@@ -119,6 +124,7 @@ public class DispatchMethodRenameStrategy implements IInitializable {
 		}
 	}
 
+	@Override
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		for(IRenameStrategy child: children)

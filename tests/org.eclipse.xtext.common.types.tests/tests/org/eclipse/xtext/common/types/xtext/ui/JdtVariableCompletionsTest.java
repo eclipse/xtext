@@ -110,6 +110,7 @@ public class JdtVariableCompletionsTest extends Assert {
 	protected void assertContainsProposals(final Set<String> expected, final String typeName, final Set<String> excluded) {
 		final Set<String> result = newHashSet();
 		completions.internalGetVariableProposals(typeName, null, VariableType.INSTANCE_FIELD, excluded, new JdtVariableCompletions.CompletionDataAcceptor() {
+			@Override
 			public void accept(String replaceText, StyledString label, Image img) {
 				result.add(replaceText);
 			}

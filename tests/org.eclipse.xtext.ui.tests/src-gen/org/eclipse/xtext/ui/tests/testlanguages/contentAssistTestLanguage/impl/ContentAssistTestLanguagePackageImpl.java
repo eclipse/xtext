@@ -128,7 +128,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStart()
+  @Override
+public EClass getStart()
   {
     return startEClass;
   }
@@ -138,7 +139,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStart_Rules()
+  @Override
+public EReference getStart_Rules()
   {
     return (EReference)startEClass.getEStructuralFeatures().get(0);
   }
@@ -148,7 +150,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractRule()
+  @Override
+public EClass getAbstractRule()
   {
     return abstractRuleEClass;
   }
@@ -158,7 +161,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAbstractRule_Name()
+  @Override
+public EAttribute getAbstractRule_Name()
   {
     return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -168,7 +172,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFirstAbstractRuleChild()
+  @Override
+public EClass getFirstAbstractRuleChild()
   {
     return firstAbstractRuleChildEClass;
   }
@@ -178,7 +183,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFirstAbstractRuleChild_Elements()
+  @Override
+public EReference getFirstAbstractRuleChild_Elements()
   {
     return (EReference)firstAbstractRuleChildEClass.getEStructuralFeatures().get(0);
   }
@@ -188,7 +194,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSecondAbstractRuleChild()
+  @Override
+public EClass getSecondAbstractRuleChild()
   {
     return secondAbstractRuleChildEClass;
   }
@@ -198,7 +205,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSecondAbstractRuleChild_Rule()
+  @Override
+public EReference getSecondAbstractRuleChild_Rule()
   {
     return (EReference)secondAbstractRuleChildEClass.getEStructuralFeatures().get(0);
   }
@@ -208,7 +216,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractRuleCall()
+  @Override
+public EClass getAbstractRuleCall()
   {
     return abstractRuleCallEClass;
   }
@@ -218,7 +227,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAbstractRuleCall_Rule()
+  @Override
+public EReference getAbstractRuleCall_Rule()
   {
     return (EReference)abstractRuleCallEClass.getEStructuralFeatures().get(0);
   }
@@ -228,7 +238,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
+  @Override
+public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
   {
     return (ContentAssistTestLanguageFactory)getEFactoryInstance();
   }

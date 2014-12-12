@@ -33,6 +33,7 @@ public class JavaChangeQueueFiller implements IElementChangedListener {
 		this.deltaConverter = deltaConverter;
 	}
 	
+	@Override
 	public void elementChanged(ElementChangedEvent event) {
 		List<Delta> deltas = deltaConverter.convert(event.getDelta());
 		if (deltas != null && !deltas.isEmpty()) {

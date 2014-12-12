@@ -124,6 +124,7 @@ public class LineMappingProvider {
 	protected List<LineMapping> normalizeLineInfo(Set<LineMapping> lineData) {
 		ArrayList<LineMapping> list = newArrayList(lineData);
 		Collections.sort(list, new Comparator<LineMapping>() {
+			@Override
 			public int compare(LineMapping o1, LineMapping o2) {
 				int compareResult = o2.targetStartLine - o1.targetStartLine;
 				if (compareResult == 0) {

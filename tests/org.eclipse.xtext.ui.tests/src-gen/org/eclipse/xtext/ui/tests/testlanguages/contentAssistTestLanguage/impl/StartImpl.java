@@ -72,7 +72,8 @@ public class StartImpl extends MinimalEObjectImpl.Container implements Start
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractRule> getRules()
+  @Override
+public EList<AbstractRule> getRules()
   {
     if (rules == null)
     {

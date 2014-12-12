@@ -74,7 +74,8 @@ public class TAnnotationImpl extends MinimalEObjectImpl.Container implements TAn
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getDescription()
+  @Override
+public String getDescription()
   {
     return description;
   }
@@ -84,7 +85,8 @@ public class TAnnotationImpl extends MinimalEObjectImpl.Container implements TAn
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDescription(String newDescription)
+  @Override
+public void setDescription(String newDescription)
   {
     String oldDescription = description;
     description = newDescription;

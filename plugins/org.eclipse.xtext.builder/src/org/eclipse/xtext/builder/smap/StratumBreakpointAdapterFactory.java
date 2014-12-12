@@ -73,6 +73,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	@Inject
 	private XbaseBreakpointUtil breakpointUtil;
 
+	@Override
 	@SuppressWarnings({ "rawtypes" })
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adaptableObject instanceof XtextEditor) {
@@ -81,6 +82,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		return null;
 	}
 
+	@Override
 	public Class<?>[] getAdapterList() {
 		return new Class[] { IToggleBreakpointsTargetExtension.class };
 	}
@@ -94,6 +96,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		protected String classHandle;
 	}
 
+	@Override
 	public void toggleBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 		if (!(part instanceof XtextEditor) || !(selection instanceof ITextSelection)) {
 			return;
@@ -107,6 +110,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 			
 			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {
+				@Override
 				public Data exec(XtextResource state) throws Exception {
 					IResourceServiceProvider provider = state.getResourceServiceProvider();
 					IStratumBreakpointSupport breakpointSupport = provider.get(IStratumBreakpointSupport.class);
@@ -157,6 +161,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final IMarker marker = breakpoint.getMarker();
 			final IWorkspace ws = marker.getResource().getWorkspace();
 			IResourceChangeListener listener = new IResourceChangeListener() {
+				@Override
 				public void resourceChanged(IResourceChangeEvent event) {
 					if (!marker.exists())
 						ws.removeResourceChangeListener(this);
@@ -251,27 +256,34 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			return sb.substring(0, sb.length() - 1);
 	}
 
+	@Override
 	public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 	}
 
+	@Override
 	public boolean canToggleLineBreakpoints(IWorkbenchPart part, ISelection selection) {
 		return true;
 	}
 
+	@Override
 	public void toggleMethodBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 	}
 
+	@Override
 	public boolean canToggleMethodBreakpoints(IWorkbenchPart part, ISelection selection) {
 		return false;
 	}
 
+	@Override
 	public void toggleWatchpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 	}
 
+	@Override
 	public boolean canToggleWatchpoints(IWorkbenchPart part, ISelection selection) {
 		return false;
 	}
 
+	@Override
 	public boolean canToggleBreakpoints(IWorkbenchPart part, ISelection selection) {
 		return true;
 	}

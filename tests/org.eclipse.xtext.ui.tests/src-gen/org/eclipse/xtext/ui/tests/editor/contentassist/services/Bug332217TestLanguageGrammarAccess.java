@@ -25,6 +25,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	elements+=TableView*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=TableView*
@@ -45,6 +46,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//// common supertype to allow variableReferences
 		//PropertyPathPart:
 		//	Parameter | CollectionIterator;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Parameter | CollectionIterator
@@ -67,6 +69,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TypeDescription:
 		//	type=ID many?="[]"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//type=ID many?="[]"?
@@ -95,6 +98,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Parameter:
 		//	description=TypeDescription name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//description=TypeDescription name=ID
@@ -124,6 +128,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ObjectReference:
 		//	object=[PropertyPathPart] tail=NestedObjectReference?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//object=[PropertyPathPart] tail=NestedObjectReference?
@@ -161,6 +166,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		////     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
 		//NestedObjectReference returns ObjectReference:
 		//	"." object=[PropertyPathPart] tail=NestedObjectReference?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"." object=[PropertyPathPart] tail=NestedObjectReference?
@@ -197,6 +203,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		////TODO: could this be ScalarExpression | CollectionExpression? and simplify rootParameter extension
 		//Expression:
 		//	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference
@@ -224,6 +231,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ImageExpression returns ScalarExpression:
 		//	ScalarExpression;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ScalarExpression
@@ -239,6 +247,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ScalarExpression:
 		//	StringLiteral | StringFunction | ObjectReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//StringLiteral | StringFunction | ObjectReference
@@ -263,6 +272,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CollectionExpression:
 		//	CollectionLiteral | CollectionFunction | ObjectReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//CollectionLiteral | CollectionFunction | ObjectReference
@@ -285,6 +295,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//StringLiteral:
 		//	value=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=STRING
@@ -326,6 +337,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	{StringConcat} "(" values+=ScalarExpression+ ")" | {StringReplace} "replace(" value=ScalarExpression ","
 		//	match=ScalarExpression "," replacement=ScalarExpression ")" | {StringUrlConform} "urlconform(" value=ScalarExpression
 		//	")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{StringConcat} "(" values+=ScalarExpression+ ")" | {StringReplace} "replace(" value=ScalarExpression ","
@@ -420,6 +432,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CollectionLiteral:
 		//	"[" items+=ScalarExpression ("," items+=ScalarExpression)* "]";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"[" items+=ScalarExpression ("," items+=ScalarExpression)* "]"
@@ -464,6 +477,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CollectionFunction:
 		//	{StringSplit} "split(" value=ScalarExpression "," delimiter=ScalarExpression ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{StringSplit} "split(" value=ScalarExpression "," delimiter=ScalarExpression ")"
@@ -526,6 +540,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TableView:
 		//	"tableview" name=ID ("(" content=Parameter ")")? "{" (("title:" title=ScalarExpression)? & ("titleImage:"
 		//	titleImage=ImageExpression)? & ("style:" style=TableViewStyle)?) sections+=Section* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"tableview" name=ID ("(" content=Parameter ")")? "{" (("title:" title=ScalarExpression)? & ("titleImage:"
@@ -616,6 +631,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ViewContentElement:
 		//	Section | Cell;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Section | Cell
@@ -645,6 +661,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Section:
 		//	"section" iterator=CollectionIterator? "{" ("title:" title=ScalarExpression)? cells+=Cell+ "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"section" iterator=CollectionIterator? "{" ("title:" title=ScalarExpression)? cells+=Cell+ "}"
@@ -720,6 +737,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	"cell" type=CellType iterator=CollectionIterator? "{" (("text:" text=ScalarExpression)? & ("details:"
 		//	details=ScalarExpression)? & ("image:" image=ScalarExpression)? & ("action:" action=ViewAction)? & ("accessory:"
 		//	accessory=CellAccessory)?) "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"cell" type=CellType iterator=CollectionIterator? "{" (("text:" text=ScalarExpression)? & ("details:"
@@ -825,6 +843,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CollectionIterator:
 		//	"for" name=ID "in" collection=CollectionExpression;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"for" name=ID "in" collection=CollectionExpression
@@ -857,6 +876,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ViewAction:
 		//	ExternalOpen | Selector;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ExternalOpen | Selector
@@ -880,6 +900,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SelectorName:
 		//	ID (":" ID)* ":"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID (":" ID)* ":"?
@@ -912,6 +933,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Selector:
 		//	"@selector" "(" name=SelectorName ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"@selector" "(" name=SelectorName ")"
@@ -940,6 +962,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ExternalOpen:
 		//	url=ScalarExpression;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//url=ScalarExpression
@@ -962,6 +985,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//// views
 		//enum TableViewStyle:
 		//	Plain | Grouped;
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//Plain | Grouped
@@ -994,6 +1018,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum CellType:
 		//	default="Default" | value1="Value1" | value2="Value2" | subtitle="Subtitle";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//default="Default" | value1="Value1" | value2="Value2" | subtitle="Subtitle"
@@ -1038,6 +1063,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum CellAccessory:
 		//	None | Link | Detail | Check;
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//None | Link | Detail | Check
@@ -1149,6 +1175,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

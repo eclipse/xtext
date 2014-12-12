@@ -17,11 +17,13 @@ public class ReversedBidiIterable<T> implements BidiIterable<T> {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public BidiIterator<T> iterator() {
 		BidiIterator<T> delegate = getDelegate().iterator(); 
 		return new ReversedBidiIterator<T>(delegate);
 	}
 
+	@Override
 	public BidiIterable<T> reverse() {
 		return delegate;
 	}

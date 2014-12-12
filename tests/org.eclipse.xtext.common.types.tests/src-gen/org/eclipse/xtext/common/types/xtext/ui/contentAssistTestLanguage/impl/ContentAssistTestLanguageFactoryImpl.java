@@ -78,7 +78,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -89,7 +90,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceHolder createReferenceHolder()
+  @Override
+public ReferenceHolder createReferenceHolder()
   {
     ReferenceHolderImpl referenceHolder = new ReferenceHolderImpl();
     return referenceHolder;
@@ -100,7 +102,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public GenerateDirective createGenerateDirective()
+  @Override
+public GenerateDirective createGenerateDirective()
   {
     GenerateDirectiveImpl generateDirective = new GenerateDirectiveImpl();
     return generateDirective;
@@ -111,7 +114,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Import createImport()
+  @Override
+public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -122,7 +126,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
+  @Override
+public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
   {
     return (ContentAssistTestLanguagePackage)getEPackage();
   }

@@ -105,9 +105,11 @@ public class XtextReconciler extends Job implements IReconciler {
 
 		private volatile boolean sessionStarted = false;
 
+		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
 
+		@Override
 		public void documentChanged(DocumentEvent event) {
 			if (Display.getCurrent() == null) {
 				log.error("Changes to the document must only be applied from the Display thread to keep them ordered",
@@ -119,11 +121,13 @@ public class XtextReconciler extends Job implements IReconciler {
 		/**
 		 * @since 2.7
 		 */
+		@Override
 		public boolean performNecessaryUpdates(Processor processor) {
 			boolean hadUpdates = false;
 			try {
 				if (!pendingChanges.isEmpty()) {
 					hadUpdates = processor.process(new IUnitOfWork<Boolean, XtextResource>() {
+						@Override
 						public Boolean exec(XtextResource state) throws Exception {
 							return doRun(state, null);
 						}
@@ -142,19 +146,23 @@ public class XtextReconciler extends Job implements IReconciler {
 		/**
 		 * @since 2.7
 		 */
+		@Override
 		public boolean hasPendingUpdates() {
 			return !pendingChanges.isEmpty();
 		}
 
+		@Override
 		public void assistSessionStarted(ContentAssistEvent event) {
 			sessionStarted = true;
 		}
 
+		@Override
 		public void assistSessionEnded(ContentAssistEvent event) {
 			sessionStarted = false;
 			resume();
 		}
 
+		@Override
 		public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
 			// do nothing
 		}
@@ -166,10 +174,12 @@ public class XtextReconciler extends Job implements IReconciler {
 	 * initially opened, as well as after a save-as.
 	 */
 	protected class TextInputListener implements ITextInputListener {
+		@Override
 		public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 			// do nothing
 		}
 
+		@Override
 		public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 			handleInputDocumentChanged(oldInput, newInput);
 		}
@@ -188,6 +198,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		setReconcilingStrategy(strategy);
 	}
 
+	@Override
 	public IReconcilingStrategy getReconcilingStrategy(String contentType) {
 		return strategy;
 	}
@@ -196,6 +207,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		this.strategy = strategy;
 	}
 
+	@Override
 	public void install(ITextViewer textViewer) {
 		if (!isInstalled) {
 			this.textViewer = textViewer;
@@ -217,6 +229,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		}
 	}
 
+	@Override
 	public void uninstall() {
 		if (isInstalled) {
 			textViewer.removeTextInputListener(textInputListener);

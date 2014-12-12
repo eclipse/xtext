@@ -20,6 +20,7 @@ import com.google.common.collect.Lists;
 public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, STACKITEM>, String> {
 
 	protected static class ObjToStrFunction<OBJ> implements Function<OBJ, String> {
+		@Override
 		public String apply(OBJ from) {
 			return from == null ? "null" : from.toString();
 		}
@@ -36,6 +37,7 @@ public class PdaListFormatter<STATE, STACKITEM> implements Function<Pda<STATE, S
 		return this;
 	}
 
+	@Override
 	public String apply(Pda<STATE, STACKITEM> pda) {
 		return format(pda);
 	}

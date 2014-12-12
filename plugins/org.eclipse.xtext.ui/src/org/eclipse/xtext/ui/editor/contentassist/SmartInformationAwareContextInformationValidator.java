@@ -46,11 +46,13 @@ public class SmartInformationAwareContextInformationValidator implements IContex
 		fProcessor= processor;
 	}
 
+	@Override
 	public void install(IContextInformation contextInformation, ITextViewer viewer, int offset) {
 		fContextInformation= contextInformation;
 		fViewer= viewer;
 	}
 
+	@Override
 	public boolean isContextInformationValid(int offset) {
 		if (fContextInformation instanceof ISmartContextInformation) {
 			return ((ISmartContextInformation) fContextInformation).isContextInformationValid(fViewer, offset);
@@ -65,6 +67,7 @@ public class SmartInformationAwareContextInformationValidator implements IContex
 		}
 	}
 
+	@Override
 	public boolean updatePresentation(int offset, TextPresentation presentation) {
 		if (fContextInformation instanceof ISmartContextInformation) {
 			return ((ISmartContextInformation) fContextInformation).updatePresentation(fViewer, offset, presentation);

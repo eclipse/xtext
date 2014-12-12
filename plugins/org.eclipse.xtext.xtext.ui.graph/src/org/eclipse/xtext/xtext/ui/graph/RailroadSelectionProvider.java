@@ -48,14 +48,17 @@ public class RailroadSelectionProvider implements MouseListener, ISelectionProvi
 
 	private IFigure currentSelectedFigure;
 
+	@Override
 	public void mousePressed(MouseEvent me) {
 		setSelection(me, false);
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent me) {
 		// do nothing
 	}
 
+	@Override
 	public void mouseDoubleClicked(MouseEvent me) {
 		setSelection(me, true);
 	}
@@ -69,14 +72,17 @@ public class RailroadSelectionProvider implements MouseListener, ISelectionProvi
 		}
 	}
 
+	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionListeners.add(listener);
 	}
 
+	@Override
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		selectionListeners.remove(listener);
 	}
 
+	@Override
 	public ISelection getSelection() {
 		if (currentSelectedFigure != null)
 			return new StructuredSelection(currentSelectedFigure);
@@ -99,6 +105,7 @@ public class RailroadSelectionProvider implements MouseListener, ISelectionProvi
 			((ISelectionChangedListener) listener).selectionChanged(event);
 	}
 
+	@Override
 	public void setSelection(ISelection selection) {
 		setSelection(selection, false);
 	}

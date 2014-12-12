@@ -46,22 +46,27 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 	}
 
 
+	@Override
 	public int getIndexInList() {
 		return indexInList;
 	}
 
+	@Override
 	public URI getSourceEObjectUri() {
 		return sourceEObjectUri;
 	}
 
+	@Override
 	public URI getTargetEObjectUri() {
 		return targetEObjectUri;
 	}
 
+	@Override
 	public EReference getEReference() {
 		return eReference;
 	}
 
+	@Override
 	public URI getContainerEObjectURI() {
 		return containerEObjectURI;
 	}

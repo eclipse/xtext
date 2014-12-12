@@ -118,7 +118,8 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getSelfName()
+  @Override
+public String getSelfName()
   {
     return selfName;
   }
@@ -128,7 +129,8 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSelfName(String newSelfName)
+  @Override
+public void setSelfName(String newSelfName)
   {
     String oldSelfName = selfName;
     selfName = newSelfName;
@@ -141,7 +143,8 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  public ClassifierRef getClassifier()
+  @Override
+public ClassifierRef getClassifier()
   {
     return classifier;
   }
@@ -168,7 +171,8 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setClassifier(ClassifierRef newClassifier)
+  @Override
+public void setClassifier(ClassifierRef newClassifier)
   {
     if (newClassifier != classifier)
     {
@@ -189,7 +193,8 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Invariant> getInvariants()
+  @Override
+public EList<Invariant> getInvariants()
   {
     if (invariants == null)
     {
@@ -203,7 +208,8 @@ public class ClassifierContextDeclImpl extends ContextDeclImpl implements Classi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Definition> getDefinitions()
+  @Override
+public EList<Definition> getDefinitions()
   {
     if (definitions == null)
     {

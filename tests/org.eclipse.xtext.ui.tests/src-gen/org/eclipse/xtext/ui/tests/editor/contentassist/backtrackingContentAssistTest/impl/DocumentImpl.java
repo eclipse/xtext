@@ -84,7 +84,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PackageDeclaration> getPackages()
+  @Override
+public EList<PackageDeclaration> getPackages()
   {
     if (packages == null)
     {
@@ -98,7 +99,8 @@ public class DocumentImpl extends MinimalEObjectImpl.Container implements Docume
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ContextDecl> getContexts()
+  @Override
+public EList<ContextDecl> getContexts()
   {
     if (contexts == null)
     {

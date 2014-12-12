@@ -107,10 +107,12 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 		wasCurrentOffset = -1;
 	}
 
+	@Override
 	public void pushTemplateIndentation(CharSequence completeIndentation) {
 		pushIndentation(completeIndentation);
 	}
 
+	@Override
 	public void pushSemanticIndentation(CharSequence completeIndentation) {
 		pushIndentation(completeIndentation);
 	}
@@ -128,10 +130,12 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 		}
 	}
 
+	@Override
 	public void popIndentation() {
 		indentationStack.removeLast();
 	}
 
+	@Override
 	public void accept(IRichStringPartAcceptor acceptor) {
 		if (indentationStack.isEmpty())
 			return;
@@ -155,10 +159,12 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 		currentOffset+=indentation.length();
 	}
 
+	@Override
 	public CharSequence getTotalSemanticIndentation() {
 		return "";
 	}
 	
+	@Override
 	public CharSequence getTotalIndentation() {
 		if (indentationStack.isEmpty())
 			return "";

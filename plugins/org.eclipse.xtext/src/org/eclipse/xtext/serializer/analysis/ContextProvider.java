@@ -59,6 +59,7 @@ public class ContextProvider implements IContextProvider {
 				collectTypesForContext(t.getTarget(), types, true, hasAssignment, visited);
 	}
 
+	@Override
 	public List<EObject> getAllContexts(Grammar grammar) {
 		List<EObject> result = Lists.newArrayList();
 		for (ParserRule pr : GrammarUtil.allParserRules(grammar))
@@ -71,6 +72,7 @@ public class ContextProvider implements IContextProvider {
 		return result;
 	}
 
+	@Override
 	public Set<EClass> getTypesForContext(EObject context) {
 		Set<EClass> result = Sets.newHashSet();
 		if (context instanceof AbstractElement) {

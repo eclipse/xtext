@@ -25,6 +25,7 @@ public class HiddenRegionFormattingMerger implements IMerger<IHiddenRegionFormat
 		this.formatter = formatter;
 	}
 
+	@Override
 	public IHiddenRegionFormatting merge(List<? extends IHiddenRegionFormatting> conflicting) {
 		if (conflicting.size() == 2) {
 			// TODO: don't do this

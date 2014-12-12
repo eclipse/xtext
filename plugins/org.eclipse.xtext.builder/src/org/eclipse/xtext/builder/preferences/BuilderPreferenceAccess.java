@@ -45,6 +45,7 @@ public class BuilderPreferenceAccess {
 			this.outputConfigurationProvider = outputConfigurationProvider;
 		}
 
+		@Override
 		public void initialize(IPreferenceStoreAccess preferenceStoreAccess) {
 			IPreferenceStore store = preferenceStoreAccess.getWritablePreferenceStore();
 			intializeBuilderPreferences(store);

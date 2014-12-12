@@ -50,6 +50,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//State:
 		//	{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
 		//	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
@@ -148,6 +149,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum StateType:
 		//	NORMAL | PSEUDO="cond" | REFERENCE="reference" | TEXTUAL="textual";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//NORMAL | PSEUDO="cond" | REFERENCE="reference" | TEXTUAL="textual"
@@ -211,6 +213,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

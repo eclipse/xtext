@@ -65,6 +65,7 @@ public class NodeModelBuilder {
 
 		private Map<ArrayAsList<T>, T[]> map = Maps.newHashMap();
 
+		@Override
 		public /* @Nullable */ T[] intern(/* @Nullable */ T[] sample) {
 			ArrayAsList<T> key = new ArrayAsList<T>(sample);
 			T[] canonical = map.get(key);

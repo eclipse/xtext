@@ -73,7 +73,8 @@ public class SimpleClassifierRefImpl extends ClassifierRefImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getClassifier()
+  @Override
+public String getClassifier()
   {
     return classifier;
   }
@@ -83,7 +84,8 @@ public class SimpleClassifierRefImpl extends ClassifierRefImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setClassifier(String newClassifier)
+  @Override
+public void setClassifier(String newClassifier)
   {
     String oldClassifier = classifier;
     classifier = newClassifier;

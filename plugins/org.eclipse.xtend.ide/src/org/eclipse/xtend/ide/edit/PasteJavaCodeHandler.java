@@ -50,6 +50,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 	@Inject
 	private ReplaceConverter replaceConverter;
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		final XtextEditor activeXtextEditor = EditorUtils.getActiveXtextEditor(event);
 		if (activeXtextEditor == null) {
@@ -73,6 +74,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			if (javaImports != null) {
 				String imports = Strings.toString(Arrays.asList(javaImports.getImports()),
 						new Function<String, String>() {
+							@Override
 							public String apply(String input) {
 								return "import " + input + ";";
 							}
@@ -111,6 +113,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 
 	private void addImports(final JavaImportData javaImports, final IXtextDocument xtextDocument) {
 		List<ReplaceRegion> result = xtextDocument.modify(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
+			@Override
 			public List<ReplaceRegion> exec(XtextResource state) throws Exception {
 				RewritableImportSection impSection = importSectionFactory.parse(state);
 				for (String javaImport : javaImports.getImports()) {

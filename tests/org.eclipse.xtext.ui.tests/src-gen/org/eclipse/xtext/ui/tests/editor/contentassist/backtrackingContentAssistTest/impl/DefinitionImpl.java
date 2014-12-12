@@ -161,7 +161,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isStatic()
+  @Override
+public boolean isStatic()
   {
     return static_;
   }
@@ -171,7 +172,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStatic(boolean newStatic)
+  @Override
+public void setStatic(boolean newStatic)
   {
     boolean oldStatic = static_;
     static_ = newStatic;
@@ -184,7 +186,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getConstraintName()
+  @Override
+public String getConstraintName()
   {
     return constraintName;
   }
@@ -194,7 +197,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstraintName(String newConstraintName)
+  @Override
+public void setConstraintName(String newConstraintName)
   {
     String oldConstraintName = constraintName;
     constraintName = newConstraintName;
@@ -207,7 +211,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getConstrainedName()
+  @Override
+public String getConstrainedName()
   {
     return constrainedName;
   }
@@ -217,7 +222,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstrainedName(String newConstrainedName)
+  @Override
+public void setConstrainedName(String newConstrainedName)
   {
     String oldConstrainedName = constrainedName;
     constrainedName = newConstrainedName;
@@ -230,7 +236,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Parameter> getParameters()
+  @Override
+public EList<Parameter> getParameters()
   {
     if (parameters == null)
     {
@@ -244,7 +251,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeExp getType()
+  @Override
+public TypeExp getType()
   {
     return type;
   }
@@ -271,7 +279,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeExp newType)
+  @Override
+public void setType(TypeExp newType)
   {
     if (newType != type)
     {
@@ -292,7 +301,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return expression;
   }
@@ -319,7 +329,8 @@ public class DefinitionImpl extends MinimalEObjectImpl.Container implements Defi
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  @Override
+public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

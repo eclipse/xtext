@@ -117,7 +117,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -128,7 +129,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Alternative createAlternative()
+  @Override
+public Alternative createAlternative()
   {
     AlternativeImpl alternative = new AlternativeImpl();
     return alternative;
@@ -139,7 +141,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public RecursiveClassDeclaration createRecursiveClassDeclaration()
+  @Override
+public RecursiveClassDeclaration createRecursiveClassDeclaration()
   {
     RecursiveClassDeclarationImpl recursiveClassDeclaration = new RecursiveClassDeclarationImpl();
     return recursiveClassDeclaration;
@@ -150,7 +153,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Modifiers createModifiers()
+  @Override
+public Modifiers createModifiers()
   {
     ModifiersImpl modifiers = new ModifiersImpl();
     return modifiers;
@@ -161,7 +165,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Unordered createUnordered()
+  @Override
+public Unordered createUnordered()
   {
     UnorderedImpl unordered = new UnorderedImpl();
     return unordered;
@@ -172,7 +177,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleClassDeclaration createSimpleClassDeclaration()
+  @Override
+public SimpleClassDeclaration createSimpleClassDeclaration()
   {
     SimpleClassDeclarationImpl simpleClassDeclaration = new SimpleClassDeclarationImpl();
     return simpleClassDeclaration;
@@ -183,7 +189,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ClassMember createClassMember()
+  @Override
+public ClassMember createClassMember()
   {
     ClassMemberImpl classMember = new ClassMemberImpl();
     return classMember;
@@ -194,7 +201,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnorderedModifiers createUnorderedModifiers()
+  @Override
+public UnorderedModifiers createUnorderedModifiers()
   {
     UnorderedModifiersImpl unorderedModifiers = new UnorderedModifiersImpl();
     return unorderedModifiers;
@@ -227,7 +235,8 @@ public class Bug360834TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug360834TestLanguagePackage getBug360834TestLanguagePackage()
+  @Override
+public Bug360834TestLanguagePackage getBug360834TestLanguagePackage()
   {
     return (Bug360834TestLanguagePackage)getEPackage();
   }

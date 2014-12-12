@@ -117,6 +117,7 @@ public class SharedStateModule extends AbstractGenericModule {
 
 	public Provider<IWorkspace> provideIWorkspace() {
 		return new Provider<IWorkspace>() {
+			@Override
 			public IWorkspace get() {
 				return ResourcesPlugin.getWorkspace();
 			}
@@ -126,6 +127,7 @@ public class SharedStateModule extends AbstractGenericModule {
 	public void configureIWorkbench(Binder binder) {
 		if (PlatformUI.isWorkbenchRunning()) {
 			binder.bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
+				@Override
 				public IWorkbench get() {
 					return (PlatformUI.isWorkbenchRunning()) ? PlatformUI.getWorkbench() : null;
 				}

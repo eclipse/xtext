@@ -31,6 +31,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	/* @Nullable */
 	private IContainer.Manager containerManager;
 	
+	@Override
 	public IContainer.Manager getContainerManager() {
 		return containerManager;
 	}
@@ -38,6 +39,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private IResourceDescription.Manager resourceDescriptionManager;
 
+	@Override
 	public IResourceDescription.Manager getResourceDescriptionManager() {
 		return resourceDescriptionManager;
 	}
@@ -46,6 +48,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	/* @Nullable */
 	private IResourceValidator resourceValidator = IResourceValidator.NULL;
 
+	@Override
 	public IResourceValidator getResourceValidator() {
 		return resourceValidator;
 	}
@@ -53,6 +56,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
 	
+	@Override
 	public boolean canHandle(URI uri) {
 		return fileExtensionProvider.isValid(uri.fileExtension());
 	}
@@ -60,6 +64,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private IEncodingProvider encodingProvider;
 	
+	@Override
 	public IEncodingProvider getEncodingProvider() {
 		return encodingProvider;
 	}
@@ -67,6 +72,7 @@ public class GenericResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private Injector injector;
 	
+	@Override
 	public <T> T get(Class<T> t) {
 		try {
 			return injector.getInstance(t);

@@ -246,11 +246,13 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 				"}");
 		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
 		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation input) {
 				return equal("foo", input.getSimpleName());
 			}
 		});
 		Iterable<String> exceptionTypeNames = transform(dispatcher.getExceptions(), new Function<JvmTypeReference, String>() {
+			@Override
 			public String apply(JvmTypeReference input) {
 				return input.getQualifiedName();
 			}
@@ -267,6 +269,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 				"}");
 		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
 		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation input) {
 				return equal("foo", input.getSimpleName());
 			}
@@ -282,6 +285,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 			"}\n");
 		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
 		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation input) {
 				return equal("foo", input.getSimpleName());
 			}
@@ -300,6 +304,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 			"}\n");
 		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
 		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation input) {
 				return equal("infer", input.getSimpleName());
 			}
@@ -504,6 +509,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 
 	protected JvmOperation findByNameAndFirstParameterType(Iterable<JvmOperation> operations, final String name, final Class<?> paramType) {
 		return find(operations, new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals(name)
 					&& input.getParameters().get(0).getParameterType().getIdentifier().equals(paramType.getName());

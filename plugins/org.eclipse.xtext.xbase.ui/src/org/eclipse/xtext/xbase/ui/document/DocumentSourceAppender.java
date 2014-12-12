@@ -169,6 +169,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 		return lineSeparator;
 	}
 
+	@Override
 	public boolean isJava() {
 		return isJava;
 	}
@@ -181,6 +182,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 		return importSection;
 	}
 
+	@Override
 	public ISourceAppender append(JvmType type) {
 		appendType(type, builder);
 		return this;
@@ -224,6 +226,7 @@ public class DocumentSourceAppender implements ISourceAppender {
 		return '.';
 	}
 
+	@Override
 	public ISourceAppender append(LightweightTypeReference typeRef) {
 		typeRef.accept(lightweightTypeReferenceSerializer);
 		return this;
@@ -248,22 +251,26 @@ public class DocumentSourceAppender implements ISourceAppender {
 		return sb.toString();
 	}
 
+	@Override
 	public ISourceAppender append(CharSequence string) {
 		String replaced = string.toString().replace(lineSeparator, getIndentationString());
 		builder.append(replaced);
 		return this;
 	}
 	
+	@Override
 	public ISourceAppender newLine() {
 		builder.append(getIndentationString());
 		return this;
 	}
 
+	@Override
 	public ISourceAppender increaseIndentation() {
 		currentIndentLevel++;
 		return this;
 	}
 
+	@Override
 	public ISourceAppender decreaseIndentation() {
 		if (currentIndentLevel == 0)
 			throw new IllegalStateException("Can't reduce indentation level. It's already zero.");

@@ -95,7 +95,8 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringOperator getOperator()
+  @Override
+public StringOperator getOperator()
   {
     return operator;
   }
@@ -105,7 +106,8 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(StringOperator newOperator)
+  @Override
+public void setOperator(StringOperator newOperator)
   {
     StringOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -118,7 +120,8 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getPattern()
+  @Override
+public String getPattern()
   {
     return pattern;
   }
@@ -128,7 +131,8 @@ public class StringAttributeWhereEntryImpl extends AttributeWhereEntryImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPattern(String newPattern)
+  @Override
+public void setPattern(String newPattern)
   {
     String oldPattern = pattern;
     pattern = newPattern;

@@ -26,6 +26,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//NamedElement:
 		//	Namespace | Element;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Namespace | Element
@@ -53,6 +54,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//Namespace:
 		//	"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}"
@@ -95,6 +97,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//Import:
 		//	"import" importedNamespace=QualifiedName;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=QualifiedName
@@ -135,6 +138,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Element:
 		//	"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName]
 		//	("," otherRefs+=[Element|QualifiedName])*)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName] (","
@@ -206,6 +210,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//QualifiedName:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -264,6 +269,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

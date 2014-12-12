@@ -49,6 +49,7 @@ public class DelegatingContentAssistContextFactory extends AbstractContentAssist
 		return pool;
 	}
 	
+	@Override
 	public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
 		StatefulFactory factory = getStatefulFactoryProvider().get();
 		factory.setPool(pool);
@@ -105,22 +106,27 @@ public class DelegatingContentAssistContextFactory extends AbstractContentAssist
 				this.selection = selection;
 			}
 
+			@Override
 			public int getOffset() {
 				return selection.getOffset();
 			}
 
+			@Override
 			public int getLength() {
 				return selection.getLength();
 			}
 
+			@Override
 			public ITextRegion merge(ITextRegion region) {
 				throw new UnsupportedOperationException();
 			}
 
+			@Override
 			public boolean contains(ITextRegion other) {
 				throw new UnsupportedOperationException();
 			}
 
+			@Override
 			public boolean contains(int offset) {
 				throw new UnsupportedOperationException();
 			}

@@ -82,7 +82,8 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getReferencedAdvice()
+  @Override
+public EList<String> getReferencedAdvice()
   {
     if (referencedAdvice == null)
     {
@@ -96,7 +97,8 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getFuncExpr()
+  @Override
+public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -123,7 +125,8 @@ public class WithExpressionImpl extends ExpressionImpl implements WithExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFuncExpr(Expression newFuncExpr)
+  @Override
+public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {

@@ -46,6 +46,7 @@ public class AssignmentQuantityIntervalProvider implements IAssignmentQuantityIn
 		}
 	}
 
+	@Override
 	public int getMax(IQuantities ctx, ISyntaxConstraint ass, Set<ISyntaxConstraint> involved, String excludeFeature) {
 		int c = ass.isRoot() ? 1 : getMaxByParent(ctx, ass.getContainer(), ass, excludeFeature, involved);
 		return ass.isMultiple() && c > 0 ? MAX : c;
@@ -121,6 +122,7 @@ public class AssignmentQuantityIntervalProvider implements IAssignmentQuantityIn
 		}
 	}
 
+	@Override
 	public int getMin(IQuantities ctx, ISyntaxConstraint assignment, Set<ISyntaxConstraint> involved) {
 		if (assignment.isOptional())
 			return 0;

@@ -19,6 +19,7 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 
 	private boolean computing = false;
 
+	@Override
 	public final JvmTypeReference getTypeReference(/* @NonNull */ XComputedTypeReferenceImplCustom context) {
 		if (computing)
 			return handleReentrantInvocation(context);

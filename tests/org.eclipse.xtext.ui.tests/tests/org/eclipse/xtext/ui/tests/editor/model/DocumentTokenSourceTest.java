@@ -37,6 +37,7 @@ public class DocumentTokenSourceTest extends Assert {
 	public void setUp() throws Exception {
 		tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
+			@Override
 			public Lexer get() {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}
@@ -44,10 +45,12 @@ public class DocumentTokenSourceTest extends Assert {
 		document = new Document("");
 		document.addDocumentListener(new IDocumentListener() {
 			
+			@Override
 			public void documentChanged(DocumentEvent event) {
 				tokenSource.updateStructure(event);
 			}
 			
+			@Override
 			public void documentAboutToBeChanged(DocumentEvent event) {
 			}
 		});

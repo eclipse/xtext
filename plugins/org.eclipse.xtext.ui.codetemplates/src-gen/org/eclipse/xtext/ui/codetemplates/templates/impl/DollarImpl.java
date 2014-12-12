@@ -72,7 +72,8 @@ public class DollarImpl extends TemplatePartImpl implements Dollar
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isEscaped()
+  @Override
+public boolean isEscaped()
   {
     return escaped;
   }
@@ -82,7 +83,8 @@ public class DollarImpl extends TemplatePartImpl implements Dollar
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setEscaped(boolean newEscaped)
+  @Override
+public void setEscaped(boolean newEscaped)
   {
     boolean oldEscaped = escaped;
     escaped = newEscaped;

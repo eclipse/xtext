@@ -111,6 +111,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getA() {
 		return aEClass;
 	}
@@ -120,6 +121,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getA_A() {
 		return (EReference)aEClass.getEStructuralFeatures().get(0);
 	}
@@ -129,6 +131,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getA_B() {
 		return (EReference)aEClass.getEStructuralFeatures().get(1);
 	}
@@ -138,6 +141,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getA_Name() {
 		return (EAttribute)aEClass.getEStructuralFeatures().get(2);
 	}
@@ -147,6 +151,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getB() {
 		return bEClass;
 	}
@@ -156,6 +161,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getB_Name() {
 		return (EAttribute)bEClass.getEStructuralFeatures().get(0);
 	}
@@ -165,6 +171,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getB_B() {
 		return (EReference)bEClass.getEStructuralFeatures().get(1);
 	}
@@ -174,6 +181,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getroot() {
 		return rootEClass;
 	}
@@ -183,6 +191,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getroot_A() {
 		return (EReference)rootEClass.getEStructuralFeatures().get(0);
 	}
@@ -192,6 +201,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplestructureFactory getSimplestructureFactory() {
 		return (SimplestructureFactory)getEFactoryInstance();
 	}

@@ -152,6 +152,7 @@ public class ReaderTest extends AbstractReaderTest {
 	
 	protected Predicate<EObject> getPredicate(final String uriContains) {
 		return new Predicate<EObject>() {
+			@Override
 			public boolean apply(EObject input) {
 				return input.eResource().getURI().toString().contains("folder%20"+uriContains);
 			}

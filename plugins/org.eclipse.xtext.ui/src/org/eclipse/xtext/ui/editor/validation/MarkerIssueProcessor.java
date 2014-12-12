@@ -51,6 +51,7 @@ public class MarkerIssueProcessor implements IValidationIssueProcessor {
 		this.markerTypeProvider = markerTypeProvider;
 	}
 
+	@Override
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 		try {
 			new AddMarkersOperation(resource, issues, ImmutableSet.of(MarkerTypes.FAST_VALIDATION,

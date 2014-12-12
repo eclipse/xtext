@@ -72,6 +72,7 @@ public class rootImpl extends EObjectImpl implements root {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<A> getA() {
 		if (a == null) {
 			a = new EObjectContainmentEList<A>(A.class, this, SimplestructurePackage.ROOT__A);

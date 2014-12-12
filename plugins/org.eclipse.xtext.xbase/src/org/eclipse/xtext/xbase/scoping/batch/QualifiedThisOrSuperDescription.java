@@ -26,10 +26,12 @@ public class QualifiedThisOrSuperDescription extends BucketedEObjectDescription 
 		this.receiver = receiver;
 	}
 
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 
+	@Override
 	public boolean isExtension() {
 		return false;
 	}

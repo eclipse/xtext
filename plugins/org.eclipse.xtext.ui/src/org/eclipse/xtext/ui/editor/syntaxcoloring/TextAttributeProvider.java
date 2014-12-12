@@ -48,6 +48,7 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 		attributes.clear();
 		if (Display.getCurrent() == null) {
 			Display.getDefault().asyncExec(new Runnable() {
+				@Override
 				public void run() {
 					highlightingConfig.configure(TextAttributeProvider.this);		
 				}
@@ -57,10 +58,12 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 		}
 	}
 	
+	@Override
 	public TextAttribute getAttribute(String id) {
 		return attributes.get(id);
 	}
 	
+	@Override
 	public TextAttribute getMergedAttributes(String[] ids) {
 		if (ids.length < 2)
 			throw new IllegalStateException();
@@ -100,10 +103,12 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 		return "$$$Merged:" + Strings.concat("/", Arrays.asList(ids)) + "$$$";
 	}
 
+	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		initialize();
 	}
 
+	@Override
 	public void acceptDefaultHighlighting(String id, String name, TextStyle style) {
 		if (this.attributes.put(id, createTextAttribute(id, style)) != null)
 			throw new IllegalStateException("Id '" + id + "' has been used twice.");

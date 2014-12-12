@@ -26,6 +26,7 @@ public class DebugHiddenTokenHandler implements IHiddenTokenHandler {
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public IHiddenTokenState replaceHiddenTokens(ITerminalConsumer... consumers) {
 		if (log.isDebugEnabled()) {
 			log.debug("replaceHiddenTokens(" + Arrays.toString(consumers) + ")");
@@ -45,6 +46,7 @@ public class DebugHiddenTokenHandler implements IHiddenTokenHandler {
 			this.delegate = delegate;
 		}
 		
+		@Override
 		public void restore() {
 			if (log.isDebugEnabled()) {
 				log.debug("restore(" + delegate + ")");

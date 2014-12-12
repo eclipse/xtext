@@ -41,12 +41,14 @@ public class DelegatingReferenceFinder implements IReferenceFinder, IReferenceFi
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
+	@Override
 	public void findReferences(Set<URI> targetURIs, IResourceDescription resourceDescription,
 			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor,
 			ILocalResourceAccess localResourceAccess) {
 		delegate.findReferences(converter.fromIterable(targetURIs), resourceDescription, localResourceAccess, toAcceptor(acceptor), monitor);
 	}
 
+	@Override
 	public void findReferences(Iterable<URI> targetURIs, Iterable<URI> sourceResourceURIs,
 			ILocalResourceAccess localResourceAccess, IAcceptor<IReferenceDescription> acceptor,
 			IProgressMonitor monitor) {
@@ -54,6 +56,7 @@ public class DelegatingReferenceFinder implements IReferenceFinder, IReferenceFi
 		delegate.findReferences(converter.fromIterable(targetURIs), asSet, localResourceAccess, indexData, toAcceptor(acceptor), monitor);
 	}
 
+	@Override
 	public void findAllReferences(Iterable<URI> targetURIs, ILocalResourceAccess localResourceAccess,
 			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		delegate.findAllReferences(converter.fromIterable(targetURIs), localResourceAccess, indexData, toAcceptor(acceptor), monitor);

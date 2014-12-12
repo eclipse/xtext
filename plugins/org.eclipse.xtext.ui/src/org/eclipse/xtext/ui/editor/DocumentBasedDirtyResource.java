@@ -74,8 +74,10 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	 * This allows for lazy resolution of proxies instead of eager copying.
 	 * @return the current resource description of the associated document. May be <code>null</code>.
 	 */
+	@Override
 	public IResourceDescription get() {
 		IResourceDescription result = document.readOnly(new IUnitOfWork<IResourceDescription, XtextResource>() {
+			@Override
 			public IResourceDescription exec(XtextResource resource) {
 				if (resource != null) {
 					IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
@@ -108,6 +110,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		return description != null;
 	}
 	
+	@Override
 	public URI getURI() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
@@ -116,6 +119,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		return description.getURI();
 	}
 	
+	@Override
 	public synchronized IResourceDescription getDescription() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is not connected to a document");
@@ -124,6 +128,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		return description;
 	}
 
+	@Override
 	public synchronized String getContents() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is not connected to a document");
@@ -132,6 +137,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		return content;
 	}
 	
+	@Override
 	public String getActualContents() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getActualContents if this dirty resource is not connected to a document");
@@ -141,6 +147,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public URI getNormalizedURI() {
 		return normalizedUri;
 	}

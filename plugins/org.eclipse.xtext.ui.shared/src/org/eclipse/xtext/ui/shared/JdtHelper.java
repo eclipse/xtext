@@ -47,12 +47,14 @@ public class JdtHelper implements IJdtHelper {
 		return Activator.isJavaEnabled();
 	}
 
+	@Override
 	public boolean isJavaCoreAvailable() {
 		return javaCoreAvailable;
 	}
 	
 	// TODO consider caching the output path's per project
 	// TODO have a more detailed look at other clients of #getOutputLocation to get the corner cases right
+	@Override
 	public boolean isFromOutputPath(IResource resource) {
 		IProject project = resource.getProject();
 		IJavaProject javaProject = JavaCore.create(project);

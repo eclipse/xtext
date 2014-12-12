@@ -230,6 +230,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			private TreeIterator<EObject> it = null;
 			private int index = 0;
 
+			@Override
 			public void prune() {
 				switch (index) {
 					case 0:
@@ -243,6 +244,7 @@ public class EcoreUtil2 extends EcoreUtil {
 				}
 			}
 
+			@Override
 			public boolean hasNext() {
 				if (index == 0)
 					return true;
@@ -251,6 +253,7 @@ public class EcoreUtil2 extends EcoreUtil {
 				return false;
 			}
 
+			@Override
 			public EObject next() {
 				if (index++ == 0) {
 					it = obj.eAllContents();
@@ -261,6 +264,7 @@ public class EcoreUtil2 extends EcoreUtil {
 				return null;
 			}
 
+			@Override
 			public void remove() {
 				if (index == 0)
 					EcoreUtil.remove(obj);
@@ -272,6 +276,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	
 	public static Iterable<EObject> eAllContents(final EObject n) {
 		return new Iterable<EObject>() {
+			@Override
 			public Iterator<EObject> iterator() {
 				return eAll(n);
 			}
@@ -361,6 +366,7 @@ public class EcoreUtil2 extends EcoreUtil {
 
 	private static class EClassTypeHierarchyComparator implements Comparator<EClass> {
 
+		@Override
 		public int compare(EClass classA, EClass classB) {
 			if (classA.getEAllSuperTypes().contains(classB))
 				return -1;

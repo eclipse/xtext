@@ -33,6 +33,7 @@ public class TypeAwareReferenceProposalCreator extends ReferenceProposalCreator 
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(model, reference))) {
 			return new Function<IEObjectDescription, ICompletionProposal>() {
 	
+				@Override
 				public ICompletionProposal apply(IEObjectDescription from) {
 					ICompletionProposal result = proposalFactory.apply(from);
 					if (result instanceof ConfigurableCompletionProposal) {

@@ -57,6 +57,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		this.helper = helper;
 	}
 	
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}
@@ -143,6 +144,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		return getFeatureCall().getActualArguments();
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return getExpression();
 	}
@@ -325,6 +327,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		return helper.getSyntacticArguments(getFeatureCall());
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return getFeatureCall().isExtension();
 	}
@@ -334,6 +337,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		return !isStatic();
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return getFeatureCall().isStatic();
 	}

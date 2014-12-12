@@ -136,6 +136,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 				Collection<Resource> affectedResources = document.readOnly(
 						new IUnitOfWork<Collection<Resource>, XtextResource>() {
 					
+							@Override
 							public Collection<Resource> exec(XtextResource resource) throws Exception {
 								if (resource == null || resource.getResourceSet() == null) {
 									return null;
@@ -216,6 +217,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	
 	public static class InteractiveConcurrentEditingQuestion implements IConcurrentEditingCallback {
 
+		@Override
 		public boolean isConcurrentEditingIgnored(IDirtyStateEditorSupportClient client) {
 			String title = Messages.DirtyStateEditorSupport_ConcurrentChangeDialog_Title;
 			String message = Messages.DirtyStateEditorSupport_ConcurrentChangeDialog_Message;
@@ -260,18 +262,22 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 */
 	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension {
 
+		@Override
 		public String getContents() {
 			return dirtyResource.getContents();
 		}
 
+		@Override
 		public String getActualContents() {
 			return dirtyResource.getActualContents();
 		}
 
+		@Override
 		public IResourceDescription getDescription() {
 			return dirtyResource.getDescription();
 		}
 
+		@Override
 		public URI getURI() {
 			return dirtyResource.getURI();
 		}
@@ -284,6 +290,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			markEditorClean(currentClient);
 		}
 
+		@Override
 		public URI getNormalizedURI() {
 			return dirtyResource.getNormalizedURI();
 		}
@@ -343,6 +350,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		}
 	}
 
+	@Override
 	public void verifyText(VerifyEvent e) {
 		if (isDirty || !e.doit)
 			return;
@@ -421,6 +429,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			dirtyResource.copyState(cleanDescription);
 	}
 	
+	@Override
 	public void descriptionsChanged(final IResourceDescription.Event event) {
 		if (!getDirtyResource().isInitialized())
 			return;

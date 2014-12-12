@@ -24,15 +24,18 @@ public class RootTypeExpectation extends AbstractRootTypeExpectation {
 		this.reference = reference;
 	}
 	
+	@Override
 	public boolean isNoTypeExpectation() {
 		return false;
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType() {
 		return reference;
 	}
 
+	@Override
 	public ITypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return new RootTypeExpectation(reference.copyInto(referenceOwner), getState());
 	}

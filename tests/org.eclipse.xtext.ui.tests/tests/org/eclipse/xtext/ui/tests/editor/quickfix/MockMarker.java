@@ -44,40 +44,49 @@ final class MockMarker implements IMarker {
 		this.attributes = attributes;
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
 		return null;
 	}
 
+	@Override
 	public void setAttributes(String[] attributeNames, Object[] values) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public void setAttributes(Map attributes) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setAttribute(String attributeName, boolean value) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setAttribute(String attributeName, Object value) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setAttribute(String attributeName, int value) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean isSubtypeOf(String superType) throws CoreException {
 		return true;
 	}
 
+	@Override
 	public String getType() throws CoreException {
 		return type;
 	}
 
+	@Override
 	public IResource getResource() {
 		return resource;
 	}
@@ -86,46 +95,56 @@ final class MockMarker implements IMarker {
 		return context;
 	}
 
+	@Override
 	public long getId() {
 		return 0;
 	}
 
+	@Override
 	public long getCreationTime() throws CoreException {
 		return 0;
 	}
 
+	@Override
 	public Object[] getAttributes(String[] attributeNames) throws CoreException {
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Map getAttributes() throws CoreException {
 		return attributes;
 	}
 
+	@Override
 	public boolean getAttribute(String attributeName, boolean defaultValue) {
 		Object result = attributes.get(attributeName);
 		return result == null ? defaultValue : (Boolean) result;
 	}
 
+	@Override
 	public String getAttribute(String attributeName, String defaultValue) {
 		Object result = attributes.get(attributeName);
 		return result == null ? defaultValue : (String) result;
 	}
 
+	@Override
 	public int getAttribute(String attributeName, int defaultValue) {
 		Object result = attributes.get(attributeName);
 		return result == null ? defaultValue : (Integer) result;
 	}
 
+	@Override
 	public Object getAttribute(String attributeName) throws CoreException {
 		return attributes.get(attributeName);
 	}
 
+	@Override
 	public boolean exists() {
 		return true;
 	}
 
+	@Override
 	public void delete() throws CoreException {
 		throw new UnsupportedOperationException();
 	}

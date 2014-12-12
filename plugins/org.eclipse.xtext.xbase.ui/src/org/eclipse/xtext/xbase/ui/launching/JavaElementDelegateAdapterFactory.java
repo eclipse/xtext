@@ -30,6 +30,7 @@ public class JavaElementDelegateAdapterFactory implements IAdapterFactory {
 	@Inject
 	private Provider<JavaElementDelegateMainLaunch> mainDelegateProvider;
 	
+	@Override
 	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes")  Class adapterType) {
 		if (adaptableObject instanceof JavaElementDelegate) {
 			return ((JavaElementDelegate) adaptableObject).getAdapter(adapterType);
@@ -59,6 +60,7 @@ public class JavaElementDelegateAdapterFactory implements IAdapterFactory {
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Class[] getAdapterList() {
 		return new Class[] { JavaElementDelegate.class };

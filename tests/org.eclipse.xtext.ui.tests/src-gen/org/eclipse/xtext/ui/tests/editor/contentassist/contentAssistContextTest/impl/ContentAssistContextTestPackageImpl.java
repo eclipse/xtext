@@ -144,7 +144,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFirstLevel()
+  @Override
+public EClass getFirstLevel()
   {
     return firstLevelEClass;
   }
@@ -154,7 +155,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFirstLevel_SecondLevelA()
+  @Override
+public EReference getFirstLevel_SecondLevelA()
   {
     return (EReference)firstLevelEClass.getEStructuralFeatures().get(0);
   }
@@ -164,7 +166,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFirstLevel_SecondLevelB()
+  @Override
+public EReference getFirstLevel_SecondLevelB()
   {
     return (EReference)firstLevelEClass.getEStructuralFeatures().get(1);
   }
@@ -174,7 +177,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSecondLevelA()
+  @Override
+public EClass getSecondLevelA()
   {
     return secondLevelAEClass;
   }
@@ -184,7 +188,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSecondLevelA_ThirdLevelA1()
+  @Override
+public EReference getSecondLevelA_ThirdLevelA1()
   {
     return (EReference)secondLevelAEClass.getEStructuralFeatures().get(0);
   }
@@ -194,7 +199,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSecondLevelA_ThirdLevelA2()
+  @Override
+public EReference getSecondLevelA_ThirdLevelA2()
   {
     return (EReference)secondLevelAEClass.getEStructuralFeatures().get(1);
   }
@@ -204,7 +210,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSecondLevelB()
+  @Override
+public EClass getSecondLevelB()
   {
     return secondLevelBEClass;
   }
@@ -214,7 +221,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSecondLevelB_ThirdLevelB1()
+  @Override
+public EReference getSecondLevelB_ThirdLevelB1()
   {
     return (EReference)secondLevelBEClass.getEStructuralFeatures().get(0);
   }
@@ -224,7 +232,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSecondLevelB_ThirdLevelB2()
+  @Override
+public EReference getSecondLevelB_ThirdLevelB2()
   {
     return (EReference)secondLevelBEClass.getEStructuralFeatures().get(1);
   }
@@ -234,7 +243,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getThirdLevelA1()
+  @Override
+public EClass getThirdLevelA1()
   {
     return thirdLevelA1EClass;
   }
@@ -244,7 +254,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getThirdLevelA1_Name()
+  @Override
+public EAttribute getThirdLevelA1_Name()
   {
     return (EAttribute)thirdLevelA1EClass.getEStructuralFeatures().get(0);
   }
@@ -254,7 +265,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getThirdLevelA2()
+  @Override
+public EClass getThirdLevelA2()
   {
     return thirdLevelA2EClass;
   }
@@ -264,7 +276,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getThirdLevelA2_Name()
+  @Override
+public EAttribute getThirdLevelA2_Name()
   {
     return (EAttribute)thirdLevelA2EClass.getEStructuralFeatures().get(0);
   }
@@ -274,7 +287,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getThirdLevelB1()
+  @Override
+public EClass getThirdLevelB1()
   {
     return thirdLevelB1EClass;
   }
@@ -284,7 +298,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getThirdLevelB1_Name()
+  @Override
+public EAttribute getThirdLevelB1_Name()
   {
     return (EAttribute)thirdLevelB1EClass.getEStructuralFeatures().get(0);
   }
@@ -294,7 +309,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getThirdLevelB2()
+  @Override
+public EClass getThirdLevelB2()
   {
     return thirdLevelB2EClass;
   }
@@ -304,7 +320,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getThirdLevelB2_Name()
+  @Override
+public EAttribute getThirdLevelB2_Name()
   {
     return (EAttribute)thirdLevelB2EClass.getEStructuralFeatures().get(0);
   }
@@ -314,7 +331,8 @@ public class ContentAssistContextTestPackageImpl extends EPackageImpl implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistContextTestFactory getContentAssistContextTestFactory()
+  @Override
+public ContentAssistContextTestFactory getContentAssistContextTestFactory()
   {
     return (ContentAssistContextTestFactory)getEFactoryInstance();
   }

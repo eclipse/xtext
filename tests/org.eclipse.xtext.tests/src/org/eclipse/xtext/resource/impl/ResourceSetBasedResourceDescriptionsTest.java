@@ -58,6 +58,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends Assert implements 
 		resourceSet = new ResourceSetImpl();
 		IQualifiedNameProvider qualifiedNameProvider = new IQualifiedNameProvider.AbstractImpl() {
 			
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				return QualifiedName.create(((ENamedElement) obj).getName());
 			}
@@ -79,6 +80,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends Assert implements 
 		container = new ResourceDescriptionsBasedContainer(resDescs);
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		return new DefaultResourceServiceProvider() {
 			@Override
@@ -201,22 +203,27 @@ public class ResourceSetBasedResourceDescriptionsTest extends Assert implements 
 		return resource;
 	}
 
+	@Override
 	public EObject apply(IEObjectDescription from) {
 		return from.getEObjectOrProxy();
 	}
 
+	@Override
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		return null;
 	}
 
+	@Override
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return null;
 	}
 
+	@Override
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return null;
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}

@@ -46,6 +46,7 @@ public class SyntheticResourceAwareScopeProvider extends CodetemplatesScopeProvi
 			}
 			return Scopes.scopeFor(grammars, new Function<Grammar, QualifiedName>() {
 
+				@Override
 				public QualifiedName apply(Grammar from) {
 					return qualifiedNameConverter.toQualifiedName(from.getName());
 				}

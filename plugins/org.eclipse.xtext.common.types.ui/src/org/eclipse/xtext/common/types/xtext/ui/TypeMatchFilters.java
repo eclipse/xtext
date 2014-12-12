@@ -84,6 +84,7 @@ public final class TypeMatchFilters {
 			this(IJavaSearchConstants.TYPE);
 		}
 
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
@@ -95,6 +96,7 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return searchFor;
 		}
@@ -102,6 +104,7 @@ public final class TypeMatchFilters {
 	
 	public static class None implements ITypesProposalProvider.Filter {
 		
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return false;
@@ -110,6 +113,7 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return IJavaSearchConstants.TYPE;
 		}
@@ -123,6 +127,7 @@ public final class TypeMatchFilters {
 			this.delegate = delegate;
 		}
 		
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return !delegate.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path);
@@ -131,6 +136,7 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return delegate.getSearchFor();
 		}
@@ -146,6 +152,7 @@ public final class TypeMatchFilters {
 				throw new IllegalArgumentException("Cannot 'and' empty delegates");
 		}
 		
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			boolean result = true;
@@ -160,6 +167,7 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return delegates[0].getSearchFor();
 		}
@@ -175,6 +183,7 @@ public final class TypeMatchFilters {
 				throw new IllegalArgumentException("Cannot 'or' empty delegates");
 		}
 		
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			boolean result = false;
@@ -189,12 +198,14 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return delegates[0].getSearchFor();
 		}
 	}
 	
 	public static class CanInstantiate implements ITypesProposalProvider.Filter {
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
@@ -206,12 +217,14 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return IJavaSearchConstants.CLASS;
 		}
 	}
 	
 	public static class IsPublic implements ITypesProposalProvider.Filter {
+		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
@@ -223,6 +236,7 @@ public final class TypeMatchFilters {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public int getSearchFor() {
 			return IJavaSearchConstants.TYPE;
 		}

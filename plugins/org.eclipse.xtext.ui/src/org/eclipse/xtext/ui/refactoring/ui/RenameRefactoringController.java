@@ -139,12 +139,14 @@ public class RenameRefactoringController {
 			final XtextEditor xtextEditor = getXtextEditor();
 			if (xtextEditor != null) {
 				workbench.getProgressService().run(true, true, new IRunnableWithProgress() {
+					@Override
 					public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 						try {
 							final Provider<LinkedPositionGroup> provider = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext, monitor);
 							Display display = workbench.getDisplay();
 							display.syncExec(new Runnable() {
 								
+								@Override
 								public void run() {
 									RenameLinkedMode newLinkedMode = renameLinkedModeProvider.get();
 									if (newLinkedMode.start(renameElementContext, provider, monitor)) {
@@ -217,6 +219,7 @@ public class RenameRefactoringController {
 
 	protected String getOriginalName(final XtextEditor xtextEditor) {
 		return xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
+			@Override
 			public String exec(XtextResource state) throws Exception {
 				try {
 					EObject targetElement = state.getResourceSet().getEObject(renameElementContext.getTargetElementURI(),

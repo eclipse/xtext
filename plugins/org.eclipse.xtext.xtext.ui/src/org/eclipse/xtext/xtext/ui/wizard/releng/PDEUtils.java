@@ -39,6 +39,7 @@ public class PDEUtils {
 
 	public static void selectFeature(final Shell shell, final IAcceptor<IProject> acceptor) {
 		BusyIndicator.showWhile(shell.getDisplay(), new Runnable() {
+			@Override
 			public void run() {
 				IFeatureModel[] allModels = PDECore.getDefault().getFeatureModelManager().getWorkspaceModels();
 

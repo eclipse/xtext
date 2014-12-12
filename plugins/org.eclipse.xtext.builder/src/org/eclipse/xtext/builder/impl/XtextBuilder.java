@@ -184,6 +184,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
+			@Override
 			public boolean visit(IResourceDelta delta) throws CoreException {
 				if (progress.isCanceled())
 					throw new OperationCanceledException();

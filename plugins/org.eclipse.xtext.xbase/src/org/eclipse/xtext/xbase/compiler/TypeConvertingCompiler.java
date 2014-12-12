@@ -59,6 +59,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			if (isToBeCastedAnyType(actualType, obj, appendable)) {
 				if (!toBeConvertedTo.getJavaIdentifier().equals(actualType.getJavaIdentifier())) {
 					doCastConversion(toBeConvertedTo, appendable, new Later() {
+						@Override
 						public void exec(ITreeAppendable appendable) {
 							appendable = appendable.trace(obj, true);
 							internalToConvertedExpression(obj, appendable);
@@ -69,6 +70,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			}
 			if (!toBeConvertedTo.getUniqueIdentifier().equals(actualType.getUniqueIdentifier())) {
 				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
+					@Override
 					public void exec(ITreeAppendable appendable) {
 						appendable = appendable.trace(obj, true);
 						internalToConvertedExpression(obj, appendable);
@@ -78,6 +80,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			}
 			if (mustInsertTypeCast(obj, actualType)) {
 				doCastConversion(actualType, appendable, new Later() {
+					@Override
 					public void exec(ITreeAppendable appendable) {
 						appendable = appendable.trace(obj, true);
 						internalToConvertedExpression(obj, appendable);
@@ -89,6 +92,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			LightweightTypeReference actualType = getLightweightType(obj);
 			if (obj instanceof XAbstractFeatureCall && mustInsertTypeCast(obj, actualType)){
 				doCastConversion(actualType, appendable, new Later() {
+					@Override
 					public void exec(ITreeAppendable appendable) {
 						appendable = appendable.trace(obj, true);
 						internalToConvertedExpression(obj, appendable);

@@ -30,6 +30,7 @@ public class DefaultEcoreElementFactoryTest extends Assert {
 		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
 		Function2<String, INode, Object> toValueImpl = new Function2<String, INode, Object>() {
 
+			@Override
 			public Object apply(String lexerRule, INode node) {
 				if ("foo".equals(lexerRule) ) {
 					return "FOO";
@@ -51,6 +52,7 @@ public class DefaultEcoreElementFactoryTest extends Assert {
 		
 		Function2<String, INode, Object> toValueImpl = new Function2<String, INode, Object>() {
 
+			@Override
 			public Object apply(String lexerRule, INode nodeParam) {
 				if ("foo".equals(lexerRule) && nodeParam.equals(node)) {
 					return null;
@@ -80,6 +82,7 @@ public class DefaultEcoreElementFactoryTest extends Assert {
 		
 		Function2<String, INode, Object> toValueImpl = new Function2<String, INode, Object>() {
 
+			@Override
 			public Object apply(String lexerRule, INode nodeParam) {
 				if ("foo".equals(lexerRule) && node.equals(nodeParam)) {
 					throw expected;
@@ -109,10 +112,12 @@ public class DefaultEcoreElementFactoryTest extends Assert {
 			this.toValueFunction = toValueFunction;
 		}
 
+		@Override
 		public Object toValue(String string, String lexerRule, INode nodeParam) throws ValueConverterException {
 			return toValueFunction.apply(lexerRule, nodeParam);
 		}
 
+		@Override
 		public String toString(Object value, String lexerRule) {
 			return null;
 		}

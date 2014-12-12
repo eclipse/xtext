@@ -25,6 +25,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	constants+=TConstant;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//constants+=TConstant
@@ -43,6 +44,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TConstant:
 		//	TStringConstant | TIntegerConstant | TBooleanConstant;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//TStringConstant | TIntegerConstant | TBooleanConstant
@@ -70,6 +72,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TStringConstant:
 		//	annotations+=TAnnotation* "constant" "string" name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=TAnnotation* "constant" "string" name=ID
@@ -106,6 +109,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TIntegerConstant:
 		//	annotations+=TAnnotation* "constant" "integer" name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=TAnnotation* "constant" "integer" name=ID
@@ -142,6 +146,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TBooleanConstant:
 		//	annotations+=TAnnotation* "constant" "boolean" name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=TAnnotation* "constant" "boolean" name=ID
@@ -175,6 +180,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TAnnotation:
 		//	"@desc" description=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"@desc" description=STRING
@@ -232,6 +238,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

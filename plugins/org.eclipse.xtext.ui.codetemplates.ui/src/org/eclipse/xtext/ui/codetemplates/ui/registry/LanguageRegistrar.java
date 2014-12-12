@@ -12,7 +12,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialEditingContentAssistContextFactory;
-import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 
 import com.google.inject.Inject;

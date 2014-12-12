@@ -44,6 +44,7 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 	@Named(MINIMUM_PERCENT_FREE_MEMORY)
 	private long minimumPercentFreeMemory = 15;
 
+	@Override
 	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
 		if (next != null && resourceSet.getResource(next, false) != null)
 			return true;

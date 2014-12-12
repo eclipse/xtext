@@ -72,7 +72,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<EObject> getAttribute()
+  @Override
+public EList<EObject> getAttribute()
   {
     if (attribute == null)
     {

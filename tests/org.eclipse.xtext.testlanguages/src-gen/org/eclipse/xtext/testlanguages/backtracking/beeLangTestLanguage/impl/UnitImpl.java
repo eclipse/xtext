@@ -226,7 +226,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getDocumentation()
+  @Override
+public String getDocumentation()
   {
     return documentation;
   }
@@ -236,7 +237,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDocumentation(String newDocumentation)
+  @Override
+public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
     documentation = newDocumentation;
@@ -249,7 +251,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -259,7 +262,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -272,7 +276,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVersion()
+  @Override
+public String getVersion()
   {
     return version;
   }
@@ -282,7 +287,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVersion(String newVersion)
+  @Override
+public void setVersion(String newVersion)
   {
     String oldVersion = version;
     version = newVersion;
@@ -295,7 +301,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SimpleTypeRef> getImplements()
+  @Override
+public EList<SimpleTypeRef> getImplements()
   {
     if (implements_ == null)
     {
@@ -309,7 +316,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getSourceLocation()
+  @Override
+public String getSourceLocation()
   {
     return sourceLocation;
   }
@@ -319,7 +327,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSourceLocation(String newSourceLocation)
+  @Override
+public void setSourceLocation(String newSourceLocation)
   {
     String oldSourceLocation = sourceLocation;
     sourceLocation = newSourceLocation;
@@ -332,7 +341,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOutputLocation()
+  @Override
+public String getOutputLocation()
   {
     return outputLocation;
   }
@@ -342,7 +352,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOutputLocation(String newOutputLocation)
+  @Override
+public void setOutputLocation(String newOutputLocation)
   {
     String oldOutputLocation = outputLocation;
     outputLocation = newOutputLocation;
@@ -355,7 +366,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ProvidedCapability> getProvidedCapabilities()
+  @Override
+public EList<ProvidedCapability> getProvidedCapabilities()
   {
     if (providedCapabilities == null)
     {
@@ -369,7 +381,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AliasedRequiredCapability> getRequiredCapabilities()
+  @Override
+public EList<AliasedRequiredCapability> getRequiredCapabilities()
   {
     if (requiredCapabilities == null)
     {
@@ -383,7 +396,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RequiredCapability> getMetaRequiredCapabilities()
+  @Override
+public EList<RequiredCapability> getMetaRequiredCapabilities()
   {
     if (metaRequiredCapabilities == null)
     {
@@ -397,7 +411,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Function> getFunctions()
+  @Override
+public EList<Function> getFunctions()
   {
     if (functions == null)
     {

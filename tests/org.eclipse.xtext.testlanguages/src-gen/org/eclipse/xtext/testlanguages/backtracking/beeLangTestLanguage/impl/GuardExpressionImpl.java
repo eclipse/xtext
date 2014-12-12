@@ -66,7 +66,8 @@ public class GuardExpressionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getGuardExpr()
+  @Override
+public Expression getGuardExpr()
   {
     return guardExpr;
   }
@@ -93,7 +94,8 @@ public class GuardExpressionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGuardExpr(Expression newGuardExpr)
+  @Override
+public void setGuardExpr(Expression newGuardExpr)
   {
     if (newGuardExpr != guardExpr)
     {

@@ -749,6 +749,7 @@ public class JvmTypesBuilder {
 		result.setSimpleName(prefix + Strings.toFirstUpper(propertyName));
 		result.setReturnType(cloneWithProxies(typeRef));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
+			@Override
 			public void apply(/* @Nullable */ ITreeAppendable p) {
 				if(p != null) {
 					p = p.trace(sourceElement);
@@ -791,6 +792,7 @@ public class JvmTypesBuilder {
 		result.setSimpleName("set" + Strings.toFirstUpper(propertyName));
 		result.getParameters().add(toParameter(sourceElement, propertyName, cloneWithProxies(typeRef)));
 		setBody(result, new Procedures.Procedure1<ITreeAppendable>() {
+			@Override
 			public void apply(/* @Nullable */ ITreeAppendable p) {
 				if(p != null) {
 					p = p.trace(sourceElement);
@@ -858,6 +860,7 @@ public class JvmTypesBuilder {
 		if (overrideType != null)
 			result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
 		setBody(result, new Procedure1<ITreeAppendable>() {
+			@Override
 			public void apply(/* @Nullable */ ITreeAppendable p) {
 				if (p == null)
 					return;
@@ -898,6 +901,7 @@ public class JvmTypesBuilder {
 			return null;
 		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
 		setBody(result, new Procedure1<ITreeAppendable>() {
+			@Override
 			public void apply(/* @Nullable */ ITreeAppendable p) {
 				if (p == null)
 					return;
@@ -955,6 +959,7 @@ public class JvmTypesBuilder {
 		result.getAnnotations().add(toAnnotation(sourceElement, Override.class));
 		result.getParameters().add( toParameter(sourceElement, "obj", references.getTypeForName(Object.class, sourceElement)));
 		setBody(result, new Procedure1<ITreeAppendable>() {
+				@Override
 				public void apply(/* @Nullable */ ITreeAppendable p) {
 					if (p == null)
 						return;

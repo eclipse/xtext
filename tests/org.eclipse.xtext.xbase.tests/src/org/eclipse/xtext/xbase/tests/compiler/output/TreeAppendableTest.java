@@ -44,18 +44,22 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	private EClass content;
 	private Resource resource;
 
+	@Override
 	public ITextRegionWithLineInformation getSignificantTextRegion(/* @Nullable */ EObject obj) {
 		throw new UnsupportedOperationException();		
 	}
 
+	@Override
 	public ITextRegionWithLineInformation getSignificantTextRegion(/* @Nullable */ EObject owner, /* @Nullable */ EStructuralFeature feature, int indexInList) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ITextRegionWithLineInformation getFullTextRegion(/* @Nullable */ EObject obj) {
 		return expectedRegions.next();
 	}
 
+	@Override
 	public ITextRegionWithLineInformation getFullTextRegion(/* @Nullable */ EObject owner, /* @Nullable */ EStructuralFeature feature, int indexInList) {
 		throw new UnsupportedOperationException();
 	}
@@ -265,30 +269,37 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 		assertEquals("my bbaa text bbaa more bbaa end", appendable.getContent());
 	}
 
+	@Override
 	public Set<EObject> getSourceElements(EObject jvmElement) {
 		return Collections.emptySet();
 	}
 
+	@Override
 	public Set<EObject> getJvmElements(EObject sourceElement) {
 		return Collections.emptySet();
 	}
 
+	@Override
 	public EObject getPrimarySourceElement(EObject jvmElement) {
 		return null;
 	}
 
+	@Override
 	public URI getURIForTrace(XtextResource context) {
 		return context.getURI();
 	}
 
+	@Override
 	public URI getURIForTrace(URI uri) {
 		return uri;
 	}
 
+	@Override
 	public EObject getPrimaryJvmElement(EObject sourceElement) {
 		return null;
 	}
 
+	@Override
 	public boolean isPrimaryJvmElement(EObject jvmElement) {
 		return false;
 	}

@@ -26,28 +26,34 @@ public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot
 		this.idx = idx;
 	}
 	
+	@Override
 	public boolean isVarArg() {
 		return false;
 	}
 
+	@Override
 	public boolean isSuperfluous() {
 		return false;
 	}
 
+	@Override
 	public List<XExpression> getArgumentExpressions() {
 		return Collections.singletonList(getArgumentExpression());
 	}
 
 	/* @Nullable */
+	@Override
 	public XExpression getArgumentExpression() {
 		return parent.internalGetArgument(idx);
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getDeclaredType() {
 		return parent.internalGetParameterType(idx);
 	}
 
+	@Override
 	public void markProcessed() {
 		parent.markProcessed(idx);
 	}

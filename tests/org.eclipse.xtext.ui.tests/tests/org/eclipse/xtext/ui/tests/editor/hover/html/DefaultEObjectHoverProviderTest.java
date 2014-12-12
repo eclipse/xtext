@@ -61,6 +61,7 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 	
 	@Test public void testElementHasNoDocumentation () throws Exception {
 		with(getTestLanguageSetup(new IEObjectDocumentationProvider() {			
+			@Override
 			public String getDocumentation(EObject o) {
 				return null;
 			}
@@ -76,6 +77,7 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 	
 	@Test public void testElementHasDocumentation () throws Exception {
 		with(getTestLanguageSetup(new IEObjectDocumentationProvider() {			
+			@Override
 			public String getDocumentation(EObject o) {
 				return "Test";
 			}

@@ -121,7 +121,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -131,7 +132,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_E1()
+  @Override
+public EReference getModel_E1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -141,7 +143,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_E2()
+  @Override
+public EReference getModel_E2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -151,7 +154,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElem1()
+  @Override
+public EClass getElem1()
   {
     return elem1EClass;
   }
@@ -161,7 +165,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElem1_Value()
+  @Override
+public EAttribute getElem1_Value()
   {
     return (EAttribute)elem1EClass.getEStructuralFeatures().get(0);
   }
@@ -171,7 +176,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElem2()
+  @Override
+public EClass getElem2()
   {
     return elem2EClass;
   }
@@ -181,7 +187,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElem2_Value()
+  @Override
+public EAttribute getElem2_Value()
   {
     return (EAttribute)elem2EClass.getEStructuralFeatures().get(0);
   }
@@ -191,7 +198,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getEnumT()
+  @Override
+public EEnum getEnumT()
   {
     return enumTEEnum;
   }
@@ -201,7 +209,8 @@ public class Bug307519TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug307519TestLanguageFactory getBug307519TestLanguageFactory()
+  @Override
+public Bug307519TestLanguageFactory getBug307519TestLanguageFactory()
   {
     return (Bug307519TestLanguageFactory)getEFactoryInstance();
   }

@@ -72,7 +72,8 @@ public class RuleCallImpl extends RuleElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getRule()
+  @Override
+public String getRule()
   {
     return rule;
   }
@@ -82,7 +83,8 @@ public class RuleCallImpl extends RuleElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRule(String newRule)
+  @Override
+public void setRule(String newRule)
   {
     String oldRule = rule;
     rule = newRule;

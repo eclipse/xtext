@@ -51,6 +51,7 @@ public class ProjectUtil {
 		Iterable<Pair<IStorage, IProject>> storages = mapper.getStorages(uri);
 		try {
 			Pair<IStorage, IProject> fileStorage = Iterables.find(storages, new Predicate<Pair<IStorage, IProject>>() {
+				@Override
 				public boolean apply(Pair<IStorage, IProject> input) {
 					IStorage storage = input.getFirst();
 					if (storage instanceof IFile) {

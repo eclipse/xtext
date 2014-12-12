@@ -32,21 +32,25 @@ public interface ITypeLiteralLinkingCandidate extends IFeatureLinkingCandidate {
 	 * A linked type literal does never have type arguments. Returns an empty list.
 	 * @return an empty list.
 	 */
+	@Override
 	List<LightweightTypeReference> getTypeArguments();
 	
 	/**
 	 * @return always <code>true</code>.
 	 */
+	@Override
 	boolean isTypeLiteral();
 	
 	/**
 	 * @return always <code>false</code>.
 	 */
+	@Override
 	boolean isStatic();
 	
 	/**
 	 * @return always <code>false</code>.
 	 */
+	@Override
 	boolean isExtension();
 	
 }

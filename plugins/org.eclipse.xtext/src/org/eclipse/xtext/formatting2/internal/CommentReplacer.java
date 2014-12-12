@@ -28,6 +28,7 @@ public abstract class CommentReplacer implements ITextReplacer {
 		return comment;
 	}
 
+	@Override
 	public ITextSegment getRegion() {
 		return comment;
 	}

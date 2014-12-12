@@ -25,6 +25,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Main:
 		//	referenced+=Reference*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//referenced+=Reference*
@@ -44,6 +45,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Reference:
 		//	"ref" referenced=[ecore::EObject|FQN];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"ref" referenced=[ecore::EObject|FQN]
@@ -72,6 +74,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FQN:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -126,6 +129,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

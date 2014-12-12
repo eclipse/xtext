@@ -31,6 +31,7 @@ public class SharedStateContributionRegistryImplTest {
 	@Before
 	public void createParentInjector() {
 		injector = Guice.createInjector(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(CharSequence.class).to(String.class);
 				binder.bind(String.class).toInstance("fromParentInjector");
@@ -42,6 +43,7 @@ public class SharedStateContributionRegistryImplTest {
 	public void testCreateContributingInjector() {
 		SharedStateContributionRegistryImpl registry = new SharedStateContributionRegistryImpl(injector);
 		Injector myInjector = registry.createInjectorWithoutJITBindings(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(CharSequenceClient.class).to(CharSequenceClientImpl.class);
 			}
@@ -63,6 +65,7 @@ public class SharedStateContributionRegistryImplTest {
 	public void testCreateContribution() {
 		SharedStateContributionRegistryImpl registry = new SharedStateContributionRegistryImpl(injector);
 		SharedStateContribution contribution = registry.createContribution(new Module() {
+			@Override
 			public void configure(Binder binder) {
 				binder.bind(CharSequenceClient.class).to(CharSequenceClientImpl.class);
 			}
@@ -79,6 +82,7 @@ public class SharedStateContributionRegistryImplTest {
 		@Inject
 		CharSequence seq;
 
+		@Override
 		public CharSequence getSeq() {
 			return seq;
 		}

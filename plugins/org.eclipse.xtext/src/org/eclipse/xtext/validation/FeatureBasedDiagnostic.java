@@ -37,6 +37,7 @@ public class FeatureBasedDiagnostic extends AbstractValidationDiagnostic {
 		this.index = index;
 	}
 
+	@Override
 	public List<?> getData() {
 		List<Object> result = Lists.newArrayListWithExpectedSize(3);
 		result.add(getSourceEObject());

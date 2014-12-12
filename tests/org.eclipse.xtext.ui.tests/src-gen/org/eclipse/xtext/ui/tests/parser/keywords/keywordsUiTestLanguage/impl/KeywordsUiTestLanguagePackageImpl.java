@@ -95,7 +95,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -105,7 +106,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_First()
+  @Override
+public EAttribute getModel_First()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -115,7 +117,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Second()
+  @Override
+public EAttribute getModel_Second()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -125,7 +128,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Third()
+  @Override
+public EAttribute getModel_Third()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -135,7 +139,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Forth()
+  @Override
+public EAttribute getModel_Forth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
   }
@@ -145,7 +150,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Fifth()
+  @Override
+public EAttribute getModel_Fifth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
   }
@@ -155,7 +161,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Sixth()
+  @Override
+public EAttribute getModel_Sixth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
   }
@@ -165,7 +172,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Seventh()
+  @Override
+public EAttribute getModel_Seventh()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
   }
@@ -175,7 +183,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Eighth()
+  @Override
+public EAttribute getModel_Eighth()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
   }
@@ -185,7 +194,8 @@ public class KeywordsUiTestLanguagePackageImpl extends EPackageImpl implements K
    * <!-- end-user-doc -->
    * @generated
    */
-  public KeywordsUiTestLanguageFactory getKeywordsUiTestLanguageFactory()
+  @Override
+public KeywordsUiTestLanguageFactory getKeywordsUiTestLanguageFactory()
   {
     return (KeywordsUiTestLanguageFactory)getEFactoryInstance();
   }

@@ -25,6 +25,7 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 	@Inject
 	private Provider<AbstractRenameProcessor> processorProvider;
 
+	@Override
 	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
 		RenameProcessor processor = getRenameProcessor(renameElementContext);
 		if (processor != null) {
@@ -33,6 +34,7 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 		return null;
 	}
 	
+	@Override
 	public RenameProcessor getRenameProcessor(IRenameElementContext renameElementContext) {
 		AbstractRenameProcessor processor = processorProvider.get();
 		if (processor != null && processor.initialize(renameElementContext)) {

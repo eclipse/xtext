@@ -104,7 +104,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMain()
+  @Override
+public EClass getMain()
   {
     return mainEClass;
   }
@@ -114,7 +115,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMain_Elements()
+  @Override
+public EReference getMain_Elements()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElement()
+  @Override
+public EClass getElement()
   {
     return elementEClass;
   }
@@ -134,7 +137,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElement_Doc()
+  @Override
+public EAttribute getElement_Doc()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElement_Name()
+  @Override
+public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -154,7 +159,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Contained()
+  @Override
+public EReference getElement_Contained()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
   }
@@ -164,7 +170,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Referenced()
+  @Override
+public EReference getElement_Referenced()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(3);
   }
@@ -174,7 +181,8 @@ public class QuickfixCrossrefPackageImpl extends EPackageImpl implements Quickfi
    * <!-- end-user-doc -->
    * @generated
    */
-  public QuickfixCrossrefFactory getQuickfixCrossrefFactory()
+  @Override
+public QuickfixCrossrefFactory getQuickfixCrossrefFactory()
   {
     return (QuickfixCrossrefFactory)getEFactoryInstance();
   }

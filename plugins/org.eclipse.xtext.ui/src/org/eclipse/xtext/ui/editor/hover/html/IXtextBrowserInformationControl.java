@@ -29,6 +29,7 @@ public interface IXtextBrowserInformationControl extends IInformationControl {
 
 	public void notifyDelayedInputChange(Object object);
 
+	@Override
 	public void dispose();
 
 	public void addLocationListener(LocationListener createLocationListener);

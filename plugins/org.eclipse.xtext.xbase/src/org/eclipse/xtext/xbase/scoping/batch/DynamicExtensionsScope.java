@@ -174,6 +174,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedExecutableScope 
 				final List<JvmType> types = extensionType.getRawTypes();
 				final Set<JvmFeature> allFeatures = Sets.newLinkedHashSet();
 				processFeatureNames(name, new NameAcceptor() {
+					@Override
 					public void accept(String simpleName, int order) {
 						for(JvmType type: types) {
 							if (type instanceof JvmDeclaredType) {

@@ -54,6 +54,7 @@ public class MutableTokenDefProvider extends AntlrTokenDefProvider {
 	public void writeTokenFile(PrintWriter out) throws IOException {
 		List<Map.Entry<Integer, String>> entries = Lists.newArrayList(getTokenDefMap().entrySet());
 		ListExtensions.sortInplaceBy(entries, new Functions.Function1<Map.Entry<Integer, String>, String>() {
+			@Override
 			public String apply(Map.Entry<Integer, String> p) {
 				return p.getValue();
 			}

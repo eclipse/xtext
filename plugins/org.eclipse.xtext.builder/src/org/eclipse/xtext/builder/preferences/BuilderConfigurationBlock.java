@@ -213,6 +213,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 					final Text directoryField = new Text(table, SWT.NONE);
 					directoryField.setText(getOutputDirectory(item));
 					directoryField.addModifyListener(new ModifyListener() {
+						@Override
 						public void modifyText(ModifyEvent me) {
 							setValue(data.getOutputDirectoryKey(), directoryField.getText());
 							refreshItem(item);
@@ -243,6 +244,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 				}
 			});
 			defaultDirectoryField.addModifyListener(new ModifyListener() {
+				@Override
 				public void modifyText(ModifyEvent e) {
 					refreshItem(item);
 				}

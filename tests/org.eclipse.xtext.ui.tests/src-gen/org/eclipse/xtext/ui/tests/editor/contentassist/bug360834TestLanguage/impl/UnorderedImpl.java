@@ -88,7 +88,8 @@ public class UnorderedImpl extends MinimalEObjectImpl.Container implements Unord
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -98,7 +99,8 @@ public class UnorderedImpl extends MinimalEObjectImpl.Container implements Unord
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,7 +113,8 @@ public class UnorderedImpl extends MinimalEObjectImpl.Container implements Unord
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleClassDeclaration getRootDeclaration()
+  @Override
+public SimpleClassDeclaration getRootDeclaration()
   {
     return rootDeclaration;
   }
@@ -138,7 +141,8 @@ public class UnorderedImpl extends MinimalEObjectImpl.Container implements Unord
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRootDeclaration(SimpleClassDeclaration newRootDeclaration)
+  @Override
+public void setRootDeclaration(SimpleClassDeclaration newRootDeclaration)
   {
     if (newRootDeclaration != rootDeclaration)
     {

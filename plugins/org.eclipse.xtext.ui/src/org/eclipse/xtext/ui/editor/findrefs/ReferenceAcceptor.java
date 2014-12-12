@@ -41,6 +41,7 @@ public class ReferenceAcceptor implements org.eclipse.xtext.findReferences.IRefe
 		this.resourceServiceProviderRegistry = resourceServiceProviderRegistry;
 	}
 	
+	@Override
 	public void accept(EObject source, URI sourceURI, EReference eReference, int index, EObject targetOrProxy,
 			URI targetURI) {
 		if (currentResource == null || source.eResource() != currentResource) {
@@ -87,6 +88,7 @@ public class ReferenceAcceptor implements org.eclipse.xtext.findReferences.IRefe
 		return result;
 	}
 
+	@Override
 	public void accept(IReferenceDescription description) {
 		this.delegate.accept(description);
 	}

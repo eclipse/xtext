@@ -127,7 +127,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getType()
+  @Override
+public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -157,7 +158,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newType)
+  @Override
+public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object newType)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object oldType = type;
     type = newType;
@@ -170,7 +172,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isMany()
+  @Override
+public boolean isMany()
   {
     return many;
   }
@@ -180,7 +183,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMany(boolean newMany)
+  @Override
+public void setMany(boolean newMany)
   {
     boolean oldMany = many;
     many = newMany;
@@ -193,7 +197,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getShortDescription()
+  @Override
+public String getShortDescription()
   {
     return shortDescription;
   }
@@ -203,7 +208,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setShortDescription(String newShortDescription)
+  @Override
+public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
     shortDescription = newShortDescription;
@@ -216,7 +222,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getLongDescription()
+  @Override
+public String getLongDescription()
   {
     return longDescription;
   }
@@ -226,7 +233,8 @@ public class ReferenceImpl extends FeatureImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLongDescription(String newLongDescription)
+  @Override
+public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
     longDescription = newLongDescription;

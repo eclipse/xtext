@@ -64,6 +64,7 @@ public class RenameElementWizard extends RefactoringWizard {
 					: renameProcessor.getOriginalName();
 		}
 
+		@Override
 		public void createControl(Composite parent) {
 			Composite composite = new Composite(parent, SWT.NONE);
 			composite.setLayout(new GridLayout(2, false));
@@ -78,6 +79,7 @@ public class RenameElementWizard extends RefactoringWizard {
 			nameField.setFont(composite.getFont());
 			nameField.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING, true, false));
 			nameField.addModifyListener(new ModifyListener() {
+				@Override
 				public void modifyText(ModifyEvent e) {
 					validatePage();
 				}

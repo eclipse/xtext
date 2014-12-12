@@ -32,6 +32,7 @@ public class ValueSerializer implements IValueSerializer {
 	@Inject
 	protected TokenUtil tokenUtil;
 
+	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, Acceptor errors) {
 		try {
 			String str = converter.toString(value, ruleCall.getRule().getName());
@@ -47,6 +48,7 @@ public class ValueSerializer implements IValueSerializer {
 		}
 	}
 
+	@Override
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node, Acceptor errors) {
 		if (node != null) {
 			Object converted = converter.toValue(NodeModelUtils.getTokenText(node), ruleCall.getRule().getName(), node);

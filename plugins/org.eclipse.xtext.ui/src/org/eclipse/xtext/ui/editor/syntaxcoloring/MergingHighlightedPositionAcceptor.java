@@ -36,6 +36,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 		initialize();
 	}
 
+	@Override
 	public void addPosition(int offset, int length, String... ids) {
 		if (length > 0) {
 			this.getPositions().add(new LightweightPosition(offset, length, timestamp, ids));
@@ -46,6 +47,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 		timestamp++;
 	}
 
+	@Override
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		initialize();
 		delegate.provideHighlightingFor(resource, this);

@@ -72,7 +72,8 @@ public class FileImpl extends MinimalEObjectImpl.Container implements File
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Stuff> getStuff()
+  @Override
+public EList<Stuff> getStuff()
   {
     if (stuff == null)
     {

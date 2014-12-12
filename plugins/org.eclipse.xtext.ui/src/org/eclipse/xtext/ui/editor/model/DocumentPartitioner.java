@@ -154,6 +154,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	/**
 	 * @since 2.2
 	 */
+	@Override
 	public String[] getManagingPositionCategories() {
 		return new String[] { fPositionCategory };
 	}
@@ -164,6 +165,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	/**
 	 * @since 2.2
 	 */
+	@Override
 	public final void connect(IDocument document) {
 		connect(document, false);
 	}
@@ -176,6 +178,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public void connect(IDocument document, boolean delayInitialization) {
 		Assert.isNotNull(document);
 		Assert.isTrue(!document.containsPositionCategory(fPositionCategory));
@@ -240,6 +243,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public void disconnect() {
 
 		Assert.isTrue(fDocument.containsPositionCategory(fPositionCategory));
@@ -259,6 +263,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public void documentAboutToBeChanged(DocumentEvent e) {
 		if (fIsInitialized) {
 
@@ -276,6 +281,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	/**
 	 * @since 2.2
 	 */
+	@Override
 	public final boolean documentChanged(DocumentEvent e) {
 		if (fIsInitialized) {
 			IRegion region = documentChanged2(e);
@@ -347,6 +353,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public IRegion documentChanged2(DocumentEvent e) {
 
 		if (!fIsInitialized)
@@ -537,6 +544,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public String getContentType(int offset) {
 		checkInitialization();
 
@@ -555,6 +563,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public ITypedRegion getPartition(int offset) {
 		checkInitialization();
 
@@ -625,6 +634,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	/**
 	 * @since 2.2
 	 */
+	@Override
 	public final ITypedRegion[] computePartitioning(int offset, int length) {
 		return computePartitioning(offset, length, false);
 	}
@@ -637,6 +647,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public String[] getLegalContentTypes() {
 		return TextUtilities.copy(fLegalContentTypes);
 	}
@@ -692,6 +703,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public String getContentType(int offset, boolean preferOpenPartitions) {
 		return getPartition(offset, preferOpenPartitions).getType();
 	}
@@ -704,6 +716,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public ITypedRegion getPartition(int offset, boolean preferOpenPartitions) {
 		ITypedRegion region = getPartition(offset);
 		if (preferOpenPartitions) {
@@ -727,6 +740,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public ITypedRegion[] computePartitioning(int offset, int length, boolean includeZeroLengthPartitions) {
 		checkInitialization();
 		List<ITypedRegion> list = new ArrayList<ITypedRegion>();
@@ -866,6 +880,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	/**
 	 * @since 2.2
 	 */
+	@Override
 	public void startRewriteSession(DocumentRewriteSession session) throws IllegalStateException {
 		if (fActiveRewriteSession != null)
 			throw new IllegalStateException();
@@ -880,6 +895,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public void stopRewriteSession(DocumentRewriteSession session) {
 		if (fActiveRewriteSession == session)
 			flushRewriteSession();
@@ -893,6 +909,7 @@ public class DocumentPartitioner implements IDocumentPartitioner, IDocumentParti
 	 * 
 	 * @since 2.2
 	 */
+	@Override
 	public DocumentRewriteSession getActiveRewriteSession() {
 		return fActiveRewriteSession;
 	}

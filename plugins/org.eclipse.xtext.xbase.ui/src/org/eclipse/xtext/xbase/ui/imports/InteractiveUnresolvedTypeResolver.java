@@ -67,6 +67,7 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 	@Inject
 	private XbaseQualifiedNameValueConverter nameValueConverter;
 	
+	@Override
 	public void resolve(TypeUsages typeUsages, XtextResource resource) {
 		if(typeUsages.getUnresolvedTypeUsages().isEmpty() || resource == null)
 			return;
@@ -98,6 +99,7 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 			JvmDeclaredType contextType = EcoreUtil2.getContainerOfType(context, JvmDeclaredType.class);
 			if(contextType != null)
 				findCandidateTypes(contextType, name, javaSearchScope, new IAcceptor<JvmDeclaredType>() {
+					@Override
 					public void accept(JvmDeclaredType t) {
 						candidateTypes.add(t);
 					}
@@ -142,6 +144,7 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 		searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, typeSimpleName.toCharArray(),
 				SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, IJavaSearchConstants.TYPE, searchScope,
 				new IRestrictedAccessTypeRequestor() {
+					@Override
 					public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path, AccessRestriction access) {
 						final String qualifiedTypeName = getQualifiedTypeName(packageName, enclosingTypeNames,

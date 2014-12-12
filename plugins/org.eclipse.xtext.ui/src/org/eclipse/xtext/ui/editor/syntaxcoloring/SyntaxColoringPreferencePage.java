@@ -46,6 +46,7 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage impleme
 		configuration.configure(this);
 	}
 	
+	@Override
 	public void acceptDefaultHighlighting(String id, String name, TextStyle style) {
 		highlightings.add(Tuples.create(id, name, style));
 	}
@@ -64,6 +65,7 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage impleme
 		}
 	}
 
+	@Override
 	public int compare(Triple<String, String, TextStyle> left, Triple<String, String, TextStyle> right) {
 		return left.getSecond().compareTo(right.getSecond());
 	}

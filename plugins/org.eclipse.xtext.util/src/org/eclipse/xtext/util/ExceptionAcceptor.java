@@ -17,16 +17,19 @@ public enum ExceptionAcceptor implements IAcceptor<Exception> {
 	LOGGING {
 		private final Logger LOG = Logger.getLogger(ExceptionAcceptor.class);
 
+		@Override
 		public void accept(Exception t) {
 			LOG.error(t.getMessage(), t);
 		}
 	},
 	THROWING {
+		@Override
 		public void accept(Exception t) {
 			Exceptions.throwUncheckedException(t);
 		}
 	},
 	IGNORING {
+		@Override
 		public void accept(Exception t) {
 		}
 	};

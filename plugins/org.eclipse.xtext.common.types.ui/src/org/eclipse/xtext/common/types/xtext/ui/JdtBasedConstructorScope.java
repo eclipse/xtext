@@ -119,16 +119,19 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 			this.converter = converter;
 		}
 		
+		@Override
 		public QualifiedName getName() {
 			return getQualifiedName();
 		}
 
+		@Override
 		public QualifiedName getQualifiedName() {
 			if (qualifiedName == null)
 				qualifiedName = converter.toQualifiedName(constructor.getDeclaringType().getFullyQualifiedName('.'));
 			return qualifiedName;
 		}
 
+		@Override
 		public JvmConstructor getEObjectOrProxy() {
 			if (proxy == null) {
 				proxy = createProxy();
@@ -136,12 +139,14 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 			return proxy;
 		}
 
+		@Override
 		public URI getEObjectURI() {
 			if (uri == null)
 				uri = computeURI();
 			return uri;
 		}
 
+		@Override
 		public EClass getEClass() {
 			return TypesPackage.Literals.JVM_CONSTRUCTOR;
 		}
@@ -176,16 +181,19 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 			this.converter = converter;
 		}
 		
+		@Override
 		public QualifiedName getName() {
 			return getQualifiedName();
 		}
 
+		@Override
 		public QualifiedName getQualifiedName() {
 			if (qualifiedName == null)
 				qualifiedName = converter.toQualifiedName(type.getFullyQualifiedName('.'));
 			return qualifiedName;
 		}
 
+		@Override
 		public JvmConstructor getEObjectOrProxy() {
 			if (proxy == null) {
 				proxy = createProxy();
@@ -193,12 +201,14 @@ public class JdtBasedConstructorScope extends AbstractConstructorScope {
 			return proxy;
 		}
 
+		@Override
 		public URI getEObjectURI() {
 			if (uri == null)
 				uri = computeURI();
 			return uri;
 		}
 
+		@Override
 		public EClass getEClass() {
 			return TypesPackage.Literals.JVM_CONSTRUCTOR;
 		}

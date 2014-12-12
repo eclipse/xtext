@@ -192,6 +192,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	private ISelectionChangedListener selectionChangedListener;
 
 	private IPropertyListener dirtyListener = new IPropertyListener() {
+		@Override
 		public void propertyChanged(Object source, int propId) {
 			if (propId == PROP_DIRTY && !isDirty()) {
 				dirtyStateEditorSupport.markEditorClean(XtextEditor.this);
@@ -207,6 +208,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 			log.debug("Creating Xtext Editor. Instance: [" + this.toString() + "]");
 	}
 
+	@Override
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
 	}
@@ -434,11 +436,13 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		 */
 		return new IOperationApprover() {
 
+			@Override
 			public IStatus proceedRedoing(IUndoableOperation operation, IOperationHistory history, IAdaptable info) {
 				IStatus status = result.proceedRedoing(operation, history, info);
 				return validateEditorInputState(info, status);
 			}
 
+			@Override
 			public IStatus proceedUndoing(IUndoableOperation operation, IOperationHistory history, IAdaptable info) {
 				IStatus status = result.proceedUndoing(operation, history, info);
 				return validateEditorInputState(info, status);
@@ -526,6 +530,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 
 	private void installSelectionChangedListener() {
 		selectionChangedListener = new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(final SelectionChangedEvent event) {
 				updateStatusLine();
 			}
@@ -1025,6 +1030,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		/*
 		 * @see org.eclipse.ui.texteditor.IUpdate#update()
 		 */
+		@Override
 		public void update() {
 			setEnabled(isEditorInputModifiable());
 		}
@@ -1243,6 +1249,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 		/*
 		 * @see org.eclipse.ui.texteditor.IUpdate#update()
 		 */
+		@Override
 		public void update() {
 			setEnabled(isEditorInputModifiable());
 		}
@@ -1382,6 +1389,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public Shell getShell() {
 		return getSite().getShell();
 	}
@@ -1389,6 +1397,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public void addVerifyListener(VerifyListener listener) {
 		StyledText textWidget = getSourceViewer().getTextWidget();
 		if(textWidget != null) 
@@ -1398,6 +1407,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public void removeVerifyListener(VerifyListener listener) {
 		StyledText textWidget = getSourceViewer().getTextWidget();
 		if(textWidget != null) 
@@ -1407,6 +1417,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public void forceReconcile() {
 		((XtextReconciler) ((IAdaptable) getInternalSourceViewer()).getAdapter(IReconciler.class)).forceReconcile();
 	}

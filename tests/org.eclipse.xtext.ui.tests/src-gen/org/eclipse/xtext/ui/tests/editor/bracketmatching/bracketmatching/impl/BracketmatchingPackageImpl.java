@@ -120,7 +120,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFile()
+  @Override
+public EClass getFile()
   {
     return fileEClass;
   }
@@ -130,7 +131,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFile_Expression()
+  @Override
+public EReference getFile_Expression()
   {
     return (EReference)fileEClass.getEStructuralFeatures().get(0);
   }
@@ -140,7 +142,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getExpression()
+  @Override
+public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -150,7 +153,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSExpression()
+  @Override
+public EClass getSExpression()
   {
     return sExpressionEClass;
   }
@@ -160,7 +164,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSExpression_Element()
+  @Override
+public EReference getSExpression_Element()
   {
     return (EReference)sExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -170,7 +175,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAtom()
+  @Override
+public EClass getAtom()
   {
     return atomEClass;
   }
@@ -180,7 +186,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAtom_Value()
+  @Override
+public EAttribute getAtom_Value()
   {
     return (EAttribute)atomEClass.getEStructuralFeatures().get(0);
   }
@@ -190,7 +197,8 @@ public class BracketmatchingPackageImpl extends EPackageImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public BracketmatchingFactory getBracketmatchingFactory()
+  @Override
+public BracketmatchingFactory getBracketmatchingFactory()
   {
     return (BracketmatchingFactory)getEFactoryInstance();
   }

@@ -32,10 +32,12 @@ public abstract class AbstractResolvedExecutable<T extends JvmExecutable> extend
 		super(declaration, contextType);
 	}
 	
+	@Override
 	public List<JvmTypeParameter> getTypeParameters() {
 		return Collections.unmodifiableList(getDeclaration().getTypeParameters());
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getResolvedParameterTypes() {
 		JvmExecutable declaration = getDeclaration();
 		if (declaration.getParameters().isEmpty())
@@ -50,6 +52,7 @@ public abstract class AbstractResolvedExecutable<T extends JvmExecutable> extend
 		return parameterTypes = getResolvedReferences(unresolvedParameterTypes);
 	}
 	
+	@Override
 	public String getResolvedErasureSignature() {
 		JvmExecutable declaration = getDeclaration();
 		List<LightweightTypeReference> parameterTypes = getResolvedParameterTypes();
@@ -66,6 +69,7 @@ public abstract class AbstractResolvedExecutable<T extends JvmExecutable> extend
 		return result.toString();
 	}
 	
+	@Override
 	public String getResolvedSignature() {
 		JvmExecutable declaration = getDeclaration();
 		List<LightweightTypeReference> parameterTypes = getResolvedParameterTypes();
@@ -82,6 +86,7 @@ public abstract class AbstractResolvedExecutable<T extends JvmExecutable> extend
 		return result.toString();
 	}
 	
+	@Override
 	public String getSimpleSignature() {
 		JvmExecutable declaration = getDeclaration();
 		List<LightweightTypeReference> parameterTypes = getResolvedParameterTypes();
@@ -99,6 +104,7 @@ public abstract class AbstractResolvedExecutable<T extends JvmExecutable> extend
 	}
 	
 	
+	@Override
 	public List<LightweightTypeReference> getResolvedExceptions() {
 		JvmExecutable declaration = getDeclaration();
 		if (declaration.getExceptions().isEmpty())

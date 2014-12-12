@@ -74,7 +74,8 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getImportedNamespace()
+  @Override
+public String getImportedNamespace()
   {
     return importedNamespace;
   }
@@ -84,7 +85,8 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImportedNamespace(String newImportedNamespace)
+  @Override
+public void setImportedNamespace(String newImportedNamespace)
   {
     String oldImportedNamespace = importedNamespace;
     importedNamespace = newImportedNamespace;

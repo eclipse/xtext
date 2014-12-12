@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  */
 public class PublicVisibilityHelper implements IVisibilityHelper {
 
+	@Override
 	public boolean isVisible(/* @NonNull */ JvmMember member) {
 		return member.getVisibility() == JvmVisibility.PUBLIC;
 	}

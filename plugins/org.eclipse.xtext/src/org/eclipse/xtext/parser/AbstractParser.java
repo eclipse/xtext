@@ -25,6 +25,7 @@ public abstract class AbstractParser implements IParser {
 		return false;
 	}
 
+	@Override
 	public final IParseResult parse(Reader reader) {
 		StoppedTask task = Stopwatches.forTask("AbstractParser.parse");
 		try {
@@ -39,6 +40,7 @@ public abstract class AbstractParser implements IParser {
 
 	protected abstract IParseResult doParse(CharSequence sequence);
 
+	@Override
 	public final IParseResult reparse(IParseResult previousResult, ReplaceRegion replaceRegion) {
 		if (!isReparseSupported()) {
 			final StringBuilder builder = new StringBuilder(previousResult.getRootNode().getText());

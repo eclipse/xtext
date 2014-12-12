@@ -96,7 +96,8 @@ public class MQLqueryImpl extends MinimalEObjectImpl.Container implements MQLque
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SelectEntry> getSelectEntries()
+  @Override
+public EList<SelectEntry> getSelectEntries()
   {
     if (selectEntries == null)
     {
@@ -110,7 +111,8 @@ public class MQLqueryImpl extends MinimalEObjectImpl.Container implements MQLque
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<FromEntry> getFromEntries()
+  @Override
+public EList<FromEntry> getFromEntries()
   {
     if (fromEntries == null)
     {
@@ -124,7 +126,8 @@ public class MQLqueryImpl extends MinimalEObjectImpl.Container implements MQLque
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<WhereEntry> getWhereEntries()
+  @Override
+public EList<WhereEntry> getWhereEntries()
   {
     if (whereEntries == null)
     {

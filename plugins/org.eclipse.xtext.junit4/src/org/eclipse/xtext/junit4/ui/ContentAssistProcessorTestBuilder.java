@@ -517,18 +517,22 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(Strings.emptyIfNull(currentModelToParse)));
 		if (announceDirtyState) {
 			dirtyResource = new IDirtyResource() {
+				@Override
 				public String getContents() {
 					return currentModelToParse;
 				}
 
+				@Override
 				public String getActualContents() {
 					return currentModelToParse;
 				}
 
+				@Override
 				public IResourceDescription getDescription() {
 					return xtextResource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(xtextResource);
 				}
 
+				@Override
 				public URI getURI() {
 					return xtextResource.getURI();
 				}

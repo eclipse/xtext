@@ -87,7 +87,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -97,7 +98,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -110,7 +112,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmType getDefaultReference()
+  @Override
+public JvmType getDefaultReference()
   {
     if (defaultReference != null && defaultReference.eIsProxy())
     {
@@ -140,7 +143,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDefaultReference(JvmType newDefaultReference)
+  @Override
+public void setDefaultReference(JvmType newDefaultReference)
   {
     JvmType oldDefaultReference = defaultReference;
     defaultReference = newDefaultReference;

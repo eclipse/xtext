@@ -79,7 +79,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public Scenario1 getElement1()
+  @Override
+public Scenario1 getElement1()
   {
     return element1;
   }
@@ -106,7 +107,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement1(Scenario1 newElement1)
+  @Override
+public void setElement1(Scenario1 newElement1)
   {
     if (newElement1 != element1)
     {
@@ -127,7 +129,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public Scenario2 getElement2()
+  @Override
+public Scenario2 getElement2()
   {
     return element2;
   }
@@ -154,7 +157,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement2(Scenario2 newElement2)
+  @Override
+public void setElement2(Scenario2 newElement2)
   {
     if (newElement2 != element2)
     {

@@ -54,6 +54,7 @@ public class ResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 		this.fallBackResourceSet = resourceSet;
 	}
 	
+	@Override
 	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		URI resourceURI = targetURI.trimFragment();
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(resourceURI);

@@ -91,25 +91,31 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		collapseAllAction = new ReferenceSearchViewPageActions.CollapseAll(this);
 	}
 
+	@Override
 	public String getID() {
 		return id;
 	}
 
+	@Override
 	public void setID(String id) {
 		this.id = id;
 	}
 
+	@Override
 	public String getLabel() {
 		return searchResult == null ? "" : searchResult.getLabel();
 	}
 
+	@Override
 	public Object getUIState() {
 		return viewer.getSelection();
 	}
 
+	@Override
 	public void restoreState(IMemento memento) {
 	}
 
+	@Override
 	public void saveState(IMemento memento) {
 	}
 
@@ -118,6 +124,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		super.init(pageSite);
 	}
 
+	@Override
 	public void setInput(ISearchResult newSearchResult, Object uiState) {
 		synchronized (viewer) {
 			this.searchResult = newSearchResult;
@@ -131,6 +138,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 		}
 	}
 
+	@Override
 	public void setViewPart(ISearchResultViewPart part) {
 		this.part = part;
 	}
@@ -189,18 +197,22 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	protected IQueryListener createQueryListener() {
 		return new IQueryListener() {
 
+			@Override
 			public void queryStarting(ISearchQuery query) {
 				showBusyLabel(true);
 			}
 
+			@Override
 			public void queryRemoved(ISearchQuery query) {
 				showBusyLabel(false);
 			}
 
+			@Override
 			public void queryFinished(ISearchQuery query) {
 				showBusyLabel(false);
 			}
 
+			@Override
 			public void queryAdded(ISearchQuery query) {
 				showBusyLabel(false);
 			}
@@ -216,6 +228,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	protected void showBusyLabel(final boolean shouldShowBusy) {
 		if (shouldShowBusy != isBusyShowing) {
 			Display.getDefault().asyncExec(new Runnable() {
+				@Override
 				public void run() {
 					if (shouldShowBusy)
 						pagebook.showPage(busyLabel);

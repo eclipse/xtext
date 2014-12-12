@@ -38,6 +38,7 @@ public class ReplaceRegion implements ITypedRegion {
 		this.text = text;
 	}
 
+	@Override
 	public String getType() {
 		return REPLACE;
 	}
@@ -93,6 +94,7 @@ public class ReplaceRegion implements ITypedRegion {
 		return indexAfterReplace + (originalLength - replacementLength);
 	}
 
+	@Override
 	public int getOffset() {
 		return offset;
 	}
@@ -106,6 +108,7 @@ public class ReplaceRegion implements ITypedRegion {
 	 * 
 	 * @see org.eclipse.jface.text.IRegion#getLength()
 	 */
+	@Override
 	public int getLength() {
 		return originalLength;
 	}

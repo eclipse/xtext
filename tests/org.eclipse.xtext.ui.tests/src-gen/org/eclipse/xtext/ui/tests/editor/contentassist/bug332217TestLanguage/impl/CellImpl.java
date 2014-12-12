@@ -144,7 +144,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public CellType getType()
+  @Override
+public CellType getType()
   {
     return type;
   }
@@ -154,7 +155,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(CellType newType)
+  @Override
+public void setType(CellType newType)
   {
     CellType oldType = type;
     type = newType == null ? TYPE_EDEFAULT : newType;
@@ -167,7 +169,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getText()
+  @Override
+public ScalarExpression getText()
   {
     return text;
   }
@@ -194,7 +197,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setText(ScalarExpression newText)
+  @Override
+public void setText(ScalarExpression newText)
   {
     if (newText != text)
     {
@@ -215,7 +219,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getDetails()
+  @Override
+public ScalarExpression getDetails()
   {
     return details;
   }
@@ -242,7 +247,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDetails(ScalarExpression newDetails)
+  @Override
+public void setDetails(ScalarExpression newDetails)
   {
     if (newDetails != details)
     {
@@ -263,7 +269,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getImage()
+  @Override
+public ScalarExpression getImage()
   {
     return image;
   }
@@ -290,7 +297,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImage(ScalarExpression newImage)
+  @Override
+public void setImage(ScalarExpression newImage)
   {
     if (newImage != image)
     {
@@ -311,7 +319,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public ViewAction getAction()
+  @Override
+public ViewAction getAction()
   {
     return action;
   }
@@ -338,7 +347,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAction(ViewAction newAction)
+  @Override
+public void setAction(ViewAction newAction)
   {
     if (newAction != action)
     {
@@ -359,7 +369,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public CellAccessory getAccessory()
+  @Override
+public CellAccessory getAccessory()
   {
     return accessory;
   }
@@ -369,7 +380,8 @@ public class CellImpl extends ViewContentElementImpl implements Cell
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAccessory(CellAccessory newAccessory)
+  @Override
+public void setAccessory(CellAccessory newAccessory)
   {
     CellAccessory oldAccessory = accessory;
     accessory = newAccessory == null ? ACCESSORY_EDEFAULT : newAccessory;

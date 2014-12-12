@@ -28,6 +28,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyProgram:
 		//	{MyProgram} LT* package=MyPackage LT*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{MyProgram} LT* package=MyPackage LT*
@@ -56,6 +57,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Identifier:
 		//	name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -77,6 +79,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FQN:
 		//	ID (LT* "." LT* ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID (LT* "." LT* ID)*
@@ -109,6 +112,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//VirtualSemi:
 		//	";" | LT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//";" | LT
@@ -135,6 +139,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Literal:
 		//	num=NUMBER | str=STRING | bool="true" | bool="false";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//num=NUMBER | str=STRING | bool="true" | bool="false"
@@ -173,6 +178,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyPrimary:
 		//	Literal | Identifier;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Literal | Identifier
@@ -203,6 +209,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyPackage:
 		//	"package" LT* name=FQN LT* "{" LT* (directives+=MyClass LT*)* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"package" LT* name=FQN LT* "{" LT* (directives+=MyClass LT*)* "}"
@@ -264,6 +271,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyClass:
 		//	"public"? "class" LT* name=ID LT* "{" LT* (directives+=MyField LT*)* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"public"? "class" LT* name=ID LT* "{" LT* (directives+=MyField LT*)* "}"
@@ -319,6 +327,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyAttribute:
 		//	PUBLIC="public" | PRIVATE="private";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//PUBLIC="public" | PRIVATE="private"
@@ -346,6 +355,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyAttributes:
 		//	{MyAttributes} attributes+=MyAttribute*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{MyAttributes} attributes+=MyAttribute*
@@ -380,6 +390,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyField:
 		//	attr=MyAttributes "var" LT* bindings+=MyBinding (LT* "," LT* bindings+=MyBinding)* VirtualSemi;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//attr=MyAttributes "var" LT* bindings+=MyBinding (LT* "," LT* bindings+=MyBinding)* VirtualSemi
@@ -445,6 +456,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyBinding:
 		//	name=ID (LT* ":" LT* type=FQN)? (LT* "=" LT* expression=MyPrimary)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID (LT* ":" LT* type=FQN)? (LT* "=" LT* expression=MyPrimary)?
@@ -561,6 +573,7 @@ public class Bug347012TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

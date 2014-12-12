@@ -51,6 +51,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		this.replacements = createTextReplacementsSet();
 	}
 
+	@Override
 	public Integer canAutowrap() {
 		return canAutowrap;
 	}
@@ -58,33 +59,40 @@ public class TextReplacerContext implements ITextReplacerContext {
 	protected TextSegmentSet<ITextReplacement> createTextReplacementsSet() {
 		return new ArrayListTextSegmentSet<ITextReplacement>(Functions.<ITextReplacement> identity(),
 				new Function<ITextReplacement, String>() {
+					@Override
 					public String apply(ITextReplacement input) {
 						return input.getReplacementText();
 					}
 				});
 	}
 
+	@Override
 	public IFormattableDocument getDocument() {
 		return document;
 	}
 
+	@Override
 	public AbstractFormatter2 getFormatter() {
 		return document.getFormatter();
 	}
 
+	@Override
 	public int getIndentation() {
 		return this.indentation;
 	}
 
+	@Override
 	public String getIndentationString() {
 		return getIndentationString(getIndentation());
 	}
 
+	@Override
 	public String getIndentationString(int indentationLevel) {
 		AbstractFormatter2 formatter = document.getFormatter();
 		return Strings.repeat(formatter.getPreference(FormatterPreferenceKeys.indentation), indentationLevel);
 	}
 
+	@Override
 	public int getLeadingCharsInLineCount() {
 		ITextRegionAccess access = getDocument().getRequest().getTextRegionAccess();
 		int lastOffset = replacer.getRegion().getOffset();
@@ -121,6 +129,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return count;
 	}
 
+	@Override
 	public Iterable<ITextReplacement> getLocalReplacements() {
 		if (replacements != null)
 			return replacements;
@@ -128,14 +137,17 @@ public class TextReplacerContext implements ITextReplacerContext {
 			return Collections.<ITextReplacement> emptyList();
 	}
 
+	@Override
 	public String getNewLinesString(int count) {
 		return Strings.repeat(document.getFormatter().getPreference(FormatterPreferenceKeys.lineSeparator), count);
 	}
 
+	@Override
 	public ITextReplacerContext getPreviousContext() {
 		return previous;
 	}
 
+	@Override
 	public List<ITextReplacement> getReplacementsUntil(ITextReplacerContext first) {
 		ITextReplacerContext current = this;
 		List<Iterable<ITextReplacement>> reversedReplacements = Lists.newArrayList();
@@ -154,10 +166,12 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return flattenedReplacements;
 	}
 
+	@Override
 	public ITextReplacer getReplacer() {
 		return replacer;
 	}
 
+	@Override
 	public boolean isAutowrap() {
 		return autowrap;
 	}
@@ -172,6 +186,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return false;
 	}
 
+	@Override
 	public boolean isInsideFormattedRegion() {
 		return true; // TODO: implement
 	}
@@ -191,18 +206,21 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return length;
 	}
 
+	@Override
 	public void replaceText(CharSequence text) {
 		Preconditions.checkNotNull(replacer);
 		ITextSegment region = replacer.getRegion();
 		replaceText(region.getOffset(), region.getLength(), text);
 	}
 
+	@Override
 	public void replaceText(int offset, int lenght, CharSequence text) {
 		Preconditions.checkNotNull(text);
 		ITextReplacement replacement = document.getFormatter().createTextReplacement(offset, lenght, text.toString());
 		replaceText(replacement);
 	}
 
+	@Override
 	public void replaceText(ITextReplacement replacement) {
 		Preconditions.checkNotNull(replacer);
 		if (!replacer.getRegion().contains(replacement)) {
@@ -226,19 +244,23 @@ public class TextReplacerContext implements ITextReplacerContext {
 		}
 	}
 
+	@Override
 	public void replaceText(ITextSegment region, CharSequence text) {
 		replaceText(region.getOffset(), region.getLength(), text);
 	}
 
+	@Override
 	public void setAutowrap(boolean value) {
 		this.autowrap = value;
 		this.replacements = createTextReplacementsSet();
 	}
 
+	@Override
 	public void setCanAutowrap(Integer value) {
 		this.canAutowrap = value;
 	}
 
+	@Override
 	public void setNextReplacerIsChild() {
 		this.nextReplacerIsChild = true;
 	}
@@ -284,10 +306,12 @@ public class TextReplacerContext implements ITextReplacerContext {
 		return context;
 	}
 
+	@Override
 	public ITextReplacerContext withIndentation(int indentation) {
 		return new TextReplacerContext(document, this, indentation, null);
 	}
 
+	@Override
 	public ITextReplacerContext withReplacer(ITextReplacer replacer) {
 		ITextReplacerContext current = this;
 		while (current != null) {

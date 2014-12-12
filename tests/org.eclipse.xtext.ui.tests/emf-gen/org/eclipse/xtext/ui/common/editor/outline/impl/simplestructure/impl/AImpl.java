@@ -106,6 +106,7 @@ public class AImpl extends EObjectImpl implements A {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A getA() {
 		return a;
 	}
@@ -130,6 +131,7 @@ public class AImpl extends EObjectImpl implements A {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setA(A newA) {
 		if (newA != a) {
 			NotificationChain msgs = null;
@@ -149,6 +151,7 @@ public class AImpl extends EObjectImpl implements A {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<B> getB() {
 		if (b == null) {
 			b = new EObjectContainmentEList<B>(B.class, this, SimplestructurePackage.A__B);
@@ -161,6 +164,7 @@ public class AImpl extends EObjectImpl implements A {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -170,6 +174,7 @@ public class AImpl extends EObjectImpl implements A {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;

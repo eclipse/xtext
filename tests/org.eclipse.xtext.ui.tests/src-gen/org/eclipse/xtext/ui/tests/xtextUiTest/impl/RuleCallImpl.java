@@ -65,7 +65,8 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRule getRule()
+  @Override
+public AbstractRule getRule()
   {
     if (rule != null && rule.eIsProxy())
     {
@@ -95,7 +96,8 @@ public class RuleCallImpl extends AbstractElementImpl implements RuleCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRule(AbstractRule newRule)
+  @Override
+public void setRule(AbstractRule newRule)
   {
     AbstractRule oldRule = rule;
     rule = newRule;

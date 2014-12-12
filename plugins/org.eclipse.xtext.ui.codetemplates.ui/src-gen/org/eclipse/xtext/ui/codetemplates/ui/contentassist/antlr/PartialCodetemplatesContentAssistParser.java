@@ -19,6 +19,7 @@ public class PartialCodetemplatesContentAssistParser extends CodetemplatesParser
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

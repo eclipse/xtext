@@ -159,6 +159,7 @@ public class XtextTokenStream extends CommonTokenStream {
 		private MyHiddenTokens(BitSet prev) {
 			this. prev = prev;
 		}
+		@Override
 		public void restore() {
 			skipHiddenTokens();
 			XtextTokenStream.this.hiddenTokens = prev;

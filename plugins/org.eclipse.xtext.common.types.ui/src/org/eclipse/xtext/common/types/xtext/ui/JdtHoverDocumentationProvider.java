@@ -34,6 +34,7 @@ public class JdtHoverDocumentationProvider implements IEObjectHoverDocumentation
 	
 	private static Logger log = Logger.getLogger(JdtHoverDocumentationProvider.class);
 	
+	@Override
 	public String getDocumentation(EObject object) {
 		if(object instanceof JvmIdentifiableElement){
 			IJavaElement element = javaElementFinder.findElementFor((JvmIdentifiableElement) object);

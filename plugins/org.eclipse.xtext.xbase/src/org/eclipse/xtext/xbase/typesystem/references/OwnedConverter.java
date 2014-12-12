@@ -41,6 +41,7 @@ public class OwnedConverter extends LightweightTypeReferenceFactory implements F
 		super(owner, keepUnboundWildcards);
 	}
 	
+	@Override
 	public LightweightTypeReference apply(JvmTypeReference reference) {
 		return toLightweightReference(reference);
 	}

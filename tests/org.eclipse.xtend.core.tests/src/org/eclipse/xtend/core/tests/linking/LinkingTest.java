@@ -1095,6 +1095,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 		Set<EObject> elements = associator.getJvmElements(func);
 		Iterable<JvmOperation> filter = filter(elements, JvmOperation.class);
 		JvmOperation initializer = filter(filter, new Predicate<JvmOperation>() {
+			@Override
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().startsWith("_init_");
 			}

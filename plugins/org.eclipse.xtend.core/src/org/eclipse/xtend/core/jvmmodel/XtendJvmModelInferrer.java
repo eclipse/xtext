@@ -135,6 +135,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private CompilerPhases compilerPhases;
 	
+	@Override
 	public void infer(/* @Nullable */ EObject object, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
 			return;
@@ -213,6 +214,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			final JvmAnnotationType annotation = typesFactory.createJvmAnnotationType();
 			if (!preIndexingPhase) {
 				doLater.add(new Runnable() {
+					@Override
 					public void run() {
 						initialize((XtendAnnotationType)declaration, annotation);
 					}
@@ -225,6 +227,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			copyTypeParameters(xtendClass.getTypeParameters(), javaType);
 			if (!preIndexingPhase) {
 				doLater.add(new Runnable() {
+					@Override
 					public void run() {
 						initialize((XtendClass) declaration, javaType);
 					}
@@ -238,6 +241,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			copyTypeParameters(xtendInterface.getTypeParameters(), javaType);
 			if (!preIndexingPhase) {
 				doLater.add(new Runnable() {
+					@Override
 					public void run() {
 						initialize((XtendInterface) declaration, javaType);
 					}
@@ -248,6 +252,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			final JvmEnumerationType javaType = typesFactory.createJvmEnumerationType();
 			if (!preIndexingPhase) {
 				doLater.add(new Runnable() {
+					@Override
 					public void run() {
 						initialize((XtendEnum) declaration, javaType);
 					}
@@ -432,6 +437,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (DispatchHelper.DispatchSignature signature : methods.keySet()) {
 			List<JvmOperation> operations = methods.get(signature);
 			Iterable<JvmOperation> localOperations = Iterables.filter(operations, new Predicate<JvmOperation>() {
+				@Override
 				public boolean apply(JvmOperation input) {
 					return target == input.eContainer();
 				}
@@ -702,6 +708,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	private Predicate<XAnnotation> annotationTranslationFilter = new Predicate<XAnnotation>() {
+		@Override
 		public boolean apply(/* @Nullable */ XAnnotation annotation) {
 			if (annotation == null || annotation.getAnnotationType() == null)
 				return false;

@@ -29,6 +29,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Program:
 		//	{Program} (LT* directives+=ProgramDirective)* LT*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Program} (LT* directives+=ProgramDirective)* LT*
@@ -61,6 +62,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ProgramDirective:
 		//	FunctionDefinition | Statement;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//FunctionDefinition | Statement
@@ -91,6 +93,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FunctionDefinition:
 		//	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
@@ -149,6 +152,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Attribute:
 		//	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
@@ -205,6 +209,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Parameters:
 		//	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")"
@@ -267,6 +272,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Block:
 		//	{Block} "{" (LT* directives+=Statement)* LT* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Block} "{" (LT* directives+=Statement)* LT* "}"
@@ -311,6 +317,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Statement:
 		//	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Block | {ExpressionStatement} expression=PostfixExpression (";" | LT)
@@ -365,6 +372,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PostfixExpression:
 		//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
 		//	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
@@ -438,6 +446,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ListExpression:
 		//	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*
@@ -486,6 +495,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//PropertyOperator:
 		//	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]"
@@ -547,6 +557,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//PrimaryExpression:
 		//	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block
@@ -646,6 +657,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

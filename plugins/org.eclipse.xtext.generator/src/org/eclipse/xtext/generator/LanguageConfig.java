@@ -61,6 +61,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			this.delim = string;
 		}
 
+		@Override
 		public String apply(IGeneratorFragment from) {
 			if (from instanceof CompositeGeneratorFragment) {
 				return Strings.toString(((CompositeGeneratorFragment) from).fragments, this, delim);
@@ -249,6 +250,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 		if (validator != null) {
 			DiagnosticChain chain = new DiagnosticChain() {
 
+				@Override
 				public void add(Diagnostic diagnostic) {
 					if (diagnostic.getSeverity() == Diagnostic.ERROR) {
 						if (diagnostic.getException() == null)
@@ -258,10 +260,12 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 					}
 				}
 
+				@Override
 				public void addAll(Diagnostic diagnostic) {
 					add(diagnostic);
 				}
 
+				@Override
 				public void merge(Diagnostic diagnostic) {
 					throw new UnsupportedOperationException();
 				}

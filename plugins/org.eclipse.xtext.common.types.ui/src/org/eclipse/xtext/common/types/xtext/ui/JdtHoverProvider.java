@@ -33,6 +33,7 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 	
 	private JavadocHoverWrapper javadocHover = new JavadocHoverWrapper ();
 	
+	@Override
 	public IInformationControlCreatorProvider getHoverInfo(EObject eObject, ITextViewer viewer, IRegion region) {
 		if (eObject instanceof JvmIdentifiableElement) {
 			JvmIdentifiableElement jvmIdentifiableElement = (JvmIdentifiableElement) eObject;
@@ -42,14 +43,17 @@ public class JdtHoverProvider implements IEObjectHoverProvider {
 				final Object hoverInfo2 = javadocHover.getHoverInfo2(viewer, region);
 				return new IInformationControlCreatorProvider2() {
 
+					@Override
 					public IInformationControlCreator getHoverControlCreator() {
 						return javadocHover.getHoverControlCreator();
 					}
 
+					@Override
 					public Object getInfo() {
 						return hoverInfo2;
 					}
 
+					@Override
 					public IInformationControlCreator getInformationPresenterControlCreator() {
 						return javadocHover.getInformationPresenterControlCreator();
 					}

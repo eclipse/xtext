@@ -67,7 +67,8 @@ public class MyProgramImpl extends MinimalEObjectImpl.Container implements MyPro
    * <!-- end-user-doc -->
    * @generated
    */
-  public MyPackage getPackage()
+  @Override
+public MyPackage getPackage()
   {
     return package_;
   }
@@ -94,7 +95,8 @@ public class MyProgramImpl extends MinimalEObjectImpl.Container implements MyPro
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPackage(MyPackage newPackage)
+  @Override
+public void setPackage(MyPackage newPackage)
   {
     if (newPackage != package_)
     {

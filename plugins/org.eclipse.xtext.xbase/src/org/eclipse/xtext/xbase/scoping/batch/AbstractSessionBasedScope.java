@@ -185,6 +185,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 		if (localElements.isEmpty())
 			return getParent().getElements(name);
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> get() {
 				return getParent().getElements(name);
 			}
@@ -198,6 +199,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
 		Iterable<IEObjectDescription> localElements = getAllLocalElements();
 		Iterable<IEObjectDescription> result = Iterables.filter(localElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
 					return canBeFoundByNameAndShadowingKey(input);

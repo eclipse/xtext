@@ -73,6 +73,7 @@ public class StateBasedContainerManagerTest extends AbstractContainerRelatedTest
 		containerManager.setStateProvider(this);
 	}
 
+	@Override
 	public IAllContainersState get(IResourceDescriptions context) {
 		assertSame(this, context);
 		return projectsState;

@@ -174,6 +174,7 @@ public class IterableExtensions {
 		if (count == 0)
 			return Collections.emptyList();
 		return new Iterable<T>() {
+			@Override
 			public Iterator<T> iterator() {
 				return IteratorExtensions.take(iterable.iterator(), count);
 			}
@@ -201,6 +202,7 @@ public class IterableExtensions {
 			throw new IllegalArgumentException("Cannot drop a negative number of elements. Argument 'count' was: "
 					+ count);
 		return new Iterable<T>() {
+			@Override
 			public Iterator<T> iterator() {
 				return IteratorExtensions.drop(iterable.iterator(), count);
 			}
@@ -720,6 +722,7 @@ public class IterableExtensions {
 		if (predicate == null)
 			throw new NullPointerException("predicate");
 		return new Iterable<T>() {
+			@Override
 			public Iterator<T> iterator() {
 				return IteratorExtensions.takeWhile(iterable.iterator(), predicate);
 			}
@@ -744,6 +747,7 @@ public class IterableExtensions {
 		if (predicate == null)
 			throw new NullPointerException("predicate");
 		return new Iterable<T>() {
+			@Override
 			public Iterator<T> iterator() {
 				return IteratorExtensions.dropWhile(iterable.iterator(), predicate);
 			}
@@ -768,6 +772,7 @@ public class IterableExtensions {
 		if (iterable == null)
 			throw new NullPointerException("iterable");
 		return new Iterable<Pair<Integer, A>>() {
+			@Override
 			public Iterator<Pair<Integer, A>> iterator() {
 				return IteratorExtensions.indexed(iterable.iterator());
 			}

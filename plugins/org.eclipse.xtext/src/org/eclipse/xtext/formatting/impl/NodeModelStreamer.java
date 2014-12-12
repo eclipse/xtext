@@ -44,6 +44,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 	@Inject
 	protected IValueConverterService valueConverter;
 
+	@Override
 	public ITextRegion feedTokenStream(ITokenStream out, ICompositeNode in, int offset, int length) throws IOException {
 		List<INode> nodes = getLeafs(in, offset, offset + length);
 		if (nodes.isEmpty())

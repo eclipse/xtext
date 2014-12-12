@@ -55,6 +55,7 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment impleme
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public void registerNaming(Naming naming) {
 		this.naming = naming;
 	}

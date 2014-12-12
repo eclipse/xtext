@@ -65,7 +65,8 @@ public class StringLiteralExpImpl extends PrimitiveLiteralExpImpl implements Str
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getValues()
+  @Override
+public EList<String> getValues()
   {
     if (values == null)
     {

@@ -45,6 +45,7 @@ public class LinkingWarningsTest extends AbstractXtextTests implements ILinkingD
 		});
 	}
 	
+	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
 		return new DiagnosticMessage(expected, Severity.WARNING, Diagnostic.LINKING_DIAGNOSTIC);
 	}

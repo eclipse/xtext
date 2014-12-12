@@ -32,16 +32,20 @@ public abstract class AbstractContainer extends AbstractCompoundSelectable imple
 		return getResourceDescriptions();
 	}
 	
+	@Override
 	public int getResourceDescriptionCount() {
 		return Iterables.size(getResourceDescriptions());
 	}
 	
+	@Override
 	public boolean hasResourceDescription(URI uri) {
 		return getResourceDescription(uri) != null;
 	}
 	
+	@Override
 	public IResourceDescription getResourceDescription(final URI uri) {
 		return Iterables.find(getResourceDescriptions(), new Predicate<IResourceDescription>() {
+			@Override
 			public boolean apply(IResourceDescription input) {
 				return uri.equals(input.getURI());
 			}

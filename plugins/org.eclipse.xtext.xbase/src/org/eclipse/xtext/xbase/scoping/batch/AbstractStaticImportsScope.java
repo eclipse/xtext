@@ -103,6 +103,7 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedExe
 		}
 		final List<IEObjectDescription> result = Lists.newArrayList();
 		processFeatureNames(name, new NameAcceptor() {
+			@Override
 			public void accept(String simpleName, int order) {
 				for (TypeBucket bucket : buckets) {
 					if (bucket.isRestrictingNames()) {

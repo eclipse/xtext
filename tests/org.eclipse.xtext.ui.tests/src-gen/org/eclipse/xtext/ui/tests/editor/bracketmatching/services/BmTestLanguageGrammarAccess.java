@@ -25,6 +25,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//File:
 		//	expression+=Expression*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//expression+=Expression*
@@ -46,6 +47,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Expression:
 		//	SExpression | Atom | "[" Expression "]";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//SExpression | Atom | "[" Expression "]"
@@ -88,6 +90,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//SExpression:
 		//	{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end")
@@ -137,6 +140,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Atom:
 		//	value=VALUE;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=VALUE
@@ -155,6 +159,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//VALUE:
 		//	ID | INT | STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID | INT | STRING
@@ -210,6 +215,7 @@ public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -55,6 +55,7 @@ public interface Issue {
 		private CheckType type;
 		private String[] data;
 
+		@Override
 		public Integer getLength() {
 			return length;
 		}
@@ -68,6 +69,7 @@ public interface Issue {
 			}
 		}
 
+		@Override
 		public Integer getLineNumber() {
 			return lineNumber;
 		}
@@ -76,6 +78,7 @@ public interface Issue {
 			this.lineNumber = lineNumber;
 		}
 
+		@Override
 		public Integer getOffset() {
 			return offset;
 		}
@@ -84,6 +87,7 @@ public interface Issue {
 			this.offset = offset;
 		}
 
+		@Override
 		public String getMessage() {
 			return message;
 		}
@@ -92,6 +96,7 @@ public interface Issue {
 			this.message = message;
 		}
 
+		@Override
 		public URI getUriToProblem() {
 			return uriToProblem;
 		}
@@ -100,6 +105,7 @@ public interface Issue {
 			this.uriToProblem = uriToProblem;
 		}
 
+		@Override
 		public Severity getSeverity() {
 			return severity == null ? Severity.ERROR : severity;
 		}
@@ -108,6 +114,7 @@ public interface Issue {
 			this.severity = severity;
 		}
 
+		@Override
 		public String getCode() {
 			return code;
 		}
@@ -116,6 +123,7 @@ public interface Issue {
 			this.code = code;
 		}
 
+		@Override
 		public String[] getData() {
 			return data;
 		}
@@ -124,6 +132,7 @@ public interface Issue {
 			this.data = data;
 		}
 
+		@Override
 		public CheckType getType() {
 			return type;
 		}
@@ -136,6 +145,7 @@ public interface Issue {
 			this.isSyntaxError = isSyntaxError;
 		}
 
+		@Override
 		public boolean isSyntaxError() {
 			return isSyntaxError;
 		}

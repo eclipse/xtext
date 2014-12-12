@@ -100,7 +100,8 @@ public class LetVariableImpl extends MinimalEObjectImpl.Container implements Let
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -110,7 +111,8 @@ public class LetVariableImpl extends MinimalEObjectImpl.Container implements Let
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -123,7 +125,8 @@ public class LetVariableImpl extends MinimalEObjectImpl.Container implements Let
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeExp getType()
+  @Override
+public TypeExp getType()
   {
     return type;
   }
@@ -150,7 +153,8 @@ public class LetVariableImpl extends MinimalEObjectImpl.Container implements Let
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeExp newType)
+  @Override
+public void setType(TypeExp newType)
   {
     if (newType != type)
     {
@@ -171,7 +175,8 @@ public class LetVariableImpl extends MinimalEObjectImpl.Container implements Let
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getInitExpression()
+  @Override
+public Expression getInitExpression()
   {
     return initExpression;
   }
@@ -198,7 +203,8 @@ public class LetVariableImpl extends MinimalEObjectImpl.Container implements Let
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setInitExpression(Expression newInitExpression)
+  @Override
+public void setInitExpression(Expression newInitExpression)
   {
     if (newInitExpression != initExpression)
     {

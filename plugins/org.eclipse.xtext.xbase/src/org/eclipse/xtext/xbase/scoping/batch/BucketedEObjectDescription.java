@@ -52,6 +52,7 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		this.visible = visible;
 	}
 
+	@Override
 	public String getShadowingKey() {
 		EObject object = getEObjectOrProxy();
 		if (object instanceof JvmIdentifiableElement) {
@@ -97,11 +98,13 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		}
 	}
 	
+	@Override
 	public int getBucketId() {
 		return bucketId;
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getImplicitReceiverType() {
 		return null;
 	}
@@ -111,48 +114,59 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	 * even though there is a syntactic receiver available (in case of static features).
 	 */
 	/* @Nullable */
+	@Override
 	public XExpression getImplicitReceiver() {
 		return null;
 	}
 	
+	@Override
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
 	}
 	
+	@Override
 	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
 		return ConformanceHint.fromFlags(getImplicitReceiverConformanceFlags());
 	}
 	
+	@Override
 	public int getImplicitReceiverConformanceFlags() {
 		return ConformanceFlags.NONE;
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return null;
 	}
 	
 	/* @Nullable */
+	@Override
 	public XExpression getSyntacticReceiver() {
 		return null;
 	}
 	
+	@Override
 	public boolean isSyntacticReceiverPossibleArgument() {
 		return true;
 	}
 	
+	@Override
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
 	}
 	
+	@Override
 	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
 		return ConformanceHint.fromFlags(getSyntacticReceiverConformanceFlags());
 	}
 	
+	@Override
 	public int getSyntacticReceiverConformanceFlags() {
 		return ConformanceFlags.NONE;
 	}
 	
+	@Override
 	public boolean isVisible() {
 		return visible;
 	}
@@ -162,28 +176,34 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return String.format("%s:%s [key: %s]", getName(), getElementOrProxy().getIdentifier(), getShadowingKey());
 	}
 
+	@Override
 	public JvmIdentifiableElement getElementOrProxy() {
 		return (JvmIdentifiableElement) getEObjectOrProxy();
 	}
 
 	/* @Nullable */
+	@Override
 	public XExpression getImplicitFirstArgument() {
 		return null;
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return false;
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return false;
 	}
 	
+	@Override
 	public int getNumberOfIrrelevantParameters() {
 		if (isExtension())
 			return 1;
@@ -192,6 +212,7 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return 0;
 	}
 	
+	@Override
 	public int getNumberOfParameters() {
 		JvmIdentifiableElement elementOrProxy = getElementOrProxy();
 		if (elementOrProxy instanceof JvmExecutable) {
@@ -201,6 +222,7 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return 0;
 	}
 	
+	@Override
 	public boolean isValidStaticState() {
 		return true;
 	}

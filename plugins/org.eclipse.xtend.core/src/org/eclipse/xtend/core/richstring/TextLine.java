@@ -87,10 +87,12 @@ public class TextLine implements CharSequence {
 		return offset;
 	}
 	
+	@Override
 	public int length() {
 		return length;
 	}
 
+	@Override
 	public char charAt(int index) {
 		return completeText.charAt(index + offset);
 	}
@@ -137,6 +139,7 @@ public class TextLine implements CharSequence {
      *          if <tt>end</tt> is greater than <tt>length()</tt>,
      *          or if <tt>start</tt> is greater than <tt>end</tt>
 	 */
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		if (start < 0 || start > end) {
 			throwIndexOutOfBounds(start);

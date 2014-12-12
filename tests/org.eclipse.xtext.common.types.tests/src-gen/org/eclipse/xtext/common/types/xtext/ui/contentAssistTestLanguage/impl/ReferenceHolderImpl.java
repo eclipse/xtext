@@ -88,7 +88,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmType getDefaultReference()
+  @Override
+public JvmType getDefaultReference()
   {
     if (defaultReference != null && defaultReference.eIsProxy())
     {
@@ -118,7 +119,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDefaultReference(JvmType newDefaultReference)
+  @Override
+public void setDefaultReference(JvmType newDefaultReference)
   {
     JvmType oldDefaultReference = defaultReference;
     defaultReference = newDefaultReference;
@@ -131,7 +133,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmType getCustomizedReference()
+  @Override
+public JvmType getCustomizedReference()
   {
     if (customizedReference != null && customizedReference.eIsProxy())
     {
@@ -161,7 +164,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCustomizedReference(JvmType newCustomizedReference)
+  @Override
+public void setCustomizedReference(JvmType newCustomizedReference)
   {
     JvmType oldCustomizedReference = customizedReference;
     customizedReference = newCustomizedReference;
@@ -174,7 +178,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public JvmType getSubtypeReference()
+  @Override
+public JvmType getSubtypeReference()
   {
     if (subtypeReference != null && subtypeReference.eIsProxy())
     {
@@ -204,7 +209,8 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSubtypeReference(JvmType newSubtypeReference)
+  @Override
+public void setSubtypeReference(JvmType newSubtypeReference)
   {
     JvmType oldSubtypeReference = subtypeReference;
     subtypeReference = newSubtypeReference;

@@ -120,6 +120,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 		final String ruleName = issue.getData()[0];
 		acceptor.accept(issue, "Create rule '" + ruleName + "'", "Create rule '" + ruleName + "'", NULL_QUICKFIX_IMAGE,
 				new ISemanticModification() {
+					@Override
 					public void apply(final EObject element, IModificationContext context) throws BadLocationException {
 						AbstractRule abstractRule = EcoreUtil2.getContainerOfType(element, ParserRule.class);
 						ICompositeNode node = NodeModelUtils.getNode(abstractRule);
@@ -139,6 +140,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 		final String metaModelName = issue.getData()[0];
 		acceptor.accept(issue, "Fix metamodel name '" + metaModelName + "'", "Fix metamodel name '" + metaModelName
 				+ "'", NULL_QUICKFIX_IMAGE, new ISemanticModification() {
+			@Override
 			public void apply(final EObject element, IModificationContext context) {
 				GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) element;
 				generatedMetamodel.setName(Strings.toFirstLower(generatedMetamodel.getName()));
@@ -150,6 +152,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixEmptyEnumLiteral(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix empty enum literal", "Fix empty enum literal", NULL_QUICKFIX_IMAGE,
 				new ISemanticModification() {
+					@Override
 					public void apply(final EObject element, IModificationContext context) {
 						EnumLiteralDeclaration enumLiteralDeclaration = (EnumLiteralDeclaration) element;
 						Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
@@ -163,6 +166,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixInvalidActionUsage(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Fix invalid action usage", "Fix invalid action usage", NULL_QUICKFIX_IMAGE,
 				new IModification() {
+					@Override
 					public void apply(IModificationContext context) throws BadLocationException {
 						context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), "");
 					}
@@ -177,6 +181,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					"Fix the bogus package import\n" +
 					"import '" + issue.getData()[0] + "'", NULL_QUICKFIX_IMAGE,
 					new IModification() {
+						@Override
 						public void apply(IModificationContext context) throws BadLocationException {
 							String replaceString = valueConverterService.toString(issue.getData()[0], "STRING");
 							IXtextDocument document = context.getXtextDocument();
@@ -197,11 +202,13 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 					"Fix the bogus package import\n" +
 					"import '" + issue.getData()[0] + "'", NULL_QUICKFIX_IMAGE,
 					new IModification() {
+						@Override
 						public void apply(IModificationContext context) throws BadLocationException {
 							String replaceString = valueConverterService.toString(issue.getData()[0], "STRING");
 							IXtextDocument document = context.getXtextDocument();
 							final List<String> importedPackages = document.priorityReadOnly(new IUnitOfWork<List<String>, XtextResource>() {
 
+								@Override
 								public List<String> exec(XtextResource state) throws Exception {
 									IResourceDescriptions descriptions = resourceDescriptionsProvider.getResourceDescriptions(state);
 									ResourceSet resourceSet = state.getResourceSet();
@@ -375,6 +382,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 							if (importedPackages != null && !importedPackages.isEmpty()) {
 								final Shell shell = workbench.getActiveWorkbenchWindow().getShell();
 								shell.getDisplay().asyncExec(new Runnable() {
+									@Override
 									public void run() {
 										String title = "Please update the Ecore2XtextDslProjectContributor that generates the language.";
 										String message = "Please make sure that the Ecore2XtextDslProjectContributor that generates the language is up-to date.\n" +
@@ -405,6 +413,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 			final String upperCase = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE,issue.getData()[0]).toString();
 			acceptor.accept(issue, "Change name to " + upperCase , "Change name to " + upperCase, "upcase.png", new IModification() {
 
+				@Override
 				public void apply(IModificationContext context) throws Exception {
 					final IXtextDocument xtextDocument = context.getXtextDocument();
 					xtextDocument.replace(issue.getOffset(), issue.getLength(), upperCase);
@@ -413,6 +422,7 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 						public void process(XtextResource state) throws Exception {
 							final EObject terminalRule = state.getEObject(issue.getUriToProblem().fragment());
 							Iterable<RuleCall> candidates = Iterables.filter(Iterables.filter(Lists.newArrayList(state.getAllContents()),RuleCall.class), new Predicate<RuleCall>() {
+								@Override
 								public boolean apply(RuleCall ruleCall) {
 									return ruleCall.getRule() == terminalRule;
 								}

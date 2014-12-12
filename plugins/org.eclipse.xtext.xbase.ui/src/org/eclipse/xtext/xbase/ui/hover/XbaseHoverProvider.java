@@ -209,9 +209,11 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected void addLinkListener(final IXtextBrowserInformationControl control) {
 		control.addLocationListener(elementLinks.createLocationListener(new XbaseElementLinks.IXbaseLinkHandler() {
 
+			@Override
 			public void handleXtextdocViewLink(URI linkTarget) {
 			}
 
+			@Override
 			public void handleInlineXtextdocLink(URI linkTarget) {
 				XtextBrowserInformationControlInput hoverInfo = getHoverInfo(getTarget(linkTarget), null,
 						(XtextBrowserInformationControlInput) control.getInput());
@@ -221,6 +223,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 					control.setInput(hoverInfo);
 			}
 
+			@Override
 			public void handleDeclarationLink(URI linkTarget) {
 				control.notifyDelayedInputChange(null);
 				control.dispose();
@@ -249,6 +252,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 					uriEditorOpener.open(linkTarget, true);
 			}
 
+			@Override
 			public boolean handleExternalLink(URL url, Display display) {
 				control.notifyDelayedInputChange(null);
 				control.dispose(); //FIXME: should have protocol to hide, rather than dispose
@@ -257,6 +261,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 				return true;
 			}
 
+			@Override
 			public void handleTextSet() {
 			}
 
@@ -266,6 +271,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 				return rs.getEObject(uri, true);
 			}
 
+			@Override
 			public void handleInlineJavadocLink(IJavaElement target) {
 				String html = getHtmlFromIJavaElement(target);
 				XtextBrowserInformationControlInput hoverInfo = new XbaseInformationControlInput((XtextBrowserInformationControlInput) control.getInput(), null, target, html, labelProvider);
@@ -335,6 +341,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 			final OpenDeclarationAction openDeclarationAction = new OpenDeclarationAction(control);
 			tbm.add(openDeclarationAction);
 			IInputChangedListener inputChangeListener = new IInputChangedListener() {
+				@Override
 				public void inputChanged(Object newInput) {
 					backAction.update();
 					forwardAction.update();

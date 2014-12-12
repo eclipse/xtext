@@ -71,11 +71,13 @@ public class SwitchOutlineModeContribution extends AbstractToggleOutlineContribu
 		this.outlinePage = null;
 	}
 
+	@Override
 	public void register(QuickOutlinePopup quickOutline, IMenuManager dialogMenu) {
 		this.quickOutline = quickOutline;
 		dialogMenu.add(getAction());
 	}
 
+	@Override
 	public void deregister(QuickOutlinePopup quickOutline) {
 		this.quickOutline = null;
 	}

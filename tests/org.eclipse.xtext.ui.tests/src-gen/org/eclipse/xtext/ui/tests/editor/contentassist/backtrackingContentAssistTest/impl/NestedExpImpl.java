@@ -66,7 +66,8 @@ public class NestedExpImpl extends ExpressionImpl implements NestedExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getSource()
+  @Override
+public Expression getSource()
   {
     return source;
   }
@@ -93,7 +94,8 @@ public class NestedExpImpl extends ExpressionImpl implements NestedExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSource(Expression newSource)
+  @Override
+public void setSource(Expression newSource)
   {
     if (newSource != source)
     {

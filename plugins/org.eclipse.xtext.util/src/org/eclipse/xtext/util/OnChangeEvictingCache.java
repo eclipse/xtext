@@ -54,6 +54,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	/**
 	 * Clears the cache of the given resource. 
 	 */
+	@Override
 	public void clear(Resource resource) {
 		getOrCreate(resource).clearValues();
 	}
@@ -65,6 +66,7 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 	 * @param key the cache key. May not be <code>null</code>.
 	 * @param provider the strategy to compute the value if necessary. May not be <code>null</code>.
 	 */
+	@Override
 	public <T> T get(Object key, Resource resource, Provider<T> provider) {
 		if(resource == null) {
 			return provider.get();

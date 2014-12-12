@@ -25,6 +25,7 @@ public interface IPreferenceValuesProvider {
 	IPreferenceValues getPreferenceValues(Resource context);
 
 	public static class SimplePreferenceValuesProvider implements IPreferenceValuesProvider {
+		@Override
 		public IPreferenceValues getPreferenceValues(Resource context) {
 			return new MapBasedPreferenceValues(new LinkedHashMap<String, String>());
 		}
@@ -34,6 +35,7 @@ public interface IPreferenceValuesProvider {
 	public class SingletonPreferenceValuesProvider implements IPreferenceValuesProvider {
 		private MapBasedPreferenceValues preferences = new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap());
 
+		@Override
 		public MapBasedPreferenceValues getPreferenceValues(Resource context) {
 			return preferences;
 		}

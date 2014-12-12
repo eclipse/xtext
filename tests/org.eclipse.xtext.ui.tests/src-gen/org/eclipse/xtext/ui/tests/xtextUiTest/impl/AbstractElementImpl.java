@@ -74,7 +74,8 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getCardinality()
+  @Override
+public String getCardinality()
   {
     return cardinality;
   }
@@ -84,7 +85,8 @@ public class AbstractElementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCardinality(String newCardinality)
+  @Override
+public void setCardinality(String newCardinality)
   {
     String oldCardinality = cardinality;
     cardinality = newCardinality;

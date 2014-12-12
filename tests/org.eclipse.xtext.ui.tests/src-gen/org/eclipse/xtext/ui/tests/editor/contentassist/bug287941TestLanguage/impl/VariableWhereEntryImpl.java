@@ -99,7 +99,8 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumericOperator getOperator()
+  @Override
+public NumericOperator getOperator()
   {
     return operator;
   }
@@ -109,7 +110,8 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(NumericOperator newOperator)
+  @Override
+public void setOperator(NumericOperator newOperator)
   {
     NumericOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
@@ -122,7 +124,8 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry getRightAlias()
+  @Override
+public FromEntry getRightAlias()
   {
     if (rightAlias != null && rightAlias.eIsProxy())
     {
@@ -152,7 +155,8 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRightAlias(FromEntry newRightAlias)
+  @Override
+public void setRightAlias(FromEntry newRightAlias)
   {
     FromEntry oldRightAlias = rightAlias;
     rightAlias = newRightAlias;
@@ -165,7 +169,8 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRightAttribute()
+  @Override
+public EAttribute getRightAttribute()
   {
     if (rightAttribute != null && rightAttribute.eIsProxy())
     {
@@ -195,7 +200,8 @@ public class VariableWhereEntryImpl extends AttributeWhereEntryImpl implements V
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRightAttribute(EAttribute newRightAttribute)
+  @Override
+public void setRightAttribute(EAttribute newRightAttribute)
   {
     EAttribute oldRightAttribute = rightAttribute;
     rightAttribute = newRightAttribute;

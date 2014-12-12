@@ -99,32 +99,39 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 		assertEquals(1, loadCalled);
 	}
 	
+	@Override
 	public void updateMarkers(Delta resourceDescriptionDeltas, /* @Nullable */ ResourceSet resourceSet,
 			IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Iterable<IResourceDescription> load() {
 		loadCalled++;
 		return Collections.emptyList();
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getExtensionToFactoryMap() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getProtocolToFactoryMap() {
 		throw new UnsupportedOperationException();
 	}

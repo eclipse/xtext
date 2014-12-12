@@ -46,6 +46,7 @@ public class SyntaxFilteredScope implements IScope {
 		}
 	}
 
+	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		if (values.contains(name)) {
 			return parent.getSingleElement(name);
@@ -53,6 +54,7 @@ public class SyntaxFilteredScope implements IScope {
 		return null;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 		if (values.contains(name)) {
 			return parent.getElements(name);
@@ -60,16 +62,20 @@ public class SyntaxFilteredScope implements IScope {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public IEObjectDescription getSingleElement(EObject object) {
 		return Iterables.getFirst(getElements(object), null);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		return Iterables.filter(parent.getElements(object), Predicates.<Object>in(values));
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getAllElements() {
 		return Iterables.concat(Iterables.transform(values, new Function<QualifiedName, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(QualifiedName input) {
 				return parent.getElements(input);
 			}

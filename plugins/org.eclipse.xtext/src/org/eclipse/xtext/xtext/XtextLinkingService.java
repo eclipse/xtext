@@ -175,6 +175,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 	
 	private EPackage findPackageInScope(EObject context, QualifiedName packageNsURI) {
 		IScope scopedPackages = scopeProvider.getScope(context.eResource(), XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return isNsUriIndexEntry(input);
 			}

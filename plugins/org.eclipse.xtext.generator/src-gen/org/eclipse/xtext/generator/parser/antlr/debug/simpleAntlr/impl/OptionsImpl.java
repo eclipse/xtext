@@ -71,7 +71,8 @@ public class OptionsImpl extends MinimalEObjectImpl.Container implements Options
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<OptionValue> getOptionValues()
+  @Override
+public EList<OptionValue> getOptionValues()
   {
     if (optionValues == null)
     {

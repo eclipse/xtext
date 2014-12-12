@@ -84,7 +84,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Import> getImports()
+  @Override
+public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -98,7 +99,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Type> getTypes()
+  @Override
+public EList<Type> getTypes()
   {
     if (types == null)
     {

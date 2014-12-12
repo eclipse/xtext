@@ -47,6 +47,7 @@ import com.google.inject.Singleton;
 public class OpenDocumentTracker {
 
 	protected class PartListener implements IPartListener2 {
+		@Override
 		public void partOpened(IWorkbenchPartReference partRef) {
 			Pair<URI, IXtextDocument> entry = getEntry(partRef);
 			if (entry != null) {
@@ -57,6 +58,7 @@ public class OpenDocumentTracker {
 			}
 		}
 
+		@Override
 		public void partInputChanged(IWorkbenchPartReference partRef) {
 			Pair<URI, IXtextDocument> entry = getEntry(partRef);
 			if (entry != null) {
@@ -68,6 +70,7 @@ public class OpenDocumentTracker {
 			}
 		}
 
+		@Override
 		public void partClosed(IWorkbenchPartReference partRef) {
 			Pair<URI, IXtextDocument> entry = getEntry(partRef);
 			if (entry != null) {
@@ -78,31 +81,39 @@ public class OpenDocumentTracker {
 			}
 		}
 
+		@Override
 		public void partVisible(IWorkbenchPartReference partRef) {
 		}
 
+		@Override
 		public void partHidden(IWorkbenchPartReference partRef) {
 		}
 
+		@Override
 		public void partDeactivated(IWorkbenchPartReference partRef) {
 		}
 
+		@Override
 		public void partBroughtToTop(IWorkbenchPartReference partRef) {
 		}
 
+		@Override
 		public void partActivated(IWorkbenchPartReference partRef) {
 		}
 	}
 
 	protected class PageListener implements IPageListener {
+		@Override
 		public void pageOpened(IWorkbenchPage page) {
 			page.addPartListener(partListener);
 		}
 
+		@Override
 		public void pageClosed(IWorkbenchPage page) {
 			page.removePartListener(partListener);
 		}
 
+		@Override
 		public void pageActivated(IWorkbenchPage page) {
 		}
 	}

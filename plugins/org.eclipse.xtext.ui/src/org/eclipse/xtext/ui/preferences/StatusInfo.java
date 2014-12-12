@@ -32,6 +32,7 @@ public class StatusInfo implements IStatus {
 		fSeverity = severity;
 	}
 
+	@Override
 	public boolean isOK() {
 		return fSeverity == IStatus.OK;
 	}
@@ -48,6 +49,7 @@ public class StatusInfo implements IStatus {
 		return fSeverity == IStatus.ERROR;
 	}
 
+	@Override
 	public String getMessage() {
 		return fStatusMessage;
 	}
@@ -75,31 +77,38 @@ public class StatusInfo implements IStatus {
 		fSeverity = IStatus.OK;
 	}
 
+	@Override
 	public boolean matches(int severityMask) {
 		return (fSeverity & severityMask) != 0;
 	}
 
+	@Override
 	public boolean isMultiStatus() {
 		return false;
 	}
 
+	@Override
 	public int getSeverity() {
 		return fSeverity;
 	}
 
+	@Override
 	public String getPlugin() {
 		//FIXME pull from DefaultuiModule
 		return "org.eclipse.xtext.ui";
 	}
 
+	@Override
 	public Throwable getException() {
 		return null;
 	}
 
+	@Override
 	public int getCode() {
 		return fSeverity;
 	}
 
+	@Override
 	public IStatus[] getChildren() {
 		return new IStatus[0];
 	}

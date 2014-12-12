@@ -85,7 +85,8 @@ public class SectionImpl extends ViewContentElementImpl implements Section
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getTitle()
+  @Override
+public ScalarExpression getTitle()
   {
     return title;
   }
@@ -112,7 +113,8 @@ public class SectionImpl extends ViewContentElementImpl implements Section
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTitle(ScalarExpression newTitle)
+  @Override
+public void setTitle(ScalarExpression newTitle)
   {
     if (newTitle != title)
     {
@@ -133,7 +135,8 @@ public class SectionImpl extends ViewContentElementImpl implements Section
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Cell> getCells()
+  @Override
+public EList<Cell> getCells()
   {
     if (cells == null)
     {

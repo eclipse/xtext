@@ -178,7 +178,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  @Override
+public String getType()
   {
     return type;
   }
@@ -188,7 +189,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  @Override
+public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -201,7 +203,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getShortDescription()
+  @Override
+public String getShortDescription()
   {
     return shortDescription;
   }
@@ -211,7 +214,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setShortDescription(String newShortDescription)
+  @Override
+public void setShortDescription(String newShortDescription)
   {
     String oldShortDescription = shortDescription;
     shortDescription = newShortDescription;
@@ -224,7 +228,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getLongDescription()
+  @Override
+public String getLongDescription()
   {
     return longDescription;
   }
@@ -234,7 +239,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLongDescription(String newLongDescription)
+  @Override
+public void setLongDescription(String newLongDescription)
   {
     String oldLongDescription = longDescription;
     longDescription = newLongDescription;
@@ -247,7 +253,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ConstraintDefinition> getConstraintDefinitions()
+  @Override
+public EList<ConstraintDefinition> getConstraintDefinitions()
   {
     if (constraintDefinitions == null)
     {
@@ -261,7 +268,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isRequired()
+  @Override
+public boolean isRequired()
   {
     return required;
   }
@@ -271,7 +279,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRequired(boolean newRequired)
+  @Override
+public void setRequired(boolean newRequired)
   {
     boolean oldRequired = required;
     required = newRequired;
@@ -284,7 +293,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isTechnical()
+  @Override
+public boolean isTechnical()
   {
     return technical;
   }
@@ -294,7 +304,8 @@ public class AttributImpl extends FeatureImpl implements Attribut
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTechnical(boolean newTechnical)
+  @Override
+public void setTechnical(boolean newTechnical)
   {
     boolean oldTechnical = technical;
     technical = newTechnical;

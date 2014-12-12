@@ -76,6 +76,7 @@ public class LineWrapTab extends AbstractModifyDialogTab {
 		fDefaultFocusManager.add(previewLineWidth);
 		previewLineWidth.addObserver(fUpdater);
 		previewLineWidth.addObserver(new Observer() {
+			@Override
 			public void update(Observable o, Object arg) {
 				if (fDialogSettings != null)
 					fDialogSettings.put(PREF_PREVIEW_LINE_WIDTH, fPreviewPreferences.get(PREF_PREVIEW_LINE_WIDTH));

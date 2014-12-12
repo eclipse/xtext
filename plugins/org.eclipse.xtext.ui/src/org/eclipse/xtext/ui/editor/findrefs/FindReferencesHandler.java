@@ -40,6 +40,7 @@ public class FindReferencesHandler extends AbstractHandler {
 
 	private static final Logger LOG = Logger.getLogger(FindReferencesHandler.class);
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);

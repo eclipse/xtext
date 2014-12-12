@@ -49,6 +49,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 		return ImmutableSet.of(EcorePackage.Literals.EOBJECT);
 	}
 	
+	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, 
 			ValidationMessageAcceptor acceptor) {
 		checkUniqueNames(descriptions, null, acceptor);
@@ -61,6 +62,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	 * The cancel indicator will be queried everytime a description has been processed.
 	 * It should provide a fast answer about its canceled state.
 	 */
+	@Override
 	public void checkUniqueNames(Iterable<IEObjectDescription> descriptions, 
 			CancelIndicator cancelIndicator, 
 			ValidationMessageAcceptor acceptor) {

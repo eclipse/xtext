@@ -84,6 +84,7 @@ public class RefactoringWizardOpenOperation_NonForking {
 		final int[] result = new int[1];
 		final InterruptedException[] canceled = new InterruptedException[1];
 		Runnable r = new Runnable() {
+			@Override
 			public void run() {
 				try {
 					// we are getting the block dialog for free if we pass in null

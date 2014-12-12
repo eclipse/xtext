@@ -88,7 +88,8 @@ public class iteratorVariableImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -98,7 +99,8 @@ public class iteratorVariableImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,7 +113,8 @@ public class iteratorVariableImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeExp getType()
+  @Override
+public TypeExp getType()
   {
     return type;
   }
@@ -138,7 +141,8 @@ public class iteratorVariableImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeExp newType)
+  @Override
+public void setType(TypeExp newType)
   {
     if (newType != type)
     {

@@ -56,6 +56,7 @@ public class ConstructorTypeScopeWrapper implements IScope {
 	/**
 	 * @throws UnsupportedOperationException always
 	 */
+	@Override
 	public Iterable<IEObjectDescription> getAllElements() {
 		throw new UnsupportedOperationException();
 	}
@@ -95,6 +96,7 @@ public class ConstructorTypeScopeWrapper implements IScope {
 		return proxy;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (!(object instanceof JvmConstructor)) {
 			return Collections.emptyList();
@@ -116,6 +118,7 @@ public class ConstructorTypeScopeWrapper implements IScope {
 		return constructorDescription;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 		Iterable<IEObjectDescription> original = typeScope.getElements(name);
 		return createFeatureDescriptions(original);
@@ -124,6 +127,7 @@ public class ConstructorTypeScopeWrapper implements IScope {
 	/**
 	 * @throws UnsupportedOperationException always
 	 */
+	@Override
 	public IEObjectDescription getSingleElement(EObject object) {
 		throw new UnsupportedOperationException();
 	}
@@ -131,6 +135,7 @@ public class ConstructorTypeScopeWrapper implements IScope {
 	/**
 	 * @throws UnsupportedOperationException always
 	 */
+	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		throw new UnsupportedOperationException();
 	}

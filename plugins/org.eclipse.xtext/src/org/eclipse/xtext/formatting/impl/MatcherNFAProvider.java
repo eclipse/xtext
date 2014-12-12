@@ -47,6 +47,7 @@ public class MatcherNFAProvider extends AbstractNFAProvider<MatcherState, Matche
 			return true;
 		}
 
+		@Override
 		public NFADirection getDirection() {
 			return NFADirection.FORWARD;
 		}

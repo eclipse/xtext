@@ -28,6 +28,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	imports+=Import* elements+=Type*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* elements+=Type*
@@ -55,6 +56,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Import:
 		//	"import" importURI=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
@@ -78,6 +80,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Type:
 		//	DataType | Class;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//DataType | Class
@@ -100,6 +103,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//DataType:
 		//	"datatype" name=ID ";"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"datatype" name=ID ";"?
@@ -138,6 +142,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Class:
 		//	"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}"
@@ -194,6 +199,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Property:
 		//	Attribute | Reference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Attribute | Reference
@@ -220,6 +226,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Attribute:
 		//	"attr" name=ID ":" type=[DataType] ";"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"attr" name=ID ":" type=[DataType] ";"?
@@ -264,6 +271,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Reference:
 		//	"ref" name=ID ":" type=[Class] ";"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"ref" name=ID ":" type=[Class] ";"?
@@ -340,6 +348,7 @@ public class DomainModelTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

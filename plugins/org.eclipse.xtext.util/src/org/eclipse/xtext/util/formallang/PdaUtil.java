@@ -50,6 +50,7 @@ public class PdaUtil {
 			return list.isEmpty();
 		}
 
+		@Override
 		public Iterator<T> iterator() {
 			return list.iterator();
 		}
@@ -85,6 +86,7 @@ public class PdaUtil {
 			this.pda = pda;
 		}
 
+		@Override
 		public boolean apply(S input) {
 			return pda.getPop(input) != null;
 		}
@@ -125,6 +127,7 @@ public class PdaUtil {
 	}
 
 	public static class CyclicStackTraverser<S, P> implements Traverser<Pda<S, P>, S, CyclicStackItem<P>> {
+		@Override
 		public CyclicStackItem<P> enter(Pda<S, P> pda, S state, CyclicStackItem<P> previous) {
 			P item;
 			if ((item = pda.getPush(state)) != null)
@@ -136,6 +139,7 @@ public class PdaUtil {
 			return previous;
 		}
 
+		@Override
 		public boolean isSolution(CyclicStackItem<P> result) {
 			return result.parent == null;
 		}

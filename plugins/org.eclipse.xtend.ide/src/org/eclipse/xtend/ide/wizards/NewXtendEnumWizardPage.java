@@ -22,6 +22,7 @@ public class NewXtendEnumWizardPage extends AbstractNewXtendElementWizardPage {
 		this.setDescription(Messages.XTEND_ENUM_WIZARD_DESCRIPTION);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		setControl(createCommonControls(parent));
 	}

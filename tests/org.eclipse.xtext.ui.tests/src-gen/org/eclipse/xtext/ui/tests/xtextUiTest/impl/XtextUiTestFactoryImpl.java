@@ -97,7 +97,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Grammar createGrammar()
+  @Override
+public Grammar createGrammar()
   {
     GrammarImpl grammar = new GrammarImpl();
     return grammar;
@@ -108,7 +109,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRule createAbstractRule()
+  @Override
+public AbstractRule createAbstractRule()
   {
     AbstractRuleImpl abstractRule = new AbstractRuleImpl();
     return abstractRule;
@@ -119,7 +121,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration()
+  @Override
+public AbstractMetamodelDeclaration createAbstractMetamodelDeclaration()
   {
     AbstractMetamodelDeclarationImpl abstractMetamodelDeclaration = new AbstractMetamodelDeclarationImpl();
     return abstractMetamodelDeclaration;
@@ -130,7 +133,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public GeneratedMetamodel createGeneratedMetamodel()
+  @Override
+public GeneratedMetamodel createGeneratedMetamodel()
   {
     GeneratedMetamodelImpl generatedMetamodel = new GeneratedMetamodelImpl();
     return generatedMetamodel;
@@ -141,7 +145,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferencedMetamodel createReferencedMetamodel()
+  @Override
+public ReferencedMetamodel createReferencedMetamodel()
   {
     ReferencedMetamodelImpl referencedMetamodel = new ReferencedMetamodelImpl();
     return referencedMetamodel;
@@ -152,7 +157,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParserRule createParserRule()
+  @Override
+public ParserRule createParserRule()
   {
     ParserRuleImpl parserRule = new ParserRuleImpl();
     return parserRule;
@@ -163,7 +169,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef createTypeRef()
+  @Override
+public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
     return typeRef;
@@ -174,7 +181,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractElement createAbstractElement()
+  @Override
+public AbstractElement createAbstractElement()
   {
     AbstractElementImpl abstractElement = new AbstractElementImpl();
     return abstractElement;
@@ -185,7 +193,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Action createAction()
+  @Override
+public Action createAction()
   {
     ActionImpl action = new ActionImpl();
     return action;
@@ -196,7 +205,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Keyword createKeyword()
+  @Override
+public Keyword createKeyword()
   {
     KeywordImpl keyword = new KeywordImpl();
     return keyword;
@@ -207,7 +217,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleCall createRuleCall()
+  @Override
+public RuleCall createRuleCall()
   {
     RuleCallImpl ruleCall = new RuleCallImpl();
     return ruleCall;
@@ -218,7 +229,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Assignment createAssignment()
+  @Override
+public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
     return assignment;
@@ -229,7 +241,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public CrossReference createCrossReference()
+  @Override
+public CrossReference createCrossReference()
   {
     CrossReferenceImpl crossReference = new CrossReferenceImpl();
     return crossReference;
@@ -240,7 +253,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public TerminalRule createTerminalRule()
+  @Override
+public TerminalRule createTerminalRule()
   {
     TerminalRuleImpl terminalRule = new TerminalRuleImpl();
     return terminalRule;
@@ -251,7 +265,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractNegatedToken createAbstractNegatedToken()
+  @Override
+public AbstractNegatedToken createAbstractNegatedToken()
   {
     AbstractNegatedTokenImpl abstractNegatedToken = new AbstractNegatedTokenImpl();
     return abstractNegatedToken;
@@ -262,7 +277,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public NegatedToken createNegatedToken()
+  @Override
+public NegatedToken createNegatedToken()
   {
     NegatedTokenImpl negatedToken = new NegatedTokenImpl();
     return negatedToken;
@@ -273,7 +289,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public UntilToken createUntilToken()
+  @Override
+public UntilToken createUntilToken()
   {
     UntilTokenImpl untilToken = new UntilTokenImpl();
     return untilToken;
@@ -284,7 +301,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Wildcard createWildcard()
+  @Override
+public Wildcard createWildcard()
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
@@ -295,7 +313,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumRule createEnumRule()
+  @Override
+public EnumRule createEnumRule()
   {
     EnumRuleImpl enumRule = new EnumRuleImpl();
     return enumRule;
@@ -306,7 +325,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumLiteralDeclaration createEnumLiteralDeclaration()
+  @Override
+public EnumLiteralDeclaration createEnumLiteralDeclaration()
   {
     EnumLiteralDeclarationImpl enumLiteralDeclaration = new EnumLiteralDeclarationImpl();
     return enumLiteralDeclaration;
@@ -317,7 +337,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Alternatives createAlternatives()
+  @Override
+public Alternatives createAlternatives()
   {
     AlternativesImpl alternatives = new AlternativesImpl();
     return alternatives;
@@ -328,7 +349,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Group createGroup()
+  @Override
+public Group createGroup()
   {
     GroupImpl group = new GroupImpl();
     return group;
@@ -339,7 +361,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public CharacterRange createCharacterRange()
+  @Override
+public CharacterRange createCharacterRange()
   {
     CharacterRangeImpl characterRange = new CharacterRangeImpl();
     return characterRange;
@@ -350,7 +373,8 @@ public class XtextUiTestFactoryImpl extends EFactoryImpl implements XtextUiTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public XtextUiTestPackage getXtextUiTestPackage()
+  @Override
+public XtextUiTestPackage getXtextUiTestPackage()
   {
     return (XtextUiTestPackage)getEPackage();
   }

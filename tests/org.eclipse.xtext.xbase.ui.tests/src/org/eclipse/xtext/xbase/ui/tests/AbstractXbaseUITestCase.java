@@ -78,6 +78,7 @@ public abstract class AbstractXbaseUITestCase extends Assert implements Resource
 		return result;
 	}
 	
+	@Override
 	public XtextResource getResourceFor(InputStream stream) {
 		try {
 			XtextResourceSet set = get(XtextResourceSet.class);

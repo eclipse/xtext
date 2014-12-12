@@ -45,6 +45,7 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	private ProjectionViewer viewer;
 	private ProjectionChangeListener projectionListener;
 
+	@Override
 	public void install(XtextEditor editor, ProjectionViewer viewer) {
 		Assert.isNotNull(editor);
 		Assert.isNotNull(viewer);
@@ -54,10 +55,12 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 		projectionListener = new ProjectionChangeListener(viewer);
 	}
 
+	@Override
 	public void initialize() {
 		calculateProjectionAnnotationModel(true);
 	}
 
+	@Override
 	public void uninstall() {
 		if (isInstalled()) {
 			handleProjectionDisabled();
@@ -79,10 +82,12 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	/**
 	 * @see org.eclipse.xtext.ui.editor.model.IXtextModelListener#modelChanged(org.eclipse.xtext.resource.XtextResource)
 	 */
+	@Override
 	public void modelChanged(XtextResource resource) {
 		if (resource == null)
 			return;
 		boolean existingSyntaxErrors = Iterables.any(resource.getErrors(), new Predicate<Diagnostic>() {
+			@Override
 			public boolean apply(Diagnostic diagnostic) {
 				return diagnostic instanceof XtextSyntaxDiagnostic;
 			}
@@ -183,10 +188,12 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 			}
 		}
 
+		@Override
 		public void projectionEnabled() {
 			handleProjectionEnabled();
 		}
 
+		@Override
 		public void projectionDisabled() {
 			handleProjectionDisabled();
 		}

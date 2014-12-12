@@ -53,6 +53,7 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IClasspathEntry[] getClasspathEntries() {
 		if (classPathEnries == null) {
 			List<IClasspathEntry> cpEntries = new ArrayList<IClasspathEntry>();
@@ -153,6 +154,7 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getDescription() {
 		return Messages.XtendClasspathContainer_Description;
 	}
@@ -160,6 +162,7 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public int getKind() {
 		return IClasspathContainer.K_APPLICATION;
 	}
@@ -167,6 +170,7 @@ final public class XtendClasspathContainer implements IClasspathContainer {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public IPath getPath() {
 		return containerPath;
 	}

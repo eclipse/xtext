@@ -140,7 +140,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFinal()
+  @Override
+public boolean isFinal()
   {
     return final_;
   }
@@ -150,7 +151,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFinal(boolean newFinal)
+  @Override
+public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -163,7 +165,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getType()
+  @Override
+public TypeRef getType()
   {
     return type;
   }
@@ -190,7 +193,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeRef newType)
+  @Override
+public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -211,7 +215,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -221,7 +226,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -234,7 +240,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getValueExpr()
+  @Override
+public Expression getValueExpr()
   {
     return valueExpr;
   }
@@ -261,7 +268,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValueExpr(Expression newValueExpr)
+  @Override
+public void setValueExpr(Expression newValueExpr)
   {
     if (newValueExpr != valueExpr)
     {
@@ -282,7 +290,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isImmutable()
+  @Override
+public boolean isImmutable()
   {
     return immutable;
   }
@@ -292,7 +301,8 @@ public class DefValueImpl extends ExpressionImpl implements DefValue
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImmutable(boolean newImmutable)
+  @Override
+public void setImmutable(boolean newImmutable)
   {
     boolean oldImmutable = immutable;
     immutable = newImmutable;

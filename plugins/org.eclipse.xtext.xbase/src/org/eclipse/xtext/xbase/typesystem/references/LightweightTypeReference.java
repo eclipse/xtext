@@ -87,6 +87,7 @@ public abstract class LightweightTypeReference {
 		private IdentifierFunction() {
 		}
 		
+		@Override
 		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -101,6 +102,7 @@ public abstract class LightweightTypeReference {
 		private UniqueIdentifierFunction() {
 		}
 		
+		@Override
 		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -115,6 +117,7 @@ public abstract class LightweightTypeReference {
 		private JavaIdentifierFunction() {
 		}
 		
+		@Override
 		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -129,6 +132,7 @@ public abstract class LightweightTypeReference {
 		private SimpleNameFunction() {
 		}
 		
+		@Override
 		public String apply(/* @Nullable */ LightweightTypeReference reference) {
 			if (reference == null)
 				throw new NullPointerException("reference");
@@ -412,6 +416,7 @@ public abstract class LightweightTypeReference {
 
 			int counter = 0;
 			
+			@Override
 			public boolean accept(LightweightTypeReference superType, int distance) {
 				JvmType type = superType.getType();
 				counterPerType.add(type, counter++);
@@ -431,6 +436,7 @@ public abstract class LightweightTypeReference {
 			
 		});
 		Collections.sort(result, new Comparator<LightweightTypeReference>() {
+			@Override
 			public int compare(/* @Nullable */ LightweightTypeReference o1, /* @Nullable */ LightweightTypeReference o2) {
 				if (o1 == null || o2 == null) {
 					throw new IllegalArgumentException();

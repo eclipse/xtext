@@ -112,7 +112,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMain()
+  @Override
+public EClass getMain()
   {
     return mainEClass;
   }
@@ -122,7 +123,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMain_Imports()
+  @Override
+public EReference getMain_Imports()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
   }
@@ -132,7 +134,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMain_Types()
+  @Override
+public EReference getMain_Types()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(1);
   }
@@ -142,7 +145,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
+  @Override
+public EClass getImport()
   {
     return importEClass;
   }
@@ -152,7 +156,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImport_ImportURI()
+  @Override
+public EAttribute getImport_ImportURI()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -162,7 +167,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getType()
+  @Override
+public EClass getType()
   {
     return typeEClass;
   }
@@ -172,7 +178,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getType_Name()
+  @Override
+public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -182,7 +189,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getType_Extends()
+  @Override
+public EReference getType_Extends()
   {
     return (EReference)typeEClass.getEStructuralFeatures().get(1);
   }
@@ -192,7 +200,8 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiFactory getImportUriUiFactory()
+  @Override
+public ImportUriUiFactory getImportUriUiFactory()
   {
     return (ImportUriUiFactory)getEFactoryInstance();
   }

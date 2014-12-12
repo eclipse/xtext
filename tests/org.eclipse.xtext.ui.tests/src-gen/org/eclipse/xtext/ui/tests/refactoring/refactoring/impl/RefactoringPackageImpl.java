@@ -120,7 +120,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMain()
+  @Override
+public EClass getMain()
   {
     return mainEClass;
   }
@@ -130,7 +131,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMain_Elements()
+  @Override
+public EReference getMain_Elements()
   {
     return (EReference)mainEClass.getEStructuralFeatures().get(0);
   }
@@ -140,7 +142,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractElement()
+  @Override
+public EClass getAbstractElement()
   {
     return abstractElementEClass;
   }
@@ -150,7 +153,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
+  @Override
+public EClass getImport()
   {
     return importEClass;
   }
@@ -160,7 +164,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImport_ImportedNamespace()
+  @Override
+public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -170,7 +175,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElement()
+  @Override
+public EClass getElement()
   {
     return elementEClass;
   }
@@ -180,7 +186,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElement_Name()
+  @Override
+public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -190,7 +197,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Contained()
+  @Override
+public EReference getElement_Contained()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -200,7 +208,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Referenced()
+  @Override
+public EReference getElement_Referenced()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
   }
@@ -210,7 +219,8 @@ public class RefactoringPackageImpl extends EPackageImpl implements RefactoringP
    * <!-- end-user-doc -->
    * @generated
    */
-  public RefactoringFactory getRefactoringFactory()
+  @Override
+public RefactoringFactory getRefactoringFactory()
   {
     return (RefactoringFactory)getEFactoryInstance();
   }

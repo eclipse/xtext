@@ -81,6 +81,7 @@ public class ProductionUtil {
 
 	public <E, T> E findByToken(final Production<E, T> production, E element, final Predicate<T> matches) {
 		return find(production, element, new Predicate<E>() {
+			@Override
 			public boolean apply(E input) {
 				T token = production.getToken(input);
 				return token != null && matches.apply(token);

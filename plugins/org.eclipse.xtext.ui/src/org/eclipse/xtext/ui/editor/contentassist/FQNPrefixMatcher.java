@@ -38,6 +38,7 @@ public class FQNPrefixMatcher extends PrefixMatcher {
 	
 	public static class DefaultLastSegmentFinder implements LastSegmentFinder {
 
+		@Override
 		public String getLastSegment(String fqn, char delimiter) {
 			if (fqn == null || fqn.length() == 0)
 				return null;

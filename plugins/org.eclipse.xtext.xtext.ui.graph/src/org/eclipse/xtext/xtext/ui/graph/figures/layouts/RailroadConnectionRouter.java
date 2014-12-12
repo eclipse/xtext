@@ -46,6 +46,7 @@ public class RailroadConnectionRouter extends AbstractRouter {
 
 	private Map<Connection, BendConstraint> constraints = Maps.newHashMap();
 
+	@Override
 	public void route(Connection connection) {
 		PointList points = connection.getPoints();
 		points.removeAllPoints();

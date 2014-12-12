@@ -90,7 +90,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -101,7 +102,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public PackageDefinition createPackageDefinition()
+  @Override
+public PackageDefinition createPackageDefinition()
   {
     PackageDefinitionImpl packageDefinition = new PackageDefinitionImpl();
     return packageDefinition;
@@ -112,7 +114,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object createObject()
+  @Override
+public org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object createObject()
   {
     ObjectImpl object = new ObjectImpl();
     return object;
@@ -123,7 +126,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Feature createFeature()
+  @Override
+public Feature createFeature()
   {
     FeatureImpl feature = new FeatureImpl();
     return feature;
@@ -134,7 +138,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute createAttribute()
+  @Override
+public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -145,7 +150,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Reference createReference()
+  @Override
+public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
@@ -156,7 +162,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribut createAttribut()
+  @Override
+public Attribut createAttribut()
   {
     AttributImpl attribut = new AttributImpl();
     return attribut;
@@ -167,7 +174,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ConstraintDefinition createConstraintDefinition()
+  @Override
+public ConstraintDefinition createConstraintDefinition()
   {
     ConstraintDefinitionImpl constraintDefinition = new ConstraintDefinitionImpl();
     return constraintDefinition;
@@ -178,7 +186,8 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug304681TestLanguagePackage getBug304681TestLanguagePackage()
+  @Override
+public Bug304681TestLanguagePackage getBug304681TestLanguagePackage()
   {
     return (Bug304681TestLanguagePackage)getEPackage();
   }

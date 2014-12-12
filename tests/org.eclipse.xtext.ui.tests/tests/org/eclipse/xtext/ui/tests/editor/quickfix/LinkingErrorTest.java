@@ -84,6 +84,7 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 	@Test public void testSemanticIssueResolution() throws Exception {
 		xtextEditor = newXtextEditor(PROJECT_NAME, MODEL_FILE, MODEL_WITH_LINKING_ERROR);
 		URI uriToProblem = xtextEditor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
+			@Override
 			public URI exec(XtextResource state) throws Exception {
 				Main main = (Main) state.getContents().get(0);
 				Element element = main.getElements().get(1);

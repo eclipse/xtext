@@ -18,6 +18,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
  */
 public abstract class AbstractFormatter implements IFormatter, IFormatterExtension {
 
+	@Override
 	public ITokenStream createFormatterStream(String initalIndentation,
 			ITokenStream outputStream, boolean preserveWhitespaces) {
 		return null;
@@ -26,6 +27,7 @@ public abstract class AbstractFormatter implements IFormatter, IFormatterExtensi
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public ITokenStream createFormatterStream(EObject context, String initalIndentation, ITokenStream outputStream,
 			boolean preserveWhitespaces) {
 		return createFormatterStream(initalIndentation, outputStream, preserveWhitespaces);

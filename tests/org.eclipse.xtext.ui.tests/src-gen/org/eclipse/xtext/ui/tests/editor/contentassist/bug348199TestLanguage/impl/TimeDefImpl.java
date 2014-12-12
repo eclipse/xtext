@@ -74,7 +74,8 @@ public class TimeDefImpl extends MinimalEObjectImpl.Container implements TimeDef
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getDay()
+  @Override
+public int getDay()
   {
     return day;
   }
@@ -84,7 +85,8 @@ public class TimeDefImpl extends MinimalEObjectImpl.Container implements TimeDef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDay(int newDay)
+  @Override
+public void setDay(int newDay)
   {
     int oldDay = day;
     day = newDay;

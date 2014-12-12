@@ -174,6 +174,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		return generatorMarkers;
 	}
 
+	@Override
 	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (!isEnabled(context)) {
 			return;
@@ -341,16 +342,19 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		final String uri = delta.getUri().toString();
 		return new EclipseResourceFileSystemAccess2.IFileCallback() {
 
+			@Override
 			public boolean beforeFileDeletion(IFile file) {
 				derivedResources.remove(file);
 				context.needRebuild();
 				return true;
 			}
 
+			@Override
 			public void afterFileUpdate(IFile file) {
 				handleFileAccess(file);
 			}
 
+			@Override
 			public void afterFileCreation(IFile file) {
 				handleFileAccess(file);
 			}
@@ -571,6 +575,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(context
 				.getBuiltProject());
 		return uniqueIndex(configurations, new Function<OutputConfiguration, String>() {
+			@Override
 			public String apply(OutputConfiguration from) {
 				return from.getName();
 			}

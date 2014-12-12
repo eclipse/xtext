@@ -104,7 +104,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFoldingModel()
+  @Override
+public EClass getFoldingModel()
   {
     return foldingModelEClass;
   }
@@ -114,7 +115,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFoldingModel_Elements()
+  @Override
+public EReference getFoldingModel_Elements()
   {
     return (EReference)foldingModelEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElement()
+  @Override
+public EClass getElement()
   {
     return elementEClass;
   }
@@ -134,7 +137,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElement_Name()
+  @Override
+public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Subelements()
+  @Override
+public EReference getElement_Subelements()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -154,7 +159,8 @@ public class FoldingPackageImpl extends EPackageImpl implements FoldingPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public FoldingFactory getFoldingFactory()
+  @Override
+public FoldingFactory getFoldingFactory()
   {
     return (FoldingFactory)getEFactoryInstance();
   }

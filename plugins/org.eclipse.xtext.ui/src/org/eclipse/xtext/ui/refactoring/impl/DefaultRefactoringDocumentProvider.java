@@ -66,6 +66,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		return new FileEditorInput(file);
 	}
 
+	@Override
 	public IRefactoringDocument get(URI uri, final StatusWrapper status) {
 		URI resourceURI = uri.trimFragment();
 		final IFileEditorInput fileEditorInput = getEditorInput(resourceURI, status);
@@ -108,10 +109,12 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 				resourceURI, IEncodingProvider.class);
 	}
 
+	@Override
 	public IChangeRedirector getChangeRedirector() {
 		return changeRedirector;
 	}
 	
+	@Override
 	public void setChangeRedirector(IChangeRedirector changeRedirector) {
 		this.changeRedirector  = changeRedirector;
 	}
@@ -123,8 +126,10 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			this.resourceURI = resourceURI;
 		}
 
+		@Override
 		public abstract Change createChange(String name, TextEdit textEdit);
 
+		@Override
 		public URI getURI() {
 			return resourceURI;
 		}
@@ -186,6 +191,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			return buffer.toString();
 		}
 
+		@Override
 		public String getOriginalContents() {
 			return document.get();
 		}
@@ -215,6 +221,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			return textFileChange;
 		}
 
+		@Override
 		public String getOriginalContents() {
 			try {
 				InputStream inputStream = file.getContents();

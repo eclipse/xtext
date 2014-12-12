@@ -64,6 +64,7 @@ public interface IOutlineContribution extends IPreferenceStoreInitializer {
 			}
 		}
 		
+		@Override
 		public void register(OutlinePage outlinePage) {
 			for(IOutlineContribution contribution: contributions)
 				contribution.register(outlinePage);
@@ -72,11 +73,13 @@ public interface IOutlineContribution extends IPreferenceStoreInitializer {
 				treeViewer.refresh();
 		}
 		
+		@Override
 		public void deregister(OutlinePage outlinePage) {
 			for(IOutlineContribution contribution: contributions)
 				contribution.deregister(outlinePage);
 		}
 		
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			for(IOutlineContribution contribution: contributions)
 				contribution.initialize(access);

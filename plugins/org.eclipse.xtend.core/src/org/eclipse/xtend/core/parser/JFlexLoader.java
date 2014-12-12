@@ -47,6 +47,7 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 		return loader;
 	}
 	
+	@Override
 	public void runJFlex(String... args) {
 		try {
 			Class<?> main = loader.loadClass(MAIN_CLASS);
@@ -73,6 +74,7 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 		return new File(downloadTo);
 	}
 	
+	@Override
 	public void preInvoke() {
 		try {
 			loader.loadClass(MAIN_CLASS);
@@ -146,9 +148,11 @@ public class JFlexLoader implements IWorkflowComponent, JFlexMain {
 		}
 	}
 
+	@Override
 	public void invoke(IWorkflowContext ctx) {
 	}
 
+	@Override
 	public void postInvoke() {
 	}
 

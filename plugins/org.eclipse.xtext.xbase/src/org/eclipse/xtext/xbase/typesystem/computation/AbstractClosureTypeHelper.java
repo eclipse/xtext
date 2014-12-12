@@ -138,6 +138,7 @@ public abstract class AbstractClosureTypeHelper implements IClosureCandidate {
 		}
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		if (!closure.isExplicitSyntax()) {
 			List<JvmFormalParameter> parametersToAdd = getParameters();
@@ -160,10 +161,12 @@ public abstract class AbstractClosureTypeHelper implements IClosureCandidate {
 		((XClosureImplCustom) closure).setLinked(true);
 	}
 	
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		return true;
 	}
 	
+	@Override
 	public abstract List<JvmFormalParameter> getParameters();
 
 }

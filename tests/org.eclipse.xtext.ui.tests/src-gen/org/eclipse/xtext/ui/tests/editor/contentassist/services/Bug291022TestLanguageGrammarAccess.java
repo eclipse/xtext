@@ -35,6 +35,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RootModel returns ModelElement:
 		//	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?
@@ -98,6 +99,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ModelElement:
 		//	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
 		//	"}");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute* "}")
@@ -163,6 +165,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ModelAttribute:
 		//	ModelElement | Attribute;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ModelElement | Attribute
@@ -187,6 +190,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Attribute:
 		//	feature=[ModelElement] "=" value=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//feature=[ModelElement] "=" value=STRING
@@ -249,6 +253,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

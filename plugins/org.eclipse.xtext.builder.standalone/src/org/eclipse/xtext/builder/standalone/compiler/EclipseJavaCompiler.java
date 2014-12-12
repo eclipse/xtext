@@ -38,6 +38,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 	private Writer outputWriter;
 	private static final Logger LOG = Logger.getLogger(EclipseJavaCompiler.class);
 
+	@Override
 	public CompilationResult compile(Iterable<String> sourceRoots, File outputClassDirectory) {
 		Iterable<String> validSourceRoots = IterableExtensions.filter(sourceRoots, new EmptyOrMissingFilter());
 		if (!containsJavaFiles(validSourceRoots)) {
@@ -123,6 +124,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		this.errorWriter = errorWriter;
 	}
 
+	@Override
 	public void setClassPath(Iterable<String> classPath) {
 		this.classPath = classPath;
 	}
@@ -130,6 +132,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 	private boolean containsJavaFiles(Iterable<String> roots) {
 		final String javaExt = "java";
 		Multimap<String, URI> uris = new PathTraverser().resolvePathes(Lists.newArrayList(roots), new Predicate<URI>() {
+			@Override
 			public boolean apply(URI input) {
 				return javaExt.equals(input.fileExtension());
 			}
@@ -142,6 +145,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 	 */
 	private final class EmptyOrMissingFilter implements Function1<String, Boolean> {
 
+		@Override
 		public Boolean apply(final String path) {
 			final File file = new File(path);
 			boolean useEntry = file.exists();
@@ -162,6 +166,7 @@ public class EclipseJavaCompiler implements IJavaCompiler {
 		}
 	}
 
+	@Override
 	public CompilerConfiguration getConfiguration() {
 		return configuration;
 	}

@@ -61,6 +61,7 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public ImageDescriptor getImageDescriptor(Object element) {
 		Object image = doGetImage(element);
 		ImageDescriptor imageDescriptor = convertToImageDescriptor(image);
@@ -115,6 +116,7 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	/**
 	 * Subclasses should rather override {@link #doGetText}.
 	 */
+	@Override
 	public StyledString getStyledText(Object element) {
 		StyledString styledText = convertToStyledString(doGetText(element));
 		if (styledText != null) {

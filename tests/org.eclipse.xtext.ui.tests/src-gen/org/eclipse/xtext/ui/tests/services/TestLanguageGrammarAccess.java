@@ -25,6 +25,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//File:
 		//	stuff+=Stuff*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//stuff+=Stuff*
@@ -48,6 +49,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Stuff:
 		//	"stuff" name=ID ("refs" refs=[Stuff])?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"stuff" name=ID ("refs" refs=[Stuff])?
@@ -112,6 +114,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -31,6 +31,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//JvmTypeReference:
 		//	JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
 		//	XFunctionTypeRef;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//JvmParameterizedTypeReference => ({JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
@@ -67,6 +68,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ArrayBrackets:
 		//	"[" "]";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"[" "]"
@@ -98,6 +100,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XFunctionTypeRef:
 		//	("(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>" returnType=JvmTypeReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>" returnType=JvmTypeReference
@@ -180,6 +183,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//	type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">"
 		//	(=> ({JvmInnerTypeReference.outer=current} ".") type=[JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference (","
 		//	arguments+=JvmArgumentTypeReference)* ">")?)*)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//type=[JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)* ">" (=>
@@ -286,6 +290,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmArgumentTypeReference returns JvmTypeReference:
 		//	JvmTypeReference | JvmWildcardTypeReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//JvmTypeReference | JvmWildcardTypeReference
@@ -318,6 +323,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//JvmWildcardTypeReference:
 		//	{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* |
 		//	constraints+=JvmLowerBound constraints+=JvmLowerBoundAnded*)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{JvmWildcardTypeReference} "?" (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound
@@ -374,6 +380,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmUpperBound:
 		//	"extends" typeReference=JvmTypeReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"extends" typeReference=JvmTypeReference
@@ -398,6 +405,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmUpperBoundAnded returns JvmUpperBound:
 		//	"&" typeReference=JvmTypeReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"&" typeReference=JvmTypeReference
@@ -422,6 +430,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmLowerBound:
 		//	"super" typeReference=JvmTypeReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"super" typeReference=JvmTypeReference
@@ -446,6 +455,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmLowerBoundAnded returns JvmLowerBound:
 		//	"&" typeReference=JvmTypeReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"&" typeReference=JvmTypeReference
@@ -474,6 +484,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmTypeParameter:
 		//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*)?
@@ -511,6 +522,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedName:
 		//	ValidID ("." ValidID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ValidID ("." ValidID)*
@@ -538,6 +550,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedNameWithWildcard:
 		//	QualifiedName "." "*";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//QualifiedName "." "*"
@@ -559,6 +572,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ValidID:
 		//	ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID
@@ -572,6 +586,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XImportSection:
 		//	importDeclarations+=XImportDeclaration+;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//importDeclarations+=XImportDeclaration+
@@ -610,6 +625,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//	"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport]
 		//	(wildcard?="*" | memberName=ValidID) | importedType=[JvmDeclaredType|QualifiedName] |
 		//	importedNamespace=QualifiedNameWithWildcard) ";"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" (static?="static" extension?="extension"? importedType=[JvmDeclaredType|QualifiedNameInStaticImport]
@@ -691,6 +707,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedNameInStaticImport:
 		//	(ValidID ".")+;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(ValidID ".")+
@@ -775,6 +792,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

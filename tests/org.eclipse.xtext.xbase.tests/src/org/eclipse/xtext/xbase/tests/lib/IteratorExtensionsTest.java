@@ -150,6 +150,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		pairs.add(new Pair<Integer, String>(2, "b"));
 		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
 
+			@Override
 			public Integer apply(Pair<Integer, String> p) {
 				return p.getKey();
 			}
@@ -167,6 +168,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
 		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
 
+			@Override
 			public Integer apply(Pair<Integer, String> p) {
 				return p.getKey();
 			}
@@ -184,6 +186,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		names.add("Koch");
 		Function1<String, String> computeKeys = new Function1<String, String>() {
 
+			@Override
 			public String apply(String p) {
 				return p.contains("y") ? "y" : null;
 			}
@@ -203,6 +206,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		names.add("Koch");
 		Function1<String, Boolean> computeKeys = new Function1<String, Boolean>() {
 
+			@Override
 			public Boolean apply(String p) {
 				return p.contains("y");
 			}
@@ -230,6 +234,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		pairs.add(new Pair<Integer, String>(2, "b"));
 		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
 
+			@Override
 			public Integer apply(Pair<Integer, String> p) {
 				return p.getKey();
 			}
@@ -251,6 +256,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
 		Function1<Pair<Integer, String>, Integer> computeKeys = new Function1<Pair<Integer, String>, Integer>() {
 
+			@Override
 			public Integer apply(Pair<Integer, String> p) {
 				return p.getKey();
 			}
@@ -268,6 +274,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		names.add("Koch");
 		Function1<String, String> computeKeys = new Function1<String, String>() {
 
+			@Override
 			public String apply(String p) {
 				return p.contains("y") ? "y" : null;
 			}
@@ -287,6 +294,7 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		names.add("Koch");
 		Function1<String, Boolean> computeKeys = new Function1<String, Boolean>() {
 
+			@Override
 			public Boolean apply(String p) {
 				return p.contains("y");
 			}

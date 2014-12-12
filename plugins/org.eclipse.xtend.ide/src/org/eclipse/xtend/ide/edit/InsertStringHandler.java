@@ -43,6 +43,7 @@ public abstract class InsertStringHandler extends AbstractHandler {
 		this.replaceChar = replaceChar;
 	}
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 		if (editor != null) {

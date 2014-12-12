@@ -74,7 +74,8 @@ public class NumericAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumericOperator getOperator()
+  @Override
+public NumericOperator getOperator()
   {
     return operator;
   }
@@ -84,7 +85,8 @@ public class NumericAttributeWhereEntryImpl extends AttributeWhereEntryImpl impl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(NumericOperator newOperator)
+  @Override
+public void setOperator(NumericOperator newOperator)
   {
     NumericOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

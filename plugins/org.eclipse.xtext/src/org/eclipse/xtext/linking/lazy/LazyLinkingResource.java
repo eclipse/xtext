@@ -333,14 +333,17 @@ public class LazyLinkingResource extends XtextResource {
 			this.linkingHelper = helper;
 		}
 
+		@Override
 		public EObject getContext() {
 			return triple.getFirst();
 		}
 
+		@Override
 		public EReference getReference() {
 			return triple.getSecond();
 		}
 
+		@Override
 		public String getLinkText() {
 			return linkingHelper.getCrossRefNodeAsString(triple.getThird(), true);
 		}
@@ -476,6 +479,7 @@ public class LazyLinkingResource extends XtextResource {
 	protected Set<String> getUnresolvableURIFragments() {
 		Set<String> unresolveableProxies = getCache().get(UNRESOLVEABLE_PROXIES_KEY, this,
 				new Provider<Set<String>>() {
+					@Override
 					public Set<String> get() {
 						return Sets.newHashSet();
 					}

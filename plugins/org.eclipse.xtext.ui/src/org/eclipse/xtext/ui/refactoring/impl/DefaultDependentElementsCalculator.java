@@ -34,6 +34,7 @@ public class DefaultDependentElementsCalculator implements IDependentElementsCal
 
 	private static final int MONITOR_CHUNK_SIZE = 1000;
 	
+	@Override
 	public List<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		List<URI> elementURIs = Lists.newArrayList();

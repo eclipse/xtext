@@ -66,6 +66,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 		return 0;
 	}
 
+	@Override
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		if (formatting.getAutowrap() != null && formatting.getAutowrap() >= 0)
 			context.setCanAutowrap(formatting.getAutowrap());
@@ -97,6 +98,7 @@ public class WhitespaceReplacer implements ITextReplacer {
 		return formatting;
 	}
 
+	@Override
 	public ITextSegment getRegion() {
 		return region;
 	}

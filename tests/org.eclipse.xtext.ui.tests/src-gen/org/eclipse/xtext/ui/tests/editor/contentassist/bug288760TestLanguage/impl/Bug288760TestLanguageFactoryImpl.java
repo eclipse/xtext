@@ -76,7 +76,8 @@ public class Bug288760TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public WorkflowElement createWorkflowElement()
+  @Override
+public WorkflowElement createWorkflowElement()
   {
     WorkflowElementImpl workflowElement = new WorkflowElementImpl();
     return workflowElement;
@@ -87,7 +88,8 @@ public class Bug288760TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute createAttribute()
+  @Override
+public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -98,7 +100,8 @@ public class Bug288760TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug288760TestLanguagePackage getBug288760TestLanguagePackage()
+  @Override
+public Bug288760TestLanguagePackage getBug288760TestLanguagePackage()
   {
     return (Bug288760TestLanguagePackage)getEPackage();
   }

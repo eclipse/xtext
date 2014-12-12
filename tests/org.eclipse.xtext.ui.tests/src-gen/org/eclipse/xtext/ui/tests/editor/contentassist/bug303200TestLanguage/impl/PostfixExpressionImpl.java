@@ -78,7 +78,8 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public PostfixExpression getExpression()
+  @Override
+public PostfixExpression getExpression()
   {
     return expression;
   }
@@ -105,7 +106,8 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(PostfixExpression newExpression)
+  @Override
+public void setExpression(PostfixExpression newExpression)
   {
     if (newExpression != expression)
     {
@@ -126,7 +128,8 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public PropertyOperator getProperty()
+  @Override
+public PropertyOperator getProperty()
   {
     return property;
   }
@@ -153,7 +156,8 @@ public class PostfixExpressionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setProperty(PropertyOperator newProperty)
+  @Override
+public void setProperty(PropertyOperator newProperty)
   {
     if (newProperty != property)
     {

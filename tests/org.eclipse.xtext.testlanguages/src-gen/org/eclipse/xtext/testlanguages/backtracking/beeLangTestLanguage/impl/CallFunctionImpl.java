@@ -77,7 +77,8 @@ public class CallFunctionImpl extends ExpressionImpl implements CallFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getFuncExpr()
+  @Override
+public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -104,7 +105,8 @@ public class CallFunctionImpl extends ExpressionImpl implements CallFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFuncExpr(Expression newFuncExpr)
+  @Override
+public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {
@@ -125,7 +127,8 @@ public class CallFunctionImpl extends ExpressionImpl implements CallFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterList getParameterList()
+  @Override
+public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -152,7 +155,8 @@ public class CallFunctionImpl extends ExpressionImpl implements CallFunction
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setParameterList(ParameterList newParameterList)
+  @Override
+public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {

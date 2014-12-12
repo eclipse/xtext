@@ -73,14 +73,17 @@ public interface IResolvedFeatures {
 	 */
 	IResolvedFeatures NO_FEATURES = new IResolvedFeatures() {
 		
+		@Override
 		public IResolvedFeatures getParameterizedView(LightweightTypeReference concrete) {
 			return this;
 		}
 		
+		@Override
 		public List<JvmFeature> getAllFeatures(String simpleName) {
 			return Collections.emptyList();
 		}
 		
+		@Override
 		public List<JvmFeature> getAllFeatures() {
 			return Collections.emptyList();
 		}

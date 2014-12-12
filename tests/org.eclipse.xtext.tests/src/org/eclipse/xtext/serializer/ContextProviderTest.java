@@ -54,11 +54,13 @@ public class ContextProviderTest extends AbstractXtextTests {
 			result.add(Tuples.create(names.getContextName(context), types));
 		}
 		Collections.sort(result, new Comparator<Pair<String, List<String>>>() {
+			@Override
 			public int compare(Pair<String, List<String>> o1, Pair<String, List<String>> o2) {
 				return o1.getFirst().compareTo(o2.getFirst());
 			}
 		});
 		return Joiner.on("\n").join(Iterables.transform(result, new Function<Pair<String, List<String>>, String>() {
+			@Override
 			public String apply(Pair<String, List<String>> from) {
 				return from.getFirst() + " returns " + Joiner.on(", ").join(from.getSecond());
 			}

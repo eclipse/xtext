@@ -38,6 +38,7 @@ public class Regions {
 	 */
 	public static Predicate<? super IRegion> overlaps(final IRegion region) {
 		return new Predicate<IRegion>() {
+			@Override
 			public boolean apply(IRegion input) {
 				return TextUtilities.overlaps(region, input);
 			}

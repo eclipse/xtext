@@ -112,6 +112,7 @@ public class AntlrFragmentHelper {
 	public Collection<? extends AbstractElement> getAllPredicatedElements(Grammar g) {
 		Collection<AbstractElement> unfiltered = getAllElementsByType(g, AbstractElement.class);
 		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
+			@Override
 			public boolean apply(AbstractElement input) {
 				return input.isPredicated();
 			}

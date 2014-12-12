@@ -33,42 +33,52 @@ public class UriValidatorBug406208Test implements IStorage, IResourceServiceProv
 		Assert.assertTrue(validator.isPossiblyManaged(this));
 	}
 	
+	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public InputStream getContents() throws CoreException {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IPath getFullPath() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public String getName() {
 		return "fileName.file extension";
 	}
 
+	@Override
 	public boolean isReadOnly() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		return Collections.emptyMap();
 	}
 
+	@Override
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return Collections.singletonMap("file%20extension", new Object());
 	}
 
+	@Override
 	public Map<String, Object> getProtocolToFactoryMap() {
 		throw new UnsupportedOperationException();
 	}

@@ -109,6 +109,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testNullChange() throws BadLocationException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				try {
 					int lastBrace = document.get().lastIndexOf("}");
@@ -125,6 +126,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testCloseEditor() throws InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
 			}
@@ -136,6 +138,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testCloseAndReopenEditor() throws InterruptedException, PartInitException, JavaModelException {
 		waitForEvent(new Procedure0() {
 			
+			@Override
 			public void apply() {
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeEditor(editor, false);
 				try {
@@ -154,6 +157,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	public void testNonStructuralChange() throws BadLocationException, InterruptedException {
 		waitForEvent(new Procedure0() {
 			
+			@Override
 			public void apply() {
 				int methodBody = document.get().indexOf("{}") + 1;
 				assertNull("event is null before the document was modified", event);
@@ -171,6 +175,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testTypeParameterAdded() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				String lookup = "NestedTypes";
 				int idx = document.get().indexOf(lookup) + "NestedTypes".length();
@@ -198,6 +203,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testRemoveMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				String lookup = "abstract boolean method();";
 				int idx = document.get().lastIndexOf(lookup);
@@ -231,6 +237,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testAddParam() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				int idx = document.get().lastIndexOf("(");
 				assertNull("event is null before the document was modified", event);
@@ -253,6 +260,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testAddMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				String lookup = "abstract boolean method();";
 				int idx = document.get().lastIndexOf(lookup);
@@ -276,6 +284,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testRenameMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				int idx = document.get().lastIndexOf("method(");
 				assertNull("event is null before the document was modified", event);
@@ -298,6 +307,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testRenameInnerMethod() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				int idx = document.get().indexOf("method(");
 				assertNull("event is null before the document was modified", event);
@@ -320,6 +330,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	@Test public void testRenameClass() throws BadLocationException, JavaModelException, InterruptedException {
 		waitForEvent(new Procedure0() {
 
+			@Override
 			public void apply() {
 				int idx = document.get().indexOf("NestedTypes");
 				assertNull("event is null before the document was modified", event);
@@ -407,11 +418,13 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		}
 	} 
 	
+	@Override
 	public void elementChanged(ElementChangedEvent elementChanged) {
 		if (firedElementChangedEvents != null)
 			firedElementChangedEvents.add(String.valueOf(elementChanged));
 	}
 	
+	@Override
 	public void descriptionsChanged(IResourceDescription.Event event) {
 		if (this.event != null && subsequentEvents != null) {
 			subsequentEvents.add(event);

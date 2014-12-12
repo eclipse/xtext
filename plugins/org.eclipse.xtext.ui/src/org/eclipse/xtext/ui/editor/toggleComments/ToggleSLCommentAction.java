@@ -104,6 +104,7 @@ public class ToggleSLCommentAction extends TextEditorAction {
 			display= shell.getDisplay();
 
 		BusyIndicator.showWhile(display, new Runnable() {
+			@Override
 			public void run() {
 				fOperationTarget.doOperation(operationCode);
 			}

@@ -86,7 +86,8 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getObjExpr()
+  @Override
+public Expression getObjExpr()
   {
     return objExpr;
   }
@@ -113,7 +114,8 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setObjExpr(Expression newObjExpr)
+  @Override
+public void setObjExpr(Expression newObjExpr)
   {
     if (newObjExpr != objExpr)
     {
@@ -134,7 +136,8 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFeatureName()
+  @Override
+public String getFeatureName()
   {
     return featureName;
   }
@@ -144,7 +147,8 @@ public class FeatureExpressionImpl extends ExpressionImpl implements FeatureExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeatureName(String newFeatureName)
+  @Override
+public void setFeatureName(String newFeatureName)
   {
     String oldFeatureName = featureName;
     featureName = newFeatureName;

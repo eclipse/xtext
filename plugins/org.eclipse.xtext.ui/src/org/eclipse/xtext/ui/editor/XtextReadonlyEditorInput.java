@@ -25,26 +25,32 @@ public class XtextReadonlyEditorInput extends PlatformObject implements IStorage
 		this.storage = storage;
 	}
 
+	@Override
 	public IStorage getStorage() throws CoreException {
 		return storage;
 	}
 
+	@Override
 	public boolean exists() {
 		return true;
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor() {
 		return null;
 	}
 
+	@Override
 	public String getName() {
 		return storage.getName();
 	}
 
+	@Override
 	public IPersistableElement getPersistable() {
 		return null;
 	}
 
+	@Override
 	public String getToolTipText() {
 		return storage.getName();
 	}

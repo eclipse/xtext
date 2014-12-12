@@ -25,6 +25,7 @@ public class LineSeparatorHarmonizer implements IFilePostProcessor {
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
 
+	@Override
 	public CharSequence postProcess(URI fileURI, CharSequence content) {
 		String lineSeparator = whitespaceInformationProvider.getLineSeparatorInformation(fileURI).getLineSeparator();
 		return replaceLineSeparators(content, lineSeparator);

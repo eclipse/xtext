@@ -64,7 +64,8 @@ public class ReferenceImpl extends PropertyImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getType()
+  @Override
+public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -94,7 +95,8 @@ public class ReferenceImpl extends PropertyImpl implements Reference
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newType)
+  @Override
+public void setType(org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class newType)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class oldType = type;
     type = newType;

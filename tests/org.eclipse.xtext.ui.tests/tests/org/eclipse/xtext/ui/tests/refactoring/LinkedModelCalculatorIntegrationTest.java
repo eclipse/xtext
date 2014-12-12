@@ -77,6 +77,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		waitForAutoBuild();
 		XtextEditor editor = openEditor(file1);
 		EObject a = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
+			@Override
 			public EObject exec(XtextResource state) throws Exception {
 				return state.getContents().get(0).eContents().get(0);
 			}
@@ -104,6 +105,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor(file2);
 		EObject a = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
 
+			@Override
 			public EObject exec(XtextResource state) throws Exception {
 				return ((Element) state.getContents().get(0).eContents().get(0)).getReferenced().get(0);
 			}

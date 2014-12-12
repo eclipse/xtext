@@ -86,6 +86,7 @@ public class JavaElementDelegate implements IAdaptable {
 		this.resource = resource;
 	}
 
+	@Override
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (IJavaElement.class.equals(adapter)) {
 			if (editor != null) {
@@ -190,6 +191,7 @@ public class JavaElementDelegate implements IAdaptable {
 			return null;
 		final int offset = ((ITextSelection) selection).getOffset();
 		IJavaElement func = xtextEditor.getDocument().readOnly(new IUnitOfWork<IJavaElement, XtextResource>() {
+			@Override
 			public IJavaElement exec(XtextResource state) throws Exception {
 				return findJavaElement(state, offset);
 			}

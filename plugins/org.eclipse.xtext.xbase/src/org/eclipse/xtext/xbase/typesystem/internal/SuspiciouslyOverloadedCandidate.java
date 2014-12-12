@@ -43,14 +43,17 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 		this.rejectedCandidate = rejectedCandidate;
 	}
 	
+	@Override
 	public FeatureLinkingCandidate getChosenCandidate() {
 		return chosenCandidate;
 	}
 	
+	@Override
 	public FeatureLinkingCandidate getRejectedCandidate() {
 		return rejectedCandidate;
 	}
 	
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof FeatureLinkingCandidate) {
 			FeatureLinkingCandidate right = (FeatureLinkingCandidate) other;
@@ -76,15 +79,18 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 		return result;
 	}
 	
+	@Override
 	public void applyToComputationState() {
 		chosenCandidate.getState().getResolvedTypes().reassignLinkingInformation(chosenCandidate.getExpression(), this);
 		chosenCandidate.applyToComputationState();
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		chosenCandidate.applyToModel(resolvedTypes);
 	}
 
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		if (chosenCandidate.validate(result)) {
 			StringBuilder messageBuilder = new StringBuilder("Suspiciously overloaded method.\n");
@@ -155,30 +161,37 @@ public class SuspiciouslyOverloadedCandidate implements IFeatureLinkingCandidate
 	}
 	
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getFeature() {
 		return chosenCandidate.getFeature();
 	}
 
+	@Override
 	public XExpression getExpression() {
 		return chosenCandidate.getExpression();
 	}
 
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		return chosenCandidate.getTypeArguments();
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return chosenCandidate.getFeatureCall();
 	}
 
+	@Override
 	public boolean isStatic() {
 		return chosenCandidate.isStatic();
 	}
 
+	@Override
 	public boolean isExtension() {
 		return chosenCandidate.isExtension();
 	}
 
+	@Override
 	public boolean isTypeLiteral() {
 		return chosenCandidate.isTypeLiteral();
 	}

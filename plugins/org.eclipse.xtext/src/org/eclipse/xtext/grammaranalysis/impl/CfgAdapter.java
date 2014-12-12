@@ -34,6 +34,7 @@ public class CfgAdapter implements Cfg<AbstractElement, AbstractElement> {
 		this.grammar = grammar;
 	}
 
+	@Override
 	public Iterable<AbstractElement> getAlternativeChildren(AbstractElement ele) {
 		switch (ele.eClass().getClassifierID()) {
 			case XtextPackage.ALTERNATIVES:
@@ -43,6 +44,7 @@ public class CfgAdapter implements Cfg<AbstractElement, AbstractElement> {
 		}
 	}
 
+	@Override
 	public AbstractElement getCall(AbstractElement ele) {
 		switch (ele.eClass().getClassifierID()) {
 			case XtextPackage.RULE_CALL:
@@ -52,15 +54,18 @@ public class CfgAdapter implements Cfg<AbstractElement, AbstractElement> {
 		}
 	}
 
+	@Override
 	public AbstractElement getParent(AbstractElement ele) {
 		EObject cnt = ele.eContainer();
 		return cnt instanceof AbstractElement ? (AbstractElement) cnt : null;
 	}
 
+	@Override
 	public AbstractElement getRoot() {
 		return grammar.getRules().size() > 0 ? grammar.getRules().get(0).getAlternatives() : null;
 	}
 
+	@Override
 	public Iterable<AbstractElement> getSequentialChildren(AbstractElement ele) {
 		switch (ele.eClass().getClassifierID()) {
 			case XtextPackage.GROUP:
@@ -74,10 +79,12 @@ public class CfgAdapter implements Cfg<AbstractElement, AbstractElement> {
 		}
 	}
 
+	@Override
 	public AbstractElement getToken(AbstractElement owner) {
 		return owner;
 	}
 
+	@Override
 	public Iterable<AbstractElement> getUnorderedChildren(AbstractElement ele) {
 		switch (ele.eClass().getClassifierID()) {
 			case XtextPackage.UNORDERED_GROUP:
@@ -87,10 +94,12 @@ public class CfgAdapter implements Cfg<AbstractElement, AbstractElement> {
 		}
 	}
 
+	@Override
 	public boolean isMany(AbstractElement ele) {
 		return GrammarUtil.isMultipleCardinality(ele);
 	}
 
+	@Override
 	public boolean isOptional(AbstractElement ele) {
 		return GrammarUtil.isOptionalCardinality(ele);
 	}

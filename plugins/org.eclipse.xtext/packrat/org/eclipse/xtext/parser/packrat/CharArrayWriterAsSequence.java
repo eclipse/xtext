@@ -14,10 +14,12 @@ import java.io.CharArrayWriter;
  */
 public class CharArrayWriterAsSequence extends CharArrayWriter implements CharSequence {
 
+	@Override
 	public char charAt(int index) {
 		return buf[index];
 	}
 
+	@Override
 	public int length() {
 		return count;
 	}
@@ -30,6 +32,7 @@ public class CharArrayWriterAsSequence extends CharArrayWriter implements CharSe
 		super(1024);
 	}
 	
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		return new SubSequence(this, start, end);
 	}
@@ -45,14 +48,17 @@ public class CharArrayWriterAsSequence extends CharArrayWriter implements CharSe
 			this.end = end;
 		}
 
+		@Override
 		public char charAt(int index) {
 			return base.charAt(index + start);
 		}
 
+		@Override
 		public int length() {
 			return end - start;
 		}
 
+		@Override
 		public CharSequence subSequence(int start, int end) {
 			return new SubSequence(base, this.start + start, this.start + end);
 		}

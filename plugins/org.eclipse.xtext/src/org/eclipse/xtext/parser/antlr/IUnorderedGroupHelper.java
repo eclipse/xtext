@@ -69,38 +69,47 @@ public interface IUnorderedGroupHelper {
 
 	public static class Null implements IUnorderedGroupHelper, UnorderedGroupState {
 
+		@Override
 		public void initializeWith(BaseRecognizer recognizer) {
 			// ignore
 		}
 		
+		@Override
 		public void enter(UnorderedGroup group) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void leave(UnorderedGroup group) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean canSelect(UnorderedGroup group, int index) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void select(UnorderedGroup group, int index) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void returnFromSelection(UnorderedGroup group) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean canLeave(UnorderedGroup group) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void restore() {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public UnorderedGroupState snapShot(UnorderedGroup... group) {
 			throw new UnsupportedOperationException();
 		}

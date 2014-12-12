@@ -105,6 +105,7 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Concrete0 createConcrete0() {
 		Concrete0Impl concrete0 = new Concrete0Impl();
 		return concrete0;
@@ -115,6 +116,7 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Concrete1 createConcrete1() {
 		Concrete1Impl concrete1 = new Concrete1Impl();
 		return concrete1;
@@ -125,6 +127,7 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
@@ -135,6 +138,7 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DiamondInheritance createDiamondInheritance() {
 		DiamondInheritanceImpl diamondInheritance = new DiamondInheritanceImpl();
 		return diamondInheritance;
@@ -163,6 +167,7 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Ecore2xtextPackage getEcore2xtextPackage() {
 		return (Ecore2xtextPackage)getEPackage();
 	}

@@ -16,6 +16,7 @@ import org.eclipse.xtext.builder.smap.StratumBreakpointAdapterFactory;
 public class XbaseBreakpointPropertyTester extends PropertyTester {
 	private static final Logger logger = Logger.getLogger(XbaseBreakpointPropertyTester.class);
 
+	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (receiver instanceof IJavaStratumLineBreakpoint) {
 			IJavaStratumLineBreakpoint breakpoint = (IJavaStratumLineBreakpoint) receiver;

@@ -81,7 +81,8 @@ public class ElementImpl extends NamedElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public Element getReferences()
+  @Override
+public Element getReferences()
   {
     if (references != null && references.eIsProxy())
     {
@@ -111,7 +112,8 @@ public class ElementImpl extends NamedElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferences(Element newReferences)
+  @Override
+public void setReferences(Element newReferences)
   {
     Element oldReferences = references;
     references = newReferences;
@@ -124,7 +126,8 @@ public class ElementImpl extends NamedElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Element> getOtherRefs()
+  @Override
+public EList<Element> getOtherRefs()
   {
     if (otherRefs == null)
     {

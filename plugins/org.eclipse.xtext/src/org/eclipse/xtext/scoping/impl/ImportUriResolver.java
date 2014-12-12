@@ -51,6 +51,7 @@ public class ImportUriResolver implements Function<EObject, String> {
 		return getResolver().getAttribute(object);
 	}
 
+	@Override
 	public String apply(EObject from) {
 		return resolve(from);
 	}

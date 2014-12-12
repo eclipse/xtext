@@ -48,14 +48,17 @@ public class ReferenceQuery implements ISearchQuery {
 		this.searchResult = createSearchResult();
 	}
 
+	@Override
 	public boolean canRerun() {
 		return true;
 	}
 
+	@Override
 	public boolean canRunInBackground() {
 		return true;
 	}
 
+	@Override
 	public String getLabel() {
 		return label;
 	}
@@ -64,10 +67,12 @@ public class ReferenceQuery implements ISearchQuery {
 		return filter;
 	}
 	
+	@Override
 	public ISearchResult getSearchResult() {
 		return searchResult;
 	}
 
+	@Override
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
 		finder.findAllReferences(targetURIs, localContextProvider, searchResult, monitor);

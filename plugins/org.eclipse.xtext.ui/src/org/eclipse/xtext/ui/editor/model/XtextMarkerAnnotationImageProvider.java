@@ -23,14 +23,17 @@ import org.eclipse.xtext.ui.internal.XtextPluginImages;
  */
 public class XtextMarkerAnnotationImageProvider implements IAnnotationImageProvider {
 
+	@Override
 	public ImageDescriptor getImageDescriptor(String imageDescritporId) {
 		return null;
 	}
 
+	@Override
 	public String getImageDescriptorId(Annotation annotation) {
 		return null;
 	}
 
+	@Override
 	public Image getManagedImage(Annotation annotation) {
 		return getImages(annotation).get(annotation.getType());
 	}

@@ -67,10 +67,12 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		this.delegate = delegate;
 	}
 
+	@Override
 	public IScopeProvider getDelegate() {
 		return delegate;
 	}
 	
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null) {
 			return IScope.NULLSCOPE;
@@ -105,6 +107,7 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		return delegateGetScope(context, reference);
 	}
 	
+	@Override
 	public IFeatureScopeSession newSession(Resource context) {
 		List<JvmType> literalClasses = implicitlyImportedFeatures.getStaticImportClasses(context);
 		List<JvmType> extensionClasses = implicitlyImportedFeatures.getExtensionClasses(context);
@@ -115,6 +118,7 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		if(importSection != null) {
 			result = result.addImports(new ITypeImporter.Client() {
 
+				@Override
 				public void doAddImports(ITypeImporter importer) {
 					List<XImportDeclaration> imports = importSection.getImportDeclarations();
 					for(XImportDeclaration _import: imports) {
@@ -145,10 +149,12 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
 
+	@Override
 	public boolean isConstructorCallScope(EReference reference) {
 		return reference.getEReferenceType() == TypesPackage.Literals.JVM_CONSTRUCTOR;
 	}
 
+	@Override
 	public boolean isFeatureCallScope(EReference reference) {
 		return featureScopes.isFeatureCallScope(reference);
 	}
@@ -157,6 +163,7 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 		return featureScopes;
 	}
 
+	@Override
 	public boolean isBatchScopeable(EReference reference) {
 		return isConstructorCallScope(reference) || isFeatureCallScope(reference);
 	}

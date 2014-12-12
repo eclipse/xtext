@@ -63,6 +63,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	
 	private SimpleCache<EClass, EClass> instantiableSubTypes = new SimpleCache<EClass, EClass>(
 			new Function<EClass, EClass>() {
+				@Override
 				public EClass apply(EClass from) {
 					return findInstantiableCompatible(from);
 				}

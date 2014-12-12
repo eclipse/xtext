@@ -20,10 +20,12 @@ import com.google.common.collect.Iterables;
  */
 public class UrlClassLoaderClasspathEntriesProvider implements IClasspathEntriesProvider {
 
+	@Override
 	public Iterable<String> getAllPathes(ClassLoader classloader) {
 		if (classloader instanceof URLClassLoader) {
 			List<URL> urls = Arrays.asList(((URLClassLoader)classloader).getURLs());
 			return Iterables.transform(urls, new Function<URL,String>(){
+				@Override
 				public String apply(URL from) {
 					return from.toString();
 				}});

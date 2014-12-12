@@ -35,82 +35,100 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	protected abstract IResolvedTypes delegate();
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualType(XExpression expression) {
 		return delegate().getActualType(expression);
 	}
 	
+	@Override
 	public Collection<ILinkingCandidate> getFollowUpErrors() {
 		return delegate().getFollowUpErrors();
 	}
 	
+	@Override
 	public Collection<IAmbiguousLinkingCandidate> getAmbiguousLinkingCandidates() {
 		return delegate().getAmbiguousLinkingCandidates();
 	}
 	
+	@Override
 	public boolean isRefinedType(XExpression expression) {
 		return delegate().isRefinedType(expression);
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getReturnType(XExpression expression) {
 		return delegate().getReturnType(expression);
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		return delegate().getExpectedReturnType(expression);
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		return delegate().getActualType(identifiable);
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getThrownExceptions(XExpression obj) {
 		return delegate().getThrownExceptions(obj);
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		return delegate().getExpectedType(expression);
 	}
 
+	@Override
 	public List<LightweightTypeReference> getActualTypeArguments(XExpression expression) {
 		return delegate().getActualTypeArguments(expression);
 	}
 
+	@Override
 	public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
 		return delegate().getQueuedDiagnostics();
 	}
 	
+	@Override
 	public boolean isVoidTypeAllowed(XExpression expression) {
 		return delegate().isVoidTypeAllowed(expression);
 	}
 
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		return delegate().getLinkedFeature(featureCall);
 	}
 	
 	/* @Nullable */
+	@Override
 	public IFeatureLinkingCandidate getLinkingCandidate(/* @Nullable */ XAbstractFeatureCall featureCall) {
 		return delegate().getLinkingCandidate(featureCall);
 	}
 	
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getLinkedFeature(/* @Nullable */ XConstructorCall constructorCall) {
 		return delegate().getLinkedFeature(constructorCall);
 	}
 	
 	/* @Nullable */
+	@Override
 	public IConstructorLinkingCandidate getLinkingCandidate(/* @Nullable */ XConstructorCall constructorCall) {
 		return delegate().getLinkingCandidate(constructorCall);
 	}
 	
+	@Override
 	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		return delegate().getExpressionScope(context, anchor);
 	}
 	
+	@Override
 	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		return delegate().hasExpressionScope(context, anchor);
 	}

@@ -44,6 +44,7 @@ public class EObjectDiagnosticImpl extends AbstractDiagnostic {
 		this.data = data;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}

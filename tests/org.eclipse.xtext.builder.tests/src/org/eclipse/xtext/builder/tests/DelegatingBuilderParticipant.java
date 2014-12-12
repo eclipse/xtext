@@ -21,6 +21,7 @@ public class DelegatingBuilderParticipant implements IXtextBuilderParticipant {
 
 	private IXtextBuilderParticipant delegate;
 
+	@Override
 	public void build(IXtextBuilderParticipant.IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		if (delegate != null)
 			delegate.build(context, monitor);

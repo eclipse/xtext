@@ -73,7 +73,8 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -83,7 +84,8 @@ public class GeneratedMetamodelImpl extends AbstractMetamodelDeclarationImpl imp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

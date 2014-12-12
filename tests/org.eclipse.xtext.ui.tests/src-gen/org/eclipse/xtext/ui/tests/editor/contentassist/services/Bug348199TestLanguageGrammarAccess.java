@@ -262,6 +262,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	(time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
 		//	| "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
 		//	name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Timeperiod} "define" "timeperiod" ("1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
@@ -989,6 +990,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TimeDef1 returns TimeDef:
 		//	"july" day=INT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"july" day=INT
@@ -1013,6 +1015,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TimeDef2 returns TimeDef:
 		//	"august" day=INT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"august" day=INT
@@ -1037,6 +1040,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TimeDef3 returns TimeDef:
 		//	"september" day=INT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"september" day=INT
@@ -1094,6 +1098,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

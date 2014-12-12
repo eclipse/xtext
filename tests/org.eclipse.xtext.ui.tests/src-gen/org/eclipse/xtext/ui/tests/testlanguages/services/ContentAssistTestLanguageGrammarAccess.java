@@ -28,6 +28,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Start:
 		//	"abstract rules" rules+=AbstractRule+ "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"abstract rules" rules+=AbstractRule+ "end"
@@ -54,6 +55,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AbstractRule:
 		//	FirstAbstractRuleChild | SecondAbstractRuleChild;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//FirstAbstractRuleChild | SecondAbstractRuleChild
@@ -79,6 +81,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//FirstAbstractRuleChild:
 		//	name=ID "(" elements+=AbstractRule+ ")" ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID "(" elements+=AbstractRule+ ")" ";"
@@ -119,6 +122,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//SecondAbstractRuleChild:
 		//	name=ID "rule" ":" rule=AbstractRuleCall ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID "rule" ":" rule=AbstractRuleCall ";"
@@ -154,6 +158,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AbstractRuleCall:
 		//	rule=[AbstractRule];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//rule=[AbstractRule]
@@ -206,6 +211,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

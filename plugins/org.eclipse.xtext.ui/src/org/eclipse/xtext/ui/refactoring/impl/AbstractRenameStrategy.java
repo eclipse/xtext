@@ -30,6 +30,7 @@ public abstract class AbstractRenameStrategy implements DefaultRenameStrategyPro
 	private URI targetElementNewURI;
 	private EAttribute nameAttribute;
 	
+	@Override
 	public boolean initialize(EObject targetElement, IRenameElementContext context) {
 		this.nameAttribute = getNameAttribute(targetElement);
 		if(nameAttribute == null)
@@ -40,20 +41,24 @@ public abstract class AbstractRenameStrategy implements DefaultRenameStrategyPro
 	}
 
 	
+	@Override
 	public String getOriginalName() {
 		return originalName;
 	}
 
+	@Override
 	public RefactoringStatus validateNewName(String newName) {
 		RefactoringStatus status = new RefactoringStatus();
 		return status;
 	}
 
+	@Override
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
 		EObject renamedElement = setName(targetElementOriginalURI, newName, resourceSet);
 		targetElementNewURI = EcoreUtil.getURI(renamedElement);
 	}
 
+	@Override
 	public void revertDeclarationChange(ResourceSet resourceSet) {
 		if (targetElementNewURI == null)
 			return;

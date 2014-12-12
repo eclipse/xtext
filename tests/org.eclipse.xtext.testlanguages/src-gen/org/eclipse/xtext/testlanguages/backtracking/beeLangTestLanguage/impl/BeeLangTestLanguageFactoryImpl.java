@@ -110,7 +110,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -121,7 +122,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public Unit createUnit()
+  @Override
+public Unit createUnit()
   {
     UnitImpl unit = new UnitImpl();
     return unit;
@@ -132,7 +134,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ProvidedCapability createProvidedCapability()
+  @Override
+public ProvidedCapability createProvidedCapability()
   {
     ProvidedCapabilityImpl providedCapability = new ProvidedCapabilityImpl();
     return providedCapability;
@@ -143,7 +146,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public AliasedRequiredCapability createAliasedRequiredCapability()
+  @Override
+public AliasedRequiredCapability createAliasedRequiredCapability()
   {
     AliasedRequiredCapabilityImpl aliasedRequiredCapability = new AliasedRequiredCapabilityImpl();
     return aliasedRequiredCapability;
@@ -154,7 +158,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public RequiredCapability createRequiredCapability()
+  @Override
+public RequiredCapability createRequiredCapability()
   {
     RequiredCapabilityImpl requiredCapability = new RequiredCapabilityImpl();
     return requiredCapability;
@@ -165,7 +170,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterList createParameterList()
+  @Override
+public ParameterList createParameterList()
   {
     ParameterListImpl parameterList = new ParameterListImpl();
     return parameterList;
@@ -176,7 +182,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter createParameter()
+  @Override
+public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
     return parameter;
@@ -187,7 +194,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ClosureParameter createClosureParameter()
+  @Override
+public ClosureParameter createClosureParameter()
   {
     ClosureParameterImpl closureParameter = new ClosureParameterImpl();
     return closureParameter;
@@ -198,7 +206,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterDeclaration createParameterDeclaration()
+  @Override
+public ParameterDeclaration createParameterDeclaration()
   {
     ParameterDeclarationImpl parameterDeclaration = new ParameterDeclarationImpl();
     return parameterDeclaration;
@@ -209,7 +218,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public Function createFunction()
+  @Override
+public Function createFunction()
   {
     FunctionImpl function = new FunctionImpl();
     return function;
@@ -220,7 +230,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public GuardExpression createGuardExpression()
+  @Override
+public GuardExpression createGuardExpression()
   {
     GuardExpressionImpl guardExpression = new GuardExpressionImpl();
     return guardExpression;
@@ -231,7 +242,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression createExpression()
+  @Override
+public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -242,7 +254,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef createTypeRef()
+  @Override
+public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
     return typeRef;
@@ -253,7 +266,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleTypeRef createSimpleTypeRef()
+  @Override
+public SimpleTypeRef createSimpleTypeRef()
   {
     SimpleTypeRefImpl simpleTypeRef = new SimpleTypeRefImpl();
     return simpleTypeRef;
@@ -264,7 +278,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ClosureTypeRef createClosureTypeRef()
+  @Override
+public ClosureTypeRef createClosureTypeRef()
   {
     ClosureTypeRefImpl closureTypeRef = new ClosureTypeRefImpl();
     return closureTypeRef;
@@ -275,7 +290,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public WithExpression createWithExpression()
+  @Override
+public WithExpression createWithExpression()
   {
     WithExpressionImpl withExpression = new WithExpressionImpl();
     return withExpression;
@@ -286,7 +302,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public WithContextExpression createWithContextExpression()
+  @Override
+public WithContextExpression createWithContextExpression()
   {
     WithContextExpressionImpl withContextExpression = new WithContextExpressionImpl();
     return withContextExpression;
@@ -297,7 +314,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public CallExpression createCallExpression()
+  @Override
+public CallExpression createCallExpression()
   {
     CallExpressionImpl callExpression = new CallExpressionImpl();
     return callExpression;
@@ -308,7 +326,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ValueLiteral createValueLiteral()
+  @Override
+public ValueLiteral createValueLiteral()
   {
     ValueLiteralImpl valueLiteral = new ValueLiteralImpl();
     return valueLiteral;
@@ -319,7 +338,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public AssignmentExpression createAssignmentExpression()
+  @Override
+public AssignmentExpression createAssignmentExpression()
   {
     AssignmentExpressionImpl assignmentExpression = new AssignmentExpressionImpl();
     return assignmentExpression;
@@ -330,7 +350,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public DefValue createDefValue()
+  @Override
+public DefValue createDefValue()
   {
     DefValueImpl defValue = new DefValueImpl();
     return defValue;
@@ -341,7 +362,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public CachedExpression createCachedExpression()
+  @Override
+public CachedExpression createCachedExpression()
   {
     CachedExpressionImpl cachedExpression = new CachedExpressionImpl();
     return cachedExpression;
@@ -352,7 +374,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public OrExpression createOrExpression()
+  @Override
+public OrExpression createOrExpression()
   {
     OrExpressionImpl orExpression = new OrExpressionImpl();
     return orExpression;
@@ -363,7 +386,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public AndExpression createAndExpression()
+  @Override
+public AndExpression createAndExpression()
   {
     AndExpressionImpl andExpression = new AndExpressionImpl();
     return andExpression;
@@ -374,7 +398,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public BinaryOpExpression createBinaryOpExpression()
+  @Override
+public BinaryOpExpression createBinaryOpExpression()
   {
     BinaryOpExpressionImpl binaryOpExpression = new BinaryOpExpressionImpl();
     return binaryOpExpression;
@@ -385,7 +410,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnaryOpExpression createUnaryOpExpression()
+  @Override
+public UnaryOpExpression createUnaryOpExpression()
   {
     UnaryOpExpressionImpl unaryOpExpression = new UnaryOpExpressionImpl();
     return unaryOpExpression;
@@ -396,7 +422,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnaryPreOpExpression createUnaryPreOpExpression()
+  @Override
+public UnaryPreOpExpression createUnaryPreOpExpression()
   {
     UnaryPreOpExpressionImpl unaryPreOpExpression = new UnaryPreOpExpressionImpl();
     return unaryPreOpExpression;
@@ -407,7 +434,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnaryPostOpExpression createUnaryPostOpExpression()
+  @Override
+public UnaryPostOpExpression createUnaryPostOpExpression()
   {
     UnaryPostOpExpressionImpl unaryPostOpExpression = new UnaryPostOpExpressionImpl();
     return unaryPostOpExpression;
@@ -418,7 +446,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public CallFeature createCallFeature()
+  @Override
+public CallFeature createCallFeature()
   {
     CallFeatureImpl callFeature = new CallFeatureImpl();
     return callFeature;
@@ -429,7 +458,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public AtExpression createAtExpression()
+  @Override
+public AtExpression createAtExpression()
   {
     AtExpressionImpl atExpression = new AtExpressionImpl();
     return atExpression;
@@ -440,7 +470,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public FeatureExpression createFeatureExpression()
+  @Override
+public FeatureExpression createFeatureExpression()
   {
     FeatureExpressionImpl featureExpression = new FeatureExpressionImpl();
     return featureExpression;
@@ -451,7 +482,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public CallFunction createCallFunction()
+  @Override
+public CallFunction createCallFunction()
   {
     CallFunctionImpl callFunction = new CallFunctionImpl();
     return callFunction;
@@ -462,7 +494,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public ChainedExpression createChainedExpression()
+  @Override
+public ChainedExpression createChainedExpression()
   {
     ChainedExpressionImpl chainedExpression = new ChainedExpressionImpl();
     return chainedExpression;
@@ -473,7 +506,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableExpression createVariableExpression()
+  @Override
+public VariableExpression createVariableExpression()
   {
     VariableExpressionImpl variableExpression = new VariableExpressionImpl();
     return variableExpression;
@@ -484,7 +518,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public CallNamedFunction createCallNamedFunction()
+  @Override
+public CallNamedFunction createCallNamedFunction()
   {
     CallNamedFunctionImpl callNamedFunction = new CallNamedFunctionImpl();
     return callNamedFunction;
@@ -495,7 +530,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public CreateExpression createCreateExpression()
+  @Override
+public CreateExpression createCreateExpression()
   {
     CreateExpressionImpl createExpression = new CreateExpressionImpl();
     return createExpression;
@@ -506,7 +542,8 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public BeeLangTestLanguagePackage getBeeLangTestLanguagePackage()
+  @Override
+public BeeLangTestLanguagePackage getBeeLangTestLanguagePackage()
   {
     return (BeeLangTestLanguagePackage)getEPackage();
   }

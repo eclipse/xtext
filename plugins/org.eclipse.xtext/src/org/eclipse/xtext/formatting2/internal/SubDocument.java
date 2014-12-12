@@ -37,18 +37,22 @@ public class SubDocument extends FormattableDocument implements IFormattableSubD
 		return ((TextReplacerContext) super.createReplacements(context)).withDocument(previous.getDocument());
 	}
 
+	@Override
 	public AbstractFormatter2 getFormatter() {
 		return parent.getFormatter();
 	}
 
+	@Override
 	public ITextSegment getRegion() {
 		return region;
 	}
 
+	@Override
 	public FormatterRequest getRequest() {
 		return parent.getRequest();
 	}
 
+	@Override
 	public IFormattableSubDocument requireFitsInLine() {
 		return requireFitsInLine(region.getOffset(), region.getLength());
 	}
@@ -58,6 +62,7 @@ public class SubDocument extends FormattableDocument implements IFormattableSubD
 		return requireFitsInLine(offset, length, maxLineWidth);
 	}
 
+	@Override
 	public IFormattableSubDocument requireFitsInLine(int offset, int length, int maxLineWidth) {
 		TextSegment segment = new TextSegment(getTextRegionAccess(), offset, length);
 		MaxLineWidthDocument document = new MaxLineWidthDocument(segment, this, maxLineWidth);

@@ -54,6 +54,7 @@ public class XbaseWithAnnotationsProposalProvider extends AbstractXbaseWithAnnot
 				JvmAnnotationType casted = (JvmAnnotationType) annotationType;
 				final Set<JvmOperation> operations = Sets.newHashSet(casted.getDeclaredOperations());
 				Predicate<IEObjectDescription> predicate = Predicates.and(new Predicate<IEObjectDescription>() {
+					@Override
 					public boolean apply(IEObjectDescription in) {
 						return operations.contains(in.getEObjectOrProxy());
 					}

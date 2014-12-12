@@ -88,7 +88,8 @@ public class SpielzeugImpl extends MinimalEObjectImpl.Container implements Spiel
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -98,7 +99,8 @@ public class SpielzeugImpl extends MinimalEObjectImpl.Container implements Spiel
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -111,7 +113,8 @@ public class SpielzeugImpl extends MinimalEObjectImpl.Container implements Spiel
    * <!-- end-user-doc -->
    * @generated
    */
-  public Farbe getFarbe()
+  @Override
+public Farbe getFarbe()
   {
     return farbe;
   }
@@ -138,7 +141,8 @@ public class SpielzeugImpl extends MinimalEObjectImpl.Container implements Spiel
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFarbe(Farbe newFarbe)
+  @Override
+public void setFarbe(Farbe newFarbe)
   {
     if (newFarbe != farbe)
     {

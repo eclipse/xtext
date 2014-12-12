@@ -16,10 +16,12 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
  */
 public abstract class AbstractXtypeReferenceVisitorWithParameter<Parameter, Result> extends AbstractTypeReferenceVisitorWithParameter.InheritanceAware<Parameter, Result> implements XtypeReferenceVisitorWithParameter<Parameter, Result> {
 
+	@Override
 	public Result doVisitFunctionTypeReference(XFunctionTypeRef reference, Parameter param) {
 		return doVisitSpecializedTypeReference(reference, param);
 	}
 
+	@Override
 	public Result doVisitComputedTypeReference(XComputedTypeReference reference, Parameter param) {
 		return doVisitSpecializedTypeReference(reference, param);
 	}

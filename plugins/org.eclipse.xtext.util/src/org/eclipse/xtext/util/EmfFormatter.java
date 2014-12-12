@@ -51,6 +51,7 @@ public class EmfFormatter {
 						Collections.singleton(ignoredFeatures[0]) ) :
 			Collections.<EStructuralFeature>emptySet();
 		return objToStr(obj, new Predicate<EStructuralFeature>() {
+			@Override
 			public boolean apply(EStructuralFeature input) {
 				return ignoreUs.contains(input);
 			}

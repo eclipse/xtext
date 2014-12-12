@@ -29,6 +29,7 @@ public class InvalidTokenTest extends AbstractXtextTests {
 		with(OptionalEmptyTestLanguageStandaloneSetup.class);
 		ICompositeNode rootNode = getRootNodeAndExpect("/*", 1);
 		List<INode> allErrorNodes = Lists.newArrayList(Iterators.filter(rootNode.getAsTreeIterable().iterator(), new Predicate<INode>() {
+			@Override
 			public boolean apply(INode input) {
 				return input.getSyntaxErrorMessage() != null;
 			}

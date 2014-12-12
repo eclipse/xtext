@@ -95,7 +95,8 @@ public class TypeDescriptionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  @Override
+public String getType()
   {
     return type;
   }
@@ -105,7 +106,8 @@ public class TypeDescriptionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  @Override
+public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -118,7 +120,8 @@ public class TypeDescriptionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isMany()
+  @Override
+public boolean isMany()
   {
     return many;
   }
@@ -128,7 +131,8 @@ public class TypeDescriptionImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMany(boolean newMany)
+  @Override
+public void setMany(boolean newMany)
   {
     boolean oldMany = many;
     many = newMany;

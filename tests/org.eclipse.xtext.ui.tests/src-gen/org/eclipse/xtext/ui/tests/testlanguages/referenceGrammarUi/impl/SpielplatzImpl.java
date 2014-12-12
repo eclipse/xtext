@@ -152,7 +152,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getGroesse()
+  @Override
+public int getGroesse()
   {
     return groesse;
   }
@@ -162,7 +163,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGroesse(int newGroesse)
+  @Override
+public void setGroesse(int newGroesse)
   {
     int oldGroesse = groesse;
     groesse = newGroesse;
@@ -175,7 +177,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getBeschreibung()
+  @Override
+public String getBeschreibung()
   {
     return beschreibung;
   }
@@ -185,7 +188,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBeschreibung(String newBeschreibung)
+  @Override
+public void setBeschreibung(String newBeschreibung)
   {
     String oldBeschreibung = beschreibung;
     beschreibung = newBeschreibung;
@@ -198,7 +202,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Kind> getKinder()
+  @Override
+public EList<Kind> getKinder()
   {
     if (kinder == null)
     {
@@ -212,7 +217,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Erwachsener> getErzieher()
+  @Override
+public EList<Erwachsener> getErzieher()
   {
     if (erzieher == null)
     {
@@ -226,7 +232,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Spielzeug> getSpielzeuge()
+  @Override
+public EList<Spielzeug> getSpielzeuge()
   {
     if (spielzeuge == null)
     {
@@ -240,7 +247,8 @@ public class SpielplatzImpl extends MinimalEObjectImpl.Container implements Spie
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Familie> getFamilie()
+  @Override
+public EList<Familie> getFamilie()
   {
     if (familie == null)
     {

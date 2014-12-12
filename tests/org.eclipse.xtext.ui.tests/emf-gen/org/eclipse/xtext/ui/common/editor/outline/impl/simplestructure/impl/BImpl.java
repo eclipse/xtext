@@ -94,6 +94,7 @@ public class BImpl extends EObjectImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -103,6 +104,7 @@ public class BImpl extends EObjectImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -115,6 +117,7 @@ public class BImpl extends EObjectImpl implements B {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<B> getB() {
 		if (b == null) {
 			b = new EObjectContainmentEList<B>(B.class, this, SimplestructurePackage.B__B);

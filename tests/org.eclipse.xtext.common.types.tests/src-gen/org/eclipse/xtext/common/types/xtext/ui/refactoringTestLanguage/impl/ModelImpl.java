@@ -71,7 +71,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ReferenceHolder> getReferenceHolder()
+  @Override
+public EList<ReferenceHolder> getReferenceHolder()
   {
     if (referenceHolder == null)
     {

@@ -99,6 +99,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		resourceChanged = false;
 	}
 
+	@Override
 	public void beginRecording(Resource newResource) {
 		reset();
 
@@ -121,6 +122,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		recording = true;
 	}
 
+	@Override
 	public TextEdit endRecording() {
 		recording = false;
 		TextEdit textEdit = getTextEdit();
@@ -129,6 +131,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		return textEdit;
 	}
 
+	@Override
 	public TextEdit getTextEdit() {
 		TextEdit result = null;
 
@@ -158,6 +161,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 		final Collection<EObject> modifiedObjects = getModifiedObjects();
 		Collection<EObject> topLevelObjects = EcoreUtil.filterDescendants(modifiedObjects);
 		Iterable<EObject> containedModifiedObjects = Iterables.filter(topLevelObjects, new Predicate<EObject>() {
+			@Override
 			public boolean apply(EObject input) {
 				return input.eResource() == resource;
 			}

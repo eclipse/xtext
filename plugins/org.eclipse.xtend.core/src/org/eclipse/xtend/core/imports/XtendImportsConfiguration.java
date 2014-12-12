@@ -50,6 +50,7 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration imple
 			return null;
 	}
 
+	@Override
 	public void setImportSection(XtextResource resource, XImportSection importSection) {
 		XtendFile xtendFile = getXtendFile(resource);
 		if (xtendFile != null) {
@@ -74,6 +75,7 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration imple
 					JvmDeclaredType declaredType = (JvmDeclaredType) inferredElement;
 					locallyDefinedTypes.add(declaredType);
 					addInnerTypes(declaredType, new IAcceptor<JvmDeclaredType>() {
+						@Override
 						public void accept(JvmDeclaredType t) {
 							locallyDefinedTypes.add(t);
 						}

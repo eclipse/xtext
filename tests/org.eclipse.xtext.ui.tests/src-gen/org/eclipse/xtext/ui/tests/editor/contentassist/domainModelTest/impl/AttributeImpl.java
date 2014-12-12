@@ -65,7 +65,8 @@ public class AttributeImpl extends PropertyImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType getType()
+  @Override
+public DataType getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -95,7 +96,8 @@ public class AttributeImpl extends PropertyImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(DataType newType)
+  @Override
+public void setType(DataType newType)
   {
     DataType oldType = type;
     type = newType;

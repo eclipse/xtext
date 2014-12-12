@@ -72,7 +72,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Word> getWords()
+  @Override
+public EList<Word> getWords()
   {
     if (words == null)
     {

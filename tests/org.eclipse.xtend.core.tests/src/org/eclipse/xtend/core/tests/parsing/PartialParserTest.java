@@ -747,6 +747,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
 		validator.setDiagnosticConverter(new IDiagnosticConverter() {
+			@Override
 			public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof BasicDiagnostic) {
 					List<?> data = diagnostic.getData();
@@ -762,6 +763,7 @@ public class PartialParserTest extends AbstractXtendTestCase {
 				}
 			}
 			
+			@Override
 			public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity, IAcceptor<Issue> acceptor) {
 				if (diagnostic instanceof ExceptionDiagnostic) {
 					Exception e = ((ExceptionDiagnostic) diagnostic).getException();

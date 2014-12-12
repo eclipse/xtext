@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 public class FollowerFunctionTest extends Assert {
 
 	private class ElementFormatter implements Function<ProdElement, String> {
+		@Override
 		public String apply(ProdElement from) {
 			if (from == null)
 				return "null";

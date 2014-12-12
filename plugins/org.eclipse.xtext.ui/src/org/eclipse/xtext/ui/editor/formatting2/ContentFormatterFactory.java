@@ -16,6 +16,7 @@ public class ContentFormatterFactory implements IContentFormatterFactory {
 	@Inject
 	private Provider<ContentFormatter> formatter;
 
+	@Override
 	public IContentFormatter createConfiguredFormatter(SourceViewerConfiguration cfg, ISourceViewer sourceViewer) {
 		return formatter.get();
 	}

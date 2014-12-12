@@ -226,6 +226,7 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 		return instance.split(",")[0];
 	}
 	
+	@Override
 	public final XtextResource getResourceFor(InputStream stream) {
 		try {
 			return getResourceAndExpect(stream, AbstractXtextTests.UNKNOWN_EXPECTATION);

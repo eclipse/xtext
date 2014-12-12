@@ -73,6 +73,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 		return qualifiedNameConverter;
 	}
 	
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (context == null)
 			throw new NullPointerException("context");
@@ -193,6 +194,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 
 	protected List<ImportNormalizer> getImportedNamespaceResolvers(final EObject context, final boolean ignoreCase) {
 		return cache.get(Tuples.create(context, ignoreCase, "imports"), context.eResource(), new Provider<List<ImportNormalizer>>() {
+			@Override
 			public List<ImportNormalizer> get() {
 				return internalGetImportedNamespaceResolvers(context, ignoreCase);
 			}
@@ -267,6 +269,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 
 	protected ISelectable getAllDescriptions(final Resource resource) {
 		return cache.get("internalGetAllDescriptions", resource, new Provider<ISelectable>() {
+			@Override
 			public ISelectable get() {
 				return internalGetAllDescriptions(resource);
 			}
@@ -275,6 +278,7 @@ public class XImportSectionNamespaceScopeProvider extends AbstractGlobalScopeDel
 	
 	protected ISelectable internalGetAllDescriptions(final Resource resource) {
 		Iterable<EObject> allContents = new Iterable<EObject>(){
+			@Override
 			public Iterator<EObject> iterator() {
 				return EcoreUtil.getAllContents(resource, false);
 			}

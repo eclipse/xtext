@@ -86,7 +86,8 @@ public class MyFieldImpl extends MinimalEObjectImpl.Container implements MyField
    * <!-- end-user-doc -->
    * @generated
    */
-  public MyAttributes getAttr()
+  @Override
+public MyAttributes getAttr()
   {
     return attr;
   }
@@ -113,7 +114,8 @@ public class MyFieldImpl extends MinimalEObjectImpl.Container implements MyField
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAttr(MyAttributes newAttr)
+  @Override
+public void setAttr(MyAttributes newAttr)
   {
     if (newAttr != attr)
     {
@@ -134,7 +136,8 @@ public class MyFieldImpl extends MinimalEObjectImpl.Container implements MyField
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<MyBinding> getBindings()
+  @Override
+public EList<MyBinding> getBindings()
   {
     if (bindings == null)
     {

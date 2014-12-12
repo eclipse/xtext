@@ -25,6 +25,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Root:
 		//	childs+=Child*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//childs+=Child*
@@ -43,6 +44,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child hidden(WS, ID):
 		//	"child" name=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"child" name=STRING
@@ -96,6 +98,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -27,6 +27,7 @@ public class SyncingSelectionListener implements ISelectionChangedListener {
 		syncer.awaitSignal(timeout);
 	}
 	
+	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		syncer.signal();
 	}

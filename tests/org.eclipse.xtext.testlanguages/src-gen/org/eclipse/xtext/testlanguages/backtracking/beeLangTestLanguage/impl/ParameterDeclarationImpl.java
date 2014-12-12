@@ -87,7 +87,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getType()
+  @Override
+public TypeRef getType()
   {
     return type;
   }
@@ -114,7 +115,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeRef newType)
+  @Override
+public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -135,7 +137,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -145,7 +148,8 @@ public class ParameterDeclarationImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

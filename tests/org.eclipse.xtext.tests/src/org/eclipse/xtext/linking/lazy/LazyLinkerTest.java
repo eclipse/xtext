@@ -60,18 +60,22 @@ public class LazyLinkerTest extends AbstractXtextTests {
 			protected void configure() {
 				bind(EPackage.Registry.class).toInstance(EPackage.Registry.INSTANCE);
 				bind(IGrammarAccess.class).toInstance(new IGrammarAccess() {
+					@Override
 					public List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw) {
 						return Collections.emptyList();
 					}
 
+					@Override
 					public List<Keyword> findKeywords(String... keywords) {
 						return Collections.emptyList();
 					}
 
+					@Override
 					public List<RuleCall> findRuleCalls(AbstractRule... rules) {
 						return Collections.emptyList();
 					}
 
+					@Override
 					public Grammar getGrammar() {
 						return XtextFactory.eINSTANCE.createGrammar();
 					}

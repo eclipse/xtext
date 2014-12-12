@@ -76,11 +76,13 @@ public abstract class AbstractConstructorScope extends AbstractScope {
 			return emptySet();
 		}
 		Iterable<JvmConstructor> constructors = new Iterable<JvmConstructor>() {
+			@Override
 			public Iterator<JvmConstructor> iterator() {
 				return castedType.getDeclaredConstructors().iterator();
 			}
 		};
 		return transform(constructors, new Function<JvmConstructor,IEObjectDescription>(){
+			@Override
 			public IEObjectDescription apply(JvmConstructor from) {
 				return EObjectDescription.create(name, from);
 			}

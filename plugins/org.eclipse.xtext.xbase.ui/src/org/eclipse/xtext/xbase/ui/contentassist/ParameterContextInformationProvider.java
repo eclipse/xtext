@@ -65,6 +65,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 	@Inject
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
+	@Override
 	public void getContextInformation(ContentAssistContext context, IContextInformationAcceptor acceptor) {
 		XExpression containerCall = getContainerCall(eObjectAtOffsetHelper.resolveContainedElementAt(context.getResource(), context.getOffset()));
 		LightweightTypeReferenceFactory factory = proposalProvider.getTypeConverter(context.getResource());

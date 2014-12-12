@@ -45,6 +45,7 @@ public class CompositeEValidatorTest {
 	@Test public void testNoShortCircuiting() {
 		CompositeEValidator compositeValidator = new CompositeEValidator();
 		compositeValidator.setEqualitySupportProvider(new Provider<CompositeEValidator.EValidatorEqualitySupport>() {
+			@Override
 			public EValidatorEqualitySupport get() {
 				return new CompositeEValidator.EValidatorEqualitySupport();
 			}

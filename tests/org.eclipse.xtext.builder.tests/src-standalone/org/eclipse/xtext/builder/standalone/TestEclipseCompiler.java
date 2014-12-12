@@ -25,6 +25,7 @@ import com.google.inject.Injector;
 
 public class TestEclipseCompiler {
 	private final class ClassFileFilter implements Predicate<URI> {
+		@Override
 		public boolean apply(URI input) {
 			return "class".equals(input.fileExtension());
 		}

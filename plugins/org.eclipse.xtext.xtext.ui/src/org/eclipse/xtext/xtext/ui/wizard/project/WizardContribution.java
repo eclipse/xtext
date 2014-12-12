@@ -67,6 +67,7 @@ public class WizardContribution implements Comparable<WizardContribution> {
 		return sortKey;
 	}
 
+	@Override
 	public int compareTo(WizardContribution o) {
 		if (this.getSortKey() == null)
 			return -1000;

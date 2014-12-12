@@ -72,7 +72,8 @@ public class ListExpressionImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<PostfixExpression> getExpressions()
+  @Override
+public EList<PostfixExpression> getExpressions()
   {
     if (expressions == null)
     {

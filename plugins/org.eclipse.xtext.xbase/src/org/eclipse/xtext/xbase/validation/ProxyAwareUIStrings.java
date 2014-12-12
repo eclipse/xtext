@@ -44,6 +44,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<StringBuilder, StringBuilder> {
 
+	@Override
 	public StringBuilder visit(JvmTypeReference reference, StringBuilder param) {
 		if (reference == null)
 			return null;
@@ -98,14 +99,17 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return result;
 	}
 	
+	@Override
 	public StringBuilder doVisitAnyTypeReference(JvmAnyTypeReference reference, StringBuilder param) {
 		return doVisitTypeReference(reference, param);
 	}
 	
+	@Override
 	public StringBuilder doVisitDelegateTypeReference(JvmDelegateTypeReference reference, StringBuilder param) {
 		return visit(reference.getDelegate(), param);
 	}
 	
+	@Override
 	public StringBuilder doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference, StringBuilder param) {
 		param = visit(reference.getComponentType(), param);
 		if (param != null) {
@@ -114,6 +118,7 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return param;
 	}
 	
+	@Override
 	public StringBuilder doVisitCompoundTypeReference(JvmCompoundTypeReference reference, StringBuilder param) {
 		throw new IllegalStateException("Should never be called");
 	}
@@ -131,10 +136,12 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return param;
 	}
 	
+	@Override
 	public StringBuilder doVisitMultiTypeReference(JvmMultiTypeReference reference, StringBuilder param) {
 		return doVisitCompoundTypeReference(reference, param, " & ");
 	}
 	
+	@Override
 	public StringBuilder doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference, StringBuilder param) {
 		JvmType type = reference.getType();
 		if (type == null || type.eIsProxy()) {
@@ -158,6 +165,7 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return param;
 	}
 	
+	@Override
 	public StringBuilder doVisitInnerTypeReference(JvmInnerTypeReference reference, StringBuilder param) {
 		JvmType type = reference.getType();
 		if (type == null || type.eIsProxy()) {
@@ -170,18 +178,22 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return doVisitParameterizedTypeReference(reference, param);
 	}
 	
+	@Override
 	public StringBuilder doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference, StringBuilder param) {
 		return visit(reference.getEquivalent(), param);
 	}
 	
+	@Override
 	public StringBuilder doVisitSynonymTypeReference(JvmSynonymTypeReference reference, StringBuilder param) {
 		return doVisitCompoundTypeReference(reference, param, " | ");
 	}
 	
+	@Override
 	public StringBuilder doVisitUnknownTypeReference(JvmUnknownTypeReference reference, StringBuilder param) {
 		return doVisitTypeReference(reference, param);
 	}
 	
+	@Override
 	public StringBuilder doVisitWildcardTypeReference(JvmWildcardTypeReference reference, StringBuilder param) {
 		param.append("? ");
 		List<JvmTypeConstraint> constraints = reference.getConstraints();
@@ -210,10 +222,12 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return param;
 	}
 	
+	@Override
 	public StringBuilder doVisitComputedTypeReference(XComputedTypeReference reference, StringBuilder param) {
 		return doVisitSpecializedTypeReference(reference, param);
 	}
 	
+	@Override
 	public StringBuilder doVisitFunctionTypeReference(XFunctionTypeRef reference, StringBuilder param) {
 		param.append("(");
 		List<JvmTypeReference> paramTypes = reference.getParamTypes();
@@ -229,6 +243,7 @@ public class ProxyAwareUIStrings implements XtypeReferenceVisitorWithParameter<S
 		return visit(reference.getReturnType(), param);
 	}
 	
+	@Override
 	public StringBuilder doVisitTypeReference(JvmTypeReference reference, StringBuilder param) {
 		param.append(reference.getSimpleName());
 		return param;

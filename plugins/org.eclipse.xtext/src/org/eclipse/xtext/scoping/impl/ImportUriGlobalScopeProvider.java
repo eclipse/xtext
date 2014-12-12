@@ -116,6 +116,7 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 			return uri;
 		}
 
+		@Override
 		public void accept(String uriAsString) {
 			if (uriAsString == null) {
 				return;
@@ -133,6 +134,7 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 
 	protected LinkedHashSet<URI> getImportedUris(final Resource resource) {
 		return cache.get(ImportUriGlobalScopeProvider.class.getName(), resource, new Provider<LinkedHashSet<URI>>(){
+			@Override
 			public LinkedHashSet<URI> get() {
 				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(5);
 				IAcceptor<String> collector = createURICollector(resource, uniqueImportURIs);

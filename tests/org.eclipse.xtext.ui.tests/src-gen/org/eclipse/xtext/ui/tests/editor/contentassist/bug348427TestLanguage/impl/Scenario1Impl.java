@@ -72,7 +72,8 @@ public class Scenario1Impl extends MinimalEObjectImpl.Container implements Scena
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Child1> getChild()
+  @Override
+public EList<Child1> getChild()
   {
     if (child == null)
     {

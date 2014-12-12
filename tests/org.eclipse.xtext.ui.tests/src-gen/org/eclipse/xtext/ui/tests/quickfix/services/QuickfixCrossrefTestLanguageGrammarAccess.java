@@ -25,6 +25,7 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Main:
 		//	elements+=Element*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
@@ -53,6 +54,7 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Element:
 		//	doc=STRING? name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//doc=STRING? name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}"
@@ -132,6 +134,7 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -46,6 +46,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 
 	protected ImmutableList<IEObjectDescription> copyExportedObjects(IResourceDescription original) {
 		return ImmutableList.copyOf(Iterables.filter(Iterables.transform(original.getExportedObjects(), new Function<IEObjectDescription, IEObjectDescription>() {
+			@Override
 			public IEObjectDescription apply(IEObjectDescription from) {
 				if (from == null)
 					return null;
@@ -73,6 +74,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 		return exported;
 	}
 	
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		IResourceDescription snapShot = snapShotProvider.get();
 		if (snapShot != null)
@@ -80,6 +82,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		// find references was triggered - use up-to-date reference descriptions
 		// the content of this copied description is updated as soon as the exported
@@ -91,6 +94,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}

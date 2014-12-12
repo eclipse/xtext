@@ -29,6 +29,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	@Inject
 	private IAllContainersState.Provider stateProvider;
 	
+	@Override
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
@@ -44,6 +45,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return result;
 	}
 
+	@Override
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {

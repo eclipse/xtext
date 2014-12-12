@@ -22,87 +22,109 @@ public class StringBufferSequenceAcceptor implements ISequenceAcceptor {
 
 	protected StringBuilder buf = new StringBuilder();
 
+	@Override
 	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index,
 			ICompositeNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
 			ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptUnassignedAction(Action action) {
 	}
 
+	@Override
 	public void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
 		buf.append(token);
 	}
 
+	@Override
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		return true;
 	}
 
+	@Override
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
 		return true;
 	}
 
+	@Override
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 	}
 
+	@Override
 	public void finish() {
 	}
 
+	@Override
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 	}
 
+	@Override
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 	}
 
+	@Override
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 	}
 

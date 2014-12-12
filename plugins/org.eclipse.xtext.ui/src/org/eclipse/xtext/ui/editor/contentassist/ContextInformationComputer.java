@@ -39,6 +39,7 @@ public final class ContextInformationComputer implements IUnitOfWork<IContextInf
 		this.viewer = viewer;
 	}
 
+	@Override
 	public IContextInformation[] exec(XtextResource resource) throws Exception {
 		IContextInformationAcceptor acceptor = state.decorateAcceptor(this);
 		ContentAssistContext[] contexts = state.getContextFactory().create(viewer, offset, resource);
@@ -51,10 +52,12 @@ public final class ContextInformationComputer implements IUnitOfWork<IContextInf
 		return information.toArray(new IContextInformation[information.size()]);
 	}
 
+	@Override
 	public void accept(IContextInformation information) {
 		this.information.add(information);
 	}
 
+	@Override
 	public boolean canAcceptMoreInformation() {
 		return true;
 	}

@@ -34,21 +34,27 @@ public interface IXtextEditorCallback {
 	
 	public static class NullImpl implements IXtextEditorCallback {
 
+		@Override
 		public void beforeSetInput(XtextEditor xtextEditor) {
 		}
 		
+		@Override
 		public void afterSetInput(XtextEditor xtextEditor) {
 		}
 		
+		@Override
 		public void afterCreatePartControl(XtextEditor editor) {
 		}
 
+		@Override
 		public void afterSave(XtextEditor editor) {
 		}
 
+		@Override
 		public void beforeDispose(XtextEditor editor) {
 		}
 
+		@Override
 		public boolean onValidateEditorInputState(XtextEditor editor) {
 			return true;
 		}

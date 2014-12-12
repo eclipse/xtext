@@ -28,14 +28,17 @@ public class TextSegment extends AbstractTextSegment {
 		this.length = length;
 	}
 
+	@Override
 	public int getLength() {
 		return length;
 	}
 
+	@Override
 	public int getOffset() {
 		return offset;
 	}
 
+	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return regionAccess;
 	}

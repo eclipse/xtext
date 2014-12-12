@@ -22,6 +22,7 @@ public interface ISimilarityMatcher {
 	
 	public static class Default implements ISimilarityMatcher {
 
+		@Override
 		public boolean isSimilar(String s0, String s1) {
 			if(Strings.isEmpty(s0) || Strings.isEmpty(s1)) {
 				return false;

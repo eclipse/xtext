@@ -94,9 +94,11 @@ public class EclipseLogAppender extends AppenderSkeleton {
 		return new Status(severity, LOG4J_BUNDLE_NAME, message, throwable);
 	}
 
+	@Override
 	public void close() {
 	}
 
+	@Override
 	public boolean requiresLayout() {
 		return true;
 	}

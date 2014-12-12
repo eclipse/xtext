@@ -90,7 +90,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -101,7 +102,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public Import createImport()
+  @Override
+public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -112,7 +114,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
+  @Override
+public Type createType()
   {
     TypeImpl type = new TypeImpl();
     return type;
@@ -123,7 +126,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public DataType createDataType()
+  @Override
+public DataType createDataType()
   {
     DataTypeImpl dataType = new DataTypeImpl();
     return dataType;
@@ -134,7 +138,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class createClass()
+  @Override
+public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class createClass()
   {
     ClassImpl class_ = new ClassImpl();
     return class_;
@@ -145,7 +150,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public Property createProperty()
+  @Override
+public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
     return property;
@@ -156,7 +162,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute createAttribute()
+  @Override
+public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -167,7 +174,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public Reference createReference()
+  @Override
+public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
@@ -178,7 +186,8 @@ public class DomainModelTestFactoryImpl extends EFactoryImpl implements DomainMo
    * <!-- end-user-doc -->
    * @generated
    */
-  public DomainModelTestPackage getDomainModelTestPackage()
+  @Override
+public DomainModelTestPackage getDomainModelTestPackage()
   {
     return (DomainModelTestPackage)getEPackage();
   }

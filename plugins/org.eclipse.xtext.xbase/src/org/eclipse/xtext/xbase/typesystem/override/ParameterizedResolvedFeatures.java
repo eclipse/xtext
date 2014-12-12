@@ -31,6 +31,7 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 		this.parent = parent;
 	}
 	
+	@Override
 	public List<JvmFeature> getAllFeatures(String simpleName) {
 		List<JvmFeature> result = parent.getAllFeatures(simpleName);
 		if (result.size() <= 1 || !type.hasTypeArguments()) {
@@ -39,6 +40,7 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 		return computeAllFeatures(result);
 	}
 	
+	@Override
 	public List<JvmFeature> getAllFeatures() {
 		List<JvmFeature> result = parent.getAllFeatures();
 		if (result.size() <= 1 || !type.hasTypeArguments()) {
@@ -47,6 +49,7 @@ public class ParameterizedResolvedFeatures implements IResolvedFeatures {
 		return computeAllFeatures(result);
 	}
 	
+	@Override
 	public IResolvedFeatures getParameterizedView(LightweightTypeReference concrete) {
 		return parent.getParameterizedView(concrete);
 	}

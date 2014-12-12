@@ -45,15 +45,18 @@ public class ValidationTestHelper {
 			return features.isEmpty();
 		}
 
+		@Override
 		public void add(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			Assert.assertTrue(diagnostic.getData().get(0) instanceof EObject);
 			features.add((EStructuralFeature) diagnostic.getData().get(1));
 		}
 
+		@Override
 		public void addAll(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void merge(org.eclipse.emf.common.util.Diagnostic diagnostic) {
 			throw new UnsupportedOperationException();
 		}

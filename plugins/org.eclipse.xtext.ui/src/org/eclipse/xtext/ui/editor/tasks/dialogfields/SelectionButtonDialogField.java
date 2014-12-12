@@ -124,10 +124,12 @@ public class SelectionButtonDialogField extends DialogField {
 			fButton.setEnabled(isEnabled());
 			fButton.setSelection(fIsSelected);
 			fButton.addSelectionListener(new SelectionListener() {
+				@Override
 				public void widgetDefaultSelected(SelectionEvent e) {
 					doWidgetSelected(e);
 				}
 
+				@Override
 				public void widgetSelected(SelectionEvent e) {
 					doWidgetSelected(e);
 				}

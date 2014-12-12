@@ -20,6 +20,7 @@ public class PartialXtextContentAssistParser extends XtextParser implements IPar
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

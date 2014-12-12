@@ -27,6 +27,7 @@ public class RefactoringTestLanguageFragmentProvider implements IFragmentProvide
 		this.useNames = useNames;
 	}
 
+	@Override
 	public String getFragment(EObject obj, Fallback fallback) {
 		if (useNames && obj instanceof Element)
 			return ((Element) obj).getName();
@@ -34,6 +35,7 @@ public class RefactoringTestLanguageFragmentProvider implements IFragmentProvide
 			return fallback.getFragment(obj);
 	}
 
+	@Override
 	public EObject getEObject(Resource resource, String fragment, Fallback fallback) {
 		if (useNames) {
 			for (TreeIterator<EObject> i = resource.getAllContents(); i.hasNext();) {

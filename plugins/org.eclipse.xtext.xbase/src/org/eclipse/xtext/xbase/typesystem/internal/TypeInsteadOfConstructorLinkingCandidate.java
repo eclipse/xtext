@@ -57,10 +57,12 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 	}
 
 	/* @Nullable */
+	@Override
 	public JvmConstructor getConstructor() {
 		return null;
 	}
 	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return false;
 	}
@@ -79,6 +81,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 		getState().acceptActualType(result);
 	}
 	
+	@Override
 	public XConstructorCall getConstructorCall() {
 		return (XConstructorCall) getExpression();
 	}
@@ -117,6 +120,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 		return false;
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		JvmType type = (JvmType) getFeature();
 		if (type == null || type.eIsProxy()) {
@@ -158,6 +162,7 @@ public class TypeInsteadOfConstructorLinkingCandidate extends AbstractUnresolvab
 		return result;
 	}
 	
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		Resource resource = getExpression().eResource();
 		if (resource instanceof LazyLinkingResource) {

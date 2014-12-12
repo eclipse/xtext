@@ -50,6 +50,7 @@ public class ExtractVariableHandler extends AbstractHandler {
 	
 	protected static final Logger LOG = Logger.getLogger(DefaultRenameElementHandler.class);
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			syncUtil.totalSync(false);
@@ -58,6 +59,7 @@ public class ExtractVariableHandler extends AbstractHandler {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				final IXtextDocument document = editor.getDocument();
 				XtextResource resource = document.priorityReadOnly(new IUnitOfWork<XtextResource, XtextResource>() {
+					@Override
 					public XtextResource exec(XtextResource state) throws Exception {
 						return resourceCopier.loadIntoNewResourceSet(state);
 					}

@@ -24,6 +24,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//DelegateModel returns Model:
 		//	Model;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Model
@@ -61,6 +62,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

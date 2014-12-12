@@ -40,6 +40,7 @@ public class Scopes {
 
 	public static Iterable<IEObjectDescription> selectCompatible(Iterable<IEObjectDescription> exportedObjects, final EClass clazz) {
 		return Iterables.filter(exportedObjects, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
 			}
@@ -87,6 +88,7 @@ public class Scopes {
 			final Function<T, QualifiedName> nameComputation) {
 		Iterable<IEObjectDescription> transformed = Iterables.transform(elements,
 				new Function<T, IEObjectDescription>() {
+					@Override
 					public IEObjectDescription apply(T from) {
 						final QualifiedName qualifiedName = nameComputation.apply(from);
 						if (qualifiedName != null)
@@ -114,6 +116,7 @@ public class Scopes {
 	 */
 	public static Multimap<QualifiedName,IEObjectDescription> index(Iterable<IEObjectDescription> descriptions) {
 		return index(descriptions, new Function<IEObjectDescription, QualifiedName>() {
+			@Override
 			public QualifiedName apply(IEObjectDescription from) {
 				return from.getName().toLowerCase();
 			}

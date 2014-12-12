@@ -28,53 +28,65 @@ public class AssignmentFeatureCallArguments implements IFeatureCallArguments, IF
 		this.type = type;
 	}
 	
+	@Override
 	public boolean hasUnprocessedArguments() {
 		return !processed;
 	}
 
+	@Override
 	public IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot() {
 		if (hasUnprocessedArguments())
 			return this;
 		throw new NoSuchElementException();
 	}
 
+	@Override
 	public XExpression getArgument(int idx) {
 		return expression;
 	}
 
+	@Override
 	public int getArgumentCount() {
 		return 1;
 	}
 
+	@Override
 	public boolean isProcessed(int argumentIndex) {
 		return processed;
 	}
 
+	@Override
 	public boolean isVarArg() {
 		return false;
 	}
 
+	@Override
 	public boolean isSuperfluous() {
 		return false;
 	}
 
+	@Override
 	public List<XExpression> getArgumentExpressions() {
 		return Collections.singletonList(expression);
 	}
 
+	@Override
 	public XExpression getArgumentExpression() {
 		return expression;
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getDeclaredType() {
 		return type;
 	}
 
+	@Override
 	public void markProcessed() {
 		this.processed = true;
 	}
 	
+	@Override
 	public boolean hasEmptyTrailingVarArg() {
 		return false;
 	}

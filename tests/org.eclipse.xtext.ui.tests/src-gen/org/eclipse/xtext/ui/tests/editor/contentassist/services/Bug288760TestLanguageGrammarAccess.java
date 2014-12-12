@@ -40,6 +40,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//WorkflowElement:
 		//	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
 		//	children+=WorkflowElement* end=END_TAG;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
@@ -106,6 +107,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Attribute:
 		//	name=ID EQ value=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID EQ value=STRING
@@ -183,6 +185,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

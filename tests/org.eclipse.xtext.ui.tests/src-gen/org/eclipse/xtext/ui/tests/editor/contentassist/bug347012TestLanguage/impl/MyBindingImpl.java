@@ -109,7 +109,8 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -119,7 +120,8 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -132,7 +134,8 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  @Override
+public String getType()
   {
     return type;
   }
@@ -142,7 +145,8 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  @Override
+public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -155,7 +159,8 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  public MyPrimary getExpression()
+  @Override
+public MyPrimary getExpression()
   {
     return expression;
   }
@@ -182,7 +187,8 @@ public class MyBindingImpl extends MinimalEObjectImpl.Container implements MyBin
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(MyPrimary newExpression)
+  @Override
+public void setExpression(MyPrimary newExpression)
   {
     if (newExpression != expression)
     {

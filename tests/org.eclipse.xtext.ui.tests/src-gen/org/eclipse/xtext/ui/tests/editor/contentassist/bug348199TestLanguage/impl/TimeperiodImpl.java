@@ -95,7 +95,8 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TimeDef> getTime()
+  @Override
+public EList<TimeDef> getTime()
   {
     if (time == null)
     {
@@ -109,7 +110,8 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getName()
+  @Override
+public EList<String> getName()
   {
     if (name == null)
     {
@@ -123,7 +125,8 @@ public class TimeperiodImpl extends MinimalEObjectImpl.Container implements Time
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getAlias()
+  @Override
+public EList<String> getAlias()
   {
     if (alias == null)
     {

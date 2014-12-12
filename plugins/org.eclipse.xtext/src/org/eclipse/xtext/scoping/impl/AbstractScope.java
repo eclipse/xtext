@@ -54,6 +54,7 @@ public abstract class AbstractScope implements IScope {
 			this.provider = provider;
 		}
 
+		@Override
 		public Iterator<IEObjectDescription> iterator() {
 			if (parentElements == null) {
 				parentElements = provider.get();
@@ -63,6 +64,7 @@ public abstract class AbstractScope implements IScope {
 			return filteredIterator;
 		}
 
+		@Override
 		public boolean apply(IEObjectDescription input) {
 			return !scope.isShadowed(input);
 		}
@@ -98,6 +100,7 @@ public abstract class AbstractScope implements IScope {
 		return ignoreCase;
 	}
 	
+	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		IEObjectDescription result = getSingleLocalElementByName(name);
 		if (result != null)
@@ -113,9 +116,11 @@ public abstract class AbstractScope implements IScope {
 		return null;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getAllElements() {
 		Iterable<IEObjectDescription> localElements = getAllLocalElements();
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> get() {
 				return getParent().getAllElements();
 			}
@@ -124,6 +129,7 @@ public abstract class AbstractScope implements IScope {
 		return result;
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
 		Iterable<IEObjectDescription> localElements = getLocalElementsByName(name);
 		if (localElements instanceof Collection) {
@@ -131,6 +137,7 @@ public abstract class AbstractScope implements IScope {
 				return getParent().getElements(name);
 		}
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> get() {
 				return getParent().getElements(name);
 			}
@@ -139,6 +146,7 @@ public abstract class AbstractScope implements IScope {
 		return result;
 	}
 	
+	@Override
 	public IEObjectDescription getSingleElement(EObject object) {
 		Iterable<IEObjectDescription> elements = getElements(object);
 		Iterator<IEObjectDescription> iterator = elements.iterator();
@@ -149,10 +157,12 @@ public abstract class AbstractScope implements IScope {
 		return null;
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getElements(final EObject object) {
 		final URI uri = EcoreUtil2.getPlatformResourceOrNormalizedURI(object);
 		Iterable<IEObjectDescription> localElements = getLocalElementsByEObject(object, uri);
 		Iterable<IEObjectDescription> parentElements = getParentElements(new Provider<Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> get() {
 				return getParent().getElements(object);
 			}
@@ -166,6 +176,7 @@ public abstract class AbstractScope implements IScope {
 	protected Iterable<IEObjectDescription> getLocalElementsByName(final QualifiedName name) {
 		Iterable<IEObjectDescription> localElements = getAllLocalElements();
 		Iterable<IEObjectDescription> result = Iterables.filter(localElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (isIgnoreCase()) {
 					QualifiedName lowerCase = name.toLowerCase();
@@ -182,6 +193,7 @@ public abstract class AbstractScope implements IScope {
 	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
 		Iterable<IEObjectDescription> localElements = getAllLocalElements();
 		Iterable<IEObjectDescription> result = Iterables.filter(localElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
 					return canBeFoundByName(input);

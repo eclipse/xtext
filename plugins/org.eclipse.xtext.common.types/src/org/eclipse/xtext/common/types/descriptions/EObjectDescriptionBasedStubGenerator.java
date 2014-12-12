@@ -72,6 +72,7 @@ public class EObjectDescriptionBasedStubGenerator implements IStubGenerator {
 				&& description.getUserData(IS_NESTED_TYPE) == null;
 	}
 
+	@Override
 	public void doGenerateStubs(IFileSystemAccess access, IResourceDescription description) {
 		for (IEObjectDescription objectDesc : description.getExportedObjects()) {
 			String javaFileName = getJavaFileName(objectDesc);

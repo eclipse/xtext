@@ -137,7 +137,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFinal()
+  @Override
+public boolean isFinal()
   {
     return final_;
   }
@@ -147,7 +148,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFinal(boolean newFinal)
+  @Override
+public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -160,7 +162,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isAbstract()
+  @Override
+public boolean isAbstract()
   {
     return abstract_;
   }
@@ -170,7 +173,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAbstract(boolean newAbstract)
+  @Override
+public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
     abstract_ = newAbstract;
@@ -183,7 +187,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isExtern()
+  @Override
+public boolean isExtern()
   {
     return extern;
   }
@@ -193,7 +198,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExtern(boolean newExtern)
+  @Override
+public void setExtern(boolean newExtern)
   {
     boolean oldExtern = extern;
     extern = newExtern;
@@ -206,7 +212,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public Visibility getVisibility()
+  @Override
+public Visibility getVisibility()
   {
     return visibility;
   }
@@ -216,7 +223,8 @@ public class ModifiersImpl extends UnorderedModifiersImpl implements Modifiers
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVisibility(Visibility newVisibility)
+  @Override
+public void setVisibility(Visibility newVisibility)
   {
     Visibility oldVisibility = visibility;
     visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;

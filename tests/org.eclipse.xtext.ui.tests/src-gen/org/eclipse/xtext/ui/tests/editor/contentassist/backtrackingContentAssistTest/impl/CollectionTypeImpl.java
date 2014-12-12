@@ -95,7 +95,8 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<CollectionLiteralPart> getCollectionLiteralParts()
+  @Override
+public EList<CollectionLiteralPart> getCollectionLiteralParts()
   {
     if (collectionLiteralParts == null)
     {
@@ -109,7 +110,8 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getTypeIdentifier()
+  @Override
+public String getTypeIdentifier()
   {
     return typeIdentifier;
   }
@@ -119,7 +121,8 @@ public class CollectionTypeImpl extends TypeExpImpl implements CollectionType
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTypeIdentifier(String newTypeIdentifier)
+  @Override
+public void setTypeIdentifier(String newTypeIdentifier)
   {
     String oldTypeIdentifier = typeIdentifier;
     typeIdentifier = newTypeIdentifier;

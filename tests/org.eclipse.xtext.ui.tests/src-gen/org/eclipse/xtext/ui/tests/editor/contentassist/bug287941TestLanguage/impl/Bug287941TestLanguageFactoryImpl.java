@@ -140,7 +140,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -151,7 +152,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Import createImport()
+  @Override
+public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -162,7 +164,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public MQLquery createMQLquery()
+  @Override
+public MQLquery createMQLquery()
   {
     MQLqueryImpl mqLquery = new MQLqueryImpl();
     return mqLquery;
@@ -173,7 +176,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public SelectEntry createSelectEntry()
+  @Override
+public SelectEntry createSelectEntry()
   {
     SelectEntryImpl selectEntry = new SelectEntryImpl();
     return selectEntry;
@@ -184,7 +188,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry createFromEntry()
+  @Override
+public FromEntry createFromEntry()
   {
     FromEntryImpl fromEntry = new FromEntryImpl();
     return fromEntry;
@@ -195,7 +200,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScopeClause createScopeClause()
+  @Override
+public ScopeClause createScopeClause()
   {
     ScopeClauseImpl scopeClause = new ScopeClauseImpl();
     return scopeClause;
@@ -206,7 +212,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Scope createScope()
+  @Override
+public Scope createScope()
   {
     ScopeImpl scope = new ScopeImpl();
     return scope;
@@ -217,7 +224,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ResourceScope createResourceScope()
+  @Override
+public ResourceScope createResourceScope()
   {
     ResourceScopeImpl resourceScope = new ResourceScopeImpl();
     return resourceScope;
@@ -228,7 +236,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ElementScope createElementScope()
+  @Override
+public ElementScope createElementScope()
   {
     ElementScopeImpl elementScope = new ElementScopeImpl();
     return elementScope;
@@ -239,7 +248,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public WhereEntry createWhereEntry()
+  @Override
+public WhereEntry createWhereEntry()
   {
     WhereEntryImpl whereEntry = new WhereEntryImpl();
     return whereEntry;
@@ -250,7 +260,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public AttributeWhereEntry createAttributeWhereEntry()
+  @Override
+public AttributeWhereEntry createAttributeWhereEntry()
   {
     AttributeWhereEntryImpl attributeWhereEntry = new AttributeWhereEntryImpl();
     return attributeWhereEntry;
@@ -261,7 +272,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumericAttributeWhereEntry createNumericAttributeWhereEntry()
+  @Override
+public NumericAttributeWhereEntry createNumericAttributeWhereEntry()
   {
     NumericAttributeWhereEntryImpl numericAttributeWhereEntry = new NumericAttributeWhereEntryImpl();
     return numericAttributeWhereEntry;
@@ -272,7 +284,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public DoubleWhereEntry createDoubleWhereEntry()
+  @Override
+public DoubleWhereEntry createDoubleWhereEntry()
   {
     DoubleWhereEntryImpl doubleWhereEntry = new DoubleWhereEntryImpl();
     return doubleWhereEntry;
@@ -283,7 +296,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public LongWhereEntry createLongWhereEntry()
+  @Override
+public LongWhereEntry createLongWhereEntry()
   {
     LongWhereEntryImpl longWhereEntry = new LongWhereEntryImpl();
     return longWhereEntry;
@@ -294,7 +308,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public VariableWhereEntry createVariableWhereEntry()
+  @Override
+public VariableWhereEntry createVariableWhereEntry()
   {
     VariableWhereEntryImpl variableWhereEntry = new VariableWhereEntryImpl();
     return variableWhereEntry;
@@ -305,7 +320,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringAttributeWhereEntry createStringAttributeWhereEntry()
+  @Override
+public StringAttributeWhereEntry createStringAttributeWhereEntry()
   {
     StringAttributeWhereEntryImpl stringAttributeWhereEntry = new StringAttributeWhereEntryImpl();
     return stringAttributeWhereEntry;
@@ -316,7 +332,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public BooleanAttributeWhereEntry createBooleanAttributeWhereEntry()
+  @Override
+public BooleanAttributeWhereEntry createBooleanAttributeWhereEntry()
   {
     BooleanAttributeWhereEntryImpl booleanAttributeWhereEntry = new BooleanAttributeWhereEntryImpl();
     return booleanAttributeWhereEntry;
@@ -327,7 +344,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public NullWhereEntry createNullWhereEntry()
+  @Override
+public NullWhereEntry createNullWhereEntry()
   {
     NullWhereEntryImpl nullWhereEntry = new NullWhereEntryImpl();
     return nullWhereEntry;
@@ -338,7 +356,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceAliasWhereEntry createReferenceAliasWhereEntry()
+  @Override
+public ReferenceAliasWhereEntry createReferenceAliasWhereEntry()
   {
     ReferenceAliasWhereEntryImpl referenceAliasWhereEntry = new ReferenceAliasWhereEntryImpl();
     return referenceAliasWhereEntry;
@@ -349,7 +368,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public SubselectWhereEntry createSubselectWhereEntry()
+  @Override
+public SubselectWhereEntry createSubselectWhereEntry()
   {
     SubselectWhereEntryImpl subselectWhereEntry = new SubselectWhereEntryImpl();
     return subselectWhereEntry;
@@ -360,7 +380,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public AliasWhereEntry createAliasWhereEntry()
+  @Override
+public AliasWhereEntry createAliasWhereEntry()
   {
     AliasWhereEntryImpl aliasWhereEntry = new AliasWhereEntryImpl();
     return aliasWhereEntry;
@@ -371,7 +392,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public OrWhereEntry createOrWhereEntry()
+  @Override
+public OrWhereEntry createOrWhereEntry()
   {
     OrWhereEntryImpl orWhereEntry = new OrWhereEntryImpl();
     return orWhereEntry;
@@ -382,7 +404,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public AndWhereEntry createAndWhereEntry()
+  @Override
+public AndWhereEntry createAndWhereEntry()
   {
     AndWhereEntryImpl andWhereEntry = new AndWhereEntryImpl();
     return andWhereEntry;
@@ -459,7 +482,8 @@ public class Bug287941TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug287941TestLanguagePackage getBug287941TestLanguagePackage()
+  @Override
+public Bug287941TestLanguagePackage getBug287941TestLanguagePackage()
   {
     return (Bug287941TestLanguagePackage)getEPackage();
   }

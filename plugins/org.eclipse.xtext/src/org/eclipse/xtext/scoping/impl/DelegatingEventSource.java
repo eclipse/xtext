@@ -29,10 +29,12 @@ public class DelegatingEventSource extends AbstractResourceDescriptionChangeEven
 		source.addListener(this);
 	}
 	
+	@Override
 	public void descriptionsChanged(Event event) {
 		notifyListeners(event);
 	}
 
+	@Override
 	public void onEvict(CacheAdapter cache) {
 		source.removeListener(this);
 	}

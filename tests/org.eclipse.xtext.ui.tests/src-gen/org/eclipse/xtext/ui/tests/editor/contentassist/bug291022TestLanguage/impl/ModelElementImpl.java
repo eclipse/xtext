@@ -116,7 +116,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ModelElement getFirstReference()
+  @Override
+public ModelElement getFirstReference()
   {
     if (firstReference != null && firstReference.eIsProxy())
     {
@@ -146,7 +147,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFirstReference(ModelElement newFirstReference)
+  @Override
+public void setFirstReference(ModelElement newFirstReference)
   {
     ModelElement oldFirstReference = firstReference;
     firstReference = newFirstReference;
@@ -159,7 +161,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -169,7 +172,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -182,7 +186,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ModelElement getSecondReference()
+  @Override
+public ModelElement getSecondReference()
   {
     if (secondReference != null && secondReference.eIsProxy())
     {
@@ -212,7 +217,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSecondReference(ModelElement newSecondReference)
+  @Override
+public void setSecondReference(ModelElement newSecondReference)
   {
     ModelElement oldSecondReference = secondReference;
     secondReference = newSecondReference;
@@ -225,7 +231,8 @@ public class ModelElementImpl extends ModelAttributeImpl implements ModelElement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ModelAttribute> getElements()
+  @Override
+public EList<ModelAttribute> getElements()
   {
     if (elements == null)
     {

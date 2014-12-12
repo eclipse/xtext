@@ -127,7 +127,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getSource()
+  @Override
+public Expression getSource()
   {
     return source;
   }
@@ -154,7 +155,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSource(Expression newSource)
+  @Override
+public void setSource(Expression newSource)
   {
     if (newSource != source)
     {
@@ -175,7 +177,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOp()
+  @Override
+public String getOp()
   {
     return op;
   }
@@ -185,7 +188,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOp(String newOp)
+  @Override
+public void setOp(String newOp)
   {
     String oldOp = op;
     op = newOp;
@@ -198,7 +202,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getMessageName()
+  @Override
+public String getMessageName()
   {
     return messageName;
   }
@@ -208,7 +213,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMessageName(String newMessageName)
+  @Override
+public void setMessageName(String newMessageName)
   {
     String oldMessageName = messageName;
     messageName = newMessageName;
@@ -221,7 +227,8 @@ public class OclMessageImpl extends ExpressionImpl implements OclMessage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<OclMessageArg> getArguments()
+  @Override
+public EList<OclMessageArg> getArguments()
   {
     if (arguments == null)
     {

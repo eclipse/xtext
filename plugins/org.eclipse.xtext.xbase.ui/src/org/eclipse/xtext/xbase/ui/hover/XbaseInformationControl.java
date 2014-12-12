@@ -123,6 +123,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 			}
 		});
 		fBrowser.addOpenWindowListener(new OpenWindowListener() {
+			@Override
 			public void open(WindowEvent event) {
 				event.required = true; // Cancel opening of new windows
 			}
@@ -142,6 +143,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		resourceProvider = new HoverEditedResourceProvider();
 		embeddedEditor = xbaseHoverConfiguration.getEditorFactory().newEditor(resourceProvider).readOnly()
 				.processIssuesBy(new IValidationIssueProcessor() {
+					@Override
 					public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
 					}
 				}).withParent(detailPaneComposite);
@@ -169,6 +171,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	public class HoverEditedResourceProvider implements IEditedResourceProvider {
 		private XtextResourceSet xtextResourceSet;
 
+		@Override
 		public XtextResource createResource() {
 			final String SYNTHETIC_SCHEME = "synthetic";
 			xtextResourceSet = new XtextResourceSet();
@@ -191,6 +194,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	/**
 	 * Xbase - modification added detailPane
 	 */
+	@Override
 	public void setInput(Object input) {
 		Assert.isLegal(input == null || input instanceof String || input instanceof XtextBrowserInformationControlInput, String.valueOf(input));
 
@@ -354,6 +358,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	/**
 	 * Xbase - modification
 	 */
+	@Override
 	public XtextBrowserInformationControlInput getInput() {
 		return fInput;
 	}
@@ -496,6 +501,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 
 		// Make sure the display wakes from sleep after timeout:
 		display.timerExec(100, new Runnable() {
+			@Override
 			public void run() {
 				fCompleted = true;
 			}
@@ -583,6 +589,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 *            the location listener
 	 * @since 3.4
 	 */
+	@Override
 	public void addLocationListener(LocationListener listener) {
 		fBrowser.addLocationListener(listener);
 	}
@@ -590,6 +597,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	/*
 	 * @see IInformationControlExtension#hasContents()
 	 */
+	@Override
 	public boolean hasContents() {
 		return fBrowserHasContent;
 	}
@@ -602,6 +610,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 *            the listener to add
 	 * @since 3.4
 	 */
+	@Override
 	public void addInputChangeListener(IInputChangedListener inputChangeListener) {
 		Assert.isNotNull(inputChangeListener);
 		fInputChangeListeners.add(inputChangeListener);
@@ -623,6 +632,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 * @see org.eclipse.jface.text.IDelayedInputChangeProvider#setDelayedInputChangeListener(org.eclipse.jface.text.IInputChangedListener)
 	 * @since 3.4
 	 */
+	@Override
 	public void setDelayedInputChangeListener(IInputChangedListener inputChangeListener) {
 		fDelayedInputChangeListener = inputChangeListener;
 	}
@@ -633,6 +643,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 * @return <code>true</code> if a delayed input change listener is currently registered
 	 * @since 3.4
 	 */
+	@Override
 	public boolean hasDelayedInputChangeListener() {
 		return fDelayedInputChangeListener != null;
 	}
@@ -644,6 +655,7 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 	 *            the new input, or <code>null</code> to request cancellation
 	 * @since 3.4
 	 */
+	@Override
 	public void notifyDelayedInputChange(Object newInput) {
 		if (fDelayedInputChangeListener != null)
 			fDelayedInputChangeListener.inputChanged(newInput);

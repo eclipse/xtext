@@ -76,7 +76,8 @@ public class ReferringFactoryImpl extends EFactoryImpl implements ReferringFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Main createMain()
+  @Override
+public Main createMain()
   {
     MainImpl main = new MainImpl();
     return main;
@@ -87,7 +88,8 @@ public class ReferringFactoryImpl extends EFactoryImpl implements ReferringFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Reference createReference()
+  @Override
+public Reference createReference()
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
@@ -98,7 +100,8 @@ public class ReferringFactoryImpl extends EFactoryImpl implements ReferringFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferringPackage getReferringPackage()
+  @Override
+public ReferringPackage getReferringPackage()
   {
     return (ReferringPackage)getEPackage();
   }

@@ -16,18 +16,22 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NullDiagnosticProducer implements IDiagnosticProducer {
 
+	@Override
 	public void addDiagnostic(DiagnosticMessage message) {
 		// nothing to do
 	}
 
+	@Override
 	public INode getNode() {
 		return null;
 	}
 
+	@Override
 	public void setNode(INode node) {
 		// nothing to do		
 	}
 
+	@Override
 	public void setTarget(EObject object, EStructuralFeature feature) {
 		// nothing to do		
 	}

@@ -375,6 +375,7 @@ public class StringConcatenation implements CharSequence {
 	 * Only the significant content of this sequence is considered.
 	 * </p>
 	 */
+	@Override
 	public int length() {
 		return toString().length();
 	}
@@ -386,6 +387,7 @@ public class StringConcatenation implements CharSequence {
 	 * Only the significant content of this sequence is considered.
 	 * </p>
 	 */
+	@Override
 	public char charAt(int index) {
 		return toString().charAt(index);
 	}
@@ -397,6 +399,7 @@ public class StringConcatenation implements CharSequence {
 	 * Only the significant content of this sequence is considered.
 	 * </p>
 	 */
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		return toString().subSequence(start, end);
 	}
@@ -472,30 +475,37 @@ public class StringConcatenation implements CharSequence {
 			this.offsetFixup = target.segments.size() - index;
 		}
 
+		@Override
 		public int length() {
 			return target.length();
 		}
 
+		@Override
 		public char charAt(int index) {
 			return target.charAt(index);
 		}
 
+		@Override
 		public CharSequence subSequence(int start, int end) {
 			return target.subSequence(start, end);
 		}
 
+		@Override
 		public void newLineIfNotEmpty() {
 			target.newLineIfNotEmpty();
 		}
 
+		@Override
 		public void newLine() {
 			target.newLine();
 		}
 
+		@Override
 		public void appendImmediate(Object object, String indentation) {
 			target.appendImmediate(object, indentation);
 		}
 
+		@Override
 		public void append(Object object, String indentation) {
 			if (offsetFixup == 0)
 				target.append(object, indentation);
@@ -503,6 +513,7 @@ public class StringConcatenation implements CharSequence {
 				target.append(object, indentation, target.segments.size() - offsetFixup);
 		}
 
+		@Override
 		public void append(Object object) {
 			target.append(object, target.segments.size() - offsetFixup);
 		}

@@ -24,6 +24,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSeriali
  */
 public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 
+	@Override
 	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node) {
 		Keyword nodeLit = getLiteral(node);
 		Keyword modelLit = getLiteral(context, ruleCall, value);
@@ -58,10 +59,12 @@ public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 		return null;
 	}
 
+	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
 		return getLiteral(context, ruleCall, value) != null;
 	}
 
+	@Override
 	public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, INode node) {
 		Keyword nodeLit = getLiteral(node);
 		Keyword modelLit = getLiteral(context, ruleCall, value);

@@ -15,10 +15,12 @@ public class DefaultProjectInfo implements IProjectInfo {
 
 	private String projectName;
 
+	@Override
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
 
+	@Override
 	public String getProjectName() {
 		return projectName;
 	}

@@ -65,7 +65,8 @@ public class NotExpressionImpl extends ExpressionImpl implements NotExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return expression;
   }
@@ -92,7 +93,8 @@ public class NotExpressionImpl extends ExpressionImpl implements NotExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  @Override
+public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

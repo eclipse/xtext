@@ -94,6 +94,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 		int idx;
 	}
 
+	@Override
 	public Map<Annotation, Position> createAnnotationMap(XtextEditor editor, final ITextSelection selection,
 			final SubMonitor monitor) {
 		final IXtextDocument document = editor.getDocument();
@@ -108,10 +109,12 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 						if (target != null && ! target.eIsProxy()) {
 							final List<EObjectReferenceAndIndex> references = newArrayList();
 							IReferenceFinder.Acceptor acceptor = new IReferenceFinder.Acceptor() {
+								@Override
 								public void accept(IReferenceDescription reference) {
 									throw new UnsupportedOperationException("Local references are announced per object");
 								}
 
+								@Override
 								public void accept(EObject source, URI sourceURI, EReference eReference, int index,
 										EObject targetOrProxy, URI targetURI) {
 									EObjectReferenceAndIndex acceptMe = new EObjectReferenceAndIndex();
@@ -182,6 +185,7 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 		return result;
 	}
 
+	@Override
 	public boolean hasAnnotationType(String annotationType) {
 		return DECLARATION_ANNOTATION_TYPE.equals(annotationType) || OCCURRENCE_ANNOTATION_TYPE.equals(annotationType);
 	}

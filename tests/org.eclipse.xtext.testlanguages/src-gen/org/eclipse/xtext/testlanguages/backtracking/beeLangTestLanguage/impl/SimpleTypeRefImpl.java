@@ -89,7 +89,8 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getRawType()
+  @Override
+public String getRawType()
   {
     return rawType;
   }
@@ -99,7 +100,8 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRawType(String newRawType)
+  @Override
+public void setRawType(String newRawType)
   {
     String oldRawType = rawType;
     rawType = newRawType;
@@ -112,7 +114,8 @@ public class SimpleTypeRefImpl extends TypeRefImpl implements SimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getActualArgumentsList()
+  @Override
+public EList<String> getActualArgumentsList()
   {
     if (actualArgumentsList == null)
     {

@@ -128,6 +128,7 @@ public class EPackageChooser {
 
 		private Iterable<Object> content;
 
+		@Override
 		public Object[] getElements(Object inputElement) {
 			if (content != null) {
 				return Iterables.toArray(content, Object.class);
@@ -136,10 +137,12 @@ public class EPackageChooser {
 			}
 		}
 
+		@Override
 		public void dispose() {
 			content = null;
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput instanceof Iterable<?>) {
@@ -172,6 +175,7 @@ public class EPackageChooser {
 		final List<IResource> filteredResources = Lists.newArrayList();
 		try {
 			ResourcesPlugin.getWorkspace().getRoot().accept(new IResourceVisitor() {
+				@Override
 				public boolean visit(IResource resource) throws CoreException {
 					if (resource instanceof IFile) {
 						String fileExtension = ((IFile) resource).getFileExtension();

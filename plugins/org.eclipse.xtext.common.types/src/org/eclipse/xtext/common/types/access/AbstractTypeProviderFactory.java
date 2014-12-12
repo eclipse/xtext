@@ -26,16 +26,19 @@ public abstract class AbstractTypeProviderFactory implements IJvmTypeProvider.Fa
 	@Inject
 	private TypeResourceServices services;
 	
+	@Override
 	public IJvmTypeProvider findTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
 		return (IJvmTypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL);
 	}
 
+	@Override
 	public IJvmTypeProvider createTypeProvider() {
 		return createTypeProvider(new ResourceSetImpl());
 	}
 	
+	@Override
 	public IJvmTypeProvider findOrCreateTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");

@@ -40,11 +40,13 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		managedResources = new MapMaker().makeMap();
 	}
 	
+	@Override
 	public void announceDirtyStateChanged(IDirtyResource dirtyResource) {
 		managedResources.put(dirtyResource.getURI(), dirtyResource);
 		notifyListeners(dirtyResource, true);
 	}
 
+	@Override
 	public void discardDirtyState(IDirtyResource dirtyResource) {
 		if (managedResources.remove(dirtyResource.getURI(), dirtyResource)) {
 			notifyListeners(dirtyResource, false);
@@ -54,18 +56,22 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	protected void notifyListeners(final IDirtyResource dirtyResource, boolean managed) {
 		if (managed) {
 			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
+				@Override
 				public boolean haveEObjectDescriptionsChanged() {
 					return true;
 				}
 				
+				@Override
 				public IResourceDescription getOld() {
 					return null;
 				}
 				
+				@Override
 				public IResourceDescription getNew() {
 					return dirtyResource.getDescription();
 				}
 
+				@Override
 				public URI getUri() {
 					return dirtyResource.getURI();
 				}
@@ -73,17 +79,21 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 			notifyListeners(new ResourceDescriptionChangeEvent(Collections.singletonList(delta)));
 		} else {
 			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
+				@Override
 				public boolean haveEObjectDescriptionsChanged() {
 					return true;
 				}
 				
+				@Override
 				public IResourceDescription getOld() {
 					return dirtyResource.getDescription();
 				}
 				
+				@Override
 				public IResourceDescription getNew() {
 					return null;
 				}
+				@Override
 				public URI getUri() {
 					return dirtyResource.getURI();
 				}
@@ -92,6 +102,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		}
 	}
 
+	@Override
 	public boolean manageDirtyState(IDirtyResource dirtyResource) {
 		IDirtyResource prevValue = managedResources.putIfAbsent(dirtyResource.getURI(), dirtyResource);
 		return prevValue == null || prevValue == dirtyResource;
@@ -101,6 +112,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		return managedResources.get(uri);
 	}
 	
+	@Override
 	public IResourceDescription getDirtyResourceDescription(URI uri) {
 		IDirtyResource dirtyResource = getDirtyResource(uri);
 		if (dirtyResource != null)
@@ -108,6 +120,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		return null;
 	}
 
+	@Override
 	public String getContent(URI uri) {
 		IDirtyResource dirtyResource = findDirtyResourcebyURIorNormalizedURI(uri);
 		if (dirtyResource != null)
@@ -135,13 +148,16 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		return dirtyResource;
 	}
 	
+	@Override
 	public IExternalContentProvider getActualContentProvider() {
 		return new IExternalContentProvider() {
 			
+			@Override
 			public boolean hasContent(URI uri) {
 				return DirtyStateManager.this.hasContent(uri);
 			}
 			
+			@Override
 			public String getContent(URI uri) {
 				IDirtyResource dirtyResource = DirtyStateManager.this.findDirtyResourcebyURIorNormalizedURI(uri);
 				if (dirtyResource != null)
@@ -149,22 +165,27 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 				return null;
 			}
 			
+			@Override
 			public IExternalContentProvider getActualContentProvider() {
 				return this;
 			}
 		};
 	}
 
+	@Override
 	public boolean hasContent(URI uri) {
 		return findDirtyResourcebyURIorNormalizedURI(uri) != null;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return managedResources.isEmpty();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Iterables.concat(Iterables.transform(managedResources.values(), new Function<IDirtyResource, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(IDirtyResource from) {
 				if (from != null)
 					return from.getDescription().getExportedObjects();
@@ -173,8 +194,10 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		}));
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
 		return Iterables.concat(Iterables.transform(managedResources.values(), new Function<IDirtyResource, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(IDirtyResource from) {
 				if (from != null)
 					return from.getDescription().getExportedObjects(type, name, ignoreCase);
@@ -183,6 +206,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		}));
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(object).trimFragment();
 		IDirtyResource dirtyResource = getDirtyResource(resourceURI);
@@ -192,8 +216,10 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 		return Collections.emptyList();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
 		return Iterables.concat(Iterables.transform(managedResources.values(), new Function<IDirtyResource, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(IDirtyResource from) {
 				if (from != null)
 					return from.getDescription().getExportedObjectsByType(type);
@@ -205,6 +231,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public List<URI> getDirtyResourceURIs() {
 		return ImmutableList.copyOf(managedResources.keySet());
 	}

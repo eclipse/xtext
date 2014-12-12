@@ -61,6 +61,7 @@ public class DefaultHighlightingConfiguration implements IHighlightingConfigurat
 	@Deprecated
 	public static final String TASK_ID = HighlightingStyles.TASK_ID;
 
+	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(KEYWORD_ID, "Keyword", keywordTextStyle());
 		acceptor.acceptDefaultHighlighting(PUNCTUATION_ID, "Punctuation character", punctuationTextStyle());

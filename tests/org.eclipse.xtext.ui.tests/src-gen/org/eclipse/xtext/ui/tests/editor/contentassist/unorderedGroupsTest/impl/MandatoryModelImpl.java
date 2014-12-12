@@ -179,7 +179,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVisibility()
+  @Override
+public String getVisibility()
   {
     return visibility;
   }
@@ -189,7 +190,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVisibility(String newVisibility)
+  @Override
+public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
     visibility = newVisibility;
@@ -202,7 +204,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isStatic()
+  @Override
+public boolean isStatic()
   {
     return static_;
   }
@@ -212,7 +215,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStatic(boolean newStatic)
+  @Override
+public void setStatic(boolean newStatic)
   {
     boolean oldStatic = static_;
     static_ = newStatic;
@@ -225,7 +229,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isSynchronized()
+  @Override
+public boolean isSynchronized()
   {
     return synchronized_;
   }
@@ -235,7 +240,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSynchronized(boolean newSynchronized)
+  @Override
+public void setSynchronized(boolean newSynchronized)
   {
     boolean oldSynchronized = synchronized_;
     synchronized_ = newSynchronized;
@@ -248,7 +254,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isAbstract()
+  @Override
+public boolean isAbstract()
   {
     return abstract_;
   }
@@ -258,7 +265,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAbstract(boolean newAbstract)
+  @Override
+public void setAbstract(boolean newAbstract)
   {
     boolean oldAbstract = abstract_;
     abstract_ = newAbstract;
@@ -271,7 +279,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFinal()
+  @Override
+public boolean isFinal()
   {
     return final_;
   }
@@ -281,7 +290,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFinal(boolean newFinal)
+  @Override
+public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -294,7 +304,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -304,7 +315,8 @@ public class MandatoryModelImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

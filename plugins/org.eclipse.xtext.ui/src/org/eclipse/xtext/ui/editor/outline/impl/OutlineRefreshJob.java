@@ -130,6 +130,7 @@ public class OutlineRefreshJob extends Job {
 	
 	protected boolean containsUsingComparer(Iterable<IOutlineNode> list, final IOutlineNode node) {
 		return Iterables.any(list, new Predicate<IOutlineNode>() {
+			@Override
 			public boolean apply(IOutlineNode nodeFromList) {
 				return nodeComparer.equals(node, nodeFromList);
 			}

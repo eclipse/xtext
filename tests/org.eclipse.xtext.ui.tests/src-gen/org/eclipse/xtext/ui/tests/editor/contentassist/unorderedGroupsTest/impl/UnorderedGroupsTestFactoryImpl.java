@@ -84,7 +84,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -95,7 +96,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleModel createSimpleModel()
+  @Override
+public SimpleModel createSimpleModel()
   {
     SimpleModelImpl simpleModel = new SimpleModelImpl();
     return simpleModel;
@@ -106,7 +108,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public MandatoryModel createMandatoryModel()
+  @Override
+public MandatoryModel createMandatoryModel()
   {
     MandatoryModelImpl mandatoryModel = new MandatoryModelImpl();
     return mandatoryModel;
@@ -117,7 +120,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public LoopedModel createLoopedModel()
+  @Override
+public LoopedModel createLoopedModel()
   {
     LoopedModelImpl loopedModel = new LoopedModelImpl();
     return loopedModel;
@@ -128,7 +132,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public GroupLoopedModel createGroupLoopedModel()
+  @Override
+public GroupLoopedModel createGroupLoopedModel()
   {
     GroupLoopedModelImpl groupLoopedModel = new GroupLoopedModelImpl();
     return groupLoopedModel;
@@ -139,7 +144,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public LoopedAlternativeModel createLoopedAlternativeModel()
+  @Override
+public LoopedAlternativeModel createLoopedAlternativeModel()
   {
     LoopedAlternativeModelImpl loopedAlternativeModel = new LoopedAlternativeModelImpl();
     return loopedAlternativeModel;
@@ -150,7 +156,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug304681Model createBug304681Model()
+  @Override
+public Bug304681Model createBug304681Model()
   {
     Bug304681ModelImpl bug304681Model = new Bug304681ModelImpl();
     return bug304681Model;
@@ -161,7 +168,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug304681Feature createBug304681Feature()
+  @Override
+public Bug304681Feature createBug304681Feature()
   {
     Bug304681FeatureImpl bug304681Feature = new Bug304681FeatureImpl();
     return bug304681Feature;
@@ -172,7 +180,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug304681Attribute createBug304681Attribute()
+  @Override
+public Bug304681Attribute createBug304681Attribute()
   {
     Bug304681AttributeImpl bug304681Attribute = new Bug304681AttributeImpl();
     return bug304681Attribute;
@@ -183,7 +192,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug304681Reference createBug304681Reference()
+  @Override
+public Bug304681Reference createBug304681Reference()
   {
     Bug304681ReferenceImpl bug304681Reference = new Bug304681ReferenceImpl();
     return bug304681Reference;
@@ -194,7 +204,8 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnorderedGroupsTestPackage getUnorderedGroupsTestPackage()
+  @Override
+public UnorderedGroupsTestPackage getUnorderedGroupsTestPackage()
   {
     return (UnorderedGroupsTestPackage)getEPackage();
   }

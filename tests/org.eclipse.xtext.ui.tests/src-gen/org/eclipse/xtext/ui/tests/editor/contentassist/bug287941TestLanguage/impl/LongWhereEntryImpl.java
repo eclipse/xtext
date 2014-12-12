@@ -73,7 +73,8 @@ public class LongWhereEntryImpl extends NumericAttributeWhereEntryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public long getValue()
+  @Override
+public long getValue()
   {
     return value;
   }
@@ -83,7 +84,8 @@ public class LongWhereEntryImpl extends NumericAttributeWhereEntryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(long newValue)
+  @Override
+public void setValue(long newValue)
   {
     long oldValue = value;
     value = newValue;

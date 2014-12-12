@@ -19,6 +19,7 @@ import org.eclipse.ui.IEditorPart;
  */
 public class GenerateArtifactsLaunchShortcut implements ILaunchShortcut {
 
+	@Override
 	public void launch(ISelection selection, String mode) {
 		IResource workflowFile = workflowFileFor(selection);
 		if (workflowFile != null) {
@@ -26,6 +27,7 @@ public class GenerateArtifactsLaunchShortcut implements ILaunchShortcut {
 		}
 	}
 
+	@Override
 	public void launch(IEditorPart editor, String mode) {
 		IResource workflowFile = workflowFileFor(editor);
 		if (workflowFile != null) {

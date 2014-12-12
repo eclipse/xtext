@@ -120,7 +120,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getType()
+  @Override
+public EClass getType()
   {
     if (type != null && type.eIsProxy())
     {
@@ -150,7 +151,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(EClass newType)
+  @Override
+public void setType(EClass newType)
   {
     EClass oldType = type;
     type = newType;
@@ -163,7 +165,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isWithoutsubtypes()
+  @Override
+public boolean isWithoutsubtypes()
   {
     return withoutsubtypes;
   }
@@ -173,7 +176,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setWithoutsubtypes(boolean newWithoutsubtypes)
+  @Override
+public void setWithoutsubtypes(boolean newWithoutsubtypes)
   {
     boolean oldWithoutsubtypes = withoutsubtypes;
     withoutsubtypes = newWithoutsubtypes;
@@ -186,7 +190,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getAlias()
+  @Override
+public String getAlias()
   {
     return alias;
   }
@@ -196,7 +201,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlias(String newAlias)
+  @Override
+public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;
@@ -209,7 +215,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScopeClause getScopeClause()
+  @Override
+public ScopeClause getScopeClause()
   {
     return scopeClause;
   }
@@ -236,7 +243,8 @@ public class FromEntryImpl extends MinimalEObjectImpl.Container implements FromE
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setScopeClause(ScopeClause newScopeClause)
+  @Override
+public void setScopeClause(ScopeClause newScopeClause)
   {
     if (newScopeClause != scopeClause)
     {

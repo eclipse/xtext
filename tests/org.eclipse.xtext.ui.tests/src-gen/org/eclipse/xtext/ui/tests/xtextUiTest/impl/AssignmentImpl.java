@@ -108,7 +108,8 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFeature()
+  @Override
+public String getFeature()
   {
     return feature;
   }
@@ -118,7 +119,8 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeature(String newFeature)
+  @Override
+public void setFeature(String newFeature)
   {
     String oldFeature = feature;
     feature = newFeature;
@@ -131,7 +133,8 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOperator()
+  @Override
+public String getOperator()
   {
     return operator;
   }
@@ -141,7 +144,8 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(String newOperator)
+  @Override
+public void setOperator(String newOperator)
   {
     String oldOperator = operator;
     operator = newOperator;
@@ -154,7 +158,8 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractElement getTerminal()
+  @Override
+public AbstractElement getTerminal()
   {
     return terminal;
   }
@@ -181,7 +186,8 @@ public class AssignmentImpl extends AbstractElementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTerminal(AbstractElement newTerminal)
+  @Override
+public void setTerminal(AbstractElement newTerminal)
   {
     if (newTerminal != terminal)
     {

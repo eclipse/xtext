@@ -67,6 +67,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 		return name;
 	}
 
+	@Override
 	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
 		if (smap == null)
 			return null;
@@ -74,6 +75,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 		return updatedByteCode;
 	}
 
+	@Override
 	public void setTrace(String javaFileName, AbstractTraceRegion trace) {
 		smap = generateSmap(trace, javaFileName);
 	}

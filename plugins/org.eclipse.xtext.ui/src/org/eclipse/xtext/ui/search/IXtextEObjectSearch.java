@@ -32,6 +32,7 @@ public interface IXtextEObjectSearch {
 		@Inject
 		private IResourceDescriptions resourceDescriptions;
 
+		@Override
 		public Iterable<IEObjectDescription> findMatches(final String searchPattern, final String typeSearchPattern) {
 			return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern, typeSearchPattern));
 		}
@@ -45,6 +46,7 @@ public interface IXtextEObjectSearch {
 			typeSearchPattern.setPattern(typeStringPattern);
 			final Collection<IXtextSearchFilter> registeredFilters = IXtextSearchFilter.Registry.allFilters();
 			return new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					if (isNameMatches(searchPattern, input, namespaceDelimiters)
 							&& typeSearchPattern.matches(input.getEClass().getName())) {
@@ -79,6 +81,7 @@ public interface IXtextEObjectSearch {
 		protected Iterable<IEObjectDescription> getSearchScope() {
 			return Iterables.concat(Iterables.transform(getResourceDescriptions().getAllResourceDescriptions(),
 					new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+						@Override
 						public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 							return from.getExportedObjects();
 						}

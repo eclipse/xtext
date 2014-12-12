@@ -53,6 +53,7 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 	@Inject
 	private DescriptionUtils descriptionUtils;
 	
+	@Override
 	public void scheduleInitialValidation(IXtextDocument document) {
 		if (!(document instanceof XtextDocument))
 			return;

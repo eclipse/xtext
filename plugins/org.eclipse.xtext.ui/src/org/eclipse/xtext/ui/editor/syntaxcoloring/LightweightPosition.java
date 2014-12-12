@@ -26,6 +26,7 @@ public class LightweightPosition implements Comparable<LightweightPosition>{
 			this.ids = ids;
 		}
 
+		@Override
 		public int compareTo(IntToStringArray o) {
 			if (timestamp < o.timestamp)
 				return -1;
@@ -79,6 +80,7 @@ public class LightweightPosition implements Comparable<LightweightPosition>{
 		this.ids = ids;
 	}
 	
+	@Override
 	public int compareTo(LightweightPosition pos) {
 		if (offset < pos.offset)
 			return -1;

@@ -23,6 +23,7 @@ public interface IWorkingCopyOwnerProvider {
 	public WorkingCopyOwner getWorkingCopyOwner(final IJavaProject javaProject, final ResourceSet resourceset);
 	
 	IWorkingCopyOwnerProvider DEFAULT = new IWorkingCopyOwnerProvider() {
+		@Override
 		public WorkingCopyOwner getWorkingCopyOwner(IJavaProject javaProject, ResourceSet resourceset) {
 			return DefaultWorkingCopyOwner.PRIMARY;
 		}

@@ -47,6 +47,7 @@ import com.google.inject.Provider;
  */
 public class Serializer implements ISerializer {
 
+	@Override
 	public String serialize(EObject obj) {
 		return serialize(obj, SaveOptions.defaultOptions());
 	}
@@ -116,6 +117,7 @@ public class Serializer implements ISerializer {
 		return contexts.next();
 	}
 
+	@Override
 	public String serialize(EObject obj, SaveOptions options) {
 		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {
@@ -126,10 +128,12 @@ public class Serializer implements ISerializer {
 		return tokenStringBuffer.toString();
 	}
 
+	@Override
 	public void serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
 		serialize(obj, new WriterTokenStream(writer), options);
 	}
 
+	@Override
 	public ReplaceRegion serializeReplacement(EObject obj, SaveOptions options) {
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
 		if (node == null) {

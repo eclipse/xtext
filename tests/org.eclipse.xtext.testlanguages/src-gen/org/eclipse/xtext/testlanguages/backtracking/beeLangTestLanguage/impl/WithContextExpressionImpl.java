@@ -97,7 +97,8 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpr()
+  @Override
+public Expression getExpr()
   {
     return expr;
   }
@@ -124,7 +125,8 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpr(Expression newExpr)
+  @Override
+public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
     {
@@ -145,7 +147,8 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getAlias()
+  @Override
+public String getAlias()
   {
     return alias;
   }
@@ -155,7 +158,8 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlias(String newAlias)
+  @Override
+public void setAlias(String newAlias)
   {
     String oldAlias = alias;
     alias = newAlias;
@@ -168,7 +172,8 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getContextBlock()
+  @Override
+public Expression getContextBlock()
   {
     return contextBlock;
   }
@@ -195,7 +200,8 @@ public class WithContextExpressionImpl extends ExpressionImpl implements WithCon
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setContextBlock(Expression newContextBlock)
+  @Override
+public void setContextBlock(Expression newContextBlock)
   {
     if (newContextBlock != contextBlock)
     {

@@ -25,6 +25,7 @@ public class ConfigurableIssueCodesPreferenceStoreInitializer implements IPrefer
 	
 	private @Inject ConfigurableIssueCodesProvider issueCodesProvider;
 	
+	@Override
 	public void initialize(IPreferenceStoreAccess preferenceStoreAccess) {
 		IPreferenceStore preferenceStore = preferenceStoreAccess.getWritablePreferenceStore();
 		for (PreferenceKey prefKey : issueCodesProvider.getConfigurableIssueCodes().values()) {

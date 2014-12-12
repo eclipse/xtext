@@ -41,6 +41,7 @@ public class EnumTemplateVariableResolver extends
 			return Collections.emptyList();
 		}
 		return Lists.transform(enumeration.getELiterals(), new Function<EEnumLiteral, String>() {
+			@Override
 			public String apply(EEnumLiteral enumLiteral) {
 				return enumLiteral.getLiteral();
 			}

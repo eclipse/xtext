@@ -53,10 +53,12 @@ public class EObjectDescription extends AbstractEObjectDescription {
 		return create(qualifiedName, element, Collections.<String,String>emptyMap());
 	}
 
+	@Override
 	public EObject getEObjectOrProxy() {
 		return element;
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		if (normalizedURI == null) {
 			normalizedURI = normalize(element, EcoreUtil.getURI(element));
@@ -73,10 +75,12 @@ public class EObjectDescription extends AbstractEObjectDescription {
 		return uri;
 	}
 
+	@Override
 	public QualifiedName getName() {
 		return qualifiedName;
 	}
 	
+	@Override
 	public QualifiedName getQualifiedName() {
 		return qualifiedName;
 	}
@@ -95,6 +99,7 @@ public class EObjectDescription extends AbstractEObjectDescription {
 		return userData.keySet().toArray(new String[userData.size()]);
 	}
 
+	@Override
 	public EClass getEClass() {
 		return element.eClass();
 	}

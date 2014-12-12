@@ -104,7 +104,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -114,7 +115,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Elements()
+  @Override
+public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElement()
+  @Override
+public EClass getElement()
   {
     return elementEClass;
   }
@@ -134,7 +137,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getElement_Name()
+  @Override
+public EAttribute getElement_Name()
   {
     return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Xrefs()
+  @Override
+public EReference getElement_Xrefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -154,7 +159,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_Children()
+  @Override
+public EReference getElement_Children()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(2);
   }
@@ -164,7 +170,8 @@ public class OutlineTestPackageImpl extends EPackageImpl implements OutlineTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public OutlineTestFactory getOutlineTestFactory()
+  @Override
+public OutlineTestFactory getOutlineTestFactory()
   {
     return (OutlineTestFactory)getEFactoryInstance();
   }

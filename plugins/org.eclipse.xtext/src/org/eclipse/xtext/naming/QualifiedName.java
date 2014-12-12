@@ -153,6 +153,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 	 */
 	public static <F> Function<F, QualifiedName> wrapper(final Function<F, String> nameFunction) {
 		return new Function<F, QualifiedName>() {
+			@Override
 			public QualifiedName apply(F from) {
 				String name = nameFunction.apply(from);
 				if (name == null)
@@ -289,6 +290,7 @@ public class QualifiedName implements Comparable<QualifiedName> {
 				&& startsWith((QualifiedName) obj, true);
 	}
 
+	@Override
 	public int compareTo(QualifiedName qualifiedName) {
 		return compareTo(qualifiedName, false);
 	}

@@ -292,11 +292,13 @@ public class RawTypeHelper implements IRawTypeHelper {
 		}
 	}
 	
+	@Override
 	public List<JvmType> getAllRawTypes(LightweightTypeReference reference, ResourceSet resourceSet) {
 		List<JvmType> result = new RawTypeImplementation(factory).getAllRawTypes(reference, resourceSet);
 		return result;
 	}
 
+	@Override
 	public LightweightTypeReference getRawTypeReference(LightweightTypeReference reference, ResourceSet resourceSet) {
 		LightweightTypeReference result = new RawTypeReferenceImplementation(factory).getRawTypeReference(reference, resourceSet);
 		return result;

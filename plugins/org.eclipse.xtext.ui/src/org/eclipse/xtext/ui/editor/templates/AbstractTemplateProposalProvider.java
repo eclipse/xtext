@@ -63,6 +63,7 @@ public abstract class AbstractTemplateProposalProvider implements ITemplatePropo
 		}
 	}
 	
+	@Override
 	public void createTemplates(ContentAssistContext context, ITemplateAcceptor acceptor) {
 		if (!acceptor.canAcceptMoreTemplates())
 			return;

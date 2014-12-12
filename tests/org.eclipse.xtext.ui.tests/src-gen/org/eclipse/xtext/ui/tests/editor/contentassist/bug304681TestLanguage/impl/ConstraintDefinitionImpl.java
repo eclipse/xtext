@@ -112,7 +112,8 @@ public class ConstraintDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  @Override
+public String getType()
   {
     return type;
   }
@@ -122,7 +123,8 @@ public class ConstraintDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  @Override
+public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -135,7 +137,8 @@ public class ConstraintDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getParameters()
+  @Override
+public EList<String> getParameters()
   {
     if (parameters == null)
     {
@@ -149,7 +152,8 @@ public class ConstraintDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getMessage()
+  @Override
+public String getMessage()
   {
     return message;
   }
@@ -159,7 +163,8 @@ public class ConstraintDefinitionImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMessage(String newMessage)
+  @Override
+public void setMessage(String newMessage)
   {
     String oldMessage = message;
     message = newMessage;

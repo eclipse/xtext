@@ -86,7 +86,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -96,7 +97,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -109,7 +111,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getExtends()
+  @Override
+public Type getExtends()
   {
     if (extends_ != null && extends_.eIsProxy())
     {
@@ -139,7 +142,8 @@ public class TypeImpl extends MinimalEObjectImpl.Container implements Type
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExtends(Type newExtends)
+  @Override
+public void setExtends(Type newExtends)
   {
     Type oldExtends = extends_;
     extends_ = newExtends;

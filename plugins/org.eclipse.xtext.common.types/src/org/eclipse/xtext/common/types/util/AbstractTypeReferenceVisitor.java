@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
  */
 public abstract class AbstractTypeReferenceVisitor<Result> implements ITypeReferenceVisitor<Result> {
 
+	@Override
 	public Result visit(JvmTypeReference reference) {
 		if (reference == null) {
 			Result result = handleNullReference();
@@ -38,11 +39,13 @@ public abstract class AbstractTypeReferenceVisitor<Result> implements ITypeRefer
 		throw new NullPointerException("Given type reference was null");
 	}
 	
+	@Override
 	public Result doVisitDelegateTypeReference(JvmDelegateTypeReference reference) {
 		Result result = visit(reference.getDelegate());
 		return result;
 	}
 	
+	@Override
 	public Result doVisitSpecializedTypeReference(JvmSpecializedTypeReference reference) {
 		Result result = visit(reference.getEquivalent());
 		return result;
@@ -50,42 +53,52 @@ public abstract class AbstractTypeReferenceVisitor<Result> implements ITypeRefer
 	
 	public static class InheritanceAware<Result> extends AbstractTypeReferenceVisitor<Result> {
 
+		@Override
 		public Result doVisitTypeReference(JvmTypeReference reference) {
 			throw new IllegalStateException("doVisitTypeReference was invoked but not implemented for: " + reference);
 		}
 
+		@Override
 		public Result doVisitAnyTypeReference(JvmAnyTypeReference reference) {
 			return doVisitTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitCompoundTypeReference(JvmCompoundTypeReference reference) {
 			return doVisitTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 			return doVisitTypeReference(reference);
 		}
 		
+		@Override
 		public Result doVisitInnerTypeReference(JvmInnerTypeReference reference) {
 			return doVisitParameterizedTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
 			return doVisitTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitWildcardTypeReference(JvmWildcardTypeReference reference) {
 			return doVisitTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitMultiTypeReference(JvmMultiTypeReference reference) {
 			return doVisitCompoundTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitSynonymTypeReference(JvmSynonymTypeReference reference) {
 			return doVisitCompoundTypeReference(reference);
 		}
 
+		@Override
 		public Result doVisitUnknownTypeReference(JvmUnknownTypeReference reference) {
 			return doVisitTypeReference(reference);
 		}

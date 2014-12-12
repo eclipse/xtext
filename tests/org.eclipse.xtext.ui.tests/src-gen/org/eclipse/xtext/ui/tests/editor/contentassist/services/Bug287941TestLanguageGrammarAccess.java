@@ -27,6 +27,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	imports+=Import* query=MQLquery;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* query=MQLquery
@@ -54,6 +55,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Import:
 		//	"import" importURI=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
@@ -94,6 +96,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//MQLquery:
 		//	"select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from" fromEntries+=FromEntry (","
 		//	fromEntries+=FromEntry)* ("where" whereEntries+=WhereEntry+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"select" selectEntries+=SelectEntry ("," selectEntries+=SelectEntry)* "from" fromEntries+=FromEntry (","
@@ -169,6 +172,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SelectEntry:
 		//	select=[FromEntry] ("." attribute=[ecore::EAttribute])?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//select=[FromEntry] ("." attribute=[ecore::EAttribute])?
@@ -215,6 +219,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FromEntry:
 		//	type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=ScopeClause?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//type=[ecore::EClass] withoutsubtypes?="withoutsubtypes"? "as" alias=ID scopeClause=ScopeClause?
@@ -262,6 +267,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ScopeClause:
 		//	notIn?="not"? "in" scope=Scope;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//notIn?="not"? "in" scope=Scope
@@ -291,6 +297,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Scope:
 		//	ResourceScope | ElementScope;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ResourceScope | ElementScope
@@ -318,6 +325,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ResourceScope:
 		//	"resources" "{" uris+=STRING ("," uris+=STRING)* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"resources" "{" uris+=STRING ("," uris+=STRING)* "}"
@@ -366,6 +374,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ElementScope:
 		//	"elements" "{" uris+=STRING ("," uris+=STRING)* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"elements" "{" uris+=STRING ("," uris+=STRING)* "}"
@@ -412,6 +421,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//WhereEntry:
 		//	AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//AndWhereEntry ({OrWhereEntry.entries+=current} ("or" entries+=AndWhereEntry)+)?
@@ -452,6 +462,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AndWhereEntry returns WhereEntry:
 		//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
@@ -492,6 +503,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ConcreteWhereEntry returns WhereEntry:
 		//	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
 		//	SubselectWhereEntry;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry | SubselectWhereEntry
@@ -525,6 +537,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ParWhereEntry returns WhereEntry:
 		//	"(" WhereEntry ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" WhereEntry ")"
@@ -550,6 +563,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AttributeWhereEntry:
 		//	NumericAttributeWhereEntry | StringAttributeWhereEntry | BooleanAttributeWhereEntry | VariableWhereEntry;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//NumericAttributeWhereEntry | StringAttributeWhereEntry | BooleanAttributeWhereEntry | VariableWhereEntry
@@ -576,6 +590,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NumericAttributeWhereEntry:
 		//	DoubleWhereEntry | LongWhereEntry;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//DoubleWhereEntry | LongWhereEntry
@@ -605,6 +620,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//DoubleWhereEntry:
 		//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SIGNED_DOUBLE;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SIGNED_DOUBLE
@@ -661,6 +677,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//LongWhereEntry:
 		//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SINGED_LONG;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator value=SINGED_LONG
@@ -723,6 +740,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//VariableWhereEntry:
 		//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator rightAlias=[FromEntry] "."
 		//	rightAttribute=[ecore::EAttribute];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=NumericOperator rightAlias=[FromEntry] "."
@@ -795,6 +813,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//StringAttributeWhereEntry:
 		//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=StringOperator pattern=STRING
@@ -853,6 +872,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//BooleanAttributeWhereEntry:
 		//	alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue?="true" | "false");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." attribute=[ecore::EAttribute] operator=BooleanOperator (isTrue?="true" | "false")
@@ -914,6 +934,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NullWhereEntry:
 		//	alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator "null";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." feature=[ecore::EStructuralFeature] operator=BooleanOperator "null"
@@ -967,6 +988,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ReferenceAliasWhereEntry:
 		//	alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." reference=[ecore::EReference] "=" rightAlias=[FromEntry]
@@ -1026,6 +1048,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SubselectWhereEntry:
 		//	alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=MQLquery ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "." reference=[ecore::EReference] notIn?="not"? "in" "(" subQuery=MQLquery ")"
@@ -1087,6 +1110,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AliasWhereEntry:
 		//	alias=[FromEntry] "=" rightAlias=[FromEntry];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//alias=[FromEntry] "=" rightAlias=[FromEntry]
@@ -1133,6 +1157,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum NumericOperator:
 		//	lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual="!=";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//lessThen="<" | greaterThen=">" | lessEqual="<=" | greaterEqual=">=" | equal="=" | notEqual="!="
@@ -1189,6 +1214,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum StringOperator:
 		//	equal="=" | notEqual="!=" | like | notLike="notlike";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//equal="=" | notEqual="!=" | like | notLike="notlike"
@@ -1229,6 +1255,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum BooleanOperator:
 		//	equal="=" | notEqual="!=";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//equal="=" | notEqual="!="
@@ -1340,6 +1367,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

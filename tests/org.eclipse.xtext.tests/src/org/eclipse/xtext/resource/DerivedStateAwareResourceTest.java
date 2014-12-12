@@ -31,10 +31,12 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 		TestedResource resource = new TestedResource();
 		assertTrue(resource.getContents().isEmpty());
 		resource.setDerivedStateComputer(new IDerivedStateComputer() {
+			@Override
 			public void installDerivedState(DerivedStateAwareResource resource, boolean resolve) {
 				fail("shouldn't be called after initialization");
 			}
 
+			@Override
 			public void discardDerivedState(DerivedStateAwareResource resource) {
 				fail("shouldn't be called after initialization");
 			}
@@ -50,10 +52,12 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 		});
 		resource.setDerivedStateComputer(new IDerivedStateComputer() {
 			
+			@Override
 			public void installDerivedState(DerivedStateAwareResource resource, boolean resolve) {
 				resource.getContents().add(EcoreFactory.eINSTANCE.createEObject());
 			}
 
+			@Override
 			public void discardDerivedState(DerivedStateAwareResource resource) {
 				resource.getContents().clear();
 			}

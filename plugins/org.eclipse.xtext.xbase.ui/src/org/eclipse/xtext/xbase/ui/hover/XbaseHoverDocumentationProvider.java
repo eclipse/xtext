@@ -114,6 +114,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
 
+	@Override
 	public String getDocumentation(EObject object) {
 		return computeDocumentation(object) + getDerivedOrOriginalDeclarationInformation(object);
 	}
@@ -835,6 +836,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	protected List<EObject> getFilteredDerivedElements(EObject o, final EClass type) {
 		List<EObject> jvmElements = Lists.newArrayList(Iterables.filter(associations.getJvmElements(o),
 				new Predicate<EObject>() {
+					@Override
 					public boolean apply(EObject input) {
 						if (input instanceof JvmConstructor && ((JvmConstructor) input).getParameters().size() == 0)
 							return false;
@@ -849,6 +851,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	protected List<EObject> getFilteredSourceElements(EObject o, final EClass type) {
 		List<EObject> sourceElements = Lists.newArrayList(Iterables.filter(associations.getSourceElements(o),
 				new Predicate<EObject>() {
+					@Override
 					public boolean apply(EObject input) {
 						if (type == null)
 							return true;

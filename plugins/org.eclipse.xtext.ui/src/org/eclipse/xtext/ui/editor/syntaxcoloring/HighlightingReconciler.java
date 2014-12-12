@@ -157,6 +157,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 * @param length The range length
 	 * @param ids The highlighting attribute ids
 	 */
+	@Override
 	public void addPosition(int offset, int length, String... ids) {
 		TextAttribute highlighting = ids.length == 1 ? 
 				attributeProvider.getAttribute(ids[0])
@@ -203,6 +204,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 		
 		Display display = getDisplay();
 		display.asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				// never apply outdated highlighting
 				if(sourceViewer != null 
@@ -291,6 +293,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	/*
 	 * @see org.eclipse.jface.text.ITextInputListener#inputDocumentAboutToBeChanged(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
 	 */
+	@Override
 	public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
 		if (oldInput != null)
 			((IXtextDocument) oldInput).removeModelListener(this);
@@ -299,6 +302,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	/*
 	 * @see org.eclipse.jface.text.ITextInputListener#inputDocumentChanged(org.eclipse.jface.text.IDocument, org.eclipse.jface.text.IDocument)
 	 */
+	@Override
 	public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 		if (newInput != null) {
 			refresh();
@@ -343,6 +347,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			((IBatchLinkableResource) resource).linkBatched(cancelIndicator);
 	}
 
+	@Override
 	public void modelChanged(XtextResource resource) {
 		modelChanged(resource, CancelIndicator.NullImpl);
 	}
@@ -350,6 +355,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public void modelChanged(XtextResource resource, CancelIndicator cancelIndicator) {
 		if (resource == null) {
 			return;

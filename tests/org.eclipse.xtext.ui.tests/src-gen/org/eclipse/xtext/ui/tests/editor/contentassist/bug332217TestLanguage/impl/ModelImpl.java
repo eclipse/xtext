@@ -72,7 +72,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TableView> getElements()
+  @Override
+public EList<TableView> getElements()
   {
     if (elements == null)
     {

@@ -110,6 +110,7 @@ public class XtextResourceTest extends AbstractXtextTests {
 		resource.reparse(simpleModel);
 		final Wrapper<Boolean> unloaded = Wrapper.wrap(Boolean.FALSE);
 		resource.setUnloader(new IReferableElementsUnloader() {
+			@Override
 			public void unloadRoot(EObject root) {
 				unloaded.set(Boolean.TRUE);
 			}

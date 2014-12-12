@@ -63,6 +63,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	private Link link;
 
+	@Override
 	public void init(IWorkbench workbench) {
 		this.workbench = workbench;
 	}
@@ -71,10 +72,12 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		return workbench;
 	}
 
+	@Override
 	public void setElement(IAdaptable element) {
 		this.project = (IProject) element.getAdapter(IProject.class);
 	}
 
+	@Override
 	public IAdaptable getElement() {
 		return project;
 	}

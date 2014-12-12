@@ -116,7 +116,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -126,7 +127,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -139,7 +141,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public Erwachsener getMutter()
+  @Override
+public Erwachsener getMutter()
   {
     if (mutter != null && mutter.eIsProxy())
     {
@@ -169,7 +172,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMutter(Erwachsener newMutter)
+  @Override
+public void setMutter(Erwachsener newMutter)
   {
     Erwachsener oldMutter = mutter;
     mutter = newMutter;
@@ -182,7 +186,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public Erwachsener getVater()
+  @Override
+public Erwachsener getVater()
   {
     if (vater != null && vater.eIsProxy())
     {
@@ -212,7 +217,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVater(Erwachsener newVater)
+  @Override
+public void setVater(Erwachsener newVater)
   {
     Erwachsener oldVater = vater;
     vater = newVater;
@@ -225,7 +231,8 @@ public class FamilieImpl extends MinimalEObjectImpl.Container implements Familie
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Kind> getKinder()
+  @Override
+public EList<Kind> getKinder()
   {
     if (kinder == null)
     {

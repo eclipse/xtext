@@ -82,30 +82,37 @@ public abstract class AbstractContainerRelatedTests extends Assert implements IR
 		return result;
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return uriToResourceDescription.isEmpty();
 	}
 	
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return uriToResourceDescription.values();
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		return uriToResourceDescription.get(uri);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return selectableDelegate.getExportedObjects();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return selectableDelegate.getExportedObjects(type, name, ignoreCase);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return selectableDelegate.getExportedObjectsByObject(object);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return selectableDelegate.getExportedObjectsByType(type);
 	}

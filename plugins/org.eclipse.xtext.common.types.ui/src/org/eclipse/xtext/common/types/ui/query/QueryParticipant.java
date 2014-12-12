@@ -49,6 +49,7 @@ public class QueryParticipant implements IQueryParticipant {
 		typeURIHelper = new TypeURIHelper();
 	}
 
+	@Override
 	public void search(ISearchRequestor requestor, QuerySpecification query, IProgressMonitor monitor)
 			throws CoreException {
 		if (!isHandled(query)) {
@@ -96,6 +97,7 @@ public class QueryParticipant implements IQueryParticipant {
 		} while (wasInterrupted);
 	}
 
+	@Override
 	public int estimateTicks(QuerySpecification query) {
 		if (isHandled(query)) {
 			return 250;
@@ -103,6 +105,7 @@ public class QueryParticipant implements IQueryParticipant {
 		return 0;
 	}
 
+	@Override
 	public IMatchPresentation getUIParticipant() {
 		return uiParticipant;
 	}

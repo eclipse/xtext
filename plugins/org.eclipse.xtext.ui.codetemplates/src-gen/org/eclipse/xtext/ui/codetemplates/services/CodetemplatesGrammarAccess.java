@@ -31,6 +31,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Codetemplates:
 		//	"templates" "for" language=[xtext::Grammar|FQN] ":" templates+=Codetemplate*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"templates" "for" language=[xtext::Grammar|FQN] ":" templates+=Codetemplate*
@@ -86,6 +87,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//Codetemplate:
 		//	name=ValidID "(" id=ID "," description=STRING ")" "for" (context=[xtext::AbstractRule|ValidID] |
 		//	keywordContext=STRING) body=TemplateBodyWithQuotes;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ValidID "(" id=ID "," description=STRING ")" "for" (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
@@ -159,6 +161,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//	WS? // EOL
 		//	">>" TemplateBody // BOL
 		//	"<<";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//WS? // EOL
@@ -195,6 +198,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TemplateBody hidden():
 		//	{TemplateBody} parts+=Literal? (parts+=VariableOrDollar parts+=Literal?)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{TemplateBody} parts+=Literal? (parts+=VariableOrDollar parts+=Literal?)*
@@ -233,6 +237,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TemplatePart:
 		//	Literal | VariableOrDollar;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Literal | VariableOrDollar
@@ -253,6 +258,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//VariableOrDollar returns TemplatePart hidden():
 		//	Variable | Dollar;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Variable | Dollar
@@ -308,6 +314,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//Variable hidden():
 		//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS*
 		//	(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING
@@ -434,6 +441,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ValidID hidden():
 		//	ID | "for" | "templates";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID | "for" | "templates"
@@ -459,6 +467,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//FQN hidden():
 		//	ValidID ("." ValidID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ValidID ("." ValidID)*
@@ -484,6 +493,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Literal hidden():
 		//	value=LiteralValue;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=LiteralValue
@@ -504,6 +514,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//// needs to be escaped at BOL
 		//LiteralValue hidden():
 		//	(WS | ANY_OTHER | ID | "\\<<")+;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(WS | ANY_OTHER | ID | "\\<<")+
@@ -533,6 +544,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Dollar hidden():
 		//	{Dollar} (escaped?="$$" | "$");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Dollar} (escaped?="$$" | "$")
@@ -596,6 +608,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

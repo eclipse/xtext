@@ -40,6 +40,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 
 		// listen to CoreLog use RuntimeLog to hear more
 		Activator.getInstance().getLog().addLogListener(new ILogListener() {
+			@Override
 			public void logging(IStatus status, String plugin) {
 				if (IStatus.ERROR == status.getSeverity()) {
 					fail(status.getMessage());

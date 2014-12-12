@@ -84,6 +84,7 @@ import com.google.common.collect.Maps;
 		if (predicate == null)
 			throw new NullPointerException("predicate");
 		return Maps.filterEntries(original, new Predicate<Map.Entry<K, V>>() {
+			@Override
 			public boolean apply(Map.Entry<K, V> input) {
 				Boolean result = predicate.apply(input.getKey(), input.getValue());
 				return result.booleanValue();

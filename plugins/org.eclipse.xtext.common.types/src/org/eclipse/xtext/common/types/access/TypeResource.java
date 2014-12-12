@@ -48,10 +48,12 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
+		@Override
 		public String getFragment(EObject obj) {
 			return TypeResource.super.getURIFragment(obj);
 		}
 		
+		@Override
 		public EObject getEObject(String fragment) {
 			return TypeResource.super.getEObject(fragment);
 		}
@@ -174,6 +176,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	 * Otherwise this resource itself is used as the lock context.
 	 */
 	/* @NonNull */
+	@Override
 	public Object getLock() {
 		ResourceSet resourceSet = getResourceSet();
 		if (resourceSet instanceof ISynchronizable<?>) {
@@ -188,6 +191,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	 * @since 2.4
 	 */
 	/* @Nullable */
+	@Override
 	public <Result> Result execute(/* @NonNull */ IUnitOfWork<Result, ? super TypeResource> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);

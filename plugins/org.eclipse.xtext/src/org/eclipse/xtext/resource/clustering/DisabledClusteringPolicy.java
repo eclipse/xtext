@@ -22,6 +22,7 @@ public class DisabledClusteringPolicy implements IResourceClusteringPolicy  {
 	 * Returns always {@code true} to continue the processing in the very same resource set.
 	 * @return {@code true}.
 	 */
+	@Override
 	public boolean continueProcessing(ResourceSet resourceSet, URI next, int alreadyProcessed) {
 		return true;
 	}

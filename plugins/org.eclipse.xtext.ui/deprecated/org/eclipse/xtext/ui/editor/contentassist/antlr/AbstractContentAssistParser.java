@@ -66,6 +66,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		return lexer;
 	}
 	
+	@Override
 	public Collection<FollowElement> getFollowElements(FollowElement element) {
 		if (element.getLookAhead() <= 1)
 			throw new IllegalArgumentException("lookahead may not be less than or equal to 1");
@@ -80,6 +81,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					parser.getUnorderedGroupHelper().initializeWith(parser);
 					final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
 					ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
+						@Override
 						public Token nextToken() {
 							if (iter.hasNext()) {
 								LookAheadTerminal lookAhead = iter.next();
@@ -87,6 +89,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 							}
 							return Token.EOF_TOKEN;
 						}
+						@Override
 						public String getSourceName() {
 							return "LookAheadTerminalTokenSource";
 						}
@@ -110,36 +113,44 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 						parser.setUnorderedGroupHelper(new IUnorderedGroupHelper() {
 
 							boolean first = true;
+							@Override
 							public void initializeWith(BaseRecognizer recognizer) {
 								helper.initializeWith(recognizer);
 							}
 
+							@Override
 							public void enter(UnorderedGroup group) {
 								if (!first)
 									helper.enter(group);
 								first = false;
 							}
 
+							@Override
 							public void leave(UnorderedGroup group) {
 								helper.leave(group);
 							}
 
+							@Override
 							public boolean canSelect(UnorderedGroup group, int index) {
 								return helper.canSelect(group, index);
 							}
 
+							@Override
 							public void select(UnorderedGroup group, int index) {
 								helper.select(group, index);
 							}
 
+							@Override
 							public void returnFromSelection(UnorderedGroup group) {
 								helper.returnFromSelection(group);
 							}
 
+							@Override
 							public boolean canLeave(UnorderedGroup group) {
 								return helper.canLeave(group);
 							}
 
+							@Override
 							public UnorderedGroupState snapShot(UnorderedGroup... groups) {
 								return helper.snapShot(groups);
 							}
@@ -171,6 +182,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			ObservableXtextTokenStream stream = (ObservableXtextTokenStream) parser.getTokenStream();
 			stream.setListener(new StreamListener() {
 				
+				@Override
 				public void announceEof(int lookAhead) {
 					if (!wasRecovering[0]) {
 						parser.announceEof(lookAhead);
@@ -190,16 +202,19 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 					}
 				}
 				
+				@Override
 				public void announceConsume() {
 					parser.announceConsume();
 					if (!wasRecovering[0])
 						consumedSomething[0] = true;
 				}
 
+				@Override
 				public void announceMark(int marker) {
 					parser.announceMark(marker);
 				}
 
+				@Override
 				public void announceRewind(int marker) {
 					parser.announceRewind(marker);
 				}
@@ -208,12 +223,14 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 				
 				private int startedErrorRecoveryAt;
 
+				@Override
 				public void endErrorRecovery() {
 					if (!wasEof[0] && !parserState.failed && startedErrorRecoveryAt == parser.input.index()) {
 						wasRecovering[0] = false;
 					}
 				}
 				
+				@Override
 				public void beginErrorRecovery() {
 					startedErrorRecoveryAt = parser.input.index();
 					wasRecovering[0] = true;
@@ -307,6 +324,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	
 	protected abstract String[] getInitialHiddenTokens();
 	
+	@Override
 	public Collection<FollowElement> getFollowElements(String input, boolean strict) {
 		TokenSource tokenSource = createTokenSource(input);
 		AbstractInternalContentAssistParser parser = createParser();

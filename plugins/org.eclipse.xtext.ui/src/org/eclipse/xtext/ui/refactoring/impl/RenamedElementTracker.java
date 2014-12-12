@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
  */
 public class RenamedElementTracker implements IRenamedElementTracker {
 
+	@Override
 	public Map<URI, URI> renameAndTrack(Iterable<URI> renamedElementURIs, String newName, ResourceSet resourceSet, IRenameStrategy renameStrategy, IProgressMonitor monitor) {
 		Map<EObject, URI> renamedElement2oldURI = resolveRenamedElements(renamedElementURIs, resourceSet);
 		if (monitor.isCanceled()) {

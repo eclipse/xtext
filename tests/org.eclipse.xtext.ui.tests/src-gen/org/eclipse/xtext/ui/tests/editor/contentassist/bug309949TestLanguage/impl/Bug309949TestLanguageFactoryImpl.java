@@ -82,7 +82,8 @@ public class Bug309949TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -93,7 +94,8 @@ public class Bug309949TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error createError()
+  @Override
+public org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error createError()
   {
     ErrorImpl error = new ErrorImpl();
     return error;
@@ -104,7 +106,8 @@ public class Bug309949TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Operation createOperation()
+  @Override
+public Operation createOperation()
   {
     OperationImpl operation = new OperationImpl();
     return operation;
@@ -115,7 +118,8 @@ public class Bug309949TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Annotation createAnnotation()
+  @Override
+public Annotation createAnnotation()
   {
     AnnotationImpl annotation = new AnnotationImpl();
     return annotation;
@@ -126,7 +130,8 @@ public class Bug309949TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug309949TestLanguagePackage getBug309949TestLanguagePackage()
+  @Override
+public Bug309949TestLanguagePackage getBug309949TestLanguagePackage()
   {
     return (Bug309949TestLanguagePackage)getEPackage();
   }

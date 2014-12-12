@@ -141,7 +141,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -152,7 +153,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public PropertyPathPart createPropertyPathPart()
+  @Override
+public PropertyPathPart createPropertyPathPart()
   {
     PropertyPathPartImpl propertyPathPart = new PropertyPathPartImpl();
     return propertyPathPart;
@@ -163,7 +165,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeDescription createTypeDescription()
+  @Override
+public TypeDescription createTypeDescription()
   {
     TypeDescriptionImpl typeDescription = new TypeDescriptionImpl();
     return typeDescription;
@@ -174,7 +177,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter createParameter()
+  @Override
+public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
     return parameter;
@@ -185,7 +189,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ObjectReference createObjectReference()
+  @Override
+public ObjectReference createObjectReference()
   {
     ObjectReferenceImpl objectReference = new ObjectReferenceImpl();
     return objectReference;
@@ -196,7 +201,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression createExpression()
+  @Override
+public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -207,7 +213,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression createScalarExpression()
+  @Override
+public ScalarExpression createScalarExpression()
   {
     ScalarExpressionImpl scalarExpression = new ScalarExpressionImpl();
     return scalarExpression;
@@ -218,7 +225,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionExpression createCollectionExpression()
+  @Override
+public CollectionExpression createCollectionExpression()
   {
     CollectionExpressionImpl collectionExpression = new CollectionExpressionImpl();
     return collectionExpression;
@@ -229,7 +237,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringLiteral createStringLiteral()
+  @Override
+public StringLiteral createStringLiteral()
   {
     StringLiteralImpl stringLiteral = new StringLiteralImpl();
     return stringLiteral;
@@ -240,7 +249,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringFunction createStringFunction()
+  @Override
+public StringFunction createStringFunction()
   {
     StringFunctionImpl stringFunction = new StringFunctionImpl();
     return stringFunction;
@@ -251,7 +261,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionLiteral createCollectionLiteral()
+  @Override
+public CollectionLiteral createCollectionLiteral()
   {
     CollectionLiteralImpl collectionLiteral = new CollectionLiteralImpl();
     return collectionLiteral;
@@ -262,7 +273,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionFunction createCollectionFunction()
+  @Override
+public CollectionFunction createCollectionFunction()
   {
     CollectionFunctionImpl collectionFunction = new CollectionFunctionImpl();
     return collectionFunction;
@@ -273,7 +285,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TableView createTableView()
+  @Override
+public TableView createTableView()
   {
     TableViewImpl tableView = new TableViewImpl();
     return tableView;
@@ -284,7 +297,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ViewContentElement createViewContentElement()
+  @Override
+public ViewContentElement createViewContentElement()
   {
     ViewContentElementImpl viewContentElement = new ViewContentElementImpl();
     return viewContentElement;
@@ -295,7 +309,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Section createSection()
+  @Override
+public Section createSection()
   {
     SectionImpl section = new SectionImpl();
     return section;
@@ -306,7 +321,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Cell createCell()
+  @Override
+public Cell createCell()
   {
     CellImpl cell = new CellImpl();
     return cell;
@@ -317,7 +333,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public CollectionIterator createCollectionIterator()
+  @Override
+public CollectionIterator createCollectionIterator()
   {
     CollectionIteratorImpl collectionIterator = new CollectionIteratorImpl();
     return collectionIterator;
@@ -328,7 +345,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ViewAction createViewAction()
+  @Override
+public ViewAction createViewAction()
   {
     ViewActionImpl viewAction = new ViewActionImpl();
     return viewAction;
@@ -339,7 +357,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Selector createSelector()
+  @Override
+public Selector createSelector()
   {
     SelectorImpl selector = new SelectorImpl();
     return selector;
@@ -350,7 +369,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExternalOpen createExternalOpen()
+  @Override
+public ExternalOpen createExternalOpen()
   {
     ExternalOpenImpl externalOpen = new ExternalOpenImpl();
     return externalOpen;
@@ -361,7 +381,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringConcat createStringConcat()
+  @Override
+public StringConcat createStringConcat()
   {
     StringConcatImpl stringConcat = new StringConcatImpl();
     return stringConcat;
@@ -372,7 +393,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringReplace createStringReplace()
+  @Override
+public StringReplace createStringReplace()
   {
     StringReplaceImpl stringReplace = new StringReplaceImpl();
     return stringReplace;
@@ -383,7 +405,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringUrlConform createStringUrlConform()
+  @Override
+public StringUrlConform createStringUrlConform()
   {
     StringUrlConformImpl stringUrlConform = new StringUrlConformImpl();
     return stringUrlConform;
@@ -394,7 +417,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringSplit createStringSplit()
+  @Override
+public StringSplit createStringSplit()
   {
     StringSplitImpl stringSplit = new StringSplitImpl();
     return stringSplit;
@@ -471,7 +495,8 @@ public class Bug332217TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug332217TestLanguagePackage getBug332217TestLanguagePackage()
+  @Override
+public Bug332217TestLanguagePackage getBug332217TestLanguagePackage()
   {
     return (Bug332217TestLanguagePackage)getEPackage();
   }

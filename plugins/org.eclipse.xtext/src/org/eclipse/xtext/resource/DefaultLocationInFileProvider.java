@@ -42,10 +42,12 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	@Inject(optional = true)
 	private IHiddenTokenHelper hiddenTokenHelper;
 	
+	@Override
 	public ITextRegion getSignificantTextRegion(EObject obj) {
 		return getTextRegion(obj, true);
 	}
 
+	@Override
 	public ITextRegion getFullTextRegion(EObject obj) {
 		return getTextRegion(obj, false);
 	}
@@ -58,6 +60,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	 * @since 2.3
 	 */
 	/* @Nullable */
+	@Override
 	public ITextRegion getTextRegion(/* @NonNull */ EObject object, /* @NonNull */ RegionDescription query) {
 		switch(query) {
 			// we delegate the implementation to the existing and potentially overridden methods
@@ -86,10 +89,12 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 		return createRegion(nodes, query);
 	}
 	
+	@Override
 	public ITextRegion getSignificantTextRegion(final EObject owner, EStructuralFeature feature, final int indexInList) {
 		return getTextRegion(owner, feature, indexInList, true);
 	}
 
+	@Override
 	public ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList) {
 		return getTextRegion(owner, feature, indexInList, false);
 	}
@@ -98,6 +103,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider, I
 	 * @since 2.3
 	 */
 	/* @Nullable */
+	@Override
 	public ITextRegion getTextRegion(EObject object, EStructuralFeature feature, int indexInList,
 			RegionDescription query) {
 		switch(query) {

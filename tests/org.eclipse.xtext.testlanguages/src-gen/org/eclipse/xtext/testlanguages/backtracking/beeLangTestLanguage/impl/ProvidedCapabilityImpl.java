@@ -129,7 +129,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNameSpace()
+  @Override
+public String getNameSpace()
   {
     return nameSpace;
   }
@@ -139,7 +140,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNameSpace(String newNameSpace)
+  @Override
+public void setNameSpace(String newNameSpace)
   {
     String oldNameSpace = nameSpace;
     nameSpace = newNameSpace;
@@ -152,7 +154,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getCondExpr()
+  @Override
+public Expression getCondExpr()
   {
     return condExpr;
   }
@@ -179,7 +182,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCondExpr(Expression newCondExpr)
+  @Override
+public void setCondExpr(Expression newCondExpr)
   {
     if (newCondExpr != condExpr)
     {
@@ -200,7 +204,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -210,7 +215,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -223,7 +229,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVersion()
+  @Override
+public String getVersion()
   {
     return version;
   }
@@ -233,7 +240,8 @@ public class ProvidedCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVersion(String newVersion)
+  @Override
+public void setVersion(String newVersion)
   {
     String oldVersion = version;
     version = newVersion;

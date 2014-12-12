@@ -28,6 +28,7 @@ public class PartialEditingContentAssistContextFactory extends DelegatingContent
 	public Provider<? extends StatefulFactory> getStatefulFactoryProvider() {
 		final Provider<? extends StatefulFactory> delegate = super.getStatefulFactoryProvider();
 		return new Provider<StatefulFactory>() {
+			@Override
 			public StatefulFactory get() {
 				StatefulFactory result = delegate.get();
 				result.getDelegate().setParser(partialContentAssistParser);
@@ -39,6 +40,7 @@ public class PartialEditingContentAssistContextFactory extends DelegatingContent
 		};
 	}
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

@@ -52,10 +52,12 @@ public class LazyOverrideCheckResult implements IOverrideCheckResult {
 		this.primaryDetail = detail;
 	}
 
+	@Override
 	public boolean isOverridingOrImplementing() {
 		return overridingIfAnyOf.contains(primaryDetail);
 	}
 
+	@Override
 	public boolean hasProblems() {
 		if (!isOverridingOrImplementing()) {
 			return true;
@@ -64,6 +66,7 @@ public class LazyOverrideCheckResult implements IOverrideCheckResult {
 		return !Sets.intersection(problemIfAnyOf, details).isEmpty();
 	}
 
+	@Override
 	public EnumSet<OverrideCheckDetails> getDetails() {
 		if (details != null) {
 			return details;
@@ -75,10 +78,12 @@ public class LazyOverrideCheckResult implements IOverrideCheckResult {
 		return thisOperation.getOverrideTester().getAllDetails(thisOperation, givenOperation, primaryDetail);
 	}
 	
+	@Override
 	public IResolvedOperation getThisOperation() {
 		return thisOperation;
 	}
 
+	@Override
 	public JvmOperation getGivenOperation() {
 		return givenOperation;
 	}

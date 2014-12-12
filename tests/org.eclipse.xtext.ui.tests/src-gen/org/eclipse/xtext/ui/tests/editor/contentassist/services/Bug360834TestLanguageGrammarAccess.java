@@ -32,6 +32,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	"alternative" element=Alternative | "unordered" element=Unordered;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"alternative" element=Alternative | "unordered" element=Unordered
@@ -74,6 +75,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Alternative:
 		//	"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration
@@ -108,6 +110,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FQN:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -141,6 +144,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RecursiveClassDeclaration:
 		//	modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}"
@@ -190,6 +194,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AlternativeClassModifiers returns Modifiers:
 		//	{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?);
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?)
@@ -238,6 +243,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Unordered:
 		//	"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration
@@ -277,6 +283,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SimpleClassDeclaration:
 		//	modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}"
@@ -322,6 +329,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ClassMember:
 		//	modifiers=UnorderedModifiers "var" name=ID ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//modifiers=UnorderedModifiers "var" name=ID ";"
@@ -362,6 +370,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedModifiers:
 		//	{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?);
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?)
@@ -411,6 +420,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum Visibility:
 		//	PUBLIC="public" | PROTECTED="protected" | PRIVATE="private";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//PUBLIC="public" | PROTECTED="protected" | PRIVATE="private"
@@ -484,6 +494,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

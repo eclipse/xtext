@@ -25,10 +25,12 @@ public class StaticFeatureDescription extends BucketedEObjectDescription {
 		}
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return true;
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return false;
 	}

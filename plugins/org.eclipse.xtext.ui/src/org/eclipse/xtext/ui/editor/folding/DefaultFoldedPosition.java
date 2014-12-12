@@ -44,6 +44,7 @@ public class DefaultFoldedPosition extends FoldedPosition {
 		this.initiallyFolded = initiallyFolded;
 	}
 	
+	@Override
 	public IRegion[] computeProjectionRegions(IDocument document) throws BadLocationException {
 		if (contentStart == UNSET) {
 			int line= document.getLineOfOffset(offset);
@@ -87,6 +88,7 @@ public class DefaultFoldedPosition extends FoldedPosition {
 		}
 	}
 
+	@Override
 	public int computeCaptionOffset(IDocument document) throws BadLocationException {
 		if (contentStart == UNSET) {
 			return 0;

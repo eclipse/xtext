@@ -39,10 +39,12 @@ public class ConstructorDescription extends BucketedEObjectDescription {
 	/**
 	 * Constructors of non-member types are considered to be static.
 	 */
+	@Override
 	public boolean isStatic() {
 		return true;
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return false;
 	}

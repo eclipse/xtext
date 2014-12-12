@@ -73,7 +73,8 @@ public class SimplePackageRefImpl extends PackageRefImpl implements SimplePackag
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getPackage()
+  @Override
+public String getPackage()
   {
     return package_;
   }
@@ -83,7 +84,8 @@ public class SimplePackageRefImpl extends PackageRefImpl implements SimplePackag
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setPackage(String newPackage)
+  @Override
+public void setPackage(String newPackage)
   {
     String oldPackage = package_;
     package_ = newPackage;

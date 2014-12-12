@@ -17,6 +17,7 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 	@Fix(SEMANTIC_FIX_ID)
 	public void rename(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, SEMANTIC_FIX_ID, SEMANTIC_FIX_ID, null, new ISemanticModification() {
+			@Override
 			public void apply(EObject element, IModificationContext context) {
 				((Element)element).setName("Bor");
 			}

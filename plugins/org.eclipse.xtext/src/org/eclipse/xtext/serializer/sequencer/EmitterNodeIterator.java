@@ -50,6 +50,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 		}
 	}
 
+	@Override
 	public boolean hasNext() {
 		return !next.isEmpty();
 	}
@@ -71,6 +72,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 		return node.getGrammarElement() != null && GrammarUtil.isAssigned(node.getGrammarElement());
 	}
 
+	@Override
 	public INode next() {
 		INode result;
 		if (!next.isEmpty()) {
@@ -107,6 +109,7 @@ public class EmitterNodeIterator implements Iterator<INode> {
 		return result;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

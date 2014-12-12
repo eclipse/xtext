@@ -73,7 +73,8 @@ public class SimpleNameExpImpl extends NameExpImpl implements SimpleNameExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getElement()
+  @Override
+public String getElement()
   {
     return element;
   }
@@ -83,7 +84,8 @@ public class SimpleNameExpImpl extends NameExpImpl implements SimpleNameExp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement(String newElement)
+  @Override
+public void setElement(String newElement)
   {
     String oldElement = element;
     element = newElement;

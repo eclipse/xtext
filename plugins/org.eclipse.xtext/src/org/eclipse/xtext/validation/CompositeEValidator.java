@@ -106,6 +106,7 @@ public class CompositeEValidator implements EValidator {
 		}
 	}
 
+	@Override
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {
@@ -127,6 +128,7 @@ public class CompositeEValidator implements EValidator {
 		return result;
 	}
 
+	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {
@@ -148,6 +150,7 @@ public class CompositeEValidator implements EValidator {
 		return result;
 	}
 
+	@Override
 	public boolean validate(EDataType eDataType, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		boolean result = true;
 		for (int i = 0; i < getContents().size(); i++) {

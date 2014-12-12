@@ -31,6 +31,7 @@ public interface IOutputConfigurationProvider {
 			this.delegate = delegate;
 		}
 
+		@Override
 		public Set<OutputConfiguration> getOutputConfigurations() {
 			return delegate.getOutputConfigurations();
 		}

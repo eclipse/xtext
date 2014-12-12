@@ -29,6 +29,7 @@ import com.google.inject.name.Named;
 @Singleton
 public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 
+	@Override
 	public IPreferenceStore getPreferenceStore() {
 		lazyInitialize();
 		Activator activator = Activator.getDefault();
@@ -42,6 +43,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 				EditorsUI.getPreferenceStore() });
 	}
 
+	@Override
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		lazyInitialize();
 		// may be null on shutdown
@@ -56,6 +58,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 				EditorsUI.getPreferenceStore()});
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
@@ -67,6 +70,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		return result;
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore(Object context) {
 		lazyInitialize();

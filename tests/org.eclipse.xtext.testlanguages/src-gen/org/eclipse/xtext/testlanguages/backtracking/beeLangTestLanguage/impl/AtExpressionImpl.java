@@ -76,7 +76,8 @@ public class AtExpressionImpl extends ExpressionImpl implements AtExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getObjExpr()
+  @Override
+public Expression getObjExpr()
   {
     return objExpr;
   }
@@ -103,7 +104,8 @@ public class AtExpressionImpl extends ExpressionImpl implements AtExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setObjExpr(Expression newObjExpr)
+  @Override
+public void setObjExpr(Expression newObjExpr)
   {
     if (newObjExpr != objExpr)
     {
@@ -124,7 +126,8 @@ public class AtExpressionImpl extends ExpressionImpl implements AtExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getIndexExpr()
+  @Override
+public Expression getIndexExpr()
   {
     return indexExpr;
   }
@@ -151,7 +154,8 @@ public class AtExpressionImpl extends ExpressionImpl implements AtExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIndexExpr(Expression newIndexExpr)
+  @Override
+public void setIndexExpr(Expression newIndexExpr)
   {
     if (newIndexExpr != indexExpr)
     {

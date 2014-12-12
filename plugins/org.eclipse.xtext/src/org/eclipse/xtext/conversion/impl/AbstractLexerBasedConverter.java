@@ -37,6 +37,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 
 	private AbstractRule rule;
 	
+	@Override
 	public String toString(T value) {
 		assertValidValue(value);
 		String result = toEscapedString(value);
@@ -118,6 +119,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 		return rule;
 	}
 	
+	@Override
 	public void setRule(AbstractRule rule) {
 		this.rule = rule;
 	}

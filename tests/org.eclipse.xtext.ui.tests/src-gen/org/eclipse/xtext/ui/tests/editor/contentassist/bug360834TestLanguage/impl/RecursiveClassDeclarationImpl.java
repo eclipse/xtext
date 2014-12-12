@@ -106,7 +106,8 @@ public class RecursiveClassDeclarationImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public Modifiers getModifiers()
+  @Override
+public Modifiers getModifiers()
   {
     return modifiers;
   }
@@ -133,7 +134,8 @@ public class RecursiveClassDeclarationImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setModifiers(Modifiers newModifiers)
+  @Override
+public void setModifiers(Modifiers newModifiers)
   {
     if (newModifiers != modifiers)
     {
@@ -154,7 +156,8 @@ public class RecursiveClassDeclarationImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -164,7 +167,8 @@ public class RecursiveClassDeclarationImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -177,7 +181,8 @@ public class RecursiveClassDeclarationImpl extends MinimalEObjectImpl.Container 
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<RecursiveClassDeclaration> getMembers()
+  @Override
+public EList<RecursiveClassDeclaration> getMembers()
   {
     if (members == null)
     {

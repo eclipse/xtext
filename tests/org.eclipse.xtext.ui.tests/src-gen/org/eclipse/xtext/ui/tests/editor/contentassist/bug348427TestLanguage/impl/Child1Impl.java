@@ -117,7 +117,8 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -127,7 +128,8 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -140,7 +142,8 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isBool()
+  @Override
+public boolean isBool()
   {
     return bool;
   }
@@ -150,7 +153,8 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBool(boolean newBool)
+  @Override
+public void setBool(boolean newBool)
   {
     boolean oldBool = bool;
     bool = newBool;
@@ -163,7 +167,8 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumType getEnumType()
+  @Override
+public EnumType getEnumType()
   {
     return enumType;
   }
@@ -173,7 +178,8 @@ public class Child1Impl extends MinimalEObjectImpl.Container implements Child1
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setEnumType(EnumType newEnumType)
+  @Override
+public void setEnumType(EnumType newEnumType)
   {
     EnumType oldEnumType = enumType;
     enumType = newEnumType == null ? ENUM_TYPE_EDEFAULT : newEnumType;

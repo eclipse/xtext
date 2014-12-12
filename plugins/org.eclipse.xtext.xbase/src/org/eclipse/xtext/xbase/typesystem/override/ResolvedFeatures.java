@@ -101,6 +101,7 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 	protected ListMultimap<String, IResolvedOperation> computeIndex() {
 		// produces an immutable index which is what we want to have
 		return Multimaps.index(getAllOperations(), new Function<IResolvedOperation, String>() {
+			@Override
 			public String apply(IResolvedOperation input) {
 				return input.getResolvedErasureSignature();
 			}

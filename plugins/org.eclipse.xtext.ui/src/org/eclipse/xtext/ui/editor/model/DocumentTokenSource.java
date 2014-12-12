@@ -106,14 +106,17 @@ public class DocumentTokenSource {
 			this.offset = offset;
 		}
 
+		@Override
 		public int getLength() {
 			return token.getLength();
 		}
 
+		@Override
 		public int getOffset() {
 			return offset;
 		}
 
+		@Override
 		public int getLexerTokenType() {
 			return token.getAntlrTokenType();
 		}
@@ -128,6 +131,7 @@ public class DocumentTokenSource {
 			this.tokens = tokens;
 		}
 
+		@Override
 		public Iterator<ILexerTokenRegion> iterator() {
 			return new AbstractIterator<ILexerTokenRegion>() {
 
@@ -339,6 +343,7 @@ public class DocumentTokenSource {
 		final TokenSource delegate = createTokenSource(e.fDocument.get(tokenStartsAt, e.fDocument.getLength() - tokenStartsAt));
 		final int offset = tokenStartsAt;
 		TokenSource source = new TokenSource() {
+			@Override
 			public Token nextToken() {
 				CommonToken commonToken = (CommonToken) delegate.nextToken();
 				commonToken.setText(commonToken.getText());
@@ -347,6 +352,7 @@ public class DocumentTokenSource {
 				return commonToken;
 			}
 
+			@Override
 			public String getSourceName() {
 				return delegate.getSourceName();
 			}

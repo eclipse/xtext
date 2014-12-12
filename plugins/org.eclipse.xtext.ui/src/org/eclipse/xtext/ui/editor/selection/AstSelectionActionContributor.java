@@ -19,10 +19,12 @@ public class AstSelectionActionContributor implements IActionContributor {
 	@Inject
 	private AstSelectionProvider astSelectionProvider;
 
+	@Override
 	public void contributeActions(XtextEditor xtextEditor) {
 		astSelectionProvider.initialize(xtextEditor);
 	}
 
+	@Override
 	public void editorDisposed(XtextEditor editor) {
 	}
 }

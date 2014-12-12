@@ -52,6 +52,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
+	@Override
 	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, INode node) {
 		if (crossref != node.getGrammarElement())
 			return false;
@@ -81,6 +82,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		return null;
 	}
 
+	@Override
 	public boolean isValid(EObject context, CrossReference crossref, EObject target, IErrorAcceptor errorAcceptor) {
 		try {
 			final EReference ref = GrammarUtil.getReference(crossref, context.eClass());
@@ -96,6 +98,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 		}
 	}
 
+	@Override
 	public String serializeCrossRef(EObject context, CrossReference grammarElement, final EObject target, INode node) {
 		final EReference ref = GrammarUtil.getReference(grammarElement, context.eClass());
 		String text = null;
@@ -103,6 +106,7 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 			List<EObject> objects = linkingService.getLinkedObjects(context, ref, node);
 			if (Iterables.any(objects, new Predicate<EObject>() {
 				private final URI targetURI = EcoreUtil.getURI(target);
+				@Override
 				public boolean apply(EObject input) {
 					return input == target || EcoreUtil.getURI(input).equals(targetURI);
 				}

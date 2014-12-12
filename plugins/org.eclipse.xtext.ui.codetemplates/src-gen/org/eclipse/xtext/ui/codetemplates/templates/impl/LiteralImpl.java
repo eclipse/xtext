@@ -72,7 +72,8 @@ public class LiteralImpl extends TemplatePartImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValue()
+  @Override
+public String getValue()
   {
     return value;
   }
@@ -82,7 +83,8 @@ public class LiteralImpl extends TemplatePartImpl implements Literal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(String newValue)
+  @Override
+public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

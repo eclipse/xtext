@@ -33,6 +33,7 @@ public class ConvertJavaCodeHandler extends AbstractHandler {
 	@Inject
 	private Provider<ConvertJavaCode> javaConverterProvider;
 
+	@Override
 	public Object execute(final ExecutionEvent event) throws ExecutionException {
 		ISelection currentSelection = HandlerUtil.getCurrentSelection(event);
 		if (currentSelection instanceof IStructuredSelection) {

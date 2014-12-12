@@ -158,6 +158,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 * @return <code>true</code> if the folder is a java output folder. Otherwise <code>false</code>.
 	 * @since 2.5
 	 */
+	@Override
 	public boolean isRejected(/* @NonNull */ IFolder folder) {
 		return jdtHelper.isFromOutputPath(folder);
 	}
@@ -165,6 +166,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public Pair<URI, URI> getURIMapping(IPackageFragmentRoot root) throws JavaModelException {
 		PackageFragmentRootData data = getData(root);
 		if (data.uriPrefix == null)
@@ -183,6 +185,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public Map<URI, IStorage> getAllEntries(IPackageFragmentRoot root) {
 		try {
 			if (root.getUnderlyingResource() instanceof IFolder) {
@@ -292,6 +295,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	}
 	
 	/* @NonNull */
+	@Override
 	public Iterable<Pair<IStorage, IProject>> getStorages(/* @NonNull */ URI uri) {
 		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
 		List<PackageFragmentRootData> packageFragmentRootDatas;
@@ -341,6 +345,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public URI getUri(/* @NonNull */ IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			final IJarEntryResource storage2 = (IJarEntryResource) storage;
@@ -410,6 +415,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void initializeCache() {
 		if(!isInitialized) {
 			for(IProject project: workspace.getRoot().getProjects()) {
@@ -419,6 +425,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 				}
 			}
 			JavaCore.addElementChangedListener(new IElementChangedListener() {
+				@Override
 				public void elementChanged(ElementChangedEvent event) {
 					Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
 					if(!javaProjectsWithClasspathChange.isEmpty()) {

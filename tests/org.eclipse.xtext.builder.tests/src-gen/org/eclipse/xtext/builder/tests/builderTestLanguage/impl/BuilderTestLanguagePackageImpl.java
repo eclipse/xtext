@@ -120,7 +120,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNamedElement()
+  @Override
+public EClass getNamedElement()
   {
     return namedElementEClass;
   }
@@ -130,7 +131,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNamedElement_Name()
+  @Override
+public EAttribute getNamedElement_Name()
   {
     return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
   }
@@ -140,7 +142,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNamespace()
+  @Override
+public EClass getNamespace()
   {
     return namespaceEClass;
   }
@@ -150,7 +153,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNamespace_Imports()
+  @Override
+public EReference getNamespace_Imports()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(0);
   }
@@ -160,7 +164,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNamespace_Elements()
+  @Override
+public EReference getNamespace_Elements()
   {
     return (EReference)namespaceEClass.getEStructuralFeatures().get(1);
   }
@@ -170,7 +175,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
+  @Override
+public EClass getImport()
   {
     return importEClass;
   }
@@ -180,7 +186,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImport_ImportedNamespace()
+  @Override
+public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -190,7 +197,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getElement()
+  @Override
+public EClass getElement()
   {
     return elementEClass;
   }
@@ -200,7 +208,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_References()
+  @Override
+public EReference getElement_References()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(0);
   }
@@ -210,7 +219,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getElement_OtherRefs()
+  @Override
+public EReference getElement_OtherRefs()
   {
     return (EReference)elementEClass.getEStructuralFeatures().get(1);
   }
@@ -220,7 +230,8 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
-  public BuilderTestLanguageFactory getBuilderTestLanguageFactory()
+  @Override
+public BuilderTestLanguageFactory getBuilderTestLanguageFactory()
   {
     return (BuilderTestLanguageFactory)getEFactoryInstance();
   }

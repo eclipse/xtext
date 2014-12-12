@@ -85,7 +85,8 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class getSuperClass()
+  @Override
+public org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class getSuperClass()
   {
     if (superClass != null && superClass.eIsProxy())
     {
@@ -115,7 +116,8 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class newSuperClass)
+  @Override
+public void setSuperClass(org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class newSuperClass)
   {
     org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class oldSuperClass = superClass;
     superClass = newSuperClass;
@@ -128,7 +130,8 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -138,7 +141,8 @@ public class ClassImpl extends MinimalEObjectImpl.Container implements org.eclip
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

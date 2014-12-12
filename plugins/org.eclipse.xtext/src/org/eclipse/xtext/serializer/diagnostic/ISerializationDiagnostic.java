@@ -30,32 +30,39 @@ public interface ISerializationDiagnostic {
 			this.exception = exception;
 		}
 
+		@Override
 		public boolean breaksSyntax() {
 			return false;
 		}
 
+		@Override
 		public Throwable getException() {
 			return exception;
 		}
 
+		@Override
 		public String getMessage() {
 			return exception.getMessage();
 		}
 
+		@Override
 		public EObject getSemanticObject() {
 			return null;
 		}
 
+		@Override
 		public EObject getContext() {
 			return null;
 		}
 
+		@Override
 		public String getId() {
 			return EXCEPTION_DIAGNOSTIC;
 		}
 	}
 
 	public class ExceptionThrowingAcceptor implements Acceptor {
+		@Override
 		public void accept(ISerializationDiagnostic diagnostic) {
 			if (diagnostic == null || diagnostic.getMessage() == null)
 				throw new RuntimeException("Something went wrong during serialization");
@@ -73,6 +80,7 @@ public interface ISerializationDiagnostic {
 	}
 
 	public class StdErrAcceptor implements Acceptor {
+		@Override
 		public void accept(ISerializationDiagnostic diagnostic) {
 			if (diagnostic == null || diagnostic.getMessage() == null)
 				System.err.println("error");

@@ -286,9 +286,11 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 		}
 
+		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
 
+		@Override
 		public void documentChanged(DocumentEvent event) {
 			if (element.fCanBeSaved && modificationStamp == event.getModificationStamp()) {
 				element.fCanBeSaved = false;

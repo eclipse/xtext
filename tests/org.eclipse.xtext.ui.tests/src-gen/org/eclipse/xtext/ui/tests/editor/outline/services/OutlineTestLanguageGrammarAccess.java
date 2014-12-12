@@ -25,6 +25,7 @@ public class OutlineTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//Model:
 		//	elements+=Element*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
@@ -52,6 +53,7 @@ public class OutlineTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//Element:
 		//	name=ID ("(" xrefs+=[Element]* ")")? "{" children+=Element* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ("(" xrefs+=[Element]* ")")? "{" children+=Element* "}"
@@ -128,6 +130,7 @@ public class OutlineTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

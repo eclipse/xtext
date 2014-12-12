@@ -157,6 +157,7 @@ public class RenameLinkedMode {
 	}
 
 	protected class EditorSynchronizer implements ILinkedModeListener {
+		@Override
 		public void left(LinkedModeModel model, int flags) {
 			//boolean isValidNewName = updateNewName();
 			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0) {// && isValidNewName) {
@@ -169,14 +170,17 @@ public class RenameLinkedMode {
 			}
 		}
 
+		@Override
 		public void suspend(LinkedModeModel model) {
 		}
 
+		@Override
 		public void resume(LinkedModeModel model, int flags) {
 		}
 	}
 
 	protected class FocusEditingSupport implements IEditingSupport {
+		@Override
 		public boolean ownsFocusShell() {
 			if (popup == null)
 				return false;
@@ -191,6 +195,7 @@ public class RenameLinkedMode {
 			return false;
 		}
 
+		@Override
 		public boolean isOriginator(DocumentEvent event, IRegion subjectRegion) {
 			return false; // leave on external modification outside positions
 		}
@@ -203,6 +208,7 @@ public class RenameLinkedMode {
 			this.document = document;
 		}
 
+		@Override
 		public ExitFlags doExit(LinkedModeModel model, VerifyEvent event, int offset, int length) {
 			showPreview = (event.stateMask & SWT.CTRL) != 0 && (event.character == SWT.CR || event.character == SWT.LF);
 			if (length == 0 && (event.character == SWT.BS || event.character == SWT.DEL)) {

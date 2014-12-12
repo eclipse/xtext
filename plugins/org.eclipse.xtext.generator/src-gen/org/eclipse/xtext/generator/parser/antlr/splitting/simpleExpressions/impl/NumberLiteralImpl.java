@@ -72,7 +72,8 @@ public class NumberLiteralImpl extends ExpressionImpl implements NumberLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getValue()
+  @Override
+public int getValue()
   {
     return value;
   }
@@ -82,7 +83,8 @@ public class NumberLiteralImpl extends ExpressionImpl implements NumberLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(int newValue)
+  @Override
+public void setValue(int newValue)
   {
     int oldValue = value;
     value = newValue;

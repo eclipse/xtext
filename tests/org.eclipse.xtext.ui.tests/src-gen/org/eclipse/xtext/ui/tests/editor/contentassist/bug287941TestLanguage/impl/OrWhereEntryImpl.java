@@ -70,7 +70,8 @@ public class OrWhereEntryImpl extends WhereEntryImpl implements OrWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<WhereEntry> getEntries()
+  @Override
+public EList<WhereEntry> getEntries()
   {
     if (entries == null)
     {

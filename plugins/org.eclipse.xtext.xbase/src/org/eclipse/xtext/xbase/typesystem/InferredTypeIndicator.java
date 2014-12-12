@@ -59,6 +59,7 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 		}
 	}
 	
+	@Override
 	public JvmTypeReference getTypeReference(/* @NonNull */ XComputedTypeReferenceImplCustom context) {
 		Resource resource = context.eResource();
 		IResolvedTypes resolvedTypes = null;

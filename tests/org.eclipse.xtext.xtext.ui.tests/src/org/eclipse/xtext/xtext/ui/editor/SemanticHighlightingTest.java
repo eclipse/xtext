@@ -53,6 +53,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 				"terminal fragment FOO returns EString: 'a';", 1);
 		ISemanticHighlightingCalculator calculator = get(ISemanticHighlightingCalculator.class);
 		calculator.provideHighlightingFor(resource, new IHighlightedPositionAcceptor() {
+			@Override
 			public void addPosition(int offset, int length, String... id) {
 				// ignore
 			}
@@ -103,6 +104,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		expectedRegions.add(new TypedRegion(offset, length, type));
 	}
 
+	@Override
 	public void addPosition(int offset, int length, String... id) {
 		assertEquals(1, id.length);
 		TypedRegion region = new TypedRegion(offset, length, id[0]);

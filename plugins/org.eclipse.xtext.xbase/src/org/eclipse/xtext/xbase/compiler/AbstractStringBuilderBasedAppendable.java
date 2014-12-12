@@ -38,10 +38,12 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		openScope();
 	}
 	
+	@Override
 	public boolean isJava() {
 		return isJava;
 	}
 
+	@Override
 	public IAppendable append(JvmType type) {
 		appendType(type, builder);
 		return this;
@@ -52,6 +54,7 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		return this;
 	}
 
+	@Override
 	public IAppendable append(LightweightTypeReference typeRef) {
 		typeRef.accept(lightweightTypeReferenceSerializer);
 		return this;
@@ -61,12 +64,14 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		return new LightweightTypeReferenceSerializer(this);
 	}
 	
+	@Override
 	public IAppendable append(CharSequence string) {
 		String replaced = string.toString().replace(lineSeparator, getIndentationString());
 		builder.append(replaced);
 		return this;
 	}
 	
+	@Override
 	public IAppendable newLine() {
 		builder.append(getIndentationString());
 		return this;
@@ -90,19 +95,23 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		return builder.toString();
 	}
 	
+	@Override
 	public String getContent() {
 		return toString();
 	}
 	
+	@Override
 	public int length() {
 		return builder.length();
 	}
 
+	@Override
 	public IAppendable increaseIndentation() {
 		indentationlevel++;
 		return this;
 	}
 
+	@Override
 	public IAppendable decreaseIndentation() {
 		if (indentationlevel == 0)
 			throw new IllegalStateException("Can't reduce indentation level. It's already zero.");
@@ -116,26 +125,32 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		this.scopes = scopes;
 	}
 
+	@Override
 	public void openScope() {
 		scopes.openScope(false);
 	}
 	
+	@Override
 	public void openPseudoScope() {
 		scopes.openScope(true);
 	}
 	
+	@Override
 	public String declareVariable(Object key, String proposedName) {
 		return scopes.declareVariable(key, proposedName, false);
 	}
 	
+	@Override
 	public String declareSyntheticVariable(Object key, String proposedName) {
 		return scopes.declareVariable(key, proposedName, true);
 	}
 	
+	@Override
 	public void closeScope() {
 		scopes.closeScope();
 	}
 	
+	@Override
 	public String removeName(Object key) {
 		return scopes.removeName(key);
 	}
@@ -144,9 +159,11 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	
 	protected abstract void appendType(final Class<?> type, StringBuilder builder);
 	
+	@Override
 	@Deprecated
 	public abstract List<String> getImports();
 
+	@Override
 	public String getName(Object key) {
 		String result = scopes.getName(key);
 		if (result == null)
@@ -154,10 +171,12 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		return result;
 	}
 	
+	@Override
 	public boolean hasName(Object key) {
 		return scopes.getName(key) != null;
 	}
 
+	@Override
 	public Object getObject(String name) {
 		Object result = scopes.get(name);
 		if (result == null)
@@ -165,6 +184,7 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 		return result;
 	}
 	
+	@Override
 	public boolean hasObject(String name) {
 		return scopes.get(name) != null;
 	}

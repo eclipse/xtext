@@ -76,7 +76,8 @@ public class OutlineTestFactoryImpl extends EFactoryImpl implements OutlineTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -87,7 +88,8 @@ public class OutlineTestFactoryImpl extends EFactoryImpl implements OutlineTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Element createElement()
+  @Override
+public Element createElement()
   {
     ElementImpl element = new ElementImpl();
     return element;
@@ -98,7 +100,8 @@ public class OutlineTestFactoryImpl extends EFactoryImpl implements OutlineTestF
    * <!-- end-user-doc -->
    * @generated
    */
-  public OutlineTestPackage getOutlineTestPackage()
+  @Override
+public OutlineTestPackage getOutlineTestPackage()
   {
     return (OutlineTestPackage)getEPackage();
   }

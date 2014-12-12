@@ -66,6 +66,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 		@Override
 		public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 			super.completeKeyword(keyword, context, new FilteringCompletionProposalAcceptor(acceptor, new Predicate<ICompletionProposal>() {
+				@Override
 				public boolean apply(ICompletionProposal input) {
 					if (!input.getDisplayString().startsWith(context.getPrefix()))
 						throw new IllegalStateException("proposed element '"+input.getDisplayString()+"' does not start with '"+ context.getPrefix()+"'");

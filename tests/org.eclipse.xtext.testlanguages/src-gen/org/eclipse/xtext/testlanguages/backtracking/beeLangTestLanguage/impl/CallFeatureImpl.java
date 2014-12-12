@@ -98,7 +98,8 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getFuncExpr()
+  @Override
+public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -125,7 +126,8 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFuncExpr(Expression newFuncExpr)
+  @Override
+public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {
@@ -146,7 +148,8 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -156,7 +159,8 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -169,7 +173,8 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  public ParameterList getParameterList()
+  @Override
+public ParameterList getParameterList()
   {
     return parameterList;
   }
@@ -196,7 +201,8 @@ public class CallFeatureImpl extends ExpressionImpl implements CallFeature
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setParameterList(ParameterList newParameterList)
+  @Override
+public void setParameterList(ParameterList newParameterList)
   {
     if (newParameterList != parameterList)
     {

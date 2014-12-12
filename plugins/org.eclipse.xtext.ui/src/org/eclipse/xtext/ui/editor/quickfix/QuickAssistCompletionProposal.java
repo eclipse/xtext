@@ -28,18 +28,22 @@ public class QuickAssistCompletionProposal implements ICompletionProposal, IComp
 		this.image = image;
 	}
 
+	@Override
 	public void apply(IDocument document) {
 		resolution.apply();
 	}
 
+	@Override
 	public Point getSelection(IDocument document) {
 		return new Point(pos.offset, 0);
 	}
 
+	@Override
 	public String getAdditionalProposalInfo() {
 		return resolution.getDescription();
 	}
 
+	@Override
 	public String getDisplayString() {
 		return resolution.getLabel();
 	}
@@ -51,22 +55,27 @@ public class QuickAssistCompletionProposal implements ICompletionProposal, IComp
 		return resolution.getRelevance();
 	}
 
+	@Override
 	public Image getImage() {
 		return image;
 	}
 
+	@Override
 	public IContextInformation getContextInformation() {
 		return null;
 	}
 
+	@Override
 	public IInformationControlCreator getInformationControlCreator() {
 		return null;
 	}
 
+	@Override
 	public int getPrefixCompletionStart(IDocument document, int completionOffset) {
 		return 0;
 	}
 
+	@Override
 	public CharSequence getPrefixCompletionText(IDocument document, int completionOffset) {
 		return null;
 	}

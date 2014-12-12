@@ -213,7 +213,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getDocumentation()
+  @Override
+public String getDocumentation()
   {
     return documentation;
   }
@@ -223,7 +224,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDocumentation(String newDocumentation)
+  @Override
+public void setDocumentation(String newDocumentation)
   {
     String oldDocumentation = documentation;
     documentation = newDocumentation;
@@ -236,7 +238,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVisibility()
+  @Override
+public String getVisibility()
   {
     return visibility;
   }
@@ -246,7 +249,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVisibility(String newVisibility)
+  @Override
+public void setVisibility(String newVisibility)
   {
     String oldVisibility = visibility;
     visibility = newVisibility;
@@ -259,7 +263,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFinal()
+  @Override
+public boolean isFinal()
   {
     return final_;
   }
@@ -269,7 +274,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFinal(boolean newFinal)
+  @Override
+public void setFinal(boolean newFinal)
   {
     boolean oldFinal = final_;
     final_ = newFinal;
@@ -282,7 +288,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getReturnType()
+  @Override
+public TypeRef getReturnType()
   {
     return returnType;
   }
@@ -309,7 +316,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReturnType(TypeRef newReturnType)
+  @Override
+public void setReturnType(TypeRef newReturnType)
   {
     if (newReturnType != returnType)
     {
@@ -330,7 +338,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -340,7 +349,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -353,7 +363,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<ParameterDeclaration> getParameters()
+  @Override
+public EList<ParameterDeclaration> getParameters()
   {
     if (parameters == null)
     {
@@ -367,7 +378,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isVarArgs()
+  @Override
+public boolean isVarArgs()
   {
     return varArgs;
   }
@@ -377,7 +389,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVarArgs(boolean newVarArgs)
+  @Override
+public void setVarArgs(boolean newVarArgs)
   {
     boolean oldVarArgs = varArgs;
     varArgs = newVarArgs;
@@ -390,7 +403,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public GuardExpression getGuard()
+  @Override
+public GuardExpression getGuard()
   {
     return guard;
   }
@@ -417,7 +431,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGuard(GuardExpression newGuard)
+  @Override
+public void setGuard(GuardExpression newGuard)
   {
     if (newGuard != guard)
     {
@@ -438,7 +453,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getFuncExpr()
+  @Override
+public Expression getFuncExpr()
   {
     return funcExpr;
   }
@@ -465,7 +481,8 @@ public class FunctionImpl extends ExpressionImpl implements Function
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFuncExpr(Expression newFuncExpr)
+  @Override
+public void setFuncExpr(Expression newFuncExpr)
   {
     if (newFuncExpr != funcExpr)
     {

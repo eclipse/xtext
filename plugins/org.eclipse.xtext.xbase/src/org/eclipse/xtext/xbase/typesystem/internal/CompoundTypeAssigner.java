@@ -27,12 +27,14 @@ public class CompoundTypeAssigner implements ITypeAssigner {
 		this.assigners = assigners;
 	}
 
+	@Override
 	public void assignType(JvmIdentifiableElement element, /* @Nullable */ LightweightTypeReference actualType) {
 		for(ITypeAssigner assigner: assigners) {
 			assigner.assignType(element, actualType);
 		}
 	}
 
+	@Override
 	public ITypeComputationState getForkedState() {
 		AbstractTypeComputationState[] states = new AbstractTypeComputationState[assigners.length];
 		for(int i = 0; i < states.length; i++) {
@@ -41,10 +43,12 @@ public class CompoundTypeAssigner implements ITypeAssigner {
 		return new CompoundTypeComputationState(owner, states);
 	}
 
+	@Override
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {
 		return owner.toLightweightTypeReference(reference);
 	}
 	
+	@Override
 	public ITypeReferenceOwner getReferenceOwner() {
 		return owner;
 	}

@@ -69,6 +69,7 @@ public class TextViewerShiftAction extends TextViewerAction implements IReadOnly
 			display = shell.getDisplay();
 
 		BusyIndicator.showWhile(display, new Runnable() {
+			@Override
 			public void run() {
 				fOperationTarget.doOperation(fOperationCode);
 			}
@@ -122,6 +123,7 @@ public class TextViewerShiftAction extends TextViewerAction implements IReadOnly
 		fOperationTarget = null;
 	}
 
+	@Override
 	public boolean isEnabled(boolean isWritable) {
 
 		if (!isWritable)

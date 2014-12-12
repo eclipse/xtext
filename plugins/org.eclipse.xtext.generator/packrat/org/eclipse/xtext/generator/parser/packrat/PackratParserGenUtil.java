@@ -57,10 +57,12 @@ public final class PackratParserGenUtil {
 			this.input = input;
 		}
 
+		@Override
 		public ICharSequenceWithOffset getInput() {
 			return input;
 		}
 
+		@Override
 		public IParsedTokenAcceptor getTokenAcceptor() {
 			return null;
 		}
@@ -228,6 +230,7 @@ public final class PackratParserGenUtil {
 
 	public static Iterator<Keyword> getConflictingKeywords(final TerminalRule rule, final Iterator<Keyword> allKeywords) {
 		return Iterators.filter(allKeywords, new Predicate<Keyword>() {
+			@Override
 			public boolean apply(Keyword param) {
 				final ParserRule containerRule = EcoreUtil2.getContainerOfType(param, ParserRule.class);
 				if (containerRule == null)
@@ -265,6 +268,7 @@ public final class PackratParserGenUtil {
 				Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class));
 		Set<String> res = Sets.newLinkedHashSet();
 		Iterators.addAll(res, Iterators.transform(conflictingKeywords, new Function<Keyword, String>() {
+			@Override
 			public String apply(Keyword param) {
 				return param.getValue();
 			}
@@ -279,6 +283,7 @@ public final class PackratParserGenUtil {
 		Iterator<AbstractElement> iterator = Iterators.filter(
 				Iterators.filter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class),
 				new Predicate<AbstractElement>() {
+					@Override
 					public boolean apply(AbstractElement param) {
 						final List<String> otherConflicting = getConflictingKeywords(param, grammar);
 						return otherConflicting != null && otherConflicting.equals(conflicting);
@@ -296,6 +301,7 @@ public final class PackratParserGenUtil {
 		Keyword result = element;
 		Iterator<Keyword> iterator = Iterators.filter(
 				Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Predicate<Keyword>() {
+					@Override
 					public boolean apply(Keyword param) {
 						if (GrammarUtil.containingParserRule(param) == null)
 							return false;

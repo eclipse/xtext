@@ -94,7 +94,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getKey()
+  @Override
+public String getKey()
   {
     return key;
   }
@@ -104,7 +105,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setKey(String newKey)
+  @Override
+public void setKey(String newKey)
   {
     String oldKey = key;
     key = newKey;
@@ -117,7 +119,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValue()
+  @Override
+public String getValue()
   {
     return value;
   }
@@ -127,7 +130,8 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(String newValue)
+  @Override
+public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

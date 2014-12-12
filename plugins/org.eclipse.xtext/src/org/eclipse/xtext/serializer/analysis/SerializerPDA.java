@@ -26,24 +26,29 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 
 	public static class SerializerPDACloneFactory implements PdaFactory<SerializerPDA, ISerState, RuleCall, ISerState> {
 
+		@Override
 		public SerializerPDA create(ISerState start, ISerState stop) {
 			SerializerPDA.SerializerPDAState s1 = new SerializerPDAState(start.getGrammarElement(), SerStateType.START);
 			SerializerPDA.SerializerPDAState s2 = new SerializerPDAState(stop.getGrammarElement(), SerStateType.STOP);
 			return new SerializerPDA(s1, s2);
 		}
 
+		@Override
 		public ISerState createPop(SerializerPDA pda, ISerState token) {
 			return new SerializerPDAState(token.getGrammarElement(), SerStateType.POP);
 		}
 
+		@Override
 		public ISerState createPush(SerializerPDA pda, ISerState token) {
 			return new SerializerPDAState(token.getGrammarElement(), SerStateType.PUSH);
 		}
 
+		@Override
 		public ISerState createState(SerializerPDA nfa, ISerState token) {
 			return new SerializerPDAState(token.getGrammarElement(), SerStateType.ELEMENT);
 		}
 
+		@Override
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
 			((SerializerPDA.SerializerPDAState) owner).followers = Lists.newArrayList(followers);
 		}
@@ -52,24 +57,29 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 	public static class SerializerPDAElementFactory implements
 			PdaFactory<SerializerPDA, ISerState, RuleCall, AbstractElement> {
 
+		@Override
 		public SerializerPDA create(AbstractElement start, AbstractElement stop) {
 			SerializerPDA.SerializerPDAState s1 = new SerializerPDAState(start, SerStateType.START);
 			SerializerPDA.SerializerPDAState s2 = new SerializerPDAState(stop, SerStateType.STOP);
 			return new SerializerPDA(s1, s2);
 		}
 
+		@Override
 		public ISerState createPop(SerializerPDA pda, AbstractElement token) {
 			return new SerializerPDAState(token, SerStateType.POP);
 		}
 
+		@Override
 		public ISerState createPush(SerializerPDA pda, AbstractElement token) {
 			return new SerializerPDAState(token, SerStateType.PUSH);
 		}
 
+		@Override
 		public ISerState createState(SerializerPDA nfa, AbstractElement token) {
 			return new SerializerPDAState(token, SerStateType.ELEMENT);
 		}
 
+		@Override
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
 			((SerializerPDA.SerializerPDAState) owner).followers = Lists.newArrayList(followers);
 		}
@@ -77,6 +87,7 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 
 	public static class SerializerPDAGetToken implements Function<ISerState, AbstractElement> {
 
+		@Override
 		public AbstractElement apply(ISerState input) {
 			return input.getGrammarElement();
 		}
@@ -102,14 +113,17 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 			return grammarElement == s.grammarElement && type == s.type;
 		}
 
+		@Override
 		public List<ISerState> getFollowers() {
 			return followers;
 		}
 
+		@Override
 		public AbstractElement getGrammarElement() {
 			return grammarElement;
 		}
 
+		@Override
 		public SerStateType getType() {
 			return type;
 		}
@@ -155,24 +169,29 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 		return new NfaUtil().equalsIgnoreOrder(this, (SerializerPDA) obj);
 	}
 
+	@Override
 	public Iterable<ISerState> getFollowers(ISerState state) {
 		return ((SerializerPDA.SerializerPDAState) state).followers;
 	}
 
+	@Override
 	public RuleCall getPop(ISerState state) {
 		SerializerPDA.SerializerPDAState s = (SerializerPDA.SerializerPDAState) state;
 		return s.type == SerStateType.POP ? (RuleCall) s.grammarElement : null;
 	}
 
+	@Override
 	public RuleCall getPush(ISerState state) {
 		SerializerPDA.SerializerPDAState s = (SerializerPDA.SerializerPDAState) state;
 		return s.type == SerStateType.PUSH ? (RuleCall) s.grammarElement : null;
 	}
 
+	@Override
 	public ISerState getStart() {
 		return start;
 	}
 
+	@Override
 	public ISerState getStop() {
 		return stop;
 	}

@@ -31,10 +31,12 @@ public class ShowSyntheticMembersContribution extends AbstractFilterOutlineContr
 	public IFilter getFilter() {
 		if (filter == null) {
 			filter = new IFilter() {
+				@Override
 				public boolean apply(IOutlineNode node) {
 					return ShowSyntheticMembersContribution.this.apply(node);
 				}
 
+				@Override
 				public boolean isEnabled() {
 					return !isPropertySet();
 				}

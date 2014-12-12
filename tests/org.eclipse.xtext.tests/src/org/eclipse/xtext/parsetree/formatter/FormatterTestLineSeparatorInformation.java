@@ -23,6 +23,7 @@ public class FormatterTestLineSeparatorInformation implements ILineSeparatorInfo
 		this.lineSeparator = lineSeparator;
 	}
 	
+	@Override
 	public String getLineSeparator() {
 		return lineSeparator;
 	}

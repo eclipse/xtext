@@ -32,6 +32,7 @@ public class EclipsePreferencesProvider implements IPreferenceValuesProvider {
 	private final static Logger log = Logger.getLogger(EclipsePreferencesProvider.class);
 	@Inject IPreferenceStoreAccess access;
 	
+	@Override
 	public IPreferenceValues getPreferenceValues(Resource context) {
 		final IProject project = getProject(context);
 		final IPreferenceStore store = project != null ?
@@ -41,6 +42,7 @@ public class EclipsePreferencesProvider implements IPreferenceValuesProvider {
 		final Map<String, String> preferenceCache = Maps.newHashMap();
 		
 		return new IPreferenceValues() {
+			@Override
 			public String getPreference(PreferenceKey key) {
 				try {
 					String id = key.getId();

@@ -151,7 +151,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -161,7 +162,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Definition()
+  @Override
+public EReference getModel_Definition()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -171,7 +173,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPackageDefinition()
+  @Override
+public EClass getPackageDefinition()
   {
     return packageDefinitionEClass;
   }
@@ -181,7 +184,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPackageDefinition_Namespace()
+  @Override
+public EAttribute getPackageDefinition_Namespace()
   {
     return (EAttribute)packageDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -191,7 +195,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPackageDefinition_Contents()
+  @Override
+public EReference getPackageDefinition_Contents()
   {
     return (EReference)packageDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -201,7 +206,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getObject()
+  @Override
+public EClass getObject()
   {
     return objectEClass;
   }
@@ -211,7 +217,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_Enabled()
+  @Override
+public EAttribute getObject_Enabled()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(0);
   }
@@ -221,7 +228,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_Abstract()
+  @Override
+public EAttribute getObject_Abstract()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(1);
   }
@@ -231,7 +239,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_Name()
+  @Override
+public EAttribute getObject_Name()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(2);
   }
@@ -241,7 +250,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getObject_Parent()
+  @Override
+public EReference getObject_Parent()
   {
     return (EReference)objectEClass.getEStructuralFeatures().get(3);
   }
@@ -251,7 +261,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_ShortDescription()
+  @Override
+public EAttribute getObject_ShortDescription()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(4);
   }
@@ -261,7 +272,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_LongDescription()
+  @Override
+public EAttribute getObject_LongDescription()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(5);
   }
@@ -271,7 +283,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_SerialVersionUID()
+  @Override
+public EAttribute getObject_SerialVersionUID()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(6);
   }
@@ -281,7 +294,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getObject_Cloneable()
+  @Override
+public EAttribute getObject_Cloneable()
   {
     return (EAttribute)objectEClass.getEStructuralFeatures().get(7);
   }
@@ -291,7 +305,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getObject_Features()
+  @Override
+public EReference getObject_Features()
   {
     return (EReference)objectEClass.getEStructuralFeatures().get(8);
   }
@@ -301,7 +316,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFeature()
+  @Override
+public EClass getFeature()
   {
     return featureEClass;
   }
@@ -311,7 +327,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFeature_Name()
+  @Override
+public EAttribute getFeature_Name()
   {
     return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
   }
@@ -321,7 +338,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAttribute()
+  @Override
+public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -331,7 +349,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Type()
+  @Override
+public EAttribute getAttribute_Type()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -341,7 +360,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getReference()
+  @Override
+public EClass getReference()
   {
     return referenceEClass;
   }
@@ -351,7 +371,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReference_Type()
+  @Override
+public EReference getReference_Type()
   {
     return (EReference)referenceEClass.getEStructuralFeatures().get(0);
   }
@@ -361,7 +382,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getReference_Many()
+  @Override
+public EAttribute getReference_Many()
   {
     return (EAttribute)referenceEClass.getEStructuralFeatures().get(1);
   }
@@ -371,7 +393,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getReference_ShortDescription()
+  @Override
+public EAttribute getReference_ShortDescription()
   {
     return (EAttribute)referenceEClass.getEStructuralFeatures().get(2);
   }
@@ -381,7 +404,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getReference_LongDescription()
+  @Override
+public EAttribute getReference_LongDescription()
   {
     return (EAttribute)referenceEClass.getEStructuralFeatures().get(3);
   }
@@ -391,7 +415,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAttribut()
+  @Override
+public EClass getAttribut()
   {
     return attributEClass;
   }
@@ -401,7 +426,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribut_Type()
+  @Override
+public EAttribute getAttribut_Type()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(0);
   }
@@ -411,7 +437,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribut_ShortDescription()
+  @Override
+public EAttribute getAttribut_ShortDescription()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(1);
   }
@@ -421,7 +448,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribut_LongDescription()
+  @Override
+public EAttribute getAttribut_LongDescription()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(2);
   }
@@ -431,7 +459,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAttribut_ConstraintDefinitions()
+  @Override
+public EReference getAttribut_ConstraintDefinitions()
   {
     return (EReference)attributEClass.getEStructuralFeatures().get(3);
   }
@@ -441,7 +470,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribut_Required()
+  @Override
+public EAttribute getAttribut_Required()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(4);
   }
@@ -451,7 +481,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribut_Technical()
+  @Override
+public EAttribute getAttribut_Technical()
   {
     return (EAttribute)attributEClass.getEStructuralFeatures().get(5);
   }
@@ -461,7 +492,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getConstraintDefinition()
+  @Override
+public EClass getConstraintDefinition()
   {
     return constraintDefinitionEClass;
   }
@@ -471,7 +503,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getConstraintDefinition_Type()
+  @Override
+public EAttribute getConstraintDefinition_Type()
   {
     return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(0);
   }
@@ -481,7 +514,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getConstraintDefinition_Parameters()
+  @Override
+public EAttribute getConstraintDefinition_Parameters()
   {
     return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -491,7 +525,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getConstraintDefinition_Message()
+  @Override
+public EAttribute getConstraintDefinition_Message()
   {
     return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -501,7 +536,8 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug304681TestLanguageFactory getBug304681TestLanguageFactory()
+  @Override
+public Bug304681TestLanguageFactory getBug304681TestLanguageFactory()
   {
     return (Bug304681TestLanguageFactory)getEFactoryInstance();
   }

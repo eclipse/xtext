@@ -73,6 +73,7 @@ public class SimplestructureFactoryImpl extends EFactoryImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public A createA() {
 		AImpl a = new AImpl();
 		return a;
@@ -83,6 +84,7 @@ public class SimplestructureFactoryImpl extends EFactoryImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public B createB() {
 		BImpl b = new BImpl();
 		return b;
@@ -93,6 +95,7 @@ public class SimplestructureFactoryImpl extends EFactoryImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public root createroot() {
 		rootImpl root = new rootImpl();
 		return root;
@@ -103,6 +106,7 @@ public class SimplestructureFactoryImpl extends EFactoryImpl implements Simplest
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimplestructurePackage getSimplestructurePackage() {
 		return (SimplestructurePackage)getEPackage();
 	}

@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
  */
 public abstract class AbstractTextSegment implements ITextSegment {
 
+	@Override
 	public int compareTo(ITextSegment o) {
 		int cmp1 = getOffset() - o.getOffset();
 		if (cmp1 != 0)
@@ -33,11 +34,13 @@ public abstract class AbstractTextSegment implements ITextSegment {
 		return 0;
 	}
 
+	@Override
 	public boolean contains(int offset) {
 		int thisOffset = this.getOffset();
 		return offset >= thisOffset && offset < thisOffset + this.getLength();
 	}
 
+	@Override
 	public boolean contains(ITextRegion other) {
 		int offset = getOffset();
 		int length = getLength();
@@ -52,18 +55,22 @@ public abstract class AbstractTextSegment implements ITextSegment {
 		return getOffset() == other.getOffset() && getLength() == other.getLength();
 	}
 
+	@Override
 	public int getEndOffset() {
 		return getOffset() + getLength();
 	}
 
+	@Override
 	public ITextSegment getIndentation() {
 		return getTextRegionAccess().indentationRegion(getOffset());
 	}
 
+	@Override
 	public int getLineCount() {
 		return Strings.countLines(getText());
 	}
 
+	@Override
 	public String getText() {
 		ITextRegionAccess tokenAccess = getTextRegionAccess();
 		if (tokenAccess != null)
@@ -76,10 +83,12 @@ public abstract class AbstractTextSegment implements ITextSegment {
 		return getOffset() + (31 * getLength());
 	}
 
+	@Override
 	public boolean isMultiline() {
 		return getText().contains("\n");
 	}
 
+	@Override
 	public ITextRegion merge(ITextRegion other) {
 		if (contains(other))
 			return this;
@@ -92,6 +101,7 @@ public abstract class AbstractTextSegment implements ITextSegment {
 		return new TextRegion(newOffset, newLength);
 	}
 
+	@Override
 	public List<ITextSegment> splitIntoLines() {
 		ITextRegionAccess access = getTextRegionAccess();
 		List<ITextSegment> result = Lists.newArrayList();

@@ -76,6 +76,7 @@ public class ExtractMethodUserInputPage extends UserInputWizardPage {
 		this.refactoring = refactoring;
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite result = new Composite(parent, SWT.NONE);
 		setControl(result);
@@ -97,6 +98,7 @@ public class ExtractMethodUserInputPage extends UserInputWizardPage {
 		textField = new Text(result, SWT.BORDER);
 		textField.setText(refactoring.getMethodName());
 		textField.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				textModified(getText());
 			}
@@ -139,14 +141,17 @@ public class ExtractMethodUserInputPage extends UserInputWizardPage {
 		if (!refactoring.getParameterInfos().isEmpty()) {
 			ChangeParametersControl cp = new ChangeParametersControl(result, SWT.NONE,
 					"Parameters", new IParameterListChangeListener() {
+						@Override
 						public void parameterChanged(ParameterInfo parameter) {
 							parameterModified();
 						}
 	
+						@Override
 						public void parameterListChanged() {
 							parameterModified();
 						}
 	
+						@Override
 						public void parameterAdded(ParameterInfo parameter) {
 							updatePreview();
 						}
@@ -188,6 +193,7 @@ public class ExtractMethodUserInputPage extends UserInputWizardPage {
 		gridData.horizontalSpan = 2;
 		previewLabel.setLayoutData(gridData);
 		signaturePreview = editorFactory.newEditor(new IEditedResourceProvider() {
+			@Override
 			public XtextResource createResource() {
 				URI resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(refactoring.getXtendClass()).trimFragment();
 				IProject project = projectUtil.getProject(resourceURI);

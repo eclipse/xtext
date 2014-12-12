@@ -73,7 +73,8 @@ public class DoubleWhereEntryImpl extends NumericAttributeWhereEntryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public double getValue()
+  @Override
+public double getValue()
   {
     return value;
   }
@@ -83,7 +84,8 @@ public class DoubleWhereEntryImpl extends NumericAttributeWhereEntryImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(double newValue)
+  @Override
+public void setValue(double newValue)
   {
     double oldValue = value;
     value = newValue;

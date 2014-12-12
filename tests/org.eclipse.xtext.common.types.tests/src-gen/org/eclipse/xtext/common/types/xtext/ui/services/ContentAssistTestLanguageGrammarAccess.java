@@ -30,6 +30,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Model:
 		//	imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//imports+=Import* generateDirective=GenerateDirective? referenceHolder=ReferenceHolder?
@@ -76,6 +77,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ReferenceHolder:
 		//	"default" defaultReference=[types::JvmType|FQN] | "custom" customizedReference=[types::JvmType|FQN] | "subtype"
 		//	subtypeReference=[types::JvmType|FQN];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"default" defaultReference=[types::JvmType|FQN] | "custom" customizedReference=[types::JvmType|FQN] | "subtype"
@@ -137,6 +139,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//GenerateDirective:
 		//	"generate" typeName=QN;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"generate" typeName=QN
@@ -161,6 +164,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Import:
 		//	"import" importedNamespace=ImportedFQN;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=ImportedFQN
@@ -184,6 +188,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ImportedFQN:
 		//	FQN ".*"?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//FQN ".*"?
@@ -206,6 +211,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//FQN:
 		//	QN ("$" ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//QN ("$" ID)*
@@ -234,6 +240,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//QN:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -289,6 +296,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

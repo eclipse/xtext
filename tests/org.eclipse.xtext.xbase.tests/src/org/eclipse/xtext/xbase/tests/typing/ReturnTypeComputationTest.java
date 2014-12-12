@@ -158,6 +158,7 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 		final XExpression expr = expression(expression);
 		List<LightweightTypeReference> exceptions = typeResolver.resolveTypes(expr).getThrownExceptions(expr);
 		ArrayList<String> actual = newArrayList(transform(exceptions, new Function<LightweightTypeReference, String>() {
+			@Override
 			public String apply(LightweightTypeReference from) {
 				return from.getIdentifier();
 			}

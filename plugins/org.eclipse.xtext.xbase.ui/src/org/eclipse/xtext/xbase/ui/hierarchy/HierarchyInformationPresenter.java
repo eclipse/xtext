@@ -30,6 +30,7 @@ public class HierarchyInformationPresenter extends InformationPresenter {
 
 	protected static IInformationControlCreator getHierarchyPresenterControlCreator() {
 		return new IInformationControlCreator() {
+			@Override
 			public IInformationControl createInformationControl(Shell parent) {
 				int shellStyle = SWT.RESIZE;
 				int treeStyle = SWT.V_SCROLL | SWT.H_SCROLL;

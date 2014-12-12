@@ -44,6 +44,7 @@ public abstract class AbstractGlobalScopeProvider implements IGlobalScopeProvide
 		return getScope(resource, reference, null);
 	}
 	
+	@Override
 	public IScope getScope(Resource resource, final EReference reference, Predicate<IEObjectDescription> filter) {
 		return getScope(resource, isIgnoreCase(reference), reference.getEReferenceType(), filter);
 	}

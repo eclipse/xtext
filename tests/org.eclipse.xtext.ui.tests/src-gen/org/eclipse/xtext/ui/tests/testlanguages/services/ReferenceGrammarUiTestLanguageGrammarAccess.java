@@ -41,6 +41,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		//Spielplatz:
 		//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
 		//	familie+=Familie)* "}")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
@@ -104,6 +105,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Person:
 		//	Kind | Erwachsener;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Kind | Erwachsener
@@ -129,6 +131,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Kind:
 		//	"kind" "(" name=ID age=INT ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"kind" "(" name=ID age=INT ")"
@@ -169,6 +172,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Erwachsener:
 		//	"erwachsener" "(" name=ID age=INT ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"erwachsener" "(" name=ID age=INT ")"
@@ -209,6 +213,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Spielzeug:
 		//	"spielzeug" "(" name=ID farbe=Farbe ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"spielzeug" "(" name=ID farbe=Farbe ")"
@@ -247,6 +252,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Farbe:
 		//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//wert=("ROT" | "BLAU" | "GELB" | "GRÜN")
@@ -297,6 +303,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 		//Familie:
 		//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 		//	kinder+=[Kind])* ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
@@ -414,6 +421,7 @@ public class ReferenceGrammarUiTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

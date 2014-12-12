@@ -94,7 +94,8 @@ public class PackageDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNamespace()
+  @Override
+public String getNamespace()
   {
     return namespace;
   }
@@ -104,7 +105,8 @@ public class PackageDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNamespace(String newNamespace)
+  @Override
+public void setNamespace(String newNamespace)
   {
     String oldNamespace = namespace;
     namespace = newNamespace;
@@ -117,7 +119,8 @@ public class PackageDefinitionImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object> getContents()
+  @Override
+public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Object> getContents()
   {
     if (contents == null)
     {

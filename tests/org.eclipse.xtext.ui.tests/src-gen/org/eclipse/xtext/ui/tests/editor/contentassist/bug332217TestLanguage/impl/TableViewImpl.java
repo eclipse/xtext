@@ -152,7 +152,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -162,7 +163,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -175,7 +177,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameter getContent()
+  @Override
+public Parameter getContent()
   {
     return content;
   }
@@ -202,7 +205,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setContent(Parameter newContent)
+  @Override
+public void setContent(Parameter newContent)
   {
     if (newContent != content)
     {
@@ -223,7 +227,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getTitle()
+  @Override
+public ScalarExpression getTitle()
   {
     return title;
   }
@@ -250,7 +255,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTitle(ScalarExpression newTitle)
+  @Override
+public void setTitle(ScalarExpression newTitle)
   {
     if (newTitle != title)
     {
@@ -271,7 +277,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getTitleImage()
+  @Override
+public ScalarExpression getTitleImage()
   {
     return titleImage;
   }
@@ -298,7 +305,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTitleImage(ScalarExpression newTitleImage)
+  @Override
+public void setTitleImage(ScalarExpression newTitleImage)
   {
     if (newTitleImage != titleImage)
     {
@@ -319,7 +327,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public TableViewStyle getStyle()
+  @Override
+public TableViewStyle getStyle()
   {
     return style;
   }
@@ -329,7 +338,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStyle(TableViewStyle newStyle)
+  @Override
+public void setStyle(TableViewStyle newStyle)
   {
     TableViewStyle oldStyle = style;
     style = newStyle == null ? STYLE_EDEFAULT : newStyle;
@@ -342,7 +352,8 @@ public class TableViewImpl extends MinimalEObjectImpl.Container implements Table
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Section> getSections()
+  @Override
+public EList<Section> getSections()
   {
     if (sections == null)
     {

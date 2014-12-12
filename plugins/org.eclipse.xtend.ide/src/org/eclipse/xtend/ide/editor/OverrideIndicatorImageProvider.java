@@ -28,10 +28,12 @@ public class OverrideIndicatorImageProvider implements IAnnotationImageProvider 
 		this.xtendImages = xtendImages;
 	}
 
+	@Override
 	public Image getManagedImage(Annotation annotation) {
 		return null;
 	}
 
+	@Override
 	public String getImageDescriptorId(Annotation annotation) {
 		if (!(annotation instanceof OverrideIndicatorAnnotation)) {
 			return null;
@@ -40,6 +42,7 @@ public class OverrideIndicatorImageProvider implements IAnnotationImageProvider 
 		return overrideIndicatorAnnotation.isOverwriteIndicator() ? OVERRIDE_IMG_DESC_ID : IMPLEMENTS_IMG_DESC_ID;
 	}
 
+	@Override
 	public ImageDescriptor getImageDescriptor(String imageDescritporId) {
 		ImageDescriptor imageDescriptor = null;
 		if (IMPLEMENTS_IMG_DESC_ID.equals(imageDescritporId)) {

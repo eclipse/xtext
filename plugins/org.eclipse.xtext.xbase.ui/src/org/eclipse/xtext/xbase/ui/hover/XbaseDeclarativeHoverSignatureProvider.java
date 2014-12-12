@@ -216,6 +216,7 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	protected String internalGetSignature(EObject object, boolean typeAtEnd) {
 		PolymorphicDispatcher<String> polymorphicDispatcher = new PolymorphicDispatcher<String>("_signature", 2, 2,
 				Collections.singletonList(this), new ErrorHandler<String>() {
+					@Override
 					public String handle(Object[] params, Throwable throwable) {
 						return null;
 					}

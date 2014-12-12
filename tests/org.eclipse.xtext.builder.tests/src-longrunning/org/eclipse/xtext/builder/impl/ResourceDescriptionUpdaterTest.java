@@ -68,6 +68,7 @@ public class ResourceDescriptionUpdaterTest extends AbstractParticipatingBuilder
 			final URI expected = URI.createPlatformResourceURI(projectName + "/" + SRC_FOLDER + "/" + fileName + F_EXT, true);
 			Iterables.find(getContext().getDeltas(), new Predicate<IResourceDescription.Delta>() {
 
+				@Override
 				public boolean apply(Delta actual) {
 					return expected.equals(actual.getUri());
 				}

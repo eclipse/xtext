@@ -42,6 +42,7 @@ public class DefaultResourceDescriptionManagerTest extends Assert {
 		resource = new ResourceImpl();
 		resource.getContents().add(copy);
 		IQualifiedNameProvider nameProvider = new IQualifiedNameProvider.AbstractImpl() {
+			@Override
 			public QualifiedName getFullyQualifiedName(EObject obj) {
 				if (obj instanceof ENamedElement)
 					return QualifiedName.create(((ENamedElement) obj).getName());

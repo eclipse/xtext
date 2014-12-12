@@ -78,7 +78,8 @@ public class SelectEntryImpl extends MinimalEObjectImpl.Container implements Sel
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry getSelect()
+  @Override
+public FromEntry getSelect()
   {
     if (select != null && select.eIsProxy())
     {
@@ -108,7 +109,8 @@ public class SelectEntryImpl extends MinimalEObjectImpl.Container implements Sel
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSelect(FromEntry newSelect)
+  @Override
+public void setSelect(FromEntry newSelect)
   {
     FromEntry oldSelect = select;
     select = newSelect;
@@ -121,7 +123,8 @@ public class SelectEntryImpl extends MinimalEObjectImpl.Container implements Sel
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute()
+  @Override
+public EAttribute getAttribute()
   {
     if (attribute != null && attribute.eIsProxy())
     {
@@ -151,7 +154,8 @@ public class SelectEntryImpl extends MinimalEObjectImpl.Container implements Sel
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAttribute(EAttribute newAttribute)
+  @Override
+public void setAttribute(EAttribute newAttribute)
   {
     EAttribute oldAttribute = attribute;
     attribute = newAttribute;

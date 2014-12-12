@@ -106,6 +106,7 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 					newTargetElement);
 		return new RefTextEvaluator() {
 
+			@Override
 			public boolean isValid(IEObjectDescription newTarget) {
 				IScope scope = linkingScopeProvider.getScope(referringElement, reference);
 				IEObjectDescription element = scope.getSingleElement(newTarget.getName());
@@ -120,6 +121,7 @@ public class JvmModelReferenceUpdater extends DefaultReferenceUpdater {
 							&& element.getEObjectURI().equals(newTarget.getEObjectURI());
 			}
 
+			@Override
 			public boolean isBetterThan(String newText, String currentText) {
 				ReferenceSyntax newSyntax = getReferenceSyntax(newText);
 				ReferenceSyntax currentSyntax = getReferenceSyntax(currentText);

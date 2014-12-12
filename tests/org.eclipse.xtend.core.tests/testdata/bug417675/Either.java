@@ -333,51 +333,63 @@ public abstract class Either<L, R> implements Serializable {
    * Holds the common implementation for both projections.
    */
   abstract class AbstractProjection<A, B> implements Projection<A, B, L, R> {
-    public final Iterator<A> iterator() {
+    @Override
+	public final Iterator<A> iterator() {
       return Collections.<A>emptyList().iterator();
     }
 
-    public final Either<L, R> either() {
+    @Override
+	public final Either<L, R> either() {
       return Either.this;
     }
 
-    public final boolean isEmpty() {
+    @Override
+	public final boolean isEmpty() {
       return !isDefined();
     }
 
-    public final Optional<A> toOption() {
+    @Override
+	public final Optional<A> toOption() {
       return isDefined() ? Optional.of(get()) : Optional.<A> absent();
     }
 
-    public final boolean exists(final Predicate<? super A> f) {
+    @Override
+	public final boolean exists(final Predicate<? super A> f) {
       return isDefined() && f.apply(get());
     }
 
-    final public A getOrNull() {
+    @Override
+	final public A getOrNull() {
       return isDefined() ? get() : null;
     }
 
-    public final boolean forall(final Predicate<? super A> f) {
+    @Override
+	public final boolean forall(final Predicate<? super A> f) {
       return isEmpty() || f.apply(get());
     }
 
-    public final A getOrError(final Supplier<String> err) {
+    @Override
+	public final A getOrError(final Supplier<String> err) {
       return toOption().get();
     }
 
-    public <X extends Throwable> A getOrThrow(Supplier<X> ifUndefined) throws X {
+    @Override
+	public <X extends Throwable> A getOrThrow(Supplier<X> ifUndefined) throws X {
       return toOption().get();
     }
 
-    public final A getOrElse(final Supplier<? extends A> a) {
+    @Override
+	public final A getOrElse(final Supplier<? extends A> a) {
       return isDefined() ? get() : a.get();
     }
 
-    public final <X extends A> A getOrElse(final X x) {
+    @Override
+	public final <X extends A> A getOrElse(final X x) {
       return isDefined() ? get() : x;
     }
 
-    public final void foreach(final Effect<? super A> f) {
+    @Override
+	public final void foreach(final Effect<? super A> f) {
       if (isDefined()) {
         f.apply(get());
       }
@@ -391,15 +403,18 @@ public abstract class Either<L, R> implements Serializable {
   public final class LeftProjection extends AbstractProjection<L, R> implements Projection<L, R, L, R> {
     private LeftProjection() {}
 
-    public L get() {
+    @Override
+	public L get() {
       return getLeft();
     }
 
-    public boolean isDefined() {
+    @Override
+	public boolean isDefined() {
       return isLeft();
     }
 
-    public L on(final Function<? super R, ? extends L> f) {
+    @Override
+	public L on(final Function<? super R, ? extends L> f) {
       return isLeft() ? get() : f.apply(right().get());
     }
 
@@ -473,7 +488,8 @@ public abstract class Either<L, R> implements Serializable {
      */
     public <X> Either<X, R> apply(final Either<Function<L, X>, R> either) {
       return either.left().flatMap(new Function<Function<L, X>, Either<X, R>>() {
-        public Either<X, R> apply(final Function<L, X> f) {
+        @Override
+		public Either<X, R> apply(final Function<L, X> f) {
           return map(f);
         }
       });
@@ -497,15 +513,18 @@ public abstract class Either<L, R> implements Serializable {
   public final class RightProjection extends AbstractProjection<R, L> implements Projection<R, L, L, R> {
     private RightProjection() {}
 
-    public R get() {
+    @Override
+	public R get() {
       return getRight();
     }
 
-    public boolean isDefined() {
+    @Override
+	public boolean isDefined() {
       return isRight();
     }
 
-    public R on(final Function<? super L, ? extends R> f) {
+    @Override
+	public R on(final Function<? super L, ? extends R> f) {
       return isRight() ? get() : f.apply(left().get());
     }
 
@@ -579,7 +598,8 @@ public abstract class Either<L, R> implements Serializable {
      */
     public <X> Either<L, X> apply(final Either<L, Function<R, X>> either) {
       return either.right().flatMap(new Function<Function<R, X>, Either<L, X>>() {
-        public Either<L, X> apply(final Function<R, X> f) {
+        @Override
+		public Either<L, X> apply(final Function<R, X> f) {
           return map(f);
         }
       });

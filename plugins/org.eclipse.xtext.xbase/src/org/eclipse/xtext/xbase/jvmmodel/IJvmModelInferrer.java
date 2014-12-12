@@ -82,6 +82,7 @@ public interface IJvmModelInferrer {
 	 */
 	public static class NullImpl implements IJvmModelInferrer {
 
+		@Override
 		public void infer(EObject e, /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		}
 

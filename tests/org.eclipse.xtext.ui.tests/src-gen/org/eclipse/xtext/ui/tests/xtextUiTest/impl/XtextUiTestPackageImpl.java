@@ -272,7 +272,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGrammar()
+  @Override
+public EClass getGrammar()
   {
     return grammarEClass;
   }
@@ -282,7 +283,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGrammar_Name()
+  @Override
+public EAttribute getGrammar_Name()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(0);
   }
@@ -292,7 +294,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGrammar_UsedGrammars()
+  @Override
+public EReference getGrammar_UsedGrammars()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(1);
   }
@@ -302,7 +305,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGrammar_DefinesHiddenTokens()
+  @Override
+public EAttribute getGrammar_DefinesHiddenTokens()
   {
     return (EAttribute)grammarEClass.getEStructuralFeatures().get(2);
   }
@@ -312,7 +316,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGrammar_HiddenTokens()
+  @Override
+public EReference getGrammar_HiddenTokens()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(3);
   }
@@ -322,7 +327,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGrammar_MetamodelDeclarations()
+  @Override
+public EReference getGrammar_MetamodelDeclarations()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(4);
   }
@@ -332,7 +338,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGrammar_Rules()
+  @Override
+public EReference getGrammar_Rules()
   {
     return (EReference)grammarEClass.getEStructuralFeatures().get(5);
   }
@@ -342,7 +349,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractRule()
+  @Override
+public EClass getAbstractRule()
   {
     return abstractRuleEClass;
   }
@@ -352,7 +360,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAbstractRule_Name()
+  @Override
+public EAttribute getAbstractRule_Name()
   {
     return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -362,7 +371,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAbstractRule_Type()
+  @Override
+public EReference getAbstractRule_Type()
   {
     return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
   }
@@ -372,7 +382,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAbstractRule_Alternatives()
+  @Override
+public EReference getAbstractRule_Alternatives()
   {
     return (EReference)abstractRuleEClass.getEStructuralFeatures().get(2);
   }
@@ -382,7 +393,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractMetamodelDeclaration()
+  @Override
+public EClass getAbstractMetamodelDeclaration()
   {
     return abstractMetamodelDeclarationEClass;
   }
@@ -392,7 +404,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAbstractMetamodelDeclaration_EPackage()
+  @Override
+public EReference getAbstractMetamodelDeclaration_EPackage()
   {
     return (EReference)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -402,7 +415,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAbstractMetamodelDeclaration_Alias()
+  @Override
+public EAttribute getAbstractMetamodelDeclaration_Alias()
   {
     return (EAttribute)abstractMetamodelDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -412,7 +426,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGeneratedMetamodel()
+  @Override
+public EClass getGeneratedMetamodel()
   {
     return generatedMetamodelEClass;
   }
@@ -422,7 +437,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGeneratedMetamodel_Name()
+  @Override
+public EAttribute getGeneratedMetamodel_Name()
   {
     return (EAttribute)generatedMetamodelEClass.getEStructuralFeatures().get(0);
   }
@@ -432,7 +448,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getReferencedMetamodel()
+  @Override
+public EClass getReferencedMetamodel()
   {
     return referencedMetamodelEClass;
   }
@@ -442,7 +459,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getParserRule()
+  @Override
+public EClass getParserRule()
   {
     return parserRuleEClass;
   }
@@ -452,7 +470,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParserRule_DefinesHiddenTokens()
+  @Override
+public EAttribute getParserRule_DefinesHiddenTokens()
   {
     return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -462,7 +481,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParserRule_HiddenTokens()
+  @Override
+public EReference getParserRule_HiddenTokens()
   {
     return (EReference)parserRuleEClass.getEStructuralFeatures().get(1);
   }
@@ -472,7 +492,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypeRef()
+  @Override
+public EClass getTypeRef()
   {
     return typeRefEClass;
   }
@@ -482,7 +503,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeRef_Metamodel()
+  @Override
+public EReference getTypeRef_Metamodel()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -492,7 +514,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeRef_Classifier()
+  @Override
+public EReference getTypeRef_Classifier()
   {
     return (EReference)typeRefEClass.getEStructuralFeatures().get(1);
   }
@@ -502,7 +525,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractElement()
+  @Override
+public EClass getAbstractElement()
   {
     return abstractElementEClass;
   }
@@ -512,7 +536,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAbstractElement_Cardinality()
+  @Override
+public EAttribute getAbstractElement_Cardinality()
   {
     return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
   }
@@ -522,7 +547,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAction()
+  @Override
+public EClass getAction()
   {
     return actionEClass;
   }
@@ -532,7 +558,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAction_Type()
+  @Override
+public EReference getAction_Type()
   {
     return (EReference)actionEClass.getEStructuralFeatures().get(0);
   }
@@ -542,7 +569,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAction_Feature()
+  @Override
+public EAttribute getAction_Feature()
   {
     return (EAttribute)actionEClass.getEStructuralFeatures().get(1);
   }
@@ -552,7 +580,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAction_Operator()
+  @Override
+public EAttribute getAction_Operator()
   {
     return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
   }
@@ -562,7 +591,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getKeyword()
+  @Override
+public EClass getKeyword()
   {
     return keywordEClass;
   }
@@ -572,7 +602,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getKeyword_Value()
+  @Override
+public EAttribute getKeyword_Value()
   {
     return (EAttribute)keywordEClass.getEStructuralFeatures().get(0);
   }
@@ -582,7 +613,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRuleCall()
+  @Override
+public EClass getRuleCall()
   {
     return ruleCallEClass;
   }
@@ -592,7 +624,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRuleCall_Rule()
+  @Override
+public EReference getRuleCall_Rule()
   {
     return (EReference)ruleCallEClass.getEStructuralFeatures().get(0);
   }
@@ -602,7 +635,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAssignment()
+  @Override
+public EClass getAssignment()
   {
     return assignmentEClass;
   }
@@ -612,7 +646,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAssignment_Feature()
+  @Override
+public EAttribute getAssignment_Feature()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(0);
   }
@@ -622,7 +657,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAssignment_Operator()
+  @Override
+public EAttribute getAssignment_Operator()
   {
     return (EAttribute)assignmentEClass.getEStructuralFeatures().get(1);
   }
@@ -632,7 +668,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssignment_Terminal()
+  @Override
+public EReference getAssignment_Terminal()
   {
     return (EReference)assignmentEClass.getEStructuralFeatures().get(2);
   }
@@ -642,7 +679,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCrossReference()
+  @Override
+public EClass getCrossReference()
   {
     return crossReferenceEClass;
   }
@@ -652,7 +690,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCrossReference_Type()
+  @Override
+public EReference getCrossReference_Type()
   {
     return (EReference)crossReferenceEClass.getEStructuralFeatures().get(0);
   }
@@ -662,7 +701,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCrossReference_Terminal()
+  @Override
+public EReference getCrossReference_Terminal()
   {
     return (EReference)crossReferenceEClass.getEStructuralFeatures().get(1);
   }
@@ -672,7 +712,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTerminalRule()
+  @Override
+public EClass getTerminalRule()
   {
     return terminalRuleEClass;
   }
@@ -682,7 +723,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAbstractNegatedToken()
+  @Override
+public EClass getAbstractNegatedToken()
   {
     return abstractNegatedTokenEClass;
   }
@@ -692,7 +734,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAbstractNegatedToken_Terminal()
+  @Override
+public EReference getAbstractNegatedToken_Terminal()
   {
     return (EReference)abstractNegatedTokenEClass.getEStructuralFeatures().get(0);
   }
@@ -702,7 +745,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNegatedToken()
+  @Override
+public EClass getNegatedToken()
   {
     return negatedTokenEClass;
   }
@@ -712,7 +756,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getUntilToken()
+  @Override
+public EClass getUntilToken()
   {
     return untilTokenEClass;
   }
@@ -722,7 +767,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWildcard()
+  @Override
+public EClass getWildcard()
   {
     return wildcardEClass;
   }
@@ -732,7 +778,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEnumRule()
+  @Override
+public EClass getEnumRule()
   {
     return enumRuleEClass;
   }
@@ -742,7 +789,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEnumLiteralDeclaration()
+  @Override
+public EClass getEnumLiteralDeclaration()
   {
     return enumLiteralDeclarationEClass;
   }
@@ -752,7 +800,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEnumLiteralDeclaration_EnumLiteral()
+  @Override
+public EReference getEnumLiteralDeclaration_EnumLiteral()
   {
     return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -762,7 +811,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEnumLiteralDeclaration_Literal()
+  @Override
+public EReference getEnumLiteralDeclaration_Literal()
   {
     return (EReference)enumLiteralDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -772,7 +822,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAlternatives()
+  @Override
+public EClass getAlternatives()
   {
     return alternativesEClass;
   }
@@ -782,7 +833,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAlternatives_Groups()
+  @Override
+public EReference getAlternatives_Groups()
   {
     return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
   }
@@ -792,7 +844,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGroup()
+  @Override
+public EClass getGroup()
   {
     return groupEClass;
   }
@@ -802,7 +855,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGroup_Tokens()
+  @Override
+public EReference getGroup_Tokens()
   {
     return (EReference)groupEClass.getEStructuralFeatures().get(0);
   }
@@ -812,7 +866,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCharacterRange()
+  @Override
+public EClass getCharacterRange()
   {
     return characterRangeEClass;
   }
@@ -822,7 +877,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCharacterRange_Left()
+  @Override
+public EReference getCharacterRange_Left()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(0);
   }
@@ -832,7 +888,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCharacterRange_Right()
+  @Override
+public EReference getCharacterRange_Right()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(1);
   }
@@ -842,7 +899,8 @@ public class XtextUiTestPackageImpl extends EPackageImpl implements XtextUiTestP
    * <!-- end-user-doc -->
    * @generated
    */
-  public XtextUiTestFactory getXtextUiTestFactory()
+  @Override
+public XtextUiTestFactory getXtextUiTestFactory()
   {
     return (XtextUiTestFactory)getEFactoryInstance();
   }

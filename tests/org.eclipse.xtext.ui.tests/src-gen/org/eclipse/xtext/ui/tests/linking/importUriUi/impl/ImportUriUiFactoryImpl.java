@@ -77,7 +77,8 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Main createMain()
+  @Override
+public Main createMain()
   {
     MainImpl main = new MainImpl();
     return main;
@@ -88,7 +89,8 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Import createImport()
+  @Override
+public Import createImport()
   {
     ImportImpl import_ = new ImportImpl();
     return import_;
@@ -99,7 +101,8 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
+  @Override
+public Type createType()
   {
     TypeImpl type = new TypeImpl();
     return type;
@@ -110,7 +113,8 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiPackage getImportUriUiPackage()
+  @Override
+public ImportUriUiPackage getImportUriUiPackage()
   {
     return (ImportUriUiPackage)getEPackage();
   }

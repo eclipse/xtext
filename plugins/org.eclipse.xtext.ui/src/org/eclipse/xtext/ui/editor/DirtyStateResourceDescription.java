@@ -58,6 +58,7 @@ public class DirtyStateResourceDescription extends AbstractResourceDescription {
 			this.delegate = delegate;
 		}
 		
+		@Override
 		public IResourceDescription getResourceDescription(Resource resource) {
 			try {
 				resource.eSetDeliver(false);
@@ -89,14 +90,17 @@ public class DirtyStateResourceDescription extends AbstractResourceDescription {
 			return result;
 		}
 
+		@Override
 		public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 			return delegate.createDelta(oldDescription, newDescription);
 		}
 
+		@Override
 		public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 			return delegate.isAffected(delta, candidate);
 		}
 
+		@Override
 		public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate,
 				IResourceDescriptions context) throws IllegalArgumentException {
 			return delegate.isAffected(deltas, candidate, context);
@@ -138,14 +142,17 @@ public class DirtyStateResourceDescription extends AbstractResourceDescription {
 		this.types = types;
 	}
 
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}

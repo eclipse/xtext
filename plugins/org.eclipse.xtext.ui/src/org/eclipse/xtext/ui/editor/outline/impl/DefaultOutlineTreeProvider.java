@@ -76,6 +76,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected PolymorphicDispatcher<Boolean> isLeafDispatcher = PolymorphicDispatcher.createForSingleTarget("_isLeaf",
 			1, 1, this);
 
+	@Override
 	public IOutlineNode createRoot(IXtextDocument document) {
 		DocumentRootNode documentNode = new DocumentRootNode(labelProvider.getImage(document),
 				labelProvider.getText(document), document, this);
@@ -86,6 +87,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator) {
 		try {
 			this.cancelIndicator = cancelIndicator;
@@ -103,6 +105,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 			throw new OperationCanceledException();
 	}
 	
+	@Override
 	public void createChildren(IOutlineNode parent, EObject modelElement) {
 		checkCanceled();
 		if (modelElement != null && parent.hasChildren())
@@ -169,6 +172,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 	protected boolean isLocalElement(IOutlineNode node, final EObject element) {
 		if (node instanceof AbstractOutlineNode) {
 			return ((AbstractOutlineNode) node).getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+				@Override
 				public Boolean exec(XtextResource state) throws Exception {
 					return element.eResource() == state;
 				}
@@ -193,6 +197,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 
 	protected boolean _isLeaf(final EObject modelElement) {
 		return !Iterables.any(modelElement.eClass().getEAllContainments(), new Predicate<EReference>() {
+			@Override
 			public boolean apply(EReference containmentRef) {
 				return modelElement.eIsSet(containmentRef);
 			}

@@ -25,6 +25,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	stmt=CopyFieldNameToVariableStmt;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//stmt=CopyFieldNameToVariableStmt
@@ -65,6 +66,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CopyFieldNameToVariableStmt:
 		//	"FIELD-NAME-TO-VARIABLE" ("," "SCREEN" "=" "(" line=INT "," column=INT ")" & "," "VAR" "=" name=ID & ("," "TYPE" "="
 		//	"REPLACE")?);
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"FIELD-NAME-TO-VARIABLE" ("," "SCREEN" "=" "(" line=INT "," column=INT ")" & "," "VAR" "=" name=ID & ("," "TYPE" "="
@@ -178,6 +180,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

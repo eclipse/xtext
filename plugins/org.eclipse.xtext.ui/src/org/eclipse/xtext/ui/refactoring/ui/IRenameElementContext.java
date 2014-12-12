@@ -60,30 +60,37 @@ public interface IRenameElementContext {
 			this.contextResourceURI = contextResourceURI;
 		}
 
+		@Override
 		public URI getContextResourceURI() {
 			return contextResourceURI;
 		}
 
+		@Override
 		public URI getTargetElementURI() {
 			return targetElementURI;
 		}
 
+		@Override
 		public EClass getTargetElementEClass() {
 			return targetElementEClass;
 		}
 
+		@Override
 		public IEditorPart getTriggeringEditor() {
 			return triggeringEditor;
 		}
 
+		@Override
 		public ISelection getTriggeringEditorSelection() {
 			return triggeringEditorSelection;
 		}
 
+		@Override
 		public IChangeRedirector getChangeRedirector() {
 			return changeRedirector;
 		}
 
+		@Override
 		public void setChangeRedirector(IChangeRedirector changeRedirector) {
 			this.changeRedirector = changeRedirector;
 		}

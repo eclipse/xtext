@@ -39,6 +39,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		return new Procedure0() {
+			@Override
 			public void apply() {
 				procedure.apply(argument);
 			}
@@ -59,6 +60,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		return new Procedure1<P2>() {
+			@Override
 			public void apply(P2 p) {
 				procedure.apply(argument, p);
 			}
@@ -79,6 +81,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		return new Procedure2<P2, P3>() {
+			@Override
 			public void apply(P2 p2, P3 p3) {
 				procedure.apply(argument, p2, p3);
 			}
@@ -100,6 +103,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		return new Procedure3<P2, P3, P4>() {
+			@Override
 			public void apply(P2 p2, P3 p3, P4 p4) {
 				procedure.apply(argument, p2, p3, p4);
 			}
@@ -121,6 +125,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		return new Procedure4<P2, P3, P4, P5>() {
+			@Override
 			public void apply(P2 p2, P3 p3, P4 p4, P5 p5) {
 				procedure.apply(argument, p2, p3, p4, p5);
 			}
@@ -142,6 +147,7 @@ import com.google.common.annotations.GwtCompatible;
 		if (procedure == null)
 			throw new NullPointerException("procedure");
 		return new Procedure5<P2, P3, P4, P5, P6>() {
+			@Override
 			public void apply(P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) {
 				procedure.apply(argument, p2, p3, p4, p5, p6);
 			}

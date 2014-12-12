@@ -76,7 +76,8 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -87,7 +88,8 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public Word createWord()
+  @Override
+public Word createWord()
   {
     WordImpl word = new WordImpl();
     return word;
@@ -98,7 +100,8 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EncodingTestPackage getEncodingTestPackage()
+  @Override
+public EncodingTestPackage getEncodingTestPackage()
   {
     return (EncodingTestPackage)getEPackage();
   }

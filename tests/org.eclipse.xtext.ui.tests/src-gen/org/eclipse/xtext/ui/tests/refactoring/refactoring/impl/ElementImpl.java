@@ -105,7 +105,8 @@ public class ElementImpl extends AbstractElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -115,7 +116,8 @@ public class ElementImpl extends AbstractElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -128,7 +130,8 @@ public class ElementImpl extends AbstractElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Element> getContained()
+  @Override
+public EList<Element> getContained()
   {
     if (contained == null)
     {
@@ -142,7 +145,8 @@ public class ElementImpl extends AbstractElementImpl implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Element> getReferenced()
+  @Override
+public EList<Element> getReferenced()
   {
     if (referenced == null)
     {

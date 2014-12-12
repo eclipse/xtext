@@ -28,6 +28,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	(e1+=Elem1 | e2+=Elem2)+;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(e1+=Elem1 | e2+=Elem2)+
@@ -53,6 +54,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Elem1:
 		//	value=EnumT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=EnumT
@@ -73,6 +75,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Elem2:
 		//	value=EnumT "foo" "%" "$";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=EnumT "foo" "%" "$"
@@ -105,6 +108,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum EnumT:
 		//	T1 | T2;
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//T1 | T2
@@ -160,6 +164,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

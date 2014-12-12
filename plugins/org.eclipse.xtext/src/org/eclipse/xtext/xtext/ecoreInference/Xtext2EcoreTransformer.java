@@ -95,6 +95,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	public static class NullErrorAcceptor implements ErrorAcceptor {
+		@Override
 		public void acceptError(TransformationErrorCode errorCode, String arg0, EObject arg1) {
 			// do nothing
 		}
@@ -120,6 +121,7 @@ public class Xtext2EcoreTransformer {
 		Iterables.addAll(result, Iterables.filter(Iterables.transform(
 				Iterables.filter(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class),
 				new Function<AbstractMetamodelDeclaration, EPackage>() {
+					@Override
 					public EPackage apply(AbstractMetamodelDeclaration param) {
 						EPackage pack = (EPackage) param.eGet(XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE, false);
 						if (pack != null && !pack.eIsProxy()) {
@@ -185,6 +187,7 @@ public class Xtext2EcoreTransformer {
 	private static List<EPackage> getPackagesSortedByName(Collection<EPackage> packages) {
 		final ArrayList<EPackage> result = new ArrayList<EPackage>(packages);
 		Collections.sort(result, new Comparator<EPackage>() {
+			@Override
 			public int compare(EPackage o1, EPackage o2) {
 				return o1.getName().compareTo(o2.getName());
 			}
@@ -821,6 +824,7 @@ public class Xtext2EcoreTransformer {
 	private Set<String> getGeneratedEPackageURIs() {
 		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		return Sets.newLinkedHashSet(Iterables.transform(list, new Function<GeneratedMetamodel, String>() {
+			@Override
 			public String apply(GeneratedMetamodel from) {
 				return from.getEPackage()!=null?from.getEPackage().getNsURI() : null;
 			}

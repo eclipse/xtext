@@ -108,7 +108,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFragment()
+  @Override
+public boolean isFragment()
   {
     return fragment;
   }
@@ -118,7 +119,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFragment(boolean newFragment)
+  @Override
+public void setFragment(boolean newFragment)
   {
     boolean oldFragment = fragment;
     fragment = newFragment;
@@ -131,7 +133,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -141,7 +144,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -154,7 +158,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getBody()
+  @Override
+public RuleElement getBody()
   {
     return body;
   }
@@ -181,7 +186,8 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBody(RuleElement newBody)
+  @Override
+public void setBody(RuleElement newBody)
   {
     if (newBody != body)
     {

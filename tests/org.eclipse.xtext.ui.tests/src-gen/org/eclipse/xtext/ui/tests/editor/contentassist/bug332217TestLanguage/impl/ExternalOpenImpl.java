@@ -66,7 +66,8 @@ public class ExternalOpenImpl extends ViewActionImpl implements ExternalOpen
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getUrl()
+  @Override
+public ScalarExpression getUrl()
   {
     return url;
   }
@@ -93,7 +94,8 @@ public class ExternalOpenImpl extends ViewActionImpl implements ExternalOpen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setUrl(ScalarExpression newUrl)
+  @Override
+public void setUrl(ScalarExpression newUrl)
   {
     if (newUrl != url)
     {

@@ -53,6 +53,7 @@ import com.google.common.collect.Sets;
 		if (iterator == null)
 			throw new NullPointerException("iterator");
 		return new Iterable<T>() {
+			@Override
 			public Iterator<T> iterator() {
 				return iterator;
 			}

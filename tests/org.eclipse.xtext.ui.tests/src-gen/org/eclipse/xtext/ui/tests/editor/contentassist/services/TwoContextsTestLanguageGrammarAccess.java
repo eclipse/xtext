@@ -25,6 +25,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//MainModel:
 		//	elements+=AnElement*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=AnElement*
@@ -48,6 +49,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//AnElement:
 		//	name=ID ("refersTo" referred=[AnElement])? ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ("refersTo" referred=[AnElement])? ";"
@@ -112,6 +114,7 @@ public class TwoContextsTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

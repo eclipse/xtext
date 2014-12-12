@@ -25,6 +25,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		
 		//Model:
 		//	types+=Type*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//types+=Type*
@@ -50,6 +51,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		
 		//Type:
 		//	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";"
@@ -94,6 +96,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		
 		//TypeRef:
 		//	type=[Type|FQN];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//type=[Type|FQN]
@@ -116,6 +119,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		
 		//FQN:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -172,6 +176,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

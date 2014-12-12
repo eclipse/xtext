@@ -65,7 +65,8 @@ public class NegatedElementImpl extends RuleElementImpl implements NegatedElemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public RuleElement getElement()
+  @Override
+public RuleElement getElement()
   {
     return element;
   }
@@ -92,7 +93,8 @@ public class NegatedElementImpl extends RuleElementImpl implements NegatedElemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement(RuleElement newElement)
+  @Override
+public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {

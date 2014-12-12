@@ -48,6 +48,7 @@ public class LiveShadowedAllContainerState implements IAllContainersState {
 
 	private IResourceDescriptions localDescriptions;
 
+	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		Set<URI> result = Sets.newLinkedHashSet();
 		for (IResourceDescription descriptions : localDescriptions.getAllResourceDescriptions()) {
@@ -59,14 +60,17 @@ public class LiveShadowedAllContainerState implements IAllContainersState {
 		return result;
 	}
 
+	@Override
 	public String getContainerHandle(URI uri) {
 		return globalState.getContainerHandle(uri);
 	}
 
+	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		return globalState.getVisibleContainerHandles(handle);
 	}
 
+	@Override
 	public boolean isEmpty(String containerHandle) {
 		for (IResourceDescription descriptions : localDescriptions.getAllResourceDescriptions()) {
 			String computedHandle = getContainerHandle(descriptions.getURI());

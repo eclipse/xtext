@@ -45,6 +45,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//Root:
 		//	{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
 		//	concrete0=Concrete0)? "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
@@ -121,6 +122,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Abstract:
 		//	Concrete0_Impl | Concrete1_Impl | DiamondInheritance;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Concrete0_Impl | Concrete1_Impl | DiamondInheritance
@@ -144,6 +146,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Concrete0:
 		//	Concrete0_Impl | DiamondInheritance;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Concrete0_Impl | DiamondInheritance
@@ -162,6 +165,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// * TODO: implement this rule and an appropriate IValueConverter * / INT0 returns INT:
 		//	"INT";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"INT"
@@ -178,6 +182,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Concrete0_Impl returns Concrete0:
 		//	{Concrete0} "Concrete0" name=EString;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Concrete0} "Concrete0" name=EString
@@ -204,6 +209,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EString returns ecore::EString:
 		//	STRING | ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//STRING | ID
@@ -226,6 +232,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Concrete1_Impl returns Concrete1:
 		//	{Concrete1} "Concrete1" name=EString;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Concrete1} "Concrete1" name=EString
@@ -254,6 +261,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DiamondInheritance:
 		//	{DiamondInheritance} "DiamondInheritance" name=EString;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{DiamondInheritance} "DiamondInheritance" name=EString
@@ -318,6 +326,7 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

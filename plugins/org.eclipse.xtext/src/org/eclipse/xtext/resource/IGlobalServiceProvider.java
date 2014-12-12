@@ -43,6 +43,7 @@ public interface IGlobalServiceProvider {
 			this.thisLanguageServiceProvider = thisLanguageServiceProvider;
 		}
 
+		@Override
 		public <T> T findService(URI uri, Class<T> serviceClazz) {
 			if (thisLanguageServiceProvider.canHandle(uri))
 				return thisLanguageServiceProvider.get(serviceClazz);
@@ -53,6 +54,7 @@ public interface IGlobalServiceProvider {
 			return result;
 		}
 
+		@Override
 		public <T> T findService(EObject eObject, Class<T> serviceClazz) {
 			if (eObject.eIsProxy()) {
 				return findService(((InternalEObject)eObject).eProxyURI(),serviceClazz);

@@ -18,6 +18,7 @@ import com.google.inject.Inject;
 public class RefactoringPreferences {
 
 	public static class Initializer implements IPreferenceStoreInitializer {
+		@Override
 		public void initialize(IPreferenceStoreAccess access) {
 			access.getWritablePreferenceStore().setDefault(SAVE_ALL_BEFORE_REFACTORING, false);
 			access.getWritablePreferenceStore().setDefault(USE_INLINE_REFACTORING, true);

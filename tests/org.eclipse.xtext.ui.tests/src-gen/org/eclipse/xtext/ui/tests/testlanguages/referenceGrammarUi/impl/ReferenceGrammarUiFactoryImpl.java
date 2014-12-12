@@ -81,7 +81,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Spielplatz createSpielplatz()
+  @Override
+public Spielplatz createSpielplatz()
   {
     SpielplatzImpl spielplatz = new SpielplatzImpl();
     return spielplatz;
@@ -92,7 +93,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Person createPerson()
+  @Override
+public Person createPerson()
   {
     PersonImpl person = new PersonImpl();
     return person;
@@ -103,7 +105,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Kind createKind()
+  @Override
+public Kind createKind()
   {
     KindImpl kind = new KindImpl();
     return kind;
@@ -114,7 +117,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Erwachsener createErwachsener()
+  @Override
+public Erwachsener createErwachsener()
   {
     ErwachsenerImpl erwachsener = new ErwachsenerImpl();
     return erwachsener;
@@ -125,7 +129,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Spielzeug createSpielzeug()
+  @Override
+public Spielzeug createSpielzeug()
   {
     SpielzeugImpl spielzeug = new SpielzeugImpl();
     return spielzeug;
@@ -136,7 +141,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Farbe createFarbe()
+  @Override
+public Farbe createFarbe()
   {
     FarbeImpl farbe = new FarbeImpl();
     return farbe;
@@ -147,7 +153,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public Familie createFamilie()
+  @Override
+public Familie createFamilie()
   {
     FamilieImpl familie = new FamilieImpl();
     return familie;
@@ -158,7 +165,8 @@ public class ReferenceGrammarUiFactoryImpl extends EFactoryImpl implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceGrammarUiPackage getReferenceGrammarUiPackage()
+  @Override
+public ReferenceGrammarUiPackage getReferenceGrammarUiPackage()
   {
     return (ReferenceGrammarUiPackage)getEPackage();
   }

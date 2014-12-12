@@ -26,10 +26,12 @@ public class InstanceFeatureDescriptionWithoutReceiver extends BucketedEObjectDe
 		}
 	}
 	
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 	
+	@Override
 	public boolean isExtension() {
 		return false;
 	}

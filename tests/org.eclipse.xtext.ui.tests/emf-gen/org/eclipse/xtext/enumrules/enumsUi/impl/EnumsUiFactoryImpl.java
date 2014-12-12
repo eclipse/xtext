@@ -121,6 +121,7 @@ public class EnumsUiFactoryImpl extends EFactoryImpl implements EnumsUiFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnumsUiPackage getEnumsUiPackage() {
 		return (EnumsUiPackage)getEPackage();
 	}

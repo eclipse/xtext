@@ -54,6 +54,7 @@ public abstract class AbstractResourceLoader implements IResourceLoader {
 			this.parent = parent;
 		}
 
+		@Override
 		public void load(Collection<URI> uris) {
 			if(isLoading) {
 				throw new IllegalStateException("The load operation has already been started.");
@@ -62,18 +63,21 @@ public abstract class AbstractResourceLoader implements IResourceLoader {
 			parent.load(uris);
 		}
 
+		@Override
 		public boolean hasNext() {
 			checkIsLoading();
 			checkIsNotCancelled();
 			return parent.hasNext();
 		}
 
+		@Override
 		public LoadResult next() throws LoadOperationException {
 			checkIsLoading();
 			checkIsNotCancelled();
 			return parent.next();
 		}
 
+		@Override
 		public Collection<URI> cancel() {
 			checkIsLoading();
 			isCancelled = true;

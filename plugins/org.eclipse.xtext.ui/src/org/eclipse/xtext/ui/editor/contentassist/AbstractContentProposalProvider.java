@@ -67,6 +67,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 			return Boolean.TRUE;
 		}
 
+		@Override
 		public void accept(AbstractElement element) {
 			doSwitch(element);
 		}
@@ -101,6 +102,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		}
 	}
 
+	@Override
 	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor nullSafe = new NullSafeCompletionProposalAcceptor(acceptor);
 		IFollowElementAcceptor selector = createSelector(context, nullSafe);
@@ -133,6 +135,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 				contentAssistContext.getPrefix(), contentAssistContext);
 	}
 
+	@Override
 	public ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
 			ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(),

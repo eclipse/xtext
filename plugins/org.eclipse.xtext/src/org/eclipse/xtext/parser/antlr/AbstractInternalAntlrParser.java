@@ -85,14 +85,17 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			this.recognitionException = recognitionException;
 		}
 		
+		@Override
 		public String getDefaultMessage() {
 			return superGetErrorMessage(getRecognitionException(), getTokenNames());
 		}
 
+		@Override
 		public RecognitionException getRecognitionException() {
 			return recognitionException;
 		}
 
+		@Override
 		public String[] getTokenNames() {
 			return readableTokenNames;
 		}
@@ -106,14 +109,17 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			this.message = message;
 		}
 		
+		@Override
 		public String getDefaultMessage() {
 			return message;
 		}
 
+		@Override
 		public RecognitionException getRecognitionException() {
 			return null;
 		}
 
+		@Override
 		public String[] getTokenNames() {
 			return readableTokenNames;
 		}
@@ -136,6 +142,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			return (FailedPredicateException) super.getRecognitionException();
 		}
 		
+		@Override
 		public List<AbstractElement> getMissingMandatoryElements() {
 			List<AbstractElement> result = missingMandatoryElements;
 			if (result == null) {
@@ -179,10 +186,12 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			this.valueConverterException = valueConverterException;
 		}
 
+		@Override
 		public String getDefaultMessage() {
 			return getValueConverterExceptionMessage(getValueConverterException());
 		}
 
+		@Override
 		public ValueConverterException getValueConverterException() {
 			return valueConverterException;
 		}

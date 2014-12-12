@@ -22,39 +22,51 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public abstract class AbstractRichStringPartAcceptor implements IRichStringPartAcceptor {
 
+	@Override
 	public void acceptSemanticText(CharSequence text, /* @Nullable */ RichStringLiteral origin) {
 	}
 
+	@Override
 	public void acceptTemplateText(CharSequence text, /* @Nullable */ RichStringLiteral origin) {
 	}
 
+	@Override
 	public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
 	}
 
+	@Override
 	public void acceptTemplateLineBreak(int charCount, RichStringLiteral origin) {
 	}
 
+	@Override
 	public void acceptIfCondition(XExpression condition) {
 	}
 
+	@Override
 	public void acceptElseIfCondition(XExpression condition) {
 	}
 
+	@Override
 	public void acceptElse() {
 	}
 
+	@Override
 	public void acceptEndIf() {
 	}
 
+	@Override
 	public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 	}
 	
+	@Override
 	public void acceptEndFor(/* @Nullable */ XExpression after, CharSequence indentation) {
 	}
 
+	@Override
 	public void acceptExpression(XExpression expression, CharSequence indentation) {
 	}
 
+	@Override
 	public void announceNextLiteral(RichStringLiteral object) {
 	}
 
@@ -69,6 +81,7 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 			forLoopStack.set(forLoopStackPointer);
 		}
 
+		@Override
 		public boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, CharSequence indentation) {
 			if (forLoopStack.get(forLoopStackPointer)) {
 				forLoopStack.set(forLoopStackPointer, false);

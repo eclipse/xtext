@@ -59,6 +59,7 @@ public class Bug419429Test extends AbstractPartialParserTest {
 		assertEquals(expectedReparseRegion, reparseRegion);
 		final Wrapper<Boolean> unloaded = Wrapper.wrap(Boolean.FALSE);
 		getPartialParser().setUnloader(new IReferableElementsUnloader() {
+			@Override
 			public void unloadRoot(EObject root) {
 				unloaded.set(Boolean.TRUE);
 			}

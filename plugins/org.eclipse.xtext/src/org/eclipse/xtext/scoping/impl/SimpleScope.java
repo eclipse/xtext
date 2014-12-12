@@ -56,6 +56,7 @@ public class SimpleScope extends AbstractScope {
 	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
 		Iterable<IEObjectDescription> localElements = getAllLocalElements();
 		Iterable<IEObjectDescription> result = Iterables.filter(localElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
 					return canBeFoundByNameAndShadowingKey(input);

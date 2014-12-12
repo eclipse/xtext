@@ -21,6 +21,7 @@ public class XtextEditorPropertyTester extends PropertyTester {
 		super();
 	}
 
+	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (receiver instanceof IAdaptable) {
 			IAdaptable adaptable = (IAdaptable) receiver;

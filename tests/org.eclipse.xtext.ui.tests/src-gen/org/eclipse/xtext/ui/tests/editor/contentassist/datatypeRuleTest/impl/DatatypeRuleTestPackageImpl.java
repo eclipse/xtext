@@ -136,7 +136,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -146,7 +147,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypes()
+  @Override
+public EClass getTypes()
   {
     return typesEClass;
   }
@@ -156,7 +158,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypes_Types()
+  @Override
+public EReference getTypes_Types()
   {
     return (EReference)typesEClass.getEStructuralFeatures().get(0);
   }
@@ -166,7 +169,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getType()
+  @Override
+public EClass getType()
   {
     return typeEClass;
   }
@@ -176,7 +180,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getType_Name()
+  @Override
+public EAttribute getType_Name()
   {
     return (EAttribute)typeEClass.getEStructuralFeatures().get(0);
   }
@@ -186,7 +191,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimpleType()
+  @Override
+public EClass getSimpleType()
   {
     return simpleTypeEClass;
   }
@@ -196,7 +202,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCompositeType()
+  @Override
+public EClass getCompositeType()
   {
     return compositeTypeEClass;
   }
@@ -206,7 +213,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCompositeType_BaseType()
+  @Override
+public EReference getCompositeType_BaseType()
   {
     return (EReference)compositeTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -216,7 +224,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCompositeTypeEntry()
+  @Override
+public EClass getCompositeTypeEntry()
   {
     return compositeTypeEntryEClass;
   }
@@ -226,7 +235,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCompositeTypeEntry_DataType()
+  @Override
+public EReference getCompositeTypeEntry_DataType()
   {
     return (EReference)compositeTypeEntryEClass.getEStructuralFeatures().get(0);
   }
@@ -236,7 +246,8 @@ public class DatatypeRuleTestPackageImpl extends EPackageImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public DatatypeRuleTestFactory getDatatypeRuleTestFactory()
+  @Override
+public DatatypeRuleTestFactory getDatatypeRuleTestFactory()
   {
     return (DatatypeRuleTestFactory)getEFactoryInstance();
   }

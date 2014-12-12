@@ -21,6 +21,7 @@ import com.google.common.collect.Iterators;
  */
 public class MappingIteratorTest extends Assert implements Function<String, String> {
 
+	@Override
 	public String apply(String param) {
 		return param + "->" + param;
 	}

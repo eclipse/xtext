@@ -124,6 +124,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 		return binding + " to show " + category;
 	}
 
+	@Override
 	public void assistSessionStarted(ContentAssistEvent event) {
 		ModeAware proposalProvider = getModeAwareProposalProvider();
 		if (proposalProvider != null)
@@ -131,6 +132,7 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 		this.currentAssistant = (IContentAssistantExtension2) event.assistant;
 	}
 
+	@Override
 	public void assistSessionEnded(ContentAssistEvent event) {
 		ModeAware proposalProvider = getModeAwareProposalProvider();
 		if (proposalProvider != null)
@@ -138,12 +140,14 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 		this.currentAssistant = null;
 	}
 	
+	@Override
 	public void assistSessionRestarted(ContentAssistEvent event) {
 		ModeAware proposalProvider = getModeAwareProposalProvider();
 		if (proposalProvider != null)
 			proposalProvider.reset();
 	}
 
+	@Override
 	public void selectionChanged(ICompletionProposal proposal, boolean smartToggle) {
 	}
 

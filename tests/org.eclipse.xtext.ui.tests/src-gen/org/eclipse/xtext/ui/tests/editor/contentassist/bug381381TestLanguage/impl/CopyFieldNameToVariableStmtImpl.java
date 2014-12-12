@@ -116,7 +116,8 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getLine()
+  @Override
+public int getLine()
   {
     return line;
   }
@@ -126,7 +127,8 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLine(int newLine)
+  @Override
+public void setLine(int newLine)
   {
     int oldLine = line;
     line = newLine;
@@ -139,7 +141,8 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getColumn()
+  @Override
+public int getColumn()
   {
     return column;
   }
@@ -149,7 +152,8 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setColumn(int newColumn)
+  @Override
+public void setColumn(int newColumn)
   {
     int oldColumn = column;
     column = newColumn;
@@ -162,7 +166,8 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -172,7 +177,8 @@ public class CopyFieldNameToVariableStmtImpl extends MinimalEObjectImpl.Containe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

@@ -24,6 +24,7 @@ public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElemen
 		
 		//Entry returns Model:
 		//	Model;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Model
@@ -61,6 +62,7 @@ public class RefactoringTestLanguage1GrammarAccess extends AbstractGrammarElemen
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

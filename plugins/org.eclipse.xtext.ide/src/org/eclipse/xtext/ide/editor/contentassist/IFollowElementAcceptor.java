@@ -21,6 +21,7 @@ public interface IFollowElementAcceptor {
 			this.decorated = decorated;
 		}
 
+		@Override
 		public void accept(AbstractElement element) {
 			if (element != null)
 				decorated.accept(element);

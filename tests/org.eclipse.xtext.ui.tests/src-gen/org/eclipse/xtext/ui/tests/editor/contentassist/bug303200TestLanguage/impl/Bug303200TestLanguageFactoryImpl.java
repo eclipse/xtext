@@ -90,7 +90,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Program createProgram()
+  @Override
+public Program createProgram()
   {
     ProgramImpl program = new ProgramImpl();
     return program;
@@ -101,7 +102,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ProgramDirective createProgramDirective()
+  @Override
+public ProgramDirective createProgramDirective()
   {
     ProgramDirectiveImpl programDirective = new ProgramDirectiveImpl();
     return programDirective;
@@ -112,7 +114,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunctionDefinition createFunctionDefinition()
+  @Override
+public FunctionDefinition createFunctionDefinition()
   {
     FunctionDefinitionImpl functionDefinition = new FunctionDefinitionImpl();
     return functionDefinition;
@@ -123,7 +126,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute createAttribute()
+  @Override
+public Attribute createAttribute()
   {
     AttributeImpl attribute = new AttributeImpl();
     return attribute;
@@ -134,7 +138,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameters createParameters()
+  @Override
+public Parameters createParameters()
   {
     ParametersImpl parameters = new ParametersImpl();
     return parameters;
@@ -145,7 +150,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block createBlock()
+  @Override
+public Block createBlock()
   {
     BlockImpl block = new BlockImpl();
     return block;
@@ -156,7 +162,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Statement createStatement()
+  @Override
+public Statement createStatement()
   {
     StatementImpl statement = new StatementImpl();
     return statement;
@@ -167,7 +174,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public PostfixExpression createPostfixExpression()
+  @Override
+public PostfixExpression createPostfixExpression()
   {
     PostfixExpressionImpl postfixExpression = new PostfixExpressionImpl();
     return postfixExpression;
@@ -178,7 +186,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ListExpression createListExpression()
+  @Override
+public ListExpression createListExpression()
   {
     ListExpressionImpl listExpression = new ListExpressionImpl();
     return listExpression;
@@ -189,7 +198,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public PropertyOperator createPropertyOperator()
+  @Override
+public PropertyOperator createPropertyOperator()
   {
     PropertyOperatorImpl propertyOperator = new PropertyOperatorImpl();
     return propertyOperator;
@@ -200,7 +210,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public PrimaryExpression createPrimaryExpression()
+  @Override
+public PrimaryExpression createPrimaryExpression()
   {
     PrimaryExpressionImpl primaryExpression = new PrimaryExpressionImpl();
     return primaryExpression;
@@ -211,7 +222,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public BracketAttribute createBracketAttribute()
+  @Override
+public BracketAttribute createBracketAttribute()
   {
     BracketAttributeImpl bracketAttribute = new BracketAttributeImpl();
     return bracketAttribute;
@@ -222,7 +234,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExpressionStatement createExpressionStatement()
+  @Override
+public ExpressionStatement createExpressionStatement()
   {
     ExpressionStatementImpl expressionStatement = new ExpressionStatementImpl();
     return expressionStatement;
@@ -233,7 +246,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Invocation createInvocation()
+  @Override
+public Invocation createInvocation()
   {
     InvocationImpl invocation = new InvocationImpl();
     return invocation;
@@ -244,7 +258,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Identifier createIdentifier()
+  @Override
+public Identifier createIdentifier()
   {
     IdentifierImpl identifier = new IdentifierImpl();
     return identifier;
@@ -255,7 +270,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunctionExpression createFunctionExpression()
+  @Override
+public FunctionExpression createFunctionExpression()
   {
     FunctionExpressionImpl functionExpression = new FunctionExpressionImpl();
     return functionExpression;
@@ -266,7 +282,8 @@ public class Bug303200TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug303200TestLanguagePackage getBug303200TestLanguagePackage()
+  @Override
+public Bug303200TestLanguagePackage getBug303200TestLanguagePackage()
   {
     return (Bug303200TestLanguagePackage)getEPackage();
   }

@@ -51,6 +51,7 @@ public class DisplayChangeWrapper {
 			this.delegate = delegate;
 		}
 	
+		@Override
 		public Change getDelegate() {
 			return delegate;
 		}
@@ -154,6 +155,7 @@ public class DisplayChangeWrapper {
 			this.delegate = delegate;
 		}
 
+		@Override
 		public TextEditBasedChange getDelegate() {
 			return delegate;
 		}

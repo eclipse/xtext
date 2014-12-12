@@ -33,6 +33,7 @@ import com.google.inject.ImplementedBy;
 public interface ISyntacticSequencerPDAProvider {
 
 	public class GetGrammarElement implements Function<ISynState, AbstractElement> {
+		@Override
 		public AbstractElement apply(ISynState from) {
 			return from.getGrammarElement();
 		}
@@ -104,20 +105,24 @@ public interface ISyntacticSequencerPDAProvider {
 			super();
 			this.start = start;
 			this.stop = new NfaUtil().find(this, new Predicate<ISynAbsorberState>() {
+				@Override
 				public boolean apply(ISynAbsorberState input) {
 					return input.getType().isStop();
 				}
 			});
 		}
 
+		@Override
 		public Iterable<ISynAbsorberState> getFollowers(ISynAbsorberState node) {
 			return node.getOutAbsorbers();
 		}
 
+		@Override
 		public ISynAbsorberState getStart() {
 			return start;
 		}
 
+		@Override
 		public ISynAbsorberState getStop() {
 			return stop;
 		}
@@ -127,6 +132,7 @@ public interface ISyntacticSequencerPDAProvider {
 	public class SynPredicates {
 		public static Predicate<ISynState> absorber() {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input instanceof ISynAbsorberState;
 				}
@@ -135,6 +141,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> absorber(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input instanceof ISynAbsorberState;
 				}
@@ -143,6 +150,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> element(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele;
 				}
@@ -151,6 +159,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> emitter(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input instanceof ISynEmitterState;
 				}
@@ -159,6 +168,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallEnter(final RuleCall ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input.getType().isRuleCallEnter();
 				}
@@ -167,6 +177,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallExit(final RuleCall ele) {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele && input.getType().isRuleCallExit();
 				}
@@ -175,6 +186,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallExits() {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getType().isRuleCallExit();
 				}
@@ -183,6 +195,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		public static Predicate<ISynState> ruleCallExitsOrAbsorber() {
 			return new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getType().isRuleCallExit() || input instanceof ISynAbsorberState;
 				}

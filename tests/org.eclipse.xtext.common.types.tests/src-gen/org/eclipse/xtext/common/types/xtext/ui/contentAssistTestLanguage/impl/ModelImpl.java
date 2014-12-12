@@ -97,7 +97,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Import> getImports()
+  @Override
+public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -111,7 +112,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public GenerateDirective getGenerateDirective()
+  @Override
+public GenerateDirective getGenerateDirective()
   {
     return generateDirective;
   }
@@ -138,7 +140,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGenerateDirective(GenerateDirective newGenerateDirective)
+  @Override
+public void setGenerateDirective(GenerateDirective newGenerateDirective)
   {
     if (newGenerateDirective != generateDirective)
     {
@@ -159,7 +162,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReferenceHolder getReferenceHolder()
+  @Override
+public ReferenceHolder getReferenceHolder()
   {
     return referenceHolder;
   }
@@ -186,7 +190,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferenceHolder(ReferenceHolder newReferenceHolder)
+  @Override
+public void setReferenceHolder(ReferenceHolder newReferenceHolder)
   {
     if (newReferenceHolder != referenceHolder)
     {

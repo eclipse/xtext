@@ -59,29 +59,36 @@ public class XtendCompilerTester {
 		try {
 			compilationTestHelper.configureFreshWorkspace();
 			compilationTestHelper.compile(source, new IAcceptor<CompilationTestHelper.Result>() {
+				@Override
 				public void accept(final Result t) {
 					acceptor.accept(new CompilationResult() {
 
+						@Override
 						public Map<String, String> getGeneratedCode() {
 							return t.getGeneratedCode();
 						}
 
+						@Override
 						public String getGeneratedCode(String typeName) {
 							return t.getGeneratedCode(typeName);
 						}
 
+						@Override
 						public String getSingleGeneratedCode() {
 							return t.getSingleGeneratedCode();
 						}
 
+						@Override
 						public Class<?> getCompiledClass() {
 							return t.getCompiledClass();
 						}
 
+						@Override
 						public Class<?> getCompiledClass(String className) {
 							return t.getCompiledClass(className);
 						}
 
+						@Override
 						public Map<String, CharSequence> getAllGeneratedResources() {
 							return t.getAllGeneratedResources();
 						}
@@ -93,9 +100,11 @@ public class XtendCompilerTester {
 							compilationUnitImpl.setXtendFile(xtendFile);
 						}
 						
+						@Override
 						public CompilationUnit getCompilationUnit() {
 							return compilationUnitImpl;
 						}
+						@Override
 						public TransformationContext getTransformationContext() {
 							TransformationContextImpl transformationContextImpl = new TransformationContextImpl();
 							transformationContextImpl.setUnit(compilationUnitImpl);

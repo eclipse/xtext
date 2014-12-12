@@ -95,7 +95,8 @@ public class TConstantImpl extends MinimalEObjectImpl.Container implements TCons
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TAnnotation> getAnnotations()
+  @Override
+public EList<TAnnotation> getAnnotations()
   {
     if (annotations == null)
     {
@@ -109,7 +110,8 @@ public class TConstantImpl extends MinimalEObjectImpl.Container implements TCons
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -119,7 +121,8 @@ public class TConstantImpl extends MinimalEObjectImpl.Container implements TCons
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

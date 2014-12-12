@@ -56,6 +56,7 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 		lastActiveDocument = null;
 	}
 
+	@Override
 	public void partActivated(IWorkbenchPart part) {
 		updateView(part);
 	}
@@ -67,6 +68,7 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 			if (xtextDocument != lastActiveDocument) {
 				selectionLinker.setXtextEditor(xtextEditor);
 				final IFigure contents = xtextDocument.readOnly(new IUnitOfWork<IFigure, XtextResource>() {
+					@Override
 					public IFigure exec(XtextResource resource) throws Exception {
 						return createFigure(resource);
 					}
@@ -92,18 +94,23 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 		return null;
 	}
 
+	@Override
 	public void partBroughtToTop(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void partClosed(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void partDeactivated(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void partOpened(IWorkbenchPart part) {
 	}
 
+	@Override
 	public void modelChanged(XtextResource resource) {
 		view.setContents(createFigure(resource));
 	}

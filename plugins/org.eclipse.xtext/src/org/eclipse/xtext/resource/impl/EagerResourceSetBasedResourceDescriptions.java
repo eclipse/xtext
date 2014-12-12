@@ -87,6 +87,7 @@ public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundS
 		return manager.getResourceDescription(resource);
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return Collections.unmodifiableCollection(getDescriptionsMap().values());
 	}
@@ -116,6 +117,7 @@ public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundS
 		return getDescriptionsMap().containsKey(uri);
 	}
 
+	@Override
 	public void setContext(Notifier ctx) {
 		this.resourceSet = EcoreUtil2.getResourceSet(ctx);
 	}
@@ -125,6 +127,7 @@ public class EagerResourceSetBasedResourceDescriptions extends AbstractCompoundS
 		return "[" + getClass().getSimpleName() + "\n  " + Joiner.on("\n  ").join(getAllResourceDescriptions()) + "\n]";
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		return getDescriptionsMap().get(uri);
 	}

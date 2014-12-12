@@ -111,6 +111,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		List<WizardContribution> contrib = newArrayList(contributions.values());
 		Collections.sort(contrib);
 		List<String> names = newArrayList(Iterables.transform(contrib, new Function<WizardContribution, String>() {
+			@Override
 			public String apply(WizardContribution input) {
 				return input.getName();
 			}
@@ -203,6 +204,7 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		extensionsField.setLayoutData(textData);
 
 		Listener modifyListener = new Listener() {
+			@Override
 			public void handleEvent(Event event) {
 				setPageComplete(validatePage());
 			}

@@ -67,7 +67,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getElement()
+  @Override
+public EObject getElement()
   {
     return element;
   }
@@ -94,7 +95,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setElement(EObject newElement)
+  @Override
+public void setElement(EObject newElement)
   {
     if (newElement != element)
     {

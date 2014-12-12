@@ -39,10 +39,12 @@ public class KeywordBasedValueConverter extends AbstractValueConverter<String> i
 	private Set<String> keywords;
 	private AbstractRule rule;
 
+	@Override
 	public String toValue(String string, INode node) throws ValueConverterException {
 		return string;
 	}
 
+	@Override
 	public String toString(String value) throws ValueConverterException {
 		assertValidValue(value);
 		String result = toEscapedString(value);
@@ -66,6 +68,7 @@ public class KeywordBasedValueConverter extends AbstractValueConverter<String> i
 	 * @throws IllegalArgumentException if the rule is not a datatype rule or does not fulfill
 	 *   the pattern <pre>RuleName: 'keyword' | 'other';</pre>
 	 */
+	@Override
 	public void setRule(AbstractRule rule) {
 		this.rule = rule;
 		if (!GrammarUtil.isDatatypeRule(rule))

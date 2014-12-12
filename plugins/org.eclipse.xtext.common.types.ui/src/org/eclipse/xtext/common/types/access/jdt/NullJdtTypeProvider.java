@@ -37,6 +37,7 @@ public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 		typeURIHelper = new TypeURIHelper();
 	}
 	
+	@Override
 	public JvmType findTypeByName(String name) {
 		return null;
 	}
@@ -44,22 +45,27 @@ public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public JvmType findTypeByName(String name, boolean binaryNestedTypeDelimiter) {
 		return null;
 	}
 
+	@Override
 	public ResourceSet getResourceSet() {
 		return resourceSet;
 	}
 
+	@Override
 	public TypeURIHelper getTypeUriHelper() {
 		return typeURIHelper;
 	}
 
+	@Override
 	public IJavaProject getJavaProject() {
 		return null;
 	}
 
+	@Override
 	public Resource createResource(URI uri) {
 		doLogMessage("Creating empty resource instead of type resource:" + uri);
 		return new ResourceImpl(uri) {

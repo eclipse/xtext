@@ -24,26 +24,32 @@ public class NullFeatureLinkingCandidate extends AbstractNullLinkingCandidate im
 		this.state = state;
 	}
 	
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return other;
 	}
 	
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return (XAbstractFeatureCall) featureOrConstructorCall;
 	}
 
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
 
+	@Override
 	public boolean isExtension() {
 		return false;
 	}
 	
+	@Override
 	public boolean isTypeLiteral() {
 		return false;
 	}
 	
+	@Override
 	public void applyToComputationState() {
 		FeatureLinkHelper helper = new FeatureLinkHelper();
 		XExpression receiver = helper.getSyntacticReceiver(getFeatureCall());

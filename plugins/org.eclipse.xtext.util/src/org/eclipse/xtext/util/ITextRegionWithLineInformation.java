@@ -29,34 +29,42 @@ public interface ITextRegionWithLineInformation extends ITextRegion {
 	
 	static ITextRegionWithLineInformation EMPTY_REGION = new ITextRegionWithLineInformation() {
 
+		@Override
 		public int getOffset() {
 			return 0;
 		}
 
+		@Override
 		public int getLength() {
 			return 0;
 		}
 
+		@Override
 		public ITextRegion merge(ITextRegion region) {
 			return region;
 		}
 
+		@Override
 		public boolean contains(ITextRegion other) {
 			return false;
 		}
 
+		@Override
 		public boolean contains(int offset) {
 			return false;
 		}
 
+		@Override
 		public int getLineNumber() {
 			return 0;
 		}
 
+		@Override
 		public int getEndLineNumber() {
 			return 0;
 		}
 
+		@Override
 		public ITextRegionWithLineInformation merge(ITextRegionWithLineInformation other) {
 			return other;
 		}

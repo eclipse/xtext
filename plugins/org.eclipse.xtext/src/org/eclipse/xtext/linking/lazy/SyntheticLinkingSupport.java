@@ -60,126 +60,157 @@ class SyntheticLinkingLeafNode implements ILeafNode, BidiTreeIterable<INode> {
 		this.grammarElement = XtextFactory.eINSTANCE.createKeyword();
 	}
 
+	@Override
 	public ICompositeNode getParent() {
 		return null;
 	}
 
+	@Override
 	public boolean hasSiblings() {
 		return false;
 	}
 
+	@Override
 	public boolean hasPreviousSibling() {
 		return false;
 	}
 
+	@Override
 	public boolean hasNextSibling() {
 		return false;
 	}
 
+	@Override
 	public INode getPreviousSibling() {
 		return null;
 	}
 
+	@Override
 	public INode getNextSibling() {
 		return null;
 	}
 
+	@Override
 	public ICompositeNode getRootNode() {
 		return null;
 	}
 
+	@Override
 	public Iterable<ILeafNode> getLeafNodes() {
 		return emptyList();
 	}
 
+	@Override
 	public int getTotalOffset() {
 		return OFFSET;
 	}
 
+	@Override
 	public int getOffset() {
 		return OFFSET;
 	}
 
+	@Override
 	public int getTotalLength() {
 		return LENGTH;
 	}
 
+	@Override
 	public int getLength() {
 		return LENGTH;
 	}
 
+	@Override
 	public int getTotalEndOffset() {
 		return LENGTH;
 	}
 
+	@Override
 	public int getEndOffset() {
 		return LENGTH;
 	}
 
+	@Override
 	public int getTotalStartLine() {
 		return LINE;
 	}
 
+	@Override
 	public int getStartLine() {
 		return LINE;
 	}
 
+	@Override
 	public int getTotalEndLine() {
 		return LINE;
 	}
 
+	@Override
 	public int getEndLine() {
 		return LINE;
 	}
 
+	@Override
 	public String getText() {
 		return text;
 	}
 
+	@Override
 	public EObject getGrammarElement() {
 		return grammarElement;
 	}
 
+	@Override
 	public EObject getSemanticElement() {
 		return semanticElement;
 	}
 
+	@Override
 	public boolean hasDirectSemanticElement() {
 		return true;
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage() {
 		return null;
 	}
 
+	@Override
 	public BidiTreeIterable<INode> getAsTreeIterable() {
 		return this;
 	}
 	
+	@Override
 	public BidiTreeIterator<INode> iterator() {
 		return new NodeTreeIterator(this);
 	}
 	
+	@Override
 	public BidiTreeIterable<INode> reverse() {
 		return new ReversedBidiTreeIterable<INode>(this);
 	}
 
+	@Override
 	public ITextRegion getTextRegion() {
 		return new TextRegion(OFFSET, LENGTH);
 	}
 
+	@Override
 	public ITextRegion getTotalTextRegion() {
 		return new TextRegion(OFFSET, LENGTH);
 	}
 
+	@Override
 	public ITextRegionWithLineInformation getTextRegionWithLineInformation() {
 		return new TextRegionWithLineInformation(OFFSET, LENGTH, LINE, LINE);
 	}
 
+	@Override
 	public ITextRegionWithLineInformation getTotalTextRegionWithLineInformation() {
 		return new TextRegionWithLineInformation(OFFSET, LENGTH, LINE, LINE);
 	}
 
+	@Override
 	public boolean isHidden() {
 		return false;
 	}

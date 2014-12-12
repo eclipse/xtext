@@ -107,6 +107,7 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 			composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 			IDialogFieldListener listener = new IDialogFieldListener() {
+				@Override
 				public void dialogFieldChanged(DialogField field) {
 					boolean enabled = ((SelectionButtonDialogField) field).isSelected();
 					enableProjectSpecificSettings(enabled);
@@ -171,10 +172,12 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 		link.setFont(composite.getFont());
 		link.setText("<A>" + text + "</A>"); //$NON-NLS-1$//$NON-NLS-2$
 		link.addSelectionListener(new SelectionListener() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				doLinkActivated((Link) e.widget);
 			}
 
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				doLinkActivated((Link) e.widget);
 			}
@@ -256,6 +259,7 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 
 	protected IStatusChangeListener getNewStatusChangedListener() {
 		return new IStatusChangeListener() {
+			@Override
 			public void statusChanged(IStatus status) {
 				setPreferenceContentStatus(status);
 			}
@@ -300,13 +304,16 @@ public abstract class PropertyAndPreferencePage extends PreferencePage implement
 		applyToStatusLine(this, status);
 	}
 
+	@Override
 	public void init(IWorkbench workbench) {
 	}
 
+	@Override
 	public IAdaptable getElement() {
 		return project;
 	}
 
+	@Override
 	public void setElement(IAdaptable element) {
 		project = (IProject) element.getAdapter(IResource.class);
 	}

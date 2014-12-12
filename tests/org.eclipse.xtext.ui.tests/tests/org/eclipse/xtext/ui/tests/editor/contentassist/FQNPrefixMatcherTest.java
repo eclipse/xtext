@@ -23,6 +23,7 @@ public class FQNPrefixMatcherTest extends AbstractPrefixMatcherTest<FQNPrefixMat
 		FQNPrefixMatcher result = new FQNPrefixMatcher();
 		result.setDelegate(ignoreCase);
 		result.setLastSegmentFinder(new FQNPrefixMatcher.LastSegmentFinder() {
+			@Override
 			public String getLastSegment(String fqn, char delimiter) {
 				int i = fqn.lastIndexOf(delimiter);
 				if (i >= 0) {

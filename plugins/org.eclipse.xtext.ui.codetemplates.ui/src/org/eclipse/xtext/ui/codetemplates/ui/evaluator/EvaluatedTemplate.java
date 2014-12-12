@@ -62,6 +62,7 @@ public class EvaluatedTemplate implements IProjectedContent {
 		originalTemplate = original.toString();
 	}
 	
+	@Override
 	public int getOriginalOffset(int mappedOffset) {
 		Pair<Integer, Integer> current = mappedOffsetHints.get(0);
 		for(int i = 1; i < mappedOffsetHints.size(); i++) {
@@ -76,6 +77,7 @@ public class EvaluatedTemplate implements IProjectedContent {
 		return result;
 	}
 	
+	@Override
 	public int getMappedOffset(int originalOffset) {
 		Pair<Integer, Integer> current = mappedOffsetHints.get(0);
 		for(int i = 1; i < mappedOffsetHints.size(); i++) {
@@ -90,10 +92,12 @@ public class EvaluatedTemplate implements IProjectedContent {
 		return result;
 	}
 	
+	@Override
 	public String getOriginalString() {
 		return originalTemplate;
 	}
 	
+	@Override
 	public String getMappedString() {
 		return evaluatedResult;
 	}

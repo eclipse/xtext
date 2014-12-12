@@ -71,7 +71,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getClasses()
+  @Override
+public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug289187TestLanguage.Class> getClasses()
   {
     if (classes == null)
     {

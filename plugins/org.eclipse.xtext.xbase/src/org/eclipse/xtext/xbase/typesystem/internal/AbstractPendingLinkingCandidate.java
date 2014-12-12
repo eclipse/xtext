@@ -239,6 +239,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * <li>{@link #validateUnhandledExceptions(IAcceptor) unhandled excptions},</li>
 	 * </ol>
 	 */
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		if (!validateVisibility(result)) {
 			return false;
@@ -456,6 +457,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 * The result is not necessarily this or the other, but may also be a third instance,
 	 * e.g. in order to disambiguate certain error conditions.
 	 */
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
 			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;

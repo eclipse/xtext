@@ -68,34 +68,42 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 		return this;
 	}
 	
+	@Override
 	public AbstractTraceRegion getTraceRegion() {
 		throw new UnsupportedOperationException("FakeTreeAppendable cannot provide trace information");
 	}
 
+	@Override
 	public ITreeAppendable trace(EObject object, boolean useForDebugging) {
 		return this;
 	}
 	
+	@Override
 	public ITreeAppendable trace(ILocationData location) {
 		return this;
 	}
 	
+	@Override
 	public ITreeAppendable trace(ILocationData location, boolean useForDebugging) {
 		return this;
 	}
 
+	@Override
 	public ITreeAppendable trace(Iterable<? extends EObject> objects) {
 		return this;
 	}
 	
+	@Override
 	public ITreeAppendable trace(EObject object, EStructuralFeature feature, int indexInList) {
 		return this;
 	}
 
+	@Override
 	public ITreeAppendable trace(EObject object) {
 		return this;
 	}
 
+	@Override
 	public ErrorTreeAppendable errorChild() {
 		throw new UnsupportedOperationException();
 	}

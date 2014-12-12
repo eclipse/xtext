@@ -66,6 +66,7 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 	@Inject
 	private Provider<MultiImportOrganizer> importOrganizerProvider;
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchSite activeSite = HandlerUtil.getActiveSite(event);
 		MultiOrganizeImportAction javaDelegate = new MultiOrganizeImportAction(activeSite);
@@ -84,6 +85,7 @@ public class MultiOrganizeImportsHandler extends AbstractHandler {
 
 			IRunnableWithProgress op = new IRunnableWithProgress() {
 
+				@Override
 				public void run(IProgressMonitor mon) throws InvocationTargetException, InterruptedException {
 					int totalWork = organizeImports.size();
 					mon.beginTask(Messages.OrganizeImports, totalWork);

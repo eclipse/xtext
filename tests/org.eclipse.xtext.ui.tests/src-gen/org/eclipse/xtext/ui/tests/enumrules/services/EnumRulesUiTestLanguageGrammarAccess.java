@@ -36,6 +36,7 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum
@@ -91,6 +92,7 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//enum ExistingEnum:
 		//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral"
@@ -125,6 +127,7 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//enum GeneratedEnum:
 		//	SameName | DifferentName="DifferentLiteral";
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//SameName | DifferentName="DifferentLiteral"
@@ -178,6 +181,7 @@ public class EnumRulesUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

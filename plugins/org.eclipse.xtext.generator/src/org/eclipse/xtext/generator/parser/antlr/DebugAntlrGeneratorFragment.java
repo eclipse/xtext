@@ -59,6 +59,7 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		try {
 			String content = readFileIntoString(absoluteGrammarFileName, encoding);
 			final ILineSeparatorInformation lineSeparatorInformation = new ILineSeparatorInformation() {
+				@Override
 				public String getLineSeparator() {
 					return DebugAntlrGeneratorFragment.this.getLineDelimiter();
 				}

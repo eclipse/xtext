@@ -85,6 +85,7 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 		return result;
 	}
 	
+	@Override
 	public List<IFile> findDerivedResources(IContainer container, String source) throws CoreException {
 		return findDerivedResources(container,generatorIdProvider.getGeneratorIdentifier(), source);
 	}
@@ -112,6 +113,7 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public IMarker[] findDerivedResourceMarkers(IResource file) throws CoreException {
 		if (!file.isAccessible())
 			return new IMarker[0];
@@ -121,8 +123,10 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public Iterable<IMarker> findDerivedResourceMarkers(IResource file, final String generatorId) throws CoreException {
 		Iterable<IMarker> filtered = Iterables.filter(Arrays.asList(findDerivedResourceMarkers(file)), new Predicate<IMarker>() {
+			@Override
 			public boolean apply(IMarker input) {
 				if (input.exists()) {
 					try {
@@ -140,6 +144,7 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 		return Lists.newArrayList(filtered);
 	}
 	
+	@Override
 	public IMarker findDerivedResourceMarker(IFile file, String source) throws CoreException {
 		return findDerivedResourceMarker(file, generatorIdProvider.getGeneratorIdentifier(), source);
 	}
@@ -153,6 +158,7 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 		return null;
 	}
 	
+	@Override
 	public String getSource(IMarker marker) {
 		try {
 			Object result = marker.getAttribute(ATTR_SOURCE);
@@ -164,6 +170,7 @@ public class DerivedResourceMarkers implements IDerivedResourceMarkers {
 		}
 	}
 	
+	@Override
 	public boolean installMarker(IFile file, String source) throws CoreException {
 		return installMarker(file, generatorIdProvider.getGeneratorIdentifier(), source);
 	}

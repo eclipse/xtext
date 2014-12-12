@@ -568,7 +568,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDocument()
+  @Override
+public EClass getDocument()
   {
     return documentEClass;
   }
@@ -578,7 +579,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDocument_Packages()
+  @Override
+public EReference getDocument_Packages()
   {
     return (EReference)documentEClass.getEStructuralFeatures().get(0);
   }
@@ -588,7 +590,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDocument_Contexts()
+  @Override
+public EReference getDocument_Contexts()
   {
     return (EReference)documentEClass.getEStructuralFeatures().get(1);
   }
@@ -598,7 +601,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBody()
+  @Override
+public EClass getBody()
   {
     return bodyEClass;
   }
@@ -608,7 +612,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBody_ConstraintName()
+  @Override
+public EAttribute getBody_ConstraintName()
   {
     return (EAttribute)bodyEClass.getEStructuralFeatures().get(0);
   }
@@ -618,7 +623,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBody_Expression()
+  @Override
+public EReference getBody_Expression()
   {
     return (EReference)bodyEClass.getEStructuralFeatures().get(1);
   }
@@ -628,7 +634,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getClassifierContextDecl()
+  @Override
+public EClass getClassifierContextDecl()
   {
     return classifierContextDeclEClass;
   }
@@ -638,7 +645,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClassifierContextDecl_SelfName()
+  @Override
+public EAttribute getClassifierContextDecl_SelfName()
   {
     return (EAttribute)classifierContextDeclEClass.getEStructuralFeatures().get(0);
   }
@@ -648,7 +656,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getClassifierContextDecl_Classifier()
+  @Override
+public EReference getClassifierContextDecl_Classifier()
   {
     return (EReference)classifierContextDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -658,7 +667,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getClassifierContextDecl_Invariants()
+  @Override
+public EReference getClassifierContextDecl_Invariants()
   {
     return (EReference)classifierContextDeclEClass.getEStructuralFeatures().get(2);
   }
@@ -668,7 +678,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getClassifierContextDecl_Definitions()
+  @Override
+public EReference getClassifierContextDecl_Definitions()
   {
     return (EReference)classifierContextDeclEClass.getEStructuralFeatures().get(3);
   }
@@ -678,7 +689,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getClassifierRef()
+  @Override
+public EClass getClassifierRef()
   {
     return classifierRefEClass;
   }
@@ -688,7 +700,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getContextDecl()
+  @Override
+public EClass getContextDecl()
   {
     return contextDeclEClass;
   }
@@ -698,7 +711,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDefinition()
+  @Override
+public EClass getDefinition()
   {
     return definitionEClass;
   }
@@ -708,7 +722,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDefinition_Static()
+  @Override
+public EAttribute getDefinition_Static()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(0);
   }
@@ -718,7 +733,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDefinition_ConstraintName()
+  @Override
+public EAttribute getDefinition_ConstraintName()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(1);
   }
@@ -728,7 +744,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDefinition_ConstrainedName()
+  @Override
+public EAttribute getDefinition_ConstrainedName()
   {
     return (EAttribute)definitionEClass.getEStructuralFeatures().get(2);
   }
@@ -738,7 +755,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDefinition_Parameters()
+  @Override
+public EReference getDefinition_Parameters()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(3);
   }
@@ -748,7 +766,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDefinition_Type()
+  @Override
+public EReference getDefinition_Type()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(4);
   }
@@ -758,7 +777,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDefinition_Expression()
+  @Override
+public EReference getDefinition_Expression()
   {
     return (EReference)definitionEClass.getEStructuralFeatures().get(5);
   }
@@ -768,7 +788,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDer()
+  @Override
+public EClass getDer()
   {
     return derEClass;
   }
@@ -778,7 +799,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDer_Expression()
+  @Override
+public EReference getDer_Expression()
   {
     return (EReference)derEClass.getEStructuralFeatures().get(0);
   }
@@ -788,7 +810,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getInit()
+  @Override
+public EClass getInit()
   {
     return initEClass;
   }
@@ -798,7 +821,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInit_Expression()
+  @Override
+public EReference getInit_Expression()
   {
     return (EReference)initEClass.getEStructuralFeatures().get(0);
   }
@@ -808,7 +832,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getInvariant()
+  @Override
+public EClass getInvariant()
   {
     return invariantEClass;
   }
@@ -818,7 +843,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getInvariant_ConstraintName()
+  @Override
+public EAttribute getInvariant_ConstraintName()
   {
     return (EAttribute)invariantEClass.getEStructuralFeatures().get(0);
   }
@@ -828,7 +854,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getInvariant_Expression()
+  @Override
+public EReference getInvariant_Expression()
   {
     return (EReference)invariantEClass.getEStructuralFeatures().get(1);
   }
@@ -838,7 +865,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOperationContextDecl()
+  @Override
+public EClass getOperationContextDecl()
   {
     return operationContextDeclEClass;
   }
@@ -848,7 +876,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationContextDecl_Operation()
+  @Override
+public EReference getOperationContextDecl_Operation()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(0);
   }
@@ -858,7 +887,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationContextDecl_Parameters()
+  @Override
+public EReference getOperationContextDecl_Parameters()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -868,7 +898,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationContextDecl_Type()
+  @Override
+public EReference getOperationContextDecl_Type()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(2);
   }
@@ -878,7 +909,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationContextDecl_Pres()
+  @Override
+public EReference getOperationContextDecl_Pres()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(3);
   }
@@ -888,7 +920,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationContextDecl_Posts()
+  @Override
+public EReference getOperationContextDecl_Posts()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(4);
   }
@@ -898,7 +931,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationContextDecl_Bodies()
+  @Override
+public EReference getOperationContextDecl_Bodies()
   {
     return (EReference)operationContextDeclEClass.getEStructuralFeatures().get(5);
   }
@@ -908,7 +942,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOperationRef()
+  @Override
+public EClass getOperationRef()
   {
     return operationRefEClass;
   }
@@ -918,7 +953,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPackageDeclaration()
+  @Override
+public EClass getPackageDeclaration()
   {
     return packageDeclarationEClass;
   }
@@ -928,7 +964,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPackageDeclaration_Package()
+  @Override
+public EReference getPackageDeclaration_Package()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -938,7 +975,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPackageDeclaration_Contexts()
+  @Override
+public EReference getPackageDeclaration_Contexts()
   {
     return (EReference)packageDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -948,7 +986,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPackageRef()
+  @Override
+public EClass getPackageRef()
   {
     return packageRefEClass;
   }
@@ -958,7 +997,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getParameter()
+  @Override
+public EClass getParameter()
   {
     return parameterEClass;
   }
@@ -968,7 +1008,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameter_Name()
+  @Override
+public EAttribute getParameter_Name()
   {
     return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
   }
@@ -978,7 +1019,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParameter_Type()
+  @Override
+public EReference getParameter_Type()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(1);
   }
@@ -988,7 +1030,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPost()
+  @Override
+public EClass getPost()
   {
     return postEClass;
   }
@@ -998,7 +1041,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPost_ConstraintName()
+  @Override
+public EAttribute getPost_ConstraintName()
   {
     return (EAttribute)postEClass.getEStructuralFeatures().get(0);
   }
@@ -1008,7 +1052,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPost_Expression()
+  @Override
+public EReference getPost_Expression()
   {
     return (EReference)postEClass.getEStructuralFeatures().get(1);
   }
@@ -1018,7 +1063,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPre()
+  @Override
+public EClass getPre()
   {
     return preEClass;
   }
@@ -1028,7 +1074,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPre_ConstraintName()
+  @Override
+public EAttribute getPre_ConstraintName()
   {
     return (EAttribute)preEClass.getEStructuralFeatures().get(0);
   }
@@ -1038,7 +1085,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPre_Expression()
+  @Override
+public EReference getPre_Expression()
   {
     return (EReference)preEClass.getEStructuralFeatures().get(1);
   }
@@ -1048,7 +1096,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPropertyContextDecl()
+  @Override
+public EClass getPropertyContextDecl()
   {
     return propertyContextDeclEClass;
   }
@@ -1058,7 +1107,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPropertyContextDecl_Property()
+  @Override
+public EReference getPropertyContextDecl_Property()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(0);
   }
@@ -1068,7 +1118,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPropertyContextDecl_Type()
+  @Override
+public EReference getPropertyContextDecl_Type()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(1);
   }
@@ -1078,7 +1129,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPropertyContextDecl_Init()
+  @Override
+public EReference getPropertyContextDecl_Init()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(2);
   }
@@ -1088,7 +1140,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPropertyContextDecl_Der()
+  @Override
+public EReference getPropertyContextDecl_Der()
   {
     return (EReference)propertyContextDeclEClass.getEStructuralFeatures().get(3);
   }
@@ -1098,7 +1151,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPropertyRef()
+  @Override
+public EClass getPropertyRef()
   {
     return propertyRefEClass;
   }
@@ -1108,7 +1162,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getQualifiedClassifierRef()
+  @Override
+public EClass getQualifiedClassifierRef()
   {
     return qualifiedClassifierRefEClass;
   }
@@ -1118,7 +1173,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getQualifiedClassifierRef_Namespace()
+  @Override
+public EAttribute getQualifiedClassifierRef_Namespace()
   {
     return (EAttribute)qualifiedClassifierRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1128,7 +1184,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getQualifiedClassifierRef_Element()
+  @Override
+public EReference getQualifiedClassifierRef_Element()
   {
     return (EReference)qualifiedClassifierRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1138,7 +1195,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getQualifiedOperationRef()
+  @Override
+public EClass getQualifiedOperationRef()
   {
     return qualifiedOperationRefEClass;
   }
@@ -1148,7 +1206,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getQualifiedOperationRef_Namespace()
+  @Override
+public EAttribute getQualifiedOperationRef_Namespace()
   {
     return (EAttribute)qualifiedOperationRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1158,7 +1217,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getQualifiedOperationRef_Element()
+  @Override
+public EReference getQualifiedOperationRef_Element()
   {
     return (EReference)qualifiedOperationRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1168,7 +1228,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getQualifiedPropertyRef()
+  @Override
+public EClass getQualifiedPropertyRef()
   {
     return qualifiedPropertyRefEClass;
   }
@@ -1178,7 +1239,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getQualifiedPropertyRef_Namespace()
+  @Override
+public EAttribute getQualifiedPropertyRef_Namespace()
   {
     return (EAttribute)qualifiedPropertyRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1188,7 +1250,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getQualifiedPropertyRef_Element()
+  @Override
+public EReference getQualifiedPropertyRef_Element()
   {
     return (EReference)qualifiedPropertyRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1198,7 +1261,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getQualifiedPackageRef()
+  @Override
+public EClass getQualifiedPackageRef()
   {
     return qualifiedPackageRefEClass;
   }
@@ -1208,7 +1272,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getQualifiedPackageRef_Namespace()
+  @Override
+public EAttribute getQualifiedPackageRef_Namespace()
   {
     return (EAttribute)qualifiedPackageRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1218,7 +1283,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getQualifiedPackageRef_Element()
+  @Override
+public EReference getQualifiedPackageRef_Element()
   {
     return (EReference)qualifiedPackageRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1228,7 +1294,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimpleClassifierRef()
+  @Override
+public EClass getSimpleClassifierRef()
   {
     return simpleClassifierRefEClass;
   }
@@ -1238,7 +1305,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleClassifierRef_Classifier()
+  @Override
+public EAttribute getSimpleClassifierRef_Classifier()
   {
     return (EAttribute)simpleClassifierRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1248,7 +1316,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimpleOperationRef()
+  @Override
+public EClass getSimpleOperationRef()
   {
     return simpleOperationRefEClass;
   }
@@ -1258,7 +1327,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleOperationRef_Operation()
+  @Override
+public EAttribute getSimpleOperationRef_Operation()
   {
     return (EAttribute)simpleOperationRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1268,7 +1338,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimplePackageRef()
+  @Override
+public EClass getSimplePackageRef()
   {
     return simplePackageRefEClass;
   }
@@ -1278,7 +1349,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimplePackageRef_Package()
+  @Override
+public EAttribute getSimplePackageRef_Package()
   {
     return (EAttribute)simplePackageRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1288,7 +1360,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimplePropertyRef()
+  @Override
+public EClass getSimplePropertyRef()
   {
     return simplePropertyRefEClass;
   }
@@ -1298,7 +1371,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimplePropertyRef_Feature()
+  @Override
+public EAttribute getSimplePropertyRef_Feature()
   {
     return (EAttribute)simplePropertyRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1308,7 +1382,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getExpression()
+  @Override
+public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -1318,7 +1393,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNavigatingExp()
+  @Override
+public EClass getNavigatingExp()
   {
     return navigatingExpEClass;
   }
@@ -1328,7 +1404,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOclMessageArg()
+  @Override
+public EClass getOclMessageArg()
   {
     return oclMessageArgEClass;
   }
@@ -1338,7 +1415,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOclMessageArg_Type()
+  @Override
+public EReference getOclMessageArg_Type()
   {
     return (EReference)oclMessageArgEClass.getEStructuralFeatures().get(0);
   }
@@ -1348,7 +1426,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPrimitiveType()
+  @Override
+public EClass getPrimitiveType()
   {
     return primitiveTypeEClass;
   }
@@ -1358,7 +1437,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPrimitiveType_Name()
+  @Override
+public EAttribute getPrimitiveType_Name()
   {
     return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1368,7 +1448,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypeExp()
+  @Override
+public EClass getTypeExp()
   {
     return typeExpEClass;
   }
@@ -1378,7 +1459,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCollectionType()
+  @Override
+public EClass getCollectionType()
   {
     return collectionTypeEClass;
   }
@@ -1388,7 +1470,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getCollectionType_TypeIdentifier()
+  @Override
+public EAttribute getCollectionType_TypeIdentifier()
   {
     return (EAttribute)collectionTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1398,7 +1481,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTupleType()
+  @Override
+public EClass getTupleType()
   {
     return tupleTypeEClass;
   }
@@ -1408,7 +1492,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTupleType_Name()
+  @Override
+public EAttribute getTupleType_Name()
   {
     return (EAttribute)tupleTypeEClass.getEStructuralFeatures().get(0);
   }
@@ -1418,7 +1503,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTupleType_Part()
+  @Override
+public EReference getTupleType_Part()
   {
     return (EReference)tupleTypeEClass.getEStructuralFeatures().get(1);
   }
@@ -1428,7 +1514,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass gettuplePart()
+  @Override
+public EClass gettuplePart()
   {
     return tuplePartEClass;
   }
@@ -1438,7 +1525,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute gettuplePart_Name()
+  @Override
+public EAttribute gettuplePart_Name()
   {
     return (EAttribute)tuplePartEClass.getEStructuralFeatures().get(0);
   }
@@ -1448,7 +1536,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference gettuplePart_Type()
+  @Override
+public EReference gettuplePart_Type()
   {
     return (EReference)tuplePartEClass.getEStructuralFeatures().get(1);
   }
@@ -1458,7 +1547,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCollectionLiteralExp()
+  @Override
+public EClass getCollectionLiteralExp()
   {
     return collectionLiteralExpEClass;
   }
@@ -1468,7 +1558,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCollectionLiteralExp_CollectionLiteralParts()
+  @Override
+public EReference getCollectionLiteralExp_CollectionLiteralParts()
   {
     return (EReference)collectionLiteralExpEClass.getEStructuralFeatures().get(0);
   }
@@ -1478,7 +1569,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCollectionLiteralPart()
+  @Override
+public EClass getCollectionLiteralPart()
   {
     return collectionLiteralPartEClass;
   }
@@ -1488,7 +1580,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCollectionLiteralPart_Expression()
+  @Override
+public EReference getCollectionLiteralPart_Expression()
   {
     return (EReference)collectionLiteralPartEClass.getEStructuralFeatures().get(0);
   }
@@ -1498,7 +1591,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCollectionLiteralPart_LastExpression()
+  @Override
+public EReference getCollectionLiteralPart_LastExpression()
   {
     return (EReference)collectionLiteralPartEClass.getEStructuralFeatures().get(1);
   }
@@ -1508,7 +1602,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPrimitiveLiteralExp()
+  @Override
+public EClass getPrimitiveLiteralExp()
   {
     return primitiveLiteralExpEClass;
   }
@@ -1518,7 +1613,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTupleLiteralExp()
+  @Override
+public EClass getTupleLiteralExp()
   {
     return tupleLiteralExpEClass;
   }
@@ -1528,7 +1624,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTupleLiteralExp_Part()
+  @Override
+public EReference getTupleLiteralExp_Part()
   {
     return (EReference)tupleLiteralExpEClass.getEStructuralFeatures().get(0);
   }
@@ -1538,7 +1635,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTupleLiteralPart()
+  @Override
+public EClass getTupleLiteralPart()
   {
     return tupleLiteralPartEClass;
   }
@@ -1548,7 +1646,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTupleLiteralPart_Name()
+  @Override
+public EAttribute getTupleLiteralPart_Name()
   {
     return (EAttribute)tupleLiteralPartEClass.getEStructuralFeatures().get(0);
   }
@@ -1558,7 +1657,8 @@ public class BacktrackingContentAssistTestPackageImpl extends EPackageImpl imple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTupleLiteralPart_Type()
+  @Override
+public EReference getTupleLiteralPart_Type()
   {
     return (EReference)tupleLiteralPartEClass.getEStructuralFeatures().get(1);
   }

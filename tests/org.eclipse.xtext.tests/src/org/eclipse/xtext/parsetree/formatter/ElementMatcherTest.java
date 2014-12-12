@@ -48,6 +48,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 		public void after(final String name, final AbstractElement ele) {
 			patterns.add(new IAfterElement() {
+				@Override
 				public AbstractElement matchAfter() {
 					return ele;
 				}
@@ -65,6 +66,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 		public void before(final String name, final AbstractElement ele) {
 			patterns.add(new IBeforeElement() {
+				@Override
 				public AbstractElement matchBefore() {
 					return ele;
 				}
@@ -82,6 +84,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 
 		public void between(final String name, final AbstractElement first, final AbstractElement second) {
 			patterns.add(new IBetweenElements() {
+				@Override
 				public Pair<AbstractElement, AbstractElement> matchBetween() {
 					return Tuples.create(first, second);
 				}

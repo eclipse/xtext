@@ -136,6 +136,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment implem
 		return fallback.getRequiredBundlesUi(grammar);
 	}
 
+	@Override
 	public void registerNaming(Naming n) {
 		this.naming = n;
 	}

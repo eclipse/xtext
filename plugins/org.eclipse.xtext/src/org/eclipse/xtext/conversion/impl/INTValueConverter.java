@@ -32,6 +32,7 @@ public class INTValueConverter extends AbstractLexerBasedConverter<Integer> {
 			throw new ValueConverterException(getRuleName() + "-value may not be negative (value: " + value + ").", null, null);
 	}
 	
+	@Override
 	public Integer toValue(String string, INode node) {
 		if (Strings.isEmpty(string))
 			throw new ValueConverterException("Couldn't convert empty string to an int value.", node, null);

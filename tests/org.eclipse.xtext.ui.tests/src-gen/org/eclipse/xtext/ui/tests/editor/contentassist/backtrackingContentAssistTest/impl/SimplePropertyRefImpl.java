@@ -73,7 +73,8 @@ public class SimplePropertyRefImpl extends PropertyRefImpl implements SimpleProp
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getFeature()
+  @Override
+public String getFeature()
   {
     return feature;
   }
@@ -83,7 +84,8 @@ public class SimplePropertyRefImpl extends PropertyRefImpl implements SimpleProp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeature(String newFeature)
+  @Override
+public void setFeature(String newFeature)
   {
     String oldFeature = feature;
     feature = newFeature;

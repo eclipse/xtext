@@ -166,6 +166,7 @@ public class IndexingTest extends AbstractXtendTestCase {
 		for (int i = 0; i < 10; i++) {
 			DerivedStateAwareResource resource = (DerivedStateAwareResource) resourceSet.createResource(URI.createURI("Dummy" + i + ".xtend"));
 			resource.setDerivedStateComputer(new IDerivedStateComputer() {
+				@Override
 				public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
 					if (!preLinkingPhase) {
 						wrapper.set(Boolean.TRUE);
@@ -173,6 +174,7 @@ public class IndexingTest extends AbstractXtendTestCase {
 					derivedStateComputer.installDerivedState(resource, preLinkingPhase);
 				}
 				
+				@Override
 				public void discardDerivedState(DerivedStateAwareResource resource) {
 					derivedStateComputer.discardDerivedState(resource);
 				}

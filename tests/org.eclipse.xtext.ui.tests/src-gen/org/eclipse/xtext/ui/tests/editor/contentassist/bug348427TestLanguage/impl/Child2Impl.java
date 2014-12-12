@@ -116,7 +116,8 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -126,7 +127,8 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -139,7 +141,8 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isBool()
+  @Override
+public boolean isBool()
   {
     return bool;
   }
@@ -149,7 +152,8 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBool(boolean newBool)
+  @Override
+public void setBool(boolean newBool)
   {
     boolean oldBool = bool;
     bool = newBool;
@@ -162,7 +166,8 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getString()
+  @Override
+public String getString()
   {
     return string;
   }
@@ -172,7 +177,8 @@ public class Child2Impl extends MinimalEObjectImpl.Container implements Child2
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setString(String newString)
+  @Override
+public void setString(String newString)
   {
     String oldString = string;
     string = newString;

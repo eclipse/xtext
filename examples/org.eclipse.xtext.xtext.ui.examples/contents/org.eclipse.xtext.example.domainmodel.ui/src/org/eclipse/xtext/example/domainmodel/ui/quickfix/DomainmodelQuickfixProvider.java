@@ -29,6 +29,7 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
 		acceptor.accept(issue, "Capitalize name", "Capitalize name  of '" + issue.getData()[0] + "'", "upcase.png",
 		// exemplary textual modification 
 				new IModification() {
+					@Override
 					public void apply(IModificationContext context) throws BadLocationException {
 						IXtextDocument xtextDocument = context.getXtextDocument();
 						String firstLetter = xtextDocument.get(issue.getOffset(), 1);
@@ -42,6 +43,7 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
 		acceptor.accept(issue, "Uncapitalize name", "Uncapitalize name of '" + issue.getData()[0] + "'", "upcase.png",
 		// exemplary semantic modification 
 				new ISemanticModification() {
+					@Override
 					public void apply(EObject element, IModificationContext context) {
 						((Feature) element).setName(Strings.toFirstLower(issue.getData()[0]));
 					}

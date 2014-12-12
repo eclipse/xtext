@@ -29,6 +29,7 @@ public class ReflectionTypeProviderFactory extends AbstractTypeProviderFactory {
 		this.services = services;
 	}
 	
+	@Override
 	public ReflectionTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");

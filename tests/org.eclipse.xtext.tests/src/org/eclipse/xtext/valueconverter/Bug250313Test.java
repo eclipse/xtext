@@ -91,10 +91,12 @@ public class Bug250313Test extends AbstractXtextTests {
 		@Inject
 		private Bug250313Test test;
 
+		@Override
 		public String toString(Object value, String lexerRule) {
 			return delegate.toString(value, lexerRule);
 		}
 
+		@Override
 		public Object toValue(String string, String lexerRule, INode node) throws ValueConverterException {
 			test.toValueCalled(string, lexerRule, node);
 			return delegate.toValue(string, lexerRule, node);

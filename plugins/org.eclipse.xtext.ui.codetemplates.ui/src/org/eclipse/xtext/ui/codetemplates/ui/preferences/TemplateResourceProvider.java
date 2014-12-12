@@ -31,6 +31,7 @@ public class TemplateResourceProvider implements IEditedResourceProvider {
 	@Inject
 	private IGrammarAccess grammarAccess;
 	
+	@Override
 	public XtextResource createResource() {
 		ResourceSet resourceSet = resourceSetProvider.get(null);
 		Resource grammarResource = resourceSet.createResource(

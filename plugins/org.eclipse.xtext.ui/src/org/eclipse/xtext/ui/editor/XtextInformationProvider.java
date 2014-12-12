@@ -48,6 +48,7 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 	protected ITextViewer textViewer = null;
 	protected IRegion contextRegion = null;
 
+	@Override
 	public IInformationControlCreator getInformationPresenterControlCreator() {
 		if(contextObject != null && textViewer != null && contextRegion != null){
 			IEObjectHoverProvider hoverProvider = serviceProvider.findService(contextObject , IEObjectHoverProvider.class);
@@ -61,6 +62,7 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 		return null;
 	}
 
+	@Override
 	public Object getInformation2(ITextViewer textViewer, IRegion subject) {
 		if(hover != null && hover instanceof ITextHoverExtension2){
 			return ((ITextHoverExtension2) hover).getHoverInfo2(textViewer, subject);
@@ -68,11 +70,13 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 		return null;
 	}
 
+	@Override
 	public IRegion getSubject(ITextViewer textViewer, final int offset) {
 		if(textViewer instanceof XtextSourceViewer){
 			IDocument document = ((XtextSourceViewer) textViewer).getDocument();
 			if(document instanceof IXtextDocument){
 				Object resolvedObject = ((IXtextDocument) document).priorityReadOnly(new IUnitOfWork<Object, XtextResource>() {
+					@Override
 					public Object exec(XtextResource state) throws Exception {
 						return eObjectAtOffsetHelper.resolveElementAt(state, offset);
 					}
@@ -97,6 +101,7 @@ public class XtextInformationProvider  implements IInformationProvider, IInforma
 	 * Just for compatibility reasons
 	 * {@link org.eclipse.jface.text.information.IInformationProvider#getInformation(ITextViewer, IRegion)}
 	 */
+	@Override
 	@Deprecated
 	public String getInformation(ITextViewer textViewer, IRegion subject) {
 		if(hover instanceof ITextHoverExtension2){

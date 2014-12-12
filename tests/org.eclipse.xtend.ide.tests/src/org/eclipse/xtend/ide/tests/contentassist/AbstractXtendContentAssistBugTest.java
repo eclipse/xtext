@@ -46,6 +46,7 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUIT
 		super.tearDown();
 	}
 	
+	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		IJavaProject javaProject = findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
 		if (javaProject == null || !javaProject.exists()) {
@@ -59,6 +60,7 @@ public abstract class AbstractXtendContentAssistBugTest extends AbstractXtendUIT
 		return javaProject;
 	}
 
+	@Override
 	public XtextResource getResourceFor(InputStream stream) {
 		try {
 			XtextResourceSet set = get(XtextResourceSet.class);

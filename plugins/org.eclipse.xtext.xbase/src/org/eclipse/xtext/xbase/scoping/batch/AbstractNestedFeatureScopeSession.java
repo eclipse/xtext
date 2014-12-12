@@ -90,6 +90,7 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	}
 	
 	/* @Nullable */
+	@Override
 	public IEObjectDescription getLocalElement(QualifiedName name) {
 		return parent.getLocalElement(name);
 	}
@@ -114,10 +115,12 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.getExtensionProviders();
 	}
 	
+	@Override
 	public boolean isInstanceContext() {
 		return parent.isInstanceContext();
 	}
 	
+	@Override
 	public boolean isConstructorContext() {
 		return parent.isConstructorContext();
 	}
@@ -132,10 +135,12 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return id;
 	}
 	
+	@Override
 	public boolean isVisible(JvmMember member) {
 		return parent.isVisible(member);
 	}
 	
+	@Override
 	public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 		return parent.isVisible(member, receiverType, receiverFeature);
 	}

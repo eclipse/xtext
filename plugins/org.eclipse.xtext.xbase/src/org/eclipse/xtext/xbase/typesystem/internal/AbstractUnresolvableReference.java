@@ -29,10 +29,12 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 		this.state = state;
 	}
 
+	@Override
 	public XExpression getExpression() {
 		return expression;
 	}
 
+	@Override
 	public void applyToComputationState() {
 		StackedResolvedTypes resolvedTypes = getResolvedTypes();
 		resolvedTypes.acceptCandidate(expression, this);
@@ -53,6 +55,7 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 		return state.getStackedResolvedTypes();
 	}
 	
+	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
 		return true;
@@ -70,11 +73,13 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 
 	protected abstract List<XExpression> getArguments();
 
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return other;
 	}
 
 	/* @Nullable */
+	@Override
 	public JvmIdentifiableElement getFeature() {
 		return null;
 	}

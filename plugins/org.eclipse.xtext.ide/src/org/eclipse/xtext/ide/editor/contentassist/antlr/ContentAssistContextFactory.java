@@ -105,6 +105,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 
 	private String document;
 
+	@Override
 	public ContentAssistContext apply(Builder from) {
 		return from.toContext();
 	}
@@ -136,6 +137,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		List<Future<?>> futures = Lists.newArrayList();
 		if (!datatypeNode.equals(lastCompleteNode)) {
 			futures.add(pool.submit(new Callable<Void>() {
+				@Override
 				public Void call() throws Exception {
 					handleLastCompleteNodeAsPartOfDatatypeNode();
 					return null;
@@ -147,6 +149,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		// any valid grammar element by removing the current token and using it as prefix
 		if (datatypeNode.equals(lastCompleteNode) && completionOffset != lastCompleteNode.getOffset()) {
 			futures.add(pool.submit(new Callable<Void>() {
+				@Override
 				public Void call() throws Exception {
 					handleLastCompleteNodeIsAtEndOfDatatypeNode();
 					return null;
@@ -157,6 +160,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 		// 4th context: we assume, that the current position is perfectly ok to insert a new token, if the previous one was valid
 		if (!(lastCompleteNode instanceof ILeafNode) || lastCompleteNode.getGrammarElement() != null) {
 			futures.add(pool.submit(new Callable<Void>() {
+				@Override
 				public Void call() throws Exception {
 					handleLastCompleteNodeIsPartOfLookahead();
 					return null;
@@ -331,6 +335,7 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 	protected void computeFollowElements(Collection<FollowElement> followElements, final Collection<AbstractElement> result) {
 		FollowElementCalculator calculator = new FollowElementCalculator();
 		calculator.acceptor = new IFollowElementAcceptor(){
+			@Override
 			public void accept(AbstractElement element) {
 				ParserRule rule = GrammarUtil.containingParserRule(element);
 				if (rule == null || !GrammarUtil.isDatatypeRule(rule))

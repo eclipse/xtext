@@ -73,6 +73,7 @@ public class TypeChooser {
 
 	protected void revealInEditor(XtextEditor activeXtextEditor, Iterable<TypeUsage> usages, final XtextResource resource) {
 		boolean isRevealUsages = activeXtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<Boolean, XtextResource>() {
+			@Override
 			public Boolean exec(XtextResource state) throws Exception {
 				return state.getURI().equals(resource.getURI());
 			}
@@ -85,12 +86,15 @@ public class TypeChooser {
 	}
 
 	protected static class ContentProvider implements IStructuredContentProvider {
+		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
 
+		@Override
 		public void dispose() {
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public Object[] getElements(Object inputElement) {
 			return toArray((List<JvmDeclaredType>)inputElement, JvmDeclaredType.class);
@@ -143,6 +147,7 @@ public class TypeChooser {
 			searchControl = new Text(composite, SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
 			setDefaultGridData(searchControl);
 			ModifyListener textModifyListener = new ModifyListener() {
+				@Override
 				public void modifyText(ModifyEvent e) {
 					applyFilter();
 				}

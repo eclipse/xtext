@@ -45,12 +45,14 @@ public class StateBasedContainerTest extends ResourceDescriptionsBasedContainerT
 		return new StateBasedContainer(this, this);
 	}
 
+	@Override
 	public Collection<URI> getContents() {
 		if (simulateEmpty)
 			return Collections.emptyList();
 		return Collections.singleton(uri);
 	}
 
+	@Override
 	public boolean contains(URI uri) {
 		if (simulateEmpty)
 			return false;

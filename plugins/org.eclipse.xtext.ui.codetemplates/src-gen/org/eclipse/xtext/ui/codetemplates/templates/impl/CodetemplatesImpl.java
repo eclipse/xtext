@@ -86,7 +86,8 @@ public class CodetemplatesImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  public Grammar getLanguage()
+  @Override
+public Grammar getLanguage()
   {
     if (language != null && language.eIsProxy())
     {
@@ -116,7 +117,8 @@ public class CodetemplatesImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setLanguage(Grammar newLanguage)
+  @Override
+public void setLanguage(Grammar newLanguage)
   {
     Grammar oldLanguage = language;
     language = newLanguage;
@@ -129,7 +131,8 @@ public class CodetemplatesImpl extends MinimalEObjectImpl.Container implements C
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Codetemplate> getTemplates()
+  @Override
+public EList<Codetemplate> getTemplates()
   {
     if (templates == null)
     {

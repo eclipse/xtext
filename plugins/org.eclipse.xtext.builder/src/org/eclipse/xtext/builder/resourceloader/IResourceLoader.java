@@ -106,6 +106,7 @@ public interface IResourceLoader {
 		Collection<URI> sort(Collection<URI> uris);
 
 		class NoSorting implements Sorter {
+			@Override
 			public Collection<URI> sort(Collection<URI> uris) {
 				return Lists.newArrayList(uris);
 			}

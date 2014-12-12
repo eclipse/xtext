@@ -125,7 +125,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -135,7 +136,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Imports()
+  @Override
+public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -145,7 +147,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_GenerateDirective()
+  @Override
+public EReference getModel_GenerateDirective()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -155,7 +158,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_ReferenceHolder()
+  @Override
+public EReference getModel_ReferenceHolder()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -165,7 +169,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getReferenceHolder()
+  @Override
+public EClass getReferenceHolder()
   {
     return referenceHolderEClass;
   }
@@ -175,7 +180,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReferenceHolder_DefaultReference()
+  @Override
+public EReference getReferenceHolder_DefaultReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(0);
   }
@@ -185,7 +191,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReferenceHolder_CustomizedReference()
+  @Override
+public EReference getReferenceHolder_CustomizedReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(1);
   }
@@ -195,7 +202,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReferenceHolder_SubtypeReference()
+  @Override
+public EReference getReferenceHolder_SubtypeReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(2);
   }
@@ -205,7 +213,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGenerateDirective()
+  @Override
+public EClass getGenerateDirective()
   {
     return generateDirectiveEClass;
   }
@@ -215,7 +224,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGenerateDirective_TypeName()
+  @Override
+public EAttribute getGenerateDirective_TypeName()
   {
     return (EAttribute)generateDirectiveEClass.getEStructuralFeatures().get(0);
   }
@@ -225,7 +235,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getImport()
+  @Override
+public EClass getImport()
   {
     return importEClass;
   }
@@ -235,7 +246,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getImport_ImportedNamespace()
+  @Override
+public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -245,7 +257,8 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
+  @Override
+public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
   {
     return (ContentAssistTestLanguageFactory)getEFactoryInstance();
   }

@@ -37,6 +37,7 @@ public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 		return errorNode;
 	}
 
+	@Override
 	public String getMessage() {
 		return errorNode.getSyntaxErrorMessage().getMessage();
 	}

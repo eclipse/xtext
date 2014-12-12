@@ -104,7 +104,8 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -114,7 +115,8 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Words()
+  @Override
+public EReference getModel_Words()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWord()
+  @Override
+public EClass getWord()
   {
     return wordEClass;
   }
@@ -134,7 +137,8 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWord_Value()
+  @Override
+public EAttribute getWord_Value()
   {
     return (EAttribute)wordEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class EncodingTestPackageImpl extends EPackageImpl implements EncodingTes
    * <!-- end-user-doc -->
    * @generated
    */
-  public EncodingTestFactory getEncodingTestFactory()
+  @Override
+public EncodingTestFactory getEncodingTestFactory()
   {
     return (EncodingTestFactory)getEFactoryInstance();
   }

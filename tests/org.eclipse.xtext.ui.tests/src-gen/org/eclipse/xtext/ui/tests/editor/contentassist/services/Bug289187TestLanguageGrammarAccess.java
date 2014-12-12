@@ -25,6 +25,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	classes+=Class*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//classes+=Class*
@@ -87,6 +88,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
 		//	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
 		//	operations+=Operation* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
@@ -239,6 +241,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Attribute:
 		//	visibility=Visibility? "attribute" name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//visibility=Visibility? "attribute" name=ID
@@ -271,6 +274,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Operation:
 		//	visibility=Visibility? "operation" name=ID;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//visibility=Visibility? "operation" name=ID
@@ -307,6 +311,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//enum Visibility:
 		//	PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC;
+		@Override
 		public EnumRule getRule() { return rule; }
 
 		//PRIVATE | PROTECTED | PACKAGE_PRIVATE | PUBLIC
@@ -376,6 +381,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

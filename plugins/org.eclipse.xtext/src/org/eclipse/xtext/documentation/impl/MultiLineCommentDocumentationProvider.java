@@ -57,6 +57,7 @@ public class MultiLineCommentDocumentationProvider extends AbstractMultiLineComm
 	 * @return a list with exactly one node or an empty list if the object is undocumented.
 	 */
 	/* @NonNull */
+	@Override
 	public List<INode> getDocumentationNodes(/* @NonNull */ EObject object) {
 		ICompositeNode node = NodeModelUtils.getNode(object);
 		List<INode> result = Collections.emptyList();
@@ -77,6 +78,7 @@ public class MultiLineCommentDocumentationProvider extends AbstractMultiLineComm
 		return result;
 	}
 	
+	@Override
 	public String getDocumentation(EObject o) {
 		String returnValue = findComment(o);
 		return getTextFromMultilineComment(returnValue);

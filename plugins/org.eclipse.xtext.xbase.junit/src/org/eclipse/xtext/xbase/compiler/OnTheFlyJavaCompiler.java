@@ -369,6 +369,7 @@ public class OnTheFlyJavaCompiler {
 				tempDir.deleteOnExit();
 				// Classloader needs .class files to lazy load an anonymous non static classes
 				Files.cleanFolder(tempDir, new FileFilter() {
+					@Override
 					public boolean accept(File pathname) {
 						boolean isClass = pathname.getName().endsWith(".class");
 						if(isClass) {

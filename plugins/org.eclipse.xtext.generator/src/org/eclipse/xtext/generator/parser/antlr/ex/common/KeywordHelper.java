@@ -73,6 +73,7 @@ public class KeywordHelper implements Adapter {
 
 	public final static Comparator<String> keywordComparator = new Comparator<String>() {
 
+		@Override
 		public int compare(String s1, String s2) {
 			// sortBy(e|e).sortBy(e|e.length*-1)
 			int result = s2.length() - s1.length();
@@ -95,11 +96,13 @@ public class KeywordHelper implements Adapter {
 				EcoreUtil.<EObject>getAllContents(parserRules), EcoreUtil.<EObject>getAllContents(enumRules));
 		Iterator<Keyword> filtered = Iterators.filter(iter, Keyword.class);
 		Iterator<String> transformed = Iterators.transform(filtered, new Function<Keyword, String>() {
+			@Override
 			public String apply(Keyword from) {
 				return from.getValue();
 			}
 		});
 		TreeSet<String> treeSet = Sets.newTreeSet(new Comparator<String>() {
+			@Override
 			public int compare(String o1, String o2) {
 				if (o1.length() == o2.length())
 					return o1.compareTo(o2);
@@ -140,17 +143,21 @@ public class KeywordHelper implements Adapter {
 			return s;
 	}
 
+	@Override
 	public Notifier getTarget() {
 		return null;
 	}
 
+	@Override
 	public boolean isAdapterForType(Object type) {
 		return false;
 	}
 
+	@Override
 	public void notifyChanged(Notification notification) {
 	}
 
+	@Override
 	public void setTarget(Notifier newTarget) {
 	}
 

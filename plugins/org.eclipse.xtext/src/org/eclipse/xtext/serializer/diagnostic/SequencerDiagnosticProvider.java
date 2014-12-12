@@ -45,6 +45,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	 * @author meysholdt - Initial contribution and API
 	 */
 	private final class GetGrammarEle implements Function<ISemState, AbstractElement> {
+		@Override
 		public AbstractElement apply(ISemState from) {
 			return from.getAssignedGrammarElement();
 		}
@@ -52,6 +53,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 
 	public static class NamedElement2Name implements Function<ENamedElement, String> {
 
+		@Override
 		public String apply(ENamedElement from) {
 			return from == null ? "null" : from.getName();
 		}
@@ -69,11 +71,13 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	@Inject
 	protected IContextFinder contextFinder;
 
+	@Override
 	public ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature) {
 		String msg = "A value for feature '" + feature.getName() + "' is missing but required.";
 		return new SerializationDiagnostic(FEATURE_VALUE_MISSING, semanticObject, msg);
 	}
 
+	@Override
 	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context) {
 		Set<EObject> contexts = Sets.newHashSet(contextFinder.findContextsByContentsAndContainer(semanticObject, null));
 		List<EClass> validTypes = getValidTypes(context);
@@ -121,6 +125,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		return Collections.emptyList();
 	}
 
+	@Override
 	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject,
 			EObject context, Nfa<ISemState> nfa) {
 		GrammarElementTitleSwitch ele2str = new GrammarElementTitleSwitch().showAssignments().setValueForNull(null);

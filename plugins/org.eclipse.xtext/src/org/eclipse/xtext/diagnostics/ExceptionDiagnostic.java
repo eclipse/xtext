@@ -18,26 +18,32 @@ public class ExceptionDiagnostic implements Diagnostic {
 		this.exception = exception;
 	}
 	
+	@Override
 	public int getLength() {
 		return 1;
 	}
 
+	@Override
 	public int getOffset() {
 		return 0;
 	}
 
+	@Override
 	public int getColumn() {
 		return 0;
 	}
 
+	@Override
 	public int getLine() {
 		return 1;
 	}
 
+	@Override
 	public String getLocation() {
 		return null;
 	}
 
+	@Override
 	public String getMessage() {
 		return exception.getClass().getSimpleName() + ": " + exception.getMessage() + " (see logs for details)";
 	}

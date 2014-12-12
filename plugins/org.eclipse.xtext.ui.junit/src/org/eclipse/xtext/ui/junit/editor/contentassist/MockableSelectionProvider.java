@@ -16,18 +16,22 @@ import org.eclipse.jface.viewers.ISelectionProvider;
  */
 public class MockableSelectionProvider implements ISelectionProvider {
 
+	@Override
 	public void addSelectionChangedListener(ISelectionChangedListener listener) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ISelection getSelection() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void removeSelectionChangedListener(ISelectionChangedListener listener) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setSelection(ISelection selection) {
 		throw new UnsupportedOperationException();
 	}

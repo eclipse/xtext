@@ -77,7 +77,8 @@ public class ContentAssistCustomizingTestFactoryImpl extends EFactoryImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -88,7 +89,8 @@ public class ContentAssistCustomizingTestFactoryImpl extends EFactoryImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
+  @Override
+public Type createType()
   {
     TypeImpl type = new TypeImpl();
     return type;
@@ -99,7 +101,8 @@ public class ContentAssistCustomizingTestFactoryImpl extends EFactoryImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef createTypeRef()
+  @Override
+public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
     return typeRef;
@@ -110,7 +113,8 @@ public class ContentAssistCustomizingTestFactoryImpl extends EFactoryImpl implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistCustomizingTestPackage getContentAssistCustomizingTestPackage()
+  @Override
+public ContentAssistCustomizingTestPackage getContentAssistCustomizingTestPackage()
   {
     return (ContentAssistCustomizingTestPackage)getEPackage();
   }

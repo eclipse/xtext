@@ -44,33 +44,39 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 		private int i = 0;
 		boolean wasCompletelyPopped = false;
 		
+		@Override
 		public void pushTemplateIndentation(/* @NonNull */ CharSequence completeIndentation) {
 			i++;
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 		}
 
+		@Override
 		public void pushSemanticIndentation(/* @NonNull */ CharSequence completeIndentation) {
 			i++;
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 		}
 
+		@Override
 		public void popIndentation() {
 			i--;
 			wasCompletelyPopped = i == 0;
 			assertTrue("i>=0", i>=0);
 		}
 
+		@Override
 		public void accept(/* @NonNull */ IRichStringPartAcceptor acceptor) {
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 		}
 
 		/* @NonNull */ 
+		@Override
 		public CharSequence getTotalSemanticIndentation() {
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 			return "";
 		}
 
 		/* @NonNull */ 
+		@Override
 		public CharSequence getTotalIndentation() {
 			assertFalse("wasCompletelyPopped", wasCompletelyPopped);
 			return "";
@@ -167,6 +173,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 	
 	public static class ForLoopSkipped extends AbstractRichStringPartAcceptor {
 
+		@Override
 		public boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, /* @NonNull */ CharSequence indentation) {
 			return false;
 		}
@@ -193,6 +200,7 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 			forLoopStack.push(count);
 		}
 		
+		@Override
 		public boolean forLoopHasNext(/* @Nullable */ XExpression before, /* @Nullable */ XExpression separator, /* @NonNull */ CharSequence indentation) {
 			Integer peek = forLoopStack.peek();
 			if (peek > 0) {

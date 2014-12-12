@@ -44,6 +44,7 @@ public class PreferenceStoreIndentationInformation implements IIndentationInform
 
 	private String indentString = null;
 
+	@Override
 	public synchronized String getIndentString() {
 		if (indentString == null) {
 			indentString = isSpacesForTab() ? WS.substring(0, Math.min(getTabWidth(), WS.length())) : "\t";
@@ -51,6 +52,7 @@ public class PreferenceStoreIndentationInformation implements IIndentationInform
 		return indentString;
 	}
 
+	@Override
 	public synchronized void propertyChange(PropertyChangeEvent event) {
 		indentString = null;
 	}

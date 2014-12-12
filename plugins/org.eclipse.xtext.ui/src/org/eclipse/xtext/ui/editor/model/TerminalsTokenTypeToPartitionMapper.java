@@ -31,6 +31,7 @@ public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper
 		IDocument.DEFAULT_CONTENT_TYPE
 	};
 	
+	@Override
 	public String getPartitionType(int antlrTokenType) {
 		// on lexer error return default content type
 		if (antlrTokenType == Token.INVALID_TOKEN_TYPE) {
@@ -51,6 +52,7 @@ public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper
 		return IDocument.DEFAULT_CONTENT_TYPE;
 	}
 
+	@Override
 	public String[] getSupportedPartitionTypes() {
 		return SUPPORTED_PARTITIONS;
 	}
@@ -58,6 +60,7 @@ public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public boolean isMultiLineComment(String partitionType) {
 		return COMMENT_PARTITION.equals(partitionType);
 	}
@@ -65,6 +68,7 @@ public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public boolean isSingleLineComment(String partitionType) {
 		return SL_COMMENT_PARTITION.equals(partitionType);
 	}

@@ -77,6 +77,7 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 		return null;
 	}
 
+	@Override
 	public boolean hasNext() {
 		return next != null;
 	}
@@ -104,6 +105,7 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 		return false;
 	}
 
+	@Override
 	public Triple<INode, AbstractElement, EObject> next() {
 		Triple<INode, AbstractElement, EObject> oldNext = next;
 		if (next != null)
@@ -127,6 +129,7 @@ public class SemanticNodeIterator implements Iterator<Triple<INode, AbstractElem
 		return n;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

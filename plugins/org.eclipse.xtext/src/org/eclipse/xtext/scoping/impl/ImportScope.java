@@ -75,6 +75,7 @@ public class ImportScope extends AbstractScope {
 			elements.add(qn);
 		}
 		return concat(aliased, filter(globalElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				return !elements.contains(getIgnoreCaseAwareQualifiedName(input));
 			}
@@ -97,6 +98,7 @@ public class ImportScope extends AbstractScope {
 		final Iterable<IEObjectDescription> aliasedElements = getAliasedElements(candidates);
 		// make sure that the element is returned when asked by name.
 		return filter(aliasedElements, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				IEObjectDescription description = getSingleLocalElementByName(input.getName());
 				if (description==null)

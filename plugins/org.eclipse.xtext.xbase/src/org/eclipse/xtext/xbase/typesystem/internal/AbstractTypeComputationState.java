@@ -100,6 +100,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	protected abstract LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags);
 	protected abstract LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, int flags);
 	
+	@Override
 	public final ITypeComputationResult computeTypes(/* @Nullable */ XExpression expression) {
 		if(resolvedTypes.getMonitor().isCanceled())
 			throw new OperationCanceledException();
@@ -141,23 +142,28 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	 * Clients who override this method have to be careful with AbstractPendingLinkingCandidate#computeArgumentTypes where
 	 * a subtype of TypeComputationStateWithExpectation is used.
 	 */
+	@Override
 	public TypeComputationStateWithExpectation withExpectation(/* @Nullable */ LightweightTypeReference expectation) {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, expectation);
 	}
 	
+	@Override
 	public void refineExpectedType(XExpression expression, LightweightTypeReference expectation) {
 		TypeExpectation typeExpectation = new TypeExpectation(expectation, this, false);
 		getResolvedTypes().refineExpectedType(expression, typeExpectation);
 	}
 	
+	@Override
 	public TypeComputationStateWithRootExpectation withRootExpectation(/* @Nullable */ LightweightTypeReference expectation) {
 		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, this, expectation);
 	}
 	
+	@Override
 	public TypeComputationStateWithRootExpectation withoutRootExpectation() {
 		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
+	@Override
 	public AbstractTypeComputationState withNonVoidExpectation() {
 		return withNonVoidExpectation(resolvedTypes);
 	}
@@ -166,32 +172,39 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeComputationStateWithNonVoidExpectation(resolvedTypes, featureScopeSession, this);
 	}
 
+	@Override
 	public AbstractTypeComputationState withReturnExpectation() {
 		return new ReturnExpectationTypeComputationState(resolvedTypes, featureScopeSession, this);
 	}
 
+	@Override
 	public AbstractTypeComputationState withoutExpectation() {
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
+	@Override
 	public TypeCheckpointComputationState withTypeCheckpoint(/* @Nullable */ EObject context) {
 		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
 	}
 	
+	@Override
 	public AbstractTypeComputationState withExpectedExceptions(List<LightweightTypeReference> declaredExceptionTypes) {
 		return new ExpectedExceptionTypeComputationState(resolvedTypes, featureScopeSession, this, declaredExceptionTypes);
 	}
 	
+	@Override
 	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */  LightweightTypeReference type) {
 		return assignType(element, type, true);
 	}
 	
+	@Override
 	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, /* @Nullable */  LightweightTypeReference type, boolean addToChildScope) {
 		TypeAssigner assigner = assignTypes();
 		assigner.assignType(element, type, addToChildScope);
 		return assigner.getForkedState();
 	}
 	
+	@Override
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
 		String simpleName = element.getSimpleName();
 		if (Strings.isNullOrEmpty(simpleName))
@@ -200,6 +213,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		addLocalToCurrentScope(elementName, element, !getResolver().isShadowingAllowed(elementName));
 	}
 	
+	@Override
 	public void addExtensionToCurrentScope(JvmIdentifiableElement extensionProvider) {
 		LightweightTypeReference knownType = getResolvedTypes().getActualType(extensionProvider);
 		if (knownType != null && !knownType.isAny() && !knownType.isUnknown()) {
@@ -209,18 +223,22 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 	}
 	
+	@Override
 	public void addTypeToStaticImportScope(JvmDeclaredType type) {
 		featureScopeSession = featureScopeSession.addTypesToStaticScope(Collections.<JvmType>singletonList(type), Collections.<JvmType>emptyList());
 	}
 	
+	@Override
 	public void addTypeToStaticExtensionImportScope(JvmDeclaredType type) {
 		featureScopeSession = featureScopeSession.addTypesToStaticScope(Collections.<JvmType>singletonList(type), Collections.<JvmType>emptyList());
 	}
 	
+	@Override
 	public void addImports(ITypeImporter.Client importer) {
 		featureScopeSession = featureScopeSession.addImports(importer);
 	}
 	
+	@Override
 	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {
 		if (extensionProviders.isEmpty())
 			return;
@@ -281,16 +299,19 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		featureScopeSession = featureScopeSession.addLocalElement(elementName, element, getReferenceOwner());
 	}
 	
+	@Override
 	public void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType) {
 		resolvedTypes.reassignTypeWithoutMerge(rawType, actualType);
 		featureScopeSession = featureScopeSession.addLocalElement(name, rawType, getReferenceOwner());
 	}
 	
+	@Override
 	public TypeAssigner assignTypes() {
 		TypeCheckpointComputationState state = withTypeCheckpoint(null);
 		return createTypeAssigner(state);
 	}
 	
+	@Override
 	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		resolvedTypes.addDiagnostic(diagnostic);
 	}
@@ -299,6 +320,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeAssigner(state);
 	}
 
+	@Override
 	public final List<? extends ITypeExpectation> getExpectations() {
 		if (expectations == null)
 			expectations = getExpectations(this);
@@ -316,24 +338,29 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	protected abstract List<AbstractTypeExpectation> getReturnExpectations(AbstractTypeComputationState actualState, boolean asActualExpectation);
 	
+	@Override
 	public void acceptCandidate(XExpression expression, IApplicableCandidate candidate) {
 		getResolvedTypes().acceptCandidate(expression, candidate);
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type) {
 		for(ITypeExpectation expectation: getExpectations()) {
 			expectation.acceptActualType(type, ConformanceFlags.UNCHECKED);
 		}
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
 		acceptActualType(type, ConformanceHint.toFlags(hints));
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, EnumSet<ConformanceHint> hints) {
 		acceptActualType(type, ConformanceHint.toFlags(hints));
 	}
 	
+	@Override
 	public void acceptActualType(LightweightTypeReference type, int flags) {
 		if ((flags & ConformanceFlags.CHECKED) == 0)
 			flags |= ConformanceFlags.UNCHECKED;
@@ -343,16 +370,19 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 	}
 
+	@Override
 	public void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type) {
 		if (type == null)
 			throw new IllegalArgumentException("Reassigned type may not be null");
 		resolvedTypes.reassignType(refinable, type);
 	}
 
+	@Override
 	public void discardReassignedTypes(JvmIdentifiableElement refinable) {
 		resolvedTypes.reassignType(refinable, (LightweightTypeReference) null);
 	}
 
+	@Override
 	public List<IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall) {
 		IFeatureLinkingCandidate result = reentrantTypeResolver.getScopeProviderAccess().getKnownFeature(featureCall, this, resolvedTypes);
 		if (result != null) {
@@ -496,6 +526,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		};
 	}
 	
+	@Override
 	public List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {
 		IConstructorLinkingCandidate result = reentrantTypeResolver.getScopeProviderAccess().getKnownConstructor(constructorCall, this, resolvedTypes);
 		if(result != null) {
@@ -546,14 +577,17 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return String.format("%s: %s", getClass().getSimpleName(), resolvedTypes);
 	}
 
+	@Override
 	public ITypeReferenceOwner getReferenceOwner() {
 		return resolvedTypes.getReferenceOwner();
 	}
 	
+	@Override
 	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
 		return getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
 	}
 	
+	@Override
 	public List<LightweightTypeReference> getExpectedExceptions() {
 		return resolvedTypes.getExpectedExceptions();
 	}
@@ -562,22 +596,27 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return resolvedTypes.getSeverities();
 	}
 
+	@Override
 	public Severity getSeverity(String issueCode) {
 		return getSeverities().getSeverity(issueCode);
 	}
 
+	@Override
 	public boolean isIgnored(String issueCode) {
 		return getSeverities().isIgnored(issueCode);
 	}
 	
+	@Override
 	public void withinScope(EObject context) {
 		resolvedTypes.addExpressionScope(context, featureScopeSession, IExpressionScope.Anchor.WITHIN);
 	}
 	
+	@Override
 	public void afterScope(EObject context) {
 		resolvedTypes.addExpressionScope(context, featureScopeSession, IExpressionScope.Anchor.AFTER);
 	}
 	
+	@Override
 	public void rewriteScope(EObject context) {
 		resolvedTypes.replacePreviousExpressionScope(context, featureScopeSession, IExpressionScope.Anchor.AFTER);
 	}

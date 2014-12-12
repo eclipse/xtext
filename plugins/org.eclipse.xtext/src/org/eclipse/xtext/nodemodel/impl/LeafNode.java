@@ -28,14 +28,17 @@ public class LeafNode extends AbstractNode implements ILeafNode {
 	
 	private int totalLength;
 	
+	@Override
 	public boolean isHidden() {
 		return false;
 	}
 
+	@Override
 	public int getTotalOffset() {
 		return totalOffset;
 	}
 
+	@Override
 	public int getTotalLength() {
 		return totalLength;
 	}

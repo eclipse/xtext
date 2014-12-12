@@ -72,7 +72,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractElement> getElements()
+  @Override
+public EList<AbstractElement> getElements()
   {
     if (elements == null)
     {

@@ -285,6 +285,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	@Override
 	public Provider<InternalXtendLexer> provideInternalXtendLexer() {
 		return new Provider<InternalXtendLexer>() {
+			@Override
 			public InternalXtendLexer get() {
 				return new DisabledAntlrLexer(null);
 			}
@@ -297,6 +298,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 				.annotatedWith(Names.named(LexerBindings.RUNTIME))
 				.to(DisabledAntlrLexer.class);
 		binder.bind(DisabledAntlrLexer.class).toProvider(new Provider<DisabledAntlrLexer>() {
+			@Override
 			public DisabledAntlrLexer get() {
 				return new DisabledAntlrLexer(null);
 			}

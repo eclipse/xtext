@@ -74,12 +74,14 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 		protected Map<String, Long> projectToModificationStamp = Maps.newHashMap();
 	}
 	
+	@Override
 	public void removeProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) {
 		if (toBeBuilt.getToBeDeleted().isEmpty() && toBeBuilt.getToBeUpdated().isEmpty())
 			return;
 		modificationStampCache.projectToModificationStamp.clear();
 	}
 	
+	@Override
 	public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		if (progress.isCanceled()) {
@@ -145,6 +147,7 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 		}
 	}
 
+	@Override
 	public boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
 		if (storage instanceof IFile && JavaCore.isJavaLikeFileName(storage.getName())) {
 			IJavaElement element = JavaCore.create(((IFile)storage).getParent());
@@ -162,6 +165,7 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 		return false;
 	}
 	
+	@Override
 	public boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
 		// nothing to do
 		// structural java changes will be queued in a fine grained fashion by the JavaChangeQueueFiller
@@ -175,6 +179,7 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 		queuedBuildData.queueChange(delta);
 	}
 
+	@Override
 	public boolean isPossiblyHandled(IStorage resource) {
 		return resource instanceof IJarEntryResource;
 	}
@@ -183,6 +188,7 @@ public class JdtToBeBuiltComputer implements IToBeBuiltComputerContribution {
 	 * Ignores Java output folders when traversing a project.
 	 * @return <code>true</code> if the folder is a java output folder. Otherwise <code>false</code>.
 	 */
+	@Override
 	public boolean isRejected(IFolder folder) {
 		boolean result = jdtHelper.isFromOutputPath(folder);
 		return result;

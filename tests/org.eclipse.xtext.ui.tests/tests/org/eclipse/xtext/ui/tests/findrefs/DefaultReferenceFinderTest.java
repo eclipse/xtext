@@ -169,6 +169,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 			assertTrue(expectationQueue.isEmpty());
 		}
 
+		@Override
 		public void accept(IReferenceDescription description) {
 			IReferenceDescription nextExpected = expectationQueue.poll();
 			assertNotNull(nextExpected);

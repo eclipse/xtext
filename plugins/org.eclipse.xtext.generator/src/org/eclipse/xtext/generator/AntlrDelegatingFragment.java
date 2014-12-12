@@ -129,6 +129,7 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 		return getInstance().getRequiredBundlesUi(grammar);
 	}
 
+	@Override
 	public void registerNaming(Naming naming) {
 		IGeneratorFragment generatorFragment = getInstance();
 		if(generatorFragment instanceof NamingAware){

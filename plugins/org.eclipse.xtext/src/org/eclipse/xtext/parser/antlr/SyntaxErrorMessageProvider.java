@@ -18,10 +18,12 @@ import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
  */
 public class SyntaxErrorMessageProvider implements ISyntaxErrorMessageProvider {
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
 		return new SyntaxErrorMessage(context.getDefaultMessage(), SYNTAX_DIAGNOSTIC);
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
 		ValueConverterException cause = context.getValueConverterException();
 		if (cause instanceof ValueConverterWithValueException) {

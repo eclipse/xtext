@@ -57,15 +57,18 @@ public class ResourceDescriptionsBasedContainerTest extends Assert implements IR
 			return Collections.emptyList();
 		}
 		
+		@Override
 		public Iterable<QualifiedName> getImportedNames() {
 			fail("unexpected");
 			return null;
 		}
 
+		@Override
 		public URI getURI() {
 			return uri;
 		}
 
+		@Override
 		public Iterable<IReferenceDescription> getReferenceDescriptions() {
 			return Collections.emptyList();
 		}
@@ -146,32 +149,39 @@ public class ResourceDescriptionsBasedContainerTest extends Assert implements IR
 		assertNull(container.getResourceDescription(uri));
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return Collections.<IResourceDescription>singletonList(resourceDescription);
 	}
 	
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (uri == this.uri)
 			return resourceDescription;
 		return null;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return false;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return selectableDelegate.getExportedObjects();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return selectableDelegate.getExportedObjects(type, name, ignoreCase);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return selectableDelegate.getExportedObjectsByType(type);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return selectableDelegate.getExportedObjectsByObject(object);
 	}

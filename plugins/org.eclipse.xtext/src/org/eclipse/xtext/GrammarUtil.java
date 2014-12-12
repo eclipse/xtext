@@ -441,15 +441,18 @@ public class GrammarUtil {
 
 	public static Collection<EPackage> allEPackagesToValidate(final Grammar _this) {
 		Iterable<TypeRef> allTypeRefs = concat(transform(allParserRules(_this), new Function<ParserRule, Iterable<TypeRef>>() {
+			@Override
 			public Iterable<TypeRef> apply(ParserRule from) {
 				return EcoreUtil2.eAllOfType(from, TypeRef.class);
 			}
 		}));
 		return newLinkedHashSet(transform(filter(allTypeRefs, new Predicate<TypeRef>() {
+			@Override
 			public boolean apply(TypeRef input) {
 				return !(input.eContainer() instanceof CrossReference) && input.getClassifier() instanceof EClass;
 			}
 		}), new Function<TypeRef, EPackage>() {
+			@Override
 			public EPackage apply(TypeRef from) {
 				return from.getClassifier().getEPackage();
 			}

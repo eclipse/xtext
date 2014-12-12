@@ -62,14 +62,17 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			this.stop = stops;
 		}
 
+		@Override
 		public List<ISemState> getFollowers(ISemState node) {
 			return node.getFollowers();
 		}
 
+		@Override
 		public ISemState getStart() {
 			return start;
 		}
 
+		@Override
 		public ISemState getStop() {
 			return stop;
 		}
@@ -94,36 +97,43 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			this.assignedGrammarElement = assignedGrammarElement;
 		}
 
+		@Override
 		public BitSet getAllFollowerFeatures() {
 			if (allFollowerFeatures == null)
 				allFollowerFeatures = new BitSet();
 			return allFollowerFeatures;
 		}
 
+		@Override
 		public AbstractElement getAssignedGrammarElement() {
 			return assignedGrammarElement;
 		}
 
+		@Override
 		public EStructuralFeature getFeature() {
 			if (feature == null && assignedGrammarElement != null)
 				feature = FeatureFinderUtil.getFeature(assignedGrammarElement, type);
 			return feature;
 		}
 
+		@Override
 		public int getFeatureID() {
 			if (featureID < -1)
 				featureID = getFeature() != null ? type.getFeatureID(getFeature()) : -1;
 			return featureID;
 		}
 
+		@Override
 		public List<ISemState> getFollowers() {
 			return followers == null ? Collections.<ISemState> emptyList() : followers;
 		}
 
+		@Override
 		public int getOrderID() {
 			return orderID;
 		}
 
+		@Override
 		public List<AbstractElement> getToBeValidatedAssignedElements() {
 			return contentValidationNeeded;
 		}
@@ -135,6 +145,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 			return new GrammarElementTitleSwitch().showQualified().showAssignments().apply(assignedGrammarElement);
 		}
 
+		@Override
 		public boolean isBooleanAssignment() {
 			if (booleanAssignment == null) {
 				Assignment assignment = GrammarUtil.containingAssignment(assignedGrammarElement);
@@ -146,16 +157,19 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	protected static class SemStateFactory implements NfaFactory<SemNfa, ISemState, ISynAbsorberState> {
 
+		@Override
 		public SemNfa create(ISynAbsorberState start, ISynAbsorberState stop) {
 			SemState starts = new SemState(stop.getEClass(), stop.getGrammarElement());
 			SemState stops = new SemState(start.getEClass(), start.getGrammarElement());
 			return new SemNfa(starts, stops);
 		}
 
+		@Override
 		public ISemState createState(SemNfa nfa, ISynAbsorberState token) {
 			return new SemState(token.getEClass(), token.getGrammarElement());
 		}
 
+		@Override
 		public void setFollowers(SemNfa nfa, ISemState owner, Iterable<ISemState> followers) {
 			((SemState) owner).followers = Lists.newArrayList(followers);
 		}
@@ -193,6 +207,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		return elementIDCache.get(ele);
 	}
 
+	@Override
 	public Nfa<ISemState> getNFA(EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
 		Nfa<ISemState> nfa = resultCache.get(key);

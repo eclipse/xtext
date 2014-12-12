@@ -73,7 +73,8 @@ public class AttributeImpl extends FeatureImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  @Override
+public String getType()
   {
     return type;
   }
@@ -83,7 +84,8 @@ public class AttributeImpl extends FeatureImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  @Override
+public void setType(String newType)
   {
     String oldType = type;
     type = newType;

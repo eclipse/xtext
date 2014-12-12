@@ -62,6 +62,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			}
 		}
 
+		@Override
 		public List<Diagnostic> getChildren() {
 			return Collections.emptyList();
 		}
@@ -110,10 +111,12 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return "";
 		}
 
+		@Override
 		public List<?> getData() {
 			return Arrays.asList(source);
 		}
 
+		@Override
 		public Throwable getException() {
 			return null;
 		}
@@ -133,10 +136,12 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return GrammarUtil.containingParserRule(rule.getGrammarElement());
 		}
 
+		@Override
 		public int getSeverity() {
 			return Diagnostic.ERROR;
 		}
 
+		@Override
 		public String getSource() {
 			return EmfFormatter.objPath(source);
 		}
@@ -147,6 +152,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 				if (a.getType() == ConstraintType.ASSIGNMENT)
 					feats.add(a.getAssignmentFeature(source.eClass()));
 			return Joiner.on(", ").join(Iterables.transform(feats, new Function<EStructuralFeature, String>() {
+				@Override
 				public String apply(EStructuralFeature from) {
 					return from.getName() + ":" + quantityAllocator.getFeatureQuantity(source, from);
 				}
@@ -179,12 +185,14 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 				collectAssignments(e, matcher, types);
 		}
 
+		@Override
 		public int getCode() {
 			if (requiredTypes.isEmpty())
 				return ERROR_ASSIGNMENT_MISSING;
 			return ERROR_ASSIGNMENT_PROHIBITED;
 		}
 
+		@Override
 		public String getMessage() {
 			StringBuffer msg = new StringBuffer();
 			msg.append("The feature ");
@@ -205,6 +213,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 					msg.append(" is not allowed to contain non-transient values. ");
 					msg.append("The object needs to be of type ");
 					msg.append(Joiner.on(" or ").join(Iterables.transform(requiredTypes, new Function<EClass, String>() {
+						@Override
 						public String apply(EClass from) {
 							return from.getName();
 						}
@@ -234,6 +243,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return actual;
 		}
 
+		@Override
 		public int getCode() {
 			if (feature == null)
 				return ERROR_FEATURE_MISSING;
@@ -266,6 +276,7 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			return max;
 		}
 
+		@Override
 		public String getMessage() {
 			StringBuffer msg = new StringBuffer();
 			msg.append("Feature ");
@@ -321,10 +332,12 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			this.element = element;
 		}
 
+		@Override
 		public int getCode() {
 			return ERROR_FEATURE_MISSING;
 		}
 
+		@Override
 		public String getMessage() {
 			StringBuffer msg = new StringBuffer();
 			msg.append("A feature named '");
@@ -344,14 +357,17 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 			super(rule, source, involved);
 		}
 
+		@Override
 		public int getCode() {
 			return ERROR_WRONG_TYPE;
 		}
 
+		@Override
 		public String getMessage() {
 			StringBuffer msg = new StringBuffer();
 			msg.append("An object of type ");
 			msg.append(Joiner.on(" or ").join(Iterables.transform(getSemanticTypes(), new Function<EClass, String>() {
+				@Override
 				public String apply(EClass from) {
 					return from.getName();
 				}
@@ -377,21 +393,25 @@ public class ConcreteSyntaxDiagnosticProvider implements IConcreteSyntaxDiagnost
 	@Inject
 	protected IAssignmentQuantityAllocator quantityAllocator;
 
+	@Override
 	public IConcreteSyntaxDiagnostic createAssignmentMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			EStructuralFeature feature, Set<ISyntaxConstraint> involved) {
 		return new ConcreteSyntaxAssignmentMissingDiagnostic(rule, source, feature, involved);
 	}
 
+	@Override
 	public IConcreteSyntaxDiagnostic createFeatureMissingDiagnostic(ISyntaxConstraint rule, EObject source,
 			ISyntaxConstraint element, Set<ISyntaxConstraint> involved) {
 		return new ConcreteSyntaxFeatureMissingDiagnostic(rule, source, element, involved);
 	}
 
+	@Override
 	public IConcreteSyntaxDiagnostic createFeatureQuantityDiagnostic(ISyntaxConstraint rule, IQuantities source,
 			EStructuralFeature feature, int actual, int min, int max, Set<ISyntaxConstraint> involved) {
 		return new ConcreteSyntaxFeatureDiagnostic(rule, source, feature, actual, min, max, involved);
 	}
 
+	@Override
 	public IConcreteSyntaxDiagnostic createUnexpectedTypeDiagnostic(ISyntaxConstraint rule, EObject source,
 			Set<ISyntaxConstraint> involved) {
 		return new ConcreteSyntaxObjectDiagnostic(rule, source, involved);

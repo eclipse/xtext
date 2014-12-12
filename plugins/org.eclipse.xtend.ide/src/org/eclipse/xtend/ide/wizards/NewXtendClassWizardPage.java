@@ -23,6 +23,7 @@ public class NewXtendClassWizardPage extends AbstractNewXtendElementWizardPage {
 		this.setDescription(Messages.XTEND_CLASS_WIZARD_DESCRIPTION);
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite composite = createCommonControls(parent);
 		createSuperClassControls(composite, COLS);

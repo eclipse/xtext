@@ -80,6 +80,7 @@ public class DispatchRenameSupport {
 
 		final Set<JvmOperation> dispatchCases = newLinkedHashSet();
 		IAcceptor<JvmOperation> operationAcceptor = new IAcceptor<JvmOperation>() {
+			@Override
 			public void accept(JvmOperation operation) {
 				dispatchCases.add(operation);
 			}

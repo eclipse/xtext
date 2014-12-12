@@ -55,6 +55,7 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public IOutlineNode createRoot(IXtextDocument document, CancelIndicator cancelIndicator) {
 		try {
 			this.cancelIndicator = cancelIndicator;
@@ -64,6 +65,7 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 		}
 	}
 
+	@Override
 	public IOutlineNode createRoot(IXtextDocument document) {
 		return createRoot(document, CancelIndicator.NullImpl);
 	}
@@ -76,6 +78,7 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 			throw new OperationCanceledException();
 	}	
 
+	@Override
 	public void createChildren(IOutlineNode parentNode, EObject modelElement) {
 		checkCanceled();
 		if (modelElement != null && parentNode.hasChildren()) {
@@ -141,6 +144,7 @@ public class BackgroundOutlineTreeProvider implements IOutlineTreeStructureProvi
 
 	protected boolean isLeaf(final EObject modelElement) {
 		return !Iterables.any(modelElement.eClass().getEAllContainments(), new Predicate<EReference>() {
+			@Override
 			public boolean apply(EReference containmentRef) {
 				return modelElement.eIsSet(containmentRef);
 			}

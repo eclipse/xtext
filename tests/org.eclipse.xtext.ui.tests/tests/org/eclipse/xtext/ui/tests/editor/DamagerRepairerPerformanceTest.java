@@ -64,6 +64,7 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 		protected Document createDocument(String before) {
 			DocumentTokenSource source = new DocumentTokenSource();
 			source.setLexer(new Provider<Lexer>() {
+				@Override
 				public Lexer get() {
 					return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 				}
@@ -89,10 +90,12 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 			assertEquals(0, Math.min(text.length(), doc.getLength()));
 		}
 		
+		@Override
 		public void documentChanged(DocumentEvent event) {
 			lastRegion = damager.getDamageRegion(new TypedRegion(0,event.getDocument().getLength(), IDocument.DEFAULT_CONTENT_TYPE), event, false);
 		}
 
+		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 		}
 		
@@ -152,17 +155,21 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 		return new PresentationDamager();
 	}
 	
+	@Override
 	public void setRange(IDocument document, int offset, int length) {
 	}
 
+	@Override
 	public IToken nextToken() {
 		return null;
 	}
 
+	@Override
 	public int getTokenOffset() {
 		return 0;
 	}
 
+	@Override
 	public int getTokenLength() {
 		return 0;
 	}

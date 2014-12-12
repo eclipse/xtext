@@ -64,6 +64,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 
 	private Map<URI, Set<String>> sourceTargetMap = newHashMap();
 
+	@Override
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		final IProject builtProject = context.getBuiltProject();
 		IJavaProject javaProject = JavaCore.create(builtProject);
@@ -84,6 +85,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 			}
 			final Set<String> newFiles = newHashSet();
 			IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess(srcGenFolder, new IAcceptor<String>() {
+				@Override
 				public void accept(String fileName) {
 					oldFiles.remove(fileName);
 					newFiles.add(fileName);

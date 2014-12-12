@@ -70,7 +70,8 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractElement> getGroups()
+  @Override
+public EList<AbstractElement> getGroups()
   {
     if (groups == null)
     {

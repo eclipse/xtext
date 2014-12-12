@@ -75,6 +75,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			return result;
 		}
 
+		@Override
 		public Pair<Integer, RuleCall> findTopmostRuleCall(Predicate<RuleCall> predicate) {
 			for (int i = ruleCallStack.size() - 1; i >= 0; i--)
 				if (predicate.apply((RuleCall) ruleCallStack.get(i).getGrammarElement()))
@@ -146,6 +147,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			return result;
 		}
 
+		@Override
 		@SuppressWarnings("unchecked")
 		public Collection<T> finish() {
 			if (lastState != null) {
@@ -261,10 +263,12 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 		/**
 		 * @since 2.0
 		 */
+		@Override
 		public void init(ParserRule rule) {
 			lastState = nfaProvider.getNFA(rule.getAlternatives());
 		}
 
+		@Override
 		public Collection<T> matchNext(AbstractElement nextElement) {
 			Pair<List<MatcherTransition>, List<MatcherState>> path = findTransitionPath(lastState, nextElement, false,
 					true, Sets.<Pair<Boolean, MatcherState>> newHashSet());
@@ -312,6 +316,7 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 	@Inject
 	protected MatcherNFAProvider nfaProvider;
 
+	@Override
 	public <T extends IElementPattern> IElementMatcher<T> createMatcher(Iterable<T> rules) {
 		return new TransitionMatcher<T>(grammar, nfaProvider, rules);
 	}

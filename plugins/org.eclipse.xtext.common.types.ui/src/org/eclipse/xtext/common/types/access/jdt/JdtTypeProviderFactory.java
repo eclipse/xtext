@@ -41,6 +41,7 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 		this.javaProjectProvider = javaProjectProvider;
 	}
 	
+	@Override
 	public IJdtTypeProvider createTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");

@@ -54,6 +54,7 @@ public class ParseResultFactory extends AbstractParsedTokenVisitor implements IP
 		this.nonterminalStack = new LinkedList<ParsedNonTerminal>();
 	}
 
+	@Override
 	public IParseResult createParseResult(AbstractParsedToken token, CharSequence input) {
 //		currentNode = null;
 		currentStack.clear();

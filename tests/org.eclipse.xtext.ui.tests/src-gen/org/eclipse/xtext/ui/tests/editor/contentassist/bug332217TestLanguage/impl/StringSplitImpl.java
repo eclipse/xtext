@@ -77,7 +77,8 @@ public class StringSplitImpl extends CollectionFunctionImpl implements StringSpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getValue()
+  @Override
+public ScalarExpression getValue()
   {
     return value;
   }
@@ -104,7 +105,8 @@ public class StringSplitImpl extends CollectionFunctionImpl implements StringSpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(ScalarExpression newValue)
+  @Override
+public void setValue(ScalarExpression newValue)
   {
     if (newValue != value)
     {
@@ -125,7 +127,8 @@ public class StringSplitImpl extends CollectionFunctionImpl implements StringSpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getDelimiter()
+  @Override
+public ScalarExpression getDelimiter()
   {
     return delimiter;
   }
@@ -152,7 +155,8 @@ public class StringSplitImpl extends CollectionFunctionImpl implements StringSpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDelimiter(ScalarExpression newDelimiter)
+  @Override
+public void setDelimiter(ScalarExpression newDelimiter)
   {
     if (newDelimiter != delimiter)
     {

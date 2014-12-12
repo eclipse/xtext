@@ -72,14 +72,17 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 			this.element = element;
 		}
 
+		@Override
 		public Collection<IPDAState> getFollowers() {
 			return followers;
 		}
 
+		@Override
 		public AbstractElement getGrammarElement() {
 			return element;
 		}
 
+		@Override
 		public PDAStateType getType() {
 			return type;
 		}
@@ -283,6 +286,7 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 	/**
 	 * @since 2.0
 	 */
+	@Override
 	public IPDAState getPDA(CTX context) {
 		PDAContext<CTX> ctx = createContext(context);
 		ctx.start = createState(IPDAState.PDAStateType.START, null);

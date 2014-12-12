@@ -24,10 +24,12 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	}
 
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType() {
 		return null;
 	}
 
+	@Override
 	public boolean isNoTypeExpectation() {
 		return voidAllowed;
 	}
@@ -37,6 +39,7 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 		return voidAllowed;
 	}
 	
+	@Override
 	public RootNoExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return this;
 	}

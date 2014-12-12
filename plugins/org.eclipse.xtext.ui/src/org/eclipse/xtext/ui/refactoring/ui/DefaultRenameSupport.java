@@ -28,6 +28,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 		@Inject
 		private IGlobalServiceProvider globalServiceProvider;
 
+		@Override
 		public IRenameSupport create(Object context, String newName) {
 			if (context instanceof IRenameElementContext) {
 				IRenameElementContext renameElementContext = (IRenameElementContext) context;
@@ -74,6 +75,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 		return false;
 	}
 
+	@Override
 	public void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
 		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, renameElementContext) {
 			@Override
@@ -90,6 +92,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 		openOperation.run(renameElementContext.getTriggeringEditor().getSite().getShell(), "Rename Element");
 	}
 
+	@Override
 	public void startDirectRefactoring() throws InterruptedException {
 		RenameRefactoringExecuter renameRefactoringExecuter = executerProvider.get();
 		renameRefactoringExecuter.execute(renameElementContext.getTriggeringEditor(), renameRefactoring);

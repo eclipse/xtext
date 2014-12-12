@@ -70,7 +70,8 @@ public class AndWhereEntryImpl extends WhereEntryImpl implements AndWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<WhereEntry> getEntries()
+  @Override
+public EList<WhereEntry> getEntries()
   {
     if (entries == null)
     {

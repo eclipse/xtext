@@ -42,26 +42,32 @@ public class DefaultResourceServiceProvider implements IResourceServiceProvider 
 	@Inject
 	private Injector injector;
 	
+	@Override
 	public org.eclipse.xtext.resource.IContainer.Manager getContainerManager() {
 		return containerManager;
 	}
 	
+	@Override
 	public IResourceDescription.Manager getResourceDescriptionManager() {
 		return resourceDescriptionManager;
 	}
 	
+	@Override
 	public IResourceValidator getResourceValidator() {
 		return resourceValidator;
 	}
 	
+	@Override
 	public boolean canHandle(URI uri) {
 		return fileExtensionProvider.isValid(uri.fileExtension());
 	}
 
+	@Override
 	public IEncodingProvider getEncodingProvider() {
 		return encodingProvider;
 	}
 	
+	@Override
 	public <T> T get(Class<T> t) {
 		try {
 			return injector.getInstance(t);

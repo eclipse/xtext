@@ -36,6 +36,7 @@ public final class KeyComparator<T, C extends Comparable<? super C>> implements 
 		this.keyFunction = checkNotNull(keyFunction, "keyFunction");
 	}
 
+	@Override
 	public int compare(T a, T b) {
 		C c1 = keyFunction.apply(a);
 		C c2 = keyFunction.apply(b);

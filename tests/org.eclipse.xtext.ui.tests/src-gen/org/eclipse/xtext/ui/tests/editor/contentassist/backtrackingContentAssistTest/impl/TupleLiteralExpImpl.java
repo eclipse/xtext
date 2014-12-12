@@ -70,7 +70,8 @@ public class TupleLiteralExpImpl extends ExpressionImpl implements TupleLiteralE
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<TupleLiteralPart> getPart()
+  @Override
+public EList<TupleLiteralPart> getPart()
   {
     if (part == null)
     {

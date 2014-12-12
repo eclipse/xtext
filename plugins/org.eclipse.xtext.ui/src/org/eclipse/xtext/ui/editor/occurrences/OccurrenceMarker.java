@@ -86,6 +86,7 @@ public class OccurrenceMarker {
 
 	protected ISelectionChangedListener createSelectionChangedListener() {
 		return new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				if (isMarkOccurrences)
 					doMarkOccurrences(event.getSelection());
@@ -123,6 +124,7 @@ public class OccurrenceMarker {
 						progress.newChild(1)) : Collections.<Annotation, Position>emptyMap();
 				if (!progress.isCanceled()) {
 					Display.getDefault().asyncExec(new Runnable() {
+						@Override
 						public void run() {
 							if (!progress.isCanceled()) {
 								final IAnnotationModel annotationModel = getAnnotationModel(editor);

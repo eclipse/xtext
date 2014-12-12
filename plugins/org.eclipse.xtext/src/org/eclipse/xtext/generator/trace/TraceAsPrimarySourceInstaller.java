@@ -127,6 +127,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		return target2source;
 	}
 
+	@Override
 	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
 		if (trace == null)
 			return null;
@@ -150,6 +151,7 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 		this.hideSyntheticVariables = hideSyntheticVariables;
 	}
 
+	@Override
 	public void setTrace(String javaFileName, AbstractTraceRegion trace) {
 		this.trace = trace;
 	}

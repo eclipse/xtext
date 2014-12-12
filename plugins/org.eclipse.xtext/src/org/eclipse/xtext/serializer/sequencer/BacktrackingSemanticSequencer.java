@@ -58,6 +58,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			this.nodeModelEle = nodeModelEle;
 		}
 
+		@Override
 		public int compare(ISemState o1, ISemState o2) {
 			if (nodeModelEle != null) {
 				if (o1.getAssignedGrammarElement() == nodeModelEle)
@@ -416,12 +417,14 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		return new FollowerSorter(obj, nodeModelEle);
 	}
 
+	@Override
 	public void createSequence(EObject context, final EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
 		Nfa<ISemState> nfa = nfaProvider.getNFA(context, obj.eClass());
 		final SerializableObject object = new SerializableObject(obj, nodes);
 		TraceItem co = new TraceItem(object);
 		List<TraceItem> trace = new NfaUtil().backtrack(nfa, co, new NfaUtil.BacktrackHandler<ISemState, TraceItem>() {
+			@Override
 			public TraceItem handle(ISemState state, TraceItem previous) {
 				if (!previous.canEnter(state))
 					return null;
@@ -431,10 +434,12 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 					return previous.clone(state);
 			}
 
+			@Override
 			public boolean isSolution(TraceItem result) {
 				return result.isConsumed();
 			}
 
+			@Override
 			public Iterable<ISemState> sortFollowers(TraceItem result, Iterable<ISemState> followers) {
 				AbstractElement next = result.getNextGrammarElement();
 				List<ISemState> r = Lists.newArrayList(followers);

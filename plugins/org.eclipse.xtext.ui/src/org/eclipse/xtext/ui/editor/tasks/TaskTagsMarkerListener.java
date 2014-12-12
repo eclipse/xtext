@@ -19,10 +19,12 @@ import org.eclipse.jface.text.IDocumentListener;
 @Deprecated
 public class TaskTagsMarkerListener implements IDocumentListener {
 
+	@Override
 	public void documentAboutToBeChanged(DocumentEvent event) {
 
 	}
 
+	@Override
 	public void documentChanged(DocumentEvent event) {
 
 	}

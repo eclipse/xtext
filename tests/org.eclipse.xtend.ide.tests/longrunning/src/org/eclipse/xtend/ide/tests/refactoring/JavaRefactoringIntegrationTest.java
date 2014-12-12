@@ -1396,6 +1396,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	protected IRenameElementContext createRenameElementContext(final XtextEditor editor, final int offset) {
 		IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 				new IUnitOfWork<IRenameElementContext, XtextResource>() {
+					@Override
 					public IRenameElementContext exec(XtextResource state) throws Exception {
 						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, offset);
 						return renameContextFactory.createRenameElementContext(element, editor, new TextSelection(

@@ -137,7 +137,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -147,7 +148,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Element1()
+  @Override
+public EReference getModel_Element1()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -157,7 +159,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Element2()
+  @Override
+public EReference getModel_Element2()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -167,7 +170,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getScenario1()
+  @Override
+public EClass getScenario1()
   {
     return scenario1EClass;
   }
@@ -177,7 +181,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getScenario1_Child()
+  @Override
+public EReference getScenario1_Child()
   {
     return (EReference)scenario1EClass.getEStructuralFeatures().get(0);
   }
@@ -187,7 +192,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getChild1()
+  @Override
+public EClass getChild1()
   {
     return child1EClass;
   }
@@ -197,7 +203,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild1_Name()
+  @Override
+public EAttribute getChild1_Name()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(0);
   }
@@ -207,7 +214,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild1_Bool()
+  @Override
+public EAttribute getChild1_Bool()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(1);
   }
@@ -217,7 +225,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild1_EnumType()
+  @Override
+public EAttribute getChild1_EnumType()
   {
     return (EAttribute)child1EClass.getEStructuralFeatures().get(2);
   }
@@ -227,7 +236,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getScenario2()
+  @Override
+public EClass getScenario2()
   {
     return scenario2EClass;
   }
@@ -237,7 +247,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getScenario2_Child()
+  @Override
+public EReference getScenario2_Child()
   {
     return (EReference)scenario2EClass.getEStructuralFeatures().get(0);
   }
@@ -247,7 +258,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getChild2()
+  @Override
+public EClass getChild2()
   {
     return child2EClass;
   }
@@ -257,7 +269,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild2_Name()
+  @Override
+public EAttribute getChild2_Name()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(0);
   }
@@ -267,7 +280,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild2_Bool()
+  @Override
+public EAttribute getChild2_Bool()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(1);
   }
@@ -277,7 +291,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getChild2_String()
+  @Override
+public EAttribute getChild2_String()
   {
     return (EAttribute)child2EClass.getEStructuralFeatures().get(2);
   }
@@ -287,7 +302,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getEnumType()
+  @Override
+public EEnum getEnumType()
   {
     return enumTypeEEnum;
   }
@@ -297,7 +313,8 @@ public class Bug348427TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug348427TestLanguageFactory getBug348427TestLanguageFactory()
+  @Override
+public Bug348427TestLanguageFactory getBug348427TestLanguageFactory()
   {
     return (Bug348427TestLanguageFactory)getEFactoryInstance();
   }

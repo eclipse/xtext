@@ -64,10 +64,12 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		return grammar;
 	}
 
+	@Override
 	public String toString(Object value, String lexerRule) {
 		return getConverter(lexerRule).toString(value);
 	}
 
+	@Override
 	public Object toValue(String string, String lexerRule, INode node) throws ValueConverterException {
 		return getConverter(lexerRule).toValue(string, node);
 	}
@@ -75,6 +77,7 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public IValueConverter<Object> getConverter(String lexerRule) {
 		Map<String, IValueConverter<Object>> map = getConverters();

@@ -21,6 +21,7 @@ public class InjectableViewerCreator implements IViewerCreator {
 	@Inject
 	protected IViewerCreator viewerCreator;
 
+	@Override
 	public Viewer createViewer(Composite parent, CompareConfiguration config) {
 		return viewerCreator.createViewer(parent, config);
 	}

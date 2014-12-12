@@ -45,6 +45,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//	{XAnnotation} "@" annotationType=[types::JvmAnnotationType|QualifiedName] ("("
 		//	(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
 		//	value=XAnnotationElementValueOrCommaList)? ")")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{XAnnotation} "@" annotationType=[types::JvmAnnotationType|QualifiedName] ("("
@@ -123,6 +124,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		
 		//XAnnotationElementValuePair:
 		//	=> (element=[types::JvmOperation|ValidID] "=") value=XAnnotationElementValue;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//=> (element=[types::JvmOperation|ValidID] "=") value=XAnnotationElementValue
@@ -182,6 +184,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//XAnnotationElementValueOrCommaList returns xbase::XExpression:
 		//	=> ({xbase::XListLiteral} "#" "[") (elements+=XAnnotationOrExpression ("," elements+=XAnnotationOrExpression)*)? "]" |
 		//	XAnnotationOrExpression ({xbase::XListLiteral.elements+=current} ("," elements+=XAnnotationOrExpression)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//=> ({xbase::XListLiteral} "#" "[") (elements+=XAnnotationOrExpression ("," elements+=XAnnotationOrExpression)*)? "]" |
@@ -277,6 +280,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//XAnnotationElementValue returns xbase::XExpression:
 		//	=> ({xbase::XListLiteral} "#" "[") (elements+=XAnnotationOrExpression ("," elements+=XAnnotationOrExpression)*)? "]" |
 		//	XAnnotationOrExpression;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//=> ({xbase::XListLiteral} "#" "[") (elements+=XAnnotationOrExpression ("," elements+=XAnnotationOrExpression)*)? "]" |
@@ -337,6 +341,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		
 		//XAnnotationOrExpression returns xbase::XExpression:
 		//	XAnnotation | XExpression;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//XAnnotation | XExpression
@@ -389,6 +394,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

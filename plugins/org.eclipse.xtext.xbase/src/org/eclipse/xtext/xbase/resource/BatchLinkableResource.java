@@ -54,6 +54,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * Otherwise this resource itself is used as the lock context.
 	 */
 	/* @NonNull */
+	@Override
 	public Object getLock() {
 		ResourceSet resourceSet = getResourceSet();
 		if (resourceSet instanceof ISynchronizable<?>) {
@@ -68,6 +69,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * @since 2.4
 	 */
 	/* @Nullable */
+	@Override
 	public <Result> Result execute(/* @NonNull */ IUnitOfWork<Result, ? super BatchLinkableResource> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);
@@ -177,6 +179,7 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		return null;
 	}
 
+	@Override
 	public void linkBatched(CancelIndicator monitor) {
 		resolveLazyCrossReferences(monitor);
 	}

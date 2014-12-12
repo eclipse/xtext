@@ -55,6 +55,7 @@ public class JavaBreakPointProvider {
 		final IMarker marker = breakpoint.getMarker();
 		final Object markerProxy = Proxy.newProxyInstance(getClass().getClassLoader(), new Class[] { IMarker.class },
 				new InvocationHandler() {
+					@Override
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 						if (method.getName().equals("getAttribute")) {
 							if (args[0].equals(IMarker.LINE_NUMBER)) {
@@ -72,6 +73,7 @@ public class JavaBreakPointProvider {
 				});
 		return (IJavaLineBreakpoint) Proxy.newProxyInstance(getClass().getClassLoader(),
 				new Class[] { IJavaLineBreakpoint.class }, new InvocationHandler() {
+					@Override
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 						if (method.getName().equals("getMarker")) {
 							return markerProxy;

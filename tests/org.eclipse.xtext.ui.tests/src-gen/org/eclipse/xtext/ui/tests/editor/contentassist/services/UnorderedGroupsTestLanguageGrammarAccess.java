@@ -49,6 +49,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Model:
 		//	"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
 		//	fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
@@ -155,6 +156,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//SimpleModel:
 		//	(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
 		//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
@@ -250,6 +252,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//MandatoryModel:
 		//	(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
 		//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
@@ -345,6 +348,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//LoopedModel:
 		//	(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
 		//	(abstract+="abstract" | final+="final")*) "class" name=ID "{" "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
@@ -440,6 +444,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//GroupLoopedModel:
 		//	(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
 		//	(abstract+="abstract" | final+="final"))* "class" name=ID "{" "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
@@ -538,6 +543,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//LoopedAlternativeModel:
 		//	(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
 		//	(abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
@@ -647,6 +653,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Bug304681Model:
 		//	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
 		//	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
@@ -738,6 +745,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Bug304681Feature:
 		//	Bug304681Attribute | Bug304681Reference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Bug304681Attribute | Bug304681Reference
@@ -760,6 +768,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Bug304681Attribute:
 		//	"attr" name=ID ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"attr" name=ID ";"
@@ -788,6 +797,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Bug304681Reference:
 		//	"ref" name=ID ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"ref" name=ID ";"
@@ -856,6 +866,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

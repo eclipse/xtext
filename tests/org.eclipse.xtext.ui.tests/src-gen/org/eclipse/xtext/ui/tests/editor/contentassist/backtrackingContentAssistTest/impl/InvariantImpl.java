@@ -88,7 +88,8 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getConstraintName()
+  @Override
+public String getConstraintName()
   {
     return constraintName;
   }
@@ -98,7 +99,8 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setConstraintName(String newConstraintName)
+  @Override
+public void setConstraintName(String newConstraintName)
   {
     String oldConstraintName = constraintName;
     constraintName = newConstraintName;
@@ -111,7 +113,8 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpression()
+  @Override
+public Expression getExpression()
   {
     return expression;
   }
@@ -138,7 +141,8 @@ public class InvariantImpl extends MinimalEObjectImpl.Container implements Invar
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(Expression newExpression)
+  @Override
+public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

@@ -75,6 +75,7 @@ public class XtendBatchCompiler {
 			this.severity = severity;
 		}
 
+		@Override
 		public boolean apply(Issue issue) {
 			return this.severity == issue.getSeverity();
 		}
@@ -83,6 +84,7 @@ public class XtendBatchCompiler {
 	private final static Logger log = Logger.getLogger(XtendBatchCompiler.class.getName());
 
 	protected static final FileFilter ACCEPT_ALL_FILTER = new FileFilter() {
+		@Override
 		public boolean accept(File pathname) {
 			return true;
 		}
@@ -410,6 +412,7 @@ public class XtendBatchCompiler {
 		PathTraverser pathTraverser = new PathTraverser();
 		List<String> sourcePathDirectories = getSourcePathDirectories();
 		Multimap<String, URI> pathes = pathTraverser.resolvePathes(sourcePathDirectories, new Predicate<URI>() {
+			@Override
 			public boolean apply(URI input) {
 				boolean matches = nameBasedFilter.matches(input);
 				return matches;
@@ -467,7 +470,7 @@ public class XtendBatchCompiler {
 		List<String> sourceDirectories = newArrayList(getSourcePathDirectories());
 		sourceDirectories.add(tmpSourceDirectory.toString());
 		commandLine.add(concat(" ", transform(sourceDirectories, new Function<String, String>() {
-
+			@Override
 			public String apply(String path) {
 				return "\"" + path + "\"";
 			}
@@ -525,11 +528,13 @@ public class XtendBatchCompiler {
 		Iterable<String> classPathEntries = concat(getClassPathEntries(), getSourcePathDirectories(),
 				asList(tmpClassDirectory.toString()));
 		classPathEntries = filter(classPathEntries, new Predicate<String>() {
+			@Override
 			public boolean apply(String input) {
 				return !Strings.isEmpty(input.trim());
 			}
 		});
 		Function<String, URL> toUrl = new Function<String, URL>() {
+			@Override
 			public URL apply(String from) {
 				try {
 					return new File(from).toURI().toURL();
@@ -642,6 +647,7 @@ public class XtendBatchCompiler {
 		}
 		final List<String> split = split(emptyIfNull(path), File.pathSeparator);
 		return transform(split, new Function<String, String>() {
+			@Override
 			public String apply(String from) {
 				return new File(new File(from).getAbsoluteFile().toURI().normalize()).getAbsolutePath();
 			}

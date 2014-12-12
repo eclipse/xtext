@@ -577,6 +577,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return false;
 	}
 
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		initConstraints();
 		IConstraint constraint = getConstraint(context, semanticObject.eClass());

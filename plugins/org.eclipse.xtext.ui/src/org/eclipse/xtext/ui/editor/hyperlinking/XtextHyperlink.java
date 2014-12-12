@@ -22,6 +22,7 @@ public class XtextHyperlink extends AbstractHyperlink {
 	@Inject 
 	private IURIEditorOpener uriEditorOpener;
 	
+	@Override
 	public void open() {
 		uriEditorOpener.open(getURI(), true);
 	}

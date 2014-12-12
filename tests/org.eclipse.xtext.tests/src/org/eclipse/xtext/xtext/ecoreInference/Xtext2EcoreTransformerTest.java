@@ -63,6 +63,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			this.testMetamodel = testMetamodel;
 		}
 
+		@Override
 		public void process(GeneratedMetamodel metamodel) {
 			if (testMetamodel.equals(metamodel)) {
 				called++;
@@ -86,6 +87,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			this.second = second;
 		}
 
+		@Override
 		public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 			first.acceptError(errorCode, message, element);
 			second.acceptError(errorCode, message, element);

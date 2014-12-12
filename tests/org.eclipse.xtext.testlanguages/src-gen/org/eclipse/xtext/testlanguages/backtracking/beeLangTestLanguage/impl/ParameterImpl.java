@@ -66,7 +66,8 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getExpr()
+  @Override
+public Expression getExpr()
   {
     return expr;
   }
@@ -93,7 +94,8 @@ public class ParameterImpl extends MinimalEObjectImpl.Container implements Param
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpr(Expression newExpr)
+  @Override
+public void setExpr(Expression newExpr)
   {
     if (newExpr != expr)
     {

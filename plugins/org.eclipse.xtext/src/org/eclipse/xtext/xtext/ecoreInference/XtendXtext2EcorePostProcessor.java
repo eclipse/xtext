@@ -45,6 +45,7 @@ public class XtendXtext2EcorePostProcessor implements IXtext2EcorePostProcessor 
 	private ExecutionContext executionContext;
 	private Resource xtendFile;
 
+	@Override
 	public void process(GeneratedMetamodel metamodel) {
 		Resource xtendFile = loadXtendFile(metamodel);
 		if (xtendFile != null) {

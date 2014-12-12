@@ -40,6 +40,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		this.trace = trace;
 	}
 
+	@Override
 	public abstract URI getSrcRelativeResourceURI();
 	protected abstract int getOffset();
 	protected abstract int getLength();
@@ -47,16 +48,19 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	protected abstract int getEndLineNumber();
 	
 	/* @Nullable */
+	@Override
 	public IStorage getStorage() {
 		IStorage result = trace.findStorage(getSrcRelativeResourceURI(), getProject());
 		return result;
 	}
 
+	@Override
 	public ITextRegionWithLineInformation getTextRegion() {
 		ITextRegionWithLineInformation result = new TextRegionWithLineInformation(getOffset(), getLength(), getLineNumber(), getEndLineNumber());
 		return result;
 	}
 	
+	@Override
 	public URI getAbsoluteResourceURI() {
 		if (absoluteURI == null) {
 			absoluteURI = trace.resolvePath(getSrcRelativeResourceURI());
@@ -65,19 +69,23 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	}
 	
 	/* @NonNull */
+	@Override
 	public InputStream getContents() throws CoreException {
 		return trace.getContents(getSrcRelativeResourceURI(), getProject());
 	}
 	
+	@Override
 	public /* @NonNull */ IProject getProject() {
 		return trace.getLocalProject();
 	}
 	
+	@Override
 	public LanguageInfo getLanguage() {
 		LanguageInfo result = trace.findLanguage(getAbsoluteResourceURI());
 		return result;
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		if (eObjectURI == null && !triedToComputeURI) {
 			Resource resource = trace.getResource(getAbsoluteResourceURI(), getProject());

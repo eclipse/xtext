@@ -131,7 +131,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -141,7 +142,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -154,7 +156,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getType()
+  @Override
+public String getType()
   {
     return type;
   }
@@ -164,7 +167,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(String newType)
+  @Override
+public void setType(String newType)
   {
     String oldType = type;
     type = newType;
@@ -177,7 +181,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isExpectingParameters()
+  @Override
+public boolean isExpectingParameters()
   {
     return expectingParameters;
   }
@@ -187,7 +192,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpectingParameters(boolean newExpectingParameters)
+  @Override
+public void setExpectingParameters(boolean newExpectingParameters)
   {
     boolean oldExpectingParameters = expectingParameters;
     expectingParameters = newExpectingParameters;
@@ -200,7 +206,8 @@ public class VariableImpl extends TemplatePartImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getParameters()
+  @Override
+public EList<String> getParameters()
   {
     if (parameters == null)
     {

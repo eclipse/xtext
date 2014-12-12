@@ -116,6 +116,7 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 			}
 		}
 
+		@Override
 		public INode getNodeForMultiValue(EStructuralFeature feat, int indexInFeat, int indexInNonTransient, Object val) {
 			if (childrenBySemanticChild != null && feat instanceof EReference && ((EReference) feat).isContainment()) {
 				INode candiadate = this.childrenBySemanticChild.get(val);
@@ -133,6 +134,7 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 			return null;
 		}
 
+		@Override
 		public INode getNodeForSingelValue(EStructuralFeature feature, Object value) {
 			return getNodeForMultiValue(feature, 0, 0, value);
 		}
@@ -155,6 +157,7 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 		return new NodesForEObjectProvider(semanticObject, node);
 	}
 
+	@Override
 	public INodesForEObjectProvider getNodesForSemanticObject(EObject semanticObject, ICompositeNode suggestedComposite) {
 		if (suggestedComposite != null)
 			return createNodesForEObjectProvider(semanticObject, suggestedComposite);

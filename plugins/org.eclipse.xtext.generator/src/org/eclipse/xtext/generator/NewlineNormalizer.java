@@ -18,12 +18,14 @@ public class NewlineNormalizer extends LineSeparatorHarmonizer implements PostPr
 		this.lineDelimiterToUse = lineDelimiterToUse;
 	}
 	
+	@Override
 	public void beforeWriteAndClose(FileHandle impl) {
 		CharSequence content = impl.getBuffer();
 		String replaced = normalizeLineDelimiters(content);
 		impl.setBuffer(replaced);
 	}
 
+	@Override
 	public void afterClose(FileHandle impl) {
 		// nothing to do
 	}

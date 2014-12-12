@@ -80,7 +80,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -91,7 +92,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TConstant createTConstant()
+  @Override
+public TConstant createTConstant()
   {
     TConstantImpl tConstant = new TConstantImpl();
     return tConstant;
@@ -102,7 +104,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TStringConstant createTStringConstant()
+  @Override
+public TStringConstant createTStringConstant()
   {
     TStringConstantImpl tStringConstant = new TStringConstantImpl();
     return tStringConstant;
@@ -113,7 +116,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TIntegerConstant createTIntegerConstant()
+  @Override
+public TIntegerConstant createTIntegerConstant()
   {
     TIntegerConstantImpl tIntegerConstant = new TIntegerConstantImpl();
     return tIntegerConstant;
@@ -124,7 +128,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TBooleanConstant createTBooleanConstant()
+  @Override
+public TBooleanConstant createTBooleanConstant()
   {
     TBooleanConstantImpl tBooleanConstant = new TBooleanConstantImpl();
     return tBooleanConstant;
@@ -135,7 +140,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public TAnnotation createTAnnotation()
+  @Override
+public TAnnotation createTAnnotation()
   {
     TAnnotationImpl tAnnotation = new TAnnotationImpl();
     return tAnnotation;
@@ -146,7 +152,8 @@ public class Bug288734TestLanguageFactoryImpl extends EFactoryImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug288734TestLanguagePackage getBug288734TestLanguagePackage()
+  @Override
+public Bug288734TestLanguagePackage getBug288734TestLanguagePackage()
   {
     return (Bug288734TestLanguagePackage)getEPackage();
   }

@@ -109,6 +109,7 @@ public interface ISyntaxErrorMessageProvider {
 		 * Returns the failed predicate exception caused by a specific unordered group.
 		 * @return the failed predicate exception caused by a specific unordered group. Never <code>null</code>.
 		 */
+		@Override
 		FailedPredicateException getRecognitionException();
 	}
 	

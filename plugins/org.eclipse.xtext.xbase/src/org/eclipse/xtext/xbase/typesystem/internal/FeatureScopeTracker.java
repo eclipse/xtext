@@ -32,6 +32,7 @@ public class FeatureScopeTracker implements IFeatureScopeTracker {
 		featureScopeSessions = Maps.newHashMapWithExpectedSize(256);
 	}
 	
+	@Override
 	public IExpressionScope getExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		EnumMap<Anchor, ExpressionScope> recordedScopes = featureScopeSessions.get(context);
 		if (recordedScopes == null) {
@@ -47,11 +48,13 @@ public class FeatureScopeTracker implements IFeatureScopeTracker {
 		return result.withAnchor(anchor);
 	}
 	
+	@Override
 	public boolean hasExpressionScope(EObject context, IExpressionScope.Anchor anchor) {
 		Map<Anchor,ExpressionScope> recordedScopes = featureScopeSessions.get(context);
 		return recordedScopes != null && recordedScopes.containsKey(anchor);
 	}
 	
+	@Override
 	public void addExpressionScope(ResolvedTypes current, EObject context, IFeatureScopeSession session, Anchor anchor) {
 		EnumMap<Anchor, ExpressionScope> recordedScopes = featureScopeSessions.get(context);
 		if (recordedScopes == null) {
@@ -66,6 +69,7 @@ public class FeatureScopeTracker implements IFeatureScopeTracker {
 		scope.addData(session, current.withFlattenedReassignedTypes());
 	}
 	
+	@Override
 	public void replacePreviousExpressionScope(EObject context, IFeatureScopeSession session, IExpressionScope.Anchor anchor) {
 		EnumMap<Anchor, ExpressionScope> recordedScopes = featureScopeSessions.get(context);
 		if (recordedScopes == null) {

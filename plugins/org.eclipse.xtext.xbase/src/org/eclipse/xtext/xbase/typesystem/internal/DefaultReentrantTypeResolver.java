@@ -95,6 +95,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		this.allRootedExpressions = allRootedExpressions;
 	}
 	
+	@Override
 	public final void initializeFrom(EObject root) {
 		if (this.root != null) {
 			throw new IllegalStateException("Cannot reinitialize. Resolver has already a root: " + this.root);
@@ -127,6 +128,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		return issueSeveritiesProvider.getIssueSeverities(resource);
 	}
 	
+	@Override
 	public IResolvedTypes reentrantResolve(CancelIndicator monitor) {
 		if (resolving) {
 			throw new UnsupportedOperationException("TODO: import a functional handle on the type resolution that delegates to the best available (current, but evolving) result");

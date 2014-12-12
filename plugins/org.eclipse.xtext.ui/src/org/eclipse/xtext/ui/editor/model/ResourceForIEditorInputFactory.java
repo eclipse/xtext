@@ -53,6 +53,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	 * @throws IllegalArgumentException
 	 *             if no resource can be provided for the given input.
 	 */
+	@Override
 	public Resource createResource(IEditorInput editorInput) {
 		try {
 			if (editorInput instanceof IStorageEditorInput) {

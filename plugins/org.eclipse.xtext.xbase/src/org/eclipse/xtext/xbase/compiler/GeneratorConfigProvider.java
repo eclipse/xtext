@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class GeneratorConfigProvider implements IGeneratorConfigProvider {
 
+	@Override
 	public GeneratorConfig get(EObject context) {
 		return new GeneratorConfig();
 	}

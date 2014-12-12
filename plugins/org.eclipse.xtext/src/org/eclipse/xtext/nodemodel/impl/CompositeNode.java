@@ -37,6 +37,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 	
 	private int lookAhead;
 	
+	@Override
 	public BidiIterable<INode> getChildren() {
 		if (hasChildren()) {
 			INode firstChild = getFirstChild();
@@ -60,14 +61,17 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return EmptyBidiIterable.instance();
 	}
 	
+	@Override
 	public boolean hasChildren() {
 		return firstChild != null || isFolded();
 	}
 
+	@Override
 	public int getLookAhead() {
 		return lookAhead;
 	}
 	
+	@Override
 	public int getTotalLength() {
 		if (firstChild != null) {
 			int offset = firstChild.getTotalOffset();
@@ -77,6 +81,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		return 0;
 	}
 	
+	@Override
 	public int getTotalOffset() {
 		if (firstChild != null)
 			return firstChild.getTotalOffset();
@@ -110,6 +115,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		this.lookAhead = lookAhead;
 	}
 	
+	@Override
 	public INode getFirstChild() {
 		if (isFolded()) {
 			return new SyntheticCompositeNode(this, 1);
@@ -125,6 +131,7 @@ public class CompositeNode extends AbstractNode implements ICompositeNode {
 		this.firstChild = firstChild;
 	}
 	
+	@Override
 	public INode getLastChild() {
 		if (isFolded()) {
 			return new SyntheticCompositeNode(this, 1);

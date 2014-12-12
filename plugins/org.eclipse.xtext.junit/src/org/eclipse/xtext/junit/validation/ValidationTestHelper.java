@@ -46,6 +46,7 @@ public class ValidationTestHelper {
 	public void assertNoErrors(final EObject model) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				return Severity.ERROR == input.getSeverity();
 			}
@@ -57,6 +58,7 @@ public class ValidationTestHelper {
 	public void assertNoError(final EObject model, final String issuecode) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				return issuecode.equals(input.getCode());
 			}
@@ -74,6 +76,7 @@ public class ValidationTestHelper {
 			final String... messageParts) {
 		final List<Issue> validate = validate(model);
 		Iterable<Issue> matchingErrors = Iterables.filter(validate, new Predicate<Issue>() {
+			@Override
 			public boolean apply(Issue input) {
 				if (Strings.equal(input.getCode(), code) && input.getSeverity()==severity) {
 					EObject object = model.eResource().getResourceSet().getEObject(input.getUriToProblem(), true);

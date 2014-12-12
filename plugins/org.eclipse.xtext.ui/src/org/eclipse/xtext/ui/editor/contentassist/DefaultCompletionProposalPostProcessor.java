@@ -14,6 +14,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
  */
 public class DefaultCompletionProposalPostProcessor implements ICompletionProposalPostProcessor {
 
+	@Override
 	public ICompletionProposal[] postProcess(ICompletionProposal[] proposals) {
 		if (proposals.length == 1) {
 			if (proposals[0] instanceof ConfigurableCompletionProposal) {

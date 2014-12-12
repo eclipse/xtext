@@ -29,6 +29,7 @@ public class ClosureTypeResolutionTestData1 {
 		ClosureTypeResolutionTestData1 testData = null;
 		ListFunction1<Object, String> fun = null;
 		new ListFunction1<Object, String>() {
+			@Override
 			public List<String> apply(List<Object> list) {
 			return null;	
 			}

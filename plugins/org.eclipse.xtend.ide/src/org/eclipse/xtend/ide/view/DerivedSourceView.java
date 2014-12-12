@@ -244,6 +244,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 				TextRegion localRegion = mapTextRegion(workbenchPartSelection);
 				Iterable<IStorage> transform = transform(trace.getAllAssociatedLocations(localRegion),
 						new Function<ILocationInResource, IStorage>() {
+							@Override
 							public IStorage apply(ILocationInResource input) {
 								return input.getStorage();
 							}
@@ -310,6 +311,7 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		}
 	}
 
+	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (selectedSource == null || getWorkbenchPartSelection() == null) {
 			return;

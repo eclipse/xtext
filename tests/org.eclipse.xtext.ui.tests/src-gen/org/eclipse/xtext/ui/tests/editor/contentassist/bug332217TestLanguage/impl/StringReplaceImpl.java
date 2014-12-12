@@ -88,7 +88,8 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getValue()
+  @Override
+public ScalarExpression getValue()
   {
     return value;
   }
@@ -115,7 +116,8 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(ScalarExpression newValue)
+  @Override
+public void setValue(ScalarExpression newValue)
   {
     if (newValue != value)
     {
@@ -136,7 +138,8 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getMatch()
+  @Override
+public ScalarExpression getMatch()
   {
     return match;
   }
@@ -163,7 +166,8 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMatch(ScalarExpression newMatch)
+  @Override
+public void setMatch(ScalarExpression newMatch)
   {
     if (newMatch != match)
     {
@@ -184,7 +188,8 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  public ScalarExpression getReplacement()
+  @Override
+public ScalarExpression getReplacement()
   {
     return replacement;
   }
@@ -211,7 +216,8 @@ public class StringReplaceImpl extends StringFunctionImpl implements StringRepla
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReplacement(ScalarExpression newReplacement)
+  @Override
+public void setReplacement(ScalarExpression newReplacement)
   {
     if (newReplacement != replacement)
     {

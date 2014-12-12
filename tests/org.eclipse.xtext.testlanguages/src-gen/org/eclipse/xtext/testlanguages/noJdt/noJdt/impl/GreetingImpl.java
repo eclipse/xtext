@@ -85,7 +85,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -95,7 +96,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -108,7 +110,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  public Greeting getOther()
+  @Override
+public Greeting getOther()
   {
     if (other != null && other.eIsProxy())
     {
@@ -138,7 +141,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOther(Greeting newOther)
+  @Override
+public void setOther(Greeting newOther)
   {
     Greeting oldOther = other;
     other = newOther;

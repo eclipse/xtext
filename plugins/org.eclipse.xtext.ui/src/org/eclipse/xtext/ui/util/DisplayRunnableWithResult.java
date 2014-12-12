@@ -20,6 +20,7 @@ public abstract class DisplayRunnableWithResult <T>{
 			final Wrapper<T> resultWrapper = new Wrapper<T>();
 			final Wrapper<Exception> exceptionWrapper = new Wrapper<Exception>();
 			Display.getDefault().syncExec(new Runnable() {
+				@Override
 				public void run() {
 					try {
 						resultWrapper.set(DisplayRunnableWithResult.this.run());

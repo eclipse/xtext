@@ -58,14 +58,17 @@ public class CharSequenceTraceWrapper {
 			this.originEndLineNumber = originEndLineNumber;
 		}
 
+		@Override
 		public int length() {
 			return delegate.length();
 		}
 
+		@Override
 		public char charAt(int index) {
 			return delegate.charAt(index);
 		}
 
+		@Override
 		public CharSequence subSequence(int start, int end) {
 			return delegate.subSequence(start, end);
 		}
@@ -75,6 +78,7 @@ public class CharSequenceTraceWrapper {
 			return delegate.toString();
 		}
 
+		@Override
 		public AbstractTraceRegion getTraceRegion() {
 			ILocationData locationData = new LocationData(originOffset, originLength, originLineNumber, originEndLineNumber, originURI);
 			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), 0, Strings.countLineBreaks(delegate), locationData, null);

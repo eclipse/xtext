@@ -23,6 +23,7 @@ public class XtextNature implements IProjectNature {
 	
 	private IProject project;
 
+	@Override
 	public void configure() throws CoreException {
 		IProjectDescription desc = project.getDescription();
 		ICommand[] commands = desc.getBuildSpec();
@@ -42,6 +43,7 @@ public class XtextNature implements IProjectNature {
 		project.setDescription(desc, null);
 	}
 
+	@Override
 	public void deconfigure() throws CoreException {
 		IProjectDescription description = getProject().getDescription();
 		ICommand[] commands = description.getBuildSpec();
@@ -59,10 +61,12 @@ public class XtextNature implements IProjectNature {
 		}
 	}
 
+	@Override
 	public IProject getProject() {
 		return project;
 	}
 
+	@Override
 	public void setProject(IProject project) {
 		this.project = project;
 	}

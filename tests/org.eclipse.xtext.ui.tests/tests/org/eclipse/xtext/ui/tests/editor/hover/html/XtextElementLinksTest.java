@@ -53,6 +53,7 @@ public class XtextElementLinksTest extends AbstractEditorTest {
 		document = editor.getDocument();
 		elementLinks = Activator.getInstance().getInjector(getEditorId()).getInstance (XtextElementLinks.class);
 		f = document.readOnly(new IUnitOfWork<File, XtextResource>() {
+			@Override
 			public File exec(XtextResource state) throws Exception {
 				return (File) state.getContents().get(0);
 			}	
@@ -111,6 +112,7 @@ public class XtextElementLinksTest extends AbstractEditorTest {
 	protected EObject getEObject (String link) throws URISyntaxException {
 		URI uri = elementLinks.parseURI(new java.net.URI(getLocation(link)));
 		ResourceSet rs = document.readOnly(new IUnitOfWork<ResourceSet, XtextResource>() {
+			@Override
 			public ResourceSet exec(XtextResource state) throws Exception {
 				return state.getResourceSet();
 			}

@@ -111,7 +111,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry getAlias()
+  @Override
+public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -141,7 +142,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlias(FromEntry newAlias)
+  @Override
+public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -154,7 +156,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getReference()
+  @Override
+public EReference getReference()
   {
     if (reference != null && reference.eIsProxy())
     {
@@ -184,7 +187,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReference(EReference newReference)
+  @Override
+public void setReference(EReference newReference)
   {
     EReference oldReference = reference;
     reference = newReference;
@@ -197,7 +201,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isNotIn()
+  @Override
+public boolean isNotIn()
   {
     return notIn;
   }
@@ -207,7 +212,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNotIn(boolean newNotIn)
+  @Override
+public void setNotIn(boolean newNotIn)
   {
     boolean oldNotIn = notIn;
     notIn = newNotIn;
@@ -220,7 +226,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public MQLquery getSubQuery()
+  @Override
+public MQLquery getSubQuery()
   {
     return subQuery;
   }
@@ -247,7 +254,8 @@ public class SubselectWhereEntryImpl extends WhereEntryImpl implements Subselect
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSubQuery(MQLquery newSubQuery)
+  @Override
+public void setSubQuery(MQLquery newSubQuery)
   {
     if (newSubQuery != subQuery)
     {

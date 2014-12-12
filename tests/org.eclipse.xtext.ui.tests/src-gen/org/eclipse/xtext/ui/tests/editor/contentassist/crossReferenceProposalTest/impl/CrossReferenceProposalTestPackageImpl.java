@@ -103,7 +103,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -113,7 +114,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Elements()
+  @Override
+public EReference getModel_Elements()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -123,7 +125,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getClass_()
+  @Override
+public EClass getClass_()
   {
     return classEClass;
   }
@@ -133,7 +136,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getClass_SuperClass()
+  @Override
+public EReference getClass_SuperClass()
   {
     return (EReference)classEClass.getEStructuralFeatures().get(0);
   }
@@ -143,7 +147,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClass_Name()
+  @Override
+public EAttribute getClass_Name()
   {
     return (EAttribute)classEClass.getEStructuralFeatures().get(1);
   }
@@ -153,7 +158,8 @@ public class CrossReferenceProposalTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public CrossReferenceProposalTestFactory getCrossReferenceProposalTestFactory()
+  @Override
+public CrossReferenceProposalTestFactory getCrossReferenceProposalTestFactory()
   {
     return (CrossReferenceProposalTestFactory)getEFactoryInstance();
   }

@@ -36,6 +36,7 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 		}
 
 		/* @Nullable */
+		@Override
 		public URI getURIForTrace(XtextResource context) {
 			for(int i = 0, size = contributions.size(); i < size; i++) {
 				URI result = contributions.get(i).getURIForTrace(context);
@@ -47,6 +48,7 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 		}
 
 		/* @Nullable */
+		@Override
 		public URI getURIForTrace(URI uri) {
 			for(int i = 0, size = contributions.size(); i < size; i++) {
 				URI result = contributions.get(i).getURIForTrace(uri);
@@ -61,11 +63,13 @@ public class ExtensibleTraceURIConverter extends DefaultTraceURIConverter {
 	public static final class NullContribution implements ITraceURIConverterContribution {
 
 		/* @Nullable */
+		@Override
 		public URI getURIForTrace(XtextResource context) {
 			return null;
 		}
 
 		/* @Nullable */
+		@Override
 		public URI getURIForTrace(URI uri) {
 			return null;
 		}

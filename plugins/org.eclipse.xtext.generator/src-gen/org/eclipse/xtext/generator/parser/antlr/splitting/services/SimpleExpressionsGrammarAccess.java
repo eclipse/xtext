@@ -32,6 +32,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//IfCondition:
 		//	elseif?="else"? "if" "(" condition=Expression ")" "{";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elseif?="else"? "if" "(" condition=Expression ")" "{"
@@ -74,6 +75,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Expression:
 		//	AndExpression ({OrExpression.left=current} "||" right=AndExpression)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//AndExpression ({OrExpression.left=current} "||" right=AndExpression)*
@@ -110,6 +112,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//AndExpression returns Expression:
 		//	Comparison ({AndExpression.left=current} "&&" right=Comparison)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Comparison ({AndExpression.left=current} "&&" right=Comparison)*
@@ -150,6 +153,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Comparison returns Expression:
 		//	PrefixExpression ({Comparison.left=current} operator=("==" | "<=" | ">=") right=PrefixExpression)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//PrefixExpression ({Comparison.left=current} operator=("==" | "<=" | ">=") right=PrefixExpression)?
@@ -198,6 +202,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//PrefixExpression returns Expression:
 		//	{NotExpression} "!" expression=Atom | Atom;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{NotExpression} "!" expression=Atom | Atom
@@ -231,6 +236,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Atom returns Expression:
 		//	ParenthesizedExpression | NumberLiteral | MethodCall;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ParenthesizedExpression | NumberLiteral | MethodCall
@@ -253,6 +259,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//NumberLiteral:
 		//	value=INT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=INT
@@ -271,6 +278,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//ParenthesizedExpression returns Expression:
 		//	"(" Expression ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" Expression ")"
@@ -293,6 +301,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//MethodCall:
 		//	value=MethodCallLiteral;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=MethodCallLiteral
@@ -320,6 +329,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//MethodCallLiteral:
 		//	FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?
@@ -370,6 +380,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Argument:
 		//	MethodCallLiteral | INT;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//MethodCallLiteral | INT
@@ -392,6 +403,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		
 		//FQN:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -452,6 +464,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

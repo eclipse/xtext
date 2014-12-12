@@ -73,7 +73,8 @@ public class SimpleOperationRefImpl extends OperationRefImpl implements SimpleOp
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getOperation()
+  @Override
+public String getOperation()
   {
     return operation;
   }
@@ -83,7 +84,8 @@ public class SimpleOperationRefImpl extends OperationRefImpl implements SimpleOp
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperation(String newOperation)
+  @Override
+public void setOperation(String newOperation)
   {
     String oldOperation = operation;
     operation = newOperation;

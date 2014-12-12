@@ -41,6 +41,7 @@ public class ContentAssistContext {
 		
 		public static class Null implements Factory {
 
+			@Override
 			public ContentAssistContext[] create(ITextViewer viewer, int offset, XtextResource resource) {
 				return EMPTY_ARRAY;
 			}
@@ -106,6 +107,7 @@ public class ContentAssistContext {
 			return this;
 		}
 		
+		@Override
 		public void accept(AbstractElement element) {
 			if (element == null)
 				throw new NullPointerException("element may not be null");

@@ -39,10 +39,12 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		this.owner = owner;
 	}
 	
+	@Override
 	public boolean hasUnprocessedArguments() {
 		return nextUnprocessedArgument < arguments.size();
 	}
 
+	@Override
 	public IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot() {
 		if (!hasUnprocessedArguments()) {
 			throw new NoSuchElementException();
@@ -54,14 +56,17 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	}
 
 	/* @Nullable */
+	@Override
 	public XExpression getArgument(int idx) {
 		return internalGetArgument(idx - receiverFixup);
 	}
 	
+	@Override
 	public int getArgumentCount() {
 		return arguments.size() + receiverFixup;
 	}
 	
+	@Override
 	public boolean hasEmptyTrailingVarArg() {
 		return false;
 	}
@@ -82,6 +87,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	/**
 	 * @param argumentIndex the external argument index.
 	 */
+	@Override
 	public boolean isProcessed(int argumentIndex) {
 		return argumentIndex - receiverFixup < nextUnprocessedArgument || argumentIndex >= getArgumentCount();
 	}

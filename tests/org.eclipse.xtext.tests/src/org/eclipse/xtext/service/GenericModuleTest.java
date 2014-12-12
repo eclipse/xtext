@@ -100,6 +100,7 @@ public class GenericModuleTest extends Assert {
 
 	public static class DateProvider implements Provider<Date> {
 
+		@Override
 		public Date get() {
 			return null;
 		}
@@ -133,6 +134,7 @@ public class GenericModuleTest extends Assert {
 	}
 	
 	static class FooProvider implements Provider<String> {
+		@Override
 		public String get() {
 			 return "foo";
 		}
@@ -140,6 +142,7 @@ public class GenericModuleTest extends Assert {
 
 	@Test public void testProviderInstanceBinding() throws Exception {
 		final Provider<Date> provider = new Provider<Date>() {
+			@Override
 			public Date get() {
 				return null;
 			}

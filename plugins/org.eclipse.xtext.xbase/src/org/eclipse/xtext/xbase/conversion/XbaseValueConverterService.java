@@ -53,10 +53,12 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 			"?:",
 			"<=>");
 		
+		@Override
 		public String toValue(String string, INode node) throws ValueConverterException {
 			return string;
 		}
 
+		@Override
 		public String toString(String value) throws ValueConverterException {
 			if (!operators.contains(value))
 				throw new ValueConverterException("'" + value + "' is not a valid operator.", null, null);
@@ -73,10 +75,12 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 			">",
 			"<");
 		
+		@Override
 		public String toValue(String string, INode node) throws ValueConverterException {
 			return string;
 		}
 
+		@Override
 		public String toString(String value) throws ValueConverterException {
 			if (!operators.contains(value))
 				throw new ValueConverterException("'" + value + "' is not a valid operator.", null, null);
@@ -100,10 +104,12 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 			">>=",
 			">>>=");
 		
+		@Override
 		public String toValue(String string, INode node) throws ValueConverterException {
 			return string;
 		}
 
+		@Override
 		public String toString(String value) throws ValueConverterException {
 			if (!operators.contains(value))
 				throw new ValueConverterException("'" + value + "' is not a valid operator.", null, null);

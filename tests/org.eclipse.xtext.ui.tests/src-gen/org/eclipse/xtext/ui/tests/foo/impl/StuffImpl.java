@@ -86,7 +86,8 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -96,7 +97,8 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -109,7 +111,8 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * <!-- end-user-doc -->
    * @generated
    */
-  public Stuff getRefs()
+  @Override
+public Stuff getRefs()
   {
     if (refs != null && refs.eIsProxy())
     {
@@ -139,7 +142,8 @@ public class StuffImpl extends MinimalEObjectImpl.Container implements Stuff
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRefs(Stuff newRefs)
+  @Override
+public void setRefs(Stuff newRefs)
   {
     Stuff oldRefs = refs;
     refs = newRefs;

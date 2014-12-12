@@ -23,15 +23,18 @@ public class TypeExpectation extends AbstractReturnAwareTypeExpectation {
 		this.reference = reference;
 	}
 	
+	@Override
 	public boolean isNoTypeExpectation() {
 		return false;
 	}
 	
 	/* @Nullable */
+	@Override
 	public LightweightTypeReference getExpectedType() {
 		return reference;
 	}
 	
+	@Override
 	public TypeExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		if (reference == null || reference.isOwnedBy(referenceOwner))
 			return this;

@@ -34,18 +34,22 @@ public class PartialParser implements IParser {
 		this.originalParser = originalParser;
 	}
 
+	@Override
 	public IParseResult parse(Reader reader) {
 		return originalParser.parse(rule, reader);
 	}
 	
+	@Override
 	public IParseResult parse(ParserRule rule, Reader reader) {
 		return originalParser.parse(rule, reader);
 	}
 	
+	@Override
 	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IParseResult reparse(IParseResult previousParseResult, ReplaceRegion replaceRegion) {
 		return originalParser.reparse(previousParseResult, replaceRegion);
 	}

@@ -31,6 +31,7 @@ public class DerivedMemberAwareEditorOpener extends LanguageSpecificURIEditorOpe
 	@Inject
 	private IJvmModelAssociations associations;
 	
+	@Override
 	public IEditorPart open(URI uri, IMember member, boolean select) {
 		if (member != null) {
 			URI memberURI = new TypeURIHelper().getFullURI(member);

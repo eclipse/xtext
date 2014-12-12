@@ -66,7 +66,8 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
-  public PostfixExpression getExpression()
+  @Override
+public PostfixExpression getExpression()
   {
     return expression;
   }
@@ -93,7 +94,8 @@ public class ExpressionStatementImpl extends StatementImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(PostfixExpression newExpression)
+  @Override
+public void setExpression(PostfixExpression newExpression)
   {
     if (newExpression != expression)
     {

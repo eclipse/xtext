@@ -45,6 +45,7 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 		return other.resourceSet == resourceSet;
 	}
 
+	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		if (!HANDLE.equals(containerHandle))
 			return Collections.emptySet();
@@ -59,6 +60,7 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 		return uris;
 	}
 
+	@Override
 	public String getContainerHandle(URI uri) {
 		return HANDLE;
 	}
@@ -67,6 +69,7 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 		return resourceSet;
 	}
 
+	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		return Collections.singletonList(HANDLE);
 	}
@@ -81,6 +84,7 @@ public class FlatResourceSetBasedAllContainersState extends AdapterImpl implemen
 		return IAllContainersState.class == type || FlatResourceSetBasedAllContainersState.class == type;
 	}
 
+	@Override
 	public boolean isEmpty(String containerHandle) {
 		return !HANDLE.equals(containerHandle);
 	}

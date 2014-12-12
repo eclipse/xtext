@@ -19,10 +19,12 @@ public class DefaultWorkbenchPartSelection implements IWorkbenchPartSelection {
 	private IWorkbenchPart workbenchPart;
 	private ISelection selection;
 
+	@Override
 	public IWorkbenchPart getWorkbenchPart() {
 		return workbenchPart;
 	}
 
+	@Override
 	public ISelection getSelection() {
 		return selection;
 	}

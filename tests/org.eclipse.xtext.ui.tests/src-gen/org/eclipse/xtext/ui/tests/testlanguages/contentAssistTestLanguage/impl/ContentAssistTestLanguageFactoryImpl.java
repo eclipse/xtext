@@ -79,7 +79,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public Start createStart()
+  @Override
+public Start createStart()
   {
     StartImpl start = new StartImpl();
     return start;
@@ -90,7 +91,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRule createAbstractRule()
+  @Override
+public AbstractRule createAbstractRule()
   {
     AbstractRuleImpl abstractRule = new AbstractRuleImpl();
     return abstractRule;
@@ -101,7 +103,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public FirstAbstractRuleChild createFirstAbstractRuleChild()
+  @Override
+public FirstAbstractRuleChild createFirstAbstractRuleChild()
   {
     FirstAbstractRuleChildImpl firstAbstractRuleChild = new FirstAbstractRuleChildImpl();
     return firstAbstractRuleChild;
@@ -112,7 +115,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public SecondAbstractRuleChild createSecondAbstractRuleChild()
+  @Override
+public SecondAbstractRuleChild createSecondAbstractRuleChild()
   {
     SecondAbstractRuleChildImpl secondAbstractRuleChild = new SecondAbstractRuleChildImpl();
     return secondAbstractRuleChild;
@@ -123,7 +127,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRuleCall createAbstractRuleCall()
+  @Override
+public AbstractRuleCall createAbstractRuleCall()
   {
     AbstractRuleCallImpl abstractRuleCall = new AbstractRuleCallImpl();
     return abstractRuleCall;
@@ -134,7 +139,8 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
+  @Override
+public ContentAssistTestLanguagePackage getContentAssistTestLanguagePackage()
   {
     return (ContentAssistTestLanguagePackage)getEPackage();
   }

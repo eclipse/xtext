@@ -56,26 +56,32 @@ public class ToBeBuiltComputer {
 	
 	public static class NullContribution implements IToBeBuiltComputerContribution {
 
+		@Override
 		public void removeProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) {
 			// nothing to do
 		}
 
+		@Override
 		public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
 			// nothing to do
 		}
 
+		@Override
 		public boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
 			return false;
 		}
 
+		@Override
 		public boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
 			return false;
 		}
 
+		@Override
 		public boolean isPossiblyHandled(IStorage storage) {
 			return false;
 		}
 
+		@Override
 		public boolean isRejected(IFolder folder) {
 			return false;
 		}
@@ -90,18 +96,21 @@ public class ToBeBuiltComputer {
 			this.contributions = contributions;
 		}
 		
+		@Override
 		public void removeProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) {
 			for (int i = 0, size = contributions.size(); i < size; i++) {
 				contributions.get(i).removeProject(toBeBuilt, project, monitor);
 			}
 		}
 
+		@Override
 		public void updateProject(ToBeBuilt toBeBuilt, IProject project, IProgressMonitor monitor) throws CoreException {
 			for (int i = 0; i < contributions.size(); i++) {
 				contributions.get(i).updateProject(toBeBuilt, project, monitor);
 			}
 		}
 
+		@Override
 		public boolean removeStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
 			for (int i = 0; i < contributions.size(); i++) {
 				if (contributions.get(i).removeStorage(toBeBuilt, storage, monitor)) {
@@ -111,6 +120,7 @@ public class ToBeBuiltComputer {
 			return false;
 		}
 
+		@Override
 		public boolean updateStorage(ToBeBuilt toBeBuilt, IStorage storage, IProgressMonitor monitor) {
 			for (int i = 0; i < contributions.size(); i++) {
 				if (contributions.get(i).updateStorage(toBeBuilt, storage, monitor)) {
@@ -120,6 +130,7 @@ public class ToBeBuiltComputer {
 			return false;
 		}
 
+		@Override
 		public boolean isPossiblyHandled(IStorage storage) {
 			boolean result = false;
 			for (int i = 0; i < contributions.size() && !result; i++) {
@@ -128,6 +139,7 @@ public class ToBeBuiltComputer {
 			return result;
 		}
 
+		@Override
 		public boolean isRejected(IFolder folder) {
 			for (int i = 0; i < contributions.size(); i++) {
 				if (contributions.get(i).isRejected(folder)) {
@@ -205,6 +217,7 @@ public class ToBeBuiltComputer {
 		ToBeBuilt toBeBuilt = updateProject(project, progress.newChild(1));
 		Iterable<URI> existingURIs = Iterables.transform(builderState.getAllResourceDescriptions(),
 				new Function<IResourceDescription, URI>() {
+					@Override
 					public URI apply(IResourceDescription from) {
 						return from.getURI();
 					}
@@ -235,6 +248,7 @@ public class ToBeBuiltComputer {
 			throw new OperationCanceledException();
 		final SubMonitor childMonitor = progress.newChild(1);
 		project.accept(new IResourceVisitor() {
+			@Override
 			public boolean visit(IResource resource) throws CoreException {
 				if (progress.isCanceled())
 					throw new OperationCanceledException();

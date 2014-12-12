@@ -168,7 +168,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -178,7 +179,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_First()
+  @Override
+public EReference getModel_First()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -188,7 +190,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Second()
+  @Override
+public EReference getModel_Second()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -198,7 +201,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Thrird()
+  @Override
+public EReference getModel_Thrird()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -208,7 +212,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Forth()
+  @Override
+public EReference getModel_Forth()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
   }
@@ -218,7 +223,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Fifth()
+  @Override
+public EReference getModel_Fifth()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
   }
@@ -228,7 +234,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Model()
+  @Override
+public EReference getModel_Model()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(5);
   }
@@ -238,7 +245,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimpleModel()
+  @Override
+public EClass getSimpleModel()
   {
     return simpleModelEClass;
   }
@@ -248,7 +256,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleModel_Visibility()
+  @Override
+public EAttribute getSimpleModel_Visibility()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(0);
   }
@@ -258,7 +267,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleModel_Static()
+  @Override
+public EAttribute getSimpleModel_Static()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(1);
   }
@@ -268,7 +278,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleModel_Synchronized()
+  @Override
+public EAttribute getSimpleModel_Synchronized()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(2);
   }
@@ -278,7 +289,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleModel_Abstract()
+  @Override
+public EAttribute getSimpleModel_Abstract()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(3);
   }
@@ -288,7 +300,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleModel_Final()
+  @Override
+public EAttribute getSimpleModel_Final()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(4);
   }
@@ -298,7 +311,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleModel_Name()
+  @Override
+public EAttribute getSimpleModel_Name()
   {
     return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(5);
   }
@@ -308,7 +322,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMandatoryModel()
+  @Override
+public EClass getMandatoryModel()
   {
     return mandatoryModelEClass;
   }
@@ -318,7 +333,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMandatoryModel_Visibility()
+  @Override
+public EAttribute getMandatoryModel_Visibility()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(0);
   }
@@ -328,7 +344,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMandatoryModel_Static()
+  @Override
+public EAttribute getMandatoryModel_Static()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(1);
   }
@@ -338,7 +355,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMandatoryModel_Synchronized()
+  @Override
+public EAttribute getMandatoryModel_Synchronized()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(2);
   }
@@ -348,7 +366,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMandatoryModel_Abstract()
+  @Override
+public EAttribute getMandatoryModel_Abstract()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(3);
   }
@@ -358,7 +377,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMandatoryModel_Final()
+  @Override
+public EAttribute getMandatoryModel_Final()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(4);
   }
@@ -368,7 +388,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMandatoryModel_Name()
+  @Override
+public EAttribute getMandatoryModel_Name()
   {
     return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(5);
   }
@@ -378,7 +399,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getLoopedModel()
+  @Override
+public EClass getLoopedModel()
   {
     return loopedModelEClass;
   }
@@ -388,7 +410,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedModel_Visibility()
+  @Override
+public EAttribute getLoopedModel_Visibility()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(0);
   }
@@ -398,7 +421,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedModel_Static()
+  @Override
+public EAttribute getLoopedModel_Static()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(1);
   }
@@ -408,7 +432,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedModel_Synchronized()
+  @Override
+public EAttribute getLoopedModel_Synchronized()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(2);
   }
@@ -418,7 +443,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedModel_Abstract()
+  @Override
+public EAttribute getLoopedModel_Abstract()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(3);
   }
@@ -428,7 +454,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedModel_Final()
+  @Override
+public EAttribute getLoopedModel_Final()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(4);
   }
@@ -438,7 +465,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedModel_Name()
+  @Override
+public EAttribute getLoopedModel_Name()
   {
     return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(5);
   }
@@ -448,7 +476,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGroupLoopedModel()
+  @Override
+public EClass getGroupLoopedModel()
   {
     return groupLoopedModelEClass;
   }
@@ -458,7 +487,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGroupLoopedModel_Visibility()
+  @Override
+public EAttribute getGroupLoopedModel_Visibility()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(0);
   }
@@ -468,7 +498,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGroupLoopedModel_Static()
+  @Override
+public EAttribute getGroupLoopedModel_Static()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(1);
   }
@@ -478,7 +509,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGroupLoopedModel_Synchronized()
+  @Override
+public EAttribute getGroupLoopedModel_Synchronized()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(2);
   }
@@ -488,7 +520,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGroupLoopedModel_Abstract()
+  @Override
+public EAttribute getGroupLoopedModel_Abstract()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(3);
   }
@@ -498,7 +531,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGroupLoopedModel_Final()
+  @Override
+public EAttribute getGroupLoopedModel_Final()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(4);
   }
@@ -508,7 +542,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getGroupLoopedModel_Name()
+  @Override
+public EAttribute getGroupLoopedModel_Name()
   {
     return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(5);
   }
@@ -518,7 +553,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getLoopedAlternativeModel()
+  @Override
+public EClass getLoopedAlternativeModel()
   {
     return loopedAlternativeModelEClass;
   }
@@ -528,7 +564,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedAlternativeModel_Visibility()
+  @Override
+public EAttribute getLoopedAlternativeModel_Visibility()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(0);
   }
@@ -538,7 +575,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedAlternativeModel_Static()
+  @Override
+public EAttribute getLoopedAlternativeModel_Static()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(1);
   }
@@ -548,7 +586,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedAlternativeModel_Synchronized()
+  @Override
+public EAttribute getLoopedAlternativeModel_Synchronized()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(2);
   }
@@ -558,7 +597,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedAlternativeModel_Abstract()
+  @Override
+public EAttribute getLoopedAlternativeModel_Abstract()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(3);
   }
@@ -568,7 +608,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedAlternativeModel_Final()
+  @Override
+public EAttribute getLoopedAlternativeModel_Final()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(4);
   }
@@ -578,7 +619,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getLoopedAlternativeModel_Name()
+  @Override
+public EAttribute getLoopedAlternativeModel_Name()
   {
     return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(5);
   }
@@ -588,7 +630,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBug304681Model()
+  @Override
+public EClass getBug304681Model()
   {
     return bug304681ModelEClass;
   }
@@ -598,7 +641,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBug304681Model_ShortDescription()
+  @Override
+public EAttribute getBug304681Model_ShortDescription()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(0);
   }
@@ -608,7 +652,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBug304681Model_LongDescription()
+  @Override
+public EAttribute getBug304681Model_LongDescription()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(1);
   }
@@ -618,7 +663,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBug304681Model_Uid()
+  @Override
+public EAttribute getBug304681Model_Uid()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(2);
   }
@@ -628,7 +674,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBug304681Model_Flag()
+  @Override
+public EAttribute getBug304681Model_Flag()
   {
     return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(3);
   }
@@ -638,7 +685,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBug304681Model_Features()
+  @Override
+public EReference getBug304681Model_Features()
   {
     return (EReference)bug304681ModelEClass.getEStructuralFeatures().get(4);
   }
@@ -648,7 +696,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBug304681Feature()
+  @Override
+public EClass getBug304681Feature()
   {
     return bug304681FeatureEClass;
   }
@@ -658,7 +707,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBug304681Feature_Name()
+  @Override
+public EAttribute getBug304681Feature_Name()
   {
     return (EAttribute)bug304681FeatureEClass.getEStructuralFeatures().get(0);
   }
@@ -668,7 +718,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBug304681Attribute()
+  @Override
+public EClass getBug304681Attribute()
   {
     return bug304681AttributeEClass;
   }
@@ -678,7 +729,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBug304681Reference()
+  @Override
+public EClass getBug304681Reference()
   {
     return bug304681ReferenceEClass;
   }
@@ -688,7 +740,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public UnorderedGroupsTestFactory getUnorderedGroupsTestFactory()
+  @Override
+public UnorderedGroupsTestFactory getUnorderedGroupsTestFactory()
   {
     return (UnorderedGroupsTestFactory)getEFactoryInstance();
   }

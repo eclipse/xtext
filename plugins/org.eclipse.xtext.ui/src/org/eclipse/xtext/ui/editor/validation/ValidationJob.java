@@ -86,6 +86,7 @@ public class ValidationJob extends Job {
 						if (resource == null || resource.isValidationDisabled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
+							@Override
 							public boolean isCanceled() {
 								return outerIndicator.isCanceled() || monitor.isCanceled();
 							}

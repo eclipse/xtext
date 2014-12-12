@@ -101,22 +101,27 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertEquals("foo", targetElement.getName());
 	}
 	
+	@Override
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		textEdits.add(textEdit);		
 	}
 
+	@Override
 	public void accept(URI resourceURI, Change change) {
 		changes.add(change);
 	}
 
+	@Override
 	public StatusWrapper getRefactoringStatus() {
 		return null;
 	}
 
+	@Override
 	public IRefactoringDocument getDocument(URI resourceURI) {
 		return null;
 	}
 
+	@Override
 	public Change createCompositeChange(String name, IProgressMonitor monitor) {
 		// TODO Auto-generated method stub
 		return null;

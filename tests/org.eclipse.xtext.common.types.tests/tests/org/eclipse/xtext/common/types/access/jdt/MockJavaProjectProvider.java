@@ -54,6 +54,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 	private boolean useSources;
 	
+	@Override
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
 		if (javaProject == null || javaProjectWithSources == null)
 			throw new IllegalStateException("javaProject is null || javaProjectWithSources == null");

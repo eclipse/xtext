@@ -86,7 +86,8 @@ public class AttributeImpl extends ModelAttributeImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public ModelElement getFeature()
+  @Override
+public ModelElement getFeature()
   {
     if (feature != null && feature.eIsProxy())
     {
@@ -116,7 +117,8 @@ public class AttributeImpl extends ModelAttributeImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeature(ModelElement newFeature)
+  @Override
+public void setFeature(ModelElement newFeature)
   {
     ModelElement oldFeature = feature;
     feature = newFeature;
@@ -129,7 +131,8 @@ public class AttributeImpl extends ModelAttributeImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getValue()
+  @Override
+public String getValue()
   {
     return value;
   }
@@ -139,7 +142,8 @@ public class AttributeImpl extends ModelAttributeImpl implements Attribute
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(String newValue)
+  @Override
+public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

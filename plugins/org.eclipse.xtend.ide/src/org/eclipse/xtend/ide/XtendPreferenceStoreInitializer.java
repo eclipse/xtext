@@ -24,6 +24,7 @@ import com.google.inject.Singleton;
 public class XtendPreferenceStoreInitializer implements IPreferenceStoreInitializer, IPropertyChangeListener {
 	private IPreferenceStoreAccess preferenceStoreAccess;
 	
+	@Override
 	public void initialize(IPreferenceStoreAccess preferenceStoreAccess) {
 		this.preferenceStoreAccess = preferenceStoreAccess;
 
@@ -34,6 +35,7 @@ public class XtendPreferenceStoreInitializer implements IPreferenceStoreInitiali
 		
 	}
 
+	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		if (preferenceStoreAccess == null) {
 			return;

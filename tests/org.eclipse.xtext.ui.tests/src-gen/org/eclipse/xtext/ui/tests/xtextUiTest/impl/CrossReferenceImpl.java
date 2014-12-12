@@ -78,7 +78,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getType()
+  @Override
+public TypeRef getType()
   {
     return type;
   }
@@ -105,7 +106,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeRef newType)
+  @Override
+public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -126,7 +128,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractElement getTerminal()
+  @Override
+public AbstractElement getTerminal()
   {
     return terminal;
   }
@@ -153,7 +156,8 @@ public class CrossReferenceImpl extends AbstractElementImpl implements CrossRefe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTerminal(AbstractElement newTerminal)
+  @Override
+public void setTerminal(AbstractElement newTerminal)
   {
     if (newTerminal != terminal)
     {

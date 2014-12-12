@@ -42,6 +42,7 @@ public class ReconcilingUnitOfWork<T> implements IUnitOfWork<T, XtextResource> {
 		this.composer = composer;
 	}
 
+	@Override
 	public T exec(XtextResource state) throws Exception {
 		String original = document.get();
 		DocumentChangeListener documentChangeListener = new DocumentChangeListener();
@@ -77,10 +78,12 @@ public class ReconcilingUnitOfWork<T> implements IUnitOfWork<T, XtextResource> {
 
 		private boolean documentChanged = false;
 
+		@Override
 		public void documentAboutToBeChanged(DocumentEvent event) {
 			// ignore
 		}
 
+		@Override
 		public void documentChanged(DocumentEvent event) {
 			documentChanged = true;
 		}

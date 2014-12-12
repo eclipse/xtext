@@ -17,6 +17,7 @@ public interface ICharacterClass {
 	class Factory {
 		private static class NullCharacterClass implements ICharacterClass {
 			private static ICharacterClass INSTANCE = new NullCharacterClass();
+			@Override
 			public boolean matches(char candidate) {
 				return false;
 			}
@@ -42,6 +43,7 @@ public interface ICharacterClass {
 		
 		public static ICharacterClass invert(final ICharacterClass clazz) {
 			return new ICharacterClass() {
+				@Override
 				public boolean matches(char candidate) {
 					return !clazz.matches(candidate);
 				}

@@ -70,7 +70,8 @@ public class FirstAbstractRuleChildImpl extends AbstractRuleImpl implements Firs
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractRule> getElements()
+  @Override
+public EList<AbstractRule> getElements()
   {
     if (elements == null)
     {

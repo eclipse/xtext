@@ -29,6 +29,7 @@ public class ImplicitFirstArgument extends AbstractImplicitFeature {
 		super(featureCall, implicit, state);
 	}
 
+	@Override
 	public void applyToModel(IResolvedTypes resolvedTypes) {
 		getOwner().setImplicitFirstArgument(getFeatureCall());
 	}

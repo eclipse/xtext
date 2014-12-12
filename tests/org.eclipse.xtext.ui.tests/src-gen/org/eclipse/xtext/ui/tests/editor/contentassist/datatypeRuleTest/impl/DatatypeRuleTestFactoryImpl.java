@@ -80,7 +80,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public Model createModel()
+  @Override
+public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -91,7 +92,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public Types createTypes()
+  @Override
+public Types createTypes()
   {
     TypesImpl types = new TypesImpl();
     return types;
@@ -102,7 +104,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
+  @Override
+public Type createType()
   {
     TypeImpl type = new TypeImpl();
     return type;
@@ -113,7 +116,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleType createSimpleType()
+  @Override
+public SimpleType createSimpleType()
   {
     SimpleTypeImpl simpleType = new SimpleTypeImpl();
     return simpleType;
@@ -124,7 +128,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public CompositeType createCompositeType()
+  @Override
+public CompositeType createCompositeType()
   {
     CompositeTypeImpl compositeType = new CompositeTypeImpl();
     return compositeType;
@@ -135,7 +140,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public CompositeTypeEntry createCompositeTypeEntry()
+  @Override
+public CompositeTypeEntry createCompositeTypeEntry()
   {
     CompositeTypeEntryImpl compositeTypeEntry = new CompositeTypeEntryImpl();
     return compositeTypeEntry;
@@ -146,7 +152,8 @@ public class DatatypeRuleTestFactoryImpl extends EFactoryImpl implements Datatyp
    * <!-- end-user-doc -->
    * @generated
    */
-  public DatatypeRuleTestPackage getDatatypeRuleTestPackage()
+  @Override
+public DatatypeRuleTestPackage getDatatypeRuleTestPackage()
   {
     return (DatatypeRuleTestPackage)getEPackage();
   }

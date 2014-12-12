@@ -58,6 +58,7 @@ public abstract class AbstractSmokeTest extends AbstractXtendTestCase {
 	protected IResourceFactory resourceFactory;
 
 	private Provider<Lexer> lexerProvider = new Provider<Lexer>() {
+		@Override
 		public Lexer get() {
 			return new InternalXtendLexer(null);
 		}

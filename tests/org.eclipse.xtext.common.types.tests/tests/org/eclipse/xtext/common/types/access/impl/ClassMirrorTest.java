@@ -51,6 +51,7 @@ public class ClassMirrorTest extends Assert implements ITypeFactory<Class<?>, Jv
 		}
 	}
 
+	@Override
 	public JvmDeclaredType createType(Class<?> clazz) {
 		fail("Unexpected call");
 		return null;

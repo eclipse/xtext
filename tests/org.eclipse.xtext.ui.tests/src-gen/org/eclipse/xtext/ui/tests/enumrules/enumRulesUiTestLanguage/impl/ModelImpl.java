@@ -98,7 +98,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public ExistingEnum getExisting()
+  @Override
+public ExistingEnum getExisting()
   {
     return existing;
   }
@@ -108,7 +109,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExisting(ExistingEnum newExisting)
+  @Override
+public void setExisting(ExistingEnum newExisting)
   {
     ExistingEnum oldExisting = existing;
     existing = newExisting == null ? EXISTING_EDEFAULT : newExisting;
@@ -121,7 +123,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public GeneratedEnum getGenerated()
+  @Override
+public GeneratedEnum getGenerated()
   {
     return generated;
   }
@@ -131,7 +134,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGenerated(GeneratedEnum newGenerated)
+  @Override
+public void setGenerated(GeneratedEnum newGenerated)
   {
     GeneratedEnum oldGenerated = generated;
     generated = newGenerated == null ? GENERATED_EDEFAULT : newGenerated;

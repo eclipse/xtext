@@ -120,6 +120,7 @@ public class ElementIssueProvider implements IElementIssueProvider {
 			resource.eAdapters().remove(findDataAdapter(resource));
 		}
 
+		@Override
 		public IElementIssueProvider get(Resource resource) {
 			Data data = findDataAdapter(resource);
 			return new ElementIssueProvider(data);
@@ -137,6 +138,7 @@ public class ElementIssueProvider implements IElementIssueProvider {
 		this.data = data;
 	}
 
+	@Override
 	public Iterable<Issue> getIssues(EObject element) {
 		if(data == null)
 			return emptyList();

@@ -78,6 +78,7 @@ public class ContentAssistContext {
 			return this;
 		}
 		
+		@Override
 		public void accept(AbstractElement element) {
 			if (element == null)
 				throw new NullPointerException("element may not be null");

@@ -20,14 +20,17 @@ class ContainerState implements IContainerState {
 		this.globalState = globalState;
 	}
 
+	@Override
 	public Collection<URI> getContents() {
 		return globalState.getContainedURIs(root);
 	}
 
+	@Override
 	public boolean contains(URI uri) {
 		return getContents().contains(uri);
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return globalState.isEmpty(root);
 	}

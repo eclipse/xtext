@@ -68,6 +68,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		indentationDataStack.add(indentationData);
 	}
 	
+	@Override
 	public void popIndentation() {
 		indentationData.removeLast();
 		if (indentationData.isEmpty() && indentationDataStack.size() > 1) {
@@ -76,6 +77,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		}
 	}
 
+	@Override
 	public void pushTemplateIndentation(CharSequence indentation) {
 		if (indentationData.isEmpty()) {
 			indentationData.add(new TemplateIndentationData(indentation));
@@ -93,6 +95,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		}
 	}
 	
+	@Override
 	public void pushSemanticIndentation(CharSequence indentation) {
 		if (indentationData.isEmpty()) {
 			indentationData.add(new SemanticIndentationData(indentation));
@@ -110,6 +113,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		}
 	}
 	
+	@Override
 	public CharSequence getTotalSemanticIndentation() {
 		StringBuilder result = new StringBuilder();
 		for(IndentationData data: indentationData) {
@@ -119,6 +123,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		return result.toString();
 	}
 	
+	@Override
 	public String getTotalIndentation() {
 		StringBuilder result = new StringBuilder();
 		for(IndentationData data: indentationData) {
@@ -127,6 +132,7 @@ public class DefaultIndentationHandler implements IRichStringIndentationHandler 
 		return result.toString();
 	}
 	
+	@Override
 	public void accept(IRichStringPartAcceptor acceptor) {
 		for(IndentationData data: indentationData) {
 			data.accept(acceptor);

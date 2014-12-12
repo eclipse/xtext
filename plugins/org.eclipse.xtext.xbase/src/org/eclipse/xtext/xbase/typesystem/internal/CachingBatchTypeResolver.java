@@ -44,6 +44,7 @@ public class CachingBatchTypeResolver extends AbstractBatchTypeResolver {
 		// TODO
 		final Resource resource = nonArtificialObject.eResource();
 		final LazyResolvedTypes result = cache.get(CachingBatchTypeResolver.class, resource, new Provider<LazyResolvedTypes>() {
+			@Override
 			public LazyResolvedTypes get() {
 				final IReentrantTypeResolver resolver = delegate.getTypeResolver(object);
 				return new LazyResolvedTypes(resolver, resource);

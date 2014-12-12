@@ -92,6 +92,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void createControl(final Composite parent) {
 		Composite pageMain = new Composite(parent, SWT.NONE);
 		initializeDialogUnits(parent);
@@ -149,6 +150,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				IAcceptor<IProject> acceptor = new IAcceptor<IProject>() {
 
+					@Override
 					public void accept(IProject project) {
 						if (project != null) {
 							featureProjectField.setText(project.getName());
@@ -219,6 +221,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 
 				try {
 					IRunnableWithProgress runnable = new IRunnableWithProgress() {
+						@Override
 						public void run(IProgressMonitor monitor) throws InvocationTargetException,
 								InterruptedException {
 							SubMonitor localmonitor = SubMonitor.convert(monitor, "Installing Buckminster", 200);
@@ -233,6 +236,7 @@ public class WizardNewRelengProjectCreationPage extends WizardPage {
 									Thread.sleep(200l);
 								}
 								Display.getDefault().syncExec(new Runnable() {
+									@Override
 									public void run() {
 										dbc.updateModels();
 									}

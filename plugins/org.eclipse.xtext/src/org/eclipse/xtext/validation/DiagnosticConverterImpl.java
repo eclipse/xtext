@@ -40,6 +40,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		public Integer length;
 	}
 	
+	@Override
 	public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity,	IAcceptor<Issue> acceptor) {
 		IssueImpl issue = new Issue.IssueImpl();
 		issue.setSyntaxError(diagnostic instanceof XtextSyntaxDiagnostic);
@@ -62,6 +63,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		acceptor.accept(issue);
 	}
 
+	@Override
 	public void convertValidatorDiagnostic(org.eclipse.emf.common.util.Diagnostic diagnostic,
 			IAcceptor<Issue> acceptor) {
 		Severity severity = getSeverity(diagnostic);

@@ -56,6 +56,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 		}
 	}
 	
+	@Override
 	public void generateFile(String fileName, String slot, CharSequence contents) {
 		IFile file = getFile(fileName, slot);
 		try {
@@ -129,6 +130,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 	 * We cannot use the storage to URI mapper here, as it only works for Xtext based languages 
 	 * @since 2.3
 	 */
+	@Override
 	public URI getURI(String fileName, String outputConfiguration) {
 		IFile file = getFile(fileName, outputConfiguration);
 		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
@@ -137,6 +139,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
 		throw new UnsupportedOperationException();
 	}
@@ -144,6 +147,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		throw new UnsupportedOperationException();
 	}
@@ -151,6 +155,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		throw new UnsupportedOperationException();
 	}

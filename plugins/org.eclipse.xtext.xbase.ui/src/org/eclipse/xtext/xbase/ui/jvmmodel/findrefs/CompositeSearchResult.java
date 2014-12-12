@@ -37,6 +37,7 @@ public class CompositeSearchResult extends JavaSearchResult {
 		Assert.isLegal(!query.getChildren().isEmpty());
 		childListener = new ISearchResultListener() {
 			int removeAll = 0;
+			@Override
 			public void searchResultChanged(SearchResultEvent e) {
 				if(!(e instanceof RemoveAllEvent) || removeAll++%query.getChildren().size() == 0)
 					fireChange(e);

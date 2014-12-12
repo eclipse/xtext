@@ -104,7 +104,8 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFile()
+  @Override
+public EClass getFile()
   {
     return fileEClass;
   }
@@ -114,7 +115,8 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFile_Stuff()
+  @Override
+public EReference getFile_Stuff()
   {
     return (EReference)fileEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStuff()
+  @Override
+public EClass getStuff()
   {
     return stuffEClass;
   }
@@ -134,7 +137,8 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStuff_Name()
+  @Override
+public EAttribute getStuff_Name()
   {
     return (EAttribute)stuffEClass.getEStructuralFeatures().get(0);
   }
@@ -144,7 +148,8 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getStuff_Refs()
+  @Override
+public EReference getStuff_Refs()
   {
     return (EReference)stuffEClass.getEStructuralFeatures().get(1);
   }
@@ -154,7 +159,8 @@ public class FooPackageImpl extends EPackageImpl implements FooPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public FooFactory getFooFactory()
+  @Override
+public FooFactory getFooFactory()
   {
     return (FooFactory)getEFactoryInstance();
   }

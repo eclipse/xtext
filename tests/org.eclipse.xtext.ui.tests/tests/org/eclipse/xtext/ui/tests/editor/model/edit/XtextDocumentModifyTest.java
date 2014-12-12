@@ -49,6 +49,7 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		
 		final Object expected = resource.getContents().get(0);
 		Object result = document.modify(new IUnitOfWork<Object, XtextResource>() {
+			@Override
 			public Object exec(XtextResource state) throws Exception {
 				assertEquals(resource, state);
 				Grammar grammar = (Grammar) state.getContents().get(0);
@@ -72,6 +73,7 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 			+ "Bar: 'bar';";
 		IXtextDocument document = createDocument(grammar);
 		document.modify(new IUnitOfWork<Object, XtextResource>() {
+			@Override
 			public Object exec(XtextResource state) throws Exception {
 				assertEquals(resource, state);
 				Grammar grammar = (Grammar) state.getContents().get(0);
@@ -141,6 +143,7 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		resource = getResource(new StringInputStream(model));
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>(){
+			@Override
 			public Lexer get() {
 				return new InternalXtextLexer();
 			}});

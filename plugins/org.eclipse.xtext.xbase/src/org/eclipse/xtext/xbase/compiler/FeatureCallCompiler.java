@@ -121,6 +121,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
 		if (expr.isTypeLiteral()) {
 			generateComment(new Later() {
+				@Override
 				public void exec(ITreeAppendable appendable) {
 					internalToJavaExpression(expr, appendable);
 				}
@@ -153,6 +154,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 				} else if (isVariableDeclarationRequired(expr, b)) {
 					Later later = new Later() {
+						@Override
 						public void exec(ITreeAppendable appendable) {
 							featureCalltoJavaExpression(expr, appendable, true);
 						}
@@ -212,6 +214,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		} else if (isVariableDeclarationRequired(expr, b)) {
 			Later later = new Later() {
+				@Override
 				public void exec(ITreeAppendable appendable) {
 					appendNullValueUntyped(getTypeForVariableDeclaration(expr), expr, appendable);
 				}
@@ -241,6 +244,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected List<XExpression> getActualArguments(final XAbstractFeatureCall expr) {
 		List<XExpression> actualArguments = expr.getActualArguments();
 		return Lists.transform(actualArguments, new Function<XExpression, XExpression>() {
+			@Override
 			public XExpression apply(XExpression e) {
 				return normalizeBlockExpression(e);
 			}

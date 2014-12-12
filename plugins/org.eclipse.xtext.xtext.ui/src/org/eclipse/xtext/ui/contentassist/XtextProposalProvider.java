@@ -491,6 +491,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			if (!foundPack) {
 				// we need to add a new import statement to the grammar
 				completionProposal.setTextApplier(new ConfigurableCompletionProposal.IReplacementTextApplier() {
+					@Override
 					public void apply(IDocument document, ConfigurableCompletionProposal proposal)
 							throws BadLocationException {
 						// compute import statement's offset
@@ -648,6 +649,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		}
 		Iterable<EClassifier> allRuleNames = Iterables.transform(GrammarUtil.allParserRules(grammar),
 				new Function<ParserRule, EClassifier>() {
+					@Override
 					public EClassifier apply(ParserRule from) {
 						return from.getType().getClassifier();
 					}
@@ -674,6 +676,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
 					EObject object = input.getEObjectOrProxy();
@@ -697,12 +700,14 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		if (containingRule instanceof TerminalRule) {
 			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					return input.getEClass() == XtextPackage.Literals.TERMINAL_RULE;
 				}
 			});
 		} else {
 			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+				@Override
 				public boolean apply(IEObjectDescription input) {
 					if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
 						EObject object = input.getEObjectOrProxy();

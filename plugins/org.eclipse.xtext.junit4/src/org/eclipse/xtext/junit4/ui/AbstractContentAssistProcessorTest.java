@@ -34,6 +34,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 			this.plainSetup = plainSetup;
 		}
 		
+		@Override
 		public Injector createInjectorAndDoEMFRegistration() {
 			return plainSetup.createInjectorAndDoEMFRegistration();
 		}
@@ -81,6 +82,7 @@ public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTe
 			return doGetSetup();
 		}
 		return new ISetup() {
+			@Override
 			public Injector createInjectorAndDoEMFRegistration() {
 				if (staticSetup == null) {
 					staticSetup = new SetupExtension(doGetSetup());

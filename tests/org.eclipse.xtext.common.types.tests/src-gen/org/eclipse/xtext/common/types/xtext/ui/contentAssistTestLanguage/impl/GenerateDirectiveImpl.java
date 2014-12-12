@@ -73,7 +73,8 @@ public class GenerateDirectiveImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getTypeName()
+  @Override
+public String getTypeName()
   {
     return typeName;
   }
@@ -83,7 +84,8 @@ public class GenerateDirectiveImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTypeName(String newTypeName)
+  @Override
+public void setTypeName(String newTypeName)
   {
     String oldTypeName = typeName;
     typeName = newTypeName;

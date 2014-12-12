@@ -19,6 +19,7 @@ import com.google.common.collect.Lists;
 public class ProductionFormatter<ELEMENT, TOKEN> implements Function<Production<ELEMENT, TOKEN>, String> {
 
 	protected static class ObjToStrFunction<TOKEN> implements Function<TOKEN, String> {
+		@Override
 		public String apply(TOKEN from) {
 			return from == null ? "null" : from.toString();
 		}
@@ -30,6 +31,7 @@ public class ProductionFormatter<ELEMENT, TOKEN> implements Function<Production<
 
 	protected Function<TOKEN, String> tokenToString = new ObjToStrFunction<TOKEN>();
 
+	@Override
 	public String apply(Production<ELEMENT, TOKEN> from) {
 		return format(from);
 	}

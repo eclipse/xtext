@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
  */
 public class BinaryGrammarResourceFactoryImpl implements Factory {
 
+	@Override
 	public Resource createResource(URI uri) {
 		XMIResourceImpl resource = new XMIResourceImpl(uri);
 		
@@ -29,13 +30,16 @@ public class BinaryGrammarResourceFactoryImpl implements Factory {
 		// don't do any resolution, since the only external references point to Ecore elements from EPackages in the registry. 
 		XMLResource.URIHandler uriHandler = new XMLResource.URIHandler() {
 
+			@Override
 			public void setBaseURI(URI uri) {
 			}
 
+			@Override
 			public URI resolve(URI uri) {
 				return uri;
 			}
 
+			@Override
 			public URI deresolve(URI uri) {
 				return uri;
 			}

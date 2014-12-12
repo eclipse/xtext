@@ -118,7 +118,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Attribute> getAttributes()
+  @Override
+public EList<Attribute> getAttributes()
   {
     if (attributes == null)
     {
@@ -132,7 +133,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -142,7 +144,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -155,7 +158,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public Parameters getParams()
+  @Override
+public Parameters getParams()
   {
     return params;
   }
@@ -182,7 +186,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setParams(Parameters newParams)
+  @Override
+public void setParams(Parameters newParams)
   {
     if (newParams != params)
     {
@@ -203,7 +208,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public Block getBody()
+  @Override
+public Block getBody()
   {
     return body;
   }
@@ -230,7 +236,8 @@ public class FunctionDefinitionImpl extends ProgramDirectiveImpl implements Func
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setBody(Block newBody)
+  @Override
+public void setBody(Block newBody)
   {
     if (newBody != body)
     {

@@ -100,7 +100,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -110,7 +111,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -123,7 +125,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeRef getType()
+  @Override
+public TypeRef getType()
   {
     return type;
   }
@@ -150,7 +153,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeRef newType)
+  @Override
+public void setType(TypeRef newType)
   {
     if (newType != type)
     {
@@ -171,7 +175,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractElement getAlternatives()
+  @Override
+public AbstractElement getAlternatives()
   {
     return alternatives;
   }
@@ -198,7 +203,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlternatives(AbstractElement newAlternatives)
+  @Override
+public void setAlternatives(AbstractElement newAlternatives)
   {
     if (newAlternatives != alternatives)
     {

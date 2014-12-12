@@ -144,6 +144,7 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 	@Test public void testSortBy() throws Exception {
 		List<? extends CharSequence> list = newArrayList("foo","bar","baz");
 		List<? extends CharSequence> sorted = IterableExtensions.sortBy(list, new Functions.Function1<CharSequence, String>() {
+			@Override
 			public String apply(CharSequence p) {
 				return p.toString();
 			}
@@ -165,6 +166,7 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		ArrayList<String> emptylist = new ArrayList<String>();
 		
 		final Functions.Function1<String, String> function = new Functions.Function1<String, String>() {
+			@Override
 			public String apply(String p) {
 				return p;
 			}

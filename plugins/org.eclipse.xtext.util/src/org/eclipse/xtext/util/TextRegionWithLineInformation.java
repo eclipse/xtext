@@ -26,10 +26,12 @@ public class TextRegionWithLineInformation extends TextRegion implements ITextRe
 		this.endLineNumber = endLineNumber;
 	}
 
+	@Override
 	public int getLineNumber() {
 		return lineNumber;
 	}
 	
+	@Override
 	public int getEndLineNumber() {
 		return endLineNumber;
 	}
@@ -41,6 +43,7 @@ public class TextRegionWithLineInformation extends TextRegion implements ITextRe
 		return super.merge(other);
 	}
 	
+	@Override
 	public ITextRegionWithLineInformation merge(ITextRegionWithLineInformation other) {
 		if (contains(other))
 			return this;

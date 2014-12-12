@@ -74,7 +74,8 @@ public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getWert()
+  @Override
+public String getWert()
   {
     return wert;
   }
@@ -84,7 +85,8 @@ public class FarbeImpl extends MinimalEObjectImpl.Container implements Farbe
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setWert(String newWert)
+  @Override
+public void setWert(String newWert)
   {
     String oldWert = wert;
     wert = newWert;

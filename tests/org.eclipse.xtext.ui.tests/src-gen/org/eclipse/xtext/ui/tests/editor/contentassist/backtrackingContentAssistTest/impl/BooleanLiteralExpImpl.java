@@ -73,7 +73,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isIsTrue()
+  @Override
+public boolean isIsTrue()
   {
     return isTrue;
   }
@@ -83,7 +84,8 @@ public class BooleanLiteralExpImpl extends PrimitiveLiteralExpImpl implements Bo
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIsTrue(boolean newIsTrue)
+  @Override
+public void setIsTrue(boolean newIsTrue)
   {
     boolean oldIsTrue = isTrue;
     isTrue = newIsTrue;

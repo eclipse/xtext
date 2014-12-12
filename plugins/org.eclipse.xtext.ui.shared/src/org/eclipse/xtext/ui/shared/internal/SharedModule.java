@@ -135,6 +135,7 @@ public class SharedModule extends AbstractModule {
 		
 
 		bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
+			@Override
 			public IWorkbench get() {
 				if (PlatformUI.isWorkbenchRunning())
 					return PlatformUI.getWorkbench();
@@ -143,6 +144,7 @@ public class SharedModule extends AbstractModule {
 		});
 
 		bind(IWorkspace.class).toProvider(new Provider<IWorkspace>() {
+			@Override
 			public IWorkspace get() {
 				return ResourcesPlugin.getWorkspace();
 			}

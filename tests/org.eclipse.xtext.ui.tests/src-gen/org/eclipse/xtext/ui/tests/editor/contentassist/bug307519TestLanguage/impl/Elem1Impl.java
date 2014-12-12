@@ -75,7 +75,8 @@ public class Elem1Impl extends MinimalEObjectImpl.Container implements Elem1
    * <!-- end-user-doc -->
    * @generated
    */
-  public EnumT getValue()
+  @Override
+public EnumT getValue()
   {
     return value;
   }
@@ -85,7 +86,8 @@ public class Elem1Impl extends MinimalEObjectImpl.Container implements Elem1
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(EnumT newValue)
+  @Override
+public void setValue(EnumT newValue)
   {
     EnumT oldValue = value;
     value = newValue == null ? VALUE_EDEFAULT : newValue;

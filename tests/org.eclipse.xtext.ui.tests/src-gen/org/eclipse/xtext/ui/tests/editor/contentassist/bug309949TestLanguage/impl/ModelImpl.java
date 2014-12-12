@@ -106,7 +106,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error> getErrors()
+  @Override
+public EList<org.eclipse.xtext.ui.tests.editor.contentassist.bug309949TestLanguage.Error> getErrors()
   {
     if (errors == null)
     {
@@ -120,7 +121,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Operation> getOperations()
+  @Override
+public EList<Operation> getOperations()
   {
     if (operations == null)
     {
@@ -134,7 +136,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -144,7 +147,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;

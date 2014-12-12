@@ -136,7 +136,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -146,7 +147,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Constants()
+  @Override
+public EReference getModel_Constants()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -156,7 +158,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTConstant()
+  @Override
+public EClass getTConstant()
   {
     return tConstantEClass;
   }
@@ -166,7 +169,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTConstant_Annotations()
+  @Override
+public EReference getTConstant_Annotations()
   {
     return (EReference)tConstantEClass.getEStructuralFeatures().get(0);
   }
@@ -176,7 +180,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTConstant_Name()
+  @Override
+public EAttribute getTConstant_Name()
   {
     return (EAttribute)tConstantEClass.getEStructuralFeatures().get(1);
   }
@@ -186,7 +191,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTStringConstant()
+  @Override
+public EClass getTStringConstant()
   {
     return tStringConstantEClass;
   }
@@ -196,7 +202,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTIntegerConstant()
+  @Override
+public EClass getTIntegerConstant()
   {
     return tIntegerConstantEClass;
   }
@@ -206,7 +213,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTBooleanConstant()
+  @Override
+public EClass getTBooleanConstant()
   {
     return tBooleanConstantEClass;
   }
@@ -216,7 +224,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTAnnotation()
+  @Override
+public EClass getTAnnotation()
   {
     return tAnnotationEClass;
   }
@@ -226,7 +235,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTAnnotation_Description()
+  @Override
+public EAttribute getTAnnotation_Description()
   {
     return (EAttribute)tAnnotationEClass.getEStructuralFeatures().get(0);
   }
@@ -236,7 +246,8 @@ public class Bug288734TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug288734TestLanguageFactory getBug288734TestLanguageFactory()
+  @Override
+public Bug288734TestLanguageFactory getBug288734TestLanguageFactory()
   {
     return (Bug288734TestLanguageFactory)getEFactoryInstance();
   }

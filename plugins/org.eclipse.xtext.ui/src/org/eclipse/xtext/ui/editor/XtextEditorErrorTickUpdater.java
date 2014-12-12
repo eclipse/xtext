@@ -138,6 +138,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	public void scheduleUpdateEditor(final ImageDescriptor titleImageDescription) {
 		Display display = PlatformUI.getWorkbench().getDisplay();
 		display.asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (editor != null) {
 					Image image = imageHelper.getImage(titleImageDescription);
@@ -156,6 +157,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	public void scheduleUpdateEditor(final Image titleImage) {
 		Display display = PlatformUI.getWorkbench().getDisplay();
 		display.asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				if (editor != null) {
 					if (editor.getTitleImage() != titleImage) {
@@ -184,6 +186,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 		return new UpdateEditorImageJob(SEQUENCE_RULE);
 	}
 
+	@Override
 	public void modelChanged(IAnnotationModel model) {
 		updateEditorImage(editor);
 	}

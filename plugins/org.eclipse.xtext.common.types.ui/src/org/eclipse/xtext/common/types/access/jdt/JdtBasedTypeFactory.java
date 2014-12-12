@@ -373,6 +373,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		this.workingCopyOwner = workingCopyOwner;
 	}
 
+	@Override
 	public JvmDeclaredType createType(IType jdtType) {
 		IJavaProject project = jdtType.getJavaProject();
 		
@@ -439,6 +440,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	/**
 	 * @since 2.7
 	 */
+	@Override
 	public JvmDeclaredType createType(IType type, TypeResource resource, Map<?, ?> options) {
 		if (resource == null) {
 			return createType(type);
@@ -1376,6 +1378,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			this.signature = signature;
 		}
 
+		@Override
 		public void run() {
 			try {
 				resolveParamNames.start();

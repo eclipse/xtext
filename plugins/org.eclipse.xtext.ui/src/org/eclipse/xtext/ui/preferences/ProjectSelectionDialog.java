@@ -73,11 +73,13 @@ public class ProjectSelectionDialog extends SelectionStatusDialog {
 		createMessageArea(composite);
 		tableViewer = new TableViewer(composite, SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
 		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				doSelectionChanged(((IStructuredSelection) event.getSelection()).toArray());
 			}
 		});
 		tableViewer.addDoubleClickListener(new IDoubleClickListener() {
+			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				okPressed();
 			}
@@ -94,10 +96,12 @@ public class ProjectSelectionDialog extends SelectionStatusDialog {
 		checkbox.setText(Messages.ProjectSelectionDialog_filter);
 		checkbox.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, true, false));
 		checkbox.addSelectionListener(new SelectionListener() {
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				updateFilter(((Button) e.widget).getSelection());
 			}
 
+			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 				updateFilter(((Button) e.widget).getSelection());
 			}

@@ -26,10 +26,12 @@ public class NodeIterator extends UnmodifiableIterator<INode> implements BidiIte
 		this.startWith = startWith;
 	}
 
+	@Override
 	public boolean hasNext() {
 		return lastReturned == null || lastReturned.hasNextSibling();
 	}
 
+	@Override
 	public INode next() {
 		if (!hasNext())
 			throw new NoSuchElementException();
@@ -41,10 +43,12 @@ public class NodeIterator extends UnmodifiableIterator<INode> implements BidiIte
 		return lastReturned;
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		return lastReturned == null || lastReturned.hasPreviousSibling();
 	}
 
+	@Override
 	public INode previous() {
 		if (!hasPrevious())
 			throw new NoSuchElementException();

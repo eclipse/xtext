@@ -45,6 +45,7 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 	private TraceURIHelper traceURIHelper;
 	
 	/* @Nullable */
+	@Override
 	public URI getURIForTrace(XtextResource context) {
 		ResourceSet rs = context.getResourceSet();
 		if (!(rs instanceof XtextResourceSet && ((XtextResourceSet) rs).getClasspathURIContext() instanceof IJavaProject))
@@ -59,6 +60,7 @@ public class JavaProjectAwareTraceContribution implements ITraceURIConverterCont
 	}
 	
 	/* @Nullable */
+	@Override
 	public URI getURIForTrace(URI uri) {
 		if (uri.isPlatform() && uri.segmentCount() > 1) {
 			Iterator<Pair<IStorage, IProject>> storagesIterator = mapper.getStorages(uri).iterator();

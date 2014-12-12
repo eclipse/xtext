@@ -84,6 +84,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		@Inject
 		private OperatorMapping operatorMapping;
 		
+		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (input instanceof IIdentifiableElementDescription) {
 				final IIdentifiableElementDescription desc = (IIdentifiableElementDescription) input;
@@ -126,18 +127,22 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private SyntaxFilteredScopes syntaxFilteredScopes;
 	
+	@Override
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
 	}
 	
+	@Override
 	public void nextMode() {
 		getXbaseCrossReferenceProposalCreator().nextMode();
 	}
 	
+	@Override
 	public void reset() {
 		getXbaseCrossReferenceProposalCreator().reset();
 	}
 	
+	@Override
 	public boolean isLastMode() {
 		return getXbaseCrossReferenceProposalCreator().isLastMode();
 	}
@@ -826,6 +831,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							// If the user types 'is' as a prefix for boolean properties, we want to keep that after applying the proposal
 							if (executable.getSimpleName().startsWith("is") && executable.getSimpleName().length() > 2 && executable.getParameters().size() - insignificantParameters == 0) {
 								((ConfigurableCompletionProposal) result).setTextApplier(new ConfigurableCompletionProposal.IReplacementTextApplier() {
+									@Override
 									public void apply(IDocument document, ConfigurableCompletionProposal proposal) throws BadLocationException {
 										String replacementString = proposal.getReplacementString();
 										if (proposal.getReplacementLength() >= 2) {

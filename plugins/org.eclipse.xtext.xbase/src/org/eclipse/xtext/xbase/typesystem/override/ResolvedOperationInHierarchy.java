@@ -40,6 +40,7 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 		return bottom.getResolvedTypeParameters();
 	}
 
+	@Override
 	public boolean isBottomInContext() {
 		return false;
 	}
@@ -49,6 +50,7 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 		return bottom;
 	}
 
+	@Override
 	public IResolvedOperation getAsBottom() {
 		JvmOperation operation = getDeclaration();
 		JvmDeclaredType declaringType = operation.getDeclaringType();
@@ -88,6 +90,7 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 		return getBottom().getContextTypeParameterMapping();
 	}
 	
+	@Override
 	public IOverrideCheckResult getOverrideCheckResult() {
 		return checkResult;
 	}

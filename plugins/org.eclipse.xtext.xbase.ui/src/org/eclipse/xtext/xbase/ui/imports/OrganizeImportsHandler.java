@@ -40,6 +40,7 @@ public class OrganizeImportsHandler extends AbstractHandler {
 	@Inject
 	private ReplaceConverter replaceConverter;
 	
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 		if (editor != null) {
@@ -51,6 +52,7 @@ public class OrganizeImportsHandler extends AbstractHandler {
 	
 	public void doOrganizeImports(final IXtextDocument document) {
 		List<ReplaceRegion> result = document.priorityReadOnly(new IUnitOfWork<List<ReplaceRegion>, XtextResource>() {
+			@Override
 			public List<ReplaceRegion> exec(XtextResource state) throws Exception {
 				return importOrganizer.getOrganizedImportChanges(state);
 			}

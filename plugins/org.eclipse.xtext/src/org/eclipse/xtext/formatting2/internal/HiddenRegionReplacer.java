@@ -86,6 +86,7 @@ public class HiddenRegionReplacer implements ITextReplacer {
 		}
 	}
 
+	@Override
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		AbstractFormatter2 formatter = context.getFormatter();
 		List<IHiddenRegionPart> hiddens = region.getParts();
@@ -155,6 +156,7 @@ public class HiddenRegionReplacer implements ITextReplacer {
 		return formatting;
 	}
 
+	@Override
 	public IHiddenRegion getRegion() {
 		return region;
 	}

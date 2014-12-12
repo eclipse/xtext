@@ -74,7 +74,8 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getImportURI()
+  @Override
+public String getImportURI()
   {
     return importURI;
   }
@@ -84,7 +85,8 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setImportURI(String newImportURI)
+  @Override
+public void setImportURI(String newImportURI)
   {
     String oldImportURI = importURI;
     importURI = newImportURI;

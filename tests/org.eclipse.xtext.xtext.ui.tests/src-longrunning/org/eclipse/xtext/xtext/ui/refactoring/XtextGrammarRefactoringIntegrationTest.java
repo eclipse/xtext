@@ -124,6 +124,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 				.filter(EcoreUtil2.getAllContentsOfType(grammarResource.getContents().get(0), ParserRule.class),
 						new Predicate<ParserRule>() {
 
+							@Override
 							public boolean apply(ParserRule input) {
 								return input.getName().equals(CLASSIFIERNAME);
 							}
@@ -133,6 +134,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 				.filter(EcoreUtil2.getAllContentsOfType(grammarResource.getContents().get(0), ParserRule.class),
 						new Predicate<ParserRule>() {
 
+							@Override
 							public boolean apply(ParserRule input) {
 								return input.getName().equals("Model");
 							}
@@ -231,6 +233,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		final EReference greetingRef = Iterables
 				.filter(EcoreUtil2.getAllContentsOfType(ecoreResource.getContents().get(0), EReference.class),
 						new Predicate<EReference>() {
+							@Override
 							public boolean apply(EReference input) {
 								return input.getEType() == classifier;
 							}
@@ -242,6 +245,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		final EClass greetingClass = Iterables
 				.filter(EcoreUtil2.getAllContentsOfType(ecoreResource.getContents().get(0), EClass.class),
 						new Predicate<EClass>() {
+							@Override
 							public boolean apply(EClass input) {
 								return input.getName().equals(CLASSIFIERNAME);
 							}
@@ -272,6 +276,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	private void checkConsistenceOfGrammar(XtextEditor editor) {
 		waitForAutoBuild();
 		assertEquals(REFACTOREDCLASSIFIERNAME, editor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>() {
+			@Override
 			public String exec(XtextResource state) throws Exception {
 				String renamedRuleFragment = greetingParserRuleUri.fragment()
 						.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME);
@@ -281,6 +286,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 			}
 		}));
 		editor.getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+			@Override
 			public Boolean exec(XtextResource state) throws Exception {
 				AbstractRule rule = ((RuleCall) ((Assignment) ((ParserRule) state.getEObject(modelParserRuleUri
 						.fragment())).getAlternatives()).getTerminal()).getRule();

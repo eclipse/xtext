@@ -37,6 +37,7 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 	@Inject
 	private EntryPointFinder entryPointFinder;
 
+	@Override
 	public Collection<FollowElement> getFollowElements(IParseResult parseResult, int offset, boolean strict) {
 		ICompositeNode entryPoint = entryPointFinder.findEntryPoint(parseResult, offset);
 		if (entryPoint != null) {

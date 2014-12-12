@@ -106,7 +106,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -116,7 +117,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -129,7 +131,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Element> getXrefs()
+  @Override
+public EList<Element> getXrefs()
   {
     if (xrefs == null)
     {
@@ -143,7 +146,8 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Element> getChildren()
+  @Override
+public EList<Element> getChildren()
   {
     if (children == null)
     {

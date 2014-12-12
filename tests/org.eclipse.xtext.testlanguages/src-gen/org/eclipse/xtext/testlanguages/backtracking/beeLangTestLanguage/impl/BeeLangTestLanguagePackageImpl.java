@@ -376,7 +376,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -386,7 +387,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Units()
+  @Override
+public EReference getModel_Units()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -396,7 +398,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Functions()
+  @Override
+public EReference getModel_Functions()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -406,7 +409,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getUnit()
+  @Override
+public EClass getUnit()
   {
     return unitEClass;
   }
@@ -416,7 +420,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getUnit_Documentation()
+  @Override
+public EAttribute getUnit_Documentation()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(0);
   }
@@ -426,7 +431,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getUnit_Name()
+  @Override
+public EAttribute getUnit_Name()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
   }
@@ -436,7 +442,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getUnit_Version()
+  @Override
+public EAttribute getUnit_Version()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
   }
@@ -446,7 +453,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnit_Implements()
+  @Override
+public EReference getUnit_Implements()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(3);
   }
@@ -456,7 +464,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getUnit_SourceLocation()
+  @Override
+public EAttribute getUnit_SourceLocation()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(4);
   }
@@ -466,7 +475,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getUnit_OutputLocation()
+  @Override
+public EAttribute getUnit_OutputLocation()
   {
     return (EAttribute)unitEClass.getEStructuralFeatures().get(5);
   }
@@ -476,7 +486,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnit_ProvidedCapabilities()
+  @Override
+public EReference getUnit_ProvidedCapabilities()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(6);
   }
@@ -486,7 +497,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnit_RequiredCapabilities()
+  @Override
+public EReference getUnit_RequiredCapabilities()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(7);
   }
@@ -496,7 +508,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnit_MetaRequiredCapabilities()
+  @Override
+public EReference getUnit_MetaRequiredCapabilities()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(8);
   }
@@ -506,7 +519,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnit_Functions()
+  @Override
+public EReference getUnit_Functions()
   {
     return (EReference)unitEClass.getEStructuralFeatures().get(9);
   }
@@ -516,7 +530,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getProvidedCapability()
+  @Override
+public EClass getProvidedCapability()
   {
     return providedCapabilityEClass;
   }
@@ -526,7 +541,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getProvidedCapability_NameSpace()
+  @Override
+public EAttribute getProvidedCapability_NameSpace()
   {
     return (EAttribute)providedCapabilityEClass.getEStructuralFeatures().get(0);
   }
@@ -536,7 +552,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getProvidedCapability_CondExpr()
+  @Override
+public EReference getProvidedCapability_CondExpr()
   {
     return (EReference)providedCapabilityEClass.getEStructuralFeatures().get(1);
   }
@@ -546,7 +563,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getProvidedCapability_Name()
+  @Override
+public EAttribute getProvidedCapability_Name()
   {
     return (EAttribute)providedCapabilityEClass.getEStructuralFeatures().get(2);
   }
@@ -556,7 +574,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getProvidedCapability_Version()
+  @Override
+public EAttribute getProvidedCapability_Version()
   {
     return (EAttribute)providedCapabilityEClass.getEStructuralFeatures().get(3);
   }
@@ -566,7 +585,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAliasedRequiredCapability()
+  @Override
+public EClass getAliasedRequiredCapability()
   {
     return aliasedRequiredCapabilityEClass;
   }
@@ -576,7 +596,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_NameSpace()
+  @Override
+public EAttribute getAliasedRequiredCapability_NameSpace()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(0);
   }
@@ -586,7 +607,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_Name()
+  @Override
+public EAttribute getAliasedRequiredCapability_Name()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(1);
   }
@@ -596,7 +618,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_Alias()
+  @Override
+public EAttribute getAliasedRequiredCapability_Alias()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(2);
   }
@@ -606,7 +629,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAliasedRequiredCapability_CondExpr()
+  @Override
+public EReference getAliasedRequiredCapability_CondExpr()
   {
     return (EReference)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(3);
   }
@@ -616,7 +640,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_Greedy()
+  @Override
+public EAttribute getAliasedRequiredCapability_Greedy()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(4);
   }
@@ -626,7 +651,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_Min()
+  @Override
+public EAttribute getAliasedRequiredCapability_Min()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(5);
   }
@@ -636,7 +662,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_Max()
+  @Override
+public EAttribute getAliasedRequiredCapability_Max()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(6);
   }
@@ -646,7 +673,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAliasedRequiredCapability_VersionRange()
+  @Override
+public EAttribute getAliasedRequiredCapability_VersionRange()
   {
     return (EAttribute)aliasedRequiredCapabilityEClass.getEStructuralFeatures().get(7);
   }
@@ -656,7 +684,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getRequiredCapability()
+  @Override
+public EClass getRequiredCapability()
   {
     return requiredCapabilityEClass;
   }
@@ -666,7 +695,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRequiredCapability_NameSpace()
+  @Override
+public EAttribute getRequiredCapability_NameSpace()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(0);
   }
@@ -676,7 +706,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRequiredCapability_Name()
+  @Override
+public EAttribute getRequiredCapability_Name()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(1);
   }
@@ -686,7 +717,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getRequiredCapability_CondExpr()
+  @Override
+public EReference getRequiredCapability_CondExpr()
   {
     return (EReference)requiredCapabilityEClass.getEStructuralFeatures().get(2);
   }
@@ -696,7 +728,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRequiredCapability_Greedy()
+  @Override
+public EAttribute getRequiredCapability_Greedy()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(3);
   }
@@ -706,7 +739,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRequiredCapability_Min()
+  @Override
+public EAttribute getRequiredCapability_Min()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(4);
   }
@@ -716,7 +750,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRequiredCapability_Max()
+  @Override
+public EAttribute getRequiredCapability_Max()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(5);
   }
@@ -726,7 +761,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getRequiredCapability_VersionRange()
+  @Override
+public EAttribute getRequiredCapability_VersionRange()
   {
     return (EAttribute)requiredCapabilityEClass.getEStructuralFeatures().get(6);
   }
@@ -736,7 +772,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getParameterList()
+  @Override
+public EClass getParameterList()
   {
     return parameterListEClass;
   }
@@ -746,7 +783,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParameterList_Parameters()
+  @Override
+public EReference getParameterList_Parameters()
   {
     return (EReference)parameterListEClass.getEStructuralFeatures().get(0);
   }
@@ -756,7 +794,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getParameter()
+  @Override
+public EClass getParameter()
   {
     return parameterEClass;
   }
@@ -766,7 +805,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParameter_Expr()
+  @Override
+public EReference getParameter_Expr()
   {
     return (EReference)parameterEClass.getEStructuralFeatures().get(0);
   }
@@ -776,7 +816,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getClosureParameter()
+  @Override
+public EClass getClosureParameter()
   {
     return closureParameterEClass;
   }
@@ -786,7 +827,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getParameterDeclaration()
+  @Override
+public EClass getParameterDeclaration()
   {
     return parameterDeclarationEClass;
   }
@@ -796,7 +838,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getParameterDeclaration_Type()
+  @Override
+public EReference getParameterDeclaration_Type()
   {
     return (EReference)parameterDeclarationEClass.getEStructuralFeatures().get(0);
   }
@@ -806,7 +849,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParameterDeclaration_Name()
+  @Override
+public EAttribute getParameterDeclaration_Name()
   {
     return (EAttribute)parameterDeclarationEClass.getEStructuralFeatures().get(1);
   }
@@ -816,7 +860,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFunction()
+  @Override
+public EClass getFunction()
   {
     return functionEClass;
   }
@@ -826,7 +871,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunction_Documentation()
+  @Override
+public EAttribute getFunction_Documentation()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(0);
   }
@@ -836,7 +882,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunction_Visibility()
+  @Override
+public EAttribute getFunction_Visibility()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(1);
   }
@@ -846,7 +893,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunction_Final()
+  @Override
+public EAttribute getFunction_Final()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(2);
   }
@@ -856,7 +904,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunction_ReturnType()
+  @Override
+public EReference getFunction_ReturnType()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(3);
   }
@@ -866,7 +915,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunction_Name()
+  @Override
+public EAttribute getFunction_Name()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(4);
   }
@@ -876,7 +926,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunction_Parameters()
+  @Override
+public EReference getFunction_Parameters()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(5);
   }
@@ -886,7 +937,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFunction_VarArgs()
+  @Override
+public EAttribute getFunction_VarArgs()
   {
     return (EAttribute)functionEClass.getEStructuralFeatures().get(6);
   }
@@ -896,7 +948,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunction_Guard()
+  @Override
+public EReference getFunction_Guard()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(7);
   }
@@ -906,7 +959,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getFunction_FuncExpr()
+  @Override
+public EReference getFunction_FuncExpr()
   {
     return (EReference)functionEClass.getEStructuralFeatures().get(8);
   }
@@ -916,7 +970,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGuardExpression()
+  @Override
+public EClass getGuardExpression()
   {
     return guardExpressionEClass;
   }
@@ -926,7 +981,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGuardExpression_GuardExpr()
+  @Override
+public EReference getGuardExpression_GuardExpr()
   {
     return (EReference)guardExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -936,7 +992,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getExpression()
+  @Override
+public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -946,7 +1003,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypeRef()
+  @Override
+public EClass getTypeRef()
   {
     return typeRefEClass;
   }
@@ -956,7 +1014,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSimpleTypeRef()
+  @Override
+public EClass getSimpleTypeRef()
   {
     return simpleTypeRefEClass;
   }
@@ -966,7 +1025,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleTypeRef_RawType()
+  @Override
+public EAttribute getSimpleTypeRef_RawType()
   {
     return (EAttribute)simpleTypeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -976,7 +1036,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getSimpleTypeRef_ActualArgumentsList()
+  @Override
+public EAttribute getSimpleTypeRef_ActualArgumentsList()
   {
     return (EAttribute)simpleTypeRefEClass.getEStructuralFeatures().get(1);
   }
@@ -986,7 +1047,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getClosureTypeRef()
+  @Override
+public EClass getClosureTypeRef()
   {
     return closureTypeRefEClass;
   }
@@ -996,7 +1058,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClosureTypeRef_ParameterTypes()
+  @Override
+public EAttribute getClosureTypeRef_ParameterTypes()
   {
     return (EAttribute)closureTypeRefEClass.getEStructuralFeatures().get(0);
   }
@@ -1006,7 +1069,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClosureTypeRef_VarArgs()
+  @Override
+public EAttribute getClosureTypeRef_VarArgs()
   {
     return (EAttribute)closureTypeRefEClass.getEStructuralFeatures().get(1);
   }
@@ -1016,7 +1080,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getClosureTypeRef_ReturnType()
+  @Override
+public EAttribute getClosureTypeRef_ReturnType()
   {
     return (EAttribute)closureTypeRefEClass.getEStructuralFeatures().get(2);
   }
@@ -1026,7 +1091,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWithExpression()
+  @Override
+public EClass getWithExpression()
   {
     return withExpressionEClass;
   }
@@ -1036,7 +1102,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWithExpression_ReferencedAdvice()
+  @Override
+public EAttribute getWithExpression_ReferencedAdvice()
   {
     return (EAttribute)withExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1046,7 +1113,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWithExpression_FuncExpr()
+  @Override
+public EReference getWithExpression_FuncExpr()
   {
     return (EReference)withExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1056,7 +1124,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWithContextExpression()
+  @Override
+public EClass getWithContextExpression()
   {
     return withContextExpressionEClass;
   }
@@ -1066,7 +1135,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWithContextExpression_Expr()
+  @Override
+public EReference getWithContextExpression_Expr()
   {
     return (EReference)withContextExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1076,7 +1146,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getWithContextExpression_Alias()
+  @Override
+public EAttribute getWithContextExpression_Alias()
   {
     return (EAttribute)withContextExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1086,7 +1157,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getWithContextExpression_ContextBlock()
+  @Override
+public EReference getWithContextExpression_ContextBlock()
   {
     return (EReference)withContextExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1096,7 +1168,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCallExpression()
+  @Override
+public EClass getCallExpression()
   {
     return callExpressionEClass;
   }
@@ -1106,7 +1179,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getValueLiteral()
+  @Override
+public EClass getValueLiteral()
   {
     return valueLiteralEClass;
   }
@@ -1116,7 +1190,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getValueLiteral_Value()
+  @Override
+public EAttribute getValueLiteral_Value()
   {
     return (EAttribute)valueLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -1126,7 +1201,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAssignmentExpression()
+  @Override
+public EClass getAssignmentExpression()
   {
     return assignmentExpressionEClass;
   }
@@ -1136,7 +1212,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssignmentExpression_LeftExpr()
+  @Override
+public EReference getAssignmentExpression_LeftExpr()
   {
     return (EReference)assignmentExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1146,7 +1223,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAssignmentExpression_FunctionName()
+  @Override
+public EAttribute getAssignmentExpression_FunctionName()
   {
     return (EAttribute)assignmentExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1156,7 +1234,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAssignmentExpression_RightExpr()
+  @Override
+public EReference getAssignmentExpression_RightExpr()
   {
     return (EReference)assignmentExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1166,7 +1245,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getDefValue()
+  @Override
+public EClass getDefValue()
   {
     return defValueEClass;
   }
@@ -1176,7 +1256,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDefValue_Final()
+  @Override
+public EAttribute getDefValue_Final()
   {
     return (EAttribute)defValueEClass.getEStructuralFeatures().get(0);
   }
@@ -1186,7 +1267,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDefValue_Type()
+  @Override
+public EReference getDefValue_Type()
   {
     return (EReference)defValueEClass.getEStructuralFeatures().get(1);
   }
@@ -1196,7 +1278,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDefValue_Name()
+  @Override
+public EAttribute getDefValue_Name()
   {
     return (EAttribute)defValueEClass.getEStructuralFeatures().get(2);
   }
@@ -1206,7 +1289,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDefValue_ValueExpr()
+  @Override
+public EReference getDefValue_ValueExpr()
   {
     return (EReference)defValueEClass.getEStructuralFeatures().get(3);
   }
@@ -1216,7 +1300,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDefValue_Immutable()
+  @Override
+public EAttribute getDefValue_Immutable()
   {
     return (EAttribute)defValueEClass.getEStructuralFeatures().get(4);
   }
@@ -1226,7 +1311,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getCachedExpression()
+  @Override
+public EClass getCachedExpression()
   {
     return cachedExpressionEClass;
   }
@@ -1236,7 +1322,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getCachedExpression_Expr()
+  @Override
+public EReference getCachedExpression_Expr()
   {
     return (EReference)cachedExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1246,7 +1333,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOrExpression()
+  @Override
+public EClass getOrExpression()
   {
     return orExpressionEClass;
   }
@@ -1256,7 +1344,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOrExpression_LeftExpr()
+  @Override
+public EReference getOrExpression_LeftExpr()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1266,7 +1355,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOrExpression_RightExpr()
+  @Override
+public EReference getOrExpression_RightExpr()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1276,7 +1366,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAndExpression()
+  @Override
+public EClass getAndExpression()
   {
     return andExpressionEClass;
   }
@@ -1286,7 +1377,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAndExpression_LeftExpr()
+  @Override
+public EReference getAndExpression_LeftExpr()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1296,7 +1388,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAndExpression_RightExpr()
+  @Override
+public EReference getAndExpression_RightExpr()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1306,7 +1399,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBinaryOpExpression()
+  @Override
+public EClass getBinaryOpExpression()
   {
     return binaryOpExpressionEClass;
   }
@@ -1316,7 +1410,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBinaryOpExpression_LeftExpr()
+  @Override
+public EReference getBinaryOpExpression_LeftExpr()
   {
     return (EReference)binaryOpExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1326,7 +1421,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getBinaryOpExpression_FunctionName()
+  @Override
+public EAttribute getBinaryOpExpression_FunctionName()
   {
     return (EAttribute)binaryOpExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -1336,7 +1432,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBinaryOpExpression_RightExpr()
+  @Override
+public EReference getBinaryOpExpression_RightExpr()
   {
     return (EReference)binaryOpExpressionEClass.getEStructuralFeatures().get(2);
   }
@@ -1346,7 +1443,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getUnaryOpExpression()
+  @Override
+public EClass getUnaryOpExpression()
   {
     return unaryOpExpressionEClass;
   }
@@ -1356,7 +1454,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getUnaryOpExpression_FunctionName()
+  @Override
+public EAttribute getUnaryOpExpression_FunctionName()
   {
     return (EAttribute)unaryOpExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -1366,7 +1465,8 @@ public class BeeLangTestLanguagePackageImpl extends EPackageImpl implements BeeL
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnaryOpExpression_Expr()
+  @Override
+public EReference getUnaryOpExpression_Expr()
   {
     return (EReference)unaryOpExpressionEClass.getEStructuralFeatures().get(1);
   }

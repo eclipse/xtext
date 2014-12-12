@@ -20,6 +20,7 @@ public interface ILineSeparatorInformation {
 	
 	class Default implements ILineSeparatorInformation {
 
+		@Override
 		public String getLineSeparator() {
 			return System.getProperty("line.separator");
 		}

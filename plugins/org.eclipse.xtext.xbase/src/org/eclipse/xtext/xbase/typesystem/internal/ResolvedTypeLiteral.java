@@ -39,18 +39,22 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 		this.helper = new TypeLiteralHelper(state);
 	}
 
+	@Override
 	public XAbstractFeatureCall getFeatureCall() {
 		return getExpression();
 	}
 
+	@Override
 	public boolean isStatic() {
 		return getFeatureCall().isStatic();
 	}
 	
+	@Override
 	public JvmType getType() {
 		return (JvmType) getFeature();
 	}
 
+	@Override
 	public boolean isExtension() {
 		return getFeatureCall().isExtension();
 	}
@@ -89,6 +93,7 @@ public class ResolvedTypeLiteral extends AbstractResolvedReference<XAbstractFeat
 		return Collections.emptyList();
 	}
 
+	@Override
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}

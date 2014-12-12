@@ -32,6 +32,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	"1" definition=PackageDefinition | "2" definition=PackageDefinition2;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"1" definition=PackageDefinition | "2" definition=PackageDefinition2
@@ -75,6 +76,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//PackageDefinition:
 		//	{PackageDefinition} "package" namespace=ID ";" contents+=Object*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{PackageDefinition} "package" namespace=ID ";" contents+=Object*
@@ -161,6 +163,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT
 		//	";")? & (cloneable?="cloneable" ";")? & features+=Feature* & ("before" features+=Feature* "after")? & ("optionalLoop"
 		//	features+=Feature*)? & ("mandatoryLoop" features+=Feature+)?) "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(enabled?="enabled" | abstract?="abstract")? "object" name=ID ("extends" parent=[Object])? "{" (("shortDescription"
@@ -330,6 +333,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Feature:
 		//	Attribute | Reference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Attribute | Reference
@@ -354,6 +358,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Attribute:
 		//	"Attribute" type=ID name=ID ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Attribute" type=ID name=ID ";"
@@ -409,6 +414,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Reference:
 		//	"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription" shortDescription=STRING ";")? &
 		//	("longDescription" longDescription=STRING ";")?) "}" | ";");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription" shortDescription=STRING ";")? &
@@ -501,6 +507,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//PackageDefinition2 returns PackageDefinition:
 		//	{PackageDefinition} "package" namespace=ID ";" contents+=Object2*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{PackageDefinition} "package" namespace=ID ";" contents+=Object2*
@@ -573,6 +580,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	(enabled?="enabled" | abstract?="abstract")? "object" name=ID ("extends" parent=[Object])? "{" (("shortDescription"
 		//	shortDescription=STRING ";")? & ("longDescription" longDescription=STRING ";")? & ("serialUID" serialVersionUID=INT
 		//	";")? & (cloneable?="cloneable" ";")? & features+=Feature2*) "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(enabled?="enabled" | abstract?="abstract")? "object" name=ID ("extends" parent=[Object])? "{" (("shortDescription"
@@ -701,6 +709,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Feature2 returns Feature:
 		//	Attribute2 | Reference2;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Attribute2 | Reference2
@@ -752,6 +761,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	"Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
 		//	longDescription=STRING ";")? & constraintDefinitions+=ConstraintDefinition* & (required?="required" ";")? &
 		//	(technical?="technical" ";")?) "}" | ";");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Attribute" type=ID name=ID ("{" (("shortDescription" shortDescription=STRING ";")? & ("longDescription"
@@ -887,6 +897,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Reference2 returns Reference:
 		//	"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription" shortDescription=STRING ";")? &
 		//	("longDescription" longDescription=STRING ";")?) "}" | ";");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"Reference" type=[Object] many?="*"? name=ID ("{" (("shortDescription" shortDescription=STRING ";")? &
@@ -988,6 +999,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ConstraintDefinition:
 		//	"constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=STRING ";") "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"constraint" type=ID "{" ("parameters" parameters+=STRING* ";" & "message" message=STRING ";") "}"
@@ -1096,6 +1108,7 @@ public class Bug304681TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

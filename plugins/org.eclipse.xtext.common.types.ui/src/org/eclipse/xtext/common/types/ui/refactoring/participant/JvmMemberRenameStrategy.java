@@ -46,11 +46,13 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		return true;
 	}
 
+	@Override
 	public void applyDeclarationChange(final String newName, ResourceSet resourceSet) {
 		JvmMember member = setName(targetMemberOriginalURI, resourceSet, newName);
 		targetMemberNewURI = EcoreUtil.getURI(member);
 	}
 
+	@Override
 	public void revertDeclarationChange(ResourceSet resourceSet) {
 		setName(targetMemberNewURI, resourceSet, originalName);
 	}
@@ -74,10 +76,12 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 				typeResource.setURI(typeResourceNewURI);
 				// disconnect the mirrored IJavaElement as it is invalid now
 				((TypeResource) typeResource).setMirror(new AbstractClassMirror() {
+					@Override
 					public boolean isSealed() {
 						return false;
 					}
 					
+					@Override
 					public void initialize(TypeResource typeResource) {
 					}
 					
@@ -91,14 +95,17 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		return member;
 	}
 
+	@Override
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 	}
 
+	@Override
 	public String getOriginalName() {
 		return originalName;
 	}
 
+	@Override
 	public RefactoringStatus validateNewName(String newName) {
 		return new RefactoringStatus();
 	}
@@ -115,6 +122,7 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		@Inject(optional=true)@Delegate
 		private IRenameStrategy.Provider delegate;
 
+		@Override
 		public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
 			if(targetEObject instanceof JvmMember) {
 				JvmMemberRenameStrategy jvmMemberRenameStrategy = guiceStartegyProvider.get();

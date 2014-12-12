@@ -42,6 +42,7 @@ public abstract class AbstractTypeScopeProvider implements IGlobalScopeProvider 
 		return getScope(resource, reference, null);
 	}
 	
+	@Override
 	public IScope getScope(Resource resource, EReference reference, Predicate<IEObjectDescription> filter) {
 		if (resource == null)
 			throw new IllegalStateException("context must be contained in a resource");

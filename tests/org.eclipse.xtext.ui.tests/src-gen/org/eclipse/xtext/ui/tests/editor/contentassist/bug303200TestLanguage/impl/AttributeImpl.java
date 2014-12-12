@@ -74,7 +74,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getIdent()
+  @Override
+public String getIdent()
   {
     return ident;
   }
@@ -84,7 +85,8 @@ public class AttributeImpl extends MinimalEObjectImpl.Container implements Attri
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setIdent(String newIdent)
+  @Override
+public void setIdent(String newIdent)
   {
     String oldIdent = ident;
     ident = newIdent;

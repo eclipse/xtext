@@ -19,6 +19,7 @@ import org.eclipse.xtext.generator.IGenerator;
  */
 public class ContentAssistTestLanguageGenerator implements IGenerator {
 
+	@Override
 	public void doGenerate(Resource input, IFileSystemAccess fsa) {
 		if (input.getContents().isEmpty())
 			return;

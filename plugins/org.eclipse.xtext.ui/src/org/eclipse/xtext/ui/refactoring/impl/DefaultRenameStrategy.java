@@ -92,6 +92,7 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 		return null;
 	}
 	
+	@Override
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 		updateAcceptor.accept(getTargetElementOriginalURI().trimFragment(), getDeclarationTextEdit(newName));

@@ -82,6 +82,7 @@ public class ConcurrentValidationTest extends AbstractXtextTests {
 			this.validator = validator;
 		}
 
+		@Override
 		public void run() {
 			try {
 				TestChain diagnostics = helper.chain();

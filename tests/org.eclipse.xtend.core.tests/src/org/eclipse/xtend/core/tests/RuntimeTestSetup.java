@@ -87,6 +87,7 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 				final InternalXtendLexer antlrImplementation = new InternalXtendLexer(antlrStream);
 				final InternalFlexer delegate = super.createFlexer(new StringReader(lexMe));
 				InternalFlexer result = new InternalFlexer() {
+					@Override
 					public int advance() throws IOException {
 						int result = delegate.advance();
 						CommonToken antlrToken = (CommonToken) antlrImplementation.nextToken();
@@ -105,14 +106,17 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 								"Token mismatch at offset " + antlrToken.getStartIndex() + "(" + other + " vs " + antlrToken.getText() + ") in: " + lexMe);
 					}
 
+					@Override
 					public int getTokenLength() {
 						return delegate.getTokenLength();
 					}
 					
+					@Override
 					public String getTokenText() {
 						return delegate.getTokenText();
 					}
 
+					@Override
 					public void yyreset(Reader reader) {
 						delegate.yyreset(reader);
 					}

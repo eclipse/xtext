@@ -78,7 +78,8 @@ public class BracketmatchingFactoryImpl extends EFactoryImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public File createFile()
+  @Override
+public File createFile()
   {
     FileImpl file = new FileImpl();
     return file;
@@ -89,7 +90,8 @@ public class BracketmatchingFactoryImpl extends EFactoryImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression createExpression()
+  @Override
+public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -100,7 +102,8 @@ public class BracketmatchingFactoryImpl extends EFactoryImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public SExpression createSExpression()
+  @Override
+public SExpression createSExpression()
   {
     SExpressionImpl sExpression = new SExpressionImpl();
     return sExpression;
@@ -111,7 +114,8 @@ public class BracketmatchingFactoryImpl extends EFactoryImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public Atom createAtom()
+  @Override
+public Atom createAtom()
   {
     AtomImpl atom = new AtomImpl();
     return atom;
@@ -122,7 +126,8 @@ public class BracketmatchingFactoryImpl extends EFactoryImpl implements Bracketm
    * <!-- end-user-doc -->
    * @generated
    */
-  public BracketmatchingPackage getBracketmatchingPackage()
+  @Override
+public BracketmatchingPackage getBracketmatchingPackage()
   {
     return (BracketmatchingPackage)getEPackage();
   }

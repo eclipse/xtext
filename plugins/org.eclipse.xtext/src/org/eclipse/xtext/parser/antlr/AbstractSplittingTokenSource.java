@@ -45,6 +45,7 @@ public abstract class AbstractSplittingTokenSource implements TokenSource {
 		return delegate;
 	}
 	
+	@Override
 	public Token nextToken() {
 		if (nextTokens.hasNext()) {
 			Token result = nextTokens.next(); 
@@ -56,6 +57,7 @@ public abstract class AbstractSplittingTokenSource implements TokenSource {
 		return result;
 	}
 	
+	@Override
 	public String getSourceName() {
 		return "[SplittingTokenSource] " + delegate.getSourceName();
 	}

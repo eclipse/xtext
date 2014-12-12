@@ -99,7 +99,8 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry getAlias()
+  @Override
+public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -129,7 +130,8 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlias(FromEntry newAlias)
+  @Override
+public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -142,7 +144,8 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public EStructuralFeature getFeature()
+  @Override
+public EStructuralFeature getFeature()
   {
     if (feature != null && feature.eIsProxy())
     {
@@ -172,7 +175,8 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeature(EStructuralFeature newFeature)
+  @Override
+public void setFeature(EStructuralFeature newFeature)
   {
     EStructuralFeature oldFeature = feature;
     feature = newFeature;
@@ -185,7 +189,8 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public BooleanOperator getOperator()
+  @Override
+public BooleanOperator getOperator()
   {
     return operator;
   }
@@ -195,7 +200,8 @@ public class NullWhereEntryImpl extends WhereEntryImpl implements NullWhereEntry
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOperator(BooleanOperator newOperator)
+  @Override
+public void setOperator(BooleanOperator newOperator)
   {
     BooleanOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;

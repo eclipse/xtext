@@ -512,6 +512,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 				result.add(GenModelAccess.getGenPackage(pkg, existingGenModel.eResource().getResourceSet()));
 		}
 		Collections.sort(result, new Comparator<GenPackage>() {
+			@Override
 			public int compare(GenPackage o1, GenPackage o2) {
 				return EcoreUtil.getURI(o1).toString().compareTo(EcoreUtil.getURI(o2).toString());
 			}

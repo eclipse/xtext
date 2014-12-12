@@ -160,6 +160,7 @@ public class ConfigurableCompletionProposal implements
 	/*
 	 * @see ICompletionProposal#apply(IDocument)
 	 */
+	@Override
 	public void apply(IDocument document) {
 		String original = document.get();
 		try {
@@ -179,6 +180,7 @@ public class ConfigurableCompletionProposal implements
 	/*
 	 * @see ICompletionProposal#getSelection(IDocument)
 	 */
+	@Override
 	public Point getSelection(IDocument document) {
 		if (!linkedMode && getSelectionLength() == 0)
 			return new Point(getReplacementOffset() + getCursorPosition(), 0);
@@ -188,6 +190,7 @@ public class ConfigurableCompletionProposal implements
 	/*
 	 * @see ICompletionProposal#getContextInformation()
 	 */
+	@Override
 	public IContextInformation getContextInformation() {
 		return contextInformation;
 	}
@@ -195,6 +198,7 @@ public class ConfigurableCompletionProposal implements
 	/*
 	 * @see ICompletionProposal#getImage()
 	 */
+	@Override
 	public Image getImage() {
 		return image;
 	}
@@ -202,6 +206,7 @@ public class ConfigurableCompletionProposal implements
 	/*
 	 * @see ICompletionProposal#getDisplayString()
 	 */
+	@Override
 	public String getDisplayString() {
 		if (displayString != null) {
 			return getStyledDisplayString().getString();
@@ -212,12 +217,14 @@ public class ConfigurableCompletionProposal implements
 	/*
 	 * @see ICompletionProposalExtension6#getStyledDisplayString()
 	 */
+	@Override
 	public StyledString getStyledDisplayString() {
 		return displayString;
 	}
 	/*
 	 * @see ICompletionProposal#getAdditionalProposalInfo()
 	 */
+	@Override
 	public String getAdditionalProposalInfo() {
 		if (additionalProposalInfo != null) {
 			return additionalProposalInfo.toString();
@@ -257,6 +264,7 @@ public class ConfigurableCompletionProposal implements
 	private int priority;
 	private Resource contextResource;
 	
+	@Override
 	public boolean isAutoInsertable() {
 		return autoInsertable;
 	}
@@ -352,6 +360,7 @@ public class ConfigurableCompletionProposal implements
 		return linkedMode;
 	}
 	
+	@Override
 	public void apply(ITextViewer viewer, char trigger, int stateMask, int offset) {
 		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
 		boolean replaceRight = (stateMask & SWT.CTRL) != 0;
@@ -364,6 +373,7 @@ public class ConfigurableCompletionProposal implements
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public void apply(IDocument document, char trigger, int offset) {
 		this.setReplacementLength(offset - getReplacementOffset() + viewer.getSelectedRange().y);
 		apply(viewer.getDocument());
@@ -372,6 +382,7 @@ public class ConfigurableCompletionProposal implements
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public boolean isValidFor(IDocument document, int offset) {
 		return validate(document, offset, null);
 	}
@@ -379,6 +390,7 @@ public class ConfigurableCompletionProposal implements
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public int getContextInformationPosition() {
 		if (getContextInformation() == null)
 			return -1;
@@ -388,6 +400,7 @@ public class ConfigurableCompletionProposal implements
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public char[] getTriggerCharacters() {
 		return triggerChars;
 	}
@@ -414,6 +427,7 @@ public class ConfigurableCompletionProposal implements
 			viewer.setSelectedRange(rememberedSelection.x, rememberedSelection.y);
 	}
 
+	@Override
 	public void selected(ITextViewer viewer, boolean smartToggle) {
 		if (smartToggle)
 			updateSelection(viewer);
@@ -423,11 +437,13 @@ public class ConfigurableCompletionProposal implements
 		}
 	}
 
+	@Override
 	public void unselected(ITextViewer viewer) {
 		restoreSelection(viewer);
 		rememberedSelection= null;
 	}
 
+	@Override
 	public boolean validate(IDocument document, int offset, DocumentEvent event) {
 		if (event != null) {
 			int oldReplaceContextLength = getReplaceContextLength();
@@ -473,6 +489,7 @@ public class ConfigurableCompletionProposal implements
 		return priority;
 	}
 	
+	@Override
 	public int compareTo(ConfigurableCompletionProposal other) {
 		if (priority < other.getPriority())
 			return 1;
@@ -529,6 +546,7 @@ public class ConfigurableCompletionProposal implements
 		/*
 		 * @see org.eclipse.jdt.internal.ui.text.link.LinkedPositionUI.ExitPolicy#doExit(org.eclipse.jdt.internal.ui.text.link.LinkedPositionManager, org.eclipse.swt.events.VerifyEvent, int, int)
 		 */
+		@Override
 		public ExitFlags doExit(LinkedModeModel environment, VerifyEvent event, int offset, int length) {
 			if (event.character == '\0')
 				return null;
@@ -548,6 +566,7 @@ public class ConfigurableCompletionProposal implements
 
 	}
 
+	@Override
 	public IInformationControlCreator getInformationControlCreator() {
 		if (hover!=null && hover instanceof ITextHoverExtension) {
 			return ((ITextHoverExtension) hover).getHoverControlCreator();
@@ -555,10 +574,12 @@ public class ConfigurableCompletionProposal implements
 		return null;
 	}
 
+	@Override
 	public CharSequence getPrefixCompletionText(IDocument document, int completionOffset) {
 		return getReplacementString();
 	}
 
+	@Override
 	public int getPrefixCompletionStart(IDocument document, int completionOffset) {
 		return getReplacementOffset();
 	}
@@ -567,6 +588,7 @@ public class ConfigurableCompletionProposal implements
 		this.hover = hover;
 	}
 
+	@Override
 	public Object getAdditionalProposalInfo(IProgressMonitor monitor) {
 		if (hover!=null) {
 			EObject eObject = null;

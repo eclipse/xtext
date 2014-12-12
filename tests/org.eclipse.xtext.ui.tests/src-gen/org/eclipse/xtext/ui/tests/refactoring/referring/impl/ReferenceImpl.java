@@ -66,7 +66,8 @@ public class ReferenceImpl extends MinimalEObjectImpl.Container implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public EObject getReferenced()
+  @Override
+public EObject getReferenced()
   {
     if (referenced != null && referenced.eIsProxy())
     {
@@ -96,7 +97,8 @@ public class ReferenceImpl extends MinimalEObjectImpl.Container implements Refer
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReferenced(EObject newReferenced)
+  @Override
+public void setReferenced(EObject newReferenced)
   {
     EObject oldReferenced = referenced;
     referenced = newReferenced;

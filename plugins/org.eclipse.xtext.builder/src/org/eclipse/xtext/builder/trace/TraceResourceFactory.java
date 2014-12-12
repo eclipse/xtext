@@ -27,6 +27,7 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 	
 	protected class Strategy implements TraceRegionSerializer.Strategy<DebugTraceRegion, DebugLocationData> {
 
+		@Override
 		public DebugLocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) {
 			DebugLocationData result = TraceFactory.eINSTANCE.createDebugLocationData();
 			result.setOffset(offset);
@@ -37,6 +38,7 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 			return result;
 		}
 
+		@Override
 		public DebugTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, List<DebugLocationData> associations,
 				DebugTraceRegion parent) {
 			DebugTraceRegion result = TraceFactory.eINSTANCE.createDebugTraceRegion();
@@ -50,11 +52,13 @@ public class TraceResourceFactory extends ResourceFactoryImpl {
 			return result;
 		}
 
+		@Override
 		public void writeRegion(DebugTraceRegion region, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
 			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.getAssociations(), region.getNestedRegions());
 		}
 
+		@Override
 		public void writeLocation(DebugLocationData location, Callback<DebugTraceRegion, DebugLocationData> callback)
 				throws IOException {
 			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath());

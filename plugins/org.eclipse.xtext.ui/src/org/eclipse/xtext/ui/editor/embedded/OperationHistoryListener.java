@@ -25,6 +25,7 @@ public class OperationHistoryListener implements IOperationHistoryListener {
 		this.update = update;
 	}
 
+	@Override
 	public void historyNotification(OperationHistoryEvent event) {
 		final int type = event.getEventType();
 		switch (type) {

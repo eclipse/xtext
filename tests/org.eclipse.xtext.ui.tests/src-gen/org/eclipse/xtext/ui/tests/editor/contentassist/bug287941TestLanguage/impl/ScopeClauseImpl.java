@@ -88,7 +88,8 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isNotIn()
+  @Override
+public boolean isNotIn()
   {
     return notIn;
   }
@@ -98,7 +99,8 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNotIn(boolean newNotIn)
+  @Override
+public void setNotIn(boolean newNotIn)
   {
     boolean oldNotIn = notIn;
     notIn = newNotIn;
@@ -111,7 +113,8 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
-  public Scope getScope()
+  @Override
+public Scope getScope()
   {
     return scope;
   }
@@ -138,7 +141,8 @@ public class ScopeClauseImpl extends MinimalEObjectImpl.Container implements Sco
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setScope(Scope newScope)
+  @Override
+public void setScope(Scope newScope)
   {
     if (newScope != scope)
     {

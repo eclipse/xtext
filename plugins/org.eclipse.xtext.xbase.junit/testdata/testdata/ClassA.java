@@ -9,10 +9,12 @@ package testdata;
 
 public class ClassA implements InterfaceA, InterfaceB {
 
+	@Override
 	public String getUpperCaseClassName() {
 		return getClassName().toUpperCase();
 	}
 
+	@Override
 	public String getClassName() {
 		return getClass().getSimpleName();
 	}

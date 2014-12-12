@@ -22,6 +22,7 @@ public class STRINGValueConverter extends AbstractLexerBasedConverter<String> {
 		return '"' + Strings.convertToJavaString(value, false) + '"';
 	}
 
+	@Override
 	public String toValue(String string, INode node) {
 		if (string == null)
 			return null;

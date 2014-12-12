@@ -67,7 +67,8 @@ public class ExpressionImpl extends NavigatingExpImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypeExp getType()
+  @Override
+public TypeExp getType()
   {
     return type;
   }
@@ -94,7 +95,8 @@ public class ExpressionImpl extends NavigatingExpImpl implements Expression
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(TypeExp newType)
+  @Override
+public void setType(TypeExp newType)
   {
     if (newType != type)
     {

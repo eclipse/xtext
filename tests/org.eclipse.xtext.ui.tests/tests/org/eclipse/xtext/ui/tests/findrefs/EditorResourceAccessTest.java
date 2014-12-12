@@ -49,6 +49,7 @@ public class EditorResourceAccessTest extends AbstractEditorTest {
 		EditorResourceAccess access = Activator.getInstance().getInjector(getEditorId())
 				.getInstance(EditorResourceAccess.class);
 		IUnitOfWork<Boolean, ResourceSet> isEmpty = new IUnitOfWork<Boolean, ResourceSet>(){
+			@Override
 			public Boolean exec(ResourceSet state) throws Exception {
 				return state.getResources().get(0).getContents().isEmpty();
 			}

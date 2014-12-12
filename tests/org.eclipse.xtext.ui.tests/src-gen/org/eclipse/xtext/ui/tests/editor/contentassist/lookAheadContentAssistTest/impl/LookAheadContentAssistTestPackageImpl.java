@@ -112,7 +112,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getModel()
+  @Override
+public EClass getModel()
   {
     return modelEClass;
   }
@@ -122,7 +123,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Attribute()
+  @Override
+public EReference getModel_Attribute()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -132,7 +134,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAttribute()
+  @Override
+public EClass getAttribute()
   {
     return attributeEClass;
   }
@@ -142,7 +145,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAttribute_Value()
+  @Override
+public EAttribute getAttribute_Value()
   {
     return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
   }
@@ -152,7 +156,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPair()
+  @Override
+public EClass getPair()
   {
     return pairEClass;
   }
@@ -162,7 +167,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPair_Name()
+  @Override
+public EAttribute getPair_Name()
   {
     return (EAttribute)pairEClass.getEStructuralFeatures().get(0);
   }
@@ -172,7 +178,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getPair_Value()
+  @Override
+public EAttribute getPair_Value()
   {
     return (EAttribute)pairEClass.getEStructuralFeatures().get(1);
   }
@@ -182,7 +189,8 @@ public class LookAheadContentAssistTestPackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public LookAheadContentAssistTestFactory getLookAheadContentAssistTestFactory()
+  @Override
+public LookAheadContentAssistTestFactory getLookAheadContentAssistTestFactory()
   {
     return (LookAheadContentAssistTestFactory)getEFactoryInstance();
   }

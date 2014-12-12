@@ -31,6 +31,7 @@ public class TextReplacerMerger implements IMerger<ITextReplacer> {
 		this.merger = formatter.createHiddenRegionFormattingMerger();
 	}
 
+	@Override
 	public ITextReplacer merge(List<? extends ITextReplacer> conflicting) {
 		ITextReplacer result = mergeHiddenRegionReplacers(conflicting);
 		if (result == null)

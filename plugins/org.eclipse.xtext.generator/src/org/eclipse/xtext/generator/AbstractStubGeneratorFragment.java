@@ -23,18 +23,22 @@ public class AbstractStubGeneratorFragment extends AbstractGeneratorFragment imp
 	
 	private boolean isGenerateXtendStub;
 
+	@Override
 	public boolean isGenerateXtendStub() {
 		return isGenerateXtendStub;
 	}
 
+	@Override
 	public void setGenerateXtendStub(boolean isGenerateXtendStub) {
 		this.isGenerateXtendStub = isGenerateXtendStub;
 	}
 
+	@Override
 	public boolean isGenerateStub() {
 		return isGenerateStub;
 	}
 
+	@Override
 	public void setGenerateStub(boolean isGenerateStub) {
 		this.isGenerateStub = isGenerateStub;
 	}

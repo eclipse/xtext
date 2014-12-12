@@ -161,6 +161,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		return true;
 	}
 
+	@Override
 	public void generateFile(String fileName, String outputName, CharSequence contents) {
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
@@ -215,6 +216,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void generateFile(String fileName, String outputName, InputStream content) {
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
@@ -562,6 +564,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * 
 	 * @since 2.3
 	 */
+	@Override
 	public URI getURI(String fileName, String outputConfiguration) {
 		return getURI(fileName, outputConfiguration, monitor);
 	}
@@ -584,6 +587,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		return readBinaryFile(fileName, outputCfgName, monitor);
 	}
@@ -610,6 +614,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		return readTextFile(fileName, outputCfgName, monitor);
 	}

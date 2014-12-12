@@ -91,7 +91,8 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isDefinesHiddenTokens()
+  @Override
+public boolean isDefinesHiddenTokens()
   {
     return definesHiddenTokens;
   }
@@ -101,7 +102,8 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
+  @Override
+public void setDefinesHiddenTokens(boolean newDefinesHiddenTokens)
   {
     boolean oldDefinesHiddenTokens = definesHiddenTokens;
     definesHiddenTokens = newDefinesHiddenTokens;
@@ -114,7 +116,8 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractRule> getHiddenTokens()
+  @Override
+public EList<AbstractRule> getHiddenTokens()
   {
     if (hiddenTokens == null)
     {

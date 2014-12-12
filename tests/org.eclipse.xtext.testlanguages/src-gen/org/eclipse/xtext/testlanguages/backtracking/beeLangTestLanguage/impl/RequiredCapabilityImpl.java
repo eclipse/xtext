@@ -192,7 +192,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getNameSpace()
+  @Override
+public String getNameSpace()
   {
     return nameSpace;
   }
@@ -202,7 +203,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setNameSpace(String newNameSpace)
+  @Override
+public void setNameSpace(String newNameSpace)
   {
     String oldNameSpace = nameSpace;
     nameSpace = newNameSpace;
@@ -215,7 +217,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  @Override
+public String getName()
   {
     return name;
   }
@@ -225,7 +228,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  @Override
+public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -238,7 +242,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public Expression getCondExpr()
+  @Override
+public Expression getCondExpr()
   {
     return condExpr;
   }
@@ -265,7 +270,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setCondExpr(Expression newCondExpr)
+  @Override
+public void setCondExpr(Expression newCondExpr)
   {
     if (newCondExpr != condExpr)
     {
@@ -286,7 +292,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isGreedy()
+  @Override
+public boolean isGreedy()
   {
     return greedy;
   }
@@ -296,7 +303,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setGreedy(boolean newGreedy)
+  @Override
+public void setGreedy(boolean newGreedy)
   {
     boolean oldGreedy = greedy;
     greedy = newGreedy;
@@ -309,7 +317,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getMin()
+  @Override
+public int getMin()
   {
     return min;
   }
@@ -319,7 +328,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMin(int newMin)
+  @Override
+public void setMin(int newMin)
   {
     int oldMin = min;
     min = newMin;
@@ -332,7 +342,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getMax()
+  @Override
+public int getMax()
   {
     return max;
   }
@@ -342,7 +353,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setMax(int newMax)
+  @Override
+public void setMax(int newMax)
   {
     int oldMax = max;
     max = newMax;
@@ -355,7 +367,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVersionRange()
+  @Override
+public String getVersionRange()
   {
     return versionRange;
   }
@@ -365,7 +378,8 @@ public class RequiredCapabilityImpl extends MinimalEObjectImpl.Container impleme
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVersionRange(String newVersionRange)
+  @Override
+public void setVersionRange(String newVersionRange)
   {
     String oldVersionRange = versionRange;
     versionRange = newVersionRange;

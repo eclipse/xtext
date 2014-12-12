@@ -40,10 +40,12 @@ public abstract class AbstractFormattingConfig {
 			super(locator, before, after);
 		}
 
+		@Override
 		public AbstractElement matchAfter() {
 			return after;
 		}
 
+		@Override
 		public AbstractElement matchBefore() {
 			return before;
 		}
@@ -54,6 +56,7 @@ public abstract class AbstractFormattingConfig {
 			super(locator, before, after);
 		}
 
+		@Override
 		public Pair<AbstractElement, AbstractElement> matchBetween() {
 			return Tuples.create(after, before);
 		}

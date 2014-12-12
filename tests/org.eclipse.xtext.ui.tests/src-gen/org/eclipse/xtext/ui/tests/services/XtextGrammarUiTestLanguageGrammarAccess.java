@@ -57,6 +57,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		//	"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
 		//	(definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] ("," hiddenTokens+=[AbstractRule])*)? ")")?
 		//	metamodelDeclarations+=AbstractMetamodelDeclaration* rules+=AbstractRule+;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"grammar" name=GrammarID ("with" usedGrammars+=[Grammar|GrammarID] ("," usedGrammars+=[Grammar|GrammarID])*)?
@@ -168,6 +169,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//GrammarID returns ecore::EString:
 		//	ID ("." ID)*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
@@ -195,6 +197,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractRule:
 		//	ParserRule | TerminalRule | EnumRule;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ParserRule | TerminalRule | EnumRule
@@ -218,6 +221,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractMetamodelDeclaration:
 		//	GeneratedMetamodel | ReferencedMetamodel;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//GeneratedMetamodel | ReferencedMetamodel
@@ -248,6 +252,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		//// generated metamodels have to have different aliases
 		//GeneratedMetamodel:
 		//	"generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?
@@ -300,6 +305,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		//// and with generated metamodels
 		//ReferencedMetamodel:
 		//	"import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?
@@ -361,6 +367,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ParserRule:
 		//	name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
 		//	hiddenTokens+=[AbstractRule])*)? ")")? ":" alternatives=Alternatives ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=ID ("returns" type=TypeRef)? (definesHiddenTokens?="hidden" "(" (hiddenTokens+=[AbstractRule] (","
@@ -454,6 +461,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeRef:
 		//	(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(metamodel=[AbstractMetamodelDeclaration] "::")? classifier=[ecore::EClassifier]
@@ -497,6 +505,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Alternatives returns AbstractElement:
 		//	Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?
@@ -535,6 +544,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Group returns AbstractElement:
 		//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
@@ -564,6 +574,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractToken returns AbstractElement:
 		//	AbstractTokenWithCardinality | Action;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//AbstractTokenWithCardinality | Action
@@ -590,6 +601,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractTokenWithCardinality returns AbstractElement:
 		//	(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(Assignment | AbstractTerminal) cardinality=("?" | "*" | "+")?
@@ -639,6 +651,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Action:
 		//	"{" type=TypeRef ("." feature=ID operator=("=" | "+=") "current")? "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"{" type=TypeRef ("." feature=ID operator=("=" | "+=") "current")? "}"
@@ -693,6 +706,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractTerminal returns AbstractElement:
 		//	Keyword | RuleCall | ParenthesizedElement;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Keyword | RuleCall | ParenthesizedElement
@@ -715,6 +729,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Keyword:
 		//	value=STRING;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//value=STRING
@@ -732,6 +747,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RuleCall:
 		//	rule=[AbstractRule];
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//rule=[AbstractRule]
@@ -759,6 +775,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Assignment:
 		//	feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//feature=ID operator=("+=" | "=" | "?=") ^terminal=AssignableTerminal
@@ -802,6 +819,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AssignableTerminal returns AbstractElement:
 		//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
@@ -829,6 +847,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ParenthesizedAssignableElement returns AbstractElement:
 		//	"(" AssignableAlternatives ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" AssignableAlternatives ")"
@@ -857,6 +876,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AssignableAlternatives returns AbstractElement:
 		//	AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?
@@ -898,6 +918,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CrossReference:
 		//	"[" type=TypeRef ("|" ^terminal=CrossReferenceableTerminal)? "]";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"[" type=TypeRef ("|" ^terminal=CrossReferenceableTerminal)? "]"
@@ -937,6 +958,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CrossReferenceableTerminal returns AbstractElement:
 		//	Keyword | RuleCall | ParenthesizedCrossReferenceableElement;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Keyword | RuleCall | ParenthesizedCrossReferenceableElement
@@ -961,6 +983,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ParenthesizedCrossReferenceableElement returns AbstractElement:
 		//	"(" CrossReferenceableAlternatives ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" CrossReferenceableAlternatives ")"
@@ -989,6 +1012,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CrossReferenceableAlternatives returns AbstractElement:
 		//	CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?
@@ -1025,6 +1049,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ParenthesizedElement returns AbstractElement:
 		//	"(" Alternatives ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" Alternatives ")"
@@ -1057,6 +1082,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TerminalRule:
 		//	"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"terminal" name=ID ("returns" type=TypeRef)? ":" alternatives=TerminalAlternatives ";"
@@ -1109,6 +1135,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TerminalAlternatives returns AbstractElement:
 		//	TerminalGroup ({Alternatives.groups+=current} ("|" groups+=TerminalGroup)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//TerminalGroup ({Alternatives.groups+=current} ("|" groups+=TerminalGroup)+)?
@@ -1147,6 +1174,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TerminalGroup returns AbstractElement:
 		//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
@@ -1180,6 +1208,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TerminalToken returns AbstractElement:
 		//	TerminalTokenElement cardinality=("?" | "*" | "+")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//TerminalTokenElement cardinality=("?" | "*" | "+")?
@@ -1215,6 +1244,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TerminalTokenElement returns AbstractElement:
 		//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
@@ -1245,6 +1275,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ParenthesizedTerminalElement returns AbstractElement:
 		//	"(" TerminalAlternatives ")";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"(" TerminalAlternatives ")"
@@ -1268,6 +1299,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractNegatedToken:
 		//	NegatedToken | UntilToken;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//NegatedToken | UntilToken
@@ -1289,6 +1321,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//NegatedToken:
 		//	"!" ^terminal=TerminalTokenElement;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"!" ^terminal=TerminalTokenElement
@@ -1313,6 +1346,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//UntilToken:
 		//	"->" ^terminal=TerminalTokenElement;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"->" ^terminal=TerminalTokenElement
@@ -1336,6 +1370,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Wildcard:
 		//	{Wildcard} ".";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{Wildcard} "."
@@ -1360,6 +1395,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CharacterRange returns AbstractElement:
 		//	Keyword ({CharacterRange.left=current} ".." right=Keyword)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//Keyword ({CharacterRange.left=current} ".." right=Keyword)?
@@ -1401,6 +1437,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EnumRule:
 		//	"enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"enum" name=ID ("returns" type=TypeRef)? ":" alternatives=EnumLiterals ";"
@@ -1453,6 +1490,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EnumLiterals returns AbstractElement:
 		//	EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
@@ -1493,6 +1531,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EnumLiteralDeclaration:
 		//	enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//enumLiteral=[ecore::EEnumLiteral] ("=" literal=Keyword)?
@@ -1628,6 +1667,7 @@ public class XtextGrammarUiTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

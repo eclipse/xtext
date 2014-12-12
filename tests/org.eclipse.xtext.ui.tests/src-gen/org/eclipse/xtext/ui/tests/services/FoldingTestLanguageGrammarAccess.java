@@ -25,6 +25,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//FoldingModel:
 		//	elements+=Element*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
@@ -46,6 +47,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//Element:
 		//	"element" name=ID subelements+=Element* "end";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"element" name=ID subelements+=Element* "end"
@@ -104,6 +106,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

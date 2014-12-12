@@ -50,9 +50,11 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 		return qualifiedNameProvider;
 	}
 
+	@Override
 	public IScope getScope(final EObject context, final EReference reference) {
 		ISelectable resourceContent = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(), reference), 
 				context.eResource(), new Provider<ISelectable>() {
+			@Override
 			public ISelectable get() {
 				return getAllDescriptions(context.eResource());
 			}
@@ -67,6 +69,7 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 
 	protected ISelectable getAllDescriptions(final Resource resource) {
 		Iterable<EObject> allContents = new Iterable<EObject>(){
+			@Override
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
 			}

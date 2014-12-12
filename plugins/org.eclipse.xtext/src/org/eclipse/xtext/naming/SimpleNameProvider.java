@@ -21,6 +21,7 @@ public class SimpleNameProvider extends IQualifiedNameProvider.AbstractImpl {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
+	@Override
 	public QualifiedName getFullyQualifiedName(EObject obj) {
 		String name = SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
 		if(name == null || name.length() == 0)

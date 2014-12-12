@@ -76,7 +76,8 @@ public class AliasWhereEntryImpl extends WhereEntryImpl implements AliasWhereEnt
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry getAlias()
+  @Override
+public FromEntry getAlias()
   {
     if (alias != null && alias.eIsProxy())
     {
@@ -106,7 +107,8 @@ public class AliasWhereEntryImpl extends WhereEntryImpl implements AliasWhereEnt
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAlias(FromEntry newAlias)
+  @Override
+public void setAlias(FromEntry newAlias)
   {
     FromEntry oldAlias = alias;
     alias = newAlias;
@@ -119,7 +121,8 @@ public class AliasWhereEntryImpl extends WhereEntryImpl implements AliasWhereEnt
    * <!-- end-user-doc -->
    * @generated
    */
-  public FromEntry getRightAlias()
+  @Override
+public FromEntry getRightAlias()
   {
     if (rightAlias != null && rightAlias.eIsProxy())
     {
@@ -149,7 +152,8 @@ public class AliasWhereEntryImpl extends WhereEntryImpl implements AliasWhereEnt
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRightAlias(FromEntry newRightAlias)
+  @Override
+public void setRightAlias(FromEntry newRightAlias)
   {
     FromEntry oldRightAlias = rightAlias;
     rightAlias = newRightAlias;

@@ -47,6 +47,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 		this(services, context.getResourceSet());
 	}
 	
+	@Override
 	public CommonTypeComputationServices getServices() {
 		return services;
 	}
@@ -65,6 +66,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	/**
 	 * Returns the context resource set if any.
 	 */
+	@Override
 	public ResourceSet getContextResourceSet() {
 		return context;
 	}
@@ -72,6 +74,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	/**
 	 * @throws UnsupportedOperationException always
 	 */
+	@Override
 	public void acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
 		throw new UnsupportedOperationException();
 	}
@@ -79,6 +82,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	/**
 	 * @throws UnsupportedOperationException always
 	 */
+	@Override
 	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {
 		throw new UnsupportedOperationException();
 	}
@@ -86,6 +90,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	/**
 	 * @throws UnsupportedOperationException always
 	 */
+	@Override
 	public boolean isResolved(Object handle) {
 		throw new UnsupportedOperationException();
 	}
@@ -93,34 +98,42 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 	/**
 	 * @return the empty list
 	 */
+	@Override
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public LightweightTypeReference toPlainTypeReference(JvmType type) {
 		return factory.toPlainTypeReference(type);
 	}
 
+	@Override
 	public LightweightTypeReference toLightweightTypeReference(JvmType type) {
 		return factory.toLightweightReference(type);
 	}
 
+	@Override
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference type) {
 		return factory.toLightweightReference(type);
 	}
 	
+	@Override
 	public CompoundTypeReference newCompoundTypeReference(boolean synonym) {
 		return new CompoundTypeReference(this, synonym);
 	}
 	
+	@Override
 	public WildcardTypeReference newWildcardTypeReference() {
 		return new WildcardTypeReference(this);
 	}
 	
+	@Override
 	public ArrayTypeReference newArrayTypeReference(LightweightTypeReference componentTypeReference) {
 		return new ArrayTypeReference(this, componentTypeReference);
 	}
 
+	@Override
 	public FunctionTypeReference newFunctionTypeReference(JvmType type) {
 		FunctionTypeReference result;
 		if (factory.isInner(type)) {
@@ -132,6 +145,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 		return result;
 	}
 	
+	@Override
 	public InnerFunctionTypeReference newFunctionTypeReference(LightweightTypeReference outer, JvmType type) {
 		if (!factory.isInner(type)) {
 			throw new IllegalArgumentException(String.valueOf(type));
@@ -139,6 +153,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 		return new InnerFunctionTypeReference(this, outer, type);
 	}
 	
+	@Override
 	public ParameterizedTypeReference newParameterizedTypeReference(JvmType type) {
 		ParameterizedTypeReference result;
 		if (factory.isInner(type)) {
@@ -150,6 +165,7 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 		return result;
 	}
 	
+	@Override
 	public InnerTypeReference newParameterizedTypeReference(LightweightTypeReference outer, JvmType type) {
 		if (!factory.isInner(type)) {
 			throw new IllegalArgumentException(String.valueOf(type));
@@ -157,14 +173,17 @@ public class StandardTypeReferenceOwner implements ITypeReferenceOwner {
 		return new InnerTypeReference(this, outer, type);
 	}
 
+	@Override
 	public UnknownTypeReference newUnknownTypeReference() {
 		return new UnknownTypeReference(this);
 	}
 
+	@Override
 	public UnknownTypeReference newUnknownTypeReference(String name) {
 		return new UnknownTypeReference(this, name);
 	}
 
+	@Override
 	public AnyTypeReference newAnyTypeReference() {
 		return new AnyTypeReference(this);
 	}

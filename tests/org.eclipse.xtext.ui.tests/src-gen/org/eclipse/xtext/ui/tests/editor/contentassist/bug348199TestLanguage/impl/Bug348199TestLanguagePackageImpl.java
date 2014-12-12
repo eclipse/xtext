@@ -104,7 +104,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTimeperiod()
+  @Override
+public EClass getTimeperiod()
   {
     return timeperiodEClass;
   }
@@ -114,7 +115,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTimeperiod_Time()
+  @Override
+public EReference getTimeperiod_Time()
   {
     return (EReference)timeperiodEClass.getEStructuralFeatures().get(0);
   }
@@ -124,7 +126,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTimeperiod_Name()
+  @Override
+public EAttribute getTimeperiod_Name()
   {
     return (EAttribute)timeperiodEClass.getEStructuralFeatures().get(1);
   }
@@ -134,7 +137,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTimeperiod_Alias()
+  @Override
+public EAttribute getTimeperiod_Alias()
   {
     return (EAttribute)timeperiodEClass.getEStructuralFeatures().get(2);
   }
@@ -144,7 +148,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTimeDef()
+  @Override
+public EClass getTimeDef()
   {
     return timeDefEClass;
   }
@@ -154,7 +159,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTimeDef_Day()
+  @Override
+public EAttribute getTimeDef_Day()
   {
     return (EAttribute)timeDefEClass.getEStructuralFeatures().get(0);
   }
@@ -164,7 +170,8 @@ public class Bug348199TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
-  public Bug348199TestLanguageFactory getBug348199TestLanguageFactory()
+  @Override
+public Bug348199TestLanguageFactory getBug348199TestLanguageFactory()
   {
     return (Bug348199TestLanguageFactory)getEFactoryInstance();
   }

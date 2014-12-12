@@ -66,7 +66,8 @@ public class AbstractRuleCallImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public AbstractRule getRule()
+  @Override
+public AbstractRule getRule()
   {
     if (rule != null && rule.eIsProxy())
     {
@@ -96,7 +97,8 @@ public class AbstractRuleCallImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setRule(AbstractRule newRule)
+  @Override
+public void setRule(AbstractRule newRule)
   {
     AbstractRule oldRule = rule;
     rule = newRule;

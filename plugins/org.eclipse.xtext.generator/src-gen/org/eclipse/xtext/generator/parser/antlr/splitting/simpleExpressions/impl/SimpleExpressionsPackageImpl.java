@@ -152,7 +152,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getIfCondition()
+  @Override
+public EClass getIfCondition()
   {
     return ifConditionEClass;
   }
@@ -162,7 +163,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getIfCondition_Elseif()
+  @Override
+public EAttribute getIfCondition_Elseif()
   {
     return (EAttribute)ifConditionEClass.getEStructuralFeatures().get(0);
   }
@@ -172,7 +174,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getIfCondition_Condition()
+  @Override
+public EReference getIfCondition_Condition()
   {
     return (EReference)ifConditionEClass.getEStructuralFeatures().get(1);
   }
@@ -182,7 +185,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getExpression()
+  @Override
+public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -192,7 +196,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNumberLiteral()
+  @Override
+public EClass getNumberLiteral()
   {
     return numberLiteralEClass;
   }
@@ -202,7 +207,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNumberLiteral_Value()
+  @Override
+public EAttribute getNumberLiteral_Value()
   {
     return (EAttribute)numberLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -212,7 +218,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMethodCall()
+  @Override
+public EClass getMethodCall()
   {
     return methodCallEClass;
   }
@@ -222,7 +229,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMethodCall_Value()
+  @Override
+public EAttribute getMethodCall_Value()
   {
     return (EAttribute)methodCallEClass.getEStructuralFeatures().get(0);
   }
@@ -232,7 +240,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOrExpression()
+  @Override
+public EClass getOrExpression()
   {
     return orExpressionEClass;
   }
@@ -242,7 +251,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOrExpression_Left()
+  @Override
+public EReference getOrExpression_Left()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -252,7 +262,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOrExpression_Right()
+  @Override
+public EReference getOrExpression_Right()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -262,7 +273,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAndExpression()
+  @Override
+public EClass getAndExpression()
   {
     return andExpressionEClass;
   }
@@ -272,7 +284,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAndExpression_Left()
+  @Override
+public EReference getAndExpression_Left()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -282,7 +295,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAndExpression_Right()
+  @Override
+public EReference getAndExpression_Right()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -292,7 +306,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getComparison()
+  @Override
+public EClass getComparison()
   {
     return comparisonEClass;
   }
@@ -302,7 +317,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getComparison_Left()
+  @Override
+public EReference getComparison_Left()
   {
     return (EReference)comparisonEClass.getEStructuralFeatures().get(0);
   }
@@ -312,7 +328,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getComparison_Operator()
+  @Override
+public EAttribute getComparison_Operator()
   {
     return (EAttribute)comparisonEClass.getEStructuralFeatures().get(1);
   }
@@ -322,7 +339,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getComparison_Right()
+  @Override
+public EReference getComparison_Right()
   {
     return (EReference)comparisonEClass.getEStructuralFeatures().get(2);
   }
@@ -332,7 +350,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNotExpression()
+  @Override
+public EClass getNotExpression()
   {
     return notExpressionEClass;
   }
@@ -342,7 +361,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNotExpression_Expression()
+  @Override
+public EReference getNotExpression_Expression()
   {
     return (EReference)notExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -352,7 +372,8 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  public SimpleExpressionsFactory getSimpleExpressionsFactory()
+  @Override
+public SimpleExpressionsFactory getSimpleExpressionsFactory()
   {
     return (SimpleExpressionsFactory)getEFactoryInstance();
   }

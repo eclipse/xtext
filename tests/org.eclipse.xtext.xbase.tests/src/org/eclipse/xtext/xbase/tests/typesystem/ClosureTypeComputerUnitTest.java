@@ -90,6 +90,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase {
 	interface StrangeIterable<C> extends Iterable {}
 	interface StrangeStringIterable<C> extends Iterable<String> {}
 	interface ListIteratorIterable<E> extends Iterable<E> {
+		@Override
 		ListIterator<E> iterator();
 	}
 	class IterableContainer<E> {
@@ -571,15 +572,18 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase {
 	
 	class NullFeatureScopeSession extends AbstractFeatureScopeSession {
 
+		@Override
 		public boolean isVisible(JvmMember member) {
 			throw new UnsupportedOperationException();
 		}
 		
+		@Override
 		public boolean isVisible(JvmMember member, /* @Nullable */ LightweightTypeReference receiverType, /* @Nullable */ JvmIdentifiableElement receiverFeature) {
 			throw new UnsupportedOperationException();
 		}
 
 		/* @Nullable */
+		@Override
 		public IEObjectDescription getLocalElement(QualifiedName name) {
 			throw new UnsupportedOperationException();
 		}
@@ -594,10 +598,12 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase {
 			throw new UnsupportedOperationException();
 		}
 		
+		@Override
 		public boolean isInstanceContext() {
 			throw new UnsupportedOperationException();
 		}
 		
+		@Override
 		public boolean isConstructorContext() {
 			throw new UnsupportedOperationException();
 		}

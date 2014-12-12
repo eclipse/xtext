@@ -27,6 +27,7 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	@Deprecated
 	protected String lineDelimiter = System.getProperty("line.separator");
 
+	@Override
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
@@ -35,6 +36,7 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 		return regions;
 	}
 
+	@Override
 	public List<ReplaceRegion> computeParameterTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();

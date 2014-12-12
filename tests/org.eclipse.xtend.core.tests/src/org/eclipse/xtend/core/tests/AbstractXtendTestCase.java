@@ -74,6 +74,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 		if (validate) {
 			List<Issue> issues = Lists.newArrayList(Iterables.filter(((XtextResource) resource).getResourceServiceProvider().getResourceValidator()
 					.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl), new Predicate<Issue>() {
+						@Override
 						public boolean apply(Issue issue) {
 							return issue.getSeverity() == Severity.ERROR;
 						}

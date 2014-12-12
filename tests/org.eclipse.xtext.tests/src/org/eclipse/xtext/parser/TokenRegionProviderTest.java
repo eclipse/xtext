@@ -93,6 +93,7 @@ public class TokenRegionProviderTest extends AbstractXtextTests {
 	
 	protected CommonToken findTokenStartingAt(final int offset, List<CommonToken> tokens) {
 		return find(tokens, new Predicate<CommonToken>() {
+			@Override
 			public boolean apply(CommonToken token) {
 				return token.getStartIndex() == offset;
 			}
@@ -102,6 +103,7 @@ public class TokenRegionProviderTest extends AbstractXtextTests {
 	protected CommonToken findTokenStopingAt(final int offset, List<CommonToken> tokens) throws Exception {
 		try {
 			return find(tokens, new Predicate<CommonToken>() {
+				@Override
 				public boolean apply(CommonToken token) {
 					return token.getStopIndex() == offset;
 				}

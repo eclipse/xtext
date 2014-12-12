@@ -68,6 +68,7 @@ public class WorkbenchRunnableAdapter implements IRunnableWithProgress, IThreadL
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void threadChange(Thread thread) {
 		if (fTransfer)
 			Job.getJobManager().transferRule(rule, thread);
@@ -76,6 +77,7 @@ public class WorkbenchRunnableAdapter implements IRunnableWithProgress, IThreadL
 	/*
 	 * @see IRunnableWithProgress#run(IProgressMonitor)
 	 */
+	@Override
 	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 		try {
 			ResourcesPlugin.getWorkspace().run(workspaceRunnable, rule, IWorkspace.AVOID_UPDATE, monitor);

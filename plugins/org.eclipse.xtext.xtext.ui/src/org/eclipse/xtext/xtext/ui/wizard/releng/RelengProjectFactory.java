@@ -30,6 +30,7 @@ public class RelengProjectFactory extends ProjectFactory {
 		super.enhanceProject(project, subMonitor, shell);
 		IProjectFactoryContributor.IFileCreator fileCreator = new IProjectFactoryContributor.IFileCreator() {
 
+			@Override
 			public IFile writeToFile(CharSequence chars, String fileName) {
 				return RelengProjectFactory.this.createFile(fileName, project, chars.toString(), subMonitor);
 			}

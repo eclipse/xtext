@@ -55,6 +55,7 @@ public class FileOpener {
 			return;
 		}
 		shell.getDisplay().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				final IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 				try {

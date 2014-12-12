@@ -24,10 +24,12 @@ public interface IGrammarAccess {
 	}
 
 	interface IEnumRuleAccess extends IAbstractRuleAccess {
+		@Override
 		EnumRule getRule();
 	}
 
 	interface IParserRuleAccess extends IAbstractRuleAccess {
+		@Override
 		ParserRule getRule();
 	}
 
