@@ -34,10 +34,9 @@ public class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvi
       if (result instanceof CurrentDescriptions.ResourceSetAware) {
         _matched=true;
         IResourceDescriptions _delegate = ((CurrentDescriptions.ResourceSetAware)result).getDelegate();
-        final IResourceDescriptions d = _delegate;
         boolean _matched_1 = false;
         if (!_matched_1) {
-          if (d instanceof CurrentDescriptions) {
+          if (_delegate instanceof CurrentDescriptions) {
             _matched_1=true;
             IProject _project = project.getProject();
             String _name = _project.getName();

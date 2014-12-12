@@ -44,7 +44,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	@Inject extension Context2NameFunction ctx2name
 	
 	def <T extends ENamedElement> List<T> sortByName(Iterable<T> iterable) {
-		iterable.sort(p1, p2|p1.name.compareTo(p2.name))
+		iterable.sortWith(p1, p2|p1.name.compareTo(p2.name))
 	}
 	
 	def Iterable<EPackage> getAccessedPackages() {

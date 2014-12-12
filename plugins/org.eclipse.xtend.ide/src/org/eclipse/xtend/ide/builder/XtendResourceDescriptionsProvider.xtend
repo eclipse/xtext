@@ -27,7 +27,7 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 		val project = projectProvider.getJavaProject(resourceSet)
 		switch result {
 			CurrentDescriptions.ResourceSetAware : {
-				switch d:result.delegate {
+				switch result.delegate {
 					// in the builder we don't want to see upstream Xtend files.
 					CurrentDescriptions : {
 						// we expect platform:/resource URIs here, where the second segment denotes the project's name.

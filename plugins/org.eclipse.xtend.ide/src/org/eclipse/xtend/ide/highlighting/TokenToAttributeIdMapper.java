@@ -8,8 +8,8 @@
 package org.eclipse.xtend.ide.highlighting;
 
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 import com.google.inject.Singleton;
 
@@ -23,7 +23,7 @@ public class TokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapp
 	@Override
 	protected String getMappedValue(int tokenType) {
 		if(tokenType == XtendDocumentTokenSource.JAVA_DOC_TOKEN_TYPE){
-			return DefaultHighlightingConfiguration.COMMENT_ID;
+			return HighlightingStyles.COMMENT_ID;
 		}
 		return super.getMappedValue(tokenType);
 	}
