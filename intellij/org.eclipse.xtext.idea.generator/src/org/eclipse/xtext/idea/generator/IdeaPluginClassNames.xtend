@@ -137,7 +137,16 @@ class IdeaPluginClassNames {
 		it.name.toPackageName+'.parser.antlr.internal.Internal'+it.name.toSimpleName+'Lexer'
 	}
 	
+	
+	def String getCompletionContributorSuperClass(Grammar it) {
+		usedGrammars.head?.completionContributor ?: 'org.eclipse.xtext.idea.completion.AbstractCompletionContributor'
+	}
+	
 	def String getCompletionContributor(Grammar it) {
 		basePackageName +'.completion.'+ name.toSimpleName+'CompletionContributor'
+	}
+	
+	def String getAbstractCompletionContributor(Grammar it) {
+		basePackageName +'.completion.Abstract'+ name.toSimpleName+'CompletionContributor'
 	}
 }
