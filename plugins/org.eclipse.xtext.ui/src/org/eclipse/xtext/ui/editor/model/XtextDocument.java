@@ -35,6 +35,7 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
@@ -471,8 +472,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 		 */
 		protected <T> T internalReadOnly(IUnitOfWork<T, XtextResource> work, boolean isCancelReaders) {
 			boolean isCancelable = work instanceof CancelableUnitOfWork;
-			if(isCancelReaders) 
+			if(isCancelReaders) {
+				if (Display.getCurrent() == null) {
+					log.error("Priority read only called from non UI-thread.", new IllegalStateException());
+				}
 				cancelReaders(resource);
+			}
 			XtextResource state = getState();
 			synchronized (getResourceLock()) {
 				acquireReadLock();
