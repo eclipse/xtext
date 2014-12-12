@@ -99,6 +99,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		ctx.writeFile(outlet_src, grammar.standaloneSetupIdea.toJavaPath, grammar.compileStandaloneSetup)
 		ctx.writeFile(outlet_src, grammar.ideaModuleName.toJavaPath, grammar.compileIdeaModule)
 		ctx.writeFile(outlet_src, grammar.completionContributor.toXtendPath, grammar.compileCompletionContributor)
+		ctx.writeFile(outlet_src_gen, grammar.abstractCompletionContributor.toJavaPath, grammar.compileAbstractCompletionContributor)
 		ctx.writeFile(outlet_src_gen, grammar.languageName.toJavaPath, grammar.compileLanguage)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeName.toJavaPath, grammar.compileFileType)
 		ctx.writeFile(outlet_src_gen, grammar.fileTypeFactoryName.toJavaPath, grammar.compileFileTypeFactory)
@@ -863,17 +864,36 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		'''
 	}
 	
-	def compileCompletionContributor(Grammar grammar) '''
-		package «grammar.completionContributor.toPackageName»
+	def compileAbstractCompletionContributor(Grammar grammar) '''
+		package «grammar.completionContributor.toPackageName»;
 
-		import «grammar.languageName»
-		import org.eclipse.xtext.idea.completion.AbstractCompletionContributor
+		import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
+		import «grammar.completionContributorSuperClass»;
 		
-		class «grammar.completionContributor.toSimpleName» extends AbstractCompletionContributor {
-			new() {
-				super(«grammar.languageName.toSimpleName».INSTANCE)
+		public class «grammar.abstractCompletionContributor.toSimpleName» extends «grammar.completionContributorSuperClass.toSimpleName» {
+			public «grammar.abstractCompletionContributor.toSimpleName»(AbstractXtextLanguage lang) {
+				super(lang);
 			}
 		}
+	'''
+	def compileCompletionContributor(Grammar grammar) '''
+		package «grammar.completionContributor.toPackageName»
+		
+		import org.eclipse.xtext.idea.lang.AbstractXtextLanguage;
+		import «grammar.languageName»;
+		
+		class «grammar.completionContributor.toSimpleName» extends «grammar.abstractCompletionContributor.toSimpleName» {
+			new() {
+				this(«grammar.languageName.toSimpleName».INSTANCE)
+			}
+			
+			new(AbstractXtextLanguage lang) {
+				super(lang)
+				//custom rules here
+			}
+		}
+		
+		
 	'''
 
 }
