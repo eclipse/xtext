@@ -20,7 +20,6 @@ import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFac
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.TextRegion;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

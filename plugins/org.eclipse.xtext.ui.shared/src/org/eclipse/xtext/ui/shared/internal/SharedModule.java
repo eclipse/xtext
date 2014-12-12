@@ -82,6 +82,7 @@ public class SharedModule extends AbstractModule {
 		this.context = context;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void configure() {
 		// TODO enable for 2.6 - https://bugs.eclipse.org/bugs/show_bug.cgi?id=423184
