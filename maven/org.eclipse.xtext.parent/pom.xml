@@ -55,8 +55,8 @@
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
-		<maven.compiler.source>1.5</maven.compiler.source>
-		<maven.compiler.target>1.5</maven.compiler.target>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
 		<mirroring.phase>prepare-package</mirroring.phase>
 		<skipMirroring>false</skipMirroring>
 		<!-- <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>  -->
