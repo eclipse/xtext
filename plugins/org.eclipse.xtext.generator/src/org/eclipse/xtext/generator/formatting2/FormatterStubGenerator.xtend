@@ -116,7 +116,7 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 		
 	def generateFormatMethod(EClass clazz, extension JavaEMFFile file, Collection<EReference> containmentRefs) '''
 		def dispatch void format(«clazz.importedGenTypeName» «clazz.toName», extension IFormattableDocument document) {
-			// TODO: format HiddenRegions around keywords, attribtues, cross references, etc. 
+			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
 					for («ref.EReferenceType.importedGenTypeName» «ref.name» : «clazz.toName».«ref.getAccessor»()) {
