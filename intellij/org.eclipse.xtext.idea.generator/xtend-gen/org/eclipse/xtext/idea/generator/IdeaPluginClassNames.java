@@ -285,9 +285,34 @@ public class IdeaPluginClassNames {
     return (_plus_1 + "Lexer");
   }
   
+  public String getCompletionContributorSuperClass(final Grammar it) {
+    String _elvis = null;
+    EList<Grammar> _usedGrammars = it.getUsedGrammars();
+    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
+    String _completionContributor = null;
+    if (_head!=null) {
+      _completionContributor=this.getCompletionContributor(_head);
+    }
+    if (_completionContributor != null) {
+      _elvis = _completionContributor;
+    } else {
+      _elvis = "org.eclipse.xtext.idea.completion.AbstractCompletionContributor";
+    }
+    return _elvis;
+  }
+  
   public String getCompletionContributor(final Grammar it) {
     String _basePackageName = this.getBasePackageName(it);
     String _plus = (_basePackageName + ".completion.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "CompletionContributor");
+  }
+  
+  public String getAbstractCompletionContributor(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".completion.Abstract");
     String _name = it.getName();
     String _simpleName = this.toSimpleName(_name);
     String _plus_1 = (_plus + _simpleName);
