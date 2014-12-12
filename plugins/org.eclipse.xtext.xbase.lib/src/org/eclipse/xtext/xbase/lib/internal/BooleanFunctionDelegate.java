@@ -36,6 +36,7 @@ import com.google.common.base.Predicate;
 		this.delegate = delegate;
 	}
 
+	@Override
 	public boolean apply(T input) {
 		Boolean result = delegate.apply(input);
 		return result.booleanValue();

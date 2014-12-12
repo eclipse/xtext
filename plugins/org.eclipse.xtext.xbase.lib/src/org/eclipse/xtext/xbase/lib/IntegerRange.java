@@ -30,6 +30,7 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * @return a read-only {@link ListIterator} for this.
 	 */
+	@Override
 	@Pure
 	public ListIterator<Integer> iterator() {
 		return new RangeIterator();
@@ -138,6 +139,7 @@ import com.google.common.annotations.GwtCompatible;
 		private int next = start;
 		private int nextIndex = 0;
 
+		@Override
 		public boolean hasNext() {
 			if (step < 0)
 				return next >= end;
@@ -145,6 +147,7 @@ import com.google.common.annotations.GwtCompatible;
 				return next <= end;
 		}
 
+		@Override
 		public Integer next() {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
@@ -155,10 +158,12 @@ import com.google.common.annotations.GwtCompatible;
 			return value;
 		}
 
+		@Override
 		public boolean hasPrevious() {
 			return nextIndex > 0;
 		}
 
+		@Override
 		public Integer previous() {
 			if (nextIndex <= 0)
 				throw new NoSuchElementException();
@@ -167,22 +172,27 @@ import com.google.common.annotations.GwtCompatible;
 			return next;
 		}
 
+		@Override
 		public int nextIndex() {
 			return nextIndex;
 		}
 
+		@Override
 		public int previousIndex() {
 			return nextIndex - 1;
 		}
 
+		@Override
 		public void remove() {
 			throw new UnsupportedOperationException("Cannot remove elements from a Range");
 		}
 
+		@Override
 		public void set(Integer e) {
 			throw new UnsupportedOperationException("Cannot set elements in a Range");
 		}
 
+		@Override
 		public void add(Integer e) {
 			throw new UnsupportedOperationException("Cannot add elements to a Range");
 		}

@@ -37,6 +37,7 @@ import com.google.common.base.Function;
 		this.delegate = delegate;
 	}
 
+	@Override
 	public R apply(P input) {
 		R result = delegate.apply(input);
 		return result;
