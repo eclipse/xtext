@@ -202,6 +202,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		return new WhitespaceReplacer(hiddens, formatting);
 	}
 
+	@Override
 	final public List<ITextReplacement> format(FormatterRequest request) {
 		try {
 			initalize(request);

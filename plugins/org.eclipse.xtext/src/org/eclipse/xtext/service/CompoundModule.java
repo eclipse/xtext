@@ -28,6 +28,7 @@ public class CompoundModule implements Module {
 		modules = Lists.newArrayList();
 	}
 	
+	@Override
 	public void configure(Binder binder) {
 		for (Module module : modules) {
 			try {

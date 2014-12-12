@@ -104,10 +104,12 @@ public class XtextResource extends ResourceImpl {
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
 		
+		@Override
 		public String getFragment(EObject obj) {
 			return XtextResource.super.getURIFragment(obj);
 		}
 		
+		@Override
 		public EObject getEObject(String fragment) {
 			return XtextResource.super.getEObject(fragment);
 		}

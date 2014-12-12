@@ -68,6 +68,7 @@ public class NfaUtil {
 			this.production = production;
 		}
 
+		@Override
 		public T apply(E from) {
 			return production.getToken(from);
 		}
@@ -81,6 +82,7 @@ public class NfaUtil {
 			this.sortBy = sortBy;
 		}
 
+		@Override
 		public int compare(S o1, S o2) {
 			COMPARABLE c1 = sortBy.get(o1);
 			if (c1 == null)
@@ -94,14 +96,17 @@ public class NfaUtil {
 
 	public static class NFAFactory<S> implements NfaFactory<Nfa<S>, S, S> {
 
+		@Override
 		public Nfa<S> create(S start, S stop) {
 			return new NFAImpl<S>(start, stop, Maps.<S, List<S>> newLinkedHashMap());
 		}
 
+		@Override
 		public S createState(Nfa<S> nfa, S token) {
 			return token;
 		}
 
+		@Override
 		public void setFollowers(Nfa<S> nfa, S owner, Iterable<S> followers) {
 			((NFAImpl<S>) nfa).followers.put(owner, Lists.newArrayList(followers));
 		}
@@ -119,15 +124,18 @@ public class NfaUtil {
 			this.followers = followers;
 		}
 
+		@Override
 		public List<S> getFollowers(S node) {
 			List<S> result = followers.get(node);
 			return result == null ? Collections.<S> emptyList() : result;
 		}
 
+		@Override
 		public S getStart() {
 			return start;
 		}
 
+		@Override
 		public S getStop() {
 			return stop;
 		}
@@ -289,6 +297,7 @@ public class NfaUtil {
 	public <S> Map<S, Integer> distanceToFinalStateMap(Nfa<S> nfa) {
 		final S stop = nfa.getStop();
 		return distanceToStateMap(nfa, new Predicate<S>() {
+			@Override
 			public boolean apply(S input) {
 				return stop == input;
 			}
@@ -301,6 +310,7 @@ public class NfaUtil {
 
 	public <S> boolean equalsIgnoreOrder(Nfa<S> nfa1, Nfa<S> nfa2) {
 		return equalsIgnoreOrder(nfa1, nfa2, new Function<S, Object>() {
+			@Override
 			public Object apply(S from) {
 				return from;
 			}
@@ -336,21 +346,25 @@ public class NfaUtil {
 	public <S> Nfa<S> filter(final Nfa<S> nfa, final Predicate<S> filter) {
 		return new Nfa<S>() {
 
+			@Override
 			public Set<S> getFollowers(final S node) {
 				final S start = nfa.getStart();
 				final S stop = nfa.getStop();
 				return filterFollowers(nfa, nfa.getFollowers(node), new Predicate<S>() {
+					@Override
 					public boolean apply(S input) {
 						return input == start || input == stop || filter.apply(input);
 					}
 				});
 			}
 
+			@Override
 			public S getStart() {
 				//				return filterFollowers(nfa, nfa.getStartStates(), filter);
 				return nfa.getStart();
 			}
 
+			@Override
 			public S getStop() {
 				//				return filterFinalStates(nfa, filter);
 				return nfa.getStop();

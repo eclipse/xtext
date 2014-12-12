@@ -33,6 +33,7 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 		return new TransformationDiagnostic(getNode(), message.getMessage(), lastError);
 	}
 
+	@Override
 	public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 		setTarget(element, null);
 		lastError = errorCode;

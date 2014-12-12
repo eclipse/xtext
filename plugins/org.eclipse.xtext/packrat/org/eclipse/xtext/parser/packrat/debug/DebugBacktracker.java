@@ -23,6 +23,7 @@ public class DebugBacktracker implements IBacktracker {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public IBacktrackingResult skipPreviousToken() {
 		if (log.isDebugEnabled()) {
 			log.debug("Trying to skip recently parsed optional token.");

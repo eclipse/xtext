@@ -15,6 +15,7 @@ import org.eclipse.xtext.Keyword;
  */
 public class KeywordSerializer extends AbstractKeywordSerializer {
 
+	@Override
 	public boolean isValid(EObject context, Keyword keyword, Object value, IErrorAcceptor errorAcceptor) {
 		return keyword.getValue().equals(value);
 	}

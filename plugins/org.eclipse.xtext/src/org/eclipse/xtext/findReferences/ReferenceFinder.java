@@ -57,6 +57,7 @@ public class ReferenceFinder implements IReferenceFinder {
 		return serviceProviderRegistry;
 	}
 	
+	@Override
 	public void findReferences(
 			TargetURIs targetURIs,
 			Set<URI> candidates,
@@ -112,6 +113,7 @@ public class ReferenceFinder implements IReferenceFinder {
 		}
 	}
 	
+	@Override
 	public void findReferences(TargetURIs targetURIs, Resource resource, Acceptor acceptor, IProgressMonitor monitor) {
 		for (EObject content : resource.getContents()) {
 			if (monitor.isCanceled()) {
@@ -121,6 +123,7 @@ public class ReferenceFinder implements IReferenceFinder {
 		}
 	}
 	
+	@Override
 	public void findReferences(final TargetURIs targetURIs, IResourceDescription resourceDescription,
 			IResourceAccess resourceAccess, final Acceptor acceptor, final IProgressMonitor monitor) {
 		final URI resourceURI = resourceDescription.getURI();
@@ -147,6 +150,7 @@ public class ReferenceFinder implements IReferenceFinder {
 		}
 	}
 	
+	@Override
 	public void findAllReferences(TargetURIs targetURIs, IResourceAccess resourceAccess,
 			IResourceDescriptions indexData, Acceptor acceptor, IProgressMonitor monitor) {
 		if (!targetURIs.isEmpty()) {

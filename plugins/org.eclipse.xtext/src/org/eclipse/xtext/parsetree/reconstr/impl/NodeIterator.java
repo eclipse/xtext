@@ -79,10 +79,12 @@ public class NodeIterator implements TreeIterator<INode> {
 		return findNextSibling(parent);
 	}
 
+	@Override
 	public boolean hasNext() {
 		return next != null;
 	}
 
+	@Override
 	public INode next() {
 		previous = current;
 		current = next;
@@ -101,10 +103,12 @@ public class NodeIterator implements TreeIterator<INode> {
 		return current;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void prune() {
 		if (current instanceof ICompositeNode) {
 			prunedComposites.add((ICompositeNode) current);

@@ -27,11 +27,13 @@ public interface ISemanticNodeProvider {
 	}
 
 	public class NullNodesForEObjectProvider implements INodesForEObjectProvider {
+		@Override
 		public INode getNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexAmongNonTransient,
 				Object value) {
 			return null;
 		}
 
+		@Override
 		public INode getNodeForSingelValue(EStructuralFeature feature, Object value) {
 			return null;
 		}

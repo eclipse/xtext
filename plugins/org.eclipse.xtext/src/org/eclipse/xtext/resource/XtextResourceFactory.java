@@ -15,6 +15,7 @@ public class XtextResourceFactory implements IResourceFactory {
 		this.provider = resourceProvider;
 	}
 	
+	@Override
 	public Resource createResource(URI uri) {
 		XtextResource xtextResource = provider.get();
 		xtextResource.setURI(uri);

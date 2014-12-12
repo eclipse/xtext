@@ -22,6 +22,7 @@ public class CharacterRange implements ICharacterClass {
 		this.max = max;
 	}
 	
+	@Override
 	public boolean matches(char candidate) {
 		return this.min <= candidate && this.max >= candidate;
 	}

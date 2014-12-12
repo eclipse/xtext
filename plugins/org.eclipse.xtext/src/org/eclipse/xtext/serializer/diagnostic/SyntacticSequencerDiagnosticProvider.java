@@ -27,6 +27,7 @@ import com.google.common.collect.Lists;
  */
 public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencerDiagnosticProvider {
 
+	@Override
 	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to) {
 		GrammarElementTitleSwitch fmt = new GrammarElementTitleSwitch().showAssignments().showQualified();
@@ -44,11 +45,13 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context, msg.toString());
 	}
 
+	@Override
 	public ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState,
 			AbstractElement target, RuleCallStack stack) {
 		return null;
 	}
 
+	@Override
 	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(EObject semanticObject, RuleCallStack stack,
 			RuleCall popped, ISynState toConsume) {
 		String poppedStr = popped == null ? "null" : new GrammarElementTitleSwitch().showAssignments().doSwitch(popped);

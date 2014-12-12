@@ -140,40 +140,48 @@ public interface IGrammarConstraintProvider {
 			this.root = root;
 		}
 
+		@Override
 		public Iterable<IConstraintElement> getAlternativeChildren(IConstraintElement ele) {
 			if (ele.getType() == ConstraintElementType.ALTERNATIVE)
 				return ele.getChildren();
 			return null;
 		}
 
+		@Override
 		public Iterable<IConstraintElement> getSequentialChildren(IConstraintElement ele) {
 			if (ele.getType() == ConstraintElementType.GROUP)
 				return ele.getChildren();
 			return null;
 		}
 
+		@Override
 		public AbstractElement getToken(IConstraintElement ele) {
 			if (ele.getType() != ConstraintElementType.ALTERNATIVE && ele.getType() != ConstraintElementType.GROUP)
 				return ele.getGrammarElement();
 			return null;
 		}
 
+		@Override
 		public Iterable<IConstraintElement> getUnorderedChildren(IConstraintElement ele) {
 			return null;
 		}
 
+		@Override
 		public boolean isMany(IConstraintElement ele) {
 			return ele.isMany();
 		}
 
+		@Override
 		public boolean isOptional(IConstraintElement ele) {
 			return ele.isOptional();
 		}
 
+		@Override
 		public IConstraintElement getParent(IConstraintElement ele) {
 			return ele.getContainer();
 		}
 
+		@Override
 		public IConstraintElement getRoot() {
 			return root.getBody();
 		}

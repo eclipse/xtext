@@ -22,6 +22,7 @@ public class DebugCharSequence implements CharSequence {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public char charAt(int index) {
 		char result = delegate.charAt(index);
 		if (log.isTraceEnabled()) {
@@ -30,10 +31,12 @@ public class DebugCharSequence implements CharSequence {
 		return result;
 	}
 
+	@Override
 	public int length() {
 		return delegate.length();
 	}
 
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		if (log.isTraceEnabled()) {
 			log.trace("subSequence(start = " + start + ", end = " + end + ")");

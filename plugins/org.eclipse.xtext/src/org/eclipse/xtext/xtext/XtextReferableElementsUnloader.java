@@ -28,6 +28,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class XtextReferableElementsUnloader implements IReferableElementsUnloader {
 
+	@Override
 	public void unloadRoot(EObject root) {
 		if (root instanceof Grammar)
 			caseGrammar((Grammar) root);

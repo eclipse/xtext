@@ -22,14 +22,17 @@ public class TextRegion implements ITextRegion {
 		this.length = length;
 	}
 
+	@Override
 	public int getOffset() {
 		return offset;
 	}
 
+	@Override
 	public int getLength() {
 		return length;
 	}
 
+	@Override
 	public ITextRegion merge(ITextRegion other) {
 		if (contains(other))
 			return this;
@@ -40,10 +43,12 @@ public class TextRegion implements ITextRegion {
 		return new TextRegion(newOffset, newLength);
 	}
 	
+	@Override
 	public boolean contains(ITextRegion other) {
 		return other == EMPTY_REGION || (other.getOffset() + other.getLength() <= offset + length && other.getOffset() >= offset); 
 	}
 
+	@Override
 	public boolean contains(int offset) {
 		return offset >= this.offset && offset < this.offset + length;
 	}

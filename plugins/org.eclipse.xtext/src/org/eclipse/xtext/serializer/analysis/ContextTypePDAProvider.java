@@ -119,6 +119,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 			this.type = type;
 		}
 
+		@Override
 		public FilterState enter(Pda<ISerState, RuleCall> pda, ISerState state, FilterState previous) {
 			switch (state.getType()) {
 				case ELEMENT:
@@ -156,6 +157,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 			return null;
 		}
 
+		@Override
 		public boolean isSolution(FilterState result) {
 			return true;
 		}
@@ -181,6 +183,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 		return contextTypePda;
 	}
 
+	@Override
 	public Pda<ISerState, RuleCall> getContextTypePDA(EObject context, EClass type) {
 		Pair<EObject, EClass> key = Tuples.create(context, type);
 		Pda<ISerState, RuleCall> result = cache.get(key);

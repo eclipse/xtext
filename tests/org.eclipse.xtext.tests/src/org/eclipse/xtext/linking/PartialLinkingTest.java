@@ -67,12 +67,14 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 		globalScopeProvider.setCache(IResourceScopeCache.NullImpl.INSTANCE);
 		final ResourceDescriptionsProvider provider = new ResourceDescriptionsProvider();
 		provider.setResourceDescriptions(new Provider<IResourceDescriptions>() {
+			@Override
 			public IResourceDescriptions get() {
 				return new IResourceDescriptions.NullImpl();
 			}
 		});
 		globalScopeProvider.setResourceDescriptionsProvider(provider);
 		globalScopeProvider.setLoadOnDemandDescriptions(new Provider<LoadOnDemandResourceDescriptions>() {
+			@Override
 			public LoadOnDemandResourceDescriptions get() {
 				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);
 			}
@@ -105,6 +107,7 @@ public class PartialLinkingTest extends AbstractXtextTests implements IScopeProv
 	/**
 	 * We try to emulate a changed scope after a partial parsing so we mock the ScopeService.
 	 */
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (doFakeScope && context == this.context && reference == this.reference)
 			return IScope.NULLSCOPE;

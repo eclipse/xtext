@@ -314,6 +314,7 @@ public class TreeConstState extends AbstractNFAState<TreeConstState, TreeConstTr
 	protected List<TypeRef> sortTypes(Collection<TypeRef> types) {
 		List<TypeRef> result = Lists.newArrayList(types);
 		Collections.sort(result, new Comparator<TypeRef>() {
+			@Override
 			public int compare(TypeRef o1, TypeRef o2) {
 				if (o1 == null)
 					return 1;

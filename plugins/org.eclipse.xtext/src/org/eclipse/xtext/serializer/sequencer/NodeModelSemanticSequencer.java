@@ -31,6 +31,7 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 	@Inject
 	protected IValueConverterService valueConverter;
 
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		SemanticNodeIterator ni = new SemanticNodeIterator(semanticObject);
 		while (ni.hasNext()) {

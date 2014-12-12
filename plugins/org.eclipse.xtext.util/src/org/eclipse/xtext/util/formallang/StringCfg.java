@@ -48,6 +48,7 @@ public class StringCfg extends StringProduction implements Cfg<ProdElement, Stri
 			throw new RuntimeException("Expected ID");
 	}
 
+	@Override
 	public ProdElement getCall(ProdElement ele) {
 		if (ele.name != null)
 			return rules.get(ele.name);

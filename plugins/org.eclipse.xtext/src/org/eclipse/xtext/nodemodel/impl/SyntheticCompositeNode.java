@@ -39,109 +39,135 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 		this.grammarElementIdx = grammarElementIdx;
 	}
 	
+	@Override
 	public ICompositeNode getParent() {
 		if (grammarElementIdx == 1)
 			return delegate;
 		return new SyntheticCompositeNode(delegate, grammarElementIdx - 1);
 	}
 	
+	@Override
 	public boolean hasSiblings() {
 		return false;
 	}
 
+	@Override
 	public boolean hasPreviousSibling() {
 		return false;
 	}
 
+	@Override
 	public boolean hasNextSibling() {
 		return false;
 	}
 
+	@Override
 	public INode getPreviousSibling() {
 		return null;
 	}
 
+	@Override
 	public INode getNextSibling() {
 		return null;
 	}
 
+	@Override
 	public ICompositeNode getRootNode() {
 		return delegate.getRootNode();
 	}
 
+	@Override
 	public int getTotalOffset() {
 		return delegate.getTotalOffset();
 	}
 	
+	@Override
 	public int getOffset() {
 		return delegate.getOffset();
 	}
 	
+	@Override
 	public int getLength() {
 		return delegate.getLength();
 	}
 	
+	@Override
 	public int getTotalStartLine() {
 		return delegate.getTotalStartLine();
 	}
 	
+	@Override
 	public int getEndLine() {
 		return delegate.getEndLine();
 	}
 	
+	@Override
 	public int getStartLine() {
 		return delegate.getStartLine();
 	}
 	
+	@Override
 	public int getTotalEndLine() {
 		return delegate.getTotalEndLine();
 	}
 
+	@Override
 	public int getTotalLength() {
 		return delegate.getTotalLength();
 	}
 
+	@Override
 	public int getTotalEndOffset() {
 		return delegate.getTotalEndOffset();
 	}
 
+	@Override
 	public String getText() {
 		return delegate.getText();
 	}
 
+	@Override
 	public EObject getGrammarElement() {
 		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
 		return array[grammarElementIdx];
 	}
 
+	@Override
 	public EObject getSemanticElement() {
 		return delegate.getSemanticElement();
 	}
 	
+	@Override
 	public boolean hasDirectSemanticElement() {
 		return false;
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage() {
 		return null;
 	}
 	
+	@Override
 	public BidiTreeIterable<INode> getAsTreeIterable() {
 		return this;
 	}
 
+	@Override
 	public BidiTreeIterator<INode> iterator() {
 		return new NodeTreeIterator(this);
 	}
 	
+	@Override
 	public Iterable<ILeafNode> getLeafNodes() {
 		return delegate.getLeafNodes();
 	}
 	
+	@Override
 	public BidiTreeIterable<INode> reverse() {
 		return new ReversedBidiTreeIterable<INode>(this);
 	}
 
+	@Override
 	public BidiIterable<INode> getChildren() {
 		if (hasChildren()) {
 			INode firstChild = getFirstChild();
@@ -154,6 +180,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 		return EmptyBidiIterable.instance();
 	}
 
+	@Override
 	public boolean hasChildren() {
 		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
 		if (array.length == grammarElementIdx + 1)
@@ -161,6 +188,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 		return true;
 	}
 
+	@Override
 	public INode getFirstChild() {
 		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
 		if (array.length == grammarElementIdx + 1)
@@ -168,6 +196,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 		return new SyntheticCompositeNode(delegate, grammarElementIdx + 1);
 	}
 
+	@Override
 	public INode getLastChild() {
 		EObject[] array = (EObject[]) delegate.basicGetGrammarElement();
 		if (array.length == grammarElementIdx + 1)
@@ -175,6 +204,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 		return new SyntheticCompositeNode(delegate, grammarElementIdx + 1);
 	}
 
+	@Override
 	public int getLookAhead() {
 		return delegate.getLookAhead();
 	}
@@ -197,6 +227,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public ITextRegion getTextRegion() {
 		return delegate.getTextRegion();
 	}
@@ -204,6 +235,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public ITextRegion getTotalTextRegion() {
 		return delegate.getTotalTextRegion();
 	}
@@ -211,6 +243,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public ITextRegionWithLineInformation getTextRegionWithLineInformation() {
 		return delegate.getTextRegionWithLineInformation();
 	}
@@ -218,6 +251,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public ITextRegionWithLineInformation getTotalTextRegionWithLineInformation() {
 		return delegate.getTotalTextRegionWithLineInformation();
 	}
@@ -225,6 +259,7 @@ public class SyntheticCompositeNode implements ICompositeNode, BidiTreeIterable<
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public int getEndOffset() {
 		return delegate.getEndOffset();
 	}

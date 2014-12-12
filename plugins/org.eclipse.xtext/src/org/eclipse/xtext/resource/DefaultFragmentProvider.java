@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public class DefaultFragmentProvider implements IFragmentProvider {
 	
+	@Override
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		return fallback.getFragment(obj);
 	}
 
+	@Override
 	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		return fallback.getEObject(fragment);
 	}

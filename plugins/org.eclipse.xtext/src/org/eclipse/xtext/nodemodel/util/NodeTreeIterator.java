@@ -33,6 +33,7 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		this.root = root;
 	}
 
+	@Override
 	public boolean hasNext() {
 		if (nextComputed)
 			return next != null;
@@ -54,6 +55,7 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		return next != null;
 	}
 
+	@Override
 	public INode next() {
 		if (next == null && !hasNext())
 			throw new NoSuchElementException();
@@ -71,6 +73,7 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		pruned = false;
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		if (previousComputed)
 			return previous != null;
@@ -92,6 +95,7 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		return previous != null;
 	}
 
+	@Override
 	public INode previous() {
 		if (previous == null && !hasPrevious())
 			throw new NoSuchElementException();
@@ -101,6 +105,7 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 		return lastPreviousReturned;
 	}
 	
+	@Override
 	public void prune() {
 		if (lastPreviousReturned == null && lastNextReturned == null)
 			throw new IllegalStateException("Cannot prune before #next or #previous");

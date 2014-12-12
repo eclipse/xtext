@@ -86,6 +86,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		Model model = (Model) getModelAndExpect("model a", 1);
 		ICompositeNode node = NodeModelUtils.getNode(model);
 		List<INode> syntaxErrors = Lists.newArrayList(Iterators.filter(node.getAsTreeIterable().iterator(), new Predicate<INode>() {
+			@Override
 			public boolean apply(INode input) {
 				return input.getSyntaxErrorMessage() != null;
 			}
@@ -95,6 +96,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		assertEquals(expectedMessage, error.getSyntaxErrorMessage().getMessage());
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
 		for(String tokenName: context.getTokenNames()) {
 			assertFalse(tokenName.startsWith("KEYWORD"));
@@ -104,6 +106,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		return syntaxErrorProvider.getSyntaxErrorMessage(context);
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
 		fail("Unexpected Invocation");
 		return null;

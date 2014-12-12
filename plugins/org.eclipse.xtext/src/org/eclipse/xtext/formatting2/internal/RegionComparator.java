@@ -25,6 +25,7 @@ public class RegionComparator<T> implements Comparator<T> {
 		return regionAccess;
 	}
 
+	@Override
 	public int compare(T t1, T t2) {
 		ITextRegion o1 = regionAccess.apply(t1);
 		ITextRegion o2 = regionAccess.apply(t2);

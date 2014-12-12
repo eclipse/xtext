@@ -21,6 +21,7 @@ public abstract class CancelableUnitOfWork<R,P> implements IUnitOfWork<R, P> {
 		this.cancelIndicator = cancelIndicator;
 	}
 	
+	@Override
 	public R exec(P state) throws Exception {
 		return exec(state, cancelIndicator);
 	}

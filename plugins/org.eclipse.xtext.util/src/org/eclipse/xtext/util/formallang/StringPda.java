@@ -34,10 +34,12 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 			this.nullState = nullState;
 		}
 
+		@Override
 		public StringPda create(T start, T stop) {
 			return new StringPda(tokenToStr(start, nullStart), tokenToStr(stop, nullStop));
 		}
 
+		@Override
 		public String createPop(StringPda pda, T token) {
 			String pop = tokenToStr(token, nullState);
 			String s = pop.startsWith("<<") ? pop : "<<" + pop;
@@ -45,6 +47,7 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 			return s;
 		}
 
+		@Override
 		public String createPush(StringPda pda, T token) {
 			String push = tokenToStr(token, nullState);
 			String s = push.startsWith(">>") ? push : ">>" + push;
@@ -52,10 +55,12 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 			return s;
 		}
 
+		@Override
 		public String createState(StringPda pda, T token) {
 			return tokenToStr(token, nullState);
 		}
 
+		@Override
 		public void setFollowers(StringPda pda, String owner, Iterable<String> followers) {
 			pda.state(owner).followedBy(Iterables.toArray(followers, String.class));
 		}
@@ -106,10 +111,12 @@ public class StringPda extends StringNfa implements Pda<String, String> {
 		super(start, stop);
 	}
 
+	@Override
 	public String getPop(String state) {
 		return pops.get(state);
 	}
 
+	@Override
 	public String getPush(String state) {
 		return pushs.get(state);
 	}

@@ -17,6 +17,7 @@ public class NegatedUriFilter implements UriFilter {
 
 	private UriFilter uriFilter;
 	
+	@Override
 	public boolean matches(URI uri) {
 		return !getUriFilter().matches(uri);
 	}

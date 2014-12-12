@@ -37,6 +37,7 @@ public class DefaultForwardNFAProvider extends AbstractNFAProvider<DefaultNFASta
 			return false;
 		}
 
+		@Override
 		public NFADirection getDirection() {
 			return NFADirection.FORWARD;
 		}

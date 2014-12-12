@@ -102,24 +102,29 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 
 	private final InternalData data = new InternalData();
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
 		if (uri == null)
 			return null;
 		return data.getServiceProvider(uri, contentType);
 	}
 
+	@Override
 	public Map<String, Object> getContentTypeToFactoryMap() {
 		return data.getContentTypeToFactoryMap();
 	}
 
+	@Override
 	public Map<String, Object> getExtensionToFactoryMap() {
 		return data.getExtensionToFactoryMap();
 	}
 
+	@Override
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return data.getProtocolToFactoryMap();
 	}
 
+	@Override
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}

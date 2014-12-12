@@ -27,6 +27,7 @@ public interface IQualifiedNameProvider extends Function<EObject, QualifiedName>
 	QualifiedName getFullyQualifiedName(EObject obj);
 
 	abstract class AbstractImpl implements IQualifiedNameProvider {
+		@Override
 		public QualifiedName apply(EObject from) {
 			return getFullyQualifiedName(from);
 		}

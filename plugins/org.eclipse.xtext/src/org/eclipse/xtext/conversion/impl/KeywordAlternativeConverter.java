@@ -36,6 +36,7 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 	private IValueConverterService delegateService;
 	private IValueConverter<Object> delegateConverter;
 
+	@Override
 	public String toValue(String string, INode node) throws ValueConverterException {
 		if (keywords.contains(string))
 			return string;
@@ -43,6 +44,7 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 		return result;
 	}
 
+	@Override
 	public String toString(String value) throws ValueConverterException {
 		if (keywords.contains(value))
 			return value;
@@ -60,10 +62,12 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 			final String ruleName = delegateRule.getName();
 			return delegateConverter = new IValueConverter<Object>() {
 
+				@Override
 				public Object toValue(String string, INode node) throws ValueConverterException {
 					return delegateService.toValue(string, ruleName, node);
 				}
 
+				@Override
 				public String toString(Object value) throws ValueConverterException {
 					return delegateService.toString(value, ruleName);
 				}
@@ -80,6 +84,7 @@ public class KeywordAlternativeConverter extends AbstractValueConverter<String> 
 	 * @throws IllegalArgumentException if the rule is not a datatype rule or does not fulfill
 	 *   the pattern <pre>RuleName: 'keyword' | 'other';</pre>
 	 */
+	@Override
 	public void setRule(AbstractRule rule) {
 		if (!GrammarUtil.isDatatypeRule(rule))
 			throw new IllegalArgumentException(rule.getName() + " is not a data type rule");

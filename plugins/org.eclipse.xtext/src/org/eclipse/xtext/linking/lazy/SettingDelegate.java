@@ -25,26 +25,32 @@ public class SettingDelegate implements EStructuralFeature.Setting {
 		this.delegate = delegate;
 	}
 
+	@Override
 	public Object get(boolean resolve) {
 		return delegate.get(resolve);
 	}
 
+	@Override
 	public EObject getEObject() {
 		return delegate.getEObject();
 	}
 
+	@Override
 	public EStructuralFeature getEStructuralFeature() {
 		return delegate.getEStructuralFeature();
 	}
 
+	@Override
 	public boolean isSet() {
 		return delegate.isSet();
 	}
 
+	@Override
 	public void set(Object newValue) {
 		delegate.set(newValue);
 	}
 
+	@Override
 	public void unset() {
 		delegate.unset();
 	}

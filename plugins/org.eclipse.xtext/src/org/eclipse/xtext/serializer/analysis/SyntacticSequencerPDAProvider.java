@@ -65,10 +65,12 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.navigable = navigable;
 		}
 
+		@Override
 		public ISynState getStop() {
 			return navigable.getTarget();
 		}
 
+		@Override
 		public Iterable<ISynState> getFollowers(ISynState node) {
 			if (node instanceof ISynAbsorberState) {
 				if (navigable instanceof ISynTransition && ((ISynTransition) navigable).getSource() == node)
@@ -78,16 +80,19 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return node.getFollowers();
 		}
 
+		@Override
 		public RuleCall getPop(ISynState state) {
 			return state.getType() == SynStateType.UNASSIGNED_PARSER_RULE_EXIT ? (RuleCall) state.getGrammarElement()
 					: null;
 		}
 
+		@Override
 		public RuleCall getPush(ISynState state) {
 			return state.getType() == SynStateType.UNASSIGNED_PARSER_RULE_ENTER ? (RuleCall) state.getGrammarElement()
 					: null;
 		}
 
+		@Override
 		public ISynState getStart() {
 			if (navigable instanceof ISynTransition)
 				return ((ISynTransition) navigable).getSource();
@@ -130,24 +135,29 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		}
 
+		@Override
 		public EObject getContext() {
 			return context;
 		}
 
+		@Override
 		public EClass getEClass() {
 			return eClass;
 		}
 
+		@Override
 		public List<ISynTransition> getOutTransitions() {
 			List<ISynTransition> result = Lists.newArrayList();
 			result.addAll(outTransitionsByElement.values());
 			return result;
 		}
 
+		@Override
 		public Map<AbstractElement, ISynTransition> getOutTransitionsByElement() {
 			return outTransitionsByElement;
 		}
 
+		@Override
 		public List<ISynAbsorberState> getOutAbsorbers() {
 			return outAbsorber;
 		}
@@ -183,26 +193,32 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.target = target;
 		}
 
+		@Override
 		public EObject getContext() {
 			return target.getContext();
 		}
 
+		@Override
 		public EClass getEClass() {
 			return target.getEClass();
 		}
 
+		@Override
 		public Pda<ISynState, RuleCall> getPathToTarget() {
 			return new NavigablePDA(this);
 		}
 
+		@Override
 		public List<ISynState> getShortestPathTo(final AbstractElement ele, RuleCallStack stack) {
 			return shortestPathTo(stack.iterator(), new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele;
 				}
 			}, true);
 		}
 
+		@Override
 		public List<ISynState> getShortestPathToAbsorber(RuleCallStack stack) {
 			if (involvesRuleExit())
 				return shortestPathTo(stack.iterator(), Predicates.<ISynState> equalTo(getTarget()), false);
@@ -212,14 +228,17 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return shortestPathToAbsorber;
 		}
 
+		@Override
 		public List<ISynState> getShortestStackpruningPathTo(final AbstractElement ele, RuleCallStack stack) {
 			return shortestStackpruningPathTo(stack.iterator(), new Predicate<ISynState>() {
+				@Override
 				public boolean apply(ISynState input) {
 					return input.getGrammarElement() == ele;
 				}
 			}, true);
 		}
 
+		@Override
 		public List<ISynState> getShortestStackpruningPathToAbsorber(RuleCallStack stack) {
 			if (involvesRuleExit())
 				return shortestStackpruningPathTo(stack.iterator(), Predicates.<ISynState> equalTo(getTarget()), false);
@@ -229,10 +248,12 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return shortestPathToAbsorber;
 		}
 
+		@Override
 		public ISynAbsorberState getTarget() {
 			return target;
 		}
 
+		@Override
 		public boolean hasEmitters() {
 			if (getFollowers().size() == 1 && getFollowers().get(0) instanceof ISynAbsorberState)
 				return false;
@@ -264,6 +285,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return involvesRuleExit;
 		}
 
+		@Override
 		public boolean involvesUnassignedTokenRuleCalls() {
 			if (involvesUnassignedTokenRuleCalls == null)
 				involvesUnassignedTokenRuleCalls = involves(EnumSet.of(SynStateType.UNASSIGNED_DATATYPE_RULE_CALL,
@@ -271,6 +293,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return involvesUnassignedTokenRuleCalls;
 		}
 
+		@Override
 		public boolean isSyntacticallyAmbiguous() {
 			if (syntacticallyAmbiguous == null)
 				syntacticallyAmbiguous = isSyntacticallyAmbiguous(followers);
@@ -370,14 +393,17 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			followers.addAll(follower);
 		}
 
+		@Override
 		public List<ISynState> getFollowers() {
 			return followers;
 		}
 
+		@Override
 		public AbstractElement getGrammarElement() {
 			return element;
 		}
 
+		@Override
 		public SynStateType getType() {
 			return type;
 		}
@@ -391,6 +417,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return toString(new GrammarElementTitleSwitch().showAssignments().showQualified());
 		}
 
+		@Override
 		public String toString(Function<AbstractElement, String> elementFormatter) {
 			if (type == null)
 				return "(type is null)";
@@ -414,6 +441,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	protected static class SynTransition extends SynNavigable implements ISynTransition {
 
 		private final static class Filter implements Predicate<ISynState> {
+			@Override
 			public boolean apply(ISynState input) {
 				AbstractElement ge = input.getGrammarElement();
 				return ge instanceof Keyword || GrammarUtil.isDatatypeRuleCall(ge) || GrammarUtil.isEnumRuleCall(ge)
@@ -434,6 +462,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.source = source;
 		}
 
+		@Override
 		public AbstractElementAlias getAmbiguousSyntax() {
 			if (ambiguousSyntax != UNINITIALIZED)
 				return ambiguousSyntax;
@@ -459,6 +488,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return ambiguousSyntax;
 		}
 
+		@Override
 		public List<AbstractElementAlias> getAmbiguousSyntaxes() {
 			if (ambiguousSyntaxes != null)
 				return ambiguousSyntaxes;
@@ -484,6 +514,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return new NfaToProduction().nfaToGrammar(path, new GetGrammarElement(), new GrammarAliasFactory());
 		}
 
+		@Override
 		public ISynAbsorberState getSource() {
 			return source;
 		}
@@ -594,6 +625,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return new SynTransition(source, target);
 	}
 
+	@Override
 	public ISynAbsorberState getPDA(EObject context, EClass type) {
 		//		SequencerPDAContext ctx = new SequencerPDAContext(context, type);
 		Pair<EObject, EClass> key = Tuples.create(context, type);

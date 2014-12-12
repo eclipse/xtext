@@ -32,6 +32,7 @@ public interface IUnitOfWork<R,P> {
 	 * @param <T>
 	 */
 	public static abstract class Void<T> implements IUnitOfWork<Object,T> {
+		@Override
 		public final Object exec(T state) throws Exception {
 			process(state);
 			return null;

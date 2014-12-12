@@ -32,10 +32,12 @@ public class SingletonBidiIterator<T> extends UnmodifiableIterator<T> implements
 		donePrevious = false;
 	}
 
+	@Override
 	public boolean hasNext() {
 		return !doneNext;
 	}
 
+	@Override
 	public T next() {
 		if (doneNext) {
 			throw new NoSuchElementException();
@@ -45,10 +47,12 @@ public class SingletonBidiIterator<T> extends UnmodifiableIterator<T> implements
 		return value;
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		return !donePrevious;
 	}
 
+	@Override
 	public T previous() {
 		if (donePrevious) {
 			throw new NoSuchElementException();

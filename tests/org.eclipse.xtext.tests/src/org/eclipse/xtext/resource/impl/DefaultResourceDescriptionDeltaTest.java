@@ -50,14 +50,17 @@ public class DefaultResourceDescriptionDeltaTest extends Assert {
 		
 		public Set<QualifiedName> imported = Sets.newHashSet();
 
+		@Override
 		public Iterable<QualifiedName> getImportedNames() {
 			return imported;
 		}
 
+		@Override
 		public URI getURI() {
 			return URI.createURI("foo://test");
 		}
 
+		@Override
 		public Iterable<IReferenceDescription> getReferenceDescriptions() {
 			return Collections.emptyList();
 		}

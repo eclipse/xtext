@@ -21,6 +21,7 @@ public interface IStratumBreakpointSupport {
 	
 	public static class DefaultImpl implements IStratumBreakpointSupport {
 
+		@Override
 		public boolean isValidLineForBreakPoint(XtextResource resource, int line) {
 			return false;
 		}

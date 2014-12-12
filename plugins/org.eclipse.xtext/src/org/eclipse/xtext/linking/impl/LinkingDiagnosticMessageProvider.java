@@ -20,6 +20,7 @@ import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
  */
 public class LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessageProvider.Extended {
 
+	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
 		EClass referenceType = context.getReference().getEReferenceType();
 		String linkText = "";
@@ -32,16 +33,19 @@ public class LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessa
 		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
+	@Override
 	public DiagnosticMessage getIllegalNodeMessage(ILinkingDiagnosticContext context, IllegalNodeException ex) {
 		String message = ex.getMessage();
 		return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
+	@Override
 	public DiagnosticMessage getIllegalCrossReferenceMessage(ILinkingDiagnosticContext context, CrossReference reference) {
 		String message = "Cannot find reference " + reference;
 		return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
+	@Override
 	public DiagnosticMessage getViolatedBoundsConstraintMessage(ILinkingDiagnosticContext context, int size) {
 		String message = "Too many matches for reference to '" + context.getLinkText() + "'. " 
 				+ "Feature " + context.getReference().getName() + " can only hold " + context.getReference().getUpperBound()
@@ -50,6 +54,7 @@ public class LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessa
 		return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 
+	@Override
 	public DiagnosticMessage getViolatedUniqueConstraintMessage(ILinkingDiagnosticContext context) {
 		String message = "Cannot refer to '" + context.getLinkText() + "' more than once.";
 		return new DiagnosticMessage(message, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);

@@ -22,6 +22,7 @@ public class SetBasedKeywordMatcher implements ISequenceMatcher {
 		this.keywords = new HashSet<String>(Arrays.asList(keywords));
 	}
 	
+	@Override
 	public boolean matches(CharSequence input, int offset, int length) {
 		return keywords.contains(input.subSequence(offset, offset + length).toString());
 	}

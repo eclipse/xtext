@@ -68,6 +68,7 @@ public class GrammarResource extends DerivedStateAwareResource {
 	 */
 	public static class LinkingTrigger implements IDerivedStateComputer {
 
+		@Override
 		public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
 			if (preLinkingPhase)
 				return;
@@ -75,6 +76,7 @@ public class GrammarResource extends DerivedStateAwareResource {
 			castedResource.superDoLinking();
 		}
 
+		@Override
 		public void discardDerivedState(DerivedStateAwareResource resource) {
 		}
 		

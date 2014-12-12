@@ -29,11 +29,13 @@ public class TypedPreferenceValues implements ITypedPreferenceValues {
 		return delegate;
 	}
 
+	@Override
 	public String getPreference(PreferenceKey key) {
 		String string = delegate.getPreference(key);
 		return string;
 	}
 
+	@Override
 	public <T> T getPreference(TypedPreferenceKey<T> key) {
 		String string = delegate.getPreference(key);
 		T result = key.toValue(string);

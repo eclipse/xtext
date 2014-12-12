@@ -34,6 +34,7 @@ public class Stopwatches {
 			this.numbers = numbers;
 		}
 		
+		@Override
 		public void start() {
 			if (!isRunning())
 				lastStart = System.currentTimeMillis();
@@ -44,6 +45,7 @@ public class Stopwatches {
 			return lastStart != notRunning;
 		}
 		
+		@Override
 		public void stop() {
 			if (isRunning()) {
 				reentrant--;
@@ -81,7 +83,9 @@ public class Stopwatches {
 	private static Map<String, NumbersForTask> data = newLinkedHashMap();
 	private static boolean enabled = false;
 	private static StoppedTask NULLIMPL = new StoppedTask() {
+		@Override
 		public void start() {}
+		@Override
 		public void stop() {}
 	};
 	

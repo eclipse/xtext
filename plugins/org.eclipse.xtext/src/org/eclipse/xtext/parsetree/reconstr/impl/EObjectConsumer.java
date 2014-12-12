@@ -70,6 +70,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		this.multiFeatures = multi;
 	}
 
+	@Override
 	public IEObjectConsumer cloneAndConsume(String featureName) {
 		EStructuralFeature feature = getFeature(featureName);
 		int[] consumedFeatureId = new int[nextFeatureId.length];
@@ -83,6 +84,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		return nextID(feature, feature.isMany() ? ((List<?>) described.eGet(feature)).size() : 1);
 	}
 
+	@Override
 	public Object getConsumable(String featureName, boolean allowDefault) {
 		EStructuralFeature feature = getFeature(featureName);
 		if (feature != null && isConsumable(feature, allowDefault)) {
@@ -96,6 +98,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		return null;
 	}
 
+	@Override
 	public EObject getEObject() {
 		return described;
 	}
@@ -104,6 +107,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		return described.eClass().getEStructuralFeature(feature);
 	}
 
+	@Override
 	public Map<EStructuralFeature, Integer> getUnconsumed() {
 		Map<EStructuralFeature, Integer> feature2FeatureId = new LinkedHashMap<EStructuralFeature, Integer>();
 		EList<EStructuralFeature> features = described.eClass().getEAllStructuralFeatures();
@@ -118,6 +122,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		return nextFeatureId[described.eClass().getFeatureID(feature)] > ((allowDefault && !feature.isMany()) ? -2 : -1);
 	}
 
+	@Override
 	public boolean isConsumed() {
 		for (int i = 0; i < nextFeatureId.length; i++)
 			if (nextFeatureId[i] > -1)
@@ -125,6 +130,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		return true;
 	}
 
+	@Override
 	public boolean isConsumedWithLastConsumtion(String featureName) {
 		EStructuralFeature feature = getFeature(featureName);
 		int featureId = described.eClass().getFeatureID(feature);
@@ -134,6 +140,7 @@ public class EObjectConsumer implements IEObjectConsumer {
 		return true;
 	}
 
+	@Override
 	public boolean isInstanceOf(EClassifier classifier) {
 		if (!(classifier instanceof EClass))
 			return false;

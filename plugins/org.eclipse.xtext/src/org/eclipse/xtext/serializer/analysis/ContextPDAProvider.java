@@ -39,6 +39,7 @@ import com.google.inject.Singleton;
 public class ContextPDAProvider implements IContextPDAProvider {
 
 	protected class ExpandRuleCalls implements Function<ISerState, Pda<ISerState, RuleCall>> {
+		@Override
 		public Pda<ISerState, RuleCall> apply(ISerState input) {
 			if (GrammarUtil.isUnassignedParserRuleCall(input.getGrammarElement()))
 				return getContextPDA((((RuleCall) input.getGrammarElement()).getRule()));
@@ -195,6 +196,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		return pdaUtil.filterOrphans(pda, new SerializerPDACloneFactory());
 	}
 
+	@Override
 	public Pda<ISerState, RuleCall> getContextPDA(EObject context) {
 		Pda<ISerState, RuleCall> result = cache.get(context);
 		if (result == null)

@@ -25,18 +25,22 @@ public class DelegatingIAllContainerAdapter extends AdapterImpl implements IAllC
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public boolean isEmpty(String containerHandle) {
 		return delegate.isEmpty(containerHandle);
 	}
 
+	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		return delegate.getVisibleContainerHandles(handle);
 	}
 
+	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		return delegate.getContainedURIs(containerHandle);
 	}
 
+	@Override
 	public String getContainerHandle(URI uri) {
 		return delegate.getContainerHandle(uri);
 	}

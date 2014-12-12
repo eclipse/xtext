@@ -47,6 +47,7 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		return Iterables.filter(unfiltered, new Predicate<IEObjectDescription>() {
 			private Collection<URI> contents = null;
 
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				if(contents == null) {
 					contents = state.getContents();

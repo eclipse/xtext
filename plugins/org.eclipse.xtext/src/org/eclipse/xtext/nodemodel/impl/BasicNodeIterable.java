@@ -15,18 +15,22 @@ public class BasicNodeIterable implements BidiIterable<AbstractNode> {
 		this.startWith = startWith;
 	}
 
+	@Override
 	public BidiIterator<AbstractNode> iterator() {
 		return new BasicNodeIterator(startWith);
 	}
 	
+	@Override
 	public BidiIterable<AbstractNode> reverse() {
 		return new BidiIterable<AbstractNode>() {
 
+			@Override
 			public BidiIterator<AbstractNode> iterator() {
 				BidiIterator<AbstractNode> delegate = BasicNodeIterable.this.iterator(); 
 				return new ReversedBidiIterator<AbstractNode>(delegate);
 			}
 
+			@Override
 			public BidiIterable<AbstractNode> reverse() {
 				return BasicNodeIterable.this;
 			}

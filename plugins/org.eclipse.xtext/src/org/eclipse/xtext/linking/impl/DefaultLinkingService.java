@@ -104,6 +104,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	 * @return the first element returned from the injected {@link IScopeProvider} which matches the text of the passed
 	 *         {@link INode node}
 	 */
+	@Override
 	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node)
 			throws IllegalNodeException {
 		final EClass requiredType = ref.getEReferenceType();

@@ -55,10 +55,12 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 				errorAcceptor);
 	}
 
+	@Override
 	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		init(this, sequenceAcceptor, errorAcceptor);
 	}
 
+	@Override
 	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor) {
 		this.masterSequencer = sequencer;

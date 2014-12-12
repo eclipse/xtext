@@ -47,6 +47,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 			this.result = result;
 		}
 
+		@Override
 		public void accept(Issue issue) {
 			if (issue != null)
 				result.add(issue);
@@ -64,6 +65,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	@Inject
 	private OperationCanceledManager operationCanceledManager;
 	
+	@Override
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
 		StoppedTask task = Stopwatches.forTask("ResourceValidatorImpl.validation");
 		try {

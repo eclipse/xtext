@@ -15,6 +15,7 @@ public class ReversedBidiTreeIterator<T> extends ReversedBidiIterator<T> impleme
 		super(delegate);
 	}
 
+	@Override
 	public void prune() {
 		getDelegate().prune();
 	}

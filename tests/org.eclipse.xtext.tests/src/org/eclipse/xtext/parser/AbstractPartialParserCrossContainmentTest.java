@@ -83,6 +83,7 @@ public abstract class AbstractPartialParserCrossContainmentTest extends Abstract
 	protected void replaceAndReparse(String model, int offset, int length, String inserted, boolean expectSameRoot) throws Exception {
 		final XtextResource resource = getResourceFromString(model);
 		resource.setUnloader(new IReferableElementsUnloader() {
+			@Override
 			public void unloadRoot(EObject root) {
 				InternalEObject internalEObject = (InternalEObject) root;
 				internalEObject.eSetProxyURI(resource.getURI().appendFragment(resource.getURIFragment(internalEObject)));

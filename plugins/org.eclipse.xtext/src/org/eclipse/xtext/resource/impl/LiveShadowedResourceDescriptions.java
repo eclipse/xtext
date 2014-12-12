@@ -66,6 +66,7 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		Iterable<IResourceDescription> notInLiveResourceSet = Iterables.filter(globalDescriptions.getAllResourceDescriptions(), new Predicate<IResourceDescription>() {
+			@Override
 			public boolean apply(IResourceDescription input) {
 				return !isExistingOrRenamedResourceURI(input.getURI());
 			}
@@ -110,6 +111,7 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return Iterables.concat(Iterables.transform(getAllResourceDescriptions(), new Function<ISelectable, Iterable<IEObjectDescription>>() {
+			@Override
 			public Iterable<IEObjectDescription> apply(ISelectable from) {
 				if (from != null)
 					return from.getExportedObjects();
@@ -128,6 +130,7 @@ public class LiveShadowedResourceDescriptions extends ResourceSetBasedResourceDe
 	protected Iterable<IEObjectDescription> joinIterables(Iterable<IEObjectDescription> liveDescriptions,
 			Iterable<IEObjectDescription> persistentDescriptions) {
 		Iterable<IEObjectDescription> filteredPersistent = Iterables.filter(persistentDescriptions, new Predicate<IEObjectDescription>() {
+			@Override
 			public boolean apply(IEObjectDescription input) {
 				URI resourceURI = input.getEObjectURI().trimFragment();
 				if (isExistingOrRenamedResourceURI(resourceURI))

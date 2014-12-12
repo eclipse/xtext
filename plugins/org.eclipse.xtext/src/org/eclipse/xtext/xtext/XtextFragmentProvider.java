@@ -25,6 +25,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class XtextFragmentProvider implements IFragmentProvider {
 
+	@Override
 	public EObject getEObject(Resource resource, String fragment, IFragmentProvider.Fallback fallback) {
 		if (!fragment.startsWith(PREFIX))
 			return fallback.getEObject(fragment);
@@ -53,6 +54,7 @@ public class XtextFragmentProvider implements IFragmentProvider {
 		}
 	}
 
+	@Override
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof Grammar) {
 			return caseGrammar((Grammar)obj);

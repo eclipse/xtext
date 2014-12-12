@@ -27,6 +27,7 @@ import com.google.common.collect.Lists;
  */
 public class Context2NameFunction implements Function<EObject, String> {
 
+	@Override
 	public String apply(EObject from) {
 		return getContextName(from);
 	}

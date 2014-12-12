@@ -67,6 +67,7 @@ public class TypeFinderNFAProvider extends AbstractNFAProvider<TypeFinderState, 
 			return true;
 		}
 
+		@Override
 		public NFADirection getDirection() {
 			return NFADirection.BACKWARD;
 		}

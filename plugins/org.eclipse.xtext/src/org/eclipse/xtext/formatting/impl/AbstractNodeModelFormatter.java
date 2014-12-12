@@ -30,20 +30,24 @@ public abstract class AbstractNodeModelFormatter implements INodeModelFormatter 
 			this.offset = offset;
 		}
 
+		@Override
 		public String getFormattedText() {
 			return formattedText;
 		}
 
+		@Override
 		public int getLength() {
 			return lengt;
 		}
 
+		@Override
 		public int getOffset() {
 			return offset;
 		}
 
 	}
 
+	@Override
 	public IFormattedRegion format(ICompositeNode root, int offset, int length) {
 		return null;
 	}

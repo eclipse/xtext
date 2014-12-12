@@ -33,6 +33,7 @@ public class MapBasedPreferenceValues implements ITypedPreferenceValues, IPrefer
 		return delegate;
 	}
 
+	@Override
 	public String getPreference(PreferenceKey key) {
 		String value = values.get(key.getId());
 		if (value != null)
@@ -42,12 +43,14 @@ public class MapBasedPreferenceValues implements ITypedPreferenceValues, IPrefer
 		return key.getDefaultValue();
 	}
 
+	@Override
 	public <T> T getPreference(TypedPreferenceKey<T> key) {
 		String string = getPreference((PreferenceKey) key);
 		T result = key.toValue(string);
 		return result;
 	}
 
+	@Override
 	public IPreferenceValues getPreferenceValues(Resource context) {
 		return this;
 	}

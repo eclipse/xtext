@@ -21,6 +21,7 @@ public class ResourceServiceProvideRegistryTest {
 	@Test
 	public void testUninstallBadProvider() {
 		final IResourceServiceProvider.Provider provider = new IResourceServiceProvider.Provider() {
+			@Override
 			public IResourceServiceProvider get(URI uri, String contentType) {
 				throw new NullPointerException();
 			}

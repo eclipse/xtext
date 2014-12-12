@@ -30,6 +30,7 @@ public abstract class AbstractTextReplacer implements ITextReplacer {
 		return document;
 	}
 
+	@Override
 	public ITextSegment getRegion() {
 		return region;
 	}

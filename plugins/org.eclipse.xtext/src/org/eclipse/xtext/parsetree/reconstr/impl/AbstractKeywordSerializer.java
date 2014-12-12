@@ -18,22 +18,26 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IKeywordSerializer;
  */
 public abstract class AbstractKeywordSerializer implements IKeywordSerializer {
 
+	@Override
 	public String serializeAssignedKeyword(EObject context, Keyword keyword, Object value, INode node) {
 		if (node != null && node.getGrammarElement() == keyword)
 			return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
 		return keyword.getValue();
 	}
 
+	@Override
 	public String serializeUnassignedKeyword(EObject context, Keyword keyword, INode node) {
 		if (node != null && node.getGrammarElement() == keyword)
 			return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
 		return keyword.getValue();
 	}
 	
+	@Override
 	public boolean equalsOrReplacesNode(EObject context, Keyword keyword, INode node) {
 		return node.getGrammarElement() == keyword;
 	}
 
+	@Override
 	public boolean equalsOrReplacesNode(EObject context, Keyword keyword, Object value, INode node) {
 		return node.getGrammarElement() == keyword;
 	}

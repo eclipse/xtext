@@ -39,16 +39,19 @@ public class StringNfa implements Nfa<String> {
 			this.nullState = nullState;
 		}
 
+		@Override
 		public StringNfa create(Object start, Object stop) {
 			String starts = start != null ? start.toString() : nullStart;
 			String stops = stop != null ? stop.toString() : nullStop;
 			return new StringNfa(starts, stops);
 		}
 
+		@Override
 		public String createState(StringNfa nfa, Object token) {
 			return token != null ? token.toString() : nullState;
 		}
 
+		@Override
 		public void setFollowers(StringNfa nfa, String owner, Iterable<String> followers) {
 			nfa.state(owner).followedBy(Iterables.toArray(followers, String.class));
 		}
@@ -79,14 +82,17 @@ public class StringNfa implements Nfa<String> {
 		this.stop = stop;
 	}
 
+	@Override
 	public Iterable<String> getFollowers(String state) {
 		return followers.get(state);
 	}
 
+	@Override
 	public String getStart() {
 		return start;
 	}
 
+	@Override
 	public String getStop() {
 		return stop;
 	}

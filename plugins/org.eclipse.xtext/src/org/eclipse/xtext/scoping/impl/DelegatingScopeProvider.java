@@ -33,6 +33,7 @@ public class DelegatingScopeProvider extends AbstractScopeProvider implements ID
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider delegate;
 	
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		return delegateGetScope(context, reference);
 	}
@@ -45,6 +46,7 @@ public class DelegatingScopeProvider extends AbstractScopeProvider implements ID
 		this.delegate = delegate;
 	}
 
+	@Override
 	public IScopeProvider getDelegate() {
 		return delegate;
 	}

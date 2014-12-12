@@ -40,6 +40,7 @@ public abstract class AbstractGenericResourceSupport implements IWorkflowCompone
 	@Inject
 	private IResourceServiceProvider.Registry registry;
 
+	@Override
 	public void preInvoke() {
 		registerServices(true);
 	}
@@ -90,9 +91,11 @@ public abstract class AbstractGenericResourceSupport implements IWorkflowCompone
 		}
 	}
 
+	@Override
 	public void invoke(IWorkflowContext ctx) {
 	}
 
+	@Override
 	public void postInvoke() {
 	}
 

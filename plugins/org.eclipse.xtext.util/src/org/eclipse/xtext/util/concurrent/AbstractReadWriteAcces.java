@@ -54,6 +54,7 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 		}
 	};
 
+	@Override
 	public <T> T readOnly(IUnitOfWork<T, P> work) {
 		acquireReadLock();
 		try {

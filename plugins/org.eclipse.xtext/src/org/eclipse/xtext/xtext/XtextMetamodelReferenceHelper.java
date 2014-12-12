@@ -89,6 +89,7 @@ class XtextMetamodelReferenceHelper {
 			final List<AbstractMetamodelDeclaration> exactMatches) {
 		Iterables.addAll(exactMatches, Iterables.filter(importedMetamodels,
 				new Predicate<AbstractMetamodelDeclaration>() {
+					@Override
 					public boolean apply(AbstractMetamodelDeclaration param) {
 						return alias.equals(param.getAlias());
 					}
@@ -99,10 +100,12 @@ class XtextMetamodelReferenceHelper {
 			final List<AbstractMetamodelDeclaration> generatedMetamodels,
 			final List<AbstractMetamodelDeclaration> importedMetamodels) {
 		Iterable<AbstractMetamodelDeclaration> all = Iterables.filter(Iterables.transform(scope.getAllElements(), new Function<IEObjectDescription, AbstractMetamodelDeclaration>() {
+			@Override
 			public AbstractMetamodelDeclaration apply(IEObjectDescription param) {
 				return (AbstractMetamodelDeclaration) param.getEObjectOrProxy();
 			}
 		}), new Predicate<AbstractMetamodelDeclaration>() {
+			@Override
 			public boolean apply(AbstractMetamodelDeclaration param) {
 				return metamodelAliasMatches(param, alias);
 			}

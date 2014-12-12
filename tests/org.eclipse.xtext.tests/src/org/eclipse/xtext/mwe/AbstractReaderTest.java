@@ -43,6 +43,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		reader.addLoad(entry);
 		
 		reader.setUriFilter(new UriFilter() {
+			@Override
 			public boolean matches(URI uri) {
 				return false;
 			}
@@ -65,6 +66,7 @@ public abstract class AbstractReaderTest extends AbstractXtextTests {
 		reader.addLoad(entry);
 		
 		reader.setUriFilter(new UriFilter() {
+			@Override
 			public boolean matches(URI uri) {
 				return true;
 			}

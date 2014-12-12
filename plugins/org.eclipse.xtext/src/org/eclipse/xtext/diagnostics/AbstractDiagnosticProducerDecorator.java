@@ -23,18 +23,22 @@ public class AbstractDiagnosticProducerDecorator implements IDiagnosticProducer 
 		this.producer = producer;
 	}
 
+	@Override
 	public void addDiagnostic(DiagnosticMessage message) {
 		producer.addDiagnostic(message);
 	}
 
+	@Override
 	public INode getNode() {
 		return producer.getNode();
 	}
 
+	@Override
 	public void setNode(INode node) {
 		producer.setNode(node);
 	}
 
+	@Override
 	public void setTarget(EObject object, EStructuralFeature feature) {
 		producer.setTarget(object, feature);
 	}

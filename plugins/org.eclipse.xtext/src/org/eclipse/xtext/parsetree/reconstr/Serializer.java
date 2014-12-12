@@ -66,14 +66,17 @@ public class Serializer implements ISerializer {
 		return report;
 	}
 
+	@Override
 	public void serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
 		serialize(obj, new WriterTokenStream(writer), options);
 	}
 
+	@Override
 	public String serialize(EObject obj) {
 		return serialize(obj, SaveOptions.defaultOptions());
 	}
 
+	@Override
 	public String serialize(EObject obj, SaveOptions options) {
 		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {
@@ -100,6 +103,7 @@ public class Serializer implements ISerializer {
 		return serialize(obj, options.toSaveOptions());
 	}
 
+	@Override
 	public ReplaceRegion serializeReplacement(EObject obj, SaveOptions options) {
 		TokenStringBuffer tokenStringBuffer = new TokenStringBuffer();
 		try {

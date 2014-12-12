@@ -40,18 +40,22 @@ public class ResourceSetBasedAllContainersState implements IAllContainersState {
 		this.uri2container = Multimaps.invertFrom(HashMultimap.create(container2Uris), HashMultimap.<URI, String>create());
 	}
 
+	@Override
 	public List<String> getVisibleContainerHandles(String handle) {
 		return containers;
 	}
 
+	@Override
 	public Collection<URI> getContainedURIs(String containerHandle) {
 		return container2URIs.get(containerHandle);
 	}
 	
+	@Override
 	public boolean isEmpty(String containerHandle) {
 		return getContainedURIs(containerHandle).isEmpty();
 	}
 
+	@Override
 	public String getContainerHandle(URI uri) {
 		Set<String> set = uri2container.get(uri);
 		if (set!=null && !set.isEmpty())

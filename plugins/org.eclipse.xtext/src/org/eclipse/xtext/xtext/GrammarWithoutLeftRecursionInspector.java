@@ -187,29 +187,35 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
 		throw new UnsupportedOperationException();
 	}

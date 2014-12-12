@@ -33,23 +33,28 @@ public class FilteringScope implements IScope {
 		this.filter = filter;
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getAllElements() {
 		return Iterables.filter(delegate.getAllElements(), filter);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		return Iterables.filter(delegate.getElements(object), filter);
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
 		return Iterables.filter(delegate.getElements(name), filter);
 	}
 	
+	@Override
 	public IEObjectDescription getSingleElement(EObject object) {
 		Iterable<IEObjectDescription> elements = getElements(object);
 		return getFirst(elements);
 	}
 	
+	@Override
 	public IEObjectDescription getSingleElement(QualifiedName name) {
 		Iterable<IEObjectDescription> elements = getElements(name);
 		return getFirst(elements);

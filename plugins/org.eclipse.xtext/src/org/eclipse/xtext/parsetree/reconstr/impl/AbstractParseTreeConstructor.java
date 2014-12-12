@@ -709,6 +709,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		return root;
 	}
 
+	@Override
 	public TreeConstructionReport serializeSubtree(EObject object, ITokenStream out) throws IOException {
 		TreeConstructionReportImpl report = createReport(object);
 		AbstractToken root = serialize(object, report);

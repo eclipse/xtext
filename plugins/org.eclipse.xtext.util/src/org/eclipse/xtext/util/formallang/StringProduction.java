@@ -142,34 +142,42 @@ public class StringProduction implements Production<ProdElement, String> {
 		return new ProdElement(type);
 	}
 
+	@Override
 	public Iterable<ProdElement> getAlternativeChildren(ProdElement ele) {
 		return ele.type == ElementType.ALTERNATIVE ? ele.children : null;
 	}
 
+	@Override
 	public ProdElement getParent(ProdElement ele) {
 		return ele.parent;
 	}
 
+	@Override
 	public ProdElement getRoot() {
 		return root;
 	}
 
+	@Override
 	public Iterable<ProdElement> getSequentialChildren(ProdElement ele) {
 		return ele.type == ElementType.SEQUENCE ? ele.children : null;
 	}
 
+	@Override
 	public String getToken(ProdElement ele) {
 		return ele.type == ElementType.TOKEN ? ele.value : null;
 	}
 
+	@Override
 	public Iterable<ProdElement> getUnorderedChildren(ProdElement ele) {
 		return ele.type == ElementType.UNOREDERED ? ele.children : null;
 	}
 
+	@Override
 	public boolean isMany(ProdElement ele) {
 		return ele.many;
 	}
 
+	@Override
 	public boolean isOptional(ProdElement ele) {
 		return ele.optional;
 	}

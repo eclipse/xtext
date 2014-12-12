@@ -38,6 +38,7 @@ public interface IQualifiedNameConverter {
 		 * @exception IllegalArgumentException
 		 *                when the qualified name is null.
 		 */
+		@Override
 		public String toString(QualifiedName qualifiedName) {
 			if (qualifiedName == null)
 				throw new IllegalArgumentException("Qualified name cannot be null");
@@ -50,6 +51,7 @@ public interface IQualifiedNameConverter {
 		 * @exception IllegalArgumentException
 		 *                if the input is empty or null.
 		 */
+		@Override
 		public QualifiedName toQualifiedName(String qualifiedNameAsString) {
 			if (qualifiedNameAsString == null)
 				throw new IllegalArgumentException("Qualified name cannot be null");

@@ -35,10 +35,12 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 			this.ele = ele;
 		}
 
+		@Override
 		public boolean hasNext() {
 			return ele != null;
 		}
 
+		@Override
 		public ELEMENT next() {
 			if (!hasNext())
 				throw new NoSuchElementException();
@@ -47,6 +49,7 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 			return prev.value;
 		}
 
+		@Override
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
@@ -133,6 +136,7 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 	/**
 	 * @since 2.0
 	 */
+	@Override
 	public Iterator<ELEMENT> iterator() {
 		return new ElementIterator(top);
 	}

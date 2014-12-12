@@ -46,6 +46,7 @@ public class MultiLineFileHeaderProvider extends AbstractMultiLineCommentProvide
 	 * @return a list with exactly one node or an empty list if there is no header is undocumented.
 	 */
 	/* @NonNull */
+	@Override
 	public List<INode> getFileHeaderNodes(Resource resource) {
 		if (resource instanceof XtextResource) {
 			IParseResult parseResult = ((XtextResource) resource).getParseResult();
@@ -67,6 +68,7 @@ public class MultiLineFileHeaderProvider extends AbstractMultiLineCommentProvide
 		return Collections.emptyList();
 	}
 
+	@Override
 	public String getFileHeader(Resource resource) {
 		String returnValue = findFileHeader(resource);
 		return getTextFromMultilineComment(returnValue);

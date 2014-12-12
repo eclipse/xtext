@@ -23,6 +23,7 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	
 	public abstract String[] getData();
 
+	@Override
 	public int getLength() {
 		INode node = getNode();
 		if (node != null)
@@ -30,6 +31,7 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 		return 1;
 	}
 
+	@Override
 	public int getOffset() {
 		INode node = getNode();
 		if (node != null)
@@ -37,10 +39,12 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 		return 0;
 	}
 
+	@Override
 	public int getColumn() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public int getLine() {
 		INode node = getNode();
 		if (node != null)
@@ -48,6 +52,7 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 		return -1;
 	}
 
+	@Override
 	public String getLocation() {
 		return null;
 	}

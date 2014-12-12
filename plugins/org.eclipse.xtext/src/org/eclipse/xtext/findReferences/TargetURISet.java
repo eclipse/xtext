@@ -44,6 +44,7 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 		return Iterators.unmodifiableIterator(uris.iterator());
 	}
 
+	@Override
 	public <T> T getUserData(Key<T> key) {
 		if (userData == null) {
 			return null;
@@ -56,6 +57,7 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 		return type.cast(result);
 	}
 
+	@Override
 	public <T> void putUserData(Key<T> key, T data) {
 		if (userData == null) {
 			userData = Maps.newHashMap();
@@ -63,30 +65,36 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 		userData.put(key, data);
 	}
 	
+	@Override
 	public void addURI(URI uri) {
 		if (uris.add(uri)) {
 			index.put(uri.trimFragment(), uri);
 		}
 	}
 	
+	@Override
 	public void addAllURIs(Iterable<URI> uris) {
 		for(URI uri: uris) {
 			addURI(uri);
 		}
 	}
 	
+	@Override
 	public Collection<URI> getTargetResourceURIs() {
 		return Collections.unmodifiableCollection(index.keySet());
 	}
 	
+	@Override
 	public Collection<URI> getEObjectURIs(URI resourceURI) {
 		return Collections.unmodifiableCollection(index.get(resourceURI));
 	}
 
+	@Override
 	public boolean contains(URI uri) {
 		return uris.contains(uri);
 	}
 
+	@Override
 	public boolean containsResource(URI resourceURI) {
 		return index.containsKey(resourceURI);
 	}
@@ -161,6 +169,7 @@ public class TargetURISet extends AbstractSet<URI> implements TargetURIs {
 		return uris.size();
 	}
 	
+	@Override
 	public Set<URI> asSet() {
 		return this;
 	}

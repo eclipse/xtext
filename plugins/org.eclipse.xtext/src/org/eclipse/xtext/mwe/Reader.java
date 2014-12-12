@@ -152,6 +152,7 @@ public class Reader extends AbstractReader {
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		ResourceSet resourceSet = getResourceSet();
 		Multimap<String, URI> uris = getPathTraverser().resolvePathes(pathes, new Predicate<URI>() {
+			@Override
 			public boolean apply(URI input) {
 				boolean result = true;
 				if (getUriFilter() != null)

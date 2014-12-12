@@ -52,6 +52,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		this.replacers = createTextReplacerSet();
 	}
 
+	@Override
 	public void addReplacer(ITextReplacer replacer) {
 		if (!this.getRegion().contains(replacer.getRegion())) {
 			String frameTitle = getClass().getSimpleName();
@@ -71,6 +72,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		}
 	}
 
+	@Override
 	public ISemanticRegion append(ISemanticRegion token, Procedure1<IHiddenRegionFormatter> after) {
 		if (token != null) {
 			IHiddenRegion gap = token.getNextHiddenRegion();
@@ -79,6 +81,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return token;
 	}
 
+	@Override
 	public <T extends EObject> T append(T owner, Procedure1<IHiddenRegionFormatter> after) {
 		if (owner != null) {
 			IHiddenRegion gap = getTextRegionAccess().trailingHiddenRegion(owner);
@@ -152,12 +155,14 @@ public abstract class FormattableDocument implements IFormattableDocument {
 	protected TextSegmentSet<ITextReplacer> createTextReplacerSet() {
 		return new ArrayListTextSegmentSet<ITextReplacer>(ITextReplacer.GET_REGION,
 				new Function<ITextReplacer, String>() {
+					@Override
 					public String apply(ITextReplacer input) {
 						return input.getClass().getSimpleName();
 					}
 				});
 	}
 
+	@Override
 	public void formatConditionally(EObject owner, ISubFormatter... formatters) {
 		ITextRegionAccess access = getTextRegionAccess();
 		int offset = access.leadingHiddenRegion(owner).getEndOffset();
@@ -165,6 +170,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		formatConditionally(offset, length, formatters);
 	}
 
+	@Override
 	public void formatConditionally(int offset, int length, ISubFormatter... formatters)
 			throws FormattingNotApplicableException {
 		ConditionalReplacer replacer = new ConditionalReplacer(this, offset, length, ImmutableList.copyOf(formatters));
@@ -196,6 +202,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return false;
 	}
 
+	@Override
 	public ISemanticRegion prepend(ISemanticRegion token, Procedure1<IHiddenRegionFormatter> before) {
 		if (token != null) {
 			IHiddenRegion gap = token.getPreviousHiddenRegion();
@@ -204,6 +211,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return token;
 	}
 
+	@Override
 	public <T extends EObject> T prepend(T owner, Procedure1<IHiddenRegionFormatter> before) {
 		if (owner != null) {
 			IHiddenRegion gap = getTextRegionAccess().leadingHiddenRegion(owner);
@@ -219,6 +227,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return replacements;
 	}
 
+	@Override
 	public IHiddenRegion set(IHiddenRegion hiddenRegion, Procedure1<IHiddenRegionFormatter> init) {
 		if (hiddenRegion != null) {
 			AbstractFormatter2 formatter = getFormatter();
@@ -230,12 +239,14 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return hiddenRegion;
 	}
 
+	@Override
 	public ISemanticRegion surround(ISemanticRegion token, Procedure1<IHiddenRegionFormatter> beforeAndAfter) {
 		prepend(token, beforeAndAfter);
 		append(token, beforeAndAfter);
 		return token;
 	}
 
+	@Override
 	public <T extends EObject> T surround(T owner, Procedure1<IHiddenRegionFormatter> beforeAndAfter) {
 		prepend(owner, beforeAndAfter);
 		append(owner, beforeAndAfter);
@@ -252,6 +263,7 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		return toString.toString();
 	}
 
+	@Override
 	public IFormattableSubDocument withReplacerFilter(Predicate<ITextReplacer> filter) {
 		return new FilteredSubDocument(getRegion(), this, filter);
 	}

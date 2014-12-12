@@ -42,8 +42,10 @@ public class LoadOnDemandResourceDescriptions extends AbstractCompoundSelectable
 		this.context = context;
 	}
 	
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return Iterables.filter(Iterables.transform(validUris, new Function<URI, IResourceDescription>() {
+			@Override
 			public IResourceDescription apply(URI from) {
 				return getResourceDescription(from);
 			}
@@ -60,6 +62,7 @@ public class LoadOnDemandResourceDescriptions extends AbstractCompoundSelectable
 		return getAllResourceDescriptions();
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		IResourceDescription result = delegate.getResourceDescription(uri);
 		if (result == null) {

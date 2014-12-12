@@ -50,6 +50,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private static final Logger logger = Logger.getLogger(AbstractInternalContentAssistParser.class);
 	
 	protected class DefaultFollowElementFactory implements IFollowElementFactory {
+		@Override
 		public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
 			if (logger.isDebugEnabled())
 				logger.debug("Creating FollowElement for: " + current);
@@ -246,14 +247,17 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	protected abstract class StreamAdapter implements ObservableXtextTokenStream.StreamListener {
+		@Override
 		public void announceConsume() {
 			AbstractInternalContentAssistParser.this.announceConsume();
 		}
 		
+		@Override
 		public void announceMark(int marker) {
 			AbstractInternalContentAssistParser.this.announceMark(marker);
 		}
 		
+		@Override
 		public void announceRewind(int marker) {
 			AbstractInternalContentAssistParser.this.announceRewind(marker);
 		}
@@ -292,6 +296,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	
 	protected StreamAdapter createNoOpStrategy() {
 		return new StreamAdapter() {
+			@Override
 			public void announceEof(int lookAhead) {
 			}
 		};
@@ -311,6 +316,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				followElementFactory = AbstractInternalContentAssistParser.this.followElementFactory;
 				AbstractInternalContentAssistParser.this.followElementFactory = new IFollowElementFactory() {
 					
+					@Override
 					public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
 						if (lastKnownSyntaxErrors == Integer.MAX_VALUE || state.lastErrorIndex < 0) {
 							FollowElement result = followElementFactory.createFollowElement(current, lookAhead);
@@ -327,6 +333,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				};
 			}
 
+			@Override
 			public void announceEof(int lookAhead) {
 				try {
 					if (predictionLevel == 0) {
@@ -390,6 +397,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 			private AbstractElement lastAddedElement;
 
+			@Override
 			public void announceEof(int lookAhead) {
 				AbstractElement current = getCurrentGrammarElement();
 				if (current != null
@@ -408,6 +416,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected StreamAdapter createNotErrorRecoveryStrategy() {
 		return new StreamAdapter() {
 
+			@Override
 			public void announceEof(int lookAhead) {
 				if (!state.errorRecovery && !mismatch && ((!isBacktracking() || marked > 0) || wasErrorCount <= 0)) {
 					AbstractElement current = getCurrentGrammarElement();
@@ -428,6 +437,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 			private boolean wasErrorRecovery = false;
 			
+			@Override
 			public void announceEof(int lookAhead) {
 				wasErrorRecovery = wasErrorRecovery || state.errorRecovery;
 				if (!wasErrorRecovery && !mismatch) {
@@ -505,6 +515,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		throw new IllegalArgumentException("tokenType " + token.getType() + " seems to be invalid.");
 	}
 
+	@Override
 	public void announceEof(int lookAhead) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Reached Eof with LA " + lookAhead);
@@ -541,6 +552,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		delegate.announceEof(lookAhead);
 	}
 	
+	@Override
 	public void announceConsume() {
 		if (marked <= 0)
 			localTrace.clear();
@@ -559,6 +571,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 	}
 	
+	@Override
 	public void announceRewind(int marker) {
 		int useLookAhead = -1;
 		if (marker != 0 && delegate == null && strict && predictionLevel != 0 && lookAheadAddOn > 0 && state.syntaxErrors == 0
@@ -577,6 +590,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		marked --;
 	}
 	
+	@Override
 	public void announceMark(int marker) {
 		if (marked <= 0) {
 			marked++;
@@ -608,6 +622,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return followElements;
 	}
 	
+	@Override
 	public Map<Integer, String> getTokenDefMap() {
 		String[] names = getTokenNames();
 		Map<Integer, String> result = Maps.newHashMapWithExpectedSize(names.length - Token.MIN_TOKEN_TYPE);

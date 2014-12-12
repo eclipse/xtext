@@ -245,6 +245,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	private final SimpleCache<Class<?>, List<MethodWrapper>> methodsForType = new SimpleCache<Class<?>, List<MethodWrapper>>(
 			new Function<Class<?>, List<MethodWrapper>>() {
+				@Override
 				public List<MethodWrapper> apply(Class<?> param) {
 					List<MethodWrapper> result = new ArrayList<MethodWrapper>();
 					for (MethodWrapper mw : checkMethods) {
@@ -547,6 +548,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	// Implementation of the Validation message acceptor below
 	//////////////////////////////////////////////////////////
 
+	@Override
 	public void acceptError(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
@@ -572,29 +574,34 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, feature, index, code, issueData));
 	}
 
+	@Override
 	public void acceptInfo(String message, EObject object, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, feature, index, code, issueData));
 	}
 
+	@Override
 	public void acceptError(String message, EObject object, int offset, int length, String code, String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
 		this.state.get().hasErrors = true;
 		state.get().chain.add(createDiagnostic(Severity.ERROR, message, object, offset, length, code, issueData));
 	}
 
+	@Override
 	public void acceptWarning(String message, EObject object, int offset, int length, String code, String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.WARNING, message, object, offset, length, code, issueData));
 	}
 
+	@Override
 	public void acceptInfo(String message, EObject object, int offset, int length, String code, String... issueData) {
 		checkIsFromCurrentlyCheckedResource(object);
 		state.get().chain.add(createDiagnostic(Severity.INFO, message, object, offset, length, code, issueData));

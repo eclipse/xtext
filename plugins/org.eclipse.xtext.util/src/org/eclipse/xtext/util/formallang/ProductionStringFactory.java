@@ -35,12 +35,14 @@ public class ProductionStringFactory<TOKEN> implements ProductionFactory<String,
 		return many ? (optional ? "*" : "+") : (optional ? "?" : "");
 	}
 
+	@Override
 	public String createForAlternativeChildren(boolean many, boolean optional, Iterable<String> children) {
 		List<String> childrenSorted = Lists.newArrayList(Iterables.filter(children, Predicates.notNull()));
 		Collections.sort(childrenSorted);
 		return "(" + Joiner.on(" | ").join(childrenSorted) + ")" + card(many, optional);
 	}
 
+	@Override
 	public String createForSequentialChildren(boolean many, boolean optional, Iterable<String> children) {
 		children = Iterables.filter(children, Predicates.notNull());
 		if (many || optional)
@@ -48,6 +50,7 @@ public class ProductionStringFactory<TOKEN> implements ProductionFactory<String,
 		return Joiner.on(" ").join(children) + card(many, optional);
 	}
 
+	@Override
 	public String createForToken(boolean many, boolean optional, TOKEN token) {
 		if (token2String != null)
 			return token2String.apply(token) + card(many, optional);
@@ -56,6 +59,7 @@ public class ProductionStringFactory<TOKEN> implements ProductionFactory<String,
 		return token.toString() + card(many, optional);
 	}
 
+	@Override
 	public String createForUnordertedChildren(boolean many, boolean optional, Iterable<String> children) {
 		List<String> childrenSorted = Lists.newArrayList(Iterables.filter(children, Predicates.notNull()));
 		Collections.sort(childrenSorted);

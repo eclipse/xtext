@@ -49,19 +49,23 @@ public class TraceRegionSerializer {
 	 */
 	protected static class IdentityStrategy implements Strategy<AbstractTraceRegion, ILocationData> {
 
+		@Override
 		public ILocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) {
 			return new LocationData(offset, length, lineNumber, endLineNumber, path);
 		}
 
+		@Override
 		public AbstractTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, List<ILocationData> associations,
 				AbstractTraceRegion parent) {
 			return new TraceRegion(offset, length, lineNumber, endLineNumber, associations, parent);
 		}
 
+		@Override
 		public void writeRegion(AbstractTraceRegion region, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
 			callback.doWriteRegion(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), region.getAssociatedLocations(), region.getNestedRegions());
 		}
 
+		@Override
 		public void writeLocation(ILocationData location, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
 			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath());
 		}
@@ -91,6 +95,7 @@ public class TraceRegionSerializer {
 			if (region == null)
 				return;
 			strategy.writeRegion(region, new Callback<Region, Location>() {
+				@Override
 				public void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> locations, List<Region> children) throws IOException {
 					dataStream.writeInt(offset);
 					dataStream.writeInt(length);
@@ -106,6 +111,7 @@ public class TraceRegionSerializer {
 					}
 				}
 
+				@Override
 				public void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) throws IOException {
 					dataStream.writeInt(offset);
 					dataStream.writeInt(length);

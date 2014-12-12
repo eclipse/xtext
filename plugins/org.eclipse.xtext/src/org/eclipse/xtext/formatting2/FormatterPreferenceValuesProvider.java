@@ -21,6 +21,7 @@ public class FormatterPreferenceValuesProvider implements IPreferenceValuesProvi
 	@Inject
 	private IPreferenceValuesProvider valuesProvider;
 
+	@Override
 	public IPreferenceValues getPreferenceValues(final Resource resource) {
 		final IPreferenceValues preferenceValues = internalGetRawPreferenceValues(resource);
 		final String indent = whitespaceInfo.getIndentationInformation(resource.getURI()).getIndentString();
@@ -28,6 +29,7 @@ public class FormatterPreferenceValuesProvider implements IPreferenceValuesProvi
 
 		return new IPreferenceValues() {
 
+			@Override
 			public String getPreference(PreferenceKey key) {
 				if (key == FormatterPreferenceKeys.indentation) {
 					return indent;

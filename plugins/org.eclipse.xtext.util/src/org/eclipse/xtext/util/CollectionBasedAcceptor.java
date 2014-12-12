@@ -25,6 +25,7 @@ public class CollectionBasedAcceptor<T> implements IAcceptor<T> {
 		this.collection = collection;
 	}
 
+	@Override
 	public void accept(T t) {
 		collection.add(t);
 	}

@@ -122,6 +122,7 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 				return true;
 			Iterator<?> contents = EcoreUtil.getAllContents(object.getAlternatives(), true);
 			return !Iterators.filter(contents, new Predicate<Object>() {
+				@Override
 				public boolean apply(Object input) {
 					return input instanceof Assignment || input instanceof Action;
 				}

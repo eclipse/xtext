@@ -28,10 +28,12 @@ public class ValueSerializer implements IValueSerializer {
 	@Inject
 	private IValueConverterService converter;
 
+	@Override
 	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, INode node) {
 		return ruleCall == node.getGrammarElement();
 	}
 
+	@Override
 	public boolean equalsOrReplacesNode(EObject context, RuleCall ruleCall, Object value, INode node) {
 		if (ruleCall != node.getGrammarElement())
 			return false;
@@ -42,6 +44,7 @@ public class ValueSerializer implements IValueSerializer {
 		return converted != null && converted.equals(value);
 	}
 
+	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, IErrorAcceptor errorAcceptor) {
 		try {
 			String str = converter.toString(value, ruleCall.getRule().getName());
@@ -77,6 +80,7 @@ public class ValueSerializer implements IValueSerializer {
 		}
 	}
 
+	@Override
 	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node) {
 		if (node != null) {
 			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
@@ -86,6 +90,7 @@ public class ValueSerializer implements IValueSerializer {
 		return converter.toString(value, ruleCall.getRule().getName());
 	}
 
+	@Override
 	public String serializeUnassignedValue(EObject context, RuleCall ruleCall, INode node) {
 		String r = serializeUnassignedValueByRuleCall(ruleCall, context, node);
 		if (r != null)

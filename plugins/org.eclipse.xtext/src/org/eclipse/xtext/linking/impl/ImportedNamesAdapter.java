@@ -62,14 +62,17 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 			this.delegate = scope;
 		}
 		
+		@Override
 		public IEObjectDescription getSingleElement(QualifiedName name) {
 			final QualifiedName lowerCase = name.toLowerCase();
 			importedNames.add(lowerCase);
 			return delegate.getSingleElement(name);
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getElements(final QualifiedName name) {
 			return new Iterable<IEObjectDescription>() {
+				@Override
 				public Iterator<IEObjectDescription> iterator() {
 					final QualifiedName lowerCase = name.toLowerCase();
 					importedNames.add(lowerCase);
@@ -79,16 +82,19 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 			};
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getElements(EObject object) {
 			handleNoNameQuery();
 			return delegate.getElements(object);
 		}
 		
+		@Override
 		public IEObjectDescription getSingleElement(EObject object) {
 			handleNoNameQuery();
 			return delegate.getSingleElement(object);
 		}
 		
+		@Override
 		public Iterable<IEObjectDescription> getAllElements() {
 			handleNoNameQuery();
 			return delegate.getAllElements();
@@ -111,6 +117,7 @@ public class ImportedNamesAdapter extends AdapterImpl implements IScopeWrapper {
 		return importedNames;
 	}
 
+	@Override
 	public IScope wrap(IScope scope) {
 		return new WrappingScope(scope);
 	}

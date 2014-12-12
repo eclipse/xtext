@@ -21,6 +21,7 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void generateFile(String fileName, InputStream content) {
 		generateFile(fileName, DEFAULT_OUTPUT, content);
 	}
@@ -28,6 +29,7 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public InputStream readBinaryFile(String fileName) {
 		return readBinaryFile(fileName, DEFAULT_OUTPUT);
 	}
@@ -35,6 +37,7 @@ public abstract class AbstractFileSystemAccess2 extends AbstractFileSystemAccess
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public CharSequence readTextFile(String fileName) {
 		return readTextFile(fileName, DEFAULT_OUTPUT);
 	}

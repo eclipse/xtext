@@ -25,22 +25,27 @@ public class ScopeBasedSelectable implements ISelectable {
 		this.scope = scope;
 	}
 	
+	@Override
 	public boolean isEmpty() {
 		return false;
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects() {
 		return scope.getAllElements();
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return scope.getElements(name);
 	}
 
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return scope.getAllElements();
 	}
 	
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return scope.getElements(object);
 	}

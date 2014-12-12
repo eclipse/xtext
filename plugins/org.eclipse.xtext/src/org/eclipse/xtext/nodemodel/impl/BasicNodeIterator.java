@@ -26,10 +26,12 @@ public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implem
 		this.startWith = startWith;
 	}
 
+	@Override
 	public boolean hasNext() {
 		return lastReturned == null || lastReturned.basicHasNextSibling();
 	}
 
+	@Override
 	public AbstractNode next() {
 		if (!hasNext())
 			throw new NoSuchElementException();
@@ -41,10 +43,12 @@ public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implem
 		return lastReturned;
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		return lastReturned == null || lastReturned.basicHasPreviousSibling();
 	}
 
+	@Override
 	public AbstractNode previous() {
 		if (!hasPrevious())
 			throw new NoSuchElementException();

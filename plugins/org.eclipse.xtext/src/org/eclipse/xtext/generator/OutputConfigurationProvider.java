@@ -20,6 +20,7 @@ public class OutputConfigurationProvider implements IOutputConfigurationProvider
 	/**
 	 * @return a set of {@link OutputConfiguration} available for the generator
 	 */
+	@Override
 	public Set<OutputConfiguration> getOutputConfigurations() {
 		OutputConfiguration defaultOutput = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
 		defaultOutput.setDescription("Output Folder");

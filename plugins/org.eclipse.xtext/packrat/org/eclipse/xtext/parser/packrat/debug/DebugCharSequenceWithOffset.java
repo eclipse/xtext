@@ -24,6 +24,7 @@ public class DebugCharSequenceWithOffset extends DebugCharSequence implements IC
 		this.delegate = delegate;
 	}
 
+	@Override
 	public int getOffset() {
 		int result = delegate.getOffset();
 		if (log.isTraceEnabled()) {
@@ -32,6 +33,7 @@ public class DebugCharSequenceWithOffset extends DebugCharSequence implements IC
 		return result;
 	}
 
+	@Override
 	public void incOffset() {
 		if (log.isTraceEnabled()) {
 			log.trace("incOffset()");
@@ -39,6 +41,7 @@ public class DebugCharSequenceWithOffset extends DebugCharSequence implements IC
 		delegate.incOffset();
 	}
 
+	@Override
 	public void incOffset(int amount) {
 		if (log.isTraceEnabled()) {
 			log.trace("incOffset(" + amount + ")");
@@ -46,6 +49,7 @@ public class DebugCharSequenceWithOffset extends DebugCharSequence implements IC
 		delegate.incOffset(amount);
 	}
 
+	@Override
 	public void setOffset(int offset) {
 		if (log.isTraceEnabled()) {
 			log.trace("setOffset(" + offset + ")");

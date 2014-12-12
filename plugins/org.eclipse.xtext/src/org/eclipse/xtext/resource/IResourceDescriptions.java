@@ -46,30 +46,37 @@ public interface IResourceDescriptions extends ISelectable {
 
 	class NullImpl implements IResourceDescriptions {
 
+		@Override
 		public Iterable<IResourceDescription> getAllResourceDescriptions() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public IResourceDescription getResourceDescription(URI uri) {
 			return null;
 		}
 
+		@Override
 		public boolean isEmpty() {
 			return true;
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects() {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 			return Collections.emptyList();
 		}
 
+		@Override
 		public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 			return Collections.emptyList();
 		}

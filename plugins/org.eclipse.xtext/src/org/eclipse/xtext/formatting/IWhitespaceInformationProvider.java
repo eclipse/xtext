@@ -30,10 +30,12 @@ public interface IWhitespaceInformationProvider {
 		@Inject
 		private ILineSeparatorInformation lineSeparatorInformation;
 
+		@Override
 		public IIndentationInformation getIndentationInformation(URI uri) {
 			return indentationInformation;
 		}
 
+		@Override
 		public ILineSeparatorInformation getLineSeparatorInformation(URI uri) {
 			return lineSeparatorInformation;
 		}

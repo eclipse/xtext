@@ -48,6 +48,7 @@ public abstract class AbstractConcreteSyntaxValidationTest extends AbstractXtext
 					+ constraint + "]";
 		}
 
+		@Override
 		public boolean apply(Diagnostic input) {
 			if (input instanceof ConcreteSyntaxFeatureDiagnostic) {
 				ConcreteSyntaxFeatureDiagnostic s = (ConcreteSyntaxFeatureDiagnostic) input;

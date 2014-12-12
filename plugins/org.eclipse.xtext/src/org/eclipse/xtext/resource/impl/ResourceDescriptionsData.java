@@ -169,6 +169,7 @@ import com.google.common.collect.Sets;
 			@SuppressWarnings("unchecked")
 			Set<IResourceDescription> casted = (Set<IResourceDescription>) existing;
 			return Iterables.concat(Iterables.transform(casted, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+				@Override
 				public Iterable<IEObjectDescription> apply(IResourceDescription from) {
 					if (from != null) {
 						return from.getExportedObjects(type, qualifiedName, ignoreCase);

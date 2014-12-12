@@ -39,6 +39,7 @@ public class DescriptionAddingContainer extends AbstractContainer {
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public Iterable<IResourceDescription> getResourceDescriptions() {
 		return Iterables.concat(Collections.singleton(description), delegate.getResourceDescriptions());
 	}

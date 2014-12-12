@@ -24,34 +24,42 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 		this.offset = 0;
 	}
 	
+	@Override
 	public int getOffset() {
 		return offset;
 	}
 
+	@Override
 	public void incOffset() {
 		offset++;
 	}
 
+	@Override
 	public void incOffset(int amount) {
 		offset+=amount;
 	}
 
+	@Override
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
 
+	@Override
 	public char charAt(int index) {
 		return value.charAt(index);
 	}
 
+	@Override
 	public int length() {
 		return value.length();
 	}
 
+	@Override
 	public CharSequence subSequence(int start, int end) {
 		return value.subSequence(start, end);
 	}
 
+	@Override
 	public IMarker mark() {
 		return new Marker();
 	}
@@ -68,6 +76,7 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 			this.offset = offset;
 		}
 		
+		@Override
 		public void rollback() {
 			StringWithOffset.this.setOffset(offset);
 		}
@@ -77,17 +86,21 @@ public class StringWithOffset implements ICharSequenceWithOffset, IMarkerFactory
 			return "Marker@" + offset;
 		}
 
+		@Override
 		public void commit() {
 		}
 
+		@Override
 		public IMarker fork() {
 			return new Marker(offset);
 		}
 
+		@Override
 		public IMarker join(IMarker forkedMarker) {
 			return this;
 		}
 
+		@Override
 		public void flush() {
 		}
 	}

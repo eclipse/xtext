@@ -36,6 +36,7 @@ public interface IResourceDescription extends ISelectable {
 	 *         combination of <code>name</code> and <code>eObjectOrProxy</code> only once as an
 	 *         {@link IEObjectDescription}. The order of the exported objects matters.
 	 */
+	@Override
 	Iterable<IEObjectDescription> getExportedObjects();
 
 	/**
@@ -232,6 +233,7 @@ public interface IResourceDescription extends ISelectable {
 		/**
 		 * @return the empty list of changes. It is never <code>null</code> but always empty.
 		 */
+		@Override
 		ImmutableList<Delta> getDeltas();
 		
 	}

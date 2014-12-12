@@ -28,6 +28,7 @@ public class ConditionalReplacer extends AbstractTextReplacer implements ICompos
 		this.subFormatters = subFormatters;
 	}
 
+	@Override
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		context.setNextReplacerIsChild();
 		for (ISubFormatter formatter : subFormatters) {
@@ -48,6 +49,7 @@ public class ConditionalReplacer extends AbstractTextReplacer implements ICompos
 		throw new FormattingNotApplicableException();
 	}
 
+	@Override
 	public void addReplacer(ITextReplacer replacer) {
 		replacers.add(replacer);
 	}

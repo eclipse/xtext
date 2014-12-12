@@ -32,6 +32,7 @@ public interface IReferableElementsUnloader {
 
 	final class NullUnloader implements IReferableElementsUnloader {
 
+		@Override
 		public void unloadRoot(EObject root) {
 			// do nothing
 		}
@@ -40,6 +41,7 @@ public interface IReferableElementsUnloader {
 
 	class GenericUnloader implements IReferableElementsUnloader {
 
+		@Override
 		public void unloadRoot(EObject root) {
 			// Content adapters should be removed the same way as they are added: top-down. 
 			// Fragments are recursive, so we need them to be calculated before proxifying the container.

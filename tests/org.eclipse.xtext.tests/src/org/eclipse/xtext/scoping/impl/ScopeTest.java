@@ -83,6 +83,7 @@ public class ScopeTest extends Assert {
 		@Override
 		protected Iterable<IEObjectDescription> getAllLocalElements() {
 			return new Iterable<IEObjectDescription>() {
+				@Override
 				public Iterator<IEObjectDescription> iterator() {
 					numberOfCalls++;
 					return singleton(

@@ -96,6 +96,7 @@ public class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterSta
 			return true;
 		}
 
+		@Override
 		public NFADirection getDirection() {
 			return NFADirection.BACKWARD;
 		}

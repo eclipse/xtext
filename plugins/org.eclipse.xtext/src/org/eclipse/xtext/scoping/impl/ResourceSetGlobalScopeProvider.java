@@ -58,12 +58,14 @@ public class ResourceSetGlobalScopeProvider extends AbstractGlobalScopeProvider 
 	protected IScope createScopeWithQualifiedNames(final IScope parent, final Resource resource,
 			final Predicate<IEObjectDescription> filter, ResourceSet resourceSet, EClass type, boolean ignoreCase) {
 		final Iterable<ISelectable> resourceDescriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, ISelectable>() {
+			@Override
 			public ISelectable apply(Resource from) {
 				return resourceDecriptionProvider.getResourceDescription(from);
 			}
 		});
 		ISelectable compound = new ISelectable() {
 			
+			@Override
 			public boolean isEmpty() {
 				for (ISelectable description: resourceDescriptions) {
 					if (!description.isEmpty())
@@ -72,32 +74,40 @@ public class ResourceSetGlobalScopeProvider extends AbstractGlobalScopeProvider 
 				return true;
 			}
 			
+			@Override
 			public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
 				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					@Override
 					public Iterable<IEObjectDescription> apply(ISelectable from) {
 						return from.getExportedObjectsByType(type);
 					}
 				}));
 			}
 			
+			@Override
 			public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
 				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					@Override
 					public Iterable<IEObjectDescription> apply(ISelectable from) {
 						return from.getExportedObjectsByObject(object);
 					}
 				}));
 			}
 			
+			@Override
 			public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
 				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					@Override
 					public Iterable<IEObjectDescription> apply(ISelectable from) {
 						return from.getExportedObjects(type, name, ignoreCase);
 					}
 				}));
 			}
 			
+			@Override
 			public Iterable<IEObjectDescription> getExportedObjects() {
 				return Iterables.concat(Iterables.transform(resourceDescriptions, new Function<ISelectable, Iterable<IEObjectDescription>>() {
+					@Override
 					public Iterable<IEObjectDescription> apply(ISelectable from) {
 						return from.getExportedObjects();
 					}

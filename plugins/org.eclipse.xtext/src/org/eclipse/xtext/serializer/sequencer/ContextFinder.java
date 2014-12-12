@@ -139,6 +139,7 @@ public class ContextFinder implements IContextFinder {
 		return result;
 	}
 
+	@Override
 	public Iterable<EObject> findContextsByContents(EObject semanticObject, Iterable<EObject> contextCandidates) {
 		if (semanticObject == null)
 			throw new NullPointerException();
@@ -170,6 +171,7 @@ public class ContextFinder implements IContextFinder {
 		return Iterables.concat(constraints.values());
 	}
 
+	@Override
 	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanticObject,
 			Iterable<EObject> contextCandidates) {
 		initConstraints();

@@ -92,6 +92,7 @@ public class SlotEntry implements ISlotEntry {
 		return firstOnly;
 	}
 	
+	@Override
 	public void put(WorkflowContext ctx, IResourceDescriptions resourceDescriptions, ResourceSet resourceSet) {
 		Set<EClass> eClasses = findEClasses(resourceSet, nsURI, type);
 		List<EObject> elements = findEObjectsOfType(eClasses, resourceDescriptions, resourceSet);
@@ -169,6 +170,7 @@ public class SlotEntry implements ISlotEntry {
 		return resourceSet.getEObject(description.getEObjectURI(), true);
 	}
 
+	@Override
 	public void preInvoke() {
 		// TODO Auto-generated method stub
 		

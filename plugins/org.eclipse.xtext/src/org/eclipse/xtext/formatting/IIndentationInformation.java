@@ -23,6 +23,7 @@ public interface IIndentationInformation {
 	 * @since 2.2
 	 */
 	class Default implements IIndentationInformation{
+		@Override
 		public String getIndentString() {
 			return "\t";
 		}

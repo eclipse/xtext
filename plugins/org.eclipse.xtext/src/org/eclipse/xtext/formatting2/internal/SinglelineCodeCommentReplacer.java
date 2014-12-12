@@ -19,6 +19,7 @@ public class SinglelineCodeCommentReplacer extends SinglelineCommentReplacer {
 		super(comment, prefix);
 	}
 
+	@Override
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		return context;
 	}

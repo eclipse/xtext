@@ -21,6 +21,7 @@ import org.junit.Test;
 public class ResourceServiceProviderProviderTest {
 
 	public static class TestResourceServiceProviderExecutableExtensionFactory implements IExecutableExtensionFactory {
+		@Override
 		public Object create() throws CoreException {
 			return new TestResourceServiceProviderProvider();
 		}
@@ -38,6 +39,7 @@ public class ResourceServiceProviderProviderTest {
 	}
 
 	public static class TestResourceServiceProviderProvider implements IResourceServiceProvider.Provider {
+		@Override
 		public IResourceServiceProvider get(URI uri, String contentType) {
 			return new TestResourceServiceProvider(uri, contentType);
 		}

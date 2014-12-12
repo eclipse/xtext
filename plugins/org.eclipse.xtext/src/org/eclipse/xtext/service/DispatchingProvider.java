@@ -40,6 +40,7 @@ public class DispatchingProvider<T> implements Provider<T> {
 	@Ui
 	private T uiBinding;
 
+	@Override
 	public T get() {
 		return uiBinding != null ? uiBinding : runtimeBinding;
 	}

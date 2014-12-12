@@ -41,6 +41,7 @@ public class TypeHierarchyHelperTest extends Assert {
 
 	private final class FailOnErrorAcceptor implements ErrorAcceptor {
 
+		@Override
 		public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 			fail("Should not be called");
 		}

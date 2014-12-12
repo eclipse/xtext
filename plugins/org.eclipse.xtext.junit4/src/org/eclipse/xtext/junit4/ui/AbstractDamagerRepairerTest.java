@@ -70,6 +70,7 @@ public abstract class AbstractDamagerRepairerTest extends Assert implements IDoc
 	protected Document createDocument(String before) throws Exception {
 		DocumentTokenSource source = new DocumentTokenSource();
 		source.setLexer(new Provider<Lexer>() {
+			@Override
 			public Lexer get() {
 				return createLexer();
 			}
@@ -84,24 +85,30 @@ public abstract class AbstractDamagerRepairerTest extends Assert implements IDoc
 		assertEquals("length", expLength, actual.getLength());
 	}
 	
+	@Override
 	public void documentChanged(DocumentEvent event) {
 		lastRegion = damager.getDamageRegion(new TypedRegion(0,event.getDocument().getLength(), IDocument.DEFAULT_CONTENT_TYPE), event, false);
 	}
 
+	@Override
 	public void documentAboutToBeChanged(DocumentEvent event) {
 	}
 	
+	@Override
 	public void setRange(IDocument document, int offset, int length) {
 	}
 
+	@Override
 	public IToken nextToken() {
 		return null;
 	}
 
+	@Override
 	public int getTokenOffset() {
 		return 0;
 	}
 
+	@Override
 	public int getTokenLength() {
 		return 0;
 	}

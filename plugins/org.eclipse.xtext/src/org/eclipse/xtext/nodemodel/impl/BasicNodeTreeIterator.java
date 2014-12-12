@@ -31,6 +31,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		this.root = root;
 	}
 
+	@Override
 	public boolean hasNext() {
 		if (nextComputed)
 			return next != null;
@@ -50,6 +51,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		return next != null;
 	}
 
+	@Override
 	public AbstractNode next() {
 		if (next == null && !hasNext())
 			throw new NoSuchElementException();
@@ -66,6 +68,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		pruned = false;
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		if (previousComputed)
 			return previous != null;
@@ -85,6 +88,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		return previous != null;
 	}
 
+	@Override
 	public AbstractNode previous() {
 		if (previous == null && !hasPrevious())
 			throw new NoSuchElementException();
@@ -93,6 +97,7 @@ public class BasicNodeTreeIterator extends UnmodifiableIterator<AbstractNode> im
 		return lastReturned;
 	}
 	
+	@Override
 	public void prune() {
 		if (lastReturned == null)
 			throw new IllegalStateException("Cannot prune before #next or #previous");

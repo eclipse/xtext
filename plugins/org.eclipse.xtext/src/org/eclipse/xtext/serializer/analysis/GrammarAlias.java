@@ -130,34 +130,42 @@ public class GrammarAlias {
 			this.root = root;
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias> getAlternativeChildren(AbstractElementAlias ele) {
 			return ele instanceof AlternativeAlias ? ((AlternativeAlias) ele).getChildren() : null;
 		}
 
+		@Override
 		public AbstractElementAlias getParent(AbstractElementAlias ele) {
 			return ele.getParent();
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias> getSequentialChildren(AbstractElementAlias ele) {
 			return ele instanceof GroupAlias ? ((GroupAlias) ele).getChildren() : null;
 		}
 
+		@Override
 		public AbstractElement getToken(AbstractElementAlias owner) {
 			return owner instanceof TokenAlias ? ((TokenAlias) owner).getToken() : null;
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias> getUnorderedChildren(AbstractElementAlias ele) {
 			return ele instanceof UnorderedGroupAlias ? ((UnorderedGroupAlias) ele).getChildren() : null;
 		}
 
+		@Override
 		public boolean isMany(AbstractElementAlias ele) {
 			return ele.isMany();
 		}
 
+		@Override
 		public boolean isOptional(AbstractElementAlias ele) {
 			return ele.isOptional();
 		}
 
+		@Override
 		public AbstractElementAlias getRoot() {
 			return root;
 		}
@@ -165,20 +173,24 @@ public class GrammarAlias {
 
 	public static class GrammarAliasFactory implements ProductionFactory<AbstractElementAlias, AbstractElement> {
 
+		@Override
 		public AbstractElementAlias createForAlternativeChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {
 			return new AlternativeAlias(many, optional, children);
 		}
 
+		@Override
 		public AbstractElementAlias createForSequentialChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {
 			return new GroupAlias(many, optional, children);
 		}
 
+		@Override
 		public AbstractElementAlias createForToken(boolean many, boolean optional, AbstractElement token) {
 			return new TokenAlias(many, optional, token);
 		}
 
+		@Override
 		public AbstractElementAlias createForUnordertedChildren(boolean many, boolean optional,
 				Iterable<AbstractElementAlias> children) {
 			return new UnorderedGroupAlias(many, optional, children);

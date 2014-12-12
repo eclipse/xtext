@@ -54,9 +54,11 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 		return resolver;
 	}
 
+	@Override
 	public QualifiedName getFullyQualifiedName(final EObject obj) {
 		return cache.get(Tuples.pair(obj, "fqn"), obj.eResource(), new Provider<QualifiedName>(){
 
+			@Override
 			public QualifiedName get() {
 				EObject temp = obj;
 				QualifiedName qualifiedNameFromDispatcher = qualifiedName.invoke(temp);

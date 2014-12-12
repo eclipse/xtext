@@ -78,6 +78,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		}
 		final List<IEObjectDescription> exportedEObjects = newArrayList();
 		IAcceptor<IEObjectDescription> acceptor = new IAcceptor<IEObjectDescription>() {
+			@Override
 			public void accept(IEObjectDescription eObjectDescription) {
 				exportedEObjects.add(eObjectDescription);
 			}
@@ -91,6 +92,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return exportedEObjects;
 	}
 
+	@Override
 	public Iterable<QualifiedName> getImportedNames() {
 		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(getResource());
@@ -105,6 +107,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return resource;
 	}
 
+	@Override
 	public URI getURI() {
 		return uri;
 	}
@@ -112,8 +115,10 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	private static final String REFERENCE_DESCRIPTIONS_CACHE_KEY = DefaultReferenceDescription.class.getName()
 			+ "#getReferenceDescriptions";
 
+	@Override
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		return cache.get(REFERENCE_DESCRIPTIONS_CACHE_KEY, getResource(), new Provider<List<IReferenceDescription>>(){
+			@Override
 			public List<IReferenceDescription> get() {
 				return computeReferenceDescriptions();
 			}});
@@ -122,6 +127,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	protected List<IReferenceDescription> computeReferenceDescriptions() {
 		final List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
 		IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
+			@Override
 			public void accept(IReferenceDescription referenceDescription) {
 				referenceDescriptions.add(referenceDescription);
 			}
@@ -165,6 +171,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 	@Override
 	protected EObjectDescriptionLookUp getLookUp() {
 		return cache.get(EOBJECT_LOOKUP_CACHE_KEY, getResource(), new Provider<EObjectDescriptionLookUp>() {
+			@Override
 			public EObjectDescriptionLookUp get() {
 				if(lookup != null) 
 					lookup.setExportedObjects(computeExportedObjects());

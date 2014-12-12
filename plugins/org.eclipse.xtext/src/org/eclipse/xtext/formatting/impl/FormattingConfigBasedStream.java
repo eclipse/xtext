@@ -463,6 +463,7 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	protected Pair<Integer, RuleCall> findTopmostHiddenTokenDef() {
 		return matcher.findTopmostRuleCall(new Predicate<RuleCall>() {
+			@Override
 			public boolean apply(RuleCall input) {
 				return ((ParserRule) input.getRule()).isDefinesHiddenTokens();
 			}

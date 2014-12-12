@@ -138,6 +138,7 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		return nodes.get(rule.getAlternatives()).toString();
 	}
 
+	@Override
 	public String apply(AbstractElement from) {
 		return doSwitch(from);
 	}

@@ -26,6 +26,7 @@ public class TestErrorAcceptor extends Assert implements ErrorAcceptor {
 	public static final EObject ANY_EOBJECT = (EObject) Proxy.newProxyInstance(
 			TestErrorAcceptor.class.getClassLoader(), new Class[] { EObject.class }, new InvocationHandler() {
 
+				@Override
 				public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 					return "toString".equals(method.getName()) ? "ANY_EOBJECT" : null;
 				}
@@ -34,6 +35,7 @@ public class TestErrorAcceptor extends Assert implements ErrorAcceptor {
 	LinkedList<Triple<TransformationErrorCode, String, EObject>> flugschreiber = Lists.newLinkedList();
 	private boolean write = true;
 
+	@Override
 	public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 		Triple<TransformationErrorCode, String, EObject> create = Tuples.create(errorCode, message, element);
 		//		System.out.println((write ? "Write>" : "Read>") + " errorCode: " + (errorCode != null ? errorCode : "")

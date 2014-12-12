@@ -19,18 +19,22 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
 public abstract class AbstractTokenStream implements ITokenStreamExtension {
 
 	
+	@Override
 	public void flush() throws IOException {
 	}
 
+	@Override
 	public void writeHidden(EObject grammarElement, String value) throws IOException {
 	}
 
+	@Override
 	public void writeSemantic(EObject grammarElement, String value) throws IOException {
 	}
 
 	/**
 	 * @since 2.0
 	 */
+	@Override
 	public void init(ParserRule startRule) {
 	}
 	

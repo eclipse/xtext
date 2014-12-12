@@ -104,6 +104,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 		return doSwitch(object.getType());
 	}
 
+	@Override
 	public EClassifier apply(AbstractElement param) {
 		return doSwitch(param);
 	}

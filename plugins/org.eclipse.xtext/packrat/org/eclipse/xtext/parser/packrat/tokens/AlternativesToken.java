@@ -42,6 +42,7 @@ public class AlternativesToken extends CompoundParsedToken implements IFurtherPa
 		return alternative;
 	}
 
+	@Override
 	public AlternativesToken getToken() {
 		return this;
 	}
@@ -52,6 +53,7 @@ public class AlternativesToken extends CompoundParsedToken implements IFurtherPa
 		return (Source<AlternativesToken>) super.getSource();
 	}
 
+	@Override
 	public boolean canParseFurther() {
 		return alternative < totalAlternatives - 1;
 	}

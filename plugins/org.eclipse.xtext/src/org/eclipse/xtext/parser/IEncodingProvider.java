@@ -40,6 +40,7 @@ public interface IEncodingProvider {
 
 		private String defaultEncoding = null;
 
+		@Override
 		public String getEncoding(URI uri) {
 			if (defaultEncoding != null)
 				return defaultEncoding;

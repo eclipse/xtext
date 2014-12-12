@@ -166,28 +166,33 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		throw new RuntimeException("invalid state for emitting: " + emitter + " (" + emitter.getType() + ")");
 	}
 
+	@Override
 	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index,
 			ICompositeNode node) {
 		navigateToAbsorber(datatypeRC, node);
 		delegate.acceptAssignedCrossRefDatatype(datatypeRC, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		navigateToAbsorber(enumRC, node);
 		delegate.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		navigateToAbsorber(kw, node);
 		delegate.acceptAssignedCrossRefKeyword(kw, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
 			ILeafNode node) {
 		navigateToAbsorber(terminalRC, node);
 		delegate.acceptAssignedCrossRefTerminal(terminalRC, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
 		navigateToAbsorber(datatypeRC, node);
 		if (token == null)
@@ -195,16 +200,19 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptAssignedDatatype(datatypeRC, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
 		navigateToAbsorber(enumRC, node);
 		delegate.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		navigateToAbsorber(keyword, node);
 		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
+	@Override
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
 		navigateToAbsorber(terminalRC, node);
 		if (token == null)
@@ -306,6 +314,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	protected abstract void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode,
 			INode toNode);
 
+	@Override
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		navigateToAbsorber(action, node);
 		boolean shouldEnter = delegate.enterAssignedAction(action, semanticChild, node);
@@ -317,6 +326,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return shouldEnter;
 	}
 
+	@Override
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
 		navigateToAbsorber(rc, node);
 		boolean shouldEnter = delegate.enterAssignedParserRuleCall(rc, semanticChild, node);
@@ -346,6 +356,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return null;
 	}
 
+	@Override
 	public void finish() {
 		navigateToAbsorber(null, contexts.peek().rootNode);
 		delegate.finish();
@@ -390,6 +401,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return getUnassignedRuleCallToken(contexts.peek().semanticObject, ruleCall, node);
 	}
 
+	@Override
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {
 		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
@@ -400,11 +412,13 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		this.errorAcceptor = errorAcceptor;
 	}
 
+	@Override
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 		contexts.pop();
 		delegate.leaveAssignedAction(action, semanticChild);
 	}
 
+	@Override
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 		contexts.pop();
 		delegate.leaveAssignedParserRuleCall(rc, semanticChild);

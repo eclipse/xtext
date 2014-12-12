@@ -31,6 +31,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 	
 	private String textFileEnconding;
 	
+	@Override
 	public void generateFile(String fileName, String outputConfigName, CharSequence contents) {
 		String encoding = getTextFileEncoding();
 		if (encoding != null)
@@ -114,6 +115,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public URI getURI(String fileName, String outputConfiguration) {
 		return URI.createURI("memory:/" + outputConfiguration + "/" + fileName);
 	}
@@ -121,6 +123,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public void generateFile(String fileName, String outputCfgName, InputStream content) {
 		try {
 			try {
@@ -137,6 +140,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public InputStream readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		String name = getFileName(fileName, outputCfgName);
 		Object contents = files.get(name);
@@ -152,6 +156,7 @@ public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 	/**
 	 * @since 2.4
 	 */
+	@Override
 	public CharSequence readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
 		String name = getFileName(fileName, outputCfgName);
 		Object contents = files.get(name);

@@ -101,6 +101,7 @@ public class JavaIoFileSystemAccessTest extends Assert {
 		try {
 			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
 					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider() {
+						@Override
 						public String getEncoding(URI uri) {
 							return "ISO-8859-1";
 						}

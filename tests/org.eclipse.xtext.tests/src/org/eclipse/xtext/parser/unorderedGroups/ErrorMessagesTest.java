@@ -50,6 +50,7 @@ public class ErrorMessagesTest extends AbstractXtextTests implements ISyntaxErro
 		grammarAccess = get(SimpleUnorderedGroupsTestLanguageGrammarAccess.class);
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
 		if (expectation != null) {
 			assertTrue(context instanceof IUnorderedGroupErrorContext);
@@ -60,6 +61,7 @@ public class ErrorMessagesTest extends AbstractXtextTests implements ISyntaxErro
 		return delegate.getSyntaxErrorMessage(context);
 	}
 
+	@Override
 	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
 		return delegate.getSyntaxErrorMessage(context);
 	}

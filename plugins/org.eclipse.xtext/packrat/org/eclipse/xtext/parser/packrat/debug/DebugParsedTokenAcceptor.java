@@ -24,6 +24,7 @@ public class DebugParsedTokenAcceptor implements IParsedTokenAcceptor {
 		this.delegate = delegate;
 	}
 	
+	@Override
 	public void accept(AbstractParsedToken token) {
 		if (log.isDebugEnabled()) {
 			log.debug("accept(" + token + ")");

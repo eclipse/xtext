@@ -547,6 +547,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		Grammar grammar = GrammarUtil.getGrammar(declaration);
 		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(),
 				new Function<AbstractMetamodelDeclaration, String>() {
+					@Override
 					public String apply(AbstractMetamodelDeclaration param) {
 						if (param.getEPackage() != null)
 							return param.getEPackage().getNsURI();
@@ -554,6 +555,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					}
 				});
 		int count = Iterables.size(Iterables.filter(nsUris, new Predicate<String>() {
+			@Override
 			public boolean apply(String param) {
 				return declaration.getEPackage().getNsURI().equals(param);
 			}

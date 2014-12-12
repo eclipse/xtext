@@ -76,6 +76,7 @@ public class Files {
 		FileFilter myFilter = filter;
 		if (myFilter == null)
 			myFilter = new FileFilter() {
+				@Override
 				public boolean accept(File pathname) {
 					return true;
 				}
@@ -114,6 +115,7 @@ public class Files {
 	 */
 	public static boolean sweepFolder(File folder) throws FileNotFoundException {
 		return Files.cleanFolder(folder, new FileFilter() {
+			@Override
 			public boolean accept(File pathname) {
 				return true;
 			}

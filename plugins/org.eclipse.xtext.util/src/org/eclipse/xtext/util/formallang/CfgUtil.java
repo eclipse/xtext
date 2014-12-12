@@ -25,6 +25,7 @@ public class CfgUtil {
 			this.cfg = cfg;
 		}
 
+		@Override
 		public boolean apply(E input) {
 			return cfg.getCall(input) != null;
 		}

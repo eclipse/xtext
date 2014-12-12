@@ -97,6 +97,7 @@ public interface IResourceServiceProvider {
 		Map<String, Object> getProtocolToFactoryMap();
 		
 		public static class RegistryProvider implements com.google.inject.Provider<Registry> {
+			@Override
 			public Registry get() {
 				return INSTANCE;
 			}

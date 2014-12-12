@@ -21,14 +21,17 @@ public class DefaultHiddenTokenHelper extends AbstractHiddenTokenHelper {
 
 	private AbstractRule wsRule;
 
+	@Override
 	public boolean isWhitespace(AbstractRule rule) {
 		return rule != null && "WS".equals(rule.getName());
 	}
 
+	@Override
 	public boolean isComment(AbstractRule rule) {
 		return rule != null && ("ML_COMMENT".equals(rule.getName()) || "SL_COMMENT".equals(rule.getName()));
 	}
 
+	@Override
 	@SuppressWarnings("deprecation")
 	public AbstractRule getWhitespaceRuleFor(String whitespace) {
 		return wsRule;

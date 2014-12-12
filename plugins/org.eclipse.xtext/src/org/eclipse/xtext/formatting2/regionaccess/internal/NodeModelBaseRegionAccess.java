@@ -233,6 +233,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		super(builder);
 	}
 
+	@Override
 	public ITextSegment expandRegionsByLines(int leadingLines, int trailingLines, ITextSegment... regions) {
 		int offset = regions[0].getOffset();
 		int endOffset = regions[0].getEndOffset();
@@ -296,6 +297,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		return node.getParent().getSemanticElement();
 	}
 
+	@Override
 	public int getLength() {
 		return getResource().getParseResult().getRootNode().getTotalEndOffset();
 	}
@@ -305,10 +307,12 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		return getResource().getParseResult().getRootNode().getText();
 	}
 
+	@Override
 	public boolean hasSyntaxError() {
 		return getResource().getParseResult().hasSyntaxErrors();
 	}
 
+	@Override
 	public boolean hasSyntaxError(EObject object) {
 		BidiTreeIterator<INode> it = NodeModelUtils.getNode(object).getAsTreeIterable().iterator();
 		while (it.hasNext()) {
@@ -318,6 +322,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		return false;
 	}
 
+	@Override
 	public ITextSegment indentationRegion(int offset) {
 		String text = getText();
 		int lineStart = text.lastIndexOf('\n', offset) + 1;

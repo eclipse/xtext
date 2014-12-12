@@ -29,6 +29,7 @@ public class LazyLinkingTestLanguageScopeProvider extends AbstractDeclarativeSco
 	
 	public IScope scope_Property(Type t, EReference ref) {
 		return new SimpleScope(IScope.NULLSCOPE, Iterables.transform(t.getExtends().getProperties(), new Function<Property, IEObjectDescription>(){
+			@Override
 			public IEObjectDescription apply(Property param) {
 				return EObjectDescription.create(QualifiedName.create(param.getName()), param);
 			}

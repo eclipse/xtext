@@ -24,18 +24,22 @@ public class TextReplacement extends AbstractTextSegment implements ITextReplace
 		this.replacement = text;
 	}
 
+	@Override
 	public int getLength() {
 		return length;
 	}
 
+	@Override
 	public int getOffset() {
 		return offset;
 	}
 
+	@Override
 	public String getReplacementText() {
 		return replacement;
 	}
 
+	@Override
 	public ITextRegionAccess getTextRegionAccess() {
 		return tokens;
 	}

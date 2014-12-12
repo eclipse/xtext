@@ -35,6 +35,7 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 		return clazz + "." + ref.getName();
 	}
 
+	@Override
 	public ISerializationDiagnostic getInvalidEnumValueDiagnostic(EObject semanticObject, RuleCall rc, Object value) {
 		List<String> valid = Lists.newArrayList();
 		for (EnumLiteralDeclaration eld : org.eclipse.xtext.EcoreUtil2.getAllContentsOfType(rc.getRule(),
@@ -46,6 +47,7 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 		return new SerializationDiagnostic(INVALID_ENUM_VALUE, semanticObject, rc, msg.toString());
 	}
 
+	@Override
 	public ISerializationDiagnostic getNoEObjectDescriptionFoundDiagnostic(EObject semanticObject,
 			CrossReference element, EObject target, IScope scope) {
 		String msg = "No EObjectDescription could be found in Scope " + getFullReferenceName(semanticObject, element)
@@ -53,16 +55,19 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 		return new SerializationDiagnostic(NO_EOBJECT_DESCRIPTION_FOUND, semanticObject, element, msg);
 	}
 
+	@Override
 	public ISerializationDiagnostic getNoScopeFoundDiagnostic(EObject semanticObject, CrossReference element,
 			EObject target) {
 		String msg = "Could not create Scope for EReference " + getFullReferenceName(semanticObject, element);
 		return new SerializationDiagnostic(NO_SCOPE_FOUND, semanticObject, element, msg);
 	}
 
+	@Override
 	public ISerializationDiagnostic getNullNotAllowedDiagnostic(EObject semanticObject, AbstractElement ele) {
 		return new SerializationDiagnostic(NULL_NOT_ALLOWED, semanticObject, ele, "Must not be null");
 	}
 
+	@Override
 	public ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semanticObject,
 			AbstractElement element, Object value, Throwable exception) {
 		return new SerializationDiagnostic(VALUE_CONVERSION_EXCEPTION, semanticObject, element, exception.getMessage());

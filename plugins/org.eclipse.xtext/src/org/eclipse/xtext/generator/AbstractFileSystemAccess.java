@@ -70,6 +70,7 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 
 	protected Map<String, String> getPathes() {
 		return transformValues(getOutputConfigurations(), new Function<OutputConfiguration, String>() {
+			@Override
 			public String apply(OutputConfiguration from) {
 				if (currentSource == null) {
 					return from.getOutputDirectory();
@@ -93,6 +94,7 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 		setOutputPath(DEFAULT_OUTPUT, path);
 	}
 
+	@Override
 	public void generateFile(String fileName, CharSequence contents) {
 		generateFile(fileName, DEFAULT_OUTPUT, contents);
 	}
@@ -100,6 +102,7 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	/**
 	 * @since 2.1
 	 */
+	@Override
 	public void deleteFile(String fileName) {
 		deleteFile(fileName, DEFAULT_OUTPUT);
 	}
@@ -107,6 +110,7 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	/**
 	 * @since 2.1
 	 */
+	@Override
 	public void deleteFile(String fileName, String outputConfigurationName) {
 		throw new UnsupportedOperationException();
 	}
@@ -134,6 +138,7 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	/**
 	 * @since 2.3
 	 */
+	@Override
 	public URI getURI(String fileName) {
 		return getURI(fileName, DEFAULT_OUTPUT);
 	}

@@ -54,14 +54,17 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
 	
+	@Override
 	public IResourceDescription getResourceDescription(final Resource resource) {
 		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>() {
+			@Override
 			public IResourceDescription get() {
 				return internalGetResourceDescription(resource, strategy);
 			}
 		});
 	}
 	
+	@Override
 	public Delta createDelta(IResourceDescription oldDescription, IResourceDescription newDescription) {
 		return new DefaultResourceDescriptionDelta(oldDescription, newDescription);
 	}
@@ -86,6 +89,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		return cache;
 	}
 	
+	@Override
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		if (!hasChanges(delta, candidate))
 			return false;
@@ -108,7 +112,8 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		}
 	}
 	
-    public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
+    @Override
+	public boolean isAffected(Collection<Delta> deltas, IResourceDescription candidate, IResourceDescriptions context) {
         Set<URI> outgoingReferences = descriptionUtils.collectOutgoingReferences(candidate);
         if (!outgoingReferences.isEmpty()) {
 	        for (IResourceDescription.Delta delta : deltas)

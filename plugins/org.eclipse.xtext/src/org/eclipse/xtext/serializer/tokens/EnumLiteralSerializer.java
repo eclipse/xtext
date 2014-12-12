@@ -67,10 +67,12 @@ public class EnumLiteralSerializer implements IEnumLiteralSerializer {
 		return null;
 	}
 
+	@Override
 	public boolean isValid(EObject context, RuleCall ruleCall, Object value, Acceptor errorAcceptor) {
 		return getLiteral(context, ruleCall, value) != null;
 	}
 
+	@Override
 	public String serializeAssignedEnumLiteral(EObject context, RuleCall ruleCall, Object value, INode node,
 			Acceptor errorAcceptor) {
 		Keyword nodeLit = getLiteral(node);

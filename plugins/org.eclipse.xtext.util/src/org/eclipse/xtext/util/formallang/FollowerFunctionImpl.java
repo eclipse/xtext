@@ -162,6 +162,7 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 		return filter;
 	}
 
+	@Override
 	public Iterable<E> getFollowers(E element) {
 		if (filter(element)) {
 			if (element == null)
@@ -177,6 +178,7 @@ public class FollowerFunctionImpl<E, T> implements FollowerFunction<E> {
 		return production;
 	}
 
+	@Override
 	public Iterable<E> getStarts(E root) {
 		if (root == null)
 			throw new NullPointerException();

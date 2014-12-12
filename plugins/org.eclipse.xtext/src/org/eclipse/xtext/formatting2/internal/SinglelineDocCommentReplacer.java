@@ -20,6 +20,7 @@ public class SinglelineDocCommentReplacer extends SinglelineCommentReplacer {
 		super(comment, prefix);
 	}
 
+	@Override
 	public ITextReplacerContext createReplacements(ITextReplacerContext context) {
 		ITextSegment firstSpace = getFirstSpace();
 		if (firstSpace != null) {

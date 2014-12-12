@@ -31,18 +31,22 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 		return element instanceof AbstractElement ? (AbstractElement) element : null;
 	}
 
+	@Override
 	public IHiddenRegion getNextHiddenRegion() {
 		return trailing;
 	}
 
+	@Override
 	public ISemanticRegion getNextSemanticRegion() {
 		return trailing != null ? trailing.getNextSemanticRegion() : null;
 	}
 
+	@Override
 	public IHiddenRegion getPreviousHiddenRegion() {
 		return leading;
 	}
 
+	@Override
 	public ISemanticRegion getPreviousSemanticRegion() {
 		return leading != null ? leading.getPreviousSemanticRegion() : null;
 	}

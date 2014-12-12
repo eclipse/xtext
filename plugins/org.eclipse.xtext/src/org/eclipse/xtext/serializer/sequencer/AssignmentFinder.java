@@ -55,6 +55,7 @@ public class AssignmentFinder implements IAssignmentFinder {
 	@Inject
 	protected IValueSerializer valueSerializer;
 
+	@Override
 	public Iterable<AbstractElement> findAssignmentsByValue(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value, INode node) {
 		EStructuralFeature feature = FeatureFinderUtil.getFeature(assignedElements.iterator().next(),

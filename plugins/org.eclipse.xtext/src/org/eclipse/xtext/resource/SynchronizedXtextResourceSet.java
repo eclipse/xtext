@@ -43,6 +43,7 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet implements IS
 	 * @since 2.4
 	 */
 	/* @NonNull */
+	@Override
 	public Object getLock() {
 		return lock;
 	}
@@ -53,6 +54,7 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet implements IS
 	 * @since 2.4
 	 */
 	/* @Nullable */
+	@Override
 	public <Result> Result execute(/* @NonNull */ IUnitOfWork<Result, ? super SynchronizedXtextResourceSet> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);

@@ -22,6 +22,7 @@ import com.google.common.base.Function;
 public interface ITextReplacer {
 
 	public final static Function<ITextReplacer, ITextSegment> GET_REGION = new Function<ITextReplacer, ITextSegment>() {
+		@Override
 		public ITextSegment apply(ITextReplacer input) {
 			return input.getRegion();
 		}

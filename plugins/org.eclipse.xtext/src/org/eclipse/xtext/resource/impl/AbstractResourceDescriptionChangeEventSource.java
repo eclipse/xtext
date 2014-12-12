@@ -23,6 +23,7 @@ public class AbstractResourceDescriptionChangeEventSource implements IResourceDe
 		listenerList = new CopyOnWriteArraySet<IResourceDescription.Event.Listener>();
 	}
 	
+	@Override
 	public void addListener(IResourceDescription.Event.Listener listener) {
 		listenerList.add(listener);
 	}
@@ -31,6 +32,7 @@ public class AbstractResourceDescriptionChangeEventSource implements IResourceDe
 		listenerList.addAll(listeners);
 	}
 
+	@Override
 	public void removeListener(IResourceDescription.Event.Listener listener) {
 		listenerList.remove(listener);
 	}
@@ -42,6 +44,7 @@ public class AbstractResourceDescriptionChangeEventSource implements IResourceDe
 	/**
 	 * @since 2.5
 	 */
+	@Override
 	public void notifyListeners(IResourceDescription.Event event) {
 		if (event == null)
 			throw new IllegalArgumentException("event may not be null");

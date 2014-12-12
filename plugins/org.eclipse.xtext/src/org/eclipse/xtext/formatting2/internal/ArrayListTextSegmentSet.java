@@ -102,6 +102,7 @@ public class ArrayListTextSegmentSet<T> extends TextSegmentSet<T> {
 		}
 	}
 
+	@Override
 	public Iterator<T> iterator() {
 		return Iterables.unmodifiableIterable(contents).iterator();
 	}

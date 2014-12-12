@@ -38,6 +38,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	
 	protected volatile Map<Integer, String> tokenDefMap;
 	
+	@Override
 	public Map<Integer, String> getTokenDefMap() {
 		if (antlrTokenFileProvider == null)
 			return Collections.emptyMap();

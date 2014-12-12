@@ -76,6 +76,7 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		this.delegate = delegate;
 	}
 
+	@Override
 	public IScopeProvider getDelegate() {
 		return delegate;
 	}
@@ -94,6 +95,7 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		return PolymorphicDispatcher.Predicates.forName(methodName, 2);
 	}
 
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope scope = polymorphicFindScopeForReferenceName(context, reference);
 		if (scope == null) {

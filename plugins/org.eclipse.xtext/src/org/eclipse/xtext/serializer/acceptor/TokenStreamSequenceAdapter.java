@@ -37,76 +37,95 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		this.errorAcceptor = errorAcceptor;
 	}
 
+	@Override
 	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
 		writeSemantic(GrammarUtil.containingCrossReference(rc), token);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
 		writeSemantic(GrammarUtil.containingCrossReference(enumRC), token);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		writeSemantic(GrammarUtil.containingCrossReference(kw), token);
 	}
 
+	@Override
 	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
 		writeSemantic(GrammarUtil.containingCrossReference(rc), token);
 	}
 
+	@Override
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
 		writeSemantic(datatypeRC, token);
 	}
 
+	@Override
 	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
 		writeSemantic(enumRC, token);
 	}
 
+	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		writeSemantic(keyword, token);
 	}
 
+	@Override
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
 		writeSemantic(terminalRC, token);
 	}
 
+	@Override
 	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
 		writeHidden(rule, token);
 	}
 
+	@Override
 	public void acceptUnassignedAction(Action action) {
 	}
 
+	@Override
 	public void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node) {
 		writeSemantic(datatypeRC, token);
 	}
 
+	@Override
 	public void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node) {
 		writeSemantic(enumRC, token);
 	}
 
+	@Override
 	public void acceptUnassignedKeyword(Keyword keyword, String token, ILeafNode node) {
 		writeSemantic(keyword, token);
 	}
 
+	@Override
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
 		writeSemantic(terminalRC, token);
 	}
 
+	@Override
 	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
 		writeHidden(rule, token);
 	}
 
+	@Override
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		return true;
 	}
 
+	@Override
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
 		return true;
 	}
 
+	@Override
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 	}
 
+	@Override
 	public void finish() {
 	}
 
@@ -125,15 +144,18 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 		}
 	}
 
+	@Override
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 	}
 
 	public void leaveAssignedParserRuleCall(RuleCall rc) {
 	}
 
+	@Override
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 	}
 
+	@Override
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 	}
 

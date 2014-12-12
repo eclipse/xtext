@@ -47,14 +47,17 @@ public class ExternalContentSupportTest extends AbstractXtextTests implements IE
 		super.tearDown();
 	}
 
+	@Override
 	public String getContent(URI uri) {
 		return uriToContent.get(uri);
 	}
 
+	@Override
 	public boolean hasContent(URI uri) {
 		return uriToContent.containsKey(uri);
 	}
 	
+	@Override
 	public IExternalContentProvider getActualContentProvider() {
 		return this;
 	}

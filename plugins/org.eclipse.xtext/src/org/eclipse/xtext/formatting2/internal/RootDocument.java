@@ -23,14 +23,17 @@ public class RootDocument extends FormattableDocument {
 		this.formatter = formatter;
 	}
 
+	@Override
 	public AbstractFormatter2 getFormatter() {
 		return formatter;
 	}
 
+	@Override
 	public ITextSegment getRegion() {
 		return (ITextSegment) formatter.getRequest().getTextRegionAccess();
 	}
 
+	@Override
 	public FormatterRequest getRequest() {
 		return formatter.getRequest();
 	}

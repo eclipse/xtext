@@ -86,34 +86,42 @@ public class NfaToProduction {
 			this.root = root;
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias<TOKEN>> getAlternativeChildren(AbstractElementAlias<TOKEN> ele) {
 			return ele instanceof AlternativeAlias ? ((AlternativeAlias<TOKEN>) ele).getChildren() : null;
 		}
 
+		@Override
 		public AbstractElementAlias<TOKEN> getParent(AbstractElementAlias<TOKEN> ele) {
 			return null;
 		}
 
+		@Override
 		public AbstractElementAlias<TOKEN> getRoot() {
 			return root;
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias<TOKEN>> getSequentialChildren(AbstractElementAlias<TOKEN> ele) {
 			return ele instanceof GroupAlias ? ((GroupAlias<TOKEN>) ele).getChildren() : null;
 		}
 
+		@Override
 		public TOKEN getToken(AbstractElementAlias<TOKEN> owner) {
 			return owner instanceof ElementAlias ? ((ElementAlias<TOKEN>) owner).getElement() : null;
 		}
 
+		@Override
 		public Iterable<AbstractElementAlias<TOKEN>> getUnorderedChildren(AbstractElementAlias<TOKEN> ele) {
 			return null;
 		}
 
+		@Override
 		public boolean isMany(AbstractElementAlias<TOKEN> ele) {
 			return ele.isMany();
 		}
 
+		@Override
 		public boolean isOptional(AbstractElementAlias<TOKEN> ele) {
 			return ele.isOptional();
 		}
@@ -268,14 +276,17 @@ public class NfaToProduction {
 			this.stop = stop;
 		}
 
+		@Override
 		public Iterable<StateAlias<TOKEN>> getFollowers(StateAlias<TOKEN> state) {
 			return state.getOutgoing();
 		}
 
+		@Override
 		public StateAlias<TOKEN> getStart() {
 			return start;
 		}
 
+		@Override
 		public StateAlias<TOKEN> getStop() {
 			return stop;
 		}

@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class HiddenRegionFormattingToString implements Function<IHiddenRegionFormatting, String> {
+	@Override
 	public String apply(IHiddenRegionFormatting gapFormatting) {
 		String space = gapFormatting.getSpace();
 		Integer nlMin = gapFormatting.getNewLineMin();

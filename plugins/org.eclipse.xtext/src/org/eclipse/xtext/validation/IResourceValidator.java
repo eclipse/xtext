@@ -27,6 +27,7 @@ public interface IResourceValidator {
 	List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator);
 
 	IResourceValidator NULL = new IResourceValidator() {
+		@Override
 		public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator) {
 			return Collections.emptyList();
 		}

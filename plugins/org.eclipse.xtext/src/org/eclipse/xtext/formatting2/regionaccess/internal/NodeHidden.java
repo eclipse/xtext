@@ -31,10 +31,12 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 		return element instanceof AbstractRule ? (AbstractRule) element : null;
 	}
 
+	@Override
 	public IHiddenRegion getHiddenRegion() {
 		return hiddenRegion;
 	}
 
+	@Override
 	public IHiddenRegionPart getNextHiddenPart() {
 		int i = hiddenRegion.hiddens.indexOf(this) + 1;
 		if (i < hiddenRegion.hiddens.size())
@@ -42,6 +44,7 @@ public class NodeHidden extends NodeRegion implements IHiddenRegionPart {
 		return null;
 	}
 
+	@Override
 	public IHiddenRegionPart getPreviousHiddenPart() {
 		int i = hiddenRegion.hiddens.indexOf(this) - 1;
 		if (i > 0)

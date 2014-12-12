@@ -15,6 +15,7 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverter<T> {
 
+	@Override
 	public String toString(T value) {
 		if (value == null)
 			return null;
@@ -23,6 +24,7 @@ public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverte
 
 	protected abstract String internalToString(T value);
 
+	@Override
 	public T toValue(String string, INode node) throws ValueConverterException {
 		if (string == null)
 			return null;

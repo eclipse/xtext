@@ -61,6 +61,7 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 		return uriEncoder;
 	}
 
+	@Override
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (getQualifiedNameProvider() == null)
 			return false;
@@ -75,6 +76,7 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 		return true;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
 			IAcceptor<IReferenceDescription> acceptor) {

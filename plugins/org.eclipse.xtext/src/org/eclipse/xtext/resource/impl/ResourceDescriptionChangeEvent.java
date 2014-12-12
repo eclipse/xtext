@@ -26,6 +26,7 @@ public class ResourceDescriptionChangeEvent implements IResourceDescription.Even
 		this.delta = ImmutableList.copyOf(delta);
 	}
 	
+	@Override
 	public ImmutableList<IResourceDescription.Delta> getDeltas() {
 		return delta;
 	}

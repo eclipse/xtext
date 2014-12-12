@@ -53,11 +53,13 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return resourceSet;
 	}
 
+	@Override
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		if (data != null) {
 			return data.getAllResourceDescriptions();
 		}
 		return Iterables.filter(new Iterable<IResourceDescription>() {
+			@Override
 			public Iterator<IResourceDescription> iterator() {
 				return new AbstractIterator<IResourceDescription>() {
 					int index = 0;
@@ -101,6 +103,7 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return resource != null;
 	}
 
+	@Override
 	public IResourceDescription getResourceDescription(URI uri) {
 		if (data != null) {
 			return data.getResourceDescription(uri);
@@ -117,6 +120,7 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 		return manager.getResourceDescription(resource);
 	}
 
+	@Override
 	public void setContext(Notifier ctx) {
 		this.resourceSet = EcoreUtil2.getResourceSet(ctx);
 		if (resourceSet != null) {
