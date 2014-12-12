@@ -51,6 +51,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("all")
 public class «setupImpl().toSimpleName()» implements ISetup {
 
+	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
 		«FOREACH usedGrammars AS usedGrammar-»
 		«((Grammar)usedGrammar).setup()».doSetup();

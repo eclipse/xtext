@@ -53,6 +53,7 @@ public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» 
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}
