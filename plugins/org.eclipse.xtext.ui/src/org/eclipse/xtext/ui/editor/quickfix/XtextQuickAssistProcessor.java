@@ -90,7 +90,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 			return new ICompletionProposal[0];
 		if (invocationContext instanceof QuickAssistInvocationContext) {
 			if (((QuickAssistInvocationContext) invocationContext).isCancelled()) {
-				return null;
+				return new ICompletionProposal[0];
 			}
 		}
 		final IDocument document = sourceViewer.getDocument();
@@ -106,7 +106,7 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		} catch (BadLocationException e) {
 			errorMessage = e.getMessage();
 		} catch (OperationCanceledException e) {
-			return null;
+			return new ICompletionProposal[0];
 		}
 		sortQuickfixes(result);
 		return result.toArray(new ICompletionProposal[result.size()]);

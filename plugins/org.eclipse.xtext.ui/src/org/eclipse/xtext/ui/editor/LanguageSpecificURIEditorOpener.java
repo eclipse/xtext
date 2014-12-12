@@ -112,7 +112,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			int tries = 0;
 			while (!success || tries >= 5) {
 				try {
-					xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork.Void<XtextResource>() {
+					xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 						@Override
 						public void process(XtextResource resource) throws Exception {
 							if (resource != null) {
