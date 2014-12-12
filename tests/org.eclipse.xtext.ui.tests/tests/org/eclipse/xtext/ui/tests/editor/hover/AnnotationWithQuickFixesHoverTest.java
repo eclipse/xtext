@@ -93,7 +93,8 @@ public class AnnotationWithQuickFixesHoverTest extends AbstractEditorTest {
 	}
 
 	@Test
-	public void testAnnotations() {
+	public void testAnnotations() throws Exception {
+		sleep(1000);
 		AnnotationWithQuickFixesHover.AnnotationInfo info = (AnnotationInfo) hover.getHoverInfo2(
 				editor.getInternalSourceViewer(), new Region(modelAsText.indexOf("_mystuff"), 1));
 		assertNotNull(info);
