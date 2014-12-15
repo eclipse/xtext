@@ -281,6 +281,13 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		assertNull(hyperlinks);
 	}
 	
+	@Test 
+	public void testBug_454412() throws Exception {
+		IHyperlink[] hyperlinks = getHyperLinks("class Baz { def QWERTZ foo(String param ){ 'Foo' } def bar(){ fo|o(variable) } }");
+		assertEquals(1, hyperlinks.length);
+		assertEquals("Open Declaration - foo(String) : QWERTZ", hyperlinks[0].getHyperlinkText());
+	}
+	
 	protected IHyperlink[] getHyperLinks(String modelAsString) throws Exception {
 		XtextResource resource = (XtextResource) testHelper.xtendFile("MyFile", modelAsString.replace("|", "")).eResource();
 		int indexOf_x_FieldRef = modelAsString.indexOf("|");
