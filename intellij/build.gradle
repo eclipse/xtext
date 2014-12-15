@@ -54,7 +54,8 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 }
 
 def intellijPluginProjects = [
-	project(':org.eclipse.xtext.idea.plugin'),
+	project(':org.eclipse.xtext.idea'),
+	project(':org.eclipse.xtext.xbase.idea'),
 	project(':org.eclipse.xtext.idea.sdomain.idea'),
 	project(':org.eclipse.xtext.idea.example.entities.idea'),
 	project(':org.eclipse.xtend.idea'),
