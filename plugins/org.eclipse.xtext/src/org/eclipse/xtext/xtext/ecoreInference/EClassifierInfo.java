@@ -92,9 +92,38 @@ public abstract class EClassifierInfo {
 					&& isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
 		}
 		
+		/**
+	     * Determine whether the class represented by {@code left} is either the same as
+	     * or is a superclass of the class represented by {@code right}.
+		 */
 		protected boolean isAssignableFrom(EClass left, EClass right) {
-			if (right != null && left.isSuperTypeOf(right))
-				return true;
+			if (right != null) {
+				// 1. Ask the EClass itself
+				if (left.isSuperTypeOf(right))
+					return true;
+				// 2. Ask the instance Class
+				if (left.getInstanceClass() != null && right.getInstanceClass() != null) {
+					boolean result = left.getInstanceClass().isAssignableFrom(right.getInstanceClass());
+					return result;
+				}
+				if (left.getEPackage() != null) {
+					// 3. Compare namespace URI and classifier Id
+					if (left.getClassifierID() == right.getClassifierID()
+							&& right.getEPackage() != null
+							&& left.getEPackage().getNsURI().equals(right.getEPackage().getNsURI())) {
+						return true;
+					}
+					// 4. Check all supertypes of the right class
+					for (EClass superClass : right.getEAllSuperTypes()) {
+						if (left.getClassifierID() == superClass.getClassifierID()
+								&& superClass.getEPackage() != null
+								&& left.getEPackage().getNsURI().equals(superClass.getEPackage().getNsURI())) {
+							return true;
+						}
+					}
+				}
+			}
+			// 5. If the left class is EObject, the result is always true
 			EClass eObjectType = GrammarUtil.findEObject(grammar);
 			if (left == eObjectType)
 				return true;
@@ -115,10 +144,6 @@ public abstract class EClassifierInfo {
 						}
 					}
 				}
-			}
-			if (right != null && left.getInstanceClass() != null && right.getInstanceClass() != null) {
-				boolean result = left.getInstanceClass().isAssignableFrom(right.getInstanceClass());
-				return result;
 			}
 			return false;
 		}
@@ -197,7 +222,6 @@ public abstract class EClassifierInfo {
 							EClass castedExistingType = (EClass) assignedExistingFeature.getEType();
 							boolean result = isAssignableFrom(castedExistingType, castedExpectedType);
 							if (!result) {
-								// TODO check for same name / nsURI pair but different resource uris
 								errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
 										"The expected type is " + classifierToString(castedExpectedType) + ".");
 								return result;
