@@ -89,6 +89,9 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Quickfixes for bogus EPackage imports
  */
 public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
+	
+	private static final String GRAMMAR_LANG_DOC = "https://www.eclipse.org/Xtext/documentation.html#grammarLanguage";
+
 	private String NULL_QUICKFIX_IMAGE = null;
 	
 //	see https://bugs.eclipse.org/bugs/show_bug.cgi?id=324566
@@ -393,9 +396,8 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 												MessageDialog.INFORMATION, 
 												new String[] { "Open Documentation", "Close" }, 1);
 										if (dialog.open() == 0) {
-											String url = "http://www.eclipse.org/Xtext/documentation/2_1_0/020-grammar-language.php#package_declarations_3";
 											try {
-												workbench.getBrowserSupport().getExternalBrowser().openURL(new URL(url));
+												workbench.getBrowserSupport().getExternalBrowser().openURL(new URL(GRAMMAR_LANG_DOC));
 											} catch (Exception e) {
 												// ignore
 											}
