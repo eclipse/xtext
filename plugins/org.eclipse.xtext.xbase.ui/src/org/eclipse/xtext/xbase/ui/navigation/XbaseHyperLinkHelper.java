@@ -186,35 +186,36 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 				return;
 			}
 			final JvmType type = typeReference.getType();
-			createHyperlinksTo(resource, crossRefNode, type, new IHyperlinkAcceptor() {
-				@Override
-				public void accept(IHyperlink hyperlink) {
-					if (hyperlink instanceof AbstractHyperlink) {
-						String target = labelForTargetElement(targetElement);
-						((AbstractHyperlink) hyperlink).setHyperlinkText("Open " + target + " Type - "
-								+ type.getSimpleName());
-					}
-					acceptor.accept(hyperlink);
-				}
-
-				private String labelForTargetElement(final JvmIdentifiableElement targetElement) {
-					String target = "Return";
-					if (targetElement instanceof JvmField) {
-						target = "Field";
-					} else if (targetElement instanceof JvmFormalParameter) {
-						// special case for variables in switch and for loops
-						if (targetElement.eContainer() instanceof XSwitchExpression
-							|| targetElement.eContainer() instanceof XForLoopExpression) {
-							target = "Variable";
-						} else {
-							target = "Parameter";
+			if(type != null)
+				createHyperlinksTo(resource, crossRefNode, type, new IHyperlinkAcceptor() {
+					@Override
+					public void accept(IHyperlink hyperlink) {
+						if (hyperlink instanceof AbstractHyperlink) {
+							String target = labelForTargetElement(targetElement);
+							((AbstractHyperlink) hyperlink).setHyperlinkText("Open " + target + " Type - "
+									+ type.getSimpleName());
 						}
-					} else if (targetElement instanceof XVariableDeclaration) {
-						target = "Variable";
+						acceptor.accept(hyperlink);
 					}
-					return target;
-				}
-			});
+	
+					private String labelForTargetElement(final JvmIdentifiableElement targetElement) {
+						String target = "Return";
+						if (targetElement instanceof JvmField) {
+							target = "Field";
+						} else if (targetElement instanceof JvmFormalParameter) {
+							// special case for variables in switch and for loops
+							if (targetElement.eContainer() instanceof XSwitchExpression
+								|| targetElement.eContainer() instanceof XForLoopExpression) {
+								target = "Variable";
+							} else {
+								target = "Parameter";
+							}
+						} else if (targetElement instanceof XVariableDeclaration) {
+							target = "Variable";
+						}
+						return target;
+					}
+				});
 		}
 	}
 
