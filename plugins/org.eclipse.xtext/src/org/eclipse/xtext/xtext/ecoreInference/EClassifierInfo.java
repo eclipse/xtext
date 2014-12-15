@@ -92,6 +92,10 @@ public abstract class EClassifierInfo {
 					&& isAssignableFrom(getEClass(),(EClass) subTypeInfo.getEClassifier());
 		}
 		
+		/**
+	     * Determine whether the class represented by {@code left} is either the same as
+	     * or is a superclass of the class represented by {@code right}.
+		 */
 		protected boolean isAssignableFrom(EClass left, EClass right) {
 			if (right != null && left.isSuperTypeOf(right))
 				return true;
@@ -197,9 +201,13 @@ public abstract class EClassifierInfo {
 							EClass castedExistingType = (EClass) assignedExistingFeature.getEType();
 							boolean result = isAssignableFrom(castedExistingType, castedExpectedType);
 							if (!result) {
-								// TODO check for same name / nsURI pair but different resource uris
-								errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
-										"The expected type is " + classifierToString(castedExpectedType) + ".");
+								if (isAssignableByID(castedExistingType, castedExpectedType)) {
+									errorMessage.append("The type " + classifierToString(castedExistingType) + " used in the reference '" + name + "' is inconsistent. " +
+											"Probably this is due to an unsupported kind of metamodel hierarchy.");
+								} else {
+									errorMessage.append("The existing reference '" + name + "' has an incompatible type " + classifierToString(castedExistingType) + ". " +
+											"The expected type is " + classifierToString(castedExpectedType) + ".");
+								}
 								return result;
 							}
 							result &= isContainment == ((EReference) assignedExistingFeature).isContainment();
@@ -250,6 +258,31 @@ public abstract class EClassifierInfo {
 			if (classifier.getInstanceTypeName() != null)
 				result += " [" + classifier.getInstanceTypeName() + "]";
 			return result;
+		}
+		
+		/**
+	     * Determine whether the class represented by {@code left} is either the same as
+	     * or is a superclass of the class represented by {@code right} comparing the classifier ID
+	     * and namespace URI.
+		 */
+		private boolean isAssignableByID(EClass left, EClass right) {
+			if (left.getEPackage() != null) {
+				// Compare namespace URI and classifier Id
+				if (left.getClassifierID() == right.getClassifierID()
+						&& right.getEPackage() != null
+						&& left.getEPackage().getNsURI().equals(right.getEPackage().getNsURI())) {
+					return true;
+				}
+				// Check all supertypes of the right class
+				for (EClass superClass : right.getEAllSuperTypes()) {
+					if (left.getClassifierID() == superClass.getClassifierID()
+							&& superClass.getEPackage() != null
+							&& left.getEPackage().getNsURI().equals(superClass.getEPackage().getNsURI())) {
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 		
 		public boolean isFeatureSemanticallyEqualApartFromType(EStructuralFeature f1, EStructuralFeature f2) {

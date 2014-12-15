@@ -482,7 +482,7 @@ public class GrammarUtil {
 	}
 	
 	/**
-	 * Find the datatype for EBoolean which is referable from the given grammar.
+	 * Find the class for EObject which is referable from the given grammar.
 	 * @since 2.1
 	 */
 	public static EClass findEObject(Grammar grammar) {
