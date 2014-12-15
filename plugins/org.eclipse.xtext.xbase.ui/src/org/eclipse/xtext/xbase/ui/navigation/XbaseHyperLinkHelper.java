@@ -85,16 +85,16 @@ public class XbaseHyperLinkHelper extends TypeAwareHyperlinkHelper implements IS
 	 */
 	@Override
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
-		if (!createMultipleHyperlinks) {
-			return super.createHyperlinksByOffset(resource, offset, createMultipleHyperlinks);
-		}
 		List<IHyperlink> links = Lists.newArrayList();
 		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
-		INode crossRefNode = getEObjectAtOffsetHelper().getCrossReferenceNode(resource, new TextRegion(offset, 0));
-		if (crossRefNode == null) {
-			this.createHyperlinksByOffset(resource, offset, acceptor);
-		} else {
-			this.createHyperlinksForCrossRef(resource, crossRefNode, acceptor);
+		super.createHyperlinksByOffset(resource, offset, acceptor);
+		if(createMultipleHyperlinks){
+			INode crossRefNode = getEObjectAtOffsetHelper().getCrossReferenceNode(resource, new TextRegion(offset, 0));
+			if (crossRefNode == null) {
+				this.createHyperlinksByOffset(resource, offset, acceptor);
+			} else {
+				this.createHyperlinksForCrossRef(resource, crossRefNode, acceptor);
+			}
 		}
 		if (!links.isEmpty())
 			return Iterables.toArray(links, IHyperlink.class);
