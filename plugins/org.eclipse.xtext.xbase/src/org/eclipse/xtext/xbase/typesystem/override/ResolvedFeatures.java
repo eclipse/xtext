@@ -39,6 +39,7 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 	private List<IResolvedOperation> allOperations;
 	private List<IResolvedOperation> declaredOperations;
 	private ListMultimap<String, IResolvedOperation> allOperationsPerErasure;
+	private ListMultimap<String, IResolvedOperation> declaredOperationsPerErasure;
 	
 	public ResolvedFeatures(LightweightTypeReference type, OverrideTester overrideTester) {
 		super(type, overrideTester);
@@ -81,26 +82,22 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 	}
 	
 	public List<IResolvedOperation> getDeclaredOperations(String erasedSignature) {
-		List<IResolvedOperation> operations = getAllOperations(erasedSignature);
-		for(int i = 0; i < operations.size(); i++) {
-			IResolvedOperation current = operations.get(i);
-			if (current.getDeclaration().getDeclaringType() != getRawType()) {
-				return operations.subList(0, i);
-			}
+		if (declaredOperationsPerErasure != null) {
+			return declaredOperationsPerErasure.get(erasedSignature);
 		}
-		return operations;
+		return (declaredOperationsPerErasure = computeIndex(getDeclaredOperations())).get(erasedSignature);
 	}
 	
 	public List<IResolvedOperation> getAllOperations(String erasedSignature) {
 		if (allOperationsPerErasure != null) {
 			return allOperationsPerErasure.get(erasedSignature);
 		}
-		return (allOperationsPerErasure = computeIndex()).get(erasedSignature);
+		return (allOperationsPerErasure = computeIndex(getAllOperations())).get(erasedSignature);
 	}
 	
-	protected ListMultimap<String, IResolvedOperation> computeIndex() {
+	protected ListMultimap<String, IResolvedOperation> computeIndex(List<IResolvedOperation> operations) {
 		// produces an immutable index which is what we want to have
-		return Multimaps.index(getAllOperations(), new Function<IResolvedOperation, String>() {
+		return Multimaps.index(operations, new Function<IResolvedOperation, String>() {
 			@Override
 			public String apply(IResolvedOperation input) {
 				return input.getResolvedErasureSignature();

@@ -42,23 +42,28 @@ import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=454786
  */
 @SuppressWarnings("all")
 public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
   public static class BaseClass {
-    public Object baseClassMethod() {
+    public Object baseClassMethod(final List<String> l) {
       return null;
     }
   }
   
   public static class DerivedClass extends ResolvedFeaturesTest.BaseClass {
-    public Object derivedClassMethod() {
+    public Object derivedClassMethod(final List<String> l) {
       return null;
     }
   }
   
   @Inject
   private OverrideHelper overrideHelper;
+  
+  private final static String BASE_CLASS_METHOD_ERASED_SIGNATURE = "baseClassMethod(java.util.List)";
+  
+  private final static String DERIVED_CLASS_METHOD_ERASED_SIGNATURE = "derivedClassMethod(java.util.List)";
   
   public ResolvedFeatures toResolvedOperations(final Class<?> type) {
     try {
@@ -108,6 +113,45 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ResolvedFeaturesTest.DerivedClass.class);
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
+    boolean _isEmpty = all.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    int _size = declared.size();
+    Assert.assertEquals(1, _size);
+    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(declared);
+    IResolvedOperation _head_1 = IterableExtensions.<IResolvedOperation>head(all);
+    Assert.assertSame(_head, _head_1);
+  }
+  
+  @Test
+  public void testDeclaredAndAllOperationsErasedSignature() {
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ResolvedFeaturesTest.DerivedClass.class);
+    List<IResolvedOperation> _allOperations = resolvedOperations.getAllOperations(ResolvedFeaturesTest.BASE_CLASS_METHOD_ERASED_SIGNATURE);
+    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(_allOperations);
+    Assert.assertNotNull(_head);
+    List<IResolvedOperation> _declaredOperations = resolvedOperations.getDeclaredOperations(ResolvedFeaturesTest.BASE_CLASS_METHOD_ERASED_SIGNATURE);
+    IResolvedOperation _head_1 = IterableExtensions.<IResolvedOperation>head(_declaredOperations);
+    Assert.assertNull(_head_1);
+  }
+  
+  @Test
+  public void testDeclaredOperationsErasedSignatureAreIncludedInAllOperations() {
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ResolvedFeaturesTest.DerivedClass.class);
+    final List<IResolvedOperation> all = resolvedOperations.getAllOperations(ResolvedFeaturesTest.DERIVED_CLASS_METHOD_ERASED_SIGNATURE);
+    final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations(ResolvedFeaturesTest.DERIVED_CLASS_METHOD_ERASED_SIGNATURE);
+    boolean _isEmpty = all.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    int _size = declared.size();
+    Assert.assertEquals(1, _size);
+    IResolvedOperation _head = IterableExtensions.<IResolvedOperation>head(declared);
+    IResolvedOperation _head_1 = IterableExtensions.<IResolvedOperation>head(all);
+    Assert.assertSame(_head, _head_1);
+  }
+  
+  @Test
+  public void testAllOperationsErasedSignatureIncludeDeclaredOperations() {
+    final ResolvedFeatures resolvedOperations = this.toResolvedOperations(ResolvedFeaturesTest.DerivedClass.class);
+    final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations(ResolvedFeaturesTest.DERIVED_CLASS_METHOD_ERASED_SIGNATURE);
+    final List<IResolvedOperation> all = resolvedOperations.getAllOperations(ResolvedFeaturesTest.DERIVED_CLASS_METHOD_ERASED_SIGNATURE);
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     int _size = declared.size();
