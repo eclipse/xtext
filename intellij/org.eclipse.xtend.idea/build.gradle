@@ -1,3 +1,8 @@
+configurations.compile {
+	exclude module:'org.eclipse.xtext.xbase.lib'
+	exclude module:'org.eclipse.xtend.lib.macro'
+}
+
 dependencies {
 	compile ("org.eclipse.xtend:org.eclipse.xtend.core:$version") {
 		transitive = false
@@ -5,6 +10,7 @@ dependencies {
 	compile ("org.eclipse.xtend:org.eclipse.xtend.ide.common:$version") {
 		transitive = false
 	}
+	compile ("org.eclipse.xtend:org.eclipse.xtend.lib:${version}")
 	provided project(':org.eclipse.xtext.idea')
 	provided project(':org.eclipse.xtext.xbase.idea')
 }

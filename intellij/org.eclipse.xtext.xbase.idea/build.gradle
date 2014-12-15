@@ -1,4 +1,5 @@
 dependencies {
-	compile project(':org.eclipse.xtext.idea.builder')
-	compile project(':org.eclipse.xtext.idea.generator')
+	provided (project(':org.eclipse.xtext.idea'))
+	provided project(':org.eclipse.xtext.idea.builder')
+	provided project(':org.eclipse.xtext.idea.generator')
 }
