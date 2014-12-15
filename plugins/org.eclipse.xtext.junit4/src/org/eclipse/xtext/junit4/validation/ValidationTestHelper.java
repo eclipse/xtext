@@ -241,6 +241,7 @@ public class ValidationTestHelper {
 				result.append(" on ");
 				result.append(eObject.eClass().getName());
 			}
+			result.append(", offset " + issue.getOffset() + ", length " + issue.getLength());
 			result.append("\n");
 		}
 		return result;
