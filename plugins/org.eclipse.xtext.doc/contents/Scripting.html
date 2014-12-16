@@ -1,0 +1,187 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Scripting Language</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="scripting"></a>
+<h1>Scripting Language</h1>
+<p>
+The scripting language allows writing code without any preludes such as package, class or method declarations.
+Just open a file and start coding. It&apos;s the simplest of the seven languages and is therefore a good starting point.
+</p>
+<p>
+<div class="image" >
+<img src="images/scripting_screenshot.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="scripting_solution"></a>
+<h2>Overview</h2>
+<p>
+As you can see the language is straightforward: All you can do is write expressions.
+The expressions you see are the same as in Xtend and they are defined in its own grammar (called Xbase).
+They are syntactically very close to Java, but feature advanced concepts like lambda expressions
+and operator overloading. They support local type inference so you do not have to write types everywhere
+like in Java, but the expressions are still statically typed. 
+For a Java developer, the code should be self-explanatory. The Xbase expression language is exhaustively 
+covered in the <a href="http://www.eclipse.org/Xtext/documentation.html">Xtext documentation</a>.
+</p>
+<p>
+A script is compiled to a Java class with one main method. That is the script
+</p>
+<p>
+<span class="inlinecode">println(<span class="string">&apos;Hello&nbsp;World!&apos;</span>)</span>
+</p>
+<p>
+is compiled to the following Java source code
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;my.first;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;Application&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String...&nbsp;args)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Hello&nbsp;World!"</span>);<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that the core language infrastructure such as the parser, linker and compiler does not depend on Eclipse,
+but the compilation is integrated with Eclipse for convenience reasons. All 7 languages can be parsed, compiled and executed
+without Eclipse. We could also make use of the interpreter, which might make more sense for a scripting language.
+How to use and integrate the interpreter is explained in the section describing the <a href="Tortoise.html#tortoise" title="Go to &quot;Little Tortoise&quot;" >section tortoise</a> language.
+</p>
+<a name="scripting_running"></a>
+<h2>Running the Example</h2>
+<p>
+Make sure you have the projects <em>org.xtext.scripting</em> and <em>org.xtext.scripting.ui</em> in your workspace.
+Then start a new Eclipse by choosing <em>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (org.xtext.scripting)</em>.
+Import the project <em>org.xtext.scripting.examples</em> into the newly spawned workspace using the <em>Import existing projects
+into workspace</em> wizard.
+</p>
+<a name="scripting_grammar"></a>
+<h2>Grammar</h2>
+<p>
+To build a language with Xtext, you first have to define a grammar. As opposed to other parser generators,
+an Xtext grammar defines both, the lexical structure of the language and an object model (the AST or semantic model) 
+that is build during parsing. 
+For a more detailed description of the Xtext grammar language, please see the <a href="http://www.eclipse.org/Xtext/documentation.html">Xtext documentation</a>.
+</p>
+<p>
+The grammar for our DSL is rather simple. We inherit from <span class="inlinecode">org.eclipse.xtext.xbase.Xbase</span> to get the
+syntax of the expressions. As we want to refer to the type 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/XBlockExpression.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.XBlockExpression" >XBlockExpression</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XBlockExpression.java" title="View Source Code" >(src)</a>, we have to import Xbase&apos;s Ecore model. The single type 
+inferred from this grammar goes into the Ecore model <span class="inlinecode">simpleExpressions</span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.xtext.scripting.Scripting&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;scripting&nbsp;<span class="string">"http://www.xtext.org/scripting/Scripting"</span><br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span><br/>
+<br/>
+Script&nbsp;<span class="keyword">returns</span>&nbsp;XBlockExpression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{Script}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(expressions+=XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*;
+</p>
+</div>
+</div>
+</p>
+<p>
+The main rule <em>Script</em> is defined to produce an object of type <span class="inlinecode">Script</span>, which is a subtype of <span class="inlinecode">XBlockExpression</span>. 
+A block expression simply contains any number of expressions. The rule <span class="inlinecode">XExpressionInsideBlock</span> is defined in the
+Xbase grammar. Usually block expressions are surrounded by curly braces, but of course we do not
+want to force anybody to write curly braces at the beginning and the end of a simple script.
+</p>
+<a name="scripting_inferrer"></a>
+<h2>Translation to Java</h2>
+<p>
+To make our language executable, we have to define how its concepts relate to Java concepts. In Xtext, this
+is defined by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>. The language
+generator automatically generates an Xtend stub for it. Nevertheless, it is up to the language developer to 
+implement the <span class="inlinecode">infer()</span> method. 
+</p>
+<p>
+This hook is not only used to explain how to generate Java code, but also to give expressions a proper
+scope and to make your DSL constructs visible by other JVM languages. The Java type system is used as
+a common hub to integrate arbitrary languages with each other.
+</p>
+<p>
+The inferrer is written in Xtend, if you are not yet familiar with it, you should read at least the 
+<a href="Intro.html#xtend_primer" title="Go to &quot;A Short Xtend Primer&quot;">Xtend Primer</a> first.
+</p>
+<p>
+The JVM model inferrer code for the scripting language looks like this: 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;ScriptingJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Script&nbsp;script,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPreIndexingPhase)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;className&nbsp;=&nbsp;script.eResource.URI.trimFileExtension.lastSegment<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(script.toClass(className))[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;class&nbsp;gets&nbsp;one&nbsp;main&nbsp;method<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;script.toMethod(<span class="string">&apos;main&apos;</span>,&nbsp;typeRef(Void.TYPE))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;script.toParameter(<span class="string">"args"</span>,&nbsp;&nbsp;typeRef(String).addArrayTypeDimension)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;=&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;varArgs&nbsp;=&nbsp;true<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;Associate&nbsp;the&nbsp;script&nbsp;as&nbsp;the&nbsp;body&nbsp;of&nbsp;the&nbsp;main&nbsp;method<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;script<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+It maps each script to one Java class with a main method. Note the use of <span class="inlinecode">script</span> as a receiver
+for all the factory methods. When creating a Java element, you need to pass a context so Xtext knows
+what the origin of a Java element is. This is used throughout the workbench for features like find references,
+call hierarchies, rename refactoring and more.
+</p>
+<p>
+As the whole script is an expression it is associated with the body of the main method. That association is important 
+since it defines the scope of the expression. It includes the variables, fields and methods that are visible as
+well as which return type is expected.
+</p>
+<p>
+In this case <span class="inlinecode"><span class="keyword">void</span></span> is expected, so you would get an error when using a return expression. Also the
+parameter <span class="inlinecode">args</span> defined in the main method is now on the scope. So you could write the following script:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(arg&nbsp;:&nbsp;args)<br/>
+&nbsp;&nbsp;println(<span class="string">&apos;--&nbsp;&apos;</span>+arg)
+</p>
+</div>
+</div>
+</p>
+<p>
+As you can imagine, this is a fairly powerful way to put things on the scope implicitly. 
+</p>
+</body>
+</html>

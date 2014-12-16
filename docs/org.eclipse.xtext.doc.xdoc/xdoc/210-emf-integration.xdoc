@@ -28,7 +28,7 @@ the meta model of our example:
 img[images/metamodel.png][Sample meta model][][] 
 
 The language in which the meta model is defined is called e[Ecore]. In other words, the meta model is 
-the Ecore model of your language. Ecore an essential part of EMF. Your models instantiate the meta model, 
+the Ecore model of your language. Ecore is an essential part of EMF. Your models instantiate the meta model, 
 and your meta model instantiates Ecore. To put an end to this recursion, Ecore is defined in itself 
 (an instance of itself). 
 
@@ -100,10 +100,8 @@ section:xtext_resource[XtextResource Implementation]
 Xtext provides an implementation of EMF's resource, the codeRef[org.eclipse.xtext.resource.XtextResource]. 
 This does not only encapsulate the parser that converts text to an EMF model but also the 
 ref:serialization[serializer] working the opposite direction. That way, an Xtext model just looks like any 
-other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact,
-the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the 
-fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore 
-model of the language. So in the ideal case, you can switch the serialization format of your models to your 
+other Ecore-based model from the outside, making it amenable for the use by other EMF based tools.
+So in the ideal case, you can switch the serialization format of your models to your 
 self-defined DSL by just replacing the resource implementation used by your other modeling tools. 
 
 img[images/emf-integration.png][ ][ ][ ]

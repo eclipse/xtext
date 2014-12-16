@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/xtext.html" label="Xtext Documentation" >
-	<topic href="contents/xtext_14.html#Xtext%20Documentation_14" label="Getting Started" >
+	<topic href="contents/xtext_21.html#Xtext%20Documentation_21" label="Getting Started" >
 		<topic href="contents/010-xtext-in-5-minutes.html#FirstFiveMinutes" label="5 Minutes Tutorial" >
 			<topic href="contents/010-xtext-in-5-minutes.html#NewProject" label="Creating A New Xtext Project" >
 			</topic>
@@ -44,7 +44,123 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_15.html#Xtext%20Documentation_15" label="Reference Documentation" >
+	<topic href="contents/xtext_22.html#Xtext%20Documentation_22" label="Seven JVM Languages Built With Xbase" >
+		<topic href="contents/Intro.html#sevenlang_introduction" label="Introduction" >
+			<topic href="contents/Intro.html#sevenlang_introduction_3" label="Write the Grammar" >
+			</topic>
+			<topic href="contents/Intro.html#sevenlang_introduction_4" label="Map to Java" >
+			</topic>
+			<topic href="contents/Intro.html#provisional_API" label="CAUTION: This is Provisional API" >
+			</topic>
+			<topic href="contents/Intro.html#common_requirements" label="Common Requirements" >
+			</topic>
+			<topic href="contents/Intro.html#installation" label="Getting the Code" >
+			</topic>
+			<topic href="contents/Intro.html#xtend_primer" label="A Short Xtend Primer" >
+			</topic>
+		</topic>
+		<topic href="contents/Scripting.html#scripting" label="Scripting Language" >
+			<topic href="contents/Scripting.html#scripting_solution" label="Overview" >
+			</topic>
+			<topic href="contents/Scripting.html#scripting_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/Scripting.html#scripting_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/Scripting.html#scripting_inferrer" label="Translation to Java" >
+			</topic>
+		</topic>
+		<topic href="contents/BuildDsl.html#builddsl" label="Build Language" >
+			<topic href="contents/BuildDsl.html#builddsl_solution" label="Overview" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_inferrer" label="Translation to Java" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_validation" label="Validation" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_imports" label="Imports" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_library" label="Operator Overloading" >
+			</topic>
+			<topic href="contents/BuildDsl.html#builddsl_launch" label="Run as... Integration" >
+			</topic>
+		</topic>
+		<topic href="contents/Mongo.html#mongoDB" label="DSL for MongoDB" >
+			<topic href="contents/Mongo.html#mongo_solution" label="Overview" >
+			</topic>
+			<topic href="contents/Mongo.html#mongo_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/Mongo.html#mongo_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/Mongo.html#mongo_inferrer" label="Translation to Java" >
+			</topic>
+			<topic href="contents/Mongo.html#mongo_nameProvider" label="Qualified Name Provider" >
+			</topic>
+			<topic href="contents/Mongo.html#mongo_validation" label="Validation" >
+			</topic>
+			<topic href="contents/Mongo.html#mongo_visual" label="IDE Enhancements" >
+			</topic>
+		</topic>
+		<topic href="contents/Guice.html#guice" label="DSL for Guice" >
+			<topic href="contents/Guice.html#guice_solution" label="Overview" >
+			</topic>
+			<topic href="contents/Guice.html#guice_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/Guice.html#guice_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/Guice.html#guice_inferrer" label="Translation to Java" >
+			</topic>
+			<topic href="contents/Guice.html#guice_validation" label="Validation" >
+			</topic>
+		</topic>
+		<topic href="contents/Routing.html#httpRouting" label="Http Routing Language" >
+			<topic href="contents/Routing.html#routing_solution" label="Overview" >
+			</topic>
+			<topic href="contents/Routing.html#routing_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/Routing.html#routing_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/Routing.html#routing_inferrer" label="Translation to Java" >
+			</topic>
+		</topic>
+		<topic href="contents/Templates.html#template" label="Template Language" >
+			<topic href="contents/Templates.html#templates_solution" label="Overview" >
+			</topic>
+			<topic href="contents/Templates.html#templates_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/Templates.html#templates_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/Templates.html#templates_inferrer" label="Translation to Java" >
+			</topic>
+			<topic href="contents/Templates.html#templates_compiler" label="Extending the Compiler" >
+			</topic>
+			<topic href="contents/Templates.html#templates_typeProvider" label="Type Computation" >
+			</topic>
+			<topic href="contents/Templates.html#templates_valueConverter" label="Value Converter" >
+			</topic>
+			<topic href="contents/Templates.html#templates_contentAssist" label="Content Assist" >
+			</topic>
+			<topic href="contents/Templates.html#templates_highlighting" label="Syntax Highlighting" >
+			</topic>
+		</topic>
+		<topic href="contents/Tortoise.html#tortoise" label="Little Tortoise" >
+			<topic href="contents/Tortoise.html#tortoise_solution" label="Overview" >
+			</topic>
+			<topic href="contents/Tortoise.html#tortoise_running" label="Running the Example" >
+			</topic>
+			<topic href="contents/Tortoise.html#tortoise_grammar" label="Grammar" >
+			</topic>
+			<topic href="contents/Tortoise.html#tortoise_inferrer" label="Translation to Java" >
+			</topic>
+			<topic href="contents/Tortoise.html#tortoise_interpreter" label="Interpreter" >
+			</topic>
+			<topic href="contents/Tortoise.html#tortoise_additons" label="Literal Classes" >
+			</topic>
+		</topic>
+	</topic>
+	<topic href="contents/xtext_23.html#Xtext%20Documentation_23" label="Reference Documentation" >
 		<topic href="contents/000-introduction.html#Overview" label="Overview" >
 			<topic href="contents/000-introduction.html#Overview_1" label="What is Xtext?" >
 			</topic>
@@ -594,7 +710,7 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/xtext_16.html#Xtext%20Documentation_16" label="Appendix" >
+	<topic href="contents/xtext_24.html#Xtext%20Documentation_24" label="Appendix" >
 		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x" label="Migrating from Xtext 1.0.x to 2.0" >
 			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_4" label="Take the Shortcut" >
 			</topic>

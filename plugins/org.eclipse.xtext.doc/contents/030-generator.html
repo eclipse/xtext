@@ -167,8 +167,8 @@ We will now have a look at the component model used to configure the Language Ge
 <p>
 A language generator is composed of so called language configurations. 
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >generator
-fragments</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
+In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/IGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >generator
+fragments</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc.
 </p>
@@ -187,7 +187,7 @@ The list of grammar fragments forms a chain of responsibility, that is they each
 to the generation of language infrastructure components and are called in the declared order.
 Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one 
 of the configured locations and contribute to several shared artifacts. A generator fragment must implement
-the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/IGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
+the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/IGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 </p>
 <p>
 There is usually no need to write your own generator fragments and only rarely you might want to extend an
@@ -250,22 +250,22 @@ Workflow&nbsp;{<br/>
 </div>
 </p>
 <p>
-Here the root element is <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> and is part of the very slim runtime 
+Here the root element is <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.7/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.7.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> and is part of the very slim runtime 
 model shipped with MWE2. It accepts 
 <span class="inlinecode">bean</span>s and <span class="inlinecode">component</span>s. A <span class="inlinecode"><span class="keyword">var</span></span> declaration is a first class concept of MWE2&apos;s configuration language 
 and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
 Note that you can refer to the variables using the <span class="inlinecode">${variable-name}</span> notation. 
 </p>
 <p>
-The method <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> does nothing but provides a means to apply global side-effects, which 
+The method <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.7/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.7.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> does nothing but provides a means to apply global side-effects, which 
 unfortunately is required sometimes. In this example we do a so called <em>EMF stand-alone setup</em>. This class 
 initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
-e.g. it allows to populate EMF&apos;s singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>.
+e.g. it allows to populate EMF&apos;s singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>.
 </p>
 <p>
-Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> method 
-accepts instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a>, which is the primary concept of MWE2&apos;s workflow model. The
-language generator component itself is an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.4.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> and can therefore be used within MWE2 workflows. 
+Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.7/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.7.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> method 
+accepts instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.7/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.7.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a>, which is the primary concept of MWE2&apos;s workflow model. The
+language generator component itself is an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.7/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.7.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> and can therefore be used within MWE2 workflows. 
 </p>
 <a name="generator_6"></a>
 <h3>Standard Generator Fragments</h3>
@@ -289,7 +289,7 @@ example languages look like.
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 EMF code for generated models
@@ -300,7 +300,7 @@ EMF code for generated models
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment" >XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment" >XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 ANTLR grammar, parser, lexer and related services
@@ -310,7 +310,7 @@ ANTLR grammar, parser, lexer and related services
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment" >GrammarAccessFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment" >GrammarAccessFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Access to the grammar
@@ -320,7 +320,7 @@ Access to the grammar
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 EMF resource factory
@@ -331,7 +331,7 @@ EMF resource factory
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment" >ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment" >ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Model-to-text serialization
@@ -342,7 +342,7 @@ Model-to-text serialization
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Index-based scoping
@@ -353,7 +353,7 @@ Index-based scoping
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.validation.JavaValidatorFragment" >JavaValidatorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.validation.JavaValidatorFragment" >JavaValidatorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Model validation
@@ -364,7 +364,7 @@ Model validation
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/formatting/FormatterFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.formatting.FormatterFragment" >FormatterFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/formatting/FormatterFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.formatting.FormatterFragment" >FormatterFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Code formatter
@@ -375,7 +375,7 @@ Code formatter
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Label provider
@@ -386,7 +386,7 @@ Label provider
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Outline view configuration
@@ -397,7 +397,7 @@ Outline view configuration
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment" >JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment" >JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Java-based content assist
@@ -408,7 +408,7 @@ Java-based content assist
 </tr>
 <tr>
 <td>
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment" >XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="View Source Code" >(src)</a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment" >XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="View Source Code" >(src)</a>
 </td>
 <td>
 Content assist helper based on ANTLR
@@ -428,7 +428,7 @@ the dependency rather then stating how to resolve it, i.e. obtaining that compon
 </p>
 <p>
 For instance when some code wants to use a scope provider, it just declares a field (or method or 
-constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html" title="View JavaDoc"><abbr title="com.google.inject.Inject" >@Inject</abbr></a> annotation: 
+constructor) and adds the <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Inject.html" title="View JavaDoc"><abbr title="com.google.inject.Inject" >@Inject</abbr></a> annotation: 
 </p>
 <p>
 <div class="literallayout">
@@ -445,7 +445,7 @@ constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.c
 </div>
 </p>
 <p>
-It is not the duty of the client code to care about where the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
+It is not the duty of the client code to care about where the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
 comes from or how it is created. When above&apos;s class is instantiated, Guice sees that it requires an instance of 
 IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
 if the object itself is created by Guice. In Xtext almost every instance is created that way 
@@ -453,7 +453,7 @@ and therefore the whole dependency net is controlled and configured by the means
 </p>
 <p>
 Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
-in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Modules</abbr></a>. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Module</abbr></a> defines a set of 
+in so called <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Modules</abbr></a>. A <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Module</abbr></a> defines a set of 
 mappings from types to either existing instances, instance providers or concrete classes. Modules are
 implemented in Java. Here&apos;s an example:
 </p>
@@ -477,7 +477,7 @@ implemented in Java. Here&apos;s an example:
 </div>
 </p>
 <p>
-With plain Guice modules one implements a method called configure and gets a <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> 
+With plain Guice modules one implements a method called configure and gets a <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> 
 passed in. That binder provides a fluent API to define the mentioned mappings. This was just a very 
 brief and simplified description. We highly recommend to have a look at 
 <a href="http://code.google.com/p/google-guice/">the website Google Guice</a> to learn more.  
@@ -508,9 +508,9 @@ method is :
 </p>
 <p>
 which would do the same as the code snippet above. It simply declares a binding from 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> to <em>MyConcreteScopeProvider</em>. That binding will make 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> to <em>MyConcreteScopeProvider</em>. That binding will make 
 Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> is declared.
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> is declared.
 </p>
 <p>
 Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
@@ -519,7 +519,7 @@ completely by returning null.
 </p>
 <p>
 There are two additional kinds of binding-methods supported. The first one allows to configure a provider. 
-A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a> is an interface with just one method : 
+A <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a> is an interface with just one method : 
 </p>
 <p>
 <div class="literallayout">
@@ -555,12 +555,12 @@ the following binding method.
 </div>
 </p>
 <p>
-Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
-is not a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a>.
+Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
+is not a Guice <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a>.
 </p>
 <p>
 That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to 
-obtain an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> for clients having declared a dependency
+obtain an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> for clients having declared a dependency
 to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful 
 if some global state should be shared in the application:
 </p>
@@ -594,8 +594,8 @@ respectively.
 </p>
 <p>
 The last binding method provided by Xtext allows to do anything you can do with Guice&apos;s binding API, since
-it allows you to use the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> directly. If your method&apos;s name starts with the
-name &apos;configure&apos;, has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a>:
+it allows you to use the <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> directly. If your method&apos;s name starts with the
+name &apos;configure&apos;, has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a>:
 </p>
 <p>
 <div class="literallayout">
@@ -612,7 +612,7 @@ name &apos;configure&apos;, has a return type <span class="inlinecode"><span cla
 <h3>Obtaining an Injector</h3>
 <p>
 In every application wired up with Guice there is usually one point where you initialize an 
-<a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a> using the modules declared. That injector is used to create the root 
+<a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a> using the modules declared. That injector is used to create the root 
 instance of the whole application. In plain Java environments this is something that&apos;s done in the main 
 method. It could look like this:
 </p>
@@ -647,7 +647,7 @@ strongly encourage you to read through the documentation on
 There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language, 
 that runs all tests and creates an Eclipse update site and other needed artifacts and secondly you may want to have your language and its corresponding
 code generator integrated in your application builds. We will discuss both cases in the section along a set of example projects, which you
-can clone, inspect or download from <a href="https://github.com/svenefftinge/maven-xtext-example">https://github.com/svenefftinge/maven-xtext-example</a>.
+can clone, inspect or download from <a href="https://github.com/xtext-dev/maven-xtext-example">https://github.com/xtext-dev/maven-xtext-example</a>.
 </p>
 <p>
 To follow this section you need to have a basic understanding of how Maven works. Please read a tutorial on Maven if you don&apos;t know anything about it.  
@@ -815,12 +815,12 @@ The second plug-in invokes the MWE2 file through a standard Java process:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtext.xtext&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.5.0&lt;/version&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.7.1&lt;/version&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtext.xbase&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.5.0&lt;/version&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.7.1&lt;/version&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;<br/>
 &nbsp;&nbsp;&lt;/dependencies&gt;<br/>
 &lt;/plugin&gt;
@@ -847,7 +847,7 @@ to how it is done in the example:
 </div>
 </p>
 <p>
-Next we need to register some URI mappings and make sure we use an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.5/org/eclipse/xtext/resource/XtextResourceSet.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResourceSet" >XtextResourceSet</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.5.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java" title="View Source Code" >(src)</a> in the build process.
+Next we need to register some URI mappings and make sure we use an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/resource/XtextResourceSet.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResourceSet" >XtextResourceSet</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResourceSet.java" title="View Source Code" >(src)</a> in the build process.
 This is only needed if you have ecore file references (also transitively) via platform URI. As we are using Xbase in the example
 it is needed to resolve the URIs to the Xbase related EPackages.
 </p>
@@ -901,7 +901,7 @@ contain any Eclipse plug-in specific information nor should it be built with Tyc
 &lt;plugin&gt;<br/>
 &nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtext&lt;/groupId&gt;<br/>
 &nbsp;&nbsp;&lt;artifactId&gt;xtext-maven-plugin&lt;/artifactId&gt;<br/>
-&nbsp;&nbsp;&lt;version&gt;2.5.0-SNAPSHOT&lt;/version&gt;<br/>
+&nbsp;&nbsp;&lt;version&gt;2.7.1&lt;/version&gt;<br/>
 &nbsp;&nbsp;&lt;executions&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;execution&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;goals&gt;<br/>
