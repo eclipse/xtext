@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.io.BufferedInputStream
+import java.io.IOException
 
 /**
  * A FileSystemSupport implementation which maps to the Eclipse Resources API.
@@ -150,15 +152,52 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 	
 	override setContentsAsStream(Path path, InputStream stream) {
 		try {
-			if (path.exists) {
-				path.eclipseFile.setContents(stream, true, true, null)
+			val eclipseFile = path.eclipseFile
+			if (eclipseFile.exists) {
+				if (stream.markSupported) {
+					if (hasContentsChanged(stream, eclipseFile)) {
+						stream.reset
+						eclipseFile.setContents(stream, true, true, null)
+					}
+				} else {
+					eclipseFile.setContents(stream, true, true, null)
+				}
 			} else {
 				path.parent.mkdir
-				path.eclipseFile.create(stream, true, null)
+				eclipseFile.create(stream, true, null)
 			}
 		} catch (CoreException exc) {
 			throw new IllegalArgumentException(exc.message, exc)
 		}
+	}
+	
+	// TODO consider extracting common logic from here and EclipseResourceFileSystemAccess2
+	private def hasContentsChanged(InputStream newContent, IFile file) {
+		var contentChanged = false;
+		var BufferedInputStream oldContent = null;
+		try {
+			oldContent = new BufferedInputStream(file.contents);
+			var int newByte = newContent.read();
+			var int oldByte = oldContent.read();
+			while (newByte != -1 && oldByte != -1 && newByte == oldByte) {
+				newByte = newContent.read();
+				oldByte = oldContent.read();
+			}
+			contentChanged = newByte != oldByte;
+		} catch (CoreException e) {
+			contentChanged = true;
+		} catch (IOException e) {
+			contentChanged = true;
+		} finally {
+			if (oldContent != null) {
+				try {
+					oldContent.close();
+				} catch (IOException e) {
+					// ignore
+				}
+			}
+		}
+		return contentChanged;
 	}
 	
 	override toURI(Path path) {
