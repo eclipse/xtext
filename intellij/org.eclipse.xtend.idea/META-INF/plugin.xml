@@ -55,6 +55,10 @@
       	<typeHierarchyProvider language="org.eclipse.xtend.core.Xtend" 
       							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
       							implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
+      	<callHierarchyProvider language="org.eclipse.xtend.core.Xtend" 
+      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+      							implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
+    	<hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/>
 	</extensions>
 
 </idea-plugin>
