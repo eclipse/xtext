@@ -51,6 +51,9 @@ public class ToBeBuiltComputer {
 
 	@Inject
 	private UriValidator uriValidator;
+	
+	@Inject 
+	private QueuedBuildData queuedBuildData;
 
 	private IToBeBuiltComputerContribution contribution;
 	
@@ -182,6 +185,7 @@ public class ToBeBuiltComputer {
 	private static final int MONITOR_CHUNK_SIZE = 100;
 	
 	protected ToBeBuilt doRemoveProject(IProject project, IProgressMonitor monitor) {
+		queuedBuildData.reset(project);
 		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()) / MONITOR_CHUNK_SIZE + 1);
 		ToBeBuilt result = new ToBeBuilt();
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();

@@ -11,7 +11,6 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
