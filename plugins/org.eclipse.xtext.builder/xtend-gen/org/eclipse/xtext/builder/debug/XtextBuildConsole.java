@@ -7,8 +7,10 @@
  */
 package org.eclipse.xtext.builder.debug;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
+import com.google.inject.Singleton;
 import java.io.PrintStream;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
@@ -35,8 +37,15 @@ public class XtextBuildConsole extends IOConsole {
     }
   }
   
+  @Singleton
   public static class Logger implements IBuildLogger {
+    private static IBuildLogger delegate;
+    
     public void log(final Object it) {
+      boolean _notEquals = (!Objects.equal(XtextBuildConsole.Logger.delegate, null));
+      if (_notEquals) {
+        XtextBuildConsole.Logger.delegate.log(it);
+      }
       ConsolePlugin _default = ConsolePlugin.getDefault();
       final IConsoleManager consoleManager = _default.getConsoleManager();
       IConsole[] _consoles = consoleManager.getConsoles();
@@ -62,6 +71,10 @@ public class XtextBuildConsole extends IOConsole {
         console.println(_plus_2);
       }
       consoleManager.showConsoleView(console);
+    }
+    
+    public IBuildLogger registerDelegate(final IBuildLogger delegate) {
+      return XtextBuildConsole.Logger.delegate = delegate;
     }
   }
   

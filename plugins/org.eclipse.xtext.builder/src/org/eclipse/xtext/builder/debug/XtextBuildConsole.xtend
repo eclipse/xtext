@@ -13,6 +13,7 @@ import org.eclipse.ui.console.IConsoleFactory
 import org.eclipse.ui.console.IOConsole
 
 import static extension com.google.common.base.Throwables.*
+import com.google.inject.Singleton
 
 /** 
  * @author Jan Koehnlein - Initial contribution and API
@@ -38,8 +39,14 @@ class XtextBuildConsole extends IOConsole {
 		}
 	}
 	
+	@Singleton
 	static class Logger implements IBuildLogger {
+		
+		static IBuildLogger delegate
+		
 		override log(Object it) {
+			if(delegate != null)
+				delegate.log(it)
 			val consoleManager = ConsolePlugin.getDefault.consoleManager
 			val console = consoleManager.consoles.filter(XtextBuildConsole).head
 			console?.println(
@@ -51,6 +58,10 @@ class XtextBuildConsole extends IOConsole {
 				}
 			)
 			consoleManager.showConsoleView(console)
+		}
+		
+		def registerDelegate(IBuildLogger delegate) {
+			Logger.delegate = delegate
 		}
 	}
 }
