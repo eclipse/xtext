@@ -71,7 +71,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 
 class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
 
-	public static val JVM_ELEMENT_KEY = new Key("org.eclipse.xtext.idea.jvm.element")
+	public static val JVM_ELEMENT_KEY = new Key<EObject>("org.eclipse.xtext.idea.jvm.element")
 
 	@Inject
 	PsiModelAssociations psiAssocations

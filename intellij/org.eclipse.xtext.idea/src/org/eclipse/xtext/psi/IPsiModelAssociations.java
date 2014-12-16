@@ -7,7 +7,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import com.intellij.psi.PsiElement;
 
 public interface IPsiModelAssociations {
-	EObject getEObject(PsiEObject element);
+	EObject getEObject(PsiElement element);
 
 	PsiElement getPsiElement(EObject object);
 

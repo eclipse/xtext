@@ -93,7 +93,7 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 @SuppressWarnings("all")
 public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensibleClass {
-  public final static Key<Object> JVM_ELEMENT_KEY = new Key<Object>("org.eclipse.xtext.idea.jvm.element");
+  public final static Key<EObject> JVM_ELEMENT_KEY = new Key<EObject>("org.eclipse.xtext.idea.jvm.element");
   
   @Inject
   private PsiModelAssociations psiAssocations;
@@ -184,7 +184,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             it.setDeprecated(_isDeprecated);
             PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(f);
             it.setNavigationElement(_navigationElement);
-            it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, f);
+            it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, f);
           }
         };
         LightFieldBuilder _doubleArrow = ObjectExtensions.<LightFieldBuilder>operator_doubleArrow(_lightFieldBuilder, _function);
@@ -219,7 +219,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             }
             PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(m);
             it.setNavigationElement(_navigationElement);
-            it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, m);
+            it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, m);
           }
         };
         LightMethodBuilder _doubleArrow = ObjectExtensions.<LightMethodBuilder>operator_doubleArrow(_lightMethodBuilder, _function);
@@ -270,7 +270,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
                 if (_notEquals) {
                   it.setNavigationElement(navElement);
                 }
-                it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
+                it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
               }
             };
             LightParameter _doubleArrow = ObjectExtensions.<LightParameter>operator_doubleArrow(_lightParameter, _function);
@@ -491,7 +491,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             public void apply(final JvmPsiClassImpl it) {
               PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(inner);
               it.setNavigationElement(_navigationElement);
-              it.<Object>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, inner);
+              it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, inner);
             }
           };
           JvmPsiClassImpl _doubleArrow = ObjectExtensions.<JvmPsiClassImpl>operator_doubleArrow(_jvmPsiClassImpl, _function);
