@@ -1,19 +1,18 @@
 package org.eclipse.xtext.idea.jvmmodel
 
 import com.google.inject.Inject
-import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiMethod
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.idea.types.psi.impl.JvmPsiClassImpl
 import org.eclipse.xtext.psi.IPsiModelAssociations
 import org.eclipse.xtext.psi.IPsiModelAssociator
 import org.eclipse.xtext.psi.PsiElementProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
-import org.eclipse.xtext.common.types.JvmExecutable
-import com.intellij.psi.PsiClass
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmFormalParameter
-import com.intellij.psi.PsiMethod
 
 class PsiJvmModelAssociator extends JvmModelAssociator {
 

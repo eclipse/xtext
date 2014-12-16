@@ -1,4 +1,4 @@
-package org.eclipse.xtext.idea.ide.hierarchy
+package org.eclipse.xtext.xbase.idea.ide.hierarchy
 
 import com.google.inject.Inject
 import com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider
@@ -8,13 +8,11 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.PsiElement
-import java.util.Collection
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmDeclaredType
+import com.intellij.psi.PsiMember
 import org.eclipse.xtext.psi.IPsiModelAssociations
-import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.psi.impl.BaseXtextFile
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider
 import org.jetbrains.annotations.NotNull
 
 import static extension com.intellij.codeInsight.TargetElementUtilBase.*
@@ -26,7 +24,10 @@ class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider {
 	extension IPsiModelAssociations
 
 	@Inject
-	extension IJvmModelAssociations
+	extension IPsiJvmModelAssociations
+
+	@Inject
+	extension IPsiLogicalContainerProvider
 
 	override PsiElement getTarget(@NotNull DataContext dataContext) {
 		val project = dataContext.project
@@ -60,15 +61,20 @@ class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider {
 	}
 
 	protected def dispatch PsiClass findPsiClass(BaseXtextFile element) {
-		element.resource.contents.psiClass
+		element.resource.contents.map [
+			psiElement
+		].filter(PsiClass).head
 	}
 
 	protected def dispatch PsiClass findPsiClass(PsiElement element) {
-		val psiClass = element.psiClass
-		if (psiClass != null) {
-			return psiClass
+		switch container : element.nearestLogicalContainer {
+			PsiClass:
+				container
+			PsiMember:
+				container.containingClass
+			default:
+				element.psiClass ?: element.parent.findPsiClass
 		}
-		element.parent.findPsiClass
 	}
 
 	protected def dispatch PsiClass findPsiClass(Void element) {
@@ -76,28 +82,7 @@ class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider {
 	}
 
 	protected def getPsiClass(PsiElement element) {
-		switch element {
-			PsiClass:
-				element
-			PsiEObject: {
-				val eObject = element.EObject
-				if (eObject == null)
-					null
-				else
-					eObject.jvmElements.psiClass
-			}
-		}
-	}
-
-	protected def getPsiClass(Collection<EObject> objects) {
-		val jvmType = objects.filter(JvmDeclaredType).head
-		if (jvmType == null) {
-			return null
-		}
-		val psiElement = jvmType.psiElement
-		if (psiElement instanceof PsiClass) {
-			return psiElement
-		}
+		element.jvmElements.filter(PsiClass).head
 	}
 
 }

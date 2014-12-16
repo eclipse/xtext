@@ -78,7 +78,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
                 PsiClass[] _innerClasses = psiClass.getInnerClasses();
                 final Function1<PsiClass, Boolean> _function = new Function1<PsiClass, Boolean>() {
                   public Boolean apply(final PsiClass it) {
-                    Object _userData = it.<Object>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
+                    EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                     return Boolean.valueOf(Objects.equal(_userData, jvmElement));
                   }
                 };
@@ -109,7 +109,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               PsiMethod[] _methods = psiClass.getMethods();
               final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
                 public Boolean apply(final PsiMethod it) {
-                  Object _userData = it.<Object>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
+                  EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                   return Boolean.valueOf(Objects.equal(_userData, jvmElement));
                 }
               };
@@ -138,7 +138,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               PsiField[] _fields = psiClass.getFields();
               final Function1<PsiField, Boolean> _function = new Function1<PsiField, Boolean>() {
                 public Boolean apply(final PsiField it) {
-                  Object _userData = it.<Object>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
+                  EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                   return Boolean.valueOf(Objects.equal(_userData, jvmElement));
                 }
               };
@@ -168,7 +168,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               PsiParameter[] _parameters = _parameterList.getParameters();
               final Function1<PsiParameter, Boolean> _function = new Function1<PsiParameter, Boolean>() {
                 public Boolean apply(final PsiParameter it) {
-                  Object _userData = it.<Object>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
+                  EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                   return Boolean.valueOf(Objects.equal(_userData, jvmElement));
                 }
               };

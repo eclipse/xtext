@@ -1,4 +1,4 @@
-package org.eclipse.xtext.idea.ide.hierarchy;
+package org.eclipse.xtext.xbase.idea.ide.hierarchy;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -14,20 +14,22 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiMember;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.idea.actionSystem.DataContextExtensions;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
-import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiJvmModelAssociations;
+import org.eclipse.xtext.xbase.idea.jvmmodel.IPsiLogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("all")
@@ -38,7 +40,11 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
   
   @Inject
   @Extension
-  private IJvmModelAssociations _iJvmModelAssociations;
+  private IPsiJvmModelAssociations _iPsiJvmModelAssociations;
+  
+  @Inject
+  @Extension
+  private IPsiLogicalContainerProvider _iPsiLogicalContainerProvider;
   
   public PsiElement getTarget(@NotNull final DataContext dataContext) {
     PsiClass _xblockexpression = null;
@@ -87,21 +93,46 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
   protected PsiClass _findPsiClass(final BaseXtextFile element) {
     Resource _resource = element.getResource();
     EList<EObject> _contents = _resource.getContents();
-    return this.getPsiClass(_contents);
+    final Function1<EObject, PsiElement> _function = new Function1<EObject, PsiElement>() {
+      public PsiElement apply(final EObject it) {
+        return JvmDeclaredTypeHierarchyProvider.this._iPsiModelAssociations.getPsiElement(it);
+      }
+    };
+    List<PsiElement> _map = ListExtensions.<EObject, PsiElement>map(_contents, _function);
+    Iterable<PsiClass> _filter = Iterables.<PsiClass>filter(_map, PsiClass.class);
+    return IterableExtensions.<PsiClass>head(_filter);
   }
   
   protected PsiClass _findPsiClass(final PsiElement element) {
-    PsiClass _xblockexpression = null;
-    {
-      final PsiClass psiClass = this.getPsiClass(element);
-      boolean _notEquals = (!Objects.equal(psiClass, null));
-      if (_notEquals) {
-        return psiClass;
+    PsiClass _switchResult = null;
+    PsiElement _nearestLogicalContainer = this._iPsiLogicalContainerProvider.getNearestLogicalContainer(element);
+    final PsiElement container = _nearestLogicalContainer;
+    boolean _matched = false;
+    if (!_matched) {
+      if (container instanceof PsiClass) {
+        _matched=true;
+        _switchResult = ((PsiClass)container);
       }
-      PsiElement _parent = element.getParent();
-      _xblockexpression = this.findPsiClass(_parent);
     }
-    return _xblockexpression;
+    if (!_matched) {
+      if (container instanceof PsiMember) {
+        _matched=true;
+        _switchResult = ((PsiMember)container).getContainingClass();
+      }
+    }
+    if (!_matched) {
+      PsiClass _elvis = null;
+      PsiClass _psiClass = this.getPsiClass(element);
+      if (_psiClass != null) {
+        _elvis = _psiClass;
+      } else {
+        PsiElement _parent = element.getParent();
+        PsiClass _findPsiClass = this.findPsiClass(_parent);
+        _elvis = _findPsiClass;
+      }
+      _switchResult = _elvis;
+    }
+    return _switchResult;
   }
   
   protected PsiClass _findPsiClass(final Void element) {
@@ -109,48 +140,9 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
   }
   
   protected PsiClass getPsiClass(final PsiElement element) {
-    PsiClass _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof PsiClass) {
-        _matched=true;
-        _switchResult = ((PsiClass)element);
-      }
-    }
-    if (!_matched) {
-      if (element instanceof PsiEObject) {
-        _matched=true;
-        PsiClass _xblockexpression = null;
-        {
-          final EObject eObject = ((PsiEObject)element).getEObject();
-          PsiClass _xifexpression = null;
-          boolean _equals = Objects.equal(eObject, null);
-          if (_equals) {
-            _xifexpression = null;
-          } else {
-            Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(eObject);
-            _xifexpression = this.getPsiClass(_jvmElements);
-          }
-          _xblockexpression = _xifexpression;
-        }
-        _switchResult = _xblockexpression;
-      }
-    }
-    return _switchResult;
-  }
-  
-  protected PsiClass getPsiClass(final Collection<EObject> objects) {
-    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(objects, JvmDeclaredType.class);
-    final JvmDeclaredType jvmType = IterableExtensions.<JvmDeclaredType>head(_filter);
-    boolean _equals = Objects.equal(jvmType, null);
-    if (_equals) {
-      return null;
-    }
-    final PsiElement psiElement = this._iPsiModelAssociations.getPsiElement(jvmType);
-    if ((psiElement instanceof PsiClass)) {
-      return ((PsiClass)psiElement);
-    }
-    return null;
+    Set<PsiElement> _jvmElements = this._iPsiJvmModelAssociations.getJvmElements(element);
+    Iterable<PsiClass> _filter = Iterables.<PsiClass>filter(_jvmElements, PsiClass.class);
+    return IterableExtensions.<PsiClass>head(_filter);
   }
   
   protected PsiClass findPsiClass(final PsiElement element) {

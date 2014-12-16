@@ -96,11 +96,15 @@ public class PsiModelAssociations implements IPsiModelAssociations, IPsiModelAss
 		
 	}
 	
-    public EObject getEObject(PsiEObject element) {
+    public EObject getEObject(PsiElement element) {
     	if (element == null) {
             return null;
         }
-    	return element.getEObject();
+    	if (element instanceof PsiEObject) {
+    		PsiEObject psiEObject = (PsiEObject) element;
+			return psiEObject.getEObject();	
+    	}
+    	return null;
     }
 
     public PsiElement getPsiElement(EObject object) {
