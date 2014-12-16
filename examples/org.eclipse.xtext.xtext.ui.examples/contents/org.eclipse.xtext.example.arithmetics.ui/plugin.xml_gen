@@ -361,5 +361,11 @@
             extensions="calc">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="calc"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>
