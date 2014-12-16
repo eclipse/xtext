@@ -287,7 +287,6 @@ public class HyperlinkingTest extends AbstractXtendUITestCase {
 		assertEquals(1, hyperlinks.length);
 		assertEquals("Open Declaration - foo(String) : QWERTZ", hyperlinks[0].getHyperlinkText());
 	}
-	
 	protected IHyperlink[] getHyperLinks(String modelAsString) throws Exception {
 		XtextResource resource = (XtextResource) testHelper.xtendFile("MyFile", modelAsString.replace("|", "")).eResource();
 		int indexOf_x_FieldRef = modelAsString.indexOf("|");
