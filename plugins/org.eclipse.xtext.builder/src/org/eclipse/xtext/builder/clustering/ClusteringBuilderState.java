@@ -30,6 +30,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.AbstractBuilderState;
 import org.eclipse.xtext.builder.builderState.BuilderStateUtil;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
+import org.eclipse.xtext.builder.debug.IBuildLogger;
 import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader.LoadOperation;
@@ -85,6 +86,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
     
     @Inject
 	private CompilerPhases compilerPhases;
+    
+    @Inject 
+    private IBuildLogger buildLogger;
 
     private static final int MONITOR_DO_UPDATE_CHUNK = 10;
     
@@ -212,7 +216,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         if(toBeDeleted.contains(changedURI)) {
                             break;
                         }
-
+                        buildLogger.log("indexing " + changedURI);
                         final IResourceDescription.Manager manager = getResourceDescriptionManager(actualResourceURI);
                         if (manager != null) {
                             // Resolve links here!
