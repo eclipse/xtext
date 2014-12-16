@@ -1,0 +1,534 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Template Language</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="template"></a>
+<h1>Template Language</h1>
+<p>
+This is a little template language specialized in generating HTML documents.
+</p>
+<p>
+<div class="image" >
+<img src="images/template_screenshot.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+The language allows web designers to do their job and lets developers put in the dynamic parts. 
+The syntax and terminals are chosen to be readable and allow rendering the templates in the browser as 
+well as in any HTML 5 compatible WYSIWYG editors. Still, when opened in the DSL editor you get the 
+fully featured, statically typed Eclipse editor.
+</p>
+<a name="templates_solution"></a>
+<h2>Overview</h2>
+<p>
+A template language works in two modes: Plain text mode, where everything goes directly into the output
+and the expression mode, where expressions have to be evaluated and the result is inserted into the text.
+To switch between text mode and expression mode, we use the French quotes <span class="inlinecode">&laquo;</span> and <span class="inlinecode"><span class="string">&raquo;</span></span>. A document
+starts in text mode.
+</p>
+<p>
+The template will be compiled to a Java class with a <span class="inlinecode">generate(params)</span> method. You can provide 
+additional information like a package declaration, imports and parameters in the preamble inside a 
+template at the beginning of the document.
+</p>
+<p>
+We provide additional <span class="inlinecode"><span class="keyword">FOR</span>-<span class="keyword">ENDFOR</span></span> and <span class="inlinecode"><span class="keyword">IF</span>-<span class="keyword">ELSE</span>-<span class="keyword">ENDIF</span></span> statements to
+iterate / branch over fixed text blocks. To distinguish them from the Xbase expressions with the same
+names, they are in uppercase.
+</p>
+<a name="templates_running"></a>
+<h2>Running the Example</h2>
+<p>
+In the runtime workspace, run the <em>GenerateHtml</em> file as a Java application (<em>Run
+as... &gt; Java Application</em> from the context menu). This will execute the template <em>MyWebsite</em> and print
+the result to the console.   
+</p>
+<a name="templates_grammar"></a>
+<h2>Grammar</h2>
+<p>
+This is the grammar of the templates DSL:
+ 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.xtext.template.Template&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;template&nbsp;<span class="string">"http://www.xtext.org/template/Template"</span><br/>
+<span class="keyword">import</span>&nbsp;<span class="string">&apos;http://www.eclipse.org/xtext/xbase/Xbase&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;xbase<br/>
+<br/>
+TemplateFile:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;&lt;!--&apos;</span><span class="string">&apos;&laquo;&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;package&apos;</span>&nbsp;package=QualifiedName)?&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;importSection=XImportSection?&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;params+=Parameter*&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=RichString;<br/>
+<br/>
+Parameter:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;annotations+=XAnnotation*&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;param&apos;</span>&nbsp;type=JvmTypeReference?&nbsp;name=ID&nbsp;(<span class="string">&apos;=&apos;</span>&nbsp;defaultexp=XExpression)?;<br/>
+<br/>
+RichString&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XBlockExpression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{RichString}&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;expressions+=RichStringLiteral&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(expressions+=RichStringPart&nbsp;expressions+=RichStringLiteral)*;<br/>
+<br/>
+RichStringLiteral&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XStringLiteral:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{RichStringLiteral}&nbsp;value=TEXT;<br/>
+<br/>
+RichStringPart&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XExpression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;XExpressionInsideBlock&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;RichStringForLoop&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;RichStringIf;<br/>
+<br/>
+RichStringForLoop&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XForLoopExpression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{RichStringForLoop}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"FOR"</span>&nbsp;declaredParam=JvmFormalParameter&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;forExpression=XExpression<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eachExpression=RichString<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ENDFOR"</span>;<br/>
+<br/>
+RichStringIf&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XIfExpression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{RichStringIf}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"IF"</span>&nbsp;if=XExpression<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then=RichString<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(else=RichStringElseIf&nbsp;|&nbsp;<span class="string">"ELSE"</span>&nbsp;else=RichString)?<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ENDIF"</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+RichStringElseIf&nbsp;<span class="keyword">returns</span>&nbsp;xbase::XIfExpression:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{RichStringIf}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ELSEIF"</span>if=XExpression<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;then=RichString<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(else=RichStringElseIf&nbsp;|&nbsp;<span class="string">"ELSE"</span>&nbsp;else=RichString)?;<br/>
+<br/>
+<span class="keyword">terminal</span>&nbsp;TEXT&nbsp;:&nbsp;<span class="string">&apos;&raquo;&apos;</span>&nbsp;(!<span class="string">&apos;&laquo;&apos;</span>)*&nbsp;(<span class="keyword">EOF</span>|<span class="string">&apos;&laquo;&apos;</span>);
+</p>
+</div>
+</div>
+</p>
+<p>
+It becomes quite straightforward once you have understood the escaping. Have a look at the last rule
+<em>TEXT</em> first: It says that a text starts with a closing French quote and ends with an opening quote or 
+the end of the file. By inverting opening and closing quotes we mark up text instead of expressions. 
+</p>
+<p>
+A <em>TemplateFile</em> starts with a comment and switches to the expression mode for the preamble part consisting 
+of the package declaration, the imports and the parameter declaration. The body is a <em>RichString</em>, which
+is an alternating sequence of <em>RichStringLiterals</em> and <em>RichStringPart</em>. The <em>RichStringLiterals</em>
+is essentially a text block (in inverted French quotes). The <em>RichStringPart</em> is either an Xbase expression,
+a <em>RichStringForLoop</em> or a <em>RichStringIf</em>. The latter inherit from the Xbase expressions with the same name 
+to reuse as much of the Xbase infrastructure as possible. The rest should be easy.
+</p>
+<a name="templates_inferrer"></a>
+<h2>Translation to Java</h2>
+<p>
+Each <em>TemplateFile</em> is compiled to a Java class with a <span class="inlinecode">generate</span> method that takes a lambda
+expression as a parameter. The lambda expression is called to initialize the template&apos;s properties, by 
+handling the template itself as an argument. This comes along nicely, especially when called from Xtend.
+</p>
+<p>
+<table>
+<tr>
+<td>
+DSL
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;!--&laquo;<br/>
+&nbsp;&nbsp;...<br/>
+<span class="string">&raquo;--&gt;</span>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+Java
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyWebsite&nbsp;{<br/>
+...&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;generate(<span class="keyword">final</span>&nbsp;Procedure1&lt;MyWebsite&gt;&nbsp;init)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(init&nbsp;!=&nbsp;<span class="keyword">null</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init.apply(<span class="keyword">this</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;result&nbsp;=&nbsp;generate().toString();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;remove&nbsp;leading&nbsp;--&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;result.replaceAll(<span class="string">"^--&gt;\\r?\\n"</span>,<span class="string">""</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;trim&nbsp;multi-newline&nbsp;to&nbsp;single&nbsp;newline<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;result.replaceAll(<span class="string">"\\r?\\n\\s*\\r\\n?"</span>,&nbsp;System.getProperty(<span class="string">"line.separator"</span>));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</p>
+<p>
+The corresponding code in the <abbr title="org.xtext.template.jvmmodel.TemplateJvmModelInferrer" >TemplateJvmModelInferrer</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateJvmModelInferrer.xtend" title="View Source Code" >(src)</a> is:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;TemplateJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
+...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(TemplateFile&nbsp;element,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPreIndexingPhase)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;simpleName&nbsp;=&nbsp;element.eResource.URI.trimFileExtension.lastSegment<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;qualifiedName&nbsp;=&nbsp;<span class="keyword">if</span>(element.getPackage&nbsp;!=&nbsp;null)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;element.getPackage&nbsp;+&nbsp;<span class="string">"."</span>&nbsp;+&nbsp;simpleName<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;simpleName<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;javaClass&nbsp;=&nbsp;element.toClass(qualifiedName)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(javaClass)[<br/>
+...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;generate&nbsp;a&nbsp;method&nbsp;accepting&nbsp;an&nbsp;initializer&nbsp;lambda&nbsp;expression<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;element.toMethod(<span class="string">"generate"</span>,&nbsp;typeRef(String))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;element.toParameter(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"init"</span>,&nbsp;typeRef(Procedures.Procedure1,&nbsp;typeRef(javaClass))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(init&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;init.apply(this);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;result&nbsp;=&nbsp;generate().toString();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;remove&nbsp;leading&nbsp;--&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;result.replaceAll("^--&gt;\\r?\\n","");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;trim&nbsp;multi-newline&nbsp;to&nbsp;single&nbsp;newline<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;result.replaceAll("\\r?\\n\\s*\\r?\\n",System.getProperty("line.separator"));<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+...
+</p>
+</div>
+</div>
+</p>
+<p>
+Each <em>Parameter</em> becomes a Java property, i.e. a field with a getter and a setter. 
+</p>
+<p>
+<table>
+<tr>
+<td>
+DSL
+</td>
+<td>
+<span class="inlinecode"><span class="keyword">param</span>&nbsp;title&nbsp;=&nbsp;<span class="string">"No&nbsp;Title"</span></span>
+</td>
+</tr>
+<tr>
+<td>
+Java
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">private</span>&nbsp;String&nbsp;title&nbsp;=&nbsp;<span class="string">"No&nbsp;Title"</span>;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setTitle(<span class="keyword">final</span>&nbsp;String&nbsp;title)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">this</span>.title&nbsp;=&nbsp;title;<br/>
+}<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;String&nbsp;getTitle()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">this</span>.title;<br/>
+}
+</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</p>
+<p>
+In the inferrer, note that we derive the property&apos;s type in three steps: Take the declared one, if there is none, 
+derive it from the initializer and if even that fails, use <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> as default. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(param&nbsp;:&nbsp;element.params)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;type&nbsp;=&nbsp;param.type&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;?:&nbsp;param.defaultexp?.inferredType&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;?:&nbsp;typeRef(String)<br/>
+&nbsp;&nbsp;members&nbsp;+=&nbsp;param.toField(param.name,&nbsp;type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(param.defaultexp&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializer&nbsp;=&nbsp;param.defaultexp<br/>
+&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;members&nbsp;+=&nbsp;param.toSetter(param.name,&nbsp;type)<br/>
+&nbsp;&nbsp;members&nbsp;+=&nbsp;param.toGetter(param.name,&nbsp;type)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The body of the template is compiled into a big private <span class="inlinecode">generate()</span> method. We skip
+the inferrer code here, as it is straightforward. But we had to extend the compiler to support rich
+strings and the new <span class="inlinecode"><span class="keyword">FOR</span></span> loop our new control structures. This is described in the 
+<a href="Templates.html#templates_compiler" title="Go to &quot;Extending the Compiler&quot;">next section</a>.
+</p>
+<p>
+<table>
+<tr>
+<td>
+DSL
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="string">&raquo;&lt;!DOCTYPE&nbsp;html&gt;<br/>
+&lt;html&nbsp;lang="en"&gt;<br/>
+&lt;head&gt;<br/>
+&nbsp;&nbsp;&lt;meta&nbsp;charset="utf-8"&gt;<br/>
+&nbsp;&nbsp;&lt;title&gt;&laquo;</span>title<span class="string">&raquo;&lt;/title&gt;<br/>
+&nbsp;&nbsp;&lt;meta&nbsp;name="viewport"&nbsp;content="width=device-width,&nbsp;initial-sca..."&gt;<br/>
+&nbsp;&nbsp;&lt;meta&nbsp;name="description"<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content="&laquo;</span>description<span class="string">&raquo;"&gt;<br/>
+&nbsp;&nbsp;&lt;meta&nbsp;name="author"&nbsp;content="&laquo;</span>...
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+Java
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">private</span>&nbsp;CharSequence&nbsp;generate()&nbsp;{<br/>
+&nbsp;&nbsp;StringBuilder&nbsp;_appendable&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuilder();<br/>
+&nbsp;&nbsp;_appendable.append(ObjectExtensions.operator_elvis(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"--&gt;\n&lt;!DOCTYPE&nbsp;html&gt;\n&lt;html&nbsp;lang=\"en\"&gt;\n&lt;head&gt;\n\t&lt;meta..."</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">""</span>));<br/>
+&nbsp;&nbsp;_appendable.append(ObjectExtensions.operator_elvis(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.title,<span class="string">""</span>));<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;appends&nbsp;galore<br/>
+</span>...
+</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</p>
+<a name="templates_compiler"></a>
+<h2>Extending the Compiler</h2>
+<p>
+We have added additional expressions to Xbase, so we have to tell the compiler how to translate them
+to Java. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler" >XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> has a method 
+<span class="inlinecode">doInternalToJavaStatement</span> that dispatches the compilation with regard to the type of the
+current expression. This is where we have to hook in with our <abbr title="org.xtext.template.jvmmodel.TemplateCompiler" >TemplateCompiler</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend" title="View Source Code" >(src)</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;TemplateCompiler&nbsp;<span class="keyword">extends</span>&nbsp;XbaseCompiler&nbsp;{<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">protected</span>&nbsp;doInternalToJavaStatement(XExpression&nbsp;expr,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ITreeAppendable&nbsp;<span class="keyword">it</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isReferenced)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;expr&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RichString&nbsp;:&nbsp;{<br/>
+...&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RichStringForLoop&nbsp;:&nbsp;{<br/>
+...&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.doInternalToJavaStatement(expr,&nbsp;<span class="keyword">it</span>,&nbsp;isReferenced)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+...
+</p>
+</div>
+</div>
+</p>
+<p>
+For a <em>RichString</em>, we declare a variable <span class="inlinecode">_appendable</span> of type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html" title="View JavaDoc"><abbr title="java.lang.StringBuilder" >StringBuilder</abbr></a>
+and append the results of all its evaluated expressions. Remember from the grammar that every second expression
+is a <em>RichStringPart</em> which can be <span class="inlinecode">null</span>, so we use the &apos;elvis operator&apos; <span class="inlinecode">?:</span>
+to insert an empty string in this case. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+RichString&nbsp;:&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;declareVariable(expr,&nbsp;<span class="string">&apos;_appendable&apos;</span>)<br/>
+&nbsp;&nbsp;newLine<br/>
+&nbsp;&nbsp;append(<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder&nbsp;&laquo;</span>name<span class="string">&raquo;&nbsp;=&nbsp;new&nbsp;StringBuilder();<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(nestedExpression&nbsp;:&nbsp;expr.expressions)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;nestedExpression.internalToJavaStatement(<span class="keyword">it</span>,&nbsp;true)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newLine<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;append(<span class="string">&apos;&apos;&apos;&laquo;</span>name<span class="string">&raquo;.append(ObjectExtensions.operator_elvis(&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;nestedExpression.internalToJavaExpression(<span class="keyword">it</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;append(<span class="string">&apos;,""));&apos;</span>)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+As our <em>RichStringLiteral</em> inherits from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/XStringLiteral.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.XStringLiteral" >XStringLiteral</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XStringLiteral.java" title="View Source Code" >(src)</a>, it does not
+need any special treatment. The same holds for <em>RichStringIf</em> and <em>RichStringElseIif</em>. The <em>RichStringForLoop</em>
+requires special treatment, because as opposed to the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/XForLoopExpression.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.XForLoopExpression" >XForLoopExpression</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java" title="View Source Code" >(src)</a>
+that always returns <span class="inlinecode"><span class="keyword">null</span></span>, we want it to return a concatenation of its results. This looks
+like
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+RichStringForLoop&nbsp;:&nbsp;{<br/>
+&nbsp;&nbsp;expr.forExpression.internalToJavaStatement(<span class="keyword">it</span>,&nbsp;true)<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;paramType&nbsp;=&nbsp;typeProvider.getTypeForIdentifiable(expr.declaredParam)<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;declareVariable(expr,&nbsp;<span class="string">&apos;_forLoopResult&apos;</span>)<br/>
+&nbsp;&nbsp;newLine<br/>
+&nbsp;&nbsp;append(<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder&nbsp;&laquo;</span>name<span class="string">&raquo;&nbsp;=&nbsp;new&nbsp;StringBuilder();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(final&nbsp;&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;serialize(paramType,&nbsp;expr,&nbsp;<span class="keyword">it</span>);<br/>
+&nbsp;&nbsp;append(<span class="string">&apos;&apos;&apos;&nbsp;&laquo;</span>declareVariable(expr.declaredParam,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;makeJavaIdentifier(expr.declaredParam.name))<span class="string">&raquo;&nbsp;:&nbsp;&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;internalToJavaExpression(expr.forExpression,&nbsp;<span class="keyword">it</span>)<br/>
+&nbsp;&nbsp;append(<span class="string">")&nbsp;{"</span>).increaseIndentation<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;expr.eachExpression.internalToJavaStatement(<span class="keyword">it</span>,&nbsp;true)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;newLine<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;append(<span class="string">&apos;&apos;&apos;&laquo;</span>name<span class="string">&raquo;.append(&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;expr.eachExpression.internalToJavaExpression(<span class="keyword">it</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;append(<span class="string">&apos;);&apos;</span>)<br/>
+&nbsp;&nbsp;decreaseIndentation.newLine.append(<span class="string">"}"</span>)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The compiler now knows how to handle the new expressions in a statement context. In addition, we have
+to teach it to compile them in an expression context. This is what the second method does:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">override</span>&nbsp;<span class="keyword">protected</span>&nbsp;internalToConvertedExpression(XExpression&nbsp;obj,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ITreeAppendable&nbsp;<span class="keyword">it</span>)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(hasName(obj))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;append(getName(obj))<br/>
+&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.internalToConvertedExpression(obj,&nbsp;<span class="keyword">it</span>)&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+As usual, we have to bind our <abbr title="org.xtext.template.jvmmodel.TemplateCompiler" >TemplateCompiler</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/jvmmodel/TemplateCompiler.xtend" title="View Source Code" >(src)</a> in the 
+<abbr title="org.xtext.template.TemplateRuntimeModule" >TemplateRuntimeModule</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java" title="View Source Code" >(src)</a> in order to be picked up as the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler" >XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> in the context of our language.
+</p>
+<a name="templates_typeProvider"></a>
+<h2>Type Computation</h2>
+<p>
+The type system has to know how to determine the types of our new expressions. This is the job of the 
+<abbr title="org.xtext.template.typesystem.TemplateTypeComputer" >TemplateTypeComputer</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/typesystem/TemplateTypeComputer.xtend" title="View Source Code" >(src)</a>: <em>RichString</em> becomes a 
+<a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html" title="View JavaDoc"><abbr title="java.lang.StringBuilder" >StringBuilder</abbr></a>. As opposed to its super type 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/XForLoopExpression.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.XForLoopExpression" >XForLoopExpression</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/emf-gen/org/eclipse/xtext/xbase/XForLoopExpression.java" title="View Source Code" >(src)</a> a <em>RichStringForLoop</em> is of type
+<a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html" title="View JavaDoc"><abbr title="java.lang.StringBuilder" >StringBuilder</abbr></a> as well. The for-loop&apos;s body is expected to have a type, as the results
+must be concatenatable, which is different from Xbase&apos;s for-loop.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;TemplateTypeComputer&nbsp;<span class="keyword">extends</span>&nbsp;XbaseWithAnnotationsTypeComputer&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;computeTypes(RichString&nbsp;expression,&nbsp;ITypeComputationState&nbsp;state)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>._computeTypes(expression&nbsp;<span class="keyword">as</span>&nbsp;XBlockExpression,&nbsp;state)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.acceptActualType(getTypeForName(StringBuilder,&nbsp;state))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;computeTypes(RichStringForLoop&nbsp;expression,&nbsp;ITypeComputationState&nbsp;state)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>._computeTypes(expression&nbsp;<span class="keyword">as</span>&nbsp;XForLoopExpression,&nbsp;state)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.acceptActualType(getTypeForName(StringBuilder,&nbsp;state))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Like the compiler, we have to bind this implementation in our 
+<abbr title="org.xtext.template.TemplateRuntimeModule" >runtime module</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java" title="View Source Code" >(src)</a> as well.
+</p>
+<a name="templates_valueConverter"></a>
+<h2>Value Converter</h2>
+<p>
+The <em>RichStringLiterals</em> still have the French quotes around their values. As we do not want to see 
+them in the output, we
+have implemented the <abbr title="org.xtext.template.TemplateValueConverterService" >TemplateValueConverterService</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateValueConverterService.xtend" title="View Source Code" >(src)</a> and bound it in the 
+<abbr title="org.xtext.template.TemplateRuntimeModule" >runtime module</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template/src/org/xtext/template/TemplateRuntimeModule.java" title="View Source Code" >(src)</a>.
+</p>
+<a name="templates_contentAssist"></a>
+<h2>Content Assist</h2>
+<p>
+The French quotes are not easy to type on every keyboard. We have adapted content assist to insert them
+when the cursor is inside a TEXT terminal:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;TemplateProposalProvider&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractTemplateProposalProvider&nbsp;{<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete_TEXT(EObject&nbsp;model,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RuleCall&nbsp;ruleCall,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContentAssistContext&nbsp;context,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;CompletionProposal(<span class="string">"&laquo;&raquo;"</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.getOffset(),&nbsp;0,&nbsp;1));<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="templates_highlighting"></a>
+<h2>Syntax Highlighting</h2>
+<p>
+Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback,
+we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting
+styles in the <abbr title="org.xtext.template.ui.highlighting.TemplateHighlightingConfiguration" >TemplateHighlightingConfiguration</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingConfiguration.xtend" title="View Source Code" >(src)</a> and apply
+them to the text in the <abbr title="org.xtext.template.ui.highlighting.TemplateHighlightingCalculator" >TemplateHighlightingCalculator</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.template.ui/src/org/xtext/template/ui/highlighting/TemplateHighlightingCalculator.xtend" title="View Source Code" >(src)</a>. As
+this is rather extensively covered in the <a href="documentation.html#highlighting">Xtext documentation</a>, we 
+skip a deeper explanation here.
+</p>
+</body>
+</html>

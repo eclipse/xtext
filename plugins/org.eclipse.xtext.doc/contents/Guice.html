@@ -1,0 +1,417 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>DSL for Guice</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="guice"></a>
+<h1>DSL for Guice</h1>
+<p>
+The Guice DSL is a little language that lets you define Guice modules in a readable and declarative way. 
+</p>
+<p>
+<div class="image" >
+<img src="images/guicemodules_screenshot.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="guice_solution"></a>
+<h2>Overview</h2>
+<p>
+Guice is a great dependency injection container, which uses Java types and annotations to declare and 
+refer to injection points. You could for instance have the following field:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject<br/>
+@Named(<span class="string">"properties"</span>)&nbsp;Map&lt;String,String&gt;&nbsp;properties;
+</p>
+</div>
+</div>
+</p>
+<p>
+A module is used to tell the framework what instance to inject into such injection points.
+For that, Guice comes with a fluent interface API written in Java and a couple of tricks (e.g. TypeLiteral) to
+make the configuration as readable and maintainable as possible.
+</p>
+<p>
+You could for instance declare the following module:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyModule&nbsp;<span class="keyword">implements</span>&nbsp;Module&nbsp;{<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Map&lt;String,String&gt;&nbsp;properties&nbsp;=&nbsp;Maps.newHashMap();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;properties.put(<span class="string">"debugLevel"</span>,&nbsp;<span class="string">"info"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(<span class="keyword">new</span>&nbsp;TypeLiteral&lt;Map&lt;String,String&gt;&gt;(){})<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(Names.named(<span class="string">"properties"</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toInstance(properties);<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The big advantage of using Java over an external text or XML file is that you can leverage
+the IDE and the type checking. We want to have that. The downside is that you have to trick (i.e. 
+<a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/TypeLiteral.html" title="View JavaDoc"><abbr title="com.google.inject.TypeLiteral" >TypeLiteral</abbr></a>) a lot in
+order to have an agreeable syntax. Also since the configuration is &apos;hidden&apos; in a method implementation and not
+really declarative you cannot validate a Guice module at compile time.
+</p>
+<p>
+The Guice DSL described in this section lets you describe the module above like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+MyModule&nbsp;{<br/>
+&nbsp;&nbsp;@Named(<span class="string">"properties"</span>)&nbsp;Map&lt;String,String&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">to</span>-instance&nbsp;newHashMap(<span class="string">&apos;debugLevel&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;info&apos;</span>)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+This not only uses the exact same syntax one uses in any injection points, but also opens up all kinds
+of possibilities for static analysis. Usually the instantiation of a Guice injector at runtime takes quite some time,
+because then all the very helpful validation is done. A language like the one described in this section could
+do all theses analysis at compile time, that way speeding up start up of the whole application significantly. 
+</p>
+<a name="guice_running"></a>
+<h2>Running the Example</h2>
+<p>
+In the example located in the project <em>org.xtext.guicemodules.examples</em> two modules are declared, one
+for a possible runtime scenario and one for a test scenario (yes, you sometimes want a module for tests).
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+import&nbsp;com.acme.*<br/>
+import&nbsp;com.acme.impl.*<br/>
+<br/>
+com.acme.RuntimeModule&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;DataProvider&nbsp;<span class="keyword">to</span>&nbsp;FileDataProvider<br/>
+&nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;@DataFile&nbsp;String&nbsp;<span class="keyword">to</span>-instance&nbsp;<span class="string">&apos;my-data.txt&apos;</span><br/>
+}<br/>
+<br/>
+com.acme.TestModule&nbsp;<span class="keyword">mixin</span>&nbsp;RuntimeModule&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;DataProvider&nbsp;<span class="keyword">to</span>-instance&nbsp;[<span class="string">&apos;dummy-data&apos;</span>&nbsp;]<br/>
+&nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;LoggingService&nbsp;<span class="keyword">to</span>&nbsp;BufferedLoggingService<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+You can see the two modules in action by running <span class="inlinecode">com.acme.Main</span> from the context menu as a 
+<em>Java application</em> or as a <em>JUnit test</em>.  
+</p>
+<a name="guice_grammar"></a>
+<h2>Grammar</h2>
+<p>
+The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism
+already described for the <a href="Scripting.html#scripting_grammar" title="Go to &quot;Grammar&quot;">scripting language</a>. A module can &apos;mixin&apos; any number of other modules, which allows
+to reuse existing modules but override keys with different bindings. The mixin feature is described as a 
+cross reference to another <span class="inlinecode">ModuleAST</span>. Cross references are covered in detail in the <a href="http://www.eclipse.org/Xtext/documentation.html#cross_reference">Xtext documentation</a>.
+</p>
+<p>
+The language allows binding keys to other keys and to instances. Other concepts like binding to providers
+is something you could do, but would not help in getting the idea across. Everybody is encouraged to fork
+this first prototype and build something really useful ;-)
+</p>
+<p>
+Instead of extending <span class="inlinecode">org.eclipse.xtext.xbase.Xbase</span> the grammar <span class="inlinecode">org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</span>
+is extended which adds full support for annotations. You just have to refer to the rule <span class="inlinecode">XAnnotation</span>
+as it is done in the rule <span class="inlinecode">KeyAST</span>. Btw. it is sometimes a good idea to suffix (or prefix) the AST
+node types to avoid confusion when working with a library where concepts are named similarly.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.xtext.guicemodules.GuiceModules&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations<br/>
+&nbsp;<br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types<br/>
+<span class="keyword">generate</span>&nbsp;guiceModules&nbsp;<span class="string">"http://www.xtext.org/guicemodules/GuiceModules"</span><br/>
+&nbsp;&nbsp;<br/>
+ModulesAST&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;importSection=XImportSection?<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;modules+=ModuleAST*;<br/>
+<br/>
+ModuleAST&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;name=QualifiedName&nbsp;(<span class="string">&apos;mixin&apos;</span>&nbsp;mixins+=[ModuleAST|QualifiedName]&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;mixins+=[ModuleAST|QualifiedName])*)?&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindings+=BindingAST*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+<br/>
+BindingAST:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;bind&apos;</span>&nbsp;from=KeyAST&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;to&apos;</span>&nbsp;to=KeyAST&nbsp;|&nbsp;<span class="string">&apos;to-instance&apos;</span>&nbsp;toInstance=XExpression)?;<br/>
+<br/>
+KeyAST:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;annotation=XAnnotation?&nbsp;type=JvmTypeReference;
+</p>
+</div>
+</div>
+</p>
+<a name="guice_inferrer"></a>
+<h2>Translation to Java</h2>
+<p>
+A module is mapped to a single java class. The &apos;mixin&apos; modules are not translated to Java inheritance
+but to a delegation approach. Here is how a simple module declaration with a single mixed-in module is
+translated.
+</p>
+<p>
+<table>
+<tr>
+<td>
+DSL
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+MyModule&nbsp;<span class="keyword">mixin</span>&nbsp;OtherModule&nbsp;{&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+Java
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyModule&nbsp;<span class="keyword">implements</span>&nbsp;Module&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;OtherModule&nbsp;otherModule&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;OtherModule();<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(<span class="keyword">final</span>&nbsp;Binder&nbsp;binder)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;configure(binder,&nbsp;<span class="keyword">new</span>&nbsp;HashSet&lt;com.google.inject.Key&lt;?&gt;&gt;());<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(<span class="keyword">final</span>&nbsp;Binder&nbsp;bind,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span>&nbsp;Set&lt;Key&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Object&gt;&gt;&nbsp;usedKeys)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;testModule.configure(bind,&nbsp;usedKeys);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(Exception&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException(e);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</p>
+<p>
+As you can see, the language simply leverages the nice <span class="inlinecode">equals</span>/<span class="inlinecode">hashCode</span> implementation 
+of Guice&apos;s <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Key.html" title="View JavaDoc"><abbr title="com.google.inject.Key" >Key</abbr></a> to implement the override semantics of mixed-in modules.
+</p>
+<p>
+The corresponding parts in <abbr title="org.xtext.guicemodules.jvmmodel.GuiceModulesJvmModelInferrer" >GuiceModulesJvmModelInferrer</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.guicemodules/src/org/xtext/guicemodules/jvmmodel/GuiceModulesJvmModelInferrer.xtend" title="View Source Code" >(src)</a> are:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+accept(module.toClass(module.fullyQualifiedName))[<br/>
+...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;declare&nbsp;a&nbsp;field&nbsp;for&nbsp;each&nbsp;mixed-in&nbsp;module<br/>
+</span>&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(mixin&nbsp;:&nbsp;module.mixins)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!mixin.eIsProxy)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;mixin.toField(&nbsp;mixin.simpleName,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;typeRef(mixin.fullyQualifiedName.toString))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializer&nbsp;=&nbsp;<span class="string">&apos;&apos;&apos;new&nbsp;&laquo;</span>mixin.name<span class="string">&raquo;()&apos;&apos;&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;later&nbsp;when&nbsp;declaring&nbsp;the&nbsp;configure&nbsp;method<br/>
+</span>&nbsp;&nbsp;members+=&nbsp;module.toMethod(<span class="string">"configure"</span>,&nbsp;typeRef(<span class="keyword">void</span>))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;documentation&nbsp;=&nbsp;<span class="string">&apos;Registers&nbsp;bindings&nbsp;for&nbsp;keys&nbsp;not&nbsp;present&nbsp;in&nbsp;...&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;module.toParameter(<span class="string">"bind"</span>,&nbsp;typeRef(Binder))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;module.toParameter(<span class="string">"usedKeys"</span>,&nbsp;typeRef(Set,&nbsp;typeRef(Key,&nbsp;wildcard)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...some&nbsp;other&nbsp;code<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;mix&nbsp;:&nbsp;module.mixins<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>mix.simpleName<span class="string">&raquo;.configure(bind,&nbsp;usedKeys);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;RuntimeException(e);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+&nbsp;&nbsp;]
+</p>
+</div>
+</div>
+</p>
+<p>
+Expressions are used in <span class="inlinecode">to-instance</span> bindings and as always they need a proper scope to live in.
+The simplest way is to declare a private method for each expression.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(binding&nbsp;:&nbsp;module.bindings)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;it&apos;s&nbsp;a&nbsp;toInstance&nbsp;binding,&nbsp;create&nbsp;a&nbsp;synthetic<br/>
+</span>&nbsp;&nbsp;<span class="comment">//&nbsp;method&nbsp;to&nbsp;give&nbsp;the&nbsp;expression&nbsp;a&nbsp;proper&nbsp;scope<br/>
+</span>&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(binding.toInstance&nbsp;!=&nbsp;null)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;binding.toMethod(binding.syntheticToInstanceName,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binding.from.type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility&nbsp;=&nbsp;JvmVisibility.PRIVATE<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;binding.toInstance<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}&nbsp;<br/>
+...
+</p>
+</div>
+</div>
+</p>
+<p>
+In order to obtain instances of annotations as required by Guice&apos;s <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a>,
+we declare dummy fields for annotated types and use reflection to get corresponding instances.
+</p>
+<p>
+<table>
+<tr>
+<td>
+DSL
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+com.acme.RuntimeModule&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">bind</span>&nbsp;@DataFile&nbsp;String&nbsp;<span class="keyword">to</span>-instance&nbsp;<span class="string">&apos;my-data.txt&apos;</span><br/>
+}
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+Java
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;declaration&nbsp;of&nbsp;dummy&nbsp;field&nbsp;with&nbsp;annotation<br/>
+</span>@DataFile<br/>
+<span class="keyword">private</span>&nbsp;String&nbsp;_from0;<br/>
+&nbsp;&nbsp;<br/>
+<span class="comment">//&nbsp;and&nbsp;later&nbsp;the&nbsp;following&nbsp;code&nbsp;is&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;key<br/>
+</span>&nbsp;&nbsp;Key&lt;java.lang.String&gt;&nbsp;key&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Key.get(<span class="keyword">new</span>&nbsp;TypeLiteral&lt;String&gt;(){},&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getClass().getDeclaredField(<span class="string">"_from0"</span>).getAnnotations()[0]);
+</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</p>
+<p>
+The two sections in the model inferrer responsible for this are:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(binding&nbsp;:&nbsp;module.bindings)&nbsp;{<br/>
+...<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;if&nbsp;a&nbsp;key&nbsp;has&nbsp;an&nbsp;annotation,&nbsp;declare&nbsp;a&nbsp;field&nbsp;so&nbsp;we&nbsp;can&nbsp;use&nbsp;that&nbsp;<br/>
+</span>&nbsp;&nbsp;<span class="comment">//&nbsp;annotation&nbsp;via&nbsp;reflection&nbsp;later.<br/>
+</span>&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(binding.to?.annotation&nbsp;!=&nbsp;null)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;binding.toField(binding.to.syntheticName,&nbsp;binding.to.type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addAnnotation(binding.to.annotation)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility&nbsp;=&nbsp;JvmVisibility.PRIVATE<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(binding.from.annotation&nbsp;!=&nbsp;null)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;binding.toField(binding.from.syntheticName,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binding.from.type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addAnnotation(binding.from.annotation)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibility&nbsp;=&nbsp;JvmVisibility.PRIVATE<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+<span class="comment">//&nbsp;and&nbsp;the&nbsp;following&nbsp;method<br/>
+</span><span class="keyword">def</span>&nbsp;guiceKey(KeyAST&nbsp;<span class="keyword">it</span>)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;Key.get(new&nbsp;TypeLiteral&lt;&laquo;</span>type&gt;(){}&laquo;<br/>
+&nbsp;&nbsp;<span class="keyword">IF</span>&nbsp;annotation&nbsp;!=&nbsp;null<br/>
+&nbsp;&nbsp;<span class="string">&raquo;,&nbsp;getClass().getDeclaredField("&laquo;</span>syntheticName<span class="string">&raquo;").getAnnotations()[0]&laquo;</span><br/>
+&nbsp;&nbsp;<span class="keyword">ENDIF</span><span class="string">&raquo;)&apos;&apos;&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+That is basically it. The rest should hopefully be self-explanatory.
+</p>
+<a name="guice_validation"></a>
+<h2>Validation</h2>
+<p>
+One of the sweet spots for a Guice modules DSL is the ability to do a lot of the validation usually done
+at runtime during compile time. Since this is just an example it just scratches the surface. There is
+just a single compiler check validating whether any used annotation is itself annotated with 
+<span class="inlinecode">BindingAnnotation</span>.
+</p>
+<p>
+This is the relevant code from <abbr title="org.xtext.guicemodules.validation.GuiceModulesValidator" >GuiceModulesValidator</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.guicemodules/src/org/xtext/guicemodules/validation/GuiceModulesValidator.xtend" title="View Source Code" >(src)</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Check&nbsp;<span class="keyword">def</span>&nbsp;checkAnnotationIsBindingAnnotation(XAnnotation&nbsp;<span class="keyword">it</span>)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;type&nbsp;:&nbsp;annotationType&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;JvmAnnotationType:&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(!type.annotations.exists[&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;annotation.is(BindingAnnotation)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;])<br/>
+&nbsp;&nbsp;error(<span class="string">"The&nbsp;annotation&nbsp;is&nbsp;not&nbsp;annotated&nbsp;with&nbsp;@BindingAnnotation"</span>,&nbsp;<br/>
+&nbsp;&nbsp;XANNOTATION__ANNOTATION_TYPE)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+It would be really cool to leverage the full information, which is available and analyze the dependencies
+transitively so you get feedback while you type for any unfulfilled dependencies. Also using all the
+information to compile a ready to use <a class="jdoc" href="https://google.github.io/guice/api-docs/latest/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a> instead of a module seems 
+interesting.
+</p>
+</body>
+</html>
