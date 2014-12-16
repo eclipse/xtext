@@ -103,6 +103,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.generator.FileSystemAccessQueue
 import org.eclipse.xtext.naming.IQualifiedNameConverter
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.Strings
@@ -121,12 +122,11 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.eclipse.xtext.xbase.typesystem.references.IndexingLightweightTypeReferenceFactory
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReferenceFactory
-import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -209,11 +209,15 @@ class CompilationUnitImpl implements CompilationUnit {
 		if (decoratedFileSystemSupport == null) {
 			val fileSystemAccessQueue = xtendFile.eResource.resourceSet.eAdapters.filter(FileSystemAccessQueue).head
 			if (fileSystemAccessQueue == null) {
-				return new ChangeListenerAddingFileSystemSupport(fileSystemSupport, this)
+				return createListeningFileSystemSupport()
 			}
-			decoratedFileSystemSupport = new ParallelFileSystemSupport(xtendFile.eResource.URI, new ChangeListenerAddingFileSystemSupport(fileSystemSupport, this), fileSystemAccessQueue)
+			decoratedFileSystemSupport = new ParallelFileSystemSupport(xtendFile.eResource.URI, createListeningFileSystemSupport(), fileSystemAccessQueue)
 		}
 		decoratedFileSystemSupport
+	}
+	
+	private def createListeningFileSystemSupport() {
+		return new ChangeListenerAddingFileSystemSupport(xtendFile.eResource.URI, fileSystemSupport, resourceChangeRegistry)
 	}
 	
 	override Path getFilePath() {
@@ -230,9 +234,9 @@ class CompilationUnitImpl implements CompilationUnit {
 		lastPhase = phase
 		val standardTypeReferenceOwner = new StandardTypeReferenceOwner(services, xtendFile)
 		if (AnnotationCallback.INDEXING == phase) {
-			this.typeRefFactory = new IndexingLightweightTypeReferenceFactory(standardTypeReferenceOwner)	
+			typeRefFactory = new IndexingLightweightTypeReferenceFactory(standardTypeReferenceOwner)	
 		} else {
-			this.typeRefFactory = new LightweightTypeReferenceFactory(standardTypeReferenceOwner)
+			typeRefFactory = new LightweightTypeReferenceFactory(standardTypeReferenceOwner)
 		}
 		if (AnnotationCallback.VALIDATION == phase) {
 			problemSupport.validationPhaseStarted
@@ -242,6 +246,8 @@ class CompilationUnitImpl implements CompilationUnit {
 	def void after(AnnotationCallback phase) {
 		if (phase == AnnotationCallback.INDEXING)
 			identityCache.clear
+		if (phase == AnnotationCallback.GENERATION)
+			resourceChangeRegistry.discardCreateOrModifyInformation(xtendFile.eResource.URI)
 	}
 	
 	def isIndexing() {

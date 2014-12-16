@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import java.io.InputStream
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
@@ -15,66 +16,75 @@ import org.eclipse.xtend.lib.macro.file.Path
 @Accessors
 class ChangeListenerAddingFileSystemSupport implements MutableFileSystemSupport {
 
+	val URI resourceURI
 	val MutableFileSystemSupport delegate
-	val CompilationUnitImpl compilationUnit
+	val IResourceChangeRegistry resourceChangeRegistry
 
 	override delete(Path path) {
+		resourceChangeRegistry.registerCreateOrModify(path.toString, URI)
 		delegate.delete(path)
 	}
 
 	override mkdir(Path path) {
+		resourceChangeRegistry.registerCreateOrModify(path.toString, URI)
 		delegate.mkdir(path)
 	}
 
 	override setContents(Path path, CharSequence contents) {
+		resourceChangeRegistry.registerCreateOrModify(path.toString, URI)
 		delegate.setContents(path, contents)
 	}
 
 	override setContentsAsStream(Path path, InputStream source) {
+		resourceChangeRegistry.registerCreateOrModify(path.toString, URI)
 		delegate.setContentsAsStream(path, source)
 	}
 
 	override exists(Path path) {
-		compilationUnit.resourceChangeRegistry.registerExists(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.exists(path)
+		resourceChangeRegistry.registerExists(path.toString, URI)
+		return delegate.exists(path)
+	}
+	
+	private def URI getURI() {
+		resourceURI
 	}
 
 	override getCharset(Path path) {
-		compilationUnit.resourceChangeRegistry.registerGetCharset(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.getCharset(path)
+		resourceChangeRegistry.registerGetCharset(path.toString, URI)
+		return delegate.getCharset(path)
 	}
 
 	override getChildren(Path path) {
-		compilationUnit.resourceChangeRegistry.registerGetChildren(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.getChildren(path)
+		resourceChangeRegistry.registerGetChildren(path.toString, URI)
+		return delegate.getChildren(path)
 	}
 
 	override getContents(Path path) {
-		compilationUnit.resourceChangeRegistry.registerGetContents(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.getContents(path)
+		resourceChangeRegistry.registerGetContents(path.toString, URI)
+		return delegate.getContents(path)
 	}
 
 	override getContentsAsStream(Path path) {
-		compilationUnit.resourceChangeRegistry.registerGetContents(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.getContentsAsStream(path)
+		resourceChangeRegistry.registerGetContents(path.toString, URI)
+		return delegate.getContentsAsStream(path)
 	}
 
 	override getLastModification(Path path) {
-		compilationUnit.resourceChangeRegistry.registerGetContents(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.getLastModification(path)
+		resourceChangeRegistry.registerGetContents(path.toString, URI)
+		return delegate.getLastModification(path)
 	}
 
 	override isFile(Path path) {
-		compilationUnit.resourceChangeRegistry.registerExists(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.isFile(path)
+		resourceChangeRegistry.registerExists(path.toString, URI)
+		return delegate.isFile(path)
 	}
 
 	override isFolder(Path path) {
-		compilationUnit.resourceChangeRegistry.registerExists(path.toString, compilationUnit.xtendFile.eResource.URI)
-		delegate.isFolder(path)
+		resourceChangeRegistry.registerExists(path.toString, URI)
+		return delegate.isFolder(path)
 	}
 
 	override toURI(Path path) {
-		delegate.toURI(path)
+		return delegate.toURI(path)
 	}
 }

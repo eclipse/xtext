@@ -316,7 +316,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	protected void translateAnnotationsTo(List<XAnnotation> annotations, JvmAnnotationTarget target) {
-		jvmTypesBuilder.translateAnnotationsTo(Iterables.filter(annotations, annotationTranslationFilter), target);
+		jvmTypesBuilder.addAnnotations(target, Iterables.filter(annotations, annotationTranslationFilter));
 	}
 	
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {

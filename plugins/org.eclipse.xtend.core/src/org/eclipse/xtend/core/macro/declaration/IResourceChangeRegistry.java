@@ -10,8 +10,10 @@ package org.eclipse.xtend.core.macro.declaration;
 import org.eclipse.emf.common.util.URI;
 
 public interface IResourceChangeRegistry {
-	public void registerExists(String path, URI uri);
-	public void registerGetCharset(String string, URI uri);
-	public void registerGetChildren(String string, URI uri);
-	public void registerGetContents(String string, URI uri);
+	void registerExists(String path, URI uri);
+	void registerGetCharset(String string, URI uri);
+	void registerGetChildren(String string, URI uri);
+	void registerGetContents(String string, URI uri);
+	void registerCreateOrModify(String string, URI uri);
+	void discardCreateOrModifyInformation(URI uri);
 }

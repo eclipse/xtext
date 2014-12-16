@@ -23,4 +23,10 @@ class NopResourceChangeRegistry implements IResourceChangeRegistry {
 	override registerGetContents(String string, URI uri) {
 	}
 	
+	override registerCreateOrModify(String string, URI uri) {
+	}
+	
+	override discardCreateOrModifyInformation(URI uri) {
+	}
+	
 }
