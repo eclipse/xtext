@@ -7,22 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.file
 
-import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
-import org.eclipse.xtext.generator.FileSystemAccessQueue
-import org.eclipse.xtend.lib.macro.file.Path
 import java.io.InputStream
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
+import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.generator.FileSystemAccessQueue
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class ParallelFileSystemSupport implements MutableFileSystemSupport {
 	
-	URI uri
+	val URI uri
 	
-	MutableFileSystemSupport delegate
+	val MutableFileSystemSupport delegate
 	
-	extension FileSystemAccessQueue queue
+	val extension FileSystemAccessQueue queue
 	
 	new(URI uri, MutableFileSystemSupport delegate, FileSystemAccessQueue queue) {
 		this.uri = uri

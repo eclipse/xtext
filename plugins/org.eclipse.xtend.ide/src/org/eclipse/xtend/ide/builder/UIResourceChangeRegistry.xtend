@@ -38,6 +38,8 @@ import org.eclipse.xtext.ui.XtextProjectHelper
 
 import static org.eclipse.core.resources.IResourceDelta.*
 import java.io.InputStream
+import java.io.BufferedOutputStream
+import java.io.BufferedInputStream
 
 @Singleton
 class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChangeRegistry, IResourceDeltaVisitor {
@@ -54,21 +56,44 @@ class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChan
 	@Accessors val charsetListeners = HashMultimap.<String, URI>create
 	@Accessors val childrenListeners = HashMultimap.<String, URI>create
 	@Accessors val contentsListeners = HashMultimap.<String, URI>create
+	// not persisted since it is only a filter for the currently processed CU
+	@Accessors val changesNotRelevantListeners = HashMultimap.<String, URI>create
 	
 	override synchronized registerExists(String path, URI uri) {
-		existsListeners.put(path, uri)
+		if (!changesNotRelevantListeners.containsEntry(path, uri))
+			existsListeners.put(path, uri)
 	}
 	
 	override synchronized registerGetCharset(String path, URI uri) {
-		charsetListeners.put(path, uri)
+		if (!changesNotRelevantListeners.containsEntry(path, uri))
+			charsetListeners.put(path, uri)
 	}
 	
 	override synchronized registerGetChildren(String path, URI uri) {
-		childrenListeners.put(path, uri)
+		if (!changesNotRelevantListeners.containsEntry(path, uri))
+			childrenListeners.put(path, uri)
 	}
 	
 	override synchronized registerGetContents(String path, URI uri) {
-		contentsListeners.put(path, uri)
+		if (!changesNotRelevantListeners.containsEntry(path, uri))
+			contentsListeners.put(path, uri)
+	}
+	
+	override synchronized registerCreateOrModify(String string, URI uri) {
+		existsListeners.remove(string, uri)
+		charsetListeners.remove(string, uri)
+		childrenListeners.remove(string, uri)
+		contentsListeners.remove(string, uri)
+		changesNotRelevantListeners.put(string, uri)
+	}
+	
+	override discardCreateOrModifyInformation(URI uri) {
+		val iter = changesNotRelevantListeners.values.iterator
+		while(iter.hasNext) {
+			if (iter.next == uri) {
+				iter.remove
+			}
+		}
 	}
 	
 	override synchronized resourceChanged(IResourceChangeEvent event) {
@@ -159,7 +184,7 @@ class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChan
 				forgetBuildState
 				return
 			}
-			val in = new FileInputStream(location)
+			val in = new BufferedInputStream(new FileInputStream(location))
 			try {
 				readState(in)
 			} finally {
@@ -186,7 +211,7 @@ class UIResourceChangeRegistry implements IResourceChangeListener, IResourceChan
 	private def synchronized save() {
 		try {
 			val location = registryStateLocation
-			val out = new FileOutputStream(location)
+			val out = new BufferedOutputStream(new FileOutputStream(location))
 			try {
 				writeState(out)
 			} finally {

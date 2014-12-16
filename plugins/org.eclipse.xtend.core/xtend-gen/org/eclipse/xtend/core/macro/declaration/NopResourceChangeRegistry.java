@@ -23,4 +23,10 @@ public class NopResourceChangeRegistry implements IResourceChangeRegistry {
   
   public void registerGetContents(final String string, final URI uri) {
   }
+  
+  public void registerCreateOrModify(final String string, final URI uri) {
+  }
+  
+  public void discardCreateOrModifyInformation(final URI uri) {
+  }
 }

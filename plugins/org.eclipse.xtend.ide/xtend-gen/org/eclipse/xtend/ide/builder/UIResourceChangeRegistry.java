@@ -7,9 +7,12 @@
  */
 package org.eclipse.xtend.ide.builder;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.HashMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -17,7 +20,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -78,20 +83,59 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   @Accessors
   private final HashMultimap<String, URI> contentsListeners = HashMultimap.<String, URI>create();
   
+  @Accessors
+  private final HashMultimap<String, URI> changesNotRelevantListeners = HashMultimap.<String, URI>create();
+  
   public synchronized void registerExists(final String path, final URI uri) {
-    this.existsListeners.put(path, uri);
+    boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
+    boolean _not = (!_containsEntry);
+    if (_not) {
+      this.existsListeners.put(path, uri);
+    }
   }
   
   public synchronized void registerGetCharset(final String path, final URI uri) {
-    this.charsetListeners.put(path, uri);
+    boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
+    boolean _not = (!_containsEntry);
+    if (_not) {
+      this.charsetListeners.put(path, uri);
+    }
   }
   
   public synchronized void registerGetChildren(final String path, final URI uri) {
-    this.childrenListeners.put(path, uri);
+    boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
+    boolean _not = (!_containsEntry);
+    if (_not) {
+      this.childrenListeners.put(path, uri);
+    }
   }
   
   public synchronized void registerGetContents(final String path, final URI uri) {
-    this.contentsListeners.put(path, uri);
+    boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
+    boolean _not = (!_containsEntry);
+    if (_not) {
+      this.contentsListeners.put(path, uri);
+    }
+  }
+  
+  public synchronized void registerCreateOrModify(final String string, final URI uri) {
+    this.existsListeners.remove(string, uri);
+    this.charsetListeners.remove(string, uri);
+    this.childrenListeners.remove(string, uri);
+    this.contentsListeners.remove(string, uri);
+    this.changesNotRelevantListeners.put(string, uri);
+  }
+  
+  public void discardCreateOrModifyInformation(final URI uri) {
+    Collection<URI> _values = this.changesNotRelevantListeners.values();
+    final Iterator<URI> iter = _values.iterator();
+    while (iter.hasNext()) {
+      URI _next = iter.next();
+      boolean _equals = Objects.equal(_next, uri);
+      if (_equals) {
+        iter.remove();
+      }
+    }
   }
   
   public synchronized void resourceChanged(final IResourceChangeEvent event) {
@@ -303,7 +347,8 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
         this.forgetBuildState();
         return;
       }
-      final FileInputStream in = new FileInputStream(location);
+      FileInputStream _fileInputStream = new FileInputStream(location);
+      final BufferedInputStream in = new BufferedInputStream(_fileInputStream);
       try {
         this.readState(in);
       } finally {
@@ -344,7 +389,8 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   private synchronized void save() {
     try {
       final File location = this.getRegistryStateLocation();
-      final FileOutputStream out = new FileOutputStream(location);
+      FileOutputStream _fileOutputStream = new FileOutputStream(location);
+      final BufferedOutputStream out = new BufferedOutputStream(_fileOutputStream);
       try {
         this.writeState(out);
       } finally {
@@ -439,5 +485,10 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   @Pure
   public HashMultimap<String, URI> getContentsListeners() {
     return this.contentsListeners;
+  }
+  
+  @Pure
+  public HashMultimap<String, URI> getChangesNotRelevantListeners() {
+    return this.changesNotRelevantListeners;
   }
 }

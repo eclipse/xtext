@@ -371,17 +371,23 @@ public class CompilationUnitImpl implements CompilationUnit {
         final FileSystemAccessQueue fileSystemAccessQueue = IterableExtensions.<FileSystemAccessQueue>head(_filter);
         boolean _equals_1 = Objects.equal(fileSystemAccessQueue, null);
         if (_equals_1) {
-          return new ChangeListenerAddingFileSystemSupport(this.fileSystemSupport, this);
+          return this.createListeningFileSystemSupport();
         }
         Resource _eResource_1 = this.xtendFile.eResource();
         URI _uRI = _eResource_1.getURI();
-        ChangeListenerAddingFileSystemSupport _changeListenerAddingFileSystemSupport = new ChangeListenerAddingFileSystemSupport(this.fileSystemSupport, this);
-        ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, _changeListenerAddingFileSystemSupport, fileSystemAccessQueue);
+        ChangeListenerAddingFileSystemSupport _createListeningFileSystemSupport = this.createListeningFileSystemSupport();
+        ParallelFileSystemSupport _parallelFileSystemSupport = new ParallelFileSystemSupport(_uRI, _createListeningFileSystemSupport, fileSystemAccessQueue);
         this.decoratedFileSystemSupport = _parallelFileSystemSupport;
       }
       _xblockexpression = this.decoratedFileSystemSupport;
     }
     return _xblockexpression;
+  }
+  
+  private ChangeListenerAddingFileSystemSupport createListeningFileSystemSupport() {
+    Resource _eResource = this.xtendFile.eResource();
+    URI _uRI = _eResource.getURI();
+    return new ChangeListenerAddingFileSystemSupport(_uRI, this.fileSystemSupport, this.resourceChangeRegistry);
   }
   
   public Path getFilePath() {
@@ -417,6 +423,12 @@ public class CompilationUnitImpl implements CompilationUnit {
     boolean _equals = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.INDEXING);
     if (_equals) {
       this.identityCache.clear();
+    }
+    boolean _equals_1 = Objects.equal(phase, ActiveAnnotationContexts.AnnotationCallback.GENERATION);
+    if (_equals_1) {
+      Resource _eResource = this.xtendFile.eResource();
+      URI _uRI = _eResource.getURI();
+      this.resourceChangeRegistry.discardCreateOrModifyInformation(_uRI);
     }
   }
   

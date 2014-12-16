@@ -22,7 +22,7 @@ import com.google.common.collect.Iterables;
  * 
  * A path either starts with a slash which denotes an absolute path or a segment which denotes a relative path.
  * Note that this is an abstraction over different 'real' file systems and doesn't understand platform specific things like, e.g. 
- * "c://" on windows.
+ * "c:/" on windows.
  * 
  * The path segment separator is '/'.
  * 
@@ -40,7 +40,6 @@ public final class Path {
 	 * the root path
 	 */
 	public static final Path ROOT = new Path("/");
-	
 	
 	private final ImmutableList<String> segments;
 	private final boolean absolute;
@@ -64,13 +63,13 @@ public final class Path {
 		// if the first element is empty it has a leading separator;
 		this.absolute = iterable.iterator().next().length() == 0;
 		
-		Iterable<String> withoutEmptySegements = Iterables.filter(iterable, new Predicate<String>() {
+		Iterable<String> withoutEmptySegments = Iterables.filter(iterable, new Predicate<String>() {
 
 			public boolean apply(String input) {
 				return input != null && input.trim().length() > 0;
 			}
 		});
-		segments = ImmutableList.copyOf(normalize(withoutEmptySegements));
+		segments = ImmutableList.copyOf(normalize(withoutEmptySegments));
 	}
 	
 	private Path(List<String> segments, boolean isAbsolute) {
@@ -78,10 +77,10 @@ public final class Path {
 		this.absolute = isAbsolute;
 	}
 	
-	private Iterable<String> normalize(Iterable<String> segments2) {
+	private Iterable<String> normalize(Iterable<String> segments) {
 		List<String> result = newArrayList();
 		boolean canRemoveSegment = false;
-		for (String seg : segments2) {
+		for (String seg : segments) {
 			String string = seg.trim();
 			if (canRemoveSegment && string.equals("..")) {
 				result.remove(result.size()-1);
@@ -124,7 +123,7 @@ public final class Path {
 	 * @return a new Path with the given suffix appended to this path's segments.
 	 */
 	public Path append(String suffix) {
-		return new Path(toString()+SEGMENT_SEPARATOR +suffix);
+		return new Path(toString()+ SEGMENT_SEPARATOR + suffix);
 	}
 	
 	/**
@@ -296,14 +295,14 @@ public final class Path {
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 		if (isAbsolute()) {
-			result.append(SEGMENT_SEPARATOR );
+			result.append(SEGMENT_SEPARATOR);
 		}
 		int size = segments.size();
 		for (int i = 0; i < size; i++) {
 			String segment = segments.get(i);
 			result.append(segment);
 			if (i < size-1) {
-				result.append(SEGMENT_SEPARATOR );
+				result.append(SEGMENT_SEPARATOR);
 			}
 		}
 		return result.toString();

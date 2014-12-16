@@ -20,12 +20,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
  */
 @SuppressWarnings("all")
 public class ParallelFileSystemSupport implements MutableFileSystemSupport {
-  private URI uri;
+  private final URI uri;
   
-  private MutableFileSystemSupport delegate;
+  private final MutableFileSystemSupport delegate;
   
   @Extension
-  private FileSystemAccessQueue queue;
+  private final FileSystemAccessQueue queue;
   
   public ParallelFileSystemSupport(final URI uri, final MutableFileSystemSupport delegate, final FileSystemAccessQueue queue) {
     this.uri = uri;
