@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.ui.file;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
@@ -277,25 +279,82 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
   
   public void setContentsAsStream(final Path path, final InputStream stream) {
     try {
-      boolean _exists = this.exists(path);
-      if (_exists) {
-        IFile _eclipseFile = this.getEclipseFile(path);
-        _eclipseFile.setContents(stream, true, true, null);
-      } else {
-        Path _parent = path.getParent();
-        this.mkdir(_parent);
-        IFile _eclipseFile_1 = this.getEclipseFile(path);
-        _eclipseFile_1.create(stream, true, null);
+      try {
+        final IFile eclipseFile = this.getEclipseFile(path);
+        boolean _exists = eclipseFile.exists();
+        if (_exists) {
+          boolean _markSupported = stream.markSupported();
+          if (_markSupported) {
+            boolean _hasContentsChanged = this.hasContentsChanged(stream, eclipseFile);
+            if (_hasContentsChanged) {
+              stream.reset();
+              eclipseFile.setContents(stream, true, true, null);
+            }
+          } else {
+            eclipseFile.setContents(stream, true, true, null);
+          }
+        } else {
+          Path _parent = path.getParent();
+          this.mkdir(_parent);
+          eclipseFile.create(stream, true, null);
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof CoreException) {
+          final CoreException exc = (CoreException)_t;
+          String _message = exc.getMessage();
+          throw new IllegalArgumentException(_message, exc);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private boolean hasContentsChanged(final InputStream newContent, final IFile file) {
+    boolean contentChanged = false;
+    BufferedInputStream oldContent = null;
+    try {
+      InputStream _contents = file.getContents();
+      BufferedInputStream _bufferedInputStream = new BufferedInputStream(_contents);
+      oldContent = _bufferedInputStream;
+      int newByte = newContent.read();
+      int oldByte = oldContent.read();
+      while ((((newByte != (-1)) && (oldByte != (-1))) && (newByte == oldByte))) {
+        {
+          int _read = newContent.read();
+          newByte = _read;
+          int _read_1 = oldContent.read();
+          oldByte = _read_1;
+        }
+      }
+      contentChanged = (newByte != oldByte);
     } catch (final Throwable _t) {
       if (_t instanceof CoreException) {
-        final CoreException exc = (CoreException)_t;
-        String _message = exc.getMessage();
-        throw new IllegalArgumentException(_message, exc);
+        final CoreException e = (CoreException)_t;
+        contentChanged = true;
+      } else if (_t instanceof IOException) {
+        final IOException e_1 = (IOException)_t;
+        contentChanged = true;
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
+    } finally {
+      boolean _notEquals = (!Objects.equal(oldContent, null));
+      if (_notEquals) {
+        try {
+          oldContent.close();
+        } catch (final Throwable _t_1) {
+          if (_t_1 instanceof IOException) {
+            final IOException e_2 = (IOException)_t_1;
+          } else {
+            throw Exceptions.sneakyThrow(_t_1);
+          }
+        }
+      }
     }
+    return contentChanged;
   }
   
   public URI toURI(final Path path) {
