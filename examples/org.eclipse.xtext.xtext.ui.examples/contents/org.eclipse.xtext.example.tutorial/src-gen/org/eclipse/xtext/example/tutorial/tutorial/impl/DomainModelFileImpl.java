@@ -28,13 +28,14 @@ import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
  * An implementation of the model object '<em><b>Domain Model File</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.DomainModelFileImpl#getEntities <em>Entities</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

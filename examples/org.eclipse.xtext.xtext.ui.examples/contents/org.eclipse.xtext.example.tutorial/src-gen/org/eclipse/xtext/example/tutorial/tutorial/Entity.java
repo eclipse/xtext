@@ -15,12 +15,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.Entity#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.Entity#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.Entity#getFeatures <em>Features</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage#getEntity()
  * @model

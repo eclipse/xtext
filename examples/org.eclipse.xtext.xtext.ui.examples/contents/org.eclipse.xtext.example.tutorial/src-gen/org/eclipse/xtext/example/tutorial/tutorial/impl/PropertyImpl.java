@@ -21,12 +21,13 @@ import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
  * An implementation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.PropertyImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

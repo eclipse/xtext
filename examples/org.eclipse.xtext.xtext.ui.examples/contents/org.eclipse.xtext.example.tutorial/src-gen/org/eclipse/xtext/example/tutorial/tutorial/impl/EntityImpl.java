@@ -29,13 +29,14 @@ import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
  * An implementation of the model object '<em><b>Entity</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.EntityImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.EntityImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.EntityImpl#getFeatures <em>Features</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
