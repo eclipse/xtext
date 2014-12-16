@@ -362,6 +362,12 @@
             extensions="dmodel">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="dmodel"
+            type="text">
+    </fileTypes>
+  </extension>
 
 <!-- Type Hierarchy  -->
 	<extension

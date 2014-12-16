@@ -415,5 +415,11 @@
             extensions="statemachine">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="statemachine"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>
