@@ -20,23 +20,29 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.junit.Test
 import org.eclipse.xtext.xbase.typesystem.^override.ResolvedFeatures
+import java.util.List
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Lorenzo Bettini - https://bugs.eclipse.org/bugs/show_bug.cgi?id=454786
  */
 class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	OverrideHelper overrideHelper
 
+	val static BASE_CLASS_METHOD_ERASED_SIGNATURE = "baseClassMethod(java.util.List)"
+
+	val static DERIVED_CLASS_METHOD_ERASED_SIGNATURE = "derivedClassMethod(java.util.List)"
+
 	static class BaseClass {
-		def baseClassMethod() {}
+		def baseClassMethod(List<String> l) {}
 	}
 	
 	static class DerivedClass extends BaseClass {
-		def derivedClassMethod() {}
+		def derivedClassMethod(List<String> l) {}
 	}
-	
+
 	def ResolvedFeatures toResolvedOperations(Class<?> type) {
 		val typeLiteral = '''typeof(«type.canonicalName»)'''.expression as XTypeLiteral
 		val result = overrideHelper.getResolvedFeatures(typeLiteral.type as JvmDeclaredType)
@@ -66,6 +72,42 @@ class ResolvedFeaturesTest extends AbstractXbaseTestCase {
 		val resolvedOperations = typeof(DerivedClass).toResolvedOperations
 		val all = resolvedOperations.getAllOperations
 		val declared = resolvedOperations.getDeclaredOperations
+		assertFalse(all.empty)
+		assertEquals(1, declared.size)
+		assertSame(declared.head, all.head)
+	}
+
+	@Test
+	def void testDeclaredAndAllOperationsErasedSignature() {
+		val resolvedOperations = typeof(DerivedClass).toResolvedOperations
+		// check that superclass is inspected for all operations
+		assertNotNull(
+			resolvedOperations.
+				getAllOperations(BASE_CLASS_METHOD_ERASED_SIGNATURE).head
+		)
+		assertNull(
+			resolvedOperations.getDeclaredOperations
+				(BASE_CLASS_METHOD_ERASED_SIGNATURE).head
+		)
+	}
+
+	@Test
+	def void testDeclaredOperationsErasedSignatureAreIncludedInAllOperations() {
+		// all operations are computed before declared operations
+		val resolvedOperations = typeof(DerivedClass).toResolvedOperations
+		val all = resolvedOperations.getAllOperations(DERIVED_CLASS_METHOD_ERASED_SIGNATURE)
+		val declared = resolvedOperations.getDeclaredOperations(DERIVED_CLASS_METHOD_ERASED_SIGNATURE)
+		assertFalse(all.empty)
+		assertEquals(1, declared.size)
+		assertSame(declared.head, all.head)
+	}
+
+	@Test
+	def void testAllOperationsErasedSignatureIncludeDeclaredOperations() {
+		// declared operations are computed before all operations
+		val resolvedOperations = typeof(DerivedClass).toResolvedOperations
+		val declared = resolvedOperations.getDeclaredOperations(DERIVED_CLASS_METHOD_ERASED_SIGNATURE)
+		val all = resolvedOperations.getAllOperations(DERIVED_CLASS_METHOD_ERASED_SIGNATURE)
 		assertFalse(all.empty)
 		assertEquals(1, declared.size)
 		assertSame(declared.head, all.head)
