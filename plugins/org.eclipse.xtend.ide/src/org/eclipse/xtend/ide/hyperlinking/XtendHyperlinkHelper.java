@@ -135,9 +135,7 @@ public class XtendHyperlinkHelper extends XbaseHyperLinkHelper {
 								crossRefNode,
 								Lists.newArrayList(castedCandidate.getChosenCandidate(),
 										castedCandidate.getRejectedCandidate()), acceptor);
-					} else {
-						createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
-					}
+					} 
 				}
 			} else if (containedElementAt instanceof XConstructorCall) {
 				XConstructorCall casted = (XConstructorCall) containedElementAt;
@@ -147,14 +145,8 @@ public class XtendHyperlinkHelper extends XbaseHyperLinkHelper {
 					if (candidate instanceof IAmbiguousLinkingCandidate) {
 						createMultipleLinks(resource, crossRefNode,
 								((IAmbiguousLinkingCandidate) candidate).getAlternatives(), acceptor);
-					} else {
-						createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 					}
-				} else {
-					createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 				}
-			} else {
-				createHyperlinksTo(resource, crossRefNode, crossLinkedEObject, acceptor);
 			}
 		}
 		super.createHyperlinksForCrossRef(resource, crossRefNode, acceptor);
