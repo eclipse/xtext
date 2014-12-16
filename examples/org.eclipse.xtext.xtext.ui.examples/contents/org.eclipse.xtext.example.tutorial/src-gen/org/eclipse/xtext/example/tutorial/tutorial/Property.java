@@ -13,11 +13,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.Property#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.Property#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage#getProperty()
  * @model

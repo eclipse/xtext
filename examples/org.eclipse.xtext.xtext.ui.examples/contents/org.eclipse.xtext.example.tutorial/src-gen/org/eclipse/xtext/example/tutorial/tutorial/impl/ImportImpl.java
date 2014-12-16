@@ -17,11 +17,12 @@ import org.eclipse.xtext.example.tutorial.tutorial.TutorialPackage;
  * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.tutorial.tutorial.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
