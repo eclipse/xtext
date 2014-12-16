@@ -33,6 +33,11 @@ public interface IQueuedBuildDataContribution {
 	void reset();
 
 	/**
+	 * Resets the internal state of the contribution with regard to the given project.
+	 */
+	void reset(IProject project);
+
+	/**
 	 * A to-be-queued delta is passed to the known contributors to establish a communication channel between clients of
 	 * the {@link QueuedBuildData} and a potentially available special treatment of a certain kind of delta.
 	 * 

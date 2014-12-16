@@ -40,6 +40,10 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 		unconfirmedDeltas = newArrayList
 	}
 
+	override reset(IProject project) {
+		javaBuildState.remove(project.name)
+	}
+
 	/**
 	 * Public for testing purpose
 	 */

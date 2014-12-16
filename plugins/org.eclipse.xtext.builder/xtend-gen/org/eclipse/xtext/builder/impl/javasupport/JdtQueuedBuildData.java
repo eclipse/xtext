@@ -47,6 +47,11 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     this.unconfirmedDeltas = _newArrayList;
   }
   
+  public void reset(final IProject project) {
+    String _name = project.getName();
+    this.javaBuildState.remove(_name);
+  }
+  
   /**
    * Public for testing purpose
    */

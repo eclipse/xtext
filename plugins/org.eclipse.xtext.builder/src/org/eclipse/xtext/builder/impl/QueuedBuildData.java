@@ -74,6 +74,16 @@ public class QueuedBuildData {
 		}
 
 		/**
+		 * Resets all known components.
+		 */
+		@Override
+		public void reset(IProject project) {
+			for (int i = 0; i < components.size(); i++) {
+				components.get(i).reset(project);
+			}
+		}
+
+		/**
 		 * Ask each component to handle the delta. Stop on the first success.
 		 */
 		@Override
@@ -132,6 +142,11 @@ public class QueuedBuildData {
 
 		@Override
 		public void reset() {
+			// nothing to do
+		}
+		
+		@Override
+		public void reset(IProject project) {
 			// nothing to do
 		}
 
@@ -213,6 +228,11 @@ public class QueuedBuildData {
 		deltas = Lists.newArrayList();
 		projectNameToChangedResource = Maps.newHashMap();
 		contribution.reset();
+	}
+	
+	public void reset(IProject project) {
+		projectNameToChangedResource.remove(project.getName());
+		contribution.reset(project); 
 	}
 
 	/**
