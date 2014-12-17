@@ -27,11 +27,20 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultLocationInFileProvider.class)
 public interface ILocationInFileProvider {
 
+	/**
+	 * @see org.eclipse.xtext.resource.ILocationInFileProviderExtension.RegionDescription#SIGNIFICANT
+	 */
 	ITextRegion getSignificantTextRegion(EObject obj);
-
+	/**
+	 * @see org.eclipse.xtext.resource.ILocationInFileProviderExtension.RegionDescription#SIGNIFICANT
+	 */
 	ITextRegion getSignificantTextRegion(EObject owner, EStructuralFeature feature, int indexInList);
-
+	/**
+	 * @see org.eclipse.xtext.resource.ILocationInFileProviderExtension.RegionDescription#FULL
+	 */
 	ITextRegion getFullTextRegion(EObject obj);
-
+	/**
+	 * @see org.eclipse.xtext.resource.ILocationInFileProviderExtension.RegionDescription#FULL
+	 */
 	ITextRegion getFullTextRegion(EObject owner, EStructuralFeature feature, int indexInList);
 }
