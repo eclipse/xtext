@@ -643,10 +643,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, 
 			/* @Nullable */ XExpression expression, boolean returnType) {
 		if (expression != null) {
-			resolvedTypes.markToBeInferred(expression);
+			markToBeInferred(resolvedTypes, expression);
 			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
 		}
 		return new AnyTypeReferenceProvider(member, resolvedTypes, this); 
+	}
+
+	protected void markToBeInferred(ResolvedTypes resolvedTypes, XExpression expression) {
+		resolvedTypes.markToBeInferred(expression);
 	}
 	
 	/**
@@ -979,9 +983,17 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		return false;
 	}
+	
+	protected AnnotationLookup getAnnotationLookup() {
+		return annotationLookup;
+	}
 
 	protected ILogicalContainerProvider getLogicalContainerProvider() {
 		return logicalContainerProvider;
+	}
+	
+	protected IBatchTypeResolver getTypeResolver() {
+		return typeResolver;
 	}
 	
 	/**
@@ -1002,6 +1014,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			return result;
 		}
 		return null;
+	}
+	
+	protected OverrideHelper getOverrideHelper() {
+		return overrideHelper;
 	}
 
 	@Override
