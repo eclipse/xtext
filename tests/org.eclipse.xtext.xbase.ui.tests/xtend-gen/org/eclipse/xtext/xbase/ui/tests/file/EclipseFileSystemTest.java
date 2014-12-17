@@ -170,4 +170,48 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testModificationStamp() {
+    try {
+      final Path path = new Path("/foo/src/my/pack/Foo.txt");
+      long _lastModification = this.fs.getLastModification(path);
+      Assert.assertEquals(0L, _lastModification);
+      this.fs.setContents(path, "Hello Foo");
+      final long mod = this.fs.getLastModification(path);
+      CharSequence _contents = this.fs.getContents(path);
+      Assert.assertEquals("Hello Foo", _contents);
+      long _lastModification_1 = this.fs.getLastModification(path);
+      Assert.assertEquals(mod, _lastModification_1);
+      Thread.sleep(1000);
+      this.fs.setContents(path, "Hello Foo");
+      long _lastModification_2 = this.fs.getLastModification(path);
+      boolean _equals = (mod == _lastModification_2);
+      Assert.assertTrue(_equals);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testModificationStamp_02() {
+    try {
+      final Path path = new Path("/foo/src/my/pack/Foo.txt");
+      long _lastModification = this.fs.getLastModification(path);
+      Assert.assertEquals(0L, _lastModification);
+      this.fs.setContents(path, "Hello Foo");
+      final long mod = this.fs.getLastModification(path);
+      CharSequence _contents = this.fs.getContents(path);
+      Assert.assertEquals("Hello Foo", _contents);
+      long _lastModification_1 = this.fs.getLastModification(path);
+      Assert.assertEquals(mod, _lastModification_1);
+      Thread.sleep(1000);
+      this.fs.setContents(path, "Hello Bar");
+      long _lastModification_2 = this.fs.getLastModification(path);
+      boolean _lessThan = (mod < _lastModification_2);
+      Assert.assertTrue(_lessThan);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
