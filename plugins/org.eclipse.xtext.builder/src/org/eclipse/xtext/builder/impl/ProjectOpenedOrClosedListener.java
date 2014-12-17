@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -34,9 +35,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -49,6 +52,8 @@ import com.google.inject.Inject;
 public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 	private final static Logger log = Logger.getLogger(ProjectOpenedOrClosedListener.class);
+	
+	private static boolean reflectErrorLogged = false;
 
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
@@ -102,7 +107,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 												&& XtextProjectHelper.hasNature(project) && XtextProjectHelper.hasBuilder(project))
 											toUpdate.add(project);
 										else if(!XtextProjectHelper.hasNature(project)){
-											scheduleRemoveProjectJob(project);
+											scheduleRemoveProjectJobIfNecessary(project, delta);
 										}
 									}
 								}
@@ -173,6 +178,26 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 				return Status.OK_STATUS;
 			}
 		}.schedule();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void scheduleRemoveProjectJobIfNecessary(IProject project, IResourceDelta delta) {
+		try {
+			ReflectExtensions reflector = new ReflectExtensions();
+			Object oldInfo = reflector.get(delta, "oldInfo");
+			Map<?, ?> natures = reflector.get(oldInfo, "natures");
+			if (natures.containsKey(XtextProjectHelper.NATURE_ID)) {
+				scheduleRemoveProjectJob(project);
+			}
+		} catch(Exception e) {
+			if (!reflectErrorLogged) {
+				log.error("Scheduled unnecessary build due to reflective code failure", e);
+				reflectErrorLogged = true;
+			}
+			scheduleRemoveProjectJob(project);
+		}
 	}
 
 }
