@@ -25,6 +25,7 @@ import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.parser.EclipseProjectPropertiesEncodingProvider;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
@@ -204,7 +205,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 	
 	public void configureRuntimeEncodingProvider(Binder binder) {
-		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class).to(IEncodingProvider.Runtime.class);
+		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class).to(EclipseProjectPropertiesEncodingProvider.class);
 	}
 
 	public Class<? extends Provider<IEncodingProvider>> provideIEncodingProvider() {

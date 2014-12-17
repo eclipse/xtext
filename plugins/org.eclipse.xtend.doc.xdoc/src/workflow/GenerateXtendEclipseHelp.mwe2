@@ -5,8 +5,6 @@ import org.eclipse.emf.mwe.utils.*
 var targetDir = "../../plugins/org.eclipse.xtend.doc/contents"
 var modelPath = "xdoc"
 
-// WARNING: make sure your workspace encoding is set to ISO-8859-1. 
-
 Workflow {
 
 	component = org.eclipse.xtext.mwe.Reader {
