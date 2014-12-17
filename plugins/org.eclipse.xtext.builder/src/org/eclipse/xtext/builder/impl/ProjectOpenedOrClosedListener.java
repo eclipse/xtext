@@ -35,7 +35,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -188,7 +187,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 			ReflectExtensions reflector = new ReflectExtensions();
 			Object oldInfo = reflector.get(delta, "oldInfo");
 			Map<?, ?> natures = reflector.get(oldInfo, "natures");
-			if (natures.containsKey(XtextProjectHelper.NATURE_ID)) {
+			if (natures != null && natures.containsKey(XtextProjectHelper.NATURE_ID)) {
 				scheduleRemoveProjectJob(project);
 			}
 		} catch(Exception e) {
