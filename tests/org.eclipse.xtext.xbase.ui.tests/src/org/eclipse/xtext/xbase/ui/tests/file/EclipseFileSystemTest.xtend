@@ -105,5 +105,32 @@ class EclipseFileSystemTest extends JavaIoFileSystemTest {
 
 		assertEquals("Hello Foo", new String(data))
 	}
+	
+	@Test override void testModificationStamp() {
+		val path = new Path('/foo/src/my/pack/Foo.txt')
+		assertEquals(0L, path.lastModification)
+		
+		path.contents = "Hello Foo"
+		val mod = path.lastModification
+		assertEquals("Hello Foo",path.contents)
+		
+		assertEquals(mod, path.lastModification)
+		Thread.sleep(1000)
+		path.contents = "Hello Foo"
+		assertTrue(mod == path.lastModification)
+	}
 
+	@Test def void testModificationStamp_02() {
+		val path = new Path('/foo/src/my/pack/Foo.txt')
+		assertEquals(0L, path.lastModification)
+		
+		path.contents = "Hello Foo"
+		val mod = path.lastModification
+		assertEquals("Hello Foo",path.contents)
+		
+		assertEquals(mod, path.lastModification)
+		Thread.sleep(1000)
+		path.contents = "Hello Bar"
+		assertTrue(mod < path.lastModification)
+	}
 }
