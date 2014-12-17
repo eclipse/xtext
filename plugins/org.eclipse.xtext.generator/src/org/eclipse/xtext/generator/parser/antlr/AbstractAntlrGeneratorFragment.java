@@ -81,8 +81,8 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		// so Terence suggested here [1] to remove the option all together
 		// [1] - http://antlr.1301665.n2.nabble.com/Xconversiontimeout-td5294411.html
 		if (!params.contains("-Xconversiontimeout")) {
-			params.add("-Xconversiontimeout");
-			params.add("100000");
+			params.add(0, "-Xconversiontimeout");
+			params.add(1, "100000");
 		}
 		String[] result = params.toArray(new String[params.size()]);
 		return result;
