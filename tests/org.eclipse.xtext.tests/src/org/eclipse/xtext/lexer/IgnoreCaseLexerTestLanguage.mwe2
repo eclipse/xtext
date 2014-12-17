@@ -18,6 +18,7 @@ var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/.."
 	}
 	

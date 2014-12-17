@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -273,7 +274,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			validator.validate(grammar, chain, null);
 			TreeIterator<EObject> iterator = grammar.eAllContents();
 			while (iterator.hasNext())
-				validator.validate(iterator.next(), chain, null);
+				validator.validate(iterator.next(), chain, new HashMap<Object, Object>());
 		}
 	}
 	
