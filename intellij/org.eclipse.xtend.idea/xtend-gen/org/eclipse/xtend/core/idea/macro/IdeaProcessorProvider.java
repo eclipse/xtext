@@ -11,9 +11,12 @@ import com.google.inject.Inject;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.roots.OrderEnumerator;
+import com.intellij.openapi.roots.OrderRootsEnumerator;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.util.PathsList;
 import java.io.File;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
@@ -52,19 +55,22 @@ public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
         final Module module = ModuleUtil.findModuleForPsiElement(psiElement);
         OrderEnumerator _orderEntries = OrderEnumerator.orderEntries(module);
         OrderEnumerator _recursively = _orderEntries.recursively();
-        final VirtualFile[] roots = _recursively.getClassesRoots();
+        OrderRootsEnumerator _classes = _recursively.classes();
+        PathsList _pathsList = _classes.getPathsList();
+        final List<VirtualFile> roots = _pathsList.getVirtualFiles();
         final Function1<VirtualFile, URL> _function = new Function1<VirtualFile, URL>() {
           public URL apply(final VirtualFile it) {
             try {
               String _path = it.getPath();
               File _file = new File(_path);
-              return _file.toURL();
+              URI _uRI = _file.toURI();
+              return _uRI.toURL();
             } catch (Throwable _e) {
               throw Exceptions.sneakyThrow(_e);
             }
           }
         };
-        final List<URL> urls = ListExtensions.<VirtualFile, URL>map(((List<VirtualFile>)Conversions.doWrapArray(roots)), _function);
+        final List<URL> urls = ListExtensions.<VirtualFile, URL>map(roots, _function);
         ClassLoader _classLoader = TransformationContext.class.getClassLoader();
         final URLClassLoader classLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
         String _identifier = type.getIdentifier();
