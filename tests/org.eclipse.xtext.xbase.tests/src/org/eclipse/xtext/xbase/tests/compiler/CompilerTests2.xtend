@@ -1332,7 +1332,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			if ((element instanceof Double)) {
-			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));
 			}
 		''')
 	}
@@ -1353,7 +1353,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			if (!_matched) {
 			  if (element instanceof Double) {
 			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));
+			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));
 			  }
 			}
 		''')
@@ -1370,7 +1370,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			final Number element = null;
 			if ((element instanceof Double)) {
-			  final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));
 			}
 		''')
 	}
@@ -1391,7 +1391,83 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			if (!_matched) {
 			  if (element instanceof Double) {
 			    _matched=true;
-			    final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));
+			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_05() {
+		'''
+			{
+				val Object element = null
+				if(element instanceof Double) {
+					val Iterable<? extends Number> i = #[element]
+				}
+			}
+		'''.compilesTo('''
+			final Object element = null;
+			if ((element instanceof Double)) {
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_06() {
+		'''
+			{
+				val Object element = null
+				switch element {
+					Double: {
+						val Iterable<? extends Number> i = #[element]
+					}
+				}
+			}
+		'''.compilesTo('''
+			final Object element = null;
+			boolean _matched = false;
+			if (!_matched) {
+			  if (element instanceof Double) {
+			    _matched=true;
+			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_07() {
+		'''
+			{
+				val Object element = null
+				if(element instanceof Double) {
+					val Iterable<? extends Number> i = #{element}
+				}
+			}
+		'''.compilesTo('''
+			final Object element = null;
+			if ((element instanceof Double)) {
+			  final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));
+			}
+		''')
+	}
+	
+	@Test def void testBug433573_08() {
+		'''
+			{
+				val Object element = null
+				switch element {
+					Double: {
+						val Iterable<? extends Number> i = #{element}
+					}
+				}
+			}
+		'''.compilesTo('''
+			final Object element = null;
+			boolean _matched = false;
+			if (!_matched) {
+			  if (element instanceof Double) {
+			    _matched=true;
+			    final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));
 			  }
 			}
 		''')

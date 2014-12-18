@@ -212,6 +212,13 @@ abstract class CommonAssignabilityTest extends AbstractAssignabilityTest {
 	}
 	
 	@Test
+	def void testNestedWildcard_01() {
+		"java.util.List<java.util.List<?>>".isNotAssignableFrom("java.util.List<java.util.List<? extends CharSequence>>")
+		"java.util.Collection<java.util.List<?>>".isNotAssignableFrom("java.util.List<java.util.List<? extends CharSequence>>")
+		"java.util.Collection<java.util.List<? extends CharSequence>>".isAssignableFrom("java.util.List<java.util.List<? extends CharSequence>>")
+	}
+	
+	@Test
 	def void testVoid_01() {
 		// TODO does not make any sense ... let's see for function types
 		"void".isAssignableFrom("void")
@@ -1335,6 +1342,13 @@ class RawAssignabilityTest extends CommonAssignabilityTest {
 	@Test
 	def void testWildcardLowerBound_02() {
 		"java.util.List<? super Integer>".isAssignableFrom("java.util.List<? super String>")
+	}
+	
+	@Test
+	override void testNestedWildcard_01() {
+		"java.util.List<java.util.List<?>>".isAssignableFrom("java.util.List<java.util.List<? extends CharSequence>>")
+		"java.util.Collection<java.util.List<?>>".isAssignableFrom("java.util.List<java.util.List<? extends CharSequence>>")
+		"java.util.Collection<java.util.List<? extends CharSequence>>".isAssignableFrom("java.util.List<java.util.List<? extends CharSequence>>")
 	}
 	
 	@Test
