@@ -1,9 +1,7 @@
 package org.eclipse.xtext.purexbase.test;
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.addNature;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.cleanBuild;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.fileIsEmpty;
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.waitForAutoBuild;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -12,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IJavaProject;
@@ -61,7 +60,7 @@ public class BuilderWithTracesTest {
 		IFile sourceFile = project.getFile("src/Foo.xbase");
 		sourceFile.create(new StringInputStream("val foo = 5"), true, null);
 		assertTrue(sourceFile.exists());
-		waitForAutoBuild();
+		sourceFile.getProject().build(IncrementalProjectBuilder.AUTO_BUILD, null);
 
 		IFile targetFile = project.getFile("/src-gen/Foo.java");
 		assertTrue(targetFile.exists());
@@ -72,8 +71,7 @@ public class BuilderWithTracesTest {
 		assertFalse(fileIsEmpty(traceFile));
 
 		sourceFile.delete(true, null);
-		waitForAutoBuild();
-		cleanBuild();
+		sourceFile.getProject().build(IncrementalProjectBuilder.AUTO_BUILD, null);
 		assertTrue(targetFile.getParent().exists());
 		assertFalse(targetFile.exists());
 		assertFalse(traceFile.exists());
@@ -93,7 +91,7 @@ public class BuilderWithTracesTest {
 		IFile sourceFile = project.getFile("src/Foo.xbase");
 		sourceFile.create(new StringInputStream("val foo = 5"), true, null);
 		assertTrue(sourceFile.exists());
-		waitForAutoBuild();
+		sourceFile.getProject().build(IncrementalProjectBuilder.AUTO_BUILD, null);
 
 		IFile traceFile = project.getFile("/src-gen/.Foo.java._trace");
 		List<IPath> traceFiles = traceMarkers.findTraceFiles(sourceFile);
