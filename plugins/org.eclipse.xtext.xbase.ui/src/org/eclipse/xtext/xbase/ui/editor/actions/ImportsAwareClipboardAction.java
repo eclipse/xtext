@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRewriteTarget;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextSelection;
@@ -40,13 +41,16 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.texteditor.IAbstractTextEditorHelpContextIds;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.util.ClipboardUtil;
+import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 
@@ -76,6 +80,13 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	private final int operationCode;
 	private ITextOperationTarget textOperationTarget;
 	private @Inject ImportsUtil importsUtil;
+	/**
+	 * Some Xbase Languages like Xtend have a possibility to convert Java code.
+	 */
+	private @Inject(optional = true) IJavaCodeConverter javaCodeConverter;
+
+	@Inject
+	private EObjectAtOffsetHelper helper;
 
 	/**
 	 * Creates the action.
@@ -163,27 +174,60 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 						return null;
 					}
 				});
+		JavaImportData javaImportsContent = ClipboardUtil.getJavaImportsContent();
+		String textFromClipboard = ClipboardUtil.getTextFromClipboard();
 		if (xbaseClipboardData != null && !sameTarget(xbaseClipboardData)) {
-			IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
-			if (target != null) {
-				target.beginCompoundChange();
-			}
-			try {
-				textOperationTarget.doOperation(operationCode);
-				importsUtil.addImports(xbaseClipboardData.getImports(), xbaseClipboardData.getStaticImports(),
-						xbaseClipboardData.getExtensionImports(), getXtextDocument());
-			} catch (Exception e) {
-				XtypeActivator
-						.getInstance()
-						.getLog()
-						.log(new Status(IStatus.ERROR, XtypeActivator.getInstance().getBundle().getSymbolicName(),
-								"Unexpected internal error: ", e));
-			} finally {
-				if (target != null) {
-					target.endCompoundChange();
-				}
-			}
+			doPasteXbaseCode(xbaseClipboardData);
+		} else if (javaImportsContent != null && getJavaCodeConverter() != null
+				&& canPasteJava(textFromClipboard, getJavaCodeConverter())) {
+			doPasteJavaCode(textFromClipboard, javaImportsContent, getJavaCodeConverter());
 		} else {
+			textOperationTarget.doOperation(operationCode);
+		}
+	}
+
+	private boolean canPasteJava(String javaToConvert, IJavaCodeConverter javaCodeConverter) {
+		XtextEditor xtextEditor = EditorUtils.getXtextEditor(getTextEditor());
+		EObject targetElement = xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<EObject, XtextResource>() {
+
+			@Override
+			public EObject exec(XtextResource state) throws Exception {
+				EObject elementAtOffset = helper.resolveContainedElementAt(state, 10);
+				return elementAtOffset;
+			}
+		});
+
+		return javaCodeConverter.isCompatibleTargetObject(javaToConvert, targetElement);
+	}
+
+	private void doPasteXbaseCode(XbaseClipboardData xbaseClipboardData) {
+		IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
+		if (target != null) {
+			target.beginCompoundChange();
+		}
+		try {
+			textOperationTarget.doOperation(operationCode);
+			importsUtil.addImports(xbaseClipboardData.getImports(), xbaseClipboardData.getStaticImports(),
+					xbaseClipboardData.getExtensionImports(), getXtextDocument());
+		} catch (Exception e) {
+			XtypeActivator
+					.getInstance()
+					.getLog()
+					.log(new Status(IStatus.ERROR, XtypeActivator.getInstance().getBundle().getSymbolicName(),
+							"Unexpected internal error: ", e));
+		} finally {
+			if (target != null) {
+				target.endCompoundChange();
+			}
+		}
+	}
+
+	private void doPasteJavaCode(String textFromClipboard, JavaImportData javaImportsContent,
+			IJavaCodeConverter iJavaCodeConverter) {
+		try {
+			//TODO implement
+			textOperationTarget.doOperation(operationCode);
+		} catch (Exception e) {
 			textOperationTarget.doOperation(operationCode);
 		}
 	}
@@ -291,6 +335,10 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	public void setEditor(ITextEditor editor) {
 		super.setEditor(editor);
 		this.textOperationTarget = null;
+	}
+
+	protected IJavaCodeConverter getJavaCodeConverter() {
+		return javaCodeConverter;
 	}
 
 	public static final class XbaseClipboardData {

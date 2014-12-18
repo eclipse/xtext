@@ -58,7 +58,7 @@
             </activeWhen>
         </handler>
         <handler 
-        	class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.edit.PasteJavaCodeHandler" 
+        	class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.javaconverter.PasteJavaCodeHandler" 
         	commandId="org.eclipse.xtend.ide.pasteJavaCode">
            <activeWhen>
               <reference definitionId="org.eclipse.xtend.core.Xtend.XtextEditor.opened"/>
@@ -1438,7 +1438,7 @@
             commandId="org.eclipse.xtext.xbase.ui.multiOrganizeImports">
       </handler>
       <handler
-            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.edit.ConvertJavaCodeHandler"
+            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.javaconverter.ConvertJavaCodeHandler"
             commandId="org.eclipse.xtend.ide.convertJavaCode">
       </handler>
    </extension>
