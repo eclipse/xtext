@@ -700,4 +700,14 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
   public void testCommonSuperType_79() {
     this.isSuperTypeOf("Super<Number>$Inner<Number>[]", "test.InnerClasses.Super<Number>.SubInner<Number>[]", "test.InnerClasses.Sub<Number>.SubInner2<Number>[]");
   }
+  
+  @Test
+  public void testCommonSuperType_80() {
+    this.isSuperTypeOf("Iterable<? extends Class<?>>", "Iterable<Class<Number>>", "Iterable<Class<CharSequence>>");
+  }
+  
+  @Test
+  public void testCommonSuperType_81() {
+    this.isSuperTypeOf("Class<?>", "Class<Number>", "Class<CharSequence>");
+  }
 }

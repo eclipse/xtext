@@ -95,8 +95,36 @@ public class FunctionTypes {
 	
 	/* @Nullable */
 	public JvmOperation findImplementingOperation(LightweightTypeReference functionType) {
-		// TODO use org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations instead (if fast enough)
+		// avoid to trigger resolution of currently unbound type arguments
+		// since the computation of this' lambdas type may enhance the information
+		// about the given unbound type
+		if (functionType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE && !functionType.isResolved()) {
+			JvmOperation result = findImplementingOperation((UnboundTypeReference)functionType);
+			if (result != null) {
+				return result;
+			}
+		} 
 		List<JvmType> rawTypes = functionType.getRawTypes();
+		JvmOperation result = findImplementingOperation(rawTypes);
+		return result;
+	}
+
+	private JvmOperation findImplementingOperation(UnboundTypeReference unboundTypeReference) {
+		List<LightweightBoundTypeArgument> hints = unboundTypeReference.getAllHints();
+		for(LightweightBoundTypeArgument hint: hints) {
+			LightweightTypeReference hintReference = hint.getTypeReference();
+			if (hintReference != null && hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+				List<JvmType> rawTypes = hintReference.getRawTypes();
+				JvmOperation result = findImplementingOperation(rawTypes);
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		return null;
+	}
+
+	protected JvmOperation findImplementingOperation(List<JvmType> rawTypes) {
 		if (rawTypes.size() == 1) {
 			JvmType rawType = rawTypes.get(0);
 			if (rawType.eClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
