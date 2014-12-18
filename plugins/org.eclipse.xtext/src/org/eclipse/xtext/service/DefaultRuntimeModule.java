@@ -205,7 +205,11 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 	
 	public void configureRuntimeEncodingProvider(Binder binder) {
-		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class).to(EclipseProjectPropertiesEncodingProvider.class);
+		binder.bind(IEncodingProvider.class).annotatedWith(DispatchingProvider.Runtime.class).to(IEncodingProvider.Runtime.class);
+	}
+	
+	public Class<? extends IEncodingProvider.Runtime> bindRuntimeEncodingProvider() {
+		return EclipseProjectPropertiesEncodingProvider.class;
 	}
 
 	public Class<? extends Provider<IEncodingProvider>> provideIEncodingProvider() {

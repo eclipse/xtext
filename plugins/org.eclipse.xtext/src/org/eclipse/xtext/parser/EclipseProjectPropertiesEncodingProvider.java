@@ -17,6 +17,8 @@ import java.util.Properties;
 
 import org.eclipse.emf.common.util.URI;
 
+import com.google.inject.Singleton;
+
 /**
  * Use this class to retrieve resource encodings from Eclipse project properties. The provider can be used
  * without a running Eclipse context, but depends on resources being stored in Eclipse projects.
@@ -25,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
  * @author Miro Spoenemann - Initial contribution and API
  * @since 2.8
  */
+@Singleton
 public class EclipseProjectPropertiesEncodingProvider extends IEncodingProvider.Runtime {
 	
 	private static final String PROPERTIES_DIRNAME = ".settings";
