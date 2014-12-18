@@ -2744,7 +2744,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if ((element instanceof Double)) {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -2794,7 +2794,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("_matched=true;");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newArrayList(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(element));");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");
@@ -2833,7 +2833,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("if ((element instanceof Double)) {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));");
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
@@ -2883,7 +2883,185 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("_matched=true;");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Double>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Double>newHashSet(((Double)element)));");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(element));");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Object element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if(element instanceof Double) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val Iterable<? extends Number> i = #[element]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Object element = null;");
+      _builder_1.newLine();
+      _builder_1.append("if ((element instanceof Double)) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_06() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Object element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch element {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Double: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("val Iterable<? extends Number> i = #[element]");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Object element = null;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (element instanceof Double) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_matched=true;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newArrayList(((Number)element)));");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_07() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Object element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("if(element instanceof Double) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("val Iterable<? extends Number> i = #{element}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Object element = null;");
+      _builder_1.newLine();
+      _builder_1.append("if ((element instanceof Double)) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug433573_08() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val Object element = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch element {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("Double: {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("val Iterable<? extends Number> i = #{element}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final Object element = null;");
+      _builder_1.newLine();
+      _builder_1.append("boolean _matched = false;");
+      _builder_1.newLine();
+      _builder_1.append("if (!_matched) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (element instanceof Double) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_matched=true;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final Iterable<? extends Number> i = java.util.Collections.<Number>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Number>newHashSet(((Number)element)));");
       _builder_1.newLine();
       _builder_1.append("  ");
       _builder_1.append("}");

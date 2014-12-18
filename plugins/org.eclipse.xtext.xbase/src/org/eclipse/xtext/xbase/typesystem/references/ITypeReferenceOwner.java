@@ -22,16 +22,12 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 /**
- * Represents the context that defines a valid cluster of
- * {@link LightweightTypeReference type references}. Clients obtain
- * an instance of the {@link ITypeReferenceOwner} by instantiating
- * a {@link StandardTypeReferenceOwner} with a given context
- * ({@link ResourceSet}, {@link Resource} or  {@link EObject}).
+ * Represents the context that defines a valid cluster of {@link LightweightTypeReference type references}. Clients
+ * obtain an instance of the {@link ITypeReferenceOwner} by instantiating a {@link StandardTypeReferenceOwner} with a
+ * given context ({@link ResourceSet}, {@link Resource} or {@link EObject}).
  * 
- * {@link ITypeReferenceOwner The owner} is used to create new
- * type references from their EMF based counterparts
- * ({@link JvmTypeReference}, {@link JvmType}) or from their 
- * {@link Class} representations.  
+ * {@link ITypeReferenceOwner The owner} is used to create new type references from their EMF based counterparts (
+ * {@link JvmTypeReference}, {@link JvmType}) or from their {@link Class} representations.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
