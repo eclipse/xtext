@@ -4327,7 +4327,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	def compileClassInDefaultPackageWithFileHeader(){
 		assertCompilesTo(''' 
 			/**
-			 * Xtend can't decide whether this is a header or a javadoc
+			 * This comment is ambiguous because it could be both a file header and a
+			 * class comment. In any case it should be generated only once.
 			 */
 			
 			class bar { 
@@ -4335,10 +4336,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''',
 		'''
 			/**
-			 * Xtend can't decide whether this is a header or a javadoc
-			 */
-			/**
-			 * Xtend can't decide whether this is a header or a javadoc
+			 * This comment is ambiguous because it could be both a file header and a
+			 * class comment. In any case it should be generated only once.
 			 */
 			@SuppressWarnings("all")
 			public class bar {
