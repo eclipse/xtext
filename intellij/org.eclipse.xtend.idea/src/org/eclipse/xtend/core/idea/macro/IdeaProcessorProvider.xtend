@@ -25,8 +25,8 @@ class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	override getProcessorInstance(JvmType type) {
 		val psiElement = type.eResource.resourceSet.resources.head.contents.head.psiElement
 		val module = ModuleUtil.findModuleForPsiElement(psiElement)
-		val roots = OrderEnumerator.orderEntries(module).recursively.classesRoots
-		val urls = roots.map[new File(path).toURL]
+		val roots = OrderEnumerator.orderEntries(module).recursively.classes.pathsList.virtualFiles
+		val urls = roots.map[new File(path).toURI.toURL]
 		val classLoader = new URLClassLoader(urls, TransformationContext.classLoader)
 		classLoader.loadClass(type.identifier).newInstance
 	}
