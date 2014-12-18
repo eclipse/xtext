@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.conversion.JavaIDValueConverter;
 import org.eclipse.xtend.core.conversion.StringValueConverter;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.documentation.XtendDocumentationProvider;
+import org.eclipse.xtend.core.documentation.XtendFileHeaderProvider;
 import org.eclipse.xtend.core.findReferences.XtendReferenceFinder;
 import org.eclipse.xtend.core.imports.XtendImportedTypesUsageCollector;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
@@ -51,6 +52,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.impl.IDValueConverter;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.findReferences.ReferenceFinder;
 import org.eclipse.xtext.findReferences.TargetURICollector;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -270,6 +272,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
 		return XtendDocumentationProvider.class;
+	}
+	
+	public Class<? extends IFileHeaderProvider> bindFileHeaderProvider() {
+		return XtendFileHeaderProvider.class;
 	}
 
 	@Override
