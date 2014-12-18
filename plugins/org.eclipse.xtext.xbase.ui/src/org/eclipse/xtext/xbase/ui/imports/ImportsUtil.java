@@ -94,8 +94,9 @@ public class ImportsUtil {
 		int memberIdx = featuresQName.lastIndexOf('.');
 		String type = featuresQName.substring(0, memberIdx);
 		String member = featuresQName.substring(memberIdx + 1);
-		if (member.endsWith("()")) {
-			member = member.substring(0, member.length() - 2);
+		int indexOf = member.indexOf("(");
+		if (indexOf != -1) {
+			member = member.substring(0, indexOf);
 		}
 		Pair<String, String> pair = Tuples.create(type, member);
 		return pair;
