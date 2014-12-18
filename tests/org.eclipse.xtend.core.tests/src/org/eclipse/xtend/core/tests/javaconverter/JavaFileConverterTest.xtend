@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.conversion;
+package org.eclipse.xtend.core.tests.javaconverter
 
 import com.google.common.base.Predicate
 import com.google.common.io.Files
@@ -15,13 +15,15 @@ import java.io.File
 import java.nio.charset.Charset
 import java.util.Set
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.core.conversion.JavaConverter
+import org.eclipse.xtend.core.javaconverter.JavaConverter
+import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.mwe.PathTraverser
+import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import org.junit.Before
-import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult
+
+import static org.junit.Assert.*
 
 /**
  * @author dhuebner - Initial contribution and API

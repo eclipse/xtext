@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.conversion
+package org.eclipse.xtend.core.javaconverter
 
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTVisitor

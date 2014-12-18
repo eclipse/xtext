@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.conversion
+package org.eclipse.xtend.core.javaconverter
 
 import com.google.inject.Inject
 import java.net.URLClassLoader
@@ -14,25 +14,22 @@ import org.eclipse.jdt.core.dom.ASTParser
 
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter
+import org.eclipse.emf.ecore.EObject
 
 /**
  * Converts Java code or an ICompilationUnit to Xtend code<br>
  * 
  *  @author Dennis Hübner - Initial contribution and API
  */
-class JavaConverter {
-	final static int JLS = JavaASTFlattener.JLS
-
+class JavaConverter implements IJavaCodeConverter {
+	@Inject JavaCodeAnalyzer javaAnalyzer
 	/*TODO Refactor this class. Remove state, extract common logic. */
 	@Inject JavaASTFlattener astFlattener
-	String complianceLevel = "1.5"
 	boolean fallbackConversionStartegy = false
 
 	def ConversionResult toXtend(ICompilationUnit cu) {
-		val parser = ASTParser.newParser(JLS)
-		val options = JavaCore.getOptions()
-		JavaCore.setComplianceOptions(complianceLevel, options)
-		parser.compilerOptions = options
+		val parser = javaAnalyzer.createDefaultJavaParser()
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
@@ -47,11 +44,11 @@ class JavaConverter {
 	}
 
 	/**
- 	* @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
- 	* 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
- 	* @param javaSrc Java source code as String
- 	* @throws IllegalArgumentException if unitName is <code>null</code> 
- 	*/
+	 * @param unitName some CU name e.g. Clazz. UnitName may not be <code>null</code>.<br>
+	 * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+	 * @param javaSrc Java source code as String
+	 * @throws IllegalArgumentException if unitName is <code>null</code> 
+	 */
 	def ConversionResult toXtend(String unitName, String javaSrc) {
 		if (unitName == null)
 			throw new IllegalArgumentException()
@@ -59,25 +56,22 @@ class JavaConverter {
 	}
 
 	/**
-	* @param javaSrc Java class source code as String
- 	* @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
- 	* 			 configured with the system class loader to resolve bindings.
-	*/
+	 * @param javaSrc Java class source code as String
+	 * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
+	 * 			 configured with the system class loader to resolve bindings.
+	 */
 	def ConversionResult bodyDeclarationToXtend(String javaSrc, IJavaProject project) {
 		internalToXtend(null, javaSrc, null)
 	}
 
 	/**
- 	* @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
- 	* 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
- 	* @param javaSrc Java source code as String
- 	* @param proj JavaProject where the java source code comes from
- 	*/
+	 * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
+	 * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
+	 * @param javaSrc Java source code as String
+	 * @param proj JavaProject where the java source code comes from
+	 */
 	def private ConversionResult internalToXtend(String unitName, String javaSrc, IJavaProject proj) {
-		val parser = ASTParser.newParser(JLS)
-		val options = JavaCore.getOptions()
-		JavaCore.setComplianceOptions(complianceLevel, options)
-		parser.compilerOptions = options
+		val parser = javaAnalyzer.createDefaultJavaParser
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
@@ -130,6 +124,10 @@ class JavaConverter {
 	def JavaConverter useRobustSyntax() {
 		this.fallbackConversionStartegy = true
 		return this
+	}
+
+	override isCompatibleTargetObject(String javaToConvert, EObject targetElement) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 }

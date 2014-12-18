@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.edit;
+package org.eclipse.xtend.ide.javaconverter;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Widget;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
+import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult;
 
 import com.ibm.icu.text.MessageFormat;
 

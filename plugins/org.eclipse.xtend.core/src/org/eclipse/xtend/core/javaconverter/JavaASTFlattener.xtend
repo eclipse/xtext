@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.conversion
+package org.eclipse.xtend.core.javaconverter
 
 import com.google.inject.Inject
 import java.util.ArrayList
@@ -142,7 +142,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	/**
 	 * Returns the string accumulated in the visit.
-	 *
+	 * 
 	 * @return the serialized
 	 */
 	def String getResult() {
@@ -453,7 +453,8 @@ class JavaASTFlattener extends ASTVisitor {
 					append = false
 				}
 			case Modifier.FINAL:
-				if (parent instanceof VariableDeclarationExpression || parent instanceof  VariableDeclarationStatement) {
+				if (parent instanceof VariableDeclarationExpression ||
+					parent instanceof  VariableDeclarationStatement) {
 					append = false
 				}
 			default:
@@ -505,7 +506,7 @@ class JavaASTFlattener extends ASTVisitor {
 				appendToBuffer(",")
 			}
 		]
-		
+
 		return false
 	}
 
@@ -542,15 +543,14 @@ class JavaASTFlattener extends ASTVisitor {
 			if (hasAnnotations) {
 				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
 
-			//	addProblem("Annotation on Variable declaration is not supported.")
+			// addProblem("Annotation on Variable declaration is not supported.")
 			}
-			appendModifieres(modifiers(),
-				[
-					if (hasAnnotations) {
-						appendToBuffer("*/")
-						appendLineWrapToBuffer
-					}
-				])
+			appendModifieres(modifiers(), [
+				if (hasAnnotations) {
+					appendToBuffer("*/")
+					appendLineWrapToBuffer
+				}
+			])
 			appendToBuffer(handleVariableDeclaration(modifiers()))
 			appendSpaceToBuffer
 			if (!type.isMissingType()) {
@@ -641,7 +641,7 @@ class JavaASTFlattener extends ASTVisitor {
 			name.accept(this)
 		}
 		appendToBuffer("(")
-		parameters.reverseView.forEach[SingleVariableDeclaration p|
+		parameters.reverseView.forEach [SingleVariableDeclaration p|
 			if (body.isAssignedInBody(p.name)) {
 				val varFrag = p.getAST().newVariableDeclarationFragment
 				varFrag.name = p.getAST().newSimpleName(p.name.toString)
@@ -651,7 +651,8 @@ class JavaASTFlattener extends ASTVisitor {
 				val typeCopy = p.getAST().createInstance(SimpleType) as Type
 				varDecl.type = typeCopy
 				body.statements.add(0, varDecl)
-			}]
+			}
+		]
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(getExtraDimensions())
@@ -740,8 +741,9 @@ class JavaASTFlattener extends ASTVisitor {
 		node.statements.visitAll
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
-			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter[
-				startPosition < node.startPosition + node.length].forEach [
+			cu.commentList.filter[Comment c|!c.docComment && c.notAssigned].filter [
+				startPosition < node.startPosition + node.length
+			].forEach [
 				accept(this)
 				assignedComments.add(it)
 			]
@@ -937,7 +939,7 @@ class JavaASTFlattener extends ASTVisitor {
 	def richTextValue(StringLiteral literal) {
 		var value = literal.literalValue
 
-		//FIXME append only on latest string in concatenation 
+		// FIXME append only on latest string in concatenation 
 		if (value.endsWith("'")) {
 			value = value.concat("«»")
 		}
@@ -1055,9 +1057,9 @@ class JavaASTFlattener extends ASTVisitor {
 					val pfOperand = node.operand as ArrayAccess
 
 					/*	
-					val _tempIndex = (i = i - 1)
-					ints.set(_tempIndex,ints.get(_tempIndex) - 1)
-					ints.get(_tempIndex) */
+					 * val _tempIndex = (i = i - 1)
+					 * ints.set(_tempIndex,ints.get(_tempIndex) - 1)
+					 ints.get(_tempIndex) */
 					val arrayName = computeArrayName(pfOperand)
 					val idxName = '''_tPreInx_«arrayName»'''
 					var op = "-"
@@ -1209,19 +1211,19 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("try ")
 
 		// TryStatementnode.resources() not supported in Juno
-		//		if (node.getAST().apiLevel() > AST.JLS3) {
-		//			if (node.resources().isEmpty()) {
-		//				appendToBuffer("(")
-		//				for (var Iterator<VariableDeclarationExpression> _it = node.resources().iterator(); _it.hasNext();) {
-		//					var VariableDeclarationExpression _var = _it.next()
-		//					_var.accept(this)
-		//					if (_it.hasNext()) {
-		//						appendToBuffer(",")
-		//					}
-		//				}
-		//				appendToBuffer(") ")
-		//			}
-		//		}
+		// if (node.getAST().apiLevel() > AST.JLS3) {
+		// if (node.resources().isEmpty()) {
+		// appendToBuffer("(")
+		// for (var Iterator<VariableDeclarationExpression> _it = node.resources().iterator(); _it.hasNext();) {
+		// var VariableDeclarationExpression _var = _it.next()
+		// _var.accept(this)
+		// if (_it.hasNext()) {
+		// appendToBuffer(",")
+		// }
+		// }
+		// appendToBuffer(") ")
+		// }
+		// }
 		node.getBody().accept(this)
 		appendSpaceToBuffer
 		for (var Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
@@ -1280,16 +1282,16 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	// UnionType is Not available in Juno
-	//	override boolean visit(UnionType node) {
-	//		for (var Iterator<Type> _it = node.types().iterator(); _it.hasNext();) {
-	//			var Type t = _it.next()
-	//			t.accept(this)
-	//			if (_it.hasNext()) {
-	//				appendToBuffer("|")
-	//			}
-	//		}
-	//		return false
-	//	}
+	// override boolean visit(UnionType node) {
+	// for (var Iterator<Type> _it = node.types().iterator(); _it.hasNext();) {
+	// var Type t = _it.next()
+	// t.accept(this)
+	// if (_it.hasNext()) {
+	// appendToBuffer("|")
+	// }
+	// }
+	// return false
+	// }
 	override boolean visit(CharacterLiteral node) {
 		appendToBuffer('''Character.valueOf(«node.getEscapedValue()»).charValue''')
 		return false
@@ -1368,7 +1370,7 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(ArrayAccess node) {
 		val arrayname = computeArrayName(node)
 
-		//Write access is handled in visit(Assignment)
+		// Write access is handled in visit(Assignment)
 		appendToBuffer('''{val _rdIndx_«arrayname»=''')
 		node.index.accept(this)
 		appendSpaceToBuffer
@@ -1632,8 +1634,8 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(") ")
 		appendToBuffer("{")
 		increaseIndent
-		val foldedCases = node.statements.fold(newLinkedHashMap,
-			[ Map<SwitchCase, ArrayList<Statement>> map, Statement currStatement |
+		val foldedCases = node.statements.fold(
+			newLinkedHashMap, [ Map<SwitchCase, ArrayList<Statement>> map, Statement currStatement |
 				if (currStatement instanceof SwitchCase) {
 					map.put(currStatement, newArrayList)
 				} else {
