@@ -180,6 +180,8 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		JvmType type = expectedType.getType();
 		if (type == null) {
 			throw new IllegalStateException();
+		} else if (type instanceof JvmTypeParameter) {
+			type = operation.getDeclaringType();
 		}
 		expectedClosureType = initKnownClosureType(type, operation);
 		deferredBindTypeArgument(expectedType, expectedClosureType, BoundTypeArgumentSource.INFERRED_CONSTRAINT);

@@ -302,24 +302,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
 		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());
 		List<LightweightBoundTypeArgument> inferredConstraintHints = Lists.newArrayListWithCapacity(allHints.size());
-		boolean hasContraintHints = false;
 		EnumSet<VarianceInfo> varianceHints = EnumSet.noneOf(VarianceInfo.class);
-		for(LightweightBoundTypeArgument hint: allHints) {
-			if (hint.getOrigin() instanceof VarianceInfo) {
-				varianceHints.add((VarianceInfo) hint.getOrigin());
-			} else {
-				if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
-					hasContraintHints = true;
-				}
-				effectiveHints.add(hint);
-				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
-					inferredHints.add(hint);
-				}
-				if (hint.getSource() == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
-					inferredConstraintHints.add(hint);
-				}
-			}
-		}
+		boolean hasContraintHints = populateListsFromHints(allHints, inferredHints, effectiveHints, inferredConstraintHints, varianceHints);
 		if (inferredHints.size() == 1 && !varianceHints.isEmpty()) {
 			LightweightBoundTypeArgument hint = inferredHints.get(0);
 			if ((hint.getDeclaredVariance() == VarianceInfo.IN && hint.getActualVariance() == VarianceInfo.INVARIANT) && !hint.getTypeReference().isWildcard()) {
@@ -378,6 +362,28 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			return true;
 		}
 		return false;
+	}
+
+	private boolean populateListsFromHints(List<LightweightBoundTypeArgument> allHints, List<LightweightBoundTypeArgument> inferredHints,
+			List<LightweightBoundTypeArgument> effectiveHints, List<LightweightBoundTypeArgument> inferredConstraintHints, EnumSet<VarianceInfo> varianceHints) {
+		boolean hasContraintHints = false;
+		for(LightweightBoundTypeArgument hint: allHints) {
+			if (hint.getOrigin() instanceof VarianceInfo) {
+				varianceHints.add((VarianceInfo) hint.getOrigin());
+			} else {
+				if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+					hasContraintHints = true;
+				}
+				effectiveHints.add(hint);
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+					inferredHints.add(hint);
+				}
+				if (hint.getSource() == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
+					inferredConstraintHints.add(hint);
+				}
+			}
+		}
+		return hasContraintHints;
 	}
 
 	protected void propageResolvedTypeToConstraints(List<LightweightBoundTypeArgument> hints) {
