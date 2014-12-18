@@ -44,7 +44,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject protected extension CompilationTestHelper compilationTestHelper
 	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
 	
-	protected boolean useJavaCompiler = false
+	protected boolean useJavaCompiler = true
 	
 	@Before
 	public def setupCompiler() {

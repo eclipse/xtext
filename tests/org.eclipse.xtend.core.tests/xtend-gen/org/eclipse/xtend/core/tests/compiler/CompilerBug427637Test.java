@@ -4208,10 +4208,10 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> init) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {");
+    _builder_1.append("final Function1<FormattableDocument, ArrayList<FormattingData>> _function = new Function1<FormattableDocument, ArrayList<FormattingData>>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public Iterable<FormattingData> apply(final FormattableDocument doc) {");
+    _builder_1.append("public ArrayList<FormattingData> apply(final FormattableDocument doc) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("ArrayList<FormattingData> _xblockexpression = null;");
@@ -4342,10 +4342,10 @@ public class CompilerBug427637Test extends AbstractXtendCompilerTest {
     _builder_1.append("public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> before, final Procedure1<? super FormattingDataInit> after) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {");
+    _builder_1.append("final Function1<FormattableDocument, ArrayList<FormattingData>> _function = new Function1<FormattableDocument, ArrayList<FormattingData>>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public Iterable<FormattingData> apply(final FormattableDocument doc) {");
+    _builder_1.append("public ArrayList<FormattingData> apply(final FormattableDocument doc) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("ArrayList<FormattingData> _xblockexpression = null;");

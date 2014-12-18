@@ -65,7 +65,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   private ProcessorInstanceForJvmTypeProvider processorProvider;
   
-  protected boolean useJavaCompiler = false;
+  protected boolean useJavaCompiler = true;
   
   @Before
   public void setupCompiler() {

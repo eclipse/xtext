@@ -1162,8 +1162,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			        throw Exceptions.sneakyThrow(_e);
 			      }
 			    }
-			  }, new Function1<Exception, Exception>() {
-			    public Exception apply(final Exception it) {
+			  }, new Function1<Exception, IllegalArgumentException>() {
+			    public IllegalArgumentException apply(final Exception it) {
 			      return new IllegalArgumentException(it);
 			    }
 			  });
@@ -4832,7 +4832,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				def bar() {
 					val pair = "Apple" -> 1
 					val _pair = pair;
-					val map2 = #{
+					val map = #{
 						pair,
 						_pair,
 						"Banana" -> 2,
@@ -4842,7 +4842,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 						1 + 2
 					}
 					
-					val map3 = #{
+					val set = #{
 						1 * 2,
 						"Banana" -> 2
 					}
@@ -4884,9 +4884,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Pair<String, Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
 			    Pair<Object, Object> _plus = this.operator_plus(
 			      1, 2);
-			    final Map<Object, Object> map2 = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
+			    final Map<Object, Object> map = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
 			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> map3 = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
+			    final Set<Object> set = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {
@@ -4906,7 +4906,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				def bar() {
 					val pair = "Apple" -> 1
 					val _pair = pair;
-					val map2 = #{
+					val map = #{
 						pair,
 						_pair,
 						"Banana" -> 2,
@@ -4915,7 +4915,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 						Bug412642_2.methodStaticPair,
 						1 + 2
 					}
-					val map3 = #{
+					val set = #{
 						1 * 2,
 						"Banana" -> 2
 					}
@@ -4954,9 +4954,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    Pair<String, Integer> _methodStaticPair = Bug412642_2.methodStaticPair();
 			    Pair<Object, Object> _plus = this.operator_plus(
 			      1, 2);
-			    final Map<Object, Object> map2 = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
+			    final Map<Object, Object> map = Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap(pair, _pair, _mappedTo, Bug412642_2.staticPair, this.pairField, _methodStaticPair, _plus));
 			    Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("Banana", Integer.valueOf(2));
-			    final Set<?> map3 = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
+			    final Set<Object> set = Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet(Integer.valueOf((1 * 2)), _mappedTo_1));
 			  }
 			  
 			  public Pair<Object, Object> operator_plus(final int operant, final int operand2) {

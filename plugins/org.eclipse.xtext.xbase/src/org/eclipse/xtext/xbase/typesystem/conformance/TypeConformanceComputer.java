@@ -167,7 +167,7 @@ public class TypeConformanceComputer extends RawTypeConformanceComputer {
 	
 	@Override
 	protected int doIsConformant(FunctionTypeReference left, FunctionTypeReference right, int flags) {
-		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0)
+		if ((flags & ALLOW_FUNCTION_CONVERSION) == 0 || (flags & AS_TYPE_ARGUMENT) != 0)
 			return doIsConformant((ParameterizedTypeReference)left, (ParameterizedTypeReference)right, flags);
 		List<LightweightTypeReference> leftParameterTypes = left.getParameterTypes();
 		List<LightweightTypeReference> rightParameterTypes = right.getParameterTypes();
