@@ -46,6 +46,13 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  public void testNestedWildcard_01() {
+    this.isAssignableFrom("java.util.List<java.util.List<?>>", "java.util.List<java.util.List<? extends CharSequence>>");
+    this.isAssignableFrom("java.util.Collection<java.util.List<?>>", "java.util.List<java.util.List<? extends CharSequence>>");
+    this.isAssignableFrom("java.util.Collection<java.util.List<? extends CharSequence>>", "java.util.List<java.util.List<? extends CharSequence>>");
+  }
+  
+  @Test
   public void testLeftIsRawType_01() {
     this.isAssignableFrom("java.util.Collection", "java.util.List<? super String>");
   }

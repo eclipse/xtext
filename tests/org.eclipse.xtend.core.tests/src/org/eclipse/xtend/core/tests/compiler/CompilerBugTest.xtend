@@ -2103,6 +2103,23 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testNestedListLiteral_02() {
+		assertCompilesTo('''
+			class C {
+				val Iterable<? extends Iterable<String>> f = #[#["a"], #{} ] 
+			}
+		''', '''
+			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private final Iterable<? extends Iterable<String>> f = Collections.<Iterable<String>>unmodifiableList(CollectionLiterals.<Iterable<String>>newArrayList(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")), Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet())));
+			}
+		''')
+	}
+	
+	@Test
 	def testEarlyExitInBranch_01() {
 		assertCompilesTo('''
 			class C {
@@ -2646,41 +2663,46 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug380058_01() {
-		useJavaCompiler = false
-		'''
-			import bug380058.Amount
-			
-			import static bug380058.SI.*
-			
-			class JScienceTest {
-			    def test() { 
-			        val w = Amount::valueOf(100, MILLIMETER)
-			        val h = Amount::valueOf(50, MILLIMETER)
-			        val perim = w.plus(h).times(2)
-			        println(perim)
-			    }
-			}
-		'''.assertCompilesTo('''
-			import bug380058.Amount;
-			import bug380058.Length;
-			import bug380058.SI;
-			import org.eclipse.xtext.xbase.lib.InputOutput;
-			
-			@SuppressWarnings("all")
-			public class JScienceTest {
-			  public Amount<Length> test() {
-			    Amount<Length> _xblockexpression = null;
-			    {
-			      final Amount<Length> w = Amount.<Length>valueOf(100, SI.MILLIMETER);
-			      final Amount<Length> h = Amount.<Length>valueOf(50, SI.MILLIMETER);
-			      Amount<Length> _plus = w.plus(h);
-			      final Amount<Length> perim = _plus.times(2);
-			      _xblockexpression = InputOutput.<Amount<Length>>println(perim);
-			    }
-			    return _xblockexpression;
-			  }
-			}
-		''')
+		val wasUseJavaCompiler = useJavaCompiler
+		try {
+			useJavaCompiler = false
+			'''
+				import bug380058.Amount
+				
+				import static bug380058.SI.*
+				
+				class JScienceTest {
+				    def test() { 
+				        val w = Amount::valueOf(100, MILLIMETER)
+				        val h = Amount::valueOf(50, MILLIMETER)
+				        val perim = w.plus(h).times(2)
+				        println(perim)
+				    }
+				}
+			'''.assertCompilesTo('''
+				import bug380058.Amount;
+				import bug380058.Length;
+				import bug380058.SI;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
+				
+				@SuppressWarnings("all")
+				public class JScienceTest {
+				  public Amount<Length> test() {
+				    Amount<Length> _xblockexpression = null;
+				    {
+				      final Amount<Length> w = Amount.<Length>valueOf(100, SI.MILLIMETER);
+				      final Amount<Length> h = Amount.<Length>valueOf(50, SI.MILLIMETER);
+				      Amount<Length> _plus = w.plus(h);
+				      final Amount<Length> perim = _plus.times(2);
+				      _xblockexpression = InputOutput.<Amount<Length>>println(perim);
+				    }
+				    return _xblockexpression;
+				  }
+				}
+			''')
+		} finally {
+			useJavaCompiler = wasUseJavaCompiler
+		}
 	}
 	
 	@Test def void testBug380059_01() {
