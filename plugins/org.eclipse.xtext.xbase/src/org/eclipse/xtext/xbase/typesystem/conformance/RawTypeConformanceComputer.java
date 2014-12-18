@@ -176,6 +176,13 @@ public class RawTypeConformanceComputer {
 	public final static int UNKNOWN_TYPE_PARTICIPATED = SYNONYM << 1;
 	
 	public final static int INCOMPATIBLE = UNKNOWN_TYPE_PARTICIPATED << 1;
+	
+	/**
+	 * Check for conformance as if the given types were used as type arguments of type arguments.
+	 * E.g. an {@code Iterable<Iterable<?>>} is not assignable from {@code Iterable<Iterable<? extends CharSequence>>}.
+	 * The usage of the nested type argument is honored by this bit.
+	 */
+	public final static int AS_NESTED_TYPE_ARGUMENT = INCOMPATIBLE << 1;
 
 	private SynonymTypesProvider synonymTypesProvider;
 	/**
@@ -197,7 +204,7 @@ public class RawTypeConformanceComputer {
 		result = isSynonymConformant(result, left, right, flags);
 		if ((result & SUCCESS) == 0)
 			result |= INCOMPATIBLE;
-		return result;
+		return result & ~AS_NESTED_TYPE_ARGUMENT;
 	}
 
 	protected int isSynonymConformant(int originalConformance, final LightweightTypeReference left, LightweightTypeReference right, final int flags) {
@@ -444,7 +451,7 @@ public class RawTypeConformanceComputer {
 	}
 	
 	protected int doIsConformant(LightweightTypeReference left, WildcardTypeReference right, int flags) {
-		if ((flags & AS_TYPE_ARGUMENT) == 0) {
+		if ((flags & AS_TYPE_ARGUMENT) == 0 || (flags & AS_NESTED_TYPE_ARGUMENT) != 0) {
 			for(LightweightTypeReference upperBound: right.getUpperBounds()) {
 				int result = doIsConformant(left, upperBound, flags);
 				if ((result & SUCCESS) != 0) {
@@ -456,10 +463,13 @@ public class RawTypeConformanceComputer {
 	}
 	
 	protected int doIsConformant(WildcardTypeReference left, LightweightTypeReference right, int flags) {
-		if ((flags & AS_TYPE_ARGUMENT) != 0) {
+		if ((flags & AS_TYPE_ARGUMENT) != 0 || (flags & AS_NESTED_TYPE_ARGUMENT) != 0) {
 			LightweightTypeReference lowerBound = left.getLowerBound();
 			if (lowerBound != null) {
 				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
+				if ((newFlags & AS_NESTED_TYPE_ARGUMENT) != 0) {
+					newFlags |= AS_TYPE_ARGUMENT;
+				}
 				if (right.isRawType()) {
 					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 				}
@@ -470,6 +480,9 @@ public class RawTypeConformanceComputer {
 			}
 			for(LightweightTypeReference leftUpperBound: left.getUpperBounds()) {
 				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
+				if ((newFlags & AS_NESTED_TYPE_ARGUMENT) != 0) {
+					newFlags |= AS_TYPE_ARGUMENT;
+				}
 				if (leftUpperBound.isRawType()) {
 					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 				}
@@ -490,6 +503,9 @@ public class RawTypeConformanceComputer {
 				LightweightTypeReference rightLowerBound = right.getLowerBound();
 				if (rightLowerBound != null) {
 					int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
+					if ((newFlags & AS_NESTED_TYPE_ARGUMENT) != 0) {
+						newFlags |= AS_TYPE_ARGUMENT;
+					}
 					if (rightLowerBound.isRawType()) {
 						newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 					}
@@ -501,6 +517,9 @@ public class RawTypeConformanceComputer {
 			int subtypeOrRawConversion = 0;
 			for(LightweightTypeReference leftUpperBound: left.getUpperBounds()) {
 				int newFlags = flags & ~(ALLOW_RAW_TYPE_CONVERSION | AS_TYPE_ARGUMENT | ALLOW_BOXING_UNBOXING | ALLOW_PRIMITIVE_WIDENING | ALLOW_SYNONYMS | ALLOW_FUNCTION_CONVERSION);
+				if ((newFlags & AS_NESTED_TYPE_ARGUMENT) != 0) {
+					newFlags |= AS_TYPE_ARGUMENT;
+				}
 				if (leftUpperBound.isRawType()) {
 					newFlags |= ALLOW_RAW_TYPE_CONVERSION;
 				}
@@ -808,6 +827,9 @@ public class RawTypeConformanceComputer {
 	
 	protected int doIsConformant(ParameterizedTypeReference left, ParameterizedTypeReference right, int flags) {
 		if (left.getType() == right.getType()) {
+			if ((flags & AS_TYPE_ARGUMENT) != 0) {
+				flags |= AS_NESTED_TYPE_ARGUMENT;
+			}
 			return doIsConformantTypeArguments(left, right, flags);
 		}
 		if (left.isPrimitiveVoid() || right.isPrimitiveVoid()) {

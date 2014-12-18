@@ -110,6 +110,13 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
   }
   
   @Test
+  public void testNestedWildcard_01() {
+    this.isNotAssignableFrom("java.util.List<java.util.List<?>>", "java.util.List<java.util.List<? extends CharSequence>>");
+    this.isNotAssignableFrom("java.util.Collection<java.util.List<?>>", "java.util.List<java.util.List<? extends CharSequence>>");
+    this.isAssignableFrom("java.util.Collection<java.util.List<? extends CharSequence>>", "java.util.List<java.util.List<? extends CharSequence>>");
+  }
+  
+  @Test
   public void testVoid_01() {
     this.isAssignableFrom("void", "void");
   }
