@@ -480,6 +480,16 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_79() {
 		"Super<Number>$Inner<Number>[]".isSuperTypeOf("test.InnerClasses.Super<Number>.SubInner<Number>[]", "test.InnerClasses.Sub<Number>.SubInner2<Number>[]")
 	}
+	
+	@Test
+	def void testCommonSuperType_80() {
+		"Iterable<? extends Class<?>>".isSuperTypeOf("Iterable<Class<Number>>", "Iterable<Class<CharSequence>>")
+	}
+	
+	@Test
+	def void testCommonSuperType_81() {
+		"Class<?>".isSuperTypeOf("Class<Number>", "Class<CharSequence>")
+	}
 }
 
 

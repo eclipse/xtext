@@ -80,8 +80,8 @@ class CompilerBug445487Test extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private Provider<? extends Lexer> lexerProvider = new Provider<Lexer>() {
-			    public Lexer get() {
+			  private Provider<? extends Lexer> lexerProvider = new Provider<InternalXtendLexer>() {
+			    public InternalXtendLexer get() {
 			      return new InternalXtendLexer(null);
 			    }
 			  };

@@ -141,10 +141,10 @@ public class CompilerBug445487Test extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private Provider<? extends Lexer> lexerProvider = new Provider<Lexer>() {");
+    _builder_1.append("private Provider<? extends Lexer> lexerProvider = new Provider<InternalXtendLexer>() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public Lexer get() {");
+    _builder_1.append("public InternalXtendLexer get() {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return new InternalXtendLexer(null);");

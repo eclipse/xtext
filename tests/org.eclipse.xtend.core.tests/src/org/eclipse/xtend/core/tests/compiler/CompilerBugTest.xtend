@@ -2097,7 +2097,25 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private final List<? extends Collection<String>> f = Collections.<Collection<String>>unmodifiableList(CollectionLiterals.<Collection<String>>newArrayList(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")), Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet())));
+			  private final List<Collection<String>> f = Collections.<Collection<String>>unmodifiableList(CollectionLiterals.<Collection<String>>newArrayList(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")), Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet())));
+			}
+		''')
+	}
+	
+	@Test
+	def testNestedListLiteral_02() {
+		assertCompilesTo('''
+			class C {
+				val Iterable<? extends Iterable<String>> f = #[#["a"], #{} ] 
+			}
+		''', '''
+			import java.util.Collection;
+			import java.util.Collections;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private final Iterable<? extends Iterable<String>> f = Collections.<Collection<String>>unmodifiableList(CollectionLiterals.<Collection<String>>newArrayList(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")), Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet())));
 			}
 		''')
 	}

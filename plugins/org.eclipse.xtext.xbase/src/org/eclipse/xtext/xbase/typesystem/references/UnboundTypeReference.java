@@ -337,9 +337,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 				if (outResolvedToInvariant && (resolvedTo.getKind() == LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE)) {
 					resolvedTo = resolvedTo.getUpperBoundSubstitute();
 				} else if (outResolvedToInvariant && (resolvedTo.getKind() != LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE) && inferredConstraintHints.size() == 1) {
-					LightweightTypeReference constraintTypeRef = inferredConstraintHints.get(0).getTypeReference();
+					LightweightBoundTypeArgument inferredConstraintHint = inferredConstraintHints.get(0);
+					LightweightTypeReference constraintTypeRef = inferredConstraintHint.getTypeReference();
 					if (constraintTypeRef.isAssignableFrom(resolvedTo)) {
-						resolvedTo = constraintTypeRef;
+						if (inferredConstraintHint.getActualVariance() == VarianceInfo.INVARIANT && inferredConstraintHint.getDeclaredVariance() != VarianceInfo.OUT 
+								|| !(varianceHints.size() == 1 && varianceHints.contains(VarianceInfo.OUT))) {
+							resolvedTo = constraintTypeRef;	
+						}
 					}
 				} else if (varianceHints.contains(VarianceInfo.IN) && varianceHints.size() == 1 && typeArgument.getVariance() == VarianceInfo.INVARIANT && (resolvedTo instanceof WildcardTypeReference)) { 
 					resolvedTo = resolvedTo.getInvariantBoundSubstitute();
