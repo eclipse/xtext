@@ -9,22 +9,31 @@ package org.eclipse.xtend.core.javaconverter;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.Block;
+import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.xtend.core.javaconverter.JavaASTFlattener;
 import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * Converts Java code or an ICompilationUnit to Xtend code<br>
@@ -33,18 +42,11 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class JavaConverter implements IJavaCodeConverter {
+  @Accessors(AccessorType.PUBLIC_GETTER)
   public static class ConversionResult {
     private String xtendCode;
     
     private Iterable<String> problems = CollectionLiterals.<String>newArrayList();
-    
-    public String getXtendCode() {
-      return this.xtendCode;
-    }
-    
-    public Iterable<String> getProblems() {
-      return this.problems;
-    }
     
     public static JavaConverter.ConversionResult create(final JavaASTFlattener flattener) {
       final JavaConverter.ConversionResult result = new JavaConverter.ConversionResult();
@@ -58,16 +60,23 @@ public class JavaConverter implements IJavaCodeConverter {
       }
       return result;
     }
+    
+    @Pure
+    public String getXtendCode() {
+      return this.xtendCode;
+    }
+    
+    @Pure
+    public Iterable<String> getProblems() {
+      return this.problems;
+    }
   }
   
   @Inject
   private JavaCodeAnalyzer javaAnalyzer;
   
-  /**
-   * TODO Refactor this class. Remove state, extract common logic.
-   */
   @Inject
-  private JavaASTFlattener astFlattener;
+  private Provider<JavaASTFlattener> astFlattenerProvider;
   
   private boolean fallbackConversionStartegy = false;
   
@@ -78,14 +87,10 @@ public class JavaConverter implements IJavaCodeConverter {
       parser.setResolveBindings(true);
       parser.setBindingsRecovery(true);
       parser.setSource(cu);
-      this.astFlattener.reset();
-      this.astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
+      final ASTNode root = parser.createAST(null);
       String _source = cu.getSource();
-      this.astFlattener.setJavaSources(_source);
-      ASTNode _createAST = parser.createAST(null);
-      _createAST.accept(this.astFlattener);
-      final JavaConverter.ConversionResult result = JavaConverter.ConversionResult.create(this.astFlattener);
-      return result;
+      Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
+      return this.executeAstFlattener(_source, _singleton);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -115,7 +120,24 @@ public class JavaConverter implements IJavaCodeConverter {
    * 			 configured with the system class loader to resolve bindings.
    */
   public JavaConverter.ConversionResult bodyDeclarationToXtend(final String javaSrc, final IJavaProject project) {
-    return this.internalToXtend(null, javaSrc, null);
+    return this.internalToXtend(null, javaSrc, project);
+  }
+  
+  /**
+   * @param javaSrc Java class source code as String
+   */
+  public JavaConverter.ConversionResult statementToXtend(final String javaSrc) {
+    final ASTParser parser = this.javaAnalyzer.createDefaultJavaParser();
+    char[] _charArray = javaSrc.toCharArray();
+    parser.setSource(_charArray);
+    parser.setKind(ASTParser.K_STATEMENTS);
+    final ASTNode root = parser.createAST(null);
+    if ((root instanceof Block)) {
+      List<Statement> statements = ((Block)root).statements();
+      return this.executeAstFlattener(javaSrc, statements);
+    }
+    Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
+    return this.executeAstFlattener(javaSrc, _singleton);
   }
   
   /**
@@ -143,7 +165,6 @@ public class JavaConverter implements IJavaCodeConverter {
       final List<String> cpEntries = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
       parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);
     }
-    parser.setKind(ASTParser.K_COMPILATION_UNIT);
     String preparedJavaSource = javaSrc;
     boolean _equals = Objects.equal(unitName, null);
     if (_equals) {
@@ -152,14 +173,25 @@ public class JavaConverter implements IJavaCodeConverter {
     } else {
       parser.setUnitName(unitName);
     }
+    parser.setKind(ASTParser.K_COMPILATION_UNIT);
     char[] _charArray = preparedJavaSource.toCharArray();
     parser.setSource(_charArray);
-    this.astFlattener.reset();
-    this.astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
-    this.astFlattener.setJavaSources(preparedJavaSource);
-    ASTNode _createAST = parser.createAST(null);
-    _createAST.accept(this.astFlattener);
-    return JavaConverter.ConversionResult.create(this.astFlattener);
+    final ASTNode result = parser.createAST(null);
+    Set<ASTNode> _singleton = Collections.<ASTNode>singleton(result);
+    return this.executeAstFlattener(preparedJavaSource, _singleton);
+  }
+  
+  /**
+   * @param  preparedJavaSource used to collect javadoc and comments
+   */
+  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final Collection<? extends ASTNode> parseResult) {
+    final JavaASTFlattener astFlattener = this.astFlattenerProvider.get();
+    astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
+    astFlattener.setJavaSources(preparedJavaSource);
+    for (final ASTNode node : parseResult) {
+      node.accept(astFlattener);
+    }
+    return JavaConverter.ConversionResult.create(astFlattener);
   }
   
   public JavaConverter useRobustSyntax() {
@@ -168,6 +200,6 @@ public class JavaConverter implements IJavaCodeConverter {
   }
   
   public boolean isCompatibleTargetObject(final String javaToConvert, final EObject targetElement) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    return false;
   }
 }

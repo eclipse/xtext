@@ -8,14 +8,23 @@
 package org.eclipse.xtend.core.javaconverter
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.net.URLClassLoader
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.dom.ASTParser
-
+import java.util.Collection
+import java.util.Collections
+import java.util.List
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.jdt.core.dom.ASTNode
+import org.eclipse.jdt.core.dom.ASTParser
+import org.eclipse.jdt.core.dom.Block
+import org.eclipse.jdt.core.dom.Statement
+import org.eclipse.xtend.lib.annotations.AccessorType
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter
-import org.eclipse.emf.ecore.EObject
+
+import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
 
 /**
  * Converts Java code or an ICompilationUnit to Xtend code<br>
@@ -24,8 +33,8 @@ import org.eclipse.emf.ecore.EObject
  */
 class JavaConverter implements IJavaCodeConverter {
 	@Inject JavaCodeAnalyzer javaAnalyzer
-	/*TODO Refactor this class. Remove state, extract common logic. */
-	@Inject JavaASTFlattener astFlattener
+	@Inject Provider<JavaASTFlattener> astFlattenerProvider
+
 	boolean fallbackConversionStartegy = false
 
 	def ConversionResult toXtend(ICompilationUnit cu) {
@@ -34,12 +43,8 @@ class JavaConverter implements IJavaCodeConverter {
 		parser.resolveBindings = true
 		parser.bindingsRecovery = true
 		parser.source = cu
-		astFlattener.reset
-		astFlattener.useFallBackStrategy = fallbackConversionStartegy
-		astFlattener.setJavaSources(cu.source)
-		parser.createAST(null).accept(astFlattener)
-		val result = ConversionResult.create(astFlattener)
-		return result
+		val root = parser.createAST(null)
+		return executeAstFlattener(cu.source, Collections.singleton(root))
 
 	}
 
@@ -61,7 +66,22 @@ class JavaConverter implements IJavaCodeConverter {
 	 * 			 configured with the system class loader to resolve bindings.
 	 */
 	def ConversionResult bodyDeclarationToXtend(String javaSrc, IJavaProject project) {
-		internalToXtend(null, javaSrc, null)
+		internalToXtend(null, javaSrc, project)
+	}
+
+	/**
+	 * @param javaSrc Java class source code as String
+	 */
+	def ConversionResult statementToXtend(String javaSrc) {
+		val parser = javaAnalyzer.createDefaultJavaParser
+		parser.source = javaSrc.toCharArray
+		parser.kind = ASTParser.K_STATEMENTS
+		val root = parser.createAST(null)
+		if (root instanceof Block) {
+			var List<Statement> statements = root.statements()
+			return executeAstFlattener(javaSrc, statements)
+		}
+		return executeAstFlattener(javaSrc, Collections.singleton(root))
 	}
 
 	/**
@@ -82,7 +102,6 @@ class JavaConverter implements IJavaCodeConverter {
 			val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
 			parser.setEnvironment(cpEntries, null, null, true)
 		}
-		parser.kind = ASTParser.K_COMPILATION_UNIT
 		var preparedJavaSource = javaSrc
 		if (unitName == null) {
 			parser.unitName = "MISSING"
@@ -90,26 +109,29 @@ class JavaConverter implements IJavaCodeConverter {
 		} else {
 			parser.unitName = unitName
 		}
+		parser.kind = ASTParser.K_COMPILATION_UNIT
 		parser.source = preparedJavaSource.toCharArray
+		val result = parser.createAST(null)
+		return executeAstFlattener(preparedJavaSource, Collections.singleton(result))
+	}
 
-		astFlattener.reset
+	/**
+	 * @param  preparedJavaSource used to collect javadoc and comments
+	 */
+	private def executeAstFlattener(String preparedJavaSource, Collection<? extends ASTNode> parseResult) {
+		val astFlattener = astFlattenerProvider.get
 		astFlattener.useFallBackStrategy = fallbackConversionStartegy
 		astFlattener.setJavaSources(preparedJavaSource)
-		parser.createAST(null).accept(astFlattener)
+		for (ASTNode node : parseResult) {
+			node.accept(astFlattener)
+		}
 		return ConversionResult.create(astFlattener)
 	}
 
+	@Accessors(AccessorType.PUBLIC_GETTER)
 	static class ConversionResult {
 		String xtendCode
 		Iterable<String> problems = newArrayList()
-
-		def getXtendCode() {
-			xtendCode
-		}
-
-		def getProblems() {
-			problems
-		}
 
 		def static create(JavaASTFlattener flattener) {
 			val result = new ConversionResult
@@ -127,7 +149,7 @@ class JavaConverter implements IJavaCodeConverter {
 	}
 
 	override isCompatibleTargetObject(String javaToConvert, EObject targetElement) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		false
 	}
 
 }

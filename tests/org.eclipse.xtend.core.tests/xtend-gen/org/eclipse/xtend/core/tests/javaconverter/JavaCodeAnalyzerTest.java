@@ -78,6 +78,21 @@ public class JavaCodeAnalyzerTest {
     this.assertNodesCount(_assertJavaTypeIs, 2);
   }
   
+  @Test
+  public void tesTryCatchSatement_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("} catch (final Exception e) {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> _assertJavaTypeIs = this.assertJavaTypeIs(_builder, ASTParser.K_STATEMENTS);
+    this.assertNodesCount(_assertJavaTypeIs, 1);
+  }
+  
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> assertNodesCount(final JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> result, final int i) {
     List<? extends ASTNode> _nodes = result.getNodes();
     int _size = _nodes.size();

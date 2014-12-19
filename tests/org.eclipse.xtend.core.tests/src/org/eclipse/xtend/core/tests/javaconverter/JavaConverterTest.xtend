@@ -1081,6 +1081,25 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	}
 
+	@Test def void testTryCatchCaseAsStatement() throws Exception {
+		val javaBody = '''
+		try {
+		
+		} catch (final Exception e) {
+			
+		}'''
+
+		var statement = statementToXtend(javaBody)
+		assertEquals('''
+			try {
+				
+			}
+			 catch (Exception e) {
+				
+			}'''.toString, statement)
+
+	}
+
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
@@ -1101,6 +1120,12 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	def private classBodyDeclToXtend(String string) {
 		val xtendCode = j2x.bodyDeclarationToXtend(string, null).getXtendCode().trim()
+		println(xtendCode)
+		return xtendCode
+	}
+
+	def private statementToXtend(String string) {
+		val xtendCode = j2x.statementToXtend(string).getXtendCode().trim()
 		println(xtendCode)
 		return xtendCode
 	}
