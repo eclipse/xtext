@@ -83,7 +83,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}
@@ -110,7 +110,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 «ENDFOREACH-»
 		
 «grammarFragmentToStr("		//", lineDelimiter)»
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 «FOREACH containedAbstractElements() AS e»
 «grammarFragmentToStr(e, "		//", lineDelimiter)»
 		public «e.getClassName()» «e.gaElementAccessMethodeName()»() { return «e.gaElementAccessorLocalVarName()»; }
