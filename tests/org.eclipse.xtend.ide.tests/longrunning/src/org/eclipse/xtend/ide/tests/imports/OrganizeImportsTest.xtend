@@ -6,7 +6,8 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+
+import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	
@@ -577,13 +578,13 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 
 	@Test 
 	def void testBug447227_2(){
-		xtendFile("Outer",
-		'''
-			package p
+		createFile('/p/Outer.xtend',
+			'''
+				package p
 			class Outer {
 				static class Inner {}
 			}
-		''')
+			''')
 		waitForAutoBuild
 		'''		
 			package p
@@ -603,6 +604,5 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
-	
 
 }
