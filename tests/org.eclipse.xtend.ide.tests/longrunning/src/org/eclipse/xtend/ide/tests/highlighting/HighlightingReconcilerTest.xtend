@@ -66,7 +66,7 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		assertEquals('3', semanticSnippets.last)
 	}
 	
-	@Test def void testNoSematicHighlightingOnOpen() {
+	@Test def void testOpenedEditorHasSemanticHighlighting() {
 		val model = '''
 			class Foo {
 			  static val foo = ''
@@ -84,8 +84,8 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 		}
 		val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
 		val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
-		// this fails if the first highlighting job hasn't been skipped
-		assertEquals('Highlighting regions broken' + semanticSnippets.join(','), 1, semanticSnippets.size)
+		// this fails if the first highlighting job didn't color the document
+		assertEquals('Highlighting regions broken ' + semanticSnippets.join(','), 1, semanticSnippets.size)
 		assertEquals('foo', semanticSnippets.head)
 	}
 }
