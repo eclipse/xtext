@@ -300,6 +300,21 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testNestedTypeLiteral_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.Map");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val entry = |Map.Entry|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertTypeImport(_builder, "java.util.Map");
+  }
+  
+  @Test
   public void testTypeParameter_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.Serializable");
@@ -370,8 +385,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.newLine();
     ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "javax.annotation.Resource");
     ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport, 
-      "javax.annotation.Resource.AuthenticationType.CONTAINER", 
-      "javax.annotation.Resource.AuthenticationType.APPLICATION");
+      "javax.annotation.Resource.AuthenticationType.CONTAINER");
     this.assertExtensionImport(_assertStaticImport);
   }
   

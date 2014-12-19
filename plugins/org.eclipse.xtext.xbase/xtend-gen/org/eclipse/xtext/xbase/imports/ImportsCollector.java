@@ -34,6 +34,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -66,9 +67,9 @@ public class ImportsCollector {
     }
     final EObject actualSemanticObj = actualOffsetNode.getSemanticElement();
     this.visitIfInRange(actualSemanticObj, offset, endOffset, acceptor);
-    final TreeIterator<EObject> contents = EcoreUtil.<EObject>getAllContents(actualSemanticObj, true);
-    while (contents.hasNext()) {
-      EObject _next = contents.next();
+    final TreeIterator<EObject> contentsIterator = EcoreUtil.<EObject>getAllContents(actualSemanticObj, true);
+    while (contentsIterator.hasNext()) {
+      EObject _next = contentsIterator.next();
       this.visitIfInRange(_next, offset, endOffset, acceptor);
     }
   }
@@ -123,6 +124,13 @@ public class ImportsCollector {
     boolean _isExplicitStatic = semanticObj.isExplicitStatic();
     boolean _not = (!_isExplicitStatic);
     if (_not) {
+      final XExpression target = semanticObj.getMemberCallTarget();
+      if ((target instanceof XAbstractFeatureCall)) {
+        boolean _isTypeLiteral_1 = ((XAbstractFeatureCall)target).isTypeLiteral();
+        if (_isTypeLiteral_1) {
+          return;
+        }
+      }
       this.collectStaticImportsFrom(semanticObj, acceptor);
     }
   }
