@@ -122,9 +122,14 @@ public class ImportManager {
 					outerContainer = (JvmType) outerContainer.eContainer();
 				}
 				if (type != outerContainer) {
-					nameToImport = outerContainer.getQualifiedName(innerTypeSeparator);
 					outerShortName = outerContainer.getSimpleName();
-					shortName = outerShortName + qualifiedName.substring(nameToImport.length());
+					if(!thisTypeQualifiedNames.contains(outerContainer.getQualifiedName(innerTypeSeparator)) && thisTypeSimpleNames.contains(outerShortName)) {
+						outerShortName = qualifiedName;
+						shortName = qualifiedName;
+					} else {
+						nameToImport = outerContainer.getQualifiedName(innerTypeSeparator);
+						shortName = outerShortName + qualifiedName.substring(nameToImport.length());
+					}
 				}
 			}
 			appendType(qualifiedName, shortName, outerShortName, nameToImport, builder);
@@ -152,9 +157,14 @@ public class ImportManager {
 					outerContainer = outerContainer.getDeclaringClass();
 				}
 				if (type != outerContainer) {
-					nameToImport = outerContainer.getCanonicalName();
 					outerShortName =  outerContainer.getSimpleName();
-					shortName = outerShortName + qualifiedName.substring(nameToImport.length());
+					if(!thisTypeQualifiedNames.contains(outerContainer.getCanonicalName()) && thisTypeSimpleNames.contains(outerShortName)) {
+						outerShortName = qualifiedName;
+						shortName = qualifiedName;
+					} else {
+						nameToImport = outerContainer.getCanonicalName();
+						shortName = outerShortName + qualifiedName.substring(nameToImport.length());
+					}
 				}
 			}
 			appendType(qualifiedName, shortName, outerShortName, nameToImport, builder);
