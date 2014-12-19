@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.TextPresentation;
@@ -27,6 +26,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IBatchLinkableResource;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -193,23 +193,22 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 *            the added positions
 	 * @param removedPositions
 	 *            the removed positions
-	 * @param modificationStamp
-	 *            the modification stamp when the positions were calculated 
+	 * @param resource
+	 *            the resource for which the positions have been computed 
 	 */
 	private void updatePresentation(TextPresentation textPresentation, List<AttributedPosition> addedPositions,
-			List<AttributedPosition> removedPositions, final long modificationStamp) {
+			List<AttributedPosition> removedPositions, XtextResource resource) {
 		final Runnable runnable = presenter.createUpdateRunnable(textPresentation, addedPositions, removedPositions);
 		if (runnable == null)
 			return;
-		
+		final XtextResourceSet resourceSet = (XtextResourceSet) resource.getResourceSet();
+		final int modificationStamp = resourceSet.getModificationStamp();
 		Display display = getDisplay();
 		display.asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				// never apply outdated highlighting
-				if(sourceViewer != null 
-						&& sourceViewer.getDocument() instanceof IDocumentExtension4
-						&& ((IDocumentExtension4) sourceViewer.getDocument()).getModificationStamp() == modificationStamp)
+				if(sourceViewer != null	&& modificationStamp == resourceSet.getModificationStamp())
 					runnable.run();
 			}
 		});
@@ -393,7 +392,7 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter.isCanceled())		
 				return;
 			checkCanceled(cancelIndicator);
-			updatePresentation(textPresentation, addedPositions, removedPositions, resource.getModificationStamp());
+			updatePresentation(textPresentation, addedPositions, removedPositions, resource);
 
 		} finally {
 			if (highlightingPresenter != null)
