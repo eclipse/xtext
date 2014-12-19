@@ -66,6 +66,17 @@ class JavaCodeAnalyzerTest {
 		'''.assertJavaTypeIs(ASTParser.K_STATEMENTS).assertNodesCount(2)
 	}
 
+	@Test
+	def void tesTryCatchSatement_01() {
+		'''
+			try {
+			
+			} catch (final Exception e) {
+			
+			}
+		'''.assertJavaTypeIs(ASTParser.K_STATEMENTS).assertNodesCount(1)
+	}
+
 	def assertNodesCount(JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> result, int i) {
 		assertEquals(i, result.nodes.size)
 		return result
