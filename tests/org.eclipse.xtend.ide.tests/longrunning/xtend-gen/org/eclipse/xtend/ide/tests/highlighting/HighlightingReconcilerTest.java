@@ -125,7 +125,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testNoSematicHighlightingOnOpen() {
+  public void testOpenedEditorHasSemanticHighlighting() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class Foo {");
@@ -160,7 +160,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       };
       final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_1);
       String _join = IterableExtensions.join(semanticSnippets, ",");
-      String _plus = ("Highlighting regions broken" + _join);
+      String _plus = ("Highlighting regions broken " + _join);
       int _size = semanticSnippets.size();
       Assert.assertEquals(_plus, 1, _size);
       String _head = IterableExtensions.<String>head(semanticSnippets);
