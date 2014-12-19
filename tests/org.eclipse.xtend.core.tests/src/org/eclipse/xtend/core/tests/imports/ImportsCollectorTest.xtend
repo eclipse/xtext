@@ -200,6 +200,15 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 			}
 		'''.assertTypeImport('java.util.Map.Entry')
 	}
+	@Test
+	def void testNestedTypeLiteral_03() {
+		'''
+			import java.util.Map
+			class C {
+				val entry = |Map.Entry|
+			}
+		'''.assertTypeImport('java.util.Map')
+	}
 
 	@Test
 	def void testTypeParameter_01() {
@@ -235,7 +244,6 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 	}
 
 	@Test
-	/* TODO check expectation */
 	def void testEnum_01() {
 		'''
 			import javax.annotation.Resource
@@ -245,8 +253,7 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 				var en2 = Resource.AuthenticationType.APPLICATION|
 			}
 		'''.assertTypeImport('javax.annotation.Resource').assertStaticImport(
-			'javax.annotation.Resource.AuthenticationType.CONTAINER',
-			'javax.annotation.Resource.AuthenticationType.APPLICATION').assertExtensionImport
+			'javax.annotation.Resource.AuthenticationType.CONTAINER').assertExtensionImport
 	}
 
 	@Test
