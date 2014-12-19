@@ -33,6 +33,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	@Inject
 	private XtypeGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE:

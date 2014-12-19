@@ -69,6 +69,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	@Inject
 	private XbaseWithAnnotationsGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_FORMAL_PARAMETER:
