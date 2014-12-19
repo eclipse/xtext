@@ -51,11 +51,11 @@ class ImportsCollector {
 			actualOffsetNode = actualOffsetNode.getParent()
 		}
 		val actualSemanticObj = actualOffsetNode.semanticElement
-		visitIfInRange(actualSemanticObj, offset, endOffset, acceptor);
+		actualSemanticObj.visitIfInRange(offset, endOffset, acceptor);
 
-		val TreeIterator<EObject> contents = EcoreUtil.getAllContents(actualSemanticObj, true)
-		while (contents.hasNext) {
-			contents.next().visitIfInRange(offset, endOffset, acceptor)
+		val TreeIterator<EObject> contentsIterator = EcoreUtil.getAllContents(actualSemanticObj, true)
+		while (contentsIterator.hasNext) {
+			contentsIterator.next().visitIfInRange(offset, endOffset, acceptor)
 		}
 
 	}
@@ -85,6 +85,12 @@ class ImportsCollector {
 			visit(semanticObj.getFeature() as JvmType, originNode, acceptor)
 		}
 		if (!semanticObj.isExplicitStatic()) {
+			val target = semanticObj.getMemberCallTarget();
+			if (target instanceof XAbstractFeatureCall) {
+				if (target.typeLiteral) {
+					return
+				}
+			}
 			collectStaticImportsFrom(semanticObj, acceptor)
 		}
 	}
