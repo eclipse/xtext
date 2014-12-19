@@ -1990,6 +1990,36 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals(_string, body);
   }
   
+  @Test
+  public void testTryCatchCaseAsStatement() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("} catch (final Exception e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    final String javaBody = _builder.toString();
+    String statement = this.statementToXtend(javaBody);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("catch (Exception e) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, statement);
+  }
+  
   private XtendClass toValidXtendClass(final String javaCode) throws Exception {
     XtendTypeDeclaration _validTypeDeclaration = this.toValidTypeDeclaration("Clazz", javaCode);
     return ((XtendClass) _validTypeDeclaration);
@@ -2015,6 +2045,14 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   private String classBodyDeclToXtend(final String string) {
     JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend(string, null);
     String _xtendCode = _bodyDeclarationToXtend.getXtendCode();
+    final String xtendCode = _xtendCode.trim();
+    InputOutput.<String>println(xtendCode);
+    return xtendCode;
+  }
+  
+  private String statementToXtend(final String string) {
+    JavaConverter.ConversionResult _statementToXtend = this.j2x.statementToXtend(string);
+    String _xtendCode = _statementToXtend.getXtendCode();
     final String xtendCode = _xtendCode.trim();
     InputOutput.<String>println(xtendCode);
     return xtendCode;
