@@ -269,6 +269,17 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 			}
 		'''.assertTypeImport('java.util.ArrayList').assertStaticImport.assertExtensionImport
 	}
+	@Test
+	def void testImplicitReciever_01() {
+		'''
+			class C {
+				|def void doStuff(String it) {
+					return substring(length)
+				} 
+				|
+			}
+		'''.assertTypeImport('java.lang.String').assertStaticImport.assertExtensionImport
+	}
 
 	private def DefaultImportsAcceptor assertTypeImport(CharSequence xtendFile, String... typeNames) {
 		xtendFile.collect.assertTypeImport(typeNames)
