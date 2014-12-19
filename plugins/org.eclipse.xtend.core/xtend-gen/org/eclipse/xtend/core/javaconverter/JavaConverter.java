@@ -5,20 +5,21 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.conversion;
+package org.eclipse.xtend.core.javaconverter;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Hashtable;
 import java.util.List;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.xtend.core.conversion.JavaASTFlattener;
+import org.eclipse.xtend.core.javaconverter.JavaASTFlattener;
+import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
+import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -31,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  *  @author Dennis Hübner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class JavaConverter {
+public class JavaConverter implements IJavaCodeConverter {
   public static class ConversionResult {
     private String xtendCode;
     
@@ -59,7 +60,8 @@ public class JavaConverter {
     }
   }
   
-  private final static int JLS = JavaASTFlattener.JLS;
+  @Inject
+  private JavaCodeAnalyzer javaAnalyzer;
   
   /**
    * TODO Refactor this class. Remove state, extract common logic.
@@ -67,16 +69,11 @@ public class JavaConverter {
   @Inject
   private JavaASTFlattener astFlattener;
   
-  private String complianceLevel = "1.5";
-  
   private boolean fallbackConversionStartegy = false;
   
   public JavaConverter.ConversionResult toXtend(final ICompilationUnit cu) {
     try {
-      final ASTParser parser = ASTParser.newParser(JavaConverter.JLS);
-      final Hashtable options = JavaCore.getOptions();
-      JavaCore.setComplianceOptions(this.complianceLevel, options);
-      parser.setCompilerOptions(options);
+      final ASTParser parser = this.javaAnalyzer.createDefaultJavaParser();
       parser.setStatementsRecovery(true);
       parser.setResolveBindings(true);
       parser.setBindingsRecovery(true);
@@ -128,10 +125,7 @@ public class JavaConverter {
    * @param proj JavaProject where the java source code comes from
    */
   private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final IJavaProject proj) {
-    final ASTParser parser = ASTParser.newParser(JavaConverter.JLS);
-    final Hashtable options = JavaCore.getOptions();
-    JavaCore.setComplianceOptions(this.complianceLevel, options);
-    parser.setCompilerOptions(options);
+    final ASTParser parser = this.javaAnalyzer.createDefaultJavaParser();
     parser.setStatementsRecovery(true);
     parser.setResolveBindings(true);
     parser.setBindingsRecovery(true);
@@ -171,5 +165,9 @@ public class JavaConverter {
   public JavaConverter useRobustSyntax() {
     this.fallbackConversionStartegy = true;
     return this;
+  }
+  
+  public boolean isCompatibleTargetObject(final String javaToConvert, final EObject targetElement) {
+    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
 }

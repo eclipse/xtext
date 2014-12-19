@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.conversion;
+package org.eclipse.xtend.core.javaconverter;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
@@ -112,7 +112,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 import org.eclipse.jdt.core.dom.WhileStatement;
 import org.eclipse.jdt.core.dom.WildcardType;
-import org.eclipse.xtend.core.conversion.ASTFlattenerUtils;
+import org.eclipse.xtend.core.javaconverter.ASTFlattenerUtils;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;

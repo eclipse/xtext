@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.edit;
+package org.eclipse.xtend.ide.javaconverter;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
@@ -39,8 +39,8 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtend.core.conversion.JavaConverter;
-import org.eclipse.xtend.core.conversion.JavaConverter.ConversionResult;
+import org.eclipse.xtend.core.javaconverter.JavaConverter;
+import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.FormatterRequest;

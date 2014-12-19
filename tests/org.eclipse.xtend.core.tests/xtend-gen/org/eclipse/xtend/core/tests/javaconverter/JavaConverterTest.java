@@ -1,10 +1,10 @@
-package org.eclipse.xtend.core.tests.conversion;
+package org.eclipse.xtend.core.tests.javaconverter;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.conversion.JavaConverter;
+import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendClass;
