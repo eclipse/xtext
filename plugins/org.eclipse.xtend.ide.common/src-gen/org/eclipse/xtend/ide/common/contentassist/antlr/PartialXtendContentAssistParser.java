@@ -19,6 +19,7 @@ public class PartialXtendContentAssistParser extends XtendParser implements IPar
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

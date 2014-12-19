@@ -16,6 +16,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("all")
 public class XtendStandaloneSetupGenerated implements ISetup {
 
+	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
 		org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsStandaloneSetup.doSetup();
 

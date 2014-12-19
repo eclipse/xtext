@@ -56,7 +56,6 @@ public class TerminalsGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
 	@Override
 	public Grammar getGrammar() {
 		return grammar;

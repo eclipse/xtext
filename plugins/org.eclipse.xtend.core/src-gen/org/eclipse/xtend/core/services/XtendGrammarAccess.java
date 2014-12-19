@@ -35,7 +35,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//File returns XtendFile:
 		//	("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("package" package=QualifiedName ";"?)? importSection=XImportSection? xtendTypes+=Type*
 		public Group getGroup() { return cGroup; }
@@ -175,7 +175,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	modifiers+=CommonModifier* "enum" name=ValidID "{" (members+=XtendEnumLiteral ("," members+=XtendEnumLiteral)*)? ";"?
 		//	"}" | {XtendAnnotationType.annotationInfo=current} modifiers+=CommonModifier* "annotation" name=ValidID "{"
 		//	members+=AnnotationField* "}");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{XtendTypeDeclaration} annotations+=XAnnotation* ({XtendClass.annotationInfo=current} modifiers+=CommonModifier* "class"
 		//name=ValidID ("<" typeParameters+=JvmTypeParameter ("," typeParameters+=JvmTypeParameter)* ">")? ("extends"
@@ -490,7 +490,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmSuperTypeReference returns types::JvmTypeReference:
 		//	JvmParameterizedTypeReference | XFunctionSuperTypeRef;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//JvmParameterizedTypeReference | XFunctionSuperTypeRef
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -523,7 +523,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//XFunctionSuperTypeRef returns xtype::XFunctionTypeRef:
 		//	(instanceContext?="(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>"
 		//	returnType=JvmTypeReference;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(instanceContext?="(" (paramTypes+=JvmTypeReference ("," paramTypes+=JvmTypeReference)*)? ")")? "=>"
 		//returnType=JvmTypeReference
@@ -709,7 +709,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	modifiers+=CommonModifier* "enum" name=ValidID "{" (members+=XtendEnumLiteral ("," members+=XtendEnumLiteral)*)? ";"?
 		//	"}" | {XtendAnnotationType.annotationInfo=current} modifiers+=CommonModifier* "annotation" name=ValidID "{"
 		//	members+=AnnotationField* "}");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{XtendMember} annotations+=XAnnotation* (({XtendField.annotationInfo=current} modifiers+=CommonModifier*
 		//modifiers+=FieldModifier modifiers+=CommonModifier* type=JvmTypeReference? name=ValidID |
@@ -1388,7 +1388,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	modifiers+=CommonModifier* "enum" name=ValidID "{" (members+=XtendEnumLiteral ("," members+=XtendEnumLiteral)*)? ";"?
 		//	"}" | {XtendAnnotationType.annotationInfo=current} modifiers+=CommonModifier* "annotation" name=ValidID "{"
 		//	members+=AnnotationField* "}");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{XtendMember} annotations+=XAnnotation* ({XtendField.annotationInfo=current} modifiers+=CommonModifier*
 		//(modifiers+=FieldModifier modifiers+=CommonModifier* type=JvmTypeReference? name=ValidID | modifiers+="extension"
@@ -2226,7 +2226,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TypeReferenceNoTypeArgs returns types::JvmParameterizedTypeReference:
 		//	type=[types::JvmType|QualifiedName];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type=[types::JvmType|QualifiedName]
 		public Assignment getTypeAssignment() { return cTypeAssignment; }
@@ -2267,7 +2267,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)*
 		//	| TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+ |
 		//	XFunctionTypeRef;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ParameterizedTypeReferenceWithTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)* |
 		//TypeReferenceNoTypeArgs => ({types::JvmGenericArrayTypeReference.componentType=current} ArrayBrackets)+ |
@@ -2352,7 +2352,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	arguments+=JvmArgumentTypeReference)* ">" (=> ({types::JvmInnerTypeReference.outer=current} ".")
 		//	type=[types::JvmType|ValidID] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
 		//	">")?)*);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type=[types::JvmType|QualifiedName] ("<" arguments+=JvmArgumentTypeReference ("," arguments+=JvmArgumentTypeReference)*
 		//">" (=> ({types::JvmInnerTypeReference.outer=current} ".") type=[types::JvmType|ValidID] ("<"
@@ -2458,7 +2458,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		/// *** The following two rules are a workaround for a limitation in serialiation logic * / FunctionID:
 		//	ValidID | Operators;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ValidID | Operators
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -2486,7 +2486,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//Operators:
 		//	OpMultiAssign //	| OpAdd completely contained in OpUnary
 		//	| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary | OpPostfix;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//OpMultiAssign //	| OpAdd completely contained in OpUnary
 		//| OpOr | OpAnd | OpEquality | OpCompare | OpOther | OpMulti | OpUnary | OpPostfix
@@ -2527,7 +2527,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XtendEnumLiteral:
 		//	name=ValidID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ValidID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -2556,7 +2556,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//CommonModifier:
 		//	"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final" | "strictfp" | "native"
 		//	| "volatile" | "synchronized" | "transient";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"public" | "private" | "protected" | "package" | "abstract" | "static" | "dispatch" | "final" | "strictfp" | "native" |
 		//"volatile" | "synchronized" | "transient"
@@ -2610,7 +2610,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//FieldModifier:
 		//	"val" | "var";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"val" | "var"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -2630,7 +2630,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//MethodModifier:
 		//	"def" | "override";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"def" | "override"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -2655,7 +2655,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//CreateExtensionInfo:
 		//	"create" (name=ValidID ":")? createExpression=XExpression;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"create" (name=ValidID ":")? createExpression=XExpression
 		public Group getGroup() { return cGroup; }
@@ -2694,7 +2694,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ValidID:
 		//	ID | "create" | "annotation" | "AFTER" | "BEFORE" | "SEPARATOR";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID | "create" | "annotation" | "AFTER" | "BEFORE" | "SEPARATOR"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -2727,7 +2727,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//// For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
 		//FeatureCallID:
 		//	InnerVarID | "extension";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//InnerVarID | "extension"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -2775,7 +2775,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements"
 		//	| "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" |
 		//	"strictfp" | "native" | "volatile" | "synchronized" | "transient" | "AFTER" | "BEFORE" | "SEPARATOR";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "final" | "implements" |
 		//"import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" | "throws" | "strictfp"
@@ -2887,7 +2887,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//Parameter returns XtendParameter:
 		//	annotations+=XAnnotation* (extension?="extension" annotations+=XAnnotation*)? parameterType=JvmTypeReference
 		//	varArg?="..."? name=ValidID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=XAnnotation* (extension?="extension" annotations+=XAnnotation*)? parameterType=JvmTypeReference
 		//varArg?="..."? name=ValidID
@@ -2971,7 +2971,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//XVariableDeclaration returns xbase::XExpression:
 		//	=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
 		//	(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ("=" right=XExpression)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//=> ({XtendVariableDeclaration} ((writeable?="var" | "val") extension?="extension"? | extension?="extension"
 		//(writeable?="var" | "val"))) (=> (type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ("=" right=XExpression)?
@@ -3088,7 +3088,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XConstructorCall returns xbase::XExpression:
 		//	XbaseConstructorCall (=> ({AnonymousClass.constructorCall=current} "{") members+=Member* "}")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//XbaseConstructorCall (=> ({AnonymousClass.constructorCall=current} "{") members+=Member* "}")?
 		public Group getGroup() { return cGroup; }
@@ -3160,7 +3160,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? (=>
 		//	explicitConstructorCall?="(" (arguments+=XShortClosure | arguments+=XExpression ("," arguments+=XExpression)*)? ")")?
 		//	arguments+=XClosure?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{xbase::XConstructorCall} "new" constructor=[types::JvmConstructor|QualifiedName] ("<"
 		//typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")? (=>
@@ -3272,7 +3272,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//JvmFormalParameter returns XtendFormalParameter:
 		//	extension?="extension"? parameterType=JvmTypeReference? name=InnerVarID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//extension?="extension"? parameterType=JvmTypeReference? name=InnerVarID
 		public Group getGroup() { return cGroup; }
@@ -3308,7 +3308,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//FullJvmFormalParameter returns XtendFormalParameter:
 		//	extension?="extension"? parameterType=JvmTypeReference name=InnerVarID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//extension?="extension"? parameterType=JvmTypeReference name=InnerVarID
 		public Group getGroup() { return cGroup; }
@@ -3340,7 +3340,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XStringLiteral returns xbase::XExpression:
 		//	SimpleStringLiteral | RichString;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//SimpleStringLiteral | RichString
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -3390,7 +3390,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	{xbase::XSwitchExpression} "switch" (=> ("(" declaredParam=JvmFormalParameter ":") switch=XExpression ")" | =>
 		//	(declaredParam=JvmFormalParameter ":")? switch=XExpressionOrSimpleConstructorCall) "{" cases+=XCasePart* ("default"
 		//	":" default=XExpression)? "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{xbase::XSwitchExpression} "switch" (=> ("(" declaredParam=JvmFormalParameter ":") switch=XExpression ")" | =>
 		//(declaredParam=JvmFormalParameter ":")? switch=XExpressionOrSimpleConstructorCall) "{" cases+=XCasePart* ("default" ":"
@@ -3497,7 +3497,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XExpressionOrSimpleConstructorCall returns xbase::XExpression:
 		//	XbaseConstructorCall | XExpression;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//-> XbaseConstructorCall | XExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -3518,7 +3518,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//SimpleStringLiteral returns xbase::XExpression:
 		//	{xbase::XStringLiteral} value=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{xbase::XStringLiteral} value=STRING
 		public Group getGroup() { return cGroup; }
@@ -3556,7 +3556,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//RichString returns xbase::XExpression:
 		//	{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart?
 		//	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart?)* expressions+=RichStringLiteralEnd);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart?
 		//(expressions+=RichStringLiteralInbetween expressions+=RichStringPart?)* expressions+=RichStringLiteralEnd)
@@ -3622,7 +3622,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RichStringLiteral returns xbase::XExpression:
 		//	{RichStringLiteral} value=RICH_TEXT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichStringLiteral} value=RICH_TEXT
 		public Group getGroup() { return cGroup; }
@@ -3646,7 +3646,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RichStringLiteralStart returns xbase::XExpression:
 		//	{RichStringLiteral} value=RICH_TEXT_START;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichStringLiteral} value=RICH_TEXT_START
 		public Group getGroup() { return cGroup; }
@@ -3673,7 +3673,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RichStringLiteralInbetween returns xbase::XExpression:
 		//	{RichStringLiteral} (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichStringLiteral} (value=RICH_TEXT_INBETWEEN | value=COMMENT_RICH_TEXT_INBETWEEN)
 		public Group getGroup() { return cGroup; }
@@ -3709,7 +3709,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RichStringLiteralEnd returns xbase::XExpression:
 		//	{RichStringLiteral} (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichStringLiteral} (value=RICH_TEXT_END | value=COMMENT_RICH_TEXT_END)
 		public Group getGroup() { return cGroup; }
@@ -3749,7 +3749,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//InternalRichString returns xbase::XExpression:
 		//	{RichString} (expressions+=RichStringLiteralInbetween (expressions+=RichStringPart?
 		//	expressions+=RichStringLiteralInbetween)*);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichString} (expressions+=RichStringLiteralInbetween (expressions+=RichStringPart?
 		//expressions+=RichStringLiteralInbetween)*)
@@ -3792,7 +3792,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RichStringPart returns xbase::XExpression:
 		//	XExpressionOrVarDeclaration | RichStringForLoop | RichStringIf;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//XExpressionOrVarDeclaration | RichStringForLoop | RichStringIf
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -3837,7 +3837,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE"
 		//	before=XExpression)? ("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)?
 		//	eachExpression=InternalRichString "ENDFOR";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE" before=XExpression)?
 		//("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)? eachExpression=InternalRichString "ENDFOR"
@@ -3930,7 +3930,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//RichStringIf returns xbase::XExpression:
 		//	{RichStringIf} "IF" if=XExpression then=InternalRichString elseIfs+=RichStringElseIf* ("ELSE"
 		//	else=InternalRichString)? "ENDIF";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RichStringIf} "IF" if=XExpression then=InternalRichString elseIfs+=RichStringElseIf* ("ELSE" else=InternalRichString)?
 		//"ENDIF"
@@ -3987,7 +3987,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//RichStringElseIf:
 		//	"ELSEIF" if=XExpression then=InternalRichString;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ELSEIF" if=XExpression then=InternalRichString
 		public Group getGroup() { return cGroup; }
@@ -4141,7 +4141,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}
