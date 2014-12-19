@@ -64,7 +64,9 @@ class ImportsCollector {
 		val region = locationInFileProvider.getSignificantTextRegion(object)
 		if (region.offset >= offset && region.offset + region.length <= endOffset) {
 			val compositeNode = NodeModelUtils.findActualNodeFor(object)
-			visit(object, compositeNode.children, acceptor)
+			if (compositeNode != null) { // implicit receiver case
+				visit(object, compositeNode.children, acceptor)
+			}
 		}
 	}
 

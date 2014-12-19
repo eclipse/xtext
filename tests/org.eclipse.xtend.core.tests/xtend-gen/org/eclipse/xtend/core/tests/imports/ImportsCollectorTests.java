@@ -418,6 +418,30 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     this.assertExtensionImport(_assertStaticImport);
   }
   
+  @Test
+  public void testImplicitReciever_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|def void doStuff(String it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return substring(length)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.lang.String");
+    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
+    this.assertExtensionImport(_assertStaticImport);
+  }
+  
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final CharSequence xtendFile, final String... typeNames) {
     ImportsAcceptor.DefaultImportsAcceptor _collect = this.collect(xtendFile);
     return this.assertTypeImport(_collect, typeNames);
