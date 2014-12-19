@@ -90,8 +90,11 @@ public class ImportsCollector {
     }
     if (_and) {
       final ICompositeNode compositeNode = NodeModelUtils.findActualNodeFor(object);
-      BidiIterable<INode> _children = compositeNode.getChildren();
-      this.visit(object, _children, acceptor);
+      boolean _notEquals = (!Objects.equal(compositeNode, null));
+      if (_notEquals) {
+        BidiIterable<INode> _children = compositeNode.getChildren();
+        this.visit(object, _children, acceptor);
+      }
     }
   }
   
