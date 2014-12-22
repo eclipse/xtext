@@ -578,11 +578,11 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 
 	@Test 
 	def void testBug447227_2(){
-		createFile('/p/Outer.xtend',
+		createFile('/p/Outer.java',
 			'''
-				package p
-			class Outer {
-				static class Inner {}
+			package p
+			public class class Outer {
+				public static class Inner {}
 			}
 			''')
 		waitForAutoBuild
