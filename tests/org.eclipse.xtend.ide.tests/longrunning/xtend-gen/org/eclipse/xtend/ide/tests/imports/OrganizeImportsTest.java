@@ -1071,17 +1071,16 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   public void testBug447227_2() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("\t");
       _builder.append("package p");
       _builder.newLine();
-      _builder.append("class Outer {");
+      _builder.append("public class class Outer {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("static class Inner {}");
+      _builder.append("public static class Inner {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      this._workbenchTestHelper.createFile("/p/Outer.xtend", _builder.toString());
+      this._workbenchTestHelper.createFile("/p/Outer.java", _builder.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package p");
