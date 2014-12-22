@@ -22,6 +22,7 @@ import org.eclipse.jdt.core.dom.Block
 import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData
 import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter
 
 import static extension org.eclipse.xtend.lib.annotations.AccessorType.*
@@ -57,7 +58,7 @@ class JavaConverter implements IJavaCodeConverter {
 	def ConversionResult toXtend(String unitName, String javaSrc) {
 		if (unitName == null)
 			throw new IllegalArgumentException()
-		internalToXtend(unitName, javaSrc, null)
+		internalToXtend(unitName, javaSrc, null, null)
 	}
 
 	/**
@@ -65,8 +66,9 @@ class JavaConverter implements IJavaCodeConverter {
 	 * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
 	 * 			 configured with the system class loader to resolve bindings.
 	 */
-	def ConversionResult bodyDeclarationToXtend(String javaSrc, IJavaProject project) {
-		internalToXtend(null, javaSrc, project)
+	def ConversionResult bodyDeclarationToXtend(String javaSrc, JavaImportData additionalImports,
+		IJavaProject project) {
+		internalToXtend(null, javaSrc, additionalImports, project)
 	}
 
 	/**
@@ -90,7 +92,8 @@ class JavaConverter implements IJavaCodeConverter {
 	 * @param javaSrc Java source code as String
 	 * @param proj JavaProject where the java source code comes from
 	 */
-	def private ConversionResult internalToXtend(String unitName, String javaSrc, IJavaProject proj) {
+	def private ConversionResult internalToXtend(String unitName, String javaSrc, JavaImportData additionalImports,
+		IJavaProject proj) {
 		val parser = javaAnalyzer.createDefaultJavaParser
 		parser.statementsRecovery = true
 		parser.resolveBindings = true
@@ -102,17 +105,22 @@ class JavaConverter implements IJavaCodeConverter {
 			val cpEntries = (sysClassLoader as URLClassLoader).getURLs().map[file]
 			parser.setEnvironment(cpEntries, null, null, true)
 		}
-		var preparedJavaSource = javaSrc
+		val javaSrcBuilder = new StringBuilder()
+		if (additionalImports != null) {
+			additionalImports.getImports().forEach[javaSrcBuilder.append("import " + it + ";")]
+		}
 		if (unitName == null) {
 			parser.unitName = "MISSING"
-			preparedJavaSource = "class MISSING {" + javaSrc + "}"
+			javaSrcBuilder.append('''class MISSING { «javaSrc»}''')
 		} else {
 			parser.unitName = unitName
+			javaSrcBuilder.append(javaSrc)
 		}
 		parser.kind = ASTParser.K_COMPILATION_UNIT
-		parser.source = preparedJavaSource.toCharArray
+		val preparedJavaSrc = javaSrcBuilder.toString
+		parser.source = preparedJavaSrc.toCharArray
 		val result = parser.createAST(null)
-		return executeAstFlattener(preparedJavaSource, Collections.singleton(result))
+		return executeAstFlattener(preparedJavaSrc, Collections.singleton(result))
 	}
 
 	/**

@@ -15,11 +15,15 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.dom.ASTNode;
+import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
+import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer.JavaParseResult;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -40,6 +44,7 @@ import com.google.inject.Provider;
 public class PasteJavaCodeHandler extends AbstractHandler {
 	private @Inject Provider<JavaConverter> javaConverterProvider;
 	private @Inject ImportsUtil importsUtil;
+	private @Inject JavaCodeAnalyzer codeAnalyzer;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -78,7 +83,14 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 
 		}
 		sb.append(javaCode);
-		ConversionResult conversionResult = javaConverterProvider.get().bodyDeclarationToXtend(sb.toString(), project);
+		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
+		JavaConverter javaConverter = javaConverterProvider.get();
+		ConversionResult conversionResult;
+		if (parseResult.getType() >= ASTParser.K_CLASS_BODY_DECLARATIONS) {
+			conversionResult = javaConverter.bodyDeclarationToXtend(sb.toString(), javaImports, project);
+		} else {
+			conversionResult = javaConverter.statementToXtend(javaCode);
+		}
 		final String xtendCode = conversionResult.getXtendCode();
 		if (!Strings.isEmpty(xtendCode)) {
 			final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
@@ -104,5 +116,4 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
 		}
 	}
-
 }

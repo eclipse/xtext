@@ -399,7 +399,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testJavadocCase() throws Exception {
 
-		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null).
+		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null, null).
 			xtendCode
 		assertTrue('''Javadoc Parameter well formed: «xtendCode»''', xtendCode.contains("@param p Param p"))
 	}
@@ -1119,7 +1119,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	def private classBodyDeclToXtend(String string) {
-		val xtendCode = j2x.bodyDeclarationToXtend(string, null).getXtendCode().trim()
+		val xtendCode = j2x.bodyDeclarationToXtend(string, null, null).getXtendCode().trim()
 		println(xtendCode)
 		return xtendCode
 	}

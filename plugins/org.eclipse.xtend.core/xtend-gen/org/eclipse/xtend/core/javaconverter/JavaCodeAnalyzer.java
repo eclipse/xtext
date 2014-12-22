@@ -87,7 +87,7 @@ public class JavaCodeAnalyzer {
     parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS);
     ASTNode root = parser.createAST(null);
     if ((root instanceof TypeDeclaration)) {
-      List<BodyDeclaration> bodyDeclarations = ((TypeDeclaration) root).bodyDeclarations();
+      List<BodyDeclaration> bodyDeclarations = ((TypeDeclaration)root).bodyDeclarations();
       int _size_1 = bodyDeclarations.size();
       boolean _greaterThan_1 = (_size_1 > 0);
       if (_greaterThan_1) {

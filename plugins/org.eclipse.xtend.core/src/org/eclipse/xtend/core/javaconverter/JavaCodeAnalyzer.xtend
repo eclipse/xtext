@@ -9,9 +9,7 @@ package org.eclipse.xtend.core.javaconverter
 
 import java.util.Collections
 import java.util.List
-import java.util.Map
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
@@ -48,7 +46,7 @@ class JavaCodeAnalyzer {
 		parser.setKind(ASTParser.K_CLASS_BODY_DECLARATIONS)
 		var ASTNode root = parser.createAST(null)
 		if (root instanceof TypeDeclaration) {
-			var List<BodyDeclaration> bodyDeclarations = (root as TypeDeclaration).bodyDeclarations()
+			var List<BodyDeclaration> bodyDeclarations = root.bodyDeclarations()
 			if (bodyDeclarations.size() > 0)
 				return new JavaParseResult<BodyDeclaration>(javaCode, ASTParser.K_CLASS_BODY_DECLARATIONS,
 					bodyDeclarations)
