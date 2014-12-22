@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.xtext.common.types.access.binary.asm.BinarySignatures;
 import org.eclipse.xtext.common.types.access.binary.asm.BinaryTypeSignature;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -24,6 +25,21 @@ public class BinarySignaturesTest {
 		BinaryTypeSignature typeErasure = typeSignature.getTypeErasure();
 		String identifier = typeErasure.toIdentifier();
 		Assert.assertEquals("com.google.common.collect.AbstractMultimap$WrappedCollection", identifier);
+	}
+	
+	@Test
+	public void testClazzesInDefaultPackage() {
+		String signature = "DummyService";
+		BinaryTypeSignature typeSignature = BinarySignatures.createTypeSignature(signature);
+		Assert.assertEquals("java:/Objects/DummyService#DummyService",typeSignature.getURI().toString());
+	}
+	
+	@Test
+	@Ignore
+	public void testClazzesInDefaultPackageNameWithOneChar() {
+		String signature = "D";
+		BinaryTypeSignature typeSignature = BinarySignatures.createTypeSignature(signature);
+		Assert.assertEquals("java:/Objects/D#D",typeSignature.getURI().toString());
 	}
 	
 }
