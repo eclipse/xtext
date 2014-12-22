@@ -82,6 +82,7 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 			// - the first one should be skipped, as it refers to an outdated document state
 			// - the second one should be executed
 		}
+		Thread.sleep(100);
 		val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
 		val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
 		// this fails if the first highlighting job didn't color the document

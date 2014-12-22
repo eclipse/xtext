@@ -140,6 +140,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final IXtextDocument document = editor.getDocument();
       while (Display.getDefault().readAndDispatch()) {
       }
+      Thread.sleep(100);
       String[] _positionCategories = document.getPositionCategories();
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
         public Boolean apply(final String it) {
