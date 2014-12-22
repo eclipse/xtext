@@ -29,6 +29,8 @@ public class BinarySignatures {
 	 * @param signature the binary type name, e.g. {@code java/lang/String} or a binary signature
 	 *  e.g {@code Ljava/lang/String;}
 	 */
+	//FIXME: This is ambiguous since a class in default package named e.g. B would always become a primitive
+	// see org.eclipse.xtext.common.types.access.impl.BinarySignaturesTest.testClazzesInDefaultPackageNameWithOneChar()
 	public static BinaryTypeSignature createTypeSignature(String signature) {
 		if (signature.charAt(signature.length() - 1) != ';')
 			return new BinaryTypeSignature(signature);
