@@ -22,6 +22,8 @@ import org.junit.Before
  */
 class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 	
+	static val VALIDATION_TIMEOUT = 10000L
+	
 	@Inject extension WorkbenchTestHelper helper
 	
 	@Before def void start() {
@@ -77,11 +79,11 @@ class HighlightingReconcilerTest extends AbstractXtendUITestCase {
 //		document.readOnly[
 //			// toggle reconciling, queues second highlighting job
 //		]
-		while(Display.getDefault.readAndDispatch) {
-			// yield to the queued highlighting update jobs
-			// - the first one should be skipped, as it refers to an outdated document state
-			// - the second one should be executed
-		}
+		awaitUIUpdate([
+			val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
+			val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
+			semanticSnippets.size > 0
+		],VALIDATION_TIMEOUT)
 		val highlighterCategory = document.positionCategories.findFirst[startsWith(HighlightingPresenter.canonicalName)]
 		val semanticSnippets = document.getPositions(highlighterCategory).map[document.get(offset, length)]
 		// this fails if the first highlighting job didn't color the document

@@ -23,6 +23,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -36,6 +37,8 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
+  private final static long VALIDATION_TIMEOUT = 10000L;
+  
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
@@ -138,18 +141,50 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final String model = _builder.toString();
       final XtextEditor editor = this.helper.openEditor("Foo.xtend", model);
       final IXtextDocument document = editor.getDocument();
-      while (Display.getDefault().readAndDispatch()) {
-      }
+      final Function0<Boolean> _function = new Function0<Boolean>() {
+        public Boolean apply() {
+          try {
+            boolean _xblockexpression = false;
+            {
+              String[] _positionCategories = document.getPositionCategories();
+              final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+                public Boolean apply(final String it) {
+                  String _canonicalName = HighlightingPresenter.class.getCanonicalName();
+                  return Boolean.valueOf(it.startsWith(_canonicalName));
+                }
+              };
+              final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function);
+              Position[] _positions = document.getPositions(highlighterCategory);
+              final Function1<Position, String> _function_1 = new Function1<Position, String>() {
+                public String apply(final Position it) {
+                  try {
+                    return document.get(it.offset, it.length);
+                  } catch (Throwable _e) {
+                    throw Exceptions.sneakyThrow(_e);
+                  }
+                }
+              };
+              final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_1);
+              int _size = semanticSnippets.size();
+              _xblockexpression = (_size > 0);
+            }
+            return Boolean.valueOf(_xblockexpression);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.helper.awaitUIUpdate(_function, HighlightingReconcilerTest.VALIDATION_TIMEOUT);
       String[] _positionCategories = document.getPositionCategories();
-      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
         public Boolean apply(final String it) {
           String _canonicalName = HighlightingPresenter.class.getCanonicalName();
           return Boolean.valueOf(it.startsWith(_canonicalName));
         }
       };
-      final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function);
+      final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_1);
       Position[] _positions = document.getPositions(highlighterCategory);
-      final Function1<Position, String> _function_1 = new Function1<Position, String>() {
+      final Function1<Position, String> _function_2 = new Function1<Position, String>() {
         public String apply(final Position it) {
           try {
             return document.get(it.offset, it.length);
@@ -158,7 +193,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
           }
         }
       };
-      final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_1);
+      final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_2);
       String _join = IterableExtensions.join(semanticSnippets, ",");
       String _plus = ("Highlighting regions broken " + _join);
       int _size = semanticSnippets.size();
