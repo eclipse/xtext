@@ -14,6 +14,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor;
 import org.eclipse.xtext.xbase.imports.ImportsCollector;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -35,6 +36,34 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   public void testUnknownType() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C implements |Serializable {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertTypeImport(_builder);
+  }
+  
+  @Test
+  public void testPackageSelected() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("|package foo");
+    _builder.newLine();
+    _builder.append("import java.io.Serializable");
+    _builder.newLine();
+    _builder.append("class C implements Serializable| {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertTypeImport(_builder, "java.io.Serializable");
+  }
+  
+  @Test
+  public void testImportSelected() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("|package foo");
+    _builder.newLine();
+    _builder.append("import java.io.Serializable|");
+    _builder.newLine();
+    _builder.append("class C {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -94,7 +123,10 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.append("/** ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("* @see java.io.Serializable");
+    _builder.append("* @see java.util.List - fqn doesn\'t need an import");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see Serializable");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("*/");
@@ -112,13 +144,23 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.Serializable");
     _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import javax.sound.sampled.Line");
+    _builder.newLine();
     _builder.append("class C  {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("/** ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("* |@see java.io.Serializable|");
+    _builder.append("* {@link Line}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see List");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see |Serializable|");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("*/");
@@ -129,6 +171,73 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.io.Serializable");
+    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
+    this.assertExtensionImport(_assertStaticImport);
+  }
+  
+  @Test
+  public void testJavadoc_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.io.Serializable");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import javax.sound.sampled.Line");
+    _builder.newLine();
+    _builder.append("class C  {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/** ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see |List");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* {@link Line}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see java.io.Serializable|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void doStuff(){}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.util.List", "javax.sound.sampled.Line");
+    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
+    this.assertExtensionImport(_assertStaticImport);
+  }
+  
+  @Test
+  public void testJavadoc_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.io.Serializable");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("class C  {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/** ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see List");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* @see java.io.Serializable");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|def void doStuff(){}|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder);
     ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport);
     this.assertExtensionImport(_assertStaticImport);
   }
@@ -514,7 +623,8 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
       XtendFile _file = this.file(contentAsString);
       final Resource resource = _file.eResource();
       final ImportsAcceptor.DefaultImportsAcceptor acceptor = new ImportsAcceptor.DefaultImportsAcceptor();
-      this.importsCollector.collectImports(((XtextResource) resource), start, (start + end), acceptor);
+      TextRegion _textRegion = new TextRegion(start, (end - start));
+      this.importsCollector.collectImports(((XtextResource) resource), _textRegion, acceptor);
       return acceptor;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
