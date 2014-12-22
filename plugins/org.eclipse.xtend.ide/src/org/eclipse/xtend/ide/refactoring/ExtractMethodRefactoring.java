@@ -331,7 +331,7 @@ public class ExtractMethodRefactoring extends Refactoring {
 						// call-in
 						if (returnExpression != null) {
 							status.add(RefactoringStatus.FATAL,
-									"Ambiguous return value: Multiple local variables are accesed in subsequent code.");
+									"Ambiguous return value: Multiple local variables are accessed in subsequent code.");
 							break;
 						}
 						returnExpression = featureCall;
