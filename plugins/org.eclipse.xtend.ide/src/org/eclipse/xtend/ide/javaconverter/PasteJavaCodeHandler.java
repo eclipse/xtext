@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.javaconverter;
 
-import java.util.Arrays;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -26,15 +25,21 @@ import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer;
 import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer.JavaParseResult;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult;
+import org.eclipse.xtend.core.xtend.XtendExecutable;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
 
-import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -71,14 +76,28 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			IProject iProject = ((IFileEditorInput) editorInput).getFile().getProject();
 			project = JavaCore.create(iProject);
 		}
+		final Point sel = sourceViewer.getSelectedRange();
+		EObject targetElement = activeXtextEditor.getDocument().priorityReadOnly(
+				new IUnitOfWork<EObject, XtextResource>() {
 
+					@Override
+					public EObject exec(XtextResource state) throws Exception {
+						IParseResult parseResult = state.getParseResult();
+						if (parseResult == null) {
+							return null;
+						}
+						ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), sel.x);
+						return leafNode.getSemanticElement();
+					}
+				});
+		boolean forceStatement = EcoreUtil2.getContainerOfType(targetElement, XtendExecutable.class) != null;
 		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
 		JavaConverter javaConverter = javaConverterProvider.get();
 		ConversionResult conversionResult;
-		if (parseResult.getType() >= ASTParser.K_CLASS_BODY_DECLARATIONS) {
-			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode, javaImports, project);
-		} else {
+		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
 			conversionResult = javaConverter.statementToXtend(javaCode);
+		} else {
+			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode, javaImports, project);
 		}
 		final String xtendCode = conversionResult.getXtendCode();
 		if (!Strings.isEmpty(xtendCode)) {
@@ -87,7 +106,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {},
 						xtextDocument);
 			}
-			final Point sel = sourceViewer.getSelectedRange();
+
 			try {
 				xtextDocument.replace(sel.x, sel.y, xtendCode);
 			} catch (BadLocationException e) {
