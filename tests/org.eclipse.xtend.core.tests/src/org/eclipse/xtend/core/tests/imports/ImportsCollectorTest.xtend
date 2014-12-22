@@ -14,6 +14,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor.DefaultImportsAcceptor
 import org.eclipse.xtext.xbase.imports.ImportsCollector
 import org.junit.Test
+import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -27,6 +28,26 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 	def void testUnknownType() {
 		'''
 			class C implements |Serializable {
+			}
+		'''.assertTypeImport()
+	}
+
+	@Test
+	def void testPackageSelected() {
+		'''
+			|package foo
+			import java.io.Serializable
+			class C implements Serializable| {
+			}
+		'''.assertTypeImport('java.io.Serializable')
+	}
+
+	@Test
+	def void testImportSelected() {
+		'''
+			|package foo
+			import java.io.Serializable|
+			class C {
 			}
 		'''.assertTypeImport()
 	}
@@ -66,7 +87,8 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 			import java.io.Serializable
 			|class C  {
 				/** 
-				* @see java.io.Serializable
+				* @see java.util.List - fqn doesn't need an import
+				* @see Serializable
 				*/
 				val l = null
 			}
@@ -77,13 +99,49 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 	def void testJavadoc_02() {
 		'''
 			import java.io.Serializable
+			import java.util.List
+			import javax.sound.sampled.Line
 			class C  {
 				/** 
-				* |@see java.io.Serializable|
+				* {@link Line}
+				* @see List
+				* @see |Serializable|
 				*/
 				def void doStuff(){}
 			}
 		'''.assertTypeImport('java.io.Serializable').assertStaticImport().assertExtensionImport()
+	}
+
+	@Test
+	def void testJavadoc_03() {
+		'''
+			import java.io.Serializable
+			import java.util.List
+			import javax.sound.sampled.Line
+			class C  {
+				/** 
+				* @see |List
+				* {@link Line}
+				* @see java.io.Serializable|
+				*/
+				def void doStuff(){}
+			}
+		'''.assertTypeImport('java.util.List', 'javax.sound.sampled.Line').assertStaticImport().assertExtensionImport()
+	}
+
+	@Test
+	def void testJavadoc_04() {
+		'''
+			import java.io.Serializable
+			import java.util.List
+			class C  {
+				/** 
+				* @see List
+				* @see java.io.Serializable
+				*/
+				|def void doStuff(){}|
+			}
+		'''.assertTypeImport().assertStaticImport().assertExtensionImport()
 	}
 
 	@Test
@@ -200,6 +258,7 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 			}
 		'''.assertTypeImport('java.util.Map.Entry')
 	}
+
 	@Test
 	def void testNestedTypeLiteral_03() {
 		'''
@@ -269,6 +328,7 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 			}
 		'''.assertTypeImport('java.util.ArrayList').assertStaticImport.assertExtensionImport
 	}
+
 	@Test
 	def void testImplicitReciever_01() {
 		'''
@@ -328,7 +388,7 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 		}
 		val resource = file(contentAsString).eResource
 		val acceptor = new DefaultImportsAcceptor
-		importsCollector.collectImports(resource as XtextResource, start, start + end, acceptor)
+		importsCollector.collectImports(resource as XtextResource, new TextRegion(start, end - start), acceptor)
 		return acceptor
 	}
 
