@@ -715,7 +715,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testJavadocCase() throws Exception {
-    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null);
+    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null, null);
     String xtendCode = _bodyDeclarationToXtend.getXtendCode();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Javadoc Parameter well formed: ");
@@ -2043,7 +2043,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   private String classBodyDeclToXtend(final String string) {
-    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend(string, null);
+    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend(string, null, null);
     String _xtendCode = _bodyDeclarationToXtend.getXtendCode();
     final String xtendCode = _xtendCode.trim();
     InputOutput.<String>println(xtendCode);
