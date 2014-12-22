@@ -48,6 +48,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
+import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.conversion.IJavaCodeConverter;
@@ -251,10 +253,9 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 				return document.priorityReadOnly(new IUnitOfWork<XbaseClipboardData, XtextResource>() {
 					@Override
 					public XbaseClipboardData exec(XtextResource state) throws Exception {
-						int offset = textSelection.getOffset();
-						int endOffset = textSelection.getOffset() + textSelection.getLength();
+						ITextRegion region = new TextRegion(textSelection.getOffset(), textSelection.getLength() - 1);
 						Triple<Set<String>, Set<String>, Set<String>> imports = importsUtil.collectImports(state,
-								offset, endOffset);
+								region);
 						XbaseClipboardData clipboardData = new XbaseClipboardData(sourceIdentifier, Iterables.toArray(
 								imports.getFirst(), String.class),
 								Iterables.toArray(imports.getSecond(), String.class), Iterables.toArray(
