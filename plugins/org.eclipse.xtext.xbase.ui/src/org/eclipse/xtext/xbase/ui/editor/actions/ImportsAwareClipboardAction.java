@@ -131,36 +131,39 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	}
 
 	private void doCutCopyWithImportsOperation() {
-		textOperationTarget.doOperation(operationCode);
-		final XbaseClipboardData cbData = createClipboardData();
-		if (cbData != null) {
-			ClipboardUtil.clipboardOperation(new Function<Clipboard, Boolean>() {
+		try {
+			final XbaseClipboardData cbData = createClipboardData();
+			if (cbData != null) {
+				ClipboardUtil.clipboardOperation(new Function<Clipboard, Boolean>() {
 
-				@Override
-				public Boolean apply(Clipboard clipboard) {
-					TextTransfer textTransfer = TextTransfer.getInstance();
-					Object txtTransferContent = clipboard.getContents(textTransfer);
-					if (txtTransferContent == null) {
-						// StyledText copied any data to ClipBoard
-						return Boolean.FALSE;
+					@Override
+					public Boolean apply(Clipboard clipboard) {
+						TextTransfer textTransfer = TextTransfer.getInstance();
+						Object txtTransferContent = clipboard.getContents(textTransfer);
+						if (txtTransferContent == null) {
+							// StyledText copied any data to ClipBoard
+							return Boolean.FALSE;
+						}
+						String textData = (String) txtTransferContent;
+						List<Object> datas = newArrayList();
+						List<Transfer> transfers = newArrayList();
+						datas.add(textData);
+						transfers.add(textTransfer);
+						RTFTransfer rtfTransfer = RTFTransfer.getInstance();
+						String rtfData = (String) clipboard.getContents(rtfTransfer);
+						if (rtfData != null) {
+							datas.add(rtfData);
+							transfers.add(rtfTransfer);
+						}
+						datas.add(cbData);
+						transfers.add(TRANSFER_INSTANCE);
+						clipboard.setContents(datas.toArray(), transfers.toArray(new Transfer[] {}));
+						return Boolean.TRUE;
 					}
-					String textData = (String) txtTransferContent;
-					List<Object> datas = newArrayList();
-					List<Transfer> transfers = newArrayList();
-					datas.add(textData);
-					transfers.add(textTransfer);
-					RTFTransfer rtfTransfer = RTFTransfer.getInstance();
-					String rtfData = (String) clipboard.getContents(rtfTransfer);
-					if (rtfData != null) {
-						datas.add(rtfData);
-						transfers.add(rtfTransfer);
-					}
-					datas.add(cbData);
-					transfers.add(TRANSFER_INSTANCE);
-					clipboard.setContents(datas.toArray(), transfers.toArray(new Transfer[] {}));
-					return Boolean.TRUE;
-				}
-			});
+				});
+			}
+		} finally {
+			textOperationTarget.doOperation(operationCode);
 		}
 	}
 
@@ -250,7 +253,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 			final ISelection selection = getTextEditor().getSelectionProvider().getSelection();
 			if (selection instanceof ITextSelection && !selection.isEmpty()) {
 				final ITextSelection textSelection = (ITextSelection) selection;
-				return document.priorityReadOnly(new IUnitOfWork<XbaseClipboardData, XtextResource>() {
+				return document.readOnly(new IUnitOfWork<XbaseClipboardData, XtextResource>() {
 					@Override
 					public XbaseClipboardData exec(XtextResource state) throws Exception {
 						ITextRegion region = new TextRegion(textSelection.getOffset(), textSelection.getLength() - 1);
