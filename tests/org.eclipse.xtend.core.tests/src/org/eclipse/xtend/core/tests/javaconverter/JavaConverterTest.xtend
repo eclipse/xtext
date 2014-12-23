@@ -28,6 +28,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
@@ -1243,8 +1244,41 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	}
 
+	@Test def void testAnnotationDeclaration() throws Exception {
+		val javaBody = '''
+		import java.lang.annotation.Documented;
+		import java.lang.annotation.ElementType;
+		import java.lang.annotation.Target;
+		 
+		@Documented
+		@Target(ElementType.METHOD)
+		public @interface MyAnno{
+			String author() default "me";
+			String date();
+			int revision() default 1;
+			String comments();
+		}'''
+		val clazz = toValidXtendAnnotation('''«javaBody»''')
+		assertNotNull(clazz)
+		var body = toXtendCode(javaBody)
+		assertEquals('''
+		import java.lang.annotation.Documented
+		import java.lang.annotation.ElementType
+		import java.lang.annotation.Target
+		@Documented @Target(ElementType.METHOD)public annotation MyAnno {
+		String author = "me"
+		String date
+		int revision = 1
+		String comments
+		}'''.toString, body)
+
+	}
+
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
+	}
+	def private XtendAnnotationType toValidXtendAnnotation(String javaCode) throws Exception {
+		return toValidTypeDeclaration("Anno", javaCode) as XtendAnnotationType
 	}
 
 	def private XtendInterface toValidXtendInterface(String javaCode) throws Exception {

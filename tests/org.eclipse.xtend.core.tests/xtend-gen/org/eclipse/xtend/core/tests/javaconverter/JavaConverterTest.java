@@ -7,6 +7,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
@@ -2316,9 +2317,72 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals(_string, _classBodyDeclToXtend);
   }
   
+  @Test
+  public void testAnnotationDeclaration() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.lang.annotation.Documented;");
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.ElementType;");
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.Target;");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.newLine();
+    _builder.append("@Documented");
+    _builder.newLine();
+    _builder.append("@Target(ElementType.METHOD)");
+    _builder.newLine();
+    _builder.append("public @interface MyAnno{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String author() default \"me\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String date();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int revision() default 1;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String comments();");
+    _builder.newLine();
+    _builder.append("}");
+    final String javaBody = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append(javaBody, "");
+    final XtendAnnotationType clazz = this.toValidXtendAnnotation(_builder_1.toString());
+    Assert.assertNotNull(clazz);
+    String body = this.toXtendCode(javaBody);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.lang.annotation.Documented");
+    _builder_2.newLine();
+    _builder_2.append("import java.lang.annotation.ElementType");
+    _builder_2.newLine();
+    _builder_2.append("import java.lang.annotation.Target");
+    _builder_2.newLine();
+    _builder_2.append("@Documented @Target(ElementType.METHOD)public annotation MyAnno {");
+    _builder_2.newLine();
+    _builder_2.append("String author = \"me\"");
+    _builder_2.newLine();
+    _builder_2.append("String date");
+    _builder_2.newLine();
+    _builder_2.append("int revision = 1");
+    _builder_2.newLine();
+    _builder_2.append("String comments");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    String _string = _builder_2.toString();
+    Assert.assertEquals(_string, body);
+  }
+  
   private XtendClass toValidXtendClass(final String javaCode) throws Exception {
     XtendTypeDeclaration _validTypeDeclaration = this.toValidTypeDeclaration("Clazz", javaCode);
     return ((XtendClass) _validTypeDeclaration);
+  }
+  
+  private XtendAnnotationType toValidXtendAnnotation(final String javaCode) throws Exception {
+    XtendTypeDeclaration _validTypeDeclaration = this.toValidTypeDeclaration("Anno", javaCode);
+    return ((XtendAnnotationType) _validTypeDeclaration);
   }
   
   private XtendInterface toValidXtendInterface(final String javaCode) throws Exception {
