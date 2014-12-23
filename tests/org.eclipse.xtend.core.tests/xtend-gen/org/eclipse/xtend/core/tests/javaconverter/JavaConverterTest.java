@@ -206,7 +206,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testMethodDeclarationCase() throws Exception {
     XtendClass xtendClazz = this.toValidXtendClass(
-      "public class JavaToConvert { public boolean visit(final Object node) { return true;}}");
+      "public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}");
     EList<XtendMember> _members = xtendClazz.getMembers();
     int _size = _members.size();
     Assert.assertEquals("Simple methods count", 1, _size);
@@ -352,7 +352,53 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("public void visit() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("for (int a = 1, int b = 2; true; a++) {");
+    _builder.append("for (int a = 1, b = 2; true; a++) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.toValidXtendClass(_builder.toString());
+  }
+  
+  @Test
+  public void testBasicForStatementCase_03() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void visit() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (final int a = 1, b = 2; true; ) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.toValidXtendClass(_builder.toString());
+  }
+  
+  @Test
+  public void testExtendedForStatementCase_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List;");
+    _builder.newLine();
+    _builder.append("public class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void visit(List<?> list) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (final Object o:list) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -1020,7 +1066,64 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testConstructorCase() throws Exception {
-    XtendClass clazz = this.toValidXtendClass("public class Clazz { public Clazz(){}}");
+    XtendClass clazz = this.toValidXtendClass("public class Clazz { public Clazz(){this(1);}public Clazz(int i){}}");
+    EList<XtendMember> _members = clazz.getMembers();
+    XtendMember _get = _members.get(0);
+    JvmVisibility _visibility = ((XtendConstructor) _get).getVisibility();
+    Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+    EList<XtendMember> _members_1 = clazz.getMembers();
+    XtendMember _get_1 = _members_1.get(1);
+    JvmVisibility _visibility_1 = ((XtendConstructor) _get_1).getVisibility();
+    Assert.assertEquals(JvmVisibility.PUBLIC, _visibility_1);
+  }
+  
+  @Test
+  public void testSuperCalls() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.awt.TextField;");
+    _builder.newLine();
+    _builder.append("public class Clazz extends TextField {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public Clazz() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public Clazz(String txt) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super(txt);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public String toString() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Object o = super.textListener;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return super.toString();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendClass clazz = this.toValidXtendClass(_builder.toString());
     EList<XtendMember> _members = clazz.getMembers();
     XtendMember _get = _members.get(0);
     JvmVisibility _visibility = ((XtendConstructor) _get).getVisibility();
@@ -2023,6 +2126,12 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("throw e;");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("} finally {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("System.out.println();");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
@@ -2049,9 +2158,13 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_2.append("throw e");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("}");
+    _builder_2.append("} finally {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("System.out.println() ");
     _builder_2.newLine();
     _builder_2.append("\t");
+    _builder_2.append("}");
     _builder_2.newLine();
     _builder_2.append("}");
     String _string = _builder_2.toString();
@@ -2069,6 +2182,20 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("throw new Exception();");
     _builder.newLine();
+    _builder.append("} catch (final Error e) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("throw new Exception();");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("} finally {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("throw new Exception();");
+    _builder.newLine();
     _builder.append("}");
     final String javaBody = _builder.toString();
     String statement = this.statementToXtend(javaBody);
@@ -2082,9 +2209,111 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.append("\t");
     _builder_1.append("throw new Exception()");
     _builder_1.newLine();
+    _builder_1.append("} catch (Error e) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("throw new Exception()");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("} finally {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("throw new Exception()");
+    _builder_1.newLine();
     _builder_1.append("}");
     String _string = _builder_1.toString();
     Assert.assertEquals(_string, statement);
+  }
+  
+  @Test
+  public void testDoWhileStatement() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("int i = 0;");
+    _builder.newLine();
+    _builder.append("do{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("System.out.println(i); ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("i++; ");
+    _builder.newLine();
+    _builder.append("} while(i < 0);");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("while(i < 10) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("System.out.print(i);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("i++;");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String javaBody = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("var int i=0 ");
+    _builder_1.newLine();
+    _builder_1.append("do {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("System.out.println(i) i++ ");
+    _builder_1.newLine();
+    _builder_1.append("} while (i < 0)");
+    _builder_1.newLine();
+    _builder_1.append("while (i < 10) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("System.out.print(i) i++ ");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _statementToXtend = this.statementToXtend(javaBody);
+    Assert.assertEquals(_string, _statementToXtend);
+  }
+  
+  @Test
+  public void testSynchronizedStatement() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public void add(int value){");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("synchronized(this){");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("this.count += value;   ");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("}");
+    _builder.newLine();
+    final String javaBody = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("def void add(int value){");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("synchronized (this) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("this.count+=value ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _classBodyDeclToXtend = this.classBodyDeclToXtend(javaBody);
+    Assert.assertEquals(_string, _classBodyDeclToXtend);
   }
   
   private XtendClass toValidXtendClass(final String javaCode) throws Exception {

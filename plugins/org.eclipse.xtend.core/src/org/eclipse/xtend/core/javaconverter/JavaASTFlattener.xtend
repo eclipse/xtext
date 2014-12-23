@@ -150,17 +150,6 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	/**
-	 * Resets this flattener so that it can be used again.
-	 */
-	def void reset() {
-		this.fBuffer.setLength(0)
-		this.problems = newArrayList()
-		this.assignedComments = newHashSet()
-		this.javaSources = null
-		this.indentation = 0
-	}
-
-	/**
 	 * Returns a list of problems occured during conversion
 	 */
 	def getProblems() {
@@ -683,7 +672,8 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(SingleVariableDeclaration it) {
-		if (parent instanceof MethodDeclaration || parent instanceof CatchClause) {
+		if (parent instanceof MethodDeclaration || parent instanceof CatchClause ||
+			parent instanceof EnhancedForStatement) {
 			appendModifieres(modifiers().filter[Object e|!(e instanceof Modifier && (e as Modifier).final)])
 		} else {
 			appendModifieres(modifiers())
@@ -769,8 +759,12 @@ class JavaASTFlattener extends ASTVisitor {
 		if (parent instanceof IfStatement) {
 			shouldWrap = parent.elseStatement == null
 		} else if (parent instanceof TryStatement) {
-			shouldWrap = parent.catchClauses.empty && parent.^finally==null
-		} 
+			shouldWrap = parent.catchClauses.empty && parent.^finally == null
+		} else if (parent instanceof DoStatement) {
+			shouldWrap = false
+		} else if (parent instanceof CatchClause) {
+			shouldWrap = false
+		}
 		if (shouldWrap)
 			appendLineWrapToBuffer
 		return false
@@ -1244,14 +1238,15 @@ class JavaASTFlattener extends ASTVisitor {
 		// }
 		// }
 		node.getBody().accept(this)
-		appendSpaceToBuffer
 		for (var Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
 			var CatchClause cc = _it.next()
 			cc.accept(this)
 		}
 		if (node.getFinally() != null) {
-			appendToBuffer("finally ")
+			appendToBuffer(" finally ")
 			node.getFinally().accept(this)
+		} else {
+			appendLineWrapToBuffer
 		}
 		return false
 	}
@@ -1482,7 +1477,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(CatchClause node) {
-		appendToBuffer("catch (")
+		appendToBuffer(" catch (")
 		node.getException().accept(this)
 		appendToBuffer(") ")
 		node.getBody().accept(this)
@@ -1518,6 +1513,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(" while (")
 		node.getExpression().accept(this)
 		appendToBuffer(")")
+		appendLineWrapToBuffer
 		return false
 	}
 

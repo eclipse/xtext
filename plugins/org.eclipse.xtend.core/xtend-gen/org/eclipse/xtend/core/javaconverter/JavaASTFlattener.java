@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -172,19 +171,6 @@ public class JavaASTFlattener extends ASTVisitor {
    */
   public String getResult() {
     return this.fBuffer.toString();
-  }
-  
-  /**
-   * Resets this flattener so that it can be used again.
-   */
-  public void reset() {
-    this.fBuffer.setLength(0);
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-    this.problems = _newArrayList;
-    HashSet<Comment> _newHashSet = CollectionLiterals.<Comment>newHashSet();
-    this.assignedComments = _newHashSet;
-    this.javaSources = null;
-    this.indentation = 0;
   }
   
   /**
@@ -1083,12 +1069,11 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public boolean visit(final SingleVariableDeclaration it) {
     boolean _or = false;
-    ASTNode _parent = it.getParent();
-    if ((_parent instanceof MethodDeclaration)) {
+    if (((it.getParent() instanceof MethodDeclaration) || (it.getParent() instanceof CatchClause))) {
       _or = true;
     } else {
-      ASTNode _parent_1 = it.getParent();
-      _or = (_parent_1 instanceof CatchClause);
+      ASTNode _parent = it.getParent();
+      _or = (_parent instanceof EnhancedForStatement);
     }
     if (_or) {
       List _modifiers = it.modifiers();
@@ -1273,6 +1258,14 @@ public class JavaASTFlattener extends ASTVisitor {
           _and = _equals_1;
         }
         shouldWrap = _and;
+      } else {
+        if ((parent instanceof DoStatement)) {
+          shouldWrap = false;
+        } else {
+          if ((parent instanceof CatchClause)) {
+            shouldWrap = false;
+          }
+        }
       }
     }
     if (shouldWrap) {
@@ -2027,7 +2020,6 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer("try ");
     Block _body = node.getBody();
     _body.accept(this);
-    this.appendSpaceToBuffer();
     for (Iterator<CatchClause> _it = node.catchClauses().iterator(); _it.hasNext();) {
       {
         CatchClause cc = _it.next();
@@ -2037,9 +2029,11 @@ public class JavaASTFlattener extends ASTVisitor {
     Block _finally = node.getFinally();
     boolean _notEquals = (!Objects.equal(_finally, null));
     if (_notEquals) {
-      this.appendToBuffer("finally ");
+      this.appendToBuffer(" finally ");
       Block _finally_1 = node.getFinally();
       _finally_1.accept(this);
+    } else {
+      this.appendLineWrapToBuffer();
     }
     return false;
   }
@@ -2394,7 +2388,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final CatchClause node) {
-    this.appendToBuffer("catch (");
+    this.appendToBuffer(" catch (");
     SingleVariableDeclaration _exception = node.getException();
     _exception.accept(this);
     this.appendToBuffer(") ");
@@ -2445,6 +2439,7 @@ public class JavaASTFlattener extends ASTVisitor {
     Expression _expression = node.getExpression();
     _expression.accept(this);
     this.appendToBuffer(")");
+    this.appendLineWrapToBuffer();
     return false;
   }
   
