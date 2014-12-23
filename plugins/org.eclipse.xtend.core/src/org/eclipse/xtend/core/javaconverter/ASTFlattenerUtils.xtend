@@ -14,6 +14,7 @@ import org.eclipse.jdt.core.dom.Annotation
 import org.eclipse.jdt.core.dom.Assignment
 import org.eclipse.jdt.core.dom.Block
 import org.eclipse.jdt.core.dom.ClassInstanceCreation
+import org.eclipse.jdt.core.dom.Expression
 import org.eclipse.jdt.core.dom.FieldAccess
 import org.eclipse.jdt.core.dom.FieldDeclaration
 import org.eclipse.jdt.core.dom.IBinding
@@ -26,6 +27,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration
 import org.eclipse.jdt.core.dom.MethodInvocation
 import org.eclipse.jdt.core.dom.Modifier
 import org.eclipse.jdt.core.dom.Name
+import org.eclipse.jdt.core.dom.NumberLiteral
 import org.eclipse.jdt.core.dom.QualifiedName
 import org.eclipse.jdt.core.dom.ReturnStatement
 import org.eclipse.jdt.core.dom.SimpleName
@@ -110,7 +112,8 @@ class ASTFlattenerUtils {
 	}
 
 	def boolean isNotSupportedInnerType(TypeDeclarationStatement it) {
-		( parent instanceof Block )
+		( parent instanceof Block
+		)
 	}
 
 	def boolean isFinal(Iterable<Modifier> modifiers) {
@@ -152,95 +155,99 @@ class ASTFlattenerUtils {
 	}
 
 	def shouldConvertName(SimpleName it) {
-		return (parent instanceof FieldAccess ||
+		return ( parent instanceof FieldAccess ||
 			( parent instanceof VariableDeclarationFragment && parent.parent instanceof FieldDeclaration))
-	}
+		}
 
-	def isLambdaCase(ClassInstanceCreation creation) {
-		val anonymousClazz = creation.anonymousClassDeclaration
-		if (anonymousClazz != null && anonymousClazz.bodyDeclarations.size == 1) {
-			val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
-			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
-				val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
-				if (methodBinding != null) {
-					val overrides = findOverride(methodBinding, methodBinding.declaringClass, true)
-					return overrides != null && Modifier.isAbstract(overrides.modifiers)
+		def isLambdaCase(ClassInstanceCreation creation) {
+			val anonymousClazz = creation.anonymousClassDeclaration
+			if (anonymousClazz != null && anonymousClazz.bodyDeclarations.size == 1) {
+				val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
+				if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
+					val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
+					if (methodBinding != null) {
+						val overrides = findOverride(methodBinding, methodBinding.declaringClass, true)
+						return overrides != null && Modifier.isAbstract(overrides.modifiers)
+					}
 				}
 			}
+			return false
 		}
-		return false
-	}
 
-	def boolean needsReturnValue(ASTNode node) {
-		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
-	}
-
-	def boolean canConvertToRichText(InfixExpression node) {
-		val parentFieldDecl = node.findParentOfType(FieldDeclaration)
-		if (parentFieldDecl != null) {
-			val typeDeclr = parentFieldDecl.findParentOfType(TypeDeclaration)
-
-			//Do not convert static final fields
-			if (typeDeclr.isInterface || parentFieldDecl.modifiers().isFinal && parentFieldDecl.modifiers().isStatic)
-				return false
+		def boolean needsReturnValue(ASTNode node) {
+			(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 		}
-		val nodes = node.collectCompatibleNodes()
-		return !nodes.empty && nodes.forall[canTranslate]
-	}
 
-	def <T extends ASTNode> T findParentOfType(ASTNode someNode, Class<T> parentType) {
-		if (someNode.parent == null) {
-			return null
-		} else if (parentType.isInstance(someNode.parent)) {
-			return parentType.cast(someNode.parent)
-		} else {
-			return someNode.parent.findParentOfType(parentType)
+		def boolean isConstantArrayIndex(Expression node) {
+			node instanceof NumberLiteral
 		}
-	}
 
-	def private Iterable<StringLiteral> collectCompatibleNodes(InfixExpression node) {
-		val strings = newArrayList()
-		if (node.getOperator() != InfixExpression.Operator.PLUS) {
+		def boolean canConvertToRichText(InfixExpression node) {
+			val parentFieldDecl = node.findParentOfType(FieldDeclaration)
+			if (parentFieldDecl != null) {
+				val typeDeclr = parentFieldDecl.findParentOfType(TypeDeclaration)
+
+				// Do not convert static final fields
+				if (typeDeclr.isInterface ||
+					parentFieldDecl.modifiers().isFinal && parentFieldDecl.modifiers().isStatic)
+					return false
+			}
+			val nodes = node.collectCompatibleNodes()
+			return !nodes.empty && nodes.forall[canTranslate]
+		}
+
+		def <T extends ASTNode> T findParentOfType(ASTNode someNode, Class<T> parentType) {
+			if (someNode.parent == null) {
+				return null
+			} else if (parentType.isInstance(someNode.parent)) {
+				return parentType.cast(someNode.parent)
+			} else {
+				return someNode.parent.findParentOfType(parentType)
+			}
+		}
+
+		def private Iterable<StringLiteral> collectCompatibleNodes(InfixExpression node) {
+			val strings = newArrayList()
+			if (node.getOperator() != InfixExpression.Operator.PLUS) {
+				return strings
+			}
+			val left = node.leftOperand
+			if (left instanceof StringLiteral) {
+				strings.add(left)
+			} else if (left instanceof InfixExpression) {
+				strings.addAll(collectCompatibleNodes(left))
+			}
+
+			val right = node.rightOperand
+			if (right instanceof StringLiteral) {
+				strings.add(right)
+			} else if (right instanceof InfixExpression) {
+				strings.addAll(collectCompatibleNodes(right))
+			}
+			strings.addAll(node.extendedOperands().filter(StringLiteral))
 			return strings
 		}
-		val left = node.leftOperand
-		if (left instanceof StringLiteral) {
-			strings.add(left)
-		} else if (left instanceof InfixExpression) {
-			strings.addAll(collectCompatibleNodes(left))
+
+		def private boolean canTranslate(StringLiteral literal) {
+			val value = literal.escapedValue
+			return !(value.contains("«") || value.contains("»") || value.contains("'''"))
 		}
 
-		val right = node.rightOperand
-		if (right instanceof StringLiteral) {
-			strings.add(right)
-		} else if (right instanceof InfixExpression) {
-			strings.addAll(collectCompatibleNodes(right))
-		}
-		strings.addAll(node.extendedOperands().filter(StringLiteral))
-		return strings
-	}
-
-	def private boolean canTranslate(StringLiteral literal) {
-		val value = literal.escapedValue
-		return !(value.contains("«") || value.contains("»") || value.contains("'''"))
-	}
-
-	def Type findDeclaredType(SimpleName simpleName) {
-		var scope = simpleName.findParentOfType(Block)
-		while (scope != null) {
-			val type = scope.findDeclaredType(simpleName)
-			if (type != null) {
-				return type
+		def Type findDeclaredType(SimpleName simpleName) {
+			var scope = simpleName.findParentOfType(Block)
+			while (scope != null) {
+				val type = scope.findDeclaredType(simpleName)
+				if (type != null) {
+					return type
+				}
+				scope = scope.findParentOfType(Block)
 			}
-			scope = scope.findParentOfType(Block)
+			return null
 		}
-		return null
-	}
 
-	def private Type findDeclaredType(Block scope, SimpleName simpleName) {
-		val matchesFound = newArrayList
-		scope.accept(
-			new ASTVisitor() {
+		def private Type findDeclaredType(Block scope, SimpleName simpleName) {
+			val matchesFound = newArrayList
+			scope.accept(new ASTVisitor() {
 				override boolean visit(VariableDeclarationFragment node) {
 					if (node.name.identifier.equals(simpleName.identifier)) {
 						val parentNode = node.parent
@@ -271,14 +278,13 @@ class ASTFlattenerUtils {
 				}
 
 			})
-		return matchesFound.head
-	}
+			return matchesFound.head
+		}
 
-	def private Iterable<Assignment> findAssigmentsInBlock(Block scope, (Assignment)=>Boolean constraint) {
-		val assigments = newHashSet()
-		if (scope != null) {
-			scope.accept(
-				new ASTVisitor() {
+		def private Iterable<Assignment> findAssigmentsInBlock(Block scope, (Assignment)=>Boolean constraint) {
+			val assigments = newHashSet()
+			if (scope != null) {
+				scope.accept(new ASTVisitor() {
 					override visit(Assignment node) {
 						if (constraint.apply(node)) {
 							assigments.add(node)
@@ -286,12 +292,12 @@ class ASTFlattenerUtils {
 						return true
 					}
 				})
+			}
+			return assigments
 		}
-		return assigments
-	}
 
-	def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
-		return !scope.findAssigmentsInBlock(
+		def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
+			return !scope.findAssigmentsInBlock(
 			[
 				if (leftHandSide instanceof Name) {
 					val simpleName = (leftHandSide as Name)
@@ -302,24 +308,24 @@ class ASTFlattenerUtils {
 				}
 				return false
 			]).empty
-	}
+		}
 
-	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
-		return !scope.findAssigmentsInBlock(
+		def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
+			return !scope.findAssigmentsInBlock(
 			[
 				if (leftHandSide  instanceof SimpleName) {
 					return nameToLookFor.identifier.equals((leftHandSide as SimpleName).identifier)
 				}
 				return false
 			]).empty
-	}
+		}
 
-	def dispatch String toSimpleName(SimpleName name) {
-		name.identifier
-	}
+		def dispatch String toSimpleName(SimpleName name) {
+			name.identifier
+		}
 
-	def dispatch String toSimpleName(QualifiedName name) {
-		name.name.identifier
-	}
+		def dispatch String toSimpleName(QualifiedName name) {
+			name.name.identifier
+		}
 
-}
+	}

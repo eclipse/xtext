@@ -302,7 +302,7 @@ public class JavaASTFlattener extends ASTVisitor {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("_wrIndx_");
       _builder_1.append(arrayName, "");
-      final String idxName = _builder_1.toString();
+      String idxName = _builder_1.toString();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("val ");
       _builder_2.append(valName, "");
@@ -310,33 +310,57 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer(_builder_2.toString());
       Expression _array = ((ArrayAccess)leftSide).getArray();
       _array.accept(this);
-      StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append(" ");
-      _builder_3.append("val ");
-      _builder_3.append(idxName, " ");
-      _builder_3.append("=");
-      this.appendToBuffer(_builder_3.toString());
       Expression _index = ((ArrayAccess)leftSide).getIndex();
-      _index.accept(this);
-      StringConcatenation _builder_4 = new StringConcatenation();
-      _builder_4.append(" ");
-      _builder_4.append(valName, " ");
-      _builder_4.append(".set(");
-      _builder_4.append(idxName, " ");
-      _builder_4.append(",");
-      this.appendToBuffer(_builder_4.toString());
+      boolean _isConstantArrayIndex = this._aSTFlattenerUtils.isConstantArrayIndex(_index);
+      boolean _not = (!_isConstantArrayIndex);
+      if (_not) {
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append(" ");
+        _builder_3.append("val ");
+        _builder_3.append(idxName, " ");
+        _builder_3.append("=");
+        this.appendToBuffer(_builder_3.toString());
+        Expression _index_1 = ((ArrayAccess)leftSide).getIndex();
+        _index_1.accept(this);
+        StringConcatenation _builder_4 = new StringConcatenation();
+        _builder_4.append(" ");
+        _builder_4.append(valName, " ");
+        _builder_4.append(".set(");
+        _builder_4.append(idxName, " ");
+        _builder_4.append(",");
+        this.appendToBuffer(_builder_4.toString());
+      } else {
+        StringConcatenation _builder_5 = new StringConcatenation();
+        _builder_5.append(" ");
+        _builder_5.append(valName, " ");
+        _builder_5.append(".set(");
+        this.appendToBuffer(_builder_5.toString());
+        Expression _index_2 = ((ArrayAccess)leftSide).getIndex();
+        _index_2.accept(this);
+        this.appendToBuffer(",");
+      }
       Expression _rightHandSide = node.getRightHandSide();
       _rightHandSide.accept(this);
       this.appendToBuffer(")");
       boolean _needsReturnValue = this._aSTFlattenerUtils.needsReturnValue(node);
       if (_needsReturnValue) {
-        StringConcatenation _builder_5 = new StringConcatenation();
-        _builder_5.append(" ");
-        _builder_5.append(valName, " ");
-        _builder_5.append(".get(");
-        _builder_5.append(idxName, " ");
-        _builder_5.append(")");
-        this.appendToBuffer(_builder_5.toString());
+        StringConcatenation _builder_6 = new StringConcatenation();
+        _builder_6.append(" ");
+        _builder_6.append(valName, " ");
+        _builder_6.append(".get(");
+        this.appendToBuffer(_builder_6.toString());
+        Expression _index_3 = ((ArrayAccess)leftSide).getIndex();
+        boolean _isConstantArrayIndex_1 = this._aSTFlattenerUtils.isConstantArrayIndex(_index_3);
+        boolean _not_1 = (!_isConstantArrayIndex_1);
+        if (_not_1) {
+          StringConcatenation _builder_7 = new StringConcatenation();
+          _builder_7.append(idxName, "");
+          this.appendToBuffer(_builder_7.toString());
+        } else {
+          Expression _index_4 = ((ArrayAccess)leftSide).getIndex();
+          _index_4.accept(this);
+        }
+        this.appendToBuffer(")");
       }
       this.appendToBuffer("}");
     } else {
@@ -2187,22 +2211,32 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ArrayAccess node) {
-    final String arrayname = this.computeArrayName(node);
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("{val _rdIndx_");
-    _builder.append(arrayname, "");
-    _builder.append("=");
-    this.appendToBuffer(_builder.toString());
     Expression _index = node.getIndex();
-    _index.accept(this);
-    this.appendSpaceToBuffer();
-    Expression _array = node.getArray();
-    _array.accept(this);
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(".get(_rdIndx_");
-    _builder_1.append(arrayname, "");
-    _builder_1.append(")}");
-    this.appendToBuffer(_builder_1.toString());
+    if ((_index instanceof NumberLiteral)) {
+      Expression _array = node.getArray();
+      _array.accept(this);
+      this.appendToBuffer(".get(");
+      Expression _index_1 = node.getIndex();
+      _index_1.accept(this);
+      this.appendToBuffer(")");
+    } else {
+      final String arrayname = this.computeArrayName(node);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{val _rdIndx_");
+      _builder.append(arrayname, "");
+      _builder.append("=");
+      this.appendToBuffer(_builder.toString());
+      Expression _index_2 = node.getIndex();
+      _index_2.accept(this);
+      this.appendSpaceToBuffer();
+      Expression _array_1 = node.getArray();
+      _array_1.accept(this);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(".get(_rdIndx_");
+      _builder_1.append(arrayname, "");
+      _builder_1.append(")}");
+      this.appendToBuffer(_builder_1.toString());
+    }
     return false;
   }
   

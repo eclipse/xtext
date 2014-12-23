@@ -34,6 +34,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.Name;
+import org.eclipse.jdt.core.dom.NumberLiteral;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
@@ -345,6 +346,10 @@ public class ASTFlattenerUtils {
     return _and;
   }
   
+  public boolean isConstantArrayIndex(final Expression node) {
+    return (node instanceof NumberLiteral);
+  }
+  
   public boolean canConvertToRichText(final InfixExpression node) {
     final FieldDeclaration parentFieldDecl = this.<FieldDeclaration>findParentOfType(node, FieldDeclaration.class);
     boolean _notEquals = (!Objects.equal(parentFieldDecl, null));
@@ -476,55 +481,54 @@ public class ASTFlattenerUtils {
   
   private Type findDeclaredType(final Block scope, final SimpleName simpleName) {
     final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
-    scope.accept(
-      new ASTVisitor() {
-        public boolean visit(final VariableDeclarationFragment node) {
-          SimpleName _name = node.getName();
-          String _identifier = _name.getIdentifier();
-          String _identifier_1 = simpleName.getIdentifier();
-          boolean _equals = _identifier.equals(_identifier_1);
-          if (_equals) {
-            final ASTNode parentNode = node.getParent();
-            boolean _matched = false;
-            if (!_matched) {
-              if (parentNode instanceof VariableDeclarationStatement) {
-                _matched=true;
-                Type _type = ((VariableDeclarationStatement)parentNode).getType();
-                matchesFound.add(_type);
-              }
-            }
-            if (!_matched) {
-              if (parentNode instanceof FieldDeclaration) {
-                _matched=true;
-                Type _type = ((FieldDeclaration)parentNode).getType();
-                matchesFound.add(_type);
-              }
-            }
-            if (!_matched) {
-              if (parentNode instanceof VariableDeclarationExpression) {
-                _matched=true;
-                Type _type = ((VariableDeclarationExpression)parentNode).getType();
-                matchesFound.add(_type);
-              }
+    scope.accept(new ASTVisitor() {
+      public boolean visit(final VariableDeclarationFragment node) {
+        SimpleName _name = node.getName();
+        String _identifier = _name.getIdentifier();
+        String _identifier_1 = simpleName.getIdentifier();
+        boolean _equals = _identifier.equals(_identifier_1);
+        if (_equals) {
+          final ASTNode parentNode = node.getParent();
+          boolean _matched = false;
+          if (!_matched) {
+            if (parentNode instanceof VariableDeclarationStatement) {
+              _matched=true;
+              Type _type = ((VariableDeclarationStatement)parentNode).getType();
+              matchesFound.add(_type);
             }
           }
-          return false;
-        }
-        
-        public boolean preVisit2(final ASTNode node) {
-          return matchesFound.isEmpty();
-        }
-        
-        public boolean visit(final SingleVariableDeclaration node) {
-          SimpleName _name = node.getName();
-          boolean _equals = _name.equals(simpleName);
-          if (_equals) {
-            Type _type = node.getType();
-            matchesFound.add(_type);
+          if (!_matched) {
+            if (parentNode instanceof FieldDeclaration) {
+              _matched=true;
+              Type _type = ((FieldDeclaration)parentNode).getType();
+              matchesFound.add(_type);
+            }
           }
-          return false;
+          if (!_matched) {
+            if (parentNode instanceof VariableDeclarationExpression) {
+              _matched=true;
+              Type _type = ((VariableDeclarationExpression)parentNode).getType();
+              matchesFound.add(_type);
+            }
+          }
         }
-      });
+        return false;
+      }
+      
+      public boolean preVisit2(final ASTNode node) {
+        return matchesFound.isEmpty();
+      }
+      
+      public boolean visit(final SingleVariableDeclaration node) {
+        SimpleName _name = node.getName();
+        boolean _equals = _name.equals(simpleName);
+        if (_equals) {
+          Type _type = node.getType();
+          matchesFound.add(_type);
+        }
+        return false;
+      }
+    });
     return IterableExtensions.<Type>head(matchesFound);
   }
   
@@ -532,16 +536,15 @@ public class ASTFlattenerUtils {
     final HashSet<Assignment> assigments = CollectionLiterals.<Assignment>newHashSet();
     boolean _notEquals = (!Objects.equal(scope, null));
     if (_notEquals) {
-      scope.accept(
-        new ASTVisitor() {
-          public boolean visit(final Assignment node) {
-            Boolean _apply = constraint.apply(node);
-            if ((_apply).booleanValue()) {
-              assigments.add(node);
-            }
-            return true;
+      scope.accept(new ASTVisitor() {
+        public boolean visit(final Assignment node) {
+          Boolean _apply = constraint.apply(node);
+          if ((_apply).booleanValue()) {
+            assigments.add(node);
           }
-        });
+          return true;
+        }
+      });
     }
     return assigments;
   }

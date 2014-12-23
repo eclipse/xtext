@@ -69,39 +69,29 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 	private void doPasteJavaCode(final XtextEditor activeXtextEditor, final String javaCode,
 			final JavaImportData javaImports) throws ExecutionException {
 		ISourceViewer sourceViewer = activeXtextEditor.getInternalSourceViewer();
-
+		final Point sel = sourceViewer.getSelectedRange();
+		final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
 		IJavaProject project = null;
 		IEditorInput editorInput = activeXtextEditor.getEditorInput();
 		if (editorInput instanceof IFileEditorInput) {
 			IProject iProject = ((IFileEditorInput) editorInput).getFile().getProject();
 			project = JavaCore.create(iProject);
 		}
-		final Point sel = sourceViewer.getSelectedRange();
-		EObject targetElement = activeXtextEditor.getDocument().priorityReadOnly(
-				new IUnitOfWork<EObject, XtextResource>() {
+		EObject targetElement = xtextDocument.priorityReadOnly(new IUnitOfWork<EObject, XtextResource>() {
 
-					@Override
-					public EObject exec(XtextResource state) throws Exception {
-						IParseResult parseResult = state.getParseResult();
-						if (parseResult == null) {
-							return null;
-						}
-						ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), sel.x);
-						return leafNode.getSemanticElement();
-					}
-				});
-		boolean forceStatement = EcoreUtil2.getContainerOfType(targetElement, XtendExecutable.class) != null;
-		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
-		JavaConverter javaConverter = javaConverterProvider.get();
-		ConversionResult conversionResult;
-		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
-			conversionResult = javaConverter.statementToXtend(javaCode);
-		} else {
-			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode, javaImports, project);
-		}
-		final String xtendCode = conversionResult.getXtendCode();
+			@Override
+			public EObject exec(XtextResource state) throws Exception {
+				IParseResult parseResult = state.getParseResult();
+				if (parseResult == null) {
+					return null;
+				}
+				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), sel.x);
+				return leafNode.getSemanticElement();
+			}
+		});
+		final String xtendCode = convertToXtend(javaCode, javaImports, sel, targetElement, project);
+
 		if (!Strings.isEmpty(xtendCode)) {
-			final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
 			if (javaImports != null) {
 				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {},
 						xtextDocument);
@@ -123,5 +113,21 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			int restoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
 			sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
 		}
+	}
+
+	private String convertToXtend(final String javaCode, final JavaImportData javaImports, final Point sel,
+			final EObject targetElement, IJavaProject project) {
+		boolean forceStatement = targetElement != null
+				&& EcoreUtil2.getContainerOfType(targetElement, XtendExecutable.class) != null;
+		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
+		JavaConverter javaConverter = javaConverterProvider.get();
+		ConversionResult conversionResult;
+		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
+			conversionResult = javaConverter.statementToXtend(javaCode);
+		} else {
+			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode, javaImports, project);
+		}
+		final String xtendCode = conversionResult.getXtendCode();
+		return xtendCode;
 	}
 }

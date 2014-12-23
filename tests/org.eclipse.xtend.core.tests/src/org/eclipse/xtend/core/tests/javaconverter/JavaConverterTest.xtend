@@ -399,8 +399,8 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testJavadocCase() throws Exception {
 
-		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null, null).
-			xtendCode
+		var String xtendCode = j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null,
+			null).xtendCode
 		assertTrue('''Javadoc Parameter well formed: «xtendCode»''', xtendCode.contains("@param p Param p"))
 	}
 
@@ -608,6 +608,24 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			}
 		}''')
 		assertNotNull(clazz)
+	}
+
+	@Test def void testArrayAccessCaseConstantIndex_01() throws Exception {
+		var String xtendCode = statementToXtend('''
+			String[] ar = new String[]{};
+			String n = ar[1];
+		''')
+		assertEquals('''
+		var String[] ar=#[] 
+		var String n=ar.get(1)'''.toString, xtendCode)
+	}
+	
+	@Test def void testArrayAccessCaseConstantIndex_02() throws Exception {
+		var String xtendCode = statementToXtend('''
+			String[] ar = new String[]{};
+			ar[1] = null;
+		''')
+		assertEquals('''var String[] ar=#[] { val _wrVal_ar=ar _wrVal_ar.set(1,null)}'''.toString, xtendCode)
 	}
 
 	@Test def void testArrayCreationCase() throws Exception {
@@ -1074,7 +1092,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				
 			}
 			 catch (Exception e) {
-				
+			 
 			}
 			
 		}'''.toString, body)
@@ -1091,12 +1109,12 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 		var statement = statementToXtend(javaBody)
 		assertEquals('''
-			try {
-				
-			}
-			 catch (Exception e) {
-				
-			}'''.toString, statement)
+		try {
+			
+		}
+		 catch (Exception e) {
+		 
+		}'''.toString, statement)
 
 	}
 
