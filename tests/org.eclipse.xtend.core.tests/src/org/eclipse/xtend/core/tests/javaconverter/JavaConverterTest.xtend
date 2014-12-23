@@ -127,7 +127,8 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	@Test def void testMethodDeclarationCase() throws Exception {
 
 		var XtendClass xtendClazz = toValidXtendClass(
-			"public class JavaToConvert { public boolean visit(final Object node) { return true;}}")
+			"public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}"
+		)
 
 		assertEquals("Simple methods count", 1, xtendClazz.getMembers().size())
 		var XtendFunction xtendMember = xtendClazz.method(0)
@@ -194,7 +195,34 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		toValidXtendClass('''
 			public class JavaToConvert {
 				public void visit() {
-					for (int a = 1, int b = 2; true; a++) {
+					for (int a = 1, b = 2; true; a++) {
+					}
+				}
+			}
+		''')
+
+	}
+
+	@Test def void testBasicForStatementCase_03() throws Exception {
+
+		toValidXtendClass('''
+			public class JavaToConvert {
+				public void visit() {
+					for (final int a = 1, b = 2; true; ) {
+					}
+				}
+			}
+		''')
+
+	}
+
+	@Test def void testExtendedForStatementCase_01() throws Exception {
+
+		toValidXtendClass('''
+			import java.util.List;
+			public class JavaToConvert {
+				public void visit(List<?> list) {
+					for (final Object o:list) {
 					}
 				}
 			}
@@ -565,8 +593,31 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testConstructorCase() throws Exception {
+		var XtendClass clazz = toValidXtendClass("public class Clazz { public Clazz(){this(1);}public Clazz(int i){}}")
+		assertEquals(PUBLIC, (clazz.getMembers().get(0) as XtendConstructor).getVisibility())
+		assertEquals(PUBLIC, (clazz.getMembers().get(1) as XtendConstructor).getVisibility())
+	}
 
-		var XtendClass clazz = toValidXtendClass("public class Clazz { public Clazz(){}}")
+	@Test def void testSuperCalls() throws Exception {
+
+		var XtendClass clazz = toValidXtendClass('''
+			import java.awt.TextField;
+			public class Clazz extends TextField {
+				public Clazz() {
+					super();
+				}
+				
+				public Clazz(String txt) {
+					super(txt);
+				}
+				
+				@Override
+				public String toString() {
+					Object o = super.textListener;
+					return super.toString();
+				}
+			}
+		''')
 		assertEquals(PUBLIC, (clazz.getMembers().get(0) as XtendConstructor).getVisibility())
 	}
 
@@ -1099,6 +1150,8 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			
 			} catch (final Exception e) {
 				throw e;
+			} finally {
+				System.out.println();
 			}
 		}'''
 		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
@@ -1110,8 +1163,9 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				
 			} catch (Exception e) {
 				throw e
+			} finally {
+				System.out.println() 
 			}
-			
 		}'''.toString, body)
 
 	}
@@ -1122,6 +1176,12 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		
 		} catch (final Exception e) {
 			throw new Exception();
+		} catch (final Error e) {
+			throw new Exception();
+		}
+		try {
+		} finally {
+			throw new Exception();
 		}'''
 
 		var statement = statementToXtend(javaBody)
@@ -1130,7 +1190,56 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			
 		} catch (Exception e) {
 			throw new Exception()
+		} catch (Error e) {
+			throw new Exception()
+		}
+		try {
+			
+		} finally {
+			throw new Exception()
 		}'''.toString, statement)
+
+	}
+
+	@Test def void testDoWhileStatement() throws Exception {
+		val javaBody = '''
+			int i = 0;
+			do{
+				System.out.println(i); 
+				i++; 
+			} while(i < 0);
+			
+			while(i < 10) {
+				System.out.print(i);
+				i++;
+			}
+		'''
+		assertEquals('''
+		var int i=0 
+		do {
+			System.out.println(i) i++ 
+		} while (i < 0)
+		while (i < 10) {
+			System.out.print(i) i++ 
+		}'''.toString, statementToXtend(javaBody))
+
+	}
+
+	@Test def void testSynchronizedStatement() throws Exception {
+		val javaBody = '''
+			public void add(int value){
+			   synchronized(this){
+			      this.count += value;   
+			   }
+			 }
+		'''
+		assertEquals('''
+		def void add(int value){
+			synchronized (this) {
+				this.count+=value 
+			}
+			
+		}'''.toString, classBodyDeclToXtend(javaBody))
 
 	}
 
