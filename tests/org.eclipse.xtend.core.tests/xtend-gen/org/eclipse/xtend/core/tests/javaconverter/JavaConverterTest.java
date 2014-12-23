@@ -715,7 +715,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testJavadocCase() throws Exception {
-    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null, null);
+    JavaConverter.ConversionResult _bodyDeclarationToXtend = this.j2x.bodyDeclarationToXtend("/**@param p Param p*/public abstract void foo();", null, 
+      null);
     String xtendCode = _bodyDeclarationToXtend.getXtendCode();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Javadoc Parameter well formed: ");
@@ -1069,6 +1070,36 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     XtendClass clazz = this.toValidXtendClass(_builder.toString());
     Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testArrayAccessCaseConstantIndex_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("String[] ar = new String[]{};");
+    _builder.newLine();
+    _builder.append("String n = ar[1];");
+    _builder.newLine();
+    String xtendCode = this.statementToXtend(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("var String[] ar=#[] ");
+    _builder_1.newLine();
+    _builder_1.append("var String n=ar.get(1)");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, xtendCode);
+  }
+  
+  @Test
+  public void testArrayAccessCaseConstantIndex_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("String[] ar = new String[]{};");
+    _builder.newLine();
+    _builder.append("ar[1] = null;");
+    _builder.newLine();
+    String xtendCode = this.statementToXtend(_builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("var String[] ar=#[] { val _wrVal_ar=ar _wrVal_ar.set(1,null)}");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, xtendCode);
   }
   
   @Test
