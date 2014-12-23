@@ -228,20 +228,33 @@ class JavaASTFlattener extends ASTVisitor {
 
 		// Array write access
 		if (leftSide instanceof ArrayAccess) {
+
 			val arrayName = computeArrayName(leftSide)
 			appendToBuffer("{ ")
 			val valName = '''_wrVal_«arrayName»'''
-			val idxName = '''_wrIndx_«arrayName»'''
+			var idxName = '''_wrIndx_«arrayName»'''
 
 			appendToBuffer('''val «valName»=''')
 			leftSide.array.accept(this)
-			appendToBuffer(''' val «idxName»=''')
-			leftSide.getIndex().accept(this)
-			appendToBuffer(''' «valName».set(«idxName»,''')
+			if (!leftSide.index.isConstantArrayIndex) {
+				appendToBuffer(''' val «idxName»=''')
+				leftSide.getIndex().accept(this)
+				appendToBuffer(''' «valName».set(«idxName»,''')
+			} else {
+				appendToBuffer(''' «valName».set(''')
+				leftSide.index.accept(this)
+				appendToBuffer(",")
+			}
 			node.rightHandSide.accept(this)
 			appendToBuffer(")")
 			if (node.needsReturnValue()) {
-				appendToBuffer(''' «valName».get(«idxName»)''')
+				appendToBuffer(''' «valName».get(''')
+				if (!leftSide.index.isConstantArrayIndex) {
+					appendToBuffer('''«idxName»''')
+				} else {
+					leftSide.getIndex().accept(this)
+				}
+				appendToBuffer(')')
 			}
 			appendToBuffer("}")
 		} else {
@@ -641,7 +654,7 @@ class JavaASTFlattener extends ASTVisitor {
 			name.accept(this)
 		}
 		appendToBuffer("(")
-		parameters.reverseView.forEach [SingleVariableDeclaration p|
+		parameters.reverseView.forEach [ SingleVariableDeclaration p |
 			if (body.isAssignedInBody(p.name)) {
 				val varFrag = p.getAST().newVariableDeclarationFragment
 				varFrag.name = p.getAST().newSimpleName(p.name.toString)
@@ -1368,14 +1381,21 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(ArrayAccess node) {
-		val arrayname = computeArrayName(node)
+		if (node.index instanceof NumberLiteral) {
+			node.array.accept(this)
+			appendToBuffer(".get(")
+			node.index.accept(this)
+			appendToBuffer(")")
+		} else {
+			val arrayname = computeArrayName(node)
 
-		// Write access is handled in visit(Assignment)
-		appendToBuffer('''{val _rdIndx_«arrayname»=''')
-		node.index.accept(this)
-		appendSpaceToBuffer
-		node.array.accept(this)
-		appendToBuffer('''.get(_rdIndx_«arrayname»)}''')
+			// Write access is handled in visit(Assignment)
+			appendToBuffer('''{val _rdIndx_«arrayname»=''')
+			node.index.accept(this)
+			appendSpaceToBuffer
+			node.array.accept(this)
+			appendToBuffer('''.get(_rdIndx_«arrayname»)}''')
+		}
 		return false
 	}
 
