@@ -69,7 +69,6 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 	private void doPasteJavaCode(final XtextEditor activeXtextEditor, final String javaCode,
 			final JavaImportData javaImports) throws ExecutionException {
 		ISourceViewer sourceViewer = activeXtextEditor.getInternalSourceViewer();
-		final Point sel = sourceViewer.getSelectedRange();
 		final IXtextDocument xtextDocument = activeXtextEditor.getDocument();
 		IJavaProject project = null;
 		IEditorInput editorInput = activeXtextEditor.getEditorInput();
@@ -77,7 +76,8 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			IProject iProject = ((IFileEditorInput) editorInput).getFile().getProject();
 			project = JavaCore.create(iProject);
 		}
-		EObject targetElement = xtextDocument.priorityReadOnly(new IUnitOfWork<EObject, XtextResource>() {
+		final int selectionOffset = sourceViewer.getSelectedRange().x;
+		EObject targetElement = xtextDocument.readOnly(new IUnitOfWork<EObject, XtextResource>() {
 
 			@Override
 			public EObject exec(XtextResource state) throws Exception {
@@ -85,24 +85,24 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 				if (parseResult == null) {
 					return null;
 				}
-				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), sel.x);
+				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), selectionOffset);
 				return leafNode.getSemanticElement();
 			}
 		});
-		final String xtendCode = convertToXtend(javaCode, javaImports, sel, targetElement, project);
+		final String xtendCode = convertToXtend(javaCode, javaImports, targetElement, project);
 
 		if (!Strings.isEmpty(xtendCode)) {
 			if (javaImports != null) {
 				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {},
 						xtextDocument);
 			}
-
+			Point selection = sourceViewer.getSelectedRange();
 			try {
-				xtextDocument.replace(sel.x, sel.y, xtendCode);
+				xtextDocument.replace(selection.x, selection.y, xtendCode);
 			} catch (BadLocationException e) {
 				throw new ExecutionException("Failed to replace content.", e);
 			}
-			int offset = sel.x;
+			int offset = selection.x;
 			int length = xtendCode.length();
 			if (offset - 1 >= 0) {
 				offset--;
@@ -115,8 +115,8 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		}
 	}
 
-	private String convertToXtend(final String javaCode, final JavaImportData javaImports, final Point sel,
-			final EObject targetElement, IJavaProject project) {
+	private String convertToXtend(final String javaCode, final JavaImportData javaImports, final EObject targetElement,
+			IJavaProject project) {
 		boolean forceStatement = targetElement != null
 				&& EcoreUtil2.getContainerOfType(targetElement, XtendExecutable.class) != null;
 		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
