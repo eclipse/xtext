@@ -733,7 +733,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testIfElseCase() throws Exception {
+  public void testIfElseCase_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class TestCast {");
     _builder.newLine();
@@ -758,6 +758,41 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     XtendClass xtendClazz = this.toValidXtendClass(_builder.toString());
     Assert.assertNotNull(xtendClazz);
+  }
+  
+  @Test
+  public void testIfElseCase_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("var Class<?> c=String ");
+    _builder.newLine();
+    _builder.append("if (c instanceof Class) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("c=null ");
+    _builder.newLine();
+    _builder.append("} else {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("c=Boolean ");
+    _builder.newLine();
+    _builder.append("}");
+    String _string = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Class<?> c = String.class;");
+    _builder_1.newLine();
+    _builder_1.append("if(c instanceof Class) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("c = null;");
+    _builder_1.newLine();
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("c = Boolean.class;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _statementToXtend = this.statementToXtend(_builder_1);
+    Assert.assertEquals(_string, _statementToXtend);
   }
   
   @Test
@@ -1079,7 +1114,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("String n = ar[1];");
     _builder.newLine();
-    String xtendCode = this.statementToXtend(_builder.toString());
+    String xtendCode = this.statementToXtend(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("var String[] ar=#[] ");
     _builder_1.newLine();
@@ -1095,9 +1130,11 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("ar[1] = null;");
     _builder.newLine();
-    String xtendCode = this.statementToXtend(_builder.toString());
+    String xtendCode = this.statementToXtend(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("var String[] ar=#[] { val _wrVal_ar=ar _wrVal_ar.set(1,null)}");
+    _builder_1.append("var String[] ar=#[] ");
+    _builder_1.newLine();
+    _builder_1.append("{ val _wrVal_ar=ar _wrVal_ar.set(1,null)}");
     String _string = _builder_1.toString();
     Assert.assertEquals(_string, xtendCode);
   }
@@ -1174,9 +1211,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.append("def void arDim(){");
     _builder_1.newLine();
     _builder_1.append("\t");
+    _builder_1.append("var int[] ar2=newIntArrayOfSize(2) ");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("var int[] ar2=newIntArrayOfSize(2) ");
     _builder_1.newLine();
     _builder_1.append("}");
     String _string = _builder_1.toString();
@@ -1725,9 +1762,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.append("def private String doSwitch(){");
     _builder_1.newLine();
     _builder_1.append("\t");
+    _builder_1.append("var int i=0 ");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("var int i=0 ");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("switch (i) {");
@@ -1959,9 +1996,10 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_2.append("def void doBitwiseOperation(){");
     _builder_2.newLine();
     _builder_2.append("\t");
+    _builder_2.append("var int i=1 ");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("var int i=1 i=i.bitwiseNot ");
+    _builder_2.append("i=i.bitwiseNot ");
     _builder_2.newLine();
     _builder_2.append("}");
     String _string = _builder_2.toString();
@@ -1981,7 +2019,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("} catch (final Exception e) {");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("\t\t");
+    _builder.append("throw e;");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -2004,12 +2043,10 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_2.append("\t\t");
     _builder_2.newLine();
     _builder_2.append("\t");
-    _builder_2.append("}");
-    _builder_2.newLine();
-    _builder_2.append("\t ");
-    _builder_2.append("catch (Exception e) {");
+    _builder_2.append("} catch (Exception e) {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
+    _builder_2.append("throw e");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("}");
@@ -2030,6 +2067,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("} catch (final Exception e) {");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("throw new Exception();");
     _builder.newLine();
     _builder.append("}");
     final String javaBody = _builder.toString();
@@ -2039,12 +2077,10 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("catch (Exception e) {");
+    _builder_1.append("} catch (Exception e) {");
     _builder_1.newLine();
     _builder_1.append("\t");
+    _builder_1.append("throw new Exception()");
     _builder_1.newLine();
     _builder_1.append("}");
     String _string = _builder_1.toString();
@@ -2081,8 +2117,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     return xtendCode;
   }
   
-  private String statementToXtend(final String string) {
-    JavaConverter.ConversionResult _statementToXtend = this.j2x.statementToXtend(string);
+  private String statementToXtend(final CharSequence string) {
+    String _string = string.toString();
+    JavaConverter.ConversionResult _statementToXtend = this.j2x.statementToXtend(_string);
     String _xtendCode = _statementToXtend.getXtendCode();
     final String xtendCode = _xtendCode.trim();
     InputOutput.<String>println(xtendCode);

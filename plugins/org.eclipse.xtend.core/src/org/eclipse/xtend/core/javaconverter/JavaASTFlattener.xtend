@@ -551,7 +551,6 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationStatement it) {
 		val hasAnnotations = !modifiers().filter(Annotation).empty
-		appendLineWrapToBuffer
 		fragments.forEach [ VariableDeclarationFragment frag |
 			if (hasAnnotations) {
 				appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ")
@@ -574,6 +573,7 @@ class JavaASTFlattener extends ASTVisitor {
 			frag.accept(this)
 			appendSpaceToBuffer
 		]
+		appendLineWrapToBuffer
 		return false
 	}
 
@@ -764,7 +764,15 @@ class JavaASTFlattener extends ASTVisitor {
 		decreaseIndent
 		appendLineWrapToBuffer
 		appendToBuffer("}")
-		appendLineWrapToBuffer
+		var shouldWrap = true
+		val parent = node.parent
+		if (parent instanceof IfStatement) {
+			shouldWrap = parent.elseStatement == null
+		} else if (parent instanceof TryStatement) {
+			shouldWrap = parent.catchClauses.empty && parent.^finally==null
+		} 
+		if (shouldWrap)
+			appendLineWrapToBuffer
 		return false
 	}
 
@@ -1215,8 +1223,6 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(ThrowStatement node) {
 		appendToBuffer("throw ")
 		node.getExpression().accept(this)
-		if (!(node.parent instanceof SwitchStatement))
-			appendToBuffer(";")
 		return false
 	}
 
@@ -1410,10 +1416,6 @@ class JavaASTFlattener extends ASTVisitor {
 			default:
 				"tmpNode"
 		}
-	}
-
-	def isReadAccess(ArrayAccess access) {
-		access.parent instanceof Assignment
 	}
 
 	@Override override boolean visit(ArrayCreation node) {

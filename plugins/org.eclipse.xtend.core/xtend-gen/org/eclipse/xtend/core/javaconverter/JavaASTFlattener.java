@@ -845,7 +845,6 @@ public class JavaASTFlattener extends ASTVisitor {
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
     boolean _isEmpty = IterableExtensions.isEmpty(_filter);
     final boolean hasAnnotations = (!_isEmpty);
-    this.appendLineWrapToBuffer();
     List _fragments = it.fragments();
     final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
       public void apply(final VariableDeclarationFragment frag) {
@@ -887,6 +886,7 @@ public class JavaASTFlattener extends ASTVisitor {
       }
     };
     IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
+    this.appendLineWrapToBuffer();
     return false;
   }
   
@@ -1254,7 +1254,30 @@ public class JavaASTFlattener extends ASTVisitor {
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
-    this.appendLineWrapToBuffer();
+    boolean shouldWrap = true;
+    final ASTNode parent = node.getParent();
+    if ((parent instanceof IfStatement)) {
+      Statement _elseStatement = ((IfStatement)parent).getElseStatement();
+      boolean _equals = Objects.equal(_elseStatement, null);
+      shouldWrap = _equals;
+    } else {
+      if ((parent instanceof TryStatement)) {
+        boolean _and = false;
+        List _catchClauses = ((TryStatement)parent).catchClauses();
+        boolean _isEmpty = _catchClauses.isEmpty();
+        if (!_isEmpty) {
+          _and = false;
+        } else {
+          Block _finally = ((TryStatement)parent).getFinally();
+          boolean _equals_1 = Objects.equal(_finally, null);
+          _and = _equals_1;
+        }
+        shouldWrap = _and;
+      }
+    }
+    if (shouldWrap) {
+      this.appendLineWrapToBuffer();
+    }
     return false;
   }
   
@@ -1997,10 +2020,6 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer("throw ");
     Expression _expression = node.getExpression();
     _expression.accept(this);
-    ASTNode _parent = node.getParent();
-    if ((!(_parent instanceof SwitchStatement))) {
-      this.appendToBuffer(";");
-    }
     return false;
   }
   
@@ -2269,11 +2288,6 @@ public class JavaASTFlattener extends ASTVisitor {
       _switchResult = "tmpNode";
     }
     return _switchResult;
-  }
-  
-  public boolean isReadAccess(final ArrayAccess access) {
-    ASTNode _parent = access.getParent();
-    return (_parent instanceof Assignment);
   }
   
   @Override
