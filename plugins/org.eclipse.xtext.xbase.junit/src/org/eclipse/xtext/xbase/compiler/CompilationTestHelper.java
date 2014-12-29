@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
@@ -45,6 +47,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -53,15 +56,15 @@ import com.google.inject.Provider;
  * It's designed to be used as an injected extension in unit tests written in Xtend.
  * 
  * Example:
- * <code>
- * @RunWith(XtextRunner)
- * @InjectWith(MyLanguageInjectorProvider) 
+ * <pre>
+ * &#64;RunWith(XtextRunner)
+ * &#64;InjectWith(MyLanguageInjectorProvider) 
  * class CompilerTest {
  *	
- *	@Rule @Inject public TemporaryFolder temporaryFolder
- *	@Inject extension CompilationTestHelper
+ *	&#64;Rule &#64;Inject public TemporaryFolder temporaryFolder
+ *	&#64;Inject extension CompilationTestHelper
  *	
- *	@Test def void myTest() {
+ *	&#64;Test def void myTest() {
  *	  '''
  *	    // DSL code
  *	    Foo bla
@@ -72,7 +75,7 @@ import com.google.inject.Provider;
  *	  '''
  *	}
  *  }
- * </code>
+ * </pre>
  * 
  * @author Sven Efftinge
  * @since 2.7
@@ -210,7 +213,7 @@ public class CompilationTestHelper {
 			result.doGenerate();
 			acceptor.accept(result);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			Exceptions.throwUncheckedException(e);
 		}
 	}
 	
@@ -451,9 +454,7 @@ public class CompilationTestHelper {
 		
 		protected void doValidation() {
 			if (allErrorsAndWarnings == null) {
-				
 				doLinking();
-				
 				allErrorsAndWarnings = newArrayList();
 				// validation
 				for (Resource resource : sources) {
@@ -470,7 +471,7 @@ public class CompilationTestHelper {
 		
 		protected void doGenerate() {
 			if (access == null) {
-				doValidation();
+				checkNoErrors();
 				access = fileSystemAccessProvider.get();
 				access.setOutputConfigurations(outputConfigurations);
 				access.setCurrentSource("src");
@@ -493,6 +494,26 @@ public class CompilationTestHelper {
 			}
 		}
 		
+		/**
+		 * Assert that there are no errors in the processed resources.
+		 * 
+		 * @throws IllegalStateException if there are any errors
+		 * 
+		 * @since 2.8
+		 */
+		protected void checkNoErrors() {
+			doValidation();
+			List<Issue> allErrors = newArrayList();
+			for(Issue issue: allErrorsAndWarnings) {
+				if (Severity.ERROR == issue.getSeverity()) {
+					allErrors.add(issue);
+				}
+			}
+			if (!allErrors.isEmpty()) {
+				throw new IllegalStateException("One or more resources contained errors : "+Joiner.on(", ").join(allErrors));
+			}
+		}
+		
 		protected void doCompile() {
 			if (compiledClasses == null || classLoader==null) {
 				doGenerate();
@@ -506,7 +527,5 @@ public class CompilationTestHelper {
 			}
 		}
 	}
-	
 
-	
 }
