@@ -147,7 +147,7 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
 			}
 		} else {
 			if (superName != null && result.eClass() != TypesPackage.Literals.JVM_ANNOTATION_TYPE) {
-				superTypes.addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(superName), typeParameters));
+				superTypes.addUnique(proxies.createTypeReference(BinarySignatures.createObjectTypeSignature(superName), typeParameters));
 			}
 			setInterfaces(interfaces, typeParameters, superTypes);
 			if (superTypes.isEmpty() && !Proxies.JAVA_LANG_OBJECT.equals(name)) {
@@ -161,7 +161,7 @@ public class JvmDeclaredTypeBuilder extends ClassVisitor implements Opcodes {
 		if (interfaces != null) {
 			for (int i = 0; i < interfaces.length; i++) {
 				String interfaceName = interfaces[i];
-				result.addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(interfaceName), typeParameters));
+				result.addUnique(proxies.createTypeReference(BinarySignatures.createObjectTypeSignature(interfaceName), typeParameters));
 			}
 		}
 	}
