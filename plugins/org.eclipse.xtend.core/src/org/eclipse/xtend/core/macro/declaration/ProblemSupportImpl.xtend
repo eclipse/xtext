@@ -98,6 +98,9 @@ class ProblemSupportImpl implements ProblemSupport {
 	def private Pair<Resource,EObject> getResourceAndEObject(Element element) {
 		checkCanceled
 		switch element {
+			CompilationUnitImpl case element == compilationUnit: {
+				return compilationUnit.xtendFile.eResource -> compilationUnit.xtendFile
+			}
 			AbstractElementImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
 				if (resource == compilationUnit.xtendFile.eResource) {

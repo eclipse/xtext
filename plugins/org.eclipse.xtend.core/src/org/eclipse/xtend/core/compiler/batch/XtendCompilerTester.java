@@ -8,20 +8,30 @@
 package org.eclipse.xtend.core.compiler.batch;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.XtendInjectorSingleton;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.ProblemImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
+import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.services.Problem;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -87,6 +97,36 @@ public class XtendCompilerTester {
 						public Class<?> getCompiledClass(String className) {
 							return t.getCompiledClass(className);
 						}
+						
+						@Override
+						public List<? extends Problem> getProblems(Element element) {
+							return getTransformationContext().getProblems(element);
+						}
+						
+						@Override
+						public List<? extends Problem> getAllProblems() {
+							Resource resource = compilationUnitImpl.getXtendFile().eResource();
+							Iterable<EObjectDiagnosticImpl> issues = Iterables.filter(Iterables.concat(resource.getErrors(), resource.getWarnings()), EObjectDiagnosticImpl.class); 
+							List<Problem> result = Lists.newArrayList(Iterables.transform(issues, new Function<EObjectDiagnosticImpl, Problem>() {
+
+								@Override
+								public Problem apply(EObjectDiagnosticImpl diag) {
+									ProblemImpl result = new ProblemImpl(diag.getCode(), diag.getMessage(), translateSeverity(diag.getSeverity()));
+									return result;
+								}
+
+								private org.eclipse.xtend.lib.macro.services.Problem.Severity translateSeverity(Severity severity) {
+									switch (severity) {
+										case ERROR : return Problem.Severity.ERROR;
+										case WARNING : return Problem.Severity.WARNING;
+										case INFO : return Problem.Severity.INFO;
+										case IGNORE : return Problem.Severity.IGNORE;
+										default: throw new IllegalArgumentException(String.valueOf(severity));
+									}
+								}
+							}));
+							return result;
+						}
 
 						@Override
 						public Map<String, CharSequence> getAllGeneratedResources() {
@@ -118,6 +158,11 @@ public class XtendCompilerTester {
 		}
 	}
 	
+	/**
+	 * @since 2.8
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 * @noextend This interface is not intended to be extended by clients.
+	 */
 	public static interface CompilationResult {
 		
 		Map<String,String> getGeneratedCode();
@@ -135,5 +180,15 @@ public class XtendCompilerTester {
 		CompilationUnit getCompilationUnit();
 		
 		TransformationContext getTransformationContext();
+		
+		/**
+		 * @since 2.8
+		 */
+		List<? extends Problem> getProblems(Element element);
+		
+		/**
+		 * @since 2.8
+		 */
+		List<? extends Problem> getAllProblems();
 	}
 }
