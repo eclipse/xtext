@@ -99,7 +99,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -407,17 +406,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			return eContainer.eContainer();
 		}
 		return eContainer;
-	}
-
-	@Override
-	@Check
-	public void checkAssignment(XAssignment assignment) {
-		JvmIdentifiableElement assignmentFeature = assignment.getFeature();
-		if (assignmentFeature instanceof XtendParameter)
-			error("Assignment to final parameter", Literals.XASSIGNMENT__ASSIGNABLE,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
-		else
-			super.checkAssignment(assignment);
 	}
 
 	@Check

@@ -30,6 +30,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	PostfixOperatorValidationTest.class,
 	SuspiciousOverloadValidationTest.class,
 	ValidationBug371957Test.class,
+	ValidationBug398302Test.class,
 	ValidationBug409602Test.class,
 	ValidationBug419050Test.class,
 	ValidationBug427432Test.class,
