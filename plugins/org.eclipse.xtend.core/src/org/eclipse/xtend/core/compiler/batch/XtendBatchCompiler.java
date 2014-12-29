@@ -245,6 +245,12 @@ public class XtendBatchCompiler {
 	protected String getComplianceLevel() {
 		return complianceLevel;
 	}
+	/**
+	 * @since 2.8
+	 */
+	public void setComplianceLevel(String complianceLevel) {
+		this.complianceLevel = complianceLevel;
+	}
 
 	public void setVerbose(boolean verbose) {
 		this.verbose = verbose;
