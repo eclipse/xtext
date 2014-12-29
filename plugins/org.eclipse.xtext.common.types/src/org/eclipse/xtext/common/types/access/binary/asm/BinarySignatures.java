@@ -23,24 +23,63 @@ public class BinarySignatures {
 	
 	/**
 	 * Creates a new {@link BinaryTypeSignature} that is backed by the given
-	 * array of chars. The array is not copied thus subsequent changes to the
-	 * array contents should be avoided.
+	 * string.
 	 * 
-	 * @param signature the binary type name, e.g. {@code java/lang/String} or a binary signature
-	 *  e.g {@code Ljava/lang/String;}
+	 * @param signature the binary signature e.g {@code Ljava/lang/String;}, {@code TT;} or {@code [[[I}.
 	 */
-	//FIXME: This is ambiguous since a class in default package named e.g. B would always become a primitive
-	// see org.eclipse.xtext.common.types.access.impl.BinarySignaturesTest.testClazzesInDefaultPackageNameWithOneChar()
 	public static BinaryTypeSignature createTypeSignature(String signature) {
+//		if (!isSignature(signature)) {
+//			throw new IllegalArgumentException(signature);
+//		}
 		if (signature.charAt(signature.length() - 1) != ';')
 			return new BinaryTypeSignature(signature);
 		return new BinaryGenericTypeSignature(signature);
 	}
 
+//	private static boolean isSignature(String signature) {
+//		char first = signature.charAt(0);
+//		if (signature.length() == 1) {
+//			switch(first) {
+//			case 'B':
+//			case 'C':
+//			case 'D':
+//			case 'F':
+//			case 'I':
+//			case 'J':
+//			case 'S':
+//			case 'Z':
+//			case 'V':
+//				return true;
+//			}
+//			return false;
+//		}
+//		if (first != '[') {
+//			if (first != 'L' && first != 'T') {
+//				return false;
+//			}
+//			if (signature.charAt(signature.length() - 1) != ';') {
+//				return false;
+//			}
+//		}
+//		return true;
+//	}
+
+	/**
+	 * Creates a new {@link BinaryTypeSignature} that is backed by the given
+	 * string.
+	 * 
+	 * @param internalName the binary type name, e.g. {@code java/lang/String} or a binary signature
+	 *  e.g {@code Ljava/lang/String;}
+	 */
+	public static BinaryTypeSignature createObjectTypeSignature(String internalName) {
+		if (internalName.charAt(internalName.length() - 1) != ';')
+			return new BinaryObjectTypeSignature(internalName);
+		return new BinaryGenericTypeSignature(internalName);
+	}
+
 	/**
 	 * Creates a new {@link BinaryMethodSignature} that is backed by the given
-	 * array of chars. The array is not copied thus subsequent changes to the
-	 * array contents should be avoided.
+	 * string.
 	 */
 	public static BinaryMethodSignature createMethodSignature(String signature) {
 		return new BinaryMethodSignature(signature);
@@ -48,8 +87,7 @@ public class BinarySignatures {
 
 	/**
 	 * Creates a new {@link BinarySuperTypeSignature} that is backed by the given
-	 * array of chars. The array is not copied thus subsequent changes to the
-	 * array contents should be avoided.
+	 * string.
 	 */
 	public static BinarySuperTypeSignature createSuperTypeSignature(String signature) {
 		return new BinarySuperTypeSignature(signature);

@@ -136,19 +136,17 @@ public class BinaryTypeSignature extends AbstractBinarySignature {
 
 	public URI getURI() {
 		BinaryTypeSignature typeErasure = getArrayComponentType().getTypeErasure();
-		if (typeErasure.length==1) {
-			switch(typeErasure.chars.charAt(typeErasure.offset)) {
-				case 'B':
-				case 'C':
-				case 'D':
-				case 'F':
-				case 'I':
-				case 'J':
-				case 'S':
-				case 'Z':
-				case 'V': {
-					return URIHelperConstants.PRIMITIVES_URI.appendFragment(toIdentifier());
-				}
+		switch(typeErasure.chars.charAt(typeErasure.offset)) {
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'F':
+			case 'I':
+			case 'J':
+			case 'S':
+			case 'Z':
+			case 'V': {
+				return URIHelperConstants.PRIMITIVES_URI.appendFragment(toIdentifier());
 			}
 		}
 		String identifier = typeErasure.toIdentifier();

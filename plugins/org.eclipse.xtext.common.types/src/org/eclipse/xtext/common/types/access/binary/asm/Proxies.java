@@ -140,7 +140,7 @@ class Proxies {
 	}
 	
 	public JvmTypeReference createObjectTypeReference() {
-		return createTypeReference(BinarySignatures.createTypeSignature(JAVA_LANG_OBJECT), null);
+		return createTypeReference(BinarySignatures.createObjectTypeSignature(JAVA_LANG_OBJECT), null);
 	}
 
 	public JvmType createProxy(BinaryTypeSignature type, Map<String, JvmTypeParameter> typeParameters) {
@@ -232,8 +232,15 @@ class Proxies {
 		if (valueClass == Type.class) {
 			JvmTypeAnnotationValue result = TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
 			Type type = (Type) value;
-			String typeName = type.getSort() == Type.OBJECT ? type.getInternalName() : type.getDescriptor();
-			((InternalEList<JvmTypeReference>) result.getValues()).addUnique(createTypeReference(BinarySignatures.createTypeSignature(typeName), null));
+			BinaryTypeSignature signature;
+			if (type.getSort() == Type.OBJECT) {
+				String typeName = type.getInternalName();
+				signature = BinarySignatures.createObjectTypeSignature(typeName);
+			} else {
+				String typeName = type.getDescriptor();
+				signature = BinarySignatures.createTypeSignature(typeName);
+			}
+			((InternalEList<JvmTypeReference>) result.getValues()).addUnique(createTypeReference(signature, null));
 			return result;
 		}
 		String className = valueClass.getName();
@@ -301,7 +308,7 @@ class Proxies {
 	}
 	
 	public JvmEnumerationLiteral createEnumLiteral(String literalName, String typeName) {
-		return createEnumLiteral(literalName, BinarySignatures.createTypeSignature(typeName));
+		return createEnumLiteral(literalName, BinarySignatures.createObjectTypeSignature(typeName));
 	}
 
 	protected JvmEnumerationLiteral createEnumLiteral(String literalName, BinaryTypeSignature typeName) {
