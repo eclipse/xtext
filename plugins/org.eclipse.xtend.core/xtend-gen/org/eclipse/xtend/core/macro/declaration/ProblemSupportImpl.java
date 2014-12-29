@@ -178,6 +178,18 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     boolean _matched = false;
     if (!_matched) {
+      if (element instanceof CompilationUnitImpl) {
+        boolean _equals = Objects.equal(element, this.compilationUnit);
+        if (_equals) {
+          _matched=true;
+          XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+          Resource _eResource = _xtendFile.eResource();
+          XtendFile _xtendFile_1 = this.compilationUnit.getXtendFile();
+          return Pair.<Resource, EObject>of(_eResource, _xtendFile_1);
+        }
+      }
+    }
+    if (!_matched) {
       if (element instanceof AbstractElementImpl) {
         _matched=true;
         EObject _delegate = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
