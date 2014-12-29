@@ -48,12 +48,12 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.internal.XtendActivator;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
@@ -66,7 +66,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -84,8 +83,7 @@ public class WorkbenchTestHelper extends Assert {
 	private Set<IFile> files = newHashSet();
 
 	@Inject
-	@Named(Constants.LANGUAGE_NAME)
-	private String languageName;
+	private XtextEditorInfo editorInfo;
 
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
@@ -217,7 +215,7 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public String getEditorID() {
-		return languageName;
+		return editorInfo.getEditorId();
 	}
 
 	public String getContents(IFile file) throws Exception {

@@ -16,12 +16,11 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -29,8 +28,7 @@ import com.google.inject.name.Named;
 public class XtendRenameElementProcessor extends RenameElementProcessor {
 
 	@Inject
-	@Named(Constants.LANGUAGE_NAME)
-	private String languageName;
+	private XtextEditorInfo editorInfo;
 	
 	@Inject(optional=true)
 	private IWorkbench workbench;
@@ -41,7 +39,7 @@ public class XtendRenameElementProcessor extends RenameElementProcessor {
 			protected Boolean run() throws Exception {
 				IWorkbenchPage workbenchPage = workbench.getActiveWorkbenchWindow().getActivePage();
 				for (IEditorPart editorPart : workbenchPage.getDirtyEditors())
-					if (equal(editorPart.getSite().getId(), languageName))
+					if (equal(editorPart.getSite().getId(), editorInfo.getEditorId()))
 						return true;
 				return false;
 				

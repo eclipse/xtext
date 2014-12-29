@@ -27,7 +27,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledError;
@@ -38,7 +37,6 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -56,8 +54,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 	private IStorage2UriMapper mapper;
 
 	@Inject
-	@Named(Constants.LANGUAGE_NAME)
-	private String editorID;
+	private XtextEditorInfo editorInfo;
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
@@ -83,7 +80,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 				IStorage storage = storages.next().getFirst();
 				IEditorInput editorInput = EditorUtils.createEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
-				final IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
+				final IEditorPart editor = IDE.openEditor(activePage, editorInput, getEditorId());
 				
 				Job selectAndRevealJob = new Job("Select and reveal referenced object") {
 					@Override
@@ -104,6 +101,13 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected String getEditorId() {
+		return editorInfo.getEditorId();
 	}
 
 	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference,
