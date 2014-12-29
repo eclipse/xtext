@@ -28,18 +28,38 @@ public class BinarySignaturesTest {
 	}
 	
 	@Test
-	public void testClazzesInDefaultPackage() {
-		String signature = "DummyService";
+	public void testClassesInDefaultPackage_01() {
+		String signature = "LDummyService;";
 		BinaryTypeSignature typeSignature = BinarySignatures.createTypeSignature(signature);
-		Assert.assertEquals("java:/Objects/DummyService#DummyService",typeSignature.getURI().toString());
+		Assert.assertEquals("java:/Objects/DummyService#DummyService", typeSignature.getURI().toString());
 	}
 	
 	@Test
-	@Ignore
-	public void testClazzesInDefaultPackageNameWithOneChar() {
+	public void testClassesInDefaultPackage_02() {
+		String signature = "DummyService";
+		BinaryTypeSignature typeSignature = BinarySignatures.createObjectTypeSignature(signature);
+		Assert.assertEquals("java:/Objects/DummyService#DummyService", typeSignature.getURI().toString());
+	}
+	
+	@Test
+	public void testDoubleSignature() {
 		String signature = "D";
 		BinaryTypeSignature typeSignature = BinarySignatures.createTypeSignature(signature);
+		Assert.assertEquals("java:/Primitives#double", typeSignature.getURI().toString());
+	}
+	
+	@Test
+	public void testSingleCharInDefaultPackage_01() {
+		String signature = "LD;";
+		BinaryTypeSignature typeSignature = BinarySignatures.createTypeSignature(signature);
 		Assert.assertEquals("java:/Objects/D#D",typeSignature.getURI().toString());
+	}
+	
+	@Test
+	public void testSingleCharInDefaultPackage_02() {
+		String signature = "D";
+		BinaryTypeSignature typeSignature = BinarySignatures.createObjectTypeSignature(signature);
+		Assert.assertEquals("java:/Objects/D#D", typeSignature.getURI().toString());
 	}
 	
 }

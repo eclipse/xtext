@@ -125,7 +125,7 @@ public class JvmExecutableBuilder extends MethodVisitor implements Opcodes {
 				InternalEList<JvmTypeReference> resultExceptions = (InternalEList<JvmTypeReference>) result
 						.getExceptions();
 				for (int i = 0, max = exceptions.length; i < max; i++) {
-					resultExceptions.addUnique(proxies.createTypeReference(BinarySignatures.createTypeSignature(exceptions[i]), typeParameters));
+					resultExceptions.addUnique(proxies.createTypeReference(BinarySignatures.createObjectTypeSignature(exceptions[i]), typeParameters));
 				}
 			}
 		} else {
