@@ -30,11 +30,10 @@ public class PrefixMatcherOutlineAdapter extends StringMatcher {
 		this.prefix = prefix;
 		this.prefixParts = splitIntoParts(prefix);
 		this.strategy = strategy;
-		boolean ignoreCase = prefix.equals(prefix.toLowerCase());
-		this.prefixStringMatcher = new StringMatcher(prefix, ignoreCase);
+		this.prefixStringMatcher = new StringMatcher(prefix, true);
 		stringMatchers = Lists.newArrayList();
 		for(String part: prefixParts) {
-			stringMatchers.add(new StringMatcher(part, ignoreCase));
+			stringMatchers.add(new StringMatcher(part, true));
 		}
 	}
 

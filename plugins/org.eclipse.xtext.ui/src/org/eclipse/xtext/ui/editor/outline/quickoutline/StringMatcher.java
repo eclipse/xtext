@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Matches a given {@link String} against a prefix pattern. The matching algorithm
  * will return <code>true</code> if the tested string starts with the given pattern.
- * The pattern suppors wildcards such as <code>*</code> and <code>?</code>.
+ * The pattern supports wildcards such as <code>*</code> and <code>?</code>.
  * @author Peter Friese - Initial contribution and API
  * @author Sebastian Zarnekow - Javadoc, minor fixes to the matching algorithm
  */

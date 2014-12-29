@@ -26,6 +26,11 @@ public class PrefixMatcherOutlineAdapterTest extends StringMatcherTest {
 		return new PrefixMatcherOutlineAdapter(pattern, fqnPrefixMatcher);
 	}
 	
+	@Test public void testBug393439() {
+		StringMatcher matcher = createStringMatcher("*CLass");
+		assertTrue(matcher.match("XtendClass"));
+	}
+	
 	@Test public void testFQN() {
 		StringMatcher matcher = createStringMatcher("j.u.ArrayList");
 		assertTrue(matcher.match("java.util.ArrayList"));
