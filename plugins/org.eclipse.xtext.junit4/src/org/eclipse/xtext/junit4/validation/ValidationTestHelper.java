@@ -161,7 +161,11 @@ public class ValidationTestHelper {
 				.append(code)
 				.append("' on ")
 				.append(objectType.getName())
-				.append(" but got\n");
+				.append(" at [")
+				.append(offset)
+				.append(":")
+				.append(length)
+				.append("] but got\n");
 			getIssuesAsString(model, allIssues, message);
 			assertEquals(Joiner.on('\n').join(messageParts), message.toString());
 			fail(message.toString());
