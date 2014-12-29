@@ -528,7 +528,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkAssignment(XAssignment assignment) {
-		checkAssignment(assignment, Literals.XASSIGNMENT__ASSIGNABLE, true);
+		checkAssignment(assignment, true);
 	}
 
 	/**
@@ -1654,7 +1654,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkAssignment(XBinaryOperation binaryOperation) {
 		if (binaryOperation.isReassignFirstArgument()) {
 			XExpression leftOperand = binaryOperation.getLeftOperand();
-			checkAssignment(leftOperand, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);	
+			checkAssignment(leftOperand, false);
 		}
 	}
 	
@@ -1687,7 +1687,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkAssignment(XPostfixOperation postfixOperation) {
 		if (expressionHelper.isGetAndAssign(postfixOperation)) {
 			XExpression firstArgument = postfixOperation.getActualArguments().get(0);
-			checkAssignment(firstArgument, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+			checkAssignment(firstArgument, false);
 		}
 	}
 	
@@ -1715,6 +1715,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				&& constructorCall.getArguments().isEmpty()) {
 			addIssue("Constructor call without parentheses", constructorCall, OPERATION_WITHOUT_PARENTHESES);
 		}
+	}
+	
+	protected void checkAssignment(XExpression expression, boolean simpleAssignment) {
+		checkAssignment(expression, Literals.XABSTRACT_FEATURE_CALL__FEATURE, simpleAssignment);
 	}
 	
 	protected void checkAssignment(XExpression expression, EStructuralFeature feature, boolean simpleAssignment) {
