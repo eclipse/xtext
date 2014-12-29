@@ -32,6 +32,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.CheckMode;
@@ -53,15 +54,15 @@ import com.google.inject.Provider;
  * It's designed to be used as an injected extension in unit tests written in Xtend.
  * 
  * Example:
- * <code>
- * @RunWith(XtextRunner)
- * @InjectWith(MyLanguageInjectorProvider) 
+ * <pre>
+ * &#64;RunWith(XtextRunner)
+ * &#64;InjectWith(MyLanguageInjectorProvider) 
  * class CompilerTest {
  *	
- *	@Rule @Inject public TemporaryFolder temporaryFolder
- *	@Inject extension CompilationTestHelper
+ *	&#64;Rule &#64;Inject public TemporaryFolder temporaryFolder
+ *	&#64;Inject extension CompilationTestHelper
  *	
- *	@Test def void myTest() {
+ *	&#64;Test def void myTest() {
  *	  '''
  *	    // DSL code
  *	    Foo bla
@@ -72,7 +73,7 @@ import com.google.inject.Provider;
  *	  '''
  *	}
  *  }
- * </code>
+ * </pre>
  * 
  * @author Sven Efftinge
  * @since 2.7
@@ -94,7 +95,7 @@ public class CompilationTestHelper {
 	@Inject private IOutputConfigurationProvider outputConfigurationProvider;
 	
 	@Inject private Provider<Result> resultProvider;
-
+	
 	private RuntimeWorkspaceConfigProvider configProvider;
 
 	@Inject
@@ -204,14 +205,22 @@ public class CompilationTestHelper {
 			List<Resource> resourcesToCheck = newArrayList(resourceSet.getResources());
 			Result result = resultProvider.get();
 			result.setJavaCompiler(javaCompiler);
+			result.setCheckMode(getCheckMode());
 			result.setResources(resourcesToCheck);
 			result.setResourceSet(resourceSet);
 			result.setOutputConfigurations(getOutputConfigurations());
 			result.doGenerate();
 			acceptor.accept(result);
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			Exceptions.throwUncheckedException(e);
 		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected CheckMode getCheckMode() {
+		return CheckMode.NORMAL_AND_FAST;
 	}
 	
 	protected Iterable<? extends OutputConfiguration> getOutputConfigurations() {
@@ -288,16 +297,25 @@ public class CompilationTestHelper {
 		
 		@Inject private IResourceServiceProvider.Registry serviceRegistry;
 		@Inject private Provider<RegisteringFileSystemAccess> fileSystemAccessProvider;
+		@Inject	private ElementIssueProvider.Factory elementIssueProviderFactory;
 		
 		private OnTheFlyJavaCompiler javaCompiler;
 		private ResourceSet resourceSet;
 		private List<Resource> sources;
 		private Map<String,OutputConfiguration> outputConfigurations;
+		private CheckMode checkMode;
 		
 		protected void setResourceSet(ResourceSet resourceSet) {
 			this.resourceSet = resourceSet;
 		}
 		
+		/**
+		 * @since 2.8
+		 */
+		protected void setCheckMode(CheckMode checkMode) {
+			this.checkMode = checkMode;
+		}
+
 		protected void setResources(List<Resource> sources) {
 			this.sources = sources;
 		}
@@ -451,15 +469,13 @@ public class CompilationTestHelper {
 		
 		protected void doValidation() {
 			if (allErrorsAndWarnings == null) {
-				
 				doLinking();
-				
 				allErrorsAndWarnings = newArrayList();
 				// validation
 				for (Resource resource : sources) {
 					if (resource instanceof XtextResource) {
 						XtextResource xtextResource = (XtextResource) resource;
-						List<Issue> issues = xtextResource.getResourceServiceProvider().getResourceValidator().validate(xtextResource, CheckMode.ALL, CancelIndicator.NullImpl);
+						List<Issue> issues = xtextResource.getResourceServiceProvider().getResourceValidator().validate(xtextResource, checkMode, CancelIndicator.NullImpl);
 						for (Issue issue : issues) {
 							allErrorsAndWarnings.add(issue);
 						}
@@ -480,7 +496,12 @@ public class CompilationTestHelper {
 						XtextResource xtextResource = (XtextResource) resource;
 						IGenerator generator = xtextResource.getResourceServiceProvider().get(IGenerator.class);
 						if (generator != null) {
-							generator.doGenerate(xtextResource, access);
+							try {
+								elementIssueProviderFactory.attachData(xtextResource);
+								generator.doGenerate(xtextResource, access);
+							} finally {
+								elementIssueProviderFactory.detachData(xtextResource);
+							}
 						}
 					}
 				}
@@ -506,7 +527,5 @@ public class CompilationTestHelper {
 			}
 		}
 	}
-	
 
-	
 }
