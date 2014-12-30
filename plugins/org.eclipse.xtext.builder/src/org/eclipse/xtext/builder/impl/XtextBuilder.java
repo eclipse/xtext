@@ -234,7 +234,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		if (participant != null && !indexingOnly) {
 			participant.build(new BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
-			getProject().getWorkspace().checkpoint(false);
+			try {
+				getProject().getWorkspace().checkpoint(false);
+			} catch(NoClassDefFoundError e) { // guard against broken Eclipse installations / bogus project configuration
+				log.error(e.getMessage(), e);
+			}
 		} else {
 			progress.worked(1);
 		}
