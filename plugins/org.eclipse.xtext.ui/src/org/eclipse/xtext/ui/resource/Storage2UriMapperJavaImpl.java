@@ -56,7 +56,7 @@ import com.google.inject.Singleton;
  * @noextend This class is not intended to be subclassed by clients.
  */
 @Singleton
-public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtensions, IStorage2UriMapperContribution {
+public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtensions, IStorage2UriMapperContribution, IElementChangedListener {
 	
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
 	
@@ -358,8 +358,29 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return null;
 	}
 	
-	@Deprecated public void elementChanged(ElementChangedEvent changeEvent) {
-		log.warn("Storage2UriMapperJavaImpl.elementChanged(ElementChangedEvent) is deperecated and does nothing.");
+	@Override
+	public void elementChanged(ElementChangedEvent event) {
+		Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
+		if(!javaProjectsWithClasspathChange.isEmpty()) {
+			for(IJavaProject project: javaProjectsWithClasspathChange) {
+				updateCache(project);
+			}
+		} 
+		for(IJavaElementDelta projectDelta: getProjectDeltas(event.getDelta())) {
+			IJavaProject project = (IJavaProject) projectDelta.getElement();
+			if((projectDelta.getKind() & IJavaElementDelta.REMOVED) != 0) {
+				clearCache(project, Collections.<PackageFragmentRootData>emptySet());
+				return;
+			} 
+			switch(projectDelta.getFlags()) {
+				case IJavaElementDelta.F_OPENED: 
+					updateCache(project);
+					break;
+				case IJavaElementDelta.F_CLOSED:
+					clearCache(project, Collections.<PackageFragmentRootData>emptySet());
+					break;
+			}
+		}
 	}
 
 	@Inject
@@ -424,32 +445,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 					updateCache(javaProject);
 				}
 			}
-			JavaCore.addElementChangedListener(new IElementChangedListener() {
-				@Override
-				public void elementChanged(ElementChangedEvent event) {
-					Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
-					if(!javaProjectsWithClasspathChange.isEmpty()) {
-						for(IJavaProject project: javaProjectsWithClasspathChange) {
-							updateCache(project);
-						}
-					} 
-					for(IJavaElementDelta projectDelta: getProjectDeltas(event.getDelta())) {
-						IJavaProject project = (IJavaProject) projectDelta.getElement();
-						if((projectDelta.getKind() & IJavaElementDelta.REMOVED) != 0) {
-							clearCache(project, Collections.<PackageFragmentRootData>emptySet());
-							return;
-						} 
-						switch(projectDelta.getFlags()) {
-							case IJavaElementDelta.F_OPENED: 
-								updateCache(project);
-								break;
-							case IJavaElementDelta.F_CLOSED:
-								clearCache(project, Collections.<PackageFragmentRootData>emptySet());
-								break;
-						}
-					}
-				}
-			}, ElementChangedEvent.POST_CHANGE);
+			JavaCore.addElementChangedListener(this, ElementChangedEvent.POST_CHANGE);
 			isInitialized = true;
 		}
 	}
@@ -505,5 +501,4 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 		return set;
 	}
 
-	
 }

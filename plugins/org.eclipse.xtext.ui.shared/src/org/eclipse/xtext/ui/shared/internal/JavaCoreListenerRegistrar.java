@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.shared.internal;
 
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.shared.contribution.IEagerContribution;
 
 import com.google.inject.Inject;
@@ -20,7 +21,10 @@ public class JavaCoreListenerRegistrar implements IEagerContribution {
 
 	@Inject
 	private ProjectClasspathChangeListener classpathChangeListener;
-
+	
+	@Inject
+	private Storage2UriMapperJavaImpl storage2UriMapperJavaImpl;
+	
 	@Override
 	public void initialize() {
 		JavaCore.addElementChangedListener(classpathChangeListener);
@@ -29,7 +33,7 @@ public class JavaCoreListenerRegistrar implements IEagerContribution {
 	@Override
 	public void discard() {
 		JavaCore.removeElementChangedListener(classpathChangeListener);
+		JavaCore.removeElementChangedListener(storage2UriMapperJavaImpl);
 	}
-
 	
 }

@@ -22,8 +22,10 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.shared.internal.EagerContributionInitializer;
 import org.eclipse.xtext.ui.shared.internal.SharedModule;
 import org.eclipse.xtext.util.Modules2;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,10 +41,11 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 
 	private IBuilderState testMe;
 	private int loadCalled;
+	private Injector injector;
 
 	@Before
 	public void setUp() throws Exception {
-		Injector injector = Guice.createInjector(Modules2.mixin(new SharedModule(null), new AbstractModule() {
+		injector = Guice.createInjector(Modules2.mixin(new SharedModule(null), new AbstractModule() {
 			@Override
 			protected void configure() {
 				bind(PersistedStateProvider.class).toInstance(Bug349445Test.this);
@@ -52,6 +55,12 @@ public class Bug349445Test extends Assert implements PersistedStateProvider, IMa
 		}));
 		loadCalled = 0;
 		testMe = injector.getInstance(ClusteringBuilderState.class);
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		EagerContributionInitializer initializer = injector.getInstance(EagerContributionInitializer.class);
+		initializer.discard();
 	}
 	
 	@Test public void testUpdate() {
