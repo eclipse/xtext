@@ -310,7 +310,17 @@ public class PortableURIs {
     return new PortableURIs.PortableFragmentDescription(eClassName, qname, fragment);
   }
   
-  protected String getFragment(final EObject fromContainer, final EObject toChild) {
+  /**
+   * Computes a fragment to the child relative from the given container.
+   * 
+   * @param fromContainer the container EObject from which the fragment path is computed
+   * @param toChild the target EObject which can be found using the fromContainer and resulting fragment path
+   * 
+   * @return a fragment path from the given container to the child, or <code>null</null> is fromContainer == toChild
+   * 
+   * @see #getEObject(EObject,String)
+   */
+  public String getFragment(final EObject fromContainer, final EObject toChild) {
     boolean _equals = Objects.equal(fromContainer, toChild);
     if (_equals) {
       return null;
@@ -338,7 +348,15 @@ public class PortableURIs {
     return result;
   }
   
-  protected EObject getEObject(final EObject from, final String toFragment) {
+  /**
+   * Finds an EObject for the given context EObject and fragment.
+   * 
+   * @param from the EObject from which the path should be resolved
+   * @param toFragment the fragment
+   * 
+   * @return the resolved EObject based. If the given fragment is <code>null</null>, the given EObject itself will be returned.
+   */
+  public EObject getEObject(final EObject from, final String toFragment) {
     boolean _equals = Objects.equal(toFragment, null);
     if (_equals) {
       return from;

@@ -111,51 +111,20 @@ public class SerializableResourceDescriptionTest {
       Iterable<QualifiedName> _importedNames = before.getImportedNames();
       Iterable<QualifiedName> _importedNames_1 = after.getImportedNames();
       Assert.assertEquals(_importedNames, _importedNames_1);
-      List<SerializableReferenceDescription> _references = before.getReferences();
-      int _size = _references.size();
-      List<SerializableReferenceDescription> _references_1 = after.getReferences();
-      int _size_1 = _references_1.size();
+      List<SerializableEObjectDescription> _descriptions = before.getDescriptions();
+      int _size = _descriptions.size();
+      List<SerializableEObjectDescription> _descriptions_1 = after.getDescriptions();
+      int _size_1 = _descriptions_1.size();
       Assert.assertEquals(_size, _size_1);
-      List<SerializableReferenceDescription> _references_2 = before.getReferences();
-      int _size_2 = _references_2.size();
+      List<SerializableEObjectDescription> _descriptions_2 = before.getDescriptions();
+      int _size_2 = _descriptions_2.size();
       ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size_2, true);
       for (final int i : _doubleDotLessThan) {
         {
-          List<SerializableReferenceDescription> _references_3 = before.getReferences();
-          final SerializableReferenceDescription beforeRef = _references_3.get(i);
-          List<SerializableReferenceDescription> _references_4 = after.getReferences();
-          final SerializableReferenceDescription afterRef = _references_4.get(i);
-          URI _containerEObjectURI = beforeRef.getContainerEObjectURI();
-          URI _containerEObjectURI_1 = afterRef.getContainerEObjectURI();
-          Assert.assertEquals(_containerEObjectURI, _containerEObjectURI_1);
-          URI _sourceEObjectUri = beforeRef.getSourceEObjectUri();
-          URI _sourceEObjectUri_1 = afterRef.getSourceEObjectUri();
-          Assert.assertEquals(_sourceEObjectUri, _sourceEObjectUri_1);
-          URI _targetEObjectUri = beforeRef.getTargetEObjectUri();
-          URI _targetEObjectUri_1 = afterRef.getTargetEObjectUri();
-          Assert.assertEquals(_targetEObjectUri, _targetEObjectUri_1);
-          EReference _eReference = beforeRef.getEReference();
-          EReference _eReference_1 = afterRef.getEReference();
-          Assert.assertEquals(_eReference, _eReference_1);
-          int _indexInList = beforeRef.getIndexInList();
-          int _indexInList_1 = afterRef.getIndexInList();
-          Assert.assertEquals(_indexInList, _indexInList_1);
-        }
-      }
-      List<SerializableEObjectDescription> _descriptions = before.getDescriptions();
-      int _size_3 = _descriptions.size();
-      List<SerializableEObjectDescription> _descriptions_1 = after.getDescriptions();
-      int _size_4 = _descriptions_1.size();
-      Assert.assertEquals(_size_3, _size_4);
-      List<SerializableEObjectDescription> _descriptions_2 = before.getDescriptions();
-      int _size_5 = _descriptions_2.size();
-      ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, _size_5, true);
-      for (final int i_1 : _doubleDotLessThan_1) {
-        {
           List<SerializableEObjectDescription> _descriptions_3 = before.getDescriptions();
-          final SerializableEObjectDescription beforeDesc = _descriptions_3.get(i_1);
+          final SerializableEObjectDescription beforeDesc = _descriptions_3.get(i);
           List<SerializableEObjectDescription> _descriptions_4 = after.getDescriptions();
-          final SerializableEObjectDescription afterDesc = _descriptions_4.get(i_1);
+          final SerializableEObjectDescription afterDesc = _descriptions_4.get(i);
           EClass _eClass = beforeDesc.getEClass();
           EClass _eClass_1 = afterDesc.getEClass();
           Assert.assertEquals(_eClass, _eClass_1);
