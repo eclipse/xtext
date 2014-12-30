@@ -1635,4 +1635,34 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+
+  @Test
+  public void checkImportsNotMarkedAsUsedWhenTypeUnresolved() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static extension java.lang.String.*");
+      _builder.newLine();
+      _builder.append("import static extension java.lang.Integer.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("valueOf(1)");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      final XtendFile file = this.file(_string);
+      this._validationTestHelper.assertNoWarnings(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

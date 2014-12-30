@@ -843,4 +843,19 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		file.assertWarning(XIMPORT_DECLARATION, IMPORT_UNUSED, "java.lang.String")
 	}
 	
+	@Test
+	def void checkImportsNotMarkedAsUsedWhenTypeUnresolved() {
+		val file = '''
+			import static extension java.lang.String.*
+			import static extension java.lang.Integer.*
+
+			class C {
+				def m() {
+					valueOf(1)
+				}
+			}
+		'''.toString.file
+		file.assertNoWarnings(XIMPORT_DECLARATION,IMPORT_UNUSED)
+	}
+
 }
