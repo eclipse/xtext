@@ -60,8 +60,8 @@ class PortableURIsTest extends AbstractXtextTests {
 	}
 	
 	def checkFragmentBothDirections(EObject container, EObject child) {
-		val fragments = new PortableURIs()
-		val fragment = fragments.getFragment(container, child)
-		Assert.assertSame(child, fragments.getEObject(container, fragment))
+		val portableURIs = new PortableURIs()
+		val fragment = portableURIs.getFragment(container, child)
+		Assert.assertSame(child, portableURIs.getEObject(container, fragment))
 	}
 }
