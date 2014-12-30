@@ -71,14 +71,17 @@ public @interface TestAnnotation  {
 		public Annotated(String s1, String s2) {
 			this(s1 + s2);
 			method(new CharSequence() {
+				@Override
 				public CharSequence subSequence(int start, int end) {
 					return null;
 				}
+				@Override
 				@NestedAnnotation("method")
 				public int length() {
 					return 0;
 				}
 				
+				@Override
 				public char charAt(int index) {
 					return 0;
 				}
