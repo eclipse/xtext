@@ -658,7 +658,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 	/**
 	 * @since 2.4
 	 */
-	protected JvmAnnotationValue createAnnotationValue( ITypeBinding type, Object value) {
+	protected JvmAnnotationValue createAnnotationValue(ITypeBinding type, Object value) {
 		if (type == stringTypeBinding) {
 			return createStringAnnotationValue(value);
 		} else if (type == classTypeBinding) {
@@ -711,9 +711,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 			InternalEList<JvmEnumerationLiteral> values = (InternalEList<JvmEnumerationLiteral>)annotationValue.getValues();
 			if (value instanceof Object[]) {
 				for (Object element : (Object[])value) {
-					values.addUnique(createEnumLiteralProxy((IVariableBinding)element));
+					if (element instanceof IVariableBinding) {
+						values.addUnique(createEnumLiteralProxy((IVariableBinding)element));
+					}
 				}
-			} else {
+			} else if (value instanceof IVariableBinding) {
 				values.addUnique(createEnumLiteralProxy((IVariableBinding)value));
 			}
 		}
