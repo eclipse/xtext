@@ -37,6 +37,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	Bug440069Test.class,
 	Bug440951Test.class,
 	Bug443025Test.class,
+	Bug448017Test.class,
 	Bug450911Test.class,
 	Bug453271Test.class,
 	MemberFeatureCallProposalsTest.class
