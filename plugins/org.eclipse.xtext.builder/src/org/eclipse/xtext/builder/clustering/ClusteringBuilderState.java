@@ -334,7 +334,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 			}
 			sourceUris.add(uri);
 			// unload resources loaded from storage previously
-			Resource resource = resourceSet.getURIResourceMap().get(uri);
+			Resource resource = resourceSet.getResource(uri, false);
 			if (resource instanceof StorageAwareResource) {
 				if (((StorageAwareResource) resource).isLoadedFromStorage()) {
 					resource.unload();
