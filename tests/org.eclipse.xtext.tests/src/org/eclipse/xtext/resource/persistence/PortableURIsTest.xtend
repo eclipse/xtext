@@ -42,7 +42,7 @@ class PortableURIsTest extends AbstractXtextTests {
 		'''), null)
 		val extended = resourceA.contents.filter(Main).head.types.head.extends
 		val uri = EcoreUtil.getURI(extended)
-		val portableURI = resourceA.portableURIs.toPortableURI(resourceA, uri.trimFragment, uri.fragment)
+		val portableURI = resourceA.portableURIs.toPortableURI(resourceA, uri)
 		assertEquals(resourceA.URI, portableURI.trimFragment)
 		assertTrue(resourceA.portableURIs.isPortableURIFragment(portableURI.fragment))
 		assertSame(extended, resourceA.getEObject(portableURI.fragment))
