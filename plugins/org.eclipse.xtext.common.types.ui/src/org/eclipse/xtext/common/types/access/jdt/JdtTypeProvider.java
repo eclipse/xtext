@@ -9,21 +9,42 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.WorkingCopyOwner;
+import org.eclipse.jdt.core.compiler.CharOperation;
+import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jdt.core.search.SearchParticipant;
+import org.eclipse.jdt.core.search.SearchPattern;
+import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
+import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
+import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
+import org.eclipse.jdt.internal.core.search.IndexQueryRequestor;
+import org.eclipse.jdt.internal.core.search.PatternSearchJob;
+import org.eclipse.jdt.internal.core.search.indexing.IIndexConstants;
+import org.eclipse.jdt.internal.core.search.indexing.IndexManager;
+import org.eclipse.jdt.internal.core.search.matching.TypeDeclarationPattern;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -35,6 +56,7 @@ import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.util.Wrapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -242,12 +264,151 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			typeName = typeName.substring(lastDot + 1);
 			packageName = topLevelType.substring(0, lastDot);
 		}
+		
+		/*
+		 * IJavaProject.findType(pack, type, progressMonitor) would search for secondary types, too
+		 * but it turns out to be quite slow due to some waiting for a busy index. That's why we use
+		 * a more low level API to find the secondary types only if the type was not found as a primary
+		 * type.
+		 */
+		
+		// fast operation first: try to find top level types
 		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */);
+		if (type == null) {
+			// no luck, try again - this time look for secondary types
+			type = findSecondaryType(packageName, typeName);
+		}
 		if (type != null && !canLink(type.getFullyQualifiedName())) {
 			return null;
 		}
 		return type;
 	}
+	
+	/**
+	 * Searches a secondary type with the given name and package.
+	 * 
+	 * Secondary types are toplevel types with a name that does not match the name of the compilation unit.
+	 */
+	private IType findSecondaryType(String packageName, final String typeName)  throws JavaModelException {
+		IPackageFragmentRoot[] sourceFolders = getSourceFolders();
+		IndexManager indexManager = JavaModelManager.getIndexManager();
+		if (indexManager.awaitingJobsCount() > 0) { // still indexing - don't enter a busy wait loop but ask the source folders directly
+			for(IPackageFragmentRoot sourceFolder: sourceFolders) {
+				IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
+				if (packageFragment.exists()) {
+					ICompilationUnit[] units = packageFragment.getCompilationUnits();
+					for(ICompilationUnit unit: units) {
+						IType type = unit.getType(typeName);
+						if (type.exists()) {
+							return type;
+						}
+					}
+				}
+			}
+			return null;
+		}
+		
+		// code below is adapted from BasicSearchEnginge.searchAllSecondaryTypes
+		
+		// index is ready, query it for a secondary type 
+		final TypeDeclarationPattern pattern = new TypeDeclarationPattern(
+				packageName == null ? CharOperation.NO_CHAR : packageName.toCharArray(),
+				CharOperation.NO_CHAR_CHAR, // top level type - no enclosing type names
+				typeName.toCharArray(),
+				IIndexConstants.SECONDARY_SUFFIX,
+				SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE);
+
+		// Get working copy path(s). Store in a single string in case of only one to optimize comparison in requestor
+		final HashSet<String> workingCopyPaths = new HashSet<String>();
+		String workingCopyPath = null;
+		ICompilationUnit[] copies = JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false/*don't add primary WCs a second time*/);
+		final int copiesLength = copies == null ? 0 : copies.length;
+		if (copies != null) {
+			if (copiesLength == 1) {
+				ICompilationUnit singleWC = copies[0];
+				if (singleWC.getPackageDeclaration(packageName).exists()) {
+					IType result = singleWC.getType(typeName);
+					if (result.exists()) {
+						return result;
+					}
+				}
+				workingCopyPath = copies[0].getPath().toString();
+			} else {
+				for (int i = 0; i < copiesLength; i++) {
+					ICompilationUnit workingCopy = copies[i];
+					if (workingCopy.getPackageDeclaration(packageName).exists()) {
+						IType result = workingCopy.getType(typeName);
+						if (result.exists()) {
+							return result;
+						}
+					}
+					workingCopyPaths.add(workingCopy.getPath().toString());
+				}
+			}
+		}
+		final String singleWkcpPath = workingCopyPath;
+		final Wrapper<IType> result = Wrapper.forType(IType.class);
+
+		IndexQueryRequestor searchRequestor = new IndexQueryRequestor(){
+			@Override
+			public boolean acceptIndexMatch(String documentPath, SearchPattern indexRecord, SearchParticipant participant, AccessRuleSet access) {
+				// Filter unexpected types
+				switch (copiesLength) {
+					case 0:
+						break;
+					case 1:
+						if (singleWkcpPath == null) {
+							throw new IllegalStateException();
+						}
+						if (singleWkcpPath.equals(documentPath)) {
+							return true; // filter out *the* working copy
+						}
+						break;
+					default:
+						if (workingCopyPaths.contains(documentPath)) {
+							return true; // filter out working copies
+						}
+						break;
+				}
+				IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(documentPath));
+				ICompilationUnit unit = JavaCore.createCompilationUnitFrom(file);
+				IType type = unit.getType(typeName);
+				result.set(type);
+				return false;
+			}
+		};
+
+		try {
+			indexManager.performConcurrentJob(
+				new PatternSearchJob(
+					pattern,
+					BasicSearchEngine.getDefaultSearchParticipant(), // Java search only
+					BasicSearchEngine.createJavaSearchScope(sourceFolders),
+					searchRequestor),
+				IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH,
+				null);
+		} catch (OperationCanceledException oce) {
+			// do nothing
+		}
+		return result.get();
+	}
+
+	private IPackageFragmentRoot[] getSourceFolders() throws JavaModelException {
+		// Build scope using prereq projects but only source folders
+		IPackageFragmentRoot[] allRoots = javaProject.getAllPackageFragmentRoots();
+		int length = allRoots.length, size = 0;
+		IPackageFragmentRoot[] allSourceFolders = new IPackageFragmentRoot[length];
+		for (int i=0; i<length; i++) {
+			if (allRoots[i].getKind() == IPackageFragmentRoot.K_SOURCE) {
+				allSourceFolders[size++] = allRoots[i];
+			}
+		}
+		if (size < length) {
+			System.arraycopy(allSourceFolders, 0, allSourceFolders = new IPackageFragmentRoot[size], 0, size);
+		}
+		return allSourceFolders;
+	}
+	
 
 	private boolean canLink(String typeName) {
 		if (typeName == null) {

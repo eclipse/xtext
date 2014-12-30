@@ -11,6 +11,7 @@ Bug347739ThreeTypeParamsSuperSuper.java.txt
 Bug427098.java.txt
 Bug428340.java.txt
 Bug438740.java.txt
+Bug456328.java.txt
 ClassContainingEnum.java.txt
 ClassWithVarArgs.java.txt
 Concrete.java.txt

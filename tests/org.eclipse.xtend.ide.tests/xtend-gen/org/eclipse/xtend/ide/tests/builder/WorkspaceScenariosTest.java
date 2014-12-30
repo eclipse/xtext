@@ -277,7 +277,7 @@ public class WorkspaceScenariosTest {
       _builder.newLine();
       Pair<String, String> _mappedTo = Pair.<String, String>of("mypack/MyData.xtend", _builder.toString());
       final byte[] jarData = this.createJar(
-        Collections.<Pair<String, String>>unmodifiableList(CollectionLiterals.<Pair<String, String>>newArrayList(_mappedTo)), jarFilter);
+        Collections.<Pair<? extends String, ? extends String>>unmodifiableList(CollectionLiterals.<Pair<? extends String, ? extends String>>newArrayList(_mappedTo)), jarFilter);
       final IProject project = WorkbenchTestHelper.createPluginProject("my.project", "org.eclipse.xtext.xbase.lib");
       final IFile jarFile = project.getFile("mydependency.jar");
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(jarData);

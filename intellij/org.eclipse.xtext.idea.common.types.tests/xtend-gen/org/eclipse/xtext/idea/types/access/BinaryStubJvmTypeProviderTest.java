@@ -207,6 +207,14 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
     delegate.testBug428340();
   }
   
+  public void testBug456328_01() {
+    delegate.testBug456328_01();
+  }
+  
+  public void testBug456328_02() {
+    delegate.testBug456328_02();
+  }
+  
   public void testByteAnnotationValue_01() throws Exception {
     delegate.testByteAnnotationValue_01();
   }

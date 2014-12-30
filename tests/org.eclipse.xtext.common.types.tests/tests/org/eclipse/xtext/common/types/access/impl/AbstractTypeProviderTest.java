@@ -80,6 +80,7 @@ import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.Bug427098;
 import org.eclipse.xtext.common.types.testSetups.Bug428340;
+import org.eclipse.xtext.common.types.testSetups.Bug456328;
 import org.eclipse.xtext.common.types.testSetups.ClassContainingEnum;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.DeprecatedMembers;
@@ -3354,5 +3355,19 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			assertTrue(member.isSetDeprecated());
 			assertTrue(member.isDeprecated());
 		}
+	}
+	
+	@Test
+	public void testBug456328_01() {
+		String typeName = Bug456328.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+	}
+	
+	@Test
+	public void testBug456328_02() {
+		String typeName = Bug456328.class.getName() + "PackageVisible";
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
 	}
 }
