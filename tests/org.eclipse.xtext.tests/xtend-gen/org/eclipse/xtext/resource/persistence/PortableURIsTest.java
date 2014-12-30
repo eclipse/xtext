@@ -111,9 +111,9 @@ public class PortableURIsTest extends AbstractXtextTests {
   }
   
   public void checkFragmentBothDirections(final EObject container, final EObject child) {
-    final PortableURIs fragments = new PortableURIs();
-    final String fragment = fragments.getFragment(container, child);
-    EObject _eObject = fragments.getEObject(container, fragment);
+    final PortableURIs portableURIs = new PortableURIs();
+    final String fragment = portableURIs.getFragment(container, child);
+    EObject _eObject = portableURIs.getEObject(container, fragment);
     Assert.assertSame(child, _eObject);
   }
 }
