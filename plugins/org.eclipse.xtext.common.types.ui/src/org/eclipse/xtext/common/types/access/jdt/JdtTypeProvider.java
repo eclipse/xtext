@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -242,7 +243,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			typeName = typeName.substring(lastDot + 1);
 			packageName = topLevelType.substring(0, lastDot);
 		}
-		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */);
+		// we have to consider also secondary types thus we need to use the overload with progress monitor 
+		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */, (IProgressMonitor) null);
 		if (type != null && !canLink(type.getFullyQualifiedName())) {
 			return null;
 		}
