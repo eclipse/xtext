@@ -71,18 +71,16 @@ public class PortableURIsTest extends AbstractXtextTests {
       final Type extended = _head_1.getExtends();
       final URI uri = EcoreUtil.getURI(extended);
       PortableURIs _portableURIs = resourceA.getPortableURIs();
-      URI _trimFragment = uri.trimFragment();
-      String _fragment = uri.fragment();
-      final URI portableURI = _portableURIs.toPortableURI(resourceA, _trimFragment, _fragment);
+      final URI portableURI = _portableURIs.toPortableURI(resourceA, uri);
       URI _uRI = resourceA.getURI();
-      URI _trimFragment_1 = portableURI.trimFragment();
-      Assert.assertEquals(_uRI, _trimFragment_1);
+      URI _trimFragment = portableURI.trimFragment();
+      Assert.assertEquals(_uRI, _trimFragment);
       PortableURIs _portableURIs_1 = resourceA.getPortableURIs();
-      String _fragment_1 = portableURI.fragment();
-      boolean _isPortableURIFragment = _portableURIs_1.isPortableURIFragment(_fragment_1);
+      String _fragment = portableURI.fragment();
+      boolean _isPortableURIFragment = _portableURIs_1.isPortableURIFragment(_fragment);
       Assert.assertTrue(_isPortableURIFragment);
-      String _fragment_2 = portableURI.fragment();
-      EObject _eObject = resourceA.getEObject(_fragment_2);
+      String _fragment_1 = portableURI.fragment();
+      EObject _eObject = resourceA.getEObject(_fragment_1);
       Assert.assertSame(extended, _eObject);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

@@ -80,10 +80,18 @@ public class ResourceStorageWritable {
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
       final BinaryResourceImpl.EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(zipOut, _emptyMap) {
         public void writeURI(final URI uri, final String fragment) throws IOException {
+          final URI fullURI = uri.appendFragment(fragment);
+          URI _elvis = null;
           PortableURIs _portableURIs = storageAwareResource.getPortableURIs();
-          final URI portableURI = _portableURIs.toPortableURI(storageAwareResource, uri, fragment);
-          URI _trimFragment = portableURI.trimFragment();
-          String _fragment = portableURI.fragment();
+          URI _portableURI = _portableURIs.toPortableURI(storageAwareResource, fullURI);
+          if (_portableURI != null) {
+            _elvis = _portableURI;
+          } else {
+            _elvis = fullURI;
+          }
+          final URI uriToWrite = _elvis;
+          URI _trimFragment = uriToWrite.trimFragment();
+          String _fragment = uriToWrite.fragment();
           super.writeURI(_trimFragment, _fragment);
         }
       };

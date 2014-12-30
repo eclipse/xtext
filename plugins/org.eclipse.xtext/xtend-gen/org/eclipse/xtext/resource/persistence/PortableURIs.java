@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -26,12 +27,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Data;
-import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -61,15 +60,15 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class PortableURIs {
   @Data
   public static class PortableFragmentDescription {
-    private final String descriptionEClassName;
+    private final EClass descriptionEClass;
     
     private final QualifiedName descriptionQualifiedName;
     
     private final String descriptionRelativeFragment;
     
-    public PortableFragmentDescription(final String descriptionEClassName, final QualifiedName descriptionQualifiedName, final String descriptionRelativeFragment) {
+    public PortableFragmentDescription(final EClass descriptionEClass, final QualifiedName descriptionQualifiedName, final String descriptionRelativeFragment) {
       super();
-      this.descriptionEClassName = descriptionEClassName;
+      this.descriptionEClass = descriptionEClass;
       this.descriptionQualifiedName = descriptionQualifiedName;
       this.descriptionRelativeFragment = descriptionRelativeFragment;
     }
@@ -79,7 +78,7 @@ public class PortableURIs {
     public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ((this.descriptionEClassName== null) ? 0 : this.descriptionEClassName.hashCode());
+      result = prime * result + ((this.descriptionEClass== null) ? 0 : this.descriptionEClass.hashCode());
       result = prime * result + ((this.descriptionQualifiedName== null) ? 0 : this.descriptionQualifiedName.hashCode());
       result = prime * result + ((this.descriptionRelativeFragment== null) ? 0 : this.descriptionRelativeFragment.hashCode());
       return result;
@@ -95,10 +94,10 @@ public class PortableURIs {
       if (getClass() != obj.getClass())
         return false;
       PortableURIs.PortableFragmentDescription other = (PortableURIs.PortableFragmentDescription) obj;
-      if (this.descriptionEClassName == null) {
-        if (other.descriptionEClassName != null)
+      if (this.descriptionEClass == null) {
+        if (other.descriptionEClass != null)
           return false;
-      } else if (!this.descriptionEClassName.equals(other.descriptionEClassName))
+      } else if (!this.descriptionEClass.equals(other.descriptionEClass))
         return false;
       if (this.descriptionQualifiedName == null) {
         if (other.descriptionQualifiedName != null)
@@ -117,15 +116,15 @@ public class PortableURIs {
     @Pure
     public String toString() {
       ToStringBuilder b = new ToStringBuilder(this);
-      b.add("descriptionEClassName", this.descriptionEClassName);
+      b.add("descriptionEClass", this.descriptionEClass);
       b.add("descriptionQualifiedName", this.descriptionQualifiedName);
       b.add("descriptionRelativeFragment", this.descriptionRelativeFragment);
       return b.toString();
     }
     
     @Pure
-    public String getDescriptionEClassName() {
-      return this.descriptionEClassName;
+    public EClass getDescriptionEClass() {
+      return this.descriptionEClass;
     }
     
     @Pure
@@ -145,27 +144,34 @@ public class PortableURIs {
   private IGlobalScopeProvider globalScopeProvider;
   
   @Inject
-  private LazyURIEncoder lazyURIencoder;
+  private EPackage.Registry packageRegistry;
   
+  @Inject
+  private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+  
+  /**
+   * @return whether the given string is a portable URI fragment
+   */
   public boolean isPortableURIFragment(final String uriFragment) {
     return uriFragment.startsWith(PortableURIs.PORTABLE_SCHEME);
   }
   
+  /**
+   * Resolves a given portable URI fragment against the given resource.
+   * 
+   * @param resource the resource from which global scope to look up the EObject
+   * @param portableFragment the portable fragment pointing to the to be resolved EObject
+   * 
+   * @return the EObject for the given portableURIFragment
+   */
   public EObject resolve(final StorageAwareResource resource, final String portableFragment) {
     final PortableURIs.PortableFragmentDescription desc = this.fromFragmentString(portableFragment);
     final EReference mock = EcoreFactory.eINSTANCE.createEReference();
-    mock.setEType(EcorePackage.Literals.EOBJECT);
+    mock.setEType(desc.descriptionEClass);
     Predicate<IEObjectDescription> _alwaysTrue = Predicates.<IEObjectDescription>alwaysTrue();
     final IScope scope = this.globalScopeProvider.getScope(resource, mock, _alwaysTrue);
     Iterable<IEObjectDescription> _elements = scope.getElements(desc.descriptionQualifiedName);
-    final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-      public Boolean apply(final IEObjectDescription it) {
-        EClass _eClass = it.getEClass();
-        String _name = _eClass.getName();
-        return Boolean.valueOf(Objects.equal(_name, desc.descriptionEClassName));
-      }
-    };
-    final IEObjectDescription description = IterableExtensions.<IEObjectDescription>findFirst(_elements, _function);
+    final IEObjectDescription description = IterableExtensions.<IEObjectDescription>head(_elements);
     boolean _equals = Objects.equal(description, null);
     if (_equals) {
       return null;
@@ -175,117 +181,139 @@ public class PortableURIs {
     return this.getEObject(container, desc.descriptionRelativeFragment);
   }
   
-  public URI toPortableURI(final StorageAwareResource res, final URI uri, final String fragment) {
-    boolean _and = false;
-    URI _uRI = res.getURI();
-    boolean _equals = Objects.equal(_uRI, uri);
-    if (!_equals) {
-      _and = false;
-    } else {
-      boolean _isCrossLinkFragment = this.lazyURIencoder.isCrossLinkFragment(res, fragment);
-      _and = _isCrossLinkFragment;
+  /**
+   * Creates and returns a portable URI from the given resource to the targetURI.
+   * Returns <code>null</code> is no portable URI can be constructed, which is the case if the
+   * targetObject is not itself exported or is a child of an exported EObject.
+   * 
+   * @param sourceResource the resource from which the EObject should later be resolved
+   * @param targetURI the target URI that should be resolvable by the created portable URI
+   * 
+   * @return a portable URI or <code>null</code>
+   */
+  public URI toPortableURI(final StorageAwareResource sourceResource, final URI targetURI) {
+    ResourceSet _resourceSet = sourceResource.getResourceSet();
+    URI _trimFragment = targetURI.trimFragment();
+    Resource _resource = _resourceSet.getResource(_trimFragment, false);
+    EObject _eObject = null;
+    if (_resource!=null) {
+      String _fragment = targetURI.fragment();
+      _eObject=_resource.getEObject(_fragment);
     }
-    if (_and) {
-      final EObject result = res.getEObject(fragment);
-      boolean _or = false;
-      boolean _equals_1 = Objects.equal(result, null);
-      if (_equals_1) {
-        _or = true;
-      } else {
-        boolean _eIsProxy = result.eIsProxy();
-        _or = _eIsProxy;
-      }
-      if (_or) {
-        return uri.appendFragment(StorageAwareResource.UNRESOLVABLE_FRAGMENT);
-      } else {
-        final String portableFragment = this.getPortableURIFragment(result);
-        boolean _notEquals = (!Objects.equal(portableFragment, null));
-        if (_notEquals) {
-          URI _uRI_1 = res.getURI();
-          return _uRI_1.appendFragment(portableFragment);
-        }
-      }
-    }
-    ResourceSet _resourceSet = res.getResourceSet();
-    final Resource resource = _resourceSet.getResource(uri, false);
-    boolean _notEquals_1 = (!Objects.equal(resource, null));
-    if (_notEquals_1) {
-      final EObject obj = resource.getEObject(fragment);
-      boolean _notEquals_2 = (!Objects.equal(obj, null));
-      if (_notEquals_2) {
-        final String portableFragment_1 = this.getPortableURIFragment(obj);
-        boolean _notEquals_3 = (!Objects.equal(portableFragment_1, null));
-        if (_notEquals_3) {
-          URI _uRI_2 = res.getURI();
-          return _uRI_2.appendFragment(portableFragment_1);
-        }
-      }
-    }
-    return uri.appendFragment(fragment);
-  }
-  
-  protected String getPortableURIFragment(final EObject obj) {
-    Resource _eResource = obj.eResource();
-    final Resource res = _eResource;
-    boolean _matched = false;
-    if (!_matched) {
-      if (res instanceof XtextResource) {
-        _matched=true;
-        IResourceServiceProvider _resourceServiceProvider = ((XtextResource)res).getResourceServiceProvider();
-        IResourceDescription.Manager _resourceDescriptionManager = _resourceServiceProvider.getResourceDescriptionManager();
-        Resource _eResource_1 = obj.eResource();
-        final IResourceDescription desc = _resourceDescriptionManager.getResourceDescription(_eResource_1);
-        Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
-        final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-          public Boolean apply(final IEObjectDescription it) {
-            boolean _xblockexpression = false;
-            {
-              EObject _eObjectOrProxy = it.getEObjectOrProxy();
-              final EObject possibleContainer = EcoreUtil.resolve(_eObjectOrProxy, res);
-              boolean _or = false;
-              boolean _equals = Objects.equal(obj, possibleContainer);
-              if (_equals) {
-                _or = true;
-              } else {
-                boolean _isAncestor = EcoreUtil.isAncestor(obj, possibleContainer);
-                _or = _isAncestor;
-              }
-              _xblockexpression = _or;
-            }
-            return Boolean.valueOf(_xblockexpression);
-          }
-        };
-        final IEObjectDescription containerDesc = IterableExtensions.<IEObjectDescription>findFirst(_exportedObjects, _function);
-        boolean _notEquals = (!Objects.equal(containerDesc, null));
-        if (_notEquals) {
-          final String fragment = this.createPortableURIFragment(containerDesc, obj);
-          return fragment;
-        }
-      }
+    final EObject to = _eObject;
+    final URI result = this.toPortableURI(sourceResource, to);
+    boolean _notEquals = (!Objects.equal(result, null));
+    if (_notEquals) {
+      return result;
     }
     return null;
   }
   
-  protected String createPortableURIFragment(final IEObjectDescription desc, final EObject target) {
+  /**
+   * Creates and returns a portable URI from the global scope.
+   * Returns <code>null</code> is no portable URI can be constructed, which is the case if the
+   * targetObject is not itself exported or is a child of an exported EObject.
+   * 
+   * @param sourceResource the resource from which the EObject should later be resolved
+   * @param targetObject the target object that should be resolvable by the created portable URI
+   * 
+   * @return a portable URI or <code>null</code>
+   */
+  public URI toPortableURI(final StorageAwareResource sourceResource, final EObject targetObject) {
+    boolean _or = false;
+    boolean _equals = Objects.equal(targetObject, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _eIsProxy = targetObject.eIsProxy();
+      _or = _eIsProxy;
+    }
+    if (_or) {
+      URI _uRI = sourceResource.getURI();
+      return _uRI.appendFragment(StorageAwareResource.UNRESOLVABLE_FRAGMENT);
+    }
+    final String portableFragment = this.getPortableURIFragment(targetObject);
+    boolean _notEquals = (!Objects.equal(portableFragment, null));
+    if (_notEquals) {
+      URI _uRI_1 = sourceResource.getURI();
+      return _uRI_1.appendFragment(portableFragment);
+    }
+    return null;
+  }
+  
+  /**
+   * @return a portable URI fragment, or <code>null</code> if the give EObject isn't itself or is not contained in an exported EObjectDescription
+   */
+  protected String getPortableURIFragment(final EObject obj) {
+    URI _uRI = EcoreUtil.getURI(obj);
+    final IResourceServiceProvider serviceProvider = this.resourceServiceProviderRegistry.getResourceServiceProvider(_uRI);
+    IResourceDescription.Manager _resourceDescriptionManager = null;
+    if (serviceProvider!=null) {
+      _resourceDescriptionManager=serviceProvider.getResourceDescriptionManager();
+    }
+    IResourceDescription _resourceDescription = null;
+    if (_resourceDescriptionManager!=null) {
+      Resource _eResource = obj.eResource();
+      _resourceDescription=_resourceDescriptionManager.getResourceDescription(_eResource);
+    }
+    final IResourceDescription desc = _resourceDescription;
+    boolean _equals = Objects.equal(desc, null);
+    if (_equals) {
+      return null;
+    }
+    Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
+    final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      public Boolean apply(final IEObjectDescription it) {
+        boolean _xblockexpression = false;
+        {
+          EObject _eObjectOrProxy = it.getEObjectOrProxy();
+          Resource _eResource = obj.eResource();
+          final EObject possibleContainer = EcoreUtil.resolve(_eObjectOrProxy, _eResource);
+          boolean _or = false;
+          boolean _equals = Objects.equal(obj, possibleContainer);
+          if (_equals) {
+            _or = true;
+          } else {
+            boolean _isAncestor = EcoreUtil.isAncestor(obj, possibleContainer);
+            _or = _isAncestor;
+          }
+          _xblockexpression = _or;
+        }
+        return Boolean.valueOf(_xblockexpression);
+      }
+    };
+    final IEObjectDescription containerDesc = IterableExtensions.<IEObjectDescription>findFirst(_exportedObjects, _function);
+    boolean _notEquals = (!Objects.equal(containerDesc, null));
+    if (_notEquals) {
+      final PortableURIs.PortableFragmentDescription fragmentDescription = this.createPortableFragmentDescription(containerDesc, obj);
+      return this.toFragmentString(fragmentDescription);
+    }
+    return null;
+  }
+  
+  protected PortableURIs.PortableFragmentDescription createPortableFragmentDescription(final IEObjectDescription desc, final EObject target) {
     EObject _eObjectOrProxy = desc.getEObjectOrProxy();
     final EObject possibleContainer = EcoreUtil.resolve(_eObjectOrProxy, target);
     final String fragmentToTarget = this.getFragment(target, possibleContainer);
     EClass _eClass = desc.getEClass();
-    String _name = _eClass.getName();
     QualifiedName _qualifiedName = desc.getQualifiedName();
-    final PortableURIs.PortableFragmentDescription portableDescription = new PortableURIs.PortableFragmentDescription(_name, _qualifiedName, fragmentToTarget);
-    return this.toFragmentString(portableDescription);
+    return new PortableURIs.PortableFragmentDescription(_eClass, _qualifiedName, fragmentToTarget);
   }
   
   protected String toFragmentString(final PortableURIs.PortableFragmentDescription desc) {
-    final String typeName = desc.descriptionEClassName;
+    URI _uRI = EcoreUtil.getURI(desc.descriptionEClass);
+    String _string = _uRI.toString();
+    final String eclassUriAsString = URI.encodeFragment(_string, false);
     final List<String> segments = desc.descriptionQualifiedName.getSegments();
     String _join = IterableExtensions.join(segments, ":");
-    String uriFragment = ((((PortableURIs.PORTABLE_SCHEME + "#") + typeName) + "#") + _join);
+    String _encodeFragment = URI.encodeFragment(_join, false);
+    String uriFragment = ((((PortableURIs.PORTABLE_SCHEME + "#") + eclassUriAsString) + "#") + _encodeFragment);
     boolean _notEquals = (!Objects.equal(desc.descriptionRelativeFragment, null));
     if (_notEquals) {
       String _uriFragment = uriFragment;
-      uriFragment = (_uriFragment + ("#" + desc.descriptionRelativeFragment));
+      String _encodeFragment_1 = URI.encodeFragment(desc.descriptionRelativeFragment, false);
+      String _plus = ("#" + _encodeFragment_1);
+      uriFragment = (_uriFragment + _plus);
     }
     return uriFragment;
   }
@@ -295,19 +323,42 @@ public class PortableURIs {
     Iterable<String> _split = _on.split(fragmentString);
     final Iterator<String> segments = _split.iterator();
     segments.next();
-    final String eClassName = segments.next();
-    Splitter _on_1 = Splitter.on(":");
     String _next = segments.next();
-    Iterable<String> _split_1 = _on_1.split(_next);
+    String _decode = URI.decode(_next);
+    final URI eClassURI = URI.createURI(_decode);
+    URI _trimFragment = eClassURI.trimFragment();
+    String _string = _trimFragment.toString();
+    final EPackage ePackage = this.packageRegistry.getEPackage(_string);
+    Resource _eResource = null;
+    if (ePackage!=null) {
+      _eResource=ePackage.eResource();
+    }
+    EObject _eObject = null;
+    if (_eResource!=null) {
+      String _fragment = eClassURI.fragment();
+      _eObject=_eResource.getEObject(_fragment);
+    }
+    final EClass eClass = ((EClass) _eObject);
+    Splitter _on_1 = Splitter.on(":");
+    String _next_1 = segments.next();
+    String _decode_1 = URI.decode(_next_1);
+    Iterable<String> _split_1 = _on_1.split(_decode_1);
     List<String> _list = IterableExtensions.<String>toList(_split_1);
     final QualifiedName qname = QualifiedName.create(_list);
     String _xifexpression = null;
     boolean _hasNext = segments.hasNext();
     if (_hasNext) {
-      _xifexpression = segments.next();
+      String _next_2 = segments.next();
+      _xifexpression = URI.decode(_next_2);
     }
     final String fragment = _xifexpression;
-    return new PortableURIs.PortableFragmentDescription(eClassName, qname, fragment);
+    EClass _elvis = null;
+    if (eClass != null) {
+      _elvis = eClass;
+    } else {
+      _elvis = EcorePackage.Literals.EOBJECT;
+    }
+    return new PortableURIs.PortableFragmentDescription(_elvis, qname, fragment);
   }
   
   /**

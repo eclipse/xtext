@@ -53,8 +53,9 @@ import org.eclipse.xtend.lib.annotations.Data
 		zipOut.putNextEntry(new ZipEntry("emf-contents"))
 		val out = new BinaryResourceImpl.EObjectOutputStream(zipOut, emptyMap) {
 			override writeURI(URI uri, String fragment) throws IOException {
-				val portableURI = storageAwareResource.portableURIs.toPortableURI(storageAwareResource, uri, fragment)
-				super.writeURI(portableURI.trimFragment, portableURI.fragment)
+				val fullURI = uri.appendFragment(fragment)
+				val uriToWrite = storageAwareResource.portableURIs.toPortableURI(storageAwareResource, fullURI) ?: fullURI
+				super.writeURI(uriToWrite.trimFragment, uriToWrite.fragment)
 			}
 		}
 		try {
