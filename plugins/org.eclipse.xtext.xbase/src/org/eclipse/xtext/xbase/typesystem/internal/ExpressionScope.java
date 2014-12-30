@@ -343,29 +343,50 @@ public class ExpressionScope implements IExpressionScope {
 								continue;
 							}
 						}
-						String signature = getSignature(desc);
-						if (!signatures.containsKey(signature)) {
-							signatures.put(signature, desc);
-						}
+						recordDescription(desc, signatures);
 					}
 				} else {
-					String signature = getSignature(element);
-					if (!signatures.containsKey(signature)) {
-						signatures.put(signature, element);
-					}
+					recordDescription(element, signatures);
 				}
 			}
 			List<IIdentifiableElementDescription> extensionDescriptions = getFilteredExtensionDescriptions(extensionSignatures);
 			for(IIdentifiableElementDescription desc: extensionDescriptions) {
-				String signature = getSignature(desc);
-				if (!signatures.containsKey(signature)) {
-					signatures.put(signature, desc);
-				}
+				recordDescription(desc, signatures);
 			}
 			for(IEObjectDescription valid: signatures.values()) {
 				allElements.add(valid);
 				Maps2.putIntoListMap(valid.getName(), valid, allElementsByName);
 			}
+		}
+
+		protected void recordDescription(IEObjectDescription element, Map<String, IEObjectDescription> result) {
+			recordDescription(getSignature(element), element, result);
+		}
+
+		protected void recordDescription(String signature, IEObjectDescription element, Map<String, IEObjectDescription> result) {
+			IEObjectDescription known = result.get(signature);
+			if (known != null) {
+				if (!isAliased(known)) {
+					return;
+				}
+				if (isAliased(element)) {
+					return;
+				}
+			}
+			result.put(signature, element);
+		}
+
+		protected boolean isAliased(IEObjectDescription desc) {
+			String actualName = ((JvmIdentifiableElement) desc.getEObjectOrProxy()).getSimpleName();
+			String usedName = desc.getName().getFirstSegment();
+			if (actualName.equals(usedName)) {
+				return false;
+			}
+			return true;
+		}
+
+		protected void recordDescription(IIdentifiableElementDescription desc, Map<String, IEObjectDescription> result) {
+			recordDescription(getSignature(desc), desc, result);
 		}
 		
 		protected LightweightTypeReference getFirstParameterType(IIdentifiableElementDescription candidate) {
@@ -381,6 +402,9 @@ public class ExpressionScope implements IExpressionScope {
 			return owner.toPlainTypeReference(type).getRawTypeReference();
 		}
 
+		/**
+		 * Filters the extensions by their most specific first parameter.
+		 */
 		protected List<IIdentifiableElementDescription> getFilteredExtensionDescriptions(Map<String, List<IIdentifiableElementDescription>> extensionSignatures) {
 			List<IIdentifiableElementDescription> result = Lists.newArrayList();
 			for(List<IIdentifiableElementDescription> list: extensionSignatures.values()) {
