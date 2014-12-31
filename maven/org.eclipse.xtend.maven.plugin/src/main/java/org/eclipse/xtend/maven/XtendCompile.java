@@ -41,13 +41,6 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 	 */
 	private String tempDirectory;
 
-	/**
-	 * JDK compliance level.
-	 *
-	 * @parameter expression="${maven.compiler.target}" default-value="1.5"
-	 */
-	private String complianceLevel;
-
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
 		final String defaultValue = project.getBasedir() + "/src/main/generated-sources/xtend";
@@ -63,9 +56,7 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 			});
 		}
 		outputDirectory = resolveToBaseDir(outputDirectory);
-		XtendBatchCompiler xtend2BatchCompiler = xtendBatchCompilerProvider.get();
-		xtend2BatchCompiler.setComplianceLevel(complianceLevel);
-		compileSources(xtend2BatchCompiler);
+		compileSources(getConfiguredBatchCompiler());
 	}
 
 	private void compileSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {

@@ -53,6 +53,13 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 			return new File(filePath).exists();
 		}
 	};
+	
+	/**
+	 * JDK compliance level.
+	 *
+	 * @parameter expression="${maven.compiler.target}" default-value="1.5"
+	 */
+	private String complianceLevel;
 
 	/**
 	 * @component
@@ -96,10 +103,21 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	@Inject
 	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
 
+	@Deprecated
 	protected XtendBatchCompiler createXtendBatchCompiler() {
 		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
 		XtendBatchCompiler instance = injector.getInstance(XtendBatchCompiler.class);
+		instance.setComplianceLevel(complianceLevel);
 		return instance;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected XtendBatchCompiler getConfiguredBatchCompiler() {
+		XtendBatchCompiler xtend2BatchCompiler = xtendBatchCompilerProvider.get();
+		xtend2BatchCompiler.setComplianceLevel(complianceLevel);
+		return xtend2BatchCompiler;
 	}
 
 	protected void compile(XtendBatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,

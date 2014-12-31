@@ -55,7 +55,7 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 			});
 		}
 		testOutputDirectory = resolveToBaseDir(testOutputDirectory);
-		compileTestSources(xtendBatchCompilerProvider.get());
+		compileTestSources(getConfiguredBatchCompiler());
 	}
 
 	protected void compileTestSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
