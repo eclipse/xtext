@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 
@@ -51,6 +52,7 @@ class StandaloneBuilder {
 	@Accessors String classPathLookUpFilter
 	@Accessors boolean failOnValidationError = true
 	@Accessors boolean debugLog
+	@Accessors boolean writeStorageResources
 	@Accessors ClusteringConfig clusteringConfig = null
 
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
@@ -239,6 +241,13 @@ class StandaloneBuilder {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
 			registerCurrentSource(it.URI)
 			val access = URI.languageAccess
+			if (isWriteStorageResources) {
+				switch it {
+					StorageAwareResource case resourceStorageFacade != null : {
+						resourceStorageFacade.saveResource(it, access.fileSystemAccess)
+					}
+				}
+			}
 			access.generator.doGenerate(it, access.fileSystemAccess);
 		}
 	}
