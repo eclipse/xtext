@@ -16,12 +16,12 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedField
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
-import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
-import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
-import org.eclipse.xtext.xbase.typesystem.^override.IResolvedField
 
 class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
@@ -157,11 +157,14 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	protected def StyledString signature(String simpleName, JvmIdentifiableElement element) {
-		val returnType = typeResolver.resolveTypes(element).getActualType(element)
-		val returnTypeString = if (returnType == null)
-				"void"
-			else
-				returnType.humanReadableName
+		val returnType = if (element instanceof JvmOperation) {
+			element.returnType
+		} else if (element instanceof JvmField) {
+			element.type
+		} else {
+			null
+		}
+		val returnTypeString = uiStrings.referenceToString(returnType, "void")
 		var decoratedPart = " : " + returnTypeString
 		val typeParam = uiStrings.typeParameters(element) ?: ""
 		if (typeParam != "") {

@@ -281,16 +281,20 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   }
   
   protected StyledString signature(final String simpleName, final JvmIdentifiableElement element) {
-    IResolvedTypes _resolveTypes = this.typeResolver.resolveTypes(element);
-    final LightweightTypeReference returnType = _resolveTypes.getActualType(element);
-    String _xifexpression = null;
-    boolean _equals = Objects.equal(returnType, null);
-    if (_equals) {
-      _xifexpression = "void";
+    JvmTypeReference _xifexpression = null;
+    if ((element instanceof JvmOperation)) {
+      _xifexpression = ((JvmOperation)element).getReturnType();
     } else {
-      _xifexpression = returnType.getHumanReadableName();
+      JvmTypeReference _xifexpression_1 = null;
+      if ((element instanceof JvmField)) {
+        _xifexpression_1 = ((JvmField)element).getType();
+      } else {
+        _xifexpression_1 = null;
+      }
+      _xifexpression = _xifexpression_1;
     }
-    final String returnTypeString = _xifexpression;
+    final JvmTypeReference returnType = _xifexpression;
+    final String returnTypeString = this.uiStrings.referenceToString(returnType, "void");
     String decoratedPart = (" : " + returnTypeString);
     String _elvis = null;
     String _typeParameters = this.uiStrings.typeParameters(element);

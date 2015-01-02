@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -35,6 +37,12 @@ public class DefaultBatchTypeResolver extends AbstractBatchTypeResolver {
 	
 	@Override
 	protected IResolvedTypes doResolveTypes(/* @Nullable */ EObject object,  /* @Nullable */ CancelIndicator monitor) {
+		Resource resource = object.eResource();
+		if (resource instanceof StorageAwareResource) {
+			if (((StorageAwareResource) resource).isLoadedFromStorage()) {
+				throw new IllegalStateException("Type resolution is not supported on a storage-loaded resource : "+resource.getURI());
+			}
+		}
 		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
 		EObject nonArtificialObject = getNonArtificialObject(object);
 		// TODO end
