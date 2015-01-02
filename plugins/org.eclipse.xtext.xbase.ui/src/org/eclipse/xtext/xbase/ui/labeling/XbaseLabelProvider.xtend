@@ -19,9 +19,11 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedField
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 
 class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
@@ -32,6 +34,8 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	@Inject IBatchTypeResolver typeResolver
 
 	@Inject XbaseImageAdornments adornments
+	
+	@Inject CommonTypeComputationServices services
 	
 	@Inject
 	new(AdapterFactoryLabelProvider delegate) {
@@ -164,7 +168,12 @@ class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		} else {
 			null
 		}
-		val returnTypeString = uiStrings.referenceToString(returnType, "void")
+		val owner = new StandardTypeReferenceOwner(services, element);
+		val returnTypeString = if (returnType == null) {
+				"void"
+			} else {
+				owner.toLightweightTypeReference(returnType).humanReadableName
+			}
 		var decoratedPart = " : " + returnTypeString
 		val typeParam = uiStrings.typeParameters(element) ?: ""
 		if (typeParam != "") {

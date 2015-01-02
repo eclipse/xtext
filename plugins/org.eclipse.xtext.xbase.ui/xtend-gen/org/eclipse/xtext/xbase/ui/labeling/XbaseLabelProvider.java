@@ -30,6 +30,8 @@ import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseImages2;
 import org.eclipse.xtext.xbase.validation.UIStrings;
@@ -49,6 +51,9 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   
   @Inject
   private XbaseImageAdornments adornments;
+  
+  @Inject
+  private CommonTypeComputationServices services;
   
   @Inject
   public XbaseLabelProvider(final AdapterFactoryLabelProvider delegate) {
@@ -294,7 +299,16 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
       _xifexpression = _xifexpression_1;
     }
     final JvmTypeReference returnType = _xifexpression;
-    final String returnTypeString = this.uiStrings.referenceToString(returnType, "void");
+    final StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(this.services, element);
+    String _xifexpression_2 = null;
+    boolean _equals = Objects.equal(returnType, null);
+    if (_equals) {
+      _xifexpression_2 = "void";
+    } else {
+      LightweightTypeReference _lightweightTypeReference = owner.toLightweightTypeReference(returnType);
+      _xifexpression_2 = _lightweightTypeReference.getHumanReadableName();
+    }
+    final String returnTypeString = _xifexpression_2;
     String decoratedPart = (" : " + returnTypeString);
     String _elvis = null;
     String _typeParameters = this.uiStrings.typeParameters(element);
