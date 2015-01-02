@@ -77,6 +77,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 	
 	@Override
 	public void uninstall() {
+		storedPosition = null;
 		viewer = null;
 		super.uninstall();
 	}
