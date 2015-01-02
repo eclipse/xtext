@@ -19,8 +19,14 @@ public class JvmEnumerationTypeImplCustom extends JvmEnumerationTypeImpl {
 	@Override
 	public EList<JvmEnumerationLiteral> getLiterals() {
 		if (literals == null) {
+			@SuppressWarnings("serial")
 			EObjectResolvingEList<JvmEnumerationLiteral> list = new EObjectResolvingEList<JvmEnumerationLiteral>(
-					JvmEnumerationLiteral.class, this, TypesPackage.JVM_ENUMERATION_TYPE__LITERALS);
+					JvmEnumerationLiteral.class, this, TypesPackage.JVM_ENUMERATION_TYPE__LITERALS) {
+				@Override
+				protected boolean isNotificationRequired() {
+					return false;
+				}
+			};
 			for (JvmMember member : getMembers()) {
 				if (member instanceof JvmEnumerationLiteral)
 					list.add((JvmEnumerationLiteral) member);
