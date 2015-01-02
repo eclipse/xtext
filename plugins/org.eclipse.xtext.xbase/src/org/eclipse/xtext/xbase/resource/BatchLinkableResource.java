@@ -92,7 +92,6 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * lazy cross reference} and vanilla EMF cross references which again could lead to a
 	 * dead lock.
 	 */
-	@SuppressWarnings("sync-override")
 	@Override
 	public EObject getEObject(String uriFragment) {
 		synchronized (getLock()) {
