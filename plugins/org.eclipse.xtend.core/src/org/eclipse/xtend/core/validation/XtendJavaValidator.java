@@ -1536,8 +1536,10 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkDeclaredExceptions(XtendConstructor constructor){
-		JvmConstructor jvmType = associations.getInferredConstructor(constructor);
-		checkExceptions(constructor, jvmType.getExceptions(), XtendPackage.Literals.XTEND_EXECUTABLE__EXCEPTIONS);
+		JvmConstructor jvmConstructor = associations.getInferredConstructor(constructor);
+		if (jvmConstructor != null) {
+			checkExceptions(constructor, jvmConstructor.getExceptions(), XtendPackage.Literals.XTEND_EXECUTABLE__EXCEPTIONS);
+		}
 	}
 	
 	@Check
