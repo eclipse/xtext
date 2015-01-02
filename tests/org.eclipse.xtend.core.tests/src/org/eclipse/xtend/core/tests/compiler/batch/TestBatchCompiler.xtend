@@ -387,6 +387,22 @@ class TestBatchCompiler {
 		assertEquals(7, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
 		assertEquals(0, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith("._trace")].size)
 	}
+	
+	@Test
+	def void testCompileTestDataWithStorage() {
+		batchCompiler.writeStorageFiles = true
+		batchCompiler.compile
+		assertEquals(7, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
+		assertEquals(5, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".xtendbin")].size)
+	}
+
+	@Test
+	def void testCompileTestDataWithoutStorage() {
+		batchCompiler.writeStorageFiles = false
+		batchCompiler.compile
+		assertEquals(7, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
+		assertEquals(0, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".xtendbin")].size)
+	}
 
 	@Test
 	def void testCompileSymlinkedResource() {
