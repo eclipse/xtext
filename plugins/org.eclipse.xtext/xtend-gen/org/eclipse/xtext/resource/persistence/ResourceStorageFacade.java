@@ -105,15 +105,15 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
       ResourceSet _resourceSet_1 = resource.getResourceSet();
       URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
       URI _uRI = resource.getURI();
-      URI _binaryStrorageURI = this.getBinaryStrorageURI(_uRI);
+      URI _binaryStorageURI = this.getBinaryStorageURI(_uRI);
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      boolean _exists = _uRIConverter.exists(_binaryStrorageURI, _emptyMap);
+      boolean _exists = _uRIConverter.exists(_binaryStorageURI, _emptyMap);
       if (_exists) {
         ResourceSet _resourceSet_2 = resource.getResourceSet();
         URIConverter _uRIConverter_1 = _resourceSet_2.getURIConverter();
         URI _uRI_1 = resource.getURI();
-        URI _binaryStrorageURI_1 = this.getBinaryStrorageURI(_uRI_1);
-        _xifexpression = _uRIConverter_1.createInputStream(_binaryStrorageURI_1);
+        URI _binaryStorageURI_1 = this.getBinaryStorageURI(_uRI_1);
+        _xifexpression = _uRIConverter_1.createInputStream(_binaryStorageURI_1);
       } else {
         InputStream _xblockexpression = null;
         {
@@ -172,9 +172,9 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     ResourceSet _resourceSet_1 = resource.getResourceSet();
     URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
     URI _uRI = resource.getURI();
-    URI _binaryStrorageURI = this.getBinaryStrorageURI(_uRI);
+    URI _binaryStorageURI = this.getBinaryStorageURI(_uRI);
     Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-    boolean _exists = _uRIConverter.exists(_binaryStrorageURI, _emptyMap);
+    boolean _exists = _uRIConverter.exists(_binaryStorageURI, _emptyMap);
     if (_exists) {
       return true;
     }
@@ -201,28 +201,29 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   }
   
   protected String computeOutputPath(final StorageAwareResource resource) {
+    final URI srcContainerURI = this.getSourceContainerURI(resource);
     URI _uRI = resource.getURI();
-    final URI uri = this.getBinaryStrorageURI(_uRI);
-    URI _trimFileExtension = uri.trimFileExtension();
-    int _segmentCount = uri.segmentCount();
-    int _minus = (_segmentCount - 3);
-    URI _trimSegments = _trimFileExtension.trimSegments(_minus);
-    final String srcFolderPath = _trimSegments.toString();
-    String _string = uri.toString();
-    int _length = srcFolderPath.length();
-    int _plus = (_length + 1);
-    final String outputRelativePath = _string.substring(_plus);
+    final URI uri = this.getBinaryStorageURI(_uRI);
+    URI _deresolve = uri.deresolve(srcContainerURI, false, false, true);
+    final String outputRelativePath = _deresolve.path();
     return outputRelativePath;
+  }
+  
+  protected URI getSourceContainerURI(final StorageAwareResource resource) {
+    URI _uRI = resource.getURI();
+    URI _trimFileExtension = _uRI.trimFileExtension();
+    URI _trimSegments = _trimFileExtension.trimSegments(1);
+    return _trimSegments.appendSegment("");
   }
   
   public boolean hasStorageFor(final URI uri) {
     ExtensibleURIConverterImpl _extensibleURIConverterImpl = new ExtensibleURIConverterImpl();
-    URI _binaryStrorageURI = this.getBinaryStrorageURI(uri);
+    URI _binaryStorageURI = this.getBinaryStorageURI(uri);
     Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-    return _extensibleURIConverterImpl.exists(_binaryStrorageURI, _emptyMap);
+    return _extensibleURIConverterImpl.exists(_binaryStorageURI, _emptyMap);
   }
   
-  protected URI getBinaryStrorageURI(final URI sourceURI) {
+  protected URI getBinaryStorageURI(final URI sourceURI) {
     URI _trimSegments = sourceURI.trimSegments(1);
     String _lastSegment = sourceURI.lastSegment();
     String _plus = ("." + _lastSegment);

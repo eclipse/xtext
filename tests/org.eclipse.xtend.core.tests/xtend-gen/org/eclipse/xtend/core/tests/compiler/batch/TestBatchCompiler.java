@@ -867,6 +867,54 @@ public class TestBatchCompiler {
   }
   
   @Test
+  public void testCompileTestDataWithStorage() {
+    this.batchCompiler.setWriteStorageFiles(true);
+    this.batchCompiler.compile();
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
+    final FilenameFilter _function = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith(".java");
+      }
+    };
+    String[] _list = _file.list(_function);
+    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
+    Assert.assertEquals(7, _size);
+    File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
+    final FilenameFilter _function_1 = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith(".xtendbin");
+      }
+    };
+    String[] _list_1 = _file_1.list(_function_1);
+    int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
+    Assert.assertEquals(5, _size_1);
+  }
+  
+  @Test
+  public void testCompileTestDataWithoutStorage() {
+    this.batchCompiler.setWriteStorageFiles(false);
+    this.batchCompiler.compile();
+    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
+    final FilenameFilter _function = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith(".java");
+      }
+    };
+    String[] _list = _file.list(_function);
+    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
+    Assert.assertEquals(7, _size);
+    File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
+    final FilenameFilter _function_1 = new FilenameFilter() {
+      public boolean accept(final File dir, final String name) {
+        return name.endsWith(".xtendbin");
+      }
+    };
+    String[] _list_1 = _file_1.list(_function_1);
+    int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
+    Assert.assertEquals(0, _size_1);
+  }
+  
+  @Test
   public void testCompileSymlinkedResource() {
     File _file = new File("./batch-compiler-data/test-resources/");
     URI _uRI = _file.toURI();

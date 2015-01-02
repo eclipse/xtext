@@ -53,6 +53,8 @@ import org.eclipse.xtext.resource.clustering.DisabledClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.DynamicResourceClusteringPolicy;
 import org.eclipse.xtext.resource.clustering.IResourceClusteringPolicy;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -102,6 +104,9 @@ public class StandaloneBuilder {
   
   @Accessors
   private boolean debugLog;
+  
+  @Accessors
+  private boolean writeStorageResources;
   
   @Accessors
   private ClusteringConfig clusteringConfig = null;
@@ -421,6 +426,22 @@ public class StandaloneBuilder {
         this.registerCurrentSource(_uRI_1);
         URI _uRI_2 = it.getURI();
         final LanguageAccess access = this.languageAccess(_uRI_2);
+        boolean _isWriteStorageResources = this.isWriteStorageResources();
+        if (_isWriteStorageResources) {
+          boolean _matched = false;
+          if (!_matched) {
+            if (it instanceof StorageAwareResource) {
+              IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)it).getResourceStorageFacade();
+              boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
+              if (_notEquals) {
+                _matched=true;
+                IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)it).getResourceStorageFacade();
+                JavaIoFileSystemAccess _fileSystemAccess = access.getFileSystemAccess();
+                _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), _fileSystemAccess);
+              }
+            }
+          }
+        }
         IGenerator _generator = access.getGenerator();
         JavaIoFileSystemAccess _fileSystemAccess = access.getFileSystemAccess();
         _generator.doGenerate(it, _fileSystemAccess);
@@ -763,6 +784,15 @@ public class StandaloneBuilder {
   
   public void setDebugLog(final boolean debugLog) {
     this.debugLog = debugLog;
+  }
+  
+  @Pure
+  public boolean isWriteStorageResources() {
+    return this.writeStorageResources;
+  }
+  
+  public void setWriteStorageResources(final boolean writeStorageResources) {
+    this.writeStorageResources = writeStorageResources;
   }
   
   @Pure

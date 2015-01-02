@@ -42,6 +42,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -130,6 +131,10 @@ public class XtendBatchCompiler {
 	protected boolean deleteTempDirectory = true;
 	protected List<File> tempFolders = Lists.newArrayList();
 	protected boolean writeTraceFiles = true;
+	/**
+	 * @since 2.8
+	 */
+	protected boolean writeStorageFiles = false;
 	protected ClassLoader currentClassLoader = getClass().getClassLoader();
 
 	public void setCurrentClassLoader(ClassLoader currentClassLoader) {
@@ -155,7 +160,21 @@ public class XtendBatchCompiler {
 	public void setWriteTraceFiles(boolean writeTraceFiles) {
 		this.writeTraceFiles = writeTraceFiles;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public boolean isWriteStorageFiles() {
+		return writeStorageFiles;
+	}
 
+	/**
+	 * @since 2.8
+	 */
+	public void setWriteStorageFiles(boolean writeStorageFiles) {
+		this.writeStorageFiles = writeStorageFiles;
+	}
+	
 	@Inject
 	public void setResourceSetProvider(Provider<ResourceSet> resourceSetProvider) {
 		this.resourceSetProvider = resourceSetProvider;
@@ -493,13 +512,23 @@ public class XtendBatchCompiler {
 		for (Resource resource : resources) {
 			IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE
 					.getResourceServiceProvider(resource.getURI());
-			if (resourceServiceProvider != null) {
+			if (resourceServiceProvider != null && isSourceFile(resource)) {
 				IResourceValidator resourceValidator = resourceServiceProvider.getResourceValidator();
 				List<Issue> result = resourceValidator.validate(resource, CheckMode.ALL, null);
 				addAll(issues, result);
 			}
 		}
 		return issues;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected boolean isSourceFile(Resource resource) {
+		if (resource instanceof BatchLinkableResource) {
+			return !((BatchLinkableResource) resource).isLoadedFromStorage();
+		}
+		return false;
 	}
 
 	/**
@@ -605,7 +634,11 @@ public class XtendBatchCompiler {
 		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
 
 		for (Resource resource : newArrayList(resourceSet.getResources())) {
-			if (resource instanceof BatchLinkableResource) {
+			if (isSourceFile(resource)) {
+				if (isWriteStorageFiles()) {
+					StorageAwareResource storageAwareResource = (StorageAwareResource)resource;
+					storageAwareResource.getResourceStorageFacade().saveResource(storageAwareResource, javaIoFileSystemAccess);
+				}
 				generator.doGenerate(resource, javaIoFileSystemAccess);
 			}
 		}
