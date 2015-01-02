@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,8 @@ import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding;
+import org.eclipse.jdt.internal.compiler.lookup.LookupEnvironment;
 import org.eclipse.jdt.internal.compiler.problem.AbortCompilation;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -404,6 +407,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		if (binding instanceof ITypeBinding) {
 			createType.start();
 			ITypeBinding typeBinding = (ITypeBinding) binding;
+			setMayTolerateMissingType(typeBinding);
 			
 			JvmDeclaredType result = createType(jdtType, typeBinding);
 
@@ -415,6 +419,26 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType, JvmDeclaredType>
 		} else {
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()
 					+ "', but got '" + binding.toString() + "'.");
+		}
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void setMayTolerateMissingType(ITypeBinding typeBinding) {
+		try {
+			Field field = typeBinding.getClass().getDeclaredField("binding");
+			field.setAccessible(true);
+			Object object = field.get(typeBinding);
+			if (object instanceof BinaryTypeBinding) {
+				BinaryTypeBinding binaryTypeBinding = (BinaryTypeBinding) object;
+				Field declaredField = binaryTypeBinding.getClass().getDeclaredField("environment");
+				declaredField.setAccessible(true);
+				LookupEnvironment env = (LookupEnvironment) declaredField.get(binaryTypeBinding);
+				env.mayTolerateMissingType = true;
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 		}
 	}
 
