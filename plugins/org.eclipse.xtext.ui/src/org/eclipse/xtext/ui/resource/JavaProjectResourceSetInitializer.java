@@ -92,6 +92,8 @@ public class JavaProjectResourceSetInitializer implements IResourceSetInitialize
 			}
 		} catch (JavaModelException e) {
 			LOG.error(e.getMessage(), e);
+		} catch(NoClassDefFoundError e) { // guard against broken Eclipse installations / bogus project configuration
+			LOG.error(e.getMessage(), e);
 		}
 		return hashMap;
 	}
