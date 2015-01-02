@@ -55,8 +55,8 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 			if (inputStream != null)
 				return inputStream
 		}
-		val inputStream = if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStrorageURI, emptyMap)) {
-				resource.resourceSet.URIConverter.createInputStream(resource.URI.getBinaryStrorageURI)
+		val inputStream = if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStorageURI, emptyMap)) {
+				resource.resourceSet.URIConverter.createInputStream(resource.URI.getBinaryStorageURI)
 			} else {
 				val fsa = getFileSystemAccess(resource);
 				val outputRelativePath = computeOutputPath(resource)
@@ -89,7 +89,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		if (stateProvider!=null && stateProvider.getResourceStorageLoadable(resource) != null)
 			return true;
 		// check for next to original location, i.e. jars
-		if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStrorageURI, emptyMap)) {
+		if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStorageURI, emptyMap)) {
 			return true
 		}
 		
@@ -108,17 +108,21 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	}
 	
 	protected def computeOutputPath(StorageAwareResource resource) {
-		val uri = resource.URI.getBinaryStrorageURI
-		val srcFolderPath = uri.trimFileExtension.trimSegments(uri.segmentCount-3).toString
-		val outputRelativePath = uri.toString.substring(srcFolderPath.length+1)
+		val srcContainerURI = getSourceContainerURI(resource)
+		val uri = resource.URI.getBinaryStorageURI
+		val outputRelativePath = uri.deresolve(srcContainerURI, false, false, true).path
 		return outputRelativePath
 	}
 	
-	override hasStorageFor(URI uri) {
-		new ExtensibleURIConverterImpl().exists(getBinaryStrorageURI(uri), emptyMap())
+	def protected getSourceContainerURI(StorageAwareResource resource) {
+		resource.URI.trimFileExtension.trimSegments(1).appendSegment("")
 	}
 	
-	protected def getBinaryStrorageURI(URI sourceURI) {
+	override hasStorageFor(URI uri) {
+		new ExtensibleURIConverterImpl().exists(getBinaryStorageURI(uri), emptyMap())
+	}
+	
+	protected def getBinaryStorageURI(URI sourceURI) {
 		return sourceURI.trimSegments(1).appendSegment("."+sourceURI.lastSegment+'bin')
 	}
 	
