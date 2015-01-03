@@ -4,10 +4,14 @@
 package org.eclipse.xtext.builder.tests.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.JDTAwareSourceFolderProvider;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.resource.IContainer;
 
 /**
@@ -33,4 +37,12 @@ public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests
 	public Class<? extends EclipseSourceFolderProvider> bindEclipseSourceFolderProvider() {
 		return JDTAwareSourceFolderProvider.class;
 	}
+	
+	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+        return EclipseOutputConfigurationProvider.class;	
+    }	
+    	
+    public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {	
+        return EclipseResourceFileSystemAccess2.class;	
+    }
 }
