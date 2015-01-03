@@ -7,14 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.resource
 
+import com.google.inject.Inject
 import java.io.InputStream
 import java.io.OutputStream
+import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
+	
+	@Inject AbstractFileSystemSupport fileSystemSupport
+	@Inject extension FileLocations fileLocations
 	
 	override createResourceStorageLoadable(InputStream in) {
 		return new BatchLinkableResourceStorageLoadable(in)
@@ -22,6 +29,15 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 	
 	override createResourceStorageWritable(OutputStream out) {
 		return new BatchLinkableResourceStorageWritable(out)
+	}
+	
+	override protected getSourceContainerURI(StorageAwareResource resource) {
+		val path = fileSystemSupport.getPath(resource)
+		val sourceFolder = path.sourceFolder
+		if (sourceFolder != null) {
+			return resource.URI.trimSegments(sourceFolder.relativize(path).segments.size).appendSegment("")
+		}
+		return super.getSourceContainerURI(resource)
 	}
 	
 } 
