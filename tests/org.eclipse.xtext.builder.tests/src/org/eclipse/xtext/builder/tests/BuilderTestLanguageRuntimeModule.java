@@ -7,11 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.tests;
 
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
@@ -37,6 +43,19 @@ public class BuilderTestLanguageRuntimeModule extends org.eclipse.xtext.builder.
 	
 	public Class<? extends IGenerator> bindIGenerator() {
 		return MyGenerator.class;
+	}
+	
+	@Override
+	public Class<? extends XtextResource> bindXtextResource() {
+		return StorageAwareResource.class;
+	}
+	
+	public Class<? extends IResourceStorageFacade> bindIResourceStorageFacade() {
+		return ResourceStorageFacade.class;
+	}
+	
+	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
+		return JavaIoFileSystemAccess.class;
 	}
 	
 }

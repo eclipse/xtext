@@ -68,6 +68,26 @@ public class StandaloneBuilderTest {
 		unexpectedFile = getFile("src2-gen/Foo.txt");
 		assertFalse(unexpectedFile.exists());
 	}
+	
+	@Test
+	public void testWriteStorageResource() {
+		initBuilder(new TestLanguageConfiguration(true));
+		builder.setWriteStorageResources(true);
+		assertTrue(builder.launch());
+		
+		File generatedFile = getFile("src-gen/.Foo.buildertestlanguagebin");
+		assertTrue(generatedFile.exists());
+	}
+	
+	@Test
+	public void testNoWriteStorageResource() {
+		initBuilder(new TestLanguageConfiguration(true));
+		builder.setWriteStorageResources(false);
+		assertTrue(builder.launch());
+		
+		File generatedFile = getFile("src-gen/.Foo.buildertestlanguagebin");
+		assertFalse(generatedFile.exists());
+	}
 
 	@Test
 	public void testSameOutputFolder() {
