@@ -26,11 +26,11 @@ public class XtendContentAssistFactory extends DefaultContentAssistantFactory {
 	private XtendJavaDocContentAssistProcessor javaDocContentAssistProcessor;
 
 	@Override
-	protected void setContentAssistProcessor(ContentAssistant assistent, SourceViewerConfiguration configuration,
+	protected void setContentAssistProcessor(ContentAssistant assistant, SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
-		super.setContentAssistProcessor(assistent, configuration, sourceViewer);
-		assistent.setContentAssistProcessor(javaDocContentAssistProcessor,TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
-		assistent.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION);
-		assistent.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
+		super.setContentAssistProcessor(assistant, configuration, sourceViewer);
+		assistant.setContentAssistProcessor(javaDocContentAssistProcessor,TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
+		assistant.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION);
+		assistant.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
 	}
 }
