@@ -52,6 +52,14 @@ import com.google.inject.Provider;
  */
 public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguration {
 
+	/**
+	 * Position category for Xtext templates.
+	 * 
+	 * @see org.eclipse.jface.text.IDocument#addPositionCategory(String)
+	 * @since 2.8
+	 */
+	public static final String XTEXT_TEMPLATE_POS_CATEGORY = "xtext_template_position_category";
+	
 	@Inject
 	private IContentAssistantFactory contentAssistantFactory;
 
