@@ -11,11 +11,13 @@ import org.eclipse.xtend.core.tests.parsing.ParserTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
+import org.junit.Ignore;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @FinalFieldsConstructor
+@Ignore("Only here as a delegate")
 @SuppressWarnings("all")
 public class IdeaXtendParserTest extends ParserTest {
   private final ModelChecker modelChecker;

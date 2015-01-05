@@ -1,22 +1,12 @@
 package org.eclipse.xtext.idea.tests.parsing;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.impl.JavaAwareProjectJdkTableImpl;
 import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.LanguageLevelModuleExtension;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.pom.java.LanguageLevel;
-import com.intellij.psi.PsiFile;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import javax.inject.Provider;
@@ -28,10 +18,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.BaseXtextASTFactory;
-import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.resource.IResourceSetProvider;
 import org.eclipse.xtext.idea.resource.PsiToEcoreTransformator;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
+import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.idea.tests.parsing.XtextResourceAsserts;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -43,23 +33,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
-public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase implements ModelChecker {
-  public final static DefaultLightProjectDescriptor JAVA_INTERNAL = new DefaultLightProjectDescriptor() {
-    public Sdk getSdk() {
-      JavaAwareProjectJdkTableImpl _instanceEx = JavaAwareProjectJdkTableImpl.getInstanceEx();
-      return _instanceEx.getInternalJdk();
-    }
-    
-    public void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
-      final LanguageLevelModuleExtension languageLevelModuleExtension = model.<LanguageLevelModuleExtension>getModuleExtension(LanguageLevelModuleExtension.class);
-      boolean _notEquals = (!Objects.equal(languageLevelModuleExtension, null));
-      if (_notEquals) {
-        languageLevelModuleExtension.setLanguageLevel(LanguageLevel.JDK_1_6);
-      }
-      LibraryUtil.addXbaseLibrary(model);
-    }
-  };
-  
+public class AbstractModelTestCase extends LightToolingTest implements ModelChecker {
   @Inject
   @Accessors(AccessorType.PROTECTED_GETTER)
   private BaseXtextASTFactory astFactory;
@@ -81,25 +55,12 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
   @Extension
   private XtextResourceAsserts xtextResourceAsserts;
   
-  private final LanguageFileType fileType;
-  
   public AbstractModelTestCase(final LanguageFileType fileType) {
-    this.fileType = fileType;
-    IXtextLanguage _xtextLanguage = this.getXtextLanguage();
-    _xtextLanguage.injectMembers(this);
+    super(fileType);
   }
   
-  protected void setUp() throws Exception {
-    super.setUp();
-  }
-  
-  protected IXtextLanguage getXtextLanguage() {
-    Language _language = this.fileType.getLanguage();
-    return ((IXtextLanguage) _language);
-  }
-  
-  protected LightProjectDescriptor getProjectDescriptor() {
-    return AbstractModelTestCase.JAVA_INTERNAL;
+  protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
+    LibraryUtil.addXbaseLibrary(model);
   }
   
   public <T extends EObject> T checkModel(final String code, final boolean validate) {
@@ -119,7 +80,7 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
   }
   
   protected void checkModel(final String code) {
-    this.myFixture.configureByText(this.fileType, code);
+    this.configureByText(code);
     final XtextResource actualResource = this.getActualResource();
     final XtextResource expectedResource = this.createExpectedResource();
     this.xtextResourceAsserts.assertResource(expectedResource, actualResource);
@@ -132,7 +93,7 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
   }
   
   protected XtextResource createExpectedResource() {
-    Project _project = this.myFixture.getProject();
+    Project _project = this.getProject();
     ResourceSet resourceSet = this.resourceSetProvider.get(_project);
     BaseXtextFile _xtextFile = this.getXtextFile();
     VirtualFile _virtualFile = _xtextFile.getVirtualFile();
@@ -155,11 +116,6 @@ public class AbstractModelTestCase extends LightCodeInsightFixtureTestCase imple
       }
     }
     return resource;
-  }
-  
-  protected BaseXtextFile getXtextFile() {
-    PsiFile _file = this.myFixture.getFile();
-    return ((BaseXtextFile) _file);
   }
   
   @Pure

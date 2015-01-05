@@ -4,8 +4,10 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.parser.XbaseParserTest;
+import org.junit.Ignore;
 
 @FinalFieldsConstructor
+@Ignore("Only here as a delegate")
 @SuppressWarnings("all")
 public class IdeaXbaseParserTest extends XbaseParserTest {
   private final ModelChecker expresssionChecker;
