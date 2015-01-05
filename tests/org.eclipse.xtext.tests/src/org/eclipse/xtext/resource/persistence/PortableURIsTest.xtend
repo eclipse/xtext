@@ -7,16 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.persistence
 
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EcorePackage
-import org.junit.Assert
-import org.junit.Test
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.linking.langATestLanguage.Main
-import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.junit.Assert
+import org.junit.Test
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -47,6 +49,33 @@ class PortableURIsTest extends AbstractXtextTests {
 		assertTrue(resourceA.portableURIs.isPortableURIFragment(portableURI.fragment))
 		assertSame(extended, resourceA.getEObject(portableURI.fragment))
 	}
+	
+	@Test def void testPortableReferenceDescriptions() {
+		val resourceSet = get(XtextResourceSet)
+		val resourceA = resourceSet.createResource(URI.createURI("hubba:/bubba.langatestlanguage")) as StorageAwareResource
+		val resourceB = resourceSet.createResource(URI.createURI("hubba:/bubba2.langatestlanguage")) as StorageAwareResource
+		resourceB.load(getAsStream('''
+			type B
+		'''), null)
+		resourceA.load(getAsStream('''
+			import 'hubba:/bubba2.langatestlanguage'
+			
+			type A extends B
+		'''), null)
+		val bout = new ByteArrayOutputStream
+		val writable = resourceA.resourceStorageFacade.createResourceStorageWritable(bout)
+		writable.writeResource(resourceA)
+		
+		val loadable = resourceA.resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))
+		
+		val resourceC = resourceSet.createResource(URI.createURI("hubba:/bubba3.langatestlanguage")) as StorageAwareResource
+		resourceC.load(loadable)
+		
+		val refDesc = resourceC.resourceDescription.referenceDescriptions.head
+		assertSame((resourceB.contents.head as Main).types.head, resourceSet.getEObject(refDesc.targetEObjectUri, false))
+		assertSame((resourceC.contents.head as Main).types.head, resourceSet.getEObject(refDesc.sourceEObjectUri, false))
+	}
+	
 	
 	@Test def void testEObjectRelativeFragments() {
 		checkFragmentBothDirections(EcorePackage.eINSTANCE, EcorePackage.eINSTANCE.EAnnotation_Details)
