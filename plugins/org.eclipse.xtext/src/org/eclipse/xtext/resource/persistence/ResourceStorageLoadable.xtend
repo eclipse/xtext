@@ -9,11 +9,11 @@ package org.eclipse.xtext.resource.persistence
 
 import java.io.IOException
 import java.io.InputStream
+import java.io.ObjectInputStream
 import java.util.zip.ZipInputStream
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
 import org.eclipse.xtend.lib.annotations.Data
-import java.io.ObjectInputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API

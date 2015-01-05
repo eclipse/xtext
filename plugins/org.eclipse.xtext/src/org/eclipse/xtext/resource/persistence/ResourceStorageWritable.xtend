@@ -71,7 +71,8 @@ import org.eclipse.xtend.lib.annotations.Data
 	protected def void writeResourceDescription(StorageAwareResource resource, ZipOutputStream zipOut) {
 		zipOut.putNextEntry(new ZipEntry("resource-description"))
 		val description = resource.resourceServiceProvider.resourceDescriptionManager.getResourceDescription(resource);
-		val serializableDescription = SerializableResourceDescription.createCopy(description) 
+		val serializableDescription = SerializableResourceDescription.createCopy(description)
+		convertExternalURIsToPortableURIs(serializableDescription, resource) 
 		val out = new ObjectOutputStream(zipOut);
 		try {
 			out.writeObject(serializableDescription);
@@ -80,4 +81,13 @@ import org.eclipse.xtend.lib.annotations.Data
 		}
 		zipOut.closeEntry
 	}
+	
+	def protected void convertExternalURIsToPortableURIs(SerializableResourceDescription description, StorageAwareResource resource) {
+		for (ref : description.referenceDescriptions) {
+			if (ref.targetEObjectUri.trimFragment != resource.URI) {
+				(ref as SerializableReferenceDescription).targetEObjectUri = resource.portableURIs.toPortableURI(resource, ref.targetEObjectUri)
+			}
+		}
+	}
+	
 }
