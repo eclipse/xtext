@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
+import java.util.Arrays;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -20,7 +22,6 @@ import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.ITokenScanner;
-import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
@@ -32,6 +33,9 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
+import org.eclipse.xtext.ide.editor.bracketmatching.BracePair;
+import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
+import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
@@ -41,6 +45,7 @@ import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.DispatchingProvider;
+import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.ui.containers.ContainerStateProvider;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
@@ -54,6 +59,7 @@ import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.bracketmatching.BracePairMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalPostProcessor;
@@ -187,9 +193,17 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IPresentationRepairer> bindIPresentationRepairer() {
 		return PresentationRepairer.class;
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@SingletonBinding
+	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
+		return DefaultBracePairProvider.class;
+	}
 
 	public ICharacterPairMatcher bindICharacterPairMatcher() {
-		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']' });
+		return new BracePairMatcher();
 	}
 
 	public Class<? extends ITokenScanner> bindITokenScanner() {
