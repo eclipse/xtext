@@ -523,7 +523,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			error("Couldn't find a JDK 1.5 or higher on the project's classpath.", xtendFile, XTEND_FILE__PACKAGE,
 					IssueCodes.JDK_NOT_ON_CLASSPATH);
 		} else if (typeReferences.findDeclaredType(ToStringBuilder.class, xtendFile) == null) {
-			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.7.0 or higher on the project's classpath.",
+			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.8.0 or higher on the project's classpath.",
 					xtendFile, XTEND_FILE__PACKAGE, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
