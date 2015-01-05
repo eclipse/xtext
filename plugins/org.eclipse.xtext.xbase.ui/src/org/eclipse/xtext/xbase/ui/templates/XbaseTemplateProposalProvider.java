@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.templates;
 
-import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateContextType;
@@ -35,7 +34,6 @@ public class XbaseTemplateProposalProvider extends DefaultTemplateProposalProvid
 
 	@Override
 	protected TemplateContext doCreateTemplateContext(TemplateContextType contextType, ContentAssistContext context) {
-		return factory.create(contextType, context.getDocument(), new Position(context.getReplaceRegion().getOffset(),
-				context.getReplaceRegion().getLength()), context, getScopeProvider());
+		return factory.create(contextType, context.getDocument(), createPosition(context), context, getScopeProvider());
 	}
 }
