@@ -16,10 +16,12 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.common.types.xtext.ui.ProjectAwareResourceDescriptionsProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -28,10 +30,13 @@ import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.shared.contribution.ISharedStateContributionRegistry;
+import org.eclipse.xtext.ui.shared.internal.Activator;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Binder;
 import com.google.inject.Provider;
+import com.google.inject.Scopes;
 
 public class SharedStateModule extends AbstractGenericModule {
 
@@ -133,6 +138,30 @@ public class SharedStateModule extends AbstractGenericModule {
 				}
 			});
 		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	public void configureResourceDescriptionsProvider(Binder binder) {
+		if (Activator.isJavaEnabled()) {
+			binder.install(new ResourceDescriptionsProviderModule());
+		} else {
+			binder.bind(ResourceDescriptionsProvider.class).in(Scopes.SINGLETON);
+		}
+	}
+	
+	/*
+	 * Extracted to an own static class to get rid of the dependency to the ProjectAwareResourceDescriptionsProvider
+	 * from the SharedStateModule
+	 */
+	private static class ResourceDescriptionsProviderModule extends AbstractModule {
+
+		@Override
+		protected void configure() {
+			bind(ResourceDescriptionsProvider.class).to(ProjectAwareResourceDescriptionsProvider.class).in(Scopes.SINGLETON);
+		}
+		
 	}
 
 }
