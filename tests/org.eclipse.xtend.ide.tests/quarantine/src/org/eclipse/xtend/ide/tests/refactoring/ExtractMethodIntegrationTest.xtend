@@ -105,8 +105,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				}
 				
 				def int bar() {
-					var x = 1
-					x
+					1
 				}
 			}
 		''')
@@ -128,8 +127,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				}
 				
 				def int bar() {
-					val x = 1
-					x
+					1
 				}
 			}
 		''')
@@ -952,6 +950,70 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					'«»''
 					x	«'«'»1«'»'»'«»''
 				
+			}
+		''')
+	}
+
+	@Test def test_Bug_453376() {
+		'''
+			class Foo {
+				def foo() {
+					$var x = 1$
+					var z = x
+					var y = x
+				}
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo() {
+					var x = bar()
+					var z = x
+					var y = x
+				}
+
+				def bar() {
+					1
+				}
+			}
+		''')
+	}
+
+	@Test def test_Bug_453376_2() {
+		'''
+			class Foo {
+				def foo() {
+					$val x = 1$
+				}
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo() {
+					bar()
+				}
+
+				def bar() {
+					val x = 1
+				}
+			}
+		''')
+	}
+
+		@Test def test_Bug_453376_3() {
+		'''
+			class Foo {
+				def foo() {
+					val x = $1$
+				}
+			}
+		'''.assertAfterExtract([], '''
+			class Foo {
+				def foo() {
+					val x = bar()
+				}
+
+				def bar() {
+					1
+				}
 			}
 		''')
 	}

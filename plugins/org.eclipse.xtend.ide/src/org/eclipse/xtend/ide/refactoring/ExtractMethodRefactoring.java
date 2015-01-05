@@ -81,6 +81,7 @@ import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -165,18 +166,18 @@ public class ExtractMethodRefactoring extends Refactoring {
 
 	private boolean doSave;
 	
-	public boolean initialize(XtextEditor editor, List<XExpression> expressions, boolean doSave) {
-		if(expressions.isEmpty() || editor.getDocument() == null)
+	public boolean initialize(XtextEditor editor, List<XExpression> selectedExpressions, boolean doSave) {
+		if(selectedExpressions.isEmpty() || editor.getDocument() == null)
 			return false;
 		this.document = editor.getDocument();
 		this.doSave = doSave;
 		this.editor = editor;
-		this.expressions = expressions;
-		this.firstExpression = expressions.get(0); 
-		this.lastExpression = expressions.get(expressions.size()-1);
+		this.expressions = calculateExpressions(selectedExpressions);
+		this.firstExpression = this.expressions.get(0);
+		this.originalMethod = EcoreUtil2.getContainerOfType(firstExpression, XtendFunction.class);
+		this.lastExpression = this.expressions.get(this.expressions.size()-1);
 		this.resourceURI = EcoreUtil2.getPlatformResourceOrNormalizedURI(firstExpression).trimFragment();
 		this.xtendClass = EcoreUtil2.getContainerOfType(firstExpression, XtendClass.class);
-		this.originalMethod = EcoreUtil2.getContainerOfType(firstExpression, XtendFunction.class);
 		if (xtendClass == null || originalMethod == null)
 			return false;
 		this.visibility = originalMethod.getVisibility();
@@ -186,6 +187,31 @@ public class ExtractMethodRefactoring extends Refactoring {
 		nameUtil.setFeatureScopeContext(successorExpression);
 		rewriter = rewriterFactory.create(document, (XtextResource) firstExpression.eResource());
 		return true;
+	}
+
+	protected List<XExpression> calculateExpressions(final List<XExpression> expressions) {
+		final XExpression firstExpression = expressions.get(0);
+		// If there is a XVariableDeclaration selected and there is a usage of that variable outside of the selected expressions, we need to take the right side
+		// instead of the complete XVariableDeclaration
+		if(expressions.size() == 1 && firstExpression instanceof XVariableDeclaration){
+			final XtendFunction originalMethod = EcoreUtil2.getContainerOfType(firstExpression, XtendFunction.class);
+			for (final EObject element : Iterables.filter(EcoreUtil2.eAllContents(originalMethod.getExpression()), new Predicate<EObject>() {
+				@Override
+				public boolean apply(EObject input) {
+					return !EcoreUtil.isAncestor(expressions, input);
+				}
+			}
+			)){
+				if (element instanceof XFeatureCall) {
+					XFeatureCall featureCall = (XFeatureCall) element;
+					JvmIdentifiableElement feature = featureCall.getFeature();
+					if(EcoreUtil.isAncestor(expressions, feature)){
+						return singletonList(((XVariableDeclaration) firstExpression).getRight());
+					}
+				}
+			}
+		}
+		return expressions;
 	}
 
 	@Override
