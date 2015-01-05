@@ -1,4 +1,11 @@
-package org.eclipse.xtend.ide.builder;
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -13,6 +20,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * Resource descriptions implementation that allows to filter a delegate instance
+ * based on the URI of the resource description.
+ * 
+ * @since 2.8
+ */
 @Data
 @SuppressWarnings("all")
 public class FilteringResourceDescriptions implements IResourceDescriptions {
@@ -88,7 +101,8 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   }
   
   public boolean isEmpty() {
-    return this.delegate.isEmpty();
+    Iterable<IResourceDescription> _allResourceDescriptions = this.getAllResourceDescriptions();
+    return IterableExtensions.isEmpty(_allResourceDescriptions);
   }
   
   public FilteringResourceDescriptions(final IResourceDescriptions delegate, final Function1<? super URI, ? extends Boolean> filter) {

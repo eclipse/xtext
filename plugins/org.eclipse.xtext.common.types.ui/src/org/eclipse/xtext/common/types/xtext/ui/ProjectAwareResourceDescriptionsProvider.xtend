@@ -1,4 +1,11 @@
-package org.eclipse.xtend.ide.builder
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.common.types.xtext.ui
 
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
@@ -12,7 +19,15 @@ import org.eclipse.xtext.resource.CompilerPhases
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 
-class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
+/**
+ * This specialization of the {@link ResourceDescriptionsProvider} filters
+ * locally defined elements from the resource descriptions that are made available
+ * during the indexing phase.
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.8
+ */
+class ProjectAwareResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	
 	@Inject IJavaProjectProvider projectProvider
 	@Inject CompilerPhases compilerPhases
@@ -23,22 +38,28 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	 */
 	override getResourceDescriptions(ResourceSet resourceSet) {
 		val result = super.getResourceDescriptions(resourceSet)
-		val project = projectProvider.getJavaProject(resourceSet)
 		if (compilerPhases.isIndexing(resourceSet)) {
+			val javaProject = projectProvider.getJavaProject(resourceSet)
 			// during indexing we don't want to see any local files
-			val encodedProjectName = URI.encodeSegment(project.project.name, true)
-			return new FilteringResourceDescriptions(result, [ uri |
-				// we expect platform://resource URIs here, where the second segment denotes the project's name.
-				if (uri == null || uri.segmentCount<2)
+			val encodedProjectName = URI.encodeSegment(javaProject.elementName, true)
+			return new FilteringResourceDescriptions(result) [ uri |
+				// we expect platform:/resource URIs here, where the second segment denotes the project's name.
+				if (uri == null || uri.segmentCount<2 || !uri.isPlatformResource)
 					return false
 				return uri.segment(1) != encodedProjectName
-			])
+			]
 		} else {
 			return result
 		}
 	}
 }
 
+/**
+ * Resource descriptions implementation that allows to filter a delegate instance
+ * based on the URI of the resource description.
+ * 
+ * @since 2.8
+ */
 @Data class FilteringResourceDescriptions implements IResourceDescriptions {
 	
 	IResourceDescriptions delegate
@@ -76,7 +97,8 @@ class XtendResourceDescriptionsProvider extends ResourceDescriptionsProvider {
 	}
 	
 	override isEmpty() {
-		delegate.empty
+		allResourceDescriptions.empty
 	}
 	
 }
+
