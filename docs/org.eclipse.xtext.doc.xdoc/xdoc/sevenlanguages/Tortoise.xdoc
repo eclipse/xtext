@@ -232,7 +232,7 @@ code[Xtend][
 section:tortoise_additons[Literal Classes]
 
 To make the static methods and fields of codeRef[java.lang.Math] and codeRef[org.eclipse.draw2d.ColorConstants]
-callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedFeatures]:
+callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes]:
 
 code[Xtend][
 class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedFeatures {

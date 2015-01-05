@@ -1,0 +1,331 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Little Tortoise</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="tortoise"></a>
+<h1>Little Tortoise</h1>
+<p>
+Do you remember the programming language <a href="http://en.wikipedia.org/wiki/Logo_%28programming_language%29">Logo</a>? 
+Logo was used in computer science classes to teach children how to program. In fact, it was a adaptation of LISP!
+But the remarkable part was the so-called <em>turtle</em>, a graphical cursor that can be given commands to move and turn, 
+thereby drawing lines.
+</p>
+<p>
+<div class="image" >
+<img src="images/tortoise_screenshot.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<p>
+The goal is a language to control a turtle drawing an image. Technically, this example will teach you how to adapt 
+and use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter" >XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a> for your own languages.  
+</p>
+<a name="tortoise_solution"></a>
+<h2>Overview</h2>
+<p>
+We have built a language that allows to define <em>Programs</em> and <em>SubPrograms</em>. Each of these has a body,
+which can contain any number of expressions. In addition to the standard Xbase expressions, we are able
+to issue commands to the tortoise. Here is an example explaining the concepts in comments:
+ 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;Program:&nbsp;Haus&nbsp;vom&nbsp;Nikolaus<br/>
+</span><span class="keyword">begin</span><br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;length&nbsp;=&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;local&nbsp;variable<br/>
+</span>&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;diagonal&nbsp;=&nbsp;length&nbsp;*&nbsp;sqrt(2)&nbsp;<span class="comment">//&nbsp;all&nbsp;Math.*&nbsp;methods&nbsp;are&nbsp;available<br/>
+</span>&nbsp;&nbsp;lineWidth&nbsp;=&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;assignment&nbsp;of&nbsp;a&nbsp;property<br/>
+</span>&nbsp;&nbsp;square(length)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;call&nbsp;to&nbsp;a&nbsp;SubProgram<br/>
+</span>&nbsp;&nbsp;turnRight(45)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;call&nbsp;to&nbsp;a&nbsp;command&nbsp;method<br/>
+</span>&nbsp;&nbsp;lineColor&nbsp;=&nbsp;blue&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;all&nbsp;ColorConstants.*&nbsp;are&nbsp;available<br/>
+</span>&nbsp;&nbsp;forward(diagonal)<br/>
+&nbsp;&nbsp;turnLeft(90)<br/>
+&nbsp;&nbsp;lineColor&nbsp;=&nbsp;red<br/>
+&nbsp;&nbsp;forward(diagonal&nbsp;/&nbsp;2)<br/>
+&nbsp;&nbsp;turnLeft(90)<br/>
+&nbsp;&nbsp;forward(diagonal&nbsp;/&nbsp;2)<br/>
+&nbsp;&nbsp;turnLeft(90)<br/>
+&nbsp;&nbsp;lineColor&nbsp;=&nbsp;blue<br/>
+&nbsp;&nbsp;forward(diagonal)<br/>
+<span class="keyword">end</span>&nbsp;&nbsp;<span class="comment">//&nbsp;main&nbsp;program<br/>
+</span><br/>
+<span class="keyword">sub</span>&nbsp;square&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;subprogram<br/>
+</span>&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;length&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;parameter<br/>
+</span><span class="keyword">begin</span><br/>
+&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(i&nbsp;:&nbsp;1..4)&nbsp;{&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;loop-expression&nbsp;from&nbsp;Xbase&nbsp;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;forward(length)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;turnRight(90)&nbsp;<br/>
+&nbsp;&nbsp;}<br/>
+<span class="keyword">end</span>&nbsp;&nbsp;<span class="comment">//&nbsp;sub&nbsp;square</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+The main trick about our solution is to <em>not</em> bake in the turtle commands into the language itself, but
+define it in the runtime library. This way, the language stays as slim as can be and additions can be easily
+added without the need to regenerate the whole language infrastructure.
+</p>
+<p>
+The core of the runtime library is the class <abbr title="org.xtext.tortoiseshell.lib.Tortoise" >Tortoise</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend" title="View Source Code" >(src)</a>. You can
+think of it as of our only domainmodel class: It keeps the current state of the tortoise and allows 
+modifying it using methods. Here is an excerpt of its code:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;Tortoise&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">double</span>&nbsp;angle<br/>
+&nbsp;&nbsp;<span class="keyword">double</span>&nbsp;x<br/>
+&nbsp;&nbsp;<span class="keyword">double</span>&nbsp;y<br/>
+&nbsp;&nbsp;@Accessors&nbsp;<span class="keyword">int</span>&nbsp;delay&nbsp;=&nbsp;200<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPaint&nbsp;=&nbsp;true<br/>
+&nbsp;&nbsp;@Accessors&nbsp;<span class="keyword">int</span>&nbsp;lineWidth<br/>
+&nbsp;&nbsp;@Accessors&nbsp;Color&nbsp;lineColor<br/>
+<br/>
+&nbsp;&nbsp;List&lt;ITortoiseEvent.Listener&gt;&nbsp;listeners&nbsp;=&nbsp;newArrayList()<br/>
+...
+</p>
+</div>
+</div>
+</p>
+<p>
+When a method changes the state of the tortoise, an event is thrown. These events are consumed
+by a GEF based view and turned into animations of a <abbr title="org.xtext.tortoiseshell.lib.view.TortoiseFigure" >TortoiseFigure</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/view/TortoiseFigure.xtend" title="View Source Code" >(src)</a>. This
+loose coupling of model and view allows for easier testing.
+</p>
+<a name="tortoise_running"></a>
+<h2>Running the Example</h2>
+<p>
+In the runtime Eclipse, open the <em>Tortoise View</em> <em>(Window &gt; Show View &gt; Other &gt; Xtext &gt; TortoiseView)</em>.
+Then open one of the example files in <em>org.eclipse.xtext.tortoiseshell.examples</em>. 
+The <em>Program</em> is interpreted on editor activation and on save. An additional toggle button <em>Step Mode</em> 
+in the <em>Tortoise View</em> allows to execute the code live from the editor up to the caret&apos;s current line.
+</p>
+<p>
+<div class="image" >
+<img src="images/Pythagoras.png" 
+/>
+<div class="caption">
+Tortoise takes a rest after running the Pythagoras example
+</div>
+</div>
+</p>
+<a name="tortoise_grammar"></a>
+<h2>Grammar</h2>
+<p>
+The grammar is very short. Once again, we inherit from the Xbase language to have nice Java integration
+and rich expressions. A user can define a <em>Program</em>, which can have <em>SubPrograms</em> with parameters. The 
+<em>Executable</em> rule is never called, but defines a common supertype for <em>Program</em> and <em>SubProgram</em> that 
+will hold their common member <span class="inlinecode">body</span>. A <em>Body</em> is an <em>XBlockExpression</em> from Xbase, but with the 
+keywords <span class="inlinecode">begin</span> and <span class="inlinecode">end</span> instead of the curly braces.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.xtext.tortoiseshell.TortoiseShell<br/>
+&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span><br/>
+<span class="keyword">generate</span>&nbsp;tortoiseShell&nbsp;<span class="string">"http://www.xtext.org/tortoiseshell/TortoiseShell"</span><br/>
+<br/>
+Program&nbsp;:<br/>
+&nbsp;&nbsp;body=Body<br/>
+&nbsp;&nbsp;subPrograms+=SubProgram*;<br/>
+&nbsp;&nbsp;<br/>
+SubProgram:<br/>
+&nbsp;&nbsp;<span class="string">&apos;sub&apos;</span>&nbsp;name=ValidID&nbsp;(<span class="string">&apos;:&apos;</span>&nbsp;returnType=JvmTypeReference)?<br/>
+&nbsp;&nbsp;(parameters&nbsp;+=&nbsp;FullJvmFormalParameter)*<br/>
+&nbsp;&nbsp;body=Body;<br/>
+<br/>
+Body&nbsp;<span class="keyword">returns</span>&nbsp;XBlockExpression:<br/>
+&nbsp;&nbsp;{XBlockExpression}<br/>
+&nbsp;&nbsp;<span class="string">&apos;begin&apos;</span><br/>
+&nbsp;&nbsp;(expressions+=XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;end&apos;</span>;<br/>
+&nbsp;&nbsp;<br/>
+Executable:<br/>
+&nbsp;&nbsp;Program&nbsp;|&nbsp;SubProgram;
+</p>
+</div>
+</div>
+</p>
+<a name="tortoise_inferrer"></a>
+<h2>Translation to Java</h2>
+<p>
+With the tortoise commands defined as methods in the runtime library class 
+<abbr title="org.xtext.tortoiseshell.lib.Tortoise" >Tortoise</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend" title="View Source Code" >(src)</a>, we have to infer a Java class that inherits from this. 
+Within this class, we create a method for each <em>Program</em> and <em>SubProgram</em>. The resulting code looks 
+like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;TortoiseShellJvmModelInferrer&nbsp;<span class="keyword">extends</span>&nbsp;AbstractModelInferrer&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">val</span>&nbsp;INFERRED_CLASS_NAME&nbsp;=&nbsp;<span class="string">&apos;MyTortoiseProgram&apos;</span><br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;JvmTypesBuilder<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;<span class="keyword">void</span>&nbsp;infer(Program&nbsp;program,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IJvmDeclaredTypeAcceptor&nbsp;acceptor,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isPreIndexingPhase)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(program.toClass(INFERRED_CLASS_NAME))[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superTypes&nbsp;+=&nbsp;typeRef(Tortoise)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(program.body&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;program.toMethod(<span class="string">"main"</span>,&nbsp;typeRef(Void.TYPE))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;program.body<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(subProgram:&nbsp;program.subPrograms)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;subProgram.toMethod(subProgram.name,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subProgram.returnType&nbsp;?:&nbsp;inferredType(subProgram.body))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(subParameter:&nbsp;subProgram.parameters)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;subParameter.toParameter(subParameter.name,&nbsp;subParameter.parameterType)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;subProgram.body<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;}
+</p>
+</div>
+</div>
+</p>
+<a name="tortoise_interpreter"></a>
+<h2>Interpreter</h2>
+<p>
+The Xbase language library does not only provide a compiler that generates Java code, but also an 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter" >interpreter</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a>. This has been adapted 
+to execute our <em>Programs</em>. 
+</p>
+<p>
+After all an interpreter is just a big visitor. For each expression type, it has an evaluation method,
+that recursively calls the evaluation methods for the subexpressions for its arguments. The methods
+also pass an execution context storing all temporary state such as local variables.
+</p>
+<p>
+The first thing we have to cope with is the mixture of existing Java methods (from the super class
+<abbr title="org.xtext.tortoiseshell.lib.Tortoise" >Tortoise</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend" title="View Source Code" >(src)</a>) and inferred ones. While the former are evaluated
+via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
+<abbr title="org.xtext.tortoiseshell.lib.Tortoise" >Tortoise</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell.lib/src/org/xtext/tortoiseshell/lib/Tortoise.xtend" title="View Source Code" >(src)</a> to <span class="inlinecode"><span class="keyword">this</span></span> and intercept calls to the inferred 
+methods to execute them directly. This is accomplished by overriding the method <span class="inlinecode">invokeOperation</span>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IJvmModelAssociations<br/>
+&nbsp;<br/>
+<span class="keyword">override</span>&nbsp;<span class="keyword">protected</span>&nbsp;invokeOperation(JvmOperation&nbsp;operation,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;receiver,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;Object&gt;&nbsp;argumentValues)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;executable&nbsp;=&nbsp;operation.sourceElements.head<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(executable&nbsp;<span class="keyword">instanceof</span>&nbsp;Executable)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;context&nbsp;=&nbsp;createContext<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;context.newValue(QualifiedName.<span class="keyword">create</span>(<span class="string">"this"</span>),&nbsp;tortoise)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;operation.parameters.forEach[p,&nbsp;i|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.newValue(QualifiedName.<span class="keyword">create</span>(p.name),&nbsp;argumentValues.get(i))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;evaluate(executable.body,&nbsp;context,&nbsp;CancelIndicator.NullImpl)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(result.exception&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;result.exception<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.result<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.invokeOperation(operation,&nbsp;receiver,&nbsp;argumentValues)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+One thing you have to know about the Java inferrence is that when creating Java elements using the
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder" >JvmTypesBuilder</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/JvmTypesBuilder.java" title="View Source Code" >(src)</a>, the infrastructure stores the information which 
+elements have been inferred from which source elements. To navigate these traces, we use the Xbase service
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations" >IJvmModelAssociations</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java" title="View Source Code" >(src)</a>. So to detect whether a 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/common/types/JvmOperation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmOperation" >JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.common.types/emf-gen/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> is inferred, we check whether it has a source element.
+If so, we have to setup an execution context binding <span class="inlinecode">this</span> and the parameters as local variables and then 
+execute the method&apos;s body using the interpreter. 
+</p>
+<p>
+To start the interpretation we have to do almost the same: Setup the execution context and then evaluate
+the <em>Program&apos;s</em> body. The respective code is 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">override</span>&nbsp;run(Tortoise&nbsp;tortoise,&nbsp;EObject&nbsp;program,&nbsp;<span class="keyword">int</span>&nbsp;stopAtLine)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>(tortoise&nbsp;!=&nbsp;null&nbsp;&amp;&amp;&nbsp;program&nbsp;!=&nbsp;null)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.tortoise&nbsp;=&nbsp;tortoise<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.stopAtLine&nbsp;=&nbsp;stopAtLine<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;program.jvmElements.filter(JvmOperation).head<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?.invokeOperation(null,&nbsp;#[])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(StopLineReachedException&nbsp;exc)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;ignore<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The <abbr title="org.xtext.tortoiseshell.interpreter.StopLineReachedException" >StopLineReachedException</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/interpreter/TortoiseShellInterpeter.xtend" title="View Source Code" >(src)</a> is part of the <em>Step Mode</em>.
+It is thrown when the execution reaches the line <span class="inlinecode">stopAtLine</span>, thus terminating the current execution.
+The throwing code is
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">override</span>&nbsp;<span class="keyword">protected</span>&nbsp;internalEvaluate(XExpression&nbsp;expression,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;line&nbsp;=&nbsp;NodeModelUtils.findActualNodeFor(expression)?.startLine<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>(line-1&nbsp;==&nbsp;stopAtLine)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;StopLineReachedException<br/>
+&nbsp;&nbsp;<span class="keyword">super</span>.internalEvaluate(expression,&nbsp;context,&nbsp;indicator)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="tortoise_additons"></a>
+<h2>Literal Classes</h2>
+<p>
+To make the static methods and fields of <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Math.html" title="View JavaDoc"><abbr title="java.lang.Math" >Math</abbr></a> and <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html" title="View JavaDoc"><abbr title="org.eclipse.draw2d.ColorConstants" >ColorConstants</abbr></a>
+callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes" >TortoiseShellImplicitlyImportedTypes</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellImplicitlyImportedTypes.xtend" title="View Source Code" >(src)</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;TortoiseShellImplicitlyImportedTypes&nbsp;<span class="keyword">extends</span>&nbsp;ImplicitlyImportedFeatures&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">protected</span>&nbsp;getStaticImportClasses()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="keyword">super</span>.getStaticImportClasses()&nbsp;+&nbsp;#[Math,&nbsp;ColorConstants])<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+To overcome a small issue in the interpreter we also had to implement the 
+<abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellIdentifiableSimpleNameProvider" >TortoiseShellIdentifiableSimpleNameProvider</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellIdentifiableSimpleNameProvider.xtend" title="View Source Code" >(src)</a>. 
+</p>
+</body>
+</html>
