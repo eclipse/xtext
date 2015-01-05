@@ -103,12 +103,12 @@ public class XtextGenerator extends AbstractMojo {
 	private Boolean failOnValidationError;
 
 	/**
-	 * @parameter expression="${maven.compiler.source}" default-value="1.5"
+	 * @parameter expression="${maven.compiler.source}" default-value="1.6"
 	 */
 	private String compilerSourceLevel;
 
 	/**
-	 * @parameter expression="${maven.compiler.target}" default-value="1.5"
+	 * @parameter expression="${maven.compiler.target}" default-value="1.6"
 	 */
 	private String compilerTargetLevel;
 
