@@ -1,10 +1,15 @@
 package org.eclipse.xtext.idea.sdomain.idea.tests.refactoring;
 
-import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.idea.sdomain.idea.lang.SDomainFileType;
+import org.eclipse.xtext.idea.tests.LightToolingTest;
 
 @SuppressWarnings("all")
-public class RenameTest extends LightCodeInsightFixtureTestCase {
+public class RenameTest extends LightToolingTest {
+  public RenameTest() {
+    super(SDomainFileType.INSTANCE);
+  }
+  
   public void testRenameQualifiedName() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("foo {");
