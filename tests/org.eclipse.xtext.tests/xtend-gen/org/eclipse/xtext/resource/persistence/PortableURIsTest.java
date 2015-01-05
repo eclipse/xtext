@@ -8,6 +8,8 @@
 package org.eclipse.xtext.resource.persistence;
 
 import com.google.common.collect.Iterables;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -21,8 +23,13 @@ import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
+import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.PortableURIs;
+import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -82,6 +89,63 @@ public class PortableURIsTest extends AbstractXtextTests {
       String _fragment_1 = portableURI.fragment();
       EObject _eObject = resourceA.getEObject(_fragment_1);
       Assert.assertSame(extended, _eObject);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPortableReferenceDescriptions() {
+    try {
+      final XtextResourceSet resourceSet = this.<XtextResourceSet>get(XtextResourceSet.class);
+      URI _createURI = URI.createURI("hubba:/bubba.langatestlanguage");
+      Resource _createResource = resourceSet.createResource(_createURI);
+      final StorageAwareResource resourceA = ((StorageAwareResource) _createResource);
+      URI _createURI_1 = URI.createURI("hubba:/bubba2.langatestlanguage");
+      Resource _createResource_1 = resourceSet.createResource(_createURI_1);
+      final StorageAwareResource resourceB = ((StorageAwareResource) _createResource_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type B");
+      _builder.newLine();
+      InputStream _asStream = this.getAsStream(_builder.toString());
+      resourceB.load(_asStream, null);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("import \'hubba:/bubba2.langatestlanguage\'");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("type A extends B");
+      _builder_1.newLine();
+      InputStream _asStream_1 = this.getAsStream(_builder_1.toString());
+      resourceA.load(_asStream_1, null);
+      final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+      IResourceStorageFacade _resourceStorageFacade = resourceA.getResourceStorageFacade();
+      final ResourceStorageWritable writable = _resourceStorageFacade.createResourceStorageWritable(bout);
+      writable.writeResource(resourceA);
+      IResourceStorageFacade _resourceStorageFacade_1 = resourceA.getResourceStorageFacade();
+      byte[] _byteArray = bout.toByteArray();
+      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+      final ResourceStorageLoadable loadable = _resourceStorageFacade_1.createResourceStorageLoadable(_byteArrayInputStream);
+      URI _createURI_2 = URI.createURI("hubba:/bubba3.langatestlanguage");
+      Resource _createResource_2 = resourceSet.createResource(_createURI_2);
+      final StorageAwareResource resourceC = ((StorageAwareResource) _createResource_2);
+      resourceC.load(loadable);
+      IResourceDescription _resourceDescription = resourceC.getResourceDescription();
+      Iterable<IReferenceDescription> _referenceDescriptions = _resourceDescription.getReferenceDescriptions();
+      final IReferenceDescription refDesc = IterableExtensions.<IReferenceDescription>head(_referenceDescriptions);
+      EList<EObject> _contents = resourceB.getContents();
+      EObject _head = IterableExtensions.<EObject>head(_contents);
+      EList<Type> _types = ((Main) _head).getTypes();
+      Type _head_1 = IterableExtensions.<Type>head(_types);
+      URI _targetEObjectUri = refDesc.getTargetEObjectUri();
+      EObject _eObject = resourceSet.getEObject(_targetEObjectUri, false);
+      Assert.assertSame(_head_1, _eObject);
+      EList<EObject> _contents_1 = resourceC.getContents();
+      EObject _head_2 = IterableExtensions.<EObject>head(_contents_1);
+      EList<Type> _types_1 = ((Main) _head_2).getTypes();
+      Type _head_3 = IterableExtensions.<Type>head(_types_1);
+      URI _sourceEObjectUri = refDesc.getSourceEObjectUri();
+      EObject _eObject_1 = resourceSet.getEObject(_sourceEObjectUri, false);
+      Assert.assertSame(_head_3, _eObject_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

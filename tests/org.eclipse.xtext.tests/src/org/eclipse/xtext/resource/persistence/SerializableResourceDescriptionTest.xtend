@@ -64,17 +64,17 @@ class SerializableResourceDescriptionTest {
 		val after = in.readObject as SerializableResourceDescription
 		assertEquals(before.URI, after.URI)
 		assertEquals(before.importedNames, after.importedNames)
-		//TODO references are not yet persisted 
-//		assertEquals(before.references.size, after.references.size)
-//		for (int i : 0..<before.references.size) {
-//			val beforeRef = before.references.get(i)
-//			val afterRef  = after.references.get(i)
-//			assertEquals(beforeRef.containerEObjectURI, afterRef.containerEObjectURI)
-//			assertEquals(beforeRef.sourceEObjectUri, afterRef.sourceEObjectUri)
-//			assertEquals(beforeRef.targetEObjectUri, afterRef.targetEObjectUri)
-//			assertEquals(beforeRef.EReference, afterRef.EReference)
-//			assertEquals(beforeRef.indexInList, afterRef.indexInList)
-//		}
+
+		assertEquals(before.references.size, after.references.size)
+		for (int i : 0..<before.references.size) {
+			val beforeRef = before.references.get(i)
+			val afterRef  = after.references.get(i)
+			assertEquals(beforeRef.containerEObjectURI, afterRef.containerEObjectURI)
+			assertEquals(beforeRef.sourceEObjectUri, afterRef.sourceEObjectUri)
+			assertEquals(beforeRef.targetEObjectUri, afterRef.targetEObjectUri)
+			assertEquals(beforeRef.EReference, afterRef.EReference)
+			assertEquals(beforeRef.indexInList, afterRef.indexInList)
+		}
 		assertEquals(before.descriptions.size, after.descriptions.size)
 		for (int i : 0..<before.descriptions.size) {
 			val beforeDesc = before.descriptions.get(i)

@@ -128,10 +128,13 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   private URI uRI;
   
   public void updateResourceURI(final URI uri) {
-    this.uRI = uri;
+    for (final SerializableReferenceDescription ref : this.references) {
+      ref.updateResourceURI(uri, this.uRI);
+    }
     for (final SerializableEObjectDescription desc : this.descriptions) {
       desc.updateResourceURI(uri);
     }
+    this.uRI = uri;
   }
   
   protected List<IEObjectDescription> computeExportedObjects() {
@@ -157,11 +160,19 @@ public class SerializableResourceDescription extends AbstractResourceDescription
       SerializableEObjectDescription _readCastedObject = SerializationExtensions.<SerializableEObjectDescription>readCastedObject(in);
       this.descriptions.add(_readCastedObject);
     }
-    final int importedNamesSize = in.readInt();
-    ArrayList<QualifiedName> _arrayList_1 = new ArrayList<QualifiedName>(importedNamesSize);
-    this.importedNames = _arrayList_1;
-    ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, importedNamesSize, true);
+    final int referencesSize = in.readInt();
+    ArrayList<SerializableReferenceDescription> _arrayList_1 = new ArrayList<SerializableReferenceDescription>(referencesSize);
+    this.references = _arrayList_1;
+    ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, referencesSize, true);
     for (final Integer i_1 : _doubleDotLessThan_1) {
+      SerializableReferenceDescription _readCastedObject_1 = SerializationExtensions.<SerializableReferenceDescription>readCastedObject(in);
+      this.references.add(_readCastedObject_1);
+    }
+    final int importedNamesSize = in.readInt();
+    ArrayList<QualifiedName> _arrayList_2 = new ArrayList<QualifiedName>(importedNamesSize);
+    this.importedNames = _arrayList_2;
+    ExclusiveRange _doubleDotLessThan_2 = new ExclusiveRange(0, importedNamesSize, true);
+    for (final Integer i_2 : _doubleDotLessThan_2) {
       QualifiedName _readQualifiedName = SerializationExtensions.readQualifiedName(in);
       this.importedNames.add(_readQualifiedName);
     }
@@ -174,8 +185,13 @@ public class SerializableResourceDescription extends AbstractResourceDescription
     for (final SerializableEObjectDescription desc : this.descriptions) {
       out.writeObject(desc);
     }
-    int _size_1 = this.importedNames.size();
+    int _size_1 = this.references.size();
     out.writeInt(_size_1);
+    for (final SerializableReferenceDescription ref : this.references) {
+      out.writeObject(ref);
+    }
+    int _size_2 = this.importedNames.size();
+    out.writeInt(_size_2);
     for (final QualifiedName name : this.importedNames) {
       SerializationExtensions.writeQualifiedName(out, name);
     }

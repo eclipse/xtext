@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
+import com.google.common.base.Objects;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -17,9 +18,11 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.persistence.PortableURIs;
+import org.eclipse.xtext.resource.persistence.SerializableReferenceDescription;
 import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -114,6 +117,7 @@ public class ResourceStorageWritable {
       IResourceDescription.Manager _resourceDescriptionManager = _resourceServiceProvider.getResourceDescriptionManager();
       final IResourceDescription description = _resourceDescriptionManager.getResourceDescription(resource);
       final SerializableResourceDescription serializableDescription = SerializableResourceDescription.createCopy(description);
+      this.convertExternalURIsToPortableURIs(serializableDescription, resource);
       final ObjectOutputStream out = new ObjectOutputStream(zipOut);
       try {
         out.writeObject(serializableDescription);
@@ -123,6 +127,22 @@ public class ResourceStorageWritable {
       zipOut.closeEntry();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void convertExternalURIsToPortableURIs(final SerializableResourceDescription description, final StorageAwareResource resource) {
+    Iterable<IReferenceDescription> _referenceDescriptions = description.getReferenceDescriptions();
+    for (final IReferenceDescription ref : _referenceDescriptions) {
+      URI _targetEObjectUri = ref.getTargetEObjectUri();
+      URI _trimFragment = _targetEObjectUri.trimFragment();
+      URI _uRI = resource.getURI();
+      boolean _notEquals = (!Objects.equal(_trimFragment, _uRI));
+      if (_notEquals) {
+        PortableURIs _portableURIs = resource.getPortableURIs();
+        URI _targetEObjectUri_1 = ref.getTargetEObjectUri();
+        URI _portableURI = _portableURIs.toPortableURI(resource, _targetEObjectUri_1);
+        ((SerializableReferenceDescription) ref).setTargetEObjectUri(_portableURI);
+      }
     }
   }
   

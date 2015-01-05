@@ -75,10 +75,13 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 	URI uRI
 	
 	def void updateResourceURI(URI uri) {
-		this.uRI = uri
+		for (ref : references) {
+			ref.updateResourceURI(uri, this.uRI)
+		}
 		for (desc : descriptions) {
 			desc.updateResourceURI(uri)
 		}
+		this.uRI = uri
 	}
 	
 	override protected computeExportedObjects() {
@@ -100,12 +103,11 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 		for (i : 0 ..< descriptionsSize) {
 			descriptions.add(in.readCastedObject)
 		}
-		//reference descriptions are not portable atm.
-//		val referencesSize = in.readInt
-//		references = new ArrayList(referencesSize);
-//		for (i : 0 ..< referencesSize) {
-//			references.add(in.readCastedObject)
-//		}
+		val referencesSize = in.readInt
+		references = new ArrayList(referencesSize);
+		for (i : 0 ..< referencesSize) {
+			references.add(in.readCastedObject)
+		}
 		val importedNamesSize = in.readInt
 		importedNames = new ArrayList(importedNamesSize)
 		for (i : 0 ..< importedNamesSize) {
@@ -119,11 +121,10 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 		for (desc : descriptions) {
 			out.writeObject(desc)
 		}
-		//reference descriptions are not portable atm.
-//		out.writeInt(references.size)
-//		for (ref : references) {
-//			out.writeObject(ref)
-//		}
+		out.writeInt(references.size)
+		for (ref : references) {
+			out.writeObject(ref)
+		}
 		out.writeInt(importedNames.size)
 		for (name : importedNames) {
 			out.writeQualifiedName(name)
@@ -208,6 +209,13 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 		out.writeURI(containerEObjectURI)
 		out.writeEcoreElement(eReference)
 		out.writeInt(indexInList)
+	}
+	
+	def void updateResourceURI(URI newURI, URI oldURI) {
+		sourceEObjectUri = newURI.appendFragment(sourceEObjectUri.fragment)
+		if (targetEObjectUri.trimFragment == oldURI) {
+			targetEObjectUri = newURI.appendFragment(targetEObjectUri.fragment)
+		}
 	}
 	
 } 

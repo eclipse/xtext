@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
+import com.google.common.base.Objects;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -53,6 +54,19 @@ public class SerializableReferenceDescription implements IReferenceDescription, 
     SerializationExtensions.writeURI(out, this.containerEObjectURI);
     SerializationExtensions.writeEcoreElement(out, this.eReference);
     out.writeInt(this.indexInList);
+  }
+  
+  public void updateResourceURI(final URI newURI, final URI oldURI) {
+    String _fragment = this.sourceEObjectUri.fragment();
+    URI _appendFragment = newURI.appendFragment(_fragment);
+    this.sourceEObjectUri = _appendFragment;
+    URI _trimFragment = this.targetEObjectUri.trimFragment();
+    boolean _equals = Objects.equal(_trimFragment, oldURI);
+    if (_equals) {
+      String _fragment_1 = this.targetEObjectUri.fragment();
+      URI _appendFragment_1 = newURI.appendFragment(_fragment_1);
+      this.targetEObjectUri = _appendFragment_1;
+    }
   }
   
   @Pure

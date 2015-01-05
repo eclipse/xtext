@@ -9,15 +9,15 @@ package org.eclipse.xtext.resource.persistence
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.eclipse.xtext.generator.AbstractFileSystemAccess2
-import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-import org.eclipse.xtext.generator.IFileSystemAccessExtension3
-import java.io.ByteArrayOutputStream
-import java.io.ByteArrayInputStream
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
+import org.eclipse.xtext.generator.IFileSystemAccessExtension3
 
 /**
  * @author Sven Efftinge - Initial contribution and API
