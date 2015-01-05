@@ -20,7 +20,6 @@ import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
 import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
 import org.eclipse.xtend.ide.builder.UIResourceChangeRegistry;
 import org.eclipse.xtend.ide.builder.XtendParallelBuilderParticipant;
-import org.eclipse.xtend.ide.builder.XtendResourceDescriptionsProvider;
 import org.eclipse.xtend.ide.builder.XtendUIResourceDescriptionManager;
 import org.eclipse.xtend.ide.codetemplates.ui.highlighting.FlexerBasedTemplateBodyHighlighter;
 import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
@@ -96,7 +95,6 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighter;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -439,10 +437,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	@Override
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return XtendLabelProvider.class;
-	}
-	
-	public Class<? extends ResourceDescriptionsProvider> bindResourceDescriptionsProvider() {
-		return XtendResourceDescriptionsProvider.class;
 	}
 	
 	public Class<? extends IReferenceFinder> bindIReferenceFinder() {

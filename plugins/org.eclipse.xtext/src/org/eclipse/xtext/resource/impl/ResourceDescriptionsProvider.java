@@ -18,8 +18,12 @@ import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
+ * The {@link ResourceDescriptionsProvider} allows to obtain a readily configured instance of the
+ * {@link IResourceDescriptions} depending on the use case and lifecylce of the resource set.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class ResourceDescriptionsProvider {
 
@@ -93,20 +97,7 @@ public class ResourceDescriptionsProvider {
 	 */
 	/* @NonNull */
 	public IResourceDescriptions getResourceDescriptions(/* @NonNull */ ResourceSet resourceSet) {
-		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
-		String[] mutualExclusiveFlags = new String[] { NAMED_BUILDER_SCOPE, LIVE_SCOPE, PERSISTED_DESCRIPTIONS };
-		String flag = null;
-		for (int i = 0; i < mutualExclusiveFlags.length; i++) {
-			String candidate = mutualExclusiveFlags[i];
-			if (loadOptions.containsKey(candidate)) {
-				if (flag == null) {
-					flag = candidate;
-				} else {
-					String msg = "Ambiguous scope for the resource set. Can't combine " + flag + " and " + candidate;
-					throw new IllegalStateException(msg);
-				}
-			}
-		}
+		String flag = getFlagFromLoadOptions(resourceSet);
 		final IResourceDescriptions result;
 		if (NAMED_BUILDER_SCOPE.equals(flag)) {
 			result = createBuilderScopeResourceDescriptions();
@@ -119,6 +110,24 @@ public class ResourceDescriptionsProvider {
 		}
 		if (result instanceof IResourceDescriptions.IContextAware) {
 			((IResourceDescriptions.IContextAware) result).setContext(resourceSet);
+		}
+		return result;
+	}
+
+	private String getFlagFromLoadOptions(ResourceSet resourceSet) {
+		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
+		String[] mutualExclusiveFlags = new String[] { NAMED_BUILDER_SCOPE, LIVE_SCOPE, PERSISTED_DESCRIPTIONS };
+		String result = null;
+		for (int i = 0; i < mutualExclusiveFlags.length; i++) {
+			String candidate = mutualExclusiveFlags[i];
+			if (loadOptions.containsKey(candidate)) {
+				if (result == null) {
+					result = candidate;
+				} else {
+					String msg = "Ambiguous scope for the resource set. Can't combine " + result + " and " + candidate;
+					throw new IllegalStateException(msg);
+				}
+			}
 		}
 		return result;
 	}
