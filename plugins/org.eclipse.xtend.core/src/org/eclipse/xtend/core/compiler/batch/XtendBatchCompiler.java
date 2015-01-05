@@ -125,7 +125,7 @@ public class XtendBatchCompiler {
 	protected boolean useCurrentClassLoaderAsParent;
 	protected String outputPath;
 	protected String fileEncoding;
-	protected String complianceLevel = "1.5";
+	protected String complianceLevel = "1.6";
 	protected boolean verbose = false;
 	protected String tempDirectory = System.getProperty("java.io.tmpdir");
 	protected boolean deleteTempDirectory = true;

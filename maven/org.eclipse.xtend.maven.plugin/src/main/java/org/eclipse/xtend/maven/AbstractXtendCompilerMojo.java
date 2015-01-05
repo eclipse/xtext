@@ -57,7 +57,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	/**
 	 * JDK compliance level.
 	 *
-	 * @parameter expression="${maven.compiler.target}" default-value="1.5"
+	 * @parameter expression="${maven.compiler.target}" default-value="1.6"
 	 */
 	private String complianceLevel;
 
