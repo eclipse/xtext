@@ -1,4 +1,4 @@
-package org.eclipse.xtext.idea.syntaxcoloring;
+package org.eclipse.xtext.idea.highlighting;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;

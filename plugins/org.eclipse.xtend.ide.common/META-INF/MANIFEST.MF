@@ -11,6 +11,7 @@ Require-Bundle: org.eclipse.xtend.core,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr,
  org.eclipse.xtend.ide.common.contentassist.antlr.internal,
- org.eclipse.xtend.ide.common.contentassist.javadoc
+ org.eclipse.xtend.ide.common.contentassist.javadoc,
+ org.eclipse.xtend.ide.common.editor.bracketmatching
 Import-Package: org.apache.log4j;version="1.2.15"
 

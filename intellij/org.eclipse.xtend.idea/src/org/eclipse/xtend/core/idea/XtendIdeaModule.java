@@ -6,7 +6,9 @@ import org.eclipse.xtend.ide.common.contentassist.antlr.DisabledInternalLexer;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistContextFactory;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistParser;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
+import org.eclipse.xtend.ide.common.editor.bracketmatching.XtendBracePairProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -48,10 +50,15 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 		return JvmDeclaredTypeHierarchyProvider.class;
 	}
 
-	
 	@SingletonBinding
 	public Class<? extends JavaCallHierarchyProvider> bindJavaCallHierarchyProvider() {
 		return JvmExecutableCallHierarchyProvider.class;
+	}
+	
+	@Override
+	@SingletonBinding
+	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
+		return XtendBracePairProvider.class;
 	}
 
 }
