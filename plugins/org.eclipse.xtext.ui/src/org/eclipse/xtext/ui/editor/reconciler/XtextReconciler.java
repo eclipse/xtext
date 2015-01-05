@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.reconciler;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration.*;
 
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -18,8 +19,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.text.BadPositionCategoryException;
+import org.eclipse.jface.text.DefaultPositionUpdater;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IPositionUpdater;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ContentAssistEvent;
@@ -102,6 +106,9 @@ public class XtextReconciler extends Job implements IReconciler {
 	 * @noextend
 	 */
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {
+		
+		private final IPositionUpdater templatePositionUpdater = new DefaultPositionUpdater(
+				XTEXT_TEMPLATE_POS_CATEGORY);
 
 		private volatile boolean sessionStarted = false;
 
@@ -153,12 +160,22 @@ public class XtextReconciler extends Job implements IReconciler {
 
 		@Override
 		public void assistSessionStarted(ContentAssistEvent event) {
+			IDocument document = textViewer.getDocument();
+			document.addPositionCategory(XTEXT_TEMPLATE_POS_CATEGORY);
+			document.addPositionUpdater(templatePositionUpdater);
 			sessionStarted = true;
 		}
 
 		@Override
 		public void assistSessionEnded(ContentAssistEvent event) {
 			sessionStarted = false;
+			IDocument document = textViewer.getDocument();
+			document.removePositionUpdater(templatePositionUpdater);
+			try {
+				document.removePositionCategory(XTEXT_TEMPLATE_POS_CATEGORY);
+			} catch (BadPositionCategoryException e) {
+				log.error(e.getMessage(), e);
+			}
 			resume();
 		}
 
