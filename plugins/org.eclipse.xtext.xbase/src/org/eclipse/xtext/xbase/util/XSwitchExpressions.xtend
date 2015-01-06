@@ -26,6 +26,9 @@ class XSwitchExpressions {
 	@Inject
 	extension SwitchConstantExpressionsInterpreter
 
+	/**
+	 * Determine whether the given switch expression is valid for Java version 6 or lower.
+	 */
 	def isJavaSwitchExpression(XSwitchExpression it) {
 		val switchType = switchVariableType
 		if (switchType == null) {
@@ -40,6 +43,26 @@ class XSwitchExpressions {
 		false
 	}
 
+	/**
+	 * Determine whether the given switch expression is valid for Java version 7 or higher.
+	 */
+	def isJava7SwitchExpression(XSwitchExpression it) {
+		val switchType = switchVariableType
+		if (switchType == null) {
+			return false
+		}
+		if (switchType.isSubtypeOf(Integer.TYPE)) {
+			return true
+		}
+		if (switchType.isSubtypeOf(Enum)) {
+			return true
+		}
+		if (switchType.isSubtypeOf(String)) {
+			return true
+		}
+		false
+	}
+
 	def isJavaCaseExpression(XSwitchExpression it, XCasePart casePart) {
 		if (casePart.typeGuard != null) {
 			return false
@@ -47,7 +70,7 @@ class XSwitchExpressions {
 		val ^case = casePart.^case
 		if (^case == null) {
 			return false
-		} 
+		}
 		extension val resolvedTypes = resolveTypes
 		val caseType = ^case.actualType
 		if (caseType == null) {

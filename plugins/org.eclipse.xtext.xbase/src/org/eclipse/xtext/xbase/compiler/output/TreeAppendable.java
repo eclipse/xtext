@@ -28,6 +28,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -40,7 +41,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence {
+public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence, IGeneratorConfigHolder {
 
 	private static final Logger log = Logger.getLogger(TreeAppendable.class);
 	
@@ -85,7 +86,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		}
 	}
 
-	private List<Object> children;
+	private final List<Object> children;
 	private final SharedAppendableState state;
 	private final ILocationInFileProvider locationProvider;
 	private final IJvmModelAssociations jvmModelAssociations;
@@ -610,6 +611,11 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			System.out.println(indent + currentChildren.toString());
 		if(closed) 
 			System.out.println(indent + "</closed>");
+	}
+
+	@Override
+	public GeneratorConfig getGeneratorConfig() {
+		return state.getGeneratorConfig();
 	}
 	
 }

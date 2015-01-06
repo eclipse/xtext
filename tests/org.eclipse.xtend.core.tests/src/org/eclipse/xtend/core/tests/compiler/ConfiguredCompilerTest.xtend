@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
+import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider
+import org.eclipse.xtext.junit4.InjectWith
 import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+ @InjectWith(SingletonGeneratorConfigRuntimeInjectorProvider)
 class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
@@ -43,13 +46,14 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 				    throw new UnsupportedOperationException("foo is not implemented");
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 	
 	@Test
 	def testAnnotationWithValueArray_01() {
 		val generatorConfig = generatorConfigProvider.get(null)
 		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
+		generatorConfig.setGenerateExpressions(true)
 		assertCompilesTo('''
 			@SuppressWarnings(#[ 'abc', 'efg' ])
 			class C {
@@ -58,13 +62,14 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings({ "abc", "efg" })
 			public class C {
 			}
-		''', generatorConfig)
+		''')
 	}
 	
 	@Test
 	def testAnnotationWithValueArray_02() {
 		val generatorConfig = generatorConfigProvider.get(null)
 		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
+		generatorConfig.setGenerateExpressions(true)
 		assertCompilesTo('''
 			@SuppressWarnings('abc', 'efg')
 			class C {
@@ -73,7 +78,7 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings({ "abc", "efg" })
 			public class C {
 			}
-		''', generatorConfig)
+		''')
 	}
 	
 	@Test
@@ -101,13 +106,13 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 				/**
 				 * javadoc
 				 */
-				@SuppressWarnings("all")
+				@SuppressWarnings("unused")
 				public class Bar {
 				  public int foo() {
 				    throw new UnsupportedOperationException("foo is not implemented");
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 
 	@Test
@@ -137,13 +142,13 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 				 * javadoc
 				 */
 				@Deprecated
-				@SuppressWarnings("all")
+				@SuppressWarnings("unused")
 				public class Bar {
 				  public int foo() {
 				    throw new UnsupportedOperationException("foo is not implemented");
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 	
 }

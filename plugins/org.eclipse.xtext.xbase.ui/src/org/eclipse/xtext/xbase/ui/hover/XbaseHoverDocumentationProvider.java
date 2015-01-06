@@ -72,6 +72,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -84,14 +85,14 @@ import com.google.inject.Inject;
  * @since 2.3
  */
 public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentationProvider {
+	
 	protected static final String BLOCK_TAG_START = "<dl>"; //$NON-NLS-1$
 	protected static final String BLOCK_TAG_END = "</dl>"; //$NON-NLS-1$
 	protected static final String BlOCK_TAG_ENTRY_START = "<dd>"; //$NON-NLS-1$
 	protected static final String BlOCK_TAG_ENTRY_END = "</dd>"; //$NON-NLS-1$
 	protected static final String PARAM_NAME_START = "<b>"; //$NON-NLS-1$
 	protected static final String PARAM_NAME_END = "</b> "; //$NON-NLS-1$
-	protected String rawJavaDoc = "";
-	protected EObject context = null;
+	
 	@Inject
 	protected IScopeProvider scopeProvider;
 	@Inject
@@ -108,11 +109,16 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
 	@Inject
 	IGeneratorConfigProvider generatorConfigProvider;
-
-	protected StringBuffer buffer;
-	protected int fLiteralContent;
 	@Inject
 	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	@Inject
+	private JvmTypeExtensions typeExtensions;
+
+	protected String rawJavaDoc = "";
+	protected EObject context = null;
+	
+	protected StringBuffer buffer;
+	protected int fLiteralContent;
 
 	@Override
 	public String getDocumentation(EObject object) {
@@ -270,21 +276,22 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 			}
 		}
 		for (JvmAnnotationReference annotationReference : annotations) {
-			buffer.append("@");
-			URI uri = EcoreUtil.getURI(annotationReference.getAnnotation());
-			buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, annotationReference.getAnnotation().getSimpleName()));
-			if (annotationReference.getExplicitValues().size() > 0) {
-				buffer.append("(");
-				for (JvmAnnotationValue value : annotationReference.getExplicitValues()) {
-					ITreeAppendable appendable = new FakeTreeAppendable();
-					jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
-					String java = appendable.getContent();
-					buffer.append(java);
+			if (!typeExtensions.isSynthetic(annotationReference)) {
+				buffer.append("@");
+				URI uri = EcoreUtil.getURI(annotationReference.getAnnotation());
+				buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, annotationReference.getAnnotation().getSimpleName()));
+				if (annotationReference.getExplicitValues().size() > 0) {
+					buffer.append("(");
+					for (JvmAnnotationValue value : annotationReference.getExplicitValues()) {
+						ITreeAppendable appendable = new FakeTreeAppendable();
+						jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
+						String java = appendable.getContent();
+						buffer.append(java);
+					}
+					buffer.append(")");
 				}
-				buffer.append(")");
+				buffer.append("<br>");
 			}
-			buffer.append("<br>");
-
 		}
 
 	}

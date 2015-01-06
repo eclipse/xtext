@@ -125,7 +125,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import types.SomeClassWithNestedInterface;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.append("@java.lang.SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo extends SomeClassWithNestedInterface implements SomeClassWithNestedInterface.NestedInterface {");
     _builder_1.newLine();
@@ -154,7 +154,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import types.SomeClassWithNestedInterface;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.append("@java.lang.SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo extends SomeClassWithNestedInterface {");
     _builder_1.newLine();

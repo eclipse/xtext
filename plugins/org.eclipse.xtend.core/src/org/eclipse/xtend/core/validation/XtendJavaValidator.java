@@ -787,16 +787,25 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
 							EObject source = findPrimarySourceElement(localOperation);
 							if (flaggedOperations.add(source)) {
-								error("Name clash: The method "
-										+ localOperation.getSimpleSignature() + " of type "
-										+ inferredType.getSimpleName()
-										+ " has the same erasure as "
-										+
-										// use source with other operations parameters to avoid confusion
-										// due to name transformations in JVM model inference
-										operation.getSimpleSignature() + " of type "
-										+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
-										source, nameFeature(source), DUPLICATE_METHOD);
+								if (operation.getDeclaration().isStatic()) {
+									error("The instance method "
+											+ localOperation.getSimpleSignature()
+											+ " cannot override the static method "
+											+ operation.getSimpleSignature() + " of type "
+											+ getDeclaratorName(operation.getDeclaration()) + ".",
+											source, nameFeature(source), DUPLICATE_METHOD);
+								} else {
+									error("Name clash: The method "
+											+ localOperation.getSimpleSignature() + " of type "
+											+ inferredType.getSimpleName()
+											+ " has the same erasure as "
+											+
+											// use source with other operations parameters to avoid confusion
+											// due to name transformations in JVM model inference
+											operation.getSimpleSignature() + " of type "
+											+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
+											source, nameFeature(source), DUPLICATE_METHOD);
+								}
 							}
 						}
 					}

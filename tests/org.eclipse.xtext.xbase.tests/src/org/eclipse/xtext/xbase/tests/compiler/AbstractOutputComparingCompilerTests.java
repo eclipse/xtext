@@ -10,6 +10,9 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -35,11 +38,29 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
+	
+	// FOR JAVA TESTS
 
 	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode) throws Exception {
+		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfigProvider.get(null));
+	}
+	
+	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode,
+			JavaVersion javaVersion) throws Exception {
+		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
+		generatorConfig.setTargetVersion(javaVersion);
+		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfig);
+	}
+	
+	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode,
+			GeneratorConfig generatorConfig) throws Exception {
 		XExpression model = expression(xbaseCode.toString(),true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		ITreeAppendable tracing = new FakeTreeAppendable();
+		FakeTreeAppendable tracing = new FakeTreeAppendable();
+		tracing.setGeneratorConfig(generatorConfig);
 		LightweightTypeReference returnType = typeResolver.resolveTypes(model).getReturnType(model);
 		if (returnType == null) {
 			throw new IllegalStateException();
@@ -59,7 +80,20 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 		assertEquals(expectedJavaCode, tracing.getContent());
 	}
 	
+	// FOR XTEND TESTS
+	
 	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result) throws Exception {
 		assertCompilesTo(result, xbaseCode);
 	}
+	
+	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result,
+			JavaVersion javaVersion) throws Exception {
+		assertCompilesTo(result, xbaseCode, javaVersion);
+	}
+	
+	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result,
+			GeneratorConfig generatorConfig) throws Exception {
+		assertCompilesTo(result, xbaseCode, generatorConfig);
+	}
+	
 }

@@ -142,7 +142,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _builder.append("package mypack");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("import org.eclipse.xtend.lib.macro.Data");
+      _builder.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder.newLine();
       _builder.newLine();
       _builder.append("@Data class MyClass {");
@@ -198,7 +198,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _builder_2.append("package mypack");
       _builder_2.newLine();
       _builder_2.newLine();
-      _builder_2.append("import org.eclipse.xtend.lib.macro.Data");
+      _builder_2.append("import org.eclipse.xtend.lib.annotations.Data");
       _builder_2.newLine();
       _builder_2.newLine();
       _builder_2.append("@Data class MyClass {");
@@ -243,7 +243,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       _builder_4.append("package otherpack");
       _builder_4.newLine();
       _builder_4.newLine();
-      _builder_4.append("@org.eclipse.xtend.lib.macro.Data class OtherClass {");
+      _builder_4.append("@org.eclipse.xtend.lib.annotations.Data class OtherClass {");
       _builder_4.newLine();
       _builder_4.append("}");
       _builder_4.newLine();

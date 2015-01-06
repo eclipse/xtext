@@ -239,6 +239,9 @@ public class OnTheFlyJavaCompiler {
 	@Inject(optional=true)
 	private TemporaryFolder temporaryFolder;
 	
+	@Inject(optional=true)
+	private IGeneratorConfigProvider generatorConfigProvider;
+
 	public void addClassPath(String classpath) {
 		this.classpath.add(classpath);
 	}
@@ -466,7 +469,21 @@ public class OnTheFlyJavaCompiler {
 	}
 
 	protected String getComplianceLevelArg() {
-		return "-1.5";
+		JavaVersion javaVersion = JavaVersion.JAVA5;
+		if (generatorConfigProvider != null) {
+			GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
+			javaVersion = generatorConfig.getTargetVersion();
+		}
+		switch (javaVersion) {
+			case JAVA8:
+				return "-1.8";
+			case JAVA7:
+				return "-1.7";
+			case JAVA6:
+				return "-1.6";
+			default:
+				return "-1.5";
+		}
 	}
 
 	protected Main getMain() {

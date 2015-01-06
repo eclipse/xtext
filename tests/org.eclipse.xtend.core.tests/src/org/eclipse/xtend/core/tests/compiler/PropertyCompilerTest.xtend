@@ -77,7 +77,6 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def compileProperty() {
-		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo(
 			'''
 				package foo
@@ -107,12 +106,11 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				    this._generateExpressions = generateExpressions;
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 	
 	@Test
 	def compileReadonlyPropertyWithoutType() {
-		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo(
 			'''
 				class C {
@@ -134,7 +132,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				    return this._string;
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 	
 	@Test
@@ -150,7 +148,6 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def compilePropertyWithTypeParameter() {
-		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo(
 			'''
 				class C<T> {
@@ -176,7 +173,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				    this._t = t;
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 	
 	@Test
@@ -192,7 +189,6 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
 	def compilePropertyWithArrayType() {
-		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo(
 			'''
 				class C<T> {
@@ -218,7 +214,7 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				    this._array = array;
 				  }
 				}
-			''', generatorConfig)
+			''')
 	}
 	
 	@Test

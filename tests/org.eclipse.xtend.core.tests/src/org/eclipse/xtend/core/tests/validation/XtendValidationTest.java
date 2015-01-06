@@ -34,6 +34,7 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
@@ -1427,23 +1428,25 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testSyntheticallyUsedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private String foo() {} def bar(){}}");
-		EObject eObject = clazz.eResource().getContents().get(1).eContents().get(2);
+		JvmDeclaredType jvmType = (JvmDeclaredType) clazz.eResource().getContents().get(1);
+		EObject eObject = jvmType.getMembers().get(1);
 		readAndWriteTracking.markReadAccess(eObject);
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	@Test public void testSyntheticallyUsedField() throws Exception {
 		XtendClass clazz = clazz("class X { String foo }");
-		EObject eObject = clazz.eResource().getContents().get(1).eContents().get(2);
+		JvmDeclaredType jvmType = (JvmDeclaredType) clazz.eResource().getContents().get(1);
+		EObject eObject = jvmType.getMembers().get(1);
 		readAndWriteTracking.markReadAccess(eObject);
 		helper.assertNoIssues(clazz.eContainer());
 	}
 	
 	@Test public void testSyntheticallyInitializedField() throws Exception {
 		XtendClass clazz = clazz("class X { new() {} final String foo }");
-		EObject jvmType = clazz.eResource().getContents().get(1);
-		JvmConstructor constructor = (JvmConstructor) jvmType.eContents().get(1);
-		EObject field = jvmType.eContents().get(2);
+		JvmDeclaredType jvmType = (JvmDeclaredType) clazz.eResource().getContents().get(1);
+		JvmConstructor constructor = (JvmConstructor) jvmType.getMembers().get(0);
+		EObject field = jvmType.getMembers().get(1);
 		readAndWriteTracking.markReadAccess(field);
 		readAndWriteTracking.markInitialized(field, constructor);
 		helper.assertNoIssues(clazz.eContainer());
