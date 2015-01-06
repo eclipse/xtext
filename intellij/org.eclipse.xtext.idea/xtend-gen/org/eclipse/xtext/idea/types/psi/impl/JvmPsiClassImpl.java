@@ -183,7 +183,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             boolean _isDeprecated = f.isDeprecated();
             it.setDeprecated(_isDeprecated);
             PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(f);
-            it.setNavigationElement(_navigationElement);
+            JvmPsiClassImpl.this.setNullableNavigationElement(it, _navigationElement);
             it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, f);
           }
         };
@@ -218,7 +218,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
               it.setMethodReturnType(_psiType);
             }
             PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(m);
-            it.setNavigationElement(_navigationElement);
+            JvmPsiClassImpl.this.setNullableNavigationElement(it, _navigationElement);
             it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, m);
           }
         };
@@ -265,11 +265,8 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
             LightParameter _lightParameter = new LightParameter(_simpleName, _psiType, JvmPsiClassImpl.this.psiElement, _language);
             final Procedure1<LightParameter> _function = new Procedure1<LightParameter>() {
               public void apply(final LightParameter it) {
-                final PsiElement navElement = JvmPsiClassImpl.this.getNavigationElement(p);
-                boolean _notEquals = (!Objects.equal(navElement, null));
-                if (_notEquals) {
-                  it.setNavigationElement(navElement);
-                }
+                PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(p);
+                JvmPsiClassImpl.this.setNullableNavigationElement(it, _navigationElement);
                 it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
               }
             };
@@ -290,6 +287,13 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
       _xblockexpression = this.psiAssocations.getPsiElement(primarySourceElement);
     }
     return _xblockexpression;
+  }
+  
+  private void setNullableNavigationElement(final LightElement element, final PsiElement navigationElement) {
+    boolean _notEquals = (!Objects.equal(navigationElement, null));
+    if (_notEquals) {
+      element.setNavigationElement(navigationElement);
+    }
   }
   
   private AnnotatableModifierList getPsiModifiers(final JvmMember m) {
@@ -490,7 +494,7 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
           final Procedure1<JvmPsiClassImpl> _function = new Procedure1<JvmPsiClassImpl>() {
             public void apply(final JvmPsiClassImpl it) {
               PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(inner);
-              it.setNavigationElement(_navigationElement);
+              JvmPsiClassImpl.this.setNullableNavigationElement(it, _navigationElement);
               it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, inner);
             }
           };

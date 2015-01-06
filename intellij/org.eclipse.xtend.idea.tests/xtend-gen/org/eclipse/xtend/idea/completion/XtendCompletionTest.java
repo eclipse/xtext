@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtend.idea.completion;
 
-import org.eclipse.xtend.idea.completion.LightXtendTest;
+import org.eclipse.xtend.idea.LightXtendTest;
 
 @SuppressWarnings("all")
 public class XtendCompletionTest extends LightXtendTest {
