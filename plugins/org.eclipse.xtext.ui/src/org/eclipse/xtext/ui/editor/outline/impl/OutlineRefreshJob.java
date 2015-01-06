@@ -46,6 +46,9 @@ public class OutlineRefreshJob extends Job {
 	
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
+		if (outlinePage == null) {
+			return Status.OK_STATUS;
+		}
 		try {
 			OutlineTreeState formerState = new OutlineTreeState(outlinePage.getTreeViewer());
 			OutlineTreeState newState = new OutlineTreeState();
