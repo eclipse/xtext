@@ -25,7 +25,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//File:
 		//	elements+=Element*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -43,7 +43,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Import:
 		//	"import" importedNamespace=QualifiedNameWithWildCard;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=QualifiedNameWithWildCard
 		public Group getGroup() { return cGroup; }
@@ -66,7 +66,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedNameWithWildCard:
 		//	QualifiedName ".*"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//QualifiedName ".*"?
 		public Group getGroup() { return cGroup; }
@@ -88,7 +88,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//QualifiedName:
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -118,7 +118,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Namespace:
 		//	name=QualifiedName "{" elements+=Element* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=QualifiedName "{" elements+=Element* "}"
 		public Group getGroup() { return cGroup; }
@@ -151,7 +151,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Element:
 		//	Namespace | Type | Import;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Namespace | Type | Import
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -174,7 +174,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Type:
 		//	Entity | Datatype;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Entity | Datatype
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -199,7 +199,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Entity:
 		//	"entity" name=ID "{" properties+=Property* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"entity" name=ID "{" properties+=Property* "}"
 		public Group getGroup() { return cGroup; }
@@ -235,7 +235,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Datatype:
 		//	"datatype" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"datatype" name=ID
 		public Group getGroup() { return cGroup; }
@@ -261,7 +261,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Property:
 		//	type=[Type|QualifiedName] name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type=[Type|QualifiedName] name=ID
 		public Group getGroup() { return cGroup; }
@@ -331,7 +331,7 @@ public class SDomainGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

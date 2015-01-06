@@ -20,6 +20,7 @@ public class SDomainInjectorProvider implements IInjectorProvider, IRegistryConf
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector()
 	{
 		if (injector == null) {
@@ -34,10 +35,12 @@ public class SDomainInjectorProvider implements IInjectorProvider, IRegistryConf
 	    return new SDomainStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

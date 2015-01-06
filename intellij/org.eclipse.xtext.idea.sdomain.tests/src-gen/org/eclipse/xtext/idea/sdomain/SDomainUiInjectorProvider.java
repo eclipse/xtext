@@ -9,6 +9,7 @@ import com.google.inject.Injector;
 
 public class SDomainUiInjectorProvider implements IInjectorProvider {
 	
+	@Override
 	public Injector getInjector() {
 		return org.eclipse.xtext.idea.sdomain.ui.internal.SDomainActivator.getInstance().getInjector("org.eclipse.xtext.idea.sdomain.SDomain");
 	}

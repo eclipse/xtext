@@ -21,13 +21,9 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider;
-import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
-import com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider;
-import com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider;
 
 public class XtendIdeaModule extends AbstractXtendIdeaModule {
 
@@ -50,16 +46,6 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	
 	public Class<? extends ProcessorInstanceForJvmTypeProvider> bindProcessorInstanceForJvmTypeProvider() {
 		return IdeaProcessorProvider.class;
-	}
-
-	@SingletonBinding
-	public Class<? extends JavaTypeHierarchyProvider> bindJavaTypeHierarchyProvider() {
-		return JvmDeclaredTypeHierarchyProvider.class;
-	}
-
-	@SingletonBinding
-	public Class<? extends JavaCallHierarchyProvider> bindJavaCallHierarchyProvider() {
-		return JvmExecutableCallHierarchyProvider.class;
 	}
 	
 	@Override

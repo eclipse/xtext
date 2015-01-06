@@ -415,5 +415,11 @@
             extensions="sdomain">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="sdomain"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>

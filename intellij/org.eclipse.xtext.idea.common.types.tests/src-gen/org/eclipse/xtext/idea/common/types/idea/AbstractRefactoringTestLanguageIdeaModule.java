@@ -40,6 +40,16 @@ public class AbstractRefactoringTestLanguageIdeaModule extends org.eclipse.xtext
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
 		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider> bindJavaTypeHierarchyProvider() {
+		return org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider.class;
+	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	@org.eclipse.xtext.service.SingletonBinding
+	public Class<? extends com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider> bindJavaCallHierarchyProvider() {
+		return org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider.class;
+	}
 	
 	
 }
