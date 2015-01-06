@@ -488,7 +488,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 				class MyAnnotationProcessor extends AbstractClassProcessor {
 				
 					override doTransform(MutableClassDeclaration it, extension TransformationContext context) {
-						removeAnnotation(annotations.head)
+						removeAnnotation(findAnnotation(context.findTypeGlobally('myannotation.MyAnnotation')))
 						addAnnotation(Values.newAnnotationReference [
 							setIntValue('intValue', emptyList)
 							setLongValue('longValue', emptyList)
@@ -518,7 +518,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val foo = typeLookup.findClass("myusercode.Foo")
-			val values = foo.annotations.head
+			val annotationType = typeLookup.findTypeGlobally("myannotation.Values")
+			val values = foo.findAnnotation(annotationType)
 			assertEquals(0, values.getIntArrayValue('intValue').size)
 			assertEquals(0, values.getLongArrayValue('longValue').size)
 			assertEquals(0, values.getShortArrayValue('shortValue').size)
@@ -722,7 +723,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 		) [
 			val clazz = typeLookup.findClass("myusercode.MyClass")
 			val colorEnum = typeLookup.findTypeGlobally("myannotation.BlackOrWhite") as EnumerationTypeDeclaration
-			val annotation = clazz.annotations.head
+			val annotationType = typeLookup.findTypeGlobally("myannotation.ConfigurableAnnotation")
+			val annotation = clazz.findAnnotation(annotationType)
 			
 			assertEquals(colorEnum.findDeclaredValue('BLACK'), annotation.getValue('color'))
 			
@@ -1531,7 +1533,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
-			assertEquals(0, clazz.annotations.size)
+			assertEquals(1, clazz.annotations.size)
 		]
 	}
 
@@ -1605,8 +1607,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import myannotation.MarkAsDeprecated;
 				
 				@MarkAsDeprecated
-				@Deprecated
 				@SuppressWarnings("all")
+				@Deprecated
 				public class MyClass {
 				}
 			'''

@@ -66,7 +66,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import types.SomeClassWithNestedInterface;
 			
-			@SuppressWarnings("all")
+			@java.lang.SuppressWarnings("all")
 			public class Foo extends SomeClassWithNestedInterface implements SomeClassWithNestedInterface.NestedInterface {
 			}
 		''')
@@ -82,7 +82,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			import types.SomeClassWithNestedInterface;
 			
-			@SuppressWarnings("all")
+			@java.lang.SuppressWarnings("all")
 			public class Foo extends SomeClassWithNestedInterface {
 			  public SomeClassWithNestedInterface.String convert(final java.lang.String s) {
 			    return null;

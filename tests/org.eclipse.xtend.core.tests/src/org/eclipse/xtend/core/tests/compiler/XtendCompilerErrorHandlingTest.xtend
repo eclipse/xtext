@@ -74,8 +74,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			class Foo {
 			}
 		'''.assertCompilesTo( '''
-			/* @MyAnnotation
-			 */@SuppressWarnings("all")
+			/* @MyAnnotation */@SuppressWarnings("all")
 			public class Foo {
 			}
 		''')
@@ -110,8 +109,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			class Foo {
 			}
 		'''.assertCompilesTo( '''
-			/* @MyAnnotation()
-			 */@SuppressWarnings("all")
+			/* @MyAnnotation() */@SuppressWarnings("unused")
 			public class Foo {
 			}
 		''')
