@@ -4,13 +4,12 @@ import com.intellij.codeInsight.completion.CompletionType
 import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl
 import com.intellij.codeInsight.template.impl.TemplateImpl
 import com.intellij.codeInsight.template.impl.TextExpression
-import org.eclipse.xtext.idea.completion.AbstractCompletionContributor
-import static org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider.*
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage
 
 import static com.intellij.patterns.PlatformPatterns.*
+import static org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider.*
 
-class EntitiesCompletionContributor extends AbstractCompletionContributor {
+class EntitiesCompletionContributor extends AbstractEntitiesCompletionContributor {
 	new() {
 		super(EntitiesLanguage.INSTANCE)
 		extend(

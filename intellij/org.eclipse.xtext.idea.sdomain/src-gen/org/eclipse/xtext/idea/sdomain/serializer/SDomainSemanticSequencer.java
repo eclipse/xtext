@@ -28,6 +28,7 @@ public class SDomainSemanticSequencer extends AbstractDelegatingSemanticSequence
 	@Inject
 	private SDomainGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SDomainPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SDomainPackage.DATATYPE:
