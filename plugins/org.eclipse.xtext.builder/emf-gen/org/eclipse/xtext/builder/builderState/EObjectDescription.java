@@ -7,9 +7,7 @@
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
@@ -19,11 +17,11 @@ import org.eclipse.xtext.resource.IEObjectDescription;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.EObjectDescription#getFragment <em>Fragment</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.EObjectDescription#getUserData <em>User Data</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getEObjectDescription()
  * @model superTypes="org.eclipse.xtext.builder.builderState.IEObjectDescription"

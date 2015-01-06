@@ -7,7 +7,6 @@
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 /**
@@ -17,10 +16,10 @@ import org.eclipse.xtext.resource.IReferenceDescription;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.ReferenceDescription#getExternalFormOfEReference <em>External Form Of EReference</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage#getReferenceDescription()
  * @model superTypes="org.eclipse.xtext.builder.builderState.IReferenceDescription"

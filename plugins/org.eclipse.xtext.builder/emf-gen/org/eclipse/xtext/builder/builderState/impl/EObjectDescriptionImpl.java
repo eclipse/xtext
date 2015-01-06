@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
@@ -30,18 +29,19 @@ import org.eclipse.xtext.resource.IResourceDescription;
  * An implementation of the model object '<em><b>EObject Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getEClass <em>EClass</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getFragment <em>Fragment</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.EObjectDescriptionImpl#getUserData <em>User Data</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class EObjectDescriptionImpl extends Container implements EObjectDescription {
+public class EObjectDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container implements EObjectDescription {
 	/**
 	 * The cached value of the '{@link #getEClass() <em>EClass</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -126,6 +126,7 @@ public class EObjectDescriptionImpl extends Container implements EObjectDescript
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QualifiedName getName() {
 		return name;
 	}
@@ -231,6 +232,7 @@ public class EObjectDescriptionImpl extends Container implements EObjectDescript
 		return userData != null && ((InternalEList.Unsettable<?>)userData).isSet();
 	}
 
+	@Override
 	public URI getEObjectURI() {
 		EObject container = eContainer();
 		if (container instanceof IResourceDescription) {
@@ -245,6 +247,7 @@ public class EObjectDescriptionImpl extends Container implements EObjectDescript
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public EObject getEObjectOrProxy() {
 		EClass clazz = getEClass();
 		if (clazz != null && !clazz.eIsProxy()) {
@@ -263,6 +266,7 @@ public class EObjectDescriptionImpl extends Container implements EObjectDescript
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getUserData(String name) {
 		return getUserData().get(name);
 	}
@@ -272,6 +276,7 @@ public class EObjectDescriptionImpl extends Container implements EObjectDescript
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String[] getUserDataKeys() {
 		return getUserData().keySet().toArray(new String[getUserData().size()]);
 	}
@@ -281,6 +286,7 @@ public class EObjectDescriptionImpl extends Container implements EObjectDescript
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public QualifiedName getQualifiedName() {
 		return getName();
 	}

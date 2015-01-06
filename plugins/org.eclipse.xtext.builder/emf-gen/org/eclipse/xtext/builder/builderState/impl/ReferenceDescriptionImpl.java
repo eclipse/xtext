@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.builder.builderState.ReferenceDescription;
@@ -21,7 +20,9 @@ import org.eclipse.xtext.builder.builderState.ReferenceDescription;
  * <!-- begin-user-doc --> An implementation of the model object '<em><b>Reference Description</b></em>'. <!--
  * end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getSourceEObjectUri <em>Source EObject Uri</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getTargetEObjectUri <em>Target EObject Uri</em>}</li>
@@ -29,11 +30,10 @@ import org.eclipse.xtext.builder.builderState.ReferenceDescription;
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getContainerEObjectURI <em>Container EObject URI</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ReferenceDescriptionImpl#getExternalFormOfEReference <em>External Form Of EReference</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class ReferenceDescriptionImpl extends Container implements ReferenceDescription {
+public class ReferenceDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container implements ReferenceDescription {
 	/**
 	 * The default value of the '{@link #getSourceEObjectUri() <em>Source EObject Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -240,6 +240,7 @@ public class ReferenceDescriptionImpl extends Container implements ReferenceDesc
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getExternalFormOfEReference() {
 		if (this.externalFormOfEReference == null && this.reference != null)
 			this.externalFormOfEReference = EcoreUtil2.toExternalForm(reference);
@@ -251,6 +252,7 @@ public class ReferenceDescriptionImpl extends Container implements ReferenceDesc
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public void setExternalFormOfEReference(String newExternalFormOfEReference) {
 		String oldExternalFormOfEReference = externalFormOfEReference;
 		externalFormOfEReference = newExternalFormOfEReference;

@@ -3,7 +3,6 @@
 package org.eclipse.xtext.builder.trace;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -13,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyOffset <em>My Offset</em>}</li>
@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getMyEndOffset <em>My End Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugTraceRegion#getAssociations <em>Associations</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugTraceRegion()
  * @model

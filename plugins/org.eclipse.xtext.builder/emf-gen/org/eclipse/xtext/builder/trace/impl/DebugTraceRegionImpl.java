@@ -6,18 +6,13 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.xtext.builder.trace.DebugLocationData;
 import org.eclipse.xtext.builder.trace.DebugTraceRegion;
 import org.eclipse.xtext.builder.trace.TracePackage;
@@ -27,7 +22,9 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  * An implementation of the model object '<em><b>Debug Trace Region</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyOffset <em>My Offset</em>}</li>
@@ -38,7 +35,6 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getMyEndOffset <em>My End Offset</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugTraceRegionImpl#getAssociations <em>Associations</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -199,6 +195,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public int getMyEndOffset() {
 		return getMyOffset() + getMyLength();
 	}
@@ -220,6 +217,7 @@ public class DebugTraceRegionImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getLabel() {
 		return String.format("[%d - %d]", getMyOffset(), getMyEndOffset());
 	}
