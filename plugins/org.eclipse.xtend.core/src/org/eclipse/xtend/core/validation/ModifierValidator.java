@@ -27,10 +27,10 @@ public class ModifierValidator {
 
 	private static final Set<String> visibilityModifers = newHashSet("public", "protected", "package", "private");
 	
-	private Set<String> allowedModifiers;
-	private AbstractDeclarativeValidator validator;
+	private final Set<String> allowedModifiers;
+	private final AbstractDeclarativeValidator validator;
 
-	private String allowedModifiersAsString;
+	private final String allowedModifiersAsString;
 
 	
 	public ModifierValidator(List<String> allowedModifiers, AbstractDeclarativeValidator validator) {

@@ -8,9 +8,9 @@
 package org.eclipse.xtend.core.tests;
 
 import org.eclipse.xtext.junit4.GlobalRegistries;
+import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
-import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 
 import com.google.inject.Injector;
 
