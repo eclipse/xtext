@@ -87,7 +87,7 @@ elements.
 
 The framework will pass the current codeRef[org.eclipse.xtext.resource.XtextResource] and an 
 codeRef[org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor] to 
-the calculator. It is ensured, that the resource will not be altered externally until the called method 
+the calculator. It is ensured that the resource will not be altered externally until the called method 
 code[Java][provideHighlightingFor()] returns. However, the resource may be code[Java][null] in case of
 errors in the model. The implementor's task is to 
 navigate the semantic model and compute various ranges based on the attached node information and 

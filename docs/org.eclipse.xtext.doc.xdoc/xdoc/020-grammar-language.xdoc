@@ -99,7 +99,7 @@ Transition :
 
 Martin Fowler uses this example throughout his book link[http://martinfowler.com/books/dsl.html][Domain
 Specific Languages] to implement external and internal DSLs using
-different technologies. Note, that none of his implementations is nearly as readable and concise as the description in
+different technologies. Note that none of his implementations is nearly as readable and concise as the description in
 Xtext's grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
 specific to the domain of language descriptions.
 
@@ -169,8 +169,8 @@ section4[Using Namespace URIs to Import Existing EPackages]
 
 You can use namespace URI in order to import existing codeRef[org.eclipse.emf.ecore.EPackage]. This is generally 
 preferable. The package will be read from the Xtext index and therefore your grammar is independent
-from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
-in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+from the concrete location of the respective ecore file. You have to make sure though that the ecore file is contained
+in a project that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
 Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
 the referencing project itself is an Xtext project.
 
@@ -201,8 +201,8 @@ create the genmodel in the workflow itself.
 
 If the generated EPackage interface is not available when the language workflow is executed, you can
 use another approach to register the reference packages. This may happen if your want to generate EMF
-classes and the language infrastructure in one and the same workflow. The section in the workflow, that
-refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+classes and the language infrastructure in one and the same workflow. The section in the workflow that
+refers the your grammar allows to set additional resources that should be loaded prior to loading the
 grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
 resources.
 
@@ -248,7 +248,7 @@ bean = StandaloneSetup {
 
 If you face problems with that approach, it may be necessary to explicitly load the referenced packages
 in the language configuration of the workflow. You may run into this as soon as you refer to elements
-from e[Ecore.ecore] and want to generated the EMF classes from within the same workflow.
+from e[Ecore.ecore] and want to generate the EMF classes from within the same workflow.
 
 code[MWE2][
 language = {
@@ -329,7 +329,7 @@ It is even possible to code[Xtext][import] multiple and code[Xtext][generate] on
 same alias. If you do so, for a reference to an codeRef[org.eclipse.emf.ecore.EClassifier] first the imported codeRef[org.eclipse.emf.ecore.EPackage][EPackages] are 
 scanned before it is assumed that a type needs to be generated into the inferred package. 
 
-Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
+Note that using this feature is not recommended, because it might cause problems that are hard to track down.
 For instance, a reference to e[classA] would as well be linked to a newly created codeRef[org.eclipse.emf.ecore.EClass], because the 
 corresponding type in e[http://www.eclipse.org/packContainingClassA] is spelled with a capital letter.
 
@@ -374,7 +374,7 @@ code[Xtext][TerminalRule :
 ;
 ]
 
-Note, that e[the order of terminal rules is crucial for your grammar], as they may shadow each other. 
+Note that e[the order of terminal rules is crucial for your grammar], as they may shadow each other. 
 This is especially important for newly introduced rules in connection with imported rules from used grammars. 
 
 It's almost in any case recommended to use data type rules instead. Let's assume you want to add a rule
@@ -522,7 +522,7 @@ The code[Xtext][EOF] token cannot be ref:negatedTokens[negated].
 section2:parser_rules[Parser Rules]
 
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
-contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
+contrary to a terminal rule - does not produce a single atomic terminal token, but a tree of non-terminal 
 and terminal tokens. They lead to a so called 
 %% ref:node_model[parse tree] 
 parse tree (in Xtext it is also referred 
@@ -725,8 +725,8 @@ detects this situation and will raise a warning for the parser rules in question
 
 section4[Unassigned Rule Calls]
 
-We previously explained, that the codeRef[org.eclipse.emf.ecore.EObject] to be returned is created lazily when the first assignment occurs or 
-as soon as a simple action is evaluated. There is another to e[find] the codeRef[org.eclipse.emf.ecore.EObject] to be returned. The
+We previously explained that the codeRef[org.eclipse.emf.ecore.EObject] to be returned is created lazily when the first assignment occurs or 
+as soon as a simple action is evaluated. There is another way to e[find] the codeRef[org.eclipse.emf.ecore.EObject] to be returned. The
 concept is called e[Unassigned Rule Call].
 
 Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an 
@@ -764,7 +764,7 @@ but always return the instance that has been created by the invoked e[TokenX] ru
 
 section4:grammarActions[Assigned Actions]
 
-%% LL-parsing has some significant advantages over LR algorithms. The most important ones for Xtext are, that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we hadn't error recovery.
+%% LL-parsing has some significant advantages over LR algorithms. The most important ones for Xtext are that the generated code is much simpler to understand and debug and that it is easier to recover from errors. Especially ANTLR has a very nice generic error recovery mechanism. This allows to construct an AST even if there are syntactic errors in the text. You wouldn't get any of the nice IDE features as soon as there is one little error, if we didn't have error recovery.
 
 Xtext leverages the powerful ANTLR parser which implements an code[LL(*)] algorithm. Even though code[LL]
 parsers have many advantages with respect to readability, debuggability and error recovery, there are
@@ -846,7 +846,7 @@ section2:hidden_terminals[Hidden Terminal Symbols]
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define
 the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
 things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
-symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
+symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
 are transparently woven into the node model, but not relevant for the semantic model. 
 
 Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule 
@@ -900,7 +900,7 @@ code[Xtext][QualifiedName :
 In contrast to a terminal rule this is only valid in certain contexts, i.e. it won't conflict with the rule e[ID].
 If you had defined it as a terminal rule, it would possibly hide the simple e[ID] rule.
 
-In addition when the e[QualifiedName] been defined as a data type rule, it is allowed to use hidden 
+In addition, by defining the e[QualifiedName] as a data type rule, it is allowed to use hidden 
 tokens (e.g. code[Java][/* comment */] between the segment IDs and dots (e.g. code[Java][foo/* comment */. bar . Baz]).
 
 Return types can be specified in the same way as for terminal rules:
@@ -910,8 +910,8 @@ code[Xtext][QualifiedName returns ecore::EString :
 ;
 ]
 
-Note that rules that do not call other parser rules and do neither contain any actions nor ref:assignments[assignments], are
- considered to be data type rules and the data type codeRef[java.lang.String][EString] is implied if none has been explicitly declared.
+Note that rules that do not call other parser rules and do neither contain any actions nor ref:assignments[assignments] are
+ considered to be data type rules, and the data type codeRef[java.lang.String][EString] is implied if none has been explicitly declared.
 
 ref:valueconverter[Value converters] are used to transform the parsed string to the actually returned
 data type value.
@@ -938,7 +938,7 @@ code[Xtext][enum ChangeKind :
 ;
 ]
 
-Please note, that Ecore does not support unset values for enums. If you define a grammar like
+Please note that Ecore does not support unset values for enums. If you define a grammar like
 
 code[Xtext][Element: "element" name=ID (value=SomeEnum)?;]
 
@@ -1007,7 +1007,7 @@ code[Xtext][Condition:
 ]
 
 The parser understands the predicate basically like this: If you are at this particular decision point
-and you don't know what to do, look for the code[Java][else] keyword and if it's present. Don't try to
+and you don't know what to do, check whether the code[Java][else] keyword is present. Don't try to
 choose the other option that would start with an code[Java][else] keyword, too.
 
 Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled.
@@ -1015,7 +1015,7 @@ Well chosen predicates allow to solve most ambiguities and backtracking can ofte
 section3[First Token Set Predicates]
 
 Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long.
-For disambiguation it often is sufficient to only look at the first token set. In those cases one can use
+For disambiguation it is often sufficient to look only at the first token set. In those cases one can use
 the code[->] operator instead of code[=>] which tells the parser to just look at the first token and make the decision based on that.
 This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior 
 of the IDE, such as content assist, in a positive way.
@@ -1092,7 +1092,7 @@ or action that caused it. Multiplicities will be e[0..1] for assignments with th
 with the code[+=] operator. 
 
 Furthermore, each type that is added to the currently possible return types automatically extends the current return type 
-of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
+of the parser rule. You can specify additional common super types by means of "artificial" parser rules that are never called, e.g.
 
 code[Xtext][CommonSuperType:
   SubTypeA | SubTypeB | SubTypeC;

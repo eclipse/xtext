@@ -249,8 +249,8 @@ NumberLiteral:<br/>
 </div>
 </p>
 <p>
-As you can see the main difference is that it uses three rules instead of one and if you look a bit closer 
-you see, that there&apos;s a certain delegation pattern involved. The rule Addition doesn&apos;t call itself but calls 
+As you can see the main difference is that it uses three rules instead of one, and if you look a bit closer 
+you see that there&apos;s a certain delegation pattern involved. The rule Addition doesn&apos;t call itself but calls 
 Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule 
 is called the higher is its precedence. This is at least the case for the first two rules which are of a 
 left recursive nature (but we&apos;ve left-factored them now). The last rule is not left recursive which is why 

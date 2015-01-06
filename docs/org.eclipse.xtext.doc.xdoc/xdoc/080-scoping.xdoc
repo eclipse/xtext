@@ -160,7 +160,7 @@ private IResourceServiceProvider.Registry rspr =
   IResourceServiceProvider.Registry.INSTANCE;
 ]
 
-However, we strongly encourage you to use dependency injection. Now, that we know how to export elements to be 
+However, we strongly encourage you to use dependency injection. Now that we know how to export elements to be 
 referable from other resources, we need to learn how those exported 
 codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] can be made available to the referencing resources. That is 
 the responsibility of codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider][global scoping] which is 

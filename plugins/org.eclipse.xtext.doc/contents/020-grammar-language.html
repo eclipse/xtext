@@ -126,7 +126,7 @@ Transition&nbsp;:<br/>
 <p>
 Martin Fowler uses this example throughout his book <a href="http://martinfowler.com/books/dsl.html">Domain
 Specific Languages</a> to implement external and internal DSLs using
-different technologies. Note, that none of his implementations is nearly as readable and concise as the description in
+different technologies. Note that none of his implementations is nearly as readable and concise as the description in
 Xtext&apos;s grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
 specific to the domain of language descriptions.
 </p>
@@ -212,8 +212,8 @@ and is only supported for backwards compatibility reasons.
 <p>
 You can use namespace URI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java" title="View Source Code" >(src)</a>. This is generally 
 preferable. The package will be read from the Xtext index and therefore your grammar is independent
-from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
-in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+from the concrete location of the respective ecore file. You have to make sure though that the ecore file is contained
+in a project that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
 Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
 the referencing project itself is an Xtext project.
 </p>
@@ -254,8 +254,8 @@ create the genmodel in the workflow itself.
 <p>
 If the generated EPackage interface is not available when the language workflow is executed, you can
 use another approach to register the reference packages. This may happen if your want to generate EMF
-classes and the language infrastructure in one and the same workflow. The section in the workflow, that
-refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+classes and the language infrastructure in one and the same workflow. The section in the workflow that
+refers the your grammar allows to set additional resources that should be loaded prior to loading the
 grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
 resources.
 </p>
@@ -315,7 +315,7 @@ bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
 <p>
 If you face problems with that approach, it may be necessary to explicitly load the referenced packages
 in the language configuration of the workflow. You may run into this as soon as you refer to elements
-from <em>Ecore.ecore</em> and want to generated the EMF classes from within the same workflow.
+from <em>Ecore.ecore</em> and want to generate the EMF classes from within the same workflow.
 </p>
 <p>
 <div class="literallayout">
@@ -434,7 +434,7 @@ same alias. If you do so, for a reference to an <a class="jdoc" href="http://dow
 scanned before it is assumed that a type needs to be generated into the inferred package. 
 </p>
 <p>
-Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
+Note that using this feature is not recommended, because it might cause problems that are hard to track down.
 For instance, a reference to <em>classA</em> would as well be linked to a newly created <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java" title="View Source Code" >(src)</a>, because the 
 corresponding type in <em>http://www.eclipse.org/packContainingClassA</em> is spelled with a capital letter.
 </p>
@@ -507,7 +507,7 @@ TerminalRule&nbsp;:<br/>
 </div>
 </p>
 <p>
-Note, that <em>the order of terminal rules is crucial for your grammar</em>, as they may shadow each other. 
+Note that <em>the order of terminal rules is crucial for your grammar</em>, as they may shadow each other. 
 This is especially important for newly introduced rules in connection with imported rules from used grammars. 
 </p>
 <p>
@@ -709,7 +709,7 @@ The <span class="inlinecode"><span class="keyword">EOF</span></span> token canno
 <h3>Parser Rules</h3>
 <p>
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
-contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
+contrary to a terminal rule - does not produce a single atomic terminal token, but a tree of non-terminal 
 and terminal tokens. They lead to a so called 
  parse tree (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
@@ -1027,8 +1027,8 @@ detects this situation and will raise a warning for the parser rules in question
 <a name="parser_rules_2_9"></a>
 <h5>Unassigned Rule Calls</h5>
 <p>
-We previously explained, that the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> to be returned is created lazily when the first assignment occurs or 
-as soon as a simple action is evaluated. There is another to <em>find</em> the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> to be returned. The
+We previously explained that the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> to be returned is created lazily when the first assignment occurs or 
+as soon as a simple action is evaluated. There is another way to <em>find</em> the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java" title="View Source Code" >(src)</a> to be returned. The
 concept is called <em>Unassigned Rule Call</em>.
 </p>
 <p>
@@ -1208,7 +1208,7 @@ current&nbsp;=&nbsp;temp;
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define
 the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
 things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
-symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
+symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
 are transparently woven into the node model, but not relevant for the semantic model. 
 </p>
 <p>
@@ -1293,7 +1293,7 @@ In contrast to a terminal rule this is only valid in certain contexts, i.e. it w
 If you had defined it as a terminal rule, it would possibly hide the simple <em>ID</em> rule.
 </p>
 <p>
-In addition when the <em>QualifiedName</em> been defined as a data type rule, it is allowed to use hidden 
+In addition, by defining the <em>QualifiedName</em> as a data type rule, it is allowed to use hidden 
 tokens (e.g. <span class="inlinecode"><span class="comment">/*&nbsp;comment&nbsp;*/</span></span> between the segment IDs and dots (e.g. <span class="inlinecode">foo<span class="comment">/*&nbsp;comment&nbsp;*/</span>.&nbsp;bar&nbsp;.&nbsp;Baz</span>).
 </p>
 <p>
@@ -1311,8 +1311,8 @@ QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp
 </div>
 </p>
 <p>
-Note that rules that do not call other parser rules and do neither contain any actions nor <a href="020-grammar-language.html#assignments" title="Go to &quot;Assignments&quot;">assignments</a>, are
- considered to be data type rules and the data type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >EString</abbr></a> is implied if none has been explicitly declared.
+Note that rules that do not call other parser rules and do neither contain any actions nor <a href="020-grammar-language.html#assignments" title="Go to &quot;Assignments&quot;">assignments</a> are
+ considered to be data type rules, and the data type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >EString</abbr></a> is implied if none has been explicitly declared.
 </p>
 <p>
 <a href="050-heading-runtime.html#valueconverter" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
@@ -1356,7 +1356,7 @@ It is even possible to use alternative literals for your enums or reference an e
 </div>
 </p>
 <p>
-Please note, that Ecore does not support unset values for enums. If you define a grammar like
+Please note that Ecore does not support unset values for enums. If you define a grammar like
 </p>
 <p>
 <span class="inlinecode">Element:&nbsp;<span class="string">"element"</span>&nbsp;name=ID&nbsp;(value=SomeEnum)?;</span>
@@ -1462,7 +1462,7 @@ Condition:&nbsp;<br/>
 </p>
 <p>
 The parser understands the predicate basically like this: If you are at this particular decision point
-and you don&apos;t know what to do, look for the <span class="inlinecode"><span class="keyword">else</span></span> keyword and if it&apos;s present. Don&apos;t try to
+and you don&apos;t know what to do, check whether the <span class="inlinecode"><span class="keyword">else</span></span> keyword is present. Don&apos;t try to
 choose the other option that would start with an <span class="inlinecode"><span class="keyword">else</span></span> keyword, too.
 </p>
 <p>
@@ -1472,7 +1472,7 @@ Well chosen predicates allow to solve most ambiguities and backtracking can ofte
 <h4>First Token Set Predicates</h4>
 <p>
 Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long.
-For disambiguation it often is sufficient to only look at the first token set. In those cases one can use
+For disambiguation it is often sufficient to look only at the first token set. In those cases one can use
 the <span class="inlinecode">-&gt;</span> operator instead of <span class="inlinecode">=&gt;</span> which tells the parser to just look at the first token and make the decision based on that.
 This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior 
 of the IDE, such as content assist, in a positive way.
@@ -1601,7 +1601,7 @@ with the <span class="inlinecode">+=</span> operator.
 </p>
 <p>
 Furthermore, each type that is added to the currently possible return types automatically extends the current return type 
-of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
+of the parser rule. You can specify additional common super types by means of "artificial" parser rules that are never called, e.g.
 </p>
 <p>
 <div class="literallayout">
