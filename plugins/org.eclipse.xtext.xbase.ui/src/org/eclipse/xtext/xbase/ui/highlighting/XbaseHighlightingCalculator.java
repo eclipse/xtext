@@ -11,6 +11,7 @@ import java.util.BitSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
@@ -40,14 +43,12 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultSemanticHighlightingCal
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.collect.Maps;
@@ -70,6 +71,9 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
+	
+	@Inject
+	protected AnnotationLookup annotationLookup;
 	
 	private Map<String, String> highlightedIdentifiers;
 	
@@ -177,48 +181,29 @@ public class XbaseHighlightingCalculator extends DefaultSemanticHighlightingCalc
 				if (jvmOperation.isStatic())
 					highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 			}
-			XExpression implicitReceiver = featureCall.getImplicitReceiver();
-			if (featureCall instanceof  XMemberFeatureCall){
-				XMemberFeatureCall casted = (XMemberFeatureCall) featureCall;
-				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(((JvmOperation) feature).isStatic() && !casted.isStaticWithDeclaringType()){
-							highlightFeatureCall(featureCall, acceptor, 
-								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-					}
-					if(implicitReceiver != null){
-							highlightFeatureCall(featureCall, acceptor, 
-								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-					}
-				}
-			}
-			if((featureCall instanceof XAssignment && ((XAssignment)featureCall).getValue() != null)){
-				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(implicitReceiver instanceof XMemberFeatureCall){
-						if(((XMemberFeatureCall) implicitReceiver).getFeature() instanceof JvmField)
-							highlightFeatureCall(featureCall, acceptor, 
-									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-					}
-				}
-			}
-			if (featureCall instanceof XFeatureCall){
-				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if((implicitReceiver != null && ((JvmOperation) feature).isStatic()))
+			if(featureCall.isExtension()){
+				highlightFeatureCall(featureCall, acceptor, 
+						XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+			} else {
+				// Extensions without implicit first argument
+				XExpression implicitReceiver = featureCall.getImplicitReceiver();
+				if(implicitReceiver != null && implicitReceiver instanceof XAbstractFeatureCall){
+						if(isExtension(((XAbstractFeatureCall) implicitReceiver).getFeature()))
 							highlightFeatureCall(featureCall, acceptor, 
 									XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 				}
-			}
-			if (featureCall instanceof XFeatureCall || featureCall instanceof XAssignment) {
-				if(!feature.eIsProxy() && feature instanceof JvmOperation){
-					if(featureCall.getImplicitFirstArgument() != null){
-						highlightFeatureCall(featureCall, acceptor, 
-								XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
-					}
-				}
-			}
+			}		
 			if(feature instanceof JvmAnnotationTarget && DeprecationUtil.isDeprecated((JvmAnnotationTarget)feature)){
 				highlightFeatureCall(featureCall, acceptor, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 			}
 		}
+	}
+	
+	protected boolean isExtension(JvmIdentifiableElement jvmIdentifiableElement){
+		if(jvmIdentifiableElement instanceof JvmAnnotationTarget){
+			return annotationLookup.findAnnotation((JvmAnnotationTarget) jvmIdentifiableElement, Extension.class) != null;
+		}
+		return false;
 	}
 
 	protected void highlightFeatureCall(XAbstractFeatureCall featureCall, IHighlightedPositionAcceptor acceptor, String id) {
