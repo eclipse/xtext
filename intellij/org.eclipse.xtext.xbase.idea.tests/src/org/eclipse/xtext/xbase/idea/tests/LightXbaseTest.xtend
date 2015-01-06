@@ -5,23 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.idea.completion
+package org.eclipse.xtext.xbase.idea.tests
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
-import org.eclipse.xtend.core.idea.lang.XtendFileType
+import org.eclipse.xtext.idea.tests.LibraryUtil
 import org.eclipse.xtext.idea.tests.LightToolingTest
+import org.eclipse.xtext.xbase.idea.lang.XbaseFileType
 
-import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
-
-abstract class LightXtendTest extends LightToolingTest {
-
+abstract class LightXbaseTest extends LightToolingTest {
+	
 	new() {
-		super(XtendFileType.INSTANCE)
+		super(XbaseFileType.INSTANCE)
 	}
-
+	
 	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
-		model.addXtendLibrary
+		LibraryUtil.addXbaseLibrary(model)
 	}
+	
 }
