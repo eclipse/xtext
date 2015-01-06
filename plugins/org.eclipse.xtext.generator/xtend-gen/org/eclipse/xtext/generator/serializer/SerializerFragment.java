@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
+import org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
 import org.eclipse.xtext.generator.serializer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.generator.serializer.DebugGraphGenerator;
@@ -31,6 +32,8 @@ import org.eclipse.xtext.generator.serializer.GrammarConstraints;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector;
+import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
@@ -40,6 +43,9 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+/**
+ * @author Moritz Eyshold - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
   @Inject
@@ -67,6 +73,17 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   private boolean srcGenOnly = false;
   
+  /**
+   * @since 2.8
+   */
+  private boolean detectSyntheticTerminals = true;
+  
+  /**
+   * @since 2.8
+   */
+  @Accessors
+  private SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector();
+  
   @Accessors
   private boolean generateXtendStub;
   
@@ -90,6 +107,25 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   
   public boolean setSrcGenOnly(final boolean srcGen) {
     return this.srcGenOnly = srcGen;
+  }
+  
+  /**
+   * @since 2.8
+   */
+  public boolean isDetectSyntheticTerminals() {
+    return this.detectSyntheticTerminals;
+  }
+  
+  /**
+   * Set to false if synthetic terminal should be ignored. Synthetic terminals
+   * have the form {@code terminal ABC: 'synthetic:ABC';} in the grammar
+   * and require a customized {@link AbstractSplittingTokenSource token source}.
+   * 
+   * @see SyntheticTerminalAwareFragmentHelper
+   * @since 2.8
+   */
+  public void setDetectSyntheticTerminals(final boolean detectSyntheticTerminals) {
+    this.detectSyntheticTerminals = detectSyntheticTerminals;
   }
   
   public void setGenerateStub(final boolean generateStub) {
@@ -117,6 +153,8 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   }
   
   public void generate(final Xtend2ExecutionContext ctx) {
+    this.abstractSyntacticSequencer.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
+    this.abstractSyntacticSequencer.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
     if (this.srcGenOnly) {
       SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
       String _fileName = _semanticSequencer.getFileName();
@@ -129,6 +167,8 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
       CharSequence _fileContents_1 = this.abstractSyntacticSequencer.getFileContents(_syntacticSequencer_1);
       ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
     } else {
+      this.syntacticSequencer.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
+      this.syntacticSequencer.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
       SerializerGenFileNames.GenFileName _semanticSequencer_2 = this.names.getSemanticSequencer();
       String _fileName_2 = _semanticSequencer_2.getFileName();
       SerializerGenFileNames.GenFileName _semanticSequencer_3 = this.names.getSemanticSequencer();
@@ -179,6 +219,15 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
       _xifexpression = null;
     }
     return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
+  }
+  
+  @Pure
+  public SyntheticTerminalDetector getSyntheticTerminalDetector() {
+    return this.syntheticTerminalDetector;
+  }
+  
+  public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
+    this.syntheticTerminalDetector = syntheticTerminalDetector;
   }
   
   @Pure

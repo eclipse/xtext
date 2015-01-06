@@ -30,6 +30,9 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.ICompositeNode
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
+import org.eclipse.xtext.TerminalRule
 
 class AbstractSyntacticSequencer extends GeneratedFile {
 	
@@ -38,6 +41,16 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	@Inject extension GrammarAccess grammarAccess
 	
 	@Inject extension SyntacticSequencerUtil util
+	
+	/**
+	 * @since 2.8
+	 */
+	@Accessors boolean detectSyntheticTerminals = true;
+	
+	/**
+	 * @since 2.8
+	 */
+	@Accessors SyntheticTerminalDetector syntheticTerminalDetector
 	
 	override getFileContents(SerializerGenFileNames.GenFileName filename) {
 		val file = new JavaFile(filename.packageName);
@@ -73,7 +86,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 				«file.genGetUnassignedRuleCallTokens()»
 				
 				«FOR rule:unassignedCalledTokenRules SEPARATOR "\n"»
-					«file.genGetUnassignedRuleCallToken(rule)»
+					«file.genGetUnassignedRuleCallToken(rule, filename.isAbstract)»
 				«ENDFOR»
 				
 				«file.genEmitUnassignedTokens()»
@@ -139,16 +152,30 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		}
 	}
 	
-	def genGetUnassignedRuleCallToken(JavaFile file, AbstractRule rule) '''
-		/**
-		 * «NodeModelUtils.getNode(rule).textWithoutComments.trim.replace("\n", "\n* ")»
-		 */
-		protected String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node) {
-			if (node != null)
-				return getTokenText(node);
-			return "«Strings.convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
+	def genGetUnassignedRuleCallToken(JavaFile file, AbstractRule rule, boolean isAbstract) {
+		if (rule instanceof TerminalRule) {
+			if (detectSyntheticTerminals && syntheticTerminalDetector.isSyntheticTerminalRule(rule)) {
+				return '''
+					/**
+					 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
+					«IF !isAbstract» * Defaults to the empty string.«ENDIF»
+					 */
+					protected «IF isAbstract»abstract «ENDIF»String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node)«
+						IF isAbstract»;«ELSE» { return ""; }«ENDIF»
+				'''
+			}
 		}
-	'''
+		return '''
+			/**
+			 * «NodeModelUtils.getNode(rule).textWithoutComments.trim.replace("\n", "\n* ")»
+			 */
+			protected String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node) {
+				if (node != null)
+					return getTokenText(node);
+				return "«Strings.convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
+			}
+		'''
+	}
 	
 	def genEmitUnassignedTokens(JavaFile file) '''
 		@Override
