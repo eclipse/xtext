@@ -31,7 +31,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageProviderAdapter;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -133,7 +133,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   public void saveResource(final StorageAwareResource resource, final IFileSystemAccessExtension3 fsa) {
     final String path = this.computeOutputPath(resource);
     final ResourceStorageFacade.MyByteArrayOutputStream bout = new ResourceStorageFacade.MyByteArrayOutputStream();
-    final ResourceStorageWritable outStream = this.createResourceStorageWritable(bout);
+    final ResourceStorageWriteable outStream = this.createResourceStorageWriteable(bout);
     outStream.writeResource(resource);
     byte[] _byteArray = bout.toByteArray();
     int _length = bout.length();
@@ -145,8 +145,8 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     return new ResourceStorageLoadable(in);
   }
   
-  public ResourceStorageWritable createResourceStorageWritable(final OutputStream out) {
-    return new ResourceStorageWritable(out);
+  public ResourceStorageWriteable createResourceStorageWriteable(final OutputStream out) {
+    return new ResourceStorageWriteable(out);
   }
   
   /**

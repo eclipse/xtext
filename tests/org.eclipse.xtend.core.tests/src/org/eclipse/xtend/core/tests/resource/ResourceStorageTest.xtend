@@ -36,7 +36,7 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		''')
 		
 		val bout = new ByteArrayOutputStream
-		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(file.eResource as StorageAwareResource)
+		resourceStorageFacade.createResourceStorageWriteable(bout).writeResource(file.eResource as StorageAwareResource)
 		
 		val in = resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))
 		val resource = file.eResource.resourceSet.createResource(URI.createURI("synthetic:/test/MyClass.xtend"))

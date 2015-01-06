@@ -68,7 +68,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	override void saveResource(StorageAwareResource resource, IFileSystemAccessExtension3 fsa) {
 		val path = computeOutputPath(resource)
 		val bout = new MyByteArrayOutputStream()
-		val outStream = createResourceStorageWritable(bout)
+		val outStream = createResourceStorageWriteable(bout)
 		outStream.writeResource(resource)
 		fsa.generateFile(path, new ByteArrayInputStream(bout.toByteArray, 0, bout.length))
 	}
@@ -77,8 +77,8 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 		return new ResourceStorageLoadable(in)
 	}
 	
-	override def ResourceStorageWritable createResourceStorageWritable(OutputStream out) {
-		return new ResourceStorageWritable(out)
+	override def ResourceStorageWriteable createResourceStorageWriteable(OutputStream out) {
+		return new ResourceStorageWriteable(out)
 	}
 	
 	/**

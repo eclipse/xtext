@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 
 /**
@@ -49,9 +49,9 @@ public interface IResourceStorageFacade {
   public abstract void saveResource(final StorageAwareResource resource, final IFileSystemAccessExtension3 fsa);
   
   /**
-   * Creates a fresh ResourceStorageWritable wrapping the given OutputStream
+   * Creates a fresh ResourceStorageWriteable wrapping the given OutputStream
    */
-  public abstract ResourceStorageWritable createResourceStorageWritable(final OutputStream outputStream);
+  public abstract ResourceStorageWriteable createResourceStorageWriteable(final OutputStream outputStream);
   
   /**
    * Creates a fresh ResourceStorageLoadable wrapping the given InputStream

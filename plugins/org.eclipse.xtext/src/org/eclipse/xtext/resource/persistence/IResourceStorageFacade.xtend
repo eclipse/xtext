@@ -46,9 +46,9 @@ interface IResourceStorageFacade {
 	def void saveResource(StorageAwareResource resource, IFileSystemAccessExtension3 fsa)
 	
 	/**
-	 * Creates a fresh ResourceStorageWritable wrapping the given OutputStream 
+	 * Creates a fresh ResourceStorageWriteable wrapping the given OutputStream 
 	 */
-	def ResourceStorageWritable createResourceStorageWritable(OutputStream outputStream)
+	def ResourceStorageWriteable createResourceStorageWriteable(OutputStream outputStream)
 	
 	/**
 	 * Creates a fresh ResourceStorageLoadable wrapping the given InputStream 

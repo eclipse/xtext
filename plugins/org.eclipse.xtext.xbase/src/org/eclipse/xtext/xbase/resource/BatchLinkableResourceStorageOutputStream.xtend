@@ -14,7 +14,7 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xtype.XComputedTypeReference
@@ -22,9 +22,9 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 /**
  * @author Sven Efftinge 
  */
-class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
+class BatchLinkableResourceStorageWriteable extends ResourceStorageWriteable {
 	
-	private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable)
+	private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWriteable)
 	
 	new(OutputStream out) {
 		super(out)

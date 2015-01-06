@@ -20,9 +20,9 @@ import org.eclipse.xtend.lib.annotations.Data
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class ResourceStorageWritable {
+@Data class ResourceStorageWriteable {
 	
-	static val LOG = Logger.getLogger(ResourceStorageWritable)
+	static val LOG = Logger.getLogger(ResourceStorageWriteable)
 	
 	OutputStream out
 	

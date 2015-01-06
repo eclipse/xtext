@@ -22,7 +22,9 @@ import org.eclipse.xtext.util.internal.Stopwatches
  * @author Sven Efftinge - Initial contribution and API
  */
 class StorageAwareResource extends LazyLinkingResource {
+	
 	public static val UNRESOLVABLE_FRAGMENT = "UNRESOLVABLE"
+	
 	static val Logger LOG = Logger.getLogger(StorageAwareResource)
 	
 	@Accessors(PUBLIC_GETTER) @Inject(optional=true) IResourceStorageFacade resourceStorageFacade

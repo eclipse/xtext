@@ -63,7 +63,7 @@ class PortableURIsTest extends AbstractXtextTests {
 			type A extends B
 		'''), null)
 		val bout = new ByteArrayOutputStream
-		val writable = resourceA.resourceStorageFacade.createResourceStorageWritable(bout)
+		val writable = resourceA.resourceStorageFacade.createResourceStorageWriteable(bout)
 		writable.writeResource(resourceA)
 		
 		val loadable = resourceA.resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))

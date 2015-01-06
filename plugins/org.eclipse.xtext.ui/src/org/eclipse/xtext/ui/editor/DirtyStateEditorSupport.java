@@ -45,7 +45,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -505,7 +505,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 								}
 							}
 							final MyByteArrayOutputStream bout = new MyByteArrayOutputStream();
-							ResourceStorageWritable resourceOutputStream = resoureStorageFacade.createResourceStorageWritable(bout);
+							ResourceStorageWriteable resourceOutputStream = resoureStorageFacade.createResourceStorageWriteable(bout);
 							resourceOutputStream.writeResource(storageAwareResource);
 							dirtyResource.setResourceStorageLoadableProvider(new Provider<ResourceStorageLoadable>() {
 								@Override

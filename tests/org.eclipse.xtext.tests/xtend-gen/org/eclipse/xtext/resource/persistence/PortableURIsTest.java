@@ -29,7 +29,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.PortableURIs;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -119,7 +119,7 @@ public class PortableURIsTest extends AbstractXtextTests {
       resourceA.load(_asStream_1, null);
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();
       IResourceStorageFacade _resourceStorageFacade = resourceA.getResourceStorageFacade();
-      final ResourceStorageWritable writable = _resourceStorageFacade.createResourceStorageWritable(bout);
+      final ResourceStorageWriteable writable = _resourceStorageFacade.createResourceStorageWriteable(bout);
       writable.writeResource(resourceA);
       IResourceStorageFacade _resourceStorageFacade_1 = resourceA.getResourceStorageFacade();
       byte[] _byteArray = bout.toByteArray();

@@ -27,8 +27,8 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 		return new BatchLinkableResourceStorageLoadable(in)
 	}
 	
-	override createResourceStorageWritable(OutputStream out) {
-		return new BatchLinkableResourceStorageWritable(out)
+	override createResourceStorageWriteable(OutputStream out) {
+		return new BatchLinkableResourceStorageWriteable(out)
 	}
 	
 	override protected getSourceContainerURI(StorageAwareResource resource) {

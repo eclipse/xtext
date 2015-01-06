@@ -17,12 +17,12 @@ import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageLoadable;
-import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWriteable;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -40,8 +40,8 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
     return new BatchLinkableResourceStorageLoadable(in);
   }
   
-  public ResourceStorageWritable createResourceStorageWritable(final OutputStream out) {
-    return new BatchLinkableResourceStorageWritable(out);
+  public ResourceStorageWriteable createResourceStorageWriteable(final OutputStream out) {
+    return new BatchLinkableResourceStorageWriteable(out);
   }
   
   protected URI getSourceContainerURI(final StorageAwareResource resource) {

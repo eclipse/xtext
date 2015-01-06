@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
+import org.eclipse.xtext.resource.persistence.ResourceStorageWriteable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -44,10 +44,10 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
  * @author Sven Efftinge
  */
 @SuppressWarnings("all")
-public class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
-  private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable.class);
+public class BatchLinkableResourceStorageWriteable extends ResourceStorageWriteable {
+  private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWriteable.class);
   
-  public BatchLinkableResourceStorageWritable(final OutputStream out) {
+  public BatchLinkableResourceStorageWriteable(final OutputStream out) {
     super(out);
   }
   
@@ -92,7 +92,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
               _uRI_1=_eResource_1.getURI();
             }
             String _plus_2 = (_plus_1 + _uRI_1);
-            BatchLinkableResourceStorageWritable.LOG.info(_plus_2);
+            BatchLinkableResourceStorageWriteable.LOG.info(_plus_2);
           } else {
             EObject _key_2 = entry.getKey();
             String _fragment = this.getFragment(_key_2);
@@ -119,14 +119,14 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
               _uRI_3=_eResource_3.getURI();
             }
             String _plus_5 = (_plus_4 + _uRI_3);
-            BatchLinkableResourceStorageWritable.LOG.info(_plus_5);
+            BatchLinkableResourceStorageWriteable.LOG.info(_plus_5);
           } else {
             EObject _key_5 = entry_1.getKey();
             String _fragment_2 = this.getFragment(_key_5);
             Set<EObject> _value_1 = entry_1.getValue();
             final Function1<EObject, String> _function = new Function1<EObject, String>() {
               public String apply(final EObject it) {
-                return BatchLinkableResourceStorageWritable.this.getFragment(it);
+                return BatchLinkableResourceStorageWriteable.this.getFragment(it);
               }
             };
             Iterable<String> _map = IterableExtensions.<EObject, String>map(_value_1, _function);
@@ -152,14 +152,14 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
               _uRI_5=_eResource_5.getURI();
             }
             String _plus_8 = (_plus_7 + _uRI_5);
-            BatchLinkableResourceStorageWritable.LOG.info(_plus_8);
+            BatchLinkableResourceStorageWriteable.LOG.info(_plus_8);
           } else {
             EObject _key_8 = entry_2.getKey();
             String _fragment_3 = this.getFragment(_key_8);
             Set<EObject> _value_2 = entry_2.getValue();
             final Function1<EObject, String> _function_1 = new Function1<EObject, String>() {
               public String apply(final EObject it) {
-                return BatchLinkableResourceStorageWritable.this.getFragment(it);
+                return BatchLinkableResourceStorageWriteable.this.getFragment(it);
               }
             };
             Iterable<String> _map_1 = IterableExtensions.<EObject, String>map(_value_2, _function_1);
