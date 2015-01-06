@@ -79,6 +79,7 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
+import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
 
 /**
  * A generator implementation that processes the 
@@ -148,10 +149,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch ITreeAppendable generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		if(config.generateSyntheticSuppressWarnings)
-			generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
-		else
-			annotations.generateAnnotations(childAppendable, true, config)
+		annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		if (isInterface) {
 			childAppendable.append("interface ")
@@ -181,6 +179,10 @@ class JvmModelGenerator implements IGenerator {
 		appendable.decreaseIndentation.newLine.append('}')
 	}
 	
+	/**
+	 * @deprecated Additional annotations should be created in the JVM model.
+	 */
+	@Deprecated
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != SuppressWarnings.name]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
@@ -191,10 +193,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch ITreeAppendable generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		if(config.generateSyntheticSuppressWarnings)
-			generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
-		else
-			annotations.generateAnnotations(childAppendable, true, config)
+		annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		childAppendable.append("enum ")
 		childAppendable.traceSignificant(it).append(simpleName)
@@ -906,6 +905,7 @@ class JvmModelGenerator implements IGenerator {
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
 		val appendable = new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, context, "  ", "\n")
+		appendable.state.generatorConfig = config
 		return appendable
 	}
 	

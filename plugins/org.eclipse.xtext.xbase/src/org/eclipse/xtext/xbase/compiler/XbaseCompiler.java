@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -1077,7 +1078,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
-		if (isCompiledToJavaSwitch(expr)) {
+		GeneratorConfig config = getGeneratorConfig(b);
+		boolean compileToSwitch;
+		if (config != null && config.getTargetVersion().isAtLeast(JAVA7)) {
+			compileToSwitch = isCompiledToJava7Switch(expr);
+		} else {
+			compileToSwitch = isCompiledToJavaSwitch(expr);
+		}
+		if (compileToSwitch) {
 			_toJavaSwitchStatement(expr, b, isReferenced);
 		} else {
 			_toJavaIfElseStatement(expr, b, isReferenced);
@@ -1407,8 +1415,30 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return caseAppendable;
 	}
 	
+	/**
+	 * Determine whether the given switch expression should be compiled to a Java switch for Java version 6 or lower. 
+	 */
 	protected boolean isCompiledToJavaSwitch(XSwitchExpression expr) {
 		if (!switchExpressions.isJavaSwitchExpression(expr)) {
+			return false;
+		}
+		for (XCasePart casePart : expr.getCases()) {
+			if (!switchExpressions.isJavaCaseExpression(expr, casePart)) {
+				return false;
+			}
+			if (!switchExpressions.isConstant(casePart)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Determine whether the given switch expression should be compiled to a Java switch for Java version 7 or higher.
+	 */
+	protected boolean isCompiledToJava7Switch(XSwitchExpression expr) {
+		// NOTE: This method could be merged with #isCompiledToJavaSwitch(XSwitchExpression)
+		if (!switchExpressions.isJava7SwitchExpression(expr)) {
 			return false;
 		}
 		for (XCasePart casePart : expr.getCases()) {
@@ -1608,7 +1638,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {
 		b.newLine();
 		JvmDeclaredType declaringType = operation.getDeclaringType();
-		if (declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
+		GeneratorConfig config = getGeneratorConfig(b);
+		if (config != null && config.getTargetVersion().isAtLeast(JAVA6)
+				|| declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
 			b.append("@Override").newLine();
 		}
 		switch(operation.getVisibility()) {
