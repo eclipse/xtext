@@ -30,13 +30,15 @@ import com.google.common.collect.Iterables;
 @Beta
 public enum Scenario {
 	/**
-	 * Simulates typeing from the first to the last character.
+	 * Simulates typing from the first to the last character.
 	 */
 	SkipLastCharacters {
 		@Override
-		public void processInput(String input, ScenarioProcessor tester) throws Exception {
+		public void processInput(String input, DeltaScenarioProcessor tester) throws Exception {
+			String data = "";
+			tester.processFile(input, data, 0, 0, "");
 			for(int i = 0; i < input.length(); i++) {
-				tester.processFile(input.substring(0, i));
+				data = tester.processFile(input, data, data.length(), 0, input.charAt(i));
 			}
 		}
 	},
@@ -45,9 +47,11 @@ public enum Scenario {
 	 */
 	SkipFirstCharacters {
 		@Override
-		public void processInput(String input, ScenarioProcessor tester) throws Exception {
+		public void processInput(String input, DeltaScenarioProcessor tester) throws Exception {
+			String data = input;
+			tester.processFile(input, data, 0, 0, "");
 			for(int i = 0; i < input.length(); i++) {
-				tester.processFile(input.substring(i));
+				data = tester.processFile(input, data, 0, 1, "");
 			}
 		}
 	},
@@ -56,10 +60,11 @@ public enum Scenario {
 	 */
 	SkipCharacterInBetween {
 		@Override
-		public void processInput(String input, ScenarioProcessor tester) throws Exception {
+		public void processInput(String input, DeltaScenarioProcessor tester) throws Exception {
 			if (input.length() > 1) {
+				String data = input.substring(1);
 				for(int i = 0; i < input.length() - 1; i++) {
-					tester.processFile(input.substring(0, i) + input.substring(i + 1));
+					data = tester.processFile(input, data, i, 1, input.charAt(i));
 				}
 			}
 		}
@@ -72,7 +77,7 @@ public enum Scenario {
 	 */
 	SkipTokensInBetween {
 		@Override
-		public void processInput(String input, ScenarioProcessor tester) throws Exception {
+		public void processInput(String input, DeltaScenarioProcessor tester) throws Exception {
 			XtextResource resource = tester.get(XtextResource.class);
 			resource.setURI(URI.createURI("dummy.uri"));
 			try {
@@ -85,7 +90,7 @@ public enum Scenario {
 				int start = token.getTotalOffset();
 				int length = token.getTotalLength();
 				if (length > 1 && length != 3) {
-					tester.processFile(input.substring(0, start) + input.substring(start + length));
+					tester.processFile(input, input, start, length, "");
 				}
 			}
 		}
@@ -99,7 +104,7 @@ public enum Scenario {
 	 */
 	SkipNodesInBetween {
 		@Override
-		public void processInput(String input, ScenarioProcessor tester) throws Exception {
+		public void processInput(String input, DeltaScenarioProcessor tester) throws Exception {
 			XtextResource resource = tester.get(XtextResource.class);
 			resource.setURI(URI.createURI("dummy.uri"));
 			try {
@@ -116,9 +121,7 @@ public enum Scenario {
 					if (region == null || region.getOffset() != offset || region.getLength() != length) {
 						region = new ReplaceRegion(offset, length, "");
 						if (Iterables.size(node.getLeafNodes()) > 1 && length > 1 && length != 3) {
-							StringBuilder builder = new StringBuilder(rootNode.getText());
-							region.applyTo(builder);
-							tester.processFile(builder.toString());
+							tester.processFile(input, input, offset, length, "");
 						}
 					}
 				}
@@ -132,10 +135,12 @@ public enum Scenario {
 	 */
 	SkipThreeCharactersInBetween {
 		@Override
-		public void processInput(String input, ScenarioProcessor tester) throws Exception {
-			if (input.length() > 1) {
+		public void processInput(String input, DeltaScenarioProcessor tester) throws Exception {
+			if (input.length() > 3) {
+				String data = input.substring(3);
+				tester.processFile(input, data, 0, 0, "");
 				for(int i = 0; i < input.length() - 3; i++) {
-					tester.processFile(input.substring(0, i) + input.substring(i + 3));
+					data = tester.processFile(input, data, i, 1, input.charAt(i));
 				}
 			}
 		}
@@ -144,5 +149,18 @@ public enum Scenario {
 	/**
 	 * Create permutations of the input document and pass that to the given tester.
 	 */
-	public abstract void processInput(String input, ScenarioProcessor tester) throws Exception;
+	public void processInput(String input, ScenarioProcessor tester) throws Exception {
+		if (tester instanceof DeltaScenarioProcessor) {
+			processInput(input, (DeltaScenarioProcessor) tester);
+		} else {
+			processInput(input, new DeltaScenarioProcessor.Adapter(tester));
+		}
+	}
+	
+	/**
+	 * Create permutations of the input document and pass that to the given tester.
+	 * 
+	 * @since 2.8
+	 */
+	public abstract void processInput(String input, DeltaScenarioProcessor tester) throws Exception;
 }
