@@ -8,9 +8,11 @@
 package org.eclipse.xtend.ide.tests.resource;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import java.util.Collections;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -39,6 +42,20 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ResourceStorageTest extends AbstractXtendUITestCase {
+  public static class TestableStorageAwareTrace extends StorageAwareTrace {
+    public void setLocalStorage(final IStorage derivedResource) {
+      super.setLocalStorage(derivedResource);
+    }
+
+    public URI resolvePath(final IProject project, final URI path) {
+      return super.resolvePath(project, path);
+    }
+
+    public URI resolvePath(final URI path) {
+      return super.resolvePath(path);
+    }
+  }
+
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
@@ -119,6 +136,44 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       Iterable<String> _map_1 = IterableExtensions.<IEObjectDescription, String>map(_exportedObjects_1, _function_1);
       String _join_1 = IterableExtensions.join(_map_1, ",");
       Assert.assertEquals("mypack.MyClass", _join_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testDecodeURI() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public def void foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IFile file = this.helper.createFile("mypack/MyClass Foo.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      final ResourceStorageTest.TestableStorageAwareTrace storageAwareTrace = new ResourceStorageTest.TestableStorageAwareTrace();
+      Injector _injector = this.getInjector();
+      _injector.injectMembers(storageAwareTrace);
+      storageAwareTrace.setLocalStorage(file);
+      URI _createURI = URI.createURI("mypack/MyClass%20Foo.xtend");
+      URI result = storageAwareTrace.resolvePath(_createURI);
+      String _string = result.toString();
+      Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", _string);
+      IProject _project = this.helper.getProject();
+      URI _createURI_1 = URI.createURI("src/mypack/MyClass%20Foo.xtend");
+      URI _resolvePath = storageAwareTrace.resolvePath(_project, _createURI_1);
+      result = _resolvePath;
+      String _string_1 = result.toString();
+      Assert.assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend", _string_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

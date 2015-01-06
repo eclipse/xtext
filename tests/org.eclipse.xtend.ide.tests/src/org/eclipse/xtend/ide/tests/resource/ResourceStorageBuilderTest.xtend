@@ -8,15 +8,20 @@
 package org.eclipse.xtend.ide.tests.resource
 
 import com.google.inject.Inject
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.builder.trace.JarEntryAwareTrace
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 import org.junit.Test
+import org.eclipse.xtext.builder.trace.StorageAwareTrace
+import org.eclipse.core.resources.IStorage
+import org.eclipse.core.resources.IProject
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -64,4 +69,43 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 		assertEquals("mypack.MyClass", resource.resourceDescription.exportedObjects.map[name.toString].join(','))
 	}
 	
+
+
+	@Test
+	def void testDecodeURI(){
+		val file = 'mypack/MyClass Foo.xtend'.createFile('''
+			package mypack
+
+			class Foo {
+				public def void foo() {
+				}
+			}
+		''')
+		IResourcesSetupUtil.waitForAutoBuild
+		val storageAwareTrace = new TestableStorageAwareTrace()
+		injector.injectMembers(storageAwareTrace)
+		storageAwareTrace.localStorage = file
+		var result = storageAwareTrace.resolvePath(URI.createURI('mypack/MyClass%20Foo.xtend'))
+		assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend",result.toString)
+		result = storageAwareTrace.resolvePath(project, URI.createURI('src/mypack/MyClass%20Foo.xtend'))
+		assertEquals("platform:/resource/test.project/src/mypack/MyClass%20Foo.xtend",result.toString)
+	}
+
+
+	static class TestableStorageAwareTrace extends StorageAwareTrace {
+
+		override public setLocalStorage(IStorage derivedResource) {
+			super.setLocalStorage(derivedResource)
+		}
+
+		override public resolvePath(IProject project, URI path) {
+			super.resolvePath(project, path)
+		}
+
+		override public resolvePath(URI path) {
+			super.resolvePath(path)
+		}
+
+	}
+
 }
