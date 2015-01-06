@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.ScopeStack;
 
@@ -28,6 +29,7 @@ public class SharedAppendableState {
 	private final ScopeStack scopes;
 	private final ImportManager importManager;
 	private final Resource resource;
+	private GeneratorConfig generatorConfig;
 	
 	public SharedAppendableState(String indentation, String lineSeparator, ImportManager importManager, Resource resource) {
 		this.resource = resource;
@@ -84,7 +86,7 @@ public class SharedAppendableState {
 	}
 	
 	public void appendType(final JvmType type, IAcceptor<String> content) {
-		// don't import if if a local variable with the same name is on the scope
+		// don't import if a local variable with the same name is on the scope
 		//TODO logic should be moved to ImportManager eventually.
 		if (hasObject(type.getSimpleName())) {
 			content.accept(type.getQualifiedName('.'));
@@ -96,7 +98,7 @@ public class SharedAppendableState {
 	}
 	
 	public void appendType(final Class<?> type, IAcceptor<String> content) {
-		// don't import if if a local variable with the same name is on the scope
+		// don't import if a local variable with the same name is on the scope
 		//TODO logic should be moved to ImportManager eventually.
 		if (hasObject(type.getSimpleName())) {
 			content.accept(type.getCanonicalName());
@@ -150,6 +152,14 @@ public class SharedAppendableState {
 	
 	String getIndentationString() {
 		return indentation;
+	}
+
+	public GeneratorConfig getGeneratorConfig() {
+		return generatorConfig;
+	}
+
+	public void setGeneratorConfig(GeneratorConfig generatorConfig) {
+		this.generatorConfig = generatorConfig;
 	}
 
 }

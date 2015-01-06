@@ -974,7 +974,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("override doTransform(MutableClassDeclaration it, extension TransformationContext context) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("removeAnnotation(annotations.head)");
+    _builder.append("removeAnnotation(findAnnotation(context.findTypeGlobally(\'myannotation.MyAnnotation\')))");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("addAnnotation(Values.newAnnotationReference [");
@@ -1043,8 +1043,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Foo");
-        Iterable<? extends AnnotationReference> _annotations = foo.getAnnotations();
-        final AnnotationReference values = IterableExtensions.head(_annotations);
+        TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+        final Type annotationType = _typeLookup_1.findTypeGlobally("myannotation.Values");
+        final AnnotationReference values = foo.findAnnotation(annotationType);
         int[] _intArrayValue = values.getIntArrayValue("intValue");
         int _size = ((List<Integer>)Conversions.doWrapArray(_intArrayValue)).size();
         Assert.assertEquals(0, _size);
@@ -1534,8 +1535,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
         Type _findTypeGlobally = _typeLookup_1.findTypeGlobally("myannotation.BlackOrWhite");
         final EnumerationTypeDeclaration colorEnum = ((EnumerationTypeDeclaration) _findTypeGlobally);
-        Iterable<? extends AnnotationReference> _annotations = clazz.getAnnotations();
-        final AnnotationReference annotation = IterableExtensions.head(_annotations);
+        TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
+        final Type annotationType = _typeLookup_2.findTypeGlobally("myannotation.ConfigurableAnnotation");
+        final AnnotationReference annotation = clazz.findAnnotation(annotationType);
         EnumerationValueDeclaration _findDeclaredValue = colorEnum.findDeclaredValue("BLACK");
         Object _value = annotation.getValue("color");
         Assert.assertEquals(_findDeclaredValue, _value);
@@ -1560,8 +1562,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
         TypeReference _primitiveBoolean = _typeReferenceProvider_1.getPrimitiveBoolean();
         Object _get_2 = types[0];
         Assert.assertEquals(_primitiveBoolean, _get_2);
-        TypeLookupImpl _typeLookup_2 = it.getTypeLookup();
-        final Type someAnnotationType = _typeLookup_2.findTypeGlobally("myannotation.SomeAnnotation");
+        TypeLookupImpl _typeLookup_3 = it.getTypeLookup();
+        final Type someAnnotationType = _typeLookup_3.findTypeGlobally("myannotation.SomeAnnotation");
         final AnnotationReference annotationValue = annotation.getAnnotationValue("annotation");
         Assert.assertNotNull(annotationValue);
         AnnotationTypeDeclaration _annotationTypeDeclaration = annotationValue.getAnnotationTypeDeclaration();
@@ -3224,7 +3226,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
         Iterable<? extends AnnotationReference> _annotations = clazz.getAnnotations();
         int _size = IterableExtensions.size(_annotations);
-        Assert.assertEquals(0, _size);
+        Assert.assertEquals(1, _size);
       }
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -3356,9 +3358,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.newLine();
     _builder_2.append("@MarkAsDeprecated");
     _builder_2.newLine();
-    _builder_2.append("@Deprecated");
-    _builder_2.newLine();
     _builder_2.append("@SuppressWarnings(\"all\")");
+    _builder_2.newLine();
+    _builder_2.append("@Deprecated");
     _builder_2.newLine();
     _builder_2.append("public class MyClass {");
     _builder_2.newLine();

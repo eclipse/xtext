@@ -111,10 +111,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("/* @MyAnnotation");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("*/@SuppressWarnings(\"all\")");
+    _builder_1.append("/* @MyAnnotation */@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
@@ -164,10 +161,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("/* @MyAnnotation()");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("*/@SuppressWarnings(\"all\")");
+    _builder_1.append("/* @MyAnnotation() */@SuppressWarnings(\"unused\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo {");
     _builder_1.newLine();

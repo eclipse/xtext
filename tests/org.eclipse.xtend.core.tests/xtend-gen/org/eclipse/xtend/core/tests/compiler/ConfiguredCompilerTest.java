@@ -7,14 +7,17 @@
  */
 package org.eclipse.xtend.core.tests.compiler;
 
+import org.eclipse.xtend.core.tests.SingletonGeneratorConfigRuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@InjectWith(SingletonGeneratorConfigRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
   @Test
@@ -72,13 +75,14 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
   public void testAnnotationWithValueArray_01() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     generatorConfig.setGenerateSyntheticSuppressWarnings(false);
+    generatorConfig.setGenerateExpressions(true);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@SuppressWarnings(#[ \'abc\', \'efg\' ])");
     _builder.newLine();
@@ -93,13 +97,14 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
   public void testAnnotationWithValueArray_02() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     generatorConfig.setGenerateSyntheticSuppressWarnings(false);
+    generatorConfig.setGenerateExpressions(true);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@SuppressWarnings(\'abc\', \'efg\')");
     _builder.newLine();
@@ -114,7 +119,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -161,7 +166,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append(" ");
     _builder_1.append("*/");
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"unused\")");
     _builder_1.newLine();
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
@@ -176,7 +181,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -227,7 +232,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("@Deprecated");
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"unused\")");
     _builder_1.newLine();
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
@@ -242,6 +247,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
 }
