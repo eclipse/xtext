@@ -10,6 +10,7 @@ package org.eclipse.xtext.generator.parser.antlr.ex.common;
 import java.util.List;
 
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment;
 
 import com.google.common.collect.ImmutableList;
@@ -30,6 +31,14 @@ public abstract class AbstractAntlrGeneratorFragmentEx extends AbstractAntlrGene
 		if (fragmentHelper == null)
 			fragmentHelper = new AntlrFragmentHelper(getNaming());
 		return fragmentHelper;
+	}
+	
+	@Override
+	public void registerNaming(Naming naming) {
+		if (fragmentHelper != null) {
+			fragmentHelper.registerNaming(naming);
+		}
+		super.registerNaming(naming);
 	}
 
 	@Override
