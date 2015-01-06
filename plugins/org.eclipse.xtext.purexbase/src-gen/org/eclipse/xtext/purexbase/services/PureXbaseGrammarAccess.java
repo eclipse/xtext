@@ -29,7 +29,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Model:
 		//	importSection=XImportSection? block=SpecialBlockExpression;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//importSection=XImportSection? block=SpecialBlockExpression
 		public Group getGroup() { return cGroup; }
@@ -58,7 +58,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//SpecialBlockExpression returns xbase::XBlockExpression:
 		//	{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{xbase::XBlockExpression} (expressions+=XExpressionOrVarDeclaration ";"?)*
 		public Group getGroup() { return cGroup; }
@@ -85,7 +85,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//FeatureCallID:
 		//	ValidID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ValidID
 		public RuleCall getValidIDParserRuleCall() { return cValidIDParserRuleCall; }
@@ -126,7 +126,7 @@ public class PureXbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

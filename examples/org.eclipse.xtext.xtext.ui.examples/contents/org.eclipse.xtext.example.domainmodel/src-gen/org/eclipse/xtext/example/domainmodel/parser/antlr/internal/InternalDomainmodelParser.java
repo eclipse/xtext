@@ -55,8 +55,8 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -20817,11 +20817,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred16_InternalDomainmodel() {
+    public final boolean synpred26_InternalDomainmodel() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred16_InternalDomainmodel_fragment(); // can never throw exception
+            synpred26_InternalDomainmodel_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -20831,11 +20831,11 @@ public class InternalDomainmodelParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred26_InternalDomainmodel() {
+    public final boolean synpred16_InternalDomainmodel() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred26_InternalDomainmodel_fragment(); // can never throw exception
+            synpred16_InternalDomainmodel_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

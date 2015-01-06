@@ -9,6 +9,7 @@ import com.google.inject.Injector;
 
 public class EntitiesUiInjectorProvider implements IInjectorProvider {
 	
+	@Override
 	public Injector getInjector() {
 		return org.eclipse.xtext.idea.example.entities.ui.internal.EntitiesActivator.getInstance().getInjector("org.eclipse.xtext.idea.example.entities.Entities");
 	}

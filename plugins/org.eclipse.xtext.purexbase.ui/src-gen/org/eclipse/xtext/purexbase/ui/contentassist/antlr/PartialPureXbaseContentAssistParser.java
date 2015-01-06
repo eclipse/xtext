@@ -19,6 +19,7 @@ public class PartialPureXbaseContentAssistParser extends PureXbaseParser impleme
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

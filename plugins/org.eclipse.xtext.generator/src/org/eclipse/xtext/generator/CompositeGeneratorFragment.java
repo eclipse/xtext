@@ -29,7 +29,7 @@ import com.google.common.base.Function;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3, NamingAware {
+public class CompositeGeneratorFragment implements IGeneratorFragment, IGeneratorFragmentExtension, IGeneratorFragmentExtension2, IGeneratorFragmentExtension3, IGeneratorFragmentExtension4, NamingAware {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
 
@@ -284,7 +284,41 @@ public class CompositeGeneratorFragment implements IGeneratorFragment, IGenerato
 			}
 		});
 	}
-
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getDefaultRuntimeModuleClassName(Grammar grammar) {
+		String result = null;
+		for (IGeneratorFragment f : fragments) {
+			if (f instanceof IGeneratorFragmentExtension4) {
+				String candidate = ((IGeneratorFragmentExtension4) f).getDefaultRuntimeModuleClassName(grammar);
+				if (candidate != null) {
+					result = candidate;
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getDefaultUiModuleClassName(Grammar grammar) {
+		String result = null;
+		for (IGeneratorFragment f : fragments) {
+			if (f instanceof IGeneratorFragmentExtension4) {
+				String candidate = ((IGeneratorFragmentExtension4) f).getDefaultUiModuleClassName(grammar);
+				if (candidate != null) {
+					result = candidate;
+				}
+			}
+		}
+		return result;
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {

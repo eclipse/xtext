@@ -10,7 +10,7 @@ class XbaseCompletionContributor extends AbstractXbaseCompletionContributor {
 	
 	new(AbstractXtextLanguage lang) {
 		super(lang)
-		//custom rules here
+//		custom rules here
 	}
 }
 

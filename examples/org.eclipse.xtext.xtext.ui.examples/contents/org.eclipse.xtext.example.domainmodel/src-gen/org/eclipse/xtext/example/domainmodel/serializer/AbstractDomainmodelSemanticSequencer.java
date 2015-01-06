@@ -72,6 +72,7 @@ public abstract class AbstractDomainmodelSemanticSequencer extends XbaseSemantic
 	@Inject
 	private DomainmodelGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == DomainmodelPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case DomainmodelPackage.DOMAIN_MODEL:

@@ -20,6 +20,7 @@ public class PartialDomainmodelContentAssistParser extends DomainmodelParser imp
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}
