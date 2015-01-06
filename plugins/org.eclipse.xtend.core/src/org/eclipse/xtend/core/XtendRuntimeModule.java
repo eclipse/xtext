@@ -365,11 +365,4 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendTokenSourceProvider.class;
 	}
 	
-	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
-		return JavaIoFileSystemAccess.class;
-	}
-	
-	public Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {
-		return BatchLinkableResourceStorageFacade.class;
-	}
 }

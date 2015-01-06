@@ -1,0 +1,27 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.generator;
+
+import org.eclipse.xtext.Grammar;
+
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ * @since 2.8
+ */
+public interface IGeneratorFragmentExtension4 {
+
+	/**
+	 * @return the qualified name of the default module the generated runtime one should inherit from, or <code>null</code> if the default one should be used.
+	 */
+	public String getDefaultRuntimeModuleClassName(Grammar grammar);
+	
+	/**
+	 * @return the qualified name of the default module the generated ui one should inherit from, or <code>null</code> if the default one should be used.
+	 */
+	public String getDefaultUiModuleClassName(Grammar grammar);
+}
