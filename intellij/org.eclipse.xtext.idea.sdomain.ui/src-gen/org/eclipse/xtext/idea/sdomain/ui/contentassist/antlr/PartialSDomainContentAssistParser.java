@@ -20,6 +20,7 @@ public class PartialSDomainContentAssistParser extends SDomainParser implements 
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

@@ -601,5 +601,11 @@
             extensions="entities">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="entities"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>

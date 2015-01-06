@@ -72,6 +72,7 @@ public class EntitiesSemanticSequencer extends XbaseSemanticSequencer {
 	@Inject
 	private EntitiesGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == DomainmodelPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case DomainmodelPackage.ENTITIES:
