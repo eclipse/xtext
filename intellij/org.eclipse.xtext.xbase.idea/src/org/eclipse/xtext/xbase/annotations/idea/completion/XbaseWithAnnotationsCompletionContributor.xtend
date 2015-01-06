@@ -13,5 +13,3 @@ class XbaseWithAnnotationsCompletionContributor extends AbstractXbaseWithAnnotat
 		//custom rules here
 	}
 }
-
-

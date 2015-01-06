@@ -13,7 +13,7 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate(Set[Binding] bindings) FOR Grammar»
+«DEFINE generate(String superClassName, Set[Binding] bindings) FOR Grammar»
 «EXPAND guiceModuleUi»
 
 «FILE guiceModuleUiGenerated().asPath()+".java" SRC_GEN_UI»
@@ -29,7 +29,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  * Manual modifications go to {«guiceModuleUi()»}
  */
 @SuppressWarnings("all")
-public abstract class «guiceModuleUiGenerated().toSimpleName()» extends DefaultUiModule {
+public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «superClassName» {
 	
 	public «guiceModuleUiGenerated().toSimpleName()»(AbstractUIPlugin plugin) {
 		super(plugin);

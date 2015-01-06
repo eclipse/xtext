@@ -14,50 +14,23 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.generator.IGeneratorFragmentExtension4;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypesGeneratorFragment extends DefaultGeneratorFragment {
+public class TypesGeneratorFragment extends DefaultGeneratorFragment implements IGeneratorFragmentExtension4 {
 	
 	static {
 		new StandaloneSetup().addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
 	}
 
 	@Override
-	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-		     .addTypeToInstance("org.eclipse.xtext.common.types.TypesFactory", "org.eclipse.xtext.common.types.TypesFactory.eINSTANCE")
-			 .addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory")
-			 .addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider")
-			 .addTypeToType(IGlobalScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider")
-			 .getBindings();
-	}
-
-	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			 .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
-			 .addTypeToType("org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory", "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
-			 .addTypeToType("org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
-			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider",
-					 	"org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
-			 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider",
-					 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
-			 .addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper",
-					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
+			 // overrides binding from org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
 			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher",
 					 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
-			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider$ReferenceProposalCreator",
-					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator")
-		 	 .addTypeToType("org.eclipse.xtext.ui.editor.IValidationJobScheduler",
-					 	"org.eclipse.xtext.common.types.xtext.ui.JdtValidationJobScheduler")
-			 .addTypeToType("org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider",
-						"org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetProvider")
-			 .addTypeToType("org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation", 
-						"org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation.Yes")
 			 .getBindings();
 	}
 
@@ -74,6 +47,22 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[] { "org.eclipse.xtext.common.types.ui" };
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getDefaultRuntimeModuleClassName(Grammar grammar) {
+		return "org.eclipse.xtext.common.types.DefaultCommonTypesRuntimeModule";
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getDefaultUiModuleClassName(Grammar grammar) {
+		return "org.eclipse.xtext.common.types.ui.DefaultCommonTypesUiModule";
 	}
 
 }

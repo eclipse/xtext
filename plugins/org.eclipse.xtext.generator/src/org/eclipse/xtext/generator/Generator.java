@@ -423,7 +423,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private void generateGuiceModuleRt(LanguageConfig config, XpandExecutionContext ctx) {
 		XpandFacade facade = XpandFacade.create(ctx);
 		Set<Binding> bindings = config.getGuiceBindingsRt(config.getGrammar());
-		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), bindings,
+		String superClassName = config.getDefaultRuntimeModuleClassName(config.getGrammar());
+		if (superClassName == null) {
+			superClassName = "DefaultRuntimeModule";
+		}
+		facade.evaluate("org::eclipse::xtext::generator::GuiceModuleRt::generate", config.getGrammar(), superClassName, bindings,
 				config.getFileExtensions(config.getGrammar()));
 	}
 
@@ -431,7 +435,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (isUi()) {
 			XpandFacade facade = XpandFacade.create(ctx);
 			Set<Binding> bindings = config.getGuiceBindingsUi(config.getGrammar());
-			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", config.getGrammar(), bindings);
+			String superClassName = config.getDefaultUiModuleClassName(config.getGrammar());
+			if (superClassName == null) {
+				superClassName = "DefaultUiModule";
+			}
+			facade.evaluate("org::eclipse::xtext::generator::GuiceModuleUi::generate", config.getGrammar(), superClassName, bindings);
 		}
 	}
 
