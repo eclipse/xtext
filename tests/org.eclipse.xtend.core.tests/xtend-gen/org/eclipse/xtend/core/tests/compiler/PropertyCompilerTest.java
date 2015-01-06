@@ -18,7 +18,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -152,7 +151,6 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void compileProperty() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -213,12 +211,11 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
   public void compileReadonlyPropertyWithoutType() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
     _builder.newLine();
@@ -262,7 +259,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -290,7 +287,6 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void compilePropertyWithTypeParameter() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> {");
     _builder.newLine();
@@ -345,7 +341,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
@@ -373,7 +369,6 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
   
   @Test
   public void compilePropertyWithArrayType() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T> {");
     _builder.newLine();
@@ -428,7 +423,7 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test

@@ -12,8 +12,10 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -109,12 +111,31 @@ public class JvmTypeExtensions {
     return _metaData.isSynthetic();
   }
   
+  /**
+   * @since 2.8
+   */
+  public boolean isSynthetic(final JvmAnnotationReference element) {
+    JvmIdentifiableMetaData _metaData = this.getMetaData(element);
+    return _metaData.isSynthetic();
+  }
+  
   public void setSynthetic(final JvmIdentifiableElement element, final boolean isSynthetic) {
     JvmIdentifiableMetaData _metaData = this.getMetaData(element);
     _metaData.setSynthetic(isSynthetic);
   }
   
-  protected JvmIdentifiableMetaData getMetaData(final JvmIdentifiableElement element) {
+  /**
+   * @since 2.8
+   */
+  public void setSynthetic(final JvmAnnotationReference element, final boolean isSynthetic) {
+    JvmIdentifiableMetaData _metaData = this.getMetaData(element);
+    _metaData.setSynthetic(isSynthetic);
+  }
+  
+  /**
+   * @since 2.8
+   */
+  protected JvmIdentifiableMetaData getMetaData(final EObject element) {
     EList<Adapter> _eAdapters = element.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, JvmIdentifiableMetaData.class);
     JvmIdentifiableMetaData metaData = ((JvmIdentifiableMetaData) _adapter);

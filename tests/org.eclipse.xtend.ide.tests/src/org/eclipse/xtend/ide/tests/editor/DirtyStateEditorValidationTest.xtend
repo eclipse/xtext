@@ -78,7 +78,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		val declaration = createFileImpl('projectA/src/mypack/MyClass.xtend', '''
 			package mypack
 			
-			import org.eclipse.xtend.lib.macro.Data
+			import org.eclipse.xtend.lib.annotations.Data
 			
 			@Data class MyClass {
 				String myProperty
@@ -105,7 +105,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		editor.document.set('''
 			package mypack
 			
-			import org.eclipse.xtend.lib.macro.Data
+			import org.eclipse.xtend.lib.annotations.Data
 			
 			@Data class MyClass {
 				boolean foo
@@ -134,7 +134,7 @@ class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
 		editor2.document.set('''
 			package otherpack
 			
-			@org.eclipse.xtend.lib.macro.Data class OtherClass {
+			@org.eclipse.xtend.lib.annotations.Data class OtherClass {
 			}
 		''')
 		editor2.waitForReconciler()

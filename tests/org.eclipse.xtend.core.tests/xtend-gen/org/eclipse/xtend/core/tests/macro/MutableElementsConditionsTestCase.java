@@ -60,8 +60,6 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -84,8 +82,6 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.append("package foo;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
     _builder_1.append("public enum Bar3 {");
     _builder_1.newLine();
     _builder_1.append("}");
@@ -96,8 +92,6 @@ public class MutableElementsConditionsTestCase extends AbstractActiveAnnotationT
     _builder_1.newLine();
     _builder_1.append("package foo;");
     _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public interface Bar4 {");
     _builder_1.newLine();

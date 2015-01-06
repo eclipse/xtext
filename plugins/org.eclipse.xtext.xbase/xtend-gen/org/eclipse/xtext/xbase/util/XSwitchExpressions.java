@@ -36,6 +36,9 @@ public class XSwitchExpressions {
   @Extension
   private SwitchConstantExpressionsInterpreter _switchConstantExpressionsInterpreter;
   
+  /**
+   * Determine whether the given switch expression is valid for Java version 6 or lower.
+   */
   public boolean isJavaSwitchExpression(final XSwitchExpression it) {
     boolean _xblockexpression = false;
     {
@@ -50,6 +53,34 @@ public class XSwitchExpressions {
       }
       boolean _isSubtypeOf_1 = switchType.isSubtypeOf(Enum.class);
       if (_isSubtypeOf_1) {
+        return true;
+      }
+      _xblockexpression = false;
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * Determine whether the given switch expression is valid for Java version 7 or higher.
+   */
+  public boolean isJava7SwitchExpression(final XSwitchExpression it) {
+    boolean _xblockexpression = false;
+    {
+      final LightweightTypeReference switchType = this.getSwitchVariableType(it);
+      boolean _equals = Objects.equal(switchType, null);
+      if (_equals) {
+        return false;
+      }
+      boolean _isSubtypeOf = switchType.isSubtypeOf(Integer.TYPE);
+      if (_isSubtypeOf) {
+        return true;
+      }
+      boolean _isSubtypeOf_1 = switchType.isSubtypeOf(Enum.class);
+      if (_isSubtypeOf_1) {
+        return true;
+      }
+      boolean _isSubtypeOf_2 = switchType.isSubtypeOf(String.class);
+      if (_isSubtypeOf_2) {
         return true;
       }
       _xblockexpression = false;

@@ -27,7 +27,6 @@ class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
 			
 			package de.test;
 			
-			@SuppressWarnings("all")
 			public interface Test {
 			}
 
