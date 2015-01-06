@@ -10,11 +10,13 @@ package org.eclipse.xtend.idea.parsing
 import org.eclipse.xtend.core.tests.parsing.ParserTest
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
+import org.junit.Ignore
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @FinalFieldsConstructor
+@Ignore("Only here as a delegate")
 class IdeaXtendParserTest extends ParserTest {
 	
 	val ModelChecker modelChecker
