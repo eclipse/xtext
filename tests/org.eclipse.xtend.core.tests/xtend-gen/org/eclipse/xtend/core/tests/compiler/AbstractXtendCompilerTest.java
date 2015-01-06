@@ -82,6 +82,11 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(input, expected, _get);
   }
   
+  /**
+   * Perform a compilation test with the given generator configuration.
+   * WARNING: The configuration is applied only to the JVM model generator, but not to the
+   * JVM model inferrer or the Java compiler!
+   */
   public void assertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config) {
     this.doAssertCompilesTo(input, expected, config);
   }

@@ -251,13 +251,8 @@ public class JvmModelGenerator implements IGenerator {
     {
       this.generateJavaDoc(it, appendable, config);
       final ITreeAppendable childAppendable = appendable.trace(it);
-      boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
-      if (_isGenerateSyntheticSuppressWarnings) {
-        this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
-      } else {
-        EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-        this.generateAnnotations(_annotations, childAppendable, true, config);
-      }
+      EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+      this.generateAnnotations(_annotations, childAppendable, true, config);
       this.generateModifier(it, childAppendable, config);
       boolean _isInterface = it.isInterface();
       if (_isInterface) {
@@ -325,6 +320,10 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
+  /**
+   * @deprecated Additional annotations should be created in the JVM model.
+   */
+  @Deprecated
   public ITreeAppendable generateAnnotationsWithSyntheticSuppressWarnings(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -362,13 +361,8 @@ public class JvmModelGenerator implements IGenerator {
     {
       this.generateJavaDoc(it, appendable, config);
       final ITreeAppendable childAppendable = appendable.trace(it);
-      boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
-      if (_isGenerateSyntheticSuppressWarnings) {
-        this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
-      } else {
-        EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-        this.generateAnnotations(_annotations, childAppendable, true, config);
-      }
+      EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+      this.generateAnnotations(_annotations, childAppendable, true, config);
       this.generateModifier(it, childAppendable, config);
       childAppendable.append("enum ");
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
@@ -1861,6 +1855,8 @@ public class JvmModelGenerator implements IGenerator {
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager, final GeneratorConfig config) {
     final TreeAppendable appendable = new TreeAppendable(importManager, this.converter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
+    SharedAppendableState _state = appendable.getState();
+    _state.setGeneratorConfig(config);
     return appendable;
   }
   

@@ -9,14 +9,14 @@ package org.eclipse.xtext.xbase.jvmmodel
 
 import com.google.inject.Inject
 import org.eclipse.emf.common.notify.impl.AdapterImpl
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter
-import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter
-import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 
 /**
  * @noextend This class is not intended to be subclassed by clients.

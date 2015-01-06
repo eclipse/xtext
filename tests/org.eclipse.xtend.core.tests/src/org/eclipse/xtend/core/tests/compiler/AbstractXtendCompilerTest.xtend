@@ -10,12 +10,18 @@ package org.eclipse.xtend.core.tests.compiler
 import bug380058.Amount
 import com.google.common.collect.Lists
 import com.google.inject.Inject
+import javax.inject.Provider
+import org.antlr.runtime.Lexer
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
+import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+import org.eclipse.xtext.util.concurrent.IReadAccess
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
@@ -27,11 +33,6 @@ import org.hamcrest.core.Is
 import org.junit.Assert
 import org.junit.Before
 import testdata.Annotation1
-import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
-import org.antlr.runtime.Lexer
-import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
-import org.eclipse.xtext.util.concurrent.IReadAccess
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -53,7 +54,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			Amount,
 			Data,
 			Inject,
-			javax.inject.Provider,
+			Provider,
 			Lexer,
 			InternalXtendLexer,
 			IReadAccess,
@@ -76,6 +77,11 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		assertCompilesTo(input, expected, generatorConfigProvider.get(null))
 	}
 
+	/**
+	 * Perform a compilation test with the given generator configuration.
+	 * WARNING: The configuration is applied only to the JVM model generator, but not to the
+	 * JVM model inferrer or the Java compiler!
+	 */
 	def void assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
 		doAssertCompilesTo(input, expected, config)
 	}

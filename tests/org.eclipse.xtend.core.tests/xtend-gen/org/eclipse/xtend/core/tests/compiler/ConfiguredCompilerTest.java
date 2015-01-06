@@ -17,7 +17,6 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
-  @Test
   public void compileWithConfiguration() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     generatorConfig.setGenerateSyntheticSuppressWarnings(false);
@@ -75,7 +74,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
   
-  @Test
   public void testAnnotationWithValueArray_01() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     generatorConfig.setGenerateSyntheticSuppressWarnings(false);
@@ -96,7 +94,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
   
-  @Test
   public void testAnnotationWithValueArray_02() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     generatorConfig.setGenerateSyntheticSuppressWarnings(false);
@@ -120,7 +117,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
   @Test
   public void compileWithConfiguration_2() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    generatorConfig.setGenerateSyntheticSuppressWarnings(true);
     generatorConfig.setGenerateExpressions(false);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -161,7 +157,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append(" ");
     _builder_1.append("*/");
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"unused\")");
     _builder_1.newLine();
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
@@ -182,7 +178,6 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
   @Test
   public void compileWithConfiguration_3() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
-    generatorConfig.setGenerateSyntheticSuppressWarnings(true);
     generatorConfig.setGenerateExpressions(false);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -227,7 +222,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("@Deprecated");
     _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.append("@SuppressWarnings(\"unused\")");
     _builder_1.newLine();
     _builder_1.append("public class Bar {");
     _builder_1.newLine();
