@@ -6,6 +6,7 @@ Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.linking.lazy,
+ org.eclipse.xtext.parser.indentation,
  org.eclipse.xtext.formatting2.internal,
  org.eclipse.xtext.formatting2.regionaccess.internal
 Require-Bundle: org.eclipse.xtext.tests,

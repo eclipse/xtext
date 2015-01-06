@@ -437,5 +437,15 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.resource.bug385636,
  org.eclipse.xtext.resource.bug385636.impl,
  org.eclipse.xtext.resource.bug385636.util,
- org.eclipse.xtext.parsetree.formatter.serializer
+ org.eclipse.xtext.parsetree.formatter.serializer,
+ org.eclipse.xtext.parser.indentation.parser.antlr,
+ org.eclipse.xtext.parser.indentation.parser.antlr.internal,
+ org.eclipse.xtext.parser.indentation.parser.antlr.lexer,
+ org.eclipse.xtext.parser.indentation,
+ org.eclipse.xtext.parser.indentation.services,
+ org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage,
+ org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.impl,
+ org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.util,
+ org.eclipse.xtext.parser.indentation.parseTreeConstruction,
+ org.eclipse.xtext.parser.indentation.serializer
 
