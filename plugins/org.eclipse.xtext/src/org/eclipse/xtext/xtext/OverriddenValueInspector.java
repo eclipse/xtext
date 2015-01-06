@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,12 +35,24 @@ import com.google.common.collect.Multimap;
 public class OverriddenValueInspector extends XtextRuleInspector<Boolean, ParserRule> {
 
 	private Multimap<String, AbstractElement> assignedFeatures;
-
+	
+	/**
+	 * Remember all visited unassigned rule calls in case the grammar is broken, e.g. has
+	 * no assignments (yet).
+	 */
+	private Set<AbstractRule> permanentlyVisited;
+	
 	public OverriddenValueInspector(ValidationMessageAcceptor acceptor) {
 		super(acceptor);
 		assignedFeatures = newMultimap();
+		permanentlyVisited = Sets.newHashSet();
 	}
-
+	
+	@Override
+	public boolean addVisited(AbstractRule rule) {
+		return permanentlyVisited.add(rule) && super.addVisited(rule);
+	}
+	
 	@Override
 	protected boolean canInspect(ParserRule rule) {
 		if (GrammarUtil.isDatatypeRule(rule) || rule.getAlternatives() == null)
@@ -105,7 +119,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	@Override
 	public Boolean caseRuleCall(RuleCall object) {
 		AbstractRule calledRule = object.getRule();
-		if (calledRule == null || calledRule instanceof TerminalRule || calledRule instanceof EnumRule)
+		if (calledRule == null || calledRule.eIsProxy() || calledRule instanceof TerminalRule || calledRule instanceof EnumRule)
 			return Boolean.FALSE;
 		ParserRule parserRule = (ParserRule) calledRule;
 		if (GrammarUtil.isDatatypeRule(parserRule))
@@ -126,10 +140,14 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	public Boolean caseAlternatives(Alternatives object) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
 		Multimap<String, AbstractElement> mergedAssignedFeatures = LinkedHashMultimap.create();
+		Set<AbstractRule> prevPermanentlyVisited = permanentlyVisited;
+		Set<AbstractRule> mergedPermanentlyVisited = Sets.newHashSet();
 		for (AbstractElement element : object.getElements()) {
 			assignedFeatures = newMultimap(prevAssignedFeatures);
+			permanentlyVisited = Sets.newHashSet(prevPermanentlyVisited);
 			doSwitch(element);
 			mergedAssignedFeatures.putAll(assignedFeatures);
+			mergedPermanentlyVisited.addAll(prevPermanentlyVisited);
 		}
 		if (GrammarUtil.isOptionalCardinality(object)) {
 			mergedAssignedFeatures.putAll(prevAssignedFeatures);
@@ -139,11 +157,13 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 			prevAssignedFeatures = assignedFeatures;
 			for (AbstractElement element : object.getElements()) {
 				assignedFeatures = newMultimap(prevAssignedFeatures);
+				permanentlyVisited = Sets.newHashSet(prevPermanentlyVisited);
 				doSwitch(element);
 				mergedAssignedFeatures.putAll(assignedFeatures);
 			}
 			assignedFeatures = mergedAssignedFeatures;
 		}
+		permanentlyVisited = mergedPermanentlyVisited;
 		return Boolean.FALSE;
 	}
 
