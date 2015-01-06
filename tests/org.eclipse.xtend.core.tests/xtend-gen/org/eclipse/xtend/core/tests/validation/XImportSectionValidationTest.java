@@ -1635,7 +1635,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void checkImportsNotMarkedAsUsedWhenTypeUnresolved() {
     try {
