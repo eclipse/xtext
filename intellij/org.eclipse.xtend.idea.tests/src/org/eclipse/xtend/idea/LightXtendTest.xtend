@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.idea.completion
+package org.eclipse.xtend.idea
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ContentEntry

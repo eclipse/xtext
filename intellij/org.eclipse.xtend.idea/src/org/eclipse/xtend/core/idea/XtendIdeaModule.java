@@ -21,6 +21,10 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.idea.filesystem.IdeaFileSystemSupport;
+import org.eclipse.xtext.xbase.idea.filesystem.IdeaWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider;
 import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider;
 
@@ -66,6 +70,14 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@SingletonBinding
 	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
 		return XtendBracePairProvider.class;
+	}
+	
+	public void configureWorkspaceConfig(Binder binder) {
+		binder.bind(WorkspaceConfig.class).toProvider(IdeaWorkspaceConfigProvider.class);
+	}
+	
+	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
+		return IdeaFileSystemSupport.class;
 	}
 
 }

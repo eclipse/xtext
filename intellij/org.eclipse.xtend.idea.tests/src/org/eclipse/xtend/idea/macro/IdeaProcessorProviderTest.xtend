@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.core.macro.XAnnotationExtensions
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtend.idea.completion.LightXtendTest
+import org.eclipse.xtend.idea.LightXtendTest
 
 class IdeaProcessorProviderTest extends LightXtendTest {
 	
