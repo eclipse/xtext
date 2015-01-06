@@ -7,15 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.completion
 
-import com.intellij.openapi.module.Module
-import com.intellij.openapi.roots.ContentEntry
-import com.intellij.openapi.roots.ModifiableRootModel
-import org.eclipse.xtend.core.idea.lang.XtendFileType
-import org.eclipse.xtext.idea.tests.LightToolingTest
-
-import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
-
-class XtendCompletionTest extends LightToolingTest {
+class XtendCompletionTest extends LightXtendTest {
 
 	def void testClassKeyword() {
 		complete("cl<caret>")
@@ -37,13 +29,5 @@ class XtendCompletionTest extends LightToolingTest {
 			"interface",
 			"package"
 		)
-	}
-	
-	new() {
-		super(XtendFileType.INSTANCE)
-	}
-	
-	override protected configureModule(Module module, ModifiableRootModel model, ContentEntry contentEntry) {
-		model.addXbaseLibrary
 	}
 }

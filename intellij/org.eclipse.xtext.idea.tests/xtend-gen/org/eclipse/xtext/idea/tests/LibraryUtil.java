@@ -13,6 +13,8 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.util.Consumer;
 import com.intellij.util.PathUtil;
 import java.io.File;
+import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -44,7 +46,24 @@ public class LibraryUtil {
   
   public static void addXbaseLibrary(final ModifiableRootModel it) {
     LibraryUtil.removeLibFromIgnoredFilesList();
+    LibraryUtil.addGuavaLibrary(it);
     LibraryUtil.addLibrary(it, "org.eclipse.xtext.xbase.lib", ToStringBuilder.class);
+  }
+  
+  public static void addXtendLibrary(final Module it) {
+    final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
+      public void consume(final ModifiableRootModel it) {
+        LibraryUtil.addXtendLibrary(it);
+      }
+    };
+    ModuleRootModificationUtil.updateModel(it, _function);
+  }
+  
+  public static void addXtendLibrary(final ModifiableRootModel it) {
+    LibraryUtil.removeLibFromIgnoredFilesList();
+    LibraryUtil.addXbaseLibrary(it);
+    LibraryUtil.addLibrary(it, "org.eclipse.xtend.lib.macro", Active.class);
+    LibraryUtil.addLibrary(it, "org.eclipse.xtend.lib", Data.class);
   }
   
   public static void removeLibFromIgnoredFilesList() {
