@@ -25,4 +25,4 @@ org.eclipse.xtext.xbase.validation.IssueCodes.unreachable_case=error
 org.eclipse.xtext.xbase.validation.IssueCodes.unreachable_instance_of=error
 org.eclipse.xtext.xbase.validation.IssueCodes.unused_local_variable=org.eclipse.jdt.core.compiler.problem.unusedLocal\:warning
 org.eclipse.xtext.xbase.validation.IssueCodes.variable_name_discouraged=warning
-outlet.DEFAULT_OUTPUT.cleanupDerived=false
+outlet.DEFAULT_OUTPUT.cleanupDerived=true

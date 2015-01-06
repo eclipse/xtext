@@ -144,7 +144,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 				modifierList = f.psiModifiers
 				docComment = f.psiDocComment
 				deprecated = f.deprecated
-				navigationElement = f.navigationElement
+				nullableNavigationElement = f.navigationElement
 				putUserData(JVM_ELEMENT_KEY, f)
 			]) as PsiField
 		].toList
@@ -160,7 +160,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 				if (m instanceof JvmOperation) {
 					methodReturnType = m.returnType.toPsiType
 				}
-				navigationElement = m.navigationElement
+				nullableNavigationElement = m.navigationElement
 				putUserData(JVM_ELEMENT_KEY, m)
 			]) as PsiMethod
 		].toList
@@ -179,9 +179,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			m.parameters.forEach [ p |
 				addParameter(
 					new LightParameter(p.simpleName, p.parameterType.toPsiType, psiElement, language) => [
-						val navElement = p.navigationElement
-						if (navElement != null)
-							navigationElement = navElement
+						nullableNavigationElement = p.navigationElement
 						putUserData(JVM_ELEMENT_KEY, p)
 					]
 				)
@@ -192,6 +190,11 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	private def getNavigationElement(EObject jvmElement) {
 		val primarySourceElement = jvmAssocations.getPrimarySourceElement(jvmElement)
 		psiAssocations.getPsiElement(primarySourceElement)
+	}
+	
+	private def setNullableNavigationElement(LightElement element, PsiElement navigationElement) {
+		if (navigationElement != null)
+			element.navigationElement = navigationElement
 	}
 
 	private def getPsiModifiers(JvmMember m) {
@@ -290,7 +293,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			val sourceElement = jvmAssocations.getPrimarySourceElement(inner)
 			val psiElement = psiAssocations.getPsiElement(sourceElement) as PsiNamedElement
 			(new JvmPsiClassImpl(inner, psiElement) => [
-				navigationElement = inner.navigationElement
+				nullableNavigationElement = inner.navigationElement
 				putUserData(JVM_ELEMENT_KEY, inner)
 			]) as PsiClass
 		].toList

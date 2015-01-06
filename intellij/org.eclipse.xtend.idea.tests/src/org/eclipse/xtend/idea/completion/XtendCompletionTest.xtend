@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.completion
 
+import org.eclipse.xtend.idea.LightXtendTest
+
 class XtendCompletionTest extends LightXtendTest {
 
 	def void testClassKeyword() {
