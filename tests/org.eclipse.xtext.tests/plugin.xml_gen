@@ -400,6 +400,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2015/tmf/xtext/indentation" 
+       class = "org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.IndentationAwareTestLanguagePackage"
+       genModel = "org/eclipse/xtext/parser/indentation/IndentationAwareTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage" 
        class = "org.eclipse.xtext.parser.keywords.keywordsTestLanguage.KeywordsTestLanguagePackage"
        genModel = "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.genmodel" /> 
