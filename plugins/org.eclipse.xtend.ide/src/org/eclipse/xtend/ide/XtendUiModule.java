@@ -4,9 +4,7 @@
 package org.eclipse.xtend.ide;
 
 import org.eclipse.jface.text.rules.ITokenScanner;
-import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.jface.text.source.IAnnotationHover;
-import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
@@ -27,6 +25,7 @@ import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssist
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedContentAssistParser;
 import org.eclipse.xtend.ide.common.contentassist.antlr.FlexerBasedPartialXtendContentAssistParser;
 import org.eclipse.xtend.ide.common.contentassist.antlr.internal.InternalXtendLexer;
+import org.eclipse.xtend.ide.common.editor.bracketmatching.XtendBracePairProvider;
 import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
 import org.eclipse.xtend.ide.contentassist.OperatorAwareComparator;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
@@ -89,6 +88,7 @@ import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ide.LexerIdeBindings;
+import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -304,10 +304,14 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	public Class<? extends IResourceUIServiceProvider> bindIResourceUIServiceProvider() {
 		return XtendResourceUiServiceProvider.class;
 	}
-
+	
+	/**
+	 * @since 2.8
+	 */
 	@Override
-	public ICharacterPairMatcher bindICharacterPairMatcher() {
-		return new DefaultCharacterPairMatcher(new char[] { '(', ')', '{', '}', '[', ']', '«', '»' });
+	@SingletonBinding
+	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
+		return XtendBracePairProvider.class;
 	}
 
 	@Override
