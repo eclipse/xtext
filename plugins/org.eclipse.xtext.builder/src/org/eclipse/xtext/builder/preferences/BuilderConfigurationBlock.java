@@ -35,37 +35,40 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
-import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.ScrolledPageContent;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
  * @since 2.1
  */
-/*
- * TODO OUTPUT_FOLDERS it should be configurable which options for which output configuration are available,
- * e.g. there is almost no language where the "overwrite existing files" option 
- * should be changed by the user
- */
 public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
+	
+	protected static final String[] BOOLEAN_VALUES = new String[] { IPreferenceStore.TRUE, IPreferenceStore.FALSE };
+	
 	private static final String SETTINGS_SECTION_NAME = "BuilderConfigurationBlock"; //$NON-NLS-1$
 
+	@Inject
 	private EclipseOutputConfigurationProvider configurationProvider;
 
-	private List<TableItem> tableItems = Lists.newArrayList();
+	@Inject
+	private PreferenceStoreAccessImpl preferenceStoreAccessImpl;
 
-	public BuilderConfigurationBlock(IProject project, IPreferenceStore preferenceStore,
-			EclipseOutputConfigurationProvider configurationProvider, IWorkbenchPreferenceContainer container) {
-		super(project, preferenceStore, container);
-		this.configurationProvider = configurationProvider;
+	private final List<TableItem> tableItems = Lists.newArrayList();
+	
+	@Override
+	public void setProject(IProject project) {
+		super.setProject(project);
+		setPreferenceStore(preferenceStoreAccessImpl.getWritablePreferenceStore(project));
 	}
-
+	
 	@Override
 	protected Control doCreateContents(Composite parent) {
 		PixelConverter pixelConverter = new PixelConverter(parent);
@@ -85,7 +88,6 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 	}
 
 	private Composite createBuildPathTabContent(Composite parent) {
-		String[] trueFalseValues = new String[] { IPreferenceStore.TRUE, IPreferenceStore.FALSE };
 		int columns = 3;
 		final ScrolledPageContent pageContent = new ScrolledPageContent(parent);
 		GridLayout layout = new GridLayout();
@@ -102,8 +104,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 		excomposite.setClient(othersComposite);
 		othersComposite.setLayout(new GridLayout(columns, false));
 
-		addCheckBox(othersComposite, Messages.BuilderPreferencePage_GenerateAuto,
-				BuilderPreferenceAccess.PREF_AUTO_BUILDING, trueFalseValues, 0);
+		createGeneralSectionItems(othersComposite);
 
 		Set<OutputConfiguration> outputConfigurations = configurationProvider.getOutputConfigurations(getProject());
 
@@ -113,62 +114,72 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			othersComposite = new Composite(excomposite, SWT.NONE);
 			excomposite.setClient(othersComposite);
 			othersComposite.setLayout(new GridLayout(columns, false));
-			Text defaultDirectoryField = addTextField(othersComposite, Messages.OutputConfigurationPage_Directory,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY), 0, 200);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CreateDirectory,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY), trueFalseValues, 0);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_OverrideExistingResources,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE), trueFalseValues, 0);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CreatesDerivedResources,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_DERIVED), trueFalseValues, 0);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanupDerivedResources,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED), trueFalseValues, 0);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_CleanDirectory,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), trueFalseValues, 0);
-			final Button installAsPrimaryButton = addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_InstallDslAsPrimarySource,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.INSTALL_DSL_AS_PRIMARY_SOURCE), trueFalseValues, 0);
-			final Button hideLocalButton = addCheckBox(othersComposite, Messages.BuilderConfigurationBlock_hideSyntheticLocalVariables,
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.HIDE_LOCAL_SYNTHETIC_VARIABLES), trueFalseValues, 0);
-			hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
-			installAsPrimaryButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
-				}
-			});
-			GridData hideLocalButtonData = new GridData();
-			hideLocalButtonData.horizontalIndent = 32;
-			hideLocalButton.setLayoutData(hideLocalButtonData);
-			addCheckBox(othersComposite, Messages.OutputConfigurationPage_KeepLocalHistory, 
-					BuilderPreferenceAccess.getKey(outputConfiguration,
-							EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY), trueFalseValues, 0);
-			
-			if (getProject() != null && !outputConfiguration.getSourceFolders().isEmpty()) {
-				final Button outputPerSourceButton = addCheckBox(othersComposite,
-						Messages.OutputConfigurationPage_UseOutputPerSourceFolder, BuilderPreferenceAccess.getKey(outputConfiguration,
-								EclipseOutputConfigurationProvider.USE_OUTPUT_PER_SOURCE_FOLDER), trueFalseValues, 0);
-				final Table table = createOutputFolderTable(othersComposite, outputConfiguration, defaultDirectoryField);
-				table.setVisible(outputPerSourceButton.getSelection());
-				outputPerSourceButton.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						table.setVisible(outputPerSourceButton.getSelection());
-					}
-				});
-			}
+
+			createOutputSectionItems(othersComposite, outputConfiguration);
 		}
 		registerKey(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
 		restoreSectionExpansionStates(section);
 		return pageContent;
+	}
+	
+	protected void createGeneralSectionItems(Composite composite) {
+		addCheckBox(composite, Messages.BuilderPreferencePage_GenerateAuto,
+				BuilderPreferenceAccess.PREF_AUTO_BUILDING, BOOLEAN_VALUES, 0);
+	}
+	
+	protected void createOutputSectionItems(Composite composite, OutputConfiguration outputConfiguration) {
+		Text defaultDirectoryField = addTextField(composite, Messages.OutputConfigurationPage_Directory,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY), 0, 200);
+		addCheckBox(composite, Messages.OutputConfigurationPage_CreateDirectory,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY), BOOLEAN_VALUES, 0);
+		addCheckBox(composite, Messages.OutputConfigurationPage_OverrideExistingResources,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_OVERRIDE), BOOLEAN_VALUES, 0);
+		addCheckBox(composite, Messages.OutputConfigurationPage_CreatesDerivedResources,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_DERIVED), BOOLEAN_VALUES, 0);
+		addCheckBox(composite, Messages.OutputConfigurationPage_CleanupDerivedResources,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_CLEANUP_DERIVED), BOOLEAN_VALUES, 0);
+		addCheckBox(composite, Messages.OutputConfigurationPage_CleanDirectory,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_CLEAN_DIRECTORY), BOOLEAN_VALUES, 0);
+		final Button installAsPrimaryButton = addCheckBox(composite, Messages.BuilderConfigurationBlock_InstallDslAsPrimarySource,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.INSTALL_DSL_AS_PRIMARY_SOURCE), BOOLEAN_VALUES, 0);
+		final Button hideLocalButton = addCheckBox(composite, Messages.BuilderConfigurationBlock_hideSyntheticLocalVariables,
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.HIDE_LOCAL_SYNTHETIC_VARIABLES), BOOLEAN_VALUES, 0);
+		hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
+		installAsPrimaryButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				hideLocalButton.setEnabled(installAsPrimaryButton.getSelection());
+			}
+		});
+		GridData hideLocalButtonData = new GridData();
+		hideLocalButtonData.horizontalIndent = 32;
+		hideLocalButton.setLayoutData(hideLocalButtonData);
+		addCheckBox(composite, Messages.OutputConfigurationPage_KeepLocalHistory, 
+				BuilderPreferenceAccess.getKey(outputConfiguration,
+						EclipseOutputConfigurationProvider.OUTPUT_KEEP_LOCAL_HISTORY), BOOLEAN_VALUES, 0);
+		
+		if (getProject() != null && !outputConfiguration.getSourceFolders().isEmpty()) {
+			final Button outputPerSourceButton = addCheckBox(composite,
+					Messages.OutputConfigurationPage_UseOutputPerSourceFolder, BuilderPreferenceAccess.getKey(outputConfiguration,
+							EclipseOutputConfigurationProvider.USE_OUTPUT_PER_SOURCE_FOLDER), BOOLEAN_VALUES, 0);
+			final Table table = createOutputFolderTable(composite, outputConfiguration, defaultDirectoryField);
+			table.setVisible(outputPerSourceButton.getSelection());
+			outputPerSourceButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					table.setVisible(outputPerSourceButton.getSelection());
+				}
+			});
+		}
 	}
 
 	private Table createOutputFolderTable(Composite othersComposite, final OutputConfiguration outputConfiguration, final Text defaultDirectoryField) {

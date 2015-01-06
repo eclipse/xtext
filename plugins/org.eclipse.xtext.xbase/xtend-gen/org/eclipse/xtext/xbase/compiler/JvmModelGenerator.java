@@ -1861,6 +1861,8 @@ public class JvmModelGenerator implements IGenerator {
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager, final GeneratorConfig config) {
     final TreeAppendable appendable = new TreeAppendable(importManager, this.converter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
+    SharedAppendableState _state = appendable.getState();
+    _state.setGeneratorConfig(config);
     return appendable;
   }
   

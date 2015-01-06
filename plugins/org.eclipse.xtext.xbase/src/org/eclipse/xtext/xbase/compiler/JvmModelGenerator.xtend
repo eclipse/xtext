@@ -906,6 +906,7 @@ class JvmModelGenerator implements IGenerator {
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
 		val appendable = new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, context, "  ", "\n")
+		appendable.state.generatorConfig = config
 		return appendable
 	}
 	

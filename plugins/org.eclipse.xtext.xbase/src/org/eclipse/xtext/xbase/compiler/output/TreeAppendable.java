@@ -85,7 +85,7 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 		}
 	}
 
-	private List<Object> children;
+	private final List<Object> children;
 	private final SharedAppendableState state;
 	private final ILocationInFileProvider locationProvider;
 	private final IJvmModelAssociations jvmModelAssociations;

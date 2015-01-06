@@ -81,6 +81,7 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.builder.EclipseSourceFolderProvider;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.JDTAwareSourceFolderProvider;
+import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JvmMemberRenameStrategy;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -144,8 +145,12 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
 import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.ui.builder.EclipseGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderConfigurationBlock;
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
@@ -278,6 +283,19 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return XtendParallelBuilderParticipant.class;
 	}
 
+	public Class<? extends BuilderConfigurationBlock> bindBuilderConfigurationBlock() {
+		return XbaseBuilderConfigurationBlock.class;
+	}
+	
+	@Override
+	public void configureBuilderPreferenceStoreInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("builderPreferenceInitializer")).to(XbaseBuilderPreferenceAccess.Initializer.class);
+	}
+	
+	public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
+		return EclipseGeneratorConfigProvider.class;
+	}
+	
 	@Override
 	public Class<? extends ISingleLineCommentHelper> bindISingleLineCommentHelper() {
 		return SingleLineCommentHelper.class;
