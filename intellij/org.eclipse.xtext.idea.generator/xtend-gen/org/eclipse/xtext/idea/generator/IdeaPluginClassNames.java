@@ -318,4 +318,13 @@ public class IdeaPluginClassNames {
     String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "CompletionContributor");
   }
+  
+  public String getCallReferenceProcessorName(final Grammar it) {
+    String _basePackageName = this.getBasePackageName(it);
+    String _plus = (_basePackageName + ".ide.hierarchy.call.");
+    String _name = it.getName();
+    String _simpleName = this.toSimpleName(_name);
+    String _plus_1 = (_plus + _simpleName);
+    return (_plus_1 + "CallReferenceProcessor");
+  }
 }

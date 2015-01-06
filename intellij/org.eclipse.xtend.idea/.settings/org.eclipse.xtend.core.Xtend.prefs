@@ -1,5 +1,4 @@
 eclipse.preferences.version=1
-is_project_specific=true
 org.eclipse.xtend.core.validation.IssueCodes.api_type_inference=ignore
 org.eclipse.xtend.core.validation.IssueCodes.dispatch_plain_function_name_clash=warning
 org.eclipse.xtend.core.validation.IssueCodes.implicit_return=ignore
@@ -25,4 +24,3 @@ org.eclipse.xtext.xbase.validation.IssueCodes.unreachable_case=error
 org.eclipse.xtext.xbase.validation.IssueCodes.unreachable_instance_of=error
 org.eclipse.xtext.xbase.validation.IssueCodes.unused_local_variable=org.eclipse.jdt.core.compiler.problem.unusedLocal\:warning
 org.eclipse.xtext.xbase.validation.IssueCodes.variable_name_discouraged=warning
-outlet.DEFAULT_OUTPUT.cleanupDerived=false

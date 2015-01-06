@@ -11,14 +11,14 @@ import com.intellij.patterns.PlatformPatterns;
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
-import org.eclipse.xtext.idea.completion.AbstractCompletionContributor;
+import org.eclipse.xtext.idea.example.entities.idea.completion.AbstractEntitiesCompletionContributor;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesElementTypeProvider;
 import org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesLanguage;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
-public class EntitiesCompletionContributor extends AbstractCompletionContributor {
+public class EntitiesCompletionContributor extends AbstractEntitiesCompletionContributor {
   public EntitiesCompletionContributor() {
     super(EntitiesLanguage.INSTANCE);
     PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement();

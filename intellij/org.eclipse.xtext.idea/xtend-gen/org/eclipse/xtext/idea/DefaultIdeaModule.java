@@ -13,6 +13,7 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.intellij.lang.PairedBraceMatcher;
+import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.lang.refactoring.NamesValidator;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.idea.highlighting.DefaultSyntaxHighlighter;
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer;
 import org.eclipse.xtext.idea.refactoring.NullNamesValidator;
 import org.eclipse.xtext.idea.resource.impl.ProjectScopeBasedResourceDescriptions;
+import org.eclipse.xtext.idea.structureview.DefaultPsiStructureViewFactory;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
@@ -99,5 +101,10 @@ public class DefaultIdeaModule extends AbstractGenericModule {
   @SingletonBinding
   public Class<? extends IBracePairProvider> bindIBracePairProvider() {
     return DefaultBracePairProvider.class;
+  }
+  
+  @SingletonBinding
+  public Class<? extends PsiStructureViewFactory> bindPsiStructureViewFactory() {
+    return DefaultPsiStructureViewFactory.class;
   }
 }

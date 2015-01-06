@@ -8,8 +8,8 @@
 	<vendor>My Company</vendor>
 
 	<idea-version since-build="131"/>
-	<depends>org.eclipse.xtext.idea</depends>
-	<depends>org.eclipse.xtext.xbase.idea</depends>
+	<depends optional="true">org.eclipse.xtext.idea</depends>
+	<depends optional="true">org.eclipse.xtext.xbase.idea</depends>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<buildProcess.parametersProvider implementation="org.eclipse.xtext.idea.example.entities.idea.server.EntitiesBuildProcessParametersProvider"/>
@@ -41,12 +41,31 @@
 		<lang.refactoringSupport language="org.eclipse.xtext.idea.example.entities.Entities"
 								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
 								implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"/>
+		<lang.namesValidator language="org.eclipse.xtext.idea.example.entities.Entities"
+								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
       	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.lang.EntitiesSyntaxHighlighterFactory" />
-		<completion.contributor language="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.completion.EntitiesCompletionContributor"/>
+		<lang.braceMatcher language="org.eclipse.xtext.idea.example.entities.Entities"
+								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
       	<annotator language="org.eclipse.xtext.idea.example.entities.Entities"
       							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.completion.EntitiesCompletionContributor"/>
       	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.example.entities.idea.lang.psi.EntitiesElementDescriptionProvider" order="first"/>
+      	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.example.entities.idea.lang.pom.EntitiesPomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.example.entities.Entities"
+      							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+
+		<typeHierarchyProvider language="org.eclipse.xtext.idea.example.entities.Entities"
+								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
+		<callHierarchyProvider language="org.eclipse.xtext.idea.example.entities.Entities"
+								factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
+								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
+		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.idea.example.entities.idea.ide.hierarchy.call.EntitiesCallReferenceProcessor"/>
 	</extensions>
 
 </idea-plugin>

@@ -35,11 +35,19 @@
 								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
       	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.lang.SDomainSyntaxHighlighterFactory" />
+		<lang.braceMatcher language="org.eclipse.xtext.idea.sdomain.SDomain"
+								factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
       	<annotator language="org.eclipse.xtext.idea.sdomain.SDomain"
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.completion.SDomainCompletionContributor"/>
       	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.sdomain.idea.lang.pom.SDomainPomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.sdomain.SDomain"
+      							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
 	</extensions>
 
 </idea-plugin>

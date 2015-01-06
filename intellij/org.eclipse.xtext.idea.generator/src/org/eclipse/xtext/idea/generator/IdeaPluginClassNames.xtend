@@ -149,4 +149,8 @@ class IdeaPluginClassNames {
 	def String getAbstractCompletionContributor(Grammar it) {
 		basePackageName +'.completion.Abstract'+ name.toSimpleName+'CompletionContributor'
 	}
+	
+	def String getCallReferenceProcessorName(Grammar it) {
+		basePackageName+'.ide.hierarchy.call.'+it.name.toSimpleName+'CallReferenceProcessor'
+	}
 }

@@ -44,11 +44,27 @@
 								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
 								implementationClass="com.intellij.lang.refactoring.NamesValidator"/>
       	<lang.syntaxHighlighterFactory key="org.eclipse.xtext.xbase.Xbase" implementationClass="org.eclipse.xtext.xbase.idea.lang.XbaseSyntaxHighlighterFactory" />
+		<lang.braceMatcher language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="com.intellij.lang.PairedBraceMatcher"/>
       	<annotator language="org.eclipse.xtext.xbase.Xbase"
       							factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
+      	<completion.contributor language="org.eclipse.xtext.xbase.Xbase" implementationClass="org.eclipse.xtext.xbase.idea.completion.XbaseCompletionContributor"/>
       	<elementDescriptionProvider implementation="org.eclipse.xtext.xbase.idea.lang.psi.XbaseElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.xbase.idea.lang.pom.XbasePomDeclarationSearcher"/>
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtext.xbase.Xbase"
+      							factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+
+		<typeHierarchyProvider language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
+		<callHierarchyProvider language="org.eclipse.xtext.xbase.Xbase"
+								factoryClass="org.eclipse.xtext.xbase.idea.XbaseExtensionFactory"
+								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
+		<hierarchy.referenceProcessor implementation="org.eclipse.xtext.xbase.idea.ide.hierarchy.call.XbaseCallReferenceProcessor"/>
 	</extensions>
 
 </idea-plugin>
