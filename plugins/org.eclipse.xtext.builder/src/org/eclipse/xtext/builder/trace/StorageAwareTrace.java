@@ -81,9 +81,10 @@ public class StorageAwareTrace extends AbstractTrace {
 	}
 
 	protected URI resolvePath(IProject project, URI path) {
-		IResource candidate = project.findMember(path.toString());
+		String decodedPath = URI.decode(path.toString());
+		IResource candidate = project.findMember(decodedPath);
 		if (candidate != null && candidate.exists())
-			return URI.createPlatformResourceURI(project.getFullPath() + "/" + path, true);
+			return URI.createPlatformResourceURI(project.getFullPath() + "/" + decodedPath, true);
 		return path;
 	}
 
