@@ -301,6 +301,23 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/indentation/IndentationAwareTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment {
+				fragment = generator.parser.antlr.ex.rt.AntlrGeneratorFragment auto-inject {
+					options = auto-inject {}
+					fragmentHelper = generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper {}
+				}
+				fragment = parser.antlr.DebugAntlrGeneratorFragment auto-inject {}
+				fragment = resourceFactory.ResourceFactoryFragment { 
+				}
+				fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+				fragment = ecore.EcoreGeneratorFragment auto-inject {}
+				fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+				fragment = serializer.SerializerFragment auto-inject {}
+				fragment = generator.junit.Junit4Fragment {}
+			}
+		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
