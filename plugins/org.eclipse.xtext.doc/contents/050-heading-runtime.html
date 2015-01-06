@@ -145,7 +145,7 @@ You don&apos;t want to deal with platform or even installation dependent paths i
 with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.
 </p>
 <p>
-By default every language will have a single outlet, that points to <span class="inlinecode">&lt;project-root&gt;/src-gen/</span>. The files that go here are treated as fully derived and will be erased
+By default every language will have a single outlet, which points to <span class="inlinecode">&lt;project-root&gt;/src-gen/</span>. The files that go here are treated as fully derived and will be erased
 by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the
 interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/IOutputConfigurationProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IOutputConfigurationProvider" >IOutputConfigurationProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IOutputConfigurationProvider.java" title="View Source Code" >(src)</a>. It&apos;s straight forward to understand and the default implementation gives you a good idea about how to implement it.
 </p>
@@ -850,7 +850,7 @@ If you don&apos;t run in a Guice enabled context you will likely have to directl
 </div>
 </p>
 <p>
-However, we strongly encourage you to use dependency injection. Now, that we know how to export elements to be 
+However, we strongly encourage you to use dependency injection. Now that we know how to export elements to be 
 referable from other resources, we need to learn how those exported 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> can be made available to the referencing resources. That is 
 the responsibility of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >global scoping</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is 
@@ -1505,7 +1505,7 @@ with semantic modifications. Serialization is <em>not</em> called when a textual
 <p>
 The contract of serialization says that a model which is saved (serialized) to its textual representation 
 and then loaded (parsed) again yields a new model that is equal to the original model. Please be 
-aware that this does <em>not</em> imply, that loading a textual representation and serializing it back produces 
+aware that this does <em>not</em> imply that loading a textual representation and serializing it back produces 
 identical textual representations. However, the serialization algorithm tries to restore as much information
 as possible. That is, if the parsed model was not modified in-memory, the serialized output will usually
 be equal to the previous input. Unfortunately, this cannot be ensured for each and every case. A use
@@ -1626,7 +1626,7 @@ To understand error messages and performance issues of the parse tree constructo
 know that it implements a backtracking algorithm. This basically means that the grammar is used to 
 specify the structure of a tree in which one path (from the root node to a leaf node) is a valid 
 serialization of a specific model. The parse tree constructor&apos;s task is to find this path - with the 
-condition, that all model elements are consumed while walking this path. The parse tree constructor&apos;s 
+condition that all model elements are consumed while walking this path. The parse tree constructor&apos;s 
 strategy is to take the most promising branch first (the one that would consume the most model elements). 
 If the branch leads to a dead end (for example, if a model element needs to be consumed that is not 
 present in the model), the parse tree constructor goes back the path until a different branch can be 

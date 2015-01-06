@@ -34,10 +34,10 @@ it inherits the logic that was introduced in grammars that were mixed into the c
 Clients who want to customize the behavior may override the methods from the 
 codeRef[org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider] or introduce new
  methods with a specialized first parameter. The framework inspects the type of the model object and 
-dispatches method calls to the most concrete implementation, that can be found.
+dispatches method calls to the most concrete implementation that can be found.
 
-It is important to know, that for a given offset in a model file, many possible grammar elements exist. 
-The framework dispatches to the method declarations for any valid element. That means, that a bunch 
+It is important to know that, for a given offset in a model file, many possible grammar elements exist. 
+The framework dispatches to the method declarations for any valid element. This means that a bunch 
 of e[complete*] methods may be called.
 
 To provide a dummy proposal for the code of an code[FowlerExample][event] instance, you may introduce a specialization 

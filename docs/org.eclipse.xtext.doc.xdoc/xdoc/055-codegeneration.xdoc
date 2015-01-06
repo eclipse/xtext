@@ -44,7 +44,7 @@ section2[Output Configurations]
 You don't want to deal with platform or even installation dependent paths in your code generator, rather you want to be able to configure the code generator
 with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.
 
-By default every language will have a single outlet, that points to code[<project-root>/src-gen/]. The files that go here are treated as fully derived and will be erased
+By default every language will have a single outlet, which points to code[<project-root>/src-gen/]. The files that go here are treated as fully derived and will be erased
 by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the
 interface codeRef[org.eclipse.xtext.generator.IOutputConfigurationProvider]. It's straight forward to understand and the default implementation gives you a good idea about how to implement it.
 

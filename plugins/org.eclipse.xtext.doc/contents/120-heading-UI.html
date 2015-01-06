@@ -133,7 +133,7 @@ idea about the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xt
 What is especially nice about the default implementation is the actual reason for its class 
 name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
 at first have a look for an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> <a class="srcLink" href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java" title="View Source Code" >(src)</a> <em>name</em> and try to use this one.
-If it cannot find such a feature, it will try to use the first feature, that can be used best as a label. 
+If it cannot find such a feature, it will try to use the first feature that can be used best as a label. 
 At worst it will return the class name of the model element, which is kind of unlikely to happen.
 </p>
 <p>
@@ -226,11 +226,11 @@ it inherits the logic that was introduced in grammars that were mixed into the c
 Clients who want to customize the behavior may override the methods from the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider" >AbstractJavaBasedContentProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.java" title="View Source Code" >(src)</a> or introduce new
  methods with a specialized first parameter. The framework inspects the type of the model object and 
-dispatches method calls to the most concrete implementation, that can be found.
+dispatches method calls to the most concrete implementation that can be found.
 </p>
 <p>
-It is important to know, that for a given offset in a model file, many possible grammar elements exist. 
-The framework dispatches to the method declarations for any valid element. That means, that a bunch 
+It is important to know that, for a given offset in a model file, many possible grammar elements exist. 
+The framework dispatches to the method declarations for any valid element. This means that a bunch 
 of <em>complete*</em> methods may be called.
 </p>
 <p>
@@ -1008,7 +1008,7 @@ elements.
 <p>
 The framework will pass the current <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> and an 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor" >IHighlightedPositionAcceptor</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java" title="View Source Code" >(src)</a> to 
-the calculator. It is ensured, that the resource will not be altered externally until the called method 
+the calculator. It is ensured that the resource will not be altered externally until the called method 
 <span class="inlinecode">provideHighlightingFor()</span> returns. However, the resource may be <span class="inlinecode"><span class="keyword">null</span></span> in case of
 errors in the model. The implementor&apos;s task is to 
 navigate the semantic model and compute various ranges based on the attached node information and 

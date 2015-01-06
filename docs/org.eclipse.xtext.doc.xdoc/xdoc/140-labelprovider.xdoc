@@ -93,7 +93,7 @@ public class SecretCompartmentsLabelProvider
 What is especially nice about the default implementation is the actual reason for its class 
 name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
 at first have a look for an codeRef[org.eclipse.emf.ecore.EAttribute] e[name] and try to use this one.
-If it cannot find such a feature, it will try to use the first feature, that can be used best as a label. 
+If it cannot find such a feature, it will try to use the first feature that can be used best as a label. 
 At worst it will return the class name of the model element, which is kind of unlikely to happen.
 
 You can a also customize error handling by overriding the methods code[Java][handleTextError()] or 
