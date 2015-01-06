@@ -20,6 +20,7 @@ public class EnumRulesTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	@Inject
 	private EnumRulesTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EnumRulesTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EnumRulesTestLanguagePackage.MODEL:

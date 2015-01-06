@@ -31,7 +31,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	"model" name=FQN detail+=(Detail | AssociatedDetail)+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"model" name=FQN detail+=(Detail | AssociatedDetail)+
 		public Group getGroup() { return cGroup; }
@@ -66,7 +66,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AbstractDetail:
 		//	Detail | AssociatedDetail;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Detail | AssociatedDetail
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -93,7 +93,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Detail:
 		//	"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"detail" visibility=("private" | "protected" | "public")? detailClass=[Model|FQN]
 		public Group getGroup() { return cGroup; }
@@ -137,7 +137,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AssociatedDetail:
 		//	"associated" detailClass=[Model|FQN] ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"associated" detailClass=[Model|FQN] ";"
 		public Group getGroup() { return cGroup; }
@@ -168,7 +168,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FQN:
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -225,7 +225,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

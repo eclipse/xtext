@@ -32,7 +32,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Model:
 		//	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -77,7 +77,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//DatatypeBug286557:
 		//	"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";"
 		public Group getGroup() { return cGroup; }
@@ -120,7 +120,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//FQN:
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -150,7 +150,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//EnumBug:
 		//	"#2" "kw1" return=EnumBugEnum name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#2" "kw1" return=EnumBugEnum name=ID
 		public Group getGroup() { return cGroup; }
@@ -183,7 +183,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Commentable:
 		//	"#3" item+=CommentableItem*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#3" item+=CommentableItem*
 		public Group getGroup() { return cGroup; }
@@ -207,7 +207,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//CommentableItem:
 		//	"item" id=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"item" id=ID
 		public Group getGroup() { return cGroup; }
@@ -231,7 +231,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//ValueList:
 		//	"#4" ids+=FQN*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#4" ids+=FQN*
 		public Group getGroup() { return cGroup; }
@@ -259,7 +259,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//RefList:
 		//	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*
 		public Group getGroup() { return cGroup; }
@@ -293,7 +293,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//RefObj:
 		//	name=FQN;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=FQN
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -315,7 +315,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//SingleRef:
 		//	"#6" obj=RefObj "ref" ref=[RefObj|FQN];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#6" obj=RefObj "ref" ref=[RefObj|FQN]
 		public Group getGroup() { return cGroup; }
@@ -352,7 +352,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
 		//AppendToFileEnd:
 		//	"#7" items+=AppendToFileEndItem*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" items+=AppendToFileEndItem*
 		public Group getGroup() { return cGroup; }
@@ -377,7 +377,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//AppendToFileEndItem:
 		//	"class" name=ID "endclass";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"class" name=ID "endclass"
 		public Group getGroup() { return cGroup; }
@@ -409,7 +409,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Action1:
 		//	"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
 		public Group getGroup() { return cGroup; }
@@ -447,7 +447,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Action1Sub1:
 		//	{Action1Sub} "sub1";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Action1Sub} "sub1"
 		public Group getGroup() { return cGroup; }
@@ -467,7 +467,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Action1Sub2:
 		//	{Action1SubClass} "sub2";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Action1SubClass} "sub2"
 		public Group getGroup() { return cGroup; }
@@ -584,7 +584,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

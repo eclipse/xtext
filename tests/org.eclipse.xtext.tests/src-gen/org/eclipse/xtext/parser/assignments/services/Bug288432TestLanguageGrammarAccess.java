@@ -42,7 +42,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Body:
 		//	("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+
 		//	"end body";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+ "end body"
 		public Group getGroup() { return cGroup; }
@@ -106,7 +106,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Foo:
 		//	fooValue=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//fooValue=STRING
 		public Assignment getFooValueAssignment() { return cFooValueAssignment; }
@@ -124,7 +124,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Content:
 		//	"content" MyElement "end content";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"content" MyElement "end content"
 		public Group getGroup() { return cGroup; }
@@ -150,7 +150,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyElement:
 		//	"element" bar=(MyInt | ParameterRef);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" bar=(MyInt | ParameterRef)
 		public Group getGroup() { return cGroup; }
@@ -180,7 +180,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ParameterObject:
 		//	MyInt | Content | ParameterRef;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//MyInt | Content | ParameterRef
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -206,7 +206,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Parameter:
 		//	name=ID value=[ParameterObject]?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID value=[ParameterObject]?
 		public Group getGroup() { return cGroup; }
@@ -235,7 +235,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ParameterRef:
 		//	parameter=[Parameter];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//parameter=[Parameter]
 		public Assignment getParameterAssignment() { return cParameterAssignment; }
@@ -254,7 +254,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MyInt:
 		//	int=INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//int=INT
 		public Assignment getIntAssignment() { return cIntAssignment; }
@@ -308,7 +308,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

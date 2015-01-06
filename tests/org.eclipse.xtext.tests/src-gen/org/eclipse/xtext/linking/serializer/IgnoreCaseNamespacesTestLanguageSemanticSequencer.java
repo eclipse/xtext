@@ -26,6 +26,7 @@ public class IgnoreCaseNamespacesTestLanguageSemanticSequencer extends AbstractI
 	@Inject
 	private IgnoreCaseNamespacesTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IgnoreCaseLinkingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseLinkingTestPackage.ELEMENT:

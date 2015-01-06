@@ -26,7 +26,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Root:
 		//	IDList | KWList;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//IDList | KWList
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -48,7 +48,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//IDList:
 		//	{IDList} "idlist" ids+=ID*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{IDList} "idlist" ids+=ID*
 		public Group getGroup() { return cGroup; }
@@ -84,7 +84,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//KWList:
 		//	{KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{KWList} "kwlist" kw1?="kw1"? kw2?="kw2"? kw3?="kw3"? kw4?="kw4"? kw5?="kw5"?
 		public Group getGroup() { return cGroup; }
@@ -161,7 +161,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

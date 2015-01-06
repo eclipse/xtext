@@ -31,7 +31,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Model:
 		//	"someEnum" a=EnumRuleA b=EnumRuleB c=EnumRuleC;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"someEnum" a=EnumRuleA b=EnumRuleB c=EnumRuleC
 		public Group getGroup() { return cGroup; }
@@ -203,7 +203,7 @@ public class MultiRuleEnumTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

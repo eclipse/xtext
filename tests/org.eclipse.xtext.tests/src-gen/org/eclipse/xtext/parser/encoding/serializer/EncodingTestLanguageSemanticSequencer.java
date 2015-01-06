@@ -24,6 +24,7 @@ public class EncodingTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	@Inject
 	private EncodingTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EncodingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EncodingTestPackage.MODEL:

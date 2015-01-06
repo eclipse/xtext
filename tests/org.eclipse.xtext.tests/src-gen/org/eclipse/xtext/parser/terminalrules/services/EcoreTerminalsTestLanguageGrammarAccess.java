@@ -35,7 +35,7 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Model:
 		//	("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -112,7 +112,7 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

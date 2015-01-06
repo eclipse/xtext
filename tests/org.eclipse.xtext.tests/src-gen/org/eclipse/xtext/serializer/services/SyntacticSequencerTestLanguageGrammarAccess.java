@@ -52,7 +52,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
 		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
@@ -155,7 +155,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//MandatoryKeywords:
 		//	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4"
 		public Group getGroup() { return cGroup; }
@@ -202,7 +202,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Exp0:
 		//	"#2" Addition0;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#2" Addition0
 		public Group getGroup() { return cGroup; }
@@ -226,7 +226,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Addition0 returns Exp0:
 		//	Prim0 ({Add0.left=current} "+" right=Prim0)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Prim0 ({Add0.left=current} "+" right=Prim0)*
 		public Group getGroup() { return cGroup; }
@@ -259,7 +259,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Prim0 returns Exp0:
 		//	{Val0} name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Val0} name=ID
 		public Group getGroup() { return cGroup; }
@@ -282,7 +282,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Exp1:
 		//	"#3" Addition1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#3" Addition1
 		public Group getGroup() { return cGroup; }
@@ -306,7 +306,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Addition1 returns Exp1:
 		//	Prim1 ({Add1.left=current} "+" right=Prim1)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Prim1 ({Add1.left=current} "+" right=Prim1)*
 		public Group getGroup() { return cGroup; }
@@ -344,7 +344,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Prim1 returns Exp1:
 		//	{Val1} name=ID | "(" Addition1 ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Val1} name=ID | "(" Addition1 ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -382,7 +382,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Exp2:
 		//	"#4" Addition2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#4" Addition2
 		public Group getGroup() { return cGroup; }
@@ -406,7 +406,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Addition2 returns Exp2:
 		//	Multiplication2 ({Add2.left=current} "+" right=Multiplication2)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Multiplication2 ({Add2.left=current} "+" right=Multiplication2)*
 		public Group getGroup() { return cGroup; }
@@ -442,7 +442,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Multiplication2 returns Exp2:
 		//	Prim2 ({Mult2.left=current} "*" right=Prim2)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Prim2 ({Mult2.left=current} "*" right=Prim2)*
 		public Group getGroup() { return cGroup; }
@@ -480,7 +480,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Prim2 returns Exp2:
 		//	{Val2} name=ID | "(" Addition2 ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Val2} name=ID | "(" Addition2 ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -516,7 +516,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//DatatypeID:
 		//	ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -554,7 +554,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//SingleCrossReference:
 		//	"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#5" name=(TERMINAL_ID | ID) ("kw1" ref1=[SingleCrossReference|TERMINAL_ID])? ("kw2"
 		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
@@ -645,7 +645,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//BooleanAlternative:
 		//	"#6" bool=BooleanAlternativeLiteral;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#6" bool=BooleanAlternativeLiteral
 		public Group getGroup() { return cGroup; }
@@ -671,7 +671,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//BooleanAlternativeLiteral:
 		//	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2")
 		public Group getGroup() { return cGroup; }
@@ -702,7 +702,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//UnassignedDatatype:
 		//	"#7" val=ID KW1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" val=ID KW1
 		public Group getGroup() { return cGroup; }
@@ -730,7 +730,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//KW1:
 		//	"kw1" | "matched" INT?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" | "matched" INT?
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -758,7 +758,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//OptionalSingleTransition:
 		//	"#8" KW1? val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#8" KW1? val=ID
 		public Group getGroup() { return cGroup; }
@@ -786,7 +786,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//OptionalManyTransition:
 		//	"#9" KW1* val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#9" KW1* val=ID
 		public Group getGroup() { return cGroup; }
@@ -814,7 +814,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//MandatoryManyTransition:
 		//	"#10" KW1+ val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#10" KW1+ val=ID
 		public Group getGroup() { return cGroup; }
@@ -844,7 +844,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//AlternativeTransition:
 		//	"#11" (KW1 | "kw2") val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#11" (KW1 | "kw2") val=ID
 		public Group getGroup() { return cGroup; }
@@ -874,7 +874,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//BooleanDatatypeID:
 		//	ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -894,7 +894,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//BooleanValues:
 		//	{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{BooleanValues} "#12" val1?="kw1"? val2?=BOOLEAN_TERMINAL_ID? val3?=BooleanDatatypeID?
 		public Group getGroup() { return cGroup; }
@@ -968,7 +968,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//LongAlternative:
 		//	"#13" foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6"
 		//	val6+=ID? | "kw7" val7+=ID? | "kw8" val8+=ID?)* "!";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#13" foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID?
 		//| "kw7" val7+=ID? | "kw8" val8+=ID?)* "!"
@@ -1170,7 +1170,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -26,7 +26,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Root:
 		//	Op | TrickyG;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Op | TrickyG
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -56,7 +56,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Op returns Expression:
 		//	Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*
 		public Group getGroup() { return cGroup; }
@@ -106,7 +106,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Term returns Expression:
 		//	Atom | Parens;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Atom | Parens
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -125,7 +125,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Atom:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -145,7 +145,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Parens returns Expression:
 		//	"(" Op ")" em="!"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(" Op ")" em="!"?
 		public Group getGroup() { return cGroup; }
@@ -186,7 +186,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		////TrickyA1 returns TypeD: name+=ID;
 		//TrickyB:
 		//	"TB" (name=ID type+=INT)? type+=INT*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"TB" (name=ID type+=INT)? type+=INT*
 		public Group getGroup() { return cGroup; }
@@ -234,7 +234,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//TrickyC:
 		//	"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?
 		public Group getGroup() { return cGroup; }
@@ -297,7 +297,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//TrickyD:
 		//	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
 		public Group getGroup() { return cGroup; }
@@ -369,7 +369,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
 		//TrickyE:
 		//	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -435,7 +435,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//// 
 		//TrickyF:
 		//	"TF" (name+=ID type+=INT)* (name+=ID | type+=INT);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"TF" (name+=ID type+=INT)* (name+=ID | type+=INT)
 		public Group getGroup() { return cGroup; }
@@ -483,7 +483,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//TrickyG:
 		//	"TG" tree=TrickyG1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"TG" tree=TrickyG1
 		public Group getGroup() { return cGroup; }
@@ -513,7 +513,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//TrickyG1:
 		//	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]"
 		public Group getGroup() { return cGroup; }
@@ -560,7 +560,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//// TrickyG3: val=ID {T.x=current} 'x';
 		//// TrickyG4: val=INT {T.x=current} 'y'; TrickyG2:
 		//	TrickyG1 | val=INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//TrickyG1 //TrickyH: x+='a' TrickyH?; 
 		//// TrickyG: TrickyG1 | TrickyG2;
@@ -645,7 +645,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

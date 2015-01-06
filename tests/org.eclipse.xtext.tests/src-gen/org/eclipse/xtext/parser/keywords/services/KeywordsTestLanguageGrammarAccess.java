@@ -41,7 +41,7 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//Model:
 		//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" |
 		//	seventh?="\'c\'" | eighth?="\"d\"";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" | seventh?="\'c\'"
 		//| eighth?="\"d\""
@@ -127,7 +127,7 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

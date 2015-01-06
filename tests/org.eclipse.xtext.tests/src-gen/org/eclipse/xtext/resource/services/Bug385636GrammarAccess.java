@@ -29,7 +29,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Program:
 		//	define=DefineVariables statements+=Statement* "END";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//define=DefineVariables statements+=Statement* "END"
 		public Group getGroup() { return cGroup; }
@@ -60,7 +60,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DefineVariables:
 		//	"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES"
 		public Group getGroup() { return cGroup; }
@@ -87,7 +87,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DefineVariable:
 		//	"NAME" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"NAME" name=ID
 		public Group getGroup() { return cGroup; }
@@ -110,7 +110,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//NVariableAccess:
 		//	variable=[DefineVariable];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//variable=[DefineVariable]
 		public Assignment getVariableAssignment() { return cVariableAssignment; }
@@ -174,7 +174,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//	right=Expression_VariableName | "C4" {Expression_Equal.left=current} right=Expression_VariableName | "C5"
 		//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
 		//	right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Expression_VariableName ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2"
 		//{Expression_Smaller.left=current} right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current}
@@ -318,7 +318,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Expression_VariableName:
 		//	variable=NVariableAccess;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//variable=NVariableAccess
 		public Assignment getVariableAssignment() { return cVariableAssignment; }
@@ -368,7 +368,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

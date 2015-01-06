@@ -30,7 +30,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Model:
 		//	greetings+=Greeting* "favourite" favourite=[Greeting|MyId];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//greetings+=Greeting* "favourite" favourite=[Greeting|MyId]
 		public Group getGroup() { return cGroup; }
@@ -64,7 +64,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Greeting:
 		//	"Hello" name=MyId "!";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"Hello" name=MyId "!"
 		public Group getGroup() { return cGroup; }
@@ -88,7 +88,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//MyId returns ecore::EString:
 		//	ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -129,7 +129,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

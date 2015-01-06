@@ -29,7 +29,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Model:
 		//	Child ({Parent.left=current} right=Child)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Child ({Parent.left=current} right=Child)?
 		public Group getGroup() { return cGroup; }
@@ -57,7 +57,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Child:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -99,7 +99,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

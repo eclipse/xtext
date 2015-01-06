@@ -30,7 +30,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Root:
 		//	"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"test" (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
 		public Group getGroup() { return cGroup; }
@@ -73,7 +73,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Line:
 		//	(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";"
 		public Group getGroup() { return cGroup; }
@@ -128,7 +128,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Decl:
 		//	type+=ID name+=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type+=ID name+=ID
 		public Group getGroup() { return cGroup; }
@@ -167,7 +167,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Assign:
 		//	var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//var=ID op=("=" | "+=") "[" (val+=INT ("," val+=INT)*)? "]"
 		public Group getGroup() { return cGroup; }
@@ -236,7 +236,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Meth:
 		//	"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"void" name=ID "(" (param+=Param ("," param+=Param)*)? ")"
 		public Group getGroup() { return cGroup; }
@@ -289,7 +289,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Param:
 		//	name+=ID ":" type+=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name+=ID ":" type+=ID
 		public Group getGroup() { return cGroup; }
@@ -319,7 +319,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Space:
 		//	"space" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"space" val=ID
 		public Group getGroup() { return cGroup; }
@@ -344,7 +344,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TestLinewrap:
 		//	{TestLinewrap} "linewrap" items+=Line*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TestLinewrap} "linewrap" items+=Line*
 		public Group getGroup() { return cGroup; }
@@ -372,7 +372,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TestLinewrapMinMax:
 		//	{TestLinewrapMinMax} "wrapminmax" items+=Line*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TestLinewrapMinMax} "wrapminmax" items+=Line*
 		public Group getGroup() { return cGroup; }
@@ -406,7 +406,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//TestIndentation:
 		//	{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TestIndentation} "indentation" "{" items+=(Line | TestIndentation)* "}" semi?=";"?
 		public Group getGroup() { return cGroup; }
@@ -451,7 +451,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FqnObj:
 		//	"fqn" name=FQN;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"fqn" name=FQN
 		public Group getGroup() { return cGroup; }
@@ -476,7 +476,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FQN:
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -504,7 +504,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//FqnRef:
 		//	"fqnref" ref=[FqnObj|FQN];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"fqnref" ref=[FqnObj|FQN]
 		public Group getGroup() { return cGroup; }
@@ -535,7 +535,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Enumeration:
 		//	"enum" val+=Enum1+ ("," val+=Enum1)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"enum" val+=Enum1+ ("," val+=Enum1)*
 		public Group getGroup() { return cGroup; }
@@ -578,7 +578,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SuppressedHidden hidden():
 		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`"
 		public Group getGroup() { return cGroup; }
@@ -622,7 +622,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SuppressedHiddenSub:
 		//	SuppressedHiddenSubSub | SuppressedHiddenSubID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//SuppressedHiddenSubSub | SuppressedHiddenSubID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -644,7 +644,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SuppressedHiddenSubSub hidden(WS):
 		//	"<" idval=ID ">";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"<" idval=ID ">"
 		public Group getGroup() { return cGroup; }
@@ -669,7 +669,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SuppressedHiddenSubID:
 		//	idval=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//idval=ID
 		public Assignment getIdvalAssignment() { return cIdvalAssignment; }
@@ -684,7 +684,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Datatype1:
 		//	FQN;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//FQN
 		public RuleCall getFQNParserRuleCall() { return cFQNParserRuleCall; }
@@ -696,7 +696,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Datatype2:
 		//	FQN;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//FQN
 		public RuleCall getFQNParserRuleCall() { return cFQNParserRuleCall; }
@@ -708,7 +708,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Datatype3:
 		//	FQN;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//FQN
 		public RuleCall getFQNParserRuleCall() { return cFQNParserRuleCall; }
@@ -729,7 +729,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Datatypes:
 		//	"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"datatypes" val1=Datatype1 "kw1" val2=Datatype2 val3=Datatype3 "kw3"
 		public Group getGroup() { return cGroup; }
@@ -772,7 +772,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//WrappingDataTypeTest:
 		//	"wrappingdt" datatype=WrappingDataType "kw1";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"wrappingdt" datatype=WrappingDataType "kw1"
 		public Group getGroup() { return cGroup; }
@@ -796,7 +796,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//WrappingDataType:
 		//	ID+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID+
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -917,7 +917,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

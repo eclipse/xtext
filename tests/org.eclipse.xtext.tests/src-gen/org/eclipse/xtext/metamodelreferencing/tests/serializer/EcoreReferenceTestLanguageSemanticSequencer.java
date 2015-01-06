@@ -31,6 +31,7 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	@Inject
 	private EcoreReferenceTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EcorePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcorePackage.EATTRIBUTE:

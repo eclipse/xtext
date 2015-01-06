@@ -31,7 +31,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
 		//ORing:
 		//	Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*
 		public Group getGroup() { return cGroup; }
@@ -62,7 +62,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		
 		//Value:
 		//	value="a";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value="a"
 		public Assignment getValueAssignment() { return cValueAssignment; }
@@ -104,7 +104,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

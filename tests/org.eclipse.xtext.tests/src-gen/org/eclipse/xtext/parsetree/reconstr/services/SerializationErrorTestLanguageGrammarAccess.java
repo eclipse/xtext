@@ -28,7 +28,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Model:
 		//	test=Test | test=Parenthesis;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//test=Test | test=Parenthesis
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -55,7 +55,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Parenthesis returns Test:
 		//	"(" Test ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(" Test ")"
 		public Group getGroup() { return cGroup; }
@@ -79,7 +79,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Test:
 		//	TwoRequired | TwoOptions | Indent;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//TwoRequired | TwoOptions | Indent
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -105,7 +105,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//TwoRequired:
 		//	"tworequired" one=ID two=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"tworequired" one=ID two=ID
 		public Group getGroup() { return cGroup; }
@@ -142,7 +142,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//TwoOptions:
 		//	"twooptions" ("one" one=ID | "two" two=ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"twooptions" ("one" one=ID | "two" two=ID)
 		public Group getGroup() { return cGroup; }
@@ -192,7 +192,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Indent:
 		//	"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"{" req=TwoRequired? opt=TwoOptions? indent+=Indent* "}"
 		public Group getGroup() { return cGroup; }
@@ -263,7 +263,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -28,7 +28,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	{Model} "Model" refs+=ModelElement*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} "Model" refs+=ModelElement*
 		public Group getGroup() { return cGroup; }
@@ -66,7 +66,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//ModelElement:
 		//	{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{ModelElement} (containments+=Contained | "reference" refs+=[Contained] ("$" refs+=[Contained])*)+
 		public Group getGroup() { return cGroup; }
@@ -123,7 +123,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Contained:
 		//	"containment" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"containment" name=ID
 		public Group getGroup() { return cGroup; }
@@ -173,7 +173,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

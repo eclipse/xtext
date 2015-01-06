@@ -48,7 +48,7 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -157,7 +157,7 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

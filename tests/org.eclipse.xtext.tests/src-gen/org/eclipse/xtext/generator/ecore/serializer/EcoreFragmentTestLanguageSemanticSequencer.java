@@ -23,6 +23,7 @@ public class EcoreFragmentTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SecondPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SecondPackage.SECOND:

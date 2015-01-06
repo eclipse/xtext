@@ -28,7 +28,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Model:
 		//	imports+=Import* elements+=Element+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* elements+=Element+
 		public Group getGroup() { return cGroup; }
@@ -53,7 +53,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Import:
 		//	importURI=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//importURI=STRING
 		public Assignment getImportURIAssignment() { return cImportURIAssignment; }
@@ -95,7 +95,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

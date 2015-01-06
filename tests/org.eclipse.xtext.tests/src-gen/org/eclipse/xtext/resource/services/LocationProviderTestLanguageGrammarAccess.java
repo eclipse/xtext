@@ -28,7 +28,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Model:
 		//	elements+=Element* components+=Component*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element* components+=Component*
 		public Group getGroup() { return cGroup; }
@@ -65,7 +65,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Element:
 		//	"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" name=ID ("singleref" singleref=[Element])? ("multiref" multirefs+=[Element])*
 		public Group getGroup() { return cGroup; }
@@ -128,7 +128,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Component:
 		//	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";"
 		public Group getGroup() { return cGroup; }
@@ -181,7 +181,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Bus:
 		//	"bus" name=ID port+=Port*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"bus" name=ID port+=Port*
 		public Group getGroup() { return cGroup; }
@@ -213,7 +213,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Processor:
 		//	"processor" name=ID data+=Data*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"processor" name=ID data+=Data*
 		public Group getGroup() { return cGroup; }
@@ -244,7 +244,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Mode:
 		//	"mode" name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"mode" name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -279,7 +279,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Transition:
 		//	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID ":" source=[Mode] "->" destination=[Mode] ";"
 		public Group getGroup() { return cGroup; }
@@ -328,7 +328,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Port:
 		//	"port" name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"port" name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -356,7 +356,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Data:
 		//	"data" name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"data" name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -421,7 +421,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

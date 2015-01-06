@@ -30,7 +30,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Model:
 		//	extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject
 		public Group getGroup() { return cGroup; }
@@ -116,7 +116,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		//	eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
 		//	eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
 		//	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ExtendsNsURIEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
 		//eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
@@ -292,7 +292,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//MyEAttribute:
 		//	{MyEAttribute} "MyEAttribute";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{MyEAttribute} "MyEAttribute"
 		public Group getGroup() { return cGroup; }
@@ -312,7 +312,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EAttribute:
 		//	{EAttribute} "EAttribute";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{EAttribute} "EAttribute"
 		public Group getGroup() { return cGroup; }
@@ -383,7 +383,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		//	eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
 		//	eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
 		//	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ExtendsPluginEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
 		//eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
@@ -550,7 +550,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Unused_01 returns ExtendsNsURIEObject:
 		//	{MyNamedElement_01} name=ValidID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{MyNamedElement_01} name=ValidID
 		public Group getGroup() { return cGroup; }
@@ -574,7 +574,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Unused_02 returns ExtendsResourceEObject:
 		//	{MyNamedElement_02} name=ValidID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{MyNamedElement_02} name=ValidID
 		public Group getGroup() { return cGroup; }
@@ -598,7 +598,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Unused_03 returns ExtendsPluginEObject:
 		//	{MyNamedElement_03} name=ValidID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{MyNamedElement_03} name=ValidID
 		public Group getGroup() { return cGroup; }
@@ -672,7 +672,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		//	eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
 		//	eObjectContainment+=ExtendsPluginEObject eObjectContainment+=ExtendsResourceEObject eObjectContainment+=EObject
 		//	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ExtendsResourceEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
 		//eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
@@ -838,7 +838,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EObject:
 		//	{EObject} "object";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{EObject} "object"
 		public Group getGroup() { return cGroup; }
@@ -856,7 +856,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ValidID returns EString:
 		//	ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -913,7 +913,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

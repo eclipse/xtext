@@ -23,6 +23,7 @@ public class MultiRuleEnumTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private MultiRuleEnumTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == MultiRuleenumsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case MultiRuleenumsPackage.MODEL:

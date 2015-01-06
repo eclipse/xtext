@@ -30,6 +30,7 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 	@Inject
 	private LocationProviderTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LocationprovidertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LocationprovidertestPackage.BUS:

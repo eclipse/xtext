@@ -35,7 +35,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Model:
 		//	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*
 		public Group getGroup() { return cGroup; }
@@ -87,7 +87,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Ab:
 		//	x=CharA y=Charb;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//x=CharA y=Charb
 		public Group getGroup() { return cGroup; }
@@ -115,7 +115,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Xb:
 		//	x=CharX y=Charb;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//x=CharX y=Charb
 		public Group getGroup() { return cGroup; }
@@ -210,7 +210,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

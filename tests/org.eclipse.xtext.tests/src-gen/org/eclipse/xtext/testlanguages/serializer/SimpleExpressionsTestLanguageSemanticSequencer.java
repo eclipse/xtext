@@ -22,6 +22,7 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	@Inject
 	private SimpleExpressionsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SimpleExpressionsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SimpleExpressionsPackage.ATOM:

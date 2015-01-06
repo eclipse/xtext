@@ -37,6 +37,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private ContextFinderTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ContextFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ContextFinderTestPackage.ATTRIBUTE_EXCLUSION_TEST:

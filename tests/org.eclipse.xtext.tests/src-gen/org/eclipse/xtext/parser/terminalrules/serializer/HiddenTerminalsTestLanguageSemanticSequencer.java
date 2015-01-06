@@ -30,6 +30,7 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	@Inject
 	private HiddenTerminalsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == HiddenTerminalsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case HiddenTerminalsTestLanguagePackage.DATATYPE_HIDDENS:

@@ -34,7 +34,7 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	{Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign"
 		public Group getGroup() { return cGroup; }
@@ -101,7 +101,7 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

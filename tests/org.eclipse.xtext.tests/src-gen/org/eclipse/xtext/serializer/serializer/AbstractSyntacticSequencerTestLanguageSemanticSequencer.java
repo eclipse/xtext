@@ -41,6 +41,7 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	@Inject
 	private SyntacticSequencerTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SyntacticsequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SyntacticsequencertestPackage.ADD0:

@@ -16,6 +16,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("all")
 public class ExUnorderedGroupsTestLanguageStandaloneSetupGenerated implements ISetup {
 
+	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
 		org.eclipse.xtext.parser.unorderedGroups.UnorderedGroupsTestLanguageStandaloneSetup.doSetup();
 

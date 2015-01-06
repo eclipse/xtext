@@ -27,7 +27,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Element:
 		//	"keyword" qualifiedName=QualifiedName;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"keyword" qualifiedName=QualifiedName
 		public Group getGroup() { return cGroup; }
@@ -55,7 +55,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//QualifiedName:
 		//	ID ("." ID)* ("." "*")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)* ("." "*")?
 		public Group getGroup() { return cGroup; }
@@ -115,7 +115,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

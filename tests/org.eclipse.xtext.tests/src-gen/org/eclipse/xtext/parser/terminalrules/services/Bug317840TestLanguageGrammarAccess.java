@@ -25,7 +25,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	elements+=Element*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -50,7 +50,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Element:
 		//	"element" first=Named second=Named? (third+=Named forth+=Named)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" first=Named second=Named? (third+=Named forth+=Named)*
 		public Group getGroup() { return cGroup; }
@@ -93,7 +93,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Named:
 		//	name=NAME;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=NAME
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -112,7 +112,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NAME hidden():
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -167,7 +167,7 @@ public class Bug317840TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

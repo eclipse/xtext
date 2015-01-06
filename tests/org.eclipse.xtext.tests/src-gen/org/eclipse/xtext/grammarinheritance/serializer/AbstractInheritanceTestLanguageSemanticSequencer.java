@@ -24,6 +24,7 @@ public abstract class AbstractInheritanceTestLanguageSemanticSequencer extends A
 	@Inject
 	private InheritanceTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == InheritanceTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case InheritanceTestPackage.ELEMENT:

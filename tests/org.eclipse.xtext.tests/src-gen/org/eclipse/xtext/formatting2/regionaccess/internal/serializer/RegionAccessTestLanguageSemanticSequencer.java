@@ -26,6 +26,7 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	@Inject
 	private RegionAccessTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == RegionaccesstestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case RegionaccesstestlanguagePackage.DELEGATE:

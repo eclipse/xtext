@@ -24,7 +24,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//Model:
 		//	words+=Word*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//words+=Word*
 		public Assignment getWordsAssignment() { return cWordsAssignment; }
@@ -40,7 +40,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//Word:
 		//	value=LEXEME;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value=LEXEME
 		public Assignment getValueAssignment() { return cValueAssignment; }
@@ -84,7 +84,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

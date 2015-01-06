@@ -21,14 +21,14 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LineFeedLf", "CarriageReturnCr", "RULE_ID", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Control000a", "Control000d", "RULE_ID", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=6;
-    public static final int CarriageReturnCr=5;
+    public static final int Control000d=5;
     public static final int RULE_ANY_OTHER=8;
+    public static final int Control000a=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
-    public static final int LineFeedLf=4;
 
     // delegates
     // delegators
@@ -358,7 +358,7 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleNL"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:191:1: ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturnCr )? kw= LineFeedLf ) (this_WS_3= RULE_WS )* ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:191:1: ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* ) ;
     public final AntlrDatatypeRuleToken ruleNL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -369,11 +369,11 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:195:6: ( ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturnCr )? kw= LineFeedLf ) (this_WS_3= RULE_WS )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:1: ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturnCr )? kw= LineFeedLf ) (this_WS_3= RULE_WS )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:195:6: ( ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:1: ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:1: ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturnCr )? kw= LineFeedLf ) (this_WS_3= RULE_WS )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:2: (this_WS_0= RULE_WS )* ( (kw= CarriageReturnCr )? kw= LineFeedLf ) (this_WS_3= RULE_WS )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:1: ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:2: (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )*
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:196:2: (this_WS_0= RULE_WS )*
             loop1:
@@ -406,24 +406,24 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:203:3: ( (kw= CarriageReturnCr )? kw= LineFeedLf )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:203:4: (kw= CarriageReturnCr )? kw= LineFeedLf
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:203:3: ( (kw= Control000d )? kw= Control000a )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:203:4: (kw= Control000d )? kw= Control000a
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:203:4: (kw= CarriageReturnCr )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:203:4: (kw= Control000d )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==CarriageReturnCr) ) {
+            if ( (LA2_0==Control000d) ) {
                 alt2=1;
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:204:2: kw= CarriageReturnCr
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug301935ExTestLanguageParser.g:204:2: kw= Control000d
                     {
-                    kw=(Token)match(input,CarriageReturnCr,FollowSets000.FOLLOW_CarriageReturnCr_in_ruleNL402); 
+                    kw=(Token)match(input,Control000d,FollowSets000.FOLLOW_Control000d_in_ruleNL402); 
 
                             current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getNLAccess().getCarriageReturnCrKeyword_1_0()); 
+                            newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0()); 
                         
 
                     }
@@ -431,10 +431,10 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            kw=(Token)match(input,LineFeedLf,FollowSets000.FOLLOW_LineFeedLf_in_ruleNL417); 
+            kw=(Token)match(input,Control000a,FollowSets000.FOLLOW_Control000a_in_ruleNL417); 
 
                     current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getNLAccess().getLineFeedLfKeyword_1_1()); 
+                    newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1()); 
                 
 
             }
@@ -511,8 +511,8 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
         public static final BitSet FOLLOW_ruleNL_in_entryRuleNL328 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleNL339 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_WS_in_ruleNL380 = new BitSet(new long[]{0x00000000000000B0L});
-        public static final BitSet FOLLOW_CarriageReturnCr_in_ruleNL402 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_LineFeedLf_in_ruleNL417 = new BitSet(new long[]{0x0000000000000082L});
+        public static final BitSet FOLLOW_Control000d_in_ruleNL402 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_Control000a_in_ruleNL417 = new BitSet(new long[]{0x0000000000000082L});
         public static final BitSet FOLLOW_RULE_WS_in_ruleNL434 = new BitSet(new long[]{0x0000000000000082L});
     }
 

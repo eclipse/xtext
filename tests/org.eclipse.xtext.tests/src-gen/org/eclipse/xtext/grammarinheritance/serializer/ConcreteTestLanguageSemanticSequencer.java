@@ -32,6 +32,7 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 	@Inject
 	private ConcreteTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AmetamodelPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AmetamodelPackage.AMODEL:

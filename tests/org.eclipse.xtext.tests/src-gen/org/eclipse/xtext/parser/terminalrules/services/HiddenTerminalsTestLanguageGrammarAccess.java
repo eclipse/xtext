@@ -28,7 +28,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Model:
 		//	WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -63,7 +63,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//WithoutHiddens:
 		//	"without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
 		public Group getGroup() { return cGroup; }
@@ -103,7 +103,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 		//	"with" "hiddens" valid?=";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"with" "hiddens" valid?=";"
 		public Group getGroup() { return cGroup; }
@@ -135,7 +135,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 		//	"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
 		public Group getGroup() { return cGroup; }
@@ -176,7 +176,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//OverridingHiddensCall hidden():
 		//	"call" spaces+=WS? valid?=";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"call" spaces+=WS? valid?=";"
 		public Group getGroup() { return cGroup; }
@@ -214,7 +214,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 		//	"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";"
 		public Group getGroup() { return cGroup; }
@@ -262,7 +262,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//DatatypeHiddens:
 		//	"datatype" valid?=DatatypeRule;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"datatype" valid?=DatatypeRule
 		public Group getGroup() { return cGroup; }
@@ -285,7 +285,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//DatatypeRule returns ecore::EString hidden(WS):
 		//	"rule" ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"rule" ";"
 		public Group getGroup() { return cGroup; }
@@ -308,7 +308,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//HidingHiddens hidden():
 		//	"hiding" space=WS called=InheritingHiddensCall;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"hiding" space=WS called=InheritingHiddensCall
 		public Group getGroup() { return cGroup; }
@@ -338,7 +338,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//InheritingHiddensCall:
 		//	"call" valid?=";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"call" valid?=";"
 		public Group getGroup() { return cGroup; }
@@ -406,7 +406,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

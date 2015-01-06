@@ -27,7 +27,7 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Model:
 		//	"case" "foo"? value="CaSe";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"case" "foo"? value="CaSe"
 		public Group getGroup() { return cGroup; }
@@ -76,7 +76,7 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractGrammarEle
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -32,7 +32,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//EntityWithEnumAndReference:
 		//	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
 		public Group getGroup() { return cGroup; }
@@ -123,7 +123,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

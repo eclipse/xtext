@@ -28,7 +28,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		
 		//Foo:
 		//	name=ID nameRefs+=NameRef*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID nameRefs+=NameRef*
 		public Group getGroup() { return cGroup; }
@@ -53,7 +53,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		
 		//NameRef returns other::FooBar:
 		//	name=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -95,7 +95,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

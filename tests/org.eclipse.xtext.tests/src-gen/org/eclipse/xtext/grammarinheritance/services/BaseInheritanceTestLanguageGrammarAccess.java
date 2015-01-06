@@ -27,7 +27,7 @@ public class BaseInheritanceTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Model:
 		//	"model" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"model" name=ID
 		public Group getGroup() { return cGroup; }
@@ -52,7 +52,7 @@ public class BaseInheritanceTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//FQN:
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -103,7 +103,7 @@ public class BaseInheritanceTestLanguageGrammarAccess extends AbstractGrammarEle
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

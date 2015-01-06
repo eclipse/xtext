@@ -24,6 +24,7 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	@Inject
 	private SuperTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SuperPackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SuperPackagePackage.ANOTHER_SUPER_MAIN:

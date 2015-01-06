@@ -21,6 +21,7 @@ public class DummyTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	@Inject
 	private DummyTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == DummyLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case DummyLangPackage.ELEMENT:

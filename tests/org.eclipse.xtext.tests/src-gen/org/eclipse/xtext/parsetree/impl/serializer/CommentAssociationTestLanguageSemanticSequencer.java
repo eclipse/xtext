@@ -21,6 +21,7 @@ public class CommentAssociationTestLanguageSemanticSequencer extends AbstractDel
 	@Inject
 	private CommentAssociationTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == CommentAssociationPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case CommentAssociationPackage.ELEMENT:

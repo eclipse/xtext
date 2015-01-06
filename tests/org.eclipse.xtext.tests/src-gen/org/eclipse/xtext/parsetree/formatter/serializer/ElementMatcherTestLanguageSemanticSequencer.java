@@ -41,6 +41,7 @@ public class ElementMatcherTestLanguageSemanticSequencer extends AbstractDelegat
 	@Inject
 	private ElementMatcherTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ElementmatchertestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ElementmatchertestlanguagePackage.ADD:

@@ -28,7 +28,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Model:
 		//	"model" INT+ modelFeatures=ModelFeatures;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"model" INT+ modelFeatures=ModelFeatures
 		public Group getGroup() { return cGroup; }
@@ -57,7 +57,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//ModelFeatures:
 		//	"feature" name=ID DataTypeRule ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"feature" name=ID DataTypeRule ";"
 		public Group getGroup() { return cGroup; }
@@ -88,7 +88,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//DataTypeRule:
 		//	INT "keyword" INT STRING?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//INT "keyword" INT STRING?
 		public Group getGroup() { return cGroup; }
@@ -141,7 +141,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

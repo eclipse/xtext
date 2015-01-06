@@ -25,7 +25,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Model:
 		//	child=Greeting?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//child=Greeting?
 		public Assignment getChildAssignment() { return cChildAssignment; }
@@ -43,7 +43,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Greeting:
 		//	"hallo" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"hallo" name=ID
 		public Group getGroup() { return cGroup; }
@@ -91,7 +91,7 @@ public class OptionalEmptyTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

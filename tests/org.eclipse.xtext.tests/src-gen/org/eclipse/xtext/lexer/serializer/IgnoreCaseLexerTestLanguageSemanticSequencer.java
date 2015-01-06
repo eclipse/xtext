@@ -23,6 +23,7 @@ public class IgnoreCaseLexerTestLanguageSemanticSequencer extends AbstractDelega
 	@Inject
 	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IgnoreCaseTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseTestLanguagePackage.MODEL:

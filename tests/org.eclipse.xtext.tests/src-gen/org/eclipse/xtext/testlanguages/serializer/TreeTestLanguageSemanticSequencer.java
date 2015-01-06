@@ -21,6 +21,7 @@ public class TreeTestLanguageSemanticSequencer extends AbstractDelegatingSemanti
 	@Inject
 	private TreeTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TreeTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TreeTestLanguagePackage.MODEL:

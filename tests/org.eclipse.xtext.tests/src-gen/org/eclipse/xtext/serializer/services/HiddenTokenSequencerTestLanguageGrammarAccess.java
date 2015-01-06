@@ -25,7 +25,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		
 		//Model:
 		//	domainModel=DomainModel;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//domainModel=DomainModel
 		public Assignment getDomainModelAssignment() { return cDomainModelAssignment; }
@@ -44,7 +44,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		
 		//DomainModel:
 		//	"entities" entities+=Entity* "end";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"entities" entities+=Entity* "end"
 		public Group getGroup() { return cGroup; }
@@ -72,7 +72,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		
 		//Entity:
 		//	name=ID description=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID description=STRING
 		public Group getGroup() { return cGroup; }
@@ -125,7 +125,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

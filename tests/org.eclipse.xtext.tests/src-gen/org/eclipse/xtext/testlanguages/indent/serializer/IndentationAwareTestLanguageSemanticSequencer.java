@@ -21,6 +21,7 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	@Inject
 	private IndentationAwareTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IndentLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IndentLangPackage.NODE:

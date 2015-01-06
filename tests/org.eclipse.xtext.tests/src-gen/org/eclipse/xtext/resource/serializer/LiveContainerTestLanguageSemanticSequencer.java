@@ -23,6 +23,7 @@ public class LiveContainerTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private LiveContainerTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LiveContainerTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LiveContainerTestLanguagePackage.MODEL:

@@ -30,6 +30,7 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private PartialParserTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == PartialParserTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case PartialParserTestLanguagePackage.ABSTRACT_CHILDREN:

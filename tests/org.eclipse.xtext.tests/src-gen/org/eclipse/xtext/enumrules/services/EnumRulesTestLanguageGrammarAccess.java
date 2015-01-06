@@ -36,7 +36,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -177,7 +177,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

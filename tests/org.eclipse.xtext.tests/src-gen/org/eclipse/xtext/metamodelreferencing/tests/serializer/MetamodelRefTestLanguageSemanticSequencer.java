@@ -23,6 +23,7 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	@Inject
 	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AnotherSimpleTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AnotherSimpleTestPackage.FOO:

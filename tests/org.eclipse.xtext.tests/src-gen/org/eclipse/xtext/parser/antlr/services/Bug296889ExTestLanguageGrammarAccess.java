@@ -32,7 +32,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -70,7 +70,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Expression:
 		//	Postop | Preop;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Postop | Preop
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -93,7 +93,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Preop returns Expression:
 		//	{Preop} functionName="--" expr=Variable;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Preop} functionName="--" expr=Variable
 		public Group getGroup() { return cGroup; }
@@ -125,7 +125,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Postop returns Expression:
 		//	Variable ({Postop.expr=current} functionName="--")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Variable ({Postop.expr=current} functionName="--")?
 		public Group getGroup() { return cGroup; }
@@ -155,7 +155,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Variable returns Expression:
 		//	{Variable} name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Variable} name=ID
 		public Group getGroup() { return cGroup; }
@@ -178,7 +178,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//DataTypeExpression:
 		//	DataTypePostop | DataTypePreop;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//DataTypePostop | DataTypePreop
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -198,7 +198,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//DataTypePreop:
 		//	"--" DataTypeVariable;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"--" DataTypeVariable
 		public Group getGroup() { return cGroup; }
@@ -218,7 +218,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//DataTypePostop:
 		//	DataTypeVariable "--"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//DataTypeVariable "--"?
 		public Group getGroup() { return cGroup; }
@@ -236,7 +236,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//DataTypeVariable:
 		//	ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -289,7 +289,7 @@ public class Bug296889ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

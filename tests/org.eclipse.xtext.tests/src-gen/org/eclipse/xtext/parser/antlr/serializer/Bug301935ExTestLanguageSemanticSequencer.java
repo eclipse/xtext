@@ -20,6 +20,7 @@ public class Bug301935ExTestLanguageSemanticSequencer extends Bug301935TestLangu
 	@Inject
 	private Bug301935ExTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug301935TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug301935TestPackage.MODEL:

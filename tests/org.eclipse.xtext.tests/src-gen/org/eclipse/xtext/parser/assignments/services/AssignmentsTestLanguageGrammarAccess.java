@@ -44,7 +44,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//Model:
 		//	"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
 		//	object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
 		//object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
@@ -128,7 +128,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//SingleValue:
 		//	"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -196,7 +196,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//MultiValue:
 		//	"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -265,7 +265,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//SingleDatatype returns SingleValue:
 		//	"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
 		//	value=StringDatatype;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
 		//value=StringDatatype
@@ -335,7 +335,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		//MultiDatatype returns MultiValue:
 		//	"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
 		//	value+=StringDatatype;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
 		//value+=StringDatatype
@@ -390,7 +390,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//IdDatatype:
 		//	ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
@@ -402,7 +402,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//StringDatatype:
 		//	STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall() { return cSTRINGTerminalRuleCall; }
@@ -451,7 +451,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

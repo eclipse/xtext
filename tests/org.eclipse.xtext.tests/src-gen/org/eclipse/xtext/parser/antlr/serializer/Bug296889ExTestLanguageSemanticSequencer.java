@@ -26,6 +26,7 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	@Inject
 	private Bug296889ExTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug296889ExTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug296889ExTestPackage.MODEL:

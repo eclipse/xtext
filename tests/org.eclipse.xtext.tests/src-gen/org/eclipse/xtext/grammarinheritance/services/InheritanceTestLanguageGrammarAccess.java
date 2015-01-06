@@ -31,7 +31,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	"model" name=ID "{" elements+=Element* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"model" name=ID "{" elements+=Element* "}"
 		public Group getGroup() { return cGroup; }
@@ -67,7 +67,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Element:
 		//	"element" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
 		public Group getGroup() { return cGroup; }
@@ -115,7 +115,7 @@ public class InheritanceTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

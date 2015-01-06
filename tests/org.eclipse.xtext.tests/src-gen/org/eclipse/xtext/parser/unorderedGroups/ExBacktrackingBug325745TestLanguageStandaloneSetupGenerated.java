@@ -16,6 +16,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("all")
 public class ExBacktrackingBug325745TestLanguageStandaloneSetupGenerated implements ISetup {
 
+	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
 		org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguageStandaloneSetup.doSetup();
 

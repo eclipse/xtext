@@ -20,6 +20,7 @@ public class TerminalRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TerminalRulesTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TerminalRulesTestLanguagePackage.MODEL:

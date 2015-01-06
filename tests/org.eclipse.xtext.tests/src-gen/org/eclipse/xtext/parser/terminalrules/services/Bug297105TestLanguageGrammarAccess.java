@@ -25,7 +25,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	expressions+=Expression*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//expressions+=Expression*
 		public Assignment getExpressionsAssignment() { return cExpressionsAssignment; }
@@ -45,7 +45,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Expression:
 		//	left=Literal "+" right=Literal;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//left=Literal "+" right=Literal
 		public Group getGroup() { return cGroup; }
@@ -74,7 +74,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Literal:
 		//	RealLiteral | IntLiteral;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//RealLiteral | IntLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -93,7 +93,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//IntLiteral:
 		//	value=IntValue;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value=IntValue
 		public Assignment getValueAssignment() { return cValueAssignment; }
@@ -109,7 +109,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RealLiteral:
 		//	value=RealValue;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value=RealValue
 		public Assignment getValueAssignment() { return cValueAssignment; }
@@ -124,7 +124,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//IntValue:
 		//	INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//INT
 		public RuleCall getINTTerminalRuleCall() { return cINTTerminalRuleCall; }
@@ -136,7 +136,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RealValue:
 		//	Real;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Real
 		public RuleCall getRealParserRuleCall() { return cRealParserRuleCall; }
@@ -153,7 +153,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Real hidden():
 		//	INT? "." (EXT_INT | INT);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//INT? "." (EXT_INT | INT)
 		public Group getGroup() { return cGroup; }
@@ -221,7 +221,7 @@ public class Bug297105TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -23,6 +23,7 @@ public class LiveContainerBuilderIntegerationTestLanguageSemanticSequencer exten
 	@Inject
 	private LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LiveContainerBuilderIntegerationTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LiveContainerBuilderIntegerationTestLanguagePackage.MODEL:

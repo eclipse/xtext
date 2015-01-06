@@ -32,7 +32,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	name=ID WS value=ID NL value2=ID WS;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID WS value=ID NL value2=ID WS
 		public Group getGroup() { return cGroup; }
@@ -70,13 +70,13 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cWSTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cCarriageReturnCrKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Keyword cLineFeedLfKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Keyword cControl000dKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cControl000aKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final RuleCall cWSTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NL:
 		//	WS* ("\r"? "\n") WS*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//WS* ("\r"? "\n") WS*
 		public Group getGroup() { return cGroup; }
@@ -88,10 +88,10 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"\r"?
-		public Keyword getCarriageReturnCrKeyword_1_0() { return cCarriageReturnCrKeyword_1_0; }
+		public Keyword getControl000dKeyword_1_0() { return cControl000dKeyword_1_0; }
 
 		//"\n"
-		public Keyword getLineFeedLfKeyword_1_1() { return cLineFeedLfKeyword_1_1; }
+		public Keyword getControl000aKeyword_1_1() { return cControl000aKeyword_1_1; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2() { return cWSTerminalRuleCall_2; }
@@ -132,7 +132,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

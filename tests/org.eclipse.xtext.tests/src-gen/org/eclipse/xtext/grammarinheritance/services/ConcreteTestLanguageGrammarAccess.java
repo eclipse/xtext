@@ -28,7 +28,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//RootRule:
 		//	ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule | OverridableParserRule2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ConcreteParserRule | CallOverridenParserRule | CallExtendedParserRule | OverridableParserRule2
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -59,7 +59,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//// call InheritedParserRule
 		//ConcreteParserRule:
 		//	"model" magicNumber=REAL ":" elements+=InheritedParserRule*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"model" magicNumber=REAL ":" elements+=InheritedParserRule*
 		public Group getGroup() { return cGroup; }
@@ -93,7 +93,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//// override OverridableParserRule and call it
 		//OverridableParserRule returns mm::AType:
 		//	"overriddenelement" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"overriddenelement" name=ID
 		public Group getGroup() { return cGroup; }
@@ -115,7 +115,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//CallOverridenParserRule:
 		//	call=AbstractCallOverridenParserRule;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//call=AbstractCallOverridenParserRule
 		public Assignment getCallAssignment() { return cCallAssignment; }
@@ -137,7 +137,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//// override parser rule and change return type
 		//OverridableParserRule2 returns AType2:
 		//	"overridden other element" name=ID "-" age=INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"overridden other element" name=ID "-" age=INT
 		public Group getGroup() { return cGroup; }
@@ -171,7 +171,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//// override and extend ExtendableParserRule and call it
 		//ExtendableParserRule returns mm::AType:
 		//	Subrule1 | Subrule2 | Subrule3;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Subrule1 | Subrule2 | Subrule3
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -197,7 +197,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//Subrule1:
 		//	"subrule1" name=ID sub1=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"subrule1" name=ID sub1=ID
 		public Group getGroup() { return cGroup; }
@@ -229,7 +229,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//Subrule2:
 		//	"subrule3" name=ID sub2=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"subrule3" name=ID sub2=STRING
 		public Group getGroup() { return cGroup; }
@@ -261,7 +261,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//Subrule3:
 		//	"subrule3" name=ID sub1=INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"subrule3" name=ID sub1=INT
 		public Group getGroup() { return cGroup; }
@@ -289,7 +289,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//CallExtendedParserRule:
 		//	call=AbstractCallExtendedParserRule;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//call=AbstractCallExtendedParserRule
 		public Assignment getCallAssignment() { return cCallAssignment; }
@@ -347,7 +347,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

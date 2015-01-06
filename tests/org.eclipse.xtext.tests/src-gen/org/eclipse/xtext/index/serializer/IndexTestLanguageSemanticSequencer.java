@@ -28,6 +28,7 @@ public class IndexTestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	@Inject
 	private IndexTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IndexTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IndexTestLanguagePackage.DATATYPE:

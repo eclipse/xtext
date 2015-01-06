@@ -27,6 +27,7 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	@Inject
 	private FowlerDslTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FowlerdslPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FowlerdslPackage.COMMAND:

@@ -25,7 +25,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Entry:
 		//	contents+=Alts*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//contents+=Alts*
 		public Assignment getContentsAssignment() { return cContentsAssignment; }
@@ -43,7 +43,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Alts:
 		//	LookAhead0 | LookAhead1 | LookAhead3;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//LookAhead0 | LookAhead1 | LookAhead3
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -67,7 +67,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//LookAhead0:
 		//	"bar" x="a";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"bar" x="a"
 		public Group getGroup() { return cGroup; }
@@ -95,7 +95,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//LookAhead1:
 		//	"foo" y=LookAhead2 x="b" z="d";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"foo" y=LookAhead2 x="b" z="d"
 		public Group getGroup() { return cGroup; }
@@ -134,7 +134,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//LookAhead2:
 		//	(z="foo" | z="bar") "c";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(z="foo" | z="bar") "c"
 		public Group getGroup() { return cGroup; }
@@ -170,7 +170,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//LookAhead3:
 		//	"foo" "bar" x="b" z=LookAhead4;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"foo" "bar" x="b" z=LookAhead4
 		public Group getGroup() { return cGroup; }
@@ -204,7 +204,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//LookAhead4:
 		//	x="c" | x="d";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//x="c" | x="d"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -265,7 +265,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

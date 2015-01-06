@@ -32,7 +32,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Model:
 		//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -77,7 +77,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Simple:
 		//	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#1" name=ID ("kw1" optional=ID)? datatype=FQN
 		public Group getGroup() { return cGroup; }
@@ -120,7 +120,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//FQN:
 		//	ID ("." ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)
 		public Group getGroup() { return cGroup; }
@@ -152,7 +152,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RuleCalls:
 		//	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?
 		public Group getGroup() { return cGroup; }
@@ -189,7 +189,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RuleCallsSub:
 		//	sub="sub";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//sub="sub"
 		public Assignment getSubAssignment() { return cSubAssignment; }
@@ -207,7 +207,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RuleCallsAss1:
 		//	"ass1" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ass1" name=ID
 		public Group getGroup() { return cGroup; }
@@ -231,7 +231,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RuleCallsAss2:
 		//	"ass2" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ass2" name=ID
 		public Group getGroup() { return cGroup; }
@@ -258,7 +258,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//OptionalCalls:
 		//	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID
 		public Group getGroup() { return cGroup; }
@@ -294,7 +294,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//OptionalCallsSub1:
 		//	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?
 		public Group getGroup() { return cGroup; }
@@ -327,7 +327,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//OptionalCallsSub2:
 		//	"sub2" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"sub2" name=ID
 		public Group getGroup() { return cGroup; }
@@ -351,7 +351,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//OptionalCallsSub3:
 		//	"sub3" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"sub3" name=ID
 		public Group getGroup() { return cGroup; }
@@ -374,7 +374,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Recursion:
 		//	"#4" RecursionSub;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#4" RecursionSub
 		public Group getGroup() { return cGroup; }
@@ -402,7 +402,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RecursionSub:
 		//	{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?
 		public Group getGroup() { return cGroup; }
@@ -456,7 +456,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Loop:
 		//	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*
 		public Group getGroup() { return cGroup; }
@@ -506,7 +506,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Expression:
 		//	"#6" Add;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#6" Add
 		public Group getGroup() { return cGroup; }
@@ -530,7 +530,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Add returns Expression:
 		//	Mult ({Add.left=current} "+" right=Mult)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Mult ({Add.left=current} "+" right=Mult)*
 		public Group getGroup() { return cGroup; }
@@ -566,7 +566,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Mult returns Expression:
 		//	Prim ({Mult.left=current} "*" right=Prim)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Prim ({Mult.left=current} "*" right=Prim)*
 		public Group getGroup() { return cGroup; }
@@ -621,7 +621,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Prim returns Expression:
 		//	{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -714,7 +714,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//RuleCalls12:
 		//	"#7" constructor=Constructor fields+=Field "kw3";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" constructor=Constructor fields+=Field "kw3"
 		public Group getGroup() { return cGroup; }
@@ -747,7 +747,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Constructor:
 		//	{Constructor} kw1?="kw1"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Constructor} kw1?="kw1"?
 		public Group getGroup() { return cGroup; }
@@ -770,7 +770,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Field:
 		//	ID Parameter;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID Parameter
 		public Group getGroup() { return cGroup; }
@@ -791,7 +791,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Parameter:
 		//	{Parameter} kw2?="kw2"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Parameter} kw2?="kw2"?
 		public Group getGroup() { return cGroup; }
@@ -815,7 +815,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//NestedStart:
 		//	NestedStartSub name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//NestedStartSub name=ID
 		public Group getGroup() { return cGroup; }
@@ -838,7 +838,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//NestedStartSub:
 		//	"#8" {NestedStartSub};
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#8" {NestedStartSub}
 		public Group getGroup() { return cGroup; }
@@ -927,7 +927,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

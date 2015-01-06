@@ -23,6 +23,7 @@ public class QualifiedNameTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private QualifiedNameTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == QualifiedNamePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QualifiedNamePackage.ELEMENT:

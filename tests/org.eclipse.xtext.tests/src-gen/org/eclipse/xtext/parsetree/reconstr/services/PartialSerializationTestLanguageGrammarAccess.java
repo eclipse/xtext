@@ -24,7 +24,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		
 		//Model:
 		//	NodeRoot;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//NodeRoot
 		public RuleCall getNodeRootParserRuleCall() { return cNodeRootParserRuleCall; }
@@ -39,7 +39,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		
 		//NodeRoot:
 		//	"#1" node=Node;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#1" node=Node
 		public Group getGroup() { return cGroup; }
@@ -68,7 +68,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		
 		//Node:
 		//	"node" name=ID ("(" children+=Node+ ")")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"node" name=ID ("(" children+=Node+ ")")?
 		public Group getGroup() { return cGroup; }
@@ -133,7 +133,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

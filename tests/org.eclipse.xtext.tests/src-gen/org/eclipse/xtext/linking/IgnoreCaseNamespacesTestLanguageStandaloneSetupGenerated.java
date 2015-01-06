@@ -16,6 +16,7 @@ import com.google.inject.Injector;
 @SuppressWarnings("all")
 public class IgnoreCaseNamespacesTestLanguageStandaloneSetupGenerated implements ISetup {
 
+	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
 		org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguageStandaloneSetup.doSetup();
 

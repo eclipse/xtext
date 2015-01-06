@@ -53,6 +53,7 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	@Inject
 	private ConcreteSyntaxValidationTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == CsvalidationtestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case CsvalidationtestPackage.ALT_LIST1:

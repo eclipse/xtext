@@ -66,7 +66,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//	"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
 		//	"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
 		//	"#08" containmentRef=ContainmentRef | "#09" crossRef=CrossRef;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#00" keywordVal=KeywordVal | "#01" terminalVal=TerminalVal | "#02" enumVal=EnumVal | "#03" keywordBool=KeywordBool |
 		//"#04" terminalBool=TerminalBool | "#05" enumBool=EnumBool | "#06" mixedBool=MixedBool | "#07" mixedValue=MixedValue |
@@ -204,7 +204,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//KeywordVal:
 		//	kw="kw1" | kw="kw2";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//kw="kw1" | kw="kw2"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -234,7 +234,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//TerminalVal:
 		//	term=Terminal1 | term=Terminal2 | term="%foo";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//term=Terminal1 | term=Terminal2 | term="%foo"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -268,7 +268,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//EnumVal:
 		//	en=Enum1 | en=Enum2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//en=Enum1 | en=Enum2
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -296,7 +296,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//KeywordBool:
 		//	kw?="kw1" | kw?="kw2";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//kw?="kw1" | kw?="kw2"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -326,7 +326,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//TerminalBool:
 		//	term?=Terminal1 | term?=Terminal2 | term?="%foo";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//term?=Terminal1 | term?=Terminal2 | term?="%foo"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -360,7 +360,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//EnumBool:
 		//	en?=Enum1 | en?=Enum2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//en?=Enum1 | en?=Enum2
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -388,7 +388,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//MixedBool:
 		//	val?="kw1" | val=Boolean;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val?="kw1" | val=Boolean
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -414,7 +414,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Boolean returns ecore::EBoolean:
 		//	"true" | "false";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"true" | "false"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -436,7 +436,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//MixedValue:
 		//	val=Enum1 | val=DatEnum;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val=Enum1 | val=DatEnum
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -460,7 +460,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//DatEnum returns TestEnum:
 		//	"lit3";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"lit3"
 		public Keyword getLit3Keyword() { return cLit3Keyword; }
@@ -476,7 +476,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//ContainmentRef:
 		//	ctx=ContainmentRef1 | ctx=ContainmentRef2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ctx=ContainmentRef1 | ctx=ContainmentRef2
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -503,7 +503,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//ContainmentRef1 returns ContainmentRefN:
 		//	"kw1" val1=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" val1=ID
 		public Group getGroup() { return cGroup; }
@@ -527,7 +527,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//ContainmentRef2 returns ContainmentRefN:
 		//	"kw2" val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" val2=ID
 		public Group getGroup() { return cGroup; }
@@ -559,7 +559,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//CrossRef:
 		//	name=(Terminal1 | Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=(Terminal1 | Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2])
 		public Group getGroup() { return cGroup; }
@@ -715,7 +715,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

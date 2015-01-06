@@ -35,7 +35,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model hidden(WS):
 		//	("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -86,7 +86,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Error hidden():
 		//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR
 		public Group getGroup() { return cGroup; }
@@ -111,7 +111,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Fix hidden():
 		//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide
 		public Group getGroup() { return cGroup; }
@@ -135,7 +135,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Apostrophe hidden(WS):
 		//	APOSTROPHE_CHAR;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//APOSTROPHE_CHAR
 		public RuleCall getAPOSTROPHE_CHARTerminalRuleCall() { return cAPOSTROPHE_CHARTerminalRuleCall; }
@@ -148,7 +148,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		////some unused char
 		//Rehide hidden(WS):
 		//	"^"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"^"?
 		public Keyword getCircumflexAccentKeyword() { return cCircumflexAccentKeyword; }
@@ -162,7 +162,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Graphical:
 		//	CHAR | WS;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//CHAR | WS
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -217,7 +217,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

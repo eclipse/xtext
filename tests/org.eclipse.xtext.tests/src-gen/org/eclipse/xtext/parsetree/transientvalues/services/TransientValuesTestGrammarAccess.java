@@ -29,7 +29,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		
 		//Root:
 		//	"test" (TestRequired | TestOptional | TestList);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"test" (TestRequired | TestOptional | TestList)
 		public Group getGroup() { return cGroup; }
@@ -62,7 +62,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		
 		//TestRequired:
 		//	{TestRequired} "required" required1=INT required2=INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TestRequired} "required" required1=INT required2=INT
 		public Group getGroup() { return cGroup; }
@@ -100,7 +100,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		
 		//TestOptional:
 		//	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TestOptional} "optional" opt1=INT? (":" opt2=INT)?
 		public Group getGroup() { return cGroup; }
@@ -140,7 +140,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		
 		//TestList:
 		//	{TestList} "list" item+=INT*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TestList} "list" item+=INT*
 		public Group getGroup() { return cGroup; }
@@ -195,7 +195,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

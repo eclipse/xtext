@@ -25,7 +25,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		
 		//Model:
 		//	children+=Node*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//children+=Node*
 		public Assignment getChildrenAssignment() { return cChildrenAssignment; }
@@ -50,7 +50,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		
 		//Node:
 		//	name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID "(" attrib=STRING ")" "{" children+=Node* "};"
 		public Group getGroup() { return cGroup; }
@@ -119,7 +119,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

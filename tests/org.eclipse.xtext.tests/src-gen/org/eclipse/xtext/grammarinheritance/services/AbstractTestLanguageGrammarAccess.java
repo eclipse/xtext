@@ -27,7 +27,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//InheritedParserRule returns mm::AType:
 		//	"element" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
 		public Group getGroup() { return cGroup; }
@@ -51,7 +51,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//AbstractCallOverridenParserRule returns mm::AModel:
 		//	"overridemodel" elements+=OverridableParserRule*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"overridemodel" elements+=OverridableParserRule*
 		public Group getGroup() { return cGroup; }
@@ -75,7 +75,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//OverridableParserRule returns mm::AType:
 		//	"element" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
 		public Group getGroup() { return cGroup; }
@@ -99,7 +99,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//OverridableParserRule2 returns mm::AType:
 		//	"other element" name=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"other element" name=STRING
 		public Group getGroup() { return cGroup; }
@@ -123,7 +123,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//AbstractCallExtendedParserRule returns mm::AModel:
 		//	"extendedmodel" elements+=ExtendableParserRule*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"extendedmodel" elements+=ExtendableParserRule*
 		public Group getGroup() { return cGroup; }
@@ -147,7 +147,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//ExtendableParserRule returns mm::AType:
 		//	"element" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" name=ID
 		public Group getGroup() { return cGroup; }
@@ -207,7 +207,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

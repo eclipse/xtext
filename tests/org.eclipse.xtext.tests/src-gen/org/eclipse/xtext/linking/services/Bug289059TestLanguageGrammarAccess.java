@@ -31,7 +31,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	name=ID enabled=UnassignedAction? reference=[Model]?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID enabled=UnassignedAction? reference=[Model]?
 		public Group getGroup() { return cGroup; }
@@ -66,7 +66,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnassignedAction:
 		//	{UnassignedAction} "enabled";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{UnassignedAction} "enabled"
 		public Group getGroup() { return cGroup; }
@@ -111,7 +111,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

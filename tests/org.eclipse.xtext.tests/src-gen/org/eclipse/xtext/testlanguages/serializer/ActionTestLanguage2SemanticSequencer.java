@@ -21,6 +21,7 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	@Inject
 	private ActionTestLanguage2GrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ActionLang2Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ActionLang2Package.ORING:

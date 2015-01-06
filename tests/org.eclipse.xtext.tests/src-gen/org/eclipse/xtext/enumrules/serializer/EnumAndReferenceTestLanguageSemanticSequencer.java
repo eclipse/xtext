@@ -23,6 +23,7 @@ public class EnumAndReferenceTestLanguageSemanticSequencer extends AbstractDeleg
 	@Inject
 	private EnumAndReferenceTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EnumAndReferenceTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE:

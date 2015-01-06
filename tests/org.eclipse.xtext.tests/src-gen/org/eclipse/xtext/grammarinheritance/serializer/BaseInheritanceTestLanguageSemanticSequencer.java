@@ -23,6 +23,7 @@ public class BaseInheritanceTestLanguageSemanticSequencer extends AbstractDelega
 	@Inject
 	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BaseInheritanceTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BaseInheritanceTestPackage.MODEL:

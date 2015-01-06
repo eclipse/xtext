@@ -36,7 +36,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		
 		//Model:
 		//	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -109,7 +109,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -24,7 +24,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//DelegateModel returns Model:
 		//	Model;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
@@ -61,7 +61,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

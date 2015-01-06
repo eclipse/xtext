@@ -29,7 +29,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Op returns Expression:
 		//	Term ({Op.values+=current} values+=Term)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Term ({Op.values+=current} values+=Term)*
 		public Group getGroup() { return cGroup; }
@@ -84,7 +84,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 		//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
 		//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 		//Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
@@ -177,7 +177,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Atom:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -197,7 +197,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Parens returns Expression:
 		//	"(" Op ")" em="!"?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(" Op ")" em="!"?
 		public Group getGroup() { return cGroup; }
@@ -232,7 +232,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TwoNumbers:
 		//	num1=INT num2=INT ("#" num3+=INT)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//num1=INT num2=INT ("#" num3+=INT)*
 		public Group getGroup() { return cGroup; }
@@ -273,7 +273,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ManyStrings:
 		//	"=" str1+=STRING* str2+=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"=" str1+=STRING* str2+=STRING
 		public Group getGroup() { return cGroup; }
@@ -307,7 +307,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Type:
 		//	"type" name=ID "extends" extends=[Type];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"type" name=ID "extends" extends=[Type]
 		public Group getGroup() { return cGroup; }
@@ -346,7 +346,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Ref2:
 		//	"#2" ref2=("mykeyword1" | STRING | "mykeyword2");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#2" ref2=("mykeyword1" | STRING | "mykeyword2")
 		public Group getGroup() { return cGroup; }
@@ -383,7 +383,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Spare:
 		//	"#3" id+=ID ("." id+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#3" id+=ID ("." id+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -422,7 +422,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Boolean:
 		//	"#4" bool?="myoption"? "kw" value=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#4" bool?="myoption"? "kw" value=ID
 		public Group getGroup() { return cGroup; }
@@ -465,7 +465,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Transient1:
 		//	"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?
 		public Group getGroup() { return cGroup; }
@@ -530,7 +530,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Consumed1:
 		//	"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT)
 		public Group getGroup() { return cGroup; }
@@ -587,7 +587,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Consumed2:
 		//	"#7" child=Consumed1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" child=Consumed1
 		public Group getGroup() { return cGroup; }
@@ -618,7 +618,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Loop1:
 		//	"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+
 		public Group getGroup() { return cGroup; }
@@ -678,7 +678,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Loop2:
 		//	"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6")
 		public Group getGroup() { return cGroup; }
@@ -756,7 +756,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Loop3:
 		//	("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*
 		public Group getGroup() { return cGroup; }
@@ -818,7 +818,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Loop4:
 		//	"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+
 		public Group getGroup() { return cGroup; }
@@ -879,7 +879,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//LoopBug285452:
 		//	"#12" (interface?="interface" | "class") name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#12" (interface?="interface" | "class") name=ID
 		public Group getGroup() { return cGroup; }
@@ -920,7 +920,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//DuplicateBug284491:
 		//	"#13" (static?="static" | final?="final" | transient?="transient")*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#13" (static?="static" | final?="final" | transient?="transient")*
 		public Group getGroup() { return cGroup; }
@@ -959,7 +959,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EmptyObjectBug284850:
 		//	"#14" items=EmptyObjectItems;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#14" items=EmptyObjectItems
 		public Group getGroup() { return cGroup; }
@@ -981,7 +981,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EmptyObjectItems:
 		//	list+=EmptyObjectItem*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//list+=EmptyObjectItem*
 		public Assignment getListAssignment() { return cListAssignment; }
@@ -999,7 +999,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EmptyObjectItem:
 		//	"item" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"item" name=ID
 		public Group getGroup() { return cGroup; }
@@ -1023,7 +1023,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//MultiInheritanceBug280439:
 		//	"#15" val=ConcreteMulti;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#15" val=ConcreteMulti
 		public Group getGroup() { return cGroup; }
@@ -1047,7 +1047,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractMulti1:
 		//	ConcreteMulti | m1=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ConcreteMulti | m1=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1071,7 +1071,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//AbstractMulti2:
 		//	ConcreteMulti | m2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ConcreteMulti | m2=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1096,7 +1096,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//ConcreteMulti:
 		//	m1=ID m2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//m1=ID m2=ID
 		public Group getGroup() { return cGroup; }
@@ -1127,7 +1127,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EObjectRef:
 		//	"#16" obj=EObjectElement "refs" ref=[ecore::EObject];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#16" obj=EObjectElement "refs" ref=[ecore::EObject]
 		public Group getGroup() { return cGroup; }
@@ -1161,7 +1161,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//EObjectElement:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -1180,7 +1180,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug305577_1:
 		//	"#17" (TypeBug1A | TypeBug1B);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#17" (TypeBug1A | TypeBug1B)
 		public Group getGroup() { return cGroup; }
@@ -1208,7 +1208,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug305577_2:
 		//	"#18" (TypeBug2B | TypeBug2A);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#18" (TypeBug2B | TypeBug2A)
 		public Group getGroup() { return cGroup; }
@@ -1232,7 +1232,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug1AInh returns TypeBug1A:
 		//	TypeBug1B;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//TypeBug1B
 		public RuleCall getTypeBug1BParserRuleCall() { return cTypeBug1BParserRuleCall; }
@@ -1248,7 +1248,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug1A:
 		//	{TypeBug1A} "ka" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TypeBug1A} "ka" name=ID
 		public Group getGroup() { return cGroup; }
@@ -1276,7 +1276,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug1B:
 		//	{TypeBug1B} "kb" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TypeBug1B} "kb" name=ID
 		public Group getGroup() { return cGroup; }
@@ -1300,7 +1300,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug2AInh returns TypeBug2A:
 		//	TypeBug2B;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//TypeBug2B
 		public RuleCall getTypeBug2BParserRuleCall() { return cTypeBug2BParserRuleCall; }
@@ -1316,7 +1316,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug2A:
 		//	{TypeBug2A} "ka" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TypeBug2A} "ka" name=ID
 		public Group getGroup() { return cGroup; }
@@ -1344,7 +1344,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//TypeBug2B:
 		//	{TypeBug2B} "kb" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{TypeBug2B} "kb" name=ID
 		public Group getGroup() { return cGroup; }
@@ -1397,7 +1397,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Bug305171:
 		//	"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID
 		public Group getGroup() { return cGroup; }
@@ -1506,7 +1506,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Bug310435Enum:
 		//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*
 		public Group getGroup() { return cGroup; }
@@ -1558,7 +1558,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Bug310435Val:
 		//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*
 		public Group getGroup() { return cGroup; }
@@ -1615,7 +1615,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CrossRefNameTest:
 		//	"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#22" named+=CrossRefNamed* "kw1" ("kw2" ref+=[CrossRefNamed|ID1] | "kw3" ref+=[CrossRefNamed|ID2])*
 		public Group getGroup() { return cGroup; }
@@ -1675,7 +1675,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CrossRefNamed:
 		//	name=(ID1 | ID2);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=(ID1 | ID2)
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -1841,7 +1841,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

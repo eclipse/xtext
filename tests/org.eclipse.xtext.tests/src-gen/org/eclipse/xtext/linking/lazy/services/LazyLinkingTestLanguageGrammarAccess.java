@@ -25,7 +25,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Model:
 		//	types+=Type*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//types+=Type*
 		public Assignment getTypesAssignment() { return cTypesAssignment; }
@@ -68,7 +68,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//Type:
 		//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
 		//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{"
 		//properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
@@ -168,7 +168,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//Property:
 		//	type+=[Type]+ name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type+=[Type]+ name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -205,7 +205,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//UnresolvedProxyProperty:
 		//	"unresolved" type+=[Type]+ name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"unresolved" type+=[Type]+ name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -269,7 +269,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

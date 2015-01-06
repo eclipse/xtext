@@ -25,8 +25,8 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Containment", "Reference", "Model", "DollarSign", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=8;
-    public static final int Model=6;
     public static final int RULE_STRING=10;
+    public static final int Model=6;
     public static final int DollarSign=7;
     public static final int RULE_ANY_OTHER=14;
     public static final int RULE_INT=9;

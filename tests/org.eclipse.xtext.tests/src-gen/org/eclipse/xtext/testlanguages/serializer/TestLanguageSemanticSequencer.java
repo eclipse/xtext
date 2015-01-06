@@ -26,6 +26,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	@Inject
 	private TestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TestLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TestLangPackage.CHOICE_ELEMENT:

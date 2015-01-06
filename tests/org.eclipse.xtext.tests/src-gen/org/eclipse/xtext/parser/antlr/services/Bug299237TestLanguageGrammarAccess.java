@@ -28,7 +28,7 @@ public class Bug299237TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	"model" name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"model" name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -77,7 +77,7 @@ public class Bug299237TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

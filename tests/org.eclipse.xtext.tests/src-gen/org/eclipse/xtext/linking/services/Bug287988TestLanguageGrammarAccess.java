@@ -50,7 +50,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall"
 		//	attributes+=RuleCallAttribute* | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3"
 		//	attributes+=RuleCallAttribute3* | "inlinedActions" attributes+=ActionAttribute*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall" attributes+=RuleCallAttribute*
 		//| "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3" attributes+=RuleCallAttribute3* | "inlinedActions"
@@ -150,7 +150,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//BaseAttribute:
 		//	(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(Attribute | Master) ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -206,7 +206,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Attribute:
 		//	{Attribute} "attribute";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Attribute} "attribute"
 		public Group getGroup() { return cGroup; }
@@ -226,7 +226,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Master:
 		//	{Master} "master";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Master} "master"
 		public Group getGroup() { return cGroup; }
@@ -262,7 +262,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//ActionAttribute returns BaseAttribute:
 		//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -339,7 +339,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SimpleAttribute returns Attribute:
 		//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -388,7 +388,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RuleCallAttribute returns Attribute:
 		//	CallMe name=ID ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//CallMe name=ID ";"
 		public Group getGroup() { return cGroup; }
@@ -419,7 +419,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CallMe returns Attribute:
 		//	"ref" typeRef=[BaseAttribute] | type=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"ref" typeRef=[BaseAttribute] | type=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -462,7 +462,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RuleCallAttribute2 returns Attribute:
 		//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
 		public Group getGroup() { return cGroup; }
@@ -505,7 +505,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CallMe2 returns Attribute:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -530,7 +530,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//RuleCallAttribute3 returns Attribute:
 		//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
 		public Group getGroup() { return cGroup; }
@@ -575,7 +575,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CallMe3 returns Attribute:
 		//	"call" "me" CallMe4;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"call" "me" CallMe4
 		public Group getGroup() { return cGroup; }
@@ -597,7 +597,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//CallMe4 returns Attribute:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -661,7 +661,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

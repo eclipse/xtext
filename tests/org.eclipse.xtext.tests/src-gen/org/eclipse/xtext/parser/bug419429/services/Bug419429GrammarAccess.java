@@ -26,7 +26,7 @@ public class Bug419429GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EReference:
 		//	eType=[EClassifier];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//eType=[EClassifier]
 		public Assignment getETypeAssignment() { return cETypeAssignment; }
@@ -69,7 +69,7 @@ public class Bug419429GrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

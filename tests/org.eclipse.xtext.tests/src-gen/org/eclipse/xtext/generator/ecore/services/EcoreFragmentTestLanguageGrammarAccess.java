@@ -30,7 +30,7 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Second returns second::Second:
 		//	name=ID "first" first=[first::First];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID "first" first=[first::First]
 		public Group getGroup() { return cGroup; }
@@ -85,7 +85,7 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

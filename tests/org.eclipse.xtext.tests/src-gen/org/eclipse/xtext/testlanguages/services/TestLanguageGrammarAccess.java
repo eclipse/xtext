@@ -25,7 +25,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//EntryRule returns Model:
 		//	multiFeature+=AbstractRule*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//multiFeature+=AbstractRule*
 		public Assignment getMultiFeatureAssignment() { return cMultiFeatureAssignment; }
@@ -42,7 +42,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//AbstractRule returns AbstractElement:
 		//	ChoiceRule | ReducibleRule;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ChoiceRule | ReducibleRule
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -65,7 +65,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ChoiceRule returns ChoiceElement:
 		//	"choice" optionalKeyword?="optional"? name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"choice" optionalKeyword?="optional"? name=ID
 		public Group getGroup() { return cGroup; }
@@ -98,7 +98,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ReducibleRule returns ReducibleElement:
 		//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		public Group getGroup() { return cGroup; }
@@ -129,7 +129,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TerminalRule returns TerminalElement:
 		//	stringFeature=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//stringFeature=STRING
 		public Assignment getStringFeatureAssignment() { return cStringFeatureAssignment; }
@@ -177,7 +177,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

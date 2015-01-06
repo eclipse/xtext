@@ -85,7 +85,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//	quantityExclusion=(QuantityExclusionTest1 | QuantityExclusionTest2) | "#6" valueExclusion=(ValueExclusionTest1 |
 		//	ValueExclusionTest2) | "#7" name=STRING nodeExclusion=(NodeExclusion1 | NodeExclusion2) | "#8" name=STRING
 		//	nodeExclusionList=(NodeExclusion1List | NodeExclusion2List);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
 		//nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
@@ -272,7 +272,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Model2 returns Model:
 		//	{Model} "model";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} "model"
 		public Group getGroup() { return cGroup; }
@@ -293,7 +293,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AttributeExclusionTest1 returns AttributeExclusionTest:
 		//	"kw1" attr1=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" attr1=ID
 		public Group getGroup() { return cGroup; }
@@ -317,7 +317,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AttributeExclusionTest2 returns AttributeExclusionTest:
 		//	"kw2" attr2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" attr2=ID
 		public Group getGroup() { return cGroup; }
@@ -339,7 +339,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeTest1 returns NestedTypeTest:
 		//	nested=NestedTypeChild1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//nested=NestedTypeChild1
 		public Assignment getNestedAssignment() { return cNestedAssignment; }
@@ -355,7 +355,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeTest2 returns NestedTypeTest:
 		//	nested=NestedTypeChild2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//nested=NestedTypeChild2
 		public Assignment getNestedAssignment() { return cNestedAssignment; }
@@ -372,7 +372,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeChild:
 		//	NestedTypeChild1 | NestedTypeChild2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//NestedTypeChild1 | NestedTypeChild2
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -393,7 +393,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeChild1:
 		//	"kw1" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" val=ID
 		public Group getGroup() { return cGroup; }
@@ -417,7 +417,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeChild2:
 		//	"kw2" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" val=ID
 		public Group getGroup() { return cGroup; }
@@ -443,7 +443,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest:
 		//	{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+
 		public Group getGroup() { return cGroup; }
@@ -475,7 +475,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest:
 		//	{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+
 		public Group getGroup() { return cGroup; }
@@ -505,7 +505,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ParentRefTest1:
 		//	"kw1" child1=ParentRefTestChild1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" child1=ParentRefTestChild1
 		public Group getGroup() { return cGroup; }
@@ -529,7 +529,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ParentRefTest2:
 		//	"kw2" child2=ParentRefTestChild2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" child2=ParentRefTestChild2
 		public Group getGroup() { return cGroup; }
@@ -554,7 +554,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ParentRefTestChild1 returns ParentRefTestChild:
 		//	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{ParentRefTestChild} "foo" child=ParentRefTestChild1?
 		public Group getGroup() { return cGroup; }
@@ -582,7 +582,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ParentRefTestChild2 returns ParentRefTestChild:
 		//	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{ParentRefTestChild} "foo" child=ParentRefTestChild2?
 		public Group getGroup() { return cGroup; }
@@ -611,7 +611,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//QuantityExclusionTest1 returns QuantityExclusionTest:
 		//	"kw1" attr1=ID attr2=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" attr1=ID attr2=ID?
 		public Group getGroup() { return cGroup; }
@@ -643,7 +643,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//QuantityExclusionTest2 returns QuantityExclusionTest:
 		//	"kw2" attr1=ID? attr2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" attr1=ID? attr2=ID
 		public Group getGroup() { return cGroup; }
@@ -671,7 +671,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ValueExclusionTest1 returns ValueExclusionTest:
 		//	val=ValueExclusionTestEn1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val=ValueExclusionTestEn1
 		public Assignment getValAssignment() { return cValAssignment; }
@@ -687,7 +687,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ValueExclusionTest2 returns ValueExclusionTest:
 		//	val=ValueExclusionTestEn2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val=ValueExclusionTestEn2
 		public Assignment getValAssignment() { return cValAssignment; }
@@ -704,7 +704,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NodeExclusion1 returns NodeExclusion:
 		//	ref=[Model];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ref=[Model]
 		public Assignment getRefAssignment() { return cRefAssignment; }
@@ -724,7 +724,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NodeExclusion2 returns NodeExclusion:
 		//	ref=[Model|STRING];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ref=[Model|STRING]
 		public Assignment getRefAssignment() { return cRefAssignment; }
@@ -744,7 +744,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NodeExclusion1List returns NodeExclusionList:
 		//	ref+=[Model]+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ref+=[Model]+
 		public Assignment getRefAssignment() { return cRefAssignment; }
@@ -764,7 +764,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NodeExclusion2List returns NodeExclusionList:
 		//	ref+=[Model|STRING]+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ref+=[Model|STRING]+
 		public Assignment getRefAssignment() { return cRefAssignment; }
@@ -905,7 +905,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

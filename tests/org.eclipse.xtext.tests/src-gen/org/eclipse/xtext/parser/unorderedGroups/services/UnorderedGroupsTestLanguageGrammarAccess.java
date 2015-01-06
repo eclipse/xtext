@@ -168,7 +168,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//	(firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
 		//	secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
 		//	serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} ("1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"? &
 		//second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
@@ -612,7 +612,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//NestedModel:
 		//	{NestedModel} (first?="a" & second?="b")? "nested";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{NestedModel} (first?="a" & second?="b")? "nested"
 		public Group getGroup() { return cGroup; }
@@ -734,7 +734,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//	"1" ("a" & "b") | "2" ("a" & "b" & "c" & "d") | "3" ("a"? & "b"?) | "4" ("a" & "b"?) | "5" ("a"? & "b") | "6" ("a"+ &
 		//	"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
 		//	| "12" ("a" & "b") ("a" & "b") | "13" ("a" & "b")? "a" "b" | "14" (("a" & "b") & ("c" & "d"))+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"1" ("a" & "b") | "2" ("a" & "b" & "c" & "d") | "3" ("a"? & "b"?) | "4" ("a" & "b"?) | "5" ("a"? & "b") | "6" ("a"+ &
 		//"b"*) | "7" ("a"* & "b"+) | "8" ("a" "b" "c" & "a" "b" "d") | "9" ("a" & "b")+ | "10" ("a" & "b")* | "11" ("a" & "b")?
@@ -1037,7 +1037,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//UnorderedSerialization:
 		//	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
 		//	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
 		//secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*)
@@ -1163,7 +1163,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

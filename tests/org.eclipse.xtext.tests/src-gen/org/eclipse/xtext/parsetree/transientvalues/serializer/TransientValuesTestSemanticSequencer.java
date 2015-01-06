@@ -25,6 +25,7 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	@Inject
 	private TransientValuesTestGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TransientvaluestestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TransientvaluestestPackage.TEST_LIST:

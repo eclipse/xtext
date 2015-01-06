@@ -25,7 +25,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		
 		//Model:
 		//	elements+=Element+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element+
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -49,7 +49,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		
 		//Element:
 		//	name=ID reference=[Element]? "{" elements+=Element* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID reference=[Element]? "{" elements+=Element* "}"
 		public Group getGroup() { return cGroup; }
@@ -115,7 +115,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -25,7 +25,7 @@ public class LiveContainerTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Model:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -65,7 +65,7 @@ public class LiveContainerTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

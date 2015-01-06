@@ -28,7 +28,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Foo:
 		//	name=ID nameRefs+=NameRef*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID nameRefs+=NameRef*
 		public Group getGroup() { return cGroup; }
@@ -54,7 +54,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//NameRef returns xtext::RuleCall:
 		//	rule=[xtext::ParserRule];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//rule=[xtext::ParserRule]
 		public Assignment getRuleAssignment() { return cRuleAssignment; }
@@ -73,7 +73,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//MyRule returns xtext::ParserRule:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -117,7 +117,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

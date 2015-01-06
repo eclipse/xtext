@@ -29,7 +29,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Model:
 		//	CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//CaseInsensitiveKeywordRule | PluralRule | MultiRule | DatatypeRule | CommonTerminalsRule
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -59,7 +59,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CaseInsensitiveKeywordRule:
 		//	CaseInsensitiveKeyword val=INT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//CaseInsensitiveKeyword val=INT
 		public Group getGroup() { return cGroup; }
@@ -84,7 +84,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//PluralRule:
 		//	"contents:" count=INT Plural;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"contents:" count=INT Plural
 		public Group getGroup() { return cGroup; }
@@ -114,7 +114,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//MultiRule:
 		//	"multi" val=INT Multi Multi Multi;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"multi" val=INT Multi Multi Multi
 		public Group getGroup() { return cGroup; }
@@ -148,7 +148,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//DatatypeRule:
 		//	"datatype" val=INT Datatype;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"datatype" val=INT Datatype
 		public Group getGroup() { return cGroup; }
@@ -175,7 +175,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Datatype returns ecore::EString:
 		//	"str" | INT | Datatype2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"str" | INT | Datatype2
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -196,7 +196,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//Datatype2 returns ecore::EString:
 		//	STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall() { return cSTRINGTerminalRuleCall; }
@@ -214,7 +214,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		
 		//CommonTerminalsRule:
 		//	"terminals" ID INT STRING val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"terminals" ID INT STRING val=ID
 		public Group getGroup() { return cGroup; }
@@ -291,7 +291,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

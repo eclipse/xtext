@@ -42,7 +42,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?
 		public Group getGroup() { return cGroup; }
@@ -114,7 +114,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SubModel:
 		//	{SubModel} ("1" "2" strings+=STRING?)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{SubModel} ("1" "2" strings+=STRING?)*
 		public Group getGroup() { return cGroup; }
@@ -171,7 +171,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

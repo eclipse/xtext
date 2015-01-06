@@ -21,6 +21,7 @@ public class DatatypeRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == DatatypeRulesTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case DatatypeRulesTestLanguagePackage.COMPOSITE_MODEL:

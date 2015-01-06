@@ -24,7 +24,7 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 		
 		//DelegateModel returns Model:
 		//	Model;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
@@ -61,7 +61,7 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

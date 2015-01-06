@@ -40,7 +40,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Root:
 		//	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -106,7 +106,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Rule1:
 		//	type=FirstEnum value=INT unit=SecondEnum;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//type=FirstEnum value=INT unit=SecondEnum
 		public Group getGroup() { return cGroup; }
@@ -140,7 +140,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Rule2:
 		//	"after" value=INT "s";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"after" value=INT "s"
 		public Group getGroup() { return cGroup; }
@@ -168,7 +168,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Rule3:
 		//	After value=INT S;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//After value=INT S
 		public Group getGroup() { return cGroup; }
@@ -198,7 +198,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Rule4:
 		//	after=AfterObj value=INT s=SObj;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//after=AfterObj value=INT s=SObj
 		public Group getGroup() { return cGroup; }
@@ -229,7 +229,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AfterObj:
 		//	value="after";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value="after"
 		public Assignment getValueAssignment() { return cValueAssignment; }
@@ -245,7 +245,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SObj:
 		//	value="s";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value="s"
 		public Assignment getValueAssignment() { return cValueAssignment; }
@@ -260,7 +260,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//After:
 		//	"after";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"after"
 		public Keyword getAfterKeyword() { return cAfterKeyword; }
@@ -272,7 +272,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//S:
 		//	"s";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"s"
 		public Keyword getSKeyword() { return cSKeyword; }
@@ -361,7 +361,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

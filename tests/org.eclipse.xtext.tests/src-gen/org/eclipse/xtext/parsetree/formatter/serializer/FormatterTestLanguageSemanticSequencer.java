@@ -38,6 +38,7 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	@Inject
 	private FormatterTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FormattertestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FormattertestlanguagePackage.ASSIGN:

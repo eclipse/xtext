@@ -94,7 +94,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	x20=DependentAlternative2 | x21=Optional | x22=Float | x23=UnorderedAlternative | x24=UnorderedGroup |
 		//	x25=UnorderedGroupOptional | x26=UnorderedGroupBoolean | x27=Complex1 | x28=OptionalDouble | x29=NullValueGenerated |
 		//	x30=NullValueInterpreted | x31=NullCrossRefGenerated | x32=NullCrossRefInterpreted;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
@@ -309,7 +309,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SimpleGroup:
 		//	"#1" val1=ID val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#1" val1=ID val2=ID
 		public Group getGroup() { return cGroup; }
@@ -346,7 +346,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SimpleAlternative:
 		//	"#2" ("kw1" val1=ID | "kw2" val2=ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#2" ("kw1" val1=ID | "kw2" val2=ID)
 		public Group getGroup() { return cGroup; }
@@ -400,7 +400,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SimpleMultiplicities:
 		//	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*
 		public Group getGroup() { return cGroup; }
@@ -469,7 +469,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//GroupMultiplicities:
 		//	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -568,7 +568,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AlternativeMultiplicities:
 		//	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -659,7 +659,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//List1:
 		//	"#6" val1+=ID ("," val1+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#6" val1+=ID ("," val1+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -701,7 +701,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//List2:
 		//	"#7" {List2} (val1+=ID ("," val1+=ID)*)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" {List2} (val1+=ID ("," val1+=ID)*)?
 		public Group getGroup() { return cGroup; }
@@ -759,7 +759,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AltList1:
 		//	"#8" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#8" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 		public Group getGroup() { return cGroup; }
@@ -845,7 +845,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//AltList2:
 		//	"#9" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#9" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 		public Group getGroup() { return cGroup; }
@@ -914,7 +914,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleKeywords:
 		//	"#10" val=("kw1" | "kw2" | "kw3");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#10" val=("kw1" | "kw2" | "kw3")
 		public Group getGroup() { return cGroup; }
@@ -951,7 +951,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleKeywordsOrID:
 		//	"#11" val=("kw1" | "kw2" | "kw3" | ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#11" val=("kw1" | "kw2" | "kw3" | ID)
 		public Group getGroup() { return cGroup; }
@@ -989,7 +989,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleTerminals:
 		//	"#12" val=(ID1 | ID2);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#12" val=(ID1 | ID2)
 		public Group getGroup() { return cGroup; }
@@ -1022,7 +1022,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleEnum:
 		//	"#13" val=(DefEnum1 | DefEnum2 | DefEnum3);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#13" val=(DefEnum1 | DefEnum2 | DefEnum3)
 		public Group getGroup() { return cGroup; }
@@ -1069,7 +1069,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//SingleCrossReference:
 		//	"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
 		//	ref=[SingleCrossReference|ID3]);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#14" name=(ID1 | ID2 | ID3) (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] |
 		//ref=[SingleCrossReference|ID3])
@@ -1136,7 +1136,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleContainmentReference:
 		//	"#15" child=(SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#15" child=(SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3)
 		public Group getGroup() { return cGroup; }
@@ -1167,7 +1167,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleContainmentReferenceChild1:
 		//	val="kw1";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val="kw1"
 		public Assignment getValAssignment() { return cValAssignment; }
@@ -1183,7 +1183,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleContainmentReferenceChild2:
 		//	val="kw2";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val="kw2"
 		public Assignment getValAssignment() { return cValAssignment; }
@@ -1199,7 +1199,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//SingleContainmentReferenceChild3:
 		//	val="kw3";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val="kw3"
 		public Assignment getValAssignment() { return cValAssignment; }
@@ -1220,7 +1220,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MultiKeywords:
 		//	"#16" val+=("kw1" | "kw2" | "kw3");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#16" val+=("kw1" | "kw2" | "kw3")
 		public Group getGroup() { return cGroup; }
@@ -1257,7 +1257,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MultiKeywordsOrID:
 		//	"#17" val+=("kw1" | "kw2" | "kw3" | ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#17" val+=("kw1" | "kw2" | "kw3" | ID)
 		public Group getGroup() { return cGroup; }
@@ -1295,7 +1295,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//MultiTerminals:
 		//	"#18" val+=(ID1 | ID2);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#18" val+=(ID1 | ID2)
 		public Group getGroup() { return cGroup; }
@@ -1331,7 +1331,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//DependentAlternative1:
 		//	"#19" (val=ID | val=ID flag?="kw1");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#19" (val=ID | val=ID flag?="kw1")
 		public Group getGroup() { return cGroup; }
@@ -1382,7 +1382,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//DependentAlternative2:
 		//	"#20" (val+=ID val+=ID+ | val+=ID+ flag?="kw1");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#20" (val+=ID val+=ID+ | val+=ID+ flag?="kw1")
 		public Group getGroup() { return cGroup; }
@@ -1438,7 +1438,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Optional:
 		//	"#21" int0=INT (int1=INT int2=INT)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#21" int0=INT (int1=INT int2=INT)?
 		public Group getGroup() { return cGroup; }
@@ -1477,7 +1477,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Float:
 		//	"#22" {Float} "Bye";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#22" {Float} "Bye"
 		public Group getGroup() { return cGroup; }
@@ -1510,7 +1510,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//UnorderedAlternative:
 		//	"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal |
 		//	val4+=UnorderedAlternativeValDelegate)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#23" {UnorderedAlternative} (val1+=ID | val2+=INT | val3+=UnorderedAlternativeVal |
 		//val4+=UnorderedAlternativeValDelegate)*
@@ -1559,7 +1559,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedAlternativeVal:
 		//	"kw1" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" val=ID
 		public Group getGroup() { return cGroup; }
@@ -1580,7 +1580,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedAlternativeValDelegate:
 		//	UnorderedAlternativeVal2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//UnorderedAlternativeVal2
 		public RuleCall getUnorderedAlternativeVal2ParserRuleCall() { return cUnorderedAlternativeVal2ParserRuleCall; }
@@ -1595,7 +1595,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedAlternativeVal2:
 		//	"kw2" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" val=ID
 		public Group getGroup() { return cGroup; }
@@ -1626,7 +1626,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedGroup:
 		//	"#24" (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#24" (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate)
 		public Group getGroup() { return cGroup; }
@@ -1671,7 +1671,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedGroupVal:
 		//	"kw1" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw1" val=ID
 		public Group getGroup() { return cGroup; }
@@ -1692,7 +1692,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedGroupValDelegate:
 		//	UnorderedGroupVal2;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//UnorderedGroupVal2
 		public RuleCall getUnorderedGroupVal2ParserRuleCall() { return cUnorderedGroupVal2ParserRuleCall; }
@@ -1707,7 +1707,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedGroupVal2:
 		//	"kw2" val=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kw2" val=ID
 		public Group getGroup() { return cGroup; }
@@ -1743,7 +1743,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedGroupOptional:
 		//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
 		public Group getGroup() { return cGroup; }
@@ -1809,7 +1809,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//UnorderedGroupBoolean:
 		//	"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?)
 		public Group getGroup() { return cGroup; }
@@ -1876,7 +1876,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Complex1:
 		//	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
 		//	val6+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -1977,7 +1977,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//OptionalDouble:
 		//	"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#28" double0=DOUBLE (double1=DOUBLE double2=DOUBLE)?
 		public Group getGroup() { return cGroup; }
@@ -2017,7 +2017,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//DOUBLE returns ecore::EDouble:
 		//	INT ("." INT)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//INT ("." INT)?
 		public Group getGroup() { return cGroup; }
@@ -2044,7 +2044,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NullValueGenerated returns NullValue:
 		//	"#29" value=NULL_STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#29" value=NULL_STRING
 		public Group getGroup() { return cGroup; }
@@ -2070,7 +2070,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NullValueInterpreted returns NullValue:
 		//	"#30" value=NULL_STRING foo=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#30" value=NULL_STRING foo=ID?
 		public Group getGroup() { return cGroup; }
@@ -2097,7 +2097,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NULL_STRING:
 		//	STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall() { return cSTRINGTerminalRuleCall; }
@@ -2113,7 +2113,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NullCrossRefGenerated returns NullCrossRef:
 		//	"#31" ref=[ecore::EObject];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#31" ref=[ecore::EObject]
 		public Group getGroup() { return cGroup; }
@@ -2143,7 +2143,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//NullCrossRefInterpreted returns NullCrossRef:
 		//	"#32" ref=[ecore::EObject] foo=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#32" ref=[ecore::EObject] foo=ID?
 		public Group getGroup() { return cGroup; }
@@ -2344,7 +2344,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

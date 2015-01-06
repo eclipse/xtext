@@ -27,7 +27,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		
 		//Model:
 		//	{Model} fields+=Element+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} fields+=Element+
 		public Group getGroup() { return cGroup; }
@@ -55,7 +55,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		
 		//Element:
 		//	name=ID dataType=DataType? expression=Expression ".";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID dataType=DataType? expression=Expression "."
 		public Group getGroup() { return cGroup; }
@@ -94,7 +94,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		
 		//DataType:
 		//	baseType=ID (":=" defaultValue=STRING)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//baseType=ID (":=" defaultValue=STRING)?
 		public Group getGroup() { return cGroup; }
@@ -138,7 +138,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		
 		//Expression:
 		//	{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?)
 		public Group getGroup() { return cGroup; }
@@ -203,7 +203,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		
 		//SimpleTerm:
 		//	lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -281,7 +281,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

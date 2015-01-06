@@ -22,6 +22,7 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	@Inject
 	private AssignmentsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AssignmentsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AssignmentsTestLanguagePackage.MODEL:

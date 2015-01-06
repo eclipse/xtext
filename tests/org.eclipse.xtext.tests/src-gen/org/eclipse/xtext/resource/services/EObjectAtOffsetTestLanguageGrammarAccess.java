@@ -28,7 +28,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Model:
 		//	(foos+=Foo | bars+=AbstractBar)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(foos+=Foo | bars+=AbstractBar)*
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -65,7 +65,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//AbstractBar:
 		//	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
 		//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
 		//foo+=[Foo|QualifiedNameWithOtherDelim]?
@@ -125,7 +125,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Bar:
 		//	"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*
 		public Group getGroup() { return cGroup; }
@@ -173,7 +173,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//Foo:
 		//	"foo" name=QualifiedNameWithOtherDelim;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"foo" name=QualifiedNameWithOtherDelim
 		public Group getGroup() { return cGroup; }
@@ -198,7 +198,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//QualifiedNameWithOtherDelim:
 		//	QualifiedName ("=" QualifiedName)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//QualifiedName ("=" QualifiedName)*
 		public Group getGroup() { return cGroup; }
@@ -226,7 +226,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//QualifiedName:
 		//	ID ("." ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
@@ -285,7 +285,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

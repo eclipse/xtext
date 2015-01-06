@@ -25,6 +25,7 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	@Inject
 	private Bug250313GrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug250313Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug250313Package.CHILD1:

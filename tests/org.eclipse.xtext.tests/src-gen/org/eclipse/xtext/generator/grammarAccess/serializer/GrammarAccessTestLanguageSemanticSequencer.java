@@ -23,6 +23,7 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private GrammarAccessTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AsubpackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AsubpackagePackage.AMODEL:

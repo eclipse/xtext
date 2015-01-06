@@ -34,7 +34,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Foo:
 		//	name=ID (bar=Bar | baz=Baz) ref=[Foo];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID (bar=Bar | baz=Baz) ref=[Foo]
 		public Group getGroup() { return cGroup; }
@@ -79,7 +79,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Bar:
 		//	{Bar} name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Bar} name=ID
 		public Group getGroup() { return cGroup; }
@@ -108,7 +108,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Baz:
 		//	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"baz" name=ID ({Baz.child=current} "baz" name=ID)*
 		public Group getGroup() { return cGroup; }
@@ -173,7 +173,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

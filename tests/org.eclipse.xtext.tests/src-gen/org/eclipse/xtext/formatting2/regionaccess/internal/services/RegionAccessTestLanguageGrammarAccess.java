@@ -30,7 +30,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Root:
 		//	"test" (Simple | Delegation | Unassigned | PrefixedUnassigned);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"test" (Simple | Delegation | Unassigned | PrefixedUnassigned)
 		public Group getGroup() { return cGroup; }
@@ -63,7 +63,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Simple:
 		//	"1" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"1" name=ID
 		public Group getGroup() { return cGroup; }
@@ -87,7 +87,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Delegation:
 		//	"2" delegate=Delegate;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"2" delegate=Delegate
 		public Group getGroup() { return cGroup; }
@@ -110,7 +110,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Unassigned:
 		//	"3" Delegate;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"3" Delegate
 		public Group getGroup() { return cGroup; }
@@ -131,7 +131,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//PrefixedUnassigned:
 		//	"4" delegate=PrefixedDelegate;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"4" delegate=PrefixedDelegate
 		public Group getGroup() { return cGroup; }
@@ -154,7 +154,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//PrefixedDelegate:
 		//	"prefix" Delegate;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"prefix" Delegate
 		public Group getGroup() { return cGroup; }
@@ -173,7 +173,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Delegate:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -225,7 +225,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

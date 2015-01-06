@@ -25,6 +25,7 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	@Inject
 	private LangATestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LangATestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LangATestLanguagePackage.IMPORT:

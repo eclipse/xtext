@@ -35,7 +35,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//EPatch:
 		//	"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}"
 		public Group getGroup() { return cGroup; }
@@ -83,7 +83,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Import:
 		//	ModelImport | JavaImport | ExtensionImport;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ModelImport | JavaImport | ExtensionImport
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -106,7 +106,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ModelImport:
 		//	ResourceImport | EPackageImport;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ResourceImport | EPackageImport
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -130,7 +130,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ResourceImport:
 		//	"import" name=ID "uri" uri=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" name=ID "uri" uri=STRING
 		public Group getGroup() { return cGroup; }
@@ -166,7 +166,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//EPackageImport:
 		//	"import" name=ID "ns" nsURI=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" name=ID "ns" nsURI=STRING
 		public Group getGroup() { return cGroup; }
@@ -204,7 +204,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//JavaImport:
 		//	"import" "java" path+=ID ("." path+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" "java" path+=ID ("." path+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -248,7 +248,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ExtensionImport:
 		//	"import" "extension" path+=ID ("::" path+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" "extension" path+=ID ("::" path+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -308,7 +308,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//NamedResource:
 		//	"resource" name=ID "{" "left" ("uri" leftUri=STRING | leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING |
 		//	rightRoot=CreatedObject) ";" "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"resource" name=ID "{" "left" ("uri" leftUri=STRING | leftRoot=CreatedObject) ";" "right" ("uri" rightUri=STRING |
 		//rightRoot=CreatedObject) ";" "}"
@@ -392,7 +392,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//NamedObject:
 		//	ObjectRef | CreatedObject;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ObjectRef | CreatedObject
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -451,7 +451,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//	"object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT | "left" leftRes=[NamedResource] leftFrag=FRAGMENT
 		//	"right" rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment |
 		//	assignments+=BiListAssignment)+ ("left" leftMig=Migration)? ("right" rightMig=Migration)? "}")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"object" name=ID? (leftRes=[NamedResource] leftFrag=FRAGMENT | "left" leftRes=[NamedResource] leftFrag=FRAGMENT "right"
 		//rightRes=[NamedResource] rightFrag=FRAGMENT) ("{" (assignments+=BiSingleAssignment | assignments+=BiListAssignment)+
@@ -588,7 +588,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Assignment:
 		//	BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -621,7 +621,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//BiSingleAssignment returns SingleAssignment:
 		//	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
 		public Group getGroup() { return cGroup; }
@@ -682,7 +682,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//BiListAssignment returns ListAssignment:
 		//	feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
 		//	(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
 		//(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";"
@@ -764,7 +764,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//MonoSingleAssignment returns SingleAssignment:
 		//	feature=ID "=" leftValue=SingleAssignmentValue ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//feature=ID "=" leftValue=SingleAssignmentValue ";"
 		public Group getGroup() { return cGroup; }
@@ -807,7 +807,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//MonoListAssignment returns ListAssignment:
 		//	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
 		public Group getGroup() { return cGroup; }
@@ -882,7 +882,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//AssignmentValue:
 		//	value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? | newObject=CreatedObject |
 		//	^import=[Import] impFrag=FRAGMENT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? | newObject=CreatedObject |
 		//^import=[Import] impFrag=FRAGMENT
@@ -997,7 +997,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//ListAssignmentValue returns AssignmentValue:
 		//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
 		//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
 		//"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT)
@@ -1133,7 +1133,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//SingleAssignmentValue returns AssignmentValue:
 		//	keyword="null" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
 		//	newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//keyword="null" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
 		//newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT
@@ -1237,7 +1237,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//CreatedObject:
 		//	(ObjectNew | ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+
 		//	leftMig=Migration? "}")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//(ObjectNew | ObjectCopy) name=ID? ("{" (assignments+=MonoSingleAssignment | assignments+=MonoListAssignment)+
 		//leftMig=Migration? "}")?
@@ -1301,7 +1301,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ObjectNew:
 		//	"new" ^import=[Import] impFrag=FRAGMENT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"new" ^import=[Import] impFrag=FRAGMENT
 		public Group getGroup() { return cGroup; }
@@ -1337,7 +1337,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ObjectCopy:
 		//	"copy" resource=[NamedResource] ^fragment=FRAGMENT;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"copy" resource=[NamedResource] ^fragment=FRAGMENT
 		public Group getGroup() { return cGroup; }
@@ -1382,7 +1382,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//// ******************* migration *****************************
 		//Migration:
 		//	{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Migration} "migrate" first=Executable? ("as" asOp=Executable | "each" eachOp=Executable)? ";"
 		public Group getGroup() { return cGroup; }
@@ -1438,7 +1438,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//Executable:
 		//	JavaExecutable | ExpressionExecutable;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//JavaExecutable | ExpressionExecutable
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1461,7 +1461,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//JavaExecutable:
 		//	"java" method=ID "(" ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"java" method=ID "(" ")"
 		public Group getGroup() { return cGroup; }
@@ -1489,7 +1489,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ExpressionExecutable:
 		//	exprstr=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//exprstr=STRING
 		public Assignment getExprstrAssignment() { return cExprstrAssignment; }
@@ -1579,7 +1579,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

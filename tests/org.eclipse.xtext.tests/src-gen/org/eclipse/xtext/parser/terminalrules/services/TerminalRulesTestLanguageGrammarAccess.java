@@ -40,7 +40,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Model:
 		//	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
 		//	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
 		//slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER
@@ -142,7 +142,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

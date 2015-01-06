@@ -28,7 +28,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Main:
 		//	imports+=Import* types+=Type*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* types+=Type*
 		public Group getGroup() { return cGroup; }
@@ -55,7 +55,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Import:
 		//	"import" uri=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" uri=STRING
 		public Group getGroup() { return cGroup; }
@@ -94,7 +94,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Type:
 		//	"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?
 		public Group getGroup() { return cGroup; }
@@ -189,7 +189,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

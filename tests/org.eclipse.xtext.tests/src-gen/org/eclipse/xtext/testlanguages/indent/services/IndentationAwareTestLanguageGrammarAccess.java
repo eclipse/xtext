@@ -29,7 +29,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//NodeList:
 		//	children+=Node (NL children+=Node)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//children+=Node (NL children+=Node)*
 		public Group getGroup() { return cGroup; }
@@ -67,7 +67,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Node:
 		//	name=String (NL BEGIN children=NodeList END)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=String (NL BEGIN children=NodeList END)?
 		public Group getGroup() { return cGroup; }
@@ -103,7 +103,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//String returns ecore::EString:
 		//	OTHER+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//OTHER+
 		public RuleCall getOTHERTerminalRuleCall() { return cOTHERTerminalRuleCall; }
@@ -148,7 +148,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

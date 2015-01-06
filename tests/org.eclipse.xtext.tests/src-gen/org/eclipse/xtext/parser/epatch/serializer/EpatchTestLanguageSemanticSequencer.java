@@ -37,6 +37,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	@Inject
 	private EpatchTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EpatchTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EpatchTestLanguagePackage.ASSIGNMENT_VALUE:

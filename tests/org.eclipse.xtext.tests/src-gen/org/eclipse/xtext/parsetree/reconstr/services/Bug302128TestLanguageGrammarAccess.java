@@ -25,7 +25,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	elements+=Element*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -44,7 +44,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Element:
 		//	name=Variable value=Value?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=Variable value=Value?
 		public Group getGroup() { return cGroup; }
@@ -74,7 +74,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Variable:
 		//	ID (("." | "-") ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID (("." | "-") ID)*
 		public Group getGroup() { return cGroup; }
@@ -137,7 +137,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

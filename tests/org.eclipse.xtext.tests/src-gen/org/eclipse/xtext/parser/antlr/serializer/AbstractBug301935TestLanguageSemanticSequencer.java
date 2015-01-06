@@ -23,6 +23,7 @@ public abstract class AbstractBug301935TestLanguageSemanticSequencer extends Abs
 	@Inject
 	private Bug301935TestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug301935TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug301935TestPackage.MODEL:

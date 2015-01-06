@@ -25,7 +25,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Model:
 		//	elements+=Element*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -48,7 +48,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//Element:
 		//	optional?="optional"? "element" name=ID descriptions+=STRING* ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//optional?="optional"? "element" name=ID descriptions+=STRING* ";"
 		public Group getGroup() { return cGroup; }
@@ -111,7 +111,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

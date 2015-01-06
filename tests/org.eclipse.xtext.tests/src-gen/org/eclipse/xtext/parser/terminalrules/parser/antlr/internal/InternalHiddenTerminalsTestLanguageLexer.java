@@ -12,6 +12,12 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
+    public static final int RULE_ANY_OTHER=7;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int EOF=-1;
+    public static final int T__9=9;
+    public static final int T__8=8;
+    public static final int RULE_ML_COMMENT=5;
     public static final int T__19=19;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -21,14 +27,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
     public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=7;
     public static final int T__10=10;
     public static final int RULE_WS=4;
-    public static final int RULE_SL_COMMENT=6;
-    public static final int EOF=-1;
-    public static final int T__9=9;
-    public static final int T__8=8;
-    public static final int RULE_ML_COMMENT=5;
 
     // delegates
     // delegators

@@ -85,7 +85,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//	x14=Combination2 | x15=Combination3 | x16=Combination4 | x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 |
 		//	x22=AltList1 | x23=AltList2 | x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification |
 		//	x27=TwoVersion | x28=Heuristic1;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 |
@@ -274,7 +274,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//SimpleGroup:
 		//	"#1" val1=ID val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#1" val1=ID val2=ID
 		public Group getGroup() { return cGroup; }
@@ -311,7 +311,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//SimpleAlternative:
 		//	"#2" ("kw1" val1=ID | "kw2" val2=ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#2" ("kw1" val1=ID | "kw2" val2=ID)
 		public Group getGroup() { return cGroup; }
@@ -365,7 +365,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//SimpleMultiplicities:
 		//	"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#3" val1=ID "kw1" val2=ID? "kw2" val3+=ID+ "kw3" val4+=ID*
 		public Group getGroup() { return cGroup; }
@@ -434,7 +434,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//GroupMultiplicities:
 		//	"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#4" val1=ID "kw1" (val2=ID val3=ID)? "kw2" (val4+=ID val5+=ID)+ "kw3" (val6+=ID val7+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -533,7 +533,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//AlternativeMultiplicities:
 		//	"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#5" (val2=ID | "kw1" val3=ID)? "kw2" (val4+=ID | "kw3" val5+=ID)+ "kw4" (val6+=ID | "kw5" val7+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -624,7 +624,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//AssignedAction:
 		//	"#6" val1=ID ({AssignedAction.child=current} val1=ID)+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#6" val1=ID ({AssignedAction.child=current} val1=ID)+
 		public Group getGroup() { return cGroup; }
@@ -663,7 +663,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//AssignedActionSecond returns AssignedAction:
 		//	"#7" val1=ID "kw1" val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" val1=ID "kw1" val2=ID
 		public Group getGroup() { return cGroup; }
@@ -699,7 +699,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedAction1:
 		//	{UnassignedAction1} "#8" val1=ID val2=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{UnassignedAction1} "#8" val1=ID val2=ID?
 		public Group getGroup() { return cGroup; }
@@ -735,7 +735,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedAction2:
 		//	{UnassignedAction2Sub} "#9" val1=ID val2=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{UnassignedAction2Sub} "#9" val1=ID val2=ID?
 		public Group getGroup() { return cGroup; }
@@ -777,7 +777,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedAction3:
 		//	"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#10" ("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}) val1=ID val2=ID?
 		public Group getGroup() { return cGroup; }
@@ -829,7 +829,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedRuleCall1:
 		//	"#11" UnassignedRuleCall1Sub val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#11" UnassignedRuleCall1Sub val2=ID
 		public Group getGroup() { return cGroup; }
@@ -854,7 +854,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedRuleCall1Sub:
 		//	val1=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val1=ID
 		public Assignment getVal1Assignment() { return cVal1Assignment; }
@@ -873,7 +873,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedRuleCall2:
 		//	"#12" UnassignedRuleCall2Sub val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#12" UnassignedRuleCall2Sub val2=ID
 		public Group getGroup() { return cGroup; }
@@ -897,7 +897,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//UnassignedRuleCall2Sub:
 		//	{UnassignedRuleCall2SubAction};
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{UnassignedRuleCall2SubAction}
 		public Action getUnassignedRuleCall2SubActionAction() { return cUnassignedRuleCall2SubActionAction; }
@@ -923,7 +923,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//Combination1:
 		//	"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#13" val1=ID ("kw1" val2=ID ("kw2" val3=ID | val4=ID))?
 		public Group getGroup() { return cGroup; }
@@ -990,7 +990,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//Combination2:
 		//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*)
 		public Group getGroup() { return cGroup; }
@@ -1049,7 +1049,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//Combination3:
 		//	"#15" (val1=ID | val2=INT | val3=STRING)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#15" (val1=ID | val2=INT | val3=STRING)*
 		public Group getGroup() { return cGroup; }
@@ -1094,7 +1094,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//Combination4:
 		//	"#16" ("group" val1+=ID val2+=ID val3+=ID)+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#16" ("group" val1+=ID val2+=ID val3+=ID)+
 		public Group getGroup() { return cGroup; }
@@ -1140,7 +1140,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//List1:
 		//	"#17" val1+=ID ("," val1+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#17" val1+=ID ("," val1+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -1181,7 +1181,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//List2:
 		//	"#18" (val1+=ID ("," val1+=ID)*)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#18" (val1+=ID ("," val1+=ID)*)?
 		public Group getGroup() { return cGroup; }
@@ -1230,7 +1230,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//List3:
 		//	"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#19" (val1+=ID ("," val1+=ID)*) | "kw3" val2=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1291,7 +1291,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//List4:
 		//	"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID
 		public Group getGroup() { return cGroup; }
@@ -1347,7 +1347,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//List5:
 		//	"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID)
 		public Group getGroup() { return cGroup; }
@@ -1420,7 +1420,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//AltList1:
 		//	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 		public Group getGroup() { return cGroup; }
@@ -1506,7 +1506,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//AltList2:
 		//	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 		public Group getGroup() { return cGroup; }
@@ -1575,7 +1575,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TransientObject:
 		//	"#24" (val1=ID nested=TransientObjectSub)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#24" (val1=ID nested=TransientObjectSub)?
 		public Group getGroup() { return cGroup; }
@@ -1609,7 +1609,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TransientObjectSub:
 		//	val2=ID val3=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//val2=ID val3=ID
 		public Group getGroup() { return cGroup; }
@@ -1644,7 +1644,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TransientSerializeables1:
 		//	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?
 		public Group getGroup() { return cGroup; }
@@ -1705,7 +1705,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//StaticSimplification:
 		//	"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#26" ("kw1" | {EmptyAlternativeSub} | val1=ID) ("kw2" | val2=ID) ("kw3" ("kw4" val3=ID+)?)
 		public Group getGroup() { return cGroup; }
@@ -1769,7 +1769,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TwoVersion:
 		//	"#27" (TwoVersionNo1 | TwoVersionNo2);
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#27" (TwoVersionNo1 | TwoVersionNo2)
 		public Group getGroup() { return cGroup; }
@@ -1806,7 +1806,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TwoVersionNo1 returns TwoVersion:
 		//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
 		public Group getGroup() { return cGroup; }
@@ -1880,7 +1880,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TwoVersionNo2 returns TwoVersion:
 		//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
 		public Group getGroup() { return cGroup; }
@@ -1980,7 +1980,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//Heuristic1:
 		//	"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"#28" ("kw1" a+=ID b+=ID)* ("kw2" a+=ID c+=ID)* ("kw3" b+=ID c+=ID)*
 		public Group getGroup() { return cGroup; }
@@ -2170,7 +2170,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

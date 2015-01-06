@@ -20,6 +20,7 @@ public class EcoreTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	@Inject
 	private EcoreTerminalsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EcoreTerminalsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcoreTerminalsTestLanguagePackage.MODEL:

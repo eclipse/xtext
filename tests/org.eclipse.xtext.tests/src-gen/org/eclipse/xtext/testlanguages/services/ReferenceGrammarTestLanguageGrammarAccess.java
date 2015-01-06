@@ -41,7 +41,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Spielplatz:
 		//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
 		//	familie+=Familie)* "}")?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
 		//familie+=Familie)* "}")?
@@ -104,7 +104,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Person:
 		//	Kind | Erwachsener;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Kind | Erwachsener
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -129,7 +129,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Kind:
 		//	"kind" "(" name=ID age=INT ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"kind" "(" name=ID age=INT ")"
 		public Group getGroup() { return cGroup; }
@@ -169,7 +169,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Erwachsener:
 		//	"erwachsener" "(" name=ID age=INT ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"erwachsener" "(" name=ID age=INT ")"
 		public Group getGroup() { return cGroup; }
@@ -209,7 +209,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Spielzeug:
 		//	"spielzeug" "(" name=ID farbe=Farbe ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"spielzeug" "(" name=ID farbe=Farbe ")"
 		public Group getGroup() { return cGroup; }
@@ -247,7 +247,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		
 		//Farbe:
 		//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//wert=("ROT" | "BLAU" | "GELB" | "GRÜN")
 		public Assignment getWertAssignment() { return cWertAssignment; }
@@ -297,7 +297,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Familie:
 		//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 		//	kinder+=[Kind])* ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 		//kinder+=[Kind])* ")"
@@ -413,7 +413,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

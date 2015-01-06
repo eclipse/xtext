@@ -27,6 +27,7 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	@Inject
 	private UnassignedTextTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnassignedtextPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case UnassignedtextPackage.CASE_INSENSITIVE_KEYWORD_RULE:

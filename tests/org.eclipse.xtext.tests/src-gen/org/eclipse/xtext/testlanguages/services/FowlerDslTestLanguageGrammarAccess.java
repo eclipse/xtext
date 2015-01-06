@@ -34,7 +34,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Statemachine:
 		//	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
 		public Group getGroup() { return cGroup; }
@@ -82,7 +82,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Event:
 		//	resetting?="resetting"? name=ID code=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//resetting?="resetting"? name=ID code=ID
 		public Group getGroup() { return cGroup; }
@@ -116,7 +116,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Command:
 		//	name=ID code=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID code=ID
 		public Group getGroup() { return cGroup; }
@@ -153,7 +153,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//State:
 		//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 		public Group getGroup() { return cGroup; }
@@ -211,7 +211,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Transition:
 		//	event=[Event] "=>" state=[State];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//event=[Event] "=>" state=[State]
 		public Group getGroup() { return cGroup; }
@@ -277,7 +277,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

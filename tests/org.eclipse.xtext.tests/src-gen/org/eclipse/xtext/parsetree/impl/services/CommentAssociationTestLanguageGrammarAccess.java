@@ -25,7 +25,7 @@ public class CommentAssociationTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Model:
 		//	elements+=Element*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -48,7 +48,7 @@ public class CommentAssociationTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//Element:
 		//	"element" name=ID ({Element.child=current} "parent" name=ID)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"element" name=ID ({Element.child=current} "parent" name=ID)?
 		public Group getGroup() { return cGroup; }
@@ -111,7 +111,7 @@ public class CommentAssociationTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

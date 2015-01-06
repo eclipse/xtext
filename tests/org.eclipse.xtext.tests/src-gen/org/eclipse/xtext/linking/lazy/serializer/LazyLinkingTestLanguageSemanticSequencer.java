@@ -23,6 +23,7 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	@Inject
 	private LazyLinkingTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LazyLinkingPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LazyLinkingPackage.MODEL:

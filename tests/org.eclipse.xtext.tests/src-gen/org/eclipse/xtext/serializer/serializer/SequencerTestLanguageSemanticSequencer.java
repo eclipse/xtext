@@ -59,6 +59,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	@Inject
 	private SequencerTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SequencertestPackage.ALT_LIST1:

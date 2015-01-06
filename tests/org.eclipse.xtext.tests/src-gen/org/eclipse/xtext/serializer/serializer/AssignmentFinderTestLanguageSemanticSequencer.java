@@ -31,6 +31,7 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	@Inject
 	private AssignmentFinderTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AssignmentFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AssignmentFinderTestPackage.CONTAINMENT_REF:

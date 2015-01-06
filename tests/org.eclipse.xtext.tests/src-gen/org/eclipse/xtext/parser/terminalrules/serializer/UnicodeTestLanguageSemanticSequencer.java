@@ -25,6 +25,7 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	@Inject
 	private UnicodeTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnicodePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case UnicodePackage.GSTRING:

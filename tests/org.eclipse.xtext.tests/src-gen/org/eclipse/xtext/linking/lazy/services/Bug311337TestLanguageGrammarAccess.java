@@ -25,7 +25,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Model:
 		//	def+=Definition+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//def+=Definition+
 		public Assignment getDefAssignment() { return cDefAssignment; }
@@ -48,7 +48,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Definition:
 		//	"(def)" name=ID ":" child+=Child ref+=Reference?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(def)" name=ID ":" child+=Child ref+=Reference?
 		public Group getGroup() { return cGroup; }
@@ -91,7 +91,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Child:
 		//	"(child)" name=ID ":" link=[Definition]?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(child)" name=ID ":" link=[Definition]?
 		public Group getGroup() { return cGroup; }
@@ -134,7 +134,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Reference:
 		//	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*
 		public Group getGroup() { return cGroup; }
@@ -207,7 +207,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

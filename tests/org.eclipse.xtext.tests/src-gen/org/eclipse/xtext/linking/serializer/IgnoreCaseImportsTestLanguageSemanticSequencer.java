@@ -26,6 +26,7 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	@Inject
 	private IgnoreCaseImportsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IgnoreCaseImportsTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseImportsTestPackage.IMPORT:

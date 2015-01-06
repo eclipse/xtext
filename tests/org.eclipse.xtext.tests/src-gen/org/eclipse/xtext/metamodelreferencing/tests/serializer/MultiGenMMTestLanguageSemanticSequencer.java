@@ -25,6 +25,7 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	@Inject
 	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == OtherTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case OtherTestPackage.FOO_BAR:

@@ -13,11 +13,11 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug301935ExTestLanguageLexer extends Lexer {
     public static final int RULE_ID=6;
-    public static final int CarriageReturnCr=5;
+    public static final int Control000d=5;
+    public static final int RULE_ANY_OTHER=8;
+    public static final int Control000a=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
-    public static final int RULE_ANY_OTHER=8;
-    public static final int LineFeedLf=4;
 
     // delegates
     // delegators
@@ -32,13 +32,13 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g"; }
 
-    // $ANTLR start "LineFeedLf"
-    public final void mLineFeedLf() throws RecognitionException {
+    // $ANTLR start "Control000a"
+    public final void mControl000a() throws RecognitionException {
         try {
-            int _type = LineFeedLf;
+            int _type = Control000a;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:19:12: ( '\\n' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:19:14: '\\n'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:19:13: ( '\\n' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:19:15: '\\n'
             {
             match('\n'); 
 
@@ -50,15 +50,15 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "LineFeedLf"
+    // $ANTLR end "Control000a"
 
-    // $ANTLR start "CarriageReturnCr"
-    public final void mCarriageReturnCr() throws RecognitionException {
+    // $ANTLR start "Control000d"
+    public final void mControl000d() throws RecognitionException {
         try {
-            int _type = CarriageReturnCr;
+            int _type = Control000d;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:21:18: ( '\\r' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:21:20: '\\r'
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:21:13: ( '\\r' )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:21:15: '\\r'
             {
             match('\r'); 
 
@@ -70,7 +70,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "CarriageReturnCr"
+    // $ANTLR end "Control000d"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
@@ -229,40 +229,40 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:8: ( LineFeedLf | CarriageReturnCr | RULE_ID | RULE_WS | RULE_ANY_OTHER )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:8: ( Control000a | Control000d | RULE_ID | RULE_WS | RULE_ANY_OTHER )
         int alt4=5;
         alt4 = dfa4.predict(input);
         switch (alt4) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:10: LineFeedLf
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:10: Control000a
                 {
-                mLineFeedLf(); 
+                mControl000a(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:21: CarriageReturnCr
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:22: Control000d
                 {
-                mCarriageReturnCr(); 
+                mControl000d(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:38: RULE_ID
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:34: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:46: RULE_WS
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:42: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:54: RULE_ANY_OTHER
+                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/lexer/InternalBug301935ExTestLanguageLexer.g:1:50: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -331,7 +331,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( LineFeedLf | CarriageReturnCr | RULE_ID | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( Control000a | Control000d | RULE_ID | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

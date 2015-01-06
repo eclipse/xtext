@@ -28,7 +28,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 		
 		//Model:
 		//	imports+=Import* elements+=Element+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* elements+=Element+
 		public Group getGroup() { return cGroup; }
@@ -53,7 +53,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 		
 		//Import:
 		//	importedNamespace=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//importedNamespace=STRING
 		public Assignment getImportedNamespaceAssignment() { return cImportedNamespaceAssignment; }
@@ -95,7 +95,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

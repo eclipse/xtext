@@ -28,6 +28,7 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	@Inject
 	private LookaheadTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LookaheadLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LookaheadLangPackage.ENTRY:

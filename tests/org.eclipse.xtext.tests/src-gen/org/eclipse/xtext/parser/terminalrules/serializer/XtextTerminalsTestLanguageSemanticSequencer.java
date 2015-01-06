@@ -38,6 +38,7 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 	@Inject
 	private XtextTerminalsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == XtextTerminalsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtextTerminalsTestLanguagePackage.ACTION:

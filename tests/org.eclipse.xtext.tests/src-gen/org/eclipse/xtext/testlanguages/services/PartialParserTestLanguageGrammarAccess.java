@@ -34,7 +34,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//SomeContainer:
 		//	"container" name=ID "{" (nested+=Nested | content+=Content)* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"container" name=ID "{" (nested+=Nested | content+=Content)* "}"
 		public Group getGroup() { return cGroup; }
@@ -81,7 +81,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Nested:
 		//	"nested" "{" nested+=SomeContainer+ "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"nested" "{" nested+=SomeContainer+ "}"
 		public Group getGroup() { return cGroup; }
@@ -110,7 +110,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Content:
 		//	Children | AbstractChildren;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Children | AbstractChildren
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -137,7 +137,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Children:
 		//	"children" "{" children+=Child ("," children+=Child)* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"children" "{" children+=Child ("," children+=Child)* "}"
 		public Group getGroup() { return cGroup; }
@@ -182,7 +182,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Child:
 		//	"->" "C" "(" value=Named ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"->" "C" "(" value=Named ")"
 		public Group getGroup() { return cGroup; }
@@ -217,7 +217,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AbstractChildren:
 		//	"abstract children" "{" abstractChildren+=AbstractChild+ "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"abstract children" "{" abstractChildren+=AbstractChild+ "}"
 		public Group getGroup() { return cGroup; }
@@ -246,7 +246,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AbstractChild:
 		//	FirstConcrete | SecondConcrete;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//FirstConcrete | SecondConcrete
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -273,7 +273,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//FirstConcrete:
 		//	"->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")"
 		public Group getGroup() { return cGroup; }
@@ -322,7 +322,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//SecondConcrete:
 		//	"->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")"
 		public Group getGroup() { return cGroup; }
@@ -365,7 +365,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Named:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -423,7 +423,7 @@ public class PartialParserTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

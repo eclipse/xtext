@@ -25,6 +25,7 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	@Inject
 	private ImportUriTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ImportedURIPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ImportedURIPackage.IMPORT:

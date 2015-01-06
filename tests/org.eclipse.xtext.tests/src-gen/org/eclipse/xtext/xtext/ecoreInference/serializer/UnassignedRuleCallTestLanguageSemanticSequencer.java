@@ -24,6 +24,7 @@ public class UnassignedRuleCallTestLanguageSemanticSequencer extends AbstractDel
 	@Inject
 	private UnassignedRuleCallTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnassignedRuleCallTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case UnassignedRuleCallTestLanguagePackage.MODEL:

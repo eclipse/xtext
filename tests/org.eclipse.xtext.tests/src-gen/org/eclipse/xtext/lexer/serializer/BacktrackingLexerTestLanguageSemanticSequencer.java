@@ -25,6 +25,7 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	@Inject
 	private BacktrackingLexerTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BacktrackingTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BacktrackingTestLanguagePackage.AB:

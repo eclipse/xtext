@@ -24,6 +24,7 @@ public class SimpleBacktrackingBug325745TestLanguageSemanticSequencer extends Ba
 	@Inject
 	private SimpleBacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BacktrackingBug325745TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BacktrackingBug325745TestLanguagePackage.DATA_TYPE:

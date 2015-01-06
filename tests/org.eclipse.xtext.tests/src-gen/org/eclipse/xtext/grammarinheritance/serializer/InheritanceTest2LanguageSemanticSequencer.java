@@ -22,6 +22,7 @@ public class InheritanceTest2LanguageSemanticSequencer extends InheritanceTestLa
 	@Inject
 	private InheritanceTest2LanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == InheritanceTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case InheritanceTestPackage.ELEMENT:

@@ -24,6 +24,7 @@ public abstract class AbstractAbstractTestLanguageSemanticSequencer extends Abst
 	@Inject
 	private AbstractTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AmetamodelPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AmetamodelPackage.AMODEL:

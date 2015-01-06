@@ -25,7 +25,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//Model:
 		//	strings+=AbstractString*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//strings+=AbstractString*
 		public Assignment getStringsAssignment() { return cStringsAssignment; }
@@ -42,7 +42,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//AbstractString:
 		//	GString | QuotedString;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//GString | QuotedString
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -61,7 +61,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//GString:
 		//	name=GERMAN_STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=GERMAN_STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -77,7 +77,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//QuotedString:
 		//	name=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -125,7 +125,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

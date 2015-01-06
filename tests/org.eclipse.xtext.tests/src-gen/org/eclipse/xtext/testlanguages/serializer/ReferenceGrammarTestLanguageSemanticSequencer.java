@@ -28,6 +28,7 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	@Inject
 	private ReferenceGrammarTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ReferenceGrammarPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ReferenceGrammarPackage.ERWACHSENER:

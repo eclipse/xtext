@@ -25,7 +25,7 @@ public class Bug305397GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Model:
 		//	elements+=Element*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -49,7 +49,7 @@ public class Bug305397GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Element:
 		//	{Element} a?="a"? "element" name=ID? elements+=Element* "end";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Element} a?="a"? "element" name=ID? elements+=Element* "end"
 		public Group getGroup() { return cGroup; }
@@ -115,7 +115,7 @@ public class Bug305397GrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

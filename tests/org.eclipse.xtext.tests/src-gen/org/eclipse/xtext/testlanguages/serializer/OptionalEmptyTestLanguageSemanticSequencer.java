@@ -24,6 +24,7 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	@Inject
 	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == OptionalEmptyPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case OptionalEmptyPackage.GREETING:

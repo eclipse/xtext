@@ -25,6 +25,7 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	@Inject
 	private HiddenTokenSequencerTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == HiddentokensequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case HiddentokensequencertestPackage.DOMAIN_MODEL:

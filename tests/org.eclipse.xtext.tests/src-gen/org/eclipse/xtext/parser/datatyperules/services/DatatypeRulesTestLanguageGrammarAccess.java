@@ -25,7 +25,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//CompositeModel:
 		//	model+=Model+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//model+=Model+
 		public Assignment getModelAssignment() { return cModelAssignment; }
@@ -59,7 +59,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Model:
 		//	id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";"
 		public Group getGroup() { return cGroup; }
@@ -131,7 +131,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//ModelId returns ecore::EString:
 		//	ID "." ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ID "." ID
 		public Group getGroup() { return cGroup; }
@@ -155,7 +155,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//NestedModelId:
 		//	ModelId "." ModelId;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//ModelId "." ModelId
 		public Group getGroup() { return cGroup; }
@@ -180,7 +180,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Fraction returns ecore::EBigDecimal:
 		//	INT ("/" INT)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//INT ("/" INT)?
 		public Group getGroup() { return cGroup; }
@@ -208,7 +208,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Vector:
 		//	"(" INT INT ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(" INT INT ")"
 		public Group getGroup() { return cGroup; }
@@ -236,7 +236,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Dots returns ecore::EString:
 		//	"." "." | "..";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"." "." | ".."
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -268,7 +268,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Double returns ecore::EDouble:
 		//	"-"? INT? "." INT ("E" "-"? INT)?;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"-"? INT? "." INT ("E" "-"? INT)?
 		public Group getGroup() { return cGroup; }
@@ -343,7 +343,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

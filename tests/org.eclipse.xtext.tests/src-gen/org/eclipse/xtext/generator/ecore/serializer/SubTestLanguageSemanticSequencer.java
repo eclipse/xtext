@@ -26,6 +26,7 @@ public class SubTestLanguageSemanticSequencer extends SuperTestLanguageSemanticS
 	@Inject
 	private SubTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SubPackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SubPackagePackage.ANOTHER_SUPER_MAIN:

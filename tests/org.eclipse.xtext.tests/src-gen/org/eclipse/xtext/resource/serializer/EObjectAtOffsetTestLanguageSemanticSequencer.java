@@ -26,6 +26,7 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 	@Inject
 	private EObjectAtOffsetTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EObjectAtOffsetTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EObjectAtOffsetTestLanguagePackage.BAR:

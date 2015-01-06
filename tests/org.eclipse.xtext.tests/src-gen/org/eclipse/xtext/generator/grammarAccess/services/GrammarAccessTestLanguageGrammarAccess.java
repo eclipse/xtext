@@ -25,7 +25,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Root returns root::AModel:
 		//	elements+=Type*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Type*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
@@ -42,7 +42,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Type returns root::AType:
 		//	AType | AnotherType;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//AType | AnotherType
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -62,7 +62,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AType returns root::AType:
 		//	"foo" {root::AType};
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"foo" {root::AType}
 		public Group getGroup() { return cGroup; }
@@ -82,7 +82,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//AnotherType returns sub::AnotherType:
 		//	"bar" {sub::AnotherType};
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"bar" {sub::AnotherType}
 		public Group getGroup() { return cGroup; }
@@ -131,7 +131,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

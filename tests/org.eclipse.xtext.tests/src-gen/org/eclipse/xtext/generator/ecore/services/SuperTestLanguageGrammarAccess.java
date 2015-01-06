@@ -27,7 +27,7 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//SuperMain:
 		//	"super" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"super" name=ID
 		public Group getGroup() { return cGroup; }
@@ -51,7 +51,7 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		
 		//AnotherSuperMain:
 		//	"another" name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"another" name=ID
 		public Group getGroup() { return cGroup; }
@@ -99,7 +99,7 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -29,7 +29,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Sequence:
 		//	Addition ({Sequence.expressions+=current} expressions+=Addition)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Addition ({Sequence.expressions+=current} expressions+=Addition)*
 		public Group getGroup() { return cGroup; }
@@ -65,7 +65,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Addition returns Expression:
 		//	Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
 		public Group getGroup() { return cGroup; }
@@ -113,7 +113,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Multiplication returns Expression:
 		//	Term ({Op.values+=current} operator=("*" | "/") values+=Term)*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Term ({Op.values+=current} operator=("*" | "/") values+=Term)*
 		public Group getGroup() { return cGroup; }
@@ -154,7 +154,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Term returns Expression:
 		//	Atom | Parens;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Atom | Parens
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -173,7 +173,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Atom:
 		//	name=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
@@ -191,7 +191,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Parens returns Expression:
 		//	"(" Addition ")";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"(" Addition ")"
 		public Group getGroup() { return cGroup; }
@@ -247,7 +247,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

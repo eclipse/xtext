@@ -20,6 +20,7 @@ public class KeywordsTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	@Inject
 	private KeywordsTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == KeywordsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case KeywordsTestLanguagePackage.MODEL:

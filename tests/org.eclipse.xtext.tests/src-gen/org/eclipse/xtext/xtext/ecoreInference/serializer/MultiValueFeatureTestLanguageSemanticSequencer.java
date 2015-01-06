@@ -20,6 +20,7 @@ public class MultiValueFeatureTestLanguageSemanticSequencer extends AbstractDele
 	@Inject
 	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == MultiValueFeatureTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case MultiValueFeatureTestLanguagePackage.START:

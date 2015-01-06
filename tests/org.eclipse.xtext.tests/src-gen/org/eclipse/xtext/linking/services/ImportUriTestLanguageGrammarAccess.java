@@ -28,7 +28,7 @@ public class ImportUriTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Main:
 		//	imports+=Import* types+=Type*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* types+=Type*
 		public Group getGroup() { return cGroup; }
@@ -55,7 +55,7 @@ public class ImportUriTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Import:
 		//	"import" importURI=STRING;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" importURI=STRING
 		public Group getGroup() { return cGroup; }
@@ -83,7 +83,7 @@ public class ImportUriTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		
 		//Type:
 		//	"type" name=ID "extends" extends=[Type];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"type" name=ID "extends" extends=[Type]
 		public Group getGroup() { return cGroup; }
@@ -145,7 +145,7 @@ public class ImportUriTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

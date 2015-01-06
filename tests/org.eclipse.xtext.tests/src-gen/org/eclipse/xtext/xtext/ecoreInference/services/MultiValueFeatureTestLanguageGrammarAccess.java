@@ -25,7 +25,7 @@ public class MultiValueFeatureTestLanguageGrammarAccess extends AbstractGrammarE
 		
 		//Start:
 		//	featureA+=ID+;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//featureA+=ID+
 		public Assignment getFeatureAAssignment() { return cFeatureAAssignment; }
@@ -65,7 +65,7 @@ public class MultiValueFeatureTestLanguageGrammarAccess extends AbstractGrammarE
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}
