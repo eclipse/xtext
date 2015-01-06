@@ -3,17 +3,16 @@
 package org.eclipse.xtext.builder.trace.impl;
 
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.xtext.builder.trace.*;
+import org.eclipse.xtext.builder.trace.DebugLocationData;
+import org.eclipse.xtext.builder.trace.DebugTraceRegion;
+import org.eclipse.xtext.builder.trace.TraceFactory;
+import org.eclipse.xtext.builder.trace.TracePackage;
 
 /**
  * <!-- begin-user-doc -->

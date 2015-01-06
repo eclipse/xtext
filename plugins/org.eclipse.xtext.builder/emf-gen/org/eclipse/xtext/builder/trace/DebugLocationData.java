@@ -3,7 +3,6 @@
 package org.eclipse.xtext.builder.trace;
 
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -13,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getOffset <em>Offset</em>}</li>
@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.DebugLocationData#getEndOffset <em>End Offset</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.builder.trace.TracePackage#getDebugLocationData()
  * @model

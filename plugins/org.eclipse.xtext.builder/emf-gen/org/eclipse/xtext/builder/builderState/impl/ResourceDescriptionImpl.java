@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -32,18 +31,19 @@ import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
  * An implementation of the model object '<em><b>Resource Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getURI <em>URI</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getExportedObjects <em>Exported Objects</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getReferenceDescriptions <em>Reference Descriptions</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl#getImportedNames <em>Imported Names</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class ResourceDescriptionImpl extends Container implements IResourceDescription {
+public class ResourceDescriptionImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container implements IResourceDescription {
 	/**
 	 * The default value of the '{@link #getURI() <em>URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -141,6 +141,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	@SuppressWarnings("serial")
 	public EList<IEObjectDescription> getExportedObjects() {
 		if (exportedObjects == null) {
@@ -160,6 +161,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<QualifiedName> getImportedNames() {
 		if (importedNames == null) {
 			importedNames = new EDataTypeUniqueEList<QualifiedName>(QualifiedName.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__IMPORTED_NAMES);
@@ -172,6 +174,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public boolean isEmpty() {
 		return exportedObjects == null || exportedObjects.isEmpty();
 	}
@@ -181,6 +184,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
 		return getLookUp().getExportedObjectsByType(type);
 	}
@@ -190,6 +194,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
 		return getLookUp().getExportedObjects(type, name, ignoreCase);
 	}
@@ -199,6 +204,7 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return getLookUp().getExportedObjectsByObject(object);
 	}

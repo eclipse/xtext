@@ -3,14 +3,10 @@
 package org.eclipse.xtext.builder.trace.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.xtext.builder.trace.DebugLocationData;
 import org.eclipse.xtext.builder.trace.TracePackage;
 
@@ -19,7 +15,9 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  * An implementation of the model object '<em><b>Debug Location Data</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getOffset <em>Offset</em>}</li>
@@ -29,7 +27,6 @@ import org.eclipse.xtext.builder.trace.TracePackage;
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getPath <em>Path</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.trace.impl.DebugLocationDataImpl#getEndOffset <em>End Offset</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -178,6 +175,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getLabel() {
 		return String.format("[%d - %d]", getOffset(), getEndOffset());
 	}
@@ -292,6 +290,7 @@ public class DebugLocationDataImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public int getEndOffset() {
 		return getOffset() + getLength();
 	}

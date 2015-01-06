@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: BuilderStatePackageImpl.java,v 1.11 2010/04/12 20:19:21 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -188,8 +184,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getResourceDescription_ImportedNames() {
-		return (EAttribute)resourceDescriptionEClass.getEStructuralFeatures().get(3);
+	public EReference getResourceDescription_ReferenceDescriptions() {
+		return (EReference)resourceDescriptionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -197,8 +193,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getResourceDescription_ReferenceDescriptions() {
-		return (EReference)resourceDescriptionEClass.getEStructuralFeatures().get(2);
+	public EAttribute getResourceDescription_ImportedNames() {
+		return (EAttribute)resourceDescriptionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**

@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 
 /**
@@ -20,16 +19,17 @@ import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
  * An implementation of the model object '<em><b>User Data Entry</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.UserDataEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.eclipse.xtext.builder.builderState.impl.UserDataEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class UserDataEntryImpl extends Container implements BasicEMap.Entry<String,String> {
+public class UserDataEntryImpl extends org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container implements BasicEMap.Entry<String,String> {
 	/**
 	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
