@@ -12,6 +12,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.ide.common.contentassist.antlr;x-internal:=true,
  org.eclipse.xtend.ide.common.contentassist.antlr.internal;x-internal:=true,
  org.eclipse.xtend.ide.common.contentassist.javadoc;x-internal:=true,
- org.eclipse.xtend.ide.common.editor.bracketmatching;x-internal:=true
+ org.eclipse.xtend.ide.common.editor.bracketmatching;x-internal:=true,
+ org.eclipse.xtend.ide.common.outline;x-friends:="org.eclipse.xtend.ide"
 Import-Package: org.apache.log4j;version="1.2.15"
 

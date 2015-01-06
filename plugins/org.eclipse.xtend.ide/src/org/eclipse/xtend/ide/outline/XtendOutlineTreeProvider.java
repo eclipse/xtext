@@ -6,6 +6,8 @@ package org.eclipse.xtend.ide.outline;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.ide.common.outline.XtendOutlineJvmTreeBuilder;
+import org.eclipse.xtend.ide.common.outline.XtendOutlineSourceTreeBuilder;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
@@ -28,7 +30,13 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 	private Provider<XtendOutlineSourceTreeProvider> sourceProvider;
 
 	@Inject
+	private Provider<XtendOutlineSourceTreeBuilder> xtendOutlineSourceTreeBuilderProvider;
+
+	@Inject
 	private Provider<XtendOutlineJvmTreeProvider> jvmProvider;
+
+	@Inject
+	private Provider<XtendOutlineJvmTreeBuilder> xtendOutlineJvmTreeBuilderProvider;
 
 	@Inject
 	private IOutlineTreeProvider.ModeAware modeAware;
@@ -70,6 +78,11 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 		if (jvmTreeProvider == null) {
 			jvmTreeProvider = jvmProvider.get();
 			jvmTreeProvider.setModeAware(modeAware);
+			
+			XtendOutlineJvmTreeBuilder xtendOutlineJvmTreeBuilder = xtendOutlineJvmTreeBuilderProvider.get();
+			xtendOutlineJvmTreeBuilder.setXtendOutlineNodeBuilder(jvmTreeProvider);
+			
+			jvmTreeProvider.setXtendOutlineTreeBuilder(xtendOutlineJvmTreeBuilder);
 		}
 		return jvmTreeProvider;
 	}
@@ -78,6 +91,11 @@ public class XtendOutlineTreeProvider implements IOutlineTreeStructureProvider, 
 		if (sourceTreeProvider == null) {
 			sourceTreeProvider = sourceProvider.get();
 			sourceTreeProvider.setModeAware(modeAware);
+			
+			XtendOutlineSourceTreeBuilder xtendOutlineSourceTreeBuilder = xtendOutlineSourceTreeBuilderProvider.get();
+			xtendOutlineSourceTreeBuilder.setXtendOutlineNodeBuilder(sourceTreeProvider);
+			
+			sourceTreeProvider.setXtendOutlineTreeBuilder(xtendOutlineSourceTreeBuilder);
 		}
 		return sourceTreeProvider;
 	}

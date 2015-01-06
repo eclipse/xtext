@@ -54,14 +54,18 @@
       	<completion.contributor language="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.completion.XtendCompletionContributor"/>
       	<elementDescriptionProvider implementation="org.eclipse.xtend.core.idea.lang.psi.XtendElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtend.core.idea.lang.pom.XtendPomDeclarationSearcher"/>
-      	
-      	<typeHierarchyProvider language="org.eclipse.xtend.core.Xtend" 
+
+      	<lang.psiStructureViewFactory language="org.eclipse.xtend.core.Xtend"
       							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
-      	<callHierarchyProvider language="org.eclipse.xtend.core.Xtend" 
-      							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
-      							implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
-    	<hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/>
+      							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+
+		<typeHierarchyProvider language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider"/>
+		<callHierarchyProvider language="org.eclipse.xtend.core.Xtend"
+								factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
+								implementationClass="com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider"/>
+		<hierarchy.referenceProcessor implementation="org.eclipse.xtend.core.idea.ide.hierarchy.call.XtendCallReferenceProcessor"/>
 	</extensions>
 
 </idea-plugin>
