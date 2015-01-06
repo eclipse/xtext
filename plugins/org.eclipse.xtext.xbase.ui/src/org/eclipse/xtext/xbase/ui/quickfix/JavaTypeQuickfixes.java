@@ -302,7 +302,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 		for (char[] enclosingType : enclosingTypeNames) {
 			fqName.append(enclosingType);
-			fqName.append('.');
+			fqName.append('$');
 		}
 		fqName.append(simpleTypeName);
 		String fqNameAsString = fqName.toString();
