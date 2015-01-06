@@ -7,15 +7,10 @@
  */
 package org.eclipse.xtend.idea.completion;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import org.eclipse.xtend.core.idea.lang.XtendFileType;
-import org.eclipse.xtext.idea.tests.LibraryUtil;
-import org.eclipse.xtext.idea.tests.LightToolingTest;
+import org.eclipse.xtend.idea.completion.LightXtendTest;
 
 @SuppressWarnings("all")
-public class XtendCompletionTest extends LightToolingTest {
+public class XtendCompletionTest extends LightXtendTest {
   public void testClassKeyword() {
     this.complete("cl<caret>");
     this.assertLookupStrings("class");
@@ -35,13 +30,5 @@ public class XtendCompletionTest extends LightToolingTest {
       "import", 
       "interface", 
       "package");
-  }
-  
-  public XtendCompletionTest() {
-    super(XtendFileType.INSTANCE);
-  }
-  
-  protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
-    LibraryUtil.addXbaseLibrary(model);
   }
 }

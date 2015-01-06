@@ -12,6 +12,8 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 import static extension com.intellij.openapi.roots.ModuleRootModificationUtil.*
 import static extension com.intellij.openapi.vfs.VfsUtil.*
 import static extension com.intellij.util.PathUtil.*
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.macro.Active
 
 class LibraryUtil {
 
@@ -29,7 +31,19 @@ class LibraryUtil {
 
 	static def addXbaseLibrary(ModifiableRootModel it) {
 		removeLibFromIgnoredFilesList
+		addGuavaLibrary
 		addLibrary("org.eclipse.xtext.xbase.lib", ToStringBuilder)
+	}
+	
+	static def addXtendLibrary(Module it) {
+		updateModel[addXtendLibrary]
+	}
+
+	static def addXtendLibrary(ModifiableRootModel it) {
+		removeLibFromIgnoredFilesList
+		addXbaseLibrary
+		addLibrary("org.eclipse.xtend.lib.macro", Active)
+		addLibrary("org.eclipse.xtend.lib", Data)
 	}
 
 	static def removeLibFromIgnoredFilesList() {
