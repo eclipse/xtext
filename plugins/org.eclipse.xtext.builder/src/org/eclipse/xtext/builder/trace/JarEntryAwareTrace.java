@@ -72,9 +72,10 @@ public class JarEntryAwareTrace implements IStorageAwareTraceContribution {
 					IResource resource = root.getResource();
 					if (resource instanceof IFolder) {
 						IFolder folder = (IFolder) resource;
-						IResource candidate = folder.findMember(path.toString());
+						String decodedPath = URI.decode(path.toString());
+						IResource candidate = folder.findMember(decodedPath);
 						if (candidate != null && candidate.exists())
-							return URI.createPlatformResourceURI(resource.getFullPath() + "/" + path, true);
+							return URI.createPlatformResourceURI(resource.getFullPath() + "/" + decodedPath, true);
 					}
 				}
 		} catch (JavaModelException e) {
