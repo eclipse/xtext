@@ -273,7 +273,26 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void createKeyWordProposal(final Keyword keyword, final ContentAssistContext context, final CompletionParameters parameters, final CompletionResultSet result) {
-    AbstractCompletionContributor.KeywordLookupElement _keywordLookupElement = new AbstractCompletionContributor.KeywordLookupElement(keyword);
-    this._completionExtensions.operator_add(result, _keywordLookupElement);
+    boolean _isKeywordWorthyToPropose = this.isKeywordWorthyToPropose(keyword);
+    if (_isKeywordWorthyToPropose) {
+      AbstractCompletionContributor.KeywordLookupElement _keywordLookupElement = new AbstractCompletionContributor.KeywordLookupElement(keyword);
+      this._completionExtensions.operator_add(result, _keywordLookupElement);
+    }
+  }
+  
+  protected boolean isKeywordWorthyToPropose(final Keyword keyword) {
+    boolean _and = false;
+    String _value = keyword.getValue();
+    int _length = _value.length();
+    boolean _greaterThan = (_length > 1);
+    if (!_greaterThan) {
+      _and = false;
+    } else {
+      String _value_1 = keyword.getValue();
+      char _charAt = _value_1.charAt(0);
+      boolean _isLetter = Character.isLetter(_charAt);
+      _and = _isLetter;
+    }
+    return _and;
   }
 }

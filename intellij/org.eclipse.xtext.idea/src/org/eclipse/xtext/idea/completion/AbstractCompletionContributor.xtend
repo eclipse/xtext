@@ -109,7 +109,13 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def createKeyWordProposal(Keyword keyword, ContentAssistContext context, CompletionParameters parameters,	CompletionResultSet result) {
-		result += new KeywordLookupElement(keyword)
+		if (isKeywordWorthyToPropose(keyword)) {
+			result += new KeywordLookupElement(keyword)
+		}
+	}
+	
+	protected def isKeywordWorthyToPropose(Keyword keyword) {
+		keyword.value.length > 1 && Character.isLetter(keyword.value.charAt(0))
 	}
 
 	@Data

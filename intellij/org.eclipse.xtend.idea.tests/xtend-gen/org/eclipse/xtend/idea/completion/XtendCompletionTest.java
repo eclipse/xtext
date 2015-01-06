@@ -29,7 +29,6 @@ public class XtendCompletionTest extends LightToolingTest {
   public void testEmptyFile() {
     this.complete("");
     this.assertLookupStrings(
-      "@", 
       "annotation", 
       "class", 
       "enum", 

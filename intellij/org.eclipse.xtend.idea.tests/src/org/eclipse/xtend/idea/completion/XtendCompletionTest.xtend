@@ -30,7 +30,6 @@ class XtendCompletionTest extends LightToolingTest {
 	def void testEmptyFile() {
 		complete("")
 		assertLookupStrings(
-			"@",
 			"annotation",
 			"class",
 			"enum",
