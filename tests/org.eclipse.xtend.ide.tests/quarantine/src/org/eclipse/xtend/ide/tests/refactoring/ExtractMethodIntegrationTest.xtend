@@ -970,7 +970,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 					var z = x
 					var y = x
 				}
-
+				
 				def bar() {
 					1
 				}
@@ -990,7 +990,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo() {
 					bar()
 				}
-
+				
 				def bar() {
 					val x = 1
 				}
@@ -1010,7 +1010,7 @@ class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
 				def foo() {
 					val x = bar()
 				}
-
+				
 				def bar() {
 					1
 				}
