@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingCalculator;
 import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
@@ -166,7 +167,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	@Test public void testBug375272_01() {
 		expectInsignificant(0, 3);
 		expectInsignificant(4, 6);
-		expectAbsolute(20, 11, DefaultHighlightingConfiguration.COMMENT_ID);
+		expectAbsolute(20, 11, HighlightingStyles.COMMENT_ID);
 		expectInsignificant(32, 6);
 		expectInsignificant(46, 3);
 		highlight(
@@ -180,7 +181,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	@Test public void testBug375272_02() {
 		expectInsignificant(0, 3);
 		expectInsignificant(5, 6);
-		expectAbsolute(22, 11, DefaultHighlightingConfiguration.COMMENT_ID);
+		expectAbsolute(22, 11, HighlightingStyles.COMMENT_ID);
 		expectInsignificant(35, 6);
 		expectInsignificant(50, 3);
 		highlight(
@@ -213,45 +214,45 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 	
 	@Test public void testVoid() {
 		String model = "{ var void v = null }";
-		expectAbsolute(model.indexOf("void"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		expectAbsolute(model.indexOf("void"), 4, HighlightingStyles.KEYWORD_ID);
 		highlight(model);
 	}
 	
 	@Test public void testThis() {
 		String model = "{ var f = this }";
-		expectAbsolute(model.indexOf("this"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		expectAbsolute(model.indexOf("this"), 4, HighlightingStyles.KEYWORD_ID);
 		highlight(model);
 	}
 	
 	@Test public void testSelf() {
 		String model = "val Runnable runnable = [| self.run ]";
-		expectAbsolute(model.indexOf("self"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		expectAbsolute(model.indexOf("self"), 4, HighlightingStyles.KEYWORD_ID);
 		highlight(model);
 	}
 	
 	@Test public void testSelf_2() {
 		String model = "{ val self = 1 }";
-		expectAbsolute(model.indexOf("self"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
-		expectAbsolute(model.indexOf('1'), 1, DefaultHighlightingConfiguration.NUMBER_ID);
+		expectAbsolute(model.indexOf("self"), 4, HighlightingStyles.KEYWORD_ID);
+		expectAbsolute(model.indexOf('1'), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
 	
 	@Test public void testInt() {
 		String model = "{ var int i = 1 }";
-		expectAbsolute(model.indexOf("int"), 3, DefaultHighlightingConfiguration.KEYWORD_ID);
-		expectAbsolute(model.lastIndexOf("1"), 1, DefaultHighlightingConfiguration.NUMBER_ID);
+		expectAbsolute(model.indexOf("int"), 3, HighlightingStyles.KEYWORD_ID);
+		expectAbsolute(model.lastIndexOf("1"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
 	
 	@Test public void testCreateAsIdentifier() {
 		String model = "{ var String create = '' }";
-		expectAbsolute(model.indexOf("create"), 6, DefaultHighlightingConfiguration.DEFAULT_ID);
+		expectAbsolute(model.indexOf("create"), 6, HighlightingStyles.DEFAULT_ID);
 		highlight(model);
 	}
 	
 	@Test public void testCreateKeyword() {
 		String model = "{} def create result: new Object() create() {}";
-		expectAbsolute(model.lastIndexOf("create"), 6, DefaultHighlightingConfiguration.DEFAULT_ID);
+		expectAbsolute(model.lastIndexOf("create"), 6, HighlightingStyles.DEFAULT_ID);
 		highlight(model);
 	}
 	
@@ -542,7 +543,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 					"def", "dispatch", "enum", "extends", "extension", "final", "implements", "import", "interface", 
 					"override", "package", "public", "private", "protected", "static", "throws")) {
 			String model = "{} def get" + toFirstUpper(keyword) + "() {} def bar(Foo it) { "+ keyword + "}";
-			expectAbsolute(model.lastIndexOf(keyword), keyword.length(), DefaultHighlightingConfiguration.DEFAULT_ID);
+			expectAbsolute(model.lastIndexOf(keyword), keyword.length(), HighlightingStyles.DEFAULT_ID);
 		}
 	}
 	
@@ -574,6 +575,51 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expect(591, 1, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		expect(592, 10, XtendHighlightingConfiguration.ACTIVE_ANNOTATION);
 		highlightActiveAnnotation(model);
+	}
+	
+	@Test
+	public void testBug455188() throws Exception {
+		StringBuilder a = new StringBuilder();
+		a.append("class Bar {");
+		a.append("	def String getProperty(){}");
+		a.append("	def void setProperty(String s){}");
+		a.append("}");
+		
+		classDefString = a.toString() + classDefString;
+		
+		StringBuilder b = new StringBuilder();
+		
+		b.append("{");
+		b.append("	if(property != null){");
+		b.append("		property = ''");
+		b.append("	} ");
+		b.append("} extension Bar = new Bar{} ");
+		String model = b.toString();
+		
+		expectAbsolute(model.indexOf("property"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.lastIndexOf("property"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
+	
+	@Test
+	public void testBug455188_2() throws Exception {
+		StringBuilder a = new StringBuilder();
+		a.append("class Bar {");
+		a.append("	def void setContents(String s, int i){}");
+		a.append("}");
+		
+		classDefString = a.toString() + classDefString;
+		
+		StringBuilder b = new StringBuilder();
+		
+		b.append("{");
+		b.append("	's'.contents = 1");
+		b.append("} extension Bar = new Bar{} ");
+		String model = b.toString();
+		
+		expectAbsolute(model.indexOf("contents"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
+		highlight(model);
 	}
 
 	protected void highlight(String functionBody) {
