@@ -23,8 +23,6 @@ import org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvi
 import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.xtext.ui.editor.IValidationJobScheduler;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
-import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
-import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 

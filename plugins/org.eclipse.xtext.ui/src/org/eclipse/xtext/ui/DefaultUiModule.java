@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui;
 
-import java.util.Arrays;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -33,7 +31,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
-import org.eclipse.xtext.ide.editor.bracketmatching.BracePair;
 import org.eclipse.xtext.ide.editor.bracketmatching.DefaultBracePairProvider;
 import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
 import org.eclipse.xtext.parser.IEncodingProvider;

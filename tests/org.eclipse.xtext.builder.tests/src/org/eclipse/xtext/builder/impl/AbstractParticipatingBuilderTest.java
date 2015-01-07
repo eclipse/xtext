@@ -9,7 +9,6 @@ package org.eclipse.xtext.builder.impl;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.tests.Activator;
 import org.eclipse.xtext.builder.tests.DelegatingBuilderParticipant;

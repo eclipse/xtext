@@ -43,7 +43,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
-import org.eclipse.xtext.resource.persistence.ResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
@@ -303,6 +302,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			return dirtyResource.getNormalizedURI();
 		}
 
+		@Override
 		public ResourceStorageLoadable getResourceStorageLoadable() {
 			return dirtyResource.getResourceStorageLoadable();
 		}
