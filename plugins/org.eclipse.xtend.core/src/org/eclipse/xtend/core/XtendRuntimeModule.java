@@ -262,10 +262,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		binder.bind(IResourceDescriptions.class).to(EagerResourceSetBasedResourceDescriptions.class);
 	}
 
-	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
-		return JavaIOFileSystemSupport.class;
-	}
-
 	public Class<? extends IDValueConverter> bindIDValueConverter() {
 		return JavaIDValueConverter.class;
 	}
