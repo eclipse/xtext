@@ -217,7 +217,7 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 		if (!res.URI.platform) {
 			throw new IllegalStateException("Expecting platform URI but was : " + res.URI)
 		}
-		return new Path(res.URI.toPlatformString(false))
+		return new Path(res.URI.toPlatformString(true))
 	}
 	
 }

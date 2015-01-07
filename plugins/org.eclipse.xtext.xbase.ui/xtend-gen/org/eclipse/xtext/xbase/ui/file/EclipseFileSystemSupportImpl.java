@@ -396,7 +396,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       throw new IllegalStateException(_plus);
     }
     org.eclipse.emf.common.util.URI _uRI_2 = res.getURI();
-    String _platformString = _uRI_2.toPlatformString(false);
+    String _platformString = _uRI_2.toPlatformString(true);
     return new Path(_platformString);
   }
   
