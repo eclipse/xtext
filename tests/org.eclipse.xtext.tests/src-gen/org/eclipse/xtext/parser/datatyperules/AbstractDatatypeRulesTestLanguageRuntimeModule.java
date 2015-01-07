@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.datatyperules;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -15,7 +14,7 @@ import com.google.inject.name.Names;
  * Manual modifications go to {org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguageRuntimeModule}
  */
  @SuppressWarnings("all")
-public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
