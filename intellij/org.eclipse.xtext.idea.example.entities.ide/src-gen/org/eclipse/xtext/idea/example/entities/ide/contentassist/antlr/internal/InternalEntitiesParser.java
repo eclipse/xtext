@@ -56,8 +56,8 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -60208,11 +60208,11 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
         state.failed=false;
         return success;
     }
-    public final boolean synpred104_InternalEntities() {
+    public final boolean synpred127_InternalEntities() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred104_InternalEntities_fragment(); // can never throw exception
+            synpred127_InternalEntities_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -60222,11 +60222,11 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
         state.failed=false;
         return success;
     }
-    public final boolean synpred127_InternalEntities() {
+    public final boolean synpred104_InternalEntities() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred127_InternalEntities_fragment(); // can never throw exception
+            synpred104_InternalEntities_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

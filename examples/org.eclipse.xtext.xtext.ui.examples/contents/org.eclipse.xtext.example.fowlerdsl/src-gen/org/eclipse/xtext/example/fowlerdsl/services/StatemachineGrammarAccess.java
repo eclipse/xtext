@@ -44,7 +44,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//Statemachine:
 		//	{Statemachine} ("events" events+=Event+ "end")? ("resetEvents" resetEvents+=[Event]+ "end")? ("commands"
 		//	commands+=Command+ "end")? states+=State*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//{Statemachine} ("events" events+=Event+ "end")? ("resetEvents" resetEvents+=[Event]+ "end")? ("commands"
 		//commands+=Command+ "end")? states+=State*
@@ -118,7 +118,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Event:
 		//	name=ID code=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID code=ID
 		public Group getGroup() { return cGroup; }
@@ -146,7 +146,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Command:
 		//	name=ID code=ID;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID code=ID
 		public Group getGroup() { return cGroup; }
@@ -183,7 +183,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//State:
 		//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
 		public Group getGroup() { return cGroup; }
@@ -241,7 +241,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Transition:
 		//	event=[Event] "=>" state=[State];
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//event=[Event] "=>" state=[State]
 		public Group getGroup() { return cGroup; }
@@ -307,7 +307,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

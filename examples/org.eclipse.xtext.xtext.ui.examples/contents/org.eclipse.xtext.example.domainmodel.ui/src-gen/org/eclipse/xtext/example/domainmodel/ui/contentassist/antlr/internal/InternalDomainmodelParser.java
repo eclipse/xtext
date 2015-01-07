@@ -56,8 +56,8 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -60040,11 +60040,11 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         state.failed=false;
         return success;
     }
-    public final boolean synpred28_InternalDomainmodel() {
+    public final boolean synpred127_InternalDomainmodel() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred28_InternalDomainmodel_fragment(); // can never throw exception
+            synpred127_InternalDomainmodel_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -60054,11 +60054,11 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         state.failed=false;
         return success;
     }
-    public final boolean synpred127_InternalDomainmodel() {
+    public final boolean synpred28_InternalDomainmodel() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred127_InternalDomainmodel_fragment(); // can never throw exception
+            synpred28_InternalDomainmodel_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
