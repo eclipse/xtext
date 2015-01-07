@@ -102,7 +102,6 @@ public class XtextReconciler extends Job implements IReconciler {
 	}
 	
 	/**
-	 * @noimplement
 	 * @noextend
 	 */
 	protected class DocumentListener implements IXtextDocumentContentObserver, ICompletionListener {

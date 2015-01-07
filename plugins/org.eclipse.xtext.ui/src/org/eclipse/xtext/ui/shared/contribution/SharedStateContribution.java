@@ -35,7 +35,6 @@ import com.google.inject.ProvisionException;
  * </ul>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @noextend This class is not intended to be subclassed by clients.
  * @since 2.5
  */
 public final class SharedStateContribution {
