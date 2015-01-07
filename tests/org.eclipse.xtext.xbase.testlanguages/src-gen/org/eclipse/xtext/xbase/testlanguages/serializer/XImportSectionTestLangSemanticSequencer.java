@@ -68,6 +68,7 @@ public class XImportSectionTestLangSemanticSequencer extends XbaseSemanticSequen
 	@Inject
 	private XImportSectionTestLangGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_FORMAL_PARAMETER:

@@ -29,7 +29,7 @@ public class XImportSectionTestLangGrammarAccess extends AbstractGrammarElementF
 		
 		//ImportSectionTestLanguageRoot:
 		//	"some" "token" importSection=XImportSection;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"some" "token" importSection=XImportSection
 		public Group getGroup() { return cGroup; }
@@ -78,7 +78,7 @@ public class XImportSectionTestLangGrammarAccess extends AbstractGrammarElementF
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

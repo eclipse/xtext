@@ -65,6 +65,7 @@ public class PureXbaseSemanticSequencer extends XbaseSemanticSequencer {
 	@Inject
 	private PureXbaseGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == PureXbasePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case PureXbasePackage.MODEL:

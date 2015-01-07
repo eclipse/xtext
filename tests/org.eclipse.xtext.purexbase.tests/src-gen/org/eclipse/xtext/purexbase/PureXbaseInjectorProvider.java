@@ -20,6 +20,7 @@ public class PureXbaseInjectorProvider implements IInjectorProvider, IRegistryCo
 		GlobalRegistries.initializeDefaults();
 	}
 
+	@Override
 	public Injector getInjector()
 	{
 		if (injector == null) {
@@ -34,10 +35,12 @@ public class PureXbaseInjectorProvider implements IInjectorProvider, IRegistryCo
 	    return new PureXbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
+	@Override
 	public void restoreRegistry() {
 		stateBeforeInjectorCreation.restoreGlobalState();
 	}
 
+	@Override
 	public void setupRegistry() {
 		getInjector();
 		stateAfterInjectorCreation.restoreGlobalState();

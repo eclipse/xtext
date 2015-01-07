@@ -285,6 +285,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public void configureITransientValueService(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.serializer.sequencer.ITransientValueService.class).to(org.eclipse.xtext.xbase.serializer.XbaseTransientValueService.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.xbase.file.WorkspaceConfig>> provideWorkspaceConfig() {
 		return org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider.class;
 	}

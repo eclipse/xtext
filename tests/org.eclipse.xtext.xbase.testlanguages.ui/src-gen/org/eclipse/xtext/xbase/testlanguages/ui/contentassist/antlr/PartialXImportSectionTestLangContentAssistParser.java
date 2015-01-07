@@ -20,6 +20,7 @@ public class PartialXImportSectionTestLangContentAssistParser extends XImportSec
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

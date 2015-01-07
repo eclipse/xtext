@@ -29,7 +29,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DomainModel:
 		//	importSection=XImportSection? elements+=AbstractElement*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//importSection=XImportSection? elements+=AbstractElement*
 		public Group getGroup() { return cGroup; }
@@ -55,7 +55,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//AbstractElement:
 		//	PackageDeclaration | Entity;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//PackageDeclaration | Entity
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -80,7 +80,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PackageDeclaration:
 		//	"package" name=QualifiedName "{" elements+=AbstractElement* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"package" name=QualifiedName "{" elements+=AbstractElement* "}"
 		public Group getGroup() { return cGroup; }
@@ -124,7 +124,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Entity:
 		//	"entity" name=ValidID ("extends" superType=JvmParameterizedTypeReference)? "{" features+=Feature* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"entity" name=ValidID ("extends" superType=JvmParameterizedTypeReference)? "{" features+=Feature* "}"
 		public Group getGroup() { return cGroup; }
@@ -171,7 +171,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Feature:
 		//	Property | Operation;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//Property | Operation
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -194,7 +194,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Property:
 		//	name=ValidID ":" type=JvmTypeReference;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ValidID ":" type=JvmTypeReference
 		public Group getGroup() { return cGroup; }
@@ -240,7 +240,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		//Operation:
 		//	"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" (":"
 		//	type=JvmTypeReference)? body=XBlockExpression;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"op" name=ValidID "(" (params+=FullJvmFormalParameter ("," params+=FullJvmFormalParameter)*)? ")" (":"
 		//type=JvmTypeReference)? body=XBlockExpression
@@ -344,7 +344,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

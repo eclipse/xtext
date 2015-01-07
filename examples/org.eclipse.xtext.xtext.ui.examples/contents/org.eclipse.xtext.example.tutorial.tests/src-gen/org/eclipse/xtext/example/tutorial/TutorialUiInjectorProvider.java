@@ -9,6 +9,7 @@ import com.google.inject.Injector;
 
 public class TutorialUiInjectorProvider implements IInjectorProvider {
 	
+	@Override
 	public Injector getInjector() {
 		return org.eclipse.xtext.example.tutorial.ui.internal.TutorialActivator.getInstance().getInjector("org.eclipse.xtext.example.tutorial.Tutorial");
 	}

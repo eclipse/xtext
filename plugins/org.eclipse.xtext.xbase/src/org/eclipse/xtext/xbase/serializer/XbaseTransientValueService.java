@@ -10,12 +10,12 @@ package org.eclipse.xtext.xbase.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.serializer.sequencer.TransientValueService;
+import org.eclipse.xtext.serializer.sequencer.LegacyTransientValueService;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XbaseTransientValueService extends TransientValueService {
+public class XbaseTransientValueService extends LegacyTransientValueService {
 
 	@Override
 	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature) {

@@ -27,6 +27,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 	@Inject
 	private StatemachineGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == StatemachinePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case StatemachinePackage.COMMAND:
