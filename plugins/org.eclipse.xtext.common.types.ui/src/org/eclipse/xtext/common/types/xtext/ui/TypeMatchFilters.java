@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter;
+
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -73,20 +78,35 @@ public final class TypeMatchFilters {
 		
 		private final int searchFor;
 
+		private final Set<String> dirtyStateTypNames;
 		/**
 		 * @since 2.0
 		 */
 		public All(int searchFor) {
-			this.searchFor = searchFor;
+			this(searchFor, Collections.<String>emptySet());
 		}
 		
 		public All() {
-			this(IJavaSearchConstants.TYPE);
+			this(IJavaSearchConstants.TYPE, Collections.<String>emptySet());
+		}
+		/**
+		 * @since 2.8
+		 */
+		public All(int searchFor, Set<String> dirtyStateTypNames) {
+			this.searchFor = searchFor;
+			this.dirtyStateTypNames = dirtyStateTypNames;
+
 		}
 
 		@Override
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
+			if (path == null || path.endsWith(".class") || path.endsWith(".java")) { // Java index match
+				String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
+				if (dirtyStateTypNames.contains(identifier)) {
+					return false;
+				}
+			}
 			if (isInternalClass(simpleTypeName, enclosingTypeNames)) {
 				return false;
 			}
@@ -102,6 +122,23 @@ public final class TypeMatchFilters {
 		}
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	public static String getIdentifier(char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames) {
+		StringBuilder result = new StringBuilder(packageName.length + simpleTypeName.length + 1);
+		if (packageName.length != 0) {
+			result.append(packageName);
+			result.append('.');
+		}
+		for(char[] enclosingType: enclosingTypeNames) {
+			result.append(enclosingType);
+			result.append('$');
+		}
+		result.append(simpleTypeName);
+		return result.toString();
+	}
+
 	public static class None implements ITypesProposalProvider.Filter {
 		
 		@Override

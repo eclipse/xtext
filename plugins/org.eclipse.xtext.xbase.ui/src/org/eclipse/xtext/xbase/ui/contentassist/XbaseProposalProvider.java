@@ -7,8 +7,10 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -24,6 +26,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -42,7 +45,10 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -72,6 +78,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -127,6 +134,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private SyntaxFilteredScopes syntaxFilteredScopes;
 	
+	@Inject
+	private IDirtyStateManager dirtyStateManager;
+
+	@SuppressWarnings("restriction")
+	@Inject
+	private IBuilderState index;
+
 	@Override
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -239,7 +253,21 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
-		return new TypeMatchFilters.All(searchFor);
+		return new TypeMatchFilters.All(searchFor, getDirtyStateTypNames());
+	}
+
+	protected Set<String> getDirtyStateTypNames(){
+		Iterable<IEObjectDescription> dirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
+		final Set<String> dirtyNames =Sets.newConcurrentHashSet();
+		for(IEObjectDescription description: dirtyTypes) {
+			dirtyNames.add(description.getQualifiedName().toString());
+			URI uri = description.getEObjectURI().trimFragment();
+			IResourceDescription indexedResourceDescription = index.getResourceDescription(uri);
+			for(IEObjectDescription desc : indexedResourceDescription.getExportedObjects()){
+				dirtyNames.add(desc.getQualifiedName().toString());
+			}
+		}
+		return dirtyNames;
 	}
 	
 	@Override

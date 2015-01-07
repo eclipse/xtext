@@ -162,11 +162,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			return;
 		} 
 		try {
-			Iterable<IEObjectDescription> dirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
-			final Set<String> dirtyNames = Sets.newHashSet();
-			for(IEObjectDescription description: dirtyTypes) {
-				dirtyNames.add(description.getQualifiedName().toString());
-			}
 			final Set<String> superTypeNames = Sets.newHashSet();
 			final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
 			IJavaSearchScope scope = createSearchScope(project, superType, superTypeNames);
@@ -175,16 +170,13 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 						char[][] enclosingTypeNames, String path) {
 					if (path == null || path.endsWith(".class") || path.endsWith(".java")) { // Java index match
-						String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
-						if (dirtyNames.contains(identifier)) { // currently dirty, will be processed later (as path with another extension)
-							return false;
-						}
+						String identifier = TypeMatchFilters.getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
 						if (!superTypeNames.contains(identifier)) {
 							return true;
 						}
 						return false;
 					} else { // accept match from dirty state
-						String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
+						String identifier = TypeMatchFilters.getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
 						if (identifier.equals(superTypeIdentifier)) {
 							return true;
 						}
@@ -194,20 +186,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						}
 						return false;
 					}
-				}
-				
-				protected String getIdentifier(char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames) {
-					StringBuilder result = new StringBuilder(packageName.length + simpleTypeName.length + 1);
-					if (packageName.length != 0) {
-						result.append(packageName);
-						result.append('.');
-					}
-					for(char[] enclosingType: enclosingTypeNames) {
-						result.append(enclosingType);
-						result.append('$');
-					}
-					result.append(simpleTypeName);
-					return result.toString();
 				}
 				
 				@Override
