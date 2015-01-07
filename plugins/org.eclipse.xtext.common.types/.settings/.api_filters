@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types" version="2">
     <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
-        <filter id="403804204">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
-                <message_argument value="getJvmCustomAnnotationValue_Values()"/>
-            </message_arguments>
-        </filter>
         <filter comment="changed return type of values" id="405901410">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
-                <message_argument value="getJvmCustomAnnotationValue_Values()"/>
-            </message_arguments>
-        </filter>
-        <filter id="1211105284">
-            <message_arguments>
                 <message_argument value="getJvmCustomAnnotationValue_Values()"/>
             </message_arguments>
         </filter>
