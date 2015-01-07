@@ -139,7 +139,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean suppressLoadInitialization = false;
 	
-	private GenJDKLevel jdkLevel = GenJDKLevel.JDK50_LITERAL;
+	private GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL;
 	
 	private String getLineDelimiter() {
 		return getNaming().getLineDelimiter();
@@ -1002,7 +1002,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 *   <li>"JDK70"</li>
 	 *   <li>"JDK80"</li>
 	 * </ul>
-	 * The default level is "JDK50".
+	 * The default level is "JDK60".
 	 * 
 	 * @since 2.8
 	 */
