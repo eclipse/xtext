@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.terminalrules;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -15,7 +14,7 @@ import com.google.inject.name.Names;
  * Manual modifications go to {org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguageRuntimeModule}
  */
  @SuppressWarnings("all")
-public abstract class AbstractBug297105TestLanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractBug297105TestLanguageRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
 
 	protected Properties properties = null;
 

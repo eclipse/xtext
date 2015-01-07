@@ -6,7 +6,6 @@ package org.eclipse.xtext;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -15,7 +14,7 @@ import com.google.inject.name.Names;
  * Manual modifications go to {org.eclipse.xtext.XtextGrammarTestLanguageRuntimeModule}
  */
  @SuppressWarnings("all")
-public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
