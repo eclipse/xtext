@@ -41,6 +41,7 @@ public interface IOutputConfigurationProvider {
 		/**
 		 * @since 2.8
 		 */
+		@Override
 		public Set<OutputConfiguration> getOutputConfigurations(Resource context) {
 			if (delegate instanceof IContextualOutputConfigurationProvider) {
 				return ((IContextualOutputConfigurationProvider) delegate).getOutputConfigurations(context);

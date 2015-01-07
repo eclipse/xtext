@@ -54,7 +54,6 @@ import org.osgi.service.prefs.BackingStoreException;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.ByteStreams;
-import com.google.common.primitives.Bytes;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
