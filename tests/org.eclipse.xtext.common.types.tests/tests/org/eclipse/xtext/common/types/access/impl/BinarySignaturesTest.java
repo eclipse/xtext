@@ -10,7 +10,6 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.xtext.common.types.access.binary.asm.BinarySignatures;
 import org.eclipse.xtext.common.types.access.binary.asm.BinaryTypeSignature;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
