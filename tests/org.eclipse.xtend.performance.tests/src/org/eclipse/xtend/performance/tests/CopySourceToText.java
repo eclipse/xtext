@@ -32,9 +32,11 @@ public class CopySourceToText implements IWorkflowComponent {
 	private String sourceDirectory;
 	private String targetDirectory;
 	
+	@Override
 	public void preInvoke() {
 	}
 
+	@Override
 	public void invoke(IWorkflowContext ctx) {
 		try {
 			for(String pack: packages) {
@@ -76,6 +78,7 @@ public class CopySourceToText implements IWorkflowComponent {
 		}
 	}
 
+	@Override
 	public void postInvoke() {
 	}
 
