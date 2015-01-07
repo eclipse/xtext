@@ -44,7 +44,7 @@ public class Bug355821Test extends AbstractParticipatingBuilderTest {
 		manifestContent += " org.eclipse.core.runtime\n";
 		manifestContent += "Bundle-ActivationPolicy: lazy\n";
 		// Remove this one implies a change of build.properties
-//		manifestContent += "Bundle-RequiredExecutionEnvironment: J2SE-1.5\n";
+//		manifestContent += "Bundle-RequiredExecutionEnvironment: JavaSE-1.6\n";
 		reset();
 		manifestFile.setContents(new StringInputStream(manifestContent), true, true, monitor());
 		waitForAutoBuild();

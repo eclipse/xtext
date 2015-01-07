@@ -38,7 +38,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		//	// the import section is made up of zero or more import statements (* == 0..n) 
 		//	imports+=Import* // followed by any number of Entity declarations
 		//	entities+=Entity*;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//("package" name=QualifiedName)? // we start with an optional package declaration (? == optional)
 		//// the import section is made up of zero or more import statements (* == 0..n) 
@@ -84,7 +84,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		// * The framework automatically treats properties with the name 'importedNamespace' as imports. 
 		// * / Import:
 		//	"import" importedNamespace=QualifiedName;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"import" importedNamespace=QualifiedName
 		public Group getGroup() { return cGroup; }
@@ -118,7 +118,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		// * Entities may have a super type and they may define properties.
 		// * / Entity:
 		//	"entity" name=ValidID ("extends" superType=JvmTypeReference)? "{" features+=Property* "}";
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//"entity" name=ValidID ("extends" superType=JvmTypeReference)? "{" features+=Property* "}"
 		public Group getGroup() { return cGroup; }
@@ -170,7 +170,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		// * Properties are basically a pair of a name and a reference to a type.
 		// * / Property:
 		//	name=ValidID ":" type=JvmTypeReference;
-		public ParserRule getRule() { return rule; }
+		@Override public ParserRule getRule() { return rule; }
 
 		//name=ValidID ":" type=JvmTypeReference
 		public Group getGroup() { return cGroup; }
@@ -228,7 +228,7 @@ public class TutorialGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}

@@ -46,16 +46,16 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
     public void setLocalStorage(final IStorage derivedResource) {
       super.setLocalStorage(derivedResource);
     }
-
+    
     public URI resolvePath(final IProject project, final URI path) {
       return super.resolvePath(project, path);
     }
-
+    
     public URI resolvePath(final URI path) {
       return super.resolvePath(path);
     }
   }
-
+  
   @Inject
   @Extension
   private WorkbenchTestHelper helper;
@@ -140,7 +140,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testDecodeURI() {
     try {

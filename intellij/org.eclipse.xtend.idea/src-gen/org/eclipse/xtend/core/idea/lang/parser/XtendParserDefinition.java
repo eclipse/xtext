@@ -52,8 +52,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getAnnotationField_XtendClassAnnotationInfoAction_2_1_0ElementType()) {
@@ -79,8 +79,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getFile_XtendTypesTypeParserRuleCall_2_0ElementType()) {
@@ -104,8 +104,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_XtendMemberAction_0ElementType()) {
@@ -121,8 +121,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_XtendInterfaceAnnotationInfoAction_2_4_0ElementType()) {
@@ -138,8 +138,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_ParametersParameterParserRuleCall_2_2_5_1_1_0ElementType()) {
@@ -165,8 +165,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_ParametersParameterParserRuleCall_2_1_6_1_1_0ElementType()) {
@@ -177,14 +177,6 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 		if (elementType == elementTypeProvider.getMember_MembersXtendEnumLiteralParserRuleCall_2_5_5_0_0ElementType()) {
 			return new PsiNamedEObjectImpl(node,
 				elementTypeProvider.getXtendEnumLiteral_NameValidIDParserRuleCall_0ElementType()
-			);
-		}
-		if (elementType == elementTypeProvider.getType_XtendInterfaceAnnotationInfoAction_2_1_0ElementType()) {
-			return new PsiNamedEObjectImpl(node,
-				elementTypeProvider.getType_NameValidIDParserRuleCall_2_2_3_0ElementType(),
-				elementTypeProvider.getType_NameValidIDParserRuleCall_2_0_3_0ElementType(),
-				elementTypeProvider.getType_NameValidIDParserRuleCall_2_1_3_0ElementType(),
-				elementTypeProvider.getType_NameValidIDParserRuleCall_2_3_3_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_XtendAnnotationTypeAnnotationInfoAction_2_6_0ElementType()) {
@@ -200,8 +192,16 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
+			);
+		}
+		if (elementType == elementTypeProvider.getType_XtendInterfaceAnnotationInfoAction_2_1_0ElementType()) {
+			return new PsiNamedEObjectImpl(node,
+				elementTypeProvider.getType_NameValidIDParserRuleCall_2_2_3_0ElementType(),
+				elementTypeProvider.getType_NameValidIDParserRuleCall_2_0_3_0ElementType(),
+				elementTypeProvider.getType_NameValidIDParserRuleCall_2_1_3_0ElementType(),
+				elementTypeProvider.getType_NameValidIDParserRuleCall_2_3_3_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_ParametersParameterParserRuleCall_2_1_6_0_0ElementType()) {
@@ -232,8 +232,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getAnnotationField_MembersXtendEnumLiteralParserRuleCall_2_3_5_1_1_0ElementType()) {
@@ -254,8 +254,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_XtendEnumAnnotationInfoAction_2_5_0ElementType()) {
@@ -271,8 +271,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getAnnotationField_XtendEnumAnnotationInfoAction_2_3_0ElementType()) {
@@ -303,8 +303,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getRichStringForLoop_DeclaredParamJvmFormalParameterParserRuleCall_2_0ElementType()) {
@@ -363,8 +363,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getType_XtendEnumAnnotationInfoAction_2_2_0ElementType()) {
@@ -411,8 +411,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getMember_MembersMemberParserRuleCall_2_4_7_0ElementType()) {
@@ -428,8 +428,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getAnnotationField_XtendFieldAnnotationInfoAction_2_0_0_0_0ElementType()) {
@@ -475,8 +475,8 @@ public class XtendParserDefinition extends XbaseWithAnnotationsParserDefinition 
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_1_3_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_0_2_3_1_0ElementType(),
 				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_3_3_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType(),
-				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType()
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_6_3_0ElementType(),
+				elementTypeProvider.getMember_NameValidIDParserRuleCall_2_1_5_0_0_2_0ElementType()
 			);
 		}
 		if (elementType == elementTypeProvider.getXSwitchExpression_DeclaredParamJvmFormalParameterParserRuleCall_2_1_0_0_0_0ElementType()) {
