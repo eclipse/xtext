@@ -72,6 +72,7 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.EagerResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.tasks.ITaskTagProvider;
@@ -91,6 +92,7 @@ import org.eclipse.xtext.xbase.imports.TypeUsageCollector;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelTargetURICollector;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade;
 import org.eclipse.xtext.xbase.scoping.batch.ConstructorScopes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
@@ -262,10 +264,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		binder.bind(IResourceDescriptions.class).to(EagerResourceSetBasedResourceDescriptions.class);
 	}
 
-	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
-		return JavaIOFileSystemSupport.class;
-	}
-
 	public Class<? extends IDValueConverter> bindIDValueConverter() {
 		return JavaIDValueConverter.class;
 	}
@@ -361,4 +359,11 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendTokenSourceProvider.class;
 	}
 	
+	public Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {
+		return BatchLinkableResourceStorageFacade.class;
+	}
+	
+	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
+		return JavaIOFileSystemSupport.class;
+	}
 }
