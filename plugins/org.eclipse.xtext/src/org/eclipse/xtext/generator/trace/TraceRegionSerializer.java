@@ -22,7 +22,6 @@ import com.google.common.collect.Lists;
 
 /**
  * @noextend This interface is not intended to be extended by clients.
- * @noimplement This interface is not intended to be implemented by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TraceRegionSerializer {
