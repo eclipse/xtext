@@ -2744,6 +2744,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def bar() {");
@@ -2791,6 +2792,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def bar() {");
@@ -2838,6 +2840,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("def bar() {");
