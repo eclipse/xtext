@@ -91,6 +91,7 @@ public enum Modifier {
 	
 	/**
 	 * The extension modifier, can be present on {@link FieldDeclaration fields}
+	 * @since 2.8
 	 */
 	EXTENSION,
 }
