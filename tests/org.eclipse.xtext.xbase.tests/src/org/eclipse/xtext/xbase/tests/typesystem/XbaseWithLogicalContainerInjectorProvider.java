@@ -35,7 +35,6 @@ public class XbaseWithLogicalContainerInjectorProvider extends XbaseInjectorProv
 
 	public static class XbaseWithLogicalContainerRuntimeModule extends XbaseTestRuntimeModule {
 
-		@Override
 		public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
 			return LogicalContainerAwareBatchTypeResolver.class; 
 		}
@@ -44,7 +43,6 @@ public class XbaseWithLogicalContainerInjectorProvider extends XbaseInjectorProv
 			return LogicalContainerAwareReentrantTypeResolver.class;
 		}
 		
-		@Override
 		public Class<? extends IResourceValidator> bindIResourceValidator() {
 			return DerivedStateAwareResourceValidator.class;
 		}

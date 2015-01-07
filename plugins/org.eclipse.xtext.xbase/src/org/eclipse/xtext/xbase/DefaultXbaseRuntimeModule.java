@@ -23,18 +23,14 @@ import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
-import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.SeverityConverter;
-import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
@@ -48,25 +44,17 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
-import org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
-import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageFacade;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter;
 import org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseTransientValueService;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
-import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 import org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator;
-import org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 import org.eclipse.xtext.xbase.validation.XbaseDiagnostician;
 import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
@@ -124,7 +112,7 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
 				.annotatedWith(Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-				.to(org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider.class);
+				.to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class);
 	}
 
 	@Override
@@ -211,32 +199,8 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 		binder.bind(ITransientValueService.class).to(XbaseTransientValueService.class);
 	}
 
-	@Override
-	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
-		return JvmLocationInFileProvider.class;
-	}
-
-	public Class<? extends FeatureNameValidator> bindFeatureNameValidator() {
-		return LogicalContainerAwareFeatureNameValidator.class;
-	}
-
-	public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
-		return LogicalContainerAwareBatchTypeResolver.class;
-	}
-
-	public Class<? extends DefaultReentrantTypeResolver> bindDefaultReentrantTypeResolver() {
-		return LogicalContainerAwareReentrantTypeResolver.class;
-	}
-
-	public Class<? extends IResourceValidator> bindIResourceValidator() {
-		return DerivedStateAwareResourceValidator.class;
-	}
-
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return JavaIoFileSystemAccess.class;
 	}
 	
-	public Class<? extends IResourceStorageFacade> bindResourceStorageFacade() {
-		return BatchLinkableResourceStorageFacade.class;
-	}
 }
