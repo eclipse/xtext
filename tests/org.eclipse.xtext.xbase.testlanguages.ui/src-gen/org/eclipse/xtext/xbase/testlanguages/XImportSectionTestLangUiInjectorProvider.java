@@ -9,6 +9,7 @@ import com.google.inject.Injector;
 
 public class XImportSectionTestLangUiInjectorProvider implements IInjectorProvider {
 	
+	@Override
 	public Injector getInjector() {
 		return org.eclipse.xtext.xbase.testlanguages.ui.internal.XImportSectionTestLangActivator.getInstance().getInjector("org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLang");
 	}

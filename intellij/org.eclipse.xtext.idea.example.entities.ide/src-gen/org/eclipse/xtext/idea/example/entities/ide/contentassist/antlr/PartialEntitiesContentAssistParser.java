@@ -20,6 +20,7 @@ public class PartialEntitiesContentAssistParser extends EntitiesParser implement
 
 	private AbstractRule rule;
 
+	@Override
 	public void initializeFor(AbstractRule rule) {
 		this.rule = rule;
 	}

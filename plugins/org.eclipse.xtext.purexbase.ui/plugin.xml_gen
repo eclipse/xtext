@@ -601,5 +601,11 @@
             extensions="xbase">
     </provider>
   </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="xbase"
+            type="text">
+    </fileTypes>
+  </extension>
 
 </plugin>

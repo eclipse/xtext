@@ -8,6 +8,7 @@ import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class EntitiesAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	
+	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/idea/example/entities/parser/antlr/internal/InternalEntities.tokens");

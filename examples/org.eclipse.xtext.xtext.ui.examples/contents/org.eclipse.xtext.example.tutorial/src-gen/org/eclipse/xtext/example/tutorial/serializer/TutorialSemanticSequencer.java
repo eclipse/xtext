@@ -71,6 +71,7 @@ public class TutorialSemanticSequencer extends XbaseSemanticSequencer {
 	@Inject
 	private TutorialGrammarAccess grammarAccess;
 	
+	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TutorialPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TutorialPackage.DOMAIN_MODEL_FILE:
