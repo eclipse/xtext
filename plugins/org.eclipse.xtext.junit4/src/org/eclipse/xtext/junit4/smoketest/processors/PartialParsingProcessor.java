@@ -30,28 +30,33 @@ import com.google.inject.Inject;
  */
 public class PartialParsingProcessor extends DeltaScenarioProcessor {
 
+	private static final String DELIM = "\n----------------------\n";
+	
 	@Inject private IParser parser;
 	
 	@Override
 	public String processFile(String completeData, String data, int offset, int len, String change) throws Exception {
 		IParseResult initialParseResult = parser.parse(new StringReader(data));
-		IParseResult reparsed = parser.reparse(initialParseResult, new ReplaceRegion(offset, len, change));
-		
 		String newData = applyDelta(data, offset, len, change);
-		IParseResult parsedFromScratch = parser.parse(new StringReader(newData));
-		assertEqual(data, newData, parsedFromScratch, reparsed);
-		return newData;
+		ReplaceRegion replaceRegion = new ReplaceRegion(offset, len, change);
+		try {
+			IParseResult reparsed = parser.reparse(initialParseResult, replaceRegion);
+		
+			IParseResult parsedFromScratch = parser.parse(new StringReader(newData));
+			assertEqual(data, newData, parsedFromScratch, reparsed);
+			return newData;
+		} catch(Throwable e) {
+			ComparisonFailure throwMe = new ComparisonFailure(e.getMessage(), newData, replaceRegion + DELIM + data);
+			throwMe.initCause(e);
+			throw throwMe;
+		}
 	}
 
 	private void assertEqual(String data, String newData, IParseResult parsedFromScratch, IParseResult reparsed) {
 		EObject rootFromScratch = parsedFromScratch.getRootASTElement();
 		EObject rootReparsed = reparsed.getRootASTElement();
 		assertEqual(data, newData, EmfFormatter.objToStr(rootFromScratch), EmfFormatter.objToStr(rootReparsed));
-		try {
-			assertEqual(data, newData, parsedFromScratch.getRootNode(), reparsed.getRootNode());
-		} catch (AssertionError e) {
-			throw new ComparisonFailure(e.getMessage(), newData, data);
-		}
+		assertEqual(data, newData, parsedFromScratch.getRootNode(), reparsed.getRootNode());
 	}
 	
 	private void assertEqual(String data, String newData, ICompositeNode fromScratch, ICompositeNode reparsed) {
@@ -81,8 +86,7 @@ public class PartialParsingProcessor extends DeltaScenarioProcessor {
 
 	private void assertEqual(String data, String newData, String parsedFromScratch, String reparsed) {
 		if (!parsedFromScratch.equals(reparsed)) {
-			String delim = "\n----------------------\n";
-			throw new ComparisonFailure("Parsed EObjects are not equal", newData + delim + parsedFromScratch, data + delim + reparsed);
+			throw new ComparisonFailure("Parsed EObjects are not equal", newData + DELIM + parsedFromScratch, data + DELIM + reparsed);
 		}
 	}
 
