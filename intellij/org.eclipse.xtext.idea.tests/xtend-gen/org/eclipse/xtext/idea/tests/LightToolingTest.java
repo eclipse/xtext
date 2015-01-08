@@ -21,6 +21,7 @@ import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase;
 import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
+import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -92,7 +93,8 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected PsiFile configureByText(final String code) {
-    return this.myFixture.configureByText(this.fileType, code);
+    String _unix = LineDelimiters.toUnix(code);
+    return this.myFixture.configureByText(this.fileType, _unix);
   }
   
   protected LookupElement[] complete(final String text) {
