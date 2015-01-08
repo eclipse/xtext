@@ -1,0 +1,280 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Http Routing Language</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="httpRouting"></a>
+<h1>Http Routing Language</h1>
+<p>
+This is a little language that lets you dispatch incoming HTTP requests.
+</p>
+<p>
+<div class="image" >
+<img src="images/httprouting_screenshot.png" 
+/>
+<div class="caption">
+</div>
+</div>
+</p>
+<a name="routing_solution"></a>
+<h2>Overview</h2>
+<p>
+For server-side web development one needs to match any incoming HTTP requests to some handling code. A request
+is defined by a HTTP method (i.e. GET, POST, etc.), a URL and maybe some other data (headers, parameters,
+etc.). In the Java world there are many different solutions to this problem. Java Servlets come with an external 
+configuration (web.xml), where you configure what servlet should be called for which URLs. JAX-RS (JSR-311) uses 
+annotations to match incoming URLs and other frameworks have their own external DSLs for that.
+</p>
+<p>
+The HTTP routing language explained in this section uses an approach very similar to the one from the
+<a href="http://playframework.org">Play framework</a>. You basically declare a list of URL patterns and explain
+what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare
+so called dependencies which are translated to fields annotated with <span class="inlinecode">@Inject</span>. So this DSL plays
+nicely with dependency injection and especially with the <a href="Guice.html#guice" title="Go to &quot;DSL for Guice&quot;">Guice modules DSL</a>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">inject</span>&nbsp;GuessTheNumber&nbsp;controller<br/>
+<br/>
+<span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)
+</p>
+</div>
+</div>
+</p>
+<p>
+As you can see, you can have named variable placeholders in the URL and use them in the <span class="inlinecode"><span class="keyword">do</span></span>-part.
+There also is a <span class="inlinecode"><span class="keyword">when</span></span>-part which allows to specify an additional condition using the request object
+as well as any parameters:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">inject</span>&nbsp;GuessTheNumber&nbsp;controller<br/>
+<br/>
+<span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
+&nbsp;&nbsp;<span class="keyword">when</span>&nbsp;!controller.isValidGuess(theGuess)<br/>
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleWrongRange(theGuess)<br/>
+<br/>
+<span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)
+</p>
+</div>
+</div>
+</p>
+<a name="routing_running"></a>
+<h2>Running the Example</h2>
+<p>
+The example project&apos;s name is <em>org.xtext.httprouting.examples</em> and includes a simple but runnable number
+guessing game. Just start the server (an embedded Jetty) by running <span class="inlinecode">framework.StartServer</span> as a
+Java Application. Then point your browser to the URL <a href="http://localhost:8080/guess">http://localhost:8080/guess</a>.
+</p>
+<a name="routing_grammar"></a>
+<h2>Grammar</h2>
+<p>
+The Routing DSL extends <em>org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations</em> to make use of expressions
+predefined by <a href="documentation.html#xbaseExpressions">Xbase</a> plus support for Annotations.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.xtext.httprouting.Route&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;route&nbsp;<span class="string">"http://www.xtext.org/httprouting/Route"</span><br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types<br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span>&nbsp;<span class="keyword">as</span>&nbsp;xbase<br/>
+<br/>
+Model&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;importSection=XImportSection?<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;declarations+=AbstractDeclaration*;<br/>
+<br/>
+AbstractDeclaration&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Dependency&nbsp;|&nbsp;Route;<br/>
+<br/>
+Dependency&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;inject&apos;</span>&nbsp;annotations+=XAnnotation?&nbsp;type=JvmTypeReference&nbsp;name=ID;<br/>
+<br/>
+Route&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;requestType=RequestType&nbsp;url=URL&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;when&apos;</span>&nbsp;condition=XExpression)?&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;do&apos;</span>&nbsp;call=XExpression;<br/>
+<br/>
+<span class="keyword">enum</span>&nbsp;RequestType&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;GET&nbsp;|&nbsp;POST&nbsp;|&nbsp;PUT&nbsp;|&nbsp;DELETE&nbsp;|&nbsp;HEAD;<br/>
+<br/>
+<span class="comment">/**<br/>
+&nbsp;*&nbsp;matches&nbsp;URLs&nbsp;like&nbsp;<br/>
+&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;/foo/bar.html&apos;&nbsp;or&nbsp;<br/>
+&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;/customer/:customerID/save&apos;<br/>
+&nbsp;*/</span><br/>
+URL&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{URL}&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;<span class="string">&apos;/&apos;</span>&nbsp;|&nbsp;(<span class="string">&apos;/&apos;</span>&nbsp;(QualifiedName&nbsp;|&nbsp;variables+=Variable))*&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;/&apos;</span>&nbsp;variables+=Variable&nbsp;wildcard?=<span class="string">&apos;*&apos;</span>)?);<br/>
+<br/>
+Variable&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;name=ID;
+</p>
+</div>
+</div>
+</p>
+<p>
+There should not be any surprises if you know the grammar language: A <em>Model</em> consists of
+an <em>XImportSection</em> followed by any number of <em>Dependencies</em> and <em>Routes</em>. A <em>Route</em> starts with a <em>RequestType</em>,
+i.e. HTTP method, followed by a <em>URL</em> pattern. Then an optional when-clause can be specified followed by
+a mandatory do-clause.
+</p>
+<a name="routing_inferrer"></a>
+<h2>Translation to Java</h2>
+<p>
+In <abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer" >RouteJvmModelInferrer</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend" title="View Source Code" >(src)</a> you can see that a Java class 
+extending the class <a class="jdoc" href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html" title="View JavaDoc"><abbr title="javax.servlet.http.HttpServlet" >HttpServlet</abbr></a> is derived.
+First the <em>Dependencies</em> are translated to Java fields. This is almost a one-to-one mapping.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;translate&nbsp;the&nbsp;dependencies&nbsp;to&nbsp;fields&nbsp;annotated&nbsp;with&nbsp;@Inject<br/>
+</span><span class="keyword">for</span>&nbsp;(field&nbsp;:&nbsp;model.declarations.filter(Dependency))&nbsp;{<br/>
+&nbsp;&nbsp;members&nbsp;+=&nbsp;field.toField(field.name,&nbsp;field.type)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;annotations&nbsp;+=&nbsp;annotationRef(Inject)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addAnnotations(field.annotations)<br/>
+&nbsp;&nbsp;]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Next up a field for the <em>URL</em> patterns is generated and a method for the used expressions, such giving them
+a proper scope and context.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;declare&nbsp;fields&nbsp;for&nbsp;the&nbsp;URL&nbsp;regexp,&nbsp;a&nbsp;method&nbsp;for&nbsp;each&nbsp;when-part&nbsp;<br/>
+</span><span class="comment">//&nbsp;and&nbsp;of&nbsp;course&nbsp;the&nbsp;call&nbsp;part&nbsp;of&nbsp;a&nbsp;route<br/>
+</span><span class="keyword">for</span>&nbsp;(route&nbsp;:&nbsp;model.routes.filter[&nbsp;url&nbsp;!=&nbsp;null&nbsp;])&nbsp;{<br/>
+&nbsp;&nbsp;members&nbsp;+=&nbsp;route.toRoutePatternField<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(route.condition&nbsp;!=&nbsp;null)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;members&nbsp;+=&nbsp;route.toRouteConditionMethod<br/>
+&nbsp;&nbsp;members&nbsp;+=&nbsp;route.toRouteCallMethod<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that the code in a model inferrer has to be very defensive, because it is called for any kind of
+broken models. You just cannot assume that the URL is set although it is mandatory in the grammar, because
+the user might have written syntactically incorrect code.
+</p>
+<p>
+Next up the handler methods from <a class="jdoc" href="http://docs.oracle.com/javaee/5/api/javax/servlet/http/HttpServlet.html" title="View JavaDoc"><abbr title="javax.servlet.http.HttpServlet" >HttpServlet</abbr></a> are implemented such that they
+dispatch according the URL patterns and when-clauses. Here is a translated example:
+</p>
+<p>
+<table>
+<tr>
+<td>
+DSL
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;com.acme.GuessTheNumber<br/>
+<br/>
+<span class="keyword">inject</span>&nbsp;GuessTheNumber&nbsp;controller<br/>
+<br/>
+<span class="keyword">GET</span>&nbsp;/guess/:theGuess<br/>
+&nbsp;&nbsp;<span class="keyword">do</span>&nbsp;controller.handleGuess(theGuess)
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+Java
+</td>
+<td>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@SuppressWarnings(<span class="string">"serial"</span>)<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;NumberGuessing&nbsp;<span class="keyword">extends</span>&nbsp;HttpServlet&nbsp;{<br/>
+&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;GuessTheNumber&nbsp;controller;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span>&nbsp;Pattern&nbsp;_pattern2&nbsp;=&nbsp;Pattern.compile(<span class="string">"/guess/(\\w+)"</span>);<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;_doGet2(<span class="keyword">final</span>&nbsp;HttpServletRequest&nbsp;request,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span>&nbsp;HttpServletResponse&nbsp;response,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;theGuess)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.controller.handleGuess(theGuess);<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;doGet(<span class="keyword">final</span>&nbsp;HttpServletRequest&nbsp;request,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">final</span>&nbsp;HttpServletResponse&nbsp;response)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;url&nbsp;=&nbsp;&nbsp;request.getRequestURL().toString();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Matcher&nbsp;_matcher&nbsp;=&nbsp;_pattern2.matcher(url);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(_matcher.find())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;theGuess&nbsp;=&nbsp;_matcher.group(1);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_doGet2(request,&nbsp;response,&nbsp;theGuess);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</p>
+<p>
+As you can see the expression <span class="inlinecode">controller.handleGuess(theGuess)</span> is put into a method with
+three parameters. This is done in the following method from <abbr title="org.xtext.httprouting.jvmmodel.RouteJvmModelInferrer" >RouteJvmModelInferrer</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.httprouting/src/org/xtext/httprouting/jvmmodel/RouteJvmModelInferrer.xtend" title="View Source Code" >(src)</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">/**<br/>
+&nbsp;*&nbsp;Creates&nbsp;a&nbsp;method&nbsp;for&nbsp;the&nbsp;route&apos;s&nbsp;target&nbsp;call.<br/>
+&nbsp;*&nbsp;Gives&nbsp;scope&nbsp;and&nbsp;live&nbsp;to&nbsp;the&nbsp;expression.<br/>
+&nbsp;*/</span><br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">protected</span>&nbsp;toRouteCallMethod(Route&nbsp;route)&nbsp;{<br/>
+&nbsp;&nbsp;route.toMethod(route.nameOfRouteMethod,&nbsp;typeRef(Void.TYPE))&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;route.toParameter(<span class="string">"request"</span>,&nbsp;&nbsp;typeRef(HTTP_REQUEST))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;route.toParameter(<span class="string">"response"</span>,&nbsp;typeRef(HTTP_RESPONSE))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(variable&nbsp;:&nbsp;route.url.variables)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parameters&nbsp;+=&nbsp;variable.toParameter(variable.name,&nbsp;typeRef(String))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;route.call<br/>
+&nbsp;&nbsp;]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Just because of that code you can now refer to the local variables <span class="inlinecode">request</span>, <span class="inlinecode">response</span>, and
+<span class="inlinecode">theGuess</span>. Also it defines that the expected type is <span class="inlinecode"><span class="keyword">void</span></span> so you are not allowed to
+write thing like <span class="inlinecode">return&nbsp;42</span>. 
+</p>
+</body>
+</html>

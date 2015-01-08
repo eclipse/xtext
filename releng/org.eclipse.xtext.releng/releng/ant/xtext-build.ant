@@ -15,7 +15,7 @@
 
 	<property name="WORKSPACE" location="${user.home}/hudsonbuild/tmf-xtext-head/" />
 	<property name="build.root" location="${WORKSPACE}/buildroot" />
-	<property name="checkout.location" location="/Users/dhuebner/git/xtext-master" />
+	<property name="checkout.location" location="/Users/dhuebner/git/org.eclipse.xtext-master" />
 	<!-- Debug session suspend on start? -->
 	<property name="suspend.debug" value="n" />
 
