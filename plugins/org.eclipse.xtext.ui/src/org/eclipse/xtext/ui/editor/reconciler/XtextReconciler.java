@@ -173,7 +173,7 @@ public class XtextReconciler extends Job implements IReconciler {
 			try {
 				document.removePositionCategory(XTEXT_TEMPLATE_POS_CATEGORY);
 			} catch (BadPositionCategoryException e) {
-				log.error(e.getMessage(), e);
+				log.debug(e.getMessage(), e);
 			}
 			resume();
 		}
