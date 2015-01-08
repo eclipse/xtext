@@ -204,12 +204,15 @@ public abstract class AbstractOutlineNode implements IOutlineNode, IOutlineNode.
 			return getDocument().readOnly(new IUnitOfWork<T, XtextResource>() {
 				@Override
 				public T exec(XtextResource state) throws Exception {
-					EObject eObject;
-					if (state.getResourceSet() != null)
-						eObject = state.getResourceSet().getEObject(getEObjectURI(), true);
-					else
-						eObject = state.getEObject(getEObjectURI().fragment());
-					return work.exec(eObject);
+					if (state != null) {
+						EObject eObject;
+						if (state.getResourceSet() != null)
+							eObject = state.getResourceSet().getEObject(getEObjectURI(), true);
+						else
+							eObject = state.getEObject(getEObjectURI().fragment());
+						return work.exec(eObject);
+					}
+					return null;
 				}
 
 			});
