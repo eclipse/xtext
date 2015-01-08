@@ -81,7 +81,12 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 		if (rightNode == null) {
 			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
-		String originalText = oldRootNode.getText().substring(leftNode.getTotalOffset(), rightNode.getTotalEndOffset());
+		while(leafNodes.hasNext()) {
+			if (leafNodes.next().getSyntaxErrorMessage() != null) {
+				return fullyReparse(parser, previousParseResult, changedRegion);
+			}
+		}
+		String originalText = oldRootNode.getText().substring(leftNode.getTotalOffset());
 		StringBuilder newTextBuilder = new StringBuilder(originalText);
 		changedRegion.shiftBy(-leftNode.getTotalOffset()).applyTo(newTextBuilder);
 		String newText = newTextBuilder.toString();
@@ -89,7 +94,9 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 			// nothing to do
 			return previousParseResult;
 		}
-		if (!isSameTokenSequence(originalText, newText)) {
+		int originalLength = rightNode.getTotalEndOffset() - leftNode.getTotalOffset();
+		int expectedLength = originalLength - changedRegion.getLength() + changedRegion.getText().length();
+		if (!isSameTokenSequence(originalText.substring(0, originalLength), newText, expectedLength)) {
 			// different token sequence, cannot perform a partial parse run
 			return fullyReparse(parser, previousParseResult, changedRegion);
 		}
@@ -210,18 +217,20 @@ public class XtendPartialParsingHelper implements IPartialParsingHelper {
 		return newParseResult;
 	}
 	
-	private boolean isSameTokenSequence(String originalText, String newText) {
+	private boolean isSameTokenSequence(String originalText, String newText, int expectedLength) {
 		try {
 			InternalFlexer originalSequence = flexerFactory.createFlexer(new StringReader(originalText));
 			InternalFlexer newSequence = flexerFactory.createFlexer(new StringReader(newText));
 			int token = originalSequence.advance();
+			int newLength = 0;
 			while(token != Token.EOF) {
 				if (token != newSequence.advance()) {
 					return false;
 				}
+				newLength += newSequence.getTokenLength();
 				token = originalSequence.advance();
 			}
-			return newSequence.advance() == Token.EOF;
+			return newLength == expectedLength;
 		} catch(IOException e) {
 			throw new RuntimeException(e);
 		}

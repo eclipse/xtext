@@ -743,6 +743,37 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtEnd(model, 'e', "Smoke.xtend");
 	}
 	
+	@Test public void testSmokeTestFailure_05() throws Exception {
+		String model = 
+				"class C {\n" + 
+				"	def m() {\n" + 
+				"		val d = new D() {\n" + 
+				"			/** comment */\n" + 
+				"			final def op1() {\n" + 
+				"			}\n" + 
+				"			public def op2() {\n" + 
+				"			}\n" + 
+				"			private def op3() {\n" + 
+				"			}\n" + 
+				"			override toString() {\n" + 
+				"			''\n" + 
+				"			}\n" + 
+				"		}\n" + 
+				"		d.op1\n" + 
+				"		d\n" + 
+				"	}\n" + 
+				"	static class D {\n" + 
+				"	}\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 168, 1, "\t", "Smoke.xtend");
+	}
+	
+	@Test public void testSmokeTestFailure_06() throws Exception {
+		String model = 
+				"package generics class Bar {	def <T extends (Object)=>T> T bar(T t) { 		bar(apply(bar(t))	}}";
+		doTestUpdateAtOffset(model, 76, 1, "t", "Smoke.xtend");
+	}
+	
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
