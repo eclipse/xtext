@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Java Interoperability</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="Xtend.html" title="">
+</head>
+<body>
+<a name="types"></a>
+<h1>Java Interoperability</h1>
+<p>
+Xtend, like Java, is a statically typed language. In fact it completely supports Java&apos;s type system, including the primitive types 
+like <span class="inlinecode"><span class="keyword">int</span></span> or <span class="inlinecode"><span class="keyword">boolean</span></span>, arrays and all the Java classes, interfaces, enums and annotations that reside on the 
+class path.  
+</p>
+<p>
+Java generics are fully supported as well: You can define type parameters on methods and classes and pass type arguments to
+generic types just as you are used to from Java. The type system and its conformance and casting rules are implemented as
+defined in  
+<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html">the Java Language Specification</a>.
+</p>
+<a name="localTypeInference"></a>
+<h2>Type Inference</h2>
+<p>
+One of the problems with Java is that you are forced to write type signatures over
+and over again. That is why so many people do not like static typing. 
+But this is in fact not a problem of static typing but simply a problem with Java. Although Xtend is statically typed
+just like Java, you rarely have to write types down because they can be computed from the context.
+</p>
+<a name="conversionRules"></a>
+<h2>Conversion Rules</h2>
+<p>
+In addition to Java&apos;s autoboxing to convert primitives to their corresponding wrapper types (e.g. <span class="inlinecode"><span class="keyword">int</span></span>
+is automatically converted to <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html" title="View JavaDoc"><abbr title="java.lang.Integer" >Integer</abbr></a> when needed), there are additional conversion rules in Xtend.
+</p>
+<p>
+Arrays are automatically converted to <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" ><span class="inlinecode">List&lt;ComponentType&gt;</span></abbr></a> and vice versa. That is you can
+write the following:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;toList(String[]&nbsp;array)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;List&lt;String&gt;&nbsp;asList&nbsp;=&nbsp;array<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;asList<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Subsequent changes to the array are reflected by the list and vice versa. Arrays of primitive types are converted to
+lists of their respective wrapper types.
+</p>
+<p>
+The conversion works the other way round, too. In fact, all subtypes of <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a> are automatically
+converted to arrays on demand.
+</p>
+<p>
+Another very useful conversion applies to lambda expressions. A lambda expression
+usually is of one of the types declared in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a>
+or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>. However, if the expected type is an interface or a class with a single 
+abstract method declaration, a lambda expression is automatically converted to that
+type. This allows to use lambda expressions with many existing Java libraries. See <a href="30-expressions.html#closureTypes" title="Go to &quot;Typing&quot;" >section closureTypes</a>
+for more details. 
+</p>
+<a name="javaInteroperability"></a>
+<h2>Interoperability with Java</h2>
+<p>
+Resembling and supporting every aspect of Java&apos;s type system ensures that there is no impedance mismatch between Java and Xtend.
+This means that Xtend and Java are 100% interoperable. There are no exceptional cases and you do not have
+to think in two worlds. You can invoke Xtend code from Java and vice versa without any surprises or hassles.
+</p>
+<p>
+As a bonus if you know Java&apos;s type system and are familiar with Java&apos;s generic types, you already know the most complicated part
+of Xtend.
+</p>
+</body>
+</html>

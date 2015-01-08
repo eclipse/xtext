@@ -1,0 +1,89 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Hello World</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="Xtend.html" title="">
+</head>
+<body>
+<a name="GettingStarted"></a>
+<h1>Hello World</h1>
+<p>
+The first thing you want to see in any language is a <em>Hello World</em> example. 
+In Xtend, that reads as
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;World"</span>)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+You see that Xtend looks quite similar to Java. At a first glance the main difference seems to be the <span class="inlinecode"><span class="keyword">def</span></span>
+keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
+Admittedly <em>Hello World</em> programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things
+as you will learn in a second.
+</p>
+<p>
+An Xtend class resides in a plain Eclipse Java project. As soon as the SDK is installed, Eclipse will automatically 
+translate all the classes to Java source code. By default you will find it in a source folder <em>xtend-gen</em>.
+The hello world example is translated to the following Java code:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;Generated&nbsp;Java&nbsp;Source&nbsp;Code<br/>
+</span><span class="keyword">import</span>&nbsp;org.eclipse.xtext.xbase.lib.InputOutput;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HelloWorld&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(<span class="keyword">final</span>&nbsp;String[]&nbsp;args)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;InputOutput.&lt;String&gt;println(<span class="string">"Hello&nbsp;World"</span>);<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The only surprising fact in the generated Java code may be the referenced library class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/InputOutput.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.InputOutput" >InputOutput</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/InputOutput.java" title="View Source Code" >(src)</a>. 
+It is part of the runtime library and a nice utility that is quite handy when used in expressions.
+</p>
+<p>
+You can put an Xtend class into a source folder of any Java project within Eclipse or any Maven project. If the project is not
+yet configured properly, Eclipse will complain about the missing library. The xtend.lib has to be on the class path. 
+The IDE will provide a quick fix to add it.
+</p>
+<p>
+The next thing you might want to do is materializing one of the example projects into your workspace.
+Right click anywhere in the <em>Navigator</em> view in Eclipse and select <em>New -&gt; Example...</em>.
+</p>
+<p>
+In the upcoming dialog you will find two examples for Xtend:
+</p>
+<p>
+<ul>
+	<li>
+		<em>Xtend Introductory Examples</em> contains a couple of example code snippets illustrating certain
+		  aspects and strengths of Xtend. 
+		  For instance it shows how to build an API which allows to write code like this:
+		  <span class="inlinecode">assertEquals(42.km/h,&nbsp;(40_000.m&nbsp;+&nbsp;2.km)&nbsp;/&nbsp;60.min)</span>
+		  Also the <a href="14-movies.html#moviesExample" title="Go to &quot;The Movies Example&quot;">movies example</a> explained in detail in <a href="14-movies.html#moviesExample" title="Go to &quot;The Movies Example&quot;">the next section</a>
+		  is included there.
+	</li>
+	<li>
+		<em>Xtend Solutions For Euler</em> contains solutions to some of the problems you will find at <a href="http://projecteuler.net/">Project Euler</a>.
+		   These examples are leveraging the whole expressive power of Xtend. For instance <a href="http://projecteuler.net/problem=1">Euler Problem 1</a> can be solved
+		   with this expression :
+		   <span class="inlinecode">(1..999).filter[&nbsp;i&nbsp;|&nbsp;i&nbsp;%&nbsp;3&nbsp;==&nbsp;0&nbsp;||&nbsp;i&nbsp;%&nbsp;5&nbsp;==&nbsp;0&nbsp;].reduce[&nbsp;i1,&nbsp;i2&nbsp;|&nbsp;i1&nbsp;+&nbsp;i2&nbsp;]</span>
+	</li>
+</ul>
+
+</p>
+</body>
+</html>

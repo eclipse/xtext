@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<toc topic="contents/Xtend.html" label="Xtend User Guide" >
+	<topic href="contents/Xtend_4.html#Xtend%20User%20Guide_4" label="Getting Started" >
+		<topic href="contents/10-introduction.html#Introduction" label="Introduction" >
+		</topic>
+		<topic href="contents/13-hello-world.html#GettingStarted" label="Hello World" >
+		</topic>
+		<topic href="contents/14-movies.html#moviesExample" label="The Movies Example" >
+			<topic href="contents/14-movies.html#moviesExample_2" label="The Data" >
+			</topic>
+			<topic href="contents/14-movies.html#moviesExample_3" label="Parsing The Data" >
+			</topic>
+			<topic href="contents/14-movies.html#moviesExample_4" label="Answering Some Questions" >
+				<topic href="contents/14-movies.html#moviesExample_4_2" label="Question 1 : What Is The Number Of Action Movies?" >
+				</topic>
+				<topic href="contents/14-movies.html#moviesExample_4_3" label="Question 2 : What Is The Year The Best Movie From The 80's Was Released?" >
+				</topic>
+				<topic href="contents/14-movies.html#moviesExample_4_4" label="Question 3 : What Is The The Sum Of All Votes Of The Top Two Movies?" >
+				</topic>
+			</topic>
+		</topic>
+	</topic>
+	<topic href="contents/Xtend_5.html#Xtend%20User%20Guide_5" label="Reference Documentation" >
+		<topic href="contents/15-types.html#types" label="Java Interoperability" >
+			<topic href="contents/15-types.html#localTypeInference" label="Type Inference" >
+			</topic>
+			<topic href="contents/15-types.html#conversionRules" label="Conversion Rules" >
+			</topic>
+			<topic href="contents/15-types.html#javaInteroperability" label="Interoperability with Java" >
+			</topic>
+		</topic>
+		<topic href="contents/20-classes-and-functions.html#Xtend_Classes_Members" label="Classes and Members" >
+			<topic href="contents/20-classes-and-functions.html#packageDecl" label="Package Declaration" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#imports" label="Imports" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#Xtend_ClassDeclaration" label="Class Declaration" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#constructors" label="Constructors" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#fields" label="Fields" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#methods" label="Methods" >
+				<topic href="contents/20-classes-and-functions.html#abstractMethods" label="Abstract Methods" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#methods_8" label="Overriding Methods" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#declaredExceptions" label="Declared Exceptions" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#inferredReturnTypes" label="Inferred Return Types" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#genericMethods" label="Generic Methods" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#operatorDeclaration" label="Operator Declarations" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#polymorphicDispatch" label="Dispatch Methods" >
+					<topic href="contents/20-classes-and-functions.html#polymorphicDispatch_11" label="Dispatch Methods and Inheritance" >
+					</topic>
+					<topic href="contents/20-classes-and-functions.html#polymorphicDispatch_12" label="Static Dispatch Methods" >
+					</topic>
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#CreateMethods" label="Create Methods" >
+					<topic href="contents/20-classes-and-functions.html#CreateMethods_9" label="How it works" >
+					</topic>
+				</topic>
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#Annotations" label="Annotations" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#extensionMethods" label="Extension Methods" >
+				<topic href="contents/20-classes-and-functions.html#libraryExtensions" label="Extensions from the Library" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#extensionMethods_9" label="Local Extension Methods" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#extensionImports" label="Extension Imports" >
+				</topic>
+				<topic href="contents/20-classes-and-functions.html#Extension_Provider" label="Extension Provider" >
+				</topic>
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#interfaces" label="Interface Declaration" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#annotationTypeDeclaration" label="Annotation Type Declaration" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#enumTypeDeclaration" label="Enum Type Declaration" >
+			</topic>
+			<topic href="contents/20-classes-and-functions.html#Nested_Type_Declarations" label="Nested Type Declarations" >
+			</topic>
+		</topic>
+		<topic href="contents/30-expressions.html#Xtend_Expressions" label="Expressions" >
+			<topic href="contents/30-expressions.html#Xtend_Expressions_Literals" label="Literals" >
+				<topic href="contents/30-expressions.html#stringLiterals" label="String Literals" >
+				</topic>
+				<topic href="contents/30-expressions.html#characterLiterals" label="Character Literals" >
+				</topic>
+				<topic href="contents/30-expressions.html#numberLiterals" label="Number Literals" >
+				</topic>
+				<topic href="contents/30-expressions.html#booleanLiteral" label="Boolean Literals" >
+				</topic>
+				<topic href="contents/30-expressions.html#nullLiteral" label="Null Literal" >
+				</topic>
+				<topic href="contents/30-expressions.html#typeLiteral" label="Type Literals" >
+				</topic>
+				<topic href="contents/30-expressions.html#collectionLiterals" label="Collection Literals" >
+				</topic>
+				<topic href="contents/30-expressions.html#arrays" label="Arrays" >
+				</topic>
+			</topic>
+			<topic href="contents/30-expressions.html#typeCasts" label="Type Casts" >
+			</topic>
+			<topic href="contents/30-expressions.html#operators" label="Infix Operators and Operator Overloading" >
+				<topic href="contents/30-expressions.html#operators_4" label="Short-Circuit Boolean Operators" >
+				</topic>
+				<topic href="contents/30-expressions.html#operators_5" label="Postfix Operators" >
+				</topic>
+				<topic href="contents/30-expressions.html#operators_6" label="Defined Operators in The Library" >
+					<topic href="contents/30-expressions.html#operators_6_2" label="Equality Operators" >
+					</topic>
+					<topic href="contents/30-expressions.html#operators_6_3" label="Comparison Operators" >
+					</topic>
+					<topic href="contents/30-expressions.html#operators_6_4" label="Arithmetic Operators" >
+					</topic>
+					<topic href="contents/30-expressions.html#operators_6_5" label="Elvis Operator" >
+					</topic>
+					<topic href="contents/30-expressions.html#operators_6_6" label="With Operator" >
+					</topic>
+					<topic href="contents/30-expressions.html#operators_6_7" label="Range Operators" >
+					</topic>
+					<topic href="contents/30-expressions.html#operators_6_8" label="Pair Operator" >
+					</topic>
+				</topic>
+				<topic href="contents/30-expressions.html#assignments" label="Assignments" >
+					<topic href="contents/30-expressions.html#propertyAssignments" label="Setting Properties" >
+					</topic>
+					<topic href="contents/30-expressions.html#assignmentOperators" label="Assignment Operators" >
+					</topic>
+				</topic>
+			</topic>
+			<topic href="contents/30-expressions.html#blocks" label="Blocks" >
+			</topic>
+			<topic href="contents/30-expressions.html#variableDeclaration" label="Variable Declarations" >
+				<topic href="contents/30-expressions.html#variableDeclaration_7" label="Typing" >
+				</topic>
+			</topic>
+			<topic href="contents/30-expressions.html#featureCalls" label="Field Access and Method Invocation" >
+				<topic href="contents/30-expressions.html#propertyAccess" label="Property Access" >
+				</topic>
+				<topic href="contents/30-expressions.html#implicitVariables" label="Implicit Variables this and it" >
+				</topic>
+				<topic href="contents/30-expressions.html#staticAccess" label="Static Access" >
+				</topic>
+				<topic href="contents/30-expressions.html#nullSafeFeatureCalls" label="Null-Safe Feature Call" >
+				</topic>
+			</topic>
+			<topic href="contents/30-expressions.html#constructorCall" label="Constructor Call" >
+			</topic>
+			<topic href="contents/30-expressions.html#lambdas" label="Lambda Expressions" >
+				<topic href="contents/30-expressions.html#closureTypes" label="Typing" >
+				</topic>
+			</topic>
+			<topic href="contents/30-expressions.html#anonymousClasses" label="Anonymous Classes" >
+			</topic>
+			<topic href="contents/30-expressions.html#ifExpression" label="If Expression" >
+			</topic>
+			<topic href="contents/30-expressions.html#switchExpression" label="Switch Expression" >
+				<topic href="contents/30-expressions.html#switchExpression_6" label="Type guards" >
+				</topic>
+				<topic href="contents/30-expressions.html#switchExpression_7" label="Fall Through" >
+				</topic>
+			</topic>
+			<topic href="contents/30-expressions.html#forLoop" label="For Loop" >
+			</topic>
+			<topic href="contents/30-expressions.html#traditionalForLoop" label="Basic For Loop" >
+			</topic>
+			<topic href="contents/30-expressions.html#whileExpression" label="While Loop" >
+			</topic>
+			<topic href="contents/30-expressions.html#doWhileExpression" label="Do-While Loop" >
+			</topic>
+			<topic href="contents/30-expressions.html#Xtend_Expressions_Return" label="Return Expression" >
+			</topic>
+			<topic href="contents/30-expressions.html#Xtend_Expressions_Throw" label="Throwing Exceptions" >
+			</topic>
+			<topic href="contents/30-expressions.html#Xtend_Expressions_TryCatch" label="Try, Catch, Finally" >
+			</topic>
+			<topic href="contents/30-expressions.html#Xtend_Expressions_Synchronized" label="Synchronized" >
+			</topic>
+			<topic href="contents/30-expressions.html#templates" label="Template Expressions" >
+				<topic href="contents/30-expressions.html#templateIF" label="Conditions in Templates" >
+				</topic>
+				<topic href="contents/30-expressions.html#templateFOREACH" label="Loops in Templates" >
+				</topic>
+				<topic href="contents/30-expressions.html#templateType" label="Typing" >
+				</topic>
+				<topic href="contents/30-expressions.html#WhitespaceHandling" label="White Space Handling" >
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/40-annotations.html#activeAnnotations" label="Active Annotations" >
+			<topic href="contents/40-annotations.html#active_annotations_processor" label="Annotation Processor" >
+				<topic href="contents/40-annotations.html#active_annotations_register_globals" label="Phase 1: Register Globals" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_transformation_phase" label="Phase 2: Transformation" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_validation_phase" label="Phase 3: Validation" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_code_generation" label="Phase 4: Code Generation" >
+				</topic>
+			</topic>
+			<topic href="contents/40-annotations.html#active_annotations_expression" label="On Expressions and Statements" >
+				<topic href="contents/40-annotations.html#active_annotations_compilation_strategies" label="Generating Blackbox Java Code" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_assigning_expressions" label="Assigning Expressions" >
+				</topic>
+			</topic>
+			<topic href="contents/40-annotations.html#active_annotations_validation" label="Custom Compiler Checks" >
+			</topic>
+			<topic href="contents/40-annotations.html#active_annotation_classpath" label="Class Path Setup and Testing" >
+				<topic href="contents/40-annotations.html#active_annotation_CompilerTester" label="Testing" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotation_classpath_8" label="Wrap Up" >
+				</topic>
+			</topic>
+			<topic href="contents/40-annotations.html#activeAnnotations_10" label="Existing Active Annotations" >
+			</topic>
+			<topic href="contents/40-annotations.html#propertyAnnotation" label="@Accessors" >
+			</topic>
+			<topic href="contents/40-annotations.html#dataAnnotation" label="@Data" >
+			</topic>
+			<topic href="contents/40-annotations.html#delegateAnnotation" label="@Delegate" >
+			</topic>
+		</topic>
+	</topic>
+</toc>

@@ -1,0 +1,2048 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Expressions</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="Xtend.html" title="">
+</head>
+<body>
+<a name="Xtend_Expressions"></a>
+<h1>Expressions</h1>
+<p>
+In Xtend everything is an expression and has a return type. Statements do not exist. 
+That allows you to compose your code in interesting ways. For example, you can have a
+<span class="inlinecode"><span class="keyword">try</span>&nbsp;<span class="keyword">catch</span></span> expression on the right hand side of an assignment: 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;data&nbsp;=&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fileContentsToString(<span class="string">&apos;data.txt&apos;</span>)<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;dummy&nbsp;data&apos;</span><br/>
+&nbsp;&nbsp;}
+</p>
+</div>
+</div>
+</p>
+<p>
+If <span class="inlinecode">fileContentsToString()</span> throws an <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/io/IOException.html" title="View JavaDoc"><abbr title="java.io.IOException" >IOException</abbr></a>, it is caught and the string <span class="inlinecode"><span class="string">&apos;dummy&nbsp;data&apos;</span></span> is assigned to the value <span class="inlinecode">data</span>.
+ 
+Expressions can appear as <a href="20-classes-and-functions.html#fields" title="Go to &quot;Fields&quot;">initializers of fields</a>, the body of constructors
+or methods and as values in annotations. A method body can either be a <a href="30-expressions.html#blocks" title="Go to &quot;Blocks&quot;">block expression</a> 
+or a <a href="30-expressions.html#templates" title="Go to &quot;Template Expressions&quot;">template expression</a>.
+</p>
+<a name="Xtend_Expressions_Literals"></a>
+<h2>Literals</h2>
+<p>
+A literal denotes a fixed, unchangeable value. Literals for <a href="30-expressions.html#stringLiterals" title="Go to &quot;String Literals&quot;">strings</a>, <a href="30-expressions.html#numberLiterals" title="Go to &quot;Number Literals&quot;">numbers</a>, <a href="30-expressions.html#booleanLiteral" title="Go to &quot;Boolean Literals&quot;">booleans</a>,
+<span class="inlinecode"><span class="keyword">null</span></span> and <a href="30-expressions.html#typeLiteral" title="Go to &quot;Type Literals&quot;">Java types</a> are supported as well as literals for unmodifiable collection types like lists,
+sets and maps or literals for arrays.
+</p>
+<a name="stringLiterals"></a>
+<h3>String Literals</h3>
+<p>
+A string literal is of type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
+String literals are enclosed in a pair of single quotes or double quotes. Single quotes are more common
+because the signal-to-noise ration is better, but generally you should use the terminals which are
+least likely to occur in the string value. Special characters can be quoted with a backslash or defined using
+unicode notation. Contrary to Java, strings can span multiple lines.
+</p>
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="string">&apos;Hello&nbsp;World&nbsp;!&apos;</span><br/>
+<span class="string">"Hello&nbsp;World&nbsp;!"</span><br/>
+<span class="string">&apos;Hello&nbsp;"World"&nbsp;!&apos;</span><br/>
+<span class="string">"Hello&nbsp;\"World\"&nbsp;!"</span><br/>
+<span class="string">"Hello&nbsp;<br/>
+<br/>
+&nbsp;&nbsp;World&nbsp;!"</span>
+</p>
+</div>
+</div>
+</p>
+<a name="characterLiterals"></a>
+<h3>Character Literals</h3>
+<p>
+Character literals use the same notation as String literals. If a single character literal is used in a context where a primitive <span class="inlinecode"><span class="keyword">char</span></span> or
+the wrapper type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Character.html" title="View JavaDoc"><abbr title="java.lang.Character" >Character</abbr></a> is expected, the compiler will treat the literal as such a value or instance.
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;<span class="keyword">char</span>&nbsp;c&nbsp;=&nbsp;<span class="string">&apos;c&apos;</span></span>
+</p>
+<a name="numberLiterals"></a>
+<h3>Number Literals</h3>
+<p>
+Xtend supports roughly the same number literals as Java with a few differences.   
+First, there are no signed number literals. If you put a minus operator in front of a number 
+literal it is treated as a <a href="30-expressions.html#operators" title="Go to &quot;Infix Operators and Operator Overloading&quot;">unary operator</a> with one argument (the positive number 
+literal). Second, as in Java 7, you can separate digits using <span class="inlinecode">_</span> for better readability
+of large numbers.
+ 
+An integer literal creates an <span class="inlinecode"><span class="keyword">int</span></span>, a <span class="inlinecode"><span class="keyword">long</span></span> (suffix <span class="inlinecode">L</span>) or a
+<a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html" title="View JavaDoc"><abbr title="java.math.BigInteger" >BigInteger</abbr></a> (suffix <span class="inlinecode">BI</span>). There are no octal numbers
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+42<br/>
+1_234_567_890&nbsp;<br/>
+0xbeef&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;hexadecimal<br/>
+</span>077&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;decimal&nbsp;77&nbsp;(*NOT*&nbsp;octal)<br/>
+</span>-1&nbsp;&nbsp;<span class="comment">//&nbsp;an&nbsp;expression&nbsp;consisting&nbsp;of&nbsp;the&nbsp;unary&nbsp;-&nbsp;operator&nbsp;and&nbsp;an&nbsp;integer&nbsp;literal&nbsp;&nbsp;<br/>
+</span>42L<br/>
+0xbeef#L&nbsp;<span class="comment">//&nbsp;hexadecimal,&nbsp;mind&nbsp;the&nbsp;&apos;#&apos;<br/>
+</span>0xbeef_beef_beef_beef_beef#BI&nbsp;<span class="comment">//&nbsp;BigInteger</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+A floating-point literal creates a <span class="inlinecode"><span class="keyword">double</span></span> (suffix <span class="inlinecode">D</span> or none), a <span class="inlinecode"><span class="keyword">float</span></span> 
+(suffix <span class="inlinecode">F</span>) or a <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html" title="View JavaDoc"><abbr title="java.math.BigDecimal" >BigDecimal</abbr></a> (suffix <span class="inlinecode">BD</span>). If you use a <span class="inlinecode">.</span> you have to 
+specify both, the integral and the fractional part of the mantissa. There are only decimal floating-point 
+literals.  
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+42d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;double<br/>
+</span>0.42e2&nbsp;&nbsp;<span class="comment">//&nbsp;implicit&nbsp;double<br/>
+</span>0.42e2f&nbsp;<span class="comment">//&nbsp;float<br/>
+</span>4.2f&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;float<br/>
+</span>0.123_456_789_123_456_789_123_456_789e2000bd&nbsp;<span class="comment">//&nbsp;BigDecimal</span>
+</p>
+</div>
+</div>
+</p>
+<a name="booleanLiteral"></a>
+<h3>Boolean Literals</h3>
+<p>
+There are two boolean literals, <span class="inlinecode"><span class="keyword">true</span></span> and <span class="inlinecode"><span class="keyword">false</span></span> which correspond to their 
+Java counterpart of type <span class="inlinecode"><span class="keyword">boolean</span></span>. 
+</p>
+<a name="nullLiteral"></a>
+<h3>Null Literal</h3>
+<p>
+The null pointer literal <span class="inlinecode"><span class="keyword">null</span></span> has exactly the same semantics as in Java.
+</p>
+<a name="typeLiteral"></a>
+<h3>Type Literals</h3>
+<p>
+The syntax for type literals is generally the plain name of the type, e.g. the snippet <span class="inlinecode">String</span>
+is equivalent to the Java code <span class="inlinecode">String.<span class="keyword">class</span></span>. Nested types use the delimiter <span class="inlinecode"><span class="string">&apos;.&apos;</span></span>.
+</p>
+<p>
+To disambiguate the expression, type literals may also be specified using the keyword <span class="inlinecode"><span class="keyword">typeof</span></span>.
+</p>
+<p>
+<ul>
+	<li>
+		<span class="inlinecode">Map.Entry</span> is equivalent to <span class="inlinecode">Map.Entry.<span class="keyword">class</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">typeof</span>(StringBuilder)</span> yields <span class="inlinecode">StringBuilder.<span class="keyword">class</span></span>
+	</li>
+</ul>
+</p>
+<p>
+Consequently it is possible to access the members of a type reflectively by using its plain name <span class="inlinecode">String.getDeclaredFields</span>.
+</p>
+<p>
+The keyword <span class="inlinecode"><span class="keyword">typeof</span></span> is mandatory for references to array types, e.g. <span class="inlinecode"><span class="keyword">typeof</span>(<span class="keyword">int</span>[]</span>
+</p>
+<p>
+Previous versions of Xtend (2.4.1 and before) used the dollar as the delimiter character for nested types and
+enforced the use of <span class="inlinecode"><span class="keyword">typeof</span></span> for all type literals:
+</p>
+<p>
+<ul>
+	<li>
+		<span class="inlinecode"><span class="keyword">typeof</span>(Map$Entry)</span> yields <span class="inlinecode">Map.Entry.<span class="keyword">class</span></span>
+	</li>
+</ul>
+</p>
+<a name="collectionLiterals"></a>
+<h3>Collection Literals</h3>
+<p>
+The methods in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/CollectionLiterals.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.CollectionLiterals" >CollectionLiterals</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionLiterals.java" title="View Source Code" >(src)</a> are automatically imported so
+it&apos;s very easy and convenient to create instances of the various collection types the JDK offers.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;myList&nbsp;=&nbsp;newArrayList(<span class="string">&apos;Hello&apos;</span>,&nbsp;<span class="string">&apos;World&apos;</span>)<br/>
+<span class="keyword">val</span>&nbsp;myMap&nbsp;=&nbsp;newLinkedHashMap(<span class="string">&apos;a&apos;</span>&nbsp;-&gt;&nbsp;1,&nbsp;<span class="string">&apos;b&apos;</span>&nbsp;-&gt;&nbsp;2)
+</p>
+</div>
+</div>
+</p>
+<p>
+In addition xtend supports collection literals to create immutable collections and arrays, depending on
+the target type. An immutable list can be created like this:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;myList&nbsp;=&nbsp;#[<span class="string">&apos;Hello&apos;</span>,<span class="string">&apos;World&apos;</span>]</span>
+</p>
+<p>
+If the target type is an array as in the following example an array is created instead without any
+conversion:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;String[]&nbsp;myArray&nbsp;=&nbsp;#[<span class="string">&apos;Hello&apos;</span>,<span class="string">&apos;World&apos;</span>]</span>
+</p>
+<p>
+An immutable set can be created using curly braces instead of the squared brackets:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;mySet&nbsp;=&nbsp;#{<span class="string">&apos;Hello&apos;</span>,<span class="string">&apos;World&apos;</span>}</span>
+</p>
+<p>
+An immutable map is created like this:
+ 
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;myMap&nbsp;=&nbsp;#{<span class="string">&apos;a&apos;</span>&nbsp;-&gt;&nbsp;1&nbsp;,<span class="string">&apos;b&apos;</span>&nbsp;-&gt;2}</span>
+</p>
+<a name="arrays"></a>
+<h3>Arrays</h3>
+<p>
+Java arrays can be created either using a <a href="30-expressions.html#collectionLiterals" title="Go to &quot;Collection Literals&quot;">literal</a> as described in the previous
+section, or if it should be a new array with a fixed size, one of the 
+methods from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/ArrayLiterals.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ArrayLiterals" >ArrayLiterals</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ArrayLiterals.java" title="View Source Code" >(src)</a> can be used. The generic <span class="inlinecode">newArrayOfSize(int)</span>
+method works for all reference types, while there is a specific factory method for each primitive type.
+</p>
+<p>
+Example:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;String[]&nbsp;myArray&nbsp;=&nbsp;newArrayOfSize(400)<br/>
+<span class="keyword">val</span>&nbsp;<span class="keyword">int</span>[]&nbsp;intArray&nbsp;=&nbsp;newIntArrayOfSize(400)
+</p>
+</div>
+</div>
+</p>
+<p>
+Retrieving and setting values of arrays is done through the extension methods <span class="inlinecode">get(<span class="keyword">int</span>)</span> and 
+<span class="inlinecode">set(<span class="keyword">int</span>,&nbsp;T)</span> which are specifically overloaded for arrays and are translated directly to the
+equivalent native Java code <span class="inlinecode">myArray[<span class="keyword">int</span>]</span>.
+</p>
+<p>
+Also <span class="inlinecode">length</span> is available as an extension method and is directly translated to Java&apos;s equivalent
+<span class="inlinecode">myArray.length</span>.
+</p>
+<p>
+Furthermore arrays are automatically converted to lists (<span class="inlinecode">java.util.List</span>) when needed. This works similar to how boxing and unboxing between
+primitives and their respective wrapper types work.
+</p>
+<p>
+Example:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;<span class="keyword">int</span>[]&nbsp;myArray&nbsp;=&nbsp;#[1,2,3]<br/>
+<span class="keyword">val</span>&nbsp;List&lt;Integer&gt;&nbsp;myList&nbsp;=&nbsp;myArray
+</p>
+</div>
+</div>
+</p>
+<a name="typeCasts"></a>
+<h2>Type Casts</h2>
+<p>
+A type cast behaves exactly like casts in Java, but has a slightly more readable syntax.
+Type casts bind stronger than any other operator but weaker than feature calls.
+</p>
+<p>
+The conformance rules for casts are defined in the 
+<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/conversions.html#5.5">Java Language Specification</a>.
+Here are some examples:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+something&nbsp;<span class="keyword">as</span>&nbsp;MyClass<br/>
+42&nbsp;<span class="keyword">as</span>&nbsp;Integer
+</p>
+</div>
+</div>
+</p>
+<p>
+Instead of a plain type cast it&apos;s also possible to use a <a href="30-expressions.html#switchExpression" title="Go to &quot;Switch Expression&quot;">switch with a type guard</a> 
+which performs both the casting and the instance-of check. 
+<a href="20-classes-and-functions.html#polymorphicDispatch" title="Go to &quot;Dispatch Methods&quot;">Dispatch methods</a> are another alternative to casts that offers the potential
+to enhance the number of expected and handled types in subclasses.
+</p>
+<a name="operators"></a>
+<h2>Infix Operators and Operator Overloading</h2>
+<p>
+There are a couple of common predefined infix operators. These operators are not limited
+to operations on certain types. Instead an operator-to-method mapping allows to redefine the 
+operators for any type just by implementing the corresponding method signature. As an example, the 
+runtime library contains a class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.BigDecimalExtensions" >BigDecimalExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BigDecimalExtensions.java" title="View Source Code" >(src)</a> that defines operators for 
+<a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html" title="View JavaDoc"><abbr title="java.math.BigDecimal" >BigDecimals</abbr></a>. The following code is therefore perfectly valid:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;x&nbsp;=&nbsp;2.71BD<br/>
+<span class="keyword">val</span>&nbsp;y&nbsp;=&nbsp;3.14BD<br/>
+<span class="keyword">val</span>&nbsp;sum&nbsp;=&nbsp;x&nbsp;+&nbsp;y&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;BigDecimalExtension.operator_plus(x,y)</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+This is the complete list of all available operators and their corresponding method signatures:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;+=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_add(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;-=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_remove(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;||&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_or(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&amp;&amp;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_and(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;==&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_equals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;!=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_notEquals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;===&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleEquals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;!==&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleNotEquals(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_lessThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_greaterThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_lessEqualsThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_greaterEqualsThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;-&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_mappedTo(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;..&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_upTo(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;..&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_greaterThanDoubleDot(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;..&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleDotLessThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;=&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleArrow(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleLessThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_doubleGreaterThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&lt;&lt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleLessThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&gt;&gt;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_tripleGreaterThan(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_diamond(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;?:&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_elvis(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;&lt;=&gt;&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_spaceship(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;+&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_plus(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;-&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_minus(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;*&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_multiply(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;/&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_divide(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;%&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_modulo(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;**&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_power(e2)</span>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">!&nbsp;e1</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_not()</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">-&nbsp;e1</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_minus()</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">+&nbsp;e1</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_plus()</span>
+</td>
+</tr>
+</table>
+
+    
+The table above also defines the operator precedence in ascending order. The blank lines separate 
+precedence levels. The assignment operators <span class="inlinecode">+=</span> and <span class="inlinecode">-=</span> are right-to-left associative in the same way 
+as the plain assignment operator <span class="inlinecode">=</span> is. That is a = b = c is executed as a = (b = c), all
+other operators are left-to-right associative. Parentheses can be used to adjust the default 
+precedence and associativity. 
+</p>
+<a name="operators_4"></a>
+<h3>Short-Circuit Boolean Operators</h3>
+<p>
+If the operators <span class="inlinecode">||</span>, <span class="inlinecode">&amp;&amp;</span>, and <span class="inlinecode">?:</span> are bound to the library methods 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions" ><span class="inlinecode">BooleanExtensions.operator_and(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a>, 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions" ><span class="inlinecode">BooleanExtensions.operator_or(boolean&nbsp;l,&nbsp;boolean&nbsp;r)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a>  resp.
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ObjectExtensions" ><span class="inlinecode">&lt;T&gt;&nbsp;T&nbsp;operator_elvis(T&nbsp;first,&nbsp;T&nbsp;second)</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a> the operation is inlined and evaluated in short circuit mode.
+That means that the right hand operand might not be evaluated at all in the following cases: 
+<ol>
+	<li>
+		in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left 
+		    operand evaluates to <span class="inlinecode"><span class="keyword">true</span></span>.
+	</li>
+	<li>
+		in the case of <span class="inlinecode">&amp;&amp;</span> the operand on the right hand side is not evaluated if the left 
+		    operand evaluates to <span class="inlinecode"><span class="keyword">false</span></span>.
+	</li>
+	<li>
+		in the case of <span class="inlinecode">?:</span> the operand on the right hand side is not evaluated if the left 
+		    operand evaluates to anything but <span class="inlinecode"><span class="keyword">null</span></span>.
+	</li>
+</ol>
+</p>
+<p>
+Still you can overload these operators for your types or even override it for booleans, in which case
+both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
+</p>
+<a name="operators_5"></a>
+<h3>Postfix Operators</h3>
+<p>
+The two postfix operators <span class="inlinecode">++</span> and <span class="inlinecode">--</span> use the following method mapping:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1++</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_plusPlus()</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1--</span>
+</td>
+<td>
+<span class="inlinecode">e1.operator_minusMinus()</span>
+</td>
+</tr>
+</table>
+</p>
+<a name="operators_6"></a>
+<h3>Defined Operators in The Library</h3>
+<p>
+Xtend offers operators for common types from the JDK.
+</p>
+<a name="operators_6_2"></a>
+<h4>Equality Operators</h4>
+<p>
+In Xtend the equals operators (<span class="inlinecode">==</span>,<span class="inlinecode">!=</span>) are bound to <span class="inlinecode">Object.equals</span>. So you can write:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(name&nbsp;==&nbsp;<span class="string">&apos;Homer&apos;</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">&apos;Hi&nbsp;Homer&apos;</span>)
+</p>
+</div>
+</div>
+</p>
+<p>
+Java&apos;s identity equals semantic is mapped to the tripple-equals operators <span class="inlinecode">===</span> and <span class="inlinecode">!==</span> in Xtend.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(someObject&nbsp;===&nbsp;anotherObject)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">&apos;same&nbsp;objects&apos;</span>)
+</p>
+</div>
+</div>
+</p>
+<a name="operators_6_3"></a>
+<h4>Comparison Operators</h4>
+<p>
+In Xtend the usual comparison operators (<span class="inlinecode">&gt;</span>,<span class="inlinecode">&lt;</span>,<span class="inlinecode">&gt;=</span>, and <span class="inlinecode">&lt;=</span>) work as expected on the primitive numbers:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(42&nbsp;&gt;&nbsp;myNumber)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+In addition these operators are overloaded for all instances of <span class="inlinecode">java.lang.Comparable</span>. So you can
+also write
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">if</span>&nbsp;(startTime&nbsp;&lt;&nbsp;arrivalTime)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"You&nbsp;are&nbsp;too&nbsp;late!"</span>)
+</p>
+</div>
+</div>
+</p>
+<a name="operators_6_4"></a>
+<h4>Arithmetic Operators</h4>
+<p>
+The arithmetic operators (<span class="inlinecode">+</span>,<span class="inlinecode">-</span>,<span class="inlinecode">*</span>,<span class="inlinecode">/</span>,<span class="inlinecode">%</span>, and <span class="inlinecode">**</span>) are not only available for
+the primitive types, but also for other reasonable types such as <span class="inlinecode">BigDecimal</span> and <span class="inlinecode">BigInteger</span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;x&nbsp;=&nbsp;2.71BD<br/>
+<span class="keyword">val</span>&nbsp;y&nbsp;=&nbsp;3.14BD<br/>
+<span class="keyword">val</span>&nbsp;sum&nbsp;=&nbsp;x&nbsp;+&nbsp;y&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;BigDecimalExtension.operator_plus(x,y)</span>
+</p>
+</div>
+</div>
+</p>
+<a name="operators_6_5"></a>
+<h4>Elvis Operator</h4>
+<p>
+In addition to <a href="30-expressions.html#nullSafeFeatureCalls" title="Go to &quot;Null-Safe Feature Call&quot;">null-safe feature calls</a> Xtend supports the elvis operator known
+from Groovy.
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;salutation&nbsp;=&nbsp;person.firstName&nbsp;?:&nbsp;<span class="string">&apos;Sir/Madam&apos;</span></span>
+</p>
+<p>
+The right hand side of the expression is only evaluated if the left side was <span class="inlinecode">null</span>.
+</p>
+<a name="operators_6_6"></a>
+<h4>With Operator</h4>
+<p>
+The with operator is very handy when you want to initialize objects or when you want to use a particular
+instance a couple of time in subsequent lines of code. It simply passes the left hand side
+argument to the lambda on the right hand and returns the left hand after that.
+</p>
+<p>
+Here&apos;s an example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;person&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person&nbsp;=&gt;&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;firstName&nbsp;=&nbsp;<span class="string">&apos;Homer&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;lastName&nbsp;=&nbsp;<span class="string">&apos;Simpson&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;address&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Address&nbsp;=&gt;&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;street&nbsp;=&nbsp;<span class="string">&apos;742&nbsp;Evergreen&nbsp;Terrace&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;city&nbsp;=&nbsp;<span class="string">&apos;SpringField&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+]
+</p>
+</div>
+</div>
+</p>
+<a name="operators_6_7"></a>
+<h4>Range Operators</h4>
+<p>
+There are three different range operators. The most useful ones are <span class="inlinecode">..&lt;</span> and <span class="inlinecode">&gt;..</span> which create exclusive ranges.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;iterate&nbsp;the&nbsp;list&nbsp;forwards<br/>
+</span><span class="keyword">for</span>&nbsp;(i&nbsp;:&nbsp;0&nbsp;..&lt;&nbsp;list.size)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;element&nbsp;=&nbsp;list.get(i)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;or&nbsp;backwards<br/>
+</span><span class="keyword">for</span>&nbsp;(i&nbsp;:&nbsp;list.size&nbsp;&gt;..&nbsp;0)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;element&nbsp;=&nbsp;list.get(i)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+In addition there is the inclusive range, which is nice if you know both ends well. In the movies example
+the range is used to check whether a movie was made in a certain decade:
+</p>
+<p>
+<span class="inlinecode">movies.filter[1980..1989.contains(year)]</span>
+</p>
+<p>
+Please keep in mind that there are other means to iterator lists, too. For example, you may want to use the <span class="inlinecode">forEach</span> extension
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+list.forEach[&nbsp;element,&nbsp;index&nbsp;|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;<span class="comment">//&nbsp;if&nbsp;you&nbsp;need&nbsp;access&nbsp;to&nbsp;the&nbsp;current&nbsp;index<br/>
+</span>]<br/>
+list.reverseView.forEach[<br/>
+&nbsp;&nbsp;..&nbsp;<span class="comment">//&nbsp;if&nbsp;you&nbsp;just&nbsp;need&nbsp;the&nbsp;element&nbsp;it&nbsp;in&nbsp;reverse&nbsp;order<br/>
+</span>]
+</p>
+</div>
+</div>
+</p>
+<a name="operators_6_8"></a>
+<h4>Pair Operator</h4>
+<p>
+Sometimes you want to use a pair of two elements locally without introducing a new structure. In Xtend you can
+use the <span class="inlinecode">-&gt;</span>-operator which returns an instance of <span class="inlinecode">Pair&lt;A,B&gt;</span>:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;nameAndAge&nbsp;=&nbsp;<span class="string">&apos;Homer&apos;</span>&nbsp;-&gt;&nbsp;42</span>
+</p>
+<p>
+If you want to surface a such a pair of values on the interface of a method or field, it&apos;s generally a better
+idea to use a data class with a well defined name, instead:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Data&nbsp;<span class="keyword">class</span>&nbsp;NameAndAge&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;age<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="assignments"></a>
+<h3>Assignments</h3>
+<p>
+<a href="30-expressions.html#variableDeclaration" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be assigned using the <span class="inlinecode">=</span> operator. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;greeting&nbsp;=&nbsp;<span class="string">&apos;Hello&apos;</span><br/>
+<span class="keyword">if</span>&nbsp;(isInformal)<br/>
+&nbsp;&nbsp;greeting&nbsp;=&nbsp;<span class="string">&apos;Hi&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Of course, also non-final fields can be set using an assignment: 
+<span class="inlinecode">myObj.myField&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span></span>
+</p>
+<a name="propertyAssignments"></a>
+<h4>Setting Properties</h4>
+<p>
+The lack of properties in Java leads to a lot of syntactic noise when working with data objects.
+As Xtend is designed to integrate with existing Java APIs it respects the Java Beans convention,
+hence you can call a setter using an assignment:
+</p>
+<p>
+<span class="inlinecode">myObj.myProperty&nbsp;=&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;<span class="comment">//&nbsp;calls&nbsp;myObj.setMyProperty("foo")</span></span>
+</p>
+<p>
+The setter is only used if the field is not accessible from the given context. That is why the 
+<a href="40-annotations.html#propertyAnnotation" title="Go to &quot;@Accessors&quot;">@Property annotation</a> would rename the local field to <span class="inlinecode">_myProperty</span>.
+</p>
+<p>
+The return type of an assignment is the type of the right hand side, in case it is a simple assignment.
+If it is translated to a setter method it yields whatever the setter method returns.
+</p>
+<a name="assignmentOperators"></a>
+<h4>Assignment Operators</h4>
+<p>
+Compound assignment operators can be used as a shorthand for the assignment of a binary expression.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;BigDecimal&nbsp;bd&nbsp;=&nbsp;45bd<br/>
+bd&nbsp;+=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;+&nbsp;12bd<br/>
+</span>bd&nbsp;-=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;-&nbsp;12bd<br/>
+</span>bd&nbsp;/=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;/&nbsp;12bd<br/>
+</span>bd&nbsp;*=&nbsp;12bd&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;bd&nbsp;=&nbsp;bd&nbsp;*&nbsp;12bd</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Compound assignments work automatically when the infix operator is declared. The following compound assignment operators 
+are supported:
+</p>
+<p>
+<table>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;+=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">+</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;-=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">-</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;*=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">*</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;/=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">/</span>
+</td>
+</tr>
+<tr>
+<td>
+<span class="inlinecode">e1&nbsp;%=&nbsp;e2</span>
+</td>
+<td>
+<span class="inlinecode">%</span>
+</td>
+</tr>
+</table>
+</p>
+<a name="blocks"></a>
+<h2>Blocks</h2>
+<p>
+The block expression allows to have imperative code sequences. It consists of a sequence of 
+expressions. The value of the last expression in the block is the value of the complete block. 
+The type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode"><span class="keyword">null</span></span> and
+have the type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="View JavaDoc"><abbr title="java.lang.Object" >Object</abbr></a>. 
+<a href="30-expressions.html#variableDeclaration" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as 
+a block&apos;s last expression.
+</p>
+<p>
+A block expression is surrounded by curly braces. The expressions in a block can be terminated by an optional semicolon.
+</p>
+<p>
+Here are two examples:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+{<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+&nbsp;&nbsp;result<br/>
+}
+</p>
+</div>
+</div>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+{<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting;<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;+&nbsp;<span class="string">"World!"</span>&nbsp;<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;x<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="variableDeclaration"></a>
+<h2>Variable Declarations</h2>
+<p>
+Variable declarations are only allowed within <a href="30-expressions.html#blocks" title="Go to &quot;Blocks&quot;">blocks</a>. They are visible from any 
+subsequent expressions in the block. 
+</p>
+<p>
+A variable declaration starting with the keyword <span class="inlinecode"><span class="keyword">val</span></span> denotes a value, which
+is essentially a final, unsettable variable. The variable needs to be declared with the 
+keyword <span class="inlinecode"><span class="keyword">var</span></span>, which stands for &apos;variable&apos; if it should be allowed to reassign its value.
+</p>
+<p>
+A typical example for using <span class="inlinecode"><span class="keyword">var</span></span> is a counter in a loop:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br/>
+&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&lt;&nbsp;max)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Shadowing variables from outer scopes is not allowed, the only exception is the 
+<a href="30-expressions.html#implicitVariables" title="Go to &quot;Implicit Variables this and it&quot;">implicit variable</a> <span class="inlinecode"><span class="keyword">it</span></span>.
+</p>
+<p>
+Variables declared outside of a lambda expression using the <span class="inlinecode"><span class="keyword">var</span></span> keyword are not accessible from within the
+lambda expressions.
+</p>
+<p>
+A local variable can be marked with the <span class="inlinecode">extension</span> keyword to make its methods available as extensions (<a href="20-classes-and-functions.html#Extension_Provider" title="Go to &quot;Extension Provider&quot;">see
+extension provider</a>). 
+</p>
+<a name="variableDeclaration_7"></a>
+<h3>Typing</h3>
+<p>
+The type of the variable itself can either be explicitly declared or it can be inferred from the initializer
+expression. Here is an example for an explicitly declared type:
+<span class="inlinecode"><span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;strings&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList</span>
+</p>
+<p>
+In such cases, the type of the right hand expression must conform to the type 
+of the expression on the left side.
+</p>
+<p>
+Alternatively the type can be inferred from the initializater: 
+<span class="inlinecode"><span class="keyword">var</span>&nbsp;strings&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;msg&nbsp;is&nbsp;of&nbsp;type&nbsp;ArrayList&lt;String&gt;</span></span>
+</p>
+<a name="featureCalls"></a>
+<h2>Field Access and Method Invocation</h2>
+<p>
+A simple name can refer to a local field, variable or parameter. In addition
+it can point to a method with zero arguments, since empty parentheses are optional. 
+</p>
+<a name="propertyAccess"></a>
+<h3>Property Access</h3>
+<p>
+If there is no field with the given name and also no method with the name and zero parameters
+accessible, a simple name binds to a corresponding Java-Bean getter method if available:
+</p>
+<p>
+<span class="inlinecode">myObj.myProperty&nbsp;<span class="comment">//&nbsp;myObj.getMyProperty()&nbsp;&nbsp;(..&nbsp;in&nbsp;case&nbsp;myObj.myProperty&nbsp;is&nbsp;not&nbsp;visible.)</span></span>
+</p>
+<a name="implicitVariables"></a>
+<h3>Implicit Variables this and it</h3>
+<p>
+Like in Java the current instance of the class is bound to <span class="inlinecode"><span class="keyword">this</span></span>. This allows for either qualified
+field access or method invocations like in:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">this</span>.myField</span>
+</p>
+<p>
+or it is possible to omit the receiver:
+</p>
+<p>
+<span class="inlinecode">myField</span>
+</p>
+<p>
+You can use the variable name <span class="inlinecode"><span class="keyword">it</span></span> to get the same behavior for any variable or parameter:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;<span class="keyword">it</span>&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person<br/>
+name&nbsp;=&nbsp;<span class="string">&apos;Horst&apos;</span>&nbsp;<span class="comment">//&nbsp;translates&nbsp;to&nbsp;&apos;it.setName("Horst");&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Another speciality of the variable <span class="inlinecode"><span class="keyword">it</span></span> is that it is allowed to be shadowed. This is especially useful
+when used together with <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a>.
+</p>
+<p>
+As <span class="inlinecode"><span class="keyword">this</span></span> is bound to the surrounding object in Java, <span class="inlinecode"><span class="keyword">it</span></span> can be used
+in finer-grained constructs such as <a href="30-expressions.html#lambdas" title="Go to &quot;Lambda Expressions&quot;">lambda expressions</a>. That is why <span class="inlinecode"><span class="keyword">it</span>.myProperty</span> has 
+higher precedence than <span class="inlinecode"><span class="keyword">this</span>.myProperty</span>.
+</p>
+<a name="staticAccess"></a>
+<h3>Static Access</h3>
+<p>
+For accessing a static field or method you can use the recommended Java syntax or the more explicit double colon <span class="inlinecode">::</span>. 
+That means, the following epxressions are pairwise equivalent:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+MyClass.myField<br/>
+MyClass::myField
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+com.acme.MyClass.myMethod(<span class="string">&apos;foo&apos;</span>)<br/>
+com.acme.MyClass::myMethod(<span class="string">&apos;foo&apos;</span>)<br/>
+com::acme::MyClass::myMethod(<span class="string">&apos;foo&apos;</span>)
+</p>
+</div>
+</div>
+</p>
+<p>
+Alternatively you could import the method or field using a <a href="20-classes-and-functions.html#imports" title="Go to &quot;Imports&quot;">static import</a>.
+</p>
+<a name="nullSafeFeatureCalls"></a>
+<h3>Null-Safe Feature Call</h3>
+<p>
+Checking for <span class="inlinecode"><span class="keyword">null</span></span> references can make code very unreadable. In many situations it is ok for an 
+expression to return <span class="inlinecode"><span class="keyword">null</span></span> if a receiver was <span class="inlinecode"><span class="keyword">null</span></span>. Xtend supports the safe navigation 
+operator <span class="inlinecode">?.</span> to make such code better readable.
+</p>
+<p>
+Instead of writing 
+<span class="inlinecode"><span class="keyword">if</span>&nbsp;(myRef&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;myRef.doStuff()</span>
+</p>
+<p>
+one can write
+<span class="inlinecode">myRef?.doStuff</span>
+</p>
+<p>
+Arguments that would be passed to the method are only evaluated if the method will be invoked at all.
+</p>
+<p>
+For primitive types the default value is returned (e.g. 0 for int). This may not be what you want in some cases,
+so a warning will be raised by default. You can turn that off in the preferences if you wish.
+</p>
+<a name="constructorCall"></a>
+<h2>Constructor Call</h2>
+<p>
+Constructor calls have the same syntax as in Java. The only difference is that empty parentheses
+are optional:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">new</span>&nbsp;String()&nbsp;==&nbsp;<span class="keyword">new</span>&nbsp;String<br/>
+<span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;()&nbsp;==&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;BigDecimal&gt;
+</p>
+</div>
+</div>
+</p>
+<p>
+If type arguments are omitted, they will be inferred from the current context similar to Java&apos;s
+diamond operator on generic method and constructor calls.
+</p>
+<a name="lambdas"></a>
+<h2>Lambda Expressions</h2>
+<p>
+A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
+a Java developer it is best to think of a lambda expression as an anonymous class with a single method, i.e. 
+like in the following Java code :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;Java&nbsp;Code!<br/>
+</span><span class="keyword">final</span>&nbsp;JTextField&nbsp;textField&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;JTextField();<br/>
+textField.addActionListener(<span class="keyword">new</span>&nbsp;ActionListener()&nbsp;{<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;actionPerformed(ActionEvent&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;textField.setText(<span class="string">"Something&nbsp;happened!"</span>);<br/>
+&nbsp;&nbsp;}<br/>
+});
+</p>
+</div>
+</div>
+</p>
+<p>
+This kind of anonymous classes can be found everywhere in Java code and have always been the poor-man&apos;s replacement
+for lambda expressions in Java. 
+</p>
+<p>
+Xtend not only supports lambda expressions, but offers an extremely dense syntax for it. That is the
+code above can be written in Xtend like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;textField&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;JTextField<br/>
+textField.addActionListener([&nbsp;ActionEvent&nbsp;e&nbsp;|<br/>
+&nbsp;&nbsp;textField.text&nbsp;=&nbsp;<span class="string">"Something&nbsp;happened!"</span><br/>
+])
+</p>
+</div>
+</div>
+</p>
+<p>
+As you might have guessed, a lambda expression is surrounded by square brackets (inspired from Smalltalk).
+Also a lambda expression like a method declares parameters. The lambda above has one parameter called <span class="inlinecode">e</span> which is of
+type <span class="inlinecode">ActionEvent</span>. You do not have to specify the type explicitly because it can be inferred from
+the context:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+textField.addActionListener([&nbsp;e&nbsp;|<br/>
+&nbsp;&nbsp;textField.text&nbsp;=&nbsp;<span class="string">"The&nbsp;command&nbsp;&apos;"</span>&nbsp;+&nbsp;e.actionCommand&nbsp;+&nbsp;<span class="string">"&apos;&nbsp;happened!"</span><br/>
+])
+</p>
+</div>
+</div>
+</p>
+<p>
+Also you do not need to speficy the argument names. If you leave them out a single argument will be named <span class="inlinecode"><span class="keyword">it</span></span>, if the lambda has more arguments
+the names will be <span class="inlinecode">$1,$2,...,$n</span> depending on the numnber of arguments of course. Here&apos;s an example with a single argument named <span class="inlinecode">it</span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+textField.addActionListener([<br/>
+&nbsp;&nbsp;textField.text&nbsp;=&nbsp;<span class="string">"The&nbsp;command&nbsp;&apos;"</span>&nbsp;+&nbsp;actionCommand&nbsp;+&nbsp;<span class="string">"&apos;&nbsp;happened!"</span><br/>
+])
+</p>
+</div>
+</div>
+</p>
+<p>
+A lambda expression with zero arguments can be written with or without the bar.
+They are both the same.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;Runnable&nbsp;aBar&nbsp;=&nbsp;[|<br/>
+&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;I&apos;m&nbsp;executed!"</span>)<br/>
+]<br/>
+<span class="keyword">val</span>&nbsp;Runnable&nbsp;noBar&nbsp;=&nbsp;[<br/>
+&nbsp;&nbsp;println(<span class="string">"Hello&nbsp;I&apos;m&nbsp;executed!"</span>)<br/>
+]
+</p>
+</div>
+</div>
+</p>
+<p>
+When a method call&apos;s last parameter is a lambda it can be passed right after the parameter list.
+For instance if you want to sort some strings by their length, you could write :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Collections.sort(someStrings)&nbsp;[&nbsp;a,&nbsp;b&nbsp;|<br/>
+&nbsp;&nbsp;a.length&nbsp;-&nbsp;b.length<br/>
+]
+</p>
+</div>
+</div>
+</p>
+<p>
+which is just the same as writing
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Collections.sort(someStrings,&nbsp;[&nbsp;a,&nbsp;b&nbsp;|<br/>
+&nbsp;&nbsp;a.length&nbsp;-&nbsp;b.length<br/>
+])
+</p>
+</div>
+</div>
+</p>
+<p>
+Since you can leave out empty parentheses for methods which get a lambda as their only argument, you can reduce
+the code above further down to:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+textField.addActionListener&nbsp;[<br/>
+&nbsp;&nbsp;textField.text&nbsp;=&nbsp;<span class="string">"Something&nbsp;happened!"</span><br/>
+]
+</p>
+</div>
+</div>
+</p>
+<p>
+A lambda expression also captures the current scope. Any final local variables and all parameters that are visible at construction time can be referred to
+from within the lambda body. 
+That is exactly what we did with the variable <span class="inlinecode">textField</span> above.
+</p>
+<p>
+The variable <span class="inlinecode"><span class="keyword">this</span></span> refers to the outer class. The lambda instance itself is available with the identifier
+<span class="inlinecode"><span class="keyword">self</span></span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;lineReader&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;LineReader(r);<br/>
+<span class="keyword">val</span>&nbsp;AbstractIterator&lt;String&gt;&nbsp;lineIterator&nbsp;=&nbsp;[|<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;lineReader.readLine&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result==<span class="keyword">null</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">self</span>.endOfData<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result<br/>
+]
+</p>
+</div>
+</div>
+</p>
+<a name="closureTypes"></a>
+<h3>Typing</h3>
+<p>
+Lambdas are expressions which produce <em>Function</em> objects. The type of a lambda expression generally depends on the target
+type, as seen in the previous examples. That is, the lambda expression can coerce to any interface or abstract class which has declared only 
+one abstract method. This allows for using lambda expressions in many existing Java
+APIs directly.
+</p>
+<p>
+However, if you write a lambda expression without having any target type expectation, like in the following
+assignment:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;toUpperCaseFunction&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span></span>
+</p>
+<p>
+The type will be one of the inner types found in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Functions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Functions" >Functions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Functions.java" title="View Source Code" >(src)</a> or <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/Procedures.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.Procedures" >Procedures</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/Procedures.java" title="View Source Code" >(src)</a>.
+It is a procedure if the return type is <span class="inlinecode"><span class="keyword">void</span></span>, otherwise it is a function.
+</p>
+<p>
+Xtend supports a shorthand syntax for function types. Instead of writing <span class="inlinecode">Function1&lt;?&nbsp;<span class="keyword">super</span>&nbsp;String,?&nbsp;<span class="keyword">extends</span>&nbsp;String&gt;</span>
+which is what you will find in the generated Java code, you can simply write <span class="inlinecode">(String)=&gt;String</span>.
+</p>
+<p>
+Example:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;(String)=&gt;String&nbsp;stringToStringFunction&nbsp;=&nbsp;[&nbsp;toUpperCase&nbsp;]<br/>
+<span class="comment">//&nbsp;or<br/>
+</span><span class="keyword">val</span>&nbsp;Function1&lt;?&nbsp;<span class="keyword">super</span>&nbsp;String,?&nbsp;<span class="keyword">extends</span>&nbsp;String&gt;&nbsp;same&nbsp;=&nbsp;[&nbsp;toUpperCase&nbsp;]<br/>
+<span class="comment">//&nbsp;or<br/>
+</span><span class="keyword">val</span>&nbsp;stringToStringFunction2&nbsp;=&nbsp;[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;type&nbsp;is&nbsp;(String)=&gt;String</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Checked exceptions that are thrown in the body of a lambda expression but not declared in the implemented method of the target type are thrown using the 
+<a href="20-classes-and-functions.html#declaredExceptions" title="Go to &quot;Declared Exceptions&quot;">sneaky-throw technique</a>.
+Of course you can always <a href="30-expressions.html#Xtend_Expressions_TryCatch" title="Go to &quot;Try, Catch, Finally&quot;">catch and handle</a> them.
+</p>
+<a name="anonymousClasses"></a>
+<h2>Anonymous Classes</h2>
+<p>
+An anonymous class in Xtend has the very same semantics as in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5">Java Language Sepcification</a>).
+Here&apos;s an example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;tabListener&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ActionBar.TabListener()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;onTabSelected(ActionBar.Tab&nbsp;tab,&nbsp;FragmentTransaction&nbsp;ft)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;the&nbsp;given&nbsp;tab<br/>
+</span>&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;onTabUnselected(ActionBar.Tab&nbsp;tab,&nbsp;FragmentTransaction&nbsp;ft)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;hide&nbsp;the&nbsp;given&nbsp;tab<br/>
+</span>&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;onTabReselected(ActionBar.Tab&nbsp;tab,&nbsp;FragmentTransaction&nbsp;ft)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;probably&nbsp;ignore&nbsp;this&nbsp;event<br/>
+</span>&nbsp;&nbsp;}<br/>
+};
+</p>
+</div>
+</div>
+</p>
+<a name="ifExpression"></a>
+<h2>If Expression</h2>
+<p>
+An if-expression is used to choose between two different values based on a predicate.
+</p>
+<p>
+An expression 
+<span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> 
+results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> evaluates 
+to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for an else branch
+that returns the default value of the current type, e.g. for reference type this is equivalent to <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>.
+That means 
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x</span>
+</p>
+<p>
+is a short hand for
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
+</p>
+<p>
+The type of an if expression is the common super type of the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> 
+of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
+</p>
+<p>
+While the if expression has the syntax of Java&apos;s if statement it behaves more like Java&apos;s ternary operator 
+(<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>), because it is an expression and returns a value.
+Consequently, you can use if expressions deeply nested within expressions:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">if</span>&nbsp;(firstName&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;firstName&nbsp;+&nbsp;<span class="string">&apos;&nbsp;&apos;</span>&nbsp;+&nbsp;lastName&nbsp;<span class="keyword">else</span>&nbsp;lastName</span>
+</p>
+<a name="switchExpression"></a>
+<h2>Switch Expression</h2>
+<p>
+The switch expression is very different from Java&apos;s switch statement. The use of <span class="inlinecode"><span class="keyword">switch</span></span> is not limited 
+to certain values but can be used for any object reference. <span class="inlinecode">Object.equals(Object)</span> is used to
+compare the value in the case with the one you are switching over.
+ 
+Given the following example:
+ 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&nbsp;&gt;&nbsp;5&nbsp;:&nbsp;<span class="string">"a&nbsp;long&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;some&apos;</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;some&nbsp;string."</span><br/>
+&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">"It&apos;s&nbsp;another&nbsp;short&nbsp;string."</span><br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+the main expression <span class="inlinecode">myString</span> is evaluated first and then compared to each case sequentially.
+If the case expression is of type <span class="inlinecode"><span class="keyword">boolean</span></span>, the case matches if the expression evaluates
+to <span class="inlinecode"><span class="keyword">true</span></span>. If it is not of type <span class="inlinecode"><span class="keyword">boolean</span></span> it is compared to the value of the main
+expression using <span class="inlinecode">Object.equals(Object)</span>.
+</p>
+<p>
+If a case is a match, that is it evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or the result equals the one we are switching
+over, the case expression after the colon is evaluated and is the result of the whole switch expression.
+</p>
+<p>
+The main expression can also be a computed value instead of a field or variable. If you want to reuse that value
+in the body of the switch expression, you can create a local value for that by using the following notation which
+is similar to the syntax in <a href="30-expressions.html#forLoop" title="Go to &quot;For Loop&quot;"><span class="inlinecode"><span class="keyword">for</span></span> loops</a>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">switch</span>&nbsp;myString&nbsp;:&nbsp;someComputation()&nbsp;{<br/>
+&nbsp;&nbsp;..<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="switchExpression_6"></a>
+<h3>Type guards</h3>
+<p>
+Instead of or in addition to the case guard you can specify a <em>type guard</em>. The case only matches if the 
+switch value conforms to this type. A case with both a type guard and a predicate only matches if both conditions match.
+If the switch value is a field, parameter or variable, it is automatically casted to the given type within the
+predicate and the case body.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;length(Object&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;x&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length&nbsp;&gt;&nbsp;0&nbsp;:&nbsp;x.length&nbsp;<span class="comment">//&nbsp;length&nbsp;is&nbsp;defined&nbsp;for&nbsp;String&nbsp;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;size&nbsp;is&nbsp;defined&nbsp;for&nbsp;List<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Switches with type guards are a safe and much more readable alternative to instance of / casting cascades you 
+might know from Java.
+</p>
+<a name="switchExpression_7"></a>
+<h3>Fall Through</h3>
+<p>
+You can have multiple type guards and cases separated with a comma, to have all of them share the same then part.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;isMale(String&nbsp;salutation)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;salutation&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"Mr."</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"Sir"</span>&nbsp;:&nbsp;<span class="keyword">true</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">false</span><br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="forLoop"></a>
+<h2>For Loop</h2>
+<p>
+The for loop 
+<span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;arrayOrIterable)&nbsp;expression</span> 
+is used to execute a certain expression for each element of an array or an instance of 
+<a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Iterable.html" title="View JavaDoc"><abbr title="java.lang.Iterable" >Iterable</abbr></a>. The local <span class="inlinecode">variable</span> is final, hence cannot be updated. 
+</p>
+<p>
+The type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>. The type of the local variable can be inferred from the 
+iterable or array that is processed. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br/>
+&nbsp;&nbsp;doSideEffect(s)<br/>
+}<br/>
+<br/>
+<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br/>
+&nbsp;&nbsp;doSideEffect(s)
+</p>
+</div>
+</div>
+</p>
+<a name="traditionalForLoop"></a>
+<h2>Basic For Loop</h2>
+<p>
+The traditional for loop 
+<span class="inlinecode"><span class="keyword">for</span>&nbsp;(&lt;init-expression&gt;&nbsp;;&nbsp;&nbsp;&lt;predicate&gt;&nbsp;;&nbsp;&lt;update-expression&gt;)&nbsp;body-expression</span> 
+is very similar to the one known from Java, or even C. When executed, it first executes the <span class="inlinecode">init-expression</span>, 
+where local variables can be declared. Next the <span class="inlinecode">predicate</span> is executed and if it evaluates to <span class="inlinecode">true</span>, the <span class="inlinecode">body-expression</span> is executed.
+On any subsequent iterations the <span class="inlinecode">update-expressio</span> is executed instead of the init-expression. This happens until the <span class="inlinecode">predicate</span> returns <span class="inlinecode">false</span>.
+</p>
+<p>
+The type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">for</span>&nbsp;(<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0&nbsp;;&nbsp;i&nbsp;&lt;&nbsp;s.length&nbsp;;&nbsp;i++)&nbsp;{<br/>
+&nbsp;&nbsp;println(s.subString(0,i)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="whileExpression"></a>
+<h2>While Loop</h2>
+<p>
+A while loop 
+<span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> 
+is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
+The type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)<br/>
+}<br/>
+<br/>
+<span class="keyword">while</span>&nbsp;((i=i+1)&nbsp;&lt;&nbsp;max)&nbsp;<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)
+</p>
+</div>
+</div>
+</p>
+<a name="doWhileExpression"></a>
+<h2>Do-While Loop</h2>
+<p>
+A do-while loop 
+<span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> 
+is used to execute a certain expression until the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>. 
+The difference to the <a href="30-expressions.html#whileExpression" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing 
+the block once before evaluating the predicate for the first time. The type of a do-while 
+loop is <span class="inlinecode"><span class="keyword">void</span></span>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">do</span>&nbsp;{<br/>
+&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);<br/>
+}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)<br/>
+<br/>
+<br/>
+<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
+</p>
+</div>
+</div>
+</p>
+<a name="Xtend_Expressions_Return"></a>
+<h2>Return Expression</h2>
+<p>
+A method or lambda expression automatically returns the value of its body expression.
+If it is a <a href="30-expressions.html#blocks" title="Go to &quot;Blocks&quot;">block expression</a> this is the value of the last expression in it.
+However, sometimes you want to return early or make it explicit.
+</p>
+<p>
+The syntax is just like in Java:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+listOfStrings.map&nbsp;[&nbsp;e&nbsp;|&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span><br/>
+&nbsp;&nbsp;e.toUpperCase<br/>
+]
+</p>
+</div>
+</div>
+</p>
+<a name="Xtend_Expressions_Throw"></a>
+<h2>Throwing Exceptions</h2>
+<p>
+Throwing <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html" title="View JavaDoc"><abbr title="java.lang.Throwable" >Throwable</abbr></a>s up the call stack has the same semantics and syntax 
+as in Java.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+{<br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br/>
+&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="Xtend_Expressions_TryCatch"></a>
+<h2>Try, Catch, Finally</h2>
+<p>
+The try-catch-finally expression is used to handle exceptional situations.
+Checked exceptions are treated like runtime exceptions and only optionally validated. 
+You can but do not have to catch them as they
+will be silently thrown (see the <a href="20-classes-and-functions.html#declaredExceptions" title="Go to &quot;Declared Exceptions&quot;">section on declared exceptions</a>).
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
+}&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
+</span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
+</span>}
+</p>
+</div>
+</div>
+</p>
+<p>
+For try-catch it is again beneficial that it is an expression, because you can write code like the following
+and do not have to rely on non-final variables:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;readFromFile<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"unknown"</span><br/>
+&nbsp;&nbsp;}
+</p>
+</div>
+</div>
+</p>
+<a name="Xtend_Expressions_Synchronized"></a>
+<h2>Synchronized</h2>
+<p>
+The synchonized expression does the same as it does in Java (see <a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-14.html#jls-14.19">Java Language Specification</a>).
+The only difference is that in Xtend it is an expression and can therefore be used at more places.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">synchronized</span>(lock)&nbsp;{<br/>
+&nbsp;&nbsp;println(<span class="string">"Hello"</span>)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;name&nbsp;=&nbsp;<span class="keyword">synchronized</span>(lock)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;doStuff()&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="templates"></a>
+<h2>Template Expressions</h2>
+<p>
+Templates allow for readable string concatenation. Templates are surrounded by triple single quotes (<span class="inlinecode"><span class="string">&apos;&apos;&apos;</span></span>). 
+A template expression can span multiple lines and expressions can be nested which are evaluated and their <span class="inlinecode">toString()</span> 
+representation is automatically inserted at that position.
+</p>
+<p>
+The terminals for interpolated expression are so called guillemets <span class="inlinecode">&laquo;expression<span class="string">&raquo;</span></span>. They read nicely and are not often used
+in text so you seldom need to escape them. These escaping conflicts are the reason why
+template languages often use longer character sequences like e.g. <span class="inlinecode">&lt;%=&nbsp;expression&nbsp;%&gt;</span> in JSP, for the price of worse readability. 
+The downside with the guillemets in Xtend is that you will have to have a consistent encoding. Always use UTF-8 and you are good.
+</p>
+<p>
+If you use the Eclipse plug-in the guillemets will be inserted on content assist
+within a template. They are additionally bound to <em>CTRL+SHIFT+&lt;</em> and <em>CTRL+SHIFT+</em> for <span class="inlinecode">&laquo;</span> and <span class="inlinecode"><span class="string">&raquo;</span></span> respectively.
+On a Mac they are also available with <em>alt+q</em> (<span class="inlinecode">&laquo;</span>) and <em>alt+Q</em> (<span class="inlinecode"><span class="string">&raquo;</span></span>).
+</p>
+<p>
+Let us have a look at an example of how a typical method with a template expressions looks like:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;someHTML(String&nbsp;content)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&lt;html&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>content<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br/>
+&nbsp;&nbsp;&lt;/html&gt;<br/>
+&apos;&apos;&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+As you can see, template expressions can be used as the body of a method.
+If an interpolation expression evaluates to <span class="inlinecode"><span class="keyword">null</span></span> an empty string is added.
+</p>
+<p>
+Template expressions can occur everywhere. 
+Here is an example showing it in conjunction with the powerful <a href="30-expressions.html#switchExpression" title="Go to &quot;Switch Expression&quot;">switch expression</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;toText(Node&nbsp;n)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;n&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Contents&nbsp;:&nbsp;n.text<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;:&nbsp;<span class="string">&apos;&apos;&apos;&lt;a&nbsp;href="&laquo;</span>n.href<span class="string">&raquo;"&gt;&laquo;</span>n.applyContents<span class="string">&raquo;&lt;/a&gt;&apos;&apos;&apos;</span><br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&laquo;</span>n.tagName<span class="string">&raquo;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>n.applyContents<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/&laquo;</span>n.tagName<span class="string">&raquo;&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="templateIF"></a>
+<h3>Conditions in Templates</h3>
+<p>
+There is a special <span class="inlinecode"><span class="keyword">IF</span></span> to be used within templates:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;someHTML(Paragraph&nbsp;p)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&lt;html&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;p.headLine&nbsp;!=&nbsp;<span class="keyword">null</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;&laquo;</span>p.headline<span class="string">&raquo;&lt;/h1&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>p.text<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br/>
+&nbsp;&nbsp;&lt;/html&gt;<br/>
+&apos;&apos;&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<a name="templateFOREACH"></a>
+<h3>Loops in Templates</h3>
+<p>
+Also a <span class="inlinecode"><span class="keyword">FOR</span></span> expression is available:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;someHTML(List&lt;Paragraph&gt;&nbsp;paragraphs)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&lt;html&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;p&nbsp;:&nbsp;paragraphs<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;p.headLine&nbsp;!=&nbsp;<span class="keyword">null</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;&laquo;</span>p.headline<span class="string">&raquo;&lt;/h1&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>p.text<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br/>
+&nbsp;&nbsp;&lt;/html&gt;<br/>
+&apos;&apos;&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+The for expression optionally allows to specify what to prepend (<span class="inlinecode"><span class="keyword">BEFORE</span></span>), put in-between (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>), and what to
+put at the end (<span class="inlinecode"><span class="keyword">AFTER</span></span>) of all iterations. <span class="inlinecode"><span class="keyword">BEFORE</span></span> and <span class="inlinecode"><span class="keyword">AFTER</span></span>
+are only executed if there is at least one iteration. (<span class="inlinecode"><span class="keyword">SEPARATOR</span></span>) is only added between
+iterations. It is executed if there are at least two iterations.
+</p>
+<p>
+Here is an example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;someHTML(List&lt;Paragraph&gt;&nbsp;paragraphs)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&lt;html&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;p&nbsp;:&nbsp;paragraphs&nbsp;<span class="keyword">BEFORE</span>&nbsp;<span class="string">&apos;&lt;div&gt;&apos;</span>&nbsp;<span class="keyword">SEPARATOR</span>&nbsp;<span class="string">&apos;&lt;/div&gt;&lt;div&gt;&apos;</span>&nbsp;<span class="keyword">AFTER</span>&nbsp;<span class="string">&apos;&lt;/div&gt;&apos;</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;p.headLine&nbsp;!=&nbsp;<span class="keyword">null</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;&laquo;</span>p.headline<span class="string">&raquo;&lt;/h1&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>p.text<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br/>
+&nbsp;&nbsp;&lt;/html&gt;<br/>
+&apos;&apos;&apos;</span>
+</p>
+</div>
+</div>
+</p>
+<a name="templateType"></a>
+<h3>Typing</h3>
+<p>
+The template expression is of type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/CharSequence.html" title="View JavaDoc"><abbr title="java.lang.CharSequence" >CharSequence</abbr></a>. It is automatically converted
+to <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> if that is the expected target type.
+</p>
+<a name="WhitespaceHandling"></a>
+<h3>White Space Handling</h3>
+<p>
+One of the key features of templates is the smart handling of white space in the template output. 
+The white space is not written into the output data structure as is but preprocessed. This allows 
+for readable templates as well as nicely formatted output. The following three rules are applied 
+when the template is evaluated:
+</p>
+<p>
+<ol>
+	<li>
+		
+		    Indentation in the template that is relative to a control structure will not be propagated 
+		    to the output string. A control structure is a <span class="inlinecode"><span class="keyword">FOR</span></span>-loop or a condition 
+		    (<span class="inlinecode"><span class="keyword">IF</span></span>) as well as the opening and closing marks of the template string itself.
+		    
+		    The indentation is considered to be relative to such a control structure if the previous 
+		    line ends with a control structure followed by optional white space. The amount of indentation white 
+		    space is not taken into account but the delta to the other lines.
+	</li>
+	<li>
+		
+		    Lines that do not contain any static text which is not white space but do contain control 
+		    structures or invocations of other templates which evaluate to an empty string, will not 
+		    appear in the output.
+	</li>
+	<li>
+		
+		    Any newlines in appended strings (no matter they are created with template expressions or not) will
+		    be prepended with the current indentation when inserted.
+	</li>
+</ol>
+</p>
+<p>
+Although this algorithm sounds a bit complicated at first it behaves very intuitively. In addition the
+syntax coloring in Eclipse communicates this behavior.
+</p>
+<p>
+<div class="image" >
+<img src="images/Xtend_template_coloring.png" 
+/>
+<div class="caption">
+Syntax Coloring For Templates In Eclipse
+</div>
+</div>
+</p>
+<p>
+The behavior is best described with a set of examples. The following table assumes a data structure 
+of nested nodes.
+</p>
+<p>
+<table>
+<tr>
+<td>
+
+      <div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;</span>n.name<span class="string">&raquo;&nbsp;{}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+}
+</p>
+</div>
+</div>
+
+</td>
+<td>
+
+      <span class="inlinecode">node&nbsp;NodeName&nbsp;{}</span>
+</td>
+</tr>
+</table>
+</p>
+<p>
+The indentation before <span class="inlinecode">node&nbsp;&laquo;n.name<span class="string">&raquo;</span></span> will be skipped as it is relative to the opening mark of
+the template string and thereby not considered to be relevant for the output but only for the readability 
+of the template itself.
+</p>
+<p>
+<table>
+<tr>
+<td>
+
+      <div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;Template&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;&laquo;</span>n.name<span class="string">&raquo;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;hasChildren<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>n.children.map[print]<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&apos;&apos;&apos;</span><br/>
+}
+</p>
+</div>
+</div>
+
+</td>
+<td>
+
+      <div class="literallayout">
+<div class="incode">
+<p class="code">
+node&nbsp;Parent{<br/>
+&nbsp;&nbsp;node&nbsp;FirstChild&nbsp;{<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;node&nbsp;SecondChild&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+
+</td>
+</tr>
+</table>
+</p>
+<p>
+As in the previous example, there is no indentation on the root level for the same reason.
+The first nesting level has only one indentation level in the output. This is derived from
+the indentation of the <span class="inlinecode"><span class="keyword">IF</span>&nbsp;hasChildren</span> condition in the template which is nested in
+the node. The additional nesting of the recursive invocation <span class="inlinecode">children.map[print]</span> is not
+visible in the output as it is relative the the surrounding control structure. The line with
+<span class="inlinecode"><span class="keyword">IF</span></span> and <span class="inlinecode"><span class="keyword">ENDIF</span></span> contain only control structures thus they are skipped in 
+the output. Note the additional indentation of the node <em>Leaf</em> which happens due to the first rule:
+Indentation is propagated to called templates.
+</p>
+</body>
+</html>

@@ -1,0 +1,1024 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Classes and Members</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="Xtend.html" title="">
+</head>
+<body>
+<a name="Xtend_Classes_Members"></a>
+<h1>Classes and Members</h1>
+<p>
+At a first glance an Xtend file pretty much looks like a Java file. It starts with a package 
+declaration followed by an import section and class definitions.
+The classes in fact are directly translated to Java classes in the corresponding Java package.
+A class can have constructors, fields, methods and annotations. 
+</p>
+<p>
+Here is an examplary Xtend file:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;com.acme<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;java.util.List<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;String&nbsp;name<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;name)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.name&nbsp;=&nbsp;name<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;elements.get(0)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="packageDecl"></a>
+<h2>Package Declaration</h2>
+<p>
+Package declarations can look like those in Java. Two small, optional differences:
+<ul>
+	<li>
+		An identifier can be escaped with a <span class="inlinecode">^</span> character in case it conflicts with a keyword.
+	</li>
+	<li>
+		The terminating semicolon is optional.
+	</li>
+</ul>
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">package</span>&nbsp;com.acme</span>
+</p>
+<a name="imports"></a>
+<h2>Imports</h2>
+<p>
+The ordinary imports of type names are equivalent to the imports known from Java. 
+Again one can escape any names conflicting with keywords using a <span class="inlinecode">^</span>. In contrast to Java, the 
+terminating semicolon is optional. Non-static wildcard type imports are deprecated for the benefit of better usability and well
+defined dependencies. 
+</p>
+<p>
+Xtend also features static imports for importing static fields and methods. The semantics and syntax are just like in Java. 
+</p>
+<p>
+As in Java all classes from the <span class="inlinecode">java.lang</span> package are implicitly imported.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.sort<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.junit.Assert.*
+</p>
+</div>
+</div>
+</p>
+<p>
+Static methods can also be imported as <span class="inlinecode"><span class="keyword">extension</span></span>s. See the section on 
+<a href="20-classes-and-functions.html#extensionMethods" title="Go to &quot;Extension Methods&quot;">extension methods</a> for details.
+</p>
+<a name="Xtend_ClassDeclaration"></a>
+<h2>Class Declaration</h2>
+<p>
+The class declaration reuses a lot of Java&apos;s syntax but still is a bit different in some aspects:
+All Xtend types are <span class="inlinecode"><span class="keyword">public</span></span> by default since that&apos;s the common case. Java&apos;s "package private" 
+default visibility is declared by the more explicit keyword <span class="inlinecode"><span class="keyword">package</span></span> in Xtend. In contrast to Java,
+Xtend supports multiple public top level class declarations per file. Each Xtend class
+is compiled to a separate top-level Java class.
+</p>
+<p>
+Abstract classes are defined using the <span class="inlinecode"><span class="keyword">abstract</span></span> modifier as in Java. See also <a href="20-classes-and-functions.html#abstractMethods" title="Go to &quot;Abstract Methods&quot;">abstract methods</a>.
+</p>
+<p>
+Xtend&apos;s approach to inheritance is conceptually the same as in Java. Single inheritance of 
+classes as well as implementing multiple interfaces is supported. 
+Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes.
+If no super type is specified, <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html" title="View JavaDoc"><abbr title="java.lang.Object" >Object</abbr></a> is used. 
+</p>
+<p>
+The most simple class looks like this:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+A more advanced generic class declaration in Xtend:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;ArrayList&lt;E&gt;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractList&lt;E&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
+&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="constructors"></a>
+<h2>Constructors</h2>
+<p>
+An Xtend class can define any number of constructors. Unlike Java you do not have to repeat the name of the class over and over again,
+but use the keyword <span class="inlinecode"><span class="keyword">new</span></span> to declare a constructor.
+Constructors can also delegate to other constructors using <span class="inlinecode"><span class="keyword">this</span>(args...)</span> in their first
+line. 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;<span class="keyword">extends</span>&nbsp;AnotherClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">new</span>(String&nbsp;s)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(s)<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">new</span>()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>(<span class="string">"default"</span>)<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The same rules with regard to inheritance apply as in Java, i.e. if the super class does not define a 
+no-argument constructor, you have to explicitly call one using <span class="inlinecode"><span class="keyword">super</span>(args...)</span> as the first 
+expression in the body of the constructor.
+</p>
+<p>
+The default visibility of constructors is <span class="inlinecode"><span class="keyword">public</span></span> but you can also specify an explicit visiblity 
+<span class="inlinecode"><span class="keyword">public</span></span>, <span class="inlinecode"><span class="keyword">protected</span></span>, <span class="inlinecode"><span class="keyword">package</span></span> or <span class="inlinecode"><span class="keyword">private</span></span>.
+</p>
+<a name="fields"></a>
+<h2>Fields</h2>
+<p>
+A field can have an initializer. Final fields are declared using <span class="inlinecode"><span class="keyword">val</span></span>, while 
+<span class="inlinecode"><span class="keyword">var</span></span> introduces a non-final field and can be omitted. Yet, if an initializer expression
+is present, the type of a field can be inferred if <span class="inlinecode"><span class="keyword">val</span></span> or <span class="inlinecode"><span class="keyword">var</span></span> was
+used to introduce the field. The keyword <span class="inlinecode"><span class="keyword">final</span></span> is synonym to <span class="inlinecode"><span class="keyword">val</span></span>.
+Fields marked as <span class="inlinecode"><span class="keyword">static</span></span> will be compiled to static Java fields.  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;count&nbsp;=&nbsp;1<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">boolean</span>&nbsp;debug&nbsp;=&nbsp;<span class="keyword">false</span><br/>
+&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;name&nbsp;=&nbsp;<span class="string">&apos;Foo&apos;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;type&nbsp;String&nbsp;is&nbsp;inferred&nbsp;<br/>
+</span>&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;UNIVERSAL_ANSWER&nbsp;=&nbsp;42&nbsp;<span class="comment">//&nbsp;final&nbsp;field&nbsp;with&nbsp;inferred&nbsp;type&nbsp;int<br/>
+</span>&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The default visibility for fields is <span class="inlinecode"><span class="keyword">private</span></span>. You can also declare it explicitly as 
+being <span class="inlinecode"><span class="keyword">public</span></span>, <span class="inlinecode"><span class="keyword">protected</span></span>, <span class="inlinecode"><span class="keyword">package</span></span> or <span class="inlinecode"><span class="keyword">private</span></span>. 
+</p>
+<p>
+A specialty of Xtend are fields that provide <em>extension methods</em> which are covered in 
+<a href="20-classes-and-functions.html#extensionMethods" title="Go to &quot;Extension Methods&quot;">their own section</a>.
+</p>
+<a name="methods"></a>
+<h2>Methods</h2>
+<p>
+Xtend methods are declared within a class and are translated to a corresponding Java method with 
+exactly the same signature. The only exceptions are dispatch methods, which are explained 
+<a href="20-classes-and-functions.html#polymorphicDispatch" title="Go to &quot;Dispatch Methods&quot;">later</a>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;elements.get(0)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Method declarations start with the keyword <span class="inlinecode"><span class="keyword">def</span></span>.
+The default visibility of a method is <span class="inlinecode"><span class="keyword">public</span></span>. You can explicitly declare it as
+being <span class="inlinecode"><span class="keyword">public</span></span>, <span class="inlinecode"><span class="keyword">protected</span></span>, <span class="inlinecode"><span class="keyword">package</span></span> or <span class="inlinecode"><span class="keyword">private</span></span>.
+</p>
+<p>
+Xtend supports the <span class="inlinecode"><span class="keyword">static</span></span> modifier for methods and can <a href="20-classes-and-functions.html#inferredReturnTypes" title="Go to &quot;Inferred Return Types&quot;">infer</a> the return type if it is not explicitly given:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;<span class="keyword">static</span>&nbsp;createInstance()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyClass(<span class="string">&apos;foo&apos;</span>)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+As in Java, vararg parameters are allowed and accessible as array values in the method body:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;printAll(String...&nbsp;strings)&nbsp;{<br/>
+&nbsp;&nbsp;strings.forEach[&nbsp;s&nbsp;|&nbsp;println(s)&nbsp;]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+It is possible to infer the return type of a method from its body. Recursive methods and abstract
+methods have to declare an explicit return type.
+</p>
+<a name="abstractMethods"></a>
+<h3>Abstract Methods</h3>
+<p>
+An abstract method in Xtend does not define a body and must be declared within an <span class="inlinecode"><span class="keyword">abstract</span></span>
+class or an interface. Also specifying the return type is mandatory since it cannot be inferred. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;MyAbstractClass()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;abstractMethod()&nbsp;<span class="comment">//&nbsp;no&nbsp;body<br/>
+</span>}
+</p>
+</div>
+</div>
+</p>
+<a name="methods_8"></a>
+<h3>Overriding Methods</h3>
+<p>
+Methods can override other methods from the super class or implement interface methods using the
+keyword <span class="inlinecode"><span class="keyword">override</span></span>. If a method overrides a method from a super type, the 
+<span class="inlinecode"><span class="keyword">override</span></span> keyword is mandatory and replaces the keyword <span class="inlinecode"><span class="keyword">def</span></span>. The override semantics
+are the same as in Java, e.g. it is impossible to override <span class="inlinecode"><span class="keyword">final</span></span> methods or invisible methods.
+Overriding methods inherit their return type from the super declaration.
+</p>
+<p>
+Example:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">override</span>&nbsp;String&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;elements.get(1)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="declaredExceptions"></a>
+<h3>Declared Exceptions</h3>
+<p>
+Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare 
+the exceptions thrown in a method&apos;s body using the <span class="inlinecode"><span class="keyword">throws</span></span> clause as in Java.
+</p>
+<p>
+If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
+compiler will throw the checked exception silently (using the sneaky-throw technique introduced by 
+<a href="http://projectlombok.org/features/SneakyThrows.html">Lombok</a>). 
+  
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">/*<br/>
+&nbsp;*&nbsp;throws&nbsp;an&nbsp;Exception<br/>
+&nbsp;*/</span><br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwException()&nbsp;<span class="keyword">throws</span>&nbsp;Exception&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;Exception<br/>
+}<br/>
+<br/>
+<span class="comment">/*<br/>
+&nbsp;*&nbsp;throws&nbsp;an&nbsp;Exception&nbsp;without&nbsp;declaring&nbsp;it<br/>
+&nbsp;*/</span><br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;sneakyThrowException()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;Exception<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Optional validation of checked exception is supported, too, and can be configured on the respective Eclipse
+preference page for the Xtend Errors and Warnings.
+</p>
+<a name="inferredReturnTypes"></a>
+<h3>Inferred Return Types</h3>
+<p>
+If the return type of a method can be inferred from its body it does not have to be declared.
+</p>
+<p>
+That is the method
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;String&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;elements.get(1)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+could be declared like this:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;second(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;elements.get(1)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The return type is mandatory for abstract method declarations as well as for recursive implementations.
+</p>
+<a name="genericMethods"></a>
+<h3>Generic Methods</h3>
+<p>
+You can specify type parameters on methods. A parameterized variant of the method from the previous section,
+could look like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;&lt;T&gt;&nbsp;second(List&lt;T&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;elements.get(1)<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the 
+<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/classes.html#8.4.4">the Java Language Specification</a>
+</p>
+<a name="operatorDeclaration"></a>
+<h3>Operator Declarations</h3>
+<p>
+Xtend supports operator overloading based on an operator-name-mapping as explained in <a href="30-expressions.html#operators" title="Go to &quot;Infix Operators and Operator Overloading&quot;" >section operators</a>.
+To declare an operator one can either declare a simple method using the operator&apos;s name or by using the operator directly like in the
+following:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;Money&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;+&nbsp;(Money&nbsp;other)&nbsp;{&nbsp;...&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;-&nbsp;(Money&nbsp;other)&nbsp;{&nbsp;...&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;*&nbsp;(BigDecimal&nbsp;times)&nbsp;{&nbsp;...&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="polymorphicDispatch"></a>
+<h3>Dispatch Methods</h3>
+<p>
+Generally, method resolution and binding is done statically at compile time as in Java. Method calls are bound 
+based on the static types of arguments. Sometimes this is not what you want. Especially in the 
+context of <a href="20-classes-and-functions.html#extensionMethods" title="Go to &quot;Extension Methods&quot;">extension methods</a> you would like to have polymorphic behavior.
+</p>
+<p>
+A dispatch method is declared using the keyword <span class="inlinecode"><span class="keyword">dispatch</span></span>.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Number&nbsp;x)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;<br/>
+}<br/>
+<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+For a set of visible dispatch methods in the current type hierarchy with the same name and the same
+number of arguments, the compiler infers a synthetic dispatcher method. This dispatcher uses the common super type
+of all declared arguments. The method name of the actual dispatch cases is prepended with an underscore
+and the visibility of these methods is reduced to protected if they have been defined as public methods.
+Client code always binds to the synthesized dispatcher method.
+</p>
+<p>
+For the two dispatch methods in the example above the following Java code would be generated:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;a&nbsp;number"</span>;<br/>
+}<br/>
+<br/>
+<span class="keyword">protected</span>&nbsp;String&nbsp;_printType(<span class="keyword">final</span>&nbsp;Integer&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"it\&apos;s&nbsp;an&nbsp;int"</span>;<br/>
+}<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType(x);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that the <span class="inlinecode"><span class="keyword">instanceof</span></span> cascade is ordered such that more specific types are handled first.
+</p>
+<p>
+The default visibility of the dispatch cases is <span class="inlinecode"><span class="keyword">protected</span></span>. If all dispatch methods
+explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
+Otherwise it is <span class="inlinecode"><span class="keyword">public</span></span>.
+ 
+The comparison of the parameter types is performed from left to right. That is in the following example, the second
+method declaration is considered more specific since its first parameter type is the most specific:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+}<br/>
+<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printTypes(Integer&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+generates the following Java code :
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;String&nbsp;printTypes(<span class="keyword">final</span>&nbsp;Number&nbsp;x,&nbsp;<span class="keyword">final</span>&nbsp;Number&nbsp;y)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;y&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes((Integer)x,&nbsp;y);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;!=&nbsp;<span class="keyword">null</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printTypes(x,&nbsp;(Integer)y);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x,&nbsp;y).toString());<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The code is compiled in a way that a <span class="inlinecode"><span class="keyword">null</span></span> reference is never a match. <span class="inlinecode"><span class="keyword">null</span></span> values 
+can be handled by dispatch cases that use the parameter type <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Void.html" title="View JavaDoc"><abbr title="java.lang.Void" >Void</abbr></a>.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Number&nbsp;x)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;<br/>
+}<br/>
+<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Integer&nbsp;x)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;<br/>
+}<br/>
+<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;printType(Void&nbsp;x)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">"it&apos;s&nbsp;null"</span>&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+This compiles to the following Java code:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;String&nbsp;printType(<span class="keyword">final</span>&nbsp;Number&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Integer)x);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType(x);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_printType((Void)<span class="keyword">null</span>);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(x).toString());<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="polymorphicDispatch_11"></a>
+<h4>Dispatch Methods and Inheritance</h4>
+<p>
+All visible Java methods from all super types that are conformant to the compiled representation of 
+a dispatch method are also included in the dispatcher. Conforming means they have the expected number of arguments 
+and have the same compiled name with the prepended underscore.
+</p>
+<p>
+For example, consider the following Java class :
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
+</span>&nbsp;&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+and the following Xtend class which extends the Java class :
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;<span class="keyword">it</span>)&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.join(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">it</span>)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The resulting dispatch method in the generated Java class <span class="inlinecode">MyLabelProvider</span> would then look like this:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;String&nbsp;label(<span class="keyword">final</span>&nbsp;Object&nbsp;it)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Entity)it);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)it);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;<span class="keyword">instanceof</span>&nbsp;Method)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Method)it);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(it&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>._label(it);<br/>
+&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"Unhandled&nbsp;parameter&nbsp;types:&nbsp;"</span>&nbsp;+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrays.&lt;Object&gt;asList(it).toString());<br/>
+&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="polymorphicDispatch_12"></a>
+<h4>Static Dispatch Methods</h4>
+<p>
+Also static dispatch methods are supported. A mixture of static and non-static
+dispatch methods is prohibited.
+</p>
+<a name="CreateMethods"></a>
+<h3>Create Methods</h3>
+<p>
+Create methods in Xtend allow to do graph transformation in one pass where it usually needs two passes.
+That means you don&apos;t need to separate a translation from one graph to another in the typical two phases:
+tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using
+create methods and the built-in identity preservation will take care of the rest.
+</p>
+<p>
+Consider you want to create a copy of the following list of persons into a :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Fred&nbsp;Flintstone&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Willma&nbsp;Flintstone<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Barny&nbsp;Rubble<br/>
+}<br/>
+Willma&nbsp;Flintstone&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Fred&nbsp;Flintstone<br/>
+}<br/>
+Barny&nbsp;Rubble&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Fred&nbsp;Flintstone<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+A function like the following could do the trick :
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;persons.map[copy]<br/>
+}<br/>
+<span class="keyword">def</span>&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;overflow<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map[copy]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map[copy]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+The problem with that code is that we don&apos;t track the origins of the created copies. This is the
+main problem with model transformations. The classic solution is to run the copying in two passes.
+First we create all instances and then we establish the links. Although it works it results in cluttered
+and non coherent code. Xtend&apos;s create functions handle this problem by introducing identity perservation by
+tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual
+object and a second one to initialize it.
+ 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;<span class="keyword">create</span>&nbsp;result:&nbsp;<span class="keyword">new</span>&nbsp;Person&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map[copy]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map[copy]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+If you do not specify the name of the result variable it is assumed to be the implicit receiver variable 
+<span class="inlinecode"><span class="keyword">it</span></span>, which can be skipped in feature calls inside the body. Furthermore, you can define the return type of a create function:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">def</span>&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;<span class="keyword">new</span>&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/*&nbsp;it.*/</span>name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;=&nbsp;p.friendWith.map[copy]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedWith&nbsp;=&nbsp;p.marriedWith.map[copy]&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="CreateMethods_9"></a>
+<h4>How it works</h4>
+<p>
+In addition to the keyword <span class="inlinecode"><span class="keyword">create</span></span> one specifies two expressions.
+The first expression is the factory to create an instance while the second will initialize it further.
+Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
+for the very same arguments. If there is no such instance, the factory expression is evaluated and the
+result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated.
+This happens only if there was no previously created instance available in the cache. If that expression
+in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned.
+Note that the object is probably currently initialized. That is, its internal state may not yet be available.
+The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control
+how long the cache lives by means of Guice.
+</p>
+<a name="Annotations"></a>
+<h2>Annotations</h2>
+<p>
+Annotations are available on classes, fields, methods and parameters. They are prefixed
+with the <span class="inlinecode">@</span> character and accept a number of key-value pairs or a default value
+for the annotation property named <span class="inlinecode">value</span>. Annotation
+values that expect arrays can handle single values, too. Value arrays are enclosed in array 
+literals <span class="inlinecode">#[<span class="string">&apos;first&apos;</span>,&nbsp;<span class="string">&apos;second&apos;</span>]</span>.
+The semantics for annotations are exactly like defined in the 
+<a href="http://docs.oracle.com/javase/specs/jls/se5.0/html/j3TOC.html">Java Language Specification</a>. 
+Here is an example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@TypeAnnotation(<span class="string">"some&nbsp;value"</span>)<br/>
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;@FieldAnnotation(value&nbsp;=&nbsp;@NestedAnnotation(<span class="keyword">true</span>))<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">val</span>&nbsp;CONSTANT&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;compile-time&nbsp;constant&apos;</span><br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@MethodAnnotation(constant&nbsp;=&nbsp;CONSTANT)<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
+</span>&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+In addition <a href="40-annotations.html#activeAnnotations" title="Go to &quot;Active Annotations&quot;">Active Annotations</a> allow users to participate in compilation of
+Xtend code to Java source code.
+</p>
+<a name="extensionMethods"></a>
+<h2>Extension Methods</h2>
+<p>
+Extension methods allow to add new methods to existing types without modifying them. 
+This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
+Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the 
+method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type&apos;s members.
+<span class="inlinecode"><span class="string">"hello"</span>.toFirstUpper()&nbsp;<span class="comment">//&nbsp;calls&nbsp;StringExtensions.toFirstUpper("hello")</span></span>   
+</p>
+<p>
+Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
+Another benefit of extensions is that you can add methods which are specific to a certain context
+or layer of your application.
+</p>
+<p>
+For instance, you might not want to put UI-specific methods and dependencies into your
+domain model classes. Therefore this functionality is often defined in static methods or methods in
+utility classes or service layers. That works, but the code is less readable and less object-oriented if you call methods
+like this. In Java you often see code like this:
+</p>
+<p>
+<span class="inlinecode">persistenceManager.save(myObject);</span>
+</p>
+<p>
+Without tying your entities to the persistenceManager, extension methods allow you to write
+</p>
+<p>
+<span class="inlinecode">myObject.save</span>
+</p>
+<p>
+There are different ways to make methods available as extensions, which are described in the following sections.
+</p>
+<a name="libraryExtensions"></a>
+<h3>Extensions from the Library</h3>
+<p>
+The Xtend library puts a lot of very useful extension methods on existing types from the Java
+SDK without any further ado.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="string">"hello"</span>.toFirstUpper&nbsp;<span class="comment">//&nbsp;calls&nbsp;StringExtensions.toFirstUpper(String)<br/>
+</span>listOfStrings.map[&nbsp;toUpperCase&nbsp;]&nbsp;<span class="comment">//&nbsp;calls&nbsp;ListExtensions.&lt;T,&nbsp;R&gt;map(List&lt;T&gt;&nbsp;list,&nbsp;Function&lt;?&nbsp;super&nbsp;T,&nbsp;?&nbsp;extends&nbsp;R&gt;&nbsp;mapFunction)</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Have a look at the JavaDoc to learn about the available functionality:
+</p>
+<p>
+<ul>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/ObjectExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ObjectExtensions" >ObjectExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ObjectExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IterableExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IterableExtensions" >IterableExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IterableExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/MapExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.MapExtensions" >MapExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/MapExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/ListExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.ListExtensions" >ListExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/ListExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/CollectionExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.CollectionExtensions" >CollectionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/CollectionExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/BooleanExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.BooleanExtensions" >BooleanExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/BooleanExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/IntegerExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.IntegerExtensions" >IntegerExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/IntegerExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+	<li>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/xbase/lib/FunctionExtensions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.lib.FunctionExtensions" >FunctionExtensions</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.xbase.lib/src/org/eclipse/xtext/xbase/lib/FunctionExtensions.java" title="View Source Code" >(src)</a>
+	</li>
+</ul>
+</p>
+<a name="extensionMethods_9"></a>
+<h3>Local Extension Methods</h3>
+<p>
+All visible non-static methods of the current class and its super types are automatically available as extensions. For example
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;doSomething(Object&nbsp;obj)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;something&nbsp;with&nbsp;obj<br/>
+</span>&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;extensionCall(Object&nbsp;obj)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;obj.doSomething()&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;this.doSomething(obj)<br/>
+</span>&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Local static methods have to be made available through an import like any other static method.
+</p>
+<a name="extensionImports"></a>
+<h3>Extension Imports</h3>
+<p>
+In Java, you would usually write a helper class with static methods to decorate an existing
+class with additional behavior. In order to integrate such static helper classes, Xtend allows to put
+the keyword <span class="inlinecode"><span class="keyword">extension</span></span> after the <span class="inlinecode"><span class="keyword">static</span></span> keyword of a <a href="20-classes-and-functions.html#imports" title="Go to &quot;Imports&quot;">static import</a>
+thus making all imported static functions available as extensions methods.
+</p>
+<p>
+The following import declaration 
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.singletonList</span>
+</p>
+<p>
+allows us to use singletonList methods like this:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">new</span>&nbsp;MyClass().singletonList()&nbsp;<br/>
+<span class="comment">//&nbsp;calls&nbsp;Collections.singletonList(new&nbsp;MyClass())</span>
+</p>
+</div>
+</div>
+</p>
+<a name="Extension_Provider"></a>
+<h3>Extension Provider</h3>
+<p>
+By adding the <span class="inlinecode"><span class="keyword">extension</span></span> keyword to a field, a local variable or a parameter
+declaration, its instance methods become extension methods.
+</p>
+<p>
+Imagine you want to have some layer specific functionality on a class <span class="inlinecode">Person</span>. Let us say you are in a servlet-like class
+and want to persist a <span class="inlinecode">Person</span> using some persistence mechanism. Let us assume <span class="inlinecode">Person</span> implements
+a common interface <span class="inlinecode">Entity</span>.
+ 
+You could have the following interface
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">interface</span>&nbsp;EntityPersistence&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;save(Entity&nbsp;e);<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;update(Entity&nbsp;e);<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;delete(Entity&nbsp;e);<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+And if you have obtained an instance of that type (through a factory or dependency injection or what ever) like this:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyServlet&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">extension</span>&nbsp;EntityPersistence&nbsp;ep&nbsp;=&nbsp;Factory.get(EntityPersistence)<br/>
+&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+You are able to save, update and delete any entity like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;Person&nbsp;person&nbsp;=&nbsp;...<br/>
+person.save&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.save(person)<br/>
+</span>person.name&nbsp;=&nbsp;<span class="string">&apos;Horst&apos;</span><br/>
+person.update&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.update(person)<br/>
+</span>person.delete&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;ep.delete(person)</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+Using the <span class="inlinecode"><span class="keyword">extension</span></span> modifier on values has a significant advantage over 
+static <a href="20-classes-and-functions.html#extensionImports" title="Go to &quot;Extension Imports&quot;">extension imports</a>: Your code is not bound to the actual implementation of the extension method.
+You can simply exchange the component that provides the referenced extension with another implementation from outside,
+by providing a different instance.
+</p>
+<a name="interfaces"></a>
+<h2>Interface Declaration</h2>
+<p>
+An interface declaration is very similar to the one in Java. An interface can declare fields, which are
+by default final static therefore must have an initial value. And of course methods can
+be declared. They are public by default. Interfaces can extend any number of other interfaces and can
+declare type parameters.
+</p>
+<p>
+Here&apos;s an example:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">interface</span>&nbsp;MyInterface&lt;T&gt;&nbsp;<span class="keyword">extends</span>&nbsp;OtherInterface&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;CONSTANT&nbsp;=&nbsp;42<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;T&nbsp;doStuff(String&nbsp;...&nbsp;varArg)&nbsp;<span class="keyword">throws</span>&nbsp;SomeException<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="annotationTypeDeclaration"></a>
+<h2>Annotation Type Declaration</h2>
+<p>
+Annotation types can also be declared. The are introduced by the keyword <span class="inlinecode">annotation</span> and declare their values
+with a concise syntax:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">annotation</span>&nbsp;MyAnnotation&nbsp;{<br/>
+&nbsp;&nbsp;String[]&nbsp;value<br/>
+&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;isTricky&nbsp;=&nbsp;<span class="keyword">false</span><br/>
+&nbsp;&nbsp;<span class="keyword">int</span>[]&nbsp;lotteryNumbers&nbsp;=&nbsp;#[&nbsp;42,&nbsp;137&nbsp;]<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="enumTypeDeclaration"></a>
+<h2>Enum Type Declaration</h2>
+<p>
+Enumeration types are declared like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">enum</span>&nbsp;MyColor&nbsp;{<br/>
+&nbsp;&nbsp;GREEN,<br/>
+&nbsp;&nbsp;BLUE,<br/>
+&nbsp;&nbsp;RED<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="Nested_Type_Declarations"></a>
+<h2>Nested Type Declarations</h2>
+<p>
+Classes, enum, annotation and interface declarations can be nested. Just as in Java nested enums, annotations and interfaces are always static.
+In Xtend nested classes are also always static. Nested types are public by default and can only be nested within a class, an interface or an annotation declaration.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">class</span>&nbsp;NestedClass&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">annotation</span>&nbsp;NestedAnnotation&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">enum</span>&nbsp;NestedEnum&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">interface</span>&nbsp;NestedInterface&nbsp;{}<br/>
+}<br/>
+<br/>
+<span class="keyword">interface</span>&nbsp;MyInterface&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">class</span>&nbsp;NestedClass&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">annotation</span>&nbsp;NestedAnnotation&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">enum</span>&nbsp;NestedEnum&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">interface</span>&nbsp;NestedInterface&nbsp;{}<br/>
+}<br/>
+<br/>
+<span class="keyword">annotation</span>&nbsp;MyAnnotation&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">class</span>&nbsp;NestedClass&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">annotation</span>&nbsp;NestedAnnotation&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">enum</span>&nbsp;NestedEnum&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">interface</span>&nbsp;NestedInterface&nbsp;{}<br/>
+}
+</p>
+</div>
+</div>
+
+</p>
+</body>
+</html>
