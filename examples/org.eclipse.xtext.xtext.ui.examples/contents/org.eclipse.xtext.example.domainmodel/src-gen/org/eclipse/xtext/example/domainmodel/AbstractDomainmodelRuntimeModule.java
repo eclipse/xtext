@@ -173,4 +173,9 @@ public abstract class AbstractDomainmodelRuntimeModule extends org.eclipse.xtext
 		return org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelInferrer.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider.class);
+	}
+
 }

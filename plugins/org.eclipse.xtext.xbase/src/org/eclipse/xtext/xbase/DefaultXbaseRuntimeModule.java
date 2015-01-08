@@ -51,8 +51,6 @@ import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
-import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter;
-import org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseTransientValueService;
 import org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
@@ -109,6 +107,7 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 				.to(org.eclipse.xtext.xbase.serializer.SerializerScopeProvider.class);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
 				.annotatedWith(Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
@@ -179,8 +178,9 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 		return XbaseDiagnostician.class;
 	}
 
-	public Class<? extends StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider> bindStaticImplicitMethodsFeatureForTypeProvider$ExtensionClassNameProvider() {
-		return ImplicitlyImportedTypesAdapter.class;
+	@SuppressWarnings("deprecation")
+	public Class<? extends org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider.ExtensionClassNameProvider> bindStaticImplicitMethodsFeatureForTypeProvider$ExtensionClassNameProvider() {
+		return org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypesAdapter.class;
 	}
 
 	public Class<? extends MutableFileSystemSupport> bindMutableFileSystemSupport() {

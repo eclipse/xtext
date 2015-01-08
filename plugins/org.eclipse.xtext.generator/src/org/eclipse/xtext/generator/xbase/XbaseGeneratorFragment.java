@@ -28,6 +28,8 @@ import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
@@ -147,6 +149,15 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment implements
 					.addTypeToType(ILocationInFileProvider.class.getName(),
 								"org.eclipse.xtext.xbase.resource.XbaseLocationInFileProvider");
 
+		}
+		if (usesXImportSection(grammar)) {
+			config = config.addConfiguredBinding(
+					IScopeProvider.class.getName() + "Delegate",
+					"binder.bind("
+							+ IScopeProvider.class.getName()
+							+ ".class).annotatedWith(com.google.inject.name.Names.named("
+							+ AbstractDeclarativeScopeProvider.class.getName()
+							+ ".NAMED_DELEGATE)).to("+ getImportScopeProvider(grammar)+")");
 		}
 		return config.getBindings();
 	}

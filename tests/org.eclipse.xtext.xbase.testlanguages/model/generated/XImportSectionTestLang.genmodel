@@ -4,7 +4,7 @@
     editDirectory="/org.eclipse.xtext.xbase.testlanguages.edit/src" editorDirectory="/org.eclipse.xtext.xbase.testlanguages.editor/src"
     modelPluginID="org.eclipse.xtext.xbase.testlanguages" forceOverwrite="true" modelName="XImportSectionTestLang"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xbase.testlanguages.edit"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xbase.testlanguages.edit"
     editorPluginID="org.eclipse.xtext.xbase.testlanguages.editor" runtimeVersion="2.10"
     usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <genPackages prefix="XImportSectionTestLang" basePackage="org.eclipse.xtext.xbase.testlanguages"

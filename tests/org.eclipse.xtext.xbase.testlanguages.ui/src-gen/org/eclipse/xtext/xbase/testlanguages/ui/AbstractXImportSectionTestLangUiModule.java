@@ -4,7 +4,6 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
