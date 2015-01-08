@@ -32,7 +32,6 @@
         <cs:dependency name="org.eclipse.jdt" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.annotation" componentType="osgi.bundle" versionDesignator="1.0.0"/>
         <cs:dependency name="org.eclipse.jdt.core.source" componentType="osgi.bundle"/>
-        <cs:dependency name="org.eclipse.jdt.launching.macosx" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.junit" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.jdt.junit4.runtime" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.m2e.core" componentType="osgi.bundle"/>

@@ -13,6 +13,12 @@
 				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/docs/{1}">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
+			</rm:uri>
+		</rm:provider>
 		
 		<rm:provider componentTypes="eclipse.feature" readerType="local" mutable="false">
 			<rm:uri format="{0}/features/{1}.feature">
