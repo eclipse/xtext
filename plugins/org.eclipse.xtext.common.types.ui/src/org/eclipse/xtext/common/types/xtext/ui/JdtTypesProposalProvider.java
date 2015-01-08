@@ -9,10 +9,12 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -48,9 +50,13 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.editor.IDirtyStateManagerExtension;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal.IReplacementTextApplier;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -98,6 +104,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 
 	@Inject
 	private IDirtyStateManager dirtyStateManager;
+	
+	@Inject
+	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 	
 	@Inject
 	private RawSuperTypes superTypeCollector;
@@ -162,11 +171,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			return;
 		} 
 		try {
-			Iterable<IEObjectDescription> dirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
-			final Set<String> dirtyNames = Sets.newHashSet();
-			for(IEObjectDescription description: dirtyTypes) {
-				dirtyNames.add(description.getQualifiedName().toString());
-			}
 			final Set<String> superTypeNames = Sets.newHashSet();
 			final IJdtTypeProvider provider = jdtTypeProviderFatory.createTypeProvider(superType.eResource().getResourceSet());
 			IJavaSearchScope scope = createSearchScope(project, superType, superTypeNames);
@@ -176,9 +180,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						char[][] enclosingTypeNames, String path) {
 					if (path == null || path.endsWith(".class") || path.endsWith(".java")) { // Java index match
 						String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
-						if (dirtyNames.contains(identifier)) { // currently dirty, will be processed later (as path with another extension)
-							return false;
-						}
 						if (!superTypeNames.contains(identifier)) {
 							return true;
 						}
@@ -196,20 +197,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					}
 				}
 				
-				protected String getIdentifier(char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames) {
-					StringBuilder result = new StringBuilder(packageName.length + simpleTypeName.length + 1);
-					if (packageName.length != 0) {
-						result.append(packageName);
-						result.append('.');
-					}
-					for(char[] enclosingType: enclosingTypeNames) {
-						result.append(enclosingType);
-						result.append('$');
-					}
-					result.append(simpleTypeName);
-					return result.toString();
-				}
-				
 				@Override
 				public int getSearchFor() {
 					return filter.getSearchFor();
@@ -219,6 +206,23 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		} catch(JavaModelException ex) {
 			// ignore
 		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected String getIdentifier(char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames) {
+		StringBuilder result = new StringBuilder(packageName.length + simpleTypeName.length + 1);
+		if (packageName.length != 0) {
+			result.append(packageName);
+			result.append('.');
+		}
+		for(char[] enclosingType: enclosingTypeNames) {
+			result.append(enclosingType);
+			result.append('$');
+		}
+		result.append(simpleTypeName);
+		return result.toString();
 	}
 
 	/**
@@ -249,6 +253,26 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			IJavaSearchScope result = new IntersectingJavaSearchScope(projectScope, hierarchyScope);
 			return result;
 		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected Set<String> getDirtyTypeNames(){
+		Iterable<IEObjectDescription> dirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
+		final Set<String> dirtyNames = new HashSet<String>();
+		for(IEObjectDescription description: dirtyTypes) {
+			dirtyNames.add(description.getQualifiedName().toString());
+		}
+		for(URI dirtyURI : ((IDirtyStateManagerExtension) dirtyStateManager).getDirtyResourceURIs()){
+			IResourceDescriptions index = resourceDescriptionsProvider.createPersistedResourceDescriptions();
+			IResourceDescription indexedResourceDescription = index.getResourceDescription(dirtyURI);
+			if(indexedResourceDescription != null)
+				for(IEObjectDescription desc : indexedResourceDescription.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE)){
+					dirtyNames.add(desc.getQualifiedName().toString());
+				}
+		}
+		return dirtyNames;
 	}
 
 	protected void searchAndCreateProposals(IJavaSearchScope scope, final ICompletionProposalFactory proposalFactory,
@@ -312,6 +336,26 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		});
 		final ContentAssistContext myContext = contextBuilder.toContext();
 		final IJvmTypeProvider jvmTypeProvider = jdtTypeProviderFatory.findOrCreateTypeProvider(context.getResource().getResourceSet());
+		final Set<String> filteredTypeNames = getDirtyTypeNames();
+		final Filter dirtyTypenameFilter = new ITypesProposalProvider.Filter(){
+			@Override
+			public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
+					char[][] enclosingTypeNames, String path) {
+				if (path == null || path.endsWith(".class") || path.endsWith(".java")) { // Java index match
+					String identifier = getIdentifier(packageName, simpleTypeName, enclosingTypeNames);
+					if (filteredTypeNames.contains(identifier)) {
+						return false;
+					}
+				}
+				return true;
+			}
+
+			@Override
+			public int getSearchFor() {
+				return filter.getSearchFor();
+			}
+		};
+		
 		BasicSearchEngine searchEngine = new BasicSearchEngine();
 		searchEngine.searchAllTypeNames(
 				packageName, SearchPattern.R_PATTERN_MATCH, 
@@ -321,7 +365,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					@Override
 					public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path, AccessRestriction access) {
-						if (filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path) && (!checkAccessRestriction() || (access == null || access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter()))) {
+						if (dirtyTypenameFilter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path) && 
+							filter.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path) && (!checkAccessRestriction() || (access == null || access.getProblemId() != IProblem.ForbiddenReference && !access.ignoreIfBetter()))) {
 							StringBuilder fqName = new StringBuilder(packageName.length + simpleTypeName.length + 1);
 							if (packageName.length != 0) {
 								fqName.append(packageName);
