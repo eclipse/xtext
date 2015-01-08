@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.smoketest.internal;
 
+import org.eclipse.xtext.junit4.smoketest.DeltaScenarioProcessor;
 import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
@@ -36,7 +37,11 @@ public class ParallelCompleteInputScenarioRunner extends AbstractParallelScenari
 	
 	@Override
 	protected void doProcess(String data, ScenarioProcessor processor) throws Exception {
-		processor.processFile(data);
+		if (processor instanceof DeltaScenarioProcessor) {
+			((DeltaScenarioProcessor) processor).processFile(data, data, 0, 0, "");
+		} else {
+			processor.processFile(data);
+		}
 	}
 	
 }

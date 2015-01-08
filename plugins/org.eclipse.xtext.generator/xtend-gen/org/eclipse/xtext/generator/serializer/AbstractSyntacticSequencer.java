@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -26,11 +27,13 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector;
 import org.eclipse.xtext.nodemodel.BidiIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -45,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
 public class AbstractSyntacticSequencer extends GeneratedFile {
@@ -58,6 +62,18 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   @Inject
   @Extension
   private SyntacticSequencerUtil util;
+  
+  /**
+   * @since 2.8
+   */
+  @Accessors
+  private boolean detectSyntheticTerminals = true;
+  
+  /**
+   * @since 2.8
+   */
+  @Accessors
+  private SyntheticTerminalDetector syntheticTerminalDetector;
   
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     String _xblockexpression = null;
@@ -164,7 +180,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
             _builder.appendImmediate("\n", "\t");
           }
           _builder.append("\t");
-          CharSequence _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
+          boolean _isAbstract_1 = filename.isAbstract();
+          String _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule, _isAbstract_1);
           _builder.append(_genGetUnassignedRuleCallToken, "\t");
           _builder.newLineIfNotEmpty();
         }
@@ -436,44 +453,89 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _switchResult;
   }
   
-  public CharSequence genGetUnassignedRuleCallToken(final JavaFile file, final AbstractRule rule) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* ");
+  public String genGetUnassignedRuleCallToken(final JavaFile file, final AbstractRule rule, final boolean isAbstract) {
+    if ((rule instanceof TerminalRule)) {
+      boolean _and = false;
+      if (!this.detectSyntheticTerminals) {
+        _and = false;
+      } else {
+        boolean _isSyntheticTerminalRule = this.syntheticTerminalDetector.isSyntheticTerminalRule(((TerminalRule)rule));
+        _and = _isSyntheticTerminalRule;
+      }
+      if (_and) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("/**");
+        _builder.newLine();
+        _builder.append(" ");
+        _builder.append("* Synthetic terminal rule. The concrete syntax is to be specified by clients.");
+        _builder.newLine();
+        {
+          if ((!isAbstract)) {
+            _builder.append(" * Defaults to the empty string.");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        _builder.append(" ");
+        _builder.append("*/");
+        _builder.newLine();
+        _builder.append("protected ");
+        {
+          if (isAbstract) {
+            _builder.append("abstract ");
+          }
+        }
+        _builder.append("String ");
+        CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
+        _builder.append(_unassignedCalledTokenRuleName, "");
+        _builder.append("(EObject semanticObject, RuleCall ruleCall, INode node)");
+        {
+          if (isAbstract) {
+            _builder.append(";");
+          } else {
+            _builder.append(" { return \"\"; }");
+          }
+        }
+        _builder.newLineIfNotEmpty();
+        return _builder.toString();
+      }
+    }
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* ");
     ICompositeNode _node = NodeModelUtils.getNode(rule);
     String _textWithoutComments = this.textWithoutComments(_node);
     String _trim = _textWithoutComments.trim();
     String _replace = _trim.replace("\n", "\n* ");
-    _builder.append(_replace, " ");
-    _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    _builder.append("protected String ");
-    CharSequence _unassignedCalledTokenRuleName = this.unassignedCalledTokenRuleName(rule);
-    _builder.append(_unassignedCalledTokenRuleName, "");
-    _builder.append("(EObject semanticObject, RuleCall ruleCall, INode node) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("if (node != null)");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return getTokenText(node);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("return \"");
+    _builder_1.append(_replace, " ");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("protected String ");
+    CharSequence _unassignedCalledTokenRuleName_1 = this.unassignedCalledTokenRuleName(rule);
+    _builder_1.append(_unassignedCalledTokenRuleName_1, "");
+    _builder_1.append("(EObject semanticObject, RuleCall ruleCall, INode node) {");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("if (node != null)");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return getTokenText(node);");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("return \"");
     AbstractElement _alternatives = rule.getAlternatives();
     HashSet<AbstractElement> _newHashSet = CollectionLiterals.<AbstractElement>newHashSet();
     String _defaultValue = this.defaultValue(_alternatives, _newHashSet);
     String _convertToJavaString = Strings.convertToJavaString(_defaultValue);
-    _builder.append(_convertToJavaString, "\t");
-    _builder.append("\";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
+    _builder_1.append(_convertToJavaString, "\t");
+    _builder_1.append("\";");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    return _builder_1.toString();
   }
   
   public CharSequence genEmitUnassignedTokens(final JavaFile file) {
@@ -534,5 +596,23 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  @Pure
+  public boolean isDetectSyntheticTerminals() {
+    return this.detectSyntheticTerminals;
+  }
+  
+  public void setDetectSyntheticTerminals(final boolean detectSyntheticTerminals) {
+    this.detectSyntheticTerminals = detectSyntheticTerminals;
+  }
+  
+  @Pure
+  public SyntheticTerminalDetector getSyntheticTerminalDetector() {
+    return this.syntheticTerminalDetector;
+  }
+  
+  public void setSyntheticTerminalDetector(final SyntheticTerminalDetector syntheticTerminalDetector) {
+    this.syntheticTerminalDetector = syntheticTerminalDetector;
   }
 }

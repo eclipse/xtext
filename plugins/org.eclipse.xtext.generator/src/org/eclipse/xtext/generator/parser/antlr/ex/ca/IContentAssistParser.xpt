@@ -53,6 +53,13 @@ public class «helper.getContentAssistParserClassName(this).toSimpleName()» exten
 		return result;
 	}
 	
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+	@Override
+	protected TokenSource createLexer(CharStream stream) {
+		return new «helper.getContentAssistTokenSourceClassName(this)»(super.createLexer(stream));
+	}
+
+«ENDIF-»
 	@Override
 	protected String getRuleName(AbstractElement element) {
 		if (nameMappings == null) {
@@ -91,6 +98,65 @@ public class «helper.getContentAssistParserClassName(this).toSimpleName()» exten
 	}
 }
 «ENDFILE»
+
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+«FILE helper.getContentAssistTokenSourceClassName(this).asPath()+".java" SRC_UI-»
+/*
+«fileHeader()»
+*/
+package «helper.getContentAssistTokenSourceClassName(this).toJavaPackage()»;
+
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
+import org.eclipse.xtext.parser.antlr.AbstractIndentationTokenSource;
+import «helper.getInternalContentAssistParserClassName(this)»;
+
+public class «helper.getContentAssistTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
+	
+	public «helper.getContentAssistTokenSourceClassName(this).toSimpleName()»(TokenSource delegate) {
+		super(delegate);
+	}
+	
+	@Override
+	protected boolean shouldSplitTokenImpl(Token token) {
+«IF allTerminalRules().exists(r | r.name.toUpperCase() == "WS" )-»
+		// TODO Review assumption
+		return token.getType() == «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_WS;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+	}
+
+	@Override
+	protected int getBeginTokenType() {
+«LET allTerminalRules().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
+«IF open.size == 1-»
+		// TODO Review assumption
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_«open.first().name.toUpperCase()»;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+«ENDLET-»
+	}
+
+	@Override
+	protected int getEndTokenType() {
+«LET allTerminalRules().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
+«IF close.size == 1-»
+		// TODO Review assumption
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_«close.first().name.toUpperCase()»;
+«ELSE-»
+		// TODO Implement me
+		throw new UnsupportedOperationException("Implement me");
+«ENDIF-»
+«ENDLET-»
+	}
+	
+}
+«ENDFILE»
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE ruleName FOR AbstractElement-»

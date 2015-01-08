@@ -17,7 +17,7 @@ import com.google.inject.name.Named;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SerializerGenFileNames {
-	public class GenFileName {
+	public static class GenFileName {
 		private boolean _abstract;
 		private String component;
 		private String fileext;

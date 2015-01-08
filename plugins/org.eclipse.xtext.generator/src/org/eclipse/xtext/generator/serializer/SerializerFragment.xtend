@@ -25,7 +25,13 @@ import com.google.inject.name.Names
 import org.eclipse.xtext.generator.IStubGenerating
 import static java.util.Collections.*
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.generator.parser.antlr.ex.wsAware.SyntheticTerminalAwareFragmentHelper
+import org.eclipse.xtext.parser.antlr.AbstractSplittingTokenSource
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
 
+/**
+ * @author Moritz Eyshold - Initial contribution and API
+ */
 class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 	
 	@Inject AbstractSemanticSequencer abstractSemanticSequencer
@@ -46,6 +52,16 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	
 	boolean srcGenOnly = false;
 	
+	/**
+	 * @since 2.8
+	 */
+	boolean detectSyntheticTerminals = true;
+	
+	/**
+	 * @since 2.8
+	 */
+	@Accessors SyntheticTerminalDetector syntheticTerminalDetector = new SyntheticTerminalDetector()
+	
 	@Accessors boolean generateXtendStub
 	
 	override protected addLocalBindings(Binder binder) {
@@ -59,6 +75,25 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	
 	def setSrcGenOnly(boolean srcGen) {
 		srcGenOnly = srcGen;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	def boolean isDetectSyntheticTerminals() {
+		return detectSyntheticTerminals;
+	}
+	
+	/**
+	 * Set to false if synthetic terminal should be ignored. Synthetic terminals
+	 * have the form {@code terminal ABC: 'synthetic:ABC';} in the grammar
+	 * and require a customized {@link AbstractSplittingTokenSource token source}.
+	 * 
+	 * @see SyntheticTerminalAwareFragmentHelper
+	 * @since 2.8
+	 */
+	def void setDetectSyntheticTerminals(boolean detectSyntheticTerminals) {
+		this.detectSyntheticTerminals = detectSyntheticTerminals;
 	}
 	
 	override setGenerateStub(boolean generateStub) {
@@ -78,10 +113,14 @@ class SerializerFragment extends Xtend2GeneratorFragment implements IStubGenerat
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
+		abstractSyntacticSequencer.detectSyntheticTerminals = detectSyntheticTerminals
+		abstractSyntacticSequencer.syntheticTerminalDetector = syntheticTerminalDetector;
 		if(srcGenOnly) {
 			ctx.writeFile(Generator.SRC_GEN, names.semanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.semanticSequencer));
 			ctx.writeFile(Generator.SRC_GEN, names.syntacticSequencer.fileName, abstractSyntacticSequencer.getFileContents(names.syntacticSequencer));
 		} else {
+			syntacticSequencer.detectSyntheticTerminals = detectSyntheticTerminals
+			syntacticSequencer.syntheticTerminalDetector = syntheticTerminalDetector;
 			ctx.writeFile(Generator.SRC, names.semanticSequencer.fileName, semanticSequencer.getFileContents(names.semanticSequencer));
 			ctx.writeFile(Generator.SRC, names.syntacticSequencer.fileName, syntacticSequencer.getFileContents(names.syntacticSequencer));
 			ctx.writeFile(Generator.SRC_GEN, names.abstractSemanticSequencer.fileName, abstractSemanticSequencer.getFileContents(names.abstractSemanticSequencer));
