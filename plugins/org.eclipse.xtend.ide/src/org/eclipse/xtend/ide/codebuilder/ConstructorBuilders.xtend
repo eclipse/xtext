@@ -13,13 +13,17 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Jan Koehnlein
  */
 abstract class AbstractConstructorBuilder extends AbstractExecutableBuilder {
 }
- 
+
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject extension InsertionOffsets
@@ -33,8 +37,8 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 			.appendBody('')
 	}
 
-	override getInsertOffset() {
-		getNewConstructorInsertOffset(context, xtendType)
+	override getInsertOffset(XtextResource resource) {
+		getNewConstructorInsertOffset(context, resource.findByFragment(xtendType))
 	}
 	
 	override getIndentationLevel() {
@@ -46,6 +50,9 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	}
 }
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
 	
 	override build(ISourceAppender appendable) {

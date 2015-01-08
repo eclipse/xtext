@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Jan Koehnlein
@@ -33,8 +34,11 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 			default: 'field_default_obj.gif'
 		}
 	}
-} 
+}
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject extension InsertionOffsets
@@ -50,8 +54,8 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 		appendable.appendType(fieldType, "Object").append(' ').append(fieldName)
 	}
 
-	override getInsertOffset() {
-		getNewFieldInsertOffset(context, xtendType)
+	override getInsertOffset(XtextResource resource) {
+		getNewFieldInsertOffset(context, resource.findByFragment(xtendType))
 	}
 	
 	override getIndentationLevel() {
@@ -63,6 +67,9 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 	}
 }
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {
