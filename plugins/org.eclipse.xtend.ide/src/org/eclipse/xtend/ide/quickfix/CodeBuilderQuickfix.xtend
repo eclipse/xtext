@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable
 import org.eclipse.xtext.xbase.ui.document.DocumentSourceAppender.Factory.OptionalParameters
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
-import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.Wrapper
 
 /**
  * Creates quickfixes using {@link ICodeBuilder}s.
@@ -71,12 +71,17 @@ class CodeBuilderQuickfix {
 			}
 			val xtextEditor = editor as XtextEditor;
 			val document = xtextEditor.getDocument();
-			var offset = builder.insertOffset
-
-			val appendable = appendableFactory.create(document, xtendClass.eResource as XtextResource, offset, 0, new OptionalParameters => [
-				baseIndentationLevel = builder.indentationLevel
-				ensureEmptyLinesAround = true
-			])
+			val wrapper = Wrapper.forType(Integer)
+			val appendable = document.readOnly [ resource |
+				var offset = builder.getInsertOffset(resource)
+				wrapper.set(offset)
+				appendableFactory.create(document, resource, offset, 0, new OptionalParameters => [
+					baseIndentationLevel = builder.indentationLevel
+					ensureEmptyLinesAround = true
+				])				
+			] 
+			
+			var offset = wrapper.get
 			builder.build(appendable)
 			appendable.commitChanges
 			xtextEditor.setHighlightRange(offset + 1, appendable.length, true)

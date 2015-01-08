@@ -17,10 +17,14 @@ import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Xtend {
   @Inject
@@ -79,10 +83,11 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
     return _xblockexpression;
   }
   
-  public int getInsertOffset() {
+  public int getInsertOffset(final XtextResource resource) {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
-    return this._insertionOffsets.getNewMethodInsertOffset(_context, _xtendType);
+    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
+    return this._insertionOffsets.getNewMethodInsertOffset(_context, _findByFragment);
   }
   
   public int getIndentationLevel() {

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
@@ -8,9 +15,13 @@ import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xtend {
   @Inject
@@ -47,10 +58,11 @@ public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuil
     return _newLine.append("}");
   }
   
-  public int getInsertOffset() {
+  public int getInsertOffset(final XtextResource resource) {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
-    return this._insertionOffsets.getNewTypeInsertOffset(_context, _xtendType);
+    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
+    return this._insertionOffsets.getNewTypeInsertOffset(_context, _findByFragment);
   }
   
   public int getIndentationLevel() {

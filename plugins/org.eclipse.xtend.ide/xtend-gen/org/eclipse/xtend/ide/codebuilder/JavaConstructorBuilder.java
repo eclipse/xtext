@@ -14,6 +14,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
   public ISourceAppender build(final ISourceAppender appendable) {

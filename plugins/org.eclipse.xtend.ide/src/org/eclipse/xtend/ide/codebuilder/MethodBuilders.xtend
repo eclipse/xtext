@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Jan Koehnlein
@@ -28,6 +29,9 @@ abstract class AbstractMethodBuilder extends AbstractExecutableBuilder {
 	@Accessors boolean overrideFlag
 }
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject extension InsertionOffsets
@@ -52,8 +56,8 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 		appendable
 	}
 
-	override getInsertOffset() {
-		getNewMethodInsertOffset(context, xtendType)
+	override getInsertOffset(XtextResource resource) {
+		getNewMethodInsertOffset(context, resource.findByFragment(xtendType))
 	}
 	
 	override getIndentationLevel() {
@@ -65,6 +69,9 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 	}
 }
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {

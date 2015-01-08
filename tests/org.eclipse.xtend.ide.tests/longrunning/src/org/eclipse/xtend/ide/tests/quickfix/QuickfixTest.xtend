@@ -781,6 +781,40 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void missingConstructorOtherClassTwoFiles() {
+		create('Foo.xtend', '''
+			class Foo| {
+			}
+		''')
+		val myEditor = editor
+		create('Bar.xtend', '''
+			class Bar {
+				def foo() {
+					new Foo(1)|
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_NUMBER_OF_ARGUMENTS)
+		.assertResolutionLabels("Create constructor 'new(int)' in 'Foo'")
+		.assertModelAfterQuickfix('''
+			class Bar {
+				def foo() {
+					new Foo(1)
+				}
+			}
+		''')
+		assertEquals('''
+			class Foo {
+				
+				new(int i) {
+					«defaultBody»
+				}
+				
+			}
+		'''.toString, myEditor.document.get)
+	}
+	
+	@Test
 	def void missingConstructorCallParentheses() {
 		create('Foo.xtend', '''
 			class TopLevelClassWithDefaultconstructor {

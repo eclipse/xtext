@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IAnnotatable;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -34,6 +33,8 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.util.Wrapper;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -122,22 +123,33 @@ public class CodeBuilderQuickfix {
         }
         final XtextEditor xtextEditor = ((XtextEditor) editor);
         final IXtextDocument document = xtextEditor.getDocument();
-        int offset = builder.getInsertOffset();
-        Resource _eResource = xtendClass.eResource();
-        DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
-        final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function = new Procedure1<DocumentSourceAppender.Factory.OptionalParameters>() {
-          public void apply(final DocumentSourceAppender.Factory.OptionalParameters it) {
-            int _indentationLevel = builder.getIndentationLevel();
-            it.baseIndentationLevel = _indentationLevel;
-            it.ensureEmptyLinesAround = true;
+        final Wrapper<Integer> wrapper = Wrapper.<Integer>forType(Integer.class);
+        final IUnitOfWork<ReplacingAppendable, XtextResource> _function = new IUnitOfWork<ReplacingAppendable, XtextResource>() {
+          public ReplacingAppendable exec(final XtextResource resource) throws Exception {
+            ReplacingAppendable _xblockexpression = null;
+            {
+              int offset = builder.getInsertOffset(resource);
+              wrapper.set(Integer.valueOf(offset));
+              DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
+              final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function = new Procedure1<DocumentSourceAppender.Factory.OptionalParameters>() {
+                public void apply(final DocumentSourceAppender.Factory.OptionalParameters it) {
+                  int _indentationLevel = builder.getIndentationLevel();
+                  it.baseIndentationLevel = _indentationLevel;
+                  it.ensureEmptyLinesAround = true;
+                }
+              };
+              DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function);
+              _xblockexpression = CodeBuilderQuickfix.this.appendableFactory.create(document, resource, offset, 0, _doubleArrow);
+            }
+            return _xblockexpression;
           }
         };
-        DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function);
-        final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.create(document, ((XtextResource) _eResource), offset, 0, _doubleArrow);
+        final ReplacingAppendable appendable = document.<ReplacingAppendable>readOnly(_function);
+        Integer offset = wrapper.get();
         builder.build(appendable);
         appendable.commitChanges();
         int _length = appendable.length();
-        xtextEditor.setHighlightRange((offset + 1), _length, true);
+        xtextEditor.setHighlightRange(((offset).intValue() + 1), _length, true);
       }
     };
     return _function;

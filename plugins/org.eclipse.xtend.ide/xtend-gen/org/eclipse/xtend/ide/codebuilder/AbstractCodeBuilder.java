@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -142,6 +144,18 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       _switchResult = "";
     }
     return appendable.append(_switchResult);
+  }
+  
+  protected <T extends EObject> T findByFragment(final XtextResource resource, final T object) {
+    final Resource myResource = object.eResource();
+    boolean _equals = Objects.equal(myResource, resource);
+    if (_equals) {
+      return object;
+    }
+    final String fragment = myResource.getURIFragment(object);
+    EObject _eObject = resource.getEObject(fragment);
+    final T result = ((T) _eObject);
+    return result;
   }
   
   protected ISourceAppender appendType(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
