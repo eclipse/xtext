@@ -134,7 +134,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
 		XtendFile file = (XtendFile) context.getRootModel();
 		final char[] contextPackageName = Strings.emptyIfNull(file.getPackage()).toCharArray(); 
-		return new TypeMatchFilters.All(searchFor) {
+		return new TypeMatchFilters.All(searchFor, getDirtyStateTypeNames()) {
 			@Override
 			public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 					char[][] enclosingTypeNames, String path) {
@@ -318,18 +318,15 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	public void completeType_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
-				new ITypesProposalProvider.Filter() {
-					@Override
-					public int getSearchFor() {
-						return IJavaSearchConstants.CLASS;
-					}
+				new TypeMatchFilters.All(IJavaSearchConstants.CLASS, getDirtyStateTypeNames()) {
 
 					@Override
 					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path) {
-						if (TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames))
-							return false;
-						return !Flags.isFinal(modifiers);
+						if (super.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
+							return !Flags.isFinal(modifiers);
+						}
+						return false;
 					}
 				}, acceptor);
 	}

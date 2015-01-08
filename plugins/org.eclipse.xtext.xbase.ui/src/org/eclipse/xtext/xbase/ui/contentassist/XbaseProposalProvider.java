@@ -5,10 +5,13 @@ package org.eclipse.xtext.xbase.ui.contentassist;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -24,6 +27,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -42,7 +46,10 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.editor.IDirtyStateManagerExtension;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -77,6 +84,7 @@ import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
+@SuppressWarnings("restriction")
 public class XbaseProposalProvider extends AbstractXbaseProposalProvider implements RepeatedContentAssistProcessor.ModeAware {
 	
 	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
@@ -127,6 +135,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private SyntaxFilteredScopes syntaxFilteredScopes;
 	
+	@Inject
+	private IDirtyStateManager dirtyStateManager;
+
+	@Inject
+	private IBuilderState index;
+
 	@Override
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -239,7 +253,22 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected ITypesProposalProvider.Filter createVisibilityFilter(ContentAssistContext context, int searchFor) {
-		return new TypeMatchFilters.All(searchFor);
+		return new TypeMatchFilters.All(searchFor, getDirtyStateTypeNames());
+	}
+
+	protected Set<String> getDirtyStateTypeNames(){
+		Iterable<IEObjectDescription> dirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
+		final Set<String> dirtyNames = new HashSet<String>();
+		for(IEObjectDescription description: dirtyTypes) {
+			dirtyNames.add(description.getQualifiedName().toString());
+		}
+		for(URI dirtyURI : ((IDirtyStateManagerExtension) dirtyStateManager).getDirtyResourceURIs()){
+			IResourceDescription indexedResourceDescription = index.getResourceDescription(dirtyURI);
+			for(IEObjectDescription desc : indexedResourceDescription.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE)){
+				dirtyNames.add(desc.getQualifiedName().toString());
+			}
+		}
+		return dirtyNames;
 	}
 	
 	@Override
