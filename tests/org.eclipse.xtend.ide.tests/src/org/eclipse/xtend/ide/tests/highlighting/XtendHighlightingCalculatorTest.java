@@ -621,6 +621,13 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
+	
+	@Test public void testBug455188_3() throws Exception {
+		String model = "{ true && true } ";
+		
+		notExpectAbsolute(model.indexOf("&&"), 2, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
 
 	protected void highlight(String functionBody) {
 		try {
