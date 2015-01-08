@@ -22,7 +22,6 @@ import org.eclipse.xtend.ide.highlighting.XtendHighlightingConfiguration;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
@@ -619,6 +618,22 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendTestCase imple
 		
 		expectAbsolute(model.indexOf("contents"), 8, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
 		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
+		highlight(model);
+	}
+
+	@Test public void testBug455188_3() throws Exception {
+		String model = "{ true && true } ";
+
+		notExpectAbsolute(model.indexOf("&&"), 2, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		highlight(model);
+	}
+	
+	@Test public void testBug455188_4() throws Exception {
+		String model = "{ 1 + 2 } ";
+
+		notExpectAbsolute(model.indexOf("+"), 1, XbaseHighlightingConfiguration.EXTENSION_METHOD_INVOCATION);
+		expectAbsolute(model.indexOf("1"), 1, HighlightingStyles.NUMBER_ID);
+		expectAbsolute(model.indexOf("2"), 1, HighlightingStyles.NUMBER_ID);
 		highlight(model);
 	}
 
