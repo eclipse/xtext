@@ -14,8 +14,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -23,6 +26,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
@@ -37,8 +41,10 @@ import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.SearchParticipant;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
+import org.eclipse.jdt.internal.compiler.util.ObjectVector;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
 import org.eclipse.jdt.internal.core.search.IndexQueryRequestor;
 import org.eclipse.jdt.internal.core.search.PatternSearchJob;
@@ -57,6 +63,8 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
+
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -395,20 +403,74 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 
 	private IPackageFragmentRoot[] getSourceFolders() throws JavaModelException {
 		// Build scope using prereq projects but only source folders
-		IPackageFragmentRoot[] allRoots = javaProject.getAllPackageFragmentRoots();
-		int length = allRoots.length, size = 0;
-		IPackageFragmentRoot[] allSourceFolders = new IPackageFragmentRoot[length];
-		for (int i=0; i<length; i++) {
-			if (allRoots[i].getKind() == IPackageFragmentRoot.K_SOURCE) {
-				allSourceFolders[size++] = allRoots[i];
+		if (javaProject instanceof JavaProject) {
+			return getSourceFolders((JavaProject) javaProject);
+		} else {
+			IPackageFragmentRoot[] allRoots = javaProject.getAllPackageFragmentRoots();
+			int length = allRoots.length, size = 0;
+			IPackageFragmentRoot[] allSourceFolders = new IPackageFragmentRoot[length];
+			for (int i=0; i<length; i++) {
+				if (allRoots[i].getKind() == IPackageFragmentRoot.K_SOURCE) {
+					allSourceFolders[size++] = allRoots[i];
+				}
 			}
+			if (size < length) {
+				System.arraycopy(allSourceFolders, 0, allSourceFolders = new IPackageFragmentRoot[size], 0, size);
+			}
+			return allSourceFolders;
 		}
-		if (size < length) {
-			System.arraycopy(allSourceFolders, 0, allSourceFolders = new IPackageFragmentRoot[size], 0, size);
-		}
-		return allSourceFolders;
 	}
 	
+	/*
+	 * IJavaProject#getAllPackageFragmentRoots will open all references archives to read the JDK version from
+	 * the first class file it finds. This isn't necessary for our case thus we try to avoid this by copying a lot of 
+	 * code. 
+	 */
+	private IPackageFragmentRoot[] getSourceFolders(JavaProject javaProject) throws JavaModelException {
+		ObjectVector result = new ObjectVector();
+		collectSourcePackageFragmentRoots(javaProject, Sets.<String>newHashSet(), null, result);
+		IPackageFragmentRoot[] rootArray = new IPackageFragmentRoot[result.size()];
+		result.copyInto(rootArray);
+		return rootArray;
+	}
+
+	/**
+	 * @see JavaProject#computePackageFragmentRoots(IClasspathEntry, ObjectVector, HashSet, IClasspathEntry, boolean, java.util.Map)
+	 */
+	private void collectSourcePackageFragmentRoots(JavaProject javaProject, HashSet<String> rootIDs, IClasspathEntry referringEntry, ObjectVector result) throws JavaModelException {
+		if (referringEntry == null){
+			rootIDs.add(javaProject.rootID());
+		}
+		IWorkspaceRoot workspaceRoot = javaProject.getProject().getWorkspace().getRoot();
+		for(IClasspathEntry entry: javaProject.getResolvedClasspath()) {
+			switch(entry.getEntryKind()) {
+				case IClasspathEntry.CPE_PROJECT:
+					if (referringEntry != null && !entry.isExported())
+						return;
+					
+					IPath pathToProject = entry.getPath();
+					IResource referencedProject = workspaceRoot.findMember(pathToProject);
+					if (referencedProject != null && referencedProject.getType() == IResource.PROJECT) {
+						IProject casted = (IProject) referencedProject;
+						if (JavaProject.hasJavaNature(casted)) {
+							rootIDs.add(javaProject.rootID());
+							JavaProject referencedJavaProject = (JavaProject) JavaCore.create(casted);
+							collectSourcePackageFragmentRoots(referencedJavaProject, rootIDs, entry, result);
+						}
+					}
+					break;
+				case IClasspathEntry.CPE_SOURCE:
+					javaProject.computePackageFragmentRoots(
+							entry,
+							result,
+							rootIDs,
+							referringEntry,
+							true,
+							null);
+					break;
+			}
+		}
+	}
 
 	private boolean canLink(String typeName) {
 		if (typeName == null) {
