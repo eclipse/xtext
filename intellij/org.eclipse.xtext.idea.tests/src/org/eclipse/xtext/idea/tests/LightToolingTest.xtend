@@ -15,6 +15,7 @@ import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
 import com.intellij.testFramework.fixtures.LightCodeInsightFixtureTestCase
 import org.eclipse.xtext.idea.lang.IXtextLanguage
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtext.junit4.internal.LineDelimiters
 
 class LightToolingTest extends LightCodeInsightFixtureTestCase {
 
@@ -75,7 +76,7 @@ class LightToolingTest extends LightCodeInsightFixtureTestCase {
 	}
 
 	protected def configureByText(String code) {
-		configureByText(fileType, code)
+		configureByText(fileType, LineDelimiters.toUnix(code))
 	}
 
 	protected def complete(String text) {
