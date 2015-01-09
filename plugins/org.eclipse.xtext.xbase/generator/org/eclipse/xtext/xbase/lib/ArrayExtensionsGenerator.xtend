@@ -72,7 +72,7 @@ class ArrayExtensionsGenerator {
 		«ENDFOR»
 	'''
 	
-	def generateClone(String string) '''
+	def generateClone(String type) '''
 		/**
 		 * Clones the array. @see {@link Object#clone}
 		 * 
@@ -84,12 +84,12 @@ class ArrayExtensionsGenerator {
 		@Pure
 		@Inline("$1.clone()")
 		@GwtIncompatible("clone")
-		public static «string»[] clone(«string»[] array) {
+		public static «type»[] clone(«type»[] array) {
 			return array.clone();
 		}
 	'''
 	
-	def generateEquals(String string) '''
+	def generateEquals(String type) '''
 		/**
 		 * Returns whether the array and the given other object are identical.
 		 *
@@ -104,12 +104,12 @@ class ArrayExtensionsGenerator {
 		 */
 		@Pure
 		@Inline("$1.equals($2)")
-		public static boolean equals(«string»[] array, Object other) {
+		public static boolean equals(«type»[] array, Object other) {
 			return array.equals(other);
 		}
 	'''
 	
-	def generateHashCode(String string) '''
+	def generateHashCode(String type) '''
 		/**
 		 * Returns a hash code value for the given array.
 		 * 
@@ -120,12 +120,12 @@ class ArrayExtensionsGenerator {
 		 */
 		@Pure
 		@Inline("$1.hashCode()")
-		public static int hashCode(«string»[] array) {
+		public static int hashCode(«type»[] array) {
 			return array.hashCode();
 		}
 	'''
 	
-	def generateLength(String string) '''
+	def generateLength(String type) '''
 		/**
 		 * @param array
 		 *            the array
@@ -133,12 +133,12 @@ class ArrayExtensionsGenerator {
 		 */
 		@Pure
 		@Inline("$1.length")
-		public static int length(«string»[] array) {
+		public static int length(«type»[] array) {
 			return array.length;
 		}
 	'''
 	
-	def generateSet(String string) '''
+	def generateSet(String type) '''
 		/**
 		 * @param array
 		 *            the array
@@ -146,14 +146,16 @@ class ArrayExtensionsGenerator {
 		 *            the index the value should be set at
 		 * @param value
 		 *            the value to set at the given index
+		 * @return the new value
 		 */
 		@Inline("$1[$2] = $3")
-		public static void set(«string»[] array, int index, «string» value) {
+		public static «type» set(«type»[] array, int index, «type» value) {
 			array[index] = value;
+			return value;
 		}
 	'''
 	
-	def generateGet(String string) '''
+	def generateGet(String type) '''
 		/**
 		 * @param array
 		 *            the array
@@ -163,7 +165,7 @@ class ArrayExtensionsGenerator {
 		 */
 		@Pure
 		@Inline("$1[$2]")
-		public static «string» get(«string»[] array, int index) {
+		public static «type» get(«type»[] array, int index) {
 			return array[index];
 		}
 	'''
