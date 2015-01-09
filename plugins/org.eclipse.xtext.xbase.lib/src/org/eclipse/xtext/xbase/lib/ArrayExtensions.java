@@ -126,10 +126,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(boolean[] array, int index, boolean value) {
+	public static boolean set(boolean[] array, int index, boolean value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -210,10 +212,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(double[] array, int index, double value) {
+	public static double set(double[] array, int index, double value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -294,10 +298,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(float[] array, int index, float value) {
+	public static float set(float[] array, int index, float value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -378,10 +384,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(long[] array, int index, long value) {
+	public static long set(long[] array, int index, long value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -462,10 +470,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(int[] array, int index, int value) {
+	public static int set(int[] array, int index, int value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -546,10 +556,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(char[] array, int index, char value) {
+	public static char set(char[] array, int index, char value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -630,10 +642,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(short[] array, int index, short value) {
+	public static short set(short[] array, int index, short value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
@@ -714,10 +728,12 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @return the new value
 	 */
 	@Inline("$1[$2] = $3")
-	public static void set(byte[] array, int index, byte value) {
+	public static byte set(byte[] array, int index, byte value) {
 		array[index] = value;
+		return value;
 	}
 	
 	/**
