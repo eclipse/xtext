@@ -3510,10 +3510,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("public class C {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("public void m(final CharSequence[] array, final String value) {");
+    _builder_1.append("public CharSequence m(final CharSequence[] array, final String value) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("array[1] = value;");
+    _builder_1.append("return array[1] = value;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
