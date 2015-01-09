@@ -4,6 +4,12 @@
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.xbase.lib.ArrayExtensions"/>
+                <message_argument value="set(T[], int, E)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.xbase.lib.ArrayExtensions"/>
                 <message_argument value="set(boolean[], int, boolean)"/>
             </message_arguments>
         </filter>
@@ -47,6 +53,13 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.xbase.lib.ArrayExtensions"/>
                 <message_argument value="set(short[], int, short)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1141899266">
+            <message_arguments>
+                <message_argument value="2.4"/>
+                <message_argument value="2.8"/>
+                <message_argument value="set(T[], int, E)"/>
             </message_arguments>
         </filter>
         <filter id="1143996420">
