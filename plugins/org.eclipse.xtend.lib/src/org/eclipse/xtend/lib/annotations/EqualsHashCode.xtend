@@ -11,6 +11,8 @@ import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtend2.lib.StringConcatenationClient
+import java.util.Arrays
 
 /**
  * Creates default implementations for {@link Object#equals(Object) equals} and {@link Object#hashCode hashCode}.
@@ -55,8 +57,8 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 	/**
 	 * @since 2.7
-	 * @noreference
 	 * @noextend
+	 * @noreference
  	 */
 	@Beta
 	static class Util {
@@ -118,8 +120,8 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 			cls.newTypeReference(cls.typeParameters.map[object.newWildcardTypeReference])
 		}
 
-		def contributeToEquals(FieldDeclaration it) {
-			return switch (type.orObject.name) {
+		def StringConcatenationClient contributeToEquals(FieldDeclaration it) {
+			switch (type.orObject.name) {
 				case Double.TYPE.name: '''
 					if (Double.doubleToLongBits(other.«simpleName») != Double.doubleToLongBits(this.«simpleName»))
 					  return false; 
@@ -129,11 +131,11 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 					  return false; 
 				'''
 				case Boolean.TYPE.name,
-			case Integer.TYPE.name,
-			case Character.TYPE.name,
-			case Byte.TYPE.name,
-			case Short.TYPE.name,
-			case Long.TYPE.name: '''
+				case Integer.TYPE.name,
+				case Character.TYPE.name,
+				case Byte.TYPE.name,
+				case Short.TYPE.name,
+				case Long.TYPE.name: '''
 					if (other.«simpleName» != this.«simpleName»)
 					  return false;
 				'''
@@ -141,9 +143,21 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 					if (this.«simpleName» == null) {
 					  if (other.«simpleName» != null)
 					    return false;
-					} else if (!this.«simpleName».equals(other.«simpleName»))
+					} else if (!«deepEquals»)
 					  return false;
 				'''
+			}
+		}
+		
+		def StringConcatenationClient deepEquals(FieldDeclaration it) {
+			if (type.isArray) {
+				if (type.arrayComponentType.isPrimitive) {
+					'''«Arrays».equals(this.«simpleName», other.«simpleName»)'''
+				} else {
+					'''«Arrays».deepEquals(this.«simpleName», other.«simpleName»)'''
+				}
+			} else {
+				'''this.«simpleName».equals(other.«simpleName»)'''
 			}
 		}
 
@@ -165,25 +179,36 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 			]
 		}
 
-		def contributeToHashCode(FieldDeclaration it) {
-			return switch (type.orObject.name) {
+		def StringConcatenationClient contributeToHashCode(FieldDeclaration it) {
+			switch (type.orObject.name) {
 				case Double.TYPE.name:
-					"result = prime * result + (int) (Double.doubleToLongBits(this." + simpleName +
-						") ^ (Double.doubleToLongBits(this." + simpleName + ") >>> 32));"
+					'''result = prime * result + (int) (Double.doubleToLongBits(this.«simpleName») ^ (Double.doubleToLongBits(this.«simpleName») >>> 32));'''
 				case Float.TYPE.name:
-					"result = prime * result + Float.floatToIntBits(this." + simpleName + ");"
+					'''result = prime * result + Float.floatToIntBits(this.«simpleName»);'''
 				case Boolean.TYPE.name:
-					"result = prime * result + (this." + simpleName + " ? 1231 : 1237);"
+					'''result = prime * result + (this.«simpleName» ? 1231 : 1237);'''
 				case Integer.TYPE.name,
-			case Character.TYPE.name,
-			case Byte.TYPE.name,
-			case Short.TYPE.name:
-					"result = prime * result + this." + simpleName + ";"
+				case Character.TYPE.name,
+				case Byte.TYPE.name,
+				case Short.TYPE.name:
+					'''result = prime * result + this.«simpleName»;'''
 				case Long.TYPE.name:
-					"result = prime * result + (int) (this." + simpleName + " ^ (this." + simpleName + " >>> 32));"
+					'''result = prime * result + (int) (this.«simpleName» ^ (this.«simpleName» >>> 32));'''
 				default:
-					"result = prime * result + ((this." + simpleName + "== null) ? 0 : this." + simpleName +
-						".hashCode());"
+					'''result = prime * result + ((this.«simpleName»== null) ? 0 : «deepHashCode»);'''
+			}
+		}
+		
+		def StringConcatenationClient deepHashCode(FieldDeclaration it) {
+			val type = type.orObject
+			if (type.isArray) {
+				if (type.arrayComponentType.isPrimitive) {
+					'''«Arrays».hashCode(this.«simpleName»)'''
+				} else {
+					'''«Arrays».deepHashCode(this.«simpleName»)'''
+				}
+			} else {
+				'''this.«simpleName».hashCode()'''
 			}
 		}
 		
