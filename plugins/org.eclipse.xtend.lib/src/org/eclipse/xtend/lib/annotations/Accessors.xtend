@@ -59,6 +59,7 @@ annotation Accessors {
 
 /**
  * @since 2.7
+ * @noreference
  */
 @Beta
 @GwtCompatible
@@ -76,6 +77,8 @@ enum AccessorType {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 class AccessorsProcessor implements TransformationParticipant<MutableMemberDeclaration> {
@@ -107,6 +110,8 @@ class AccessorsProcessor implements TransformationParticipant<MutableMemberDecla
 
 	/**
 	 * @since 2.7
+	 * @noextend
+	 * @noreference
 	 */
 	@Beta
 	static class Util {

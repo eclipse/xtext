@@ -37,6 +37,8 @@ annotation Data {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 class DataProcessor extends AbstractClassProcessor {
@@ -78,6 +80,8 @@ class DataProcessor extends AbstractClassProcessor {
 
 	/**
 	 * @since 2.7
+	 * @noextend
+	 * @noreference
  	 */
 	@Beta
 	static class Util {
