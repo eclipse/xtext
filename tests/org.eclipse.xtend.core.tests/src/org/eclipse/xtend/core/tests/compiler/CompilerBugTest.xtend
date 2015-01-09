@@ -1579,8 +1579,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 		''', '''
 			@SuppressWarnings("all")
 			public class C {
-			  public void m(final CharSequence[] array, final String value) {
-			    array[1] = value;
+			  public CharSequence m(final CharSequence[] array, final String value) {
+			    return array[1] = value;
 			  }
 			}
 		''')
