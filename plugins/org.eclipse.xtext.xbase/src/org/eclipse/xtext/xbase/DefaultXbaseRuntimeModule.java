@@ -53,6 +53,7 @@ import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.serializer.XbaseTransientValueService;
 import org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator;
+import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 import org.eclipse.xtext.xbase.validation.XbaseDiagnostician;
 import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
@@ -127,6 +128,11 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	@SingletonBinding(eager = true)
 	public Class<? extends JvmTypeReferencesValidator> bindJvmTypeReferencesValidator() {
 		return JvmTypeReferencesValidator.class;
+	}
+	
+	@SingletonBinding(eager = true)
+	public Class<? extends UniqueClassNameValidator> bindUniqueClassNameValidator() {
+		return UniqueClassNameValidator.class;
 	}
 
 	// obsolete convenience bindings
