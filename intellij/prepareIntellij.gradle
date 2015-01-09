@@ -4,6 +4,7 @@ allprojects {
   ext.intellijLibs = file("${intellijHome}/lib")
 }
 
+def repositoryUrl = 'https://teamcity.jetbrains.com/repository/download/bt410/153679:id'
 def buildQualifier = '138.SNAPSHOT'
 def archiveName
 if (os.windows) {
@@ -19,8 +20,8 @@ task downloadIntellij {
   onlyIf {!archiveFile.exists()}
   doLast {
     intellijHome.mkdirs()
-    ant.get(src:"https://teamcity.jetbrains.com/repository/download/bt410/153679:id/${archiveName}?guest", dest: intellijHome)
-    ant.get(src:'https://teamcity.jetbrains.com/repository/download/bt410/153679:id/sources.zip?guest', dest: intellijHome)
+    ant.get(src:"${repositoryUrl}/${archiveName}?guest", dest: intellijHome)
+    ant.get(src:"${repositoryUrl}/sources.zip?guest', dest: intellijHome)
   }
 }
 
