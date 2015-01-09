@@ -12,13 +12,17 @@ import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
+import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Assert;
 
 @SuppressWarnings("all")
 public class FileProcessor extends AbstractClassProcessor {
@@ -51,7 +55,15 @@ public class FileProcessor extends AbstractClassProcessor {
     Path _append = _projectFolder.append("res/template.txt");
     CharSequence _contents = context.getContents(_append);
     String _string = _contents.toString();
-    final String[] segments = _string.split(",");
+    String _trim = _string.trim();
+    final String[] segments = _trim.split(",");
+    final Procedure1<String> _function = new Procedure1<String>() {
+      public void apply(final String segment) {
+        FieldDeclaration _findDeclaredField = annotatedClass.findDeclaredField(segment);
+        Assert.assertNotNull(_findDeclaredField);
+      }
+    };
+    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(segments)), _function);
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _hasElements = false;
