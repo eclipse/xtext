@@ -42,12 +42,16 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 @SuppressWarnings("all")
 public class FinalFieldsConstructorProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
   /**
    * @since 2.7
+   * @noextend
+   * @noreference
    */
   @Beta
   public static class Util {
