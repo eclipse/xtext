@@ -151,4 +151,20 @@ class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 			assertTrue(singleGeneratedCode.contains("Foo<?> other = (Foo<?>) obj"))
 		]
 	}
+	
+	@Test
+	def void testArray() {
+		val text = '''
+			import org.eclipse.xtend.lib.annotations.EqualsHashCode
+			@EqualsHashCode class Foo {
+				int[] a = #[1]
+			}
+		'''
+		text.compile [
+			val instance = compiledClass.newInstance
+			val instance2 = compiledClass.newInstance
+			assertEquals(instance, instance2)
+			assertEquals(instance.hashCode, instance2.hashCode)
+		]
+	}
 }
