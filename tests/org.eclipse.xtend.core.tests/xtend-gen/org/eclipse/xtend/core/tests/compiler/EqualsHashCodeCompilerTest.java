@@ -351,4 +351,40 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testArray() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import org.eclipse.xtend.lib.annotations.EqualsHashCode");
+      _builder.newLine();
+      _builder.append("@EqualsHashCode class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("int[] a = #[1]");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String text = _builder.toString();
+      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        public void accept(final CompilationTestHelper.Result it) {
+          try {
+            Class<?> _compiledClass = it.getCompiledClass();
+            final Object instance = _compiledClass.newInstance();
+            Class<?> _compiledClass_1 = it.getCompiledClass();
+            final Object instance2 = _compiledClass_1.newInstance();
+            Assert.assertEquals(instance, instance2);
+            int _hashCode = instance.hashCode();
+            int _hashCode_1 = instance2.hashCode();
+            Assert.assertEquals(_hashCode, _hashCode_1);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      this.compilationTestHelper.compile(text, _function);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
