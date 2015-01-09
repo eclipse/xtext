@@ -39,6 +39,9 @@ class DefaultStructureViewTreeElementProvider implements IStructureViewTreeEleme
 
 	def dispatch void buildChildren(XtextFileTreeElement it) {
 		val modelElement = element.resource.contents.head
+		if (modelElement == null) {
+			return
+		}
 		val itemPresentation = modelElement.itemPresentation ?: new PresentationData
 		if (itemPresentation instanceof PresentationData)
 			if (itemPresentation.presentableText == null)

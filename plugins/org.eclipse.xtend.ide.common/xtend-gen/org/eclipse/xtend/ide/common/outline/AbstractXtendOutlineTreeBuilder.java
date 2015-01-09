@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.common.outline;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -65,11 +66,10 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   @Extension
   protected IXtendOutlineNodeBuilder xtendOutlineNodeBuilder;
   
-  public void build(final EObject modelElement, final IXtendOutlineContext context) {
-    this._build(modelElement, context);
+  protected void _build(final Void modelElement, final IXtendOutlineContext context) {
   }
   
-  public void _build(final EObject modelElement, final IXtendOutlineContext context) {
+  protected void _build(final EObject modelElement, final IXtendOutlineContext context) {
     EList<EObject> _eContents = modelElement.eContents();
     final Procedure1<EObject> _function = new Procedure1<EObject>() {
       public void apply(final EObject it) {
@@ -239,6 +239,19 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   }
   
   protected abstract void buildType(final EObject someType, final IXtendOutlineContext context);
+  
+  public void build(final EObject modelElement, final IXtendOutlineContext context) {
+    if (modelElement != null) {
+      _build(modelElement, context);
+      return;
+    } else if (modelElement == null) {
+      _build((Void)null, context);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(modelElement, context).toString());
+    }
+  }
   
   public void setXtendOutlineNodeBuilder(final IXtendOutlineNodeBuilder xtendOutlineNodeBuilder) {
     this.xtendOutlineNodeBuilder = xtendOutlineNodeBuilder;

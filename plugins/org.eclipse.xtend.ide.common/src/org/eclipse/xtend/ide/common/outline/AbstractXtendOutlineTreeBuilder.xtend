@@ -38,11 +38,10 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 	@Accessors(PUBLIC_SETTER)
 	protected extension IXtendOutlineNodeBuilder xtendOutlineNodeBuilder
 
-	override build(EObject modelElement, IXtendOutlineContext context) {
-		modelElement._build(context)
+	def dispatch build(Void modelElement, IXtendOutlineContext context) {
 	}
 
-	def void _build(EObject modelElement, IXtendOutlineContext context) {
+	def dispatch build(EObject modelElement, IXtendOutlineContext context) {
 		modelElement.eContents.forEach[buildEObjectNode(context)]
 	}
 

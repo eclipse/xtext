@@ -227,6 +227,9 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     } else if (xtendType != null) {
       _build(xtendType, context);
       return;
+    } else if (xtendType == null) {
+      _build((Void)null, context);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(xtendType, context).toString());
