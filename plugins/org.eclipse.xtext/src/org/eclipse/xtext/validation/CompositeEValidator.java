@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.xtext.service.OperationCanceledError;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -54,7 +55,22 @@ public class CompositeEValidator implements EValidator {
 		public boolean equals(Object obj) {
 			if (!(obj instanceof EValidatorEqualitySupport))
 				return false;
-			return ((EValidatorEqualitySupport) obj).getDelegate().getClass().equals(getDelegate().getClass());
+			EValidator otherDelegate = ((EValidatorEqualitySupport) obj).getDelegate();
+			if (otherDelegate.getClass().equals(getDelegate().getClass())) {
+				if (delegate instanceof AbstractInjectableValidator) {
+					AbstractInjectableValidator casted = (AbstractInjectableValidator) getDelegate();
+					AbstractInjectableValidator otherCasted = (AbstractInjectableValidator) otherDelegate;
+					if (casted.isLanguageSpecific() == otherCasted.isLanguageSpecific()) {
+						if (casted.isLanguageSpecific()) {
+							return Objects.equal(casted.getLanguageName(), otherCasted.getLanguageName());
+						}
+						return true;
+					}
+					return false;
+				}
+				return true;
+			}
+			return false;
 		}
 
 		@Override
