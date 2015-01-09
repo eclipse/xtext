@@ -11,6 +11,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 
 /**
@@ -39,7 +40,7 @@ public interface ICodeBuilder {
 	interface Xtend extends ICodeBuilder {
 		XtendTypeDeclaration getXtendType();
 		
-		int getInsertOffset();
+		int getInsertOffset(XtextResource resource);
 		
 		int getIndentationLevel();
 	}

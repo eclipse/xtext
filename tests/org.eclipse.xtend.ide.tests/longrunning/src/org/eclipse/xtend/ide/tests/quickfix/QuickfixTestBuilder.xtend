@@ -118,6 +118,10 @@ class QuickfixTestBuilder {
 		this
 	}
 	
+	def protected getEditor() {
+		return editor
+	}
+	
 	def protected getIssuesAtCaret() {
 		issues.filter[offset <= caretOffset && offset+length >= caretOffset]
 	}
