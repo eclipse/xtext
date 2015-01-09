@@ -130,7 +130,7 @@ public class ArrayExtensionsGenerator {
     return _builder;
   }
   
-  public CharSequence generateClone(final String string) {
+  public CharSequence generateClone(final String type) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -162,9 +162,9 @@ public class ArrayExtensionsGenerator {
     _builder.append("@GwtIncompatible(\"clone\")");
     _builder.newLine();
     _builder.append("public static ");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append("[] clone(");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append("[] array) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -175,7 +175,7 @@ public class ArrayExtensionsGenerator {
     return _builder;
   }
   
-  public CharSequence generateEquals(final String string) {
+  public CharSequence generateEquals(final String type) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -217,7 +217,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1.equals($2)\")");
     _builder.newLine();
     _builder.append("public static boolean equals(");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append("[] array, Object other) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -228,7 +228,7 @@ public class ArrayExtensionsGenerator {
     return _builder;
   }
   
-  public CharSequence generateHashCode(final String string) {
+  public CharSequence generateHashCode(final String type) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -258,7 +258,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1.hashCode()\")");
     _builder.newLine();
     _builder.append("public static int hashCode(");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append("[] array) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -269,7 +269,7 @@ public class ArrayExtensionsGenerator {
     return _builder;
   }
   
-  public CharSequence generateLength(final String string) {
+  public CharSequence generateLength(final String type) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -290,7 +290,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1.length\")");
     _builder.newLine();
     _builder.append("public static int length(");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append("[] array) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -301,7 +301,7 @@ public class ArrayExtensionsGenerator {
     return _builder;
   }
   
-  public CharSequence generateSet(final String string) {
+  public CharSequence generateSet(final String type) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -324,25 +324,33 @@ public class ArrayExtensionsGenerator {
     _builder.append("*            the value to set at the given index");
     _builder.newLine();
     _builder.append(" ");
+    _builder.append("* @return the new value");
+    _builder.newLine();
+    _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
     _builder.append("@Inline(\"$1[$2] = $3\")");
     _builder.newLine();
-    _builder.append("public static void set(");
-    _builder.append(string, "");
+    _builder.append("public static ");
+    _builder.append(type, "");
+    _builder.append(" set(");
+    _builder.append(type, "");
     _builder.append("[] array, int index, ");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append(" value) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("array[index] = value;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return value;");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;
   }
   
-  public CharSequence generateGet(final String string) {
+  public CharSequence generateGet(final String type) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -369,9 +377,9 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1[$2]\")");
     _builder.newLine();
     _builder.append("public static ");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append(" get(");
-    _builder.append(string, "");
+    _builder.append(type, "");
     _builder.append("[] array, int index) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
