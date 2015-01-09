@@ -2,7 +2,7 @@
 <rm:rmap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:maven="http://www.eclipse.org/buckminster/MavenProvider-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
   <rm:property key="checkout.location" value=""/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
-  <rm:property key="emf.target.platform" value="${eclipse.download}/modeling/emf/emf/updates/releases"/>
+  <rm:property key="emf.target.platform" value="${eclipse.download}/modeling/emf/emf/updates/nightly"/>
   <rm:property key="xpand_mwe.download" value="${eclipse.download}"/>
   <rm:property key="xpand.p2.repository" value="${eclipse.download}/modeling/m2t/xpand/updates/releases"/>
   <rm:property key="mwe.p2.repository" value="${xpand_mwe.download}/modeling/emft/mwe/updates/nightly"/>
