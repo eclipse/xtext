@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 
+import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 
 /**
@@ -193,8 +194,21 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 		if (!fullyInitialized && !isInitializing && !isLoadedFromStorage()) {
 			try {
 				isInitializing = true;
-				if (derivedStateComputer != null)
-					derivedStateComputer.installDerivedState(this, preIndexingPhase);
+				if (derivedStateComputer != null) {
+					EList<EObject> roots = doGetContents();
+					if (roots.size() > 1) {
+						throw new IllegalStateException("The resource should have no more than one root element, but: " + roots);
+					}
+					try {
+						derivedStateComputer.installDerivedState(this, preIndexingPhase);
+					} catch (Throwable e) {
+						if (operationCanceledManager.isOperationCanceledException(e)) {
+							derivedStateComputer.discardDerivedState(this);
+							operationCanceledManager.propagateAsErrorIfCancelException(e);
+						}
+						throw Throwables.propagate(e);
+					}
+				}
 				fullyInitialized = true;
 			} finally {
 				isInitializing = false;
