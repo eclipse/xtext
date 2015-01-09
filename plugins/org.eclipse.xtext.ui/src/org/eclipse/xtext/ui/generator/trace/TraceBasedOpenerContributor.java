@@ -38,7 +38,7 @@ public class TraceBasedOpenerContributor extends OppositeFileOpenerContributor {
 		IStorage editorStorage = getStorage(editor);
 		if (editorStorage != null) {
 			ITrace trace = traceForStorageProvider.getTraceToTarget(editorStorage);
-			if (((ITrace.Internal) trace).getRootTraceRegion() != null) {
+			if (trace != null && ((ITrace.Internal) trace).getRootTraceRegion() != null) {
 				collectOpeners(trace, getSelectedRegion(editor), acceptor);
 				return true;
 			}
