@@ -21,7 +21,7 @@ task downloadIntellij {
   doLast {
     intellijHome.mkdirs()
     ant.get(src:"${repositoryUrl}/${archiveName}?guest", dest: intellijHome)
-    ant.get(src:"${repositoryUrl}/sources.zip?guest', dest: intellijHome)
+    ant.get(src:"${repositoryUrl}/sources.zip?guest", dest: intellijHome)
   }
 }
 
