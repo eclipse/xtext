@@ -75,6 +75,10 @@ public abstract class AbstractInjectableValidator implements EValidator {
 		return languageName != null;
 	}
 	
+	String getLanguageName() {
+		return languageName;
+	}
+	
 	protected boolean isResponsible(Map<Object, Object> context, EObject eObject) {
 		return !isLanguageSpecific() || Strings.equal(languageName, getCurrentLanguage(context, eObject));
 	}
