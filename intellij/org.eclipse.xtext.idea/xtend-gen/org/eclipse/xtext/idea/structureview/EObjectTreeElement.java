@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.structureview;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.intellij.ide.util.treeView.NodeDescriptorProvidingKey;
 import com.intellij.psi.PsiElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -21,22 +20,22 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class EObjectTreeElement extends AbstractStructureViewTreeElement implements NodeDescriptorProvidingKey {
+public class EObjectTreeElement extends AbstractStructureViewTreeElement {
   @Inject
   private PsiModelAssociations psiModelAssociations;
   
   @Accessors
   private EObject object;
   
-  protected PsiElement getInternalElement() {
+  public Object getValue() {
+    return this.object;
+  }
+  
+  protected PsiElement getInternalNavigationElement() {
     return this.psiModelAssociations.getPsiElement(this.object);
   }
   
   protected Object getObjectToPresent() {
-    return this.object;
-  }
-  
-  public Object getKey() {
     return this.object;
   }
   

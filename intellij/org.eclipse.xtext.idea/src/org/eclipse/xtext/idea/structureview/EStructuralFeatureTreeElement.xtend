@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.structureview
 
-import com.intellij.ide.util.treeView.NodeDescriptorProvidingKey
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -17,15 +16,19 @@ import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
 /**
  * @author kosyakov - Initial contribution and API
  */
-class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement implements NodeDescriptorProvidingKey {
+class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
 
 	@Accessors
 	EObject owner
 
 	@Accessors
 	EStructuralFeature feature
+	
+	override getValue() {
+		owner -> feature
+	}
 
-	override protected getInternalElement() {
+	override protected getInternalNavigationElement() {
 		owner.findNodesForFeature(feature).map[leafNodes].flatten.filter[!hidden].head.ASTNodes.map[psi].head
 	}
 
@@ -33,22 +36,18 @@ class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement imp
 		owner
 	}
 
-	override getKey() {
-		feature
-	}
-
 	override equals(Object obj) {
 		if (this === obj) {
 			true
 		} else if (obj instanceof EStructuralFeatureTreeElement) {
-			feature == obj.feature
+			owner == obj.owner && feature == obj.feature
 		} else {
 			false
 		}
 	}
 
 	override hashCode() {
-		feature.hashCode
+		owner.hashCode * feature.hashCode
 	}
 
 }

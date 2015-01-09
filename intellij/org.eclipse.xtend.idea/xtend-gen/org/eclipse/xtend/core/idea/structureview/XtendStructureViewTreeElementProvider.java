@@ -75,6 +75,22 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     this.xtendOutlineTreeBuilder.build(_head, _doubleArrow);
   }
   
+  protected void _buildChildren(final EObjectTreeElement objectTreeElement) {
+    EObject _object = objectTreeElement.getObject();
+    IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();
+    final Procedure1<IntellijXtendOutlineContext> _function = new Procedure1<IntellijXtendOutlineContext>() {
+      public void apply(final IntellijXtendOutlineContext it) {
+        boolean _isShowInherited = XtendStructureViewTreeElementProvider.this.isShowInherited();
+        it.setShowInherited(_isShowInherited);
+        BaseXtextFile _xtextFile = objectTreeElement.getXtextFile();
+        it.setXtextFile(_xtextFile);
+        it.setStructureViewTreeElement(objectTreeElement);
+      }
+    };
+    IntellijXtendOutlineContext _doubleArrow = ObjectExtensions.<IntellijXtendOutlineContext>operator_doubleArrow(_intellijXtendOutlineContext, _function);
+    this.xtendOutlineTreeBuilder.build(_object, _doubleArrow);
+  }
+  
   protected boolean isShowInherited() {
     boolean _xblockexpression = false;
     {
@@ -198,22 +214,22 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _switchResult;
   }
   
-  public void buildChildren(final StructureViewTreeElement xtextFileTreeElement) {
-    if (xtextFileTreeElement instanceof EObjectTreeElement) {
-      _buildChildren((EObjectTreeElement)xtextFileTreeElement);
+  public void buildChildren(final StructureViewTreeElement objectTreeElement) {
+    if (objectTreeElement instanceof EObjectTreeElement) {
+      _buildChildren((EObjectTreeElement)objectTreeElement);
       return;
-    } else if (xtextFileTreeElement instanceof EStructuralFeatureTreeElement) {
-      _buildChildren((EStructuralFeatureTreeElement)xtextFileTreeElement);
+    } else if (objectTreeElement instanceof EStructuralFeatureTreeElement) {
+      _buildChildren((EStructuralFeatureTreeElement)objectTreeElement);
       return;
-    } else if (xtextFileTreeElement instanceof XtextFileTreeElement) {
-      _buildChildren((XtextFileTreeElement)xtextFileTreeElement);
+    } else if (objectTreeElement instanceof XtextFileTreeElement) {
+      _buildChildren((XtextFileTreeElement)objectTreeElement);
       return;
-    } else if (xtextFileTreeElement != null) {
-      _buildChildren(xtextFileTreeElement);
+    } else if (objectTreeElement != null) {
+      _buildChildren(objectTreeElement);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(xtextFileTreeElement).toString());
+        Arrays.<Object>asList(objectTreeElement).toString());
     }
   }
   

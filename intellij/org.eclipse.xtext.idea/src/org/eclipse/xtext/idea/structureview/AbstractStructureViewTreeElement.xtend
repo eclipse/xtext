@@ -34,19 +34,6 @@ abstract class AbstractStructureViewTreeElement implements ModifiableStructureVi
 	@Accessors
 	protected extension BaseXtextFile xtextFile
 
-	override getValue() {
-		element
-	}
-
-	protected def getElement() {
-		val element = internalElement
-		if (element != null && element.valid) {
-			element
-		}
-	}
-
-	protected abstract def PsiElement getInternalElement()
-
 	override getChildren() {
 		if (leaf) {
 			return emptyList
@@ -93,7 +80,7 @@ abstract class AbstractStructureViewTreeElement implements ModifiableStructureVi
 	protected abstract def Object getObjectToPresent()
 
 	override canNavigate() {
-		val element = element
+		val element = navigationElement
 		if (element instanceof Navigatable) {
 			element.canNavigate
 		} else {
@@ -106,10 +93,24 @@ abstract class AbstractStructureViewTreeElement implements ModifiableStructureVi
 	}
 
 	override navigate(boolean requestFocus) {
-		val element = element
+		val element = navigationElement
 		if (element instanceof Navigatable) {
 			element.navigate(requestFocus)
 		}
 	}
+
+	protected def getNavigationElement() {
+		try {
+			val element = internalNavigationElement
+			if (element != null && element.valid) {
+				element
+			}
+		} catch (Exception e) {
+	      	// FIXME: illegal psi element access
+	      	return null
+		}
+	}
+
+	protected abstract def PsiElement getInternalNavigationElement()
 
 }

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.idea.structureview
 
 import com.google.inject.Inject
-import com.intellij.ide.util.treeView.NodeDescriptorProvidingKey
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.PsiModelAssociations
@@ -16,23 +15,23 @@ import org.eclipse.xtext.psi.PsiModelAssociations
 /**
  * @author kosyakov - Initial contribution and API
  */
-class EObjectTreeElement extends AbstractStructureViewTreeElement implements NodeDescriptorProvidingKey {
+class EObjectTreeElement extends AbstractStructureViewTreeElement {
 
 	@Inject
 	PsiModelAssociations psiModelAssociations
 
 	@Accessors
 	EObject object
+	
+	override getValue() {
+		object
+	}
 
-	override protected getInternalElement() {
+	override protected getInternalNavigationElement() {
 		psiModelAssociations.getPsiElement(object)
 	}
 
 	override protected getObjectToPresent() {
-		object
-	}
-
-	override getKey() {
 		object
 	}
 

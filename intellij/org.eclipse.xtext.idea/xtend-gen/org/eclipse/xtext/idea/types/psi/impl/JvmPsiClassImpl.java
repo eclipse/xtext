@@ -258,20 +258,34 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
         EList<JvmFormalParameter> _parameters = m.getParameters();
         final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
           public void apply(final JvmFormalParameter p) {
-            String _simpleName = p.getSimpleName();
+            final String parameterName = p.getSimpleName();
             JvmTypeReference _parameterType = p.getParameterType();
-            PsiType _psiType = JvmPsiClassImpl.this.toPsiType(_parameterType);
-            Language _language = it.getLanguage();
-            LightParameter _lightParameter = new LightParameter(_simpleName, _psiType, JvmPsiClassImpl.this.psiElement, _language);
-            final Procedure1<LightParameter> _function = new Procedure1<LightParameter>() {
-              public void apply(final LightParameter it) {
-                PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(p);
-                JvmPsiClassImpl.this.setNullableNavigationElement(it, _navigationElement);
-                it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
-              }
-            };
-            LightParameter _doubleArrow = ObjectExtensions.<LightParameter>operator_doubleArrow(_lightParameter, _function);
-            it.addParameter(_doubleArrow);
+            PsiType _psiType = null;
+            if (_parameterType!=null) {
+              _psiType=JvmPsiClassImpl.this.toPsiType(_parameterType);
+            }
+            final PsiType parameterType = _psiType;
+            boolean _and = false;
+            boolean _notEquals = (!Objects.equal(parameterName, null));
+            if (!_notEquals) {
+              _and = false;
+            } else {
+              boolean _notEquals_1 = (!Objects.equal(parameterType, null));
+              _and = _notEquals_1;
+            }
+            if (_and) {
+              Language _language = it.getLanguage();
+              LightParameter _lightParameter = new LightParameter(parameterName, parameterType, JvmPsiClassImpl.this.psiElement, _language);
+              final Procedure1<LightParameter> _function = new Procedure1<LightParameter>() {
+                public void apply(final LightParameter it) {
+                  PsiElement _navigationElement = JvmPsiClassImpl.this.getNavigationElement(p);
+                  JvmPsiClassImpl.this.setNullableNavigationElement(it, _navigationElement);
+                  it.<EObject>putUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY, p);
+                }
+              };
+              LightParameter _doubleArrow = ObjectExtensions.<LightParameter>operator_doubleArrow(_lightParameter, _function);
+              it.addParameter(_doubleArrow);
+            }
           }
         };
         IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function);

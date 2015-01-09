@@ -177,12 +177,16 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	private def getPsiParameters(JvmExecutable m) {
 		new LightParameterListBuilder(manager, language) => [
 			m.parameters.forEach [ p |
-				addParameter(
-					new LightParameter(p.simpleName, p.parameterType.toPsiType, psiElement, language) => [
-						nullableNavigationElement = p.navigationElement
-						putUserData(JVM_ELEMENT_KEY, p)
-					]
-				)
+				val parameterName = p.simpleName
+				val parameterType = p.parameterType?.toPsiType
+				if (parameterName != null && parameterType != null) {
+					addParameter(
+						new LightParameter(parameterName, parameterType, psiElement, language) => [
+							nullableNavigationElement = p.navigationElement
+							putUserData(JVM_ELEMENT_KEY, p)
+						]
+					)
+				}
 			]
 		]
 	}
