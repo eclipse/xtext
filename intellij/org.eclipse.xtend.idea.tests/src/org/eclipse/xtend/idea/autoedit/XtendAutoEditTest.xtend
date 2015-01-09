@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.idea.bracketmatching
+package org.eclipse.xtend.idea.autoedit
 
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtext.junit4.internal.LineDelimiters
