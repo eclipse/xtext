@@ -1,0 +1,361 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Introduction</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="sevenlang_introduction"></a>
+<h1>Introduction</h1>
+<p>
+Building a domain-specific language (DSL) for structural parts of an application has always been rather 
+easy with Xtext. But structure alone is not sufficient in many cases. When it comes to the behavioral aspects users 
+often fall back to implementing them in Java. The reasons are obvious: expressions and statements are hard to get 
+right and extremely complex and therefore costly to implement.
+</p>
+<p>
+This document introduces and explains a new API, which allows reusing predefined language constructs such as type references, 
+annotations and fully featured expressions anywhere in your languages. You not only reuse the grammar but the complete implementation 
+including a compiler, interpreter, the whole Java type system and a tight IDE integration. And the best part is, that it is 
+relatively easy to do so. It is actually just two steps:
+</p>
+<a name="sevenlang_introduction_3"></a>
+<h2>Write the Grammar</h2>
+<p>
+Using the traditional Xtext grammar language you freely describe the syntax of your language. The specialty for JVM
+languages is, that you inherit from an abstract grammar org.eclipse.xtext.xbase.Xbase, which predefines the syntax
+for the reusable parts. You do not need to use all of them directly and you can of course change the syntax 
+or add new concepts, as it seems fit.
+</p>
+<a name="sevenlang_introduction_4"></a>
+<h2>Map to Java</h2>
+<p>
+Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
+For that purpose you use a so-called <em>model inferrer</em>, a special API that allows you to create any number of Java classes, interfaces 
+or members from your DSL. This hook not only defines how your language is translated to Java, but also defines 
+the scope of the embedded expressions. The expressions from your language &apos;live&apos; in the context you give them.
+If you want an expression to have access to certain local variables, just put it into a method with appropriate 
+parameters or use instance fields if they work better.
+</p>
+<p>
+While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has 
+JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code
+directly from the inferred model. The same way, Xbase already integrates your language with JDT to an
+extend that customizations beyond the JVM model inferrer will only be necessary for very special cases.
+You can naturally mix Java and DSL code in the same application without any barriers. 
+</p>
+<p>
+The inferred model also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to 
+integrate arbitrary languages with each other. You can for instance call <a href="Templates.html#template" title="Go to &quot;Template Language&quot;">templates</a> directly from a <a href="Scripting.html#scripting" title="Go to &quot;Scripting Language&quot;">script</a>
+and vice versa. You do not even need to generate the equivalent Java code; everything is based on the Java types you
+create in the model inferrer.
+</p>
+<p>
+To illustrate the power and flexibility of these two abstractions, we have built seven example languages using them:
+</p>
+<p>
+<ul>
+	<li>
+		<a href="Scripting.html#scripting" title="Go to &quot;Scripting Language&quot;">A simple scripting language</a>
+	</li>
+	<li>
+		<a href="BuildDsl.html#builddsl" title="Go to &quot;Build Language&quot;">A Grade-like build DSL</a>
+	</li>
+	<li>
+		<a href="Mongo.html#mongoDB" title="Go to &quot;DSL for MongoDB&quot;">A DSL for statically-typed MongoDB documents</a>
+	</li>
+	<li>
+		<a href="Guice.html#guice" title="Go to &quot;DSL for Guice&quot;">A Guice modules DSL</a>
+	</li>
+	<li>
+		<a href="Routing.html#httpRouting" title="Go to &quot;Http Routing Language&quot;">A Playframework-like HTTP routing language</a>
+	</li>
+	<li>
+		<a href="Templates.html#template" title="Go to &quot;Template Language&quot;">A template language</a>
+	</li>
+	<li>
+		<a href="Tortoise.html#tortoise" title="Go to &quot;Little Tortoise&quot;">A Logo-like programming environment for educational purposes</a>
+	</li>
+</ul>
+</p>
+<p>
+Each language is very simple and focuses on the value a DSL can add to the respective 
+viewpoint. It is meant to give you an idea of what is possible without being a complete practical solution.
+Yet the languages are flexible and come with powerful core abstractions.
+We also covered different technical aspects of customizing to the language infrastructure. Some languages
+have special syntax coloring, others provide customized outline views or content assist. All aspects of a language are still fully customizable when using Xbase.
+</p>
+<a name="provisional_API"></a>
+<h2>CAUTION: This is Provisional API</h2>
+<p>
+<em>Please be aware that some of the new API covered in this document is not yet finalized and will 
+likely be improved in future releases in incompatible ways. Usages of such API are marked with a warning.</em>
+</p>
+<a name="common_requirements"></a>
+<h2>Common Requirements</h2>
+<p>
+To run any of the examples, you will need <a href="http://www.eclipse.org/downloads">Eclipse 3.6 or better</a>
+for your platform. In addition, you have to install <a href="http://www.eclipse.org/xtend/download.html">Xtend</a>
+and of course <a href="http://www.eclipse.org/Xtext/download.html">Xtext 2.7</a>.
+</p>
+<p>
+If you prefer a simple all-inclusive installation, consider downloading the latest
+<a href="http://www.eclipse.org/Xtext/download.html">Xtext distribution</a>.
+</p>
+<p>
+Additional requirements are mentioned in the <em>Running the Example</em> section of each chapter.
+</p>
+<a name="installation"></a>
+<h2>Getting the Code</h2>
+<p>
+You can get the source code for all languages from the github repository at
+<a href="https://github.com/xtext-dev/seven-languages-xtext.git">github.com/xtext-dev/seven-languages-xtext</a>.
+The repository contains two folders <em>languages</em> and <em>examples</em>. Download the plug-ins from <em>languages</em> into
+the root workspace and the <em>examples</em> into the runtime workspace spawned from the root one using
+<em>Run &gt; Run Configurations... &gt; Eclipse Application &gt; Run (&lt;language&gt;)</em>.
+</p>
+<p>
+Each language consists of several Eclipse projects
+<table>
+<tr>
+<td>
+<em>org.xtext.&lt;language&gt;</em>
+</td>
+<td>
+The base infrastructure
+</td>
+</tr>
+<tr>
+<td>
+<em>org.xtext.&lt;language&gt;.ui</em>
+</td>
+<td>
+The editor based on Eclipse
+</td>
+</tr>
+<tr>
+<td>
+<em>org.xtext.&lt;language&gt;.tests</em>
+</td>
+<td>
+Tests for the language
+</td>
+</tr>
+<tr>
+<td>
+<em>org.xtext.&lt;language&gt;.lib</em>
+</td>
+<td>
+Runtime library
+</td>
+</tr>
+<tr>
+<td>
+<em>org.xtext.&lt;language&gt;.example</em>
+</td>
+<td>
+Examples for using the language
+</td>
+</tr>
+</table>
+ 
+Some of the languages do not include all of these plug-ins but the general structure is always the same.
+</p>
+<a name="xtend_primer"></a>
+<h2>A Short Xtend Primer</h2>
+<p>
+Any general code in the examples is implemented in <a href="http://www.xtend-lang.org">Xtend</a>. Xtend is 
+a more expressive and less verbose way to implement Java applications. It is 100% interoperable with Java APIs and 
+compiles to readable Java code. In addition, it uses the same expressions that we use in our example languages.
+In fact it is built with the very same API that is described in this document. This should give you a taste of 
+how powerful JVM-languages built with Xtext can actually be. 
+</p>
+<p>
+Xtend is designed to be easy to learn for Java developers. In this section we will shortly describe
+the most important language features that were used in our examples. For a full description of the Xtend language, 
+please refer to the <a href="http://www.xtend-lang.org/documentation">Xtend documentation</a>. 
+</p>
+<p>
+Just like a Java file, an Xtend file starts with a <span class="inlinecode"><span class="keyword">package</span></span> declaration and an <span class="inlinecode"><span class="keyword">import</span></span>
+section followed by one or more class declarations. Semicolons are optional. All types are <span class="inlinecode"><span class="keyword">public</span></span> by default.
+Xtend classes can extend other classes and implement interfaces just like in Java. It does not make any difference 
+whether they were originally declared in Xtend or in Java.
+</p>
+<p>
+<a name="anchor-xtend_property"></a> 
+JavaBean properties can be accessed directly by their name. The access will be automatically mapped to 
+the appropriate accessor method. That means you can write
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+println(foo.bar)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;println(foo.getBar())<br/>
+</span>foo.bar&nbsp;=&nbsp;baz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;foo.setBar(baz)<br/>
+</span>foo.fooBars&nbsp;+=&nbsp;foobar&nbsp;<span class="comment">//&nbsp;instead&nbsp;of&nbsp;foo.getFooBars().add(foobar)</span>
+</p>
+</div>
+</div>
+
+Empty parentheses on method or constructor calls can be skipped.
+</p>
+<p>
+<a name="anchor-xtend_methods"></a> 
+</p>
+<p>
+Methods are introduced with the keyword <span class="inlinecode"><span class="keyword">def</span></span> or <span class="inlinecode"><span class="keyword">override</span></span> if they override/implement
+a super type&apos;s method. Methods are public if not specified otherwise. The value of the last expression is returned
+if no explicit return expression is used and the method&apos;s return type is not <span class="inlinecode"><span class="keyword">void</span></span>.
+</p>
+<p>
+<a name="anchor-xtend_variables"></a>
+</p>
+<p>
+Variables are declared with the keywords <span class="inlinecode"><span class="keyword">val</span></span> (final) or <span class="inlinecode"><span class="keyword">var</span></span> (non-final).
+Field declarations can use the same syntax as in Java.
+</p>
+<p>
+<a name="anchor-xtend_typeinferrence"></a>
+</p>
+<p>
+Xtend is statically typed, but you do not have to specify the type in a declaration if it can be inferred
+from the context:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">val</span>&nbsp;x&nbsp;=&nbsp;newArrayList(<span class="string">&apos;foo&apos;</span>,&nbsp;<span class="string">&apos;bar&apos;</span>,&nbsp;<span class="string">&apos;baz&apos;</span>)&nbsp;<span class="comment">//&nbsp;x&nbsp;is&nbsp;of&nbsp;type&nbsp;List&lt;String&gt;<br/>
+</span><span class="keyword">def</span>&nbsp;foo()&nbsp;{&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;&nbsp;def&nbsp;int&nbsp;foo()...<br/>
+</span>&nbsp;&nbsp;1<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<a name="anchor-xtend_extension"></a>
+The methods of fields marked as <span class="inlinecode"><span class="keyword">extension</span></span> are callable in extension syntax. That means,
+you can put the first argument in front as if it were the receiver of the call, e.g.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;assume&nbsp;the&nbsp;class&nbsp;Foo&nbsp;defines&nbsp;a&nbsp;method&nbsp;foo(Baz)<br/>
+</span><span class="keyword">extension</span>&nbsp;Foo&nbsp;theFoo<br/>
+<br/>
+<span class="keyword">def</span>&nbsp;bar(Baz&nbsp;baz) {<br/>
+&nbsp;&nbsp;baz.foo&nbsp;&nbsp;<span class="comment">//&nbsp;calls&nbsp;theFoo.foo(baz)<br/>
+</span>}
+</p>
+</div>
+</div>
+
+Static methods can be put on the extension scope with a <span class="inlinecode"><span class="keyword">static</span>&nbsp;<span class="keyword">extension</span></span> import, e.g.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*<br/>
+...<br/>
+<span class="keyword">val</span>&nbsp;foo&nbsp;=&nbsp;singleton(<span class="string">&apos;foo&apos;</span>)&nbsp;<span class="comment">//&nbsp;calls&nbsp;Collections.&lt;String&gt;singleton(&apos;foo&apos;)</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+<a name="anchor-xtend_it"></a>
+In addition to Java&apos;s <span class="inlinecode"><span class="keyword">this</span></span>, you can define another implicit receiver variable named <span class="inlinecode"><span class="keyword">it</span></span>.
+As with <span class="inlinecode"><span class="keyword">this</span></span>, you can omit <span class="inlinecode"><span class="keyword">it</span></span> in feature calls, i.e.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;Foo&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;foo(Bar&nbsp;<span class="keyword">it</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;foo&nbsp;<span class="comment">//&nbsp;will&nbsp;call&nbsp;it.foo()&nbsp;or&nbsp;if&nbsp;that&nbsp;doesn&apos;t&nbsp;exist&nbsp;this.foo()<br/>
+</span>&nbsp;&nbsp;}<br/>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+<a name="anchor-xtend_lambda"></a>
+Xtend provides lambda expressions. These are anonymous functions in square brackets. 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+[String&nbsp;foo,&nbsp;String&nbsp;bar&nbsp;| foo&nbsp;+&nbsp;bar]&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;a&nbsp;function&nbsp;(String&nbsp;foo,&nbsp;String&nbsp;bar)&nbsp;{&nbsp;foo&nbsp;+&nbsp;bar&nbsp;}</span>
+</p>
+</div>
+</div>
+
+<a name="anchor-xtend_lambda_coercion"></a>
+As this is a bit bulky, there are more rules to make working with lambdas more attractive:
+<ol>
+	<li>
+		When a lambda expression is the last argument in a method call, it can be put behind the closing parentheses.
+	</li>
+	<li>
+		Lambdas are automatically coerced to interfaces with a single function. Parameter types will be
+		inferred.
+	</li>
+	<li>
+		If you skip the declaration of the only parameter, it will be implicitly called <span class="inlinecode"><span class="keyword">it</span></span>.
+	</li>
+</ol>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">new</span>&nbsp;Thread&nbsp;[&nbsp;println(<span class="string">"Hello&nbsp;concurrent&nbsp;world"</span>)&nbsp;]&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;lambda&nbsp;will&nbsp;be&nbsp;coerced&nbsp;to&nbsp;a&nbsp;java.lang.Runnable<br/>
+</span><span class="keyword">val</span>&nbsp;list&nbsp;=&nbsp;#[<span class="string">&apos;fooooo&apos;</span>,&nbsp;<span class="string">&apos;fo&apos;</span>,&nbsp;<span class="string">&apos;foo&apos;</span>]&nbsp;&nbsp;<span class="comment">//&nbsp;#[]&nbsp;delimits&nbsp;a&nbsp;list&nbsp;literal<br/>
+</span>list.sortBy[&nbsp;length&nbsp;]&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;lambda&nbsp;is&nbsp;coerced&nbsp;to&nbsp;a&nbsp;function&nbsp;(String)=&gt;Comparable<br/>
+</span>&nbsp;&nbsp;<span class="comment">//&nbsp;equivalent&nbsp;to&nbsp;list.sortBy[String&nbsp;it&nbsp;|&nbsp;it.length]</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+<a name="anchor-xtend_templates"></a>
+Also noteworthy is the template expression, which allows defining interpolated multi-line string literals.
+In addition, the template expressions has intelligent whitespace handling and supports a special <span class="inlinecode"><span class="keyword">FOR</span></span> and 
+<span class="inlinecode"><span class="keyword">IF</span></span> construct, which is far better readable in this context. In model inferrers, the template expressions are enhanced further to support type literals, automatically adding an import to the generated Java file.
+</p>
+<p>
+We most often use this expression in the examples to generate some synthetic Java boilerplate code. Here is
+an example from the <a href="Routing.html#httpRouting" title="Go to &quot;Http Routing Language&quot;">http routing language</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;String&nbsp;url&nbsp;=&nbsp;&nbsp;request.getRequestURL().toString();<br/>
+&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;route&nbsp;:&nbsp;routes<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//java.util.regex.Matcher&nbsp;will&nbsp;be&nbsp;imported&nbsp;in&nbsp;the&nbsp;generated&nbsp;Java&nbsp;file<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>Matcher<span class="string">&raquo;&nbsp;_matcher&nbsp;=&nbsp;_pattern&laquo;</span>route.index<span class="string">&raquo;.matcher(url);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(_matcher.find())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;variable&nbsp;:&nbsp;route.url.variables<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;&laquo;</span>variable.name<span class="string">&raquo;&nbsp;=&nbsp;_matcher.group(&laquo;</span>variable.index&nbsp;+&nbsp;1<span class="string">&raquo;);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">IF</span>&nbsp;route.condition&nbsp;!=&nbsp;null<span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(&laquo;</span>route.nameOfRouteMethod<span class="string">&raquo;Condition(request,&nbsp;response<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;v&nbsp;:&nbsp;route.url.variables&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">BEFORE</span>&nbsp;<span class="string">",&nbsp;"</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">SEPARATOR</span>&nbsp;<span class="string">",&nbsp;"</span><span class="string">&raquo;&laquo;</span>v.name<span class="string">&raquo;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDIF</span><span class="string">&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span>route.nameOfRouteMethod<span class="string">&raquo;(request,&nbsp;response<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;</span><span class="keyword">FOR</span>&nbsp;v&nbsp;:&nbsp;route.url.variables<span class="string">&raquo;,&nbsp;&laquo;</span>v.name<span class="string">&raquo;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&laquo;</span><span class="keyword">ENDFOR</span><span class="string">&raquo;<br/>
+&apos;&apos;&apos;</span>
+</p>
+</div>
+</div>
+ 
+</p>
+</body>
+</html>

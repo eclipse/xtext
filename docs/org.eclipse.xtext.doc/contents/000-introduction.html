@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Overview</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="Overview"></a>
+<h1>Overview</h1>
+<a name="Overview_1"></a>
+<h2>What is Xtext?</h2>
+<p>
+No matter if you want to create a small textual domain-specific language (DSL) or you want to implement 
+a full-blown general purpose programming language. 
+With Xtext you can create your very own languages in a snap. Also if you already have an existing 
+language but it lacks decent tool support, you can use Xtext to create 
+a sophisticated Eclipse-based development environment providing editing experience known from modern 
+Java IDEs in a surprisingly short amount of time. We call Xtext a language development framework.  
+</p>
+<a name="Overview_2"></a>
+<h2>How Does It Work?</h2>
+<p>
+Xtext provides you with a set of domain-specific languages and modern APIs to describe the different 
+aspects of your programming language. 
+Based on that information it gives you a full implementation of that language running on the JVM. 
+The compiler components of your language are independent of Eclipse or OSGi and can be used in any Java environment.
+They include such things as the parser, the type-safe abstract syntax tree (AST), the serializer and 
+code formatter, the scoping framework and the linking, compiler checks and static analysis aka validation 
+and last but not least a code generator or interpreter. These runtime components integrate with and 
+are based on the Eclipse Modeling Framework (EMF), which effectively allows you to 
+use Xtext together with other EMF frameworks like for instance the Graphical Modeling Project GMF.
+</p>
+<p>
+In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored 
+for your language. It already provides great default functionality for 
+all aspects and again comes with DSLs and APIs that allow to configure or change the most common things 
+very easily. And if that&apos;s not flexible enough there is Guice to replace the default behavior with
+your own implementations.
+</p>
+<a name="Overview_3"></a>
+<h2>Xtext is Highly Configurable</h2>
+<p>
+Xtext uses the lightweight dependency injection (DI) framework Google Guice to wire up the whole language 
+as well as the IDE infrastructure. A central, external module is used to configure the DI container. 
+As already mentioned, Xtext comes with decent default implementations and DSLs and APIs for the aspect that 
+are common sweet spots for customization. But if you need something completely different, 
+Google Guice gives you the power to exchange every little class in a non-invasive way.
+</p>
+<a name="Overview_4"></a>
+<h2>Who Uses Xtext?</h2>
+<p>
+Xtext is used in many different industries. It is used in the field of mobile devices, automotive development, 
+embedded systems or Java enterprise software projects and game development. 
+People use Xtext-based languages to drive code generators that target Java, C, C++, C#, Objective C, Python, or Ruby code. 
+Although the language infrastructure itself runs on the JVM, you can compile Xtext languages to any 
+existing platform.
+Xtext-based languages are developed for well known Open-Source projects such as Maven, Eclipse B3, 
+the Eclipse Webtools platform or Google&apos;s Protocol Buffers and the framework is also widely used in research projects.  
+</p>
+<a name="Overview_5"></a>
+<h2>Who is Behind Xtext?</h2>
+<p>
+Xtext is a professional Open-Source project. We, the main developers and the project lead, work for 
+itemis, 
+which is a well known consulting company specialized on model-based development.
+Therefore we are able to work almost full-time on the project. Xtext is an Eclipse.org project. 
+Besides many other advantages this means that you don&apos;t have to fear any IP issues, because the Eclipse Foundation 
+has their own lawyers who take care that no intellectual property is violated. 
+</p>
+<p>
+You may ask: Where does the money for Open-Source development come from? Well, we provide professional 
+services around Xtext. Be it training or on-site consulting, be it development of prototypes or 
+implementation of full-blown IDEs for programming languages. We do not only know the framework very well 
+but we are also experts in programming and domain-specific language design. Don&apos;t hesitate to get in 
+contact with us (<a href="http://xtext.itemis.com">www.itemis.com</a>).
+</p>
+<a name="DSL"></a>
+<h2>What is a Domain-Specific Language</h2>
+<p>
+A <em>Domain-Specific Language (DSL)</em> is a small programming language, which focuses on a particular domain.
+Such a domain can be more or less anything. The idea is that its concepts and notation is as close as possible to
+what you have in mind when you think about a solution in that domain. Of course we are talking about problems which can
+be solved or processed by computers somehow.
+</p>
+<p>
+The opposite of a DSL is a so called <em>GPL</em>, a <em>General Purpose Language</em> such as Java or any other common programming language.
+With a GPL you can solve every computer problem, but it might not always be the best way to solve it.
+</p>
+<p>
+Imagine you want to remove the core from an apple. You could of course use a Swiss army knife to cut it out, 
+and this is reasonable if you have to do it just once or twice. But if you need to do that on a regular 
+basis it might be more efficient to use an apple corer.
+</p>
+<p>
+There are a couple of well-known examples of DSLs. For instance SQL is actually a DSL which focuses on 
+querying relational databases. Other DSLs are regular expressions or even languages provided by tools 
+like MathLab. Also most XML languages are actually domain-specific languages. The whole purpose of XML is 
+to allow for easy creation of new languages. Unfortunately, XML uses a fixed concrete syntax, which is 
+very verbose and yet not adapted to be read by humans. Into the bargain, a generic syntax for everything is a compromise.
+</p>
+<p>
+Xtext is a sophisticated framework that helps to implement your very own DSL with appropriate IDE support. 
+There is no such limitation as with XML, you are free to define your concrete syntax as you like. It may 
+be as concise and suggestive as possible being a best match for your particular domain. The hard task of 
+reading your model, working with it and writing it back to your syntax is greatly simplified by Xtext.
+</p>
+</body>
+</html>

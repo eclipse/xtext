@@ -28,8 +28,6 @@
     <requirement
         name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <repository
-        url="${xtext.nightly.composite}"/>
-    <repository
         url="http://download.eclipse.org/modeling/emft/b3/updates-4.3"/>
     <repository
         url="http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-jdt-compiler/"/>
@@ -62,9 +60,8 @@
     <requirement
         name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <requirement
-        name="org.eclipse.emf.ecore.xcore.sdk.feature.group"/>
-    <requirement
-        name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"/>
+        name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
+        optional="true"/>
     <requirement
         name="org.eclipse.epp.mpc.feature.group"/>
     <requirement
@@ -235,19 +232,6 @@
           value="com.google.common.collect.Lists.*;com.google.common.collect.Iterables.*;com.google.common.collect.Sets.*;java.util.Collections.*;com.google.common.collect.Maps.*;java.lang.Math.*"/>
     </setupTask>
   </setupTask>
-    <setupTask
-      xsi:type="projects:ProjectsImportTask"
-      disabled="true">
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/devtools/"/>
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/releng/"/>
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/maven/"/>
-    <sourceLocator
-        rootFolder="${git.clone.xtext.location}/examples/org.eclipse.xtend.examples-container/contents"/>
-    <description>Import all developer tools</description>
-  </setupTask>
   <setupTask
       xsi:type="setup.targlets:TargletTask">
     <targlet
@@ -356,6 +340,7 @@
             url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
     </targlet>
+    <description>Target platform</description>
   </setupTask>
   <project name="core"
       label="Core">
@@ -369,10 +354,10 @@
               xsi:type="predicates:AndPredicate">
             <operand
                 xsi:type="predicates:RepositoryPredicate"
-                project="org.eclipse.xtext.releng"/>
+                project="org.eclipse.xtext"/>
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern=".*releng|.*bootstrap|.*contributor|.*build.feature|.*language-generator"/>
+                pattern=".*\.xtext\.contributor|.*releng|.*build.feature"/>
           </operand>
           <operand
               xsi:type="predicates:NamePredicate"
@@ -385,7 +370,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtend.core"/>
+              project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8"/>
@@ -410,6 +395,9 @@
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.7"/>
+          <operand
+              xsi:type="predicates:NaturePredicate"
+              nature="org.eclipse.pde.PluginNature"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -534,7 +522,7 @@
               xsi:type="predicates:OrPredicate">
             <operand
                 xsi:type="predicates:NamePredicate"
-                pattern=".*maven.*"/>
+                pattern=".*maven.*|.*parent"/>
             <operand
                 xsi:type="predicates:NaturePredicate"
                 nature="org.eclipse.m2e.core.maven2Nature"/>
@@ -542,173 +530,156 @@
         </predicate>
       </workingSet>
     </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Xtext Core">
+        <requirement
+            name="org.eclipse.xtext.tests.feature.group"/>
+        <requirement
+            name="org.eclipse.xtext.build.feature.group"/>
+        <requirement
+            name="org.eclipse.xtext.compatibility.galileo"/>
+        <requirement
+            name="org.eclipse.xtext.bootstrap"/>
+        <requirement
+            name="org.eclipse.xtext.language-generator"/>
+        <requirement
+            name="org.eclipse.xtext.ui.codetemplates.tests"/>
+        <requirement
+            name="org.eclipse.xtext.contributor"/>
+        <requirement
+            name="org.eclipse.xtend.bootstrapdoc"/>
+        <requirement
+            name="org.eclipse.xtend.tests.feature.group"/>
+        <requirement
+            name="org.eclipse.xtend.performance.tests"/>
+        <requirement
+            name="org.eclipse.xtext.releng">
+          <annotation
+              source="This_has_the_problem_that_it_requires_a_Mac-specific_fragment."/>
+        </requirement>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location}"/>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Xtext/Xtend Examples">
+        <requirement
+            name="org.eclipse.xtend.examples-container"/>
+        <requirement
+            name="xtend-examples"/>
+        <requirement
+            name="xtend-annotation-examples-client"/>
+        <requirement
+            name="xtend-annotation-examples"/>
+        <requirement
+            name="org.eclipse.xtext.xtext.ui.examples-container"/>
+        <requirement
+            name="org.eclipse.xtext.xtext.ui.examples"/>
+        <requirement
+            name="org.eclipse.xtext.example.arithmetics.ui"/>
+        <requirement
+            name="org.eclipse.xtext.example.arithmetics.tests"/>
+        <requirement
+            name="org.eclipse.xtext.example.fowlerdsl.ui"/>
+        <requirement
+            name="org.eclipse.xtext.example.tutorial"/>
+        <requirement
+            name="org.eclipse.xtext.example.tutorial.tests"/>
+        <requirement
+            name="org.eclipse.xtext.example.tutorial.ui"/>
+        <requirement
+            name="xbase.tutorial"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
+            locateNestedProjects="true">
+          <predicate
+              xsi:type="predicates:NotPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="*example\.gmf*"/>
+          </predicate>
+        </sourceLocator>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"
+            locateNestedProjects="true"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/}"
+            locateNestedProjects="true"/>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask"
+        disabled="true">
+      <targlet
+          name="Xtext GMF Examples">
+        <requirement
+            name="org.eclipse.xtext.example.gmf.diagram"/>
+        <requirement
+            name="org.eclipse.xtext.example.gmf.diagram.extensions"/>
+        <requirement
+            name="org.eclipse.xtext.gmf.glue"/>
+        <requirement
+            name="org.eclipse.xtext.example.gmf"/>
+        <requirement
+            name="org.eclipse.xtext.example.gmf.edit"/>
+        <requirement
+            name="org.eclipse.xtext.example.gmf.ui"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
+            locateNestedProjects="true"/>
+        <repositoryList
+            name="GMF">
+          <repository
+              url="http://download.eclipse.org/modeling/gmf/updates/releases/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/emf/transaction/updates/releases/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/emf/validation/updates/releases/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/mdt/ocl/updates/releases/3.0.2/"/>
+        </repositoryList>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Xtext Xdoc">
+        <requirement
+            name="org.xtext.sevenlanguages.doc.xdoc"
+            optional="true"/>
+        <requirement
+            name="xtend.website.generator"/>
+        <requirement
+            name="xtext.website.generator"/>
+        <requirement
+            name="org.eclipse.xtext.doc.xdoc"/>
+        <requirement
+            name="org.eclipse.xtend.doc.xdoc"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location}"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location}/docs"/>
+        <repositoryList
+            name="External">
+          <repository
+              url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
+          <repository
+              url="https://dhuebner.ci.cloudbees.com/job/seven-languages-xtext/job/Seven-Languages/lastSuccessfulBuild/artifact/p2.repository/"/>
+        </repositoryList>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/maven}"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
     <stream
-        name="master">
-      <setupTask
-          xsi:type="setup.targlets:TargletTask">
-        <targlet
-            name="Xtext Core">
-          <requirement
-              name="org.eclipse.xtext.tests.feature.group"/>
-          <requirement
-              name="org.eclipse.xtext.build.feature.group"/>
-          <requirement
-              name="org.eclipse.xtext.compatibility.galileo"/>
-          <requirement
-              name="org.eclipse.xtext.bootstrap"/>
-          <requirement
-              name="org.eclipse.xtext.language-generator"/>
-          <requirement
-              name="org.eclipse.xtext.ui.codetemplates.tests"/>
-          <requirement
-              name="org.eclipse.xtext.contributor"/>
-          <requirement
-              name="org.eclipse.xtext.xtext.ui.examples-container"/>
-          <requirement
-              name="org.eclipse.xtend.bootstrapdoc"/>
-          <requirement
-              name="org.eclipse.xtext.doc.xdoc"
-              optional="true"/>
-          <requirement
-              name="org.eclipse.xtend.doc.xdoc"
-              optional="true"/>
-          <requirement
-              name="org.eclipse.xtend.tests.feature.group"/>
-          <requirement
-              name="org.eclipse.xtend.performance.tests"/>
-          <requirement
-              name="org.eclipse.xtend.examples-container"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location}"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
-              locateNestedProjects="true"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples/contents}"
-              locateNestedProjects="true"/>
-        </targlet>
-      </setupTask>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask">
-        <targlet
-            name="Xtext Examples Not Referenced Anywhere">
-          <requirement
-              name="org.eclipse.xtext.example.arithmetics.tests"/>
-          <requirement
-              name="org.eclipse.xtext.example.arithmetics.ui"/>
-          <requirement
-              name="org.eclipse.xtext.example.fowlerdsl.ui"/>
-          <requirement
-              name="org.eclipse.xtext.example.tutorial"/>
-          <requirement
-              name="org.eclipse.xtext.example.gmf"/>
-          <requirement
-              name="org.eclipse.xtext.example.gmf.edit"/>
-          <requirement
-              name="org.eclipse.xtext.example.gmf.ui"/>
-          <requirement
-              name="org.eclipse.xtext.xtext.ui.examples"/>
-          <requirement
-              name="xbase.tutorial"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
-              locateNestedProjects="true"/>
-        </targlet>
-      </setupTask>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask">
-        <targlet
-            name="Xtend Examples Not Referenced Anywhere">
-          <requirement
-              name="xtend-examples"/>
-          <requirement
-              name="xtend-annotation-examples-client"/>
-          <requirement
-              name="xtend-annotation-examples"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"
-              locateNestedProjects="true"/>
-        </targlet>
-      </setupTask>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask"
-          disabled="true">
-        <targlet
-            name="Xtext Examples Not That Can't be Materialize with Bad Dependencies">
-          <requirement
-              name="org.eclipse.xtext.example.gmf.diagram"/>
-          <requirement
-              name="org.eclipse.xtext.example.gmf.diagram.extensions"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
-              locateNestedProjects="true"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples/contents}"
-              locateNestedProjects="true"/>
-        </targlet>
-      </setupTask>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask"
-          disabled="true">
-        <targlet
-            name="Xtext Examples That Have Errors When Materialized">
-          <requirement
-              name="org.eclipse.xtext.gmf.glue"/>
-          <requirement
-              name="org.eclipse.xtext.example.tutorial.tests"/>
-          <requirement
-              name="org.eclipse.xtext.example.tutorial.ui"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
-              locateNestedProjects="true"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples/contents}"
-              locateNestedProjects="true"/>
-        </targlet>
-      </setupTask>
-      <setupTask
-          xsi:type="setup.targlets:TargletTask"
-          disabled="true">
-        <targlet
-            name="Xtext Problem Bundles with dependencies that can't be resolved">
-          <requirement
-              name="org.eclipse.xtext.releng">
-            <annotation
-                source="This_has_the_problem_that_it_requires_a_Mac-specific_fragment."/>
-          </requirement>
-          <requirement
-              name="org.xtext.sevenlanguages.doc.xdoc"
-              optional="true"/>
-          <requirement
-              name="xtend.website.generator"/>
-          <requirement
-              name="xtext.website.generator"/>
-          <sourceLocator
-              rootFolder="${git.clone.xtext.location}"/>
-          <repositoryList
-              name="External">
-            <repository
-                url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
-          </repositoryList>
-        </targlet>
-      </setupTask>
-      <setupTask
-          xsi:type="projects:ProjectsImportTask">
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/maven}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf.models}">
-          <annotation
-              source="This_project_can't_be_materlized_because_it_has_no_component_extension"/>
-        </sourceLocator>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents/xtend-euler}">
-          <annotation
-              source="This_project_can't_be_materlized_because_it_has_no_component_extension;_it's_also_missing_the_xtend-gen_folder"/>
-        </sourceLocator>
-        <description>Maven Dependencies</description>
-      </setupTask>
-    </stream>
+        name="master"/>
     <stream
         name="maintenance">
       <setupTask
@@ -722,7 +693,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="emf.update.site"
-          value="http://download.eclipse.org/modeling/emf/emf/updates/2.9.x/"/>
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.10.x/"/>
     </stream>
     <description>Provide the core grammar infrastructure</description>
   </project>
