@@ -29,6 +29,8 @@ annotation Property {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Deprecated
 class PropertyProcessor extends AbstractFieldProcessor {

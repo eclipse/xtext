@@ -29,12 +29,16 @@ import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @since 2.7
+ * @noreference
+ * @noextend
  */
 @Beta
 @SuppressWarnings("all")
 public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
+   * @noreference
+   * @noextend
    */
   @Beta
   public static class Util {

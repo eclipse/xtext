@@ -27,12 +27,16 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 @SuppressWarnings("all")
 public class ToStringProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
+   * @noextend
+   * @noreference
    */
   @Beta
   public static class Util {
