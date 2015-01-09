@@ -61,6 +61,10 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
     Resource _resource = _element.getResource();
     EList<EObject> _contents = _resource.getContents();
     final EObject modelElement = IterableExtensions.<EObject>head(_contents);
+    boolean _equals = Objects.equal(modelElement, null);
+    if (_equals) {
+      return;
+    }
     ItemPresentation _elvis = null;
     ItemPresentation _itemPresentation = this.itemPresentationProvider.getItemPresentation(modelElement);
     if (_itemPresentation != null) {
@@ -72,8 +76,8 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
     final ItemPresentation itemPresentation = _elvis;
     if ((itemPresentation instanceof PresentationData)) {
       String _presentableText = ((PresentationData)itemPresentation).getPresentableText();
-      boolean _equals = Objects.equal(_presentableText, null);
-      if (_equals) {
+      boolean _equals_1 = Objects.equal(_presentableText, null);
+      if (_equals_1) {
         Resource _eResource = modelElement.eResource();
         URI _uRI = _eResource.getURI();
         URI _trimFileExtension = _uRI.trimFileExtension();

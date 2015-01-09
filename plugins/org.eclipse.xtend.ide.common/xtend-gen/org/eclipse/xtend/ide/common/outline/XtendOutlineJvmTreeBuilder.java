@@ -65,6 +65,9 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     } else if (jvmDeclaredType != null) {
       _build(jvmDeclaredType, context);
       return;
+    } else if (jvmDeclaredType == null) {
+      _build((Void)null, context);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(jvmDeclaredType, context).toString());
