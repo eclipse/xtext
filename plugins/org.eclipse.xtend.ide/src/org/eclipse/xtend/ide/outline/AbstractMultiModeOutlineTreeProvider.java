@@ -7,15 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.outline;
 
-import static com.google.common.collect.Sets.*;
-
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.internal.ui.viewsupport.ColoringLabelProvider;
+import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
@@ -23,29 +20,28 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
+import org.eclipse.xtend.ide.common.outline.IXtendOutlineNodeBuilder;
+import org.eclipse.xtend.ide.common.outline.IXtendOutlineTreeBuilder;
+import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.BackgroundOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeature;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
-import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
-import org.eclipse.xtext.xbase.typesystem.override.ResolvedFeatures;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
 
@@ -53,18 +49,121 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOutlineTreeProvider {
+public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOutlineTreeProvider implements IXtendOutlineNodeBuilder {
+
+	@Inject
+	private XtendImages images;
+
+	@Inject
+	private XbaseImageAdornments adornments;
 
 	@Inject
 	private IXtendJvmAssociations associations;
 
 	@Inject
 	private JvmTypeExtensions typeExtensions;
-	
-	@Inject
-	private CommonTypeComputationServices services;
 
 	private IOutlineTreeProvider.ModeAware modeAware;
+	
+	private IXtendOutlineTreeBuilder xtendOutlineTreeBuilder;
+
+	@Override
+	public void internalCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
+		IXtendOutlineContext context = newContext(parentNode);
+		xtendOutlineTreeBuilder.build(modelElement, context);
+	}
+
+	@Override
+	protected void internalCreateChildren(IOutlineNode parentNode, EObject modelElement) {
+		IXtendOutlineContext context = newContext(parentNode);
+		xtendOutlineTreeBuilder.build(modelElement, context);
+	}
+
+	protected abstract IXtendOutlineContext newContext(IOutlineNode parentNode);
+
+	@Override
+	public IXtendOutlineContext buildEObjectNode(EObject modelElement, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		EObjectNode node = createNode(parentNode, modelElement);
+		return eclipseXtendOutlineContext.withParentNode(node);
+	}
+
+	@Override
+	public IXtendOutlineContext buildXtendNode(EObject modelElement, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		int inheritanceDepth = eclipseXtendOutlineContext.getInheritanceDepth();
+		EObjectNode xtendNode = createXtendNode(parentNode, modelElement, inheritanceDepth);
+		return eclipseXtendOutlineContext.withParentNode(xtendNode);
+	}
+
+	@Override
+	public IXtendOutlineContext buildFeatureNode(JvmDeclaredType inferredType, JvmFeature jvmFeature,
+			EObject modelElement, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		int inheritanceDepth = eclipseXtendOutlineContext.getInheritanceDepth();
+		XtendFeatureNode featureNode = createNodeForFeature(parentNode, inferredType, jvmFeature, modelElement,
+				inheritanceDepth);
+		return eclipseXtendOutlineContext.withParentNode(featureNode);
+	}
+
+	@Override
+	public IXtendOutlineContext buildDispatcherNode(JvmDeclaredType baseType, JvmFeature dispatcher,
+			List<JvmOperation> dispatchCases, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		int inheritanceDepth = eclipseXtendOutlineContext.getInheritanceDepth();
+		XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, baseType, dispatcher, dispatcher,
+				inheritanceDepth);
+		dispatcherNode.setDispatch(true);
+		if (isInheritsDispatchCases(baseType, dispatchCases)) {
+			dispatcherNode.setImageDescriptor(images.forDispatcherFunction(dispatcher.getVisibility(),
+					adornments.get(dispatcher) | JavaElementImageDescriptor.OVERRIDES));
+		}
+		return eclipseXtendOutlineContext.withParentNode(dispatcherNode);
+	}
+
+	@Override
+	public IXtendOutlineContext buildPackageNode(XtendFile xtendFile, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		String primaryPackage = xtendFile.getPackage();
+		EStructuralFeatureNode node = getOutlineNodeFactory().createEStructuralFeatureNode(parentNode, xtendFile, 
+				XtendPackage.Literals.XTEND_FILE__PACKAGE,
+				images.forPackage(), primaryPackage, true);
+		return eclipseXtendOutlineContext.withParentNode(node);
+	}
+
+	@Override
+	public IXtendOutlineContext buildImportSectionNode(XtendFile xtendFile, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		EStructuralFeatureNode node = getOutlineNodeFactory().createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(),
+				XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, images.forImportContainer(),
+				"import declarations", false);
+		return eclipseXtendOutlineContext.withParentNode(node);
+	}
+
+	@Override
+	public IXtendOutlineContext buildResolvedFeatureNode(JvmDeclaredType inferredType,
+			IResolvedFeature resolvedFeature, IXtendOutlineContext context) {
+		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+		int inheritanceDepth = eclipseXtendOutlineContext.getInheritanceDepth();
+		XtendFeatureNode node = createNodeForResolvedFeature(parentNode, inferredType, resolvedFeature, inheritanceDepth);
+		return eclipseXtendOutlineContext.withParentNode(node);
+	}
+
+	protected boolean isInheritsDispatchCases(JvmDeclaredType baseType, List<JvmOperation> dispatchCases) {
+		for (JvmOperation dispatchCase : dispatchCases) {
+			if (dispatchCase.getDeclaringType() != baseType) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature, int inheritanceDepth) {
@@ -79,86 +178,6 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 				image, text, true, synthetic, inheritanceDepth);
 	}
 
-	protected final void createFeatureNodesForType(IOutlineNode parentNode, JvmDeclaredType inferredType,
-			final JvmDeclaredType baseType, Set<JvmMember> processedMembers, int inheritanceDepth, boolean showInherited) {
-		for (JvmMember member : inferredType.getMembers()) {
-			if (!processedMembers.contains(member)) {
-				if (member instanceof JvmDeclaredType) {
-					JvmDeclaredType jvmNestedType = (JvmDeclaredType) member;
-					if (showInherited) {
-						Set<JvmMember> forgetProcessed = newHashSet();
-						EObject sourceElement = associations.getPrimarySourceElement(member);
-						if (sourceElement instanceof XtendTypeDeclaration) {
-							createNodeForType(parentNode, sourceElement, forgetProcessed, inheritanceDepth, showInherited);
-						} else {
-							createNodeForType(parentNode, jvmNestedType, forgetProcessed, inheritanceDepth, showInherited);
-						}
-					} else {
-						createNodeForType(parentNode, jvmNestedType, processedMembers, inheritanceDepth, showInherited);
-					}
-				} else if (member instanceof JvmFeature) {
-					JvmFeature feature = (JvmFeature) member;
-					if (skipFeature(feature)) {
-						continue;
-					}
-					IOutlineNode featureNode = createNodeForFeature(parentNode, baseType, feature, feature,
-							inheritanceDepth);
-					EList<JvmGenericType> localClasses = feature.getLocalClasses();
-					if (!localClasses.isEmpty()) {
-						for (JvmGenericType jvmGenericType : localClasses) {
-							Set<JvmMember> forgetProcessed = newHashSet();
-							createNodeForType(featureNode, jvmGenericType, forgetProcessed, inheritanceDepth, showInherited);
-						}
-					}
-				}
-				rememberJvmMember(processedMembers, member);
-			}
-		}
-
-		if (showInherited) {
-			handleInheritedMembers(parentNode, inferredType, processedMembers, inheritanceDepth);
-		}
-	}
-
-	/**
-	 * Adds all the members from the hierarchy
-	 */
-	protected void handleInheritedMembers(IOutlineNode parentNode, JvmDeclaredType inferredType,
-			Set<JvmMember> processedMembers, int inheritanceDepth) {
-		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, inferredType.eResource().getResourceSet());
-		LightweightTypeReference typeReference = owner.toLightweightTypeReference(inferredType);
-		List<LightweightTypeReference> superTypes = typeReference.getAllSuperTypes();
-		for (LightweightTypeReference superTypeRef : superTypes) {
-			inheritanceDepth = inheritanceDepth +1;
-			ResolvedFeatures resolvedFeatures = new ResolvedFeatures(superTypeRef);
-			List<IResolvedField> declaredFields = resolvedFeatures.getDeclaredFields();
-			for (IResolvedField jvmField : declaredFields) {
-				if (!skipFeature(jvmField.getDeclaration()))
-					createNodeForResolvedFeature(parentNode, inferredType, jvmField, inheritanceDepth);
-			}
-			List<IResolvedConstructor> constructors = resolvedFeatures.getDeclaredConstructors();
-			for (IResolvedConstructor constructor : constructors) {
-				if (!skipFeature(constructor.getDeclaration()))
-					createNodeForResolvedFeature(parentNode, inferredType, constructor, inheritanceDepth);
-			}
-			List<IResolvedOperation> operations = resolvedFeatures.getDeclaredOperations();
-			for (IResolvedOperation operation : operations) {
-				if (!skipFeature(operation.getDeclaration()) && !processedMembers.contains(operation.getDeclaration()))
-					createNodeForResolvedFeature(parentNode, inferredType, operation, inheritanceDepth);
-			}
-			JvmType jvmType = superTypeRef.getType();
-			if (jvmType instanceof JvmDeclaredType) {
-				JvmDeclaredType declaredType = (JvmDeclaredType) jvmType;
-				for (JvmMember e : declaredType.getMembers()) {
-					if (e instanceof JvmDeclaredType) {
-						JvmDeclaredType nestedType = (JvmDeclaredType) e;
-						createNodeForType(parentNode, nestedType, processedMembers, inheritanceDepth, false);
-					}
-				}
-			}
-		}
-	}
-
 	protected XtendFeatureNode createNodeForResolvedFeature(IOutlineNode parentNode, JvmDeclaredType inferredType,
 			IResolvedFeature feature, int inheritanceDepth) {
 		final boolean synthetic = typeExtensions.isSynthetic(feature.getDeclaration());
@@ -168,43 +187,11 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 				inheritanceDepth);
 	}
 
-	protected boolean skipFeature(JvmFeature feature) {
-		if (feature instanceof JvmConstructor) {
-			if (feature.getDeclaringType().isLocal()
-					|| typeExtensions.isSingleSyntheticDefaultConstructor((JvmConstructor) feature)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	protected abstract void createNodeForType(IOutlineNode parentNode, EObject someType,
-			Set<JvmMember> processedMembers, int inheritanceDepth, boolean showInheritance);
-
-	protected EObjectNode createNodeForType(IOutlineNode parentNode, JvmDeclaredType typeElement,
-			Set<JvmMember> processedMembers, int inheritanceDepth, boolean showInheritance) {
-		XtendEObjectNode classNode = createXtendNode(parentNode, typeElement, inheritanceDepth);
-		if (!processedMembers.contains(typeElement)) {
-			processedMembers.add(typeElement);
-			createFeatureNodesForType(classNode, typeElement, typeElement, processedMembers, inheritanceDepth, showInheritance);
-		}
-		return classNode;
-	}
-
 	protected boolean isShowInherited() {
 		if (modeAware != null) {
 			return modeAware.getCurrentMode() == XtendOutlineModes.SHOW_INHERITED_MODE;
 		}
 		return false;
-	}
-
-	@Override
-	public void internalCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
-		super.internalCreateChildren(parentNode, modelElement);
-	}
-
-	protected void rememberJvmMember(Set<JvmMember> processedMembers, JvmMember feature) {
-		processedMembers.add(feature);
 	}
 
 	@Override
@@ -353,5 +340,9 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 
 	public void setModeAware(IOutlineTreeProvider.ModeAware modeAware) {
 		this.modeAware = modeAware;
+	}
+	
+	public void setXtendOutlineTreeBuilder(IXtendOutlineTreeBuilder xtendOutlineTreeBuilder) {
+		this.xtendOutlineTreeBuilder = xtendOutlineTreeBuilder;
 	}
 }

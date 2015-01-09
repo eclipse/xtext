@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.idea.sdomain/src-gen" editDirectory="/org.eclipse.xtext.idea.sdomain.edit/src"
     editorDirectory="/org.eclipse.xtext.idea.sdomain.editor/src" modelPluginID="org.eclipse.xtext.idea.sdomain"
     forceOverwrite="true" modelName="SDomain" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.idea.sdomain.edit"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.idea.sdomain.edit"
     editorPluginID="org.eclipse.xtext.idea.sdomain.editor" runtimeVersion="2.10">
   <genPackages prefix="SDomain" basePackage="org.eclipse.xtext.idea.sdomain" disposableProviderFactory="true"
       fileExtensions="sdomain" ecorePackage="SDomain.ecore#/">

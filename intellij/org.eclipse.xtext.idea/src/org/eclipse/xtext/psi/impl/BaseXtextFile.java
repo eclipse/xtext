@@ -1,5 +1,7 @@
 package org.eclipse.xtext.psi.impl;
 
+import static java.util.Collections.emptyList;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,12 +111,16 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	public INode getINode(ASTNode node) {
 		return PsiToEcoreAdapter.get(getResource()).getNodesMapping().get(node);
 	}
+	
+	public List<ASTNode> getASTNodes(INode node) {
+		List<ASTNode> astNodes = PsiToEcoreAdapter.get(getResource()).getReverseNodesMapping().get(node);
+		if (astNodes == null) {
+			return emptyList();
+		}
+		return astNodes;
+	}
 
-	/**
-	 * FIXME: Should be protected
-	 * @return
-	 */
-	public Resource createResource() {    	
+	protected Resource createResource() {    	
     	VirtualFile virtualFile = getViewProvider().getVirtualFile();
         if (virtualFile == null) {
             return null;

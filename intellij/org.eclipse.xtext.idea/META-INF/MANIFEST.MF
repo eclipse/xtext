@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtext IDEA Core
 Bundle-SymbolicName: org.eclipse.xtext.idea
 Bundle-Version: 1.0.0.qualifier
-Export-Package: org.eclipse.xtext.common.idea.lang.parser,
+Export-Package: org.eclipse.xtext.common.idea.completion,
+ org.eclipse.xtext.common.idea.lang.parser,
  org.eclipse.xtext.idea,
  org.eclipse.xtext.idea.annotation,
  org.eclipse.xtext.idea.build,

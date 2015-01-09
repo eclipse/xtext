@@ -4,14 +4,13 @@
  */
 package org.eclipse.xtext.xbase.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.xbase.ui.XtypeUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractXtypeUiModule extends DefaultUiModule {
+public abstract class AbstractXtypeUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractXtypeUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

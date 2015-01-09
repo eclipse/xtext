@@ -3,19 +3,13 @@
 */
 package org.eclipse.xtend.ide.outline;
 
-import static com.google.common.collect.Sets.*;
-
-import java.util.Set;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtend.ide.labeling.XtendJvmLabelProvider;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
@@ -30,58 +24,50 @@ import com.google.inject.Inject;
 public class XtendOutlineJvmTreeProvider extends AbstractMultiModeOutlineTreeProvider {
 
 	@Inject
-	XtendJvmLabelProvider xtendJvmLableProvider;
-
+	private XtendJvmLabelProvider xtendJvmLableProvider;
+	
 	@Override
-	public void internalCreateChildren(DocumentRootNode parentNode, EObject modelElement) {
-		String primaryPackage = null;
-		if (modelElement instanceof XtendFile) {
-			primaryPackage = getOutlineNodeFactory().createPackageAndImporNodes(parentNode, (XtendFile) modelElement);
-		}
-		EList<EObject> contents = modelElement.eResource().getContents();
-
-		for (EObject eObject : contents) {
-			Set<JvmMember> processedFeatures = newHashSet();
-			if (eObject instanceof JvmDeclaredType) {
-				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) eObject;
-				String packageName = jvmDeclaredType.getPackageName();
-				EObjectNode typeNode = createNodeForType(parentNode, jvmDeclaredType, processedFeatures, 0, isShowInherited());
-				if (!isShowInherited() && packageName != null && (!packageName.equals(primaryPackage))) {
-					if (typeNode.getText() instanceof StyledString) {
-						typeNode.setText(((StyledString) typeNode.getText()).append(new StyledString(" - "
-								+ packageName, StyledString.QUALIFIER_STYLER)));
+	public IXtendOutlineContext buildXtendNode(EObject modelElement, IXtendOutlineContext context) {
+		IXtendOutlineContext resultedContext = super.buildXtendNode(modelElement, context);
+		
+		if (!context.isShowInherited()) {
+			EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
+			IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
+			if (parentNode instanceof DocumentRootNode) {
+				if (modelElement instanceof JvmDeclaredType) {
+					JvmDeclaredType jvmDeclaredType = (JvmDeclaredType) modelElement;
+					String packageName = jvmDeclaredType.getPackageName();
+					if (packageName != null) {
+						EObject rootElement = modelElement.eResource().getContents().get(0);
+						if (rootElement instanceof XtendFile) {
+							XtendFile xtendFile = (XtendFile) rootElement;
+							String primaryPackage = xtendFile.getPackage();
+							if (!packageName.equals(primaryPackage)) {
+								EObjectNode typeNode = (EObjectNode) ((EclipseXtendOutlineContext) resultedContext).getParentNode();
+								if (typeNode.getText() instanceof StyledString) {
+									typeNode.setText(((StyledString) typeNode.getText()).append(new StyledString(" - "
+											+ packageName, StyledString.QUALIFIER_STYLER)));
+								}
+							}
+						}
 					}
 				}
 			}
 		}
-	}
-
-	@Override
-	protected void internalCreateChildren(IOutlineNode parentNode, EObject modelElement) {
-		if (modelElement instanceof JvmDeclaredType) {
-			Set<JvmMember> processedFeatures = newHashSet();
-			createFeatureNodesForType(parentNode, (JvmDeclaredType) modelElement, (JvmDeclaredType) modelElement,
-					processedFeatures, 0, isShowInherited());
-		} else {
-			super.internalCreateChildren(parentNode, modelElement);
-		}
-	}
-
-	@Override
-	protected void createNodeForType(IOutlineNode parentNode, EObject someType, Set<JvmMember> processedFeatures,
-			int inheritanceDepth, boolean showInherited) {
-		if (someType instanceof JvmDeclaredType) {
-			JvmDeclaredType jvmType = (JvmDeclaredType) someType;
-			super.createNodeForType(parentNode, jvmType, processedFeatures, inheritanceDepth, showInherited);
-		} else if (someType instanceof XtendTypeDeclaration) {
-			EObject jvmElement = getAssociations().getPrimaryJvmElement(someType);
-			if (jvmElement instanceof JvmDeclaredType)
-				super.createNodeForType(parentNode, (JvmDeclaredType) jvmElement, processedFeatures, inheritanceDepth, showInherited);
-		}
+		return resultedContext;
 	}
 
 	@Override
 	protected ILabelProvider getLabelProvider() {
 		return xtendJvmLableProvider;
 	}
+
+	@Override
+	protected IXtendOutlineContext newContext(IOutlineNode parentNode) {
+		EclipseXtendOutlineContext context = new EclipseXtendOutlineContext();
+		context.setShowInherited(isShowInherited());
+		context.setParentNode(parentNode);
+		return context;
+	}
+
 }

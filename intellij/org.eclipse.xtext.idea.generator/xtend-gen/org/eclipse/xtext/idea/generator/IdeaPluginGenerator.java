@@ -117,6 +117,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator", "org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator");
       bindFactory.addTypeToTypeSingleton("org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex", "org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex");
       bindFactory.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider", "org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider");
+      bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider");
+      bindFactory.addTypeToTypeSingleton("com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider", "org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider");
     }
     final Set<Binding> bindings = bindFactory.getBindings();
     String _standaloneSetupIdea = this._ideaPluginClassNames.getStandaloneSetupIdea(grammar);
@@ -208,10 +210,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       String _javaPath_20 = this._ideaPluginClassNames.toJavaPath(_jvmElementsReferencesSearch);
       CharSequence _compileJvmElementsReferencesSearch = this.compileJvmElementsReferencesSearch(grammar);
       ctx.writeFile(outlet_src_gen, _javaPath_20, _compileJvmElementsReferencesSearch);
+      String _callReferenceProcessorName = this._ideaPluginClassNames.getCallReferenceProcessorName(grammar);
+      String _javaPath_21 = this._ideaPluginClassNames.toJavaPath(_callReferenceProcessorName);
+      CharSequence _compileCallReferenceProcessor = this.compileCallReferenceProcessor(grammar);
+      ctx.writeFile(outlet_src_gen, _javaPath_21, _compileCallReferenceProcessor);
     }
     OutputImpl output = new OutputImpl();
     this.addOutlet(output, IdeaPluginGenerator.PLUGIN, false, this.ideaProjectPath);
-    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, false, (this.ideaProjectPath + "/META-INF"));
+    this.addOutlet(output, IdeaPluginGenerator.META_INF_PLUGIN, true, (this.ideaProjectPath + "/META-INF"));
     if (this.deployable) {
       StringConcatenation _builder = new StringConcatenation();
       String _name = grammar.getName();
@@ -809,6 +815,53 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
+  public CharSequence compileCallReferenceProcessor(final Grammar it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package ");
+    String _callReferenceProcessorName = this._ideaPluginClassNames.getCallReferenceProcessorName(it);
+    String _packageName = this._ideaPluginClassNames.toPackageName(_callReferenceProcessorName);
+    _builder.append(_packageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import ");
+    String _languageName = this._ideaPluginClassNames.getLanguageName(it);
+    _builder.append(_languageName, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallReferenceProcessor;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class ");
+    String _callReferenceProcessorName_1 = this._ideaPluginClassNames.getCallReferenceProcessorName(it);
+    String _simpleName = this._ideaPluginClassNames.toSimpleName(_callReferenceProcessorName_1);
+    _builder.append(_simpleName, "");
+    _builder.append(" extends JvmExecutableCallReferenceProcessor {");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public ");
+    String _callReferenceProcessorName_2 = this._ideaPluginClassNames.getCallReferenceProcessorName(it);
+    String _simpleName_1 = this._ideaPluginClassNames.toSimpleName(_callReferenceProcessorName_2);
+    _builder.append(_simpleName_1, "\t");
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("super(");
+    String _languageName_1 = this._ideaPluginClassNames.getLanguageName(it);
+    String _simpleName_2 = this._ideaPluginClassNames.toSimpleName(_languageName_1);
+    _builder.append(_simpleName_2, "\t\t");
+    _builder.append(".INSTANCE);");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
   public CharSequence compilePsiParser(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
@@ -1207,6 +1260,20 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("\t");
     _builder.append("<depends optional=\"true\">org.eclipse.xtext.idea</depends>");
     _builder.newLine();
+    {
+      boolean _and = false;
+      if (!this.typesIntegrationRequired) {
+        _and = false;
+      } else {
+        boolean _notEquals = (!Objects.equal(this.ideaProjectName, "org.eclipse.xtext.xbase.idea"));
+        _and = _notEquals;
+      }
+      if (_and) {
+        _builder.append("\t");
+        _builder.append("<depends optional=\"true\">org.eclipse.xtext.xbase.idea</depends>");
+        _builder.newLine();
+      }
+    }
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<extensions defaultExtensionNs=\"com.intellij\">");
@@ -1311,9 +1378,13 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_syntaxHighlighterFactoryName, "      \t");
     _builder.append("\" />");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    CharSequence _compileExtension_6 = this.compileExtension(grammar, "lang.braceMatcher", "com.intellij.lang.PairedBraceMatcher");
+    _builder.append(_compileExtension_6, "\t\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("      \t");
-    CharSequence _compileExtension_6 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
-    _builder.append(_compileExtension_6, "      \t");
+    CharSequence _compileExtension_7 = this.compileExtension(grammar, "annotator", "org.eclipse.xtext.idea.annotation.IssueAnnotator");
+    _builder.append(_compileExtension_7, "      \t");
     _builder.newLineIfNotEmpty();
     _builder.append("      \t");
     _builder.append("<completion.contributor language=\"");
@@ -1336,6 +1407,30 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(_pomDeclarationSearcherName, "      \t");
     _builder.append("\"/>");
     _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("      \t");
+    CharSequence _compileExtension_8 = this.compileExtension(grammar, "lang.psiStructureViewFactory", "com.intellij.lang.PsiStructureViewFactory");
+    _builder.append(_compileExtension_8, "      \t");
+    _builder.newLineIfNotEmpty();
+    {
+      if (this.typesIntegrationRequired) {
+        _builder.newLine();
+        _builder.append("\t\t");
+        CharSequence _compileExtension_9 = this.compileExtension(grammar, "typeHierarchyProvider", "com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider");
+        _builder.append(_compileExtension_9, "\t\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        CharSequence _compileExtension_10 = this.compileExtension(grammar, "callHierarchyProvider", "com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider");
+        _builder.append(_compileExtension_10, "\t\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("<hierarchy.referenceProcessor implementation=\"");
+        String _callReferenceProcessorName = this._ideaPluginClassNames.getCallReferenceProcessorName(grammar);
+        _builder.append(_callReferenceProcessorName, "\t\t");
+        _builder.append("\"/>");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("\t");
     _builder.append("</extensions>");
     _builder.newLine();
