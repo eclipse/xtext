@@ -15,6 +15,9 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
   public boolean isValid() {

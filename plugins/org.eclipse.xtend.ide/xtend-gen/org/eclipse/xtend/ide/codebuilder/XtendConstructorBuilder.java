@@ -14,9 +14,13 @@ import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.Extension;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Xtend {
   @Inject
@@ -32,10 +36,11 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
     return this.appendBody(_appendThrowsClause, "");
   }
   
-  public int getInsertOffset() {
+  public int getInsertOffset(final XtextResource resource) {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
-    return this._insertionOffsets.getNewConstructorInsertOffset(_context, _xtendType);
+    XtendTypeDeclaration _findByFragment = this.<XtendTypeDeclaration>findByFragment(resource, _xtendType);
+    return this._insertionOffsets.getNewConstructorInsertOffset(_context, _findByFragment);
   }
   
   public int getIndentationLevel() {

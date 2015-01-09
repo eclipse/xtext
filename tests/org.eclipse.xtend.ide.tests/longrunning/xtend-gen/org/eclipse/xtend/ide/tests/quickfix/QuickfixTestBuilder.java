@@ -299,6 +299,10 @@ public class QuickfixTestBuilder {
     return _xblockexpression;
   }
   
+  protected XtextEditor getEditor() {
+    return this.editor;
+  }
+  
   protected Iterable<Issue> getIssuesAtCaret() {
     final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
       public Boolean apply(final Issue it) {

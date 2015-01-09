@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
@@ -6,7 +13,11 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.XtextResource
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
 	@Accessors String className
@@ -17,6 +28,9 @@ abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
 }
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xtend {
 	
 	@Inject extension InsertionOffsets
@@ -30,8 +44,8 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xte
 			.newLine.append('}')
 	}
 
-	override getInsertOffset() {
-		getNewTypeInsertOffset(context, xtendType)
+	override getInsertOffset(XtextResource resource) {
+		getNewTypeInsertOffset(context, resource.findByFragment(xtendType))
 	}
 	
 	override getIndentationLevel() {
@@ -43,6 +57,9 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xte
 	}
 }
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {

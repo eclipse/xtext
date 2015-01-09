@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
+import org.eclipse.xtext.resource.XtextResource
 
 /** 
  * @author Jan Koehnlein
@@ -61,6 +62,16 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 				case JvmVisibility.PUBLIC: 'public '
 				default: ''
 			})
+	}
+	
+	def protected <T extends EObject> T findByFragment(XtextResource resource, T object) {
+		val myResource = object.eResource
+		if (myResource == resource) {
+			return object
+		}
+		val fragment = myResource.getURIFragment(object)
+		val result = resource.getEObject(fragment) as T
+		return result
 	}
 
 	def protected appendType(ISourceAppender appendable, LightweightTypeReference typeRef, String surrogate) {

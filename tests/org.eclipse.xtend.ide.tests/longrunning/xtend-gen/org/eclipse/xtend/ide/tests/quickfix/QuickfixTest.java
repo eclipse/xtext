@@ -6,8 +6,11 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.quickfix.QuickfixTestBuilder;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -1515,6 +1518,71 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingConstructorOtherClassTwoFiles() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo| {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.builder.create("Foo.xtend", _builder);
+    final XtextEditor myEditor = this.builder.getEditor();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Foo(1)|");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Bar.xtend", _builder_1);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create constructor \'new(int)\' in \'Foo\'");
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Bar {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("new Foo(1)");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_2);
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("class Foo {");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("new(int i) {");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append(QuickfixTest.defaultBody, "\t\t");
+    _builder_3.newLineIfNotEmpty();
+    _builder_3.append("\t");
+    _builder_3.append("}");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.newLine();
+    _builder_3.append("}");
+    _builder_3.newLine();
+    String _string = _builder_3.toString();
+    IXtextDocument _document = myEditor.getDocument();
+    String _get = _document.get();
+    Assert.assertEquals(_string, _get);
   }
   
   @Test
