@@ -93,6 +93,8 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator', 'org.eclipse.xtext.idea.jvmmodel.PsiJvmModelAssociator')
 			bindFactory.addTypeToTypeSingleton('org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex', 'org.eclipse.xtext.idea.types.stubindex.JvmDeclaredTypeShortNameIndex')
 			bindFactory.addTypeToType('org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider', 'org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider')
+			bindFactory.addTypeToTypeSingleton('com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider', 'org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmDeclaredTypeHierarchyProvider')
+			bindFactory.addTypeToTypeSingleton('com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider', 'org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallHierarchyProvider')
 		}
 		val bindings = bindFactory.bindings
 		
@@ -119,11 +121,12 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesElementFinderName.toJavaPath, grammar.compileJvmTypesElementFinder)
 			ctx.writeFile(outlet_src_gen, grammar.jvmTypesShortNamesCacheName.toJavaPath, grammar.compileJvmTypesShortNamesCache)
 			ctx.writeFile(outlet_src_gen, grammar.jvmElementsReferencesSearch.toJavaPath, grammar.compileJvmElementsReferencesSearch)
+			ctx.writeFile(outlet_src_gen, grammar.callReferenceProcessorName.toJavaPath, grammar.compileCallReferenceProcessor)
 		}
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
-		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
+		output.addOutlet(META_INF_PLUGIN, true, ideaProjectPath + "/META-INF");
 		
 		if (deployable) {
 			output.writeFile(PLUGIN, '''«grammar.name.toSimpleName» Launch Intellij.launch''', grammar.compileLaunchIntellij)
@@ -276,6 +279,21 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		public class «pomDeclarationSearcherName.toSimpleName» extends AbstractXtextPomDeclarationSearcher {
 		
 			public «pomDeclarationSearcherName.toSimpleName»() {
+				super(«languageName.toSimpleName».INSTANCE);
+			}
+		
+		}
+	'''
+	
+	def compileCallReferenceProcessor(Grammar it) '''
+		package «callReferenceProcessorName.toPackageName»;
+		
+		import «languageName»;
+		import org.eclipse.xtext.xbase.idea.ide.hierarchy.JvmExecutableCallReferenceProcessor;
+		
+		public class «callReferenceProcessorName.toSimpleName» extends JvmExecutableCallReferenceProcessor {
+		
+			public «callReferenceProcessorName.toSimpleName»() {
 				super(«languageName.toSimpleName».INSTANCE);
 			}
 		
@@ -438,6 +456,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 			<idea-version since-build="131"/>
 			<depends optional="true">org.eclipse.xtext.idea</depends>
+			«IF typesIntegrationRequired && ideaProjectName != 'org.eclipse.xtext.xbase.idea'»
+			<depends optional="true">org.eclipse.xtext.xbase.idea</depends>
+			«ENDIF»
 
 			<extensions defaultExtensionNs="com.intellij">
 				<buildProcess.parametersProvider implementation="«grammar.buildProcessParametersProviderName»"/>
@@ -467,10 +488,19 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				«grammar.compileExtension('lang.refactoringSupport', 'org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider')»
 				«grammar.compileExtension('lang.namesValidator', 'com.intellij.lang.refactoring.NamesValidator')»
 		      	<lang.syntaxHighlighterFactory key="«grammar.languageID»" implementationClass="«grammar.syntaxHighlighterFactoryName»" />
+				«grammar.compileExtension('lang.braceMatcher', 'com.intellij.lang.PairedBraceMatcher')»
 		      	«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator')»
 		      	<completion.contributor language="«grammar.languageID»" implementationClass="«grammar.completionContributor»"/>
 		      	<elementDescriptionProvider implementation="«grammar.elementDescriptionProviderName»" order="first"/>
 		      	<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcherName»"/>
+
+		      	«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory')»
+				«IF typesIntegrationRequired»
+
+				«grammar.compileExtension('typeHierarchyProvider', 'com.intellij.ide.hierarchy.type.JavaTypeHierarchyProvider')»
+				«grammar.compileExtension('callHierarchyProvider', 'com.intellij.ide.hierarchy.call.JavaCallHierarchyProvider')»
+				<hierarchy.referenceProcessor implementation="«grammar.callReferenceProcessorName»"/>
+				«ENDIF»
 			</extensions>
 		
 		</idea-plugin>
