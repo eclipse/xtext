@@ -44,7 +44,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	AmbiguityValidationSuite.class,
 	AnonymousClassValidationTest.class,
 	NestedClassValidationTest.class,
-	VisibilityValidationTest.class
+	VisibilityValidationTest.class,
+	UniqueClassNameValidatorRuntimeTest.class
 })
 public class ValidationSuite {
 }
