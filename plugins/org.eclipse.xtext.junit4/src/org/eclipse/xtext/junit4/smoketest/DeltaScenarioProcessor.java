@@ -53,6 +53,16 @@ public abstract class DeltaScenarioProcessor extends ScenarioProcessor {
 			processor.processFile(newData);
 			return newData;
 		}
+		
+		@Override
+		protected <T> T get(Class<T> service) {
+			return processor.get(service);
+		}
+		
+		@Override
+		public String preProcess(String data) {
+			return processor.preProcess(data);
+		}
 
 	}
 	
