@@ -1,0 +1,239 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
+package org.eclipse.xtext.xbase.ui.validation;
+
+import com.google.common.base.Objects;
+import com.google.inject.Inject;
+import java.util.HashSet;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageDeclaration;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.compiler.CharOperation;
+import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jdt.core.search.IJavaSearchScope;
+import org.eclipse.jdt.core.search.SearchParticipant;
+import org.eclipse.jdt.core.search.SearchPattern;
+import org.eclipse.jdt.internal.compiler.env.AccessRuleSet;
+import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
+import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
+import org.eclipse.jdt.internal.core.search.IndexQueryRequestor;
+import org.eclipse.jdt.internal.core.search.PatternSearchJob;
+import org.eclipse.jdt.internal.core.search.indexing.IIndexConstants;
+import org.eclipse.jdt.internal.core.search.indexing.IndexManager;
+import org.eclipse.jdt.internal.core.search.matching.TypeDeclarationPattern;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@SuppressWarnings("all")
+public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
+  @Inject
+  private IJavaProjectProvider javaProjectProvider;
+  
+  @Inject
+  private IDerivedResourceMarkers derivedResourceMarkers;
+  
+  public boolean doCheckUniqueName(final QualifiedName name, final JvmDeclaredType type) {
+    boolean _doCheckUniqueName = super.doCheckUniqueName(name, type);
+    if (_doCheckUniqueName) {
+      return this.doCheckUniqueInProject(name, type);
+    } else {
+      return true;
+    }
+  }
+  
+  public boolean doCheckUniqueInProject(final QualifiedName name, final JvmDeclaredType type) {
+    try {
+      Resource _eResource = type.eResource();
+      ResourceSet _resourceSet = _eResource.getResourceSet();
+      final IJavaProject javaProject = this.javaProjectProvider.getJavaProject(_resourceSet);
+      final String packageName = type.getPackageName();
+      final String typeName = type.getSimpleName();
+      IPackageFragmentRoot[] _packageFragmentRoots = javaProject.getPackageFragmentRoots();
+      final Function1<IPackageFragmentRoot, Boolean> _function = new Function1<IPackageFragmentRoot, Boolean>() {
+        public Boolean apply(final IPackageFragmentRoot it) {
+          try {
+            int _kind = it.getKind();
+            return Boolean.valueOf((_kind == IPackageFragmentRoot.K_SOURCE));
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      final Iterable<IPackageFragmentRoot> sourceFolders = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
+      IndexManager indexManager = JavaModelManager.getIndexManager();
+      int _awaitingJobsCount = indexManager.awaitingJobsCount();
+      boolean _greaterThan = (_awaitingJobsCount > 0);
+      if (_greaterThan) {
+        for (final IPackageFragmentRoot sourceFolder : sourceFolders) {
+          {
+            IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
+            boolean _exists = packageFragment.exists();
+            if (_exists) {
+              ICompilationUnit[] units = packageFragment.getCompilationUnits();
+              for (final ICompilationUnit unit : units) {
+                IResource _resource = unit.getResource();
+                IMarker[] _findDerivedResourceMarkers = this.derivedResourceMarkers.findDerivedResourceMarkers(_resource);
+                int _length = _findDerivedResourceMarkers.length;
+                boolean _equals = (_length == 0);
+                if (_equals) {
+                  IType javaType = unit.getType(typeName);
+                  boolean _exists_1 = javaType.exists();
+                  if (_exists_1) {
+                    String _elementName = unit.getElementName();
+                    this.addIssue(type, _elementName);
+                    return false;
+                  }
+                }
+              }
+            }
+          }
+        }
+        return true;
+      }
+      final HashSet<String> workingCopyPaths = CollectionLiterals.<String>newHashSet();
+      JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
+      ICompilationUnit[] copies = _javaModelManager.getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false);
+      boolean _notEquals = (!Objects.equal(copies, null));
+      if (_notEquals) {
+        for (final ICompilationUnit workingCopy : copies) {
+          {
+            final IPath path = workingCopy.getPath();
+            IPath _path = javaProject.getPath();
+            boolean _isPrefixOf = _path.isPrefixOf(path);
+            if (_isPrefixOf) {
+              IPackageDeclaration _packageDeclaration = workingCopy.getPackageDeclaration(packageName);
+              boolean _exists = _packageDeclaration.exists();
+              if (_exists) {
+                IType result = workingCopy.getType(typeName);
+                boolean _exists_1 = result.exists();
+                if (_exists_1) {
+                  String _elementName = workingCopy.getElementName();
+                  this.addIssue(type, _elementName);
+                  return false;
+                }
+              }
+              IPath _path_1 = workingCopy.getPath();
+              String _string = _path_1.toString();
+              workingCopyPaths.add(_string);
+            }
+          }
+        }
+      }
+      char[] _xifexpression = null;
+      boolean _equals = Objects.equal(packageName, null);
+      if (_equals) {
+        _xifexpression = CharOperation.NO_CHAR;
+      } else {
+        _xifexpression = packageName.toCharArray();
+      }
+      char[] _charArray = typeName.toCharArray();
+      final TypeDeclarationPattern pattern = new TypeDeclarationPattern(_xifexpression, CharOperation.NO_CHAR_CHAR, _charArray, IIndexConstants.TYPE_SUFFIX, 
+        (SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE));
+      final IndexQueryRequestor _function_1 = new IndexQueryRequestor() {
+        @Override
+        public boolean acceptIndexMatch(final String documentPath, final SearchPattern indexRecord, final SearchParticipant participant, final AccessRuleSet access) {
+          try {
+            boolean _contains = workingCopyPaths.contains(documentPath);
+            if (_contains) {
+              return true;
+            }
+            IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+            IWorkspaceRoot _root = _workspace.getRoot();
+            Path _path = new Path(documentPath);
+            IFile file = _root.getFile(_path);
+            IMarker[] _findDerivedResourceMarkers = ProjectAwareUniqueClassNameValidator.this.derivedResourceMarkers.findDerivedResourceMarkers(file);
+            int _length = _findDerivedResourceMarkers.length;
+            boolean _equals = (_length == 0);
+            if (_equals) {
+              String _name = file.getName();
+              ProjectAwareUniqueClassNameValidator.this.addIssue(type, _name);
+              return false;
+            }
+            return true;
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      IndexQueryRequestor searchRequestor = _function_1;
+      try {
+        SearchParticipant _defaultSearchParticipant = BasicSearchEngine.getDefaultSearchParticipant();
+        IJavaSearchScope _createJavaSearchScope = BasicSearchEngine.createJavaSearchScope(((IJavaElement[])Conversions.unwrapArray(sourceFolders, IJavaElement.class)));
+        PatternSearchJob _patternSearchJob = new PatternSearchJob(pattern, _defaultSearchParticipant, _createJavaSearchScope, searchRequestor);
+        indexManager.performConcurrentJob(_patternSearchJob, 
+          IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, null);
+        return true;
+      } catch (final Throwable _t) {
+        if (_t instanceof OperationCanceledException) {
+          final OperationCanceledException oce = (OperationCanceledException)_t;
+          return false;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected boolean checkUniqueInIndex(final JvmDeclaredType type, final Iterable<IEObjectDescription> descriptions) {
+    final URI objectURI = EcoreUtil.getURI(type);
+    boolean _isPlatformResource = objectURI.isPlatformResource();
+    if (_isPlatformResource) {
+      final String project = objectURI.segment(1);
+      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+        public Boolean apply(final IEObjectDescription it) {
+          final URI candidate = it.getEObjectURI();
+          boolean _and = false;
+          boolean _isPlatformResource = candidate.isPlatformResource();
+          if (!_isPlatformResource) {
+            _and = false;
+          } else {
+            String _segment = candidate.segment(1);
+            boolean _equals = Objects.equal(_segment, project);
+            _and = _equals;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(descriptions, _function);
+      return super.checkUniqueInIndex(type, _filter);
+    }
+    return true;
+  }
+}
