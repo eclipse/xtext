@@ -27,12 +27,16 @@ import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Deprecated
 @SuppressWarnings("all")
 public class DataProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
+   * @noextend
+   * @noreference
    */
   @Deprecated
   public static class Util {

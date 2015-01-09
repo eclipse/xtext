@@ -27,12 +27,16 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 @SuppressWarnings("all")
 public class DataProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
+   * @noextend
+   * @noreference
    */
   @Beta
   public static class Util {

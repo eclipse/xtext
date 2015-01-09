@@ -5,6 +5,8 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 @SuppressWarnings("all")

@@ -37,6 +37,8 @@ annotation Data {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Deprecated
 class DataProcessor extends AbstractClassProcessor {
@@ -72,6 +74,8 @@ class DataProcessor extends AbstractClassProcessor {
 
 	/**
 	 * @since 2.7
+	 * @noextend
+	 * @noreference
  	 */
 	@Deprecated
 	static class Util {

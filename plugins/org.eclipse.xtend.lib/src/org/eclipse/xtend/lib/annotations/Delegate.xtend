@@ -76,6 +76,8 @@ annotation Delegate {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 class DelegateProcessor implements TransformationParticipant<MutableMemberDeclaration> {
@@ -91,6 +93,8 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 
 	/**
 	 * @since 2.7
+	 * @noextend
+	 * @noreference
  	*/
  	@Beta
 	static class Util {

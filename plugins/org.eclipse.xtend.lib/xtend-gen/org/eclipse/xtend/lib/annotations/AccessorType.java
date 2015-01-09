@@ -5,6 +5,7 @@ import com.google.common.annotations.GwtCompatible;
 
 /**
  * @since 2.7
+ * @noreference
  */
 @Beta
 @GwtCompatible

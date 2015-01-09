@@ -47,6 +47,8 @@ annotation FinalFieldsConstructor {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 class FinalFieldsConstructorProcessor implements TransformationParticipant<MutableTypeParameterDeclarator> {
@@ -74,6 +76,8 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 
 	/**
 	 * @since 2.7
+	 * @noextend
+	 * @noreference
 	 */
 	@Beta
 	static class Util {

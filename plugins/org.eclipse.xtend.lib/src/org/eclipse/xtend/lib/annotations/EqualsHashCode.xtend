@@ -29,6 +29,8 @@ annotation EqualsHashCode {
 
 /**
  * @since 2.7
+ * @noreference
+ * @noextend
  */
 @Beta
 class EqualsHashCodeProcessor extends AbstractClassProcessor {
@@ -53,6 +55,8 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 
 	/**
 	 * @since 2.7
+	 * @noreference
+	 * @noextend
  	 */
 	@Beta
 	static class Util {

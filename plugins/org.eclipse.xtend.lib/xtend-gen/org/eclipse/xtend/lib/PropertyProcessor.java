@@ -10,6 +10,8 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Deprecated
 @SuppressWarnings("all")

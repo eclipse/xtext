@@ -59,6 +59,8 @@ annotation ToString {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 class ToStringConfiguration {
@@ -97,6 +99,8 @@ class ToStringConfiguration {
 
 /**
  * @since 2.7
+ * @noextend
+ * @noreference
  */
 @Beta
 class ToStringProcessor extends AbstractClassProcessor {
@@ -119,6 +123,8 @@ class ToStringProcessor extends AbstractClassProcessor {
 
 	/**
 	* @since 2.7
+	* @noextend
+	* @noreference
 	*/
 	@Beta
 	static class Util {
