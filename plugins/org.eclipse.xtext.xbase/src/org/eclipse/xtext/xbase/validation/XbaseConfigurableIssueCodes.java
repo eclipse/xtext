@@ -80,6 +80,8 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(create(IssueCodes.OPERATION_WITHOUT_PARENTHESES, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(create(IssueCodes.COPY_JAVA_PROBLEMS, SeverityConverter.SEVERITY_IGNORE));
 		iAcceptor.accept(createDelegate(IssueCodes.DEPRECATED_MEMBER_REFERENCE, COMPILER_PB_DEPRECATION));
+		
+		iAcceptor.accept(create(IssueCodes.DUPLICATE_TYPE, SeverityConverter.SEVERITY_ERROR));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {

@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.tests.editor;
 
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -31,6 +32,8 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   @Inject
   @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
+  
+  private IProject testProject;
   
   @Test
   public void testOpenTargetSourceTwice() {
@@ -63,7 +66,8 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   @Before
   public void setUp() throws Exception {
     super.setUp();
-    WorkbenchTestHelper.createPluginProject("testProject");
+    IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
+    this.testProject = _createPluginProject;
     Path _path = new Path("testProject/src/mypackage/A.xtend");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage; ");
@@ -101,6 +105,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   
   @After
   public void tearDown() throws Exception {
-    IResourcesSetupUtil.cleanWorkspace();
+    WorkbenchTestHelper.deleteProject(this.testProject);
+    this.testProject = null;
   }
 }

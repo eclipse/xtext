@@ -25,8 +25,6 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
-import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
@@ -36,7 +34,9 @@ import org.eclipse.xtext.xbase.ui.hover.XbaseHoverDocumentationProvider;
 import org.eclipse.xtext.xbase.ui.hover.XbaseHoverProvider;
 import org.eclipse.xtext.xbase.ui.navigation.XbaseHyperLinkHelper;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseCrossRefResolutionConverter;
+import org.eclipse.xtext.xbase.ui.validation.ProjectAwareUniqueClassNameValidator;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
+import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -98,8 +98,9 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 		return XbaseHyperLinkHelper.class;
 	}
 
-	public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
-		return OptimizingFeatureScopeTrackerProvider.class;
+	@SuppressWarnings("restriction")
+	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
+		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
 	}
 
 	public Class<? extends IContentProposalPriorities> bindIContentProposalPriorities() {
@@ -108,5 +109,10 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
+	}
+	
+	@SingletonBinding(eager = true)
+	public Class<? extends UniqueClassNameValidator> bindUniqueClassNameValidator() {
+		return ProjectAwareUniqueClassNameValidator.class;
 	}
 }

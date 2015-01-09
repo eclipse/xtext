@@ -9,15 +9,16 @@ package org.eclipse.xtend.ide.tests.editor
 
 import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.Path
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.junit.After
+import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.junit.Before
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -26,6 +27,8 @@ class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCase {
 
 	@Inject
 	extension WorkbenchTestHelper
+	
+	IProject testProject
 
 	@Test def void testOpenTargetSourceTwice() {
 		val childFile = file('testProject/xtend-gen/mypackage/B.java') as IFile
@@ -40,7 +43,7 @@ class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCase {
 	
 	@Before override setUp() throws Exception {
 		super.setUp()
-		createPluginProject('testProject')
+		testProject = createPluginProject('testProject')
 		createFile(new Path('testProject/src/mypackage/A.xtend'),
 			'''
 				package mypackage; 
@@ -65,7 +68,8 @@ class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCase {
 	}
 
 	@After override tearDown() throws Exception {
-		cleanWorkspace
+		deleteProject(testProject)
+		testProject = null
 	}
 	
 }

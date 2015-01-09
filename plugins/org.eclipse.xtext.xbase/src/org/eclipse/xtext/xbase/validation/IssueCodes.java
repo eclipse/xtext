@@ -146,6 +146,11 @@ public class IssueCodes {
 	 */
 	public static final String DEPRECATED_MEMBER_REFERENCE = ISSUE_CODE_PREFIX + "deprecated_member_reference";
 	
+	/**
+	 * A type is defined twice.
+	 */
+	public static final String DUPLICATE_TYPE = ISSUE_CODE_PREFIX + "duplicate_type";
+	
 	private IssueCodes() {
 	}
 
