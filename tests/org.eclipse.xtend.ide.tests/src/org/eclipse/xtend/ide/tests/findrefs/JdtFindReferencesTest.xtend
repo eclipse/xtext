@@ -30,7 +30,6 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.junit.Ignore
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
@@ -280,7 +279,6 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 		]
 	}
 	
-	@Ignore("tracing is currently not supported by the active annotation API")
 	@Test def void testPropertyJavaElements() {
 		val field = xtendFile("Xtend.xtend", '''
 			class Xtend {
@@ -336,5 +334,15 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 		for(event: events.tail)
 			assertTrue(event instanceof MatchEvent)
 		elements
+	}
+	
+	@Test def void testBug387230() {
+		val cls = xtendFile("Xtend.xtend", "@Data class Xtend { String field }").xtendTypes.filter(typeof(XtendClass)).head
+		waitForAutoBuild
+		getJavaElements(cls) => [
+			assertEquals(2, size)
+			assertTrue(exists[it instanceof IType && (it as IType).elementName == 'Xtend'])
+			assertTrue(exists[it instanceof IMethod && (it as IMethod).elementName == 'Xtend'])
+		]
 	}
 }
