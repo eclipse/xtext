@@ -343,10 +343,13 @@ public class IResourcesSetupUtil {
 	}
 	
 	public static String printMarker(IMarker[] markers) throws CoreException {
-		String s = "";
-		for (IMarker iMarker : markers) {
-			s += "," + iMarker.getAttribute(IMarker.MESSAGE);
+		StringBuilder result = new StringBuilder();
+		for (IMarker marker : markers) {
+			if (result.length() != 0) {
+				result.append(", ");
+			}
+			result.append(marker.getAttribute(IMarker.MESSAGE));
 		}
-		return s;
+		return result.toString();
 	}
 }
