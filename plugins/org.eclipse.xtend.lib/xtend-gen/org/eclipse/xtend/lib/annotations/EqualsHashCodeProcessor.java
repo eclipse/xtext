@@ -2,6 +2,7 @@ package org.eclipse.xtend.lib.annotations;
 
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
+import java.util.Arrays;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtend.lib.annotations.EqualsHashCode;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
@@ -18,7 +19,6 @@ import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -37,8 +37,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   /**
    * @since 2.7
-   * @noreference
    * @noextend
+   * @noreference
    */
   @Beta
   public static class Util {
@@ -76,8 +76,8 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
             Iterable<? extends ParameterDeclaration> _parameters_1 = it.getParameters();
             ParameterDeclaration _head = IterableExtensions.head(_parameters_1);
             TypeReference _type = _head.getType();
-            String _name = _type.getName();
-            boolean _equals_2 = Objects.equal(_name, "java.lang.Object");
+            TypeReference _object = Util.this.context.getObject();
+            boolean _equals_2 = Objects.equal(_type, _object);
             _and = _equals_2;
           }
           return Boolean.valueOf(_and);
@@ -157,7 +157,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
               _builder.newLineIfNotEmpty();
               {
                 for(final FieldDeclaration field : includedFields) {
-                  String _contributeToEquals = Util.this.contributeToEquals(field);
+                  StringConcatenationClient _contributeToEquals = Util.this.contributeToEquals(field);
                   _builder.append(_contributeToEquals, "");
                   _builder.newLineIfNotEmpty();
                 }
@@ -184,131 +184,203 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       return this.context.newTypeReference(cls, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));
     }
     
-    public String contributeToEquals(final FieldDeclaration it) {
-      String _switchResult = null;
+    public StringConcatenationClient contributeToEquals(final FieldDeclaration it) {
+      StringConcatenationClient _switchResult = null;
       TypeReference _type = it.getType();
       TypeReference _orObject = this.orObject(_type);
-      String _name = _orObject.getName();
+      TypeReference _wrapperIfPrimitive = _orObject.getWrapperIfPrimitive();
       boolean _matched = false;
       if (!_matched) {
-        String _name_1 = Double.TYPE.getName();
-        if (Objects.equal(_name, _name_1)) {
+        TypeReference _newTypeReference = this.context.newTypeReference(Double.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference)) {
           _matched=true;
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("if (Double.doubleToLongBits(other.");
-          String _simpleName = it.getSimpleName();
-          _builder.append(_simpleName, "");
-          _builder.append(") != Double.doubleToLongBits(this.");
-          String _simpleName_1 = it.getSimpleName();
-          _builder.append(_simpleName_1, "");
-          _builder.append("))");
-          _builder.newLineIfNotEmpty();
-          _builder.append("  ");
-          _builder.append("return false; ");
-          _builder.newLine();
-          _switchResult = _builder.toString();
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("if (Double.doubleToLongBits(other.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(") != Double.doubleToLongBits(this.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append("))");
+              _builder.newLineIfNotEmpty();
+              _builder.append("  ");
+              _builder.append("return false; ");
+              _builder.newLine();
+            }
+          };
+          _switchResult = _client;
         }
       }
       if (!_matched) {
-        String _name_2 = Float.TYPE.getName();
-        if (Objects.equal(_name, _name_2)) {
+        TypeReference _newTypeReference_1 = this.context.newTypeReference(Float.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_1)) {
           _matched=true;
-          StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append("if (Float.floatToIntBits(other.");
-          String _simpleName_2 = it.getSimpleName();
-          _builder_1.append(_simpleName_2, "");
-          _builder_1.append(") != Float.floatToIntBits(this.");
-          String _simpleName_3 = it.getSimpleName();
-          _builder_1.append(_simpleName_3, "");
-          _builder_1.append("))");
-          _builder_1.newLineIfNotEmpty();
-          _builder_1.append("  ");
-          _builder_1.append("return false; ");
-          _builder_1.newLine();
-          _switchResult = _builder_1.toString();
+          StringConcatenationClient _client_1 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("if (Float.floatToIntBits(other.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(") != Float.floatToIntBits(this.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append("))");
+              _builder.newLineIfNotEmpty();
+              _builder.append("  ");
+              _builder.append("return false; ");
+              _builder.newLine();
+            }
+          };
+          _switchResult = _client_1;
         }
       }
       if (!_matched) {
-        String _name_3 = Boolean.TYPE.getName();
-        if (Objects.equal(_name, _name_3)) {
+        TypeReference _newTypeReference_2 = this.context.newTypeReference(Boolean.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_2)) {
           _matched=true;
         }
         if (!_matched) {
-          String _name_4 = Integer.TYPE.getName();
-          if (Objects.equal(_name, _name_4)) {
+          TypeReference _newTypeReference_3 = this.context.newTypeReference(Integer.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_3)) {
             _matched=true;
           }
         }
         if (!_matched) {
-          String _name_5 = Character.TYPE.getName();
-          if (Objects.equal(_name, _name_5)) {
+          TypeReference _newTypeReference_4 = this.context.newTypeReference(Character.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_4)) {
             _matched=true;
           }
         }
         if (!_matched) {
-          String _name_6 = Byte.TYPE.getName();
-          if (Objects.equal(_name, _name_6)) {
+          TypeReference _newTypeReference_5 = this.context.newTypeReference(Byte.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_5)) {
             _matched=true;
           }
         }
         if (!_matched) {
-          String _name_7 = Short.TYPE.getName();
-          if (Objects.equal(_name, _name_7)) {
+          TypeReference _newTypeReference_6 = this.context.newTypeReference(Short.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_6)) {
             _matched=true;
           }
         }
         if (!_matched) {
-          String _name_8 = Long.TYPE.getName();
-          if (Objects.equal(_name, _name_8)) {
+          TypeReference _newTypeReference_7 = this.context.newTypeReference(Long.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_7)) {
             _matched=true;
           }
         }
         if (_matched) {
-          StringConcatenation _builder_2 = new StringConcatenation();
-          _builder_2.append("if (other.");
-          String _simpleName_4 = it.getSimpleName();
-          _builder_2.append(_simpleName_4, "");
-          _builder_2.append(" != this.");
-          String _simpleName_5 = it.getSimpleName();
-          _builder_2.append(_simpleName_5, "");
-          _builder_2.append(")");
-          _builder_2.newLineIfNotEmpty();
-          _builder_2.append("  ");
-          _builder_2.append("return false;");
-          _builder_2.newLine();
-          _switchResult = _builder_2.toString();
+          StringConcatenationClient _client_2 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("if (other.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(" != this.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append(")");
+              _builder.newLineIfNotEmpty();
+              _builder.append("  ");
+              _builder.append("return false;");
+              _builder.newLine();
+            }
+          };
+          _switchResult = _client_2;
         }
       }
       if (!_matched) {
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("if (this.");
-        String _simpleName_6 = it.getSimpleName();
-        _builder_3.append(_simpleName_6, "");
-        _builder_3.append(" == null) {");
-        _builder_3.newLineIfNotEmpty();
-        _builder_3.append("  ");
-        _builder_3.append("if (other.");
-        String _simpleName_7 = it.getSimpleName();
-        _builder_3.append(_simpleName_7, "  ");
-        _builder_3.append(" != null)");
-        _builder_3.newLineIfNotEmpty();
-        _builder_3.append("    ");
-        _builder_3.append("return false;");
-        _builder_3.newLine();
-        _builder_3.append("} else if (!this.");
-        String _simpleName_8 = it.getSimpleName();
-        _builder_3.append(_simpleName_8, "");
-        _builder_3.append(".equals(other.");
-        String _simpleName_9 = it.getSimpleName();
-        _builder_3.append(_simpleName_9, "");
-        _builder_3.append("))");
-        _builder_3.newLineIfNotEmpty();
-        _builder_3.append("  ");
-        _builder_3.append("return false;");
-        _builder_3.newLine();
-        _switchResult = _builder_3.toString();
+        StringConcatenationClient _client_3 = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("if (this.");
+            String _simpleName = it.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(" == null) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("  ");
+            _builder.append("if (other.");
+            String _simpleName_1 = it.getSimpleName();
+            _builder.append(_simpleName_1, "  ");
+            _builder.append(" != null)");
+            _builder.newLineIfNotEmpty();
+            _builder.append("    ");
+            _builder.append("return false;");
+            _builder.newLine();
+            _builder.append("} else if (!");
+            StringConcatenationClient _deepEquals = Util.this.deepEquals(it);
+            _builder.append(_deepEquals, "");
+            _builder.append(")");
+            _builder.newLineIfNotEmpty();
+            _builder.append("  ");
+            _builder.append("return false;");
+            _builder.newLine();
+          }
+        };
+        _switchResult = _client_3;
       }
       return _switchResult;
+    }
+    
+    public StringConcatenationClient deepEquals(final FieldDeclaration it) {
+      StringConcatenationClient _xifexpression = null;
+      TypeReference _type = it.getType();
+      boolean _isArray = _type.isArray();
+      if (_isArray) {
+        StringConcatenationClient _xifexpression_1 = null;
+        TypeReference _type_1 = it.getType();
+        TypeReference _arrayComponentType = _type_1.getArrayComponentType();
+        boolean _isPrimitive = _arrayComponentType.isPrimitive();
+        if (_isPrimitive) {
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append(Arrays.class, "");
+              _builder.append(".equals(this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(", other.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append(")");
+            }
+          };
+          _xifexpression_1 = _client;
+        } else {
+          StringConcatenationClient _client_1 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append(Arrays.class, "");
+              _builder.append(".deepEquals(this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(", other.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append(")");
+            }
+          };
+          _xifexpression_1 = _client_1;
+        }
+        _xifexpression = _xifexpression_1;
+      } else {
+        StringConcatenationClient _client_2 = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("this.");
+            String _simpleName = it.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(".equals(other.");
+            String _simpleName_1 = it.getSimpleName();
+            _builder.append(_simpleName_1, "");
+            _builder.append(")");
+          }
+        };
+        _xifexpression = _client_2;
+      }
+      return _xifexpression;
     }
     
     public void addHashCode(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
@@ -339,7 +411,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
               _builder.newLineIfNotEmpty();
               {
                 for(final FieldDeclaration field : includedFields) {
-                  String _contributeToHashCode = Util.this.contributeToHashCode(field);
+                  StringConcatenationClient _contributeToHashCode = Util.this.contributeToHashCode(field);
                   _builder.append(_contributeToHashCode, "");
                   _builder.newLineIfNotEmpty();
                 }
@@ -354,94 +426,188 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
       cls.addMethod("hashCode", _function);
     }
     
-    public String contributeToHashCode(final FieldDeclaration it) {
-      String _switchResult = null;
+    public StringConcatenationClient contributeToHashCode(final FieldDeclaration it) {
+      StringConcatenationClient _switchResult = null;
       TypeReference _type = it.getType();
       TypeReference _orObject = this.orObject(_type);
-      String _name = _orObject.getName();
+      TypeReference _wrapperIfPrimitive = _orObject.getWrapperIfPrimitive();
       boolean _matched = false;
       if (!_matched) {
-        String _name_1 = Double.TYPE.getName();
-        if (Objects.equal(_name, _name_1)) {
+        TypeReference _newTypeReference = this.context.newTypeReference(Double.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference)) {
           _matched=true;
-          String _simpleName = it.getSimpleName();
-          String _plus = ("result = prime * result + (int) (Double.doubleToLongBits(this." + _simpleName);
-          String _plus_1 = (_plus + 
-            ") ^ (Double.doubleToLongBits(this.");
-          String _simpleName_1 = it.getSimpleName();
-          String _plus_2 = (_plus_1 + _simpleName_1);
-          _switchResult = (_plus_2 + ") >>> 32));");
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("result = prime * result + (int) (Double.doubleToLongBits(this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(") ^ (Double.doubleToLongBits(this.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append(") >>> 32));");
+            }
+          };
+          _switchResult = _client;
         }
       }
       if (!_matched) {
-        String _name_2 = Float.TYPE.getName();
-        if (Objects.equal(_name, _name_2)) {
+        TypeReference _newTypeReference_1 = this.context.newTypeReference(Float.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_1)) {
           _matched=true;
-          String _simpleName_2 = it.getSimpleName();
-          String _plus_3 = ("result = prime * result + Float.floatToIntBits(this." + _simpleName_2);
-          _switchResult = (_plus_3 + ");");
+          StringConcatenationClient _client_1 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("result = prime * result + Float.floatToIntBits(this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(");");
+            }
+          };
+          _switchResult = _client_1;
         }
       }
       if (!_matched) {
-        String _name_3 = Boolean.TYPE.getName();
-        if (Objects.equal(_name, _name_3)) {
+        TypeReference _newTypeReference_2 = this.context.newTypeReference(Boolean.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_2)) {
           _matched=true;
-          String _simpleName_3 = it.getSimpleName();
-          String _plus_4 = ("result = prime * result + (this." + _simpleName_3);
-          _switchResult = (_plus_4 + " ? 1231 : 1237);");
+          StringConcatenationClient _client_2 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("result = prime * result + (this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(" ? 1231 : 1237);");
+            }
+          };
+          _switchResult = _client_2;
         }
       }
       if (!_matched) {
-        String _name_4 = Integer.TYPE.getName();
-        if (Objects.equal(_name, _name_4)) {
+        TypeReference _newTypeReference_3 = this.context.newTypeReference(Integer.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_3)) {
           _matched=true;
         }
         if (!_matched) {
-          String _name_5 = Character.TYPE.getName();
-          if (Objects.equal(_name, _name_5)) {
+          TypeReference _newTypeReference_4 = this.context.newTypeReference(Character.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_4)) {
             _matched=true;
           }
         }
         if (!_matched) {
-          String _name_6 = Byte.TYPE.getName();
-          if (Objects.equal(_name, _name_6)) {
+          TypeReference _newTypeReference_5 = this.context.newTypeReference(Byte.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_5)) {
             _matched=true;
           }
         }
         if (!_matched) {
-          String _name_7 = Short.TYPE.getName();
-          if (Objects.equal(_name, _name_7)) {
+          TypeReference _newTypeReference_6 = this.context.newTypeReference(Short.class);
+          if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_6)) {
             _matched=true;
           }
         }
         if (_matched) {
-          String _simpleName_4 = it.getSimpleName();
-          String _plus_5 = ("result = prime * result + this." + _simpleName_4);
-          _switchResult = (_plus_5 + ";");
+          StringConcatenationClient _client_3 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("result = prime * result + this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(";");
+            }
+          };
+          _switchResult = _client_3;
         }
       }
       if (!_matched) {
-        String _name_8 = Long.TYPE.getName();
-        if (Objects.equal(_name, _name_8)) {
+        TypeReference _newTypeReference_7 = this.context.newTypeReference(Long.class);
+        if (Objects.equal(_wrapperIfPrimitive, _newTypeReference_7)) {
           _matched=true;
-          String _simpleName_5 = it.getSimpleName();
-          String _plus_6 = ("result = prime * result + (int) (this." + _simpleName_5);
-          String _plus_7 = (_plus_6 + " ^ (this.");
-          String _simpleName_6 = it.getSimpleName();
-          String _plus_8 = (_plus_7 + _simpleName_6);
-          _switchResult = (_plus_8 + " >>> 32));");
+          StringConcatenationClient _client_4 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("result = prime * result + (int) (this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(" ^ (this.");
+              String _simpleName_1 = it.getSimpleName();
+              _builder.append(_simpleName_1, "");
+              _builder.append(" >>> 32));");
+            }
+          };
+          _switchResult = _client_4;
         }
       }
       if (!_matched) {
-        String _simpleName_7 = it.getSimpleName();
-        String _plus_9 = ("result = prime * result + ((this." + _simpleName_7);
-        String _plus_10 = (_plus_9 + "== null) ? 0 : this.");
-        String _simpleName_8 = it.getSimpleName();
-        String _plus_11 = (_plus_10 + _simpleName_8);
-        _switchResult = (_plus_11 + 
-          ".hashCode());");
+        StringConcatenationClient _client_5 = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("result = prime * result + ((this.");
+            String _simpleName = it.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append("== null) ? 0 : ");
+            StringConcatenationClient _deepHashCode = Util.this.deepHashCode(it);
+            _builder.append(_deepHashCode, "");
+            _builder.append(");");
+          }
+        };
+        _switchResult = _client_5;
       }
       return _switchResult;
+    }
+    
+    public StringConcatenationClient deepHashCode(final FieldDeclaration it) {
+      StringConcatenationClient _xblockexpression = null;
+      {
+        TypeReference _type = it.getType();
+        final TypeReference type = this.orObject(_type);
+        StringConcatenationClient _xifexpression = null;
+        boolean _isArray = type.isArray();
+        if (_isArray) {
+          StringConcatenationClient _xifexpression_1 = null;
+          TypeReference _arrayComponentType = type.getArrayComponentType();
+          boolean _isPrimitive = _arrayComponentType.isPrimitive();
+          if (_isPrimitive) {
+            StringConcatenationClient _client = new StringConcatenationClient() {
+              @Override
+              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                _builder.append(Arrays.class, "");
+                _builder.append(".hashCode(this.");
+                String _simpleName = it.getSimpleName();
+                _builder.append(_simpleName, "");
+                _builder.append(")");
+              }
+            };
+            _xifexpression_1 = _client;
+          } else {
+            StringConcatenationClient _client_1 = new StringConcatenationClient() {
+              @Override
+              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+                _builder.append(Arrays.class, "");
+                _builder.append(".deepHashCode(this.");
+                String _simpleName = it.getSimpleName();
+                _builder.append(_simpleName, "");
+                _builder.append(")");
+              }
+            };
+            _xifexpression_1 = _client_1;
+          }
+          _xifexpression = _xifexpression_1;
+        } else {
+          StringConcatenationClient _client_2 = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("this.");
+              String _simpleName = it.getSimpleName();
+              _builder.append(_simpleName, "");
+              _builder.append(".hashCode()");
+            }
+          };
+          _xifexpression = _client_2;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      return _xblockexpression;
     }
     
     private TypeReference orObject(final TypeReference ref) {
