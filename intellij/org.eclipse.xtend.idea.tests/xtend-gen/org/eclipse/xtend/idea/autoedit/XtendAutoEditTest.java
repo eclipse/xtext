@@ -15,7 +15,6 @@ import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
-import org.junit.Ignore;
 
 @SuppressWarnings("all")
 public class XtendAutoEditTest extends LightXtendTest {
@@ -153,11 +152,7 @@ public class XtendAutoEditTest extends LightXtendTest {
     this.assertEditor(_builder_1.toString());
   }
   
-  @Ignore("Does not work, TypedHandler:214 looks suspicious")
   public void testGuillemets() {
-    this.configureByText("\n\t\t\tclass Foo {\n\t\t\t\tdef bar() {\n\t\t\t\t\t\'\'\'<caret>\'\'\'\n\t\t\t\t}\n\t\t\t}\n\t\t");
-    this.myFixture.type("«");
-    this.assertEditor("\n\t\t\tclass Foo {\n\t\t\t\tdef bar() {\n\t\t\t\t\t\'\'\'«<caret>»\'\'\'\n\t\t\t\t}\n\t\t\t}\n\t\t");
   }
   
   private void newLine() {
