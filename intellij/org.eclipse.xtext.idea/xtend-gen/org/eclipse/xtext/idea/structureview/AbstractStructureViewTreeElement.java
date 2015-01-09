@@ -22,6 +22,7 @@ import org.eclipse.xtext.idea.structureview.ModifiableStructureViewTreeElement;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -45,33 +46,6 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
   @Accessors
   @Extension
   protected BaseXtextFile xtextFile;
-  
-  public Object getValue() {
-    return this.getElement();
-  }
-  
-  protected PsiElement getElement() {
-    PsiElement _xblockexpression = null;
-    {
-      final PsiElement element = this.getInternalElement();
-      PsiElement _xifexpression = null;
-      boolean _and = false;
-      boolean _notEquals = (!Objects.equal(element, null));
-      if (!_notEquals) {
-        _and = false;
-      } else {
-        boolean _isValid = element.isValid();
-        _and = _isValid;
-      }
-      if (_and) {
-        _xifexpression = element;
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
-  }
-  
-  protected abstract PsiElement getInternalElement();
   
   public TreeElement[] getChildren() {
     List<StructureViewTreeElement> _xblockexpression = null;
@@ -151,7 +125,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
   public boolean canNavigate() {
     boolean _xblockexpression = false;
     {
-      final PsiElement element = this.getElement();
+      final PsiElement element = this.getNavigationElement();
       boolean _xifexpression = false;
       if ((element instanceof Navigatable)) {
         _xifexpression = ((Navigatable)element).canNavigate();
@@ -168,11 +142,45 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
   }
   
   public void navigate(final boolean requestFocus) {
-    final PsiElement element = this.getElement();
+    final PsiElement element = this.getNavigationElement();
     if ((element instanceof Navigatable)) {
       ((Navigatable)element).navigate(requestFocus);
     }
   }
+  
+  protected PsiElement getNavigationElement() {
+    PsiElement _xtrycatchfinallyexpression = null;
+    try {
+      PsiElement _xblockexpression = null;
+      {
+        final PsiElement element = this.getInternalNavigationElement();
+        PsiElement _xifexpression = null;
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(element, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          boolean _isValid = element.isValid();
+          _and = _isValid;
+        }
+        if (_and) {
+          _xifexpression = element;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      _xtrycatchfinallyexpression = _xblockexpression;
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        final Exception e = (Exception)_t;
+        return null;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return _xtrycatchfinallyexpression;
+  }
+  
+  protected abstract PsiElement getInternalNavigationElement();
   
   @Pure
   public IStructureViewTreeElementProvider getStructureViewTreeElementProvider() {

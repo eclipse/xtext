@@ -7,13 +7,26 @@
  */
 package org.eclipse.xtend.idea.structureview;
 
+import com.google.common.base.Objects;
+import com.intellij.ide.structureView.StructureView;
+import com.intellij.ide.structureView.StructureViewBuilder;
+import com.intellij.ide.structureView.impl.StructureViewComposite;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
 import com.intellij.ide.util.treeView.AbstractTreeStructure;
+import com.intellij.lang.LanguageStructureViewBuilder;
+import com.intellij.openapi.fileEditor.FileEditor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.Consumer;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -444,6 +457,67 @@ public class OutlineTests extends LightToolingTest {
         PlatformTestUtil.assertTreeStructureEquals(_treeStructure, expected);
       }
     };
-    this.myFixture.testStructureView(_function);
+    this.testStructureView(_function);
+  }
+  
+  public void testStructureView(@NotNull final Consumer<StructureViewComponent> consumer) {
+    try {
+      PsiFile _file = this.myFixture.getFile();
+      final VirtualFile myFile = _file.getVirtualFile();
+      boolean _notEquals = (!Objects.equal(myFile, null));
+      boolean _not = (!_notEquals);
+      if (_not) {
+        throw new AssertionError("configure first");
+      }
+      Project _project = this.getProject();
+      FileEditorManager _instance = FileEditorManager.getInstance(_project);
+      final FileEditor fileEditor = _instance.getSelectedEditor(myFile);
+      boolean _equals = Objects.equal(fileEditor, null);
+      if (_equals) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("editor not opened for ");
+        _builder.append(myFile, "");
+        throw new AssertionError(_builder);
+      }
+      PsiFile _file_1 = this.myFixture.getFile();
+      final StructureViewBuilder builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(_file_1);
+      boolean _equals_1 = Objects.equal(builder, null);
+      if (_equals_1) {
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("no builder for ");
+        _builder_1.append(myFile, "");
+        throw new AssertionError(_builder_1);
+      }
+      StructureViewComponent component = null;
+      try {
+        StructureViewComponent _switchResult = null;
+        Project _project_1 = this.getProject();
+        StructureView _createStructureView = builder.createStructureView(fileEditor, _project_1);
+        final StructureView structureView = _createStructureView;
+        boolean _matched = false;
+        if (!_matched) {
+          if (structureView instanceof StructureViewComponent) {
+            _matched=true;
+            _switchResult = ((StructureViewComponent)structureView);
+          }
+        }
+        if (!_matched) {
+          if (structureView instanceof StructureViewComposite) {
+            _matched=true;
+            StructureView _selectedStructureView = ((StructureViewComposite)structureView).getSelectedStructureView();
+            _switchResult = ((StructureViewComponent) _selectedStructureView);
+          }
+        }
+        component = _switchResult;
+        consumer.consume(component);
+      } finally {
+        boolean _notEquals_1 = (!Objects.equal(component, null));
+        if (_notEquals_1) {
+          Disposer.dispose(component);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

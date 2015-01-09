@@ -9,7 +9,6 @@ package org.eclipse.xtext.idea.structureview;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import com.intellij.ide.util.treeView.NodeDescriptorProvidingKey;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import java.util.List;
@@ -23,20 +22,25 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement implements NodeDescriptorProvidingKey {
+public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
   @Accessors
   private EObject owner;
   
   @Accessors
   private EStructuralFeature feature;
   
-  protected PsiElement getInternalElement() {
+  public Object getValue() {
+    return Pair.<EObject, EStructuralFeature>of(this.owner, this.feature);
+  }
+  
+  protected PsiElement getInternalNavigationElement() {
     List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(this.owner, this.feature);
     final Function1<INode, Iterable<ILeafNode>> _function = new Function1<INode, Iterable<ILeafNode>>() {
       public Iterable<ILeafNode> apply(final INode it) {
@@ -67,10 +71,6 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     return this.owner;
   }
   
-  public Object getKey() {
-    return this.feature;
-  }
-  
   public boolean equals(final Object obj) {
     boolean _xifexpression = false;
     if ((this == obj)) {
@@ -78,7 +78,15 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     } else {
       boolean _xifexpression_1 = false;
       if ((obj instanceof EStructuralFeatureTreeElement)) {
-        _xifexpression_1 = Objects.equal(this.feature, ((EStructuralFeatureTreeElement)obj).feature);
+        boolean _and = false;
+        boolean _equals = Objects.equal(this.owner, ((EStructuralFeatureTreeElement)obj).owner);
+        if (!_equals) {
+          _and = false;
+        } else {
+          boolean _equals_1 = Objects.equal(this.feature, ((EStructuralFeatureTreeElement)obj).feature);
+          _and = _equals_1;
+        }
+        _xifexpression_1 = _and;
       } else {
         _xifexpression_1 = false;
       }
@@ -88,7 +96,9 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   }
   
   public int hashCode() {
-    return this.feature.hashCode();
+    int _hashCode = this.owner.hashCode();
+    int _hashCode_1 = this.feature.hashCode();
+    return (_hashCode * _hashCode_1);
   }
   
   @Pure

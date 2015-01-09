@@ -7,8 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.structureview
 
+import com.intellij.ide.structureView.impl.StructureViewComposite
+import com.intellij.ide.structureView.newStructureView.StructureViewComponent
+import com.intellij.lang.LanguageStructureViewBuilder
+import com.intellij.openapi.fileEditor.FileEditorManager
+import com.intellij.openapi.util.Disposer
+import com.intellij.util.Consumer
 import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.idea.tests.LightToolingTest
+import org.jetbrains.annotations.NotNull
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
 
@@ -270,14 +277,41 @@ class OutlineTests extends LightToolingTest {
 	}
 
 	protected def void testStructureView(String model, String expected) {
-		myFixture.configureByText('Foo.xtend', model)
+		configureByText('Foo.xtend', model)
 		testStructureView(expected)
 	}
 
 	protected def void testStructureView(String expected) {
-		myFixture.testStructureView [ component |
+		testStructureView [ component |
 			component.treeStructure.assertTreeStructureEquals(expected)
 		]
+	}
+
+	def void testStructureView(@NotNull Consumer<StructureViewComponent> consumer) {
+		val myFile = myFixture.file.virtualFile
+		if (!(myFile != null)) {
+			throw new AssertionError("configure first")
+		}
+		val fileEditor = FileEditorManager.getInstance(project).getSelectedEditor(myFile)
+		if (fileEditor == null) {
+			throw new AssertionError('''editor not opened for «myFile»''')
+		}
+		val builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(file)
+		if (builder == null) {
+			throw new AssertionError('''no builder for «myFile»''')
+		}
+		var StructureViewComponent component = null
+		try {
+			component = switch structureView : builder.createStructureView(fileEditor, project) {
+				StructureViewComponent: 
+					structureView
+				StructureViewComposite:
+					structureView.selectedStructureView as StructureViewComponent
+			}
+			consumer.consume(component)
+		} finally {
+			if(component != null) Disposer.dispose(component)
+		}
 	}
 
 }

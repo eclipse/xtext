@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedFeature
 
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
+import org.eclipse.xtext.idea.structureview.EObjectTreeElement
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -46,6 +47,17 @@ class XtendStructureViewTreeElementProvider extends DefaultStructureViewTreeElem
 				showInherited = this.showInherited
 				xtextFile = xtextFileTreeElement.element
 				structureViewTreeElement = xtextFileTreeElement
+			]
+		)
+	}
+	
+	override dispatch void buildChildren(EObjectTreeElement objectTreeElement) {
+		xtendOutlineTreeBuilder.build(
+			objectTreeElement.object,
+			new IntellijXtendOutlineContext => [
+				showInherited = this.showInherited
+				xtextFile = objectTreeElement.xtextFile
+				structureViewTreeElement = objectTreeElement
 			]
 		)
 	}
