@@ -58,11 +58,6 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 		return newArrayList(TypesPackage.eINSTANCE, XtypePackage.eINSTANCE);
 	}
 	
-	@Override
-	public boolean isLanguageSpecific() {
-		return false;
-	}
-	
 	@Check
 	public void checkTypeArgumentsNotPrimitive(JvmParameterizedTypeReference typeRef) {
 		EList<JvmTypeReference> arguments = typeRef.getArguments();
