@@ -54,7 +54,6 @@ import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -922,7 +921,6 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
     }
   }
   
-  @Ignore("tracing is currently not supported by the active annotation API")
   @Test
   public void testPropertyJavaElements() {
     try {
@@ -1133,6 +1131,57 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         _xblockexpression = elements;
       }
       return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testBug387230() {
+    try {
+      XtendFile _xtendFile = this._workbenchTestHelper.xtendFile("Xtend.xtend", "@Data class Xtend { String field }");
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass cls = IterableExtensions.<XtendClass>head(_filter);
+      IResourcesSetupUtil.waitForAutoBuild();
+      Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(cls);
+      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
+        public void apply(final Iterable<IJavaElement> it) {
+          int _size = IterableExtensions.size(it);
+          Assert.assertEquals(2, _size);
+          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
+            public Boolean apply(final IJavaElement it) {
+              boolean _and = false;
+              if (!(it instanceof IType)) {
+                _and = false;
+              } else {
+                String _elementName = ((IType) it).getElementName();
+                boolean _equals = Objects.equal(_elementName, "Xtend");
+                _and = _equals;
+              }
+              return Boolean.valueOf(_and);
+            }
+          };
+          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
+          Assert.assertTrue(_exists);
+          final Function1<IJavaElement, Boolean> _function_1 = new Function1<IJavaElement, Boolean>() {
+            public Boolean apply(final IJavaElement it) {
+              boolean _and = false;
+              if (!(it instanceof IMethod)) {
+                _and = false;
+              } else {
+                String _elementName = ((IMethod) it).getElementName();
+                boolean _equals = Objects.equal(_elementName, "Xtend");
+                _and = _equals;
+              }
+              return Boolean.valueOf(_and);
+            }
+          };
+          boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_1);
+          Assert.assertTrue(_exists_1);
+        }
+      };
+      ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
