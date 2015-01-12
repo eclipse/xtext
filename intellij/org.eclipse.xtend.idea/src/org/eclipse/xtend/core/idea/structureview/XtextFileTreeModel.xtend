@@ -19,10 +19,6 @@ class XtendFileTreeModel extends XtextFileTreeModel {
 		nodeProviders += new XtendShowInheritedNodeProvider
 	}
 
-	override getNodeProviders() {
-		nodeProviders
-	}
-
 	override getComparator() {
 		new XtendTreeElementComparator
 	}

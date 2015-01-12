@@ -7,10 +7,8 @@
  */
 package org.eclipse.xtend.core.idea.structureview;
 
-import com.intellij.ide.util.treeView.smartTree.NodeProvider;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.openapi.editor.Editor;
-import java.util.Collection;
 import java.util.Comparator;
 import org.eclipse.xtend.core.idea.structureview.SyntheticMemberFilter;
 import org.eclipse.xtend.core.idea.structureview.XtendShowInheritedNodeProvider;
@@ -26,10 +24,6 @@ public class XtendFileTreeModel extends XtextFileTreeModel {
     this.filters.add(_syntheticMemberFilter);
     XtendShowInheritedNodeProvider _xtendShowInheritedNodeProvider = new XtendShowInheritedNodeProvider();
     this.nodeProviders.add(_xtendShowInheritedNodeProvider);
-  }
-  
-  public Collection<NodeProvider> getNodeProviders() {
-    return this.nodeProviders;
   }
   
   public Comparator<TreeElement> getComparator() {

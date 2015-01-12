@@ -1,5 +1,7 @@
 package org.eclipse.xtext.psi.impl;
 
+import javax.swing.Icon;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -12,6 +14,7 @@ import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
+import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
@@ -90,6 +93,11 @@ public class PsiEObjectImpl<T extends StubElement> extends StubBasedPsiElementBa
 	@Override
 	public BaseXtextFile getXtextFile() {
 		return (BaseXtextFile) getContainingFile();
+	}
+	
+	@Override
+	protected Icon getElementIcon(int flags) {
+		return AllIcons.General.SecondaryGroup;
 	}
 
 	@Override

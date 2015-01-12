@@ -433,6 +433,10 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	}
 
 	//default methods
+	override protected getElementIcon(int flags) {
+		PsiClassImplUtil.getClassIcon(flags, this)
+	}
+	
 	override isEquivalentTo(PsiElement another) {
 		PsiClassImplUtil.isClassEquivalentTo(this, another)
 	}

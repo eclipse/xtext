@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.presentation
 
+import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.intellij.icons.AllIcons
 import com.intellij.ide.projectView.PresentationData
@@ -15,12 +16,15 @@ import org.eclipse.emf.ecore.EAttribute
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.FeatureMap
+import org.eclipse.xtext.psi.IPsiModelAssociations
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @Singleton
 class DefaultItemPresentationProvider implements ItemPresentationProvider {
+	
+	@Inject IPsiModelAssociations psiModelAssociations
 	
 	override getItemPresentation(Object element) {
 		new PresentationData => [
@@ -34,6 +38,14 @@ class DefaultItemPresentationProvider implements ItemPresentationProvider {
 	}
 	
 	def dispatch Icon image(Object element) {
+		AllIcons.General.SecondaryGroup
+	}
+	
+	def dispatch Icon image(EObject element) {
+		val psiElement = psiModelAssociations.getPsiElement(element)
+		if (psiElement != null) {
+			return psiElement.getIcon(0)
+		}
 		AllIcons.General.SecondaryGroup
 	}
 	

@@ -8,10 +8,12 @@
 package org.eclipse.xtext.idea.presentation;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.icons.AllIcons;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.navigation.ItemPresentation;
+import com.intellij.psi.PsiElement;
 import java.util.Arrays;
 import javax.swing.Icon;
 import org.eclipse.emf.common.util.EList;
@@ -22,6 +24,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
+import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -31,6 +34,9 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class DefaultItemPresentationProvider implements ItemPresentationProvider {
+  @Inject
+  private IPsiModelAssociations psiModelAssociations;
+  
   public ItemPresentation getItemPresentation(final Object element) {
     PresentationData _presentationData = new PresentationData();
     final Procedure1<PresentationData> _function = new Procedure1<PresentationData>() {
@@ -50,6 +56,19 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   
   protected Icon _image(final Object element) {
     return AllIcons.General.SecondaryGroup;
+  }
+  
+  protected Icon _image(final EObject element) {
+    Icon _xblockexpression = null;
+    {
+      final PsiElement psiElement = this.psiModelAssociations.getPsiElement(element);
+      boolean _notEquals = (!Objects.equal(psiElement, null));
+      if (_notEquals) {
+        return psiElement.getIcon(0);
+      }
+      _xblockexpression = AllIcons.General.SecondaryGroup;
+    }
+    return _xblockexpression;
   }
   
   protected String _text(final Void element) {
@@ -128,7 +147,9 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   }
   
   public Icon image(final Object element) {
-    if (element == null) {
+    if (element instanceof EObject) {
+      return _image((EObject)element);
+    } else if (element == null) {
       return _image((Void)null);
     } else if (element != null) {
       return _image(element);

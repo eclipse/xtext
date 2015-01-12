@@ -54,6 +54,7 @@ import com.intellij.psi.util.PsiUtil;
 import com.intellij.util.IncorrectOperationException;
 import java.util.Collection;
 import java.util.List;
+import javax.swing.Icon;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -701,6 +702,10 @@ public class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExt
   
   public String toString() {
     return this.jvmType.toString();
+  }
+  
+  protected Icon getElementIcon(final int flags) {
+    return PsiClassImplUtil.getClassIcon(flags, this);
   }
   
   public boolean isEquivalentTo(final PsiElement another) {
