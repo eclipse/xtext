@@ -10,7 +10,6 @@ package org.eclipse.xtend.idea.structureview;
 import com.google.common.base.Objects;
 import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
-import com.intellij.ide.structureView.impl.StructureViewComposite;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
 import com.intellij.ide.util.treeView.AbstractTreeStructure;
 import com.intellij.lang.LanguageStructureViewBuilder;
@@ -22,18 +21,19 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.Consumer;
+import com.intellij.util.ui.tree.TreeUtil;
+import javax.swing.JTree;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class OutlineTests extends LightToolingTest {
-  public OutlineTests() {
+public abstract class AbstractOutlineTests extends LightToolingTest {
+  public AbstractOutlineTests() {
     super(XtendFileType.INSTANCE);
   }
   
@@ -83,13 +83,18 @@ public class OutlineTests extends LightToolingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo <T> {}");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo<T>");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _typeParameter1Expectation = this.getTypeParameter1Expectation();
+    this.testStructureView(_builder.toString(), _typeParameter1Expectation);
+  }
+  
+  protected String getTypeParameter1Expectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo<T>");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testField() {
@@ -224,54 +229,69 @@ public class OutlineTests extends LightToolingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo { def java.lang.String !(Object o) {null} }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("!(Object) : String (operator_not)");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _operatorDeclarationWithSymbolExpectation = this.getOperatorDeclarationWithSymbolExpectation();
+    this.testStructureView(_builder.toString(), _operatorDeclarationWithSymbolExpectation);
+  }
+  
+  protected String getOperatorDeclarationWithSymbolExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("!(Object) : String (operator_not)");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testOperatorDeclarationWithName() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo { def java.lang.String operator_not(Object o) {null} }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("!(Object) : String (operator_not)");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _operatorDeclarationWithNameExpectation = this.getOperatorDeclarationWithNameExpectation();
+    this.testStructureView(_builder.toString(), _operatorDeclarationWithNameExpectation);
+  }
+  
+  protected String getOperatorDeclarationWithNameExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("!(Object) : String (operator_not)");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testDispatchMethod() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo { def dispatch foo(Object x) {\'\'} def dispatch foo(String y) {\'\'} }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("foo(Object) : String");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("foo(Object) : String");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("foo(String) : String");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _dispatchMethodExpectation = this.getDispatchMethodExpectation();
+    this.testStructureView(_builder.toString(), _dispatchMethodExpectation);
+  }
+  
+  protected String getDispatchMethodExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("foo(Object) : String");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("foo(Object) : String");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("foo(String) : String");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testInterface() {
@@ -316,19 +336,24 @@ public class OutlineTests extends LightToolingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { int bar String foo = \'\' }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("bar : int");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("foo : String");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _annotationTypeExpectation = this.getAnnotationTypeExpectation();
+    this.testStructureView(_builder.toString(), _annotationTypeExpectation);
+  }
+  
+  protected String getAnnotationTypeExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("bar : int");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("foo : String");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testAnnotationTypeNoMembers() {
@@ -361,66 +386,84 @@ public class OutlineTests extends LightToolingTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo { def create \'lalala\' foo() {} }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("foo() : String");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _createExtensionInfoExpectation = this.getCreateExtensionInfoExpectation();
+    this.testStructureView(_builder.toString(), _createExtensionInfoExpectation);
+  }
+  
+  protected String getCreateExtensionInfoExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("foo() : String");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testCreateExtensionInfo_dispatch() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {  dispatch def create value : \'bar\' foo(Integer it) {}  dispatch def create value : \'foo\' foo(String it) {} }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("foo(Object) : String");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("foo(Integer) : String");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("foo(String) : String");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _createExtensionInfo_dispatchExpectation = this.getCreateExtensionInfo_dispatchExpectation();
+    this.testStructureView(_builder.toString(), _createExtensionInfo_dispatchExpectation);
+  }
+  
+  protected String getCreateExtensionInfo_dispatchExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("foo(Object) : String");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("foo(Integer) : String");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("foo(String) : String");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testNestedTypes() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo { int foo static class Bar { def bar() {} interface Baz {} enum FooBar{ X } } }");
     _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("Foo.xtend");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("Foo");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("foo : int");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("Bar");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("bar() : Object");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("Baz");
-    _builder_1.newLine();
-    _builder_1.append("   ");
-    _builder_1.append("FooBar");
-    _builder_1.newLine();
-    this.testStructureView(_builder.toString(), _builder_1.toString());
+    String _nestedTypesExpectation = this.getNestedTypesExpectation();
+    this.testStructureView(_builder.toString(), _nestedTypesExpectation);
+  }
+  
+  protected String getNestedTypesExpectation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Foo.xtend");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("Foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("foo : int");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("Bar");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("bar() : Object");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("Baz");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("FooBar");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("X");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   public void testAnonymousTypes() {
@@ -446,21 +489,27 @@ public class OutlineTests extends LightToolingTest {
   }
   
   protected void testStructureView(final String model, final String expected) {
-    this.myFixture.configureByText("Foo.xtend", model);
-    this.testStructureView(expected);
-  }
-  
-  protected void testStructureView(final String expected) {
     final Consumer<StructureViewComponent> _function = new Consumer<StructureViewComponent>() {
       public void consume(final StructureViewComponent component) {
-        AbstractTreeStructure _treeStructure = component.getTreeStructure();
-        PlatformTestUtil.assertTreeStructureEquals(_treeStructure, expected);
+        AbstractOutlineTests.this.assertTreeStructure(component, expected);
       }
     };
-    this.testStructureView(_function);
+    this.testStructureView(model, _function);
   }
   
-  public void testStructureView(@NotNull final Consumer<StructureViewComponent> consumer) {
+  protected void assertTreeStructure(final StructureViewComponent component, final String expected) {
+    JTree _tree = component.getTree();
+    TreeUtil.expandAll(_tree);
+    AbstractTreeStructure _treeStructure = component.getTreeStructure();
+    PlatformTestUtil.assertTreeStructureEquals(_treeStructure, expected);
+  }
+  
+  protected void testStructureView(final String model, final Consumer<StructureViewComponent> consumer) {
+    this.myFixture.configureByText("Foo.xtend", model);
+    this.testStructureView(consumer);
+  }
+  
+  public void testStructureView(final Consumer<StructureViewComponent> consumer) {
     try {
       PsiFile _file = this.myFixture.getFile();
       final VirtualFile myFile = _file.getVirtualFile();
@@ -490,25 +539,10 @@ public class OutlineTests extends LightToolingTest {
       }
       StructureViewComponent component = null;
       try {
-        StructureViewComponent _switchResult = null;
         Project _project_1 = this.getProject();
         StructureView _createStructureView = builder.createStructureView(fileEditor, _project_1);
-        final StructureView structureView = _createStructureView;
-        boolean _matched = false;
-        if (!_matched) {
-          if (structureView instanceof StructureViewComponent) {
-            _matched=true;
-            _switchResult = ((StructureViewComponent)structureView);
-          }
-        }
-        if (!_matched) {
-          if (structureView instanceof StructureViewComposite) {
-            _matched=true;
-            StructureView _selectedStructureView = ((StructureViewComposite)structureView).getSelectedStructureView();
-            _switchResult = ((StructureViewComponent) _selectedStructureView);
-          }
-        }
-        component = _switchResult;
+        StructureViewComponent _structureViewComponent = this.getStructureViewComponent(_createStructureView);
+        component = _structureViewComponent;
         consumer.consume(component);
       } finally {
         boolean _notEquals_1 = (!Objects.equal(component, null));
@@ -520,4 +554,6 @@ public class OutlineTests extends LightToolingTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  protected abstract StructureViewComponent getStructureViewComponent(final StructureView structureView);
 }

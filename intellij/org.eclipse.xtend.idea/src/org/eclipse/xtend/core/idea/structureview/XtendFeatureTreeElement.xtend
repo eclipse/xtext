@@ -7,24 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.structureview
 
-import com.intellij.openapi.editor.Editor
-import org.eclipse.xtext.idea.structureview.XtextFileTreeModel
-import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtend.lib.annotations.Accessors
 
-class XtendFileTreeModel extends XtextFileTreeModel {
+/**
+ * @author kosyakov - Initial contribution and API
+ */
+class XtendFeatureTreeElement extends XtendEObjectTreeElement {
 
-	new(BaseXtextFile xtextFile, Editor editor) {
-		super(xtextFile, editor)
-		filters += new SyntheticMemberFilter
-		nodeProviders += new XtendShowInheritedNodeProvider
+	boolean isDispatch
+	
+	@Accessors
+	boolean synthetic
+
+	def void setDispatch(boolean isDispatch) {
+		this.isDispatch = isDispatch
 	}
 
-	override getNodeProviders() {
-		nodeProviders
-	}
-
-	override getComparator() {
-		new XtendTreeElementComparator
+	def isDispatch() {
+		this.isDispatch
 	}
 
 }
