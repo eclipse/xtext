@@ -19,7 +19,10 @@ import com.intellij.openapi.editor.Editor
 import java.util.Comparator
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.psi.impl.BaseXtextFile
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -34,6 +37,8 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 	protected val List<Filter> filters
 
 	protected val List<Grouper> groupers
+	
+	protected val List<Class<?>> suitableClasses
 
 	protected val List<NodeProvider> nodeProviders
 
@@ -50,6 +55,7 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 		filters = newArrayList
 		groupers = newArrayList
 		nodeProviders = newArrayList
+		suitableClasses = newArrayList(PsiEObject)
 	}
 
 	override protected BaseXtextFile getPsiFile() {
@@ -92,6 +98,19 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 
 	def Comparator<TreeElement> getComparator() {
 		new DefaultComparator
+	}
+	
+	override getCurrentEditorElement() {
+		val element = super.getCurrentEditorElement()
+		if (element instanceof PsiEObject) {
+			element.EObject?.URI
+		} else {
+			element
+		}
+	}
+	
+	override protected getSuitableClasses() {
+		suitableClasses
 	}
 
 }

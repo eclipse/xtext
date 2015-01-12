@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.structureview.AbstractStructureViewTreeElement;
@@ -29,6 +32,7 @@ import org.eclipse.xtext.idea.structureview.AlphaSorter;
 import org.eclipse.xtext.idea.structureview.DefaultComparator;
 import org.eclipse.xtext.idea.structureview.IStructureViewTreeElementProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileTreeElement;
+import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -49,6 +53,8 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
   protected final List<Filter> filters;
   
   protected final List<Grouper> groupers;
+  
+  protected final List<Class<?>> suitableClasses;
   
   protected final List<NodeProvider> nodeProviders;
   
@@ -76,6 +82,8 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     this.groupers = _newArrayList_2;
     ArrayList<NodeProvider> _newArrayList_3 = CollectionLiterals.<NodeProvider>newArrayList();
     this.nodeProviders = _newArrayList_3;
+    ArrayList<Class<?>> _newArrayList_4 = CollectionLiterals.<Class<?>>newArrayList(PsiEObject.class);
+    this.suitableClasses = _newArrayList_4;
   }
   
   protected BaseXtextFile getPsiFile() {
@@ -126,6 +134,30 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
   
   public Comparator<TreeElement> getComparator() {
     return new DefaultComparator();
+  }
+  
+  public Object getCurrentEditorElement() {
+    Object _xblockexpression = null;
+    {
+      final Object element = super.getCurrentEditorElement();
+      Object _xifexpression = null;
+      if ((element instanceof PsiEObject)) {
+        EObject _eObject = ((PsiEObject)element).getEObject();
+        URI _uRI = null;
+        if (_eObject!=null) {
+          _uRI=EcoreUtil.getURI(_eObject);
+        }
+        _xifexpression = _uRI;
+      } else {
+        _xifexpression = element;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  protected Class[] getSuitableClasses() {
+    return ((Class[])Conversions.unwrapArray(this.suitableClasses, Class.class));
   }
   
   @Pure
