@@ -161,7 +161,7 @@ public class IndexingTest extends AbstractXtendTestCase {
 	
 	private void doTestResourceDescriptionWithoutGetContents(final String input) throws IOException {
 		XtextResourceSet resourceSet = getResourceSet();
-		new ClasspathTypeProvider(classLoader, resourceSet, null);
+		new ClasspathTypeProvider(classLoader, resourceSet, null, null);
 		final Wrapper<Boolean> wrapper = Wrapper.wrap(Boolean.FALSE);
 		for (int i = 0; i < 10; i++) {
 			DerivedStateAwareResource resource = (DerivedStateAwareResource) resourceSet.createResource(URI.createURI("Dummy" + i + ".xtend"));
