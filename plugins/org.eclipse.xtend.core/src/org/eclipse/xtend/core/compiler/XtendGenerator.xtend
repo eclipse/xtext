@@ -38,7 +38,6 @@ import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtend.core.xtend.XtendParameter
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -63,13 +62,7 @@ class XtendGenerator extends JvmModelGenerator {
 							val codeGenServices = new CodeGenerationContextImpl => [
 								unit = context.compilationUnit
 							]
-							val elements = context.annotatedSourceElements.map[
-								val xtendMember = switch it {
-									XtendMember : context.compilationUnit.toXtendMemberDeclaration(it)
-									XtendParameter : context.compilationUnit.toXtendParameterDeclaration(it)
-								}
-								return codeGenServices.getPrimaryGeneratedJavaElement(xtendMember) as NamedElement
-							]
+							val elements = context.annotatedSourceElements.map[context.compilationUnit.toXtendMemberDeclaration(it as XtendMember)]
 							processor.doGenerateCode(elements, codeGenServices)
 						}
 					}

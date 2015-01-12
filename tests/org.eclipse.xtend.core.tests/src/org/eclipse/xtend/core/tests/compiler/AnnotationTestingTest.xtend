@@ -20,7 +20,6 @@ import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Rule
 import org.junit.Test
-import org.junit.Assert
 
 /**
  * @author svenefftinge - Initial contribution and API
@@ -64,10 +63,7 @@ class FileProcessor extends AbstractClassProcessor {
 	override doGenerateCode(ClassDeclaration annotatedClass, extension CodeGenerationContext context) {
 		val path = annotatedClass.compilationUnit.filePath
 		val result = path.targetFolder.append("out.txt")
-		val segments = path.projectFolder.append("res/template.txt").contents.toString.trim.split(',')
-		segments.forEach[segment|
-			Assert.assertNotNull(annotatedClass.findDeclaredField(segment))
-		]
+		val segments = path.projectFolder.append("res/template.txt").contents.toString.split(',')
 		result.contents = '''«FOR seg : segments SEPARATOR '|'»«seg»«ENDFOR»'''
 	}
 		
