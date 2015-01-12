@@ -217,7 +217,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
             boolean _skipFeature = this.skipFeature(((JvmFeature)member));
             boolean _not_1 = (!_skipFeature);
             if (_not_1) {
-              final IXtendOutlineContext featureContext = this.xtendOutlineNodeBuilder.buildFeatureNode(baseType, ((JvmFeature)member), member, context);
+              final IXtendOutlineContext featureContext = this.buildFeature(baseType, ((JvmFeature)member), member, context);
               EList<JvmGenericType> _localClasses = ((JvmFeature)member).getLocalClasses();
               final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
                 public void apply(final JvmGenericType it) {
@@ -236,6 +236,17 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
     if (_isShowInherited_1) {
       this.buildInheritedMembers(inferredType, context);
     }
+  }
+  
+  protected IXtendOutlineContext buildFeature(final JvmDeclaredType inferredType, final JvmFeature jvmFeature, final EObject semanticFeature, final IXtendOutlineContext context) {
+    IXtendOutlineContext _xifexpression = null;
+    boolean _isSynthetic = this._jvmTypeExtensions.isSynthetic(jvmFeature);
+    if (_isSynthetic) {
+      _xifexpression = this.xtendOutlineNodeBuilder.buildFeatureNode(inferredType, jvmFeature, context);
+    } else {
+      _xifexpression = this.xtendOutlineNodeBuilder.buildFeatureNode(inferredType, semanticFeature, context);
+    }
+    return _xifexpression;
   }
   
   protected abstract void buildType(final EObject someType, final IXtendOutlineContext context);

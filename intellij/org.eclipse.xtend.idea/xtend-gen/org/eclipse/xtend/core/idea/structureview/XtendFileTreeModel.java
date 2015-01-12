@@ -8,23 +8,31 @@
 package org.eclipse.xtend.core.idea.structureview;
 
 import com.intellij.ide.util.treeView.smartTree.NodeProvider;
+import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.openapi.editor.Editor;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
+import org.eclipse.xtend.core.idea.structureview.SyntheticMemberFilter;
 import org.eclipse.xtend.core.idea.structureview.XtendShowInheritedNodeProvider;
+import org.eclipse.xtend.core.idea.structureview.XtendTreeElementComparator;
 import org.eclipse.xtext.idea.structureview.XtextFileTreeModel;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class XtendFileTreeModel extends XtextFileTreeModel {
-  private final Collection<NodeProvider> nodeProviders = Collections.<NodeProvider>unmodifiableList(CollectionLiterals.<NodeProvider>newArrayList(new XtendShowInheritedNodeProvider()));
-  
   public XtendFileTreeModel(final BaseXtextFile xtextFile, final Editor editor) {
     super(xtextFile, editor);
+    SyntheticMemberFilter _syntheticMemberFilter = new SyntheticMemberFilter();
+    this.filters.add(_syntheticMemberFilter);
+    XtendShowInheritedNodeProvider _xtendShowInheritedNodeProvider = new XtendShowInheritedNodeProvider();
+    this.nodeProviders.add(_xtendShowInheritedNodeProvider);
   }
   
   public Collection<NodeProvider> getNodeProviders() {
     return this.nodeProviders;
+  }
+  
+  public Comparator<TreeElement> getComparator() {
+    return new XtendTreeElementComparator();
   }
 }

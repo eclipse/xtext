@@ -110,7 +110,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
                     if (_isDispatchRelated) {
                       this.buildDispatchers(inferredType, baseType, context);
                     } else {
-                      final IXtendOutlineContext featureContext = this.xtendOutlineNodeBuilder.buildFeatureNode(inferredType, ((JvmFeature)jvmElement), member, context);
+                      final IXtendOutlineContext featureContext = this.buildFeature(inferredType, ((JvmFeature)jvmElement), member, context);
                       this.buildLocalClasses(((JvmFeature)jvmElement), featureContext);
                     }
                   }
@@ -167,8 +167,8 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
           } else {
             _elvis = dispatchCase;
           }
-          IXtendOutlineContext _buildFeatureNode = this.xtendOutlineNodeBuilder.buildFeatureNode(baseType, dispatchCase, _elvis, dispatcherContext);
-          _buildFeatureNode.markAsProcessed(dispatchCase);
+          IXtendOutlineContext _buildFeature = this.buildFeature(baseType, dispatchCase, _elvis, dispatcherContext);
+          _buildFeature.markAsProcessed(dispatchCase);
         }
       }
     }

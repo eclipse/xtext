@@ -10,7 +10,14 @@ package org.eclipse.xtext.idea.structureview
 import com.intellij.ide.structureView.StructureViewModel
 import com.intellij.ide.structureView.StructureViewTreeElement
 import com.intellij.ide.structureView.TextEditorBasedStructureViewModel
+import com.intellij.ide.util.treeView.smartTree.Filter
+import com.intellij.ide.util.treeView.smartTree.Grouper
+import com.intellij.ide.util.treeView.smartTree.NodeProvider
+import com.intellij.ide.util.treeView.smartTree.Sorter
+import com.intellij.ide.util.treeView.smartTree.TreeElement
 import com.intellij.openapi.editor.Editor
+import java.util.Comparator
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 
@@ -22,8 +29,27 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 	@Accessors
 	IStructureViewTreeElementProvider structureViewTreeElementProvider
 
+	protected val List<Sorter> sorters
+
+	protected val List<Filter> filters
+
+	protected val List<Grouper> groupers
+
+	protected val List<NodeProvider> nodeProviders
+
 	new(BaseXtextFile xtextFile, Editor editor) {
 		super(editor, xtextFile)
+		xtextFile.xtextLanguage.injectMembers(this)
+		sorters = newArrayList
+		val comparator = comparator
+		if (comparator != null) {
+			sorters += new AlphaSorter => [
+				it.comparator = comparator
+			]
+		}
+		filters = newArrayList
+		groupers = newArrayList
+		nodeProviders = newArrayList
 	}
 
 	override protected BaseXtextFile getPsiFile() {
@@ -46,6 +72,26 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 
 	override isAlwaysShowsPlus(StructureViewTreeElement element) {
 		false
+	}
+
+	override getFilters() {
+		filters
+	}
+
+	override getSorters() {
+		sorters
+	}
+
+	override getGroupers() {
+		groupers
+	}
+
+	override getNodeProviders() {
+		nodeProviders
+	}
+
+	def Comparator<TreeElement> getComparator() {
+		new DefaultComparator
 	}
 
 }

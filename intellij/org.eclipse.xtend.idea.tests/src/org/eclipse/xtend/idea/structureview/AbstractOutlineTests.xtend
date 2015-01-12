@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.idea.structureview
 
-import com.intellij.ide.structureView.impl.StructureViewComposite
+import com.intellij.ide.structureView.StructureView
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent
 import com.intellij.lang.LanguageStructureViewBuilder
 import com.intellij.openapi.fileEditor.FileEditorManager
@@ -15,19 +15,19 @@ import com.intellij.openapi.util.Disposer
 import com.intellij.util.Consumer
 import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.idea.tests.LightToolingTest
-import org.jetbrains.annotations.NotNull
 
 import static extension com.intellij.testFramework.PlatformTestUtil.*
+import static extension com.intellij.util.ui.tree.TreeUtil.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class OutlineTests extends LightToolingTest {
+abstract class AbstractOutlineTests extends LightToolingTest {
 
 	new() {
 		super(XtendFileType.INSTANCE)
 	}
-	
+
 	def void testSimpleClass() {
 		testStructureView('''
 			class Foo {}
@@ -59,11 +59,13 @@ class OutlineTests extends LightToolingTest {
 	def void testTypeParameter1() {
 		testStructureView('''
 			class Foo <T> {}
-		''', '''
-			Foo.xtend
-			 Foo<T>
-		''')
+		''', typeParameter1Expectation)
 	}
+
+	protected def String getTypeParameter1Expectation() '''
+		Foo.xtend
+		 Foo<T>
+	'''
 
 	def void testField() {
 		testStructureView('''
@@ -74,7 +76,7 @@ class OutlineTests extends LightToolingTest {
 			  bar : String
 		''')
 	}
-	
+
 	def void testConstructor() {
 		testStructureView('''
 			class Foo { new(int foo) {} }
@@ -84,7 +86,7 @@ class OutlineTests extends LightToolingTest {
 			  new(int)
 		''')
 	}
-	
+
 	def void testSimpleMethod() {
 		testStructureView('''
 			class Foo { def foo() {null} }
@@ -94,7 +96,7 @@ class OutlineTests extends LightToolingTest {
 			  foo() : Object
 		''')
 	}
-	
+
 	def void testMethodWithParameter() {
 		testStructureView('''
 			class Foo { def foo(int bar) {null} }
@@ -104,7 +106,7 @@ class OutlineTests extends LightToolingTest {
 			  foo(int) : Object
 		''')
 	}
-	
+
 	def void testMethodWithParameters() {
 		testStructureView('''
 			class Foo { def foo(int bar, java.lang.Object x) {null} }
@@ -114,7 +116,7 @@ class OutlineTests extends LightToolingTest {
 			  foo(int, Object) : Object
 		''')
 	}
-	
+
 	def void testMethodWithReturnType() {
 		testStructureView('''
 			class Foo { def <T> foo() {null} }
@@ -124,7 +126,7 @@ class OutlineTests extends LightToolingTest {
 			  foo() <T extends Object> : Object
 		''')
 	}
-	
+
 	def void testMethodWithTypeParameter() {
 		testStructureView('''
 			class Foo { def <T> foo() {null} }
@@ -134,7 +136,7 @@ class OutlineTests extends LightToolingTest {
 			  foo() <T extends Object> : Object
 		''')
 	}
-	
+
 	def void testMethodWithReturnTypeParameter() {
 		testStructureView('''
 			class Foo { def <T> Foo<T> foo() {null} }
@@ -144,39 +146,45 @@ class OutlineTests extends LightToolingTest {
 			  foo() <T extends Object> : Foo<T>
 		''')
 	}
-	
+
 	def void testOperatorDeclarationWithSymbol() {
 		testStructureView('''
 			class Foo { def java.lang.String !(Object o) {null} }
-		''', '''
-			Foo.xtend
-			 Foo
-			  !(Object) : String (operator_not)
-		''')
+		''', operatorDeclarationWithSymbolExpectation)
 	}
-	
+
+	protected def String getOperatorDeclarationWithSymbolExpectation() '''
+		Foo.xtend
+		 Foo
+		  !(Object) : String (operator_not)
+	'''
+
 	def void testOperatorDeclarationWithName() {
 		testStructureView('''
 			class Foo { def java.lang.String operator_not(Object o) {null} }
-		''', '''
-			Foo.xtend
-			 Foo
-			  !(Object) : String (operator_not)
-		''')
+		''', operatorDeclarationWithNameExpectation)
 	}
-	
+
+	protected def String getOperatorDeclarationWithNameExpectation() '''
+		Foo.xtend
+		 Foo
+		  !(Object) : String (operator_not)
+	'''
+
 	def void testDispatchMethod() {
 		testStructureView('''
 			class Foo { def dispatch foo(Object x) {''} def dispatch foo(String y) {''} }
-		''', '''
-			Foo.xtend
-			 Foo
-			  foo(Object) : String
-			   foo(Object) : String
-			   foo(String) : String
-		''')
+		''', dispatchMethodExpectation)
 	}
-	
+
+	protected def String getDispatchMethodExpectation() '''
+		Foo.xtend
+		 Foo
+		  foo(Object) : String
+		   foo(Object) : String
+		   foo(String) : String
+	'''
+
 	def void testInterface() {
 		testStructureView('''
 			interface Foo { int bar def String foo() }
@@ -187,7 +195,7 @@ class OutlineTests extends LightToolingTest {
 			  foo() : String
 		''')
 	}
-	
+
 	def void testEnum() {
 		testStructureView('''
 			enum Foo { BAR, BAZ }
@@ -198,18 +206,20 @@ class OutlineTests extends LightToolingTest {
 			  BAZ
 		''')
 	}
-	
+
 	def void testAnnotationType() {
 		testStructureView('''
 			@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { int bar String foo = '' }
-		''', '''
-			Foo.xtend
-			 Foo
-			  bar : int
-			  foo : String
-		''')
+		''', annotationTypeExpectation)
 	}
-	
+
+	protected def String getAnnotationTypeExpectation() '''
+		Foo.xtend
+		 Foo
+		  bar : int
+		  foo : String
+	'''
+
 	def void testAnnotationTypeNoMembers() {
 		testStructureView('''
 			@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) annotation Foo { }
@@ -218,7 +228,7 @@ class OutlineTests extends LightToolingTest {
 			 Foo
 		''')
 	}
-	
+
 	def void testInterfaceNoMembers() {
 		testStructureView('''
 			@SuppressWarnings('foo') interface Foo { }
@@ -227,43 +237,50 @@ class OutlineTests extends LightToolingTest {
 			 Foo
 		''')
 	}
-	
+
 	def void testCreateExtensionInfo() {
 		testStructureView('''
 			class Foo { def create 'lalala' foo() {} }
-		''', '''
-			Foo.xtend
-			 Foo
-			  foo() : String
-		''')
+		''', createExtensionInfoExpectation)
 	}
-	
+
+	protected def String getCreateExtensionInfoExpectation() '''
+		Foo.xtend
+		 Foo
+		  foo() : String
+	'''
+
 	def void testCreateExtensionInfo_dispatch() {
 		testStructureView('''
 			class Foo {  dispatch def create value : 'bar' foo(Integer it) {}  dispatch def create value : 'foo' foo(String it) {} }
-		''', '''
-			Foo.xtend
-			 Foo
-			  foo(Object) : String
-			   foo(Integer) : String
-			   foo(String) : String
-		''')
+		''', createExtensionInfo_dispatchExpectation)
 	}
-	
+
+	protected def String getCreateExtensionInfo_dispatchExpectation() '''
+		Foo.xtend
+		 Foo
+		  foo(Object) : String
+		   foo(Integer) : String
+		   foo(String) : String
+	'''
+
 	def void testNestedTypes() {
 		testStructureView('''
 			class Foo { int foo static class Bar { def bar() {} interface Baz {} enum FooBar{ X } } }
-		''', '''
-			Foo.xtend
-			 Foo
-			  foo : int
-			  Bar
-			   bar() : Object
-			   Baz
-			   FooBar
-		''')
+		''', nestedTypesExpectation)
 	}
-	
+
+	protected def String getNestedTypesExpectation() '''
+		Foo.xtend
+		 Foo
+		  foo : int
+		  Bar
+		   bar() : Object
+		   Baz
+		   FooBar
+		    X
+	'''
+
 	def void testAnonymousTypes() {
 		testStructureView('''
 			class Foo<T extends Object> { def Foo<String> bar() { new Foo<String>() { override bar() { } } } }
@@ -277,17 +294,22 @@ class OutlineTests extends LightToolingTest {
 	}
 
 	protected def void testStructureView(String model, String expected) {
-		configureByText('Foo.xtend', model)
-		testStructureView(expected)
-	}
-
-	protected def void testStructureView(String expected) {
-		testStructureView [ component |
-			component.treeStructure.assertTreeStructureEquals(expected)
+		testStructureView(model) [ component |
+			component.assertTreeStructure(expected)
 		]
 	}
 
-	def void testStructureView(@NotNull Consumer<StructureViewComponent> consumer) {
+	protected def assertTreeStructure(StructureViewComponent component, String expected) {
+		component.tree.expandAll
+		component.treeStructure.assertTreeStructureEquals(expected)
+	}
+
+	protected def void testStructureView(String model, Consumer<StructureViewComponent> consumer) {
+		configureByText('Foo.xtend', model)
+		testStructureView(consumer)
+	}
+
+	def void testStructureView(Consumer<StructureViewComponent> consumer) {
 		val myFile = myFixture.file.virtualFile
 		if (!(myFile != null)) {
 			throw new AssertionError("configure first")
@@ -302,16 +324,13 @@ class OutlineTests extends LightToolingTest {
 		}
 		var StructureViewComponent component = null
 		try {
-			component = switch structureView : builder.createStructureView(fileEditor, project) {
-				StructureViewComponent: 
-					structureView
-				StructureViewComposite:
-					structureView.selectedStructureView as StructureViewComponent
-			}
+			component = builder.createStructureView(fileEditor, project).structureViewComponent
 			consumer.consume(component)
 		} finally {
 			if(component != null) Disposer.dispose(component)
 		}
 	}
+
+	protected def StructureViewComponent getStructureViewComponent(StructureView structureView)
 
 }

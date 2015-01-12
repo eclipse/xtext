@@ -37,7 +37,7 @@ public class XtendOutlineNodeFactory extends OutlineNodeFactory {
 	}
 
 	public XtendEObjectNode createXtendEOBjectNode(IOutlineNode parentNode, EObject modelElement,
-			ImageDescriptor imageDescriptor, Object text, boolean isLeaf, boolean synthetic, int inheritanceDepth) {
+			ImageDescriptor imageDescriptor, Object text, boolean isLeaf, int inheritanceDepth) {
 		XtendEObjectNode featureNode = new XtendEObjectNode(modelElement, parentNode, imageDescriptor, text, isLeaf);
 		configureNode(parentNode, modelElement, inheritanceDepth, featureNode);
 		return featureNode;

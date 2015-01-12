@@ -22,7 +22,7 @@ interface IXtendOutlineNodeBuilder {
 	
 	def IXtendOutlineContext buildEObjectNode(EObject modelElement, IXtendOutlineContext context)
 	def IXtendOutlineContext buildXtendNode(EObject modelElement, IXtendOutlineContext context)
-	def IXtendOutlineContext buildFeatureNode(JvmDeclaredType inferredType, JvmFeature jvmFeature, EObject modelElement, IXtendOutlineContext context)
+	def IXtendOutlineContext buildFeatureNode(JvmDeclaredType inferredType, EObject semanticFeature, IXtendOutlineContext context)
 	def IXtendOutlineContext buildDispatcherNode(JvmDeclaredType baseType, JvmFeature dispatcher, List<JvmOperation> dispatchCases, IXtendOutlineContext context)
 	def IXtendOutlineContext buildPackageNode(XtendFile xtendFile, IXtendOutlineContext context)
 	def IXtendOutlineContext buildImportSectionNode(XtendFile xtendFile, IXtendOutlineContext context)

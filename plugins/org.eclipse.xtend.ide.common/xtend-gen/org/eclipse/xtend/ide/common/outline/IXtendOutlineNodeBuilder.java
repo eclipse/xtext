@@ -25,7 +25,7 @@ public interface IXtendOutlineNodeBuilder {
   
   public abstract IXtendOutlineContext buildXtendNode(final EObject modelElement, final IXtendOutlineContext context);
   
-  public abstract IXtendOutlineContext buildFeatureNode(final JvmDeclaredType inferredType, final JvmFeature jvmFeature, final EObject modelElement, final IXtendOutlineContext context);
+  public abstract IXtendOutlineContext buildFeatureNode(final JvmDeclaredType inferredType, final EObject semanticFeature, final IXtendOutlineContext context);
   
   public abstract IXtendOutlineContext buildDispatcherNode(final JvmDeclaredType baseType, final JvmFeature dispatcher, final List<JvmOperation> dispatchCases, final IXtendOutlineContext context);
   

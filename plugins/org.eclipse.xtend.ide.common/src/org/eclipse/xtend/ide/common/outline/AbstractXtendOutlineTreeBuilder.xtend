@@ -119,7 +119,7 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 					}
 				} else if (member instanceof JvmFeature) {
 					if (!member.skipFeature) {
-						val featureContext = baseType.buildFeatureNode(member, member, context)
+						val featureContext = baseType.buildFeature(member, member, context)
 						member.localClasses.forEach[buildJvmType(featureContext.newContext)]
 					}
 				}
@@ -128,6 +128,14 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 		}
 		if (context.isShowInherited) {
 			buildInheritedMembers(inferredType, context)
+		}
+	}
+	
+	protected def buildFeature(JvmDeclaredType inferredType, JvmFeature jvmFeature, EObject semanticFeature, IXtendOutlineContext context) {
+		if (jvmFeature.synthetic) {
+			inferredType.buildFeatureNode(jvmFeature, context)
+		} else {
+			inferredType.buildFeatureNode(semanticFeature, context)
 		}
 	}
 

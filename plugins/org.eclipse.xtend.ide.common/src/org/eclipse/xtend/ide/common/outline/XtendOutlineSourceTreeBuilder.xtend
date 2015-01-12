@@ -76,7 +76,7 @@ class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuilder impl
 								if (jvmElement.dispatchRelated) {
 									inferredType.buildDispatchers(baseType, context)
 								} else {
-									val featureContext = inferredType.buildFeatureNode(
+									val featureContext = inferredType.buildFeature(
 										jvmElement,
 										member,
 										context
@@ -120,7 +120,7 @@ class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuilder impl
 			).markAsProcessed(dispatcher)
 
 			for (dispatchCase : dispatchCases) {
-				baseType.buildFeatureNode(
+				baseType.buildFeature(
 					dispatchCase,
 					dispatchCase.xtendFunction ?: dispatchCase,
 					dispatcherContext

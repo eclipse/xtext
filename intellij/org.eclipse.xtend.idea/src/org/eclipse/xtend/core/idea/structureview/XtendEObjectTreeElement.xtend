@@ -7,24 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.structureview
 
-import com.intellij.openapi.editor.Editor
-import org.eclipse.xtext.idea.structureview.XtextFileTreeModel
-import org.eclipse.xtext.psi.impl.BaseXtextFile
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.idea.structureview.EObjectTreeElement
 
-class XtendFileTreeModel extends XtextFileTreeModel {
+/**
+ * @author kosyakov - Initial contribution and API
+ */
+class XtendEObjectTreeElement extends EObjectTreeElement {
 
-	new(BaseXtextFile xtextFile, Editor editor) {
-		super(xtextFile, editor)
-		filters += new SyntheticMemberFilter
-		nodeProviders += new XtendShowInheritedNodeProvider
+	boolean isStatic
+
+	@Accessors
+	int inheritanceDepth
+
+	def void setStatic(boolean isStatic) {
+		this.isStatic = isStatic
 	}
 
-	override getNodeProviders() {
-		nodeProviders
-	}
-
-	override getComparator() {
-		new XtendTreeElementComparator
+	def isStatic() {
+		this.isStatic
 	}
 
 }
