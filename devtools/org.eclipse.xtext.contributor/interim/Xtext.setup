@@ -586,6 +586,8 @@
             name="org.eclipse.xtext.example.tutorial.ui"/>
         <requirement
             name="xbase.tutorial"/>
+        <requirement
+            name="xtend-euler"/>
         <sourceLocator
             rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}">
           <predicate
@@ -599,6 +601,8 @@
             rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
         <sourceLocator
             rootFolder="${git.clone.xtext.location/examples/}"/>
+        <sourceLocator
+            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples}"/>
       </targlet>
     </setupTask>
     <setupTask
