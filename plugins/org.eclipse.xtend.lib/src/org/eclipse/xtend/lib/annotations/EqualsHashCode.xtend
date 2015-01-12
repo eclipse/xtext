@@ -213,7 +213,7 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 		}
 		
 		private def orObject(TypeReference ref) {
-			if (ref === null) object else ref
+			ref ?: object
 		}
 	}
 }
