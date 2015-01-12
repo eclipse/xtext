@@ -7,22 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.util;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.FileExtensionProvider;
-import org.eclipse.xtext.resource.IResourceFactory;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.LazyStringInputStream;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * Some convenience methods for parsing (i.e. testing, etc.)
@@ -32,10 +26,7 @@ import com.google.inject.Provider;
 public class ParseHelper<T extends EObject> {
 
 	@Inject
-	private Provider<XtextResourceSet> resourceSetProvider;
-
-	@Inject
-	private IResourceFactory resourceFactory;
+	private ResourceHelper resourceHelper;
 
 	public String fileExtension;
 	
@@ -49,19 +40,14 @@ public class ParseHelper<T extends EObject> {
 
 	@SuppressWarnings("unchecked")
 	public T parse(InputStream in, URI uriToUse, Map<?, ?> options, ResourceSet resourceSet) {
-		Resource resource = resourceFactory.createResource(uriToUse);
-		resourceSet.getResources().add(resource);
-		try {
-			resource.load(in, options);
-			final T root = (T) (resource.getContents().isEmpty() ? null : resource.getContents().get(0));
-			return root;
-		} catch (IOException e) {
-			throw new WrappedException(e);
-		}
+		resourceHelper.setFileExtension(fileExtension);
+		Resource resource = resourceHelper.resource(in, uriToUse, options, resourceSet);
+		final T root = (T) (resource.getContents().isEmpty() ? null : resource.getContents().get(0));
+		return root;
 	}
 
 	public T parse(CharSequence text) throws Exception {
-		return parse(text, resourceSetProvider.get());
+		return parse(text, resourceHelper.createResourceSet());
 	}
 
 	public T parse(CharSequence text, ResourceSet resourceSetToUse) throws Exception {
@@ -71,19 +57,13 @@ public class ParseHelper<T extends EObject> {
 	public T parse(CharSequence text, URI uriToUse, ResourceSet resourceSetToUse) throws Exception {
 		return parse(getAsStream(text), uriToUse, null, resourceSetToUse);
 	}
-
+	
 	protected URI computeUnusedUri(ResourceSet resourceSet) {
-		String name = "__synthetic";
-		for (int i = 0; i < Integer.MAX_VALUE; i++) {
-			URI syntheticUri = URI.createURI(name + i + "." + fileExtension);
-			if (resourceSet.getResource(syntheticUri, false) == null)
-				return syntheticUri;
-		}
-		throw new IllegalStateException();
+		return resourceHelper.computeUnusedUri(resourceSet);
 	}
 
 	protected InputStream getAsStream(CharSequence text) {
-		return new LazyStringInputStream(text == null ? "" : text.toString());
+		return resourceHelper.getAsStream(text);
 	}
 
 }
