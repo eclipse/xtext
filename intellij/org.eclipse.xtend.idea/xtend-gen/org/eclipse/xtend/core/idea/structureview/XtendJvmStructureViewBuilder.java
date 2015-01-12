@@ -9,10 +9,14 @@ package org.eclipse.xtend.core.idea.structureview;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.intellij.openapi.editor.Editor;
 import org.eclipse.xtend.core.idea.structureview.AbstractXtendStructureViewBuilder;
+import org.eclipse.xtend.core.idea.structureview.XtendFileJvmTreeModel;
 import org.eclipse.xtend.core.idea.structureview.XtendStructureViewTreeElementProvider;
 import org.eclipse.xtend.ide.common.outline.XtendOutlineJvmTreeBuilder;
 import org.eclipse.xtext.idea.structureview.IStructureViewTreeElementProvider;
+import org.eclipse.xtext.idea.structureview.XtextFileTreeModel;
+import org.eclipse.xtext.psi.impl.BaseXtextFile;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -24,6 +28,11 @@ public class XtendJvmStructureViewBuilder extends AbstractXtendStructureViewBuil
   
   @Inject
   private Provider<XtendStructureViewTreeElementProvider> xtendStructureViewTreeElementProviderProvider;
+  
+  public XtextFileTreeModel createStructureViewModel(final Editor editor) {
+    BaseXtextFile _xtextFile = this.getXtextFile();
+    return new XtendFileJvmTreeModel(_xtextFile, editor);
+  }
   
   public IStructureViewTreeElementProvider createStructureViewTreeElementProvider() {
     XtendStructureViewTreeElementProvider _xblockexpression = null;

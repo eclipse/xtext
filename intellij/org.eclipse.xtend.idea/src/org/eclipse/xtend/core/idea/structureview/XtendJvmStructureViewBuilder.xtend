@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.idea.structureview
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.intellij.openapi.editor.Editor
 import org.eclipse.xtend.ide.common.outline.XtendOutlineJvmTreeBuilder
 
 /**
@@ -21,6 +22,10 @@ class XtendJvmStructureViewBuilder extends AbstractXtendStructureViewBuilder {
 
 	@Inject
 	Provider<XtendStructureViewTreeElementProvider> xtendStructureViewTreeElementProviderProvider
+	
+	override createStructureViewModel(Editor editor) {
+		new XtendFileJvmTreeModel(xtextFile, editor)
+	}
 
 	override createStructureViewTreeElementProvider() {
 		val jvmProvider = xtendStructureViewTreeElementProviderProvider.get

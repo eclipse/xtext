@@ -156,6 +156,10 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     return _xblockexpression;
   }
   
+  protected Object getSuperCurrentEditorElement() {
+    return super.getCurrentEditorElement();
+  }
+  
   protected Class[] getSuitableClasses() {
     return ((Class[])Conversions.unwrapArray(this.suitableClasses, Class.class));
   }

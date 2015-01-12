@@ -101,12 +101,16 @@ class XtextFileTreeModel extends TextEditorBasedStructureViewModel implements St
 	}
 	
 	override getCurrentEditorElement() {
-		val element = super.getCurrentEditorElement()
+		val element = super.currentEditorElement
 		if (element instanceof PsiEObject) {
 			element.EObject?.URI
 		} else {
 			element
 		}
+	}
+	
+	protected def getSuperCurrentEditorElement() {
+		super.currentEditorElement
 	}
 	
 	override protected getSuitableClasses() {
