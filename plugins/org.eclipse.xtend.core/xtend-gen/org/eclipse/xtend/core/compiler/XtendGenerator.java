@@ -28,11 +28,9 @@ import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.CodeGenerationParticipant;
-import org.eclipse.xtend.lib.macro.declaration.Declaration;
-import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.EcoreUtil2;
@@ -112,30 +110,13 @@ public class XtendGenerator extends JvmModelGenerator {
               };
               final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
               List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
-              final Function1<XtendAnnotationTarget, NamedElement> _function_1 = new Function1<XtendAnnotationTarget, NamedElement>() {
-                public NamedElement apply(final XtendAnnotationTarget it) {
-                  Declaration _switchResult = null;
-                  boolean _matched = false;
-                  if (!_matched) {
-                    if (it instanceof XtendMember) {
-                      _matched=true;
-                      CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                      _switchResult = _compilationUnit.toXtendMemberDeclaration(((XtendMember)it));
-                    }
-                  }
-                  if (!_matched) {
-                    if (it instanceof XtendParameter) {
-                      _matched=true;
-                      CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
-                      _switchResult = _compilationUnit.toXtendParameterDeclaration(((XtendParameter)it));
-                    }
-                  }
-                  final Declaration xtendMember = _switchResult;
-                  Element _primaryGeneratedJavaElement = codeGenServices.getPrimaryGeneratedJavaElement(xtendMember);
-                  return ((NamedElement) _primaryGeneratedJavaElement);
+              final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
+                public MemberDeclaration apply(final XtendAnnotationTarget it) {
+                  CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
+                  return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
                 }
               };
-              final List<NamedElement> elements = ListExtensions.<XtendAnnotationTarget, NamedElement>map(_annotatedSourceElements, _function_1);
+              final List<MemberDeclaration> elements = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function_1);
               ((CodeGenerationParticipant<NamedElement>)processor).doGenerateCode(elements, codeGenServices);
             }
           }
