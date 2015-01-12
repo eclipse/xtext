@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -45,6 +44,7 @@ import org.eclipse.jdt.internal.compiler.util.ObjectVector;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jdt.internal.core.JavaProject;
+import org.eclipse.jdt.internal.core.NameLookup;
 import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
 import org.eclipse.jdt.internal.core.search.IndexQueryRequestor;
 import org.eclipse.jdt.internal.core.search.PatternSearchJob;
@@ -61,6 +61,7 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.ShadowedT
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
 
@@ -73,8 +74,6 @@ import com.google.common.collect.Sets;
  */
 public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
 	
-	private final static Logger LOG = Logger.getLogger(JdtTypeProvider.class);
-
 	private static final String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0);
 
 	private final IJavaProject javaProject;
@@ -193,7 +192,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		try {
 			JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI, resource, traverseNestedTypes);
 			if (result != null || resource != null) {
-				if (result != null && !canLink(result.getQualifiedName())) {
+				if (result != null && !canLink(result)) {
 					return null;
 				}
 				return result;
@@ -208,6 +207,26 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		} catch (ShadowedTypeException e) {
 			return null;
 		}
+	}
+
+	private boolean canLink(JvmType type) {
+		Resource resource = type.eResource();
+		if (resource instanceof TypeResource) {
+			JdtTypeMirror mirror = (JdtTypeMirror) ((TypeResource) resource).getMirror();
+			try {
+				return canLink(mirror.getMirroredType());
+			} catch (JavaModelException e) {
+				return false;
+			}
+		}
+		URI resourceURI = resource.getURI();
+		if (resourceURI.isPlatformResource() && resourceURI.segment(1).equals(javaProject.getProject().getName())) {
+			IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
+			if (indexedJvmTypeAccess != null && indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/* @Nullable */
@@ -265,6 +284,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	
 	private IType findObjectTypeInJavaProject(/* @NonNull */ URI resourceURI) throws JavaModelException {
 		String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
+		return findObjectTypeInJavaProject(topLevelType);
+	}
+
+	private IType findObjectTypeInJavaProject(String topLevelType) throws JavaModelException {
 		int lastDot = topLevelType.lastIndexOf('.');
 		String packageName = null;
 		String typeName = topLevelType;
@@ -281,15 +304,34 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		 */
 		
 		// fast operation first: try to find top level types
-		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */);
+		IType type = findPrimaryType(packageName, typeName);
 		if (type == null) {
 			// no luck, try again - this time look for secondary types
 			type = findSecondaryType(packageName, typeName);
 		}
-		if (type != null && !canLink(type.getFullyQualifiedName())) {
+		if (type != null && !canLink(type)) {
 			return null;
 		}
 		return type;
+	}
+
+	private IType findPrimaryType(String packageName, String typeName) throws JavaModelException {
+		JavaProject casted = (JavaProject) javaProject;
+		NameLookup nameLookup = getNameLookup(casted);
+		NameLookup.Answer answer = nameLookup.findType(
+				typeName,
+				packageName,
+				false,
+				NameLookup.ACCEPT_ALL,
+				false, // do not consider secondary types
+				true, // wait for indexes (in case we need to consider secondary types)
+				false/*don't check restrictions*/,
+				null);
+		return answer == null ? null : answer.type;
+	}
+
+	private NameLookup getNameLookup(JavaProject casted) throws JavaModelException {
+		return casted.newNameLookup(getWorkingCopies());
 	}
 	
 	/**
@@ -329,7 +371,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		// Get working copy path(s). Store in a single string in case of only one to optimize comparison in requestor
 		final HashSet<String> workingCopyPaths = new HashSet<String>();
 		String workingCopyPath = null;
-		ICompilationUnit[] copies = JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false/*don't add primary WCs a second time*/);
+		ICompilationUnit[] copies = getWorkingCopies();
 		final int copiesLength = copies == null ? 0 : copies.length;
 		if (copies != null) {
 			if (copiesLength == 1) {
@@ -399,6 +441,18 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			// do nothing
 		}
 		return result.get();
+	}
+
+	private ICompilationUnit[] getWorkingCopies() {
+		if (isBuilderScope()) {
+			return new ICompilationUnit[0];
+		}
+		return JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false/*don't add primary WCs a second time*/);
+	}
+
+	private boolean isBuilderScope() {
+		boolean builderScope = getResourceSet().getLoadOptions().containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
+		return builderScope;
 	}
 
 	private IPackageFragmentRoot[] getSourceFolders() throws JavaModelException {
@@ -471,36 +525,23 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			}
 		}
 	}
-
-	private boolean canLink(String typeName) {
-		if (typeName == null) {
-			return false;
-		}
+	
+	private boolean canLink(IType type) throws JavaModelException {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = this.getIndexedJvmTypeAccess();
 		if (indexedJvmTypeAccess != null && indexedJvmTypeAccess.isIndexingPhase(getResourceSet())) {
-			// during indexing we don't see project local types.
-			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=410594
-			try {
-				IType type = javaProject.findType(typeName);
-				if (type != null && type.exists()) {
-					IResource underlyingResource = type.getUnderlyingResource();
-					if (underlyingResource == null) {
-						return true;
-					}
-					for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
-						if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
-							IResource srcUnderlyingResource = root.getUnderlyingResource();
-							if (srcUnderlyingResource != null && srcUnderlyingResource.contains(underlyingResource)) {
-								return false;
-							}
-						}
-					}
-					return true;
-				}
-			} catch (JavaModelException e) {
-				LOG.error(e.getMessage(), e);
+			IResource underlyingResource = type.getUnderlyingResource();
+			if (underlyingResource == null) {
+				return true;
 			}
-			return false;
+			for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
+				if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
+					IResource srcUnderlyingResource = root.getUnderlyingResource();
+					if (srcUnderlyingResource != null && srcUnderlyingResource.contains(underlyingResource)) {
+						return false;
+					}
+				}
+			}
+			return true;
 		}
 		return true;
 	}
@@ -575,7 +616,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	@Override
 	protected IMirror createMirrorForFQN(String name) {
 		try {
-			IType type = javaProject.findType(name /*, workingCopyOwner */);
+			IType type = findObjectTypeInJavaProject(name);
 			if (type == null || !type.exists())
 				return null;
 			return createMirror(type);
