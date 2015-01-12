@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -13,7 +14,6 @@ import org.eclipse.xtext.junit4.formatter.FormatterTester;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.runner.RunWith;
 
@@ -112,7 +112,7 @@ public abstract class AbstractXtendFormatterTest {
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
           public void apply(final MapBasedPreferenceValues it) {
-            it.put(BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+            it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
             it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));
             if (cfg!=null) {
               cfg.apply(it);

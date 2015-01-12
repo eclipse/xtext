@@ -10,7 +10,7 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.util.TextRegion
 import org.junit.runner.RunWith
 
-import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
+import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))

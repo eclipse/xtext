@@ -3,7 +3,7 @@ package org.eclipse.xtend.core.tests.formatting;
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
-import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
+import org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatConstructor01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -34,7 +34,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatConstructor02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -421,7 +421,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
+        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
     };
     StringConcatenation _builder = new StringConcatenation();
@@ -445,7 +445,7 @@ public class XtendClassFormatterTest extends AbstractXtendFormatterTest {
   public void formatMethod02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
       public void apply(final MapBasedPreferenceValues it) {
-        it.put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
+        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
     };
     StringConcatenation _builder = new StringConcatenation();

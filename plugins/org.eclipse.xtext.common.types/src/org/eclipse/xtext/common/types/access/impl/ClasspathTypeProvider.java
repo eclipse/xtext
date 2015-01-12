@@ -133,6 +133,9 @@ public class ClasspathTypeProvider extends AbstractRuntimeJvmTypeProvider {
 	
 	private final ClassFileBytesAccess readerAccess;
 	
+	/**
+	 * @deprecated use {@link #ClasspathTypeProvider(ClassLoader, ResourceSet, IndexedJvmTypeAccess, TypeResourceServices)} instead.
+	 */
 	@Deprecated
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		this(classLoader, resourceSet, indexedJvmTypeAccess, null);
