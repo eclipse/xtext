@@ -29,9 +29,11 @@ import org.eclipse.xtext.xbase.validation.UIStrings
  */
 class XtendItemPresentationProvider extends XtendJvmItemPresentationProvider {
 
-	@Inject UIStrings uiStrings
+	@Inject
+	UIStrings uiStrings
 
-	@Inject extension IXtendJvmAssociations
+	@Inject
+	extension IXtendJvmAssociations
 
 	@Inject OperatorMapping operatorMapping
 
