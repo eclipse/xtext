@@ -99,13 +99,11 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 	}
 
 	@Override
-	public IXtendOutlineContext buildFeatureNode(JvmDeclaredType inferredType, JvmFeature jvmFeature,
-			EObject modelElement, IXtendOutlineContext context) {
+	public IXtendOutlineContext buildFeatureNode(JvmDeclaredType inferredType, EObject semanticFeature, IXtendOutlineContext context) {
 		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
 		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
 		int inheritanceDepth = eclipseXtendOutlineContext.getInheritanceDepth();
-		XtendFeatureNode featureNode = createNodeForFeature(parentNode, inferredType, jvmFeature, modelElement,
-				inheritanceDepth);
+		XtendFeatureNode featureNode = createNodeForFeature(parentNode, inferredType, semanticFeature, inheritanceDepth);
 		return eclipseXtendOutlineContext.withParentNode(featureNode);
 	}
 
@@ -115,8 +113,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		EclipseXtendOutlineContext eclipseXtendOutlineContext = (EclipseXtendOutlineContext) context;
 		IOutlineNode parentNode = eclipseXtendOutlineContext.getParentNode();
 		int inheritanceDepth = eclipseXtendOutlineContext.getInheritanceDepth();
-		XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, baseType, dispatcher, dispatcher,
-				inheritanceDepth);
+		XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, baseType, dispatcher, inheritanceDepth);
 		dispatcherNode.setDispatch(true);
 		if (isInheritsDispatchCases(baseType, dispatchCases)) {
 			dispatcherNode.setImageDescriptor(images.forDispatcherFunction(dispatcher.getVisibility(),
@@ -165,17 +162,17 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		return false;
 	}
 
-	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
-			JvmFeature jvmFeature, EObject semanticFeature, int inheritanceDepth) {
-		final boolean synthetic = typeExtensions.isSynthetic(jvmFeature);
-		Object text = computeDecoratedText(synthetic ? jvmFeature : semanticFeature, inheritanceDepth);
-		ImageDescriptor image = getImageDescriptor(synthetic ? jvmFeature : semanticFeature);
-		if (isShowInherited()) {
-			return getOutlineNodeFactory().createXtendFeatureNode(parentNode, jvmFeature, image, text, true, synthetic,
-					inheritanceDepth);
+	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType, EObject featureElement, int inheritanceDepth) {
+		boolean synthetic = false;
+		if (featureElement instanceof JvmFeature) {
+			synthetic = typeExtensions.isSynthetic((JvmIdentifiableElement) featureElement);		
 		}
-		return getOutlineNodeFactory().createXtendFeatureNode(parentNode, synthetic ? jvmFeature : semanticFeature,
-				image, text, true, synthetic, inheritanceDepth);
+		Object text = computeDecoratedText(featureElement, inheritanceDepth);
+		ImageDescriptor image = getImageDescriptor(featureElement);
+		if (isShowInherited()) {
+			return getOutlineNodeFactory().createXtendFeatureNode(parentNode, featureElement, image, text, true, synthetic, inheritanceDepth);
+		}
+		return getOutlineNodeFactory().createXtendFeatureNode(parentNode, featureElement, image, text, true, synthetic, inheritanceDepth);
 	}
 
 	protected XtendFeatureNode createNodeForResolvedFeature(IOutlineNode parentNode, JvmDeclaredType inferredType,
@@ -208,12 +205,8 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		Object text = computeDecoratedText(modelElement, inheritanceDepth);
 
 		ImageDescriptor image = getImageDescriptor(modelElement);
-		boolean syntatic = false;
-		if (modelElement instanceof JvmIdentifiableElement) {
-			syntatic = typeExtensions.isSynthetic((JvmIdentifiableElement) modelElement);
-		}
 		XtendEObjectNode objectNode = getOutlineNodeFactory().createXtendEOBjectNode(parentNode, modelElement, image,
-				text, true, syntatic, inheritanceDepth);
+				text, true, inheritanceDepth);
 		return objectNode;
 	}
 
