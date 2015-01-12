@@ -625,13 +625,14 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
     
     private TypeReference orObject(final TypeReference ref) {
-      TypeReference _xifexpression = null;
-      if ((ref == null)) {
-        _xifexpression = this.context.getObject();
+      TypeReference _elvis = null;
+      if (ref != null) {
+        _elvis = ref;
       } else {
-        _xifexpression = ref;
+        TypeReference _object = this.context.getObject();
+        _elvis = _object;
       }
-      return _xifexpression;
+      return _elvis;
     }
   }
   
