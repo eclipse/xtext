@@ -1,0 +1,8 @@
+Code-Review-1: Dennis Huebner <dennis.huebner@itemis.de>
+Code-Review+2: Stefan Oehme <stefan.oehme@itemis.de>
+Verified+1: Stefan Oehme <stefan.oehme@itemis.de>
+Submitted-by: Stefan Oehme <stefan.oehme@itemis.de>
+Submitted-at: Mon, 12 Jan 2015 05:07:30 -0500
+Reviewed-on: https://git.eclipse.org/r/39367
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
