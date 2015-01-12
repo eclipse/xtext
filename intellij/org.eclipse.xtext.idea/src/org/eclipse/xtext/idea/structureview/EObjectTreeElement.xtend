@@ -8,9 +8,12 @@
 package org.eclipse.xtext.idea.structureview
 
 import com.google.inject.Inject
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.PsiModelAssociations
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -20,11 +23,18 @@ class EObjectTreeElement extends AbstractStructureViewTreeElement {
 	@Inject
 	PsiModelAssociations psiModelAssociations
 
+	URI uri
+
 	@Accessors
 	EObject object
-	
+
+	def void setObject(EObject object) {
+		this.object = object
+		this.uri = object.URI
+	}
+
 	override getValue() {
-		object
+		uri
 	}
 
 	override protected getInternalNavigationElement() {
@@ -39,14 +49,14 @@ class EObjectTreeElement extends AbstractStructureViewTreeElement {
 		if (this === obj) {
 			true
 		} else if (obj instanceof EObjectTreeElement) {
-			object == obj.object
+			uri == obj.uri
 		} else {
 			false
 		}
 	}
 
 	override hashCode() {
-		object.hashCode
+		uri.hashCode
 	}
 
 }

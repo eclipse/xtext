@@ -10,7 +10,9 @@ package org.eclipse.xtext.idea.structureview;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.psi.PsiElement;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.structureview.AbstractStructureViewTreeElement;
 import org.eclipse.xtext.psi.PsiModelAssociations;
@@ -24,11 +26,19 @@ public class EObjectTreeElement extends AbstractStructureViewTreeElement {
   @Inject
   private PsiModelAssociations psiModelAssociations;
   
+  private URI uri;
+  
   @Accessors
   private EObject object;
   
+  public void setObject(final EObject object) {
+    this.object = object;
+    URI _uRI = EcoreUtil.getURI(object);
+    this.uri = _uRI;
+  }
+  
   public Object getValue() {
-    return this.object;
+    return this.uri;
   }
   
   protected PsiElement getInternalNavigationElement() {
@@ -46,7 +56,7 @@ public class EObjectTreeElement extends AbstractStructureViewTreeElement {
     } else {
       boolean _xifexpression_1 = false;
       if ((obj instanceof EObjectTreeElement)) {
-        _xifexpression_1 = Objects.equal(this.object, ((EObjectTreeElement)obj).object);
+        _xifexpression_1 = Objects.equal(this.uri, ((EObjectTreeElement)obj).uri);
       } else {
         _xifexpression_1 = false;
       }
@@ -56,15 +66,11 @@ public class EObjectTreeElement extends AbstractStructureViewTreeElement {
   }
   
   public int hashCode() {
-    return this.object.hashCode();
+    return this.uri.hashCode();
   }
   
   @Pure
   public EObject getObject() {
     return this.object;
-  }
-  
-  public void setObject(final EObject object) {
-    this.object = object;
   }
 }

@@ -12,8 +12,10 @@ import com.google.common.collect.Iterables;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import java.util.List;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.idea.structureview.AbstractStructureViewTreeElement;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -30,6 +32,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @SuppressWarnings("all")
 public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
+  private URI uri;
+  
   @Accessors
   private EObject owner;
   
@@ -37,7 +41,13 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   private EStructuralFeature feature;
   
   public Object getValue() {
-    return Pair.<EObject, EStructuralFeature>of(this.owner, this.feature);
+    return Pair.<URI, EStructuralFeature>of(this.uri, this.feature);
+  }
+  
+  public void setOwner(final EObject owner) {
+    this.owner = owner;
+    URI _uRI = EcoreUtil.getURI(owner);
+    this.uri = _uRI;
   }
   
   protected PsiElement getInternalNavigationElement() {
@@ -79,7 +89,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
       boolean _xifexpression_1 = false;
       if ((obj instanceof EStructuralFeatureTreeElement)) {
         boolean _and = false;
-        boolean _equals = Objects.equal(this.owner, ((EStructuralFeatureTreeElement)obj).owner);
+        boolean _equals = Objects.equal(this.uri, ((EStructuralFeatureTreeElement)obj).uri);
         if (!_equals) {
           _and = false;
         } else {
@@ -96,7 +106,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   }
   
   public int hashCode() {
-    int _hashCode = this.owner.hashCode();
+    int _hashCode = this.uri.hashCode();
     int _hashCode_1 = this.feature.hashCode();
     return (_hashCode * _hashCode_1);
   }
@@ -104,10 +114,6 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   @Pure
   public EObject getOwner() {
     return this.owner;
-  }
-  
-  public void setOwner(final EObject owner) {
-    this.owner = owner;
   }
   
   @Pure

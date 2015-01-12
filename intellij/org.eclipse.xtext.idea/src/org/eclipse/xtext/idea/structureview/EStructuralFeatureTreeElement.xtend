@@ -7,16 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.structureview
 
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend.lib.annotations.Accessors
 
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
+	
+	URI uri
 
 	@Accessors
 	EObject owner
@@ -25,7 +29,12 @@ class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
 	EStructuralFeature feature
 	
 	override getValue() {
-		owner -> feature
+		uri -> feature
+	}
+	
+	def void setOwner(EObject owner) {
+		this.owner = owner
+		this.uri = owner.URI
 	}
 
 	override protected getInternalNavigationElement() {
@@ -40,14 +49,14 @@ class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElement {
 		if (this === obj) {
 			true
 		} else if (obj instanceof EStructuralFeatureTreeElement) {
-			owner == obj.owner && feature == obj.feature
+			uri == obj.uri && feature == obj.feature
 		} else {
 			false
 		}
 	}
 
 	override hashCode() {
-		owner.hashCode * feature.hashCode
+		uri.hashCode * feature.hashCode
 	}
 
 }
