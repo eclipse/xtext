@@ -5,4 +5,4 @@ Bundle-SymbolicName: xbase.tutorial
 Bundle-Version: 2.8.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.8.0"
+Require-Bundle: org.eclipse.xtext.xbase.lib
