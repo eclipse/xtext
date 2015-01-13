@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: bootstrap
-Require-Bundle: org.eclipse.xtext.xdoc.generator;bundle-version="0.1.0",
- org.eclipse.xtext.xbase.lib;bundle-version="2.6.0",
- org.eclipse.xtend.lib;bundle-version="2.6.0"
+Require-Bundle: org.eclipse.xtext.xdoc.generator,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15"

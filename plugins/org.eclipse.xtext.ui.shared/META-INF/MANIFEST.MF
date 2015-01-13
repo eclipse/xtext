@@ -6,11 +6,11 @@ Bundle-Version: 2.8.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: org.eclipse.xtext.ui.shared.internal.Activator
 Bundle-Vendor: Eclipse Modeling Project
-Require-Bundle: org.eclipse.xtext.ui;bundle-version="2.8.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.builder;bundle-version="2.8.0";resolution:=optional;x-installation:=greedy,
+Require-Bundle: org.eclipse.xtext.ui;resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.builder;resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.ui;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.common.types.ui;bundle-version="2.8.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.xtext.common.types.ui;resolution:=optional;x-installation:=greedy,
  org.eclipse.ui.ide;resolution:=optional;x-installation:=greedy,
  org.eclipse.core.expressions
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
