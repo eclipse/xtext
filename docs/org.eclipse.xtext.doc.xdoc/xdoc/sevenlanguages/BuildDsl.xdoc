@@ -211,10 +211,10 @@ description.
 
 We ship some predefined extension classes to enhance the Java classes codeRef[java.io.File]
 and codeRef[java.lang.Class]. These are always put onto the extension scope by a customized 
-codeRef[org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes]:
+codeRef[org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedFeatures]:
 
 code[Xtend][
-class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedFeatures {
+class BuildDSLImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
 	/**
 	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
 	 */

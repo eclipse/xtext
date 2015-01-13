@@ -12,7 +12,7 @@ Workflow {
 		modelPath = modelPath
 		targetDir = targetDir
 		document = "Xtend User Guide"
-		pdfLatex = "/usr/texbin/pdflatex"
+		pdfLatex = "/opt/local/bin/pdflatex"
 		release = true
 	}
 

@@ -48,7 +48,7 @@ public class Documentation extends AbstractXtendWebsite {
   }
   
   public String getXdocDocumentRootFolder() {
-    return "../plugins/org.eclipse.xtend.doc.xdoc/xdoc";
+    return "../docs/org.eclipse.xtend.doc.xdoc/xdoc";
   }
   
   public String path() {

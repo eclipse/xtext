@@ -31,7 +31,7 @@ class Documentation extends AbstractXtendWebsite {
 	}
 	
 	def getXdocDocumentRootFolder() {
-		'../plugins/org.eclipse.xtend.doc.xdoc/xdoc'
+		'../docs/org.eclipse.xtend.doc.xdoc/xdoc'
 	}
 
 	override path() {

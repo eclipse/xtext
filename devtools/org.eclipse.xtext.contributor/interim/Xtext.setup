@@ -643,9 +643,6 @@
       <targlet
           name="Xtext Xdoc">
         <requirement
-            name="org.xtext.sevenlanguages.doc.xdoc"
-            optional="true"/>
-        <requirement
             name="xtend.website.generator"/>
         <requirement
             name="xtext.website.generator"/>
@@ -655,6 +652,8 @@
             name="org.eclipse.xtend.doc.xdoc"/>
         <requirement
             name="org.eclipse.xtend.bootstrapdoc"/>
+        <requirement
+            name="org.eclipse.xtext.xdoc.source"/>
         <sourceLocator
             rootFolder="${git.clone.xtext.location}"/>
         <sourceLocator
