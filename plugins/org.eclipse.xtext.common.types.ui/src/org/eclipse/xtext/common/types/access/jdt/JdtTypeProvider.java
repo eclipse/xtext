@@ -344,13 +344,15 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		IndexManager indexManager = JavaModelManager.getIndexManager();
 		if (indexManager.awaitingJobsCount() > 0) { // still indexing - don't enter a busy wait loop but ask the source folders directly
 			for(IPackageFragmentRoot sourceFolder: sourceFolders) {
-				IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
-				if (packageFragment.exists()) {
-					ICompilationUnit[] units = packageFragment.getCompilationUnits();
-					for(ICompilationUnit unit: units) {
-						IType type = unit.getType(typeName);
-						if (type.exists()) {
-							return type;
+				if (indexManager.awaitingJobsCount() > 0) {
+					IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
+					if (packageFragment.exists()) {
+						ICompilationUnit[] units = packageFragment.getCompilationUnits();
+						for(ICompilationUnit unit: units) {
+							IType type = unit.getType(typeName);
+							if (type.exists()) {
+								return type;
+							}
 						}
 					}
 				}
