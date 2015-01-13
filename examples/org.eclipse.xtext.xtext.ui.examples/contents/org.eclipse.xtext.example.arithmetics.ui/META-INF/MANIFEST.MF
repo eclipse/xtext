@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.xtext.example.arithmetics;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare;bundle-version="3.5.101",
- org.eclipse.xtext.xbase.lib;bundle-version="2.8.0"
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Activator: org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator

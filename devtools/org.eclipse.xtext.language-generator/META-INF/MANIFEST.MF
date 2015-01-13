@@ -5,15 +5,15 @@ Bundle-SymbolicName: org.eclipse.xtext.language-generator;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.xtext.tests;bundle-version="1.0.0",
- org.eclipse.xtext.ui.tests;bundle-version="1.0.0",
- org.eclipse.xtext.example.fowlerdsl;bundle-version="1.0.0",
- org.eclipse.xtext.example.domainmodel;bundle-version="1.0.0",
- org.eclipse.xtext.example.arithmetics;bundle-version="1.0.0",
+Require-Bundle: org.eclipse.xtext.tests,
+ org.eclipse.xtext.ui.tests,
+ org.eclipse.xtext.example.fowlerdsl,
+ org.eclipse.xtext.example.domainmodel,
+ org.eclipse.xtext.example.arithmetics,
  org.eclipse.emf.mwe.core;bundle-version="1.0.0",
  org.eclipse.emf.mwe.utils;bundle-version="1.0.0",
- org.eclipse.xtext.builder.tests;bundle-version="1.0.0",
- org.eclipse.xtext.xtext.ui.tests;bundle-version="1.0.0",
+ org.eclipse.xtext.builder.tests,
+ org.eclipse.xtext.xtext.ui.tests,
  org.eclipse.emf.codegen;bundle-version="2.10.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.11.0",
  com.google.guava;bundle-version="[10.0.1,19.0.0)",
