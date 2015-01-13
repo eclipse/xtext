@@ -87,24 +87,25 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 		}
 		List<LightweightTypeReference> setTypeCandidates = computeCollectionTypeCandidates(literal, setType, elementTypeExpectation, state);
 		LightweightTypeReference commonSetType = getCommonSuperType(setTypeCandidates, state);
+		ITypeReferenceOwner owner = state.getReferenceOwner();
 		if(commonSetType != null) {
 			LightweightTypeReference commonElementType = commonSetType.getTypeArguments().get(0).getInvariantBoundSubstitute();
 			if(isMapLiteral(expectedType, commonElementType)) {
-				LightweightTypeReference mapTypeReference = createMapTypeReference(mapType, commonElementType, expectedType);
+				LightweightTypeReference mapTypeReference = createMapTypeReference(mapType, commonElementType, expectedType, owner);
 				expectation.acceptActualType(mapTypeReference, ConformanceFlags.UNCHECKED);
-				commonElementType = createNormalizedPairType(commonElementType, mapTypeReference);
+				commonElementType = createNormalizedPairType(commonElementType, mapTypeReference, owner);
 				refineElementTypeExpectation(literal, commonElementType, state);
 			} else {
-				commonElementType = normalizeElementType(commonElementType, expectedType);
+				commonElementType = normalizeElementType(commonElementType, expectedType, owner);
 				if (expectedType != null) {
-					commonSetType = createCollectionTypeReference(setType, commonElementType, expectedType);
+					commonSetType = createCollectionTypeReference(setType, commonElementType, expectedType, owner);
 				}
 				expectation.acceptActualType(commonSetType, ConformanceFlags.UNCHECKED);
 				refineElementTypeExpectation(literal, commonElementType, state);
 			}
 		} else {
 			if(expectedType != null && (expectedType.isType(Map.class) || expectedType.isResolved() && expectedType.isSubtypeOf(Map.class))) {
-				ParameterizedTypeReference unboundCollectionType = state.getReferenceOwner().newParameterizedTypeReference(mapType);
+				ParameterizedTypeReference unboundCollectionType = owner.newParameterizedTypeReference(mapType);
 				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(0)));
 				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(1)));
 				expectation.acceptActualType(unboundCollectionType, ConformanceFlags.UNCHECKED);
@@ -154,9 +155,10 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 		LightweightTypeReference commonListType = getCommonSuperType(listTypeCandidates, state);
 		if (commonListType != null) {
 			LightweightTypeReference commonElementType = getElementOrComponentType(commonListType, state);
-			commonElementType = normalizeElementType(commonElementType, expectedType);
+			ITypeReferenceOwner owner = state.getReferenceOwner();
+			commonElementType = normalizeElementType(commonElementType, expectedType, owner);
 			if (expectedType != null) {
-				commonListType = createCollectionTypeReference(listType, commonElementType, expectedType);
+				commonListType = createCollectionTypeReference(listType, commonElementType, expectedType, owner);
 			}
 			expectation.acceptActualType(commonListType, ConformanceFlags.UNCHECKED);
 			refineElementTypeExpectation(literal, commonElementType, state);
@@ -206,17 +208,17 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	 * The map type may be constructed from different pairs, e.g. the pair's type arguments don't need to be as strict
 	 * as the map suggests. The pair's expectation is adjusted accordingly.
 	 */
-	protected LightweightTypeReference createNormalizedPairType(LightweightTypeReference pairType, LightweightTypeReference mapType) {
-		ParameterizedTypeReference result = new ParameterizedTypeReference(pairType.getOwner(), pairType.getType());
+	protected LightweightTypeReference createNormalizedPairType(LightweightTypeReference pairType, LightweightTypeReference mapType, ITypeReferenceOwner owner) {
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, pairType.getType());
 		LightweightTypeReference keyType = mapType.getTypeArguments().get(0);
 		if (keyType.getKind() != LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE) {
-			WildcardTypeReference wc = new WildcardTypeReference(pairType.getOwner());
+			WildcardTypeReference wc = new WildcardTypeReference(owner);
 			wc.addUpperBound(keyType);
 			keyType = wc;
 		}
 		LightweightTypeReference valueType = mapType.getTypeArguments().get(1);
 		if (valueType.getKind() != LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE) {
-			WildcardTypeReference wc = new WildcardTypeReference(pairType.getOwner());
+			WildcardTypeReference wc = new WildcardTypeReference(owner);
 			wc.addUpperBound(valueType);
 			valueType = wc;
 		}
@@ -228,11 +230,11 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	/**
 	 * Creates a collection type reference that comes as close as possible / necesary to its expected type.
 	 */
-	protected LightweightTypeReference createCollectionTypeReference(JvmGenericType collectionType, LightweightTypeReference elementType, LightweightTypeReference expectedType) {
-		ParameterizedTypeReference result = new ParameterizedTypeReference(elementType.getOwner(), collectionType);
+	protected LightweightTypeReference createCollectionTypeReference(JvmGenericType collectionType, LightweightTypeReference elementType, LightweightTypeReference expectedType, ITypeReferenceOwner owner) {
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, collectionType);
 		result.addTypeArgument(elementType);
 		if (isIterableExpectation(expectedType) && !expectedType.isAssignableFrom(result)) {
-			LightweightTypeReference expectedElementType = getElementOrComponentType(expectedType, expectedType.getOwner());
+			LightweightTypeReference expectedElementType = getElementOrComponentType(expectedType, owner);
 			if (matchesExpectation(elementType, expectedElementType)) {
 				return expectedType;
 			}
@@ -243,7 +245,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	/**
 	 * Creates a map type reference that comes as close as possible / necessary to its expected type.
 	 */
-	protected LightweightTypeReference createMapTypeReference(JvmGenericType mapType, LightweightTypeReference pairType, LightweightTypeReference expectation) {
+	protected LightweightTypeReference createMapTypeReference(JvmGenericType mapType, LightweightTypeReference pairType, LightweightTypeReference expectation, ITypeReferenceOwner owner) {
 		List<LightweightTypeReference> leftAndRight = pairType.getTypeArguments();
 		
 		LightweightTypeReference left = leftAndRight.get(0).getInvariantBoundSubstitute();
@@ -255,9 +257,9 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 			left = doNormalizeElementType(left, typeArguments.get(0));
 			right = doNormalizeElementType(right, typeArguments.get(1));
 		}
-		ParameterizedTypeReference result = pairType.getOwner().newParameterizedTypeReference(mapType);
-		result.addTypeArgument(left);
-		result.addTypeArgument(right);
+		ParameterizedTypeReference result = owner.newParameterizedTypeReference(mapType);
+		result.addTypeArgument(left.copyInto(owner));
+		result.addTypeArgument(right.copyInto(owner));
 		if (mapExpectation != null && !expectation.isAssignableFrom(result)) {
 			// expectation does not match the computed type, but looks good according to the element types:
 			// use expected type
@@ -296,9 +298,9 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 	 * {@code Collection<CharSequence>} may yield a type {@code List<CharSequence>} for the literal
 	 * {@code ['a']} even though it would be {@code List<? extends String>} if no expectation was given.
 	 */
-	protected LightweightTypeReference normalizeElementType(LightweightTypeReference collectionElementType, LightweightTypeReference expectedCollectionType) {
+	protected LightweightTypeReference normalizeElementType(LightweightTypeReference collectionElementType, LightweightTypeReference expectedCollectionType, ITypeReferenceOwner owner) {
 		if (isIterableExpectation(expectedCollectionType)) {
-			LightweightTypeReference expectedElementType = getElementOrComponentType(expectedCollectionType, collectionElementType.getOwner());
+			LightweightTypeReference expectedElementType = getElementOrComponentType(expectedCollectionType, owner);
 			return doNormalizeElementType(collectionElementType, expectedElementType);
 		}
 		return normalizeFunctionTypeReference(collectionElementType);
