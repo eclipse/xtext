@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.compiler.output.IGeneratorConfigHolder;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
@@ -673,6 +674,13 @@ public abstract class AbstractXbaseCompiler {
 			XFeatureCall featureCall = (XFeatureCall) expr;
 			if (b.hasName(featureCall.getFeature()))
 				return b.getName(featureCall.getFeature());
+		}
+		return null;
+	}
+	
+	protected GeneratorConfig getGeneratorConfig(ITreeAppendable b) {
+		if (b instanceof IGeneratorConfigHolder) {
+			return ((IGeneratorConfigHolder) b).getGeneratorConfig();
 		}
 		return null;
 	}

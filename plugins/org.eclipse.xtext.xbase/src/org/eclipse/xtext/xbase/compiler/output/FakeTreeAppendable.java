@@ -12,14 +12,17 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class FakeTreeAppendable extends StringBuilderBasedAppendable implements ITreeAppendable {
+public class FakeTreeAppendable extends StringBuilderBasedAppendable implements ITreeAppendable, IGeneratorConfigHolder {
 
+	private GeneratorConfig generatorConfig;
+	
 	public FakeTreeAppendable() {
 		super();
 	}
@@ -106,6 +109,15 @@ public class FakeTreeAppendable extends StringBuilderBasedAppendable implements 
 	@Override
 	public ErrorTreeAppendable errorChild() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public GeneratorConfig getGeneratorConfig() {
+		return generatorConfig;
+	}
+	
+	public void setGeneratorConfig(GeneratorConfig config) {
+		this.generatorConfig = config;
 	}
 
 }
