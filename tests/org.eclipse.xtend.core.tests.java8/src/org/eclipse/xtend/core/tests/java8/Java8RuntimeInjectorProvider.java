@@ -5,8 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests;
+package org.eclipse.xtend.core.tests.java8;
 
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
+import org.eclipse.xtend.core.tests.RuntimeTestSetup;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.JavaVersionModule;
 

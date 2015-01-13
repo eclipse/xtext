@@ -1552,7 +1552,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(" ");
 		String variableName = b.declareSyntheticVariable(closure, "_function");
 		b.append(variableName).append(" = ");
-		toAnonymousClass(closure, b, type).append(";");
+		GeneratorConfig config = getGeneratorConfig(b);
+		if (config.getTargetVersion().isAtLeast(JAVA8)) {
+			toLambda(closure, b, type, false);
+		} else {
+			toAnonymousClass(closure, b, type);
+		}
+		b.append(";");
 	}
 
 	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, LightweightTypeReference type) {
@@ -1665,11 +1671,52 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 	
+	protected ITreeAppendable toLambda(XClosure closure, ITreeAppendable b, LightweightTypeReference type,
+			boolean writeExplicitTargetType) {
+		if (writeExplicitTargetType) {
+			b.append("((");
+			b.append(type);
+			b.append(") ");
+		}
+		JvmOperation operation = findImplementingOperation(type);
+		if (operation != null) {
+			b.append("(");
+			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			for (int i = 0; i < closureParams.size(); i++) {
+				JvmFormalParameter closureParam = closureParams.get(i);
+				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
+				b.append(parameterType);
+				b.append(" ");
+				String proposedParamName = makeJavaIdentifier(closureParam.getName());
+				String name = b.declareVariable(closureParam, proposedParamName);
+				b.append(name);
+				if (i != closureParams.size() - 1)
+					b.append(", ");
+			}
+			b.append(") -> {");
+			b.increaseIndentation();
+			reassignThisInClosure(b, type.getType());
+			LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
+			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
+			b.decreaseIndentation();
+			b.newLine().append("}");
+		}
+		if (writeExplicitTargetType) {
+			b.append(")");
+		}
+		return b;
+	}
+	
 	protected void _toJavaExpression(final XClosure closure, final ITreeAppendable b) {
 		if (b.hasName(closure)) {
 			b.trace(closure, false).append(getVarName(closure, b));
 		} else {
-			toAnonymousClass(closure, b.trace(closure, false), getLightweightType(closure));
+			GeneratorConfig config = getGeneratorConfig(b);
+			if (config.getTargetVersion().isAtLeast(JAVA8)) {
+				toLambda(closure, b.trace(closure, false), getLightweightType(closure), true);
+			} else {
+				toAnonymousClass(closure, b.trace(closure, false), getLightweightType(closure));
+			}
 		}
 	}
 	
