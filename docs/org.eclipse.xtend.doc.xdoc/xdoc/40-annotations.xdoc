@@ -240,7 +240,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
     returnType = field.type
     body = \['''
       if («field.simpleName»==null)
-        «field.simpleName» = _initÂ«field.simpleName»();
+        «field.simpleName» = _init«field.simpleName»();
       return «field.simpleName»;
     '''\]
   \]
