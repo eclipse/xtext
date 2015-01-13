@@ -93,9 +93,9 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			}
 		}
 		if (serializeAllTypes)
-			XtendCompilerTest::assertEquals(expected.toString, results.join('\n'))
+			assertEquals(expected.toString, results.join('\n'))
 		else
-			XtendCompilerTest::assertEquals(expected.toString, results.head.toString)
+			assertEquals(expected.toString, results.head.toString)
 		return file
 	}
 	
