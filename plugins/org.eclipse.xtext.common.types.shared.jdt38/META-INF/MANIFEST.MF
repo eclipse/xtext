@@ -4,9 +4,9 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.common.types.shared.jdt38;singleton:=true
 Bundle-Version: 2.8.0.qualifier
 Bundle-Localization: fragment
-Fragment-Host: org.eclipse.xtext.common.types.shared;bundle-version="2.8.0"
+Fragment-Host: org.eclipse.xtext.common.types.shared
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.eclipse.xtext.xbase.ui;bundle-version="2.8.0",
+Require-Bundle: org.eclipse.xtext.xbase.ui,
  org.eclipse.ui.ide;bundle-version="3.8.0";resolution:=optional,
  org.eclipse.jdt.ui;bundle-version="3.8.0";resolution:=optional
 Bundle-Vendor: %providerName

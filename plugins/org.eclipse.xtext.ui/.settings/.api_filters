@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="version will be generated during buckminster build" id="927989779">
+            <message_arguments>
+                <message_argument value="2.8.0"/>
+                <message_argument value="org.eclipse.xtext"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/model/XtextDocument.java" type="org.eclipse.xtext.ui.editor.model.XtextDocument">
         <filter id="338792546">
             <message_arguments>
