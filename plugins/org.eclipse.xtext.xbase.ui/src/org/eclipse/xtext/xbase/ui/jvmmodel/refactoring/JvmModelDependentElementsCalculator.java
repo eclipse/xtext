@@ -46,7 +46,7 @@ public class JvmModelDependentElementsCalculator extends DefaultDependentElement
 		for (EObject dependentElement : dependentElements) {
 			addJvmConstructorURIs(dependentElementURIs, dependentElement);
 			URI elementURI = EcoreUtil.getURI(dependentElement);
-			if (elementURI != null && !dependentElementURIs.contains(elementURI))
+			if (elementURI != null && !elementURI.isRelative() && !dependentElementURIs.contains(elementURI))
 				dependentElementURIs.add(elementURI);
 		}
 	}
