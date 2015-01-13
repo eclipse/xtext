@@ -8,7 +8,9 @@
 package org.eclipse.xtend.core.jvmmodel;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
 
+import java.lang.annotation.Annotation;
 import java.util.Iterator;
 import java.util.List;
 
@@ -70,9 +72,11 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -88,7 +92,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow - Re-Implemented type system and type inference
  */
-public class XtendJvmModelInferrer implements IJvmModelInferrer {
+public class XtendJvmModelInferrer extends AbstractModelInferrer {
 
 	public static final String CREATE_INITIALIZER_PREFIX = "_init_";
 
@@ -135,11 +139,17 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private CompilerPhases compilerPhases;
 	
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
+	
+	private GeneratorConfig generatorConfig;
+	
 	@Override
 	public void infer(/* @Nullable */ EObject object, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
 			return;
 		XtendFile xtendFile = (XtendFile) object;
+		generatorConfig = generatorConfigProvider.get(xtendFile);
 		List<Runnable> doLater = newArrayList();
 		for (final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
 			inferTypeSceleton(declaration, acceptor, preIndexingPhase, xtendFile, doLater, null);
@@ -338,6 +348,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			inferredJvmType.setFinal(source.isFinal());
 		}
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+		addSuppressWarnings(source, inferredJvmType);
 		JvmTypeReference extendsClause = source.getExtends();
 		if (extendsClause == null || extendsClause.getType() == null) {
 			JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
@@ -371,6 +382,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setAbstract(true);
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+		addSuppressWarnings(source, inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
 		}
@@ -389,11 +401,22 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+		addSuppressWarnings(source, inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendEnumLiteral) 
 				transform((XtendEnumLiteral) member, inferredJvmType);
 		}
 		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
+	}
+
+	protected void addSuppressWarnings(XtendTypeDeclaration source, JvmDeclaredType inferredJvmType) {
+		if (source.getDeclaringType() == null && generatorConfig.isGenerateSyntheticSuppressWarnings()
+				&& !containsAnnotation(inferredJvmType, SuppressWarnings.class)
+				&& typeReferences.findDeclaredType(SuppressWarnings.class, source) != null) {
+			JvmAnnotationReference annotationRef = _annotationTypesBuilder.annotationRef(SuppressWarnings.class, "all");
+			typeExtensions.setSynthetic(annotationRef, true);
+			inferredJvmType.getAnnotations().add(annotationRef);
+		}
 	}
 	
 	protected boolean isTopLevel(XtendTypeDeclaration declaration) {
@@ -569,12 +592,26 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			operation.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
 		translateAnnotationsTo(source.getAnnotations(), operation);
+		if (source.isOverride() && generatorConfig.getTargetVersion().isAtLeast(JAVA6)
+				&& !containsAnnotation(operation, Override.class)
+				&& typeReferences.findDeclaredType(Override.class, source) != null) {
+			operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(Override.class));
+		}
 		if (createExtensionInfo != null) {
 			transformCreateExtension(source, createExtensionInfo, container, operation, returnType);
 		} else {
 			setBody(operation, expression);
 		}
 		jvmTypesBuilder.copyDocumentationTo(source, operation);
+	}
+	
+	private boolean containsAnnotation(JvmAnnotationTarget annotationTarget, Class<? extends Annotation> annotationClass) {
+		for (JvmAnnotationReference annotationRef : annotationTarget.getAnnotations()) {
+			if (annotationClass.getName().equals(annotationRef.getAnnotation().getIdentifier())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected void setBody(JvmExecutable executable, XExpression expression) {
@@ -640,7 +677,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		associator.associate(parameter, jvmParam);
 		translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
 		if (parameter.isExtension() && typeReferences.findDeclaredType(Extension.class, parameter) != null) {
-			jvmParam.getAnnotations().add(jvmTypesBuilder.toAnnotation(parameter, Extension.class));
+			jvmParam.getAnnotations().add(_annotationTypesBuilder.annotationRef(Extension.class));
 		}
 		executable.getParameters().add(jvmParam);
 	}
@@ -689,7 +726,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					field.getAnnotations().add(annotationReference);
 			}
 			if (source.isExtension() && typeReferences.findDeclaredType(Extension.class, source) != null) {
-				field.getAnnotations().add(jvmTypesBuilder.toAnnotation(source, Extension.class));
+				field.getAnnotations().add(_annotationTypesBuilder.annotationRef(Extension.class));
 			}
 			jvmTypesBuilder.copyDocumentationTo(source, field);
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
