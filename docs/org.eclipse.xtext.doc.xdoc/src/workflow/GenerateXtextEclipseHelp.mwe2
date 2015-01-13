@@ -2,7 +2,7 @@ module org.eclipse.xtext.doc.xdoc.GenerateEclipseHelp
 
 import org.eclipse.emf.mwe.utils.*
 
-var targetDir = "../../plugins/org.eclipse.xtext.doc/contents"
+var targetDir = "../org.eclipse.xtext.doc/contents"
 var modelPath = "xdoc"
 
 Workflow {
@@ -19,7 +19,7 @@ Workflow {
 		loadResource = {
 			slot = "model"
 			uri = ".*\\.xdoc$"
-			uri = ".*\\.xtend$"
+			uri = "^file:/.*\\.xtend$"
 		}
 	}
 

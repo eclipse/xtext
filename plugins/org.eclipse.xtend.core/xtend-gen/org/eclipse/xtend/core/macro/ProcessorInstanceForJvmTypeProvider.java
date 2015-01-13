@@ -87,7 +87,7 @@ public class ProcessorInstanceForJvmTypeProvider {
         }
       }
     }
-    ProcessorInstanceForJvmTypeProvider.logger.info("No class loader configured. Trying with this class\' classloader.");
+    ProcessorInstanceForJvmTypeProvider.logger.info("No class loader configured. Trying with this class classloader.");
     Class<? extends ProcessorInstanceForJvmTypeProvider> _class = this.getClass();
     return _class.getClassLoader();
   }
