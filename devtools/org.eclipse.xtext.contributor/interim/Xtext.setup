@@ -260,8 +260,6 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
       <repositoryList
           name="Luna">
@@ -277,8 +275,6 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
       <repositoryList
           name="Kepler">
@@ -292,8 +288,6 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
       <repositoryList
           name="Juno">
@@ -307,8 +301,6 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
       <repositoryList
           name="Indigo">
@@ -322,8 +314,6 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
       <repositoryList
           name="Helios">
@@ -337,8 +327,6 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
@@ -661,7 +649,7 @@
         <repositoryList
             name="External">
           <repository
-              url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/site/"/>
+              url="https://xtext-builds.itemis.de/jenkins/job/xdoc/lastSuccessfulBuild/artifact/repository/"/>
           <repository
               url="https://dhuebner.ci.cloudbees.com/job/seven-languages-xtext/job/Seven-Languages/lastSuccessfulBuild/artifact/p2.repository/"/>
         </repositoryList>
