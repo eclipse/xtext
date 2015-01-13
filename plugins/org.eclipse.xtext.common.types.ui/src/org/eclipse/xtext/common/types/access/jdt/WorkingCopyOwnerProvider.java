@@ -27,7 +27,7 @@ import org.eclipse.xtext.util.Strings;
 import com.google.inject.Inject;
 
 /**
- * Creates a working copy owner for a given javaProject and resourceset, 
+ * Creates a working copy owner for a given javaProject and resource set, 
  * which produces stubs for any inferred Java types which are in the index and on the project's classpath.
  * 
  * This allows for resolving Java elements against non existing (i.e. yet to be generated) Java types. 
