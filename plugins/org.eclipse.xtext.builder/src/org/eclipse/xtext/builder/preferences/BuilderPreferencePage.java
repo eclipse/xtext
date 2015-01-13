@@ -12,15 +12,12 @@ import java.util.Map;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jface.preference.IPreferencePageContainer;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.builder.DerivedResourceCleanerJob;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.ui.editor.preferences.PreferenceStoreAccessImpl;
-import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.preferences.PropertyAndPreferencePage;
 
 import com.google.common.collect.MapDifference.ValueDifference;
@@ -33,10 +30,11 @@ import com.google.inject.name.Named;
  * @since 2.1
  */
 public class BuilderPreferencePage extends PropertyAndPreferencePage {
-	private OptionsConfigurationBlock builderConfigurationBlock;
-	private EclipseOutputConfigurationProvider configurationProvider;
+	
+	@Inject
+	private BuilderConfigurationBlock builderConfigurationBlock;
+	
 	private String languageName;
-	private PreferenceStoreAccessImpl preferenceStoreAccessImpl;
 	private Provider<DerivedResourceCleanerJob> cleanerProvider;
 
 	@Inject
@@ -49,22 +47,11 @@ public class BuilderPreferencePage extends PropertyAndPreferencePage {
 		this.languageName = languageName;
 	}
 
-	@Inject
-	public void setConfigurationProvider(EclipseOutputConfigurationProvider configurationProvider) {
-		this.configurationProvider = configurationProvider;
-	}
-
-	@Inject
-	public void setPreferenceStoreAccessImpl(PreferenceStoreAccessImpl preferenceStoreAccessImpl) {
-		this.preferenceStoreAccessImpl = preferenceStoreAccessImpl;
-	}
-	
 	@Override
 	public void createControl(Composite parent) {
 		IWorkbenchPreferenceContainer container = (IWorkbenchPreferenceContainer) getContainer();
-		IPreferenceStore preferenceStore = preferenceStoreAccessImpl.getWritablePreferenceStore(getProject());
-		builderConfigurationBlock = new BuilderConfigurationBlock(getProject(), preferenceStore, configurationProvider,
-				container);
+		builderConfigurationBlock.setProject(getProject());
+		builderConfigurationBlock.setWorkbenchPreferenceContainer(container);
 		builderConfigurationBlock.setStatusChangeListener(getNewStatusChangedListener());
 		super.createControl(parent);
 	}
