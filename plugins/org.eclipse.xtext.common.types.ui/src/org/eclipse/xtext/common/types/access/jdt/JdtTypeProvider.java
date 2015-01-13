@@ -212,11 +212,15 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private boolean canLink(JvmType type) {
 		Resource resource = type.eResource();
 		if (resource instanceof TypeResource) {
-			JdtTypeMirror mirror = (JdtTypeMirror) ((TypeResource) resource).getMirror();
-			try {
-				return canLink(mirror.getMirroredType());
-			} catch (JavaModelException e) {
-				return false;
+			IMirror mirror = ((TypeResource) resource).getMirror();
+			if (mirror instanceof JdtTypeMirror) {
+				try {
+					return canLink(((JdtTypeMirror) mirror).getMirroredType());
+				} catch (JavaModelException e) {
+					return false;
+				}
+			} else {
+				return true;
 			}
 		}
 		URI resourceURI = resource.getURI();
