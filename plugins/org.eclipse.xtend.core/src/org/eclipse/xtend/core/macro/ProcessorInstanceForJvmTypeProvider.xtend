@@ -49,7 +49,7 @@ class ProcessorInstanceForJvmTypeProvider {
 				}
 			}
 		}
-		logger.info("No class loader configured. Trying with this class' classloader.")
+		logger.info("No class loader configured. Trying with this class classloader.")
 		return class.classLoader
 	}
 }
