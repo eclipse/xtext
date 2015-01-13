@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
@@ -1547,55 +1548,62 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
 		LightweightTypeReference type = getLightweightType(closure);
-		b.newLine().append("final ");
-		b.append(type);
-		b.append(" ");
-		String variableName = b.declareSyntheticVariable(closure, "_function");
-		b.append(variableName).append(" = ");
-		toAnonymousClass(closure, b, type).append(";");
+		JvmOperation operation = findImplementingOperation(type);
+		if (operation != null) {
+			b.newLine().append("final ");
+			b.append(type);
+			b.append(" ");
+			String variableName = b.declareSyntheticVariable(closure, "_function");
+			b.append(variableName).append(" = ");
+			GeneratorConfig config = getGeneratorConfig(b);
+			if (config != null && config.getTargetVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
+				toLambda(closure, b, type, operation, false);
+			} else {
+				toAnonymousClass(closure, b, type, operation);
+			}
+			b.append(";");
+		}
 	}
 
-	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, LightweightTypeReference type) {
+	protected ITreeAppendable toAnonymousClass(final XClosure closure, final ITreeAppendable b, LightweightTypeReference type,
+			JvmOperation operation) {
 		b.append("new ");
 		b.append(type);
 		b.append("() {");
 		b.increaseIndentation();
 		try {
 			b.openScope();
-			JvmOperation operation = findImplementingOperation(type);
-			if (operation != null) {
-				final LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
-				appendOperationVisibility(b, operation);
-				if (!operation.getTypeParameters().isEmpty()) {
-					appendTypeParameters(b, operation, type);
-				}
-				b.append(returnType);
-				b.append(" ").append(operation.getSimpleName());
-				b.append("(");
-				List<JvmFormalParameter> closureParams = closure.getFormalParameters();
-				for (int i = 0; i < closureParams.size(); i++) {
-					JvmFormalParameter closureParam = closureParams.get(i);
-					LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-					appendClosureParameter(closureParam, parameterType, b);
-					if (i != closureParams.size() - 1)
+			final LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
+			appendOperationVisibility(b, operation);
+			if (!operation.getTypeParameters().isEmpty()) {
+				appendTypeParameters(b, operation, type);
+			}
+			b.append(returnType);
+			b.append(" ").append(operation.getSimpleName());
+			b.append("(");
+			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			for (int i = 0; i < closureParams.size(); i++) {
+				JvmFormalParameter closureParam = closureParams.get(i);
+				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
+				appendClosureParameter(closureParam, parameterType, b);
+				if (i != closureParams.size() - 1)
+					b.append(", ");
+			}
+			b.append(")");
+			if(!operation.getExceptions().isEmpty()) {
+				b.append(" throws ");
+				for (int i = 0; i < operation.getExceptions().size(); ++i) {
+					serialize(operation.getExceptions().get(i), closure, b, false, false, false, false);
+					if(i != operation.getExceptions().size() -1)
 						b.append(", ");
 				}
-				b.append(")");
-				if(!operation.getExceptions().isEmpty()) {
-					b.append(" throws ");
-					for (int i = 0; i < operation.getExceptions().size(); ++i) {
-						serialize(operation.getExceptions().get(i), closure, b, false, false, false, false);
-						if(i != operation.getExceptions().size() -1)
-							b.append(", ");
-					}
-				}
-				b.append(" {");
-				b.increaseIndentation();
-				reassignThisInClosure(b, type.getType());
-				compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
-				b.decreaseIndentation();
-				b.newLine().append("}");
 			}
+			b.append(" {");
+			b.increaseIndentation();
+			reassignThisInClosure(b, type.getType());
+			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
+			b.decreaseIndentation();
+			b.newLine().append("}");
 		} finally {
 			b.closeScope();
 		}
@@ -1665,12 +1673,77 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType);
 	}
 	
+	protected ITreeAppendable toLambda(XClosure closure, ITreeAppendable b, LightweightTypeReference type,
+			JvmOperation operation, boolean writeExplicitTargetType) {
+		if (writeExplicitTargetType) {
+			b.append("((");
+			b.append(type);
+			b.append(") ");
+		}
+		try {
+			b.openPseudoScope();
+			b.append("(");
+			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+			for (int i = 0; i < closureParams.size(); i++) {
+				JvmFormalParameter closureParam = closureParams.get(i);
+				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
+				b.append(parameterType);
+				b.append(" ");
+				String proposedParamName = makeJavaIdentifier(closureParam.getName());
+				String name = b.declareVariable(closureParam, proposedParamName);
+				b.append(name);
+				if (i != closureParams.size() - 1)
+					b.append(", ");
+			}
+			b.append(") -> {");
+			b.increaseIndentation();
+			LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
+			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
+			b.decreaseIndentation();
+			b.newLine().append("}");
+		} finally {
+			b.closeScope();
+		}
+		if (writeExplicitTargetType) {
+			b.append(")");
+		}
+		return b;
+	}
+	
 	protected void _toJavaExpression(final XClosure closure, final ITreeAppendable b) {
 		if (b.hasName(closure)) {
 			b.trace(closure, false).append(getVarName(closure, b));
 		} else {
-			toAnonymousClass(closure, b.trace(closure, false), getLightweightType(closure));
+			LightweightTypeReference type = getLightweightType(closure);
+			JvmOperation operation = findImplementingOperation(type);
+			if (operation != null) {
+				GeneratorConfig config = getGeneratorConfig(b);
+				if (config != null && config.getTargetVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
+					toLambda(closure, b.trace(closure, false), type, operation, true);
+				} else {
+					toAnonymousClass(closure, b.trace(closure, false), type, operation);
+				}
+			}
 		}
+	}
+	
+	protected boolean canCompileToJavaLambda(XClosure closure, LightweightTypeReference type, JvmOperation operation) {
+		if (!type.isInterfaceType())
+			return false;
+		
+		if (!operation.getTypeParameters().isEmpty())
+			return false;
+		
+		TreeIterator<EObject> iterator = closure.eAllContents();
+		while (iterator.hasNext()) {
+			EObject obj = iterator.next();
+			if (obj instanceof XClosure) {
+				iterator.prune();
+			} else if (obj instanceof XFeatureCall && isReferenceToSelf((XFeatureCall) obj)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
