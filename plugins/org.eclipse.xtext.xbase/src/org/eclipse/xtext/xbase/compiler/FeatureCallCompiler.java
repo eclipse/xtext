@@ -807,6 +807,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected boolean isMemberCall(XAbstractFeatureCall call) {
 		return !call.isStatic();
 	}
+	
+	protected boolean isReferenceToSelf(XFeatureCall featureCall) {
+		return !featureCall.isTypeLiteral() && !featureCall.isPackageFragment() && !featureCall.isExplicitOperationCall()
+				&& "self".equals(featureCall.getConcreteSyntaxFeatureName());
+	}
 
 	protected void assignmentToJavaExpression(XAssignment expr, ITreeAppendable b, boolean isExpressionContext) {
 		final JvmIdentifiableElement feature = expr.getFeature();
