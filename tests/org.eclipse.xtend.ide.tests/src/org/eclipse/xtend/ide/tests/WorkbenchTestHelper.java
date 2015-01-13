@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.jar.Manifest;
 
@@ -59,6 +60,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.junit.Assert;
 
@@ -245,14 +247,38 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static IProject createPluginProject(String name) throws CoreException {
-		return createPluginProject(name, DEFAULT_REQ_BUNDLES.toArray(new String[] {}));
+		return createPluginProject(name, DEFAULT_REQ_BUNDLES.toArray(new String[DEFAULT_REQ_BUNDLES.size()]));
+	}
+	
+	public static IProject createPluginProject(String name, JavaVersion javaVersion) throws CoreException {
+		return createPluginProject(name, javaVersion, DEFAULT_REQ_BUNDLES.toArray(new String[DEFAULT_REQ_BUNDLES.size()]));
 	}
 
 	public static IProject createPluginProject(String name, String... requiredBundles) throws CoreException {
+		return createPluginProject(name, null, requiredBundles);
+	}
+	
+	public static IProject createPluginProject(String name, JavaVersion javaVersion, String... requiredBundles) throws CoreException {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
-		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
+		if (javaVersion == null) {
+			projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
+		} else {
+			switch (javaVersion) {
+				case JAVA8:
+					projectFactory.setBreeToUse("JavaSE-1.8");
+					break;
+				case JAVA7:
+					projectFactory.setBreeToUse("JavaSE-1.7");
+					break;
+				case JAVA6:
+					projectFactory.setBreeToUse("JavaSE-1.6");
+					break;
+				default:
+					projectFactory.setBreeToUse("J2SE-1.5");
+			}
+		}
 		projectFactory.addFolders(Collections.singletonList("src"));
 		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID, JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
 				"org.eclipse.pde.SchemaBuilder");
@@ -261,9 +287,42 @@ public class WorkbenchTestHelper extends Assert {
 		projectFactory.addRequiredBundles(newArrayList(requiredBundles));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		IJavaProject javaProject = JavaCore.create(result);
-		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
+		if (javaVersion == null)
+			JavaProjectSetupUtil.makeJava5Compliant(javaProject);
+		else
+			makeCompliantFor(javaProject, javaVersion);
 		JavaProjectSetupUtil.addJreClasspathEntry(javaProject);
 		return result;
+	}
+	
+	public static void makeCompliantFor(IJavaProject javaProject, JavaVersion javaVersion) {
+		@SuppressWarnings("unchecked")
+		Map<String, String> options= javaProject.getOptions(false);
+		String jreLevel;
+		switch (javaVersion) {
+			case JAVA8:
+				jreLevel = "1.8";
+				break;
+			case JAVA7:
+				jreLevel = "1.7";
+				break;
+			case JAVA6:
+				jreLevel = "1.6";
+				break;
+			default:
+				jreLevel = JavaCore.VERSION_1_5;
+		}
+		options.put(JavaCore.COMPILER_COMPLIANCE, jreLevel);
+		options.put(JavaCore.COMPILER_SOURCE, jreLevel);
+		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, jreLevel);
+		options.put(JavaCore.COMPILER_PB_ASSERT_IDENTIFIER, JavaCore.ERROR);
+		options.put(JavaCore.COMPILER_PB_ENUM_IDENTIFIER, JavaCore.ERROR);
+		options.put(JavaCore.COMPILER_CODEGEN_INLINE_JSR_BYTECODE, JavaCore.ENABLED);
+		options.put(JavaCore.COMPILER_LOCAL_VARIABLE_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_LINE_NUMBER_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_SOURCE_FILE_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_CODEGEN_UNUSED_LOCAL, JavaCore.PRESERVE);
+		javaProject.setOptions(options);
 	}
 	
 	public static void addExportedPackages(IProject project, String ... exportedPackages) throws Exception{

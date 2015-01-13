@@ -14,6 +14,7 @@ import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
@@ -103,6 +104,8 @@ import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -211,6 +214,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private AnnotationLookup annotationLookup;
 	
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
+	
 	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
 	protected final Multimap<Class<?>, ElementType> targetInfos;
 	
@@ -231,6 +237,22 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		List<EPackage> ePackages = newArrayList(super.getEPackages());
 		ePackages.add(XtendPackage.eINSTANCE);
 		return ePackages;
+	}
+	
+	protected GeneratorConfig getGeneratorConfig(EObject element) {
+		GeneratorConfig result = (GeneratorConfig) getContext().get(GeneratorConfig.class);
+		if (result == null) {
+			result = generatorConfigProvider.get(element);
+			getContext().put(GeneratorConfig.class, result);
+			if (result.getTargetVersion().isAtLeast(JAVA8)) {
+				methodInInterfaceModifierValidator = new ModifierValidator(
+						newArrayList("public", "abstract", "static", "def", "override"), this);
+			} else {
+				methodInInterfaceModifierValidator = new ModifierValidator(
+						newArrayList("public", "abstract", "def", "override"), this);
+			}
+		}
+		return result;
 	}
 
 	protected boolean hasAnnotation(XtendAnnotationTarget source, Class<?> class1) {
@@ -787,16 +809,25 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
 							EObject source = findPrimarySourceElement(localOperation);
 							if (flaggedOperations.add(source)) {
-								error("Name clash: The method "
-										+ localOperation.getSimpleSignature() + " of type "
-										+ inferredType.getSimpleName()
-										+ " has the same erasure as "
-										+
-										// use source with other operations parameters to avoid confusion
-										// due to name transformations in JVM model inference
-										operation.getSimpleSignature() + " of type "
-										+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
-										source, nameFeature(source), DUPLICATE_METHOD);
+								if (operation.getDeclaration().isStatic() && !localOperation.getDeclaration().isStatic()) {
+									error("The instance method "
+											+ localOperation.getSimpleSignature()
+											+ " cannot override the static method "
+											+ operation.getSimpleSignature() + " of type "
+											+ getDeclaratorName(operation.getDeclaration()) + ".",
+											source, nameFeature(source), DUPLICATE_METHOD);
+								} else {
+									error("Name clash: The method "
+											+ localOperation.getSimpleSignature() + " of type "
+											+ inferredType.getSimpleName()
+											+ " has the same erasure as "
+											+
+											// use source with other operations parameters to avoid confusion
+											// due to name transformations in JVM model inference
+											operation.getSimpleSignature() + " of type "
+											+ getDeclaratorName(operation.getDeclaration()) + " but does not override it.",
+											source, nameFeature(source), DUPLICATE_METHOD);
+								}
 							}
 						}
 					}
@@ -1130,7 +1161,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		} else if(function.getDeclaringType() instanceof XtendInterface) {
-			error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
+			if (!(getGeneratorConfig(function).getTargetVersion().isAtLeast(JAVA8) && function.isStatic())) {
+				error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
+			}
 		}
 	}
 	
@@ -1730,45 +1763,44 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return false;
 	}
 	
-	private ModifierValidator classModifierValidator = new ModifierValidator(
+	private final ModifierValidator classModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "final", "abstract", "strictfp"), this);
 	
-	private ModifierValidator interfaceModifierValidator = new ModifierValidator(
+	private final ModifierValidator interfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "abstract", "strictfp"), this);
 		
-	private ModifierValidator enumModifierValidator = new ModifierValidator(
+	private final ModifierValidator enumModifierValidator = new ModifierValidator(
 			newArrayList("public", "package"), this);
 	
-	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
+	private final ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "abstract"), this);
 	
-	private ModifierValidator nestedClassModifierValidator = new ModifierValidator(
+	private final ModifierValidator nestedClassModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "protected", "private", "static", "final", "abstract", "strictfp"), this);
 	
-	private ModifierValidator nestedInterfaceModifierValidator = new ModifierValidator(
+	private final ModifierValidator nestedInterfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "protected", "private", "static", "abstract", "strictfp"), this);
 		
-	private ModifierValidator nestedEnumModifierValidator = new ModifierValidator(
+	private final ModifierValidator nestedEnumModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "protected", "private", "static"), this);
 	
-	private ModifierValidator nestedAnnotationTypeModifierValidator = new ModifierValidator(
+	private final ModifierValidator nestedAnnotationTypeModifierValidator = new ModifierValidator(
 			newArrayList("public", "package", "protected", "private", "static", "abstract"), this);
 		
-	private ModifierValidator fieldModifierValidator = new ModifierValidator(
+	private final ModifierValidator fieldModifierValidator = new ModifierValidator(
 			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension", "volatile", "transient"), this);
 		
-	private ModifierValidator fieldInInterfaceModifierValidator = new ModifierValidator(
+	private final ModifierValidator fieldInInterfaceModifierValidator = new ModifierValidator(
 			newArrayList("public", "static", "final", "val"), this);
 		
-	private ModifierValidator constructorModifierValidator = new ModifierValidator(
+	private final ModifierValidator constructorModifierValidator = new ModifierValidator(
 			newArrayList(visibilityModifers), this);
 		
-	private ModifierValidator methodModifierValidator = new ModifierValidator(
+	private final ModifierValidator methodModifierValidator = new ModifierValidator(
 			newArrayList("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override", "strictfp", "native", "synchronized"), this);
-		
-	private ModifierValidator methodInInterfaceModifierValidator = new ModifierValidator(
-			newArrayList("public", "abstract", "def", "override"), this);
-		
+
+	private ModifierValidator methodInInterfaceModifierValidator;
+	
 	@Check
 	protected void checkModifiers(XtendClass xtendClass) {
 		EObject eContainer = xtendClass.eContainer();
@@ -1847,13 +1879,15 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if (abstractIndex != -1) {
 					error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
 				} else if (method.isNative()) 
-					error("NAtive methods do not specify a body", XTEND_FUNCTION__NAME, -1, INVALID_MODIFIER);
+					error("Native methods do not specify a body", XTEND_FUNCTION__NAME, -1, INVALID_MODIFIER);
 			} else {
 				int finalIndex = method.getModifiers().indexOf("final");
 				if(finalIndex != -1) 
 					error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);
 			}
-		} else if(method.getDeclaringType() instanceof XtendInterface) {
+		} else if (method.getDeclaringType() instanceof XtendInterface) {
+			// The validator for interface methods is created lazily when the generator configuration is loaded
+			getGeneratorConfig(method);
 			methodInInterfaceModifierValidator.checkModifiers(method, "method " + method.getName());			
 		}
 	}
