@@ -368,10 +368,8 @@ public class QuickfixTestBuilder {
   }
   
   public void tearDown() {
-    boolean _notEquals = (!Objects.equal(this.editor, null));
-    if (_notEquals) {
-      this._workbenchTestHelper.closeEditor(this.editor, false);
-    }
+    this.editor = null;
+    this._workbenchTestHelper.closeAllEditors(false);
     Set<IFile> _files = this._workbenchTestHelper.getFiles();
     final Procedure1<IFile> _function = new Procedure1<IFile>() {
       public void apply(final IFile it) {
@@ -386,8 +384,8 @@ public class QuickfixTestBuilder {
     IterableExtensions.<IFile>forEach(_files, _function);
     Set<IFile> _files_1 = this._workbenchTestHelper.getFiles();
     _files_1.clear();
-    boolean _notEquals_1 = (!Objects.equal(this.modifiedIssueCodes, null));
-    if (_notEquals_1) {
+    boolean _notEquals = (!Objects.equal(this.modifiedIssueCodes, null));
+    if (_notEquals) {
       IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
       final Procedure1<IPersistentPreferenceStore> _function_1 = new Procedure1<IPersistentPreferenceStore>() {
         public void apply(final IPersistentPreferenceStore it) {
