@@ -81,8 +81,8 @@ public class BoundTypeArgumentMerger {
 		}
 		LightweightTypeReference type = null;
 		VarianceInfo variance = null;
-		if (outTypes.isEmpty()) {
-			outTypes.addAll(constraintOutTypes);
+		if (outTypes.isEmpty() && inTypes.isEmpty()) {
+			outTypes = constraintOutTypes;
 		}
 		if (!invariantTypes.isEmpty()) {
 			type = invariantTypes.get(0);

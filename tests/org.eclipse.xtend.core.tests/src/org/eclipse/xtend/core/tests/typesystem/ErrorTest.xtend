@@ -2015,6 +2015,58 @@ class ErrorTest extends AbstractXtendTestCase {
 		]
 	}
 	
+	@Test
+	def void testErrorModel_139() throws Exception {
+		'''
+			class C {
+				def m() {
+					MyComparator.comparingInt [String s| s.length].thenComparing[]
+				}
+			}
+			static abstract class MyComparator<T> {
+				def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}
+				def <U extends Comparable<? super U>> MyComparator<T> thenComparing(
+					Function<? super T, ? extends U> keyExtractor,
+					MyComparator<? super U> keyComparator)
+				def MyComparator<T> thenComparing(MyComparator<? super T> other)
+				def <U extends Comparable<? super U>> MyComparator<T> thenComparing(
+					Function<? super T, ? extends U> keyExtractor)
+			}
+			interface ToIntFunction<T> {
+				def int apply(T t)
+			}
+			interface Function<T, R> {
+				def R apply(T)
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_140() throws Exception {
+		'''
+			class C {
+				def m() {
+					MyComparator.comparingInt [String s| s.length].thenComparing[]
+				}
+			}
+			static abstract class MyComparator<T> {
+				def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}
+				def <U extends Comparable<? super Iterable<? extends U>>> MyComparator<T> thenComparing(
+					Function<? super T, ? extends U> keyExtractor,
+					MyComparator<? super U> keyComparator)
+				def MyComparator<T> thenComparing(MyComparator<? super T> other)
+				def <U extends Comparable<? super U>> MyComparator<T> thenComparing(
+					Function<? super T, ? extends U> keyExtractor)
+			}
+			interface ToIntFunction<T> {
+				def int apply(T t)
+			}
+			interface Function<T, R> {
+				def R apply(T)
+			}
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
