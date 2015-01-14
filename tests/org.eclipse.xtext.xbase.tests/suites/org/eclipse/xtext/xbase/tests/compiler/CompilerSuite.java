@@ -21,6 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerTest.class,
 	CompilerTests2.class,
 	EvaluationCompilerTest.class,
+	NewLanguageFeaturesCompilerTest.class,
 	ErrorSafeExtensionsTest.class,
 	JvmModelGeneratorTest.class,
 	LoopExtensionsTest.class,
