@@ -268,6 +268,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		List<String> requiredBundles = Lists.newArrayList(getXtextProjectInfo().getProjectName(), getXtextProjectInfo()
 				.getUiProjectName(), "org.eclipse.core.runtime", //$NON-NLS-1$
 				"org.eclipse.xtext.junit4", //$NON-NLS-1$
+				"org.eclipse.xtext.xbase.lib", //$NON-NLS-1$
 				"org.eclipse.ui.workbench;resolution:=optional" //$NON-NLS-1$
 		); //$NON-NLS-1$
 		return requiredBundles;
