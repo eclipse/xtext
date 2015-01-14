@@ -348,7 +348,6 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			inferredJvmType.setFinal(source.isFinal());
 		}
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-		addSuppressWarnings(source, inferredJvmType);
 		JvmTypeReference extendsClause = source.getExtends();
 		if (extendsClause == null || extendsClause.getType() == null) {
 			JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
@@ -382,7 +381,6 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		inferredJvmType.setAbstract(true);
 		inferredJvmType.setStrictFloatingPoint(source.isStrictFloatingPoint());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-		addSuppressWarnings(source, inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
 		}
@@ -401,22 +399,11 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		inferredJvmType.setVisibility(source.getVisibility());
 		inferredJvmType.setStatic(source.isStatic() && !isTopLevel(source));
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
-		addSuppressWarnings(source, inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendEnumLiteral) 
 				transform((XtendEnumLiteral) member, inferredJvmType);
 		}
 		jvmTypesBuilder.copyDocumentationTo(source, inferredJvmType);
-	}
-
-	protected void addSuppressWarnings(XtendTypeDeclaration source, JvmDeclaredType inferredJvmType) {
-		if (source.getDeclaringType() == null && generatorConfig.isGenerateSyntheticSuppressWarnings()
-				&& !containsAnnotation(inferredJvmType, SuppressWarnings.class)
-				&& typeReferences.findDeclaredType(SuppressWarnings.class, source) != null) {
-			JvmAnnotationReference annotationRef = _annotationTypesBuilder.annotationRef(SuppressWarnings.class, "all");
-			typeExtensions.setSynthetic(annotationRef, true);
-			inferredJvmType.getAnnotations().add(annotationRef);
-		}
 	}
 	
 	protected boolean isTopLevel(XtendTypeDeclaration declaration) {

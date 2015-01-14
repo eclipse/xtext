@@ -62,6 +62,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				
 				package foo;
 				
+				@SuppressWarnings("all")
 				public class Bar {
 				}
 				
@@ -76,6 +77,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				
 				package foo;
 				
+				@SuppressWarnings("all")
 				public enum Bar3 {
 				}
 				
@@ -83,6 +85,7 @@ class MutableElementsConditionsTestCase extends AbstractActiveAnnotationTest {
 				
 				package foo;
 				
+				@SuppressWarnings("all")
 				public interface Bar4 {
 				}
 				
