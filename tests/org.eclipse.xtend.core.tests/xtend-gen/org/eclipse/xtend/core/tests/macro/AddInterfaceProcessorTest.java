@@ -36,6 +36,8 @@ public class AddInterfaceProcessorTest extends AbstractActiveAnnotationTest {
     _builder_1.append("package de.test;");
     _builder_1.newLine();
     _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
     _builder_1.append("public interface Test {");
     _builder_1.newLine();
     _builder_1.append("}");

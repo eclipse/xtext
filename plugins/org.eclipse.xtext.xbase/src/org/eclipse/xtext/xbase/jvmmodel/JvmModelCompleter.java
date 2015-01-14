@@ -12,6 +12,8 @@ import static com.google.common.collect.Iterables.*;
 import java.lang.annotation.Annotation;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -25,6 +27,8 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 
 import com.google.inject.Inject;
 
@@ -58,6 +62,12 @@ public class JvmModelCompleter {
 	@Inject
 	private IJvmModelAssociator associator;
 
+	@Inject
+	private JvmAnnotationReferenceBuilder.Factory annotationRefBuilderFactory;
+	
+	@Inject
+	private IGeneratorConfigProvider generatorConfigProvider;
+	
 	public void complete(Iterable<? extends JvmIdentifiableElement> elements) {
 		for (JvmIdentifiableElement element : elements) {
 			complete(element);
@@ -93,6 +103,7 @@ public class JvmModelCompleter {
 			if (objectType != null)
 				element.getSuperTypes().add(objectType);
 		}
+		addSuppressWarnings(element);
 		EObject primarySourceElement = associations.getPrimarySourceElement(element);
 		JvmOperation values = typesFactory.createJvmOperation();
 		values.setVisibility(JvmVisibility.PUBLIC);
@@ -152,6 +163,7 @@ public class JvmModelCompleter {
 	protected void completeJvmGenericType(JvmGenericType element) {
 		// if no super type add Object
 		ensureSuperTypeObject(element);
+		addSuppressWarnings(element);
 		if (!element.isInterface()) {
 			// if no constructors have been added, add a default constructor
 			if (isEmpty(element.getDeclaredConstructors())) {
@@ -175,4 +187,28 @@ public class JvmModelCompleter {
 				element.getSuperTypes().add(objectType);
 		}
 	}
+
+	protected void addSuppressWarnings(JvmDeclaredType jvmType) {
+		if (jvmType.getDeclaringType() == null) {
+			GeneratorConfig generatorConfig = generatorConfigProvider.get(jvmType);
+			if (generatorConfig.isGenerateSyntheticSuppressWarnings()
+					&& !containsAnnotation(jvmType, SuppressWarnings.class)
+					&& references.findDeclaredType(SuppressWarnings.class, jvmType) != null) {
+				JvmAnnotationReferenceBuilder annotationRefBuilder = annotationRefBuilderFactory.create(jvmType.eResource().getResourceSet());
+				JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(SuppressWarnings.class, "all");
+				typeExtensions.setSynthetic(annotationRef, true);
+				jvmType.getAnnotations().add(annotationRef);
+			}
+		}
+	}
+	
+	private boolean containsAnnotation(JvmAnnotationTarget annotationTarget, Class<? extends Annotation> annotationClass) {
+		for (JvmAnnotationReference annotationRef : annotationTarget.getAnnotations()) {
+			if (annotationClass.getName().equals(annotationRef.getAnnotation().getIdentifier())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

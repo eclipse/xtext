@@ -3358,9 +3358,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_2.newLine();
     _builder_2.append("@MarkAsDeprecated");
     _builder_2.newLine();
-    _builder_2.append("@SuppressWarnings(\"all\")");
-    _builder_2.newLine();
     _builder_2.append("@Deprecated");
+    _builder_2.newLine();
+    _builder_2.append("@SuppressWarnings(\"all\")");
     _builder_2.newLine();
     _builder_2.append("public class MyClass {");
     _builder_2.newLine();

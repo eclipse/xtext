@@ -1607,8 +1607,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 				import myannotation.MarkAsDeprecated;
 				
 				@MarkAsDeprecated
-				@SuppressWarnings("all")
 				@Deprecated
+				@SuppressWarnings("all")
 				public class MyClass {
 				}
 			'''
