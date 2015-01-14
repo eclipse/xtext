@@ -150,8 +150,8 @@ class QuickfixTestBuilder {
 	}
 	
 	def tearDown() {
-		if(editor != null)
-			closeEditor(editor, false)
+		editor = null
+		closeAllEditors(false)
 		files.forEach[ delete(true, new NullProgressMonitor) ]
 		files.clear
 		if (modifiedIssueCodes != null) {

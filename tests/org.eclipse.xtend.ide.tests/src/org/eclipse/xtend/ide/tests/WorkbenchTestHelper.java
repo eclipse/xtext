@@ -380,6 +380,10 @@ public class WorkbenchTestHelper extends Assert {
 	public boolean closeEditor(IEditorPart editor, boolean save) {
 		return workbench.getActiveWorkbenchWindow().getActivePage().closeEditor(editor, save);
 	}
+	
+	public boolean closeAllEditors(boolean save) {
+		return workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(save);
+	}
 
 	public boolean saveEditor(IEditorPart editor, boolean confirm) {
 		return workbench.getActiveWorkbenchWindow().getActivePage().saveEditor(editor, confirm);
