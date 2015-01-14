@@ -306,13 +306,13 @@ The throwing code is
 <h2>Literal Classes</h2>
 <p>
 To make the static methods and fields of <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Math.html" title="View JavaDoc"><abbr title="java.lang.Math" >Math</abbr></a> and <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/draw2d/ColorConstants.html" title="View JavaDoc"><abbr title="org.eclipse.draw2d.ColorConstants" >ColorConstants</abbr></a>
-callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes" >TortoiseShellImplicitlyImportedTypes</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellImplicitlyImportedTypes.xtend" title="View Source Code" >(src)</a>:
+callable directly, we provided the <abbr title="org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedFeatures" >TortoiseShellImplicitlyImportedFeatures</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.tortoiseshell/src/org/xtext/tortoiseshell/scoping/TortoiseShellImplicitlyImportedFeatures.xtend" title="View Source Code" >(src)</a>:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;TortoiseShellImplicitlyImportedTypes&nbsp;<span class="keyword">extends</span>&nbsp;ImplicitlyImportedFeatures&nbsp;{<br/>
+<span class="keyword">class</span>&nbsp;TortoiseShellImplicitlyImportedFeatures&nbsp;<span class="keyword">extends</span>&nbsp;ImplicitlyImportedFeatures&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">protected</span>&nbsp;getStaticImportClasses()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="keyword">super</span>.getStaticImportClasses()&nbsp;+&nbsp;#[Math,&nbsp;ColorConstants])<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList<br/>
