@@ -3812,6 +3812,122 @@ public class ErrorTest extends AbstractXtendTestCase {
     ObjectExtensions.<EList<Resource.Diagnostic>>operator_doubleArrow(_errors, _function);
   }
   
+  @Test
+  public void testErrorModel_139() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("MyComparator.comparingInt [String s| s.length].thenComparing[]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("static abstract class MyComparator<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Function<? super T, ? extends U> keyExtractor,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("MyComparator<? super U> keyComparator)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def MyComparator<T> thenComparing(MyComparator<? super T> other)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Function<? super T, ? extends U> keyExtractor)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface ToIntFunction<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int apply(T t)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface Function<T, R> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def R apply(T)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_140() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("MyComparator.comparingInt [String s| s.length].thenComparing[]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("static abstract class MyComparator<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <U extends Comparable<? super Iterable<? extends U>>> MyComparator<T> thenComparing(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Function<? super T, ? extends U> keyExtractor,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("MyComparator<? super U> keyComparator)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def MyComparator<T> thenComparing(MyComparator<? super T> other)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing(");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Function<? super T, ? extends U> keyExtractor)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface ToIntFunction<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int apply(T t)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface Function<T, R> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def R apply(T)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
