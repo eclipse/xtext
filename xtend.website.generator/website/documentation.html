@@ -2054,7 +2054,7 @@ val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)</pre>
 								<li>in the case of <code class="prettyprint lang-xtend">&amp;&amp;</code> the operand on the right hand side is not evaluated if the left 
 								    operand evaluates to <code class="prettyprint lang-xtend">false</code>.</li>
 								<li>in the case of <code class="prettyprint lang-xtend">?:</code> the operand on the right hand side is not evaluated if the left 
-								    operand evaluates to <code class="prettyprint lang-xtend">null</code>.</li>
+								    operand evaluates to anything but <code class="prettyprint lang-xtend">null</code>.</li>
 							</ol>
 							<p>
 						</p>
@@ -3716,7 +3716,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
     returnType = field.type
     body = ['''
       if (&laquo;field.simpleName&raquo;==null)
-        &laquo;field.simpleName&raquo; = _initÂ&laquo;field.simpleName&raquo;();
+        &laquo;field.simpleName&raquo; = _init&laquo;field.simpleName&raquo;();
       return &laquo;field.simpleName&raquo;;
     ''']
   ]

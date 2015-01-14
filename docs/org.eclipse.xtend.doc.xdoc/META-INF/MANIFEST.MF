@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.eclipse.xtend.doc.xdoc;singleton:=true
-Bundle-Version: 2.6.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtend.doc.xdoc
+Bundle-Version: 2.8.0.qualifier
 Bundle-Localization: plugin
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -11,4 +11,5 @@ Require-Bundle: org.eclipse.emf.mwe2.launch;bundle-version="2.2.0";resolution:=o
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.core,
- org.junit;bundle-version="4.10.0"
+ org.junit;bundle-version="4.10.0",
+ org.eclipse.help;bundle-version="3.6.0"

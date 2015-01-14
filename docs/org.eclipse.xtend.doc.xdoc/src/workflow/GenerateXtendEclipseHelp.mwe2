@@ -29,4 +29,8 @@ Workflow {
 			path = targetDir
 		}
 	}
+
+	component = workflow.TocFileValidator {
+		tocFile = '${targetDir}/toc.xml'
+	}
 }
