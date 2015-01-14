@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
+import org.osgi.framework.Version;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
@@ -92,8 +93,29 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 				IncrementalProjectBuilder.AUTO_BUILD, monitor());
 		waitForAutoBuild();
 		assertEquals(1, getInvocationCount());
-		assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
+		if (isCoreResources_3_7_orLater()) {
+			assertSame(BuildType.INCREMENTAL, getContext().getBuildType());
+		} else {
+			assertSame(BuildType.FULL, getContext().getBuildType());
+		}
 		reset();
+	}
+	
+	/**
+	 * The same as with JdtBasedTypeFactory.isJdtGreaterOrEqual(new Version(3.6.0))
+	 * 
+	 */
+	protected boolean isCoreResources_3_7_orLater() {
+		Version installed = org.eclipse.core.resources.ResourcesPlugin.getPlugin().getBundle().getVersion();
+		int minMajor = 3;
+		int minMinor = 7;
+		if (installed.getMajor() < minMajor) {
+			return false;
+		}
+		if (installed.getMajor() == minMajor && installed.getMinor() < minMinor) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
