@@ -86,6 +86,7 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 				getNaming().getProjectNameUi(),
 				"org.eclipse.core.runtime",
 				"org.eclipse.xtext.junit4",
+				"org.eclipse.xtext.xbase.lib",
 				"org.eclipse.ui.workbench;resolution:=optional"
 		};
 	}
