@@ -127,6 +127,32 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 		sub.child(13, "wait(long) : void - Object").hasTextRegion(false);
 		sub.child(14, "wait(long, int) : void - Object").hasTextRegion(false);
 	}
+	
+	@Test
+	public void testMethodsFromSuper_02() throws Exception {
+		setShowInherited(false);
+		String model = "package pack.name class C { enum E { VAL } }";
+		AssertBuilder assertBuilder = newAssertBuilder(model).numChildren(2);
+		AssertBuilder sub = assertBuilder.child(1, "C").numChildren(1).hasTextRegion(true);
+		sub.child(0, "E").numChildren(1).hasTextRegion(true);
+		
+		setShowInherited(true);
+		assertBuilder = newAssertBuilder(model).numChildren(2);
+		sub = assertBuilder.child(1, "C - pack.name").numChildren(13);
+		sub.child(0, "E - C").hasTextRegion(true);
+		sub.child(1, "registerNatives() : void - Object").hasTextRegion(false);
+		sub.child(2, "clone() : Object - Object").hasTextRegion(false);
+		sub.child(3, "equals(Object) : boolean - Object").hasTextRegion(false);
+		sub.child(4, "finalize() : void - Object").hasTextRegion(false);
+		sub.child(5, "getClass() : Class<?> - Object").hasTextRegion(false);
+		sub.child(6, "hashCode() : int - Object").hasTextRegion(false);
+		sub.child(7, "notify() : void - Object").hasTextRegion(false);
+		sub.child(8, "notifyAll() : void - Object").hasTextRegion(false);
+		sub.child(9, "toString() : String - Object").hasTextRegion(false);
+		sub.child(10, "wait() : void - Object").hasTextRegion(false);
+		sub.child(11, "wait(long) : void - Object").hasTextRegion(false);
+		sub.child(12, "wait(long, int) : void - Object").hasTextRegion(false);
+	}
 
 	@Test
 	public void testMixedDispatch_0() throws Exception {
