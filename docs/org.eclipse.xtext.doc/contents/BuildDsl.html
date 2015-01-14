@@ -325,13 +325,13 @@ description.
 <p>
 We ship some predefined extension classes to enhance the Java classes <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html" title="View JavaDoc"><abbr title="java.io.File" >File</abbr></a>
 and <a class="jdoc" href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html" title="View JavaDoc"><abbr title="java.lang.Class" >Class</abbr></a>. These are always put onto the extension scope by a customized 
-<abbr title="org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes" >BuildDSLImplicitlyImportedTypes</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitImports.xtend" title="View Source Code" >(src)</a>:
+<abbr title="org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedFeatures" >BuildDSLImplicitlyImportedFeatures</abbr> <a class="srcLink" href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend" title="View Source Code" >(src)</a>:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;BuildDSLImplicitlyImportedTypes&nbsp;<span class="keyword">extends</span>&nbsp;ImplicitlyImportedFeatures&nbsp;{<br/>
+<span class="keyword">class</span>&nbsp;BuildDSLImplicitlyImportedFeatures&nbsp;<span class="keyword">extends</span>&nbsp;ImplicitlyImportedFeatures&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Add&nbsp;methods&nbsp;from&nbsp;{@link&nbsp;FileExtensions}&nbsp;and&nbsp;{@link&nbsp;ClassExtensions}&nbsp;to&nbsp;the&nbsp;extension&nbsp;scope.<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
