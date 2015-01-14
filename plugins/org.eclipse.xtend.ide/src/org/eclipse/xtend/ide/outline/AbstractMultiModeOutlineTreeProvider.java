@@ -318,6 +318,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		while (xtendType.eContainer() instanceof XtendTypeDeclaration) {
 			XtendTypeDeclaration parent = (XtendTypeDeclaration) xtendType.eContainer(); 
 			qualifier = parent.getName() + innerClassDelimiter + qualifier;
+			xtendType = parent;
 		}
 		return qualifier;
 	}
