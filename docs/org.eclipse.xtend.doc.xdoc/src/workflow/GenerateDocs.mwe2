@@ -1,9 +1,9 @@
 module GenerateSpec
 
 import org.eclipse.emf.mwe.utils.*
-
-var targetDir = "../../xtend.website.generator/website/documentation/2.7.0"
-var modelPath = "xdoc"
+var projectDir = "."
+var targetDir = "${projectDir}/../../xtend.website.generator/website/documentation/2.7.0"
+var modelPath = "${projectDir}/xdoc"
 
 Workflow {
 	bean = workflow.Headless {}

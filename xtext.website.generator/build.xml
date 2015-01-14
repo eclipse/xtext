@@ -11,5 +11,20 @@
 		</copy> 
     </target>
 
+
+	<property name="xtext_xdoc_loc" location="${basedir}/../docs/org.eclipse.xtext.doc.xdoc/" />
+	
+	<target name="generateAll" description="Runs all the generation steps">
+		<java fork="true" clonevm="true" dir="${xtext_xdoc_loc}" classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher">
+			<arg line="file://${xtext_xdoc_loc}/src/workflow/GenerateDocs.mwe2" />
+			<arg line="-p projectDir=/${xtext_xdoc_loc}/" />
+		</java>
+		<java fork="true" clonevm="true" dir="${xtext_xdoc_loc}" classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher">
+			<arg line="file://${xtext_xdoc_loc}/src/workflow/GenerateXtextEclipseHelp.mwe2" />
+			<arg line="-p projectDir=/${xtext_xdoc_loc}/" />
+		</java>
+		<java classname="generator.Generator" />
+	</target>
+
 	
 </project>
