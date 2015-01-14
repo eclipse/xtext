@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch,*.xtend,*._trace
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=*.launch,*.xtend,*._trace,*.xtendbin
 org.eclipse.jdt.core.compiler.annotation.inheritNullAnnotations=disabled
 org.eclipse.jdt.core.compiler.annotation.missingNonNullByDefaultAnnotation=ignore
 org.eclipse.jdt.core.compiler.annotation.nonnull=org.eclipse.jdt.annotation.NonNull
