@@ -90,13 +90,18 @@ public class ScopeStack {
 		throw new IllegalStateException("Cannot find referenced object in current scope");
 	}
 	
+	public String declareVariable(/* @NonNull */ Object key, /* @NonNull */ String proposedName, boolean synthetic) {
+		return declareVariable(key, proposedName, synthetic, false);
+	}
+	
 	/**
 	 * provides and registers a fresh variable in the current scope.
 	 * It takes parent scopes into account and only reuses names of synthetic variables from parent scopes.
 	 * Pseudo scopes are treated as if they were part of their parent scope.
 	 */
 	/* @NonNull */
-	public String declareVariable(/* @NonNull */ Object key, /* @NonNull */ String proposedName, boolean synthetic) {
+	public String declareVariable(/* @NonNull */ Object key, /* @NonNull */ String proposedName, boolean synthetic,
+			boolean withUniqueName) {
 		if (scopes.isEmpty())
 			throw new IllegalArgumentException("No scope has been opened yet.");
 		Scope currentScope = scopes.peek();
@@ -109,13 +114,13 @@ public class ScopeStack {
 		// add only the non-synthetic variables, since they could be referenced from nested scopes.
 		for (Scope scope : reverse(newArrayList(scopes))) {
 			for (Variable variable : scope.variables()) {
-				if (!scopeClosed || !variable.synthetic)
+				if (withUniqueName || !scopeClosed || !variable.synthetic)
 					names.add(variable.name);
 			}
 			scopeClosed = scopeClosed || !scope.pseudoScope;
-			// if we left the current scope (incl. pseudo scopes) and the variable is not synthetic, we can stop collecting names. 
-			// Overriding names from outside is ok in that case. 
-			if (scopeClosed && !synthetic)
+			// If we left the current scope (incl. pseudo scopes) and the variable is not synthetic or unique,
+			// we can stop collecting names. Overriding names from outside is ok in that case. 
+			if (scopeClosed && !(synthetic || withUniqueName))
 				break;
 		}
 		String newName = findNewName(names, proposedName);

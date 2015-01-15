@@ -41,7 +41,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence, IGeneratorConfigHolder {
+public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharSequence {
 
 	private static final Logger log = Logger.getLogger(TreeAppendable.class);
 	
@@ -437,6 +437,11 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 	@Override
 	public String declareSyntheticVariable(Object key, String proposedName) {
 		return state.declareSyntheticVariable(key, proposedName);
+	}
+	
+	@Override
+	public String declareUniqueNameVariable(Object key, String proposedName) {
+		return state.declareUniqueNameVariable(key, proposedName);
 	}
 	
 	@Override

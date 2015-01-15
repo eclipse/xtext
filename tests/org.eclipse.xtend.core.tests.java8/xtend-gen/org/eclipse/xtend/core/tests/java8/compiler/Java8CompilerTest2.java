@@ -1834,10 +1834,10 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("T _elvis = null;");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Function1<T, Boolean> _function = (T it) -> {");
+    _builder_1.append("final Function1<T, Boolean> _function = (T it_1) -> {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("return Boolean.valueOf((!Objects.equal(it, null)));");
+    _builder_1.append("return Boolean.valueOf((!Objects.equal(it_1, null)));");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("};");

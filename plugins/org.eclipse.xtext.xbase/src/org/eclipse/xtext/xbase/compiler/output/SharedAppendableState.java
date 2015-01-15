@@ -74,11 +74,15 @@ public class SharedAppendableState {
 	}
 	
 	public String declareVariable(Object key, String proposedName) {
-		return scopes.declareVariable(key, proposedName, false);
+		return scopes.declareVariable(key, proposedName, false, false);
 	}
 	
 	public String declareSyntheticVariable(Object key, String proposedName) {
-		return scopes.declareVariable(key, proposedName, true);
+		return scopes.declareVariable(key, proposedName, true, false);
+	}
+	
+	public String declareUniqueNameVariable(Object key, String proposedName) {
+		return scopes.declareVariable(key, proposedName, false, true);
 	}
 	
 	public void closeScope() {

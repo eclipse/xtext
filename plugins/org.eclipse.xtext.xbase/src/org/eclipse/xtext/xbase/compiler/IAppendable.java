@@ -54,10 +54,16 @@ public interface IAppendable extends ISourceAppender {
 	String declareVariable(Object key, String proposedName);
 	
 	/**
-	 * declares a synthetic variable, where the name is not used in the current or any parent scope.
+	 * Declares a synthetic variable, where the name is not used in the current or any parent scope
+	 * except by other synthetic variables.
 	 */
 	String declareSyntheticVariable(Object key, String proposedName);
-
+	
+	/**
+	 * Declares a variable with unique name, which is not used in the current or any parent scope.
+	 */
+	String declareUniqueNameVariable(Object key, String proposedName);
+	
 	String getName(Object key);
 	
 	String removeName(Object key) throws IllegalStateException;
@@ -76,5 +82,7 @@ public interface IAppendable extends ISourceAppender {
 	String toString();
 	
 	String getContent();
+	
+	GeneratorConfig getGeneratorConfig();
 
 }

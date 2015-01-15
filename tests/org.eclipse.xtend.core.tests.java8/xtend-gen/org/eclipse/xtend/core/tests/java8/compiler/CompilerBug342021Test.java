@@ -15,7 +15,7 @@ import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @author Miro Spoenemann - Adapted to Java 8 output
+ * @author Miro Spoenemann - Copied and adapted to Java 8 output
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
