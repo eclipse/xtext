@@ -22,6 +22,7 @@ public class RefactoringTestParameters {
   @Property
   private boolean _usePreview = false;
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("(");

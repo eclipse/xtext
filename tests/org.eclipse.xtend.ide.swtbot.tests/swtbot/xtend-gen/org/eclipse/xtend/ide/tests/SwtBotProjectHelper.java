@@ -52,6 +52,7 @@ public class SwtBotProjectHelper {
       final SWTBotShell shell = it.activeShell();
       List<SWTBotView> _views = it.views();
       final Function1<SWTBotView, Boolean> _function = new Function1<SWTBotView, Boolean>() {
+        @Override
         public Boolean apply(final SWTBotView it) {
           String _title = it.getTitle();
           return Boolean.valueOf(Objects.equal(_title, "Welcome"));
@@ -104,6 +105,7 @@ public class SwtBotProjectHelper {
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
     SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
     final Procedure1<SWTBotEclipseEditor> _function = new Procedure1<SWTBotEclipseEditor>() {
+      @Override
       public void apply(final SWTBotEclipseEditor it) {
         SwtBotProjectHelper.setContent(it, content);
       }
@@ -137,6 +139,7 @@ public class SwtBotProjectHelper {
   public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
     SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
     final Procedure1<SWTBotEclipseEditor> _function = new Procedure1<SWTBotEclipseEditor>() {
+      @Override
       public void apply(final SWTBotEclipseEditor it) {
         SwtBotProjectHelper.setContent(it, content);
       }
@@ -170,6 +173,7 @@ public class SwtBotProjectHelper {
   public static void closeAllEditors(final SWTWorkbenchBot it) {
     List<? extends SWTBotEditor> _editors = it.editors();
     final Procedure1<SWTBotEditor> _function = new Procedure1<SWTBotEditor>() {
+      @Override
       public void apply(final SWTBotEditor it) {
         it.close();
       }

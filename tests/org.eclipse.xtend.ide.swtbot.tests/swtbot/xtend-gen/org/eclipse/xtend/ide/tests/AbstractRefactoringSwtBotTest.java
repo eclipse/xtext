@@ -86,6 +86,7 @@ public abstract class AbstractRefactoringSwtBotTest {
   public void tearDown() {
     Display _default = Display.getDefault();
     final Runnable _function = new Runnable() {
+      @Override
       public void run() {
         AbstractRefactoringSwtBotTest.this.preferences.setUseInlineRefactoring(true);
         AbstractRefactoringSwtBotTest.this.preferences.setSaveAllBeforeRefactoring(true);
@@ -108,6 +109,7 @@ public abstract class AbstractRefactoringSwtBotTest {
     this.preferences = preferences;
     Display _default = Display.getDefault();
     final Runnable _function = new Runnable() {
+      @Override
       public void run() {
         boolean _isUseInlineRefactoring = AbstractRefactoringSwtBotTest.this.testParams.isUseInlineRefactoring();
         preferences.setUseInlineRefactoring(_isUseInlineRefactoring);
@@ -141,6 +143,7 @@ public abstract class AbstractRefactoringSwtBotTest {
       SWTBotShell _activate = _shell_1.activate();
       SWTBot _bot = _activate.bot();
       final Procedure1<SWTBot> _function = new Procedure1<SWTBot>() {
+        @Override
         public void apply(final SWTBot it) {
           SWTBotText _textWithLabel = it.textWithLabel("New name:");
           _textWithLabel.setText(newName);
@@ -180,6 +183,7 @@ public abstract class AbstractRefactoringSwtBotTest {
       SWTBotShell _activate = _shell_1.activate();
       SWTBot _bot = _activate.bot();
       final Procedure1<SWTBot> _function = new Procedure1<SWTBot>() {
+        @Override
         public void apply(final SWTBot it) {
           SWTBotText _textWithLabel = it.textWithLabel("New name:");
           _textWithLabel.setText(newName);
