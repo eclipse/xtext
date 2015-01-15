@@ -15,11 +15,42 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Inject extension QuickfixTestBuilder builder
 	
 	static val defaultBody = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
-	 
+	
 	@After
 	override tearDown() {
 		builder.tearDown
 	}
+
+	@Test
+	def void obsoletCast() {
+		setSeverity(IssueCodes.OBSOLETE_CAST, "warning")
+		create('Foo.xtend', '''
+			class Foo {
+				String s = "" as String|
+			}
+		''').assertIssueCodes(OBSOLETE_CAST).assertResolutionLabels("Remove unnecessary cast").
+			assertModelAfterQuickfix('''
+				class Foo {
+					String s = ""
+				}
+			''')
+	}
+
+	@Test
+	def void obsoletCast_01() {
+		setSeverity(IssueCodes.OBSOLETE_CAST, "warning")
+		create('Foo.xtend', '''
+			class Foo {
+				String s = /*comment*/"" /*comment*/ as /*comment*/ String|
+			}
+		''').assertIssueCodes(OBSOLETE_CAST).assertResolutionLabels("Remove unnecessary cast").
+			assertModelAfterQuickfix('''
+				class Foo {
+					String s = /*comment*/""
+				}
+			''')
+	}
+
 
 	@Test 
 	def void fixPackageName_0() {
