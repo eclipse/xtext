@@ -33,10 +33,12 @@ public class WaitForRefactoringCondition extends DefaultCondition {
     this.isRedo = isRedo;
   }
   
+  @Override
   public String getFailureMessage() {
     return "Refactoring not performed";
   }
   
+  @Override
   public boolean test() throws Exception {
     boolean _xblockexpression = false;
     {

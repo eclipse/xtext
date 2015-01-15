@@ -20,10 +20,12 @@ public class WaitForLinkedModeCondition extends DefaultCondition {
     this.controller = controller;
   }
   
+  @Override
   public String getFailureMessage() {
     return "Linked mode not entered";
   }
   
+  @Override
   public boolean test() throws Exception {
     RenameLinkedMode _activeLinkedMode = this.controller.getActiveLinkedMode();
     return (!Objects.equal(_activeLinkedMode, null));

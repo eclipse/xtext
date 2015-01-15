@@ -34,6 +34,7 @@ public class RenameJavaClassSwtBotTest extends AbstractRefactoringSwtBotTest {
   public static Collection<Object[]> data() {
     RefactoringTestParameters _refactoringTestParameters = new RefactoringTestParameters();
     final Procedure1<RefactoringTestParameters> _function = new Procedure1<RefactoringTestParameters>() {
+      @Override
       public void apply(final RefactoringTestParameters it) {
         it.setUseInlineRefactoring(true);
         it.setUsePreview(false);

@@ -33,6 +33,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
   public static Collection<Object[]> data() {
     RefactoringTestParameters _refactoringTestParameters = new RefactoringTestParameters();
     final Procedure1<RefactoringTestParameters> _function = new Procedure1<RefactoringTestParameters>() {
+      @Override
       public void apply(final RefactoringTestParameters it) {
         it.setUseInlineRefactoring(true);
         it.setUsePreview(false);
@@ -41,6 +42,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     RefactoringTestParameters _doubleArrow = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters, _function);
     RefactoringTestParameters _refactoringTestParameters_1 = new RefactoringTestParameters();
     final Procedure1<RefactoringTestParameters> _function_1 = new Procedure1<RefactoringTestParameters>() {
+      @Override
       public void apply(final RefactoringTestParameters it) {
         it.setUseInlineRefactoring(false);
         it.setUsePreview(false);
@@ -49,6 +51,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     RefactoringTestParameters _doubleArrow_1 = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters_1, _function_1);
     RefactoringTestParameters _refactoringTestParameters_2 = new RefactoringTestParameters();
     final Procedure1<RefactoringTestParameters> _function_2 = new Procedure1<RefactoringTestParameters>() {
+      @Override
       public void apply(final RefactoringTestParameters it) {
         it.setUseInlineRefactoring(true);
         it.setUsePreview(true);
@@ -57,6 +60,7 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     RefactoringTestParameters _doubleArrow_2 = ObjectExtensions.<RefactoringTestParameters>operator_doubleArrow(_refactoringTestParameters_2, _function_2);
     RefactoringTestParameters _refactoringTestParameters_3 = new RefactoringTestParameters();
     final Procedure1<RefactoringTestParameters> _function_3 = new Procedure1<RefactoringTestParameters>() {
+      @Override
       public void apply(final RefactoringTestParameters it) {
         it.setUseInlineRefactoring(false);
         it.setUsePreview(true);
