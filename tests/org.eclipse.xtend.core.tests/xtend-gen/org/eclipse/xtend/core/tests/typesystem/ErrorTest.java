@@ -3928,6 +3928,22 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_141() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+    _builder.newLine();
+    _builder.append("@D class A {}");
+    _builder.newLine();
+    _builder.append("@Data class C extends A { val int c }");
+    _builder.newLine();
+    _builder.append("@Data class B { val int b }");
+    _builder.newLine();
+    _builder.append("@Data class D extends B { val double d }");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
