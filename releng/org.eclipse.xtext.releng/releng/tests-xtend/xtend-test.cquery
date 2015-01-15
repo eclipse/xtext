@@ -7,4 +7,5 @@
 	<cq:advisorNode namePattern="^org\.eclipse\.xtext\.license$" skipComponent="true"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtend\.swtbot(?:\..*)?$" skipComponent="true" filter="(!(SWTBOT=true))"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtend\.ide\.swtbot(?:\..*)?$" skipComponent="true" filter="(!(SWTBOT=true))"/>
+    <cq:advisorNode namePattern="^org\.eclipse\.xtend\.core\.tests\.java8(?:\..*)?$" skipComponent="true" filter="(!(JAVA8=true))"/>
 </cq:componentQuery>
