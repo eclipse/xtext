@@ -28,6 +28,10 @@ Workflow {
 		outlet = {
 			path = targetDir
 		}
+		outlet = {
+			outletName = "WEB_SITE"
+			path = '${projectDir}/website/'
+		}
 	}
 
 	component = workflow.TocFileValidator {
