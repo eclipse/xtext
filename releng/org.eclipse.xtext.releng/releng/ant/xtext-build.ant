@@ -31,6 +31,7 @@
 	<property name="ECLIPSE.TARGET.ALIAS" value="Stable" />
 	<property name="WITH.MWE2" value="false" />
 	<property name="SWTBOT" value="false" />
+	<property name="JAVA8" value="true" />
 
 	<target name="run-buckminster-build" depends="common.cleanup">
 		<fail unless="buckminster.home" message="buckminster.home must be specified." />
@@ -48,10 +49,13 @@
 		<echo file="${commands.file}" append="false">
 			importtargetdefinition -A "${releng.project}/releng/tests/tests-eclipseserver.target
 			resolve "${releng.project}/releng/tests/xtext-test.mspec"
+			resolve "${releng.project}/releng/tests-xtend/xtend-test.mspec"
 			build
-
+			#Xtext bootstrap
+			#junit --stderr --stdout --launch "org.eclipse.xtext.junit4.tests/xtext.junit4.tests.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.core.tests.fast.xml"
+			
 			#Xtend tests
-			junit --stderr --stdout --launch "org.eclipse.xtext.junit4.tests/xtext.junit4.tests.launch" --flatXML --output "${WORKSPACE}/build-result/test-results/xtend.core.tests.fast.xml"
+			junit --stderr --stdout --launch "org.eclipse.xtend.tests.java8//org.eclipse.xtend.core.tests.java8/xtend.core.tests.java8.fast (xtend).launch" --flatXML --output "${WORKSPACE}/build-result/test-results//org.eclipse.xtend.core.tests.java8/xtend.core.tests.java8.fast.launch"
 
 		</echo>
 		<echo message="build.properties: ${build.properties}" />

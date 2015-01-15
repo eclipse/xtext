@@ -58,6 +58,7 @@
 			<echo message=" " />
 			<echo message="With mwe2: ${WITH.MWE2}" />
 			<echo message="With SWTBOT: ${SWTBOT}" />
+			<echo message="With JAVA8: ${JAVA8}" />
 			<java fork="true" dir="${buckminster.home}" logError="true"  
 				classname="org.eclipse.core.launcher.Main" failonerror="true">
 				<classpath>
@@ -75,6 +76,7 @@
 				<arg line='-debug ${debug.options.file}' />
 				<sysproperty key="checkout.location" value="${checkout.location}" />
 				<sysproperty key="WITH.MWE2" value="${WITH.MWE2}" />
+				<sysproperty key="JAVA8" value="${JAVA8}" />
 				<sysproperty key="SWTBOT" value="${SWTBOT}" />
 				<sysproperty key="ECLIPSE.TARGET.ALIAS" value="${ECLIPSE.TARGET.ALIAS}" />
 				<sysproperty key="buckminster.output.root" value="${buckminster.output.root}" />
