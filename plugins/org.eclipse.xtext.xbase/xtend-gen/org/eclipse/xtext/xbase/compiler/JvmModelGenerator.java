@@ -183,6 +183,7 @@ public class JvmModelGenerator implements IGenerator {
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
   
+  @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
@@ -295,8 +296,10 @@ public class JvmModelGenerator implements IGenerator {
       _append.increaseIndentation();
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+        @Override
         public void apply(final LoopParams it) {
           final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+            @Override
             public ITreeAppendable apply(final ITreeAppendable it) {
               return it.newLine();
             }
@@ -305,6 +308,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       };
       final Procedure1<JvmMember> _function_1 = new Procedure1<JvmMember>() {
+        @Override
         public void apply(final JvmMember it) {
           final ITreeAppendable memberAppendable = JvmModelGenerator.this._treeAppendableUtil.traceWithComments(appendable, it);
           memberAppendable.openScope();
@@ -328,6 +332,7 @@ public class JvmModelGenerator implements IGenerator {
     ITreeAppendable _xblockexpression = null;
     {
       final Function1<JvmAnnotationReference, Boolean> _function = new Function1<JvmAnnotationReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmAnnotationReference it) {
           JvmAnnotationType _annotation = it.getAnnotation();
           String _identifier = null;
@@ -374,8 +379,10 @@ public class JvmModelGenerator implements IGenerator {
       _append.increaseIndentation();
       EList<JvmEnumerationLiteral> _literals = it.getLiterals();
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+        @Override
         public void apply(final LoopParams it) {
           final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+            @Override
             public ITreeAppendable apply(final ITreeAppendable it) {
               ITreeAppendable _append = it.append(",");
               return _append.newLine();
@@ -386,6 +393,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       };
       final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
+        @Override
         public void apply(final JvmEnumerationLiteral it) {
           ITreeAppendable _trace = childAppendable.trace(it);
           JvmModelGenerator.this.generateEnumLiteral(it, _trace, config);
@@ -394,14 +402,17 @@ public class JvmModelGenerator implements IGenerator {
       this._loopExtensions.<JvmEnumerationLiteral>forEach(childAppendable, _literals, _function, _function_1);
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
       final Function1<JvmMember, Boolean> _function_2 = new Function1<JvmMember, Boolean>() {
+        @Override
         public Boolean apply(final JvmMember it) {
           return Boolean.valueOf((!(it instanceof JvmEnumerationLiteral)));
         }
       };
       Iterable<JvmMember> _filter = IterableExtensions.<JvmMember>filter(_membersToBeCompiled, _function_2);
       final Procedure1<LoopParams> _function_3 = new Procedure1<LoopParams>() {
+        @Override
         public void apply(final LoopParams it) {
           final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+            @Override
             public ITreeAppendable apply(final ITreeAppendable it) {
               return it.newLine();
             }
@@ -410,6 +421,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       };
       final Procedure1<JvmMember> _function_4 = new Procedure1<JvmMember>() {
+        @Override
         public void apply(final JvmMember it) {
           ITreeAppendable _trace = childAppendable.trace(it);
           JvmModelGenerator.this.generateMember(it, _trace, config);
@@ -751,6 +763,7 @@ public class JvmModelGenerator implements IGenerator {
     if (_or) {
       EList<JvmTypeReference> _superTypes = it.getSuperTypes();
       final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference typeRef) {
           String _identifier = typeRef.getIdentifier();
           return Boolean.valueOf((!Objects.equal(_identifier, implicitSuperType)));
@@ -758,6 +771,7 @@ public class JvmModelGenerator implements IGenerator {
       };
       final Iterable<JvmTypeReference> withoutObject = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
       final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
+        @Override
         public void apply(final LoopParams it) {
           it.setPrefix("extends ");
           it.setSeparator(", ");
@@ -765,6 +779,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       };
       final Procedure2<JvmTypeReference, ITreeAppendable> _function_2 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
+        @Override
         public void apply(final JvmTypeReference it, final ITreeAppendable app) {
           JvmModelGenerator.this._errorSafeExtensions.serializeSafely(it, app);
         }
@@ -773,6 +788,7 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
       final Function1<JvmTypeReference, Boolean> _function_3 = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference typeRef) {
           String _identifier = typeRef.getIdentifier();
           return Boolean.valueOf((!Objects.equal(_identifier, implicitSuperType)));
@@ -780,6 +796,7 @@ public class JvmModelGenerator implements IGenerator {
       };
       final Iterable<JvmTypeReference> withoutObject_1 = IterableExtensions.<JvmTypeReference>filter(_superTypes_1, _function_3);
       final Function1<JvmTypeReference, Boolean> _function_4 = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference typeRef) {
           boolean _and = false;
           JvmType _type = typeRef.getType();
@@ -797,6 +814,7 @@ public class JvmModelGenerator implements IGenerator {
       Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_4);
       final JvmTypeReference superClazz = IterableExtensions.<JvmTypeReference>head(_filter);
       final Function1<JvmTypeReference, Boolean> _function_5 = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference typeRef) {
           return Boolean.valueOf((!Objects.equal(typeRef, superClazz)));
         }
@@ -824,6 +842,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       }
       final Procedure1<LoopParams> _function_6 = new Procedure1<LoopParams>() {
+        @Override
         public void apply(final LoopParams it) {
           it.setPrefix("implements ");
           it.setSeparator(", ");
@@ -831,6 +850,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       };
       final Procedure2<JvmTypeReference, ITreeAppendable> _function_7 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
+        @Override
         public void apply(final JvmTypeReference it, final ITreeAppendable app) {
           JvmModelGenerator.this._errorSafeExtensions.serializeSafely(it, app);
         }
@@ -1008,6 +1028,7 @@ public class JvmModelGenerator implements IGenerator {
   public void generateTypeParameterDeclaration(final JvmTypeParameterDeclarator it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+      @Override
       public void apply(final LoopParams it) {
         it.setPrefix("<");
         it.setSeparator(", ");
@@ -1015,6 +1036,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     };
     final Procedure1<JvmTypeParameter> _function_1 = new Procedure1<JvmTypeParameter>() {
+      @Override
       public void apply(final JvmTypeParameter it) {
         JvmModelGenerator.this.generateTypeParameterDeclaration(it, appendable, config);
       }
@@ -1034,12 +1056,14 @@ public class JvmModelGenerator implements IGenerator {
     EList<JvmTypeConstraint> _constraints = it.getConstraints();
     final Iterable<JvmUpperBound> upperBounds = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+      @Override
       public void apply(final LoopParams it) {
         it.setPrefix(" extends ");
         it.setSeparator(" & ");
       }
     };
     final Procedure2<JvmUpperBound, ITreeAppendable> _function_1 = new Procedure2<JvmUpperBound, ITreeAppendable>() {
+      @Override
       public void apply(final JvmUpperBound it, final ITreeAppendable app) {
         JvmTypeReference _typeReference = it.getTypeReference();
         JvmModelGenerator.this._errorSafeExtensions.serializeSafely(_typeReference, app);
@@ -1052,6 +1076,7 @@ public class JvmModelGenerator implements IGenerator {
     final LinkedHashMap<JvmType, JvmTypeReference> toBeGenerated = CollectionLiterals.<JvmType, JvmTypeReference>newLinkedHashMap();
     EList<JvmTypeReference> _exceptions = it.getExceptions();
     final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
+      @Override
       public void apply(final JvmTypeReference it) {
         JvmType _type = it.getType();
         boolean _containsKey = toBeGenerated.containsKey(_type);
@@ -1065,12 +1090,14 @@ public class JvmModelGenerator implements IGenerator {
     IterableExtensions.<JvmTypeReference>forEach(_exceptions, _function);
     Collection<JvmTypeReference> _values = toBeGenerated.values();
     final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
+      @Override
       public void apply(final LoopParams it) {
         it.setPrefix(" throws ");
         it.setSeparator(", ");
       }
     };
     final Procedure2<JvmTypeReference, ITreeAppendable> _function_2 = new Procedure2<JvmTypeReference, ITreeAppendable>() {
+      @Override
       public void apply(final JvmTypeReference it, final ITreeAppendable app) {
         ITreeAppendable _trace = app.trace(it);
         JvmType _type = it.getType();
@@ -1270,6 +1297,7 @@ public class JvmModelGenerator implements IGenerator {
   public void assignThisAndSuper(final ITreeAppendable b, final JvmDeclaredType declaredType) {
     EList<JvmTypeReference> _superTypes = declaredType.getSuperTypes();
     final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+      @Override
       public Boolean apply(final JvmTypeReference it) {
         final JvmType superType = it.getType();
         if ((superType instanceof JvmGenericType)) {
@@ -1366,6 +1394,7 @@ public class JvmModelGenerator implements IGenerator {
       _newLine.append("throw new Error(\"Unresolved compilation problems:\"");
       appendable.increaseIndentation();
       final Procedure1<Issue> _function = new Procedure1<Issue>() {
+        @Override
         public void apply(final Issue it) {
           ITreeAppendable _newLine = appendable.newLine();
           ITreeAppendable _append = _newLine.append("+ \"\\n");
@@ -1576,6 +1605,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateAnnotations(final Iterable<JvmAnnotationReference> annotations, final ITreeAppendable appendable, final boolean withLineBreak, final GeneratorConfig config) {
     final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+      @Override
       public ITreeAppendable apply(final ITreeAppendable it) {
         ITreeAppendable _xifexpression = null;
         if (withLineBreak) {
@@ -1588,12 +1618,14 @@ public class JvmModelGenerator implements IGenerator {
     };
     final Function1<ITreeAppendable, ITreeAppendable> sep = _function;
     final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
+      @Override
       public void apply(final LoopParams it) {
         it.setSeparator(sep);
         it.setSuffix(sep);
       }
     };
     final Procedure2<JvmAnnotationReference, ITreeAppendable> _function_2 = new Procedure2<JvmAnnotationReference, ITreeAppendable>() {
+      @Override
       public void apply(final JvmAnnotationReference it, final ITreeAppendable app) {
         JvmModelGenerator.this.generateAnnotation(it, app, config);
       }
@@ -1607,6 +1639,7 @@ public class JvmModelGenerator implements IGenerator {
     appendable.append(_annotation);
     EList<JvmAnnotationValue> _explicitValues = it.getExplicitValues();
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+      @Override
       public void apply(final LoopParams it) {
         it.setPrefix("(");
         it.setSeparator(", ");
@@ -1614,6 +1647,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     };
     final Procedure1<JvmAnnotationValue> _function_1 = new Procedure1<JvmAnnotationValue>() {
+      @Override
       public void apply(final JvmAnnotationValue it) {
         JvmModelGenerator.this.toJava(it, appendable, config);
       }
@@ -1650,6 +1684,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmAnnotationAnnotationValue value, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<JvmAnnotationReference> _values = value.getValues();
     final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+      @Override
       public void apply(final JvmAnnotationReference it) {
         JvmModelGenerator.this.generateAnnotation(it, appendable, config);
       }
@@ -1660,6 +1695,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmShortAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Short> _values = it.getValues();
     final Procedure1<Short> _function = new Procedure1<Short>() {
+      @Override
       public void apply(final Short it) {
         String _string = it.toString();
         appendable.append(_string);
@@ -1671,6 +1707,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmIntAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Integer> _values = it.getValues();
     final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      @Override
       public void apply(final Integer it) {
         String _string = it.toString();
         appendable.append(_string);
@@ -1682,6 +1719,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmLongAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Long> _values = it.getValues();
     final Procedure1<Long> _function = new Procedure1<Long>() {
+      @Override
       public void apply(final Long it) {
         String _string = it.toString();
         appendable.append(_string);
@@ -1693,6 +1731,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmByteAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Byte> _values = it.getValues();
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte it) {
         String _string = it.toString();
         appendable.append(_string);
@@ -1704,6 +1743,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmDoubleAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Double> _values = it.getValues();
     final Procedure1<Double> _function = new Procedure1<Double>() {
+      @Override
       public void apply(final Double it) {
         String _switchResult = null;
         boolean _matched = false;
@@ -1739,6 +1779,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmFloatAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Float> _values = it.getValues();
     final Procedure1<Float> _function = new Procedure1<Float>() {
+      @Override
       public void apply(final Float it) {
         String _switchResult = null;
         boolean _matched = false;
@@ -1774,6 +1815,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmCharAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Character> _values = it.getValues();
     final Procedure1<Character> _function = new Procedure1<Character>() {
+      @Override
       public void apply(final Character it) {
         String _string = it.toString();
         String _doConvertToJavaString = JvmModelGenerator.this.doConvertToJavaString(_string);
@@ -1788,6 +1830,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmStringAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<String> _values = it.getValues();
     final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
       public void apply(final String it) {
         String _string = it.toString();
         String _doConvertToJavaString = JvmModelGenerator.this.doConvertToJavaString(_string);
@@ -1802,6 +1845,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmTypeAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<JvmTypeReference> _values = it.getValues();
     final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
+      @Override
       public void apply(final JvmTypeReference it) {
         JvmType _type = it.getType();
         ITreeAppendable _append = appendable.append(_type);
@@ -1814,6 +1858,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmEnumAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<JvmEnumerationLiteral> _values = it.getValues();
     final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+      @Override
       public void apply(final JvmEnumerationLiteral it) {
         JvmDeclaredType _declaringType = it.getDeclaringType();
         appendable.append(_declaringType);
@@ -1828,6 +1873,7 @@ public class JvmModelGenerator implements IGenerator {
   protected void _toJavaLiteral(final JvmBooleanAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Boolean> _values = it.getValues();
     final Procedure1<Boolean> _function = new Procedure1<Boolean>() {
+      @Override
       public void apply(final Boolean it) {
         String _string = it.toString();
         appendable.append(_string);
@@ -1845,6 +1891,7 @@ public class JvmModelGenerator implements IGenerator {
       EList<EObject> _values_1 = it.getValues();
       Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values_1, XExpression.class);
       final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
+        @Override
         public void apply(final XExpression it) {
           JvmModelGenerator.this.compiler.toJavaExpression(it, appendable);
         }
@@ -1908,6 +1955,7 @@ public class JvmModelGenerator implements IGenerator {
       final Set<String> syntheticEnumMethods = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(_plus_1, _plus_3));
       EList<JvmMember> _members = type.getMembers();
       final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
+        @Override
         public Boolean apply(final JvmMember it) {
           boolean _and = false;
           if (!(it instanceof JvmOperation)) {
@@ -1928,6 +1976,7 @@ public class JvmModelGenerator implements IGenerator {
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmDeclaredType it) {
     EList<JvmMember> _members = it.getMembers();
     final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
+      @Override
       public Boolean apply(final JvmMember it) {
         boolean _and = false;
         if (!(it instanceof JvmConstructor)) {
@@ -1948,6 +1997,7 @@ public class JvmModelGenerator implements IGenerator {
     if (_isAnonymous) {
       EList<JvmMember> _members = it.getMembers();
       final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
+        @Override
         public Boolean apply(final JvmMember it) {
           return Boolean.valueOf((!(it instanceof JvmConstructor)));
         }

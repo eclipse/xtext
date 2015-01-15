@@ -50,6 +50,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -83,6 +84,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             String _singleGeneratedCode = it.getSingleGeneratedCode();
@@ -119,6 +121,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -234,6 +237,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -243,6 +247,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass_2 = it.getCompiledClass();
             Field _declaredField = _compiledClass_2.getDeclaredField("foo");
             final Procedure1<Field> _function = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 it.setAccessible(true);
               }
@@ -276,6 +281,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             String _singleGeneratedCode = it.getSingleGeneratedCode();
@@ -288,6 +294,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass_2 = it.getCompiledClass();
             Field _declaredField = _compiledClass_2.getDeclaredField("foo");
             final Procedure1<Field> _function = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 it.setAccessible(true);
               }
@@ -321,6 +328,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -328,6 +336,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass_1 = it.getCompiledClass();
             Field _declaredField = _compiledClass_1.getDeclaredField("foo");
             final Procedure1<Field> _function = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 it.setAccessible(true);
               }
@@ -455,9 +464,11 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               try {
                 Method _declaredMethod = it.getDeclaredMethod("getA");
@@ -478,6 +489,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
                 Assert.assertTrue(_isPublic);
                 Method[] _declaredMethods = it.getDeclaredMethods();
                 final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+                  @Override
                   public Boolean apply(final Method it) {
                     String _name = it.getName();
                     return Boolean.valueOf(Objects.equal(_name, "getC"));
@@ -487,6 +499,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
                 Assert.assertFalse(_exists);
                 Method[] _declaredMethods_1 = it.getDeclaredMethods();
                 final Function1<Method, Boolean> _function_1 = new Function1<Method, Boolean>() {
+                  @Override
                   public Boolean apply(final Method it) {
                     String _name = it.getName();
                     return Boolean.valueOf(Objects.equal(_name, "setC"));
@@ -530,9 +543,11 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               try {
                 Method _declaredMethod = it.getDeclaredMethod("getA");
@@ -553,6 +568,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
                 Assert.assertTrue(_isPublic);
                 Method[] _declaredMethods = it.getDeclaredMethods();
                 final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+                  @Override
                   public Boolean apply(final Method it) {
                     String _name = it.getName();
                     return Boolean.valueOf(Objects.equal(_name, "getC"));
@@ -562,6 +578,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
                 Assert.assertFalse(_exists);
                 Method[] _declaredMethods_1 = it.getDeclaredMethods();
                 final Function1<Method, Boolean> _function_1 = new Function1<Method, Boolean>() {
+                  @Override
                   public Boolean apply(final Method it) {
                     String _name = it.getName();
                     return Boolean.valueOf(Objects.equal(_name, "setC"));
@@ -605,9 +622,11 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               try {
                 Method _declaredMethod = it.getDeclaredMethod("getA");
@@ -616,6 +635,7 @@ public class AccessorsCompilerTest extends AbstractXtendCompilerTest {
                 Assert.assertTrue(_isProtected);
                 Method[] _declaredMethods = it.getDeclaredMethods();
                 final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+                  @Override
                   public Boolean apply(final Method it) {
                     String _name = it.getName();
                     return Boolean.valueOf(Objects.equal(_name, "setA"));

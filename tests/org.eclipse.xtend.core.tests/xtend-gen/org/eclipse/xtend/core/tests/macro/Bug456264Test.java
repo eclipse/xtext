@@ -32,9 +32,11 @@ public class Bug456264Test extends AbstractActiveAnnotationTest {
     _builder.append("@org.eclipse.xtend.core.tests.macro.Bug456264 class C {}");
     _builder.newLine();
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
         final List<? extends Problem> problems = it.getAllProblems();
         final Function1<Problem, String> _function = new Function1<Problem, String>() {
+          @Override
           public String apply(final Problem it) {
             return it.getMessage();
           }

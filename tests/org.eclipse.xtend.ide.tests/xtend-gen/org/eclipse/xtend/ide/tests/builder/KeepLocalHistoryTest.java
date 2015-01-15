@@ -55,6 +55,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   @Extension
   private IPreferenceStoreAccess _iPreferenceStoreAccess;
   
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     this.setOverride(true);
@@ -63,6 +64,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   }
   
   @After
+  @Override
   public void tearDown() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
@@ -72,6 +74,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     this.setKeepLocalHistory(false);
     IFile _assertCreateFile = this.assertCreateFile(0);
     final Procedure1<IFile> _function = new Procedure1<IFile>() {
+      @Override
       public void apply(final IFile it) {
         KeepLocalHistoryTest.this.assertChangeContentByAnotherContent(it, 0);
         KeepLocalHistoryTest.this.assertChangeContentByTheSameContent(it, 0);
@@ -87,6 +90,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile, _function);
     IFile _assertCreateFile_1 = this.assertCreateFile(0);
     final Procedure1<IFile> _function_1 = new Procedure1<IFile>() {
+      @Override
       public void apply(final IFile it) {
         KeepLocalHistoryTest.this.setCleanupDerived(true);
         KeepLocalHistoryTest.this.assertCleanBuild(0);
@@ -102,6 +106,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     this.setKeepLocalHistory(true);
     IFile _assertCreateFile = this.assertCreateFile(0);
     final Procedure1<IFile> _function = new Procedure1<IFile>() {
+      @Override
       public void apply(final IFile it) {
         KeepLocalHistoryTest.this.assertChangeContentByAnotherContent(it, 1);
         KeepLocalHistoryTest.this.assertChangeContentByTheSameContent(it, 1);
@@ -117,6 +122,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile, _function);
     IFile _assertCreateFile_1 = this.assertCreateFile(2);
     final Procedure1<IFile> _function_1 = new Procedure1<IFile>() {
+      @Override
       public void apply(final IFile it) {
         KeepLocalHistoryTest.this.setCleanupDerived(true);
         KeepLocalHistoryTest.this.assertCleanBuild(3);
@@ -131,6 +137,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     try {
       IFile _createFile = this.workbenchTestHelper.createFile(KeepLocalHistoryTest.FILE_NAME, KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
       final Procedure1<IFile> _function = new Procedure1<IFile>() {
+        @Override
         public void apply(final IFile it) {
           KeepLocalHistoryTest.this.assertGeneratedFiles(expectedLocalHistorySize);
         }
@@ -145,6 +152,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
       final Procedure1<XtextEditor> _function = new Procedure1<XtextEditor>() {
+        @Override
         public void apply(final XtextEditor it) {
           IXtextDocument _document = it.getDocument();
           final String currentContent = _document.get();
@@ -170,6 +178,7 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
       final Procedure1<XtextEditor> _function = new Procedure1<XtextEditor>() {
+        @Override
         public void apply(final XtextEditor it) {
           IXtextDocument _document = it.getDocument();
           IXtextDocument _document_1 = it.getDocument();

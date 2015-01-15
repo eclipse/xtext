@@ -32,6 +32,7 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 @Beta
 @SuppressWarnings("all")
 public class JvmElementsProxifyingUnloader implements IReferableElementsUnloader {
+  @Override
   public void unloadRoot(final EObject root) {
     boolean _matched = false;
     if (!_matched) {

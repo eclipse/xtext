@@ -40,6 +40,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   
   private Collection<UnconfirmedStructuralChangesDelta> unconfirmedDeltasCopy;
   
+  @Override
   public void reset() {
     HashMap<String, JavaBuilderState> _newHashMap = CollectionLiterals.<String, JavaBuilderState>newHashMap();
     this.javaBuildState = _newHashMap;
@@ -47,6 +48,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     this.unconfirmedDeltas = _newArrayList;
   }
   
+  @Override
   public void reset(final IProject project) {
     String _name = project.getName();
     this.javaBuildState.remove(_name);
@@ -59,6 +61,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     return Collections.<UnconfirmedStructuralChangesDelta>unmodifiableCollection(this.unconfirmedDeltas);
   }
   
+  @Override
   public boolean queueChange(final IResourceDescription.Delta delta) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -89,6 +92,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     return _switchResult;
   }
   
+  @Override
   public boolean needsRebuild(final IProject it, final Collection<IResourceDescription.Delta> deltas) {
     boolean _xblockexpression = false;
     {
@@ -108,6 +112,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       }
       if (_or) {
         final Procedure1<UnconfirmedStructuralChangesDelta> _function = new Procedure1<UnconfirmedStructuralChangesDelta>() {
+          @Override
           public void apply(final UnconfirmedStructuralChangesDelta it) {
             final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
             boolean _or = false;
@@ -188,6 +193,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     return _xblockexpression;
   }
   
+  @Override
   public void createCheckpoint() {
     HashMap<String, JavaBuilderState> _hashMap = new HashMap<String, JavaBuilderState>(this.javaBuildState);
     this.javaBuildStateCopy = _hashMap;
@@ -195,11 +201,13 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
     this.unconfirmedDeltasCopy = _arrayList;
   }
   
+  @Override
   public void discardCheckpoint() {
     this.javaBuildStateCopy = null;
     this.unconfirmedDeltasCopy = null;
   }
   
+  @Override
   public void rollback() {
     this.javaBuildState.clear();
     this.javaBuildState.putAll(this.javaBuildStateCopy);

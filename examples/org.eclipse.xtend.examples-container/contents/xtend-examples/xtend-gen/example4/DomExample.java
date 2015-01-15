@@ -47,10 +47,13 @@ public class DomExample {
   public Html buildDom() {
     Html _html = new Html();
     final Procedure1<Html> _function = new Procedure1<Html>() {
+      @Override
       public void apply(final Html it) {
         final Procedure1<Head> _function = new Procedure1<Head>() {
+          @Override
           public void apply(final Head it) {
             final Procedure1<Title> _function = new Procedure1<Title>() {
+              @Override
               public void apply(final Title it) {
                 DomExample.this.db.$(it, "HTML with Xtend");
               }
@@ -60,29 +63,35 @@ public class DomExample {
         };
         DomExample.this.db.head(it, _function);
         final Procedure1<Body> _function_1 = new Procedure1<Body>() {
+          @Override
           public void apply(final Body it) {
             final Procedure1<H1> _function = new Procedure1<H1>() {
+              @Override
               public void apply(final H1 it) {
                 DomExample.this.db.$(it, "HTML with Xtend");
               }
             };
             DomExample.this.db.h1(it, _function);
             final Procedure1<P> _function_1 = new Procedure1<P>() {
+              @Override
               public void apply(final P it) {
                 DomExample.this.db.$(it, "this format can be used as an alternative to templates.");
               }
             };
             DomExample.this.db.p(it, _function_1);
             final Procedure1<A> _function_2 = new Procedure1<A>() {
+              @Override
               public void apply(final A it) {
                 DomExample.this.db.$(it, "Xtend");
               }
             };
             DomExample.this.db.a(it, "http://www.xtend-lang.org", _function_2);
             final Procedure1<P> _function_3 = new Procedure1<P>() {
+              @Override
               public void apply(final P it) {
                 DomExample.this.db.$(it, "This is some ");
                 final Procedure1<B> _function = new Procedure1<B>() {
+                  @Override
                   public void apply(final B it) {
                     DomExample.this.db.$(it, "mixed");
                   }
@@ -90,6 +99,7 @@ public class DomExample {
                 DomExample.this.db.b(it, _function);
                 DomExample.this.db.$(it, " text. For more see the ");
                 final Procedure1<A> _function_1 = new Procedure1<A>() {
+                  @Override
                   public void apply(final A it) {
                     DomExample.this.db.$(it, "Xtend");
                   }
@@ -100,6 +110,7 @@ public class DomExample {
             };
             DomExample.this.db.p(it, _function_3);
             final Procedure1<P> _function_4 = new Procedure1<P>() {
+              @Override
               public void apply(final P it) {
                 DomExample.this.db.$(it, "More text.");
               }

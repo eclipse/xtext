@@ -86,6 +86,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
       String _absolutePath = srcProjectRoot.getAbsolutePath();
       final Set<URI> allResourceUris = pathTraverser.findAllResourceUris(_absolutePath, 
         new Predicate<URI>() {
+          @Override
           public boolean apply(final URI input) {
             final String fileName = input.toFileString();
             boolean _and = false;

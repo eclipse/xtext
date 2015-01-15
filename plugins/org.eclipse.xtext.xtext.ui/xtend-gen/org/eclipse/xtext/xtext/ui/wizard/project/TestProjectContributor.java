@@ -20,6 +20,7 @@ public class TestProjectContributor extends DefaultProjectFactoryContributor {
     this.projectInfo = projectInfo;
   }
   
+  @Override
   public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fileWriter) {
     this.contributeBuildProperties(fileWriter);
     this.contributeLaunchConfig(fileWriter);

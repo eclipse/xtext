@@ -53,38 +53,47 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     this.compilationUnit = compilationUnit;
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final String annotationTypeName) {
     final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
+      @Override
       public void apply(final AnnotationReferenceBuildContext it) {
       }
     };
     return this.newAnnotationReference(annotationTypeName, _function);
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration) {
     final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
+      @Override
       public void apply(final AnnotationReferenceBuildContext it) {
       }
     };
     return this.newAnnotationReference(annotationTypeDelcaration, _function);
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass) {
     final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
+      @Override
       public void apply(final AnnotationReferenceBuildContext it) {
       }
     };
     return this.newAnnotationReference(annotationClass, _function);
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference) {
     final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
+      @Override
       public void apply(final AnnotationReferenceBuildContext it) {
       }
     };
     return this.newAnnotationReference(annotationReference, _function);
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final String annotationTypeName, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     AnnotationReference _xblockexpression = null;
     {
@@ -107,6 +116,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
       }
       AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
       final Procedure1<AnnotationReferenceBuildContextImpl> _function = new Procedure1<AnnotationReferenceBuildContextImpl>() {
+        @Override
         public void apply(final AnnotationReferenceBuildContextImpl it) {
           it.setDelegate(jvmAnnotationReference);
           it.setCompilationUnit(AnnotationReferenceProviderImpl.this.compilationUnit);
@@ -119,6 +129,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     return _xblockexpression;
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final Type annotationTypeDelcaration, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     Object _xblockexpression = null;
     {
@@ -155,6 +166,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
         final JvmAnnotationReference newJvmAnnotationReference = this.createJvmAnnotationReference(type);
         AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
         final Procedure1<AnnotationReferenceBuildContextImpl> _function = new Procedure1<AnnotationReferenceBuildContextImpl>() {
+          @Override
           public void apply(final AnnotationReferenceBuildContextImpl it) {
             it.setDelegate(newJvmAnnotationReference);
             it.setCompilationUnit(AnnotationReferenceProviderImpl.this.compilationUnit);
@@ -169,6 +181,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     return ((AnnotationReference)_xblockexpression);
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     AnnotationReference _xblockexpression = null;
     {
@@ -182,6 +195,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     return _xblockexpression;
   }
   
+  @Override
   public AnnotationReference newAnnotationReference(final AnnotationReference annotationReference, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     Object _xblockexpression = null;
     {
@@ -201,6 +215,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
         final JvmAnnotationReference newJvmAnnotationReference = this.createJvmAnnotationReference(_annotation);
         AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
         final Procedure1<AnnotationReferenceBuildContextImpl> _function = new Procedure1<AnnotationReferenceBuildContextImpl>() {
+          @Override
           public void apply(final AnnotationReferenceBuildContextImpl it) {
             it.setDelegate(newJvmAnnotationReference);
             it.setCompilationUnit(AnnotationReferenceProviderImpl.this.compilationUnit);
@@ -209,6 +224,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
         final AnnotationReferenceBuildContextImpl buildContext = ObjectExtensions.<AnnotationReferenceBuildContextImpl>operator_doubleArrow(_annotationReferenceBuildContextImpl, _function);
         EList<JvmAnnotationValue> _values = baseJvmAnnotationReference.getValues();
         final Function1<JvmAnnotationValue, String> _function_1 = new Function1<JvmAnnotationValue, String>() {
+          @Override
           public String apply(final JvmAnnotationValue it) {
             return it.getValueName();
           }
@@ -247,6 +263,7 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
         _matched=true;
         JvmAnnotationReference _createJvmAnnotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
         final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+          @Override
           public void apply(final JvmAnnotationReference it) {
             it.setAnnotation(((JvmAnnotationType)type));
           }

@@ -20,6 +20,7 @@ public class TypeReferenceFormatterTest {
   
   private void assertFormattedTypeRef(final Procedure1<? super FormatterTestRequest> test) {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         test.apply(it);
         StringConcatenation _builder = new StringConcatenation();
@@ -42,6 +43,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void simple() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("String");
       }
@@ -52,6 +54,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void array1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("String[]");
       }
@@ -62,6 +65,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void array2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("String[][]");
       }
@@ -72,6 +76,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void function0() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("=>void");
       }
@@ -82,6 +87,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void function1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("()=>void");
       }
@@ -92,6 +98,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void function2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("(String)=>String");
       }
@@ -102,6 +109,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void function3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("(Collection<?>)=>Collection<?>");
       }
@@ -112,6 +120,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void function4() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("(Collection<? extends String>)=>Collection<? extends String>");
       }
@@ -122,6 +131,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void function5() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("(String, String)=>String");
       }
@@ -132,6 +142,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void parameters1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("Collection<String>");
       }
@@ -142,6 +153,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void parameters2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("Map<String, String>");
       }
@@ -152,6 +164,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void parametersNested() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("Map<Collection<String>, Collection<String>>");
       }
@@ -162,6 +175,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void parametersUpperBound() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("Collection<? extends String>");
       }
@@ -172,6 +186,7 @@ public class TypeReferenceFormatterTest {
   @Test
   public void parametersLowerBound() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         it.setToBeFormatted("Collection<? super String>");
       }

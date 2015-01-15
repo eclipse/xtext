@@ -20,11 +20,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class ImmutableProcessor implements TransformationParticipant<MutableClassDeclaration> {
+  @Override
   public void doTransform(final List<? extends MutableClassDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableClassDeclaration clazz : annotatedTargetElements) {
       {
         final Iterable<? extends MutableFieldDeclaration> fields = clazz.getDeclaredFields();
         final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
+          @Override
           public void apply(final MutableConstructorDeclaration it) {
             for (final MutableFieldDeclaration f : fields) {
               {
@@ -35,6 +37,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
               }
             }
             final CompilationStrategy _function = new CompilationStrategy() {
+              @Override
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 {
@@ -63,11 +66,13 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
             String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
             final String getterName = ("get" + _firstUpper);
             final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+              @Override
               public void apply(final MutableMethodDeclaration it) {
                 f.markAsRead();
                 TypeReference _type = f.getType();
                 it.setReturnType(_type);
                 final CompilationStrategy _function = new CompilationStrategy() {
+                  @Override
                   public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                     StringConcatenation _builder = new StringConcatenation();
                     _builder.append("return ");
@@ -85,12 +90,14 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
           }
         }
         final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             TypeReference _primitiveInt = context.getPrimitiveInt();
             it.setReturnType(_primitiveInt);
             AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
             it.addAnnotation(_newAnnotationReference);
             final CompilationStrategy _function = new CompilationStrategy() {
+              @Override
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("final int prime = 31;");

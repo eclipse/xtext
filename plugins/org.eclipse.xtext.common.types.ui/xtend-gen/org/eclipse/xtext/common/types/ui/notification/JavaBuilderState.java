@@ -267,6 +267,7 @@ public class JavaBuilderState {
       }
       final LinkedHashSet<String> qualifiedTypeNames = CollectionLiterals.<String>newLinkedHashSet();
       final Procedure1<char[]> _function = new Procedure1<char[]>() {
+        @Override
         public void apply(final char[] it) {
           String _string = new String(it);
           String _qualifedTypeName = JavaBuilderState.this.getQualifedTypeName(packageName, _string);

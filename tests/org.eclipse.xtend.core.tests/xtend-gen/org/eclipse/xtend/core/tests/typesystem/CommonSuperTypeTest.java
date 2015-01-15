@@ -92,6 +92,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Function1<JvmFormalParameter, LightweightTypeReference> _function = new Function1<JvmFormalParameter, LightweightTypeReference>() {
+        @Override
         public LightweightTypeReference apply(final JvmFormalParameter it) {
           JvmTypeReference _parameterType = it.getParameterType();
           return CommonSuperTypeTest.this.toLightweightTypeReference(_parameterType);
@@ -172,8 +173,10 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       boolean _notEquals = (!Objects.equal(computedSuperType, null));
       if (_notEquals) {
         final Procedure1<LightweightTypeReference> _function_1 = new Procedure1<LightweightTypeReference>() {
+          @Override
           public void apply(final LightweightTypeReference superType) {
             final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
+              @Override
               public void apply(final LightweightTypeReference it) {
                 String _key = superTypeAndParam.getKey();
                 ITypeReferenceOwner _owner = superType.getOwner();
@@ -223,6 +226,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
+      @Override
       public CharSequence apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }

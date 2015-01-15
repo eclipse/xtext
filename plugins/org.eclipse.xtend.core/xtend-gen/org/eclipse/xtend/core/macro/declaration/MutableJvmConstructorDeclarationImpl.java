@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarationImpl implements MutableConstructorDeclaration {
+  @Override
   public void markAsRead() {
     this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -29,16 +30,19 @@ public class MutableJvmConstructorDeclarationImpl extends JvmConstructorDeclarat
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
+  @Override
   public Iterable<? extends MutableParameterDeclaration> getParameters() {
     Iterable<? extends ParameterDeclaration> _parameters = super.getParameters();
     return ((Iterable<? extends MutableParameterDeclaration>) _parameters);
   }
   
+  @Override
   public Iterable<? extends MutableTypeParameterDeclaration> getTypeParameters() {
     Iterable<? extends TypeParameterDeclaration> _typeParameters = super.getTypeParameters();
     return ((Iterable<? extends MutableTypeParameterDeclaration>) _typeParameters);
   }
   
+  @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);

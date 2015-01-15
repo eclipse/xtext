@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistInArgumentListTest3 extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "does.not().exist(";
   }
   
+  @Override
   protected String getSuffix() {
     return ")";
   }

@@ -55,6 +55,7 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
     return new TextSegment(_textRegionAccess, offset, (endOffset - offset));
   }
   
+  @Override
   public ObjectEntry<T, R> getLeadingObject() {
     Entry<T, R> _previous = null;
     if (this.previous!=null) {
@@ -63,6 +64,7 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
     return ((ObjectEntry<T, R>) _previous);
   }
   
+  @Override
   public ObjectEntry<T, R> getTrailingObject() {
     Entry<T, R> _next = null;
     if (this.next!=null) {
@@ -71,14 +73,17 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
     return ((ObjectEntry<T, R>) _next);
   }
   
+  @Override
   public SeparatorEntry<T, R> getLeadingSeparator() {
     return ((SeparatorEntry<T, R>) this.previous);
   }
   
+  @Override
   public SeparatorEntry<T, R> getTrailingSeparator() {
     return ((SeparatorEntry<T, R>) this.next);
   }
   
+  @Override
   public String toString() {
     String _xblockexpression = null;
     {

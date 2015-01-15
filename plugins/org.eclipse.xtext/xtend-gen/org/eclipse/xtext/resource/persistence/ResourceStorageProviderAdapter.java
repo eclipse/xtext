@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
  */
 @SuppressWarnings("all")
 public class ResourceStorageProviderAdapter extends AdapterImpl {
+  @Override
   public boolean isAdapterForType(final Object type) {
     return Objects.equal(type, ResourceStorageProviderAdapter.class);
   }

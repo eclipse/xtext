@@ -21,30 +21,35 @@ public class MutableAssert extends Assert {
     _builder.append(" has to be a valid qualified name");
     final String message = _builder.toString();
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply(null);
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function);
     final Procedure0 _function_1 = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply("  ");
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_1);
     final Procedure0 _function_2 = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply("456");
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_2);
     final Procedure0 _function_3 = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply("foo. Bar ");
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_3);
     final Procedure0 _function_4 = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply("foo.456.Bar");
       }
@@ -59,18 +64,21 @@ public class MutableAssert extends Assert {
     _builder.append(" has to be a valid java identifier");
     final String message = _builder.toString();
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply(null);
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function);
     final Procedure0 _function_1 = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply("  ");
       }
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_1);
     final Procedure0 _function_2 = new Procedure0() {
+      @Override
       public void apply() {
         codeToTest.apply("456");
       }

@@ -25,13 +25,16 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
   @Inject
   private TypeReferences references;
   
+  @Override
   public void infer(final EObject e, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(((XExpression) e), "Test");
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+      @Override
       public void apply(final JvmGenericType it) {
         EList<JvmMember> _members = it.getMembers();
         JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);
         final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+          @Override
           public void apply(final JvmOperation it) {
             EList<JvmFormalParameter> _parameters = it.getParameters();
             JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);

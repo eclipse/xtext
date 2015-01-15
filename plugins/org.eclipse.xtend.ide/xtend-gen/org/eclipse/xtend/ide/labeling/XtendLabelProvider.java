@@ -129,6 +129,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
     return this.images.forClass(_visibility, _get);
   }
   
+  @Override
   protected ImageDescriptor _imageDescriptor(final JvmOperation operation) {
     ImageDescriptor _xifexpression = null;
     boolean _isDispatcherFunction = this._dispatchHelper.isDispatcherFunction(operation);

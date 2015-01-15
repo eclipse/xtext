@@ -25,6 +25,7 @@ public class XbaseEditorInputRedirectorTest extends AbstractXtendUITestCase {
   private XbaseEditorInputRedirector redirector;
   
   @After
+  @Override
   public void tearDown() {
     try {
       this.helper.tearDown();

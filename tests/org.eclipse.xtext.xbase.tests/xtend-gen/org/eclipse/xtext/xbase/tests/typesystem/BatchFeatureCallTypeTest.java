@@ -34,6 +34,7 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
     return this.batchTypeResolver;
   }
   
+  @Override
   public void resolvesFeatureCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XAbstractFeatureCall> featureCalls = this.findFeatureCalls(expressionWithQualifiedNames);
@@ -47,6 +48,7 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
     int _size_1 = IterableExtensions.size(actualFeatureCalls);
     Assert.assertEquals(("" + actualFeatureCalls), _size, _size_1);
     final Procedure2<XAbstractFeatureCall, Integer> _function = new Procedure2<XAbstractFeatureCall, Integer>() {
+      @Override
       public void apply(final XAbstractFeatureCall featureCall, final Integer index) {
         final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
         StringConcatenation _builder = new StringConcatenation();
@@ -62,30 +64,35 @@ public class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testRawType_01() throws Exception {
     super.testRawType_01();
   }
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testRawType_02() throws Exception {
     super.testRawType_02();
   }
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testRawType_05() throws Exception {
     super.testRawType_05();
   }
   
   @Test
   @Ignore("TODO This should work")
+  @Override
   public void testBug_391758() throws Exception {
     super.testBug_391758();
   }
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testArray_09() throws Exception {
     super.testArray_09();
   }

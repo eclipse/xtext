@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class Bug456264Processor extends AbstractClassProcessor {
+  @Override
   public void doValidate(final ClassDeclaration annotatedClass, @Extension final ValidationContext context) {
     context.addError(annotatedClass, "My error message");
   }

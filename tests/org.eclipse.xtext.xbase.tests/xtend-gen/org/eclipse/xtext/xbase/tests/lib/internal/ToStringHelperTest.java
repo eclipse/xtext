@@ -105,6 +105,7 @@ public class ToStringHelperTest {
       this.friend = friend;
     }
     
+    @Override
     public String toString() {
       String _plus = (Boolean.valueOf(this.boolProp) + "\n");
       String _plus_1 = (_plus + Integer.valueOf(this.intProp));

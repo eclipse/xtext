@@ -36,6 +36,7 @@ public class HiddenLeafAccess {
     HiddenLeafs _xblockexpression = null;
     {
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
+        @Override
         public Boolean apply(final ILeafNode it) {
           boolean _isHidden = it.isHidden();
           return Boolean.valueOf((!_isHidden));
@@ -152,6 +153,7 @@ public class HiddenLeafAccess {
     HiddenLeafs _xblockexpression = null;
     {
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
+        @Override
         public Boolean apply(final ILeafNode it) {
           boolean _isHidden = it.isHidden();
           return Boolean.valueOf((!_isHidden));

@@ -23,6 +23,7 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
     this.projectInfo = projectInfo;
   }
   
+  @Override
   public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fileCreator) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -35,6 +36,7 @@ public class SiteSpexCreator implements IProjectFactoryContributor {
     {
       List<IFile> _testLaunchers = this.projectInfo.getTestLaunchers();
       final Function1<IFile, IProject> _function = new Function1<IFile, IProject>() {
+        @Override
         public IProject apply(final IFile it) {
           return it.getProject();
         }

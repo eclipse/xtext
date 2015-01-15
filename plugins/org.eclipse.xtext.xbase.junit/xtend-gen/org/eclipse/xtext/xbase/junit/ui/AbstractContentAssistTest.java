@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-@SuppressWarnings("all")
+@SuppressWarnings("restriction")
 public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
@@ -79,6 +79,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
     return new ContentAssistProcessorTestBuilder(this.injector, this);
   }
   
+  @Override
   public XtextResource getResourceFor(final InputStream stream) {
     try {
       XtextResource _xblockexpression = null;
@@ -105,6 +106,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
     set.setClasspathURIContext(_javaProject);
   }
   
+  @Override
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     return AbstractContentAssistTest.javaProject;
   }

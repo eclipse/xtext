@@ -46,11 +46,13 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return _containerOfType.getPackage();
   }
   
+  @Override
   public String getSimpleName() {
     T _delegate = this.getDelegate();
     return _delegate.getName();
   }
   
+  @Override
   public String getQualifiedName() {
     T _delegate = this.getDelegate();
     return this.getQualifiedName(_delegate);
@@ -83,6 +85,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return null;
   }
   
+  @Override
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
@@ -90,10 +93,12 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return _compilationUnit.toVisibility(_visibility);
   }
   
+  @Override
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
     T _delegate = this.getDelegate();
     EList<XtendMember> _members = _delegate.getMembers();
     final Function1<XtendMember, MemberDeclaration> _function = new Function1<XtendMember, MemberDeclaration>() {
+      @Override
       public MemberDeclaration apply(final XtendMember it) {
         CompilationUnitImpl _compilationUnit = XtendTypeDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendMemberDeclaration(it);
@@ -102,6 +107,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
   }
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
@@ -116,12 +122,15 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
+  @Override
   public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
     final Function1<ConstructorDeclaration, Boolean> _function = new Function1<ConstructorDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final ConstructorDeclaration constructor) {
         Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
         final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+          @Override
           public TypeReference apply(final ParameterDeclaration it) {
             return it.getType();
           }
@@ -135,9 +144,11 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return IterableExtensions.findFirst(_declaredConstructors, _function);
   }
   
+  @Override
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final FieldDeclaration field) {
         String _simpleName = field.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -146,9 +157,11 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return IterableExtensions.findFirst(_declaredFields, _function);
   }
   
+  @Override
   public TypeDeclaration findDeclaredType(final String name) {
     Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
     final Function1<TypeDeclaration, Boolean> _function = new Function1<TypeDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final TypeDeclaration type) {
         String _simpleName = type.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -157,9 +170,11 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return IterableExtensions.findFirst(_declaredTypes, _function);
   }
   
+  @Override
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
     final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final MethodDeclaration method) {
         boolean _and = false;
         String _simpleName = method.getSimpleName();
@@ -169,6 +184,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
         } else {
           Iterable<? extends ParameterDeclaration> _parameters = method.getParameters();
           final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+            @Override
             public TypeReference apply(final ParameterDeclaration it) {
               return it.getType();
             }
@@ -185,41 +201,49 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return IterableExtensions.findFirst(_declaredMethods, _function);
   }
   
+  @Override
   public Iterable<? extends MethodDeclaration> getDeclaredMethods() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends FieldDeclaration> getDeclaredFields() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<FieldDeclaration>filter(_declaredMembers, FieldDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends ClassDeclaration> getDeclaredClasses() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<ClassDeclaration>filter(_declaredMembers, ClassDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends ConstructorDeclaration> getDeclaredConstructors() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<ConstructorDeclaration>filter(_declaredMembers, ConstructorDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<InterfaceDeclaration>filter(_declaredMembers, InterfaceDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends AnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<AnnotationTypeDeclaration>filter(_declaredMembers, AnnotationTypeDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends EnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<EnumerationTypeDeclaration>filter(_declaredMembers, EnumerationTypeDeclaration.class);
   }
   
+  @Override
   public Iterable<? extends TypeDeclaration> getDeclaredTypes() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<TypeDeclaration>filter(_declaredMembers, TypeDeclaration.class);

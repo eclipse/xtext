@@ -78,6 +78,7 @@ public class XtendGenerator extends JvmModelGenerator {
   private static class StopCollecting extends Exception {
   }
   
+  @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     super.doGenerate(input, fsa);
     this.callMacroProcessors(input);
@@ -103,6 +104,7 @@ public class XtendGenerator extends JvmModelGenerator {
               _matched=true;
               CodeGenerationContextImpl _codeGenerationContextImpl = new CodeGenerationContextImpl();
               final Procedure1<CodeGenerationContextImpl> _function = new Procedure1<CodeGenerationContextImpl>() {
+                @Override
                 public void apply(final CodeGenerationContextImpl it) {
                   CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
                   it.setUnit(_compilationUnit);
@@ -111,6 +113,7 @@ public class XtendGenerator extends JvmModelGenerator {
               final CodeGenerationContextImpl codeGenServices = ObjectExtensions.<CodeGenerationContextImpl>operator_doubleArrow(_codeGenerationContextImpl, _function);
               List<XtendAnnotationTarget> _annotatedSourceElements = context.getAnnotatedSourceElements();
               final Function1<XtendAnnotationTarget, MemberDeclaration> _function_1 = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
+                @Override
                 public MemberDeclaration apply(final XtendAnnotationTarget it) {
                   CompilationUnitImpl _compilationUnit = context.getCompilationUnit();
                   return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
@@ -134,6 +137,7 @@ public class XtendGenerator extends JvmModelGenerator {
     }
   }
   
+  @Override
   protected ImportingStringConcatenation createImportingStringConcatenation(final SharedAppendableState state, final ITypeReferenceOwner owner) {
     return new MacroAwareStringConcatenation(state, owner);
   }
@@ -143,16 +147,19 @@ public class XtendGenerator extends JvmModelGenerator {
    * 
    * Unicode escaping is handled by the {@link UnicodeAwarePostProcessor}.
    */
+  @Override
   public String doConvertToJavaString(final String input) {
     return Strings.convertToJavaString(input, false);
   }
   
+  @Override
   protected Iterable<JvmMember> _getMembersToBeCompiled(final JvmGenericType it) {
     Iterable<JvmMember> _xifexpression = null;
     boolean _isLocal = it.isLocal();
     if (_isLocal) {
       EList<JvmMember> _members = it.getMembers();
       final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
+        @Override
         public Boolean apply(final JvmMember it) {
           return Boolean.valueOf((it instanceof JvmOperation));
         }
@@ -178,6 +185,7 @@ public class XtendGenerator extends JvmModelGenerator {
     Iterables.<JvmMember>addAll(result, _declaredFields);
     Iterable<JvmOperation> _declaredOperations = it.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
+      @Override
       public Boolean apply(final JvmOperation it) {
         Set<EObject> _sourceElements = XtendGenerator.this.getSourceElements(it);
         EObject _head = IterableExtensions.<EObject>head(_sourceElements);
@@ -194,6 +202,7 @@ public class XtendGenerator extends JvmModelGenerator {
     return result;
   }
   
+  @Override
   public ITreeAppendable compile(final JvmExecutable executable, final XExpression expression, final JvmTypeReference returnType, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -203,6 +212,7 @@ public class XtendGenerator extends JvmModelGenerator {
     return _xblockexpression;
   }
   
+  @Override
   public String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
     String _xifexpression = null;
     boolean _hasObject = b.hasObject("this");
@@ -250,6 +260,7 @@ public class XtendGenerator extends JvmModelGenerator {
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<JvmGenericType> _localClasses = feature.getLocalClasses();
     final Function1<JvmGenericType, Boolean> _function = new Function1<JvmGenericType, Boolean>() {
+      @Override
       public Boolean apply(final JvmGenericType it) {
         boolean _isAnonymous = it.isAnonymous();
         return Boolean.valueOf((!_isAnonymous));
@@ -257,6 +268,7 @@ public class XtendGenerator extends JvmModelGenerator {
     };
     Iterable<JvmGenericType> _filter = IterableExtensions.<JvmGenericType>filter(_localClasses, _function);
     final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+      @Override
       public void apply(final JvmGenericType it) {
         appendable.newLine();
         Set<EObject> _sourceElements = XtendGenerator.this.getSourceElements(it);
@@ -292,8 +304,10 @@ public class XtendGenerator extends JvmModelGenerator {
         }
         ArrayList<JvmMember> _addedDeclarations = XtendGenerator.this.getAddedDeclarations(it, anonymousClass);
         final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+          @Override
           public void apply(final LoopParams it) {
             final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+              @Override
               public ITreeAppendable apply(final ITreeAppendable it) {
                 return it.newLine();
               }
@@ -302,6 +316,7 @@ public class XtendGenerator extends JvmModelGenerator {
           }
         };
         final Procedure1<JvmMember> _function_1 = new Procedure1<JvmMember>() {
+          @Override
           public void apply(final JvmMember it) {
             final ITreeAppendable memberAppendable = XtendGenerator.this._treeAppendableUtil.traceWithComments(childAppendable, it);
             memberAppendable.openScope();
@@ -364,6 +379,7 @@ public class XtendGenerator extends JvmModelGenerator {
     final ArrayList<EObject> references = CollectionLiterals.<EObject>newArrayList();
     try {
       final EcoreUtil2.ElementReferenceAcceptor acceptor = new EcoreUtil2.ElementReferenceAcceptor() {
+        @Override
         public void accept(final EObject referrer, final EObject referenced, final EReference reference, final int index) {
           try {
             final XtendTypeDeclaration enclosingType = EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(referrer, XtendTypeDeclaration.class);
@@ -411,6 +427,7 @@ public class XtendGenerator extends JvmModelGenerator {
     return (!_isEmpty);
   }
   
+  @Override
   public ITreeAppendable generateVisibilityModifier(final JvmMember it, final ITreeAppendable result) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -440,6 +457,7 @@ public class XtendGenerator extends JvmModelGenerator {
     return _xblockexpression;
   }
   
+  @Override
   public ITreeAppendable generateMembersInBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xifexpression = null;
     boolean _isLocal = it.isLocal();
@@ -450,6 +468,7 @@ public class XtendGenerator extends JvmModelGenerator {
         _append.increaseIndentation();
         Iterable<JvmField> _declaredFields = it.getDeclaredFields();
         final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
+          @Override
           public Boolean apply(final JvmField it) {
             boolean _xblockexpression = false;
             {
@@ -490,8 +509,10 @@ public class XtendGenerator extends JvmModelGenerator {
           ITreeAppendable _append_1 = _newLine.append("{");
           _append_1.increaseIndentation();
           final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
+            @Override
             public void apply(final LoopParams it) {
               final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+                @Override
                 public ITreeAppendable apply(final ITreeAppendable it) {
                   return it.newLine();
                 }
@@ -500,6 +521,7 @@ public class XtendGenerator extends JvmModelGenerator {
             }
           };
           final Procedure1<JvmField> _function_2 = new Procedure1<JvmField>() {
+            @Override
             public void apply(final JvmField it) {
               final ITreeAppendable memberAppendable = XtendGenerator.this._treeAppendableUtil.traceWithComments(appendable, it);
               memberAppendable.openScope();
@@ -520,8 +542,10 @@ public class XtendGenerator extends JvmModelGenerator {
         }
         Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
         final Procedure1<LoopParams> _function_3 = new Procedure1<LoopParams>() {
+          @Override
           public void apply(final LoopParams it) {
             final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
+              @Override
               public ITreeAppendable apply(final ITreeAppendable it) {
                 return it.newLine();
               }
@@ -530,6 +554,7 @@ public class XtendGenerator extends JvmModelGenerator {
           }
         };
         final Procedure1<JvmMember> _function_4 = new Procedure1<JvmMember>() {
+          @Override
           public void apply(final JvmMember it) {
             final ITreeAppendable memberAppendable = XtendGenerator.this._treeAppendableUtil.traceWithComments(appendable, it);
             memberAppendable.openScope();

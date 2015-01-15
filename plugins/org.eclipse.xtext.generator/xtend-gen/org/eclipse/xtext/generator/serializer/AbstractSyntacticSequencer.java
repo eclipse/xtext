@@ -75,6 +75,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   @Accessors
   private SyntheticTerminalDetector syntheticTerminalDetector;
   
+  @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     String _xblockexpression = null;
     {
@@ -247,15 +248,18 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     {
       List<AbstractRule> _allRules = GrammarUtil.allRules(this.grammar);
       final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+        @Override
         public Boolean apply(final AbstractRule it) {
           return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
         }
       };
       final Iterable<AbstractRule> rules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
       final Function1<AbstractRule, Iterable<RuleCall>> _function_1 = new Function1<AbstractRule, Iterable<RuleCall>>() {
+        @Override
         public Iterable<RuleCall> apply(final AbstractRule r) {
           List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(r);
           final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
+            @Override
             public Boolean apply(final RuleCall e) {
               return Boolean.valueOf(AbstractSyntacticSequencer.this.isUnassignedRuleCall(e));
             }
@@ -266,6 +270,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
       final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
       final Function1<RuleCall, AbstractRule> _function_2 = new Function1<RuleCall, AbstractRule>() {
+        @Override
         public AbstractRule apply(final RuleCall it) {
           return it.getRule();
         }
@@ -273,6 +278,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
       Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
       final Function1<AbstractRule, String> _function_3 = new Function1<AbstractRule, String>() {
+        @Override
         public String apply(final AbstractRule it) {
           return it.getName();
         }
@@ -343,6 +349,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _matched=true;
         EList<AbstractElement> _elements = ((Group)ele).getElements();
         final Function1<AbstractElement, String> _function = new Function1<AbstractElement, String>() {
+          @Override
           public String apply(final AbstractElement e) {
             return AbstractSyntacticSequencer.this.defaultValue(e, visited);
           }
@@ -439,6 +446,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         _matched=true;
         BidiIterable<INode> _children = ((ICompositeNode)node).getChildren();
         final Function1<INode, String> _function = new Function1<INode, String>() {
+          @Override
           public String apply(final INode it) {
             return AbstractSyntacticSequencer.this.textWithoutComments(it);
           }

@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MemberDeclaration {
+  @Override
   public String getDocComment() {
     T _delegate = this.getDelegate();
     EList<Adapter> _eAdapters = _delegate.eAdapters();
@@ -63,6 +64,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     adapter.setDocumentation(docComment);
   }
   
+  @Override
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
@@ -95,6 +97,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     _delegate.setVisibility(_switchResult);
   }
   
+  @Override
   public TypeDeclaration getDeclaringType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
@@ -118,10 +121,12 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     _delegate_1.setSimpleName(name);
   }
   
+  @Override
   public Set<Modifier> getModifiers() {
     return Collections.<Modifier>unmodifiableSet(CollectionLiterals.<Modifier>newHashSet());
   }
   
+  @Override
   public boolean isDeprecated() {
     T _delegate = this.getDelegate();
     return DeprecationUtil.isDeprecatedMember(_delegate);

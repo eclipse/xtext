@@ -229,6 +229,7 @@ public class FormattableDocument {
       IntegerRange _upTo = new IntegerRange(0, 5);
       int _offset = data1.getOffset();
       final Function2<Integer, Integer, Integer> _function = new Function2<Integer, Integer, Integer>() {
+        @Override
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
           if (((last).intValue() > 0)) {
@@ -243,6 +244,7 @@ public class FormattableDocument {
       IntegerRange _upTo_1 = new IntegerRange(0, 5);
       int _offset_1 = data1.getOffset();
       final Function2<Integer, Integer, Integer> _function_1 = new Function2<Integer, Integer, Integer>() {
+        @Override
         public Integer apply(final Integer last, final Integer i) {
           int _xifexpression = (int) 0;
           if (((last).intValue() > 0)) {
@@ -340,6 +342,7 @@ public class FormattableDocument {
     boolean _notEquals = (!Objects.equal(data, null));
     if (_notEquals) {
       final Procedure1<FormattingData> _function = new Procedure1<FormattingData>() {
+        @Override
         public void apply(final FormattingData it) {
           FormattableDocument.this.addFormatting(it);
         }
@@ -451,6 +454,7 @@ public class FormattableDocument {
       int lastOffset = offset;
       final StringBuilder newDocument = new StringBuilder();
       final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
+        @Override
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(offset);
         }
@@ -481,6 +485,7 @@ public class FormattableDocument {
     int _minus = (_length - 1);
     IntegerRange _upTo = new IntegerRange(0, _minus);
     final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
+      @Override
       public Boolean apply(final Integer it) {
         char _charAt = doc.charAt((it).intValue());
         return Boolean.valueOf(Character.isWhitespace(_charAt));
@@ -584,6 +589,7 @@ public class FormattableDocument {
     }
   }
   
+  @Override
   public String toString() {
     String _xblockexpression = null;
     {
@@ -630,6 +636,7 @@ public class FormattableDocument {
         final String indent = this.cfg.get(BasicFormatterPreferenceKeys.indentation);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
         final Function1<Integer, String> _function = new Function1<Integer, String>() {
+          @Override
           public String apply(final Integer it) {
             return indent;
           }
@@ -657,6 +664,7 @@ public class FormattableDocument {
         final String sep = this.cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
         final Function1<Integer, String> _function = new Function1<Integer, String>() {
+          @Override
           public String apply(final Integer it) {
             return sep;
           }

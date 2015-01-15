@@ -44,6 +44,7 @@ public class XtendFileHyperlink implements IHyperlink {
     this.console = console;
   }
   
+  @Override
   public void linkActivated() {
     try {
       try {
@@ -89,9 +90,11 @@ public class XtendFileHyperlink implements IHyperlink {
     }
   }
   
+  @Override
   public void linkEntered() {
   }
   
+  @Override
   public void linkExited() {
   }
   

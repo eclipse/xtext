@@ -60,6 +60,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
     this.javaCompiler.addClassPathOfClass(javax.inject.Inject.class);
   }
   
+  @Override
   protected Object invokeXbaseExpression(final String expression) {
     try {
       Object _xblockexpression = null;

@@ -157,6 +157,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration c = _typeLookup.findClass("Bug441081Client");
@@ -255,6 +256,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Client");
@@ -364,12 +366,14 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
         final MutableFieldDeclaration barField = cls.findDeclaredField("bar");
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = cls.getDeclaredMethods();
         final Function1<MutableMethodDeclaration, Boolean> _function = new Function1<MutableMethodDeclaration, Boolean>() {
+          @Override
           public Boolean apply(final MutableMethodDeclaration it) {
             String _simpleName = it.getSimpleName();
             return Boolean.valueOf(_simpleName.startsWith("get"));
@@ -454,6 +458,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
@@ -526,6 +531,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
@@ -598,6 +604,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Client");
@@ -691,6 +698,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
@@ -777,6 +785,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration cls = _typeLookup.findClass("myusercode.Foo");
@@ -878,11 +887,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
         EList<Resource.Diagnostic> _errors = _eResource.getErrors();
         final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          @Override
           public Boolean apply(final Resource.Diagnostic it) {
             String _message = it.getMessage();
             return Boolean.valueOf(_message.contains("cannot be modified"));
@@ -1040,6 +1051,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Foo");
@@ -1196,6 +1208,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration foo = _typeLookup.findClass("myusercode.Foo");
@@ -1529,6 +1542,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -1575,6 +1589,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         int _size = ((List<AnnotationReference>)Conversions.doWrapArray(annotationsValue)).size();
         Assert.assertEquals(2, _size);
         final Procedure1<AnnotationReference> _function = new Procedure1<AnnotationReference>() {
+          @Override
           public void apply(final AnnotationReference it) {
             AnnotationTypeDeclaration _annotationTypeDeclaration = annotationValue.getAnnotationTypeDeclaration();
             Assert.assertEquals(someAnnotationType, _annotationTypeDeclaration);
@@ -1665,6 +1680,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -1837,6 +1853,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.UserCode");
@@ -2100,6 +2117,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
       }
     };
@@ -2319,6 +2337,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
       }
     };
@@ -2494,6 +2513,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.UserCode");
@@ -2735,6 +2755,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableEnumerationTypeDeclaration enumerationType = _typeLookup.findEnumerationType("myusercode.UserCode");
@@ -2895,8 +2916,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
+          @Override
           public void apply(final MutableTypeParameterDeclarator it) {
             Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
             int _size = IterableExtensions.size(_typeParameters);
@@ -3021,8 +3044,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
+          @Override
           public void apply(final MutableTypeParameterDeclarator it) {
             Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
             int _size = IterableExtensions.size(_typeParameters);
@@ -3133,8 +3158,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
+          @Override
           public void apply(final MutableTypeParameterDeclarator it) {
             Iterable<? extends MutableTypeParameterDeclaration> _typeParameters = it.getTypeParameters();
             int _size = IterableExtensions.size(_typeParameters);
@@ -3221,6 +3248,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -3289,6 +3317,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -3910,6 +3939,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -3982,6 +4012,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -4056,6 +4087,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         it.getCompilationUnit();
         TypeLookupImpl _typeLookup = it.getTypeLookup();
@@ -4149,6 +4181,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
       }
     };
@@ -4219,6 +4252,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
       }
     };
@@ -4284,6 +4318,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -4355,6 +4390,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -4362,6 +4398,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         MutableMethodDeclaration _head = IterableExtensions.head(_declaredMethods);
         Iterable<? extends MutableParameterDeclaration> _parameters = _head.getParameters();
         final Function1<MutableParameterDeclaration, Boolean> _function = new Function1<MutableParameterDeclaration, Boolean>() {
+          @Override
           public Boolean apply(final MutableParameterDeclaration it) {
             String _simpleName = it.getSimpleName();
             return Boolean.valueOf(_simpleName.endsWith("foo"));
@@ -4488,6 +4525,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("application/MyAnnotation.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("application.MyClient.FOO");
@@ -4575,6 +4613,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -4702,6 +4741,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -4847,6 +4887,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -4960,6 +5001,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -5069,6 +5111,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.DoesNotExist");
@@ -5098,6 +5141,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
@@ -5126,11 +5170,13 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
         EList<Resource.Diagnostic> _errors = _eResource.getErrors();
         final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          @Override
           public Boolean apply(final Resource.Diagnostic it) {
             String _message = it.getMessage();
             return Boolean.valueOf(_message.contains("myField may not have been initialized"));
@@ -5160,6 +5206,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
@@ -5261,6 +5308,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
@@ -5371,6 +5419,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
@@ -5466,6 +5515,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
@@ -5560,6 +5610,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
@@ -5646,6 +5697,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.MyClass");
@@ -5838,6 +5890,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration declaredClass = _typeLookup.findClass("myusercode.MyClass");
@@ -5952,6 +6005,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
@@ -5982,6 +6036,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
@@ -6003,8 +6058,10 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   public void assertGeneratedCode(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final String... compiledClientFiles) {
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         final Function1<String, String> _function = new Function1<String, String>() {
+          @Override
           public String apply(final String it) {
             return LineDelimiters.toUnix(it);
           }
@@ -6019,6 +6076,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
         EList<EObject> _contents = resource.getContents();
         final Iterable<EObject> jvmTypes = IterableExtensions.<EObject>tail(_contents);
         final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
+          @Override
           public void apply(final EObject it) {
             if ((it instanceof JvmDeclaredType)) {
               GeneratorConfig _get = AbstractReusableActiveAnnotationTests.this.generatorConfigProvider.get(it);
@@ -6065,6 +6123,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration declaredClass = _typeLookup.findClass("myusercode.MyClass");
@@ -6411,6 +6470,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.UserClass");

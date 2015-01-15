@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 class EvaluationResult {
   protected final static EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
+    @Override
     public Object equalValue(final EvaluationResult other) {
       return Boolean.valueOf(false);
     }

@@ -65,6 +65,7 @@ public class BasicExpressions {
   public void collections() {
     final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Hello", "World"));
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         return it.toUpperCase();
       }
@@ -74,6 +75,7 @@ public class BasicExpressions {
     Assert.assertEquals("HELLO", _head);
     final Set<Integer> set = Collections.<Integer>unmodifiableSet(CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5)));
     final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
+      @Override
       public Boolean apply(final Integer it) {
         return Boolean.valueOf(((it).intValue() >= 3));
       }

@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendConstructor> implements ConstructorDeclaration {
+  @Override
   public Expression getBody() {
     XtendConstructor _delegate = this.getDelegate();
     XExpression _expression = _delegate.getExpression();
@@ -44,6 +45,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return _compilationUnit.toExpression(_expression_1);
   }
   
+  @Override
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendConstructor _delegate = this.getDelegate();
@@ -51,15 +53,18 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return _compilationUnit.toVisibility(_visibility);
   }
   
+  @Override
   public String getSimpleName() {
     TypeDeclaration _declaringType = this.getDeclaringType();
     return _declaringType.getSimpleName();
   }
   
+  @Override
   public boolean isVarArgs() {
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter, Boolean> _function = new Function1<XtendParameter, Boolean>() {
+      @Override
       public Boolean apply(final XtendParameter it) {
         return Boolean.valueOf(XtendConstructorDeclarationImpl.this.isVarArgs());
       }
@@ -67,10 +72,12 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return IterableExtensions.<XtendParameter>exists(_parameters, _function);
   }
   
+  @Override
   public Iterable<? extends TypeReference> getExceptions() {
     XtendConstructor _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
+      @Override
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -79,10 +86,12 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
   }
   
+  @Override
   public Iterable<? extends ParameterDeclaration> getParameters() {
     XtendConstructor _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
     final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = new Function1<XtendParameter, XtendParameterDeclarationImpl>() {
+      @Override
       public XtendParameterDeclarationImpl apply(final XtendParameter it) {
         CompilationUnitImpl _compilationUnit = XtendConstructorDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendParameterDeclaration(it);
@@ -91,6 +100,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(_parameters, _function);
   }
   
+  @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     return CollectionLiterals.<TypeParameterDeclaration>emptyList();
   }

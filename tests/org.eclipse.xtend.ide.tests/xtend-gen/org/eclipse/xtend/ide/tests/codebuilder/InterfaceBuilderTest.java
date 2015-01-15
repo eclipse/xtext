@@ -23,6 +23,7 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(_xtendClass);
     final Procedure1<AbstractInterfaceBuilder> _function = new Procedure1<AbstractInterfaceBuilder>() {
+      @Override
       public void apply(final AbstractInterfaceBuilder it) {
         JvmDeclaredType _xtendClass = InterfaceBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -43,6 +44,7 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(_javaClass);
     final Procedure1<AbstractInterfaceBuilder> _function = new Procedure1<AbstractInterfaceBuilder>() {
+      @Override
       public void apply(final AbstractInterfaceBuilder it) {
         JvmDeclaredType _javaClass = InterfaceBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);

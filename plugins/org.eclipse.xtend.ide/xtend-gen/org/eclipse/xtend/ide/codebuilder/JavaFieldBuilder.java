@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;
@@ -41,6 +42,7 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
     return _and;
   }
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -60,6 +62,7 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuild
     return _xblockexpression;
   }
   
+  @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();
     return ((IType) _ownerSource);

@@ -57,6 +57,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListWildcard() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
@@ -71,10 +72,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListUpperBound() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
             it.addUpperBound(_typeRef);
@@ -92,10 +95,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListUpperBoundObject() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(Object.class);
             it.addUpperBound(_typeRef);
@@ -113,10 +118,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListUpperBounds() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
             it.addUpperBound(_typeRef);
@@ -136,10 +143,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListUpperBoundsIncludingObject() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
             it.addUpperBound(_typeRef);
@@ -161,10 +170,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListLowerBound() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
             it.setLowerBound(_typeRef);
@@ -182,10 +193,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
   public void testListLowerAndUpperBound() {
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
             it.setLowerBound(_typeRef);
@@ -224,10 +237,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     StandardTypeReferenceOwner _owner = this.getOwner();
     ParameterizedTypeReference _typeRef = this.typeRef(List.class);
     final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+      @Override
       public void apply(final ParameterizedTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
         final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+          @Override
           public void apply(final WildcardTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
             it.setLowerBound(_typeRef);
@@ -264,6 +279,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Function0.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(String.class);
         it.setReturnType(_typeRef);
@@ -282,6 +298,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Function1.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(String.class);
         it.addParameterType(_typeRef);
@@ -302,6 +319,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Function1.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(Object.class);
         it.setReturnType(_typeRef);
@@ -324,6 +342,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Function3.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(Object.class);
         it.setReturnType(_typeRef);
@@ -335,10 +354,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
         it.addTypeArgument(_typeRef_3);
         ParameterizedTypeReference _typeRef_4 = LightweightTypeReferenceSerializerTest.this.typeRef(List.class);
         final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+          @Override
           public void apply(final ParameterizedTypeReference it) {
             ITypeReferenceOwner _owner = it.getOwner();
             WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
             final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+              @Override
               public void apply(final WildcardTypeReference it) {
                 ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
                 it.setLowerBound(_typeRef);
@@ -378,6 +399,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Procedure1.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(String.class);
         it.addParameterType(_typeRef);
@@ -396,6 +418,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Procedure3.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(String.class);
         it.addParameterType(_typeRef);
@@ -403,10 +426,12 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
         it.addTypeArgument(_typeRef_1);
         ParameterizedTypeReference _typeRef_2 = LightweightTypeReferenceSerializerTest.this.typeRef(List.class);
         final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+          @Override
           public void apply(final ParameterizedTypeReference it) {
             ITypeReferenceOwner _owner = it.getOwner();
             WildcardTypeReference _newWildcardTypeReference = _owner.newWildcardTypeReference();
             final Procedure1<WildcardTypeReference> _function = new Procedure1<WildcardTypeReference>() {
+              @Override
               public void apply(final WildcardTypeReference it) {
                 ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharSequence.class);
                 it.setLowerBound(_typeRef);
@@ -446,6 +471,7 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Readable.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(CharBuffer.class);
         it.addParameterType(_typeRef);
@@ -464,11 +490,13 @@ public class LightweightTypeReferenceSerializerTest extends AbstractXbaseTestCas
     JvmType _type = this.type(Iterable.class);
     FunctionTypeReference _newFunctionTypeReference = _owner.newFunctionTypeReference(_type);
     final Procedure1<FunctionTypeReference> _function = new Procedure1<FunctionTypeReference>() {
+      @Override
       public void apply(final FunctionTypeReference it) {
         ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(String.class);
         it.addTypeArgument(_typeRef);
         ParameterizedTypeReference _typeRef_1 = LightweightTypeReferenceSerializerTest.this.typeRef(Iterator.class);
         final Procedure1<ParameterizedTypeReference> _function = new Procedure1<ParameterizedTypeReference>() {
+          @Override
           public void apply(final ParameterizedTypeReference it) {
             ParameterizedTypeReference _typeRef = LightweightTypeReferenceSerializerTest.this.typeRef(String.class);
             it.addTypeArgument(_typeRef);

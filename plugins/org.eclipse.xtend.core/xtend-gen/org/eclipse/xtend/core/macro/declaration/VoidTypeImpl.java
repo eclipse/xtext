@@ -17,10 +17,12 @@ import org.eclipse.xtext.common.types.JvmVoid;
 
 @SuppressWarnings("all")
 public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidType {
+  @Override
   public String getSimpleName() {
     return "void";
   }
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
       return false;
@@ -34,6 +36,7 @@ public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidTy
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
+  @Override
   public String getQualifiedName() {
     return this.getSimpleName();
   }

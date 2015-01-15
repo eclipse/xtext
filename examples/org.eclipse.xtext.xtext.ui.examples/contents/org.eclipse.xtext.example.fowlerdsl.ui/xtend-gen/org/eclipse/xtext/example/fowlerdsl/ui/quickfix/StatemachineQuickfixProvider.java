@@ -35,6 +35,7 @@ public class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
     String _plus_2 = ("Change to \'" + _firstLower_1);
     String _plus_3 = (_plus_2 + "\'.");
     final IModification _function = new IModification() {
+      @Override
       public void apply(final IModificationContext it) throws Exception {
         IXtextDocument _xtextDocument = it.getXtextDocument();
         Integer _offset = issue.getOffset();

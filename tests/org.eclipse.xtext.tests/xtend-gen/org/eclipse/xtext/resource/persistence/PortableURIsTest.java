@@ -41,6 +41,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class PortableURIsTest extends AbstractXtextTests {
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     LangATestLanguageStandaloneSetup _langATestLanguageStandaloneSetup = new LangATestLanguageStandaloneSetup();

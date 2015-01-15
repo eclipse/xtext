@@ -42,6 +42,7 @@ public class Case_9 extends Case_8 {
     return this.generateTypeRef(_eContainer);
   }
   
+  @Override
   public <T1 extends Object> List<List<T1>> foo(final T1 t) {
     final List<List<T1>> x = super.<T1>foo(t);
     return null;

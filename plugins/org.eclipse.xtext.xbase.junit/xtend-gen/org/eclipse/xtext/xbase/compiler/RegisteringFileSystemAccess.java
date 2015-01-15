@@ -108,6 +108,7 @@ public class RegisteringFileSystemAccess extends FileSystemSupportBasedFileSyste
   @Accessors
   private final Set<RegisteringFileSystemAccess.GeneratedFile> textFiles = CollectionLiterals.<RegisteringFileSystemAccess.GeneratedFile>newHashSet();
   
+  @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
     super.generateFile(fileName, outputConfigurationName, contents);
     final Path path = this.getPath(fileName, outputConfigurationName);

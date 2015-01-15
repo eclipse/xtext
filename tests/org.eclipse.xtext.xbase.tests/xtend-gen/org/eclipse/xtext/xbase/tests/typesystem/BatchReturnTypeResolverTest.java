@@ -19,6 +19,7 @@ public class BatchReturnTypeResolverTest extends AbstractBatchReturnTypeTest {
   @Inject
   private IBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }

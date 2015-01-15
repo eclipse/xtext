@@ -68,6 +68,7 @@ public class TokenNames {
   protected List<String> _getTokens(final EObject it, final Set<String> known) {
     EList<EObject> _eContents = it.eContents();
     final Function1<EObject, List<String>> _function = new Function1<EObject, List<String>>() {
+      @Override
       public List<String> apply(final EObject it) {
         return TokenNames.this.getTokens(it, known);
       }

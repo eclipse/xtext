@@ -50,6 +50,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -98,6 +99,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -141,6 +143,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -184,6 +187,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -227,6 +231,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass("Bar");
@@ -270,6 +275,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -303,6 +309,7 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();

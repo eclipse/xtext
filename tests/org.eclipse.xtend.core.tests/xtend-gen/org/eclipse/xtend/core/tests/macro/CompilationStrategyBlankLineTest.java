@@ -22,6 +22,7 @@ public class CompilationStrategyBlankLineTest extends AbstractActiveAnnotationTe
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("import java.math.BigDecimal;");

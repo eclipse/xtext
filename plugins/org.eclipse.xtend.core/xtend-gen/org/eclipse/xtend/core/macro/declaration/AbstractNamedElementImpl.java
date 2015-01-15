@@ -13,6 +13,7 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 
 @SuppressWarnings("all")
 public abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractElementImpl<T> implements NamedElement {
+  @Override
   public String toString() {
     Class<? extends AbstractNamedElementImpl> _class = this.getClass();
     String _name = _class.getName();

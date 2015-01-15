@@ -46,6 +46,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclarationImpl implements MutableEnumerationTypeDeclaration {
+  @Override
   public void markAsRead() {
     this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -54,84 +55,101 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
+  @Override
   public MutableMethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _findDeclaredMethod = super.findDeclaredMethod(name, parameterTypes);
     return ((MutableMethodDeclaration) _findDeclaredMethod);
   }
   
+  @Override
   public MutableFieldDeclaration findDeclaredField(final String name) {
     FieldDeclaration _findDeclaredField = super.findDeclaredField(name);
     return ((MutableFieldDeclaration) _findDeclaredField);
   }
   
+  @Override
   public MutableTypeDeclaration findDeclaredType(final String name) {
     TypeDeclaration _findDeclaredType = super.findDeclaredType(name);
     return ((MutableTypeDeclaration) _findDeclaredType);
   }
   
+  @Override
   public MutableConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     ConstructorDeclaration _findDeclaredConstructor = super.findDeclaredConstructor(parameterTypes);
     return ((MutableConstructorDeclaration) _findDeclaredConstructor);
   }
   
+  @Override
   public Iterable<? extends MutableMethodDeclaration> getDeclaredMethods() {
     Iterable<? extends MethodDeclaration> _declaredMethods = super.getDeclaredMethods();
     return ((Iterable<? extends MutableMethodDeclaration>) _declaredMethods);
   }
   
+  @Override
   public Iterable<? extends MutableFieldDeclaration> getDeclaredFields() {
     Iterable<? extends FieldDeclaration> _declaredFields = super.getDeclaredFields();
     return ((Iterable<? extends MutableFieldDeclaration>) _declaredFields);
   }
   
+  @Override
   public Iterable<? extends MutableClassDeclaration> getDeclaredClasses() {
     Iterable<? extends ClassDeclaration> _declaredClasses = super.getDeclaredClasses();
     return ((Iterable<? extends MutableClassDeclaration>) _declaredClasses);
   }
   
+  @Override
   public Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors() {
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = super.getDeclaredConstructors();
     return ((Iterable<? extends MutableConstructorDeclaration>) _declaredConstructors);
   }
   
+  @Override
   public Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces() {
     Iterable<? extends InterfaceDeclaration> _declaredInterfaces = super.getDeclaredInterfaces();
     return ((Iterable<? extends MutableInterfaceDeclaration>) _declaredInterfaces);
   }
   
+  @Override
   public Iterable<? extends MutableAnnotationTypeDeclaration> getDeclaredAnnotationTypes() {
     Iterable<? extends AnnotationTypeDeclaration> _declaredAnnotationTypes = super.getDeclaredAnnotationTypes();
     return ((Iterable<? extends MutableAnnotationTypeDeclaration>) _declaredAnnotationTypes);
   }
   
+  @Override
   public Iterable<? extends MutableEnumerationTypeDeclaration> getDeclaredEnumerationTypes() {
     Iterable<? extends EnumerationTypeDeclaration> _declaredEnumerationTypes = super.getDeclaredEnumerationTypes();
     return ((Iterable<? extends MutableEnumerationTypeDeclaration>) _declaredEnumerationTypes);
   }
   
+  @Override
   public Iterable<? extends MutableTypeDeclaration> getDeclaredTypes() {
     Iterable<? extends TypeDeclaration> _declaredTypes = super.getDeclaredTypes();
     return ((Iterable<? extends MutableTypeDeclaration>) _declaredTypes);
   }
   
+  @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);
   }
   
+  @Override
   public Iterable<? extends MutableMemberDeclaration> getDeclaredMembers() {
     Iterable<? extends MemberDeclaration> _declaredMembers = super.getDeclaredMembers();
     return ((Iterable<? extends MutableMemberDeclaration>) _declaredMembers);
   }
   
+  @Override
   public Iterable<? extends MutableEnumerationValueDeclaration> getDeclaredValues() {
     Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<MutableEnumerationValueDeclaration>filter(_declaredMembers, MutableEnumerationValueDeclaration.class);
   }
   
+  @Override
   public MutableEnumerationValueDeclaration findDeclaredValue(final String name) {
     Iterable<? extends MutableEnumerationValueDeclaration> _declaredValues = this.getDeclaredValues();
     final Function1<MutableEnumerationValueDeclaration, Boolean> _function = new Function1<MutableEnumerationValueDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final MutableEnumerationValueDeclaration value) {
         String _simpleName = value.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -140,6 +158,7 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
     return IterableExtensions.findFirst(_declaredValues, _function);
   }
   
+  @Override
   public MutableEnumerationValueDeclaration addValue(final String name, final Procedure1<MutableEnumerationValueDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");

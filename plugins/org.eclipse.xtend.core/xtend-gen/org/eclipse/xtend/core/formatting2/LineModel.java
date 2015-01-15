@@ -17,6 +17,7 @@ public class LineModel {
   
   private final List<Line> lines = CollectionLiterals.<Line>newArrayList();
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("rootIndentLenght=");

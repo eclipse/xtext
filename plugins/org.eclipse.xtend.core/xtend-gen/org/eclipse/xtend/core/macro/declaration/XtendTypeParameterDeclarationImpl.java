@@ -31,11 +31,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter> implements TypeParameterDeclaration {
+  @Override
   public Iterable<? extends TypeReference> getUpperBounds() {
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
     Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
     final Function1<JvmUpperBound, TypeReference> _function = new Function1<JvmUpperBound, TypeReference>() {
+      @Override
       public TypeReference apply(final JvmUpperBound it) {
         CompilationUnitImpl _compilationUnit = XtendTypeParameterDeclarationImpl.this.getCompilationUnit();
         JvmTypeReference _typeReference = it.getTypeReference();
@@ -46,15 +48,18 @@ public class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTy
     return IterableExtensions.<TypeReference>toList(_map);
   }
   
+  @Override
   public String getSimpleName() {
     JvmTypeParameter _delegate = this.getDelegate();
     return _delegate.getName();
   }
   
+  @Override
   public String getQualifiedName() {
     return this.getSimpleName();
   }
   
+  @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     TypeParameterDeclarator _xblockexpression = null;
     {
@@ -67,14 +72,17 @@ public class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTy
     return _xblockexpression;
   }
   
+  @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
     return CollectionLiterals.<AnnotationReference>emptyList();
   }
   
+  @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     return null;
   }
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     boolean _equals = Objects.equal(otherType, null);
     if (_equals) {

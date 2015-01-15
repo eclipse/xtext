@@ -26,6 +26,7 @@ public class AbstractAntlrParserBasedTokenSourceProvider extends AbstractTokenSo
   @Inject
   private IParser parser;
   
+  @Override
   public TokenSource createTokenSource(final CharStream stream) {
     if ((this.parser instanceof AbstractAntlrParser)) {
       return ((AbstractAntlrParser)this.parser).createLexer(stream);

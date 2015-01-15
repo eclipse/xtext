@@ -42,10 +42,12 @@ public class SerializableResourceDescriptionTest {
       final URI uri = URI.createURI("file:/foo/bar.baz.foo");
       SerializableResourceDescription _serializableResourceDescription = new SerializableResourceDescription();
       final Procedure1<SerializableResourceDescription> _function = new Procedure1<SerializableResourceDescription>() {
+        @Override
         public void apply(final SerializableResourceDescription it) {
           it.setURI(uri);
           SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
           final Procedure1<SerializableReferenceDescription> _function = new Procedure1<SerializableReferenceDescription>() {
+            @Override
             public void apply(final SerializableReferenceDescription it) {
               URI _appendFragment = uri.appendFragment("foo");
               it.setSourceEObjectUri(_appendFragment);
@@ -61,6 +63,7 @@ public class SerializableResourceDescriptionTest {
           SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function);
           SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
           final Procedure1<SerializableReferenceDescription> _function_1 = new Procedure1<SerializableReferenceDescription>() {
+            @Override
             public void apply(final SerializableReferenceDescription it) {
               URI _appendFragment = uri.appendFragment("foo2");
               it.setSourceEObjectUri(_appendFragment);
@@ -77,6 +80,7 @@ public class SerializableResourceDescriptionTest {
           it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1)));
           SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
           final Procedure1<SerializableEObjectDescription> _function_2 = new Procedure1<SerializableEObjectDescription>() {
+            @Override
             public void apply(final SerializableEObjectDescription it) {
               URI _appendFragment = uri.appendFragment("baz");
               it.setEObjectURI(_appendFragment);

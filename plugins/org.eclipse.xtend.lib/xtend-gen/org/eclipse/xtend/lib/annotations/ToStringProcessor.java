@@ -70,6 +70,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     
     public void addReflectiveToString(final MutableClassDeclaration cls, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -128,6 +129,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     
     public void addToString(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> fields, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -189,6 +191,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     }
   }
   
+  @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     Type _findTypeGlobally = context.findTypeGlobally(Data.class);
     AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
@@ -213,6 +216,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
       } else {
         Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
         final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+          @Override
           public Boolean apply(final MutableFieldDeclaration it) {
             boolean _and = false;
             boolean _and_1 = false;

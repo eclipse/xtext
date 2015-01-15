@@ -72,6 +72,7 @@ public class ImportingStringConcatenation extends StringConcatenation {
   /**
    * A potentially contained trailing line delimiter is ignored.
    */
+  @Override
   protected List<String> getSignificantContent() {
     final List<String> result = super.getSignificantContent();
     boolean _and = false;

@@ -51,6 +51,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("@org.eclipse.xtend.core.tests.compiler.MyAnnotation class Foo {}");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           final Class<?> compiledClass = it.getCompiledClass();
           Field[] _declaredFields = compiledClass.getDeclaredFields();
@@ -58,6 +59,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
           Assert.assertEquals(3, _size);
           Field[] _declaredFields_1 = compiledClass.getDeclaredFields();
           final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
+            @Override
             public Boolean apply(final Field it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "foo"));
@@ -67,6 +69,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
           Assert.assertTrue(_exists);
           Field[] _declaredFields_2 = compiledClass.getDeclaredFields();
           final Function1<Field, Boolean> _function_1 = new Function1<Field, Boolean>() {
+            @Override
             public Boolean apply(final Field it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "bar"));
@@ -76,6 +79,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
           Assert.assertTrue(_exists_1);
           Field[] _declaredFields_3 = compiledClass.getDeclaredFields();
           final Function1<Field, Boolean> _function_2 = new Function1<Field, Boolean>() {
+            @Override
             public Boolean apply(final Field it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "baz"));

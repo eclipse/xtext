@@ -46,6 +46,7 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
     return this.owner.toLightweightTypeReference(reference);
   }
   
+  @Override
   protected XtendFunction function(final String string) throws Exception {
     final XtendFunction result = super.function(string);
     Resource _eResource = result.eResource();

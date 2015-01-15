@@ -30,6 +30,7 @@ public class GrammarConstraints extends GeneratedFile {
   @Extension
   private SemanticSequencerUtil sequencerUtil;
   
+  @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");

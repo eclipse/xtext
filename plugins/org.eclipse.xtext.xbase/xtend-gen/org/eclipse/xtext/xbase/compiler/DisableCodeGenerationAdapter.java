@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 @SuppressWarnings("all")
 public class DisableCodeGenerationAdapter extends AdapterImpl {
+  @Override
   public boolean isAdapterForType(final Object type) {
     Class<? extends DisableCodeGenerationAdapter> _class = this.getClass();
     return Objects.equal(_class, type);

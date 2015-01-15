@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 
 @SuppressWarnings("all")
 public class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements ConstructorDeclaration {
+  @Override
   public String getSimpleName() {
     TypeDeclaration _declaringType = this.getDeclaringType();
     return _declaringType.getSimpleName();

@@ -94,6 +94,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   @Extension
   private XtextIDEAGeneratorExtensions _xtextIDEAGeneratorExtensions;
   
+  @Override
   public void generate(final Grammar grammar, final Xtend2ExecutionContext ctx) {
     Naming _naming = this.getNaming();
     String _lineDelimiter = _naming.getLineDelimiter();
@@ -515,6 +516,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _replaceAll_1 = _replaceAll.replaceAll(">", "\\.");
     String[] _split = _replaceAll_1.split("\\.");
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+      @Override
       public Boolean apply(final String e) {
         return Boolean.valueOf(e.matches("[A-Z].*"));
       }
@@ -2457,6 +2459,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       TreeIterator<EObject> _eAllContents = grammar.eAllContents();
       Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
       final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
+        @Override
         public Boolean apply(final RuleCall it) {
           boolean _and = false;
           boolean _isAssigned = GrammarUtil.isAssigned(it);
@@ -2477,10 +2480,12 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         TreeIterator<EObject> _eAllContents_1 = grammar.eAllContents();
         Iterator<RuleCall> _filter_2 = Iterators.<RuleCall>filter(_eAllContents_1, RuleCall.class);
         final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
+          @Override
           public Boolean apply(final RuleCall it) {
             AbstractRule _rule = it.getRule();
             TreeIterator<EObject> _eAllContents = _rule.eAllContents();
             final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+              @Override
               public Boolean apply(final EObject it) {
                 return Boolean.valueOf(Objects.equal(it, nameRuleCall));
               }
@@ -2519,6 +2524,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         TreeIterator<EObject> _eAllContents_2 = grammar.eAllContents();
         Iterator<CrossReference> _filter_4 = Iterators.<CrossReference>filter(_eAllContents_2, CrossReference.class);
         final Function1<CrossReference, Boolean> _function_2 = new Function1<CrossReference, Boolean>() {
+          @Override
           public Boolean apply(final CrossReference it) {
             return Boolean.valueOf(GrammarUtil.isAssigned(it));
           }
@@ -2661,6 +2667,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         TreeIterator<EObject> _eAllContents_3 = grammar.eAllContents();
         Iterator<CrossReference> _filter_6 = Iterators.<CrossReference>filter(_eAllContents_3, CrossReference.class);
         final Function1<CrossReference, Boolean> _function_3 = new Function1<CrossReference, Boolean>() {
+          @Override
           public Boolean apply(final CrossReference it) {
             return Boolean.valueOf(GrammarUtil.isAssigned(it));
           }

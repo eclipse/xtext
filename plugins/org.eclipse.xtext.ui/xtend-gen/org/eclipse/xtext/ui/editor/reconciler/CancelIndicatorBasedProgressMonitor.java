@@ -31,6 +31,7 @@ public class CancelIndicatorBasedProgressMonitor implements IProgressMonitor {
     this.cancelIndicator = cancelIndicator;
   }
   
+  @Override
   public boolean isCanceled() {
     return this.cancelIndicator.isCanceled();
   }

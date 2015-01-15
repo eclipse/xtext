@@ -28,6 +28,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
   @Accessors
   private IFilePostProcessor postProcessor;
   
+  @Override
   public CharSequence getContents(final Path path) {
     try {
       try {
@@ -78,6 +79,7 @@ public abstract class AbstractFileSystemSupport implements MutableFileSystemSupp
     }
   }
   
+  @Override
   public void setContents(final Path path, final CharSequence contents) {
     CharSequence _elvis = null;
     CharSequence _postProcess = null;

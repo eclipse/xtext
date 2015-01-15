@@ -25,10 +25,12 @@ public class IndentOnceAutowrapFormatter implements IAutowrapFormatter {
   
   private boolean hasWrapped = false;
   
+  @Override
   public void format(final IHiddenRegionFormatter wrapped, @Extension final IFormattableDocument document) {
     if ((!this.hasWrapped)) {
       wrapped.increaseIndentation();
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.decreaseIndentation();
         }

@@ -25,6 +25,7 @@ public class TaskTags implements Iterable<TaskTag> {
   
   private final List<TaskTag> taskTags = CollectionLiterals.<TaskTag>newArrayList();
   
+  @Override
   public Iterator<TaskTag> iterator() {
     return this.taskTags.iterator();
   }

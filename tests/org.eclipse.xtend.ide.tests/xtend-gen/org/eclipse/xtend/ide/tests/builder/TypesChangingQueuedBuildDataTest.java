@@ -23,6 +23,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   @Test
   public void createPrimaryType() {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.create("Bar.java", "public class Bar {}");
       }
@@ -33,6 +34,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   @Test
   public void createPrimaryType2() {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("package mypackage;");
@@ -52,6 +54,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   @Test
   public void createPrimaryAndSecondaryType() {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("public class Bar {}");
@@ -68,6 +71,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   @Test
   public void createPrimaryAndSecondaryType2() {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("package mypackage;");
@@ -93,6 +97,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   @Test
   public void createPrimaryAndNestedTypes() {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("public class Bar {");
@@ -128,6 +133,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   @Test
   public void createPrimaryAndNestedTypes2() {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("package mypackage;");
@@ -167,6 +173,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   public void deletePrimaryType() {
     this.create("Bar.java", "public class Bar {}");
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.delete("Bar.java");
       }
@@ -187,6 +194,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     _builder.newLine();
     this.create("/mypackage/Bar.java", _builder.toString());
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.delete("/mypackage/Bar.java");
       }
@@ -204,6 +212,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     _builder.newLine();
     this.create("Bar.java", _builder.toString());
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.delete("Bar.java");
       }
@@ -230,6 +239,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     _builder.newLine();
     this.create("/mypackage/Bar.java", _builder.toString());
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.delete("/mypackage/Bar.java");
       }
@@ -266,6 +276,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     _builder.newLine();
     this.create("Bar.java", _builder.toString());
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.delete("Bar.java");
       }
@@ -305,6 +316,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     _builder.newLine();
     this.create("/mypackage/Bar.java", _builder.toString());
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         TypesChangingQueuedBuildDataTest.this.delete("/mypackage/Bar.java");
       }
@@ -316,6 +328,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
     String _xblockexpression = null;
     {
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           try {
             TypesChangingQueuedBuildDataTest.this.testHelper.createFile(fileName, content);
@@ -332,6 +345,7 @@ public class TypesChangingQueuedBuildDataTest extends AbstractQueuedBuildDataTes
   
   public String delete(final String fileName) {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         try {
           IFile _file = TypesChangingQueuedBuildDataTest.this.testHelper.getFile(fileName);

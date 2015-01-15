@@ -180,6 +180,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
   
   protected void withIndizes(final IFeatureCallArguments arguments, final int... indexes) {
     final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      @Override
       public void apply(final Integer it) {
         boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
         Assert.assertTrue(_hasUnprocessedArguments);
@@ -200,6 +201,7 @@ public class ReorderedFeatureCallArgumentsTest extends AbstractTestingTypeRefere
   
   protected void withTypes(final IFeatureCallArguments arguments, final String... types) {
     final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
       public void apply(final String it) {
         boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
         Assert.assertTrue(_hasUnprocessedArguments);

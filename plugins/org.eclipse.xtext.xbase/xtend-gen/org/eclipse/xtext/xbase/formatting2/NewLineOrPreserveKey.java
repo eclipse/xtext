@@ -13,6 +13,7 @@ public class NewLineOrPreserveKey extends BooleanKey implements Procedure1<IHidd
     super(name, defaultValue);
   }
   
+  @Override
   public void apply(final IHiddenRegionFormatter it) {
     FormatterRequest _request = it.getRequest();
     final ITypedPreferenceValues preferences = _request.getPreferences();

@@ -81,6 +81,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       ReplaceEdit _replaceEdit = new ReplaceEdit(_indexOf, 2, "  static val foo = 3");
       _replaceEdit.apply(document);
       final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           return null;
         }
@@ -90,6 +91,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       ReplaceEdit _replaceEdit_1 = new ReplaceEdit(_indexOf_1, 0, "  ");
       _replaceEdit_1.apply(document);
       final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           return null;
         }
@@ -99,6 +101,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       }
       String[] _positionCategories = document.getPositionCategories();
       final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String it) {
           String _canonicalName = HighlightingPresenter.class.getCanonicalName();
           return Boolean.valueOf(it.startsWith(_canonicalName));
@@ -107,6 +110,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_2);
       Position[] _positions = document.getPositions(highlighterCategory);
       final Function1<Position, String> _function_3 = new Function1<Position, String>() {
+        @Override
         public String apply(final Position it) {
           try {
             return document.get(it.offset, it.length);
@@ -142,12 +146,14 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.helper.openEditor("Foo.xtend", model);
       final IXtextDocument document = editor.getDocument();
       final Function0<Boolean> _function = new Function0<Boolean>() {
+        @Override
         public Boolean apply() {
           try {
             boolean _xblockexpression = false;
             {
               String[] _positionCategories = document.getPositionCategories();
               final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+                @Override
                 public Boolean apply(final String it) {
                   String _canonicalName = HighlightingPresenter.class.getCanonicalName();
                   return Boolean.valueOf(it.startsWith(_canonicalName));
@@ -156,6 +162,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
               final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function);
               Position[] _positions = document.getPositions(highlighterCategory);
               final Function1<Position, String> _function_1 = new Function1<Position, String>() {
+                @Override
                 public String apply(final Position it) {
                   try {
                     return document.get(it.offset, it.length);
@@ -177,6 +184,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       this.helper.awaitUIUpdate(_function, HighlightingReconcilerTest.VALIDATION_TIMEOUT);
       String[] _positionCategories = document.getPositionCategories();
       final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String it) {
           String _canonicalName = HighlightingPresenter.class.getCanonicalName();
           return Boolean.valueOf(it.startsWith(_canonicalName));
@@ -185,6 +193,7 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_1);
       Position[] _positions = document.getPositions(highlighterCategory);
       final Function1<Position, String> _function_2 = new Function1<Position, String>() {
+        @Override
         public String apply(final Position it) {
           try {
             return document.get(it.offset, it.length);

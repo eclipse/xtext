@@ -6,6 +6,7 @@ import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 
 @SuppressWarnings("all")
 public class AddInterfaceProcessor extends AbstractClassProcessor {
+  @Override
   public void doRegisterGlobals(final ClassDeclaration annotatedClass, final RegisterGlobalsContext context) {
     context.registerInterface("de.test.Test");
   }

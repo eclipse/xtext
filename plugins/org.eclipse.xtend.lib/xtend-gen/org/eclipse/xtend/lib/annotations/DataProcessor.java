@@ -50,6 +50,7 @@ public class DataProcessor extends AbstractClassProcessor {
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MutableFieldDeclaration it) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -75,6 +76,7 @@ public class DataProcessor extends AbstractClassProcessor {
     }
   }
   
+  @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final DataProcessor.Util util = new DataProcessor.Util(context);
@@ -88,6 +90,7 @@ public class DataProcessor extends AbstractClassProcessor {
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         Element _primarySourceElement = context.getPrimarySourceElement(it);
         Set<Modifier> _modifiers = ((FieldDeclaration) _primarySourceElement).getModifiers();
@@ -158,6 +161,7 @@ public class DataProcessor extends AbstractClassProcessor {
     }
     Iterable<? extends MutableFieldDeclaration> _dataFields_4 = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
         if (_shouldAddGetter) {

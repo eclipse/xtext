@@ -140,6 +140,7 @@ public class StandaloneBuilder {
   public boolean launch() {
     Collection<LanguageAccess> _values = this.languages.values();
     final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
+      @Override
       public Boolean apply(final LanguageAccess it) {
         return Boolean.valueOf(it.isLinksAgainstJava());
       }
@@ -163,6 +164,7 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info("Class path look up filter is active.");
       final Pattern cpLookUpFilter = Pattern.compile(this.classPathLookUpFilter);
       final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String root) {
           Matcher _matcher = cpLookUpFilter.matcher(root);
           return Boolean.valueOf(_matcher.matches());
@@ -200,6 +202,7 @@ public class StandaloneBuilder {
         StandaloneBuilder.LOG.info("Clustering configured.");
         DynamicResourceClusteringPolicy _dynamicResourceClusteringPolicy = new DynamicResourceClusteringPolicy();
         final Procedure1<DynamicResourceClusteringPolicy> _function_2 = new Procedure1<DynamicResourceClusteringPolicy>() {
+          @Override
           public void apply(final DynamicResourceClusteringPolicy it) {
             long _minimumFreeMemory = StandaloneBuilder.this.clusteringConfig.getMinimumFreeMemory();
             long _multiply = (_minimumFreeMemory * 1024);
@@ -362,6 +365,7 @@ public class StandaloneBuilder {
   
   protected Set<String> uniqueEntries(final Iterable<String> pathes) {
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         File _file = new File(it);
         return _file.getAbsolutePath();
@@ -383,6 +387,7 @@ public class StandaloneBuilder {
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
     final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      @Override
       public Boolean apply(final URI it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
@@ -390,6 +395,7 @@ public class StandaloneBuilder {
     };
     final Iterable<URI> generateStubs = IterableExtensions.<URI>filter(sourceResourceURIs, _function);
     final Procedure1<URI> _function_1 = new Procedure1<URI>() {
+      @Override
       public void apply(final URI it) {
         LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
         IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
@@ -453,6 +459,7 @@ public class StandaloneBuilder {
     LanguageAccess _languageAccess = this.languageAccess(uri);
     final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         File _file = new File(it);
         String _absolutePath = _file.getAbsolutePath();
@@ -462,6 +469,7 @@ public class StandaloneBuilder {
     };
     Iterable<String> _map = IterableExtensions.<String, String>map(this.sourceDirs, _function);
     final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+      @Override
       public Boolean apply(final String it) {
         String _string = uri.toString();
         return Boolean.valueOf(_string.startsWith(it));
@@ -469,6 +477,7 @@ public class StandaloneBuilder {
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
     final Function2<String, String, String> _function_2 = new Function2<String, String, String>() {
+      @Override
       public String apply(final String longest, final String current) {
         String _xifexpression = null;
         int _length = current.length();
@@ -550,6 +559,7 @@ public class StandaloneBuilder {
   
   private URLClassLoader createURLClassLoader(final Iterable<String> classPathEntries) {
     final Function1<String, URL> _function = new Function1<String, URL>() {
+      @Override
       public URL apply(final String str) {
         try {
           File _file = new File(str);
@@ -573,6 +583,7 @@ public class StandaloneBuilder {
     PathTraverser _pathTraverser = new PathTraverser();
     List<String> _list = IterableExtensions.<String>toList(roots);
     final Predicate<URI> _function = new Predicate<URI>() {
+      @Override
       public boolean apply(final URI input) {
         final boolean matches = nameBasedFilter.matches(input);
         if (matches) {
@@ -585,6 +596,7 @@ public class StandaloneBuilder {
     final Multimap<String, URI> modelsFound = _pathTraverser.resolvePathes(_list, _function);
     Map<String, Collection<URI>> _asMap = modelsFound.asMap();
     final Procedure2<String, Collection<URI>> _function_1 = new Procedure2<String, Collection<URI>>() {
+      @Override
       public void apply(final String uri, final Collection<URI> resource) {
         final File file = new File(uri);
         boolean _and = false;

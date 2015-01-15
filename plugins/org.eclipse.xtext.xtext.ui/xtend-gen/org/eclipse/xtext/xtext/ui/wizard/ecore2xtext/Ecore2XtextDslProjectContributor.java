@@ -34,6 +34,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     this.modelFolder = modelFolder;
   }
   
+  @Override
   public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator creator) {
     this.createWorkflowFile(creator);
     this.createGrammarFile(creator);
@@ -113,6 +114,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     {
       Collection<EPackageInfo> _ePackageInfos = this.projectInfo.getEPackageInfos();
       final Function1<EPackageInfo, Boolean> _function = new Function1<EPackageInfo, Boolean>() {
+        @Override
         public Boolean apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           String _fileExtension = _genmodelURI.fileExtension();
@@ -121,6 +123,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       };
       Iterable<EPackageInfo> _filter = IterableExtensions.<EPackageInfo>filter(_ePackageInfos, _function);
       final Function1<EPackageInfo, String> _function_1 = new Function1<EPackageInfo, String>() {
+        @Override
         public String apply(final EPackageInfo it) {
           return it.getEPackageJavaFQN();
         }
@@ -138,6 +141,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     {
       Collection<EPackageInfo> _ePackageInfos_1 = this.projectInfo.getEPackageInfos();
       final Function1<EPackageInfo, Boolean> _function_2 = new Function1<EPackageInfo, Boolean>() {
+        @Override
         public Boolean apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           String _fileExtension = _genmodelURI.fileExtension();
@@ -146,6 +150,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       };
       Iterable<EPackageInfo> _filter_1 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_1, _function_2);
       final Function1<EPackageInfo, String> _function_3 = new Function1<EPackageInfo, String>() {
+        @Override
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();
@@ -209,6 +214,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
     {
       Collection<EPackageInfo> _ePackageInfos_2 = this.projectInfo.getEPackageInfos();
       final Function1<EPackageInfo, Boolean> _function_4 = new Function1<EPackageInfo, Boolean>() {
+        @Override
         public Boolean apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           String _fileExtension = _genmodelURI.fileExtension();
@@ -217,6 +223,7 @@ public class Ecore2XtextDslProjectContributor extends DefaultProjectFactoryContr
       };
       Iterable<EPackageInfo> _filter_2 = IterableExtensions.<EPackageInfo>filter(_ePackageInfos_2, _function_4);
       final Function1<EPackageInfo, String> _function_5 = new Function1<EPackageInfo, String>() {
+        @Override
         public String apply(final EPackageInfo it) {
           URI _genmodelURI = it.getGenmodelURI();
           return _genmodelURI.toString();

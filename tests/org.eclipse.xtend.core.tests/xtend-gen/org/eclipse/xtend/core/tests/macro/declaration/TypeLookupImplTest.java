@@ -40,6 +40,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("foo.MyClass");
@@ -85,6 +86,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("foo.MyClass.NestedClass");
@@ -113,6 +115,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         Type _findUpstreamType = _typeLookup.findUpstreamType("foo.MyClass");
@@ -143,6 +146,7 @@ public class TypeLookupImplTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         ClassDeclaration _findSourceClass = _typeLookup.findSourceClass("foo.MyClass");

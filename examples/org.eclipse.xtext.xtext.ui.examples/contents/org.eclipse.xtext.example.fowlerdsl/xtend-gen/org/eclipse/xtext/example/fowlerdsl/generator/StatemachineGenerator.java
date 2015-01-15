@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class StatemachineGenerator implements IGenerator {
+  @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     String _className = this.className(resource);
     String _plus = (_className + ".java");
@@ -255,6 +256,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.append("\'. Possible events are [");
     EList<Transition> _transitions = state.getTransitions();
     final Function1<Transition, String> _function = new Function1<Transition, String>() {
+      @Override
       public String apply(final Transition t) {
         Event _event = t.getEvent();
         return _event.getName();

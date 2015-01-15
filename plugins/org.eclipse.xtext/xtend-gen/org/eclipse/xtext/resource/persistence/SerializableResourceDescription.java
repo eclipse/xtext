@@ -46,11 +46,13 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   public static SerializableResourceDescription createCopy(final IResourceDescription desc) {
     SerializableResourceDescription _serializableResourceDescription = new SerializableResourceDescription();
     final Procedure1<SerializableResourceDescription> _function = new Procedure1<SerializableResourceDescription>() {
+      @Override
       public void apply(final SerializableResourceDescription it) {
         URI _uRI = desc.getURI();
         it.setURI(_uRI);
         Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
         final Function1<IEObjectDescription, SerializableEObjectDescription> _function = new Function1<IEObjectDescription, SerializableEObjectDescription>() {
+          @Override
           public SerializableEObjectDescription apply(final IEObjectDescription it) {
             return SerializableResourceDescription.createCopy(it);
           }
@@ -60,6 +62,7 @@ public class SerializableResourceDescription extends AbstractResourceDescription
         it.descriptions = _list;
         Iterable<IReferenceDescription> _referenceDescriptions = desc.getReferenceDescriptions();
         final Function1<IReferenceDescription, SerializableReferenceDescription> _function_1 = new Function1<IReferenceDescription, SerializableReferenceDescription>() {
+          @Override
           public SerializableReferenceDescription apply(final IReferenceDescription it) {
             return SerializableResourceDescription.createCopy(it);
           }
@@ -78,6 +81,7 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   private static SerializableEObjectDescription createCopy(final IEObjectDescription desc) {
     SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
     final Procedure1<SerializableEObjectDescription> _function = new Procedure1<SerializableEObjectDescription>() {
+      @Override
       public void apply(final SerializableEObjectDescription it) {
         EClass _eClass = desc.getEClass();
         it.setEClass(_eClass);
@@ -103,6 +107,7 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   private static SerializableReferenceDescription createCopy(final IReferenceDescription desc) {
     SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
     final Procedure1<SerializableReferenceDescription> _function = new Procedure1<SerializableReferenceDescription>() {
+      @Override
       public void apply(final SerializableReferenceDescription it) {
         URI _sourceEObjectUri = desc.getSourceEObjectUri();
         it.setSourceEObjectUri(_sourceEObjectUri);
@@ -137,18 +142,22 @@ public class SerializableResourceDescription extends AbstractResourceDescription
     this.uRI = uri;
   }
   
+  @Override
   protected List<IEObjectDescription> computeExportedObjects() {
     return ((List<IEObjectDescription>) ((List<?>) this.descriptions));
   }
   
+  @Override
   public Iterable<QualifiedName> getImportedNames() {
     return this.importedNames;
   }
   
+  @Override
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     return ((Iterable<IReferenceDescription>) ((Iterable<?>) this.references));
   }
   
+  @Override
   public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
     URI _readURI = SerializationExtensions.readURI(in);
     this.setURI(_readURI);
@@ -178,6 +187,7 @@ public class SerializableResourceDescription extends AbstractResourceDescription
     }
   }
   
+  @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
     SerializationExtensions.writeURI(out, this.uRI);
     int _size = this.descriptions.size();

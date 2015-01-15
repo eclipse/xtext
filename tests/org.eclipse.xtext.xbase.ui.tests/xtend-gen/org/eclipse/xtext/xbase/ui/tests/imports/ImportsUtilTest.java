@@ -19,6 +19,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ImportsUtilTest {
   public static class ImportUtilExtension extends ImportsUtil {
+    @Override
     protected Pair<String, String> splitInTypeAndMember(final String featuresQName) {
       return super.splitInTypeAndMember(featuresQName);
     }

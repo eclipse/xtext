@@ -395,6 +395,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testEnumLiteral() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         String _simpleName = ((JvmEnumerationLiteral) it).getSimpleName();
         Assert.assertEquals("YELLOW", _simpleName);
@@ -402,6 +403,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     };
     this.evaluatesTo("test.Enum1.YELLOW", _function);
     final Procedure1<Object> _function_1 = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         JvmEnumerationLiteral _get = ((JvmEnumerationLiteral[]) it)[0];
         String _simpleName = _get.getSimpleName();
@@ -449,6 +451,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testStringArrayLiteral() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Object _get = ((String[]) it)[1];
         Assert.assertEquals("bar", _get);
@@ -456,6 +459,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
     };
     this.evaluatesTo("#[\"foo\",\"bar\"]", _function);
     final Procedure1<Object> _function_1 = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Object _get = ((String[]) it)[1];
         Assert.assertEquals("bar", _get);
@@ -467,6 +471,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testClassLiteral() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Assert.assertTrue((it instanceof JvmTypeReference));
         String _identifier = ((JvmTypeReference) it).getIdentifier();
@@ -482,6 +487,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testClassLiteralArray() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Assert.assertTrue((it instanceof JvmTypeReference[]));
         JvmTypeReference _get = ((JvmTypeReference[]) it)[0];
@@ -512,21 +518,25 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   @Test
   public void testError() {
     final Procedure1<ConstantExpressionEvaluationException> _function = new Procedure1<ConstantExpressionEvaluationException>() {
+      @Override
       public void apply(final ConstantExpressionEvaluationException it) {
       }
     };
     this.evaluatesWithException("1.intValue", _function);
     final Procedure1<ConstantExpressionEvaluationException> _function_1 = new Procedure1<ConstantExpressionEvaluationException>() {
+      @Override
       public void apply(final ConstantExpressionEvaluationException it) {
       }
     };
     this.evaluatesWithException("String.name", _function_1);
     final Procedure1<ConstantExpressionEvaluationException> _function_2 = new Procedure1<ConstantExpressionEvaluationException>() {
+      @Override
       public void apply(final ConstantExpressionEvaluationException it) {
       }
     };
     this.evaluatesWithException("if (true) 2 else 3", _function_2);
     final Procedure1<ConstantExpressionEvaluationException> _function_3 = new Procedure1<ConstantExpressionEvaluationException>() {
+      @Override
       public void apply(final ConstantExpressionEvaluationException it) {
       }
     };
@@ -567,6 +577,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   
   protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Object expectation) {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Assert.assertEquals(expectation, it);
       }

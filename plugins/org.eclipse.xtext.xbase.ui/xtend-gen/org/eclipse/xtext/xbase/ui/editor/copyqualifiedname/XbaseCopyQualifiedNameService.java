@@ -64,6 +64,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     _builder.append("(");
     EList<JvmFormalParameter> _parameters = it.getParameters();
     final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
+      @Override
       public String apply(final JvmFormalParameter it) {
         JvmTypeReference _parameterType = it.getParameterType();
         return _parameterType.getSimpleName();
@@ -86,6 +87,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       _builder.append("(");
       EList<XExpression> _actualArguments = featureCall.getActualArguments();
       final Function1<XExpression, String> _function = new Function1<XExpression, String>() {
+        @Override
         public String apply(final XExpression it) {
           EList<XExpression> _actualArguments = featureCall.getActualArguments();
           return XbaseCopyQualifiedNameService.this.toQualifiedName(it, resolvedExecutable, executable, resolvedTypes, _actualArguments);
@@ -110,6 +112,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       _builder.append("(");
       EList<XExpression> _arguments = constructorCall.getArguments();
       final Function1<XExpression, String> _function = new Function1<XExpression, String>() {
+        @Override
         public String apply(final XExpression it) {
           EList<XExpression> _arguments = constructorCall.getArguments();
           return XbaseCopyQualifiedNameService.this.toQualifiedName(it, resolvedExecutable, constructor, resolvedTypes, _arguments);
@@ -171,6 +174,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
       final Function1<IResolvedConstructor, Boolean> _function = new Function1<IResolvedConstructor, Boolean>() {
+        @Override
         public Boolean apply(final IResolvedConstructor it) {
           JvmConstructor _declaration = it.getDeclaration();
           return Boolean.valueOf(_declaration.equals(constructor));
@@ -202,6 +206,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     Iterable<IResolvedOperation> _filter = null;
     if (_allOperations!=null) {
       final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
+        @Override
         public Boolean apply(final IResolvedOperation it) {
           JvmOperation _declaration = it.getDeclaration();
           return Boolean.valueOf(_declaration.equals(operation));
@@ -233,6 +238,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
     Iterable<IResolvedConstructor> _filter = null;
     if (_declaredConstructors!=null) {
       final Function1<IResolvedConstructor, Boolean> _function = new Function1<IResolvedConstructor, Boolean>() {
+        @Override
         public Boolean apply(final IResolvedConstructor it) {
           JvmConstructor _declaration = it.getDeclaration();
           return Boolean.valueOf(_declaration.equals(consturctor));

@@ -61,12 +61,15 @@ public class EclipseWorkspaceConfigurationTest {
       JavaProjectSetupUtil.createJavaProject("projectA");
       EclipseWorkspaceConfigProvider _eclipseWorkspaceConfigProvider = new EclipseWorkspaceConfigProvider();
       final Procedure1<EclipseWorkspaceConfigProvider> _function = new Procedure1<EclipseWorkspaceConfigProvider>() {
+        @Override
         public void apply(final EclipseWorkspaceConfigProvider it) {
           it.setWorkspaceRoot(wsroot);
           final Function1<IProject, Set<OutputConfiguration>> _function = new Function1<IProject, Set<OutputConfiguration>>() {
+            @Override
             public Set<OutputConfiguration> apply(final IProject it) {
               OutputConfiguration _outputConfiguration = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
               final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
+                @Override
                 public void apply(final OutputConfiguration it) {
                   it.setOutputDirectory("xtend-gen");
                   it.setOverrideExistingResources(true);

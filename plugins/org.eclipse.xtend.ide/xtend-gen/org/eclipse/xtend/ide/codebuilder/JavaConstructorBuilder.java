@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
  */
 @SuppressWarnings("all")
 public class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICodeBuilder.Java {
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     JvmVisibility _visibility = this.getVisibility();
     ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
@@ -30,6 +31,7 @@ public class JavaConstructorBuilder extends AbstractConstructorBuilder implement
     return this.appendBody(_appendThrowsClause, ";");
   }
   
+  @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();
     return ((IType) _ownerSource);

@@ -45,6 +45,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
   @Inject
   private IStateChangeEventBroker stateChangeEventBroker;
   
+  @Override
   public void tearDown() throws Exception {
     this.workbenchTestHelper.tearDown();
   }
@@ -70,6 +71,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
       IResourcesSetupUtil.waitForAutoBuild();
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           XtendEditorChangingClasspathTest.this.changeContent(editor, "{}", "{ def foo () {} }");
         }
@@ -83,6 +85,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
   
   public void assertAddLibsToClasspath(final IJavaProject project) {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         XtendEditorChangingClasspathTest.this._xtendLibClasspathAdder.addLibsToClasspath(project, null);
       }
@@ -98,6 +101,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         final ArrayList<IResourceDescription.Event> event = CollectionLiterals.<IResourceDescription.Event>newArrayList();
         final ArrayList<Boolean> listenToEvent = CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true));
         final IResourceDescription.Event.Listener _function = new IResourceDescription.Event.Listener() {
+          @Override
           public void descriptionsChanged(final IResourceDescription.Event e) {
             boolean _and = false;
             Boolean _head = IterableExtensions.<Boolean>head(listenToEvent);
@@ -138,6 +142,7 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
         final ArrayList<IResourceDescription.Event> event = CollectionLiterals.<IResourceDescription.Event>newArrayList();
         final ArrayList<Boolean> listenToEvent = CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true));
         final IResourceDescription.Event.Listener _function = new IResourceDescription.Event.Listener() {
+          @Override
           public void descriptionsChanged(final IResourceDescription.Event e) {
             Boolean _head = IterableExtensions.<Boolean>head(listenToEvent);
             if ((boolean) _head) {

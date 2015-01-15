@@ -28,6 +28,7 @@ public class RecursionGuardTest {
   public void tryNextAndDoneYieldsEmpty() {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = new Procedure1<RecursionGuard<String>>() {
+      @Override
       public void apply(final RecursionGuard<String> it) {
         try {
           final String s = "literal";
@@ -48,6 +49,7 @@ public class RecursionGuardTest {
   public void tryNextTwiceYieldsFalse() {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = new Procedure1<RecursionGuard<String>>() {
+      @Override
       public void apply(final RecursionGuard<String> it) {
         final String s = "literal";
         boolean _tryNext = it.tryNext(s);
@@ -63,6 +65,7 @@ public class RecursionGuardTest {
   public void tryNextWithDifferentValuesYieldsTrue() {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = new Procedure1<RecursionGuard<String>>() {
+      @Override
       public void apply(final RecursionGuard<String> it) {
         boolean _tryNext = it.tryNext("first");
         Assert.assertTrue(_tryNext);
@@ -77,6 +80,7 @@ public class RecursionGuardTest {
   public void clearYieldsEmpty() {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = new Procedure1<RecursionGuard<String>>() {
+      @Override
       public void apply(final RecursionGuard<String> it) {
         try {
           boolean _tryNext = it.tryNext("dummy");
@@ -96,6 +100,7 @@ public class RecursionGuardTest {
   public void doneTwice() {
     RecursionGuard<String> _recursionGuard = new RecursionGuard<String>();
     final Procedure1<RecursionGuard<String>> _function = new Procedure1<RecursionGuard<String>>() {
+      @Override
       public void apply(final RecursionGuard<String> it) {
         final String s = "literal";
         boolean _tryNext = it.tryNext(s);

@@ -31,6 +31,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     Modules2.mixin(new XbaseRuntimeModule(), new SharedStateModule(), 
       new TestQuickfixXbaseUIModule(XtypeActivator.getInstance())));
   
+  @Override
   public void tearDown() throws Exception {
     boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
     if (_notEquals) {
@@ -39,6 +40,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     super.tearDown();
   }
   
+  @Override
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
@@ -79,6 +81,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     return (_simpleName + "Project");
   }
   
+  @Override
   public XtextResource getResourceFor(final InputStream stream) {
     try {
       XtextResourceSet _resourceSet = this.getResourceSet();
@@ -108,6 +111,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     return _xblockexpression;
   }
   
+  @Override
   public Injector getInjector() {
     return AbstractXbaseQuickfixTest.injector;
   }

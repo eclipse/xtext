@@ -24,11 +24,13 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
   /**
    * we delegate to the default but filter out all descriptions with a qualified name (i.e. with '.' in the name)
    */
+  @Override
   public IScope getScope(final EObject context, final EReference reference) {
     FilteringScope _xblockexpression = null;
     {
       final IScope scope = super.getScope(context, reference);
       final Predicate<IEObjectDescription> _function = new Predicate<IEObjectDescription>() {
+        @Override
         public boolean apply(final IEObjectDescription it) {
           boolean _and = false;
           boolean _and_1 = false;

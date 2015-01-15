@@ -109,8 +109,10 @@ public abstract class AbstractXtendFormatterTest {
   
   public void assertFormatted(final Procedure1<? super MapBasedPreferenceValues> cfg, final CharSequence expectation, final CharSequence toBeFormatted, final String prefix, final String postfix, final boolean allowErrors) {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
             it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(false));

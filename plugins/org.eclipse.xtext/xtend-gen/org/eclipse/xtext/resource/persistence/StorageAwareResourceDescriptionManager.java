@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.persistence.StorageAwareResource;
  */
 @SuppressWarnings("all")
 public class StorageAwareResourceDescriptionManager extends DefaultResourceDescriptionManager {
+  @Override
   public IResourceDescription getResourceDescription(final Resource resource) {
     IResourceDescription _switchResult = null;
     boolean _matched = false;

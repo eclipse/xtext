@@ -34,11 +34,13 @@ public abstract class AbstractTokenSourceProvider implements TokenSourceProvider
     return new StringReader(_string);
   }
   
+  @Override
   public TokenSource createTokenSource(final CharSequence text) {
     StringReader _reader = this.getReader(text);
     return this.createTokenSource(_reader);
   }
   
+  @Override
   public TokenSource createTokenSource(final Reader reader) {
     CharStream _charStream = this.getCharStream(reader);
     return this.createTokenSource(_charStream);

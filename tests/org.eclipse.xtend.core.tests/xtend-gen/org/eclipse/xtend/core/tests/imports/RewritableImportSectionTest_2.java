@@ -5,10 +5,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class RewritableImportSectionTest_2 extends AbstractRewritableImportSectionTest {
+  @Override
   protected boolean isIgnoreLinebreaks() {
     return true;
   }
   
+  @Override
   protected CharSequence getModel(final boolean isStatic, final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -36,6 +38,7 @@ public class RewritableImportSectionTest_2 extends AbstractRewritableImportSecti
     return _builder;
   }
   
+  @Override
   protected CharSequence getExpectedModel(final String sectionAsString) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");

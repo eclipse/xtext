@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
+  @Override
   public void selectInTreeView(final ISelection selection) {
     boolean _and = false;
     if (!(selection instanceof ITextSelection)) {
@@ -50,6 +51,7 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
         boolean _not_1 = (!_isEmpty);
         if (_not_1) {
           final Function1<IOutlineNode, Integer> _function = new Function1<IOutlineNode, Integer>() {
+            @Override
             public Integer apply(final IOutlineNode it) {
               ITextRegion _fullTextRegion = it.getFullTextRegion();
               return Integer.valueOf(_fullTextRegion.getLength());
@@ -58,6 +60,7 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
           List<Integer> _map = ListExtensions.<IOutlineNode, Integer>map(matchingNodes, _function);
           final Integer smallestMatch = IterableExtensions.<Integer>min(_map);
           final Function1<IOutlineNode, Boolean> _function_1 = new Function1<IOutlineNode, Boolean>() {
+            @Override
             public Boolean apply(final IOutlineNode it) {
               ITextRegion _fullTextRegion = it.getFullTextRegion();
               int _length = _fullTextRegion.getLength();

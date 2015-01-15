@@ -28,11 +28,13 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   @Inject
   private IQualifiedNameConverter nameConverter;
   
+  @Override
   public IResourceDescription createResourceDescription(final Resource resource, final IDefaultResourceDescriptionStrategy strategy) {
     IResourceScopeCache _cache = this.getCache();
     return new XtendResourceDescription(resource, strategy, _cache, this.typeResolver, this.nameConverter);
   }
   
+  @Override
   public boolean hasChanges(final IResourceDescription.Delta delta, final IResourceDescription candidate) {
     boolean _or = false;
     boolean _hasChanges = super.hasChanges(delta, candidate);
@@ -48,6 +50,7 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   private boolean containsActiveAnnotation(final IResourceDescription description) {
     Iterable<IEObjectDescription> _exportedObjects = description.getExportedObjects();
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         String[] _userDataKeys = it.getUserDataKeys();
         return Boolean.valueOf(((List<String>)Conversions.doWrapArray(_userDataKeys)).contains(XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP));
@@ -60,6 +63,7 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
    * When an annotation processor changes, even if it is just its implementation, the downstream classes should be rebuilt. That is why we are interested even in
    * deltas that have no changed EObjectDescriptions
    */
+  @Override
   public boolean isAffectedByAny(final Collection<IResourceDescription.Delta> deltas, final IResourceDescription candidate, final IResourceDescriptions context) throws IllegalArgumentException {
     return this.isAffected(deltas, candidate, context);
   }

@@ -22,6 +22,7 @@ public class MockEclipseOutputConfiguration extends EclipseOutputConfigurationPr
     this.function = function;
   }
   
+  @Override
   public Set<OutputConfiguration> getOutputConfigurations(final IProject project) {
     return this.function.apply(project);
   }

@@ -65,9 +65,11 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure, Integer> _function = new Procedure2<XClosure, Integer>() {
+      @Override
       public void apply(final XClosure closure, final Integer index) {
         final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
         final Callable<Object> _function = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("failed for closure at ");
@@ -80,6 +82,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
         };
         AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("failed for closure at ");
@@ -100,8 +103,10 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   
   public void withEquivalents(final List<Object> references, final String... types) {
     final Procedure2<Object, Integer> _function = new Procedure2<Object, Integer>() {
+      @Override
       public void apply(final Object reference, final Integer index) {
         final Callable<Object> _function = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             Assert.assertTrue((reference instanceof FunctionTypeReference));
             return null;
@@ -109,6 +114,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
         };
         AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             Object _get = types[(index).intValue()];
             String _equivalent = AbstractClosureTypeTest2.this.getEquivalent(((FunctionTypeReference) reference));
@@ -136,6 +142,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
+      @Override
       public CharSequence apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -169,6 +176,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
       Iterator<XClosure> _filter = Iterators.<XClosure>filter(_eAll, XClosure.class);
       final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(_filter);
       final Function1<XClosure, Integer> _function = new Function1<XClosure, Integer>() {
+        @Override
         public Integer apply(final XClosure it) {
           ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
           return Integer.valueOf(_findActualNodeFor.getOffset());
@@ -180,6 +188,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     }
   }
   
+  @Override
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {

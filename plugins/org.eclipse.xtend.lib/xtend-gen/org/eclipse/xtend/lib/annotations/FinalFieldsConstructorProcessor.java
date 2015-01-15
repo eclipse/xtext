@@ -65,6 +65,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     public Iterable<? extends MutableFieldDeclaration> getFinalFields(final MutableTypeDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MutableFieldDeclaration it) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -118,9 +119,11 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         final ArrayList<TypeReference> expectedTypes = this.getFinalFieldsConstructorArgumentTypes(cls);
         Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = cls.getDeclaredConstructors();
         final Function1<MutableConstructorDeclaration, Boolean> _function = new Function1<MutableConstructorDeclaration, Boolean>() {
+          @Override
           public Boolean apply(final MutableConstructorDeclaration it) {
             Iterable<? extends MutableParameterDeclaration> _parameters = it.getParameters();
             final Function1<MutableParameterDeclaration, TypeReference> _function = new Function1<MutableParameterDeclaration, TypeReference>() {
+              @Override
               public TypeReference apply(final MutableParameterDeclaration it) {
                 return it.getType();
               }
@@ -145,6 +148,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
           ResolvedConstructor _superConstructor_1 = this.getSuperConstructor(cls);
           Iterable<? extends ResolvedParameter> _resolvedParameters = _superConstructor_1.getResolvedParameters();
           final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
+            @Override
             public TypeReference apply(final ResolvedParameter it) {
               return it.getResolvedType();
             }
@@ -154,6 +158,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         }
         Iterable<? extends MutableFieldDeclaration> _finalFields = this.getFinalFields(cls);
         final Function1<MutableFieldDeclaration, TypeReference> _function_1 = new Function1<MutableFieldDeclaration, TypeReference>() {
+          @Override
           public TypeReference apply(final MutableFieldDeclaration it) {
             return it.getType();
           }
@@ -193,6 +198,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         return;
       }
       final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
+        @Override
         public void apply(final MutableConstructorDeclaration it) {
           MutableTypeDeclaration _declaringType = it.getDeclaringType();
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(_declaringType);
@@ -261,6 +267,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       }
       final Iterable<? extends ResolvedParameter> superParameters = _elvis;
       final Procedure1<ResolvedParameter> _function = new Procedure1<ResolvedParameter>() {
+        @Override
         public void apply(final ResolvedParameter p) {
           ParameterDeclaration _declaration = p.getDeclaration();
           String _simpleName = _declaration.getSimpleName();
@@ -273,6 +280,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       MutableTypeDeclaration _declaringType_4 = it.getDeclaringType();
       Iterable<? extends MutableFieldDeclaration> _finalFields = this.getFinalFields(_declaringType_4);
       final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+        @Override
         public void apply(final MutableFieldDeclaration p) {
           p.markAsInitializedBy(it);
           String _simpleName = p.getSimpleName();
@@ -288,6 +296,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("super(");
           final Function1<ResolvedParameter, CharSequence> _function = new Function1<ResolvedParameter, CharSequence>() {
+            @Override
             public CharSequence apply(final ResolvedParameter it) {
               ParameterDeclaration _declaration = it.getDeclaration();
               return _declaration.getSimpleName();
@@ -352,8 +361,10 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     }
   }
   
+  @Override
   public void doTransform(final List<? extends MutableTypeParameterDeclarator> elements, @Extension final TransformationContext context) {
     final Procedure1<MutableTypeParameterDeclarator> _function = new Procedure1<MutableTypeParameterDeclarator>() {
+      @Override
       public void apply(final MutableTypeParameterDeclarator it) {
         FinalFieldsConstructorProcessor.this.transform(it, context);
       }

@@ -30,6 +30,7 @@ public class SemanticSequencer extends GeneratedFile {
   @Named("fileHeader")
   private String fileHeader;
   
+  @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     CharSequence _xifexpression = null;
     if ((this.generateXtendStub).booleanValue()) {

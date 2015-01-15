@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 
 @SuppressWarnings("all")
 public class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest {
+  @Override
   protected CharSequence getModel(final boolean isStatic, final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -39,6 +40,7 @@ public class RewritableImportSectionTest_1 extends AbstractRewritableImportSecti
     return _builder;
   }
   
+  @Override
   protected CharSequence getExpectedModel(final String sectionAsString) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(sectionAsString, "");

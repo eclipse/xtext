@@ -30,6 +30,7 @@ class UnicodeTerminalsGenerator {
     _builder.newLine();
     _builder.append("\t");
     final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
+      @Override
       public Boolean apply(final Integer it) {
         return Boolean.valueOf(Character.isJavaIdentifierStart((it).intValue()));
       }
@@ -52,6 +53,7 @@ class UnicodeTerminalsGenerator {
     _builder.newLine();
     _builder.append("\t");
     final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
+      @Override
       public Boolean apply(final Integer it) {
         boolean _and = false;
         boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart((it).intValue());

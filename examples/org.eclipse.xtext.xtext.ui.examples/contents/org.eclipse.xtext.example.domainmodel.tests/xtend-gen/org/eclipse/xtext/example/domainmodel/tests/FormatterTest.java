@@ -29,6 +29,7 @@ public class FormatterTest {
   @Test
   public void example1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("entity Foo {");
@@ -78,6 +79,7 @@ public class FormatterTest {
   @Test
   public void example2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("entity Foo {");
@@ -109,8 +111,10 @@ public class FormatterTest {
   @Test
   public void example3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<String>put(FormatterPreferenceKeys.indentation, " ");
           }

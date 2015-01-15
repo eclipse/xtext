@@ -121,6 +121,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);
         List<LightweightBoundTypeArgument> _allHints = unbound.getAllHints();
         final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
+          @Override
           public void apply(final LightweightBoundTypeArgument it) {
             BoundTypeArgumentSource _source = it.getSource();
             Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, _source);
@@ -136,6 +137,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter, String> _function_1 = new Function1<JvmTypeParameter, String>() {
+      @Override
       public String apply(final JvmTypeParameter it) {
         return it.getSimpleName();
       }
@@ -166,6 +168,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
           _builder.append(" in ");
           Set<JvmTypeParameter> _keySet = mapping.keySet();
           final Function1<JvmTypeParameter, String> _function = new Function1<JvmTypeParameter, String>() {
+            @Override
             public String apply(final JvmTypeParameter it) {
               return it.getSimpleName();
             }
@@ -181,6 +184,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   
   public List<LightweightBoundTypeArgument> like(final List<LightweightBoundTypeArgument> mappingData, final Triple<String, VarianceInfo, VarianceInfo>... mappedTypes) {
     final Function1<LightweightBoundTypeArgument, String> _function = new Function1<LightweightBoundTypeArgument, String>() {
+      @Override
       public String apply(final LightweightBoundTypeArgument it) {
         StringConcatenation _builder = new StringConcatenation();
         LightweightTypeReference _typeReference = it.getTypeReference();
@@ -203,6 +207,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     Assert.assertEquals(_string, _size, _size_1);
     List<Triple<String, VarianceInfo, VarianceInfo>> _list = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
     final Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>> _function_1 = new Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>>() {
+      @Override
       public Triple<String, VarianceInfo, VarianceInfo> apply(final LightweightBoundTypeArgument it) {
         LightweightTypeReference _typeReference = it.getTypeReference();
         String _string = _typeReference.toString();
@@ -217,18 +222,22 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     return mappingData;
   }
   
+  @Override
   protected StandardTypeReferenceOwner createOwner() {
     CommonTypeComputationServices _services = this.getServices();
     ResourceSet _contextResourceSet = this.getContextResourceSet();
     return new StandardTypeReferenceOwner(_services, _contextResourceSet) {
+      @Override
       public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
         DeferredTypeParameterHintCollectorTest.this.hints.put(handle, boundTypeArgument);
       }
       
+      @Override
       public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
         return DeferredTypeParameterHintCollectorTest.this.hints.get(handle);
       }
       
+      @Override
       public boolean isResolved(final Object handle) {
         return false;
       }

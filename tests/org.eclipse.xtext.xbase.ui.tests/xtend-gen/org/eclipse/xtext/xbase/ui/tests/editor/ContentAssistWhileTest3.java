@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistInBlockTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistWhileTest3 extends ContentAssistInBlockTest {
+  @Override
   protected String getPrefix() {
     return "while (true) {";
   }
   
+  @Override
   protected String getSuffix() {
     return "}";
   }

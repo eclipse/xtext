@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.EmptyClasspathClassLoader;
 
 @SuppressWarnings("all")
 public class EmptyClasspathRuntimeModule extends XbaseInjectorProvider.XbaseTestRuntimeModule {
+  @Override
   public ClassLoader bindClassLoaderToInstance() {
     return new EmptyClasspathClassLoader();
   }

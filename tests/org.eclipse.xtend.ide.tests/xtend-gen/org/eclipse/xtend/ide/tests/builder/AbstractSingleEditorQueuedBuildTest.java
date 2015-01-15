@@ -33,6 +33,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "Bar", "Bar<T>");
         }
@@ -56,6 +57,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("@javax.annotation.Resource");
@@ -82,6 +84,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "// primary top level type", "public class Bar {}");
         }
@@ -103,6 +106,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "public class Bar {}", "");
         }
@@ -124,6 +128,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "Bar", "Bar2");
         }
@@ -142,6 +147,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/Bar.java", "// primary top level type", "public class Bar {}");
         }
@@ -160,6 +166,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "public class Bar {}", "");
         }
@@ -178,6 +185,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "Bar", "Bar2");
         }
@@ -204,6 +212,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "// secondary top level type", "class Foo {}");
         }
@@ -230,6 +239,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "class Foo {}", "");
         }
@@ -258,6 +268,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "Bar2", "Bar3");
         }
@@ -281,6 +292,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "// secondary top level type", "class Foo {}");
         }
@@ -304,6 +316,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "class Foo {}", "");
         }
@@ -329,6 +342,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("Bar.java", "Bar2", "Bar3");
         }
@@ -354,6 +368,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Foo {");
@@ -399,8 +414,10 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+            @Override
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -446,8 +463,10 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+            @Override
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -483,6 +502,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Foo {");
@@ -532,6 +552,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Foo3 {}");
@@ -563,8 +584,10 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+            @Override
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -602,8 +625,10 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+            @Override
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _xblockexpression = null;
               {
@@ -637,6 +662,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "package mypackage;", "package mypackage2;");
         }
@@ -665,6 +691,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "public String bar;", "private String bar;");
         }
@@ -693,6 +720,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "private String bar;", "public String bar;");
         }
@@ -721,6 +749,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "private String bar;", "private static String bar;");
         }
@@ -752,6 +781,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "import java.util.List;", "");
         }
@@ -783,6 +813,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "import java.util.List;", "import java.awt.List;");
         }
@@ -816,6 +847,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "import java.util.List;", "import java.awt.List;");
         }
@@ -850,6 +882,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "import java.util.List;", "import java.awt.List;");
         }
@@ -891,6 +924,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "import java.util.List;", "import java.awt.List;");
         }
@@ -925,6 +959,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "x", "y");
         }
@@ -959,6 +994,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "bar()", "bar2()");
         }
@@ -1007,6 +1043,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder_1.newLine();
       this.testHelper.createFile("/mypackage/Bar2.java", _builder_1.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.close("/mypackage/Bar.java", "bar()", "bar2()");
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar2.java", "bar()", "bar2()");
@@ -1042,6 +1079,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "Hello world!", "Hello!");
         }
@@ -1066,6 +1104,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Bar {");
@@ -1108,6 +1147,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public void bar() {");
@@ -1145,6 +1185,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           AbstractSingleEditorQueuedBuildTest.this.save("/mypackage/Bar.java", "private void bar() {}", "");
         }
@@ -1178,8 +1219,10 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
       _builder.newLine();
       this.testHelper.createFile("/mypackage/Bar.java", _builder.toString());
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+            @Override
             public ITextEditor apply(final ITextEditor it) {
               ITextEditor _changeContent = AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, "public void bar() {}", "");
               return AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(_changeContent, "private void bar2() {}", "");
@@ -1197,6 +1240,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
   public ITextEditor save(final String fileName, final String oldText, final String newText) {
     ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
     final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+      @Override
       public ITextEditor apply(final ITextEditor it) {
         return AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, oldText, newText);
       }
@@ -1212,6 +1256,7 @@ public abstract class AbstractSingleEditorQueuedBuildTest extends AbstractQueued
   public ITextEditor close(final String fileName, final String oldText, final String newText) {
     ITextEditor _openJavaEditor = this._javaEditorExtension.openJavaEditor(fileName);
     final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+      @Override
       public ITextEditor apply(final ITextEditor it) {
         return AbstractSingleEditorQueuedBuildTest.this._javaEditorExtension.changeContent(it, oldText, newText);
       }

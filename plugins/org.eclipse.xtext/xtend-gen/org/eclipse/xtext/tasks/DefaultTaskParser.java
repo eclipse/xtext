@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class DefaultTaskParser implements ITaskParser {
+  @Override
   public List<Task> parseTasks(final String source, final TaskTags taskTags) {
     ArrayList<Task> _xblockexpression = null;
     {
@@ -41,6 +42,7 @@ public class DefaultTaskParser implements ITaskParser {
         return Collections.<Task>unmodifiableList(CollectionLiterals.<Task>newArrayList());
       }
       final Function<TaskTag, String> _function = new Function<TaskTag, String>() {
+        @Override
         public String apply(final TaskTag it) {
           String _name = it.getName();
           return _name.toLowerCase();
@@ -53,6 +55,7 @@ public class DefaultTaskParser implements ITaskParser {
       while (matcher.find()) {
         Task _task = new Task();
         final Procedure1<Task> _function_1 = new Procedure1<Task>() {
+          @Override
           public void apply(final Task it) {
             String _group = matcher.group(2);
             String _lowerCase = _group.toLowerCase();
@@ -89,6 +92,7 @@ public class DefaultTaskParser implements ITaskParser {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("^.*((");
       final Function1<TaskTag, String> _function = new Function1<TaskTag, String>() {
+        @Override
         public String apply(final TaskTag it) {
           String _name = it.getName();
           return Pattern.quote(_name);

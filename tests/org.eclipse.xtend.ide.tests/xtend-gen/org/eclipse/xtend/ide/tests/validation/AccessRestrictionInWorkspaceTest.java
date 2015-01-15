@@ -198,6 +198,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   }
   
   @Before
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("firstProject");
@@ -237,6 +238,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   }
   
   @After
+  @Override
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }

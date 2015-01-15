@@ -33,8 +33,10 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     this.queue = queue;
   }
   
+  @Override
   public void delete(final Path path) {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         ParallelFileSystemSupport.this.delegate.delete(path);
       }
@@ -42,8 +44,10 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     this.queue.sendAsync(this.uri, _function);
   }
   
+  @Override
   public void mkdir(final Path path) {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         ParallelFileSystemSupport.this.delegate.mkdir(path);
       }
@@ -51,8 +55,10 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     this.queue.sendAsync(this.uri, _function);
   }
   
+  @Override
   public void setContents(final Path path, final CharSequence contents) {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         ParallelFileSystemSupport.this.delegate.setContents(path, contents);
       }
@@ -60,8 +66,10 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     this.queue.sendAsync(this.uri, _function);
   }
   
+  @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         ParallelFileSystemSupport.this.delegate.setContentsAsStream(path, source);
       }
@@ -69,38 +77,47 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
     this.queue.sendAsync(this.uri, _function);
   }
   
+  @Override
   public boolean exists(final Path path) {
     return this.delegate.exists(path);
   }
   
+  @Override
   public String getCharset(final Path path) {
     return this.delegate.getCharset(path);
   }
   
+  @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     return this.delegate.getChildren(path);
   }
   
+  @Override
   public CharSequence getContents(final Path path) {
     return this.delegate.getContents(path);
   }
   
+  @Override
   public InputStream getContentsAsStream(final Path path) {
     return this.delegate.getContentsAsStream(path);
   }
   
+  @Override
   public long getLastModification(final Path path) {
     return this.delegate.getLastModification(path);
   }
   
+  @Override
   public boolean isFile(final Path path) {
     return this.delegate.isFile(path);
   }
   
+  @Override
   public boolean isFolder(final Path path) {
     return this.delegate.isFolder(path);
   }
   
+  @Override
   public java.net.URI toURI(final Path path) {
     return this.delegate.toURI(path);
   }

@@ -55,12 +55,14 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   @Accessors
   private CompilationUnitImpl compilationUnit;
   
+  @Override
   public void registerAnnotationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmAnnotationType newType = TypesFactory.eINSTANCE.createJvmAnnotationType();
     newType.setVisibility(JvmVisibility.PUBLIC);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
+  @Override
   public void registerClass(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);
@@ -72,12 +74,14 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     this.setNameAndAccept(newType, qualifiedName);
   }
   
+  @Override
   public void registerEnumerationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmEnumerationType newType = TypesFactory.eINSTANCE.createJvmEnumerationType();
     newType.setVisibility(JvmVisibility.PUBLIC);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
+  @Override
   public void registerInterface(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);

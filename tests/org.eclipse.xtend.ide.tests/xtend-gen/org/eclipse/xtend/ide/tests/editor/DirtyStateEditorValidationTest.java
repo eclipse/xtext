@@ -65,6 +65,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
   private IResourceValidator validator;
   
   @After
+  @Override
   public void tearDown() {
     try {
       this.helper.tearDown();
@@ -180,6 +181,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       boolean _greaterThan = (_length > 0);
       if (_greaterThan) {
         final Function1<IMarker, Object> _function = new Function1<IMarker, Object>() {
+          @Override
           public Object apply(final IMarker it) {
             try {
               return it.getAttribute(IMarker.MESSAGE);
@@ -353,8 +355,10 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       this._syncUtil.waitForReconciler(classEditor);
       IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
+            @Override
             public boolean isCanceled() {
               return false;
             }
@@ -374,8 +378,10 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       this._syncUtil.waitForReconciler(classEditor);
       IXtextDocument _document_3 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
+            @Override
             public boolean isCanceled() {
               return false;
             }
@@ -438,8 +444,10 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       this._syncUtil.waitForDirtyStateUpdater(classEditor);
       IXtextDocument _document_1 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
+            @Override
             public boolean isCanceled() {
               return false;
             }
@@ -458,8 +466,10 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
       this._syncUtil.waitForDirtyStateUpdater(classEditor);
       IXtextDocument _document_3 = classEditor.getDocument();
       final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           final CancelIndicator _function = new CancelIndicator() {
+            @Override
             public boolean isCanceled() {
               return false;
             }
@@ -529,6 +539,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
   
   private void assertNumberOfErrorAnnotations(final XtextEditor editor, final int expectedNumber) {
     final Function0<Boolean> _function = new Function0<Boolean>() {
+      @Override
       public Boolean apply() {
         List<Annotation> _errorAnnotations = DirtyStateEditorValidationTest.this.getErrorAnnotations(editor);
         int _size = _errorAnnotations.size();
@@ -538,6 +549,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
     this.helper.awaitUIUpdate(_function, DirtyStateEditorValidationTest.VALIDATION_TIMEOUT);
     final List<Annotation> errors = this.getErrorAnnotations(editor);
     final Function1<Annotation, String> _function_1 = new Function1<Annotation, String>() {
+      @Override
       public String apply(final Annotation it) {
         String _text = it.getText();
         String _plus = (_text + "(");
@@ -559,6 +571,7 @@ public class DirtyStateEditorValidationTest extends AbstractXtendUITestCase {
     Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
     Iterator<Annotation> _filter = Iterators.<Annotation>filter(_annotationIterator, Annotation.class);
     final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+      @Override
       public Boolean apply(final Annotation it) {
         String _type = it.getType();
         return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));

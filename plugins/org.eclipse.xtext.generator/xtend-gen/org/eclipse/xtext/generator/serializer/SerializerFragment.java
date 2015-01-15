@@ -87,6 +87,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
   @Accessors
   private boolean generateXtendStub;
   
+  @Override
   protected void addLocalBindings(final Binder binder) {
     AnnotatedBindingBuilder<Boolean> _bind = binder.<Boolean>bind(Boolean.class);
     Named _named = Names.named("generateXtendStub");
@@ -128,14 +129,17 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     this.detectSyntheticTerminals = detectSyntheticTerminals;
   }
   
+  @Override
   public void setGenerateStub(final boolean generateStub) {
     this.srcGenOnly = (!generateStub);
   }
   
+  @Override
   public boolean isGenerateStub() {
     return (!this.srcGenOnly);
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     final BindFactory bf = new BindFactory();
     String _name = ISemanticSequencer.class.getName();
@@ -152,6 +156,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     return bf.getBindings();
   }
   
+  @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     this.abstractSyntacticSequencer.setDetectSyntheticTerminals(this.detectSyntheticTerminals);
     this.abstractSyntacticSequencer.setSyntheticTerminalDetector(this.syntheticTerminalDetector);
@@ -205,12 +210,14 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     }
   }
   
+  @Override
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
     SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
     String _packageName = _semanticSequencer.getPackageName();
     return CollectionLiterals.<String>newArrayList(_packageName);
   }
   
+  @Override
   public String[] getRequiredBundlesRt(final Grammar grammar) {
     List<String> _xifexpression = null;
     if (this.generateXtendStub) {

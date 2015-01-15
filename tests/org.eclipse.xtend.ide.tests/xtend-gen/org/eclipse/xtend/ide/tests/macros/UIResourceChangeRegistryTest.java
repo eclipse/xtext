@@ -54,15 +54,18 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
     
     public List<URI> queuedURIs = CollectionLiterals.<URI>newArrayList();
     
+    @Override
     public void queueURIs(final Set<URI> interestedFiles) {
       Iterables.<URI>addAll(this.queuedURIs, interestedFiles);
     }
     
     @Inject
+    @Override
     public void init(final IWorkspace workspace) {
       workspace.addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
     }
     
+    @Override
     public void resourceChanged(final IResourceChangeEvent event) {
       super.resourceChanged(event);
       this.waitForEvent = false;
@@ -102,6 +105,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       Pair<Integer, String> _mappedTo_11 = Pair.<Integer, String>of(Integer.valueOf(IResourceDelta.MARKERS), "MARKERS");
       Pair<Integer, String> _mappedTo_12 = Pair.<Integer, String>of(Integer.valueOf(IResourceDelta.REPLACED), "REPLACED");
       final Function1<Pair<Integer, String>, String> _function = new Function1<Pair<Integer, String>, String>() {
+        @Override
         public String apply(final Pair<Integer, String> it) {
           String _xifexpression = null;
           int _flags = delta.getFlags();
@@ -147,6 +151,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
   public StopwatchRule rule = new StopwatchRule(true);
   
   @After
+  @Override
   public void tearDown() {
     try {
       IProject _project = this.workbenchTestHelper.getProject();

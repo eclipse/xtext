@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @Deprecated
 @SuppressWarnings("all")
 public class PropertyProcessor extends AbstractFieldProcessor {
+  @Override
   public void doTransform(final MutableFieldDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final AccessorsProcessor.Util util = new AccessorsProcessor.Util(context);

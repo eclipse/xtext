@@ -32,15 +32,18 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
   
   private WorkspaceConfig workspaceConfig;
   
+  @Override
   public WorkspaceConfig get() {
     boolean _equals = Objects.equal(this.workspaceConfig, null);
     if (_equals) {
       String _absolutePath = this.workspaceRoot.getAbsolutePath();
       WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
       final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+        @Override
         public void apply(final WorkspaceConfig it) {
           File[] _listFiles = RuntimeWorkspaceConfigProvider.this.workspaceRoot.listFiles();
           final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
+            @Override
             public Boolean apply(final File it) {
               return Boolean.valueOf(it.isDirectory());
             }
@@ -50,6 +53,7 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
             String _name = dir.getName();
             ProjectConfig _projectConfig = new ProjectConfig(_name);
             final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
+              @Override
               public void apply(final ProjectConfig it) {
               }
             };

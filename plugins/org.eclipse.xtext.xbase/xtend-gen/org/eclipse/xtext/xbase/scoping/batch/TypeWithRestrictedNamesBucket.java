@@ -34,10 +34,12 @@ public class TypeWithRestrictedNamesBucket extends TypeBucket {
     this.typesToNames = types;
   }
   
+  @Override
   public boolean isRestrictingNames() {
     return true;
   }
   
+  @Override
   public List<? extends JvmType> getTypes() {
     Set<? extends JvmType> _keySet = this.typesToNames.keySet();
     return new ArrayList<JvmType>(_keySet);

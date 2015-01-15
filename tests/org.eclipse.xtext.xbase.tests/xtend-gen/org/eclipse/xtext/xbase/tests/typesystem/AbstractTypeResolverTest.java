@@ -48,6 +48,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     AbstractTypeResolverTest.seenExpressions = null;
   }
   
+  @Override
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {
@@ -67,6 +68,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   public Iterable<Resource.Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
     EList<Resource.Diagnostic> _errors = resource.getErrors();
     final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+      @Override
       public Boolean apply(final Resource.Diagnostic it) {
         boolean _or = false;
         if ((it instanceof XtextSyntaxDiagnostic)) {

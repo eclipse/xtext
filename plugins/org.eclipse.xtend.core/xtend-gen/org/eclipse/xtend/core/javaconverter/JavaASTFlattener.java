@@ -199,12 +199,14 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public void appendModifieres(final ASTNode node, final Iterable<IExtendedModifier> ext, final Function1<? super ASTNode, ? extends StringBuffer> callBack) {
     final Procedure1<IExtendedModifier> _function = new Procedure1<IExtendedModifier>() {
+      @Override
       public void apply(final IExtendedModifier p) {
         ((ASTNode) p).accept(JavaASTFlattener.this);
       }
     };
     final Procedure1<IExtendedModifier> appender = _function;
     final Function1<IExtendedModifier, Boolean> _function_1 = new Function1<IExtendedModifier, Boolean>() {
+      @Override
       public Boolean apply(final IExtendedModifier it) {
         return Boolean.valueOf(it.isAnnotation());
       }
@@ -216,6 +218,7 @@ public class JavaASTFlattener extends ASTVisitor {
       callBack.apply(node);
     }
     final Function1<IExtendedModifier, Boolean> _function_2 = new Function1<IExtendedModifier, Boolean>() {
+      @Override
       public Boolean apply(final IExtendedModifier it) {
         return Boolean.valueOf(it.isModifier());
       }
@@ -276,6 +279,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return this.problems.add(_builder.toString());
   }
   
+  @Override
   public boolean visit(final Assignment node) {
     final Expression leftSide = node.getLeftHandSide();
     if ((leftSide instanceof ArrayAccess)) {
@@ -360,6 +364,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final MarkerAnnotation node) {
     this.appendToBuffer("@");
     Name _typeName = node.getTypeName();
@@ -368,6 +373,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final CompilationUnit it) {
     List _types = it.types();
     AbstractTypeDeclaration _head = IterableExtensions.<AbstractTypeDeclaration>head(_types);
@@ -386,6 +392,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final PackageDeclaration it) {
     Javadoc _javadoc = it.getJavadoc();
     boolean _notEquals = (!Objects.equal(_javadoc, null));
@@ -402,6 +409,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ParameterizedType it) {
     Type _type = it.getType();
     _type.accept(this);
@@ -410,6 +418,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final PrimitiveType it) {
     PrimitiveType.Code _primitiveTypeCode = it.getPrimitiveTypeCode();
     String _string = _primitiveTypeCode.toString();
@@ -417,6 +426,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final BooleanLiteral it) {
     boolean _booleanValue = it.booleanValue();
     String _valueOf = String.valueOf(_booleanValue);
@@ -424,6 +434,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final StringLiteral it) {
     String _escapedValue = it.getEscapedValue();
     final String handleOctal = _escapedValue.replaceAll("\\\\([01234567])", "\\u000$1");
@@ -431,6 +442,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ImportDeclaration it) {
     this.appendToBuffer("import ");
     boolean _isStatic = it.isStatic();
@@ -447,6 +459,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final Initializer it) {
     Javadoc _javadoc = it.getJavadoc();
     boolean _notEquals = (!Objects.equal(_javadoc, null));
@@ -462,6 +475,7 @@ public class JavaASTFlattener extends ASTVisitor {
       ASTNode _parent = it.getParent();
       FieldDeclaration[] _fields = ((TypeDeclaration) _parent).getFields();
       final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final FieldDeclaration it) {
           boolean _and = false;
           List _modifiers = it.modifiers();
@@ -478,9 +492,11 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       Iterable<FieldDeclaration> _filter = IterableExtensions.<FieldDeclaration>filter(((Iterable<FieldDeclaration>)Conversions.doWrapArray(_fields)), _function);
       final Function1<FieldDeclaration, Boolean> _function_1 = new Function1<FieldDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final FieldDeclaration f) {
           List _fragments = f.fragments();
           final Function1<VariableDeclarationFragment, Boolean> _function = new Function1<VariableDeclarationFragment, Boolean>() {
+            @Override
             public Boolean apply(final VariableDeclarationFragment fragment) {
               Block _body = it.getBody();
               Boolean _isAssignedInBody = JavaASTFlattener.this._aSTFlattenerUtils.isAssignedInBody(_body, fragment);
@@ -523,6 +539,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final TypeDeclaration it) {
     boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(it);
     if (_isDummyType) {
@@ -612,6 +629,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final Javadoc it) {
     this.appendToBuffer("/** ");
     List _tags = it.tags();
@@ -622,6 +640,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final SimpleName it) {
     String _identifier = it.getIdentifier();
     String convertedName = this.converterService.toString(_identifier, "ValidID");
@@ -640,6 +659,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final QualifiedName it) {
     Name _qualifier = it.getQualifier();
     _qualifier.accept(this);
@@ -666,10 +686,12 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final SimpleType node) {
     return true;
   }
   
+  @Override
   public boolean visit(final Modifier it) {
     boolean append = true;
     Modifier.ModifierKeyword _keyword = it.getKeyword();
@@ -726,6 +748,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final FieldDeclaration it) {
     Javadoc _javadoc = it.getJavadoc();
     boolean _notEquals = (!Objects.equal(_javadoc, null));
@@ -735,6 +758,7 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     List _fragments = it.fragments();
     final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
+      @Override
       public void apply(final VariableDeclarationFragment frag) {
         List _modifiers = it.modifiers();
         JavaASTFlattener.this.appendModifieres(it, _modifiers);
@@ -765,9 +789,11 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final VariableDeclarationExpression it) {
     List _fragments = it.fragments();
     final Procedure2<VariableDeclarationFragment, Integer> _function = new Procedure2<VariableDeclarationFragment, Integer>() {
+      @Override
       public void apply(final VariableDeclarationFragment frag, final Integer counter) {
         List _modifiers = it.modifiers();
         JavaASTFlattener.this.appendModifieres(it, _modifiers);
@@ -793,6 +819,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final VariableDeclarationFragment it) {
     SimpleName _name = it.getName();
     _name.accept(this);
@@ -806,6 +833,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ConditionalExpression node) {
     this.appendToBuffer("if (");
     Expression _expression = node.getExpression();
@@ -826,6 +854,7 @@ public class JavaASTFlattener extends ASTVisitor {
     }
   }
   
+  @Override
   public boolean visit(final VariableDeclarationStatement it) {
     List _modifiers = it.modifiers();
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
@@ -833,12 +862,14 @@ public class JavaASTFlattener extends ASTVisitor {
     final boolean hasAnnotations = (!_isEmpty);
     List _fragments = it.fragments();
     final Procedure1<VariableDeclarationFragment> _function = new Procedure1<VariableDeclarationFragment>() {
+      @Override
       public void apply(final VariableDeclarationFragment frag) {
         if (hasAnnotations) {
           JavaASTFlattener.this.appendToBuffer("/*FIXME can not add Annotation to Variable declaration. Java code: ");
         }
         List _modifiers = it.modifiers();
         final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
+          @Override
           public StringBuffer apply(final ASTNode it) {
             StringBuffer _xifexpression = null;
             if (hasAnnotations) {
@@ -904,6 +935,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   public void visitAll(final Iterable<? extends ASTNode> iterable, final String separator) {
     final Procedure2<ASTNode, Integer> _function = new Procedure2<ASTNode, Integer>() {
+      @Override
       public void apply(final ASTNode it, final Integer counter) {
         it.accept(JavaASTFlattener.this);
         int _size = IterableExtensions.size(iterable);
@@ -927,6 +959,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return _xblockexpression;
   }
   
+  @Override
   public boolean visit(final MethodDeclaration it) {
     Javadoc _javadoc = it.getJavadoc();
     boolean _notEquals = (!Objects.equal(_javadoc, null));
@@ -935,6 +968,7 @@ public class JavaASTFlattener extends ASTVisitor {
       _javadoc_1.accept(this);
     }
     final Function1<ASTNode, StringBuffer> _function = new Function1<ASTNode, StringBuffer>() {
+      @Override
       public StringBuffer apply(final ASTNode node) {
         StringBuffer _xifexpression = null;
         if ((node instanceof MethodDeclaration)) {
@@ -1007,6 +1041,7 @@ public class JavaASTFlattener extends ASTVisitor {
     List _parameters = it.parameters();
     List<SingleVariableDeclaration> _reverseView = ListExtensions.<SingleVariableDeclaration>reverseView(_parameters);
     final Procedure1<SingleVariableDeclaration> _function_1 = new Procedure1<SingleVariableDeclaration>() {
+      @Override
       public void apply(final SingleVariableDeclaration p) {
         Block _body = it.getBody();
         SimpleName _name = p.getName();
@@ -1067,6 +1102,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final SingleVariableDeclaration it) {
     boolean _or = false;
     if (((it.getParent() instanceof MethodDeclaration) || (it.getParent() instanceof CatchClause))) {
@@ -1078,6 +1114,7 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_or) {
       List _modifiers = it.modifiers();
       final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
+        @Override
         public Boolean apply(final Object e) {
           boolean _and = false;
           if (!(e instanceof Modifier)) {
@@ -1116,6 +1153,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ClassInstanceCreation node) {
     Expression _expression = node.getExpression();
     boolean _notEquals = (!Objects.equal(_expression, null));
@@ -1192,6 +1230,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final Block node) {
     this.appendToBuffer("{");
     this.increaseIndent();
@@ -1204,6 +1243,7 @@ public class JavaASTFlattener extends ASTVisitor {
       final CompilationUnit cu = ((CompilationUnit) _root_1);
       List _commentList = cu.getCommentList();
       final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
+        @Override
         public Boolean apply(final Comment c) {
           boolean _and = false;
           boolean _isDocComment = c.isDocComment();
@@ -1219,6 +1259,7 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_commentList, _function);
       final Function1<Comment, Boolean> _function_1 = new Function1<Comment, Boolean>() {
+        @Override
         public Boolean apply(final Comment it) {
           int _startPosition = it.getStartPosition();
           int _startPosition_1 = node.getStartPosition();
@@ -1229,6 +1270,7 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       Iterable<Comment> _filter_1 = IterableExtensions.<Comment>filter(_filter, _function_1);
       final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
+        @Override
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
           JavaASTFlattener.this.assignedComments.add(it);
@@ -1274,6 +1316,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final CastExpression node) {
     Expression _expression = node.getExpression();
     _expression.accept(this);
@@ -1283,6 +1326,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ExpressionStatement it) {
     Expression _expression = it.getExpression();
     _expression.accept(this);
@@ -1290,6 +1334,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final MethodInvocation it) {
     Expression _expression = it.getExpression();
     boolean _notEquals = (!Objects.equal(_expression, null));
@@ -1325,6 +1370,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ForStatement it) {
     this.appendLineWrapToBuffer();
     this.appendToBuffer("for (");
@@ -1346,11 +1392,13 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final NullLiteral it) {
     this.appendToBuffer("null");
     return false;
   }
   
+  @Override
   public boolean visit(final ThisExpression it) {
     Name _qualifier = it.getQualifier();
     boolean _notEquals = (!Objects.equal(_qualifier, null));
@@ -1363,6 +1411,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final IfStatement node) {
     this.appendToBuffer("if (");
     Expression _expression = node.getExpression();
@@ -1381,6 +1430,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final FieldAccess it) {
     Expression _expression = it.getExpression();
     _expression.accept(this);
@@ -1401,6 +1451,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final InfixExpression node) {
     final boolean useRichString = this._aSTFlattenerUtils.canConvertToRichText(node);
     if (useRichString) {
@@ -1416,6 +1467,7 @@ public class JavaASTFlattener extends ASTVisitor {
       List _extendedOperands = node.extendedOperands();
       Expression _rightOperand_1 = node.getRightOperand();
       final Function2<Expression, Expression, Expression> _function = new Function2<Expression, Expression, Expression>() {
+        @Override
         public Expression apply(final Expression prevExpr, final Expression currExpr) {
           JavaASTFlattener.this.appendAsRichString(currExpr);
           return currExpr;
@@ -1439,6 +1491,7 @@ public class JavaASTFlattener extends ASTVisitor {
       boolean _notEquals = (_size != 0);
       if (_notEquals) {
         final Procedure1<Expression> _function_1 = new Procedure1<Expression>() {
+          @Override
           public void apply(final Expression e) {
             JavaASTFlattener.this.handleInfixRightSide(node, operator, e);
           }
@@ -1594,6 +1647,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return value;
   }
   
+  @Override
   public boolean visit(final InstanceofExpression node) {
     Expression _leftOperand = node.getLeftOperand();
     _leftOperand.accept(this);
@@ -1603,6 +1657,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ReturnStatement node) {
     this.appendToBuffer("return");
     Expression _expression = node.getExpression();
@@ -1621,6 +1676,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final BlockComment node) {
     boolean _notEquals = (!Objects.equal(this.javaSources, null));
     if (_notEquals) {
@@ -1667,6 +1723,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return this.javaSources.substring(_startPosition, _plus);
   }
   
+  @Override
   public boolean visit(final LineComment node) {
     boolean _notEquals = (!Objects.equal(this.javaSources, null));
     if (_notEquals) {
@@ -1677,6 +1734,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ParenthesizedExpression node) {
     this.appendToBuffer("(");
     Expression _expression = node.getExpression();
@@ -1685,6 +1743,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final PostfixExpression node) {
     final AST dummyAST = AST.newAST(JavaASTFlattener.JLS);
     final PostfixExpression.Operator pfOperator = node.getOperator();
@@ -1770,6 +1829,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final PrefixExpression node) {
     final AST dummyAST = AST.newAST(JavaASTFlattener.JLS);
     PrefixExpression.Operator _operator = node.getOperator();
@@ -1876,6 +1936,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final SingleMemberAnnotation node) {
     this.appendToBuffer("@");
     Name _typeName = node.getTypeName();
@@ -1951,6 +2012,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final TagElement node) {
     boolean _isNested = node.isNested();
     if (_isNested) {
@@ -1991,12 +2053,14 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final TextElement node) {
     String _text = node.getText();
     this.appendToBuffer(_text);
     return false;
   }
   
+  @Override
   public boolean visit(final TypeLiteral node) {
     if (this.fallBackStrategy) {
       this.appendToBuffer("typeof(");
@@ -2009,6 +2073,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final ThrowStatement node) {
     this.appendToBuffer("throw ");
     Expression _expression = node.getExpression();
@@ -2016,6 +2081,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final TryStatement node) {
     this.appendToBuffer("try ");
     Block _body = node.getBody();
@@ -2038,6 +2104,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final TypeParameter node) {
     SimpleName _name = node.getName();
     _name.accept(this);
@@ -2060,6 +2127,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final NumberLiteral node) {
     String value = node.getToken();
     boolean _or = false;
@@ -2104,6 +2172,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final NormalAnnotation node) {
     this.appendToBuffer("@");
     Name _typeName = node.getTypeName();
@@ -2115,6 +2184,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final CharacterLiteral node) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Character.valueOf(");
@@ -2125,6 +2195,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final WildcardType node) {
     this.appendToBuffer("?");
     Type bound = node.getBound();
@@ -2141,6 +2212,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final MemberValuePair node) {
     SimpleName _name = node.getName();
     _name.accept(this);
@@ -2150,6 +2222,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public boolean visit(final WhileStatement node) {
     this.appendToBuffer("while (");
     Expression _expression = node.getExpression();
@@ -2644,6 +2717,7 @@ public class JavaASTFlattener extends ASTVisitor {
     List _statements = node.statements();
     LinkedHashMap<SwitchCase, ArrayList<Statement>> _newLinkedHashMap = CollectionLiterals.<SwitchCase, ArrayList<Statement>>newLinkedHashMap();
     final Function2<Map<SwitchCase, ArrayList<Statement>>, Statement, Map<SwitchCase, ArrayList<Statement>>> _function = new Function2<Map<SwitchCase, ArrayList<Statement>>, Statement, Map<SwitchCase, ArrayList<Statement>>>() {
+      @Override
       public Map<SwitchCase, ArrayList<Statement>> apply(final Map<SwitchCase, ArrayList<Statement>> map, final Statement currStatement) {
         if ((currStatement instanceof SwitchCase)) {
           ArrayList<Statement> _newArrayList = CollectionLiterals.<Statement>newArrayList();
@@ -2659,6 +2733,7 @@ public class JavaASTFlattener extends ASTVisitor {
     };
     final Map<SwitchCase, ArrayList<Statement>> foldedCases = IterableExtensions.<Statement, Map<SwitchCase, ArrayList<Statement>>>fold(_statements, _newLinkedHashMap, _function);
     final Procedure2<SwitchCase, ArrayList<Statement>> _function_1 = new Procedure2<SwitchCase, ArrayList<Statement>>() {
+      @Override
       public void apply(final SwitchCase switchCase, final ArrayList<Statement> statements) {
         switchCase.accept(JavaASTFlattener.this);
         boolean _and = false;
@@ -2715,6 +2790,7 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
+  @Override
   public void preVisit(final ASTNode node) {
     boolean _or = false;
     if (((node instanceof Comment) || (node instanceof TagElement))) {
@@ -2731,6 +2807,7 @@ public class JavaASTFlattener extends ASTVisitor {
       final CompilationUnit cu = ((CompilationUnit) _root_1);
       List _commentList = cu.getCommentList();
       final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
+        @Override
         public Boolean apply(final Comment c) {
           boolean _and = false;
           boolean _isDocComment = c.isDocComment();
@@ -2746,6 +2823,7 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_commentList, _function);
       final Function1<Comment, Boolean> _function_1 = new Function1<Comment, Boolean>() {
+        @Override
         public Boolean apply(final Comment it) {
           int _startPosition = it.getStartPosition();
           int _startPosition_1 = node.getStartPosition();
@@ -2754,6 +2832,7 @@ public class JavaASTFlattener extends ASTVisitor {
       };
       Iterable<Comment> _filter_1 = IterableExtensions.<Comment>filter(_filter, _function_1);
       final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
+        @Override
         public void apply(final Comment it) {
           it.accept(JavaASTFlattener.this);
           JavaASTFlattener.this.assignedComments.add(it);

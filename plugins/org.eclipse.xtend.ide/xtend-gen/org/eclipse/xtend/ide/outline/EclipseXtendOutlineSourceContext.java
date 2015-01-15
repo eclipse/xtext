@@ -37,6 +37,7 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
   @Inject
   private Provider<EclipseXtendOutlineSourceContext> xtendOutlineContextProvider;
   
+  @Override
   public IXtendOutlineContext markAsProcessed(final JvmMember member) {
     EclipseXtendOutlineSourceContext _xblockexpression = null;
     {
@@ -56,12 +57,14 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
         Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(function);
         Iterable<JvmFeature> _filter = Iterables.<JvmFeature>filter(_jvmElements, JvmFeature.class);
         final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
+          @Override
           public Boolean apply(final JvmFeature it) {
             return Boolean.valueOf((!Objects.equal(it, member)));
           }
         };
         Iterable<JvmFeature> _filter_1 = IterableExtensions.<JvmFeature>filter(_filter, _function);
         final Function1<JvmFeature, Boolean> _function_1 = new Function1<JvmFeature, Boolean>() {
+          @Override
           public Boolean apply(final JvmFeature it) {
             boolean _or = false;
             String _simpleName = it.getSimpleName();
@@ -84,6 +87,7 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
     }
   }
   
+  @Override
   protected EclipseXtendOutlineContext cloneContext() {
     EclipseXtendOutlineSourceContext _get = this.xtendOutlineContextProvider.get();
     return this.cloneContext(_get);

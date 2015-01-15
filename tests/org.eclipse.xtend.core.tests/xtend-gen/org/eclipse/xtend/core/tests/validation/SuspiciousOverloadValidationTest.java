@@ -81,12 +81,14 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, _code);
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         return LineDelimiters.toUnix(it);
       }
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
     final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
       public void apply(final String it) {
         final String message = singleError.getMessage();
         boolean _contains = message.contains(it);
@@ -107,6 +109,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     TreeIterator<EObject> _eAllContents = block.eAllContents();
     Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
     final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
+      @Override
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         EStructuralFeature _eContainingFeature = it.eContainingFeature();
@@ -139,12 +142,14 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, _code);
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         return LineDelimiters.toUnix(it);
       }
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
     final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
       public void apply(final String it) {
         final String message = singleError.getMessage();
         boolean _contains = message.contains(it);
@@ -168,6 +173,7 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     TreeIterator<EObject> _eAllContents = block.eAllContents();
     Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
     final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
+      @Override
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         EStructuralFeature _eContainingFeature = it.eContainingFeature();

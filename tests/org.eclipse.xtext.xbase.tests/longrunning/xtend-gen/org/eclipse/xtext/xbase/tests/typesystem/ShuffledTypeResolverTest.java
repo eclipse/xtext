@@ -27,6 +27,7 @@ public class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Inject
   private IBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }

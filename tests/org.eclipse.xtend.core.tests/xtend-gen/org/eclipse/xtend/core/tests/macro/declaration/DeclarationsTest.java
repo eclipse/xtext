@@ -76,6 +76,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         String _packageName = it.getPackageName();
         Assert.assertNull(_packageName);
@@ -127,6 +128,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
         TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
@@ -167,6 +169,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         MutableClassDeclaration _findClass = _typeLookup.findClass("MyClass");
@@ -182,6 +185,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         MutableClassDeclaration _findClass_2 = _typeLookup_2.findClass("MyClass");
         AnnotationReferenceProvider _annotationReferenceProvider = it.getAnnotationReferenceProvider();
         final Procedure1<AnnotationReferenceBuildContext> _function = new Procedure1<AnnotationReferenceBuildContext>() {
+          @Override
           public void apply(final AnnotationReferenceBuildContext it) {
             it.set("annotation2Value", anno2);
           }
@@ -221,6 +225,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         String _packageName = it.getPackageName();
         Assert.assertEquals("foo", _packageName);
@@ -266,6 +271,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         String _packageName = it.getPackageName();
         Assert.assertEquals("p", _packageName);
@@ -303,6 +309,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
         TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
@@ -312,6 +319,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         final MutableClassDeclaration mutable = _typeLookup.findClass(_qualifiedName);
         Iterable<? extends MutableMemberDeclaration> _declaredMembers = mutable.getDeclaredMembers();
         final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
+          @Override
           public void apply(final MutableMemberDeclaration it) {
             it.remove();
           }
@@ -367,6 +375,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         String _packageName = it.getPackageName();
         Assert.assertEquals("foo", _packageName);
@@ -537,10 +546,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration genClazz = _typeLookup.findClass("foo.MyClass");
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             CompilationUnit _compilationUnit = genClazz.getCompilationUnit();
             TypeReferenceProvider _typeReferenceProvider = ((CompilationUnitImpl) _compilationUnit).getTypeReferenceProvider();
@@ -548,6 +559,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
             it.setReturnType(_string);
             it.setVisibility(Visibility.PRIVATE);
             final CompilationStrategy _function = new CompilationStrategy() {
+              @Override
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("return \"foo\";");
@@ -587,10 +599,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableInterfaceDeclaration genInterface = _typeLookup.findInterface("foo.MyInterface");
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
           }
         };
@@ -616,6 +630,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
         final TypeReference anyType = _typeReferenceProvider.getAnyType();
@@ -723,6 +738,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
         TypeDeclaration _get = ((TypeDeclaration[])Conversions.unwrapArray(_sourceTypeDeclarations, TypeDeclaration.class))[0];
@@ -780,6 +796,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration baseClass = _typeLookup.findClass("BaseClass");
@@ -870,6 +887,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration baseClass = _typeLookup.findClass("foo.Bar");
@@ -956,6 +974,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration baseClass = _typeLookup.findClass("foo.Bar");

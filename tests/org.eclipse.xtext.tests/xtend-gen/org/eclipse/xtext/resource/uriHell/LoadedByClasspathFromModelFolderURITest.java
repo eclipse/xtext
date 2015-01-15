@@ -15,18 +15,22 @@ import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerWithEcoreTest;
  */
 @SuppressWarnings("all")
 public class LoadedByClasspathFromModelFolderURITest extends AbstractURIHandlerWithEcoreTest {
+  @Override
   public URI getResourceURI() {
     return URI.createURI("platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.ecore");
   }
   
+  @Override
   public URI getPackagedResourceURI() {
     return URI.createURI("classpath:/org/eclipse/xtext/Xtext.ecore");
   }
   
+  @Override
   public URI getReferencedURI() {
     return URI.createURI("platform:/plugin/org.eclipse.emf.core/model/Ecore.ecore");
   }
   
+  @Override
   public URI getPackagedReferencedURI() {
     return URI.createURI("platform:/plugin/org.eclipse.emf.core/model/Ecore.ecore");
   }

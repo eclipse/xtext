@@ -29,6 +29,7 @@ public class OutdatedStateManager {
   private OperationCanceledManager canceledManager;
   
   private final ThreadLocal<Boolean> cancelationAllowed = new ThreadLocal<Boolean>() {
+    @Override
     public Boolean initialValue() {
       return Boolean.valueOf(true);
     }
@@ -43,6 +44,7 @@ public class OutdatedStateManager {
       final boolean cancelationAllowed = (this.cancelationAllowed.get()).booleanValue();
       final int current = ((XtextResourceSet)rs).getModificationStamp();
       final CancelIndicator _function = new CancelIndicator() {
+        @Override
         public boolean isCanceled() {
           boolean _and = false;
           if (!cancelationAllowed) {
@@ -102,6 +104,7 @@ public class OutdatedStateManager {
               CancelIndicator _xifexpression = null;
               if ((param == null)) {
                 final CancelIndicator _function = new CancelIndicator() {
+                  @Override
                   public boolean isCanceled() {
                     return true;
                   }

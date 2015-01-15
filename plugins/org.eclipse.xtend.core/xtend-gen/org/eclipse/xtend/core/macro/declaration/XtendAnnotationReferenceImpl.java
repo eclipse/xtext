@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> implements AnnotationReference {
+  @Override
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
     AnnotationTypeDeclaration _switchResult = null;
     JvmType _annotationType = this.getAnnotationType();
@@ -99,6 +100,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return _xblockexpression;
   }
   
+  @Override
   public Expression getExpression(final String property) {
     final XExpression value = this.findValue(property);
     boolean _notEquals = (!Objects.equal(value, null));
@@ -109,6 +111,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return null;
   }
   
+  @Override
   public Object getValue(final String property) {
     final XExpression value = this.findValue(property);
     boolean _notEquals = (!Objects.equal(value, null));
@@ -140,6 +143,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       XAnnotation _delegate_2 = this.getDelegate();
       EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
       final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
+        @Override
         public Boolean apply(final XAnnotationElementValuePair it) {
           JvmOperation _element = it.getElement();
           String _simpleName = _element.getSimpleName();
@@ -163,6 +167,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       EList<JvmMember> _members = ((JvmAnnotationType)annotationType).getMembers();
       Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
       final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
+        @Override
         public Boolean apply(final JvmOperation it) {
           String _simpleName = it.getSimpleName();
           return Boolean.valueOf(Objects.equal(_simpleName, property));
@@ -184,21 +189,25 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return _compilationUnit_2.translateAnnotationValue(value, null, false);
   }
   
+  @Override
   public AnnotationReference getAnnotationValue(final String name) {
     Object _value = this.getValue(name);
     return ((AnnotationReference) _value);
   }
   
+  @Override
   public AnnotationReference[] getAnnotationArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((AnnotationReference[]) _value);
   }
   
+  @Override
   public boolean[] getBooleanArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((boolean[]) _value);
   }
   
+  @Override
   public boolean getBooleanValue(final String name) {
     Boolean _xblockexpression = null;
     {
@@ -212,11 +221,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).booleanValue();
   }
   
+  @Override
   public byte[] getByteArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((byte[]) _value);
   }
   
+  @Override
   public byte getByteValue(final String name) {
     Byte _xblockexpression = null;
     {
@@ -230,11 +241,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).byteValue();
   }
   
+  @Override
   public char[] getCharArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((char[]) _value);
   }
   
+  @Override
   public char getCharValue(final String name) {
     Character _xblockexpression = null;
     {
@@ -259,21 +272,25 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).charValue();
   }
   
+  @Override
   public TypeReference getClassValue(final String name) {
     Object _value = this.getValue(name);
     return ((TypeReference) _value);
   }
   
+  @Override
   public TypeReference[] getClassArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((TypeReference[]) _value);
   }
   
+  @Override
   public double[] getDoubleArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((double[]) _value);
   }
   
+  @Override
   public double getDoubleValue(final String name) {
     Double _xblockexpression = null;
     {
@@ -328,21 +345,25 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).doubleValue();
   }
   
+  @Override
   public EnumerationValueDeclaration getEnumValue(final String name) {
     Object _value = this.getValue(name);
     return ((EnumerationValueDeclaration) _value);
   }
   
+  @Override
   public EnumerationValueDeclaration[] getEnumArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((EnumerationValueDeclaration[]) _value);
   }
   
+  @Override
   public float[] getFloatArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((float[]) _value);
   }
   
+  @Override
   public float getFloatValue(final String name) {
     Float _xblockexpression = null;
     {
@@ -391,11 +412,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).floatValue();
   }
   
+  @Override
   public int[] getIntArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((int[]) _value);
   }
   
+  @Override
   public int getIntValue(final String name) {
     Integer _xblockexpression = null;
     {
@@ -432,11 +455,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).intValue();
   }
   
+  @Override
   public long[] getLongArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((long[]) _value);
   }
   
+  @Override
   public long getLongValue(final String name) {
     Long _xblockexpression = null;
     {
@@ -479,11 +504,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).longValue();
   }
   
+  @Override
   public short[] getShortArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((short[]) _value);
   }
   
+  @Override
   public short getShortValue(final String name) {
     Short _xblockexpression = null;
     {
@@ -508,11 +535,13 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     return (_xblockexpression).shortValue();
   }
   
+  @Override
   public String[] getStringArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((String[]) _value);
   }
   
+  @Override
   public String getStringValue(final String name) {
     Object _value = this.getValue(name);
     return ((String) _value);

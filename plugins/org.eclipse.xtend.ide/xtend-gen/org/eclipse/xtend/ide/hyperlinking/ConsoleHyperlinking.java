@@ -17,6 +17,7 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
   @Inject(optional = true)
   private IWorkbench workbench;
   
+  @Override
   public void matchFound(final PatternMatchEvent event) {
     try {
       final int offset = event.getOffset();
@@ -34,10 +35,12 @@ public class ConsoleHyperlinking implements IPatternMatchListenerDelegate {
     }
   }
   
+  @Override
   public void connect(final TextConsole console) {
     this.console = console;
   }
   
+  @Override
   public void disconnect() {
     this.console = null;
   }

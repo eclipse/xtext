@@ -39,6 +39,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
+  @Override
   public void isAssignableFrom(final Pair<String, String> lhsAndParams, final String rhs, final boolean expectation) {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -69,6 +70,7 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       EObject _rootContainer = EcoreUtil.getRootContainer(function);
       final XtendFile xtendFile = ((XtendFile) _rootContainer);
       final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        @Override
         public void apply(final CompilationUnitImpl it) {
           TypeReference _xifexpression = null;
           String _key = lhsAndParams.getKey();

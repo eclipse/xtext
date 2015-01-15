@@ -41,6 +41,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+      @Override
       public void apply(final JvmGenericType it) {
         String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
         DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
@@ -54,6 +55,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         }
         EList<JvmMember> _members = it.getMembers();
         final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
+          @Override
           public void apply(final JvmConstructor it) {
           }
         };
@@ -63,6 +65,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
         final JvmTypeReference procedureType = DomainmodelJvmModelInferrer.this._typeReferenceBuilder.typeRef(Procedure1.class, _typeRef);
         EList<JvmMember> _members_1 = it.getMembers();
         final Procedure1<JvmConstructor> _function_1 = new Procedure1<JvmConstructor>() {
+          @Override
           public void apply(final JvmConstructor it) {
             EList<JvmFormalParameter> _parameters = it.getParameters();
             JvmFormalParameter _parameter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toParameter(entity, "initializer", procedureType);
@@ -116,6 +119,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 _elvis = _inferredType;
               }
               final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
+                @Override
                 public void apply(final JvmOperation it) {
                   String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(f);
                   DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);

@@ -86,6 +86,7 @@ public class ReflectExtensionsTest {
   public void testInvokeWithNull() {
     try {
       final Function1<String, String> _function = new Function1<String, String>() {
+        @Override
         public String apply(final String x) {
           return x;
         }

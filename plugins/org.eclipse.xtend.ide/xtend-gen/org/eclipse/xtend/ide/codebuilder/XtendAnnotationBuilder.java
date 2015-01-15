@@ -28,6 +28,7 @@ public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements
   @Extension
   private InsertionOffsets _insertionOffsets;
   
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;
@@ -49,6 +50,7 @@ public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements
     return _and;
   }
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _append = appendable.append("annotation ");
     String _annotationName = this.getAnnotationName();
@@ -58,6 +60,7 @@ public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements
     return _newLine.append("}");
   }
   
+  @Override
   public int getInsertOffset(final XtextResource resource) {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
@@ -65,10 +68,12 @@ public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements
     return this._insertionOffsets.getNewTypeInsertOffset(_context, _findByFragment);
   }
   
+  @Override
   public int getIndentationLevel() {
     return 0;
   }
   
+  @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendTypeDeclaration) _ownerSource);

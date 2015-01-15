@@ -25,6 +25,7 @@ public class EclipseXtendOutlineContext extends DefaultXtendOutlineContext {
   public EclipseXtendOutlineContext withParentNode(final IOutlineNode parentNode) {
     EclipseXtendOutlineContext _cloneContext = this.cloneContext();
     final Procedure1<EclipseXtendOutlineContext> _function = new Procedure1<EclipseXtendOutlineContext>() {
+      @Override
       public void apply(final EclipseXtendOutlineContext context) {
         context.parentNode = parentNode;
       }
@@ -32,6 +33,7 @@ public class EclipseXtendOutlineContext extends DefaultXtendOutlineContext {
     return ObjectExtensions.<EclipseXtendOutlineContext>operator_doubleArrow(_cloneContext, _function);
   }
   
+  @Override
   protected EclipseXtendOutlineContext cloneContext() {
     EclipseXtendOutlineContext _eclipseXtendOutlineContext = new EclipseXtendOutlineContext();
     return this.cloneContext(_eclipseXtendOutlineContext);

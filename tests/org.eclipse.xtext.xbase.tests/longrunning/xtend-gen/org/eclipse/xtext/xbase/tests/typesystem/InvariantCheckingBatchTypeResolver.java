@@ -21,6 +21,7 @@ public class InvariantCheckingBatchTypeResolver extends DefaultBatchTypeResolver
   @Inject
   private Provider<ValidatingReentrantTypeResolver> resolverProvider;
   
+  @Override
   protected AbstractRootedReentrantTypeResolver createResolver() {
     return this.resolverProvider.get();
   }

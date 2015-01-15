@@ -35,6 +35,7 @@ public class Movies {
   @Test
   public void numberOfActionMovies() {
     final Function1<Movie, Boolean> _function = new Function1<Movie, Boolean>() {
+      @Override
       public Boolean apply(final Movie it) {
         Set<String> _categories = it.getCategories();
         return Boolean.valueOf(_categories.contains("Action"));
@@ -51,6 +52,7 @@ public class Movies {
   @Test
   public void yearOfBestMovieFrom80ies() {
     final Function1<Movie, Boolean> _function = new Function1<Movie, Boolean>() {
+      @Override
       public Boolean apply(final Movie it) {
         IntegerRange _upTo = new IntegerRange(1980, 1989);
         int _year = it.getYear();
@@ -59,6 +61,7 @@ public class Movies {
     };
     Iterable<Movie> _filter = IterableExtensions.<Movie>filter(this.movies, _function);
     final Function1<Movie, Double> _function_1 = new Function1<Movie, Double>() {
+      @Override
       public Double apply(final Movie it) {
         return Double.valueOf(it.getRating());
       }
@@ -74,6 +77,7 @@ public class Movies {
   @Test
   public void sumOfVotesOfTop2() {
     final Function1<Movie, Double> _function = new Function1<Movie, Double>() {
+      @Override
       public Double apply(final Movie it) {
         double _rating = it.getRating();
         return Double.valueOf((-_rating));
@@ -82,12 +86,14 @@ public class Movies {
     List<Movie> _sortBy = IterableExtensions.<Movie, Double>sortBy(this.movies, _function);
     Iterable<Movie> _take = IterableExtensions.<Movie>take(_sortBy, 2);
     final Function1<Movie, Long> _function_1 = new Function1<Movie, Long>() {
+      @Override
       public Long apply(final Movie it) {
         return Long.valueOf(it.getNumberOfVotes());
       }
     };
     Iterable<Long> _map = IterableExtensions.<Movie, Long>map(_take, _function_1);
     final Function2<Long, Long, Long> _function_2 = new Function2<Long, Long, Long>() {
+      @Override
       public Long apply(final Long a, final Long b) {
         return Long.valueOf(((a).longValue() + (b).longValue()));
       }
@@ -102,6 +108,7 @@ public class Movies {
         FileReader _fileReader = new FileReader("data.csv");
         List<String> _readLines = CharStreams.readLines(_fileReader);
         final Function1<String, Movie> _function = new Function1<String, Movie>() {
+          @Override
           public Movie apply(final String line) {
             String[] _split = line.split("  ");
             final Iterator<String> segments = ((List<String>)Conversions.doWrapArray(_split)).iterator();

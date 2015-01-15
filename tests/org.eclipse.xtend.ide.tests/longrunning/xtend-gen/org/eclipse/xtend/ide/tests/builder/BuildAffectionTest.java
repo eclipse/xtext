@@ -888,6 +888,7 @@ public class BuildAffectionTest {
   private void assertBuildLogs(final CharSequence expected) {
     final StringBuilder logs = new StringBuilder();
     final IBuildLogger _function = new IBuildLogger() {
+      @Override
       public void log(final Object it) {
         String _string = it.toString();
         String _trim = _string.trim();

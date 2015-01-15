@@ -61,6 +61,7 @@ public class StaticallyImportedMemberProvider {
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures();
       final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
+        @Override
         public Boolean apply(final JvmFeature feature) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -121,6 +122,7 @@ public class StaticallyImportedMemberProvider {
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures(memberName);
       final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
+        @Override
         public Boolean apply(final JvmFeature feature) {
           boolean _and = false;
           boolean _isStatic = feature.isStatic();

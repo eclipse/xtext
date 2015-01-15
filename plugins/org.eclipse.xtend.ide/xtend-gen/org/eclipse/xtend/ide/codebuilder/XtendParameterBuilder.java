@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
  */
 @SuppressWarnings("all")
 public class XtendParameterBuilder extends AbstractParameterBuilder {
+  @Override
   protected ISourceAppender appendModifiers(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {

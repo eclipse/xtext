@@ -22,6 +22,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   private final static String defaultBody = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
   
   @After
+  @Override
   public void tearDown() {
     this.builder.tearDown();
   }

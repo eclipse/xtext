@@ -136,6 +136,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     return _switchResult;
   }
   
+  @Override
   public void announceNextLiteral(final RichStringLiteral object) {
     super.announceNextLiteral(object);
     if (((this.lastLiteralEndOffset > 0) && (this.contentStartOffset < 0))) {
@@ -156,12 +157,14 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.content = true;
   }
   
+  @Override
   public void acceptSemanticLineBreak(final int charCount, final RichStringLiteral origin, final boolean controlStructureSeen) {
     super.acceptSemanticLineBreak(charCount, origin, controlStructureSeen);
     this.acceptLineBreak(charCount, true, true);
     this.offset = (this.offset + charCount);
   }
   
+  @Override
   public void acceptTemplateLineBreak(final int charCount, final RichStringLiteral origin) {
     super.acceptTemplateLineBreak(charCount, origin);
     this.acceptLineBreak(charCount, false, true);
@@ -265,6 +268,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     }
   }
   
+  @Override
   public void acceptSemanticText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptSemanticText(text, origin);
     if ((!this.content)) {
@@ -278,6 +282,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
         int _minus = (_length_1 - 1);
         IntegerRange _upTo = new IntegerRange(0, _minus);
         final Function2<Boolean, Integer, Boolean> _function = new Function2<Boolean, Integer, Boolean>() {
+          @Override
           public Boolean apply(final Boolean v, final Integer i) {
             boolean _or = false;
             if ((v).booleanValue()) {
@@ -303,6 +308,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.offset = _plus;
   }
   
+  @Override
   public void acceptTemplateText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptTemplateText(text, origin);
     if ((!this.content)) {
@@ -320,17 +326,20 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.offset = _plus;
   }
   
+  @Override
   public void acceptExpression(final XExpression expression, final CharSequence indentation) {
     super.acceptExpression(expression, indentation);
     this.startContent();
   }
   
+  @Override
   public void acceptIfCondition(final XExpression condition) {
     super.acceptIfCondition(condition);
     this.startContent();
     this.indentNextLine = true;
   }
   
+  @Override
   public void acceptElseIfCondition(final XExpression condition) {
     super.acceptElseIfCondition(condition);
     this.outdentThisLine();
@@ -338,6 +347,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.indentNextLine = true;
   }
   
+  @Override
   public void acceptElse() {
     super.acceptElse();
     this.outdentThisLine();
@@ -345,18 +355,21 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
     this.indentNextLine = true;
   }
   
+  @Override
   public void acceptEndIf() {
     super.acceptEndIf();
     this.outdentThisLine();
     this.startContent();
   }
   
+  @Override
   public void acceptForLoop(final JvmFormalParameter parameter, final XExpression expression) {
     super.acceptForLoop(parameter, expression);
     this.startContent();
     this.indentNextLine = true;
   }
   
+  @Override
   public void acceptEndFor(final XExpression after, final CharSequence indentation) {
     super.acceptEndFor(after, indentation);
     this.outdentThisLine();

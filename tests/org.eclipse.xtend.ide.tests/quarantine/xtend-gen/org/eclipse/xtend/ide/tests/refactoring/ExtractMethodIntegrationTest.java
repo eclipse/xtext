@@ -63,6 +63,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -111,6 +112,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -162,6 +164,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -216,6 +219,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -271,6 +275,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -341,6 +346,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -426,6 +432,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -499,6 +506,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -554,6 +562,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -603,6 +612,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -652,6 +662,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -701,6 +712,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setExplicitlyDeclareReturnType(true);
       }
@@ -750,6 +762,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         List<ParameterInfo> _parameterInfos = it.getParameterInfos();
         ParameterInfo _get = _parameterInfos.get(0);
@@ -804,6 +817,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         List<ParameterInfo> _parameterInfos = it.getParameterInfos();
         ParameterInfo _get = _parameterInfos.get(0);
@@ -858,6 +872,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -915,6 +930,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -981,6 +997,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1044,6 +1061,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1079,6 +1097,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1102,6 +1121,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         it.setMethodName("foo");
       }
@@ -1132,6 +1152,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
         List<ParameterInfo> _parameterInfos = it.getParameterInfos();
         ParameterInfo _get = _parameterInfos.get(1);
@@ -1158,6 +1179,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1208,6 +1230,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1269,6 +1292,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1334,6 +1358,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1398,6 +1423,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1462,6 +1488,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1522,6 +1549,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1582,6 +1610,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1642,6 +1671,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1702,6 +1732,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1767,6 +1798,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1832,6 +1864,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1897,6 +1930,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -1962,6 +1996,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2026,6 +2061,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2091,6 +2127,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2156,6 +2193,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2221,6 +2259,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2296,6 +2335,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2388,6 +2428,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2481,6 +2522,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2565,6 +2607,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2649,6 +2692,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2723,6 +2767,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2777,6 +2822,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2825,6 +2871,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     final Procedure1<ExtractMethodRefactoring> _function = new Procedure1<ExtractMethodRefactoring>() {
+      @Override
       public void apply(final ExtractMethodRefactoring it) {
       }
     };
@@ -2865,6 +2912,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       try {
         IXtextDocument _document = editor.getDocument();
         final IUnitOfWork<Change, XtextResource> _function = new IUnitOfWork<Change, XtextResource>() {
+          @Override
           public Change exec(final XtextResource it) throws Exception {
             Change _xblockexpression = null;
             {
@@ -2920,6 +2968,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       try {
         IXtextDocument _document = editor.getDocument();
         final IUnitOfWork<String, XtextResource> _function = new IUnitOfWork<String, XtextResource>() {
+          @Override
           public String exec(final XtextResource it) throws Exception {
             String _xblockexpression = null;
             {

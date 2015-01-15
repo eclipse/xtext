@@ -29,6 +29,7 @@ public class XtendPsiAntlrGrammarGenerator extends PsiAntlrGrammarGenerator {
   @Extension
   private TokenNames _tokenNames;
   
+  @Override
   protected String compileTokens(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();

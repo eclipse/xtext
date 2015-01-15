@@ -20,8 +20,10 @@ public class ObservableExample {
   public static void main(final String[] args) {
     ObservableBean _observableBean = new ObservableBean();
     final Procedure1<ObservableBean> _function = new Procedure1<ObservableBean>() {
+      @Override
       public void apply(final ObservableBean it) {
         final PropertyChangeListener _function = new PropertyChangeListener() {
+          @Override
           public void propertyChange(final PropertyChangeEvent it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("property ");

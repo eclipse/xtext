@@ -24,19 +24,23 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
+  @Override
   public void doRegisterGlobals(final ClassDeclaration annotatedClass, @Extension final RegisterGlobalsContext context) {
     String _qualifiedName = annotatedClass.getQualifiedName();
     String _plus = (_qualifiedName + ".InternalClass");
     context.registerClass(_plus);
   }
   
+  @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     String _qualifiedName = annotatedClass.getQualifiedName();
     String _plus = (_qualifiedName + ".InternalClass");
     MutableClassDeclaration _findClass = context.findClass(_plus);
     final Procedure1<MutableClassDeclaration> _function = new Procedure1<MutableClassDeclaration>() {
+      @Override
       public void apply(final MutableClassDeclaration it) {
         final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+          @Override
           public void apply(final MutableFieldDeclaration it) {
             TypeReference _string = context.getString();
             it.setType(_string);
@@ -48,6 +52,7 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
     ObjectExtensions.<MutableClassDeclaration>operator_doubleArrow(_findClass, _function);
   }
   
+  @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
     Path _filePath = _compilationUnit.getFilePath();

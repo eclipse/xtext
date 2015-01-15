@@ -59,6 +59,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
     for (final Integer i : _doubleDotLessThan) {
       TaskTag _taskTag = new TaskTag();
       final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+        @Override
         public void apply(final TaskTag it) {
           String _get = tags.get((i).intValue());
           it.setName(_get);
@@ -94,6 +95,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   public static String serializeTags(final List<TaskTag> tags) {
     Joiner _on = Joiner.on(",");
     final Function1<TaskTag, String> _function = new Function1<TaskTag, String>() {
+      @Override
       public String apply(final TaskTag it) {
         return it.getName();
       }
@@ -105,6 +107,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   public static String serializePriorities(final List<TaskTag> tags) {
     Joiner _on = Joiner.on(",");
     final Function1<TaskTag, Priority> _function = new Function1<TaskTag, Priority>() {
+      @Override
       public Priority apply(final TaskTag it) {
         return it.getPriority();
       }
@@ -115,6 +118,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   
   private IPreferenceValuesProvider preferenceValuesProvider;
   
+  @Override
   public TaskTags getTaskTags(final Resource resource) {
     TaskTags _xblockexpression = null;
     {
@@ -123,6 +127,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
       final String priorities = prefs.getPreference(PreferenceTaskTagProvider.PRIORITIES_KEY);
       TaskTags _taskTags = new TaskTags();
       final Procedure1<TaskTags> _function = new Procedure1<TaskTags>() {
+        @Override
         public void apply(final TaskTags it) {
           String _preference = prefs.getPreference(PreferenceTaskTagProvider.CASE_SENSITIVE_KEY);
           Boolean _valueOf = Boolean.valueOf(_preference);

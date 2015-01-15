@@ -41,6 +41,7 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
     this.encoding = encoding;
   }
   
+  @Override
   protected void generate(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
     Naming _naming = this.getNaming();
     String _lineDelimiter = _naming.getLineDelimiter();
@@ -75,15 +76,19 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
     }
   }
   
+  @Override
   protected void addToPluginXmlRt(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
   }
   
+  @Override
   protected void addToPluginXmlUi(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
   }
   
+  @Override
   protected void addToPluginXmlTests(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
   }
   
+  @Override
   protected void addToStandaloneSetup(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx) {
   }
   

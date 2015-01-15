@@ -35,6 +35,7 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
     super(in);
   }
   
+  @Override
   protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) {
     super.loadEntries(resource, zipIn);
     if ((resource instanceof BatchLinkableResource)) {
@@ -53,6 +54,7 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       } else {
         JvmModelAssociator.Adapter _adapter = new JvmModelAssociator.Adapter();
         final Procedure1<JvmModelAssociator.Adapter> _function = new Procedure1<JvmModelAssociator.Adapter>() {
+          @Override
           public void apply(final JvmModelAssociator.Adapter it) {
             EList<Adapter> _eAdapters = resource.eAdapters();
             _eAdapters.add(it);
@@ -68,6 +70,7 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       final Map<String, String> logicalMap = ((Map<String, String>) _readObject);
       Set<Map.Entry<String, String>> _entrySet = logicalMap.entrySet();
       final Procedure1<Map.Entry<String, String>> _function_1 = new Procedure1<Map.Entry<String, String>>() {
+        @Override
         public void apply(final Map.Entry<String, String> it) {
           String _key = it.getKey();
           EObject _eObject = resource.getEObject(_key);
@@ -81,11 +84,13 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       final Map<String, Set<String>> sourceToTargetMap = ((Map<String, Set<String>>) _readObject_1);
       Set<Map.Entry<String, Set<String>>> _entrySet_1 = sourceToTargetMap.entrySet();
       final Procedure1<Map.Entry<String, Set<String>>> _function_2 = new Procedure1<Map.Entry<String, Set<String>>>() {
+        @Override
         public void apply(final Map.Entry<String, Set<String>> it) {
           String _key = it.getKey();
           EObject _eObject = resource.getEObject(_key);
           Set<String> _value = it.getValue();
           final Function1<String, EObject> _function = new Function1<String, EObject>() {
+            @Override
             public EObject apply(final String it) {
               return resource.getEObject(it);
             }
@@ -100,11 +105,13 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       final Map<String, Set<String>> targetToSourceMap = ((Map<String, Set<String>>) _readObject_2);
       Set<Map.Entry<String, Set<String>>> _entrySet_2 = targetToSourceMap.entrySet();
       final Procedure1<Map.Entry<String, Set<String>>> _function_3 = new Procedure1<Map.Entry<String, Set<String>>>() {
+        @Override
         public void apply(final Map.Entry<String, Set<String>> it) {
           String _key = it.getKey();
           EObject _eObject = resource.getEObject(_key);
           Set<String> _value = it.getValue();
           final Function1<String, EObject> _function = new Function1<String, EObject>() {
+            @Override
             public EObject apply(final String it) {
               return resource.getEObject(it);
             }

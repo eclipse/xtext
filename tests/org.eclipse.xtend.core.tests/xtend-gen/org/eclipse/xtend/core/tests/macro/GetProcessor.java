@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class GetProcessor implements TransformationParticipant<MutableMethodDeclaration> {
+  @Override
   public void doTransform(final List<? extends MutableMethodDeclaration> methods, @Extension final TransformationContext context) {
     for (final MutableMethodDeclaration m : methods) {
       {

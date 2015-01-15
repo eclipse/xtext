@@ -82,6 +82,7 @@ public class XFunctionTypeRefs {
           } else {
             JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
             final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+              @Override
               public void apply(final JvmParameterizedTypeReference it) {
                 it.setType(wrappedType);
               }
@@ -101,6 +102,7 @@ public class XFunctionTypeRefs {
           _matched=true;
           JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
           final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+            @Override
             public void apply(final JvmParameterizedTypeReference it) {
               JvmType _type = XFunctionTypeRefs.getType(Void.class, type);
               it.setType(_type);

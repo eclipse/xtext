@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class TimedReentrantTypeResolver extends DefaultReentrantTypeResolver {
+  @Override
   public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
     TypeResolutionTimes _typeResolutionTimes = new TypeResolutionTimes();
     return new TimedRootResolvedTypes(this, _typeResolutionTimes, monitor);

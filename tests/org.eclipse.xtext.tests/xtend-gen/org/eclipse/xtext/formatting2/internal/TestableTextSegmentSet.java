@@ -39,6 +39,7 @@ public class TestableTextSegmentSet {
     return _builder.toString();
   }
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("issues=");
@@ -47,6 +48,7 @@ public class TestableTextSegmentSet {
     _builder.newLineIfNotEmpty();
     _builder.append("set=");
     final Function1<ITextSegment, String> _function = new Function1<ITextSegment, String>() {
+      @Override
       public String apply(final ITextSegment it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("[");
@@ -75,6 +77,7 @@ public class TestableTextSegmentSet {
         final ConflictingRegionsException e = (ConflictingRegionsException)_t;
         Collection<RegionTrace> _traces = e.getTraces();
         final Function1<RegionTrace, ITextSegment> _function = new Function1<RegionTrace, ITextSegment>() {
+          @Override
           public ITextSegment apply(final RegionTrace it) {
             return it.getRegion();
           }
@@ -83,6 +86,7 @@ public class TestableTextSegmentSet {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("mergeConflict:");
         final Function1<ITextSegment, String> _function_1 = new Function1<ITextSegment, String>() {
+          @Override
           public String apply(final ITextSegment it) {
             return TestableTextSegmentSet.this.fmt(it);
           }

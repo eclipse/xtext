@@ -147,6 +147,7 @@ public class ConstantExpressionValidator {
         EList<JvmAnnotationValue> _values = annotationReference.getValues();
         Iterable<JvmBooleanAnnotationValue> _filter = Iterables.<JvmBooleanAnnotationValue>filter(_values, JvmBooleanAnnotationValue.class);
         final Function1<JvmBooleanAnnotationValue, Boolean> _function = new Function1<JvmBooleanAnnotationValue, Boolean>() {
+          @Override
           public Boolean apply(final JvmBooleanAnnotationValue it) {
             boolean _and = false;
             String _valueName = it.getValueName();
@@ -180,6 +181,7 @@ public class ConstantExpressionValidator {
           } else {
             EList<XExpression> _actualArguments = expression.getActualArguments();
             final Function1<XExpression, Boolean> _function_1 = new Function1<XExpression, Boolean>() {
+              @Override
               public Boolean apply(final XExpression it) {
                 return Boolean.valueOf(ConstantExpressionValidator.this.isConstant(it));
               }

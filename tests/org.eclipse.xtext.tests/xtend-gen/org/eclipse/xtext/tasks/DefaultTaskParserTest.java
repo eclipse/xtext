@@ -59,9 +59,11 @@ public class DefaultTaskParserTest {
     _builder.newLine();
     Task _task = new Task();
     final Procedure1<Task> _function = new Procedure1<Task>() {
+      @Override
       public void apply(final Task it) {
         TaskTag _taskTag = new TaskTag();
         final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+          @Override
           public void apply(final TaskTag it) {
             it.setName("FIXME");
             it.setPriority(Priority.HIGH);
@@ -101,9 +103,11 @@ public class DefaultTaskParserTest {
     _builder.newLine();
     Task _task = new Task();
     final Procedure1<Task> _function = new Procedure1<Task>() {
+      @Override
       public void apply(final Task it) {
         TaskTag _taskTag = new TaskTag();
         final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+          @Override
           public void apply(final TaskTag it) {
             it.setName("TODO");
             it.setPriority(Priority.NORMAL);
@@ -119,9 +123,11 @@ public class DefaultTaskParserTest {
     Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
     Task _task_1 = new Task();
     final Procedure1<Task> _function_1 = new Procedure1<Task>() {
+      @Override
       public void apply(final Task it) {
         TaskTag _taskTag = new TaskTag();
         final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+          @Override
           public void apply(final TaskTag it) {
             it.setName("FIXME");
             it.setPriority(Priority.HIGH);
@@ -137,9 +143,11 @@ public class DefaultTaskParserTest {
     Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
     Task _task_2 = new Task();
     final Procedure1<Task> _function_2 = new Procedure1<Task>() {
+      @Override
       public void apply(final Task it) {
         TaskTag _taskTag = new TaskTag();
         final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+          @Override
           public void apply(final TaskTag it) {
             it.setName("XXX");
             it.setPriority(Priority.NORMAL);
@@ -155,9 +163,11 @@ public class DefaultTaskParserTest {
     Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_2, _function_2);
     Task _task_3 = new Task();
     final Procedure1<Task> _function_3 = new Procedure1<Task>() {
+      @Override
       public void apply(final Task it) {
         TaskTag _taskTag = new TaskTag();
         final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+          @Override
           public void apply(final TaskTag it) {
             it.setName("TODO");
             it.setPriority(Priority.NORMAL);

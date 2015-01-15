@@ -48,6 +48,7 @@ public class ExtractTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
         @Extension
         final TransformationContext ctx = it.getTransformationContext();
@@ -60,6 +61,7 @@ public class ExtractTest {
         Iterable<? extends MutableMethodDeclaration> _declaredMethods = interf.getDeclaredMethods();
         MutableMethodDeclaration _head_1 = IterableExtensions.head(_declaredMethods);
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             String _simpleName = it.getSimpleName();
             Assert.assertEquals("doStuff", _simpleName);

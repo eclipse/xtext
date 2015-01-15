@@ -114,6 +114,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return new org.eclipse.core.runtime.Path(_string);
   }
   
+  @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     List<Path> _xblockexpression = null;
     {
@@ -127,6 +128,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       try {
         IResource[] _members = container.members();
         final Function1<IResource, Path> _function = new Function1<IResource, Path>() {
+          @Override
           public Path apply(final IResource it) {
             IPath _fullPath = it.getFullPath();
             String _string = _fullPath.toString();
@@ -148,21 +150,25 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _xblockexpression;
   }
   
+  @Override
   public boolean exists(final Path path) {
     IResource _findResource = this.findResource(path);
     return (!Objects.equal(_findResource, null));
   }
   
+  @Override
   public boolean isFolder(final Path path) {
     IResource _findResource = this.findResource(path);
     return (_findResource instanceof IContainer);
   }
   
+  @Override
   public boolean isFile(final Path path) {
     IResource _findResource = this.findResource(path);
     return (_findResource instanceof IFile);
   }
   
+  @Override
   public long getLastModification(final Path path) {
     long _xblockexpression = (long) 0;
     {
@@ -176,6 +182,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _xblockexpression;
   }
   
+  @Override
   public String getCharset(final Path path) {
     try {
       boolean _isFile = this.isFile(path);
@@ -203,6 +210,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public InputStream getContentsAsStream(final Path path) {
     InputStream _xtrycatchfinallyexpression = null;
     try {
@@ -220,6 +228,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _xtrycatchfinallyexpression;
   }
   
+  @Override
   public void delete(final Path path) {
     try {
       boolean _exists = this.exists(path);
@@ -238,6 +247,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public void mkdir(final Path path) {
     boolean _exists = this.exists(path);
     if (_exists) {
@@ -277,6 +287,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public void setContentsAsStream(final Path path, final InputStream stream) {
     try {
       try {
@@ -357,6 +368,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return contentChanged;
   }
   
+  @Override
   public URI toURI(final Path path) {
     ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
     return this.toURI(path, _newArrayList);
@@ -376,6 +388,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       List<String> _reverse = ListExtensions.<String>reverse(trailingSegments);
       IPath _location = resource.getLocation();
       final Function2<IPath, String, IPath> _function = new Function2<IPath, String, IPath>() {
+        @Override
         public IPath apply(final IPath location, final String segment) {
           return location.append(segment);
         }
@@ -386,6 +399,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     return _xblockexpression;
   }
   
+  @Override
   public Path getPath(final Resource res) {
     org.eclipse.emf.common.util.URI _uRI = res.getURI();
     boolean _isPlatform = _uRI.isPlatform();

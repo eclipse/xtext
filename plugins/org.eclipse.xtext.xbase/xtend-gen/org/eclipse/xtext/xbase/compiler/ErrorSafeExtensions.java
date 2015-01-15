@@ -52,6 +52,7 @@ public class ErrorSafeExtensions {
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
       Iterable<Issue> _issues = issueProvider.getIssues(element);
       final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+        @Override
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
           return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
@@ -69,6 +70,7 @@ public class ErrorSafeExtensions {
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
       Iterable<Issue> _issues = issueProvider.getIssues(element);
       final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+        @Override
         public Boolean apply(final Issue it) {
           Severity _severity = it.getSeverity();
           return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
@@ -87,6 +89,7 @@ public class ErrorSafeExtensions {
     LoopParams _loopParams = new LoopParams();
     final LoopParams loopParams = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
     final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
+      @Override
       public Boolean apply(final T it) {
         return Boolean.valueOf(ErrorSafeExtensions.this.hasErrors(it));
       }

@@ -44,6 +44,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
   @Rule
   public ErrorCollector collector = new ErrorCollector();
   
+  @Override
   public List<Object> resolvesClosuresTo(final String expression, final String... types) {
     final List<XClosure> closures = this.findClosures(expression);
     boolean _isEmpty = closures.isEmpty();
@@ -56,9 +57,11 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final ArrayList<Object> result = CollectionLiterals.<Object>newArrayList();
     final Procedure2<XClosure, Integer> _function = new Procedure2<XClosure, Integer>() {
+      @Override
       public void apply(final XClosure closure, final Integer index) {
         final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
         final Callable<Object> _function = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("failed for closure at ");
@@ -71,6 +74,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
         };
         BatchClosureTypeTest.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("failed for closure at ");
@@ -89,10 +93,13 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     return result;
   }
   
+  @Override
   public void withEquivalents(final List<Object> references, final String... types) {
     final Procedure2<Object, Integer> _function = new Procedure2<Object, Integer>() {
+      @Override
       public void apply(final Object reference, final Integer index) {
         final Callable<Object> _function = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             Assert.assertTrue((reference instanceof FunctionTypeReference));
             return null;
@@ -100,6 +107,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
         };
         BatchClosureTypeTest.this.collector.checkSucceeds(_function);
         final Callable<Object> _function_1 = new Callable<Object>() {
+          @Override
           public Object call() throws Exception {
             Object _get = types[(index).intValue()];
             String _equivalent = BatchClosureTypeTest.this.getEquivalent(((FunctionTypeReference) reference));
@@ -127,6 +135,7 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
+      @Override
       public CharSequence apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }

@@ -69,6 +69,7 @@ public class SyntacticSequencer extends GeneratedFile {
     return _builder;
   }
   
+  @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     String _packageName = filename.getPackageName();
     final JavaFile file = new JavaFile(_packageName);
@@ -89,6 +90,7 @@ public class SyntacticSequencer extends GeneratedFile {
           {
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(this.grammar);
             final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
+              @Override
               public Boolean apply(final TerminalRule it) {
                 return Boolean.valueOf(SyntacticSequencer.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
               }
@@ -156,6 +158,7 @@ public class SyntacticSequencer extends GeneratedFile {
           {
             List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(this.grammar);
             final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
+              @Override
               public Boolean apply(final TerminalRule it) {
                 return Boolean.valueOf(SyntacticSequencer.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
               }

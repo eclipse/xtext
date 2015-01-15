@@ -33,9 +33,11 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
   
   private final Function1<? super URI, ? extends Boolean> filter;
   
+  @Override
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
     Iterable<IResourceDescription> _allResourceDescriptions = this.delegate.getAllResourceDescriptions();
     final Function1<IResourceDescription, Boolean> _function = new Function1<IResourceDescription, Boolean>() {
+      @Override
       public Boolean apply(final IResourceDescription it) {
         URI _uRI = it.getURI();
         return Boolean.valueOf(FilteringResourceDescriptions.this.isContainedUri(_uRI));
@@ -44,6 +46,7 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return IterableExtensions.<IResourceDescription>filter(_allResourceDescriptions, _function);
   }
   
+  @Override
   public IResourceDescription getResourceDescription(final URI normalizedURI) {
     boolean _isContainedUri = this.isContainedUri(normalizedURI);
     if (_isContainedUri) {
@@ -56,9 +59,11 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return (this.filter.apply(uri)).booleanValue();
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjects() {
     Iterable<IEObjectDescription> _exportedObjects = this.delegate.getExportedObjects();
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         URI _eObjectURI = it.getEObjectURI();
         return Boolean.valueOf(FilteringResourceDescriptions.this.isContainedUri(_eObjectURI));
@@ -67,9 +72,11 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return IterableExtensions.<IEObjectDescription>filter(_exportedObjects, _function);
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
     Iterable<IEObjectDescription> _exportedObjects = this.delegate.getExportedObjects(type, name, ignoreCase);
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         URI _eObjectURI = it.getEObjectURI();
         return Boolean.valueOf(FilteringResourceDescriptions.this.isContainedUri(_eObjectURI));
@@ -78,9 +85,11 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return IterableExtensions.<IEObjectDescription>filter(_exportedObjects, _function);
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
     Iterable<IEObjectDescription> _exportedObjectsByObject = this.delegate.getExportedObjectsByObject(object);
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         URI _eObjectURI = it.getEObjectURI();
         return Boolean.valueOf(FilteringResourceDescriptions.this.isContainedUri(_eObjectURI));
@@ -89,9 +98,11 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByObject, _function);
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
     Iterable<IEObjectDescription> _exportedObjectsByType = this.delegate.getExportedObjectsByType(type);
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         URI _eObjectURI = it.getEObjectURI();
         return Boolean.valueOf(FilteringResourceDescriptions.this.isContainedUri(_eObjectURI));
@@ -100,6 +111,7 @@ public class FilteringResourceDescriptions implements IResourceDescriptions {
     return IterableExtensions.<IEObjectDescription>filter(_exportedObjectsByType, _function);
   }
   
+  @Override
   public boolean isEmpty() {
     Iterable<IResourceDescription> _allResourceDescriptions = this.getAllResourceDescriptions();
     return IterableExtensions.isEmpty(_allResourceDescriptions);

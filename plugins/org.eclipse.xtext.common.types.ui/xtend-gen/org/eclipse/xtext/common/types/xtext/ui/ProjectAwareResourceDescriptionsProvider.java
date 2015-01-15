@@ -39,6 +39,7 @@ public class ProjectAwareResourceDescriptionsProvider extends ResourceDescriptio
    * In the builder we use the Java representation for any upstream resources, so we filter them out here.
    * And if we are in the indexing phase, we don't even want to see the local resources.
    */
+  @Override
   public IResourceDescriptions getResourceDescriptions(final ResourceSet resourceSet) {
     final IResourceDescriptions result = super.getResourceDescriptions(resourceSet);
     boolean _isIndexing = this.compilerPhases.isIndexing(resourceSet);
@@ -47,6 +48,7 @@ public class ProjectAwareResourceDescriptionsProvider extends ResourceDescriptio
       String _elementName = javaProject.getElementName();
       final String encodedProjectName = URI.encodeSegment(_elementName, true);
       final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+        @Override
         public Boolean apply(final URI uri) {
           boolean _or = false;
           boolean _or_1 = false;

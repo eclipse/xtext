@@ -23,21 +23,26 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class AccessObjectProcessor implements TransformationParticipant<MutableClassDeclaration>, RegisterGlobalsParticipant<ClassDeclaration> {
+  @Override
   public void doTransform(final List<? extends MutableClassDeclaration> annotatedSourceClasses, @Extension final TransformationContext ctx) {
     final Procedure1<MutableClassDeclaration> _function = new Procedure1<MutableClassDeclaration>() {
+      @Override
       public void apply(final MutableClassDeclaration it) {
         Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
         final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+          @Override
           public void apply(final MutableFieldDeclaration field) {
             MutableTypeDeclaration _declaringType = field.getDeclaringType();
             String _simpleName = field.getSimpleName();
             String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
             String _plus = ("get" + _firstUpper);
             final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+              @Override
               public void apply(final MutableMethodDeclaration it) {
                 TypeReference _type = field.getType();
                 it.setReturnType(_type);
                 final CompilationStrategy _function = new CompilationStrategy() {
+                  @Override
                   public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                     StringConcatenation _builder = new StringConcatenation();
                     _builder.append("return this.");
@@ -111,8 +116,10 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
     IterableExtensions.forEach(annotatedSourceClasses, _function);
   }
   
+  @Override
   public void doRegisterGlobals(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final RegisterGlobalsContext ctx) {
     final Procedure1<ClassDeclaration> _function = new Procedure1<ClassDeclaration>() {
+      @Override
       public void apply(final ClassDeclaration it) {
         String _qualifiedName = it.getQualifiedName();
         String _qualifiedName_1 = it.getQualifiedName();

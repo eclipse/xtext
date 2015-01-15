@@ -58,6 +58,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   protected List<JvmIdentifiableElement> findIdentifiables(final XExpression expression) {
     TreeIterator<EObject> _eAll = EcoreUtil2.eAll(expression);
     final Function1<EObject, List<? extends EObject>> _function = new Function1<EObject, List<? extends EObject>>() {
+      @Override
       public List<? extends EObject> apply(final EObject it) {
         List<? extends EObject> _switchResult = null;
         boolean _matched = false;
@@ -78,6 +79,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     Iterable<EObject> _flatten = Iterables.<EObject>concat(_iterable);
     Set<EObject> _set = IterableExtensions.<EObject>toSet(_flatten);
     final Function1<EObject, Boolean> _function_1 = new Function1<EObject, Boolean>() {
+      @Override
       public Boolean apply(final EObject it) {
         boolean _and = false;
         boolean _notEquals = (!Objects.equal(it, null));
@@ -110,6 +112,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     Iterable<JvmIdentifiableElement> _filter_1 = Iterables.<JvmIdentifiableElement>filter(_filter, JvmIdentifiableElement.class);
     final List<JvmIdentifiableElement> identifiables = IterableExtensions.<JvmIdentifiableElement>toList(_filter_1);
     final Function1<JvmIdentifiableElement, Integer> _function_2 = new Function1<JvmIdentifiableElement, Integer>() {
+      @Override
       public Integer apply(final JvmIdentifiableElement it) {
         int _xblockexpression = (int) 0;
         {
@@ -131,6 +134,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_2);
   }
   
+  @Override
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {

@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.EmptyClasspathXbaseTestStandalon
 
 @SuppressWarnings("all")
 public class EmptyClasspathXbaseInjectorProvider extends XbaseInjectorProvider {
+  @Override
   public Injector internalCreateInjector() {
     EmptyClasspathXbaseTestStandaloneSetup _emptyClasspathXbaseTestStandaloneSetup = new EmptyClasspathXbaseTestStandaloneSetup();
     return _emptyClasspathXbaseTestStandaloneSetup.createInjectorAndDoEMFRegistration();

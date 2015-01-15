@@ -114,6 +114,7 @@ public class AbstractConstantExpressionsInterpreter {
     }
     JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
     final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+      @Override
       public void apply(final JvmParameterizedTypeReference it) {
         it.setType(type);
       }

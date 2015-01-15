@@ -45,12 +45,14 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     DocumentTokenSource _createTokenSource = this.createTokenSource();
     ITextEditComposer _createTextEditComposer = this.createTextEditComposer();
     final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager, this.operationCanceledManager) {
+      @Override
       protected boolean updateContentBeforeRead() {
         return s.add("x");
       }
     };
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
+      @Override
       public void apply(final XtextResource it) {
         XtextResourceSet _xtextResourceSet = new XtextResourceSet();
         EList<Resource> _resources = _xtextResourceSet.getResources();
@@ -62,14 +64,17 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     int _size = s.size();
     Assert.assertEquals(0, _size);
     final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+      @Override
       public Object exec(final XtextResource it) throws Exception {
         int _size = s.size();
         Assert.assertEquals(1, _size);
         final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+          @Override
           public Object exec(final XtextResource it) throws Exception {
             int _size = s.size();
             Assert.assertEquals(1, _size);
             final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
+              @Override
               public Object exec(final XtextResource it) throws Exception {
                 int _size = s.size();
                 Assert.assertEquals(1, _size);
@@ -96,6 +101,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final XtextDocument document = new XtextDocument(_createTokenSource, _createTextEditComposer, this.outdatedStateManager, this.operationCanceledManager);
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
+      @Override
       public void apply(final XtextResource it) {
         XtextResourceSet _xtextResourceSet = new XtextResourceSet();
         EList<Resource> _resources = _xtextResourceSet.getResources();
@@ -105,6 +111,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final XtextResource resource = ObjectExtensions.<XtextResource>operator_doubleArrow(_xtextResource, _function);
     document.setInput(resource);
     final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+      @Override
       public Object exec(final XtextResource it) throws Exception {
         Object _xblockexpression = null;
         {
@@ -124,6 +131,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     boolean _isCanceled_1 = indicator.isCanceled();
     Assert.assertTrue(_isCanceled_1);
     final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
+      @Override
       public Object exec(final XtextResource it) throws Exception {
         Object _xblockexpression = null;
         {
@@ -145,6 +153,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
       XtextResource _xtextResource = new XtextResource();
       final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
+        @Override
         public void apply(final XtextResource it) {
           XtextResourceSet _xtextResourceSet = new XtextResourceSet();
           EList<Resource> _resources = _xtextResourceSet.getResources();
@@ -155,8 +164,10 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
       document.setInput(_doubleArrow);
       final boolean[] check = new boolean[1];
       final Runnable _function_1 = new Runnable() {
+        @Override
         public void run() {
           document.<Object>readOnly(new CancelableUnitOfWork<Object, XtextResource>() {
+            @Override
             public Object exec(final XtextResource state, final CancelIndicator cancelIndicator) throws Exception {
               check[0] = true;
               final int wait = 4000;
@@ -181,6 +192,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
         Thread.sleep(1);
       }
       final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
+        @Override
         public Object exec(final XtextResource it) throws Exception {
           return null;
         }
@@ -199,6 +211,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     final XtextDocument document = new XtextDocument(_createTokenSource, null, this.outdatedStateManager, this.operationCanceledManager);
     XtextResource _xtextResource = new XtextResource();
     final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
+      @Override
       public void apply(final XtextResource it) {
         XtextResourceSet _xtextResourceSet = new XtextResourceSet();
         EList<Resource> _resources = _xtextResourceSet.getResources();
@@ -212,6 +225,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     boolean _isEmpty = cancelIndicators.isEmpty();
     Assert.assertTrue(_isEmpty);
     final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
+      @Override
       public Object exec(final XtextResource it) throws Exception {
         return null;
       }
@@ -220,6 +234,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     boolean _isEmpty_1 = cancelIndicators.isEmpty();
     Assert.assertTrue(_isEmpty_1);
     final IUnitOfWork<Object, XtextResource> _function_2 = new IUnitOfWork<Object, XtextResource>() {
+      @Override
       public Object exec(final XtextResource it) throws Exception {
         return null;
       }
@@ -234,6 +249,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
     {
       final DocumentTokenSource tokenSource = new DocumentTokenSource();
       tokenSource.setLexer(new Provider<Lexer>() {
+        @Override
         public Lexer get() {
           return new InternalXtextLexer();
         }
@@ -245,13 +261,16 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   
   private ITextEditComposer createTextEditComposer() {
     return new ITextEditComposer() {
+      @Override
       public void beginRecording(final Resource resource) {
       }
       
+      @Override
       public TextEdit endRecording() {
         return null;
       }
       
+      @Override
       public TextEdit getTextEdit() {
         return null;
       }
@@ -260,6 +279,7 @@ public class DocumentLockerTest extends AbstractXtextDocumentTest {
   
   private void addReaderCancelationListener(final IXtextDocument document, final List<CancelIndicator> cancelIndicators) {
     final IXtextModelListener _function = new IXtextModelListener() {
+      @Override
       public void modelChanged(final XtextResource it) {
         final CancelableUnitOfWork<Boolean, XtextResource> _function = new CancelableUnitOfWork<Boolean, XtextResource>() {
           @Override

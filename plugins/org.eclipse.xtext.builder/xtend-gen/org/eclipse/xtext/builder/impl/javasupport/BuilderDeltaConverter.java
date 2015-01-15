@@ -26,6 +26,7 @@ public class BuilderDeltaConverter extends DeltaConverter {
     super(nameConverter, uriHelper, builderState);
   }
   
+  @Override
   public IResourceDescription.Delta createStructureChangeDelta(final IType type, final IResourceDescription oldDescription, final IResourceDescription newDescription) {
     return new UnconfirmedStructuralChangesDelta(type, oldDescription, newDescription);
   }

@@ -12,21 +12,27 @@ import org.eclipse.xtend.core.macro.declaration.IResourceChangeRegistry;
 
 @SuppressWarnings("all")
 public class NopResourceChangeRegistry implements IResourceChangeRegistry {
+  @Override
   public void registerExists(final String path, final URI uri) {
   }
   
+  @Override
   public void registerGetCharset(final String string, final URI uri) {
   }
   
+  @Override
   public void registerGetChildren(final String string, final URI uri) {
   }
   
+  @Override
   public void registerGetContents(final String string, final URI uri) {
   }
   
+  @Override
   public void registerCreateOrModify(final String string, final URI uri) {
   }
   
+  @Override
   public void discardCreateOrModifyInformation(final URI uri) {
   }
 }

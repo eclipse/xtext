@@ -26,50 +26,63 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ChangeListenerAddingFileSystemSupportTest {
   public static class NoopFileSystemSupport implements MutableFileSystemSupport {
+    @Override
     public void delete(final Path path) {
     }
     
+    @Override
     public void mkdir(final Path path) {
     }
     
+    @Override
     public void setContents(final Path path, final CharSequence contents) {
     }
     
+    @Override
     public void setContentsAsStream(final Path path, final InputStream source) {
     }
     
+    @Override
     public boolean exists(final Path path) {
       return false;
     }
     
+    @Override
     public String getCharset(final Path path) {
       return null;
     }
     
+    @Override
     public Iterable<? extends Path> getChildren(final Path path) {
       return null;
     }
     
+    @Override
     public CharSequence getContents(final Path path) {
       return null;
     }
     
+    @Override
     public InputStream getContentsAsStream(final Path path) {
       return null;
     }
     
+    @Override
     public long getLastModification(final Path path) {
       return 0L;
     }
     
+    @Override
     public boolean isFile(final Path path) {
       return true;
     }
     
+    @Override
     public boolean isFolder(final Path path) {
       return true;
     }
     
+    @Override
     public URI toURI(final Path path) {
       return null;
     }

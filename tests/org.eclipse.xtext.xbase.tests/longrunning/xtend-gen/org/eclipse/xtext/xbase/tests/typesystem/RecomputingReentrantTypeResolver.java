@@ -64,10 +64,12 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   private final Joiner.MapJoiner mapJoiner = Joiner.on("\n").withKeyValueSeparator("=");
   
+  @Override
   public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
     return new RecordingRootResolvedTypes(this, CancelIndicator.NullImpl);
   }
   
+  @Override
   public IResolvedTypes resolve(final CancelIndicator monitor) {
     IResolvedTypes _resolve = super.resolve(monitor);
     final RecordingRootResolvedTypes firstResult = ((RecordingRootResolvedTypes) _resolve);
@@ -113,6 +115,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<XExpression> _keySet_3 = secondRun.keySet();
     Assert.assertEquals(_builder_1.toString(), _keySet_2, _keySet_3);
     final Procedure2<XExpression, IApplicableCandidate> _function = new Procedure2<XExpression, IApplicableCandidate>() {
+      @Override
       public void apply(final XExpression expression, final IApplicableCandidate firstLinkingData) {
         final IApplicableCandidate secondLinkingData = secondRun.get(expression);
         RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
@@ -141,6 +144,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Assert.assertEquals("type", _size, _size_1);
     List<JvmFormalParameter> _parameters_2 = left.getParameters();
     final Procedure2<JvmFormalParameter, Integer> _function = new Procedure2<JvmFormalParameter, Integer>() {
+      @Override
       public void apply(final JvmFormalParameter leftParam, final Integer idx) {
         List<JvmFormalParameter> _parameters = right.getParameters();
         final JvmFormalParameter rightParam = _parameters.get((idx).intValue());
@@ -376,12 +380,14 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   public void assertEqualReferences(final String message, final List<LightweightTypeReference> left, final List<LightweightTypeReference> right) {
     final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.toString();
       }
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(left, _function);
     final Function1<LightweightTypeReference, String> _function_1 = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.toString();
       }
@@ -432,6 +438,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<JvmTypeParameter> _keySet_1 = right.keySet();
     Assert.assertEquals(_builder_1.toString(), ((Object) _keySet), _keySet_1);
     final Procedure2<JvmTypeParameter, LightweightMergedBoundTypeArgument> _function = new Procedure2<JvmTypeParameter, LightweightMergedBoundTypeArgument>() {
+      @Override
       public void apply(final JvmTypeParameter typeParam, final LightweightMergedBoundTypeArgument leftData) {
         final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
         VarianceInfo _variance = leftData.getVariance();

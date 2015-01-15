@@ -10,16 +10,19 @@ public class TestAppender extends AbstractStringBuilderBasedAppendable {
     super("\t", "\n", isJava);
   }
   
+  @Override
   protected void appendType(final JvmType type, final StringBuilder builder) {
     String _identifier = type.getIdentifier();
     builder.append(_identifier);
   }
   
+  @Override
   protected void appendType(final Class<?> type, final StringBuilder builder) {
     String _name = type.getName();
     builder.append(_name);
   }
   
+  @Override
   public List<String> getImports() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }

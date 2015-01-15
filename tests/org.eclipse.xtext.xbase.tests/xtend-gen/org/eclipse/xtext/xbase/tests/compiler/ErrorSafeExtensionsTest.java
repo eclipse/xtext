@@ -61,6 +61,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     EList<XExpression> _expressions_2 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = new Procedure2<XExpression, ITreeAppendable>() {
+      @Override
       public void apply(final XExpression it, final ITreeAppendable app2) {
         String _text = ErrorSafeExtensionsTest.this.getText(it);
         app2.append(_text);
@@ -91,6 +92,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     EList<XExpression> _expressions_3 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = new Procedure2<XExpression, ITreeAppendable>() {
+      @Override
       public void apply(final XExpression it, final ITreeAppendable app2) {
         String _text = ErrorSafeExtensionsTest.this.getText(it);
         app2.append(_text);
@@ -121,6 +123,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     EList<XExpression> _expressions_3 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = new Procedure2<XExpression, ITreeAppendable>() {
+      @Override
       public void apply(final XExpression it, final ITreeAppendable app2) {
         String _text = ErrorSafeExtensionsTest.this.getText(it);
         app2.append(_text);
@@ -151,6 +154,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     EList<XExpression> _expressions_3 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = new Procedure2<XExpression, ITreeAppendable>() {
+      @Override
       public void apply(final XExpression it, final ITreeAppendable app2) {
         String _text = ErrorSafeExtensionsTest.this.getText(it);
         app2.append(_text);
@@ -173,6 +177,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     EList<XExpression> _expressions_1 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = new Procedure2<XExpression, ITreeAppendable>() {
+      @Override
       public void apply(final XExpression it, final ITreeAppendable app2) {
         String _text = ErrorSafeExtensionsTest.this.getText(it);
         app2.append(_text);
@@ -199,6 +204,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
     EList<XExpression> _expressions_2 = e.getExpressions();
     Procedure1<? super LoopParams> _loopInitializer = this.getLoopInitializer();
     final Procedure2<XExpression, ITreeAppendable> _function = new Procedure2<XExpression, ITreeAppendable>() {
+      @Override
       public void apply(final XExpression it, final ITreeAppendable app2) {
         String _text = ErrorSafeExtensionsTest.this.getText(it);
         app2.append(_text);
@@ -276,6 +282,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   
   protected Procedure1<? super LoopParams> getLoopInitializer() {
     final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+      @Override
       public void apply(final LoopParams it) {
         it.setPrefix("(");
         it.setSeparator(":");

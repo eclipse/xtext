@@ -24,10 +24,12 @@ public class RecomputingExpectationTest extends AbstractExpectationTest {
   @Inject
   private RecordingRecomputingReentrantTypeResolver resolver;
   
+  @Override
   public ExpectationTestingTypeComputer getTypeComputer() {
     return this.typeComputer;
   }
   
+  @Override
   public PublicReentrantTypeResolver getResolver() {
     return this.resolver;
   }

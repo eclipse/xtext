@@ -37,6 +37,7 @@ public class EclipseProjectConfig extends ProjectConfig {
     this.configurationProvider = configurationProvider;
   }
   
+  @Override
   public Map<Path, Path> getSourceFolderMappings() {
     try {
       final Map<Path, Path> map = super.getSourceFolderMappings();

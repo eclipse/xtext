@@ -21,6 +21,7 @@ public class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
   @Inject
   private Provider<TimedReentrantTypeResolver> resolverProvider;
   
+  @Override
   public AbstractRootedReentrantTypeResolver createResolver() {
     return this.resolverProvider.get();
   }

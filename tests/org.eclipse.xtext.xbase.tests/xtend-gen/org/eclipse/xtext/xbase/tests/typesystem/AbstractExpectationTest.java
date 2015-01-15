@@ -104,6 +104,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public AbstractExpectationTest finalizedAs(final String... names) {
     Assert.assertFalse(this.pendingAssert);
     final Function1<ITypeExpectation, String> _function = new Function1<ITypeExpectation, String>() {
+      @Override
       public String apply(final ITypeExpectation it) {
         LightweightTypeReference _expectedType = it.getExpectedType();
         String _simpleName = null;
@@ -120,6 +121,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     Assert.assertEquals(_string, _size, _size_1);
     Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
     final Function1<ITypeExpectation, String> _function_1 = new Function1<ITypeExpectation, String>() {
+      @Override
       public String apply(final ITypeExpectation it) {
         LightweightTypeReference _expectedType = it.getExpectedType();
         String _simpleName = null;
@@ -138,12 +140,14 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public AbstractExpectationTest queriedAs(final String... names) {
     this.pendingAssert = false;
     final Function1<XExpression, LightweightTypeReference> _function = new Function1<XExpression, LightweightTypeReference>() {
+      @Override
       public LightweightTypeReference apply(final XExpression it) {
         return AbstractExpectationTest.this.resolvedTypes.getExpectedType(it);
       }
     };
     final List<LightweightTypeReference> expectedTypes = ListExtensions.<XExpression, LightweightTypeReference>map(this.expressions, _function);
     final Function1<LightweightTypeReference, String> _function_1 = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -155,6 +159,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     Assert.assertEquals(_string, _size, _size_1);
     Set<String> _set = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(names)));
     final Function1<LightweightTypeReference, String> _function_2 = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }
@@ -226,6 +231,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     Iterables.<ITypeExpectation>addAll(this.finalExpectations, _expectations);
     List<? extends ITypeExpectation> _expectations_1 = state.getExpectations();
     final Function1<ITypeExpectation, String> _function = new Function1<ITypeExpectation, String>() {
+      @Override
       public String apply(final ITypeExpectation it) {
         LightweightTypeReference _expectedType = it.getExpectedType();
         String _simpleName = null;
@@ -349,6 +355,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testFeatureCallVarArgument_04() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf((it instanceof XReturnExpression));
       }
@@ -428,6 +435,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testInvocationOnPrimitive() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf((it instanceof XNumberLiteral));
       }
@@ -443,6 +451,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testImplicitReceiver() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf(false);
       }
@@ -461,6 +470,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testExtension() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf((it instanceof XCastedExpression));
       }
@@ -476,6 +486,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testImplicitFirstArgument() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf(false);
       }
@@ -494,6 +505,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testBug379531_01() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf((it instanceof XCastedExpression));
       }
@@ -508,6 +520,7 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
   public void testBug379531_02() {
     ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
     final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+      @Override
       public Boolean apply(final XExpression it) {
         return Boolean.valueOf((it instanceof XCastedExpression));
       }

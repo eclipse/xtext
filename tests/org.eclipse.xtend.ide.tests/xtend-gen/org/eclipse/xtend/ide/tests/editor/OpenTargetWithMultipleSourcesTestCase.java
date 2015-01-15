@@ -64,6 +64,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   }
   
   @Before
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
@@ -104,6 +105,7 @@ public class OpenTargetWithMultipleSourcesTestCase extends AbstractXtendUITestCa
   }
   
   @After
+  @Override
   public void tearDown() throws Exception {
     WorkbenchTestHelper.deleteProject(this.testProject);
     this.testProject = null;

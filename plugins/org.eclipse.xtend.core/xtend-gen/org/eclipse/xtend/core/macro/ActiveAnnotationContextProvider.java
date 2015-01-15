@@ -75,6 +75,7 @@ public class ActiveAnnotationContextProvider {
         compilationUnit.setXtendFile(file);
         result.compilationUnit = compilationUnit;
         final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType, XAnnotation>>() {
+          @Override
           public void accept(final Pair<JvmAnnotationType, XAnnotation> it) {
             try {
               Map<JvmAnnotationType, ActiveAnnotationContext> _contexts = result.getContexts();
@@ -186,6 +187,7 @@ public class ActiveAnnotationContextProvider {
         _matched=true;
         EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)element).getXtendTypes();
         final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
+          @Override
           public void apply(final XtendTypeDeclaration it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -199,6 +201,7 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendMember> _members = ((XtendClass)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+          @Override
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -212,6 +215,7 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendMember> _members = ((XtendInterface)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+          @Override
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -225,6 +229,7 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendMember> _members = ((XtendEnum)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+          @Override
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -238,6 +243,7 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendMember> _members = ((XtendAnnotationType)element).getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+          @Override
           public void apply(final XtendMember it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -251,6 +257,7 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendParameter> _parameters = ((XtendFunction)element).getParameters();
         final Procedure1<XtendParameter> _function = new Procedure1<XtendParameter>() {
+          @Override
           public void apply(final XtendParameter it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -264,6 +271,7 @@ public class ActiveAnnotationContextProvider {
         this.registerMacroAnnotations(((XtendAnnotationTarget)element), acceptor);
         EList<XtendParameter> _parameters = ((XtendConstructor)element).getParameters();
         final Procedure1<XtendParameter> _function = new Procedure1<XtendParameter>() {
+          @Override
           public void apply(final XtendParameter it) {
             ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
           }
@@ -282,6 +290,7 @@ public class ActiveAnnotationContextProvider {
   private void registerMacroAnnotations(final XtendAnnotationTarget candidate, final IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
     EList<XAnnotation> _annotations = candidate.getAnnotations();
     final Function1<XAnnotation, Boolean> _function = new Function1<XAnnotation, Boolean>() {
+      @Override
       public Boolean apply(final XAnnotation it) {
         return Boolean.valueOf(ActiveAnnotationContextProvider.this._xAnnotationExtensions.isProcessed(it));
       }

@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> implements AnnotationReference {
+  @Override
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmAnnotationReference _delegate = this.getDelegate();
@@ -44,11 +45,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return ((AnnotationTypeDeclaration) _typeDeclaration);
   }
   
+  @Override
   public Expression getExpression(final String property) {
     final JvmOperation op = this.findOperation(property);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
+      @Override
       public Boolean apply(final JvmAnnotationValue it) {
         boolean _or = false;
         JvmOperation _operation = it.getOperation();
@@ -85,12 +88,14 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return null;
   }
   
+  @Override
   public Object getValue(final String property) {
     try {
       final JvmOperation op = this.findOperation(property);
       JvmAnnotationReference _delegate = this.getDelegate();
       EList<JvmAnnotationValue> _values = _delegate.getValues();
       final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
+        @Override
         public Boolean apply(final JvmAnnotationValue it) {
           boolean _or = false;
           JvmOperation _operation = it.getOperation();
@@ -151,6 +156,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final JvmAnnotationType jvmAnnoType = ((JvmAnnotationTypeDeclarationImpl) _annotationTypeDeclaration).getDelegate();
     Iterable<JvmOperation> _declaredOperations = jvmAnnoType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
+      @Override
       public Boolean apply(final JvmOperation it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -167,21 +173,25 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return jvmOperation;
   }
   
+  @Override
   public AnnotationReference getAnnotationValue(final String name) {
     Object _value = this.getValue(name);
     return ((AnnotationReference) _value);
   }
   
+  @Override
   public AnnotationReference[] getAnnotationArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((AnnotationReference[]) _value);
   }
   
+  @Override
   public boolean[] getBooleanArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((boolean[]) _value);
   }
   
+  @Override
   public boolean getBooleanValue(final String name) {
     Boolean _xblockexpression = null;
     {
@@ -195,11 +205,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).booleanValue();
   }
   
+  @Override
   public byte[] getByteArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((byte[]) _value);
   }
   
+  @Override
   public byte getByteValue(final String name) {
     Byte _xblockexpression = null;
     {
@@ -213,11 +225,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).byteValue();
   }
   
+  @Override
   public char[] getCharArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((char[]) _value);
   }
   
+  @Override
   public char getCharValue(final String name) {
     Character _xblockexpression = null;
     {
@@ -242,21 +256,25 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).charValue();
   }
   
+  @Override
   public TypeReference getClassValue(final String name) {
     Object _value = this.getValue(name);
     return ((TypeReference) _value);
   }
   
+  @Override
   public TypeReference[] getClassArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((TypeReference[]) _value);
   }
   
+  @Override
   public double[] getDoubleArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((double[]) _value);
   }
   
+  @Override
   public double getDoubleValue(final String name) {
     Double _xblockexpression = null;
     {
@@ -311,21 +329,25 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).doubleValue();
   }
   
+  @Override
   public EnumerationValueDeclaration getEnumValue(final String name) {
     Object _value = this.getValue(name);
     return ((EnumerationValueDeclaration) _value);
   }
   
+  @Override
   public EnumerationValueDeclaration[] getEnumArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((EnumerationValueDeclaration[]) _value);
   }
   
+  @Override
   public float[] getFloatArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((float[]) _value);
   }
   
+  @Override
   public float getFloatValue(final String name) {
     Float _xblockexpression = null;
     {
@@ -374,11 +396,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).floatValue();
   }
   
+  @Override
   public int[] getIntArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((int[]) _value);
   }
   
+  @Override
   public int getIntValue(final String name) {
     Integer _xblockexpression = null;
     {
@@ -415,11 +439,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).intValue();
   }
   
+  @Override
   public long[] getLongArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((long[]) _value);
   }
   
+  @Override
   public long getLongValue(final String name) {
     Long _xblockexpression = null;
     {
@@ -462,11 +488,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).longValue();
   }
   
+  @Override
   public short[] getShortArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((short[]) _value);
   }
   
+  @Override
   public short getShortValue(final String name) {
     Short _xblockexpression = null;
     {
@@ -491,11 +519,13 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     return (_xblockexpression).shortValue();
   }
   
+  @Override
   public String[] getStringArrayValue(final String name) {
     Object _value = this.getValue(name);
     return ((String[]) _value);
   }
   
+  @Override
   public String getStringValue(final String name) {
     Object _value = this.getValue(name);
     return ((String) _value);

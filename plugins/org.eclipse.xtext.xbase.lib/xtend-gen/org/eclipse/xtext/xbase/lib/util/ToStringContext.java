@@ -20,6 +20,7 @@ class ToStringContext {
   public final static ToStringContext INSTANCE = new ToStringContext();
   
   private final static ThreadLocal<IdentityHashMap<Object, Boolean>> currentlyProcessed = new ThreadLocal<IdentityHashMap<Object, Boolean>>() {
+    @Override
     public IdentityHashMap<Object, Boolean> initialValue() {
       return new IdentityHashMap<Object, Boolean>();
     }

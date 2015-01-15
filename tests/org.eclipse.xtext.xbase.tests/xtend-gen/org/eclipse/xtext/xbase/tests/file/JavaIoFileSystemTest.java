@@ -48,15 +48,19 @@ public class JavaIoFileSystemTest {
       final File tempDir = this.temporaryFolder.newFolder();
       JavaIOFileSystemSupport _javaIOFileSystemSupport = new JavaIOFileSystemSupport();
       final Procedure1<JavaIOFileSystemSupport> _function = new Procedure1<JavaIOFileSystemSupport>() {
+        @Override
         public void apply(final JavaIOFileSystemSupport it) {
           final Provider<WorkspaceConfig> _function = new Provider<WorkspaceConfig>() {
+            @Override
             public WorkspaceConfig get() {
               String _absolutePath = tempDir.getAbsolutePath();
               WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
               final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+                @Override
                 public void apply(final WorkspaceConfig it) {
                   ProjectConfig _projectConfig = new ProjectConfig("/foo");
                   final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
+                    @Override
                     public void apply(final ProjectConfig it) {
                       Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
                       Path _path = new Path("/foo/src");
@@ -155,6 +159,7 @@ public class JavaIoFileSystemTest {
   public void testGetWorkspaceChildren() {
     Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
     final Function1<Path, CharSequence> _function = new Function1<Path, CharSequence>() {
+      @Override
       public CharSequence apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");
@@ -170,6 +175,7 @@ public class JavaIoFileSystemTest {
     Assert.assertTrue(_exists);
     Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
     final Function1<Path, CharSequence> _function_1 = new Function1<Path, CharSequence>() {
+      @Override
       public CharSequence apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");

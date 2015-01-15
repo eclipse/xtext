@@ -33,6 +33,7 @@ public class CommentInfo extends LeafInfo {
     return _and;
   }
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Comment: \"");

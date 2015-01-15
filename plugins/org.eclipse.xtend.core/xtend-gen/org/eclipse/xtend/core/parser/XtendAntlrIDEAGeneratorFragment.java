@@ -18,6 +18,7 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFrag
  */
 @SuppressWarnings("all")
 public class XtendAntlrIDEAGeneratorFragment extends XtextAntlrIDEAGeneratorFragment {
+  @Override
   protected void addLocalBindings(final Binder binder) {
     super.addLocalBindings(binder);
     AnnotatedBindingBuilder<PsiAntlrGrammarGenerator> _bind = binder.<PsiAntlrGrammarGenerator>bind(PsiAntlrGrammarGenerator.class);

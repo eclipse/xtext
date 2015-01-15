@@ -135,6 +135,7 @@ public class TestBatchCompiler {
   public static void afterClass() {
     try {
       final Procedure1<File> _function = new Procedure1<File>() {
+        @Override
         public void apply(final File it) {
           boolean _exists = it.exists();
           if (_exists) {
@@ -218,6 +219,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -225,6 +227,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src", _string);
@@ -237,6 +240,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
       Path _get_1 = keyPaths.get(1);
       final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src-gen", _string);
@@ -282,6 +286,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -289,6 +294,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src", _string);
@@ -301,6 +307,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
       Path _get_1 = keyPaths.get(1);
       final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src-gen", _string);
@@ -346,6 +353,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -353,6 +361,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir1/src", _string);
@@ -365,6 +374,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
       Path _get_1 = keyPaths.get(1);
       final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src-gen", _string);
@@ -410,6 +420,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -417,6 +428,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src", _string);
@@ -429,6 +441,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
       Path _get_1 = keyPaths.get(1);
       final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir1/src-gen", _string);
@@ -474,6 +487,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -481,6 +495,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir1/dir1a/src", _string);
@@ -493,6 +508,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
       Path _get_1 = keyPaths.get(1);
       final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir3/dir3a/src-gen", _string);
@@ -542,6 +558,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -549,6 +566,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir2/dir3/dir4/src1", _string);
@@ -561,6 +579,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get, _function_1);
       Path _get_1 = keyPaths.get(1);
       final Procedure1<Path> _function_2 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir2/dir3/src2", _string);
@@ -573,6 +592,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get_1, _function_2);
       Path _get_2 = keyPaths.get(2);
       final Procedure1<Path> _function_3 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/dir2/src3", _string);
@@ -585,6 +605,7 @@ public class TestBatchCompiler {
       ObjectExtensions.<Path>operator_doubleArrow(_get_2, _function_3);
       Path _get_3 = keyPaths.get(3);
       final Procedure1<Path> _function_4 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1/src4", _string);
@@ -624,6 +645,7 @@ public class TestBatchCompiler {
       Map<Path, Path> _sourceFolderMappings_1 = project.getSourceFolderMappings();
       Set<Path> _keySet = _sourceFolderMappings_1.keySet();
       final Function1<Path, String> _function = new Function1<Path, String>() {
+        @Override
         public String apply(final Path it) {
           return it.getLastSegment();
         }
@@ -631,6 +653,7 @@ public class TestBatchCompiler {
       final List<Path> keyPaths = IterableExtensions.<Path, String>sortBy(_keySet, _function);
       Path _get = keyPaths.get(0);
       final Procedure1<Path> _function_1 = new Procedure1<Path>() {
+        @Override
         public void apply(final Path it) {
           String _string = it.toString();
           Assert.assertEquals("/prj1", _string);
@@ -762,6 +785,7 @@ public class TestBatchCompiler {
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -780,6 +804,7 @@ public class TestBatchCompiler {
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -801,6 +826,7 @@ public class TestBatchCompiler {
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -824,6 +850,7 @@ public class TestBatchCompiler {
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -833,6 +860,7 @@ public class TestBatchCompiler {
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith("._trace");
       }
@@ -848,6 +876,7 @@ public class TestBatchCompiler {
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -857,6 +886,7 @@ public class TestBatchCompiler {
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith("._trace");
       }
@@ -872,6 +902,7 @@ public class TestBatchCompiler {
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -881,6 +912,7 @@ public class TestBatchCompiler {
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".xtendbin");
       }
@@ -896,6 +928,7 @@ public class TestBatchCompiler {
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -905,6 +938,7 @@ public class TestBatchCompiler {
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
     final FilenameFilter _function_1 = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".xtendbin");
       }
@@ -939,9 +973,11 @@ public class TestBatchCompiler {
     Assert.assertTrue("plain-folder/src/ is not a symlink", _not_1);
     WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRootPath);
     final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+      @Override
       public void apply(final WorkspaceConfig it) {
         ProjectConfig _projectConfig = new ProjectConfig("plain-folder");
         final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
+          @Override
           public void apply(final ProjectConfig it) {
             it.addSourceFolderMapping("src", "bin");
             it.addSourceFolderMapping("linked-src", "bin");
@@ -951,6 +987,7 @@ public class TestBatchCompiler {
         it.addProjectConfig(_doubleArrow);
         ProjectConfig _projectConfig_1 = new ProjectConfig("linked-folder");
         final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
+          @Override
           public void apply(final ProjectConfig it) {
             it.addSourceFolderMapping("src", "bin");
           }
@@ -973,6 +1010,7 @@ public class TestBatchCompiler {
     Assert.assertTrue(_exists);
     File _file_4 = new File(customOutput);
     final FilenameFilter _function_1 = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith(".java");
       }
@@ -982,6 +1020,7 @@ public class TestBatchCompiler {
     Assert.assertEquals(2, _size);
     File _file_5 = new File(customOutput);
     final FilenameFilter _function_2 = new FilenameFilter() {
+      @Override
       public boolean accept(final File dir, final String name) {
         return name.endsWith("._trace");
       }

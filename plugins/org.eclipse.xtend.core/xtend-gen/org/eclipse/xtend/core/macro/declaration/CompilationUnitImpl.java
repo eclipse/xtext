@@ -208,14 +208,17 @@ import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 @SuppressWarnings("all")
 public class CompilationUnitImpl implements CompilationUnit {
+  @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
     return CollectionLiterals.<AnnotationReference>emptyList();
   }
   
+  @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     return null;
   }
   
+  @Override
   public String getSimpleName() {
     Resource _eResource = this.xtendFile.eResource();
     URI _uRI = _eResource.getURI();
@@ -223,21 +226,26 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _lastSegment.toString();
   }
   
+  @Override
   public CompilationUnit getCompilationUnit() {
     return this;
   }
   
+  @Override
   public String getDocComment() {
     throw new UnsupportedOperationException("Auto-generated function stub");
   }
   
+  @Override
   public String getPackageName() {
     return this.xtendFile.getPackage();
   }
   
+  @Override
   public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
     EList<XtendTypeDeclaration> _xtendTypes = this.xtendFile.getXtendTypes();
     final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
+      @Override
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
         return CompilationUnitImpl.this.toXtendTypeDeclaration(it);
       }
@@ -390,6 +398,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return new ChangeListenerAddingFileSystemSupport(_uRI, this.fileSystemSupport, this.resourceChangeRegistry);
   }
   
+  @Override
   public Path getFilePath() {
     Resource _eResource = this.xtendFile.eResource();
     return this.fileSystemSupport.getPath(_eResource);
@@ -477,9 +486,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public ResolvedMethod toResolvedMethod(final IResolvedOperation delegate) {
     final Function1<IResolvedOperation, ResolvedMethodImpl> _function = new Function1<IResolvedOperation, ResolvedMethodImpl>() {
+      @Override
       public ResolvedMethodImpl apply(final IResolvedOperation it) {
         ResolvedMethodImpl _resolvedMethodImpl = new ResolvedMethodImpl();
         final Procedure1<ResolvedMethodImpl> _function = new Procedure1<ResolvedMethodImpl>() {
+          @Override
           public void apply(final ResolvedMethodImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -493,9 +504,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public ResolvedConstructor toResolvedConstructor(final IResolvedConstructor delegate) {
     final Function1<IResolvedConstructor, ResolvedConstructorImpl> _function = new Function1<IResolvedConstructor, ResolvedConstructorImpl>() {
+      @Override
       public ResolvedConstructorImpl apply(final IResolvedConstructor it) {
         ResolvedConstructorImpl _resolvedConstructorImpl = new ResolvedConstructorImpl();
         final Procedure1<ResolvedConstructorImpl> _function = new Procedure1<ResolvedConstructorImpl>() {
+          @Override
           public void apply(final ResolvedConstructorImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -509,6 +522,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Type toType(final JvmType delegate) {
     final Function1<JvmType, Type> _function = new Function1<JvmType, Type>() {
+      @Override
       public Type apply(final JvmType it) {
         Type _switchResult = null;
         boolean _matched = false;
@@ -529,6 +543,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             VoidTypeImpl _voidTypeImpl = new VoidTypeImpl();
             final Procedure1<VoidTypeImpl> _function = new Procedure1<VoidTypeImpl>() {
+              @Override
               public void apply(final VoidTypeImpl it) {
                 it.setDelegate(((JvmVoid)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -542,6 +557,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             PrimitiveTypeImpl _primitiveTypeImpl = new PrimitiveTypeImpl();
             final Procedure1<PrimitiveTypeImpl> _function = new Procedure1<PrimitiveTypeImpl>() {
+              @Override
               public void apply(final PrimitiveTypeImpl it) {
                 it.setDelegate(((JvmPrimitiveType)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -558,6 +574,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
     final Function1<JvmDeclaredType, TypeDeclaration> _function = new Function1<JvmDeclaredType, TypeDeclaration>() {
+      @Override
       public TypeDeclaration apply(final JvmDeclaredType it) {
         JvmTypeDeclarationImpl<? extends JvmDeclaredType> _switchResult = null;
         boolean _matched = false;
@@ -571,6 +588,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               if (_isBelongedToCompilationUnit) {
                 MutableJvmInterfaceDeclarationImpl _mutableJvmInterfaceDeclarationImpl = new MutableJvmInterfaceDeclarationImpl();
                 final Procedure1<MutableJvmInterfaceDeclarationImpl> _function = new Procedure1<MutableJvmInterfaceDeclarationImpl>() {
+                  @Override
                   public void apply(final MutableJvmInterfaceDeclarationImpl it) {
                     it.setDelegate(((JvmGenericType)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
@@ -580,6 +598,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               } else {
                 JvmInterfaceDeclarationImpl _jvmInterfaceDeclarationImpl = new JvmInterfaceDeclarationImpl();
                 final Procedure1<JvmInterfaceDeclarationImpl> _function_1 = new Procedure1<JvmInterfaceDeclarationImpl>() {
+                  @Override
                   public void apply(final JvmInterfaceDeclarationImpl it) {
                     it.setDelegate(((JvmGenericType)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
@@ -599,6 +618,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isBelongedToCompilationUnit) {
               MutableJvmClassDeclarationImpl _mutableJvmClassDeclarationImpl = new MutableJvmClassDeclarationImpl();
               final Procedure1<MutableJvmClassDeclarationImpl> _function = new Procedure1<MutableJvmClassDeclarationImpl>() {
+                @Override
                 public void apply(final MutableJvmClassDeclarationImpl it) {
                   it.setDelegate(((JvmGenericType)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -608,6 +628,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               JvmClassDeclarationImpl _jvmClassDeclarationImpl = new JvmClassDeclarationImpl();
               final Procedure1<JvmClassDeclarationImpl> _function_1 = new Procedure1<JvmClassDeclarationImpl>() {
+                @Override
                 public void apply(final JvmClassDeclarationImpl it) {
                   it.setDelegate(((JvmGenericType)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -626,6 +647,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isBelongedToCompilationUnit) {
               MutableJvmAnnotationTypeDeclarationImpl _mutableJvmAnnotationTypeDeclarationImpl = new MutableJvmAnnotationTypeDeclarationImpl();
               final Procedure1<MutableJvmAnnotationTypeDeclarationImpl> _function = new Procedure1<MutableJvmAnnotationTypeDeclarationImpl>() {
+                @Override
                 public void apply(final MutableJvmAnnotationTypeDeclarationImpl it) {
                   it.setDelegate(((JvmAnnotationType)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -635,6 +657,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               JvmAnnotationTypeDeclarationImpl _jvmAnnotationTypeDeclarationImpl = new JvmAnnotationTypeDeclarationImpl();
               final Procedure1<JvmAnnotationTypeDeclarationImpl> _function_1 = new Procedure1<JvmAnnotationTypeDeclarationImpl>() {
+                @Override
                 public void apply(final JvmAnnotationTypeDeclarationImpl it) {
                   it.setDelegate(((JvmAnnotationType)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -653,6 +676,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isBelongedToCompilationUnit) {
               MutableJvmEnumerationTypeDeclarationImpl _mutableJvmEnumerationTypeDeclarationImpl = new MutableJvmEnumerationTypeDeclarationImpl();
               final Procedure1<MutableJvmEnumerationTypeDeclarationImpl> _function = new Procedure1<MutableJvmEnumerationTypeDeclarationImpl>() {
+                @Override
                 public void apply(final MutableJvmEnumerationTypeDeclarationImpl it) {
                   it.setDelegate(((JvmEnumerationType)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -662,6 +686,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               JvmEnumerationTypeDeclarationImpl _jvmEnumerationTypeDeclarationImpl = new JvmEnumerationTypeDeclarationImpl();
               final Procedure1<JvmEnumerationTypeDeclarationImpl> _function_1 = new Procedure1<JvmEnumerationTypeDeclarationImpl>() {
+                @Override
                 public void apply(final JvmEnumerationTypeDeclarationImpl it) {
                   it.setDelegate(((JvmEnumerationType)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -680,12 +705,14 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, JvmTypeParameterDeclarationImpl>() {
+      @Override
       public JvmTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         JvmTypeParameterDeclarationImpl _xifexpression = null;
         boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
         if (_isBelongedToCompilationUnit) {
           MutableJvmTypeParameterDeclarationImpl _mutableJvmTypeParameterDeclarationImpl = new MutableJvmTypeParameterDeclarationImpl();
           final Procedure1<MutableJvmTypeParameterDeclarationImpl> _function = new Procedure1<MutableJvmTypeParameterDeclarationImpl>() {
+            @Override
             public void apply(final MutableJvmTypeParameterDeclarationImpl it) {
               it.setDelegate(delegate);
               it.setCompilationUnit(CompilationUnitImpl.this);
@@ -695,6 +722,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         } else {
           JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = new JvmTypeParameterDeclarationImpl();
           final Procedure1<JvmTypeParameterDeclarationImpl> _function_1 = new Procedure1<JvmTypeParameterDeclarationImpl>() {
+            @Override
             public void apply(final JvmTypeParameterDeclarationImpl it) {
               it.setDelegate(delegate);
               it.setCompilationUnit(CompilationUnitImpl.this);
@@ -710,12 +738,14 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
     final Function1<JvmFormalParameter, JvmParameterDeclarationImpl> _function = new Function1<JvmFormalParameter, JvmParameterDeclarationImpl>() {
+      @Override
       public JvmParameterDeclarationImpl apply(final JvmFormalParameter it) {
         JvmParameterDeclarationImpl _xifexpression = null;
         boolean _isBelongedToCompilationUnit = CompilationUnitImpl.this.isBelongedToCompilationUnit(delegate);
         if (_isBelongedToCompilationUnit) {
           MutableJvmParameterDeclarationImpl _mutableJvmParameterDeclarationImpl = new MutableJvmParameterDeclarationImpl();
           final Procedure1<MutableJvmParameterDeclarationImpl> _function = new Procedure1<MutableJvmParameterDeclarationImpl>() {
+            @Override
             public void apply(final MutableJvmParameterDeclarationImpl it) {
               it.setDelegate(delegate);
               it.setCompilationUnit(CompilationUnitImpl.this);
@@ -725,6 +755,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         } else {
           JvmParameterDeclarationImpl _jvmParameterDeclarationImpl = new JvmParameterDeclarationImpl();
           final Procedure1<JvmParameterDeclarationImpl> _function_1 = new Procedure1<JvmParameterDeclarationImpl>() {
+            @Override
             public void apply(final JvmParameterDeclarationImpl it) {
               it.setDelegate(delegate);
               it.setCompilationUnit(CompilationUnitImpl.this);
@@ -740,6 +771,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
     final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
+      @Override
       public MemberDeclaration apply(final JvmMember it) {
         MemberDeclaration _switchResult = null;
         boolean _matched = false;
@@ -760,6 +792,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               if (_isBelongedToCompilationUnit) {
                 MutableJvmAnnotationTypeElementDeclarationImpl _mutableJvmAnnotationTypeElementDeclarationImpl = new MutableJvmAnnotationTypeElementDeclarationImpl();
                 final Procedure1<MutableJvmAnnotationTypeElementDeclarationImpl> _function = new Procedure1<MutableJvmAnnotationTypeElementDeclarationImpl>() {
+                  @Override
                   public void apply(final MutableJvmAnnotationTypeElementDeclarationImpl it) {
                     it.setDelegate(((JvmOperation)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
@@ -769,6 +802,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               } else {
                 JvmAnnotationTypeElementDeclarationImpl _jvmAnnotationTypeElementDeclarationImpl = new JvmAnnotationTypeElementDeclarationImpl();
                 final Procedure1<JvmAnnotationTypeElementDeclarationImpl> _function_1 = new Procedure1<JvmAnnotationTypeElementDeclarationImpl>() {
+                  @Override
                   public void apply(final JvmAnnotationTypeElementDeclarationImpl it) {
                     it.setDelegate(((JvmOperation)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
@@ -783,6 +817,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               if (_isBelongedToCompilationUnit_1) {
                 MutableJvmMethodDeclarationImpl _mutableJvmMethodDeclarationImpl = new MutableJvmMethodDeclarationImpl();
                 final Procedure1<MutableJvmMethodDeclarationImpl> _function_2 = new Procedure1<MutableJvmMethodDeclarationImpl>() {
+                  @Override
                   public void apply(final MutableJvmMethodDeclarationImpl it) {
                     it.setDelegate(((JvmOperation)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
@@ -792,6 +827,7 @@ public class CompilationUnitImpl implements CompilationUnit {
               } else {
                 JvmMethodDeclarationImpl _jvmMethodDeclarationImpl = new JvmMethodDeclarationImpl();
                 final Procedure1<JvmMethodDeclarationImpl> _function_3 = new Procedure1<JvmMethodDeclarationImpl>() {
+                  @Override
                   public void apply(final JvmMethodDeclarationImpl it) {
                     it.setDelegate(((JvmOperation)delegate));
                     it.setCompilationUnit(CompilationUnitImpl.this);
@@ -812,6 +848,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isBelongedToCompilationUnit) {
               MutableJvmConstructorDeclarationImpl _mutableJvmConstructorDeclarationImpl = new MutableJvmConstructorDeclarationImpl();
               final Procedure1<MutableJvmConstructorDeclarationImpl> _function = new Procedure1<MutableJvmConstructorDeclarationImpl>() {
+                @Override
                 public void apply(final MutableJvmConstructorDeclarationImpl it) {
                   it.setDelegate(((JvmConstructor)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -821,6 +858,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               JvmConstructorDeclarationImpl _jvmConstructorDeclarationImpl = new JvmConstructorDeclarationImpl();
               final Procedure1<JvmConstructorDeclarationImpl> _function_1 = new Procedure1<JvmConstructorDeclarationImpl>() {
+                @Override
                 public void apply(final JvmConstructorDeclarationImpl it) {
                   it.setDelegate(((JvmConstructor)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -839,6 +877,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isBelongedToCompilationUnit) {
               MutableJvmEnumerationValueDeclarationImpl _mutableJvmEnumerationValueDeclarationImpl = new MutableJvmEnumerationValueDeclarationImpl();
               final Procedure1<MutableJvmEnumerationValueDeclarationImpl> _function = new Procedure1<MutableJvmEnumerationValueDeclarationImpl>() {
+                @Override
                 public void apply(final MutableJvmEnumerationValueDeclarationImpl it) {
                   it.setDelegate(((JvmEnumerationLiteral)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -848,6 +887,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               JvmEnumerationValueDeclarationImpl _jvmEnumerationValueDeclarationImpl = new JvmEnumerationValueDeclarationImpl();
               final Procedure1<JvmEnumerationValueDeclarationImpl> _function_1 = new Procedure1<JvmEnumerationValueDeclarationImpl>() {
+                @Override
                 public void apply(final JvmEnumerationValueDeclarationImpl it) {
                   it.setDelegate(((JvmEnumerationLiteral)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -866,6 +906,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (_isBelongedToCompilationUnit) {
               MutableJvmFieldDeclarationImpl _mutableJvmFieldDeclarationImpl = new MutableJvmFieldDeclarationImpl();
               final Procedure1<MutableJvmFieldDeclarationImpl> _function = new Procedure1<MutableJvmFieldDeclarationImpl>() {
+                @Override
                 public void apply(final MutableJvmFieldDeclarationImpl it) {
                   it.setDelegate(((JvmField)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -875,6 +916,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               JvmFieldDeclarationImpl _jvmFieldDeclarationImpl = new JvmFieldDeclarationImpl();
               final Procedure1<JvmFieldDeclarationImpl> _function_1 = new Procedure1<JvmFieldDeclarationImpl>() {
+                @Override
                 public void apply(final JvmFieldDeclarationImpl it) {
                   it.setDelegate(((JvmField)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -899,6 +941,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public NamedElement toNamedElement(final JvmIdentifiableElement delegate) {
     final Function1<JvmIdentifiableElement, Declaration> _function = new Function1<JvmIdentifiableElement, Declaration>() {
+      @Override
       public Declaration apply(final JvmIdentifiableElement it) {
         Declaration _switchResult = null;
         boolean _matched = false;
@@ -931,6 +974,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Element toJvmElement(final EObject delegate) {
     final Function1<EObject, Element> _function = new Function1<EObject, Element>() {
+      @Override
       public Element apply(final EObject it) {
         Element _switchResult = null;
         boolean _matched = false;
@@ -984,6 +1028,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             InferredTypeReferenceImpl _inferredTypeReferenceImpl = new InferredTypeReferenceImpl();
             final Procedure1<InferredTypeReferenceImpl> _function = new Procedure1<InferredTypeReferenceImpl>() {
+              @Override
               public void apply(final InferredTypeReferenceImpl it) {
                 it.setDelegate(((XComputedTypeReferenceImplCustom)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1016,6 +1061,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       }
       TypeReferenceImpl _typeReferenceImpl = new TypeReferenceImpl();
       final Procedure1<TypeReferenceImpl> _function = new Procedure1<TypeReferenceImpl>() {
+        @Override
         public void apply(final TypeReferenceImpl it) {
           it.setDelegate(delegate);
           it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1029,6 +1075,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> toXtendTypeDeclaration(final XtendTypeDeclaration delegate) {
     final Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
+      @Override
       public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
         XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
         boolean _matched = false;
@@ -1037,6 +1084,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendClassDeclarationImpl _xtendClassDeclarationImpl = new XtendClassDeclarationImpl();
             final Procedure1<XtendClassDeclarationImpl> _function = new Procedure1<XtendClassDeclarationImpl>() {
+              @Override
               public void apply(final XtendClassDeclarationImpl it) {
                 it.setDelegate(((XtendClass)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1050,6 +1098,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendInterfaceDeclarationImpl _xtendInterfaceDeclarationImpl = new XtendInterfaceDeclarationImpl();
             final Procedure1<XtendInterfaceDeclarationImpl> _function = new Procedure1<XtendInterfaceDeclarationImpl>() {
+              @Override
               public void apply(final XtendInterfaceDeclarationImpl it) {
                 it.setDelegate(((XtendInterface)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1063,6 +1112,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendAnnotationTypeDeclarationImpl _xtendAnnotationTypeDeclarationImpl = new XtendAnnotationTypeDeclarationImpl();
             final Procedure1<XtendAnnotationTypeDeclarationImpl> _function = new Procedure1<XtendAnnotationTypeDeclarationImpl>() {
+              @Override
               public void apply(final XtendAnnotationTypeDeclarationImpl it) {
                 it.setDelegate(((XtendAnnotationType)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1076,6 +1126,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendEnumerationDeclarationImpl _xtendEnumerationDeclarationImpl = new XtendEnumerationDeclarationImpl();
             final Procedure1<XtendEnumerationDeclarationImpl> _function = new Procedure1<XtendEnumerationDeclarationImpl>() {
+              @Override
               public void apply(final XtendEnumerationDeclarationImpl it) {
                 it.setDelegate(((XtendEnum)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1092,6 +1143,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public MemberDeclaration toXtendMemberDeclaration(final XtendMember delegate) {
     final Function1<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>>() {
+      @Override
       public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendMember it) {
         XtendMemberDeclarationImpl<? extends XtendMember> _switchResult = null;
         boolean _matched = false;
@@ -1106,6 +1158,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendMethodDeclarationImpl _xtendMethodDeclarationImpl = new XtendMethodDeclarationImpl();
             final Procedure1<XtendMethodDeclarationImpl> _function = new Procedure1<XtendMethodDeclarationImpl>() {
+              @Override
               public void apply(final XtendMethodDeclarationImpl it) {
                 it.setDelegate(((XtendFunction)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1119,6 +1172,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendConstructorDeclarationImpl _xtendConstructorDeclarationImpl = new XtendConstructorDeclarationImpl();
             final Procedure1<XtendConstructorDeclarationImpl> _function = new Procedure1<XtendConstructorDeclarationImpl>() {
+              @Override
               public void apply(final XtendConstructorDeclarationImpl it) {
                 it.setDelegate(((XtendConstructor)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1135,6 +1189,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             if ((_eContainer instanceof XtendAnnotationType)) {
               XtendAnnotationTypeElementDeclarationImpl _xtendAnnotationTypeElementDeclarationImpl = new XtendAnnotationTypeElementDeclarationImpl();
               final Procedure1<XtendAnnotationTypeElementDeclarationImpl> _function = new Procedure1<XtendAnnotationTypeElementDeclarationImpl>() {
+                @Override
                 public void apply(final XtendAnnotationTypeElementDeclarationImpl it) {
                   it.setDelegate(((XtendField)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1144,6 +1199,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             } else {
               XtendFieldDeclarationImpl _xtendFieldDeclarationImpl = new XtendFieldDeclarationImpl();
               final Procedure1<XtendFieldDeclarationImpl> _function_1 = new Procedure1<XtendFieldDeclarationImpl>() {
+                @Override
                 public void apply(final XtendFieldDeclarationImpl it) {
                   it.setDelegate(((XtendField)delegate));
                   it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1159,6 +1215,7 @@ public class CompilationUnitImpl implements CompilationUnit {
             _matched=true;
             XtendEnumerationValueDeclarationImpl _xtendEnumerationValueDeclarationImpl = new XtendEnumerationValueDeclarationImpl();
             final Procedure1<XtendEnumerationValueDeclarationImpl> _function = new Procedure1<XtendEnumerationValueDeclarationImpl>() {
+              @Override
               public void apply(final XtendEnumerationValueDeclarationImpl it) {
                 it.setDelegate(((XtendEnumLiteral)delegate));
                 it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1175,9 +1232,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public XtendParameterDeclarationImpl toXtendParameterDeclaration(final XtendParameter delegate) {
     final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = new Function1<XtendParameter, XtendParameterDeclarationImpl>() {
+      @Override
       public XtendParameterDeclarationImpl apply(final XtendParameter it) {
         XtendParameterDeclarationImpl _xtendParameterDeclarationImpl = new XtendParameterDeclarationImpl();
         final Procedure1<XtendParameterDeclarationImpl> _function = new Procedure1<XtendParameterDeclarationImpl>() {
+          @Override
           public void apply(final XtendParameterDeclarationImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1191,9 +1250,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
+      @Override
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         XtendTypeParameterDeclarationImpl _xtendTypeParameterDeclarationImpl = new XtendTypeParameterDeclarationImpl();
         final Procedure1<XtendTypeParameterDeclarationImpl> _function = new Procedure1<XtendTypeParameterDeclarationImpl>() {
+          @Override
           public void apply(final XtendTypeParameterDeclarationImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1207,6 +1268,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Element toXtendElement(final EObject delegate) {
     final Function1<EObject, Element> _function = new Function1<EObject, Element>() {
+      @Override
       public Element apply(final EObject it) {
         Element _switchResult = null;
         boolean _matched = false;
@@ -1297,9 +1359,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public Expression toExpression(final XExpression delegate) {
     final Function1<XExpression, ExpressionImpl> _function = new Function1<XExpression, ExpressionImpl>() {
+      @Override
       public ExpressionImpl apply(final XExpression it) {
         ExpressionImpl _expressionImpl = new ExpressionImpl();
         final Procedure1<ExpressionImpl> _function = new Procedure1<ExpressionImpl>() {
+          @Override
           public void apply(final ExpressionImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1314,6 +1378,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public void setCompilationStrategy(final JvmExecutable executable, final CompilationStrategy compilationStrategy) {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+      @Override
       public void apply(final ITreeAppendable it) {
         final CompilationContextImpl context = new CompilationContextImpl(it, CompilationUnitImpl.this);
         CharSequence _compile = compilationStrategy.compile(context);
@@ -1336,6 +1401,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public void setCompilationStrategy(final JvmField field, final CompilationStrategy compilationStrategy) {
     this.checkCanceled();
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+      @Override
       public void apply(final ITreeAppendable it) {
         final CompilationContextImpl context = new CompilationContextImpl(it, CompilationUnitImpl.this);
         CharSequence _compile = compilationStrategy.compile(context);
@@ -1352,9 +1418,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public AnnotationReference toAnnotationReference(final XAnnotation delegate) {
     final Function1<XAnnotation, XtendAnnotationReferenceImpl> _function = new Function1<XAnnotation, XtendAnnotationReferenceImpl>() {
+      @Override
       public XtendAnnotationReferenceImpl apply(final XAnnotation it) {
         XtendAnnotationReferenceImpl _xtendAnnotationReferenceImpl = new XtendAnnotationReferenceImpl();
         final Procedure1<XtendAnnotationReferenceImpl> _function = new Procedure1<XtendAnnotationReferenceImpl>() {
+          @Override
           public void apply(final XtendAnnotationReferenceImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1368,9 +1436,11 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public AnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
     final Function1<JvmAnnotationReference, JvmAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference, JvmAnnotationReferenceImpl>() {
+      @Override
       public JvmAnnotationReferenceImpl apply(final JvmAnnotationReference it) {
         JvmAnnotationReferenceImpl _jvmAnnotationReferenceImpl = new JvmAnnotationReferenceImpl();
         final Procedure1<JvmAnnotationReferenceImpl> _function = new Procedure1<JvmAnnotationReferenceImpl>() {
+          @Override
           public void apply(final JvmAnnotationReferenceImpl it) {
             it.setDelegate(delegate);
             it.setCompilationUnit(CompilationUnitImpl.this);
@@ -1420,6 +1490,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         EList<EObject> _values = ((JvmCustomAnnotationValue)value).getValues();
         Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
         final Function1<XExpression, Object> _function = new Function1<XExpression, Object>() {
+          @Override
           public Object apply(final XExpression it) {
             return CompilationUnitImpl.this.evaluate(it, expectedType);
           }
@@ -1434,6 +1505,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         _matched=true;
         EList<JvmTypeReference> _values = ((JvmTypeAnnotationValue)value).getValues();
         final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
+          @Override
           public TypeReference apply(final JvmTypeReference it) {
             return CompilationUnitImpl.this.toTypeReference(it);
           }
@@ -1447,6 +1519,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         _matched=true;
         EList<JvmAnnotationReference> _values = ((JvmAnnotationAnnotationValue)value).getValues();
         final Function1<JvmAnnotationReference, AnnotationReference> _function = new Function1<JvmAnnotationReference, AnnotationReference>() {
+          @Override
           public AnnotationReference apply(final JvmAnnotationReference it) {
             return CompilationUnitImpl.this.toAnnotationReference(it);
           }
@@ -1502,6 +1575,7 @@ public class CompilationUnitImpl implements CompilationUnit {
         _matched=true;
         EList<JvmEnumerationLiteral> _values = ((JvmEnumAnnotationValue)value).getValues();
         final Function1<JvmEnumerationLiteral, NamedElement> _function = new Function1<JvmEnumerationLiteral, NamedElement>() {
+          @Override
           public NamedElement apply(final JvmEnumerationLiteral it) {
             return CompilationUnitImpl.this.toNamedElement(it);
           }
@@ -1841,10 +1915,12 @@ public class CompilationUnitImpl implements CompilationUnit {
     {
       AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
       final Procedure1<AnnotationReferenceBuildContextImpl> _function = new Procedure1<AnnotationReferenceBuildContextImpl>() {
+        @Override
         public void apply(final AnnotationReferenceBuildContextImpl it) {
           it.setCompilationUnit(CompilationUnitImpl.this);
           JvmAnnotationReference _createJvmAnnotationReference = CompilationUnitImpl.this.typesFactory.createJvmAnnotationReference();
           final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+            @Override
             public void apply(final JvmAnnotationReference reference) {
               JvmType _annotationType = annotation.getAnnotationType();
               reference.setAnnotation(((JvmAnnotationType) _annotationType));

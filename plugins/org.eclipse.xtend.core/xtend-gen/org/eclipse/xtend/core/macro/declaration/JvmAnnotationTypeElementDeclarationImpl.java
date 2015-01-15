@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 
 @SuppressWarnings("all")
 public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements AnnotationTypeElementDeclaration {
+  @Override
   public Object getDefaultValue() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
@@ -31,6 +32,7 @@ public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclaratio
     return _compilationUnit.translateAnnotationValue(_defaultValue, _isArray);
   }
   
+  @Override
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
@@ -38,6 +40,7 @@ public class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclaratio
     return _compilationUnit.toTypeReference(_returnType);
   }
   
+  @Override
   public Expression getDefaultValueExpression() {
     return null;
   }

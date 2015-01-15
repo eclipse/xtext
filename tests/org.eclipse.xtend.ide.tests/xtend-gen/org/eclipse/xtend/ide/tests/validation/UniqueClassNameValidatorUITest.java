@@ -225,6 +225,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   }
   
   @Before
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("first.p384008");
@@ -235,6 +236,7 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   }
   
   @After
+  @Override
   public void tearDown() throws Exception {
     WorkbenchTestHelper.deleteProject(this.first);
     WorkbenchTestHelper.deleteProject(this.second);

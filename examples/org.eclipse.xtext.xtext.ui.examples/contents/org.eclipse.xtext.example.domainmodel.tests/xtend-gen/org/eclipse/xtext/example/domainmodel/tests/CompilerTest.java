@@ -55,6 +55,7 @@ public class CompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -102,6 +103,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass("Bar");
@@ -135,6 +137,7 @@ public class CompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");

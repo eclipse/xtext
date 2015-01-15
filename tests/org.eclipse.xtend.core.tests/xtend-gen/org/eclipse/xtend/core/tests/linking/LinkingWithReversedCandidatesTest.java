@@ -24,24 +24,28 @@ import org.junit.runner.RunWith;
 public class LinkingWithReversedCandidatesTest extends LinkingTest {
   @Ignore("TODO")
   @Test
+  @Override
   public void testOverloadedWithLambdaArgument_01() throws Exception {
     super.testOverloadedWithLambdaArgument_01();
   }
   
   @Ignore("TODO")
   @Test
+  @Override
   public void testExtensionMethodCall_Bug351827_01() throws Exception {
     super.testExtensionMethodCall_Bug351827_01();
   }
   
   @Ignore("TODO")
   @Test
+  @Override
   public void testExtensionMethodCall_Bug351827_02() throws Exception {
     super.testExtensionMethodCall_Bug351827_02();
   }
   
   @Ignore("TODO")
   @Test
+  @Override
   public void testExtensionMethodCall_Bug351827_04() throws Exception {
     super.testExtensionMethodCall_Bug351827_04();
   }

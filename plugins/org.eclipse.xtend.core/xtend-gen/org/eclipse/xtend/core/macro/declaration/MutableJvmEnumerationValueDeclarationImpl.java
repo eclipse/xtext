@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationValueDeclarationImpl implements MutableEnumerationValueDeclaration {
+  @Override
   public void markAsRead() {
     this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -25,6 +26,7 @@ public class MutableJvmEnumerationValueDeclarationImpl extends JvmEnumerationVal
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
+  @Override
   public MutableEnumerationTypeDeclaration getDeclaringType() {
     EnumerationTypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableEnumerationTypeDeclaration) _declaringType);

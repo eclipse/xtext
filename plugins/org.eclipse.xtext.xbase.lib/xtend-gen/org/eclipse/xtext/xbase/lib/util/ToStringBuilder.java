@@ -86,6 +86,7 @@ public final class ToStringBuilder {
       return this;
     }
     
+    @Override
     public String toString() {
       return this.builder.toString();
     }
@@ -155,6 +156,7 @@ public final class ToStringBuilder {
     Class<?> _class = this.instance.getClass();
     Field[] _declaredFields = _class.getDeclaredFields();
     final Procedure1<Field> _function = new Procedure1<Field>() {
+      @Override
       public void apply(final Field it) {
         ToStringBuilder.this.addField(it);
       }
@@ -172,6 +174,7 @@ public final class ToStringBuilder {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
     final Procedure1<Field> _function = new Procedure1<Field>() {
+      @Override
       public void apply(final Field it) {
         ToStringBuilder.this.addField(it);
       }
@@ -189,6 +192,7 @@ public final class ToStringBuilder {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
     final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
+      @Override
       public Boolean apply(final Field it) {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, fieldName));
@@ -260,6 +264,7 @@ public final class ToStringBuilder {
   /**
    * @return the String representation of the processed object
    */
+  @Override
   public String toString() {
     boolean _startProcessing = ToStringBuilder._toStringContext.startProcessing(this.instance);
     boolean _not = (!_startProcessing);

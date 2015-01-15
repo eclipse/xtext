@@ -30,6 +30,7 @@ public class XtendTaskTagProvider implements ITaskTagProvider {
   @Inject
   private IPreferenceValuesProvider preferenceValuesProvider;
   
+  @Override
   public TaskTags getTaskTags(final Resource resource) {
     TaskTags _xblockexpression = null;
     {
@@ -43,6 +44,7 @@ public class XtendTaskTagProvider implements ITaskTagProvider {
       final List<TaskTag> tags = PreferenceTaskTagProvider.parseTags(namePref, prioritiesPref);
       TaskTags _taskTags = new TaskTags();
       final Procedure1<TaskTags> _function = new Procedure1<TaskTags>() {
+        @Override
         public void apply(final TaskTags it) {
           List<TaskTag> _taskTags = it.getTaskTags();
           Iterables.<TaskTag>addAll(_taskTags, tags);

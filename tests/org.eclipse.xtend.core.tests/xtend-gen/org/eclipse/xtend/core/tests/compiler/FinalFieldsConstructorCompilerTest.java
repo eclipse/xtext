@@ -58,10 +58,12 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+            @Override
             public Boolean apply(final Constructor<?> it) {
               Class<?>[] _parameterTypes = it.getParameterTypes();
               List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
@@ -103,10 +105,12 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+            @Override
             public Boolean apply(final Constructor<?> it) {
               Class<?>[] _parameterTypes = it.getParameterTypes();
               List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
@@ -118,6 +122,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
           Class<?> _compiledClass_1 = it.getCompiledClass();
           Constructor<?>[] _declaredConstructors_1 = _compiledClass_1.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function_1 = new Function1<Constructor<?>, Boolean>() {
+            @Override
             public Boolean apply(final Constructor<?> it) {
               Class<?>[] _parameterTypes = it.getParameterTypes();
               return Boolean.valueOf(((List<Class<?>>)Conversions.doWrapArray(_parameterTypes)).isEmpty());
@@ -150,6 +155,7 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           String _singleGeneratedCode = it.getSingleGeneratedCode();
           boolean _contains = _singleGeneratedCode.contains("C(final T a)");
@@ -291,10 +297,12 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+            @Override
             public Boolean apply(final Constructor<?> it) {
               Class<?>[] _parameterTypes = it.getParameterTypes();
               List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
@@ -345,10 +353,12 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+            @Override
             public Boolean apply(final Constructor<?> it) {
               Class<?>[] _parameterTypes = it.getParameterTypes();
               List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
@@ -387,10 +397,12 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
           final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+            @Override
             public Boolean apply(final Constructor<?> it) {
               Class<?>[] _parameterTypes = it.getParameterTypes();
               List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));

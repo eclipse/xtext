@@ -44,6 +44,7 @@ public class FormattingDataInit {
     this.decreaseIndentationChange = (this.decreaseIndentationChange - 1);
   }
   
+  @Override
   public String toString() {
     ToStringBuilder _toStringBuilder = new ToStringBuilder(this);
     ToStringBuilder _addAllFields = _toStringBuilder.addAllFields();

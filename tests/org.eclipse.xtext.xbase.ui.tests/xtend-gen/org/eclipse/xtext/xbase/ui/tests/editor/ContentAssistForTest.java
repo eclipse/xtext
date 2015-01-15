@@ -15,14 +15,17 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistForTest extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "for(";
   }
   
+  @Override
   protected String getSuffix() {
     return ", var z = 1";
   }
   
+  @Override
   public void testEmptyInput() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     String[] _keywordsAndStatics = this.getKeywordsAndStatics();

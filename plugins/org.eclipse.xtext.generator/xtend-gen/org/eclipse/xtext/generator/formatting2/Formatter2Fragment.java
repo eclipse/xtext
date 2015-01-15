@@ -40,6 +40,7 @@ public class Formatter2Fragment extends Xtend2GeneratorFragment {
     return (_name + ".class");
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     final StringBuilder cfg = new StringBuilder();
     StringConcatenation _builder = new StringConcatenation();
@@ -70,6 +71,7 @@ public class Formatter2Fragment extends Xtend2GeneratorFragment {
     return bf.getBindings();
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
     final BindFactory bf = new BindFactory();
     bf.addTypeToType(
@@ -78,6 +80,7 @@ public class Formatter2Fragment extends Xtend2GeneratorFragment {
     return bf.getBindings();
   }
   
+  @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     String _stubFileName = this.stubGenerator.getStubFileName();
     String _generateStubFileContents = this.stubGenerator.generateStubFileContents();

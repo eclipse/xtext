@@ -87,6 +87,7 @@ public class ASTFlattenerUtils {
     List _modifiers = declaration.modifiers();
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
     final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
+      @Override
       public Boolean apply(final Annotation it) {
         Name _typeName = it.getTypeName();
         String _string = _typeName.toString();
@@ -141,6 +142,7 @@ public class ASTFlattenerUtils {
   private IMethodBinding internalFindOverride(final IMethodBinding method, final ITypeBinding superType, final boolean onlyPrimarylevel) {
     IMethodBinding[] _declaredMethods = superType.getDeclaredMethods();
     final Function1<IMethodBinding, Boolean> _function = new Function1<IMethodBinding, Boolean>() {
+      @Override
       public Boolean apply(final IMethodBinding it) {
         return Boolean.valueOf(method.overrides(it));
       }
@@ -185,6 +187,7 @@ public class ASTFlattenerUtils {
       List _modifiers = it.modifiers();
       Iterable<Modifier> _filter = Iterables.<Modifier>filter(_modifiers, Modifier.class);
       final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
+        @Override
         public Boolean apply(final Modifier it) {
           return Boolean.valueOf(it.isStatic());
         }
@@ -204,6 +207,7 @@ public class ASTFlattenerUtils {
   public boolean isFinal(final Iterable<Modifier> modifiers) {
     Iterable<Modifier> _filter = Iterables.<Modifier>filter(modifiers, Modifier.class);
     final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
+      @Override
       public Boolean apply(final Modifier it) {
         return Boolean.valueOf(it.isFinal());
       }
@@ -214,6 +218,7 @@ public class ASTFlattenerUtils {
   public boolean isStatic(final Iterable<IExtendedModifier> modifiers) {
     Iterable<Modifier> _filter = Iterables.<Modifier>filter(modifiers, Modifier.class);
     final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
+      @Override
       public Boolean apply(final Modifier it) {
         return Boolean.valueOf(it.isStatic());
       }
@@ -247,6 +252,7 @@ public class ASTFlattenerUtils {
   
   public boolean isPackageVisibility(final Iterable<Modifier> modifier) {
     final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
+      @Override
       public Boolean apply(final Modifier it) {
         boolean _or = false;
         boolean _or_1 = false;
@@ -384,6 +390,7 @@ public class ASTFlattenerUtils {
       _and_1 = false;
     } else {
       final Function1<StringLiteral, Boolean> _function = new Function1<StringLiteral, Boolean>() {
+        @Override
         public Boolean apply(final StringLiteral it) {
           return Boolean.valueOf(ASTFlattenerUtils.this.canTranslate(it));
         }
@@ -482,6 +489,7 @@ public class ASTFlattenerUtils {
   private Type findDeclaredType(final Block scope, final SimpleName simpleName) {
     final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
     scope.accept(new ASTVisitor() {
+      @Override
       public boolean visit(final VariableDeclarationFragment node) {
         SimpleName _name = node.getName();
         String _identifier = _name.getIdentifier();
@@ -515,10 +523,12 @@ public class ASTFlattenerUtils {
         return false;
       }
       
+      @Override
       public boolean preVisit2(final ASTNode node) {
         return matchesFound.isEmpty();
       }
       
+      @Override
       public boolean visit(final SingleVariableDeclaration node) {
         SimpleName _name = node.getName();
         boolean _equals = _name.equals(simpleName);
@@ -537,6 +547,7 @@ public class ASTFlattenerUtils {
     boolean _notEquals = (!Objects.equal(scope, null));
     if (_notEquals) {
       scope.accept(new ASTVisitor() {
+        @Override
         public boolean visit(final Assignment node) {
           Boolean _apply = constraint.apply(node);
           if ((_apply).booleanValue()) {
@@ -551,6 +562,7 @@ public class ASTFlattenerUtils {
   
   public Boolean isAssignedInBody(final Block scope, final VariableDeclarationFragment fieldDeclFragment) {
     final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      @Override
       public Boolean apply(final Assignment it) {
         Expression _leftHandSide = it.getLeftHandSide();
         if ((_leftHandSide instanceof Name)) {
@@ -582,6 +594,7 @@ public class ASTFlattenerUtils {
   
   public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
     final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      @Override
       public Boolean apply(final Assignment it) {
         Expression _leftHandSide = it.getLeftHandSide();
         if ((_leftHandSide instanceof SimpleName)) {

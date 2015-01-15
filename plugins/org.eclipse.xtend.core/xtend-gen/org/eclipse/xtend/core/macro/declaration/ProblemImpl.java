@@ -23,14 +23,17 @@ public class ProblemImpl implements Problem {
     this.severity = severity;
   }
   
+  @Override
   public String getId() {
     return this.id;
   }
   
+  @Override
   public String getMessage() {
     return this.message;
   }
   
+  @Override
   public Problem.Severity getSeverity() {
     return this.severity;
   }

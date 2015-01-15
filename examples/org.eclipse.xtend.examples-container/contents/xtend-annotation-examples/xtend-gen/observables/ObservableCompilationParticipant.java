@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class ObservableCompilationParticipant extends AbstractClassProcessor {
+  @Override
   public void doTransform(final MutableClassDeclaration clazz, @Extension final TransformationContext context) {
     Iterable<? extends MutableFieldDeclaration> _declaredFields = clazz.getDeclaredFields();
     for (final MutableFieldDeclaration f : _declaredFields) {
@@ -31,6 +32,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
         String _firstUpper = StringExtensions.toFirstUpper(fieldName);
         String _plus = ("get" + _firstUpper);
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             it.setReturnType(fieldType);
             StringConcatenationClient _client = new StringConcatenationClient() {
@@ -49,6 +51,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
         String _firstUpper_1 = StringExtensions.toFirstUpper(fieldName);
         String _plus_1 = ("set" + _firstUpper_1);
         final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             it.addParameter(fieldName, fieldType);
             StringConcatenationClient _client = new StringConcatenationClient() {
@@ -83,6 +86,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
     }
     final TypeReference changeSupportType = context.newTypeReference(PropertyChangeSupport.class);
     final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         it.setType(changeSupportType);
         StringConcatenationClient _client = new StringConcatenationClient() {
@@ -100,6 +104,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
     clazz.addField("_propertyChangeSupport", _function);
     final TypeReference propertyChangeListener = context.newTypeReference(PropertyChangeListener.class);
     final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         it.addParameter("listener", propertyChangeListener);
         StringConcatenationClient _client = new StringConcatenationClient() {
@@ -114,6 +119,7 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
     };
     clazz.addMethod("addPropertyChangeListener", _function_1);
     final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         it.addParameter("listener", propertyChangeListener);
         StringConcatenationClient _client = new StringConcatenationClient() {

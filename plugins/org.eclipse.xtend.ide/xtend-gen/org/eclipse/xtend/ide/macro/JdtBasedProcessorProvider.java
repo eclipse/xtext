@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
+  @Override
   public Object getProcessorInstance(final JvmType type) {
     try {
       Resource _eResource = type.eResource();
@@ -61,6 +62,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     }
   }
   
+  @Override
   public ClassLoader getClassLoader(final EObject ctx) {
     Resource _eResource = ctx.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();

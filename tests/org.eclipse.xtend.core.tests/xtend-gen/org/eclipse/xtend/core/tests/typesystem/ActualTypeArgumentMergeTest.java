@@ -67,6 +67,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
       }
       _builder.append(" void method(");
       final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
+        @Override
         public CharSequence apply(final String it) {
           return it;
         }
@@ -120,6 +121,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter, String> _function = new Function1<JvmTypeParameter, String>() {
+      @Override
       public String apply(final JvmTypeParameter it) {
         return it.getSimpleName();
       }

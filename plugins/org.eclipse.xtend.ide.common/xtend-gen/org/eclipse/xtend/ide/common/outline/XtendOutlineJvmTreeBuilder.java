@@ -31,6 +31,7 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
     final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+      @Override
       public void apply(final JvmDeclaredType it) {
         XtendOutlineJvmTreeBuilder.this.buildType(it, context);
       }
@@ -42,6 +43,7 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     this.buildMembers(jvmDeclaredType, jvmDeclaredType, context);
   }
   
+  @Override
   protected void buildType(final EObject someType, final IXtendOutlineContext context) {
     if ((someType instanceof JvmDeclaredType)) {
       this.buildJvmType(((JvmDeclaredType)someType), context);

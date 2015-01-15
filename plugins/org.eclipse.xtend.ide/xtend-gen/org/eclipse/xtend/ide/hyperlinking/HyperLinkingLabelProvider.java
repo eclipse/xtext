@@ -22,6 +22,7 @@ public class HyperLinkingLabelProvider extends XtendLabelProvider {
     super(delegate);
   }
   
+  @Override
   public String getText(final Object element) {
     final String result = super.getText(element);
     boolean _notEquals = (!Objects.equal(result, null));

@@ -30,11 +30,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter> implements TypeParameterDeclaration {
+  @Override
   public Iterable<? extends TypeReference> getUpperBounds() {
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
     Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
     final Function1<JvmUpperBound, TypeReference> _function = new Function1<JvmUpperBound, TypeReference>() {
+      @Override
       public TypeReference apply(final JvmUpperBound it) {
         CompilationUnitImpl _compilationUnit = TypeParameterDeclarationImpl.this.getCompilationUnit();
         JvmTypeReference _typeReference = it.getTypeReference();
@@ -45,16 +47,19 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
     return IterableExtensions.<TypeReference>toList(_map);
   }
   
+  @Override
   public String getSimpleName() {
     JvmTypeParameter _delegate = this.getDelegate();
     return _delegate.getName();
   }
   
+  @Override
   public String getQualifiedName() {
     JvmTypeParameter _delegate = this.getDelegate();
     return _delegate.getIdentifier();
   }
   
+  @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeParameter _delegate = this.getDelegate();
@@ -63,14 +68,17 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
     return ((TypeParameterDeclarator) _memberDeclaration);
   }
   
+  @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
     return CollectionLiterals.<AnnotationReference>emptyList();
   }
   
+  @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     return null;
   }
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
       return false;

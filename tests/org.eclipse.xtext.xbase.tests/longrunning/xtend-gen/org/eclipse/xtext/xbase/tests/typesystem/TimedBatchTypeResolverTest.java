@@ -29,24 +29,28 @@ public class TimedBatchTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Inject
   private TimedBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }
   
   @Test
   @Timed
+  @Override
   public void testFeatureCall_15_n() throws Exception {
     super.testFeatureCall_15_n();
   }
   
   @Test
   @Timed
+  @Override
   public void testFeatureCall_15_n_1() throws Exception {
     super.testFeatureCall_15_n_1();
   }
   
   @Test
   @Timed
+  @Override
   public void testFeatureCall_15_n_2() throws Exception {
     super.testFeatureCall_15_n_2();
   }

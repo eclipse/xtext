@@ -80,6 +80,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
       final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
+        @Override
         public void apply(final XExpression it) {
           XbaseValidationTest.this._validationTestHelper.assertError(it, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
           XbaseValidationTest.this._validationTestHelper.assertError(it, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);

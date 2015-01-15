@@ -72,6 +72,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public <T extends ENamedElement> List<T> sortByName(final Iterable<T> iterable) {
     final Comparator<T> _function = new Comparator<T>() {
+      @Override
       public int compare(final T p1, final T p2) {
         String _name = p1.getName();
         String _name_1 = p2.getName();
@@ -84,6 +85,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EPackage> getAccessedPackages() {
     Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
+      @Override
       public Boolean apply(final IGrammarConstraintProvider.IConstraint e) {
         EClass _type = e.getType();
         return Boolean.valueOf((!Objects.equal(_type, null)));
@@ -91,6 +93,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     };
     Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(_grammarConstraints, _function);
     final Function1<IGrammarConstraintProvider.IConstraint, EPackage> _function_1 = new Function1<IGrammarConstraintProvider.IConstraint, EPackage>() {
+      @Override
       public EPackage apply(final IGrammarConstraintProvider.IConstraint e) {
         EClass _type = e.getType();
         return _type.getEPackage();
@@ -104,12 +107,14 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
     Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IGrammarConstraintProvider.IConstraint, EClass> _function = new Function1<IGrammarConstraintProvider.IConstraint, EClass>() {
+      @Override
       public EClass apply(final IGrammarConstraintProvider.IConstraint e) {
         return e.getType();
       }
     };
     Iterable<EClass> _map = IterableExtensions.<IGrammarConstraintProvider.IConstraint, EClass>map(_grammarConstraints, _function);
     final Function1<EClass, Boolean> _function_1 = new Function1<EClass, Boolean>() {
+      @Override
       public Boolean apply(final EClass e) {
         boolean _and = false;
         boolean _notEquals = (!Objects.equal(e, null));
@@ -132,6 +137,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return this.sequencerUtil.getGrammarConstraints(this.grammar, clazz);
   }
   
+  @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     String _xblockexpression = null;
     {
@@ -153,6 +159,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       final Collection<IGrammarConstraintProvider.IConstraint> superConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
       String _xifexpression = null;
       final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
+        @Override
         public Boolean apply(final IGrammarConstraintProvider.IConstraint it) {
           return Boolean.valueOf(superConstraints.contains(it));
         }
@@ -209,6 +216,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.newLine();
       _builder.append("\t");
       final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function_1 = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
+        @Override
         public Boolean apply(final IGrammarConstraintProvider.IConstraint e) {
           boolean _and = false;
           EClass _type = e.getType();
@@ -226,6 +234,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function_1);
       List<IGrammarConstraintProvider.IConstraint> _sort = IterableExtensions.<IGrammarConstraintProvider.IConstraint>sort(_filter);
       final Function1<IGrammarConstraintProvider.IConstraint, CharSequence> _function_2 = new Function1<IGrammarConstraintProvider.IConstraint, CharSequence>() {
+        @Override
         public CharSequence apply(final IGrammarConstraintProvider.IConstraint e) {
           return AbstractSemanticSequencer.this.genMethodSequence(file, e);
         }
@@ -266,6 +275,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     Grammar _superGrammar = this.sequencerUtil.getSuperGrammar(this.grammar);
     Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
     final Function1<IGrammarConstraintProvider.IConstraint, Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>> _function = new Function1<IGrammarConstraintProvider.IConstraint, Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>>() {
+      @Override
       public Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> apply(final IGrammarConstraintProvider.IConstraint it) {
         return Pair.<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>of(it, it);
       }
@@ -309,6 +319,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               Map<IGrammarConstraintProvider.IConstraint, List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
               Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> _entrySet = _accessedConstraints.entrySet();
               final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String> _function_1 = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>() {
+                @Override
                 public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> e) {
                   IGrammarConstraintProvider.IConstraint _key = e.getKey();
                   return _key.getName();
@@ -328,6 +339,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 {
                   List<EObject> _value = ctx.getValue();
                   final Function1<EObject, String> _function_2 = new Function1<EObject, String>() {
+                    @Override
                     public String apply(final EObject e) {
                       return AbstractSemanticSequencer.this.ctx2name.getContextName(e);
                     }
@@ -462,6 +474,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         {
           IGrammarConstraintProvider.IFeatureInfo[] _features = c.getFeatures();
           final Function1<IGrammarConstraintProvider.IFeatureInfo, Boolean> _function = new Function1<IGrammarConstraintProvider.IFeatureInfo, Boolean>() {
+            @Override
             public Boolean apply(final IGrammarConstraintProvider.IFeatureInfo e) {
               return Boolean.valueOf((!Objects.equal(e, null)));
             }
@@ -524,6 +537,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             IGrammarConstraintProvider.IConstraintElement _body_4 = c.getBody();
             List<IGrammarConstraintProvider.IConstraintElement> _children = _body_4.getChildren();
             final Function1<IGrammarConstraintProvider.IConstraintElement, Boolean> _function_1 = new Function1<IGrammarConstraintProvider.IConstraintElement, Boolean>() {
+              @Override
               public Boolean apply(final IGrammarConstraintProvider.IConstraintElement e) {
                 IGrammarConstraintProvider.IFeatureInfo _featureInfo = e.getFeatureInfo();
                 return Boolean.valueOf((!Objects.equal(_featureInfo, null)));
@@ -531,6 +545,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             };
             Iterable<IGrammarConstraintProvider.IConstraintElement> _filter_1 = IterableExtensions.<IGrammarConstraintProvider.IConstraintElement>filter(_children, _function_1);
             final Function1<IGrammarConstraintProvider.IConstraintElement, IGrammarConstraintProvider.IFeatureInfo> _function_2 = new Function1<IGrammarConstraintProvider.IConstraintElement, IGrammarConstraintProvider.IFeatureInfo>() {
+              @Override
               public IGrammarConstraintProvider.IFeatureInfo apply(final IGrammarConstraintProvider.IConstraintElement e) {
                 return e.getFeatureInfo();
               }

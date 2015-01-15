@@ -114,6 +114,7 @@ public class CodeBuilderQuickfix {
   
   protected IModification getXtendModification(final ICodeBuilder.Xtend builder) {
     final IModification _function = new IModification() {
+      @Override
       public void apply(final IModificationContext it) throws Exception {
         final XtendTypeDeclaration xtendClass = builder.getXtendType();
         URI _uRI = EcoreUtil.getURI(xtendClass);
@@ -125,6 +126,7 @@ public class CodeBuilderQuickfix {
         final IXtextDocument document = xtextEditor.getDocument();
         final Wrapper<Integer> wrapper = Wrapper.<Integer>forType(Integer.class);
         final IUnitOfWork<ReplacingAppendable, XtextResource> _function = new IUnitOfWork<ReplacingAppendable, XtextResource>() {
+          @Override
           public ReplacingAppendable exec(final XtextResource resource) throws Exception {
             ReplacingAppendable _xblockexpression = null;
             {
@@ -132,6 +134,7 @@ public class CodeBuilderQuickfix {
               wrapper.set(Integer.valueOf(offset));
               DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
               final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function = new Procedure1<DocumentSourceAppender.Factory.OptionalParameters>() {
+                @Override
                 public void apply(final DocumentSourceAppender.Factory.OptionalParameters it) {
                   int _indentationLevel = builder.getIndentationLevel();
                   it.baseIndentationLevel = _indentationLevel;
@@ -157,6 +160,7 @@ public class CodeBuilderQuickfix {
   
   protected IModification getJavaModification(final ICodeBuilder.Java builder) {
     final IModification _function = new IModification() {
+      @Override
       public void apply(final IModificationContext it) throws Exception {
         final IType type = builder.getIType();
         char _charAt = ".".charAt(0);
@@ -165,6 +169,7 @@ public class CodeBuilderQuickfix {
         builder.build(content);
         List<String> _imports = importManager.getImports();
         final Procedure1<String> _function = new Procedure1<String>() {
+          @Override
           public void apply(final String it) {
             try {
               ICompilationUnit _compilationUnit = type.getCompilationUnit();
@@ -210,6 +215,7 @@ public class CodeBuilderQuickfix {
         if (_notEquals) {
           JdtHyperlink _jdtHyperlink = new JdtHyperlink();
           final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {
+            @Override
             public void apply(final JdtHyperlink it) {
               it.setJavaElement(((IMember)element));
               it.open();

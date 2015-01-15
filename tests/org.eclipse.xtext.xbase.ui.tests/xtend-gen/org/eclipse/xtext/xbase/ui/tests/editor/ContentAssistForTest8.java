@@ -17,14 +17,17 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistInBlockTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistForTest8 extends ContentAssistInBlockTest {
+  @Override
   protected String getPrefix() {
     return "for( var y = 1; x < 10; x++) {";
   }
   
+  @Override
   protected String getSuffix() {
     return "}";
   }
   
+  @Override
   protected String[] getKeywordsAndStatics() {
     String[] _keywordsAndStatics = super.getKeywordsAndStatics();
     final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_keywordsAndStatics);

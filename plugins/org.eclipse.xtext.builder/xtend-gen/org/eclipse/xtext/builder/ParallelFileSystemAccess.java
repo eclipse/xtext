@@ -43,6 +43,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
   protected <T extends Object> void sendAsync(final Procedure1<? super T> procedure) {
     URI _uri = this.delta.getUri();
     final Procedure0 _function = new Procedure0() {
+      @Override
       public void apply() {
         if ((ParallelFileSystemAccess.this.delegate instanceof EclipseResourceFileSystemAccess2)) {
           ((EclipseResourceFileSystemAccess2)ParallelFileSystemAccess.this.delegate).setPostProcessor(ParallelFileSystemAccess.this.fileCallback);
@@ -59,8 +60,10 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.fileSystemAccessQueue.sendAsync(_uri, _function);
   }
   
+  @Override
   public void deleteFile(final String fileName) {
     final Procedure1<IFileSystemAccess> _function = new Procedure1<IFileSystemAccess>() {
+      @Override
       public void apply(final IFileSystemAccess access) {
         access.deleteFile(fileName);
       }
@@ -68,8 +71,10 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.<IFileSystemAccess>sendAsync(_function);
   }
   
+  @Override
   public void generateFile(final String fileName, final CharSequence contents) {
     final Procedure1<IFileSystemAccess> _function = new Procedure1<IFileSystemAccess>() {
+      @Override
       public void apply(final IFileSystemAccess access) {
         access.generateFile(fileName, contents);
       }
@@ -77,8 +82,10 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.<IFileSystemAccess>sendAsync(_function);
   }
   
+  @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
     final Procedure1<IFileSystemAccess> _function = new Procedure1<IFileSystemAccess>() {
+      @Override
       public void apply(final IFileSystemAccess access) {
         access.generateFile(fileName, outputConfigurationName, contents);
       }
@@ -86,8 +93,10 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.<IFileSystemAccess>sendAsync(_function);
   }
   
+  @Override
   public void deleteFile(final String fileName, final String outputConfigurationName) {
     final Procedure1<IFileSystemAccessExtension> _function = new Procedure1<IFileSystemAccessExtension>() {
+      @Override
       public void apply(final IFileSystemAccessExtension access) {
         access.deleteFile(fileName, outputConfigurationName);
       }
@@ -95,6 +104,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.<IFileSystemAccessExtension>sendAsync(_function);
   }
   
+  @Override
   public URI getURI(final String fileName, final String outputConfiguration) {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -103,6 +113,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     return ((IFileSystemAccessExtension2) this.delegate).getURI(fileName, outputConfiguration);
   }
   
+  @Override
   public URI getURI(final String fileName) {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -111,8 +122,10 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     return ((IFileSystemAccessExtension2) this.delegate).getURI(fileName);
   }
   
+  @Override
   public void generateFile(final String fileName, final String outputCfgName, final InputStream content) throws RuntimeIOException {
     final Procedure1<IFileSystemAccessExtension3> _function = new Procedure1<IFileSystemAccessExtension3>() {
+      @Override
       public void apply(final IFileSystemAccessExtension3 access) {
         access.generateFile(fileName, outputCfgName, content);
       }
@@ -120,8 +133,10 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.<IFileSystemAccessExtension3>sendAsync(_function);
   }
   
+  @Override
   public void generateFile(final String fileName, final InputStream content) throws RuntimeIOException {
     final Procedure1<IFileSystemAccessExtension3> _function = new Procedure1<IFileSystemAccessExtension3>() {
+      @Override
       public void apply(final IFileSystemAccessExtension3 access) {
         access.generateFile(fileName, content);
       }
@@ -129,6 +144,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     this.<IFileSystemAccessExtension3>sendAsync(_function);
   }
   
+  @Override
   public InputStream readBinaryFile(final String fileName, final String outputCfgName) throws RuntimeIOException {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -137,6 +153,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     return ((IFileSystemAccessExtension3) this.delegate).readBinaryFile(fileName, outputCfgName);
   }
   
+  @Override
   public InputStream readBinaryFile(final String fileName) throws RuntimeIOException {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -145,6 +162,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     return ((IFileSystemAccessExtension3) this.delegate).readBinaryFile(fileName);
   }
   
+  @Override
   public CharSequence readTextFile(final String fileName, final String outputCfgName) throws RuntimeIOException {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -153,6 +171,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
     return ((IFileSystemAccessExtension3) this.delegate).readTextFile(fileName, outputCfgName);
   }
   
+  @Override
   public CharSequence readTextFile(final String fileName) throws RuntimeIOException {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();

@@ -36,9 +36,11 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     this.processedMembers = _newHashSet;
   }
   
+  @Override
   public IXtendOutlineContext newContext() {
     DefaultXtendOutlineContext _cloneContext = this.cloneContext();
     final Procedure1<DefaultXtendOutlineContext> _function = new Procedure1<DefaultXtendOutlineContext>() {
+      @Override
       public void apply(final DefaultXtendOutlineContext it) {
         HashSet<JvmMember> _newHashSet = CollectionLiterals.<JvmMember>newHashSet();
         it.processedMembers = _newHashSet;
@@ -47,6 +49,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     return ObjectExtensions.<DefaultXtendOutlineContext>operator_doubleArrow(_cloneContext, _function);
   }
   
+  @Override
   public IXtendOutlineContext showInherited() {
     DefaultXtendOutlineContext _xifexpression = null;
     if (this.showInherited) {
@@ -54,6 +57,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     } else {
       DefaultXtendOutlineContext _cloneContext = this.cloneContext();
       final Procedure1<DefaultXtendOutlineContext> _function = new Procedure1<DefaultXtendOutlineContext>() {
+        @Override
         public void apply(final DefaultXtendOutlineContext it) {
           it.showInherited = true;
         }
@@ -63,6 +67,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     return _xifexpression;
   }
   
+  @Override
   public IXtendOutlineContext hideInherited() {
     DefaultXtendOutlineContext _xifexpression = null;
     if ((!this.showInherited)) {
@@ -70,6 +75,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     } else {
       DefaultXtendOutlineContext _cloneContext = this.cloneContext();
       final Procedure1<DefaultXtendOutlineContext> _function = new Procedure1<DefaultXtendOutlineContext>() {
+        @Override
         public void apply(final DefaultXtendOutlineContext it) {
           it.showInherited = false;
         }
@@ -79,9 +85,11 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     return _xifexpression;
   }
   
+  @Override
   public IXtendOutlineContext increaseInheritanceDepth() {
     DefaultXtendOutlineContext _cloneContext = this.cloneContext();
     final Procedure1<DefaultXtendOutlineContext> _function = new Procedure1<DefaultXtendOutlineContext>() {
+      @Override
       public void apply(final DefaultXtendOutlineContext it) {
         it.inheritanceDepth++;
       }
@@ -89,6 +97,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     return ObjectExtensions.<DefaultXtendOutlineContext>operator_doubleArrow(_cloneContext, _function);
   }
   
+  @Override
   public IXtendOutlineContext decreaseInheritanceDepth() {
     DefaultXtendOutlineContext _xifexpression = null;
     if ((this.inheritanceDepth == 0)) {
@@ -96,6 +105,7 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     } else {
       DefaultXtendOutlineContext _cloneContext = this.cloneContext();
       final Procedure1<DefaultXtendOutlineContext> _function = new Procedure1<DefaultXtendOutlineContext>() {
+        @Override
         public void apply(final DefaultXtendOutlineContext it) {
           it.inheritanceDepth--;
         }
@@ -105,10 +115,12 @@ public class DefaultXtendOutlineContext implements IXtendOutlineContext {
     return _xifexpression;
   }
   
+  @Override
   public boolean isProcessed(final JvmMember member) {
     return this.processedMembers.contains(member);
   }
   
+  @Override
   public IXtendOutlineContext markAsProcessed(final JvmMember member) {
     DefaultXtendOutlineContext _xblockexpression = null;
     {

@@ -88,6 +88,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   @Test
   public void testJvmEnumerationLiteral() {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         String _simpleName = ((JvmEnumerationLiteral) it).getSimpleName();
         Assert.assertEquals("NEW", _simpleName);
@@ -118,6 +119,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   
   protected void evaluatesTo(final Pair<String, String> typeAndExpression, final Object expectation) {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Assert.assertEquals(expectation, it);
       }
@@ -160,6 +162,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
   
   protected void evaluatesTo(final XVariableDeclaration it, final Object expectation) {
     final Procedure1<Object> _function = new Procedure1<Object>() {
+      @Override
       public void apply(final Object it) {
         Assert.assertEquals(expectation, it);
       }

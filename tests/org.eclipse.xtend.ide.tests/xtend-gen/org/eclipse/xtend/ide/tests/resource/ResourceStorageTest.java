@@ -43,14 +43,17 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ResourceStorageTest extends AbstractXtendUITestCase {
   public static class TestableStorageAwareTrace extends StorageAwareTrace {
+    @Override
     public void setLocalStorage(final IStorage derivedResource) {
       super.setLocalStorage(derivedResource);
     }
     
+    @Override
     public URI resolvePath(final IProject project, final URI path) {
       return super.resolvePath(project, path);
     }
     
+    @Override
     public URI resolvePath(final URI path) {
       return super.resolvePath(path);
     }
@@ -113,6 +116,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       IResourceDescription _resourceDescription = resource2.getResourceDescription();
       Iterable<IEObjectDescription> _exportedObjects = _resourceDescription.getExportedObjects();
       final Function1<IEObjectDescription, String> _function = new Function1<IEObjectDescription, String>() {
+        @Override
         public String apply(final IEObjectDescription it) {
           QualifiedName _name = it.getName();
           return _name.toString();
@@ -128,6 +132,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       IResourceDescription _resourceDescription_1 = resource.getResourceDescription();
       Iterable<IEObjectDescription> _exportedObjects_1 = _resourceDescription_1.getExportedObjects();
       final Function1<IEObjectDescription, String> _function_1 = new Function1<IEObjectDescription, String>() {
+        @Override
         public String apply(final IEObjectDescription it) {
           QualifiedName _name = it.getName();
           return _name.toString();

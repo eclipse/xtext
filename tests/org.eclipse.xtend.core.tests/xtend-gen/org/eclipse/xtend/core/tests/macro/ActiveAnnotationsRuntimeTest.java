@@ -99,9 +99,11 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     String _absolutePath = tempDir.getAbsolutePath();
     WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
     final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+      @Override
       public void apply(final WorkspaceConfig it) {
         ProjectConfig _projectConfig = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.macroProject);
         final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
+          @Override
           public void apply(final ProjectConfig it) {
             Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
             Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.macroProject) + "/src"));
@@ -113,6 +115,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         it.addProjectConfig(_doubleArrow);
         ProjectConfig _projectConfig_1 = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.clientProject);
         final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
+          @Override
           public void apply(final ProjectConfig it) {
             Map<Path, Path> _sourceFolderMappings = it.getSourceFolderMappings();
             Path _path = new Path((("/" + ActiveAnnotationsRuntimeTest.this.clientProject) + "/src"));
@@ -149,6 +152,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     return URI.createFileURI(_plus_1);
   }
   
+  @Override
   public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
       final XtextResourceSet resourceSet = this.compileMacroResourceSet(macroFile, clientFile);
@@ -157,6 +161,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
       singleResource.load(_emptyMap);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           it.getGeneratedCode();
           final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
@@ -207,6 +212,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       final XtextResourceSet resourceSet = this.resourceSetProvider.get();
       resourceSet.createResource(clientURI);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result result) {
           Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
           ClassLoader _classLoader = _class.getClassLoader();
@@ -222,6 +228,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   }
   
   @Test
+  @Override
   public void testSimpleModification() {
     super.testSimpleModification();
   }
@@ -271,6 +278,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<List<Issue>> _function = new Procedure1<List<Issue>>() {
+      @Override
       public void apply(final List<Issue> it) {
         int _size = it.size();
         Assert.assertEquals(1, _size);
@@ -399,6 +407,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
         ActiveAnnotationsRuntimeTest.this.validator.assertIssue(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
@@ -491,6 +500,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
         ActiveAnnotationsRuntimeTest.this.validator.assertNoWarnings(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT);

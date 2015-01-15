@@ -23,6 +23,7 @@ public class ClassBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_xtendClass);
     final Procedure1<AbstractClassBuilder> _function = new Procedure1<AbstractClassBuilder>() {
+      @Override
       public void apply(final AbstractClassBuilder it) {
         JvmDeclaredType _xtendClass = ClassBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -43,6 +44,7 @@ public class ClassBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_javaClass);
     final Procedure1<AbstractClassBuilder> _function = new Procedure1<AbstractClassBuilder>() {
+      @Override
       public void apply(final AbstractClassBuilder it) {
         JvmDeclaredType _javaClass = ClassBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);

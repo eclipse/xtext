@@ -39,6 +39,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<LightweightTypeReference> {
+  @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
       final String replacedExpressionText = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
@@ -119,6 +120,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     if (!_matched) {
       EList<EObject> _eContents = expression.eContents();
       final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+        @Override
         public Boolean apply(final EObject content) {
           boolean _switchResult = false;
           boolean _matched = false;
@@ -139,6 +141,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     return _switchResult;
   }
   
+  @Override
   public void isFunctionAndEquivalentTo(final LightweightTypeReference reference, final String type) {
     Assert.assertTrue((reference instanceof FunctionTypeReference));
     String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
@@ -152,6 +155,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     _builder.append(_simpleName, "");
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
+      @Override
       public CharSequence apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }

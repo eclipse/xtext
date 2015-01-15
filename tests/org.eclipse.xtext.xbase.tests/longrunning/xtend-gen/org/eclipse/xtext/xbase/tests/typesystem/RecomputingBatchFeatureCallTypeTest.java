@@ -20,6 +20,7 @@ public class RecomputingBatchFeatureCallTypeTest extends BatchFeatureCallTypeTes
   @Inject
   private RecomputingBatchTypeResolver recomputingResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.recomputingResolver;
   }

@@ -50,6 +50,7 @@ public class DataProcessor extends AbstractClassProcessor {
     public Iterable<? extends FieldDeclaration> getDataFields(final ClassDeclaration it) {
       Iterable<? extends FieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final FieldDeclaration it) {
           boolean _and = false;
           boolean _isStatic = it.isStatic();
@@ -69,6 +70,7 @@ public class DataProcessor extends AbstractClassProcessor {
     public Iterable<? extends MutableFieldDeclaration> getDataFields(final MutableClassDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MutableFieldDeclaration it) {
           boolean _and = false;
           boolean _isStatic = it.isStatic();
@@ -87,6 +89,7 @@ public class DataProcessor extends AbstractClassProcessor {
     
     public void addDataToString(final MutableClassDeclaration cls) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -114,6 +117,7 @@ public class DataProcessor extends AbstractClassProcessor {
     }
   }
   
+  @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     @Extension
     final DataProcessor.Util util = new DataProcessor.Util(context);
@@ -127,6 +131,7 @@ public class DataProcessor extends AbstractClassProcessor {
     final FinalFieldsConstructorProcessor.Util requiredArgsUtil = new FinalFieldsConstructorProcessor.Util(context);
     Iterable<? extends MutableFieldDeclaration> _dataFields = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         it.setFinal(true);
       }
@@ -159,6 +164,7 @@ public class DataProcessor extends AbstractClassProcessor {
     }
     Iterable<? extends MutableFieldDeclaration> _dataFields_3 = util.getDataFields(it);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         boolean _shouldAddGetter = getterUtil.shouldAddGetter(it);
         if (_shouldAddGetter) {

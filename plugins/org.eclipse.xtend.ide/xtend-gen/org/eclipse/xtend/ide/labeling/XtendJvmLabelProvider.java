@@ -29,6 +29,7 @@ public class XtendJvmLabelProvider extends XbaseLabelProvider {
     super(delegate);
   }
   
+  @Override
   protected String text(final JvmGenericType element) {
     String _xblockexpression = null;
     {
@@ -58,6 +59,7 @@ public class XtendJvmLabelProvider extends XbaseLabelProvider {
     return _xblockexpression;
   }
   
+  @Override
   protected Object text(final JvmField element) {
     String _simpleName = element.getSimpleName();
     StyledString _styledString = new StyledString(_simpleName);

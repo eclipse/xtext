@@ -48,6 +48,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   public StopwatchRule rule = new StopwatchRule(true);
   
   @After
+  @Override
   public void tearDown() {
     try {
       this.workbenchTestHelper.tearDown();
@@ -653,6 +654,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       String _plus = ((("Expected an error marker containing \'" + msgPart) + "\' on ") + _fullPath);
       String _plus_1 = (_plus + " but found ");
       final Function1<IMarker, String> _function = new Function1<IMarker, String>() {
+        @Override
         public String apply(final IMarker it) {
           return MarkerUtilities.getMessage(it);
         }

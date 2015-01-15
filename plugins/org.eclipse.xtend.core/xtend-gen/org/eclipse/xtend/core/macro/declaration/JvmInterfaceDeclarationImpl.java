@@ -27,12 +27,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements InterfaceDeclaration {
+  @Override
   public Iterable<? extends TypeReference> getExtendedInterfaces() {
     List<TypeReference> _xblockexpression = null;
     {
       JvmGenericType _delegate = this.getDelegate();
       EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
       final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference it) {
           JvmType _type = it.getType();
           return Boolean.valueOf(((JvmGenericType) _type).isInterface());
@@ -40,6 +42,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
       };
       final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
       final Function1<JvmTypeReference, TypeReference> _function_1 = new Function1<JvmTypeReference, TypeReference>() {
+        @Override
         public TypeReference apply(final JvmTypeReference it) {
           CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
           return _compilationUnit.toTypeReference(it);
@@ -51,10 +54,12 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     return _xblockexpression;
   }
   
+  @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = new Function1<JvmTypeParameter, TypeParameterDeclaration>() {
+      @Override
       public TypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmInterfaceDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeParameterDeclaration(it);
@@ -63,11 +68,13 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
   }
   
+  @Override
   public boolean isStrictFloatingPoint() {
     JvmGenericType _delegate = this.getDelegate();
     return _delegate.isStrictFloatingPoint();
   }
   
+  @Override
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     this.checkMutable();
     final MutableMethodDeclaration result = super.addMethod(name, initializer);
@@ -75,6 +82,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     return result;
   }
   
+  @Override
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
     String _simpleName = this.getSimpleName();
     String _plus = ("The interface \'" + _simpleName);

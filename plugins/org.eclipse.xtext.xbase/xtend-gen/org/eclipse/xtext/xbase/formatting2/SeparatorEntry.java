@@ -19,14 +19,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class SeparatorEntry<T extends Object, R extends ITextSegment> extends Entry<T, R> {
   private R separator;
   
+  @Override
   public ObjectEntry<T, R> getLeadingObject() {
     return ((ObjectEntry<T, R>) this.previous);
   }
   
+  @Override
   public ObjectEntry<T, R> getTrailingObject() {
     return ((ObjectEntry<T, R>) this.next);
   }
   
+  @Override
   public SeparatorEntry<T, R> getLeadingSeparator() {
     Entry<T, R> _previous = null;
     if (this.previous!=null) {
@@ -35,6 +38,7 @@ public class SeparatorEntry<T extends Object, R extends ITextSegment> extends En
     return ((SeparatorEntry<T, R>) _previous);
   }
   
+  @Override
   public SeparatorEntry<T, R> getTrailingSeparator() {
     Entry<T, R> _next = null;
     if (this.next!=null) {
@@ -43,6 +47,7 @@ public class SeparatorEntry<T extends Object, R extends ITextSegment> extends En
     return ((SeparatorEntry<T, R>) _next);
   }
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"");

@@ -19,18 +19,22 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class LoadedByClasspathFromMavenStructureTest extends AbstractURIHandlerWithEcoreTest {
+  @Override
   public URI getResourceURI() {
     return URI.createURI("platform:/resource/org.eclipse.xtext/src/main/org/eclipse/xtext/Xtext.ecore");
   }
   
+  @Override
   public URI getPackagedResourceURI() {
     return URI.createURI("classpath:/org/eclipse/xtext/Xtext.ecore");
   }
   
+  @Override
   public URI getReferencedURI() {
     return URI.createURI("platform:/resource/org.eclipse.xtext.test/src/org/eclipse/xtext/resource/mydsl.ecore");
   }
   
+  @Override
   public URI getPackagedReferencedURI() {
     URL url = this.classLoader.getResource("org/eclipse/xtext/resource/mydsl.ecore");
     boolean _equals = Objects.equal(url, null);
@@ -43,6 +47,7 @@ public class LoadedByClasspathFromMavenStructureTest extends AbstractURIHandlerW
   }
   
   @Test(expected = UnexpectedProxiesException.class)
+  @Override
   public void testLoadResourceWithPackagedURIs() {
     super.testLoadResourceWithPackagedURIs();
   }

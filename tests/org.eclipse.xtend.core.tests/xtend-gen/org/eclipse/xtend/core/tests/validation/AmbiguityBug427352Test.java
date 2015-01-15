@@ -103,6 +103,7 @@ public class AmbiguityBug427352Test extends AmbiguityValidationTest {
     this.assertUnambiguous(_builder);
   }
   
+  @Override
   public void assertUnambiguous(final CharSequence contents) {
     final XtendFile file = this.getParsedXtendFile(contents);
     this._validationTestHelper.assertNoErrors(file, IssueCodes.AMBIGUOUS_FEATURE_CALL);

@@ -19,6 +19,7 @@ public abstract class AbstractAnnotationBuilder extends AbstractCodeBuilder {
   @Accessors
   private String annotationName;
   
+  @Override
   public String getImage() {
     return "newannotation_wiz.gif";
   }

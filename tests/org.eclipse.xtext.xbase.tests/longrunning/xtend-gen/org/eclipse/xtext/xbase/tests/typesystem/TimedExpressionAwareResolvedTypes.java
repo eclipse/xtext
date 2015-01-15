@@ -27,14 +27,17 @@ public class TimedExpressionAwareResolvedTypes extends ExpressionAwareStackedRes
     this.times = times;
   }
   
+  @Override
   public StackedResolvedTypes pushReassigningTypes() {
     return new TimedReassigningResolvedTypes(this, this.times);
   }
   
+  @Override
   public StackedResolvedTypes pushTypes() {
     return new TimedStackedResolvedTypes(this, this.times);
   }
   
+  @Override
   public ExpressionAwareStackedResolvedTypes pushTypes(final XExpression context) {
     return new TimedExpressionAwareResolvedTypes(this, context, this.times);
   }

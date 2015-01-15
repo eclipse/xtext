@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 
 @SuppressWarnings("all")
 public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements FieldDeclaration {
+  @Override
   public Expression getInitializer() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
@@ -29,26 +30,31 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     return _compilationUnit.toExpression(_expression);
   }
   
+  @Override
   public boolean isFinal() {
     JvmField _delegate = this.getDelegate();
     return _delegate.isFinal();
   }
   
+  @Override
   public boolean isStatic() {
     JvmField _delegate = this.getDelegate();
     return _delegate.isStatic();
   }
   
+  @Override
   public boolean isTransient() {
     JvmField _delegate = this.getDelegate();
     return _delegate.isTransient();
   }
   
+  @Override
   public boolean isVolatile() {
     JvmField _delegate = this.getDelegate();
     return _delegate.isVolatile();
   }
   
+  @Override
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
@@ -56,6 +62,7 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     return _compilationUnit.toTypeReference(_type);
   }
   
+  @Override
   public void remove() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();

@@ -73,6 +73,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     return (_plus_1 + "ProposalProvider");
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
     {
@@ -89,6 +90,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     return _xblockexpression;
   }
   
+  @Override
   public String[] getRequiredBundlesUi(final Grammar grammar) {
     List<String> _xifexpression = null;
     if (this.generateStub) {
@@ -99,10 +101,12 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     return ((String[])Conversions.unwrapArray(_xifexpression, String.class));
   }
   
+  @Override
   public String[] getImportedPackagesUi(final Grammar grammar) {
     return ((String[])Conversions.unwrapArray(Collections.<String>singleton("org.apache.log4j"), String.class));
   }
   
+  @Override
   public String[] getExportedPackagesUi(final Grammar grammar) {
     String _proposalProviderName = this.getProposalProviderName(grammar);
     String _packageName = this._naming.packageName(_proposalProviderName);
@@ -132,6 +136,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
     return _xblockexpression;
   }
   
+  @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     if (this.generateStub) {
       String _proposalProviderName = this.getProposalProviderName(this.grammar);

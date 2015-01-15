@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class UnexpectedResourcesException extends RuntimeException {
   public UnexpectedResourcesException(final ResourceSet resourceSet) {
     super(ListExtensions.<Resource, String>map(resourceSet.getResources(), new Function1<Resource, String>() {
+      @Override
       public String apply(final Resource it) {
         URI _uRI = it.getURI();
         return _uRI.toString();

@@ -20,6 +20,7 @@ public class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabel
   @Inject
   private ILabelProvider labelProvider;
   
+  @Override
   public Image getImage(final Object element) {
     Image _xifexpression = null;
     if ((element instanceof IEObjectDescription)) {

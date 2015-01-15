@@ -28,6 +28,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
   @Inject
   private FlexerFactory flexerFactory;
   
+  @Override
   protected Lexer createLexer() {
     return new InternalXtendLexer();
   }
@@ -172,14 +173,17 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
     }
   }
   
+  @Override
   public Document createDocument(final String before) throws Exception {
     XtextDocument _xblockexpression = null;
     {
       XtendDocumentTokenSource _xtendDocumentTokenSource = new XtendDocumentTokenSource();
       final Procedure1<XtendDocumentTokenSource> _function = new Procedure1<XtendDocumentTokenSource>() {
+        @Override
         public void apply(final XtendDocumentTokenSource it) {
           AntlrTokenDefProvider _antlrTokenDefProvider = new AntlrTokenDefProvider();
           final Procedure1<AntlrTokenDefProvider> _function = new Procedure1<AntlrTokenDefProvider>() {
+            @Override
             public void apply(final AntlrTokenDefProvider it) {
               XtendAntlrTokenFileProvider _xtendAntlrTokenFileProvider = new XtendAntlrTokenFileProvider();
               it.setAntlrTokenFileProvider(_xtendAntlrTokenFileProvider);
@@ -188,6 +192,7 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
           AntlrTokenDefProvider _doubleArrow = ObjectExtensions.<AntlrTokenDefProvider>operator_doubleArrow(_antlrTokenDefProvider, _function);
           it.setTokenDefProvider(_doubleArrow);
           final Provider<Lexer> _function_1 = new Provider<Lexer>() {
+            @Override
             public Lexer get() {
               return PresentationDamagerTest.this.createLexer();
             }

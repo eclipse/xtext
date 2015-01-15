@@ -110,6 +110,7 @@ public class InsertionOffsets {
       final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerType);
       Iterable<ILeafNode> _leafNodes = classNode.getLeafNodes();
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
+        @Override
         public Boolean apply(final ILeafNode it) {
           String _text = it.getText();
           return Boolean.valueOf(Objects.equal(_text, "{"));

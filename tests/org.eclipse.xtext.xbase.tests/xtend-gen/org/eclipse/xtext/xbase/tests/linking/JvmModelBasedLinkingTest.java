@@ -57,10 +57,12 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        @Override
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
           JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            @Override
             public void apply(final JvmOperation it) {
               EList<JvmFormalParameter> _parameters = it.getParameters();
               JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
@@ -90,6 +92,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        @Override
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
           JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
@@ -98,6 +101,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
           EList<JvmMember> _members_1 = it.getMembers();
           JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            @Override
             public void apply(final JvmOperation it) {
               EList<JvmFormalParameter> _parameters = it.getParameters();
               JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
@@ -129,6 +133,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        @Override
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
           JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
@@ -137,6 +142,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
           EList<JvmMember> _members_1 = it.getMembers();
           JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            @Override
             public void apply(final JvmOperation it) {
               EList<JvmFormalParameter> _parameters = it.getParameters();
               JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
@@ -168,6 +174,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       resource.eSetDeliver(false);
       EList<EObject> _contents = resource.getContents();
       final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+        @Override
         public void apply(final JvmGenericType it) {
           EList<JvmMember> _members = it.getMembers();
           JvmTypeReference _stringType = JvmModelBasedLinkingTest.this.stringType(expr);
@@ -176,6 +183,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
           EList<JvmMember> _members_1 = it.getMembers();
           JvmTypeReference _stringType_1 = JvmModelBasedLinkingTest.this.stringType(expr);
           final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            @Override
             public void apply(final JvmOperation it) {
               JvmModelBasedLinkingTest.this._jvmTypesBuilder.setBody(it, expr);
             }

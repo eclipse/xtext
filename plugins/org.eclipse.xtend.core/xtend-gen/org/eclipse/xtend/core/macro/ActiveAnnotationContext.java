@@ -108,14 +108,17 @@ public class ActiveAnnotationContext {
   
   public String getMessageWithStackTrace(final Throwable t) {
     final Function1<Throwable, String> _function = new Function1<Throwable, String>() {
+      @Override
       public String apply(final Throwable it) {
         String _xblockexpression = null;
         {
           StringWriter _stringWriter = new StringWriter();
           final Procedure1<StringWriter> _function = new Procedure1<StringWriter>() {
+            @Override
             public void apply(final StringWriter it) {
               PrintWriter _printWriter = new PrintWriter(it);
               final Procedure1<PrintWriter> _function = new Procedure1<PrintWriter>() {
+                @Override
                 public void apply(final PrintWriter it) {
                   String _messageWithoutStackTrace = ActiveAnnotationContext.this.getMessageWithoutStackTrace(t);
                   it.println(_messageWithoutStackTrace);

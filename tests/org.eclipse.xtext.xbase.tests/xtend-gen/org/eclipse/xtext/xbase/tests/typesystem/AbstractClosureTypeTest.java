@@ -63,6 +63,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
       Iterator<XClosure> _filter = Iterators.<XClosure>filter(_eAll, XClosure.class);
       final List<XClosure> Closures = IteratorExtensions.<XClosure>toList(_filter);
       final Function1<XClosure, Integer> _function = new Function1<XClosure, Integer>() {
+        @Override
         public Integer apply(final XClosure it) {
           ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
           return Integer.valueOf(_findActualNodeFor.getOffset());
@@ -74,6 +75,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Override
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {

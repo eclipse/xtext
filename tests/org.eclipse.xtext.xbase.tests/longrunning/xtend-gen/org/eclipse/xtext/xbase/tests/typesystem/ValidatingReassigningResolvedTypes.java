@@ -32,18 +32,22 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     super(parent);
   }
   
+  @Override
   public StackedResolvedTypes pushReassigningTypes() {
     return new ValidatingReassigningResolvedTypes(this);
   }
   
+  @Override
   public StackedResolvedTypes pushTypes() {
     return new ValidatingStackedResolvedTypes(this);
   }
   
+  @Override
   public ExpressionAwareStackedResolvedTypes pushTypes(final XExpression context) {
     return new ValidatingExpressionAwareResolvedTypes(this, context);
   }
   
+  @Override
   public void setType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
     boolean _isOwnedBy = reference.isOwnedBy(_referenceOwner);
@@ -54,6 +58,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     super.setType(identifiable, reference);
   }
   
+  @Override
   public void reassignType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
     boolean _and = false;
     boolean _notEquals = (!Objects.equal(reference, null));
@@ -71,6 +76,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     super.reassignType(identifiable, reference);
   }
   
+  @Override
   public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
     boolean _and = false;
     LightweightTypeReference _typeReference = boundTypeArgument.getTypeReference();
@@ -90,9 +96,11 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     super.acceptHint(handle, boundTypeArgument);
   }
   
+  @Override
   protected List<LightweightBoundTypeArgument> getHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getHints(handle);
     final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
+      @Override
       public void apply(final LightweightBoundTypeArgument it) {
         boolean _and = false;
         LightweightTypeReference _typeReference = it.getTypeReference();
@@ -115,6 +123,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final int hints) {
     LightweightTypeReference _xblockexpression = null;
     {
@@ -135,9 +144,11 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return _xblockexpression;
   }
   
+  @Override
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getAllHints(handle);
     final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
+      @Override
       public void apply(final LightweightBoundTypeArgument it) {
         boolean _and = false;
         LightweightTypeReference _typeReference = it.getTypeReference();
@@ -160,6 +171,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public UnboundTypeReference getUnboundTypeReference(final Object handle) {
     final UnboundTypeReference result = super.getUnboundTypeReference(handle);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
@@ -171,6 +183,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public LightweightTypeReference getActualType(final JvmIdentifiableElement identifiable) {
     final LightweightTypeReference result = super.getActualType(identifiable);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
@@ -182,6 +195,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public LightweightTypeReference getActualType(final XExpression expression) {
     final LightweightTypeReference result = super.getActualType(expression);
     boolean _and = false;
@@ -200,6 +214,7 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public LightweightTypeReference getExpectedType(final XExpression expression) {
     final LightweightTypeReference result = super.getExpectedType(expression);
     ITypeReferenceOwner _referenceOwner = this.getReferenceOwner();
@@ -211,8 +226,10 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public LightweightTypeReference getMergedType(final List<LightweightTypeReference> types) {
     final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
+      @Override
       public void apply(final LightweightTypeReference it) {
         ITypeReferenceOwner _owner = it.getOwner();
         boolean _isOwnedBy = it.isOwnedBy(_owner);
@@ -233,8 +250,10 @@ public class ValidatingReassigningResolvedTypes extends ReassigningStackedResolv
     return result;
   }
   
+  @Override
   public TypeData mergeTypeData(final XExpression expression, final List<TypeData> allValues, final boolean returnType, final boolean nullIfEmpty) {
     final Procedure1<TypeData> _function = new Procedure1<TypeData>() {
+      @Override
       public void apply(final TypeData it) {
         ITypeReferenceOwner _referenceOwner = ValidatingReassigningResolvedTypes.this.getReferenceOwner();
         boolean _isOwnedBy = it.isOwnedBy(_referenceOwner);

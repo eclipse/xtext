@@ -85,9 +85,11 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     return AbstractExecutableBuilder.DEFAULT_BODY;
   }
   
+  @Override
   public void setContext(final EObject ctx) {
     super.setContext(ctx);
     final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+      @Override
       public void apply(final AbstractParameterBuilder it) {
         it.setContext(ctx);
       }
@@ -181,6 +183,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     return _xblockexpression;
   }
   
+  @Override
   public String getImage() {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();
@@ -205,11 +208,13 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
     return _switchResult;
   }
   
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;
     boolean _and_2 = false;
     final Function1<AbstractParameterBuilder, Boolean> _function = new Function1<AbstractParameterBuilder, Boolean>() {
+      @Override
       public Boolean apply(final AbstractParameterBuilder it) {
         return Boolean.valueOf(it.isValid());
       }

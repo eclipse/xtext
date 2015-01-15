@@ -253,6 +253,7 @@ public class LiveShadowedAllContainerStateTest {
       final IAllContainersState containerState = this.containerStateProvider.get(resourceDescriptions);
       EList<Resource> _resources = rs.getResources();
       final Function1<Resource, URI> _function = new Function1<Resource, URI>() {
+        @Override
         public URI apply(final Resource it) {
           return it.getURI();
         }
@@ -260,6 +261,7 @@ public class LiveShadowedAllContainerStateTest {
       List<URI> _map = ListExtensions.<Resource, URI>map(_resources, _function);
       final Set<URI> allURIs = IterableExtensions.<URI>toSet(_map);
       final Function1<URI, String> _function_1 = new Function1<URI, String>() {
+        @Override
         public String apply(final URI it) {
           return containerState.getContainerHandle(it);
         }
@@ -271,6 +273,7 @@ public class LiveShadowedAllContainerStateTest {
       IWorkspaceRoot _root = _workspace.getRoot();
       IProject[] _projects = _root.getProjects();
       final Function1<IProject, String> _function_2 = new Function1<IProject, String>() {
+        @Override
         public String apply(final IProject it) {
           return it.getName();
         }
@@ -290,6 +293,7 @@ public class LiveShadowedAllContainerStateTest {
           {
             Collection<URI> _containedURIs = containerState.getContainedURIs(container);
             final Function1<URI, String> _function_3 = new Function1<URI, String>() {
+              @Override
               public String apply(final URI it) {
                 return it.toString();
               }
@@ -303,6 +307,7 @@ public class LiveShadowedAllContainerStateTest {
               IResourceDescription _resourceDescription = resourceDescriptions.getResourceDescription(uri);
               Iterable<IEObjectDescription> _exportedObjects = _resourceDescription.getExportedObjects();
               final Function1<IEObjectDescription, QualifiedName> _function_4 = new Function1<IEObjectDescription, QualifiedName>() {
+                @Override
                 public QualifiedName apply(final IEObjectDescription it) {
                   return it.getName();
                 }

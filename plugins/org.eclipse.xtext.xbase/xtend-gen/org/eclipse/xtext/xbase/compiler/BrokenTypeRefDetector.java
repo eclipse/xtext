@@ -21,10 +21,12 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.InheritanceAware<Boolean> {
+  @Override
   protected Boolean handleNullReference() {
     return Boolean.valueOf(true);
   }
   
+  @Override
   public Boolean doVisitTypeReference(final JvmTypeReference it) {
     boolean _or = false;
     JvmType _type = it.getType();
@@ -39,6 +41,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     return Boolean.valueOf(_or);
   }
   
+  @Override
   public Boolean doVisitCompoundTypeReference(final JvmCompoundTypeReference it) {
     boolean _or = false;
     Boolean _doVisitTypeReference = this.doVisitTypeReference(it);
@@ -47,6 +50,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     } else {
       EList<JvmTypeReference> _references = it.getReferences();
       final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference it) {
           return BrokenTypeRefDetector.this.visit(it);
         }
@@ -57,6 +61,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     return Boolean.valueOf(_or);
   }
   
+  @Override
   public Boolean doVisitParameterizedTypeReference(final JvmParameterizedTypeReference it) {
     boolean _or = false;
     Boolean _doVisitTypeReference = this.doVisitTypeReference(it);
@@ -65,6 +70,7 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     } else {
       EList<JvmTypeReference> _arguments = it.getArguments();
       final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference it) {
           return BrokenTypeRefDetector.this.visit(it);
         }
@@ -75,9 +81,11 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
     return Boolean.valueOf(_or);
   }
   
+  @Override
   public Boolean doVisitWildcardTypeReference(final JvmWildcardTypeReference it) {
     EList<JvmTypeConstraint> _constraints = it.getConstraints();
     final Function1<JvmTypeConstraint, Boolean> _function = new Function1<JvmTypeConstraint, Boolean>() {
+      @Override
       public Boolean apply(final JvmTypeConstraint it) {
         JvmTypeReference _typeReference = it.getTypeReference();
         return BrokenTypeRefDetector.this.visit(_typeReference);

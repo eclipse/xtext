@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationImpl implements MutableParameterDeclaration {
+  @Override
   public void markAsRead() {
     this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -26,11 +27,13 @@ public class MutableJvmParameterDeclarationImpl extends JvmParameterDeclarationI
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
+  @Override
   public MutableExecutableDeclaration getDeclaringExecutable() {
     ExecutableDeclaration _declaringExecutable = super.getDeclaringExecutable();
     return ((MutableExecutableDeclaration) _declaringExecutable);
   }
   
+  @Override
   public void setSimpleName(final String name) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");

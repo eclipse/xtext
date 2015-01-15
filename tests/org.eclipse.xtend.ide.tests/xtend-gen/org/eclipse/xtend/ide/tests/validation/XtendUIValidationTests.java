@@ -58,6 +58,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   @Inject
   private OnChangeEvictingCache cache;
   
+  @Override
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
   }
@@ -561,6 +562,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
         _builder.newLine();
         XtendFile _xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
         final Procedure1<XtendFile> _function = new Procedure1<XtendFile>() {
+          @Override
           public void apply(final XtendFile it) {
             EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
             Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
@@ -582,6 +584,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
         _builder_1.newLine();
         XtendFile _xtendFile_1 = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder_1.toString());
         final Procedure1<XtendFile> _function_1 = new Procedure1<XtendFile>() {
+          @Override
           public void apply(final XtendFile it) {
             EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
             Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);

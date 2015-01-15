@@ -68,6 +68,7 @@ public class DomSerializer {
     List<CharSequence> _map = null;
     if (_contents!=null) {
       final Function1<Node, CharSequence> _function = new Function1<Node, CharSequence>() {
+        @Override
         public CharSequence apply(final Node it) {
           return DomSerializer.this.toText(it);
         }

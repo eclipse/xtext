@@ -22,6 +22,7 @@ public class IsolationTest extends AbstractBatchTypeResolverTest {
   @Inject
   private EagerBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }

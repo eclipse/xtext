@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Data
 @SuppressWarnings("all")
 public class TemplateWhitespace extends Chunk {
+  @Override
   public String toString() {
     CharSequence _text = this.getText();
     int _length = _text.length();

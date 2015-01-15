@@ -21,6 +21,7 @@ public class ResolvedParameterImpl implements ResolvedParameter {
   
   private final TypeReference resolvedType;
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(this.resolvedType, "");

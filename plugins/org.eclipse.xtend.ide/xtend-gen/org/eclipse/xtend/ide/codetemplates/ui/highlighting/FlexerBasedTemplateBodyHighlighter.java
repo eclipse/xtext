@@ -32,6 +32,7 @@ public class FlexerBasedTemplateBodyHighlighter extends TemplateBodyHighlighter 
   @Extension
   private AbstractAntlrTokenToAttributeIdMapper _abstractAntlrTokenToAttributeIdMapper;
   
+  @Override
   public void provideHighlightingFor(final String body, final IHighlightedPositionAcceptor acceptor) {
     StringReader _stringReader = new StringReader(body);
     final FlexTokenSource tokenSource = this._flexerFactory.createTokenSource(_stringReader);

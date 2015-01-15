@@ -13,10 +13,12 @@ public class UnknownType implements Type {
   
   private final String qualifiedName;
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     return false;
   }
   
+  @Override
   public String getSimpleName() {
     String _xblockexpression = null;
     {

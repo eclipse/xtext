@@ -43,6 +43,7 @@ public class FileLocationsImpl implements FileLocations {
     return projectConfig;
   }
   
+  @Override
   public Path getSourceFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
     Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
@@ -56,6 +57,7 @@ public class FileLocationsImpl implements FileLocations {
     return null;
   }
   
+  @Override
   public Path getTargetFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
     Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
@@ -70,11 +72,13 @@ public class FileLocationsImpl implements FileLocations {
     return null;
   }
   
+  @Override
   public Path getProjectFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
     return config.getRootPath();
   }
   
+  @Override
   public Set<Path> getProjectSourceFolders(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
     Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
