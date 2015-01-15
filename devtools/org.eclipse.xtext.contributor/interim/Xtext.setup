@@ -41,12 +41,16 @@
       encoding="UTF-8"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      name="xtext.git.branch"
+      value="${scope.project.stream.name}"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
       value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
-      value="http://download.eclipse.org/modeling/emf/emf/updates/nightly"/>
+      value="http://download.eclipse.org/modeling/emf/emf/updates/milestones"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
@@ -75,7 +79,8 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.xtext"
-      remoteURI="tmf/org.eclipse.xtext">
+      remoteURI="tmf/org.eclipse.xtext"
+      checkoutBranch="${xtext.git.branch}">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
       <detail
@@ -246,6 +251,8 @@
           name="org.eclipse.pde.feature.group"/>
       <requirement
           name="org.eclipse.m2e.core"/>
+      <requirement
+          name="org.eclipse.emf.sdk.feature.group"/>
       <repositoryList
           name="Mars">
         <repository
@@ -260,6 +267,8 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Luna">
@@ -275,6 +284,8 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Kepler">
@@ -288,6 +299,8 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Juno">
@@ -301,6 +314,8 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Indigo">
@@ -314,6 +329,8 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Helios">
@@ -327,6 +344,8 @@
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
@@ -459,7 +478,7 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="Xtext Features">
+          name="Features">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -471,7 +490,7 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="Xtext Maven">
+          name="Maven">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -489,7 +508,7 @@
         </predicate>
       </workingSet>
       <workingSet
-          name="Xtext Docs">
+          name="Docs">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -507,7 +526,7 @@
             pattern=".*\.website\.generator"/>
       </workingSet>
       <workingSet
-          name="Xtext Idea">
+          name="Idea">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -675,7 +694,7 @@
       <setupTask
           xsi:type="setup:VariableTask"
           name="xtext.git.branch"
-          value="maintenance"/>
+          value="v2.7_Maintenance"/>
       <setupTask
           xsi:type="setup:VariableTask"
           name="xtext.nightly.composite"
