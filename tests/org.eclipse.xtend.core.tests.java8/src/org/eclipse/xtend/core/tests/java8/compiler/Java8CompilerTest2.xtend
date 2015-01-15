@@ -802,8 +802,8 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			      @Override
 			      protected T computeNext() {
 			        T _elvis = null;
-			        final Function1<T, Boolean> _function = (T it) -> {
-			          return Boolean.valueOf((!Objects.equal(it, null)));
+			        final Function1<T, Boolean> _function = (T it_1) -> {
+			          return Boolean.valueOf((!Objects.equal(it_1, null)));
 			        };
 			        T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
 			        if (_findFirst != null) {

@@ -32,7 +32,7 @@ public class Java8CompilerTest1 extends CompilerTest {
       _builder.append("val intArray = #[1, 2, 3, 4, 5, 6, 7, 8]");
       _builder.newLine();
       _builder.append("    ");
-      _builder.append("intArray.stream.reduce[$0, $1 | Integer.sum($0, $1)].get");
+      _builder.append("intArray.stream.reduce[Integer.sum($0, $1)].get");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -416,10 +416,10 @@ public class Java8CompilerTest1 extends CompilerTest {
       _builder.append("def test() {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("val IntegerMath addition = [a, b | a + b]");
+      _builder.append("val IntegerMath addition = [$0 + $1]");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("val IntegerMath subtraction = [a, b | a - b]");
+      _builder.append("val IntegerMath subtraction = [$0 - $1]");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("40.operateBinary(2, addition).operateBinary(10, subtraction)");

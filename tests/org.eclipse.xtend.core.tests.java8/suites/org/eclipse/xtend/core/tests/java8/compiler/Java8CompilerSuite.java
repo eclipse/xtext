@@ -17,7 +17,24 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	Java8CompilerTest1.class,
-	Java8CompilerTest2.class
+	Java8CompilerTest2.class,
+	CompilerBug342021Test.class,
+	CompilerBug383534Test.class,
+	CompilerBug404051Test.class,
+	CompilerBug405825Test.class,
+	CompilerBug406425Test.class,
+	CompilerBug410797Test.class,
+	CompilerBug412894Test.class,
+	CompilerBug421999Test.class,
+	CompilerBug427637Test.class,
+	CompilerBug428063Test.class,
+	CompilerBug432193Test.class,
+	CompilerBug435473Test.class,
+	CompilerBug436230Test.class,
+	CompilerBug440906Test.class,
+	CompilerBug445487Test.class,
+	CompilerBug447516Test.class,
+	CompilerBug457333Test.class
 })
 public class Java8CompilerSuite {
 }
