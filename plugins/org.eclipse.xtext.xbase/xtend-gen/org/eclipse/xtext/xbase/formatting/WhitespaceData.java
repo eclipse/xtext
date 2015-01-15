@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class WhitespaceData extends FormattingData {
   private final String space;
   
+  @Override
   public boolean isEmpty() {
     return Objects.equal(this.space, null);
   }

@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 @SuppressWarnings("all")
 public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements FieldDeclaration {
+  @Override
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();
@@ -30,11 +31,13 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     return _compilationUnit.toVisibility(_visibility);
   }
   
+  @Override
   public String getSimpleName() {
     XtendField _delegate = this.getDelegate();
     return _delegate.getName();
   }
   
+  @Override
   public Expression getInitializer() {
     XtendField _delegate = this.getDelegate();
     XExpression _initialValue = _delegate.getInitialValue();
@@ -48,24 +51,29 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     return _compilationUnit.toExpression(_initialValue_1);
   }
   
+  @Override
   public boolean isFinal() {
     XtendField _delegate = this.getDelegate();
     return _delegate.isFinal();
   }
   
+  @Override
   public boolean isStatic() {
     XtendField _delegate = this.getDelegate();
     return _delegate.isStatic();
   }
   
+  @Override
   public boolean isTransient() {
     return false;
   }
   
+  @Override
   public boolean isVolatile() {
     return false;
   }
   
+  @Override
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();
@@ -73,6 +81,7 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     return _compilationUnit.toTypeReference(_type);
   }
   
+  @Override
   public ClassDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((ClassDeclaration) _declaringType);

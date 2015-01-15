@@ -43,12 +43,14 @@ public class IdeaPluginExtension {
   public List<AbstractRule> getAllRules(final Grammar grammar, final List<AbstractRule> rules) {
     EList<AbstractRule> _rules = grammar.getRules();
     final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+      @Override
       public Boolean apply(final AbstractRule e) {
         boolean _and = false;
         if (!(!(e instanceof TerminalRule))) {
           _and = false;
         } else {
           final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+            @Override
             public Boolean apply(final AbstractRule r) {
               String _name = r.getName();
               String _name_1 = e.getName();
@@ -159,6 +161,7 @@ public class IdeaPluginExtension {
   public boolean hasName(final AbstractRule rule) {
     List<Assignment> _assignments = this.getAssignments(rule);
     final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      @Override
       public Boolean apply(final Assignment a) {
         String _feature = a.getFeature();
         return Boolean.valueOf(_feature.equals("name"));
@@ -172,6 +175,7 @@ public class IdeaPluginExtension {
   public List<Assignment> getAssignmentsWithoutName(final AbstractRule rule) {
     List<Assignment> _assignments = this.getAssignments(rule);
     final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      @Override
       public Boolean apply(final Assignment a) {
         String _feature = a.getFeature();
         boolean _equals = _feature.equals("name");
@@ -186,6 +190,7 @@ public class IdeaPluginExtension {
     TreeIterator<EObject> _eAllContents = rule.eAllContents();
     Iterator<Assignment> _filter = Iterators.<Assignment>filter(_eAllContents, Assignment.class);
     final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      @Override
       public Boolean apply(final Assignment a) {
         AbstractRule _containingRule = GrammarUtil.containingRule(a);
         return Boolean.valueOf(_containingRule.equals(rule));
@@ -199,6 +204,7 @@ public class IdeaPluginExtension {
     TreeIterator<EObject> _eAllContents = rule.eAllContents();
     Iterator<EnumLiteralDeclaration> _filter = Iterators.<EnumLiteralDeclaration>filter(_eAllContents, EnumLiteralDeclaration.class);
     final Function1<EnumLiteralDeclaration, Boolean> _function = new Function1<EnumLiteralDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final EnumLiteralDeclaration a) {
         AbstractRule _containingRule = GrammarUtil.containingRule(a);
         return Boolean.valueOf(_containingRule.equals(rule));
@@ -245,6 +251,7 @@ public class IdeaPluginExtension {
   public Iterable<Assignment> getMultipleAssignments(final AbstractRule rule) {
     List<Assignment> _assignments = this.getAssignments(rule);
     final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
+      @Override
       public Boolean apply(final Assignment a) {
         return Boolean.valueOf(IdeaPluginExtension.this.isMultiple(a));
       }

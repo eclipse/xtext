@@ -26,6 +26,7 @@ public class AssociatorImpl implements Associator {
     this.unit = unit;
   }
   
+  @Override
   public void setPrimarySourceElement(final MutableElement javaElement, final Element sourceElement) {
     TracabilityImpl _tracability = this.unit.getTracability();
     final Element primarySourceElement = _tracability.getPrimarySourceElement(sourceElement);

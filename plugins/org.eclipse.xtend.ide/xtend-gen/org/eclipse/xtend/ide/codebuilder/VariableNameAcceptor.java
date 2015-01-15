@@ -27,6 +27,7 @@ public class VariableNameAcceptor implements JdtVariableCompletions.CompletionDa
     this.notallowed = notallowed;
   }
   
+  @Override
   public void accept(final String replaceText, final StyledString label, final Image img) {
     this.variableNames.add(replaceText);
     this.notallowed.add(replaceText);
@@ -35,6 +36,7 @@ public class VariableNameAcceptor implements JdtVariableCompletions.CompletionDa
   public String getVariableName() {
     final ArrayList<String> candidates = Lists.<String>newArrayList(this.variableNames);
     final Comparator<String> _function = new Comparator<String>() {
+      @Override
       public int compare(final String left, final String right) {
         int _length = left.length();
         int _length_1 = right.length();

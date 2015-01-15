@@ -17,6 +17,7 @@ public class SimpleUnboundTypeReference extends UnboundTypeReference {
     super(owner, null, typeParameter, handle);
   }
   
+  @Override
   protected UnboundTypeReference createCopy(final ITypeReferenceOwner owner) {
     JvmTypeParameter _typeParameter = this.getTypeParameter();
     Object _handle = this.getHandle();

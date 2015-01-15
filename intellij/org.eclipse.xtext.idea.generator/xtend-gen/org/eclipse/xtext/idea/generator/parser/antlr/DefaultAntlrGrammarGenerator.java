@@ -188,6 +188,7 @@ public class DefaultAntlrGrammarGenerator {
     {
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
       final Function1<ParserRule, Boolean> _function = new Function1<ParserRule, Boolean>() {
+        @Override
         public Boolean apply(final ParserRule it) {
           Grammar _grammar = GrammarUtil.getGrammar(it);
           return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(it, _grammar));
@@ -204,6 +205,7 @@ public class DefaultAntlrGrammarGenerator {
     {
       List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
       final Function1<EnumRule, Boolean> _function_1 = new Function1<EnumRule, Boolean>() {
+        @Override
         public Boolean apply(final EnumRule it) {
           Grammar _grammar = GrammarUtil.getGrammar(it);
           return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(it, _grammar));

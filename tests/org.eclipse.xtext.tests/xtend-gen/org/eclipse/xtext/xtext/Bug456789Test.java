@@ -24,6 +24,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class Bug456789Test extends AbstractXtextTests {
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     this.with(XtextStandaloneSetup.class);

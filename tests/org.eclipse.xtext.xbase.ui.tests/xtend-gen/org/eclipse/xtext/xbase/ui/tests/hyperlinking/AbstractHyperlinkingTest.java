@@ -50,6 +50,7 @@ public class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements
     JavaProjectSetupUtil.deleteProject(AbstractHyperlinkingTest.staticProject);
   }
   
+  @Override
   public XtextResource getResourceFor(final InputStream stream) {
     try {
       XtextResourceSet _resourceSet = this.getResourceSet();
@@ -81,6 +82,7 @@ public class AbstractHyperlinkingTest extends AbstractXbaseUITestCase implements
     set.setClasspathURIContext(_javaProject);
   }
   
+  @Override
   public IJavaProject getJavaProject(final ResourceSet set) {
     return JavaCore.create(AbstractHyperlinkingTest.staticProject);
   }

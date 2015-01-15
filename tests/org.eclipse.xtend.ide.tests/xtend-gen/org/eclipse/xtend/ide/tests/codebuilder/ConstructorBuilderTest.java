@@ -27,6 +27,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -57,6 +58,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -88,12 +90,14 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
         it.setVisibility(JvmVisibility.PROTECTED);
         AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
             LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_xtendClass);
@@ -104,6 +108,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
         ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
         AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
             LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_javaClass);
@@ -130,12 +135,14 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
         it.setVisibility(JvmVisibility.PRIVATE);
         AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
             LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_xtendClass);
@@ -146,6 +153,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
         ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
         AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
             LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_javaClass);
@@ -173,6 +181,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -199,6 +208,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -226,6 +236,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -248,6 +259,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
     final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
+      @Override
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);

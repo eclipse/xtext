@@ -23,6 +23,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
     final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+      @Override
       public void apply(final AbstractFieldBuilder it) {
         JvmDeclaredType _xtendClass = FieldBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -41,6 +42,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
     final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+      @Override
       public void apply(final AbstractFieldBuilder it) {
         JvmDeclaredType _xtendClass = FieldBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -60,6 +62,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
     final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+      @Override
       public void apply(final AbstractFieldBuilder it) {
         JvmDeclaredType _xtendClass = FieldBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -80,6 +83,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
     final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+      @Override
       public void apply(final AbstractFieldBuilder it) {
         JvmDeclaredType _javaClass = FieldBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -98,6 +102,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
     final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+      @Override
       public void apply(final AbstractFieldBuilder it) {
         JvmDeclaredType _javaClass = FieldBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -117,6 +122,7 @@ public class FieldBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
     final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+      @Override
       public void apply(final AbstractFieldBuilder it) {
         JvmDeclaredType _javaClass = FieldBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);

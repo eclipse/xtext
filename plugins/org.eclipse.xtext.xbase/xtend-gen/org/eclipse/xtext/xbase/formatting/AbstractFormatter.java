@@ -32,6 +32,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
   
   private boolean conflictOccurred = false;
   
+  @Override
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final FormattingPreferenceValues cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
@@ -65,6 +66,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         _xifexpression = edits;
       } else {
         final Function1<TextReplacement, Boolean> _function = new Function1<TextReplacement, Boolean>() {
+          @Override
           public Boolean apply(final TextReplacement it) {
             int _offset = it.getOffset();
             int _offset_1 = it.getOffset();

@@ -44,6 +44,7 @@ public class DefaultTaskFinder implements ITaskFinder {
   @Inject
   private IHiddenTokenHelper hiddenTokenHelper;
   
+  @Override
   public List<Task> findTasks(final Resource resource) {
     List<Task> _xblockexpression = null;
     {
@@ -81,6 +82,7 @@ public class DefaultTaskFinder implements ITaskFinder {
   protected List<Task> findTasks(final ICompositeNode it, final TaskTags taskTags) {
     Iterable<ILeafNode> _leafNodes = it.getLeafNodes();
     final Function1<ILeafNode, List<Task>> _function = new Function1<ILeafNode, List<Task>>() {
+      @Override
       public List<Task> apply(final ILeafNode it) {
         return DefaultTaskFinder.this.findTasks(it, taskTags);
       }
@@ -96,6 +98,7 @@ public class DefaultTaskFinder implements ITaskFinder {
       String _text = node.getText();
       final List<Task> tasks = this.parser.parseTasks(_text, taskTags);
       final Procedure1<Task> _function = new Procedure1<Task>() {
+        @Override
         public void apply(final Task it) {
           int _offset = it.getOffset();
           int _offset_1 = node.getOffset();

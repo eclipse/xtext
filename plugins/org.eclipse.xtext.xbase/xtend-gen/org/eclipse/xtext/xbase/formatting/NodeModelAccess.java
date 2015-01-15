@@ -32,6 +32,7 @@ public class NodeModelAccess {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
       BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
       final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
+        @Override
         public Boolean apply(final INode it) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -66,6 +67,7 @@ public class NodeModelAccess {
       BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
       Iterable<ILeafNode> _filter = Iterables.<ILeafNode>filter(_asTreeIterable, ILeafNode.class);
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
+        @Override
         public Boolean apply(final ILeafNode it) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -116,6 +118,7 @@ public class NodeModelAccess {
       }
       final INode current1 = current;
       final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
+        @Override
         public Boolean apply(final ILeafNode it) {
           boolean _and = false;
           boolean _notEquals = (!Objects.equal(current1, it));

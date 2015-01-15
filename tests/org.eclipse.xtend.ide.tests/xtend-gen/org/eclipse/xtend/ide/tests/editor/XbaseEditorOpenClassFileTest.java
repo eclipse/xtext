@@ -34,6 +34,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   private WorkbenchTestHelper helper;
   
   @After
+  @Override
   public void tearDown() {
     try {
       this.helper.tearDown();

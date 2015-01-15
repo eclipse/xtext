@@ -32,6 +32,7 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
   private WorkbenchTestHelper workbenchTestHelper;
   
   @After
+  @Override
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
@@ -57,6 +58,7 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
     try {
       IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("testProject");
       final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
+        @Override
         public void apply(final IJavaProject it) {
           try {
             JavaProjectSetupUtil.addSourceFolder(it, "filtered-src", null, new String[] { "**.xtend" });

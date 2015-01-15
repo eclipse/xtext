@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistForTest9 extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "for( String s:";
   }

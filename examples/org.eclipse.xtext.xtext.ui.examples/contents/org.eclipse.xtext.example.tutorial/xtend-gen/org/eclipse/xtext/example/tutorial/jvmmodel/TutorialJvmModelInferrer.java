@@ -37,6 +37,7 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
     QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+      @Override
       public void apply(final JvmGenericType it) {
         String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
         TutorialJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
@@ -59,6 +60,7 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
       String _name = property.getName();
       JvmTypeReference _type = property.getType();
       final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
+        @Override
         public void apply(final JvmField it) {
           String _documentation = TutorialJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(property);
           TutorialJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);

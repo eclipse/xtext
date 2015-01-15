@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
+  @Override
   public void markAsRead() {
     this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -42,11 +43,13 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
+  @Override
   public MutableTypeParameterDeclarator getTypeParameterDeclarator() {
     TypeParameterDeclarator _typeParameterDeclarator = super.getTypeParameterDeclarator();
     return ((MutableTypeParameterDeclarator) _typeParameterDeclarator);
   }
   
+  @Override
   public void setSimpleName(final String name) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
@@ -54,6 +57,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     _delegate.setName(name);
   }
   
+  @Override
   public void remove() {
     this.checkMutable();
     JvmTypeParameter _delegate = this.getDelegate();
@@ -80,14 +84,17 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     Preconditions.checkState(_equals, _builder_1);
   }
   
+  @Override
   public AnnotationReference addAnnotation(final AnnotationReference annotationReference) {
     throw new UnsupportedOperationException("It is not possible to add an annotation.");
   }
   
+  @Override
   public boolean removeAnnotation(final AnnotationReference annotationReference) {
     throw new UnsupportedOperationException("It is not possible to remove an annotation.");
   }
   
+  @Override
   public void setUpperBounds(final Iterable<? extends TypeReference> upperBounds) {
     this.checkMutable();
     ConditionUtils.checkIterable(upperBounds, "upperBounds");

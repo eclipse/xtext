@@ -28,6 +28,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class BuildPathFilteringTest extends AbstractXtendUITestCase {
   @After
+  @Override
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
@@ -37,6 +38,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = new Procedure1<IProject>() {
+        @Override
         public void apply(final IProject it) {
           try {
             IJavaProject _create = JavaCore.create(it);
@@ -61,6 +63,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = new Procedure1<IProject>() {
+        @Override
         public void apply(final IProject it) {
           try {
             IJavaProject _create = JavaCore.create(it);
@@ -90,6 +93,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = new Procedure1<IProject>() {
+        @Override
         public void apply(final IProject it) {
           try {
             IJavaProject _create = JavaCore.create(it);
@@ -120,6 +124,7 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
       final Procedure1<IProject> _function = new Procedure1<IProject>() {
+        @Override
         public void apply(final IProject it) {
           try {
             IJavaProject _create = JavaCore.create(it);

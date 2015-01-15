@@ -94,6 +94,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       int _size = ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size();
       Assert.assertEquals(1, _size);
       final Function1<ICompletionProposal, Boolean> _function = new Function1<ICompletionProposal, Boolean>() {
+        @Override
         public Boolean apply(final ICompletionProposal e) {
           String _string = e.toString();
           return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
@@ -103,6 +104,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       boolean _not = (!_exists);
       Assert.assertTrue(_not);
       final Function1<ICompletionProposal, Boolean> _function_1 = new Function1<ICompletionProposal, Boolean>() {
+        @Override
         public Boolean apply(final ICompletionProposal e) {
           String _string = e.toString();
           return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
@@ -153,6 +155,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       int _indexOf = clientModel.indexOf("|");
       final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, _indexOf);
       final Function1<ICompletionProposal, Boolean> _function = new Function1<ICompletionProposal, Boolean>() {
+        @Override
         public Boolean apply(final ICompletionProposal e) {
           String _string = e.toString();
           return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
@@ -162,6 +165,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       boolean _not = (!_exists);
       Assert.assertTrue(_not);
       final Function1<ICompletionProposal, Boolean> _function_1 = new Function1<ICompletionProposal, Boolean>() {
+        @Override
         public Boolean apply(final ICompletionProposal e) {
           String _string = e.toString();
           return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));

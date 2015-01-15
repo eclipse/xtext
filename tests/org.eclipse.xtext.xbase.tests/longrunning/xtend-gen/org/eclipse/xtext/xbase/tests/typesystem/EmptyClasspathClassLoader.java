@@ -11,6 +11,7 @@ import java.net.URL;
 
 @SuppressWarnings("all")
 public class EmptyClasspathClassLoader extends ClassLoader {
+  @Override
   public URL getResource(final String name) {
     URL _xifexpression = null;
     boolean _endsWith = name.endsWith(".class");

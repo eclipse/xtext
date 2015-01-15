@@ -19,14 +19,17 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumerationType> implements EnumerationTypeDeclaration {
+  @Override
   public Iterable<? extends EnumerationValueDeclaration> getDeclaredValues() {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     return Iterables.<EnumerationValueDeclaration>filter(_declaredMembers, EnumerationValueDeclaration.class);
   }
   
+  @Override
   public EnumerationValueDeclaration findDeclaredValue(final String name) {
     Iterable<? extends EnumerationValueDeclaration> _declaredValues = this.getDeclaredValues();
     final Function1<EnumerationValueDeclaration, Boolean> _function = new Function1<EnumerationValueDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final EnumerationValueDeclaration value) {
         String _simpleName = value.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));

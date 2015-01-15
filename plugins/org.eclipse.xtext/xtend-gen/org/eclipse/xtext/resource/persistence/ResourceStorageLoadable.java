@@ -89,6 +89,7 @@ public class ResourceStorageLoadable {
       zipIn.getNextEntry();
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
       final BinaryResourceImpl.EObjectInputStream in = new BinaryResourceImpl.EObjectInputStream(zipIn, _emptyMap) {
+        @Override
         public int readCompressedInt() throws IOException {
           int _xblockexpression = (int) 0;
           {

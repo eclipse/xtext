@@ -40,6 +40,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
   @Inject
   private DispatchRenameSupport dispatchRenameSupport;
   
+  @Override
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
     super.tearDown();
@@ -825,6 +826,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
     XtendFunction _firstMethod = this.firstMethod(targetFile);
     Iterable<JvmOperation> _allDispatchOperations = this.dispatchRenameSupport.getAllDispatchOperations(_firstMethod);
     final Function1<JvmOperation, String> _function = new Function1<JvmOperation, String>() {
+      @Override
       public String apply(final JvmOperation it) {
         return DispatchRenameSupportTest.this.signature(it);
       }

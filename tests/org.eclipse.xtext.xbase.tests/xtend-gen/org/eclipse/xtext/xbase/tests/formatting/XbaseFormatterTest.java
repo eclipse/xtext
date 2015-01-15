@@ -25,6 +25,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatGenerics() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = <Pair<String, String>>newArrayList()");
@@ -38,6 +39,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBlockExpression() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\");");
@@ -59,6 +61,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBlockExpressionPreserveNewLines() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("{");
@@ -110,6 +113,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosures() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -127,6 +131,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresParenthesis() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -144,6 +149,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresParenthesis2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -161,6 +167,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresSemicolon() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("newArrayList(\"A\", \"b\").filter[val b = it; b.toUpperCase == b]");
@@ -178,6 +185,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresEmpty() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -199,6 +207,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresParam() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -216,6 +225,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresEmptyParam() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val Iterable<Object> x = [|#[].iterator]");
@@ -229,6 +239,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresMultiLine() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -263,6 +274,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresMultiLine_02() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -297,6 +309,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresMultiLine03() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("new Thread [|");
@@ -321,6 +334,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresMultiLineSemicolon() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -355,6 +369,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresWrapIfNeeded() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -390,6 +405,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresParamMultiLine() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = newArrayList(\"A\", \"b\")");
@@ -424,6 +440,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatClosuresWithOperator() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = new StringBuffer() => [");
@@ -457,6 +474,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMultiLineClosureWithAssignment() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("x += foo.myBuilder [");
@@ -487,6 +505,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSynchronizedBlock_1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("synchronized (new Object) {");
@@ -506,6 +525,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSynchronizedBlock_2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("synchronized (new Object) {");
@@ -525,8 +545,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1SL1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(true));
           }
@@ -544,8 +566,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1SL2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisSL, Boolean.valueOf(false));
           }
@@ -563,8 +587,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1ML1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
           }
@@ -585,8 +611,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1ML2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
           }
@@ -607,6 +635,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1MLVar() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("var x = if (true)");
@@ -635,6 +664,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1MLSemicolon1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true)");
@@ -657,6 +687,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf1MLSemicolon2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true)");
@@ -683,6 +714,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIf2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true) {");
@@ -701,6 +733,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElse1SL() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if(true) println(\"foo\") else println(\"bar\")");
@@ -718,6 +751,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElse1ML() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true)");
@@ -749,6 +783,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElse2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true) {");
@@ -772,8 +807,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElse3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -807,6 +844,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElseIf1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true)");
@@ -838,6 +876,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElseIf2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true) {");
@@ -873,6 +912,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatIfElseIf3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true) {");
@@ -904,6 +944,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatFor1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("for (i : 1 .. 2)");
@@ -924,8 +965,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatFor2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -948,8 +991,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatFor3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -974,6 +1019,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBasicFor() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("for (var i = 1; i < 10; i = i + 1)");
@@ -994,6 +1040,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBasicFor2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("for (;;) {");
@@ -1016,6 +1063,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBasicFor3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("var int x");
@@ -1046,6 +1094,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBasicFor4() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = 1");
@@ -1070,6 +1119,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBasicFor5() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val x = 1");
@@ -1094,6 +1144,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBasicFor6() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("for (val x = 1;; x = x + 1, x = x + 2)");
@@ -1114,8 +1165,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatWhile11() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
           }
@@ -1136,8 +1189,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatWhile12() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
           }
@@ -1158,8 +1213,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatWhile2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -1182,8 +1239,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatWhile21() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1208,8 +1267,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatDoWhile11() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
           }
@@ -1232,8 +1293,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatDoWhile12() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
           }
@@ -1256,8 +1319,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatDoWhile2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -1280,8 +1345,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatDoWhile3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1308,8 +1375,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchSL() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -1327,8 +1396,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchSL1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1346,8 +1417,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchDefaultSL() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -1365,8 +1438,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchDefaultSL1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1384,8 +1459,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchCaseSL1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1413,6 +1490,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchCaseSLParenthesis() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch \'x\' {");
@@ -1443,8 +1521,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchCaseDefaultSL1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1475,6 +1555,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchCaseDefaultSLParenthesis() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch \'x\' {");
@@ -1508,6 +1589,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchML() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch \'x\' {");
@@ -1547,6 +1629,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchDefaultML() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch \'x\' {");
@@ -1592,6 +1675,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchDefault2ML() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch \'x\' {");
@@ -1640,6 +1724,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchDefault2MLFallThrough() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch \'x\' {");
@@ -1685,8 +1770,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchMLBlock() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -1728,8 +1815,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchDefaultMLBlock() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -1780,8 +1869,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatSwitchMLBlock1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -1831,6 +1922,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatFeatureCallNoParenthesis() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val v1 = newArrayList");
@@ -1846,6 +1938,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatFeatureCallNoParams() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val v1 = newArrayList()");
@@ -1861,6 +1954,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatFeatureCall1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4, 5, 6),");
@@ -1884,6 +1978,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatFeatureCall2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML2 = newArrayList(newArrayList(1, 2, 3, 4),");
@@ -1910,6 +2005,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatFeatureCallMultiline() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML2 = newArrayList(");
@@ -1946,6 +2042,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatConstructorCallNoParenthesis() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val v1 = new ArrayList");
@@ -1961,6 +2058,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatConstructorCallClosure() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("new Thread[|println(\"foo\")]");
@@ -1974,6 +2072,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatConstructorCallNoParams() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val v1 = new ArrayList()");
@@ -1989,6 +2088,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatConstructorCall1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4, 5, 6),");
@@ -2012,6 +2112,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatConstructorCall2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML2 = new ArrayList(new ArrayList(1, 2, 3, 4),");
@@ -2038,6 +2139,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatConstructorCallMultiline() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML2 = new ArrayList(");
@@ -2074,6 +2176,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallNoParenthesis() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val v1 = \"x\".toString");
@@ -2089,6 +2192,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallNoParams() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val v1 = \"x\".toString()");
@@ -2104,6 +2208,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCall1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = \"x\".substring(0).substring(1).substring(2).substring(3).");
@@ -2127,6 +2232,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCall2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = \"x\".substring(0).substring(1)");
@@ -2152,6 +2258,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCall21() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = \"x\".toString.toString");
@@ -2177,6 +2284,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCall3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = \"x\".substring(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,");
@@ -2197,6 +2305,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCall4() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = \"x\".substring(0, 1, 2)");
@@ -2223,6 +2332,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallMultiline() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = \"x\".substring(");
@@ -2262,6 +2372,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallBuilder1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("newArrayList(\"x\").map()[]");
@@ -2279,6 +2390,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallBuilder2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("newArrayList(\"x\").map()[lenght]");
@@ -2296,6 +2408,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallBuilderMultiline1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("newArrayList(\"x\").map(");
@@ -2320,6 +2433,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatMemberFeatureCallBuilderMultiline2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("newArrayList(\"x\").map(length) [");
@@ -2344,6 +2458,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBinaryExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 +");
@@ -2367,6 +2482,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatBinaryExpression2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ML1 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 +");
@@ -2390,6 +2506,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXTypeLiteral() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("typeof(String)");
@@ -2407,6 +2524,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXTypeLiteralArray1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("typeof(String[])");
@@ -2424,6 +2542,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXTypeLiteralArray2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("typeof(String[][])");
@@ -2441,6 +2560,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXThrowExpression() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("throw new RuntimeException()");
@@ -2458,6 +2578,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXReturnExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("return \"foo\"");
@@ -2475,6 +2596,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXReturnExpression2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("\"foo\"");
@@ -2494,6 +2616,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatXReturnExpression3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("return;");
@@ -2511,6 +2634,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryFinallyExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("try");
@@ -2536,6 +2660,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryFinallyExpression2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("try {");
@@ -2563,8 +2688,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchExpression11() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(true));
           }
@@ -2590,8 +2717,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchExpression12() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.whitespaceBetweenKeywordAndParenthesisML, Boolean.valueOf(false));
           }
@@ -2617,6 +2746,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchExpression2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("try {");
@@ -2644,6 +2774,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchFinallyExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("try");
@@ -2674,8 +2805,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchFinallyExpression2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
           }
@@ -2712,8 +2845,10 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchFinallyExpression3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
           }
@@ -2760,6 +2895,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchCatchFinallyExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("try");
@@ -2795,6 +2931,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatTryCatchCatchFinallyExpression2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("try {");
@@ -2832,6 +2969,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatListLiteral1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("#[12, 13, 14]");
@@ -2849,6 +2987,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatListLiteral3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("#[");
@@ -2879,6 +3018,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatEmptySwitchSL() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch null { }");
@@ -2896,6 +3036,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatEmptySwitchSL_2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch null { default: 1 }");
@@ -2913,6 +3054,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatEmptySwitchML() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch null {");
@@ -2940,6 +3082,7 @@ public class XbaseFormatterTest {
   @Test
   public void formatEmptySwitchML_2() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("switch null {");

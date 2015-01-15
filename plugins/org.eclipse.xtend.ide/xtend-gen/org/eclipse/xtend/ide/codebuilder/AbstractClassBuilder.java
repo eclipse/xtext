@@ -19,6 +19,7 @@ public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
   @Accessors
   private String className;
   
+  @Override
   public String getImage() {
     return "newclass_wiz.gif";
   }

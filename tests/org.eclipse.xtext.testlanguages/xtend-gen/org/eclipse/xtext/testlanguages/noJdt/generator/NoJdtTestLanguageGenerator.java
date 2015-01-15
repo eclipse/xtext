@@ -21,10 +21,12 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
  */
 @SuppressWarnings("all")
 public class NoJdtTestLanguageGenerator implements IGenerator {
+  @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterator<Greeting> _filter = Iterators.<Greeting>filter(_allContents, Greeting.class);
     final Function1<Greeting, String> _function = new Function1<Greeting, String>() {
+      @Override
       public String apply(final Greeting it) {
         return it.getName();
       }

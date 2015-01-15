@@ -20,6 +20,7 @@ public class EagerReentrantTypeResolver extends DefaultReentrantTypeResolver {
   @Inject
   private EagerArgumentTypeComputer typeComputer;
   
+  @Override
   protected ITypeComputer getTypeComputer() {
     return this.typeComputer;
   }

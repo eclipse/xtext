@@ -59,6 +59,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
     boolean _isEmpty = IterableExtensions.isEmpty(_elements);
     Assert.assertFalse(toString, _isEmpty);
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         QualifiedName _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, name));
@@ -83,6 +84,7 @@ public class ExpressionScopeTest extends AbstractXbaseTestCase {
     boolean _isEmpty = IterableExtensions.isEmpty(_elements);
     Assert.assertTrue(toString, _isEmpty);
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         QualifiedName _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, name));

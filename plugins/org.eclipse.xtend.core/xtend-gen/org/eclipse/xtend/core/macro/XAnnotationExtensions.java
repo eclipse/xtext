@@ -184,6 +184,7 @@ public class XAnnotationExtensions {
   public JvmType getProcessorType(final JvmAnnotationType it) {
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     final Function1<JvmAnnotationReference, Boolean> _function = new Function1<JvmAnnotationReference, Boolean>() {
+      @Override
       public Boolean apply(final JvmAnnotationReference it) {
         JvmAnnotationType _annotation = it.getAnnotation();
         String _identifier = null;
@@ -197,6 +198,7 @@ public class XAnnotationExtensions {
     final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(_annotations, _function);
     EList<JvmAnnotationValue> _values = activeAnnotation.getValues();
     final Function1<JvmAnnotationValue, Boolean> _function_1 = new Function1<JvmAnnotationValue, Boolean>() {
+      @Override
       public Boolean apply(final JvmAnnotationValue it) {
         boolean _or = false;
         JvmOperation _operation = it.getOperation();

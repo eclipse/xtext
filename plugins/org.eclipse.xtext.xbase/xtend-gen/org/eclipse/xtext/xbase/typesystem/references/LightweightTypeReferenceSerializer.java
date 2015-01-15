@@ -27,22 +27,26 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     this.appender = appender;
   }
   
+  @Override
   protected void doVisitAnyTypeReference(final AnyTypeReference reference) {
     LightweightTypeReference _javaType = reference.toJavaType();
     _javaType.accept(this);
   }
   
+  @Override
   protected void doVisitArrayTypeReference(final ArrayTypeReference reference) {
     LightweightTypeReference _componentType = reference.getComponentType();
     _componentType.accept(this);
     this.appender.append("[]");
   }
   
+  @Override
   protected void doVisitCompoundTypeReference(final CompoundTypeReference reference) {
     LightweightTypeReference _javaType = reference.toJavaType();
     _javaType.accept(this);
   }
   
+  @Override
   protected void doVisitFunctionTypeReference(final FunctionTypeReference reference) {
     boolean _isJava = this.appender.isJava();
     if (_isJava) {
@@ -63,6 +67,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
+  @Override
   protected void doVisitInnerFunctionTypeReference(final InnerFunctionTypeReference reference) {
     boolean _isJava = this.appender.isJava();
     if (_isJava) {
@@ -97,6 +102,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
+  @Override
   protected void doVisitParameterizedTypeReference(final ParameterizedTypeReference reference) {
     boolean _isAnonymous = reference.isAnonymous();
     if (_isAnonymous) {
@@ -117,6 +123,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
+  @Override
   protected void doVisitInnerTypeReference(final InnerTypeReference reference) {
     LightweightTypeReference _outer = reference.getOuter();
     _outer.accept(this);
@@ -135,16 +142,19 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     }
   }
   
+  @Override
   protected void doVisitUnboundTypeReference(final UnboundTypeReference reference) {
     LightweightTypeReference _javaType = reference.toJavaType();
     _javaType.accept(this);
   }
   
+  @Override
   protected void doVisitUnknownTypeReference(final UnknownTypeReference reference) {
     String _simpleName = reference.getSimpleName();
     this.appender.append(_simpleName);
   }
   
+  @Override
   protected void doVisitWildcardTypeReference(final WildcardTypeReference reference) {
     this.appender.append("?");
     LightweightTypeReference _lowerBound = reference.getLowerBound();
@@ -156,6 +166,7 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
     } else {
       List<LightweightTypeReference> _upperBounds = reference.getUpperBounds();
       final Function1<LightweightTypeReference, Boolean> _function = new Function1<LightweightTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final LightweightTypeReference it) {
           String _identifier = it.getIdentifier();
           return Boolean.valueOf((!Objects.equal("java.lang.Object", _identifier)));

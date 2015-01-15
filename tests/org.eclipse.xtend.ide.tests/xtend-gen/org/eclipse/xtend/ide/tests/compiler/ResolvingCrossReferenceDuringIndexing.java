@@ -30,6 +30,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
   @After
+  @Override
   public void tearDown() {
     try {
       IResourcesSetupUtil.cleanWorkspace();

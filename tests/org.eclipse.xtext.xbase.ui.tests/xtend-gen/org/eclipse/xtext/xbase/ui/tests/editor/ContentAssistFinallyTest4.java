@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistFinallyTest4 extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "try { var x = 0 } catch(Exception ex) {} finally";
   }

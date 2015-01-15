@@ -162,6 +162,7 @@ public class JavaConverter implements IJavaCodeConverter {
       final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
       URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
       final Function1<URL, String> _function = new Function1<URL, String>() {
+        @Override
         public String apply(final URL it) {
           return it.getFile();
         }
@@ -174,6 +175,7 @@ public class JavaConverter implements IJavaCodeConverter {
     if (_notEquals_1) {
       String[] _imports = additionalImports.getImports();
       final Procedure1<String> _function_1 = new Procedure1<String>() {
+        @Override
         public void apply(final String it) {
           javaSrcBuilder.append((("import " + it) + ";"));
         }
@@ -219,6 +221,7 @@ public class JavaConverter implements IJavaCodeConverter {
     return this;
   }
   
+  @Override
   public boolean isCompatibleTargetObject(final String javaToConvert, final EObject targetElement) {
     return false;
   }

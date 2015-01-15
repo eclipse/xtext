@@ -20,22 +20,27 @@ public class OperationCanceledError extends Error {
   @Accessors
   private final RuntimeException wrapped;
   
+  @Override
   public Throwable fillInStackTrace() {
     return super.fillInStackTrace();
   }
   
+  @Override
   public Throwable getCause() {
     return this.wrapped;
   }
   
+  @Override
   public String getLocalizedMessage() {
     return this.wrapped.getLocalizedMessage();
   }
   
+  @Override
   public String getMessage() {
     return this.wrapped.getMessage();
   }
   
+  @Override
   public StackTraceElement[] getStackTrace() {
     return this.wrapped.getStackTrace();
   }

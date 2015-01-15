@@ -79,12 +79,14 @@ public class SerializerPerformanceTest {
       final EList<Entity> entities = _domainModel.getEntities();
       ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, SerializerPerformanceTest.numberOfElements, true);
       final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
+        @Override
         public Boolean apply(final Integer it) {
           return Boolean.valueOf((((it).intValue() % SerializerPerformanceTest.editEvery) == 0));
         }
       };
       Iterable<Integer> _filter = IterableExtensions.<Integer>filter(_doubleDotLessThan_1, _function);
       final Function1<Integer, Entity> _function_1 = new Function1<Integer, Entity>() {
+        @Override
         public Entity apply(final Integer it) {
           return entities.get((it).intValue());
         }

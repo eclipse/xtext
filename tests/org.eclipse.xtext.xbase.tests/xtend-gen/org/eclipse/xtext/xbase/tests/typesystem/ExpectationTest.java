@@ -23,10 +23,12 @@ public class ExpectationTest extends AbstractExpectationTest {
   @Inject
   private PublicReentrantTypeResolver resolver;
   
+  @Override
   public ExpectationTestingTypeComputer getTypeComputer() {
     return this.typeComputer;
   }
   
+  @Override
   public PublicReentrantTypeResolver getResolver() {
     return this.resolver;
   }

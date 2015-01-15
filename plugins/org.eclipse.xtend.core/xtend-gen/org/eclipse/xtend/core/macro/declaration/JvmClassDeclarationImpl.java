@@ -32,12 +32,14 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements ClassDeclaration {
+  @Override
   public Iterable<? extends TypeReference> getImplementedInterfaces() {
     List<TypeReference> _xblockexpression = null;
     {
       JvmGenericType _delegate = this.getDelegate();
       EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
       final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+        @Override
         public Boolean apply(final JvmTypeReference it) {
           JvmType _type = it.getType();
           return Boolean.valueOf(((JvmGenericType) _type).isInterface());
@@ -45,6 +47,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       };
       final Iterable<JvmTypeReference> filtered = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
       final Function1<JvmTypeReference, TypeReference> _function_1 = new Function1<JvmTypeReference, TypeReference>() {
+        @Override
         public TypeReference apply(final JvmTypeReference it) {
           CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
           return _compilationUnit.toTypeReference(it);
@@ -56,11 +59,13 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _xblockexpression;
   }
   
+  @Override
   public TypeReference getExtendedClass() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+      @Override
       public Boolean apply(final JvmTypeReference it) {
         boolean _switchResult = false;
         JvmType _type = it.getType();
@@ -86,30 +91,36 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _compilationUnit.toTypeReference(_findFirst);
   }
   
+  @Override
   public boolean isAbstract() {
     JvmGenericType _delegate = this.getDelegate();
     return _delegate.isAbstract();
   }
   
+  @Override
   public boolean isFinal() {
     JvmGenericType _delegate = this.getDelegate();
     return _delegate.isFinal();
   }
   
+  @Override
   public boolean isStatic() {
     JvmGenericType _delegate = this.getDelegate();
     return _delegate.isStatic();
   }
   
+  @Override
   public boolean isStrictFloatingPoint() {
     JvmGenericType _delegate = this.getDelegate();
     return _delegate.isStrictFloatingPoint();
   }
   
+  @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = new Function1<JvmTypeParameter, TypeParameterDeclaration>() {
+      @Override
       public TypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeParameterDeclaration(it);
@@ -118,10 +129,12 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
   }
   
+  @Override
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
     Iterable<FieldDeclaration> _filter = Iterables.<FieldDeclaration>filter(_declaredMembers, FieldDeclaration.class);
     final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final FieldDeclaration it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -130,6 +143,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return IterableExtensions.<FieldDeclaration>findFirst(_filter, _function);
   }
   
+  @Override
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     MethodDeclaration _xblockexpression = null;
     {
@@ -137,6 +151,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
       Iterable<? extends MemberDeclaration> _declaredMembers = this.getDeclaredMembers();
       Iterable<MethodDeclaration> _filter = Iterables.<MethodDeclaration>filter(_declaredMembers, MethodDeclaration.class);
       final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MethodDeclaration it) {
           boolean _and = false;
           String _simpleName = it.getSimpleName();
@@ -146,6 +161,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
           } else {
             Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
             final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+              @Override
               public TypeReference apply(final ParameterDeclaration it) {
                 return it.getType();
               }

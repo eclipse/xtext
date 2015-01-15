@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistInBlockTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistInIfElseTest3 extends ContentAssistInBlockTest {
+  @Override
   protected String getPrefix() {
     return "if (true) {} else {";
   }
   
+  @Override
   protected String getSuffix() {
     return "\n}";
   }

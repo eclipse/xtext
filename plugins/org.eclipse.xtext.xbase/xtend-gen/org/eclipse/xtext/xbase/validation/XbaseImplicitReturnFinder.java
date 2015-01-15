@@ -110,6 +110,7 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
     this.findImplicitReturns(_expression, acceptor);
     EList<XCatchClause> _catchClauses = expression.getCatchClauses();
     final Procedure1<XCatchClause> _function = new Procedure1<XCatchClause>() {
+      @Override
       public void apply(final XCatchClause it) {
         XExpression _expression = it.getExpression();
         XbaseImplicitReturnFinder.this.findImplicitReturns(_expression, acceptor);
@@ -121,6 +122,7 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
   protected void _findImplicitReturns(final XSwitchExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     EList<XCasePart> _cases = expression.getCases();
     final Procedure1<XCasePart> _function = new Procedure1<XCasePart>() {
+      @Override
       public void apply(final XCasePart it) {
         XExpression _then = it.getThen();
         XbaseImplicitReturnFinder.this.findImplicitReturns(_then, acceptor);

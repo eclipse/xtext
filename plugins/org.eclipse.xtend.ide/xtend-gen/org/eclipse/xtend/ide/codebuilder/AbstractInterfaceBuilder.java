@@ -19,6 +19,7 @@ public abstract class AbstractInterfaceBuilder extends AbstractCodeBuilder {
   @Accessors
   private String interfaceName;
   
+  @Override
   public String getImage() {
     return "newint_wiz.gif";
   }

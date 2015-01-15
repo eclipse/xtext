@@ -14,6 +14,7 @@ import org.eclipse.xtext.junit4.formatter.FormatterTester;
 
 @SuppressWarnings("all")
 public class FormatterTesterWithImpl extends FormatterTester {
+  @Override
   protected IFormatter2 createFormatter(final FormatterTestRequest req) {
     return ((GenericFormatterTestRequest) req).getFormatter();
   }

@@ -23,6 +23,7 @@ public class XbaseCommentFormatterTest {
   @Test
   public void commentInIfExpression() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("if (true)");
@@ -46,6 +47,7 @@ public class XbaseCommentFormatterTest {
   @Test
   public void commentAfterForExpression1() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("for (f : #[])");
@@ -70,6 +72,7 @@ public class XbaseCommentFormatterTest {
   @Test
   public void commentAfterForExpression3() {
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("val ll = #[].map(e|e.toString) // error here");

@@ -27,6 +27,7 @@ public class BootClassLoader extends URLClassLoader {
     super(urls);
   }
   
+  @Override
   protected Class<?> loadClass(final String name, final boolean resolve) throws ClassNotFoundException {
     Class<?> _xsynchronizedexpression = null;
     Object _classLoadingLockJdk5 = this.getClassLoadingLockJdk5(name);
@@ -52,10 +53,12 @@ public class BootClassLoader extends URLClassLoader {
     return _xsynchronizedexpression;
   }
   
+  @Override
   public URL getResource(final String name) {
     return this.findResource(name);
   }
   
+  @Override
   public Enumeration<URL> getResources(final String name) throws IOException {
     return this.findResources(name);
   }

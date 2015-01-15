@@ -98,6 +98,7 @@ public class Oven extends Assert {
                 this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
                 EList<JvmFormalParameter> _implicitFormalParameters = ((XClosure)content).getImplicitFormalParameters();
                 final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+                  @Override
                   public void apply(final JvmFormalParameter it) {
                     Oven.this.assertIdentifiableTypeIsResolved(it, resolvedTypes);
                   }

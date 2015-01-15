@@ -7,6 +7,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 
 @SuppressWarnings("all")
 public class AddNestedTypesProcessor implements RegisterGlobalsParticipant<TypeDeclaration> {
+  @Override
   public void doRegisterGlobals(final List<? extends TypeDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
     for (final TypeDeclaration type : annotatedSourceElements) {
       {

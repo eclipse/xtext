@@ -39,6 +39,7 @@ public class Bug456868Test extends AbstractXtendUITestCase {
   private IJavaProject project;
   
   @After
+  @Override
   public void tearDown() throws Exception {
     super.tearDown();
     IProject _project = this.project.getProject();

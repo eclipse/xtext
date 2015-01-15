@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @SuppressWarnings("all")
 public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _isValid = super.isValid();
@@ -35,6 +36,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
     return _and;
   }
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -73,6 +75,7 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBui
     return _xblockexpression;
   }
   
+  @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();
     return ((IType) _ownerSource);

@@ -500,6 +500,7 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
       try {
         IXtextDocument _document = editor.getDocument();
         final IUnitOfWork<Change, XtextResource> _function = new IUnitOfWork<Change, XtextResource>() {
+          @Override
           public Change exec(final XtextResource it) throws Exception {
             Change _xblockexpression = null;
             {

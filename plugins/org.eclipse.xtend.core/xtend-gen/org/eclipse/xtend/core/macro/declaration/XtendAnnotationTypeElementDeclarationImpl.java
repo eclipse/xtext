@@ -19,11 +19,13 @@ import org.eclipse.xtext.xbase.XExpression;
 
 @SuppressWarnings("all")
 public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {
+  @Override
   public String getSimpleName() {
     XtendField _delegate = this.getDelegate();
     return _delegate.getName();
   }
   
+  @Override
   public Object getDefaultValue() {
     Object _xblockexpression = null;
     {
@@ -43,6 +45,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     return _xblockexpression;
   }
   
+  @Override
   public Expression getDefaultValueExpression() {
     Expression _xblockexpression = null;
     {
@@ -60,6 +63,7 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     return _xblockexpression;
   }
   
+  @Override
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();

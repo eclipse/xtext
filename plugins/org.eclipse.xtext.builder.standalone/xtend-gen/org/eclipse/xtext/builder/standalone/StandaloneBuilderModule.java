@@ -27,6 +27,7 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
  */
 @SuppressWarnings("all")
 public class StandaloneBuilderModule extends AbstractModule {
+  @Override
   protected void configure() {
     AnnotatedBindingBuilder<IResourceDescriptions> _bind = this.<IResourceDescriptions>bind(IResourceDescriptions.class);
     Named _named = Names.named(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);

@@ -15,10 +15,12 @@ import org.eclipse.xtext.resource.uriHell.LoadedByClasspathBothFromMavenStructur
  */
 @SuppressWarnings("all")
 public class LoadedByClasspathBothFromMavenStructureTest2 extends LoadedByClasspathBothFromMavenStructureTest {
+  @Override
   public URI getResourceURI() {
     return URI.createURI("platform:/resource/org.eclipse.xtext.tests/src/main/org/eclipse/xtext/resource/ecore/utf8.ecore");
   }
   
+  @Override
   public URI getPackagedResourceURI() {
     return URI.createURI("classpath:/org/eclipse/xtext/resource/ecore/utf8.ecore");
   }

@@ -53,6 +53,7 @@ public class RenameJvmOperationTest extends AbstractXtendUITestCase {
   @Inject
   private CompositeRefactoringProcessor.Access compositeRefactoringProcessorAccess;
   
+  @Override
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
     super.tearDown();

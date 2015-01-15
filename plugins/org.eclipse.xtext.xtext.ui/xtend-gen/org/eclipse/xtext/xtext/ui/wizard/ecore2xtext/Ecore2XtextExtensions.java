@@ -43,6 +43,7 @@ public class Ecore2XtextExtensions {
     if (_equals) {
       Collection<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo, Set<EClassifier>> _function = new Function1<EPackageInfo, Set<EClassifier>>() {
+        @Override
         public Set<EClassifier> apply(final EPackageInfo it) {
           EPackage _ePackage = it.getEPackage();
           return Ecore2XtextExtensions.allReferencedClassifiers(_ePackage, false);
@@ -52,6 +53,7 @@ public class Ecore2XtextExtensions {
       Iterable<EClassifier> _flatten = Iterables.<EClassifier>concat(_map);
       Set<EClassifier> _set = IterableExtensions.<EClassifier>toSet(_flatten);
       final Function1<EClassifier, Boolean> _function_1 = new Function1<EClassifier, Boolean>() {
+        @Override
         public Boolean apply(final EClassifier it) {
           return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(it));
         }
@@ -66,6 +68,7 @@ public class Ecore2XtextExtensions {
         EClass _rootElementClass_2 = it.getRootElementClass();
         Ecore2XtextExtensions.allAssignedClassifiers(_rootElementClass_2, c);
         final Function1<EClassifier, Boolean> _function_2 = new Function1<EClassifier, Boolean>() {
+          @Override
           public Boolean apply(final EClassifier cl) {
             return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(cl));
           }
@@ -91,6 +94,7 @@ public class Ecore2XtextExtensions {
     if (_equals) {
       Collection<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo, Set<EClassifier>> _function = new Function1<EPackageInfo, Set<EClassifier>>() {
+        @Override
         public Set<EClassifier> apply(final EPackageInfo it) {
           EPackage _ePackage = it.getEPackage();
           return Ecore2XtextExtensions.allReferencedClassifiers(_ePackage, false);
@@ -100,6 +104,7 @@ public class Ecore2XtextExtensions {
       Iterable<EClassifier> _flatten = Iterables.<EClassifier>concat(_map);
       Set<EClassifier> _set = IterableExtensions.<EClassifier>toSet(_flatten);
       final Function1<EClassifier, Boolean> _function_1 = new Function1<EClassifier, Boolean>() {
+        @Override
         public Boolean apply(final EClassifier c) {
           return Boolean.valueOf(Ecore2XtextExtensions.needsDispatcherRule(c));
         }
@@ -111,15 +116,18 @@ public class Ecore2XtextExtensions {
       Iterable<EClassifier> _allConcreteRuleClassifiers = Ecore2XtextExtensions.allConcreteRuleClassifiers(it);
       Iterable<EClass> _filter_2 = Iterables.<EClass>filter(_allConcreteRuleClassifiers, EClass.class);
       final Function1<EClass, Iterable<EClassifier>> _function_2 = new Function1<EClass, Iterable<EClassifier>>() {
+        @Override
         public Iterable<EClassifier> apply(final EClass c) {
           EList<EReference> _eAllReferences = c.getEAllReferences();
           final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
+            @Override
             public Boolean apply(final EReference r) {
               return Boolean.valueOf(Ecore2XtextExtensions.needsAssignment(r));
             }
           };
           Iterable<EReference> _filter = IterableExtensions.<EReference>filter(_eAllReferences, _function);
           final Function1<EReference, EClassifier> _function_1 = new Function1<EReference, EClassifier>() {
+            @Override
             public EClassifier apply(final EReference it) {
               return it.getEType();
             }
@@ -142,6 +150,7 @@ public class Ecore2XtextExtensions {
   public static Collection<EPackage> allReferencedEPackages(final Ecore2XtextProjectInfo prjInfo) {
     Collection<EPackageInfo> _ePackageInfos = prjInfo.getEPackageInfos();
     final Function1<EPackageInfo, Set<EPackage>> _function = new Function1<EPackageInfo, Set<EPackage>>() {
+      @Override
       public Set<EPackage> apply(final EPackageInfo it) {
         EPackage _ePackage = it.getEPackage();
         return Ecore2XtextExtensions.allReferencedEPackages(_ePackage, true);
@@ -159,6 +168,7 @@ public class Ecore2XtextExtensions {
   public static Set<EPackage> allReferencedEPackages(final EPackage ePack, final boolean includeCrossRefs) {
     Set<EClassifier> _allReferencedClassifiers = Ecore2XtextExtensions.allReferencedClassifiers(ePack, includeCrossRefs);
     final Function1<EClassifier, EPackage> _function = new Function1<EClassifier, EPackage>() {
+      @Override
       public EPackage apply(final EClassifier it) {
         return it.getEPackage();
       }
@@ -172,9 +182,11 @@ public class Ecore2XtextExtensions {
     EList<EClassifier> _eClassifiers = ePack.getEClassifiers();
     Iterable<EClass> _filter = Iterables.<EClass>filter(_eClassifiers, EClass.class);
     final Function1<EClass, Iterable<EStructuralFeature>> _function = new Function1<EClass, Iterable<EStructuralFeature>>() {
+      @Override
       public Iterable<EStructuralFeature> apply(final EClass it) {
         EList<EStructuralFeature> _eAllStructuralFeatures = it.getEAllStructuralFeatures();
         final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
+          @Override
           public Boolean apply(final EStructuralFeature f) {
             boolean _and = false;
             boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(f);
@@ -199,6 +211,7 @@ public class Ecore2XtextExtensions {
     final Iterable<Iterable<EStructuralFeature>> strFeatures = IterableExtensions.<EClass, Iterable<EStructuralFeature>>map(_filter, _function);
     Iterable<EStructuralFeature> _flatten = Iterables.<EStructuralFeature>concat(strFeatures);
     final Function1<EStructuralFeature, EClassifier> _function_1 = new Function1<EStructuralFeature, EClassifier>() {
+      @Override
       public EClassifier apply(final EStructuralFeature it) {
         return it.getEType();
       }
@@ -224,12 +237,14 @@ public class Ecore2XtextExtensions {
   private static void allAssignedClassifiers(final EClass eClazz, final Collection<EClassifier> acceptor) {
     EList<EStructuralFeature> _eAllStructuralFeatures = eClazz.getEAllStructuralFeatures();
     final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
+      @Override
       public Boolean apply(final EStructuralFeature f) {
         return Boolean.valueOf(Ecore2XtextExtensions.needsAssignment(f));
       }
     };
     Iterable<EStructuralFeature> _filter = IterableExtensions.<EStructuralFeature>filter(_eAllStructuralFeatures, _function);
     final Function1<EStructuralFeature, EClassifier> _function_1 = new Function1<EStructuralFeature, EClassifier>() {
+      @Override
       public EClassifier apply(final EStructuralFeature it) {
         return it.getEType();
       }
@@ -246,6 +261,7 @@ public class Ecore2XtextExtensions {
       Iterables.<EClassifier>addAll(acceptor, classifiers);
       Iterable<EClass> _filter_1 = Iterables.<EClass>filter(classifiers, EClass.class);
       final Procedure1<EClass> _function_2 = new Procedure1<EClass>() {
+        @Override
         public void apply(final EClass c) {
           Ecore2XtextExtensions.allAssignedClassifiers(c, acceptor);
         }
@@ -279,6 +295,7 @@ public class Ecore2XtextExtensions {
   public static Iterable<EStructuralFeature> prefixFeatures(final EClass it) {
     EList<EStructuralFeature> _eAllStructuralFeatures = it.getEAllStructuralFeatures();
     final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
+      @Override
       public Boolean apply(final EStructuralFeature f) {
         boolean _and = false;
         boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(f);
@@ -301,6 +318,7 @@ public class Ecore2XtextExtensions {
   public static Iterable<EStructuralFeature> inlinedFeatures(final EClass it) {
     EList<EStructuralFeature> _eAllStructuralFeatures = it.getEAllStructuralFeatures();
     final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
+      @Override
       public Boolean apply(final EStructuralFeature f) {
         return Boolean.valueOf(Ecore2XtextExtensions.needsAssignment(f));
       }
@@ -322,6 +340,7 @@ public class Ecore2XtextExtensions {
       Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(it);
       final Iterable<EStructuralFeature> features = Iterables.<EStructuralFeature>concat(_prefixFeatures, _inlinedFeatures);
       final Function1<EStructuralFeature, Boolean> _function = new Function1<EStructuralFeature, Boolean>() {
+        @Override
         public Boolean apply(final EStructuralFeature f) {
           return Boolean.valueOf(f.isRequired());
         }
@@ -548,6 +567,7 @@ public class Ecore2XtextExtensions {
       } else {
         EList<EAttribute> _eAllAttributes = it.getEAllAttributes();
         final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
+          @Override
           public Boolean apply(final EAttribute a) {
             boolean _and = false;
             boolean _and_1 = false;
@@ -588,6 +608,7 @@ public class Ecore2XtextExtensions {
   private static EAttribute idAttributeInternal(final EClass it) {
     EList<EAttribute> _eAllAttributes = it.getEAllAttributes();
     final Function1<EAttribute, Boolean> _function = new Function1<EAttribute, Boolean>() {
+      @Override
       public Boolean apply(final EAttribute a) {
         boolean _and = false;
         boolean _needsAssignment = Ecore2XtextExtensions.needsAssignment(a);
@@ -769,6 +790,7 @@ public class Ecore2XtextExtensions {
         _matched=true;
         Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(((EClass)eClassifier));
         final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
+          @Override
           public Boolean apply(final EClass c) {
             return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
           }
@@ -825,6 +847,7 @@ public class Ecore2XtextExtensions {
       EList<EClassifier> _eClassifiers = _ePackage_1.getEClassifiers();
       Iterable<EClass> _filter = Iterables.<EClass>filter(_eClassifiers, EClass.class);
       final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
+        @Override
         public Boolean apply(final EClass c) {
           EList<EClass> _eAllSuperTypes = c.getEAllSuperTypes();
           return Boolean.valueOf(_eAllSuperTypes.contains(it));
@@ -854,6 +877,7 @@ public class Ecore2XtextExtensions {
     Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(it);
     Iterable<EReference> _filter = Iterables.<EReference>filter(_inlinedFeatures, EReference.class);
     final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
+      @Override
       public Boolean apply(final EReference f) {
         boolean _isContainment = f.isContainment();
         return Boolean.valueOf((!_isContainment));
@@ -866,6 +890,7 @@ public class Ecore2XtextExtensions {
     Iterable<EStructuralFeature> _inlinedFeatures = Ecore2XtextExtensions.inlinedFeatures(it);
     Iterable<EReference> _filter = Iterables.<EReference>filter(_inlinedFeatures, EReference.class);
     final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
+      @Override
       public Boolean apply(final EReference f) {
         return Boolean.valueOf(f.isContainment());
       }

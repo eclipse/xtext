@@ -38,6 +38,7 @@ public class TracabilityImpl implements Tracability {
     this.unit = unit;
   }
   
+  @Override
   public Element getPrimaryGeneratedJavaElement(final Element source) {
     boolean _isSource = this.isSource(source);
     if (_isSource) {
@@ -57,6 +58,7 @@ public class TracabilityImpl implements Tracability {
     return null;
   }
   
+  @Override
   public Element getPrimarySourceElement(final Element target) {
     boolean _isGenerated = this.isGenerated(target);
     if (_isGenerated) {
@@ -74,6 +76,7 @@ public class TracabilityImpl implements Tracability {
     return null;
   }
   
+  @Override
   public boolean isExternal(final Element element) {
     boolean _and = false;
     boolean _isSource = this.isSource(element);
@@ -88,6 +91,7 @@ public class TracabilityImpl implements Tracability {
     return _and;
   }
   
+  @Override
   public boolean isGenerated(final Element element) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -117,6 +121,7 @@ public class TracabilityImpl implements Tracability {
     return _switchResult;
   }
   
+  @Override
   public boolean isSource(final Element element) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -154,6 +159,7 @@ public class TracabilityImpl implements Tracability {
     return _switchResult;
   }
   
+  @Override
   public boolean isThePrimaryGeneratedJavaElement(final Element target) {
     boolean _xblockexpression = false;
     {

@@ -168,6 +168,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
+      @Override
       public void apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         boolean _isAbstract = _declaration.isAbstract();
@@ -184,6 +185,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -204,6 +206,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
     final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -214,6 +217,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     Assert.assertEquals(_string, 2, _size);
     String _string_1 = all.toString();
     final Function1<IResolvedOperation, Boolean> _function_1 = new Function1<IResolvedOperation, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isFinal());
@@ -235,6 +239,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
     final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -245,6 +250,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     Assert.assertEquals(_string, (1 + 1), _size);
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
     final Function1<IResolvedOperation, Boolean> _function_1 = new Function1<IResolvedOperation, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedOperation it) {
         JvmOperation _declaration = it.getDeclaration();
         return Boolean.valueOf(_declaration.isAbstract());
@@ -266,6 +272,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
     final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
+      @Override
       public void apply(final IResolvedConstructor it) {
         JvmConstructor _declaration = it.getDeclaration();
         EList<JvmFormalParameter> _parameters = _declaration.getParameters();
@@ -303,6 +310,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
     final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
+      @Override
       public void apply(final IResolvedConstructor it) {
         JvmConstructor _declaration = it.getDeclaration();
         EList<JvmFormalParameter> _parameters = _declaration.getParameters();
@@ -335,6 +343,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     List<IResolvedField> _declaredFields = resolvedFeatures.getDeclaredFields();
     final List<IResolvedField> fields = IterableExtensions.<IResolvedField>toList(_declaredFields);
     final Function1<IResolvedField, Boolean> _function = new Function1<IResolvedField, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedField it) {
         String _simpleSignature = it.getSimpleSignature();
         return Boolean.valueOf(Objects.equal(_simpleSignature, "referent"));
@@ -345,6 +354,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     String _humanReadableName = _resolvedType.getHumanReadableName();
     Assert.assertEquals("String", _humanReadableName);
     final Function1<IResolvedField, Boolean> _function_1 = new Function1<IResolvedField, Boolean>() {
+      @Override
       public Boolean apply(final IResolvedField it) {
         String _simpleSignature = it.getSimpleSignature();
         return Boolean.valueOf(Objects.equal(_simpleSignature, "queue"));

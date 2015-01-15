@@ -20,6 +20,7 @@ public class RecomputingBatchTypeArgumentTest extends BatchTypeArgumentTest {
   @Inject
   private RecomputingBatchTypeResolver recomputingResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.recomputingResolver;
   }

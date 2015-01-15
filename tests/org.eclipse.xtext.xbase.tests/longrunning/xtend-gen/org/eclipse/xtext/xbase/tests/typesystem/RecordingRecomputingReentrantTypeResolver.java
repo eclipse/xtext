@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class RecordingRecomputingReentrantTypeResolver extends RecomputingReentrantTypeResolver {
+  @Override
   public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
     RootResolvedTypes _xblockexpression = null;
     {

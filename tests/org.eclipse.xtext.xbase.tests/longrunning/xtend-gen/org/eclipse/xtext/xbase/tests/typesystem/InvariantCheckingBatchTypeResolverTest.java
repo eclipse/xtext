@@ -20,6 +20,7 @@ public class InvariantCheckingBatchTypeResolverTest extends AbstractBatchTypeRes
   @Inject
   private InvariantCheckingBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }

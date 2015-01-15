@@ -81,6 +81,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     final JvmAnnotationType annotationType = this.delegate.getAnnotation();
     Iterable<JvmOperation> _declaredOperations = annotationType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
+      @Override
       public Boolean apply(final JvmOperation it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -110,6 +111,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     EList<JvmAnnotationValue> _explicitValues = this.delegate.getExplicitValues();
     Iterator<JvmAnnotationValue> _iterator = _explicitValues.iterator();
     final Predicate<JvmAnnotationValue> _function = new Predicate<JvmAnnotationValue>() {
+      @Override
       public boolean apply(final JvmAnnotationValue it) {
         boolean _or = false;
         JvmOperation _operation = it.getOperation();
@@ -160,76 +162,89 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     return result;
   }
   
+  @Override
   public void set(final String name, final Object value) {
     this.internalSet(name, value, false);
   }
   
+  @Override
   public void setAnnotationValue(final String name, final AnnotationReference... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this.internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setBooleanValue(final String name, final boolean... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setByteValue(final String name, final byte... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setCharValue(final String name, final char... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setClassValue(final String name, final TypeReference... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setDoubleValue(final String name, final double... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setEnumValue(final String name, final EnumerationValueDeclaration... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setFloatValue(final String name, final float... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setIntValue(final String name, final int... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setLongValue(final String name, final long... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setShortValue(final String name, final short... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
     this._internalSet(name, value, _notEquals);
   }
   
+  @Override
   public void setStringValue(final String name, final String... value) {
     int _length = value.length;
     boolean _notEquals = (_length != 1);
@@ -570,6 +585,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     EList<JvmTypeReference> _values = it.getValues();
     Iterable<TypeReferenceImpl> _filter = Iterables.<TypeReferenceImpl>filter(((Iterable<?>)Conversions.doWrapArray(value)), TypeReferenceImpl.class);
     final Function1<TypeReferenceImpl, JvmTypeReference> _function = new Function1<TypeReferenceImpl, JvmTypeReference>() {
+      @Override
       public JvmTypeReference apply(final TypeReferenceImpl it) {
         return AnnotationReferenceBuildContextImpl.this.compilationUnit.toJvmTypeReference(it);
       }
@@ -644,6 +660,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final float[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Float> _function = new Procedure1<Float>() {
+      @Override
       public void apply(final Float v) {
         EList<Double> _values = it.getValues();
         _values.add(Double.valueOf(((double) (v).floatValue())));
@@ -654,6 +671,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Long> _function = new Procedure1<Long>() {
+      @Override
       public void apply(final Long v) {
         EList<Double> _values = it.getValues();
         _values.add(Double.valueOf(((double) (v).longValue())));
@@ -664,6 +682,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      @Override
       public void apply(final Integer v) {
         EList<Double> _values = it.getValues();
         _values.add(Double.valueOf(((double) (v).intValue())));
@@ -674,6 +693,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Short> _function = new Procedure1<Short>() {
+      @Override
       public void apply(final Short v) {
         EList<Double> _values = it.getValues();
         _values.add(Double.valueOf(((double) (v).shortValue())));
@@ -684,6 +704,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte v) {
         EList<Double> _values = it.getValues();
         _values.add(Double.valueOf(((double) (v).byteValue())));
@@ -694,6 +715,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmDoubleAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Character> _function = new Procedure1<Character>() {
+      @Override
       public void apply(final Character v) {
         EList<Double> _values = it.getValues();
         _values.add(Double.valueOf(((double) (v).charValue())));
@@ -709,6 +731,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmFloatAnnotationValue it, final long[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Long> _function = new Procedure1<Long>() {
+      @Override
       public void apply(final Long v) {
         EList<Float> _values = it.getValues();
         _values.add(Float.valueOf(((float) (v).longValue())));
@@ -719,6 +742,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmFloatAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      @Override
       public void apply(final Integer v) {
         EList<Float> _values = it.getValues();
         _values.add(Float.valueOf(((float) (v).intValue())));
@@ -729,6 +753,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmFloatAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Short> _function = new Procedure1<Short>() {
+      @Override
       public void apply(final Short v) {
         EList<Float> _values = it.getValues();
         _values.add(Float.valueOf(((float) (v).shortValue())));
@@ -739,6 +764,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmFloatAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte v) {
         EList<Float> _values = it.getValues();
         _values.add(Float.valueOf(((float) (v).byteValue())));
@@ -749,6 +775,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmFloatAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Character> _function = new Procedure1<Character>() {
+      @Override
       public void apply(final Character v) {
         EList<Float> _values = it.getValues();
         _values.add(Float.valueOf(((float) (v).charValue())));
@@ -764,6 +791,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmLongAnnotationValue it, final int[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Integer> _function = new Procedure1<Integer>() {
+      @Override
       public void apply(final Integer v) {
         EList<Long> _values = it.getValues();
         _values.add(Long.valueOf(((long) (v).intValue())));
@@ -774,6 +802,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmLongAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Short> _function = new Procedure1<Short>() {
+      @Override
       public void apply(final Short v) {
         EList<Long> _values = it.getValues();
         _values.add(Long.valueOf(((long) (v).shortValue())));
@@ -784,6 +813,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmLongAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte v) {
         EList<Long> _values = it.getValues();
         _values.add(Long.valueOf(((long) (v).byteValue())));
@@ -794,6 +824,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmLongAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Character> _function = new Procedure1<Character>() {
+      @Override
       public void apply(final Character v) {
         EList<Long> _values = it.getValues();
         _values.add(Long.valueOf(((long) (v).charValue())));
@@ -809,6 +840,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmIntAnnotationValue it, final short[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Short> _function = new Procedure1<Short>() {
+      @Override
       public void apply(final Short v) {
         EList<Integer> _values = it.getValues();
         _values.add(Integer.valueOf(((int) (v).shortValue())));
@@ -819,6 +851,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmIntAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte v) {
         EList<Integer> _values = it.getValues();
         _values.add(Integer.valueOf(((int) (v).byteValue())));
@@ -829,6 +862,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmIntAnnotationValue it, final char[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Character> _function = new Procedure1<Character>() {
+      @Override
       public void apply(final Character v) {
         EList<Integer> _values = it.getValues();
         _values.add(Integer.valueOf(((int) (v).charValue())));
@@ -844,6 +878,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmShortAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte v) {
         EList<Short> _values = it.getValues();
         _values.add(Short.valueOf(((short) (v).byteValue())));
@@ -859,6 +894,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   
   protected void _setValue(final JvmCharAnnotationValue it, final byte[] value, final String componentType, final boolean mustBeArray) {
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
+      @Override
       public void apply(final Byte v) {
         EList<Character> _values = it.getValues();
         _values.add(Character.valueOf(((char) (v).byteValue())));

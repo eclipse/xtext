@@ -7,6 +7,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Data
 @SuppressWarnings("all")
 public class SemanitcText extends Chunk {
+  @Override
   public String toString() {
     CharSequence _text = this.getText();
     return _text.toString();

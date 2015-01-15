@@ -20,6 +20,7 @@ public class RecomputingTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Inject
   private RecomputingBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }

@@ -8,6 +8,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 @SuppressWarnings("all")
 public class ExpressionImpl extends AbstractElementImpl<XExpression> implements Expression {
+  @Override
   public String toString() {
     XExpression _delegate = this.getDelegate();
     ICompositeNode _node = NodeModelUtils.getNode(_delegate);

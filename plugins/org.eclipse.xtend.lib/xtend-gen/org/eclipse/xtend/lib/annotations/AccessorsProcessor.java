@@ -109,6 +109,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     public boolean hasGetter(final FieldDeclaration it) {
       List<String> _possibleGetterNames = this.getPossibleGetterNames(it);
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String name) {
           TypeDeclaration _declaringType = it.getDeclaringType();
           MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(name);
@@ -146,6 +147,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       if ((annotation != null)) {
         EnumerationValueDeclaration[] _enumArrayValue = annotation.getEnumArrayValue("value");
         final Function1<EnumerationValueDeclaration, AccessorType> _function = new Function1<EnumerationValueDeclaration, AccessorType>() {
+          @Override
           public AccessorType apply(final EnumerationValueDeclaration it) {
             String _simpleName = it.getSimpleName();
             return AccessorType.valueOf(_simpleName);
@@ -154,6 +156,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         final List<AccessorType> types = ListExtensions.<EnumerationValueDeclaration, AccessorType>map(((List<EnumerationValueDeclaration>)Conversions.doWrapArray(_enumArrayValue)), _function);
         AccessorType _elvis_1 = null;
         final Function1<AccessorType, Boolean> _function_1 = new Function1<AccessorType, Boolean>() {
+          @Override
           public Boolean apply(final AccessorType it) {
             String _name = it.name();
             return Boolean.valueOf(_name.endsWith("GETTER"));
@@ -229,6 +232,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         _xifexpression = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("get"));
       }
       final Function1<String, String> _function = new Function1<String, String>() {
+        @Override
         public String apply(final String prefix) {
           String _simpleName = it.getSimpleName();
           String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
@@ -260,6 +264,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _getterName = this.getGetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(field);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -303,6 +308,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       if ((annotation != null)) {
         EnumerationValueDeclaration[] _enumArrayValue = annotation.getEnumArrayValue("value");
         final Function1<EnumerationValueDeclaration, AccessorType> _function = new Function1<EnumerationValueDeclaration, AccessorType>() {
+          @Override
           public AccessorType apply(final EnumerationValueDeclaration it) {
             String _simpleName = it.getSimpleName();
             return AccessorType.valueOf(_simpleName);
@@ -311,6 +317,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
         final List<AccessorType> types = ListExtensions.<EnumerationValueDeclaration, AccessorType>map(((List<EnumerationValueDeclaration>)Conversions.doWrapArray(_enumArrayValue)), _function);
         AccessorType _elvis_1 = null;
         final Function1<AccessorType, Boolean> _function_1 = new Function1<AccessorType, Boolean>() {
+          @Override
           public Boolean apply(final AccessorType it) {
             String _name = it.name();
             return Boolean.valueOf(_name.endsWith("SETTER"));
@@ -402,6 +409,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _setterName = this.getSetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(field);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -445,8 +453,10 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
   }
   
+  @Override
   public void doTransform(final List<? extends MutableMemberDeclaration> elements, @Extension final TransformationContext context) {
     final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
+      @Override
       public void apply(final MutableMemberDeclaration it) {
         AccessorsProcessor.this.transform(it, context);
       }
@@ -495,6 +505,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
     final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final MutableFieldDeclaration it) {
         boolean _and = false;
         boolean _isStatic = it.isStatic();
@@ -510,6 +521,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     };
     Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         AccessorsProcessor.this._transform(it, context);
       }

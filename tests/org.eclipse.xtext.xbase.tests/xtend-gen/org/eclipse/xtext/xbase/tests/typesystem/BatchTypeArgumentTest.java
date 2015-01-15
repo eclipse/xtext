@@ -39,6 +39,7 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
   
   private IResolvedTypes resolvedTypes;
   
+  @Override
   protected void resolveTypes(final XExpression expression) {
     IBatchTypeResolver _typeResolver = this.getTypeResolver();
     IResolvedTypes _resolveTypes = _typeResolver.resolveTypes(expression);
@@ -50,18 +51,21 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
     this.resolvedTypes = null;
   }
   
+  @Override
   protected void hasTypeArguments(final XExpression expression, final String... typeArguments) {
     final List<LightweightTypeReference> actualTypeArguments = this.resolvedTypes.getActualTypeArguments(expression);
     int _size = ((List<String>)Conversions.doWrapArray(typeArguments)).size();
     int _size_1 = actualTypeArguments.size();
     Assert.assertEquals(_size, _size_1);
     final Procedure2<String, Integer> _function = new Procedure2<String, Integer>() {
+      @Override
       public void apply(final String typeArgument, final Integer i) {
         StringConcatenation _builder = new StringConcatenation();
         String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(typeArguments)), ", ");
         _builder.append(_join, "");
         _builder.append(" vs ");
         final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+          @Override
           public String apply(final LightweightTypeReference it) {
             return it.getSimpleName();
           }
@@ -79,18 +83,21 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testRawType_01() throws Exception {
     super.testRawType_01();
   }
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testRawType_02() throws Exception {
     super.testRawType_02();
   }
   
   @Test
   @Ignore("TODO Fix me")
+  @Override
   public void testRawType_05() throws Exception {
     super.testRawType_05();
   }

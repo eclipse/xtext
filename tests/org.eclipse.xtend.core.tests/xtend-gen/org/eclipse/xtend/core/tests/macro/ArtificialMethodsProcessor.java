@@ -15,10 +15,13 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ArtificialMethodsProcessor extends AbstractClassProcessor {
+  @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             return _builder;
@@ -29,8 +32,10 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank", _function);
     final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("\t\t\t\t");
@@ -43,8 +48,10 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank_1", _function_1);
     final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             return "";
           }
@@ -54,8 +61,10 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank_2", _function_2);
     final Procedure1<MutableMethodDeclaration> _function_3 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             return "\n";
           }
@@ -65,8 +74,10 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank_3", _function_3);
     final Procedure1<MutableMethodDeclaration> _function_4 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("int foo = 42;");
@@ -79,6 +90,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank_4", _function_4);
     final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -92,6 +104,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank_5", _function_5);
     final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
@@ -104,6 +117,7 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("blank_6", _function_6);
     final Procedure1<MutableMethodDeclaration> _function_7 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override

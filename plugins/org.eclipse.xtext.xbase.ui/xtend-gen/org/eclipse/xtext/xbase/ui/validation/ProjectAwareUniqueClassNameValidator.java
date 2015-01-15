@@ -83,6 +83,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
   @Inject
   private IOutputConfigurationProvider outputConfigurationProvider;
   
+  @Override
   public boolean doCheckUniqueName(final QualifiedName name, final JvmDeclaredType type) {
     boolean _doCheckUniqueName = super.doCheckUniqueName(name, type);
     if (_doCheckUniqueName) {
@@ -144,6 +145,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       final String typeName = type.getSimpleName();
       IPackageFragmentRoot[] _packageFragmentRoots = javaProject.getPackageFragmentRoots();
       final Function1<IPackageFragmentRoot, Boolean> _function = new Function1<IPackageFragmentRoot, Boolean>() {
+        @Override
         public Boolean apply(final IPackageFragmentRoot it) {
           try {
             int _kind = it.getKind();
@@ -311,12 +313,14 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     }
   }
   
+  @Override
   protected boolean checkUniqueInIndex(final JvmDeclaredType type, final Iterable<IEObjectDescription> descriptions) {
     final URI objectURI = EcoreUtil.getURI(type);
     boolean _isPlatformResource = objectURI.isPlatformResource();
     if (_isPlatformResource) {
       final String project = objectURI.segment(1);
       final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+        @Override
         public Boolean apply(final IEObjectDescription it) {
           final URI candidate = it.getEObjectURI();
           boolean _and = false;

@@ -82,6 +82,7 @@ public class ResourceStorageWritable {
       zipOut.putNextEntry(_zipEntry);
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
       final BinaryResourceImpl.EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(zipOut, _emptyMap) {
+        @Override
         public void writeURI(final URI uri, final String fragment) throws IOException {
           final URI fullURI = uri.appendFragment(fragment);
           URI _elvis = null;

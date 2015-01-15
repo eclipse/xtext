@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
  */
 @SuppressWarnings("all")
 public class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
+  @Override
   public RootResolvedTypes createResolvedTypes(final CancelIndicator monitor) {
     return new ValidatingRootResolvedTypes(this, monitor);
   }

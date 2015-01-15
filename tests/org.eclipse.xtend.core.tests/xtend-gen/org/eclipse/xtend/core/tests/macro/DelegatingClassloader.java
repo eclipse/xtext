@@ -13,6 +13,7 @@ public class DelegatingClassloader extends ClassLoader {
     this.classFinder = classFinder;
   }
   
+  @Override
   protected URL findResource(final String name) {
     ClassLoader _classLoader = this.classFinder.getClassLoader();
     final URL result = _classLoader.getResource(name);
@@ -26,6 +27,7 @@ public class DelegatingClassloader extends ClassLoader {
     return _elvis;
   }
   
+  @Override
   public Class<?> findClass(final String name) throws ClassNotFoundException {
     Class<?> _xblockexpression = null;
     {
@@ -39,6 +41,7 @@ public class DelegatingClassloader extends ClassLoader {
     return _xblockexpression;
   }
   
+  @Override
   public Class<?> loadClass(final String name) throws ClassNotFoundException {
     return super.loadClass(name);
   }

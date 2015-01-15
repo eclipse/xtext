@@ -45,6 +45,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ResourceStorageFacade implements IResourceStorageFacade {
   private static class MyByteArrayOutputStream extends ByteArrayOutputStream {
+    @Override
     public byte[] toByteArray() {
       return this.buf;
     }
@@ -63,6 +64,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   /**
    * @return whether the given resource should be loaded from stored resource state
    */
+  @Override
   public boolean shouldLoadFromStorage(final StorageAwareResource resource) {
     ResourceSet _resourceSet = resource.getResourceSet();
     final SourceLevelURIsAdapter adapter = SourceLevelURIsAdapter.findInstalledAdapter(_resourceSet);
@@ -87,6 +89,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
    * 
    * @return an IResourceStorageLoadable
    */
+  @Override
   public ResourceStorageLoadable getOrCreateResourceStorageLoadable(final StorageAwareResource resource) {
     try {
       ResourceSet _resourceSet = resource.getResourceSet();
@@ -130,6 +133,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     }
   }
   
+  @Override
   public void saveResource(final StorageAwareResource resource, final IFileSystemAccessExtension3 fsa) {
     final String path = this.computeOutputPath(resource);
     final ResourceStorageFacade.MyByteArrayOutputStream bout = new ResourceStorageFacade.MyByteArrayOutputStream();
@@ -141,10 +145,12 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     fsa.generateFile(path, _byteArrayInputStream);
   }
   
+  @Override
   public ResourceStorageLoadable createResourceStorageLoadable(final InputStream in) {
     return new ResourceStorageLoadable(in);
   }
   
+  @Override
   public ResourceStorageWritable createResourceStorageWritable(final OutputStream out) {
     return new ResourceStorageWritable(out);
   }
@@ -191,6 +197,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     fsa.setContext(resource);
     Set<OutputConfiguration> _outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(resource);
     final Function1<OutputConfiguration, String> _function = new Function1<OutputConfiguration, String>() {
+      @Override
       public String apply(final OutputConfiguration it) {
         return it.getName();
       }
@@ -216,6 +223,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     return _trimSegments.appendSegment("");
   }
   
+  @Override
   public boolean hasStorageFor(final URI uri) {
     ExtensibleURIConverterImpl _extensibleURIConverterImpl = new ExtensibleURIConverterImpl();
     URI _binaryStorageURI = this.getBinaryStorageURI(uri);

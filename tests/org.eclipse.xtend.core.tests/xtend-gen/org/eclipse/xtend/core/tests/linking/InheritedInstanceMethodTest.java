@@ -17,6 +17,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
  */
 @SuppressWarnings("all")
 public class InheritedInstanceMethodTest extends AbstractOverloadedInstanceMethodTest {
+  @Override
   protected String inMethodBody(final String invocation) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import overloading.CopiedAbstractXtendFormatterTest");

@@ -17,6 +17,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
+  @Override
   protected abstract XtextResourceSet createEmptyResourceSet();
   
   @Test

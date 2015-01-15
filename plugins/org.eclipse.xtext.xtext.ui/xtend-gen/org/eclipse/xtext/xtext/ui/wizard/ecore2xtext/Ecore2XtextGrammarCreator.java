@@ -141,6 +141,7 @@ public class Ecore2XtextGrammarCreator {
       Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(eClazz);
       Iterable<EClass> list = Iterables.<EClass>concat(_newArrayList, _subClasses);
       final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
+        @Override
         public Boolean apply(final EClass c) {
           return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
         }
@@ -148,6 +149,7 @@ public class Ecore2XtextGrammarCreator {
       Iterable<EClass> _filter = IterableExtensions.<EClass>filter(list, _function);
       list = _filter;
       final Function1<EClass, String> _function_1 = new Function1<EClass, String>() {
+        @Override
         public String apply(final EClass it) {
           return Ecore2XtextExtensions.concreteRuleName(it);
         }
@@ -427,6 +429,7 @@ public class Ecore2XtextGrammarCreator {
         _builder.append("\t\t\t\t");
         EList<EEnumLiteral> _eLiterals = ((EEnum)it).getELiterals();
         final Function1<EEnumLiteral, String> _function = new Function1<EEnumLiteral, String>() {
+          @Override
           public String apply(final EEnumLiteral it) {
             String _name = it.getName();
             String _plus = (_name + " = \'");

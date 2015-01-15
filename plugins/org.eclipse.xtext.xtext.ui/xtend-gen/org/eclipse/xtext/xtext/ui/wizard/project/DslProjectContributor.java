@@ -28,6 +28,7 @@ public class DslProjectContributor extends DefaultProjectFactoryContributor {
     this.sourceRoot = sourceRoot;
   }
   
+  @Override
   public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator creator) {
     try {
       String _defaultCharset = project.getDefaultCharset();

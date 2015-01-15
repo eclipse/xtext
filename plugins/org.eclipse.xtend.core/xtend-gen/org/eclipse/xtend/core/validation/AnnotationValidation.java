@@ -41,6 +41,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
   @Inject
   private AnnotationValueValidator annotationValueValidator;
   
+  @Override
   protected List<EPackage> getEPackages() {
     return CollectionLiterals.<EPackage>newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
   }

@@ -25,6 +25,7 @@ public class FileSystemAccessQueue extends AdapterImpl {
   public void sendAsync(final URI uri, final Procedure0 procedure) {
     FileSystemAccessRequest _fileSystemAccessRequest = new FileSystemAccessRequest();
     final Procedure1<FileSystemAccessRequest> _function = new Procedure1<FileSystemAccessRequest>() {
+      @Override
       public void apply(final FileSystemAccessRequest request) {
         request.uri = uri;
         request.procedure = procedure;

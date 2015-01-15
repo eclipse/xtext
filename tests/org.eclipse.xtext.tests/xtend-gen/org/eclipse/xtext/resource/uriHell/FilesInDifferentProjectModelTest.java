@@ -15,18 +15,22 @@ import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerWithEcoreTest;
  */
 @SuppressWarnings("all")
 public class FilesInDifferentProjectModelTest extends AbstractURIHandlerWithEcoreTest {
+  @Override
   public URI getResourceURI() {
     return URI.createURI("platform:/resource/projectName/model/First.ecore");
   }
   
+  @Override
   public URI getPackagedResourceURI() {
     return URI.createURI("platform:/resource/projectName/model/First.ecore");
   }
   
+  @Override
   public URI getReferencedURI() {
     return URI.createURI("platform:/resource/other/model/Second.ecore");
   }
   
+  @Override
   public URI getPackagedReferencedURI() {
     return URI.createURI("platform:/resource/other/model/Second.ecore");
   }

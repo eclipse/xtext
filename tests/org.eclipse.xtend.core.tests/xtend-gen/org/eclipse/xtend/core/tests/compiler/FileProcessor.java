@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class FileProcessor extends AbstractClassProcessor {
+  @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
     final Path path = _compilationUnit.getFilePath();
@@ -33,6 +34,7 @@ public class FileProcessor extends AbstractClassProcessor {
     final String[] segments = _trim.split(",");
     for (final String segment : segments) {
       final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+        @Override
         public void apply(final MutableFieldDeclaration it) {
           TypeReference _string = context.getString();
           it.setType(_string);
@@ -42,6 +44,7 @@ public class FileProcessor extends AbstractClassProcessor {
     }
   }
   
+  @Override
   public void doGenerateCode(final ClassDeclaration annotatedClass, @Extension final CodeGenerationContext context) {
     CompilationUnit _compilationUnit = annotatedClass.getCompilationUnit();
     final Path path = _compilationUnit.getFilePath();

@@ -28,6 +28,7 @@ public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
         final Class<?> clazz = it.getCompiledClass();
         final Constructor<?>[] constr = clazz.getDeclaredConstructors();

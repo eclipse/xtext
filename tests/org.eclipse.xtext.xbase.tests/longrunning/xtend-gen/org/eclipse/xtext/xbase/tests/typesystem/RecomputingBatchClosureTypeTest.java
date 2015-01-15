@@ -20,6 +20,7 @@ public class RecomputingBatchClosureTypeTest extends BatchClosureTypeTest {
   @Inject
   private RecomputingBatchTypeResolver recomputingResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.recomputingResolver;
   }

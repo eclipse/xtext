@@ -41,6 +41,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
     this.failOnUnresolvedProxy = true;
   }
   
+  @Override
   public XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
     this.failOnUnresolvedProxy = resolve;
     final XExpression result = super.expression(string, false);
@@ -131,6 +132,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
   }
   
   @Test
+  @Override
   public void testMemberCallOnMultiTypeWithUnresolvableArgument_01() throws Exception {
     try {
       this.failOnUnresolvedProxy = false;

@@ -33,12 +33,14 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
   @Inject
   private EclipseOutputConfigurationProvider configurationProvider;
   
+  @Override
   public WorkspaceConfig get() {
     IPath _location = this.workspaceRoot.getLocation();
     final String wsRoot = _location.toString();
     final WorkspaceConfig result = new WorkspaceConfig(wsRoot);
     IProject[] _projects = this.workspaceRoot.getProjects();
     final Procedure1<IProject> _function = new Procedure1<IProject>() {
+      @Override
       public void apply(final IProject it) {
         Map<String, ProjectConfig> _projects = result.getProjects();
         String _name = it.getName();

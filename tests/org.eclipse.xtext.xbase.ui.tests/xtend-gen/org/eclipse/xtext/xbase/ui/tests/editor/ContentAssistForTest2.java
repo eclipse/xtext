@@ -18,14 +18,17 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistForTest2 extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "for( var x = 1,";
   }
   
+  @Override
   protected String getSuffix() {
     return ", var z = 1";
   }
   
+  @Override
   public void testEmptyInput() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     String[] _keywordsAndStatics = this.getKeywordsAndStatics();
@@ -33,6 +36,7 @@ public class ContentAssistForTest2 extends ContentAssistTest {
     _newBuilder.assertText(_expect);
   }
   
+  @Override
   protected String[] getKeywordsAndStatics() {
     String[] _keywordsAndStatics = super.getKeywordsAndStatics();
     final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_keywordsAndStatics);

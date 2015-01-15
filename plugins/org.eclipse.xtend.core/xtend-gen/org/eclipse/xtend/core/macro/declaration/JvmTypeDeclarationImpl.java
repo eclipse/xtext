@@ -54,6 +54,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
+      @Override
       public MemberDeclaration apply(final JvmMember it) {
         CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toMemberDeclaration(it);
@@ -63,6 +64,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return ImmutableList.<MemberDeclaration>copyOf(_map);
   }
   
+  @Override
   public String getSimpleName() {
     T _delegate = this.getDelegate();
     return _delegate.getSimpleName();
@@ -95,6 +97,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     EList<JvmMember> _members = _delegate.getMembers();
     Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
     final Function1<JvmConstructor, Boolean> _function = new Function1<JvmConstructor, Boolean>() {
+      @Override
       public Boolean apply(final JvmConstructor it) {
         CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
         JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
@@ -168,9 +171,11 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
       final Function1<ConstructorDeclaration, Boolean> _function = new Function1<ConstructorDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final ConstructorDeclaration constructor) {
           Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
           final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+            @Override
             public TypeReference apply(final ParameterDeclaration it) {
               return it.getType();
             }
@@ -189,6 +194,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final FieldDeclaration field) {
         String _simpleName = field.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -200,6 +206,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public TypeDeclaration findDeclaredType(final String name) {
     Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
     final Function1<TypeDeclaration, Boolean> _function = new Function1<TypeDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final TypeDeclaration type) {
         String _simpleName = type.getSimpleName();
         return Boolean.valueOf(Objects.equal(_simpleName, name));
@@ -214,6 +221,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
       final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MethodDeclaration method) {
           boolean _and = false;
           String _simpleName = method.getSimpleName();
@@ -223,6 +231,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
           } else {
             Iterable<? extends ParameterDeclaration> _parameters = method.getParameters();
             final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+              @Override
               public TypeReference apply(final ParameterDeclaration it) {
                 return it.getType();
               }
@@ -281,10 +290,12 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return Iterables.<EnumerationTypeDeclaration>filter(_declaredMembers, EnumerationTypeDeclaration.class);
   }
   
+  @Override
   public void setSimpleName(final String name) {
     throw new UnsupportedOperationException("The type cannot be renamed.");
   }
   
+  @Override
   public void remove() {
     throw new UnsupportedOperationException("The type cannot be removed.");
   }

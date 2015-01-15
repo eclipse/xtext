@@ -35,15 +35,18 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     return (("Cannot call method \'" + methodName) + "\' on a inferred type reference before the compilation phase. Check isInferred() before calling any methods.");
   }
   
+  @Override
   public boolean isInferred() {
     return true;
   }
   
+  @Override
   public String toString() {
     XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
     return _delegate.toString();
   }
   
+  @Override
   public boolean equals(final Object obj) {
     if ((obj instanceof InferredTypeReferenceImpl)) {
       XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
@@ -53,6 +56,7 @@ public class InferredTypeReferenceImpl extends AbstractElementImpl<XComputedType
     return false;
   }
   
+  @Override
   public int hashCode() {
     XComputedTypeReferenceImplCustom _delegate = this.getDelegate();
     return _delegate.hashCode();

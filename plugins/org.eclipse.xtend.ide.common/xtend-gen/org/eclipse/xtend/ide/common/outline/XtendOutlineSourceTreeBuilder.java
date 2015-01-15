@@ -46,6 +46,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     this.buildPackageAndImportSection(xtendFile, context);
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
     final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
+      @Override
       public void apply(final XtendTypeDeclaration it) {
         XtendOutlineSourceTreeBuilder.this.buildXtendType(it, context);
       }
@@ -73,6 +74,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     } else {
       EList<XtendMember> _members = xtendType.getMembers();
       final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+        @Override
         public void apply(final XtendMember it) {
           XtendOutlineSourceTreeBuilder.this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
         }
@@ -149,6 +151,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   protected void buildDispatchers(final JvmDeclaredType inferredType, final JvmDeclaredType baseType, final IXtendOutlineContext context) {
     Iterable<JvmOperation> _declaredOperations = inferredType.getDeclaredOperations();
     final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
+      @Override
       public Boolean apply(final JvmOperation it) {
         return Boolean.valueOf(XtendOutlineSourceTreeBuilder.this.dispatchHelper.isDispatcherFunction(it));
       }
@@ -182,6 +185,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     } else {
       List<JvmOperation> _localDispatchCases = this.dispatchHelper.getLocalDispatchCases(dispatcher);
       final Comparator<JvmOperation> _function = new Comparator<JvmOperation>() {
+        @Override
         public int compare(final JvmOperation o1, final JvmOperation o2) {
           EList<JvmMember> _members = baseType.getMembers();
           int _indexOf = _members.indexOf(o1);
@@ -211,6 +215,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
     return _xifexpression;
   }
   
+  @Override
   protected void buildType(final EObject someType, final IXtendOutlineContext context) {
     if ((someType instanceof XtendTypeDeclaration)) {
       this.buildXtendType(((XtendTypeDeclaration)someType), context);

@@ -23,6 +23,7 @@ import org.junit.Test;
 public class Bug403554Test extends AbstractXbaseContentAssistBugTest {
   private String declarator;
   
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     final IJavaProject project = this.getJavaProject(null);

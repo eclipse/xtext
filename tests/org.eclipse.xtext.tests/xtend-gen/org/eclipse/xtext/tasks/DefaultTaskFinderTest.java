@@ -81,9 +81,11 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       XtextResource _resourceFromString = this.getResourceFromString(_unix);
       Task _task = new Task();
       final Procedure1<Task> _function = new Procedure1<Task>() {
+        @Override
         public void apply(final Task it) {
           TaskTag _taskTag = new TaskTag();
           final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+            @Override
             public void apply(final TaskTag it) {
               it.setName("TODO");
               it.setPriority(Priority.NORMAL);
@@ -99,9 +101,11 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
       Task _task_1 = new Task();
       final Procedure1<Task> _function_1 = new Procedure1<Task>() {
+        @Override
         public void apply(final Task it) {
           TaskTag _taskTag = new TaskTag();
           final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+            @Override
             public void apply(final TaskTag it) {
               it.setName("FIXME");
               it.setPriority(Priority.HIGH);

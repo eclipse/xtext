@@ -74,6 +74,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
     }
   }
   
+  @Override
   protected Resource newResource(final CharSequence input) throws IOException {
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     URI _createURI = URI.createURI("Test.___xbase");

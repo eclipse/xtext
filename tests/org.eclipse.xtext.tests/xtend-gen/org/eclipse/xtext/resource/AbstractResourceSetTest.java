@@ -16,6 +16,7 @@ public abstract class AbstractResourceSetTest {
   public void testDemandLoadedResourcesAreInMap() {
     final ResourceSetImpl rs = this.createEmptyResourceSet();
     final Resource.Factory _function = new Resource.Factory() {
+      @Override
       public Resource createResource(final URI uri) {
         NullResource _xblockexpression = null;
         {

@@ -93,6 +93,7 @@ public class SerializationAfterModelChangeTest {
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
+        @Override
         public void apply(final Entity it) {
           it.setName("AAA");
           it.setDescription("BBB");
@@ -217,6 +218,7 @@ public class SerializationAfterModelChangeTest {
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
+        @Override
         public void apply(final Entity it) {
           it.setName("Baz");
           it.setDescription("Fizzle");
@@ -258,6 +260,7 @@ public class SerializationAfterModelChangeTest {
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
+        @Override
         public void apply(final Entity it) {
           it.setName("Baz");
           it.setDescription("Fizzle");
@@ -299,6 +302,7 @@ public class SerializationAfterModelChangeTest {
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
+        @Override
         public void apply(final Entity it) {
           it.setName("Baz");
           it.setDescription("Fizzle");
@@ -530,6 +534,7 @@ public class SerializationAfterModelChangeTest {
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
       final Procedure1<Entity> _function = new Procedure1<Entity>() {
+        @Override
         public void apply(final Entity it) {
           it.setName("Baz");
           it.setDescription("Fizzle");

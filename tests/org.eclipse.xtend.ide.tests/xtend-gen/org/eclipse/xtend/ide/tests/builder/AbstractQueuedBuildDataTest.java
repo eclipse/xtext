@@ -68,6 +68,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   
   protected JavaChangeQueueFiller queueFiller;
   
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     JdtQueuedBuildData _jdtQueuedBuildData = new JdtQueuedBuildData();
@@ -79,6 +80,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     JavaCore.addElementChangedListener(this.queueFiller, ElementChangedEvent.POST_CHANGE);
   }
   
+  @Override
   public void tearDown() throws Exception {
     JavaCore.removeElementChangedListener(this.queueFiller);
     this.queueFiller = null;
@@ -107,6 +109,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         for (final String exportedName : _exportedNames) {
           {
             final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+              @Override
               public Boolean apply(final String it) {
                 return Boolean.valueOf(Objects.equal(exportedName, it));
               }
@@ -159,6 +162,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   
   public HashSet<String> getExportedNames(final Collection<? extends IResourceDescription.Delta> deltas) {
     final Function1<IResourceDescription.Delta, HashSet<String>> _function = new Function1<IResourceDescription.Delta, HashSet<String>>() {
+      @Override
       public HashSet<String> apply(final IResourceDescription.Delta it) {
         HashSet<String> _xblockexpression = null;
         {
@@ -175,6 +179,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
           }
           if (_exportedObjects!=null) {
             final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
+              @Override
               public void apply(final IEObjectDescription it) {
                 QualifiedName _name = it.getName();
                 String _string = _name.toString();
@@ -190,6 +195,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
           }
           if (_exportedObjects_1!=null) {
             final Procedure1<IEObjectDescription> _function_1 = new Procedure1<IEObjectDescription>() {
+              @Override
               public void apply(final IEObjectDescription it) {
                 QualifiedName _name = it.getName();
                 String _string = _name.toString();
@@ -205,6 +211,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     };
     Iterable<HashSet<String>> _map = IterableExtensions.map(deltas, _function);
     final Function2<HashSet<String>, HashSet<String>, HashSet<String>> _function_1 = new Function2<HashSet<String>, HashSet<String>, HashSet<String>>() {
+      @Override
       public HashSet<String> apply(final HashSet<String> t, final HashSet<String> t2) {
         HashSet<String> _xblockexpression = null;
         {

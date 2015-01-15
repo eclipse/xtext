@@ -41,6 +41,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   private Set<String> knownProjects = CollectionLiterals.<String>newHashSet();
   
   @Before
+  @Override
   public void setUp() {
     try {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
@@ -61,6 +62,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
       project.open(null);
       EclipseFileSystemSupportImpl _eclipseFileSystemSupportImpl = new EclipseFileSystemSupportImpl();
       final Procedure1<EclipseFileSystemSupportImpl> _function = new Procedure1<EclipseFileSystemSupportImpl>() {
+        @Override
         public void apply(final EclipseFileSystemSupportImpl it) {
           it.setWorkspaceRoot(root);
           IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
@@ -96,14 +98,17 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   }
   
   @Test
+  @Override
   public void testMakeandDeleteFile() {
     super.testMakeandDeleteFile();
   }
   
   @Test
+  @Override
   public void testGetWorkspaceChildren() {
     Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
     final Function1<Path, CharSequence> _function = new Function1<Path, CharSequence>() {
+      @Override
       public CharSequence apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");
@@ -119,6 +124,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
     Assert.assertTrue(_exists);
     Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
     final Function1<Path, CharSequence> _function_1 = new Function1<Path, CharSequence>() {
+      @Override
       public CharSequence apply(final Path it) {
         List<String> _segments = it.getSegments();
         return IterableExtensions.join(_segments, ".");
@@ -172,6 +178,7 @@ public class EclipseFileSystemTest extends JavaIoFileSystemTest {
   }
   
   @Test
+  @Override
   public void testModificationStamp() {
     try {
       final Path path = new Path("/foo/src/my/pack/Foo.txt");

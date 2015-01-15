@@ -52,6 +52,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
     XStringLiteral _head = IterableExtensions.<XStringLiteral>head(featureCalls);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(_head);
     final Procedure2<XStringLiteral, Integer> _function = new Procedure2<XStringLiteral, Integer>() {
+      @Override
       public void apply(final XStringLiteral featureCall, final Integer index) {
         final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
         StringConcatenation _builder = new StringConcatenation();
@@ -72,6 +73,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
       Iterator<XStringLiteral> _filter = Iterators.<XStringLiteral>filter(_eAll, XStringLiteral.class);
       final List<XStringLiteral> featureCalls = IteratorExtensions.<XStringLiteral>toList(_filter);
       final Function1<XStringLiteral, Integer> _function = new Function1<XStringLiteral, Integer>() {
+        @Override
         public Integer apply(final XStringLiteral it) {
           ICompositeNode _findActualNodeFor = NodeModelUtils.findActualNodeFor(it);
           return Integer.valueOf(_findActualNodeFor.getOffset());

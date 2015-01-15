@@ -35,6 +35,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   @Accessors
   private boolean finalFlag;
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -54,6 +55,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   
   protected abstract ISourceAppender appendModifiers(final ISourceAppender appendable);
   
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _and_1 = false;
@@ -72,6 +74,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
     return _and;
   }
   
+  @Override
   public String getImage() {
     return "parameter.gif";
   }

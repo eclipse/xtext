@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 @SuppressWarnings("all")
 public class PureXbaseValidator extends XbaseJavaValidator {
   @Check
+  @Override
   public void checkInnerExpressions(final XExpression expr) {
   }
 }

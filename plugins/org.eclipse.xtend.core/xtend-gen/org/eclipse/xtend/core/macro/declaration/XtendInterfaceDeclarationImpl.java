@@ -22,10 +22,12 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterface> implements InterfaceDeclaration {
+  @Override
   public Iterable<? extends TypeReference> getExtendedInterfaces() {
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeReference> _extends = _delegate.getExtends();
     final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
+      @Override
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -34,10 +36,12 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     return ListExtensions.<JvmTypeReference, TypeReference>map(_extends, _function);
   }
   
+  @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
+      @Override
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = XtendInterfaceDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendTypeParameterDeclaration(it);
@@ -46,6 +50,7 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
   }
   
+  @Override
   public boolean isStrictFloatingPoint() {
     return false;
   }

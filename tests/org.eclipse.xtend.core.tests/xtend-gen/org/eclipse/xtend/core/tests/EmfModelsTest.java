@@ -72,6 +72,7 @@ public class EmfModelsTest {
     EmfModelsTest.LOGGER.info(_plus_1);
     EList<EClassifier> _eClassifiers = ePack.getEClassifiers();
     final Procedure1<EClassifier> _function = new Procedure1<EClassifier>() {
+      @Override
       public void apply(final EClassifier it) {
         if ((it instanceof EClass)) {
           EmfModelsTest.this.check(((EClass)it));

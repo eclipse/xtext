@@ -80,6 +80,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("//***********");
     _builder.newLine();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         DocumentRewriter.Section _newSection = it.newSection(3, 1);
         _newSection.append("one");
@@ -88,42 +89,49 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         DocumentRewriter.Section _newSection_2 = it.newSection(6, 1);
         _newSection_2.append("three");
         final Procedure1<DocumentRewriter> _function = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(4, 2);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function);
         final Procedure1<DocumentRewriter> _function_1 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(5, 0);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_1);
         final Procedure1<DocumentRewriter> _function_2 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(5, 1);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_2);
         final Procedure1<DocumentRewriter> _function_3 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(5, 2);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_3);
         final Procedure1<DocumentRewriter> _function_4 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(6, 0);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_4);
         final Procedure1<DocumentRewriter> _function_5 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(6, 1);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_5);
         final Procedure1<DocumentRewriter> _function_6 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(6, 2);
           }
@@ -144,6 +152,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.append("//***********");
     _builder.newLine();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         DocumentRewriter.Section _newSection = it.newSection(6, 1);
         _newSection.append("one");
@@ -152,42 +161,49 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         DocumentRewriter.Section _newSection_2 = it.newSection(3, 1);
         _newSection_2.append("three");
         final Procedure1<DocumentRewriter> _function = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(4, 2);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function);
         final Procedure1<DocumentRewriter> _function_1 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(5, 0);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_1);
         final Procedure1<DocumentRewriter> _function_2 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(5, 1);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_2);
         final Procedure1<DocumentRewriter> _function_3 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(5, 2);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_3);
         final Procedure1<DocumentRewriter> _function_4 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(6, 0);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_4);
         final Procedure1<DocumentRewriter> _function_5 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(6, 1);
           }
         };
         DocumentRewriterTest.this.assertFails(it, _function_5);
         final Procedure1<DocumentRewriter> _function_6 = new Procedure1<DocumentRewriter>() {
+          @Override
           public void apply(final DocumentRewriter it) {
             it.newSection(6, 2);
           }
@@ -221,6 +237,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("class");
         DocumentRewriter.Section _newSection = it.newSection(_indexOf, 0);
@@ -272,6 +289,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
@@ -320,6 +338,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
@@ -384,6 +403,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("foo");
         final DocumentRewriter.Section beforeFoo = it.newSection(_indexOf, 0);
@@ -445,6 +465,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("def bar");
         final DocumentRewriter.Section beforeDefBar = it.newSection(_indexOf, 0, true);
@@ -491,6 +512,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
     _builder.newLine();
     final String model = _builder.toString();
     final Procedure2<DocumentRewriter, XtextResource> _function = new Procedure2<DocumentRewriter, XtextResource>() {
+      @Override
       public void apply(final DocumentRewriter it, final XtextResource r) {
         int _indexOf = model.indexOf("{}");
         int _plus = (_indexOf + 3);
@@ -551,6 +573,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
         String _string = model.toString();
         final XtextDocument document = this.createDocument(_string);
         final IUnitOfWork<TextEdit, XtextResource> _function = new IUnitOfWork<TextEdit, XtextResource>() {
+          @Override
           public TextEdit exec(final XtextResource it) throws Exception {
             TextEdit _xblockexpression = null;
             {
@@ -604,9 +627,11 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
       final Resource resource = _resourceSet.getResource(_createPlatformResourceURI, true);
       XtendDocumentTokenSource _xtendDocumentTokenSource = new XtendDocumentTokenSource();
       final Procedure1<XtendDocumentTokenSource> _function = new Procedure1<XtendDocumentTokenSource>() {
+        @Override
         public void apply(final XtendDocumentTokenSource it) {
           AntlrTokenDefProvider _antlrTokenDefProvider = new AntlrTokenDefProvider();
           final Procedure1<AntlrTokenDefProvider> _function = new Procedure1<AntlrTokenDefProvider>() {
+            @Override
             public void apply(final AntlrTokenDefProvider it) {
               XtendAntlrTokenFileProvider _xtendAntlrTokenFileProvider = new XtendAntlrTokenFileProvider();
               it.setAntlrTokenFileProvider(_xtendAntlrTokenFileProvider);
@@ -615,6 +640,7 @@ public class DocumentRewriterTest extends AbstractXtendUITestCase {
           AntlrTokenDefProvider _doubleArrow = ObjectExtensions.<AntlrTokenDefProvider>operator_doubleArrow(_antlrTokenDefProvider, _function);
           it.setTokenDefProvider(_doubleArrow);
           final Provider<Lexer> _function_1 = new Provider<Lexer>() {
+            @Override
             public Lexer get() {
               InternalXtendLexer _internalXtendLexer = new InternalXtendLexer();
               return ((Lexer) _internalXtendLexer);

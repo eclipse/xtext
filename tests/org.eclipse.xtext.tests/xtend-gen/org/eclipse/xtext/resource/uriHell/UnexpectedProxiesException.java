@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class UnexpectedProxiesException extends RuntimeException {
   public UnexpectedProxiesException(final Map<EObject, Collection<EStructuralFeature.Setting>> unresolved) {
     super(IterableExtensions.<URI>toSet(Iterables.<URI>concat(IterableExtensions.<EStructuralFeature.Setting, List<URI>>map(Iterables.<EStructuralFeature.Setting>concat(unresolved.values()), new Function1<EStructuralFeature.Setting, List<URI>>() {
+      @Override
       public List<URI> apply(final EStructuralFeature.Setting it) {
         return UnexpectedProxiesException.getURIs(it);
       }
@@ -49,6 +50,7 @@ public class UnexpectedProxiesException extends RuntimeException {
       if (it instanceof List) {
         _matched=true;
         final Function1<EObject, URI> _function = new Function1<EObject, URI>() {
+          @Override
           public URI apply(final EObject it) {
             return EcoreUtil.getURI(it);
           }

@@ -558,6 +558,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
     final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = new Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>>() {
+      @Override
       public Set<String> apply(final ImportsAcceptor.DefaultImportsAcceptor it) {
         return acceptor.getTypes();
       }
@@ -572,6 +573,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   
   private ImportsAcceptor.DefaultImportsAcceptor assertExtensionImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
     final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = new Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>>() {
+      @Override
       public Set<String> apply(final ImportsAcceptor.DefaultImportsAcceptor it) {
         return acceptor.getExtensions();
       }
@@ -586,6 +588,7 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   
   private ImportsAcceptor.DefaultImportsAcceptor assertStaticImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
     final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = new Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>>() {
+      @Override
       public Set<String> apply(final ImportsAcceptor.DefaultImportsAcceptor it) {
         return acceptor.getStaticImport();
       }

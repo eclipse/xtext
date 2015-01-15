@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 
-@SuppressWarnings("all")
+@SuppressWarnings("restriction")
 public class FormatterTester {
   @Inject
   @Extension
@@ -183,6 +183,7 @@ public class FormatterTester {
       int lastOffset = 0;
       final StringBuilder newDocument = new StringBuilder();
       final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
+        @Override
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(it.getOffset());
         }
@@ -215,6 +216,7 @@ public class FormatterTester {
       int lastOffset = 0;
       final StringBuilder debugTrace = new StringBuilder();
       final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
+        @Override
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(it.getOffset());
         }
@@ -256,6 +258,7 @@ public class FormatterTester {
     ArrayList<TextReplacement> _xblockexpression = null;
     {
       final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
+        @Override
         public Integer apply(final TextReplacement it) {
           return Integer.valueOf(it.getOffset());
         }

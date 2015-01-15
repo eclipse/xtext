@@ -62,6 +62,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
   
   protected void _format(final DomainModel domainmodel, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.setNewLines(0, 0, 1);
         it.noSpace();
@@ -69,6 +70,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     };
     DomainModel _prepend = document.<DomainModel>prepend(domainmodel, _function);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.newLine();
       }
@@ -85,6 +87,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
   protected void _format(final PackageDeclaration packagedeclaration, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(packagedeclaration, DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -92,6 +95,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     document.surround(_regionForFeature, _function);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(packagedeclaration, "{");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.newLine();
         it.increaseIndentation();
@@ -103,6 +107,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       {
         this.format(element, document);
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.setNewLines(1, 1, 2);
           }
@@ -112,6 +117,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     }
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(packagedeclaration, "}");
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.decreaseIndentation();
       }
@@ -122,6 +128,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
   protected void _format(final Entity entity, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(entity, DomainmodelPackage.Literals.ABSTRACT_ELEMENT__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -129,6 +136,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     document.surround(_regionForFeature, _function);
     JvmParameterizedTypeReference _superType = entity.getSuperType();
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -136,6 +144,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     document.<JvmParameterizedTypeReference>surround(_superType, _function_1);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(entity, "{");
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.newLine();
         it.increaseIndentation();
@@ -149,6 +158,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       {
         this.format(feature, document);
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.setNewLines(1, 1, 2);
           }
@@ -158,6 +168,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     }
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(entity, "}");
     final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.decreaseIndentation();
       }
@@ -168,6 +179,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
   protected void _format(final Property property, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(property, ":");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -180,6 +192,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
   protected void _format(final Operation operation, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(operation, "op");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -187,6 +200,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     document.append(_regionForKeyword, _function);
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(operation, "(");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -199,12 +213,14 @@ public class DomainmodelFormatter extends XbaseFormatter {
       List<ISemanticRegion> _regionsForKeywords = this.regionAccess.regionsForKeywords(operation, ",");
       for (final ISemanticRegion comma : _regionsForKeywords) {
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
         ISemanticRegion _prepend = document.prepend(comma, _function_2);
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
@@ -217,6 +233,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
       }
       ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(operation, ")");
       final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -228,6 +245,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     if (_notEquals) {
       ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(operation, ")");
       final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -235,12 +253,14 @@ public class DomainmodelFormatter extends XbaseFormatter {
       document.append(_regionForKeyword_3, _function_5);
       JvmTypeReference _type_1 = operation.getType();
       final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
       JvmTypeReference _prepend_1 = document.<JvmTypeReference>prepend(_type_1, _function_6);
       final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -251,6 +271,7 @@ public class DomainmodelFormatter extends XbaseFormatter {
     } else {
       ISemanticRegion _regionForKeyword_4 = this.regionAccess.regionForKeyword(operation, ")");
       final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }

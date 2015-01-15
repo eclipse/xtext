@@ -50,6 +50,7 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
     }
   }
   
+  @Override
   public String toJavaCode(final TypeReference typeref) {
     StringBuilderBasedAppendable _xifexpression = null;
     boolean _notEquals = (!Objects.equal(this.importManager, null));

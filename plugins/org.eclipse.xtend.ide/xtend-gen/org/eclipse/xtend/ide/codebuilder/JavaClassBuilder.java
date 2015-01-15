@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
  */
 @SuppressWarnings("all")
 public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Java {
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _isValid = super.isValid();
@@ -32,6 +33,7 @@ public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuild
     return _and;
   }
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     JvmVisibility _visibility = this.getVisibility();
     ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
@@ -43,6 +45,7 @@ public class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuild
     return _newLine.append("}");
   }
   
+  @Override
   public IType getIType() {
     Object _ownerSource = this.getOwnerSource();
     return ((IType) _ownerSource);

@@ -20,9 +20,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @SuppressWarnings("all")
 public class TaskTagPreferenceInitializer implements IPreferenceStoreInitializer {
+  @Override
   public void initialize(final IPreferenceStoreAccess access) {
     final IPreferenceStore store = access.getWritablePreferenceStore();
     final Procedure1<PreferenceKey> _function = new Procedure1<PreferenceKey>() {
+      @Override
       public void apply(final PreferenceKey it) {
         String _id = it.getId();
         String _defaultValue = it.getDefaultValue();

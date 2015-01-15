@@ -263,6 +263,7 @@ public class PortableURIs {
     }
     Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
     final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
+      @Override
       public Boolean apply(final IEObjectDescription it) {
         boolean _xblockexpression = false;
         {
@@ -415,6 +416,7 @@ public class PortableURIs {
     Splitter _on = Splitter.on("/");
     final Iterable<String> splitted = _on.split(toFragment);
     final Function2<EObject, String, EObject> _function = new Function2<EObject, String, EObject>() {
+      @Override
       public EObject apply(final EObject $0, final String $1) {
         return ((InternalEObject) $0).eObjectForURIFragmentSegment($1);
       }

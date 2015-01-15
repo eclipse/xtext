@@ -220,6 +220,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       Pair<String, JvmDeclaredType> _mappedTo = Pair.<String, JvmDeclaredType>of("visibleFeaturesForAnnotationValues", container);
       Resource _eResource = expression.eResource();
       final Provider<HashMap<String, JvmIdentifiableElement>> _function = new Provider<HashMap<String, JvmIdentifiableElement>>() {
+        @Override
         public HashMap<String, JvmIdentifiableElement> get() {
           final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
           Resource _eResource = expression.eResource();
@@ -330,6 +331,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       final JvmTypeReference expectedComponentType = _switchResult;
       EList<XExpression> _elements = it.getElements();
       final Function1<XExpression, Object> _function = new Function1<XExpression, Object>() {
+        @Override
         public Object apply(final XExpression it) {
           Context _cloneWithExpectation = ctx.cloneWithExpectation(expectedComponentType);
           return ConstantExpressionsInterpreter.this.evaluate(it, _cloneWithExpectation);
@@ -513,6 +515,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         final HashMap<String, JvmIdentifiableElement> copy = new HashMap<String, JvmIdentifiableElement>(_visibleFeatures);
         EList<JvmEnumerationLiteral> _literals = enumType.getLiterals();
         final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+          @Override
           public void apply(final JvmEnumerationLiteral it) {
             String _simpleName = it.getSimpleName();
             copy.put(_simpleName, it);
@@ -639,6 +642,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
               _matched_2=true;
               EList<JvmEnumerationLiteral> _literals = ((JvmEnumerationType)type).getLiterals();
               final Function1<JvmEnumerationLiteral, Boolean> _function = new Function1<JvmEnumerationLiteral, Boolean>() {
+                @Override
                 public Boolean apply(final JvmEnumerationLiteral it) {
                   String _simpleName = it.getSimpleName();
                   return Boolean.valueOf(Objects.equal(_simpleName, featureName));
@@ -661,6 +665,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
               Iterable<JvmFeature> _allFeatures = ((JvmGenericType)type).getAllFeatures();
               Iterable<JvmField> _filter = Iterables.<JvmField>filter(_allFeatures, JvmField.class);
               final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
+                @Override
                 public Boolean apply(final JvmField it) {
                   String _simpleName = it.getSimpleName();
                   return Boolean.valueOf(Objects.equal(_simpleName, featureName));

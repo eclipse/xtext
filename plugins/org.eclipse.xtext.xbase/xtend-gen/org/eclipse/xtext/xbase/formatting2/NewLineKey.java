@@ -12,6 +12,7 @@ public class NewLineKey extends BooleanKey implements Procedure1<IHiddenRegionFo
     super(name, defaultValue);
   }
   
+  @Override
   public void apply(final IHiddenRegionFormatter it) {
     FormatterRequest _request = it.getRequest();
     ITypedPreferenceValues _preferences = _request.getPreferences();

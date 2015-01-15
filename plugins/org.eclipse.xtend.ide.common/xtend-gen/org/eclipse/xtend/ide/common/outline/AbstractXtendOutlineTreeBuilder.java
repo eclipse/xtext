@@ -72,6 +72,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   protected void _build(final EObject modelElement, final IXtendOutlineContext context) {
     EList<EObject> _eContents = modelElement.eContents();
     final Procedure1<EObject> _function = new Procedure1<EObject>() {
+      @Override
       public void apply(final EObject it) {
         AbstractXtendOutlineTreeBuilder.this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
       }
@@ -156,6 +157,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
           EList<JvmMember> _members = ((JvmDeclaredType)declaredType).getMembers();
           Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
           final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+            @Override
             public void apply(final JvmDeclaredType it) {
               AbstractXtendOutlineTreeBuilder.this.buildJvmType(it, nestedTypeContext);
             }
@@ -220,6 +222,7 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
               final IXtendOutlineContext featureContext = this.buildFeature(baseType, ((JvmFeature)member), member, context);
               EList<JvmGenericType> _localClasses = ((JvmFeature)member).getLocalClasses();
               final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+                @Override
                 public void apply(final JvmGenericType it) {
                   IXtendOutlineContext _newContext = featureContext.newContext();
                   AbstractXtendOutlineTreeBuilder.this.buildJvmType(it, _newContext);

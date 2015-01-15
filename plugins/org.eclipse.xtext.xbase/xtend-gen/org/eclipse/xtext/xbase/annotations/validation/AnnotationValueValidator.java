@@ -60,6 +60,7 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
     } else {
       EList<XExpression> _elements_1 = expression.getElements();
       final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
+        @Override
         public Boolean apply(final XExpression it) {
           return Boolean.valueOf(AnnotationValueValidator.this.isValidAnnotationValue(it));
         }

@@ -93,6 +93,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   
   protected void _format(final XtendFile xtendFile, @Extension final IFormattableDocument format) {
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -100,6 +101,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.<XtendFile>prepend(xtendFile, _function);
     final ISemanticRegion pkg = this.regionAccess.regionForFeature(xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -109,6 +111,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     boolean _notEquals = (!Objects.equal(pkgSemicolon, null));
     if (_notEquals) {
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -135,6 +138,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
     }
     final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.newLine();
       }
@@ -164,6 +168,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatTypeParameters(clazz, _typeParameters, format);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(clazz, "class");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -171,6 +176,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.append(_regionForKeyword, _function);
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(clazz, "extends");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -180,6 +186,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.format(_extends, format);
     ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(clazz, "implements");
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -190,12 +197,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       {
         ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(imp, ",");
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
         ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_3);
         final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
@@ -216,6 +225,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       {
         ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(member, "<");
         final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
@@ -226,12 +236,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
             this.format(arg, format);
             ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
             final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
             };
             ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_1);
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.oneSpace();
               }
@@ -241,6 +253,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
         }
         ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(member, ">");
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
@@ -263,6 +276,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       boolean _not = (!_isEmpty);
       if (_not) {
         final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.increaseIndentation();
           }
@@ -310,6 +324,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
               EList<XtendMember> _members_5 = type.getMembers();
               final XtendMember member = _members_5.get((i).intValue());
               final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+                @Override
                 public void apply(final IHiddenRegionFormatter it) {
                   it.decreaseIndentation();
                 }
@@ -331,6 +346,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
         }
         if (_containsComment) {
           final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
               it.increaseIndentation();
@@ -340,6 +356,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
           _xifexpression_1 = format.append(clazzOpenBrace, _function_1);
         } else {
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.newLine();
             }
@@ -360,6 +377,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatTypeParameters(interfaze, _typeParameters, format);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(interfaze, "interface");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -367,6 +385,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.append(_regionForKeyword, _function);
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(interfaze, "extends");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -377,12 +396,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       {
         ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(imp, ",");
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
         ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
         final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
@@ -399,6 +420,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatModifiers(annotationType, format);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(annotationType, "annotation");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -412,6 +434,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatModifiers(enumeration, format);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(enumeration, "enum");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -424,6 +447,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     boolean _not = (!_isEmpty);
     if (_not) {
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.increaseIndentation();
         }
@@ -446,6 +470,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
           if (_lessThan) {
             ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(current, ",");
             final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.noSpace();
               }
@@ -454,6 +479,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
             format.append(_prepend, XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals);
           } else {
             final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+              @Override
               public void apply(final IHiddenRegionFormatter it) {
                 it.decreaseIndentation();
               }
@@ -465,6 +491,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
     } else {
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.newLine();
         }
@@ -478,6 +505,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatModifiers(func, format);
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(func, "new");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -489,6 +517,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     if (_not) {
       ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(func, "<");
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -500,12 +529,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
           this.format(arg, format);
           ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
           ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_2);
           final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
@@ -515,6 +546,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
       ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(func, ">");
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -539,6 +571,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     if (_not) {
       ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(func, "<");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -550,12 +583,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
           this.format(arg, format);
           ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
           final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.noSpace();
             }
           };
           ISemanticRegion _prepend = format.prepend(_immediatelyFollowingKeyword, _function_1);
           final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+            @Override
             public void apply(final IHiddenRegionFormatter it) {
               it.oneSpace();
             }
@@ -565,12 +600,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       }
       ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(func, ">");
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
       };
       ISemanticRegion _prepend = format.prepend(_regionForKeyword_1, _function_1);
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -582,12 +619,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     final ISemanticRegion close = this.regionAccess.regionForKeyword(func, ")");
     JvmTypeReference _returnType = func.getReturnType();
     final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
     format.<JvmTypeReference>append(_returnType, _function_3);
     final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -614,6 +653,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     if (_notEquals) {
       JvmTypeReference _type = field.getType();
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -622,12 +662,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     }
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(field, "=");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
     };
     ISemanticRegion _prepend = document.prepend(_regionForKeyword, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -645,6 +687,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.format(_parameterType, format);
     final ISemanticRegion nameNode = this.regionAccess.regionForFeature(param, XtendPackage.Literals.XTEND_PARAMETER__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -673,6 +716,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     {
       ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(member, "public");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -680,6 +724,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword, _function);
       ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(member, "protected");
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -687,6 +732,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_1, _function_1);
       ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(member, "package");
       final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -694,6 +740,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_2, _function_2);
       ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(member, "private");
       final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -701,6 +748,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_3, _function_3);
       ISemanticRegion _regionForKeyword_4 = this.regionAccess.regionForKeyword(member, "abstract");
       final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -708,6 +756,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_4, _function_4);
       ISemanticRegion _regionForKeyword_5 = this.regionAccess.regionForKeyword(member, "static");
       final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -715,6 +764,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_5, _function_5);
       ISemanticRegion _regionForKeyword_6 = this.regionAccess.regionForKeyword(member, "final");
       final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -722,6 +772,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_6, _function_6);
       ISemanticRegion _regionForKeyword_7 = this.regionAccess.regionForKeyword(member, "extension");
       final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -729,6 +780,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_7, _function_7);
       ISemanticRegion _regionForKeyword_8 = this.regionAccess.regionForKeyword(member, "val");
       final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -736,6 +788,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_8, _function_8);
       ISemanticRegion _regionForKeyword_9 = this.regionAccess.regionForKeyword(member, "var");
       final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -743,6 +796,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_9, _function_9);
       ISemanticRegion _regionForKeyword_10 = this.regionAccess.regionForKeyword(member, "def");
       final Procedure1<IHiddenRegionFormatter> _function_10 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -750,6 +804,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
       document.append(_regionForKeyword_10, _function_10);
       ISemanticRegion _regionForKeyword_11 = this.regionAccess.regionForKeyword(member, "override");
       final Procedure1<IHiddenRegionFormatter> _function_11 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -759,6 +814,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     return _xblockexpression;
   }
   
+  @Override
   protected boolean isSingleLineBlock(final XBlockExpression expr) {
     boolean _and = false;
     boolean _and_1 = false;
@@ -792,6 +848,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     return _and;
   }
   
+  @Override
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
     XExpression _last = IterableExtensions.<XExpression>last(params);

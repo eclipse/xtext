@@ -26,11 +26,13 @@ public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
   
   @Accessors
   private Function1<? super XExpression, ? extends Boolean> predicate = new Function1<XExpression, Boolean>() {
+    @Override
     public Boolean apply(final XExpression it) {
       return Boolean.valueOf((it instanceof XNullLiteral));
     }
   };
   
+  @Override
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
     Boolean _apply = this.predicate.apply(expression);
     if ((_apply).booleanValue()) {

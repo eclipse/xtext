@@ -43,6 +43,7 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
       final List<ReplaceRegion> changes = this.importOrganizer.getOrganizedImportChanges(((XtextResource) _eResource));
       final StringBuilder builder = new StringBuilder(model);
       final Function1<ReplaceRegion, Integer> _function = new Function1<ReplaceRegion, Integer>() {
+        @Override
         public Integer apply(final ReplaceRegion it) {
           return Integer.valueOf(it.getOffset());
         }

@@ -36,6 +36,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatEmptyMethod2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -81,6 +82,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatEmptyMethod4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -126,6 +128,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithJustAComment2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -178,6 +181,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithJustAComment4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -223,6 +227,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithOneExpression2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -274,6 +279,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithOneExpression4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -300,6 +306,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithTryCatchExpression() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -366,6 +373,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithTwoExpressions2() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }
@@ -423,6 +431,7 @@ public class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMethodWithTwoExpressions4() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XtendFormatterPreferenceKeys.keepOneLineMethods, Boolean.valueOf(true));
       }

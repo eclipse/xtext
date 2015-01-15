@@ -17,23 +17,28 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class FilesInSourceAndModelSameProjectTest extends AbstractURIHandlerWithEcoreTest {
+  @Override
   public URI getResourceURI() {
     return URI.createURI("platform:/resource/projectName/src/org/package/First.ecore");
   }
   
+  @Override
   public URI getPackagedResourceURI() {
     return URI.createURI("platform:/resource/projectName/org/package/First.ecore");
   }
   
+  @Override
   public URI getReferencedURI() {
     return URI.createURI("platform:/resource/projectName/model/Second.ecore");
   }
   
+  @Override
   public URI getPackagedReferencedURI() {
     return URI.createURI("platform:/resource/projectName/model/Second.ecore");
   }
   
   @Test(expected = UnexpectedResourcesException.class)
+  @Override
   public void testLoadResourceWithPackagedURIs() {
     super.testLoadResourceWithPackagedURIs();
   }

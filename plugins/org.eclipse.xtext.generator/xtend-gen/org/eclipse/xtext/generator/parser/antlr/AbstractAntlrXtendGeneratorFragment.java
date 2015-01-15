@@ -32,6 +32,7 @@ import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment;
 public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
   protected Module createModule(final Grammar grammar) {
     final Module _function = new Module() {
+      @Override
       public void configure(final Binder binder) {
         AnnotatedBindingBuilder<Grammar> _bind = binder.<Grammar>bind(Grammar.class);
         _bind.toInstance(grammar);
@@ -54,6 +55,7 @@ public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrG
   protected void addLocalBindings(final Binder binder) {
   }
   
+  @Override
   public void generate(final Grammar grammar, final XpandExecutionContext ctx) {
     this.checkGrammar(grammar);
     Module _createModule = this.createModule(grammar);
@@ -66,6 +68,7 @@ public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrG
   
   protected abstract void generate(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx);
   
+  @Override
   public void addToPluginXmlRt(final Grammar grammar, final XpandExecutionContext ctx) {
     List<Object> _parameters = this.getParameters(grammar);
     Xtend2ExecutionContext _xtend2ExecutionContext = new Xtend2ExecutionContext(ctx);
@@ -74,6 +77,7 @@ public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrG
   
   protected abstract void addToPluginXmlRt(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx);
   
+  @Override
   public void addToPluginXmlUi(final Grammar grammar, final XpandExecutionContext ctx) {
     List<Object> _parameters = this.getParameters(grammar);
     Xtend2ExecutionContext _xtend2ExecutionContext = new Xtend2ExecutionContext(ctx);
@@ -82,6 +86,7 @@ public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrG
   
   protected abstract void addToPluginXmlUi(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx);
   
+  @Override
   public void addToPluginXmlTests(final Grammar grammar, final XpandExecutionContext ctx) {
     List<Object> _parameters = this.getParameters(grammar);
     Xtend2ExecutionContext _xtend2ExecutionContext = new Xtend2ExecutionContext(ctx);
@@ -90,6 +95,7 @@ public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrG
   
   protected abstract void addToPluginXmlTests(final Grammar grammar, final List<Object> parameters, final Xtend2ExecutionContext ctx);
   
+  @Override
   public void addToStandaloneSetup(final Grammar grammar, final XpandExecutionContext ctx) {
     List<Object> _parameters = this.getParameters(grammar);
     Xtend2ExecutionContext _xtend2ExecutionContext = new Xtend2ExecutionContext(ctx);

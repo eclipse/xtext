@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class LazyProcessor extends AbstractFieldProcessor {
+  @Override
   public void doTransform(final MutableFieldDeclaration field, @Extension final TransformationContext context) {
     TypeReference _type = field.getType();
     boolean _isPrimitive = _type.isPrimitive();
@@ -39,6 +40,7 @@ public class LazyProcessor extends AbstractFieldProcessor {
     String _simpleName = field.getSimpleName();
     String _plus = ("_init" + _simpleName);
     final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         it.setVisibility(Visibility.PRIVATE);
         TypeReference _type = field.getType();
@@ -54,11 +56,13 @@ public class LazyProcessor extends AbstractFieldProcessor {
     String _firstUpper = StringExtensions.toFirstUpper(_simpleName_1);
     String _plus_1 = ("get" + _firstUpper);
     final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
       public void apply(final MutableMethodDeclaration it) {
         field.markAsRead();
         TypeReference _type = field.getType();
         it.setReturnType(_type);
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("if (");

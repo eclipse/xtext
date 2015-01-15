@@ -98,13 +98,16 @@ public class Declarators {
     final HashSet<QualifiedName> declaratorNames = CollectionLiterals.<QualifiedName>newHashSet();
     Collection<URI> _targetResourceURIs = targetURIs.getTargetResourceURIs();
     final Procedure1<URI> _function = new Procedure1<URI>() {
+      @Override
       public void apply(final URI uri) {
         final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
+          @Override
           public Object exec(final ResourceSet it) throws Exception {
             Object _xblockexpression = null;
             {
               Collection<URI> _eObjectURIs = targetURIs.getEObjectURIs(uri);
               final Procedure1<URI> _function = new Procedure1<URI>() {
+                @Override
                 public void apply(final URI objectURI) {
                   final EObject object = it.getEObject(objectURI, true);
                   boolean _notEquals = (!Objects.equal(object, null));

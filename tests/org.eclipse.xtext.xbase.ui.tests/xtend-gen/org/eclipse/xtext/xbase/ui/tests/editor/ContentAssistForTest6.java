@@ -17,10 +17,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistForTest6 extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "for(var x = 1; x < 10; x++)";
   }
   
+  @Override
   protected String[] getKeywordsAndStatics() {
     String[] _keywordsAndStatics = super.getKeywordsAndStatics();
     final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_keywordsAndStatics);

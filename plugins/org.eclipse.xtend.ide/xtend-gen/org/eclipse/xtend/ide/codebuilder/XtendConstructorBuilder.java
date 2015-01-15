@@ -27,6 +27,7 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
   @Extension
   private InsertionOffsets _insertionOffsets;
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     JvmVisibility _visibility = this.getVisibility();
     ISourceAppender _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
@@ -36,6 +37,7 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
     return this.appendBody(_appendThrowsClause, "");
   }
   
+  @Override
   public int getInsertOffset(final XtextResource resource) {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
@@ -43,10 +45,12 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
     return this._insertionOffsets.getNewConstructorInsertOffset(_context, _findByFragment);
   }
   
+  @Override
   public int getIndentationLevel() {
     return 1;
   }
   
+  @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendTypeDeclaration) _ownerSource);

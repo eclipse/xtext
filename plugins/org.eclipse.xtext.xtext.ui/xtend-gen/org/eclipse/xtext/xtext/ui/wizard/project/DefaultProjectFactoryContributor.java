@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.util.IProjectFactoryContributor;
  */
 @SuppressWarnings("all")
 public class DefaultProjectFactoryContributor implements IProjectFactoryContributor {
+  @Override
   public void contributeFiles(final IProject project, final IProjectFactoryContributor.IFileCreator fileWriter) {
   }
   

@@ -50,6 +50,7 @@ public class WorkspaceScenariosTest {
   public void testJarWithEverything() {
     try {
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String it) {
           return Boolean.valueOf(false);
         }
@@ -69,6 +70,7 @@ public class WorkspaceScenariosTest {
   public void testJarWithoutJava() {
     try {
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String it) {
           boolean _or = false;
           boolean _endsWith = it.endsWith("java");
@@ -85,6 +87,7 @@ public class WorkspaceScenariosTest {
       try {
         final ArrayList<IMarker> allXtendMarkers = CollectionLiterals.<IMarker>newArrayList();
         final IResourceVisitor _function_1 = new IResourceVisitor() {
+          @Override
           public boolean visit(final IResource it) throws CoreException {
             if ((it instanceof IFile)) {
               IPath _fullPath = ((IFile)it).getFullPath();
@@ -104,6 +107,7 @@ public class WorkspaceScenariosTest {
         int _size = allXtendMarkers.size();
         Assert.assertEquals(3, _size);
         final Function1<IMarker, Boolean> _function_2 = new Function1<IMarker, Boolean>() {
+          @Override
           public Boolean apply(final IMarker it) {
             String _message = MarkerUtilities.getMessage(it);
             return Boolean.valueOf(_message.startsWith("Java problem:"));
@@ -123,6 +127,7 @@ public class WorkspaceScenariosTest {
   public void testJarWithoutXtend() {
     try {
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String it) {
           boolean _or = false;
           boolean _endsWith = it.endsWith("java");
@@ -150,6 +155,7 @@ public class WorkspaceScenariosTest {
   public void testJarWithoutStorage() {
     try {
       final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+        @Override
         public Boolean apply(final String it) {
           return Boolean.valueOf(it.endsWith("bin"));
         }
@@ -334,6 +340,7 @@ public class WorkspaceScenariosTest {
         IResourcesSetupUtil.waitForAutoBuild();
         final HashMap<String, InputStream> listOfContents = CollectionLiterals.<String, InputStream>newHashMap();
         final IResourceVisitor _function = new IResourceVisitor() {
+          @Override
           public boolean visit(final IResource it) throws CoreException {
             if ((it instanceof IFile)) {
               IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
@@ -358,6 +365,7 @@ public class WorkspaceScenariosTest {
         _folder_2.accept(visitor);
         Set<Map.Entry<String, InputStream>> _entrySet = listOfContents.entrySet();
         final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = new Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>>() {
+          @Override
           public Pair<String, InputStream> apply(final Map.Entry<String, InputStream> it) {
             String _key = it.getKey();
             InputStream _value = it.getValue();

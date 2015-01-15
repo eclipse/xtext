@@ -12,6 +12,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   @Test
   public void formatClass11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
@@ -30,6 +31,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   @Test
   public void formatClass12() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }
@@ -50,6 +52,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   @Test
   public void formatClass112() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
@@ -71,6 +74,7 @@ public class XtendFileFormatter extends AbstractXtendFormatterTest {
   @Test
   public void formatClass122() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }

@@ -69,10 +69,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               boolean _and = false;
               boolean _and_1 = false;
@@ -136,10 +138,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               boolean _and = false;
               boolean _and_1 = false;
@@ -203,10 +207,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               boolean _and = false;
               boolean _and_1 = false;
@@ -271,10 +277,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "m"));
@@ -321,10 +329,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "m"));
@@ -371,10 +381,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "m"));
@@ -617,10 +629,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               String _name = it.getName();
               return Boolean.valueOf(Objects.equal(_name, "f"));
@@ -831,10 +845,12 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               Class<?> _declaringClass = it.getDeclaringClass();
               String _simpleName = _declaringClass.getSimpleName();
@@ -897,6 +913,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("import org.eclipse.xtend.lib.annotations.Delegate;");
@@ -956,6 +973,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             String _generatedCode = it.getGeneratedCode("C");
@@ -1021,6 +1039,7 @@ public class DelegateCompilerTest extends AbstractXtendCompilerTest {
       XtendFile _file = this.file(text);
       this._validationTestHelper.assertNoIssues(_file);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             String _generatedCode = it.getGeneratedCode("C");

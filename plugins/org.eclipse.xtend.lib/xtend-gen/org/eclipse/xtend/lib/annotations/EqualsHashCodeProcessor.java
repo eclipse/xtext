@@ -57,6 +57,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     public boolean hasEquals(final ClassDeclaration it) {
       Iterable<? extends MethodDeclaration> _declaredMethods = it.getDeclaredMethods();
       final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MethodDeclaration it) {
           boolean _and = false;
           boolean _and_1 = false;
@@ -110,6 +111,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public void addEquals(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -175,6 +177,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     private TypeReference newWildCardSelfTypeReference(final ClassDeclaration cls) {
       Iterable<? extends TypeParameterDeclaration> _typeParameters = cls.getTypeParameters();
       final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
+        @Override
         public TypeReference apply(final TypeParameterDeclaration it) {
           TypeReference _object = Util.this.context.getObject();
           return Util.this.context.newWildcardTypeReference(_object);
@@ -393,6 +396,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public void addHashCode(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
       final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           Element _primarySourceElement = Util.this.context.getPrimarySourceElement(cls);
           Util.this.context.setPrimarySourceElement(it, _primarySourceElement);
@@ -636,6 +640,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     }
   }
   
+  @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     Type _findTypeGlobally = context.findTypeGlobally(Data.class);
     AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
@@ -658,6 +663,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         final boolean hasSuperEquals = util.hasSuperEquals(it);
         Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
         final Function1<MutableFieldDeclaration, Boolean> _function = new Function1<MutableFieldDeclaration, Boolean>() {
+          @Override
           public Boolean apply(final MutableFieldDeclaration it) {
             boolean _and = false;
             boolean _and_1 = false;

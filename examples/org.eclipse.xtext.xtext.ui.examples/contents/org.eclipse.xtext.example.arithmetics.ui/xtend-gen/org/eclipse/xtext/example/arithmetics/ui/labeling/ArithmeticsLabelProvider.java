@@ -33,6 +33,7 @@ public class ArithmeticsLabelProvider extends DefaultEObjectLabelProvider {
     String _name = ele.getName();
     EList<DeclaredParameter> _args = ele.getArgs();
     final Function1<DeclaredParameter, CharSequence> _function = new Function1<DeclaredParameter, CharSequence>() {
+      @Override
       public CharSequence apply(final DeclaredParameter it) {
         return it.getName();
       }

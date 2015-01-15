@@ -53,6 +53,7 @@ public class RegionSetTest {
     _builder.append("set=[[10,0], [10,1], [11,1], [12,1], [99,1], [100,0]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 10, 0);
         it.add(_textSegment);
@@ -79,6 +80,7 @@ public class RegionSetTest {
     _builder.append("set=[[20,0], [20,1]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 20, 0);
         it.add(_textSegment);
@@ -97,6 +99,7 @@ public class RegionSetTest {
     _builder.append("set=[[20,0], [20,1]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 20, 1);
         it.add(_textSegment);
@@ -115,6 +118,7 @@ public class RegionSetTest {
     _builder.append("set=[]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 20, 0);
         it.add(_textSegment);
@@ -133,6 +137,7 @@ public class RegionSetTest {
     _builder.append("set=[[20,2]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 20, 2);
         it.add(_textSegment);
@@ -151,6 +156,7 @@ public class RegionSetTest {
     _builder.append("set=[[20,2]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 21, 0);
         it.add(_textSegment);
@@ -169,6 +175,7 @@ public class RegionSetTest {
     _builder.append("set=[[21,5]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 21, 5);
         it.add(_textSegment);
@@ -187,6 +194,7 @@ public class RegionSetTest {
     _builder.append("set=[[21,5]]");
     _builder.newLine();
     final Procedure1<TestableTextSegmentSet> _function = new Procedure1<TestableTextSegmentSet>() {
+      @Override
       public void apply(final TestableTextSegmentSet it) {
         TextSegment _textSegment = new TextSegment(null, 21, 5);
         it.add(_textSegment);

@@ -31,6 +31,7 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
       final XExpression exp = this.expression("true");
       try {
         final CancelIndicator _function = new CancelIndicator() {
+          @Override
           public boolean isCanceled() {
             return true;
           }
@@ -55,6 +56,7 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
       final XExpression exp = this.expression("true");
       try {
         final CancelIndicator _function = new CancelIndicator() {
+          @Override
           public boolean isCanceled() {
             return false;
           }

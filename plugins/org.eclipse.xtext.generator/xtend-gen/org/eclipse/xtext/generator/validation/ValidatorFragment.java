@@ -67,6 +67,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     return this.composedChecks.add(composedCheckValidator);
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
     {
@@ -85,6 +86,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     return _xblockexpression;
   }
   
+  @Override
   public void generate(final Xtend2ExecutionContext ctx) {
     String _abstractValidatorName = this._validatorNaming.getAbstractValidatorName();
     String _asPath = this._validatorNaming.asPath(_abstractValidatorName);
@@ -283,6 +285,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = this.grammar.getMetamodelDeclarations();
     Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
     final Function1<GeneratedMetamodel, EPackage> _function = new Function1<GeneratedMetamodel, EPackage>() {
+      @Override
       public EPackage apply(final GeneratedMetamodel it) {
         return it.getEPackage();
       }
@@ -297,6 +300,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       List<AbstractMetamodelDeclaration> _allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(this.grammar);
       Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_allMetamodelDeclarations, GeneratedMetamodel.class);
       final Function1<GeneratedMetamodel, EPackage> _function = new Function1<GeneratedMetamodel, EPackage>() {
+        @Override
         public EPackage apply(final GeneratedMetamodel it) {
           return it.getEPackage();
         }
@@ -309,12 +313,14 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     return _xblockexpression;
   }
   
+  @Override
   public List<String> getExportedPackagesRtList(final Grammar grammar) {
     String _validatorName = this._validatorNaming.getValidatorName(grammar);
     String _packageName = this._validatorNaming.packageName(_validatorName);
     return CollectionLiterals.<String>newArrayList(_packageName);
   }
   
+  @Override
   public void addToPluginXmlUi(final Xtend2ExecutionContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();

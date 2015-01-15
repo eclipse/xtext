@@ -35,6 +35,7 @@ public class EmptyClasspathTypeResolverTest extends AbstractTypeResolverTest<Lig
   @Extension
   private ParseHelper<EObject> _parseHelper;
   
+  @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
       EObject _parse = this._parseHelper.parse(expression);
@@ -45,6 +46,7 @@ public class EmptyClasspathTypeResolverTest extends AbstractTypeResolverTest<Lig
     }
   }
   
+  @Override
   public void isFunctionAndEquivalentTo(final LightweightTypeReference reference, final String type) {
   }
 }

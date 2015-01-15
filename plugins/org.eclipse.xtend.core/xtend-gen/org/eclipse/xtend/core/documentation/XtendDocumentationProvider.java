@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
  */
 @SuppressWarnings("all")
 public class XtendDocumentationProvider extends MultiLineCommentDocumentationProvider {
+  @Override
   public String getDocumentation(final EObject o) {
     String _xblockexpression = null;
     {
@@ -35,6 +36,7 @@ public class XtendDocumentationProvider extends MultiLineCommentDocumentationPro
     return _xblockexpression;
   }
   
+  @Override
   public List<INode> getDocumentationNodes(final EObject o) {
     List<INode> _xblockexpression = null;
     {

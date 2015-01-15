@@ -47,6 +47,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     JavaProjectSetupUtil.deleteProject(AbstractXbaseContentAssistBugTest.staticProject);
   }
   
+  @Override
   public void tearDown() throws Exception {
     boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
     if (_notEquals) {
@@ -55,10 +56,12 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     super.tearDown();
   }
   
+  @Override
   public boolean doCleanWorkspace() {
     return false;
   }
   
+  @Override
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
@@ -99,6 +102,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
     return (_simpleName + "Project");
   }
   
+  @Override
   public XtextResource getResourceFor(final InputStream stream) {
     final XtextResource result = super.getResourceFor(stream);
     this.initializeTypeProvider(result);

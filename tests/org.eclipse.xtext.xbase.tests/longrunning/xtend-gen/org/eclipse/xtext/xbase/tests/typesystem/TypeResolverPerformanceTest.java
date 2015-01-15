@@ -27,6 +27,7 @@ public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   @Rule
   public final Timeout timeout = new Timeout(100);
   
+  @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
       String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");

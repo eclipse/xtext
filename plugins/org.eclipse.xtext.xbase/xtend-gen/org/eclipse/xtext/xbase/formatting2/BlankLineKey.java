@@ -13,6 +13,7 @@ public class BlankLineKey extends IntegerKey implements Procedure1<IHiddenRegion
     super(name, defaultValue);
   }
   
+  @Override
   public void apply(final IHiddenRegionFormatter it) {
     FormatterRequest _request = it.getRequest();
     final ITypedPreferenceValues preferences = _request.getPreferences();

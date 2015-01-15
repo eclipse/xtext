@@ -49,6 +49,7 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
     this.eObjectURI = _appendFragment;
   }
   
+  @Override
   public EObject getEObjectOrProxy() {
     boolean _equals = Objects.equal(this.eObjectOrProxy, null);
     if (_equals) {
@@ -59,18 +60,22 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
     return this.eObjectOrProxy;
   }
   
+  @Override
   public QualifiedName getName() {
     return this.qualifiedName;
   }
   
+  @Override
   public String getUserData(final String key) {
     return this.userData.get(key);
   }
   
+  @Override
   public String[] getUserDataKeys() {
     return ((String[])Conversions.unwrapArray(this.userData.keySet(), String.class));
   }
   
+  @Override
   public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
     URI _readURI = SerializationExtensions.readURI(in);
     this.eObjectURI = _readURI;
@@ -82,6 +87,7 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
     this.userData = _readCastedObject;
   }
   
+  @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
     SerializationExtensions.writeURI(out, this.eObjectURI);
     URI _uRI = EcoreUtil.getURI(this.eClass);

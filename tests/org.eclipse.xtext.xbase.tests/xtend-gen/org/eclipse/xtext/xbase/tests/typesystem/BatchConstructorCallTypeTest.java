@@ -32,6 +32,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
     return this.batchTypeResolver;
   }
   
+  @Override
   public void resolvesConstructorCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
     final List<XConstructorCall> featureCalls = this.findConstructorCalls(expressionWithQualifiedNames);
@@ -44,6 +45,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
     XConstructorCall _head = IterableExtensions.<XConstructorCall>head(featureCalls);
     final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(_head);
     final Procedure2<XConstructorCall, Integer> _function = new Procedure2<XConstructorCall, Integer>() {
+      @Override
       public void apply(final XConstructorCall featureCall, final Integer index) {
         final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
         StringConcatenation _builder = new StringConcatenation();

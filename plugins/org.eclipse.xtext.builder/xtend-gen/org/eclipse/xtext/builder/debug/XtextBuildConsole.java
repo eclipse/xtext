@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class XtextBuildConsole extends IOConsole {
   public static class Factory implements IConsoleFactory {
+    @Override
     public void openConsole() {
       ConsolePlugin _default = ConsolePlugin.getDefault();
       IConsoleManager consoleManager = _default.getConsoleManager();
@@ -41,6 +42,7 @@ public class XtextBuildConsole extends IOConsole {
   public static class Logger implements IBuildLogger {
     private static IBuildLogger delegate;
     
+    @Override
     public void log(final Object it) {
       boolean _notEquals = (!Objects.equal(XtextBuildConsole.Logger.delegate, null));
       if (_notEquals) {

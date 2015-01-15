@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperation, MethodDeclaration> implements ResolvedMethod {
+  @Override
   public TypeReference getResolvedReturnType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IResolvedOperation _delegate = this.getDelegate();
@@ -34,6 +35,7 @@ public class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperatio
     return _compilationUnit.toTypeReference(_resolvedReturnType);
   }
   
+  @Override
   public Iterable<? extends ResolvedTypeParameter> getResolvedTypeParameters() {
     ArrayList<ResolvedTypeParameterImpl> _xblockexpression = null;
     {
@@ -47,6 +49,7 @@ public class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperatio
         IResolvedOperation _delegate_1 = this.getDelegate();
         List<LightweightTypeReference> _resolvedTypeParameterConstraints = _delegate_1.getResolvedTypeParameterConstraints(i);
         final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
+          @Override
           public TypeReference apply(final LightweightTypeReference it) {
             CompilationUnitImpl _compilationUnit = ResolvedMethodImpl.this.getCompilationUnit();
             return _compilationUnit.toTypeReference(it);

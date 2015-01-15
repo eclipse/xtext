@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
  */
 @SuppressWarnings("all")
 public class ContentAssistTryTest extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "try";
   }
@@ -32,6 +33,7 @@ public class ContentAssistTryTest extends ContentAssistTest {
     AbstractXbaseContentAssistTest.CAST_INSTANCEOF = new String[] { "as", "catch", "finally", "instanceof" };
   }
   
+  @Override
   public void testOnStringLiteral_33() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("(\'\'.toString )");
@@ -39,6 +41,7 @@ public class ContentAssistTryTest extends ContentAssistTest {
     _append.assertTextAtCursorPosition(")", _expect);
   }
   
+  @Override
   public void testAfterBinaryOperation_06() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("((\'\'+\'\'))");
@@ -46,6 +49,7 @@ public class ContentAssistTryTest extends ContentAssistTest {
     _append.assertTextAtCursorPosition("))", 1, _expect);
   }
   
+  @Override
   public void testAfterBinaryOperation_07() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("((\'\'+\'\'))");
@@ -53,6 +57,7 @@ public class ContentAssistTryTest extends ContentAssistTest {
     _append.assertTextAtCursorPosition("))", _expect);
   }
   
+  @Override
   public void testOnVoidMethod_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     ContentAssistProcessorTestBuilder _append = _newBuilder.append("(null as java.util.List).clear ");

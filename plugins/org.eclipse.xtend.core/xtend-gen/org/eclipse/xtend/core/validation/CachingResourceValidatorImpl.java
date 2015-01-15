@@ -68,8 +68,10 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
+  @Override
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
     final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
+      @Override
       public List<Issue> get() {
         CachingResourceValidatorImpl.this.operationCanceledManager.checkCanceled(mon);
         return CachingResourceValidatorImpl.super.validate(resource, mode, mon);
@@ -78,6 +80,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     return this.cache.<List<Issue>>get(mode, resource, _function);
   }
   
+  @Override
   protected void collectResourceDiagnostics(final Resource resource, final CancelIndicator monitor, final IAcceptor<Issue> acceptor) {
     this.runActiveAnnotationValidation(resource, monitor);
     this.addWarningsForOrphanedJvmElements(resource, monitor, acceptor);
@@ -130,6 +133,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       TreeIterator<EObject> _eAllContents = jvmType.eAllContents();
       Iterator<JvmMember> _filter_1 = Iterators.<JvmMember>filter(_eAllContents, JvmMember.class);
       final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
+        @Override
         public Boolean apply(final JvmMember it) {
           boolean _isSynthetic = CachingResourceValidatorImpl.this._jvmTypeExtensions.isSynthetic(it);
           return Boolean.valueOf((!_isSynthetic));
@@ -201,6 +205,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       if ((member instanceof JvmExecutable)) {
         EList<JvmFormalParameter> _parameters = ((JvmExecutable)member).getParameters();
         final Function1<JvmFormalParameter, CharSequence> _function = new Function1<JvmFormalParameter, CharSequence>() {
+          @Override
           public CharSequence apply(final JvmFormalParameter it) {
             JvmTypeReference _parameterType = it.getParameterType();
             return _parameterType.getSimpleName();

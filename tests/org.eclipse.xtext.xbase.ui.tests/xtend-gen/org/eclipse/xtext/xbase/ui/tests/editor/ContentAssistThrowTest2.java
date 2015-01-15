@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistThrowTest2 extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "throw (";
   }
   
+  @Override
   protected String getSuffix() {
     return ")";
   }

@@ -75,9 +75,11 @@ public class AnnotationProcessor {
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
               registerGlobalsCtx.setCompilationUnit(_compilationUnit);
               final Runnable _function = new Runnable() {
+                @Override
                 public void run() {
                   List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
                   final Function1<XtendAnnotationTarget, MemberDeclaration> _function = new Function1<XtendAnnotationTarget, MemberDeclaration>() {
+                    @Override
                     public MemberDeclaration apply(final XtendAnnotationTarget it) {
                       CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
                       return _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
@@ -121,9 +123,11 @@ public class AnnotationProcessor {
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
               modifyCtx.setUnit(_compilationUnit);
               final Runnable _function = new Runnable() {
+                @Override
                 public void run() {
                   List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
                   final Function1<XtendAnnotationTarget, MutableNamedElement> _function = new Function1<XtendAnnotationTarget, MutableNamedElement>() {
+                    @Override
                     public MutableNamedElement apply(final XtendAnnotationTarget it) {
                       Declaration _switchResult = null;
                       boolean _matched = false;
@@ -184,9 +188,11 @@ public class AnnotationProcessor {
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
               validationContext.setUnit(_compilationUnit);
               final Runnable _function = new Runnable() {
+                @Override
                 public void run() {
                   List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
                   final Function1<XtendAnnotationTarget, NamedElement> _function = new Function1<XtendAnnotationTarget, NamedElement>() {
+                    @Override
                     public NamedElement apply(final XtendAnnotationTarget it) {
                       Declaration _switchResult = null;
                       boolean _matched = false;
@@ -236,6 +242,7 @@ public class AnnotationProcessor {
     {
       final AtomicBoolean isFinished = new AtomicBoolean(false);
       final Runnable _function = new Runnable() {
+        @Override
         public void run() {
           try {
             while ((!isFinished.get())) {

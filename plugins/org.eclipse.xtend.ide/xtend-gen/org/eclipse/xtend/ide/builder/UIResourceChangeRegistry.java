@@ -86,6 +86,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   @Accessors
   private final HashMultimap<String, URI> changesNotRelevantListeners = HashMultimap.<String, URI>create();
   
+  @Override
   public synchronized void registerExists(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
     boolean _not = (!_containsEntry);
@@ -94,6 +95,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
   }
   
+  @Override
   public synchronized void registerGetCharset(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
     boolean _not = (!_containsEntry);
@@ -102,6 +104,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
   }
   
+  @Override
   public synchronized void registerGetChildren(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
     boolean _not = (!_containsEntry);
@@ -110,6 +113,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
   }
   
+  @Override
   public synchronized void registerGetContents(final String path, final URI uri) {
     boolean _containsEntry = this.changesNotRelevantListeners.containsEntry(path, uri);
     boolean _not = (!_containsEntry);
@@ -118,6 +122,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
   }
   
+  @Override
   public synchronized void registerCreateOrModify(final String string, final URI uri) {
     this.existsListeners.remove(string, uri);
     this.charsetListeners.remove(string, uri);
@@ -126,6 +131,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     this.changesNotRelevantListeners.put(string, uri);
   }
   
+  @Override
   public void discardCreateOrModifyInformation(final URI uri) {
     Collection<URI> _values = this.changesNotRelevantListeners.values();
     final Iterator<URI> iter = _values.iterator();
@@ -138,6 +144,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
   }
   
+  @Override
   public synchronized void resourceChanged(final IResourceChangeEvent event) {
     try {
       IResourceDelta _delta = event.getDelta();
@@ -147,6 +154,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     }
   }
   
+  @Override
   public boolean visit(final IResourceDelta delta) throws CoreException {
     boolean _and = false;
     boolean _isEmpty = this.existsListeners.isEmpty();
@@ -319,16 +327,20 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
       this.workspace = workspace;
       this.load();
       workspace.addSaveParticipant(this.uiPlugin, new ISaveParticipant() {
+        @Override
         public void saving(final ISaveContext context) throws CoreException {
           UIResourceChangeRegistry.this.save();
         }
         
+        @Override
         public void doneSaving(final ISaveContext context) {
         }
         
+        @Override
         public void prepareToSave(final ISaveContext context) throws CoreException {
         }
         
+        @Override
         public void rollback(final ISaveContext context) {
         }
       });
@@ -440,6 +452,7 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
     IWorkspaceRoot _root = this.workspace.getRoot();
     IProject[] _projects = _root.getProjects();
     final Function1<IProject, Boolean> _function = new Function1<IProject, Boolean>() {
+      @Override
       public Boolean apply(final IProject it) {
         try {
           boolean _and = false;

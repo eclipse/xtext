@@ -47,11 +47,13 @@ public class FileSystemSupportBasedFileSystemAccess extends AbstractFileSystemAc
     return new Path(((((("/" + this.projectName) + "/") + path) + "/") + fileName));
   }
   
+  @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
     final Path path = this.getPath(fileName, outputConfigurationName);
     this.fileSystemSupport.setContents(path, contents);
   }
   
+  @Override
   public URI getURI(final String fileName, final String outputConfiguration) {
     try {
       Path _path = this.getPath(fileName, outputConfiguration);
@@ -64,16 +66,19 @@ public class FileSystemSupportBasedFileSystemAccess extends AbstractFileSystemAc
     }
   }
   
+  @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final InputStream content) throws RuntimeIOException {
     final Path path = this.getPath(fileName, outputConfigurationName);
     this.fileSystemSupport.setContentsAsStream(path, content);
   }
   
+  @Override
   public InputStream readBinaryFile(final String fileName, final String outputConfigurationName) throws RuntimeIOException {
     final Path path = this.getPath(fileName, outputConfigurationName);
     return this.fileSystemSupport.getContentsAsStream(path);
   }
   
+  @Override
   public CharSequence readTextFile(final String fileName, final String outputConfigurationName) throws RuntimeIOException {
     final Path path = this.getPath(fileName, outputConfigurationName);
     return this.fileSystemSupport.getContents(path);

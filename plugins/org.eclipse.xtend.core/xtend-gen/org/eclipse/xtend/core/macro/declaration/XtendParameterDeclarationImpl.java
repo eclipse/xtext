@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 @SuppressWarnings("all")
 public class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<XtendParameter> implements ParameterDeclaration {
+  @Override
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendParameter _delegate = this.getDelegate();
@@ -27,11 +28,13 @@ public class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<Xte
     return _compilationUnit.toTypeReference(_parameterType);
   }
   
+  @Override
   public String getSimpleName() {
     XtendParameter _delegate = this.getDelegate();
     return _delegate.getName();
   }
   
+  @Override
   public ExecutableDeclaration getDeclaringExecutable() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendParameter _delegate = this.getDelegate();

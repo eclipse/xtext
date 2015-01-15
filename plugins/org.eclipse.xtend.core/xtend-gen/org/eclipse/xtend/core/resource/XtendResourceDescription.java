@@ -56,6 +56,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     this.nameConverter = nameConverter;
   }
   
+  @Override
   protected EObjectDescriptionLookUp getLookUp() {
     boolean _equals = Objects.equal(this.lookup, null);
     if (_equals) {
@@ -66,10 +67,12 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     return this.lookup;
   }
   
+  @Override
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     return Collections.<IReferenceDescription>emptyList();
   }
   
+  @Override
   public Iterable<QualifiedName> getImportedNames() {
     final HashSet<QualifiedName> result = CollectionLiterals.<QualifiedName>newHashSet();
     Resource _resource = this.getResource();
@@ -135,6 +138,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
                 final JvmIdentifiableElement type = ((XAbstractFeatureCall)expression).getFeature();
                 if ((type instanceof JvmDeclaredType)) {
                   final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+                    @Override
                     public Boolean apply(final String it) {
                       QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
                       QualifiedName _lowerCase = _qualifiedName.toLowerCase();
@@ -151,6 +155,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           if (_notEquals_1) {
             JvmType _type = typeRef.getType();
             final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
+              @Override
               public Boolean apply(final String it) {
                 QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
                 QualifiedName _lowerCase = _qualifiedName.toLowerCase();
@@ -168,6 +173,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           TreeIterator<Object> _allContents_1 = EcoreUtil.<Object>getAllContents(eobject, true);
           Iterator<JvmIdentifiableElement> _filter_1 = Iterators.<JvmIdentifiableElement>filter(_allContents_1, JvmIdentifiableElement.class);
           final Function1<JvmIdentifiableElement, LightweightTypeReference> _function = new Function1<JvmIdentifiableElement, LightweightTypeReference>() {
+            @Override
             public LightweightTypeReference apply(final JvmIdentifiableElement it) {
               LightweightTypeReference _xifexpression = null;
               boolean _or = false;
@@ -189,6 +195,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
             if (_notEquals_1) {
               JvmType _type = typeRef.getType();
               final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+                @Override
                 public Boolean apply(final String it) {
                   QualifiedName _qualifiedName = XtendResourceDescription.this.nameConverter.toQualifiedName(it);
                   QualifiedName _lowerCase = _qualifiedName.toLowerCase();
@@ -204,6 +211,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
     Iterable<QualifiedName> _importedNames = super.getImportedNames();
     Iterables.<QualifiedName>addAll(result, _importedNames);
     final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+      @Override
       public Boolean apply(final QualifiedName it) {
         String _lastSegment = it.getLastSegment();
         boolean _contains = XtendResourceDescription.primitivesFilter.contains(_lastSegment);
@@ -255,6 +263,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           this.registerAllTypes(_type, acceptor);
           Iterable<JvmTypeReference> _extendedInterfaces = ((JvmGenericType)type).getExtendedInterfaces();
           final Procedure1<JvmTypeReference> _function = new Procedure1<JvmTypeReference>() {
+            @Override
             public void apply(final JvmTypeReference it) {
               JvmType _type = null;
               if (it!=null) {

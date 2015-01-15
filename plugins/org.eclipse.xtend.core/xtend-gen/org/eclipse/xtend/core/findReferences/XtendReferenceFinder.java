@@ -63,6 +63,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
   @Inject
   private Declarators declarators;
   
+  @Override
   public void findReferencesInDescription(final TargetURIs targetURIs, final IResourceDescription resourceDescription, final IReferenceFinder.IResourceAccess resourceAccess, final IReferenceFinder.Acceptor acceptor, final IProgressMonitor monitor) {
     Declarators.DeclaratorsData _declaratorData = this.declarators.getDeclaratorData(targetURIs, resourceAccess);
     final Set<QualifiedName> names = _declaratorData.getDeclaratorNames();
@@ -73,6 +74,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
     final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+      @Override
       public Boolean apply(final QualifiedName it) {
         return Boolean.valueOf(importedNames.contains(it));
       }
@@ -81,6 +83,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     if (_exists) {
       URI _uRI = resourceDescription.getURI();
       final IUnitOfWork<Object, ResourceSet> _function_1 = new IUnitOfWork<Object, ResourceSet>() {
+        @Override
         public Object exec(final ResourceSet it) throws Exception {
           URI _uRI = resourceDescription.getURI();
           Resource _resource = it.getResource(_uRI, true);
@@ -92,6 +95,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
   }
   
+  @Override
   protected void findLocalReferencesFromElement(final TargetURIs targetURIs, final EObject sourceCandidate, final Resource localResource, final IReferenceFinder.Acceptor acceptor) {
     boolean _matched = false;
     if (!_matched) {
@@ -179,6 +183,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
   protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final TargetURIs targetURISet, final IReferenceFinder.Acceptor acceptor) {
     Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration);
     final Procedure1<JvmFeature> _function = new Procedure1<JvmFeature>() {
+      @Override
       public void apply(final JvmFeature it) {
         XtendReferenceFinder.this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
       }

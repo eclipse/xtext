@@ -9,6 +9,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class SemanticWhitespace extends Chunk {
   private final int column;
   
+  @Override
   public String toString() {
     CharSequence _text = this.getText();
     int _length = _text.length();

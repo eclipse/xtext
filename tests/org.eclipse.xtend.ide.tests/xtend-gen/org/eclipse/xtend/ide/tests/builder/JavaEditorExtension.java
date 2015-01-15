@@ -47,6 +47,7 @@ public class JavaEditorExtension {
   
   public ITextEditor reconcile(final ITextEditor editor, final String oldText, final String newText) {
     final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
+      @Override
       public ITextEditor apply(final ITextEditor it) {
         return JavaEditorExtension.this.changeContent(it, oldText, newText);
       }
@@ -62,6 +63,7 @@ public class JavaEditorExtension {
         return editor;
       }
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           consumer.apply(editor);
         }
@@ -80,6 +82,7 @@ public class JavaEditorExtension {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           boolean _notEquals = (!Objects.equal(consumer, null));
           if (_notEquals) {
@@ -103,6 +106,7 @@ public class JavaEditorExtension {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           boolean _notEquals = (!Objects.equal(consumer, null));
           if (_notEquals) {
@@ -137,6 +141,7 @@ public class JavaEditorExtension {
       }
       final ArrayList<Boolean> changed = CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(false));
       final IElementChangedListener _function = new IElementChangedListener() {
+        @Override
         public void elementChanged(final ElementChangedEvent it) {
           JavaCore.removeElementChangedListener(this);
           Boolean _head = IterableExtensions.<Boolean>head(changed);

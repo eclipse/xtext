@@ -13,6 +13,7 @@ public class ArrayBracketsFormattingReplacer implements ITextReplacer {
   @Accessors
   private final ISemanticRegion region;
   
+  @Override
   public ITextReplacerContext createReplacements(final ITextReplacerContext it) {
     final String t = this.region.getText();
     final int offset = this.region.getOffset();

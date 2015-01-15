@@ -12,6 +12,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatSingleMember() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
@@ -39,6 +40,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatMultiMember() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
@@ -77,6 +79,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatTypeParam() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
@@ -107,6 +110,7 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatNested() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }

@@ -47,6 +47,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   @Accessors
   private Provider<WorkspaceConfig> projectInformationProvider;
   
+  @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     List<Path> _xblockexpression = null;
     {
@@ -62,6 +63,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
       File _javaIOFile = this.getJavaIOFile(path);
       String[] _list = _javaIOFile.list();
       final Function1<String, Path> _function = new Function1<String, Path>() {
+        @Override
         public Path apply(final String it) {
           return path.getAbsolutePath(it);
         }
@@ -78,26 +80,31 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     return new File(_absoluteFileSystemPath, _string);
   }
   
+  @Override
   public boolean exists(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
     return _javaIOFile.exists();
   }
   
+  @Override
   public boolean isFolder(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
     return _javaIOFile.isDirectory();
   }
   
+  @Override
   public boolean isFile(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
     return _javaIOFile.isFile();
   }
   
+  @Override
   public long getLastModification(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
     return _javaIOFile.lastModified();
   }
   
+  @Override
   public String getCharset(final Path path) {
     IEncodingProvider _encodingProvider = this.getEncodingProvider();
     File _javaIOFile = this.getJavaIOFile(path);
@@ -106,6 +113,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     return _encodingProvider.getEncoding(_createFileURI);
   }
   
+  @Override
   public InputStream getContentsAsStream(final Path path) {
     try {
       File _javaIOFile = this.getJavaIOFile(path);
@@ -122,6 +130,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public void mkdir(final Path path) {
     boolean _exists = this.exists(path);
     if (_exists) {
@@ -136,6 +145,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     _javaIOFile.mkdir();
   }
   
+  @Override
   public void delete(final Path path) {
     boolean _exists = this.exists(path);
     boolean _not = (!_exists);
@@ -162,6 +172,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     _javaIOFile_2.delete();
   }
   
+  @Override
   public void setContentsAsStream(final Path path, final InputStream stream) {
     Path _parent = path.getParent();
     this.mkdir(_parent);
@@ -226,11 +237,13 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public java.net.URI toURI(final Path path) {
     File _javaIOFile = this.getJavaIOFile(path);
     return _javaIOFile.toURI();
   }
   
+  @Override
   public Path getPath(final Resource res) {
     ResourceSet _resourceSet = res.getResourceSet();
     URIConverter _uRIConverter = _resourceSet.getURIConverter();

@@ -55,6 +55,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   @Inject
   private IJvmModelAssociations associations;
   
+  @Override
   public void register(final EValidatorRegistrar registrar) {
   }
   
@@ -84,6 +85,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
         EList<EObject> _contents_1 = resource.getContents();
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
         final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
+          @Override
           public void apply(final JvmDeclaredType it) {
             UniqueClassNameValidator.this.doCheckUniqueName(it);
           }
@@ -114,6 +116,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   
   protected boolean checkUniqueInIndex(final JvmDeclaredType type, final Iterable<IEObjectDescription> descriptions) {
     final Function1<IEObjectDescription, URI> _function = new Function1<IEObjectDescription, URI>() {
+      @Override
       public URI apply(final IEObjectDescription it) {
         URI _eObjectURI = it.getEObjectURI();
         return _eObjectURI.trimFragment();
@@ -125,6 +128,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
       final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
+        @Override
         public Boolean apply(final URI it) {
           Resource _eResource = type.eResource();
           URI _uRI = _eResource.getURI();

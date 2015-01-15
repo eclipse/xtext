@@ -22,6 +22,7 @@ public class InvariantCheckingIsolationTest extends AbstractBatchTypeResolverTes
   @Inject
   private InvariantCheckingEagerBatchTypeResolver typeResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.typeResolver;
   }

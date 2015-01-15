@@ -24,6 +24,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
   
   private final IResourceChangeRegistry resourceChangeRegistry;
   
+  @Override
   public void delete(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -31,6 +32,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     this.delegate.delete(path);
   }
   
+  @Override
   public void mkdir(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -38,6 +40,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     this.delegate.mkdir(path);
   }
   
+  @Override
   public void setContents(final Path path, final CharSequence contents) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -45,6 +48,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     this.delegate.setContents(path, contents);
   }
   
+  @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -52,6 +56,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     this.delegate.setContentsAsStream(path, source);
   }
   
+  @Override
   public boolean exists(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -63,6 +68,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.resourceURI;
   }
   
+  @Override
   public String getCharset(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -70,6 +76,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.getCharset(path);
   }
   
+  @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -77,6 +84,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.getChildren(path);
   }
   
+  @Override
   public CharSequence getContents(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -84,6 +92,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.getContents(path);
   }
   
+  @Override
   public InputStream getContentsAsStream(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -91,6 +100,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.getContentsAsStream(path);
   }
   
+  @Override
   public long getLastModification(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -98,6 +108,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.getLastModification(path);
   }
   
+  @Override
   public boolean isFile(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -105,6 +116,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.isFile(path);
   }
   
+  @Override
   public boolean isFolder(final Path path) {
     String _string = path.toString();
     URI _uRI = this.getURI();
@@ -112,6 +124,7 @@ public class ChangeListenerAddingFileSystemSupport implements MutableFileSystemS
     return this.delegate.isFolder(path);
   }
   
+  @Override
   public java.net.URI toURI(final Path path) {
     return this.delegate.toURI(path);
   }

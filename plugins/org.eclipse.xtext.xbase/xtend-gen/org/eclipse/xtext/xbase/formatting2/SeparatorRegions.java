@@ -87,6 +87,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
     }
   }
   
+  @Override
   public Iterator<ObjectEntry<T, R>> iterator() {
     abstract class __SeparatorRegions_1 extends AbstractIterator<ObjectEntry<T, R>> {
       ObjectEntry<T, R> next;
@@ -96,6 +97,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
       {
         next = SeparatorRegions.this.first;
       }
+      @Override
       protected ObjectEntry<T, R> computeNext() {
         ObjectEntry<T, R> _xblockexpression = null;
         {
@@ -115,6 +117,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
   
   public Iterable<SeparatorEntry<T, R>> separators() {
     return new Iterable<SeparatorEntry<T, R>>() {
+      @Override
       public Iterator<SeparatorEntry<T, R>> iterator() {
         abstract class ____SeparatorRegions_1 extends AbstractIterator<SeparatorEntry<T, R>> {
           SeparatorEntry<T, R> next;
@@ -124,6 +127,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
           {
             next = SeparatorRegions.this.first.getTrailingSeparator();
           }
+          @Override
           protected SeparatorEntry<T, R> computeNext() {
             SeparatorEntry<T, R> _xblockexpression = null;
             {
@@ -143,6 +147,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
     };
   }
   
+  @Override
   public String toString() {
     String _xblockexpression = null;
     {

@@ -68,12 +68,14 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.AMBIGUOUS_FEATURE_CALL, _code);
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         return LineDelimiters.toUnix(it);
       }
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
     final Procedure1<String> _function_1 = new Procedure1<String>() {
+      @Override
       public void apply(final String it) {
         final String message = singleError.getMessage();
         boolean _contains = message.contains(it);

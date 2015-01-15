@@ -42,6 +42,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
       List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
       final Function1<TypeUsage, String> _function = new Function1<TypeUsage, String>() {
+        @Override
         public String apply(final TypeUsage it) {
           return it.getUsedTypeName();
         }
@@ -63,6 +64,7 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
       List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
       final Function1<TypeUsage, String> _function = new Function1<TypeUsage, String>() {
+        @Override
         public String apply(final TypeUsage it) {
           return it.getSuffix();
         }

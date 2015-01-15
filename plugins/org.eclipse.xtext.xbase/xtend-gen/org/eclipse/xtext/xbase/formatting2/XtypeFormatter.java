@@ -28,6 +28,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
   protected void _format(final XFunctionTypeRef func, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(func, "(");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -39,12 +40,14 @@ public class XtypeFormatter extends AbstractFormatter2 {
         this.format(param, document);
         ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(param, ",");
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
         ISemanticRegion _prepend = document.prepend(_immediatelyFollowingKeyword, _function_1);
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
@@ -54,6 +57,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     }
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(func, ")");
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         EList<JvmTypeReference> _paramTypes = func.getParamTypes();
         boolean _isEmpty = _paramTypes.isEmpty();
@@ -65,6 +69,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     };
     ISemanticRegion _prepend = document.prepend(_regionForKeyword_1, _function_1);
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -72,6 +77,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     document.append(_prepend, _function_2);
     ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(func, "=>");
     final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -84,6 +90,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
   protected void _format(final JvmParameterizedTypeReference ref, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(ref, "<");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }
@@ -95,12 +102,14 @@ public class XtypeFormatter extends AbstractFormatter2 {
         this.format(arg, document);
         ISemanticRegion _immediatelyFollowingKeyword = this.regionAccess.immediatelyFollowingKeyword(arg, ",");
         final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.noSpace();
           }
         };
         ISemanticRegion _prepend = document.prepend(_immediatelyFollowingKeyword, _function_1);
         final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
@@ -114,6 +123,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     if (_not) {
       ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(ref, ">");
       final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -129,6 +139,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     if (_not) {
       ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(ref, "?");
       final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.oneSpace();
         }
@@ -146,6 +157,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     for (final JvmTypeConstraint c : _constraints) {
       {
         final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
           public void apply(final IHiddenRegionFormatter it) {
             it.oneSpace();
           }
@@ -176,6 +188,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
   protected void _format(final XImportDeclaration imp, @Extension final IFormattableDocument document) {
     ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(imp, "import");
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -183,6 +196,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     document.append(_regionForKeyword, _function);
     ISemanticRegion _regionForFeature = this.regionAccess.regionForFeature(imp, XtypePackage.Literals.XIMPORT_DECLARATION__STATIC);
     final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -190,6 +204,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     document.append(_regionForFeature, _function_1);
     ISemanticRegion _regionForFeature_1 = this.regionAccess.regionForFeature(imp, XtypePackage.Literals.XIMPORT_DECLARATION__EXTENSION);
     final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.oneSpace();
       }
@@ -198,6 +213,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     List<ISemanticRegion> _regionsForKeywords = this.regionAccess.regionsForKeywords(imp, ".");
     for (final ISemanticRegion node : _regionsForKeywords) {
       final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
+        @Override
         public void apply(final IHiddenRegionFormatter it) {
           it.noSpace();
         }
@@ -206,6 +222,7 @@ public class XtypeFormatter extends AbstractFormatter2 {
     }
     ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(imp, ";");
     final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
+      @Override
       public void apply(final IHiddenRegionFormatter it) {
         it.noSpace();
       }

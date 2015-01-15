@@ -35,6 +35,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
   
+  @Override
   public List<INode> getFileHeaderNodes(final Resource resource) {
     if ((resource instanceof XtextResource)) {
       final IParseResult parseResult = ((XtextResource)resource).getParseResult();

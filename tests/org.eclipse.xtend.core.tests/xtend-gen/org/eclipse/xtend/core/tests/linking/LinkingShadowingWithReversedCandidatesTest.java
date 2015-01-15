@@ -24,12 +24,14 @@ import org.junit.runner.RunWith;
 public class LinkingShadowingWithReversedCandidatesTest extends LinkingShadowingTest {
   @Ignore("TODO")
   @Test
+  @Override
   public void testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension() throws Exception {
     super.testOperation_implicitArgumentOnThis_shadows_implicitArgumentOnExtension();
   }
   
   @Ignore("TODO")
   @Test
+  @Override
   public void testOperation_sugarImplicitArgumentOnThis_shadows_sugarImplicitArgumentOnExtension() throws Exception {
     super.testOperation_sugarImplicitArgumentOnThis_shadows_sugarImplicitArgumentOnExtension();
   }

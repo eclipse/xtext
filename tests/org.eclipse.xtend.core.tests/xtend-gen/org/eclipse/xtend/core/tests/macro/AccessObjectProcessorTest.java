@@ -34,6 +34,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("A");
@@ -42,6 +43,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         final MutableClassDeclaration classPA = ctx.findClass("PA");
         Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+          @Override
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
@@ -54,6 +56,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         final MutableClassDeclaration classGA = ctx.findClass("GA");
         Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
         final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
+          @Override
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
@@ -86,6 +89,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
     _builder.append("}");
     _builder.newLine();
     final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
+      @Override
       public void accept(final XtendCompilerTester.CompilationResult it) {
         final TransformationContext ctx = it.getTransformationContext();
         final MutableClassDeclaration classA = ctx.findClass("my.pack.A");
@@ -94,6 +98,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         final MutableClassDeclaration classPA = ctx.findClass("my.pack.PA");
         Iterable<? extends TypeReference> _implementedInterfaces = classPA.getImplementedInterfaces();
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+          @Override
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);
@@ -106,6 +111,7 @@ public class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
         final MutableClassDeclaration classGA = ctx.findClass("my.pack.GA");
         Iterable<? extends TypeReference> _implementedInterfaces_1 = classGA.getImplementedInterfaces();
         final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
+          @Override
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             TypeReference _newTypeReference = ctx.newTypeReference(Serializable.class);

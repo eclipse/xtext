@@ -25,10 +25,12 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
+  @Override
   public Iterable<? extends AnnotationReference> getAnnotations() {
     T _delegate = this.getDelegate();
     EList<XAnnotation> _annotations = _delegate.getAnnotations();
     final Function1<XAnnotation, AnnotationReference> _function = new Function1<XAnnotation, AnnotationReference>() {
+      @Override
       public AnnotationReference apply(final XAnnotation it) {
         CompilationUnitImpl _compilationUnit = XtendAnnotationTargetImpl.this.getCompilationUnit();
         return _compilationUnit.toAnnotationReference(it);
@@ -38,9 +40,11 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
     return ImmutableList.<AnnotationReference>copyOf(_map);
   }
   
+  @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
     final Function1<AnnotationReference, Boolean> _function = new Function1<AnnotationReference, Boolean>() {
+      @Override
       public Boolean apply(final AnnotationReference it) {
         AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
         return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));

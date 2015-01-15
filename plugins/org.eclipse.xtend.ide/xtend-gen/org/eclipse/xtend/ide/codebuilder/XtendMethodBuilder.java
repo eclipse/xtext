@@ -31,6 +31,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
   @Extension
   private InsertionOffsets _insertionOffsets;
   
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _isValid = super.isValid();
@@ -44,6 +45,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
     return _and;
   }
   
+  @Override
   public ISourceAppender build(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -83,6 +85,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
     return _xblockexpression;
   }
   
+  @Override
   public int getInsertOffset(final XtextResource resource) {
     EObject _context = this.getContext();
     XtendTypeDeclaration _xtendType = this.getXtendType();
@@ -90,10 +93,12 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
     return this._insertionOffsets.getNewMethodInsertOffset(_context, _findByFragment);
   }
   
+  @Override
   public int getIndentationLevel() {
     return 1;
   }
   
+  @Override
   public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendTypeDeclaration) _ownerSource);

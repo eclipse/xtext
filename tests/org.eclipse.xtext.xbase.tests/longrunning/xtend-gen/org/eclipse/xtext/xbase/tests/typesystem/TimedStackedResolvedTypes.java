@@ -33,18 +33,22 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
     this.times = times;
   }
   
+  @Override
   public StackedResolvedTypes pushReassigningTypes() {
     return new TimedReassigningResolvedTypes(this, this.times);
   }
   
+  @Override
   public StackedResolvedTypes pushTypes() {
     return new TimedStackedResolvedTypes(this, this.times);
   }
   
+  @Override
   public ExpressionAwareStackedResolvedTypes pushTypes(final XExpression context) {
     return new TimedExpressionAwareResolvedTypes(this, context, this.times);
   }
   
+  @Override
   public IFeatureLinkingCandidate doGetFeature(final XAbstractFeatureCall featureCall) {
     IFeatureLinkingCandidate _xtrycatchfinallyexpression = null;
     try {
@@ -60,6 +64,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
     return _xtrycatchfinallyexpression;
   }
   
+  @Override
   public LightweightTypeReference getActualType(final JvmIdentifiableElement identifiable) {
     LightweightTypeReference _xtrycatchfinallyexpression = null;
     try {
@@ -75,6 +80,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
     return _xtrycatchfinallyexpression;
   }
   
+  @Override
   public LightweightTypeReference getActualType(final XExpression expression) {
     LightweightTypeReference _xtrycatchfinallyexpression = null;
     try {
@@ -90,6 +96,7 @@ public class TimedStackedResolvedTypes extends StackedResolvedTypes {
     return _xtrycatchfinallyexpression;
   }
   
+  @Override
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
     List<LightweightBoundTypeArgument> _xtrycatchfinallyexpression = null;
     try {

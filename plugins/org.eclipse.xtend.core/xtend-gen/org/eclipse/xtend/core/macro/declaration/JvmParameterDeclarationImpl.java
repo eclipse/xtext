@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 @SuppressWarnings("all")
 public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParameter> implements ParameterDeclaration {
+  @Override
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmFormalParameter _delegate = this.getDelegate();
@@ -27,6 +28,7 @@ public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmForm
     return _compilationUnit.toTypeReference(_parameterType);
   }
   
+  @Override
   public ExecutableDeclaration getDeclaringExecutable() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmFormalParameter _delegate = this.getDelegate();

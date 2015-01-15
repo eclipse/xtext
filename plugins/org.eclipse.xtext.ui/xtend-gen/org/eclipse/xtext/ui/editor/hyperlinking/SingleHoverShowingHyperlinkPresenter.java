@@ -51,6 +51,7 @@ public class SingleHoverShowingHyperlinkPresenter extends MultipleHyperlinkPrese
     super(store);
   }
   
+  @Override
   public void showHyperlinks(final IHyperlink[] activeHyperlinks) {
     try {
       super.showHyperlinks(activeHyperlinks);

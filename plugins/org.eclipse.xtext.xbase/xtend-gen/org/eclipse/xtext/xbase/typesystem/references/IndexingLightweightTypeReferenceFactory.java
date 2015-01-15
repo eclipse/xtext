@@ -157,6 +157,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     return _switchResult;
   }
   
+  @Override
   public LightweightTypeReference doVisitFunctionTypeReference(final XFunctionTypeRef reference) {
     ITypeReferenceOwner _owner = this.getOwner();
     JvmType _type = this.getType(reference);

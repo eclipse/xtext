@@ -42,6 +42,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
+  @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
       final XExpression xExpression = this.expression(expression, false);
@@ -154,6 +155,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     }
   }
   
+  @Override
   public void isFunctionAndEquivalentTo(final LightweightTypeReference reference, final String type) {
     Assert.assertTrue((reference instanceof FunctionTypeReference));
     String _equivalent = this.getEquivalent(((FunctionTypeReference) reference));
@@ -167,6 +169,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     _builder.append(_simpleName, "");
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
+      @Override
       public CharSequence apply(final LightweightTypeReference it) {
         return it.getSimpleName();
       }

@@ -25,6 +25,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolverTest {
+  @Override
   public LightweightTypeReference resolvesTo(final String expression, final String type) {
     try {
       final String replacedExpressionText = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
@@ -108,11 +109,13 @@ public class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolve
   }
   
   @Test
+  @Override
   public void testIfExpression_27() throws Exception {
     this.resolvesTo("return if (true) while(false) (\'a\'+\'b\').length", "null");
   }
   
   @Test
+  @Override
   public void testSwitchExpression_11() throws Exception {
     this.resolvesTo("return switch null {\n\t\t  Object : return \n\t\t}", "void");
   }

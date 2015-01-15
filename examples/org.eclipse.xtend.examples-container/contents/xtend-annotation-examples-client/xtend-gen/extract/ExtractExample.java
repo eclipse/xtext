@@ -16,6 +16,7 @@ public class ExtractExample implements ExtractExampleInterface {
   /**
    * This method is extracted to an interface
    */
+  @Override
   public void myPublicMethod() {
   }
   

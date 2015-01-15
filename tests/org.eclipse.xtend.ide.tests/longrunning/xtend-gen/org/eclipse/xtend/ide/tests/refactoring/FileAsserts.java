@@ -40,6 +40,7 @@ public class FileAsserts {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
     final String fileContents = this._workbenchTestHelper.getContents(file);
     final Procedure1<String> _function = new Procedure1<String>() {
+      @Override
       public void apply(final String expectation) {
         boolean _contains = fileContents.contains(expectation);
         boolean _not = (!_contains);

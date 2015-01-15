@@ -68,6 +68,7 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     return result;
   }
   
+  @Override
   public void notifyChanged(final Notification msg) {
     boolean _and = false;
     boolean _and_1 = false;

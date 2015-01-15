@@ -52,6 +52,7 @@ public class StorageAwareResource extends LazyLinkingResource {
   @Accessors
   private IResourceDescription resourceDescription = null;
   
+  @Override
   public void load(final Map<?, ?> options) throws IOException {
     boolean _and = false;
     boolean _and_1 = false;
@@ -100,16 +101,19 @@ public class StorageAwareResource extends LazyLinkingResource {
     }
   }
   
+  @Override
   protected void doUnload() {
     super.doUnload();
     this.isLoadedFromStorage = false;
   }
   
+  @Override
   protected void clearInternalState() {
     this.isLoadedFromStorage = false;
     super.clearInternalState();
   }
   
+  @Override
   public EObject getEObject(final String uriFragment) {
     EObject _xblockexpression = null;
     {
@@ -122,6 +126,7 @@ public class StorageAwareResource extends LazyLinkingResource {
     return _xblockexpression;
   }
   
+  @Override
   protected Set<String> getUnresolvableURIFragments() {
     if (this.isLoadedFromStorage) {
       return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet(StorageAwareResource.UNRESOLVABLE_FRAGMENT));

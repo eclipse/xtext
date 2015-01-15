@@ -14,12 +14,14 @@ import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("all")
+@SuppressWarnings("restriction")
 public class PublicReentrantTypeResolver extends DefaultReentrantTypeResolver {
+  @Override
   public void setTypeComputer(final ITypeComputer typeComputer) {
     super.setTypeComputer(typeComputer);
   }
   
+  @Override
   public IBatchScopeProvider getBatchScopeProvider() {
     return super.getBatchScopeProvider();
   }

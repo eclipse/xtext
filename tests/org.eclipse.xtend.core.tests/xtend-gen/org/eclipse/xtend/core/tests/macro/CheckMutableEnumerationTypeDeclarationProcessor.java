@@ -25,15 +25,19 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class CheckMutableEnumerationTypeDeclarationProcessor implements RegisterGlobalsParticipant<EnumerationTypeDeclaration>, TransformationParticipant<MutableEnumerationTypeDeclaration>, CodeGenerationParticipant<EnumerationTypeDeclaration> {
+  @Override
   public void doRegisterGlobals(final List<? extends EnumerationTypeDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
   }
   
+  @Override
   public void doTransform(final List<? extends MutableEnumerationTypeDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableEnumerationTypeDeclaration enumeration : annotatedTargetElements) {
       {
         final Procedure1<String> _function = new Procedure1<String>() {
+          @Override
           public void apply(final String identifier) {
             final Procedure1<MutableEnumerationValueDeclaration> _function = new Procedure1<MutableEnumerationValueDeclaration>() {
+              @Override
               public void apply(final MutableEnumerationValueDeclaration it) {
               }
             };
@@ -43,14 +47,17 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
         };
         MutableAssert.assertValidJavaIdentifier("name", _function);
         final Procedure0 _function_1 = new Procedure0() {
+          @Override
           public void apply() {
             enumeration.addValue("foo", null);
           }
         };
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "initializer cannot be null", _function_1);
         final Procedure0 _function_2 = new Procedure0() {
+          @Override
           public void apply() {
             final Procedure1<MutableEnumerationValueDeclaration> _function = new Procedure1<MutableEnumerationValueDeclaration>() {
+              @Override
               public void apply(final MutableEnumerationValueDeclaration it) {
               }
             };
@@ -63,6 +70,7 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
     }
   }
   
+  @Override
   public void doGenerateCode(final List<? extends EnumerationTypeDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
   }
 }

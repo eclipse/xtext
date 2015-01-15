@@ -98,6 +98,7 @@ public class QuickfixTestBuilder {
         final IXtextDocument document = this.editor.getDocument();
         Assert.assertNotNull("Error getting document from editor", document);
         final IUnitOfWork<List<Issue>, XtextResource> _function = new IUnitOfWork<List<Issue>, XtextResource>() {
+          @Override
           public List<Issue> exec(final XtextResource it) throws Exception {
             List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
             return QuickfixTestBuilder.this.issues = _validate;
@@ -129,6 +130,7 @@ public class QuickfixTestBuilder {
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
       final Function1<Issue, String> _function = new Function1<Issue, String>() {
+        @Override
         public String apply(final Issue it) {
           return it.getCode();
         }
@@ -145,6 +147,7 @@ public class QuickfixTestBuilder {
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
       final Function1<Issue, List<IssueResolution>> _function = new Function1<Issue, List<IssueResolution>>() {
+        @Override
         public List<IssueResolution> apply(final Issue it) {
           return QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
         }
@@ -152,6 +155,7 @@ public class QuickfixTestBuilder {
       Iterable<List<IssueResolution>> _map = IterableExtensions.<Issue, List<IssueResolution>>map(_issuesAtCaret, _function);
       final Iterable<IssueResolution> resolutions = Iterables.<IssueResolution>concat(_map);
       final Function1<IssueResolution, String> _function_1 = new Function1<IssueResolution, String>() {
+        @Override
         public String apply(final IssueResolution it) {
           return it.getLabel();
         }
@@ -168,6 +172,7 @@ public class QuickfixTestBuilder {
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
       final Function1<Issue, List<IssueResolution>> _function = new Function1<Issue, List<IssueResolution>>() {
+        @Override
         public List<IssueResolution> apply(final Issue it) {
           return QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
         }
@@ -175,6 +180,7 @@ public class QuickfixTestBuilder {
       Iterable<List<IssueResolution>> _map = IterableExtensions.<Issue, List<IssueResolution>>map(_issuesAtCaret, _function);
       Iterable<IssueResolution> _flatten = Iterables.<IssueResolution>concat(_map);
       final Function1<IssueResolution, String> _function_1 = new Function1<IssueResolution, String>() {
+        @Override
         public String apply(final IssueResolution it) {
           return it.getLabel();
         }
@@ -182,6 +188,7 @@ public class QuickfixTestBuilder {
       Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(_flatten, _function_1);
       final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
       final Procedure1<String> _function_2 = new Procedure1<String>() {
+        @Override
         public void apply(final String it) {
           String _join = IterableExtensions.join(actualLabels, ", ");
           String _plus = ((("Label \'" + it) + "\' missing. Got ") + _join);
@@ -200,6 +207,7 @@ public class QuickfixTestBuilder {
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
       final Function1<Issue, List<IssueResolution>> _function = new Function1<Issue, List<IssueResolution>>() {
+        @Override
         public List<IssueResolution> apply(final Issue it) {
           return QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
         }
@@ -207,6 +215,7 @@ public class QuickfixTestBuilder {
       Iterable<List<IssueResolution>> _map = IterableExtensions.<Issue, List<IssueResolution>>map(_issuesAtCaret, _function);
       Iterable<IssueResolution> _flatten = Iterables.<IssueResolution>concat(_map);
       final Function1<IssueResolution, String> _function_1 = new Function1<IssueResolution, String>() {
+        @Override
         public String apply(final IssueResolution it) {
           return it.getLabel();
         }
@@ -214,6 +223,7 @@ public class QuickfixTestBuilder {
       Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(_flatten, _function_1);
       final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
       final Procedure1<String> _function_2 = new Procedure1<String>() {
+        @Override
         public void apply(final String it) {
           String _join = IterableExtensions.join(actualLabels, ", ");
           String _plus = ((("Label \'" + it) + "\' should not appear. Got ") + _join);
@@ -232,6 +242,7 @@ public class QuickfixTestBuilder {
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
       final Function1<Issue, List<IssueResolution>> _function = new Function1<Issue, List<IssueResolution>>() {
+        @Override
         public List<IssueResolution> apply(final Issue it) {
           return QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
         }
@@ -261,6 +272,7 @@ public class QuickfixTestBuilder {
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
       final Function1<Issue, List<IssueResolution>> _function = new Function1<Issue, List<IssueResolution>>() {
+        @Override
         public List<IssueResolution> apply(final Issue it) {
           return QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
         }
@@ -271,6 +283,7 @@ public class QuickfixTestBuilder {
       IXtextDocument _document = this.editor.getDocument();
       final String originalModel = _document.get();
       final Function1<IssueResolution, Boolean> _function_1 = new Function1<IssueResolution, Boolean>() {
+        @Override
         public Boolean apply(final IssueResolution it) {
           String _label = it.getLabel();
           return Boolean.valueOf(Objects.equal(_label, label));
@@ -279,6 +292,7 @@ public class QuickfixTestBuilder {
       final IssueResolution matchingResolution = IterableExtensions.<IssueResolution>findFirst(resolutions, _function_1);
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(label);
       final Function1<IssueResolution, String> _function_2 = new Function1<IssueResolution, String>() {
+        @Override
         public String apply(final IssueResolution it) {
           return label;
         }
@@ -305,6 +319,7 @@ public class QuickfixTestBuilder {
   
   protected Iterable<Issue> getIssuesAtCaret() {
     final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
+      @Override
       public Boolean apply(final Issue it) {
         boolean _and = false;
         Integer _offset = it.getOffset();
@@ -372,6 +387,7 @@ public class QuickfixTestBuilder {
     this._workbenchTestHelper.closeAllEditors(false);
     Set<IFile> _files = this._workbenchTestHelper.getFiles();
     final Procedure1<IFile> _function = new Procedure1<IFile>() {
+      @Override
       public void apply(final IFile it) {
         try {
           NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -388,8 +404,10 @@ public class QuickfixTestBuilder {
     if (_notEquals) {
       IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
       final Procedure1<IPersistentPreferenceStore> _function_1 = new Procedure1<IPersistentPreferenceStore>() {
+        @Override
         public void apply(final IPersistentPreferenceStore it) {
           final Procedure1<String> _function = new Procedure1<String>() {
+            @Override
             public void apply(final String code) {
               it.setToDefault(code);
             }

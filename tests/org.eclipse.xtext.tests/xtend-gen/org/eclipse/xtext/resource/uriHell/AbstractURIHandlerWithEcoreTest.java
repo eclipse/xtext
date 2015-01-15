@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerTest;
  */
 @SuppressWarnings("all")
 public abstract class AbstractURIHandlerWithEcoreTest extends AbstractURIHandlerTest {
+  @Override
   public void setUp() {
     super.setUp();
     final EcoreFactory factory = EcoreFactory.eINSTANCE;

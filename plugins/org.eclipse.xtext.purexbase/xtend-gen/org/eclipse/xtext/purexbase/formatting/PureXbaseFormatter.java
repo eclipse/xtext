@@ -30,6 +30,7 @@ public class PureXbaseFormatter extends AbstractDeclarativeFormatter {
   @Inject
   private XbaseFormatter xbaseFormatter;
   
+  @Override
   protected void configureFormatting(final FormattingConfig c) {
     XbaseGrammarAccess _xbaseGrammarAccess = this._pureXbaseGrammarAccess.getXbaseGrammarAccess();
     this.xbaseFormatter.configure(c, _xbaseGrammarAccess);

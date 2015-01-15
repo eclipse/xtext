@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAnnotationTargetImpl<T> implements MemberDeclaration {
+  @Override
   public String getDocComment() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IEObjectDocumentationProvider _documentationProvider = _compilationUnit.getDocumentationProvider();
@@ -38,6 +39,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     return _documentationProvider.getDocumentation(_delegate);
   }
   
+  @Override
   public TypeDeclaration getDeclaringType() {
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
     T _delegate = this.getDelegate();
@@ -57,6 +59,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     return _switchResult;
   }
   
+  @Override
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
@@ -64,10 +67,12 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     return _compilationUnit.toVisibility(_visibility);
   }
   
+  @Override
   public Set<Modifier> getModifiers() {
     T _delegate = this.getDelegate();
     EList<String> _modifiers = _delegate.getModifiers();
     final Function1<String, Modifier> _function = new Function1<String, Modifier>() {
+      @Override
       public Modifier apply(final String it) {
         String _upperCase = it.toUpperCase();
         return Modifier.valueOf(_upperCase);
@@ -77,10 +82,12 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
     return IterableExtensions.<Modifier>toSet(_map);
   }
   
+  @Override
   public boolean isDeprecated() {
     T _delegate = this.getDelegate();
     EList<XAnnotation> _annotations = _delegate.getAnnotations();
     final Function1<XAnnotation, Boolean> _function = new Function1<XAnnotation, Boolean>() {
+      @Override
       public Boolean apply(final XAnnotation it) {
         String _name = Deprecated.class.getName();
         JvmType _annotationType = it.getAnnotationType();

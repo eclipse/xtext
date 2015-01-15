@@ -27,6 +27,7 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   @Accessors
   private boolean staticFlag;
   
+  @Override
   public String getImage() {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();

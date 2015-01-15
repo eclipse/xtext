@@ -64,6 +64,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
       Iterator<XConstructorCall> _filter = Iterators.<XConstructorCall>filter(_eAll, XConstructorCall.class);
       final List<XConstructorCall> closures = IteratorExtensions.<XConstructorCall>toList(_filter);
       final Function1<XConstructorCall, Integer> _function = new Function1<XConstructorCall, Integer>() {
+        @Override
         public Integer apply(final XConstructorCall it) {
           List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
@@ -76,6 +77,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
     }
   }
   
+  @Override
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {

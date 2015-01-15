@@ -3797,9 +3797,11 @@ public class ErrorTest extends AbstractXtendTestCase {
     Resource _eResource = file.eResource();
     EList<Resource.Diagnostic> _errors = _eResource.getErrors();
     final Procedure1<EList<Resource.Diagnostic>> _function = new Procedure1<EList<Resource.Diagnostic>>() {
+      @Override
       public void apply(final EList<Resource.Diagnostic> it) {
         String _string = it.toString();
         final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
+          @Override
           public Boolean apply(final Resource.Diagnostic it) {
             String _message = it.getMessage();
             return Boolean.valueOf(_message.startsWith("Cyclic "));

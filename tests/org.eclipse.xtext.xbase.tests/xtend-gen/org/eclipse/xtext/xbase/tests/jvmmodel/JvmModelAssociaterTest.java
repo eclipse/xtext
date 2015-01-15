@@ -62,14 +62,17 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   @Test
   public void testInference() {
     final Provider<IJvmModelInferrer> _function = new Provider<IJvmModelInferrer>() {
+      @Override
       public IJvmModelInferrer get() {
         final IJvmModelInferrer _function = new IJvmModelInferrer() {
+          @Override
           public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
             final JvmGenericType firstType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
             final JvmGenericType secondType = JvmModelAssociaterTest.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
             Resource _eResource = secondType.eResource();
             Assert.assertNull(_eResource);
             final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+              @Override
               public void apply(final JvmGenericType it) {
                 it.setAbstract(true);
                 Resource _eResource = firstType.eResource();
@@ -80,6 +83,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
             };
             acceptor.<JvmGenericType>accept(firstType, _function);
             final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+              @Override
               public void apply(final JvmGenericType it) {
                 it.setAbstract(true);
                 Resource _eResource = firstType.eResource();

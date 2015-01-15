@@ -45,6 +45,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     this.compilationUnit = compilationUnit;
   }
   
+  @Override
   public TypeReference getAnyType() {
     TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
     XtendFile _xtendFile = this.compilationUnit.getXtendFile();
@@ -52,10 +53,12 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return this.compilationUnit.toTypeReference(_createAnyTypeReference);
   }
   
+  @Override
   public TypeReference getList(final TypeReference param) {
     return this.newTypeReference("java.util.List", param);
   }
   
+  @Override
   public TypeReference getObject() {
     TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
     XtendFile _xtendFile = this.compilationUnit.getXtendFile();
@@ -64,50 +67,62 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return this.compilationUnit.toTypeReference(_createTypeRef);
   }
   
+  @Override
   public TypeReference getPrimitiveBoolean() {
     return this.newTypeReference("boolean");
   }
   
+  @Override
   public TypeReference getPrimitiveByte() {
     return this.newTypeReference("byte");
   }
   
+  @Override
   public TypeReference getPrimitiveChar() {
     return this.newTypeReference("char");
   }
   
+  @Override
   public TypeReference getPrimitiveDouble() {
     return this.newTypeReference("double");
   }
   
+  @Override
   public TypeReference getPrimitiveFloat() {
     return this.newTypeReference("float");
   }
   
+  @Override
   public TypeReference getPrimitiveInt() {
     return this.newTypeReference("int");
   }
   
+  @Override
   public TypeReference getPrimitiveLong() {
     return this.newTypeReference("long");
   }
   
+  @Override
   public TypeReference getPrimitiveShort() {
     return this.newTypeReference("short");
   }
   
+  @Override
   public TypeReference getPrimitiveVoid() {
     return this.newTypeReference("void");
   }
   
+  @Override
   public TypeReference getSet(final TypeReference param) {
     return this.newTypeReference("java.util.Set", param);
   }
   
+  @Override
   public TypeReference getString() {
     return this.newTypeReference("java.lang.String");
   }
   
+  @Override
   public TypeReference newArrayTypeReference(final TypeReference componentType) {
     TypeReference _xblockexpression = null;
     {
@@ -120,6 +135,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return _xblockexpression;
   }
   
+  @Override
   public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
     TypeReference _xblockexpression = null;
     {
@@ -131,6 +147,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         return null;
       }
       final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
+        @Override
         public JvmTypeReference apply(final TypeReference it) {
           return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
         }
@@ -185,6 +202,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return reference;
   }
   
+  @Override
   public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
     TypeReference _xblockexpression = null;
     {
@@ -263,6 +281,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         return null;
       }
       final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
+        @Override
         public JvmTypeReference apply(final TypeReference it) {
           return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
         }
@@ -274,10 +293,12 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return _xblockexpression;
   }
   
+  @Override
   public TypeReference newWildcardTypeReference() {
     return this.newWildcardTypeReference(null);
   }
   
+  @Override
   public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
     TypeReference _xifexpression = null;
     if ((upperBound == null)) {
@@ -293,6 +314,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return _xifexpression;
   }
   
+  @Override
   public TypeReference newWildcardTypeReferenceWithLowerBound(final TypeReference lowerBound) {
     TypeReference _xifexpression = null;
     if ((lowerBound == null)) {
@@ -308,16 +330,19 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     return _xifexpression;
   }
   
+  @Override
   public TypeReference newTypeReference(final Class<?> clazz, final TypeReference... typeArguments) {
     String _name = clazz.getName();
     return this.newTypeReference(_name, typeArguments);
   }
   
+  @Override
   public TypeReference newSelfTypeReference(final Type typeDeclaration) {
     TypeReference _xifexpression = null;
     if ((typeDeclaration instanceof TypeParameterDeclarator)) {
       Iterable<? extends TypeParameterDeclaration> _typeParameters = ((TypeParameterDeclarator)typeDeclaration).getTypeParameters();
       final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
+        @Override
         public TypeReference apply(final TypeParameterDeclaration it) {
           return TypeReferenceProviderImpl.this.newTypeReference(it);
         }

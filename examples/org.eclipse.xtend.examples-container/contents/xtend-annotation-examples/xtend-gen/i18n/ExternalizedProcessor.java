@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 @SuppressWarnings("all")
 public class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenerationParticipant<ClassDeclaration> {
+  @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     Iterable<? extends MutableFieldDeclaration> _declaredFields = annotatedClass.getDeclaredFields();
     for (final MutableFieldDeclaration field : _declaredFields) {
@@ -71,8 +72,10 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
         }
         String _simpleName = field.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             final Procedure2<Format, Integer> _function = new Procedure2<Format, Integer>() {
+              @Override
               public void apply(final Format format, final Integer idx) {
                 TypeReference _switchResult = null;
                 boolean _matched = false;
@@ -101,6 +104,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
             it.setStatic(true);
             final Iterable<? extends MutableParameterDeclaration> params = it.getParameters();
             final CompilationStrategy _function_1 = new CompilationStrategy() {
+              @Override
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("try {");
@@ -122,6 +126,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
                     _builder.append(_javaCode, "\t");
                     _builder.append(".format(msg,");
                     final Function1<MutableParameterDeclaration, String> _function = new Function1<MutableParameterDeclaration, String>() {
+                      @Override
                       public String apply(final MutableParameterDeclaration it) {
                         return it.getSimpleName();
                       }
@@ -164,18 +169,21 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = annotatedClass.getDeclaredFields();
     final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         it.remove();
       }
     };
     IterableExtensions.forEach(_declaredFields_1, _function);
     final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
+      @Override
       public void apply(final MutableFieldDeclaration it) {
         it.setStatic(true);
         it.setFinal(true);
         TypeReference _newTypeReference = context.newTypeReference(ResourceBundle.class);
         it.setType(_newTypeReference);
         final CompilationStrategy _function = new CompilationStrategy() {
+          @Override
           public CharSequence compile(final CompilationStrategy.CompilationContext it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("ResourceBundle.getBundle(\"");
@@ -192,6 +200,7 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
     annotatedClass.addField("RESOURCE_BUNDLE", _function_1);
   }
   
+  @Override
   public void doGenerateCode(final List<? extends ClassDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
     for (final ClassDeclaration clazz : annotatedSourceElements) {
       {

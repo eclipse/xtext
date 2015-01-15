@@ -31,6 +31,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends ExecutableDeclaration> extends AbstractDelegator<T> implements ResolvedExecutable {
   private Iterable<? extends ResolvedParameter> resolvedParameters;
   
+  @Override
   public Iterable<? extends ResolvedParameter> getResolvedParameters() {
     Iterable<? extends ResolvedParameter> _xblockexpression = null;
     {
@@ -41,6 +42,7 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
         int _size = _parameters.size();
         ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
         final Function1<Integer, ResolvedParameterImpl> _function = new Function1<Integer, ResolvedParameterImpl>() {
+          @Override
           public ResolvedParameterImpl apply(final Integer i) {
             CompilationUnitImpl _compilationUnit = ResolvedExecutableImpl.this.getCompilationUnit();
             T _delegate = ResolvedExecutableImpl.this.getDelegate();
@@ -64,10 +66,12 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
     return _xblockexpression;
   }
   
+  @Override
   public Iterable<? extends TypeReference> getResolvedExceptionTypes() {
     T _delegate = this.getDelegate();
     List<LightweightTypeReference> _resolvedExceptions = _delegate.getResolvedExceptions();
     final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
+      @Override
       public TypeReference apply(final LightweightTypeReference it) {
         CompilationUnitImpl _compilationUnit = ResolvedExecutableImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -76,6 +80,7 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
     return ListExtensions.<LightweightTypeReference, TypeReference>map(_resolvedExceptions, _function);
   }
   
+  @Override
   public D getDeclaration() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
@@ -84,11 +89,13 @@ public class ResolvedExecutableImpl<T extends IResolvedExecutable, D extends Exe
     return ((D) _memberDeclaration);
   }
   
+  @Override
   public String getSimpleSignature() {
     T _delegate = this.getDelegate();
     return _delegate.getSimpleSignature();
   }
   
+  @Override
   public String toString() {
     T _delegate = this.getDelegate();
     return _delegate.toString();

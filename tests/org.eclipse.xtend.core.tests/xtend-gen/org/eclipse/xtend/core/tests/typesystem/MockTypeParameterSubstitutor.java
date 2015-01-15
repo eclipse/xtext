@@ -36,10 +36,12 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
     this.resolvedTypes = resolvedTypes;
   }
   
+  @Override
   public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
     return super.getTypeParameterMapping();
   }
   
+  @Override
   public LightweightTypeReference doVisitParameterizedTypeReference(final ParameterizedTypeReference reference, final Set<JvmTypeParameter> visiting) {
     final JvmType type = reference.getType();
     if ((type instanceof JvmTypeParameter)) {
@@ -71,16 +73,19 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
     return super.doVisitParameterizedTypeReference(reference, visiting);
   }
   
+  @Override
   public LightweightTypeReference doVisitUnboundTypeReference(final UnboundTypeReference reference, final Set<JvmTypeParameter> param) {
     ITypeReferenceOwner _owner = this.getOwner();
     return reference.copyInto(_owner);
   }
   
+  @Override
   public LightweightTypeReference substitute(final LightweightTypeReference original) {
     HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
     return original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
   }
   
+  @Override
   protected Set<JvmTypeParameter> createVisiting() {
     return CollectionLiterals.<JvmTypeParameter>newHashSet();
   }

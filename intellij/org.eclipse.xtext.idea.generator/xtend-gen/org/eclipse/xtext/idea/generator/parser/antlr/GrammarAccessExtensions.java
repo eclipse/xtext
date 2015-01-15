@@ -80,6 +80,7 @@ public class GrammarAccessExtensions {
       if (_isDefinesHiddenTokens) {
         EList<AbstractRule> _hiddenTokens = it.getHiddenTokens();
         final Function1<AbstractRule, String> _function = new Function1<AbstractRule, String>() {
+          @Override
           public String apply(final AbstractRule it) {
             return GrammarAccessExtensions.this.ruleName(it);
           }
@@ -136,6 +137,7 @@ public class GrammarAccessExtensions {
         _or = true;
       } else {
         final Function1<AbstractRule, List<EObject>> _function = new Function1<AbstractRule, List<EObject>>() {
+          @Override
           public List<EObject> apply(final AbstractRule it) {
             return EcoreUtil2.eAllContentsAsList(it);
           }
@@ -144,12 +146,14 @@ public class GrammarAccessExtensions {
         Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
         Iterable<RuleCall> _filter = Iterables.<RuleCall>filter(_flatten, RuleCall.class);
         final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
+          @Override
           public Boolean apply(final RuleCall it) {
             return Boolean.valueOf((!Objects.equal(rule, null)));
           }
         };
         Iterable<RuleCall> _filter_1 = IterableExtensions.<RuleCall>filter(_filter, _function_1);
         final Function1<RuleCall, AbstractRule> _function_2 = new Function1<RuleCall, AbstractRule>() {
+          @Override
           public AbstractRule apply(final RuleCall it) {
             return rule;
           }
@@ -368,6 +372,7 @@ public class GrammarAccessExtensions {
   protected List<AbstractElement> _contentsAsList(final CompoundElement it) {
     EList<AbstractElement> _elements = it.getElements();
     final Function1<AbstractElement, List<AbstractElement>> _function = new Function1<AbstractElement, List<AbstractElement>>() {
+      @Override
       public List<AbstractElement> apply(final AbstractElement it) {
         return GrammarAccessExtensions.this.contentsAsList(it);
       }
@@ -383,6 +388,7 @@ public class GrammarAccessExtensions {
       final ArrayList<AbstractElement> result = CollectionLiterals.<AbstractElement>newArrayList(it);
       EList<AbstractElement> _elements = it.getElements();
       final Function1<AbstractElement, List<AbstractElement>> _function = new Function1<AbstractElement, List<AbstractElement>>() {
+        @Override
         public List<AbstractElement> apply(final AbstractElement it) {
           return GrammarAccessExtensions.this.contentsAsList(it);
         }

@@ -24,6 +24,7 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
     String[] _data = issue.getData();
     final String string = _data[0];
     final IModification _function = new IModification() {
+      @Override
       public void apply(final IModificationContext it) throws Exception {
         IXtextDocument _xtextDocument = it.getXtextDocument();
         Integer _offset = issue.getOffset();

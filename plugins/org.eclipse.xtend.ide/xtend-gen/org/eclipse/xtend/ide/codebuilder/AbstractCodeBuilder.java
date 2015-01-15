@@ -64,6 +64,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   @Inject
   private CommonTypeComputationServices services;
   
+  @Override
   public boolean isValid() {
     final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(this.owner);
     boolean _and = false;
@@ -99,6 +100,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     return _and;
   }
   
+  @Override
   public String getPreview() {
     String _xblockexpression = null;
     {
@@ -187,6 +189,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
             Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
             final Function1<JvmUpperBound, Boolean> _function = new Function1<JvmUpperBound, Boolean>() {
+              @Override
               public Boolean apply(final JvmUpperBound it) {
                 JvmTypeReference _typeReference = it.getTypeReference();
                 String _identifier = _typeReference.getIdentifier();

@@ -82,6 +82,7 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
     return this.expectedRegions.add(_typedRegion);
   }
   
+  @Override
   public void addPosition(final int offset, final int length, final String... id) {
     int _length = id.length;
     Assert.assertEquals(1, _length);

@@ -11,6 +11,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class Case_3 {
   public void testReturnExpression_06() {
     final Function1<Integer, Integer> _function = new Function1<Integer, Integer>() {
+      @Override
       public Integer apply(final Integer i) {
         return i;
       }
@@ -26,6 +27,7 @@ public class Case_3 {
     boolean _notEquals = (!Objects.equal(Case_3.class, null));
     if (_notEquals) {
       final Function1<Integer, Integer> _function = new Function1<Integer, Integer>() {
+        @Override
         public Integer apply(final Integer i) {
           return (i).intValue();
         }

@@ -60,6 +60,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
       final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence>() {
+        @Override
         public CharSequence apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
           return it.getFirst();
         }
@@ -74,6 +75,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final ArrayList<LightweightBoundTypeArgument> mergable = CollectionLiterals.<LightweightBoundTypeArgument>newArrayList();
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Procedure2<JvmFormalParameter, Integer> _function_1 = new Procedure2<JvmFormalParameter, Integer>() {
+        @Override
         public void apply(final JvmFormalParameter p, final Integer i) {
           final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
           JvmTypeReference _parameterType = p.getParameterType();
@@ -107,6 +109,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
       final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence>() {
+        @Override
         public CharSequence apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
           return it.getFirst();
         }
@@ -121,6 +124,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final ArrayList<LightweightBoundTypeArgument> mergable = CollectionLiterals.<LightweightBoundTypeArgument>newArrayList();
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Procedure2<JvmFormalParameter, Integer> _function_1 = new Procedure2<JvmFormalParameter, Integer>() {
+        @Override
         public void apply(final JvmFormalParameter p, final Integer i) {
           final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
           JvmTypeReference _parameterType = p.getParameterType();

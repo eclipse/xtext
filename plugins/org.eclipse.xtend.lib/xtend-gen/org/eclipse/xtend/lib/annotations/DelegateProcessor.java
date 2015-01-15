@@ -150,6 +150,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       boolean _switchResult = false;
       Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
       final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+        @Override
         public TypeReference apply(final ParameterDeclaration it) {
           return it.getType();
         }
@@ -227,6 +228,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       TypeDeclaration _declaringType = delegate.getDeclaringType();
       Iterable<? extends MemberDeclaration> _delegates = this.getDelegates(_declaringType);
       final Function1<MemberDeclaration, Boolean> _function = new Function1<MemberDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MemberDeclaration it) {
           return Boolean.valueOf((!Objects.equal(it, delegate)));
         }
@@ -247,6 +249,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         for (final TypeReference iface : listedInterfaces) {
           {
             final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+              @Override
               public Boolean apply(final TypeReference it) {
                 Type _type = it.getType();
                 Type _type_1 = iface.getType();
@@ -267,6 +270,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
               valid = false;
             }
             final Function1<TypeReference, Boolean> _function_1 = new Function1<TypeReference, Boolean>() {
+              @Override
               public Boolean apply(final TypeReference it) {
                 Type _type = it.getType();
                 Type _type_1 = iface.getType();
@@ -316,6 +320,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     public Iterable<? extends MemberDeclaration> getDelegates(final TypeDeclaration it) {
       Iterable<? extends MemberDeclaration> _declaredMembers = it.getDeclaredMembers();
       final Function1<MemberDeclaration, Boolean> _function = new Function1<MemberDeclaration, Boolean>() {
+        @Override
         public Boolean apply(final MemberDeclaration it) {
           Type _findTypeGlobally = Util.this.context.findTypeGlobally(Delegate.class);
           AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
@@ -338,6 +343,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         final LinkedHashSet<TypeReference> seen = CollectionLiterals.<TypeReference>newLinkedHashSet();
         this.collectAllSuperTypes(it, seen);
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+          @Override
           public Boolean apply(final TypeReference it) {
             Type _type = it.getType();
             return Boolean.valueOf((_type instanceof InterfaceDeclaration));
@@ -357,6 +363,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       }
       Iterable<? extends TypeReference> _declaredSuperTypes = it.getDeclaredSuperTypes();
       final Procedure1<TypeReference> _function = new Procedure1<TypeReference>() {
+        @Override
         public void apply(final TypeReference it) {
           Util.this.collectAllSuperTypes(it, seen);
         }
@@ -374,6 +381,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         TypeReference _type = this.getType(delegate);
         final Set<TypeReference> availableInterfaces = this.getImplementedInterfaces(_type);
         final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+          @Override
           public Boolean apply(final TypeReference iface) {
             boolean _and = false;
             boolean _contains = interfacesOfDeclaringType.contains(iface);
@@ -386,6 +394,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 _or = true;
               } else {
                 final Function1<TypeReference, Boolean> _function = new Function1<TypeReference, Boolean>() {
+                  @Override
                   public Boolean apply(final TypeReference it) {
                     return Boolean.valueOf(iface.isAssignableFrom(it));
                   }
@@ -407,6 +416,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     public Set<ResolvedMethod> getMethodsToImplement(final MemberDeclaration delegate) {
       Set<TypeReference> _delegatedInterfaces = this.getDelegatedInterfaces(delegate);
       final Function1<TypeReference, Iterable<? extends ResolvedMethod>> _function = new Function1<TypeReference, Iterable<? extends ResolvedMethod>>() {
+        @Override
         public Iterable<? extends ResolvedMethod> apply(final TypeReference it) {
           return it.getDeclaredResolvedMethods();
         }
@@ -414,12 +424,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       Iterable<Iterable<? extends ResolvedMethod>> _map = IterableExtensions.<TypeReference, Iterable<? extends ResolvedMethod>>map(_delegatedInterfaces, _function);
       Iterable<ResolvedMethod> _flatten = Iterables.<ResolvedMethod>concat(_map);
       final Function1<ResolvedMethod, Boolean> _function_1 = new Function1<ResolvedMethod, Boolean>() {
+        @Override
         public Boolean apply(final ResolvedMethod it) {
           TypeDeclaration _declaringType = delegate.getDeclaringType();
           MethodDeclaration _declaration = it.getDeclaration();
           String _simpleName = _declaration.getSimpleName();
           Iterable<? extends ResolvedParameter> _resolvedParameters = it.getResolvedParameters();
           final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
+            @Override
             public TypeReference apply(final ResolvedParameter it) {
               return it.getResolvedType();
             }
@@ -431,6 +443,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       Iterable<ResolvedMethod> _filter = IterableExtensions.<ResolvedMethod>filter(_flatten, _function_1);
       final Function1<ResolvedMethod, Boolean> _function_2 = new Function1<ResolvedMethod, Boolean>() {
+        @Override
         public Boolean apply(final ResolvedMethod it) {
           boolean _isObjectMethod = Util.this.isObjectMethod(it);
           return Boolean.valueOf((!_isObjectMethod));
@@ -438,6 +451,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       };
       Iterable<ResolvedMethod> _filter_1 = IterableExtensions.<ResolvedMethod>filter(_filter, _function_2);
       final Function1<ResolvedMethod, String> _function_3 = new Function1<ResolvedMethod, String>() {
+        @Override
         public String apply(final ResolvedMethod it) {
           return it.getSimpleSignature();
         }
@@ -445,6 +459,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       Map<String, List<ResolvedMethod>> _groupBy = IterableExtensions.<String, ResolvedMethod>groupBy(_filter_1, _function_3);
       Collection<List<ResolvedMethod>> _values = _groupBy.values();
       final Function1<List<ResolvedMethod>, ResolvedMethod> _function_4 = new Function1<List<ResolvedMethod>, ResolvedMethod>() {
+        @Override
         public ResolvedMethod apply(final List<ResolvedMethod> it) {
           return IterableExtensions.<ResolvedMethod>head(it);
         }
@@ -460,6 +475,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         final String name = _declaration.getSimpleName();
         Iterable<? extends ResolvedParameter> _resolvedParameters = it.getResolvedParameters();
         final Function1<ResolvedParameter, TypeReference> _function = new Function1<ResolvedParameter, TypeReference>() {
+          @Override
           public TypeReference apply(final ResolvedParameter it) {
             return it.getResolvedType();
           }
@@ -544,12 +560,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         MutableTypeDeclaration _declaringType = delegate.getDeclaringType();
         String _simpleName = declaration.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration impl) {
             Element _primarySourceElement = Util.this.context.getPrimarySourceElement(delegate);
             Util.this.context.setPrimarySourceElement(impl, _primarySourceElement);
             final HashMap<TypeReference, TypeReference> typeParameterMappings = CollectionLiterals.<TypeReference, TypeReference>newHashMap();
             Iterable<? extends ResolvedTypeParameter> _resolvedTypeParameters = resolvedMethod.getResolvedTypeParameters();
             final Procedure1<ResolvedTypeParameter> _function = new Procedure1<ResolvedTypeParameter>() {
+              @Override
               public void apply(final ResolvedTypeParameter param) {
                 TypeParameterDeclaration _declaration = param.getDeclaration();
                 String _simpleName = _declaration.getSimpleName();
@@ -561,6 +579,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 typeParameterMappings.put(_newTypeReference, _newTypeReference_1);
                 Iterable<? extends TypeReference> _upperBounds = copy.getUpperBounds();
                 final Function1<TypeReference, TypeReference> _function = new Function1<TypeReference, TypeReference>() {
+                  @Override
                   public TypeReference apply(final TypeReference it) {
                     return Util.this.replace(it, typeParameterMappings);
                   }
@@ -572,6 +591,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             IterableExtensions.forEach(_resolvedTypeParameters, _function);
             Iterable<? extends TypeReference> _resolvedExceptionTypes = resolvedMethod.getResolvedExceptionTypes();
             final Function1<TypeReference, TypeReference> _function_1 = new Function1<TypeReference, TypeReference>() {
+              @Override
               public TypeReference apply(final TypeReference it) {
                 return Util.this.replace(it, typeParameterMappings);
               }
@@ -585,6 +605,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             impl.setReturnType(_replace);
             Iterable<? extends ResolvedParameter> _resolvedParameters = resolvedMethod.getResolvedParameters();
             final Procedure1<ResolvedParameter> _function_2 = new Procedure1<ResolvedParameter>() {
+              @Override
               public void apply(final ResolvedParameter p) {
                 ParameterDeclaration _declaration = p.getDeclaration();
                 String _simpleName = _declaration.getSimpleName();
@@ -607,6 +628,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 _builder.append("(");
                 Iterable<? extends ParameterDeclaration> _parameters = declaration.getParameters();
                 final Function1<ParameterDeclaration, CharSequence> _function = new Function1<ParameterDeclaration, CharSequence>() {
+                  @Override
                   public CharSequence apply(final ParameterDeclaration it) {
                     return it.getSimpleName();
                   }
@@ -628,6 +650,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     public TypeReference replace(final TypeReference target, final Map<? extends TypeReference, ? extends TypeReference> mappings) {
       Set<? extends Map.Entry<? extends TypeReference, ? extends TypeReference>> _entrySet = mappings.entrySet();
       final Function2<TypeReference, Map.Entry<? extends TypeReference, ? extends TypeReference>, TypeReference> _function = new Function2<TypeReference, Map.Entry<? extends TypeReference, ? extends TypeReference>, TypeReference>() {
+        @Override
         public TypeReference apply(final TypeReference result, final Map.Entry<? extends TypeReference, ? extends TypeReference> mapping) {
           TypeReference _key = mapping.getKey();
           TypeReference _value = mapping.getValue();
@@ -649,6 +672,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         Type _type = target.getType();
         List<TypeReference> _actualTypeArguments_1 = target.getActualTypeArguments();
         final Function1<TypeReference, TypeReference> _function = new Function1<TypeReference, TypeReference>() {
+          @Override
           public TypeReference apply(final TypeReference it) {
             return Util.this.replace(it, oldType, newType);
           }
@@ -697,6 +721,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       CharSequence _switchResult = null;
       Iterable<? extends ParameterDeclaration> _parameters = it.getParameters();
       final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
+        @Override
         public TypeReference apply(final ParameterDeclaration it) {
           return it.getType();
         }
@@ -749,6 +774,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append("\", new Class[]{");
           Iterable<? extends ParameterDeclaration> _parameters_1 = method.getParameters();
           final Function1<ParameterDeclaration, CharSequence> _function_1 = new Function1<ParameterDeclaration, CharSequence>() {
+            @Override
             public CharSequence apply(final ParameterDeclaration it) {
               TypeReference _type = it.getType();
               Type _type_1 = _type.getType();
@@ -761,6 +787,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           _builder_2.append("}, new Object[]{");
           Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
           final Function1<ParameterDeclaration, CharSequence> _function_2 = new Function1<ParameterDeclaration, CharSequence>() {
+            @Override
             public CharSequence apply(final ParameterDeclaration it) {
               return it.getSimpleName();
             }
@@ -823,15 +850,18 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     }
   }
   
+  @Override
   public void doTransform(final List<? extends MutableMemberDeclaration> elements, @Extension final TransformationContext context) {
     @Extension
     final DelegateProcessor.Util util = new DelegateProcessor.Util(context);
     final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
+      @Override
       public void apply(final MutableMemberDeclaration it) {
         boolean _isValidDelegate = util.isValidDelegate(it);
         if (_isValidDelegate) {
           Set<ResolvedMethod> _methodsToImplement = util.getMethodsToImplement(it);
           final Procedure1<ResolvedMethod> _function = new Procedure1<ResolvedMethod>() {
+            @Override
             public void apply(final ResolvedMethod method) {
               util.implementMethod(it, method);
             }

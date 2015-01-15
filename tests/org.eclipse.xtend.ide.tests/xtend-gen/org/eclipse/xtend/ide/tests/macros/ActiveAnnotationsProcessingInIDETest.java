@@ -161,6 +161,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("usercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         XtendFile _xtendFile = it.getXtendFile();
         EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
@@ -174,6 +175,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         EList<XtendMember> _members = xtendClass.getMembers();
         Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
         final Function1<XtendField, Boolean> _function = new Function1<XtendField, Boolean>() {
+          @Override
           public Boolean apply(final XtendField it) {
             String _name = it.getName();
             return Boolean.valueOf(_name.equals("object"));
@@ -218,6 +220,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   
   private IFile sourceFile;
   
+  @Override
   public void assertProcessing(final Pair<String, String> macroFile, final Pair<String, String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");

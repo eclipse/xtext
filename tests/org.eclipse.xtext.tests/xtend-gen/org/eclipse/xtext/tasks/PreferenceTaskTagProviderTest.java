@@ -34,6 +34,7 @@ public class PreferenceTaskTagProviderTest {
   public void test() {
     TaskTag _taskTag = new TaskTag();
     final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
+      @Override
       public void apply(final TaskTag it) {
         it.setName("Foo");
         it.setPriority(Priority.LOW);
@@ -42,6 +43,7 @@ public class PreferenceTaskTagProviderTest {
     TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
     TaskTag _taskTag_1 = new TaskTag();
     final Procedure1<TaskTag> _function_1 = new Procedure1<TaskTag>() {
+      @Override
       public void apply(final TaskTag it) {
         it.setName("BAR");
         it.setPriority(Priority.NORMAL);
@@ -50,6 +52,7 @@ public class PreferenceTaskTagProviderTest {
     TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_1, _function_1);
     TaskTag _taskTag_2 = new TaskTag();
     final Procedure1<TaskTag> _function_2 = new Procedure1<TaskTag>() {
+      @Override
       public void apply(final TaskTag it) {
         it.setName("baZ");
         it.setPriority(Priority.HIGH);

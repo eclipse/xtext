@@ -13,6 +13,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatPublic() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -27,6 +28,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatAbstract() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -41,6 +43,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatPublicAbstract() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -55,6 +58,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatField01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -72,6 +76,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatField02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -93,6 +98,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatFieldInit01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -111,6 +117,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatFieldInit02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -132,6 +139,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatFieldInit03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -150,6 +158,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatFieldInit04() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
       }
     };
@@ -170,6 +179,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatBraces_01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
       }
@@ -188,6 +198,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
   @Test
   public void formatBraces_02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+      @Override
       public void apply(final MapBasedPreferenceValues it) {
         it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(true));
       }

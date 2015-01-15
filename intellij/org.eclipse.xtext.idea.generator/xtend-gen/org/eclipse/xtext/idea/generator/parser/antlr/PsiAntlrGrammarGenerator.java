@@ -29,10 +29,12 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
   @Extension
   private IdeaPluginClassNames _ideaPluginClassNames;
   
+  @Override
   protected String getGrammarFileName(final Grammar it) {
     return this._namingExtensions.getGrammarFileName(it, "Psi");
   }
   
+  @Override
   protected String compileOptions(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -90,6 +92,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected String compileParserImports(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -109,6 +112,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected String compileParserMembers(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -180,10 +184,12 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
     return false;
   }
   
+  @Override
   protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("//Entry rule ");
@@ -224,6 +230,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder;
   }
   
+  @Override
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -255,6 +262,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -353,6 +361,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final Action it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if ((!supportActions)) {
@@ -388,6 +397,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if ((!supportActions)) {
@@ -455,6 +465,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -565,6 +576,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _crossrefEbnf(final AbstractRule it, final CrossReference ref, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -645,6 +657,7 @@ public class PsiAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {

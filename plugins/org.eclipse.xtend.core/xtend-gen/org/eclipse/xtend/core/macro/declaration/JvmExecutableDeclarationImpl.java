@@ -43,6 +43,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     T _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = new Function1<JvmTypeParameter, TypeParameterDeclaration>() {
+      @Override
       public TypeParameterDeclaration apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeParameterDeclaration(it);
@@ -60,6 +61,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     T _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     final Function1<JvmFormalParameter, ParameterDeclaration> _function = new Function1<JvmFormalParameter, ParameterDeclaration>() {
+      @Override
       public ParameterDeclaration apply(final JvmFormalParameter it) {
         CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toParameterDeclaration(it);
@@ -72,6 +74,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
+      @Override
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -200,6 +203,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     return ((MutableParameterDeclaration) _parameterDeclaration);
   }
   
+  @Override
   public void remove() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();

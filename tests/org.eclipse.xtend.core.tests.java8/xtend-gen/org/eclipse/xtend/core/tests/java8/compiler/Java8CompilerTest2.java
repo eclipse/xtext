@@ -513,6 +513,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testClosureNoArgs() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -539,6 +540,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testClosureTwoArgs() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -590,6 +592,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testVoidMethod_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
@@ -637,6 +640,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testVoidMethod_03() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class A {");
@@ -686,6 +690,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testThrowablesPropagate_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension Throwables.*");
@@ -794,6 +799,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testThrowablesPropagate_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension Throwables.*");
@@ -880,6 +886,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testSwitchWithBooleanExpression_3() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -990,6 +997,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testSwitchOverNull() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Foo  {");
@@ -1102,6 +1110,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testSwitchWithConstantExpressions_6() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -1185,6 +1194,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testSwitchWithConstantExpressions_7() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -1270,6 +1280,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testClosureSneakyThrow() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.io.File");
@@ -1403,6 +1414,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testClosureSneakyThrow_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("abstract class Foo {");
@@ -1483,6 +1495,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testNestedClosureWithIt() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
@@ -1557,6 +1570,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testNestedClosureSuperCall() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
@@ -1613,6 +1627,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testFindFirstOnIt_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class FindFirstOnIt {");
@@ -1662,6 +1677,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testAbstractIterator_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Iterator");
@@ -1773,6 +1789,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testAbstractIterator_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Iterator");
@@ -1887,6 +1904,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testReturnType() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import test.ReturnTypeUsesTypeParameter");
@@ -1931,6 +1949,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testReturnType_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import test.ReturnTypeUsesTypeParameter");
@@ -1998,6 +2017,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testReturnType_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.LinkedList");
@@ -2070,6 +2090,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testInnerTypeImports_1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo extends types.SomeClassWithNestedInterface {");
@@ -2111,6 +2132,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testRecursiveLambda_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Foo  {");
@@ -2167,6 +2189,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testRecursiveLambda_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class Foo  {");
@@ -2223,6 +2246,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements ()=>void {");
@@ -2258,6 +2282,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo extends ()=>void {");
@@ -2287,6 +2312,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements (String)=>void {");
@@ -2322,6 +2348,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo extends (String)=>void {");
@@ -2351,6 +2378,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_05() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements ((String)=>void)=>void {");
@@ -2386,6 +2414,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_06() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo extends ((String)=>void)=>void {");
@@ -2415,6 +2444,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_07() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements ()=>String {");
@@ -2453,6 +2483,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_08() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo extends ()=>String {");
@@ -2482,6 +2513,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_09() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo implements ()=>(String)=>void {");
@@ -2522,6 +2554,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testXFunctionTypeRefAsSuperType_10() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo extends ()=>(String)=>void {");
@@ -2553,6 +2586,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testSuperCall_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x class Y extends Object {");
@@ -2627,6 +2661,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testSuperCall_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package x");
@@ -2764,6 +2799,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
    * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=395043
    */
   @Test
+  @Override
   public void testOverriddenVarArgs() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class B extends A {");
@@ -2810,6 +2846,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testExpectationFromTypeParameter() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -2925,6 +2962,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  @Override
   public void testJavaKeywordsUsed() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo;");

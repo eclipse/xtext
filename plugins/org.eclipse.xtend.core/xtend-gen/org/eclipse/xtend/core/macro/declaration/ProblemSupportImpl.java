@@ -62,6 +62,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     }
   }
   
+  @Override
   public void addError(final Element element, final String message) {
     this.checkCanceled();
     this.checkValidationAllowed();
@@ -75,6 +76,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     _errors.add(_eObjectDiagnosticImpl);
   }
   
+  @Override
   public void addWarning(final Element element, final String message) {
     this.checkCanceled();
     this.checkValidationAllowed();
@@ -88,6 +90,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     _warnings.add(_eObjectDiagnosticImpl);
   }
   
+  @Override
   public void validateLater(final Procedure0 validationCallback) {
     ActiveAnnotationContexts.AnnotationCallback _lastPhase = this.compilationUnit.getLastPhase();
     boolean _lessThan = (_lastPhase.compareTo(ActiveAnnotationContexts.AnnotationCallback.VALIDATION) < 0);
@@ -100,6 +103,7 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public void validationPhaseStarted() {
     final Procedure1<Procedure0> _function = new Procedure1<Procedure0>() {
+      @Override
       public void apply(final Procedure0 it) {
         it.apply();
       }
@@ -108,6 +112,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.delayedTasks.clear();
   }
   
+  @Override
   public List<? extends Problem> getProblems(final Element element) {
     this.checkCanceled();
     final Pair<Resource, EObject> resAndObj = this.getResourceAndEObject(element);
@@ -117,6 +122,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     Iterable<Resource.Diagnostic> _plus = Iterables.<Resource.Diagnostic>concat(_errors, _warnings);
     final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
     final Function1<EObjectDiagnosticImpl, Boolean> _function = new Function1<EObjectDiagnosticImpl, Boolean>() {
+      @Override
       public Boolean apply(final EObjectDiagnosticImpl diag) {
         EObject _problematicObject = diag.getProblematicObject();
         EObject _value = resAndObj.getValue();
@@ -125,6 +131,7 @@ public class ProblemSupportImpl implements ProblemSupport {
     };
     Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
     final Function1<EObjectDiagnosticImpl, Problem> _function_1 = new Function1<EObjectDiagnosticImpl, Problem>() {
+      @Override
       public Problem apply(final EObjectDiagnosticImpl diag) {
         String _code = diag.getCode();
         String _message = diag.getMessage();

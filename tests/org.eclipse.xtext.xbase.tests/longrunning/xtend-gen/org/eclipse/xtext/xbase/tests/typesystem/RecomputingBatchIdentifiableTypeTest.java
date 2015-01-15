@@ -20,6 +20,7 @@ public class RecomputingBatchIdentifiableTypeTest extends BatchIdentifiableTypeT
   @Inject
   private RecomputingBatchTypeResolver recomputingResolver;
   
+  @Override
   public IBatchTypeResolver getTypeResolver() {
     return this.recomputingResolver;
   }

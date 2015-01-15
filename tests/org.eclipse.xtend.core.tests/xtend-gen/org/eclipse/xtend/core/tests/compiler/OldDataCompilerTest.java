@@ -587,6 +587,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -628,6 +629,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -669,6 +671,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -710,6 +713,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -751,6 +755,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -838,9 +843,11 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               try {
                 it.getDeclaredConstructor(int.class);
@@ -880,10 +887,12 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertNoIssues(_clazz);
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           Method[] _declaredMethods = _compiledClass.getDeclaredMethods();
           final Function1<Method, Boolean> _function = new Function1<Method, Boolean>() {
+            @Override
             public Boolean apply(final Method it) {
               String _name = it.getName();
               return Boolean.valueOf(_name.startsWith("get"));
@@ -1094,12 +1103,15 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               Field[] _declaredFields = it.getDeclaredFields();
               final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
+                @Override
                 public Boolean apply(final Field it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "foo"));
@@ -1109,6 +1121,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
               Assert.assertTrue(_exists);
               Method[] _declaredMethods = it.getDeclaredMethods();
               final Function1<Method, Boolean> _function_1 = new Function1<Method, Boolean>() {
+                @Override
                 public Boolean apply(final Method it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "getFoo"));
@@ -1118,6 +1131,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
               Assert.assertFalse(_exists_1);
               Constructor<?>[] _declaredConstructors = it.getDeclaredConstructors();
               final Function1<Constructor<?>, Boolean> _function_2 = new Function1<Constructor<?>, Boolean>() {
+                @Override
                 public Boolean apply(final Constructor<?> it) {
                   Class<?>[] _parameterTypes = it.getParameterTypes();
                   int _length = _parameterTypes.length;
@@ -1152,12 +1166,15 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass();
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               Field[] _declaredFields = it.getDeclaredFields();
               final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
+                @Override
                 public Boolean apply(final Field it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "_foo"));
@@ -1167,6 +1184,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
               Assert.assertTrue(_exists);
               Field[] _declaredFields_1 = it.getDeclaredFields();
               final Function1<Field, Boolean> _function_1 = new Function1<Field, Boolean>() {
+                @Override
                 public Boolean apply(final Field it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "_bar"));
@@ -1176,6 +1194,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
               Assert.assertTrue(_exists_1);
               Method[] _declaredMethods = it.getDeclaredMethods();
               final Function1<Method, Boolean> _function_2 = new Function1<Method, Boolean>() {
+                @Override
                 public Boolean apply(final Method it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "isFoo"));
@@ -1185,6 +1204,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
               Assert.assertTrue(_exists_2);
               Method[] _declaredMethods_1 = it.getDeclaredMethods();
               final Function1<Method, Boolean> _function_3 = new Function1<Method, Boolean>() {
+                @Override
                 public Boolean apply(final Method it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, "getBar"));
@@ -1222,12 +1242,15 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           Class<?> _compiledClass = it.getCompiledClass("Bar");
           final Procedure1<Class<?>> _function = new Procedure1<Class<?>>() {
+            @Override
             public void apply(final Class<?> it) {
               Constructor<?>[] _declaredConstructors = it.getDeclaredConstructors();
               final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
+                @Override
                 public Boolean apply(final Constructor<?> it) {
                   Class<?>[] _parameterTypes = it.getParameterTypes();
                   List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
@@ -1263,6 +1286,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           String _generatedCode = it.getGeneratedCode("Bar");
           boolean _contains = _generatedCode.contains("public Bar(final String foo) {");
@@ -1291,6 +1315,7 @@ public class OldDataCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           String _generatedCode = it.getGeneratedCode("Bar");
           boolean _contains = _generatedCode.contains("public Bar(final X foo) {");

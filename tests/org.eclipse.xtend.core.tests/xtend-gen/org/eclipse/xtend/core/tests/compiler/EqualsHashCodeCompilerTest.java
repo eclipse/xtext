@@ -79,6 +79,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -88,6 +89,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass_2 = it.getCompiledClass();
             Field _declaredField = _compiledClass_2.getDeclaredField("ignoreMe");
             final Procedure1<Field> _function = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 try {
                   it.setAccessible(true);
@@ -101,6 +103,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass_3 = it.getCompiledClass();
             Field _declaredField_1 = _compiledClass_3.getDeclaredField("ignoreMe2");
             final Procedure1<Field> _function_1 = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 try {
                   it.setAccessible(true);
@@ -116,6 +119,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
             Class<?> _compiledClass_5 = it.getCompiledClass();
             Field _declaredField_2 = _compiledClass_5.getDeclaredField("i");
             final Procedure1<Field> _function_2 = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 try {
                   it.setAccessible(true);
@@ -168,6 +172,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             final Class<?> foo = it.getCompiledClass("Foo");
@@ -177,6 +182,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
             final Object third = bar.newInstance();
             Field _declaredField = bar.getDeclaredField("bar");
             final Procedure1<Field> _function = new Procedure1<Field>() {
+              @Override
               public void apply(final Field it) {
                 try {
                   it.setAccessible(true);
@@ -224,6 +230,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           String _generatedCode = it.getGeneratedCode("Bar");
           String _generatedCode_1 = it.getGeneratedCode("Bar");
@@ -266,6 +273,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -308,6 +316,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_CLASS, "user.issue", "no effect");
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();
@@ -340,6 +349,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String text = _builder.toString();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           String _singleGeneratedCode = it.getSingleGeneratedCode();
           boolean _contains = _singleGeneratedCode.contains("Foo<?> other = (Foo<?>) obj");
@@ -367,6 +377,7 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       final String text = _builder.toString();
       final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
+        @Override
         public void accept(final CompilationTestHelper.Result it) {
           try {
             Class<?> _compiledClass = it.getCompiledClass();

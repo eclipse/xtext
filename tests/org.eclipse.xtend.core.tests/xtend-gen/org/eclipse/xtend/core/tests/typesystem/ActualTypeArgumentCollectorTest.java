@@ -82,6 +82,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         Assert.assertNotNull(mappedTypes);
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         final Function1<LightweightBoundTypeArgument, String> _function = new Function1<LightweightBoundTypeArgument, String>() {
+          @Override
           public String apply(final LightweightBoundTypeArgument it) {
             StringConcatenation _builder = new StringConcatenation();
             LightweightTypeReference _typeReference = it.getTypeReference();
@@ -103,6 +104,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         Assert.assertEquals(_string, _size, _size_1);
         List<Triple<String, VarianceInfo, VarianceInfo>> _list = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
         final Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>> _function_1 = new Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>>() {
+          @Override
           public Triple<String, VarianceInfo, VarianceInfo> apply(final LightweightBoundTypeArgument it) {
             LightweightTypeReference _typeReference = it.getTypeReference();
             String _string = _typeReference.toString();
@@ -125,6 +127,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
       _builder.append(" in ");
       Set<JvmTypeParameter> _keySet = mapping.keySet();
       final Function1<JvmTypeParameter, String> _function_2 = new Function1<JvmTypeParameter, String>() {
+        @Override
         public String apply(final JvmTypeParameter it) {
           return it.getSimpleName();
         }
@@ -145,6 +148,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
       if (_equals) {
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         final Function1<LightweightBoundTypeArgument, Object> _function = new Function1<LightweightBoundTypeArgument, Object>() {
+          @Override
           public Object apply(final LightweightBoundTypeArgument it) {
             return it.getOrigin();
           }
@@ -176,6 +180,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         }
         _builder.append(" void method(");
         final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
+          @Override
           public CharSequence apply(final String it) {
             return it;
           }

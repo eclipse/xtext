@@ -31,6 +31,7 @@ public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
   @Extension
   private Naming naming;
   
+  @Override
   public void addToPluginXmlUi(final Xtend2ExecutionContext ctx) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- task preference page for ");
@@ -143,6 +144,7 @@ public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
     ctx.append(_builder);
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
     {
@@ -154,6 +156,7 @@ public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
     return _xblockexpression;
   }
   
+  @Override
   public Set<Binding> getGuiceBindingsUi(final Grammar grammar) {
     Set<Binding> _xblockexpression = null;
     {

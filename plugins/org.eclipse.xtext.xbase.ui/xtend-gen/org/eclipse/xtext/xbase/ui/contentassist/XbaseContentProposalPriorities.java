@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.ui.contentassist.XbaseProposalProvider;
  */
 @SuppressWarnings("all")
 public class XbaseContentProposalPriorities extends ContentProposalPriorities {
+  @Override
   public void adjustCrossReferencePriority(final ICompletionProposal proposal, final String prefix) {
     if ((proposal instanceof ConfigurableCompletionProposal)) {
       Object _additionalData = ((ConfigurableCompletionProposal)proposal).getAdditionalData(XbaseProposalProvider.DESCRIPTION_KEY);

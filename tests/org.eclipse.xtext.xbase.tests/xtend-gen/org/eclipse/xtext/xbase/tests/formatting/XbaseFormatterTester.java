@@ -31,9 +31,11 @@ public class XbaseFormatterTester extends FormatterTester {
     String _newLine_1 = Strings.newLine();
     final String postfix = (_newLine_1 + "}");
     final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
+      @Override
       public void apply(final FormatterTestRequest it) {
         test.apply(it);
         final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+          @Override
           public void apply(final MapBasedPreferenceValues it) {
             it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
           }
@@ -62,6 +64,7 @@ public class XbaseFormatterTester extends FormatterTester {
   protected String indent(final String string, final String indent) {
     String[] _split = string.split("\\r?\\n");
     final Function1<String, String> _function = new Function1<String, String>() {
+      @Override
       public String apply(final String it) {
         String _xifexpression = null;
         boolean _equals = Objects.equal(it, "");

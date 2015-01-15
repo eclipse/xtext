@@ -16,10 +16,12 @@ import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 
 @SuppressWarnings("all")
 public class JvmEnumerationValueDeclarationImpl extends JvmMemberDeclarationImpl<JvmEnumerationLiteral> implements EnumerationValueDeclaration {
+  @Override
   public void setVisibility(final Visibility visibility) {
     throw new UnsupportedOperationException("It is not possible to change visibility of enumeration value.");
   }
   
+  @Override
   public EnumerationTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((EnumerationTypeDeclaration) _declaringType);

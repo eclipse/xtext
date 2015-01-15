@@ -29,6 +29,7 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   @Inject
   private CommonTypeComputationServices services;
   
+  @Override
   public String resolve(final JvmTypeReference declaration, final JvmTypeReference reference) {
     JvmType _type = declaration.getType();
     @Extension

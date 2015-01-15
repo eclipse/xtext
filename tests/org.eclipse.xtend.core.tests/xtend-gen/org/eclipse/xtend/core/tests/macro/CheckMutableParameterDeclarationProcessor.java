@@ -22,12 +22,15 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class CheckMutableParameterDeclarationProcessor implements RegisterGlobalsParticipant<ParameterDeclaration>, TransformationParticipant<MutableParameterDeclaration>, CodeGenerationParticipant<MutableParameterDeclaration> {
+  @Override
   public void doRegisterGlobals(final List<? extends ParameterDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
   }
   
+  @Override
   public void doTransform(final List<? extends MutableParameterDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableParameterDeclaration annotatedTargetElement : annotatedTargetElements) {
       final Procedure1<String> _function = new Procedure1<String>() {
+        @Override
         public void apply(final String identifier) {
           annotatedTargetElement.setSimpleName(identifier);
         }
@@ -36,6 +39,7 @@ public class CheckMutableParameterDeclarationProcessor implements RegisterGlobal
     }
   }
   
+  @Override
   public void doGenerateCode(final List<? extends MutableParameterDeclaration> annotatedSourceElements, @Extension final CodeGenerationContext context) {
   }
 }

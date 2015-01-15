@@ -39,6 +39,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         ProblemSupportImpl _problemSupport = it.getProblemSupport();
         Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
@@ -76,6 +77,7 @@ public class ProblemSupportTests extends AbstractXtendTestCase {
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+      @Override
       public void apply(final CompilationUnitImpl it) {
         TypeLookupImpl _typeLookup = it.getTypeLookup();
         final MutableClassDeclaration derived = _typeLookup.findClass("MyClass");

@@ -22,10 +22,12 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> implements ClassDeclaration {
+  @Override
   public Iterable<? extends TypeReference> getImplementedInterfaces() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeReference> _implements = _delegate.getImplements();
     final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
+      @Override
       public TypeReference apply(final JvmTypeReference it) {
         CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toTypeReference(it);
@@ -34,6 +36,7 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     return ListExtensions.<JvmTypeReference, TypeReference>map(_implements, _function);
   }
   
+  @Override
   public TypeReference getExtendedClass() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendClass _delegate = this.getDelegate();
@@ -41,28 +44,34 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     return _compilationUnit.toTypeReference(_extends);
   }
   
+  @Override
   public boolean isAbstract() {
     XtendClass _delegate = this.getDelegate();
     return _delegate.isAbstract();
   }
   
+  @Override
   public boolean isFinal() {
     XtendClass _delegate = this.getDelegate();
     return _delegate.isFinal();
   }
   
+  @Override
   public boolean isStatic() {
     return true;
   }
   
+  @Override
   public boolean isStrictFloatingPoint() {
     return false;
   }
   
+  @Override
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
+      @Override
       public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
         CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
         return _compilationUnit.toXtendTypeParameterDeclaration(it);

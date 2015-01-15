@@ -39,6 +39,7 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
   @Accessors
   private ImmutableSet<URI> sourceLevelURIs;
   
+  @Override
   public boolean isAdapterForType(final Object type) {
     return Objects.equal(type, SourceLevelURIsAdapter.class);
   }
@@ -51,6 +52,7 @@ public class SourceLevelURIsAdapter extends AdapterImpl {
     } else {
       SourceLevelURIsAdapter _sourceLevelURIsAdapter = new SourceLevelURIsAdapter();
       final Procedure1<SourceLevelURIsAdapter> _function = new Procedure1<SourceLevelURIsAdapter>() {
+        @Override
         public void apply(final SourceLevelURIsAdapter it) {
           EList<Adapter> _eAdapters = resourceSet.eAdapters();
           _eAdapters.add(it);

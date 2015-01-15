@@ -34,6 +34,7 @@ public class LoopExtensions {
     ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
     Iterable<T> _tail = IterableExtensions.<T>tail(elements);
     final Procedure1<T> _function = new Procedure1<T>() {
+      @Override
       public void apply(final T it) {
         params.appendSeparator(appendable);
         ObjectExtensions.<T>operator_doubleArrow(it, procedure);
@@ -55,6 +56,7 @@ public class LoopExtensions {
     } else {
       appendable.append("{");
       final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+        @Override
         public void apply(final LoopParams it) {
           it.setPrefix(" ");
           it.setSeparator(", ");

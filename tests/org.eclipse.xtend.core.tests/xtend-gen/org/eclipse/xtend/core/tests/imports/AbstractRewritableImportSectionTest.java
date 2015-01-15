@@ -573,6 +573,7 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     final StringBuilder builder = new StringBuilder(this.model);
     final List<ReplaceRegion> changes = section.rewrite();
     final Function1<ReplaceRegion, Integer> _function = new Function1<ReplaceRegion, Integer>() {
+      @Override
       public Integer apply(final ReplaceRegion it) {
         return Integer.valueOf(it.getOffset());
       }

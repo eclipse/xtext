@@ -94,6 +94,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
         final Change change = renameRefactoring.createChange(_nullProgressMonitor_1);
         final IWorkspaceRunnable _function = new IWorkspaceRunnable() {
+          @Override
           public void run(final IProgressMonitor it) throws CoreException {
             change.perform(it);
           }

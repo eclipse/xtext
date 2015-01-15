@@ -106,6 +106,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final List<TypeData> typesForNullLiteral = expressionTypes.get(_head);
       String _string = typesForNullLiteral.toString();
       final Function1<TypeData, Boolean> _function = new Function1<TypeData, Boolean>() {
+        @Override
         public Boolean apply(final TypeData it) {
           return Boolean.valueOf(it.isReturnType());
         }
@@ -115,6 +116,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       Assert.assertEquals(_string, 1, _size);
       String _string_1 = typesForNullLiteral.toString();
       final Function1<TypeData, Boolean> _function_1 = new Function1<TypeData, Boolean>() {
+        @Override
         public Boolean apply(final TypeData it) {
           boolean _isReturnType = it.isReturnType();
           return Boolean.valueOf((!_isReturnType));
@@ -126,6 +128,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final List<TypeData> typesForBlock = expressionTypes.get(expression);
       String _string_2 = typesForBlock.toString();
       final Function1<TypeData, Boolean> _function_2 = new Function1<TypeData, Boolean>() {
+        @Override
         public Boolean apply(final TypeData it) {
           return Boolean.valueOf(it.isReturnType());
         }
@@ -135,6 +138,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       Assert.assertEquals(_string_2, 1, _size_2);
       String _string_3 = typesForBlock.toString();
       final Function1<TypeData, Boolean> _function_3 = new Function1<TypeData, Boolean>() {
+        @Override
         public Boolean apply(final TypeData it) {
           boolean _isReturnType = it.isReturnType();
           return Boolean.valueOf((!_isReturnType));
@@ -165,10 +169,12 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final Map<XExpression, List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        @Override
         public void apply(final EObject it) {
           final List<TypeData> types = expressionTypes.get(((XExpression) it));
           String _string = types.toString();
           final Function1<TypeData, Boolean> _function = new Function1<TypeData, Boolean>() {
+            @Override
             public Boolean apply(final TypeData it) {
               boolean _isReturnType = it.isReturnType();
               return Boolean.valueOf((!_isReturnType));
@@ -203,12 +209,14 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final Map<XExpression, List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        @Override
         public void apply(final EObject it) {
           final List<TypeData> typesForMemberFeatureCall = expressionTypes.get(((XExpression) it));
           String _plus = (it + " ");
           String _string = typesForMemberFeatureCall.toString();
           String _plus_1 = (_plus + _string);
           final Function1<TypeData, Boolean> _function = new Function1<TypeData, Boolean>() {
+            @Override
             public Boolean apply(final TypeData it) {
               return Boolean.valueOf(it.isReturnType());
             }
@@ -218,6 +226,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           Assert.assertEquals(_plus_1, 1, _size);
           String _string_1 = typesForMemberFeatureCall.toString();
           final Function1<TypeData, Boolean> _function_1 = new Function1<TypeData, Boolean>() {
+            @Override
             public Boolean apply(final TypeData it) {
               boolean _isReturnType = it.isReturnType();
               return Boolean.valueOf((!_isReturnType));
@@ -251,10 +260,12 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       final Map<XExpression, List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        @Override
         public void apply(final EObject it) {
           final List<TypeData> types = expressionTypes.get(((XExpression) it));
           String _string = types.toString();
           final Function1<TypeData, Boolean> _function = new Function1<TypeData, Boolean>() {
+            @Override
             public Boolean apply(final TypeData it) {
               boolean _isReturnType = it.isReturnType();
               return Boolean.valueOf((!_isReturnType));
@@ -271,6 +282,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     }
   }
   
+  @Override
   public void computeTypes(final XExpression expression, final ITypeComputationState state) {
     try {
       Assert.assertTrue("state is instanceof ExpressionTypeComputationState", (state instanceof ExpressionTypeComputationState));

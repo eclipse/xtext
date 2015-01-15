@@ -80,9 +80,11 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       JvmConstructor _inferredConstructor = this.associations.getInferredConstructor(fooClass);
       ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(fooFunction, _inferredType, _inferredConstructor);
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
+        @Override
         public void apply(final EObject it) {
           String _string = it.toString();
           final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+            @Override
             public Boolean apply(final URI element) {
               URI _uRI = EcoreUtil.getURI(it);
               return Boolean.valueOf(Objects.equal(element, _uRI));
@@ -134,6 +136,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       EList<JvmMember> _members_2 = _inferredType.getMembers();
       Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
       final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
+        @Override
         public Boolean apply(final EObject it) {
           return Boolean.valueOf((!(it instanceof JvmConstructor)));
         }
@@ -141,9 +144,11 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus, _function);
       List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
       final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
+        @Override
         public void apply(final EObject it) {
           String _string = it.toString();
           final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+            @Override
             public Boolean apply(final URI element) {
               URI _uRI = EcoreUtil.getURI(it);
               return Boolean.valueOf(Objects.equal(element, _uRI));

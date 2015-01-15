@@ -59,6 +59,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAll, XAbstractFeatureCall.class);
       final List<XAbstractFeatureCall> featureCalls = IteratorExtensions.<XAbstractFeatureCall>toList(_filter);
       final Function1<XAbstractFeatureCall, Integer> _function = new Function1<XAbstractFeatureCall, Integer>() {
+        @Override
         public Integer apply(final XAbstractFeatureCall it) {
           List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
           INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
@@ -73,6 +74,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   
   protected Iterable<XAbstractFeatureCall> filterTypeLiteralsAndPackageFragments(final Iterable<XAbstractFeatureCall> featureCalls) {
     final Function1<XAbstractFeatureCall, Boolean> _function = new Function1<XAbstractFeatureCall, Boolean>() {
+      @Override
       public Boolean apply(final XAbstractFeatureCall it) {
         boolean _and = false;
         boolean _isPackageFragment = it.isPackageFragment();
@@ -90,6 +92,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     return IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);
   }
   
+  @Override
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {

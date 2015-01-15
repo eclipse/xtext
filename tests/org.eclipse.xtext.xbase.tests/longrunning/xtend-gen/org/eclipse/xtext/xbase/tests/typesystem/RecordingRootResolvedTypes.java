@@ -28,6 +28,7 @@ public class RecordingRootResolvedTypes extends RootResolvedTypes {
     super(resolver, monitor);
   }
   
+  @Override
   public void resolveProxies() {
     Map<XExpression, IApplicableCandidate> _basicGetLinkingMap = this.basicGetLinkingMap();
     this.resolvedProxies = _basicGetLinkingMap;

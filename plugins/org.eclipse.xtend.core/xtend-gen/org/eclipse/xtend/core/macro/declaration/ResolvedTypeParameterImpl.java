@@ -23,10 +23,12 @@ public class ResolvedTypeParameterImpl implements ResolvedTypeParameter {
     this.resolvedUpperBounds = resolvedUpperBounds;
   }
   
+  @Override
   public TypeParameterDeclaration getDeclaration() {
     return this.declaration;
   }
   
+  @Override
   public List<? extends TypeReference> getResolvedUpperBounds() {
     return this.resolvedUpperBounds;
   }

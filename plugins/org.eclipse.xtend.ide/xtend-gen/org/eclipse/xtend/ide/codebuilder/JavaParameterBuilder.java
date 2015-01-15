@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
  */
 @SuppressWarnings("all")
 public class JavaParameterBuilder extends AbstractParameterBuilder {
+  @Override
   protected ISourceAppender appendModifiers(final ISourceAppender appendable) {
     ISourceAppender _xblockexpression = null;
     {
@@ -27,6 +28,7 @@ public class JavaParameterBuilder extends AbstractParameterBuilder {
     return _xblockexpression;
   }
   
+  @Override
   public boolean isValid() {
     boolean _and = false;
     boolean _isExtensionFlag = this.isExtensionFlag();

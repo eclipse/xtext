@@ -35,6 +35,7 @@ public class SerializableReferenceDescription implements IReferenceDescription, 
   
   private int indexInList;
   
+  @Override
   public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
     URI _readURI = SerializationExtensions.readURI(in);
     this.sourceEObjectUri = _readURI;
@@ -48,6 +49,7 @@ public class SerializableReferenceDescription implements IReferenceDescription, 
     this.indexInList = _readInt;
   }
   
+  @Override
   public void writeExternal(final ObjectOutput out) throws IOException {
     SerializationExtensions.writeURI(out, this.sourceEObjectUri);
     SerializationExtensions.writeURI(out, this.targetEObjectUri);

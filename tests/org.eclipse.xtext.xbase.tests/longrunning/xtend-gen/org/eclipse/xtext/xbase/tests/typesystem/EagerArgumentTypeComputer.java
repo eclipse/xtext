@@ -21,10 +21,12 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandida
 @Singleton
 @SuppressWarnings("all")
 public class EagerArgumentTypeComputer extends XbaseTypeComputer {
+  @Override
   protected ILinkingCandidate getBestCandidate(final List<? extends ILinkingCandidate> candidates) {
     ILinkingCandidate _xblockexpression = null;
     {
       final Procedure1<ILinkingCandidate> _function = new Procedure1<ILinkingCandidate>() {
+        @Override
         public void apply(final ILinkingCandidate it) {
           if ((it instanceof AbstractPendingLinkingCandidate<?>)) {
             ((AbstractPendingLinkingCandidate<?>)it).computeArgumentTypes();

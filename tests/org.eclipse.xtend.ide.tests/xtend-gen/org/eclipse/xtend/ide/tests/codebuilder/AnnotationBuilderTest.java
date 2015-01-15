@@ -23,6 +23,7 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(_xtendClass);
     final Procedure1<AbstractAnnotationBuilder> _function = new Procedure1<AbstractAnnotationBuilder>() {
+      @Override
       public void apply(final AbstractAnnotationBuilder it) {
         JvmDeclaredType _xtendClass = AnnotationBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -43,6 +44,7 @@ public class AnnotationBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractAnnotationBuilder _createAnnotationBuilder = this._codeBuilderFactory.createAnnotationBuilder(_javaClass);
     final Procedure1<AbstractAnnotationBuilder> _function = new Procedure1<AbstractAnnotationBuilder>() {
+      @Override
       public void apply(final AbstractAnnotationBuilder it) {
         JvmDeclaredType _javaClass = AnnotationBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);

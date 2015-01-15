@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.EmptyClasspathRuntimeModule;
 
 @SuppressWarnings("all")
 public class EmptyClasspathXbaseTestStandaloneSetup extends XbaseStandaloneSetup {
+  @Override
   public Injector createInjector() {
     EmptyClasspathRuntimeModule _emptyClasspathRuntimeModule = new EmptyClasspathRuntimeModule();
     return Guice.createInjector(_emptyClasspathRuntimeModule);

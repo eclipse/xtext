@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class NewLineData extends FormattingData {
   private final Integer newLines;
   
+  @Override
   public boolean isEmpty() {
     return Objects.equal(this.newLines, null);
   }

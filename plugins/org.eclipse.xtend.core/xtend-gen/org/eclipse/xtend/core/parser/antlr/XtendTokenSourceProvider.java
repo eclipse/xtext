@@ -19,6 +19,7 @@ import org.eclipse.xtext.parser.antlr.AbstractAntlrParserBasedTokenSourceProvide
 @Singleton
 @SuppressWarnings("all")
 public class XtendTokenSourceProvider extends AbstractAntlrParserBasedTokenSourceProvider {
+  @Override
   protected CharStream getCharStream(final Reader reader) {
     return new ReaderCharStream(reader);
   }

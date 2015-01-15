@@ -507,6 +507,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
       final List<String> files = CollectionLiterals.<String>newArrayList();
       Collection<? extends CharSequence> _values = map.values();
       final Function1<CharSequence, String> _function = new Function1<CharSequence, String>() {
+        @Override
         public String apply(final CharSequence it) {
           return it.toString();
         }

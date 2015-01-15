@@ -21,6 +21,7 @@ public class EagerBatchTypeResolver extends DefaultBatchTypeResolver {
   @Inject
   private Provider<EagerReentrantTypeResolver> resolverProvider;
   
+  @Override
   protected AbstractRootedReentrantTypeResolver createResolver() {
     return this.resolverProvider.get();
   }

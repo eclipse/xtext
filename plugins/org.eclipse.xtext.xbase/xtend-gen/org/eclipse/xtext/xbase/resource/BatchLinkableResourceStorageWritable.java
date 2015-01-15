@@ -51,10 +51,12 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
     super(out);
   }
   
+  @Override
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) {
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterator<XComputedTypeReference> _filter = Iterators.<XComputedTypeReference>filter(_allContents, XComputedTypeReference.class);
     final Procedure1<XComputedTypeReference> _function = new Procedure1<XComputedTypeReference>() {
+      @Override
       public void apply(final XComputedTypeReference it) {
         it.getType();
       }
@@ -125,6 +127,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
             String _fragment_2 = this.getFragment(_key_5);
             Set<EObject> _value_1 = entry_1.getValue();
             final Function1<EObject, String> _function = new Function1<EObject, String>() {
+              @Override
               public String apply(final EObject it) {
                 return BatchLinkableResourceStorageWritable.this.getFragment(it);
               }
@@ -158,6 +161,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
             String _fragment_3 = this.getFragment(_key_8);
             Set<EObject> _value_2 = entry_2.getValue();
             final Function1<EObject, String> _function_1 = new Function1<EObject, String>() {
+              @Override
               public String apply(final EObject it) {
                 return BatchLinkableResourceStorageWritable.this.getFragment(it);
               }

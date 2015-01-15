@@ -31,10 +31,12 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @Singleton
 @SuppressWarnings("all")
 public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+  @Override
   protected String getGrammarFileName(final Grammar it) {
     return this._namingExtensions.getGrammarFileName(it, "");
   }
   
+  @Override
   protected String compileOptions(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -92,6 +94,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected String compileParserImports(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -124,6 +127,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
       boolean _and = false;
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
       final Function1<ParserRule, Boolean> _function = new Function1<ParserRule, Boolean>() {
+        @Override
         public Boolean apply(final ParserRule it) {
           List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(it);
           Iterable<UnorderedGroup> _filter = Iterables.<UnorderedGroup>filter(_eAllContentsAsList, UnorderedGroup.class);
@@ -155,6 +159,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected String compileParserMembers(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -246,6 +251,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected String compileRuleCatch(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -268,10 +274,12 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder.toString();
   }
   
+  @Override
   protected boolean shouldBeSkipped(final TerminalRule it, final Grammar grammar) {
     return false;
   }
   
+  @Override
   protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     String _compileEntryRule = this.compileEntryRule(it, grammar, options);
@@ -483,6 +491,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _builder;
   }
   
+  @Override
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(" ");
@@ -536,6 +545,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _switchResult;
   }
   
+  @Override
   protected String _dataTypeEbnf2(final UnorderedGroup it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -543,6 +553,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
       {
         EList<AbstractElement> _elements = it.getElements();
         final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+          @Override
           public Boolean apply(final AbstractElement it) {
             boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
             return Boolean.valueOf((!_isOptionalCardinality));
@@ -682,6 +693,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _dataTypeEbnf2(final Keyword it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -708,6 +720,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -820,6 +833,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final UnorderedGroup it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -827,6 +841,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
       {
         EList<AbstractElement> _elements = it.getElements();
         final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
+          @Override
           public Boolean apply(final AbstractElement it) {
             boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
             return Boolean.valueOf((!_isOptionalCardinality));
@@ -966,6 +981,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final Action it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -1016,6 +1032,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final Keyword it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if ((!supportActions)) {
@@ -1063,6 +1080,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if ((!supportActions)) {
@@ -1214,6 +1232,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _crossrefEbnf(final AbstractRule it, final CrossReference ref, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -1285,6 +1304,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _assignmentEbnf(final CrossReference it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -1326,6 +1346,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _assignmentEbnf(final AbstractElement it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -1381,6 +1402,7 @@ public class AntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
     return _xifexpression;
   }
   
+  @Override
   protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {

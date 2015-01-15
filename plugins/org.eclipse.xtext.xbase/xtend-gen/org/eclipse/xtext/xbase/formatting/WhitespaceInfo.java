@@ -65,6 +65,7 @@ public class WhitespaceInfo extends LeafInfo {
     return _xblockexpression;
   }
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("WS: \"");

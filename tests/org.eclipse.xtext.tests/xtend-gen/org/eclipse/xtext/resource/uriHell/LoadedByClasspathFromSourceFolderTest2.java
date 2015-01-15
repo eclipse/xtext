@@ -15,10 +15,12 @@ import org.eclipse.xtext.resource.uriHell.LoadedByClasspathFromSourceFolderTest;
  */
 @SuppressWarnings("all")
 public class LoadedByClasspathFromSourceFolderTest2 extends LoadedByClasspathFromSourceFolderTest {
+  @Override
   public URI getResourceURI() {
     return URI.createURI("platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/resource/ecore/utf8.ecore");
   }
   
+  @Override
   public URI getPackagedResourceURI() {
     return URI.createURI("classpath:/org/eclipse/xtext/resource/ecore/utf8.ecore");
   }

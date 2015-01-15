@@ -53,6 +53,7 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     final EObject eObject = EcoreFactory.eINSTANCE.createEObject();
     final JvmGenericType bar = this._jvmTypesBuilder.toClass(eObject, "Bar");
     final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+      @Override
       public void apply(final JvmGenericType it) {
         EList<JvmMember> _members = it.getMembers();
         TypeSignatureHashTest.this._jvmTypesBuilder.<JvmGenericType>operator_add(_members, bar);
@@ -62,6 +63,7 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
     final String hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(foo);
     EList<JvmMember> _members = bar.getMembers();
     final Procedure1<JvmConstructor> _function_1 = new Procedure1<JvmConstructor>() {
+      @Override
       public void apply(final JvmConstructor it) {
       }
     };

@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.validation.ReadAndWriteTracking;
 
 @SuppressWarnings("all")
 public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements MutableFieldDeclaration {
+  @Override
   public void markAsRead() {
     this.checkMutable();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -42,6 +43,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     _readAndWriteTracking.markReadAccess(_delegate);
   }
   
+  @Override
   public void markAsInitializedBy(final ConstructorDeclaration constructorDeclaration) {
     this.checkMutable();
     JvmConstructor _switchResult = null;
@@ -77,11 +79,13 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     _readAndWriteTracking.markInitialized(_delegate, constructor);
   }
   
+  @Override
   public MutableTypeDeclaration getDeclaringType() {
     TypeDeclaration _declaringType = super.getDeclaringType();
     return ((MutableTypeDeclaration) _declaringType);
   }
   
+  @Override
   public void setInitializer(final Expression initializer) {
     this.checkMutable();
     boolean _equals = Objects.equal(initializer, null);
@@ -99,6 +103,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     }
   }
   
+  @Override
   public void setInitializer(final CompilationStrategy initializer) {
     this.checkMutable();
     boolean _notEquals = (!Objects.equal(initializer, null));
@@ -108,6 +113,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     _compilationUnit.setCompilationStrategy(_delegate, initializer);
   }
   
+  @Override
   public void setInitializer(final StringConcatenationClient template) {
     this.checkMutable();
     boolean _notEquals = (!Objects.equal(template, null));
@@ -117,30 +123,35 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     _compilationUnit.setCompilationTemplate(_delegate, template);
   }
   
+  @Override
   public void setFinal(final boolean isFinal) {
     this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setFinal(isFinal);
   }
   
+  @Override
   public void setStatic(final boolean isStatic) {
     this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setStatic(isStatic);
   }
   
+  @Override
   public void setTransient(final boolean isTransient) {
     this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setTransient(isTransient);
   }
   
+  @Override
   public void setVolatile(final boolean isVolatile) {
     this.checkMutable();
     JvmField _delegate = this.getDelegate();
     _delegate.setVolatile(isVolatile);
   }
   
+  @Override
   public void setType(final TypeReference type) {
     this.checkMutable();
     boolean _notEquals = (!Objects.equal(type, null));

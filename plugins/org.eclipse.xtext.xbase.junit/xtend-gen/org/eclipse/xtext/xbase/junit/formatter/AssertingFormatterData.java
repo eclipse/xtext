@@ -5,8 +5,8 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@SuppressWarnings("restriction")
 @Accessors
-@SuppressWarnings("all")
 public class AssertingFormatterData {
   private MapBasedPreferenceValues config;
   

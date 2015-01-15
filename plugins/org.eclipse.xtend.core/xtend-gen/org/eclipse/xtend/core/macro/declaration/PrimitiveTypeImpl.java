@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 
 @SuppressWarnings("all")
 public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements PrimitiveType {
+  @Override
   public PrimitiveType.Kind getKind() {
     PrimitiveType.Kind _switchResult = null;
     String _simpleName = this.getSimpleName();
@@ -73,11 +74,13 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
     return _switchResult;
   }
   
+  @Override
   public String getSimpleName() {
     JvmPrimitiveType _delegate = this.getDelegate();
     return _delegate.getIdentifier();
   }
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     if ((otherType == null)) {
       return false;
@@ -91,6 +94,7 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
+  @Override
   public String getQualifiedName() {
     return this.getSimpleName();
   }

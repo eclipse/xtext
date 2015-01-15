@@ -20,6 +20,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class RawAssignabilityTest extends CommonAssignabilityTest {
+  @Override
   public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
     TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(true, false, true, true, false, true);
     final int result = lhs.internalIsAssignableFrom(rhs, _typeConformanceComputationArgument);
@@ -46,6 +47,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testNestedWildcard_01() {
     this.isAssignableFrom("java.util.List<java.util.List<?>>", "java.util.List<java.util.List<? extends CharSequence>>");
     this.isAssignableFrom("java.util.Collection<java.util.List<?>>", "java.util.List<java.util.List<? extends CharSequence>>");
@@ -177,6 +179,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testTypeParameter_08() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T extends CharSequence");
     this.isAssignableFrom(_mappedTo, "org.eclipse.xtend.core.tests.typesystem.CharIterable<String>");
@@ -197,6 +200,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testTwoTypeParameters_02() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<T>", "T, V extends T");
     this.isAssignableFrom(_mappedTo, "Iterable<V>");
@@ -207,6 +211,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testTwoTypeParameters_03() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("Iterable<? super V>", "T, V extends T");
     this.isAssignableFrom(_mappedTo, "Iterable<? super T>");
@@ -215,6 +220,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypes_01() {
     this.isAssignableFrom("(String)=>void", "(CharSequence)=>void");
     this.isAssignableFrom("(String)=>void", "(String)=>void");
@@ -222,6 +228,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypes_02() {
     this.isAssignableFrom("(String)=>String", "(CharSequence)=>String");
     this.isAssignableFrom("(String)=>String", "(String)=>String");
@@ -229,6 +236,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypes_03() {
     this.isAssignableFrom("(String)=>CharSequence", "(CharSequence)=>String");
     this.isAssignableFrom("(String)=>CharSequence", "(CharSequence)=>String");
@@ -236,6 +244,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypes_07() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isAssignableFrom(_mappedTo, "(Integer)=>Integer");
@@ -244,18 +253,21 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypes_08() {
     this.isAssignableFrom("()=>long", "()=>int");
     this.isAssignableFrom("()=>int", "()=>long");
   }
   
   @Test
+  @Override
   public void testFunctionTypes_12() {
     this.isAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<$Function1<? super Long, ? extends Boolean>>");
     this.isAssignableFrom("java.util.ArrayList<(int)=>boolean>", "java.util.ArrayList<(long)=>boolean>");
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_01() {
     this.isAssignableFrom("$Procedure1<String>", "(CharSequence)=>void");
     this.isAssignableFrom("$Procedure1<? super String>", "(CharSequence)=>void");
@@ -269,6 +281,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_02() {
     this.isAssignableFrom("$Function1<String, String>", "(CharSequence)=>String");
     this.isAssignableFrom("$Function1<? super String, String>", "(CharSequence)=>String");
@@ -285,6 +298,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_03() {
     this.isAssignableFrom("$Function1<String, CharSequence>", "(CharSequence)=>String");
     this.isAssignableFrom("$Function1<? super String, CharSequence>", "(CharSequence)=>String");
@@ -301,6 +315,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_07() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("$Function1<T, T>", "T extends Integer");
     this.isAssignableFrom(_mappedTo, "(Integer)=>Integer");
@@ -321,6 +336,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_08() {
     this.isAssignableFrom("(String)=>void", "$Procedure1<CharSequence>");
     this.isAssignableFrom("(String)=>void", "$Procedure1<String>");
@@ -328,12 +344,14 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_09() {
     this.isAssignableFrom("(String)=>String", "$Function1<CharSequence,String>");
     this.isAssignableFrom("(CharSequence)=>String", "$Function1<String, String>");
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_10() {
     this.isAssignableFrom("(String)=>CharSequence", "$Function1<CharSequence, String>");
     this.isAssignableFrom("(String)=>CharSequence", "$Function1<CharSequence, String>");
@@ -341,12 +359,14 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testFunctionTypeAsParameterized_14() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("(T)=>T", "T extends Integer");
     this.isAssignableFrom(_mappedTo, "$Function1<Integer, Integer>");
   }
   
   @Test
+  @Override
   public void testDemandConvertedFunctionType_01() {
     this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<String>", "(CharSequence)=>void");
     this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super String>", "(CharSequence)=>void");
@@ -359,6 +379,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testDemandConvertedFunctionType_05() {
     this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<Integer>", "(int)=>void");
     this.isAssignableFrom("org.eclipse.xtext.util.IAcceptor<? super Integer>", "(int)=>void");
@@ -369,12 +390,14 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testDemandConvertedFunctionType_06() {
     this.isAssignableFrom("Comparable<Integer>", "(int)=>int");
     this.isAssignableFrom("Comparable<String>", "(int)=>int");
   }
   
   @Test
+  @Override
   public void testBug409847_01() {
     this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable<?>>", "java.lang.Class<java.util.ArrayList>");
     this.isAssignableFrom("java.lang.Class<? extends java.lang.Iterable<?>>", "java.lang.Class<java.util.ArrayList<java.lang.Integer>>");
@@ -382,16 +405,19 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testBug409847_02() {
     this.isAssignableFrom("java.lang.Class<java.util.ArrayList<?>>", "java.lang.Class<java.util.ArrayList>");
   }
   
   @Test
+  @Override
   public void testBug409847_03() {
     this.isAssignableFrom("java.lang.Class<java.util.ArrayList>", "java.lang.Class<java.util.ArrayList<?>>");
   }
   
   @Test
+  @Override
   public void testBug409847_04() {
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList>");
     this.isAssignableFrom("java.lang.Iterable<? extends java.lang.Iterable<?>>", "java.util.ArrayList<java.util.ArrayList<java.lang.Integer>>");
@@ -399,12 +425,14 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testStringIsNotComparableInteger() {
     this.isAssignableFrom("java.lang.Comparable<? extends Integer>", "String");
     this.isAssignableFrom("java.lang.Comparable<Integer>", "String");
   }
   
   @Test
+  @Override
   public void testClassStringIntMapIsClassMap() {
     this.isAssignableFrom("java.lang.Class<? extends java.util.Map>", "java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>");
     this.isAssignableFrom("java.lang.Class<? super java.util.Map>", "java.lang.Class<org.eclipse.xtend.core.tests.typesystem.StringIntMap>");
@@ -412,6 +440,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testClassMapIsClassMapStringInteger() {
     this.isAssignableFrom("java.lang.Class<? extends java.util.Map>", "java.lang.Class<? extends java.util.Map<String, Integer>>");
     this.isAssignableFrom("java.lang.Class<? extends java.util.Map>", "java.lang.Class<? extends java.util.Map<?, ?>>");
@@ -422,30 +451,35 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testInnerClasses_03() {
     this.isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<Number>", "test.InnerClasses.Super<String>.Inner<Integer>");
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>", "test.InnerClasses.SubString<Number>.Inner<Number>");
   }
   
   @Test
+  @Override
   public void testInnerClasses_04() {
     this.isAssignableFrom("test.InnerClasses.SubString<Number>.Inner<? extends Number>", "test.InnerClasses.Super<String>.Inner<Integer>");
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Integer>", "test.InnerClasses.SubString<Number>.Inner<? extends Number>");
   }
   
   @Test
+  @Override
   public void testInnerClasses_07() {
     this.isAssignableFrom("test.InnerClasses.Super<Number>.Inner<Number>", "test.InnerClasses.Super<String>.Inner<Number>");
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>", "test.InnerClasses.Super<Number>.Inner<Number>");
   }
   
   @Test
+  @Override
   public void testInnerClasses_11() {
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<String>.SubInner2<Number>");
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<Number>.SubInner2<Number>");
   }
   
   @Test
+  @Override
   public void testInnerClasses_12() {
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<String>.SubInner2<Number>");
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<String>", "test.InnerClasses.Sub<Number>.SubInner2<Number>");
@@ -453,6 +487,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testInnerClasses_13() {
     this.isAssignableFrom("test.InnerClasses.Super<String>.Inner<Number>", "test.InnerClasses.Sub<String>.SubInner<Number>");
     this.isNotAssignableFrom("test.InnerClasses.Super<String>.SubInner<Number>", "test.InnerClasses.Sub<String>.SubInner2<Number>");
@@ -460,6 +495,7 @@ public class RawAssignabilityTest extends CommonAssignabilityTest {
   }
   
   @Test
+  @Override
   public void testInnerClasses_15() {
     this.isAssignableFrom("test.InnerClasses.Super3<String>.Inner<Number>", "test.InnerClasses.Sub5<Number>");
     this.isAssignableFrom("test.InnerClasses.Super3<String>.Inner<String>", "test.InnerClasses.Sub5<Number>");

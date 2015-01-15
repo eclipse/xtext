@@ -32,6 +32,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
   private IResourceForEditorInputFactory resourceForEditorInputFactory;
   
   @After
+  @Override
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
@@ -41,6 +42,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
     try {
       IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("testProject");
       final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
+        @Override
         public void apply(final IJavaProject it) {
           try {
             JavaProjectSetupUtil.addSourceFolder(it, "filtered-src", null, new String[] { "**.xtend" });
@@ -63,6 +65,7 @@ public class XtendEditorValidationDisabledTest extends AbstractXtendUITestCase {
     try {
       IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("testProject");
       final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
+        @Override
         public void apply(final IJavaProject it) {
           try {
             JavaProjectSetupUtil.addSourceFolder(it, "filtered-src", null, null);

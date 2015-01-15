@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 
 @SuppressWarnings("all")
 public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements AnnotationTarget, TypeParameterDeclaration {
+  @Override
   public TypeParameterDeclarator getTypeParameterDeclarator() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeParameter _delegate = this.getDelegate();
@@ -31,6 +32,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     return ((TypeParameterDeclarator) _memberDeclaration);
   }
   
+  @Override
   public boolean isAssignableFrom(final Type otherType) {
     boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
@@ -45,6 +47,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
+  @Override
   public String getQualifiedName() {
     JvmTypeParameter _delegate = this.getDelegate();
     return _delegate.getIdentifier();

@@ -135,6 +135,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     String _plus_3 = (_simpleName + "(");
     List<LightweightTypeReference> _resolvedParameterTypes = element.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.getHumanReadableName();
       }
@@ -167,6 +168,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   protected Object text(final IResolvedConstructor constructor) {
     List<LightweightTypeReference> _resolvedParameterTypes = constructor.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.getHumanReadableName();
       }
@@ -333,6 +335,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     return null;
   }
   
+  @Override
   protected Object doGetImage(final Object element) {
     Object _elvis = null;
     ImageDescriptor _imageDescriptor = null;

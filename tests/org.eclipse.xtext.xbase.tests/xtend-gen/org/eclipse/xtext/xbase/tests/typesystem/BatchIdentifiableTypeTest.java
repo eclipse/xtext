@@ -34,6 +34,7 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
     return this.batchTypeResolver;
   }
   
+  @Override
   public void resolvesIdentifiablesTo(final String expression, final String... types) {
     try {
       final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
@@ -47,6 +48,7 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
       int _size_1 = identifiables.size();
       Assert.assertEquals(_size, _size_1);
       final Procedure2<JvmIdentifiableElement, Integer> _function = new Procedure2<JvmIdentifiableElement, Integer>() {
+        @Override
         public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
           final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
           Assert.assertNotNull(type);

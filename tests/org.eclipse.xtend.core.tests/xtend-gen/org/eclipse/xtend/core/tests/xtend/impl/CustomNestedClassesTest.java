@@ -27,6 +27,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class CustomNestedClassesTest extends CustomClassesTest {
+  @Override
   protected XtendClass clazz(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
@@ -40,6 +41,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     return ((XtendClass) _head);
   }
   
+  @Override
   protected XtendInterface interfaze(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
@@ -53,6 +55,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     return ((XtendInterface) _head);
   }
   
+  @Override
   protected XtendEnum enumeration(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
@@ -66,6 +69,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
     return ((XtendEnum) _head);
   }
   
+  @Override
   protected XtendAnnotationType annotationType(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
@@ -80,6 +84,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   }
   
   @Test
+  @Override
   public void testInterfaceFinalAndStatic() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -98,6 +103,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   }
   
   @Test
+  @Override
   public void testEnumFinalAndStatic() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -116,6 +122,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   }
   
   @Test
+  @Override
   public void testAnnotationTypeStaticAndFinal() {
     try {
       StringConcatenation _builder = new StringConcatenation();

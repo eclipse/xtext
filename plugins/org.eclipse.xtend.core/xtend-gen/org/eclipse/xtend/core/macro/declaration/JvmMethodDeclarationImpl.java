@@ -16,41 +16,49 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 @SuppressWarnings("all")
 public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation> implements MethodDeclaration {
+  @Override
   public boolean isAbstract() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isAbstract();
   }
   
+  @Override
   public boolean isFinal() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isFinal();
   }
   
+  @Override
   public boolean isStatic() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isStatic();
   }
   
+  @Override
   public boolean isSynchronized() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isSynchronized();
   }
   
+  @Override
   public boolean isDefault() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isDefault();
   }
   
+  @Override
   public boolean isStrictFloatingPoint() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isStrictFloatingPoint();
   }
   
+  @Override
   public boolean isNative() {
     JvmOperation _delegate = this.getDelegate();
     return _delegate.isNative();
   }
   
+  @Override
   public TypeReference getReturnType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();

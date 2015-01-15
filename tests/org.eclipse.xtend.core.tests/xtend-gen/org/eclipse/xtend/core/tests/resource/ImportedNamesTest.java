@@ -94,6 +94,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       Iterable<QualifiedName> _importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+        @Override
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
           return Boolean.valueOf(ImportedNamesTest.this.primitives.contains(_lastSegment));
@@ -126,6 +127,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+        @Override
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
           return Boolean.valueOf(_lastSegment.equals("collection"));
@@ -163,6 +165,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+        @Override
         public Boolean apply(final QualifiedName it) {
           String _lastSegment = it.getLastSegment();
           return Boolean.valueOf(_lastSegment.equals("runnable"));
@@ -194,6 +197,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+        @Override
         public Boolean apply(final QualifiedName it) {
           String _string = it.toString();
           String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$StaticInnerClass".toLowerCase();
@@ -226,6 +230,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+        @Override
         public Boolean apply(final QualifiedName it) {
           String _string = it.toString();
           String _lowerCase = "types.StaticOuterClass$Unknown".toLowerCase();
@@ -258,6 +263,7 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
       final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
+        @Override
         public Boolean apply(final QualifiedName it) {
           String _string = it.toString();
           String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$Unknown".toLowerCase();

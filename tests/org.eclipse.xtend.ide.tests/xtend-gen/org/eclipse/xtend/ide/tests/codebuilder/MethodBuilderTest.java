@@ -35,6 +35,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -69,6 +70,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -104,6 +106,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -135,6 +138,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -167,6 +171,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -190,6 +195,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -213,6 +219,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -231,6 +238,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -249,6 +257,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -272,6 +281,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -298,6 +308,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
@@ -325,6 +336,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
@@ -353,12 +365,14 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
         it.setMethodName("foo");
         AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             it.setName("bar");
             JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
@@ -369,6 +383,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
         AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             it.setName("baz");
             JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
@@ -395,12 +410,14 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
         it.setMethodName("foo");
         AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             it.setName("bar");
             JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
@@ -411,6 +428,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
         AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
         final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
+          @Override
           public void apply(final AbstractParameterBuilder it) {
             it.setName("baz");
             JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
@@ -438,12 +456,14 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
         it.setMethodName("foo");
         JvmTypeParameter _createJvmTypeParameter = MethodBuilderTest.this._typesFactory.createJvmTypeParameter();
         final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
+          @Override
           public void apply(final JvmTypeParameter it) {
             it.setName("T");
           }
@@ -451,6 +471,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         JvmTypeParameter _doubleArrow = ObjectExtensions.<JvmTypeParameter>operator_doubleArrow(_createJvmTypeParameter, _function);
         JvmTypeParameter _createJvmTypeParameter_1 = MethodBuilderTest.this._typesFactory.createJvmTypeParameter();
         final Procedure1<JvmTypeParameter> _function_1 = new Procedure1<JvmTypeParameter>() {
+          @Override
           public void apply(final JvmTypeParameter it) {
             it.setName("U");
           }
@@ -475,12 +496,14 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
         it.setMethodName("foo");
         JvmTypeParameter _createJvmTypeParameter = MethodBuilderTest.this._typesFactory.createJvmTypeParameter();
         final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
+          @Override
           public void apply(final JvmTypeParameter it) {
             it.setName("T");
           }
@@ -488,6 +511,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         JvmTypeParameter _doubleArrow = ObjectExtensions.<JvmTypeParameter>operator_doubleArrow(_createJvmTypeParameter, _function);
         JvmTypeParameter _createJvmTypeParameter_1 = MethodBuilderTest.this._typesFactory.createJvmTypeParameter();
         final Procedure1<JvmTypeParameter> _function_1 = new Procedure1<JvmTypeParameter>() {
+          @Override
           public void apply(final JvmTypeParameter it) {
             it.setName("U");
           }
@@ -513,6 +537,7 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
     final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+      @Override
       public void apply(final AbstractMethodBuilder it) {
         final AbstractParameterBuilder builder = it.newParameterBuilder();
         EObject _context = builder.getContext();

@@ -36,14 +36,17 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
   @Extension
   private FileLocations fileLocations;
   
+  @Override
   public ResourceStorageLoadable createResourceStorageLoadable(final InputStream in) {
     return new BatchLinkableResourceStorageLoadable(in);
   }
   
+  @Override
   public ResourceStorageWritable createResourceStorageWritable(final OutputStream out) {
     return new BatchLinkableResourceStorageWritable(out);
   }
   
+  @Override
   protected URI getSourceContainerURI(final StorageAwareResource resource) {
     final Path path = this.fileSystemSupport.getPath(resource);
     final Path sourceFolder = this.fileLocations.getSourceFolder(path);

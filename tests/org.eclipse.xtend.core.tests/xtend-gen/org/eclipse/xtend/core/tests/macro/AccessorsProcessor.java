@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class AccessorsProcessor implements TransformationParticipant<MutableFieldDeclaration> {
+  @Override
   public void doTransform(final List<? extends MutableFieldDeclaration> javaFields, @Extension final TransformationContext context) {
     for (final MutableFieldDeclaration f : javaFields) {
       {
@@ -26,10 +27,12 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
         final String setterName = ("set" + _firstUpper_1);
         MutableTypeDeclaration _declaringType = f.getDeclaringType();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             TypeReference _type = f.getType();
             it.setReturnType(_type);
             final CompilationStrategy _function = new CompilationStrategy() {
+              @Override
               public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("return ");
@@ -49,6 +52,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
         if (_not) {
           MutableTypeDeclaration _declaringType_1 = f.getDeclaringType();
           final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+            @Override
             public void apply(final MutableMethodDeclaration it) {
               TypeReference _primitiveVoid = context.getPrimitiveVoid();
               it.setReturnType(_primitiveVoid);
@@ -56,6 +60,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
               TypeReference _type = f.getType();
               it.addParameter(_simpleName, _type);
               final CompilationStrategy _function = new CompilationStrategy() {
+                @Override
                 public CharSequence compile(final CompilationStrategy.CompilationContext it) {
                   StringConcatenation _builder = new StringConcatenation();
                   _builder.append("this.");

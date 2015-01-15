@@ -24,6 +24,7 @@ public class JvmIdentifiableMetaData extends AdapterImpl {
   @Accessors
   private boolean synthetic;
   
+  @Override
   public boolean isAdapterForType(final Object type) {
     return Objects.equal(JvmIdentifiableMetaData.class, type);
   }

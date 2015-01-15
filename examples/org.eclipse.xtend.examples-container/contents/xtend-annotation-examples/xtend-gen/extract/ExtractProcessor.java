@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ExtractProcessor extends AbstractClassProcessor {
+  @Override
   public void doRegisterGlobals(final ClassDeclaration annotatedClass, final RegisterGlobalsContext context) {
     String _interfaceName = this.getInterfaceName(annotatedClass);
     context.registerInterface(_interfaceName);
@@ -37,6 +38,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
     return (_qualifiedName + "Interface");
   }
   
+  @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
     String _interfaceName = this.getInterfaceName(annotatedClass);
     final MutableInterfaceDeclaration interfaceType = context.findInterface(_interfaceName);
@@ -52,6 +54,7 @@ public class ExtractProcessor extends AbstractClassProcessor {
       if (_equals) {
         String _simpleName = method.getSimpleName();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+          @Override
           public void apply(final MutableMethodDeclaration it) {
             String _docComment = method.getDocComment();
             it.setDocComment(_docComment);

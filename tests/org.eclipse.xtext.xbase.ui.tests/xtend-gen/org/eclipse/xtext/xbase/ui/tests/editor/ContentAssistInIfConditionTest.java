@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistInIfConditionTest extends ContentAssistTest {
+  @Override
   protected String getPrefix() {
     return "if (";
   }
   
+  @Override
   protected String getSuffix() {
     return ") {}";
   }

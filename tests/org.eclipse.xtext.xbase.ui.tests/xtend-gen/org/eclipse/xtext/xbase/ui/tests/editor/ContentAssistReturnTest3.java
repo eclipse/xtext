@@ -14,10 +14,12 @@ import org.eclipse.xtext.xbase.ui.tests.editor.ContentAssistInBlockTest;
  */
 @SuppressWarnings("all")
 public class ContentAssistReturnTest3 extends ContentAssistInBlockTest {
+  @Override
   protected String getPrefix() {
     return "return {";
   }
   
+  @Override
   protected String getSuffix() {
     return "}";
   }

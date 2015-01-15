@@ -21,6 +21,7 @@ public class RecomputingBatchTypeResolver extends DefaultBatchTypeResolver {
   @Inject
   private Provider<RecomputingReentrantTypeResolver> resolverProvider;
   
+  @Override
   public AbstractRootedReentrantTypeResolver createResolver() {
     return this.resolverProvider.get();
   }
