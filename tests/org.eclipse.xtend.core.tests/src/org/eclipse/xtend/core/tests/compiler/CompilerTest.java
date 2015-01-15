@@ -3125,6 +3125,8 @@ public class CompilerTest extends AbstractXtendTestCase {
 	public void setUp() throws Exception {
 		javaCompiler.clearClassPath();
 		javaCompiler.addClassPathOfClass(getClass());
+		if (getClass() != CompilerTest.class)
+			javaCompiler.addClassPathOfClass(CompilerTest.class);
 		javaCompiler.addClassPathOfClass(StringExtensions.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);

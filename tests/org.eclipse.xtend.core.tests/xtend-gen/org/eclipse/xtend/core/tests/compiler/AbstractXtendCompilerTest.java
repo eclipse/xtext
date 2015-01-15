@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -112,12 +111,12 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       if (serializeAllTypes) {
         String _string_1 = expected.toString();
         String _join = IterableExtensions.join(results, "\n");
-        XtendCompilerTest.assertEquals(_string_1, _join);
+        Assert.assertEquals(_string_1, _join);
       } else {
         String _string_2 = expected.toString();
         CharSequence _head = IterableExtensions.<CharSequence>head(results);
         String _string_3 = _head.toString();
-        XtendCompilerTest.assertEquals(_string_2, _string_3);
+        Assert.assertEquals(_string_2, _string_3);
       }
       return file;
     } catch (Throwable _e) {
