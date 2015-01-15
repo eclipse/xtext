@@ -2636,12 +2636,12 @@ class BuildDSLValidator extends XbaseJavaValidator {
 						<p>
 							We ship some predefined extension classes to enhance the Java classes <a href="http://docs.oracle.com/javase/8/docs/api/java/io/File.html"><abbr title="java.io.File">File</abbr></a>
 							and <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Class.html"><abbr title="java.lang.Class">Class</abbr></a>. These are always put onto the extension scope by a customized 
-							<abbr title="org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes">BuildDSLImplicitlyImportedTypes</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitImports.xtend">(src)</a>:
+							<abbr title="org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedFeatures">BuildDSLImplicitlyImportedFeatures</abbr> <a href="https://github.com/xtext-dev/seven-languages-xtext/blob/master/languages/org.xtext.builddsl/src/org/xtext/builddsl/scoping/BuildDSLImplicitlyImportedFeatures.xtend">(src)</a>:
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedFeatures {
+class BuildDSLImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
 	/**
 	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
 	 */
@@ -4738,7 +4738,7 @@ override protected internalEvaluate(XExpression expression,
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedFeatures {
+class TortoiseShellImplicitlyImportedFeatures extends ImplicitlyImportedFeatures {
   override protected getStaticImportClasses() {
     (super.getStaticImportClasses() + #[Math, ColorConstants])
       .toList
@@ -4994,7 +4994,7 @@ Transition :
 						<p>
 							Martin Fowler uses this example throughout his book <a href="http://martinfowler.com/books/dsl.html">Domain
 							Specific Languages</a> to implement external and internal DSLs using
-							different technologies. Note, that none of his implementations is nearly as readable and concise as the description in
+							different technologies. Note that none of his implementations is nearly as readable and concise as the description in
 							Xtext's grammar language above. That is of course because the grammar language is designed to do just that, i.e. it is 
 							specific to the domain of language descriptions.
 						</p>
@@ -5089,8 +5089,8 @@ generate secrets 'http://www.eclipse.org/secretcompartment'</pre>
 						<p>
 							You can use namespace URI in order to import existing <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EPackage.html"><abbr title="org.eclipse.emf.ecore.EPackage">EPackage</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EPackage.java">(src)</a>. This is generally 
 							preferable. The package will be read from the Xtext index and therefore your grammar is independent
-							from the concrete location of the respective ecore file. You have to make sure though, that the ecore file is contained
-							in a project, that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
+							from the concrete location of the respective ecore file. You have to make sure though that the ecore file is contained
+							in a project that is managed by Xtext. Therefore the project has to have to Xtext project nature attached.
 							Ecore files that reside in referenced Java archives (JARs) are automatically picked up and indexed if
 							the referencing project itself is an Xtext project.
 						</p>
@@ -5131,8 +5131,8 @@ bean = StandaloneSetup {
 						<p>
 							If the generated EPackage interface is not available when the language workflow is executed, you can
 							use another approach to register the reference packages. This may happen if your want to generate EMF
-							classes and the language infrastructure in one and the same workflow. The section in the workflow, that
-							refers the your grammar, allows to set additional resources that should be loaded prior to loading the
+							classes and the language infrastructure in one and the same workflow. The section in the workflow that
+							refers the your grammar allows to set additional resources that should be loaded prior to loading the
 							grammar file. The ecore files that contain the referenced EPackages are a good candidate for preloaded
 							resources.
 						</p>
@@ -5186,7 +5186,7 @@ bean = StandaloneSetup {
 						<p>
 							If you face problems with that approach, it may be necessary to explicitly load the referenced packages
 							in the language configuration of the workflow. You may run into this as soon as you refer to elements
-							from <strong>Ecore.ecore</strong> and want to generated the EMF classes from within the same workflow.
+							from <strong>Ecore.ecore</strong> and want to generate the EMF classes from within the same workflow.
 						</p>
 						<p>
 							</p>
@@ -5306,7 +5306,7 @@ import 'http://www.eclipse.org/anotherPackage' as another</pre>
 							scanned before it is assumed that a type needs to be generated into the inferred package.
 						</p>
 						<p>
-							Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
+							Note that using this feature is not recommended, because it might cause problems that are hard to track down.
 							For instance, a reference to <strong>classA</strong> would as well be linked to a newly created <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EClass.html"><abbr title="org.eclipse.emf.ecore.EClass">EClass</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClass.java">(src)</a>, because the 
 							corresponding type in <strong>http://www.eclipse.org/packContainingClassA</strong> is spelled with a capital letter.
 						</p>
@@ -5371,7 +5371,7 @@ TerminalRule :
 							<p>
 						</p>
 						<p>
-							Note, that <strong>the order of terminal rules is crucial for your grammar</strong>, as they may shadow each other. 
+							Note that <strong>the order of terminal rules is crucial for your grammar</strong>, as they may shadow each other. 
 							This is especially important for newly introduced rules in connection with imported rules from used grammars.
 						</p>
 						<p>
@@ -5615,7 +5615,7 @@ terminal UNCLOSED_STRING : '"' (!'"')* EOF;</pre>
 						<h3>Parser Rules</h3>
 						<p>
 							The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
-							contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
+							contrary to a terminal rule - does not produce a single atomic terminal token, but a tree of non-terminal 
 							and terminal tokens. They lead to a so called 
 							 parse tree (in Xtext it is also referred 
 							as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
@@ -5904,8 +5904,8 @@ MyRule returns TypeA :
 						<section id="_39" style="padding-top: 68px; margin-top: -68px;">
 						<h5>Unassigned Rule Calls</h5>
 						<p>
-							We previously explained, that the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> to be returned is created lazily when the first assignment occurs or 
-							as soon as a simple action is evaluated. There is another to <strong>find</strong> the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> to be returned. The
+							We previously explained that the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> to be returned is created lazily when the first assignment occurs or 
+							as soon as a simple action is evaluated. There is another way to <strong>find</strong> the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EObject.html"><abbr title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EObject.java">(src)</a> to be returned. The
 							concept is called <strong>Unassigned Rule Call</strong>.
 						</p>
 						<p>
@@ -6066,7 +6066,7 @@ current = temp;</pre>
 							Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define
 							the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
 							things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
-							symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
+							symbols that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
 							are transparently woven into the node model, but not relevant for the semantic model.
 						</p>
 						<p>
@@ -6142,7 +6142,7 @@ QualifiedName :
 							If you had defined it as a terminal rule, it would possibly hide the simple <strong>ID</strong> rule.
 						</p>
 						<p>
-							In addition when the <strong>QualifiedName</strong> been defined as a data type rule, it is allowed to use hidden 
+							In addition, by defining the <strong>QualifiedName</strong> as a data type rule, it is allowed to use hidden 
 							tokens (e.g. <code class="prettyprint lang-java">/* comment */</code> between the segment IDs and dots (e.g. <code class="prettyprint lang-java">foo/* comment */. bar . Baz</code>).
 						</p>
 						<p>
@@ -6157,8 +6157,8 @@ QualifiedName returns ecore::EString :
 							<p>
 						</p>
 						<p>
-							Note that rules that do not call other parser rules and do neither contain any actions nor <a href="#assignments">assignments</a>, are
-							 considered to be data type rules and the data type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.
+							Note that rules that do not call other parser rules and do neither contain any actions nor <a href="#assignments">assignments</a> are
+							 considered to be data type rules, and the data type <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/String.html">EString</a> is implied if none has been explicitly declared.
 						</p>
 						<p>
 							<a href="#valueconverter">Value converters</a> are used to transform the parsed string to the actually returned
@@ -6198,7 +6198,7 @@ enum ChangeKind :
 							<p>
 						</p>
 						<p>
-							Please note, that Ecore does not support unset values for enums. If you define a grammar like
+							Please note that Ecore does not support unset values for enums. If you define a grammar like
 						</p>
 						<p>
 							</p>
@@ -6298,7 +6298,7 @@ Condition:
 						</p>
 						<p>
 							The parser understands the predicate basically like this: If you are at this particular decision point
-							and you don't know what to do, look for the <code class="prettyprint lang-java">else</code> keyword and if it's present. Don't try to
+							and you don't know what to do, check whether the <code class="prettyprint lang-java">else</code> keyword is present. Don't try to
 							choose the other option that would start with an <code class="prettyprint lang-java">else</code> keyword, too.
 						</p>
 						<p>
@@ -6309,7 +6309,7 @@ Condition:
 						<h4>First Token Set Predicates</h4>
 						<p>
 							Sometimes you need to put a syntactic predicate on a more complex rule, e.g. an expression, which might be very long.
-							For disambiguation it often is sufficient to only look at the first token set. In those cases one can use
+							For disambiguation it is often sufficient to look only at the first token set. In those cases one can use
 							the <code class="prettyprint lang-xtend">-&gt;</code> operator instead of <code class="prettyprint lang-xtend">=&gt;</code> which tells the parser to just look at the first token and make the decision based on that.
 							This can heavily reduce the lookahead and as a consequence make the parser faster and more robust to syntactic errors. This also affects the behavior 
 							of the IDE, such as content assist, in a positive way.
@@ -6407,7 +6407,7 @@ Condition:
 						</p>
 						<p>
 							Furthermore, each type that is added to the currently possible return types automatically extends the current return type 
-							of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
+							of the parser rule. You can specify additional common super types by means of "artificial" parser rules that are never called, e.g.
 						</p>
 						<p>
 							</p>
@@ -7110,7 +7110,7 @@ public static void main(String[] args) {
 							There are two aspects to consider when it comes to continuous integration. Firstly you may want to have a continuous build of your language, 
 							that runs all tests and creates an Eclipse update site and other needed artifacts and secondly you may want to have your language and its corresponding
 							code generator integrated in your application builds. We will discuss both cases in the section along a set of example projects, which you
-							can clone, inspect or download from <a href="https://github.com/svenefftinge/maven-xtext-example">https://github.com/svenefftinge/maven-xtext-example</a>.
+							can clone, inspect or download from <a href="https://github.com/xtext-dev/maven-xtext-example">https://github.com/xtext-dev/maven-xtext-example</a>.
 						</p>
 						<p>
 							To follow this section you need to have a basic understanding of how Maven works. Please read a tutorial on Maven if you don't know anything about it.
@@ -7533,7 +7533,7 @@ class StatemachineGenerator implements IGenerator {
 							with some basic outlet roots where the different generated files should be placed under. This is what output configurations are made for.
 						</p>
 						<p>
-							By default every language will have a single outlet, that points to <code class="prettyprint lang-xtend">&lt;project-root&gt;/src-gen/</code>. The files that go here are treated as fully derived and will be erased
+							By default every language will have a single outlet, which points to <code class="prettyprint lang-xtend">&lt;project-root&gt;/src-gen/</code>. The files that go here are treated as fully derived and will be erased
 							by the compiler automatically when a new file should be generated. If you need additional outlets or want to have a different default configuration, you need to implement the
 							interface <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/generator/IOutputConfigurationProvider.html"><abbr title="org.eclipse.xtext.generator.IOutputConfigurationProvider">IOutputConfigurationProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IOutputConfigurationProvider.java">(src)</a>. It's straight forward to understand and the default implementation gives you a good idea about how to implement it.
 						</p>
@@ -8187,7 +8187,7 @@ private IResourceServiceProvider.Registry rspr =
 							<p>
 						</p>
 						<p>
-							However, we strongly encourage you to use dependency injection. Now, that we know how to export elements to be 
+							However, we strongly encourage you to use dependency injection. Now that we know how to export elements to be 
 							referable from other resources, we need to learn how those exported 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/resource/IEObjectDescription.html">IEObjectDescriptions</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java">(src)</a> can be made available to the referencing resources. That is 
 							the responsibility of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/scoping/IGlobalScopeProvider.html">global scoping</a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java">(src)</a> which is 
@@ -8817,7 +8817,7 @@ public IValueConverter&lt;MyDataType&gt; getMyRuleNameConverter() {
 						<p>
 							The contract of serialization says that a model which is saved (serialized) to its textual representation 
 							and then loaded (parsed) again yields a new model that is equal to the original model. Please be 
-							aware that this does <strong>not</strong> imply, that loading a textual representation and serializing it back produces 
+							aware that this does <strong>not</strong> imply that loading a textual representation and serializing it back produces 
 							identical textual representations. However, the serialization algorithm tries to restore as much information
 							as possible. That is, if the parsed model was not modified in-memory, the serialized output will usually
 							be equal to the previous input. Unfortunately, this cannot be ensured for each and every case. A use
@@ -8913,7 +8913,7 @@ MyRule:
 							know that it implements a backtracking algorithm. This basically means that the grammar is used to 
 							specify the structure of a tree in which one path (from the root node to a leaf node) is a valid 
 							serialization of a specific model. The parse tree constructor's task is to find this path - with the 
-							condition, that all model elements are consumed while walking this path. The parse tree constructor's 
+							condition that all model elements are consumed while walking this path. The parse tree constructor's 
 							strategy is to take the most promising branch first (the one that would consume the most model elements). 
 							If the branch leads to a dead end (for example, if a model element needs to be consumed that is not 
 							present in the model), the parse tree constructor goes back the path until a different branch can be 
@@ -9746,7 +9746,7 @@ public class SecretCompartmentsLabelProvider
 							What is especially nice about the default implementation is the actual reason for its class 
 							name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
 							at first have a look for an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/org/eclipse/emf/ecore/EAttribute.html"><abbr title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EAttribute.java">(src)</a> <strong>name</strong> and try to use this one.
-							If it cannot find such a feature, it will try to use the first feature, that can be used best as a label. 
+							If it cannot find such a feature, it will try to use the first feature that can be used best as a label. 
 							At worst it will return the class name of the model element, which is kind of unlikely to happen.
 						</p>
 						<p>
@@ -9837,11 +9837,11 @@ public void complete_{RuleName}(
 							Clients who want to customize the behavior may override the methods from the 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.html"><abbr title="org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider">AbstractJavaBasedContentProposalProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.java">(src)</a> or introduce new
 							 methods with a specialized first parameter. The framework inspects the type of the model object and 
-							dispatches method calls to the most concrete implementation, that can be found.
+							dispatches method calls to the most concrete implementation that can be found.
 						</p>
 						<p>
-							It is important to know, that for a given offset in a model file, many possible grammar elements exist. 
-							The framework dispatches to the method declarations for any valid element. That means, that a bunch 
+							It is important to know that, for a given offset in a model file, many possible grammar elements exist. 
+							The framework dispatches to the method declarations for any valid element. This means that a bunch 
 							of <strong>complete*</strong> methods may be called.
 						</p>
 						<p>
@@ -10593,7 +10593,7 @@ public class DefaultHighlightingConfiguration
 						<p>
 							The framework will pass the current <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/resource/XtextResource.html"><abbr title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a> and an 
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.html"><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor">IHighlightedPositionAcceptor</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java">(src)</a> to 
-							the calculator. It is ensured, that the resource will not be altered externally until the called method 
+							the calculator. It is ensured that the resource will not be altered externally until the called method 
 							<code class="prettyprint lang-java">provideHighlightingFor()</code> returns. However, the resource may be <code class="prettyprint lang-java">null</code> in case of
 							errors in the model. The implementor's task is to 
 							navigate the semantic model and compute various ranges based on the attached node information and 
@@ -14089,8 +14089,8 @@ NumberLiteral:
 							<p>
 						</p>
 						<p>
-							As you can see the main difference is that it uses three rules instead of one and if you look a bit closer 
-							you see, that there's a certain delegation pattern involved. The rule Addition doesn't call itself but calls 
+							As you can see the main difference is that it uses three rules instead of one, and if you look a bit closer 
+							you see that there's a certain delegation pattern involved. The rule Addition doesn't call itself but calls 
 							Multiplication instead. The operator precedence is defined by the order of delegation. The later the rule 
 							is called the higher is its precedence. This is at least the case for the first two rules which are of a 
 							left recursive nature (but we've left-factored them now). The last rule is not left recursive which is why 
@@ -14392,7 +14392,7 @@ Addition returns Expression:
 						</p>
 						<p>
 							The language in which the meta model is defined is called <strong>Ecore</strong>. In other words, the meta model is 
-							the Ecore model of your language. Ecore an essential part of EMF. Your models instantiate the meta model, 
+							the Ecore model of your language. Ecore is an essential part of EMF. Your models instantiate the meta model, 
 							and your meta model instantiates Ecore. To put an end to this recursion, Ecore is defined in itself 
 							(an instance of itself).
 						</p>
@@ -14484,10 +14484,8 @@ Addition returns Expression:
 							Xtext provides an implementation of EMF's resource, the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.7/org/eclipse/xtext/resource/XtextResource.html"><abbr title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.7.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java">(src)</a>. 
 							This does not only encapsulate the parser that converts text to an EMF model but also the 
 							<a href="#serialization">serializer</a> working the opposite direction. That way, an Xtext model just looks like any 
-							other Ecore-based model from the outside, making it amenable for the use by other EMF based tools. In fact,
-							the Xpand templates in the generator plug-in created by the Xtext wizard do not make any assumption on the 
-							fact that the model is described in Xtext, and they would work fine with any model based on the same Ecore 
-							model of the language. So in the ideal case, you can switch the serialization format of your models to your 
+							other Ecore-based model from the outside, making it amenable for the use by other EMF based tools.
+							So in the ideal case, you can switch the serialization format of your models to your 
 							self-defined DSL by just replacing the resource implementation used by your other modeling tools.
 						</p>
 						<p>

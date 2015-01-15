@@ -4,17 +4,23 @@
      ====================================================================== -->
 <project name="deploy" default="default">
 
-    <target name="default" description="description">
+	<target name="default" description="description">
 		<copy todir="../../xtext-website">
 			<fileset dir="website">
 			</fileset>
-		</copy> 
-    </target>
+		</copy>
+	</target>
 
 
 	<property name="xtext_xdoc_loc" location="${basedir}/../docs/org.eclipse.xtext.doc.xdoc/" />
-	
+
 	<target name="generateAll" description="Runs all the generation steps">
+		<!--
+		Latex For MacPorts:
+		sudo port install texlive
+		sudo port install texlive-latex-extra
+		in /org.eclipse.xtend.doc.xdoc/src/workflow/GenerateDocs.mwe2 change pdfLatex path if not /opt/local/bin/pdflatex
+		-->
 		<java fork="true" clonevm="true" dir="${xtext_xdoc_loc}" classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher">
 			<arg line="file://${xtext_xdoc_loc}/src/workflow/GenerateDocs.mwe2" />
 			<arg line="-p projectDir=/${xtext_xdoc_loc}/" />
@@ -25,6 +31,4 @@
 		</java>
 		<java classname="generator.Generator" />
 	</target>
-
-	
 </project>
