@@ -13,7 +13,6 @@ import java.lang.annotation.Annotation;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
@@ -67,6 +67,9 @@ public class JvmModelCompleter {
 	
 	@Inject
 	private IGeneratorConfigProvider generatorConfigProvider;
+	
+	@Inject
+	private AnnotationLookup annotationLookup;
 	
 	public void complete(Iterable<? extends JvmIdentifiableElement> elements) {
 		for (JvmIdentifiableElement element : elements) {
@@ -188,27 +191,21 @@ public class JvmModelCompleter {
 		}
 	}
 
+	/**
+	 * @since 2.8
+	 */
 	protected void addSuppressWarnings(JvmDeclaredType jvmType) {
 		if (jvmType.getDeclaringType() == null) {
 			GeneratorConfig generatorConfig = generatorConfigProvider.get(jvmType);
 			if (generatorConfig.isGenerateSyntheticSuppressWarnings()
-					&& !containsAnnotation(jvmType, SuppressWarnings.class)
-					&& references.findDeclaredType(SuppressWarnings.class, jvmType) != null) {
+					&& annotationLookup.findAnnotation(jvmType, SuppressWarnings.class) == null
+					&& references.findDeclaredType(SuppressWarnings.class, jvmType) instanceof JvmAnnotationType) {
 				JvmAnnotationReferenceBuilder annotationRefBuilder = annotationRefBuilderFactory.create(jvmType.eResource().getResourceSet());
 				JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(SuppressWarnings.class, "all");
 				typeExtensions.setSynthetic(annotationRef, true);
 				jvmType.getAnnotations().add(annotationRef);
 			}
 		}
-	}
-	
-	private boolean containsAnnotation(JvmAnnotationTarget annotationTarget, Class<? extends Annotation> annotationClass) {
-		for (JvmAnnotationReference annotationRef : annotationTarget.getAnnotations()) {
-			if (annotationClass.getName().equals(annotationRef.getAnnotation().getIdentifier())) {
-				return true;
-			}
-		}
-		return false;
 	}
 	
 }
