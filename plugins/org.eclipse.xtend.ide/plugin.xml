@@ -889,7 +889,7 @@
       </category>
       <wizard
             category="org.eclipse.xtend.ide.wizards"
-            icon="icons/Xtend-Icon-16.png"
+            icon="icons/Xtend-Icon-16w.png"
             id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard"
             name="%NewXtendClass.label">
             <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
@@ -902,7 +902,7 @@
       </wizard>
       <wizard
             category="org.eclipse.xtend.ide.wizards"
-            icon="icons/Xtend-Icon-16.png"
+            icon="icons/Xtend-Icon-16w.png"
             id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard"
             name="%NewXtendInterface.label">
             <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
@@ -915,7 +915,7 @@
       </wizard>
       <wizard
             category="org.eclipse.xtend.ide.wizards"
-            icon="icons/Xtend-Icon-16.png"
+            icon="icons/Xtend-Icon-16w.png"
             id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard"
             name="%NewXtendEnum.label">
             <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
@@ -928,7 +928,7 @@
       </wizard>
       <wizard
             category="org.eclipse.xtend.ide.wizards"
-            icon="icons/Xtend-Icon-16.png"
+            icon="icons/Xtend-Icon-16w.png"
             id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard"
             name="%NewXtendAnnotation.label">
             <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
