@@ -4,7 +4,7 @@
 <stringAttribute key="M2_GOALS" value="-T 1C clean install"/>
 <booleanAttribute key="M2_NON_RECURSIVE" value="false"/>
 <booleanAttribute key="M2_OFFLINE" value="false"/>
-<stringAttribute key="M2_PROFILES" value=""/>
+<stringAttribute key="M2_PROFILES" value="local-build"/>
 <listAttribute key="M2_PROPERTIES">
 <listEntry value="maven.javadoc.skip=true"/>
 <listEntry value="source.skip=false"/>
