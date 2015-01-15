@@ -22,7 +22,7 @@ class Java8CompilerTest1 extends CompilerTest {
 		invokeAndExpect2(36, '''
 			def test() {
 				val intArray = #[1, 2, 3, 4, 5, 6, 7, 8]
-			    intArray.stream.reduce[$0, $1 | Integer.sum($0, $1)].get
+			    intArray.stream.reduce[Integer.sum($0, $1)].get
 			}
 		''', 'test')
 	}
@@ -172,8 +172,8 @@ class Java8CompilerTest1 extends CompilerTest {
 			}
 			
 			def test() {
-				val IntegerMath addition = [a, b | a + b]
-				val IntegerMath subtraction = [a, b | a - b]
+				val IntegerMath addition = [$0 + $1]
+				val IntegerMath subtraction = [$0 - $1]
 				40.operateBinary(2, addition).operateBinary(10, subtraction)
 			}
 		''', 'test')
