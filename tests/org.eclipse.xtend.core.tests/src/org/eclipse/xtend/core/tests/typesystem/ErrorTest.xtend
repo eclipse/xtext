@@ -2067,6 +2067,17 @@ class ErrorTest extends AbstractXtendTestCase {
 		'''.processWithoutException
 	}
 	
+	@Test
+	def void testErrorModel_141() throws Exception {
+		'''
+			import org.eclipse.xtend.lib.annotations.Data
+			@D class A {}
+			@Data class C extends A { val int c }
+			@Data class B { val int b }
+			@Data class D extends B { val double d }
+		'''.processWithoutException
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
