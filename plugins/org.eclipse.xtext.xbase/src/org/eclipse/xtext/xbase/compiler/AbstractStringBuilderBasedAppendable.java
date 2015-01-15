@@ -21,6 +21,7 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	private String indentation = "  ";
 	private String lineSeparator = "\n";
 	private boolean isJava;
+	private GeneratorConfig generatorConfig;
 	
 	private LightweightTypeReferenceSerializer lightweightTypeReferenceSerializer;
 	
@@ -137,12 +138,17 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	
 	@Override
 	public String declareVariable(Object key, String proposedName) {
-		return scopes.declareVariable(key, proposedName, false);
+		return scopes.declareVariable(key, proposedName, false, false);
 	}
 	
 	@Override
 	public String declareSyntheticVariable(Object key, String proposedName) {
-		return scopes.declareVariable(key, proposedName, true);
+		return scopes.declareVariable(key, proposedName, true, false);
+	}
+	
+	@Override
+	public String declareUniqueNameVariable(Object key, String proposedName) {
+		return scopes.declareVariable(key, proposedName, false, true);
 	}
 	
 	@Override
@@ -200,4 +206,14 @@ public abstract class AbstractStringBuilderBasedAppendable implements IAppendabl
 	public CharSequence subSequence(int start, int end) {
 		return builder.subSequence(start, end);
 	}
+
+	@Override
+	public GeneratorConfig getGeneratorConfig() {
+		return generatorConfig;
+	}
+	
+	public void setGeneratorConfig(GeneratorConfig config) {
+		this.generatorConfig = config;
+	}
+	
 }

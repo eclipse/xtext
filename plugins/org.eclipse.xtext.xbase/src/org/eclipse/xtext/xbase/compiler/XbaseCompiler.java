@@ -1079,7 +1079,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
-		GeneratorConfig config = getGeneratorConfig(b);
+		GeneratorConfig config = b.getGeneratorConfig();
 		boolean compileToSwitch;
 		if (config != null && config.getTargetVersion().isAtLeast(JAVA7)) {
 			compileToSwitch = isCompiledToJava7Switch(expr);
@@ -1555,7 +1555,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append(" ");
 			String variableName = b.declareSyntheticVariable(closure, "_function");
 			b.append(variableName).append(" = ");
-			GeneratorConfig config = getGeneratorConfig(b);
+			GeneratorConfig config = b.getGeneratorConfig();
 			if (config != null && config.getTargetVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
 				toLambda(closure, b, type, operation, false);
 			} else {
@@ -1646,7 +1646,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {
 		b.newLine();
 		JvmDeclaredType declaringType = operation.getDeclaringType();
-		GeneratorConfig config = getGeneratorConfig(b);
+		GeneratorConfig config = b.getGeneratorConfig();
 		if (config != null && config.getTargetVersion().isAtLeast(JAVA6)
 				|| declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
 			b.append("@Override").newLine();
@@ -1690,7 +1690,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(parameterType);
 				b.append(" ");
 				String proposedParamName = makeJavaIdentifier(closureParam.getName());
-				String name = b.declareVariable(closureParam, proposedParamName);
+				String name = b.declareUniqueNameVariable(closureParam, proposedParamName);
 				b.append(name);
 				if (i != closureParams.size() - 1)
 					b.append(", ");
@@ -1717,7 +1717,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			LightweightTypeReference type = getLightweightType(closure);
 			JvmOperation operation = findImplementingOperation(type);
 			if (operation != null) {
-				GeneratorConfig config = getGeneratorConfig(b);
+				GeneratorConfig config = b.getGeneratorConfig();
 				if (config != null && config.getTargetVersion().isAtLeast(JAVA8) && canCompileToJavaLambda(closure, type, operation)) {
 					toLambda(closure, b.trace(closure, false), type, operation, true);
 				} else {
