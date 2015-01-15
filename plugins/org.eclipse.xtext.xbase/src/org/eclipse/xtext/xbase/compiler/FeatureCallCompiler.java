@@ -61,6 +61,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.LongExtensions;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -806,6 +807,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected boolean isMemberCall(XAbstractFeatureCall call) {
 		return !call.isStatic();
+	}
+	
+	protected boolean isReferenceToSelf(XFeatureCall featureCall) {
+		return !featureCall.isTypeLiteral() && !featureCall.isPackageFragment() && !featureCall.isExplicitOperationCall()
+				&& featureCall.getFeature() instanceof JvmType
+				&& IFeatureNames.SELF.getFirstSegment().equals(featureCall.getConcreteSyntaxFeatureName());
 	}
 
 	protected void assignmentToJavaExpression(XAssignment expr, ITreeAppendable b, boolean isExpressionContext) {

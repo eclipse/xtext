@@ -58,4 +58,110 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 		''', JAVA7 -> JAVA8)
 	}
 	
+	@Test def void testNewThread() throws Exception {
+		'''
+			new Thread [| ]
+		'''.compilesTo('''
+			final Runnable _function = () -> {
+			};
+			Thread _thread = new Thread(_function);
+			return _thread;
+		''', JAVA8)
+	}
+	
+	@Test def void testBasicForLoop_8() {
+		'''
+			{
+				[| for (;;) {} ]
+			}
+		'''.compilesTo('''
+		    final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = () -> {
+		      for (;;) {
+		      }
+		    };
+		    return _function;
+		''', JAVA8)
+	}
+	
+	@Test def void testBasicForLoop_10() {
+		'''
+			{
+				val i = 0
+				for ([| i ].apply, [| i ].apply; i < 10;) {
+					
+				}
+			}
+		'''.compilesTo('''
+		    final int i = 0;
+		    for (((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {
+		      return Integer.valueOf(i);
+		    }).apply(), ((org.eclipse.xtext.xbase.lib.Functions.Function0<Integer>) () -> {
+		      return Integer.valueOf(i);
+		    }).apply(); (i < 10);) {
+		    }
+		''', JAVA8)
+	}
+
+	@Test def void testBug410797_01() throws Exception {
+		'''
+			{ val boolean bug = #[true, false, true].reduce[a,b|a && b] }
+		'''.compilesTo('''
+		    final org.eclipse.xtext.xbase.lib.Functions.Function2<Boolean, Boolean, Boolean> _function = (Boolean a, Boolean b) -> {
+		      boolean _and = false;
+		      if (!(a).booleanValue()) {
+		        _and = false;
+		      } else {
+		        _and = (b).booleanValue();
+		      }
+		      return Boolean.valueOf(_and);
+		    };
+		    final boolean bug = (boolean) org.eclipse.xtext.xbase.lib.IterableExtensions.<Boolean>reduce(java.util.Collections.<Boolean>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _function);
+		''', JAVA8)
+	}
+	
+	@Test def void testImplicitReferenceToMultitype() throws Exception {
+		'''
+			((null as Iterable<java.util.List<Object>>) + (null as Iterable<java.util.Set<Object>>)).forEach[ size ]
+		'''.compilesTo('''
+			Iterable<java.util.Collection<Object>> _plus = com.google.common.collect.Iterables.<java.util.Collection<Object>>concat(((Iterable<java.util.List<Object>>) null), ((Iterable<java.util.Set<Object>>) null));
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<java.util.Collection<Object>> _function = (java.util.Collection<Object> it) -> {
+			  it.size();
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<java.util.Collection<Object>>forEach(_plus, _function);
+		''', JAVA8)
+	}
+	
+	@Test def void testImplicitReferenceToSynonym_01() throws Exception {
+		'''
+			(null as Iterable<String[]>).forEach[ reverse ]
+		'''.compilesTo('''
+			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = (String[] it) -> {
+			  org.eclipse.xtext.xbase.lib.ListExtensions.<String>reverse(((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)));
+			};
+			org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);
+		''', JAVA8)
+	}
+	
+	@Test def void testBlockHasNoSuperfluousBraces_03() throws Exception {
+		'''
+			{ var (int)=>void fun = [ int i | new Object() new Object() ] }
+		'''.compilesTo('''
+		    final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Integer> _function = (Integer i) -> {
+		      new Object();
+		      new Object();
+		    };
+		    org.eclipse.xtext.xbase.lib.Procedures.Procedure1<? super Integer> fun = _function;
+		''', JAVA8)
+	}
+	
+	@Test def void testExceptionOnClosure() throws Exception {
+		'''
+			{val java.beans.VetoableChangeListener x = []}
+		'''.compilesTo('''
+		    final java.beans.VetoableChangeListener _function = (java.beans.PropertyChangeEvent it) -> {
+		    };
+		    final java.beans.VetoableChangeListener x = _function;
+		''', JAVA8)
+	}
+	
 }
