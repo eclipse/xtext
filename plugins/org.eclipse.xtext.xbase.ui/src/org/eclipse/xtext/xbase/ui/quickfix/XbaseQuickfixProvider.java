@@ -1,4 +1,3 @@
-
 package org.eclipse.xtext.xbase.ui.quickfix;
 
 import java.util.ArrayList;
@@ -25,10 +24,13 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.editor.quickfix.ReplaceModification;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -57,33 +59,34 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	protected JavaTypeQuickfixes javaTypeQuickfixes;
-	
+
 	@Inject
 	private CreateJavaTypeQuickfixes createJavaTypeQuickfixes;
-	
+
 	@Inject
 	private CommonTypeComputationServices services;
-	
+
 	@Inject
 	private TypesOrderUtil typesOrderUtil;
-	
-	@Inject 
-	private ReplacingAppendable.Factory appendableFactory; 
-	
-	@Inject 
+
+	@Inject
+	private ReplacingAppendable.Factory appendableFactory;
+
+	@Inject
 	private InsertionOffsets insertionOffsets;
-	
+
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
 		organizeImports(issue, acceptor);
 	}
-	
+
 	@Fix(IssueCodes.OPERATION_WITHOUT_PARENTHESES)
 	public void fixMissingParentheses(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add parentheses", "Add parentheses", null, new ISemanticModification() {
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
-				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), issue.getOffset() + issue.getLength(), 0);
+				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+						(XtextResource) element.eResource(), issue.getOffset() + issue.getLength(), 0);
 				appendable.append("()");
 				appendable.commitChanges();
 			}
@@ -111,7 +114,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			acceptor.accept(issue, replaceLabel, replaceLabel, null, new ReplaceModification(issue, replacement));
 		}
 	}
-	
+
 	@Fix(IssueCodes.INVALID_TYPE_ARGUMENTS_ON_TYPE_LITERAL)
 	public void fixTypeArguments(final Issue issue, IssueResolutionAcceptor acceptor) {
 		String message = issue.getMessage();
@@ -127,44 +130,72 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			}
 		});
 	}
-	
-	@Fix(IssueCodes.REDUNDANT_CASE)
-	public void fixRedundantCase(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Remove redundant case.", "Remove redundant case.", null, new ReplaceModification(issue, ""));
-		acceptor.accept(issue, "Assign empty expression.", "Assign empty expression.", null, new ISemanticModification() {
-			
+
+	@Fix(IssueCodes.OBSOLETE_CAST)
+	public void fixObsoletCast(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String fixup = "Remove unnecessary cast";
+		acceptor.accept(issue, fixup, fixup, null, new IModification() {
 			@Override
-			public void apply(EObject element, IModificationContext context) throws Exception {
-				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
-				if (switchExpression == null) {
-					return;
-				}
-				XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
-				if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
-					return;
-				}
-				List<INode> nodes = NodeModelUtils.findNodesForFeature(casePart, XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
-				if (nodes.isEmpty()) {
-					return;
-				}
-				INode firstNode = IterableExtensions.head(nodes);
-				INode lastNode = IterableExtensions.last(nodes);
-				int offset = firstNode.getOffset();
-				int length = lastNode.getEndOffset() - offset;
-				ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(), (XtextResource) element.eResource(), offset, length);
-				appendable.append(": {");
-				appendable.increaseIndentation().newLine();
-				appendable.decreaseIndentation().newLine().append("}");
-				appendable.commitChanges();
+			public void apply(IModificationContext context) throws Exception {
+				final IXtextDocument document = context.getXtextDocument();
+				ReplaceRegion replacement = document.readOnly(new IUnitOfWork<ReplaceRegion, XtextResource>() {
+
+					@Override
+					public ReplaceRegion exec(XtextResource state) throws Exception {
+						EObject type = state.getEObject(issue.getUriToProblem().fragment());
+						XCastedExpression cast = EcoreUtil2.getContainerOfType(type, XCastedExpression.class);
+						INode castNode = NodeModelUtils.findActualNodeFor(cast);
+						INode targetNode = NodeModelUtils.findActualNodeFor(cast.getTarget());
+						return new ReplaceRegion(castNode.getTotalTextRegion(), targetNode.getText());
+					}
+				});
+				document.replace(replacement.getOffset(), replacement.getLength(), replacement.getText());
 			}
-		
 		});
 	}
-	
+
+	@Fix(IssueCodes.REDUNDANT_CASE)
+	public void fixRedundantCase(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Remove redundant case.", "Remove redundant case.", null, new ReplaceModification(issue,
+				""));
+		acceptor.accept(issue, "Assign empty expression.", "Assign empty expression.", null,
+				new ISemanticModification() {
+
+					@Override
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element,
+								XSwitchExpression.class);
+						if (switchExpression == null) {
+							return;
+						}
+						XCasePart casePart = IterableExtensions.last(switchExpression.getCases());
+						if (casePart == null || !(casePart.isFallThrough() && casePart.getThen() == null)) {
+							return;
+						}
+						List<INode> nodes = NodeModelUtils.findNodesForFeature(casePart,
+								XbasePackage.Literals.XCASE_PART__FALL_THROUGH);
+						if (nodes.isEmpty()) {
+							return;
+						}
+						INode firstNode = IterableExtensions.head(nodes);
+						INode lastNode = IterableExtensions.last(nodes);
+						int offset = firstNode.getOffset();
+						int length = lastNode.getEndOffset() - offset;
+						ReplacingAppendable appendable = appendableFactory.create(context.getXtextDocument(),
+								(XtextResource) element.eResource(), offset, length);
+						appendable.append(": {");
+						appendable.increaseIndentation().newLine();
+						appendable.decreaseIndentation().newLine().append("}");
+						appendable.commitChanges();
+					}
+
+				});
+	}
+
 	@Fix(IssueCodes.INCOMPLETE_CASES_ON_ENUM)
 	public void fixIncompleteCasesOnEnum(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add 'default' case", "Add 'default' case", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XSwitchExpression switchExpression = EcoreUtil2.getContainerOfType(element, XSwitchExpression.class);
@@ -173,7 +204,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				}
 				int insertOffset = getInsertOffset(switchExpression);
 				IXtextDocument document = context.getXtextDocument();
-				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), insertOffset, 0);
+				ReplacingAppendable appendable = appendableFactory.create(document,
+						(XtextResource) element.eResource(), insertOffset, 0);
 				if (switchExpression.getCases().isEmpty()) {
 					appendable.increaseIndentation();
 				}
@@ -182,7 +214,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				appendable.newLine().append("}");
 				appendable.commitChanges();
 			}
-			
+
 		});
 		acceptor.accept(issue, "Add missing cases", "Add missing cases", null, new ISemanticModification() {
 			@Override
@@ -193,7 +225,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				}
 				int insertOffset = getInsertOffset(switchExpression);
 				IXtextDocument document = context.getXtextDocument();
-				ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) element.eResource(), insertOffset, 0);
+				ReplacingAppendable appendable = appendableFactory.create(document,
+						(XtextResource) element.eResource(), insertOffset, 0);
 				if (switchExpression.getCases().isEmpty()) {
 					appendable.increaseIndentation();
 				}
@@ -203,23 +236,23 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				}
 				appendable.commitChanges();
 			}
-			
+
 		});
 	}
-	
+
 	private int getInsertOffset(XSwitchExpression switchExpression) {
 		EList<XCasePart> cases = switchExpression.getCases();
 		if (cases.isEmpty()) {
 			return insertionOffsets.inEmpty(switchExpression);
-		} 
+		}
 		XCasePart casePart = IterableExtensions.last(cases);
 		return insertionOffsets.after(casePart);
 	}
-	
+
 	@Fix(IssueCodes.UNREACHABLE_CASE)
 	public void fixUnreachableCase(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove case", "Remove case", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				remove(element, XCasePart.class, context);
@@ -227,7 +260,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 		});
 		acceptor.accept(issue, "Move case up", "Move case up", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XCasePart casePart = EcoreUtil2.getContainerOfType(element, XCasePart.class);
@@ -266,11 +299,11 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 		});
 	}
-	
+
 	@Fix(IssueCodes.UNREACHABLE_CATCH_BLOCK)
 	public void fixUnreachableCatchBlock(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove catch block", "Remove catch block", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				remove(element, XCatchClause.class, context);
@@ -278,7 +311,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 		});
 		acceptor.accept(issue, "Move catch block up", "Move catch block up", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XCatchClause catchClause = EcoreUtil2.getContainerOfType(element, XCatchClause.class);
@@ -289,17 +322,20 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				if (node == null) {
 					return;
 				}
-				XTryCatchFinallyExpression tryCatchFinallyExpression = EcoreUtil2.getContainerOfType(catchClause, XTryCatchFinallyExpression.class);
+				XTryCatchFinallyExpression tryCatchFinallyExpression = EcoreUtil2.getContainerOfType(catchClause,
+						XTryCatchFinallyExpression.class);
 				if (tryCatchFinallyExpression == null) {
 					return;
 				}
 				ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, tryCatchFinallyExpression);
-				LightweightTypeReference actualTypeReference = owner.toLightweightTypeReference(catchClause.getDeclaredParam().getParameterType());
+				LightweightTypeReference actualTypeReference = owner.toLightweightTypeReference(catchClause
+						.getDeclaredParam().getParameterType());
 				for (XCatchClause previousCatchClause : tryCatchFinallyExpression.getCatchClauses()) {
 					if (previousCatchClause == catchClause) {
 						return;
 					}
-					LightweightTypeReference previousTypeReference = owner.toLightweightTypeReference(previousCatchClause.getDeclaredParam().getParameterType());
+					LightweightTypeReference previousTypeReference = owner
+							.toLightweightTypeReference(previousCatchClause.getDeclaredParam().getParameterType());
 					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
 						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(previousCatchClause);
 						if (previousNode == null) {
@@ -313,11 +349,11 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 		});
 	}
-	
+
 	@Fix(IssueCodes.UNREACHABLE_IF_BLOCK)
 	public void fixUnreachableIfBlock(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Remove if block", "Remove if block", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XIfExpression ifExpression = EcoreUtil2.getContainerOfType(element, XIfExpression.class);
@@ -334,7 +370,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 		});
 		acceptor.accept(issue, "Move if block up", "Move if block up", null, new ISemanticModification() {
-			
+
 			@Override
 			public void apply(EObject element, IModificationContext context) throws Exception {
 				XIfExpression ifExpression = EcoreUtil2.getContainerOfType(element, XIfExpression.class);
@@ -366,13 +402,16 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 					if (!(instanceOfExpression.getExpression() instanceof XAbstractFeatureCall)) {
 						continue;
 					}
-					XAbstractFeatureCall previousFeatureCall = (XAbstractFeatureCall) instanceOfExpression.getExpression();
+					XAbstractFeatureCall previousFeatureCall = (XAbstractFeatureCall) instanceOfExpression
+							.getExpression();
 					if (previousFeatureCall.getFeature() != actualFeature) {
 						continue;
 					}
-					LightweightTypeReference previousTypeReference = owner.toLightweightTypeReference(instanceOfExpression.getType());
+					LightweightTypeReference previousTypeReference = owner
+							.toLightweightTypeReference(instanceOfExpression.getType());
 					if (typesOrderUtil.isHandled(actualTypeReference, previousTypeReference)) {
-						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(instanceOfExpression.eContainer());
+						ICompositeNode previousNode = NodeModelUtils.findActualNodeFor(instanceOfExpression
+								.eContainer());
 						if (previousNode == null) {
 							return;
 						}
@@ -389,7 +428,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 						} else {
 							text = text + " ";
 						}
-						
+
 						IXtextDocument document = context.getXtextDocument();
 						document.replace(offset, length, "");
 						document.replace(previousNode.getOffset(), 0, text);
@@ -397,7 +436,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 					}
 				}
 			}
-			
+
 			private XIfExpression getFirstIfExpression(XIfExpression ifExpression) {
 				EObject container = ifExpression.eContainer();
 				if (container instanceof XIfExpression) {
@@ -429,7 +468,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				length = elseNode.getOffset() - offset;
 			}
 		} else {
-			XIfExpression parentIfExpression = EcoreUtil2.getContainerOfType(ifExpression.eContainer(), XIfExpression.class);
+			XIfExpression parentIfExpression = EcoreUtil2.getContainerOfType(ifExpression.eContainer(),
+					XIfExpression.class);
 			if (parentIfExpression != null && parentIfExpression.getElse() == ifExpression) {
 				ICompositeNode thenNode = NodeModelUtils.findActualNodeFor(parentIfExpression.getThen());
 				if (thenNode != null) {
@@ -450,8 +490,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		remove(document, node);
 		document.replace(previousNode.getOffset(), previousNode.getLength(), text);
 	}
-	
-	protected <T extends EObject> void remove(EObject element, Class<T> type, IModificationContext context) throws BadLocationException {
+
+	protected <T extends EObject> void remove(EObject element, Class<T> type, IModificationContext context)
+			throws BadLocationException {
 		T container = EcoreUtil2.getContainerOfType(element, type);
 		if (container == null) {
 			return;
@@ -495,7 +536,8 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	 */
 	@Override
 	public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(issue);
+		final IModificationContext modificationContext = getModificationContextFactory().createModificationContext(
+				issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
 		if (xtextDocument != null) {
 			xtextDocument.readOnly(new CancelableUnitOfWork<Void, XtextResource>() {
@@ -504,16 +546,12 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 					try {
 						EObject target = state.getEObject(issue.getUriToProblem().fragment());
 						EReference reference = getUnresolvedEReference(issue, target);
-						if(reference != null && reference.getEReferenceType() != null) {
-							createLinkingIssueQuickfixes(
-									issue,
-									getCancelableAcceptor(issueResolutionAcceptor, cancelIndicator),
-									xtextDocument,
-									state,
-									target,
-									reference);
+						if (reference != null && reference.getEReferenceType() != null) {
+							createLinkingIssueQuickfixes(issue,
+									getCancelableAcceptor(issueResolutionAcceptor, cancelIndicator), xtextDocument,
+									state, target, reference);
 						}
-					} catch(WrappedException e) {
+					} catch (WrappedException e) {
 						// issue information seems to be out of sync, e.g. there is no
 						// EObject with the given fragment
 					}
@@ -522,20 +560,19 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			});
 		}
 	}
-	
-	protected void createLinkingIssueQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, 
-			IXtextDocument xtextDocument,
-			XtextResource state, EObject target, EReference reference) throws Exception {
+
+	protected void createLinkingIssueQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
+			IXtextDocument xtextDocument, XtextResource state, EObject target, EReference reference) throws Exception {
 		javaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target, reference);
 		createJavaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target, reference);
 	}
-	
+
 	@Override
 	protected EReference getUnresolvedEReference(Issue issue, EObject target) {
 		EReference unresolvedEReference = super.getUnresolvedEReference(issue, target);
-		if(unresolvedEReference == null && target instanceof XConstructorCall)
+		if (unresolvedEReference == null && target instanceof XConstructorCall)
 			return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
-		else 
+		else
 			return unresolvedEReference;
 	}
 }
