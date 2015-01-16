@@ -22,6 +22,8 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextOperationTarget;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.texteditor.IDocumentProvider;
@@ -398,5 +400,24 @@ public class XbaseEditor extends XtextEditor {
 
 	protected IClipboardActionFactory getClipboardActionFactory() {
 		return clipboardActionFactory;
+	}
+
+	@Override
+	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
+		super.handlePreferenceStoreChanged(event);
+		String property = event.getProperty();
+		if (property.equals(org.eclipse.jdt.ui.PreferenceConstants.EDITOR_FOLDING_ENABLED)) {
+			ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
+			if (event.getNewValue() != null && Boolean.valueOf(event.getNewValue().toString())) {
+				if (!projectionViewer.isProjectionMode()) {
+					installFoldingSupport(projectionViewer);
+				}
+			} else {
+				if (projectionViewer.isProjectionMode()) {
+					uninstallFoldingSupport();
+					projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+				}
+			}
+		}
 	}
 }

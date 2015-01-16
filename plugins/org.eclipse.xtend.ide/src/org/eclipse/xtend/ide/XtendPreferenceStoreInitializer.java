@@ -44,7 +44,6 @@ public class XtendPreferenceStoreInitializer implements IPreferenceStoreInitiali
 			preferenceStoreAccess.getWritablePreferenceStore().setValue(PreferenceConstants.EDITOR_SUB_WORD_NAVIGATION,
 					Boolean.valueOf(event.getNewValue().toString()));
 		}
-
 	}
 
 }

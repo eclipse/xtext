@@ -12,7 +12,6 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -98,8 +97,7 @@ public class XtendFoldingRegionProvider extends DefaultFoldingRegionProvider {
 			ICompositeNode node = NodeModelUtils.findActualNodeFor(xtendFile.getImportSection());
 			if(node != null) {
 				ITextRegion textRegion = node.getTextRegion();
-				String preference = PreferenceConstants.getPreference(PreferenceConstants.EDITOR_FOLDING_IMPORTS,  null);
-				((IFoldingRegionAcceptorExtension<ITextRegion>)foldingRegionAcceptor).accept(textRegion.getOffset(), textRegion.getLength(), Boolean.valueOf(preference));
+				((IFoldingRegionAcceptorExtension<ITextRegion>)foldingRegionAcceptor).accept(textRegion.getOffset(), textRegion.getLength(), foldingPreferences.isFoldImports());
 			}
 		}
 	}
