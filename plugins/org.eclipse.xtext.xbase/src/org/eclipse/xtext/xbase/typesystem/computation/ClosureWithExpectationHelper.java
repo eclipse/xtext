@@ -354,7 +354,8 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 						} else {
 							List<LightweightBoundTypeArgument> hints = reference.getAllHints();
 							for (LightweightBoundTypeArgument hint : hints) {
-								if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+								BoundTypeArgumentSource source = hint.getSource();
+								if (source == BoundTypeArgumentSource.INFERRED || source == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
 									reference.tryResolve();
 									if (reference.internalIsResolved()) {
 										return reference.accept(this, param);

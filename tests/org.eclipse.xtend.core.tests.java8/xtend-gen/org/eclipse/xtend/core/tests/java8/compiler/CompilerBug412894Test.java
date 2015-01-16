@@ -7,11 +7,9 @@
  */
 package org.eclipse.xtend.core.tests.java8.compiler;
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -20,8 +18,9 @@ import org.junit.Test;
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class CompilerBug412894Test extends AbstractXtendCompilerTest {
+public class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler.CompilerBug412894Test {
   @Test
+  @Override
   public void test_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -109,6 +108,7 @@ public class CompilerBug412894Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -219,6 +219,7 @@ public class CompilerBug412894Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -267,7 +268,7 @@ public class CompilerBug412894Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final ArrayList<String> list = CollectionLiterals.<String>newArrayList();");
+    _builder_1.append("final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Consumer<Serializable> _function = (Serializable it) -> {");
@@ -310,8 +311,8 @@ public class CompilerBug412894Test extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Ignore
   @Test
+  @Override
   public void test_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
@@ -337,6 +338,45 @@ public class CompilerBug412894Test extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.ArrayList;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.function.Consumer;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Consumer<Object> _function = (Object it) -> {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("if ((it instanceof String)) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("list.add(it);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("list.forEach(_function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }

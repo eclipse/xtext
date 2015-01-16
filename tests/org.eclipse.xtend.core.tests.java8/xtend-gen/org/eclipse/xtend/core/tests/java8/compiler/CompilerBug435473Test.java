@@ -7,11 +7,9 @@
  */
 package org.eclipse.xtend.core.tests.java8.compiler;
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -20,8 +18,9 @@ import org.junit.Test;
  */
 @InjectWith(Java8RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class CompilerBug435473Test extends AbstractXtendCompilerTest {
+public class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.CompilerBug435473Test {
   @Test
+  @Override
   public void test_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -68,6 +67,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -114,6 +114,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -160,6 +161,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -206,6 +208,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_05() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -252,6 +255,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_06() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -298,6 +302,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_07() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -344,6 +349,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_08() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -390,6 +396,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_09() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -434,6 +441,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_10() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -478,6 +486,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_11() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -521,26 +530,8 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Ignore("Would be nice but too much effort ATM")
   @Test
-  public void test_12() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.List");
-    _builder.newLine();
-    _builder.append("class Outer {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("val List<? extends Functions.Function0<Number>> x = newArrayList([|1],  [|1.0])");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("IGNORED");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1);
-  }
-  
-  @Test
+  @Override
   public void test_13() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -587,6 +578,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_14() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -631,6 +623,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_15() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -675,6 +668,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_16() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map");
@@ -723,6 +717,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_17() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Map");
@@ -771,6 +766,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_18() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Outer {");
@@ -807,6 +803,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_19() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Outer {");
@@ -843,116 +840,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void test_20() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import static org.junit.Assert.*");
-    _builder.newLine();
-    _builder.append("import static org.hamcrest.CoreMatchers.*");
-    _builder.newLine();
-    _builder.append("class Outer {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("assertThat(#[1, 2.0, 3], hasItem(5))");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.Collections;");
-    _builder_1.newLine();
-    _builder_1.append("import java.util.List;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
-    _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.CoreMatchers;");
-    _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.Matcher;");
-    _builder_1.newLine();
-    _builder_1.append("import org.junit.Assert;");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
-    _builder_1.append("public class Outer {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public void m() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Assert.<List<Number>>assertThat(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1);
-  }
-  
-  @Test
-  public void test_21() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import static org.junit.Assert.*");
-    _builder.newLine();
-    _builder.append("import static org.hamcrest.CoreMatchers.*");
-    _builder.newLine();
-    _builder.append("class Outer {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def void m() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("assertThat(#{1, 2.0, 3}, hasItem(5))");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import java.util.Collections;");
-    _builder_1.newLine();
-    _builder_1.append("import java.util.Set;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
-    _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.CoreMatchers;");
-    _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.Matcher;");
-    _builder_1.newLine();
-    _builder_1.append("import org.junit.Assert;");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("@SuppressWarnings(\"all\")");
-    _builder_1.newLine();
-    _builder_1.append("public class Outer {");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("public void m() {");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Assert.<Set<Number>>assertThat(Collections.<Number>unmodifiableSet(CollectionLiterals.<Number>newHashSet(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("}");
-    _builder_1.newLine();
-    _builder_1.append("}");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1);
-  }
-  
-  @Test
+  @Override
   public void test_31() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1032,6 +920,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_32() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1111,6 +1000,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_33() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1190,6 +1080,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_34() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1269,6 +1160,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_35() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -1348,6 +1240,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_36() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -1427,6 +1320,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_37() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -1506,6 +1400,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_38() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
@@ -1585,6 +1480,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_39() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1662,6 +1558,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_40() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1739,6 +1636,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_41() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1816,34 +1714,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
-  @Ignore("Would be nice but too much effort ATM")
-  public void test_42() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import java.util.List");
-    _builder.newLine();
-    _builder.append("class Outer {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("interface A {}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("interface B extends A{}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("interface C extends A{}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("val List<? extends Functions.Function0<A>> x = newArrayList([| null as B],  [| null as C])");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("IGNORED");
-    _builder_1.newLine();
-    this.assertCompilesTo(_builder, _builder_1);
-  }
-  
-  @Test
+  @Override
   public void test_43() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
@@ -1923,6 +1794,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Override
   public void test_44() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");

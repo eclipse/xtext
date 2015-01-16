@@ -66,7 +66,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 
 	protected void enhanceFunctionType(FunctionTypeReference reference, FunctionTypeReference result, Visiting visiting) {
 		for(LightweightTypeReference parameterType: reference.getParameterTypes()) {
-			result.addParameterType(visitTypeArgument(parameterType, visiting));
+			result.addParameterType(visitTypeArgument(parameterType, visiting, true));
 		}
 		for(LightweightTypeReference typeArgument: reference.getTypeArguments()) {
 			result.addTypeArgument(visitTypeArgument(typeArgument, visiting));

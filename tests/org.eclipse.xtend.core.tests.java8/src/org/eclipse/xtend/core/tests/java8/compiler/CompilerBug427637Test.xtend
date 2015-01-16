@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.compiler
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -18,9 +16,9 @@ import org.junit.Test
  * @author Miro Spoenemann - Copied and adapted to Java 8 output
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class CompilerBug427637Test extends AbstractXtendCompilerTest {
+class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler.CompilerBug427637Test {
 	
-	@Test def void testBug_427637_01() {
+	@Test override void testBug_427637_01() {
 		'''
 			import java.util.List
 			
@@ -49,7 +47,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_01_b() {
+	@Test override void testBug_427637_01_b() {
 		'''
 			import java.util.List
 			
@@ -74,7 +72,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_02() {
+	@Test override void testBug_427637_02() {
 		'''
 			import java.util.List
 			
@@ -103,7 +101,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_02_b() {
+	@Test override void testBug_427637_02_b() {
 		'''
 			import java.util.List
 			
@@ -128,7 +126,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_03() {
+	@Test override void testBug_427637_03() {
 		'''
 			import java.util.List
 			
@@ -157,8 +155,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Ignore /* TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=457539 */
-	@Test def void testBug_427637_03_b() {
+	@Test override void testBug_427637_03_b() {
 		'''
 			import java.util.List
 			
@@ -169,11 +166,21 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-
+			import java.util.List;
+			import java.util.function.Consumer;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <V extends Object> void m(final List<? super V> list) {
+			    final Consumer<Object> _function = (Object it) -> {
+			    };
+			    list.forEach(_function);
+			  }
+			}
 		''')
 	}
 	
-	@Test def void testBug_427637_04() {
+	@Test override void testBug_427637_04() {
 		'''
 			import java.util.List
 			
@@ -203,7 +210,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_04_b() {
+	@Test override void testBug_427637_04_b() {
 		'''
 			import java.util.List
 			
@@ -229,7 +236,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_05() {
+	@Test override void testBug_427637_05() {
 		'''
 			import java.util.List
 			
@@ -259,7 +266,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_05_b() {
+	@Test override void testBug_427637_05_b() {
 		'''
 			import java.util.List
 			
@@ -285,7 +292,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_06() {
+	@Test override void testBug_427637_06() {
 		'''
 			import java.util.List
 			
@@ -315,8 +322,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Ignore /* TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=457539 */
-	@Test def void testBug_427637_06_b() {
+	@Test override void testBug_427637_06_b() {
 		'''
 			import java.util.List
 			
@@ -327,11 +333,22 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-
+			import java.util.List;
+			import java.util.function.Consumer;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <V extends Object> void m(final List<? super V> list) {
+			    List<? super V> _subList = list.subList(1, 1);
+			    final Consumer<Object> _function = (Object it) -> {
+			    };
+			    _subList.forEach(_function);
+			  }
+			}
 		''')
 	}
 	
-	@Test def void testBug_427637_07() {
+	@Test override void testBug_427637_07() {
 		'''
 			import java.util.List
 			
@@ -363,7 +380,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_07_b() {
+	@Test override void testBug_427637_07_b() {
 		'''
 			import java.util.List
 			
@@ -391,7 +408,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_08() {
+	@Test override void testBug_427637_08() {
 		'''
 			import java.util.List
 			
@@ -423,7 +440,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_08_b() {
+	@Test override void testBug_427637_08_b() {
 		'''
 			import java.util.List
 			
@@ -451,7 +468,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_09() {
+	@Test override void testBug_427637_09() {
 		'''
 			import java.util.List
 			
@@ -483,8 +500,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Ignore /* TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=457539 */
-	@Test def void testBug_427637_09_b() {
+	@Test override void testBug_427637_09_b() {
 		'''
 			import java.util.List
 			
@@ -496,11 +512,23 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-
+			import java.util.List;
+			import java.util.function.Consumer;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <V extends Object> void m(final List<? super V> list) {
+			    List<? super V> _subList = list.subList(1, 1);
+			    final Consumer<Object> _function = (Object it) -> {
+			      it.toString();
+			    };
+			    _subList.forEach(_function);
+			  }
+			}
 		''')
 	}
 	
-	@Test def void testBug_427637_10() {
+	@Test override void testBug_427637_10() {
 		'''
 			import java.util.List
 			
@@ -533,7 +561,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_10_b() {
+	@Test override void testBug_427637_10_b() {
 		'''
 			import java.util.List
 			
@@ -562,7 +590,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_11() {
+	@Test override void testBug_427637_11() {
 		'''
 			import java.util.List
 			
@@ -607,7 +635,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_12() {
+	@Test override void testBug_427637_12() {
 		'''
 			import java.util.List
 			
@@ -686,7 +714,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_13() {
+	@Test override void testBug_427637_13() {
 		'''
 			import java.util.List
 			
@@ -765,7 +793,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testBug_427637_14() {
+	@Test override void testBug_427637_14() {
 		'''
 			import java.util.List
 			

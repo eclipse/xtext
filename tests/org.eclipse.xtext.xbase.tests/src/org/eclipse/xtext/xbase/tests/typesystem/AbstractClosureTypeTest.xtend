@@ -2227,7 +2227,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			val list = new java.util.ArrayList
 			list.<String, CharSequence>map[s| s]
 			list
-		}".resolvesClosuresTo("(CharSequence)=>CharSequence").withEquivalents("Function1<CharSequence, CharSequence>")
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, CharSequence>")
 	}
 	
 	@Test def void testDeferredTypeArgumentResolution_16() throws Exception {
@@ -2235,7 +2235,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			val list = new java.util.ArrayList
 			list.<String, Object>map[s| s]
 			list
-		}".resolvesClosuresTo("(Object)=>Object").withEquivalents("Function1<Object, Object>")
+		}".resolvesClosuresTo("(String)=>String").withEquivalents("Function1<String, Object>")
 	}
 
 	@Test def void testClosureWithReturnExpression_01() throws Exception {

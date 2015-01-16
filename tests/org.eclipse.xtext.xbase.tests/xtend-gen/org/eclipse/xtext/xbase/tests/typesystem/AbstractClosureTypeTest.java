@@ -2161,14 +2161,14 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDeferredTypeArgumentResolution_15() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, CharSequence>map[s| s]\n\t\t\tlist\n\t\t}", "(CharSequence)=>CharSequence");
-    this.withEquivalents(_resolvesClosuresTo, "Function1<CharSequence, CharSequence>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, CharSequence>map[s| s]\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, CharSequence>");
   }
   
   @Test
   public void testDeferredTypeArgumentResolution_16() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "(Object)=>Object");
-    this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "(String)=>String");
+    this.withEquivalents(_resolvesClosuresTo, "Function1<String, Object>");
   }
   
   @Test
