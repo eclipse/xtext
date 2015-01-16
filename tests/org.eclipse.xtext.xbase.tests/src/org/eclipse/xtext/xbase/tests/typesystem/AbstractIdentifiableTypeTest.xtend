@@ -792,7 +792,7 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 			val list = new java.util.ArrayList
 			list.<String, Object>map[s| s]
 			list
-		}".resolvesIdentifiablesTo("ArrayList<String>", "Object") // could actually be 'String' but Object is quit ok, too
+		}".resolvesIdentifiablesTo("ArrayList<String>", "String")
 	}
 
 	@Test def void testDeferredTypeArgumentResolution_136() throws Exception {
@@ -816,6 +816,6 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 			val list = new java.util.ArrayList
 			list.<String, CharSequence>map[s| s]
 			list
-		}".resolvesIdentifiablesTo("ArrayList<String>", "CharSequence")
+		}".resolvesIdentifiablesTo("ArrayList<String>", "String")
 	}
 }

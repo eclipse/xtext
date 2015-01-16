@@ -485,6 +485,15 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				}
 				
 				@Override
+				protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, Set<JvmTypeParameter> visiting, boolean lowerBound) {
+					LightweightTypeReference result = super.visitTypeArgument(reference, visiting, lowerBound);
+					if (lowerBound && result.getKind() == LightweightTypeReference.KIND_WILDCARD_TYPE_REFERENCE) {
+						result = result.getUpperBoundSubstitute();
+					}
+					return result;
+				}
+				
+				@Override
 				protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Set<JvmTypeParameter> visiting) {
 					if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 						return reference;
