@@ -16,6 +16,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalPriorities;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.folding.FoldingActionContributor;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
+import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
@@ -41,7 +43,7 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
- * contains default bindings for all Xbase inheriting languages.
+ *         contains default bindings for all Xbase inheriting languages.
  */
 public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
@@ -110,9 +112,13 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
 	}
-	
+
 	@SingletonBinding(eager = true)
 	public Class<? extends UniqueClassNameValidator> bindUniqueClassNameValidator() {
 		return ProjectAwareUniqueClassNameValidator.class;
+	}
+
+	public Class<? extends FoldingActionContributor> bindFoldingActionContributor() {
+		return XbaseFoldingActionContributor.class;
 	}
 }
