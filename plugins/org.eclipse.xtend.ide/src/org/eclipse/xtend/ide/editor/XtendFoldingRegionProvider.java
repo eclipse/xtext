@@ -26,6 +26,7 @@ import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionAcceptorExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.xbase.ui.editor.FoldingPreferences;
 
 import com.google.inject.Inject;
 

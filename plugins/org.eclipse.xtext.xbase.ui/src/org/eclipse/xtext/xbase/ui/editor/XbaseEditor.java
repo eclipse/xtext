@@ -81,6 +81,7 @@ public class XbaseEditor extends XtextEditor {
 	private int expectJavaSelection = 0;
 	private boolean expectLineSelection = false;
 	private boolean isIgnoreCall = false;
+	private @Inject FoldingPreferences foldingPreferences;
 
 	@Override
 	public void saveState(IMemento memento) {
@@ -403,6 +404,13 @@ public class XbaseEditor extends XtextEditor {
 	}
 
 	@Override
+	protected void installFoldingSupport(ProjectionViewer projectionViewer) {
+		if (foldingPreferences.isEnabled()) {
+			super.installFoldingSupport(projectionViewer);
+		}
+	}
+
+	@Override
 	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
 		super.handlePreferenceStoreChanged(event);
 		String property = event.getProperty();
@@ -415,7 +423,7 @@ public class XbaseEditor extends XtextEditor {
 			} else {
 				if (projectionViewer.isProjectionMode()) {
 					uninstallFoldingSupport();
-					projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+					projectionViewer.disableProjection();
 				}
 			}
 		}

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.ide.editor;
+package org.eclipse.xtext.xbase.ui.editor;
 
 import org.eclipse.jdt.ui.PreferenceConstants;
 

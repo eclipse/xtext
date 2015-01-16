@@ -99,7 +99,7 @@ public class FoldingActionGroup extends ActionGroup {
 		this.viewer.addProjectionListener(projectionListener);
 
 		toggle = createToggleFoldingAction(editor);
-		toggle.setChecked(true);
+		toggle.setChecked(this.viewer.isProjectionMode());
 		toggle.setActionDefinitionId(IFoldingCommandIds.FOLDING_TOGGLE);
 		editor.setAction("FoldingToggle", toggle); //$NON-NLS-1$
 
@@ -133,6 +133,7 @@ public class FoldingActionGroup extends ActionGroup {
 			}
 		};
 		restoreDefaults.setActionDefinitionId(IFoldingCommandIds.FOLDING_RESTORE);
+		restoreDefaults.update();
 		editor.setAction("FoldingRestore", restoreDefaults); //$NON-NLS-1$
 
 	}
