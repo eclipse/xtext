@@ -486,7 +486,8 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	public void announceDirtyState(XtextResource resource) {
 		if (resource == null || !dirtyResource.isInitialized())
 			return;
-		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && delegatingClientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(delegatingClientAwareResource))) {
+		ClientAwareDirtyResource clientAwareResource = delegatingClientAwareResource;
+		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && clientAwareResource.isDirty() && dirtyStateManager.manageDirtyState(clientAwareResource))) {
 			synchronized (dirtyStateManager) {
 				Manager resourceDescriptionManager = getResourceDescriptionManagerIfOwnLanguage(resource);
 				if (resourceDescriptionManager != null) {
@@ -514,7 +515,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 								}
 							});
 						}
-						dirtyStateManager.announceDirtyStateChanged(delegatingClientAwareResource);
+						dirtyStateManager.announceDirtyStateChanged(clientAwareResource);
 					}
 				}
 			}
