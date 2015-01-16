@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.compiler
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -18,9 +16,9 @@ import org.junit.Test
  * @author Miro Spoenemann - Copied and adapted to Java 8 output
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class CompilerBug412894Test extends AbstractXtendCompilerTest {
+class CompilerBug412894Test extends org.eclipse.xtend.core.tests.compiler.CompilerBug412894Test {
 	
-	@Test def test_01() {
+	@Test override test_01() {
 		'''
 			class C {
 				def m()	{
@@ -56,7 +54,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_02() {
+	@Test override test_02() {
 		'''
 			class C {
 				def m()	{
@@ -100,7 +98,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_03() {
+	@Test override test_03() {
 		'''
 			class C {
 				def m()	{
@@ -121,7 +119,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
-			    final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
+			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
 			    final Consumer<Serializable> _function = (Serializable it) -> {
 			      boolean _matched = false;
 			      if (!_matched) {
@@ -138,8 +136,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Ignore /* TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=457539 */
-	@Test def test_04() {
+	@Test override test_04() {
 		'''
 			class C {
 				def m()	{
@@ -150,7 +147,22 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 				}
 			}
 		'''.assertCompilesTo('''
-
+			import java.util.ArrayList;
+			import java.util.function.Consumer;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
+			    final Consumer<Object> _function = (Object it) -> {
+			      if ((it instanceof String)) {
+			        list.add(it);
+			      }
+			    };
+			    list.forEach(_function);
+			  }
+			}
 		''')
 	}
 	
