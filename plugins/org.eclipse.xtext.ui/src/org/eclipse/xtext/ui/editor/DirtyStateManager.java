@@ -42,8 +42,10 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	
 	@Override
 	public void announceDirtyStateChanged(IDirtyResource dirtyResource) {
-		managedResources.put(dirtyResource.getURI(), dirtyResource);
-		notifyListeners(dirtyResource, true);
+		// avoid putting a dirtyResource into the map that wasn't managed before
+		if (managedResources.replace(dirtyResource.getURI(), dirtyResource) != null) {
+			notifyListeners(dirtyResource, true);
+		}
 	}
 
 	@Override
@@ -130,6 +132,8 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	
 	/**
 	 * @since 2.8
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 */
 	public ResourceStorageLoadable getResourceStorageLoadable(URI uri) {
 		IDirtyResource dirtyResource = findDirtyResourcebyURIorNormalizedURI(uri);
