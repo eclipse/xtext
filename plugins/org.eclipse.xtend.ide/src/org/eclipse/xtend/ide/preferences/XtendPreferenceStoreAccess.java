@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.ui.editor.preferences.FixedScopedPreferenceStore;
@@ -34,7 +35,8 @@ public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		});
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 			store,
-			jdtStore
+			jdtStore,
+			PreferenceConstants.getPreferenceStore()
 		});
 	}
 	
@@ -53,7 +55,8 @@ public class XtendPreferenceStoreAccess extends PreferenceStoreAccessImpl {
 		});
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 			store,
-			jdtStore
+			jdtStore,
+			PreferenceConstants.getPreferenceStore()
 		});
 	}
 }
