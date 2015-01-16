@@ -801,7 +801,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testDeferredTypeArgumentResolution_135() throws Exception {
-    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "Object");
+    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, Object>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "String");
   }
   
   @Test
@@ -816,6 +816,6 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testDeferredTypeArgumentResolution_138() throws Exception {
-    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, CharSequence>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "CharSequence");
+    this.resolvesIdentifiablesTo("{\n\t\t\tval list = new java.util.ArrayList\n\t\t\tlist.<String, CharSequence>map[s| s]\n\t\t\tlist\n\t\t}", "ArrayList<String>", "String");
   }
 }
