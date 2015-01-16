@@ -21,7 +21,9 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension, Provider<IResourceDescription> {
+public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURISupportExtension,
+		IDirtyResource.ICurrentStateProvidingExtension, Provider<IResourceDescription>,
+		IDirtyResource.InitializationAware {
 	
 	private IXtextDocument document;
 	private IResourceDescription description;
@@ -108,6 +110,15 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 		return document;
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public IResourceDescription getDescriptionIfInitialized() {
+		return description;
+	}
+	
+	@Override
 	public boolean isInitialized() {
 		return description != null;
 	}
@@ -116,6 +127,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	public URI getURI() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
+		IResourceDescription description = this.description;
 		if (description == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is currently not initialized");
 		return description.getURI();
@@ -125,6 +137,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	public synchronized IResourceDescription getDescription() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is not connected to a document");
+		IResourceDescription description = this.description;
 		if (description == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is currently not initialized");
 		return description;
@@ -134,15 +147,36 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	public synchronized String getContents() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is not connected to a document");
+		String content = this.content;
 		if (content == null)
 			throw new IllegalStateException("Cannot use getContents if this dirty resource is currently not mementoed");
 		return content;
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getContentsIfInitialized() {
+		return content;
+	}
+	
 	@Override
 	public String getActualContents() {
+		IXtextDocument document = this.document;
 		if (document == null)
 			throw new IllegalStateException("Cannot use getActualContents if this dirty resource is not connected to a document");
+		return document.get();
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getActualContentsIfInitialized() {
+		IXtextDocument document = this.document;
+		if (document == null)
+			return null;
 		return document.get();
 	}
 
@@ -156,12 +190,15 @@ public class DocumentBasedDirtyResource implements IDirtyResource.NormalizedURIS
 	
 	/**
 	 * @since 2.8
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	@Override
 	public ResourceStorageLoadable getResourceStorageLoadable() {
-		if (this.storageAwareResourceInputStreamProvider == null)
+		Provider<ResourceStorageLoadable> provider = this.storageAwareResourceInputStreamProvider;
+		if (provider == null)
 			return null;
-		return this.storageAwareResourceInputStreamProvider.get();
+		return provider.get();
 	}
 
 	/**

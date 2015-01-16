@@ -67,8 +67,9 @@ public class ExternalContentSupport implements IExternalContentSupport {
 
 		@Override
 		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
-			if (contentProvider.hasContent(uri)) {
-				return new LazyStringInputStream(contentProvider.getContent(uri), Charsets.UTF_8);
+			String content = contentProvider.getContent(uri);
+			if (content != null) {
+				return new LazyStringInputStream(content, Charsets.UTF_8);
 			}
 			return delegate.createInputStream(uri, options);
 		}

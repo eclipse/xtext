@@ -74,12 +74,14 @@ public class ValidationJobScheduler implements IValidationJobScheduler {
 			List<URI> dirtyResourceURIs = ((IDirtyStateManagerExtension) dirtyStateManager).getDirtyResourceURIs();
 			for(URI dirtyResourceURI: dirtyResourceURIs) {
 				IResourceDescription dirtyDescription = dirtyStateManager.getDirtyResourceDescription(dirtyResourceURI);
-				IResourceDescription persistedDescription = persistedDescriptions.getResourceDescription(dirtyResourceURI);
-				// Shortcut to make sure we don't waste time with more involving haveEObjectDescriptionChanged computation
-				ChangedResourceDescriptionDelta delta = new ChangedResourceDescriptionDelta(persistedDescription, dirtyDescription);
-				if(resourceDescriptionManager.isAffected(delta, documentDescription)) {
-					document.checkAndUpdateAnnotations();
-					return;
+				if (dirtyDescription != null) {
+					IResourceDescription persistedDescription = persistedDescriptions.getResourceDescription(dirtyResourceURI);
+					// Shortcut to make sure we don't waste time with more involving haveEObjectDescriptionChanged computation
+					ChangedResourceDescriptionDelta delta = new ChangedResourceDescriptionDelta(persistedDescription, dirtyDescription);
+					if(resourceDescriptionManager.isAffected(delta, documentDescription)) {
+						document.checkAndUpdateAnnotations();
+						return;
+					}
 				}
 			}
 		} else {
