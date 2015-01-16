@@ -62,6 +62,8 @@ public interface IDirtyStateManager extends ISelectable, IExternalContentSupport
 	 * to decide about the actual point in time. Implementations are free to collect
 	 * various announcement before actually raising an event. Events may be fired in a different
 	 * thread.
+	 * If there is no {@link #manageDirtyState(IDirtyResource) managed} resource in the 
+	 * state manager, the change will be refused and no change will be announced.
 	 */
 	void announceDirtyStateChanged(IDirtyResource dirtyResource);
 	

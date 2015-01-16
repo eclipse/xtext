@@ -8,6 +8,15 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/IDirtyResource.java" type="org.eclipse.xtext.ui.editor.IDirtyResource$ICurrentStateProvidingExtension">
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="ResourceStorageLoadable"/>
+                <message_argument value="ICurrentStateProvidingExtension"/>
+                <message_argument value="getResourceStorageLoadable()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/model/XtextDocument.java" type="org.eclipse.xtext.ui.editor.model.XtextDocument">
         <filter id="338792546">
             <message_arguments>
