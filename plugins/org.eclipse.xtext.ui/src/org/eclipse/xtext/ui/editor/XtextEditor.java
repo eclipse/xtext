@@ -525,7 +525,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 
 	protected void installFoldingSupport(ProjectionViewer projectionViewer) {
 		foldingStructureProvider.install(this, projectionViewer);
-		projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+		projectionViewer.enableProjection();
 	}
 
 	private void installSelectionChangedListener() {
