@@ -27,6 +27,7 @@ public class ProjectAwareResourceDescriptionsProvider extends AbstractProjectAwa
   @Inject
   private IJavaProjectProvider projectProvider;
   
+  @Override
   protected String getProjectName(final ResourceSet resourceSet) {
     final IJavaProject javaProject = this.projectProvider.getJavaProject(resourceSet);
     return javaProject.getElementName();

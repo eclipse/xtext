@@ -803,7 +803,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 		String javaCode = compileToJavaCode(code);
 		Class<?> compiledClazz = javaCompiler.compileToClass("x.Z", javaCode);
 		Object instance = compiledClazz.newInstance();
-		Method method = compiledClazz.getDeclaredMethods()[0];
+		Method method = compiledClazz.getDeclaredMethod("toString", Iterable.class, Functions.Function1.class, String.class);
 		List<String> list = Lists.newArrayList("a", "b");
 		Function1<String, String> function = new Functions.Function1<String, String>() {
 			@Override
