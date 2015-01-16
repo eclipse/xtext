@@ -1114,41 +1114,41 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 						result
 					]
 				}
-			}
-			
-			class FormattingDataInit {
-				public String space = null
-				public Integer newLines = null
-				public int increaseIndentationChange = 0
-				public int decreaseIndentationChange = 0
-				public PreferenceKey key = null
-			
-				def void cfg(PreferenceKey key) {
-					this.key = key
-				}
-			
-				def void newLine() {
-					newLines = 1
-				}
-			
-				def void noSpace() {
-					space = ""
-				}
-			
-				def void oneSpace() {
-					space = " "
-				}
-			
-				def void increaseIndentation() {
-					increaseIndentationChange = increaseIndentationChange + 1
-				}
-			
-				def void decreaseIndentation() {
-					decreaseIndentationChange = decreaseIndentationChange - 1
-				}
-			
-				override String toString() {
-					new ToStringHelper().toString(this)
+				
+				static class FormattingDataInit {
+					public String space = null
+					public Integer newLines = null
+					public int increaseIndentationChange = 0
+					public int decreaseIndentationChange = 0
+					public PreferenceKey key = null
+				
+					def void cfg(PreferenceKey key) {
+						this.key = key
+					}
+				
+					def void newLine() {
+						newLines = 1
+					}
+				
+					def void noSpace() {
+						space = ""
+					}
+				
+					def void oneSpace() {
+						space = " "
+					}
+				
+					def void increaseIndentation() {
+						increaseIndentationChange = increaseIndentationChange + 1
+					}
+				
+					def void decreaseIndentation() {
+						decreaseIndentationChange = decreaseIndentationChange - 1
+					}
+				
+					override String toString() {
+						new ToStringHelper().toString(this)
+					}
 				}
 			}
 		''', '''
@@ -1166,7 +1166,6 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			import org.eclipse.xtext.xbase.formatting.CommentInfo;
 			import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 			import org.eclipse.xtext.xbase.formatting.FormattingData;
-			import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
 			import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 			import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess;
 			import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
@@ -1183,24 +1182,66 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@SuppressWarnings("all")
 			public class FormattingDataFactory {
+			  public static class FormattingDataInit {
+			    public String space = null;
+			    
+			    public Integer newLines = null;
+			    
+			    public int increaseIndentationChange = 0;
+			    
+			    public int decreaseIndentationChange = 0;
+			    
+			    public PreferenceKey key = null;
+			    
+			    public void cfg(final PreferenceKey key) {
+			      this.key = key;
+			    }
+			    
+			    public void newLine() {
+			      this.newLines = Integer.valueOf(1);
+			    }
+			    
+			    public void noSpace() {
+			      this.space = "";
+			    }
+			    
+			    public void oneSpace() {
+			      this.space = " ";
+			    }
+			    
+			    public void increaseIndentation() {
+			      this.increaseIndentationChange = (this.increaseIndentationChange + 1);
+			    }
+			    
+			    public void decreaseIndentation() {
+			      this.decreaseIndentationChange = (this.decreaseIndentationChange - 1);
+			    }
+			    
+			    public String toString() {
+			      ToStringHelper _toStringHelper = new ToStringHelper();
+			      return _toStringHelper.toString(this);
+			    }
+			  }
+			  
 			  @Inject
 			  @Extension
 			  private HiddenLeafAccess _hiddenLeafAccess;
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataInit> init) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
 			    Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xblockexpression = null;
 			    {
-			      final FormattingDataInit data = new FormattingDataInit();
+			      final FormattingDataFactory.FormattingDataInit data = new FormattingDataFactory.FormattingDataInit();
 			      init.apply(data);
 			      _xblockexpression = this.newFormattingData(leafs, data.key, data);
 			    }
 			    return _xblockexpression;
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final Void key, final FormattingDataFactory.FormattingDataInit it) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        Integer _elvis = null;
@@ -1251,7 +1292,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final BlankLineKey key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final BlankLineKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        Iterable<FormattingData> _xblockexpression = null;
@@ -1271,7 +1312,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineOrPreserveKey key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineOrPreserveKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        Iterable<FormattingData> _xblockexpression = null;
@@ -1307,7 +1348,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineKey key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final NewLineKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        Iterable<FormattingData> _xblockexpression = null;
@@ -1330,13 +1371,13 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    Class<? extends PreferenceKey> _class = key.getClass();
 			    String _plus = ("Unknown configuration key kind: " + _class);
 			    throw new RuntimeException(_plus);
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final WhitespaceKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        Iterable<FormattingData> _xblockexpression = null;
@@ -1634,7 +1675,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _xblockexpression;
 			  }
 			  
-			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataInit> init) {
+			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
 			    Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
 			    boolean _notEquals = (!Objects.equal(node, null));
 			    if (_notEquals) {
@@ -1644,7 +1685,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _xifexpression;
 			  }
 			  
-			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataInit> init) {
+			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
 			    Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> _xifexpression = null;
 			    boolean _notEquals = (!Objects.equal(node, null));
 			    if (_notEquals) {
@@ -1654,7 +1695,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _xifexpression;
 			  }
 			  
-			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> init) {
+			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> init) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        ArrayList<FormattingData> _xblockexpression = null;
@@ -1699,7 +1740,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataInit> before, final Procedure1<? super FormattingDataInit> after) {
+			  public Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> surround(final INode node, final Procedure1<? super FormattingDataFactory.FormattingDataInit> before, final Procedure1<? super FormattingDataFactory.FormattingDataInit> after) {
 			    final Function1<FormattableDocument, Iterable<FormattingData>> _function = new Function1<FormattableDocument, Iterable<FormattingData>>() {
 			      public Iterable<FormattingData> apply(final FormattableDocument doc) {
 			        ArrayList<FormattingData> _xblockexpression = null;
@@ -1744,7 +1785,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			    return _function;
 			  }
 			  
-			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
+			  protected Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataFactory.FormattingDataInit it) {
 			    if (key instanceof BlankLineKey) {
 			      return _newFormattingData(leafs, (BlankLineKey)key, it);
 			    } else if (key instanceof NewLineKey) {
