@@ -267,7 +267,7 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	 * resources which would otherwise cause unexpected conflicts
 	 * (see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=340561">bug 340561</a>).
 	 */
-	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension {
+	private class ClientAwareDirtyResource implements IDirtyResource.NormalizedURISupportExtension, IDirtyResource.ICurrentStateProvidingExtension, IDirtyResource.InitializationAware {
 
 		@Override
 		public String getContents() {
@@ -306,6 +306,27 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 		public ResourceStorageLoadable getResourceStorageLoadable() {
 			return dirtyResource.getResourceStorageLoadable();
 		}
+		
+		@Override
+		public boolean isInitialized() {
+			return dirtyResource.isInitialized();
+		}
+		
+		@Override
+		public IResourceDescription getDescriptionIfInitialized() {
+			return dirtyResource.getDescriptionIfInitialized();
+		}
+		
+		@Override
+		public String getActualContentsIfInitialized() {
+			return dirtyResource.getActualContentsIfInitialized();
+		}
+		
+		@Override
+		public String getContentsIfInitialized() {
+			return dirtyResource.getContentsIfInitialized();
+		}
+		
 		
 	}
 	
@@ -422,13 +443,15 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 			throw new IllegalStateException("Was configured with another client or not configured at all."); //$NON-NLS-1$
 		client.removeVerifyListener(this);
 		stateChangeEventBroker.removeListener(this);
-		if (dirtyResource.isInitialized()) 
-			dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
-		IXtextDocument document = client.getDocument();
-		if (document == null)
-			document = dirtyResource.getUnderlyingDocument();
-		if (document != null) {
-			dirtyResource.disconnect(document);
+		synchronized (dirtyStateManager) {
+			if (dirtyResource.isInitialized()) 
+				dirtyStateManager.discardDirtyState(delegatingClientAwareResource);
+			IXtextDocument document = client.getDocument();
+			if (document == null)
+				document = dirtyResource.getUnderlyingDocument();
+			if (document != null) {
+				dirtyResource.disconnect(document);
+			}
 		}
 		this.delegatingClientAwareResource = null;
 		this.currentClient = null;

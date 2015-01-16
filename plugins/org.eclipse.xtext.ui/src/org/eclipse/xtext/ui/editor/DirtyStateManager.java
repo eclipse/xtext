@@ -117,16 +117,24 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	@Override
 	public IResourceDescription getDirtyResourceDescription(URI uri) {
 		IDirtyResource dirtyResource = getDirtyResource(uri);
-		if (dirtyResource != null)
+		if (dirtyResource != null) {
+			if (dirtyResource instanceof IDirtyResource.InitializationAware) {
+				return ((IDirtyResource.InitializationAware) dirtyResource).getDescriptionIfInitialized();
+			}
 			return dirtyResource.getDescription();
+		}
 		return null;
 	}
 
 	@Override
 	public String getContent(URI uri) {
 		IDirtyResource dirtyResource = findDirtyResourcebyURIorNormalizedURI(uri);
-		if (dirtyResource != null)
+		if (dirtyResource != null) {
+			if (dirtyResource instanceof IDirtyResource.InitializationAware) {
+				return ((IDirtyResource.InitializationAware) dirtyResource).getContentsIfInitialized();
+			}
 			return dirtyResource.getContents();
+		}
 		return null;
 	}
 	
@@ -175,8 +183,12 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 			@Override
 			public String getContent(URI uri) {
 				IDirtyResource dirtyResource = DirtyStateManager.this.findDirtyResourcebyURIorNormalizedURI(uri);
-				if (dirtyResource != null)
+				if (dirtyResource != null) {
+					if (dirtyResource instanceof IDirtyResource.InitializationAware) {
+						return ((IDirtyResource.InitializationAware) dirtyResource).getActualContentsIfInitialized();
+					}
 					return dirtyResource.getActualContents();
+				}
 				return null;
 			}
 			

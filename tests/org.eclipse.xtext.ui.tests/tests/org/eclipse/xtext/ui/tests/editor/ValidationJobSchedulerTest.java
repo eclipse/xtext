@@ -170,10 +170,15 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		reference.setTargetEObjectUri(targetURI);
 		referenceDescriptions.add(reference);
 		noDocumentDescription = false;
-		dirtyStateManager.announceDirtyStateChanged(this);
+		announceDirtyStateChanged();
 		validationScheduled = false;
 		testMe.scheduleInitialValidation(document);
 		assertTrue(validationScheduled);
+	}
+
+	private void announceDirtyStateChanged() {
+		assertTrue(dirtyStateManager.manageDirtyState(this));
+		dirtyStateManager.announceDirtyStateChanged(this);
 	}
 	
 	@Test public void testOutgoingReferencesToAnotherResourceNoBuilderState() {
@@ -183,7 +188,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		reference.setTargetEObjectUri(URI.createURI("anothertarget"));
 		referenceDescriptions.add(reference);
 		noDocumentDescription = false;
-		dirtyStateManager.announceDirtyStateChanged(this);
+		announceDirtyStateChanged();
 		validationScheduled = false;
 		testMe.scheduleInitialValidation(document);
 		assertFalse(validationScheduled);
@@ -199,7 +204,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		reference.setTargetEObjectUri(URI.createURI("anothertarget"));
 		referenceDescriptions.add(reference);
 		noDocumentDescription = false;
-		dirtyStateManager.announceDirtyStateChanged(this);
+		announceDirtyStateChanged();
 		validationScheduled = false;
 		testMe.scheduleInitialValidation(document);
 		assertTrue(validationScheduled);
@@ -216,7 +221,7 @@ public class ValidationJobSchedulerTest extends AbstractXtextTests implements IR
 		reference.setTargetEObjectUri(URI.createURI("anothertarget"));
 		referenceDescriptions.add(reference);
 		noDocumentDescription = false;
-		dirtyStateManager.announceDirtyStateChanged(this);
+		announceDirtyStateChanged();
 		validationScheduled = false;
 		testMe.scheduleInitialValidation(document);
 		assertFalse(validationScheduled);
