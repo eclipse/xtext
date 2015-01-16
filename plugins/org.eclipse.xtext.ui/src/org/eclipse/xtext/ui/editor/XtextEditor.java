@@ -567,6 +567,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 			outlinePage = null;
 		}
 		uninstallFoldingSupport();
+		foldingStructureProvider = null;
 		uninstallHighlightingHelper();
 		uninstallSelectionChangedListener();
 	}
@@ -574,7 +575,6 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	protected void uninstallFoldingSupport() {
 		if (foldingStructureProvider != null) {
 			foldingStructureProvider.uninstall();
-			foldingStructureProvider = null;
 		}
 	}
 
