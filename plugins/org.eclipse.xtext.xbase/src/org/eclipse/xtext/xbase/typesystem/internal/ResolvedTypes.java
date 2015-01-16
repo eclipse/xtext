@@ -1231,25 +1231,38 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		if (existingTypeArguments != null) {
 			for(int i = 0; i < existingTypeArguments.size(); i++) {
 				LightweightBoundTypeArgument existingTypeArgument = existingTypeArguments.get(i);
-				if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
-					if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
-						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+				BoundTypeArgumentSource source = existingTypeArgument.getSource();
+				LightweightTypeReference existingTypeReference = existingTypeArgument.getTypeReference();
+				LightweightTypeReference boundTypeReference = boundTypeArgument.getTypeReference();
+				if (source == BoundTypeArgumentSource.INFERRED) {
+					if (existingTypeReference instanceof UnboundTypeReference) {
+						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeReference;
 						// resolve similar pending type arguments, too
 						if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
 							acceptHint(existingReference.getHandle(), boundTypeArgument);
 						}
-					} else if (existingTypeArgument.getTypeReference() != null && existingTypeArgument.getTypeReference() != boundTypeArgument.getTypeReference()) {
-						if (!existingTypeArgument.getTypeReference().isResolved()) {
+					} else if (existingTypeReference != null && existingTypeReference != boundTypeReference) {
+						if (!existingTypeReference.isResolved()) {
 							ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(getReferenceOwner());
-							collector.processPairedReferences(boundTypeArgument.getTypeReference(), existingTypeArgument.getTypeReference());
+							collector.processPairedReferences(boundTypeReference, existingTypeReference);
 						}
 					}
-				} else if (existingTypeArgument.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
-					if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
-						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+				} else if (source == BoundTypeArgumentSource.CONSTRAINT) {
+					if (existingTypeReference instanceof UnboundTypeReference) {
+						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeReference;
 						if (!existingReference.internalIsResolved()) {
-							existingReference.acceptHint(boundTypeArgument.getTypeReference(), 
+							existingReference.acceptHint(boundTypeReference, 
 								BoundTypeArgumentSource.INFERRED, boundTypeArgument, VarianceInfo.OUT, VarianceInfo.OUT);
+						}
+					}
+				} else if (source == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
+					if (existingTypeReference instanceof UnboundTypeReference) {
+						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeReference;
+						if (!isResolved(existingReference.getHandle())) {
+							if (!boundTypeReference.isWildcard()) {
+								existingReference.acceptHint(boundTypeReference, 
+										BoundTypeArgumentSource.INFERRED, boundTypeArgument, VarianceInfo.OUT, VarianceInfo.OUT);
+							}
 						}
 					}
 				}

@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.java8.compiler
 
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -18,9 +16,9 @@ import org.junit.Test
  * @author Miro Spoenemann - Copied and adapted to Java 8 output
  */
 @InjectWith(Java8RuntimeInjectorProvider)
-class CompilerBug435473Test extends AbstractXtendCompilerTest {
+class CompilerBug435473Test extends org.eclipse.xtend.core.tests.compiler.CompilerBug435473Test {
 	
-	@Test def test_01() {
+	@Test override test_01() {
 		'''
 			import java.util.List
 			class Outer {
@@ -43,7 +41,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_02() {
+	@Test override test_02() {
 		'''
 			import java.util.List
 			class Outer {
@@ -66,7 +64,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_03() {
+	@Test override test_03() {
 		'''
 			import java.util.List
 			class Outer {
@@ -89,7 +87,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_04() {
+	@Test override test_04() {
 		'''
 			import java.util.List
 			class Outer {
@@ -112,7 +110,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_05() {
+	@Test override test_05() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -135,7 +133,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_06() {
+	@Test override test_06() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -158,7 +156,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_07() {
+	@Test override test_07() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -181,7 +179,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_08() {
+	@Test override test_08() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -204,7 +202,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 
-	@Test def test_09() {
+	@Test override test_09() {
 		'''
 			import java.util.List
 			class Outer {
@@ -226,7 +224,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_10() {
+	@Test override test_10() {
 		'''
 			import java.util.List
 			class Outer {
@@ -248,7 +246,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_11() {
+	@Test override test_11() {
 		'''
 			import java.util.List
 			class Outer {
@@ -270,19 +268,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Ignore("Would be nice but too much effort ATM")
-	@Test def test_12() {
-		'''
-			import java.util.List
-			class Outer {
-				val List<? extends Functions.Function0<Number>> x = newArrayList([|1],  [|1.0])
-			}
-		'''.assertCompilesTo('''
-			IGNORED
-		''')
-	}
-	
-	@Test def test_13() {
+	@Test override test_13() {
 		'''
 			import java.util.List
 			class Outer {
@@ -305,7 +291,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def test_14() {
+	@Test override test_14() {
 		'''
 			import java.util.List
 			class Outer {
@@ -328,7 +314,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}	
 	
 	@Test
-	def test_15() {
+	override test_15() {
 		'''
 			import java.util.List
 			class Outer {
@@ -351,7 +337,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_16() {
+	override test_16() {
 		'''
 			import java.util.Map
 			class Outer {
@@ -376,7 +362,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_17() {
+	override test_17() {
 		'''
 			import java.util.Map
 			class Outer {
@@ -402,7 +388,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	
 	// TODO this should be a list of Comparator<String> - Would be nice but too much effort ATM
 	@Test
-	def test_18() {
+	override test_18() {
 		'''
 			class Outer {
 				val x = newArrayList( String.CASE_INSENSITIVE_ORDER, [ $0 <=> $1 ] )
@@ -422,7 +408,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_19() {
+	override test_19() {
 		'''
 			class Outer {
 				val x = newArrayList( String.CASE_INSENSITIVE_ORDER, [ String s1, s2| s1 <=> s2 ] )
@@ -442,63 +428,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_20() {
-		'''
-			import static org.junit.Assert.*
-			import static org.hamcrest.CoreMatchers.*
-			class Outer {
-				def void m() {
-					assertThat(#[1, 2.0, 3], hasItem(5))
-				}
-			}
-		'''.assertCompilesTo('''
-			import java.util.Collections;
-			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.hamcrest.CoreMatchers;
-			import org.hamcrest.Matcher;
-			import org.junit.Assert;
-			
-			@SuppressWarnings("all")
-			public class Outer {
-			  public void m() {
-			    Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));
-			    Assert.<List<Number>>assertThat(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);
-			  }
-			}
-		''')
-	}
-	
-	@Test
-	def test_21() {
-		'''
-			import static org.junit.Assert.*
-			import static org.hamcrest.CoreMatchers.*
-			class Outer {
-				def void m() {
-					assertThat(#{1, 2.0, 3}, hasItem(5))
-				}
-			}
-		'''.assertCompilesTo('''
-			import java.util.Collections;
-			import java.util.Set;
-			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.hamcrest.CoreMatchers;
-			import org.hamcrest.Matcher;
-			import org.junit.Assert;
-			
-			@SuppressWarnings("all")
-			public class Outer {
-			  public void m() {
-			    Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));
-			    Assert.<Set<Number>>assertThat(Collections.<Number>unmodifiableSet(CollectionLiterals.<Number>newHashSet(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);
-			  }
-			}
-		''')
-	}
-	
-	@Test
-	def test_31() {
+	override test_31() {
 		'''
 			import java.util.List
 			class Outer {
@@ -534,7 +464,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_32() {
+	override test_32() {
 		'''
 			import java.util.List
 			class Outer {
@@ -570,7 +500,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_33() {
+	override test_33() {
 		'''
 			import java.util.List
 			class Outer {
@@ -606,7 +536,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_34() {
+	override test_34() {
 		'''
 			import java.util.List
 			class Outer {
@@ -642,7 +572,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_35() {
+	override test_35() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -678,7 +608,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_36() {
+	override test_36() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -714,7 +644,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_37() {
+	override test_37() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -750,7 +680,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_38() {
+	override test_38() {
 		'''
 			import java.util.Set
 			class Outer {
@@ -786,7 +716,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def test_39() {
+	override test_39() {
 		'''
 			import java.util.List
 			class Outer {
@@ -821,7 +751,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_40() {
+	override test_40() {
 		'''
 			import java.util.List
 			class Outer {
@@ -856,7 +786,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_41() {
+	override test_41() {
 		'''
 			import java.util.List
 			class Outer {
@@ -891,23 +821,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	@Ignore("Would be nice but too much effort ATM")
-	def test_42() {
-		'''
-			import java.util.List
-			class Outer {
-				interface A {}
-				interface B extends A{}
-				interface C extends A{}
-				val List<? extends Functions.Function0<A>> x = newArrayList([| null as B],  [| null as C])
-			}
-		'''.assertCompilesTo('''
-			IGNORED
-		''')
-	}
-	
-	@Test
-	def test_43() {
+	override test_43() {
 		'''
 			import java.util.List
 			class Outer {
@@ -943,7 +857,7 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def test_44() {
+	override test_44() {
 		'''
 			import java.util.List
 			class Outer {
