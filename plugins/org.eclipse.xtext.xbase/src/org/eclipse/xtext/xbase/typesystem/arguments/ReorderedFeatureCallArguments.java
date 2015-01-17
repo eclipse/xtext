@@ -82,6 +82,9 @@ public class ReorderedFeatureCallArguments extends StandardFeatureCallArguments 
 	@Override
 	/* @Nullable */
 	protected LightweightTypeReference internalGetParameterType(int idx) {
+		if (idx >= parameters.size() + shiftedParameters.size()) {
+			return null;
+		}
 		JvmFormalParameter parameter = internalGetParameter(idx);
 		return toLightweightTypeReference(parameter);
 	}

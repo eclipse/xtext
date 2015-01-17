@@ -62,6 +62,11 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	}
 	
 	@Override
+	public LightweightTypeReference getDeclaredType(int idx) {
+		return internalGetParameterType(idx - receiverFixup);
+	}
+	
+	@Override
 	public int getArgumentCount() {
 		return arguments.size() + receiverFixup;
 	}
@@ -80,6 +85,9 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	
 	/* @Nullable */
 	protected LightweightTypeReference internalGetParameterType(int idx) {
+		if (idx >= parameters.size()) {
+			return null;
+		}
 		JvmFormalParameter parameter = parameters.get(idx);
 		return toLightweightTypeReference(parameter);
 	}
