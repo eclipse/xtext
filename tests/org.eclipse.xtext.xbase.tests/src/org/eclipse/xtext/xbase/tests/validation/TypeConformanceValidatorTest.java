@@ -395,6 +395,28 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		helper.assertError(xExpression, XbasePackage.Literals.XFEATURE_CALL, UNREACHABLE_CODE, "Unreachable code.");
 	}
 
+	@Test public void testByteCannotBeAssignedToBoolean() throws Exception {
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=457779
+		assertConformanceError("boolean", "byte");
+	}
+
+	@Test public void testShortCannotBeAssignedToBoolean() throws Exception {
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=457779
+		assertConformanceError("boolean", "char");
+	}
+
+	@Test public void testCharCannotBeAssignedToBoolean() throws Exception {
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=457779
+		assertConformanceError("boolean", "char");
+	}
+
+	protected void assertConformanceError(String leftType, String rightType)
+			throws Exception {
+		final XExpression xExpression = expression(
+				"{var " + leftType + " left; var " + rightType + " right; left = right;}", false);
+		helper.assertError(xExpression, XbasePackage.Literals.XFEATURE_CALL, INCOMPATIBLE_TYPES, "Cannot", rightType, leftType);
+	}
+
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
 		final XExpression xExpression = expression(expression, false);
