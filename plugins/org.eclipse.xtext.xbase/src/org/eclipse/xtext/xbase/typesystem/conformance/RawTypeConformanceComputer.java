@@ -1100,6 +1100,7 @@ public class RawTypeConformanceComputer {
 		switch (rightPrimitiveKind) {
 			case PRIMITIVE_BYTE :
 				switch (leftPrimitiveKind) { 
+					case PRIMITIVE_BOOLEAN:
 					case PRIMITIVE_VOID:
 					case PRIMITIVE_BYTE:
 						return false;
@@ -1109,6 +1110,7 @@ public class RawTypeConformanceComputer {
 			case PRIMITIVE_SHORT :
 			case PRIMITIVE_CHAR :
 				switch (leftPrimitiveKind) { 
+					case PRIMITIVE_BOOLEAN:
 					case PRIMITIVE_VOID:
 					case PRIMITIVE_BYTE:
 					case PRIMITIVE_SHORT:
