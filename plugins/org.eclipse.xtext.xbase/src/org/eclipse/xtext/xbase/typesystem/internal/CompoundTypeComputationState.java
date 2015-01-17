@@ -102,6 +102,15 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}
+	
+	@Override
+	public ITypeComputationState withoutFeatureScopeTracking() {
+		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
+		for (int i = 0; i < components.length; i++) {
+			result[i] = components[i].withoutFeatureScopeTracking();
+		}
+		return new CompoundTypeComputationState(owner, result);
+	}
 
 	@Override
 	public ITypeComputationState withNonVoidExpectation() {

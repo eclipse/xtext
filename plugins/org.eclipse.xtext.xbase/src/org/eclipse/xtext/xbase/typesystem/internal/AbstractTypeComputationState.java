@@ -164,6 +164,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	@Override
+	public TypeComputationStateWithoutFeatureScopeTracking withoutFeatureScopeTracking() {
+		return new TypeComputationStateWithoutFeatureScopeTracking(resolvedTypes, featureScopeSession, this);
+	}
+	
+	@Override
 	public AbstractTypeComputationState withNonVoidExpectation() {
 		return withNonVoidExpectation(resolvedTypes);
 	}
