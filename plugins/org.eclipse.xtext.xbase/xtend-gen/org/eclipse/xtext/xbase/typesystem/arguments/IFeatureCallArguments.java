@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,6 +26,11 @@ public interface IFeatureCallArguments {
    * @Nullable
    */
   public abstract XExpression getArgument(final int idx);
+  
+  /**
+   * Returns the declared parameter type.
+   */
+  public abstract LightweightTypeReference getDeclaredType(final int idx);
   
   /**
    * Returns the number of argument expressions where the receiver

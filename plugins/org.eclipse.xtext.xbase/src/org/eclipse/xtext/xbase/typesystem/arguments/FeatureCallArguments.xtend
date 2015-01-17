@@ -31,6 +31,11 @@ interface IFeatureCallArguments {
 	def XExpression getArgument(int idx)
 	
 	/**
+	 * Returns the declared parameter type.
+	 */
+	def LightweightTypeReference getDeclaredType(int idx)
+	
+	/**
 	 * Returns the number of argument expressions where the receiver
 	 * is considered to be an argument, too.
 	 */

@@ -62,6 +62,11 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	}
 	
 	@Override
+	public LightweightTypeReference getDeclaredType(int idx) {
+		return internalGetParameterType(idx - receiverFixup);
+	}
+	
+	@Override
 	public int getArgumentCount() {
 		return arguments.size() + receiverFixup;
 	}
