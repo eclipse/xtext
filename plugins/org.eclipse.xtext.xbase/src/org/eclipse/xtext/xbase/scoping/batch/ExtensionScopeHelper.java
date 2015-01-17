@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -65,6 +66,11 @@ public class ExtensionScopeHelper {
 				}
 			} else if (isArrayTypeMismatch(rawArgumentType, rawParameterType)) {
 				return false;
+			} else if (rawArgumentType.getKind() == LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+				if (!rawParameterType.getIdentifier().equals(Object.class.getName()) &&
+						((UnboundTypeReference) rawArgumentType).getAllHints().isEmpty()) {
+					return false;
+				}
 			}
 		}
 		return true;
