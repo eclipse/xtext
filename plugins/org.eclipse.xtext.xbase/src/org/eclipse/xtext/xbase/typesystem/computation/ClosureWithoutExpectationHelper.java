@@ -58,7 +58,11 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 		
 		ITypeAssigner typeAssigner = getState().withoutRootExpectation().assignTypes();
 		ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(typeAssigner, incompleteClosureType);
-		ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
+		ITypeComputationResult expressionResult;
+		if (getExpectation().isNoTypeExpectation())
+			expressionResult = closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
+		else
+			expressionResult = closureBodyTypeComputationState.withoutFeatureScopeTracking().computeTypes(getClosure().getExpression());
 		
 		FunctionTypeReference resultClosureType = processExpressionType(incompleteClosureType, expressionResult);
 		getExpectation().acceptActualType(resultClosureType, ConformanceFlags.UNCHECKED);

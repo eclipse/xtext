@@ -154,7 +154,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	public static class Shared {
 		final DefaultReentrantTypeResolver resolver;
 		final CancelIndicator monitor;
-		final IFeatureScopeTracker featureScopeTracker;
+		IFeatureScopeTracker featureScopeTracker;
 		final IssueSeverities issueSeverities;
 		
 		final Set<JvmIdentifiableElement> allTypes = Sets.newHashSet();

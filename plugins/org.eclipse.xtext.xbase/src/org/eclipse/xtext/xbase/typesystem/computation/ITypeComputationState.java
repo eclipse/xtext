@@ -93,6 +93,13 @@ public interface ITypeComputationState {
 	ITypeComputationState withoutRootExpectation();
 	
 	/**
+	 * Creates a state that does not contribute intermediate types to content assist because
+	 * it does not track feature scopes.
+	 * @since 2.8
+	 */
+	ITypeComputationState withoutFeatureScopeTracking();
+	
+	/**
 	 * Keep the current return expectation and assume an actual expectation that is not void.
 	 * 
 	 * Example:
