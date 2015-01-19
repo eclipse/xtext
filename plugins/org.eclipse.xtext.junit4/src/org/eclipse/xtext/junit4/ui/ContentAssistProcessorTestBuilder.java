@@ -23,6 +23,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.SWT;
@@ -548,6 +549,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		ISourceViewer sourceViewer = factory.createSourceViewer(shell, null, null, false, 0);
 		sourceViewer.configure(configuration);
 		sourceViewer.setDocument(xtextDocument);
+		((ProjectionViewer)sourceViewer).disableProjection();
 		return sourceViewer;
 	}
 
