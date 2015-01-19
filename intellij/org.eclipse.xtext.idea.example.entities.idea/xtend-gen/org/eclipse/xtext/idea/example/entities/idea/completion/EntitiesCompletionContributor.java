@@ -29,6 +29,7 @@ public class EntitiesCompletionContributor extends AbstractEntitiesCompletionCon
       protected void addCompletions(final CompletionParameters parameters, final ProcessingContext context, final CompletionResultSet result) {
         TemplateImpl _templateImpl = new TemplateImpl("entity name", "");
         final Procedure1<TemplateImpl> _function = new Procedure1<TemplateImpl>() {
+          @Override
           public void apply(final TemplateImpl it) {
             TextExpression _textExpression = new TextExpression("Name");
             it.addVariable(_textExpression, true);

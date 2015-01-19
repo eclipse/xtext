@@ -29,11 +29,13 @@ public class ResolveScopeBasedContainerManger implements IContainer.Manager {
   @Inject
   private Provider<ResolveScopeBasedContainer> resolveScopeBasedContainerProvider;
   
+  @Override
   public List<IContainer> getVisibleContainers(final IResourceDescription desc, final IResourceDescriptions resourceDescriptions) {
     IContainer _container = this.getContainer(desc, resourceDescriptions, true);
     return Collections.<IContainer>unmodifiableList(CollectionLiterals.<IContainer>newArrayList(_container));
   }
   
+  @Override
   public IContainer getContainer(final IResourceDescription desc, final IResourceDescriptions resourceDescriptions) {
     return this.getContainer(desc, resourceDescriptions, false);
   }
@@ -96,6 +98,7 @@ public class ResolveScopeBasedContainerManger implements IContainer.Manager {
       if (withDependencies) {
         ResolveScopeBasedContainer _get = this.resolveScopeBasedContainerProvider.get();
         final Procedure1<ResolveScopeBasedContainer> _function = new Procedure1<ResolveScopeBasedContainer>() {
+          @Override
           public void apply(final ResolveScopeBasedContainer it) {
             BaseXtextFile _xtextFile = ((PsiFileBasedResourceDescription)desc).getXtextFile();
             GlobalSearchScope _resolveScope = _xtextFile.getResolveScope();
@@ -123,6 +126,7 @@ public class ResolveScopeBasedContainerManger implements IContainer.Manager {
       if (_notEquals) {
         ResolveScopeBasedContainer _get = this.resolveScopeBasedContainerProvider.get();
         final Procedure1<ResolveScopeBasedContainer> _function = new Procedure1<ResolveScopeBasedContainer>() {
+          @Override
           public void apply(final ResolveScopeBasedContainer it) {
             GlobalSearchScope _xifexpression = null;
             if (withDependencies) {

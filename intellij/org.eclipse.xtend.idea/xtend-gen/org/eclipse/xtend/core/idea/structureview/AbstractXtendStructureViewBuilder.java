@@ -22,11 +22,13 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
  */
 @SuppressWarnings("all")
 public abstract class AbstractXtendStructureViewBuilder extends AbstractStructureViewBuilder {
+  @Override
   public XtextFileTreeModel createStructureViewModel(final Editor editor) {
     BaseXtextFile _xtextFile = this.getXtextFile();
     return new XtendFileTreeModel(_xtextFile, editor);
   }
   
+  @Override
   public void configureStructureViewTreeElementProvider(final IStructureViewTreeElementProvider structureViewTreeElementProvider, final XtextFileTreeModel model, final StructureView view) {
     if ((structureViewTreeElementProvider instanceof XtendStructureViewTreeElementProvider)) {
       if ((view instanceof TreeActionsOwner)) {

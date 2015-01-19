@@ -20,6 +20,7 @@ public abstract class LightXtendTest extends LightToolingTest {
     super(XtendFileType.INSTANCE);
   }
   
+  @Override
   protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
     LibraryUtil.addXtendLibrary(model);
   }

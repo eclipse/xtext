@@ -20,6 +20,7 @@ public abstract class LightXbaseTest extends LightToolingTest {
     super(XbaseFileType.INSTANCE);
   }
   
+  @Override
   protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
     LibraryUtil.addXbaseLibrary(model);
   }

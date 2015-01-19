@@ -46,6 +46,7 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
   @Extension
   private IPsiLogicalContainerProvider _iPsiLogicalContainerProvider;
   
+  @Override
   public PsiElement getTarget(@NotNull final DataContext dataContext) {
     PsiClass _xblockexpression = null;
     {
@@ -94,6 +95,7 @@ public class JvmDeclaredTypeHierarchyProvider extends JavaTypeHierarchyProvider 
     Resource _resource = element.getResource();
     EList<EObject> _contents = _resource.getContents();
     final Function1<EObject, PsiElement> _function = new Function1<EObject, PsiElement>() {
+      @Override
       public PsiElement apply(final EObject it) {
         return JvmDeclaredTypeHierarchyProvider.this._iPsiModelAssociations.getPsiElement(it);
       }

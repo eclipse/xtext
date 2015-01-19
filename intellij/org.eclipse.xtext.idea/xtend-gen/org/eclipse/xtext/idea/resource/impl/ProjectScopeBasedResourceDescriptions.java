@@ -32,6 +32,7 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
   @Inject
   private CompilerPhases compilerPhases;
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName qualifiedName, final boolean ignoreCase) {
     Iterable<IEObjectDescription> _xblockexpression = null;
     {
@@ -44,6 +45,7 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
     return _xblockexpression;
   }
   
+  @Override
   public IResourceDescription getResourceDescription(final URI uri) {
     IResourceDescription _xblockexpression = null;
     {
@@ -56,6 +58,7 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
     return _xblockexpression;
   }
   
+  @Override
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
     ArrayList<IResourceDescription> _xblockexpression = null;
     {
@@ -68,6 +71,7 @@ public class ProjectScopeBasedResourceDescriptions extends AbstractScopeBasedSel
     return _xblockexpression;
   }
   
+  @Override
   public void setContext(final Notifier ctx) {
     this.context = ctx;
     Project _project = ProjectAdapter.getProject(ctx);

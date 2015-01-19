@@ -15,6 +15,7 @@ public class ValueConverterErrorContext extends ErrorContext implements ISyntaxE
   @Accessors
   private final ValueConverterException valueConverterException;
   
+  @Override
   public String getDefaultMessage() {
     String _xblockexpression = null;
     {

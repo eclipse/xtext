@@ -25,10 +25,12 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class JvmOutlineTests extends AbstractOutlineTests {
+  @Override
   protected StructureViewComponent getStructureViewComponent(final StructureView structureView) {
     StructureViewComposite.StructureViewDescriptor[] _structureViews = ((StructureViewComposite) structureView).getStructureViews();
     StructureViewComposite.StructureViewDescriptor _last = IterableExtensions.<StructureViewComposite.StructureViewDescriptor>last(((Iterable<StructureViewComposite.StructureViewDescriptor>)Conversions.doWrapArray(_structureViews)));
     final Procedure1<StructureViewComponent> _function = new Procedure1<StructureViewComponent>() {
+      @Override
       public void apply(final StructureViewComponent it) {
         it.setActionActive(SyntheticMemberFilter.ID, true);
       }
@@ -37,6 +39,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
       ((StructureViewComponent) _last.structureView), _function);
   }
   
+  @Override
   protected String getNestedTypesExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -65,6 +68,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
+  @Override
   protected String getTypeParameter1Expectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -121,6 +125,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     this.testStructureView(_builder.toString(), _builder_1.toString());
   }
   
+  @Override
   protected String getOperatorDeclarationWithSymbolExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -134,6 +139,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
+  @Override
   protected String getOperatorDeclarationWithNameExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -147,6 +153,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
+  @Override
   protected String getDispatchMethodExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -166,6 +173,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
+  @Override
   protected String getAnnotationTypeExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -182,6 +190,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
+  @Override
   protected String getCreateExtensionInfoExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");
@@ -201,6 +210,7 @@ public class JvmOutlineTests extends AbstractOutlineTests {
     return _builder.toString();
   }
   
+  @Override
   protected String getCreateExtensionInfo_dispatchExpectation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Foo.xtend");

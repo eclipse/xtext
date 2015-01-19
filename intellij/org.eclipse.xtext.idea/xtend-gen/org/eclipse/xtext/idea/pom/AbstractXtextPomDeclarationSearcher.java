@@ -20,6 +20,7 @@ public abstract class AbstractXtextPomDeclarationSearcher extends PomDeclaration
     language.injectMembers(this);
   }
   
+  @Override
   public void findDeclarationsAt(final PsiElement element, final int offsetInElement, final Consumer<PomTarget> consumer) {
     Language _language = element.getLanguage();
     boolean _notEquals = (!Objects.equal(_language, this.language));

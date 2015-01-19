@@ -16,22 +16,26 @@ public class LeafXtextPsiElement extends LeafPsiElement implements XtextPsiEleme
     super(type, text);
   }
   
+  @Override
   public IXtextLanguage getXtextLanguage() {
     IElementType _elementType = this.getElementType();
     Language _language = _elementType.getLanguage();
     return ((IXtextLanguage) _language);
   }
   
+  @Override
   public BaseXtextFile getXtextFile() {
     PsiFile _containingFile = this.getContainingFile();
     return ((BaseXtextFile) _containingFile);
   }
   
+  @Override
   public Resource getResource() {
     BaseXtextFile _xtextFile = this.getXtextFile();
     return _xtextFile.getResource();
   }
   
+  @Override
   public INode getINode() {
     BaseXtextFile _xtextFile = this.getXtextFile();
     return _xtextFile.getINode(this);

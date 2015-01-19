@@ -41,6 +41,7 @@ public class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference,
     this.language.injectMembers(this);
   }
   
+  @Override
   public void processQuery(final ReferencesSearch.SearchParameters queryParameters, final Processor<PsiReference> consumer) {
     final PsiElement element = queryParameters.getElementToSearch();
     Language _language = element.getLanguage();
@@ -53,6 +54,7 @@ public class JvmElementsReferencesSearch extends QueryExecutorBase<PsiReference,
         EObject _eObject = ((PsiNamedEObject)element).getEObject();
         Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(_eObject);
         final Function1<EObject, PsiElement> _function = new Function1<EObject, PsiElement>() {
+          @Override
           public PsiElement apply(final EObject it) {
             return JvmElementsReferencesSearch.this._iPsiModelAssociations.getPsiElement(it);
           }

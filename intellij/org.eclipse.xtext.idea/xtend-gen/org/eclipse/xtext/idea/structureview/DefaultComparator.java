@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 @SuppressWarnings("all")
 public class DefaultComparator implements Comparator<TreeElement> {
+  @Override
   public int compare(final TreeElement treeElement, final TreeElement treeElement2) {
     int _xblockexpression = (int) 0;
     {

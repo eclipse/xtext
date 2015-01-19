@@ -47,6 +47,7 @@ public class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
     return _builder.toString();
   }
   
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     IdeaTestFixtureFactory _fixtureFactory = IdeaTestFixtureFactory.getFixtureFactory();
@@ -96,6 +97,7 @@ public class ResolveScopeBasedContainerManagerTest extends UsefulTestCase {
     _xtextLanguage.injectMembers(this);
   }
   
+  @Override
   protected void tearDown() throws Exception {
     this.files = null;
     this.myFixture.tearDown();

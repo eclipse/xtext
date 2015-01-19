@@ -23,6 +23,7 @@ public class BaseXtextElementDescriptionProvider implements ElementDescriptionPr
     language.injectMembers(this);
   }
   
+  @Override
   public final String getElementDescription(final PsiElement element, final ElementDescriptionLocation location) {
     String _xifexpression = null;
     Language _language = null;

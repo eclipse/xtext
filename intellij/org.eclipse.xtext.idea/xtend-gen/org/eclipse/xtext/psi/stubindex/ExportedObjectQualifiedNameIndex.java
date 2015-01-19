@@ -8,6 +8,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 public class ExportedObjectQualifiedNameIndex extends StringStubIndexExtension<BaseXtextFile> {
   public static StubIndexKey<String, BaseXtextFile> KEY = StubIndexKey.<String, BaseXtextFile>createIndexKey("ExportedObjectQualifiedNameIndex");
   
+  @Override
   public StubIndexKey<String, BaseXtextFile> getKey() {
     return ExportedObjectQualifiedNameIndex.KEY;
   }

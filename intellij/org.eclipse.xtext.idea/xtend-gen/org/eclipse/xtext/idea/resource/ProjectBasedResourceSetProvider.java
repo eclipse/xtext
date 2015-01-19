@@ -19,6 +19,7 @@ public class ProjectBasedResourceSetProvider implements IResourceSetProvider {
   @Inject
   private Provider<XtextResourceSet> resourceSetProvider;
   
+  @Override
   public ResourceSet get(final Object context) {
     XtextResourceSet _xblockexpression = null;
     {

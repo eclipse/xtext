@@ -45,6 +45,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
   @Inject
   private ExportedObjectQualifiedNameIndex exportedObjectQualifiedNameIndex;
   
+  @Override
   protected Iterable<? extends ISelectable> getSelectables() {
     return this.getResourceDescriptions();
   }
@@ -70,10 +71,12 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
       final PsiManager psiManager = PsiManager.getInstance(_project);
       final ArrayList<IResourceDescription> descriptions = CollectionLiterals.<IResourceDescription>newArrayList();
       final Function1<Collection<VirtualFile>, Boolean> _function = new Function1<Collection<VirtualFile>, Boolean>() {
+        @Override
         public Boolean apply(final Collection<VirtualFile> files) {
           boolean _xblockexpression = false;
           {
             final Function1<VirtualFile, PsiFile> _function = new Function1<VirtualFile, PsiFile>() {
+              @Override
               public PsiFile apply(final VirtualFile it) {
                 return psiManager.findFile(it);
               }
@@ -95,11 +98,13 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
     return _xblockexpression;
   }
   
+  @Override
   public boolean isEmpty() {
     Boolean _xblockexpression = null;
     {
       final boolean[] emptinessCheck = { true };
       final Function1<Collection<VirtualFile>, Boolean> _function = new Function1<Collection<VirtualFile>, Boolean>() {
+        @Override
         public Boolean apply(final Collection<VirtualFile> files) {
           boolean _xblockexpression = false;
           {
@@ -119,12 +124,14 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
     return (_xblockexpression).booleanValue();
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName qualifiedName, final boolean ignoreCase) {
     String _string = qualifiedName.toString();
     Project _project = this.scope.getProject();
     Collection<BaseXtextFile> _get = this.exportedObjectQualifiedNameIndex.get(_string, _project, this.scope);
     ArrayList<IEObjectDescription> _newArrayList = CollectionLiterals.<IEObjectDescription>newArrayList();
     final Function2<ArrayList<IEObjectDescription>, BaseXtextFile, ArrayList<IEObjectDescription>> _function = new Function2<ArrayList<IEObjectDescription>, BaseXtextFile, ArrayList<IEObjectDescription>>() {
+      @Override
       public ArrayList<IEObjectDescription> apply(final ArrayList<IEObjectDescription> allDescriptions, final BaseXtextFile xtextFile) {
         ArrayList<IEObjectDescription> _xblockexpression = null;
         {
@@ -147,6 +154,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
       PsiFile[] _filesByName = FilenameIndex.getFilesByName(_project, fileName, this.scope);
       Iterable<BaseXtextFile> _filter = Iterables.<BaseXtextFile>filter(((Iterable<?>)Conversions.doWrapArray(_filesByName)), BaseXtextFile.class);
       final Function1<BaseXtextFile, Boolean> _function = new Function1<BaseXtextFile, Boolean>() {
+        @Override
         public Boolean apply(final BaseXtextFile it) {
           URI _uRI = it.getURI();
           return Boolean.valueOf(uri.equals(_uRI));
@@ -174,6 +182,7 @@ public abstract class AbstractScopeBasedSelectable extends AbstractCompoundSelec
     Project _project = this.scope.getProject();
     Collection<FileType> _allKeys = _instance.<FileType>getAllKeys(FileTypeIndex.NAME, _project);
     final Function1<FileType, Boolean> _function = new Function1<FileType, Boolean>() {
+      @Override
       public Boolean apply(final FileType it) {
         return Boolean.valueOf(AbstractScopeBasedSelectable.this.isXtextLanguage(it));
       }

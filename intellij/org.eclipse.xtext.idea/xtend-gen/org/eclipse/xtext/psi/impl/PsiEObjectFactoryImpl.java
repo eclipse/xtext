@@ -58,6 +58,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
   @Extension
   private TokenSourceProvider tokenSourceProvider;
   
+  @Override
   public ASTNode createLeafIdentifier(final String name, final ASTNode context) {
     LeafElement _xblockexpression = null;
     {
@@ -66,6 +67,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       IElementType _elementType_1 = context.getElementType();
       LeafElement _leaf = ASTFactory.leaf(_elementType_1, name);
       final Procedure1<LeafElement> _function = new Procedure1<LeafElement>() {
+        @Override
         public void apply(final LeafElement it) {
           CodeEditUtil.setNodeGenerated(it, true);
         }
@@ -75,6 +77,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
     return _xblockexpression;
   }
   
+  @Override
   public ASTNode createCompositeIdentifier(final String name, final String currentName, @Extension final ASTNode context) {
     FileElement _xblockexpression = null;
     {
@@ -85,6 +88,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       IElementType _elementType = context.getElementType();
       ASTNode _parse = _createParser.parse(_elementType, builder);
       final Procedure1<TreeElement> _function = new Procedure1<TreeElement>() {
+        @Override
         public void apply(final TreeElement it) {
           PsiEObjectFactoryImpl.this.assertNode(it);
           CodeEditUtil.setNodeGeneratedRecursively(it, true);
@@ -113,6 +117,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
       Lexer _createLexer = this.parserDefinition.createLexer(_project);
       PsiBuilder _createBuilder = _instance.createBuilder(this.parserDefinition, _createLexer, text);
       final Procedure1<PsiBuilder> _function = new Procedure1<PsiBuilder>() {
+        @Override
         public void apply(final PsiBuilder it) {
           Integer _userData = context.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
           it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, _userData);
@@ -125,6 +130,7 @@ public class PsiEObjectFactoryImpl implements PsiEObjectFactory {
   
   protected void assertNode(final TreeElement treeElement) {
     final Function1<TreeElement, Boolean> _function = new Function1<TreeElement, Boolean>() {
+      @Override
       public Boolean apply(final TreeElement element) {
         boolean _xblockexpression = false;
         {

@@ -69,6 +69,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     if (_notEquals) {
       AlphaSorter _alphaSorter = new AlphaSorter();
       final Procedure1<AlphaSorter> _function = new Procedure1<AlphaSorter>() {
+        @Override
         public void apply(final AlphaSorter it) {
           it.setComparator(comparator);
         }
@@ -86,11 +87,13 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     this.suitableClasses = _newArrayList_4;
   }
   
+  @Override
   protected BaseXtextFile getPsiFile() {
     PsiFile _psiFile = super.getPsiFile();
     return ((BaseXtextFile) _psiFile);
   }
   
+  @Override
   public StructureViewTreeElement getRoot() {
     XtextFileTreeElement _xblockexpression = null;
     {
@@ -102,6 +105,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     return _xblockexpression;
   }
   
+  @Override
   public boolean isAlwaysLeaf(final StructureViewTreeElement element) {
     boolean _xifexpression = false;
     if ((element instanceof AbstractStructureViewTreeElement)) {
@@ -112,22 +116,27 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     return _xifexpression;
   }
   
+  @Override
   public boolean isAlwaysShowsPlus(final StructureViewTreeElement element) {
     return false;
   }
   
+  @Override
   public Filter[] getFilters() {
     return ((Filter[])Conversions.unwrapArray(this.filters, Filter.class));
   }
   
+  @Override
   public Sorter[] getSorters() {
     return ((Sorter[])Conversions.unwrapArray(this.sorters, Sorter.class));
   }
   
+  @Override
   public Grouper[] getGroupers() {
     return ((Grouper[])Conversions.unwrapArray(this.groupers, Grouper.class));
   }
   
+  @Override
   public Collection<NodeProvider> getNodeProviders() {
     return this.nodeProviders;
   }
@@ -136,6 +145,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     return new DefaultComparator();
   }
   
+  @Override
   public Object getCurrentEditorElement() {
     Object _xblockexpression = null;
     {
@@ -160,6 +170,7 @@ public class XtextFileTreeModel extends TextEditorBasedStructureViewModel implem
     return super.getCurrentEditorElement();
   }
   
+  @Override
   protected Class[] getSuitableClasses() {
     return ((Class[])Conversions.unwrapArray(this.suitableClasses, Class.class));
   }

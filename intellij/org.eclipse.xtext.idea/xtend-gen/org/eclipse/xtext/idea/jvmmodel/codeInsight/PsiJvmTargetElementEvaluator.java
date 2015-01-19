@@ -7,6 +7,7 @@ import com.intellij.psi.impl.light.LightElement;
 
 @SuppressWarnings("all")
 public class PsiJvmTargetElementEvaluator implements TargetElementEvaluator {
+  @Override
   public PsiElement getElementByReference(final PsiReference ref, final int flags) {
     PsiElement _switchResult = null;
     PsiElement _resolve = ref.resolve();
@@ -24,6 +25,7 @@ public class PsiJvmTargetElementEvaluator implements TargetElementEvaluator {
     return _switchResult;
   }
   
+  @Override
   public boolean includeSelfInGotoImplementation(final PsiElement element) {
     return true;
   }

@@ -20,10 +20,12 @@ import org.eclipse.xtend.core.idea.structureview.XtendFeatureTreeElement;
 public class SyntheticMemberFilter implements Filter {
   public final static String ID = "SHOW_NO_SYNTHETIC";
   
+  @Override
   public boolean isReverted() {
     return true;
   }
   
+  @Override
   public boolean isVisible(final TreeElement treeNode) {
     boolean _xifexpression = false;
     if ((treeNode instanceof XtendFeatureTreeElement)) {
@@ -35,10 +37,12 @@ public class SyntheticMemberFilter implements Filter {
     return _xifexpression;
   }
   
+  @Override
   public String getName() {
     return SyntheticMemberFilter.ID;
   }
   
+  @Override
   public ActionPresentation getPresentation() {
     return new ActionPresentationData("Show Synthetic Members", null, null);
   }

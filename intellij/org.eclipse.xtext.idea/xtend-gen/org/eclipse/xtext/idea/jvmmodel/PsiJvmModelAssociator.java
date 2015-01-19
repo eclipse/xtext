@@ -33,6 +33,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
   @Extension
   private IPsiModelAssociations psiAssociations;
   
+  @Override
   public void associate(final EObject sourceElement, final EObject jvmElement) {
     super.associate(sourceElement, jvmElement);
     final PsiElementProvider psiElementProvider = this.createPsiElementProvider(sourceElement, jvmElement);
@@ -42,6 +43,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
     }
   }
   
+  @Override
   public void associatePrimary(final EObject sourceElement, final EObject jvmElement) {
     super.associatePrimary(sourceElement, jvmElement);
     final PsiElementProvider psiElementProvider = this.createPsiElementProvider(sourceElement, jvmElement);
@@ -58,6 +60,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
       if (jvmElement instanceof JvmDeclaredType) {
         _matched=true;
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             PsiClass _xifexpression = null;
             JvmDeclaredType _declaringType = ((JvmDeclaredType)jvmElement).getDeclaringType();
@@ -77,6 +80,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
                 }
                 PsiClass[] _innerClasses = psiClass.getInnerClasses();
                 final Function1<PsiClass, Boolean> _function = new Function1<PsiClass, Boolean>() {
+                  @Override
                   public Boolean apply(final PsiClass it) {
                     EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                     return Boolean.valueOf(Objects.equal(_userData, jvmElement));
@@ -96,6 +100,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
       if (jvmElement instanceof JvmExecutable) {
         _matched=true;
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             PsiMethod _xblockexpression = null;
             {
@@ -108,6 +113,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               }
               PsiMethod[] _methods = psiClass.getMethods();
               final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
+                @Override
                 public Boolean apply(final PsiMethod it) {
                   EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                   return Boolean.valueOf(Objects.equal(_userData, jvmElement));
@@ -125,6 +131,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
       if (jvmElement instanceof JvmField) {
         _matched=true;
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             PsiField _xblockexpression = null;
             {
@@ -137,6 +144,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               }
               PsiField[] _fields = psiClass.getFields();
               final Function1<PsiField, Boolean> _function = new Function1<PsiField, Boolean>() {
+                @Override
                 public Boolean apply(final PsiField it) {
                   EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                   return Boolean.valueOf(Objects.equal(_userData, jvmElement));
@@ -154,6 +162,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
       if (jvmElement instanceof JvmFormalParameter) {
         _matched=true;
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             PsiParameter _xblockexpression = null;
             {
@@ -167,6 +176,7 @@ public class PsiJvmModelAssociator extends JvmModelAssociator {
               PsiParameterList _parameterList = psiMethod.getParameterList();
               PsiParameter[] _parameters = _parameterList.getParameters();
               final Function1<PsiParameter, Boolean> _function = new Function1<PsiParameter, Boolean>() {
+                @Override
                 public Boolean apply(final PsiParameter it) {
                   EObject _userData = it.<EObject>getUserData(JvmPsiClassImpl.JVM_ELEMENT_KEY);
                   return Boolean.valueOf(Objects.equal(_userData, jvmElement));

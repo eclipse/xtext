@@ -48,29 +48,36 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
     this.language = language;
   }
   
+  @Override
   public String[] getAllClassNames() {
     return ((String[])Conversions.unwrapArray(this.jvmDeclaredTypeShortNameIndex.getAllKeys(this.project), String.class));
   }
   
+  @Override
   public void getAllClassNames(final HashSet<String> dest) {
     String[] _allClassNames = this.getAllClassNames();
     Iterables.<String>addAll(dest, ((Iterable<? extends String>)Conversions.doWrapArray(_allClassNames)));
   }
   
+  @Override
   public String[] getAllFieldNames() {
     return ArrayUtil.EMPTY_STRING_ARRAY;
   }
   
+  @Override
   public void getAllFieldNames(final HashSet<String> set) {
   }
   
+  @Override
   public String[] getAllMethodNames() {
     return ArrayUtil.EMPTY_STRING_ARRAY;
   }
   
+  @Override
   public void getAllMethodNames(final HashSet<String> set) {
   }
   
+  @Override
   public PsiClass[] getClassesByName(final String name, final GlobalSearchScope scope) {
     ArrayList<JvmPsiClass> _xblockexpression = null;
     {
@@ -89,22 +96,27 @@ public class JvmTypesShortNamesCache extends PsiShortNamesCache {
     return ((PsiClass[])Conversions.unwrapArray(_xblockexpression, PsiClass.class));
   }
   
+  @Override
   public PsiField[] getFieldsByName(final String name, final GlobalSearchScope scope) {
     return JvmTypesShortNamesCache.NO_FIELDS;
   }
   
+  @Override
   public PsiField[] getFieldsByNameIfNotMoreThan(final String name, final GlobalSearchScope scope, final int maxCount) {
     return JvmTypesShortNamesCache.NO_FIELDS;
   }
   
+  @Override
   public PsiMethod[] getMethodsByName(final String name, final GlobalSearchScope scope) {
     return JvmTypesShortNamesCache.NO_METHODS;
   }
   
+  @Override
   public PsiMethod[] getMethodsByNameIfNotMoreThan(final String name, final GlobalSearchScope scope, final int maxCount) {
     return JvmTypesShortNamesCache.NO_METHODS;
   }
   
+  @Override
   public boolean processMethodsWithName(final String name, final GlobalSearchScope scope, final Processor<PsiMethod> processor) {
     PsiMethod[] _methodsByName = this.getMethodsByName(name, scope);
     return ContainerUtil.<PsiMethod>process(_methodsByName, processor);

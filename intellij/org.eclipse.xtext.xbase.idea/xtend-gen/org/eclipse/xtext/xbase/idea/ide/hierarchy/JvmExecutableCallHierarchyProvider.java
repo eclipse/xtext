@@ -20,8 +20,10 @@ public class JvmExecutableCallHierarchyProvider extends JavaCallHierarchyProvide
   @Extension
   private IPsiJvmModelAssociations _iPsiJvmModelAssociations;
   
+  @Override
   public PsiElement getTarget(final DataContext dataContext) {
     final DataContext _function = new DataContext() {
+      @Override
       public Object getData(final String dataId) {
         Object _xifexpression = null;
         String _name = CommonDataKeys.PSI_ELEMENT.getName();
@@ -38,6 +40,7 @@ public class JvmExecutableCallHierarchyProvider extends JavaCallHierarchyProvide
     return super.getTarget(_function);
   }
   
+  @Override
   public HierarchyBrowser createHierarchyBrowser(final PsiElement target) {
     Project _project = target.getProject();
     return new JvmExecutableCallHierarchyBrowser(_project, ((PsiMethod) target));

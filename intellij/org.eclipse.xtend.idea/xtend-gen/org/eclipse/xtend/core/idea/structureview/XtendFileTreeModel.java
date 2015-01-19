@@ -26,6 +26,7 @@ public class XtendFileTreeModel extends XtextFileTreeModel {
     this.nodeProviders.add(_xtendShowInheritedNodeProvider);
   }
   
+  @Override
   public Comparator<TreeElement> getComparator() {
     return new XtendTreeElementComparator();
   }

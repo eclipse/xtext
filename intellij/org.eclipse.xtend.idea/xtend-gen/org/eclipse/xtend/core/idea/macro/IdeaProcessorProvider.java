@@ -41,6 +41,7 @@ public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
   @Extension
   private IPsiModelAssociations _iPsiModelAssociations;
   
+  @Override
   public Object getProcessorInstance(final JvmType type) {
     try {
       Object _xblockexpression = null;
@@ -59,6 +60,7 @@ public class IdeaProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
         PathsList _pathsList = _classes.getPathsList();
         final List<VirtualFile> roots = _pathsList.getVirtualFiles();
         final Function1<VirtualFile, URL> _function = new Function1<VirtualFile, URL>() {
+          @Override
           public URL apply(final VirtualFile it) {
             try {
               String _path = it.getPath();

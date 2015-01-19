@@ -50,6 +50,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   public static class KeywordLookupElement extends LookupElement {
     private final Keyword keyword;
     
+    @Override
     public String getLookupString() {
       return this.keyword.getValue();
     }
@@ -108,6 +109,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       super("dispreferKeywords");
     }
     
+    @Override
     public Boolean weigh(final LookupElement element) {
       return Boolean.valueOf((element instanceof AbstractCompletionContributor.KeywordLookupElement));
     }
@@ -126,10 +128,12 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     lang.injectMembers(this);
   }
   
+  @Override
   public void fillCompletionVariants(final CompletionParameters parameters, final CompletionResultSet result) {
     CompletionSorter _completionSorter = this.getCompletionSorter(parameters, result);
     final CompletionResultSet sortedResult = result.withRelevanceSorter(_completionSorter);
     final Procedure1<CompletionResult> _function = new Procedure1<CompletionResult>() {
+      @Override
       public void apply(final CompletionResult it) {
         LookupElement _lookupElement = it.getLookupElement();
         boolean _isValidProposal = AbstractCompletionContributor.this.isValidProposal(_lookupElement, parameters);
@@ -183,9 +187,11 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     XtextResource _resource = this.getResource(parameters);
     final ContentAssistContext[] contexts = delegate.create(_text, _selection, _offset, _resource);
     final Procedure1<ContentAssistContext> _function = new Procedure1<ContentAssistContext>() {
+      @Override
       public void apply(final ContentAssistContext c) {
         ImmutableList<AbstractElement> _firstSetGrammarElements = c.getFirstSetGrammarElements();
         final Procedure1<AbstractElement> _function = new Procedure1<AbstractElement>() {
+          @Override
           public void apply(final AbstractElement e) {
             AbstractCompletionContributor.this.createProposal(e, c, parameters, result);
           }
@@ -205,6 +211,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
       }
       ContentAssistContextFactory _get = this.delegates.get();
       final Procedure1<ContentAssistContextFactory> _function = new Procedure1<ContentAssistContextFactory>() {
+        @Override
         public void apply(final ContentAssistContextFactory it) {
           it.setPool(AbstractCompletionContributor.this.pool);
         }
@@ -216,6 +223,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected String getText(final CompletionParameters parameters) {
     final Computable<String> _function = new Computable<String>() {
+      @Override
       public String compute() {
         PsiFile _originalFile = parameters.getOriginalFile();
         return _originalFile.getText();
@@ -237,6 +245,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected OffsetMap getOffsets(final CompletionParameters parameters) {
     final Computable<OffsetMap> _function = new Computable<OffsetMap>() {
+      @Override
       public OffsetMap compute() {
         PsiElement _position = parameters.getPosition();
         CompletionContext _userData = _position.<CompletionContext>getUserData(CompletionContext.COMPLETION_CONTEXT_KEY);
@@ -248,6 +257,7 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   protected XtextResource getResource(final CompletionParameters parameters) {
     final Computable<XtextResource> _function = new Computable<XtextResource>() {
+      @Override
       public XtextResource compute() {
         PsiFile _originalFile = parameters.getOriginalFile();
         Resource _resource = ((BaseXtextFile) _originalFile).getResource();

@@ -59,10 +59,12 @@ public class AbstractModelTestCase extends LightToolingTest implements ModelChec
     super(fileType);
   }
   
+  @Override
   protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
     LibraryUtil.addXbaseLibrary(model);
   }
   
+  @Override
   public <T extends EObject> T checkModel(final String code, final boolean validate) {
     T _xblockexpression = null;
     {

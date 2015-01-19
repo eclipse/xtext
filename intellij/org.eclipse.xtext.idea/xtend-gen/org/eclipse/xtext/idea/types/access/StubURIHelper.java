@@ -51,6 +51,7 @@ public class StubURIHelper implements URIHelperConstants {
       final String topLevelTypeName = this.trimBrackets(_trimInnerType);
       StringBuilder _xifexpression = null;
       final Function1<Class<?>, Boolean> _function = new Function1<Class<?>, Boolean>() {
+        @Override
         public Boolean apply(final Class<?> type) {
           String _name = type.getName();
           return Boolean.valueOf(Objects.equal(_name, topLevelTypeName));

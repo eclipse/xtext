@@ -19,6 +19,7 @@ public class StubBasedTypeScope extends AbstractTypeScope {
     super(typeProvider, qualifiedNameConverter, filter);
   }
   
+  @Override
   protected Iterable<IEObjectDescription> internalGetAllElements() {
     return CollectionLiterals.<IEObjectDescription>emptyList();
   }

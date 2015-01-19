@@ -24,18 +24,22 @@ public class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, P
     this.grammarElement = grammarElement;
   }
   
+  @Override
   public PsiEObject createPsi(final PsiEObjectStub stub) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public PsiEObjectStub createStub(final PsiEObject psi, final StubElement parentStub) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public PsiEObjectStub deserialize(final StubInputStream dataStream, final StubElement parentStub) throws IOException {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public String getExternalId() {
     Language _language = this.getLanguage();
     String _plus = (_language + ".");
@@ -43,14 +47,17 @@ public class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, P
     return (_plus + _string);
   }
   
+  @Override
   public void indexStub(final PsiEObjectStub stub, final IndexSink sink) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public void serialize(final PsiEObjectStub stub, final StubOutputStream dataStream) throws IOException {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public boolean shouldCreateStub(final ASTNode node) {
     return false;
   }

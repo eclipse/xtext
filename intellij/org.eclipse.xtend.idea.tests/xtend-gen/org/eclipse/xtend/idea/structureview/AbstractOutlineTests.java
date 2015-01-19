@@ -490,6 +490,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   
   protected void testStructureView(final String model, final String expected) {
     final Consumer<StructureViewComponent> _function = new Consumer<StructureViewComponent>() {
+      @Override
       public void consume(final StructureViewComponent component) {
         AbstractOutlineTests.this.assertTreeStructure(component, expected);
       }

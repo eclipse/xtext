@@ -19,22 +19,27 @@ public class PsiFileBasedResourceDescription extends AbstractResourceDescription
   @Accessors
   private final BaseXtextFile xtextFile;
   
+  @Override
   protected List<IEObjectDescription> computeExportedObjects() {
     return this.xtextFile.getExportedObjects();
   }
   
+  @Override
   public Iterable<QualifiedName> getImportedNames() {
     return CollectionLiterals.<QualifiedName>emptyList();
   }
   
+  @Override
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     return CollectionLiterals.<IReferenceDescription>emptyList();
   }
   
+  @Override
   public URI getURI() {
     return this.xtextFile.getURI();
   }
   
+  @Override
   public String toString() {
     Class<? extends PsiFileBasedResourceDescription> _class = this.getClass();
     String _name = _class.getName();

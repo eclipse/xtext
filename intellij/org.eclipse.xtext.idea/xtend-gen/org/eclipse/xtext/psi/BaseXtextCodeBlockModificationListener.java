@@ -26,6 +26,7 @@ public class BaseXtextCodeBlockModificationListener implements PsiTreeChangePrep
     this.psiModificationTracker = ((PsiModificationTrackerImpl) psiModificationTracker);
   }
   
+  @Override
   public void treeChanged(final PsiTreeChangeEventImpl event) {
     boolean _and = false;
     PsiFile _file = event.getFile();

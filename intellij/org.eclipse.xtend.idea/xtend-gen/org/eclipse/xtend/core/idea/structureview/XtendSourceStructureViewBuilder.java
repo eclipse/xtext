@@ -25,6 +25,7 @@ public class XtendSourceStructureViewBuilder extends AbstractXtendStructureViewB
   @Inject
   private Provider<XtendStructureViewTreeElementProvider> xtendStructureViewTreeElementProviderProvider;
   
+  @Override
   public IStructureViewTreeElementProvider createStructureViewTreeElementProvider() {
     XtendStructureViewTreeElementProvider _xblockexpression = null;
     {

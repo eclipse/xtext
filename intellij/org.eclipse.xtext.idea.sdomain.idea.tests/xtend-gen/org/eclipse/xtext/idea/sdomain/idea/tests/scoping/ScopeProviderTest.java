@@ -59,6 +59,7 @@ public class ScopeProviderTest extends LightCodeInsightFixtureTestCase {
     final ICrossReferenceDescription crossReferenceDescription = crossReferenceDescriptionProvider.get(fileRoot, SDomainPackage.Literals.FILE__ELEMENTS, null);
     Iterable<IEObjectDescription> _variants = crossReferenceDescription.getVariants();
     final Function1<IEObjectDescription, QualifiedName> _function = new Function1<IEObjectDescription, QualifiedName>() {
+      @Override
       public QualifiedName apply(final IEObjectDescription it) {
         return it.getName();
       }
@@ -116,6 +117,7 @@ public class ScopeProviderTest extends LightCodeInsightFixtureTestCase {
     final ICrossReferenceDescription crossReferenceDescription = crossReferenceDescriptionProvider.get(entity, SDomainPackage.Literals.PROPERTY__TYPE, null);
     Iterable<IEObjectDescription> _variants = crossReferenceDescription.getVariants();
     final Function1<IEObjectDescription, QualifiedName> _function = new Function1<IEObjectDescription, QualifiedName>() {
+      @Override
       public QualifiedName apply(final IEObjectDescription it) {
         return it.getName();
       }
@@ -173,6 +175,7 @@ public class ScopeProviderTest extends LightCodeInsightFixtureTestCase {
     final ICrossReferenceDescription crossReferenceDescription = crossReferenceDescriptionProvider.get(entity, SDomainPackage.Literals.PROPERTY__TYPE, null);
     Iterable<IEObjectDescription> _variants = crossReferenceDescription.getVariants();
     final Function1<IEObjectDescription, QualifiedName> _function = new Function1<IEObjectDescription, QualifiedName>() {
+      @Override
       public QualifiedName apply(final IEObjectDescription it) {
         return it.getName();
       }

@@ -41,39 +41,47 @@ public abstract class AbstractXtextParserDefinition implements ParserDefinition 
   private IElementTypeProvider elementTypeProvider;
   
   @NotNull
+  @Override
   public Lexer createLexer(final Project project) {
     return this.lexerProvider.get();
   }
   
+  @Override
   public IFileElementType getFileNodeType() {
     return this.elementTypeProvider.getFileType();
   }
   
   @NotNull
+  @Override
   public TokenSet getWhitespaceTokens() {
     return TokenSet.EMPTY;
   }
   
   @NotNull
+  @Override
   public TokenSet getCommentTokens() {
     return TokenSet.EMPTY;
   }
   
   @NotNull
+  @Override
   public TokenSet getStringLiteralElements() {
     return this.tokenTypeProvider.getStringLiteralTokens();
   }
   
   @NotNull
+  @Override
   public PsiParser createParser(final Project project) {
     return this.psiParserProvider.get();
   }
   
+  @Override
   public ParserDefinition.SpaceRequirements spaceExistanceTypeBetweenTokens(final ASTNode left, final ASTNode right) {
     Lexer _get = this.lexerProvider.get();
     return LanguageUtil.canStickTokensTogetherByLexer(left, right, _get);
   }
   
+  @Override
   public PsiElement createElement(final ASTNode node) {
     PsiEObjectImpl<StubElement> _xifexpression = null;
     IElementType _elementType = node.getElementType();

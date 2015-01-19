@@ -23,14 +23,17 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class XtendShowInheritedNodeProvider implements NodeProvider<TreeElement> {
   public final static String ID = "XTEND_SHOW_INHERITED";
   
+  @Override
   public Collection<TreeElement> provideNodes(final TreeElement node) {
     return CollectionLiterals.<TreeElement>emptyList();
   }
   
+  @Override
   public String getName() {
     return XtendShowInheritedNodeProvider.ID;
   }
   
+  @Override
   public ActionPresentation getPresentation() {
     String _message = IdeBundle.message("action.structureview.show.inherited");
     return new ActionPresentationData(_message, null, AllIcons.Hierarchy.Supertypes);

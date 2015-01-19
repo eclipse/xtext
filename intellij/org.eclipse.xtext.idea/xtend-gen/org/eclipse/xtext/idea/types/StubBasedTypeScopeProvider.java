@@ -22,11 +22,13 @@ public class StubBasedTypeScopeProvider extends AbstractTypeScopeProvider {
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
   
+  @Override
   public StubBasedConstructorScope createConstructorScope(final IJvmTypeProvider typeProvider, final Predicate<IEObjectDescription> filter) {
     StubBasedTypeScope _createTypeScope = this.createTypeScope(typeProvider, filter);
     return new StubBasedConstructorScope(_createTypeScope);
   }
   
+  @Override
   public StubBasedTypeScope createTypeScope(final IJvmTypeProvider typeProvider, final Predicate<IEObjectDescription> filter) {
     return new StubBasedTypeScope(((StubJvmTypeProvider) typeProvider), this.qualifiedNameConverter, filter);
   }

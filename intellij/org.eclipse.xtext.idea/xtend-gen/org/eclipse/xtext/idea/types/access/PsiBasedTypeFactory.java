@@ -135,6 +135,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     this.psiModelAssociator = psiModelAssociator;
   }
   
+  @Override
   public JvmDeclaredType createType(final PsiClass psiClass) {
     JvmDeclaredType _xtrycatchfinallyexpression = null;
     try {
@@ -193,6 +194,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       if (!_matched) {
         JvmGenericType _createJvmGenericType = this._typesFactory.createJvmGenericType();
         final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          @Override
           public void apply(final JvmGenericType it) {
             boolean _isInterface = psiClass.isInterface();
             it.setInterface(_isInterface);
@@ -205,6 +207,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _switchResult = ObjectExtensions.<JvmGenericType>operator_doubleArrow(_createJvmGenericType, _function);
       }
       final Procedure1<JvmDeclaredType> _function_1 = new Procedure1<JvmDeclaredType>() {
+        @Override
         public void apply(final JvmDeclaredType it) {
           ProgressIndicatorProvider.checkCanceled();
           PsiBasedTypeFactory.this.setTypeModifiers(it, psiClass);
@@ -218,6 +221,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           String _string = fqn.toString();
           it.internalSetIdentifier(_string);
           final Procedure0 _function = new Procedure0() {
+            @Override
             public void apply() {
               PsiBasedTypeFactory.this.createNestedTypes(it, psiClass, fqn);
             }
@@ -233,6 +237,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           PsiBasedTypeFactory.this.createSuperTypes(it, psiClass);
           PsiBasedTypeFactory.this.createAnnotationValues(it, psiClass);
           final PsiElementProvider _function_1 = new PsiElementProvider() {
+            @Override
             public PsiElement get() {
               return psiClass;
             }
@@ -274,6 +279,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       }
       JvmAnnotationReference _createJvmAnnotationReference = this._typesFactory.createJvmAnnotationReference();
       final Procedure1<JvmAnnotationReference> _function = new Procedure1<JvmAnnotationReference>() {
+        @Override
         public void apply(final JvmAnnotationReference it) {
           JvmAnnotationType _craeteAnnotationProxy = PsiBasedTypeFactory.this.craeteAnnotationProxy(type);
           it.setAnnotation(_craeteAnnotationProxy);
@@ -293,6 +299,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
               final Object value = PsiBasedTypeFactory.this.computeAnnotationValue(_value, project);
               PsiMethod[] _methods = psiClass.getMethods();
               final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
+                @Override
                 public Boolean apply(final PsiMethod it) {
                   String _name = it.getName();
                   return Boolean.valueOf(Objects.equal(_name, attributeName));
@@ -323,6 +330,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       _elvis = _createJvmOperation;
     }
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+      @Override
       public void apply(final JvmOperation it) {
         final URI uri = PsiBasedTypeFactory.this.uriHelper.getFullURI(method);
         if ((it instanceof InternalEObject)) {
@@ -344,6 +352,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       _elvis = _createJvmEnumerationLiteral;
     }
     final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+      @Override
       public void apply(final JvmEnumerationLiteral it) {
         final URI uri = PsiBasedTypeFactory.this.uriHelper.getFullURI(constant);
         if ((it instanceof InternalEObject)) {
@@ -365,6 +374,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       _elvis = _createJvmAnnotationType;
     }
     final Procedure1<JvmAnnotationType> _function = new Procedure1<JvmAnnotationType>() {
+      @Override
       public void apply(final JvmAnnotationType it) {
         final URI uri = PsiBasedTypeFactory.this.uriHelper.getFullURI(annotationType);
         if ((it instanceof InternalEObject)) {
@@ -380,6 +390,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     PsiField[] _fields = psiClass.getFields();
     for (final PsiField field : _fields) {
       final Procedure0 _function = new Procedure0() {
+        @Override
         public void apply() {
           EList<JvmMember> _members = it.getMembers();
           Object _createField = PsiBasedTypeFactory.this.createField(field, fqn);
@@ -405,6 +416,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       if (!_matched) {
         JvmField _createJvmField = this._typesFactory.createJvmField();
         final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
+          @Override
           public void apply(final JvmField it) {
             final Object value = field.computeConstantValue();
             boolean _notEquals = (!Objects.equal(value, null));
@@ -419,6 +431,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _switchResult = ObjectExtensions.<JvmField>operator_doubleArrow(_createJvmField, _function);
       }
       final Procedure1<JvmField> _function_1 = new Procedure1<JvmField>() {
+        @Override
         public void apply(final JvmField it) {
           String _name = field.getName();
           StringBuilder _append = fqn.append(_name);
@@ -442,6 +455,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           it.setType(_createTypeReference);
           PsiBasedTypeFactory.this.createAnnotationValues(it, field);
           final PsiElementProvider _function = new PsiElementProvider() {
+            @Override
             public PsiElement get() {
               return field;
             }
@@ -469,6 +483,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       PsiMethod[] _methods = psiClass.getMethods();
       for (final PsiMethod method : _methods) {
         final Procedure0 _function = new Procedure0() {
+          @Override
           public void apply() {
             JvmExecutable _xifexpression = null;
             boolean _isConstructor = method.isConstructor();
@@ -477,6 +492,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
             } else {
               JvmOperation _createOperation = PsiBasedTypeFactory.this.createOperation(method, fqn);
               final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                @Override
                 public void apply(final JvmOperation it) {
                   PsiBasedTypeFactory.this.setDefaultValue(it, method);
                 }
@@ -493,6 +509,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       boolean _hasDefaultConstructor = this.hasDefaultConstructor(psiClass);
       if (_hasDefaultConstructor) {
         final Procedure0 _function_1 = new Procedure0() {
+          @Override
           public void apply() {
             EList<JvmMember> _members = it.getMembers();
             JvmConstructor _createDefaultConstructor = PsiBasedTypeFactory.this.createDefaultConstructor(psiClass, fqn);
@@ -507,6 +524,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         StringBuilder _xblockexpression_1 = null;
         {
           final Procedure0 _function_2 = new Procedure0() {
+            @Override
             public void apply() {
               EList<JvmMember> _members = it.getMembers();
               JvmOperation _createValuesOperation = PsiBasedTypeFactory.this.createValuesOperation(psiClass, fqn);
@@ -515,6 +533,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           };
           this.preserve(fqn, _function_2);
           final Procedure0 _function_3 = new Procedure0() {
+            @Override
             public void apply() {
               EList<JvmMember> _members = it.getMembers();
               JvmOperation _createValueOfOperation = PsiBasedTypeFactory.this.createValueOfOperation(psiClass, fqn);
@@ -547,6 +566,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     } else {
       PsiMethod[] _methods = psiClass.getMethods();
       final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
+        @Override
         public Boolean apply(final PsiMethod it) {
           return Boolean.valueOf(it.isConstructor());
         }
@@ -591,6 +611,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmAnnotationValue createAnnotationValue(final Object value, final PsiType type) {
     JvmAnnotationValue _createAnnotationValue = this.createAnnotationValue(type);
     final Procedure1<JvmAnnotationValue> _function = new Procedure1<JvmAnnotationValue>() {
+      @Override
       public void apply(final JvmAnnotationValue it) {
         PsiBasedTypeFactory.this.addValue(it, value);
       }
@@ -603,6 +624,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       final PsiType componentType = ((PsiArrayType)type).getComponentType();
       JvmAnnotationValue _createAnnotationValue = this.createAnnotationValue(componentType);
       final Procedure1<JvmAnnotationValue> _function = new Procedure1<JvmAnnotationValue>() {
+        @Override
         public void apply(final JvmAnnotationValue it) {
           if ((value instanceof Object[])) {
             for (final Object element : ((Object[]) value)) {
@@ -985,6 +1007,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           _matched=true;
           PsiAnnotationMemberValue[] _initializers = ((PsiArrayInitializerMemberValue)value).getInitializers();
           final Function1<PsiAnnotationMemberValue, Object> _function = new Function1<PsiAnnotationMemberValue, Object>() {
+            @Override
             public Object apply(final PsiAnnotationMemberValue it) {
               return PsiBasedTypeFactory.this.computeAnnotationValue(it, project);
             }
@@ -1016,6 +1039,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmOperation createValuesOperation(final PsiClass psiClass, final StringBuilder fqn) {
     JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
     final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+      @Override
       public void apply(final JvmOperation it) {
         StringBuilder _append = fqn.append("values()");
         String _string = _append.toString();
@@ -1030,6 +1054,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         it.setReturnType(_createTypeReference);
         it.setDeprecated(false);
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             return psiClass;
           }
@@ -1047,6 +1072,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       final PsiElementFactory psiElementFactory = this.uriHelper.getPsiElementFactory(_project);
       JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        @Override
         public void apply(final JvmOperation it) {
           StringBuilder _append = fqn.append("valueOf(java.lang.String)");
           String _string = _append.toString();
@@ -1060,6 +1086,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           EList<JvmFormalParameter> _parameters = it.getParameters();
           JvmFormalParameter _createJvmFormalParameter = PsiBasedTypeFactory.this._typesFactory.createJvmFormalParameter();
           final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+            @Override
             public void apply(final JvmFormalParameter it) {
               it.setName("name");
               String _name = String.class.getName();
@@ -1072,6 +1099,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           PsiBasedTypeFactory.this.addUnique(_parameters, _doubleArrow);
           it.setDeprecated(false);
           final PsiElementProvider _function_1 = new PsiElementProvider() {
+            @Override
             public PsiElement get() {
               return psiClass;
             }
@@ -1087,6 +1115,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmConstructor createDefaultConstructor(final PsiClass psiClass, final StringBuilder fqn) {
     JvmConstructor _createJvmConstructor = this._typesFactory.createJvmConstructor();
     final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
+      @Override
       public void apply(final JvmConstructor it) {
         String _name = psiClass.getName();
         StringBuilder _append = fqn.append(_name);
@@ -1098,6 +1127,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         it.setVisibility(JvmVisibility.PUBLIC);
         it.setDeprecated(false);
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             return psiClass;
           }
@@ -1111,6 +1141,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmConstructor createConstructor(final PsiMethod psiMethod, final StringBuilder fqn) {
     JvmConstructor _createJvmConstructor = this._typesFactory.createJvmConstructor();
     final Procedure1<JvmConstructor> _function = new Procedure1<JvmConstructor>() {
+      @Override
       public void apply(final JvmConstructor it) {
         PsiBasedTypeFactory.this.enhanceExecutable(it, psiMethod, fqn);
         PsiBasedTypeFactory.this.createAnnotationValues(it, psiMethod);
@@ -1125,6 +1156,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       ProgressIndicatorProvider.checkCanceled();
       JvmOperation _createJvmOperation = this._typesFactory.createJvmOperation();
       final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+        @Override
         public void apply(final JvmOperation it) {
           PsiBasedTypeFactory.this.enhanceExecutable(it, method, fqn);
           boolean _hasModifierProperty = method.hasModifierProperty(PsiModifier.ABSTRACT);
@@ -1144,6 +1176,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
           it.setReturnType(_createTypeReference);
           PsiBasedTypeFactory.this.createAnnotationValues(it, method);
           final PsiElementProvider _function = new PsiElementProvider() {
+            @Override
             public PsiElement get() {
               return method;
             }
@@ -1204,6 +1237,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmFormalParameter createFormalParameter(final PsiParameter parameter) {
     JvmFormalParameter _createJvmFormalParameter = this._typesFactory.createJvmFormalParameter();
     final Procedure1<JvmFormalParameter> _function = new Procedure1<JvmFormalParameter>() {
+      @Override
       public void apply(final JvmFormalParameter it) {
         String _name = parameter.getName();
         it.setName(_name);
@@ -1219,6 +1253,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmTypeParameter createTypeParameter(final PsiTypeParameter parameter) {
     JvmTypeParameter _createJvmTypeParameter = this._typesFactory.createJvmTypeParameter();
     final Procedure1<JvmTypeParameter> _function = new Procedure1<JvmTypeParameter>() {
+      @Override
       public void apply(final JvmTypeParameter it) {
         String _name = parameter.getName();
         it.setName(_name);
@@ -1285,6 +1320,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
             if (_equals_1) {
               JvmParameterizedTypeReference _createClassTypeReference = this.createClassTypeReference(resolveResult);
               final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+                @Override
                 public void apply(final JvmParameterizedTypeReference it) {
                   JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(psiType);
                   it.setType(_createProxy);
@@ -1294,6 +1330,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
             } else {
               JvmParameterizedTypeReference _createClassTypeReference_1 = this.createClassTypeReference(resolveResult);
               final Procedure1<JvmParameterizedTypeReference> _function_1 = new Procedure1<JvmParameterizedTypeReference>() {
+                @Override
                 public void apply(final JvmParameterizedTypeReference it) {
                   PsiClassType _rawType = ((PsiClassType)psiType).rawType();
                   JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(_rawType);
@@ -1318,6 +1355,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     if (!_matched) {
       JvmParameterizedTypeReference _createJvmParameterizedTypeReference = this._typesFactory.createJvmParameterizedTypeReference();
       final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
+        @Override
         public void apply(final JvmParameterizedTypeReference it) {
           JvmType _createProxy = PsiBasedTypeFactory.this.createProxy(psiType);
           it.setType(_createProxy);
@@ -1337,6 +1375,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       if (_isInnerTypeReference) {
         JvmInnerTypeReference _createJvmInnerTypeReference = this._typesFactory.createJvmInnerTypeReference();
         final Procedure1<JvmInnerTypeReference> _function = new Procedure1<JvmInnerTypeReference>() {
+          @Override
           public void apply(final JvmInnerTypeReference it) {
             final PsiClass containingClass = psiClass.getContainingClass();
             Project _project = psiClass.getProject();
@@ -1378,6 +1417,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
         _matched=true;
         JvmWildcardTypeReference _createJvmWildcardTypeReference = this._typesFactory.createJvmWildcardTypeReference();
         final Procedure1<JvmWildcardTypeReference> _function = new Procedure1<JvmWildcardTypeReference>() {
+          @Override
           public void apply(final JvmWildcardTypeReference it) {
             JvmUpperBound _createJvmUpperBound = PsiBasedTypeFactory.this._typesFactory.createJvmUpperBound();
             final JvmTypeConstraintImplCustom upperBound = ((JvmTypeConstraintImplCustom) _createJvmUpperBound);
@@ -1427,6 +1467,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected JvmGenericArrayTypeReference createArrayTypeReference(final PsiType psiComponentType) {
     JvmGenericArrayTypeReference _createJvmGenericArrayTypeReference = this._typesFactory.createJvmGenericArrayTypeReference();
     final Procedure1<JvmGenericArrayTypeReference> _function = new Procedure1<JvmGenericArrayTypeReference>() {
+      @Override
       public void apply(final JvmGenericArrayTypeReference it) {
         JvmTypeReference _createTypeReference = PsiBasedTypeFactory.this.createTypeReference(psiComponentType);
         it.setComponentType(_createTypeReference);
@@ -1445,6 +1486,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
       _elvis = _createJvmVoid;
     }
     final Procedure1<JvmType> _function = new Procedure1<JvmType>() {
+      @Override
       public void apply(final JvmType it) {
         final URI uri = PsiBasedTypeFactory.this.uriHelper.getFullURI(psiType);
         if ((it instanceof InternalEObject)) {
@@ -1459,6 +1501,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
   protected void createNestedTypes(final JvmDeclaredType it, final PsiClass psiClass, final StringBuilder fqn) {
     PsiClass[] _innerClasses = psiClass.getInnerClasses();
     final Function1<PsiClass, Boolean> _function = new Function1<PsiClass, Boolean>() {
+      @Override
       public Boolean apply(final PsiClass it) {
         boolean _and = false;
         boolean _isAnonymous = PsiBasedTypeFactory.this.isAnonymous(it);
@@ -1476,6 +1519,7 @@ public class PsiBasedTypeFactory implements ITypeFactory<PsiClass, JvmDeclaredTy
     Iterable<PsiClass> _filter = IterableExtensions.<PsiClass>filter(((Iterable<PsiClass>)Conversions.doWrapArray(_innerClasses)), _function);
     for (final PsiClass innerClass : _filter) {
       final Procedure0 _function_1 = new Procedure0() {
+        @Override
         public void apply() {
           EList<JvmMember> _members = it.getMembers();
           JvmDeclaredType _createType = PsiBasedTypeFactory.this.createType(innerClass, fqn);

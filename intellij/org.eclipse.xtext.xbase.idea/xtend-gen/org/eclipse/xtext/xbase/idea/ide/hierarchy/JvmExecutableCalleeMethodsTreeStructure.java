@@ -61,6 +61,7 @@ public class JvmExecutableCalleeMethodsTreeStructure extends HierarchyTreeStruct
     this.scopeType = scopeType;
   }
   
+  @Override
   protected Object[] buildChildren(final HierarchyNodeDescriptor it) {
     Collection<CallHierarchyNodeDescriptor> _calledMethods = this.getCalledMethods(it);
     Collection<CallHierarchyNodeDescriptor> _overridingMethods = this.getOverridingMethods(it);
@@ -86,6 +87,7 @@ public class JvmExecutableCalleeMethodsTreeStructure extends HierarchyTreeStruct
       }
       List<XAbstractFeatureCall> _eAllOfType = EcoreUtil2.<XAbstractFeatureCall>eAllOfType(sourceElement, XAbstractFeatureCall.class);
       final Function1<XAbstractFeatureCall, JvmIdentifiableElement> _function = new Function1<XAbstractFeatureCall, JvmIdentifiableElement>() {
+        @Override
         public JvmIdentifiableElement apply(final XAbstractFeatureCall it) {
           return it.getFeature();
         }
@@ -93,6 +95,7 @@ public class JvmExecutableCalleeMethodsTreeStructure extends HierarchyTreeStruct
       List<JvmIdentifiableElement> _map = ListExtensions.<XAbstractFeatureCall, JvmIdentifiableElement>map(_eAllOfType, _function);
       Iterable<JvmExecutable> _filter = Iterables.<JvmExecutable>filter(_map, JvmExecutable.class);
       final Function1<JvmExecutable, PsiElement> _function_1 = new Function1<JvmExecutable, PsiElement>() {
+        @Override
         public PsiElement apply(final JvmExecutable it) {
           return JvmExecutableCalleeMethodsTreeStructure.this._iPsiModelAssociations.getPsiElement(it);
         }
@@ -113,6 +116,7 @@ public class JvmExecutableCalleeMethodsTreeStructure extends HierarchyTreeStruct
       final PsiMethod baseMethod = ((PsiMethod) _targetElement);
       final PsiClass baseClass = baseMethod.getContainingClass();
       final Function1<PsiMethod, Boolean> _function = new Function1<PsiMethod, Boolean>() {
+        @Override
         public Boolean apply(final PsiMethod method) {
           return Boolean.valueOf(JvmExecutableCalleeMethodsTreeStructure.this.isInScope(baseClass, method, JvmExecutableCalleeMethodsTreeStructure.this.scopeType));
         }

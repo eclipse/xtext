@@ -12,11 +12,13 @@ import org.junit.Ignore;
 public class IdeaXbaseParserTest extends XbaseParserTest {
   private final ModelChecker expresssionChecker;
   
+  @Override
   protected XExpression expression(final CharSequence string) throws Exception {
     String _string = string.toString();
     return this.expresssionChecker.<XExpression>checkModel(_string, false);
   }
   
+  @Override
   protected XExpression expression(final CharSequence string, final boolean resolve) throws Exception {
     String _string = string.toString();
     return this.expresssionChecker.<XExpression>checkModel(_string, resolve);

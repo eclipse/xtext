@@ -12,14 +12,17 @@ import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 public class ParserErrorContext extends ErrorContext implements ISyntaxErrorMessageProvider.IParserErrorContext {
   private final PsiErrorElement errorElement;
   
+  @Override
   public RecognitionException getRecognitionException() {
     return null;
   }
   
+  @Override
   public String[] getTokenNames() {
     return null;
   }
   
+  @Override
   public String getDefaultMessage() {
     return this.errorElement.getErrorDescription();
   }

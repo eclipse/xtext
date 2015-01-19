@@ -37,10 +37,12 @@ public class DefaultSyntaxHighlighter extends SyntaxHighlighterBase {
   @Extension
   private AbstractAntlrTokenToAttributeIdMapper tokenToAttributeIdMapper;
   
+  @Override
   public Lexer getHighlightingLexer() {
     return this.lexerProvider.get();
   }
   
+  @Override
   public TextAttributesKey[] getTokenHighlights(final IElementType tokenType) {
     TextAttributesKey[] _xblockexpression = null;
     {

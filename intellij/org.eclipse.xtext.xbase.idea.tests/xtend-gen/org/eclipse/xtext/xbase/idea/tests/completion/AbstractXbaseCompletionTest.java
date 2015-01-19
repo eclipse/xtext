@@ -37,10 +37,12 @@ public abstract class AbstractXbaseCompletionTest extends LightToolingTest {
     super(XbaseFileType.INSTANCE);
   }
   
+  @Override
   protected void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
     LibraryUtil.addXbaseLibrary(model);
   }
   
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     String _prefix = this.getPrefix();

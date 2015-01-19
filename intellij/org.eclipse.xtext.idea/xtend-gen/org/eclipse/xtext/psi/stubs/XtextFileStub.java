@@ -26,6 +26,7 @@ public class XtextFileStub<T extends BaseXtextFile> extends PsiFileStubImpl<T> i
     this.type = type;
   }
   
+  @Override
   public IStubFileElementType getType() {
     return this.type;
   }

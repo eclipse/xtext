@@ -65,11 +65,13 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
   @Extension
   private XtextResourceAsserts xtextResourceAsserts;
   
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     this.<ASTFactory>addExplicitExtension(LanguageASTFactory.INSTANCE, this.myLanguage, this.astFactory);
   }
   
+  @Override
   protected void tearDown() throws Exception {
     super.tearDown();
     this.actualResource = null;
@@ -101,6 +103,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     super(dataPath, fileExt, lowercaseFirstLetter, definitions);
   }
   
+  @Override
   public <T extends EObject> T checkModel(final String code, final boolean validate) {
     try {
       T _xblockexpression = null;
@@ -120,10 +123,12 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     }
   }
   
+  @Override
   protected boolean includeRanges() {
     return true;
   }
   
+  @Override
   protected void doTest(final boolean checkResult) {
     super.doTest(checkResult);
     if (checkResult) {
@@ -131,6 +136,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     }
   }
   
+  @Override
   protected void doCodeTest(final String code) throws IOException {
     super.doCodeTest(code);
     this.assertResource();
@@ -149,6 +155,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     {
       PsiToEcoreTransformator _get = this.psiToEcoreTransformatorProvider.get();
       final Procedure1<PsiToEcoreTransformator> _function = new Procedure1<PsiToEcoreTransformator>() {
+        @Override
         public void apply(final PsiToEcoreTransformator it) {
           it.setXtextFile(((BaseXtextFile) AbstractLanguageParsingTestCase.this.myFile));
         }
@@ -160,6 +167,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       XtextResourceSet _get_1 = this.xtextResourceSetProvider.get();
       Resource _createResource = _get_1.createResource(uri);
       final Procedure1<XtextResource> _function_1 = new Procedure1<XtextResource>() {
+        @Override
         public void apply(final XtextResource it) {
           try {
             it.setParser(psiToEcoreTransformator);
@@ -188,6 +196,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       final URI uri = URI.createURI(_url);
       Resource _createResource = resourceSet.createResource(uri);
       final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
+        @Override
         public void apply(final XtextResource it) {
           try {
             String _text = AbstractLanguageParsingTestCase.this.myFile.getText();
@@ -205,6 +214,7 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     return _xblockexpression;
   }
   
+  @Override
   protected String loadFile(final String name) throws IOException {
     File _file = new File(this.myFullDataPath, name);
     return FileUtil.loadFile(_file, CharsetToolkit.UTF8, true);

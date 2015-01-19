@@ -69,10 +69,12 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     return new StubURIHelper();
   }
   
+  @Override
   public JvmType findTypeByName(final String name) {
     return this.doFindTypeByName(name, false);
   }
   
+  @Override
   public JvmType findTypeByName(final String name, final boolean binaryNestedTypeDelimiter) {
     JvmType _xblockexpression = null;
     {
@@ -117,6 +119,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
           if (resourceSet instanceof ISynchronizable) {
             _matched=true;
             final IUnitOfWork<JvmType, ResourceSet> _function = new IUnitOfWork<JvmType, ResourceSet>() {
+              @Override
               public JvmType exec(final ResourceSet it) throws Exception {
                 return StubJvmTypeProvider.this.findType(resourceURI, fragment, traverseNestedTypes);
               }
@@ -214,6 +217,7 @@ public class StubJvmTypeProvider extends AbstractRuntimeJvmTypeProvider {
     return null;
   }
   
+  @Override
   protected IMirror createMirrorForFQN(final String name) {
     PsiClassMirror _xblockexpression = null;
     {

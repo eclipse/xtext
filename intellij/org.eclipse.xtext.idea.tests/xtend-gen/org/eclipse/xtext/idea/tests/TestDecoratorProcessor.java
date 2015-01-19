@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class TestDecoratorProcessor extends AbstractClassProcessor {
+  @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
     final MutableFieldDeclaration delegate = it.findDeclaredField("delegate");
     boolean _equals = Objects.equal(delegate, null);
@@ -28,12 +29,14 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     TypeReference _type = delegate.getType();
     Iterable<? extends ResolvedMethod> _allResolvedMethods = _type.getAllResolvedMethods();
     final Function1<ResolvedMethod, MethodDeclaration> _function = new Function1<ResolvedMethod, MethodDeclaration>() {
+      @Override
       public MethodDeclaration apply(final ResolvedMethod it) {
         return it.getDeclaration();
       }
     };
     Iterable<MethodDeclaration> _map = IterableExtensions.map(_allResolvedMethods, _function);
     final Function1<MethodDeclaration, Boolean> _function_1 = new Function1<MethodDeclaration, Boolean>() {
+      @Override
       public Boolean apply(final MethodDeclaration it) {
         String _simpleName = it.getSimpleName();
         return Boolean.valueOf(_simpleName.startsWith("test"));
@@ -43,6 +46,7 @@ public class TestDecoratorProcessor extends AbstractClassProcessor {
     for (final MethodDeclaration declaredMethod : _filter) {
       String _simpleName = declaredMethod.getSimpleName();
       final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
+        @Override
         public void apply(final MutableMethodDeclaration it) {
           StringConcatenationClient _client = new StringConcatenationClient() {
             @Override
