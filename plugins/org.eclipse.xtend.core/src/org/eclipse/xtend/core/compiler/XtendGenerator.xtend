@@ -7,16 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.compiler
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.CodeGenerationContextImpl
 import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.CodeGenerationParticipant
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmExecutable
+import org.eclipse.xtext.common.types.JvmFeature
+import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
@@ -24,25 +30,22 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.SharedAppendableState
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
-import org.eclipse.xtext.common.types.JvmFeature
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.EReference
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtext.xbase.XClosure
-import org.eclipse.emf.ecore.util.EcoreUtil
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 class XtendGenerator extends JvmModelGenerator {
+	
+	@Inject 
+	private IBatchTypeResolver typeResolver;
 	
 	override doGenerate(Resource input, IFileSystemAccess fsa) {
 		super.doGenerate(input, fsa)
@@ -132,18 +135,15 @@ class XtendGenerator extends JvmModelGenerator {
 					b.declareVariable(element, proposedName)
 				}
 			}
-			if (declaredType != null)
-				b.declareVariable(declaredType, 'this');
-		} else {
-			if (declaredType != null)
-				b.declareVariable(declaredType, 'this');
 		}
+		if (declaredType != null)
+			b.declareVariable(declaredType, 'this');
 	}
 	
 	def compileLocalTypeStubs(JvmFeature feature, ITreeAppendable appendable, GeneratorConfig config) {
 		feature.localClasses.filter[ !anonymous ].forEach[
 			appendable.newLine
-			val anonymousClass = it.sourceElements.head as AnonymousClass
+			val anonymousClass = sourceElements.head as AnonymousClass
 			val childAppendable = appendable.trace(anonymousClass)
 			childAppendable.append('abstract class ')
 			childAppendable.traceSignificant(anonymousClass).append(simpleName)
@@ -203,22 +203,20 @@ class XtendGenerator extends JvmModelGenerator {
 	private def boolean needSyntheticThisVariable(AnonymousClass anonymousClass, JvmDeclaredType localType) {
 		val references = newArrayList
 		try {
-			val acceptor = new EcoreUtil2.ElementReferenceAcceptor() {
-				override accept(EObject referrer, EObject referenced, EReference reference, int index) {
-					val enclosingType = EcoreUtil2.getContainerOfType(referrer, XtendTypeDeclaration)
-					if (enclosingType != null && enclosingType != anonymousClass) {
+			EcoreUtil2.findCrossReferences(anonymousClass, newImmutableSet(localType), [
+					referrer, referenced, reference, index |
+				val enclosingType = EcoreUtil2.getContainerOfType(referrer, XtendTypeDeclaration)
+				if (enclosingType != null && enclosingType != anonymousClass) {
+					references.add(referrer)
+					throw new StopCollecting
+				} else {
+					val enclosingLambda = EcoreUtil2.getContainerOfType(referrer, XClosure)
+					if (enclosingLambda != null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
 						references.add(referrer)
 						throw new StopCollecting
-					} else {
-						val enclosingLambda = EcoreUtil2.getContainerOfType(referrer, XClosure)
-						if (enclosingLambda != null && EcoreUtil.isAncestor(anonymousClass, enclosingLambda)) {
-							references.add(referrer)
-							throw new StopCollecting
-						}
 					}
 				}
-			}
-			EcoreUtil2.findCrossReferences(anonymousClass, newImmutableSet(localType), acceptor)
+			])
 		} catch(StopCollecting e) {
 			// ok
 		}
@@ -244,6 +242,13 @@ class XtendGenerator extends JvmModelGenerator {
 	override generateMembersInBody(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (it.local) {
 			appendable.append('{').increaseIndentation
+			val anonymousClass = sourceElements.head as AnonymousClass
+			if (!appendable.hasName('this' -> it) && needSyntheticThisVariable(anonymousClass, it)) {
+				val resolvedTypes = typeResolver.resolveTypes(anonymousClass)
+				val actualType = resolvedTypes.getActualType(anonymousClass)
+				val thisName = appendable.declareSyntheticVariable('this' -> it, '_this')
+				appendable.newLine.append("final ").append(actualType).append(' ').append(thisName).append(' = this;')
+			}
 			val fieldsWithInitializer = declaredFields.filter [
 				if (compilationStrategy != null) {
 					return true
