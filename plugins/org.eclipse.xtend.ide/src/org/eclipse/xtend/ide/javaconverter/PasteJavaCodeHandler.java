@@ -38,6 +38,7 @@ import org.eclipse.xtext.ui.util.ClipboardUtil;
 import org.eclipse.xtext.ui.util.ClipboardUtil.JavaImportData;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.ui.imports.ImportsUtil;
 
 import com.google.inject.Inject;
@@ -76,7 +77,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			IProject iProject = ((IFileEditorInput) editorInput).getFile().getProject();
 			project = JavaCore.create(iProject);
 		}
-		final int selectionOffset = sourceViewer.getSelectedRange().x;
+		final int selectionOffset = sourceViewer.getSelectedRange().x - 1;
 		EObject targetElement = xtextDocument.readOnly(new IUnitOfWork<EObject, XtextResource>() {
 
 			@Override
@@ -102,24 +103,33 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			} catch (BadLocationException e) {
 				throw new ExecutionException("Failed to replace content.", e);
 			}
-			int offset = selection.x;
-			int length = xtendCode.length();
-			if (offset - 1 >= 0) {
-				offset--;
-				length++;
-			}
-			sourceViewer.setSelectedRange(offset, length);
-			sourceViewer.getTextOperationTarget().doOperation(ISourceViewer.FORMAT);
-			int restoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
-			sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
+			//TODO enable formatting, when performance became better
+			//	https://bugs.eclipse.org/bugs/show_bug.cgi?id=457814
+			//	doFormat(sourceViewer, xtendCode, selection);
 		}
+	}
+
+	void doFormat(ISourceViewer sourceViewer, final String xtendCode, Point selection) {
+		int offset = selection.x;
+		int length = xtendCode.length();
+		if (offset - 1 >= 0) {
+			offset--;
+			length++;
+		}
+		sourceViewer.setSelectedRange(offset, length);
+		sourceViewer.getTextOperationTarget().doOperation(ISourceViewer.FORMAT);
+		int restoreCaretAtOffset = sourceViewer.getSelectedRange().x + sourceViewer.getSelectedRange().y;
+		sourceViewer.setSelectedRange(restoreCaretAtOffset, 0);
 	}
 
 	private String convertToXtend(final String javaCode, final JavaImportData javaImports, final EObject targetElement,
 			IJavaProject project) {
-		boolean forceStatement = targetElement != null
+		boolean forceStatement = targetElement != null && !(targetElement instanceof XAnnotation)
 				&& EcoreUtil2.getContainerOfType(targetElement, XtendExecutable.class) != null;
 		JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode);
+		if (parseResult == null) {
+			return javaCode;
+		}
 		JavaConverter javaConverter = javaConverterProvider.get();
 		ConversionResult conversionResult;
 		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
