@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.compiler;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -55,6 +56,7 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -68,7 +70,10 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -77,6 +82,9 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 public class XtendGenerator extends JvmModelGenerator {
   private static class StopCollecting extends Exception {
   }
+  
+  @Inject
+  private IBatchTypeResolver typeResolver;
   
   @Override
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
@@ -214,11 +222,10 @@ public class XtendGenerator extends JvmModelGenerator {
   
   @Override
   public String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
-    String _xifexpression = null;
-    boolean _hasObject = b.hasObject("this");
-    if (_hasObject) {
-      String _xblockexpression = null;
-      {
+    String _xblockexpression = null;
+    {
+      boolean _hasObject = b.hasObject("this");
+      if (_hasObject) {
         final Object element = b.getObject("this");
         if ((element instanceof JvmDeclaredType)) {
           boolean _isLocal = ((JvmDeclaredType)element).isLocal();
@@ -238,23 +245,15 @@ public class XtendGenerator extends JvmModelGenerator {
             b.declareVariable(element, proposedName);
           }
         }
-        String _xifexpression_1 = null;
-        boolean _notEquals = (!Objects.equal(declaredType, null));
-        if (_notEquals) {
-          _xifexpression_1 = b.declareVariable(declaredType, "this");
-        }
-        _xblockexpression = _xifexpression_1;
       }
-      _xifexpression = _xblockexpression;
-    } else {
-      String _xifexpression_1 = null;
+      String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(declaredType, null));
       if (_notEquals) {
-        _xifexpression_1 = b.declareVariable(declaredType, "this");
+        _xifexpression = b.declareVariable(declaredType, "this");
       }
-      _xifexpression = _xifexpression_1;
+      _xblockexpression = _xifexpression;
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   public void compileLocalTypeStubs(final JvmFeature feature, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -378,7 +377,8 @@ public class XtendGenerator extends JvmModelGenerator {
   private boolean needSyntheticThisVariable(final AnonymousClass anonymousClass, final JvmDeclaredType localType) {
     final ArrayList<EObject> references = CollectionLiterals.<EObject>newArrayList();
     try {
-      final EcoreUtil2.ElementReferenceAcceptor acceptor = new EcoreUtil2.ElementReferenceAcceptor() {
+      Set<JvmDeclaredType> _newImmutableSet = CollectionLiterals.<JvmDeclaredType>newImmutableSet(localType);
+      final EcoreUtil2.ElementReferenceAcceptor _function = new EcoreUtil2.ElementReferenceAcceptor() {
         @Override
         public void accept(final EObject referrer, final EObject referenced, final EReference reference, final int index) {
           try {
@@ -414,8 +414,7 @@ public class XtendGenerator extends JvmModelGenerator {
           }
         }
       };
-      Set<JvmDeclaredType> _newImmutableSet = CollectionLiterals.<JvmDeclaredType>newImmutableSet(localType);
-      EcoreUtil2.findCrossReferences(anonymousClass, _newImmutableSet, acceptor);
+      EcoreUtil2.findCrossReferences(anonymousClass, _newImmutableSet, _function);
     } catch (final Throwable _t) {
       if (_t instanceof XtendGenerator.StopCollecting) {
         final XtendGenerator.StopCollecting e = (XtendGenerator.StopCollecting)_t;
@@ -466,6 +465,31 @@ public class XtendGenerator extends JvmModelGenerator {
       {
         ITreeAppendable _append = appendable.append("{");
         _append.increaseIndentation();
+        Set<EObject> _sourceElements = this.getSourceElements(it);
+        EObject _head = IterableExtensions.<EObject>head(_sourceElements);
+        final AnonymousClass anonymousClass = ((AnonymousClass) _head);
+        boolean _and = false;
+        Pair<String, JvmDeclaredType> _mappedTo = Pair.<String, JvmDeclaredType>of("this", it);
+        boolean _hasName = appendable.hasName(_mappedTo);
+        boolean _not = (!_hasName);
+        if (!_not) {
+          _and = false;
+        } else {
+          boolean _needSyntheticThisVariable = this.needSyntheticThisVariable(anonymousClass, it);
+          _and = _needSyntheticThisVariable;
+        }
+        if (_and) {
+          final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(anonymousClass);
+          final LightweightTypeReference actualType = resolvedTypes.getActualType(anonymousClass);
+          Pair<String, JvmDeclaredType> _mappedTo_1 = Pair.<String, JvmDeclaredType>of("this", it);
+          final String thisName = appendable.declareSyntheticVariable(_mappedTo_1, "_this");
+          ITreeAppendable _newLine = appendable.newLine();
+          ITreeAppendable _append_1 = _newLine.append("final ");
+          IAppendable _append_2 = _append_1.append(actualType);
+          IAppendable _append_3 = _append_2.append(" ");
+          IAppendable _append_4 = _append_3.append(thisName);
+          _append_4.append(" = this;");
+        }
         Iterable<JvmField> _declaredFields = it.getDeclaredFields();
         final Function1<JvmField, Boolean> _function = new Function1<JvmField, Boolean>() {
           @Override
@@ -503,11 +527,11 @@ public class XtendGenerator extends JvmModelGenerator {
         };
         final Iterable<JvmField> fieldsWithInitializer = IterableExtensions.<JvmField>filter(_declaredFields, _function);
         boolean _isEmpty = IterableExtensions.isEmpty(fieldsWithInitializer);
-        boolean _not = (!_isEmpty);
-        if (_not) {
-          ITreeAppendable _newLine = appendable.newLine();
-          ITreeAppendable _append_1 = _newLine.append("{");
-          _append_1.increaseIndentation();
+        boolean _not_1 = (!_isEmpty);
+        if (_not_1) {
+          ITreeAppendable _newLine_1 = appendable.newLine();
+          ITreeAppendable _append_5 = _newLine_1.append("{");
+          _append_5.increaseIndentation();
           final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
             @Override
             public void apply(final LoopParams it) {
@@ -537,8 +561,8 @@ public class XtendGenerator extends JvmModelGenerator {
           };
           this._loopExtensions.<JvmField>forEach(appendable, fieldsWithInitializer, _function_1, _function_2);
           ITreeAppendable _decreaseIndentation = appendable.decreaseIndentation();
-          ITreeAppendable _newLine_1 = _decreaseIndentation.newLine();
-          _newLine_1.append("}");
+          ITreeAppendable _newLine_2 = _decreaseIndentation.newLine();
+          _newLine_2.append("}");
         }
         Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
         final Procedure1<LoopParams> _function_3 = new Procedure1<LoopParams>() {
@@ -564,8 +588,8 @@ public class XtendGenerator extends JvmModelGenerator {
         };
         this._loopExtensions.<JvmMember>forEach(appendable, _membersToBeCompiled, _function_3, _function_4);
         ITreeAppendable _decreaseIndentation_1 = appendable.decreaseIndentation();
-        ITreeAppendable _newLine_2 = _decreaseIndentation_1.newLine();
-        _xblockexpression = _newLine_2.append("}");
+        ITreeAppendable _newLine_3 = _decreaseIndentation_1.newLine();
+        _xblockexpression = _newLine_3.append("}");
       }
       _xifexpression = _xblockexpression;
     } else {

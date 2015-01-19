@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.compiler;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -23,6 +24,7 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -39,8 +41,10 @@ import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -600,12 +604,40 @@ public class XtendCompiler extends XbaseCompiler {
 			if (b.hasObject("super")) {
 				Object superElement = b.getObject("super");
 				if (superElement instanceof JvmType) {
-					b.declareSyntheticVariable(superElement, prevType.getSimpleName()+".super");
+					// Don't reassign the super of the enclosing type if it has already been reassigned
+					String superVariable = b.getName(superElement);
+					if ("super".equals(superVariable)) {
+						b.declareSyntheticVariable(superElement, prevType.getSimpleName()+".super");
+					}
 				}
 			}
 		} else {
 			super.doReassignThisInClosure(b, prevType);
 		}
+	}
+	
+	@Override
+	protected boolean needSyntheticSelfVariable(XClosure closure, LightweightTypeReference typeRef) {
+		JvmType jvmType = typeRef.getType();
+		TreeIterator<EObject> closureIterator = closure.eAllContents();
+		while (closureIterator.hasNext()) {
+			EObject obj1 = closureIterator.next();
+			if (obj1 instanceof XClosure) {
+				closureIterator.prune();
+			} else if (obj1 instanceof XtendTypeDeclaration) {
+				TreeIterator<EObject> typeIterator = obj1.eAllContents();
+				while (typeIterator.hasNext()) {
+					EObject obj2 = typeIterator.next();
+					if (obj2 instanceof XClosure) {
+						typeIterator.prune();
+					} else if (obj2 instanceof XFeatureCall && isReferenceToSelf((XFeatureCall) obj2, jvmType)) {
+						return true;
+					}
+				}
+				closureIterator.prune();
+			}
+		}
+		return false;
 	}
 	
 }

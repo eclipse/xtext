@@ -1318,43 +1318,37 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   private String reassignSuperType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
-    String _xifexpression = null;
-    boolean _hasObject = b.hasObject("super");
-    if (_hasObject) {
-      String _xblockexpression = null;
-      {
+    String _xblockexpression = null;
+    {
+      boolean _hasObject = b.hasObject("super");
+      if (_hasObject) {
         final Object element = b.getObject("this");
         if ((element instanceof JvmDeclaredType)) {
-          String _simpleName = ((JvmDeclaredType)element).getSimpleName();
-          final String proposedName = (_simpleName + ".super");
-          Object _object = b.getObject("super");
-          b.declareVariable(_object, proposedName);
+          final Object superElement = b.getObject("super");
+          final String superVariable = b.getName(superElement);
+          boolean _equals = "super".equals(superVariable);
+          if (_equals) {
+            String _simpleName = ((JvmDeclaredType)element).getSimpleName();
+            final String proposedName = (_simpleName + ".super");
+            b.declareVariable(superElement, proposedName);
+          }
         }
-        String _xifexpression_1 = null;
-        boolean _notEquals = (!Objects.equal(declaredType, null));
-        if (_notEquals) {
-          _xifexpression_1 = b.declareVariable(declaredType, "super");
-        }
-        _xblockexpression = _xifexpression_1;
       }
-      _xifexpression = _xblockexpression;
-    } else {
-      String _xifexpression_1 = null;
+      String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(declaredType, null));
       if (_notEquals) {
-        _xifexpression_1 = b.declareVariable(declaredType, "super");
+        _xifexpression = b.declareVariable(declaredType, "super");
       }
-      _xifexpression = _xifexpression_1;
+      _xblockexpression = _xifexpression;
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   protected String reassignThisType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
-    String _xifexpression = null;
-    boolean _hasObject = b.hasObject("this");
-    if (_hasObject) {
-      String _xblockexpression = null;
-      {
+    String _xblockexpression = null;
+    {
+      boolean _hasObject = b.hasObject("this");
+      if (_hasObject) {
         final Object element = b.getObject("this");
         if ((element instanceof JvmDeclaredType)) {
           boolean _isLocal = ((JvmDeclaredType)element).isLocal();
@@ -1366,23 +1360,15 @@ public class JvmModelGenerator implements IGenerator {
             b.declareVariable(element, proposedName);
           }
         }
-        String _xifexpression_1 = null;
-        boolean _notEquals = (!Objects.equal(declaredType, null));
-        if (_notEquals) {
-          _xifexpression_1 = b.declareVariable(declaredType, "this");
-        }
-        _xblockexpression = _xifexpression_1;
       }
-      _xifexpression = _xblockexpression;
-    } else {
-      String _xifexpression_1 = null;
+      String _xifexpression = null;
       boolean _notEquals = (!Objects.equal(declaredType, null));
       if (_notEquals) {
-        _xifexpression_1 = b.declareVariable(declaredType, "this");
+        _xifexpression = b.declareVariable(declaredType, "this");
       }
-      _xifexpression = _xifexpression_1;
+      _xblockexpression = _xifexpression;
     }
-    return _xifexpression;
+    return _xblockexpression;
   }
   
   public ITreeAppendable generateBodyWithIssues(final ITreeAppendable appendable, final Iterable<Issue> errors) {

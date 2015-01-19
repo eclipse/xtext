@@ -122,6 +122,7 @@ public class SharedAppendableState {
 	
 	public String getName(Object key) {
 		String result = scopes.getName(key);
+		// FIXME This leads to a lot of code calling first hasName and then getName, hence scopes.getName is often executed twice
 		if (result == null)
 			throw new IllegalStateException("Cannot get name for " + key);
 		return result;

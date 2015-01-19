@@ -79,7 +79,6 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
-import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
 
 /**
  * A generator implementation that processes the 
@@ -656,15 +655,17 @@ class JvmModelGenerator implements IGenerator {
 			 */
 			val element = b.getObject('this') // if we have a super, there must be a 'this'
 			if (element instanceof JvmDeclaredType) {
-				val proposedName = element.simpleName+".super"
-				b.declareVariable(b.getObject('super'), proposedName)
+				val superElement = b.getObject('super')
+				// Don't reassign the super of the enclosing type if it has already been reassigned
+				val superVariable = b.getName(superElement)
+				if ("super".equals(superVariable)) {
+					val proposedName = element.simpleName+".super"
+					b.declareVariable(superElement, proposedName)
+				}
 			}
-			if (declaredType != null)
-				b.declareVariable(declaredType, 'super');
-		} else {
-			if (declaredType != null)
-				b.declareVariable(declaredType, 'super');
 		}
+		if (declaredType != null)
+			b.declareVariable(declaredType, 'super');
 	}
 	
 	protected def reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {
@@ -678,12 +679,9 @@ class JvmModelGenerator implements IGenerator {
 					b.declareVariable(element, proposedName)
 				}
 			}
-			if (declaredType != null)
-				b.declareVariable(declaredType, 'this');
-		} else {
-			if (declaredType != null)
-				b.declareVariable(declaredType, 'this');
 		}
+		if (declaredType != null)
+			b.declareVariable(declaredType, 'this');
 	}
 
 	def generateBodyWithIssues(ITreeAppendable appendable, Iterable<Issue> errors) {

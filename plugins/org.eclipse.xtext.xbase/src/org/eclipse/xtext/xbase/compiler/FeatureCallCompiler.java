@@ -809,9 +809,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		return !call.isStatic();
 	}
 	
-	protected boolean isReferenceToSelf(XFeatureCall featureCall) {
-		return !featureCall.isTypeLiteral() && !featureCall.isPackageFragment() && !featureCall.isExplicitOperationCall()
-				&& featureCall.getFeature() instanceof JvmType
+	protected boolean isReferenceToSelf(XFeatureCall featureCall, JvmType type) {
+		return !featureCall.isTypeLiteral() && !featureCall.isPackageFragment()
+				&& type.equals(featureCall.getFeature())
 				&& IFeatureNames.SELF.getFirstSegment().equals(featureCall.getConcreteSyntaxFeatureName());
 	}
 
