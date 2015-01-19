@@ -40,11 +40,13 @@ public class JvmTypesElementFinder extends PsiElementFinder {
     this.language = language;
   }
   
+  @Override
   public PsiClass findClass(final String qualifiedName, final GlobalSearchScope scope) {
     PsiClass[] _findClasses = this.findClasses(qualifiedName, scope);
     return IterableExtensions.<PsiClass>head(((Iterable<PsiClass>)Conversions.doWrapArray(_findClasses)));
   }
   
+  @Override
   public PsiClass[] findClasses(final String qualifiedName, final GlobalSearchScope scope) {
     ArrayList<JvmPsiClass> _xblockexpression = null;
     {

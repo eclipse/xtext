@@ -14,18 +14,22 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 public class URIBasedTestResourceDescription extends AbstractResourceDescription {
   private final URI uri;
   
+  @Override
   protected List<IEObjectDescription> computeExportedObjects() {
     return CollectionLiterals.<IEObjectDescription>emptyList();
   }
   
+  @Override
   public Iterable<QualifiedName> getImportedNames() {
     return CollectionLiterals.<QualifiedName>emptyList();
   }
   
+  @Override
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     return CollectionLiterals.<IReferenceDescription>emptyList();
   }
   
+  @Override
   public URI getURI() {
     return this.uri;
   }

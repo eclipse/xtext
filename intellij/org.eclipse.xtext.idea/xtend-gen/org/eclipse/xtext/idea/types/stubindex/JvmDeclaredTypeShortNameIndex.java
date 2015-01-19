@@ -8,6 +8,7 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 public class JvmDeclaredTypeShortNameIndex extends StringStubIndexExtension<BaseXtextFile> {
   public static StubIndexKey<String, BaseXtextFile> KEY = StubIndexKey.<String, BaseXtextFile>createIndexKey("JvmDeclaredTypeShortNameIndex");
   
+  @Override
   public StubIndexKey<String, BaseXtextFile> getKey() {
     return JvmDeclaredTypeShortNameIndex.KEY;
   }

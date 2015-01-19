@@ -49,6 +49,7 @@ public class PsiToEcoreTransformator implements IParser {
   @Extension
   private PsiToEcoreTransformationContext.PsiToEcoreTransformationContextProvider _psiToEcoreTransformationContextProvider;
   
+  @Override
   public IParseResult parse(final Reader reader) {
     ParseResult _xblockexpression = null;
     {
@@ -279,14 +280,17 @@ public class PsiToEcoreTransformator implements IParser {
     return _xblockexpression;
   }
   
+  @Override
   public IParseResult parse(final ParserRule rule, final Reader reader) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public IParseResult parse(final RuleCall ruleCall, final Reader reader, final int initialLookAhead) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public IParseResult reparse(final IParseResult previousParseResult, final ReplaceRegion replaceRegion) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }

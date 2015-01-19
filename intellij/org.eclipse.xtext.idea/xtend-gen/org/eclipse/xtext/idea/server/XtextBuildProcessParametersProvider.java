@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class XtextBuildProcessParametersProvider extends BuildProcessParametersProvider {
+  @Override
   public List<String> getClassPath() {
     ArrayList<String> _xblockexpression = null;
     {
@@ -27,6 +28,7 @@ public class XtextBuildProcessParametersProvider extends BuildProcessParametersP
       File _file = new File(pluginFolder, "lib");
       File[] _listFiles = _file.listFiles();
       final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
+        @Override
         public Boolean apply(final File it) {
           boolean _and = false;
           boolean _isFile = it.isFile();
@@ -42,6 +44,7 @@ public class XtextBuildProcessParametersProvider extends BuildProcessParametersP
       };
       Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function);
       final Function1<File, String> _function_1 = new Function1<File, String>() {
+        @Override
         public String apply(final File it) {
           return it.getPath();
         }

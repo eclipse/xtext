@@ -34,6 +34,7 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
   @Inject
   private IJvmModelAssociations jvmModelAssociations;
   
+  @Override
   public Set<PsiElement> getSourceElements(final PsiElement jvmElement) {
     Set<PsiElement> _xblockexpression = null;
     {
@@ -47,9 +48,11 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
     return _xblockexpression;
   }
   
+  @Override
   public Set<PsiElement> getSourceElements(final EObject jvmElement) {
     Set<EObject> _sourceElements = this.jvmModelAssociations.getSourceElements(jvmElement);
     final Function1<EObject, PsiElement> _function = new Function1<EObject, PsiElement>() {
+      @Override
       public PsiElement apply(final EObject it) {
         return PsiJvmModelAssociations.this._iPsiModelAssociations.getPsiElement(it);
       }
@@ -58,14 +61,17 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
     return IterableExtensions.<PsiElement>toSet(_map);
   }
   
+  @Override
   public Set<PsiElement> getJvmElements(final PsiElement sourceElement) {
     EObject _eObject = this._iPsiModelAssociations.getEObject(sourceElement);
     return this.getJvmElements(_eObject);
   }
   
+  @Override
   public Set<PsiElement> getJvmElements(final EObject sourceElement) {
     Set<EObject> _jvmElements = this.jvmModelAssociations.getJvmElements(sourceElement);
     final Function1<EObject, PsiElement> _function = new Function1<EObject, PsiElement>() {
+      @Override
       public PsiElement apply(final EObject it) {
         return PsiJvmModelAssociations.this._iPsiModelAssociations.getPsiElement(it);
       }
@@ -74,6 +80,7 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
     return IterableExtensions.<PsiElement>toSet(_map);
   }
   
+  @Override
   public PsiElement getPrimarySourceElement(final PsiElement jvmElement) {
     PsiElement _xblockexpression = null;
     {
@@ -87,21 +94,25 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
     return _xblockexpression;
   }
   
+  @Override
   public PsiElement getPrimarySourceElement(final EObject jvmElement) {
     EObject _primarySourceElement = this.jvmModelAssociations.getPrimarySourceElement(jvmElement);
     return this._iPsiModelAssociations.getPsiElement(_primarySourceElement);
   }
   
+  @Override
   public PsiElement getPrimaryJvmElement(final PsiElement sourceElement) {
     EObject _eObject = this._iPsiModelAssociations.getEObject(sourceElement);
     return this.getPrimaryJvmElement(_eObject);
   }
   
+  @Override
   public PsiElement getPrimaryJvmElement(final EObject sourceElement) {
     EObject _primaryJvmElement = this.jvmModelAssociations.getPrimaryJvmElement(sourceElement);
     return this._iPsiModelAssociations.getPsiElement(_primaryJvmElement);
   }
   
+  @Override
   public boolean isPrimaryJvmElement(final PsiElement jvmElement) {
     boolean _xblockexpression = false;
     {
@@ -115,6 +126,7 @@ public class PsiJvmModelAssociations implements IPsiJvmModelAssociations {
     return _xblockexpression;
   }
   
+  @Override
   public boolean isPrimaryJvmElement(final EObject jvmElement) {
     return this.jvmModelAssociations.isPrimaryJvmElement(jvmElement);
   }

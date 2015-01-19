@@ -25,6 +25,7 @@ public class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
   @Inject
   private IOutputConfigurationProvider outputConfigurations;
   
+  @Override
   public WorkspaceConfig get() {
     WorkspaceConfig _xblockexpression = null;
     {
@@ -36,6 +37,7 @@ public class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
       ModuleManager _instance_1 = ModuleManager.getInstance(project);
       Module[] _modules = _instance_1.getModules();
       final Procedure1<Module> _function = new Procedure1<Module>() {
+        @Override
         public void apply(final Module m) {
           IdeaModuleConfig _ideaModuleConfig = new IdeaModuleConfig(m, IdeaWorkspaceConfigProvider.this.outputConfigurations);
           result.addProjectConfig(_ideaModuleConfig);

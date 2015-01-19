@@ -31,6 +31,7 @@ public class XtendFileJvmTreeModel extends XtendFileTreeModel {
     super(xtextFile, editor);
   }
   
+  @Override
   public Object getCurrentEditorElement() {
     Object _xblockexpression = null;
     {

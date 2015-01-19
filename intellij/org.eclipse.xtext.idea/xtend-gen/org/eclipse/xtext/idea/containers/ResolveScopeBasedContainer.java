@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class ResolveScopeBasedContainer extends AbstractScopeBasedSelectable implements IContainer {
+  @Override
   public IResourceDescription getResourceDescription(final URI uri) {
     Object _xblockexpression = null;
     {
@@ -29,11 +30,13 @@ public class ResolveScopeBasedContainer extends AbstractScopeBasedSelectable imp
     return ((IResourceDescription)_xblockexpression);
   }
   
+  @Override
   public int getResourceDescriptionCount() {
     Integer _xblockexpression = null;
     {
       final int[] counter = { 0 };
       final Function1<Collection<VirtualFile>, Boolean> _function = new Function1<Collection<VirtualFile>, Boolean>() {
+        @Override
         public Boolean apply(final Collection<VirtualFile> files) {
           boolean _xblockexpression = false;
           {
@@ -52,11 +55,13 @@ public class ResolveScopeBasedContainer extends AbstractScopeBasedSelectable imp
     return (_xblockexpression).intValue();
   }
   
+  @Override
   public boolean hasResourceDescription(final URI uri) {
     BaseXtextFile _findFile = this.findFile(uri);
     return (!Objects.equal(_findFile, null));
   }
   
+  @Override
   public void setScope(final GlobalSearchScope resolveScope) {
     super.setScope(resolveScope);
   }

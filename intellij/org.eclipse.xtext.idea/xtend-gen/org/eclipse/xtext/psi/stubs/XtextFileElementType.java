@@ -51,6 +51,7 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     }
   }
   
+  @Override
   public String getExternalId() {
     StringConcatenation _builder = new StringConcatenation();
     Language _language = this.getLanguage();
@@ -60,10 +61,12 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     return _builder.toString();
   }
   
+  @Override
   public StubBuilder getBuilder() {
     return this.xtextStubBuilderProvider.get();
   }
   
+  @Override
   public void serialize(final T stub, final StubOutputStream it) throws IOException {
     URI _uri = stub.getUri();
     this.writeURI(it, _uri);
@@ -120,6 +123,7 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     }
   }
   
+  @Override
   public T deserialize(final StubInputStream it, final StubElement parentStub) throws IOException {
     T _xblockexpression = null;
     {
@@ -195,6 +199,7 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     }
   }
   
+  @Override
   public void indexStub(final PsiFileStub stub, @Extension final IndexSink sink) {
     if ((stub instanceof XtextFileStub<?>)) {
       List<ExportedObject> _exportedObjects = ((XtextFileStub<?>)stub).getExportedObjects();
@@ -217,6 +222,7 @@ public class XtextFileElementType<T extends XtextFileStub<?>> extends IStubFileE
     }
   }
   
+  @Override
   public void indexStub(final T stub, final IndexSink sink) {
     this.indexStub(((PsiFileStub<?>) stub), sink);
   }

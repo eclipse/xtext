@@ -22,6 +22,7 @@ import org.junit.Ignore;
 public class IdeaXtendParserTest extends ParserTest {
   private final ModelChecker modelChecker;
   
+  @Override
   public XtendFile file(final String string, final boolean validate) {
     return this.modelChecker.<XtendFile>checkModel(string, validate);
   }

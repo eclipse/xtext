@@ -37,18 +37,22 @@ public class EObjectTreeElement extends AbstractStructureViewTreeElement {
     this.uri = _uRI;
   }
   
+  @Override
   public Object getValue() {
     return this.uri;
   }
   
+  @Override
   protected PsiElement getInternalNavigationElement() {
     return this.psiModelAssociations.getPsiElement(this.object);
   }
   
+  @Override
   protected Object getObjectToPresent() {
     return this.object;
   }
   
+  @Override
   public boolean equals(final Object obj) {
     boolean _xifexpression = false;
     if ((this == obj)) {
@@ -65,6 +69,7 @@ public class EObjectTreeElement extends AbstractStructureViewTreeElement {
     return _xifexpression;
   }
   
+  @Override
   public int hashCode() {
     return this.uri.hashCode();
   }

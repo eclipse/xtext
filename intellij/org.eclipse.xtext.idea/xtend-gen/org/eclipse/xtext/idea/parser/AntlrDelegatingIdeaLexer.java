@@ -29,6 +29,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
   @Inject
   private TokenSourceProvider tokenSourceProvider;
   
+  @Override
   public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
     this.buffer = buffer;
     this.startOffset = startOffset;
@@ -38,6 +39,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     this.tokenSource = _createTokenSource;
   }
   
+  @Override
   public int getState() {
     int _xifexpression = (int) 0;
     boolean _notEquals = (!Objects.equal(this.token, null));
@@ -49,6 +51,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     return _xifexpression;
   }
   
+  @Override
   public IElementType getTokenType() {
     this.locateToken();
     boolean _equals = Objects.equal(this.token, null);
@@ -59,12 +62,14 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     return this.tokenTypeProvider.getIElementType(type);
   }
   
+  @Override
   public int getTokenStart() {
     this.locateToken();
     int _startIndex = this.token.getStartIndex();
     return (this.startOffset + _startIndex);
   }
   
+  @Override
   public int getTokenEnd() {
     this.locateToken();
     int _stopIndex = this.token.getStopIndex();
@@ -72,15 +77,18 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     return (_plus + 1);
   }
   
+  @Override
   public void advance() {
     this.locateToken();
     this.token = null;
   }
   
+  @Override
   public CharSequence getBufferSequence() {
     return this.buffer;
   }
   
+  @Override
   public int getBufferEnd() {
     return this.endOffset;
   }

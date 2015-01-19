@@ -23,6 +23,7 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class SourceOutlineTests extends AbstractOutlineTests {
+  @Override
   protected StructureViewComponent getStructureViewComponent(final StructureView structureView) {
     StructureViewComposite.StructureViewDescriptor[] _structureViews = ((StructureViewComposite) structureView).getStructureViews();
     StructureViewComposite.StructureViewDescriptor _head = IterableExtensions.<StructureViewComposite.StructureViewDescriptor>head(((Iterable<StructureViewComposite.StructureViewDescriptor>)Conversions.doWrapArray(_structureViews)));
@@ -235,6 +236,7 @@ public class SourceOutlineTests extends AbstractOutlineTests {
     _builder.append("}");
     _builder.newLine();
     final Consumer<StructureViewComponent> _function = new Consumer<StructureViewComponent>() {
+      @Override
       public void consume(final StructureViewComponent component) {
         component.setActionActive(AlphaSorter.ALPHA_SORTER_ID, true);
         StringConcatenation _builder = new StringConcatenation();

@@ -29,11 +29,13 @@ public class XtendJvmStructureViewBuilder extends AbstractXtendStructureViewBuil
   @Inject
   private Provider<XtendStructureViewTreeElementProvider> xtendStructureViewTreeElementProviderProvider;
   
+  @Override
   public XtextFileTreeModel createStructureViewModel(final Editor editor) {
     BaseXtextFile _xtextFile = this.getXtextFile();
     return new XtendFileJvmTreeModel(_xtextFile, editor);
   }
   
+  @Override
   public IStructureViewTreeElementProvider createStructureViewTreeElementProvider() {
     XtendStructureViewTreeElementProvider _xblockexpression = null;
     {

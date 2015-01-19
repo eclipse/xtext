@@ -20,6 +20,7 @@ public abstract class AbstractStructureViewBuilder implements XtextFileAwareStru
   @Accessors
   private BaseXtextFile xtextFile;
   
+  @Override
   public StructureView createStructureView(final FileEditor fileEditor, final Project project) {
     Editor _xifexpression = null;
     if ((fileEditor instanceof TextEditor)) {

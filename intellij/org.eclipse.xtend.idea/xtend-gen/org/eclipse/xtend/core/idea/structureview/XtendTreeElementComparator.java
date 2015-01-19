@@ -25,6 +25,7 @@ import org.eclipse.xtext.idea.structureview.EStructuralFeatureTreeElement;
  */
 @SuppressWarnings("all")
 public class XtendTreeElementComparator extends DefaultComparator {
+  @Override
   public int getCategory(final TreeElement element) {
     int _xifexpression = (int) 0;
     if ((element instanceof XtendEObjectTreeElement)) {

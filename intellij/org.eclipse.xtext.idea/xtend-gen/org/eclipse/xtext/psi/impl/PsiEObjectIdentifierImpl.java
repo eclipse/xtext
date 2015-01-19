@@ -23,30 +23,37 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
     this.psiElement = psiElement;
   }
   
+  @Override
   public boolean isValid() {
     return this.psiElement.isValid();
   }
   
+  @Override
   public PsiFile getContainingFile() {
     return this.psiElement.getContainingFile();
   }
   
+  @Override
   public PsiElement getNavigationElement() {
     return this.getParent();
   }
   
+  @Override
   public PsiElement getParent() {
     return this.psiElement.getParent();
   }
   
+  @Override
   public PsiElement getPrevSibling() {
     return this.psiElement.getPrevSibling();
   }
   
+  @Override
   public PsiElement getNextSibling() {
     return this.psiElement.getNextSibling();
   }
   
+  @Override
   public int getStartOffsetInParent() {
     TextRange _textRange = this.getTextRange();
     int _startOffset = _textRange.getStartOffset();
@@ -56,6 +63,7 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
     return (_startOffset - _startOffset_1);
   }
   
+  @Override
   public TextRange getTextRange() {
     PsiElement _parent = this.getParent();
     int _textOffset = _parent.getTextOffset();
@@ -65,10 +73,12 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
     return new TextRange(_textOffset, _endOffset);
   }
   
+  @Override
   public PsiElement copy() {
     return new PsiEObjectIdentifierImpl(this.psiElement);
   }
   
+  @Override
   public String getText() {
     String _xblockexpression = null;
     {
@@ -82,10 +92,12 @@ public class PsiEObjectIdentifierImpl extends LightElement implements PsiEObject
     return _xblockexpression;
   }
   
+  @Override
   public ASTNode getNode() {
     return this.psiElement.getNode();
   }
   
+  @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     Class<? extends PsiEObjectIdentifierImpl> _class = this.getClass();

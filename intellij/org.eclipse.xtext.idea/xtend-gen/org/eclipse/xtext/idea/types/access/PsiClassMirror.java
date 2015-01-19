@@ -19,16 +19,19 @@ public class PsiClassMirror extends AbstractClassMirror {
     this.typeFactory = typeFactory;
   }
   
+  @Override
   protected String getTypeName() {
     return this.psiClass.getQualifiedName();
   }
   
+  @Override
   public void initialize(final TypeResource typeResource) {
     EList<EObject> _contents = typeResource.getContents();
     JvmDeclaredType _createType = this.typeFactory.createType(this.psiClass);
     _contents.add(_createType);
   }
   
+  @Override
   public boolean isSealed() {
     return true;
   }

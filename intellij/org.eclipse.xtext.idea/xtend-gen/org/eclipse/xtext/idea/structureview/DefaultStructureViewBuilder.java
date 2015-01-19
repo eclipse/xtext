@@ -11,10 +11,12 @@ public class DefaultStructureViewBuilder extends AbstractStructureViewBuilder {
   @Inject
   private IStructureViewTreeElementProvider structureViewTreeElementProvider;
   
+  @Override
   public IStructureViewTreeElementProvider createStructureViewTreeElementProvider() {
     return this.structureViewTreeElementProvider;
   }
   
+  @Override
   public void configureStructureViewTreeElementProvider(final IStructureViewTreeElementProvider structureViewTreeElementProvider, final XtextFileTreeModel model, final StructureView view) {
   }
 }

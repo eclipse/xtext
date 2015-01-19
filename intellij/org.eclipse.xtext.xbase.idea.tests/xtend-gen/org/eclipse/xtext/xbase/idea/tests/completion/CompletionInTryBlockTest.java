@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.idea.tests.completion.AbstractXbaseCompletionTest
 
 @SuppressWarnings("all")
 public class CompletionInTryBlockTest extends AbstractXbaseCompletionTest {
+  @Override
   protected String getPrefix() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("try {");
@@ -21,6 +22,7 @@ public class CompletionInTryBlockTest extends AbstractXbaseCompletionTest {
     return _builder.toString();
   }
   
+  @Override
   protected String getSuffix() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("} finally {");

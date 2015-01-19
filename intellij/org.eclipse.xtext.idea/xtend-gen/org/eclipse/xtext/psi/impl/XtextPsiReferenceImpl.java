@@ -71,6 +71,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     }
   }
   
+  @Override
   public TextRange getRangeToHighlightInElement() {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList();
     final TextRange _result;
@@ -123,6 +124,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
   private void _init_getRangeToHighlightInElement(final TextRange it) {
   }
   
+  @Override
   protected TextRange calculateDefaultRangeInElement() {
     TextRange _xblockexpression = null;
     {
@@ -139,6 +141,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     return _xblockexpression;
   }
   
+  @Override
   public List<TextRange> getRanges() {
     List<TextRange> _xblockexpression = null;
     {
@@ -156,6 +159,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     return _xblockexpression;
   }
   
+  @Override
   public PsiElement handleElementRename(final String newElementName) throws IncorrectOperationException {
     final ASTNode myNode = this.myElement.getNode();
     final ASTNode referenceNode = this.getReferenceNode();
@@ -197,6 +201,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
       List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(context, reference);
       Iterable<Pair<Integer, INode>> _indexed = IterableExtensions.<INode>indexed(_findNodesForFeature);
       final Function1<Pair<Integer, INode>, Boolean> _function = new Function1<Pair<Integer, INode>, Boolean>() {
+        @Override
         public Boolean apply(final Pair<Integer, INode> it) {
           boolean _and = false;
           INode _value = it.getValue();
@@ -226,6 +231,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     return _xblockexpression;
   }
   
+  @Override
   public Object[] getVariants() {
     ArrayList<LookupElementBuilder> _xblockexpression = null;
     {
@@ -261,6 +267,7 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     return ((Object[])Conversions.unwrapArray(_xblockexpression, Object.class));
   }
   
+  @Override
   public PsiElement resolve() {
     PsiElement _xblockexpression = null;
     {

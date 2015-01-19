@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class LibraryUtil {
   public static void addGuavaLibrary(final Module it) {
     final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
+      @Override
       public void consume(final ModifiableRootModel it) {
         LibraryUtil.addGuavaLibrary(it);
       }
@@ -37,6 +38,7 @@ public class LibraryUtil {
   
   public static void addXbaseLibrary(final Module it) {
     final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
+      @Override
       public void consume(final ModifiableRootModel it) {
         LibraryUtil.addXbaseLibrary(it);
       }
@@ -52,6 +54,7 @@ public class LibraryUtil {
   
   public static void addXtendLibrary(final Module it) {
     final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
+      @Override
       public void consume(final ModifiableRootModel it) {
         LibraryUtil.addXtendLibrary(it);
       }
@@ -74,6 +77,7 @@ public class LibraryUtil {
     boolean _greaterThan = (_length > 1);
     if (_greaterThan) {
       final Function2<String, String, String> _function = new Function2<String, String, String>() {
+        @Override
         public String apply(final String p1, final String p2) {
           return (p1 + p2);
         }
@@ -85,6 +89,7 @@ public class LibraryUtil {
   
   public static void addLibrary(final Module it, final String libName, final Class<?> clazz) {
     final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
+      @Override
       public void consume(final ModifiableRootModel it) {
         LibraryUtil.addLibrary(it, libName, clazz);
       }

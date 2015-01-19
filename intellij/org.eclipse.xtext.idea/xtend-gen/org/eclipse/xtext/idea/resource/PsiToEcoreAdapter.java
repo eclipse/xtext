@@ -44,6 +44,7 @@ public class PsiToEcoreAdapter extends AdapterImpl {
     return _eAdapters.add(this);
   }
   
+  @Override
   public boolean isAdapterForType(final Object type) {
     Class<? extends PsiToEcoreAdapter> _class = this.getClass();
     return Objects.equal(_class, type);

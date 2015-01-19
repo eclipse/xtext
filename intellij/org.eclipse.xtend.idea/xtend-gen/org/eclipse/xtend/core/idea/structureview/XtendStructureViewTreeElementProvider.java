@@ -73,6 +73,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   @Inject
   private Provider<XtendFeatureTreeElement> xtendFeatureTreeElementProvider;
   
+  @Override
   protected void _buildChildren(final XtextFileTreeElement xtextFileTreeElement) {
     BaseXtextFile _element = xtextFileTreeElement.getElement();
     Resource _resource = _element.getResource();
@@ -80,6 +81,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     EObject _head = IterableExtensions.<EObject>head(_contents);
     IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();
     final Procedure1<IntellijXtendOutlineContext> _function = new Procedure1<IntellijXtendOutlineContext>() {
+      @Override
       public void apply(final IntellijXtendOutlineContext it) {
         boolean _isShowInherited = XtendStructureViewTreeElementProvider.this.isShowInherited();
         it.setShowInherited(_isShowInherited);
@@ -92,10 +94,12 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     this.xtendOutlineTreeBuilder.build(_head, _doubleArrow);
   }
   
+  @Override
   protected void _buildChildren(final EObjectTreeElement objectTreeElement) {
     EObject _object = objectTreeElement.getObject();
     IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();
     final Procedure1<IntellijXtendOutlineContext> _function = new Procedure1<IntellijXtendOutlineContext>() {
+      @Override
       public void apply(final IntellijXtendOutlineContext it) {
         boolean _isShowInherited = XtendStructureViewTreeElementProvider.this.isShowInherited();
         it.setShowInherited(_isShowInherited);
@@ -120,6 +124,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildEObjectNode(final EObject modelElement, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -131,6 +136,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildXtendNode(final EObject modelElement, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -142,6 +148,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildFeatureNode(final JvmDeclaredType inferredType, final EObject semanticFeature, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -154,6 +161,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildDispatcherNode(final JvmDeclaredType baseType, final JvmFeature dispatcher, final List<JvmOperation> dispatchCases, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -162,6 +170,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
       XtendFeatureTreeElement _createXtendFeatureTreeElement = this.createXtendFeatureTreeElement(dispatcher, 
         true, _itemPresentation, intellijContext);
       final Procedure1<XtendFeatureTreeElement> _function = new Procedure1<XtendFeatureTreeElement>() {
+        @Override
         public void apply(final XtendFeatureTreeElement it) {
           it.setDispatch(true);
         }
@@ -172,6 +181,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildPackageNode(final XtendFile xtendFile, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -179,6 +189,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
       BaseXtextFile _xtextFile = intellijContext.getXtextFile();
       PresentationData _presentationData = new PresentationData();
       final Procedure1<PresentationData> _function = new Procedure1<PresentationData>() {
+        @Override
         public void apply(final PresentationData it) {
           it.setIcon(AllIcons.Nodes.Package);
           String _package = xtendFile.getPackage();
@@ -194,6 +205,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildImportSectionNode(final XtendFile xtendFile, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -210,6 +222,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _xblockexpression;
   }
   
+  @Override
   public IXtendOutlineContext buildResolvedFeatureNode(final JvmDeclaredType inferredType, final IResolvedFeature resolvedFeature, final IXtendOutlineContext context) {
     IntellijXtendOutlineContext _xblockexpression = null;
     {
@@ -227,6 +240,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     XtendFeatureTreeElement _get = this.xtendFeatureTreeElementProvider.get();
     XtendFeatureTreeElement _configureTreeElement = this.<XtendFeatureTreeElement>configureTreeElement(_get, modelElement, leaf, presentation, context);
     final Procedure1<XtendFeatureTreeElement> _function = new Procedure1<XtendFeatureTreeElement>() {
+      @Override
       public void apply(final XtendFeatureTreeElement it) {
         boolean _isSynthetic = XtendStructureViewTreeElementProvider.this.isSynthetic(modelElement);
         it.setSynthetic(_isSynthetic);
@@ -293,6 +307,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
     return _switchResult;
   }
   
+  @Override
   protected boolean isLeaf(final EObject modelElement) {
     boolean _switchResult = false;
     boolean _matched = false;

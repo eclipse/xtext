@@ -36,6 +36,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     this.psiToOriginalMarkers = _newHashMap;
   }
   
+  @Override
   public void consume() {
     if (this.afterSeek) {
       super.consume();
@@ -63,6 +64,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     final boolean hidden = (_channel == BaseRecognizer.HIDDEN);
     final IElementType tokenType = this.builder.getTokenType();
     final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
+      @Override
       public void onCreate(final ASTNode it) {
         it.<Boolean>putUserData(IASTNodeAwareNodeModelBuilder.HIDDEN_KEY, Boolean.valueOf(hidden));
       }
@@ -72,6 +74,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     this.builder.advanceLexer();
   }
   
+  @Override
   public int mark() {
     int _xblockexpression = (int) 0;
     {
@@ -98,6 +101,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     return (_size - 1);
   }
   
+  @Override
   public void release(final int psiMarker) {
     Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
     super.release((_get).intValue());
@@ -105,6 +109,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     _get_1.drop();
   }
   
+  @Override
   public void rewind() {
     super.rewind();
     int _lastPsiMarker = this.getLastPsiMarker();
@@ -113,6 +118,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     this.afterSeek = false;
   }
   
+  @Override
   public void rewind(final int psiMarker) {
     Integer _get = this.psiToOriginalMarkers.get(Integer.valueOf(psiMarker));
     super.rewind((_get).intValue());
@@ -121,6 +127,7 @@ public class PsiXtextTokenStream extends XtextTokenStream {
     this.afterSeek = false;
   }
   
+  @Override
   public void seek(final int index) {
     super.seek(index);
     this.afterSeek = true;

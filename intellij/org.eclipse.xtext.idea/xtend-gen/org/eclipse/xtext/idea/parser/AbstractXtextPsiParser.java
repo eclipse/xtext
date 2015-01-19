@@ -48,6 +48,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
   @Accessors(AccessorType.PROTECTED_GETTER)
   private TokenSourceProvider tokenSourceProvider;
   
+  @Override
   public ASTNode parse(final IElementType root, final PsiBuilder builder) {
     try {
       ASTNode _xblockexpression = null;
@@ -55,6 +56,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
         PsiXtextTokenStream _createTokenStream = this.createTokenStream(builder);
         AbstractPsiAntlrParser _createParser = this.createParser(builder, _createTokenStream);
         final Procedure1<AbstractPsiAntlrParser> _function = new Procedure1<AbstractPsiAntlrParser>() {
+          @Override
           public void apply(final AbstractPsiAntlrParser it) {
             Map<Integer, String> _tokenDefMap = AbstractXtextPsiParser.this.tokenDefProvider.getTokenDefMap();
             it.setTokenTypeMap(_tokenDefMap);
@@ -111,6 +113,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       final TokenSource tokenSource = this.createTokenSource(builder);
       PsiXtextTokenStream _psiXtextTokenStream = new PsiXtextTokenStream(builder, tokenSource, this.tokenDefProvider);
       final Procedure1<PsiXtextTokenStream> _function = new Procedure1<PsiXtextTokenStream>() {
+        @Override
         public void apply(final PsiXtextTokenStream it) {
           final Integer lookAhead = builder.<Integer>getUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY);
           boolean _notEquals = (!Objects.equal(lookAhead, null));
@@ -138,6 +141,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       TokenSet _whitespaceTokens = this.tokenTypeProvider.getWhitespaceTokens();
       IElementType[] _types = _whitespaceTokens.getTypes();
       final Function1<IElementType, String> _function = new Function1<IElementType, String>() {
+        @Override
         public String apply(final IElementType it) {
           return it.toString();
         }
@@ -147,6 +151,7 @@ public abstract class AbstractXtextPsiParser implements PsiParser {
       TokenSet _commentTokens = this.tokenTypeProvider.getCommentTokens();
       IElementType[] _types_1 = _commentTokens.getTypes();
       final Function1<IElementType, String> _function_1 = new Function1<IElementType, String>() {
+        @Override
         public String apply(final IElementType it) {
           return it.toString();
         }

@@ -15,6 +15,7 @@ import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
 public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
   private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate();
   
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     Module _module = this.getModule();
@@ -25,11 +26,13 @@ public class BinaryStubJvmTypeProviderTest extends PsiTestCase {
     this.delegate.setUp(_project);
   }
   
+  @Override
   protected Sdk getTestProjectJdk() {
     JavaAwareProjectJdkTableImpl _instanceEx = JavaAwareProjectJdkTableImpl.getInstanceEx();
     return _instanceEx.getInternalJdk();
   }
   
+  @Override
   public void tearDown() throws Exception {
     this.delegate.tearDown();
     super.tearDown();

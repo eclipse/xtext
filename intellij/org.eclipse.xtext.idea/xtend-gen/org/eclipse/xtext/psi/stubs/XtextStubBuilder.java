@@ -28,6 +28,7 @@ public class XtextStubBuilder extends DefaultStubBuilder {
   @Inject
   private IElementTypeProvider elementTypeProvider;
   
+  @Override
   protected StubElement<?> createStubForFile(final PsiFile file) {
     StubElement _switchResult = null;
     boolean _matched = false;
@@ -58,6 +59,7 @@ public class XtextStubBuilder extends DefaultStubBuilder {
         List<ExportedObject> _exportedObjects = stub.getExportedObjects();
         Iterable<IEObjectDescription> _exportedObjects_1 = resourceDescription.getExportedObjects();
         final Function1<IEObjectDescription, ExportedObject> _function = new Function1<IEObjectDescription, ExportedObject>() {
+          @Override
           public ExportedObject apply(final IEObjectDescription it) {
             QualifiedName _qualifiedName = it.getQualifiedName();
             EClass _eClass = it.getEClass();

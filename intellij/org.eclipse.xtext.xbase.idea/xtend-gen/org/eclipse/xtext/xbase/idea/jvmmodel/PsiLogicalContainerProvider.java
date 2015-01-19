@@ -31,6 +31,7 @@ public class PsiLogicalContainerProvider implements IPsiLogicalContainerProvider
   @Inject
   private ILogicalContainerProvider logicalContainerProvider;
   
+  @Override
   public PsiElement getNearestLogicalContainer(final PsiElement expr) {
     PsiElement _xifexpression = null;
     if ((expr instanceof PsiEObject)) {
@@ -42,6 +43,7 @@ public class PsiLogicalContainerProvider implements IPsiLogicalContainerProvider
     return _xifexpression;
   }
   
+  @Override
   public PsiElement getNearestLogicalContainer(final EObject expr) {
     JvmIdentifiableElement _nearestLogicalContainer = this.logicalContainerProvider.getNearestLogicalContainer(expr);
     return this._iPsiModelAssociations.getPsiElement(_nearestLogicalContainer);

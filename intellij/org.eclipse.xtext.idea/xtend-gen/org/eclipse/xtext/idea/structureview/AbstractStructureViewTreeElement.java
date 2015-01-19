@@ -47,6 +47,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
   @Extension
   protected BaseXtextFile xtextFile;
   
+  @Override
   public TreeElement[] getChildren() {
     List<StructureViewTreeElement> _xblockexpression = null;
     {
@@ -68,6 +69,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
     return ((TreeElement[])Conversions.unwrapArray(_xblockexpression, TreeElement.class));
   }
   
+  @Override
   public boolean addChild(final StructureViewTreeElement child) {
     boolean _xifexpression = false;
     boolean _notEquals = (!Objects.equal(child, null));
@@ -89,6 +91,7 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
     return _xifexpression;
   }
   
+  @Override
   public boolean addChildren(final Iterable<StructureViewTreeElement> children) {
     boolean _xblockexpression = false;
     {
@@ -116,12 +119,14 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
     return _xblockexpression;
   }
   
+  @Override
   public ItemPresentation getPresentation() {
     return this.itemPresentation;
   }
   
   protected abstract Object getObjectToPresent();
   
+  @Override
   public boolean canNavigate() {
     boolean _xblockexpression = false;
     {
@@ -137,10 +142,12 @@ public abstract class AbstractStructureViewTreeElement implements ModifiableStru
     return _xblockexpression;
   }
   
+  @Override
   public boolean canNavigateToSource() {
     return this.canNavigate();
   }
   
+  @Override
   public void navigate(final boolean requestFocus) {
     final PsiElement element = this.getNavigationElement();
     if ((element instanceof Navigatable)) {

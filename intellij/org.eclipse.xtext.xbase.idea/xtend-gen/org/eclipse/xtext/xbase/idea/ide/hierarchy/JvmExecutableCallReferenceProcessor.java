@@ -30,6 +30,7 @@ public class JvmExecutableCallReferenceProcessor implements CallReferenceProcess
     this.language = language;
   }
   
+  @Override
   public boolean process(final PsiReference reference, final JavaCallHierarchyData data) {
     if ((reference instanceof XtextPsiReference)) {
       PsiElement _element = ((XtextPsiReference)reference).getElement();

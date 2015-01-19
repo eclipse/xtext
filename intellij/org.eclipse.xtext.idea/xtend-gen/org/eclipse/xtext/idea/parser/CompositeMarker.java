@@ -32,6 +32,7 @@ public class CompositeMarker {
   
   protected CreateElementType withUserData(final IElementType elementType) {
     final CreateElementType.CreateCallback _function = new CreateElementType.CreateCallback() {
+      @Override
       public void onCreate(final ASTNode it) {
         it.<Integer>putUserData(IASTNodeAwareNodeModelBuilder.LOOK_AHEAD_KEY, Integer.valueOf(CompositeMarker.this.lookAhead));
       }

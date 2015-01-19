@@ -168,6 +168,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     return _xblockexpression;
   }
   
+  @Override
   public String getSourceName() {
     return this.input.getSourceName();
   }
@@ -236,6 +237,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     throw new IllegalStateException(_plus);
   }
   
+  @Override
   protected Object recoverFromMismatchedToken(final IntStream input, final int ttype, final BitSet follow) {
     try {
       boolean _mismatchIsUnwantedToken = this.mismatchIsUnwantedToken(input, ttype);
@@ -286,6 +288,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     }
   }
   
+  @Override
   public void recover(final IntStream input, final RecognitionException re) {
     boolean _equals = Objects.equal(this.currentError, null);
     if (_equals) {
@@ -299,6 +302,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     super.recover(input, re);
   }
   
+  @Override
   public void reportError(final RecognitionException e) {
     if (this.state.errorRecovery) {
       return;
@@ -312,6 +316,7 @@ public abstract class AbstractPsiAntlrParser extends Parser {
     }
   }
   
+  @Override
   public void emitErrorMessage(final String msg) {
     throw new UnsupportedOperationException();
   }

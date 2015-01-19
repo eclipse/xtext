@@ -40,6 +40,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
   @Accessors
   private EStructuralFeature feature;
   
+  @Override
   public Object getValue() {
     return Pair.<URI, EStructuralFeature>of(this.uri, this.feature);
   }
@@ -50,9 +51,11 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     this.uri = _uRI;
   }
   
+  @Override
   protected PsiElement getInternalNavigationElement() {
     List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(this.owner, this.feature);
     final Function1<INode, Iterable<ILeafNode>> _function = new Function1<INode, Iterable<ILeafNode>>() {
+      @Override
       public Iterable<ILeafNode> apply(final INode it) {
         return it.getLeafNodes();
       }
@@ -60,6 +63,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     List<Iterable<ILeafNode>> _map = ListExtensions.<INode, Iterable<ILeafNode>>map(_findNodesForFeature, _function);
     Iterable<ILeafNode> _flatten = Iterables.<ILeafNode>concat(_map);
     final Function1<ILeafNode, Boolean> _function_1 = new Function1<ILeafNode, Boolean>() {
+      @Override
       public Boolean apply(final ILeafNode it) {
         boolean _isHidden = it.isHidden();
         return Boolean.valueOf((!_isHidden));
@@ -69,6 +73,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     ILeafNode _head = IterableExtensions.<ILeafNode>head(_filter);
     List<ASTNode> _aSTNodes = this.xtextFile.getASTNodes(_head);
     final Function1<ASTNode, PsiElement> _function_2 = new Function1<ASTNode, PsiElement>() {
+      @Override
       public PsiElement apply(final ASTNode it) {
         return it.getPsi();
       }
@@ -77,10 +82,12 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     return IterableExtensions.<PsiElement>head(_map_1);
   }
   
+  @Override
   protected Object getObjectToPresent() {
     return this.owner;
   }
   
+  @Override
   public boolean equals(final Object obj) {
     boolean _xifexpression = false;
     if ((this == obj)) {
@@ -105,6 +112,7 @@ public class EStructuralFeatureTreeElement extends AbstractStructureViewTreeElem
     return _xifexpression;
   }
   
+  @Override
   public int hashCode() {
     int _hashCode = this.uri.hashCode();
     int _hashCode_1 = this.feature.hashCode();

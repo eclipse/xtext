@@ -52,6 +52,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     _xtextLanguage.injectMembers(this);
   }
   
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     this.myFixture = super.myFixture;
@@ -59,6 +60,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     _instance.AUTOCOMPLETE_ON_CODE_COMPLETION = false;
   }
   
+  @Override
   protected void tearDown() throws Exception {
     CodeInsightSettings _instance = CodeInsightSettings.getInstance();
     _instance.AUTOCOMPLETE_ON_CODE_COMPLETION = true;
@@ -70,8 +72,10 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     return ((IXtextLanguage) _language);
   }
   
+  @Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new LightProjectDescriptor() {
+      @Override
       public void configureModule(final Module module, final ModifiableRootModel model, final ContentEntry contentEntry) {
         final LanguageLevelModuleExtension languageLevelModuleExtension = model.<LanguageLevelModuleExtension>getModuleExtension(LanguageLevelModuleExtension.class);
         boolean _notEquals = (!Objects.equal(languageLevelModuleExtension, null));
@@ -82,10 +86,12 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
         LightToolingTest.this.configureModule(module, model, contentEntry);
       }
       
+      @Override
       public ModuleType<?> getModuleType() {
         return StdModuleTypes.JAVA;
       }
       
+      @Override
       public Sdk getSdk() {
         return LightToolingTest.this.getSdk();
       }
@@ -131,6 +137,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     VirtualFile _virtualFile = _file.getVirtualFile();
     EditorHighlighter _createHighlighter = HighlighterFactory.createHighlighter(_project, _virtualFile);
     final Procedure1<EditorHighlighter> _function = new Procedure1<EditorHighlighter>() {
+      @Override
       public void apply(final EditorHighlighter it) {
         Editor _editor = LightToolingTest.this.myFixture.getEditor();
         Document _document = _editor.getDocument();

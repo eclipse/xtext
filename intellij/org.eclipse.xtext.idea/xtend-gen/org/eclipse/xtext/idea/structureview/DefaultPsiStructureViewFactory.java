@@ -15,11 +15,13 @@ public class DefaultPsiStructureViewFactory implements PsiStructureViewFactory {
   @Inject
   private Provider<XtextFileAwareStructureViewBuilder> structureViewBuilderProvider;
   
+  @Override
   public StructureViewBuilder getStructureViewBuilder(final PsiFile psiFile) {
     XtextFileAwareStructureViewBuilder _xifexpression = null;
     if ((psiFile instanceof BaseXtextFile)) {
       XtextFileAwareStructureViewBuilder _get = this.structureViewBuilderProvider.get();
       final Procedure1<XtextFileAwareStructureViewBuilder> _function = new Procedure1<XtextFileAwareStructureViewBuilder>() {
+        @Override
         public void apply(final XtextFileAwareStructureViewBuilder it) {
           it.setXtextFile(((BaseXtextFile)psiFile));
         }

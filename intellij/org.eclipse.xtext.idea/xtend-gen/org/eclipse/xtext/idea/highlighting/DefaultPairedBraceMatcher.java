@@ -73,6 +73,7 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   protected Iterable<BracePair> createPairs(final IBracePairProvider bracePairProvider, final IGrammarAccess grammarAccess) {
     Set<org.eclipse.xtext.ide.editor.bracketmatching.BracePair> _pairs = bracePairProvider.getPairs();
     final Function1<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>> _function = new Function1<org.eclipse.xtext.ide.editor.bracketmatching.BracePair, List<BracePair>>() {
+      @Override
       public List<BracePair> apply(final org.eclipse.xtext.ide.editor.bracketmatching.BracePair it) {
         String _leftBrace = it.getLeftBrace();
         String _rightBrace = it.getRightBrace();
@@ -87,6 +88,7 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
   protected List<BracePair> findPairs(final String leftBraceKeyword, final String rightBraceKeyword, final boolean structural, final IGrammarAccess grammarAccess) {
     List<Pair<Keyword, Keyword>> _findKeywordPairs = grammarAccess.findKeywordPairs(leftBraceKeyword, rightBraceKeyword);
     final Function1<Pair<Keyword, Keyword>, BracePair> _function = new Function1<Pair<Keyword, Keyword>, BracePair>() {
+      @Override
       public BracePair apply(final Pair<Keyword, Keyword> it) {
         Keyword _first = it.getFirst();
         Keyword _second = it.getSecond();
@@ -117,14 +119,17 @@ public class DefaultPairedBraceMatcher implements PairedBraceMatcher {
     return this.tokenTypes.get(_plus_1);
   }
   
+  @Override
   public int getCodeConstructStart(final PsiFile file, final int openingBraceOffset) {
     return openingBraceOffset;
   }
   
+  @Override
   public BracePair[] getPairs() {
     return this.pairs;
   }
   
+  @Override
   public boolean isPairedBracesAllowedBeforeType(final IElementType lbraceType, final IElementType contextType) {
     return true;
   }

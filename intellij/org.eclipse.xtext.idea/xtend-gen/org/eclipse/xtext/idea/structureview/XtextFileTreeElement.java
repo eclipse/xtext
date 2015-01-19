@@ -36,6 +36,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
     super(psiElement);
   }
   
+  @Override
   public Collection<StructureViewTreeElement> getChildrenBase() {
     List<StructureViewTreeElement> _xblockexpression = null;
     {
@@ -50,11 +51,13 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
     return _xblockexpression;
   }
   
+  @Override
   public String getPresentableText() {
     BaseXtextFile _element = this.getElement();
     return _element.getName();
   }
   
+  @Override
   public boolean addChild(final StructureViewTreeElement child) {
     boolean _xifexpression = false;
     boolean _notEquals = (!Objects.equal(child, null));
@@ -75,6 +78,7 @@ public class XtextFileTreeElement extends PsiTreeElementBase<BaseXtextFile> impl
     return _xifexpression;
   }
   
+  @Override
   public boolean addChildren(final Iterable<StructureViewTreeElement> children) {
     boolean _xblockexpression = false;
     {

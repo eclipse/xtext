@@ -11,6 +11,7 @@ public class LeafXtextPsiReferenceElement extends LeafXtextPsiElement {
     super(type, text);
   }
   
+  @Override
   public PsiReference getReference() {
     return new XtextPsiReferenceImpl(this);
   }

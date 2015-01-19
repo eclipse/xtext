@@ -289,6 +289,7 @@ public class PsiToEcoreTransformationContext {
     if (_notEquals) {
       AntlrDatatypeRuleToken _antlrDatatypeRuleToken = new AntlrDatatypeRuleToken();
       final Procedure1<AntlrDatatypeRuleToken> _function = new Procedure1<AntlrDatatypeRuleToken>() {
+        @Override
         public void apply(final AntlrDatatypeRuleToken token) {
           String _text = it.getText();
           token.setText(_text);
@@ -362,6 +363,7 @@ public class PsiToEcoreTransformationContext {
       boolean _notEquals = (!Objects.equal(astNode, null));
       if (_notEquals) {
         final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
           public PsiElement get() {
             return astNode.getPsi();
           }

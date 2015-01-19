@@ -71,6 +71,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
     }
   }
   
+  @Override
   protected void replaceByRootNode(final CompositeNode oldNode, final RootNode rootNode) {
     this.replaceAssociations(oldNode, rootNode);
     final INode firstChild = rootNode.getFirstChild();
@@ -82,11 +83,13 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
     this.replaceAssociations(oldNode, rootNode);
   }
   
+  @Override
   protected void replaceChildren(final AbstractNode oldNode, final AbstractNode newNode) {
     super.replaceChildren(oldNode, newNode);
     this.replaceAssociations(oldNode, newNode);
   }
   
+  @Override
   public ILeafNode newLeafNode(final LeafElement it, final EObject grammarElement, final ICompositeNode parent) {
     ILeafNode _xblockexpression = null;
     {
@@ -99,6 +102,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
     return _xblockexpression;
   }
   
+  @Override
   public ILeafNode newLeafNode(final ASTNode it, final ICompositeNode parent) {
     ILeafNode _xblockexpression = null;
     {
@@ -125,6 +129,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
                   Grammar _grammar = this.grammarAccess.getGrammar();
                   List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar);
                   final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
+                    @Override
                     public Boolean apply(final AbstractRule it) {
                       String _name = it.getName();
                       return Boolean.valueOf(Objects.equal(_name, ruleName));
@@ -160,6 +165,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
     return _xblockexpression;
   }
   
+  @Override
   public ICompositeNode newCompositeNode(final CompositeElement it, final ICompositeNode parent) {
     ICompositeNode _xblockexpression = null;
     {
@@ -183,6 +189,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
     return _xblockexpression;
   }
   
+  @Override
   public ICompositeNode newCompositeNodeAsParentOf(final CompositeElement it, final EObject grammarElement, final int lookahead, final ICompositeNode existing) {
     ICompositeNode _xblockexpression = null;
     {

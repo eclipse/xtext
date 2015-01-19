@@ -95,6 +95,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
     EObject _object = it.getObject();
     EList<EObject> _eContents = _object.eContents();
     final Function1<EObject, StructureViewTreeElement> _function = new Function1<EObject, StructureViewTreeElement>() {
+      @Override
       public StructureViewTreeElement apply(final EObject child) {
         BaseXtextFile _xtextFile = it.getXtextFile();
         return DefaultStructureViewTreeElementProvider.this.createEObjectTreeElement(child, _xtextFile);
@@ -114,6 +115,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
       if (_isMany) {
         Iterable<EObject> _filter = Iterables.<EObject>filter(((Iterable<?>)values), EObject.class);
         final Function1<EObject, StructureViewTreeElement> _function = new Function1<EObject, StructureViewTreeElement>() {
+          @Override
           public StructureViewTreeElement apply(final EObject value) {
             BaseXtextFile _xtextFile = it.getXtextFile();
             return DefaultStructureViewTreeElementProvider.this.createEObjectTreeElement(value, _xtextFile);
@@ -155,6 +157,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
       }
       EObjectTreeElement _get = this.objectTreeElementProvider.get();
       final Procedure1<EObjectTreeElement> _function = new Procedure1<EObjectTreeElement>() {
+        @Override
         public void apply(final EObjectTreeElement objectTreeElement) {
           objectTreeElement.setObject(modelElement);
           objectTreeElement.setXtextFile(xtextFile);
@@ -171,6 +174,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
   protected EStructuralFeatureTreeElement createEStructuralFeatureTreeElement(final EObject modelElement, final EStructuralFeature feature, final BaseXtextFile xtextFile, final boolean leaf, final ItemPresentation itemPresentation) {
     EStructuralFeatureTreeElement _get = this.structuralFeatureTreeElementProvider.get();
     final Procedure1<EStructuralFeatureTreeElement> _function = new Procedure1<EStructuralFeatureTreeElement>() {
+      @Override
       public void apply(final EStructuralFeatureTreeElement structuralFeatureTreeElement) {
         structuralFeatureTreeElement.setOwner(modelElement);
         structuralFeatureTreeElement.setFeature(feature);
@@ -187,6 +191,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
     EClass _eClass = modelElement.eClass();
     EList<EReference> _eAllContainments = _eClass.getEAllContainments();
     final Function1<EReference, Boolean> _function = new Function1<EReference, Boolean>() {
+      @Override
       public Boolean apply(final EReference containmentRef) {
         return Boolean.valueOf(modelElement.eIsSet(containmentRef));
       }

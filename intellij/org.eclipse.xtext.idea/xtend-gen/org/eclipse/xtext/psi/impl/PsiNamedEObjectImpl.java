@@ -49,6 +49,7 @@ public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEO
     boolean _not = (!_isEmpty);
     Preconditions.checkArgument(_not);
     final Function1<IGrammarAwareElementType, Boolean> _function = new Function1<IGrammarAwareElementType, Boolean>() {
+      @Override
       public Boolean apply(final IGrammarAwareElementType nameType) {
         ASTNode _findChildByType = node.findChildByType(nameType);
         return Boolean.valueOf((!Objects.equal(_findChildByType, null)));
@@ -58,6 +59,7 @@ public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEO
     this.nameType = _findFirst;
   }
   
+  @Override
   public PsiEObjectIdentifier getNameIdentifier() {
     PsiEObjectIdentifierImpl _xblockexpression = null;
     {
@@ -72,6 +74,7 @@ public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEO
     return _xblockexpression;
   }
   
+  @Override
   public String getName() {
     String _xblockexpression = null;
     {
@@ -91,11 +94,13 @@ public class PsiNamedEObjectImpl<T extends PsiNamedEObjectStub<?>> extends PsiEO
     return _xblockexpression;
   }
   
+  @Override
   public int getTextOffset() {
     ITextRegion _significantTextRegion = this.getSignificantTextRegion();
     return _significantTextRegion.getOffset();
   }
   
+  @Override
   public PsiNamedEObject setName(final String name) throws IncorrectOperationException {
     PsiNamedEObjectImpl<T> _xblockexpression = null;
     {

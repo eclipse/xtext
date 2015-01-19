@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
+  @Override
   public Path getPath(final Resource res) {
     Path _xblockexpression = null;
     {
@@ -41,6 +42,7 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
     return _xblockexpression;
   }
   
+  @Override
   public void delete(final Path path) {
     try {
       VirtualFile _virtualFile = this.toVirtualFile(path);
@@ -50,10 +52,12 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public void mkdir(final Path path) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
     try {
       VirtualFile _virtualFile = this.toVirtualFile(path);
@@ -68,6 +72,7 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public boolean exists(final Path path) {
     VirtualFile _virtualFile = this.toVirtualFile(path);
     boolean _exists = false;
@@ -77,16 +82,19 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
     return _exists;
   }
   
+  @Override
   public String getCharset(final Path path) {
     VirtualFile _virtualFile = this.toVirtualFile(path);
     Charset _charset = _virtualFile.getCharset();
     return _charset.name();
   }
   
+  @Override
   public Iterable<? extends Path> getChildren(final Path path) {
     VirtualFile _virtualFile = this.toVirtualFile(path);
     VirtualFile[] _children = _virtualFile.getChildren();
     final Function1<VirtualFile, Path> _function = new Function1<VirtualFile, Path>() {
+      @Override
       public Path apply(final VirtualFile it) {
         return IdeaFileSystemSupport.this.toPath(it);
       }
@@ -94,6 +102,7 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
     return ListExtensions.<VirtualFile, Path>map(((List<VirtualFile>)Conversions.doWrapArray(_children)), _function);
   }
   
+  @Override
   public InputStream getContentsAsStream(final Path path) {
     try {
       VirtualFile _virtualFile = this.toVirtualFile(path);
@@ -103,21 +112,25 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
     }
   }
   
+  @Override
   public long getLastModification(final Path path) {
     VirtualFile _virtualFile = this.toVirtualFile(path);
     return _virtualFile.getModificationStamp();
   }
   
+  @Override
   public boolean isFile(final Path path) {
     boolean _isFolder = this.isFolder(path);
     return (!_isFolder);
   }
   
+  @Override
   public boolean isFolder(final Path path) {
     VirtualFile _virtualFile = this.toVirtualFile(path);
     return _virtualFile.isDirectory();
   }
   
+  @Override
   public java.net.URI toURI(final Path path) {
     VirtualFile _virtualFile = this.toVirtualFile(path);
     String _url = _virtualFile.getUrl();

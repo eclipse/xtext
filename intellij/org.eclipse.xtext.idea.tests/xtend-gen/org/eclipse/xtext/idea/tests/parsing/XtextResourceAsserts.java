@@ -89,6 +89,7 @@ public class XtextResourceAsserts extends Assert {
   protected boolean belongsTo(final INode node, final ICompositeNode rootNode) {
     BidiTreeIterable<INode> _asTreeIterable = rootNode.getAsTreeIterable();
     final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
+      @Override
       public Boolean apply(final INode it) {
         return Boolean.valueOf(Objects.equal(it, node));
       }

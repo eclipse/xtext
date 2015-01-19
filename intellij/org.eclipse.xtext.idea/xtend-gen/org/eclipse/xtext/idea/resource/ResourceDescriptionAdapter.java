@@ -26,34 +26,42 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class ResourceDescriptionAdapter extends AdapterImpl implements IResourceDescription {
   private final IResourceDescription delegate;
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjects() {
     return this.delegate.getExportedObjects();
   }
   
+  @Override
   public Iterable<QualifiedName> getImportedNames() {
     return this.delegate.getImportedNames();
   }
   
+  @Override
   public Iterable<IReferenceDescription> getReferenceDescriptions() {
     return this.delegate.getReferenceDescriptions();
   }
   
+  @Override
   public URI getURI() {
     return this.delegate.getURI();
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjects(final EClass type, final QualifiedName name, final boolean ignoreCase) {
     return this.delegate.getExportedObjects(type, name, ignoreCase);
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjectsByObject(final EObject object) {
     return this.delegate.getExportedObjectsByObject(object);
   }
   
+  @Override
   public Iterable<IEObjectDescription> getExportedObjectsByType(final EClass type) {
     return this.delegate.getExportedObjectsByType(type);
   }
   
+  @Override
   public boolean isEmpty() {
     return this.delegate.isEmpty();
   }
@@ -74,6 +82,7 @@ public class ResourceDescriptionAdapter extends AdapterImpl implements IResource
           IResourceDescription _resourceDescription = resourceDescriptionManager.getResourceDescription(it);
           ResourceDescriptionAdapter _resourceDescriptionAdapter = new ResourceDescriptionAdapter(_resourceDescription);
           final Procedure1<ResourceDescriptionAdapter> _function = new Procedure1<ResourceDescriptionAdapter>() {
+            @Override
             public void apply(final ResourceDescriptionAdapter adapter) {
               EList<Adapter> _eAdapters = ((XtextResource)it).eAdapters();
               _eAdapters.add(adapter);
@@ -109,6 +118,7 @@ public class ResourceDescriptionAdapter extends AdapterImpl implements IResource
     return IterableExtensions.<ResourceDescriptionAdapter>head(_filter);
   }
   
+  @Override
   public String toString() {
     Class<? extends ResourceDescriptionAdapter> _class = this.getClass();
     String _name = _class.getName();

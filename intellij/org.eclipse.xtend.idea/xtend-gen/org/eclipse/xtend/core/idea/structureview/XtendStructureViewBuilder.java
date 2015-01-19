@@ -36,11 +36,13 @@ public class XtendStructureViewBuilder implements XtextFileAwareStructureViewBui
   @Inject
   private Provider<XtendSourceStructureViewBuilder> xtendSourceStructureViewBuilderProvider;
   
+  @Override
   public StructureView createStructureView(final FileEditor fileEditor, final Project project) {
     StructureViewComposite _xblockexpression = null;
     {
       XtendSourceStructureViewBuilder _get = this.xtendSourceStructureViewBuilderProvider.get();
       final Procedure1<XtendSourceStructureViewBuilder> _function = new Procedure1<XtendSourceStructureViewBuilder>() {
+        @Override
         public void apply(final XtendSourceStructureViewBuilder builder) {
           builder.setXtextFile(XtendStructureViewBuilder.this.xtextFile);
         }
@@ -48,6 +50,7 @@ public class XtendStructureViewBuilder implements XtextFileAwareStructureViewBui
       final XtendSourceStructureViewBuilder xtendSourceStructureViewBuilder = ObjectExtensions.<XtendSourceStructureViewBuilder>operator_doubleArrow(_get, _function);
       XtendJvmStructureViewBuilder _get_1 = this.xtendJvmStructureViewBuilderProvider.get();
       final Procedure1<XtendJvmStructureViewBuilder> _function_1 = new Procedure1<XtendJvmStructureViewBuilder>() {
+        @Override
         public void apply(final XtendJvmStructureViewBuilder builder) {
           builder.setXtextFile(XtendStructureViewBuilder.this.xtextFile);
         }

@@ -17,6 +17,7 @@ public class StubTypeProviderFactory extends AbstractTypeProviderFactory {
   @Inject
   private IPsiModelAssociator psiModelAssociator;
   
+  @Override
   public IJvmTypeProvider createTypeProvider(final ResourceSet resourceSet) {
     StubJvmTypeProvider _xblockexpression = null;
     {

@@ -22,6 +22,7 @@ import org.eclipse.xtext.idea.types.access.StubJvmTypeProviderTestDelegate;
 public class SourceStubJvmTypeProviderTest extends PsiTestCase {
   private final StubJvmTypeProviderTestDelegate delegate = new StubJvmTypeProviderTestDelegate();
   
+  @Override
   public void setUp() throws Exception {
     super.setUp();
     Project _project = this.myJavaFacade.getProject();
@@ -40,11 +41,13 @@ public class SourceStubJvmTypeProviderTest extends PsiTestCase {
     this.delegate.setUp(_project_1);
   }
   
+  @Override
   protected Sdk getTestProjectJdk() {
     JavaAwareProjectJdkTableImpl _instanceEx = JavaAwareProjectJdkTableImpl.getInstanceEx();
     return _instanceEx.getInternalJdk();
   }
   
+  @Override
   public void tearDown() throws Exception {
     this.delegate.tearDown();
     super.tearDown();

@@ -18,14 +18,17 @@ public class AlphaSorter implements Sorter {
   @Accessors
   private Comparator<TreeElement> comparator;
   
+  @Override
   public boolean isVisible() {
     return (!Objects.equal(this.comparator, null));
   }
   
+  @Override
   public String getName() {
     return AlphaSorter.ALPHA_SORTER_ID;
   }
   
+  @Override
   public ActionPresentation getPresentation() {
     String _message = IdeBundle.message("action.sort.alphabetically");
     String _message_1 = IdeBundle.message("action.sort.alphabetically");
@@ -33,6 +36,7 @@ public class AlphaSorter implements Sorter {
       AllIcons.ObjectBrowser.Sorted);
   }
   
+  @Override
   public String toString() {
     return this.getName();
   }

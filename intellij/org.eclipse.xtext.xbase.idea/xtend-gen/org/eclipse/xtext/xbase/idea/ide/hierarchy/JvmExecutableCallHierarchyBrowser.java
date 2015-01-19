@@ -24,6 +24,7 @@ public class JvmExecutableCallHierarchyBrowser extends CallHierarchyBrowser {
     super(project, method);
   }
   
+  @Override
   protected HierarchyTreeStructure createHierarchyTreeStructure(final String typeName, final PsiElement psiElement) {
     HierarchyTreeStructure _xifexpression = null;
     boolean _equals = CallHierarchyBrowserBase.CALLEE_TYPE.equals(typeName);

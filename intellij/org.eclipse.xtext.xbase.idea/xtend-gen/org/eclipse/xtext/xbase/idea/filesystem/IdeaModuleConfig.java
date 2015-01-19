@@ -34,6 +34,7 @@ public class IdeaModuleConfig extends ProjectConfig {
     this.outputConfigurations = outputConfigurations;
   }
   
+  @Override
   public Map<Path, Path> getSourceFolderMappings() {
     Map<Path, Path> _xblockexpression = null;
     {
@@ -43,6 +44,7 @@ public class IdeaModuleConfig extends ProjectConfig {
         ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
         VirtualFile[] _sourceRoots = _instance.getSourceRoots();
         final Procedure1<VirtualFile> _function = new Procedure1<VirtualFile>() {
+          @Override
           public void apply(final VirtualFile root) {
             final Project project = IdeaModuleConfig.this.module.getProject();
             VirtualFile _baseDir = project.getBaseDir();
@@ -70,6 +72,7 @@ public class IdeaModuleConfig extends ProjectConfig {
     return _xblockexpression;
   }
   
+  @Override
   public Path getRootPath() {
     String _name = this.module.getName();
     return new Path(_name);

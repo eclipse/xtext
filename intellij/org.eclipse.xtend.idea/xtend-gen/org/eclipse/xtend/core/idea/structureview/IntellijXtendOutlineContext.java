@@ -31,6 +31,7 @@ public class IntellijXtendOutlineContext extends DefaultXtendOutlineContext {
       this.structureViewTreeElement.addChild(structureViewTreeElement);
       IntellijXtendOutlineContext _cloneContext = this.cloneContext();
       final Procedure1<IntellijXtendOutlineContext> _function = new Procedure1<IntellijXtendOutlineContext>() {
+        @Override
         public void apply(final IntellijXtendOutlineContext context) {
           context.structureViewTreeElement = structureViewTreeElement;
         }
@@ -40,6 +41,7 @@ public class IntellijXtendOutlineContext extends DefaultXtendOutlineContext {
     return _xblockexpression;
   }
   
+  @Override
   protected IntellijXtendOutlineContext cloneContext() {
     IntellijXtendOutlineContext _intellijXtendOutlineContext = new IntellijXtendOutlineContext();
     return this.cloneContext(_intellijXtendOutlineContext);
