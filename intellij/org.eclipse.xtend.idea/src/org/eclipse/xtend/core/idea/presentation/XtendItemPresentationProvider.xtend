@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.idea.presentation
 
 import com.google.inject.Inject
+import javax.swing.Icon
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.XtendClass
@@ -18,6 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendParameter
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.naming.QualifiedName
@@ -36,6 +38,26 @@ class XtendItemPresentationProvider extends XtendJvmItemPresentationProvider {
 	extension IXtendJvmAssociations
 
 	@Inject OperatorMapping operatorMapping
+	
+	def dispatch Icon image(XtendTypeDeclaration element) {
+		element.inferredType.image
+	}
+	
+	def dispatch Icon image(XtendFunction element) {
+		element.directlyInferredOperation.image
+	}
+	
+	def dispatch Icon image(XtendConstructor element) {
+		element.inferredConstructor.image
+	}
+	
+	def dispatch Icon image(XtendField element) {
+		element.jvmField.image
+	}
+	
+	def dispatch Icon image(XtendEnumLiteral element) {
+		element.jvmField.image
+	}
 
 	def dispatch String text(XtendFile element) {
 		element.eResource.URI.trimFileExtension.lastSegment
