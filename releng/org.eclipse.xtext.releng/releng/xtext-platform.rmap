@@ -47,7 +47,7 @@
   <rm:locator pattern="^org\.hamcrest(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.m2e(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>
-  <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="maven"/>
+  <rm:locator pattern="^org\.slf4j\.api$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.(?:egit|jgit)(?:\..+)?$" searchPathRef="egit"/>
   <rm:locator pattern="^org\.kohsuke\.args4j(?:\..+)?$" searchPathRef="egit"/>
   <rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven"/>
