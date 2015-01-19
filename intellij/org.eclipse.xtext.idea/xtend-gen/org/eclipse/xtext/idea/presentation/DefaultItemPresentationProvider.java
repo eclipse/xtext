@@ -37,9 +37,11 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   @Inject
   private IPsiModelAssociations psiModelAssociations;
   
+  @Override
   public ItemPresentation getItemPresentation(final Object element) {
     PresentationData _presentationData = new PresentationData();
     final Procedure1<PresentationData> _function = new Procedure1<PresentationData>() {
+      @Override
       public void apply(final PresentationData it) {
         Icon _image = DefaultItemPresentationProvider.this.image(element);
         it.setIcon(_image);
@@ -59,16 +61,12 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   }
   
   protected Icon _image(final EObject element) {
-    Icon _xblockexpression = null;
-    {
-      final PsiElement psiElement = this.psiModelAssociations.getPsiElement(element);
-      boolean _notEquals = (!Objects.equal(psiElement, null));
-      if (_notEquals) {
-        return psiElement.getIcon(0);
-      }
-      _xblockexpression = AllIcons.General.SecondaryGroup;
-    }
-    return _xblockexpression;
+    PsiElement _psiElement = this.psiModelAssociations.getPsiElement(element);
+    return this.image(_psiElement);
+  }
+  
+  protected Icon _image(final PsiElement element) {
+    return element.getIcon(0);
   }
   
   protected String _text(final Void element) {
@@ -147,7 +145,9 @@ public class DefaultItemPresentationProvider implements ItemPresentationProvider
   }
   
   public Icon image(final Object element) {
-    if (element instanceof EObject) {
+    if (element instanceof PsiElement) {
+      return _image((PsiElement)element);
+    } else if (element instanceof EObject) {
       return _image((EObject)element);
     } else if (element == null) {
       return _image((Void)null);

@@ -9,8 +9,11 @@ package org.eclipse.xtext.xbase.idea.presentation;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiElement;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.Icon;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -52,6 +55,26 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   @Inject
   private IBatchTypeResolver typeResolver;
   
+  @Override
+  protected Icon _image(final PsiElement element) {
+    return element.getIcon(Iconable.ICON_FLAG_VISIBILITY);
+  }
+  
+  protected Icon _image(final IResolvedConstructor constructor) {
+    JvmConstructor _declaration = constructor.getDeclaration();
+    return this.image(_declaration);
+  }
+  
+  protected Icon _image(final IResolvedField field) {
+    JvmField _declaration = field.getDeclaration();
+    return this.image(_declaration);
+  }
+  
+  protected Icon _image(final IResolvedOperation operation) {
+    JvmOperation _declaration = operation.getDeclaration();
+    return this.image(_declaration);
+  }
+  
   protected String _text(final JvmGenericType genericType) {
     return genericType.getSimpleName();
   }
@@ -83,6 +106,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
       String _plus_3 = (_simpleName + "(");
       List<LightweightTypeReference> _resolvedParameterTypes = element.getResolvedParameterTypes();
       final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+        @Override
         public String apply(final LightweightTypeReference it) {
           return it.getHumanReadableName();
         }
@@ -104,6 +128,7 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
   protected String _text(final IResolvedConstructor constructor) {
     List<LightweightTypeReference> _resolvedParameterTypes = constructor.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
+      @Override
       public String apply(final LightweightTypeReference it) {
         return it.getHumanReadableName();
       }
@@ -238,6 +263,27 @@ public class XbaseItemPresentationProvider extends DefaultItemPresentationProvid
       _xblockexpression = (_plus + decoratedPart);
     }
     return _xblockexpression;
+  }
+  
+  public Icon image(final Object constructor) {
+    if (constructor instanceof IResolvedConstructor) {
+      return _image((IResolvedConstructor)constructor);
+    } else if (constructor instanceof IResolvedOperation) {
+      return _image((IResolvedOperation)constructor);
+    } else if (constructor instanceof PsiElement) {
+      return _image((PsiElement)constructor);
+    } else if (constructor instanceof EObject) {
+      return _image((EObject)constructor);
+    } else if (constructor instanceof IResolvedField) {
+      return _image((IResolvedField)constructor);
+    } else if (constructor == null) {
+      return _image((Void)null);
+    } else if (constructor != null) {
+      return _image(constructor);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(constructor).toString());
+    }
   }
   
   public String text(final Object constructor) {

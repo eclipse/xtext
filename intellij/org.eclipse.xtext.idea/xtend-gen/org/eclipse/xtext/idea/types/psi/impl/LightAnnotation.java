@@ -24,34 +24,42 @@ public class LightAnnotation extends LightElement implements PsiAnnotation {
     this.qualifiedName = qualifiedName;
   }
   
+  @Override
   public String getQualifiedName() {
     return this.qualifiedName;
   }
   
+  @Override
   public String toString() {
     return this.qualifiedName;
   }
   
+  @Override
   public PsiAnnotationMemberValue findAttributeValue(final String attributeName) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public PsiAnnotationMemberValue findDeclaredAttributeValue(final String attributeName) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public PsiJavaCodeReferenceElement getNameReferenceElement() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public PsiAnnotationParameterList getParameterList() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public <T extends PsiAnnotationMemberValue> T setDeclaredAttributeValue(final String attributeName, final T value) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
   public PsiMetaData getMetaData() {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }

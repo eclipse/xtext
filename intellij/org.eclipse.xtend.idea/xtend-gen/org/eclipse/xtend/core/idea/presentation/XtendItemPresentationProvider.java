@@ -9,9 +9,11 @@ package org.eclipse.xtend.core.idea.presentation;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.intellij.psi.PsiElement;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.Icon;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -27,7 +29,9 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -60,6 +64,31 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   
   @Inject
   private OperatorMapping operatorMapping;
+  
+  protected Icon _image(final XtendTypeDeclaration element) {
+    JvmDeclaredType _inferredType = this._iXtendJvmAssociations.getInferredType(element);
+    return this.image(_inferredType);
+  }
+  
+  protected Icon _image(final XtendFunction element) {
+    JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
+    return this.image(_directlyInferredOperation);
+  }
+  
+  protected Icon _image(final XtendConstructor element) {
+    JvmConstructor _inferredConstructor = this._iXtendJvmAssociations.getInferredConstructor(element);
+    return this.image(_inferredConstructor);
+  }
+  
+  protected Icon _image(final XtendField element) {
+    JvmField _jvmField = this._iXtendJvmAssociations.getJvmField(element);
+    return this.image(_jvmField);
+  }
+  
+  protected Icon _image(final XtendEnumLiteral element) {
+    JvmField _jvmField = this._iXtendJvmAssociations.getJvmField(element);
+    return this.image(_jvmField);
+  }
   
   protected String _text(final XtendFile element) {
     Resource _eResource = element.eResource();
@@ -194,6 +223,37 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
       _xblockexpression = null;
     }
     return ((JvmTypeReference)_xblockexpression);
+  }
+  
+  public Icon image(final Object element) {
+    if (element instanceof XtendConstructor) {
+      return _image((XtendConstructor)element);
+    } else if (element instanceof XtendFunction) {
+      return _image((XtendFunction)element);
+    } else if (element instanceof XtendEnumLiteral) {
+      return _image((XtendEnumLiteral)element);
+    } else if (element instanceof XtendField) {
+      return _image((XtendField)element);
+    } else if (element instanceof XtendTypeDeclaration) {
+      return _image((XtendTypeDeclaration)element);
+    } else if (element instanceof IResolvedConstructor) {
+      return _image((IResolvedConstructor)element);
+    } else if (element instanceof IResolvedOperation) {
+      return _image((IResolvedOperation)element);
+    } else if (element instanceof PsiElement) {
+      return _image((PsiElement)element);
+    } else if (element instanceof EObject) {
+      return _image((EObject)element);
+    } else if (element instanceof IResolvedField) {
+      return _image((IResolvedField)element);
+    } else if (element == null) {
+      return _image((Void)null);
+    } else if (element != null) {
+      return _image(element);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(element).toString());
+    }
   }
   
   public String text(final Object element) {

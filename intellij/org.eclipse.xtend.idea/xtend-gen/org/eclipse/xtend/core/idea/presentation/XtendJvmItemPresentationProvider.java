@@ -38,6 +38,7 @@ public class XtendJvmItemPresentationProvider extends XbaseItemPresentationProvi
   @Inject
   private UIStrings uiStrings;
   
+  @Override
   protected String _text(final JvmGenericType genericType) {
     String _xblockexpression = null;
     {
