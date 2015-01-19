@@ -18,7 +18,7 @@
       <repositories location="http://download.eclipse.org/tools/gef/updates/milestones">
         <bundles name="org.eclipse.draw2d.feature.group"/>
       </repositories>
-      <repositories location="http://download.eclipse.org/technology/m2e/releases/1.0/1.0.0.20110606-1526/">
+      <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4/1.4.1.20140328-1905/">
         <bundles name="org.eclipse.m2e.core"/>
       </repositories>
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">

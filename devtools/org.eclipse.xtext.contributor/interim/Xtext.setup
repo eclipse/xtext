@@ -262,7 +262,7 @@
         <repository
             url="http://download.eclipse.org/tools/gef/updates/milestones"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
@@ -279,7 +279,7 @@
         <repository
             url="http://download.eclipse.org/tools/gef/updates/milestones"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
@@ -294,7 +294,7 @@
         <repository
             url="http://download.itemis.com/updates/releases/2.1.0/"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
@@ -309,7 +309,7 @@
         <repository
             url="http://download.itemis.com/updates/releases/2.1.0/"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
@@ -324,7 +324,7 @@
         <repository
             url="http://download.itemis.com/updates/releases/2.1.0/"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
@@ -339,7 +339,7 @@
         <repository
             url="http://download.itemis.com/updates/releases/2.1.0/"/>
         <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.0/"/>
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
         <repository
