@@ -145,6 +145,19 @@ public class JavaConverter implements IJavaCodeConverter {
   }
   
   /**
+   * @param javaSrc Java class source code as String
+   */
+  public JavaConverter.ConversionResult expressionToXtend(final String javaSrc) {
+    final ASTParser parser = this.javaAnalyzer.createDefaultJavaParser();
+    char[] _charArray = javaSrc.toCharArray();
+    parser.setSource(_charArray);
+    parser.setKind(ASTParser.K_EXPRESSION);
+    final ASTNode root = parser.createAST(null);
+    Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
+    return this.executeAstFlattener(javaSrc, _singleton);
+  }
+  
+  /**
    * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>
    * 			See org.eclipse.jdt.core.dom.ASTParser.setUnitName(String)
    * @param javaSrc Java source code as String

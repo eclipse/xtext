@@ -85,6 +85,16 @@ class JavaConverter implements IJavaCodeConverter {
 		}
 		return executeAstFlattener(javaSrc, Collections.singleton(root))
 	}
+	/**
+	 * @param javaSrc Java class source code as String
+	 */
+	def ConversionResult expressionToXtend(String javaSrc) {
+		val parser = javaAnalyzer.createDefaultJavaParser
+		parser.source = javaSrc.toCharArray
+		parser.kind = ASTParser.K_EXPRESSION
+		val root = parser.createAST(null)
+		return executeAstFlattener(javaSrc, Collections.singleton(root))
+	}
 
 	/**
 	 * @param unitName some CU name e.g. Clazz. If unitName is null, a body declaration content is considered.<br>

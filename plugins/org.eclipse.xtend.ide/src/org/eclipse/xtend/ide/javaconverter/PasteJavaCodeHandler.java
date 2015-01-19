@@ -91,7 +91,6 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			}
 		});
 		final String xtendCode = convertToXtend(javaCode, javaImports, targetElement, project);
-
 		if (!Strings.isEmpty(xtendCode)) {
 			if (javaImports != null) {
 				importsUtil.addImports(javaImports.getImports(), javaImports.getStaticImports(), new String[] {},
@@ -105,7 +104,7 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 			}
 			//TODO enable formatting, when performance became better
 			//	https://bugs.eclipse.org/bugs/show_bug.cgi?id=457814
-			//	doFormat(sourceViewer, xtendCode, selection);
+			//			doFormat(sourceViewer, xtendCode, selection);
 		}
 	}
 
@@ -133,7 +132,11 @@ public class PasteJavaCodeHandler extends AbstractHandler {
 		JavaConverter javaConverter = javaConverterProvider.get();
 		ConversionResult conversionResult;
 		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
-			conversionResult = javaConverter.statementToXtend(javaCode);
+			if (parseResult.getType() == ASTParser.K_EXPRESSION) {
+				conversionResult = javaConverter.expressionToXtend(javaCode);
+			} else {
+				conversionResult = javaConverter.statementToXtend(javaCode);
+			}
 		} else {
 			conversionResult = javaConverter.bodyDeclarationToXtend(javaCode, javaImports, project);
 		}
