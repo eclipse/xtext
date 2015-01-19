@@ -183,8 +183,7 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 		String textFromClipboard = ClipboardUtil.getTextFromClipboard();
 		if (xbaseClipboardData != null && !sameTarget(xbaseClipboardData)) {
 			doPasteXbaseCode(xbaseClipboardData);
-		} else if (javaImportsContent != null && getJavaCodeConverter() != null
-				&& canPasteJava(textFromClipboard, getJavaCodeConverter())) {
+		} else if (javaImportsContent != null && canPasteJava(textFromClipboard, getJavaCodeConverter())) {
 			doPasteJavaCode(textFromClipboard, javaImportsContent, getJavaCodeConverter());
 		} else {
 			textOperationTarget.doOperation(operationCode);
@@ -192,6 +191,9 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 	}
 
 	private boolean canPasteJava(String javaToConvert, IJavaCodeConverter javaCodeConverter) {
+		if (javaCodeConverter == null) {
+			return true;
+		}
 		XtextEditor xtextEditor = EditorUtils.getXtextEditor(getTextEditor());
 		EObject targetElement = xtextEditor.getDocument().priorityReadOnly(new IUnitOfWork<EObject, XtextResource>() {
 
@@ -229,11 +231,24 @@ public class ImportsAwareClipboardAction extends TextEditorAction {
 
 	private void doPasteJavaCode(String textFromClipboard, JavaImportData javaImportsContent,
 			IJavaCodeConverter iJavaCodeConverter) {
+		IRewriteTarget target = (IRewriteTarget) getTextEditor().getAdapter(IRewriteTarget.class);
+		if (target != null) {
+			target.beginCompoundChange();
+		}
 		try {
-			//TODO implement
 			textOperationTarget.doOperation(operationCode);
+			importsUtil.addImports(javaImportsContent.getImports(), javaImportsContent.getStaticImports(),
+					new String[] {}, getXtextDocument());
 		} catch (Exception e) {
-			textOperationTarget.doOperation(operationCode);
+			XtypeActivator
+					.getInstance()
+					.getLog()
+					.log(new Status(IStatus.ERROR, XtypeActivator.getInstance().getBundle().getSymbolicName(),
+							"Unexpected internal error: ", e));
+		} finally {
+			if (target != null) {
+				target.endCompoundChange();
+			}
 		}
 	}
 
