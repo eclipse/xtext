@@ -8,7 +8,7 @@
   <rm:property key="mwe.p2.repository" value="${xpand_mwe.download}/modeling/emft/mwe/updates/nightly"/>
   <rm:property key="mwe2launcher.p2.repository" value="${xpand_mwe.download}/modeling/tmf/xtext/updates/composite/latest"/>
   <rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases"/>
-  <rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.0/1.0.0.20110606-1526/"/>
+  <rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.4/1.4.1.20140328-1905/"/>
   <rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2"/>
   
   <rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit"/>

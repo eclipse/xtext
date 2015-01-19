@@ -52,7 +52,7 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.m2e.core" version="0.0.0"/>
-<repository location="http://download.eclipse.org/technology/m2e/releases/1.0"/>
+<repository location="http://download.eclipse.org/technology/m2e/releases/1.1"/>
 </location>
 </locations>
 </target>
