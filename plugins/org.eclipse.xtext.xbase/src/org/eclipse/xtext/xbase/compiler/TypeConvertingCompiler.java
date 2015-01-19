@@ -39,8 +39,6 @@ import com.google.common.collect.Lists;
  */
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
-	private final static String REASSIGNED_THIS_IN_LAMBDA = "!reassigned_this_for_lambda!";
-	
 	@Override
 	protected final void internalToJavaExpression(final XExpression obj, final ITreeAppendable appendable) {
 		LightweightTypeReference expectedType = getLightweightExpectedType(obj);
@@ -328,18 +326,15 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	
 	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
 		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType;
-		boolean isAlreadyInALambda = b.hasObject(REASSIGNED_THIS_IN_LAMBDA);
-		if (b.hasObject("this") && !isAlreadyInALambda) {
+		if (b.hasObject("this")) {
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {
-				doReassignThisInClosure(b, (JvmType) element);
+				// Don't reassign if the types are equal, since the 'this' of the enclosing type is shadowed
+				if (element != rawClosureType)
+					doReassignThisInClosure(b, (JvmType) element);
 			} else {
 				registerClosureAsThis = false;
 			}
-		}
-		if (!isAlreadyInALambda) {
-			// add a synthetic marker so we don't reassign this and super more than once.
-			b.declareSyntheticVariable(REASSIGNED_THIS_IN_LAMBDA, REASSIGNED_THIS_IN_LAMBDA);
 		}
 		if (registerClosureAsThis) {
 			b.declareVariable(rawClosureType, "this");
@@ -353,7 +348,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 			if (b.hasObject("super")) {
 				Object superElement = b.getObject("super");
 				if (superElement instanceof JvmType) {
-					b.declareSyntheticVariable(superElement, prevType.getSimpleName()+".super");
+					// Don't reassign the super of the enclosing type if it has already been reassigned
+					String superVariable = b.getName(superElement);
+					if ("super".equals(superVariable)) {
+						b.declareSyntheticVariable(superElement, prevType.getSimpleName()+".super");
+					}
 				}
 			}
 		}

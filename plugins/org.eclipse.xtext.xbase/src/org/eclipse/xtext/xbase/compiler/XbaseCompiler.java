@@ -1573,6 +1573,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.increaseIndentation();
 		try {
 			b.openScope();
+			String selfVariable = null;
+			if (needSyntheticSelfVariable(closure, type)) {
+				b.newLine().append("final ");
+				b.append(type).append(" ");
+				selfVariable = b.declareVariable(type.getType(), "_self");
+				b.append(selfVariable);
+				b.append(" = this;");
+			}
 			final LightweightTypeReference returnType = getClosureOperationReturnType(type, operation);
 			appendOperationVisibility(b, operation);
 			if (!operation.getTypeParameters().isEmpty()) {
@@ -1600,7 +1608,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(" {");
 			b.increaseIndentation();
-			reassignThisInClosure(b, type.getType());
+			if (selfVariable == null) {
+				reassignThisInClosure(b, type.getType());
+			} else {
+				// We have already assigned the closure type to _self, so don't assign it again
+				reassignThisInClosure(b, null);
+			}
 			compile(closure.getExpression(), b, returnType, newHashSet(operation.getExceptions()));
 			b.decreaseIndentation();
 			b.newLine().append("}");
@@ -1608,6 +1621,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.closeScope();
 		}
 		return b.decreaseIndentation().newLine().append("}");
+	}
+	
+	@SuppressWarnings("unused")
+	protected boolean needSyntheticSelfVariable(XClosure closure, LightweightTypeReference typeRef) {
+		return false;
 	}
 	
 	private void appendTypeParameters(ITreeAppendable b, JvmOperation operation, LightweightTypeReference instantiatedType) {
@@ -1649,7 +1667,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		GeneratorConfig config = b.getGeneratorConfig();
 		if (config != null && config.getTargetVersion().isAtLeast(JAVA6)
 				|| declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
-			b.append("@Override").newLine();
+			b.append("@").append(Override.class).newLine();
 		}
 		switch(operation.getVisibility()) {
 			case DEFAULT: break;
@@ -1729,19 +1747,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 	
-	protected boolean canCompileToJavaLambda(XClosure closure, LightweightTypeReference type, JvmOperation operation) {
-		if (!type.isInterfaceType())
+	protected boolean canCompileToJavaLambda(XClosure closure, LightweightTypeReference typeRef, JvmOperation operation) {
+		if (!typeRef.isInterfaceType())
 			return false;
 		
 		if (!operation.getTypeParameters().isEmpty())
 			return false;
 		
 		TreeIterator<EObject> iterator = closure.eAllContents();
+		JvmType jvmType = typeRef.getType();
 		while (iterator.hasNext()) {
 			EObject obj = iterator.next();
 			if (obj instanceof XClosure) {
 				iterator.prune();
-			} else if (obj instanceof XFeatureCall && isReferenceToSelf((XFeatureCall) obj)) {
+			} else if (obj instanceof XFeatureCall && isReferenceToSelf((XFeatureCall) obj, jvmType)) {
 				return false;
 			}
 		}
