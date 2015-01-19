@@ -1689,7 +1689,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				LightweightTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
 				b.append(parameterType);
 				b.append(" ");
-				String proposedParamName = makeJavaIdentifier(closureParam.getName());
+				String proposedParamName = makeJavaIdentifier(closureParam.getName());	
+				// Usually a normal variable would suffice here. The 'unique name' variable is a workaround for
+				// https://bugs.eclipse.org/bugs/show_bug.cgi?id=445949
 				String name = b.declareUniqueNameVariable(closureParam, proposedParamName);
 				b.append(name);
 				if (i != closureParams.size() - 1)

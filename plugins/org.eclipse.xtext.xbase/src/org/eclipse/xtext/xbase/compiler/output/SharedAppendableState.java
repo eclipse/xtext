@@ -81,6 +81,9 @@ public class SharedAppendableState {
 		return scopes.declareVariable(key, proposedName, true, false);
 	}
 	
+	/**
+	 * This is a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=445949
+	 */
 	public String declareUniqueNameVariable(Object key, String proposedName) {
 		return scopes.declareVariable(key, proposedName, false, true);
 	}
