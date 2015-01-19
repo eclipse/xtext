@@ -61,6 +61,7 @@ public interface IAppendable extends ISourceAppender {
 	
 	/**
 	 * Declares a variable with unique name, which is not used in the current or any parent scope.
+	 * This is a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=445949
 	 */
 	String declareUniqueNameVariable(Object key, String proposedName);
 	
