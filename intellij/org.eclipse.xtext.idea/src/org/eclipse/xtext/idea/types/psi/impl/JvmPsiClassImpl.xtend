@@ -152,11 +152,18 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 
 	override getOwnMethods() {
 		jvmType.members.filter(JvmExecutable).map [ m |
-			(new LightMethodBuilder(manager, language, m.simpleName, m.psiParameters, m.psiModifiers, m.psiThrowsList,
-				m.psiTypeParameterList) => [
+			(new LightMethodBuilder(
+				manager,
+				language,
+				m.simpleName,
+				m.psiParameters,
+				m.psiModifiers,
+				m.psiThrowsList,
+				m.psiTypeParameterList
+			) => [
 				containingClass = this
 				constructor = m instanceof JvmConstructor
-				//TODO subclass to allow doccomment
+				// TODO subclass to allow doccomment
 				if (m instanceof JvmOperation) {
 					methodReturnType = m.returnType.toPsiType
 				}
@@ -195,7 +202,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 		val primarySourceElement = jvmAssocations.getPrimarySourceElement(jvmElement)
 		psiAssocations.getPsiElement(primarySourceElement)
 	}
-	
+
 	private def setNullableNavigationElement(LightElement element, PsiElement navigationElement) {
 		if (navigationElement != null)
 			element.navigationElement = navigationElement
@@ -257,7 +264,9 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 
 	private def PsiType toPsiType(JvmTypeReference type) {
 		try {
-			if (type instanceof XComputedTypeReference) {
+			if (type == null) {
+				null
+			} else if (type instanceof XComputedTypeReference) {
 				type.equivalent.toPsiType
 			} else {
 				buildTypeFromTypeString(type.getQualifiedName('.'), psiElement, containingFile)
@@ -266,11 +275,11 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			throw e.wrapped
 		}
 	}
-	
+
 	/*
 	 * Copied from PsiClassImplUtil for Android Studio compatibility
 	 */
-	private def buildTypeFromTypeString(String typeName,  PsiElement context, PsiFile psiFile) {
+	private def buildTypeFromTypeString(String typeName, PsiElement context, PsiFile psiFile) {
 		val psiManager = psiFile.manager
 		if (typeName.indexOf('<') != -1 || typeName.indexOf('[') != -1 || typeName.indexOf('.') == -1) {
 			try {
@@ -282,7 +291,8 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 
 		val aClass = JavaPsiFacade.getInstance(psiManager.project).findClass(typeName, context.resolveScope)
 		if (aClass == null) {
-			val ref = new LightClassReference(psiManager, PsiNameHelper.getShortClassName(typeName), typeName, PsiSubstitutor.EMPTY, psiFile)
+			val ref = new LightClassReference(psiManager, PsiNameHelper.getShortClassName(typeName), typeName,
+				PsiSubstitutor.EMPTY, psiFile)
 			return new PsiClassReferenceType(ref, null)
 		} else {
 			val factory = JavaPsiFacade.getInstance(psiManager.project).elementFactory
@@ -290,7 +300,6 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 			return factory.createType(aClass, substitutor)
 		}
 	}
-
 
 	override getOwnInnerClasses() {
 		jvmType.allNestedTypes.map [ inner |
@@ -335,19 +344,19 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 
 	override getLBrace() {
 
-		//TODO
+		// TODO
 		null
 	}
 
 	override getRBrace() {
 
-		//TODO
+		// TODO
 		null
 	}
 
 	override getNameIdentifier() {
 
-		//TODO
+		// TODO
 		null
 	}
 
@@ -405,7 +414,7 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 	private def getPsiTypeParameterList(EObject declarator) {
 		new LightTypeParameterListBuilder(manager, language) => [
 			if (declarator instanceof JvmTypeParameterDeclarator) {
-				//TODO
+				// TODO
 			}
 		]
 	}
@@ -425,18 +434,19 @@ class JvmPsiClassImpl extends LightElement implements JvmPsiClass, PsiExtensible
 		}
 
 		val level = PsiUtil.getLanguageLevel(place)
-		return PsiClassImplUtil.processDeclarationsInClass(this, processor, state, null, lastParent, place, level, false)
+		return PsiClassImplUtil.processDeclarationsInClass(this, processor, state, null, lastParent, place, level,
+			false)
 	}
 
 	override toString() {
 		jvmType.toString
 	}
 
-	//default methods
+	// default methods
 	override protected getElementIcon(int flags) {
 		PsiClassImplUtil.getClassIcon(flags, this)
 	}
-	
+
 	override isEquivalentTo(PsiElement another) {
 		PsiClassImplUtil.isClassEquivalentTo(this, another)
 	}
@@ -563,7 +573,7 @@ public class AnnotatableModifierList extends LightModifierList {
 
 	override getApplicableAnnotations() {
 
-		//TODO filter
+		// TODO filter
 		annotations
 	}
 

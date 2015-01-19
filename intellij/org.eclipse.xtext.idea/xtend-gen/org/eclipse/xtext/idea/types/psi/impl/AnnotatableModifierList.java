@@ -20,6 +20,7 @@ public class AnnotatableModifierList extends LightModifierList {
     super(manager, language, new String[] {});
   }
   
+  @Override
   public LightAnnotation addAnnotation(final String qualifiedName) {
     LightAnnotation _xblockexpression = null;
     {
@@ -33,8 +34,10 @@ public class AnnotatableModifierList extends LightModifierList {
     return _xblockexpression;
   }
   
+  @Override
   public PsiAnnotation findAnnotation(final String qualifiedName) {
     final Function1<PsiAnnotation, Boolean> _function = new Function1<PsiAnnotation, Boolean>() {
+      @Override
       public Boolean apply(final PsiAnnotation a) {
         String _qualifiedName = a.getQualifiedName();
         return Boolean.valueOf(Objects.equal(qualifiedName, _qualifiedName));
@@ -43,10 +46,12 @@ public class AnnotatableModifierList extends LightModifierList {
     return IterableExtensions.<PsiAnnotation>findFirst(this.annotations, _function);
   }
   
+  @Override
   public PsiAnnotation[] getAnnotations() {
     return ((PsiAnnotation[])Conversions.unwrapArray(this.annotations, PsiAnnotation.class));
   }
   
+  @Override
   public PsiAnnotation[] getApplicableAnnotations() {
     return ((PsiAnnotation[])Conversions.unwrapArray(this.annotations, PsiAnnotation.class));
   }

@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.idea.presentation
 
 import com.google.inject.Inject
+import com.intellij.openapi.util.Iconable
+import com.intellij.psi.PsiElement
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -25,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.xbase.validation.UIStrings
 import org.eclipse.xtext.xtype.XImportDeclaration
 import org.eclipse.xtext.xtype.XImportSection
+import javax.swing.Icon
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -36,6 +39,22 @@ class XbaseItemPresentationProvider extends DefaultItemPresentationProvider {
 	@Inject CommonTypeComputationServices services
 
 	@Inject IBatchTypeResolver typeResolver
+	
+	override protected _image(PsiElement element) {
+		element.getIcon(Iconable.ICON_FLAG_VISIBILITY)
+	}
+	
+	def dispatch Icon image(IResolvedConstructor constructor) {
+		constructor.declaration.image
+	}
+	
+	def dispatch Icon image(IResolvedField field) {
+		field.declaration.image
+	}
+	
+	def dispatch Icon image(IResolvedOperation operation) {
+		operation.declaration.image
+	}
 
 	def dispatch text(JvmGenericType genericType) {
 		genericType.simpleName

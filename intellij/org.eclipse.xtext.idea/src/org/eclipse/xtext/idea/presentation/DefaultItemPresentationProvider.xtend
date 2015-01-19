@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.FeatureMap
 import org.eclipse.xtext.psi.IPsiModelAssociations
+import com.intellij.psi.PsiElement
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -42,11 +43,11 @@ class DefaultItemPresentationProvider implements ItemPresentationProvider {
 	}
 	
 	def dispatch Icon image(EObject element) {
-		val psiElement = psiModelAssociations.getPsiElement(element)
-		if (psiElement != null) {
-			return psiElement.getIcon(0)
-		}
-		AllIcons.General.SecondaryGroup
+		psiModelAssociations.getPsiElement(element).image
+	}
+	
+	def dispatch Icon image(PsiElement element) {
+		element.getIcon(0)
 	}
 	
 	def dispatch String text(Void element) {
