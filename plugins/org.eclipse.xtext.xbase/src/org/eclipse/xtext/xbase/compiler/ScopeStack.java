@@ -98,6 +98,9 @@ public class ScopeStack {
 	 * provides and registers a fresh variable in the current scope.
 	 * It takes parent scopes into account and only reuses names of synthetic variables from parent scopes.
 	 * Pseudo scopes are treated as if they were part of their parent scope.
+	 * 
+	 * @param withUniqueName
+	 * 		This is a workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=445949
 	 */
 	/* @NonNull */
 	public String declareVariable(/* @NonNull */ Object key, /* @NonNull */ String proposedName, boolean synthetic,
