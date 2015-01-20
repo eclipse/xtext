@@ -30,6 +30,7 @@ import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jdt.internal.core.builder.State;
 import org.eclipse.jdt.internal.core.builder.StringSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.ui.notification.PrimaryTypeToType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -170,10 +171,10 @@ public class JavaBuilderState {
    * Return types which are direct children of a given package.
    * </p>
    */
-  protected LinkedHashSet<String> _getQualifiedTypeNames(final IPackageFragment it) {
-    LinkedHashSet<String> _xblockexpression = null;
+  protected LinkedHashSet<PrimaryTypeToType> _getQualifiedTypeNames(final IPackageFragment it) {
+    LinkedHashSet<PrimaryTypeToType> _xblockexpression = null;
     {
-      final LinkedHashSet<String> qualifiedTypeNames = CollectionLiterals.<String>newLinkedHashSet();
+      final LinkedHashSet<PrimaryTypeToType> qualifiedTypeNames = CollectionLiterals.<PrimaryTypeToType>newLinkedHashSet();
       final SimpleLookupTable references = this.getReferences();
       boolean _equals = Objects.equal(references, null);
       if (_equals) {
@@ -203,16 +204,16 @@ public class JavaBuilderState {
             boolean _isPrefixOf = packagePath.isPrefixOf(typeLocatorPath);
             if (_isPrefixOf) {
               IPath _removeFirstSegments = typeLocatorPath.removeFirstSegments(srcPathSegmentCount);
-              final IPath qulifiedPath = _removeFirstSegments.removeFileExtension();
-              IPath _removeLastSegments = qulifiedPath.removeLastSegments(1);
+              final IPath qualifiedPath = _removeFirstSegments.removeFileExtension();
+              IPath _removeLastSegments = qualifiedPath.removeLastSegments(1);
               String _string = _removeLastSegments.toString();
               final String typePackageName = _string.replace("/", ".");
               boolean _equals_2 = packageName.equals(typePackageName);
               if (_equals_2) {
-                String _lastSegment = qulifiedPath.lastSegment();
+                String _lastSegment = qualifiedPath.lastSegment();
                 final String simpleTypeName = _lastSegment.toString();
-                LinkedHashSet<String> _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName);
-                Iterables.<String>addAll(qualifiedTypeNames, _qualifiedTypeNames);
+                LinkedHashSet<PrimaryTypeToType> _qualifiedTypeNames = this.getQualifiedTypeNames(((String)typeLocator), packageName, simpleTypeName);
+                Iterables.<PrimaryTypeToType>addAll(qualifiedTypeNames, _qualifiedTypeNames);
               }
             }
           }
@@ -228,7 +229,7 @@ public class JavaBuilderState {
    * Return types which are children of a given compilation unit.
    * </p>
    */
-  protected LinkedHashSet<String> _getQualifiedTypeNames(final ICompilationUnit it) {
+  protected LinkedHashSet<PrimaryTypeToType> _getQualifiedTypeNames(final ICompilationUnit it) {
     String _typeLocator = this.getTypeLocator(it);
     String _packageName = this.getPackageName(it);
     String _simplePrimaryTypeName = this.getSimplePrimaryTypeName(it);
@@ -252,9 +253,11 @@ public class JavaBuilderState {
     return _switchResult;
   }
   
-  private LinkedHashSet<String> getQualifiedTypeNames(final String typeLocator, final String packageName, final String simpleName) {
-    LinkedHashSet<String> _xblockexpression = null;
+  private LinkedHashSet<PrimaryTypeToType> getQualifiedTypeNames(final String typeLocator, final String packageName, final String simpleName) {
+    LinkedHashSet<PrimaryTypeToType> _xblockexpression = null;
     {
+      final LinkedHashSet<PrimaryTypeToType> qualifiedTypeNames = CollectionLiterals.<PrimaryTypeToType>newLinkedHashSet();
+      final String primaryTypeFqn = this.getQualifedTypeName(packageName, simpleName);
       char[][] _definedTypeNamesFor = null;
       if (this.state!=null) {
         _definedTypeNamesFor=this.state.getDefinedTypeNamesFor(typeLocator);
@@ -262,16 +265,16 @@ public class JavaBuilderState {
       final char[][] typeNames = _definedTypeNamesFor;
       boolean _equals = Objects.equal(typeNames, null);
       if (_equals) {
-        String _qualifedTypeName = this.getQualifedTypeName(packageName, simpleName);
-        return CollectionLiterals.<String>newLinkedHashSet(_qualifedTypeName);
+        PrimaryTypeToType _primaryTypeToType = new PrimaryTypeToType(primaryTypeFqn, primaryTypeFqn);
+        return CollectionLiterals.<PrimaryTypeToType>newLinkedHashSet(_primaryTypeToType);
       }
-      final LinkedHashSet<String> qualifiedTypeNames = CollectionLiterals.<String>newLinkedHashSet();
       final Procedure1<char[]> _function = new Procedure1<char[]>() {
         @Override
         public void apply(final char[] it) {
           String _string = new String(it);
-          String _qualifedTypeName = JavaBuilderState.this.getQualifedTypeName(packageName, _string);
-          qualifiedTypeNames.add(_qualifedTypeName);
+          final String typeName = JavaBuilderState.this.getQualifedTypeName(packageName, _string);
+          PrimaryTypeToType _primaryTypeToType = new PrimaryTypeToType(primaryTypeFqn, typeName);
+          qualifiedTypeNames.add(_primaryTypeToType);
         }
       };
       IterableExtensions.<char[]>forEach(((Iterable<char[]>)Conversions.doWrapArray(typeNames)), _function);
@@ -388,7 +391,7 @@ public class JavaBuilderState {
     }
   }
   
-  public LinkedHashSet<String> getQualifiedTypeNames(final Object it) {
+  public LinkedHashSet<PrimaryTypeToType> getQualifiedTypeNames(final Object it) {
     if (it instanceof ICompilationUnit) {
       return _getQualifiedTypeNames((ICompilationUnit)it);
     } else if (it instanceof IPackageFragment) {
