@@ -43,6 +43,14 @@
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="setup.p2:P2Task">
+    <requirement
+        name="org.eclipse.xtend.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.xtext.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.emf.sdk.feature.group"/>
+    <requirement
+        name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
@@ -158,8 +166,14 @@
       <predicate
           xsi:type="predicates:AndPredicate">
         <operand
-            xsi:type="predicates:RepositoryPredicate"
-            project="org.xpect.sdk"/>
+            xsi:type="predicates:OrPredicate">
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.xpect.sdk"/>
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="Xpect-pages"/>
+        </operand>
       </predicate>
     </workingSet>
     <description>The dynamic working sets for ${scope.project.label}</description>
@@ -200,6 +214,8 @@
       <sourceLocator
           rootFolder="${git.clone.website.location}"/>
     </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask"/>
     <stream
         name="gh-pages"
         label="gh-pages"/>
