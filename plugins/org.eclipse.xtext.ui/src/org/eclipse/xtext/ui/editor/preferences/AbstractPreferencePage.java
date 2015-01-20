@@ -1,29 +1,33 @@
+package org.eclipse.xtext.ui.editor.preferences;
+
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2008, 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *   itemis AG - initial API and implementation
+ *   Cloudsmith Inc - changes to store 'use project settings' in project
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor.preferences;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -39,14 +43,23 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbenchPropertyPage;
 import org.eclipse.ui.dialogs.PreferencesUtil;
-import org.eclipse.xtext.ui.internal.Activator;
+import org.eclipse.xtext.ui.preferences.PropertyAndPreferencePage;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * This implementation works with a {@link FixedScopedPreferenceStore}
+ * <p>
+ * The following changes have been made:
+ * <ul>
+ * <li>'useProjectSettings' is now stored in the project preference store as opposed to the project meta-data stored in
+ * the workspace. This is done so that import of a project automatically gets the intended 'useProjectSettings'.</li>
+ * </ul>
  * 
+ * @author Dennis Hübner - Initial contribution and API
+ * @author Henrik Lindberg - changes to store 'use project settings' in project
+ * @see PropertyAndPreferencePage
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
@@ -89,7 +102,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	public AbstractPreferencePage() {
 		super(GRID);
 	}
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
@@ -102,11 +115,12 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	}
 
 	/**
-	 * @return the qualifer used to look up the preference node of the
-	 *         configured preferencesstore
+	 * @deprecated Use {@link #qualifiedName()} instead
+	 * @return the qualifer used to look up the preference node of the configured preferencesstore
 	 */
+	@Deprecated
 	protected String getQualifier() {
-		return Activator.getDefault().getBundle().getSymbolicName();
+		return qualifiedName();
 	}
 
 	/*
@@ -151,6 +165,7 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 			public void widgetSelected(SelectionEvent e) {
 				String id = qualifiedName();
 				PreferencesUtil.createPreferenceDialogOn(getShell(), id, new String[] { id }, null).open();
+				updateFieldEditors(false);
 			}
 		});
 		link.setLayoutData(new GridData(SWT.END, SWT.CENTER, true, false));
@@ -159,13 +174,27 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		Label horizontalLine = new Label(projectSettingsParent, SWT.SEPARATOR | SWT.HORIZONTAL);
 		horizontalLine.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, false, 2, 1));
 		horizontalLine.setFont(projectSettingsParent.getFont());
+		//backward compatibility
+		restoreOldSettings();
+		useProjectSettingsButton.setSelection(isUseProjectSettings());
+	}
 
-		try {
-			useProjectSettingsButton.setSelection(Boolean.valueOf(currentProject().getPersistentProperty(
-					new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS))));
-		}
-		catch (CoreException e) {
-			log.error("Error", e); //$NON-NLS-1$
+	private void restoreOldSettings() {
+		if (isPropertyPage()) {
+			QualifiedName oldKey = new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS);
+			try {
+				String oldValue = currentProject().getPersistentProperty(oldKey);
+				if (oldValue != null) {
+					//remove old entry
+					currentProject().setPersistentProperty(oldKey, null);
+					//if were true - save copy into project settings
+					if (Boolean.valueOf(oldValue)) {
+						saveUseProjectSettings(true);
+					}
+				}
+			} catch (Exception e) {
+				log.debug("Failed to read persistent property", e);
+			}
 		}
 
 	}
@@ -176,13 +205,14 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		return project;
 	}
 
-	@Inject @Named("languageName")
+	@Inject
+	@Named("languageName")
 	private String languageName;
 
 	protected String getLanguageName() {
 		return this.languageName;
 	}
-	
+
 	/**
 	 * @return prefix for preference keys
 	 */
@@ -210,55 +240,111 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		super.addField(editor);
 	}
 
+	/**
+	 * Gets the 'useProjectSettings' flag in the project preferences.
+	 * 
+	 * @return true if the settings on this page are project specific
+	 */
+	private Boolean isUseProjectSettings() {
+		return Boolean.valueOf(getPreferenceStore().getBoolean(useProjectSettingsPreferenceName()));
+	}
+
+	/**
+	 * Produces the preference key to use for the 'use project settings' flag when this preference page is is used as a
+	 * properties page.
+	 * 
+	 * @return the concatenation of {@link #qualifiedName()}, "." and {@link #USE_PROJECT_SETTINGS}.
+	 * @since 2.8
+	 */
+	protected String useProjectSettingsPreferenceName() {
+		return qualifiedName() + "." + USE_PROJECT_SETTINGS;
+	}
+
+	/**
+	 * Switches the search scope of the preference store to use [Project, Instance, Configuration] if values are project
+	 * specific, and [Instance, Configuration] otherwise. This implementation requires that the given preference store
+	 * is based on the Project preference store when the page is used as a Properties page. (This is done in
+	 * {@link #doGetPreferenceStore()}).
+	 */
 	@SuppressWarnings("deprecation")
 	private void handleUseProjectSettings() {
+		// Note: uses the pre Eclipse 3.6 way of specifying search scopes (deprecated since 3.6)
 		boolean isUseProjectSettings = useProjectSettingsButton.getSelection();
 		link.setEnabled(!isUseProjectSettings);
 		if (!isUseProjectSettings) {
-			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { new InstanceScope(),
-					new ConfigurationScope() });
-		}
-		else {
+			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
+					new InstanceScope(), new ConfigurationScope() });
+		} else {
 			((FixedScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
 					new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
+			setProjectSpecificValues();
 		}
 		updateFieldEditors(isUseProjectSettings);
 	}
 
+	/**
+	 * Loads values of all field editors using current search scopes in the preference store. Also updates fields
+	 * enabled status. (The effect is that fields show project specific values when enabled, and instance scoped/default
+	 * values when disabled).
+	 * 
+	 * @param enabled
+	 */
 	protected void updateFieldEditors(boolean enabled) {
-		// TODO handle do not use project settings sets project settings to
-		// default
 		Composite parent = getFieldEditorParent();
-		Iterator<FieldEditor> it = editors.iterator();
-		while (it.hasNext()) {
-			FieldEditor editor = it.next();
-			if (enabled)
-				editor.load();
-			else
-				editor.loadDefault();
+		for (FieldEditor editor : editors) {
+			editor.load();
 			editor.setEnabled(enabled, parent);
 		}
+		getDefaultsButton().setEnabled(enabled);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.eclipse.jface.preference.FieldEditorPreferencePage#performOk()
-	 */
 	@Override
 	public boolean performOk() {
 		boolean retVal = super.performOk();
 		if (retVal && isPropertyPage()) {
 			try {
-				currentProject().setPersistentProperty(new QualifiedName(qualifiedName(), USE_PROJECT_SETTINGS),
-						String.valueOf(useProjectSettingsButton.getSelection()));
-				((IPersistentPreferenceStore) getPreferenceStore()).save();
-			}
-			catch (Exception e) {
+				saveUseProjectSettings(useProjectSettingsButton.getSelection());
+			} catch (Exception e) {
 				log.error("Error", e); //$NON-NLS-1$
 				retVal = false;
 			}
 		}
 		return retVal;
 	}
+
+	/**
+	 * Saves the 'use project settings' as a preference in the store using the
+	 * {@link #useProjectSettingsPreferenceName()} as the key. If not project specific, all affected keys are removed
+	 * from the project preferences.
+	 * 
+	 * @throws IOException
+	 */
+	private void saveUseProjectSettings(boolean isProjectSpecific) throws IOException {
+		final FixedScopedPreferenceStore store = (FixedScopedPreferenceStore) getPreferenceStore();
+		if (!isProjectSpecific) {
+			// remove all the keys (written by various field editors)
+			IEclipsePreferences storePreferences = store.getStorePreferences();
+			for (FieldEditor field : editors) {
+				storePreferences.remove(field.getPreferenceName());
+			}
+			// Also remove the master key (i.e. use default/default == false when later reading).
+			storePreferences.remove(useProjectSettingsPreferenceName());
+		} else {
+			store.setValue(useProjectSettingsPreferenceName(), Boolean.toString(isProjectSpecific));
+		}
+		store.save();
+	}
+
+	/**
+	 * Copies all the project specific values (except master key) to the values of the instance preference store.
+	 */
+	private void setProjectSpecificValues() {
+		FixedScopedPreferenceStore store = (FixedScopedPreferenceStore) getPreferenceStore();
+		IEclipsePreferences storePreferences = store.getStorePreferences();
+		for (FieldEditor field : editors) {
+			String key = field.getPreferenceName();
+			storePreferences.put(key, store.getString(key));
+		}
+	}
+
 }
