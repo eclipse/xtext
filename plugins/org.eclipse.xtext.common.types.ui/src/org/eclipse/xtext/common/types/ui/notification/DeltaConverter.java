@@ -1,5 +1,7 @@
 package org.eclipse.xtext.common.types.ui.notification;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +28,9 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -172,18 +177,52 @@ public class DeltaConverter {
 		if ((delta.getFlags() & IJavaElementDelta.F_PRIMARY_WORKING_COPY) != 0) {
 			return;
 		}
-		Collection<String> previousTypeNames = getQualifiedTypeNames(delta);
+		Collection<PrimaryTypeToType> primaryToChildtypesFromIndex = getQualifiedPrimaryToTypeNames(delta);
+		final Collection<String> previousTypeNames = newHashSet(Iterables.transform(primaryToChildtypesFromIndex, new Function<PrimaryTypeToType,String>() {
+			@Override
+			public String apply(PrimaryTypeToType input) {
+				return input.getTypeName();
+			}
+		}));
+		
 		ICompilationUnit compilationUnit = (ICompilationUnit) delta.getElement();
 		try {
-			for (IType type : compilationUnit.getAllTypes()) {
-				String typeName = type.getFullyQualifiedName();
-				if (previousTypeNames.remove(typeName)) {
-					convertChangedType(type, result);
-				} else {
-					convertNewType(type, result);
+			for (IType type : compilationUnit.getTypes()) {
+				if (!isDerived(type)) {
+					String typeName = type.getFullyQualifiedName();
+					URI topLevelURI = uriHelper.createResourceURIForFQN(typeName);
+					convertChangedTypeAndChildren(result, previousTypeNames, type, topLevelURI);
 				}
 			}
-			convertRemovedTypes(previousTypeNames, result);
+			convertRemovedTypes(Iterables.filter(primaryToChildtypesFromIndex, new Predicate<PrimaryTypeToType>(){
+
+				@Override
+				public boolean apply(PrimaryTypeToType input) {
+					return previousTypeNames.contains(input.getTypeName());
+				}
+
+				}), result);
+		} catch (JavaModelException e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug(e, e);
+			}
+		}
+	}
+	/**
+	 * @since 2.8
+	 */
+	private void convertChangedTypeAndChildren(List<IResourceDescription.Delta> result, Collection<String> previousTypeNames,
+			IType type, URI topLevelUri) {
+		String typeName = type.getFullyQualifiedName();
+		if (previousTypeNames.remove(typeName)) {
+			convertChangedType(topLevelUri, type, result);
+		} else {
+			convertNewType(topLevelUri, type, result);
+		}
+		try {
+			for(IType child : type.getTypes()){
+				convertChangedTypeAndChildren(result, previousTypeNames, child, topLevelUri);
+			}
 		} catch (JavaModelException e) {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug(e, e);
@@ -193,7 +232,9 @@ public class DeltaConverter {
 
 	/**
 	 * @since 2.5
+	 * @deprecated
 	 */
+	@Deprecated
 	protected void convertChangedType(IType type, List<IResourceDescription.Delta> result) {
 		if (!isDerived(type)) {
 			TypeResourceDescription newDescription = createTypeResourceDescription(type.getFullyQualifiedName());
@@ -202,14 +243,28 @@ public class DeltaConverter {
 			result.add(createStructureChangeDelta(type, oldDescription, newDescription));
 		}
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void convertChangedType(URI topLevelUri, IType type, List<IResourceDescription.Delta> result) {
+		TypeResourceDescription newDescription = createTypeResourceDescription(topLevelUri, type.getFullyQualifiedName());
+		IResourceDescription oldDescription = createTypeResourceDescription(newDescription.getURI(),
+				type.getFullyQualifiedName());
+		result.add(createStructureChangeDelta(type, oldDescription, newDescription));
+	}
 
 	/**
 	 * @since 2.5
 	 */
 	protected void convertNewTypes(ICompilationUnit compilationUnit, List<IResourceDescription.Delta> result) {
 		try {
-			for (IType type : compilationUnit.getAllTypes()) {
-				convertNewType(type, result);
+			for (IType type : compilationUnit.getTypes()) {
+				if (!isDerived(type)) {
+					String typeName = type.getFullyQualifiedName();
+					URI topLevelURI = uriHelper.createResourceURIForFQN(typeName);
+					convertNewTypeAndChildren(topLevelURI, type, result);
+				}
 			}
 		} catch (JavaModelException e) {
 			if (LOGGER.isDebugEnabled())
@@ -219,11 +274,35 @@ public class DeltaConverter {
 
 	/**
 	 * @since 2.5
+	 * @deprecated as we need the URI of the topLevelType to create the TypeResourceDescription
 	 */
+	@Deprecated
 	protected void convertNewType(IType type, List<IResourceDescription.Delta> result) {
 		if (!isDerived(type)) {
 			result.add(createContentChangeDelta(null, createTypeResourceDescription(type.getFullyQualifiedName())));
 		}
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected void convertNewTypeAndChildren(URI topLevelType, IType type, List<IResourceDescription.Delta> result) {
+		convertNewType(topLevelType, type, result);
+		try {
+			for(IType child : type.getTypes()){
+				convertNewTypeAndChildren(topLevelType, child, result);
+			}
+		} catch (JavaModelException e) {
+			if (LOGGER.isDebugEnabled())
+				LOGGER.debug(e, e);
+		}
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void convertNewType(URI topLevelType, IType type, List<IResourceDescription.Delta> result) {
+		result.add(createContentChangeDelta(null, createTypeResourceDescription(topLevelType, type.getFullyQualifiedName())));
 	}
 
 	/**
@@ -234,10 +313,21 @@ public class DeltaConverter {
 			result.add(createContentChangeDelta(createTypeResourceDescription(typeName), null));
 		}
 	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void convertRemovedType(URI toplevelUri, String typeName, List<IResourceDescription.Delta> result) {
+		if (!isDerived(typeName)) {
+			result.add(createContentChangeDelta(createTypeResourceDescription(toplevelUri, typeName), null));
+		}
+	}
 
 	/**
 	 * @since 2.5
+	 * @deprecated as we need the URI of the topLevelType to create the TypeResourceDescription
 	 */
+	@Deprecated
 	protected TypeResourceDescription createTypeResourceDescription(String typeName) {
 		URI uri = uriHelper.createResourceURIForFQN(typeName);
 		return createTypeResourceDescription(uri, typeName);
@@ -396,29 +486,67 @@ public class DeltaConverter {
 	 * @since 2.5
 	 */
 	protected void convertRemovedTypes(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
-		convertRemovedTypes(getQualifiedTypeNames(delta), result);
+		convertRemovedTypes(getQualifiedPrimaryToTypeNames(delta), result);
 	}
+
 
 	/**
 	 * @since 2.5
+	 * @deprecated
 	 */
+	@Deprecated
 	protected void convertRemovedTypes(Collection<String> typeNames, List<IResourceDescription.Delta> result) {
 		for (String typeName : typeNames) {
 			convertRemovedType(typeName, result);
 		}
 	}
-
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void convertRemovedTypes(Iterable<PrimaryTypeToType> typeNames, List<IResourceDescription.Delta> result) {
+		for (PrimaryTypeToType primaryToChildType : typeNames) {
+			URI toplevelUri = uriHelper.createResourceURIForFQN(primaryToChildType.getPrimaryTypeName());
+			convertRemovedType(toplevelUri, primaryToChildType.getTypeName(), result);
+		}
+	}
+	
 	/**
 	 * @since 2.5
+	 * @deprecated
+	 * 
 	 */
+	@Deprecated
 	protected Collection<String> getQualifiedTypeNames(IJavaElementDelta delta) {
 		return getQualifiedTypeNames(delta.getElement());
 	}
 
 	/**
 	 * @since 2.5
+	 * @deprecated
+	 * 
 	 */
+	@Deprecated
 	protected Collection<String> getQualifiedTypeNames(IJavaElement element) {
+		return Lists.newArrayList(Iterables.transform(getQualifiedPrimaryToTypeNames(element), new Function<PrimaryTypeToType,String>() {
+			@Override
+			public String apply(PrimaryTypeToType input) {
+				return input.getTypeName();
+			}
+		}));
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected Collection<PrimaryTypeToType> getQualifiedPrimaryToTypeNames(IJavaElementDelta delta) {
+		return getQualifiedPrimaryToTypeNames(delta.getElement());
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected Collection<PrimaryTypeToType> getQualifiedPrimaryToTypeNames(IJavaElement element) {
 		return JavaBuilderState.getLastBuiltState(element).getQualifiedTypeNames(element);
 	}
 
