@@ -11,6 +11,7 @@ import org.eclipse.xtend.core.tests.parsing.ParserTest
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.idea.tests.parsing.ModelChecker
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -18,11 +19,25 @@ import org.junit.Ignore
 @FinalFieldsConstructor
 @Ignore("Only here as a delegate")
 class IdeaXtendParserTest extends ParserTest {
-	
+
 	val ModelChecker modelChecker
 
 	override file(String string, boolean validate) {
 		modelChecker.checkModel(string, validate)
 	}
-	
+
+	@Test
+	def void testErrorRecovery() {
+		file('''
+			package foo
+			
+			class Foo2323 {
+			
+			    def create val result = newArrayList foo() {
+			        result.
+			    }
+			}
+		''')
+	}
+
 }
