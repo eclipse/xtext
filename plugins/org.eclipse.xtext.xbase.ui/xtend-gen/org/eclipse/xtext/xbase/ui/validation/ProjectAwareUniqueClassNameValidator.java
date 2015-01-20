@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
@@ -32,6 +33,7 @@ import org.eclipse.jdt.core.IPackageDeclaration;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
@@ -87,186 +89,187 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
   public boolean doCheckUniqueName(final QualifiedName name, final JvmDeclaredType type) {
     boolean _doCheckUniqueName = super.doCheckUniqueName(name, type);
     if (_doCheckUniqueName) {
-      return this.doCheckUniqueInProject(name, type);
+      try {
+        return this.doCheckUniqueInProject(name, type);
+      } catch (final Throwable _t) {
+        if (_t instanceof JavaModelException) {
+          final JavaModelException e = (JavaModelException)_t;
+          return true;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
     } else {
       return true;
     }
   }
   
-  private ProjectAwareUniqueClassNameValidator.SourceTraversal doCheckUniqueInProjectSource(final String packageName, final String typeName, final JvmDeclaredType type, final IPackageFragmentRoot[] sourceFolders) {
-    try {
-      IndexManager indexManager = JavaModelManager.getIndexManager();
-      for (final IPackageFragmentRoot sourceFolder : sourceFolders) {
-        int _awaitingJobsCount = indexManager.awaitingJobsCount();
-        boolean _greaterThan = (_awaitingJobsCount > 0);
-        if (_greaterThan) {
-          IResource _resource = sourceFolder.getResource();
-          boolean _isDerived = this.isDerived(_resource);
-          boolean _not = (!_isDerived);
-          if (_not) {
-            IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
-            boolean _exists = packageFragment.exists();
-            if (_exists) {
-              ICompilationUnit[] units = packageFragment.getCompilationUnits();
-              for (final ICompilationUnit unit : units) {
-                {
-                  final IResource resource = unit.getResource();
-                  boolean _isDerived_1 = this.isDerived(resource);
-                  boolean _not_1 = (!_isDerived_1);
-                  if (_not_1) {
-                    IType javaType = unit.getType(typeName);
-                    boolean _exists_1 = javaType.exists();
-                    if (_exists_1) {
-                      String _elementName = unit.getElementName();
-                      this.addIssue(type, _elementName);
-                      return ProjectAwareUniqueClassNameValidator.SourceTraversal.DUPLICATE;
-                    }
+  private ProjectAwareUniqueClassNameValidator.SourceTraversal doCheckUniqueInProjectSource(final String packageName, final String typeName, final JvmDeclaredType type, final IPackageFragmentRoot[] sourceFolders) throws JavaModelException {
+    IndexManager indexManager = JavaModelManager.getIndexManager();
+    for (final IPackageFragmentRoot sourceFolder : sourceFolders) {
+      int _awaitingJobsCount = indexManager.awaitingJobsCount();
+      boolean _greaterThan = (_awaitingJobsCount > 0);
+      if (_greaterThan) {
+        IResource _resource = sourceFolder.getResource();
+        boolean _isDerived = this.isDerived(_resource);
+        boolean _not = (!_isDerived);
+        if (_not) {
+          IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
+          boolean _exists = packageFragment.exists();
+          if (_exists) {
+            ICompilationUnit[] units = packageFragment.getCompilationUnits();
+            for (final ICompilationUnit unit : units) {
+              {
+                final IResource resource = unit.getResource();
+                boolean _isDerived_1 = this.isDerived(resource);
+                boolean _not_1 = (!_isDerived_1);
+                if (_not_1) {
+                  IType javaType = unit.getType(typeName);
+                  boolean _exists_1 = javaType.exists();
+                  if (_exists_1) {
+                    String _elementName = unit.getElementName();
+                    this.addIssue(type, _elementName);
+                    return ProjectAwareUniqueClassNameValidator.SourceTraversal.DUPLICATE;
                   }
                 }
               }
             }
           }
-        } else {
-          return ProjectAwareUniqueClassNameValidator.SourceTraversal.INTERRUPT;
         }
+      } else {
+        return ProjectAwareUniqueClassNameValidator.SourceTraversal.INTERRUPT;
       }
-      return ProjectAwareUniqueClassNameValidator.SourceTraversal.UNIQUE;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
+    return ProjectAwareUniqueClassNameValidator.SourceTraversal.UNIQUE;
   }
   
-  public boolean doCheckUniqueInProject(final QualifiedName name, final JvmDeclaredType type) {
-    try {
-      Resource _eResource = type.eResource();
-      ResourceSet _resourceSet = _eResource.getResourceSet();
-      final IJavaProject javaProject = this.javaProjectProvider.getJavaProject(_resourceSet);
-      final String packageName = type.getPackageName();
-      final String typeName = type.getSimpleName();
-      IPackageFragmentRoot[] _packageFragmentRoots = javaProject.getPackageFragmentRoots();
-      final Function1<IPackageFragmentRoot, Boolean> _function = new Function1<IPackageFragmentRoot, Boolean>() {
-        @Override
-        public Boolean apply(final IPackageFragmentRoot it) {
-          try {
-            int _kind = it.getKind();
-            return Boolean.valueOf((_kind == IPackageFragmentRoot.K_SOURCE));
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      final Iterable<IPackageFragmentRoot> sourceFolders = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
-      IndexManager indexManager = JavaModelManager.getIndexManager();
-      boolean _or = false;
-      int _length = ((Object[])Conversions.unwrapArray(sourceFolders, Object.class)).length;
-      boolean _equals = (_length == 0);
-      if (_equals) {
-        _or = true;
-      } else {
-        int _awaitingJobsCount = indexManager.awaitingJobsCount();
-        boolean _greaterThan = (_awaitingJobsCount > 0);
-        _or = _greaterThan;
-      }
-      if (_or) {
-        ProjectAwareUniqueClassNameValidator.SourceTraversal _doCheckUniqueInProjectSource = this.doCheckUniqueInProjectSource(packageName, typeName, type, ((IPackageFragmentRoot[])Conversions.unwrapArray(sourceFolders, IPackageFragmentRoot.class)));
-        if (_doCheckUniqueInProjectSource != null) {
-          switch (_doCheckUniqueInProjectSource) {
-            case DUPLICATE:
-              return false;
-            case UNIQUE:
-              return true;
-            default:
-              break;
-          }
-        } else {
+  public boolean doCheckUniqueInProject(final QualifiedName name, final JvmDeclaredType type) throws JavaModelException {
+    Resource _eResource = type.eResource();
+    ResourceSet _resourceSet = _eResource.getResourceSet();
+    final IJavaProject javaProject = this.javaProjectProvider.getJavaProject(_resourceSet);
+    final String packageName = type.getPackageName();
+    final String typeName = type.getSimpleName();
+    IPackageFragmentRoot[] _packageFragmentRoots = javaProject.getPackageFragmentRoots();
+    final Function1<IPackageFragmentRoot, Boolean> _function = new Function1<IPackageFragmentRoot, Boolean>() {
+      @Override
+      public Boolean apply(final IPackageFragmentRoot it) {
+        try {
+          int _kind = it.getKind();
+          return Boolean.valueOf((_kind == IPackageFragmentRoot.K_SOURCE));
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       }
-      final HashSet<String> workingCopyPaths = CollectionLiterals.<String>newHashSet();
-      ICompilationUnit[] copies = this.getWorkingCopies(type);
-      boolean _notEquals = (!Objects.equal(copies, null));
-      if (_notEquals) {
-        for (final ICompilationUnit workingCopy : copies) {
-          {
-            final IPath path = workingCopy.getPath();
-            boolean _and = false;
-            IPath _path = javaProject.getPath();
-            boolean _isPrefixOf = _path.isPrefixOf(path);
-            if (!_isPrefixOf) {
-              _and = false;
-            } else {
-              IResource _resource = workingCopy.getResource();
-              boolean _isDerived = this.isDerived(_resource);
-              boolean _not = (!_isDerived);
-              _and = _not;
-            }
-            if (_and) {
-              IPackageDeclaration _packageDeclaration = workingCopy.getPackageDeclaration(packageName);
-              boolean _exists = _packageDeclaration.exists();
-              if (_exists) {
-                IType result = workingCopy.getType(typeName);
-                boolean _exists_1 = result.exists();
-                if (_exists_1) {
-                  String _elementName = workingCopy.getElementName();
-                  this.addIssue(type, _elementName);
-                  return false;
-                }
-              }
-              IPath _path_1 = workingCopy.getPath();
-              String _string = _path_1.toString();
-              workingCopyPaths.add(_string);
-            }
-          }
-        }
-      }
-      char[] _xifexpression = null;
-      boolean _equals_1 = Objects.equal(packageName, null);
-      if (_equals_1) {
-        _xifexpression = CharOperation.NO_CHAR;
-      } else {
-        _xifexpression = packageName.toCharArray();
-      }
-      char[] _charArray = typeName.toCharArray();
-      final TypeDeclarationPattern pattern = new TypeDeclarationPattern(_xifexpression, CharOperation.NO_CHAR_CHAR, _charArray, IIndexConstants.TYPE_SUFFIX, 
-        (SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE));
-      final IndexQueryRequestor _function_1 = new IndexQueryRequestor() {
-        @Override
-        public boolean acceptIndexMatch(final String documentPath, final SearchPattern indexRecord, final SearchParticipant participant, final AccessRuleSet access) {
-          boolean _contains = workingCopyPaths.contains(documentPath);
-          if (_contains) {
-            return true;
-          }
-          IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-          IWorkspaceRoot _root = _workspace.getRoot();
-          Path _path = new Path(documentPath);
-          IFile file = _root.getFile(_path);
-          boolean _isDerived = ProjectAwareUniqueClassNameValidator.this.isDerived(file);
-          boolean _not = (!_isDerived);
-          if (_not) {
-            String _name = file.getName();
-            ProjectAwareUniqueClassNameValidator.this.addIssue(type, _name);
+    };
+    final Iterable<IPackageFragmentRoot> sourceFolders = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
+    IndexManager indexManager = JavaModelManager.getIndexManager();
+    boolean _or = false;
+    int _length = ((Object[])Conversions.unwrapArray(sourceFolders, Object.class)).length;
+    boolean _equals = (_length == 0);
+    if (_equals) {
+      _or = true;
+    } else {
+      int _awaitingJobsCount = indexManager.awaitingJobsCount();
+      boolean _greaterThan = (_awaitingJobsCount > 0);
+      _or = _greaterThan;
+    }
+    if (_or) {
+      ProjectAwareUniqueClassNameValidator.SourceTraversal _doCheckUniqueInProjectSource = this.doCheckUniqueInProjectSource(packageName, typeName, type, ((IPackageFragmentRoot[])Conversions.unwrapArray(sourceFolders, IPackageFragmentRoot.class)));
+      if (_doCheckUniqueInProjectSource != null) {
+        switch (_doCheckUniqueInProjectSource) {
+          case DUPLICATE:
             return false;
+          case UNIQUE:
+            return true;
+          default:
+            break;
+        }
+      } else {
+      }
+    }
+    final HashSet<String> workingCopyPaths = CollectionLiterals.<String>newHashSet();
+    ICompilationUnit[] copies = this.getWorkingCopies(type);
+    boolean _notEquals = (!Objects.equal(copies, null));
+    if (_notEquals) {
+      for (final ICompilationUnit workingCopy : copies) {
+        {
+          final IPath path = workingCopy.getPath();
+          boolean _and = false;
+          IPath _path = javaProject.getPath();
+          boolean _isPrefixOf = _path.isPrefixOf(path);
+          if (!_isPrefixOf) {
+            _and = false;
+          } else {
+            IResource _resource = workingCopy.getResource();
+            boolean _isDerived = this.isDerived(_resource);
+            boolean _not = (!_isDerived);
+            _and = _not;
           }
+          if (_and) {
+            IPackageDeclaration _packageDeclaration = workingCopy.getPackageDeclaration(packageName);
+            boolean _exists = _packageDeclaration.exists();
+            if (_exists) {
+              IType result = workingCopy.getType(typeName);
+              boolean _exists_1 = result.exists();
+              if (_exists_1) {
+                String _elementName = workingCopy.getElementName();
+                this.addIssue(type, _elementName);
+                return false;
+              }
+            }
+            IPath _path_1 = workingCopy.getPath();
+            String _string = _path_1.toString();
+            workingCopyPaths.add(_string);
+          }
+        }
+      }
+    }
+    char[] _xifexpression = null;
+    boolean _equals_1 = Objects.equal(packageName, null);
+    if (_equals_1) {
+      _xifexpression = CharOperation.NO_CHAR;
+    } else {
+      _xifexpression = packageName.toCharArray();
+    }
+    char[] _charArray = typeName.toCharArray();
+    final TypeDeclarationPattern pattern = new TypeDeclarationPattern(_xifexpression, CharOperation.NO_CHAR_CHAR, _charArray, IIndexConstants.TYPE_SUFFIX, 
+      (SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE));
+    final IndexQueryRequestor _function_1 = new IndexQueryRequestor() {
+      @Override
+      public boolean acceptIndexMatch(final String documentPath, final SearchPattern indexRecord, final SearchParticipant participant, final AccessRuleSet access) {
+        boolean _contains = workingCopyPaths.contains(documentPath);
+        if (_contains) {
           return true;
         }
-      };
-      IndexQueryRequestor searchRequestor = _function_1;
-      try {
-        SearchParticipant _defaultSearchParticipant = BasicSearchEngine.getDefaultSearchParticipant();
-        IJavaSearchScope _createJavaSearchScope = BasicSearchEngine.createJavaSearchScope(((IJavaElement[])Conversions.unwrapArray(sourceFolders, IJavaElement.class)));
-        PatternSearchJob _patternSearchJob = new PatternSearchJob(pattern, _defaultSearchParticipant, _createJavaSearchScope, searchRequestor);
-        indexManager.performConcurrentJob(_patternSearchJob, 
-          IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, null);
-        return true;
-      } catch (final Throwable _t) {
-        if (_t instanceof OperationCanceledException) {
-          final OperationCanceledException oce = (OperationCanceledException)_t;
+        IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+        IWorkspaceRoot _root = _workspace.getRoot();
+        Path _path = new Path(documentPath);
+        IFile file = _root.getFile(_path);
+        boolean _isDerived = ProjectAwareUniqueClassNameValidator.this.isDerived(file);
+        boolean _not = (!_isDerived);
+        if (_not) {
+          String _name = file.getName();
+          ProjectAwareUniqueClassNameValidator.this.addIssue(type, _name);
           return false;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
         }
+        return true;
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    };
+    IndexQueryRequestor searchRequestor = _function_1;
+    try {
+      SearchParticipant _defaultSearchParticipant = BasicSearchEngine.getDefaultSearchParticipant();
+      IJavaSearchScope _createJavaSearchScope = BasicSearchEngine.createJavaSearchScope(((IJavaElement[])Conversions.unwrapArray(sourceFolders, IJavaElement.class)));
+      PatternSearchJob _patternSearchJob = new PatternSearchJob(pattern, _defaultSearchParticipant, _createJavaSearchScope, searchRequestor);
+      indexManager.performConcurrentJob(_patternSearchJob, 
+        IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, null);
+      return true;
+    } catch (final Throwable _t) {
+      if (_t instanceof OperationCanceledException) {
+        final OperationCanceledException oce = (OperationCanceledException)_t;
+        return false;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
@@ -308,8 +311,13 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
         }
       }
       return false;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+    } catch (final Throwable _t) {
+      if (_t instanceof CoreException) {
+        final CoreException e = (CoreException)_t;
+        return false;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
     }
   }
   
