@@ -29,6 +29,10 @@ public class XtendParsingTestCase extends AbstractModelTestCase {
     _xtextLanguage.injectMembers(this.delegate);
   }
   
+  public void testErrorRecovery() {
+    delegate.testErrorRecovery();
+  }
+  
   public void testBug367949() throws Exception {
     delegate.testBug367949();
   }

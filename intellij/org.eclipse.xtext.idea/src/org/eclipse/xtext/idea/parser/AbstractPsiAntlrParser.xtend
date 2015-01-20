@@ -169,29 +169,15 @@ abstract class AbstractPsiAntlrParser extends Parser {
 			if (marked) {
 				drop
 			}
-		
-			val unwantedTokenException = new UnwantedTokenException(ttype, input)
 			
-			val startTokenIndex = psiBuilder.rawTokenIndex
-			val marker = psiBuilder.mark
+			val exception = new UnwantedTokenException(ttype, input)
 			
-			beginResync()
-			input.consume()
-			endResync()
-			reportError(unwantedTokenException)
-			
-			if (currentError != null) {
-				val endTokenIndex = psiBuilder.rawTokenIndex
-				marker.rollbackTo
-				val n = endTokenIndex - startTokenIndex - 1
-				for (var i = 0; i < n; i++) {
-					psiBuilder.advanceLexer
-				}
-				val errorMarker = psiBuilder.mark
-				psiBuilder.advanceLexer
-				errorMarker.error(getErrorMessage(unwantedTokenException, readableTokenNames))
-				currentError = null
-			}
+			recover [
+				beginResync()
+				input.consume()
+				endResync()
+				reportError(exception)
+			]
 		
 			if (marked) {
 				markLeaf
@@ -212,11 +198,39 @@ abstract class AbstractPsiAntlrParser extends Parser {
 		if (currentError == null) {
 			currentError = getErrorMessage(re, readableTokenNames)
 		}
+		
 		for (leafMarker : leafMarkers) {
 			leafMarker.drop
 		}
 		leafMarkers.clear
-		super.recover(input, re)
+		
+		recover [
+			super.recover(input, re)
+		]
+	}
+	
+	protected def recover(()=>void recoverStrategy) {
+		val startTokenIndex = psiBuilder.rawTokenIndex
+		val marker = psiBuilder.mark
+		
+		recoverStrategy.apply
+		
+		val endTokenIndex = psiBuilder.rawTokenIndex
+		marker.rollbackTo
+		if (startTokenIndex != endTokenIndex) {
+			val n = endTokenIndex - startTokenIndex - 1
+			for (var i = 0; i < n; i++) {
+				psiBuilder.advanceLexer
+			}
+			if (currentError != null) {
+				val errorMarker = psiBuilder.mark
+				psiBuilder.advanceLexer
+				errorMarker.error(currentError)
+				currentError = null
+			} else {
+				psiBuilder.advanceLexer
+			}
+		}
 	}
 	
 	override reportError(RecognitionException e) {

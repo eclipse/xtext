@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -247,27 +248,17 @@ public abstract class AbstractPsiAntlrParser extends Parser {
         if (marked) {
           this.drop();
         }
-        final UnwantedTokenException unwantedTokenException = new UnwantedTokenException(ttype, input);
-        final int startTokenIndex = this.psiBuilder.rawTokenIndex();
-        final PsiBuilder.Marker marker = this.psiBuilder.mark();
-        this.beginResync();
-        input.consume();
-        this.endResync();
-        this.reportError(unwantedTokenException);
-        boolean _notEquals = (!Objects.equal(this.currentError, null));
-        if (_notEquals) {
-          final int endTokenIndex = this.psiBuilder.rawTokenIndex();
-          marker.rollbackTo();
-          final int n = ((endTokenIndex - startTokenIndex) - 1);
-          for (int i = 0; (i < n); i++) {
-            this.psiBuilder.advanceLexer();
+        final UnwantedTokenException exception = new UnwantedTokenException(ttype, input);
+        final Procedure0 _function = new Procedure0() {
+          @Override
+          public void apply() {
+            AbstractPsiAntlrParser.this.beginResync();
+            input.consume();
+            AbstractPsiAntlrParser.this.endResync();
+            AbstractPsiAntlrParser.this.reportError(exception);
           }
-          final PsiBuilder.Marker errorMarker = this.psiBuilder.mark();
-          this.psiBuilder.advanceLexer();
-          String _errorMessage = this.getErrorMessage(unwantedTokenException, ((String[])Conversions.unwrapArray(this.readableTokenNames, String.class)));
-          errorMarker.error(_errorMessage);
-          this.currentError = null;
-        }
+        };
+        this.recover(_function);
         if (marked) {
           this.markLeaf();
         }
@@ -299,7 +290,52 @@ public abstract class AbstractPsiAntlrParser extends Parser {
       leafMarker.drop();
     }
     this.leafMarkers.clear();
-    super.recover(input, re);
+    final Procedure0 _function = new Procedure0() {
+      @Override
+      public void apply() {
+        AbstractPsiAntlrParser.super.recover(input, re);
+      }
+    };
+    this.recover(_function);
+  }
+  
+  protected String recover(final Procedure0 recoverStrategy) {
+    String _xblockexpression = null;
+    {
+      final int startTokenIndex = this.psiBuilder.rawTokenIndex();
+      final PsiBuilder.Marker marker = this.psiBuilder.mark();
+      recoverStrategy.apply();
+      final int endTokenIndex = this.psiBuilder.rawTokenIndex();
+      marker.rollbackTo();
+      String _xifexpression = null;
+      if ((startTokenIndex != endTokenIndex)) {
+        String _xblockexpression_1 = null;
+        {
+          final int n = ((endTokenIndex - startTokenIndex) - 1);
+          for (int i = 0; (i < n); i++) {
+            this.psiBuilder.advanceLexer();
+          }
+          String _xifexpression_1 = null;
+          boolean _notEquals = (!Objects.equal(this.currentError, null));
+          if (_notEquals) {
+            String _xblockexpression_2 = null;
+            {
+              final PsiBuilder.Marker errorMarker = this.psiBuilder.mark();
+              this.psiBuilder.advanceLexer();
+              errorMarker.error(this.currentError);
+              _xblockexpression_2 = this.currentError = null;
+            }
+            _xifexpression_1 = _xblockexpression_2;
+          } else {
+            this.psiBuilder.advanceLexer();
+          }
+          _xblockexpression_1 = _xifexpression_1;
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   @Override
