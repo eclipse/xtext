@@ -110,7 +110,7 @@ class JavaBuilderState {
 	 * </p>
 	 */
 	def dispatch getQualifiedTypeNames(IPackageFragment it) {
-		val qualifiedTypeNames = <String>newLinkedHashSet
+		val qualifiedTypeNames = <PrimaryTypeToType>newLinkedHashSet
 		val references = getReferences
 		if (references == null) {
 			return qualifiedTypeNames
@@ -126,10 +126,10 @@ class JavaBuilderState {
 				String: {
 					val typeLocatorPath = javaProject.project.getFile(typeLocator).projectRelativePath
 					if (packagePath.isPrefixOf(typeLocatorPath)) {
-						val qulifiedPath = typeLocatorPath.removeFirstSegments(srcPathSegmentCount).removeFileExtension
-						val typePackageName = qulifiedPath.removeLastSegments(1).toString.replace('/', '.')
+						val qualifiedPath = typeLocatorPath.removeFirstSegments(srcPathSegmentCount).removeFileExtension
+						val typePackageName = qualifiedPath.removeLastSegments(1).toString.replace('/', '.')
 						if (packageName.equals(typePackageName)) {
-							val simpleTypeName = qulifiedPath.lastSegment.toString
+							val simpleTypeName = qualifiedPath.lastSegment.toString
 							qualifiedTypeNames += typeLocator.getQualifiedTypeNames(packageName, simpleTypeName)
 						}
 					}
@@ -156,13 +156,16 @@ class JavaBuilderState {
 	}
 
 	private def getQualifiedTypeNames(String typeLocator, String packageName, String simpleName) {
+		val qualifiedTypeNames = <PrimaryTypeToType>newLinkedHashSet
+		val primaryTypeFqn = getQualifedTypeName(packageName, simpleName)
 		val typeNames = state?.getDefinedTypeNamesFor(typeLocator)
 		if (typeNames == null) {
-			return <String>newLinkedHashSet(getQualifedTypeName(packageName, simpleName))
+			return <PrimaryTypeToType>newLinkedHashSet()
 		}
-		val qualifiedTypeNames = <String>newLinkedHashSet
+		
 		typeNames.forEach [
-			qualifiedTypeNames += getQualifedTypeName(packageName, new String(it))
+			val typeName =  getQualifedTypeName(packageName, new String(it))
+			qualifiedTypeNames += new PrimaryTypeToType(primaryTypeFqn, typeName)
 		]
 		qualifiedTypeNames
 	}

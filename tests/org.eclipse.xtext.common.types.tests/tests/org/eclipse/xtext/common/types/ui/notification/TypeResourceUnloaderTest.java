@@ -347,19 +347,13 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
 		assertEquals("" + event.getDeltas(), 6, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
-		
-		Set<String> expectedURIs = Sets.newHashSet("java:/Objects/" + NESTED_TYPES,
-				"java:/Objects/" + NESTED_TYPES + "$Outer", 
-				"java:/Objects/" + NESTED_TYPES + "$Outer$Inner",
-				"java:/Objects/" + foobar,
-				"java:/Objects/" + foobar + "$Outer", 
-				"java:/Objects/" + foobar + "$Outer$Inner");
-		assertTrue("" + delta.getUri(), expectedURIs.remove(delta.getUri().toString()));
-		for (int i = 1; i < 6; i++) {
-			String uri = event.getDeltas().get(i).getUri().toString();
-			assertTrue(uri, expectedURIs.remove(uri));
-		}
-		assertTrue(expectedURIs.isEmpty());
+
+		assertEquals("java:/Objects/" + foobar, event.getDeltas().get(0).getUri().toString());
+		assertEquals("java:/Objects/" + foobar, event.getDeltas().get(1).getUri().toString());
+		assertEquals("java:/Objects/" + foobar, event.getDeltas().get(2).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(3).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(4).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(5).getUri().toString());
 		
 		Collection<String> allNames = getNames(delta);
 		addNames(event.getDeltas().get(0).getNew(), allNames); //FooBar
@@ -375,6 +369,59 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer"));
 		assertTrue(allNames.toString(), allNames.contains(NESTED_TYPES + "$Outer$Inner"));
 		assertEquals("" + allNames, 6, allNames.size());
+	}
+	
+	@Test public void testRemoveNestedClass() throws BadLocationException, JavaModelException, InterruptedException {
+		waitForEvent(new Procedure0() {
+
+			@Override
+			public void apply() {
+				int idx = document.get().indexOf("public abstract class Inner");
+				assertNull("event is null before the document was modified", event);
+				try {
+					int closing = document.get().substring(idx).indexOf("\t}");
+					document.replace(idx, closing + 2, "");
+				} catch (BadLocationException e) {
+					fail(e.getMessage());
+				}
+			}
+
+		});
+		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertEquals("" + event.getDeltas(), 3, event.getDeltas().size());
+		assertNull(event.getDeltas().get(2).getNew());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(0).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(1).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(2).getUri().toString());
+		
+	}
+	
+	@Test public void testAddNestedClass() throws BadLocationException, JavaModelException, InterruptedException {
+		waitForEvent(new Procedure0() {
+
+			@Override
+			public void apply() {
+				int idx = document.get().indexOf("public abstract class Inner");
+				assertNull("event is null before the document was modified", event);
+				try {
+						int closing = document.get().substring(idx).indexOf("\t}");
+						document.replace(idx + closing, 0, " public abstract class InnerSibling {} ");
+					} catch (BadLocationException e) {
+						fail(e.getMessage());
+					}
+			}
+
+		});
+		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertEquals("" + event.getDeltas(), 4, event.getDeltas().size());
+		assertNull(event.getDeltas().get(3).getOld());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(0).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(1).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(2).getUri().toString());
+		assertEquals("java:/Objects/" + NESTED_TYPES, event.getDeltas().get(3).getUri().toString());
+		
 	}
 	
 	protected Collection<String> getNames(List<IResourceDescription.Delta> deltas) {
