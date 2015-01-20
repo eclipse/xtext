@@ -35,6 +35,8 @@ import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator
+import org.eclipse.jdt.core.JavaModelException
+import org.eclipse.core.runtime.CoreException
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -49,7 +51,11 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	
 	override doCheckUniqueName(QualifiedName name, JvmDeclaredType type) {
 		if (super.doCheckUniqueName(name, type)) {
-			return doCheckUniqueInProject(name, type)
+			try {
+				return doCheckUniqueInProject(name, type)
+			} catch(JavaModelException e) {
+				return true
+			}
 		} else {
 			return true
 		}
@@ -59,7 +65,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		INTERRUPT, DUPLICATE, UNIQUE
 	}
 	
-	private def SourceTraversal doCheckUniqueInProjectSource(String packageName, String typeName, JvmDeclaredType type, IPackageFragmentRoot[] sourceFolders) {
+	private def SourceTraversal doCheckUniqueInProjectSource(String packageName, String typeName, JvmDeclaredType type, IPackageFragmentRoot[] sourceFolders) throws JavaModelException {
 		var indexManager = JavaModelManager.getIndexManager
 		for (sourceFolder : sourceFolders) {
 			if (indexManager.awaitingJobsCount > 0) {
@@ -86,7 +92,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		return SourceTraversal.UNIQUE
 	}
 	
-	def boolean doCheckUniqueInProject(QualifiedName name, JvmDeclaredType type) {
+	def boolean doCheckUniqueInProject(QualifiedName name, JvmDeclaredType type) throws JavaModelException {
 		val javaProject = javaProjectProvider.getJavaProject(type.eResource.resourceSet)
 		val packageName = type.packageName
 		val typeName = type.simpleName
@@ -166,18 +172,22 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	}
 	
 	def protected isDerived(IResource resource) {
-		if (derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
-			return true
-		}
-		val projectRelativePath = resource.projectRelativePath
-		for(outputConfiguration: outputConfigurationProvider.outputConfigurations) {
-			for(dir: outputConfiguration.outputDirectories) {
-				if (new Path(dir).isPrefixOf(projectRelativePath)) {
-					return true
+		try {
+			if (derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {
+				return true
+			}
+			val projectRelativePath = resource.projectRelativePath
+			for(outputConfiguration: outputConfigurationProvider.outputConfigurations) {
+				for(dir: outputConfiguration.outputDirectories) {
+					if (new Path(dir).isPrefixOf(projectRelativePath)) {
+						return true
+					}
 				}
 			}
+			return false
+		} catch(CoreException e) {
+			return false
 		}
-		return false
 	}
 	
 	override protected checkUniqueInIndex(JvmDeclaredType type, Iterable<IEObjectDescription> descriptions) {
