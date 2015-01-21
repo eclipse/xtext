@@ -247,18 +247,9 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	 * Always put existing modifiers into this fixed order
 	 */
 	def protected formatModifiers(XtendMember member, extension IFormattableDocument document) {
-		member.regionForKeyword("public").append[oneSpace]
-		member.regionForKeyword("protected").append[oneSpace]
-		member.regionForKeyword("package").append[oneSpace]
-		member.regionForKeyword("private").append[oneSpace]
-		member.regionForKeyword("abstract").append[oneSpace]
-		member.regionForKeyword("static").append[oneSpace]
-		member.regionForKeyword("final").append[oneSpace]
-		member.regionForKeyword("extension").append[oneSpace]
-		member.regionForKeyword("val").append[oneSpace]
-		member.regionForKeyword("var").append[oneSpace]
-		member.regionForKeyword("def").append[oneSpace]
-		member.regionForKeyword("override").append[oneSpace]
+		member.regionsForRuleCallsTo(commonModifierRule, methodModifierRule, fieldModifierRule).forEach [
+			append[oneSpace]
+		]
 	}
 
 	override protected isSingleLineBlock(XBlockExpression expr) {

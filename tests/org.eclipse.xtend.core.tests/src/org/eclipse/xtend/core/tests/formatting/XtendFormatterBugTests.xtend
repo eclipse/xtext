@@ -202,6 +202,14 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 		}
 		''')
 	}
-
+	
+	@Test
+	def testBug455582() {
+		assertFormatted('''
+		abstract package class XtendTest {
+			static final def void foo() {
+			}
+		}''', '''  abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }''')
+	}
 
 }
