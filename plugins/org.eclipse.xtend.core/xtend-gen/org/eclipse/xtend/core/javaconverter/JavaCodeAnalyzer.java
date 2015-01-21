@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
+import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
@@ -59,9 +60,7 @@ public class JavaCodeAnalyzer {
     }
   }
   
-  private final static int JLS = AST.JLS3;
-  
-  private String complianceLevel = "1.5";
+  private String complianceLevel = "1.6";
   
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode) {
     return this.determinateJavaType(javaCode, this.complianceLevel);
@@ -126,10 +125,32 @@ public class JavaCodeAnalyzer {
   }
   
   public ASTParser createDefaultJavaParser(final String compilerCompliance) {
-    final ASTParser parser = ASTParser.newParser(JavaCodeAnalyzer.JLS);
+    int _asJLS = JavaCodeAnalyzer.asJLS(compilerCompliance);
+    final ASTParser parser = ASTParser.newParser(_asJLS);
     final Hashtable options = JavaCore.getOptions();
     JavaCore.setComplianceOptions(compilerCompliance, options);
     parser.setCompilerOptions(options);
     return parser;
+  }
+  
+  public static int asJLS(final String compilerCompliance) {
+    int _switchResult = (int) 0;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(compilerCompliance, "1.7")) {
+        _matched=true;
+        _switchResult = 4;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(compilerCompliance, "1.8")) {
+        _matched=true;
+        _switchResult = 8;
+      }
+    }
+    if (!_matched) {
+      _switchResult = AST.JLS3;
+    }
+    return _switchResult;
   }
 }
