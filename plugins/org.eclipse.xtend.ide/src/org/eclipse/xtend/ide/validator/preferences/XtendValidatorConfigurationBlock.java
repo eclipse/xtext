@@ -106,4 +106,5 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		}
 		return section;
 	}
+
 }
