@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
+import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -59,7 +60,7 @@ public class XtendProjectConfigurator extends AbstractProjectConfigurator {
 		IEclipsePreferences languagePreferences = projectPreferences
 				.getNode("org.eclipse.xtend.core.Xtend");
 		languagePreferences.putBoolean(
-				OptionsConfigurationBlock.IS_PROJECT_SPECIFIC, true);
+				OptionsConfigurationBlock.isPrprojectSpecificPropertyKey(BuilderConfigurationBlock.PROPERTY_PREFIX), true);
 		languagePreferences.putBoolean(
 				getKey(configuration, INSTALL_DSL_AS_PRIMARY_SOURCE),
 				configuration.isInstallDslAsPrimarySource());

@@ -43,10 +43,13 @@ import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
  * @author Stefan Oehme - Initial contribution and API
  */
 public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
+	public static final String SETTINGS_SECTION_NAME = "TaskTagConfigurationBlock"; //$NON-NLS-1$
 
 	private static final int IDX_ADD = 0;
 	private static final int IDX_EDIT = 1;
 	private static final int IDX_REMOVE = 2;
+
+	private static final String PROPERTY_PREFIX = "TaskTagConfiguration";
 
 	private ListDialogField taskTags;
 	private SelectionButtonDialogField caseSensitiveCheckBox;
@@ -279,5 +282,10 @@ public class TaskTagConfigurationBlock extends OptionsConfigurationBlock {
 		buildJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
 		buildJob.setUser(true);
 		return buildJob;
+	}
+
+	@Override
+	public String getPropertyPrefix() {
+		return PROPERTY_PREFIX;
 	}
 }
