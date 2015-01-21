@@ -8,6 +8,7 @@ import org.eclipse.xtend.core.javaconverter.JavaConverter
 import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.RichString
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendEnum
@@ -28,11 +29,11 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
-import org.eclipse.xtend.core.xtend.XtendAnnotationType
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
 	JavaConverter j2x
+	static boolean DUMP = false;
 
 	@Before def void setUp() {
 		j2x = javaConverterProvider.get()
@@ -42,7 +43,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var String javaCode = "package pack; import java.lang.Object; public class JavaToConvert<T,U> {}"
 
-		var XtendFile xtendFile = toValidFile("JavaToConvert", javaCode)
+		var XtendFile xtendFile = toValidXtendFile("JavaToConvert", javaCode)
 		assertEquals("pack", xtendFile.getPackage())
 		assertEquals("java.lang.Object", xtendFile.getImportSection().getImportDeclarations().get(0).getImportedName())
 		var XtendTypeDeclaration typeDeclaration = xtendFile.getXtendTypes().get(0)
@@ -97,6 +98,27 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			static String def;
 		}''')
 		checkVisibility(xtendClazz)
+	}
+
+	def private void checkVisibility(XtendClass xtendClazz) {
+
+		assertEquals("Simple fields count", 4, xtendClazz.getMembers().size())
+		var XtendField xtendMember = xtendClazz.field(0)
+		assertEquals("priv", xtendMember.getName())
+		assertEquals("field PRIVATE visibility", PRIVATE, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
+		xtendMember = xtendClazz.field(1)
+		assertEquals("pub", xtendMember.getName())
+		assertEquals("field public visibility", PUBLIC, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
+		xtendMember = xtendClazz.field(2)
+		assertEquals("prot", xtendMember.getName())
+		assertEquals("field PROTECTED visibility", PROTECTED, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
+		xtendMember = xtendClazz.field(3)
+		assertEquals("def", xtendMember.getName())
+		assertEquals("field DEFAULT visibility", DEFAULT, xtendMember.getVisibility())
+		assertEquals("String", xtendMember.getType().getSimpleName())
 	}
 
 	@Test def void testFieldVisibility1() throws Exception {
@@ -468,7 +490,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			c = null;
 		} else {
 			c = Boolean.class;
-		}'''.statementToXtend)
+		}'''.toXtendStatement)
 	}
 
 	@Test def void testStaticImportCase() throws Exception {
@@ -557,7 +579,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			"public class Clazz { static final String foo;static{foo=\"\";}}")
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.isEmpty())
-		println(xtendCode)
+		dump(xtendCode)
 		assertEquals(1, Iterables.size(conversionResult.getProblems()))
 	}
 
@@ -589,7 +611,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		''')
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.isEmpty())
-		println(xtendCode)
+		dump(xtendCode)
 		assertEquals(1, Iterables.size(conversionResult.getProblems()))
 	}
 
@@ -679,7 +701,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testArrayAccessCaseConstantIndex_01() throws Exception {
-		var String xtendCode = statementToXtend('''
+		var String xtendCode = toXtendStatement('''
 			String[] ar = new String[]{};
 			String n = ar[1];
 		''')
@@ -689,7 +711,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testArrayAccessCaseConstantIndex_02() throws Exception {
-		var String xtendCode = statementToXtend('''
+		var String xtendCode = toXtendStatement('''
 			String[] ar = new String[]{};
 			ar[1] = null;
 		''')
@@ -721,7 +743,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testArrayCreationCase2() throws Exception {
 		j2x.useRobustSyntax
-		var xtendCode = classBodyDeclToXtend(
+		var xtendCode = toXtendClassBodyDeclr(
 			'private List<String> l=Arrays.asList(new String[] { "AType", "RootRule" });')
 		assertEquals('List<String> l=Arrays.asList((#["AType", "RootRule"] as String[]))', xtendCode)
 	}
@@ -738,7 +760,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		def void arDim(){
 			var int[] ar2=newIntArrayOfSize(2) 
 			
-		}'''.toString, classBodyDeclToXtend(xtendCode))
+		}'''.toString, toXtendClassBodyDeclr(xtendCode))
 	}
 
 	@Test def void testArrayPrefixMinusCase() throws Exception {
@@ -820,11 +842,11 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertTrue((clazz.getMembers().get(2) as XtendField).getInitialValue() instanceof RichString)
 		assertEquals("static package String a='''«(i - i)»«i»4=«((i=i - 1))»1=«(i++)»«i»'''",
-			classBodyDeclToXtend("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"))
+			toXtendClassBodyDeclr("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"))
 	}
 
 	@Test def void testRichStringCase1() throws Exception {
-		assertEquals("int i=0\nString richTxt='''int i=«i».'''", classBodyDeclToXtend(
+		assertEquals("int i=0\nString richTxt='''int i=«i».'''", toXtendClassBodyDeclr(
 				'''
 			private int i = 0;
 			private String richTxt = "int "+"i="+i+".";
@@ -834,7 +856,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	@Test def void testRichStringCase2() throws Exception {
 		assertEquals(
 			"package String str='''Step: «info» memory: free / total / max MB «runtime.freeMemory() / (1000 * 1000)» / «runtime.totalMemory() / (1000 * 1000)» / «runtime.maxMemory() / (1000 * 1000)»'''",
-			classBodyDeclToXtend(
+			toXtendClassBodyDeclr(
 				'''
 				String str = "Step: " + info + " memory: free / total / max MB " + runtime.freeMemory() / (1000 * 1000) + " / " + runtime.totalMemory() / (1000 * 1000) + " / " + runtime.maxMemory() / (1000 * 1000)
 			'''))
@@ -842,14 +864,14 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testRichStringCase3() throws Exception {
 		assertEquals("static package String a='''first line\nsecond line\nthird line\nfourth line'''",
-			classBodyDeclToXtend('''static String a = "first line\n"+"second line\n"+"third line\n"+"fourth line";'''))
+			toXtendClassBodyDeclr('''static String a = "first line\n"+"second line\n"+"third line\n"+"fourth line";'''))
 	}
 
 	@Test def void testRichStringCase4() throws Exception {
 		assertEquals(
 			"public String someVar=\".\"
 public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError''').replace(Character.valueOf('.').charValue, Character.valueOf('/').charValue)».xtexterror'''",
-			classBodyDeclToXtend(
+			toXtendClassBodyDeclr(
 				'''
 				public String someVar=".";
 				public String loadingURI = "classpath:/"
@@ -1011,7 +1033,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			//Single Line comment
 			String str;
 		}''')
-		println(clazz)
+		dump(clazz)
 		assertEquals('''
 		package class Clazz {
 			//Single Line comment
@@ -1021,7 +1043,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	@Test def void testSwitchCase() throws Exception {
-		var clazz = classBodyDeclToXtend(
+		var clazz = toXtendClassBodyDeclr(
 			'''
 		private String doSwitch() {
 			int i = 0;
@@ -1113,7 +1135,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				return;
 			}
 		}'''
-		var body = classBodyDeclToXtend(java)
+		var body = toXtendClassBodyDeclr(java)
 		assertEquals('''
 		def void doBitwiseOperation(){
 			if ((1.bitwiseAnd(2)) > 0) {
@@ -1135,7 +1157,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		}'''
 		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
 		assertNotNull(clazz)
-		var body = classBodyDeclToXtend(javaBody)
+		var body = toXtendClassBodyDeclr(javaBody)
 		assertEquals('''
 		def void doBitwiseOperation(){
 			var int i=1 
@@ -1157,7 +1179,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		}'''
 		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
 		assertNotNull(clazz)
-		var body = classBodyDeclToXtend(javaBody)
+		var body = toXtendClassBodyDeclr(javaBody)
 		assertEquals('''
 		def void checkTryCatch(){
 			try {
@@ -1185,7 +1207,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			throw new Exception();
 		}'''
 
-		var statement = statementToXtend(javaBody)
+		var statement = toXtendStatement(javaBody)
 		assertEquals('''
 		try {
 			
@@ -1222,7 +1244,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		} while (i < 0)
 		while (i < 10) {
 			System.out.print(i) i++ 
-		}'''.toString, statementToXtend(javaBody))
+		}'''.toString, toXtendStatement(javaBody))
 
 	}
 
@@ -1240,7 +1262,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				this.count+=value 
 			}
 			
-		}'''.toString, classBodyDeclToXtend(javaBody))
+		}'''.toString, toXtendClassBodyDeclr(javaBody))
 
 	}
 
@@ -1274,48 +1296,49 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	}
 
-	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
+	def protected XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
-	def private XtendAnnotationType toValidXtendAnnotation(String javaCode) throws Exception {
+
+	def protected XtendAnnotationType toValidXtendAnnotation(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Anno", javaCode) as XtendAnnotationType
 	}
 
-	def private XtendInterface toValidXtendInterface(String javaCode) throws Exception {
+	def protected XtendInterface toValidXtendInterface(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Interfaze", javaCode) as XtendInterface
 	}
 
-	def private XtendEnum toValidXtendEnum(String javaCode) throws Exception {
+	def protected XtendEnum toValidXtendEnum(String javaCode) throws Exception {
 		return toValidTypeDeclaration("EnumClazz", javaCode) as XtendEnum
 	}
 
-	def private XtendTypeDeclaration toValidTypeDeclaration(String unitName, String javaCode) throws Exception {
-		var XtendFile file = toValidFile(unitName, javaCode)
+	def protected XtendTypeDeclaration toValidTypeDeclaration(String unitName, String javaCode) throws Exception {
+		var XtendFile file = toValidXtendFile(unitName, javaCode)
 		var XtendTypeDeclaration typeDeclaration = file.getXtendTypes().get(0)
 		return typeDeclaration
 	}
 
-	def private classBodyDeclToXtend(String string) {
-		val xtendCode = j2x.bodyDeclarationToXtend(string, null, null).getXtendCode().trim()
-		println(xtendCode)
+	def protected toXtendClassBodyDeclr(CharSequence string) {
+		val xtendCode = j2x.bodyDeclarationToXtend(string.toString, null, null).getXtendCode().trim()
+		dump(xtendCode)
 		return xtendCode
 	}
 
-	def private statementToXtend(CharSequence string) {
+	def protected toXtendStatement(CharSequence string) {
 		val xtendCode = j2x.statementToXtend(string.toString).getXtendCode().trim()
-		println(xtendCode)
+		dump(xtendCode)
 		return xtendCode
 	}
 
-	def private XtendFile toValidFile(String unitName, String javaCode) throws Exception {
+	def protected XtendFile toValidXtendFile(String unitName, String javaCode) throws Exception {
 
 		var ConversionResult conversionResult = j2x.toXtend(unitName, javaCode)
 
 		var String xtendCode = conversionResult.getXtendCode()
 		assertFalse(xtendCode.empty)
-		System.out.println(xtendCode)
+		dump(xtendCode)
 		for (String problem : conversionResult.getProblems()) {
-			System.out.println('''ERROR: «problem»''')
+			dump('''ERROR: «problem»''')
 		}
 		return file(xtendCode, true)
 	}
@@ -1332,25 +1355,9 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		typeDecl.members.get(i) as XtendFunction
 	}
 
-	def private void checkVisibility(XtendClass xtendClazz) {
-
-		assertEquals("Simple fields count", 4, xtendClazz.getMembers().size())
-		var XtendField xtendMember = xtendClazz.field(0)
-		assertEquals("priv", xtendMember.getName())
-		assertEquals("field PRIVATE visibility", PRIVATE, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = xtendClazz.field(1)
-		assertEquals("pub", xtendMember.getName())
-		assertEquals("field public visibility", PUBLIC, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = xtendClazz.field(2)
-		assertEquals("prot", xtendMember.getName())
-		assertEquals("field PROTECTED visibility", PROTECTED, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
-		xtendMember = xtendClazz.field(3)
-		assertEquals("def", xtendMember.getName())
-		assertEquals("field DEFAULT visibility", DEFAULT, xtendMember.getVisibility())
-		assertEquals("String", xtendMember.getType().getSimpleName())
+	def dump(String text) {
+		if (DUMP) {
+			println(text)
+		}
 	}
-
 }
