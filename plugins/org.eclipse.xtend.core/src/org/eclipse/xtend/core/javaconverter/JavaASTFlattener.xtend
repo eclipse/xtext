@@ -596,6 +596,8 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def appendTypeParameters(Iterable<TypeParameter> iterable) {
+		if(iterable.isEmpty)
+			return; //"diamond operator" java7
 		appendToBuffer("<")
 		visitAllSeparatedByComma(iterable)
 		appendToBuffer(">")

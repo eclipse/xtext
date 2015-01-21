@@ -949,14 +949,14 @@ public class JavaASTFlattener extends ASTVisitor {
     IterableExtensions.forEach(iterable, _function);
   }
   
-  public StringBuffer appendTypeParameters(final Iterable<TypeParameter> iterable) {
-    StringBuffer _xblockexpression = null;
-    {
-      this.appendToBuffer("<");
-      this.visitAllSeparatedByComma(iterable);
-      _xblockexpression = this.appendToBuffer(">");
+  public void appendTypeParameters(final Iterable<TypeParameter> iterable) {
+    boolean _isEmpty = IterableExtensions.isEmpty(iterable);
+    if (_isEmpty) {
+      return;
     }
-    return _xblockexpression;
+    this.appendToBuffer("<");
+    this.visitAllSeparatedByComma(iterable);
+    this.appendToBuffer(">");
   }
   
   @Override

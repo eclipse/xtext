@@ -42,7 +42,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 		var String javaCode = "package pack; import java.lang.Object; public class JavaToConvert<T,U> {}"
 
-		var XtendFile xtendFile = toValidFile("JavaToConvert", javaCode)
+		var XtendFile xtendFile = toValidXtendFile("JavaToConvert", javaCode)
 		assertEquals("pack", xtendFile.getPackage())
 		assertEquals("java.lang.Object", xtendFile.getImportSection().getImportDeclarations().get(0).getImportedName())
 		var XtendTypeDeclaration typeDeclaration = xtendFile.getXtendTypes().get(0)
@@ -468,7 +468,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			c = null;
 		} else {
 			c = Boolean.class;
-		}'''.statementToXtend)
+		}'''.toXtendStatement)
 	}
 
 	@Test def void testStaticImportCase() throws Exception {
@@ -679,7 +679,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testArrayAccessCaseConstantIndex_01() throws Exception {
-		var String xtendCode = statementToXtend('''
+		var String xtendCode = toXtendStatement('''
 			String[] ar = new String[]{};
 			String n = ar[1];
 		''')
@@ -689,7 +689,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testArrayAccessCaseConstantIndex_02() throws Exception {
-		var String xtendCode = statementToXtend('''
+		var String xtendCode = toXtendStatement('''
 			String[] ar = new String[]{};
 			ar[1] = null;
 		''')
@@ -721,7 +721,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testArrayCreationCase2() throws Exception {
 		j2x.useRobustSyntax
-		var xtendCode = classBodyDeclToXtend(
+		var xtendCode = toXtendClassBodyDeclr(
 			'private List<String> l=Arrays.asList(new String[] { "AType", "RootRule" });')
 		assertEquals('List<String> l=Arrays.asList((#["AType", "RootRule"] as String[]))', xtendCode)
 	}
@@ -738,7 +738,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		def void arDim(){
 			var int[] ar2=newIntArrayOfSize(2) 
 			
-		}'''.toString, classBodyDeclToXtend(xtendCode))
+		}'''.toString, toXtendClassBodyDeclr(xtendCode))
 	}
 
 	@Test def void testArrayPrefixMinusCase() throws Exception {
@@ -820,11 +820,11 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertTrue((clazz.getMembers().get(2) as XtendField).getInitialValue() instanceof RichString)
 		assertEquals("static package String a='''«(i - i)»«i»4=«((i=i - 1))»1=«(i++)»«i»'''",
-			classBodyDeclToXtend("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"))
+			toXtendClassBodyDeclr("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"))
 	}
 
 	@Test def void testRichStringCase1() throws Exception {
-		assertEquals("int i=0\nString richTxt='''int i=«i».'''", classBodyDeclToXtend(
+		assertEquals("int i=0\nString richTxt='''int i=«i».'''", toXtendClassBodyDeclr(
 				'''
 			private int i = 0;
 			private String richTxt = "int "+"i="+i+".";
@@ -834,7 +834,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	@Test def void testRichStringCase2() throws Exception {
 		assertEquals(
 			"package String str='''Step: «info» memory: free / total / max MB «runtime.freeMemory() / (1000 * 1000)» / «runtime.totalMemory() / (1000 * 1000)» / «runtime.maxMemory() / (1000 * 1000)»'''",
-			classBodyDeclToXtend(
+			toXtendClassBodyDeclr(
 				'''
 				String str = "Step: " + info + " memory: free / total / max MB " + runtime.freeMemory() / (1000 * 1000) + " / " + runtime.totalMemory() / (1000 * 1000) + " / " + runtime.maxMemory() / (1000 * 1000)
 			'''))
@@ -842,14 +842,14 @@ class JavaConverterTest extends AbstractXtendTestCase {
 
 	@Test def void testRichStringCase3() throws Exception {
 		assertEquals("static package String a='''first line\nsecond line\nthird line\nfourth line'''",
-			classBodyDeclToXtend('''static String a = "first line\n"+"second line\n"+"third line\n"+"fourth line";'''))
+			toXtendClassBodyDeclr('''static String a = "first line\n"+"second line\n"+"third line\n"+"fourth line";'''))
 	}
 
 	@Test def void testRichStringCase4() throws Exception {
 		assertEquals(
 			"public String someVar=\".\"
 public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError''').replace(Character.valueOf('.').charValue, Character.valueOf('/').charValue)».xtexterror'''",
-			classBodyDeclToXtend(
+			toXtendClassBodyDeclr(
 				'''
 				public String someVar=".";
 				public String loadingURI = "classpath:/"
@@ -1021,7 +1021,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	@Test def void testSwitchCase() throws Exception {
-		var clazz = classBodyDeclToXtend(
+		var clazz = toXtendClassBodyDeclr(
 			'''
 		private String doSwitch() {
 			int i = 0;
@@ -1113,7 +1113,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				return;
 			}
 		}'''
-		var body = classBodyDeclToXtend(java)
+		var body = toXtendClassBodyDeclr(java)
 		assertEquals('''
 		def void doBitwiseOperation(){
 			if ((1.bitwiseAnd(2)) > 0) {
@@ -1135,7 +1135,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		}'''
 		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
 		assertNotNull(clazz)
-		var body = classBodyDeclToXtend(javaBody)
+		var body = toXtendClassBodyDeclr(javaBody)
 		assertEquals('''
 		def void doBitwiseOperation(){
 			var int i=1 
@@ -1157,7 +1157,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		}'''
 		val clazz = toValidXtendClass('''class Test {«javaBody»}''')
 		assertNotNull(clazz)
-		var body = classBodyDeclToXtend(javaBody)
+		var body = toXtendClassBodyDeclr(javaBody)
 		assertEquals('''
 		def void checkTryCatch(){
 			try {
@@ -1185,7 +1185,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			throw new Exception();
 		}'''
 
-		var statement = statementToXtend(javaBody)
+		var statement = toXtendStatement(javaBody)
 		assertEquals('''
 		try {
 			
@@ -1222,7 +1222,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		} while (i < 0)
 		while (i < 10) {
 			System.out.print(i) i++ 
-		}'''.toString, statementToXtend(javaBody))
+		}'''.toString, toXtendStatement(javaBody))
 
 	}
 
@@ -1240,7 +1240,7 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				this.count+=value 
 			}
 			
-		}'''.toString, classBodyDeclToXtend(javaBody))
+		}'''.toString, toXtendClassBodyDeclr(javaBody))
 
 	}
 
@@ -1274,9 +1274,24 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 
 	}
 
+	@Test def void testDiamondOperator() throws Exception {
+		assertEquals(
+		'''
+		def List<?> foo(){
+			var List<String> x=new ArrayList() 
+			return new ArrayList() 
+		}'''.toString, 
+		'''
+		public List<?> foo() {
+			List<String> x = new ArrayList<>();
+			return new ArrayList<>();
+		}'''.toXtendClassBodyDeclr)
+	}
+
 	def private XtendClass toValidXtendClass(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Clazz", javaCode) as XtendClass
 	}
+
 	def private XtendAnnotationType toValidXtendAnnotation(String javaCode) throws Exception {
 		return toValidTypeDeclaration("Anno", javaCode) as XtendAnnotationType
 	}
@@ -1290,24 +1305,24 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 
 	def private XtendTypeDeclaration toValidTypeDeclaration(String unitName, String javaCode) throws Exception {
-		var XtendFile file = toValidFile(unitName, javaCode)
+		var XtendFile file = toValidXtendFile(unitName, javaCode)
 		var XtendTypeDeclaration typeDeclaration = file.getXtendTypes().get(0)
 		return typeDeclaration
 	}
 
-	def private classBodyDeclToXtend(String string) {
-		val xtendCode = j2x.bodyDeclarationToXtend(string, null, null).getXtendCode().trim()
+	def private toXtendClassBodyDeclr(CharSequence string) {
+		val xtendCode = j2x.bodyDeclarationToXtend(string.toString, null, null).getXtendCode().trim()
 		println(xtendCode)
 		return xtendCode
 	}
 
-	def private statementToXtend(CharSequence string) {
+	def private toXtendStatement(CharSequence string) {
 		val xtendCode = j2x.statementToXtend(string.toString).getXtendCode().trim()
 		println(xtendCode)
 		return xtendCode
 	}
 
-	def private XtendFile toValidFile(String unitName, String javaCode) throws Exception {
+	def private XtendFile toValidXtendFile(String unitName, String javaCode) throws Exception {
 
 		var ConversionResult conversionResult = j2x.toXtend(unitName, javaCode)
 
