@@ -346,6 +346,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/tools/gef/updates/releases"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
