@@ -10,17 +10,12 @@ package org.eclipse.xtext.ui.editor.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
-import com.google.inject.Inject;
-
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class LanguageRootPreferencePage extends AbstractPreferencePage {
 
-	@Inject
-	private IPreferenceStoreAccess preferenceStoreAccess;
-	
 	@Override
 	protected void createFieldEditors() {
 	}
@@ -30,6 +25,7 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	 */
 	@Override
 	protected IPreferenceStore doGetPreferenceStore() {
-		return preferenceStoreAccess.getWritablePreferenceStore();
+		return super.doGetPreferenceStore();
 	}
+	
 }
