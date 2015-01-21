@@ -42,10 +42,9 @@ import com.google.inject.name.Named;
 @SuppressWarnings("restriction")
 public abstract class FormatterConfigurationBlock extends ProfileConfigurationBlock {
 
-
 	@Inject
 	private XtendPreviewFactory previewFactory;
-	
+
 	@Inject
 	private FormatterModifyDialog.Factory formatterModifyDialogFactory;
 
@@ -110,10 +109,12 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 						PreferencesAccess access, IProfileVersioner profileVersioner) {
 
 					addBuiltinProfiles(profiles, profileVersioner);
-					KeySet[] keySet = new KeySet[] { new KeySet(xtendNodeID, new ArrayList<String>(
-							getDefaultProfileSettings().keySet())) };
+					String profVersionerkey = FormatterProfileVersioner.PREFIX + FormatterProfileVersioner.VERSION_KEY;
+					ArrayList<String> keys = new ArrayList<String>(getDefaultProfileSettings().keySet());
+					keys.add(profVersionerkey);
+					KeySet[] keySet = new KeySet[] { new KeySet(xtendNodeID, keys) };
 					return new AbstractProfileManager(profiles, context, access, profileVersioner, keySet,
-							DEFUALT_PROFILE_KEY, FormatterProfileVersioner.VERSION_KEY) {
+							DEFUALT_PROFILE_KEY, profVersionerkey) {
 
 						@Override
 						protected String getNodeId() {
@@ -137,8 +138,9 @@ public abstract class FormatterConfigurationBlock extends ProfileConfigurationBl
 					return profiles;
 				}
 
-				protected Map<String,String> getDefaultProfileSettings() {
-					Set<? extends PreferenceKey> keys = PreferenceKeysProvider.allConstantKeys(XtendFormatterPreferenceKeys.class);
+				protected Map<String, String> getDefaultProfileSettings() {
+					Set<? extends PreferenceKey> keys = PreferenceKeysProvider
+							.allConstantKeys(XtendFormatterPreferenceKeys.class);
 					final HashMap<String, String> hashMap = new HashMap<String, String>();
 					for (PreferenceKey key : keys) {
 						hashMap.put(key.getId(), key.getDefaultValue());

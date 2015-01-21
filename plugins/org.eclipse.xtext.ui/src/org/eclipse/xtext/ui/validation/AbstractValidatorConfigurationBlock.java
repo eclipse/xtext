@@ -39,6 +39,7 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
+	private static final String PROPERTY_PREFIX = "ValidatorConfiguration"; //$NON-NLS-1$
 
 	protected AbstractValidatorConfigurationBlock() {
 		super();
@@ -91,6 +92,25 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 	}
 
 	/**
+	 * This implementation returns Dialog settings which were bind in {@link org.eclipse.xtext.ui.DefaultUiModule}
+	 * normally {@link org.eclipse.ui.plugin.AbstractUIPlugin#getDialogSettings()}<br>
+	 * Subclasses should override to get special section settings. Here is an example:<br>
+	 * 
+	 * <pre>
+	 *  <code>
+	 *  
+	 * protected IDialogSettings getDialogSettings() {
+	 * 	IDialogSettings dialogSettings = super.getDialogSettings();
+	 * 	IDialogSettings section = dialogSettings.getSection(SETTINGS_SECTION_NAME);
+	 * 	if(section==null) {
+	 * 		return dialogSettings.addNewSection(SETTINGS_SECTION_NAME);
+	 * 	}
+	 * 	return section;
+	 * }
+	 *  </code>
+	 * </pre>
+	 * 
+	 * @return Dialog settings which were bind in {@link org.eclipse.xtext.ui.DefaultUiModule}
 	 * @since 2.7
 	 */
 	protected IDialogSettings getDialogSettings() {
@@ -147,4 +167,11 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 		return inner;
 	}
 
+	/**
+	 * @since 2.8
+	 */
+	@Override
+	public String getPropertyPrefix() {
+		return PROPERTY_PREFIX;
+	}
 }

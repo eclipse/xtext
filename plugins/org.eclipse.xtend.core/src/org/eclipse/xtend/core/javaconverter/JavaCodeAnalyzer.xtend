@@ -26,8 +26,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class JavaCodeAnalyzer {
 
-	final static int JLS = AST.JLS3
-	String complianceLevel = "1.5"
+	String complianceLevel = "1.6"
 
 	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode) {
 		return determinateJavaType(javaCode, complianceLevel)
@@ -76,11 +75,19 @@ class JavaCodeAnalyzer {
 	}
 
 	def createDefaultJavaParser(String compilerCompliance) {
-		val parser = ASTParser.newParser(JLS)
+		val parser = ASTParser.newParser(asJLS(compilerCompliance))
 		val options = JavaCore.getOptions()
 		JavaCore.setComplianceOptions(compilerCompliance, options)
 		parser.compilerOptions = options
 		return parser
+	}
+	
+	def static int asJLS(String compilerCompliance) {
+		switch(compilerCompliance) {
+			case "1.7" : 4
+			case "1.8" : 8
+			default: AST.JLS3
+		}
 	}
 
 	@Accessors(PUBLIC_GETTER)

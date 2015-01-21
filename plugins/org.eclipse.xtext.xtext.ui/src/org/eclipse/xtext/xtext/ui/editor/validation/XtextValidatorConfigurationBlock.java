@@ -23,9 +23,9 @@ import org.eclipse.xtext.validation.SeverityConverter;
  * @author Miro Spoenemann - Initial contribution and API
  */
 public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigurationBlock {
-	
-	private static final String SETTINGS_SECTION_NAME = "XtextValidatorConfigurationBlock"; //$NON-NLS-1$
-	
+
+	public static final String SETTINGS_SECTION_NAME = "XtextValidatorConfigurationBlock"; //$NON-NLS-1$
+
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 		Composite grammarSection = createSection(Messages.XtextValidatorConfigurationBlock_0, composite, nColumns);
@@ -33,35 +33,33 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 		Composite ecoreModel = createSection(Messages.XtextValidatorConfigurationBlock_1, composite, nColumns);
 		fillEcoreModelSection(ecoreModel, defaultIndent);
 	}
-	
+
 	protected void fillGrammarSection(Composite section, int defaultIndent) {
 		addComboBox(INVALID_TERMINALRULE_NAME, Messages.XtextValidatorConfigurationBlock_2, section, defaultIndent);
 		addComboBox(DUPLICATE_ENUM_LITERAL, Messages.XtextValidatorConfigurationBlock_3, section, defaultIndent);
 	}
-	
+
 	protected void fillEcoreModelSection(Composite section, int defaultIndent) {
 		addComboBox(INVALID_METAMODEL_NAME, Messages.XtextValidatorConfigurationBlock_4, section, defaultIndent);
-		addComboBox(INVALID_PACKAGE_REFERENCE_EXTERNAL, Messages.XtextValidatorConfigurationBlock_5, section, defaultIndent);
-		addComboBox(INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH, Messages.XtextValidatorConfigurationBlock_6, section, defaultIndent);
+		addComboBox(INVALID_PACKAGE_REFERENCE_EXTERNAL, Messages.XtextValidatorConfigurationBlock_5, section,
+				defaultIndent);
+		addComboBox(INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH, Messages.XtextValidatorConfigurationBlock_6, section,
+				defaultIndent);
 		addComboBox(BIDIRECTIONAL_REFERENCE, Messages.XtextValidatorConfigurationBlock_7, section, defaultIndent);
 	}
 
 	protected Combo addComboBox(String prefKey, String label, Composite parent, int indent) {
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
 				SeverityConverter.SEVERITY_IGNORE };
-		String[] valueLabels = new String[] {
-				Messages.XtextValidatorConfigurationBlock_8,
-				Messages.XtextValidatorConfigurationBlock_9,
-				Messages.XtextValidatorConfigurationBlock_10
-			};
+		String[] valueLabels = new String[] { Messages.XtextValidatorConfigurationBlock_8,
+				Messages.XtextValidatorConfigurationBlock_9, Messages.XtextValidatorConfigurationBlock_10 };
 		Combo comboBox = addComboBox(parent, label, prefKey, indent, values, valueLabels);
 		return comboBox;
 	}
 
 	@Override
 	protected Job getBuildJob(IProject project) {
-		Job buildJob = new OptionsConfigurationBlock.BuildJob(
-				Messages.XtextValidatorConfigurationBlock_11, project);
+		Job buildJob = new OptionsConfigurationBlock.BuildJob(Messages.XtextValidatorConfigurationBlock_11, project);
 		buildJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
 		buildJob.setUser(true);
 		return buildJob;
@@ -83,21 +81,21 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 	@Override
 	protected void validateSettings(String changedKey, String oldValue, String newValue) {
 	}
-	
+
 	@Override
 	public void dispose() {
 		storeSectionExpansionStates(getDialogSettings());
 		super.dispose();
 	}
-	
+
 	@Override
 	protected IDialogSettings getDialogSettings() {
 		IDialogSettings dialogSettings = super.getDialogSettings();
 		IDialogSettings section = dialogSettings.getSection(SETTINGS_SECTION_NAME);
-		if(section==null) {
+		if (section == null) {
 			return dialogSettings.addNewSection(SETTINGS_SECTION_NAME);
 		}
 		return section;
 	}
-	
+
 }
