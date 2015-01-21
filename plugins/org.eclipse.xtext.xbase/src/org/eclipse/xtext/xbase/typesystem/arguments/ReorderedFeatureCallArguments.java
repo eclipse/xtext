@@ -80,6 +80,14 @@ public class ReorderedFeatureCallArguments extends StandardFeatureCallArguments 
 	}
 	
 	@Override
+	protected LightweightTypeReference internalGetParameterTypeForLambda(int idx) {
+		if (idx > parameters.size() + shiftedParameters.size() && idx < arguments.size() + shiftedArguments.size()) {
+			return null;
+		}
+		return super.internalGetParameterTypeForLambda(idx);
+	}
+	
+	@Override
 	/* @Nullable */
 	protected LightweightTypeReference internalGetParameterType(int idx) {
 		JvmFormalParameter parameter = internalGetParameter(idx);

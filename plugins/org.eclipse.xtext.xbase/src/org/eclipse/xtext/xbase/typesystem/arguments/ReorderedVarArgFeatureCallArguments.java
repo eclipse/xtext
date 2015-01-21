@@ -52,6 +52,12 @@ public class ReorderedVarArgFeatureCallArguments extends ReorderedFeatureCallArg
 	}
 	
 	@Override
+	protected LightweightTypeReference internalGetParameterTypeForLambda(int idx) {
+		LightweightTypeReference result = internalGetParameterType(idx);
+		return VarArgFeatureCallArguments.getComponentTypeIfLast(result, parameters, idx);
+	}
+	
+	@Override
 	/* @Nullable */
 	protected LightweightTypeReference internalGetParameterType(int idx) {
 		if (idx >= arguments.size()) {
@@ -59,6 +65,9 @@ public class ReorderedVarArgFeatureCallArguments extends ReorderedFeatureCallArg
 			// the shifted index
 			JvmFormalParameter parameter = shiftedParameters.get(idx - arguments.size());
 			return toLightweightTypeReference(parameter);
+		}
+		if (idx >= parameters.size()) {
+			idx = parameters.size() - 1;
 		}
 		JvmFormalParameter parameter = parameters.get(idx);
 		return toLightweightTypeReference(parameter);
