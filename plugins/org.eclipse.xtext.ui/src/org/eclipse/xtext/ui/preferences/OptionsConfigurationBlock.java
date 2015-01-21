@@ -65,11 +65,11 @@ import com.google.inject.Inject;
 public abstract class OptionsConfigurationBlock {
 	@Inject
 	AbstractUIPlugin uiPlugin;
-	
+
 	@Inject
 	protected PreferenceStoreAccessImpl preferenceStoreAccessImpl;
 
-	public static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
+	private static final String IS_PROJECT_SPECIFIC = "is_project_specific"; //$NON-NLS-1$
 	private static final String SETTINGS_EXPANDED = "expanded"; //$NON-NLS-1$
 	private static final String REBUILD_COUNT_KEY = "preferences_build_requested"; //$NON-NLS-1$
 
@@ -109,19 +109,19 @@ public abstract class OptionsConfigurationBlock {
 
 	public static final class BuildJob extends Job {
 		private final IProject project;
-	
+
 		public BuildJob(String name, IProject project) {
 			super(name);
 			this.project = project;
 		}
-	
+
 		public boolean isCoveredBy(BuildJob other) {
 			if (other.project == null) {
 				return true;
 			}
 			return project != null && project.equals(other.project);
 		}
-	
+
 		@Override
 		protected IStatus run(IProgressMonitor monitor) {
 			synchronized (getClass()) {
@@ -161,7 +161,7 @@ public abstract class OptionsConfigurationBlock {
 			}
 			return Status.OK_STATUS;
 		}
-	
+
 		@Override
 		public boolean belongsTo(Object family) {
 			return ResourcesPlugin.FAMILY_MANUAL_BUILD == family;
@@ -202,19 +202,19 @@ public abstract class OptionsConfigurationBlock {
 		this.setPreferenceStore(preferenceStore);
 		this.workbenchPreferenceContainer = container;
 	}
-	
+
 	public OptionsConfigurationBlock() {
 		this.keys = new String[] {};
 	}
-	
+
 	public void setWorkbenchPreferenceContainer(IWorkbenchPreferenceContainer workbenchPreferenceContainer) {
 		this.workbenchPreferenceContainer = workbenchPreferenceContainer;
 	}
-	
+
 	public void setProject(IProject project) {
 		this.project = project;
 	}
-	
+
 	public void setPreferenceStore(IPreferenceStore preferenceStore) {
 		this.preferenceStore = preferenceStore;
 		this.rebuildCount = getRebuildCount();
@@ -236,13 +236,22 @@ public abstract class OptionsConfigurationBlock {
 		if (project != getProject()) {
 			ps = preferenceStoreAccessImpl.getWritablePreferenceStore(project);
 		}
-		return ps.getBoolean(IS_PROJECT_SPECIFIC);
+		// backward compatibility
+		boolean oldSettingsUsed = ps.getBoolean(IS_PROJECT_SPECIFIC);
+		boolean newSettingsValue = ps.getBoolean(getIsProjectSpecificPropertyKey(getPropertyPrefix()));
+		if (oldSettingsUsed) {
+			if (!newSettingsValue) {
+				ps.setValue(getIsProjectSpecificPropertyKey(getPropertyPrefix()), true);
+				return true;
+			}
+		}
+		return newSettingsValue;
 	}
 
 	protected void setShell(Shell shell) {
 		this.shell = shell;
 	}
-	
+
 	protected Shell getShell() {
 		return shell;
 	}
@@ -463,7 +472,7 @@ public abstract class OptionsConfigurationBlock {
 		preferenceStore.putValue(key, value);
 		return oldValue;
 	}
-	
+
 	protected String setToDefault(String key) {
 		String value = preferenceStore.getDefaultString(key);
 		if (disabledProjectSettings != null) {
@@ -486,7 +495,7 @@ public abstract class OptionsConfigurationBlock {
 				disabledProjectSettings = null;
 				updateControls();
 				validateSettings(null, null, null);
-				preferenceStore.setValue(IS_PROJECT_SPECIFIC, true);
+				preferenceStore.setValue(getIsProjectSpecificPropertyKey(getPropertyPrefix()), true);
 			} else {
 				disabledProjectSettings = Maps.newHashMap();
 				for (int i = 0; i < keys.length; i++) {
@@ -495,6 +504,8 @@ public abstract class OptionsConfigurationBlock {
 					disabledProjectSettings.put(curr, oldSetting);
 					preferenceStore.setToDefault(curr);
 				}
+				preferenceStore.setToDefault(getIsProjectSpecificPropertyKey(getPropertyPrefix()));
+				//backward compatibility
 				preferenceStore.setToDefault(IS_PROJECT_SPECIFIC);
 			}
 		}
@@ -561,10 +572,13 @@ public abstract class OptionsConfigurationBlock {
 				((IPersistentPreferenceStore) preferenceStore).save();
 			}
 		} catch (IOException e) {
-			IStatus status = new Status(IStatus.ERROR, uiPlugin.getBundle().getSymbolicName(),
-					"Unexpected internal error: ", e); //$NON-NLS-1$
-			uiPlugin.getLog().log(status);
+			logError("Unexpected internal error: ", e); //$NON-NLS-1$
 		}
+	}
+
+	private void logError(String text, IOException e) {
+		IStatus status = new Status(IStatus.ERROR, uiPlugin.getBundle().getSymbolicName(), text, e);
+		uiPlugin.getLog().log(status);
 	}
 
 	public Map<String, ValueDifference<String>> getPreferenceChanges() {
@@ -661,4 +675,19 @@ public abstract class OptionsConfigurationBlock {
 		keysToRegister.add(key);
 	}
 
+	public abstract String getPropertyPrefix();
+
+	public String getIsProjectSpecificPropertyKey(String propertyPrefix) {
+		String key = IS_PROJECT_SPECIFIC;
+		if (propertyPrefix != null) {
+			key = isPrprojectSpecificPropertyKey(propertyPrefix);
+		} else {
+			logError("Project specific key is not qualified", null);
+		}
+		return key;
+	}
+
+	public static String isPrprojectSpecificPropertyKey(String propertyPrefix) {
+		return propertyPrefix + "." + IS_PROJECT_SPECIFIC;
+	}
 }
