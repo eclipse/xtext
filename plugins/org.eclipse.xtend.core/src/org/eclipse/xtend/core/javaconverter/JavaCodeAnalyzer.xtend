@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.javaconverter
 import java.util.Collections
 import java.util.List
 import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.core.dom.AST
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
@@ -25,7 +26,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class JavaCodeAnalyzer {
 
-	final static int JLS = JavaASTFlattener.JLS
+	final static int JLS = AST.JLS3
 	String complianceLevel = "1.5"
 
 	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode) {
@@ -33,7 +34,7 @@ class JavaCodeAnalyzer {
 	}
 
 	def JavaParseResult<? extends ASTNode> determinateJavaType(String javaCode, String compilerCompliance) {
-		var ASTParser parser = createDefaultJavaParser
+		var ASTParser parser = createDefaultJavaParser(compilerCompliance)
 
 		parser.setSource(javaCode.toCharArray())
 		parser.setStatementsRecovery(true)
@@ -71,9 +72,13 @@ class JavaCodeAnalyzer {
 	}
 
 	def createDefaultJavaParser() {
+		return createDefaultJavaParser(complianceLevel)
+	}
+
+	def createDefaultJavaParser(String compilerCompliance) {
 		val parser = ASTParser.newParser(JLS)
 		val options = JavaCore.getOptions()
-		JavaCore.setComplianceOptions(complianceLevel, options)
+		JavaCore.setComplianceOptions(compilerCompliance, options)
 		parser.compilerOptions = options
 		return parser
 	}
