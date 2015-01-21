@@ -374,4 +374,22 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
+  
+  @Test
+  public void testBug455582() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract package class XtendTest {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static final def void foo() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("  ");
+    _builder_1.append("abstract  package  class  XtendTest  {  static  final  def  void  foo  (  )  {  }  }");
+    this.assertFormatted(_builder, _builder_1);
+  }
 }

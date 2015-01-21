@@ -32,6 +32,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -711,107 +712,24 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   /**
    * Always put existing modifiers into this fixed order
    */
-  protected ISemanticRegion formatModifiers(final XtendMember member, @Extension final IFormattableDocument document) {
-    ISemanticRegion _xblockexpression = null;
-    {
-      ISemanticRegion _regionForKeyword = this.regionAccess.regionForKeyword(member, "public");
-      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword, _function);
-      ISemanticRegion _regionForKeyword_1 = this.regionAccess.regionForKeyword(member, "protected");
-      final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_1, _function_1);
-      ISemanticRegion _regionForKeyword_2 = this.regionAccess.regionForKeyword(member, "package");
-      final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_2, _function_2);
-      ISemanticRegion _regionForKeyword_3 = this.regionAccess.regionForKeyword(member, "private");
-      final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_3, _function_3);
-      ISemanticRegion _regionForKeyword_4 = this.regionAccess.regionForKeyword(member, "abstract");
-      final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_4, _function_4);
-      ISemanticRegion _regionForKeyword_5 = this.regionAccess.regionForKeyword(member, "static");
-      final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_5, _function_5);
-      ISemanticRegion _regionForKeyword_6 = this.regionAccess.regionForKeyword(member, "final");
-      final Procedure1<IHiddenRegionFormatter> _function_6 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_6, _function_6);
-      ISemanticRegion _regionForKeyword_7 = this.regionAccess.regionForKeyword(member, "extension");
-      final Procedure1<IHiddenRegionFormatter> _function_7 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_7, _function_7);
-      ISemanticRegion _regionForKeyword_8 = this.regionAccess.regionForKeyword(member, "val");
-      final Procedure1<IHiddenRegionFormatter> _function_8 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_8, _function_8);
-      ISemanticRegion _regionForKeyword_9 = this.regionAccess.regionForKeyword(member, "var");
-      final Procedure1<IHiddenRegionFormatter> _function_9 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_9, _function_9);
-      ISemanticRegion _regionForKeyword_10 = this.regionAccess.regionForKeyword(member, "def");
-      final Procedure1<IHiddenRegionFormatter> _function_10 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      document.append(_regionForKeyword_10, _function_10);
-      ISemanticRegion _regionForKeyword_11 = this.regionAccess.regionForKeyword(member, "override");
-      final Procedure1<IHiddenRegionFormatter> _function_11 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.oneSpace();
-        }
-      };
-      _xblockexpression = document.append(_regionForKeyword_11, _function_11);
-    }
-    return _xblockexpression;
+  protected void formatModifiers(final XtendMember member, @Extension final IFormattableDocument document) {
+    ParserRule _commonModifierRule = this._xtendGrammarAccess.getCommonModifierRule();
+    ParserRule _methodModifierRule = this._xtendGrammarAccess.getMethodModifierRule();
+    ParserRule _fieldModifierRule = this._xtendGrammarAccess.getFieldModifierRule();
+    List<ISemanticRegion> _regionsForRuleCallsTo = this.regionAccess.regionsForRuleCallsTo(member, _commonModifierRule, _methodModifierRule, _fieldModifierRule);
+    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
+      @Override
+      public void apply(final ISemanticRegion it) {
+        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
+          @Override
+          public void apply(final IHiddenRegionFormatter it) {
+            it.oneSpace();
+          }
+        };
+        document.append(it, _function);
+      }
+    };
+    IterableExtensions.<ISemanticRegion>forEach(_regionsForRuleCallsTo, _function);
   }
   
   @Override
