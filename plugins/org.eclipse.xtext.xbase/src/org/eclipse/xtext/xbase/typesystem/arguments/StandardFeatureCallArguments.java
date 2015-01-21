@@ -58,9 +58,26 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	/* @Nullable */
 	@Override
 	public XExpression getArgument(int idx) {
-		return internalGetArgument(idx - receiverFixup);
+		int fixedIdx = idx - receiverFixup;
+		if (fixedIdx < 0) {
+			return null;
+		}
+		return internalGetArgument(fixedIdx);
 	}
 	
+	@Override
+	public final LightweightTypeReference getDeclaredTypeForLambda(int idx) {
+		int fixedIdx = idx - receiverFixup;
+		if (fixedIdx < 0) {
+			return null;
+		}
+		return internalGetParameterTypeForLambda(fixedIdx);
+	}
+	
+	protected LightweightTypeReference internalGetParameterTypeForLambda(int idx) {
+		return internalGetParameterType(idx);
+	}
+
 	@Override
 	public int getArgumentCount() {
 		return arguments.size() + receiverFixup;
@@ -73,8 +90,6 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	
 	/* @Nullable */
 	protected XExpression internalGetArgument(int idx) {
-		if (idx < 0)
-			return null;
 		return arguments.get(idx);
 	}
 	

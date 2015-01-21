@@ -44,6 +44,11 @@ public class AssignmentFeatureCallArguments implements IFeatureCallArguments, IF
 	public XExpression getArgument(int idx) {
 		return expression;
 	}
+	
+	@Override
+	public LightweightTypeReference getDeclaredTypeForLambda(int idx) {
+		return type;
+	}
 
 	@Override
 	public int getArgumentCount() {

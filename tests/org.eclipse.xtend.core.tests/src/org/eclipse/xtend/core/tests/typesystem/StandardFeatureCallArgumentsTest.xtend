@@ -190,6 +190,58 @@ class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferenceOwner
 		'String s'.toArgumentsWithReceiver('[], 1, 1')
 	}
 	
+	@Test
+	def void testBug457779_01() {
+		val arguments = 'String s, int i'.toArgumentsWithReceiver('"", 1')
+		val first = arguments.getArgument(0)
+		assertNull(first)
+		val firstType = arguments.getDeclaredTypeForLambda(0)
+		assertNull(firstType)
+		
+		val second = arguments.getArgument(1)
+		assertTrue(second instanceof XStringLiteral)
+		val secondType = arguments.getDeclaredTypeForLambda(1)
+		assertEquals('String', secondType.simpleName)
+		
+		val third = arguments.getArgument(2)
+		assertTrue(third instanceof XNumberLiteral)
+		val thirdType = arguments.getDeclaredTypeForLambda(2)
+		assertEquals('int', thirdType.simpleName)
+		
+		try {
+			arguments.getArgument(3)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+		try {
+			arguments.getDeclaredTypeForLambda(3)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+	}
+	
+	@Test
+	def void testBug457779_02() {
+		val arguments = 'String s, int i'.toArgumentsWithoutReceiver('"", 1')
+		
+		val first = arguments.getArgument(0)
+		assertTrue(first instanceof XStringLiteral)
+		val firstType = arguments.getDeclaredTypeForLambda(0)
+		assertEquals('String', firstType.simpleName)
+		
+		val second = arguments.getArgument(1)
+		assertTrue(second instanceof XNumberLiteral)
+		val secondType = arguments.getDeclaredTypeForLambda(1)
+		assertEquals('int', secondType.simpleName)
+		
+		try {
+			arguments.getArgument(2)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+		try {
+			arguments.getDeclaredTypeForLambda(2)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+	}
+	
 	protected def toArgumentsWithoutReceiver(String signature, String invocation) {
 		toArguments(signature, invocation, false)
 	}

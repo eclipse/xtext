@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,9 +23,19 @@ public interface IFeatureCallArguments {
   public abstract IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot();
   
   /**
-   * @Nullable
+   * Returns the argument expression at index {@code idx}.
+   * If there is a receiver, the index {@code 0} returns
+   * {@code null}.
    */
   public abstract XExpression getArgument(final int idx);
+  
+  /**
+   * Returns the declared parameter type for the argument at index {@code idx}.
+   * The semantics are similar to {@link #getArgument(int)} except for var arg
+   * parameters. Var arg parameters always return the component type of the
+   * last argument if asked for the type of the last or variable argument.
+   */
+  public abstract LightweightTypeReference getDeclaredTypeForLambda(final int idx);
   
   /**
    * Returns the number of argument expressions where the receiver

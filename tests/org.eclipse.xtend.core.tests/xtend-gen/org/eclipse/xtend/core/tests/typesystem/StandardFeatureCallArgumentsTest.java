@@ -283,6 +283,80 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     this.toArgumentsWithReceiver("String s", "[], 1, 1");
   }
   
+  @Test
+  public void testBug457779_01() {
+    final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, int i", "\"\", 1");
+    final XExpression first = arguments.getArgument(0);
+    Assert.assertNull(first);
+    final LightweightTypeReference firstType = arguments.getDeclaredTypeForLambda(0);
+    Assert.assertNull(firstType);
+    final XExpression second = arguments.getArgument(1);
+    Assert.assertTrue((second instanceof XStringLiteral));
+    final LightweightTypeReference secondType = arguments.getDeclaredTypeForLambda(1);
+    String _simpleName = secondType.getSimpleName();
+    Assert.assertEquals("String", _simpleName);
+    final XExpression third = arguments.getArgument(2);
+    Assert.assertTrue((third instanceof XNumberLiteral));
+    final LightweightTypeReference thirdType = arguments.getDeclaredTypeForLambda(2);
+    String _simpleName_1 = thirdType.getSimpleName();
+    Assert.assertEquals("int", _simpleName_1);
+    try {
+      arguments.getArgument(3);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t) {
+      if (_t instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected = (IndexOutOfBoundsException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    try {
+      arguments.getDeclaredTypeForLambda(3);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected_1 = (IndexOutOfBoundsException)_t_1;
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
+      }
+    }
+  }
+  
+  @Test
+  public void testBug457779_02() {
+    final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i", "\"\", 1");
+    final XExpression first = arguments.getArgument(0);
+    Assert.assertTrue((first instanceof XStringLiteral));
+    final LightweightTypeReference firstType = arguments.getDeclaredTypeForLambda(0);
+    String _simpleName = firstType.getSimpleName();
+    Assert.assertEquals("String", _simpleName);
+    final XExpression second = arguments.getArgument(1);
+    Assert.assertTrue((second instanceof XNumberLiteral));
+    final LightweightTypeReference secondType = arguments.getDeclaredTypeForLambda(1);
+    String _simpleName_1 = secondType.getSimpleName();
+    Assert.assertEquals("int", _simpleName_1);
+    try {
+      arguments.getArgument(2);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t) {
+      if (_t instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected = (IndexOutOfBoundsException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    try {
+      arguments.getDeclaredTypeForLambda(2);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected_1 = (IndexOutOfBoundsException)_t_1;
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
+      }
+    }
+  }
+  
   protected IFeatureCallArguments toArgumentsWithoutReceiver(final String signature, final String invocation) {
     return this.toArguments(signature, invocation, false);
   }

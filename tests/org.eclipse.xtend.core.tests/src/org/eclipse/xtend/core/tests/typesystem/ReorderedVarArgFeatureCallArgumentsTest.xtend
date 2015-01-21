@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments
 import org.junit.Test
+import org.eclipse.xtext.xbase.XBooleanLiteral
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -122,6 +123,75 @@ class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingTypeReferen
 	def void test_10() {
 		val arguments = 'String s, int i, int j, int k, int l, int m, int n'.toArgumentsWithoutReceiver('[], 1, [], 1, []')
 		arguments.withIndizes(1, 3, 0, 2, 4)
+	}
+	
+	@Test
+	def void testBug457779_01() {
+		val arguments = 'String s, boolean b, int[] i'.toArgumentsWithReceiver('[], 1, [1], true')
+		val first = arguments.getArgument(0)
+		assertNull(first)
+		val firstType = arguments.getDeclaredTypeForLambda(0)
+		assertNull(firstType)
+		
+		val second = arguments.getArgument(1)
+		assertTrue(second instanceof XNumberLiteral)
+		val secondType = arguments.getDeclaredTypeForLambda(1)
+		assertEquals('boolean', secondType.simpleName)
+		
+		val third = arguments.getArgument(2)
+		assertTrue(third instanceof XClosure)
+		assertFalse(((third as XClosure).expression as XBlockExpression).expressions.isEmpty)
+		val thirdType = arguments.getDeclaredTypeForLambda(2)
+		assertEquals('int', thirdType.simpleName)
+		
+		val fourth = arguments.getArgument(3)
+		assertTrue(fourth instanceof XBooleanLiteral)
+		val fourthType = arguments.getDeclaredTypeForLambda(3)
+		assertEquals('int', fourthType.simpleName)
+		
+		val fifth = arguments.getArgument(4)
+		assertTrue(fifth instanceof XClosure)
+		assertTrue(((fifth as XClosure).expression as XBlockExpression).expressions.isEmpty)
+		val fifthType = arguments.getDeclaredTypeForLambda(4)
+		assertEquals('String', fifthType.simpleName)
+		
+		try {
+			arguments.getArgument(5)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+		try {
+			arguments.getDeclaredTypeForLambda(5)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+	}
+	
+	@Test
+	def void testBug457779_02() {
+		val arguments = 'String s, boolean b, int[] i'.toArgumentsWithReceiver('[], 1')
+		val first = arguments.getArgument(0)
+		assertNull(first)
+		val firstType = arguments.getDeclaredTypeForLambda(0)
+		assertNull(firstType)
+		
+		val second = arguments.getArgument(1)
+		assertTrue(second instanceof XNumberLiteral)
+		val secondType = arguments.getDeclaredTypeForLambda(1)
+		assertEquals('boolean', secondType.simpleName)
+		
+		val third = arguments.getArgument(2)
+		assertTrue(third instanceof XClosure)
+		assertTrue(((third as XClosure).expression as XBlockExpression).expressions.isEmpty)
+		val thirdType = arguments.getDeclaredTypeForLambda(2)
+		assertEquals('String', thirdType.simpleName)
+		
+		try {
+			arguments.getArgument(3)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
+		try {
+			arguments.getDeclaredTypeForLambda(3)
+			fail("Expected exception")
+		} catch(IndexOutOfBoundsException expected) {}
 	}
 	
 	protected def void withIndizes(IFeatureCallArguments arguments, int... indexes) {
