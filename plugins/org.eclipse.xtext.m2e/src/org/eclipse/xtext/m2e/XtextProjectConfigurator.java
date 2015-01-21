@@ -26,6 +26,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.m2e.core.project.configurator.AbstractProjectConfigurator;
 import org.eclipse.m2e.core.project.configurator.ProjectConfigurationRequest;
+import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
@@ -60,7 +61,7 @@ public class XtextProjectConfigurator extends AbstractProjectConfigurator {
 		if (language.getOutputConfigurations().isEmpty()) return;
 		
 		IEclipsePreferences languagePreferences = projectPreferences.getNode(language.name());
-		languagePreferences.putBoolean(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC, true);
+		languagePreferences.putBoolean(OptionsConfigurationBlock.isPrprojectSpecificPropertyKey(BuilderConfigurationBlock.PROPERTY_PREFIX), true);
 		languagePreferences.putBoolean(PREF_AUTO_BUILDING, true);
 		for (OutputConfiguration outputConfiguration : language.getOutputConfigurations()) {
 			configureOutlet(languagePreferences, outputConfiguration, request);

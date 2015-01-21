@@ -53,7 +53,9 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 	
 	protected static final String[] BOOLEAN_VALUES = new String[] { IPreferenceStore.TRUE, IPreferenceStore.FALSE };
 	
-	private static final String SETTINGS_SECTION_NAME = "BuilderConfigurationBlock"; //$NON-NLS-1$
+	public static final String SETTINGS_SECTION_NAME = "BuilderConfigurationBlock"; //$NON-NLS-1$
+
+	public static final String PROPERTY_PREFIX = "BuilderConfiguration";
 
 	@Inject
 	private EclipseOutputConfigurationProvider configurationProvider;
@@ -117,7 +119,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 
 			createOutputSectionItems(othersComposite, outputConfiguration);
 		}
-		registerKey(OptionsConfigurationBlock.IS_PROJECT_SPECIFIC);
+		registerKey(getIsProjectSpecificPropertyKey(getPropertyPrefix()));
 		IDialogSettings section = Activator.getDefault().getDialogSettings().getSection(SETTINGS_SECTION_NAME);
 		restoreSectionExpansionStates(section);
 		return pageContent;
@@ -360,6 +362,11 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 		buildJob.setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
 		buildJob.setUser(true);
 		return buildJob;
+	}
+
+	@Override
+	public String getPropertyPrefix() {
+		return PROPERTY_PREFIX;
 	}
 
 }
