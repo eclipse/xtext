@@ -131,8 +131,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JavaASTFlattener extends ASTVisitor {
-  public final static int JLS = AST.JLS3;
-  
   @Inject
   private IValueConverterService converterService;
   
@@ -949,14 +947,14 @@ public class JavaASTFlattener extends ASTVisitor {
     IterableExtensions.forEach(iterable, _function);
   }
   
-  public StringBuffer appendTypeParameters(final Iterable<TypeParameter> iterable) {
-    StringBuffer _xblockexpression = null;
-    {
-      this.appendToBuffer("<");
-      this.visitAllSeparatedByComma(iterable);
-      _xblockexpression = this.appendToBuffer(">");
+  public void appendTypeParameters(final Iterable<TypeParameter> iterable) {
+    boolean _isEmpty = IterableExtensions.isEmpty(iterable);
+    if (_isEmpty) {
+      return;
     }
-    return _xblockexpression;
+    this.appendToBuffer("<");
+    this.visitAllSeparatedByComma(iterable);
+    this.appendToBuffer(">");
   }
   
   @Override
@@ -1745,7 +1743,9 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final PostfixExpression node) {
-    final AST dummyAST = AST.newAST(JavaASTFlattener.JLS);
+    AST _aST = node.getAST();
+    int _apiLevel = _aST.apiLevel();
+    final AST dummyAST = AST.newAST(_apiLevel);
     final PostfixExpression.Operator pfOperator = node.getOperator();
     Expression _operand = node.getOperand();
     if ((_operand instanceof ArrayAccess)) {
@@ -1831,7 +1831,9 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final PrefixExpression node) {
-    final AST dummyAST = AST.newAST(JavaASTFlattener.JLS);
+    AST _aST = node.getAST();
+    int _apiLevel = _aST.apiLevel();
+    final AST dummyAST = AST.newAST(_apiLevel);
     PrefixExpression.Operator _operator = node.getOperator();
     boolean _matched = false;
     if (!_matched) {

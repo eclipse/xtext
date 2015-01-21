@@ -115,8 +115,6 @@ import org.eclipse.xtext.conversion.IValueConverterService
  */
 class JavaASTFlattener extends ASTVisitor {
 
-	final static public int JLS = AST.JLS3
-
 	@Inject IValueConverterService converterService
 	@Inject extension ASTFlattenerUtils
 
@@ -596,6 +594,8 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def appendTypeParameters(Iterable<TypeParameter> iterable) {
+		if(iterable.isEmpty)
+			return; //"diamond operator" java7
 		appendToBuffer("<")
 		visitAllSeparatedByComma(iterable)
 		appendToBuffer(">")
@@ -1018,7 +1018,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(PostfixExpression node) {
-		val dummyAST = AST.newAST(JLS)
+		val dummyAST = AST.newAST(node.AST.apiLevel)
 		val pfOperator = node.operator
 		if (node.operand instanceof ArrayAccess) {
 			val pfOperand = node.operand as ArrayAccess
@@ -1064,7 +1064,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(PrefixExpression node) {
-		val dummyAST = AST.newAST(JLS)
+		val dummyAST = AST.newAST(node.AST.apiLevel)
 		switch (node.operator) {
 			case Operator.DECREMENT,
 			case Operator.INCREMENT: {

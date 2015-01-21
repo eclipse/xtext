@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.Block;
@@ -19,7 +20,6 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.eclipse.xtend.core.javaconverter.JavaASTFlattener;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -59,7 +59,7 @@ public class JavaCodeAnalyzer {
     }
   }
   
-  private final static int JLS = JavaASTFlattener.JLS;
+  private final static int JLS = AST.JLS3;
   
   private String complianceLevel = "1.5";
   
@@ -68,7 +68,7 @@ public class JavaCodeAnalyzer {
   }
   
   public JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> determinateJavaType(final String javaCode, final String compilerCompliance) {
-    ASTParser parser = this.createDefaultJavaParser();
+    ASTParser parser = this.createDefaultJavaParser(compilerCompliance);
     char[] _charArray = javaCode.toCharArray();
     parser.setSource(_charArray);
     parser.setStatementsRecovery(true);
@@ -122,9 +122,13 @@ public class JavaCodeAnalyzer {
   }
   
   public ASTParser createDefaultJavaParser() {
+    return this.createDefaultJavaParser(this.complianceLevel);
+  }
+  
+  public ASTParser createDefaultJavaParser(final String compilerCompliance) {
     final ASTParser parser = ASTParser.newParser(JavaCodeAnalyzer.JLS);
     final Hashtable options = JavaCore.getOptions();
-    JavaCore.setComplianceOptions(this.complianceLevel, options);
+    JavaCore.setComplianceOptions(compilerCompliance, options);
     parser.setCompilerOptions(options);
     return parser;
   }
