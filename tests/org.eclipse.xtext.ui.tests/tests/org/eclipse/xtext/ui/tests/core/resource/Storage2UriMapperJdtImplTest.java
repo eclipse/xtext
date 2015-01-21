@@ -93,6 +93,7 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		assertEquals("platform:/resource/other.bundle.name/foo/bar.indexed", rootData.keySet().iterator().next().toString());
 	}
 	
+	@Flaky
 	@Test public void testResourceInExternalFolder() throws Exception {
 		IFolder externalFolder = createExternalFolder("externalFolder");
 		IJavaProject project = createJavaProject("foo");
