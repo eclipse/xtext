@@ -27,8 +27,15 @@ interface IFeatureCallArguments {
 	 * If there is a receiver, the index {@code 0} returns 
 	 * {@code null}.
 	 */
-	/* @Nullable */
-	def XExpression getArgument(int idx)
+	def /* @Nullable */ XExpression getArgument(int idx)
+	
+	/**
+	 * Returns the declared parameter type for the argument at index {@code idx}.
+	 * The semantics are similar to {@link #getArgument(int)} except for var arg
+	 * parameters. Var arg parameters always return the component type of the 
+	 * last argument if asked for the type of the last or variable argument.
+	 */
+	def /* @Nullable */ LightweightTypeReference getDeclaredTypeForLambda(int idx)
 	
 	/**
 	 * Returns the number of argument expressions where the receiver

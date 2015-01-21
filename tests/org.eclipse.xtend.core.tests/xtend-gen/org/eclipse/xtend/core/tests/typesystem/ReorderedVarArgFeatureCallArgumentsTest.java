@@ -20,6 +20,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -183,6 +184,106 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
   public void test_10() {
     final IFeatureCallArguments arguments = this.toArgumentsWithoutReceiver("String s, int i, int j, int k, int l, int m, int n", "[], 1, [], 1, []");
     this.withIndizes(arguments, 1, 3, 0, 2, 4);
+  }
+  
+  @Test
+  public void testBug457779_01() {
+    final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, boolean b, int[] i", "[], 1, [1], true");
+    final XExpression first = arguments.getArgument(0);
+    Assert.assertNull(first);
+    final LightweightTypeReference firstType = arguments.getDeclaredTypeForLambda(0);
+    Assert.assertNull(firstType);
+    final XExpression second = arguments.getArgument(1);
+    Assert.assertTrue((second instanceof XNumberLiteral));
+    final LightweightTypeReference secondType = arguments.getDeclaredTypeForLambda(1);
+    String _simpleName = secondType.getSimpleName();
+    Assert.assertEquals("boolean", _simpleName);
+    final XExpression third = arguments.getArgument(2);
+    Assert.assertTrue((third instanceof XClosure));
+    XExpression _expression = ((XClosure) third).getExpression();
+    EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+    boolean _isEmpty = _expressions.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    final LightweightTypeReference thirdType = arguments.getDeclaredTypeForLambda(2);
+    String _simpleName_1 = thirdType.getSimpleName();
+    Assert.assertEquals("int", _simpleName_1);
+    final XExpression fourth = arguments.getArgument(3);
+    Assert.assertTrue((fourth instanceof XBooleanLiteral));
+    final LightweightTypeReference fourthType = arguments.getDeclaredTypeForLambda(3);
+    String _simpleName_2 = fourthType.getSimpleName();
+    Assert.assertEquals("int", _simpleName_2);
+    final XExpression fifth = arguments.getArgument(4);
+    Assert.assertTrue((fifth instanceof XClosure));
+    XExpression _expression_1 = ((XClosure) fifth).getExpression();
+    EList<XExpression> _expressions_1 = ((XBlockExpression) _expression_1).getExpressions();
+    boolean _isEmpty_1 = _expressions_1.isEmpty();
+    Assert.assertTrue(_isEmpty_1);
+    final LightweightTypeReference fifthType = arguments.getDeclaredTypeForLambda(4);
+    String _simpleName_3 = fifthType.getSimpleName();
+    Assert.assertEquals("String", _simpleName_3);
+    try {
+      arguments.getArgument(5);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t) {
+      if (_t instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected = (IndexOutOfBoundsException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    try {
+      arguments.getDeclaredTypeForLambda(5);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected_1 = (IndexOutOfBoundsException)_t_1;
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
+      }
+    }
+  }
+  
+  @Test
+  public void testBug457779_02() {
+    final IFeatureCallArguments arguments = this.toArgumentsWithReceiver("String s, boolean b, int[] i", "[], 1");
+    final XExpression first = arguments.getArgument(0);
+    Assert.assertNull(first);
+    final LightweightTypeReference firstType = arguments.getDeclaredTypeForLambda(0);
+    Assert.assertNull(firstType);
+    final XExpression second = arguments.getArgument(1);
+    Assert.assertTrue((second instanceof XNumberLiteral));
+    final LightweightTypeReference secondType = arguments.getDeclaredTypeForLambda(1);
+    String _simpleName = secondType.getSimpleName();
+    Assert.assertEquals("boolean", _simpleName);
+    final XExpression third = arguments.getArgument(2);
+    Assert.assertTrue((third instanceof XClosure));
+    XExpression _expression = ((XClosure) third).getExpression();
+    EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
+    boolean _isEmpty = _expressions.isEmpty();
+    Assert.assertTrue(_isEmpty);
+    final LightweightTypeReference thirdType = arguments.getDeclaredTypeForLambda(2);
+    String _simpleName_1 = thirdType.getSimpleName();
+    Assert.assertEquals("String", _simpleName_1);
+    try {
+      arguments.getArgument(3);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t) {
+      if (_t instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected = (IndexOutOfBoundsException)_t;
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    try {
+      arguments.getDeclaredTypeForLambda(3);
+      Assert.fail("Expected exception");
+    } catch (final Throwable _t_1) {
+      if (_t_1 instanceof IndexOutOfBoundsException) {
+        final IndexOutOfBoundsException expected_1 = (IndexOutOfBoundsException)_t_1;
+      } else {
+        throw Exceptions.sneakyThrow(_t_1);
+      }
+    }
   }
   
   protected void withIndizes(final IFeatureCallArguments arguments, final int... indexes) {

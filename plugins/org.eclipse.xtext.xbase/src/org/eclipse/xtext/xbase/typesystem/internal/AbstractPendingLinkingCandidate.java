@@ -772,6 +772,13 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		boolean invalid = false;
 		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		for(int leftIdx = hasReceiver() ? 0 : -1, rightIdx = right.hasReceiver() ? 0 : -1; leftIdx < upTo || rightIdx < upTo; leftIdx++, rightIdx++) {
+			boolean leftIsPossibleFunctionType = isPossibleFunctionType(leftIdx);
+			if (leftIsPossibleFunctionType != right.isPossibleFunctionType(rightIdx)) {
+				if (leftIsPossibleFunctionType) {
+					return CandidateCompareResult.THIS;
+				}
+				return CandidateCompareResult.OTHER;
+			}
 			int leftConformance = getConformanceFlags(leftIdx, recompute);
 			int rightConformance = right.getConformanceFlags(rightIdx, recompute);
 			CandidateCompareResult argumentCompareResult = compareByArgumentTypesFlags(right, leftIdx, rightIdx, leftConformance, rightConformance);
@@ -928,6 +935,39 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			return CandidateCompareResult.OTHER;
 		}
 		return CandidateCompareResult.AMBIGUOUS;
+	}
+	
+	/**
+	 * Returns false if the argument expression is a lambda and the expected type
+	 * of the argument is not a function type or {@link Object}.
+	 * Returns true in all other cases.
+	 * 
+	 * This serves as a shortcut to rule out decision path's where a method is overloaded
+	 * and one of the overloads accepts a function type but the other doesn't. In those cases
+	 * it is not necessary to compute the type of the lamdba expression twice.
+	 * 
+	 * An example for this pattern is {@link IterableExtensions#filter(Iterable, Class)} vs
+	 * {@link IterableExtensions#filter(Iterable, org.eclipse.xtext.xbase.lib.Functions.Function1)}.
+	 */
+	protected boolean isPossibleFunctionType(int idx) {
+		if (idx < arguments.getArgumentCount()) {
+			XExpression argument = arguments.getArgument(idx);
+			if (argument instanceof XClosure) {
+				XClosure closure = (XClosure) argument;
+				LightweightTypeReference declaredType = arguments.getDeclaredTypeForLambda(idx);
+				if (declaredType != null && !declaredType.isType(Object.class)) {
+					CommonTypeComputationServices services = getState().getReferenceOwner().getServices();
+					JvmOperation operation = services.getFunctionTypes().findImplementingOperation(declaredType);
+					if (operation == null) {
+						return false;
+					}
+					if (closure.isExplicitSyntax() && closure.getDeclaredFormalParameters().size() != operation.getParameters().size()) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 	
 	protected int getConformanceFlags(int idx, boolean recompute) {

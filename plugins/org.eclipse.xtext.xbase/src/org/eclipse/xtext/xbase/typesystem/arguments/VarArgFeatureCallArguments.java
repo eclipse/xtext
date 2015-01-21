@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * A representation of {@link IFeatureCallArguments} that does not handle
@@ -25,6 +26,29 @@ public class VarArgFeatureCallArguments extends StandardFeatureCallArguments {
 
 	public VarArgFeatureCallArguments(List<XExpression> arguments, List<JvmFormalParameter> parameters, boolean hasReceiver, ITypeReferenceOwner owner) {
 		super(arguments, parameters, hasReceiver, owner);
+	}
+	
+	@Override
+	protected LightweightTypeReference internalGetParameterTypeForLambda(int idx) {
+		if (idx >= arguments.size()) {
+			throw new IndexOutOfBoundsException("Cannot read type for argument that is not present.");
+		} else if (idx >= parameters.size()) {
+			idx = parameters.size() - 1;
+		}
+		LightweightTypeReference result = super.internalGetParameterTypeForLambda(idx);
+		return getComponentTypeIfLast(result, parameters, idx);
+	}
+
+	protected static LightweightTypeReference getComponentTypeIfLast(LightweightTypeReference type, List<JvmFormalParameter> parameter, int idx) {
+		if (type != null) {
+			if (idx >= parameter.size() - 1) {
+				LightweightTypeReference componentType = type.getComponentType();
+				if (componentType != null) {
+					return componentType;
+				}
+			}
+		}
+		return type;
 	}
 	
 	@Override
