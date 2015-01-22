@@ -29,25 +29,14 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug250313Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug250313Package.CHILD1:
-				if(context == grammarAccess.getChildRule() ||
-				   context == grammarAccess.getChild1Rule()) {
-					sequence_Child1(context, (Child1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Child1(context, (Child1) semanticObject); 
+				return; 
 			case Bug250313Package.CHILD2:
-				if(context == grammarAccess.getChildRule() ||
-				   context == grammarAccess.getChild2Rule()) {
-					sequence_Child2(context, (Child2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Child2(context, (Child2) semanticObject); 
+				return; 
 			case Bug250313Package.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

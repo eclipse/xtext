@@ -35,11 +35,8 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AssignmentFinderTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AssignmentFinderTestPackage.CONTAINMENT_REF:
-				if(context == grammarAccess.getContainmentRefRule()) {
-					sequence_ContainmentRef(context, (ContainmentRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ContainmentRef(context, (ContainmentRef) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.CONTAINMENT_REF_N:
 				if(context == grammarAccess.getContainmentRef1Rule()) {
 					sequence_ContainmentRef1(context, (ContainmentRefN) semanticObject); 
@@ -51,65 +48,35 @@ public class AssignmentFinderTestLanguageSemanticSequencer extends AbstractDeleg
 				}
 				else break;
 			case AssignmentFinderTestPackage.CROSS_REF:
-				if(context == grammarAccess.getCrossRefRule()) {
-					sequence_CrossRef(context, (CrossRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CrossRef(context, (CrossRef) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.ENUM_BOOL:
-				if(context == grammarAccess.getEnumBoolRule()) {
-					sequence_EnumBool(context, (EnumBool) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EnumBool(context, (EnumBool) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.ENUM_VAL:
-				if(context == grammarAccess.getEnumValRule()) {
-					sequence_EnumVal(context, (EnumVal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EnumVal(context, (EnumVal) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.KEYWORD_BOOL:
-				if(context == grammarAccess.getKeywordBoolRule()) {
-					sequence_KeywordBool(context, (KeywordBool) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_KeywordBool(context, (KeywordBool) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.KEYWORD_VAL:
-				if(context == grammarAccess.getKeywordValRule()) {
-					sequence_KeywordVal(context, (KeywordVal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_KeywordVal(context, (KeywordVal) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.MIXED_BOOL:
-				if(context == grammarAccess.getMixedBoolRule()) {
-					sequence_MixedBool(context, (MixedBool) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MixedBool(context, (MixedBool) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.MIXED_VALUE:
-				if(context == grammarAccess.getMixedValueRule()) {
-					sequence_MixedValue(context, (MixedValue) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MixedValue(context, (MixedValue) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.TERMINAL_BOOL:
-				if(context == grammarAccess.getTerminalBoolRule()) {
-					sequence_TerminalBool(context, (TerminalBool) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TerminalBool(context, (TerminalBool) semanticObject); 
+				return; 
 			case AssignmentFinderTestPackage.TERMINAL_VAL:
-				if(context == grammarAccess.getTerminalValRule()) {
-					sequence_TerminalVal(context, (TerminalVal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TerminalVal(context, (TerminalVal) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

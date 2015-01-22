@@ -44,35 +44,20 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 				}
 				else break;
 			case LocationprovidertestPackage.DATA:
-				if(context == grammarAccess.getDataRule()) {
-					sequence_Data(context, (Data) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Data(context, (Data) semanticObject); 
+				return; 
 			case LocationprovidertestPackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Element(context, (Element) semanticObject); 
+				return; 
 			case LocationprovidertestPackage.MODE:
-				if(context == grammarAccess.getModeRule()) {
-					sequence_Mode(context, (Mode) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Mode(context, (Mode) semanticObject); 
+				return; 
 			case LocationprovidertestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case LocationprovidertestPackage.PORT:
-				if(context == grammarAccess.getPortRule()) {
-					sequence_Port(context, (Port) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Port(context, (Port) semanticObject); 
+				return; 
 			case LocationprovidertestPackage.PROCESSOR:
 				if(context == grammarAccess.getComponentRule()) {
 					sequence_Component_Processor(context, (Processor) semanticObject); 
@@ -84,11 +69,8 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 				}
 				else break;
 			case LocationprovidertestPackage.TRANSITION:
-				if(context == grammarAccess.getTransitionRule()) {
-					sequence_Transition(context, (Transition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Transition(context, (Transition) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

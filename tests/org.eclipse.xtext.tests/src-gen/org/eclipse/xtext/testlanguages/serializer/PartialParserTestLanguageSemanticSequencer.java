@@ -34,57 +34,29 @@ public class PartialParserTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == PartialParserTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case PartialParserTestLanguagePackage.ABSTRACT_CHILDREN:
-				if(context == grammarAccess.getAbstractChildrenRule() ||
-				   context == grammarAccess.getContentRule()) {
-					sequence_AbstractChildren(context, (AbstractChildren) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AbstractChildren(context, (AbstractChildren) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.CHILD:
-				if(context == grammarAccess.getChildRule()) {
-					sequence_Child(context, (Child) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Child(context, (Child) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.CHILDREN:
-				if(context == grammarAccess.getChildrenRule() ||
-				   context == grammarAccess.getContentRule()) {
-					sequence_Children(context, (Children) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Children(context, (Children) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.FIRST_CONCRETE:
-				if(context == grammarAccess.getAbstractChildRule() ||
-				   context == grammarAccess.getFirstConcreteRule()) {
-					sequence_FirstConcrete(context, (FirstConcrete) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_FirstConcrete(context, (FirstConcrete) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.NAMED:
-				if(context == grammarAccess.getNamedRule()) {
-					sequence_Named(context, (Named) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Named(context, (Named) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.NESTED:
-				if(context == grammarAccess.getNestedRule()) {
-					sequence_Nested(context, (Nested) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Nested(context, (Nested) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.SECOND_CONCRETE:
-				if(context == grammarAccess.getAbstractChildRule() ||
-				   context == grammarAccess.getSecondConcreteRule()) {
-					sequence_SecondConcrete(context, (SecondConcrete) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SecondConcrete(context, (SecondConcrete) semanticObject); 
+				return; 
 			case PartialParserTestLanguagePackage.SOME_CONTAINER:
-				if(context == grammarAccess.getSomeContainerRule()) {
-					sequence_SomeContainer(context, (SomeContainer) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SomeContainer(context, (SomeContainer) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

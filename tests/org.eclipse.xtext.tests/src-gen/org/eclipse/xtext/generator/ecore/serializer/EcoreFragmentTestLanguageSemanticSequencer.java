@@ -27,11 +27,8 @@ public class EcoreFragmentTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SecondPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SecondPackage.SECOND:
-				if(context == grammarAccess.getSecondRule()) {
-					sequence_Second(context, (Second) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Second(context, (Second) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -30,34 +30,17 @@ public class Bug296889ExTestLanguageSemanticSequencer extends AbstractDelegating
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug296889ExTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug296889ExTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case Bug296889ExTestPackage.POSTOP:
-				if(context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getPostopRule()) {
-					sequence_Postop(context, (Postop) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Postop(context, (Postop) semanticObject); 
+				return; 
 			case Bug296889ExTestPackage.PREOP:
-				if(context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getPreopRule()) {
-					sequence_Preop(context, (Preop) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Preop(context, (Preop) semanticObject); 
+				return; 
 			case Bug296889ExTestPackage.VARIABLE:
-				if(context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getPostopRule() ||
-				   context == grammarAccess.getPostopAccess().getPostopExprAction_1_0() ||
-				   context == grammarAccess.getVariableRule()) {
-					sequence_Variable(context, (Variable) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Variable(context, (Variable) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

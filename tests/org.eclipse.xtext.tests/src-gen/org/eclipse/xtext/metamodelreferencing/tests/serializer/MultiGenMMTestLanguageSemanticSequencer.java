@@ -29,19 +29,13 @@ public class MultiGenMMTestLanguageSemanticSequencer extends AbstractDelegatingS
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == OtherTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case OtherTestPackage.FOO_BAR:
-				if(context == grammarAccess.getNameRefRule()) {
-					sequence_NameRef(context, (FooBar) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NameRef(context, (FooBar) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == SimpleTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SimpleTestPackage.FOO:
-				if(context == grammarAccess.getFooRule()) {
-					sequence_Foo(context, (Foo) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Foo(context, (Foo) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

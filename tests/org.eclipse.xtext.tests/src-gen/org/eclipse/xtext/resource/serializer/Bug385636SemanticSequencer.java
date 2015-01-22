@@ -38,134 +38,41 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug385636Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug385636Package.DEFINE_VARIABLE:
-				if(context == grammarAccess.getDefineVariableRule()) {
-					sequence_DefineVariable(context, (DefineVariable) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DefineVariable(context, (DefineVariable) semanticObject); 
+				return; 
 			case Bug385636Package.DEFINE_VARIABLES:
-				if(context == grammarAccess.getDefineVariablesRule()) {
-					sequence_DefineVariables(context, (DefineVariables) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DefineVariables(context, (DefineVariables) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_EQUAL:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Equal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Equal) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_LARGER_EQUAL:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Larger_Equal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Larger_Equal) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_NOT_EQUAL:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Not_Equal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Not_Equal) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_NOT_GREATER:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Not_Greater) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Not_Greater) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_NOT_LESS:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Not_Less) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Not_Less) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_SMALLER:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Smaller) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Smaller) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_SMALLER_EQUAL:
-				if(context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Smaller_Equal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statement(context, (Expression_Smaller_Equal) semanticObject); 
+				return; 
 			case Bug385636Package.EXPRESSION_VARIABLE_NAME:
-				if(context == grammarAccess.getExpression_VariableNameRule() ||
-				   context == grammarAccess.getStatementRule() ||
-				   context == grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
-				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Expression_VariableName(context, (Expression_VariableName) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Expression_VariableName(context, (Expression_VariableName) semanticObject); 
+				return; 
 			case Bug385636Package.NVARIABLE_ACCESS:
-				if(context == grammarAccess.getNVariableAccessRule()) {
-					sequence_NVariableAccess(context, (NVariableAccess) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NVariableAccess(context, (NVariableAccess) semanticObject); 
+				return; 
 			case Bug385636Package.PROGRAM:
-				if(context == grammarAccess.getProgramRule()) {
-					sequence_Program(context, (Program) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Program(context, (Program) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

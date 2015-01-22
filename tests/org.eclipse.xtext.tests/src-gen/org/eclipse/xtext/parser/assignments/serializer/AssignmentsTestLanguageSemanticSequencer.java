@@ -26,11 +26,8 @@ public class AssignmentsTestLanguageSemanticSequencer extends AbstractDelegating
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AssignmentsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AssignmentsTestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case AssignmentsTestLanguagePackage.MULTI_VALUE:
 				if(context == grammarAccess.getMultiDatatypeRule()) {
 					sequence_MultiDatatype(context, (MultiValue) semanticObject); 

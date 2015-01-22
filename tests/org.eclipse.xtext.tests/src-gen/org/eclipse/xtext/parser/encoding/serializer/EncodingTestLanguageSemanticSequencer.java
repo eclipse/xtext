@@ -28,17 +28,11 @@ public class EncodingTestLanguageSemanticSequencer extends AbstractDelegatingSem
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EncodingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EncodingTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case EncodingTestPackage.WORD:
-				if(context == grammarAccess.getWordRule()) {
-					sequence_Word(context, (Word) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Word(context, (Word) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

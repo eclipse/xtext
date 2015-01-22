@@ -24,11 +24,8 @@ public class Bug419429SemanticSequencer extends AbstractDelegatingSemanticSequen
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EcorePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcorePackage.EREFERENCE:
-				if(context == grammarAccess.getEReferenceRule()) {
-					sequence_EReference(context, (EReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EReference(context, (EReference) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

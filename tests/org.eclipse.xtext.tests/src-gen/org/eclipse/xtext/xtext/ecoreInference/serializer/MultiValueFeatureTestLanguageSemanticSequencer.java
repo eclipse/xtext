@@ -24,11 +24,8 @@ public class MultiValueFeatureTestLanguageSemanticSequencer extends AbstractDele
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == MultiValueFeatureTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case MultiValueFeatureTestLanguagePackage.START:
-				if(context == grammarAccess.getStartRule()) {
-					sequence_Start(context, (Start) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Start(context, (Start) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

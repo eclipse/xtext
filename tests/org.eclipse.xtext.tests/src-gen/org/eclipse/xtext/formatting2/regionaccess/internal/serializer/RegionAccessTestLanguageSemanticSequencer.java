@@ -30,35 +30,17 @@ public class RegionAccessTestLanguageSemanticSequencer extends AbstractDelegatin
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == RegionaccesstestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case RegionaccesstestlanguagePackage.DELEGATE:
-				if(context == grammarAccess.getDelegateRule() ||
-				   context == grammarAccess.getPrefixedDelegateRule() ||
-				   context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getUnassignedRule()) {
-					sequence_Delegate(context, (Delegate) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Delegate(context, (Delegate) semanticObject); 
+				return; 
 			case RegionaccesstestlanguagePackage.DELEGATION:
-				if(context == grammarAccess.getDelegationRule() ||
-				   context == grammarAccess.getRootRule()) {
-					sequence_Delegation(context, (Delegation) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Delegation(context, (Delegation) semanticObject); 
+				return; 
 			case RegionaccesstestlanguagePackage.PREFIXED_UNASSIGNED:
-				if(context == grammarAccess.getPrefixedUnassignedRule() ||
-				   context == grammarAccess.getRootRule()) {
-					sequence_PrefixedUnassigned(context, (PrefixedUnassigned) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_PrefixedUnassigned(context, (PrefixedUnassigned) semanticObject); 
+				return; 
 			case RegionaccesstestlanguagePackage.SIMPLE:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getSimpleRule()) {
-					sequence_Simple(context, (Simple) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Simple(context, (Simple) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

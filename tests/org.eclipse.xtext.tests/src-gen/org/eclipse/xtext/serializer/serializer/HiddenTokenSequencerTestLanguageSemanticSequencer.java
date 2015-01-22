@@ -29,23 +29,14 @@ public class HiddenTokenSequencerTestLanguageSemanticSequencer extends AbstractD
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == HiddentokensequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case HiddentokensequencertestPackage.DOMAIN_MODEL:
-				if(context == grammarAccess.getDomainModelRule()) {
-					sequence_DomainModel(context, (DomainModel) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DomainModel(context, (DomainModel) semanticObject); 
+				return; 
 			case HiddentokensequencertestPackage.ENTITY:
-				if(context == grammarAccess.getEntityRule()) {
-					sequence_Entity(context, (Entity) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Entity(context, (Entity) semanticObject); 
+				return; 
 			case HiddentokensequencertestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

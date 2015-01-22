@@ -37,23 +37,11 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
-					sequence_JvmTypeReference(context, (JvmGenericArrayTypeReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JvmTypeReference(context, (JvmGenericArrayTypeReference) semanticObject); 
+				return; 
 			case TypesPackage.JVM_INNER_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
-					sequence_JvmParameterizedTypeReference(context, (JvmInnerTypeReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JvmParameterizedTypeReference(context, (JvmInnerTypeReference) semanticObject); 
+				return; 
 			case TypesPackage.JVM_LOWER_BOUND:
 				if(context == grammarAccess.getJvmLowerBoundAndedRule()) {
 					sequence_JvmLowerBoundAnded(context, (JvmLowerBound) semanticObject); 
@@ -65,21 +53,11 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 				}
 				else break;
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceRule() ||
-				   context == grammarAccess.getJvmParameterizedTypeReferenceAccess().getJvmInnerTypeReferenceOuterAction_1_4_0_0_0() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceAccess().getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0()) {
-					sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JvmParameterizedTypeReference(context, (JvmParameterizedTypeReference) semanticObject); 
+				return; 
 			case TypesPackage.JVM_TYPE_PARAMETER:
-				if(context == grammarAccess.getJvmTypeParameterRule()) {
-					sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JvmTypeParameter(context, (JvmTypeParameter) semanticObject); 
+				return; 
 			case TypesPackage.JVM_UPPER_BOUND:
 				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
 					sequence_JvmUpperBoundAnded(context, (JvmUpperBound) semanticObject); 
@@ -91,34 +69,19 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 				}
 				else break;
 			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmWildcardTypeReferenceRule()) {
-					sequence_JvmWildcardTypeReference(context, (JvmWildcardTypeReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JvmWildcardTypeReference(context, (JvmWildcardTypeReference) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == XtypePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtypePackage.XFUNCTION_TYPE_REF:
-				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
-				   context == grammarAccess.getJvmTypeReferenceRule() ||
-				   context == grammarAccess.getXFunctionTypeRefRule()) {
-					sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_XFunctionTypeRef(context, (XFunctionTypeRef) semanticObject); 
+				return; 
 			case XtypePackage.XIMPORT_DECLARATION:
-				if(context == grammarAccess.getXImportDeclarationRule()) {
-					sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_XImportDeclaration(context, (XImportDeclaration) semanticObject); 
+				return; 
 			case XtypePackage.XIMPORT_SECTION:
-				if(context == grammarAccess.getXImportSectionRule()) {
-					sequence_XImportSection(context, (XImportSection) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_XImportSection(context, (XImportSection) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

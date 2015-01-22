@@ -30,34 +30,17 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TestLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TestLangPackage.CHOICE_ELEMENT:
-				if(context == grammarAccess.getAbstractRuleRule() ||
-				   context == grammarAccess.getChoiceRuleRule()) {
-					sequence_ChoiceRule(context, (ChoiceElement) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ChoiceRule(context, (ChoiceElement) semanticObject); 
+				return; 
 			case TestLangPackage.MODEL:
-				if(context == grammarAccess.getEntryRuleRule()) {
-					sequence_EntryRule(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EntryRule(context, (Model) semanticObject); 
+				return; 
 			case TestLangPackage.REDUCIBLE_COMPOSITE:
-				if(context == grammarAccess.getAbstractRuleRule() ||
-				   context == grammarAccess.getReducibleRuleRule()) {
-					sequence_ReducibleRule(context, (ReducibleComposite) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ReducibleRule(context, (ReducibleComposite) semanticObject); 
+				return; 
 			case TestLangPackage.TERMINAL_ELEMENT:
-				if(context == grammarAccess.getAbstractRuleRule() ||
-				   context == grammarAccess.getReducibleRuleRule() ||
-				   context == grammarAccess.getReducibleRuleAccess().getReducibleCompositeActionFeatureAction_2_0() ||
-				   context == grammarAccess.getTerminalRuleRule()) {
-					sequence_TerminalRule(context, (TerminalElement) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TerminalRule(context, (TerminalElement) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

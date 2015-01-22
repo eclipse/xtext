@@ -27,11 +27,8 @@ public class EnumAndReferenceTestLanguageSemanticSequencer extends AbstractDeleg
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EnumAndReferenceTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EnumAndReferenceTestLanguagePackage.ENTITY_WITH_ENUM_AND_REFERENCE:
-				if(context == grammarAccess.getEntityWithEnumAndReferenceRule()) {
-					sequence_EntityWithEnumAndReference(context, (EntityWithEnumAndReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EntityWithEnumAndReference(context, (EntityWithEnumAndReference) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

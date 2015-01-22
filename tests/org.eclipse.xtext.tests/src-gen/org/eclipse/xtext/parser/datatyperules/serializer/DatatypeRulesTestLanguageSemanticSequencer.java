@@ -25,17 +25,11 @@ public class DatatypeRulesTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == DatatypeRulesTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case DatatypeRulesTestLanguagePackage.COMPOSITE_MODEL:
-				if(context == grammarAccess.getCompositeModelRule()) {
-					sequence_CompositeModel(context, (CompositeModel) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CompositeModel(context, (CompositeModel) semanticObject); 
+				return; 
 			case DatatypeRulesTestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

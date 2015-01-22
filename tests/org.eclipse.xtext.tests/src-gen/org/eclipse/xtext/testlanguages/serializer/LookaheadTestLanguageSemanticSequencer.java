@@ -32,44 +32,23 @@ public class LookaheadTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LookaheadLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LookaheadLangPackage.ENTRY:
-				if(context == grammarAccess.getEntryRule()) {
-					sequence_Entry(context, (Entry) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Entry(context, (Entry) semanticObject); 
+				return; 
 			case LookaheadLangPackage.LOOK_AHEAD0:
-				if(context == grammarAccess.getAltsRule() ||
-				   context == grammarAccess.getLookAhead0Rule()) {
-					sequence_LookAhead0(context, (LookAhead0) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_LookAhead0(context, (LookAhead0) semanticObject); 
+				return; 
 			case LookaheadLangPackage.LOOK_AHEAD1:
-				if(context == grammarAccess.getAltsRule() ||
-				   context == grammarAccess.getLookAhead1Rule()) {
-					sequence_LookAhead1(context, (LookAhead1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_LookAhead1(context, (LookAhead1) semanticObject); 
+				return; 
 			case LookaheadLangPackage.LOOK_AHEAD2:
-				if(context == grammarAccess.getLookAhead2Rule()) {
-					sequence_LookAhead2(context, (LookAhead2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_LookAhead2(context, (LookAhead2) semanticObject); 
+				return; 
 			case LookaheadLangPackage.LOOK_AHEAD3:
-				if(context == grammarAccess.getAltsRule() ||
-				   context == grammarAccess.getLookAhead3Rule()) {
-					sequence_LookAhead3(context, (LookAhead3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_LookAhead3(context, (LookAhead3) semanticObject); 
+				return; 
 			case LookaheadLangPackage.LOOK_AHEAD4:
-				if(context == grammarAccess.getLookAhead4Rule()) {
-					sequence_LookAhead4(context, (LookAhead4) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_LookAhead4(context, (LookAhead4) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

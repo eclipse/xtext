@@ -28,17 +28,11 @@ public class UnassignedRuleCallTestLanguageSemanticSequencer extends AbstractDel
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnassignedRuleCallTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case UnassignedRuleCallTestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case UnassignedRuleCallTestLanguagePackage.MODEL_FEATURES:
-				if(context == grammarAccess.getModelFeaturesRule()) {
-					sequence_ModelFeatures(context, (ModelFeatures) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ModelFeatures(context, (ModelFeatures) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

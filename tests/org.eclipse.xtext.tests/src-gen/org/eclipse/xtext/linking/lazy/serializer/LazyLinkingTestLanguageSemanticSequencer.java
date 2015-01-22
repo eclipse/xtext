@@ -27,29 +27,17 @@ public class LazyLinkingTestLanguageSemanticSequencer extends AbstractDelegating
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LazyLinkingPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LazyLinkingPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case LazyLinkingPackage.PROPERTY:
-				if(context == grammarAccess.getPropertyRule()) {
-					sequence_Property(context, (Property) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Property(context, (Property) semanticObject); 
+				return; 
 			case LazyLinkingPackage.TYPE:
-				if(context == grammarAccess.getTypeRule()) {
-					sequence_Type(context, (Type) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Type(context, (Type) semanticObject); 
+				return; 
 			case LazyLinkingPackage.UNRESOLVED_PROXY_PROPERTY:
-				if(context == grammarAccess.getUnresolvedProxyPropertyRule()) {
-					sequence_UnresolvedProxyProperty(context, (UnresolvedProxyProperty) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnresolvedProxyProperty(context, (UnresolvedProxyProperty) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

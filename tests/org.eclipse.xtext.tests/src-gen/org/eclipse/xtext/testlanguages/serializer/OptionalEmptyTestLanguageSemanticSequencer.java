@@ -28,17 +28,11 @@ public class OptionalEmptyTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == OptionalEmptyPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case OptionalEmptyPackage.GREETING:
-				if(context == grammarAccess.getGreetingRule()) {
-					sequence_Greeting(context, (Greeting) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Greeting(context, (Greeting) semanticObject); 
+				return; 
 			case OptionalEmptyPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

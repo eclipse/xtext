@@ -63,89 +63,47 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SequencertestPackage.ALT_LIST1:
-				if(context == grammarAccess.getAltList1Rule()) {
-					sequence_AltList1(context, (AltList1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AltList1(context, (AltList1) semanticObject); 
+				return; 
 			case SequencertestPackage.ALT_LIST2:
-				if(context == grammarAccess.getAltList2Rule()) {
-					sequence_AltList2(context, (AltList2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AltList2(context, (AltList2) semanticObject); 
+				return; 
 			case SequencertestPackage.ALTERNATIVE_MULTIPLICITIES:
-				if(context == grammarAccess.getAlternativeMultiplicitiesRule()) {
-					sequence_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject); 
+				return; 
 			case SequencertestPackage.COMPLEX1:
-				if(context == grammarAccess.getComplex1Rule()) {
-					sequence_Complex1(context, (Complex1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Complex1(context, (Complex1) semanticObject); 
+				return; 
 			case SequencertestPackage.DEPENDENT_ALTERNATIVE1:
-				if(context == grammarAccess.getDependentAlternative1Rule()) {
-					sequence_DependentAlternative1(context, (DependentAlternative1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DependentAlternative1(context, (DependentAlternative1) semanticObject); 
+				return; 
 			case SequencertestPackage.DEPENDENT_ALTERNATIVE2:
-				if(context == grammarAccess.getDependentAlternative2Rule()) {
-					sequence_DependentAlternative2(context, (DependentAlternative2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DependentAlternative2(context, (DependentAlternative2) semanticObject); 
+				return; 
 			case SequencertestPackage.FLOAT:
-				if(context == grammarAccess.getFloatRule()) {
-					sequence_Float(context, (org.eclipse.xtext.serializer.sequencertest.Float) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Float(context, (org.eclipse.xtext.serializer.sequencertest.Float) semanticObject); 
+				return; 
 			case SequencertestPackage.GROUP_MULTIPLICITIES:
-				if(context == grammarAccess.getGroupMultiplicitiesRule()) {
-					sequence_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
+				return; 
 			case SequencertestPackage.LIST1:
-				if(context == grammarAccess.getList1Rule()) {
-					sequence_List1(context, (List1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List1(context, (List1) semanticObject); 
+				return; 
 			case SequencertestPackage.LIST2:
-				if(context == grammarAccess.getList2Rule()) {
-					sequence_List2(context, (List2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List2(context, (List2) semanticObject); 
+				return; 
 			case SequencertestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case SequencertestPackage.MULTI_KEYWORDS:
-				if(context == grammarAccess.getMultiKeywordsRule()) {
-					sequence_MultiKeywords(context, (MultiKeywords) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MultiKeywords(context, (MultiKeywords) semanticObject); 
+				return; 
 			case SequencertestPackage.MULTI_KEYWORDS_OR_ID:
-				if(context == grammarAccess.getMultiKeywordsOrIDRule()) {
-					sequence_MultiKeywordsOrID(context, (MultiKeywordsOrID) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MultiKeywordsOrID(context, (MultiKeywordsOrID) semanticObject); 
+				return; 
 			case SequencertestPackage.MULTI_TERMINALS:
-				if(context == grammarAccess.getMultiTerminalsRule()) {
-					sequence_MultiTerminals(context, (MultiTerminals) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MultiTerminals(context, (MultiTerminals) semanticObject); 
+				return; 
 			case SequencertestPackage.NULL_CROSS_REF:
 				if(context == grammarAccess.getNullCrossRefGeneratedRule()) {
 					sequence_NullCrossRefGenerated(context, (NullCrossRef) semanticObject); 
@@ -167,139 +125,71 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				}
 				else break;
 			case SequencertestPackage.OPTIONAL:
-				if(context == grammarAccess.getOptionalRule()) {
-					sequence_Optional(context, (Optional) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Optional(context, (Optional) semanticObject); 
+				return; 
 			case SequencertestPackage.OPTIONAL_DOUBLE:
-				if(context == grammarAccess.getOptionalDoubleRule()) {
-					sequence_OptionalDouble(context, (OptionalDouble) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalDouble(context, (OptionalDouble) semanticObject); 
+				return; 
 			case SequencertestPackage.SIMPLE_ALTERNATIVE:
-				if(context == grammarAccess.getSimpleAlternativeRule()) {
-					sequence_SimpleAlternative(context, (SimpleAlternative) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleAlternative(context, (SimpleAlternative) semanticObject); 
+				return; 
 			case SequencertestPackage.SIMPLE_GROUP:
-				if(context == grammarAccess.getSimpleGroupRule()) {
-					sequence_SimpleGroup(context, (SimpleGroup) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleGroup(context, (SimpleGroup) semanticObject); 
+				return; 
 			case SequencertestPackage.SIMPLE_MULTIPLICITIES:
-				if(context == grammarAccess.getSimpleMultiplicitiesRule()) {
-					sequence_SimpleMultiplicities(context, (SimpleMultiplicities) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleMultiplicities(context, (SimpleMultiplicities) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:
-				if(context == grammarAccess.getSingleContainmentReferenceRule()) {
-					sequence_SingleContainmentReference(context, (SingleContainmentReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleContainmentReference(context, (SingleContainmentReference) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD1:
-				if(context == grammarAccess.getSingleContainmentReferenceChild1Rule()) {
-					sequence_SingleContainmentReferenceChild1(context, (SingleContainmentReferenceChild1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleContainmentReferenceChild1(context, (SingleContainmentReferenceChild1) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD2:
-				if(context == grammarAccess.getSingleContainmentReferenceChild2Rule()) {
-					sequence_SingleContainmentReferenceChild2(context, (SingleContainmentReferenceChild2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleContainmentReferenceChild2(context, (SingleContainmentReferenceChild2) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD3:
-				if(context == grammarAccess.getSingleContainmentReferenceChild3Rule()) {
-					sequence_SingleContainmentReferenceChild3(context, (SingleContainmentReferenceChild3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleContainmentReferenceChild3(context, (SingleContainmentReferenceChild3) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_CROSS_REFERENCE:
-				if(context == grammarAccess.getSingleCrossReferenceRule()) {
-					sequence_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_ENUM:
-				if(context == grammarAccess.getSingleEnumRule()) {
-					sequence_SingleEnum(context, (SingleEnum) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleEnum(context, (SingleEnum) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_KEYWORDS:
-				if(context == grammarAccess.getSingleKeywordsRule()) {
-					sequence_SingleKeywords(context, (SingleKeywords) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleKeywords(context, (SingleKeywords) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:
-				if(context == grammarAccess.getSingleKeywordsOrIDRule()) {
-					sequence_SingleKeywordsOrID(context, (SingleKeywordsOrID) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleKeywordsOrID(context, (SingleKeywordsOrID) semanticObject); 
+				return; 
 			case SequencertestPackage.SINGLE_TERMINALS:
-				if(context == grammarAccess.getSingleTerminalsRule()) {
-					sequence_SingleTerminals(context, (SingleTerminals) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleTerminals(context, (SingleTerminals) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_ALTERNATIVE:
-				if(context == grammarAccess.getUnorderedAlternativeRule()) {
-					sequence_UnorderedAlternative(context, (UnorderedAlternative) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedAlternative(context, (UnorderedAlternative) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL:
-				if(context == grammarAccess.getUnorderedAlternativeValRule()) {
-					sequence_UnorderedAlternativeVal(context, (UnorderedAlternativeVal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedAlternativeVal(context, (UnorderedAlternativeVal) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_ALTERNATIVE_VAL2:
-				if(context == grammarAccess.getUnorderedAlternativeVal2Rule() ||
-				   context == grammarAccess.getUnorderedAlternativeValDelegateRule()) {
-					sequence_UnorderedAlternativeVal2(context, (UnorderedAlternativeVal2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedAlternativeVal2(context, (UnorderedAlternativeVal2) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_GROUP:
-				if(context == grammarAccess.getUnorderedGroupRule()) {
-					sequence_UnorderedGroup(context, (UnorderedGroup) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedGroup(context, (UnorderedGroup) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_GROUP_BOOLEAN:
-				if(context == grammarAccess.getUnorderedGroupBooleanRule()) {
-					sequence_UnorderedGroupBoolean(context, (UnorderedGroupBoolean) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedGroupBoolean(context, (UnorderedGroupBoolean) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_GROUP_OPTIONAL:
-				if(context == grammarAccess.getUnorderedGroupOptionalRule()) {
-					sequence_UnorderedGroupOptional(context, (UnorderedGroupOptional) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedGroupOptional(context, (UnorderedGroupOptional) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_GROUP_VAL:
-				if(context == grammarAccess.getUnorderedGroupValRule()) {
-					sequence_UnorderedGroupVal(context, (UnorderedGroupVal) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedGroupVal(context, (UnorderedGroupVal) semanticObject); 
+				return; 
 			case SequencertestPackage.UNORDERED_GROUP_VAL2:
-				if(context == grammarAccess.getUnorderedGroupVal2Rule() ||
-				   context == grammarAccess.getUnorderedGroupValDelegateRule()) {
-					sequence_UnorderedGroupVal2(context, (UnorderedGroupVal2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnorderedGroupVal2(context, (UnorderedGroupVal2) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -58,54 +58,26 @@ public class ConcreteTestLanguageSemanticSequencer extends AbstractTestLanguageS
 			}
 		else if(semanticObject.eClass().getEPackage() == FooPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FooPackage.ATYPE2:
-				if(context == grammarAccess.getOverridableParserRule2Rule() ||
-				   context == grammarAccess.getRootRuleRule()) {
-					sequence_OverridableParserRule2(context, (AType2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OverridableParserRule2(context, (AType2) semanticObject); 
+				return; 
 			case FooPackage.CALL_EXTENDED_PARSER_RULE:
-				if(context == grammarAccess.getCallExtendedParserRuleRule() ||
-				   context == grammarAccess.getRootRuleRule()) {
-					sequence_CallExtendedParserRule(context, (CallExtendedParserRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CallExtendedParserRule(context, (CallExtendedParserRule) semanticObject); 
+				return; 
 			case FooPackage.CALL_OVERRIDEN_PARSER_RULE:
-				if(context == grammarAccess.getCallOverridenParserRuleRule() ||
-				   context == grammarAccess.getRootRuleRule()) {
-					sequence_CallOverridenParserRule(context, (CallOverridenParserRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CallOverridenParserRule(context, (CallOverridenParserRule) semanticObject); 
+				return; 
 			case FooPackage.CONCRETE_PARSER_RULE:
-				if(context == grammarAccess.getConcreteParserRuleRule() ||
-				   context == grammarAccess.getRootRuleRule()) {
-					sequence_ConcreteParserRule(context, (ConcreteParserRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ConcreteParserRule(context, (ConcreteParserRule) semanticObject); 
+				return; 
 			case FooPackage.SUBRULE1:
-				if(context == grammarAccess.getExtendableParserRuleRule() ||
-				   context == grammarAccess.getSubrule1Rule()) {
-					sequence_Subrule1(context, (Subrule1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Subrule1(context, (Subrule1) semanticObject); 
+				return; 
 			case FooPackage.SUBRULE2:
-				if(context == grammarAccess.getExtendableParserRuleRule() ||
-				   context == grammarAccess.getSubrule2Rule()) {
-					sequence_Subrule2(context, (Subrule2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Subrule2(context, (Subrule2) semanticObject); 
+				return; 
 			case FooPackage.SUBRULE3:
-				if(context == grammarAccess.getExtendableParserRuleRule() ||
-				   context == grammarAccess.getSubrule3Rule()) {
-					sequence_Subrule3(context, (Subrule3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Subrule3(context, (Subrule3) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

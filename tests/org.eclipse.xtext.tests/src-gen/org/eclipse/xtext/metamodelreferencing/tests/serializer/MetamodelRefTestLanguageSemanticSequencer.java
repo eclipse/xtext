@@ -27,25 +27,16 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AnotherSimpleTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AnotherSimpleTestPackage.FOO:
-				if(context == grammarAccess.getFooRule()) {
-					sequence_Foo(context, (Foo) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Foo(context, (Foo) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == XtextPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtextPackage.PARSER_RULE:
-				if(context == grammarAccess.getMyRuleRule()) {
-					sequence_MyRule(context, (ParserRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MyRule(context, (ParserRule) semanticObject); 
+				return; 
 			case XtextPackage.RULE_CALL:
-				if(context == grammarAccess.getNameRefRule()) {
-					sequence_NameRef(context, (RuleCall) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NameRef(context, (RuleCall) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

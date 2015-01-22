@@ -31,40 +31,20 @@ public abstract class AbstractUnassignedTextTestLanguageSemanticSequencer extend
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnassignedtextPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case UnassignedtextPackage.CASE_INSENSITIVE_KEYWORD_RULE:
-				if(context == grammarAccess.getCaseInsensitiveKeywordRuleRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_CaseInsensitiveKeywordRule(context, (CaseInsensitiveKeywordRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CaseInsensitiveKeywordRule(context, (CaseInsensitiveKeywordRule) semanticObject); 
+				return; 
 			case UnassignedtextPackage.COMMON_TERMINALS_RULE:
-				if(context == grammarAccess.getCommonTerminalsRuleRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_CommonTerminalsRule(context, (CommonTerminalsRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CommonTerminalsRule(context, (CommonTerminalsRule) semanticObject); 
+				return; 
 			case UnassignedtextPackage.DATATYPE_RULE:
-				if(context == grammarAccess.getDatatypeRuleRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_DatatypeRule(context, (DatatypeRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DatatypeRule(context, (DatatypeRule) semanticObject); 
+				return; 
 			case UnassignedtextPackage.MULTI_RULE:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getMultiRuleRule()) {
-					sequence_MultiRule(context, (MultiRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MultiRule(context, (MultiRule) semanticObject); 
+				return; 
 			case UnassignedtextPackage.PLURAL_RULE:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getPluralRuleRule()) {
-					sequence_PluralRule(context, (PluralRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_PluralRule(context, (PluralRule) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

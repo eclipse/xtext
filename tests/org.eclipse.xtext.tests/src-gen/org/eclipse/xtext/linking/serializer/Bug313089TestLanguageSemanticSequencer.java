@@ -29,24 +29,14 @@ public class Bug313089TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug313089Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug313089Package.BAR:
-				if(context == grammarAccess.getBarRule()) {
-					sequence_Bar(context, (Bar) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Bar(context, (Bar) semanticObject); 
+				return; 
 			case Bug313089Package.BAZ:
-				if(context == grammarAccess.getBazRule() ||
-				   context == grammarAccess.getBazAccess().getBazChildAction_2_0()) {
-					sequence_Baz(context, (Baz) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Baz(context, (Baz) semanticObject); 
+				return; 
 			case Bug313089Package.FOO:
-				if(context == grammarAccess.getFooRule()) {
-					sequence_Foo(context, (Foo) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Foo(context, (Foo) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

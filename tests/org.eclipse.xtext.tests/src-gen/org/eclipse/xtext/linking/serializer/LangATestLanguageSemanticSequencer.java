@@ -29,23 +29,14 @@ public class LangATestLanguageSemanticSequencer extends AbstractDelegatingSemant
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LangATestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LangATestLanguagePackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Import(context, (Import) semanticObject); 
+				return; 
 			case LangATestLanguagePackage.MAIN:
-				if(context == grammarAccess.getMainRule()) {
-					sequence_Main(context, (Main) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Main(context, (Main) semanticObject); 
+				return; 
 			case LangATestLanguagePackage.TYPE:
-				if(context == grammarAccess.getTypeRule()) {
-					sequence_Type(context, (Type) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Type(context, (Type) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

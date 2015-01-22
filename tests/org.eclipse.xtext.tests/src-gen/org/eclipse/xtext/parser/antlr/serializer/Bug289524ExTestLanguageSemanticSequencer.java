@@ -29,23 +29,14 @@ public class Bug289524ExTestLanguageSemanticSequencer extends AbstractDelegating
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug289524ExTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug289524ExTestPackage.CONTAINED:
-				if(context == grammarAccess.getContainedRule()) {
-					sequence_Contained(context, (Contained) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Contained(context, (Contained) semanticObject); 
+				return; 
 			case Bug289524ExTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case Bug289524ExTestPackage.MODEL_ELEMENT:
-				if(context == grammarAccess.getModelElementRule()) {
-					sequence_ModelElement(context, (ModelElement) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ModelElement(context, (ModelElement) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

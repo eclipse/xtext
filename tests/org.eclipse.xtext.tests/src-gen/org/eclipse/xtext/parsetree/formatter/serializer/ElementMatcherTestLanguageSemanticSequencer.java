@@ -45,54 +45,20 @@ public class ElementMatcherTestLanguageSemanticSequencer extends AbstractDelegat
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ElementmatchertestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ElementmatchertestlanguagePackage.ADD:
-				if(context == grammarAccess.getAddRule() ||
-				   context == grammarAccess.getAddAccess().getAddLeftAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getMultRule() ||
-				   context == grammarAccess.getMultAccess().getMultLeftAction_1_0() ||
-				   context == grammarAccess.getPrimRule()) {
-					sequence_Add(context, (Add) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Add(context, (Add) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.CONSTRUCTOR:
-				if(context == grammarAccess.getConstructorRule()) {
-					sequence_Constructor(context, (Constructor) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Constructor(context, (Constructor) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.FUNCTION:
-				if(context == grammarAccess.getAddRule() ||
-				   context == grammarAccess.getAddAccess().getAddLeftAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getMultRule() ||
-				   context == grammarAccess.getMultAccess().getMultLeftAction_1_0() ||
-				   context == grammarAccess.getPrimRule()) {
-					sequence_Prim(context, (Function) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Prim(context, (Function) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.LOOP:
-				if(context == grammarAccess.getLoopRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_Loop(context, (Loop) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Loop(context, (Loop) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.MULT:
-				if(context == grammarAccess.getAddRule() ||
-				   context == grammarAccess.getAddAccess().getAddLeftAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getMultRule() ||
-				   context == grammarAccess.getMultAccess().getMultLeftAction_1_0() ||
-				   context == grammarAccess.getPrimRule()) {
-					sequence_Mult(context, (Mult) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Mult(context, (Mult) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.NESTED_START_SUB:
 				if(context == grammarAccess.getNestedStartSubRule()) {
 					sequence_NestedStartSub(context, (NestedStartSub) semanticObject); 
@@ -105,76 +71,35 @@ public class ElementMatcherTestLanguageSemanticSequencer extends AbstractDelegat
 				}
 				else break;
 			case ElementmatchertestlanguagePackage.OPTIONAL_CALLS:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getOptionalCallsRule()) {
-					sequence_OptionalCalls(context, (OptionalCalls) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalCalls(context, (OptionalCalls) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.OPTIONAL_CALLS_SUB1:
-				if(context == grammarAccess.getOptionalCallsSub1Rule()) {
-					sequence_OptionalCallsSub1(context, (OptionalCallsSub1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalCallsSub1(context, (OptionalCallsSub1) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.OPTIONAL_CALLS_SUB2:
-				if(context == grammarAccess.getOptionalCallsSub2Rule()) {
-					sequence_OptionalCallsSub2(context, (OptionalCallsSub2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalCallsSub2(context, (OptionalCallsSub2) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.OPTIONAL_CALLS_SUB3:
-				if(context == grammarAccess.getOptionalCallsSub3Rule()) {
-					sequence_OptionalCallsSub3(context, (OptionalCallsSub3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalCallsSub3(context, (OptionalCallsSub3) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.PARAMETER:
-				if(context == grammarAccess.getFieldRule() ||
-				   context == grammarAccess.getParameterRule()) {
-					sequence_Parameter(context, (Parameter) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Parameter(context, (Parameter) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.POINTER:
-				if(context == grammarAccess.getAddRule() ||
-				   context == grammarAccess.getAddAccess().getAddLeftAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getMultRule() ||
-				   context == grammarAccess.getMultAccess().getMultLeftAction_1_0() ||
-				   context == grammarAccess.getPrimRule()) {
-					sequence_Prim(context, (Pointer) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Prim(context, (Pointer) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.RECURSION_SUB:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getRecursionRule() ||
-				   context == grammarAccess.getRecursionSubRule()) {
-					sequence_RecursionSub(context, (RecursionSub) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_RecursionSub(context, (RecursionSub) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.RULE_CALLS12:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getRuleCalls12Rule()) {
-					sequence_RuleCalls12(context, (RuleCalls12) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_RuleCalls12(context, (RuleCalls12) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.RULE_CALLS_ASS1:
-				if(context == grammarAccess.getRuleCallsAss1Rule()) {
-					sequence_RuleCallsAss1(context, (RuleCallsAss1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_RuleCallsAss1(context, (RuleCallsAss1) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.RULE_CALLS_ASS2:
-				if(context == grammarAccess.getRuleCallsAss2Rule()) {
-					sequence_RuleCallsAss2(context, (RuleCallsAss2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_RuleCallsAss2(context, (RuleCallsAss2) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.RULE_CALLS_SUB:
 				if(context == grammarAccess.getRuleCallsSubRule()) {
 					sequence_RuleCallsSub(context, (RuleCallsSub) semanticObject); 
@@ -187,24 +112,11 @@ public class ElementMatcherTestLanguageSemanticSequencer extends AbstractDelegat
 				}
 				else break;
 			case ElementmatchertestlanguagePackage.SIMPLE:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getSimpleRule()) {
-					sequence_Simple(context, (Simple) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Simple(context, (Simple) semanticObject); 
+				return; 
 			case ElementmatchertestlanguagePackage.VALUE:
-				if(context == grammarAccess.getAddRule() ||
-				   context == grammarAccess.getAddAccess().getAddLeftAction_1_0() ||
-				   context == grammarAccess.getExpressionRule() ||
-				   context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getMultRule() ||
-				   context == grammarAccess.getMultAccess().getMultLeftAction_1_0() ||
-				   context == grammarAccess.getPrimRule()) {
-					sequence_Prim(context, (Value) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Prim(context, (Value) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

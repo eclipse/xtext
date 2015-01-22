@@ -25,17 +25,11 @@ public class IndentationAwareTestLanguageSemanticSequencer extends AbstractDeleg
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IndentLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IndentLangPackage.NODE:
-				if(context == grammarAccess.getNodeRule()) {
-					sequence_Node(context, (Node) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Node(context, (Node) semanticObject); 
+				return; 
 			case IndentLangPackage.NODE_LIST:
-				if(context == grammarAccess.getNodeListRule()) {
-					sequence_NodeList(context, (NodeList) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NodeList(context, (NodeList) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

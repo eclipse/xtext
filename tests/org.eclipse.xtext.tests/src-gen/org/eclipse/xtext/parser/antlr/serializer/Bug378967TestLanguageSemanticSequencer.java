@@ -33,47 +33,26 @@ public class Bug378967TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug378967TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug378967TestPackage.AFTER_OBJ:
-				if(context == grammarAccess.getAfterObjRule()) {
-					sequence_AfterObj(context, (AfterObj) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AfterObj(context, (AfterObj) semanticObject); 
+				return; 
 			case Bug378967TestPackage.ROOT:
-				if(context == grammarAccess.getRootRule()) {
-					sequence_Root(context, (Root) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Root(context, (Root) semanticObject); 
+				return; 
 			case Bug378967TestPackage.RULE1:
-				if(context == grammarAccess.getRule1Rule()) {
-					sequence_Rule1(context, (Rule1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Rule1(context, (Rule1) semanticObject); 
+				return; 
 			case Bug378967TestPackage.RULE2:
-				if(context == grammarAccess.getRule2Rule()) {
-					sequence_Rule2(context, (Rule2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Rule2(context, (Rule2) semanticObject); 
+				return; 
 			case Bug378967TestPackage.RULE3:
-				if(context == grammarAccess.getRule3Rule()) {
-					sequence_Rule3(context, (Rule3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Rule3(context, (Rule3) semanticObject); 
+				return; 
 			case Bug378967TestPackage.RULE4:
-				if(context == grammarAccess.getRule4Rule()) {
-					sequence_Rule4(context, (Rule4) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Rule4(context, (Rule4) semanticObject); 
+				return; 
 			case Bug378967TestPackage.SOBJ:
-				if(context == grammarAccess.getSObjRule()) {
-					sequence_SObj(context, (SObj) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SObj(context, (SObj) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

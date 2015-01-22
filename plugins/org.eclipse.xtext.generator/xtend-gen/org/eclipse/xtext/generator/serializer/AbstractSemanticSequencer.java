@@ -313,102 +313,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("\t");
-            int ctxi = 0;
+            CharSequence _genMethodCreateSequenceCaseBody = this.genMethodCreateSequenceCaseBody(file, superConstraints, type);
+            _builder.append(_genMethodCreateSequenceCaseBody, "\t\t\t");
             _builder.newLineIfNotEmpty();
-            {
-              Map<IGrammarConstraintProvider.IConstraint, List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
-              Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> _entrySet = _accessedConstraints.entrySet();
-              final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String> _function_1 = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>() {
-                @Override
-                public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> e) {
-                  IGrammarConstraintProvider.IConstraint _key = e.getKey();
-                  return _key.getName();
-                }
-              };
-              List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> _sortBy = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>sortBy(_entrySet, _function_1);
-              for(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> ctx : _sortBy) {
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                {
-                  if (((ctxi = (ctxi + 1)) > 1)) {
-                    _builder.append("else ");
-                  }
-                }
-                _builder.append("if(");
-                {
-                  List<EObject> _value = ctx.getValue();
-                  final Function1<EObject, String> _function_2 = new Function1<EObject, String>() {
-                    @Override
-                    public String apply(final EObject e) {
-                      return AbstractSemanticSequencer.this.ctx2name.getContextName(e);
-                    }
-                  };
-                  List<EObject> _sortBy_1 = IterableExtensions.<EObject, String>sortBy(_value, _function_2);
-                  boolean _hasElements = false;
-                  for(final EObject c : _sortBy_1) {
-                    if (!_hasElements) {
-                      _hasElements = true;
-                    } else {
-                      _builder.appendImmediate(" ||\n   ", "\t\t\t");
-                    }
-                    _builder.append("context == grammarAccess.");
-                    String _gaAccessor = this.grammarAccess.gaAccessor(c);
-                    _builder.append(_gaAccessor, "\t\t\t");
-                  }
-                }
-                _builder.append(") {");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                IGrammarConstraintProvider.IConstraint _key = ctx.getKey();
-                final IGrammarConstraintProvider.IConstraint superConstraint = superConstraints.get(_key);
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                IGrammarConstraintProvider.IConstraint _xifexpression = null;
-                boolean _equals = Objects.equal(superConstraint, null);
-                if (_equals) {
-                  _xifexpression = ctx.getKey();
-                } else {
-                  _xifexpression = superConstraint;
-                }
-                final IGrammarConstraintProvider.IConstraint constraint = _xifexpression;
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("sequence_");
-                String _simpleName = constraint.getSimpleName();
-                _builder.append(_simpleName, "\t\t\t\t");
-                _builder.append("(context, (");
-                String _importedGenTypeName = file.importedGenTypeName(type);
-                _builder.append(_importedGenTypeName, "\t\t\t\t");
-                _builder.append(") semanticObject); ");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("return; ");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("\t");
-                _builder.append("}");
-                _builder.newLine();
-              }
-            }
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("\t");
-            _builder.append("else break;");
-            _builder.newLine();
           }
         }
         _builder.append("\t");
@@ -421,6 +328,111 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence genMethodCreateSequenceCaseBody(final JavaEMFFile file, final Map<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> superConstraints, final EClass type) {
+    StringConcatenation _builder = new StringConcatenation();
+    Map<IGrammarConstraintProvider.IConstraint, List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
+    Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> _entrySet = _accessedConstraints.entrySet();
+    final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String> _function = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>() {
+      @Override
+      public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> e) {
+        IGrammarConstraintProvider.IConstraint _key = e.getKey();
+        return _key.getName();
+      }
+    };
+    List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>, String>sortBy(_entrySet, _function);
+    _builder.newLineIfNotEmpty();
+    {
+      int _size = contexts.size();
+      boolean _greaterThan = (_size > 1);
+      if (_greaterThan) {
+        int ctxi = 0;
+        _builder.newLineIfNotEmpty();
+        {
+          for(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> ctx : contexts) {
+            {
+              if (((ctxi = (ctxi + 1)) > 1)) {
+                _builder.append("else ");
+              }
+            }
+            _builder.append("if(");
+            {
+              List<EObject> _value = ctx.getValue();
+              final Function1<EObject, String> _function_1 = new Function1<EObject, String>() {
+                @Override
+                public String apply(final EObject e) {
+                  return AbstractSemanticSequencer.this.ctx2name.getContextName(e);
+                }
+              };
+              List<EObject> _sortBy = IterableExtensions.<EObject, String>sortBy(_value, _function_1);
+              boolean _hasElements = false;
+              for(final EObject c : _sortBy) {
+                if (!_hasElements) {
+                  _hasElements = true;
+                } else {
+                  _builder.appendImmediate(" ||\n   ", "");
+                }
+                _builder.append("context == grammarAccess.");
+                String _gaAccessor = this.grammarAccess.gaAccessor(c);
+                _builder.append(_gaAccessor, "");
+              }
+            }
+            _builder.append(") {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            IGrammarConstraintProvider.IConstraint _key = ctx.getKey();
+            CharSequence _genMethodCreateSequenceCall = this.genMethodCreateSequenceCall(file, superConstraints, type, _key);
+            _builder.append(_genMethodCreateSequenceCall, "\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+        _builder.append("else break;");
+        _builder.newLine();
+      } else {
+        int _size_1 = contexts.size();
+        boolean _equals = (_size_1 == 1);
+        if (_equals) {
+          Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<EObject>>>head(contexts);
+          IGrammarConstraintProvider.IConstraint _key_1 = _head.getKey();
+          CharSequence _genMethodCreateSequenceCall_1 = this.genMethodCreateSequenceCall(file, superConstraints, type, _key_1);
+          _builder.append(_genMethodCreateSequenceCall_1, "");
+          _builder.newLineIfNotEmpty();
+        } else {
+          _builder.append("// error, no contexts. ");
+          _builder.newLine();
+        }
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence genMethodCreateSequenceCall(final JavaEMFFile file, final Map<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> superConstraints, final EClass type, final IGrammarConstraintProvider.IConstraint key) {
+    StringConcatenation _builder = new StringConcatenation();
+    final IGrammarConstraintProvider.IConstraint superConstraint = superConstraints.get(key);
+    _builder.newLineIfNotEmpty();
+    IGrammarConstraintProvider.IConstraint _xifexpression = null;
+    boolean _equals = Objects.equal(superConstraint, null);
+    if (_equals) {
+      _xifexpression = key;
+    } else {
+      _xifexpression = superConstraint;
+    }
+    final IGrammarConstraintProvider.IConstraint constraint = _xifexpression;
+    _builder.newLineIfNotEmpty();
+    _builder.append("sequence_");
+    String _simpleName = constraint.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append("(context, (");
+    String _importedGenTypeName = file.importedGenTypeName(type);
+    _builder.append(_importedGenTypeName, "");
+    _builder.append(") semanticObject); ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("return; ");
     _builder.newLine();
     return _builder;
   }

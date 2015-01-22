@@ -45,145 +45,62 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SyntacticsequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SyntacticsequencertestPackage.ADD0:
-				if(context == grammarAccess.getAddition0Rule() ||
-				   context == grammarAccess.getAddition0Access().getAdd0LeftAction_1_0() ||
-				   context == grammarAccess.getExp0Rule()) {
-					sequence_Addition0(context, (Add0) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Addition0(context, (Add0) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.ADD1:
-				if(context == grammarAccess.getAddition1Rule() ||
-				   context == grammarAccess.getAddition1Access().getAdd1LeftAction_1_0() ||
-				   context == grammarAccess.getExp1Rule() ||
-				   context == grammarAccess.getPrim1Rule()) {
-					sequence_Addition1(context, (Add1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Addition1(context, (Add1) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.ADD2:
-				if(context == grammarAccess.getAddition2Rule() ||
-				   context == grammarAccess.getAddition2Access().getAdd2LeftAction_1_0() ||
-				   context == grammarAccess.getExp2Rule() ||
-				   context == grammarAccess.getMultiplication2Rule() ||
-				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
-				   context == grammarAccess.getPrim2Rule()) {
-					sequence_Addition2(context, (Add2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Addition2(context, (Add2) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.ALTERNATIVE_TRANSITION:
-				if(context == grammarAccess.getAlternativeTransitionRule()) {
-					sequence_AlternativeTransition(context, (AlternativeTransition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AlternativeTransition(context, (AlternativeTransition) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE:
-				if(context == grammarAccess.getBooleanAlternativeRule()) {
-					sequence_BooleanAlternative(context, (BooleanAlternative) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_BooleanAlternative(context, (BooleanAlternative) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL:
-				if(context == grammarAccess.getBooleanAlternativeLiteralRule()) {
-					sequence_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.BOOLEAN_VALUES:
-				if(context == grammarAccess.getBooleanValuesRule()) {
-					sequence_BooleanValues(context, (BooleanValues) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_BooleanValues(context, (BooleanValues) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.LONG_ALTERNATIVE:
-				if(context == grammarAccess.getLongAlternativeRule()) {
-					sequence_LongAlternative(context, (LongAlternative) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_LongAlternative(context, (LongAlternative) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.MANDATORY_KEYWORDS:
-				if(context == grammarAccess.getMandatoryKeywordsRule()) {
-					sequence_MandatoryKeywords(context, (MandatoryKeywords) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MandatoryKeywords(context, (MandatoryKeywords) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.MANDATORY_MANY_TRANSITION:
-				if(context == grammarAccess.getMandatoryManyTransitionRule()) {
-					sequence_MandatoryManyTransition(context, (MandatoryManyTransition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MandatoryManyTransition(context, (MandatoryManyTransition) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.MULT2:
-				if(context == grammarAccess.getAddition2Rule() ||
-				   context == grammarAccess.getAddition2Access().getAdd2LeftAction_1_0() ||
-				   context == grammarAccess.getExp2Rule() ||
-				   context == grammarAccess.getMultiplication2Rule() ||
-				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
-				   context == grammarAccess.getPrim2Rule()) {
-					sequence_Multiplication2(context, (Mult2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Multiplication2(context, (Mult2) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.OPTIONAL_MANY_TRANSITION:
-				if(context == grammarAccess.getOptionalManyTransitionRule()) {
-					sequence_OptionalManyTransition(context, (OptionalManyTransition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalManyTransition(context, (OptionalManyTransition) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.OPTIONAL_SINGLE_TRANSITION:
-				if(context == grammarAccess.getOptionalSingleTransitionRule()) {
-					sequence_OptionalSingleTransition(context, (OptionalSingleTransition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OptionalSingleTransition(context, (OptionalSingleTransition) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE:
-				if(context == grammarAccess.getSingleCrossReferenceRule()) {
-					sequence_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE:
-				if(context == grammarAccess.getUnassignedDatatypeRule()) {
-					sequence_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.VAL0:
-				if(context == grammarAccess.getAddition0Rule() ||
-				   context == grammarAccess.getAddition0Access().getAdd0LeftAction_1_0() ||
-				   context == grammarAccess.getExp0Rule() ||
-				   context == grammarAccess.getPrim0Rule()) {
-					sequence_Prim0(context, (Val0) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Prim0(context, (Val0) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.VAL1:
-				if(context == grammarAccess.getAddition1Rule() ||
-				   context == grammarAccess.getAddition1Access().getAdd1LeftAction_1_0() ||
-				   context == grammarAccess.getExp1Rule() ||
-				   context == grammarAccess.getPrim1Rule()) {
-					sequence_Prim1(context, (Val1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Prim1(context, (Val1) semanticObject); 
+				return; 
 			case SyntacticsequencertestPackage.VAL2:
-				if(context == grammarAccess.getAddition2Rule() ||
-				   context == grammarAccess.getAddition2Access().getAdd2LeftAction_1_0() ||
-				   context == grammarAccess.getExp2Rule() ||
-				   context == grammarAccess.getMultiplication2Rule() ||
-				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
-				   context == grammarAccess.getPrim2Rule()) {
-					sequence_Prim2(context, (Val2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Prim2(context, (Val2) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

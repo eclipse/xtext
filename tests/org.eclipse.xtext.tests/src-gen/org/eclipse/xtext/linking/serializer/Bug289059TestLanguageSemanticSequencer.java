@@ -25,17 +25,11 @@ public class Bug289059TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug289059TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug289059TestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case Bug289059TestPackage.UNASSIGNED_ACTION:
-				if(context == grammarAccess.getUnassignedActionRule()) {
-					sequence_UnassignedAction(context, (UnassignedAction) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnassignedAction(context, (UnassignedAction) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
