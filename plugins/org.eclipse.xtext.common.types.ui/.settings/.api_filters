@@ -8,4 +8,39 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/common/types/ui/notification/JavaBuilderState.java" type="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState">
+        <filter comment="As the DeltaConverter is the only client, this class is not ment to be used by clients" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState"/>
+                <message_argument value="_getQualifiedTypeNames(ICompilationUnit)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState"/>
+                <message_argument value="_getQualifiedTypeNames(IPackageFragment)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.ui.notification.JavaBuilderState"/>
+                <message_argument value="getQualifiedTypeNames(Object)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="_getQualifiedTypeNames(ICompilationUnit)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="_getQualifiedTypeNames(IPackageFragment)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="getQualifiedTypeNames(Object)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
