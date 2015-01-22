@@ -13,6 +13,7 @@ Require-Bundle: org.eclipse.xtext.tests,
  org.eclipse.xtext.tests.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext.junit4,
+ org.eclipse.xtext.xbase.lib,
  org.eclipse.ui.workbench;resolution:=optional
 Import-Package: org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
