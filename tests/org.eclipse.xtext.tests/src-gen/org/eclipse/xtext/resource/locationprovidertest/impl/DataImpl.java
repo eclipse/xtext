@@ -17,7 +17,6 @@ import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPacka
  * An implementation of the model object '<em><b>Data</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

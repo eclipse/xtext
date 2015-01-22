@@ -19,7 +19,6 @@ import org.eclipse.xtext.linking.bug313089.Bug313089Package;
  * An implementation of the model object '<em><b>Baz</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -21,7 +21,6 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Optional
  * An implementation of the model object '<em><b>Optional Calls Sub1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

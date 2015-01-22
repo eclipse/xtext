@@ -11,7 +11,6 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.WithHi
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>With Hiddens</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -16,7 +16,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ExpressionExecutable;
  * An implementation of the model object '<em><b>Expression Executable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -16,7 +16,6 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * An implementation of the model object '<em><b>Generated Metamodel</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

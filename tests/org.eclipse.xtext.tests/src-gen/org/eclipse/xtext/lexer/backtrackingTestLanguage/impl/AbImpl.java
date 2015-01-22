@@ -17,7 +17,6 @@ import org.eclipse.xtext.lexer.backtrackingTestLanguage.BacktrackingTestLanguage
  * An implementation of the model object '<em><b>Ab</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

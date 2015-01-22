@@ -16,7 +16,6 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.TypeBug1A;
  * An implementation of the model object '<em><b>Type Bug1 A</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

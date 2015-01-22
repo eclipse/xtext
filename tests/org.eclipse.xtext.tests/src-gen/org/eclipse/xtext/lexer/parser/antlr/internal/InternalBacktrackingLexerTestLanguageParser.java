@@ -33,8 +33,8 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
     public static final int RULE_WS=12;
     public static final int RULE_CHARA=6;
     public static final int RULE_SL_COMMENT=13;
-    public static final int EOF=-1;
     public static final int RULE_CHARB=7;
+    public static final int EOF=-1;
     public static final int RULE_CHARC=11;
 
     // delegates

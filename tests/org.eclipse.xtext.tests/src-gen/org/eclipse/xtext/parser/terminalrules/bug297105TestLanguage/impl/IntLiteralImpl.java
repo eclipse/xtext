@@ -11,7 +11,6 @@ import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.IntLiteral;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Int Literal</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

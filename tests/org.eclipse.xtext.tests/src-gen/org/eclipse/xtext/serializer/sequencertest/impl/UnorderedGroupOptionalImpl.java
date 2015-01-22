@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedGroupOptional;
  * An implementation of the model object '<em><b>Unordered Group Optional</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

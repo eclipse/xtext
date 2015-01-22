@@ -13,7 +13,6 @@ import org.eclipse.xtext.grammarinheritance.foo.RootRule;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Root Rule</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

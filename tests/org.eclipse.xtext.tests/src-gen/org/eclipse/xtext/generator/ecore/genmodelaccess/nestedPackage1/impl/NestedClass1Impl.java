@@ -13,7 +13,6 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedPac
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Nested Class1</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

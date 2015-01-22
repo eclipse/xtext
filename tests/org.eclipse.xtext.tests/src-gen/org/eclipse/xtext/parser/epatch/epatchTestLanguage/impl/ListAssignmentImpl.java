@@ -23,7 +23,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ListAssignment;
  * An implementation of the model object '<em><b>List Assignment</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

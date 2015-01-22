@@ -11,7 +11,6 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Hidden
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Datatype Hiddens</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -19,7 +19,6 @@ import org.eclipse.xtext.linking.lazy.bug311337.Reference;
  * An implementation of the model object '<em><b>Nested Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

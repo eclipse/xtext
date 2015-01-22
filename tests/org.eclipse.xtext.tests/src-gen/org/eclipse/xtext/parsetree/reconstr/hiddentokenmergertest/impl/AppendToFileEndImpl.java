@@ -23,7 +23,6 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
  * An implementation of the model object '<em><b>Append To File End</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

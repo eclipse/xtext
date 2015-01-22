@@ -24,7 +24,6 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
  * An implementation of the model object '<em><b>Unresolved Proxy Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -13,7 +13,6 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Model;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -19,7 +19,6 @@ import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.FooBar;
  * An implementation of the model object '<em><b>Foo Bar</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

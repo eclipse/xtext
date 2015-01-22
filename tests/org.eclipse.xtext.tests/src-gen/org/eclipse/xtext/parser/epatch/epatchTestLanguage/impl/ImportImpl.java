@@ -13,7 +13,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Import;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

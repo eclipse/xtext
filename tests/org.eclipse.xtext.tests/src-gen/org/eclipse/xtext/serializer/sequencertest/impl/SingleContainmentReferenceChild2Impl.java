@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChil
  * An implementation of the model object '<em><b>Single Containment Reference Child2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

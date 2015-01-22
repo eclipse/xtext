@@ -11,7 +11,6 @@ import org.eclipse.xtext.linking.bug287988Test.Master;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Master</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

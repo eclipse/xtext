@@ -17,7 +17,6 @@ import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
  * An implementation of the model object '<em><b>Simple Group</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

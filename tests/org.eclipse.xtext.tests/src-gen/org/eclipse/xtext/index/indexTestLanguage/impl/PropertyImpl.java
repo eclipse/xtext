@@ -19,7 +19,6 @@ import org.eclipse.xtext.index.indexTestLanguage.Type;
  * An implementation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

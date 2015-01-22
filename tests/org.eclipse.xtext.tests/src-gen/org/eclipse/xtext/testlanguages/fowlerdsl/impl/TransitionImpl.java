@@ -20,7 +20,6 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.Transition;
  * An implementation of the model object '<em><b>Transition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

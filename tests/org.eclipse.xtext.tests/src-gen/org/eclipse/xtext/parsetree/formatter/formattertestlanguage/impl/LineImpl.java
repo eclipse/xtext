@@ -13,7 +13,6 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Line;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Line</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

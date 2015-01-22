@@ -17,7 +17,6 @@ import org.eclipse.xtext.xtext.ecoreInference.unassignedRuleCallTestLanguage.Una
  * An implementation of the model object '<em><b>Model Features</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

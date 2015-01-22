@@ -18,7 +18,6 @@ import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList;
  * An implementation of the model object '<em><b>ID List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -28,7 +28,6 @@ import org.eclipse.xtext.resource.bug385636.Program;
  * An implementation of the model object '<em><b>Program</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

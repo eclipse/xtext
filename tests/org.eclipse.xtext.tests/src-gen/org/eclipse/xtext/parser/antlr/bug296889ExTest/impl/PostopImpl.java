@@ -19,7 +19,6 @@ import org.eclipse.xtext.parser.antlr.bug296889ExTest.Postop;
  * An implementation of the model object '<em><b>Postop</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

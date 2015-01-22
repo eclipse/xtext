@@ -13,7 +13,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.MyNamedElemen
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>My Named Element 01</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

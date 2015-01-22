@@ -11,7 +11,6 @@ import org.eclipse.xtext.parser.terminalrules.xtextTerminalsTestLanguage.XtextTe
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Until Token</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

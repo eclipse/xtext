@@ -26,7 +26,6 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.TestIndentati
  * An implementation of the model object '<em><b>Test Indentation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

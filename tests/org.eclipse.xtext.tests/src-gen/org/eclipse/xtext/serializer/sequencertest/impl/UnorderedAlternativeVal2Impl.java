@@ -16,7 +16,6 @@ import org.eclipse.xtext.serializer.sequencertest.UnorderedAlternativeVal2;
  * An implementation of the model object '<em><b>Unordered Alternative Val2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

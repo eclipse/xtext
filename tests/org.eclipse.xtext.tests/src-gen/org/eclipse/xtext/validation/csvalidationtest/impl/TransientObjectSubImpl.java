@@ -17,7 +17,6 @@ import org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub;
  * An implementation of the model object '<em><b>Transient Object Sub</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

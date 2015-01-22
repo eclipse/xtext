@@ -13,7 +13,6 @@ import org.eclipse.xtext.resource.bug385636.Expression;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

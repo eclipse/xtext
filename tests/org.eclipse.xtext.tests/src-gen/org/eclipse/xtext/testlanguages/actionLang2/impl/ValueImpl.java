@@ -16,7 +16,6 @@ import org.eclipse.xtext.testlanguages.actionLang2.Value;
  * An implementation of the model object '<em><b>Value</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

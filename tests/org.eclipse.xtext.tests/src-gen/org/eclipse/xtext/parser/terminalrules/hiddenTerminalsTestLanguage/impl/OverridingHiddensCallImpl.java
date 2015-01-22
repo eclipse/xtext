@@ -23,7 +23,6 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Overri
  * An implementation of the model object '<em><b>Overriding Hiddens Call</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

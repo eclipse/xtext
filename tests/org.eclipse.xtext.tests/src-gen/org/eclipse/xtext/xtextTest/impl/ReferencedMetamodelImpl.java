@@ -11,7 +11,6 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Referenced Metamodel</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

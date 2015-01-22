@@ -20,7 +20,6 @@ import org.eclipse.xtext.generator.ecore.second.SecondPackage;
  * An implementation of the model object '<em><b>Second</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

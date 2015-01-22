@@ -19,7 +19,6 @@ import org.eclipse.xtext.resource.bug385636.NVariableAccess;
  * An implementation of the model object '<em><b>Expression Variable Name</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

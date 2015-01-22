@@ -16,7 +16,6 @@ import org.eclipse.xtext.parser.antlr.bug296889Test.Variable;
  * An implementation of the model object '<em><b>Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

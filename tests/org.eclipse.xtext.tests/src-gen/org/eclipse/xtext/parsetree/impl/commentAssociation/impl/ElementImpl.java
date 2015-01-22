@@ -19,7 +19,6 @@ import org.eclipse.xtext.parsetree.impl.commentAssociation.Element;
  * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

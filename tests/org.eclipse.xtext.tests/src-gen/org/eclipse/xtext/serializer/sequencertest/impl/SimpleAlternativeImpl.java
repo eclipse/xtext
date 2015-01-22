@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
  * An implementation of the model object '<em><b>Simple Alternative</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -17,7 +17,6 @@ import org.eclipse.xtext.parser.antlr.bug378967Test.Rule3;
  * An implementation of the model object '<em><b>Rule3</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

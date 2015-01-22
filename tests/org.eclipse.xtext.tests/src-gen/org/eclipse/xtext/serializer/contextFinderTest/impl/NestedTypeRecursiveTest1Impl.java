@@ -11,7 +11,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Nested Type Recursive Test1</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

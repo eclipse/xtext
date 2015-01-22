@@ -16,7 +16,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.JavaExecutable;
  * An implementation of the model object '<em><b>Java Executable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

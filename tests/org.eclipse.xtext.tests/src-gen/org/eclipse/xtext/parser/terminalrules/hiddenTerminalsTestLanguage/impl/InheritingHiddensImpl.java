@@ -20,7 +20,6 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Inheri
  * An implementation of the model object '<em><b>Inheriting Hiddens</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

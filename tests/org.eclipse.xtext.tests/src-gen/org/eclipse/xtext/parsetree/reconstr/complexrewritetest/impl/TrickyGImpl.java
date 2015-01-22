@@ -19,7 +19,6 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG1;
  * An implementation of the model object '<em><b>Tricky G</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -16,7 +16,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ModelImport;
  * An implementation of the model object '<em><b>Model Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

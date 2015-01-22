@@ -17,7 +17,6 @@ import org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage;
  * An implementation of the model object '<em><b>Event</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

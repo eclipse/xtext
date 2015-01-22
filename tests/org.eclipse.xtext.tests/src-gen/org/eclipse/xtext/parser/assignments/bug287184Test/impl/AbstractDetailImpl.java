@@ -19,7 +19,6 @@ import org.eclipse.xtext.parser.assignments.bug287184Test.Model;
  * An implementation of the model object '<em><b>Abstract Detail</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
