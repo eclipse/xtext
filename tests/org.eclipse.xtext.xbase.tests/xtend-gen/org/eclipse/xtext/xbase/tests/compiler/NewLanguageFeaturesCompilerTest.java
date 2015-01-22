@@ -115,6 +115,23 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
   }
   
   @Test
+  public void testUnderscoreInNumericLiteral() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val x = 123_456_789");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("final int x = 123_456_789;");
+    _builder_1.newLine();
+    Pair<JavaVersion, JavaVersion> _mappedTo = Pair.<JavaVersion, JavaVersion>of(JavaVersion.JAVA7, JavaVersion.JAVA8);
+    this.compilesTo(_builder, _builder_1, _mappedTo);
+  }
+  
+  @Test
   public void testNewThread() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("new Thread [| ]");
