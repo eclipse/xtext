@@ -58,6 +58,16 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 		''', JAVA7 -> JAVA8)
 	}
 	
+	@Test def void testUnderscoreInNumericLiteral() throws Exception {
+		'''
+			{
+				val x = 123_456_789
+			}
+		'''.compilesTo('''
+		    final int x = 123_456_789;
+		''', JAVA7 -> JAVA8)
+	}
+	
 	@Test def void testNewThread() throws Exception {
 		'''
 			new Thread [| ]

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -193,7 +195,12 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 				}
 			}
 		} else {
-			b.append(numberLiterals.toJavaLiteral(expr));
+			GeneratorConfig config = b.getGeneratorConfig();
+			if (config != null && config.getTargetVersion().isAtLeast(JAVA7)) {
+				b.append(numberLiterals.toJavaLiteral(expr, false));
+			} else {
+				b.append(numberLiterals.toJavaLiteral(expr, true));
+			}
 		}
 	}
 	
