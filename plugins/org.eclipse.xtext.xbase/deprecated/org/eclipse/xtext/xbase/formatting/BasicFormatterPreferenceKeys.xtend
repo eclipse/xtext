@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.formatting
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
 
 /**
- * @Deprecated use {@link FormatterPreferenceKeys}
+ * @deprecated use {@link FormatterPreferenceKeys}
  */
 @Deprecated class BasicFormatterPreferenceKeys {
 	public static val lineSeparator = new StringKey("line.separator", System.getProperty("line.separator"))

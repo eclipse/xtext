@@ -5,7 +5,7 @@ import org.eclipse.xtext.xbase.formatting.IntegerKey;
 import org.eclipse.xtext.xbase.formatting.StringKey;
 
 /**
- * @Deprecated use {@link FormatterPreferenceKeys}
+ * @deprecated use {@link FormatterPreferenceKeys}
  */
 @Deprecated
 @SuppressWarnings("all")

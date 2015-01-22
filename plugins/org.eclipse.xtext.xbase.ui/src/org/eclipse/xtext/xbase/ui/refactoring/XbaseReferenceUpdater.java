@@ -69,7 +69,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  * 
- * TODO this looks bogus to me (e.g. {@link #isImplicitVariable(EObject, EReference, String)}, {@link #isStaticExtensionFeatureCall(EObject, EReference, EObject)})
+ * TODO this looks bogus to me  {@link #isStaticExtensionFeatureCall(EObject, EReference, EObject)})
  */
 public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	

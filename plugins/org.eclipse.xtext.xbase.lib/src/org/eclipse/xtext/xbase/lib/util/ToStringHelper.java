@@ -15,7 +15,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge - Initial contribution and API
  * 
  * @since 2.3
- * @deprected use {@link ToStringBuilder}
+ * @deprecated use {@link ToStringBuilder}
  */
 @Beta
 @Deprecated

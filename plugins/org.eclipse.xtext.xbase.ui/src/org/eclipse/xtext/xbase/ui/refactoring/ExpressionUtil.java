@@ -39,7 +39,7 @@ public class ExpressionUtil {
 	protected ILocationInFileProvider locationInFileProvider;
 
 	/**
-	 * @returns the smallest single expression containing the selection.  
+	 * @return the smallest single expression containing the selection.  
 	 */
 	public XExpression findSelectedExpression(XtextResource resource, ITextSelection selection) {
 		IParseResult parseResult = resource.getParseResult();
@@ -81,7 +81,7 @@ public class ExpressionUtil {
 	}
 
 	/**
-	 * @returns the list of sibling expressions (expressions in the same block expression) containing the selection.  
+	 * @return the list of sibling expressions (expressions in the same block expression) containing the selection.  
 	 */
 	public List<XExpression> findSelectedSiblingExpressions(XtextResource resource, ITextSelection selection) {
 		ITextSelection trimmedSelection = trimSelection(resource, selection);

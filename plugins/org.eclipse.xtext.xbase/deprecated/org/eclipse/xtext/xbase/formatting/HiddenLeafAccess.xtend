@@ -11,7 +11,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 
 /**
- * @Deprecated use {@link ITextRegionAccess}
+ * @deprecated use {@link ITextRegionAccess}
  */
 @Deprecated class HiddenLeafAccess {
 	

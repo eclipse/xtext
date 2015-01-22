@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
- * @Deprecated use {@link ITextRegionAccess}
+ * @deprecated use {@link ITextRegionAccess}
  */
 @Deprecated
 @SuppressWarnings("all")

@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.formatting;
 import org.eclipse.xtext.xbase.formatting.IntegerKey;
 
 /**
- * @Deprecated use {@link org.eclipse.xtext.xbase.formatting2.BlankLineKey}
+ * @deprecated use {@link org.eclipse.xtext.xbase.formatting2.BlankLineKey}
  */
 @Deprecated
 @SuppressWarnings("all")

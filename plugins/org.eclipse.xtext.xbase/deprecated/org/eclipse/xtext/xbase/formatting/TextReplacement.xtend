@@ -4,7 +4,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.formatting2.ITextReplacement
 
 /**
- * @Deprecated use {@link ITextReplacement}
+ * @deprecated use {@link ITextReplacement}
  */
 @Deprecated @Data class TextReplacement {
 	int offset

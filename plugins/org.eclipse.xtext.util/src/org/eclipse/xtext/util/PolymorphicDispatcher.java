@@ -330,7 +330,7 @@ public class PolymorphicDispatcher<RT> {
 	}
 
 	/**
-	 * @return
+	 * @return {@code Void.class}
 	 */
 	protected Class<?> getDefaultClass(int paramIndex) {
 		return Void.class;

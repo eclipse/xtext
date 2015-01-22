@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.formatting;
 import org.eclipse.xtext.preferences.PreferenceKey;
 
 /**
- * @Deprecated use {@link org.eclipse.xtext.preferences.BooleanKey}
+ * @deprecated use {@link org.eclipse.xtext.preferences.BooleanKey}
  */
 @Deprecated
 @SuppressWarnings("all")

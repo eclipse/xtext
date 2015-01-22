@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated class FormattingDataFactory {
 
@@ -210,7 +210,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 }
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated class FormattingDataInit {
 	public String space = null

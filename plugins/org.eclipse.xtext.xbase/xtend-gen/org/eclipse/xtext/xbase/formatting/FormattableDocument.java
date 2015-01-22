@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
- * @Deprecated use {@link IFormattableDocument}
+ * @deprecated use {@link IFormattableDocument}
  */
 @Deprecated
 @SuppressWarnings("all")

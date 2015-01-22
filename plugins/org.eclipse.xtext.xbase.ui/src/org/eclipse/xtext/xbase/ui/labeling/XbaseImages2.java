@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
- * Obsoletes {@link XbaseImages} to allow better adornments and use {@link ImageDescriptor}s instead of
+ * Obsoletes XbaseImages to allow better adornments and use {@link ImageDescriptor}s instead of
  * {@link org.eclipse.swt.graphics.Image}s. Use {@link XbaseImageAdornments} for calculating adornments.
  * 
  * @author Jan Koehnlein - Initial contribution and API

@@ -6,7 +6,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
- * @Deprecated use {@link ITextReplacement}
+ * @deprecated use {@link ITextReplacement}
  */
 @Deprecated
 @Data

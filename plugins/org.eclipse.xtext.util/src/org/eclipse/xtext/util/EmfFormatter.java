@@ -194,11 +194,6 @@ public class EmfFormatter {
 			buf.append(r.getURI().toString()).append("#").append(r.getURIFragment(target));
 	}
 
-	/**
-	 * @param firstSetGrammarElements
-	 * @param object
-	 * @return
-	 */
 	public static String listToStr(List<? extends EObject> elements) {
 		StringBuffer buff = new StringBuffer();
 		for (int i = 0; i < elements.size(); i++) {

@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
- * @Deprecated use {@link AbstractFormatter2}
+ * @deprecated use {@link AbstractFormatter2}
  */
 @Deprecated
 @SuppressWarnings("all")

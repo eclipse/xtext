@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
- * @deprecated left for backward compatibility only. Use {@link DefaultRenameElementHandler} instead.
+ * @deprecated left for backward compatibility only. Use {@link org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler} instead.
  */
 @Deprecated 
 public class JvmModelRenameElementHandler extends JvmRenameElementHandler {

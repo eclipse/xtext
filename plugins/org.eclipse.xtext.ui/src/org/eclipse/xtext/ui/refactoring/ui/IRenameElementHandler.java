@@ -19,7 +19,7 @@ import com.google.inject.ImplementedBy;
  * @author Jan Koehnlein - Initial contribution and API
  * 
  * @noimplement This interface is not intended to be implemented by clients. 
- * @deprecation use {@link DefaultRenameElementHandler} and {@link IRenameContextFactory} instead.
+ * @deprecated use {@link DefaultRenameElementHandler} and {@link IRenameContextFactory} instead.
  */
 @Deprecated
 @ImplementedBy(DefaultRenameElementHandler.class)

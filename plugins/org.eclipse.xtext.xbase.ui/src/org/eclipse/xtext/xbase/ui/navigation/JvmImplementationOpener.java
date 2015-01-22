@@ -77,7 +77,7 @@ public class JvmImplementationOpener {
 	 * Main parts of the logic is taken from {@link org.eclipse.jdt.internal.ui.javaeditor.JavaElementImplementationHyperlink}
 	 *
 	 * @param element - Element to show implementations for
-	 * @param textViewer - Viewer to show hierarchy view on
+	 * @param textviewer - Viewer to show hierarchy view on
 	 * @param region - Region where to show hierarchy view
 	 */
 	public void openImplementations(final IJavaElement element, ITextViewer textviewer, IRegion region){

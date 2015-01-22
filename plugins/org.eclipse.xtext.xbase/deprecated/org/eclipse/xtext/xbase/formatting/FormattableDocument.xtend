@@ -11,7 +11,7 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter
 
 /**
- * @Deprecated use {@link IFormattableDocument}
+ * @deprecated use {@link IFormattableDocument}
  */
 @Deprecated
 class FormattableDocument {
@@ -299,7 +299,7 @@ class FormattableDocument {
 }
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated @Data abstract class FormattingData {
 	int offset
@@ -315,7 +315,7 @@ class FormattableDocument {
 }
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated @Data class WhitespaceData extends FormattingData {
 	String space
@@ -326,7 +326,7 @@ class FormattableDocument {
 }
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated @Data class NewLineData extends FormattingData {
 	Integer newLines

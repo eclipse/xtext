@@ -5,7 +5,7 @@ import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated
 @SuppressWarnings("all")

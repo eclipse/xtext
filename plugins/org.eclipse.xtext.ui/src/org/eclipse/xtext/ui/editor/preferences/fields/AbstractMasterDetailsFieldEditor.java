@@ -173,7 +173,7 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	}
 
 	/**
-	 * @return
+	 * @return selected Object
 	 */
 	private Object selectedObject() {
 		int selectionIndex = masterList.getSelectionIndex();

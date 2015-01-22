@@ -11,7 +11,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 
 /**
- * @Deprecated use {@link ITextRegionAccess}
+ * @deprecated use {@link ITextRegionAccess}
  */
 @Deprecated class NodeModelAccess {
 

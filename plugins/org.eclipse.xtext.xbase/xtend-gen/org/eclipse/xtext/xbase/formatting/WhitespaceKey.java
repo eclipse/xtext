@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.formatting;
 import org.eclipse.xtext.xbase.formatting.BooleanKey;
 
 /**
- * @Deprecated use {@link org.eclipse.xtext.xbase.formatting2.WhitespaceKey}
+ * @deprecated use {@link org.eclipse.xtext.xbase.formatting2.WhitespaceKey}
  */
 @Deprecated
 @SuppressWarnings("all")

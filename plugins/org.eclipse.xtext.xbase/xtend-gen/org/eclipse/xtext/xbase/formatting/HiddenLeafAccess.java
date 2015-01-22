@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
- * @Deprecated use {@link ITextRegionAccess}
+ * @deprecated use {@link ITextRegionAccess}
  */
 @Deprecated
 @SuppressWarnings("all")

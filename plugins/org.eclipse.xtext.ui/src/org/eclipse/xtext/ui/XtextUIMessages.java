@@ -20,7 +20,7 @@ import com.ibm.icu.text.MessageFormat;
  * Singleton for all message bundle classes used from within
  * <i>org.eclipse.xtext.ui</i>.
  * 
- * @author Dennis H¸bner - Initial contribution and API
+ * @author Dennis Huebner - Initial contribution and API
  * @author Michael Clay
  * @see org.eclipse.osgi.util.NLS
  * 
@@ -40,7 +40,7 @@ public class XtextUIMessages extends NLS {
 
 	/**
 	 * @param key
-	 * @return
+	 * @return the string for the given key
 	 */
 	public static String getString(String key) {
 		try {

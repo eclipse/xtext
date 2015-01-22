@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 
 /**
- * @Deprecated use {@link AbstractFormatter2}
+ * @deprecated use {@link AbstractFormatter2}
  */
 @Deprecated abstract class AbstractFormatter implements IBasicFormatter {
 

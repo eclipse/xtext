@@ -139,8 +139,8 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 	/**
 	 * is executed within the transaction right after the unit of work has been executed and delivered the result.
 	 * 
-	 * @param result
-	 * @param work
+	 * @param result - delivered result
+	 * @param work  - the unit of work to be processed
 	 */
 	protected void afterModify(P state, Object result, IUnitOfWork<?, P> work) {
 	}
@@ -148,8 +148,8 @@ public abstract class AbstractReadWriteAcces<P> implements IReadAccess<P> {
 	/**
 	 * is executed within the transaction right after the unit of work has been executed and delivered the result.
 	 * 
-	 * @param result
-	 * @param work
+	 * @param result - delivered result
+	 * @param work  - the unit of work to be processed
 	 */
 	protected void afterReadOnly(P state, Object result, IUnitOfWork<?, P> work) {
 	}

@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.formatting.NewLineOrPreserveKey;
 import org.eclipse.xtext.xbase.formatting.WhitespaceKey;
 
 /**
- * @Deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys}
+ * @deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys}
  */
 @Deprecated
 @SuppressWarnings("all")

@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
- * @Deprecated use {@link IHiddenRegionFormatter}
+ * @deprecated use {@link IHiddenRegionFormatter}
  */
 @Deprecated
 @Data

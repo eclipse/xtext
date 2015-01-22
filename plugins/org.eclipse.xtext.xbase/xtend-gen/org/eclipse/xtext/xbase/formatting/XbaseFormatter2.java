@@ -76,7 +76,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 /**
- * @Deprecated use {@link XbaseFormatter}
+ * @deprecated use {@link XbaseFormatter}
  */
 @Deprecated
 @SuppressWarnings("all")

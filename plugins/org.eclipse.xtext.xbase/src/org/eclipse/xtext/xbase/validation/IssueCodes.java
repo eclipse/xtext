@@ -101,7 +101,7 @@ public class IssueCodes {
 	public static final String NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive";
 	/**
 	 * Indicates a synthesized default value for a primitive type, e.g.
-	 * @code{list?.isEmpty} or @code{val boolean b = if (condition) true}. 
+	 * {@code list?.isEmpty} or {@code val boolean b = if (condition) true}. 
 	 */
 	public static final String NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive_valued_feature";
 	public static final String PRIMITIVE_COMPARED_TO_NULL = ISSUE_CODE_PREFIX	+ "primitive_compared_to_null";

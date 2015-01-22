@@ -50,7 +50,7 @@ import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 /**
- * @Deprecated use {@link XbaseFormatter}
+ * @deprecated use {@link XbaseFormatter}
  */
 @Deprecated class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess
