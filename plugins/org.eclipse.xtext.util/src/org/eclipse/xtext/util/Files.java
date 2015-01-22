@@ -109,9 +109,9 @@ public class Files {
 	 * This will completely sweep the given folder. Consider using
 	 * {@link #cleanFolder(File, FileFilter, boolean, boolean)} if you want to preserve CVS or SVN information.
 	 * 
-	 * @param folder
-	 * @return
-	 * @throws FileNotFoundException
+	 * @param folder to delete
+	 * @return {@code true} if all content was successfully deleted
+	 * @throws FileNotFoundException if folder does not exists
 	 */
 	public static boolean sweepFolder(File folder) throws FileNotFoundException {
 		return Files.cleanFolder(folder, new FileFilter() {

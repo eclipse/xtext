@@ -28,7 +28,7 @@ public class Exceptions {
 	}
 
 	/**
-	 * Invoke {@link Throwable#addSuppressed(Throwable)} reflectively if it is available.
+	 * Invoke {@code Throwable#addSuppressed(Throwable)} reflectively if it is available.
 	 * 
 	 * It is not available on JRE < 1.7
 	 * 
