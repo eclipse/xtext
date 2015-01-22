@@ -18,7 +18,6 @@ import org.eclipse.xtext.grammarinheritance.foo.Subrule1;
  * An implementation of the model object '<em><b>Subrule1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -13,7 +13,6 @@ import org.eclipse.xtext.formatting2.internal.formattertestlanguage.Root;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

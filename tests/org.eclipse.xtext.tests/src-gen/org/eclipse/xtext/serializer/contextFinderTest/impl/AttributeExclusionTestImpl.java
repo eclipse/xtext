@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
  * An implementation of the model object '<em><b>Attribute Exclusion Test</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

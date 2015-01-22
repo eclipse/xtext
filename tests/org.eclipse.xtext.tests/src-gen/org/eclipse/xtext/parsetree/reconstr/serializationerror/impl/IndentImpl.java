@@ -27,7 +27,6 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
  * An implementation of the model object '<em><b>Indent</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

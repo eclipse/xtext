@@ -17,7 +17,6 @@ import org.eclipse.xtext.resource.locationprovidertest.Mode;
  * An implementation of the model object '<em><b>Mode</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

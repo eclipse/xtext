@@ -25,7 +25,6 @@ import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNod
  * An implementation of the model object '<em><b>Tree</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -17,7 +17,6 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefObj;
  * An implementation of the model object '<em><b>Ref Obj</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

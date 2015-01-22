@@ -18,7 +18,6 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.Transient1;
  * An implementation of the model object '<em><b>Transient1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

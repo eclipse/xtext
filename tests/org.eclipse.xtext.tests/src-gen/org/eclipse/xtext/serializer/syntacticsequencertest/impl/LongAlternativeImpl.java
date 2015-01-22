@@ -23,7 +23,6 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  * An implementation of the model object '<em><b>Long Alternative</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

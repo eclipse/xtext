@@ -13,7 +13,6 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.Test;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Test</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

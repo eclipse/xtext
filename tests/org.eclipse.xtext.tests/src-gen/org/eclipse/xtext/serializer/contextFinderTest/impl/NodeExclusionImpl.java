@@ -19,7 +19,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusion;
  * An implementation of the model object '<em><b>Node Exclusion</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

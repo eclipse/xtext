@@ -17,7 +17,6 @@ import org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.Literal;
  * An implementation of the model object '<em><b>Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

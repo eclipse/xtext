@@ -11,7 +11,6 @@ import org.eclipse.xtext.parser.assignments.bug287184Test.Bug287184TestPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Associated Detail</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

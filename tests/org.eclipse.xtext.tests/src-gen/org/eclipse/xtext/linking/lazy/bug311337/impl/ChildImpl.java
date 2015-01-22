@@ -19,7 +19,6 @@ import org.eclipse.xtext.linking.lazy.bug311337.Definition;
  * An implementation of the model object '<em><b>Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

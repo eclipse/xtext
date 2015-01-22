@@ -13,7 +13,6 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Action1 Sub1</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

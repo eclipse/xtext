@@ -18,7 +18,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectNew;
  * An implementation of the model object '<em><b>Object New</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -13,7 +13,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.Executable;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Executable</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -13,7 +13,6 @@ import org.eclipse.xtext.linking.bug289059Test.UnassignedAction;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Unassigned Action</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

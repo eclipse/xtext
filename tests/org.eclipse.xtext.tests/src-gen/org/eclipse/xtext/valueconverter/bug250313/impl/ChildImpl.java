@@ -17,7 +17,6 @@ import org.eclipse.xtext.valueconverter.bug250313.Child;
  * An implementation of the model object '<em><b>Child</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

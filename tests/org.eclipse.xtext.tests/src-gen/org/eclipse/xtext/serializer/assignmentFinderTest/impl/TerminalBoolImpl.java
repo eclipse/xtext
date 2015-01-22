@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.TerminalBool;
  * An implementation of the model object '<em><b>Terminal Bool</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

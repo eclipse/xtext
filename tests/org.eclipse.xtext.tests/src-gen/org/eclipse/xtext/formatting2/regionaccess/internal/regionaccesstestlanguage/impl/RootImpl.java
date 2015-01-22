@@ -13,7 +13,6 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

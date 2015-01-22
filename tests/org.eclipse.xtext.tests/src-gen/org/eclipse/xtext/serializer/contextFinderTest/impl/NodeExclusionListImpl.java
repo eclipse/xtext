@@ -21,7 +21,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.NodeExclusionList;
  * An implementation of the model object '<em><b>Node Exclusion List</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

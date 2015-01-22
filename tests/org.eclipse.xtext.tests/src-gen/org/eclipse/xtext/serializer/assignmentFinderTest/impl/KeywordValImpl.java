@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.assignmentFinderTest.KeywordVal;
  * An implementation of the model object '<em><b>Keyword Val</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

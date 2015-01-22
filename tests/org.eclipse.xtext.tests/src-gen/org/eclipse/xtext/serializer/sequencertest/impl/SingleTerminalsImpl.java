@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
  * An implementation of the model object '<em><b>Single Terminals</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -18,7 +18,6 @@ import org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.Withou
  * An implementation of the model object '<em><b>Without Hiddens</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

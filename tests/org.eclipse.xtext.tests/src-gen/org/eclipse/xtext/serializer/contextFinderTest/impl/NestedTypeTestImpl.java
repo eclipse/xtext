@@ -20,7 +20,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
  * An implementation of the model object '<em><b>Nested Type Test</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

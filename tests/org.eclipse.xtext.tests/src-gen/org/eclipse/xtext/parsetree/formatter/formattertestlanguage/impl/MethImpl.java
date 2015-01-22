@@ -26,7 +26,6 @@ import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Param;
  * An implementation of the model object '<em><b>Meth</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

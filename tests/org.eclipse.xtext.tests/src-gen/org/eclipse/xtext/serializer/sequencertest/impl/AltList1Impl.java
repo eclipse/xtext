@@ -17,7 +17,6 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * An implementation of the model object '<em><b>Alt List1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

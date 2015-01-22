@@ -17,7 +17,6 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
  * An implementation of the model object '<em><b>Unassigned Action1</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

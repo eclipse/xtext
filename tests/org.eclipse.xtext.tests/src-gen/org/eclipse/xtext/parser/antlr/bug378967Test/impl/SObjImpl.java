@@ -17,7 +17,6 @@ import org.eclipse.xtext.parser.antlr.bug378967Test.SObj;
  * An implementation of the model object '<em><b>SObj</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

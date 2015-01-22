@@ -26,7 +26,6 @@ import org.eclipse.xtext.linking.importedURI.Type;
  * An implementation of the model object '<em><b>Main</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -23,7 +23,6 @@ import org.eclipse.xtext.resource.locationprovidertest.Port;
  * An implementation of the model object '<em><b>Bus</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

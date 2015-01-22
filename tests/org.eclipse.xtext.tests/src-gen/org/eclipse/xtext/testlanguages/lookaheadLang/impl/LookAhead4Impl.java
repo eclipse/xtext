@@ -17,7 +17,6 @@ import org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage;
  * An implementation of the model object '<em><b>Look Ahead4</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

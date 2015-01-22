@@ -19,7 +19,6 @@ import org.eclipse.xtext.grammarinheritance.foo.FooPackage;
  * An implementation of the model object '<em><b>AType2</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

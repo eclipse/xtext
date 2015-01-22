@@ -17,7 +17,6 @@ import org.eclipse.xtext.parser.unorderedGroups.backtrackingBug325745TestLanguag
  * An implementation of the model object '<em><b>Data Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

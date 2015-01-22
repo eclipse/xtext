@@ -19,7 +19,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.SingleAssignment;
  * An implementation of the model object '<em><b>Single Assignment</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

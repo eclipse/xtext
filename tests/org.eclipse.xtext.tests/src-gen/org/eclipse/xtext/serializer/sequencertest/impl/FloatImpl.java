@@ -12,7 +12,6 @@ import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Float</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

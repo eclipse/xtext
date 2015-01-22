@@ -16,7 +16,6 @@ import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextP
  * An implementation of the model object '<em><b>Datatype Rule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

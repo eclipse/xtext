@@ -19,7 +19,6 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Expressi
  * An implementation of the model object '<em><b>Add</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

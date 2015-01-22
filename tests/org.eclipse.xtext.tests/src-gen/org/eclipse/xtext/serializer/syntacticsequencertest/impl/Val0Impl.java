@@ -16,7 +16,6 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Val0;
  * An implementation of the model object '<em><b>Val0</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -13,7 +13,6 @@ import org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextP
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Model</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

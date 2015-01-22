@@ -20,7 +20,6 @@ import org.eclipse.xtext.resource.bug385636.Expression_VariableName;
  * An implementation of the model object '<em><b>Expression Equal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

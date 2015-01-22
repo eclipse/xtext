@@ -18,7 +18,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectCopy;
  * An implementation of the model object '<em><b>Object Copy</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

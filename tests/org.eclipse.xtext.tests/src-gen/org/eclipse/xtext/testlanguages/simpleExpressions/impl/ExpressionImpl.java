@@ -11,7 +11,6 @@ import org.eclipse.xtext.testlanguages.simpleExpressions.SimpleExpressionsPackag
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

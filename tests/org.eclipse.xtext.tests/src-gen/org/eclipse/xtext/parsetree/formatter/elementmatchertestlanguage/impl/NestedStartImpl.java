@@ -11,7 +11,6 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedSt
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Nested Start</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

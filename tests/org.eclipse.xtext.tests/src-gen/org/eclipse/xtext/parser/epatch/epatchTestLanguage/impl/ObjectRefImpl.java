@@ -20,7 +20,6 @@ import org.eclipse.xtext.parser.epatch.epatchTestLanguage.ObjectRef;
  * An implementation of the model object '<em><b>Object Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

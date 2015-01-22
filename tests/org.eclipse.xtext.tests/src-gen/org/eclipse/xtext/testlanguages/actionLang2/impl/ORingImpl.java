@@ -24,7 +24,6 @@ import org.eclipse.xtext.testlanguages.actionLang2.ORing;
  * An implementation of the model object '<em><b>ORing</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

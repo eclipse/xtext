@@ -18,7 +18,6 @@ import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestP
  * An implementation of the model object '<em><b>Bug310435 Val</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -23,7 +23,6 @@ import org.eclipse.xtext.testlanguages.testLang.TestLangPackage;
  * An implementation of the model object '<em><b>Reducible Composite</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
