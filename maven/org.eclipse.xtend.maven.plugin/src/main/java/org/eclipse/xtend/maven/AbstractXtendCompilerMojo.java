@@ -108,6 +108,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
 		XtendBatchCompiler instance = injector.getInstance(XtendBatchCompiler.class);
 		instance.setComplianceLevel(complianceLevel);
+		instance.setBasePath(project.getBasedir().getAbsolutePath());
 		return instance;
 	}
 	
@@ -117,6 +118,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	protected XtendBatchCompiler getConfiguredBatchCompiler() {
 		XtendBatchCompiler xtend2BatchCompiler = xtendBatchCompilerProvider.get();
 		xtend2BatchCompiler.setComplianceLevel(complianceLevel);
+		xtend2BatchCompiler.setBasePath(project.getBasedir().getAbsolutePath());
 		return xtend2BatchCompiler;
 	}
 
