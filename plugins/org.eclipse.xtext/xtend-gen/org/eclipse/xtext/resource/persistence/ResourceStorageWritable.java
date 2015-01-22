@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.persistence;
 
 import com.google.common.base.Objects;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -18,6 +19,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel;
+import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -72,16 +75,37 @@ public class ResourceStorageWritable {
    * Overriding methods should first delegate to super before adding their own entries.
    */
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) {
-    this.writeContents(resource, zipOut);
-    this.writeResourceDescription(resource, zipOut);
-  }
-  
-  protected void writeContents(final StorageAwareResource storageAwareResource, final ZipOutputStream zipOut) {
     try {
       ZipEntry _zipEntry = new ZipEntry("emf-contents");
       zipOut.putNextEntry(_zipEntry);
+      try {
+        this.writeContents(resource, zipOut);
+      } finally {
+        zipOut.closeEntry();
+      }
+      ZipEntry _zipEntry_1 = new ZipEntry("resource-description");
+      zipOut.putNextEntry(_zipEntry_1);
+      try {
+        this.writeResourceDescription(resource, zipOut);
+      } finally {
+        zipOut.closeEntry();
+      }
+      ZipEntry _zipEntry_2 = new ZipEntry("node-model");
+      zipOut.putNextEntry(_zipEntry_2);
+      try {
+        this.writeNodeModel(resource, zipOut);
+      } finally {
+        zipOut.closeEntry();
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void writeContents(final StorageAwareResource storageAwareResource, final OutputStream outputStream) {
+    try {
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      final BinaryResourceImpl.EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(zipOut, _emptyMap) {
+      final BinaryResourceImpl.EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(outputStream, _emptyMap) {
         @Override
         public void writeURI(final URI uri, final String fragment) throws IOException {
           final URI fullURI = uri.appendFragment(fragment);
@@ -104,28 +128,24 @@ public class ResourceStorageWritable {
       } finally {
         out.flush();
       }
-      zipOut.closeEntry();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected void writeResourceDescription(final StorageAwareResource resource, final ZipOutputStream zipOut) {
+  protected void writeResourceDescription(final StorageAwareResource resource, final OutputStream outputStream) {
     try {
-      ZipEntry _zipEntry = new ZipEntry("resource-description");
-      zipOut.putNextEntry(_zipEntry);
       IResourceServiceProvider _resourceServiceProvider = resource.getResourceServiceProvider();
       IResourceDescription.Manager _resourceDescriptionManager = _resourceServiceProvider.getResourceDescriptionManager();
       final IResourceDescription description = _resourceDescriptionManager.getResourceDescription(resource);
       final SerializableResourceDescription serializableDescription = SerializableResourceDescription.createCopy(description);
       this.convertExternalURIsToPortableURIs(serializableDescription, resource);
-      final ObjectOutputStream out = new ObjectOutputStream(zipOut);
+      final ObjectOutputStream out = new ObjectOutputStream(outputStream);
       try {
         out.writeObject(serializableDescription);
       } finally {
         out.flush();
       }
-      zipOut.closeEntry();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -144,6 +164,18 @@ public class ResourceStorageWritable {
         URI _portableURI = _portableURIs.toPortableURI(resource, _targetEObjectUri_1);
         ((SerializableReferenceDescription) ref).setTargetEObjectUri(_portableURI);
       }
+    }
+  }
+  
+  protected void writeNodeModel(final StorageAwareResource resource, final OutputStream outputStream) {
+    try {
+      final DataOutputStream out = new DataOutputStream(outputStream);
+      final SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
+      final SerializationConversionContext conversionContext = new SerializationConversionContext(resource);
+      serializableNodeModel.writeObjectData(out, conversionContext);
+      out.flush();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
