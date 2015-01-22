@@ -29,6 +29,8 @@
 			<arg line="-p projectDir=/${xtend_xdoc_loc}/" />
 		</java>
 		<java classname="generator.xtend.XtendWebsiteGenerator" />
+		<ant antfile="javadoc.xml" taskname="javadoc">
+		</ant>
 	</target>
 
 </project>

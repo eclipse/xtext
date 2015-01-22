@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="javadoc">
-	<property name="repositoryLocation" value="/Users/svenefftinge/Documents/eclipse-dev/xtext/master/git/xtext"/>
+	<property name="repositoryLocation" value="../"/>
 	<property name="pathToGuava" value="${user.home}/.p2/pool/plugins/com.google.guava_15.0.0.v201403281430.jar"/>
-	<property name="destdir" value="website/api/2.7.0"/>
+	<property name="destdir" value="website/api/2.8.0"/>
 
 	<target name="clean">
 		<delete>
@@ -68,6 +68,8 @@ ${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/
 ${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/Data.java,
 ${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen/org/eclipse/xtend/lib/annotations/Delegate.java" sourcepath="${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/src:${repositoryLocation}/plugins/org.eclipse.xtend.lib/src:${repositoryLocation}/plugins/org.eclipse.xtend.lib/xtend-gen:${repositoryLocation}/plugins/org.eclipse.xtext.xbase.lib/xtend-gen:${repositoryLocation}/plugins/org.eclipse.xtend.lib.macro/src" splitindex="true" use="true" version="true">
 			
+			<tag name="noreference" description="This method is not intended to be referenced by clients." />
+			<tag name="noimplement" description="This interface is not intended to be implemented by clients." />
 			<link href="http://docs.guava-libraries.googlecode.com/git-history/v18.0/javadoc/" />
 			<link href="http://docs.oracle.com/javase/7/docs/api/" />
 		</javadoc>

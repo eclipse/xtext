@@ -18,7 +18,7 @@ Workflow {
 		register = org.eclipse.xtext.xdoc.XdocStandaloneSetup {}
 		loadResource = {
 			slot = "model"
-			uri = ".*org.eclipse.xtend.doc.xdoc.*\\.xdoc$"
+			uri = ".*org.eclipse.xtend.doc.*\\.xdoc$"
 		}
 	}
 
@@ -28,10 +28,10 @@ Workflow {
 		outlet = {
 			path = targetDir
 		}
-		outlet = {
-			outletName = "WEB_SITE"
-			path = '${projectDir}/website/'
-		}
+	//	outlet = {
+	//	outletName = "WEB_SITE"
+	//		path = '${projectDir}/website/'
+	//	}
 	}
 
 	component = workflow.TocFileValidator {
