@@ -22,6 +22,7 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer
@@ -29,7 +30,6 @@ import org.eclipse.xtext.serializer.sequencer.GenericSequencer
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
-import org.eclipse.xtext.xbase.lib.Pair
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -121,21 +121,36 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			«IF (pkgi = pkgi + 1) > 1 /*!i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «file.importedGenTypeLiteral(pkg)») switch(semanticObject.eClass().getClassifierID()) {
 				«FOR type:pkg.accessedClasses»
 				case «file.importedGenIntLiteral(type)»:
-					«var ctxi = 0»
-					«FOR ctx: type.accessedConstraints.entrySet.sortBy(e|e.key.name) /* ITERATOR j-  */»
-						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value.sortBy(e|e.contextName) SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
-							«val superConstraint = superConstraints.get(ctx.key)»
-							«val constraint = if(superConstraint == null) ctx.key else superConstraint»
-							sequence_«constraint.simpleName»(context, («file.importedGenTypeName(type)») semanticObject); 
-							return; 
-						}
-					«ENDFOR»
-					else break;
+					«genMethodCreateSequenceCaseBody(file, superConstraints, type)»
 				«ENDFOR»
 				}
 			«ENDFOR»
 			if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 		}
+	'''
+	
+	def genMethodCreateSequenceCaseBody(JavaEMFFile file, Map<IConstraint, IConstraint> superConstraints, EClass type) '''
+		«var contexts = type.accessedConstraints.entrySet.sortBy(e|e.key.name)»
+		«IF contexts.size > 1»
+			«var ctxi = 0»
+			«FOR ctx: contexts /* ITERATOR j-  */»
+				«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value.sortBy(e|e.contextName) SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
+					«genMethodCreateSequenceCall(file, superConstraints, type, ctx.key)»
+				}
+			«ENDFOR»
+			else break;
+		«ELSEIF contexts.size == 1»
+			«genMethodCreateSequenceCall(file, superConstraints, type, contexts.head.key)»
+		«ELSE»
+			// error, no contexts. 
+		«ENDIF»
+	'''
+	
+	def genMethodCreateSequenceCall(JavaEMFFile file, Map<IConstraint, IConstraint> superConstraints, EClass type, IConstraint key) '''
+		«val superConstraint = superConstraints.get(key)»
+		«val constraint = if(superConstraint == null) key else superConstraint»
+		sequence_«constraint.simpleName»(context, («file.importedGenTypeName(type)») semanticObject); 
+		return; 
 	'''
 	
 	def genMethodSequence(JavaEMFFile file, IGrammarConstraintProvider.IConstraint c) '''
