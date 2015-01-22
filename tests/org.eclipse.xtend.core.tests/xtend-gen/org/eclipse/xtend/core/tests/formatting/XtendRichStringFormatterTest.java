@@ -556,4 +556,45 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpression(_builder);
   }
+  
+  @Test
+  public void bug450458() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Test def testDefaultPackageLeadingWhitespace() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("<<>>");
+    _builder.newLine();
+    _builder.append("\t\t\t   \t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("class Foo implements java.io.Serializable {}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```.assertIsOrganizedTo(```");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("import java.io.Serializable");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("class Foo implements Serializable {}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("```)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedRichString(_builder);
+  }
 }

@@ -289,5 +289,23 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
+	
+	@Test def bug450458() {
+		assertFormattedRichString('''
+			class Foo {
+				@Test def testDefaultPackageLeadingWhitespace() {
+					```
+						<<>>
+						   	
+						class Foo implements java.io.Serializable {}
+					```.assertIsOrganizedTo(```
+						import java.io.Serializable
+						
+						class Foo implements Serializable {}
+					```)
+				}
+			}
+		''')
+	}
 }
 	 
