@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
@@ -259,10 +260,13 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 			}
 		}
 		IFile file = getSelectedFile();
-		if (file != null && file.exists() && file.isSynchronized(1)) {
-			openEditorAction.setInputFile(file);
+		if (file != null) {
 			try {
-				return Files.readStreamIntoString(file.getContents());
+				file.refreshLocal(1, new NullProgressMonitor());
+				if (file.exists()) {
+					openEditorAction.setInputFile(file);
+					return Files.readStreamIntoString(file.getContents());
+				}
 			} catch (CoreException e) {
 				throw new WrappedRuntimeException(e);
 			}

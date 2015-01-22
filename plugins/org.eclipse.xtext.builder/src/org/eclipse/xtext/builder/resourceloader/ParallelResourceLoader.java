@@ -214,9 +214,7 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 				Path path = new Path(uri.toPlatformString(true));
 				IFile file = root.getFile(path);
 				try {
-					if(!file.isSynchronized(IResource.DEPTH_ZERO)) {
-						file.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
-					}
+					file.refreshLocal(IResource.DEPTH_ZERO, new NullProgressMonitor());
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
 				}
