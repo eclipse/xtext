@@ -24,7 +24,6 @@ import org.eclipse.xtend.core.richstring.ProcessedRichStringPackage;
  * An implementation of the model object '<em><b>Else Start</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

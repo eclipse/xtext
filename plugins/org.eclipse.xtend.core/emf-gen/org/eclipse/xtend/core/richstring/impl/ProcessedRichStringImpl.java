@@ -34,7 +34,6 @@ import org.eclipse.xtend.core.xtend.RichString;
  * An implementation of the model object '<em><b>Processed Rich String</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

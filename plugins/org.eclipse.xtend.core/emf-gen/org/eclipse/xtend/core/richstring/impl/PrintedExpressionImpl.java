@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XExpression;
  * An implementation of the model object '<em><b>Printed Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

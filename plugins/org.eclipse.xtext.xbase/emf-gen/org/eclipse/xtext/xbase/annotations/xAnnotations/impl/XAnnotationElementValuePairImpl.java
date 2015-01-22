@@ -28,7 +28,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
  * An implementation of the model object '<em><b>XAnnotation Element Value Pair</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -31,7 +31,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
  * An implementation of the model object '<em><b>Type Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  * An implementation of the model object '<em><b>Rich String If</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

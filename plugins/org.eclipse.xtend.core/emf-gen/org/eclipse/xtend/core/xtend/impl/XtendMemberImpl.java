@@ -34,7 +34,6 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  * An implementation of the model object '<em><b>Member</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
