@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>XList Literal</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

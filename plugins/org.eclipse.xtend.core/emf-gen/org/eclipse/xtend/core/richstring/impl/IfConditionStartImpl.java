@@ -35,7 +35,6 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
  * An implementation of the model object '<em><b>If Condition Start</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

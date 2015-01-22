@@ -25,7 +25,6 @@ import org.eclipse.xtext.xtype.XtypePackage;
  * An implementation of the model object '<em><b>XComputed Type Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

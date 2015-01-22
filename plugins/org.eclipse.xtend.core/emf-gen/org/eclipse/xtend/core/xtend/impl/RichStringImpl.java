@@ -18,7 +18,6 @@ import org.eclipse.xtext.xbase.impl.XBlockExpressionImplCustom;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Rich String</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

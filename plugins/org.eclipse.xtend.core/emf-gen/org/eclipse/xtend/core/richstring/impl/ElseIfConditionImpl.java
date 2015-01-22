@@ -26,7 +26,6 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf;
  * An implementation of the model object '<em><b>Else If Condition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
