@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.persistence
 
+import java.io.DataOutputStream
 import java.io.IOException
 import java.io.ObjectOutputStream
 import java.io.OutputStream
@@ -14,17 +15,21 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import org.apache.log4j.Logger
 import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel
+import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class ResourceStorageWritable {
+@FinalFieldsConstructor class ResourceStorageWritable {
 	
 	static val LOG = Logger.getLogger(ResourceStorageWritable)
 	
-	OutputStream out
+	val OutputStream out
+	val boolean storeNodeModel
 	
 	def void writeResource(StorageAwareResource resource) {
 		if (resource.isLoadedFromStorage) {
@@ -45,41 +50,68 @@ import org.eclipse.xtend.lib.annotations.Data
 	 * Overriding methods should first delegate to super before adding their own entries.
 	 */
 	protected def void writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) {
-		writeContents(resource, zipOut)
-		writeResourceDescription(resource, zipOut)
+		zipOut.putNextEntry(new ZipEntry("emf-contents"))
+		try {
+			writeContents(resource, zipOut)
+		} finally {
+			zipOut.closeEntry
+		}
+		
+		zipOut.putNextEntry(new ZipEntry("resource-description"))
+		try {
+			writeResourceDescription(resource, zipOut)
+		} finally {
+			zipOut.closeEntry
+		}
+		
+		if (storeNodeModel) {
+			zipOut.putNextEntry(new ZipEntry("node-model"))
+			try {
+				writeNodeModel(resource, zipOut)
+			} finally {
+				zipOut.closeEntry
+			}
+		}
 	}
 	
-	protected def void writeContents(StorageAwareResource storageAwareResource, ZipOutputStream zipOut) {
-		zipOut.putNextEntry(new ZipEntry("emf-contents"))
-		val out = new BinaryResourceImpl.EObjectOutputStream(zipOut, emptyMap) {
+	
+	protected def void writeContents(StorageAwareResource storageAwareResource, OutputStream outputStream) {
+		val out = new BinaryResourceImpl.EObjectOutputStream(outputStream, emptyMap) {
+			
 			override writeURI(URI uri, String fragment) throws IOException {
 				val fullURI = uri.appendFragment(fragment)
 				val uriToWrite = storageAwareResource.portableURIs.toPortableURI(storageAwareResource, fullURI) ?: fullURI
 				super.writeURI(uriToWrite.trimFragment, uriToWrite.fragment)
 			}
+			
+			override saveEObject(InternalEObject internalEObject, Check check) throws IOException {
+				super.saveEObject(internalEObject, check)
+				handleSaveEObject(internalEObject, this)
+			}
+	
+			
 		}
 		try {
 			out.saveResource(storageAwareResource)
 		} finally {
 			out.flush
 		}
-		zipOut.closeEntry
 	}
 	
+	protected def void handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) {
+		// do nothing
+	}
 	
-	
-	protected def void writeResourceDescription(StorageAwareResource resource, ZipOutputStream zipOut) {
-		zipOut.putNextEntry(new ZipEntry("resource-description"))
+	protected def void writeResourceDescription(StorageAwareResource resource, OutputStream outputStream) {
 		val description = resource.resourceServiceProvider.resourceDescriptionManager.getResourceDescription(resource);
 		val serializableDescription = SerializableResourceDescription.createCopy(description)
 		convertExternalURIsToPortableURIs(serializableDescription, resource) 
-		val out = new ObjectOutputStream(zipOut);
+		val out = new ObjectOutputStream(outputStream);
 		try {
 			out.writeObject(serializableDescription);
 		} finally {
 			out.flush
 		}
-		zipOut.closeEntry
 	}
 	
 	def protected void convertExternalURIsToPortableURIs(SerializableResourceDescription description, StorageAwareResource resource) {
@@ -88,6 +120,14 @@ import org.eclipse.xtend.lib.annotations.Data
 				(ref as SerializableReferenceDescription).targetEObjectUri = resource.portableURIs.toPortableURI(resource, ref.targetEObjectUri)
 			}
 		}
+	}
+	
+	protected def writeNodeModel(StorageAwareResource resource, OutputStream outputStream) {
+		val out = new DataOutputStream(outputStream);
+		val serializableNodeModel = new SerializableNodeModel(resource)
+		val conversionContext = new SerializationConversionContext(resource)
+		serializableNodeModel.writeObjectData(out, conversionContext)
+		out.flush
 	}
 	
 }

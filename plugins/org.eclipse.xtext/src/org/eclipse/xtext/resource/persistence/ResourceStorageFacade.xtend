@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,6 +28,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	@Inject IContextualOutputConfigurationProvider outputConfigurationProvider
 	@Inject Provider<AbstractFileSystemAccess2> fileSystemAccessProvider
 	
+	@Accessors boolean storeNodeModel = false
 	/**
 	 * @return whether the given resource should be loaded from stored resource state
 	 */
@@ -74,11 +76,11 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	}
 	
 	override def ResourceStorageLoadable createResourceStorageLoadable(InputStream in) {
-		return new ResourceStorageLoadable(in)
+		return new ResourceStorageLoadable(in, isStoreNodeModel)
 	}
 	
 	override def ResourceStorageWritable createResourceStorageWritable(OutputStream out) {
-		return new ResourceStorageWritable(out)
+		return new ResourceStorageWritable(out, isStoreNodeModel)
 	}
 	
 	/**
