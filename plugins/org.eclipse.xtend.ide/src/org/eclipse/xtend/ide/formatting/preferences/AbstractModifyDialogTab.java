@@ -74,7 +74,7 @@ public abstract class AbstractModifyDialogTab extends ModifyDialogTabPage {
 	 * Does nothing, not a java formatterPreview.<br>
 	 * See {@link #doCreatePreviewPane(Composite, int)} for information about Xtend formatterPreview.
 	 * 
-	 * @returns <code>null</code> not a Java Dialog
+	 * @return <code>null</code> not a Java Dialog
 	 */
 	@Override
 	protected JavaPreview doCreateJavaPreview(Composite parent) {
