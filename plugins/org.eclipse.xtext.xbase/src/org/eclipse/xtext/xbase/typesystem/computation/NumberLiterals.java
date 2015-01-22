@@ -51,11 +51,18 @@ public class NumberLiterals {
 				throw new IllegalArgumentException("Invalid number literal base " + getBase(literal));
 		}
 	}
-
+	
 	public String toJavaLiteral(XNumberLiteral literal) {
-		if (getJavaType(literal).isPrimitive())
-			return literal.getValue().replace("_", "").replace("#", "");
-		else
+		return toJavaLiteral(literal, true);
+	}
+	
+	public String toJavaLiteral(XNumberLiteral literal, boolean removeUnderscores) {
+		if (getJavaType(literal).isPrimitive()) {
+			if (removeUnderscores)
+				return literal.getValue().replace("_", "").replace("#", "");
+			else
+				return literal.getValue().replace("#", "");
+		} else
 			return null;
 	}
 
