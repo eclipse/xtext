@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.formatting
 
 /**
- * @Deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys}
+ * @deprecated use {@link org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys}
  */
 @Deprecated class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
 	public static val preserveBlankLines = new IntegerKey("preserve.blank.lines", 1)
