@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IFileSystemAccessExtension3;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -60,6 +62,9 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   
   @Inject
   private Provider<AbstractFileSystemAccess2> fileSystemAccessProvider;
+  
+  @Accessors
+  private boolean storeNodeModel = false;
   
   /**
    * @return whether the given resource should be loaded from stored resource state
@@ -147,12 +152,14 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   
   @Override
   public ResourceStorageLoadable createResourceStorageLoadable(final InputStream in) {
-    return new ResourceStorageLoadable(in);
+    boolean _isStoreNodeModel = this.isStoreNodeModel();
+    return new ResourceStorageLoadable(in, _isStoreNodeModel);
   }
   
   @Override
   public ResourceStorageWritable createResourceStorageWritable(final OutputStream out) {
-    return new ResourceStorageWritable(out);
+    boolean _isStoreNodeModel = this.isStoreNodeModel();
+    return new ResourceStorageWritable(out, _isStoreNodeModel);
   }
   
   /**
@@ -237,5 +244,14 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     String _plus = ("." + _lastSegment);
     String _plus_1 = (_plus + "bin");
     return _trimSegments.appendSegment(_plus_1);
+  }
+  
+  @Pure
+  public boolean isStoreNodeModel() {
+    return this.storeNodeModel;
+  }
+  
+  public void setStoreNodeModel(final boolean storeNodeModel) {
+    this.storeNodeModel = storeNodeModel;
   }
 }

@@ -18,9 +18,13 @@ import java.util.zip.ZipInputStream;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -29,17 +33,47 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadable {
-  public BatchLinkableResourceStorageLoadable(final InputStream in) {
-    super(in);
-  }
-  
   @Override
   protected void loadEntries(final StorageAwareResource resource, final ZipInputStream zipIn) {
     super.loadEntries(resource, zipIn);
     if ((resource instanceof BatchLinkableResource)) {
       this.readAssociationsAdapter(((BatchLinkableResource)resource), zipIn);
+    }
+  }
+  
+  @Override
+  protected Object handleLoadEObject(final InternalEObject loaded, final BinaryResourceImpl.EObjectInputStream input) {
+    try {
+      boolean _xblockexpression = false;
+      {
+        super.handleLoadEObject(loaded, input);
+        boolean _xifexpression = false;
+        boolean _readBoolean = input.readBoolean();
+        if (_readBoolean) {
+          boolean _xblockexpression_1 = false;
+          {
+            final String doc = input.readString();
+            EList<Adapter> _eAdapters = loaded.eAdapters();
+            DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
+            final Procedure1<DocumentationAdapter> _function = new Procedure1<DocumentationAdapter>() {
+              @Override
+              public void apply(final DocumentationAdapter it) {
+                it.setDocumentation(doc);
+              }
+            };
+            DocumentationAdapter _doubleArrow = ObjectExtensions.<DocumentationAdapter>operator_doubleArrow(_documentationAdapter, _function);
+            _xblockexpression_1 = _eAdapters.add(_doubleArrow);
+          }
+          _xifexpression = _xblockexpression_1;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      return Boolean.valueOf(_xblockexpression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
@@ -125,5 +159,9 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public BatchLinkableResourceStorageLoadable(final InputStream in, final boolean storeNodeModel) {
+    super(in, storeNodeModel);
   }
 }

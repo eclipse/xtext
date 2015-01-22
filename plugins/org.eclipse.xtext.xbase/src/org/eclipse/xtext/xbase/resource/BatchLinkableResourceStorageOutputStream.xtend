@@ -9,33 +9,44 @@ package org.eclipse.xtext.xbase.resource
 
 import com.google.common.collect.Sets
 import java.io.ObjectOutputStream
-import java.io.OutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xtype.XComputedTypeReference
 
 /**
  * @author Sven Efftinge 
  */
-class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
+@FinalFieldsConstructor class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
 	
 	private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable)
 	
-	new(OutputStream out) {
-		super(out)
-	}
-
 	override protected writeEntries(StorageAwareResource resource, ZipOutputStream zipOut) {
 		// make sure lazy type references are computed
 		resource.allContents.filter(XComputedTypeReference).forEach[ type ]
 		super.writeEntries(resource, zipOut)
 		if (resource instanceof BatchLinkableResource) {
 			writeAssociationsAdapter(resource, zipOut)
+		}
+	}
+	
+	override protected handleSaveEObject(InternalEObject object, BinaryResourceImpl.EObjectOutputStream out) {
+		super.handleSaveEObject(object, out)
+		// store Documentation adapters
+		val documentationAdapter = object.eAdapters.filter(DocumentationAdapter).head
+		if (documentationAdapter!=null) {
+			out.writeBoolean(true)
+			out.writeString(documentationAdapter.documentation)
+		} else {
+			out.writeBoolean(false)
 		}
 	}
 	
