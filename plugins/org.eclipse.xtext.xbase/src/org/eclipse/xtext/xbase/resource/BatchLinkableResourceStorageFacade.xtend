@@ -24,11 +24,11 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 	@Inject extension FileLocations fileLocations
 	
 	override createResourceStorageLoadable(InputStream in) {
-		return new BatchLinkableResourceStorageLoadable(in)
+		return new BatchLinkableResourceStorageLoadable(in, isStoreNodeModel)
 	}
 	
 	override createResourceStorageWritable(OutputStream out) {
-		return new BatchLinkableResourceStorageWritable(out)
+		return new BatchLinkableResourceStorageWritable(out, isStoreNodeModel)
 	}
 	
 	override protected getSourceContainerURI(StorageAwareResource resource) {
