@@ -39,7 +39,6 @@ public interface CompilationUnit extends AnnotationTarget {
 	/**
 	 * Returns the file handle for the given compilation unit.
 	 * 
-	 * @param compilationUnit the compilation unit
 	 * @return the file handle for the given compilation unit.
 	 * @see Path
 	 */
