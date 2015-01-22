@@ -523,12 +523,10 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	}
 
 	private void syncIfNecessary(IFile result, IProgressMonitor progressMonitor) {
-		if (!result.isSynchronized(IResource.DEPTH_ZERO)) {
-			try {
-				result.refreshLocal(IResource.DEPTH_ZERO, progressMonitor);
-			} catch (CoreException c) {
-				// ignore
-			}
+		try {
+			result.refreshLocal(IResource.DEPTH_ZERO, progressMonitor);
+		} catch (CoreException c) {
+			// ignore
 		}
 	}
 
