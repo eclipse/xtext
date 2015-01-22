@@ -26,10 +26,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -43,13 +47,10 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 /**
  * @author Sven Efftinge
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class BatchLinkableResourceStorageWritable extends ResourceStorageWritable {
   private final static Logger LOG = Logger.getLogger(BatchLinkableResourceStorageWritable.class);
-  
-  public BatchLinkableResourceStorageWritable(final OutputStream out) {
-    super(out);
-  }
   
   @Override
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) {
@@ -65,6 +66,26 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
     super.writeEntries(resource, zipOut);
     if ((resource instanceof BatchLinkableResource)) {
       this.writeAssociationsAdapter(((BatchLinkableResource)resource), zipOut);
+    }
+  }
+  
+  @Override
+  protected void handleSaveEObject(final InternalEObject object, final BinaryResourceImpl.EObjectOutputStream out) {
+    try {
+      super.handleSaveEObject(object, out);
+      EList<Adapter> _eAdapters = object.eAdapters();
+      Iterable<DocumentationAdapter> _filter = Iterables.<DocumentationAdapter>filter(_eAdapters, DocumentationAdapter.class);
+      final DocumentationAdapter documentationAdapter = IterableExtensions.<DocumentationAdapter>head(_filter);
+      boolean _notEquals = (!Objects.equal(documentationAdapter, null));
+      if (_notEquals) {
+        out.writeBoolean(true);
+        String _documentation = documentationAdapter.getDocumentation();
+        out.writeString(_documentation);
+      } else {
+        out.writeBoolean(false);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
@@ -207,5 +228,9 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
       _xblockexpression = _eResource_1.getURIFragment(obj);
     }
     return _xblockexpression;
+  }
+  
+  public BatchLinkableResourceStorageWritable(final OutputStream out, final boolean storeNodeModel) {
+    super(out, storeNodeModel);
   }
 }

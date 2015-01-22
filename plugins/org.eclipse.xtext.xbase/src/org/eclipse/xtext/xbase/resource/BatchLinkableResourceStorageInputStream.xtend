@@ -8,26 +8,36 @@
 package org.eclipse.xtext.xbase.resource
 
 import com.google.common.collect.Sets
-import java.io.InputStream
 import java.io.ObjectInputStream
 import java.util.Map
 import java.util.Set
 import java.util.zip.ZipInputStream
+import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
-class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadable {
-	
-	new(InputStream in) {
-		super(in)
-	}
+@FinalFieldsConstructor class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadable {
 	
 	override protected loadEntries(StorageAwareResource resource, ZipInputStream zipIn) {
 		super.loadEntries(resource, zipIn)
 		if (resource instanceof BatchLinkableResource) {
 			readAssociationsAdapter(resource, zipIn)
+		}
+	}
+	
+	override protected handleLoadEObject(InternalEObject loaded, EObjectInputStream input) {
+		super.handleLoadEObject(loaded, input)
+		// load documentation adapters
+		if (input.readBoolean) {
+			val doc = input.readString
+			loaded.eAdapters += new DocumentationAdapter => [
+				documentation = doc
+			]
 		}
 	}
 	

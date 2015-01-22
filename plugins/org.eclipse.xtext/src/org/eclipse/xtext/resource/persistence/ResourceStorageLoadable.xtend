@@ -7,22 +7,31 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.persistence
 
+import com.google.common.io.CharStreams
+import java.io.DataInputStream
 import java.io.IOException
 import java.io.InputStream
+import java.io.InputStreamReader
 import java.io.ObjectInputStream
 import java.util.zip.ZipInputStream
 import org.apache.log4j.Logger
+import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl
-import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel
+import org.eclipse.xtext.nodemodel.serialization.DeserializationConversionContext
+import org.eclipse.xtext.parser.ParseResult
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data class ResourceStorageLoadable {
+@FinalFieldsConstructor class ResourceStorageLoadable {
 	
 	static val LOG = Logger.getLogger(ResourceStorageLoadable)
 	
-	InputStream in
+	val InputStream in
+	val boolean storeNodeModel
 	
 	protected def void loadIntoResource(StorageAwareResource resource) {
 		try {
@@ -45,21 +54,20 @@ import org.eclipse.xtend.lib.annotations.Data
 	 * Overriding methods should first delegate to super before adding their own entries.
 	 */
 	protected def void loadEntries(StorageAwareResource resource, ZipInputStream zipIn) {
+		zipIn.nextEntry
 		readContents(resource, zipIn)
+
+		zipIn.nextEntry
 		readResourceDescription(resource, zipIn)
+
+		if (storeNodeModel) {
+			zipIn.nextEntry
+			readNodeModel(resource, zipIn)
+		}
 	}
 	
-	protected def void readResourceDescription(StorageAwareResource resource, ZipInputStream zipIn) {
-		zipIn.nextEntry
-		val objectIn = new ObjectInputStream(zipIn)
-		val description = objectIn.readObject as SerializableResourceDescription
-		description.updateResourceURI(resource.URI)
-		resource.resourceDescription = description
-	}
-	
-	protected def void readContents(StorageAwareResource resource, ZipInputStream zipIn) {
-		zipIn.nextEntry
-		val in = new BinaryResourceImpl.EObjectInputStream(zipIn, emptyMap) {
+	protected def void readContents(StorageAwareResource resource, InputStream inputStream) {
+		val in = new BinaryResourceImpl.EObjectInputStream(inputStream, emptyMap) {
 			
 			override readCompressedInt() throws IOException {
 				//HACK! null resource set, to avoid usage of resourceSet's package registry
@@ -67,8 +75,45 @@ import org.eclipse.xtend.lib.annotations.Data
 				super.readCompressedInt()
 			}
 			
+			override loadEObject() throws IOException {
+				val result = super.loadEObject()
+				handleLoadEObject(result, this)
+				return result
+			}
+	
+			
 		}
 		in.loadResource(resource)
+	}
+	
+	protected def handleLoadEObject(InternalEObject loaded, EObjectInputStream input) {
+	}
+	
+	protected def void readResourceDescription(StorageAwareResource resource, InputStream inputStream) {
+		val objectIn = new ObjectInputStream(inputStream)
+		val description = objectIn.readObject as SerializableResourceDescription
+		description.updateResourceURI(resource.URI)
+		resource.resourceDescription = description
+	}
+	
+	protected def void readNodeModel(StorageAwareResource resource, InputStream inputStream) {
+		try {
+			val serializableNodeModel = new SerializableNodeModel(resource)
+			// if this is a synthetic resource (i.e. tests or so, don't load the node model)
+			if (!resource.resourceSet.URIConverter.exists(resource.URI, resource.resourceSet.loadOptions)) {
+				LOG.info("Skipping loading node model for synthetic resource "+resource.URI)
+				return;
+			}
+			val stream = resource.resourceSet.URIConverter.createInputStream(resource.URI)
+			val in = new InputStreamReader(stream, resource.encoding)
+			val completeContent = CharStreams.toString(in)
+			val deserializationContext = new DeserializationConversionContext(resource, completeContent)
+			val dataIn = new DataInputStream(inputStream)
+			serializableNodeModel.readObjectData(dataIn, deserializationContext)
+			resource.parseResult = new ParseResult(resource.contents.head,serializableNodeModel.root, deserializationContext.hasErrors)
+		} catch (IOException e) {
+			LOG.error(e.message, e)
+		}
 	}
 	
 }

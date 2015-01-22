@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.persistence;
 
 import com.google.common.base.Objects;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -16,8 +17,11 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
-import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.nodemodel.impl.SerializableNodeModel;
+import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -27,18 +31,18 @@ import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@Data
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class ResourceStorageWritable {
   private final static Logger LOG = Logger.getLogger(ResourceStorageWritable.class);
   
   private final OutputStream out;
+  
+  private final boolean storeNodeModel;
   
   public void writeResource(final StorageAwareResource resource) {
     try {
@@ -72,16 +76,39 @@ public class ResourceStorageWritable {
    * Overriding methods should first delegate to super before adding their own entries.
    */
   protected void writeEntries(final StorageAwareResource resource, final ZipOutputStream zipOut) {
-    this.writeContents(resource, zipOut);
-    this.writeResourceDescription(resource, zipOut);
-  }
-  
-  protected void writeContents(final StorageAwareResource storageAwareResource, final ZipOutputStream zipOut) {
     try {
       ZipEntry _zipEntry = new ZipEntry("emf-contents");
       zipOut.putNextEntry(_zipEntry);
+      try {
+        this.writeContents(resource, zipOut);
+      } finally {
+        zipOut.closeEntry();
+      }
+      ZipEntry _zipEntry_1 = new ZipEntry("resource-description");
+      zipOut.putNextEntry(_zipEntry_1);
+      try {
+        this.writeResourceDescription(resource, zipOut);
+      } finally {
+        zipOut.closeEntry();
+      }
+      if (this.storeNodeModel) {
+        ZipEntry _zipEntry_2 = new ZipEntry("node-model");
+        zipOut.putNextEntry(_zipEntry_2);
+        try {
+          this.writeNodeModel(resource, zipOut);
+        } finally {
+          zipOut.closeEntry();
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void writeContents(final StorageAwareResource storageAwareResource, final OutputStream outputStream) {
+    try {
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
-      final BinaryResourceImpl.EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(zipOut, _emptyMap) {
+      final BinaryResourceImpl.EObjectOutputStream out = new BinaryResourceImpl.EObjectOutputStream(outputStream, _emptyMap) {
         @Override
         public void writeURI(final URI uri, final String fragment) throws IOException {
           final URI fullURI = uri.appendFragment(fragment);
@@ -98,34 +125,39 @@ public class ResourceStorageWritable {
           String _fragment = uriToWrite.fragment();
           super.writeURI(_trimFragment, _fragment);
         }
+        
+        @Override
+        public void saveEObject(final InternalEObject internalEObject, final BinaryResourceImpl.EObjectOutputStream.Check check) throws IOException {
+          super.saveEObject(internalEObject, check);
+          ResourceStorageWritable.this.handleSaveEObject(internalEObject, this);
+        }
       };
       try {
         out.saveResource(storageAwareResource);
       } finally {
         out.flush();
       }
-      zipOut.closeEntry();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  protected void writeResourceDescription(final StorageAwareResource resource, final ZipOutputStream zipOut) {
+  protected void handleSaveEObject(final InternalEObject object, final BinaryResourceImpl.EObjectOutputStream out) {
+  }
+  
+  protected void writeResourceDescription(final StorageAwareResource resource, final OutputStream outputStream) {
     try {
-      ZipEntry _zipEntry = new ZipEntry("resource-description");
-      zipOut.putNextEntry(_zipEntry);
       IResourceServiceProvider _resourceServiceProvider = resource.getResourceServiceProvider();
       IResourceDescription.Manager _resourceDescriptionManager = _resourceServiceProvider.getResourceDescriptionManager();
       final IResourceDescription description = _resourceDescriptionManager.getResourceDescription(resource);
       final SerializableResourceDescription serializableDescription = SerializableResourceDescription.createCopy(description);
       this.convertExternalURIsToPortableURIs(serializableDescription, resource);
-      final ObjectOutputStream out = new ObjectOutputStream(zipOut);
+      final ObjectOutputStream out = new ObjectOutputStream(outputStream);
       try {
         out.writeObject(serializableDescription);
       } finally {
         out.flush();
       }
-      zipOut.closeEntry();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -147,48 +179,21 @@ public class ResourceStorageWritable {
     }
   }
   
-  public ResourceStorageWritable(final OutputStream out) {
+  protected void writeNodeModel(final StorageAwareResource resource, final OutputStream outputStream) {
+    try {
+      final DataOutputStream out = new DataOutputStream(outputStream);
+      final SerializableNodeModel serializableNodeModel = new SerializableNodeModel(resource);
+      final SerializationConversionContext conversionContext = new SerializationConversionContext(resource);
+      serializableNodeModel.writeObjectData(out, conversionContext);
+      out.flush();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public ResourceStorageWritable(final OutputStream out, final boolean storeNodeModel) {
     super();
     this.out = out;
-  }
-  
-  @Override
-  @Pure
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((this.out== null) ? 0 : this.out.hashCode());
-    return result;
-  }
-  
-  @Override
-  @Pure
-  public boolean equals(final Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    ResourceStorageWritable other = (ResourceStorageWritable) obj;
-    if (this.out == null) {
-      if (other.out != null)
-        return false;
-    } else if (!this.out.equals(other.out))
-      return false;
-    return true;
-  }
-  
-  @Override
-  @Pure
-  public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("out", this.out);
-    return b.toString();
-  }
-  
-  @Pure
-  public OutputStream getOut() {
-    return this.out;
+    this.storeNodeModel = storeNodeModel;
   }
 }

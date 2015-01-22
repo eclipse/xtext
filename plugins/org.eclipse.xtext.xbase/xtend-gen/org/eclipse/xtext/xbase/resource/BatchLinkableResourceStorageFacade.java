@@ -38,12 +38,14 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
   
   @Override
   public ResourceStorageLoadable createResourceStorageLoadable(final InputStream in) {
-    return new BatchLinkableResourceStorageLoadable(in);
+    boolean _isStoreNodeModel = this.isStoreNodeModel();
+    return new BatchLinkableResourceStorageLoadable(in, _isStoreNodeModel);
   }
   
   @Override
   public ResourceStorageWritable createResourceStorageWritable(final OutputStream out) {
-    return new BatchLinkableResourceStorageWritable(out);
+    boolean _isStoreNodeModel = this.isStoreNodeModel();
+    return new BatchLinkableResourceStorageWritable(out, _isStoreNodeModel);
   }
   
   @Override
