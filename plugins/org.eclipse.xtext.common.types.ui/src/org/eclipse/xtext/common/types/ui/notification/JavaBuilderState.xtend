@@ -106,11 +106,11 @@ class JavaBuilderState {
 
 	/**
 	 * <p>
-	 * Return types which are direct children of a given package.
+	 * Returns TypeNames which are direct children of a given package.
 	 * </p>
 	 */
-	def dispatch getQualifiedTypeNames(IPackageFragment it) {
-		val qualifiedTypeNames = <PrimaryTypeToType>newLinkedHashSet
+	def dispatch TypeNames getQualifiedTypeNames(IPackageFragment it) {
+		val qualifiedTypeNames = new TypeNames
 		val references = getReferences
 		if (references == null) {
 			return qualifiedTypeNames
@@ -130,7 +130,7 @@ class JavaBuilderState {
 						val typePackageName = qualifiedPath.removeLastSegments(1).toString.replace('/', '.')
 						if (packageName.equals(typePackageName)) {
 							val simpleTypeName = qualifiedPath.lastSegment.toString
-							qualifiedTypeNames += typeLocator.getQualifiedTypeNames(packageName, simpleTypeName)
+							qualifiedTypeNames.addAll(typeLocator.getQualifiedTypeNames(packageName, simpleTypeName))
 						}
 					}
 				}
@@ -138,13 +138,12 @@ class JavaBuilderState {
 		}
 		qualifiedTypeNames
 	}
-
 	/**
 	 * <p>
-	 * Return types which are children of a given compilation unit.
+	 * Returns TypeNames which are direct children of a given CompilationUnit.
 	 * </p>
 	 */
-	def dispatch getQualifiedTypeNames(ICompilationUnit it) {
+	def dispatch TypeNames getQualifiedTypeNames(ICompilationUnit it) {
 		typeLocator.getQualifiedTypeNames(packageName, simplePrimaryTypeName)
 	}
 
@@ -155,17 +154,17 @@ class JavaBuilderState {
 		}
 	}
 
-	private def getQualifiedTypeNames(String typeLocator, String packageName, String simpleName) {
-		val qualifiedTypeNames = <PrimaryTypeToType>newLinkedHashSet
+	private def TypeNames getQualifiedTypeNames(String typeLocator, String packageName, String simpleName) {
+		val qualifiedTypeNames = new TypeNames
 		val primaryTypeFqn = getQualifedTypeName(packageName, simpleName)
 		val typeNames = state?.getDefinedTypeNamesFor(typeLocator)
 		if (typeNames == null) {
-			return <PrimaryTypeToType>newLinkedHashSet(new PrimaryTypeToType(primaryTypeFqn, primaryTypeFqn))
+			return new TypeNames => [addTypeName(primaryTypeFqn, primaryTypeFqn)]
 		}
 		
 		typeNames.forEach [
 			val typeName =  getQualifedTypeName(packageName, new String(it))
-			qualifiedTypeNames += new PrimaryTypeToType(primaryTypeFqn, typeName)
+			qualifiedTypeNames.addTypeName(typeName, primaryTypeFqn)
 		]
 		qualifiedTypeNames
 	}
