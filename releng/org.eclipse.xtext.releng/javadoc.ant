@@ -1,4 +1,4 @@
-<project name="javadoc-project">
+<project name="javadoc-project" default="create.javadoc.eclipse">
 	<target name="create.javadoc">
 		<buckminster.targetPlatformLocation property="target.platform.location" />
 		<property name="projectName" value="Xtext" />
@@ -10,12 +10,41 @@
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 		<condition property="build.stable" value="yes">
-				<matches string="${build.id}" pattern="[S|R](d)*" />
+			<matches string="${build.id}" pattern="[S|R](d)*" />
 		</condition>
 		<condition property="generate.javadoc" value="yes">
 			<or>
-				<istrue value="${build.stable}"/>
-				<istrue value="${force.javadoc}"/>
+				<istrue value="${build.stable}" />
+				<istrue value="${force.javadoc}" />
+			</or>
+		</condition>
+
+		<echo message="Source code location ${sourcesLocation}" />
+		<echo message="Javadoc output location ${output}" />
+		<echo message="Target platform path ${targetPlatform}" />
+
+		<echo message="Build id ${build.id}" />
+		<echo message="Build stable? ${build.stable}" />
+		<echo message="Force javadoc generation? ${force.javadoc}" />
+		<echo message="Do javadoc generation unless: ${skip.javadoc} is set." />
+		<antcall target="-generate.javadoc" inheritall="true" />
+	</target>
+
+	<target name="create.javadoc.eclipse">
+		<property name="projectName" value="Xtext" />
+
+		<!-- workspace default properties -->
+		<property name="output" value="./javadoc" />
+		<property name="checkoutLocation" value="../.." />
+
+		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
+		<condition property="build.stable" value="yes">
+			<matches string="${build.id}" pattern="[S|R](d)*" />
+		</condition>
+		<condition property="generate.javadoc" value="yes">
+			<or>
+				<istrue value="${build.stable}" />
+				<istrue value="${force.javadoc}" />
 			</or>
 		</condition>
 
@@ -41,19 +70,20 @@
 		</path>
 
 		<!-- Prepare dirs -->
-		<delete dir="${output}" />
+		<delete  dir="${output}" />
 		<mkdir dir="${output}" />
 
-		<javadoc destdir="${output}" use="false" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" Verbose="no" windowtitle="${projectName} Documentation">
+		<javadoc destdir="${output}" use="false" Encoding="ISO-8859-1" maxmemory="1024m" source="1.6" useexternalfile="true" author="true" version="true" Verbose="no" windowtitle="${projectName} Documentation">
 			<fileset dir="${sourcesLocation}" defaultexcludes="true">
 				<include name="**/org.eclipse.xtext*/**/org/eclipse/xtext/**/*.java" />
-				<include name="**/org.eclipse.xtext*/**/org/eclipse/xtend/lib/**/*.java" />
+				<include name="**/org.eclipse.xtend.li*/**/org/eclipse/xtend/lib/**/*.java" />
 				<exclude name="**/org.eclipse.xtend.standalone.maven/**" />
-				<!--
+				<exclude name="**/*.gwt/**/*" />
+				<exclude name="**/target/**/*" />
 				<exclude name="**/testdata/**" />
 				<exclude name="**/packrat/**" />
+				<exclude name="**/deprecated/**" />
 				<exclude name="**/antlr/internal/**" />
-				-->
 			</fileset>
 
 			<tag name="generated" description="EMF generated code" />
@@ -65,7 +95,7 @@
 			<tag name="noreference" description="This method is not intended to be referenced by clients." />
 			<tag name="nooverride" description="This method is not intended to be extended (re-implement with a call to the overridden parent) or re-implemented (with no call to the overridden parent) by clients." />
 		</javadoc>
-		
+
 		<!-- Compress the output javadoc in a zip file -->
 		<zip destfile="${output}/javadoc.zip" basedir="${output}">
 			<exclude name="*.zip" />

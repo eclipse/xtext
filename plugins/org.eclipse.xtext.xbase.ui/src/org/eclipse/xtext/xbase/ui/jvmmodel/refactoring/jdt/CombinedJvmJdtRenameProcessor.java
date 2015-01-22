@@ -40,8 +40,7 @@ import com.google.inject.Inject;
 
 /**
  * Bundles multiple {@link JavaRenameProcessor}s and combines their results.
- * Unfortunately {@link
- * org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor.setRefactoring(ProcessorBasedRefactoring)} is
+ * Unfortunately {@link org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor#setRefactoring(org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring)} is
  * package private. So we have to set the refactoring from the other side. Note that this requires a refactoring
  * that is aware of that fact, e.g. {@link ChangeCombiningRenameRefactoring}.
  *  

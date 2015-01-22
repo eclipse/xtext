@@ -180,7 +180,6 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 
 	/**
 	 * @since 2.3
-	 * @param call - FeatureCall may be null
 	 */
 	protected String computeSignature(EObject astElement, EObject referencedElement) {
 		String imageTag =  hoverSignatureProvider.getImageTag(referencedElement);

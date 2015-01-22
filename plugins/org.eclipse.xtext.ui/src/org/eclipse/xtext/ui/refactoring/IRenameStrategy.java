@@ -46,7 +46,7 @@ public interface IRenameStrategy {
 		/**
 		 * @return an {@link IRenameStrategy} to rename the given target object 
 		 * 	or null if the element should be skipped (e.g. XtendConstructor)
-		 * @throw {@link NoSuchStrategyException} with a reason when refactoring is forbidden. 
+		 * @throws NoSuchStrategyException with a reason when refactoring is forbidden. 
 		 */
 		IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException;
 		

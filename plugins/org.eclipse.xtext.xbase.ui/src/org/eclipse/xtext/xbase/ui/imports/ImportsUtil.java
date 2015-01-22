@@ -43,10 +43,8 @@ public class ImportsUtil {
 	 * 
 	 * @param xtextResource
 	 *            {@link XtextResource} to work with
-	 * @param offset
-	 *            start of the range to inspect
-	 * @param endOffset
-	 *            end of the range to inspect
+	 * @param textRegion
+	 *            start and end of the range to inspect
 	 * @return {@link Triple} where the first element holds the Type imports, the second staticImport and the third
 	 *         static extension Imports
 	 */
