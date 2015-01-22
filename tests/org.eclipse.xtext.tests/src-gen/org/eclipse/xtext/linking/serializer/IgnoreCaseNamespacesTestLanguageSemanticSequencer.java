@@ -30,25 +30,16 @@ public class IgnoreCaseNamespacesTestLanguageSemanticSequencer extends AbstractI
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IgnoreCaseLinkingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseLinkingTestPackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Element(context, (Element) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == IgnoreCaseNamespacesTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseNamespacesTestPackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Import(context, (Import) semanticObject); 
+				return; 
 			case IgnoreCaseNamespacesTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

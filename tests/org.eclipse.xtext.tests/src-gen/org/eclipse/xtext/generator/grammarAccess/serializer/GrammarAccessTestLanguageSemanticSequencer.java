@@ -27,27 +27,16 @@ public class GrammarAccessTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == AsubpackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case AsubpackagePackage.AMODEL:
-				if(context == grammarAccess.getRootRule()) {
-					sequence_Root(context, (AModel) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Root(context, (AModel) semanticObject); 
+				return; 
 			case AsubpackagePackage.ATYPE:
-				if(context == grammarAccess.getATypeRule() ||
-				   context == grammarAccess.getTypeRule()) {
-					sequence_AType(context, (AType) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AType(context, (AType) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == SubsubpackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SubsubpackagePackage.ANOTHER_TYPE:
-				if(context == grammarAccess.getAnotherTypeRule() ||
-				   context == grammarAccess.getTypeRule()) {
-					sequence_AnotherType(context, (AnotherType) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AnotherType(context, (AnotherType) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

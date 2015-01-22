@@ -27,11 +27,8 @@ public class LiveContainerTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == LiveContainerTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case LiveContainerTestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

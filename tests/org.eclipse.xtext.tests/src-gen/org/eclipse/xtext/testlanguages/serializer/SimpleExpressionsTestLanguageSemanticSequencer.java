@@ -26,39 +26,14 @@ public class SimpleExpressionsTestLanguageSemanticSequencer extends AbstractDele
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SimpleExpressionsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SimpleExpressionsPackage.ATOM:
-				if(context == grammarAccess.getAdditionRule() ||
-				   context == grammarAccess.getAdditionAccess().getOpValuesAction_1_0() ||
-				   context == grammarAccess.getAtomRule() ||
-				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0() ||
-				   context == grammarAccess.getParensRule() ||
-				   context == grammarAccess.getSequenceRule() ||
-				   context == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0() ||
-				   context == grammarAccess.getTermRule()) {
-					sequence_Atom(context, (Atom) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Atom(context, (Atom) semanticObject); 
+				return; 
 			case SimpleExpressionsPackage.OP:
-				if(context == grammarAccess.getAdditionRule() ||
-				   context == grammarAccess.getAdditionAccess().getOpValuesAction_1_0() ||
-				   context == grammarAccess.getMultiplicationRule() ||
-				   context == grammarAccess.getMultiplicationAccess().getOpValuesAction_1_0() ||
-				   context == grammarAccess.getParensRule() ||
-				   context == grammarAccess.getSequenceRule() ||
-				   context == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0() ||
-				   context == grammarAccess.getTermRule()) {
-					sequence_Addition_Multiplication(context, (Op) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Addition_Multiplication(context, (Op) semanticObject); 
+				return; 
 			case SimpleExpressionsPackage.SEQUENCE:
-				if(context == grammarAccess.getSequenceRule() ||
-				   context == grammarAccess.getSequenceAccess().getSequenceExpressionsAction_1_0()) {
-					sequence_Sequence(context, (Sequence) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Sequence(context, (Sequence) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

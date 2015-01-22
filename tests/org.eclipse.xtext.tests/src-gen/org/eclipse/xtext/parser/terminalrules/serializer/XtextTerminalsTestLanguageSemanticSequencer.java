@@ -132,43 +132,20 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 				}
 				else break;
 			case XtextTerminalsTestLanguagePackage.CROSS_REFERENCE:
-				if(context == grammarAccess.getAssignableAlternativesRule() ||
-				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getAssignableTerminalRule() ||
-				   context == grammarAccess.getCrossReferenceRule() ||
-				   context == grammarAccess.getParenthesizedAssignableElementRule()) {
-					sequence_CrossReference(context, (CrossReference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_CrossReference(context, (CrossReference) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.ENUM_LITERAL_DECLARATION:
-				if(context == grammarAccess.getEnumLiteralDeclarationRule() ||
-				   context == grammarAccess.getEnumLiteralsRule() ||
-				   context == grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0()) {
-					sequence_EnumLiteralDeclaration(context, (EnumLiteralDeclaration) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EnumLiteralDeclaration(context, (EnumLiteralDeclaration) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.ENUM_RULE:
-				if(context == grammarAccess.getAbstractRuleRule() ||
-				   context == grammarAccess.getEnumRuleRule()) {
-					sequence_EnumRule(context, (EnumRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EnumRule(context, (EnumRule) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.GENERATED_METAMODEL:
-				if(context == grammarAccess.getAbstractMetamodelDeclarationRule() ||
-				   context == grammarAccess.getGeneratedMetamodelRule()) {
-					sequence_GeneratedMetamodel(context, (GeneratedMetamodel) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_GeneratedMetamodel(context, (GeneratedMetamodel) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.GRAMMAR:
-				if(context == grammarAccess.getGrammarRule()) {
-					sequence_Grammar(context, (Grammar) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Grammar(context, (Grammar) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.GROUP:
 				if(context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
@@ -250,19 +227,11 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 				}
 				else break;
 			case XtextTerminalsTestLanguagePackage.PARSER_RULE:
-				if(context == grammarAccess.getAbstractRuleRule() ||
-				   context == grammarAccess.getParserRuleRule()) {
-					sequence_ParserRule(context, (ParserRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ParserRule(context, (ParserRule) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.REFERENCED_METAMODEL:
-				if(context == grammarAccess.getAbstractMetamodelDeclarationRule() ||
-				   context == grammarAccess.getReferencedMetamodelRule()) {
-					sequence_ReferencedMetamodel(context, (ReferencedMetamodel) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ReferencedMetamodel(context, (ReferencedMetamodel) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.RULE_CALL:
 				if(context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
@@ -296,18 +265,11 @@ public class XtextTerminalsTestLanguageSemanticSequencer extends AbstractDelegat
 				}
 				else break;
 			case XtextTerminalsTestLanguagePackage.TERMINAL_RULE:
-				if(context == grammarAccess.getAbstractRuleRule() ||
-				   context == grammarAccess.getTerminalRuleRule()) {
-					sequence_TerminalRule(context, (TerminalRule) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TerminalRule(context, (TerminalRule) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.TYPE_REF:
-				if(context == grammarAccess.getTypeRefRule()) {
-					sequence_TypeRef(context, (TypeRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TypeRef(context, (TypeRef) semanticObject); 
+				return; 
 			case XtextTerminalsTestLanguagePackage.UNTIL_TOKEN:
 				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||

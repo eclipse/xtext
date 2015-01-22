@@ -32,45 +32,23 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug288432TestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug288432TestPackage.BODY:
-				if(context == grammarAccess.getBodyRule()) {
-					sequence_Body(context, (Body) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Body(context, (Body) semanticObject); 
+				return; 
 			case Bug288432TestPackage.FOO:
-				if(context == grammarAccess.getFooRule()) {
-					sequence_Foo(context, (Foo) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Foo(context, (Foo) semanticObject); 
+				return; 
 			case Bug288432TestPackage.MY_ELEMENT:
-				if(context == grammarAccess.getContentRule() ||
-				   context == grammarAccess.getMyElementRule() ||
-				   context == grammarAccess.getParameterObjectRule()) {
-					sequence_MyElement(context, (MyElement) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MyElement(context, (MyElement) semanticObject); 
+				return; 
 			case Bug288432TestPackage.MY_INT:
-				if(context == grammarAccess.getMyIntRule() ||
-				   context == grammarAccess.getParameterObjectRule()) {
-					sequence_MyInt(context, (MyInt) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MyInt(context, (MyInt) semanticObject); 
+				return; 
 			case Bug288432TestPackage.PARAMETER:
-				if(context == grammarAccess.getParameterRule()) {
-					sequence_Parameter(context, (Parameter) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Parameter(context, (Parameter) semanticObject); 
+				return; 
 			case Bug288432TestPackage.PARAMETER_REF:
-				if(context == grammarAccess.getParameterObjectRule() ||
-				   context == grammarAccess.getParameterRefRule()) {
-					sequence_ParameterRef(context, (ParameterRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ParameterRef(context, (ParameterRef) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -35,11 +35,8 @@ public class CommentAssociationTestLanguageSemanticSequencer extends AbstractDel
 				}
 				else break;
 			case CommentAssociationPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -27,11 +27,8 @@ public class QualifiedNameTestLanguageSemanticSequencer extends AbstractDelegati
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == QualifiedNamePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QualifiedNamePackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Element(context, (Element) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

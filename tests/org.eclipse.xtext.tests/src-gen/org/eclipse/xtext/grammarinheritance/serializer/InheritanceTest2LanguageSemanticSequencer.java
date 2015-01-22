@@ -26,19 +26,13 @@ public class InheritanceTest2LanguageSemanticSequencer extends InheritanceTestLa
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == InheritanceTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case InheritanceTestPackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Element(context, (Element) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == InheritanceTest2Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case InheritanceTest2Package.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -29,23 +29,14 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ImportedURIPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ImportedURIPackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Import(context, (Import) semanticObject); 
+				return; 
 			case ImportedURIPackage.MAIN:
-				if(context == grammarAccess.getMainRule()) {
-					sequence_Main(context, (Main) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Main(context, (Main) semanticObject); 
+				return; 
 			case ImportedURIPackage.TYPE:
-				if(context == grammarAccess.getTypeRule()) {
-					sequence_Type(context, (Type) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Type(context, (Type) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

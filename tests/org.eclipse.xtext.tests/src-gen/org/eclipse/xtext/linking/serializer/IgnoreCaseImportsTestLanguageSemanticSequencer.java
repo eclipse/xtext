@@ -30,25 +30,16 @@ public class IgnoreCaseImportsTestLanguageSemanticSequencer extends AbstractIgno
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IgnoreCaseImportsTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseImportsTestPackage.IMPORT:
-				if(context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Import(context, (Import) semanticObject); 
+				return; 
 			case IgnoreCaseImportsTestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == IgnoreCaseLinkingTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IgnoreCaseLinkingTestPackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Element(context, (Element) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

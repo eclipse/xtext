@@ -31,37 +31,20 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug311337Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug311337Package.CHILD:
-				if(context == grammarAccess.getChildRule()) {
-					sequence_Child(context, (Child) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Child(context, (Child) semanticObject); 
+				return; 
 			case Bug311337Package.DEFINITION:
-				if(context == grammarAccess.getDefinitionRule()) {
-					sequence_Definition(context, (Definition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Definition(context, (Definition) semanticObject); 
+				return; 
 			case Bug311337Package.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case Bug311337Package.NESTED_REF:
-				if(context == grammarAccess.getReferenceRule() ||
-				   context == grammarAccess.getReferenceAccess().getNestedRefLeftAction_2_1()) {
-					sequence_Reference(context, (NestedRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Reference(context, (NestedRef) semanticObject); 
+				return; 
 			case Bug311337Package.REFERENCE:
-				if(context == grammarAccess.getReferenceRule() ||
-				   context == grammarAccess.getReferenceAccess().getNestedRefLeftAction_2_1()) {
-					sequence_Reference(context, (Reference) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Reference(context, (Reference) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

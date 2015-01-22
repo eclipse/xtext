@@ -42,116 +42,53 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FormattertestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FormattertestlanguagePackage.ASSIGN:
-				if(context == grammarAccess.getAssignRule() ||
-				   context == grammarAccess.getLineRule()) {
-					sequence_Assign(context, (Assign) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Assign(context, (Assign) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.DATATYPES:
-				if(context == grammarAccess.getDatatypesRule() ||
-				   context == grammarAccess.getLineRule()) {
-					sequence_Datatypes(context, (Datatypes) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Datatypes(context, (Datatypes) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.DECL:
-				if(context == grammarAccess.getDeclRule() ||
-				   context == grammarAccess.getLineRule()) {
-					sequence_Decl(context, (Decl) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Decl(context, (Decl) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.ENUMERATION:
-				if(context == grammarAccess.getEnumerationRule() ||
-				   context == grammarAccess.getLineRule()) {
-					sequence_Enumeration(context, (Enumeration) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Enumeration(context, (Enumeration) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.FQN_OBJ:
-				if(context == grammarAccess.getFqnObjRule() ||
-				   context == grammarAccess.getLineRule()) {
-					sequence_FqnObj(context, (FqnObj) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_FqnObj(context, (FqnObj) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.FQN_REF:
-				if(context == grammarAccess.getFqnRefRule() ||
-				   context == grammarAccess.getLineRule()) {
-					sequence_FqnRef(context, (FqnRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_FqnRef(context, (FqnRef) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.METH:
-				if(context == grammarAccess.getLineRule() ||
-				   context == grammarAccess.getMethRule()) {
-					sequence_Meth(context, (Meth) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Meth(context, (Meth) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.PARAM:
-				if(context == grammarAccess.getParamRule()) {
-					sequence_Param(context, (Param) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Param(context, (Param) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.SPACE:
-				if(context == grammarAccess.getLineRule() ||
-				   context == grammarAccess.getSpaceRule()) {
-					sequence_Space(context, (Space) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Space(context, (Space) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.SUPPRESSED_HIDDEN:
-				if(context == grammarAccess.getLineRule() ||
-				   context == grammarAccess.getSuppressedHiddenRule()) {
-					sequence_SuppressedHidden(context, (SuppressedHidden) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SuppressedHidden(context, (SuppressedHidden) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_ID:
-				if(context == grammarAccess.getSuppressedHiddenSubRule() ||
-				   context == grammarAccess.getSuppressedHiddenSubIDRule()) {
-					sequence_SuppressedHiddenSubID(context, (SuppressedHiddenSubID) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SuppressedHiddenSubID(context, (SuppressedHiddenSubID) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.SUPPRESSED_HIDDEN_SUB_SUB:
-				if(context == grammarAccess.getSuppressedHiddenSubRule() ||
-				   context == grammarAccess.getSuppressedHiddenSubSubRule()) {
-					sequence_SuppressedHiddenSubSub(context, (SuppressedHiddenSubSub) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SuppressedHiddenSubSub(context, (SuppressedHiddenSubSub) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.TEST_INDENTATION:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getTestIndentationRule()) {
-					sequence_TestIndentation(context, (TestIndentation) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TestIndentation(context, (TestIndentation) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.TEST_LINEWRAP:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getTestLinewrapRule()) {
-					sequence_TestLinewrap(context, (TestLinewrap) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TestLinewrap(context, (TestLinewrap) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.TEST_LINEWRAP_MIN_MAX:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getTestLinewrapMinMaxRule()) {
-					sequence_TestLinewrapMinMax(context, (TestLinewrapMinMax) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TestLinewrapMinMax(context, (TestLinewrapMinMax) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.WRAPPING_DATA_TYPE_TEST:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getWrappingDataTypeTestRule()) {
-					sequence_WrappingDataTypeTest(context, (WrappingDataTypeTest) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_WrappingDataTypeTest(context, (WrappingDataTypeTest) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -25,19 +25,11 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FormattertestlanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FormattertestlanguagePackage.ID_LIST:
-				if(context == grammarAccess.getIDListRule() ||
-				   context == grammarAccess.getRootRule()) {
-					sequence_IDList(context, (IDList) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_IDList(context, (IDList) semanticObject); 
+				return; 
 			case FormattertestlanguagePackage.KW_LIST:
-				if(context == grammarAccess.getKWListRule() ||
-				   context == grammarAccess.getRootRule()) {
-					sequence_KWList(context, (KWList) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_KWList(context, (KWList) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

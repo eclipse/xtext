@@ -28,36 +28,20 @@ public class SimpleBacktrackingBug325745TestLanguageSemanticSequencer extends Ba
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BacktrackingBug325745TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BacktrackingBug325745TestLanguagePackage.DATA_TYPE:
-				if(context == grammarAccess.getDataTypeRule()) {
-					sequence_DataType(context, (DataType) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DataType(context, (DataType) semanticObject); 
+				return; 
 			case BacktrackingBug325745TestLanguagePackage.ELEMENT:
-				if(context == grammarAccess.getElementRule()) {
-					sequence_Element(context, (Element) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Element(context, (Element) semanticObject); 
+				return; 
 			case BacktrackingBug325745TestLanguagePackage.EXPRESSION:
-				if(context == grammarAccess.getExpressionRule()) {
-					sequence_Expression(context, (Expression) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Expression(context, (Expression) semanticObject); 
+				return; 
 			case BacktrackingBug325745TestLanguagePackage.MODEL:
-				if(context == grammarAccess.getDelegateModelRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case BacktrackingBug325745TestLanguagePackage.SIMPLE_TERM:
-				if(context == grammarAccess.getSimpleTermRule()) {
-					sequence_SimpleTerm(context, (SimpleTerm) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleTerm(context, (SimpleTerm) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

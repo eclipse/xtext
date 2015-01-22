@@ -61,19 +61,11 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_CHILD1:
-				if(context == grammarAccess.getNestedTypeChildRule() ||
-				   context == grammarAccess.getNestedTypeChild1Rule()) {
-					sequence_NestedTypeChild1(context, (NestedTypeChild1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NestedTypeChild1(context, (NestedTypeChild1) semanticObject); 
+				return; 
 			case ContextFinderTestPackage.NESTED_TYPE_CHILD2:
-				if(context == grammarAccess.getNestedTypeChildRule() ||
-				   context == grammarAccess.getNestedTypeChild2Rule()) {
-					sequence_NestedTypeChild2(context, (NestedTypeChild2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NestedTypeChild2(context, (NestedTypeChild2) semanticObject); 
+				return; 
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST:
 				if(context == grammarAccess.getNestedTypeRecursiveTest1Rule() ||
 				   context == grammarAccess.getNestedTypeRecursiveTest1Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
@@ -87,17 +79,11 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 				}
 				else break;
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1:
-				if(context == grammarAccess.getNestedTypeRecursiveTest1Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0(context, (NestedTypeRecursiveTest1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NestedTypeRecursiveTest1_NestedTypeRecursiveTest_2_0(context, (NestedTypeRecursiveTest1) semanticObject); 
+				return; 
 			case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST2:
-				if(context == grammarAccess.getNestedTypeRecursiveTest2Access().getNestedTypeRecursiveTestLeftAction_2_0()) {
-					sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0(context, (NestedTypeRecursiveTest2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NestedTypeRecursiveTest2_NestedTypeRecursiveTest_2_0(context, (NestedTypeRecursiveTest2) semanticObject); 
+				return; 
 			case ContextFinderTestPackage.NESTED_TYPE_TEST:
 				if(context == grammarAccess.getNestedTypeTest1Rule()) {
 					sequence_NestedTypeTest1(context, (NestedTypeTest) semanticObject); 
@@ -129,17 +115,11 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 				}
 				else break;
 			case ContextFinderTestPackage.PARENT_REF_TEST1:
-				if(context == grammarAccess.getParentRefTest1Rule()) {
-					sequence_ParentRefTest1(context, (ParentRefTest1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ParentRefTest1(context, (ParentRefTest1) semanticObject); 
+				return; 
 			case ContextFinderTestPackage.PARENT_REF_TEST2:
-				if(context == grammarAccess.getParentRefTest2Rule()) {
-					sequence_ParentRefTest2(context, (ParentRefTest2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ParentRefTest2(context, (ParentRefTest2) semanticObject); 
+				return; 
 			case ContextFinderTestPackage.PARENT_REF_TEST_CHILD:
 				if(context == grammarAccess.getParentRefTestChild1Rule()) {
 					sequence_ParentRefTestChild1(context, (ParentRefTestChild) semanticObject); 

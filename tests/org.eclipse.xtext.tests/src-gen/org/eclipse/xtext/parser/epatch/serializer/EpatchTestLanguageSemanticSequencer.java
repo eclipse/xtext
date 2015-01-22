@@ -55,47 +55,23 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				}
 				else break;
 			case EpatchTestLanguagePackage.EPACKAGE_IMPORT:
-				if(context == grammarAccess.getEPackageImportRule() ||
-				   context == grammarAccess.getImportRule() ||
-				   context == grammarAccess.getModelImportRule()) {
-					sequence_EPackageImport(context, (EPackageImport) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EPackageImport(context, (EPackageImport) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.EPATCH:
-				if(context == grammarAccess.getEPatchRule()) {
-					sequence_EPatch(context, (EPatch) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EPatch(context, (EPatch) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.EXPRESSION_EXECUTABLE:
-				if(context == grammarAccess.getExecutableRule() ||
-				   context == grammarAccess.getExpressionExecutableRule()) {
-					sequence_ExpressionExecutable(context, (ExpressionExecutable) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ExpressionExecutable(context, (ExpressionExecutable) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.EXTENSION_IMPORT:
-				if(context == grammarAccess.getExtensionImportRule() ||
-				   context == grammarAccess.getImportRule()) {
-					sequence_ExtensionImport(context, (ExtensionImport) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ExtensionImport(context, (ExtensionImport) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.JAVA_EXECUTABLE:
-				if(context == grammarAccess.getExecutableRule() ||
-				   context == grammarAccess.getJavaExecutableRule()) {
-					sequence_JavaExecutable(context, (JavaExecutable) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JavaExecutable(context, (JavaExecutable) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.JAVA_IMPORT:
-				if(context == grammarAccess.getImportRule() ||
-				   context == grammarAccess.getJavaImportRule()) {
-					sequence_JavaImport(context, (JavaImport) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_JavaImport(context, (JavaImport) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.LIST_ASSIGNMENT:
 				if(context == grammarAccess.getAssignmentRule()) {
 					sequence_Assignment_BiListAssignment_MonoListAssignment(context, (ListAssignment) semanticObject); 
@@ -111,17 +87,11 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				}
 				else break;
 			case EpatchTestLanguagePackage.MIGRATION:
-				if(context == grammarAccess.getMigrationRule()) {
-					sequence_Migration(context, (Migration) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Migration(context, (Migration) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.NAMED_RESOURCE:
-				if(context == grammarAccess.getNamedResourceRule()) {
-					sequence_NamedResource(context, (NamedResource) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_NamedResource(context, (NamedResource) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.OBJECT_COPY:
 				if(context == grammarAccess.getCreatedObjectRule() ||
 				   context == grammarAccess.getNamedObjectRule()) {
@@ -145,20 +115,11 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				}
 				else break;
 			case EpatchTestLanguagePackage.OBJECT_REF:
-				if(context == grammarAccess.getNamedObjectRule() ||
-				   context == grammarAccess.getObjectRefRule()) {
-					sequence_ObjectRef(context, (ObjectRef) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ObjectRef(context, (ObjectRef) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.RESOURCE_IMPORT:
-				if(context == grammarAccess.getImportRule() ||
-				   context == grammarAccess.getModelImportRule() ||
-				   context == grammarAccess.getResourceImportRule()) {
-					sequence_ResourceImport(context, (ResourceImport) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ResourceImport(context, (ResourceImport) semanticObject); 
+				return; 
 			case EpatchTestLanguagePackage.SINGLE_ASSIGNMENT:
 				if(context == grammarAccess.getAssignmentRule()) {
 					sequence_Assignment_BiSingleAssignment_MonoSingleAssignment(context, (SingleAssignment) semanticObject); 

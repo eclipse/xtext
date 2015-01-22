@@ -29,23 +29,14 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BacktrackingTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BacktrackingTestLanguagePackage.AB:
-				if(context == grammarAccess.getAbRule()) {
-					sequence_Ab(context, (Ab) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Ab(context, (Ab) semanticObject); 
+				return; 
 			case BacktrackingTestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case BacktrackingTestLanguagePackage.XB:
-				if(context == grammarAccess.getXbRule()) {
-					sequence_Xb(context, (Xb) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Xb(context, (Xb) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

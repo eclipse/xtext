@@ -35,73 +35,43 @@ public class EcoreReferenceTestLanguageSemanticSequencer extends AbstractDelegat
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EcorePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcorePackage.EATTRIBUTE:
-				if(context == grammarAccess.getEAttributeRule()) {
-					sequence_EAttribute(context, (EAttribute) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EAttribute(context, (EAttribute) semanticObject); 
+				return; 
 			case EcorePackage.EOBJECT:
-				if(context == grammarAccess.getEObjectRule()) {
-					sequence_EObject(context, (EObject) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_EObject(context, (EObject) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == EcorePerNsURIPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcorePerNsURIPackage.EXTENDS_NS_URIE_OBJECT:
-				if(context == grammarAccess.getExtendsNsURIEObjectRule()) {
-					sequence_ExtendsNsURIEObject(context, (ExtendsNsURIEObject) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ExtendsNsURIEObject(context, (ExtendsNsURIEObject) semanticObject); 
+				return; 
 			case EcorePerNsURIPackage.MY_EATTRIBUTE:
-				if(context == grammarAccess.getMyEAttributeRule()) {
-					sequence_MyEAttribute(context, (EAttribute) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_MyEAttribute(context, (EAttribute) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == EcorePerPlatformPluginPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcorePerPlatformPluginPackage.EXTENDS_PLUGIN_EOBJECT:
-				if(context == grammarAccess.getExtendsPluginEObjectRule()) {
-					sequence_ExtendsPluginEObject(context, (ExtendsPluginEObject) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ExtendsPluginEObject(context, (ExtendsPluginEObject) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == EcorePerPlatformResourcePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcorePerPlatformResourcePackage.EXTENDS_RESOURCE_EOBJECT:
-				if(context == grammarAccess.getExtendsResourceEObjectRule()) {
-					sequence_ExtendsResourceEObject(context, (ExtendsResourceEObject) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ExtendsResourceEObject(context, (ExtendsResourceEObject) semanticObject); 
+				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == EcoreReferencePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EcoreReferencePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case EcoreReferencePackage.MY_NAMED_ELEMENT_01:
-				if(context == grammarAccess.getUnused_01Rule()) {
-					sequence_Unused_01(context, (MyNamedElement_01) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Unused_01(context, (MyNamedElement_01) semanticObject); 
+				return; 
 			case EcoreReferencePackage.MY_NAMED_ELEMENT_02:
-				if(context == grammarAccess.getUnused_02Rule()) {
-					sequence_Unused_02(context, (MyNamedElement_02) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Unused_02(context, (MyNamedElement_02) semanticObject); 
+				return; 
 			case EcoreReferencePackage.MY_NAMED_ELEMENT_03:
-				if(context == grammarAccess.getUnused_03Rule()) {
-					sequence_Unused_03(context, (MyNamedElement_03) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Unused_03(context, (MyNamedElement_03) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -31,35 +31,20 @@ public class FowlerDslTestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == FowlerdslPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case FowlerdslPackage.COMMAND:
-				if(context == grammarAccess.getCommandRule()) {
-					sequence_Command(context, (Command) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Command(context, (Command) semanticObject); 
+				return; 
 			case FowlerdslPackage.EVENT:
-				if(context == grammarAccess.getEventRule()) {
-					sequence_Event(context, (Event) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Event(context, (Event) semanticObject); 
+				return; 
 			case FowlerdslPackage.STATE:
-				if(context == grammarAccess.getStateRule()) {
-					sequence_State(context, (State) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_State(context, (State) semanticObject); 
+				return; 
 			case FowlerdslPackage.STATEMACHINE:
-				if(context == grammarAccess.getStatemachineRule()) {
-					sequence_Statemachine(context, (Statemachine) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Statemachine(context, (Statemachine) semanticObject); 
+				return; 
 			case FowlerdslPackage.TRANSITION:
-				if(context == grammarAccess.getTransitionRule()) {
-					sequence_Transition(context, (Transition) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Transition(context, (Transition) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

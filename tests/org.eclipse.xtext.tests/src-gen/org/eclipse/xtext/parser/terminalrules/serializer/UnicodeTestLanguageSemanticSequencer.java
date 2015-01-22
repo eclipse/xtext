@@ -29,25 +29,14 @@ public class UnicodeTestLanguageSemanticSequencer extends AbstractDelegatingSema
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == UnicodePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case UnicodePackage.GSTRING:
-				if(context == grammarAccess.getAbstractStringRule() ||
-				   context == grammarAccess.getGStringRule()) {
-					sequence_GString(context, (GString) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_GString(context, (GString) semanticObject); 
+				return; 
 			case UnicodePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case UnicodePackage.QUOTED_STRING:
-				if(context == grammarAccess.getAbstractStringRule() ||
-				   context == grammarAccess.getQuotedStringRule()) {
-					sequence_QuotedString(context, (QuotedString) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_QuotedString(context, (QuotedString) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -25,17 +25,11 @@ public abstract class AbstractIndentationAwareTestLanguageSemanticSequencer exte
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == IndentationAwareTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case IndentationAwareTestLanguagePackage.TREE:
-				if(context == grammarAccess.getTreeRule()) {
-					sequence_Tree(context, (Tree) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Tree(context, (Tree) semanticObject); 
+				return; 
 			case IndentationAwareTestLanguagePackage.TREE_NODE:
-				if(context == grammarAccess.getTreeNodeRule()) {
-					sequence_TreeNode(context, (TreeNode) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TreeNode(context, (TreeNode) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

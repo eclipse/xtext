@@ -30,31 +30,17 @@ public class Bug297105TestLanguageSemanticSequencer extends AbstractDelegatingSe
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug297105TestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug297105TestLanguagePackage.EXPRESSION:
-				if(context == grammarAccess.getExpressionRule()) {
-					sequence_Expression(context, (Expression) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Expression(context, (Expression) semanticObject); 
+				return; 
 			case Bug297105TestLanguagePackage.INT_LITERAL:
-				if(context == grammarAccess.getIntLiteralRule() ||
-				   context == grammarAccess.getLiteralRule()) {
-					sequence_IntLiteral(context, (IntLiteral) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_IntLiteral(context, (IntLiteral) semanticObject); 
+				return; 
 			case Bug297105TestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case Bug297105TestLanguagePackage.REAL_LITERAL:
-				if(context == grammarAccess.getLiteralRule() ||
-				   context == grammarAccess.getRealLiteralRule()) {
-					sequence_RealLiteral(context, (RealLiteral) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_RealLiteral(context, (RealLiteral) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

@@ -32,43 +32,23 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ReferenceGrammarPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ReferenceGrammarPackage.ERWACHSENER:
-				if(context == grammarAccess.getErwachsenerRule() ||
-				   context == grammarAccess.getPersonRule()) {
-					sequence_Erwachsener(context, (Erwachsener) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Erwachsener(context, (Erwachsener) semanticObject); 
+				return; 
 			case ReferenceGrammarPackage.FAMILIE:
-				if(context == grammarAccess.getFamilieRule()) {
-					sequence_Familie(context, (Familie) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Familie(context, (Familie) semanticObject); 
+				return; 
 			case ReferenceGrammarPackage.FARBE:
-				if(context == grammarAccess.getFarbeRule()) {
-					sequence_Farbe(context, (Farbe) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Farbe(context, (Farbe) semanticObject); 
+				return; 
 			case ReferenceGrammarPackage.KIND:
-				if(context == grammarAccess.getKindRule() ||
-				   context == grammarAccess.getPersonRule()) {
-					sequence_Kind(context, (Kind) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Kind(context, (Kind) semanticObject); 
+				return; 
 			case ReferenceGrammarPackage.SPIELPLATZ:
-				if(context == grammarAccess.getSpielplatzRule()) {
-					sequence_Spielplatz(context, (Spielplatz) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Spielplatz(context, (Spielplatz) semanticObject); 
+				return; 
 			case ReferenceGrammarPackage.SPIELZEUG:
-				if(context == grammarAccess.getSpielzeugRule()) {
-					sequence_Spielzeug(context, (Spielzeug) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Spielzeug(context, (Spielzeug) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

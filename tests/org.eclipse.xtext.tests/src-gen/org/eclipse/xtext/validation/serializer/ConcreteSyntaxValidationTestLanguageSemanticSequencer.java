@@ -57,23 +57,14 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == CsvalidationtestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case CsvalidationtestPackage.ALT_LIST1:
-				if(context == grammarAccess.getAltList1Rule()) {
-					sequence_AltList1(context, (AltList1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AltList1(context, (AltList1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.ALT_LIST2:
-				if(context == grammarAccess.getAltList2Rule()) {
-					sequence_AltList2(context, (AltList2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AltList2(context, (AltList2) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.ALTERNATIVE_MULTIPLICITIES:
-				if(context == grammarAccess.getAlternativeMultiplicitiesRule()) {
-					sequence_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.ASSIGNED_ACTION:
 				if(context == grammarAccess.getAssignedActionSecondRule()) {
 					sequence_AssignedActionSecond(context, (AssignedAction) semanticObject); 
@@ -89,125 +80,65 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 				}
 				else break;
 			case CsvalidationtestPackage.COMBINATION1:
-				if(context == grammarAccess.getCombination1Rule()) {
-					sequence_Combination1(context, (Combination1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Combination1(context, (Combination1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.COMBINATION2:
-				if(context == grammarAccess.getCombination2Rule()) {
-					sequence_Combination2(context, (Combination2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Combination2(context, (Combination2) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.COMBINATION3:
-				if(context == grammarAccess.getCombination3Rule()) {
-					sequence_Combination3(context, (Combination3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Combination3(context, (Combination3) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.COMBINATION4:
-				if(context == grammarAccess.getCombination4Rule()) {
-					sequence_Combination4(context, (Combination4) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Combination4(context, (Combination4) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.EMPTY_ALTERNATIVE_SUB:
-				if(context == grammarAccess.getStaticSimplificationRule()) {
-					sequence_StaticSimplification(context, (EmptyAlternativeSub) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_StaticSimplification(context, (EmptyAlternativeSub) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.GROUP_MULTIPLICITIES:
-				if(context == grammarAccess.getGroupMultiplicitiesRule()) {
-					sequence_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.HEURISTIC1:
-				if(context == grammarAccess.getHeuristic1Rule()) {
-					sequence_Heuristic1(context, (Heuristic1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Heuristic1(context, (Heuristic1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.LIST1:
-				if(context == grammarAccess.getList1Rule()) {
-					sequence_List1(context, (List1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List1(context, (List1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.LIST2:
-				if(context == grammarAccess.getList2Rule()) {
-					sequence_List2(context, (List2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List2(context, (List2) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.LIST3:
-				if(context == grammarAccess.getList3Rule()) {
-					sequence_List3(context, (List3) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List3(context, (List3) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.LIST4:
-				if(context == grammarAccess.getList4Rule()) {
-					sequence_List4(context, (List4) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List4(context, (List4) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.LIST5:
-				if(context == grammarAccess.getList5Rule()) {
-					sequence_List5(context, (List5) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_List5(context, (List5) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.SIMPLE_ALTERNATIVE:
-				if(context == grammarAccess.getSimpleAlternativeRule()) {
-					sequence_SimpleAlternative(context, (SimpleAlternative) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleAlternative(context, (SimpleAlternative) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.SIMPLE_GROUP:
-				if(context == grammarAccess.getSimpleGroupRule()) {
-					sequence_SimpleGroup(context, (SimpleGroup) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleGroup(context, (SimpleGroup) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.SIMPLE_MULTIPLICITIES:
-				if(context == grammarAccess.getSimpleMultiplicitiesRule()) {
-					sequence_SimpleMultiplicities(context, (SimpleMultiplicities) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SimpleMultiplicities(context, (SimpleMultiplicities) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.STATIC_SIMPLIFICATION:
-				if(context == grammarAccess.getStaticSimplificationRule()) {
-					sequence_StaticSimplification(context, (StaticSimplification) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_StaticSimplification(context, (StaticSimplification) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.TRANSIENT_OBJECT:
-				if(context == grammarAccess.getTransientObjectRule()) {
-					sequence_TransientObject(context, (TransientObject) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TransientObject(context, (TransientObject) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.TRANSIENT_OBJECT_SUB:
-				if(context == grammarAccess.getTransientObjectSubRule()) {
-					sequence_TransientObjectSub(context, (TransientObjectSub) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TransientObjectSub(context, (TransientObjectSub) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1:
-				if(context == grammarAccess.getTransientSerializeables1Rule()) {
-					sequence_TransientSerializeables1(context, (TransientSerializeables1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TransientSerializeables1(context, (TransientSerializeables1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.TWO_VERSION:
 				if(context == grammarAccess.getTwoVersionNo1Rule()) {
 					sequence_TwoVersionNo1(context, (TwoVersion) semanticObject); 
@@ -223,29 +154,17 @@ public class ConcreteSyntaxValidationTestLanguageSemanticSequencer extends Abstr
 				}
 				else break;
 			case CsvalidationtestPackage.UNASSIGNED_ACTION1:
-				if(context == grammarAccess.getUnassignedAction1Rule()) {
-					sequence_UnassignedAction1(context, (UnassignedAction1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnassignedAction1(context, (UnassignedAction1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB:
-				if(context == grammarAccess.getUnassignedAction2Rule()) {
-					sequence_UnassignedAction2(context, (UnassignedAction2Sub) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnassignedAction2(context, (UnassignedAction2Sub) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB1:
-				if(context == grammarAccess.getUnassignedAction3Rule()) {
-					sequence_UnassignedAction3(context, (UnassignedAction2Sub1) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnassignedAction3(context, (UnassignedAction2Sub1) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB2:
-				if(context == grammarAccess.getUnassignedAction3Rule()) {
-					sequence_UnassignedAction3(context, (UnassignedAction2Sub2) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_UnassignedAction3(context, (UnassignedAction2Sub2) semanticObject); 
+				return; 
 			case CsvalidationtestPackage.UNASSIGNED_RULE_CALL1_SUB:
 				if(context == grammarAccess.getUnassignedRuleCall1SubRule()) {
 					sequence_UnassignedRuleCall1Sub(context, (UnassignedRuleCall1Sub) semanticObject); 

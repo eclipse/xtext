@@ -28,19 +28,11 @@ public class ActionTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ActionLangPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ActionLangPackage.CHILD:
-				if(context == grammarAccess.getChildRule() ||
-				   context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getModelAccess().getParentLeftAction_1_0()) {
-					sequence_Child(context, (Child) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Child(context, (Child) semanticObject); 
+				return; 
 			case ActionLangPackage.PARENT:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Parent) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Parent) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

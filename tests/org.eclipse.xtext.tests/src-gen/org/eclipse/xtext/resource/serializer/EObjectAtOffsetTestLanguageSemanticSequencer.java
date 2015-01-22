@@ -41,23 +41,14 @@ public class EObjectAtOffsetTestLanguageSemanticSequencer extends AbstractDelega
 				}
 				else break;
 			case EObjectAtOffsetTestLanguagePackage.FOO:
-				if(context == grammarAccess.getFooRule()) {
-					sequence_Foo(context, (Foo) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Foo(context, (Foo) semanticObject); 
+				return; 
 			case EObjectAtOffsetTestLanguagePackage.FOO_BAR:
-				if(context == grammarAccess.getAbstractBarRule()) {
-					sequence_AbstractBar(context, (FooBar) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AbstractBar(context, (FooBar) semanticObject); 
+				return; 
 			case EObjectAtOffsetTestLanguagePackage.MODEL:
-				if(context == grammarAccess.getModelRule()) {
-					sequence_Model(context, (Model) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Model(context, (Model) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

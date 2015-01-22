@@ -34,58 +34,29 @@ public class HiddenTerminalsTestLanguageSemanticSequencer extends AbstractDelega
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == HiddenTerminalsTestLanguagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case HiddenTerminalsTestLanguagePackage.DATATYPE_HIDDENS:
-				if(context == grammarAccess.getDatatypeHiddensRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_DatatypeHiddens(context, (DatatypeHiddens) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_DatatypeHiddens(context, (DatatypeHiddens) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.HIDING_HIDDENS:
-				if(context == grammarAccess.getHidingHiddensRule()) {
-					sequence_HidingHiddens(context, (HidingHiddens) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_HidingHiddens(context, (HidingHiddens) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.INHERITING_HIDDENS:
-				if(context == grammarAccess.getInheritingHiddensRule() ||
-				   context == grammarAccess.getModelRule()) {
-					sequence_InheritingHiddens(context, (InheritingHiddens) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_InheritingHiddens(context, (InheritingHiddens) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.INHERITING_HIDDENS_CALL:
-				if(context == grammarAccess.getInheritingHiddensCallRule()) {
-					sequence_InheritingHiddensCall(context, (InheritingHiddensCall) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_InheritingHiddensCall(context, (InheritingHiddensCall) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getOverridingHiddensRule()) {
-					sequence_OverridingHiddens(context, (OverridingHiddens) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OverridingHiddens(context, (OverridingHiddens) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.OVERRIDING_HIDDENS_CALL:
-				if(context == grammarAccess.getOverridingHiddensCallRule()) {
-					sequence_OverridingHiddensCall(context, (OverridingHiddensCall) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_OverridingHiddensCall(context, (OverridingHiddensCall) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.WITH_HIDDENS:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getWithHiddensRule()) {
-					sequence_WithHiddens(context, (WithHiddens) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_WithHiddens(context, (WithHiddens) semanticObject); 
+				return; 
 			case HiddenTerminalsTestLanguagePackage.WITHOUT_HIDDENS:
-				if(context == grammarAccess.getModelRule() ||
-				   context == grammarAccess.getWithoutHiddensRule()) {
-					sequence_WithoutHiddens(context, (WithoutHiddens) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_WithoutHiddens(context, (WithoutHiddens) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

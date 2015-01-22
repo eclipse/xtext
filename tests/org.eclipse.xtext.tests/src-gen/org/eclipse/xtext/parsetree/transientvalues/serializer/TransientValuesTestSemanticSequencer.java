@@ -29,26 +29,14 @@ public class TransientValuesTestSemanticSequencer extends AbstractDelegatingSema
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TransientvaluestestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case TransientvaluestestPackage.TEST_LIST:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getTestListRule()) {
-					sequence_TestList(context, (TestList) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TestList(context, (TestList) semanticObject); 
+				return; 
 			case TransientvaluestestPackage.TEST_OPTIONAL:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getTestOptionalRule()) {
-					sequence_TestOptional(context, (TestOptional) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TestOptional(context, (TestOptional) semanticObject); 
+				return; 
 			case TransientvaluestestPackage.TEST_REQUIRED:
-				if(context == grammarAccess.getRootRule() ||
-				   context == grammarAccess.getTestRequiredRule()) {
-					sequence_TestRequired(context, (TestRequired) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TestRequired(context, (TestRequired) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

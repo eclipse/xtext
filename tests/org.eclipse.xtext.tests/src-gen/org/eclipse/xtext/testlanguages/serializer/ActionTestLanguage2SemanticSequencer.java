@@ -25,20 +25,11 @@ public class ActionTestLanguage2SemanticSequencer extends AbstractDelegatingSema
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == ActionLang2Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ActionLang2Package.ORING:
-				if(context == grammarAccess.getORingRule() ||
-				   context == grammarAccess.getORingAccess().getORingDisjunctsAction_1_0()) {
-					sequence_ORing(context, (ORing) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_ORing(context, (ORing) semanticObject); 
+				return; 
 			case ActionLang2Package.VALUE:
-				if(context == grammarAccess.getORingRule() ||
-				   context == grammarAccess.getORingAccess().getORingDisjunctsAction_1_0() ||
-				   context == grammarAccess.getValueRule()) {
-					sequence_Value(context, (Value) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Value(context, (Value) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

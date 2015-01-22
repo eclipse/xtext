@@ -28,17 +28,11 @@ public abstract class AbstractSuperTestLanguageSemanticSequencer extends Abstrac
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SuperPackagePackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SuperPackagePackage.ANOTHER_SUPER_MAIN:
-				if(context == grammarAccess.getAnotherSuperMainRule()) {
-					sequence_AnotherSuperMain(context, (AnotherSuperMain) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_AnotherSuperMain(context, (AnotherSuperMain) semanticObject); 
+				return; 
 			case SuperPackagePackage.SUPER_MAIN:
-				if(context == grammarAccess.getSuperMainRule()) {
-					sequence_SuperMain(context, (SuperMain) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_SuperMain(context, (SuperMain) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
