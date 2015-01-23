@@ -27,7 +27,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("  class XtendA$1 {\n");
 		xpt.append("    void <init>() { // XtendA.java:16, XtendA.xtend:6\n");
 		xpt.append("      void this;\n");
-		xpt.append("      void this$0;\n");
 		xpt.append("    }\n");
 		xpt.append("    \n");
 		xpt.append("    void apply() { // XtendA.java:18, XtendA.xtend:6\n");
@@ -57,7 +56,7 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("    \n");
 		xpt.append("  }\n");
 		xpt.append("}");
-		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
+		Assert.assertEquals(xpt.toString(), debugInfo);
 	}
 
 	@Test
@@ -73,7 +72,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("  class XtendA$1 {\n");
 		xpt.append("    void <init>() { // XtendA.xtend:6\n");
 		xpt.append("      void this;\n");
-		xpt.append("      void this$0;\n");
 		xpt.append("    }\n");
 		xpt.append("    \n");
 		xpt.append("    void apply() { // XtendA.xtend:6\n");
@@ -100,7 +98,7 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("    \n");
 		xpt.append("  }\n");
 		xpt.append("}");
-		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
+		Assert.assertEquals(xpt.toString(), debugInfo);
 	}
 
 	@Test
@@ -116,7 +114,6 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("  class XtendA$1 {\n");
 		xpt.append("    void <init>() { // XtendA.xtend:6\n");
 		xpt.append("      void this;\n");
-		xpt.append("      void this$0;\n");
 		xpt.append("    }\n");
 		xpt.append("    \n");
 		xpt.append("    void apply() { // XtendA.xtend:6\n");
@@ -146,7 +143,7 @@ public class XtendInstallDebugInfoMojoIT {
 		xpt.append("    \n");
 		xpt.append("  }\n");
 		xpt.append("}");
-		Assert.assertEquals(debugInfo, xpt.toString(), debugInfo);
+		Assert.assertEquals(xpt.toString(), debugInfo);
 	}
 
 	@Test

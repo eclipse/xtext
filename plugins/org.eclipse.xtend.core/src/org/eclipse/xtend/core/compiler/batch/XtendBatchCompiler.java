@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.compiler.batch;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static java.util.Arrays.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.File;
@@ -138,8 +137,6 @@ public class XtendBatchCompiler {
 	protected boolean writeStorageFiles = false;
 	protected ClassLoader currentClassLoader = getClass().getClassLoader();
 
-	private URI baseURI;
-
 	public void setCurrentClassLoader(ClassLoader currentClassLoader) {
 		this.currentClassLoader = currentClassLoader;
 	}
@@ -254,10 +251,6 @@ public class XtendBatchCompiler {
 	 */
 	public void setBootClassPath(String bootClassPath) {
 		this.bootClassPath = bootClassPath;
-	}
-	
-	public void setBasePath(String basePath) {
-		this.baseURI = URI.createFileURI(new File(basePath).getAbsolutePath());
 	}
 
 	public void setOutputPath(String outputPath) {
@@ -412,10 +405,7 @@ public class XtendBatchCompiler {
 				loadXtendFiles(resourceSet);
 				File sourceDirectory = createStubs(resourceSet);
 				if (!preCompileStubs(sourceDirectory, classDirectory)) {
-					log.warn("Compilation of stubs had errors.");
-				}
-				if (!preCompileJava(sourceDirectory, classDirectory)) {
-					log.debug("Compilation of Java code against stubs had errors. This is expected and usually is not a probblem.");
+					log.debug("Compilation of stubs and existing Java code had errors. This is expected and usually is not a probblem.");
 				}
 			} finally {
 				compilerPhases.setIndexing(resourceSet, false);
@@ -453,26 +443,15 @@ public class XtendBatchCompiler {
 			}
 		});
 		for (String src : pathes.keySet()) {
-			URI srcURI = URI.createFileURI(src + "/");
-			URI relativeSrcURI = null;
-			if(baseURI != null) {
-				relativeSrcURI = srcURI.deresolve(baseURI);
-			} else {
-				relativeSrcURI = srcURI;
-			}
-			URI platformResourceURI = null;
-			if(relativeSrcURI.isRelative()) {
-				platformResourceURI = URI.createPlatformResourceURI(relativeSrcURI.toString(), true);
-			} else {
-				String identifier = Joiner.on("_").join(relativeSrcURI.segments());
-				platformResourceURI = URI.createPlatformResourceURI(identifier + "/", true);
-			}
-			resourceSet.getURIConverter().getURIMap().put(platformResourceURI, srcURI);
+			URI baseDir = URI.createFileURI(src + "/");
+			String identifier = Joiner.on("_").join(baseDir.segments());
+			URI platformResourceURI = URI.createPlatformResourceURI(identifier + "/", true);
+			resourceSet.getURIConverter().getURIMap().put(platformResourceURI, baseDir);
 			for (URI uri : pathes.get(src)) {
 				if (log.isDebugEnabled()) {
 					log.debug("load xtend file '" + uri + "'");
 				}
-				URI uriToUse = uri.replacePrefix(srcURI, platformResourceURI);
+				URI uriToUse = uri.replacePrefix(baseDir, platformResourceURI);
 				resourceSet.getResource(uriToUse, true);
 			}
 		}
@@ -498,14 +477,6 @@ public class XtendBatchCompiler {
 	}
 
 	protected boolean preCompileStubs(File tmpSourceDirectory, File classDirectory) {
-		return preCompile(tmpSourceDirectory, singletonList(tmpSourceDirectory.toString()), getClassPathEntries());
-	}	
-	
-	protected boolean preCompileJava(File tmpSourceDirectory, File classDirectory) {
-		return preCompile(classDirectory, getSourcePathDirectories(), concat(singletonList(tmpSourceDirectory.toString()), getClassPathEntries()));
-	}
-	
-	protected boolean preCompile(File classDirectory, Iterable<String> sourcePathDirectories, Iterable<String> classPathEntries) {
 		List<String> commandLine = Lists.newArrayList();
 		// todo args
 		if (isVerbose()) {
@@ -515,12 +486,13 @@ public class XtendBatchCompiler {
 			commandLine.add("-bootclasspath \"" + concat(File.pathSeparator, getBootClassPathEntries()) + "\"");
 		}
 		if (!isEmpty(classPath)) {
-			commandLine.add("-cp \"" + Joiner.on(File.pathSeparator).join(classPathEntries) + "\"");
+			commandLine.add("-cp \"" + concat(File.pathSeparator, getClassPathEntries()) + "\"");
 		}
 		commandLine.add("-d \"" + classDirectory.toString() + "\"");
 		commandLine.add("-" + getComplianceLevel());
 		commandLine.add("-proceedOnError");
-		List<String> sourceDirectories = newArrayList(sourcePathDirectories);
+		List<String> sourceDirectories = newArrayList(getSourcePathDirectories());
+		sourceDirectories.add(tmpSourceDirectory.toString());
 		commandLine.add(concat(" ", transform(sourceDirectories, new Function<String, String>() {
 			@Override
 			public String apply(String path) {
