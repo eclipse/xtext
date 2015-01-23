@@ -58,11 +58,11 @@ public class XtendStructureViewBuilder implements XtextFileAwareStructureViewBui
       final XtendJvmStructureViewBuilder xtendJvmStructureViewBuilder = ObjectExtensions.<XtendJvmStructureViewBuilder>operator_doubleArrow(_get_1, _function_1);
       StructureView _createStructureView = xtendSourceStructureViewBuilder.createStructureView(fileEditor, project);
       StructureViewComposite.StructureViewDescriptor _structureViewDescriptor = new StructureViewComposite.StructureViewDescriptor(
-        "Xtend Model View", _createStructureView, 
+        "Xtend View", _createStructureView, 
         null);
       StructureView _createStructureView_1 = xtendJvmStructureViewBuilder.createStructureView(fileEditor, project);
       StructureViewComposite.StructureViewDescriptor _structureViewDescriptor_1 = new StructureViewComposite.StructureViewDescriptor(
-        "JVM Model View", _createStructureView_1, 
+        "JVM View", _createStructureView_1, 
         null);
       _xblockexpression = new StructureViewComposite(_structureViewDescriptor, _structureViewDescriptor_1);
     }
