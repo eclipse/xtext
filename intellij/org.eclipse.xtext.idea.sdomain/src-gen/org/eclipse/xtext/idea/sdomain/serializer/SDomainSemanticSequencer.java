@@ -32,47 +32,23 @@ public class SDomainSemanticSequencer extends AbstractDelegatingSemanticSequence
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SDomainPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SDomainPackage.DATATYPE:
-				if(context == grammarAccess.getDatatypeRule() ||
-				   context == grammarAccess.getElementRule() ||
-				   context == grammarAccess.getTypeRule()) {
-					sequence_Datatype(context, (Datatype) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Datatype(context, (Datatype) semanticObject); 
+				return; 
 			case SDomainPackage.ENTITY:
-				if(context == grammarAccess.getElementRule() ||
-				   context == grammarAccess.getEntityRule() ||
-				   context == grammarAccess.getTypeRule()) {
-					sequence_Entity(context, (Entity) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Entity(context, (Entity) semanticObject); 
+				return; 
 			case SDomainPackage.FILE:
-				if(context == grammarAccess.getFileRule()) {
-					sequence_File(context, (File) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_File(context, (File) semanticObject); 
+				return; 
 			case SDomainPackage.IMPORT:
-				if(context == grammarAccess.getElementRule() ||
-				   context == grammarAccess.getImportRule()) {
-					sequence_Import(context, (Import) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Import(context, (Import) semanticObject); 
+				return; 
 			case SDomainPackage.NAMESPACE:
-				if(context == grammarAccess.getElementRule() ||
-				   context == grammarAccess.getNamespaceRule()) {
-					sequence_Namespace(context, (Namespace) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Namespace(context, (Namespace) semanticObject); 
+				return; 
 			case SDomainPackage.PROPERTY:
-				if(context == grammarAccess.getPropertyRule()) {
-					sequence_Property(context, (Property) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_Property(context, (Property) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}

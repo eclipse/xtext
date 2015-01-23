@@ -11,7 +11,6 @@ import org.eclipse.xtext.idea.sdomain.sDomain.SDomainPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Datatype</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtext.idea.tests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtend.idea"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtend.core.tests"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.eclipse.xtend.lib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

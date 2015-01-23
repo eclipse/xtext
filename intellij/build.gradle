@@ -1,8 +1,11 @@
+import java.nio.file.Files
+
 apply from: 'prepareIntellij.gradle'
 
 allprojects {
 	apply plugin: 'base'
 	apply plugin: 'maven'
+	apply plugin: 'eclipse'
 	group = 'org.eclipse.xtext'
 	version = '2.8.0-SNAPSHOT'
 	
@@ -58,10 +61,10 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 def intellijPluginProjects = [
 	project(':org.eclipse.xtext.idea'),
 	project(':org.eclipse.xtext.xbase.idea'),
-	project(':org.eclipse.xtext.idea.builder'),
 	project(':org.eclipse.xtext.idea.sdomain.idea'),
 	project(':org.eclipse.xtext.idea.example.entities.idea'),
 	project(':org.eclipse.xtend.idea'),
+	project(':org.eclipse.xtext.idea.common.types.tests')
 ]
 configure(intellijPluginProjects) {
 
@@ -94,3 +97,52 @@ task createIntellijRepository(type: Copy) {
 	from intellijPluginProjects*.zip
 	into "$rootDir/build/intellijRepository"
 }
+
+configure(intellijPluginProjects) {
+	ext.sandboxDirName = 'sandbox'
+	ext.sandboxDir = file(sandboxDirName)
+	ext.sandboxPluginsDir = file("${sandboxDir}/plugins")
+	ext.sandboxPluginDir = file("${sandboxPluginsDir}/${project.name}")
+	
+	task createSandbox {
+		onlyIf {!sandboxDir.exists()}
+		doLast {
+			sandboxPluginDir.mkdirs()
+
+			Files.createSymbolicLink(file("${sandboxPluginDir}/classes").toPath(), project.eclipse.classpath.defaultOutputDir.toPath())
+			Files.createSymbolicLink(file("${sandboxPluginDir}/META-INF").toPath(), file("META-INF").toPath())
+			
+			File pluginLibDir = file("${sandboxPluginDir}/lib")
+			pluginLibDir.mkdirs();
+
+			configurations.runtime.allDependencies.withType(ExternalDependency) { dependency ->
+				copy {
+					from configurations.runtime.fileCollection(dependency)
+					into pluginLibDir
+				}
+			}
+
+			configurations.runtime.allDependencies.withType(ProjectDependency) {
+				Files.createSymbolicLink(file("${pluginLibDir}/${it.dependencyProject.name}").toPath(), it.dependencyProject.eclipse.classpath.defaultOutputDir.toPath())
+			}
+
+			configurations.provided.allDependencies.withType(ProjectDependency).findAll{intellijPluginProjects.contains(it.dependencyProject)}.each {
+				Files.createSymbolicLink(file("${sandboxPluginsDir}/${it.dependencyProject.name}").toPath(), it.dependencyProject.sandboxPluginDir.toPath())
+			}
+		}
+	}
+
+	task cleanSandbox {
+		onlyIf {sandboxDir.exists()}
+		doLast {
+			ant.delete(includeEmptyDirs: true, removeNotFollowedSymlinks: true, verbose: true) {
+				fileset(dir: sandboxDir, followSymlinks: false, defaultExcludes: "no")
+			}
+			delete sandboxDir
+		}
+	}
+}
+
+// Stub tasks for intellij project
+task createSandbox {}
+task cleanSandbox {}
