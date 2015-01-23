@@ -1085,6 +1085,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			}
 			if (foundSomething) {
 				this.grammarElement = nextGrammarElement;
+				this.visited.clear();
 				this.visiting.clear();
 			}
 			return Boolean.FALSE;
