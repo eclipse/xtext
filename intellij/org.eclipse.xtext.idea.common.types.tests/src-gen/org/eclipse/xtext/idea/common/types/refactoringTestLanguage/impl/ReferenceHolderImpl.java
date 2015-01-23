@@ -20,7 +20,6 @@ import org.eclipse.xtext.idea.common.types.refactoringTestLanguage.ReferenceHold
  * An implementation of the model object '<em><b>Reference Holder</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

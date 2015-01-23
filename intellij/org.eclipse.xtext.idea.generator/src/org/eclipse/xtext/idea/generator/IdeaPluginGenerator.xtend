@@ -133,10 +133,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		
 		var output = new OutputImpl();
 		output.addOutlet(PLUGIN, false, ideaProjectPath);
-		output.addOutlet(META_INF_PLUGIN, true, ideaProjectPath + "/META-INF");
+		output.addOutlet(META_INF_PLUGIN, false, ideaProjectPath + "/META-INF");
 		
 		if (deployable) {
-			output.writeFile(PLUGIN, '''«grammar.name.toSimpleName» Launch Intellij.launch''', grammar.compileLaunchIntellij)
+			output.writeFile(PLUGIN, '''«ideaProjectName».launch''', grammar.compileLaunchIntellij)
 			output.writeFile(META_INF_PLUGIN, "plugin.xml", grammar.compilePluginXml)
 		}
 		output.writeFile(PLUGIN, ".project", grammar.compileProjectXml)
@@ -462,9 +462,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			<vendor>My Company</vendor>
 		
 			<idea-version since-build="131"/>
-			<depends optional="true">org.eclipse.xtext.idea</depends>
+			<depends>org.eclipse.xtext.idea</depends>
 			«IF typesIntegrationRequired && ideaProjectName != 'org.eclipse.xtext.xbase.idea'»
-			<depends optional="true">org.eclipse.xtext.xbase.idea</depends>
+			<depends>org.eclipse.xtext.xbase.idea</depends>
 			«ENDIF»
 
 			<extensions defaultExtensionNs="com.intellij">
@@ -521,19 +521,22 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	def compileLaunchIntellij(Grammar grammar)'''
 		<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-			<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
-			<stringAttribute key="bad_container_name" value="/«ideaProjectName»/«grammar.name.toSimpleName.toLowerCase»_launch_intellij.launch"/>
-			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-				<listEntry value="/«ideaProjectName»"/>
-			</listAttribute>
-			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
-				<listEntry value="4"/>
-			</listAttribute>
-			<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="false"/>
-			<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 6 [1.6.0_65-b14-462]"/>
-			<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.intellij.idea.Main"/>
-			<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«ideaProjectName»"/>
-			<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx2g -XX:MaxPermSize=320m -Didea.plugins.path=${INTELLIJ_IDEA_PLUGINS} -Didea.home.path=${INTELLIJ_IDEA} -Didea.ProcessCanceledException=disabled -Dcompiler.process.debug.port=-1"/>
+		<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+		<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+		<listEntry value="/«ideaProjectName»"/>
+		</listAttribute>
+		<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+		<listEntry value="4"/>
+		</listAttribute>
+		<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+		<listAttribute key="org.eclipse.jdt.launching.CLASSPATH">
+		<listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6&quot; javaProject=&quot;«ideaProjectName»&quot; path=&quot;1&quot; type=&quot;4&quot;/&gt;&#10;"/>
+		</listAttribute>
+		<booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
+		<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.intellij.rt.execution.application.AppMain"/>
+		<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="com.intellij.idea.Main"/>
+		<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«ideaProjectName»"/>
+		<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m&#10;-Xms256m&#10;-XX:MaxPermSize=250m&#10;-ea&#10;-Xbootclasspath/a:../intellij-ce/lib/boot.jar&#10;-Didea.plugins.path=./sandbox/plugins&#10;-Didea.smooth.progress=false&#10;-Dapple.laf.useScreenMenuBar=true&#10;-Didea.platform.prefix=Idea&#10;-Didea.launcher.port=7532&#10;-Didea.launcher.bin.path=../intellij-ce/bin&#10;-Dfile.encoding=UTF-8&#10;-classpath ../intellij-ce/lib/idea_rt.jar:../intellij-ce/lib/idea.jar:../intellij-ce/lib/bootstrap.jar:../intellij-ce/lib/extensions.jar:../intellij-ce/lib/util.jar:../intellij-ce/lib/openapi.jar:../intellij-ce/lib/trove4j.jar:../intellij-ce/lib/jdom.jar:../intellij-ce/lib/log4j.jar"/>
 		</launchConfiguration>
 	'''
 	

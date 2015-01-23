@@ -13,5 +13,5 @@
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value=""/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.xtext.idea.common.types.tests"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -Xbootclasspath/p:../intellij-ce/out/classes/production/boot -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxPermSize=320m -Didea.system.path=../intellij-ce/test-system -Didea.home.path=../intellij-ce/ -Didea.config.path=../intellij-ce/test -Didea.test.group=ALL_EXCLUDE_DEFINED -Dplugin.path=../org.eclipse.xtext.idea.common.types.tests"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea -Xbootclasspath/p:../intellij-ce/out/classes/production/boot -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -XX:MaxPermSize=320m -Didea.system.path=../intellij-ce/test-system -Didea.home.path=../intellij-ce/ -Didea.config.path=../intellij-ce/test -Didea.test.group=ALL_EXCLUDE_DEFINED -Didea.plugins.path=../org.eclipse.xtext.idea.common.types.tests/sandbox/plugins"/>
 </launchConfiguration>

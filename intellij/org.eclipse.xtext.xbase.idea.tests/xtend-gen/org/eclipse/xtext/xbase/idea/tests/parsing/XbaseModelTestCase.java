@@ -23,140 +23,12 @@ public class XbaseModelTestCase extends AbstractModelTestCase {
     this.delegate = _ideaXbaseParserTest;
   }
   
-  public void testAddition_1() throws Exception {
-    delegate.testAddition_1();
-  }
-  
-  public void testAddition_2() throws Exception {
-    delegate.testAddition_2();
-  }
-  
-  public void testAssignment_RightAssociativity() throws Exception {
-    delegate.testAssignment_RightAssociativity();
-  }
-  
   public void testAssignments_00() throws Exception {
     delegate.testAssignments_00();
   }
   
-  public void testBlockExpression_0() throws Exception {
-    delegate.testBlockExpression_0();
-  }
-  
-  public void testBlockExpression_1() throws Exception {
-    delegate.testBlockExpression_1();
-  }
-  
-  public void testBlockExpression_2() throws Exception {
-    delegate.testBlockExpression_2();
-  }
-  
-  public void testBlockExpression_3() throws Exception {
-    delegate.testBlockExpression_3();
-  }
-  
-  public void testBlockExpression_4() throws Exception {
-    delegate.testBlockExpression_4();
-  }
-  
-  public void testBlockExpression_5() throws Exception {
-    delegate.testBlockExpression_5();
-  }
-  
-  public void testBlockExpression_withVariableDeclaration_0() throws Exception {
-    delegate.testBlockExpression_withVariableDeclaration_0();
-  }
-  
-  public void testBlockExpression_withVariableDeclaration_1() throws Exception {
-    delegate.testBlockExpression_withVariableDeclaration_1();
-  }
-  
-  public void testBlockExpression_withVariableDeclaration_2() throws Exception {
-    delegate.testBlockExpression_withVariableDeclaration_2();
-  }
-  
-  public void testBlockExpression_withVariableDeclaration_3() throws Exception {
-    delegate.testBlockExpression_withVariableDeclaration_3();
-  }
-  
-  public void testBlockExpression_withVariableDeclaration_4() throws Exception {
-    delegate.testBlockExpression_withVariableDeclaration_4();
-  }
-  
-  public void testBooleanLiteral_1() throws Exception {
-    delegate.testBooleanLiteral_1();
-  }
-  
-  public void testBooleanLiteral_2() throws Exception {
-    delegate.testBooleanLiteral_2();
-  }
-  
-  public void testCastedExpression() throws Exception {
-    delegate.testCastedExpression();
-  }
-  
-  public void testCastedExpression_1() throws Exception {
-    delegate.testCastedExpression_1();
-  }
-  
-  public void testCastedExpression_2() throws Exception {
-    delegate.testCastedExpression_2();
-  }
-  
-  public void testClosure_1() throws Exception {
-    delegate.testClosure_1();
-  }
-  
-  public void testClosure_2() throws Exception {
-    delegate.testClosure_2();
-  }
-  
-  public void testClosure_3() throws Exception {
-    delegate.testClosure_3();
-  }
-  
-  public void testClosure_4() throws Exception {
-    delegate.testClosure_4();
-  }
-  
-  public void testClosure_5() throws Exception {
-    delegate.testClosure_5();
-  }
-  
-  public void testClosure_6() throws Exception {
-    delegate.testClosure_6();
-  }
-  
-  public void testConstructorCall_0() throws Exception {
-    delegate.testConstructorCall_0();
-  }
-  
-  public void testConstructorCall_1() throws Exception {
-    delegate.testConstructorCall_1();
-  }
-  
-  public void testConstructorCall_2() throws Exception {
-    delegate.testConstructorCall_2();
-  }
-  
-  public void testDoWhileExpression() throws Exception {
-    delegate.testDoWhileExpression();
-  }
-  
-  public void testExclusiveRange() throws Exception {
-    delegate.testExclusiveRange();
-  }
-  
-  public void testFeatureCall_0() throws Exception {
-    delegate.testFeatureCall_0();
-  }
-  
-  public void testFeatureCall_1() throws Exception {
-    delegate.testFeatureCall_1();
-  }
-  
-  public void testFeatureCall_2() throws Exception {
-    delegate.testFeatureCall_2();
+  public void testFeatureCall_5() throws Exception {
+    delegate.testFeatureCall_5();
   }
   
   public void testFeatureCall_3() throws Exception {
@@ -167,28 +39,224 @@ public class XbaseModelTestCase extends AbstractModelTestCase {
     delegate.testFeatureCall_4();
   }
   
-  public void testFeatureCall_5() throws Exception {
-    delegate.testFeatureCall_5();
+  public void testFeatureCall_1() throws Exception {
+    delegate.testFeatureCall_1();
   }
   
-  public void testForLoopExpression() throws Exception {
-    delegate.testForLoopExpression();
+  public void testFeatureCall_2() throws Exception {
+    delegate.testFeatureCall_2();
   }
   
-  public void testForLoopExpression_1() throws Exception {
-    delegate.testForLoopExpression_1();
+  public void testFeatureCall_0() throws Exception {
+    delegate.testFeatureCall_0();
+  }
+  
+  public void testUnaryOperation_3() throws Exception {
+    delegate.testUnaryOperation_3();
   }
   
   public void testIfWithAdd() throws Exception {
     delegate.testIfWithAdd();
   }
   
-  public void testIfWithAdd_2() throws Exception {
-    delegate.testIfWithAdd_2();
+  public void testUnaryOperation_2() throws Exception {
+    delegate.testUnaryOperation_2();
+  }
+  
+  public void testTryCatchExpression() throws Exception {
+    delegate.testTryCatchExpression();
   }
   
   public void testIfWithClosure() throws Exception {
     delegate.testIfWithClosure();
+  }
+  
+  public void testTryCatchExpression_1() throws Exception {
+    delegate.testTryCatchExpression_1();
+  }
+  
+  public void testTryCatchExpression_2() throws Exception {
+    delegate.testTryCatchExpression_2();
+  }
+  
+  public void testTryCatchExpression_3() throws Exception {
+    delegate.testTryCatchExpression_3();
+  }
+  
+  public void testExclusiveRange() throws Exception {
+    delegate.testExclusiveRange();
+  }
+  
+  public void testWhileExpression() throws Exception {
+    delegate.testWhileExpression();
+  }
+  
+  public void testUnaryOperation() throws Exception {
+    delegate.testUnaryOperation();
+  }
+  
+  public void testInstanceOf() throws Exception {
+    delegate.testInstanceOf();
+  }
+  
+  public void testBooleanLiteral_2() throws Exception {
+    delegate.testBooleanLiteral_2();
+  }
+  
+  public void testBooleanLiteral_1() throws Exception {
+    delegate.testBooleanLiteral_1();
+  }
+  
+  public void testConstructorCall_2() throws Exception {
+    delegate.testConstructorCall_2();
+  }
+  
+  public void testConstructorCall_1() throws Exception {
+    delegate.testConstructorCall_1();
+  }
+  
+  public void testOrAndAndPrecedence() throws Exception {
+    delegate.testOrAndAndPrecedence();
+  }
+  
+  public void testConstructorCall_0() throws Exception {
+    delegate.testConstructorCall_0();
+  }
+  
+  public void testStringLiteral() throws Exception {
+    delegate.testStringLiteral();
+  }
+  
+  public void testBlockExpression_withVariableDeclaration_2() throws Exception {
+    delegate.testBlockExpression_withVariableDeclaration_2();
+  }
+  
+  public void testBlockExpression_withVariableDeclaration_1() throws Exception {
+    delegate.testBlockExpression_withVariableDeclaration_1();
+  }
+  
+  public void testBlockExpression_withVariableDeclaration_0() throws Exception {
+    delegate.testBlockExpression_withVariableDeclaration_0();
+  }
+  
+  public void testCastedExpression_1() throws Exception {
+    delegate.testCastedExpression_1();
+  }
+  
+  public void testCastedExpression_2() throws Exception {
+    delegate.testCastedExpression_2();
+  }
+  
+  public void testMemberFeatureCall_01() throws Exception {
+    delegate.testMemberFeatureCall_01();
+  }
+  
+  public void testCastedExpression() throws Exception {
+    delegate.testCastedExpression();
+  }
+  
+  public void testThrowExpression() throws Exception {
+    delegate.testThrowExpression();
+  }
+  
+  public void testStaticFeatureCall_1() throws Exception {
+    delegate.testStaticFeatureCall_1();
+  }
+  
+  public void testStaticFeatureCall_2() throws Exception {
+    delegate.testStaticFeatureCall_2();
+  }
+  
+  public void testStaticFeatureCall_0() throws Exception {
+    delegate.testStaticFeatureCall_0();
+  }
+  
+  public void testStaticFeatureCall_5() throws Exception {
+    delegate.testStaticFeatureCall_5();
+  }
+  
+  public void testStaticFeatureCall_3() throws Exception {
+    delegate.testStaticFeatureCall_3();
+  }
+  
+  public void testStaticFeatureCall_4() throws Exception {
+    delegate.testStaticFeatureCall_4();
+  }
+  
+  public void testMemberFeatureCall_00() throws Exception {
+    delegate.testMemberFeatureCall_00();
+  }
+  
+  public void testDoWhileExpression() throws Exception {
+    delegate.testDoWhileExpression();
+  }
+  
+  public void testClosure_5() throws Exception {
+    delegate.testClosure_5();
+  }
+  
+  public void testClosure_4() throws Exception {
+    delegate.testClosure_4();
+  }
+  
+  public void testClosure_3() throws Exception {
+    delegate.testClosure_3();
+  }
+  
+  public void testClosure_2() throws Exception {
+    delegate.testClosure_2();
+  }
+  
+  public void testClosure_1() throws Exception {
+    delegate.testClosure_1();
+  }
+  
+  public void testForLoopExpression() throws Exception {
+    delegate.testForLoopExpression();
+  }
+  
+  public void testAddition_1() throws Exception {
+    delegate.testAddition_1();
+  }
+  
+  public void testAddition_2() throws Exception {
+    delegate.testAddition_2();
+  }
+  
+  public void testIfWithAdd_2() throws Exception {
+    delegate.testIfWithAdd_2();
+  }
+  
+  public void testShortClosure_1() throws Exception {
+    delegate.testShortClosure_1();
+  }
+  
+  public void testShortClosure_3() throws Exception {
+    delegate.testShortClosure_3();
+  }
+  
+  public void testShortClosure_2() throws Exception {
+    delegate.testShortClosure_2();
+  }
+  
+  public void testAssignment_RightAssociativity() throws Exception {
+    delegate.testAssignment_RightAssociativity();
+  }
+  
+  public void testInstanceOf_1() throws Exception {
+    delegate.testInstanceOf_1();
+  }
+  
+  public void testTypeLiteral() throws Exception {
+    delegate.testTypeLiteral();
+  }
+  
+  public void testClosure_6() throws Exception {
+    delegate.testClosure_6();
+  }
+  
+  public void testForLoopExpression_1() throws Exception {
+    delegate.testForLoopExpression_1();
   }
   
   public void testIf_0() throws Exception {
@@ -207,82 +275,6 @@ public class XbaseModelTestCase extends AbstractModelTestCase {
     delegate.testIf_3();
   }
   
-  public void testInstanceOf() throws Exception {
-    delegate.testInstanceOf();
-  }
-  
-  public void testInstanceOf_1() throws Exception {
-    delegate.testInstanceOf_1();
-  }
-  
-  public void testMemberFeatureCall_00() throws Exception {
-    delegate.testMemberFeatureCall_00();
-  }
-  
-  public void testMemberFeatureCall_01() throws Exception {
-    delegate.testMemberFeatureCall_01();
-  }
-  
-  public void testOrAndAndPrecedence() throws Exception {
-    delegate.testOrAndAndPrecedence();
-  }
-  
-  public void testReturnExpressionInBlock_1() throws Exception {
-    delegate.testReturnExpressionInBlock_1();
-  }
-  
-  public void testReturnExpressionInBlock_2() throws Exception {
-    delegate.testReturnExpressionInBlock_2();
-  }
-  
-  public void testReturnExpressionInBlock_3() throws Exception {
-    delegate.testReturnExpressionInBlock_3();
-  }
-  
-  public void testShortClosure_1() throws Exception {
-    delegate.testShortClosure_1();
-  }
-  
-  public void testShortClosure_2() throws Exception {
-    delegate.testShortClosure_2();
-  }
-  
-  public void testShortClosure_3() throws Exception {
-    delegate.testShortClosure_3();
-  }
-  
-  public void testStaticFeatureCall_0() throws Exception {
-    delegate.testStaticFeatureCall_0();
-  }
-  
-  public void testStaticFeatureCall_1() throws Exception {
-    delegate.testStaticFeatureCall_1();
-  }
-  
-  public void testStaticFeatureCall_2() throws Exception {
-    delegate.testStaticFeatureCall_2();
-  }
-  
-  public void testStaticFeatureCall_3() throws Exception {
-    delegate.testStaticFeatureCall_3();
-  }
-  
-  public void testStaticFeatureCall_4() throws Exception {
-    delegate.testStaticFeatureCall_4();
-  }
-  
-  public void testStaticFeatureCall_5() throws Exception {
-    delegate.testStaticFeatureCall_5();
-  }
-  
-  public void testStringLiteral() throws Exception {
-    delegate.testStringLiteral();
-  }
-  
-  public void testSwitch_0() throws Exception {
-    delegate.testSwitch_0();
-  }
-  
   public void testSwitch_1() throws Exception {
     delegate.testSwitch_1();
   }
@@ -291,43 +283,51 @@ public class XbaseModelTestCase extends AbstractModelTestCase {
     delegate.testSwitch_2();
   }
   
-  public void testThrowExpression() throws Exception {
-    delegate.testThrowExpression();
+  public void testSwitch_0() throws Exception {
+    delegate.testSwitch_0();
   }
   
-  public void testTryCatchExpression() throws Exception {
-    delegate.testTryCatchExpression();
+  public void testReturnExpressionInBlock_3() throws Exception {
+    delegate.testReturnExpressionInBlock_3();
   }
   
-  public void testTryCatchExpression_1() throws Exception {
-    delegate.testTryCatchExpression_1();
+  public void testBlockExpression_4() throws Exception {
+    delegate.testBlockExpression_4();
   }
   
-  public void testTryCatchExpression_2() throws Exception {
-    delegate.testTryCatchExpression_2();
+  public void testReturnExpressionInBlock_1() throws Exception {
+    delegate.testReturnExpressionInBlock_1();
   }
   
-  public void testTryCatchExpression_3() throws Exception {
-    delegate.testTryCatchExpression_3();
+  public void testBlockExpression_5() throws Exception {
+    delegate.testBlockExpression_5();
   }
   
-  public void testTypeLiteral() throws Exception {
-    delegate.testTypeLiteral();
+  public void testReturnExpressionInBlock_2() throws Exception {
+    delegate.testReturnExpressionInBlock_2();
   }
   
-  public void testUnaryOperation() throws Exception {
-    delegate.testUnaryOperation();
+  public void testBlockExpression_withVariableDeclaration_4() throws Exception {
+    delegate.testBlockExpression_withVariableDeclaration_4();
   }
   
-  public void testUnaryOperation_2() throws Exception {
-    delegate.testUnaryOperation_2();
+  public void testBlockExpression_withVariableDeclaration_3() throws Exception {
+    delegate.testBlockExpression_withVariableDeclaration_3();
   }
   
-  public void testUnaryOperation_3() throws Exception {
-    delegate.testUnaryOperation_3();
+  public void testBlockExpression_2() throws Exception {
+    delegate.testBlockExpression_2();
   }
   
-  public void testWhileExpression() throws Exception {
-    delegate.testWhileExpression();
+  public void testBlockExpression_3() throws Exception {
+    delegate.testBlockExpression_3();
+  }
+  
+  public void testBlockExpression_0() throws Exception {
+    delegate.testBlockExpression_0();
+  }
+  
+  public void testBlockExpression_1() throws Exception {
+    delegate.testBlockExpression_1();
   }
 }
