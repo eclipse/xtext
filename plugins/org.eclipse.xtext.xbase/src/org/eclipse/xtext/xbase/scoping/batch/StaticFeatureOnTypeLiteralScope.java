@@ -45,28 +45,32 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 
 	@Override
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
-		return new StaticFeatureDescriptionWithTypeLiteralReceiver(name, feature, getReceiver(), getReceiverType(), bucket.getId(), getSession().isVisible(feature));
+		return new StaticFeatureDescriptionWithTypeLiteralReceiver(name, feature, getReceiver(), getReceiverType(),
+				bucket.getId(), getSession().isVisible(feature));
 	}
 	
 	@Override
 	protected List<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		if (THIS.equals(name)) {
 			ITypeReferenceOwner owner = getReceiverType().getOwner();
-			QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, owner.newParameterizedTypeReference(getTypeLiteral()), getBucket().getId(), true, getReceiver());
+			QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name,
+					owner.newParameterizedTypeReference(getTypeLiteral()), getBucket().getId(), true, getReceiver());
 			return Collections.<IEObjectDescription>singletonList(description);
 		} else if (SUPER.equals(name)) {
 			JvmType receiverRawType = getTypeLiteral();
 			if (receiverRawType instanceof JvmDeclaredType) {
-				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
-				if (superType != null) {
-					ITypeReferenceOwner owner = getReceiverType().getOwner();
-					QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, owner.newParameterizedTypeReference(superType.getType()), getBucket().getId(), true, getReceiver());
-					return Collections.<IEObjectDescription>singletonList(description);
-				} else {
-					ITypeReferenceOwner owner = getReceiverType().getOwner();
-					QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, owner.newParameterizedTypeReference(receiverRawType), getBucket().getId(), true, getReceiver());
-					return Collections.<IEObjectDescription>singletonList(description);
+				JvmType referencedType = receiverRawType;
+				// If the receiver type is an interface, 'super' always refers to that interface
+				if (!(receiverRawType instanceof JvmGenericType && ((JvmGenericType) receiverRawType).isInterface())) {
+					JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
+					if (superType != null) {
+						referencedType = superType.getType();
+					}
 				}
+				ITypeReferenceOwner owner = getReceiverType().getOwner();
+				QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name,
+						owner.newParameterizedTypeReference(referencedType), getBucket().getId(), true, getReceiver());
+				return Collections.<IEObjectDescription>singletonList(description);
 			}
 			return Collections.emptyList();
 		}
@@ -78,15 +82,22 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 		List<IEObjectDescription> result = super.getAllLocalElements();
 		if (getSession().isInstanceContext() && !isExplicitStaticFeatureCall()) {
 			ITypeReferenceOwner owner = getReceiverType().getOwner();
-			QualifiedThisOrSuperDescription thisDescription = new QualifiedThisOrSuperDescription(THIS, owner.newParameterizedTypeReference(getTypeLiteral()), getBucket().getId(), true, getReceiver());
+			QualifiedThisOrSuperDescription thisDescription = new QualifiedThisOrSuperDescription(THIS,
+					owner.newParameterizedTypeReference(getTypeLiteral()), getBucket().getId(), true, getReceiver());
 			addToList(thisDescription, result);
 			JvmType receiverRawType = getTypeLiteral();
 			if (receiverRawType instanceof JvmDeclaredType) {
-				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
-				if (superType != null) {
-					QualifiedThisOrSuperDescription superDescription = new QualifiedThisOrSuperDescription(SUPER, owner.newParameterizedTypeReference(superType.getType()), getBucket().getId(), true, getReceiver());
-					addToList(superDescription, result);
+				JvmType referencedType = receiverRawType;
+				// If the receiver type is an interface, 'super' always refers to that interface
+				if (!(receiverRawType instanceof JvmGenericType && ((JvmGenericType) receiverRawType).isInterface())) {
+					JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
+					if (superType != null) {
+						referencedType = superType.getType();
+					}
 				}
+				QualifiedThisOrSuperDescription superDescription = new QualifiedThisOrSuperDescription(SUPER,
+						owner.newParameterizedTypeReference(referencedType), getBucket().getId(), true, getReceiver());
+				addToList(superDescription, result);
 			}
 		}
 		return result;
@@ -102,12 +113,7 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 
 	/* @Nullable */
 	protected JvmTypeReference getExtendedClass(JvmDeclaredType type) {
-		// TODO move JvmGenericType.getExtendedClass to JvmDeclaredType
-		for(JvmTypeReference candidate: type.getSuperTypes()) {
-			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
-				return candidate;
-		}
-		return null;
+		return type.getExtendedClass();
 	}
 	
 	protected JvmType getTypeLiteral() {
