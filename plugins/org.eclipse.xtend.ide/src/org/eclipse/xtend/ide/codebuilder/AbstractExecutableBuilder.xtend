@@ -34,12 +34,16 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 	@Accessors List<AbstractParameterBuilder> parameterBuilders = emptyList
 	@Accessors List<LightweightTypeReference> exceptions = emptyList
 	@Accessors List<JvmTypeParameter> typeParameters = emptyList
-	@Accessors String body
+	@Accessors var (ISourceAppender)=>void bodyGenerator
 	@Accessors boolean varArgsFlag
 
 	def appendBody(ISourceAppender appendable, String statementSeparator) {
-		appendable.append(' {').increaseIndentation.newLine.append(body ?: defaultBody).append(statementSeparator).
-			decreaseIndentation.newLine.append('}')
+		appendable.append(' {').increaseIndentation.newLine
+		if (bodyGenerator != null)
+			bodyGenerator.apply(appendable)
+		else
+			appendable.append(defaultBody)
+		appendable.append(statementSeparator).decreaseIndentation.newLine.append('}')
 	}
 
 	def protected String defaultBody() {
