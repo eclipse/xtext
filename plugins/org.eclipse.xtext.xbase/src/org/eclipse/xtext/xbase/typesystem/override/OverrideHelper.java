@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -191,6 +192,15 @@ public class OverrideHelper {
 	}
 	
 	/**
+	 * Returns the resolved features targeting a specific Java version in order to support new language features.
+	 */
+	public ResolvedFeatures getResolvedFeatures(JvmDeclaredType type, JavaVersion targetVersion) {
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type.eResource().getResourceSet());
+		LightweightTypeReference contextType = owner.toLightweightTypeReference(type);
+		return getResolvedFeatures(contextType, targetVersion);
+	}
+	
+	/**
 	 * Returns the resolved features that are defined in the given <code>context type</code> and its supertypes.
 	 * Considers private methods of super types, too.
 	 * @param contextType the context type. Has to be contained in a resource.
@@ -199,6 +209,14 @@ public class OverrideHelper {
 	public ResolvedFeatures getResolvedFeatures(JvmTypeReference contextType) {
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, contextType.eResource().getResourceSet());
 		return getResolvedFeatures(owner.toLightweightTypeReference(contextType));
+	}
+	
+	/**
+	 * Returns the resolved features targeting a specific Java version in order to support new language features.
+	 */
+	public ResolvedFeatures getResolvedFeatures(JvmTypeReference contextType, JavaVersion targetVersion) {
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, contextType.eResource().getResourceSet());
+		return getResolvedFeatures(owner.toLightweightTypeReference(contextType), targetVersion);
 	}
 
 	/**
@@ -210,5 +228,11 @@ public class OverrideHelper {
 		return new ResolvedFeatures(contextType, overrideTester);
 	}
 	
+	/**
+	 * Returns the resolved features targeting a specific Java version in order to support new language features.
+	 */
+	public ResolvedFeatures getResolvedFeatures(LightweightTypeReference contextType, JavaVersion targetVersion) {
+		return new ResolvedFeatures(contextType, overrideTester, targetVersion);
+	}
+	
 }
-

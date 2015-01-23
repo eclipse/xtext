@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -176,7 +177,13 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
         it.setMethodName("foo");
-        it.setBody("return");
+        final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
+          @Override
+          public void apply(final ISourceAppender it) {
+            it.append("return");
+          }
+        };
+        it.setBodyGenerator(_function);
       }
     };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
@@ -200,7 +207,13 @@ public class MethodBuilderTest extends AbstractBuilderTest {
         JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
         it.setMethodName("foo");
-        it.setBody("return");
+        final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
+          @Override
+          public void apply(final ISourceAppender it) {
+            it.append("return");
+          }
+        };
+        it.setBodyGenerator(_function);
       }
     };
     AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);

@@ -11,6 +11,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -33,7 +35,7 @@ import com.google.inject.Inject;
  */
 public class OverrideTester {
 
-	private IVisibilityHelper visibilityHelper;
+	private final IVisibilityHelper visibilityHelper;
 	
 	@Inject
 	public OverrideTester(IVisibilityHelper visibilityHelper) {
@@ -90,7 +92,7 @@ public class OverrideTester {
 		AbstractResolvedOperation overriddenInHierarchy = new ResolvedOperationInHierarchy(overridden, overriding.getBottom());
 		if (parameterCount != 0 && !isMatchingParameterList(overriding, overriddenInHierarchy)) {
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.PARAMETER_TYPE_MISMATCH);
-		}			
+		}
 		if (!isMatchingTypeParameters(overriding, overriddenInHierarchy))
 			return new LazyOverrideCheckResult(overriding, overridden, OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
 		return new LazyOverrideCheckResult(overriding, overridden, getPrimaryValidDetail(overriding, overridden));
@@ -103,12 +105,16 @@ public class OverrideTester {
 			case CURRENT:
 			case NO_INHERITANCE:
 			case NAME_MISMATCH:
-			case ARITY_MISMATCH: return result;
+			case ARITY_MISMATCH:
+				return result;
 			case SAME_DECLARATOR:
 			case TYPE_PARAMETER_MISMATCH:
 			case PARAMETER_TYPE_MISMATCH: {
 				if (isSameErasure(overriding, overriddenInHierarchy)) {
 					result.add(OverrideCheckDetails.SAME_ERASURE);
+					if (isConflictingDefaultImplementation(overriding, overriddenInHierarchy)) {
+						result.add(OverrideCheckDetails.DEFAULT_IMPL_CONFLICT);
+					}
 				}
 				return result;
 			}
@@ -157,7 +163,20 @@ public class OverrideTester {
 			AbstractResolvedOperation overridden, EnumSet<OverrideCheckDetails> result) {
 		addReturnTypeDetails(overriding, overridden, result);
 		addExceptionDetails(overriding, overridden, result);
-		addAdditionalDetails(overriding.getDeclaration(), overridden.getDeclaration(), result);
+		JvmOperation overridingDecl = overriding.getDeclaration();
+		JvmOperation overriddenDecl = overridden.getDeclaration();
+		if (isMorePrivateThan(overridingDecl.getVisibility(), overriddenDecl.getVisibility())) {
+			result.add(OverrideCheckDetails.REDUCED_VISIBILITY);
+		}
+		if (overriddenDecl.isFinal()) {
+			result.add(OverrideCheckDetails.IS_FINAL);
+		}
+		if (overridingDecl.isVarArgs() != overriddenDecl.isVarArgs()) {
+			result.add(OverrideCheckDetails.VAR_ARG_MISMATCH);
+		}
+		if (isConflictingDefaultImplementation(overriding, overridden)) {
+			result.add(OverrideCheckDetails.DEFAULT_IMPL_CONFLICT);
+		}
 	}
 
 	protected void addExceptionDetails(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden,
@@ -213,19 +232,6 @@ public class OverrideTester {
 		}
 	}
 
-	protected void addAdditionalDetails(JvmOperation overriding, JvmOperation overridden,
-			EnumSet<OverrideCheckDetails> result) {
-		if (isMorePrivateThan(overriding.getVisibility(), overridden.getVisibility())) {
-			result.add(OverrideCheckDetails.REDUCED_VISIBILITY);
-		}
-		if (overridden.isFinal()) {
-			result.add(OverrideCheckDetails.IS_FINAL);
-		}
-		if (overriding.isVarArgs() != overridden.isVarArgs()) {
-			result.add(OverrideCheckDetails.VAR_ARG_MISMATCH);
-		}
-	}
-
 	protected boolean isMorePrivateThan(JvmVisibility o1, JvmVisibility o2) {
 		if (o1 == o2) {
 			return false;
@@ -243,6 +249,22 @@ public class OverrideTester {
 					throw new IllegalArgumentException("Unknown JvmVisibility " + o1);
 			}
 		}
+	}
+	
+	protected boolean isConflictingDefaultImplementation(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden) {
+		JvmOperation ridingDecl = overriding.getDeclaration();
+		JvmOperation riddenDecl = overridden.getDeclaration();
+		if (isInterface(ridingDecl.getDeclaringType()) && isInterface(riddenDecl.getDeclaringType())
+				&& (!ridingDecl.isAbstract() || !riddenDecl.isAbstract())) {
+			LightweightTypeReference ridingTypeRef = overriding.getResolvedDeclarator();
+			LightweightTypeReference riddenTypeRef = overridden.getResolvedDeclarator();
+			return !riddenTypeRef.isAssignableFrom(ridingTypeRef);
+		}
+		return false;
+	}
+
+	private boolean isInterface(JvmDeclaredType type) {
+		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
 	}
 	
 	protected boolean isMatchingParameterList(AbstractResolvedOperation overriding,

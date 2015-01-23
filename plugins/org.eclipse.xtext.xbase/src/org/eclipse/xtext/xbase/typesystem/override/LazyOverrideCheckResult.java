@@ -18,19 +18,19 @@ import com.google.common.collect.Sets;
  */
 public class LazyOverrideCheckResult implements IOverrideCheckResult {
 
-	private AbstractResolvedOperation thisOperation;
-	private JvmOperation givenOperation;
-	private OverrideCheckDetails primaryDetail;
+	private final AbstractResolvedOperation thisOperation;
+	private final JvmOperation givenOperation;
+	private final OverrideCheckDetails primaryDetail;
 	private EnumSet<OverrideCheckDetails> details;
 	
-	protected static EnumSet<OverrideCheckDetails> overridingIfAnyOf = EnumSet.of(
+	protected static final EnumSet<OverrideCheckDetails> overridingIfAnyOf = EnumSet.of(
 			OverrideCheckDetails.OVERRIDE,
 			OverrideCheckDetails.IMPLEMENTATION,
 			OverrideCheckDetails.REDECLARATION,
 			OverrideCheckDetails.REPEATED,
 			OverrideCheckDetails.SHADOWED);
 	
-	protected static EnumSet<OverrideCheckDetails> problemIfAnyOf = EnumSet.of(
+	protected static final EnumSet<OverrideCheckDetails> problemIfAnyOf = EnumSet.of(
 			OverrideCheckDetails.ARITY_MISMATCH,
 			OverrideCheckDetails.EXCEPTION_MISMATCH,
 			OverrideCheckDetails.IS_FINAL,

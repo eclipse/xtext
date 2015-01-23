@@ -67,7 +67,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest {
 
 	@Override
 	@Test public void testNestedTypes_01() throws Exception {
-		newBuilder().append("java.util.Map.").assertText(expect(new String[] { "Entry", "this", "super" }, getClassFeatures()));
+		newBuilder().append("java.util.Map.").assertText(expect(new String[] { "Entry", "super" }, getClassFeatures()));
 	}
 	
 	// all these test cases declared a local variable 'this' which is not allowed in Xtend
