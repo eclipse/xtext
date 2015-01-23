@@ -2,6 +2,8 @@ apply from: 'prepareIntellij.gradle'
 
 allprojects {
 	apply plugin: 'base'
+	apply plugin: 'maven'
+	group = 'org.eclipse.xtext'
 	version = '2.8.0-SNAPSHOT'
 	
 	repositories {
