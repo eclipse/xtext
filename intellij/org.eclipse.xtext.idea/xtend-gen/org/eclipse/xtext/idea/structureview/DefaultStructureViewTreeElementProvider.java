@@ -196,8 +196,7 @@ public class DefaultStructureViewTreeElementProvider implements IStructureViewTr
         return Boolean.valueOf(modelElement.eIsSet(containmentRef));
       }
     };
-    EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllContainments, _function);
-    return Objects.equal(_findFirst, null);
+    return IterableExtensions.<EReference>exists(_eAllContainments, _function);
   }
   
   public void buildChildren(final StructureViewTreeElement it) {
