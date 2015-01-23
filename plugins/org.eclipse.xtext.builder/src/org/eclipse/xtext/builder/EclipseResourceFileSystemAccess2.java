@@ -580,8 +580,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.7
 	 */
-	public URI getURI(String fileName, IProgressMonitor progressMonitor) {
-		return getURI(fileName, DEFAULT_OUTPUT, progressMonitor);
+	public URI getURI(String path, IProgressMonitor progressMonitor) {
+		return getURI(path, DEFAULT_OUTPUT, progressMonitor);
 	}
 
 	/**
@@ -590,16 +590,18 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.3
 	 */
 	@Override
-	public URI getURI(String fileName, String outputConfiguration) {
-		return getURI(fileName, outputConfiguration, monitor);
+	public URI getURI(String path, String outputConfiguration) {
+		return getURI(path, outputConfiguration, monitor);
 	}
 	
 	/**
 	 * @since 2.7
 	 */
-	public URI getURI(String fileName, String outputConfiguration, IProgressMonitor progressMonitor) {
-		IFile file = getFile(fileName, outputConfiguration, progressMonitor);
-		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	public URI getURI(String path, String outputName, IProgressMonitor progressMonitor) {
+		OutputConfiguration configuration = getOutputConfig(outputName);
+		IContainer container = getContainer(configuration);
+		IPath childPath = container.getFullPath().append(path).makeAbsolute();
+		return URI.createPlatformResourceURI(childPath.toString(), true);
 	}
 	
 	/**

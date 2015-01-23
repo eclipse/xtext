@@ -139,8 +139,8 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 	 * @since 2.3
 	 */
 	@Override
-	public URI getURI(String fileName) {
-		return getURI(fileName, DEFAULT_OUTPUT);
+	public URI getURI(String path) {
+		return getURI(path, DEFAULT_OUTPUT);
 	}
 	
 	void setPostProcessor(IFilePostProcessor postProcessor) {

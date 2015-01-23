@@ -16,17 +16,17 @@ import org.eclipse.emf.common.util.URI;
 public interface IFileSystemAccessExtension2 {
 	
 	/**
-	 * Returns an URI for the specified file.
+	 * Returns an URI for the specified path.
 	 * 
-	 * For workspace files a platform:/resource URI should be returned in order to pick up project specific preferences.
+	 * For workspace resources a platform:/resource URI should be returned in order to pick up project specific preferences.
 	 */
-	URI getURI(String fileName, String outputConfiguration);
+	URI getURI(String path, String outputConfiguration);
 
 	/**
-	 * Returns an URI for the specified file in the default output location.
+	 * Returns an URI for the specified path in the default output location.
 	 * 
-	 * For workspace files a platform:/resource URI should be returned in order to pick up project specific preferences.
+	 * For workspace resources a platform:/resource URI should be returned in order to pick up project specific preferences.
 	 */
-	URI getURI(String fileName);
+	URI getURI(String path);
 
 }
