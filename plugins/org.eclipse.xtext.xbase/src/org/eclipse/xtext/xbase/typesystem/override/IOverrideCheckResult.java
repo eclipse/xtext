@@ -179,7 +179,12 @@ public interface IOverrideCheckResult {
 		 * Should yield the message <code>Varargs methods should only override or be overridden by other varargs methods unlike
 		 * B.m(String[]) and A.m(String...)</code>
 		 */
-		VAR_ARG_MISMATCH
+		VAR_ARG_MISMATCH,
+		/**
+		 * The operations are declared in different interfaces that do not extend each other, their type erasure is equal,
+		 * and at least one of them is not abstract, i.e. it has a default implementation (Java 8).
+		 */
+		DEFAULT_IMPL_CONFLICT;
 	}
 
 }

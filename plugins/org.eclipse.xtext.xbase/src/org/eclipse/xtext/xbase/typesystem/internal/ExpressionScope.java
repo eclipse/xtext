@@ -16,6 +16,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.scoping.batch.BucketedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IExpressionScope;
@@ -332,7 +334,7 @@ public class ExpressionScope implements IExpressionScope {
 			for(IEObjectDescription element: delegate.getAllElements()) {
 				if (element instanceof IIdentifiableElementDescription) {
 					IIdentifiableElementDescription desc = (IIdentifiableElementDescription) element;
-					if (!desc.isVisible() || !desc.isValidStaticState()) {
+					if (!desc.isVisible() || !desc.isValidStaticState() || isInvalidThisReference(desc)) {
 						continue;
 					}
 					if (desc.isExtension()) { // filter extensions by most specific first parameter
@@ -357,6 +359,12 @@ public class ExpressionScope implements IExpressionScope {
 				allElements.add(valid);
 				Maps2.putIntoListMap(valid.getName(), valid, allElementsByName);
 			}
+		}
+		
+		private boolean isInvalidThisReference(IIdentifiableElementDescription desc) {
+			EObject object = desc.getEObjectOrProxy();
+			return object instanceof JvmGenericType && ((JvmGenericType) object).isInterface()
+					&& IFeatureNames.THIS.equals(desc.getName());
 		}
 
 		protected void recordDescription(IEObjectDescription element, Map<String, IEObjectDescription> result) {
