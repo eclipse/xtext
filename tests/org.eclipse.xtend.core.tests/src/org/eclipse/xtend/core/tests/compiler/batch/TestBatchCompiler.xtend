@@ -28,6 +28,7 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
+import java.io.Writer
 
 /**
  * Batch compiler tests.
@@ -341,8 +342,22 @@ class TestBatchCompiler {
 	@Test
 	def void testActiveAnnotatons1() {
 		batchCompiler.sourcePath = "./batch-compiler-data/activeAnnotations1"
-		assertTrue(batchCompiler.compile)
-		assertEquals(3, new File(OUTPUT_DIRECTORY + "/mypackage").list[dir, name|name.endsWith(".java")].size)
+		val errorBuffer = new StringBuilder
+		batchCompiler.errorWriter = new Writer() {
+			override close() throws IOException {
+			}
+			
+			override flush() throws IOException {
+			}
+			
+			override write(char[] cbuf, int off, int len) throws IOException {
+				errorBuffer.append(cbuf, off, len)
+			}
+		}
+		// AA and client should not reside in the same project
+		assertFalse(batchCompiler.compile)
+		val errors = errorBuffer.toString
+		assertTrue(errors, errors.contains('Problem during instantiation of mypackage.Processor'))
 	}
 
 	@Test
