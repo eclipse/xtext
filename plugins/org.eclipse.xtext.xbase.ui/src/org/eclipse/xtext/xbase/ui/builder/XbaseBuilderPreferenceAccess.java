@@ -104,6 +104,7 @@ public class XbaseBuilderPreferenceAccess {
 	
 	public void setJavaVersion(Object context, JavaVersion version) {
 		IPreferenceStore preferenceStore = preferenceStoreAccess.getWritablePreferenceStore(context);
+		preferenceStore.setValue(PREF_USE_COMPILER_COMPLIANCE, false);
 		preferenceStore.setValue(PREF_JAVA_VERSION, version.toString());
 	}
 	
