@@ -73,18 +73,18 @@ class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemAccessEx
 		]
 	}
 	
-	override getURI(String fileName, String outputConfiguration) {
+	override getURI(String path, String outputConfiguration) {
 		if (delegate instanceof EclipseResourceFileSystemAccess2) {
-			return delegate.getURI(fileName, outputConfiguration, new NullProgressMonitor)
+			return delegate.getURI(path, outputConfiguration, new NullProgressMonitor)
 		}
-		return (delegate as IFileSystemAccessExtension2).getURI(fileName, outputConfiguration)
+		return (delegate as IFileSystemAccessExtension2).getURI(path, outputConfiguration)
 	}
 	
-	override getURI(String fileName) {
+	override getURI(String path) {
 		if (delegate instanceof EclipseResourceFileSystemAccess2) {
-			return delegate.getURI(fileName, new NullProgressMonitor)
+			return delegate.getURI(path, new NullProgressMonitor)
 		}
-		return (delegate as IFileSystemAccessExtension2).getURI(fileName)
+		return (delegate as IFileSystemAccessExtension2).getURI(path)
 	}
 	
 	override generateFile(String fileName, String outputCfgName, InputStream content) throws RuntimeIOException {
