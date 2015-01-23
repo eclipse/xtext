@@ -500,9 +500,6 @@ public class XtendBatchCompiler {
 		return outputDirectory;
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	protected boolean preCompileStubs(File tmpSourceDirectory, File classDirectory) {
 		return preCompile(tmpSourceDirectory, singletonList(tmpSourceDirectory.toString()), getClassPathEntries());
 	}	
@@ -514,6 +511,9 @@ public class XtendBatchCompiler {
 		return preCompile(classDirectory, getSourcePathDirectories(), concat(singletonList(tmpSourceDirectory.toString()), getClassPathEntries()));
 	}
 	
+	/**
+	 * @since 2.8
+	 */
 	protected boolean preCompile(File classDirectory, Iterable<String> sourcePathDirectories, Iterable<String> classPathEntries) {
 		List<String> commandLine = Lists.newArrayList();
 		// todo args
