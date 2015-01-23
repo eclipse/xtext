@@ -643,7 +643,7 @@ public class XtendBatchCompiler {
 		for (Issue issue : issues) {
 			StringBuilder issueBuilder = createIssueMessage(issue);
 			if (Severity.ERROR == issue.getSeverity()) {
-				log.error(issueBuilder.toString());
+				new PrintWriter(getErrorWriter()).append(issueBuilder.toString());
 			} else if (Severity.WARNING == issue.getSeverity()) {
 				log.warn(issueBuilder.toString());
 			}

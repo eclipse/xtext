@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.Writer;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
@@ -781,18 +782,26 @@ public class TestBatchCompiler {
   @Test
   public void testActiveAnnotatons1() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
-    boolean _compile = this.batchCompiler.compile();
-    Assert.assertTrue(_compile);
-    File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
-    final FilenameFilter _function = new FilenameFilter() {
+    final StringBuilder errorBuffer = new StringBuilder();
+    this.batchCompiler.setErrorWriter(new Writer() {
       @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
+      public void close() throws IOException {
       }
-    };
-    String[] _list = _file.list(_function);
-    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(3, _size);
+      
+      @Override
+      public void flush() throws IOException {
+      }
+      
+      @Override
+      public void write(final char[] cbuf, final int off, final int len) throws IOException {
+        errorBuffer.append(cbuf, off, len);
+      }
+    });
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertFalse(_compile);
+    final String errors = errorBuffer.toString();
+    boolean _contains = errors.contains("Problem during instantiation of mypackage.Processor");
+    Assert.assertTrue(errors, _contains);
   }
   
   @Test
