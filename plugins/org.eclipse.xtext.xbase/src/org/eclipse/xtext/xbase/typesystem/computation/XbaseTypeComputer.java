@@ -17,9 +17,12 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
@@ -87,6 +90,9 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	
 	@Inject
 	private CollectionLiteralsTypeComputer collectionLiterals;
+	
+	@Inject
+	private Primitives primitives;
 	
 	@Override
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
@@ -571,7 +577,40 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	}
 
 	protected void _computeTypes(XNumberLiteral object, ITypeComputationState state) {
-		// TODO evaluate expectation if no specific suffix is given
+		List<? extends ITypeExpectation> expectations = state.getExpectations();
+		for (ITypeExpectation typeExpectation : expectations) {
+			LightweightTypeReference expectedType = typeExpectation.getExpectedType();
+			if (expectedType != null && expectedType.getType() instanceof JvmPrimitiveType) {
+				Primitive kind = primitives.primitiveKind((JvmPrimitiveType)expectedType.getType());
+				boolean success = true;
+				String value = object.getValue();
+				try {
+					switch(kind) {
+					case Byte:
+						Byte.parseByte(value);
+						break;
+					case Short:
+						Short.parseShort(value);
+						break;
+					case Char:
+						int parsed = Integer.parseInt(value);
+						success = parsed <= Character.MAX_VALUE;
+						break;
+					default:
+						success = false;
+						break;
+					}
+				} catch (NumberFormatException e) {
+					success = false;
+				}
+				
+				if (success) {
+					state.acceptActualType(expectedType);
+					return;
+				}
+			}
+		}
+		
 		LightweightTypeReference result = getTypeForName(numberLiterals.getJavaType(object), state);
 		state.acceptActualType(result);
 	}
