@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -123,14 +124,20 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 	protected void computeAllOperations(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations, Set<JvmDeclaredType> processedTypes, List<IResolvedOperation> result) {
 		if (type != null && !type.eIsProxy() && processedTypes.add(type)) {
 			Iterable<JvmOperation> operations = type.getDeclaredOperations();
-			for(JvmOperation operation: operations) {
+			for (JvmOperation operation: operations) {
+				BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
 				String simpleName = operation.getSimpleName();
 				if (processedOperations.containsKey(simpleName)) {
-					if (isOverridden(operation, processedOperations.get(simpleName))) {
+					Collection<AbstractResolvedOperation> sameNameOps = processedOperations.get(simpleName);
+					AbstractResolvedOperation conflictingOperation = getConflictingDefault(resolvedOperation, sameNameOps);
+					if (conflictingOperation != null) {
+						processedOperations.remove(simpleName, conflictingOperation);
+						result.remove(conflictingOperation);
+						resolvedOperation = createResolvedOperation(operation, conflictingOperation);
+					} else if (isOverridden(operation, processedOperations.get(simpleName))) {
 						continue;
 					}
 				}
-				BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
 				processedOperations.put(simpleName, resolvedOperation);
 				result.add(resolvedOperation);
 			}

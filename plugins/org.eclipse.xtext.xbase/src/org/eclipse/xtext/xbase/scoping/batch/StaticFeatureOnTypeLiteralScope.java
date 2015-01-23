@@ -57,16 +57,17 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 		} else if (SUPER.equals(name)) {
 			JvmType receiverRawType = getTypeLiteral();
 			if (receiverRawType instanceof JvmDeclaredType) {
+				ITypeReferenceOwner owner = getReceiverType().getOwner();
 				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
+				JvmType referencedType;
 				if (superType != null) {
-					ITypeReferenceOwner owner = getReceiverType().getOwner();
-					QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, owner.newParameterizedTypeReference(superType.getType()), getBucket().getId(), true, getReceiver());
-					return Collections.<IEObjectDescription>singletonList(description);
+					referencedType = superType.getType();
 				} else {
-					ITypeReferenceOwner owner = getReceiverType().getOwner();
-					QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name, owner.newParameterizedTypeReference(receiverRawType), getBucket().getId(), true, getReceiver());
-					return Collections.<IEObjectDescription>singletonList(description);
+					referencedType = receiverRawType;
 				}
+				QualifiedThisOrSuperDescription description = new QualifiedThisOrSuperDescription(name,
+						owner.newParameterizedTypeReference(referencedType), getBucket().getId(), true, getReceiver());
+				return Collections.<IEObjectDescription>singletonList(description);
 			}
 			return Collections.emptyList();
 		}
@@ -83,10 +84,15 @@ public class StaticFeatureOnTypeLiteralScope extends StaticFeatureScope implemen
 			JvmType receiverRawType = getTypeLiteral();
 			if (receiverRawType instanceof JvmDeclaredType) {
 				JvmTypeReference superType = getExtendedClass((JvmDeclaredType) receiverRawType);
+				JvmType referencedType;
 				if (superType != null) {
-					QualifiedThisOrSuperDescription superDescription = new QualifiedThisOrSuperDescription(SUPER, owner.newParameterizedTypeReference(superType.getType()), getBucket().getId(), true, getReceiver());
-					addToList(superDescription, result);
+					referencedType = superType.getType();
+				} else {
+					referencedType = receiverRawType;					
 				}
+				QualifiedThisOrSuperDescription superDescription = new QualifiedThisOrSuperDescription(SUPER,
+						owner.newParameterizedTypeReference(referencedType), getBucket().getId(), true, getReceiver());
+				addToList(superDescription, result);
 			}
 		}
 		return result;
