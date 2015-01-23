@@ -53,6 +53,12 @@
       value="http://download.eclipse.org/modeling/emf/emf/updates/milestones"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      type="URI"
+      name="draw2d.p2.repository"
+      value="http://download.eclipse.org/tools/gef/updates/releases"
+      defaultValue=""/>
+  <setupTask
+      xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
       defaultValue="Luna"
       storageURI="scope://Workspace"/>
@@ -203,15 +209,15 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform"
-          value="1.5"/>
+          value="1.6"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source"
-          value="1.5"/>
+          value="1.6"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance"
-          value="1.5"/>
+          value="1.6"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -305,6 +311,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="${draw2d.p2.repository}"/>
       </repositoryList>
       <repositoryList
           name="Juno">
@@ -320,6 +328,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="${draw2d.p2.repository}"/>
       </repositoryList>
       <repositoryList
           name="Indigo">
@@ -335,6 +345,8 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="${draw2d.p2.repository}"/>
       </repositoryList>
       <repositoryList
           name="Helios">
@@ -351,7 +363,7 @@
         <repository
             url="${emf.update.site}"/>
         <repository
-            url="http://download.eclipse.org/tools/gef/updates/releases"/>
+            url="${draw2d.p2.repository}"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>

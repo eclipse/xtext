@@ -1,6 +1,6 @@
+BuilderConfiguration.is_project_specific=true
 autobuilding=true
 eclipse.preferences.version=1
-is_project_specific=true
 outlet.DEFAULT_OUTPUT.cleanDirectory=false
 outlet.DEFAULT_OUTPUT.cleanupDerived=false
 outlet.DEFAULT_OUTPUT.createDirectory=true
