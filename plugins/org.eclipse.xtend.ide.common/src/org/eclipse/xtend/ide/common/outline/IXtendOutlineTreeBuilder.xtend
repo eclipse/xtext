@@ -10,7 +10,15 @@ package org.eclipse.xtend.ide.common.outline
 import org.eclipse.emf.ecore.EObject
 
 /**
+ * <p>
+ * Builds an outline tree structure for the given model element.
+ * </p> 
+ * <p>
+ * An implementation should delegate to {@link IXtendOutlineNodeBuilder} in order to builder platform specific outline nodes.
+ * </p>
+ * 
  * @author kosyakov - Initial contribution and API
+ * @see IXtendOutlineNodeBuilder 
  */
 interface IXtendOutlineTreeBuilder {
 
