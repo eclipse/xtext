@@ -7,12 +7,21 @@
  */
 package org.eclipse.xtend.ide.tests.resource;
 
+import com.google.common.base.Objects;
+import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import java.util.ArrayList;
 import java.util.Collections;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -25,8 +34,10 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.persistence.IResourceStorageFacade;
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
+import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -34,6 +45,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -141,6 +155,104 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       Iterable<String> _map_1 = IterableExtensions.<IEObjectDescription, String>map(_exportedObjects_1, _function_1);
       String _join_1 = IterableExtensions.join(_map_1, ",");
       Assert.assertEquals("mypack.MyClass", _join_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testShouldLoadFromStorage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class MyClass {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public def void foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final IFile file = this.helper.createFile("mypack/MyClass.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      final URI uri = this.uriMapper.getUri(file);
+      IProject _project = file.getProject();
+      final ResourceSet resourceSet = this.resourceSetProvider.get(_project);
+      SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
+      Resource _createResource = resourceSet.createResource(uri);
+      final StorageAwareResource resource = ((StorageAwareResource) _createResource);
+      final Procedure0 _function = new Procedure0() {
+        @Override
+        public void apply() {
+          IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
+          boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
+          Assert.assertTrue(_shouldLoadFromStorage);
+        }
+      };
+      this.doWorkInJob(_function);
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      file.delete(true, _nullProgressMonitor);
+      IResourcesSetupUtil.waitForAutoBuild();
+      final Procedure0 _function_1 = new Procedure0() {
+        @Override
+        public void apply() {
+          IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
+          boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
+          Assert.assertFalse(_shouldLoadFromStorage);
+        }
+      };
+      this.doWorkInJob(_function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void doWorkInJob(final Procedure0 work) {
+    try {
+      final ArrayList<Throwable> throwables = CollectionLiterals.<Throwable>newArrayList();
+      StringConcatenation _builder = new StringConcatenation();
+      Class<? extends ResourceStorageTest> _class = this.getClass();
+      String _name = _class.getName();
+      _builder.append(_name, "");
+      _builder.append(".TestJob");
+      final Procedure1<Job> _function = new Procedure1<Job>() {
+        @Override
+        public void apply(final Job it) {
+          ISchedulingRule _newSequence = SchedulingRuleFactory.INSTANCE.newSequence();
+          it.setRule(_newSequence);
+        }
+      };
+      final Job testShouldLoadFromStorageJob = ObjectExtensions.<Job>operator_doubleArrow(new Job(_builder.toString()) {
+        @Override
+        protected IStatus run(final IProgressMonitor monitor) {
+          IStatus _xblockexpression = null;
+          {
+            try {
+              work.apply();
+            } catch (final Throwable _t) {
+              if (_t instanceof Throwable) {
+                final Throwable t = (Throwable)_t;
+                throwables.add(t);
+              } else {
+                throw Exceptions.sneakyThrow(_t);
+              }
+            }
+            _xblockexpression = Status.OK_STATUS;
+          }
+          return _xblockexpression;
+        }
+      }, _function);
+      testShouldLoadFromStorageJob.schedule();
+      testShouldLoadFromStorageJob.join();
+      final Throwable t = IterableExtensions.<Throwable>head(throwables);
+      boolean _notEquals = (!Objects.equal(t, null));
+      if (_notEquals) {
+        Throwables.propagate(t);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
