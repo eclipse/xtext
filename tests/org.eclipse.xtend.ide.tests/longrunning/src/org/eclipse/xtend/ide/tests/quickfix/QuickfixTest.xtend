@@ -9,6 +9,7 @@ import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
+import org.eclipse.xtext.xbase.compiler.JavaVersion
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -3403,6 +3404,23 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
+	}
+
+	@Test
+	def void conflictingDefaultMethods() {
+		targetVersion = JavaVersion.JAVA8
+		create('Foo.xtend', '''
+			interface A {
+				def void foo() { }
+			}
+			interface B {
+				def void foo() { }
+			}
+			class |Foo implements A, B {
+			}
+		''')
+		.assertIssueCodes(CONFLICTING_DEFAULT_METHODS)
+		.assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B")
 	}
 
 }

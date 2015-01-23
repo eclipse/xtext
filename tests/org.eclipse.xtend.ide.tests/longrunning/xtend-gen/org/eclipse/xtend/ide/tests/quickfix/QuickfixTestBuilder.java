@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
@@ -57,6 +59,9 @@ public class QuickfixTestBuilder {
   
   @Inject
   private IPreferenceStoreAccess preferenceStoreAccess;
+  
+  @Inject
+  private XbaseBuilderPreferenceAccess xbaseBuilderPreferenceAccess;
   
   private int caretOffset;
   
@@ -81,6 +86,10 @@ public class QuickfixTestBuilder {
     this.modifiedIssueCodes.add(issueCode);
     IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
     _preferenceStore.setValue(issueCode, "error");
+  }
+  
+  public void setTargetVersion(final JavaVersion targetVersion) {
+    this.xbaseBuilderPreferenceAccess.setJavaVersion(null, targetVersion);
   }
   
   public QuickfixTestBuilder create(final String fileName, final CharSequence model) {
@@ -413,6 +422,8 @@ public class QuickfixTestBuilder {
             }
           };
           IterableExtensions.<String>forEach(QuickfixTestBuilder.this.modifiedIssueCodes, _function);
+          it.setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_COMPLIANCE);
+          it.setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION);
         }
       };
       ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function_1);

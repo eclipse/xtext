@@ -7,6 +7,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
@@ -6415,5 +6416,32 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("}");
     _builder_2.newLine();
     _assertModelAfterQuickfix.assertModelAfterQuickfix("Assign empty expression.", _builder_2);
+  }
+  
+  @Test
+  public void conflictingDefaultMethods() {
+    this.builder.setTargetVersion(JavaVersion.JAVA8);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void foo() { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface B {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void foo() { }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class |Foo implements A, B {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.CONFLICTING_DEFAULT_METHODS);
+    _assertIssueCodes.assertResolutionLabels("Override conflicting method of type A", "Override conflicting method of type B");
   }
 }

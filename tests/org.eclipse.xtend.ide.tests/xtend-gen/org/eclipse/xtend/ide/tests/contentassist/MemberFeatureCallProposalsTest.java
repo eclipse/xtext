@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 
 import org.eclipse.xtend.ide.tests.contentassist.AbstractXtendContentAssistBugTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.Flaky;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.junit.Test;
 
@@ -41,6 +42,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _append.assertTextAtCursorPosition("em", 2, "empty");
   }
   
+  @Flaky
   @Test
   public void test_02() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -65,6 +67,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
   
+  @Flaky
   @Test
   public void test_03() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -89,6 +92,7 @@ public class MemberFeatureCallProposalsTest extends AbstractXtendContentAssistBu
     _append.assertTextAtCursorPosition("em", 2, "empty", "emptyList", "emptyMap", "emptySet");
   }
   
+  @Flaky
   @Test
   public void test_04() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

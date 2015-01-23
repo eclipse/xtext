@@ -17,6 +17,8 @@ import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess
 
 class QuickfixTestBuilder {
 	
@@ -29,6 +31,8 @@ class QuickfixTestBuilder {
 	@Inject extension SyncUtil
 	
 	@Inject IPreferenceStoreAccess preferenceStoreAccess;
+	
+	@Inject XbaseBuilderPreferenceAccess xbaseBuilderPreferenceAccess;
 	
 	int caretOffset
 	
@@ -47,6 +51,10 @@ class QuickfixTestBuilder {
 			modifiedIssueCodes = newHashSet
 		modifiedIssueCodes.add(issueCode)
 		preferenceStore.setValue(issueCode, "error")
+	}
+	
+	def setTargetVersion(JavaVersion targetVersion) {
+		xbaseBuilderPreferenceAccess.setJavaVersion(null, targetVersion);
 	}
 	
 	def create(String fileName, CharSequence model) {
@@ -159,6 +167,8 @@ class QuickfixTestBuilder {
 				modifiedIssueCodes.forEach [ code |
 					setToDefault(code)
 				]
+				setToDefault(XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_COMPLIANCE)
+				setToDefault(XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION)
 			]
 			modifiedIssueCodes = null;
 		}		
