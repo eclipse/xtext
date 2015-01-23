@@ -106,9 +106,9 @@ class DefaultStructureViewTreeElementProvider implements IStructureViewTreeEleme
 	}
 
 	protected def isLeaf(EObject modelElement) {
-		modelElement.eClass.getEAllContainments.findFirst [ containmentRef |
+		modelElement.eClass.getEAllContainments.exists [ containmentRef |
 			modelElement.eIsSet(containmentRef)
-		] == null
+		]
 	}
 
 }
