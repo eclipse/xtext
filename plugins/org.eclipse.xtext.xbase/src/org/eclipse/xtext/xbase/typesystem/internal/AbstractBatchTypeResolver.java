@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
@@ -55,12 +56,19 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 		if (object == null || object.eIsProxy()) {
 			return IResolvedTypes.NULL;
 		}
+		Resource resource = object.eResource();
+		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
+			throw new IllegalArgumentException("Cannot compute types for resource that was loaded from storage");
+		}
 		return doResolveTypes(object, monitor);
 	}
 	
 	/* @NonNull */
 	@Override
 	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource, /* @Nullable */ CancelIndicator monitor) {
+		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
+			throw new IllegalArgumentException("Cannot compute types for resource that was loaded from storage");
+		}
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {
 			IFeatureScopeSession session = scopeProvider.newSession(resource);
