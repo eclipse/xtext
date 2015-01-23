@@ -205,7 +205,7 @@ public abstract class AbstractMultiModeOutlineTreeProvider extends BackgroundOut
 		Object text = computeDecoratedText(modelElement, inheritanceDepth);
 
 		ImageDescriptor image = getImageDescriptor(modelElement);
-		XtendEObjectNode objectNode = getOutlineNodeFactory().createXtendEOBjectNode(parentNode, modelElement, image,
+		XtendEObjectNode objectNode = getOutlineNodeFactory().createXtendEObjectNode(parentNode, modelElement, image,
 				text, true, inheritanceDepth);
 		return objectNode;
 	}
