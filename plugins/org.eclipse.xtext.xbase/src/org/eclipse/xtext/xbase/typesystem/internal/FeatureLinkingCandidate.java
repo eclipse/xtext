@@ -12,10 +12,12 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -59,6 +61,8 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -205,15 +209,56 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				} else if (getExpression() instanceof XMemberFeatureCall && !(SELF.equals(featureName))) {
 					XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) getExpression();
 					XAbstractFeatureCall target = (XAbstractFeatureCall) memberFeatureCall.getMemberCallTarget();
-					JvmType enclosingType = (JvmType) target.getFeature();
+					final JvmType referencedType = (JvmType) target.getFeature();
 					List<JvmDeclaredType> enclosingTypes = getState().getFeatureScopeSession().getEnclosingTypes();
-					if (!enclosingTypes.contains(enclosingType)) {
-						String message = String.format("No enclosing instance of the type %s is accessible in scope", enclosingType.getSimpleName());
+					if (SUPER.equals(featureName) && referencedType instanceof JvmGenericType
+							&& ((JvmGenericType) referencedType).isInterface() && !enclosingTypes.isEmpty()) {
+						if (!Iterables.any(enclosingTypes.get(0).getSuperTypes(), new Predicate<JvmTypeReference>() {
+							@Override
+							public boolean apply(JvmTypeReference input) {
+								return input.getType() == referencedType;
+							}
+						})) {
+							String message = String.format("The enclosing type does not extend or implement the interface %s", referencedType.getSimpleName());
+							AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+									IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, message, getExpression(),
+									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+							result.accept(diagnostic);
+							return false;
+						}
+					} else if (!enclosingTypes.contains(referencedType)) {
+						String message = String.format("No enclosing instance of the type %s is accessible in scope", referencedType.getSimpleName());
 						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 								IssueCodes.NO_ENCLOSING_INSTANCE_AVAILABLE, message, getExpression(),
 								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 						result.accept(diagnostic);
 						return false;
+					}
+				} else if (getExpression() instanceof XFeatureCall && SUPER.equals(featureName)) {
+					List<JvmDeclaredType> enclosingTypes = getState().getFeatureScopeSession().getEnclosingTypes();
+					JvmDeclaredType declaringType = null;
+					if (!enclosingTypes.isEmpty())
+						declaringType = enclosingTypes.get(0);
+					if (declaringType instanceof JvmGenericType && ((JvmGenericType) declaringType).isInterface()) {
+						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+								IssueCodes.INVALID_SUPER_CALL,
+								"super reference is illegal in interface context", getExpression(),
+								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+						result.accept(diagnostic);
+						return false;
+					} else if (declaringType != null && declaringType != feature && declaringType.isLocal()) {
+						XClosure closure = EcoreUtil2.getContainerOfType(featureCall, XClosure.class);
+						if (closure != null) {
+							EObject typeSource = getState().getReferenceOwner().getServices().getJvmModelAssociations().getPrimarySourceElement(declaringType);
+							if (typeSource != null && EcoreUtil.isAncestor(typeSource, closure)) {
+								AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+										IssueCodes.INVALID_SUPER_CALL,
+										"Cannot call super of an anonymous class from a lambda expression", getExpression(),
+										XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+								result.accept(diagnostic);
+								return false;
+							}
+						}
 					}
 				}
 			}

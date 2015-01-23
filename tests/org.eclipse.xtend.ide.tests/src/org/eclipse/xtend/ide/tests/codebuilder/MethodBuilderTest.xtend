@@ -77,7 +77,7 @@ class MethodBuilderTest extends AbstractBuilderTest {
 		(createMethodBuilder(xtendClass) => [
 			context = xtendClass
 			methodName = 'foo'
-			body = 'return'
+			bodyGenerator = [append('return')]
 		]).assertBuilds('''
 			def foo() {
 			  return
@@ -90,7 +90,7 @@ class MethodBuilderTest extends AbstractBuilderTest {
 		(createMethodBuilder(javaClass) => [
 			context = javaClass
 			methodName = 'foo'
-			body = 'return'
+			bodyGenerator = [append('return')]
 		]).assertBuilds('''
 			void foo() {
 			  return;

@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -145,7 +146,20 @@ public class MemberFromSuperImplementor {
       String _join = IterableExtensions.join(_map, ", ");
       _builder.append(_join, "");
       _builder.append(")");
-      methodBuilder.setBody(_builder.toString());
+      final String body = _builder.toString();
+      JvmOperation _declaration_4 = overriddenOperation.getDeclaration();
+      JvmDeclaredType _declaringType = _declaration_4.getDeclaringType();
+      final Procedure1<? super ISourceAppender> superTypeRef = this.getImplementedInterface(inferredType, _declaringType);
+      final Procedure1<ISourceAppender> _function_2 = new Procedure1<ISourceAppender>() {
+        @Override
+        public void apply(final ISourceAppender it) {
+          if (superTypeRef!=null) {
+            superTypeRef.apply(it);
+          }
+          it.append(body);
+        }
+      };
+      methodBuilder.setBodyGenerator(_function_2);
     }
     boolean _isValid = methodBuilder.isValid();
     if (_isValid) {
@@ -153,33 +167,115 @@ public class MemberFromSuperImplementor {
     }
   }
   
+  private Procedure1<? super ISourceAppender> getImplementedInterface(final JvmDeclaredType subType, final JvmDeclaredType superInterface) {
+    boolean _and = false;
+    if (!(superInterface instanceof JvmGenericType)) {
+      _and = false;
+    } else {
+      boolean _isInterface = ((JvmGenericType) superInterface).isInterface();
+      _and = _isInterface;
+    }
+    if (_and) {
+      EList<JvmTypeReference> _superTypes = subType.getSuperTypes();
+      final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
+        @Override
+        public Boolean apply(final JvmTypeReference it) {
+          JvmType _type = it.getType();
+          return Boolean.valueOf(Objects.equal(_type, superInterface));
+        }
+      };
+      boolean _exists = IterableExtensions.<JvmTypeReference>exists(_superTypes, _function);
+      if (_exists) {
+        final Procedure1<ISourceAppender> _function_1 = new Procedure1<ISourceAppender>() {
+          @Override
+          public void apply(final ISourceAppender it) {
+            ISourceAppender _append = it.append(superInterface);
+            _append.append(".");
+          }
+        };
+        return _function_1;
+      }
+      EList<JvmTypeReference> _superTypes_1 = subType.getSuperTypes();
+      final Function1<JvmTypeReference, Boolean> _function_2 = new Function1<JvmTypeReference, Boolean>() {
+        @Override
+        public Boolean apply(final JvmTypeReference it) {
+          JvmType _type = it.getType();
+          return Boolean.valueOf(MemberFromSuperImplementor.this.isInterface(_type));
+        }
+      };
+      Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(_superTypes_1, _function_2);
+      final Function1<JvmTypeReference, JvmDeclaredType> _function_3 = new Function1<JvmTypeReference, JvmDeclaredType>() {
+        @Override
+        public JvmDeclaredType apply(final JvmTypeReference it) {
+          JvmType _type = it.getType();
+          return ((JvmDeclaredType) _type);
+        }
+      };
+      Iterable<JvmDeclaredType> _map = IterableExtensions.<JvmTypeReference, JvmDeclaredType>map(_filter, _function_3);
+      final Function1<JvmDeclaredType, Boolean> _function_4 = new Function1<JvmDeclaredType, Boolean>() {
+        @Override
+        public Boolean apply(final JvmDeclaredType it) {
+          Procedure1<? super ISourceAppender> _implementedInterface = MemberFromSuperImplementor.this.getImplementedInterface(it, superInterface);
+          return Boolean.valueOf((!Objects.equal(_implementedInterface, null)));
+        }
+      };
+      final JvmDeclaredType interfaze = IterableExtensions.<JvmDeclaredType>findFirst(_map, _function_4);
+      boolean _notEquals = (!Objects.equal(interfaze, null));
+      if (_notEquals) {
+        final Procedure1<ISourceAppender> _function_5 = new Procedure1<ISourceAppender>() {
+          @Override
+          public void apply(final ISourceAppender it) {
+            ISourceAppender _append = it.append(interfaze);
+            _append.append(".");
+          }
+        };
+        return _function_5;
+      }
+    }
+    return null;
+  }
+  
+  private boolean isInterface(final JvmType type) {
+    boolean _and = false;
+    if (!(type instanceof JvmGenericType)) {
+      _and = false;
+    } else {
+      boolean _isInterface = ((JvmGenericType) type).isInterface();
+      _and = _isInterface;
+    }
+    return _and;
+  }
+  
   public void appendConstructorFromSuper(final XtendClass overrider, final IResolvedConstructor superConstructor, final ISourceAppender appendable) {
     final JvmGenericType inferredType = this.associations.getInferredType(overrider);
     final AbstractConstructorBuilder constructorBuilder = this.codeBuilderFactory.createConstructorBuilder(inferredType);
     this.initializeExecutableBuilder(constructorBuilder, inferredType, superConstructor);
-    String _xifexpression = null;
-    List<LightweightTypeReference> _resolvedParameterTypes = superConstructor.getResolvedParameterTypes();
-    boolean _isEmpty = _resolvedParameterTypes.isEmpty();
-    if (_isEmpty) {
-      _xifexpression = "";
-    } else {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("super(");
-      JvmConstructor _declaration = superConstructor.getDeclaration();
-      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-      final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
-        @Override
-        public String apply(final JvmFormalParameter it) {
-          return it.getSimpleName();
+    final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
+      @Override
+      public void apply(final ISourceAppender it) {
+        List<LightweightTypeReference> _resolvedParameterTypes = superConstructor.getResolvedParameterTypes();
+        boolean _isEmpty = _resolvedParameterTypes.isEmpty();
+        boolean _not = (!_isEmpty);
+        if (_not) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("super(");
+          JvmConstructor _declaration = superConstructor.getDeclaration();
+          EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+          final Function1<JvmFormalParameter, String> _function = new Function1<JvmFormalParameter, String>() {
+            @Override
+            public String apply(final JvmFormalParameter it) {
+              return it.getSimpleName();
+            }
+          };
+          List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function);
+          String _join = IterableExtensions.join(_map, ", ");
+          _builder.append(_join, "");
+          _builder.append(")");
+          it.append(_builder);
         }
-      };
-      List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function);
-      String _join = IterableExtensions.join(_map, ", ");
-      _builder.append(_join, "");
-      _builder.append(")");
-      _xifexpression = _builder.toString();
-    }
-    constructorBuilder.setBody(_xifexpression);
+      }
+    };
+    constructorBuilder.setBodyGenerator(_function);
     boolean _isValid = constructorBuilder.isValid();
     if (_isValid) {
       constructorBuilder.build(appendable);

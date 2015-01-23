@@ -165,7 +165,7 @@ class AnonymousClassValidationTest extends AbstractXtendTestCase {
 					}
 				}
 			}
-		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.INVALID_SUPER_CALL, 'Cannot call super of an anonymous class from a lambda expression.')
+		'''.parse.assertError(XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_SUPER_CALL, 'Cannot call super of an anonymous class from a lambda expression')
 	}
 	
 	@Test

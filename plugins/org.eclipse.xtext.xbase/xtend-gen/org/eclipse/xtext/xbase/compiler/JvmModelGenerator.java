@@ -91,6 +91,7 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.compiler.LoopExtensions;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
@@ -659,6 +660,42 @@ public class JvmModelGenerator implements IGenerator {
       boolean _isStatic = it.isStatic();
       if (_isStatic) {
         appendable.append("static ");
+      }
+      boolean _and = false;
+      boolean _and_1 = false;
+      boolean _and_2 = false;
+      boolean _and_3 = false;
+      boolean _isAbstract_1 = it.isAbstract();
+      boolean _not = (!_isAbstract_1);
+      if (!_not) {
+        _and_3 = false;
+      } else {
+        boolean _isStatic_1 = it.isStatic();
+        boolean _not_1 = (!_isStatic_1);
+        _and_3 = _not_1;
+      }
+      if (!_and_3) {
+        _and_2 = false;
+      } else {
+        JavaVersion _targetVersion = config.getTargetVersion();
+        boolean _isAtLeast = _targetVersion.isAtLeast(JavaVersion.JAVA8);
+        _and_2 = _isAtLeast;
+      }
+      if (!_and_2) {
+        _and_1 = false;
+      } else {
+        EObject _eContainer = it.eContainer();
+        _and_1 = (_eContainer instanceof JvmGenericType);
+      }
+      if (!_and_1) {
+        _and = false;
+      } else {
+        EObject _eContainer_1 = it.eContainer();
+        boolean _isInterface = ((JvmGenericType) _eContainer_1).isInterface();
+        _and = _isInterface;
+      }
+      if (_and) {
+        appendable.append("default ");
       }
       boolean _isFinal = it.isFinal();
       if (_isFinal) {

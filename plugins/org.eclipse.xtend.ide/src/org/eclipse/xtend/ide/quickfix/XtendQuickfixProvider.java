@@ -246,7 +246,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
-		doImplementAbstractMethods(issue, acceptor);
+		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
 				new ISemanticModification() {
 			@Override
@@ -258,12 +258,17 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	@Fix(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS)
 	public void implementAbstractMethodsInAnonymousClass(final Issue issue, IssueResolutionAcceptor acceptor) {
-		doImplementAbstractMethods(issue, acceptor);
+		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 	}
 	
-	protected void doImplementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
+	@Fix(IssueCodes.CONFLICTING_DEFAULT_METHODS)
+	public void overrideDefaultMethod(final Issue issue, IssueResolutionAcceptor acceptor) {
+		doOverrideMethods(issue, acceptor, "Override conflicting methods");
+	}
+	
+	protected void doOverrideMethods(final Issue issue, IssueResolutionAcceptor acceptor, String label) {
 		if (issue.getData() != null && issue.getData().length > 0) {
-			acceptor.accept(issue, "Add unimplemented methods", "Add unimplemented methods", "fix_indent.gif",
+			acceptor.accept(issue, label, label, "fix_indent.gif",
 					new ISemanticModification() {
 						@Override
 						public void apply(EObject element, IModificationContext context) throws Exception {

@@ -100,7 +100,7 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	def testXtendCustomBody() {
 		(createConstructorBuilder(xtendClass) => [
 			context = xtendClass
-			body = 'return'
+			bodyGenerator = [append('return')]
 		]).assertBuilds('''
 			new() {
 			  return
@@ -112,7 +112,7 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	def testJavaCustomBody() {
 		(createConstructorBuilder(javaClass) => [
 			context = javaClass
-			body = 'return'
+			bodyGenerator = [append('return')]
 		]).assertBuilds('''
 			Bar() {
 			  return;

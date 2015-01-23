@@ -151,6 +151,8 @@ public class IssueCodes {
 	 */
 	public static final String DUPLICATE_TYPE = ISSUE_CODE_PREFIX + "duplicate_type";
 	
+	public static final String INVALID_SUPER_CALL = ISSUE_CODE_PREFIX +  "invalid_super_call";
+	
 	private IssueCodes() {
 	}
 

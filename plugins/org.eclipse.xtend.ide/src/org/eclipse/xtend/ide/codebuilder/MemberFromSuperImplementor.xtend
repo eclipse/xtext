@@ -10,14 +10,16 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.AnnotationLookup
 import org.eclipse.xtext.xbase.compiler.ISourceAppender
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
-import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
-import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmType
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -53,14 +55,37 @@ class MemberFromSuperImplementor {
 			]
 			methodBuilder.typeParameters = typeParameters
 		}
-		if(!overriddenOperation.declaration.abstract)
-			methodBuilder.body = '''super.«
+		if(!overriddenOperation.declaration.abstract) {
+			val body = '''super.«
 				FOR typeParam: overriddenOperation.resolvedTypeParameters BEFORE '<' SEPARATOR ',' AFTER '>'»«
 					typeParam.simpleName»«
 				ENDFOR
 				»«overriddenOperation.declaration.simpleName»(«overriddenOperation.declaration.parameters.map[simpleName].join(', ')»)'''
+			val superTypeRef = getImplementedInterface(inferredType, overriddenOperation.declaration.declaringType)
+			methodBuilder.bodyGenerator = [
+				superTypeRef?.apply(it)
+				append(body)
+			] 
+		}
 		if(methodBuilder.isValid)
 			methodBuilder.build(appendable)
+	}
+	
+	private def (ISourceAppender)=>void getImplementedInterface(JvmDeclaredType subType, JvmDeclaredType superInterface) {
+		if (superInterface instanceof JvmGenericType && (superInterface as JvmGenericType).isInterface) {
+			if (subType.superTypes.exists[type == superInterface]) {
+				return [append(superInterface).append('.')]
+			}
+			val interfaze = subType.superTypes.filter[type.isInterface].map[type as JvmDeclaredType]
+				.findFirst[getImplementedInterface(superInterface) != null]
+			if (interfaze != null) {
+				return [append(interfaze).append('.')]
+			}
+		}
+	}
+
+	private def isInterface(JvmType type) {
+		type instanceof JvmGenericType && (type as JvmGenericType).isInterface
 	}
 
 	def void appendConstructorFromSuper(XtendClass overrider, IResolvedConstructor superConstructor, ISourceAppender appendable) {
@@ -68,10 +93,10 @@ class MemberFromSuperImplementor {
 		val inferredType = associations.getInferredType(overrider)
 		val constructorBuilder = codeBuilderFactory.createConstructorBuilder(inferredType)
 		initializeExecutableBuilder(constructorBuilder, inferredType, superConstructor)
-		constructorBuilder.body = if(superConstructor.resolvedParameterTypes.empty) 
-				'' 
-			else 
-				'''super(«superConstructor.declaration.parameters.map[simpleName].join(', ')»)'''
+		constructorBuilder.bodyGenerator = [
+			if (!superConstructor.resolvedParameterTypes.empty) 
+				append('''super(«superConstructor.declaration.parameters.map[simpleName].join(', ')»)''')
+		]
 		if(constructorBuilder.isValid)
 			constructorBuilder.build(appendable)
 	}
