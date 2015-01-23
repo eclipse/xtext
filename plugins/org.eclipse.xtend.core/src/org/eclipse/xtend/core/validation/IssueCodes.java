@@ -42,6 +42,7 @@ public final class IssueCodes {
 	public static final String DUPLICATE_METHOD = ISSUE_CODE_PREFIX + "duplicate_method";
 	public static final String DUPLICATE_FIELD = ISSUE_CODE_PREFIX + "duplicate_field";
 	public static final String DUPLICATE_TYPE_NAME = org.eclipse.xtext.xbase.validation.IssueCodes.DUPLICATE_TYPE;
+	public static final String CONFLICTING_DEFAULT_METHODS = ISSUE_CODE_PREFIX + "conflicting_default_methods";
 	public static final String MISSING_ABSTRACT = ISSUE_CODE_PREFIX + "missing_abstract";
 	public static final String MISSING_ABSTRACT_IN_ANONYMOUS = ISSUE_CODE_PREFIX + "missing_abstract_in_anonymous";
 	public static final String MISSING_OVERRIDE = ISSUE_CODE_PREFIX + "missing_override";

@@ -58,27 +58,30 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   private List<JvmTypeParameter> typeParameters = CollectionLiterals.<JvmTypeParameter>emptyList();
   
   @Accessors
-  private String body;
+  private Procedure1<? super ISourceAppender> bodyGenerator;
   
   @Accessors
   private boolean varArgsFlag;
   
   public ISourceAppender appendBody(final ISourceAppender appendable, final String statementSeparator) {
-    ISourceAppender _append = appendable.append(" {");
-    ISourceAppender _increaseIndentation = _append.increaseIndentation();
-    ISourceAppender _newLine = _increaseIndentation.newLine();
-    String _elvis = null;
-    if (this.body != null) {
-      _elvis = this.body;
-    } else {
-      String _defaultBody = this.defaultBody();
-      _elvis = _defaultBody;
+    ISourceAppender _xblockexpression = null;
+    {
+      ISourceAppender _append = appendable.append(" {");
+      ISourceAppender _increaseIndentation = _append.increaseIndentation();
+      _increaseIndentation.newLine();
+      boolean _notEquals = (!Objects.equal(this.bodyGenerator, null));
+      if (_notEquals) {
+        this.bodyGenerator.apply(appendable);
+      } else {
+        String _defaultBody = this.defaultBody();
+        appendable.append(_defaultBody);
+      }
+      ISourceAppender _append_1 = appendable.append(statementSeparator);
+      ISourceAppender _decreaseIndentation = _append_1.decreaseIndentation();
+      ISourceAppender _newLine = _decreaseIndentation.newLine();
+      _xblockexpression = _newLine.append("}");
     }
-    ISourceAppender _append_1 = _newLine.append(_elvis);
-    ISourceAppender _append_2 = _append_1.append(statementSeparator);
-    ISourceAppender _decreaseIndentation = _append_2.decreaseIndentation();
-    ISourceAppender _newLine_1 = _decreaseIndentation.newLine();
-    return _newLine_1.append("}");
+    return _xblockexpression;
   }
   
   protected String defaultBody() {
@@ -271,12 +274,12 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   }
   
   @Pure
-  public String getBody() {
-    return this.body;
+  public Procedure1<? super ISourceAppender> getBodyGenerator() {
+    return this.bodyGenerator;
   }
   
-  public void setBody(final String body) {
-    this.body = body;
+  public void setBodyGenerator(final Procedure1<? super ISourceAppender> bodyGenerator) {
+    this.bodyGenerator = bodyGenerator;
   }
   
   @Pure

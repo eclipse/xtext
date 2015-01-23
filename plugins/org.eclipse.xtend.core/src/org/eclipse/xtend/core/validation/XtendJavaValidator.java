@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -92,12 +93,14 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
@@ -140,6 +143,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
@@ -598,8 +602,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
 			JvmTypeReference implementedType = xtendClass.getImplements().get(i);
-			if (!(implementedType.getType() instanceof JvmGenericType)
-					|| !((JvmGenericType) implementedType.getType()).isInterface()) {
+			if (!isInterface(implementedType.getType())) {
 				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
 			}
 			checkWildcardSupertype(xtendClass, implementedType, XTEND_CLASS__IMPLEMENTS, i);
@@ -609,12 +612,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkSuperTypes(XtendInterface xtendInterface) {
 		for (int i = 0; i < xtendInterface.getExtends().size(); ++i) {
-			JvmTypeReference implementedType = xtendInterface.getExtends().get(i);
-			if (!(implementedType.getType() instanceof JvmGenericType)
-					|| !((JvmGenericType) implementedType.getType()).isInterface()) {
+			JvmTypeReference extendedType = xtendInterface.getExtends().get(i);
+			if (!isInterface(extendedType.getType())) {
 				error("Extended interface must be an interface", XTEND_INTERFACE__EXTENDS, i, INTERFACE_EXPECTED);
 			}
-			checkWildcardSupertype(xtendInterface, implementedType, XTEND_INTERFACE__EXTENDS, i);
+			checkWildcardSupertype(xtendInterface, extendedType, XTEND_INTERFACE__EXTENDS, i);
 		}
 		JvmGenericType inferredType = associations.getInferredType(xtendInterface);
 		if(inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
@@ -797,15 +799,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			operationsMissingImplementation = Lists.newArrayList();
 		}
 		IVisibilityHelper visibilityHelper = new ContextualVisibilityHelper(this.visibilityHelper, resolvedFeatures.getType());
+		Map<String, IResolvedOperation> defaultInterfaceMethods = null;
+		boolean flaggedType = false;
 		for (IResolvedOperation operation : resolvedFeatures.getAllOperations()) {
-			if (operation.getDeclaration().getDeclaringType() != inferredType) {
+			JvmDeclaredType operationDeclaringType = operation.getDeclaration().getDeclaringType();
+			if (operationDeclaringType != inferredType) {
 				if (operationsMissingImplementation != null && operation.getDeclaration().isAbstract()) {
 					operationsMissingImplementation.add(operation);
 				}
 				if (visibilityHelper.isVisible(operation.getDeclaration())) {
+					String erasureSignature = operation.getResolvedErasureSignature();
 					List<IResolvedOperation> declaredOperationsWithSameErasure = 
-							resolvedFeatures.getDeclaredOperations(operation.getResolvedErasureSignature());
-					for(IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
+							resolvedFeatures.getDeclaredOperations(erasureSignature);
+					for (IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
 							EObject source = findPrimarySourceElement(localOperation);
 							if (flaggedOperations.add(source)) {
@@ -831,10 +837,50 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 							}
 						}
 					}
+					if (declaredOperationsWithSameErasure.isEmpty() && isInterface(operationDeclaringType)) {
+						IResolvedOperation conflictingOperation = null;
+						if (defaultInterfaceMethods == null) {
+							defaultInterfaceMethods = Maps.newHashMap();
+						} else {
+							conflictingOperation = defaultInterfaceMethods.get(erasureSignature);
+						}
+						if (conflictingOperation == null) {
+							defaultInterfaceMethods.put(erasureSignature, operation);
+						} else if ((!operation.getDeclaration().isAbstract() || !conflictingOperation.getDeclaration().isAbstract())
+								&& !flaggedType) {
+							if (!operation.getDeclaration().isAbstract() && !conflictingOperation.getDeclaration().isAbstract()) {
+								String uri = EcoreUtil.getURI(operation.getDeclaration()).toString();
+								error("The type " + xtendType.getName()
+										+ " inherits the conflicting non-abstract methods " + conflictingOperation.getSimpleSignature()
+										+ " from " + getDeclaratorName(conflictingOperation.getDeclaration())
+										+ " and " + operation.getSimpleSignature()
+										+ " from " + getDeclaratorName(operation.getDeclaration()) + ".",
+										xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME,
+										CONFLICTING_DEFAULT_METHODS, uri);
+							} else {
+								IResolvedOperation abstractOp, nonabstractOp;
+								if (operation.getDeclaration().isAbstract()) {
+									abstractOp = operation;
+									nonabstractOp = conflictingOperation;
+								} else {
+									abstractOp = conflictingOperation;
+									nonabstractOp = operation;
+								}
+								String uri = EcoreUtil.getURI(nonabstractOp.getDeclaration()).toString();
+								error("The non-abstract method " + nonabstractOp.getSimpleSignature()
+										+ " inherited from " + getDeclaratorName(nonabstractOp.getDeclaration())
+										+ " conflicts with the method " + abstractOp.getSimpleSignature()
+										+ " inherited from " + getDeclaratorName(abstractOp.getDeclaration()) + ".",
+										xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME,
+										CONFLICTING_DEFAULT_METHODS, uri);
+							}
+							flaggedType = true;
+						}
+					}
 				}
 			}
 		}
-		if (operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty()) {
+		if (operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty() && !flaggedType) {
 			reportMissingImplementations(xtendType, inferredType, operationsMissingImplementation);
 		}
 	}
@@ -1039,7 +1085,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						XExpression expression = containerProvider.getAssociatedExpression(constructor);
 						if (expression instanceof XBlockExpression) {
 							List<XExpression> expressions = ((XBlockExpression) expression).getExpressions();
-							if(expressions.isEmpty() || !isDelegatConstructorCall(expressions.get(0))) {
+							if(expressions.isEmpty() || !isDelegateConstructorCall(expressions.get(0))) {
 								EObject source = associations.getPrimarySourceElement(constructor);
 								error("No default constructor in super type " + superType.getSimpleName() 
 										+ ". Another constructor must be invoked explicitly.",
@@ -1052,7 +1098,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		} 
 	}
 
-	protected boolean isDelegatConstructorCall(XExpression expression) {
+	protected boolean isDelegateConstructorCall(XExpression expression) {
 		if(expression instanceof XFeatureCall) {
 			JvmIdentifiableElement feature = ((XFeatureCall)expression).getFeature();
 			return (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor);
@@ -1161,7 +1207,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				}
 			}
 		} else if(function.getDeclaringType() instanceof XtendInterface) {
-			if (!(getGeneratorConfig(function).getTargetVersion().isAtLeast(JAVA8) && function.isStatic())) {
+			if (!getGeneratorConfig(function).getTargetVersion().isAtLeast(JAVA8)) {
 				error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
 			}
 		}
@@ -1887,8 +1933,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			}
 		} else if (method.getDeclaringType() instanceof XtendInterface) {
 			// The validator for interface methods is created lazily when the generator configuration is loaded
-			getGeneratorConfig(method);
-			methodInInterfaceModifierValidator.checkModifiers(method, "method " + method.getName());			
+			GeneratorConfig config = getGeneratorConfig(method);
+			methodInInterfaceModifierValidator.checkModifiers(method, "method " + method.getName());
+			int abstractIndex = method.getModifiers().indexOf("abstract");
+			if (config.getTargetVersion().isAtLeast(JAVA8) && method.getExpression() != null && abstractIndex != -1) {
+				error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
+			}
 		}
 	}
 
@@ -1954,6 +2004,39 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					if (closure != null && EcoreUtil.isAncestor(anon, closure)) {
 						error("Cannot call super of an anonymous class from a lambda expression.", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IssueCodes.INVALID_SUPER_CALL);
 					}
+				}
+			}
+		}
+	}
+	
+	@Check
+	protected void checkSuperCallToInterface(final XFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if (feature instanceof JvmType
+				&& featureCall.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET
+				&& IFeatureNames.SUPER.getFirstSegment().equals(featureCall.getConcreteSyntaxFeatureName())) {
+			JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(featureCall);
+			JvmDeclaredType declaringType = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+			if (isInterface(declaringType)) {
+				error("super reference is illegal in interface context", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IssueCodes.INVALID_SUPER_CALL);
+			}
+		}
+	}
+	
+	@Check
+	protected void checkSuperCallToInterface(final XMemberFeatureCall featureCall) {
+		if (featureCall.getMemberCallTarget() instanceof XAbstractFeatureCall) {
+			JvmIdentifiableElement feature = ((XAbstractFeatureCall) featureCall.getMemberCallTarget()).getFeature();
+			if (feature instanceof JvmGenericType && ((JvmGenericType) feature).isInterface()
+					&& IFeatureNames.SUPER.getFirstSegment().equals(featureCall.getConcreteSyntaxFeatureName())) {
+				JvmIdentifiableElement logicalContainer = getLogicalContainerProvider().getNearestLogicalContainer(featureCall);
+				JvmDeclaredType declaringType = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+				while (declaringType != null) {
+					if (declaringType == feature) {
+						error("super reference is illegal in interface context", featureCall, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, IssueCodes.INVALID_SUPER_CALL);
+						break;
+					}
+					declaringType = EcoreUtil2.getContainerOfType(declaringType.eContainer(), JvmDeclaredType.class);
 				}
 			}
 		}
