@@ -157,6 +157,7 @@ public class CallHierarchyHelper extends XtextSwitch<Boolean> {
 		if (foundSomething) {
 			this.grammarElement = nextGrammarElement;
 			this.visiting.clear();
+			this.visited.clear();
 		}
 		return Boolean.FALSE;
 	}
