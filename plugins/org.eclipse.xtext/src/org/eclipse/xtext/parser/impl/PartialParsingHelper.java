@@ -157,7 +157,12 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 				List featureValueList = (List) oldSemanticParentElement.eGet(feature);
 				int index = featureValueList.indexOf(oldSemanticElement);
 				unloadSemanticObject(oldSemanticElement);
-				featureValueList.set(index, newParseResult.getRootASTElement());
+				EObject newSemanticObject = newParseResult.getRootASTElement();
+				if (newSemanticObject != null) {
+					featureValueList.set(index, newParseResult.getRootASTElement());
+				} else {
+					featureValueList.remove(index);
+				}
 			} else {
 				unloadSemanticObject(oldSemanticElement);
 				oldSemanticParentElement.eSet(feature, newParseResult.getRootASTElement());
