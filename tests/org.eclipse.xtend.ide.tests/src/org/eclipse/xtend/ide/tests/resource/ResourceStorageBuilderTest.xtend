@@ -8,20 +8,25 @@
 package org.eclipse.xtend.ide.tests.resource
 
 import com.google.inject.Inject
+import org.eclipse.core.resources.IProject
+import org.eclipse.core.resources.IStorage
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.builder.trace.JarEntryAwareTrace
+import org.eclipse.xtext.builder.trace.StorageAwareTrace
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.resource.persistence.SourceLevelURIsAdapter
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper
 import org.junit.Test
-import org.eclipse.xtext.builder.trace.StorageAwareTrace
-import org.eclipse.core.resources.IStorage
-import org.eclipse.core.resources.IProject
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.core.runtime.jobs.Job
+import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.Status
+import org.eclipse.xtext.ui.editor.SchedulingRuleFactory
+import com.google.common.base.Throwables
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -69,7 +74,59 @@ class ResourceStorageTest extends AbstractXtendUITestCase {
 		assertEquals("mypack.MyClass", resource.resourceDescription.exportedObjects.map[name.toString].join(','))
 	}
 	
+	@Test def void testShouldLoadFromStorage() {
+		val file = 'mypack/MyClass.xtend'.createFile('''
+			package mypack
+			
+			class MyClass {
+				public def void foo() {
+				}
+			}
+		''')
+		IResourcesSetupUtil.waitForAutoBuild
 
+		val uri = uriMapper.getUri(file)
+		
+		val resourceSet = resourceSetProvider.get(file.project)
+		SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, #[])
+	
+		val resource = resourceSet.createResource(uri) as StorageAwareResource
+		
+		doWorkInJob[
+			assertTrue(resource.resourceStorageFacade.shouldLoadFromStorage(resource))
+		]
+		
+		file.delete(true, new NullProgressMonitor)
+		IResourcesSetupUtil.waitForAutoBuild
+		
+		doWorkInJob[
+			assertFalse(resource.resourceStorageFacade.shouldLoadFromStorage(resource))
+		]
+	}
+	
+	protected def void doWorkInJob(()=>void work) {
+		val throwables = newArrayList
+		val testShouldLoadFromStorageJob = new Job('''«class.name».TestJob''') {
+
+			override protected run(IProgressMonitor monitor) {
+				try {
+					work.apply
+				} catch (Throwable t) {
+					throwables += t
+				}
+				Status.OK_STATUS
+			}
+
+		} => [
+			rule = SchedulingRuleFactory.INSTANCE.newSequence
+		]
+		testShouldLoadFromStorageJob.schedule
+		testShouldLoadFromStorageJob.join
+		val t = throwables.head
+		if (t != null) {
+			Throwables.propagate(t)
+		}
+	}
 
 	@Test
 	def void testDecodeURI(){

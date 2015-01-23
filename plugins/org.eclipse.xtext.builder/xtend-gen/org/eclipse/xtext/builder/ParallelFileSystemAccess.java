@@ -105,21 +105,21 @@ public class ParallelFileSystemAccess implements IFileSystemAccess, IFileSystemA
   }
   
   @Override
-  public URI getURI(final String fileName, final String outputConfiguration) {
+  public URI getURI(final String path, final String outputConfiguration) {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      return ((EclipseResourceFileSystemAccess2)this.delegate).getURI(fileName, outputConfiguration, _nullProgressMonitor);
+      return ((EclipseResourceFileSystemAccess2)this.delegate).getURI(path, outputConfiguration, _nullProgressMonitor);
     }
-    return ((IFileSystemAccessExtension2) this.delegate).getURI(fileName, outputConfiguration);
+    return ((IFileSystemAccessExtension2) this.delegate).getURI(path, outputConfiguration);
   }
   
   @Override
-  public URI getURI(final String fileName) {
+  public URI getURI(final String path) {
     if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-      return ((EclipseResourceFileSystemAccess2)this.delegate).getURI(fileName, _nullProgressMonitor);
+      return ((EclipseResourceFileSystemAccess2)this.delegate).getURI(path, _nullProgressMonitor);
     }
-    return ((IFileSystemAccessExtension2) this.delegate).getURI(fileName);
+    return ((IFileSystemAccessExtension2) this.delegate).getURI(path);
   }
   
   @Override
