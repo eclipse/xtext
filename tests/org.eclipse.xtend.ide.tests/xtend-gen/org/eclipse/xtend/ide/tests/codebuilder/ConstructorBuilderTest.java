@@ -9,6 +9,7 @@ import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -240,7 +241,13 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
         it.setContext(_xtendClass);
-        it.setBody("return");
+        final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
+          @Override
+          public void apply(final ISourceAppender it) {
+            it.append("return");
+          }
+        };
+        it.setBodyGenerator(_function);
       }
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
@@ -263,7 +270,13 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
       public void apply(final AbstractConstructorBuilder it) {
         JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
         it.setContext(_javaClass);
-        it.setBody("return");
+        final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
+          @Override
+          public void apply(final ISourceAppender it) {
+            it.append("return");
+          }
+        };
+        it.setBodyGenerator(_function);
       }
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);

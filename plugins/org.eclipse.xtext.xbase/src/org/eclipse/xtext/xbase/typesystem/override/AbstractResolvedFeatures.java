@@ -39,6 +39,11 @@ public abstract class AbstractResolvedFeatures {
 		return new BottomResolvedOperation(operation, type, overrideTester);
 	}
 	
+	protected DefaultConflictResolvedOperation createConflictOperation(JvmOperation operation,
+			IResolvedOperation... conflictingOperations) {
+		return new DefaultConflictResolvedOperation(operation, type, overrideTester, conflictingOperations);
+	}
+	
 	protected BottomResolvedOperation createResolvedOperation(JvmOperation operation, LightweightTypeReference context) {
 		return new BottomResolvedOperation(operation, context, overrideTester);
 	}
