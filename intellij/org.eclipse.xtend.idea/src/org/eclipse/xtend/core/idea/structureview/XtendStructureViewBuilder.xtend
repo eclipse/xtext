@@ -40,12 +40,12 @@ class XtendStructureViewBuilder implements XtextFileAwareStructureViewBuilder {
 		]
 		new StructureViewComposite(
 			new StructureViewDescriptor(
-				'Xtend Model View',
+				'Xtend View',
 				xtendSourceStructureViewBuilder.createStructureView(fileEditor, project),
 				null
 			),
 			new StructureViewDescriptor(
-				'JVM Model View',
+				'JVM View',
 				xtendJvmStructureViewBuilder.createStructureView(fileEditor, project),
 				null
 			)
