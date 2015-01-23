@@ -246,7 +246,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Fix(IssueCodes.CLASS_MUST_BE_ABSTRACT)
 	public void implementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
-		doImplementAbstractMethods(issue, acceptor);
+		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 		acceptor.accept(issue, "Make class abstract", "Make class abstract", "fix_indent.gif",
 				new ISemanticModification() {
 			@Override
@@ -258,44 +258,63 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	@Fix(IssueCodes.ANONYMOUS_CLASS_MISSING_MEMBERS)
 	public void implementAbstractMethodsInAnonymousClass(final Issue issue, IssueResolutionAcceptor acceptor) {
-		doImplementAbstractMethods(issue, acceptor);
+		doOverrideMethods(issue, acceptor, "Add unimplemented methods");
 	}
 	
-	protected void doImplementAbstractMethods(final Issue issue, IssueResolutionAcceptor acceptor) {
-		if (issue.getData() != null && issue.getData().length > 0) {
-			acceptor.accept(issue, "Add unimplemented methods", "Add unimplemented methods", "fix_indent.gif",
-					new ISemanticModification() {
-						@Override
-						public void apply(EObject element, IModificationContext context) throws Exception {
-							XtendTypeDeclaration clazz = (XtendTypeDeclaration) element;
-							JvmGenericType inferredType = (JvmGenericType) associations.getInferredType(clazz);
-							ResolvedFeatures resolvedOperations = overrideHelper.getResolvedFeatures(inferredType);
-							IXtextDocument document = context.getXtextDocument();
-							final int offset = insertionOffsets.getNewMethodInsertOffset(null, clazz);
-							int currentIndentation = appendableFactory.getIndentationLevelAtOffset(offset, document, (XtextResource) clazz.eResource());
-							final int indentationToUse = clazz.getMembers().isEmpty() ? currentIndentation + 1 : currentIndentation;
-							ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
-									offset, 0, new OptionalParameters() {{ 
-										ensureEmptyLinesAround = true;
-										baseIndentationLevel = indentationToUse;	
-									}});
-							boolean isFirst = true;
-							for (String operationUriAsString : issue.getData()) {
-								URI operationURI = URI.createURI(operationUriAsString);
-								EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
-								if (overridden instanceof JvmOperation) {
-									if(!isFirst) 
-										appendable.newLine().newLine();
-									isFirst = false;
-									
-									superMemberImplementor.appendOverrideFunction(clazz, resolvedOperations.getResolvedOperation((JvmOperation) overridden),
-											appendable);
-								}
-							}
-							appendable.commitChanges();
-						}
-					});
+	@Fix(IssueCodes.CONFLICTING_DEFAULT_METHODS)
+	public void overrideDefaultMethod(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData() != null) {
+			for (String data : issue.getData()) {
+				int separatorIndex = data.indexOf('|');
+				if (separatorIndex > 0) {
+					String interfaceName = data.substring(0, separatorIndex);
+					String uri = data.substring(separatorIndex + 1);
+					doOverrideMethods(issue, acceptor, "Override conflicting method of type " + interfaceName,
+							new String[] {uri});
+				}
+			}
 		}
+	}
+	
+	protected void doOverrideMethods(final Issue issue, IssueResolutionAcceptor acceptor, String label) {
+		if (issue.getData() != null && issue.getData().length > 0) {
+			doOverrideMethods(issue, acceptor, label, issue.getData());
+		}
+	}
+	
+	protected void doOverrideMethods(final Issue issue, IssueResolutionAcceptor acceptor, String label, final String[] operationUris) {
+		acceptor.accept(issue, label, label, "fix_indent.gif",
+				new ISemanticModification() {
+					@Override
+					public void apply(EObject element, IModificationContext context) throws Exception {
+						XtendTypeDeclaration clazz = (XtendTypeDeclaration) element;
+						JvmGenericType inferredType = (JvmGenericType) associations.getInferredType(clazz);
+						ResolvedFeatures resolvedOperations = overrideHelper.getResolvedFeatures(inferredType);
+						IXtextDocument document = context.getXtextDocument();
+						final int offset = insertionOffsets.getNewMethodInsertOffset(null, clazz);
+						int currentIndentation = appendableFactory.getIndentationLevelAtOffset(offset, document, (XtextResource) clazz.eResource());
+						final int indentationToUse = clazz.getMembers().isEmpty() ? currentIndentation + 1 : currentIndentation;
+						ReplacingAppendable appendable = appendableFactory.create(document, (XtextResource) clazz.eResource(),
+								offset, 0, new OptionalParameters() {{ 
+									ensureEmptyLinesAround = true;
+									baseIndentationLevel = indentationToUse;	
+								}});
+						boolean isFirst = true;
+						for (String operationUriAsString : operationUris) {
+							URI operationURI = URI.createURI(operationUriAsString);
+							EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
+							if (overridden instanceof JvmOperation) {
+								if(!isFirst) 
+									appendable.newLine().newLine();
+								isFirst = false;
+								
+								superMemberImplementor.appendOverrideFunction(clazz, resolvedOperations.getResolvedOperation((JvmOperation) overridden),
+										appendable);
+							}
+						}
+						appendable.commitChanges();
+					}
+				});
 	}
 
 	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION)

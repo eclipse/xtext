@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -18,12 +21,15 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
@@ -40,6 +46,12 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 	private List<IResolvedOperation> declaredOperations;
 	private ListMultimap<String, IResolvedOperation> allOperationsPerErasure;
 	private ListMultimap<String, IResolvedOperation> declaredOperationsPerErasure;
+	private JavaVersion targetVersion = JavaVersion.JAVA5;
+	
+	public ResolvedFeatures(LightweightTypeReference type, OverrideTester overrideTester, JavaVersion targetVersion) {
+		super(type, overrideTester);
+		this.targetVersion = targetVersion;
+	}
 	
 	public ResolvedFeatures(LightweightTypeReference type, OverrideTester overrideTester) {
 		super(type, overrideTester);
@@ -110,42 +122,85 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 		if (!(rawType instanceof JvmDeclaredType)) {
 			return Collections.emptyList();
 		}
-		List<IResolvedOperation> result = Lists.newArrayList(getDeclaredOperations());
-		Multimap<String, AbstractResolvedOperation> processed = HashMultimap.create();
-		for (IResolvedOperation resolvedOperation : result) {
-			processed.put(resolvedOperation.getDeclaration().getSimpleName(), (AbstractResolvedOperation)resolvedOperation);
+		Multimap<String, AbstractResolvedOperation> processedOperations = HashMultimap.create();
+		for (IResolvedOperation resolvedOperation : getDeclaredOperations()) {
+			processedOperations.put(resolvedOperation.getDeclaration().getSimpleName(), (AbstractResolvedOperation) resolvedOperation);
 		}
-		Set<JvmDeclaredType> processedTypes = Sets.newHashSet((JvmDeclaredType)rawType);
-		computeAllOperationsFromSuperTypes((JvmDeclaredType)rawType, processed, processedTypes, result);
-		return Collections.unmodifiableList(result);
+		if (targetVersion.isAtLeast(JavaVersion.JAVA8)) {
+			computeAllOperationsFromSortedSuperTypes((JvmDeclaredType) rawType, processedOperations);
+		} else {
+			Set<JvmType> processedTypes = Sets.newHashSet(rawType);
+			computeAllOperationsFromSuperTypes((JvmDeclaredType) rawType, processedOperations, processedTypes);
+		}
+		return Collections.unmodifiableList(new ArrayList<IResolvedOperation>(processedOperations.values()));
 	}
 
-	protected void computeAllOperations(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations, Set<JvmDeclaredType> processedTypes, List<IResolvedOperation> result) {
-		if (type != null && !type.eIsProxy() && processedTypes.add(type)) {
-			Iterable<JvmOperation> operations = type.getDeclaredOperations();
-			for(JvmOperation operation: operations) {
+	protected void computeAllOperations(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations) {
+		for (JvmOperation operation: type.getDeclaredOperations()) {
+			boolean addToResult = true;
+			if (targetVersion.isAtLeast(JavaVersion.JAVA8)) {
+				addToResult = handleOverridesAndConflicts(operation, processedOperations);
+			} else {
 				String simpleName = operation.getSimpleName();
 				if (processedOperations.containsKey(simpleName)) {
-					if (isOverridden(operation, processedOperations.get(simpleName))) {
-						continue;
-					}
+					addToResult = !isOverridden(operation, processedOperations.get(simpleName));
 				}
-				BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
-				processedOperations.put(simpleName, resolvedOperation);
-				result.add(resolvedOperation);
 			}
-			computeAllOperationsFromSuperTypes(type, processedOperations, processedTypes, result);
+			if (addToResult) {
+				BottomResolvedOperation resolvedOperation = createResolvedOperation(operation);
+				processedOperations.put(operation.getSimpleName(), resolvedOperation);
+			}
 		}
 	}
 
 	protected void computeAllOperationsFromSuperTypes(JvmDeclaredType type, Multimap<String, AbstractResolvedOperation> processedOperations,
-			Set<JvmDeclaredType> processedTypes, List<IResolvedOperation> result) {
-		for(JvmTypeReference superType: type.getSuperTypes()) {
+			Set<JvmType> processedTypes) {
+		for (JvmTypeReference superType: type.getSuperTypes()) {
 			JvmType rawSuperType = superType.getType();
-			if (rawSuperType instanceof JvmDeclaredType) {
-				computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations, processedTypes, result);
+			if (rawSuperType instanceof JvmDeclaredType && !rawSuperType.eIsProxy() && processedTypes.add(rawSuperType)) {
+				computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations);
+				computeAllOperationsFromSuperTypes((JvmDeclaredType) rawSuperType, processedOperations, processedTypes);
 			}
 		}
+	}
+	
+	protected void computeAllOperationsFromSortedSuperTypes(JvmDeclaredType rootType,
+			Multimap<String, AbstractResolvedOperation> processedOperations) {
+		// First collect the number of incoming supertype references for each type that is to visit
+		Map<JvmType, Integer> incomingCount = Maps.newHashMap();
+		LinkedList<JvmDeclaredType> typeStack = Lists.newLinkedList();
+		typeStack.add(rootType);
+		do {
+			JvmDeclaredType type = typeStack.removeLast();
+			for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
+				JvmType rawSuperType = superTypeRef.getType();
+				Integer n = incomingCount.get(rawSuperType);
+				if (n != null) {
+					incomingCount.put(rawSuperType, n + 1);
+				} else if (rawSuperType instanceof JvmDeclaredType) {
+					incomingCount.put(rawSuperType, 1);
+					typeStack.add((JvmDeclaredType) rawSuperType);
+				}
+			}
+		} while (!typeStack.isEmpty());
+		
+		// Then travel through the supertype hierarchy considering the incoming reference counters
+		typeStack.add(rootType);
+		do {
+			JvmDeclaredType type = typeStack.removeLast();
+			for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
+				JvmType rawSuperType = superTypeRef.getType();
+				Integer n = incomingCount.get(rawSuperType);
+				if (n != null) {
+					if (n == 1) {
+						computeAllOperations((JvmDeclaredType) rawSuperType, processedOperations);
+						typeStack.addLast((JvmDeclaredType) rawSuperType);
+					} else {
+						incomingCount.put(rawSuperType, n - 1);
+					}
+				}
+			}
+		} while (!typeStack.isEmpty());
 	}
 
 	protected List<IResolvedOperation> computeDeclaredOperations() {
@@ -184,6 +239,66 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 			result.add(new ResolvedConstructor(constructor, getType()));
 		}
 		return Collections.unmodifiableList(result);
+	}
+	
+	/**
+	 * When the inherited operations are computed for Java 8, we have to check for conflicting default interface method implementations.
+	 */
+	private boolean handleOverridesAndConflicts(JvmOperation operation, Multimap<String, AbstractResolvedOperation> processedOperations) {
+		String simpleName = operation.getSimpleName();
+		if (!processedOperations.containsKey(simpleName)) {
+			return true;
+		}
+		List<AbstractResolvedOperation> conflictingOperations = null;
+		for (AbstractResolvedOperation candidate : processedOperations.get(simpleName)) {
+			OverrideTester overrideTester = candidate.getOverrideTester();
+			IOverrideCheckResult checkResult = overrideTester.isSubsignature(candidate, operation, false);
+			if (checkResult.getDetails().contains(OverrideCheckDetails.DEFAULT_IMPL_CONFLICT)) {
+				// The current operation conflicts with the candidate
+				if (conflictingOperations == null)
+					conflictingOperations = Lists.newLinkedList();
+				conflictingOperations.add(candidate);
+			} else if (checkResult.isOverridingOrImplementing()) {
+				return false;
+			}
+		}
+		if (conflictingOperations != null) {
+			if (conflictingOperations.size() == 1 && conflictingOperations.get(0) instanceof DefaultConflictResolvedOperation) {
+				// The current operation contributes to the already existing conflict
+				DefaultConflictResolvedOperation conflictResolvedOperation = (DefaultConflictResolvedOperation) conflictingOperations.get(0);
+				boolean isOverridden = false;
+				for (IResolvedOperation conflictingOp : conflictResolvedOperation.getConflictingOperations()) {
+					if (conflictingOp.getResolvedDeclarator().isSubtypeOf(operation.getDeclaringType())) {
+						isOverridden = true;
+						break;
+					}
+				}
+				if (!isOverridden)
+					conflictResolvedOperation.getConflictingOperations().add(createResolvedOperation(operation));
+				return false;
+			}
+			// A new conflict of default implementations was found
+			if (operation.isAbstract()) {
+				DefaultConflictResolvedOperation resolvedOperation = createConflictOperation(conflictingOperations.get(0).getDeclaration());
+				resolvedOperation.getConflictingOperations().add(createResolvedOperation(operation));
+				for (AbstractResolvedOperation conflictingOp : conflictingOperations) {
+					processedOperations.remove(simpleName, conflictingOp);
+					if (conflictingOp.getDeclaration() != resolvedOperation.getDeclaration()) {
+						resolvedOperation.getConflictingOperations().add(conflictingOp);
+					}
+				}
+				processedOperations.put(simpleName, resolvedOperation);
+			} else {
+				DefaultConflictResolvedOperation resolvedOperation = createConflictOperation(operation);
+				for (AbstractResolvedOperation conflictingOp : conflictingOperations) {
+					processedOperations.remove(simpleName, conflictingOp);
+					resolvedOperation.getConflictingOperations().add(conflictingOp);
+				}
+				processedOperations.put(simpleName, resolvedOperation);
+			}
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -79,6 +79,7 @@ import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*
+import static org.eclipse.xtext.xbase.compiler.JavaVersion.*
 
 /**
  * A generator implementation that processes the 
@@ -345,6 +346,9 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("abstract ")
 		if (isStatic)
 			appendable.append("static ")
+		if (!isAbstract && !isStatic && config.targetVersion.isAtLeast(JAVA8)
+				&& eContainer instanceof JvmGenericType && (eContainer as JvmGenericType).isInterface)
+			appendable.append("default ")
 		if (isFinal)
 			appendable.append("final ")
 		if (isSynchronized)
