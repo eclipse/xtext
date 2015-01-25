@@ -15,7 +15,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguageStan
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug348427TestLanguageGrammarAccess;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runners.Parameterized.Parameters;
 
 import com.google.inject.Inject;
 
@@ -33,7 +32,6 @@ public class GrammarCallHierarchyHelperTest extends AbstractXtextTests {
 		injectMembers(this);
 	}
 	
-	@Parameters()
 	@Test public void testCallHierarchy() {
 		Assert.assertFalse(newHelper().doSwitch(grammarAccess.getScenario1_1Rule()));
 		Assert.assertTrue(newHelper().doSwitch(grammarAccess.getScenario1_2Rule()));
