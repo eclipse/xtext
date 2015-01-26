@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -111,7 +112,26 @@ public class CompilationTestHelper {
 		File tempDir = createFreshTempDir();
 		WorkspaceConfig config = new WorkspaceConfig(tempDir.getAbsolutePath());
 		ProjectConfig projectConfig = new ProjectConfig(PROJECT_NAME);
-		projectConfig.addSourceFolderMapping("src", "src-gen");
+		// use default output configuration for the FileSystem Access
+		OutputConfiguration outputConfig = null;
+		for (OutputConfiguration cfg : getOutputConfigurations()) {
+			if (cfg.getName().equals(IFileSystemAccess.DEFAULT_OUTPUT)) {
+				outputConfig = cfg;
+				break;
+			}
+		}
+		if (outputConfig == null) {
+			throw new IllegalStateException("No default output configuration could be found!");
+		}
+		if (!outputConfig.isUseOutputPerSourceFolder()) {
+			String out = outputConfig.getOutputDirectory("src");
+			projectConfig.addSourceFolderMapping("src", out);
+		} else {
+			for (String src : outputConfig.getSourceFolders()) {
+				String out = outputConfig.getOutputDirectory(src);
+				projectConfig.addSourceFolderMapping(src, out);
+			}
+		}
 		config.addProjectConfig(projectConfig);
 		configProvider.setWorkspaceConfig(config);
 	}
