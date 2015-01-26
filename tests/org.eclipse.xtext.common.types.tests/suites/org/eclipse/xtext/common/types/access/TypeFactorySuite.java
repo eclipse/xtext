@@ -8,7 +8,9 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProviderTest;
+import org.eclipse.xtext.common.types.access.jdt.JavaProjectAccessTypeProviderTest;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderTest;
+import org.eclipse.xtext.common.types.access.jdt.SourceBasedJavaProjectAccessTypeProviderTest;
 import org.eclipse.xtext.common.types.access.jdt.SourceBasedJdtTypeProviderTest;
 import org.eclipse.xtext.common.types.access.reflect.ReflectionTypeProviderTest;
 import org.junit.runner.RunWith;
@@ -22,8 +24,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	JdtTypeProviderTest.class,
 	SourceBasedJdtTypeProviderTest.class,
+	JavaProjectAccessTypeProviderTest.class,
+	SourceBasedJavaProjectAccessTypeProviderTest.class,
 	ReflectionTypeProviderTest.class,
-	ClasspathTypeProviderTest.class
+	ClasspathTypeProviderTest.class,
 })
 public class TypeFactorySuite {
 }

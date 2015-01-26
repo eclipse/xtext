@@ -10,8 +10,10 @@ package org.eclipse.xtext.common.types.access.jdt;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
+import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
+import org.eclipse.xtext.common.types.access.jdt.internal.JavaProjectAccessTypeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -54,6 +56,9 @@ public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 		if (javaProject == null)
 			//TODO throw a serious exception instead of returning a non working implementation
 			return new NullJdtTypeProvider(resourceSet);
+		if (javaProject instanceof JavaProject) {
+			return new JavaProjectAccessTypeProvider((JavaProject) javaProject, resourceSet, getIndexedJvmTypeAccess(), copyOwnerProvider==null? DefaultWorkingCopyOwner.PRIMARY : copyOwnerProvider.getWorkingCopyOwner(javaProject, resourceSet), typeResourceServices);
+		}
 		return new JdtTypeProvider(javaProject, resourceSet, getIndexedJvmTypeAccess(), copyOwnerProvider==null? DefaultWorkingCopyOwner.PRIMARY : copyOwnerProvider.getWorkingCopyOwner(javaProject, resourceSet), typeResourceServices);
 	}
 

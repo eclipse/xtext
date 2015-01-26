@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.lang.reflect.Method;
+import java.text.NumberFormat;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -219,6 +220,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	 *        reported and that the operation cannot be cancelled.
 	 */
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor, BuildType type) throws CoreException {
+		long time = System.currentTimeMillis();
 		buildLogger.log("Building " + getProject().getName());
 		// return early if there's nothing to do.
 		// we reuse the isEmpty() impl from BuildData assuming that it doesnT access the ResourceSet which is still null 
@@ -245,6 +247,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		resourceSet.eSetDeliver(false);
 		resourceSet.getResources().clear();
 		resourceSet.eAdapters().clear();
+		buildLogger.log("Finished building " + getProject().getName() + " in " + NumberFormat.getIntegerInstance().format(System.currentTimeMillis() - time) + "ms");
 	}
 
 	/**
