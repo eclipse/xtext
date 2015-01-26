@@ -59,6 +59,7 @@
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<mirroring.phase>prepare-package</mirroring.phase>
 		<skipMirroring>false</skipMirroring>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<!-- <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>  -->
 	</properties>
 	<licenses>

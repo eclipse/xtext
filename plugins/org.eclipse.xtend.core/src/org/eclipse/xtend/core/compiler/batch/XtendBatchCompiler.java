@@ -225,7 +225,7 @@ public class XtendBatchCompiler {
 				public void write(char[] data, int offset, int count) throws IOException {
 					String message = String.copyValueOf(data, offset, count);
 					if (!Strings.isEmpty(message.trim())) {
-						log.debug(message);
+						log.error(message);
 					}
 				}
 
