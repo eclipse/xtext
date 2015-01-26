@@ -181,7 +181,7 @@
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone.website"
-        location="${installation.location}/git/Xpect_pages"
+        location="${installation.location/git/Xpect_pages}"
         remoteURI="meysholdt/Xpect"
         checkoutBranch="gh-pages">
       <annotation
