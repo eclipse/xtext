@@ -39,7 +39,7 @@ class AnnotationTestingTest extends AbstractXtendCompilerTest {
 			assertTrue(compiledClass.declaredFields.exists[name=='foo'])
 			assertTrue(compiledClass.declaredFields.exists[name=='bar'])
 			assertTrue(compiledClass.declaredFields.exists[name=='baz'])
-			assertEquals("foo|bar|baz",new Path("/"+CompilationTestHelper.PROJECT_NAME+"/src-gen/out.txt").contents.toString.trim)
+			assertEquals("foo|bar|baz",new Path("/"+CompilationTestHelper.PROJECT_NAME+"/xtend-gen/out.txt").contents.toString.trim)
 		]
 	}
 }

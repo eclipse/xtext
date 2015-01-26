@@ -87,7 +87,7 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
           };
           boolean _exists_2 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_3)), _function_2);
           Assert.assertTrue(_exists_2);
-          Path _path = new Path((("/" + CompilationTestHelper.PROJECT_NAME) + "/src-gen/out.txt"));
+          Path _path = new Path((("/" + CompilationTestHelper.PROJECT_NAME) + "/xtend-gen/out.txt"));
           CharSequence _contents = AnnotationTestingTest.this.fileSystemSupport.getContents(_path);
           String _string = _contents.toString();
           String _trim = _string.trim();
