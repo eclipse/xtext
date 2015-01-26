@@ -264,6 +264,9 @@
           name="org.eclipse.m2e.core"/>
       <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
+      <requirement
+          name="org.junit"
+          versionRange="4.11.0"/>
       <repositoryList
           name="Mars">
         <repository
