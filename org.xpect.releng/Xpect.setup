@@ -54,8 +54,7 @@
     <setupTask
         xsi:type="git:GitCloneTask"
         id="git.clone"
-        remoteURI="meysholdt/Xpect"
-        checkoutBranch="master">
+        remoteURI="meysholdt/Xpect">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
@@ -88,6 +87,8 @@
             name="de.itemis.xtext.antlr.sdk.feature.group"/>
         <requirement
             name="org.xpect.sdk.feature.group"/>
+        <requirement
+            name="org.xpect.releng"/>
         <requirement
             name="org.xpect.tests"/>
         <requirement
@@ -151,11 +152,6 @@
               url="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_7_0/"/>
         </repositoryList>
       </targlet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.location}/org.xpect.releng"/>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task">
