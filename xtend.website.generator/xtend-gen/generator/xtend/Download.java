@@ -6,10 +6,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Download extends AbstractXtendWebsite {
+  @Override
   public String path() {
     return "download.html";
   }
   
+  @Override
   protected boolean isPrettyPrint() {
     return true;
   }
@@ -52,6 +54,7 @@ public class Download extends AbstractXtendWebsite {
   
   private final String currentVersion = "2.7.3";
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _headline = this.headline("Download");

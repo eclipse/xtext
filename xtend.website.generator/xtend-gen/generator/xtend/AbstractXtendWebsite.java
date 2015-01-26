@@ -7,26 +7,32 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public abstract class AbstractXtendWebsite extends AbstractWebsite {
+  @Override
   public String websiteDescription() {
     return "Xtend is a statically typed programming language sitting on top of Java.";
   }
   
+  @Override
   public String websiteTitle() {
     return "Xtend - Modernized Java";
   }
   
+  @Override
   public String analyticsAccount() {
     return "UA-2429174-4";
   }
   
+  @Override
   public CharSequence headline(final String title) {
     return "";
   }
   
+  @Override
   public String plusoneURL() {
     return "http://www.xtend-lang.org";
   }
   
+  @Override
   public Iterable<Pair<String, String>> topLevelMenu() {
     Pair<String, String> _mappedTo = Pair.<String, String>of("news.html", "News");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("download.html", "Download");
@@ -37,6 +43,7 @@ public abstract class AbstractXtendWebsite extends AbstractWebsite {
     return CollectionLiterals.<Pair<String, String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
   }
   
+  @Override
   public CharSequence quickLinksAndTweets() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"extra\">");

@@ -5,14 +5,17 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class News extends AbstractWebsite {
+  @Override
   public String path() {
     return "news.html";
   }
   
+  @Override
   protected boolean isPrettyPrint() {
     return true;
   }
   
+  @Override
   public CharSequence javaScriptDocumentStart() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>");
@@ -28,6 +31,7 @@ public class News extends AbstractWebsite {
     return (_builder.toString() + _string);
   }
   
+  @Override
   public CharSequence jsOnLoad() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("var feed = new google.feeds.Feed(\"http://xtextnews.blogspot.com/feeds/posts/default?orderby=published&foo=\"+new Date().getTime());");
@@ -89,6 +93,7 @@ public class News extends AbstractWebsite {
     return (_builder.toString() + _string);
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"header_wrapper\" class=\"container\" >");

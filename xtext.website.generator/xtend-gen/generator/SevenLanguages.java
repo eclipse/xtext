@@ -5,10 +5,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class SevenLanguages extends AbstractWebsite {
+  @Override
   public String path() {
     return "7languages.html";
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!--Container-->");

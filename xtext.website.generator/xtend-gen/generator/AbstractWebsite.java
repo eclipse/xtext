@@ -28,6 +28,7 @@ public abstract class AbstractWebsite implements Resource {
     return new XdocStandaloneSetup();
   }
   
+  @Override
   public void generateTo(final File targetDir) {
     try {
       String _path = this.path();

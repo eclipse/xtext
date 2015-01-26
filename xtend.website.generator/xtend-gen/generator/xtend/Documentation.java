@@ -43,6 +43,7 @@ public class Documentation extends AbstractXtendWebsite {
     this.doc = _loadDocument;
   }
   
+  @Override
   public XdocStandaloneSetup getStandaloneSetup() {
     return new DocumentationSetup();
   }
@@ -51,18 +52,22 @@ public class Documentation extends AbstractXtendWebsite {
     return "../docs/org.eclipse.xtend.doc.xdoc/xdoc";
   }
   
+  @Override
   public String path() {
     return "documentation.html";
   }
   
+  @Override
   protected boolean isPrettyPrint() {
     return true;
   }
   
+  @Override
   protected boolean isOutline() {
     return true;
   }
   
+  @Override
   protected boolean isPopover() {
     return false;
   }
@@ -85,11 +90,13 @@ public class Documentation extends AbstractXtendWebsite {
   
   private final String currentVersion = "2.7.0";
   
+  @Override
   public CharSequence website() {
     CharSequence _website = super.website();
     return this.processor.postProcess(_website);
   }
   
+  @Override
   public void generateTo(final File targetDir) {
     super.generateTo(targetDir);
     this.copyImages(this.doc, targetDir);
@@ -101,6 +108,7 @@ public class Documentation extends AbstractXtendWebsite {
     final TreeIterator<Object> iter = EcoreUtil.<Object>getAllContents(_resourceSet, true);
     Iterator<ImageRef> _filter = Iterators.<ImageRef>filter(iter, ImageRef.class);
     final Procedure1<ImageRef> _function = new Procedure1<ImageRef>() {
+      @Override
       public void apply(final ImageRef it) {
         try {
           Resource _eResource = it.eResource();
@@ -139,6 +147,7 @@ public class Documentation extends AbstractXtendWebsite {
     IteratorExtensions.<ImageRef>forEach(_filter, _function);
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!--Container-->");

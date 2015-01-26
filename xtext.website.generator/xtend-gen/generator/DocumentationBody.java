@@ -20,6 +20,7 @@ public class DocumentationBody extends Body {
   @Extension
   private HtmlExtensions _htmlExtensions;
   
+  @Override
   public CharSequence h1(final AbstractSection chapter) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- chapter -->");
@@ -81,6 +82,7 @@ public class DocumentationBody extends Body {
     return _builder;
   }
   
+  @Override
   public CharSequence h2(final AbstractSection section) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!--  section -->");

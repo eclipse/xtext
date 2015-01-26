@@ -5,14 +5,17 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Index extends AbstractXtendWebsite {
+  @Override
   public String path() {
     return "index.html";
   }
   
+  @Override
   protected boolean isPrettyPrint() {
     return true;
   }
   
+  @Override
   public CharSequence quickLinksAndTweets() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _quickLinksAndTweets = super.quickLinksAndTweets();
@@ -23,6 +26,7 @@ public class Index extends AbstractXtendWebsite {
     return _builder;
   }
   
+  @Override
   public CharSequence jsOnLoad() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("var elements = $(\".newsticker li\");");
@@ -54,6 +58,7 @@ public class Index extends AbstractXtendWebsite {
     return _builder;
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\t");

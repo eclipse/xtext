@@ -5,14 +5,17 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class ReleaseNotes extends AbstractXtendWebsite {
+  @Override
   public String path() {
     return "releasenotes.html";
   }
   
+  @Override
   protected boolean isPrettyPrint() {
     return true;
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("        ");

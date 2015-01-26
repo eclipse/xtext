@@ -12,6 +12,7 @@ import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
 
 @SuppressWarnings("all")
 public class DocumentationSetup extends XdocStandaloneSetup implements Module {
+  @Override
   public Injector createInjector() {
     Injector _xblockexpression = null;
     {
@@ -21,6 +22,7 @@ public class DocumentationSetup extends XdocStandaloneSetup implements Module {
     return _xblockexpression;
   }
   
+  @Override
   public void configure(final Binder binder) {
     AnnotatedBindingBuilder<Body> _bind = binder.<Body>bind(Body.class);
     _bind.to(DocumentationBody.class);

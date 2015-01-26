@@ -43,6 +43,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
     this.doc = _loadDocument;
   }
   
+  @Override
   public XdocStandaloneSetup getStandaloneSetup() {
     return new DocumentationSetup();
   }
@@ -51,6 +52,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
     return "../docs/org.eclipse.xtext.doc.xdoc/xdoc";
   }
   
+  @Override
   public String path() {
     return "documentation.html";
   }
@@ -71,11 +73,13 @@ public class Documentation extends AbstractXdocBaseWebsite {
   @Inject
   private PostProcessor processor;
   
+  @Override
   public CharSequence website() {
     CharSequence _website = super.website();
     return this.processor.postProcess(_website);
   }
   
+  @Override
   public void generateTo(final File targetDir) {
     super.generateTo(targetDir);
     this.copyImages(this.doc, targetDir);
@@ -87,6 +91,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
     final TreeIterator<Object> iter = EcoreUtil.<Object>getAllContents(_resourceSet, true);
     Iterator<ImageRef> _filter = Iterators.<ImageRef>filter(iter, ImageRef.class);
     final Procedure1<ImageRef> _function = new Procedure1<ImageRef>() {
+      @Override
       public void apply(final ImageRef it) {
         try {
           Resource _eResource = it.eResource();
@@ -125,6 +130,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
     IteratorExtensions.<ImageRef>forEach(_filter, _function);
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!--Container-->");
@@ -277,6 +283,7 @@ public class Documentation extends AbstractXdocBaseWebsite {
     return _builder;
   }
   
+  @Override
   protected Document getDocument() {
     return this.doc;
   }

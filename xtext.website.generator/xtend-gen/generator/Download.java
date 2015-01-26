@@ -6,6 +6,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Download extends AbstractWebsite {
+  @Override
   public String path() {
     return "download.html";
   }
@@ -46,6 +47,7 @@ public class Download extends AbstractWebsite {
   
   public final static String WIN_32 = "win32";
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _headline = this.headline("Download");

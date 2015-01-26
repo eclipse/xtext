@@ -11,6 +11,7 @@ import org.eclipse.xtext.xdoc.xdoc.LangDef;
 public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
   protected abstract Document getDocument();
   
+  @Override
   public CharSequence javaScriptAtTheEnd() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _javaScriptAtTheEnd = super.javaScriptAtTheEnd();
@@ -22,6 +23,7 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
     return _builder;
   }
   
+  @Override
   protected boolean isPrettyPrint() {
     return true;
   }

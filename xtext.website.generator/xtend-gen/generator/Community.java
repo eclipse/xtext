@@ -5,10 +5,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class Community extends AbstractWebsite {
+  @Override
   public String path() {
     return "community.html";
   }
   
+  @Override
   public CharSequence contents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<div id=\"header_wrapper\" class=\"container\" >");
