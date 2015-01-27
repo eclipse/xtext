@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
@@ -28,6 +29,8 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 
+	private static final Logger LOG = Logger.getLogger(AbstractBatchTypeResolver.class);
+	
 	@Inject
 	private IBatchScopeProvider scopeProvider;
 	@Inject
@@ -58,7 +61,7 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 		}
 		Resource resource = object.eResource();
 		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
-			throw new IllegalArgumentException("Cannot compute types for resource that was loaded from storage");
+			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage", new Exception());
 		}
 		return doResolveTypes(object, monitor);
 	}
@@ -67,7 +70,7 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 	@Override
 	public IResolvedTypes resolveTypes(/* @NonNull */ Resource resource, /* @Nullable */ CancelIndicator monitor) {
 		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
-			throw new IllegalArgumentException("Cannot compute types for resource that was loaded from storage");
+			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage", new Exception());
 		}
 		List<EObject> resourceContents = resource.getContents();
 		if (resourceContents.isEmpty()) {
