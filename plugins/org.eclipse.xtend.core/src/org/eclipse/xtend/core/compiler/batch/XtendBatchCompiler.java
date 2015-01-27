@@ -529,6 +529,7 @@ public class XtendBatchCompiler {
 		commandLine.add("-d \"" + classDirectory.toString() + "\"");
 		commandLine.add("-" + getComplianceLevel());
 		commandLine.add("-proceedOnError");
+		commandLine.add("-encoding \"" + encodingProvider.getDefaultEncoding() + "\"");
 		List<String> sourceDirectories = newArrayList(sourcePathDirectories);
 		commandLine.add(concat(" ", transform(sourceDirectories, new Function<String, String>() {
 			@Override
