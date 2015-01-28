@@ -42,6 +42,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
+import test.Consumer;
 import testdata.Annotation1;
 
 /**
@@ -70,7 +71,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Before
   public void setupCompiler() {
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
-    final Class<?>[] classes = new Class<?>[] { _class, Amount.class, Data.class, Inject.class, Provider.class, Lexer.class, InternalXtendLexer.class, IReadAccess.class, CollectionLiterals.class, JvmTypeParameter.class, ITraceRegionProvider.class, XExpression.class, Object.class, Annotation1.class, Lists.class, EObject.class, Matcher.class, Is.class, Assert.class };
+    final Class<?>[] classes = new Class<?>[] { _class, Amount.class, Consumer.class, Data.class, Inject.class, Provider.class, Lexer.class, InternalXtendLexer.class, IReadAccess.class, CollectionLiterals.class, JvmTypeParameter.class, ITraceRegionProvider.class, XExpression.class, Object.class, Annotation1.class, Lists.class, EObject.class, Matcher.class, Is.class, Assert.class };
     this.compilationTestHelper.setJavaCompilerClassPath(classes);
     Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
     ClassLoader _classLoader = _class_1.getClassLoader();

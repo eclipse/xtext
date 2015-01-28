@@ -142,21 +142,25 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	 */
 	protected String getFeatureParameterTypesAsString() {
 		if(getFeature() instanceof JvmExecutable) {
-			ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
-			List<JvmFormalParameter> parameters = ((JvmExecutable) getFeature()).getParameters();
-			StringBuilder b = new StringBuilder();
-			b.append("(");
-			for(int i=0; i<parameters.size(); ++i) {
-				JvmTypeReference parameterType = parameters.get(i).getParameterType();
-				LightweightTypeReference typeReference = referenceOwner.toLightweightTypeReference(parameterType);
-				b.append(typeReference.getHumanReadableName());
-				if(i < parameters.size()-1)
-					b.append(", ");
-			}
-			b.append(")");
-			return b.toString();
+			return getFeatureParameterTypesAsString((JvmExecutable) getFeature());
 		}
 		return "";
+	}
+	
+	protected String getFeatureParameterTypesAsString(JvmExecutable executable) {
+		ITypeReferenceOwner referenceOwner = getState().getReferenceOwner();
+		List<JvmFormalParameter> parameters = executable.getParameters();
+		StringBuilder b = new StringBuilder();
+		b.append("(");
+		for(int i=0; i<parameters.size(); ++i) {
+			JvmTypeReference parameterType = parameters.get(i).getParameterType();
+			LightweightTypeReference typeReference = referenceOwner.toLightweightTypeReference(parameterType);
+			b.append(typeReference.getHumanReadableName());
+			if(i < parameters.size()-1)
+				b.append(", ");
+		}
+		b.append(")");
+		return b.toString();
 	}
 	
 	/**

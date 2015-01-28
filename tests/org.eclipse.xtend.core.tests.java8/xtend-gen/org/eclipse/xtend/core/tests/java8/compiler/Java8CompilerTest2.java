@@ -418,6 +418,194 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
   }
   
   @Test
+  public void testDefaultMethodSuperCall01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test implements A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("A.super.foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void foo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Test implements A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("A.super.foo();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testDefaultMethodSuperCall02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test implements A, B {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("B.super.foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void foo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface B {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void foo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Test implements A, B {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("B.super.foo();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testDefaultMethodSuperCall03() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import test.Consumer");
+    _builder.newLine();
+    _builder.append("class Test implements Consumer, java.util.function.Consumer<String> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void accept(String element) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("java.util.function.Consumer.super.andThen(this).accept(\'foo\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import test.Consumer;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Test implements Consumer, java.util.function.Consumer<String> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void accept(final String element) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("java.util.function.Consumer<String> _andThen = java.util.function.Consumer.super.andThen(this);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_andThen.accept(\"foo\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testDefaultMethodSuperCall04() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Test extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override void foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("A.super.foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void foo() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Test extends A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public default void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("A.super.foo();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testSelfReference() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class LambdaTest {");

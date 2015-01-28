@@ -199,6 +199,94 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test def void testDefaultMethodSuperCall01() throws Exception {
+		'''
+			class Test implements A {
+				override void foo() {
+					A.super.foo
+				}
+			}
+			interface A {
+				def void foo() {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Test implements A {
+			  @Override
+			  public void foo() {
+			    A.super.foo();
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testDefaultMethodSuperCall02() throws Exception {
+		'''
+			class Test implements A, B {
+				override void foo() {
+					B.super.foo
+				}
+			}
+			interface A {
+				def void foo() {}
+			}
+			interface B {
+				def void foo() {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Test implements A, B {
+			  @Override
+			  public void foo() {
+			    B.super.foo();
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testDefaultMethodSuperCall03() throws Exception {
+		'''
+			import test.Consumer
+			class Test implements Consumer, java.util.function.Consumer<String> {
+				override void accept(String element) {
+					java.util.function.Consumer.super.andThen(this).accept('foo')
+				}
+			}
+		'''.assertCompilesTo('''
+			import test.Consumer;
+			
+			@SuppressWarnings("all")
+			public class Test implements Consumer, java.util.function.Consumer<String> {
+			  @Override
+			  public void accept(final String element) {
+			    java.util.function.Consumer<String> _andThen = java.util.function.Consumer.super.andThen(this);
+			    _andThen.accept("foo");
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testDefaultMethodSuperCall04() throws Exception {
+		'''
+			interface Test extends A {
+				override void foo() {
+					A.super.foo
+				}
+			}
+			interface A {
+				def void foo() {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public interface Test extends A {
+			  @Override
+			  public default void foo() {
+			    A.super.foo();
+			  }
+			}
+		''')
+	}
 
 	@Test def void testSelfReference() throws Exception {
 		'''
