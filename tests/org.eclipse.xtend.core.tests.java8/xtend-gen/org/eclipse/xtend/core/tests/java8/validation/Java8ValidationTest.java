@@ -17,6 +17,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
@@ -579,6 +580,38 @@ public class Java8ValidationTest extends AbstractXtendTestCase {
       _builder.newLine();
       XtendFile _file = this.file(_builder.toString());
       this._validationTestHelper.assertNoIssues(_file, XtendPackage.Literals.XTEND_INTERFACE, IssueCodes.CONFLICTING_DEFAULT_METHODS, 111, (-1), Severity.ERROR);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAbstractMethodCall() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void foo()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class E implements A {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override void foo() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("A.super.foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XtendFile _file = this.file(_builder.toString());
+      this._validationTestHelper.assertError(_file, XbasePackage.Literals.XMEMBER_FEATURE_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.ABSTRACT_METHOD_INVOCATION, 
+        "Cannot directly invoke the abstract method foo() of the interface A");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

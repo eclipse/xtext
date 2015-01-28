@@ -127,7 +127,7 @@ class JvmModelGenerator implements IGenerator {
 		val importManager = new ImportManager(true, type)
 		val bodyAppendable = createAppendable(type, importManager, config)
 		bodyAppendable.openScope
-		bodyAppendable.assignThisAndSuper(type)
+		bodyAppendable.assignThisAndSuper(type, config)
 		generateBody(type, bodyAppendable, config)
 		bodyAppendable.closeScope
 		val importAppendable = createAppendable(type, importManager, config)
@@ -428,7 +428,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateMember(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
 		appendable.openScope
-		appendable.assignThisAndSuper(it)
+		appendable.assignThisAndSuper(it, config)
 		try {
 			generateBody(it, appendable, config)
 		} finally {
@@ -639,18 +639,13 @@ class JvmModelGenerator implements IGenerator {
 		compiler.compile(expression, appendable, returnType, executable.exceptions.toSet)
 	}
 
-	def void assignThisAndSuper(ITreeAppendable b, JvmDeclaredType declaredType) {
-		val superClass = declaredType.superTypes.findFirst[ 
-			val superType = it.type
-			if (superType instanceof JvmGenericType)
-				return !superType.isInterface
-			return false
-		]?.type as JvmDeclaredType
-		b.reassignSuperType(superClass)
+	def void assignThisAndSuper(ITreeAppendable b, JvmDeclaredType declaredType, GeneratorConfig config) {
+		b.reassignSuperType(declaredType, config)
 		b.reassignThisType(declaredType)
 	}
 	
-	private def reassignSuperType(ITreeAppendable b, JvmDeclaredType declaredType) {
+	private def reassignSuperType(ITreeAppendable b, JvmDeclaredType declaredType, GeneratorConfig config) {
+		val superType = declaredType.extendedClass?.type
 		if (b.hasObject('super')) {
 			/*
 			 * class A {}
@@ -662,14 +657,30 @@ class JvmModelGenerator implements IGenerator {
 				val superElement = b.getObject('super')
 				// Don't reassign the super of the enclosing type if it has already been reassigned
 				val superVariable = b.getName(superElement)
-				if ("super".equals(superVariable)) {
-					val proposedName = element.simpleName+".super"
+				if ('super'.equals(superVariable)) {
+					val proposedName = element.simpleName + '.super'
 					b.declareVariable(superElement, proposedName)
 				}
 			}
 		}
-		if (declaredType != null)
-			b.declareVariable(declaredType, 'super');
+		if (config.targetVersion.isAtLeast(JAVA8)) {
+			for (JvmTypeReference interfaceRef : declaredType.extendedInterfaces) {
+				val interfaze = interfaceRef.type
+				val simpleVarName = interfaze.simpleName + '.super'
+				if (b.hasObject(simpleVarName)) {
+					val element = b.getObject(simpleVarName)
+					if (element != interfaceRef) {
+						// This can happen when the type extends multiple interfaces with the same simple name
+						val qualifiedVarName = interfaze.qualifiedName + '.super'
+						b.declareVariable(interfaze, qualifiedVarName)
+					}
+				} else {
+					b.declareVariable(interfaze, simpleVarName)
+				}
+			}
+		}
+		if (superType != null)
+			b.declareVariable(superType, 'super');
 	}
 	
 	protected def reassignThisType(ITreeAppendable b, JvmDeclaredType declaredType) {

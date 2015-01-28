@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -225,6 +227,17 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 							result.accept(diagnostic);
 							return false;
+						} else if (memberFeatureCall.eContainingFeature() == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+							JvmIdentifiableElement referencedFeature = ((XAbstractFeatureCall) memberFeatureCall.eContainer()).getFeature();
+							if (referencedFeature instanceof JvmOperation && ((JvmOperation) referencedFeature).isAbstract()) {
+								String message = String.format("Cannot directly invoke the abstract method %s of the interface %s",
+										getSimpleSignature((JvmOperation) referencedFeature), referencedType.getSimpleName());
+								AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+										IssueCodes.ABSTRACT_METHOD_INVOCATION, message, memberFeatureCall.eContainer(),
+										XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+								result.accept(diagnostic);
+								return false;
+							}
 						}
 					} else if (!enclosingTypes.contains(referencedType)) {
 						String message = String.format("No enclosing instance of the type %s is accessible in scope", referencedType.getSimpleName());
@@ -305,6 +318,20 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 		}
 		return true;
+	}
+	
+	private String getSimpleSignature(JvmOperation operation) {
+		StringBuilder builder = new StringBuilder(operation.getSimpleName());
+		builder.append('(');
+		Iterator<JvmFormalParameter> parameterIter = operation.getParameters().iterator();
+		while (parameterIter.hasNext()) {
+			JvmFormalParameter parameter = parameterIter.next();
+			builder.append(parameter.getParameterType().getSimpleName());
+			if (parameterIter.hasNext())
+				builder.append(",");
+		}
+		builder.append(')');
+		return builder.toString();
 	}
 	
 	@Override

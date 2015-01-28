@@ -10,13 +10,15 @@ package org.eclipse.xtend.core.tests.java8.validation
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*
-import org.eclipse.xtext.diagnostics.Severity
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
@@ -291,6 +293,21 @@ class Java8ValidationTest extends AbstractXtendTestCase {
 			interface C extends A, B { }
 			interface D extends C { }
 		''').assertNoIssues(XTEND_INTERFACE, CONFLICTING_DEFAULT_METHODS, 111, -1, Severity.ERROR)
+	}
+	
+	@Test
+	def void testAbstractMethodCall() {
+		file('''
+			interface A {
+				def void foo()
+			}
+			class E implements A {
+				override void foo() {
+					A.super.foo
+				}
+			}
+		''').assertError(XMEMBER_FEATURE_CALL, ABSTRACT_METHOD_INVOCATION,
+			"Cannot directly invoke the abstract method foo() of the interface A")
 	}
 	
 }
