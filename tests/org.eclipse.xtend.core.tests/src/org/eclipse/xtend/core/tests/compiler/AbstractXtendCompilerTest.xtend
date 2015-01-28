@@ -33,6 +33,7 @@ import org.hamcrest.core.Is
 import org.junit.Assert
 import org.junit.Before
 import testdata.Annotation1
+import test.Consumer
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -52,6 +53,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		val Class<?>[] classes = #[
 			getClass(),
 			Amount,
+			Consumer,
 			Data,
 			Inject,
 			Provider,
