@@ -50,6 +50,7 @@ import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -427,8 +428,9 @@ public class XtendCompiler extends XbaseCompiler {
 		ITreeAppendable appendable = b.trace(anonymousClass, true);
 		appendable.append(" ");
 		appendable.openScope();
-		jvmModelGenerator.assignThisAndSuper(appendable, type);
-		jvmModelGenerator.generateMembersInBody(type, appendable, generatorConfigProvider.get(anonymousClass));
+		GeneratorConfig config = generatorConfigProvider.get(anonymousClass);
+		jvmModelGenerator.assignThisAndSuper(appendable, type, config);
+		jvmModelGenerator.generateMembersInBody(type, appendable, config);
 		appendable.closeScope();
 	}
 	

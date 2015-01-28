@@ -152,6 +152,7 @@ public class IssueCodes {
 	public static final String DUPLICATE_TYPE = ISSUE_CODE_PREFIX + "duplicate_type";
 	
 	public static final String INVALID_SUPER_CALL = ISSUE_CODE_PREFIX +  "invalid_super_call";
+	public static final String ABSTRACT_METHOD_INVOCATION = ISSUE_CODE_PREFIX + "abstract_method_invocation";
 	
 	private IssueCodes() {
 	}

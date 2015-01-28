@@ -283,6 +283,24 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					return false;
 				}
 			}
+			if (feature instanceof JvmOperation) {
+				JvmOperation operation = (JvmOperation) feature;
+				if (operation.isAbstract() && featureCall instanceof XMemberFeatureCall) {
+					XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) featureCall;
+					XExpression target = memberFeatureCall.getMemberCallTarget();
+					if (target instanceof XAbstractFeatureCall
+							&& SUPER.getFirstSegment().equals(((XAbstractFeatureCall) target).getConcreteSyntaxFeatureName())) {
+						JvmIdentifiableElement targetFeature = ((XAbstractFeatureCall) target).getFeature();
+						String message = String.format("Cannot directly invoke the abstract method %s of the type %s",
+								operation.getSimpleName() + getFeatureParameterTypesAsString(operation), targetFeature.getSimpleName());
+						AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+								IssueCodes.ABSTRACT_METHOD_INVOCATION, message, memberFeatureCall,
+								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+						result.accept(diagnostic);
+						return false;
+					}
+				}
+			}
 		}
 		if (isGetClassOnTypeLiteral()) {
 			if ("class".equals(description.getName().getFirstSegment())) {

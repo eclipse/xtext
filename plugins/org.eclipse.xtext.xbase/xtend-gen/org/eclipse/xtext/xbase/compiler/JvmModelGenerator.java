@@ -216,7 +216,7 @@ public class JvmModelGenerator implements IGenerator {
     final ImportManager importManager = new ImportManager(true, type);
     final TreeAppendable bodyAppendable = this.createAppendable(type, importManager, config);
     bodyAppendable.openScope();
-    this.assignThisAndSuper(bodyAppendable, type);
+    this.assignThisAndSuper(bodyAppendable, type, config);
     this.generateBody(type, bodyAppendable, config);
     bodyAppendable.closeScope();
     final TreeAppendable importAppendable = this.createAppendable(type, importManager, config);
@@ -914,7 +914,7 @@ public class JvmModelGenerator implements IGenerator {
     {
       appendable.newLine();
       appendable.openScope();
-      this.assignThisAndSuper(appendable, it);
+      this.assignThisAndSuper(appendable, it, config);
       ITreeAppendable _xtrycatchfinallyexpression = null;
       try {
         _xtrycatchfinallyexpression = this.generateBody(it, appendable, config);
@@ -1331,32 +1331,20 @@ public class JvmModelGenerator implements IGenerator {
     return this.compiler.compile(expression, appendable, returnType, _set);
   }
   
-  public void assignThisAndSuper(final ITreeAppendable b, final JvmDeclaredType declaredType) {
-    EList<JvmTypeReference> _superTypes = declaredType.getSuperTypes();
-    final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
-      @Override
-      public Boolean apply(final JvmTypeReference it) {
-        final JvmType superType = it.getType();
-        if ((superType instanceof JvmGenericType)) {
-          boolean _isInterface = ((JvmGenericType)superType).isInterface();
-          return Boolean.valueOf((!_isInterface));
-        }
-        return Boolean.valueOf(false);
-      }
-    };
-    JvmTypeReference _findFirst = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
-    JvmType _type = null;
-    if (_findFirst!=null) {
-      _type=_findFirst.getType();
-    }
-    final JvmDeclaredType superClass = ((JvmDeclaredType) _type);
-    this.reassignSuperType(b, superClass);
+  public void assignThisAndSuper(final ITreeAppendable b, final JvmDeclaredType declaredType, final GeneratorConfig config) {
+    this.reassignSuperType(b, declaredType, config);
     this.reassignThisType(b, declaredType);
   }
   
-  private String reassignSuperType(final ITreeAppendable b, final JvmDeclaredType declaredType) {
+  private String reassignSuperType(final ITreeAppendable b, final JvmDeclaredType declaredType, final GeneratorConfig config) {
     String _xblockexpression = null;
     {
+      JvmTypeReference _extendedClass = declaredType.getExtendedClass();
+      JvmType _type = null;
+      if (_extendedClass!=null) {
+        _type=_extendedClass.getType();
+      }
+      final JvmType superType = _type;
       boolean _hasObject = b.hasObject("super");
       if (_hasObject) {
         final Object element = b.getObject("this");
@@ -1371,10 +1359,34 @@ public class JvmModelGenerator implements IGenerator {
           }
         }
       }
+      JavaVersion _targetVersion = config.getTargetVersion();
+      boolean _isAtLeast = _targetVersion.isAtLeast(JavaVersion.JAVA8);
+      if (_isAtLeast) {
+        Iterable<JvmTypeReference> _extendedInterfaces = declaredType.getExtendedInterfaces();
+        for (final JvmTypeReference interfaceRef : _extendedInterfaces) {
+          {
+            final JvmType interfaze = interfaceRef.getType();
+            String _simpleName_1 = interfaze.getSimpleName();
+            final String simpleVarName = (_simpleName_1 + ".super");
+            boolean _hasObject_1 = b.hasObject(simpleVarName);
+            if (_hasObject_1) {
+              final Object element_1 = b.getObject(simpleVarName);
+              boolean _notEquals = (!Objects.equal(element_1, interfaceRef));
+              if (_notEquals) {
+                String _qualifiedName = interfaze.getQualifiedName();
+                final String qualifiedVarName = (_qualifiedName + ".super");
+                b.declareVariable(interfaze, qualifiedVarName);
+              }
+            } else {
+              b.declareVariable(interfaze, simpleVarName);
+            }
+          }
+        }
+      }
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(declaredType, null));
+      boolean _notEquals = (!Objects.equal(superType, null));
       if (_notEquals) {
-        _xifexpression = b.declareVariable(declaredType, "super");
+        _xifexpression = b.declareVariable(superType, "super");
       }
       _xblockexpression = _xifexpression;
     }
