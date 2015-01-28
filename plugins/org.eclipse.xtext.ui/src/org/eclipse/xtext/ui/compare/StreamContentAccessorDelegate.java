@@ -35,7 +35,12 @@ public class StreamContentAccessorDelegate implements IResourceProvider, IEncode
 
 	@Override
 	public InputStream getContents() throws CoreException {
-		return streamContentAccessor.getContents();
+		try {
+			return streamContentAccessor.getContents();
+		} catch (CoreException e) {
+			// deleted files cause a CoreException in egit compare dialog
+			return null;
+		}
 	}
 
 	@Override
