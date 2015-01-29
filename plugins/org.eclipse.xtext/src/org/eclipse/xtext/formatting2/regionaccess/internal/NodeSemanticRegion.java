@@ -21,7 +21,7 @@ public class NodeSemanticRegion extends NodeRegion implements ISemanticRegion {
 	private IHiddenRegion leading;
 	private IHiddenRegion trailing;
 
-	protected NodeSemanticRegion(NodeModelBaseRegionAccess tokenAccess, INode node) {
+	protected NodeSemanticRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
 		super(tokenAccess, node);
 	}
 

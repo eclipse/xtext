@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.debug.TokenAccessToString;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguageInjectorProvider;
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -194,10 +194,10 @@ public class RegionAccessTest {
   private void operator_tripleEquals(final CharSequence file, final CharSequence expectation) {
     try {
       final Root obj = this.parseHelper.parse(file);
-      NodeModelBaseRegionAccess.Builder _builder = new NodeModelBaseRegionAccess.Builder();
+      NodeModelBasedRegionAccess.Builder _builder = new NodeModelBasedRegionAccess.Builder();
       Resource _eResource = obj.eResource();
-      NodeModelBaseRegionAccess.Builder _withResource = _builder.withResource(((XtextResource) _eResource));
-      final NodeModelBaseRegionAccess access = _withResource.create();
+      NodeModelBasedRegionAccess.Builder _withResource = _builder.withResource(((XtextResource) _eResource));
+      final NodeModelBasedRegionAccess access = _withResource.create();
       TokenAccessToString _tokenAccessToString = new TokenAccessToString();
       TokenAccessToString _withOrigin = _tokenAccessToString.withOrigin(access);
       TokenAccessToString _hideColumnExplanation = _withOrigin.hideColumnExplanation();

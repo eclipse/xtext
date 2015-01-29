@@ -35,7 +35,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
+public class NodeModelBasedRegionAccess extends AbstractRegionAccess {
 
 	public static class Builder extends AbstractRegionAccess.Builder {
 
@@ -45,7 +45,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		private EObjectTokens lastTokens;
 		private XtextResource resource;
 
-		protected boolean add(NodeModelBaseRegionAccess tokenAccess, INode node) {
+		protected boolean add(NodeModelBasedRegionAccess tokenAccess, INode node) {
 			EObject semanticElement = tokenAccess.findSemanticElement(node);
 			if (lastTokens == null || semanticElement != lastTokens.getSemanticElement())
 				lastTokens = eObjToTokens.get(semanticElement);
@@ -100,8 +100,8 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 			return result;
 		}
 
-		public NodeModelBaseRegionAccess create() {
-			NodeModelBaseRegionAccess tokenAccess = new NodeModelBaseRegionAccess(this);
+		public NodeModelBasedRegionAccess create() {
+			NodeModelBasedRegionAccess tokenAccess = new NodeModelBasedRegionAccess(this);
 			//			System.out.println(tokenAccess);
 			return tokenAccess;
 		}
@@ -117,11 +117,11 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 				return new NodeWhitespace(gap, node);
 		}
 
-		protected NodeSemanticRegion createToken(NodeModelBaseRegionAccess tokenAccess, INode node) {
+		protected NodeSemanticRegion createToken(NodeModelBasedRegionAccess tokenAccess, INode node) {
 			return new NodeSemanticRegion(tokenAccess, node);
 		}
 
-		protected EObjectTokens createTokens(NodeModelBaseRegionAccess access, INode node) {
+		protected EObjectTokens createTokens(NodeModelBasedRegionAccess access, INode node) {
 			return new EObjectTokens(access, node);
 		}
 
@@ -131,7 +131,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 			this.lastTokenOrGap = null;
 			this.lastTokens = null;
 			this.firstToken = null;
-			NodeModelBaseRegionAccess access = (NodeModelBaseRegionAccess) tokenAccess;
+			NodeModelBasedRegionAccess access = (NodeModelBasedRegionAccess) tokenAccess;
 			ICompositeNode rootNode = resource.getParseResult().getRootNode();
 			TreeIterator<INode> iterator = rootNode.getAsTreeIterable().iterator();
 			while (iterator.hasNext()) {
@@ -229,7 +229,7 @@ public class NodeModelBaseRegionAccess extends AbstractRegionAccess {
 		}
 	}
 
-	protected NodeModelBaseRegionAccess(Builder builder) {
+	protected NodeModelBasedRegionAccess(Builder builder) {
 		super(builder);
 	}
 

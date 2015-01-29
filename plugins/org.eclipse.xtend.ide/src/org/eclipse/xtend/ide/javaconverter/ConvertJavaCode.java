@@ -47,7 +47,7 @@ import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.TextReplacements;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.preferences.TypedPreferenceValues;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -180,7 +180,7 @@ public class ConvertJavaCode {
 			XtextResource resource = (XtextResource) createResource(xtendFile, xtendCode);
 			FormatterRequest request = new FormatterRequest();
 			request.setAllowIdentityEdits(false);
-			request.setTextRegionAccess(new NodeModelBaseRegionAccess.Builder().withResource(resource).create());
+			request.setTextRegionAccess(new NodeModelBasedRegionAccess.Builder().withResource(resource).create());
 			request.setPreferences(TypedPreferenceValues.castOrWrap(cfgProvider.getPreferenceValues(resource)));
 			List<ITextReplacement> replacements = formatter.format(request);
 			String formatted = TextReplacements.apply(xtendCode, replacements);
