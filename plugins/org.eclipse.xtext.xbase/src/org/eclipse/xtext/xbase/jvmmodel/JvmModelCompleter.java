@@ -16,7 +16,9 @@ import java.util.Date;
 
 import javax.annotation.Generated;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -27,6 +29,8 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -53,6 +57,8 @@ import com.google.inject.Inject;
  * @since 2.7
  */
 public class JvmModelCompleter {
+	
+	protected static final String GENERATED_COMMENT_VAR_SOURCE_FILE = "${sourcefile}";
 	
 	@Inject 
 	private TypeReferences references;
@@ -214,8 +220,9 @@ public class JvmModelCompleter {
 					&& generatorConfig.isGenerateSyntheticSuppressWarnings()
 					&& annotationLookup.findAnnotation(jvmType, SuppressWarnings.class) == null
 					&& references.findDeclaredType(SuppressWarnings.class, jvmType) instanceof JvmAnnotationType;
+			JvmType generatedJvmType = references.findDeclaredType(Generated.class, jvmType);
 			boolean generateGenerated = generatorConfig.isGenerateGeneratedAnnotation()
-					&& references.findDeclaredType(Generated.class, jvmType) instanceof JvmAnnotationType;
+					&& generatedJvmType instanceof JvmAnnotationType;
 			if (generateSuppressWarnings || generateGenerated) {
 				JvmAnnotationReferenceBuilder annotationRefBuilder = annotationRefBuilderFactory.create(jvmType.eResource().getResourceSet());
 				if (generateSuppressWarnings) {
@@ -224,27 +231,27 @@ public class JvmModelCompleter {
 					jvmType.getAnnotations().add(annotationRef);
 				}
 				if (generateGenerated) {
-					String generatorName = generator.getClass().getName();
-					String date = null;
-					String comment = null;
+					JvmAnnotationType generatedAnnotationType = (JvmAnnotationType) generatedJvmType;
+					JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(Generated.class);
+					JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
+					annotationValue.getValues().add(generator.getClass().getName());
+					annotationRef.getExplicitValues().add(annotationValue);
 					if (generatorConfig.isIncludeDateInGeneratedAnnotation()) {
 						if (dateFormat == null) {
-						    dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX");
+						    dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ");
 						}
-					    date = dateFormat.format(new Date());
+						String date = dateFormat.format(new Date());
+						annotationValue = typesFactory.createJvmStringAnnotationValue();
+						annotationValue.setOperation(getOperation(generatedAnnotationType, "date"));
+						annotationValue.getValues().add(date);
+						annotationRef.getExplicitValues().add(annotationValue);
 					}
 					if (!Strings.isNullOrEmpty(generatorConfig.getGeneratedAnnotationComment())) {
-						comment = generatorConfig.getGeneratedAnnotationComment();
-					}
-					JvmAnnotationReference annotationRef;
-					if (date != null && comment != null) {
-						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName, date, comment);
-					} else if (date != null) {
-						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName, date);
-					} else if (comment != null) {
-						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName, "", comment);
-					} else {
-						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName);
+						String transformedComment = replaceVariables(generatorConfig.getGeneratedAnnotationComment(), jvmType);
+						annotationValue = typesFactory.createJvmStringAnnotationValue();
+						annotationValue.setOperation(getOperation(generatedAnnotationType, "comments"));
+						annotationValue.getValues().add(transformedComment);
+						annotationRef.getExplicitValues().add(annotationValue);
 					}
 					typeExtensions.setSynthetic(annotationRef, true);
 					annotationLookup.removeAnnotation(jvmType, Generated.class);
@@ -252,6 +259,34 @@ public class JvmModelCompleter {
 				}
 			}
 		}
+	}
+	
+	private JvmOperation getOperation(JvmAnnotationType annotationType, String operationName) {
+		for (JvmOperation operation : annotationType.getDeclaredOperations()) {
+			if (operationName.equals(operation.getSimpleName()))
+				return operation;
+		}
+		return null;
+	}
+	
+	/**
+	 * Replace the variables contained in the comment to be written to the <code>@Generated</code> annotation.
+	 */
+	protected String replaceVariables(String commentForGenerated, JvmDeclaredType jvmType) {
+		String result = commentForGenerated;
+		if (result.contains(GENERATED_COMMENT_VAR_SOURCE_FILE)) {
+			Resource resource = jvmType.eResource();
+			if (resource != null) {
+				URI uri = resource.getURI();
+				if (uri != null) {
+					String sourceFile = uri.lastSegment();
+					if (sourceFile == null)
+						sourceFile = uri.toString();
+					result = result.replace(GENERATED_COMMENT_VAR_SOURCE_FILE, sourceFile);
+				}
+			}
+		}
+		return result;
 	}
 	
 }
