@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.xtend.core.formatting2.XtendFormatter;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.formatting2.FormatterRequest;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
 import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
 import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
@@ -62,8 +62,8 @@ public class FormatterSmokeSuite {
 				if (file != null) {
 					try {
 						XtextResource resource = (XtextResource) file.eResource();
-						NodeModelBaseRegionAccess.Builder builder = new NodeModelBaseRegionAccess.Builder();
-						NodeModelBaseRegionAccess regions = builder.withResource(resource).create();
+						NodeModelBasedRegionAccess.Builder builder = new NodeModelBasedRegionAccess.Builder();
+						NodeModelBasedRegionAccess regions = builder.withResource(resource).create();
 						FormatterRequest request = new FormatterRequest().setTextRegionAccess(regions);
 						request.setExceptionHandler(ExceptionAcceptor.IGNORING);
 						formatter.format(request);
