@@ -13,6 +13,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 
 import com.google.inject.Inject;
@@ -21,6 +22,25 @@ import com.google.inject.Inject;
  * @author Miro Spoenemann - Initial contribution and API
  */
 public class XbaseBuilderPreferenceAccess {
+	
+	/**
+	 * Preference identifier for generating <code>@SuppressWarnings</code>.
+	 */
+	public static final String PREF_GENERATE_SUPPRESS_WARNINGS = "generateSuppressWarnings"; //$NON-NLS-1$
+	/**
+	 * Preference identifier for generating <code>@Generated</code>.
+	 */
+	public static final String PREF_GENERATE_GENERATED = "generateGeneratedAnnotation"; //$NON-NLS-1$
+
+	/**
+	 * Preference identifier for including the current date in <code>@Generated</code> annotations.
+	 */
+	public static final String PREF_DATE_IN_GENERATED = "includeDateInGenerated"; //$NON-NLS-1$
+
+	/**
+	 * Preference identifier for the comment to add to <code>@Generated</code> annotations.
+	 */
+	public static final String PREF_GENERATED_COMMENT = "generatedAnnotationComment"; //$NON-NLS-1$
 	
 	/**
 	 * Preference identifier for the Java language version of generated code.
@@ -37,6 +57,9 @@ public class XbaseBuilderPreferenceAccess {
 		@Override
 		protected void initializeBuilderPreferences(IPreferenceStore store) {
 			super.initializeBuilderPreferences(store);
+			store.setDefault(PREF_GENERATE_SUPPRESS_WARNINGS, true);
+			store.setDefault(PREF_GENERATE_GENERATED, false);
+			store.setDefault(PREF_DATE_IN_GENERATED, false);
 			store.setDefault(PREF_JAVA_VERSION, JavaVersion.JAVA5.toString());
 			store.setDefault(PREF_USE_COMPILER_COMPLIANCE, true);
 		}
@@ -45,9 +68,19 @@ public class XbaseBuilderPreferenceAccess {
 
 	@Inject	
 	private IPreferenceStoreAccess preferenceStoreAccess;
-
-	public JavaVersion getJavaVersion(Object context) {
+	
+	public void loadBuilderPreferences(GeneratorConfig generatorConfig, Object context) {
 		IPreferenceStore preferenceStore = preferenceStoreAccess.getContextPreferenceStore(context);
+		generatorConfig.setGenerateSyntheticSuppressWarnings(preferenceStore.getBoolean(PREF_GENERATE_SUPPRESS_WARNINGS));
+		generatorConfig.setGenerateGeneratedAnnotation(preferenceStore.getBoolean(PREF_GENERATE_GENERATED));
+		if (generatorConfig.isGenerateGeneratedAnnotation()) {
+			generatorConfig.setIncludeDateInGeneratedAnnotation(preferenceStore.getBoolean(PREF_DATE_IN_GENERATED));
+			generatorConfig.setGeneratedAnnotationComment(preferenceStore.getString(PREF_GENERATED_COMMENT));
+		}
+		generatorConfig.setTargetVersion(getJavaVersion(context, preferenceStore));
+	}
+
+	public JavaVersion getJavaVersion(Object context, IPreferenceStore preferenceStore) {
 		boolean useCompilerCompliance = preferenceStore.getBoolean(PREF_USE_COMPILER_COMPLIANCE);
 		if (useCompilerCompliance) {
 			IJavaProject javaProject = JavaCore.create(context instanceof IProject ? (IProject) context : null);

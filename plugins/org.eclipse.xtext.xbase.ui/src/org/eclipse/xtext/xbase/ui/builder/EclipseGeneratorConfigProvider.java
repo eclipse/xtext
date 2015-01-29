@@ -39,7 +39,7 @@ public class EclipseGeneratorConfigProvider implements IGeneratorConfigProvider 
 				project = pair.getSecond();
 			}
 		}
-		result.setTargetVersion(xbaseBuilderPreferenceAccess.getJavaVersion(project));
+		xbaseBuilderPreferenceAccess.loadBuilderPreferences(result, project);
 		return result;
 	}
 

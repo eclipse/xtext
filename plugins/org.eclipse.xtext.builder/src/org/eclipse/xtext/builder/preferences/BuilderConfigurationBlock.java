@@ -53,6 +53,8 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 	
 	protected static final String[] BOOLEAN_VALUES = new String[] { IPreferenceStore.TRUE, IPreferenceStore.FALSE };
 	
+	protected static final int INDENT_AMOUNT = 32;
+	
 	public static final String SETTINGS_SECTION_NAME = "BuilderConfigurationBlock"; //$NON-NLS-1$
 
 	public static final String PROPERTY_PREFIX = "BuilderConfiguration";
@@ -133,7 +135,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 	protected void createOutputSectionItems(Composite composite, OutputConfiguration outputConfiguration) {
 		Text defaultDirectoryField = addTextField(composite, Messages.OutputConfigurationPage_Directory,
 				BuilderPreferenceAccess.getKey(outputConfiguration,
-						EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY), 0, 200);
+						EclipseOutputConfigurationProvider.OUTPUT_DIRECTORY), 0, 0);
 		addCheckBox(composite, Messages.OutputConfigurationPage_CreateDirectory,
 				BuilderPreferenceAccess.getKey(outputConfiguration,
 						EclipseOutputConfigurationProvider.OUTPUT_CREATE_DIRECTORY), BOOLEAN_VALUES, 0);
@@ -163,7 +165,7 @@ public class BuilderConfigurationBlock extends OptionsConfigurationBlock {
 			}
 		});
 		GridData hideLocalButtonData = new GridData();
-		hideLocalButtonData.horizontalIndent = 32;
+		hideLocalButtonData.horizontalIndent = INDENT_AMOUNT;
 		hideLocalButton.setLayoutData(hideLocalButtonData);
 		addCheckBox(composite, Messages.OutputConfigurationPage_KeepLocalHistory, 
 				BuilderPreferenceAccess.getKey(outputConfiguration,
