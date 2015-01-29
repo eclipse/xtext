@@ -96,7 +96,7 @@ class RegionAccessTest {
 
 	private def ===(CharSequence file, CharSequence expectation) {
 		val obj = parseHelper.parse(file)
-		val access = new NodeModelBaseRegionAccess.Builder().withResource(obj.eResource as XtextResource).create
+		val access = new org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess.Builder().withResource(obj.eResource as XtextResource).create
 		val actual = new TokenAccessToString().withOrigin(access).hideColumnExplanation().toString
 		Assert.assertEquals(expectation.toString, actual + "\n")
 	}
