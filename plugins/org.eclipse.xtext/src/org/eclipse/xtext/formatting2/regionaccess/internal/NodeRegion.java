@@ -18,9 +18,9 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class NodeRegion extends AbstractTextSegment {
 	private final INode node;
-	private final NodeModelBaseRegionAccess tokenAccess;
+	private final NodeModelBasedRegionAccess tokenAccess;
 
-	protected NodeRegion(NodeModelBaseRegionAccess tokenAccess, INode node) {
+	protected NodeRegion(NodeModelBasedRegionAccess tokenAccess, INode node) {
 		super();
 		this.tokenAccess = tokenAccess;
 		this.node = node;

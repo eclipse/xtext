@@ -20,7 +20,7 @@ import org.eclipse.xtext.formatting2.ITextReplacement;
 import org.eclipse.xtext.formatting2.TextReplacements;
 import org.eclipse.xtext.formatting2.debug.TextRegionsToString;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBaseRegionAccess;
+import org.eclipse.xtext.formatting2.regionaccess.internal.NodeModelBasedRegionAccess;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
@@ -50,7 +50,7 @@ public class FormatterTester {
 	private Provider<FormatterTestRequest> formatterRequestProvider;
 
 	@Inject
-	private Provider<NodeModelBaseRegionAccess.Builder> nodeModelTokenAccessBuilderProvider;
+	private Provider<NodeModelBasedRegionAccess.Builder> nodeModelTokenAccessBuilderProvider;
 
 	@Inject
 	private ParseHelper<EObject> parseHelper;

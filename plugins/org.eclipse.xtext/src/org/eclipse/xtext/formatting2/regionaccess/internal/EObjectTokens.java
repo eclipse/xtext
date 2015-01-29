@@ -19,9 +19,9 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class EObjectTokens extends AbstractEObjectTokens {
 	private final INode node;
-	private final NodeModelBaseRegionAccess tokenAccess;
+	private final NodeModelBasedRegionAccess tokenAccess;
 
-	public EObjectTokens(NodeModelBaseRegionAccess tokenAccess, INode node) {
+	public EObjectTokens(NodeModelBasedRegionAccess tokenAccess, INode node) {
 		super();
 		this.tokenAccess = tokenAccess;
 		this.node = node;
