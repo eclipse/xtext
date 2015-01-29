@@ -249,4 +249,64 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testGeneratedAnnotation_01() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    generatorConfig.setGenerateSyntheticSuppressWarnings(false);
+    generatorConfig.setGenerateGeneratedAnnotation(true);
+    generatorConfig.setIncludeDateInGeneratedAnnotation(false);
+    generatorConfig.setGeneratedAnnotationComment("");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import javax.annotation.Generated;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Generated(\"org.eclipse.xtend.core.compiler.XtendGenerator\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testGeneratedAnnotation_02() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    generatorConfig.setGenerateSyntheticSuppressWarnings(false);
+    generatorConfig.setGenerateGeneratedAnnotation(true);
+    generatorConfig.setIncludeDateInGeneratedAnnotation(false);
+    generatorConfig.setGeneratedAnnotationComment("Source: ${sourcefile}");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import javax.annotation.Generated;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@Generated(value = \"org.eclipse.xtend.core.compiler.XtendGenerator\", comments = \"Source: Bar.xtend\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }

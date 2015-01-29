@@ -18,16 +18,37 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class GeneratorConfig {
+  /**
+   * Whether expressions shall be generated.
+   */
   private boolean generateExpressions = true;
   
+  /**
+   * Whether <code>@SuppressWarnings</code> shall be generated for non-nested types.
+   */
   private boolean generateSyntheticSuppressWarnings = true;
   
+  /**
+   * Whether <code>@Generated</code> shall be generated for non-nested types.
+   */
   private boolean generateGeneratedAnnotation = false;
   
+  /**
+   * Whether the current time shall be added to <code>@Generated</code> annotations.
+   */
   private boolean includeDateInGeneratedAnnotation = false;
   
+  /**
+   * The comment that is added to <code>@Generated</code> annotations, also supports variables:
+   * <ul>
+   *   <li><code>${sourcefile}</code></li>
+   * </ul>
+   */
   private String generatedAnnotationComment;
   
+  /**
+   * The target Java language version.
+   */
   private JavaVersion targetVersion = JavaVersion.JAVA5;
   
   /**

@@ -16,16 +16,37 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class GeneratorConfig {
 
+	/**
+	 * Whether expressions shall be generated.
+	 */
 	boolean generateExpressions = true
 
+	/**
+	 * Whether <code>@SuppressWarnings</code> shall be generated for non-nested types.
+	 */
 	boolean generateSyntheticSuppressWarnings = true
 	
+	/**
+	 * Whether <code>@Generated</code> shall be generated for non-nested types.
+	 */
 	boolean generateGeneratedAnnotation = false
 	
+	/**
+	 * Whether the current time shall be added to <code>@Generated</code> annotations.
+	 */
 	boolean includeDateInGeneratedAnnotation = false
 	
+	/**
+	 * The comment that is added to <code>@Generated</code> annotations, also supports variables:
+	 * <ul>
+	 *   <li><code>${sourcefile}</code></li>
+	 * </ul>
+	 */
 	String generatedAnnotationComment
 
+	/**
+	 * The target Java language version.
+	 */
 	JavaVersion targetVersion = JavaVersion.JAVA5
 	
 	/**
