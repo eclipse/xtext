@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.builder;
 
+import static org.eclipse.xtext.xbase.ui.builder.XbaseBuilderPreferenceAccess.*;
+
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -14,6 +16,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.builder.preferences.BuilderConfigurationBlock;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 
@@ -31,7 +34,7 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 		String javaComplianceVersion = javaValue(JavaCore.COMPILER_SOURCE);
 		final Button useComplianceButton = addCheckBox(composite,
 				"Use language version from compiler source compatibility level (" + javaComplianceVersion + ")",
-				XbaseBuilderPreferenceAccess.PREF_USE_COMPILER_COMPLIANCE, BOOLEAN_VALUES, 0);
+				PREF_USE_COMPILER_COMPLIANCE, BOOLEAN_VALUES, 0);
 		
 		int valueCount = JavaVersion.values().length;
 		String[] values = new String[valueCount];
@@ -42,12 +45,33 @@ public class XbaseBuilderConfigurationBlock extends BuilderConfigurationBlock {
 			valueLabels[i] = v.getLabel();
 		}
 		final Combo versionCombo = addComboBox(composite, "Java language version of generated code:",
-				XbaseBuilderPreferenceAccess.PREF_JAVA_VERSION, 0, values, valueLabels);
+				PREF_JAVA_VERSION, 0, values, valueLabels);
 		versionCombo.setEnabled(!useComplianceButton.getSelection());
 		useComplianceButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				versionCombo.setEnabled(!useComplianceButton.getSelection());
+			}
+		});
+		
+		addCheckBox(composite, "Generate @SuppressWarnings annotations",
+				PREF_GENERATE_SUPPRESS_WARNINGS, BOOLEAN_VALUES, 0);
+		
+		final Button generateGeneratedButton = addCheckBox(composite, "Generate @Generated annotations",
+				PREF_GENERATE_GENERATED, BOOLEAN_VALUES, 0);
+		
+		final Button includeDateButton = addCheckBox(composite, "Include current time information",
+				PREF_DATE_IN_GENERATED, BOOLEAN_VALUES, INDENT_AMOUNT);
+		includeDateButton.setEnabled(generateGeneratedButton.getSelection());
+		
+		final Text commentText = addTextField(composite, "Comment:",
+				PREF_GENERATED_COMMENT, INDENT_AMOUNT, 0);
+		commentText.setEnabled(generateGeneratedButton.getSelection());
+		generateGeneratedButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				includeDateButton.setEnabled(generateGeneratedButton.getSelection());
+				commentText.setEnabled(generateGeneratedButton.getSelection());
 			}
 		});
 	}

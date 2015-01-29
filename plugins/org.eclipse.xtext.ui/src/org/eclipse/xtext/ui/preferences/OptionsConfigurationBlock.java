@@ -268,7 +268,7 @@ public abstract class OptionsConfigurationBlock {
 
 	protected Button addCheckBox(Composite parent, String label, String key, String[] values, int indent) {
 		ControlData data = new ControlData(key, values);
-		GridData gd = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+		GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		gd.horizontalSpan = 3;
 		gd.horizontalIndent = indent;
 		return addCheckboxWithData(parent, label, data, gd);
@@ -291,22 +291,21 @@ public abstract class OptionsConfigurationBlock {
 		Label labelControl = new Label(parent, SWT.WRAP);
 		labelControl.setText(label);
 		labelControl.setFont(JFaceResources.getDialogFont());
-		labelControl.setLayoutData(new GridData());
+		GridData labelLayoutData = new GridData();
+		labelLayoutData.horizontalIndent = indent;
+		labelControl.setLayoutData(labelLayoutData);
 		Text textBox = new Text(parent, SWT.BORDER | SWT.SINGLE);
 		textBox.setData(key);
-		textBox.setLayoutData(new GridData());
 		makeScrollableCompositeAware(textBox);
 		labels.put(textBox, labelControl);
 		updateText(textBox);
 		textBox.addModifyListener(getTextModifyListener());
 
-		GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
+		GridData textLayoutData = new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1);
 		if (widthHint != 0) {
-			data.widthHint = widthHint;
+			textLayoutData.widthHint = widthHint;
 		}
-		data.horizontalIndent = indent;
-		data.horizontalSpan = 2;
-		textBox.setLayoutData(data);
+		textBox.setLayoutData(textLayoutData);
 		textBoxes.add(textBox);
 		return textBox;
 	}
@@ -322,7 +321,7 @@ public abstract class OptionsConfigurationBlock {
 		labelControl.setLayoutData(gd);
 
 		Combo comboBox = newComboControl(parent, key, values, valueLabels);
-		comboBox.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL));
+		comboBox.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 
 		labels.put(comboBox, labelControl);
 
