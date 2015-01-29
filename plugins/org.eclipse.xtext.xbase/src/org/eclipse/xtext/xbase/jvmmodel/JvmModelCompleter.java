@@ -10,6 +10,11 @@ package org.eclipse.xtext.xbase.jvmmodel;
 import static com.google.common.collect.Iterables.*;
 
 import java.lang.annotation.Annotation;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.annotation.Generated;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -29,7 +34,9 @@ import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 
 /**
@@ -71,6 +78,12 @@ public class JvmModelCompleter {
 	@Inject
 	private AnnotationLookup annotationLookup;
 	
+	/** The generator is used to fill information of the <code>@Generated</code> annotation. */
+	@Inject
+	private JvmModelGenerator generator;
+	
+	private DateFormat dateFormat;
+	
 	public void complete(Iterable<? extends JvmIdentifiableElement> elements) {
 		for (JvmIdentifiableElement element : elements) {
 			complete(element);
@@ -106,7 +119,7 @@ public class JvmModelCompleter {
 			if (objectType != null)
 				element.getSuperTypes().add(objectType);
 		}
-		addSuppressWarnings(element);
+		addAnnotations(element);
 		EObject primarySourceElement = associations.getPrimarySourceElement(element);
 		JvmOperation values = typesFactory.createJvmOperation();
 		values.setVisibility(JvmVisibility.PUBLIC);
@@ -143,12 +156,12 @@ public class JvmModelCompleter {
 	}
 
 	protected void completeJvmAnnotationType(JvmAnnotationType element) {
+		addAnnotations(element);
 		if (element.getSuperTypes().isEmpty()) {
 			JvmTypeReference objectType = references.getTypeForName(Annotation.class, element);
 			if (objectType != null)
 				element.getSuperTypes().add(objectType);
 		}
-
 	}
 	
 	public void completeJvmConstructor(JvmConstructor constructor) {
@@ -166,7 +179,7 @@ public class JvmModelCompleter {
 	protected void completeJvmGenericType(JvmGenericType element) {
 		// if no super type add Object
 		ensureSuperTypeObject(element);
-		addSuppressWarnings(element);
+		addAnnotations(element);
 		if (!element.isInterface()) {
 			// if no constructors have been added, add a default constructor
 			if (isEmpty(element.getDeclaredConstructors())) {
@@ -194,16 +207,49 @@ public class JvmModelCompleter {
 	/**
 	 * @since 2.8
 	 */
-	protected void addSuppressWarnings(JvmDeclaredType jvmType) {
+	protected void addAnnotations(JvmDeclaredType jvmType) {
 		if (jvmType.getDeclaringType() == null) {
 			GeneratorConfig generatorConfig = generatorConfigProvider.get(jvmType);
-			if (generatorConfig.isGenerateSyntheticSuppressWarnings()
+			boolean generateSuppressWarnings = !(jvmType instanceof JvmAnnotationType)
+					&& generatorConfig.isGenerateSyntheticSuppressWarnings()
 					&& annotationLookup.findAnnotation(jvmType, SuppressWarnings.class) == null
-					&& references.findDeclaredType(SuppressWarnings.class, jvmType) instanceof JvmAnnotationType) {
+					&& references.findDeclaredType(SuppressWarnings.class, jvmType) instanceof JvmAnnotationType;
+			boolean generateGenerated = generatorConfig.isGenerateGeneratedAnnotation()
+					&& references.findDeclaredType(Generated.class, jvmType) instanceof JvmAnnotationType;
+			if (generateSuppressWarnings || generateGenerated) {
 				JvmAnnotationReferenceBuilder annotationRefBuilder = annotationRefBuilderFactory.create(jvmType.eResource().getResourceSet());
-				JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(SuppressWarnings.class, "all");
-				typeExtensions.setSynthetic(annotationRef, true);
-				jvmType.getAnnotations().add(annotationRef);
+				if (generateSuppressWarnings) {
+					JvmAnnotationReference annotationRef = annotationRefBuilder.annotationRef(SuppressWarnings.class, "all");
+					typeExtensions.setSynthetic(annotationRef, true);
+					jvmType.getAnnotations().add(annotationRef);
+				}
+				if (generateGenerated) {
+					String generatorName = generator.getClass().getName();
+					String date = null;
+					String comment = null;
+					if (generatorConfig.isIncludeDateInGeneratedAnnotation()) {
+						if (dateFormat == null) {
+						    dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mmX");
+						}
+					    date = dateFormat.format(new Date());
+					}
+					if (!Strings.isNullOrEmpty(generatorConfig.getGeneratedAnnotationComment())) {
+						comment = generatorConfig.getGeneratedAnnotationComment();
+					}
+					JvmAnnotationReference annotationRef;
+					if (date != null && comment != null) {
+						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName, date, comment);
+					} else if (date != null) {
+						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName, date);
+					} else if (comment != null) {
+						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName, "", comment);
+					} else {
+						annotationRef = annotationRefBuilder.annotationRef(Generated.class, generatorName);
+					}
+					typeExtensions.setSynthetic(annotationRef, true);
+					annotationLookup.removeAnnotation(jvmType, Generated.class);
+					jvmType.getAnnotations().add(annotationRef);
+				}
 			}
 		}
 	}

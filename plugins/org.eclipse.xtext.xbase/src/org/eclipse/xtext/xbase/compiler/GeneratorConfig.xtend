@@ -19,6 +19,12 @@ class GeneratorConfig {
 	boolean generateExpressions = true
 
 	boolean generateSyntheticSuppressWarnings = true
+	
+	boolean generateGeneratedAnnotation = false
+	
+	boolean includeDateInGeneratedAnnotation = false
+	
+	String generatedAnnotationComment
 
 	JavaVersion targetVersion = JavaVersion.JAVA5
 	
@@ -28,6 +34,9 @@ class GeneratorConfig {
 	def copy(GeneratorConfig other) {
 		this.generateExpressions = other.generateExpressions
 		this.generateSyntheticSuppressWarnings = other.generateSyntheticSuppressWarnings
+		this.generateGeneratedAnnotation = other.generateGeneratedAnnotation
+		this.includeDateInGeneratedAnnotation = other.includeDateInGeneratedAnnotation
+		this.generatedAnnotationComment = other.generatedAnnotationComment
 		this.targetVersion = other.targetVersion
 		return this
 	}
