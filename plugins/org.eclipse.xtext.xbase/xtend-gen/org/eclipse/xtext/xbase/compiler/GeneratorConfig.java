@@ -22,6 +22,12 @@ public class GeneratorConfig {
   
   private boolean generateSyntheticSuppressWarnings = true;
   
+  private boolean generateGeneratedAnnotation = false;
+  
+  private boolean includeDateInGeneratedAnnotation = false;
+  
+  private String generatedAnnotationComment;
+  
   private JavaVersion targetVersion = JavaVersion.JAVA5;
   
   /**
@@ -30,6 +36,9 @@ public class GeneratorConfig {
   public GeneratorConfig copy(final GeneratorConfig other) {
     this.generateExpressions = other.generateExpressions;
     this.generateSyntheticSuppressWarnings = other.generateSyntheticSuppressWarnings;
+    this.generateGeneratedAnnotation = other.generateGeneratedAnnotation;
+    this.includeDateInGeneratedAnnotation = other.includeDateInGeneratedAnnotation;
+    this.generatedAnnotationComment = other.generatedAnnotationComment;
     this.targetVersion = other.targetVersion;
     return this;
   }
@@ -50,6 +59,33 @@ public class GeneratorConfig {
   
   public void setGenerateSyntheticSuppressWarnings(final boolean generateSyntheticSuppressWarnings) {
     this.generateSyntheticSuppressWarnings = generateSyntheticSuppressWarnings;
+  }
+  
+  @Pure
+  public boolean isGenerateGeneratedAnnotation() {
+    return this.generateGeneratedAnnotation;
+  }
+  
+  public void setGenerateGeneratedAnnotation(final boolean generateGeneratedAnnotation) {
+    this.generateGeneratedAnnotation = generateGeneratedAnnotation;
+  }
+  
+  @Pure
+  public boolean isIncludeDateInGeneratedAnnotation() {
+    return this.includeDateInGeneratedAnnotation;
+  }
+  
+  public void setIncludeDateInGeneratedAnnotation(final boolean includeDateInGeneratedAnnotation) {
+    this.includeDateInGeneratedAnnotation = includeDateInGeneratedAnnotation;
+  }
+  
+  @Pure
+  public String getGeneratedAnnotationComment() {
+    return this.generatedAnnotationComment;
+  }
+  
+  public void setGeneratedAnnotationComment(final String generatedAnnotationComment) {
+    this.generatedAnnotationComment = generatedAnnotationComment;
   }
   
   @Pure
