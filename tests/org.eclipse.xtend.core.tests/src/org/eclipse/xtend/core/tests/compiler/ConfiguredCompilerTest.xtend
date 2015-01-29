@@ -18,10 +18,10 @@ import org.junit.Test
 class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
-	def compileWithConfiguration(){
+	def compileWithConfiguration() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
-		generatorConfig.setGenerateExpressions(false)
+		generatorConfig.generateSyntheticSuppressWarnings = false
+		generatorConfig.generateExpressions = false
 		assertCompilesTo(
 			'''
 				package foo
@@ -52,8 +52,8 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testAnnotationWithValueArray_01() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
-		generatorConfig.setGenerateExpressions(true)
+		generatorConfig.generateSyntheticSuppressWarnings = false
+		generatorConfig.generateExpressions = true
 		assertCompilesTo('''
 			@SuppressWarnings(#[ 'abc', 'efg' ])
 			class C {
@@ -68,8 +68,8 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	def testAnnotationWithValueArray_02() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
-		generatorConfig.setGenerateExpressions(true)
+		generatorConfig.generateSyntheticSuppressWarnings = false
+		generatorConfig.generateExpressions = true
 		assertCompilesTo('''
 			@SuppressWarnings('abc', 'efg')
 			class C {
@@ -82,10 +82,10 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def compileWithConfiguration_2(){
+	def compileWithConfiguration_2() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.setGenerateSyntheticSuppressWarnings(true)
-		generatorConfig.setGenerateExpressions(false)
+		generatorConfig.generateSyntheticSuppressWarnings = true
+		generatorConfig.generateExpressions = false
 		assertCompilesTo(
 			'''
 				package foo
@@ -116,10 +116,10 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
-	def compileWithConfiguration_3(){
+	def compileWithConfiguration_3() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		generatorConfig.setGenerateSyntheticSuppressWarnings(true)
-		generatorConfig.setGenerateExpressions(false)
+		generatorConfig.generateSyntheticSuppressWarnings = true
+		generatorConfig.generateExpressions = false
 		assertCompilesTo(
 			'''
 				package foo
@@ -147,6 +147,54 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 				  public int foo() {
 				    throw new UnsupportedOperationException("foo is not implemented");
 				  }
+				}
+			''')
+	}
+	
+	@Test
+	def testGeneratedAnnotation_01() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		generatorConfig.generateSyntheticSuppressWarnings = false
+		generatorConfig.generateGeneratedAnnotation = true
+		generatorConfig.includeDateInGeneratedAnnotation = false
+		generatorConfig.generatedAnnotationComment = ''
+		assertCompilesTo(
+			'''
+				package foo
+				class Bar {
+				}
+			''',
+			'''
+				package foo;
+				
+				import javax.annotation.Generated;
+				
+				@Generated("org.eclipse.xtend.core.compiler.XtendGenerator")
+				public class Bar {
+				}
+			''')
+	}
+	
+	@Test
+	def testGeneratedAnnotation_02() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		generatorConfig.generateSyntheticSuppressWarnings = false
+		generatorConfig.generateGeneratedAnnotation = true
+		generatorConfig.includeDateInGeneratedAnnotation = false
+		generatorConfig.generatedAnnotationComment = 'Source: ${sourcefile}'
+		assertCompilesTo(
+			'''
+				package foo
+				class Bar {
+				}
+			''',
+			'''
+				package foo;
+				
+				import javax.annotation.Generated;
+				
+				@Generated(value = "org.eclipse.xtend.core.compiler.XtendGenerator", comments = "Source: Bar.xtend")
+				public class Bar {
 				}
 			''')
 	}
