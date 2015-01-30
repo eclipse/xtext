@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaEMFFile;
@@ -69,6 +70,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   @Inject
   @Extension
   private Context2NameFunction ctx2name;
+  
+  @Inject
+  @Extension
+  private Naming _naming;
   
   public <T extends ENamedElement> List<T> sortByName(final Iterable<T> iterable) {
     final Comparator<T> _function = new Comparator<T>() {
@@ -144,7 +149,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       Resource _eResource = this.grammar.eResource();
       ResourceSet _resourceSet = _eResource.getResourceSet();
       String _packageName = filename.getPackageName();
-      final JavaEMFFile file = new JavaEMFFile(_resourceSet, _packageName);
+      String _fileHeader = this._naming.fileHeader();
+      final JavaEMFFile file = new JavaEMFFile(_resourceSet, _packageName, _fileHeader);
       file.imported(EObject.class);
       file.imported(GenericSequencer.class);
       file.imported(ISemanticSequencer.class);

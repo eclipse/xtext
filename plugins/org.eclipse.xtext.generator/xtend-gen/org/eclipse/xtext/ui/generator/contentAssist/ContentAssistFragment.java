@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.generator.contentAssist;
 
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -52,10 +51,6 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   
   @Accessors
   private boolean generateStub = true;
-  
-  @Inject
-  @Named("fileHeader")
-  private String fileHeader;
   
   public String getProposalProviderName(final Grammar grammar) {
     String _basePackageUi = this._naming.basePackageUi(grammar);
@@ -143,14 +138,9 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       String _asPath = this._naming.asPath(_proposalProviderName);
       String _plus = (_asPath + ".xtend");
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/*");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append(this.fileHeader, " ");
+      String _fileHeader = this._naming.fileHeader();
+      _builder.append(_fileHeader, "");
       _builder.newLineIfNotEmpty();
-      _builder.append(" ");
-      _builder.append("*/");
-      _builder.newLine();
       _builder.append("package ");
       String _proposalProviderName_1 = this.getProposalProviderName(this.grammar);
       String _packageName = this._naming.packageName(_proposalProviderName_1);

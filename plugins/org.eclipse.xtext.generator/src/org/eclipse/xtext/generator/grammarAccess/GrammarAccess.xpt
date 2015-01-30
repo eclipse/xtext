@@ -24,9 +24,7 @@
 
 «DEFINE root(String lineDelimiter) FOR Grammar»
 «FILE gaFQName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «gaFQName().toJavaPackage()»;
 
 import com.google.inject.Singleton;

@@ -21,9 +21,7 @@
 
 «DEFINE root(String lineDelimiter) FOR Grammar»
 «FILE getParseTreeConstructorName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getParseTreeConstructorName().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.*;
