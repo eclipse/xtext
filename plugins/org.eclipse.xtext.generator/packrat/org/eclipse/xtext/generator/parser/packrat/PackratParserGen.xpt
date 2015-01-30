@@ -26,11 +26,10 @@
 
 «DEFINE parser FOR Grammar»
 «FILE getParserClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getParserClassName().toJavaPackage()»;
 
+«annotationImports()-»
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.parser.packrat.AbstractPackratParser;
@@ -39,7 +38,7 @@ import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration.IInternalPar
 
 import «gaFQName()»;
 
-public class «getParserClassName().toSimpleName()» extends AbstractPackratParser {
+«classAnnotations()»public class «getParserClassName().toSimpleName()» extends AbstractPackratParser {
 	
 	@Inject
 	public «getParserClassName().toSimpleName()»(IParseResultFactory parseResultFactory, «gaSimpleName()» grammarAccess) {
@@ -62,11 +61,10 @@ public class «getParserClassName().toSimpleName()» extends AbstractPackratParser
 
 «DEFINE parserConfiguration FOR Grammar»
 «FILE getParserConfigurationClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getParserConfigurationClassName().toJavaPackage()»;
 
+«annotationImports()-»
 import org.eclipse.xtext.parser.packrat.AbstractParserConfiguration;
 «IF definesHiddenTokens || usedGrammars.size == 1 || rules.typeSelect(ParserRule).exists(e|e.definesHiddenTokens)-»
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
@@ -84,7 +82,7 @@ import «usedGrammar.getNamespace()».parser.packrat.«usedGrammar.getName().toFirs
 import «rule.containingGrammar().getNamespace()».parser.packrat.consumers.«rule.consumerClassName()»;
 «ENDFOREACH-»
 
-public class «getParserConfigurationClassName().toSimpleName()» extends AbstractParserConfiguration {
+«classAnnotations()»public class «getParserConfigurationClassName().toSimpleName()» extends AbstractParserConfiguration {
 
 «FOREACH usedGrammars AS usedGrammar-»
 	private final «usedGrammar.getName().replaceAll("\\s","_").toFirstUpper()»ParserConfiguration «usedGrammar.getName().replaceAll("\\s","_").toFirstLower()»Configuration; 
@@ -235,11 +233,10 @@ public class «getParserConfigurationClassName().toSimpleName()» extends Abstract
 
 «DEFINE delimiters FOR Grammar»
 «FILE getDelimiterClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getDelimiterClassName().toJavaPackage()»;
 
+«annotationImports()-»
 «IF allParserRules().allDelimited().exists(e|Keyword.isInstance(e))-»
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 «ENDIF-»
@@ -250,7 +247,7 @@ import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 «ENDIF-»
 «ENDIF-»
 
-public final class «getDelimiterClassName().toSimpleName()» {
+«classAnnotations()»public final class «getDelimiterClassName().toSimpleName()» {
 
 	private «getDelimiterClassName().toSimpleName()»() {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");

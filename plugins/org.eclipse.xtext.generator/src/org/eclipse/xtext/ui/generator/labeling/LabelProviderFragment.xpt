@@ -28,9 +28,7 @@
 
 «DEFINE eObjectLabelProvider FOR Grammar-»
 «FILE eObjectLabelProviderQualifiedName().asPath()+".java" SRC_UI -»
-/*
 «fileHeader()»
-*/
 package «eObjectLabelProviderQualifiedName().toJavaPackage()»;
 
 import com.google.inject.Inject;
@@ -62,9 +60,7 @@ public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObje
 
 «DEFINE xtendEObjectLabelProvider FOR Grammar-»
 «FILE eObjectLabelProviderQualifiedName().asPath()+".xtend" SRC_UI -»
-/*
 «fileHeader()»
-*/
 package «eObjectLabelProviderQualifiedName().toJavaPackage()»
 
 import com.google.inject.Inject
@@ -96,9 +92,7 @@ class «eObjectLabelProviderQualifiedName().toSimpleName()» extends «eObjectLabel
 
 «DEFINE descriptionLabelProvider FOR Grammar-»
 «FILE descriptionLabelProviderQualifiedName().asPath()+".java" SRC_UI -»
-/*
 «fileHeader()»
-*/
 package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
 
 /**
@@ -123,9 +117,7 @@ public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends «d
 
 «DEFINE xtendDescriptionLabelProvider FOR Grammar-»
 «FILE descriptionLabelProviderQualifiedName().asPath()+".xtend" SRC_UI -»
-/*
 «fileHeader()»
-*/
 package «descriptionLabelProviderQualifiedName().toJavaPackage()»
 
 //import org.eclipse.xtext.resource.IEObjectDescription

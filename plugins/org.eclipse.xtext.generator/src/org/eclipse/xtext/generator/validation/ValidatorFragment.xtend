@@ -9,8 +9,8 @@
 package org.eclipse.xtext.generator.validation
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import java.util.Set
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.BindFactory
@@ -18,12 +18,14 @@ import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.IInheriting
 import org.eclipse.xtext.generator.IStubGenerating
+import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtend.lib.annotations.Accessors
+
 import static extension org.eclipse.xtext.generator.IInheriting.Util.*
+
 /**
  * Generates an Xtend-based model validator.
  * 
@@ -31,6 +33,8 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
  * @since 2.4
  */
 class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
+
+	@Inject extension Naming
 	
 	@Inject extension ValidatorNaming
 	
@@ -39,8 +43,6 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 	@Accessors boolean generateStub = true
 
 	@Inject Grammar grammar
-	
-	@Inject @Named("fileHeader") String fileHeader
 	
 	val composedChecks = <String>newArrayList
 	
@@ -64,11 +66,10 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 	
 	override generate(Xtend2ExecutionContext ctx) {
 		ctx.writeFile(Generator.SRC_GEN, abstractValidatorName.asPath + ".java", '''
-			/*
-			 «fileHeader»
-			 */
+			«fileHeader»
 			package «abstractValidatorName.packageName»;
 			
+			«annotationImports»
 			import java.util.ArrayList;
 			import java.util.List;
 			import org.eclipse.emf.ecore.EPackage;
@@ -79,7 +80,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			«IF !composedChecks.isEmpty»
 			@ComposedChecks(validators= {«FOR validator: composedChecks SEPARATOR ", "»«validator».class«ENDFOR»})
 			«ENDIF»
-			public class «abstractValidatorName.toSimpleName» extends «getValidatorSuperClassName(isInheritImplementation)» {
+			«classAnnotations»public class «abstractValidatorName.toSimpleName» extends «getValidatorSuperClassName(isInheritImplementation)» {
 			
 				@Override
 				protected List<EPackage> getEPackages() {
@@ -96,10 +97,9 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 		''')
 		if(generateStub) {
 			ctx.writeFile(Generator.SRC, grammar.validatorName.asPath + '.xtend', '''
-				/*
-				 «fileHeader»
-				 */
+				«fileHeader»
 				package «grammar.validatorName.packageName»
+				
 				//import org.eclipse.xtext.validation.Check
 				
 				/**

@@ -26,9 +26,7 @@
 
 «DEFINE javaOutlineTreeProvider FOR Grammar»
  «FILE qualifiedName().asPath()+".java" SRC_UI -»
-/*
 «fileHeader()»
-*/
 package «qualifiedName().toJavaPackage()»;
 
 /**
@@ -44,9 +42,7 @@ public class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.edito
 
 «DEFINE xtendOutlineTreeProvider FOR Grammar»
  «FILE qualifiedName().asPath()+".xtend" SRC_UI -»
-/*
 «fileHeader()»
-*/
 package «qualifiedName().toJavaPackage()»
 
 /**

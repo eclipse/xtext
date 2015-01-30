@@ -24,11 +24,10 @@
 
 «DEFINE root(String lineDelimiter) FOR Grammar»
 «FILE gaFQName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «gaFQName().toJavaPackage()»;
 
+«annotationImports()-»
 import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
@@ -43,7 +42,7 @@ import «usedGrammar.gaFQName()»;
 «ENDFOREACH-»
 
 @Singleton
-public class «gaSimpleName()» extends AbstractGrammarElementFinder {
+«classAnnotations()»public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 	
 	«EXPAND parseRuleClasses(lineDelimiter) FOREACH rules.typeSelect(ParserRule)-»
 	

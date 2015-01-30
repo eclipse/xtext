@@ -79,9 +79,7 @@
 «DEFINE generate(Boolean generatorStub, Boolean mwe, Boolean javaMain, boolean xtendMain) FOR Grammar»
 «IF generatorStub»
 «FILE generatorName().asPath()+".xtend" SRC-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «generatorName().toJavaPackage()»
 
 import org.eclipse.emf.ecore.resource.Resource
@@ -144,9 +142,7 @@ Workflow {
 
 «IF javaMain»
 «FILE generatorName().toJavaPackage().asPath()+"/Main.java" SRC-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «generatorName().toJavaPackage()»;
 
 import java.util.List;
@@ -215,9 +211,7 @@ public class Main {
 
 «IF xtendMain»
 «FILE generatorName().toJavaPackage().asPath()+"/Main.xtend" SRC-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «generatorName().toJavaPackage()»
 
 import org.eclipse.emf.common.util.URI
