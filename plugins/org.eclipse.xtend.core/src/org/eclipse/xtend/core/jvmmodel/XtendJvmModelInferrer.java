@@ -12,7 +12,9 @@ import static org.eclipse.xtext.xbase.compiler.JavaVersion.*;
 
 import java.lang.annotation.Annotation;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -62,6 +64,8 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom;
+import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom.Initializer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
@@ -80,6 +84,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 import com.google.common.base.Predicate;
@@ -148,11 +153,27 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 	public void infer(/* @Nullable */ EObject object, final /* @NonNull */ IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (!(object instanceof XtendFile))
 			return;
-		XtendFile xtendFile = (XtendFile) object;
+		final Set<JvmDeclaredType> types = new LinkedHashSet<JvmDeclaredType>();
+		final IJvmDeclaredTypeAcceptor wrapper = new IJvmDeclaredTypeAcceptor() {
+
+			@Override
+			public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
+				types.add(type);
+				return acceptor.accept(type);
+			}
+
+			@Override
+			public <T extends JvmDeclaredType> void accept(T type, Procedure1<? super T> lateInitialization) {
+				types.add(type);
+				acceptor.accept(type, lateInitialization);
+			}
+			
+		};
+		final XtendFile xtendFile = (XtendFile) object;
 		generatorConfig = generatorConfigProvider.get(xtendFile);
-		List<Runnable> doLater = newArrayList();
+		final List<Runnable> doLater = newArrayList();
 		for (final XtendTypeDeclaration declaration: xtendFile.getXtendTypes()) {
-			inferTypeSceleton(declaration, acceptor, preIndexingPhase, xtendFile, doLater, null);
+			inferTypeSceleton(declaration, wrapper, preIndexingPhase, xtendFile, doLater, null);
 		}
 		ActiveAnnotationContexts contexts = null;
 		BatchLinkableResource resource = (BatchLinkableResource)xtendFile.eResource();
@@ -168,7 +189,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 				contexts.before(ActiveAnnotationContexts.AnnotationCallback.INDEXING);
 				for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
 					try {
-						annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
+						annotationProcessor.indexingPhase(ctx, wrapper, CancelIndicator.NullImpl);
 					} catch (Throwable t) {
 						ctx.handleProcessingError(xtendFile.eResource(), t);
 					}
@@ -182,20 +203,31 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 		}
 		
 		if (!preIndexingPhase) {
-			for (Runnable runnable : doLater) {
-				runnable.run();
-			}
-			try {
-				contexts.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
-				for (ActiveAnnotationContext ctx : contexts.getContexts().values()) {
+			final ActiveAnnotationContexts finalContexts = contexts;
+			Runnable lateInit = new Runnable() {
+
+				@Override
+				public void run() {
+					for (Runnable runnable : doLater) {
+						runnable.run();
+					}
 					try {
-						annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
-					} catch (Throwable t) {
-						ctx.handleProcessingError(xtendFile.eResource(), t);
+						finalContexts.before(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
+						for (ActiveAnnotationContext ctx : finalContexts.getContexts().values()) {
+							try {
+								annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
+							} catch (Throwable t) {
+								ctx.handleProcessingError(xtendFile.eResource(), t);
+							}
+						}
+					} finally {
+						finalContexts.after(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
 					}
 				}
-			} finally {
-				contexts.after(ActiveAnnotationContexts.AnnotationCallback.INFERENCE);
+			};
+			Initializer initializer = new JvmDeclaredTypeImplCustom.Initializer(resource, lateInit);
+			for (JvmDeclaredType type : types) {
+				((JvmDeclaredTypeImplCustom)type).setInitializer(initializer);
 			}
 		}
 	}

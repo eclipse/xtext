@@ -12,6 +12,7 @@ import static java.util.Collections.*;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScope;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
@@ -357,7 +359,13 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 
 	private void doGetAllDescriptions(JvmDeclaredType type, List<IEObjectDescription> descriptions) {
 		descriptions.add(EObjectDescription.create(getQualifiedNameConverter().toQualifiedName(type.getIdentifier()), type));
-		for(JvmMember member: type.getMembers()) {
+		EList<JvmMember> members = null;
+		if (type instanceof JvmDeclaredTypeImplCustom) {
+			members = ((JvmDeclaredTypeImplCustom)type).basicGetMembers();
+		} else {
+			members = type.getMembers();
+		}
+		for(JvmMember member: members) {
 			if (member instanceof JvmDeclaredType) {
 				doGetAllDescriptions((JvmDeclaredType) member, descriptions);
 			}
