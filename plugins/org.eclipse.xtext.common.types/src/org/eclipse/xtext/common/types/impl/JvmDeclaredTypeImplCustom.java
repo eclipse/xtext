@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -15,12 +17,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -33,6 +40,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -41,7 +49,9 @@ import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.RawTypeReferenceComputer;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -59,6 +69,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	
 	@Override
 	public JvmArrayType getArrayType() {
+		checkPendingInitialization();
 		JvmArrayType result = super.getArrayType();
 		if (result == null) {
 			result = doSynchronized(new Provider<JvmArrayType>() {
@@ -507,5 +518,180 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		RawTypeReferenceComputer strategy = new RawTypeReferenceComputer(TypesFactory.eINSTANCE);
 		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
 		return result == null ? null : result.getType();
+	}
+	
+	// Lazy initialization
+	
+	private Initializer initializer = null;
+	
+	public static class Initializer extends AdapterImpl implements Runnable {
+		
+		public static void ensureInitialized(Resource resource) {
+			Initializer initializer = find(resource);
+			if (initializer != null) {
+				initializer.run();
+			}
+		}
+		
+		public static Initializer find(Resource resource) {
+			for (Adapter adapter : resource.eAdapters()) {
+				if (adapter instanceof Initializer) {
+					return (Initializer) adapter;
+				}
+			}
+			return null;
+		}
+		
+		Set<Runnable> runnables = newLinkedHashSet();
+		private DerivedStateAwareResource resource;
+		private boolean executed = false;
+		
+		public Initializer(DerivedStateAwareResource resource, Runnable initial) {
+			if (find(resource) != null) {
+				throw new IllegalStateException("An initializer already existed on resource "+resource.getURI());
+			}
+			runnables.add(initial);
+			resource.eAdapters().add(this);
+			this.resource = resource;
+		}
+		
+		@Override
+		public void run() {
+			if (executed) {
+				return;
+			}
+			executed = true;
+			resource.runLateInitialization(new IAcceptor<DerivedStateAwareResource>() {
+				@Override
+				public void accept(DerivedStateAwareResource t) {
+					try {
+						resource.eAdapters().remove(this);
+						for (Runnable runnable : runnables) {
+							runnable.run();
+						}
+					} finally {
+						runnables = null;
+						resource = null;
+					}
+				}
+			});
+		}
+		
+		public void addRunnable(Runnable runnable) {
+			this.runnables.add(runnable);
+		}
+	}
+	
+	public Initializer getInitializer() {
+		return initializer;
+	}
+	
+	public void setInitializer(final Initializer initializer) {
+		this.initializer = initializer;
+	}
+	
+	protected void checkPendingInitialization() {
+		if (initializer != null) {
+			Runnable local = initializer;
+			initializer = null;
+			local.run();
+		}
+	}
+	
+	@Override
+	public EList<EObject> eContents() {
+		checkPendingInitialization();
+		return super.eContents();
+	}
+	
+	@Override
+	public EList<Adapter> eAdapters() {
+		checkPendingInitialization();
+		return super.eAdapters();
+	}
+	
+	@Override
+	public boolean eIsSet(EStructuralFeature eFeature) {
+		checkPendingInitialization();
+		return super.eIsSet(eFeature);
+	}
+	
+	@Override
+	public boolean eIsSet(int featureID) {
+		checkPendingInitialization();
+		return super.eIsSet(featureID);
+	}
+	
+	@Override
+	public Object eGet(EStructuralFeature eFeature) {
+		checkPendingInitialization();
+		return super.eGet(eFeature);
+	}
+	
+	@Override
+	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
+		checkPendingInitialization();
+		return super.eGet(eFeature, resolve);
+	}
+	
+	@Override
+	public Object eGet(EStructuralFeature eFeature, boolean resolve, boolean coreType) {
+		checkPendingInitialization();
+		return super.eGet(eFeature, resolve, coreType);
+	}
+	
+	@Override
+	public EList<JvmTypeReference> getSuperTypes() {
+		checkPendingInitialization();
+		return super.getSuperTypes();
+	}
+	
+	/**
+	 * access to the members without triggering pending initialization
+	 */
+	public EList<JvmMember> basicGetMembers() {
+		return super.getMembers();
+	}
+	
+	@Override
+	public EList<JvmMember> getMembers() {
+		checkPendingInitialization();
+		return super.getMembers();
+	}
+	
+	@Override
+	public boolean isAbstract() {
+		checkPendingInitialization();
+		return super.isAbstract();
+	}
+	
+	@Override
+	public boolean isStatic() {
+		checkPendingInitialization();
+		return super.isStatic();
+	}
+	
+	@Override
+	public boolean isFinal() {
+		checkPendingInitialization();
+		return super.isFinal();
+	}
+	
+	@Override
+	public JvmVisibility getVisibility() {
+		checkPendingInitialization();
+		return super.getVisibility();
+	}
+	
+	@Override
+	public boolean isDeprecated() {
+		checkPendingInitialization();
+		return super.isDeprecated();
+	}
+	
+	@Override
+	public EList<JvmAnnotationReference> getAnnotations() {
+		checkPendingInitialization();
+		return super.getAnnotations();
 	}
 }
