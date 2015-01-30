@@ -205,7 +205,7 @@ public class Strings {
 		if (bufLen < 0) {
 			bufLen = Integer.MAX_VALUE;
 		}
-		StringBuffer outBuffer = new StringBuffer(bufLen);
+		StringBuilder outBuffer = new StringBuilder(bufLen);
 
 		for (int x = 0; x < len; x++) {
 			char aChar = theString.charAt(x);

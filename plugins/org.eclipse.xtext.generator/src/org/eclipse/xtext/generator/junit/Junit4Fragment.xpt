@@ -17,9 +17,7 @@
 «DEFINE generate(Junit4Fragment junit4Fragment) FOR Grammar-»
 «REM»
 «FILE qualifiedTestName().asPath()+".java" SRC_TEST -»
-/*
 «fileHeader()»
-*/
 package «qualifiedTestName().toJavaPackage()»;
 
 import static junit.framework.Assert.assertNotNull;
@@ -51,11 +49,10 @@ public class «qualifiedTestName().toSimpleName()» {
 «ENDREM»
 
 «FILE qualifiedInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
-/*
 «fileHeader()»
-*/
 package «qualifiedInjectorProviderName().toJavaPackage()»;
 
+«annotationImports()-»
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
@@ -63,7 +60,7 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 
 import com.google.inject.Injector;
 
-public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
+«classAnnotations()»public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
 	
     protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
@@ -104,16 +101,15 @@ public class «qualifiedInjectorProviderName().toSimpleName()» implements IInject
 
 «IF getNaming().hasUI()»
 «FILE qualifiedUiInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
-/*
 «fileHeader()»
-*/
 package «qualifiedUiInjectorProviderName().toJavaPackage()»;
 
+«annotationImports()-»
 import org.eclipse.xtext.junit4.IInjectorProvider;
 
 import com.google.inject.Injector;
 
-public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInjectorProvider {
+«classAnnotations()»public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInjectorProvider {
 	
 	@Override
 	public Injector getInjector() {

@@ -12,6 +12,7 @@ import com.google.inject.Inject
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Alternatives
@@ -20,19 +21,19 @@ import org.eclipse.xtext.Group
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.TerminalRule
+import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
+import org.eclipse.xtext.nodemodel.ICompositeNode
+import org.eclipse.xtext.nodemodel.ILeafNode
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.serializer.analysis.GrammarAlias
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider
 import org.eclipse.xtext.util.Strings
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.xtext.nodemodel.ILeafNode
-import org.eclipse.xtext.nodemodel.ICompositeNode
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
-import org.eclipse.xtext.TerminalRule
 
 class AbstractSyntacticSequencer extends GeneratedFile {
 	
@@ -41,6 +42,8 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	@Inject extension GrammarAccess grammarAccess
 	
 	@Inject extension SyntacticSequencerUtil util
+	
+	@Inject extension Naming
 	
 	/**
 	 * @since 2.8
@@ -53,7 +56,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	@Accessors SyntheticTerminalDetector syntheticTerminalDetector
 	
 	override getFileContents(SerializerGenFileNames.GenFileName filename) {
-		val file = new JavaFile(filename.packageName);
+		val file = new JavaFile(filename.packageName, fileHeader);
 		
 		file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer)
 		file.imported(RuleCall)
@@ -64,10 +67,12 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		file.imported(EObject)
 		file.imported(List)
 		file.imported(GrammarAlias.AbstractElementAlias)
+		if (annotationImports != null)
+			annotationImports.split("(import)|;").map[trim].filter[!empty].forEach[file.imported(it)]
 		
 		val _abstract = if (filename.isAbstract) "abstract " else ""
 		file.body = '''
-			@SuppressWarnings("all")
+			«classAnnotations»@SuppressWarnings("all")
 			public «_abstract»class «filename.simpleName» extends AbstractSyntacticSequencer {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;

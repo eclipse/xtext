@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.ENamedElement
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
@@ -42,6 +43,8 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	@Inject SerializerGenFileNames names
 	
 	@Inject extension Context2NameFunction ctx2name
+	
+	@Inject extension Naming
 	
 	def <T extends ENamedElement> List<T> sortByName(Iterable<T> iterable) {
 		iterable.sortWith(p1, p2|p1.name.compareTo(p2.name))
@@ -70,7 +73,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 //	}
 	
 	override getFileContents(SerializerGenFileNames.GenFileName filename) {
-		val file = new JavaEMFFile(grammar.eResource.resourceSet, filename.packageName);
+		val file = new JavaEMFFile(grammar.eResource.resourceSet, filename.packageName, fileHeader);
 		
 		file.imported(EObject)
 		file.imported(GenericSequencer)
@@ -81,6 +84,8 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		file.imported(ISerializationDiagnostic.Acceptor)
 		file.imported(Inject)
 		file.imported(Provider)
+		if (annotationImports != null)
+			annotationImports.split("(import)|;").map[trim].filter[!empty].forEach[file.imported(it)]
 		
 		val localConstraints = grammar.grammarConstraints
 		val superConstraints = grammar.superGrammar.grammarConstraints
@@ -91,7 +96,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				file.imported(AbstractDelegatingSemanticSequencer)
 		val _abstract = if (filename.isAbstract) "abstract " else "" 
 		file.body = '''
-			@SuppressWarnings("all")
+			«classAnnotations»@SuppressWarnings("all")
 			public «_abstract»class «filename.simpleName» extends «superGrammar» {
 			
 				@Inject
