@@ -29,11 +29,10 @@
 
 «DEFINE PartialContentAssistParser(boolean restriction) FOR Grammar»
 «FILE partialParser().asPath()+".java" SRC_GEN_IDE-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «partialParser().toJavaPackage()»;
 
+«annotationImports()»
 import java.util.Collection;
 import java.util.Collections;
 
@@ -49,7 +48,7 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 «IF restriction-»
 @SuppressWarnings("restriction")
 «ENDIF-»
-public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements IPartialEditingContentAssistParser {
+«classAnnotations()»public class «partialParser().toSimpleName()» extends «parser().toSimpleName()» implements IPartialEditingContentAssistParser {
 
 	private AbstractRule rule;
 

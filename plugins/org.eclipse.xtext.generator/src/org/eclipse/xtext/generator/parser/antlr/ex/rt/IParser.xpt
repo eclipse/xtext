@@ -18,17 +18,16 @@
 
 «DEFINE parser(AntlrFragmentHelper helper) FOR Grammar»
 «FILE helper.getParserClassName(this).asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «helper.getParserClassName(this).toJavaPackage()»;
 
+«annotationImports()»
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import «gaFQName()»;
 
-public class «helper.getParserClassName(this).toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+«classAnnotations()»public class «helper.getParserClassName(this).toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;
@@ -77,17 +76,16 @@ public class «helper.getParserClassName(this).toSimpleName()» extends org.eclips
 
 «IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
 «FILE helper.getTokenSourceClassName(this).asPath()+".java" SRC-»
-/*
 «fileHeader()»
-*/
 package «helper.getTokenSourceClassName(this).toJavaPackage()»;
 
+«annotationImports()»
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.AbstractIndentationTokenSource;
 import «helper.getInternalParserClassName(this)»;
 
-public class «helper.getTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
+«classAnnotations()»public class «helper.getTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
 	
 	public «helper.getTokenSourceClassName(this).toSimpleName()»(TokenSource delegate) {
 		super(delegate);

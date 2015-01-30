@@ -21,11 +21,10 @@
 
 «DEFINE root(String lineDelimiter) FOR Grammar»
 «FILE getParseTreeConstructorName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getParseTreeConstructorName().toJavaPackage()»;
 
+«annotationImports()»
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
@@ -35,7 +34,7 @@ import «gaFQName()»;
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class «getParseTreeConstructorName().toSimpleName()» extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
+«classAnnotations()»public class «getParseTreeConstructorName().toSimpleName()» extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private «gaSimpleName()» grammarAccess;

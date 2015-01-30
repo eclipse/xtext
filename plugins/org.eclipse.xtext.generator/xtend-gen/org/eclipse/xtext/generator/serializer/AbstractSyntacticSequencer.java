@@ -28,6 +28,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
@@ -44,10 +45,12 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -62,6 +65,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   @Inject
   @Extension
   private SyntacticSequencerUtil util;
+  
+  @Inject
+  @Extension
+  private Naming _naming;
   
   /**
    * @since 2.8
@@ -80,7 +87,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     String _xblockexpression = null;
     {
       String _packageName = filename.getPackageName();
-      final JavaFile file = new JavaFile(_packageName);
+      String _fileHeader = this._naming.fileHeader();
+      final JavaFile file = new JavaFile(_packageName, _fileHeader);
       file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer.class);
       file.imported(RuleCall.class);
       file.imported(INode.class);
@@ -90,6 +98,34 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       file.imported(EObject.class);
       file.imported(List.class);
       file.imported(GrammarAlias.AbstractElementAlias.class);
+      String _annotationImports = this._naming.annotationImports();
+      boolean _notEquals = (!Objects.equal(_annotationImports, null));
+      if (_notEquals) {
+        String _annotationImports_1 = this._naming.annotationImports();
+        String[] _split = _annotationImports_1.split("(import)|;");
+        final Function1<String, String> _function = new Function1<String, String>() {
+          @Override
+          public String apply(final String it) {
+            return it.trim();
+          }
+        };
+        List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
+        final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
+          @Override
+          public Boolean apply(final String it) {
+            boolean _isEmpty = it.isEmpty();
+            return Boolean.valueOf((!_isEmpty));
+          }
+        };
+        Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
+        final Procedure1<String> _function_2 = new Procedure1<String>() {
+          @Override
+          public void apply(final String it) {
+            file.imported(it);
+          }
+        };
+        IterableExtensions.<String>forEach(_filter, _function_2);
+      }
       String _xifexpression = null;
       boolean _isAbstract = filename.isAbstract();
       if (_isAbstract) {
@@ -99,8 +135,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       }
       final String _abstract = _xifexpression;
       StringConcatenation _builder = new StringConcatenation();
+      String _classAnnotations = this._naming.classAnnotations();
+      _builder.append(_classAnnotations, "");
       _builder.append("@SuppressWarnings(\"all\")");
-      _builder.newLine();
+      _builder.newLineIfNotEmpty();
       _builder.append("public ");
       _builder.append(_abstract, "");
       _builder.append("class ");

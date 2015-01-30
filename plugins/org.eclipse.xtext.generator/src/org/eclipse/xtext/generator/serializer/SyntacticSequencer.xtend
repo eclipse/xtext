@@ -10,13 +10,14 @@ package org.eclipse.xtext.generator.serializer
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
-import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.AbstractRule
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.AbstractRule
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.generator.Naming
+import org.eclipse.xtext.generator.terminals.SyntheticTerminalDetector
 import org.eclipse.xtext.nodemodel.INode
 
 /**
@@ -40,12 +41,12 @@ class SyntacticSequencer extends GeneratedFile {
 	
 	@Inject @Named("generateXtendStub") Boolean generateXtendStub
 	
-	@Inject @Named("fileHeader") String fileHeader
+	@Inject extension Naming
 	
 	private def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''
 	
 	override getFileContents(SerializerGenFileNames.GenFileName filename) {
-		val file = new JavaFile(filename.packageName);
+		val file = new JavaFile(filename.packageName, fileHeader);
 		file.body = if (generateXtendStub) '''
 			class «filename.simpleName» extends «names.abstractSyntacticSequencer.simpleName» {
 				«IF detectSyntheticTerminals»
@@ -79,9 +80,7 @@ class SyntacticSequencer extends GeneratedFile {
 			}
 		'''
 		return '''
-			/*
-			 «fileHeader»
-			 */
+			«fileHeader»
 			«file.toString»
 		'''
 		
