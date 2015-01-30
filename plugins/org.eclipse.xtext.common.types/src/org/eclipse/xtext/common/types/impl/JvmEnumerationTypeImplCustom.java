@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 public class JvmEnumerationTypeImplCustom extends JvmEnumerationTypeImpl {
 	@Override
 	public EList<JvmEnumerationLiteral> getLiterals() {
+		checkPendingInitialization();
 		if (literals == null) {
 			@SuppressWarnings("serial")
 			EObjectResolvingEList<JvmEnumerationLiteral> list = new EObjectResolvingEList<JvmEnumerationLiteral>(
@@ -38,6 +39,7 @@ public class JvmEnumerationTypeImplCustom extends JvmEnumerationTypeImpl {
 
 	@Override
 	public EList<JvmMember> getMembers() {
+		checkPendingInitialization();
 		if (members == null) {
 			members = new EObjectContainmentWithInverseEList<JvmMember>(JvmMember.class, this,
 					TypesPackage.JVM_DECLARED_TYPE__MEMBERS, TypesPackage.JVM_MEMBER__DECLARING_TYPE) {
