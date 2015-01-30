@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.window.Window;
@@ -53,6 +53,7 @@ import org.eclipse.xtext.preferences.TypedPreferenceValues;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.util.DontAskAgainDialogs;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
@@ -67,11 +68,14 @@ import com.google.inject.Provider;
  * @author dhuebner - Initial contribution and API
  */
 public class ConvertJavaCode {
+	private static String DELETE_JAVA_FILES_AFTER_CONVERSION = "delete_java_file_after_conversion";
+
 	private @Inject Provider<JavaConverter> converterProvider;
 	private @Inject IResourceSetProvider resourceSetProvider;
 	private @Inject FileExtensionProvider fileExtensionProvider;
 	private @Inject @FormatterPreferences IPreferenceValuesProvider cfgProvider;
 	private @Inject IFormatter2 formatter;
+	private @Inject DontAskAgainDialogs dialogs;
 
 	public void runJavaConverter(final Set<ICompilationUnit> compilationUnits, Shell activeShell)
 			throws ExecutionException {
@@ -93,15 +97,21 @@ public class ConvertJavaCode {
 				return;
 			}
 		}
-		//TODO save decision
-		MessageDialog dialogWithToggle = new MessageDialog(activeShell, "Xtend converter", null,
-				"Delete Java source files?", MessageDialog.QUESTION_WITH_CANCEL, new String[] {
-						IDialogConstants.YES_LABEL, IDialogConstants.NO_LABEL, IDialogConstants.CANCEL_LABEL }, 0);
-		//			dialogWithToggle.setPrefKey("delete_java_files_after_successfull_conversion");
-		//			dialogWithToggle.setPrefStore(prefStore.getWritablePreferenceStore());
-		final int deleteJavaFiles = dialogWithToggle.open();
-		if (deleteJavaFiles == 2) {
-			return;
+
+		final String storedValue = dialogs.getUserDecision(DELETE_JAVA_FILES_AFTER_CONVERSION);
+
+		boolean deleteJavaFiles = false;
+		if (MessageDialogWithToggle.PROMPT.equals(storedValue)) {
+			int userAnswer = dialogs.askUser("Delete Java source files?", "Xtend converter",
+					DELETE_JAVA_FILES_AFTER_CONVERSION, activeShell);
+			if (userAnswer == IDialogConstants.CANCEL_ID) {
+				//cancel
+				return;
+			} else if (userAnswer == IDialogConstants.YES_ID) {
+				deleteJavaFiles = true;
+			}
+		} else if (MessageDialogWithToggle.ALWAYS.equals(storedValue)) {
+			deleteJavaFiles = true;
 		}
 		for (final Entry<ICompilationUnit, ConversionResult> result : conversionResults.entrySet()) {
 			ICompilationUnit compilationUnit = result.getKey();
@@ -115,7 +125,7 @@ public class ConvertJavaCode {
 				}
 			}
 			writeToFile(xtendFileToCreate, xtendCode);
-			if (deleteJavaFiles == 0) {
+			if (deleteJavaFiles) {
 				try {
 					compilationUnit.delete(true, null);
 				} catch (JavaModelException e) {
