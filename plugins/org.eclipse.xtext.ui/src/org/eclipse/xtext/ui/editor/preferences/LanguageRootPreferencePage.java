@@ -9,15 +9,22 @@
 package org.eclipse.xtext.ui.editor.preferences;
 
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtext.ui.preferences.ResetPromptDialogSettingsField;
+
+import com.google.inject.Inject;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
  * 
  */
 public class LanguageRootPreferencePage extends AbstractPreferencePage {
+	private @Inject ResetPromptDialogSettingsField resetPromptDialogSettings;
 
 	@Override
 	protected void createFieldEditors() {
+		Composite parent = getFieldEditorParent();
+		addField(resetPromptDialogSettings.getFieldEditor(parent));
 	}
 
 	/**

@@ -157,6 +157,9 @@ public class ConversionProblemsDialog extends Dialog {
 		problemsPane.setContent(problemsTable);
 		applyDialogFont(parent);
 		vsplitter.setWeights(new int[] { 50, 50 });
+		if (javaFilesTable.getItems().length > 0) {
+			javaFilesTable.select(0);
+		}
 		return parent;
 	}
 
