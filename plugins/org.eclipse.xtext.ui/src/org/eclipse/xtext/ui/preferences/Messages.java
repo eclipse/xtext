@@ -33,6 +33,8 @@ public class Messages extends NLS {
 	public static String ProjectSelectionDialog_title;
 	public static String ProjectSelectionDialog_desciption;
 	public static String ProjectSelectionDialog_filter;
+	public static String ResetPromptDialogSettingsField_0;
+	public static String ResetPromptDialogSettingsField_1;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
