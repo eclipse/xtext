@@ -21,9 +21,7 @@
 
 «DEFINE grammar(AntlrOptions options, AntlrFragmentHelper helper) FOR Grammar»
 «FILE helper.getParserGrammarFileName(this).asPath()+".g" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 parser grammar «helper.getParserGrammarFileName(this).toSimpleName()»;
 
 options {

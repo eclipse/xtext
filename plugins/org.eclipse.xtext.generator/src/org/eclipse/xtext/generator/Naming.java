@@ -30,6 +30,7 @@ public class Naming {
 	private String projectNameIde;
 	private String ideBasePackage;
 	private String lineDelimiter = Strings.newLine();
+	private String fileHeader;
 	private boolean hasUI;
 	private boolean hasIde;
 	
@@ -209,6 +210,20 @@ public class Naming {
 		return Strings.skipLastToken(name, ".");
 	}
 	
+	/**
+	 * @since 2.8
+	 */
+	public String fileHeader() {
+		return fileHeader;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setFileHeader(String fileHeader) {
+		this.fileHeader = fileHeader;
+	}
+
 	/**
 	 * @since 2.8
 	 */

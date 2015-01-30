@@ -21,9 +21,7 @@
 
 «DEFINE file(String grammarFileName) FOR Grammar»
 «FILE getAntlrTokenFileProviderClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getAntlrTokenFileProviderClassName().toJavaPackage()»;
 
 import java.io.InputStream;

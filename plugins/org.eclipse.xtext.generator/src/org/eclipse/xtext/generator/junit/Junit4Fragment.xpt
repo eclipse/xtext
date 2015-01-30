@@ -17,9 +17,7 @@
 «DEFINE generate(Junit4Fragment junit4Fragment) FOR Grammar-»
 «REM»
 «FILE qualifiedTestName().asPath()+".java" SRC_TEST -»
-/*
 «fileHeader()»
-*/
 package «qualifiedTestName().toJavaPackage()»;
 
 import static junit.framework.Assert.assertNotNull;
@@ -51,9 +49,7 @@ public class «qualifiedTestName().toSimpleName()» {
 «ENDREM»
 
 «FILE qualifiedInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
-/*
 «fileHeader()»
-*/
 package «qualifiedInjectorProviderName().toJavaPackage()»;
 
 import org.eclipse.xtext.junit4.GlobalRegistries;
@@ -104,9 +100,7 @@ public class «qualifiedInjectorProviderName().toSimpleName()» implements IInject
 
 «IF getNaming().hasUI()»
 «FILE qualifiedUiInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
-/*
 «fileHeader()»
-*/
 package «qualifiedUiInjectorProviderName().toJavaPackage()»;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;

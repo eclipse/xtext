@@ -27,9 +27,7 @@
 
 «DEFINE javaQuickfixProvider(String superClassName) FOR Grammar»
 «FILE getQuickfixProviderName().asPath()+".java" SRC_UI-»
-/*
 «fileHeader()»
-*/
 package «getQuickfixProviderName().toJavaPackage()»;
 
 /**
@@ -57,9 +55,7 @@ public class «getQuickfixProviderName().toSimpleName()» extends «superClassName»
 
 «DEFINE xtendQuickfixProvider(String superClassName) FOR Grammar»
 «FILE getQuickfixProviderName().asPath()+".xtend" SRC_UI-»
-/*
 «fileHeader()»
-*/
 package «getQuickfixProviderName().toJavaPackage()»
 
 //import org.eclipse.xtext.ui.editor.quickfix.Fix

@@ -20,9 +20,7 @@
 
 «DEFINE parser(boolean partialParsing, AntlrFragmentHelper helper) FOR Grammar»
 «FILE helper.getContentAssistParserClassName(this).asPath()+".java" SRC_GEN_IDE-»
-/*
 «fileHeader()»
-*/
 package «helper.getContentAssistParserClassName(this).toJavaPackage()»;
 
 import java.util.Collection;
@@ -101,9 +99,7 @@ public class «helper.getContentAssistParserClassName(this).toSimpleName()» exten
 
 «IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
 «FILE helper.getContentAssistTokenSourceClassName(this).asPath()+".java" SRC_UI-»
-/*
 «fileHeader()»
-*/
 package «helper.getContentAssistTokenSourceClassName(this).toJavaPackage()»;
 
 import org.antlr.runtime.Token;
