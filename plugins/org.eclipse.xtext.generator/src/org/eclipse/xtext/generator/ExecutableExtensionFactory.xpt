@@ -4,9 +4,7 @@
 	
 «DEFINE file(String activatorName) FOR Grammar»
 «FILE executableExtensionFactory().asPath()+".java" SRC_GEN_UI-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «executableExtensionFactory().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
@@ -20,7 +18,7 @@ import «activatorName»;
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class «executableExtensionFactory().toSimpleName()» extends AbstractGuiceAwareExecutableExtensionFactory {
+«classAnnotations()»public class «executableExtensionFactory().toSimpleName()» extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
 	protected Bundle getBundle() {

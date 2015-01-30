@@ -9,8 +9,8 @@
 package org.eclipse.xtext.ui.generator.contentAssist
 
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import org.eclipse.xpand2.XpandFacade
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Generator
@@ -22,7 +22,6 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static java.util.Collections.*
 import static org.eclipse.xtext.GrammarUtil.*
-import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -37,8 +36,6 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	@Accessors boolean inheritImplementation = true
 
 	@Accessors boolean generateStub = true;
-	
-	@Inject @Named("fileHeader") String fileHeader
 	
 	def String getProposalProviderName(Grammar grammar) {
 		return grammar.basePackageUi + ".contentassist." + getName(grammar) + "ProposalProvider"
@@ -88,9 +85,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	override generate(Xtend2ExecutionContext ctx) {
 		if(generateStub) {
 			ctx.writeFile(Generator::SRC_UI, grammar.proposalProviderName.asPath + '.xtend', '''
-				/*
-				 «fileHeader»
-				 */
+				«fileHeader»
 				package «grammar.proposalProviderName.packageName»
 				
 				import «genProposalProviderName»

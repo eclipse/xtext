@@ -18,9 +18,7 @@
 
 «DEFINE generate(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getValidatorName("Abstract").toJavaPackage()»;
  
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 «IF !composedChecks.isEmpty-»
 @ComposedChecks(validators= {«FOREACH composedChecks AS validator SEPARATOR ", "-»«validator».class«ENDFOREACH-»})
 «ENDIF-»
-public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName» {
+«classAnnotations()»public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName» {
 
    	«EXPAND Common::getEPackages(packageQNames)-»
 
@@ -42,9 +40,7 @@ public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSup
 «ENDFILE»
 
 «FILE getValidatorName("").asPath()+".java" SRC-»
-/*
 «fileHeader()»
-*/
 package «getValidatorName("").toJavaPackage()»;
 
 /**

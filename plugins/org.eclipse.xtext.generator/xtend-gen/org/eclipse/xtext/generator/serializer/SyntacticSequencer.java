@@ -18,6 +18,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
@@ -57,8 +58,8 @@ public class SyntacticSequencer extends GeneratedFile {
   private Boolean generateXtendStub;
   
   @Inject
-  @Named("fileHeader")
-  private String fileHeader;
+  @Extension
+  private Naming _naming;
   
   private CharSequence unassignedCalledTokenRuleName(final AbstractRule rule) {
     StringConcatenation _builder = new StringConcatenation();
@@ -72,7 +73,8 @@ public class SyntacticSequencer extends GeneratedFile {
   @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     String _packageName = filename.getPackageName();
-    final JavaFile file = new JavaFile(_packageName);
+    String _fileHeader = this._naming.fileHeader();
+    final JavaFile file = new JavaFile(_packageName, _fileHeader);
     String _xifexpression = null;
     if ((this.generateXtendStub).booleanValue()) {
       StringConcatenation _builder = new StringConcatenation();
@@ -216,14 +218,9 @@ public class SyntacticSequencer extends GeneratedFile {
     }
     file.body = _xifexpression;
     StringConcatenation _builder_2 = new StringConcatenation();
-    _builder_2.append("/*");
-    _builder_2.newLine();
-    _builder_2.append(" ");
-    _builder_2.append(this.fileHeader, " ");
+    String _fileHeader_1 = this._naming.fileHeader();
+    _builder_2.append(_fileHeader_1, "");
     _builder_2.newLineIfNotEmpty();
-    _builder_2.append(" ");
-    _builder_2.append("*/");
-    _builder_2.newLine();
     String _string = file.toString();
     _builder_2.append(_string, "");
     _builder_2.newLineIfNotEmpty();

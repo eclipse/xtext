@@ -22,9 +22,7 @@
 
 «DEFINE GenProposalProvider(String superClassName) FOR Grammar»
 «FILE getGenProposalProvider().asPath()+".java" SRC_GEN_UI -»
-/*
 «fileHeader()»
-*/
 package «getGenProposalProvider().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EObject;
@@ -38,7 +36,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
+«classAnnotations()»public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
 		
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
@@ -84,9 +82,7 @@ public class «getGenProposalProvider().toSimpleName()» extends «superClassName» 
 
 «DEFINE ProposalProvider(String superClassName) FOR Grammar»
 «FILE getProposalProvider().asPath()+".java" SRC_UI-»
-/*
 «fileHeader()»
-*/
 package «getProposalProvider().toJavaPackage()»;
 
 /**

@@ -22,9 +22,7 @@
 
 «DEFINE terminalConsumer FOR TerminalRule»
 «FILE this.fullConsumerClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «this.consumerPackageName()»;
 
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
@@ -38,7 +36,7 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 «ENDIF-»
 
-public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
+«classAnnotations()»public final class «this.consumerClassName()» extends AbstractRuleAwareTerminalConsumer {
 «FOREACH allCalledRules() AS calledRule-»
 
 	private «calledRule.consumerInterfaceName()» «calledRule.consumerFieldName()»;

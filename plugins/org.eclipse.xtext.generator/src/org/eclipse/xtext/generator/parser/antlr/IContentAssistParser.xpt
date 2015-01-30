@@ -18,9 +18,7 @@
 
 «DEFINE parser(AntlrOptions options, boolean partialParsing) FOR Grammar»
 «FILE getParserClassName().asPath()+".java" SRC_GEN_IDE-»
-/*
 «fileHeader()»
-*/
 package «getParserClassName().toJavaPackage()»;
 
 import java.util.Collection;
@@ -37,7 +35,7 @@ import com.google.inject.Inject;
 
 import «gaFQName()»;
 
-public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
+«classAnnotations()»public class «getParserClassName().toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;

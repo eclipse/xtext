@@ -18,9 +18,7 @@
 «EXPAND guiceModuleRt»
 
 «FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleRtGenerated().toJavaPackage()»;
 
 import java.util.Properties;
@@ -34,7 +32,7 @@ import com.google.inject.name.Names;
  * Manual modifications go to {«guiceModuleRt()»}
  */
  @SuppressWarnings("all")
-public abstract class «guiceModuleRtGenerated().toSimpleName()» extends «superClassName» {
+«classAnnotations()»public abstract class «guiceModuleRtGenerated().toSimpleName()» extends «superClassName» {
 
 	protected Properties properties = null;
 
@@ -60,9 +58,7 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends «superCl
 	
 «DEFINE guiceModuleRt FOR Grammar»
 «FILE guiceModuleRt().asPath()+'.java' SRC -»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleRt().toJavaPackage()»;
 
 /**

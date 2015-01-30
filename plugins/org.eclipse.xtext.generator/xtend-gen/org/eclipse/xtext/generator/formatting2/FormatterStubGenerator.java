@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -50,10 +49,6 @@ public class FormatterStubGenerator {
     @Inject
     private Naming naming;
     
-    @Inject
-    @Named("fileHeader")
-    private String fileHeader;
-    
     public FormatterStubGenerator createGenerator(final Grammar grammar) {
       return new FormatterStubGenerator(this, grammar);
     }
@@ -61,11 +56,6 @@ public class FormatterStubGenerator {
     @Pure
     public Naming getNaming() {
       return this.naming;
-    }
-    
-    @Pure
-    public String getFileHeader() {
-      return this.fileHeader;
     }
   }
   

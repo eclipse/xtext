@@ -10,8 +10,10 @@ package org.eclipse.xtext.generator.serializer;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SerializerGenFileNames;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * @author Moritz Eyshold - Initial contribution and API
@@ -23,26 +25,21 @@ public class SemanticSequencer extends GeneratedFile {
   private SerializerGenFileNames names;
   
   @Inject
-  @Named("generateXtendStub")
-  private Boolean generateXtendStub;
+  @Extension
+  private Naming _naming;
   
   @Inject
-  @Named("fileHeader")
-  private String fileHeader;
+  @Named("generateXtendStub")
+  private Boolean generateXtendStub;
   
   @Override
   public CharSequence getFileContents(final SerializerGenFileNames.GenFileName filename) {
     CharSequence _xifexpression = null;
     if ((this.generateXtendStub).booleanValue()) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("/*");
-      _builder.newLine();
-      _builder.append(" ");
-      _builder.append(this.fileHeader, " ");
+      String _fileHeader = this._naming.fileHeader();
+      _builder.append(_fileHeader, "");
       _builder.newLineIfNotEmpty();
-      _builder.append(" ");
-      _builder.append("*/");
-      _builder.newLine();
       _builder.append("package ");
       String _packageName = filename.getPackageName();
       _builder.append(_packageName, "");
@@ -62,14 +59,9 @@ public class SemanticSequencer extends GeneratedFile {
       _xifexpression = _builder;
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("/*");
-      _builder_1.newLine();
-      _builder_1.append(" ");
-      _builder_1.append(this.fileHeader, " ");
+      String _fileHeader_1 = this._naming.fileHeader();
+      _builder_1.append(_fileHeader_1, "");
       _builder_1.newLineIfNotEmpty();
-      _builder_1.append(" ");
-      _builder_1.append("*/");
-      _builder_1.newLine();
       _builder_1.append("package ");
       String _packageName_1 = filename.getPackageName();
       _builder_1.append(_packageName_1, "");

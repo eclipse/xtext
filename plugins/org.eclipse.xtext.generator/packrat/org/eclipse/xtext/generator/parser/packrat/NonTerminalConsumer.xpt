@@ -23,9 +23,7 @@
 
 «DEFINE nonTerminalConsumer FOR AbstractRule»
 «FILE this.fullConsumerClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «this.consumerPackageName()»;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -51,7 +49,7 @@ import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import «this.containingGrammar().grammarAccess()».«name»Elements;
 
-public final class «this.consumerClassName().toSimpleName()» extends NonTerminalConsumer {
+«classAnnotations()»public final class «this.consumerClassName().toSimpleName()» extends NonTerminalConsumer {
 
 	private «this.name»Elements rule;	
 «FOREACH allCalledRules() AS calledRule-»

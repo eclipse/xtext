@@ -19,9 +19,7 @@
 
 «DEFINE grammar(AntlrOptions options, boolean debugGrammar) FOR Grammar»
 «FILE (getGrammarFileName().toJavaPackage() + (debugGrammar ? ".Debug" : ".") + getGrammarFileName().toSimpleName()).asPath()+".g" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 grammar «IF debugGrammar»Debug«ENDIF»«getGrammarFileName().toSimpleName()»;
 
 «IF !debugGrammar || options.backtrack || options.memoize || options.k>=0-»
