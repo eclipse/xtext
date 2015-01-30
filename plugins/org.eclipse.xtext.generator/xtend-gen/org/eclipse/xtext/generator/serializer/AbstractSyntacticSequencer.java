@@ -28,6 +28,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.JavaFile;
@@ -63,6 +64,10 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   @Extension
   private SyntacticSequencerUtil util;
   
+  @Inject
+  @Extension
+  private Naming _naming;
+  
   /**
    * @since 2.8
    */
@@ -80,7 +85,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     String _xblockexpression = null;
     {
       String _packageName = filename.getPackageName();
-      final JavaFile file = new JavaFile(_packageName);
+      String _fileHeader = this._naming.fileHeader();
+      final JavaFile file = new JavaFile(_packageName, _fileHeader);
       file.imported(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer.class);
       file.imported(RuleCall.class);
       file.imported(INode.class);

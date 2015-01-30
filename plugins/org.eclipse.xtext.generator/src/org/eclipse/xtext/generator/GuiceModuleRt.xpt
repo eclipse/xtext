@@ -18,9 +18,7 @@
 «EXPAND guiceModuleRt»
 
 «FILE guiceModuleRtGenerated().asPath()+".java" SRC_GEN-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleRtGenerated().toJavaPackage()»;
 
 import java.util.Properties;
@@ -60,9 +58,7 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends «superCl
 	
 «DEFINE guiceModuleRt FOR Grammar»
 «FILE guiceModuleRt().asPath()+'.java' SRC -»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleRt().toJavaPackage()»;
 
 /**

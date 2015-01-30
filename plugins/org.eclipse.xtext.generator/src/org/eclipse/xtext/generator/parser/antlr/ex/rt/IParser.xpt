@@ -18,9 +18,7 @@
 
 «DEFINE parser(AntlrFragmentHelper helper) FOR Grammar»
 «FILE helper.getParserClassName(this).asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «helper.getParserClassName(this).toJavaPackage()»;
 
 import com.google.inject.Inject;
@@ -77,9 +75,7 @@ public class «helper.getParserClassName(this).toSimpleName()» extends org.eclips
 
 «IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
 «FILE helper.getTokenSourceClassName(this).asPath()+".java" SRC-»
-/*
 «fileHeader()»
-*/
 package «helper.getTokenSourceClassName(this).toJavaPackage()»;
 
 import org.antlr.runtime.Token;

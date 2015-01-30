@@ -27,9 +27,7 @@
 
 «DEFINE JavaScopeProvider(String scopeProviderSuperClassName) FOR Grammar»
 «FILE scopeProviderName().asPath()+".java" SRC-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «scopeProviderName().toJavaPackage()»;
 
 /**
@@ -48,9 +46,7 @@ public class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperCla
 
 «DEFINE XtendScopeProvider(String scopeProviderSuperClassName) FOR Grammar»
 «FILE scopeProviderName().asPath()+".xtend" SRC-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «scopeProviderName().toJavaPackage()»
 
 /**

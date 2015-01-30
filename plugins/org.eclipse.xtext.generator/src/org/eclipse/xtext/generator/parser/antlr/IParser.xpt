@@ -18,9 +18,7 @@
 
 «DEFINE parser FOR Grammar»
 «FILE getParserClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getParserClassName().toJavaPackage()»;
 
 import com.google.inject.Inject;

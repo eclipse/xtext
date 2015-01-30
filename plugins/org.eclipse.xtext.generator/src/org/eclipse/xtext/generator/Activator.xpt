@@ -4,9 +4,7 @@
 
 «DEFINE file(String activatorName) FOR List[Grammar]»
 «FILE activatorName.asPath()+".java" SRC_GEN_UI-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «activatorName.toJavaPackage()»;
 
 import java.util.Collections;

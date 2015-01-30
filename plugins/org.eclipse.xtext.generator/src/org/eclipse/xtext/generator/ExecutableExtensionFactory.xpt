@@ -4,9 +4,7 @@
 	
 «DEFINE file(String activatorName) FOR Grammar»
 «FILE executableExtensionFactory().asPath()+".java" SRC_GEN_UI-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «executableExtensionFactory().toJavaPackage()»;
 
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
