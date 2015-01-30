@@ -326,6 +326,14 @@ public class IResourcesSetupUtil {
 			}
 		} while (wasInterrupted);
 	}
+	
+	public static void waitForBuild(IProgressMonitor monitor) {
+		try {
+			ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.INCREMENTAL_BUILD, monitor);
+		} catch (CoreException e) {
+			throw new OperationCanceledException(e.getMessage());
+		}
+	}
 
 	public static void cleanWorkspace() throws CoreException {
 		IProject[] visibleProjects = root().getProjects();
