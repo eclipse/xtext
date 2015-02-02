@@ -225,9 +225,10 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	/**
 	 * Runs the given acceptor with a fresh linking context and with eDeliver turned off.
 	 * 
+	 * @noreference This method is not intended to be referenced by clients.
 	 * @since 2.8
 	 */
-	public void runLateInitialization(IAcceptor<DerivedStateAwareResource> runnable) {
+	public void runLateInitialization(IAcceptor<? super DerivedStateAwareResource> runnable) {
 		boolean wasDeliver = eDeliver();
 		LinkedHashSet<Triple<EObject, EReference, INode>> before = resolving;
 		try {

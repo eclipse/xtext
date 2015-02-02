@@ -557,10 +557,12 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		
 		@Override
 		public void run() {
-			if (executed) {
-				return;
+			synchronized(this) {
+				if (executed) {
+					return;
+				}
+				executed = true;
 			}
-			executed = true;
 			resource.runLateInitialization(new IAcceptor<DerivedStateAwareResource>() {
 				@Override
 				public void accept(DerivedStateAwareResource t) {
