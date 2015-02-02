@@ -27,7 +27,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	override getProcessorInstance(JvmType type) {
 		try {
 			val project = (type.eResource.resourceSet as XtextResourceSet).classpathURIContext as IJavaProject
-			val classLoader = createClassLoader(type.identifier, project)
+			val classLoader = createClassLoaderForJavaProject(project)
 			val result = classLoader.loadClass(type.identifier)
 			return result.newInstance
 		} catch (Exception e) {
@@ -38,14 +38,6 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	override getClassLoader(EObject ctx) {
 		val project = (ctx.eResource.resourceSet as XtextResourceSet).classpathURIContext as IJavaProject
 		return createClassLoaderForJavaProject(project)
-	}
-	
-	def protected ClassLoader createClassLoader(String typeName, IJavaProject javaProject) {
-		val type = javaProject.findType(typeName)
-		if (type == null)
-			return getClass.classLoader
-		val projectToUse = type.javaProject
-		createClassLoaderForJavaProject(projectToUse);
 	}
 	
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {

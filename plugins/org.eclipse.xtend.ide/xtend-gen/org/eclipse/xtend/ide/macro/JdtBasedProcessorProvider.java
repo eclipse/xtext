@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -42,16 +41,15 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       ResourceSet _resourceSet = _eResource.getResourceSet();
       Object _classpathURIContext = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
       final IJavaProject project = ((IJavaProject) _classpathURIContext);
+      final URLClassLoader classLoader = this.createClassLoaderForJavaProject(project);
       String _identifier = type.getIdentifier();
-      final ClassLoader classLoader = this.createClassLoader(_identifier, project);
-      String _identifier_1 = type.getIdentifier();
-      final Class<?> result = classLoader.loadClass(_identifier_1);
+      final Class<?> result = classLoader.loadClass(_identifier);
       return result.newInstance();
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        String _identifier_2 = type.getIdentifier();
-        String _plus = ("Problem during instantiation of " + _identifier_2);
+        String _identifier_1 = type.getIdentifier();
+        String _plus = ("Problem during instantiation of " + _identifier_1);
         String _plus_1 = (_plus + " : ");
         String _message = e.getMessage();
         String _plus_2 = (_plus_1 + _message);
@@ -69,25 +67,6 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     Object _classpathURIContext = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
     final IJavaProject project = ((IJavaProject) _classpathURIContext);
     return this.createClassLoaderForJavaProject(project);
-  }
-  
-  protected ClassLoader createClassLoader(final String typeName, final IJavaProject javaProject) {
-    try {
-      URLClassLoader _xblockexpression = null;
-      {
-        final IType type = javaProject.findType(typeName);
-        boolean _equals = Objects.equal(type, null);
-        if (_equals) {
-          Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
-          return _class.getClassLoader();
-        }
-        final IJavaProject projectToUse = type.getJavaProject();
-        _xblockexpression = this.createClassLoaderForJavaProject(projectToUse);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
   
   protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
