@@ -8,19 +8,22 @@
 package org.eclipse.xtext.builder.impl;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.IShadowedResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.CoarseGrainedChangeEvent;
@@ -31,6 +34,7 @@ import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -66,19 +70,48 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 			notifyListeners(event);
 			return;
 		}
-		ResourceDescriptionChangeEvent changeEvent = new ResourceDescriptionChangeEvent(
-				Iterables.transform(event.getDeltas(), new Function<IResourceDescription.Delta, IResourceDescription.Delta>() {
+		List<Delta> deltas = Lists.newArrayList(Iterables.transform(event.getDeltas(), new Function<IResourceDescription.Delta, IResourceDescription.Delta>() {
+			@Override
+			public IResourceDescription.Delta apply(IResourceDescription.Delta from) {
+				IResourceDescription.Delta result = from;
+				if (from.getNew() == null) {
+					result = createDelta(from.getOld(), globalDescriptions.getResourceDescription(from.getUri()));
+				} else if (from.getOld() == null) {
+					result = createDelta(globalDescriptions.getResourceDescription(from.getUri()), from.getNew());
+				}
+				return result;
+			}
+		}));
+		List<Delta> derivedJvmTypeDeltas = Lists.newArrayList();
+		for(final Delta delta : deltas){
+			IResourceDescription resourceDescription = globalDescriptions.getResourceDescription(delta.getUri());
+			Iterable<IEObjectDescription> exportedJvmTypes = resourceDescription.getExportedObjectsByType(TypesPackage.Literals.JVM_GENERIC_TYPE);
+			for(final IEObjectDescription desc : exportedJvmTypes){
+				IResourceDescription.Delta jvmtypeDelta = new IResourceDescription.Delta() {
 					@Override
-					public IResourceDescription.Delta apply(IResourceDescription.Delta from) {
-						IResourceDescription.Delta result = from;
-						if (from.getNew() == null) {
-							result = createDelta(from.getOld(), globalDescriptions.getResourceDescription(from.getUri()));
-						} else if (from.getOld() == null) {
-							result = createDelta(globalDescriptions.getResourceDescription(from.getUri()), from.getNew());
-						}
-						return result;
+					public boolean haveEObjectDescriptionsChanged() {
+						return delta.haveEObjectDescriptionsChanged();
 					}
-				}));
+					
+					@Override
+					public IResourceDescription getOld() {
+						return delta.getOld();
+					}
+					
+					@Override
+					public IResourceDescription getNew() {
+						return delta.getNew();
+					}
+
+					@Override
+					public URI getUri() {
+						return URIHelperConstants.OBJECTS_URI.appendSegment(desc.getQualifiedName().toString());
+					}
+				};
+				derivedJvmTypeDeltas.add(jvmtypeDelta);
+			}
+		}
+		ResourceDescriptionChangeEvent changeEvent = new ResourceDescriptionChangeEvent(Iterables.concat(deltas, derivedJvmTypeDeltas));
 		notifyListeners(changeEvent);
 	}
 	
