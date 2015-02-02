@@ -6,7 +6,7 @@
         <cs:dependency name="com.google.inject.source" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="javax.inject" componentType="osgi.bundle"/>
         <cs:dependency name="javax.inject.source" componentType="osgi.bundle"/>
-        <cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle"/>
+        <cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle" versionDesignator="[3.2,3.3)"/>
         <cs:dependency name="org.apache.ant" componentType="osgi.bundle" versionDesignator="1.8.0"/>
         <cs:dependency name="org.apache.commons.lang" componentType="osgi.bundle"/>
         <cs:dependency name="org.apache.commons.lang.source" componentType="osgi.bundle"/>
