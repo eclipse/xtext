@@ -1,12 +1,3 @@
-configurations.compile {
-	exclude module:'guava'
-	exclude module:'cglib'
-	exclude module:'log4j'
-	exclude module:'icu4j'
-	exclude group:'org.ow2.asm'
-	exclude module:'org.eclipse.jdt.core'
-}
-
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
