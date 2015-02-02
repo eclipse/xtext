@@ -58,15 +58,33 @@ configure(subprojects.findAll{p->p.name !='intellij-dependencies'}) {
 def intellijPluginProjects = [
 	project(':org.eclipse.xtext.idea'),
 	project(':org.eclipse.xtext.xbase.idea'),
+	project(':org.eclipse.xtext.idea.builder'),
 	project(':org.eclipse.xtext.idea.sdomain.idea'),
 	project(':org.eclipse.xtext.idea.example.entities.idea'),
 	project(':org.eclipse.xtend.idea'),
 ]
 configure(intellijPluginProjects) {
-	task zip(dependsOn: jar, type: Zip) {
-    from configurations.runtime.allArtifacts.files
+
+	configurations.compile {
+		exclude module:'guava'
+		exclude module:'cglib'
+		exclude module:'log4j'
+		exclude module:'icu4j'
+		exclude group:'org.ow2.asm'
+	}
+	
+	task assembleLibFolder(type: Copy) {
+		from configurations.runtime.allArtifacts.files
 		from configurations.runtime
-    into(project.name + '-' + project.version + '/lib')
+		into '/lib'
+	}
+	
+	assemble.dependsOn(assembleLibFolder)
+
+	task zip(dependsOn: jar, type: Zip) {
+		from configurations.runtime.allArtifacts.files
+		from configurations.runtime
+		into(project.name + '-' + project.version + '/lib')
 	}
 }
 

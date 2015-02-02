@@ -1,9 +1,4 @@
 configurations.compile {
-	exclude module:'guava'
-	exclude module:'cglib'
-	exclude module:'log4j'
-	exclude module:'icu4j'
-	exclude group:'org.ow2.asm'
 	exclude module:'org.eclipse.jdt.core'
 }
 
