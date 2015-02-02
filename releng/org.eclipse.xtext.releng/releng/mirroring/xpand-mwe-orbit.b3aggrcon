@@ -21,8 +21,8 @@
     <bundles name="org.easymock"/>
     <bundles name="org.junit" versionRange="[4.11.0.v201303080030]"/>
     <bundles name="org.easymock.source"/>
-    <bundles name="org.antlr.runtime"/>
-    <bundles name="org.antlr.runtime.source"/>
+    <bundles name="org.antlr.runtime" versionRange="[3.2,3.3)"/>
+    <bundles name="org.antlr.runtime.source" versionRange="[3.2,3.3)"/>
     <bundles name="javax.inject"/>
     <bundles name="javax.inject.source"/>
     <bundles name="org.objectweb.asm" versionRange="5.0.1"/>
