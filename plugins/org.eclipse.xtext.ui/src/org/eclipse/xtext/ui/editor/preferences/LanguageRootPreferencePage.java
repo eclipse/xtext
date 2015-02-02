@@ -23,8 +23,10 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 
 	@Override
 	protected void createFieldEditors() {
-		Composite parent = getFieldEditorParent();
-		addField(resetPromptDialogSettings.getFieldEditor(parent));
+		if (!isPropertyPage()) {
+			Composite parent = getFieldEditorParent();
+			addField(resetPromptDialogSettings.getFieldEditor(parent));
+		}
 	}
 
 	/**
@@ -34,5 +36,5 @@ public class LanguageRootPreferencePage extends AbstractPreferencePage {
 	protected IPreferenceStore doGetPreferenceStore() {
 		return super.doGetPreferenceStore();
 	}
-	
+
 }
