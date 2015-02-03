@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -50,24 +51,38 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
       boolean _xblockexpression = false;
       {
         super.handleLoadEObject(loaded, input);
-        boolean _xifexpression = false;
         boolean _readBoolean = input.readBoolean();
         if (_readBoolean) {
-          boolean _xblockexpression_1 = false;
-          {
-            final String doc = input.readString();
-            EList<Adapter> _eAdapters = loaded.eAdapters();
-            DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
-            final Procedure1<DocumentationAdapter> _function = new Procedure1<DocumentationAdapter>() {
-              @Override
-              public void apply(final DocumentationAdapter it) {
-                it.setDocumentation(doc);
+          final String doc = input.readString();
+          EList<Adapter> _eAdapters = loaded.eAdapters();
+          DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
+          final Procedure1<DocumentationAdapter> _function = new Procedure1<DocumentationAdapter>() {
+            @Override
+            public void apply(final DocumentationAdapter it) {
+              it.setDocumentation(doc);
+            }
+          };
+          DocumentationAdapter _doubleArrow = ObjectExtensions.<DocumentationAdapter>operator_doubleArrow(_documentationAdapter, _function);
+          _eAdapters.add(_doubleArrow);
+        }
+        boolean _xifexpression = false;
+        boolean _readBoolean_1 = input.readBoolean();
+        if (_readBoolean_1) {
+          EList<Adapter> _eAdapters_1 = loaded.eAdapters();
+          JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
+          final Procedure1<JvmIdentifiableMetaData> _function_1 = new Procedure1<JvmIdentifiableMetaData>() {
+            @Override
+            public void apply(final JvmIdentifiableMetaData it) {
+              try {
+                boolean _readBoolean = input.readBoolean();
+                it.setSynthetic(_readBoolean);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
               }
-            };
-            DocumentationAdapter _doubleArrow = ObjectExtensions.<DocumentationAdapter>operator_doubleArrow(_documentationAdapter, _function);
-            _xblockexpression_1 = _eAdapters.add(_doubleArrow);
-          }
-          _xifexpression = _xblockexpression_1;
+            }
+          };
+          JvmIdentifiableMetaData _doubleArrow_1 = ObjectExtensions.<JvmIdentifiableMetaData>operator_doubleArrow(_jvmIdentifiableMetaData, _function_1);
+          _xifexpression = _eAdapters_1.add(_doubleArrow_1);
         }
         _xblockexpression = _xifexpression;
       }

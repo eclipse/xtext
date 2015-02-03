@@ -19,6 +19,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
+import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xtype.XComputedTypeReference
 
@@ -45,6 +46,14 @@ import org.eclipse.xtext.xtype.XComputedTypeReference
 		if (documentationAdapter!=null) {
 			out.writeBoolean(true)
 			out.writeString(documentationAdapter.documentation)
+		} else {
+			out.writeBoolean(false)
+		}
+		// store additional meta data
+		val metaDataAdapter = object.eAdapters.filter(JvmIdentifiableMetaData).head
+		if (metaDataAdapter != null) {
+			out.writeBoolean(true)
+			out.writeBoolean(metaDataAdapter.synthetic)
 		} else {
 			out.writeBoolean(false)
 		}

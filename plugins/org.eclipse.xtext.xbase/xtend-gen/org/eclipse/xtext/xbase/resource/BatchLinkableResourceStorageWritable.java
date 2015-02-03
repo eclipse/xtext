@@ -34,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.persistence.ResourceStorageWritable;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -81,6 +82,17 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
         out.writeBoolean(true);
         String _documentation = documentationAdapter.getDocumentation();
         out.writeString(_documentation);
+      } else {
+        out.writeBoolean(false);
+      }
+      EList<Adapter> _eAdapters_1 = object.eAdapters();
+      Iterable<JvmIdentifiableMetaData> _filter_1 = Iterables.<JvmIdentifiableMetaData>filter(_eAdapters_1, JvmIdentifiableMetaData.class);
+      final JvmIdentifiableMetaData metaDataAdapter = IterableExtensions.<JvmIdentifiableMetaData>head(_filter_1);
+      boolean _notEquals_1 = (!Objects.equal(metaDataAdapter, null));
+      if (_notEquals_1) {
+        out.writeBoolean(true);
+        boolean _isSynthetic = metaDataAdapter.isSynthetic();
+        out.writeBoolean(_isSynthetic);
       } else {
         out.writeBoolean(false);
       }
