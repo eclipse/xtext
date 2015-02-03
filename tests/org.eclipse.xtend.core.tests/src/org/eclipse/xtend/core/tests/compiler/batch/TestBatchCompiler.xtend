@@ -29,6 +29,7 @@ import org.junit.runner.RunWith
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
 import java.io.Writer
+import org.eclipse.xtext.junit4.logging.LoggingTester
 
 /**
  * Batch compiler tests.
@@ -91,6 +92,14 @@ class TestBatchCompiler {
 		} finally {
 			abfalleimer.clear
 		}
+	}
+	
+	@Test def void testInvalidConfiguration() {
+		LoggingTester.countErrorLogging(XtendBatchCompiler) [
+			batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+			batchCompiler.outputPath = XTEND_SRC_DIRECTORY+"/xtend-gen"
+			batchCompiler.compile	
+		]
 	}
 
 	@Test def void testWorkspaceConfig() {

@@ -24,6 +24,7 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
@@ -154,6 +155,19 @@ public class TestBatchCompiler {
     } finally {
       TestBatchCompiler.abfalleimer.clear();
     }
+  }
+  
+  @Test
+  public void testInvalidConfiguration() {
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        TestBatchCompiler.this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+        TestBatchCompiler.this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
+        TestBatchCompiler.this.batchCompiler.compile();
+      }
+    };
+    LoggingTester.countErrorLogging(XtendBatchCompiler.class, _function);
   }
   
   @Test
