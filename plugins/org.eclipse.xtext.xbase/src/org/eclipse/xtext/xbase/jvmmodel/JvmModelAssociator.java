@@ -26,8 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom;
-import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom.Initializer;
+import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
@@ -109,7 +108,9 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (!(resource instanceof XtextResource)) {
 			return new Adapter();
 		}
-		JvmDeclaredTypeImplCustom.Initializer.ensureInitialized(resource);
+		if (resource instanceof JvmMemberInitializableResource) {
+			((JvmMemberInitializableResource) resource).ensureJvmMembersInitialized();
+		}
 		String resourceLanguageName = ((XtextResource) resource).getLanguageName();
 		if (!languageName.equals(resourceLanguageName)){
 			return new Adapter();
@@ -368,6 +369,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (resource.getContents().isEmpty())
 			return;
 		EObject eObject = resource.getContents().get(0);
+		
 
 		StoppedTask task = Stopwatches.forTask("JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
@@ -382,51 +384,48 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			operationCanceledManager.propagateAsErrorIfCancelException(e);
 			LOG.error("Error calling inferrer", e);
 		}
+		boolean lateJvmMemberInit = false;
+		if (resource instanceof JvmMemberInitializableResource) {
+			lateJvmMemberInit = ((JvmMemberInitializableResource) resource).isLazyJvmMemberInitialization();
+		}
 		if (!preIndexingPhase) {
 			for (final Pair<JvmDeclaredType, Procedure1<? super JvmDeclaredType>> initializer : acceptor.later) {
-				JvmDeclaredType type = initializer.getKey();
-				if (type instanceof JvmDeclaredTypeImplCustom && ((JvmDeclaredTypeImplCustom) type).getInitializer()!=null) {
-					((JvmDeclaredTypeImplCustom) type).getInitializer().addRunnable(new Runnable() {
-						@Override
-						public void run() {
-							try {
-								initializer.getValue().apply(initializer.getKey());
-							} catch (RuntimeException e) {
-								operationCanceledManager.propagateAsErrorIfCancelException(e);
-								LOG.error("Error calling inferrer", e);
-							}
+				Runnable initialization = new Runnable() {
+					@Override
+					public void run() {
+						try {
+							initializer.getValue().apply(initializer.getKey());
+						} catch (RuntimeException e) {
+							operationCanceledManager.propagateAsErrorIfCancelException(e);
+							LOG.error("Error calling inferrer", e);
 						}
-					});
-				} else {
-					try {
-						initializer.getValue().apply(initializer.getKey());
-					} catch (RuntimeException e) {
-						operationCanceledManager.propagateAsErrorIfCancelException(e);
-						LOG.error("Error calling inferrer", e);
 					}
+				};
+				if (lateJvmMemberInit) {
+					((JvmMemberInitializableResource) resource).addRunnableForJvmMembersInitialization(initialization);
+				} else {
+					initialization.run();
 				}
 			}
 		}
 		task.stop();
 
 		if (!preIndexingPhase) {
-			for (EObject object : resource.getContents()) {
-				if (object instanceof JvmDeclaredTypeImplCustom) {
-					final JvmDeclaredTypeImplCustom typeImplCustom = (JvmDeclaredTypeImplCustom) object;
-					if (typeImplCustom.getInitializer() != null) {
-						typeImplCustom.getInitializer().addRunnable(new Runnable() {
-							@Override
-							public void run() {
-								completer.complete(typeImplCustom);
-							}
-						});
-					} else {
-						completer.complete(typeImplCustom);
+			Runnable completingRunnable = new Runnable() {
+				@Override
+				public void run() {
+					for (EObject object : resource.getContents()) {
+						if (object instanceof JvmIdentifiableElement) {
+							JvmIdentifiableElement element = (JvmIdentifiableElement) object;
+							completer.complete(element);
+						}
 					}
-				} else if (object instanceof JvmIdentifiableElement) {
-					JvmIdentifiableElement element = (JvmIdentifiableElement) object;
-					completer.complete(element);
 				}
+			};
+			if (lateJvmMemberInit) {
+				((JvmMemberInitializableResource) resource).addRunnableForJvmMembersInitialization(completingRunnable);
+			} else {
+				completingRunnable.run();
 			}
 		}
 	}
@@ -434,11 +433,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	@Override
 	public void discardDerivedState(DerivedStateAwareResource resource) {
 		cleanAssociationState(resource);
-		// remove pending initializer
-		Initializer initializer = JvmDeclaredTypeImplCustom.Initializer.find(resource);
-		if (initializer != null) {
-			resource.eAdapters().remove(initializer);
-		}
 	}
 
 	public void cleanAssociationState(Resource resource) {

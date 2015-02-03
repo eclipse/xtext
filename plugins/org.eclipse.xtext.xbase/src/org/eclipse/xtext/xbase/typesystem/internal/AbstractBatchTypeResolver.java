@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
@@ -61,7 +62,10 @@ public abstract class AbstractBatchTypeResolver implements IBatchTypeResolver {
 		}
 		Resource resource = object.eResource();
 		if (resource instanceof StorageAwareResource && ((StorageAwareResource) resource).isLoadedFromStorage()) {
-			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage", new Exception());
+			LOG.error("Discouraged attempt to compute types for resource that was loaded from storage. Resource was : "+resource.getURI(), new Exception());
+		}
+		if (resource instanceof JvmMemberInitializableResource) {
+			((JvmMemberInitializableResource) resource).ensureJvmMembersInitialized();
 		}
 		return doResolveTypes(object, monitor);
 	}
