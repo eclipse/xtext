@@ -83,13 +83,9 @@ public class DefaultAntlrGrammarGenerator {
   
   protected CharSequence compile(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/*");
-    _builder.newLine();
     String _fileHeader = this._naming.fileHeader();
     _builder.append(_fileHeader, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("*/");
-    _builder.newLine();
     _builder.append("grammar ");
     String _grammarFileName = this.getGrammarFileName(it);
     String _simpleName = this._naming.toSimpleName(_grammarFileName);
