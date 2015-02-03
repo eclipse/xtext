@@ -76,7 +76,7 @@ configure(intellijPluginProjects) {
 	task assembleLibFolder(type: Copy) {
 		from configurations.runtime.allArtifacts.files
 		from configurations.runtime
-		into '/lib'
+		into 'lib'
 	}
 	
 	assemble.dependsOn(assembleLibFolder)
