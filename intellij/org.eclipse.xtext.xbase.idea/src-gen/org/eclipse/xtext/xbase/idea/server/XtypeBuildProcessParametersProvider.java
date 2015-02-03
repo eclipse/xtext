@@ -9,8 +9,9 @@ import com.intellij.openapi.extensions.PluginId;
 
 public class XtypeBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
+	@Override
 	public List<String> getClassPath() {
-		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.xbase.Xtype")).getPath().getPath();
+		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.xbase.idea")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
 			path + "/../../org.eclipse.xtext.xbase/bin"

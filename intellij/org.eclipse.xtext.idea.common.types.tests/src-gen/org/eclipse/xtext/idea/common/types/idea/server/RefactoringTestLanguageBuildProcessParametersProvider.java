@@ -10,7 +10,7 @@ import com.intellij.openapi.extensions.PluginId;
 public class RefactoringTestLanguageBuildProcessParametersProvider extends BuildProcessParametersProvider {
 
 	public List<String> getClassPath() {
-		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea.common.types.RefactoringTestLanguage")).getPath().getPath();
+		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea.common.types.tests")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
 			path + "/../../org.eclipse.xtext.idea.common.types.tests/bin"
