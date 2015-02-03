@@ -45,6 +45,10 @@
       name="xtext.git.branch"
       value="${scope.project.stream.name}"/>
   <setupTask
+      xsi:type="setup:StringSubstitutionTask"
+      name="git.xtext.location"
+      value="${git.clone.xtext.location}"/>
+  <setupTask
       xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
       value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
@@ -421,7 +425,7 @@
               pattern=".*xbase.*"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.7"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -436,7 +440,7 @@
               pattern=".*xtend.*"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.9 //@projects[name='core']/@setupTasks.0/@workingSets.10 //@projects[name='core']/@setupTasks.0/@workingSets.7"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.9 //@projects[name='core']/@setupTasks.0/@workingSets.10 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -451,7 +455,7 @@
               pattern=".*xbase.*test.*"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -466,7 +470,7 @@
               pattern=".*tests.*"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.6"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -481,7 +485,7 @@
               pattern=".*xtend.*tests.*"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -553,7 +557,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern=".*\.idea.*"/>
+              pattern=".*\.idea.*|intellij-dependencies"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -635,39 +639,6 @@
       </targlet>
     </setupTask>
     <setupTask
-        xsi:type="setup.targlets:TargletTask"
-        disabled="true">
-      <targlet
-          name="Xtext GMF Examples">
-        <requirement
-            name="org.eclipse.xtext.example.gmf.diagram"/>
-        <requirement
-            name="org.eclipse.xtext.example.gmf.diagram.extensions"/>
-        <requirement
-            name="org.eclipse.xtext.gmf.glue"/>
-        <requirement
-            name="org.eclipse.xtext.example.gmf"/>
-        <requirement
-            name="org.eclipse.xtext.example.gmf.edit"/>
-        <requirement
-            name="org.eclipse.xtext.example.gmf.ui"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"
-            locateNestedProjects="true"/>
-        <repositoryList
-            name="GMF">
-          <repository
-              url="http://download.eclipse.org/modeling/gmf/updates/releases/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/emf/transaction/updates/releases/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/emf/validation/updates/releases/"/>
-          <repository
-              url="http://download.eclipse.org/modeling/mdt/ocl/updates/releases/3.0.2/"/>
-        </repositoryList>
-      </targlet>
-    </setupTask>
-    <setupTask
         xsi:type="setup.targlets:TargletTask">
       <targlet
           name="Xtext Xdoc">
@@ -700,6 +671,8 @@
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.location/maven}"/>
+      <sourceLocator
+          rootFolder="${git.clone.xtext.location/intellij}"/>
       <description>Maven Dependencies</description>
     </setupTask>
     <setupTask
@@ -708,6 +681,13 @@
         excludedTriggers="MANUAL"
         launcher="/org.eclipse.xtext.parent/org.eclipse.xtext.parent.launch">
       <description>Xtext-Maven build</description>
+    </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="gradle-build"
+        excludedTriggers="MANUAL"
+        launcher="/org.eclipse.xtext.idea.all/launch-gradle-build.launch">
+      <description>Run IDEA  gradle build</description>
     </setupTask>
     <stream
         name="master">
