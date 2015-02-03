@@ -82,7 +82,7 @@ public class XtendBatchCompiler {
 		}
 	}
 
-	private final static Logger log = Logger.getLogger(XtendBatchCompiler.class.getName());
+	private static Logger log = Logger.getLogger(XtendBatchCompiler.class.getName());
 
 	protected static final FileFilter ACCEPT_ALL_FILTER = new FileFilter() {
 		@Override
@@ -401,6 +401,9 @@ public class XtendBatchCompiler {
 
 	public boolean compile() {
 		try {
+			if (!checkConfiguration()) {
+				return false;
+			}
 			if (workspaceConfigProvider.getWorkspaceConfig() == null) {
 				if (!configureWorkspace()) {
 					return false;
@@ -437,6 +440,20 @@ public class XtendBatchCompiler {
 		} finally {
 			if (isDeleteTempDirectory()) {
 				deleteTmpFolders();
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	protected boolean checkConfiguration() {
+		String absoluteOutputPath = getOutputPathFile().getAbsolutePath();
+		for (String sourcePath : getSourcePathDirectories()) {
+			if (absoluteOutputPath.startsWith(sourcePath)) {
+				log.error("The configured output path \""+getOutputPathFile()+"\" cannot be a child of the configured source directory \""+sourcePath+"\".");
+				return false;
 			}
 		}
 		return true;
