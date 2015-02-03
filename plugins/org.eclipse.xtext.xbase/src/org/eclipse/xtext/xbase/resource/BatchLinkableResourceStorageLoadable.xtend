@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.resource.persistence.ResourceStorageLoadable
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
+import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 
 @FinalFieldsConstructor class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadable {
@@ -37,6 +38,12 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 			val doc = input.readString
 			loaded.eAdapters += new DocumentationAdapter => [
 				documentation = doc
+			]
+		}
+		// load additional meta data
+		if (input.readBoolean) {
+			loaded.eAdapters += new JvmIdentifiableMetaData => [
+				synthetic = input.readBoolean
 			]
 		}
 	}
