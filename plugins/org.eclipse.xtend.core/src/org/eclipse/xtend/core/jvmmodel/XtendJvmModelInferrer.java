@@ -64,8 +64,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom;
-import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom.Initializer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
@@ -225,10 +223,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 					}
 				}
 			};
-			Initializer initializer = new JvmDeclaredTypeImplCustom.Initializer(resource, lateInit);
-			for (JvmDeclaredType type : types) {
-				((JvmDeclaredTypeImplCustom)type).setInitializer(initializer);
-			}
+			resource.addRunnableForJvmMembersInitialization(lateInit);
 		}
 	}
 

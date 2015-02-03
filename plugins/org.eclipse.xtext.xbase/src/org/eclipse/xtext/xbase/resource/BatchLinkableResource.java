@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.resource;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +17,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
@@ -39,7 +42,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Linking assumptions
  */
-public class BatchLinkableResource extends DerivedStateAwareResource implements ISynchronizable<BatchLinkableResource>, IBatchLinkableResource {
+public class BatchLinkableResource extends DerivedStateAwareResource implements ISynchronizable<BatchLinkableResource>, IBatchLinkableResource, JvmMemberInitializableResource {
 	
 	private static final Logger log = Logger.getLogger(BatchLinkableResource.class);
 	
@@ -182,4 +185,73 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	public void linkBatched(CancelIndicator monitor) {
 		resolveLazyCrossReferences(monitor);
 	}
+	
+	// Lazy initialization
+	
+	private LinkedHashSet<Runnable> runnables = null;
+	
+	/**
+	 * Executes any {@link Runnable}s added through {@link #addRunnableForJvmMembersInitialization(Runnable)}
+	 * 
+	 * @since 2.8
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	@Override
+	public void ensureJvmMembersInitialized() {
+		if (runnables == null)
+			return;
+		Set<Runnable> localRunnables = null;
+		synchronized(this) {
+			localRunnables = runnables;
+			runnables = null;
+		}
+		if (localRunnables == null)
+			return;
+		boolean wasDeliver = eDeliver();
+		LinkedHashSet<Triple<EObject, EReference, INode>> before = resolving;
+		try {
+			eSetDeliver(false);
+			if (!before.isEmpty()) {
+				resolving = new LinkedHashSet<Triple<EObject, EReference, INode>>();
+			}
+			for (Runnable runnable : localRunnables) {
+				runnable.run();
+			}
+		} catch (Exception e) {
+		} finally {
+			if (!before.isEmpty()) {
+				resolving = before;
+			}
+			eSetDeliver(wasDeliver);
+		}
+	}
+	
+	@Override
+	public void discardDerivedState() {
+		this.runnables = null;
+		super.discardDerivedState();
+	}
+	
+	/**
+	 * register runnables to be executed on JvmMemberInitialization
+	 * 
+	 * @since 2.8
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	@Override
+	public void addRunnableForJvmMembersInitialization(Runnable runnable) {
+		if (this.runnables == null) {
+			this.runnables = new LinkedHashSet<Runnable>();
+			this.isLazyJvmMemberInitialization = true;
+		}
+		this.runnables.add(runnable);
+	}
+	
+	private boolean isLazyJvmMemberInitialization;
+	
+	@Override
+	public boolean isLazyJvmMemberInitialization() {
+		return isLazyJvmMemberInitialization;
+	}
+	
 }

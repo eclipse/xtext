@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.impl;
 
 import static com.google.common.collect.Sets.*;
 
+import java.sql.BatchUpdateException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -520,84 +522,18 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		return result == null ? null : result.getType();
 	}
 	
-	// Lazy initialization
-	
-	private Initializer initializer = null;
-	
-	public static class Initializer extends AdapterImpl implements Runnable {
-		
-		public static void ensureInitialized(Resource resource) {
-			Initializer initializer = find(resource);
-			if (initializer != null) {
-				initializer.run();
-			}
-		}
-		
-		public static Initializer find(Resource resource) {
-			for (Adapter adapter : resource.eAdapters()) {
-				if (adapter instanceof Initializer) {
-					return (Initializer) adapter;
-				}
-			}
-			return null;
-		}
-		
-		Set<Runnable> runnables = newLinkedHashSet();
-		private DerivedStateAwareResource resource;
-		private boolean executed = false;
-		
-		public Initializer(DerivedStateAwareResource resource, Runnable initial) {
-			if (find(resource) != null) {
-				throw new IllegalStateException("An initializer already existed on resource "+resource.getURI());
-			}
-			runnables.add(initial);
-			resource.eAdapters().add(this);
-			this.resource = resource;
-		}
-		
-		@Override
-		public void run() {
-			synchronized(this) {
-				if (executed) {
-					return;
-				}
-				executed = true;
-			}
-			resource.runLateInitialization(new IAcceptor<DerivedStateAwareResource>() {
-				@Override
-				public void accept(DerivedStateAwareResource t) {
-					try {
-						resource.eAdapters().remove(this);
-						for (Runnable runnable : runnables) {
-							runnable.run();
-						}
-					} finally {
-						runnables = null;
-						resource = null;
-					}
-				}
-			});
-		}
-		
-		public void addRunnable(Runnable runnable) {
-			this.runnables.add(runnable);
-		}
-	}
-	
-	public Initializer getInitializer() {
-		return initializer;
-	}
-	
-	public void setInitializer(final Initializer initializer) {
-		this.initializer = initializer;
-	}
+	private boolean initialized = false;
 	
 	protected void checkPendingInitialization() {
-		if (initializer != null) {
-			Runnable local = initializer;
-			initializer = null;
-			local.run();
+		// just a check to avoid repetitive casting etc.
+		// consistency (i.e. multiple execution) is not checked here but in the Resource itself.
+		if (initialized)
+			return;
+		Resource resource = this.eResource();
+		if (resource instanceof JvmMemberInitializableResource) {
+			((JvmMemberInitializableResource) resource).ensureJvmMembersInitialized();
 		}
+		initialized = true;
 	}
 	
 	@Override
