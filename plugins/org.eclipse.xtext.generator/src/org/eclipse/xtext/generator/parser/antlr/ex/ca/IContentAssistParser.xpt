@@ -20,11 +20,10 @@
 
 «DEFINE parser(boolean partialParsing, AntlrFragmentHelper helper) FOR Grammar»
 «FILE helper.getContentAssistParserClassName(this).asPath()+".java" SRC_GEN_IDE-»
-/*
 «fileHeader()»
-*/
 package «helper.getContentAssistParserClassName(this).toJavaPackage()»;
 
+«annotationImports()-»
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
@@ -39,7 +38,7 @@ import com.google.inject.Inject;
 
 import «gaFQName()»;
 
-public class «helper.getContentAssistParserClassName(this).toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
+«classAnnotations()»public class «helper.getContentAssistParserClassName(this).toSimpleName()» extends «getParserSuperClassName(partialParsing).toSimpleName()» {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;
@@ -101,17 +100,16 @@ public class «helper.getContentAssistParserClassName(this).toSimpleName()» exten
 
 «IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
 «FILE helper.getContentAssistTokenSourceClassName(this).asPath()+".java" SRC_UI-»
-/*
 «fileHeader()»
-*/
 package «helper.getContentAssistTokenSourceClassName(this).toJavaPackage()»;
 
+«annotationImports()-»
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.AbstractIndentationTokenSource;
 import «helper.getInternalContentAssistParserClassName(this)»;
 
-public class «helper.getContentAssistTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
+«classAnnotations()»public class «helper.getContentAssistTokenSourceClassName(this).toSimpleName()» extends AbstractIndentationTokenSource {
 	
 	public «helper.getContentAssistTokenSourceClassName(this).toSimpleName()»(TokenSource delegate) {
 		super(delegate);

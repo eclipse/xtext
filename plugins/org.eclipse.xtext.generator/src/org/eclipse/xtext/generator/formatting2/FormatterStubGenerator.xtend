@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.formatting2
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
-import com.google.inject.name.Named
 import java.util.Collection
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EReference
@@ -32,7 +31,6 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 @FinalFieldsConstructor class FormatterStubGenerator {
 	@Accessors(PUBLIC_GETTER) static class Service {
 		@Inject Naming naming
-		@Inject @Named("fileHeader") String fileHeader
 
 		def FormatterStubGenerator createGenerator(Grammar grammar) {
 			new FormatterStubGenerator(this, grammar)

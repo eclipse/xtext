@@ -17,18 +17,17 @@
 «EXPAND guiceModuleUi»
 
 «FILE guiceModuleUiGenerated().asPath()+".java" SRC_GEN_UI»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleUiGenerated().toJavaPackage()»;
 
+«annotationImports()-»
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {«guiceModuleUi()»}
  */
 @SuppressWarnings("all")
-public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «superClassName» {
+«classAnnotations()»public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «superClassName» {
 	
 	public «guiceModuleUiGenerated().toSimpleName()»(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -45,9 +44,7 @@ public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «superCl
 	
 «DEFINE guiceModuleUi FOR Grammar»
 «FILE guiceModuleUi().asPath()+'.java' SRC_UI -»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «guiceModuleUi().toJavaPackage()»;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;

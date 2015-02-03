@@ -18,17 +18,16 @@
 
 «DEFINE parser FOR Grammar»
 «FILE getParserClassName().asPath()+".java" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 package «getParserClassName().toJavaPackage()»;
 
+«annotationImports()-»
 import com.google.inject.Inject;
 
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import «gaFQName()»;
 
-public class «getParserClassName().toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+«classAnnotations()»public class «getParserClassName().toSimpleName()» extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject
 	private «gaSimpleName()» grammarAccess;

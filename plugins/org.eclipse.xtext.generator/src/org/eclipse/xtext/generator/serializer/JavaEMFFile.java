@@ -24,11 +24,15 @@ import org.eclipse.xtext.generator.GenModelAccess;
  */
 public class JavaEMFFile extends JavaFile {
 
-	protected ResourceSet resourceSet;
+	protected final ResourceSet resourceSet;
 
-	public JavaEMFFile(ResourceSet rs, String packageName) {
-		super(packageName);
+	public JavaEMFFile(ResourceSet rs, String packageName, String fileHeader) {
+		super(packageName, fileHeader);
 		this.resourceSet = rs;
+	}
+	
+	public JavaEMFFile(ResourceSet rs, String packageName) {
+		this(rs, packageName, null);
 	}
 
 	public String getEObjectCast(EClass eClass) {

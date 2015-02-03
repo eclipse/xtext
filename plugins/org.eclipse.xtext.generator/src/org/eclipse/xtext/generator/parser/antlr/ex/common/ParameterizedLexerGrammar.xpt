@@ -19,9 +19,7 @@
 
 
 «DEFINE grammar(org::eclipse::xtext::generator::parser::antlr::AntlrOptions options, AntlrFragmentHelper helper, String lexerGrammarFileName, String superclass) FOR Grammar»
-/*
 «fileHeader()»
-*/
 lexer grammar «lexerGrammarFileName.toSimpleName()»;
 
 «IF options.backtrackLexer-»

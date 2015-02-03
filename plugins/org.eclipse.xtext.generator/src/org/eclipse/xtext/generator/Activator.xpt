@@ -4,11 +4,10 @@
 
 «DEFINE file(String activatorName) FOR List[Grammar]»
 «FILE activatorName.asPath()+".java" SRC_GEN_UI-»
-/*
- «fileHeader()»
- */
+«fileHeader()»
 package «activatorName.toJavaPackage()»;
 
+«annotationImports()-»
 import java.util.Collections;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ import com.google.inject.Module;
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
  */
-public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
+«classAnnotations()»public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 	
 	«FOREACH this AS grammar-»
 	public static final String «grammar.name.toUpperCase().replaceAll('\\.', '_')» = "«grammar.name»";
