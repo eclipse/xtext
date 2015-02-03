@@ -85,7 +85,7 @@ public class DefaultAntlrGrammarGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*");
     _builder.newLine();
-    String _fileHeader = this._namingExtensions.fileHeader();
+    String _fileHeader = this._naming.fileHeader();
     _builder.append(_fileHeader, "");
     _builder.newLineIfNotEmpty();
     _builder.append("*/");
