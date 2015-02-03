@@ -8,6 +8,8 @@
 package org.eclipse.xtext.util.formallang;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Functions;
@@ -16,6 +18,10 @@ import com.google.common.base.Functions;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class NfaToProductionTest extends Assert {
+	
+	@BeforeClass public static void enableDebugValidation() {
+		NfaToProduction.DEBUG_VALIDATE = true;
+	}
 
 	private String nfa2g(Nfa<String> nfa) {
 		NfaToProduction nfa2g = new NfaToProduction();
@@ -249,7 +255,7 @@ public class NfaToProductionTest extends Assert {
 		nfa.start().followedBy("x");
 		nfa.state("x").followedBy("stop", "y");
 		nfa.state("y").followedBy("x");
-		assertEquals("start x (y x)* stop", nfa2g(nfa));
+		assertEquals("start (x y)* x stop", nfa2g(nfa));
 	}
 
 	/*
@@ -304,5 +310,57 @@ public class NfaToProductionTest extends Assert {
 		nfa.state("}").followedBy("x");
 		nfa.state("x").followedBy("x", "{", "stop");
 		assertEquals("start ({ x=ID? } x+)* stop", nfa2g(nfa));
+	}
+	
+	@Test public void testLoopWithSeparator1() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("a", "b");
+		nfa.state("a").followedBy(",");
+		nfa.state("b").followedBy(",", "stop");
+		nfa.state(",").followedBy("a", "b");
+		assertEquals("start ((a | b) ,)* b stop", nfa2g(nfa));
+	}
+	
+	@Test public void testLoopWithSeparator2() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("a");
+		nfa.state("a").followedBy(",", "stop");
+		nfa.state("b").followedBy(",", "stop");
+		nfa.state(",").followedBy("a", "b");
+		assertEquals("start a (, (a | b))* stop", nfa2g(nfa));
+	}
+	
+	@Test public void testLoopWithSeparator3() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("a");
+		nfa.state("a").followedBy(",");
+		nfa.state("b").followedBy(",", "stop");
+		nfa.state(",").followedBy("a", "b");
+		assertEquals("start a ((, a)* , b)+ stop", nfa2g(nfa));
+	}
+	
+	@Test public void testLoopWithSeparator4() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("kw");
+		nfa.state("kw").followedBy("x1", "x2");
+		nfa.state("x1").followedBy("{");
+		nfa.state("{").followedBy("stop", "}");
+		nfa.state("}").followedBy("x2", "x1");
+		nfa.state("x2").followedBy("[");
+		nfa.state("[").followedBy("]");
+		nfa.state("]").followedBy("x2", "x1");
+		assertEquals("start kw ((x2 [ ])? (x1 { })?)+ x1 { stop", nfa2g(nfa));
+	}
+	
+	@Test public void testLoopWithSeparator5() {
+		StringNfa nfa = new StringNfa("start", "stop");
+		nfa.start().followedBy("}");
+		nfa.state("}").followedBy("x1", "x2");
+		nfa.state("x1").followedBy("[");
+		nfa.state("[").followedBy("]", "stop");
+		nfa.state("]").followedBy("x2", "x1");
+		nfa.state("x2").followedBy("{");
+		nfa.state("{").followedBy("}");
+		assertEquals("start } ((x2 { })? (x1 [ ])?)+ x1 [ stop", nfa2g(nfa));
 	}
 }
