@@ -227,10 +227,10 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		public class «grammar.buildProcessParametersProviderName.toSimpleName» extends BuildProcessParametersProvider {
 		
 			public List<String> getClassPath() {
-				String path = PluginManager.getPlugin(PluginId.getId("«grammar.languageID»")).getPath().getPath();
+				String path = PluginManager.getPlugin(PluginId.getId("«grammar.basePackageName»")).getPath().getPath();
 				return Arrays.asList(
 					path + "/bin", 
-					path + "/../«runtimeProjectPath»/bin"
+					path + "/«runtimeProjectPath»/bin"
 				);
 			}
 		
