@@ -24,7 +24,7 @@ import com.google.common.annotations.Beta;
  * Annotate a method with {@code Flaky} to mark it as occasionally failing.
  * 
  * If the test class defines a {@code @Rule Flaky.Rule} (a public, non-static, initialized field),
- * it will try to execture a flaky tests more than once if it failed. By default,
+ * it will try to execute a flaky tests more than once if it failed. By default,
  * three executions are tried.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
