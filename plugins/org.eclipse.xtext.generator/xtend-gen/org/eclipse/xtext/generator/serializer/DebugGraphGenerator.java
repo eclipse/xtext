@@ -9,15 +9,20 @@ package org.eclipse.xtext.generator.serializer;
 
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.generator.serializer.EqualAmbiguousTransitions;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
@@ -66,74 +71,136 @@ public class DebugGraphGenerator {
   private SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot;
   
   @Inject
+  private SyntacticSequencerUtil syntacticSequencerUtil;
+  
+  @Inject
   private PdaToDot<?, ?> pdaToDot;
   
   @Inject
   private NfaToDot<?> nfaToDot;
   
   public Iterable<Pair<String, String>> generateDebugGraphs() {
-    ArrayList<Pair<String, String>> _xblockexpression = null;
-    {
-      final ArrayList<Pair<String, String>> result = CollectionLiterals.<Pair<String, String>>newArrayList();
-      List<EObject> _allContexts = this.contextProvider.getAllContexts(this.grammar);
-      for (final EObject context : _allContexts) {
-        try {
-          String _file = this.file("context", context);
-          Pda<ISerState, RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(context);
-          String _draw = this.pdaToDot.draw(_contextPDA);
-          Pair<String, String> _mappedTo = Pair.<String, String>of(_file, _draw);
-          result.add(_mappedTo);
-          Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(context);
-          for (final EClass type : _typesForContext) {
-            try {
-              String _file_1 = this.file("context_type", context, type);
-              Pda<ISerState, RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(context, type);
-              String _draw_1 = this.pdaToDot.draw(_contextTypePDA);
-              Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_file_1, _draw_1);
-              result.add(_mappedTo_1);
-              String _file_2 = this.file("syntactic_sequencer", context, type);
-              ISyntacticSequencerPDAProvider.ISynAbsorberState _pDA = this.syntacticSequencerPDAProvider.getPDA(context, type);
-              String _draw_2 = this.syntacticSequencerPDA2Dot.draw(_pDA);
-              Pair<String, String> _mappedTo_2 = Pair.<String, String>of(_file_2, _draw_2);
-              result.add(_mappedTo_2);
-              String _file_3 = this.file("semantic_sequencer", context, type);
-              Nfa<ISemanticSequencerNfaProvider.ISemState> _nFA = this.semanticSequencerNFAProvider.getNFA(context, type);
-              String _draw_3 = this.nfaToDot.draw(_nFA);
-              Pair<String, String> _mappedTo_3 = Pair.<String, String>of(_file_3, _draw_3);
-              result.add(_mappedTo_3);
-            } catch (final Throwable _t) {
-              if (_t instanceof Throwable) {
-                final Throwable t = (Throwable)_t;
-                String _contextName = this.nameFunction.getContextName(context);
-                String _plus = ("Context: " + _contextName);
-                String _plus_1 = (_plus + " Type:");
-                String _name = null;
-                if (type!=null) {
-                  _name=type.getName();
-                }
-                String _plus_2 = (_plus_1 + _name);
-                System.out.println(_plus_2);
-                t.printStackTrace();
-              } else {
-                throw Exceptions.sneakyThrow(_t);
+    final ArrayList<Pair<String, String>> result = CollectionLiterals.<Pair<String, String>>newArrayList();
+    List<EObject> _allContexts = this.contextProvider.getAllContexts(this.grammar);
+    for (final EObject context : _allContexts) {
+      try {
+        String _file = this.file("context", context);
+        Pda<ISerState, RuleCall> _contextPDA = this.contextPDAProvider.getContextPDA(context);
+        String _draw = this.pdaToDot.draw(_contextPDA);
+        Pair<String, String> _mappedTo = Pair.<String, String>of(_file, _draw);
+        result.add(_mappedTo);
+        Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(context);
+        for (final EClass type : _typesForContext) {
+          try {
+            String _file_1 = this.file("context_type", context, type);
+            Pda<ISerState, RuleCall> _contextTypePDA = this.contextTypePDAProvider.getContextTypePDA(context, type);
+            String _draw_1 = this.pdaToDot.draw(_contextTypePDA);
+            Pair<String, String> _mappedTo_1 = Pair.<String, String>of(_file_1, _draw_1);
+            result.add(_mappedTo_1);
+            String _file_2 = this.file("syntactic_sequencer", context, type);
+            ISyntacticSequencerPDAProvider.ISynAbsorberState _pDA = this.syntacticSequencerPDAProvider.getPDA(context, type);
+            String _draw_2 = this.syntacticSequencerPDA2Dot.draw(_pDA);
+            Pair<String, String> _mappedTo_2 = Pair.<String, String>of(_file_2, _draw_2);
+            result.add(_mappedTo_2);
+            String _file_3 = this.file("semantic_sequencer", context, type);
+            Nfa<ISemanticSequencerNfaProvider.ISemState> _nFA = this.semanticSequencerNFAProvider.getNFA(context, type);
+            String _draw_3 = this.nfaToDot.draw(_nFA);
+            Pair<String, String> _mappedTo_3 = Pair.<String, String>of(_file_3, _draw_3);
+            result.add(_mappedTo_3);
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable t = (Throwable)_t;
+              String _contextName = this.nameFunction.getContextName(context);
+              String _plus = ("Context: " + _contextName);
+              String _plus_1 = (_plus + " Type:");
+              String _name = null;
+              if (type!=null) {
+                _name=type.getName();
               }
+              String _plus_2 = (_plus_1 + _name);
+              System.out.println(_plus_2);
+              t.printStackTrace();
+            } else {
+              throw Exceptions.sneakyThrow(_t);
             }
           }
-        } catch (final Throwable _t_1) {
-          if (_t_1 instanceof Throwable) {
-            final Throwable t_1 = (Throwable)_t_1;
-            String _contextName_1 = this.nameFunction.getContextName(context);
-            String _plus_3 = ("Context: " + _contextName_1);
-            System.out.println(_plus_3);
-            t_1.printStackTrace();
-          } else {
-            throw Exceptions.sneakyThrow(_t_1);
-          }
+        }
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof Throwable) {
+          final Throwable t_1 = (Throwable)_t_1;
+          String _contextName_1 = this.nameFunction.getContextName(context);
+          String _plus_3 = ("Context: " + _contextName_1);
+          System.out.println(_plus_3);
+          t_1.printStackTrace();
+        } else {
+          throw Exceptions.sneakyThrow(_t_1);
         }
       }
-      _xblockexpression = result;
     }
-    return _xblockexpression;
+    int i = 0;
+    final HashMap<ISyntacticSequencerPDAProvider.ISynTransition, String> trans2id = CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynTransition, String>newHashMap();
+    Set<ISyntacticSequencerPDAProvider.ISynTransition> _allAmbiguousTransitions = this.syntacticSequencerUtil.getAllAmbiguousTransitions();
+    for (final ISyntacticSequencerPDAProvider.ISynTransition transition : _allAmbiguousTransitions) {
+      {
+        final String name = ("ambiguity_" + Integer.valueOf(i));
+        String _directory = this.directory("syntactic_sequencer");
+        String _plus_4 = (_directory + name);
+        String _plus_5 = (_plus_4 + ".dot");
+        Nfa<ISyntacticSequencerPDAProvider.ISynState> _ambiguousNfa = transition.getAmbiguousNfa();
+        String _draw_4 = this.nfaToDot.draw(_ambiguousNfa);
+        Pair<String, String> _mappedTo_4 = Pair.<String, String>of(_plus_5, _draw_4);
+        result.add(_mappedTo_4);
+        trans2id.put(transition, name);
+        i = (i + 1);
+      }
+    }
+    final StringBuffer ambiguities = new StringBuffer();
+    List<EqualAmbiguousTransitions> _allAmbiguousTransitionsBySyntax = this.syntacticSequencerUtil.getAllAmbiguousTransitionsBySyntax();
+    for (final EqualAmbiguousTransitions group : _allAmbiguousTransitionsBySyntax) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("id: ");
+      String _identifyer = group.getIdentifyer();
+      _builder.append(_identifyer, "");
+      _builder.newLineIfNotEmpty();
+      _builder.append("    ");
+      _builder.append("Ambiguous syntax:»:");
+      _builder.newLine();
+      _builder.append("        ");
+      GrammarAlias.AbstractElementAlias _elementAlias = group.getElementAlias();
+      String _string = _elementAlias.toString();
+      String _replace = _string.replace("\n", "\n        ");
+      _builder.append(_replace, "        ");
+      _builder.newLineIfNotEmpty();
+      _builder.append("    ");
+      _builder.append("This ambiguous syntax occurs at:");
+      _builder.newLine();
+      {
+        List<ISyntacticSequencerPDAProvider.ISynTransition> _transitions = group.getTransitions();
+        for(final ISyntacticSequencerPDAProvider.ISynTransition trans : _transitions) {
+          _builder.append("\t");
+          String _get = trans2id.get(trans);
+          _builder.append(_get, "\t");
+          _builder.append(":");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append("    ");
+          String _ambiguityInsideTransition = group.ambiguityInsideTransition(trans);
+          String _replace_1 = _ambiguityInsideTransition.replace("\n", "\n        ");
+          _builder.append(_replace_1, "\t    ");
+          _builder.newLineIfNotEmpty();
+        }
+      }
+      _builder.append("        ");
+      _builder.newLine();
+      _builder.newLine();
+      ambiguities.append(_builder);
+    }
+    String _directory = this.directory("syntactic_sequencer");
+    String _plus_4 = (_directory + "ambiguities.txt");
+    String _string_1 = ambiguities.toString();
+    Pair<String, String> _mappedTo_4 = Pair.<String, String>of(_plus_4, _string_1);
+    result.add(_mappedTo_4);
+    return result;
   }
   
   public String directory(final String name) {
