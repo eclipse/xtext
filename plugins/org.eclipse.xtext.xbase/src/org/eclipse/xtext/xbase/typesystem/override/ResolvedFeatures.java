@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.Override
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.base.Function;
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -122,7 +122,7 @@ public class ResolvedFeatures extends AbstractResolvedFeatures {
 		if (!(rawType instanceof JvmDeclaredType)) {
 			return Collections.emptyList();
 		}
-		Multimap<String, AbstractResolvedOperation> processedOperations = HashMultimap.create();
+		Multimap<String, AbstractResolvedOperation> processedOperations = LinkedHashMultimap.create();
 		for (IResolvedOperation resolvedOperation : getDeclaredOperations()) {
 			processedOperations.put(resolvedOperation.getDeclaration().getSimpleName(), (AbstractResolvedOperation) resolvedOperation);
 		}
