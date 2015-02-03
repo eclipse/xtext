@@ -7,16 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.macro
 
+import java.io.File
 import java.net.URL
 import java.net.URLClassLoader
 import java.util.List
-import org.eclipse.core.resources.IResource
-import org.eclipse.core.runtime.IPath
-import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
-import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
@@ -41,69 +38,14 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	}
 	
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
-		val resolvedClasspath = projectToUse.getResolvedClasspath(true)
-		val List<URL> urls = newArrayList()
-		urls.addAll(getOutputFolders(projectToUse));
-		for (entry : resolvedClasspath) {
-			var URL url = null
-			switch entry.entryKind {
-				case IClasspathEntry.CPE_SOURCE: {/* do nothing */}
-				case IClasspathEntry.CPE_PROJECT: {
-					var IPath path = entry.getPath()
-					val IResource project = projectToUse.workspaceRoot.findMember(path)
-					urls.addAll(getOutputFolders(JavaCore.create(project.getProject())))
-				}
-				case IClasspathEntry.CPE_LIBRARY: {
-					var IPath path = entry.getPath()
-					// if the library is in the workspace, the entry path is relative to the workspace root
-					// thus we load it as a resource and take the raw path to find the location in the file system
-					val IResource library = projectToUse.workspaceRoot.findMember(path)
-					url = if (library != null) {
-						library.rawLocationURI.toURL
-					} else {
-						// otherwise we use the path itself
-						path.toFile().toURI().toURL() 
-					}
-				}
-				default: {
-					var IPath path = entry.getPath();
-					url = path.toFile().toURI().toURL();
-				}
-			}
-			if (url != null) {
-				urls.add(url);
-			}
-		}
+		val classPathEntries = JavaRuntime.computeDefaultRuntimeClassPath(projectToUse)
+		val List<URL> urls = classPathEntries.map[new File(it).toURI.toURL].toList
 		return new URLClassLoader(urls, getParentClassLoader())
 	}
 	
 	protected def getParentClassLoader() {
 		val bundleClassLoader = TransformationContext.classLoader
 		return bundleClassLoader
-	}
-	
-	def private getWorkspaceRoot(IJavaProject javaProject) {
-		javaProject.project.workspace.root
-	}
-
-	def private List<URL> getOutputFolders(IJavaProject javaProject) {
-		val List<URL> result = newArrayList;
-		var IPath path = javaProject.getOutputLocation().addTrailingSeparator();
-		var URL url = new URL(URI.createPlatformResourceURI(path.toString(), true).toString());
-		result.add(url);
-		for (IClasspathEntry entry : javaProject.getRawClasspath()) {
-			switch (entry.getEntryKind()) {
-				case IClasspathEntry.CPE_SOURCE: {
-					path = entry.getOutputLocation();
-					if (path != null) {
-						url = new URL(URI.createPlatformResourceURI(path.addTrailingSeparator().toString(), true)
-								.toString());
-						result.add(url);
-					}
-				}
-			}
-		}
-		return result;
 	}
 	
 }
