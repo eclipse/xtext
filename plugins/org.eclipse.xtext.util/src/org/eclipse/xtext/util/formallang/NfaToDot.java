@@ -21,7 +21,7 @@ public class NfaToDot<STATE> extends GraphvizDotBuilder {
 	protected Node create(Digraph result, Nfa<STATE> nfa, STATE state) {
 		Node n = new Node(state, stateToString(nfa, state));
 		if (state == nfa.getStart() || state == nfa.getStop())
-			n.setShape("point");
+			n.setShape("box");
 		return n;
 	}
 
