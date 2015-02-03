@@ -89,6 +89,8 @@ public interface ISyntacticSequencerPDAProvider {
 
 	public interface ISynTransition extends ISynNavigable {
 
+		Nfa<ISynState> getAmbiguousNfa();
+
 		AbstractElementAlias getAmbiguousSyntax();
 
 		List<AbstractElementAlias> getAmbiguousSyntaxes();

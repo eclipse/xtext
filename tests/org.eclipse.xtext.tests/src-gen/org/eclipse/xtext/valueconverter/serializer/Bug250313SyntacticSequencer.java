@@ -47,8 +47,15 @@ public class Bug250313SyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '1'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) value='mykeyword1'
+	 *     (rule start) (ambiguity) value=Datatype
+	 *     (rule start) (ambiguity) value=ID
+	 *     (rule start) (ambiguity) value=NestedDatatype
+	 *     (rule start) (ambiguity) value=STRING
 	 */
 	protected void emit_Model_DigitOneKeyword_0_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

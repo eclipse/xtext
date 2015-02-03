@@ -47,8 +47,11 @@ public class IgnoreCaseLexerTestLanguageSyntacticSequencer extends AbstractSynta
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     'foo'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'case' (ambiguity) value='CaSe'
 	 */
 	protected void emit_Model_FooKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

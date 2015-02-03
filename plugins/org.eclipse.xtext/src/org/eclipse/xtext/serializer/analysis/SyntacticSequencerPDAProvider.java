@@ -30,7 +30,6 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GrammarAliasFactory;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.Pair;
@@ -449,11 +448,9 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			}
 		}
 
-		protected static final AbstractElementAlias UNINITIALIZED = new TokenAlias(false, false, null);
+		protected AbstractElementAlias ambiguousSyntax = null;
 
-		protected AbstractElementAlias ambiguousSyntax = UNINITIALIZED;
-
-		protected List<AbstractElementAlias> ambiguousSyntaxes;
+		protected List<AbstractElementAlias> ambiguousSyntaxes = null;
 
 		protected ISynAbsorberState source;
 
@@ -463,28 +460,18 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		@Override
+		public Nfa<ISynState> getAmbiguousNfa() {
+			Nfa<ISynState> nfa = new PdaUtil().filterUnambiguousPaths(getPathToTarget());
+			return new NfaUtil().filter(nfa, new Filter());
+		}
+
+		@Override
 		public AbstractElementAlias getAmbiguousSyntax() {
-			if (ambiguousSyntax != UNINITIALIZED)
+			if (ambiguousSyntax != null)
 				return ambiguousSyntax;
-			ambiguousSyntax = getShortSyntax();
-			if (ambiguousSyntax instanceof GroupAlias) {
-				GroupAlias group = (GroupAlias) ambiguousSyntax;
-				List<AbstractElementAlias> children = group.getChildren();
-				int start = 0;
-				while (start < children.size() && children.get(start) instanceof TokenAlias
-						&& !children.get(start).isMany() && !children.get(start).isOptional())
-					start++;
-				int end = children.size() - 1;
-				while (end >= 0 && children.get(end) instanceof TokenAlias && !children.get(end).isMany()
-						&& !children.get(end).isOptional())
-					end--;
-				if (start <= end) {
-					ambiguousSyntax = group = new GroupAlias(false, false, children.subList(start, end + 1));
-					if (group.children.size() == 1)
-						ambiguousSyntax = group.children.get(0);
-				} else
-					ambiguousSyntax = null;
-			}
+			Nfa<ISynState> nfa = getAmbiguousNfa();
+			NfaToProduction prod = new NfaToProduction();
+			ambiguousSyntax = prod.nfaToGrammar(nfa, new GetGrammarElement(), new GrammarAliasFactory());
 			return ambiguousSyntax;
 		}
 
@@ -495,10 +482,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			if (!isSyntacticallyAmbiguous())
 				return ambiguousSyntaxes = Collections.emptyList();
 			ambiguousSyntaxes = Lists.newArrayList();
-			Nfa<ISynState> nfa = new PdaUtil().filterUnambiguousPaths(getPathToTarget());
-			nfa = new NfaUtil().filter(nfa, new Filter());
-			AbstractElementAlias syntax = new NfaToProduction().nfaToGrammar(nfa, new GetGrammarElement(),
-					new GrammarAliasFactory());
+			AbstractElementAlias syntax = getAmbiguousSyntax();
 			if (syntax instanceof GroupAlias) {
 				GroupAlias group = (GroupAlias) syntax;
 				for (AbstractElementAlias child : group.getChildren())
@@ -507,11 +491,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			} else
 				ambiguousSyntaxes.add(syntax);
 			return ambiguousSyntaxes;
-		}
-
-		public AbstractElementAlias getShortSyntax() {
-			Nfa<ISynState> path = new NfaUtil().filter(getPathToTarget(), new Filter());
-			return new NfaToProduction().nfaToGrammar(path, new GetGrammarElement(), new GrammarAliasFactory());
 		}
 
 		@Override

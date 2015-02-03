@@ -67,48 +67,89 @@ public class SimpleBacktrackingBug325745TestLanguageSyntacticSequencer extends A
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '['*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '['? terms+=SimpleTerm
+	 *     (rule start) (ambiguity) ']'* (rule start)
+	 *     (rule start) (ambiguity) ']'* postfix=STRING
+	 *     (rule start) (ambiguity) prefix=STRING
+	 *     prefix=STRING (ambiguity) '['? terms+=SimpleTerm
+	 *     prefix=STRING (ambiguity) ']'* (rule end)
+	 *     prefix=STRING (ambiguity) ']'* postfix=STRING
+	 *     prefix=STRING (ambiguity) prefix=STRING
 	 */
 	protected void emit_Expression_LeftSquareBracketKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '['?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '['* (ambiguity) terms+=SimpleTerm
+	 *     prefix=STRING '['* (ambiguity) terms+=SimpleTerm
+	 *     terms+=SimpleTerm ']'? (ambiguity) terms+=SimpleTerm
 	 */
 	protected void emit_Expression_LeftSquareBracketKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ']'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     terms+=SimpleTerm (ambiguity) '['? terms+=SimpleTerm
+	 *     terms+=SimpleTerm (ambiguity) ']'* (rule end)
+	 *     terms+=SimpleTerm (ambiguity) ']'* postfix=STRING
 	 */
 	protected void emit_Expression_RightSquareBracketKeyword_2_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ']'*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '['* (ambiguity) (rule start)
+	 *     (rule start) '['* (ambiguity) postfix=STRING
+	 *     postfix=STRING (ambiguity) (rule end)
+	 *     postfix=STRING (ambiguity) postfix=STRING
+	 *     prefix=STRING '['* (ambiguity) (rule end)
+	 *     prefix=STRING '['* (ambiguity) postfix=STRING
+	 *     terms+=SimpleTerm ']'? (ambiguity) (rule end)
+	 *     terms+=SimpleTerm ']'? (ambiguity) postfix=STRING
 	 */
 	protected void emit_Expression_RightSquareBracketKeyword_3_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '*'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     lineCount=INT (ambiguity) '!'? (rule end)
+	 *     lineCount=INT (ambiguity) '!'? charSet=ID
+	 *     lineCount=INT (ambiguity) charCount=INT
 	 */
 	protected void emit_SimpleTerm_AsteriskKeyword_0_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '!'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     charCount=INT (ambiguity) (rule end)
+	 *     charCount=INT (ambiguity) charSet=ID
+	 *     lineCount=INT '*'? (ambiguity) (rule end)
+	 *     lineCount=INT '*'? (ambiguity) charSet=ID
 	 */
 	protected void emit_SimpleTerm_ExclamationMarkKeyword_0_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

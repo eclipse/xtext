@@ -148,233 +148,365 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     KW1 | 'kw2'
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#11' (ambiguity) val=ID
 	 */
 	protected void emit_AlternativeTransition_KW1ParserRuleCall_1_0_or_Kw2Keyword_1_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     'kw1' | 
-	     'kw2' | 
-	     'kw3' | 
-	     'kw4' | 
-	     'kw5' | 
-	     'kw6' | 
-	     'kw7' | 
-	     'kw8'
-	 )*
+	  *         'kw1' | 
+	  *         'kw2' | 
+	  *         'kw3' | 
+	  *         'kw4' | 
+	  *         'kw5' | 
+	  *         'kw6' | 
+	  *         'kw7' | 
+	  *         'kw8'
+	  *     )*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) '!' (rule end)
+	 *     val1+=ID (ambiguity) '!' (rule end)
+	 *     val2+=ID (ambiguity) '!' (rule end)
+	 *     val3+=ID (ambiguity) '!' (rule end)
+	 *     val4+=ID (ambiguity) '!' (rule end)
+	 *     val5+=ID (ambiguity) '!' (rule end)
+	 *     val6+=ID (ambiguity) '!' (rule end)
+	 *     val7+=ID (ambiguity) '!' (rule end)
+	 *     val8+=ID (ambiguity) '!' (rule end)
 	 */
 	protected void emit_LongAlternative___Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw2' | 
-	         'kw3' | 
-	         'kw4' | 
-	         'kw5' | 
-	         'kw6' | 
-	         'kw7'
-	     )* 
-	     'kw8'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw2' | 
+	  *             'kw3' | 
+	  *             'kw4' | 
+	  *             'kw5' | 
+	  *             'kw6' | 
+	  *             'kw7'
+	  *         )* 
+	  *         'kw8'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val8+=ID
+	 *     val1+=ID (ambiguity) val8+=ID
+	 *     val2+=ID (ambiguity) val8+=ID
+	 *     val3+=ID (ambiguity) val8+=ID
+	 *     val4+=ID (ambiguity) val8+=ID
+	 *     val5+=ID (ambiguity) val8+=ID
+	 *     val6+=ID (ambiguity) val8+=ID
+	 *     val7+=ID (ambiguity) val8+=ID
+	 *     val8+=ID (ambiguity) val8+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0__a_Kw8Keyword_2_7_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw2' | 
-	         'kw3' | 
-	         'kw4' | 
-	         'kw5' | 
-	         'kw6' | 
-	         'kw8'
-	     )* 
-	     'kw7'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw2' | 
+	  *             'kw3' | 
+	  *             'kw4' | 
+	  *             'kw5' | 
+	  *             'kw6' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw7'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val7+=ID
+	 *     val1+=ID (ambiguity) val7+=ID
+	 *     val2+=ID (ambiguity) val7+=ID
+	 *     val3+=ID (ambiguity) val7+=ID
+	 *     val4+=ID (ambiguity) val7+=ID
+	 *     val5+=ID (ambiguity) val7+=ID
+	 *     val6+=ID (ambiguity) val7+=ID
+	 *     val7+=ID (ambiguity) val7+=ID
+	 *     val8+=ID (ambiguity) val7+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw8Keyword_2_7_0__a_Kw7Keyword_2_6_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw2' | 
-	         'kw3' | 
-	         'kw4' | 
-	         'kw5' | 
-	         'kw7' | 
-	         'kw8'
-	     )* 
-	     'kw6'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw2' | 
+	  *             'kw3' | 
+	  *             'kw4' | 
+	  *             'kw5' | 
+	  *             'kw7' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw6'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val6+=ID
+	 *     val1+=ID (ambiguity) val6+=ID
+	 *     val2+=ID (ambiguity) val6+=ID
+	 *     val3+=ID (ambiguity) val6+=ID
+	 *     val4+=ID (ambiguity) val6+=ID
+	 *     val5+=ID (ambiguity) val6+=ID
+	 *     val6+=ID (ambiguity) val6+=ID
+	 *     val7+=ID (ambiguity) val6+=ID
+	 *     val8+=ID (ambiguity) val6+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw6Keyword_2_5_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw2' | 
-	         'kw3' | 
-	         'kw4' | 
-	         'kw6' | 
-	         'kw7' | 
-	         'kw8'
-	     )* 
-	     'kw5'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw2' | 
+	  *             'kw3' | 
+	  *             'kw4' | 
+	  *             'kw6' | 
+	  *             'kw7' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw5'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val5+=ID
+	 *     val1+=ID (ambiguity) val5+=ID
+	 *     val2+=ID (ambiguity) val5+=ID
+	 *     val3+=ID (ambiguity) val5+=ID
+	 *     val4+=ID (ambiguity) val5+=ID
+	 *     val5+=ID (ambiguity) val5+=ID
+	 *     val6+=ID (ambiguity) val5+=ID
+	 *     val7+=ID (ambiguity) val5+=ID
+	 *     val8+=ID (ambiguity) val5+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw5Keyword_2_4_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw2' | 
-	         'kw3' | 
-	         'kw5' | 
-	         'kw6' | 
-	         'kw7' | 
-	         'kw8'
-	     )* 
-	     'kw4'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw2' | 
+	  *             'kw3' | 
+	  *             'kw5' | 
+	  *             'kw6' | 
+	  *             'kw7' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw4'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val4+=ID
+	 *     val1+=ID (ambiguity) val4+=ID
+	 *     val2+=ID (ambiguity) val4+=ID
+	 *     val3+=ID (ambiguity) val4+=ID
+	 *     val4+=ID (ambiguity) val4+=ID
+	 *     val5+=ID (ambiguity) val4+=ID
+	 *     val6+=ID (ambiguity) val4+=ID
+	 *     val7+=ID (ambiguity) val4+=ID
+	 *     val8+=ID (ambiguity) val4+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw4Keyword_2_3_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw2' | 
-	         'kw4' | 
-	         'kw5' | 
-	         'kw6' | 
-	         'kw7' | 
-	         'kw8'
-	     )* 
-	     'kw3'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw2' | 
+	  *             'kw4' | 
+	  *             'kw5' | 
+	  *             'kw6' | 
+	  *             'kw7' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw3'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val3+=ID
+	 *     val1+=ID (ambiguity) val3+=ID
+	 *     val2+=ID (ambiguity) val3+=ID
+	 *     val3+=ID (ambiguity) val3+=ID
+	 *     val4+=ID (ambiguity) val3+=ID
+	 *     val5+=ID (ambiguity) val3+=ID
+	 *     val6+=ID (ambiguity) val3+=ID
+	 *     val7+=ID (ambiguity) val3+=ID
+	 *     val8+=ID (ambiguity) val3+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw2Keyword_2_1_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw3Keyword_2_2_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw1' | 
-	         'kw3' | 
-	         'kw4' | 
-	         'kw5' | 
-	         'kw6' | 
-	         'kw7' | 
-	         'kw8'
-	     )* 
-	     'kw2'
-	 )+
+	  *         (
+	  *             'kw1' | 
+	  *             'kw3' | 
+	  *             'kw4' | 
+	  *             'kw5' | 
+	  *             'kw6' | 
+	  *             'kw7' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw2'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val2+=ID
+	 *     val1+=ID (ambiguity) val2+=ID
+	 *     val2+=ID (ambiguity) val2+=ID
+	 *     val3+=ID (ambiguity) val2+=ID
+	 *     val4+=ID (ambiguity) val2+=ID
+	 *     val5+=ID (ambiguity) val2+=ID
+	 *     val6+=ID (ambiguity) val2+=ID
+	 *     val7+=ID (ambiguity) val2+=ID
+	 *     val8+=ID (ambiguity) val2+=ID
 	 */
 	protected void emit_LongAlternative_____Kw1Keyword_2_0_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw2Keyword_2_1_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     (
-	         'kw2' | 
-	         'kw3' | 
-	         'kw4' | 
-	         'kw5' | 
-	         'kw6' | 
-	         'kw7' | 
-	         'kw8'
-	     )* 
-	     'kw1'
-	 )+
+	  *         (
+	  *             'kw2' | 
+	  *             'kw3' | 
+	  *             'kw4' | 
+	  *             'kw5' | 
+	  *             'kw6' | 
+	  *             'kw7' | 
+	  *             'kw8'
+	  *         )* 
+	  *         'kw1'
+	  *     )+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     foo=ID (ambiguity) val1+=ID
+	 *     val1+=ID (ambiguity) val1+=ID
+	 *     val2+=ID (ambiguity) val1+=ID
+	 *     val3+=ID (ambiguity) val1+=ID
+	 *     val4+=ID (ambiguity) val1+=ID
+	 *     val5+=ID (ambiguity) val1+=ID
+	 *     val6+=ID (ambiguity) val1+=ID
+	 *     val7+=ID (ambiguity) val1+=ID
+	 *     val8+=ID (ambiguity) val1+=ID
 	 */
 	protected void emit_LongAlternative_____Kw2Keyword_2_1_0_or_Kw3Keyword_2_2_0_or_Kw4Keyword_2_3_0_or_Kw5Keyword_2_4_0_or_Kw6Keyword_2_5_0_or_Kw7Keyword_2_6_0_or_Kw8Keyword_2_7_0__a_Kw1Keyword_2_0_0__p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     KW1+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#10' (ambiguity) val=ID
 	 */
 	protected void emit_MandatoryManyTransition_KW1ParserRuleCall_1_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     KW1*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#9' (ambiguity) val=ID
 	 */
 	protected void emit_OptionalManyTransition_KW1ParserRuleCall_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     KW1?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#8' (ambiguity) val=ID
 	 */
 	protected void emit_OptionalSingleTransition_KW1ParserRuleCall_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#3' (ambiguity) name=ID
+	 *     (rule start) '#3' (ambiguity) {Add1.left=}
+	 *     (rule start) (ambiguity) name=ID
+	 *     (rule start) (ambiguity) {Add1.left=}
 	 */
 	protected void emit_Prim1_LeftParenthesisKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) {Add1.left=}
 	 */
 	protected void emit_Prim1_LeftParenthesisKeyword_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#4' (ambiguity) name=ID
+	 *     (rule start) '#4' (ambiguity) {Add2.left=}
+	 *     (rule start) '#4' (ambiguity) {Mult2.left=}
+	 *     (rule start) (ambiguity) name=ID
+	 *     (rule start) (ambiguity) {Add2.left=}
+	 *     (rule start) (ambiguity) {Mult2.left=}
 	 */
 	protected void emit_Prim2_LeftParenthesisKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) {Add2.left=}
+	 *     (rule start) (ambiguity) {Mult2.left=}
 	 */
 	protected void emit_Prim2_LeftParenthesisKeyword_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

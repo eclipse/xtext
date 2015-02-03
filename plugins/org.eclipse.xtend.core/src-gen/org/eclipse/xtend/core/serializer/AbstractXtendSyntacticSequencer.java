@@ -125,112 +125,259 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     initialValue=XAnnotationElementValue (ambiguity) (rule end)
+	 *     name=ValidID (ambiguity) (rule end)
 	 */
 	protected void emit_AnnotationField_SemicolonKeyword_2_0_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     members+=XtendEnumLiteral (ambiguity) '}' (rule end)
+	 *     name=ValidID '{' (ambiguity) '}' (rule end)
 	 */
 	protected void emit_AnnotationField_SemicolonKeyword_2_3_6_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     package=QualifiedName (ambiguity) (rule end)
+	 *     package=QualifiedName (ambiguity) importSection=XImportSection
+	 *     package=QualifiedName (ambiguity) xtendTypes+=Type
 	 */
 	protected void emit_File_SemicolonKeyword_0_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     initialValue=XExpression (ambiguity) (rule end)
+	 *     name=ValidID (ambiguity) (rule end)
+	 *     type=JvmTypeReference (ambiguity) (rule end)
 	 */
 	protected void emit_Member_SemicolonKeyword_2_0_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     exceptions+=JvmTypeReference (ambiguity) (rule end)
+	 *     name=FunctionID '(' ')' (ambiguity) (rule end)
+	 *     name=ValidID '(' ')' (ambiguity) (rule end)
+	 *     parameters+=Parameter ')' (ambiguity) (rule end)
 	 */
 	protected void emit_Member_SemicolonKeyword_2_1_9_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     members+=XtendEnumLiteral (ambiguity) '}' (rule end)
+	 *     name=ValidID '{' (ambiguity) '}' (rule end)
 	 */
 	protected void emit_Member_SemicolonKeyword_2_5_6_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     members+=XtendEnumLiteral (ambiguity) '}' (rule end)
+	 *     name=ValidID '{' (ambiguity) '}' (rule end)
 	 */
 	protected void emit_Type_SemicolonKeyword_2_2_6_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     annotationType=[JvmAnnotationType|QualifiedName] (ambiguity) (rule end)
 	 */
 	protected void emit_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) '}' ')' (rule end)
+	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) '}' (rule end)
+	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) expressions+=XExpressionOrVarDeclaration
 	 */
 	protected void emit_XBlockExpression_SemicolonKeyword_2_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) (rule end)
+	 *     expressions+=XExpressionOrVarDeclaration (ambiguity) expressions+=XExpressionOrVarDeclaration
 	 */
 	protected void emit_XExpressionInClosure_SemicolonKeyword_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '=>' returnType=JvmTypeReference
 	 */
 	protected void emit_XFunctionTypeRef___LeftParenthesisKeyword_0_0_RightParenthesisKeyword_0_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     importedNamespace=QualifiedNameWithWildcard (ambiguity) (rule end)
+	 *     importedType=[JvmDeclaredType|QualifiedName] (ambiguity) (rule end)
+	 *     memberName=ValidID (ambiguity) (rule end)
+	 *     wildcard?='*' (ambiguity) (rule end)
 	 */
 	protected void emit_XImportDeclaration_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '#' '[' ']' (rule start)
+	 *     (rule start) (ambiguity) '#' '[' elements+=XExpression
+	 *     (rule start) (ambiguity) '#' '{' '}' (rule start)
+	 *     (rule start) (ambiguity) '#' '{' elements+=XExpression
+	 *     (rule start) (ambiguity) '<' typeArguments+=JvmArgumentTypeReference
+	 *     (rule start) (ambiguity) '[' declaredFormalParameters+=JvmFormalParameter
+	 *     (rule start) (ambiguity) '[' explicitSyntax?='|'
+	 *     (rule start) (ambiguity) '[' expression=XExpressionInClosure
+	 *     (rule start) (ambiguity) 'do' body=XExpression
+	 *     (rule start) (ambiguity) 'false' (rule start)
+	 *     (rule start) (ambiguity) 'for' '(' ';' ';' ')' eachExpression=XExpression
+	 *     (rule start) (ambiguity) 'for' '(' ';' ';' updateExpressions+=XExpression
+	 *     (rule start) (ambiguity) 'for' '(' ';' expression=XExpression
+	 *     (rule start) (ambiguity) 'for' '(' declaredParam=JvmFormalParameter
+	 *     (rule start) (ambiguity) 'for' '(' initExpressions+=XExpressionOrVarDeclaration
+	 *     (rule start) (ambiguity) 'if' '(' if=XExpression
+	 *     (rule start) (ambiguity) 'new' constructor=[JvmConstructor|QualifiedName]
+	 *     (rule start) (ambiguity) 'null' (rule start)
+	 *     (rule start) (ambiguity) 'return' (rule start)
+	 *     (rule start) (ambiguity) 'return' expression=XExpression
+	 *     (rule start) (ambiguity) 'switch' '(' declaredParam=JvmFormalParameter
+	 *     (rule start) (ambiguity) 'switch' declaredParam=JvmFormalParameter
+	 *     (rule start) (ambiguity) 'switch' switch=XExpressionOrSimpleConstructorCall
+	 *     (rule start) (ambiguity) 'synchronized' '(' param=XExpression
+	 *     (rule start) (ambiguity) 'throw' expression=XExpression
+	 *     (rule start) (ambiguity) 'try' expression=XExpression
+	 *     (rule start) (ambiguity) 'typeof' '(' type=[JvmType|QualifiedName]
+	 *     (rule start) (ambiguity) 'while' '(' predicate=XExpression
+	 *     (rule start) (ambiguity) '{' '}' (rule start)
+	 *     (rule start) (ambiguity) '{' expressions+=XExpressionOrVarDeclaration
+	 *     (rule start) (ambiguity) expressions+=RichStringLiteral
+	 *     (rule start) (ambiguity) expressions+=RichStringLiteralStart
+	 *     (rule start) (ambiguity) feature=[JvmIdentifiableElement|FeatureCallID]
+	 *     (rule start) (ambiguity) feature=[JvmIdentifiableElement|IdOrSuper]
+	 *     (rule start) (ambiguity) feature=[JvmIdentifiableElement|OpUnary]
+	 *     (rule start) (ambiguity) isTrue?='true'
+	 *     (rule start) (ambiguity) value=Number
+	 *     (rule start) (ambiguity) value=STRING
+	 *     (rule start) (ambiguity) {AnonymousClass.constructorCall=}
+	 *     (rule start) (ambiguity) {XAssignment.assignable=}
+	 *     (rule start) (ambiguity) {XBinaryOperation.leftOperand=}
+	 *     (rule start) (ambiguity) {XCastedExpression.target=}
+	 *     (rule start) (ambiguity) {XInstanceOfExpression.expression=}
+	 *     (rule start) (ambiguity) {XMemberFeatureCall.memberCallTarget=}
+	 *     (rule start) (ambiguity) {XPostfixOperation.operand=}
 	 */
 	protected void emit_XParenthesizedExpression_LeftParenthesisKeyword_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '#' '[' ']' ')' (rule start)
+	 *     (rule start) (ambiguity) '#' '[' elements+=XExpression
+	 *     (rule start) (ambiguity) '#' '{' '}' ')' (rule start)
+	 *     (rule start) (ambiguity) '#' '{' elements+=XExpression
+	 *     (rule start) (ambiguity) '<' typeArguments+=JvmArgumentTypeReference
+	 *     (rule start) (ambiguity) '[' declaredFormalParameters+=JvmFormalParameter
+	 *     (rule start) (ambiguity) '[' explicitSyntax?='|'
+	 *     (rule start) (ambiguity) '[' expression=XExpressionInClosure
+	 *     (rule start) (ambiguity) 'do' body=XExpression
+	 *     (rule start) (ambiguity) 'false' ')' (rule start)
+	 *     (rule start) (ambiguity) 'for' '(' ';' ';' ')' eachExpression=XExpression
+	 *     (rule start) (ambiguity) 'for' '(' ';' ';' updateExpressions+=XExpression
+	 *     (rule start) (ambiguity) 'for' '(' ';' expression=XExpression
+	 *     (rule start) (ambiguity) 'for' '(' declaredParam=JvmFormalParameter
+	 *     (rule start) (ambiguity) 'for' '(' initExpressions+=XExpressionOrVarDeclaration
+	 *     (rule start) (ambiguity) 'if' '(' if=XExpression
+	 *     (rule start) (ambiguity) 'new' constructor=[JvmConstructor|QualifiedName]
+	 *     (rule start) (ambiguity) 'null' ')' (rule start)
+	 *     (rule start) (ambiguity) 'return' ')' (rule start)
+	 *     (rule start) (ambiguity) 'return' expression=XExpression
+	 *     (rule start) (ambiguity) 'switch' '(' declaredParam=JvmFormalParameter
+	 *     (rule start) (ambiguity) 'switch' declaredParam=JvmFormalParameter
+	 *     (rule start) (ambiguity) 'switch' switch=XExpressionOrSimpleConstructorCall
+	 *     (rule start) (ambiguity) 'synchronized' '(' param=XExpression
+	 *     (rule start) (ambiguity) 'throw' expression=XExpression
+	 *     (rule start) (ambiguity) 'try' expression=XExpression
+	 *     (rule start) (ambiguity) 'typeof' '(' type=[JvmType|QualifiedName]
+	 *     (rule start) (ambiguity) 'while' '(' predicate=XExpression
+	 *     (rule start) (ambiguity) '{' '}' ')' (rule start)
+	 *     (rule start) (ambiguity) '{' expressions+=XExpressionOrVarDeclaration
+	 *     (rule start) (ambiguity) expressions+=RichStringLiteral
+	 *     (rule start) (ambiguity) expressions+=RichStringLiteralStart
+	 *     (rule start) (ambiguity) feature=[JvmIdentifiableElement|FeatureCallID]
+	 *     (rule start) (ambiguity) feature=[JvmIdentifiableElement|IdOrSuper]
+	 *     (rule start) (ambiguity) feature=[JvmIdentifiableElement|OpUnary]
+	 *     (rule start) (ambiguity) isTrue?='true'
+	 *     (rule start) (ambiguity) value=Number
+	 *     (rule start) (ambiguity) value=STRING
+	 *     (rule start) (ambiguity) {AnonymousClass.constructorCall=}
+	 *     (rule start) (ambiguity) {XAssignment.assignable=}
+	 *     (rule start) (ambiguity) {XBinaryOperation.leftOperand=}
+	 *     (rule start) (ambiguity) {XCastedExpression.target=}
+	 *     (rule start) (ambiguity) {XInstanceOfExpression.expression=}
+	 *     (rule start) (ambiguity) {XMemberFeatureCall.memberCallTarget=}
+	 *     (rule start) (ambiguity) {XPostfixOperation.operand=}
 	 */
 	protected void emit_XParenthesizedExpression_LeftParenthesisKeyword_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

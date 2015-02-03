@@ -61,16 +61,22 @@ public class EObjectAtOffsetTestLanguageSyntacticSequencer extends AbstractSynta
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     INT?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'zonk'? (ambiguity) 'bar' name=ID
 	 */
 	protected void emit_AbstractBar_INTTerminalRuleCall_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     'zonk'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) INT? 'bar' name=ID
 	 */
 	protected void emit_AbstractBar_ZonkKeyword_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

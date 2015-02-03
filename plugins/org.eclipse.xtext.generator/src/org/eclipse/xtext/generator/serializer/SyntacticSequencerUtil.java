@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.serializer;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,8 +28,6 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -74,36 +71,29 @@ public class SyntacticSequencerUtil {
 				collectAllAmbiguousTransitions(follower, result, visited);
 	}
 
-	protected Set<ISynTransition> getAllAmbiguousTransitions() {
+	public Set<ISynTransition> getAllAmbiguousTransitions() {
 		Set<ISynTransition> result = Sets.newLinkedHashSet();
 		for (ISynAbsorberState start : getAllPDAs())
 			collectAllAmbiguousTransitions(start, result, Sets.newHashSet());
 		return result;
 	}
 
-	protected List<Pair<String, AbstractElementAlias>> ambiguousTransitions;
+	protected List<EqualAmbiguousTransitions> ambiguousTransitions;
 
-	public List<Pair<String, AbstractElementAlias>> getAllAmbiguousTransitionsBySyntax() {
+	public List<EqualAmbiguousTransitions> getAllAmbiguousTransitionsBySyntax() {
 		if (ambiguousTransitions != null)
 			return ambiguousTransitions;
-		Map<AbstractElementAlias, List<ISynTransition>> result = Maps.newHashMap();
+		Map<AbstractElementAlias, EqualAmbiguousTransitions> result = Maps.newHashMap();
 		for (ISynTransition transition : getAllAmbiguousTransitions()) {
 			for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
-				List<ISynTransition> list = result.get(syntax);
+				EqualAmbiguousTransitions list = result.get(syntax);
 				if (list == null)
-					result.put(syntax, list = Lists.newArrayList());
-				list.add(transition);
+					result.put(syntax, list = new EqualAmbiguousTransitions(elementAliasToIdentifyer(syntax), syntax));
+				list.getTransitions().add(transition);
 			}
 		}
-		ambiguousTransitions = Lists.newArrayList();
-		for (Map.Entry<AbstractElementAlias, List<ISynTransition>> e : result.entrySet())
-			ambiguousTransitions.add(Tuples.create(elementAliasToIdentifyer(e.getKey()), e.getKey(), e.getValue()));
-		Collections.sort(ambiguousTransitions, new Comparator<Pair<String, AbstractElementAlias>>() {
-			@Override
-			public int compare(Pair<String, AbstractElementAlias> o1, Pair<String, AbstractElementAlias> o2) {
-				return o1.getFirst().compareTo(o2.getFirst());
-			}
-		});
+		ambiguousTransitions = Lists.newArrayList(result.values());
+		Collections.sort(ambiguousTransitions);
 		return ambiguousTransitions;
 	}
 

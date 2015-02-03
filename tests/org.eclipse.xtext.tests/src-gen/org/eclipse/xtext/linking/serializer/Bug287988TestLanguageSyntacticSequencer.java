@@ -48,15 +48,18 @@ public class Bug287988TestLanguageSyntacticSequencer extends AbstractSyntacticSe
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     (
-	     'actions' | 
-	     'simple' | 
-	     'rulecall' | 
-	     'rulecall2' | 
-	     'rulecall3' | 
-	     'inlinedActions'
-	 )
+	  *         'actions' | 
+	  *         'simple' | 
+	  *         'rulecall' | 
+	  *         'rulecall2' | 
+	  *         'rulecall3' | 
+	  *         'inlinedActions'
+	  *     )
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
 	 */
 	protected void emit_Model_ActionsKeyword_0_0_or_InlinedActionsKeyword_5_0_or_Rulecall2Keyword_3_0_or_Rulecall3Keyword_4_0_or_RulecallKeyword_2_0_or_SimpleKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -43,6 +43,8 @@ class DebugGraphGenerator {
 	
 	@Inject SyntacticSequencerPDA2ExtendedDot syntacticSequencerPDA2Dot
 	
+	@Inject SyntacticSequencerUtil syntacticSequencerUtil
+	
 	@Inject PdaToDot<?,?> pdaToDot
 	
 	@Inject NfaToDot<?> nfaToDot
@@ -67,7 +69,35 @@ class DebugGraphGenerator {
 				t.printStackTrace
 			}
 		}
-		result
+		try {
+			var i = 0
+			val trans2id = newHashMap()
+			for (transition : syntacticSequencerUtil.allAmbiguousTransitions) {
+				val name = "ambiguity_" + i
+				result.add(directory("syntactic_sequencer") + name + ".dot" -> nfaToDot.draw(transition.ambiguousNfa))
+				trans2id.put(transition, name)
+				i = i + 1
+			}
+			val ambiguities = new StringBuffer()
+			for (group : syntacticSequencerUtil.allAmbiguousTransitionsBySyntax) {
+				ambiguities.append('''
+					id: «group.identifyer»
+					    Ambiguous syntax:»:
+					        «group.elementAlias.toString.replace("\n", "\n        ")»
+					    This ambiguous syntax occurs at:
+						«FOR trans : group.transitions»
+							«trans2id.get(trans)»:
+							    «group.ambiguityInsideTransition(trans).replace("\n", "\n        ")»
+						«ENDFOR»
+						
+					
+				''')
+			}
+			result.add(directory("syntactic_sequencer") + "ambiguities.txt" -> ambiguities.toString)
+		} catch (Throwable t) {
+			t.printStackTrace
+		}
+		return result
 	}
 	
 	def String directory(String name) {

@@ -61,16 +61,32 @@ public class ElementMatcherTestLanguageSyntacticSequencer extends AbstractSyntac
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '#6' (ambiguity) '=>' target=Prim
+	 *     (rule start) '#6' (ambiguity) func=ID
+	 *     (rule start) '#6' (ambiguity) val=INT
+	 *     (rule start) '#6' (ambiguity) {Add.left=}
+	 *     (rule start) '#6' (ambiguity) {Mult.left=}
+	 *     (rule start) (ambiguity) '=>' target=Prim
+	 *     (rule start) (ambiguity) func=ID
+	 *     (rule start) (ambiguity) val=INT
+	 *     (rule start) (ambiguity) {Add.left=}
+	 *     (rule start) (ambiguity) {Mult.left=}
 	 */
 	protected void emit_Prim_LeftParenthesisKeyword_3_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) {Add.left=}
+	 *     (rule start) (ambiguity) {Mult.left=}
 	 */
 	protected void emit_Prim_LeftParenthesisKeyword_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
