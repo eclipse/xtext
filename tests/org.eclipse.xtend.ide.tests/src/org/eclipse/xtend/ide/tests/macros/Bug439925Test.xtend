@@ -21,10 +21,13 @@ import org.junit.After
 import org.junit.Test
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
-import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static extension org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 import com.google.common.io.CharStreams
 import java.io.InputStreamReader
 import org.junit.Assert
+import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder
+import org.eclipse.xtext.ui.XtextProjectHelper
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -95,6 +98,124 @@ class Bug439925Test {
 		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
 	}
 	
+	@Test def void testClassLoaderSeesAllUpstreamProjects_01() {
+		val libProject = JavaCore.create(createPluginProject("libProject"))
+		libProject.newSource("mylib/Lib.xtend", '''
+			package mylib
+			
+			class Lib {
+				override String toString() {
+					return "HUNKELDUNKEL"
+				}
+			}
+		''')
+		libProject.addExportedPackage("mylib")
+		
+		val macroProject = JavaCore.create(createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib",
+				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject"))
+		macroProject.newSource("annotation/MyAA.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+			
+			@Active(MyAAProcessor)
+			annotation MyAA {
+			}
+			
+			class MyAAProcessor extends AbstractClassProcessor {
+				
+				override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+					annotatedClass.docComment = new mylib.Lib().toString()
+				}
+			}
+		''')
+		macroProject.addExportedPackage("annotation")
+		waitForAutoBuild()
+				
+		val userProject = JavaCore.create(
+			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
+				"org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+		userProject.newSource("client/A.xtend", '''
+			package client
+			
+			@annotation.MyAA
+			class SomeClass {
+			}
+		''')
+		
+		cleanBuild
+		waitForBuild(new NullProgressMonitor)
+		assertNoErrorsInWorkspace();
+		
+		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
+	}
+	
+	XtendLibClasspathAdder xtendLibs = new XtendLibClasspathAdder()
+	
+	private def xtendProject(String name, IJavaProject...upstreamProjects) {
+		val result = createJavaProject(name)
+		result.project.addNature(XtextProjectHelper.NATURE_ID)
+		xtendLibs.addLibsToClasspath(result, null)
+		upstreamProjects.forEach [
+			addToClasspath(result, JavaCore.newProjectEntry(getPath(), true));
+		]
+		return result
+	}
+	
+	@Test def void testClassLoaderSeesAllDepsFromReferencedProjects() {
+		val libProject = xtendProject("libProject")
+		libProject.newSource("mylib/Lib.xtend", '''
+			package mylib
+			
+			class Lib {
+				override String toString() {
+					return "HUNKELDUNKEL"
+				}
+			}
+		''')
+		
+		val macroProject = xtendProject("macroProject", xtendProject("inbetween", libProject))
+		macroProject.newSource("annotation/MyAA.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+			
+			@Active(MyAAProcessor)
+			annotation MyAA {
+			}
+			
+			class MyAAProcessor extends AbstractClassProcessor {
+				
+				override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+					annotatedClass.docComment = new mylib.Lib().toString()
+				}
+			}
+		''')
+		waitForAutoBuild()
+				
+		val userProject = xtendProject("userProject", macroProject)
+		userProject.newSource("client/A.xtend", '''
+			package client
+			
+			@annotation.MyAA
+			class SomeClass {
+			}
+		''')
+		
+		cleanBuild
+		waitForBuild(new NullProgressMonitor)
+		assertNoErrorsInWorkspace();
+		
+		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
+	}
 	
 	def IFile newSource(IJavaProject it, String fileName, String contents) {
 		val result = it.project.getFile("src/" + fileName)

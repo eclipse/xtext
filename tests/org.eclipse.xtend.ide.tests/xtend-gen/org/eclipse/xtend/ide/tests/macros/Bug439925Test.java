@@ -20,16 +20,22 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -117,6 +123,215 @@ public class Bug439925Test {
       IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject", "libProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_2);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package client");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@annotation.MyAA");
+      _builder_2.newLine();
+      _builder_2.append("class SomeClass {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.newSource(userProject, "client/A.xtend", _builder_2.toString());
+      IResourcesSetupUtil.cleanBuild();
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.assertNoErrorsInWorkspace();
+      IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
+      InputStream _contents = ((IFile) _file).getContents();
+      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
+      final String javaCode = CharStreams.toString(_inputStreamReader);
+      boolean _contains = javaCode.contains("HUNKELDUNKEL");
+      Assert.assertTrue(_contains);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testClassLoaderSeesAllUpstreamProjects_01() {
+    try {
+      IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("libProject");
+      final IJavaProject libProject = JavaCore.create(_createPluginProject);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mylib");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Lib {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override String toString() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return \"HUNKELDUNKEL\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.newSource(libProject, "mylib/Lib.xtend", _builder.toString());
+      this.addExportedPackage(libProject, "mylib");
+      IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("macroProject", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "libProject");
+      final IJavaProject macroProject = JavaCore.create(_createPluginProject_1);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package annotation");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Active(MyAAProcessor)");
+      _builder_1.newLine();
+      _builder_1.append("annotation MyAA {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class MyAAProcessor extends AbstractClassProcessor {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("annotatedClass.docComment = new mylib.Lib().toString()");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.newSource(macroProject, "annotation/MyAA.xtend", _builder_1.toString());
+      this.addExportedPackage(macroProject, "annotation");
+      IResourcesSetupUtil.waitForAutoBuild();
+      IProject _createPluginProject_2 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
+        "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
+      final IJavaProject userProject = JavaCore.create(_createPluginProject_2);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package client");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@annotation.MyAA");
+      _builder_2.newLine();
+      _builder_2.append("class SomeClass {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.newSource(userProject, "client/A.xtend", _builder_2.toString());
+      IResourcesSetupUtil.cleanBuild();
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.assertNoErrorsInWorkspace();
+      IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
+      InputStream _contents = ((IFile) _file).getContents();
+      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
+      final String javaCode = CharStreams.toString(_inputStreamReader);
+      boolean _contains = javaCode.contains("HUNKELDUNKEL");
+      Assert.assertTrue(_contains);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private XtendLibClasspathAdder xtendLibs = new XtendLibClasspathAdder();
+  
+  private IJavaProject xtendProject(final String name, final IJavaProject... upstreamProjects) {
+    try {
+      final IJavaProject result = JavaProjectSetupUtil.createJavaProject(name);
+      IProject _project = result.getProject();
+      IResourcesSetupUtil.addNature(_project, XtextProjectHelper.NATURE_ID);
+      this.xtendLibs.addLibsToClasspath(result, null);
+      final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
+        @Override
+        public void apply(final IJavaProject it) {
+          try {
+            IPath _path = it.getPath();
+            IClasspathEntry _newProjectEntry = JavaCore.newProjectEntry(_path, true);
+            JavaProjectSetupUtil.addToClasspath(result, _newProjectEntry);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        }
+      };
+      IterableExtensions.<IJavaProject>forEach(((Iterable<IJavaProject>)Conversions.doWrapArray(upstreamProjects)), _function);
+      return result;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testClassLoaderSeesAllDepsFromReferencedProjects() {
+    try {
+      final IJavaProject libProject = this.xtendProject("libProject");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mylib");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class Lib {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override String toString() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return \"HUNKELDUNKEL\"");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.newSource(libProject, "mylib/Lib.xtend", _builder.toString());
+      IJavaProject _xtendProject = this.xtendProject("inbetween", libProject);
+      final IJavaProject macroProject = this.xtendProject("macroProject", _xtendProject);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package annotation");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder_1.newLine();
+      _builder_1.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@Active(MyAAProcessor)");
+      _builder_1.newLine();
+      _builder_1.append("annotation MyAA {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class MyAAProcessor extends AbstractClassProcessor {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("annotatedClass.docComment = new mylib.Lib().toString()");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.newSource(macroProject, "annotation/MyAA.xtend", _builder_1.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      final IJavaProject userProject = this.xtendProject("userProject", macroProject);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("package client");
       _builder_2.newLine();
