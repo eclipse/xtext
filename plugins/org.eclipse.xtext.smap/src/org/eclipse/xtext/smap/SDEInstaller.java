@@ -216,17 +216,25 @@ public class SDEInstaller {
 			switch (tag) {
 				case 7: // Class
 				case 8: // String
+				case 16 : // MethodType
 					if (verbose) {
 						System.out.println(i + " copying 2 bytes");
 					}
 					copy(2);
 					break;
+                case 15 : // MethodHandle
+                	if (verbose) {
+						System.out.println(i + " copying 3 bytes");
+					}
+                    copy(3);
+                    break;
 				case 9: // Field
 				case 10: // Method
 				case 11: // InterfaceMethod
 				case 3: // Integer
 				case 4: // Float
 				case 12: // NameAndType
+				case 18 : // InvokeDynamic
 					if (verbose) {
 						System.out.println(i + " copying 4 bytes");
 					}
