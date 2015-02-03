@@ -59,9 +59,7 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected def compile(Grammar it, AntlrOptions options) '''
-		/*
 		«fileHeader»
-		*/
 		grammar «grammarFileName.toSimpleName»;
 		«compileOptions(options)»
 		«compileTokens(options)»
