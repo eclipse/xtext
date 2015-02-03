@@ -14,7 +14,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.util.Strings;
 
 /**
- * Utility class providing names and the like for general artifacts used in all Xtext projects There's a
+ * Utility class providing names and the like for general artifacts used in all Xtext projects. There's a
  * corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -30,8 +30,11 @@ public class Naming {
 	private String projectNameIde;
 	private String ideBasePackage;
 	private String lineDelimiter = Strings.newLine();
+	private String fileHeader;
 	private boolean hasUI;
 	private boolean hasIde;
+	private String classAnnotations;
+	private String annotationImports;
 	
 	
 	/**
@@ -212,6 +215,20 @@ public class Naming {
 	/**
 	 * @since 2.8
 	 */
+	public String fileHeader() {
+		return fileHeader;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setFileHeader(String fileHeader) {
+		this.fileHeader = fileHeader;
+	}
+
+	/**
+	 * @since 2.8
+	 */
 	public boolean hasUI() {
 		return hasUI;
 	}
@@ -235,6 +252,34 @@ public class Naming {
 	 */
 	public void setHasIde(boolean hasIde) {
 		this.hasIde = hasIde;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String classAnnotations() {
+		return classAnnotations;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setClassAnnotations(String classAnnotations) {
+		this.classAnnotations = classAnnotations;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String annotationImports() {
+		return annotationImports;
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setAnnotationImports(String annotationImports) {
+		this.annotationImports = annotationImports;
 	}
 	
 }
