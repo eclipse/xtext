@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  *******************************************************************************/
 package org.eclipse.xtext.generator.serializer
 
@@ -36,11 +36,11 @@ import org.eclipse.xtext.util.Strings
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 class AbstractSyntacticSequencer extends GeneratedFile {
-	
+
 	@Inject Grammar grammar
-	
+
 	@Inject extension GrammarAccess grammarAccess
-	
+
 	@Inject extension SyntacticSequencerUtil util
 	
 	@Inject extension Naming
@@ -49,12 +49,12 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	 * @since 2.8
 	 */
 	@Accessors boolean detectSyntheticTerminals = true;
-	
+
 	/**
 	 * @since 2.8
 	 */
 	@Accessors SyntheticTerminalDetector syntheticTerminalDetector
-	
+
 	override getFileContents(SerializerGenFileNames.GenFileName filename) {
 		val file = new JavaFile(filename.packageName, fileHeader);
 		
@@ -76,79 +76,84 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			public «_abstract»class «filename.simpleName» extends AbstractSyntacticSequencer {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
-				«FOR group:util.allAmbiguousTransitionsBySyntax»
-					protected «file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias")» match_«group.first»;
+				«FOR group : util.allAmbiguousTransitionsBySyntax»
+					protected «file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias")» match_«group.identifyer»;
 				«ENDFOR»
 				
 				@Inject
 				protected void init(IGrammarAccess access) {
 					grammarAccess = («file.imported(grammar.gaFQName)») access;
-					«FOR group:util.allAmbiguousTransitionsBySyntax»
-						match_«group.first» = « group.second.elementAliasToConstructor(file)»;
+					«FOR group : util.allAmbiguousTransitionsBySyntax»
+						match_«group.identifyer» = « group.elementAlias.elementAliasToConstructor(file)»;
 					«ENDFOR»
 				}
 				
 				«file.genGetUnassignedRuleCallTokens()»
 				
-				«FOR rule:unassignedCalledTokenRules SEPARATOR "\n"»
+				«FOR rule : unassignedCalledTokenRules SEPARATOR "\n"»
 					«file.genGetUnassignedRuleCallToken(rule, filename.isAbstract)»
 				«ENDFOR»
 				
 				«file.genEmitUnassignedTokens()»
 			
-				«FOR group:util.allAmbiguousTransitionsBySyntax»
+				«FOR group : util.allAmbiguousTransitionsBySyntax»
 					/**
-					 * Syntax:
-					 *     «group.second»
+					 * Ambiguous syntax:
+					 *     «group.elementAlias.toString.replace("\n", "\n *     ")»
+					 *
+					 * This ambiguous syntax occurs at:
+					 «FOR trans:group.transitions.map[group.ambiguityInsideTransition(it).trim].toSet.sort»
+					 	*     «trans.toString.replace("\n", "\n*     ")»
+					 «ENDFOR»
 					 */
-					protected void emit_«group.first»(EObject semanticObject, «file.imported(ISyntacticSequencerPDAProvider.ISynNavigable)» transition, List<INode> nodes) {
+					protected void emit_«group.identifyer»(EObject semanticObject, «file.imported(ISyntacticSequencerPDAProvider.ISynNavigable)» transition, List<INode> nodes) {
 						acceptNodes(transition, nodes);
 					}
 					
 				«ENDFOR»
 			}
-		'''.toString; 
-		file.toString 
+		'''.toString;
+		file.toString
 	}
-	
+
 	def List<AbstractRule> unassignedCalledTokenRules() {
 		val rules = grammar.allRules.filter[EObjectRule]
 		val calls = rules.map(r|r.containedRuleCalls.filter(e|isUnassignedRuleCall(e))).flatten
 		calls.map[rule].toSet.sortBy[name]
 	}
-	
+
 	def boolean isUnassignedRuleCall(RuleCall c) {
 		if(c.isEObjectRuleCall()) return false
 		val ass = c.containingAssignment
-		ass == null || ass.isBooleanAssignment 
+		ass == null || ass.isBooleanAssignment
 	}
-	
+
 	def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''
-	
+
 	def String defaultValue(AbstractElement ele, Set<AbstractElement> visited) {
-		switch(ele) {
+		switch (ele) {
 			case !visited.add(ele): ""
 			case ele.isOptionalCardinality(): ""
 			Alternatives: ele.elements.head.defaultValue(visited)
-			Group:  	  ele.elements.map(e|e.defaultValue(visited)).join()
-			Keyword:	  ele.value
-			RuleCall:     ele.rule.alternatives.defaultValue(visited)
-			default:	  ""
+			Group: ele.elements.map(e|e.defaultValue(visited)).join()
+			Keyword: ele.value
+			RuleCall: ele.rule.alternatives.defaultValue(visited)
+			default: ""
 		}
 	}
-	
+
 	def genGetUnassignedRuleCallTokens(JavaFile file) '''
 		@Override
 		protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 			«var i = 0»
-			«FOR rule:unassignedCalledTokenRules»
+			«FOR rule : unassignedCalledTokenRules»
 				«IF (i = i + 1) > 1»else «ENDIF»if(ruleCall.getRule() == grammarAccess.«rule.gaAccessor»)
 					return «rule.unassignedCalledTokenRuleName»(semanticObject, ruleCall, node);
 			«ENDFOR»
 			return "";
 		}
 	'''
-	
+
 	def String textWithoutComments(INode node) {
 		switch node {
 			ILeafNode case !node.hidden || node.text.trim.length == 0: node.text
@@ -156,7 +161,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			default: ""
 		}
 	}
-	
+
 	def genGetUnassignedRuleCallToken(JavaFile file, AbstractRule rule, boolean isAbstract) {
 		if (rule instanceof TerminalRule) {
 			if (detectSyntheticTerminals && syntheticTerminalDetector.isSyntheticTerminalRule(rule)) {
@@ -165,8 +170,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 					 * Synthetic terminal rule. The concrete syntax is to be specified by clients.
 					«IF !isAbstract» * Defaults to the empty string.«ENDIF»
 					 */
-					protected «IF isAbstract»abstract «ENDIF»String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node)«
-						IF isAbstract»;«ELSE» { return ""; }«ENDIF»
+					protected «IF isAbstract»abstract «ENDIF»String «rule.unassignedCalledTokenRuleName»(EObject semanticObject, RuleCall ruleCall, INode node)«IF isAbstract»;«ELSE» { return ""; }«ENDIF»
 				'''
 			}
 		}
@@ -181,7 +185,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			}
 		'''
 	}
-	
+
 	def genEmitUnassignedTokens(JavaFile file) '''
 		@Override
 		protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -190,9 +194,9 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 				List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 				«var i = 0»
-				«FOR group:util.allAmbiguousTransitionsBySyntax»
-					«IF (i = i + 1) > 1»else «ENDIF»if(match_«group.first».equals(syntax))
-						emit_«group.first»(semanticObject, getLastNavigableState(), syntaxNodes);
+				«FOR group : util.allAmbiguousTransitionsBySyntax»
+					«IF (i = i + 1) > 1»else «ENDIF»if(match_«group.identifyer».equals(syntax))
+						emit_«group.identifyer»(semanticObject, getLastNavigableState(), syntaxNodes);
 				«ENDFOR»
 				«IF i > 0»else «ENDIF»acceptNodes(getLastNavigableState(), syntaxNodes);
 			}
