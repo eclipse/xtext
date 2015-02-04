@@ -97,6 +97,35 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui.zip"  description="Contains Eclipse IDE integration (i.e. editor)"/>
 	  </example>
    </extension>
+
+	<!-- ========= org.eclipse.xtext.example.homeautomation ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" 
+			name="%HomeAutomationExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
+			icon="icons/genproject.gif"
+			project="true">
+			<description>%HomeAutomationExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" 
+			name="%HomeAutomationExample_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%HomeAutomationExample_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.xtext.examples.NewHomeAutomationExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.homeautomation" contentURI="contents/org.eclipse.xtext.example.homeautomation.zip" description="Contains the parser, serializer, linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.homeautomation.tests" contentURI="contents/org.eclipse.xtext.example.homeautomation.tests.zip" description="The test bundle for the language"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.homeautomation.ui" contentURI="contents/org.eclipse.xtext.example.homeautomation.ui.zip" description="Contains Eclipse IDE integration (i.e. editor)"/>
+	  </example>
+	</extension>
    
    <!-- ========= org.eclipse.xtext.example.xbase.tutorial ========= -->
 	<extension point="org.eclipse.ui.newWizards">

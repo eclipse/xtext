@@ -54,6 +54,9 @@ public interface IHiddenRegionFormatter {
 
 	void setOnAutowrap(IAutowrapFormatter formatter);
 
+	/**
+	 * The priority of this formatter; the default value is {@link #NORMAL_PRIORITY}.
+	 */
 	void setPriority(int priority);
 
 	void setSpace(String space);

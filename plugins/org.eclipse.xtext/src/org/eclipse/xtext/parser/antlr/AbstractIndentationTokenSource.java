@@ -50,14 +50,20 @@ public abstract class AbstractIndentationTokenSource extends AbstractSplittingTo
 	@Override
 	protected void doSplitToken(Token token, ITokenAcceptor result) {
 		if (token.getType() == Token.EOF) {
-			while(indentationStack.size() > 1) {
-				indentationStack.pop();
-				result.accept(createEndToken(nextOffset));
+			if (shouldEmitPendingEndTokens()) {
+				while(indentationStack.size() > 1) {
+					indentationStack.pop();
+					result.accept(createEndToken(nextOffset));
+				}
 			}
 			result.accept(token);
 			return;
 		}
 		doSplitTokenImpl(token, result);
+	}
+	
+	protected boolean shouldEmitPendingEndTokens() {
+		return true;
 	}
 	
 	@Override
