@@ -31,9 +31,7 @@
 «ENDDEFINE»
 
 «DEFINE doGenerate(String macros, String rules, String parserName) FOR Grammar-»
-/*
 «fileHeader()»
-*/
 package «parserName.toJavaPackage()»;
 
 import static «parserName»Parser.*;

@@ -19,9 +19,7 @@
 
 «AROUND org::eclipse::xtext::generator::parser::antlr::AntlrContentAssistGrammar::grammar(AntlrOptions options) FOR Grammar»
 «FILE getGrammarFileName().asPath()+".g" SRC_GEN_IDE-»
-/*
 «fileHeader()»
-*/
 grammar «getGrammarFileName().toSimpleName()»;
 
 options {
