@@ -10,9 +10,14 @@ package org.eclipse.xtend.ide.macro
 import java.io.File
 import java.net.URL
 import java.net.URLClassLoader
+import java.util.LinkedHashSet
 import java.util.List
+import java.util.Set
+import org.eclipse.core.runtime.IPath
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
+import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.macro.TransformationContext
@@ -38,9 +43,39 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	}
 	
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
-		val classPathEntries = JavaRuntime.computeDefaultRuntimeClassPath(projectToUse)
+		val classPathEntries = <String>newLinkedHashSet
+		deepCollectRuntimeClassPath(projectToUse, newHashSet, classPathEntries)
+		// remove local output folders, as they are in an inconsistent state
+		removeLocalOutputFolders(projectToUse, classPathEntries)
 		val List<URL> urls = classPathEntries.map[new File(it).toURI.toURL].toList
 		return new URLClassLoader(urls, getParentClassLoader())
+	}
+	
+	protected def removeLocalOutputFolders(IJavaProject project, LinkedHashSet<String> classPathEntries) {
+		for (classpathEntry : project.rawClasspath) {
+			if (classpathEntry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+				var IPath path=classpathEntry.getOutputLocation() 
+				if (path != null) {
+					val outputfolder = project.project.workspace.root.getFolder(path)
+					classPathEntries.remove(outputfolder.location.toString) 
+				}
+			}
+		}
+		val outputfolder = project.project.workspace.root.getFolder(project.outputLocation)
+		classPathEntries.remove(outputfolder.location.toString)
+	}
+	
+	private def void deepCollectRuntimeClassPath(IJavaProject project, Set<IJavaProject> visitedProjects, LinkedHashSet<String> allEntries) {
+		visitedProjects.add(project);
+		val entries = JavaRuntime.computeDefaultRuntimeClassPath(project)
+		allEntries.addAll(entries)
+		for (requiredProjectName : project.requiredProjectNames) {
+			val reqProject = project.project.workspace.root.getProject(requiredProjectName);
+			val javaReqProject = JavaCore.create(reqProject)
+			if (javaReqProject.isOpen) {
+				deepCollectRuntimeClassPath(javaReqProject, visitedProjects, allEntries)
+			}
+		}
 	}
 	
 	protected def getParentClassLoader() {
