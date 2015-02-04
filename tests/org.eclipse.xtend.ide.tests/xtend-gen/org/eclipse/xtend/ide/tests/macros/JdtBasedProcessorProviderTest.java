@@ -44,7 +44,7 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class Bug439925Test {
+public class JdtBasedProcessorProviderTest {
   @After
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
@@ -352,6 +352,92 @@ public class Bug439925Test {
       InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
       final String javaCode = CharStreams.toString(_inputStreamReader);
       boolean _contains = javaCode.contains("HUNKELDUNKEL");
+      Assert.assertTrue(_contains);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testClassLoaderDoesNotSeeLocalClasses() {
+    try {
+      final IJavaProject macroProject = this.xtendProject("macroProject");
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package annotation");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(MyAAProcessor)");
+      _builder.newLine();
+      _builder.append("annotation MyAA {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class MyAAProcessor extends AbstractClassProcessor {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("try {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("Class.forName(\"client.B\")");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("} catch (ClassNotFoundException e) {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("annotatedClass.docComment = \'classnotfound\'");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.newSource(macroProject, "annotation/MyAA.xtend", _builder.toString());
+      IResourcesSetupUtil.waitForAutoBuild();
+      final IJavaProject userProject = this.xtendProject("userProject", macroProject);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package client;");
+      _builder_1.newLine();
+      _builder_1.append("public class B {}");
+      _builder_1.newLine();
+      this.newSource(userProject, "client/B.java", _builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package client");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("@annotation.MyAA");
+      _builder_2.newLine();
+      _builder_2.append("class SomeClass {");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.newSource(userProject, "client/A.xtend", _builder_2.toString());
+      IResourcesSetupUtil.cleanBuild();
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      IResourcesSetupUtil.waitForBuild(_nullProgressMonitor);
+      IResourcesSetupUtil.assertNoErrorsInWorkspace();
+      IResource _file = IResourcesSetupUtil.file("userProject/xtend-gen/client/SomeClass.java");
+      InputStream _contents = ((IFile) _file).getContents();
+      InputStreamReader _inputStreamReader = new InputStreamReader(_contents);
+      final String javaCode = CharStreams.toString(_inputStreamReader);
+      boolean _contains = javaCode.contains("classnotfound");
       Assert.assertTrue(_contains);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

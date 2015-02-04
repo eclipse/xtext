@@ -33,7 +33,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-class Bug439925Test {
+class JdtBasedProcessorProviderTest {
 	
 	@After def tearDown() throws Exception {
 		cleanWorkspace();
@@ -215,6 +215,55 @@ class Bug439925Test {
 		
 		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
 		Assert.assertTrue(javaCode.contains("HUNKELDUNKEL"))
+	}
+	
+	@Test def void testClassLoaderDoesNotSeeLocalClasses() {
+		
+		val macroProject = xtendProject("macroProject")
+		macroProject.newSource("annotation/MyAA.xtend", '''
+			package annotation
+			
+			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+			import org.eclipse.xtend.lib.macro.Active
+			import org.eclipse.xtend.lib.macro.TransformationContext
+			import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+			
+			@Active(MyAAProcessor)
+			annotation MyAA {
+			}
+			
+			class MyAAProcessor extends AbstractClassProcessor {
+				
+				override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+					try {
+						Class.forName("client.B")
+					} catch (ClassNotFoundException e) {
+						annotatedClass.docComment = 'classnotfound'
+					}
+				}
+			}
+		''')
+		waitForAutoBuild()
+				
+		val userProject = xtendProject("userProject", macroProject)
+		userProject.newSource("client/B.java", '''
+			package client;
+			public class B {}
+		''')
+		userProject.newSource("client/A.xtend", '''
+			package client
+			
+			@annotation.MyAA
+			class SomeClass {
+			}
+		''')
+		
+		cleanBuild
+		waitForBuild(new NullProgressMonitor)
+		assertNoErrorsInWorkspace();
+		
+		val javaCode = CharStreams.toString(new InputStreamReader((file("userProject/xtend-gen/client/SomeClass.java") as IFile).contents))
+		Assert.assertTrue(javaCode.contains("classnotfound"))
 	}
 	
 	def IFile newSource(IJavaProject it, String fileName, String contents) {
