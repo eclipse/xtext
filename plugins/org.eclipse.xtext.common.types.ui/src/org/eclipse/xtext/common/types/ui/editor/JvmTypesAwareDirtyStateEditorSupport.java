@@ -10,7 +10,6 @@ package org.eclipse.xtext.common.types.ui.editor;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
@@ -29,10 +28,7 @@ public class JvmTypesAwareDirtyStateEditorSupport extends DirtyStateEditorSuppor
 		if(delta.getNew() != null){
 			Iterable<IEObjectDescription> exportedJvmTypes = delta.getNew().getExportedObjectsByType(TypesPackage.Literals.JVM_GENERIC_TYPE);
 			for(IEObjectDescription jvmTypeDesc : exportedJvmTypes){
-				URI uriToJvmType = URIHelperConstants.OBJECTS_URI.appendSegment(jvmTypeDesc.getQualifiedName().toString());
-				Resource jvmResourceInResourceSet = resourceSet.getResource(uriToJvmType, false);
-				if(jvmResourceInResourceSet != null)
-					normalizedURIs.add(jvmResourceInResourceSet.getURI());
+				normalizedURIs.add(URIHelperConstants.OBJECTS_URI.appendSegment(jvmTypeDesc.getQualifiedName().toString()));
 			}
 		}
 	}
