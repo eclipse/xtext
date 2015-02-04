@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.ui.editor;
 
-import java.util.Set;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,15 +24,16 @@ import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 public class JvmTypesAwareDirtyStateEditorSupport extends DirtyStateEditorSupport {
 	
 	@Override
-	protected void processDelta(IResourceDescription.Delta delta, ResourceSet resourceSet, Set<URI> normalizedURIs) {
-		super.processDelta(delta, resourceSet, normalizedURIs);
+	protected void processDelta(IResourceDescription.Delta delta, Resource context, List<Resource> result) {
+		super.processDelta(delta, context, result);
+		ResourceSet resourceSet = context.getResourceSet();
 		if(delta.getNew() != null){
 			Iterable<IEObjectDescription> exportedJvmTypes = delta.getNew().getExportedObjectsByType(TypesPackage.Literals.JVM_GENERIC_TYPE);
 			for(IEObjectDescription jvmTypeDesc : exportedJvmTypes){
 				URI uriToJvmType = URIHelperConstants.OBJECTS_URI.appendSegment(jvmTypeDesc.getQualifiedName().toString());
 				Resource jvmResourceInResourceSet = resourceSet.getResource(uriToJvmType, false);
 				if(jvmResourceInResourceSet != null)
-					normalizedURIs.add(jvmResourceInResourceSet.getURI());
+					result.add(jvmResourceInResourceSet);
 			}
 		}
 	}
