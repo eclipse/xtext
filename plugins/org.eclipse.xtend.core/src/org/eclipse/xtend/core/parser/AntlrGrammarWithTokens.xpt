@@ -24,9 +24,7 @@
 «targetDef.proceed()»
 «ELSE»
 «FILE (getGrammarFileName().toJavaPackage() + "." + getGrammarFileName().toSimpleName()).asPath()+".g" SRC_GEN-»
-/*
 «fileHeader()»
-*/
 grammar «getGrammarFileName().toSimpleName()»;
 
 options {
