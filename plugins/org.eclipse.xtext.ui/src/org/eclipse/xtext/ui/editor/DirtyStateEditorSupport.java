@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
@@ -600,27 +599,31 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event) {
 		List<Resource> result = Lists.newArrayListWithExpectedSize(4);
-		ResourceSet resourceSet = resource.getResourceSet();
-		URIConverter converter = resourceSet.getURIConverter();
 		Set<URI> normalizedURIs = Sets.newHashSetWithExpectedSize(event.getDeltas().size());
+		ResourceSet resourceSet = resource.getResourceSet();
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
-			normalizedURIs.add(converter.normalize(delta.getUri()));
+			processDelta(delta, resourceSet, normalizedURIs);
 		}
 		List<Resource> resources = resourceSet.getResources();
 		for(int i = 0; i< resources.size(); i++) {
 			Resource res = resources.get(i);
 			if (res != resource && res != null) {
 				URI uri = res.getURI();
-				try {
-					uri = converter.normalize(uri);
-				} catch (org.eclipse.xtext.resource.ClasspathUriResolutionException e) {
-					// ignore, since the classpath might be broken.
-				}
 				if (normalizedURIs.contains(uri))
 					result.add(res);
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * @since 2.8
+	 */
+	protected void processDelta(IResourceDescription.Delta delta, ResourceSet resourceSet, Set<URI> normalizedURIs) {
+		Resource resourceInResourceSet = resourceSet.getResource(delta.getUri(), false);
+		if(resourceInResourceSet != null) {
+			normalizedURIs.add(resourceInResourceSet.getURI());
+		}
 	}
 	
 	protected boolean isReparseRequired(XtextResource resource, IResourceDescription.Event event) {
