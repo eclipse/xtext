@@ -58,6 +58,10 @@
       value="http://download.eclipse.org/modeling/emf/emf/updates/milestones"/>
   <setupTask
       xsi:type="setup:VariableTask"
+      name="antlr-gen.update.site"
+      value="http://download.itemis.com/updates/releases/2.1.1/"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
       type="URI"
       name="draw2d.p2.repository"
       value="http://download.eclipse.org/tools/gef/updates/releases"
@@ -276,7 +280,7 @@
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.0/"/>
+            url="${antlr-gen.update.site}"/>
         <repository
             url="http://download.eclipse.org/tools/gef/updates/milestones"/>
         <repository
@@ -293,8 +297,6 @@
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.0/"/>
-        <repository
             url="http://download.eclipse.org/tools/gef/updates/milestones"/>
         <repository
             url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
@@ -304,14 +306,14 @@
             url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
         <repository
             url="${emf.update.site}"/>
+        <repository
+            url="${antlr-gen.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Kepler">
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.0/"/>
-        <repository
             url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -321,14 +323,14 @@
             url="${emf.update.site}"/>
         <repository
             url="${draw2d.p2.repository}"/>
+        <repository
+            url="${antlr-gen.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Juno">
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.0/"/>
-        <repository
             url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -338,14 +340,14 @@
             url="${emf.update.site}"/>
         <repository
             url="${draw2d.p2.repository}"/>
+        <repository
+            url="${antlr-gen.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Indigo">
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.0/"/>
-        <repository
             url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -355,14 +357,14 @@
             url="${emf.update.site}"/>
         <repository
             url="${draw2d.p2.repository}"/>
+        <repository
+            url="${antlr-gen.update.site}"/>
       </repositoryList>
       <repositoryList
           name="Helios">
         <repository
             url="${xtext.nightly.composite}"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.0/"/>
-        <repository
             url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
         <repository
             url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
@@ -372,6 +374,8 @@
             url="${emf.update.site}"/>
         <repository
             url="${draw2d.p2.repository}"/>
+        <repository
+            url="${antlr-gen.update.site}"/>
       </repositoryList>
     </targlet>
     <description>Target platform</description>
