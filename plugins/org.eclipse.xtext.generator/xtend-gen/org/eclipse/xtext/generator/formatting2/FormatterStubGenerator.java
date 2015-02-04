@@ -12,8 +12,10 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EReference;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.generator.IInheriting;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
 import org.eclipse.xtext.generator.serializer.JavaEMFFile;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -111,9 +114,8 @@ public class FormatterStubGenerator {
     }
   }
   
-  public Multimap<EClass, EReference> getLocalyAssignedContainmentReferences() {
-    final LinkedHashMultimap<EClass, EReference> result = LinkedHashMultimap.<EClass, EReference>create();
-    List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(this.grammar);
+  protected void getLocallyAssignedContainmentReferences(final Grammar grammar, final Multimap<EClass, EReference> type2ref) {
+    List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(grammar);
     for (final Assignment assignment : _containedAssignments) {
       {
         final EClassifier type = GrammarUtil.findCurrentType(assignment);
@@ -128,12 +130,12 @@ public class FormatterStubGenerator {
             _and = _isContainment;
           }
           if (_and) {
-            result.put(((EClass)type), ((EReference) feature));
+            type2ref.put(((EClass)type), ((EReference) feature));
           }
         }
       }
     }
-    List<Action> _containedActions = GrammarUtil.containedActions(this.grammar);
+    List<Action> _containedActions = GrammarUtil.containedActions(grammar);
     for (final Action action : _containedActions) {
       {
         final String featureName = action.getFeature();
@@ -151,23 +153,40 @@ public class FormatterStubGenerator {
               _and = _isContainment;
             }
             if (_and) {
-              result.put(((EClass)type), ((EReference) feature));
+              type2ref.put(((EClass)type), ((EReference) feature));
             }
           }
         }
       }
     }
-    return result;
+  }
+  
+  protected void getInheritedContainmentReferences(final Grammar grammar, final Multimap<EClass, EReference> type2ref, final Set<Grammar> visitedGrammars) {
+    visitedGrammars.add(grammar);
+    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
+    for (final Grammar usedGrammar : _usedGrammars) {
+      boolean _contains = visitedGrammars.contains(usedGrammar);
+      boolean _not = (!_contains);
+      if (_not) {
+        this.getLocallyAssignedContainmentReferences(usedGrammar, type2ref);
+        this.getInheritedContainmentReferences(usedGrammar, type2ref, visitedGrammars);
+      }
+    }
   }
   
   public String generateStubFileContents() {
     Resource _eResource = this.grammar.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     String _stubPackageName = this.getStubPackageName();
+    String _fileHeader = this.service.naming.fileHeader();
     @Extension
-    final JavaEMFFile file = new JavaEMFFile(_resourceSet, _stubPackageName);
+    final JavaEMFFile file = new JavaEMFFile(_resourceSet, _stubPackageName, _fileHeader);
     file.imported(IFormattableDocument.class);
-    final Multimap<EClass, EReference> type2ref = this.getLocalyAssignedContainmentReferences();
+    final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
+    this.getLocallyAssignedContainmentReferences(this.grammar, type2ref);
+    final LinkedHashMultimap<EClass, EReference> inheritedTypes = LinkedHashMultimap.<EClass, EReference>create();
+    HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
+    this.getInheritedContainmentReferences(this.grammar, inheritedTypes, _newHashSet);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     String _stubSimpleName = this.getStubSimpleName();
@@ -194,8 +213,9 @@ public class FormatterStubGenerator {
       for(final EClass type : _keySet) {
         _builder.newLine();
         _builder.append("\t");
-        Collection<EReference> _get = type2ref.get(type);
-        CharSequence _generateFormatMethod = this.generateFormatMethod(type, file, _get);
+        Set<EReference> _get = type2ref.get(type);
+        boolean _containsKey = inheritedTypes.containsKey(type);
+        CharSequence _generateFormatMethod = this.generateFormatMethod(type, file, _get, _containsKey);
         _builder.append(_generateFormatMethod, "\t");
         _builder.newLineIfNotEmpty();
       }
@@ -206,14 +226,21 @@ public class FormatterStubGenerator {
     return file.toString();
   }
   
-  public String toName(final EClass clazz) {
+  protected String toName(final EClass clazz) {
     String _name = clazz.getName();
     return _name.toLowerCase();
   }
   
-  public CharSequence generateFormatMethod(final EClass clazz, @Extension final JavaEMFFile file, final Collection<EReference> containmentRefs) {
+  protected CharSequence generateFormatMethod(final EClass clazz, @Extension final JavaEMFFile file, final Collection<EReference> containmentRefs, final boolean isOverriding) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("def dispatch void format(");
+    {
+      if (isOverriding) {
+        _builder.append("override");
+      } else {
+        _builder.append("def");
+      }
+    }
+    _builder.append(" dispatch void format(");
     String _importedGenTypeName = file.importedGenTypeName(clazz);
     _builder.append(_importedGenTypeName, "");
     _builder.append(" ");

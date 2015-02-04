@@ -24,6 +24,7 @@ import org.eclipse.xtext.generator.serializer.JavaEMFFile
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.IInheriting.Util.*
+import java.util.Set
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -64,14 +65,13 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 			return AbstractFormatter2.name
 	}
 
-	def Multimap<EClass, EReference> getLocalyAssignedContainmentReferences() {
-		val result = LinkedHashMultimap.<EClass, EReference>create
+	protected def void getLocallyAssignedContainmentReferences(Grammar grammar, Multimap<EClass, EReference> type2ref) {
 		for (assignment : grammar.containedAssignments) {
 			val type = assignment.findCurrentType
 			if (type instanceof EClass) {
 				val feature = type.getEStructuralFeature(assignment.feature)
 				if (feature instanceof EReference && (feature as EReference).isContainment) {
-					result.put(type, feature as EReference)
+					type2ref.put(type, feature as EReference)
 				}
 			}
 		}
@@ -82,38 +82,51 @@ import static extension org.eclipse.xtext.generator.IInheriting.Util.*
 				if (type instanceof EClass) {
 					val feature = type.getEStructuralFeature(featureName)
 					if (feature instanceof EReference && (feature as EReference).isContainment) {
-						result.put(type, feature as EReference)
+						type2ref.put(type, feature as EReference)
 					}
 				}
 			}
 		}
-		return result
+	}
+	
+	protected def void getInheritedContainmentReferences(Grammar grammar, Multimap<EClass, EReference> type2ref, Set<Grammar> visitedGrammars) {
+		visitedGrammars.add(grammar)
+		for (Grammar usedGrammar : grammar.usedGrammars) {
+			if (!visitedGrammars.contains(usedGrammar)) {
+				getLocallyAssignedContainmentReferences(usedGrammar, type2ref)
+				getInheritedContainmentReferences(usedGrammar, type2ref, visitedGrammars)
+			}
+		}
 	}
 
 	def String generateStubFileContents() {
-		val extension file = new JavaEMFFile(grammar.eResource.resourceSet, stubPackageName);
+		val extension file = new JavaEMFFile(grammar.eResource.resourceSet, stubPackageName, service.naming.fileHeader);
 		file.imported(IFormattableDocument)
 
-		val type2ref = getLocalyAssignedContainmentReferences
+		val type2ref = LinkedHashMultimap.<EClass, EReference>create
+		getLocallyAssignedContainmentReferences(grammar, type2ref)
+		val inheritedTypes = LinkedHashMultimap.<EClass, EReference>create
+		getInheritedContainmentReferences(grammar, inheritedTypes, newHashSet)
+		
 		file.body = '''
 			class «stubSimpleName» extends «stubSuperClassName.imported» {
 				
 				@«Inject.imported» extension «GrammarAccessUtil.getGrammarAccessFQName(grammar, service.naming).imported»
 				«FOR type : type2ref.keySet»
 
-					«type.generateFormatMethod(file, type2ref.get(type))»
+					«type.generateFormatMethod(file, type2ref.get(type), inheritedTypes.containsKey(type))»
 				«ENDFOR»	
 			}
 		'''
 		return file.toString
 	}
 	
-	def String toName(EClass clazz) {
+	protected def String toName(EClass clazz) {
 		clazz.name.toLowerCase
 	}
-		
-	def generateFormatMethod(EClass clazz, extension JavaEMFFile file, Collection<EReference> containmentRefs) '''
-		def dispatch void format(«clazz.importedGenTypeName» «clazz.toName», extension IFormattableDocument document) {
+	
+	protected def generateFormatMethod(EClass clazz, extension JavaEMFFile file, Collection<EReference> containmentRefs, boolean isOverriding) '''
+		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz.importedGenTypeName» «clazz.toName», extension IFormattableDocument document) {
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
