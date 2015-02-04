@@ -1,0 +1,31 @@
+grammar org.eclipse.xtext.example.homeautomation.RuleEngine with org.eclipse.xtext.xbase.Xbase
+
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+generate ruleEngine "http://www.eclipse.org/Xtext/example/RuleEngine"
+
+Model:
+	declarations+=Declaration*;
+
+Declaration:
+	Device | Rule;
+
+Device:
+	'Device' name=ID 'can' 'be'
+		(states+=State (',' states+=State)*)?;
+
+State:
+	name=ID ;
+
+Rule:
+	'Rule' description=STRING
+		'when' deviceState=[State|QualifiedName]
+		'then' thenPart=XBlockExpression;
+
+XBlockExpression returns xbase::XExpression: 
+	{xbase::XBlockExpression}
+	BEGIN
+		(expressions+=XExpressionOrVarDeclaration ';'?)*
+	END;
+
+terminal BEGIN: 'synthetic:BEGIN';
+terminal END: 'synthetic:END';
