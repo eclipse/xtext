@@ -28,6 +28,10 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
 
+«IF allTerminalRules().exists(tr|helper.isSyntheticTerminalRule(tr))-»
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.TokenSource;
+«ENDIF-»
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import «getParserSuperClassName(partialParsing)»;
