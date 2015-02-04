@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
+import org.eclipse.xtext.common.types.ui.editor.JvmTypesAwareDirtyStateEditorSupport;
 import org.eclipse.xtext.common.types.ui.query.IJavaSearchParticipation;
 import org.eclipse.xtext.common.types.ui.refactoring.JvmRefactoringResourceSetProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator;
 import org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider;
 import org.eclipse.xtext.ui.DefaultUiModule;
+import org.eclipse.xtext.ui.editor.DirtyStateEditorSupport;
 import org.eclipse.xtext.ui.editor.IValidationJobScheduler;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
@@ -75,5 +77,9 @@ public class DefaultCommonTypesUiModule extends DefaultUiModule {
 
 	public Class<? extends IJavaSearchParticipation> bindIJavaSearchParticipation() {
 		return IJavaSearchParticipation.Yes.class;
+	}
+	
+	public Class<? extends DirtyStateEditorSupport> bindDirtyStateEditorSupport(){
+		return JvmTypesAwareDirtyStateEditorSupport.class;
 	}
 }
