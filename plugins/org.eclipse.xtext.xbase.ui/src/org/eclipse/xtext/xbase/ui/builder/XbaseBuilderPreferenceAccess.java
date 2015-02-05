@@ -77,7 +77,7 @@ public class XbaseBuilderPreferenceAccess {
 			generatorConfig.setIncludeDateInGeneratedAnnotation(preferenceStore.getBoolean(PREF_DATE_IN_GENERATED));
 			generatorConfig.setGeneratedAnnotationComment(preferenceStore.getString(PREF_GENERATED_COMMENT));
 		}
-		generatorConfig.setTargetVersion(getJavaVersion(context, preferenceStore));
+		generatorConfig.setJavaSourceVersion(getJavaVersion(context, preferenceStore));
 	}
 
 	public JavaVersion getJavaVersion(Object context, IPreferenceStore preferenceStore) {

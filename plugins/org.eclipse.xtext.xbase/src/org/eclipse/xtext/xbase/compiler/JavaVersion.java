@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.List;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+
 /**
  * Enumeration of Java language versions. This is likely to be extended as new versions are released.
  * 
@@ -15,41 +20,56 @@ package org.eclipse.xtext.xbase.compiler;
 public enum JavaVersion {
 
 	/**
-	 * Java 5 language enhancements: generics, simplified for-loop, autoboxing and unboxing, enums,
-	 * varargs, static import, annotations.
+	 * Java 5 language enhancements: generics, simplified for-loop, autoboxing and unboxing, enums, varargs, static
+	 * import, annotations.
 	 */
-	JAVA5("Java 5"),
-	
+	JAVA5("Java 5", "1.5"),
+
 	/**
 	 * Java 6 language enhancements: Override annotations for implemented methods.
 	 */
-	JAVA6("Java 6"),
-	
+	JAVA6("Java 6", "1.6"),
+
 	/**
-	 * Java 7 language enhancements: extended numeric literals, switch over strings, type inference,
-	 * try-with-resources, catch multiple exceptions.
+	 * Java 7 language enhancements: extended numeric literals, switch over strings, type inference, try-with-resources,
+	 * catch multiple exceptions.
 	 */
-	JAVA7("Java 7"),
-	
+	JAVA7("Java 7", "1.7"),
+
 	/**
-	 * Java 8 language enhancements: lambda expressions, better type inference, more flexible
-	 * annotations.
+	 * Java 8 language enhancements: lambda expressions, better type inference, more flexible annotations.
 	 */
-	JAVA8("Java 8");
-	
+	JAVA8("Java 8", "1.8");
+
 	private final String label;
-	
-	JavaVersion(String label) {
+	private final String qualifyer;
+
+	JavaVersion(String label, String qualifier) {
 		this.label = label;
+		this.qualifyer = qualifier;
 	}
-	
+
+	public static JavaVersion fromQualifier(String qualifier) {
+		for (JavaVersion version : JavaVersion.values())
+			if (version.qualifyer.equals(qualifier))
+				return version;
+		List<String> qualifiers = Lists.newArrayList();
+		for (JavaVersion version : JavaVersion.values())
+			qualifiers.add(version.getQualifier());
+		throw new RuntimeException("Unknonw Java Version Qualifier:" + qualifier + ". Valid values are:" + Joiner.on(", ").join(qualifiers));
+	}
+
 	public String getLabel() {
 		return label;
 	}
-	
+
+	public String getQualifier() {
+		return qualifyer;
+	}
+
 	public boolean isAtLeast(JavaVersion other) {
 		// This implementation relies on the correct order of declaration of the enum constants
 		return this.ordinal() >= other.ordinal();
 	}
-	
+
 }

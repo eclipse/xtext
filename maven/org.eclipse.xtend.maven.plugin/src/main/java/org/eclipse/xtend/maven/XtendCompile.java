@@ -11,7 +11,6 @@ import java.util.Set;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
@@ -56,15 +55,11 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 			});
 		}
 		outputDirectory = resolveToBaseDir(outputDirectory);
-		compileSources(getConfiguredBatchCompiler());
-	}
-
-	private void compileSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		compileSourceRoots.remove(outputDirectory);
 		String classPath = concat(File.pathSeparator, getClassPath());
 		project.addCompileSourceRoot(outputDirectory);
-		compile(xtend2BatchCompiler, classPath, compileSourceRoots, outputDirectory);
+		compile(classPath, compileSourceRoots, outputDirectory);
 	}
 
 	@SuppressWarnings("deprecation")

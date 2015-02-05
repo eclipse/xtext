@@ -95,6 +95,19 @@ public class XtendCompilerMojoIT {
 		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendA.java");
 		verifier.assertFilePresent(outputdir + "src/test/generated-sources/xtend/tests/XtendC.java");
 	}
+	
+	@Test
+	public void suppressWarningsAnnotation() throws Exception {
+		Verifier verifier = newVerifier(ROOT + "/suppress_warnings_annotation");
+		System.out.println(verifier.getLogFileName());
+		verifier.setDebug(true);
+		verifier.setForkJvm(false);
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+		String outputdir = verifier.getBasedir() + "/";
+		assertFileDoesNotContain(verifier, outputdir + "src/main/generated-sources/xtend/test/XtendA.java", "@SuppressWarnings");
+		assertFileDoesNotContain(verifier, outputdir + "src/test/generated-sources/xtend/test/XtendB.java", "@SuppressWarnings");
+	}
 
 	@Test
 	public void macro() throws Exception {
@@ -247,6 +260,18 @@ public class XtendCompilerMojoIT {
 			String content = FileUtils.fileRead(new File(file), "UTF-16");
 			if (!content.contains(contained)) {
 				Assert.fail("Content of " + file + " does not contain " + contained + " but: " + content);
+			}
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+	
+	public void assertFileDoesNotContain(Verifier verifier, String file, String contained) {
+		verifier.assertFilePresent(file);
+		try {
+			String content = FileUtils.fileRead(new File(file), "UTF-8");
+			if (content.contains(contained)) {
+				Assert.fail("Content of " + file + " does contain " + contained + ", but it should not. Contents: " + content);
 			}
 		} catch (IOException e) {
 			Assert.fail(e.getMessage());
