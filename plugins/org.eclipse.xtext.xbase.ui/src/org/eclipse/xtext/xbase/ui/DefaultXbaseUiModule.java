@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
@@ -45,9 +46,10 @@ import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
 import com.google.inject.Binder;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * A base module that contains default UI bindings for all Xbase inheriting languages.
  * 
- *         contains default bindings for all Xbase inheriting languages.
+ * @since 2.8
+ * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
@@ -128,5 +130,9 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 	
 	public void configureWorkspaceConfigContribution(Binder binder) {
 		binder.bind(WorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
+	}
+	
+	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
+		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 }

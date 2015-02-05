@@ -171,10 +171,17 @@ public class ResourceStorageWritable {
       URI _uRI = resource.getURI();
       boolean _notEquals = (!Objects.equal(_trimFragment, _uRI));
       if (_notEquals) {
+        URI _elvis = null;
         PortableURIs _portableURIs = resource.getPortableURIs();
         URI _targetEObjectUri_1 = ref.getTargetEObjectUri();
         URI _portableURI = _portableURIs.toPortableURI(resource, _targetEObjectUri_1);
-        ((SerializableReferenceDescription) ref).setTargetEObjectUri(_portableURI);
+        if (_portableURI != null) {
+          _elvis = _portableURI;
+        } else {
+          URI _targetEObjectUri_2 = ref.getTargetEObjectUri();
+          _elvis = _targetEObjectUri_2;
+        }
+        ((SerializableReferenceDescription) ref).setTargetEObjectUri(_elvis);
       }
     }
   }
