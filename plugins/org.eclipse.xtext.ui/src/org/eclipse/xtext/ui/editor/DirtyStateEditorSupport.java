@@ -56,7 +56,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -599,19 +598,8 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 
 	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event) {
 		List<Resource> result = Lists.newArrayListWithExpectedSize(4);
-		Set<URI> normalizedURIs = Sets.newHashSetWithExpectedSize(event.getDeltas().size());
-		ResourceSet resourceSet = resource.getResourceSet();
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
-			processDelta(delta, resourceSet, normalizedURIs);
-		}
-		List<Resource> resources = resourceSet.getResources();
-		for(int i = 0; i< resources.size(); i++) {
-			Resource res = resources.get(i);
-			if (res != resource && res != null) {
-				URI uri = res.getURI();
-				if (normalizedURIs.contains(uri))
-					result.add(res);
-			}
+			processDelta(delta, resource, result);
 		}
 		return result;
 	}
@@ -619,10 +607,11 @@ public class DirtyStateEditorSupport implements IResourceDescription.Event.Liste
 	/**
 	 * @since 2.8
 	 */
-	protected void processDelta(IResourceDescription.Delta delta, ResourceSet resourceSet, Set<URI> normalizedURIs) {
+	protected void processDelta(IResourceDescription.Delta delta, Resource context, List<Resource> result) {
+		ResourceSet resourceSet = context.getResourceSet();
 		Resource resourceInResourceSet = resourceSet.getResource(delta.getUri(), false);
-		if(resourceInResourceSet != null) {
-			normalizedURIs.add(resourceInResourceSet.getURI());
+		if(resourceInResourceSet != null && resourceInResourceSet != context) {
+			result.add(resourceInResourceSet);
 		}
 	}
 	
