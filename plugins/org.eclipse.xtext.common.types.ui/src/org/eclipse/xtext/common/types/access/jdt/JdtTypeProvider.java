@@ -349,7 +349,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		if (indexManager.awaitingJobsCount() > 0) { // still indexing - don't enter a busy wait loop but ask the source folders directly
 			for(IPackageFragmentRoot sourceFolder: sourceFolders) {
 				if (indexManager.awaitingJobsCount() > 0) {
-					IPackageFragment packageFragment = sourceFolder.getPackageFragment(packageName);
+					IPackageFragment packageFragment = sourceFolder.getPackageFragment(Strings.emptyIfNull(packageName));
 					if (packageFragment.exists()) {
 						ICompilationUnit[] units = packageFragment.getCompilationUnits();
 						for(ICompilationUnit unit: units) {
