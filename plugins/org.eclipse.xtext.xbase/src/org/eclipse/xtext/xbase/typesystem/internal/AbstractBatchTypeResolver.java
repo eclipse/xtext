@@ -12,7 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
+import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
 import org.eclipse.xtext.resource.persistence.StorageAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.scoping.batch.FeatureScopes;
