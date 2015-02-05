@@ -12,12 +12,9 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
@@ -27,17 +24,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
@@ -77,88 +70,61 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   }
   
   protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
-    final LinkedHashSet<String> classPathEntries = CollectionLiterals.<String>newLinkedHashSet();
-    HashSet<IJavaProject> _newHashSet = CollectionLiterals.<IJavaProject>newHashSet();
-    this.deepCollectRuntimeClassPath(projectToUse, _newHashSet, classPathEntries);
-    this.removeLocalOutputFolders(projectToUse, classPathEntries);
-    final Function1<String, URL> _function = new Function1<String, URL>() {
-      @Override
-      public URL apply(final String it) {
-        try {
-          File _file = new File(it);
-          URI _uRI = _file.toURI();
-          return _uRI.toURL();
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
-      }
-    };
-    Iterable<URL> _map = IterableExtensions.<String, URL>map(classPathEntries, _function);
-    final List<URL> urls = IterableExtensions.<URL>toList(_map);
-    ClassLoader _parentClassLoader = this.getParentClassLoader();
-    return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
-  }
-  
-  protected boolean removeLocalOutputFolders(final IJavaProject project, final LinkedHashSet<String> classPathEntries) {
     try {
-      boolean _xblockexpression = false;
-      {
-        IClasspathEntry[] _rawClasspath = project.getRawClasspath();
-        for (final IClasspathEntry classpathEntry : _rawClasspath) {
-          int _entryKind = classpathEntry.getEntryKind();
-          boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
-          if (_equals) {
-            IPath path = classpathEntry.getOutputLocation();
-            boolean _notEquals = (!Objects.equal(path, null));
-            if (_notEquals) {
-              IProject _project = project.getProject();
-              IWorkspace _workspace = _project.getWorkspace();
-              IWorkspaceRoot _root = _workspace.getRoot();
-              final IFolder outputfolder = _root.getFolder(path);
-              IPath _location = outputfolder.getLocation();
-              String _string = _location.toString();
-              classPathEntries.remove(_string);
-            }
-          }
-        }
-        IProject _project_1 = project.getProject();
-        IWorkspace _workspace_1 = _project_1.getWorkspace();
-        IWorkspaceRoot _root_1 = _workspace_1.getRoot();
-        IPath _outputLocation = project.getOutputLocation();
-        final IFolder outputfolder_1 = _root_1.getFolder(_outputLocation);
-        IPath _location_1 = outputfolder_1.getLocation();
-        String _string_1 = _location_1.toString();
-        _xblockexpression = classPathEntries.remove(_string_1);
-      }
-      return _xblockexpression;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  private void deepCollectRuntimeClassPath(final IJavaProject project, final Set<IJavaProject> visitedProjects, final LinkedHashSet<String> allEntries) {
-    try {
-      boolean _add = visitedProjects.add(project);
-      boolean _not = (!_add);
-      if (_not) {
-        return;
-      }
-      final String[] entries = JavaRuntime.computeDefaultRuntimeClassPath(project);
-      CollectionExtensions.<String>addAll(allEntries, entries);
-      String[] _requiredProjectNames = project.getRequiredProjectNames();
-      for (final String requiredProjectName : _requiredProjectNames) {
+      final IClasspathEntry[] resolvedClasspath = projectToUse.getResolvedClasspath(true);
+      final List<URL> urls = CollectionLiterals.<URL>newArrayList();
+      List<URL> _outputFolders = this.getOutputFolders(projectToUse);
+      urls.addAll(_outputFolders);
+      for (final IClasspathEntry entry : resolvedClasspath) {
         {
-          IProject _project = project.getProject();
-          IWorkspace _workspace = _project.getWorkspace();
-          IWorkspaceRoot _root = _workspace.getRoot();
-          final IProject reqProject = _root.getProject(requiredProjectName);
-          final IJavaProject javaReqProject = JavaCore.create(reqProject);
-          boolean _isOpen = javaReqProject.isOpen();
-          if (_isOpen) {
-            this.deepCollectRuntimeClassPath(javaReqProject, visitedProjects, allEntries);
+          URL url = null;
+          int _entryKind = entry.getEntryKind();
+          switch (_entryKind) {
+            case IClasspathEntry.CPE_SOURCE:
+              break;
+            case IClasspathEntry.CPE_PROJECT:
+              IPath path = entry.getPath();
+              IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot(projectToUse);
+              final IResource project = _workspaceRoot.findMember(path);
+              IProject _project = project.getProject();
+              IJavaProject _create = JavaCore.create(_project);
+              List<URL> _outputFolders_1 = this.getOutputFolders(_create);
+              urls.addAll(_outputFolders_1);
+              break;
+            case IClasspathEntry.CPE_LIBRARY:
+              IPath path_1 = entry.getPath();
+              IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot(projectToUse);
+              final IResource library = _workspaceRoot_1.findMember(path_1);
+              URL _xifexpression = null;
+              boolean _notEquals = (!Objects.equal(library, null));
+              if (_notEquals) {
+                URI _rawLocationURI = library.getRawLocationURI();
+                _xifexpression = _rawLocationURI.toURL();
+              } else {
+                File _file = path_1.toFile();
+                URI _uRI = _file.toURI();
+                _xifexpression = _uRI.toURL();
+              }
+              url = _xifexpression;
+              break;
+            default:
+              {
+                IPath path_2 = entry.getPath();
+                File _file_1 = path_2.toFile();
+                URI _uRI_1 = _file_1.toURI();
+                URL _uRL = _uRI_1.toURL();
+                url = _uRL;
+              }
+              break;
+          }
+          boolean _notEquals_1 = (!Objects.equal(url, null));
+          if (_notEquals_1) {
+            urls.add(url);
           }
         }
       }
+      ClassLoader _parentClassLoader = this.getParentClassLoader();
+      return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -167,5 +133,47 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   protected ClassLoader getParentClassLoader() {
     final ClassLoader bundleClassLoader = TransformationContext.class.getClassLoader();
     return bundleClassLoader;
+  }
+  
+  private IWorkspaceRoot getWorkspaceRoot(final IJavaProject javaProject) {
+    IProject _project = javaProject.getProject();
+    IWorkspace _workspace = _project.getWorkspace();
+    return _workspace.getRoot();
+  }
+  
+  private List<URL> getOutputFolders(final IJavaProject javaProject) {
+    try {
+      final List<URL> result = CollectionLiterals.<URL>newArrayList();
+      IPath _outputLocation = javaProject.getOutputLocation();
+      IPath path = _outputLocation.addTrailingSeparator();
+      String _string = path.toString();
+      org.eclipse.emf.common.util.URI _createPlatformResourceURI = org.eclipse.emf.common.util.URI.createPlatformResourceURI(_string, true);
+      String _string_1 = _createPlatformResourceURI.toString();
+      URL url = new URL(_string_1);
+      result.add(url);
+      IClasspathEntry[] _rawClasspath = javaProject.getRawClasspath();
+      for (final IClasspathEntry entry : _rawClasspath) {
+        int _entryKind = entry.getEntryKind();
+        switch (_entryKind) {
+          case IClasspathEntry.CPE_SOURCE:
+            IPath _outputLocation_1 = entry.getOutputLocation();
+            path = _outputLocation_1;
+            boolean _notEquals = (!Objects.equal(path, null));
+            if (_notEquals) {
+              IPath _addTrailingSeparator = path.addTrailingSeparator();
+              String _string_2 = _addTrailingSeparator.toString();
+              org.eclipse.emf.common.util.URI _createPlatformResourceURI_1 = org.eclipse.emf.common.util.URI.createPlatformResourceURI(_string_2, true);
+              String _string_3 = _createPlatformResourceURI_1.toString();
+              URL _uRL = new URL(_string_3);
+              url = _uRL;
+              result.add(url);
+            }
+            break;
+        }
+      }
+      return result;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }
