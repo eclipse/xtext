@@ -19,6 +19,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImplCustom;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -243,8 +246,23 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 		if (this.runnables == null) {
 			this.runnables = new LinkedHashSet<Runnable>();
 			this.isLazyJvmMemberInitialization = true;
+			for (EObject obj : getContents()) {
+				if (obj instanceof JvmDeclaredTypeImplCustom) {
+					JvmDeclaredTypeImplCustom type = (JvmDeclaredTypeImplCustom) obj;
+					markPendingInitialization(type);
+				}
+			}
 		}
 		this.runnables.add(runnable);
+	}
+	
+	private void markPendingInitialization(JvmDeclaredTypeImplCustom type) {
+		type.setPendingInitialization(true);
+		for (JvmMember member : type.basicGetMembers()) {
+			if (member instanceof JvmDeclaredTypeImplCustom) {
+				markPendingInitialization((JvmDeclaredTypeImplCustom) member);
+			}
+		}
 	}
 	
 	private boolean isLazyJvmMemberInitialization;

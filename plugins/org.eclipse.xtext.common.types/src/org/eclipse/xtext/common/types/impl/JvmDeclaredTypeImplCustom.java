@@ -516,10 +516,20 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		return result == null ? null : result.getType();
 	}
 	
+	private boolean isPendingInitialization = false;
+	
+	public void setPendingInitialization(boolean hasPendingInitialization) {
+		this.isPendingInitialization = hasPendingInitialization;
+	}
+	
 	protected void checkPendingInitialization() {
+		if (!isPendingInitialization) {
+			return;
+		}
 		Resource resource = this.eResource();
 		if (resource instanceof JvmMemberInitializableResource) {
 			((JvmMemberInitializableResource) resource).ensureJvmMembersInitialized();
+			isPendingInitialization = false;
 		}
 	}
 	
