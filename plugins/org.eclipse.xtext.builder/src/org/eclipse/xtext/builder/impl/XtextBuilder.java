@@ -33,6 +33,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
@@ -124,12 +125,15 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			handleCanceled(err);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
+			buildLogger.log(e.getClass().getSimpleName() + " while building " + getProject().getName() + ": " + e.getMessage() + " (see logs for details)");
 			forgetLastBuiltState();
 		} finally {
 			queuedBuildData.discardCheckpoint();
 			if (monitor != null)
 				monitor.done();
-			log.info("Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms");
+			String message = "Build " + getProject().getName() + " in " + (System.currentTimeMillis() - startTime) + " ms";
+			log.info(message);
+			buildLogger.log(message);
 			task.stop();
 		}
 		return getProject().getReferencedProjects();
