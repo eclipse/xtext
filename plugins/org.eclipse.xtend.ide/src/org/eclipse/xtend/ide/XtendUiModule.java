@@ -477,10 +477,6 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 		return EclipseFileSystemSupportImpl.class;
 	}
 	
-	public void configureWorkspaceConfigContribution(Binder binder) {
-		binder.bind(WorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
-	}
-	
 	@Override
 	public Class<? extends CopyQualifiedNameService> bindCopyQualifiedNameService() {
 		return XtendCopyQualifiedNameService.class;
