@@ -17,9 +17,10 @@ import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.junit4.TemporaryFolder;
 import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -50,14 +51,14 @@ public class JavaIoFileSystemTest {
       final Procedure1<JavaIOFileSystemSupport> _function = new Procedure1<JavaIOFileSystemSupport>() {
         @Override
         public void apply(final JavaIOFileSystemSupport it) {
-          final Provider<WorkspaceConfig> _function = new Provider<WorkspaceConfig>() {
+          final Provider<IWorkspaceConfig> _function = new Provider<IWorkspaceConfig>() {
             @Override
-            public WorkspaceConfig get() {
+            public IWorkspaceConfig get() {
               String _absolutePath = tempDir.getAbsolutePath();
-              WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
-              final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+              SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(_absolutePath);
+              final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
                 @Override
-                public void apply(final WorkspaceConfig it) {
+                public void apply(final SimpleWorkspaceConfig it) {
                   ProjectConfig _projectConfig = new ProjectConfig("/foo");
                   final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
                     @Override
@@ -72,7 +73,7 @@ public class JavaIoFileSystemTest {
                   it.addProjectConfig(_doubleArrow);
                 }
               };
-              return ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
+              return ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
             }
           };
           it.setProjectInformationProvider(_function);

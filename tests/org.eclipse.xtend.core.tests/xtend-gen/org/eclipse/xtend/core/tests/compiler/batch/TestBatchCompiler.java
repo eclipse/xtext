@@ -27,9 +27,10 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -175,14 +176,13 @@ public class TestBatchCompiler {
     try {
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("..");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       File _file_1 = new File(".");
       File _canonicalFile = _file_1.getCanonicalFile();
       String _name = _canonicalFile.getName();
@@ -217,14 +217,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -284,14 +283,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("/tmp/ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -351,14 +349,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -418,14 +415,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -485,14 +481,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -556,14 +551,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath(_builder_1.toString());
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("dir1/ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -643,14 +637,13 @@ public class TestBatchCompiler {
       this.batchCompiler.setOutputPath("ws/prj1");
       boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
       Assert.assertTrue(_configureWorkspace);
-      final WorkspaceConfig config = this.workspaceConfigProvider.get();
+      final IWorkspaceConfig config = this.workspaceConfigProvider.get();
       File _file = new File("ws");
       String _canonicalPath = _file.getCanonicalPath();
       String _absoluteFileSystemPath = config.getAbsoluteFileSystemPath();
       Assert.assertEquals(_canonicalPath, _absoluteFileSystemPath);
-      Map<String, ProjectConfig> _projects = config.getProjects();
-      Collection<ProjectConfig> _values = _projects.values();
-      final ProjectConfig project = IterableExtensions.<ProjectConfig>head(_values);
+      Collection<? extends ProjectConfig> _projects = config.getProjects();
+      final ProjectConfig project = IterableExtensions.head(_projects);
       Path _rootPath = project.getRootPath();
       String _string = _rootPath.toString();
       Assert.assertEquals("/prj1", _string);
@@ -994,10 +987,10 @@ public class TestBatchCompiler {
     boolean _isSymlink_1 = this.isSymlink(_file_2);
     boolean _not_1 = (!_isSymlink_1);
     Assert.assertTrue("plain-folder/src/ is not a symlink", _not_1);
-    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(wsRootPath);
-    final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+    SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(wsRootPath);
+    final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
       @Override
-      public void apply(final WorkspaceConfig it) {
+      public void apply(final SimpleWorkspaceConfig it) {
         ProjectConfig _projectConfig = new ProjectConfig("plain-folder");
         final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
           @Override
@@ -1019,7 +1012,7 @@ public class TestBatchCompiler {
         it.addProjectConfig(_doubleArrow_1);
       }
     };
-    WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
+    SimpleWorkspaceConfig _doubleArrow = ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
     this.workspaceConfigProvider.setWorkspaceConfig(_doubleArrow);
     this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.setSourcePath(((((wsRootPath + "/plain-folder/src") + File.pathSeparator) + wsRootPath) + 

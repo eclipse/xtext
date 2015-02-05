@@ -39,7 +39,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.file.FileLocationsImpl;
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
@@ -197,7 +197,7 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 		return FileLocationsImpl.class;
 	}
 
-	public Class<? extends Provider<WorkspaceConfig>> provideWorkspaceConfig() {
+	public Class<? extends Provider<IWorkspaceConfig>> provideWorkspaceConfig() {
 		return RuntimeWorkspaceConfigProvider.class;
 	}
 	

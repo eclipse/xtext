@@ -12,8 +12,9 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.io.File;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -27,20 +28,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Singleton
 @Accessors
 @SuppressWarnings("all")
-public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+public class RuntimeWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
   private File workspaceRoot = new File(".").getAbsoluteFile().getParentFile();
   
-  private WorkspaceConfig workspaceConfig;
+  private IWorkspaceConfig workspaceConfig;
   
   @Override
-  public WorkspaceConfig get() {
+  public IWorkspaceConfig get() {
     boolean _equals = Objects.equal(this.workspaceConfig, null);
     if (_equals) {
       String _absolutePath = this.workspaceRoot.getAbsolutePath();
-      WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
-      final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+      SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(_absolutePath);
+      final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
         @Override
-        public void apply(final WorkspaceConfig it) {
+        public void apply(final SimpleWorkspaceConfig it) {
           File[] _listFiles = RuntimeWorkspaceConfigProvider.this.workspaceRoot.listFiles();
           final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
             @Override
@@ -52,17 +53,11 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
           for (final File dir : _filter) {
             String _name = dir.getName();
             ProjectConfig _projectConfig = new ProjectConfig(_name);
-            final Procedure1<ProjectConfig> _function_1 = new Procedure1<ProjectConfig>() {
-              @Override
-              public void apply(final ProjectConfig it) {
-              }
-            };
-            ProjectConfig _doubleArrow = ObjectExtensions.<ProjectConfig>operator_doubleArrow(_projectConfig, _function_1);
-            it.addProjectConfig(_doubleArrow);
+            it.addProjectConfig(_projectConfig);
           }
         }
       };
-      WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
+      SimpleWorkspaceConfig _doubleArrow = ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
       this.workspaceConfig = _doubleArrow;
     }
     return this.workspaceConfig;
@@ -78,11 +73,11 @@ public class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig>
   }
   
   @Pure
-  public WorkspaceConfig getWorkspaceConfig() {
+  public IWorkspaceConfig getWorkspaceConfig() {
     return this.workspaceConfig;
   }
   
-  public void setWorkspaceConfig(final WorkspaceConfig workspaceConfig) {
+  public void setWorkspaceConfig(final IWorkspaceConfig workspaceConfig) {
     this.workspaceConfig = workspaceConfig;
   }
 }

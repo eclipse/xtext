@@ -15,7 +15,7 @@ import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xbase.file.JavaIOFileSystemSupport
 import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +35,7 @@ class JavaIoFileSystemTest {
 	@Before def void setUp() {
 		val tempDir = temporaryFolder.newFolder()
 		fs = new JavaIOFileSystemSupport => [
-			projectInformationProvider = [|new WorkspaceConfig(tempDir.absolutePath) => [
+			projectInformationProvider = [new SimpleWorkspaceConfig(tempDir.absolutePath) => [
 				addProjectConfig(new ProjectConfig('/foo') => [
 					sourceFolderMappings.put(new Path('/foo/src'), new Path('/foo/xtend-gen'))
 				])

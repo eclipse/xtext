@@ -19,8 +19,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -88,17 +88,24 @@ public class EclipseWorkspaceConfigurationTest {
         }
       };
       final EclipseWorkspaceConfigProvider provider = ObjectExtensions.<EclipseWorkspaceConfigProvider>operator_doubleArrow(_eclipseWorkspaceConfigProvider, _function);
-      WorkspaceConfig _get = provider.get();
-      Map<String, ProjectConfig> _projects_2 = _get.getProjects();
-      final ProjectConfig projectAConfig = _projects_2.get("projectA");
+      IWorkspaceConfig _get = provider.get();
+      final ProjectConfig projectAConfig = _get.getProject("projectA");
+      Path _path = new Path("/projectA/src/com/acme");
+      final Path sourceBeforeInit = projectAConfig.getContainingSourceFolder(_path);
+      String _string = sourceBeforeInit.toString();
+      Assert.assertEquals("/projectA/src", _string);
       Map<Path, Path> _sourceFolderMappings = projectAConfig.getSourceFolderMappings();
       int _size = _sourceFolderMappings.size();
       Assert.assertEquals(1, _size);
       Map<Path, Path> _sourceFolderMappings_1 = projectAConfig.getSourceFolderMappings();
-      Path _path = new Path("/projectA/src");
-      final Path target = _sourceFolderMappings_1.get(_path);
-      String _string = target.toString();
-      Assert.assertEquals("/projectA/xtend-gen", _string);
+      Path _path_1 = new Path("/projectA/src");
+      final Path target = _sourceFolderMappings_1.get(_path_1);
+      String _string_1 = target.toString();
+      Assert.assertEquals("/projectA/xtend-gen", _string_1);
+      Path _path_2 = new Path("/projectA/src/com/acme");
+      final Path sourceAfterInit = projectAConfig.getContainingSourceFolder(_path_2);
+      String _string_2 = sourceAfterInit.toString();
+      Assert.assertEquals("/projectA/src", _string_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

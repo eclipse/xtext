@@ -12,12 +12,15 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
+import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.CancelIndicator
@@ -26,16 +29,13 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.core.xtend.XtendPackage
-import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 
 @RunWith(XtextRunner)
 @InjectWith(RuntimeInjectorProvider)
@@ -63,7 +63,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	
 	protected def void configureFreshWorkspace() {
 		val tempDir = createFreshTempDir()
-		configProvider.workspaceConfig = new WorkspaceConfig(tempDir.absolutePath) => [
+		configProvider.workspaceConfig = new SimpleWorkspaceConfig(tempDir.absolutePath) => [
 			addProjectConfig(new ProjectConfig(macroProject) => [
 				sourceFolderMappings.put(new Path('/'+macroProject+'/src'), new Path('/'+macroProject+'/xtend-gen'))
 			])

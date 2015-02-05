@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
@@ -35,6 +36,34 @@ public class EclipseProjectConfig extends ProjectConfig {
     super(project.getName());
     this.project = project;
     this.configurationProvider = configurationProvider;
+  }
+  
+  @Override
+  public Path getContainingSourceFolder(final Path path) {
+    try {
+      Map<Path, Path> _sourceFolderMappings = super.getSourceFolderMappings();
+      boolean _isEmpty = _sourceFolderMappings.isEmpty();
+      if (_isEmpty) {
+        IJavaProject _create = JavaCore.create(this.project);
+        IClasspathEntry[] _rawClasspath = _create.getRawClasspath();
+        for (final IClasspathEntry cp : _rawClasspath) {
+          int _entryKind = cp.getEntryKind();
+          boolean _equals = (_entryKind == IClasspathEntry.CPE_SOURCE);
+          if (_equals) {
+            IPath _path = cp.getPath();
+            String _string = _path.toString();
+            final Path cpPath = new Path(_string);
+            boolean _startsWith = path.startsWith(cpPath);
+            if (_startsWith) {
+              return cpPath;
+            }
+          }
+        }
+      }
+      return super.getContainingSourceFolder(path);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Override

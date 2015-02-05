@@ -8,17 +8,17 @@
 package org.eclipse.xtext.xbase.file;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.macro.file.FileLocations;
 import org.eclipse.xtend.lib.macro.file.Path;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
@@ -28,14 +28,13 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class FileLocationsImpl implements FileLocations {
   @Inject
   @Accessors
-  private Provider<WorkspaceConfig> projectInformationProvider;
+  private Provider<IWorkspaceConfig> projectInformationProvider;
   
   protected ProjectConfig getProjectConfig(final Path path) {
     List<String> _segments = path.getSegments();
     final String string = _segments.get(0);
-    WorkspaceConfig _get = this.projectInformationProvider.get();
-    Map<String, ProjectConfig> _projects = _get.getProjects();
-    final ProjectConfig projectConfig = _projects.get(string);
+    IWorkspaceConfig _get = this.projectInformationProvider.get();
+    final ProjectConfig projectConfig = _get.getProject(string);
     boolean _equals = Objects.equal(projectConfig, null);
     if (_equals) {
       throw new IllegalArgumentException((("The project \'" + string) + "\' has not been configured."));
@@ -46,15 +45,7 @@ public class FileLocationsImpl implements FileLocations {
   @Override
   public Path getSourceFolder(final Path path) {
     final ProjectConfig config = this.getProjectConfig(path);
-    Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
-    Set<Path> _keySet = _sourceFolderMappings.keySet();
-    for (final Path src : _keySet) {
-      boolean _startsWith = path.startsWith(src);
-      if (_startsWith) {
-        return src;
-      }
-    }
-    return null;
+    return config.getContainingSourceFolder(path);
   }
   
   @Override
@@ -83,15 +74,15 @@ public class FileLocationsImpl implements FileLocations {
     final ProjectConfig config = this.getProjectConfig(path);
     Map<Path, Path> _sourceFolderMappings = config.getSourceFolderMappings();
     Set<Path> _keySet = _sourceFolderMappings.keySet();
-    return ImmutableSet.<Path>copyOf(_keySet);
+    return Collections.<Path>unmodifiableSet(_keySet);
   }
   
   @Pure
-  public Provider<WorkspaceConfig> getProjectInformationProvider() {
+  public Provider<IWorkspaceConfig> getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
   
-  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
+  public void setProjectInformationProvider(final Provider<IWorkspaceConfig> projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
 }

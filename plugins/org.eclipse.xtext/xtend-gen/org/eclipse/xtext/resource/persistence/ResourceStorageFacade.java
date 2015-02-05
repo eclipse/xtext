@@ -225,8 +225,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   
   protected URI getSourceContainerURI(final StorageAwareResource resource) {
     URI _uRI = resource.getURI();
-    URI _trimFileExtension = _uRI.trimFileExtension();
-    URI _trimSegments = _trimFileExtension.trimSegments(1);
+    URI _trimSegments = _uRI.trimSegments(1);
     return _trimSegments.appendSegment("");
   }
   

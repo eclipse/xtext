@@ -117,7 +117,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	}
 	
 	def protected getSourceContainerURI(StorageAwareResource resource) {
-		resource.URI.trimFileExtension.trimSegments(1).appendSegment("")
+		resource.URI.trimSegments(1).appendSegment("")
 	}
 	
 	override hasStorageFor(URI uri) {

@@ -9,22 +9,15 @@ package org.eclipse.xtext.xbase.ui.file;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.util.Map;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
-import org.eclipse.xtext.xbase.file.ProjectConfig;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.ui.file.EclipseProjectConfig;
+import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfig;
 
 @SuppressWarnings("all")
-public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+public class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
   @Accessors
   @Inject
   private IWorkspaceRoot workspaceRoot;
@@ -34,21 +27,8 @@ public class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig>
   private EclipseOutputConfigurationProvider configurationProvider;
   
   @Override
-  public WorkspaceConfig get() {
-    IPath _location = this.workspaceRoot.getLocation();
-    final String wsRoot = _location.toString();
-    final WorkspaceConfig result = new WorkspaceConfig(wsRoot);
-    IProject[] _projects = this.workspaceRoot.getProjects();
-    final Procedure1<IProject> _function = new Procedure1<IProject>() {
-      @Override
-      public void apply(final IProject it) {
-        Map<String, ProjectConfig> _projects = result.getProjects();
-        String _name = it.getName();
-        EclipseProjectConfig _eclipseProjectConfig = new EclipseProjectConfig(it, EclipseWorkspaceConfigProvider.this.configurationProvider);
-        _projects.put(_name, _eclipseProjectConfig);
-      }
-    };
-    IterableExtensions.<IProject>forEach(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);
+  public IWorkspaceConfig get() {
+    final EclipseWorkspaceConfig result = new EclipseWorkspaceConfig(this.workspaceRoot, this.configurationProvider);
     return result;
   }
   

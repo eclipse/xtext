@@ -1,17 +1,33 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xbase.file;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
+/**
+ * An implementation of the workspace config that can be configured by clients.
+ */
 @Data
 @SuppressWarnings("all")
-public class WorkspaceConfig {
+public class SimpleWorkspaceConfig implements IWorkspaceConfig {
   private final String absoluteFileSystemPath;
   
+  @Accessors(AccessorType.NONE)
   private final Map<String, ProjectConfig> projects = CollectionLiterals.<String, ProjectConfig>newLinkedHashMap();
   
   public ProjectConfig addProjectConfig(final ProjectConfig config) {
@@ -19,7 +35,18 @@ public class WorkspaceConfig {
     return this.projects.put(_name, config);
   }
   
-  public WorkspaceConfig(final String absoluteFileSystemPath) {
+  @Override
+  public Collection<? extends ProjectConfig> getProjects() {
+    Collection<ProjectConfig> _values = this.projects.values();
+    return Collections.<ProjectConfig>unmodifiableCollection(_values);
+  }
+  
+  @Override
+  public ProjectConfig getProject(final String name) {
+    return this.projects.get(name);
+  }
+  
+  public SimpleWorkspaceConfig(final String absoluteFileSystemPath) {
     super();
     this.absoluteFileSystemPath = absoluteFileSystemPath;
   }
@@ -43,7 +70,7 @@ public class WorkspaceConfig {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    WorkspaceConfig other = (WorkspaceConfig) obj;
+    SimpleWorkspaceConfig other = (SimpleWorkspaceConfig) obj;
     if (this.absoluteFileSystemPath == null) {
       if (other.absoluteFileSystemPath != null)
         return false;
@@ -69,10 +96,5 @@ public class WorkspaceConfig {
   @Pure
   public String getAbsoluteFileSystemPath() {
     return this.absoluteFileSystemPath;
-  }
-  
-  @Pure
-  public Map<String, ProjectConfig> getProjects() {
-    return this.projects;
   }
 }

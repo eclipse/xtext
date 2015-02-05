@@ -174,7 +174,13 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       _or = _greaterThan;
     }
     if (_or) {
-      ProjectAwareUniqueClassNameValidator.SourceTraversal _doCheckUniqueInProjectSource = this.doCheckUniqueInProjectSource(packageName, typeName, type, ((IPackageFragmentRoot[])Conversions.unwrapArray(sourceFolders, IPackageFragmentRoot.class)));
+      String _elvis = null;
+      if (packageName != null) {
+        _elvis = packageName;
+      } else {
+        _elvis = "";
+      }
+      ProjectAwareUniqueClassNameValidator.SourceTraversal _doCheckUniqueInProjectSource = this.doCheckUniqueInProjectSource(_elvis, typeName, type, ((IPackageFragmentRoot[])Conversions.unwrapArray(sourceFolders, IPackageFragmentRoot.class)));
       if (_doCheckUniqueInProjectSource != null) {
         switch (_doCheckUniqueInProjectSource) {
           case DUPLICATE:

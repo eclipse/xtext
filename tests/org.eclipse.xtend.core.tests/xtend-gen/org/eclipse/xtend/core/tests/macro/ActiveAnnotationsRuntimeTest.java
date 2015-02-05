@@ -38,9 +38,10 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -97,10 +98,10 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   protected void configureFreshWorkspace() {
     final File tempDir = this.createFreshTempDir();
     String _absolutePath = tempDir.getAbsolutePath();
-    WorkspaceConfig _workspaceConfig = new WorkspaceConfig(_absolutePath);
-    final Procedure1<WorkspaceConfig> _function = new Procedure1<WorkspaceConfig>() {
+    SimpleWorkspaceConfig _simpleWorkspaceConfig = new SimpleWorkspaceConfig(_absolutePath);
+    final Procedure1<SimpleWorkspaceConfig> _function = new Procedure1<SimpleWorkspaceConfig>() {
       @Override
-      public void apply(final WorkspaceConfig it) {
+      public void apply(final SimpleWorkspaceConfig it) {
         ProjectConfig _projectConfig = new ProjectConfig(ActiveAnnotationsRuntimeTest.this.macroProject);
         final Procedure1<ProjectConfig> _function = new Procedure1<ProjectConfig>() {
           @Override
@@ -127,7 +128,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         it.addProjectConfig(_doubleArrow_1);
       }
     };
-    WorkspaceConfig _doubleArrow = ObjectExtensions.<WorkspaceConfig>operator_doubleArrow(_workspaceConfig, _function);
+    SimpleWorkspaceConfig _doubleArrow = ObjectExtensions.<SimpleWorkspaceConfig>operator_doubleArrow(_simpleWorkspaceConfig, _function);
     this.configProvider.setWorkspaceConfig(_doubleArrow);
   }
   
@@ -145,7 +146,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     final Path path = new Path(_plus);
     String _value = fileRepresentation.getValue();
     this.fileSystemSupport.setContents(path, _value);
-    WorkspaceConfig _workspaceConfig = this.configProvider.getWorkspaceConfig();
+    IWorkspaceConfig _workspaceConfig = this.configProvider.getWorkspaceConfig();
     String _absoluteFileSystemPath = _workspaceConfig.getAbsoluteFileSystemPath();
     String _string = path.toString();
     String _plus_1 = (_absoluteFileSystemPath + _string);

@@ -10,15 +10,17 @@ package org.eclipse.xtend.core.tests.compiler.batch
 import com.google.inject.Inject
 import java.io.File
 import java.io.IOException
+import java.io.Writer
 import java.util.Set
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest
 import org.eclipse.xtext.xbase.file.ProjectConfig
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
@@ -28,8 +30,6 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
-import java.io.Writer
-import org.eclipse.xtext.junit4.logging.LoggingTester
 
 /**
  * Batch compiler tests.
@@ -106,7 +106,7 @@ class TestBatchCompiler {
 		assertTrue(batchCompiler.configureWorkspace());
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('..').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		val projectPath = "/" + new File(".").canonicalFile.name
 		assertEquals(projectPath, project.rootPath.toString)
 		val src = project.sourceFolderMappings.keySet.head
@@ -123,7 +123,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(2, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -145,7 +145,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('/tmp/ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(2, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -167,7 +167,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(2, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -189,7 +189,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(2, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -211,7 +211,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(2, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -234,7 +234,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('dir1/ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(4, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -264,7 +264,7 @@ class TestBatchCompiler {
 
 		val config = workspaceConfigProvider.get
 		assertEquals(new File('ws').canonicalPath, config.absoluteFileSystemPath)
-		val project = config.projects.values.head
+		val project = config.projects.head
 		assertEquals("/prj1", project.rootPath.toString)
 		assertEquals(1, project.sourceFolderMappings.size)
 		val keyPaths = project.sourceFolderMappings.keySet.sortBy[lastSegment]
@@ -441,7 +441,7 @@ class TestBatchCompiler {
 		}
 		assertTrue("plain-folder/linked-src/ is a symlink", isSymlink(new File(wsRootFile, "plain-folder/linked-src/")))
 		assertTrue("plain-folder/src/ is not a symlink", !isSymlink(new File(wsRootFile, "plain-folder/src/")))
-		workspaceConfigProvider.workspaceConfig = new WorkspaceConfig(wsRootPath) => [
+		workspaceConfigProvider.workspaceConfig = new SimpleWorkspaceConfig(wsRootPath) => [
 			addProjectConfig(
 				new ProjectConfig('plain-folder') => [
 					addSourceFolderMapping("src", "bin")

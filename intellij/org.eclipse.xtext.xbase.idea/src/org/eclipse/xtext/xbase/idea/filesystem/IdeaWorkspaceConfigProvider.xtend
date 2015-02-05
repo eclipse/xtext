@@ -17,16 +17,17 @@ import com.intellij.openapi.vfs.VfsUtil
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.generator.IOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig
 
-class IdeaWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+class IdeaWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
 
 	@Inject
 	IOutputConfigurationProvider outputConfigurations
 
 	override get() {
 		val project = ProjectManager.instance.openProjects.head
-		val result = new WorkspaceConfig(project.basePath)
+		val result = new SimpleWorkspaceConfig(project.basePath)
 		ModuleManager.getInstance(project).modules.forEach [ m |
 			result.addProjectConfig(new IdeaModuleConfig(m, outputConfigurations))
 		]

@@ -19,25 +19,50 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider
 import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.jdt.core.IClasspathEntry
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig
+import com.google.inject.Singleton
 
-class EclipseWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+class EclipseWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
 	
 	@Accessors @Inject IWorkspaceRoot workspaceRoot
 	
 	@Accessors @Inject EclipseOutputConfigurationProvider configurationProvider
 	
 	override get() {
-		val wsRoot = workspaceRoot.location.toString
-		val result = new WorkspaceConfig(wsRoot)
-		workspaceRoot.projects.forEach [
-			result.projects.put(name, new EclipseProjectConfig(it, configurationProvider))
-		]
+		val result = new EclipseWorkspaceConfig(workspaceRoot, configurationProvider)
 		return result
 	}
 	
 }
 
+@Data
+class EclipseWorkspaceConfig implements IWorkspaceConfig {
+	IWorkspaceRoot workspaceRoot
+	EclipseOutputConfigurationProvider configurationProvider
+	
+	override getAbsoluteFileSystemPath() {
+		return workspaceRoot.location.toString
+	}
+	
+	override getProject(String name) {
+		try {
+			val project = workspaceRoot.getProject(name)
+			if (project.exists) {
+				return new EclipseProjectConfig(project, configurationProvider)
+			}
+			return null
+		} catch(IllegalArgumentException e) {
+			return null
+		}
+	}
+	
+	override getProjects() {
+		workspaceRoot.projects.map [ new EclipseProjectConfig(it, configurationProvider) ].unmodifiableView
+	}
+	
+}
 class EclipseProjectConfig extends ProjectConfig {
 	
 	IProject project
@@ -47,6 +72,20 @@ class EclipseProjectConfig extends ProjectConfig {
 		super(project.name)
 		this.project = project;
 		this.configurationProvider = configurationProvider
+	}
+	
+	override getContainingSourceFolder(Path path) {
+		if (super.sourceFolderMappings.empty) {
+			for(cp: JavaCore.create(project).rawClasspath) {
+				if (cp.entryKind == IClasspathEntry.CPE_SOURCE) {
+					val cpPath = new Path(cp.path.toString)
+					if (path.startsWith(cpPath)) {
+						return cpPath
+					}
+				} 
+			}
+		}
+		return super.getContainingSourceFolder(path)
 	}
 	
 	override getSourceFolderMappings() {

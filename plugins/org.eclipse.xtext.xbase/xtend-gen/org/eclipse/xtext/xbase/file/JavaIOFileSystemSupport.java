@@ -30,7 +30,7 @@ import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.file.AbstractFileSystemSupport;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -45,7 +45,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   @Inject
   @Accessors
-  private Provider<WorkspaceConfig> projectInformationProvider;
+  private Provider<IWorkspaceConfig> projectInformationProvider;
   
   @Override
   public Iterable<? extends Path> getChildren(final Path path) {
@@ -74,7 +74,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   protected File getJavaIOFile(final Path path) {
-    WorkspaceConfig _get = this.projectInformationProvider.get();
+    IWorkspaceConfig _get = this.projectInformationProvider.get();
     String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
     String _string = path.toString();
     return new File(_absoluteFileSystemPath, _string);
@@ -251,7 +251,7 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     final URI uri = _uRIConverter.normalize(_uRI);
     boolean _isFile = uri.isFile();
     if (_isFile) {
-      WorkspaceConfig _get = this.projectInformationProvider.get();
+      IWorkspaceConfig _get = this.projectInformationProvider.get();
       String _absoluteFileSystemPath = _get.getAbsoluteFileSystemPath();
       final File workspacePathAsFile = new File(_absoluteFileSystemPath);
       String _fileString = uri.toFileString();
@@ -293,11 +293,11 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
   }
   
   @Pure
-  public Provider<WorkspaceConfig> getProjectInformationProvider() {
+  public Provider<IWorkspaceConfig> getProjectInformationProvider() {
     return this.projectInformationProvider;
   }
   
-  public void setProjectInformationProvider(final Provider<WorkspaceConfig> projectInformationProvider) {
+  public void setProjectInformationProvider(final Provider<IWorkspaceConfig> projectInformationProvider) {
     this.projectInformationProvider = projectInformationProvider;
   }
 }
