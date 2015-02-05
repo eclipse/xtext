@@ -34,22 +34,19 @@ public class LanguageAccess {
 	private static final Logger LOG = Logger.getLogger(LanguageAccess.class);
 
 	private Set<OutputConfiguration> outputConfigs;
-	private IResourceServiceProvider resourceServiceProvider;
+	protected IResourceServiceProvider resourceServiceProvider;
 	private boolean linksAgainstJava = true;
-	private JavaIoFileSystemAccess fsa;
-	private File baseDir;
 
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
-			IResourceServiceProvider resourceServiceProvider, File baseDir) {
-		this(outputConfigurations, resourceServiceProvider, false, baseDir);
+			IResourceServiceProvider resourceServiceProvider) {
+		this(outputConfigurations, resourceServiceProvider, false);
 	}
 
 	public LanguageAccess(Set<OutputConfiguration> outputConfigurations,
-			IResourceServiceProvider resourceServiceProvider, boolean linksAgainstJavaTypes, File baseDir) {
+			IResourceServiceProvider resourceServiceProvider, boolean linksAgainstJavaTypes) {
 		this.outputConfigs = outputConfigurations;
 		this.resourceServiceProvider = resourceServiceProvider;
 		this.linksAgainstJava = linksAgainstJavaTypes;
-		this.baseDir = baseDir;
 	}
 
 	public IGenerator getGenerator() {
@@ -60,14 +57,8 @@ public class LanguageAccess {
 		return resourceServiceProvider.get(IStubGenerator.class);
 	}
 
-	public JavaIoFileSystemAccess getFileSystemAccess() {
-		if (fsa == null) {
-			fsa = configuredFileSystemAccess(resourceServiceProvider.get(JavaIoFileSystemAccess.class));
-		}
-		return fsa;
-	}
-
-	private JavaIoFileSystemAccess configuredFileSystemAccess(JavaIoFileSystemAccess fsaToConfigure) {
+	public JavaIoFileSystemAccess createFileSystemAccess(final File baseDir) {
+		JavaIoFileSystemAccess fsa = resourceServiceProvider.get(JavaIoFileSystemAccess.class);
 		Set<OutputConfiguration> confsForFsa = Sets.newHashSet();
 		Set<OutputConfiguration> pomOutputConfigs = getConfiguredOutputConfigs();
 		if (pomOutputConfigs != null && !pomOutputConfigs.isEmpty()) {
@@ -85,9 +76,9 @@ public class LanguageAccess {
 
 					@Override
 					public OutputConfiguration apply(OutputConfiguration output) {
-						output.setOutputDirectory(resolveToBaseDir(output.getOutputDirectory()));
+						output.setOutputDirectory(resolveToBaseDir(output.getOutputDirectory(), baseDir));
 						for (SourceMapping sourceMapping : output.getSourceMappings()) {
-							sourceMapping.setOutputDirectory(resolveToBaseDir(sourceMapping.getOutputDirectory()));
+							sourceMapping.setOutputDirectory(resolveToBaseDir(sourceMapping.getOutputDirectory(), baseDir));
 						}
 						return output;
 					}
@@ -97,8 +88,8 @@ public class LanguageAccess {
 						return it.getName();
 					}
 				});
-		fsaToConfigure.setOutputConfigurations(asMap);
-		return fsaToConfigure;
+		fsa.setOutputConfigurations(asMap);
+		return fsa;
 	}
 
 	public Set<OutputConfiguration> getConfiguredOutputConfigs() {
@@ -129,7 +120,7 @@ public class LanguageAccess {
 		return linksAgainstJava;
 	}
 
-	protected String resolveToBaseDir(final String directory) {
+	protected String resolveToBaseDir(final String directory, File baseDir) {
 		File outDir = new File(directory);
 		if (!outDir.isAbsolute()) {
 			outDir = new File(baseDir, directory);

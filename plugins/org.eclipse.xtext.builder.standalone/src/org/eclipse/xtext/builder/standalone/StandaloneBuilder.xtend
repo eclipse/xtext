@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess
 import org.eclipse.xtext.generator.AbstractFileSystemAccess
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.mwe.NameBasedFilter
 import org.eclipse.xtext.mwe.PathTraverser
 import org.eclipse.xtext.parser.IEncodingProvider
@@ -44,6 +45,7 @@ class StandaloneBuilder {
 
 	/**  Map key is a file extension provided by Language FileExtensionProvider   */
 	@Accessors Map<String, LanguageAccess> languages
+	@Accessors String baseDir
 	@Accessors Iterable<String> sourceDirs
 	@Accessors Iterable<String> javaSourceDirs = newArrayList
 	@Accessors Iterable<String> classPathEntries
@@ -58,7 +60,7 @@ class StandaloneBuilder {
 	@Inject IndexedJvmTypeAccess jvmTypeAccess
 	@Inject Provider<XtextResourceSet> resourceSetProvider
 	@Inject AbstractFileSystemAccess commonFileAccess
-	@Inject IIssueHandler issueHandler
+	@Inject protected IIssueHandler issueHandler
 	@Inject IEncodingProvider.Runtime encodingProvider
 	@Inject IJavaCompiler compiler
 
@@ -70,6 +72,10 @@ class StandaloneBuilder {
 
 	def launch() {
 		val needsJava = languages.values.exists[linksAgainstJava]
+		if(baseDir == null) {
+			baseDir = System.getProperty('user.dir')
+			LOG.warn("Property baseDir not set. Using '" + baseDir + "'")
+		}
 		if (needsJava) {
 			LOG.info("Using common types.")
 		}
@@ -241,14 +247,15 @@ class StandaloneBuilder {
 			LOG.info("Starting generator for input: '" + getURI().lastSegment() + "'");
 			registerCurrentSource(it.URI)
 			val access = URI.languageAccess
+			val fileSystemAccess = access.fileSystemAccess
 			if (isWriteStorageResources) {
 				switch it {
 					StorageAwareResource case resourceStorageFacade != null : {
-						resourceStorageFacade.saveResource(it, access.fileSystemAccess)
+						resourceStorageFacade.saveResource(it, fileSystemAccess)
 					}
 				}
 			}
-			access.generator.doGenerate(it, access.fileSystemAccess);
+			access.generator.doGenerate(it, fileSystemAccess);
 		}
 	}
 
@@ -268,6 +275,22 @@ class StandaloneBuilder {
 				}
 			}
 		}
+	}
+
+	Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = newHashMap()
+	
+	private def getFileSystemAccess(LanguageAccess language) {
+		var fsa = configuredFsas.get(language)
+		if(fsa == null) {
+			fsa = language.createFileSystemAccess(new File(baseDir))
+			fsa = fsa.configureFileSystemAccess(language)
+			configuredFsas.put(language, fsa)
+		}
+		return fsa
+	}
+	
+	protected def configureFileSystemAccess(JavaIoFileSystemAccess fsa, LanguageAccess language) {
+		fsa
 	}
 
 	def private languageAccess(URI uri) {
