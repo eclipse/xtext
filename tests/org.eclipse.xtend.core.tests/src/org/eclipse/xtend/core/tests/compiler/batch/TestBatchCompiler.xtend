@@ -30,6 +30,8 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.Files.*
 import static org.junit.Assert.*
+import com.google.common.io.Files
+import com.google.common.base.Charsets
 
 /**
  * Batch compiler tests.
@@ -492,6 +494,10 @@ class TestBatchCompiler {
 		}
 		return !canon.getCanonicalFile().equals(canon.getAbsoluteFile())
 	}
+	
+	def private String getContents(String fileName) {
+		Files.toString(new File(fileName), Charsets.UTF_8)
+	}
 
 	@Test
 	def void tempDirectory() {
@@ -509,5 +515,91 @@ class TestBatchCompiler {
 		batchCompiler.tempDirectory = TEMP_DIRECTORY
 		assertTrue(batchCompiler.compile)
 		assertEquals(0, new File(TEMP_DIRECTORY).list.size)
+	}
+	
+	@Test
+	def void testNoSuppressWarningsAnnotations() {
+		batchCompiler.generateSyntheticSuppressWarnings = false
+		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		assertFalse((OUTPUT_DIRECTORY + "/XtendA.java").contents.contains("@SuppressWarnings"))
+	}
+	
+	@Test
+	def void testGeneratedAnnotation() {
+		batchCompiler.generateGeneratedAnnotation = true
+		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		assertTrue((OUTPUT_DIRECTORY + "/XtendA.java").contents.contains("@Generated"))
+	}
+	
+	@Test
+	def void testGeneratedAnnotationComment() {
+		batchCompiler.generateGeneratedAnnotation = true
+		batchCompiler.generatedAnnotationComment = "FooComment"
+		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
+		assertTrue(generated.contains("@Generated"))
+		assertTrue(generated.contains("FooComment"))
+	}
+	
+	@Test
+	def void testGeneratedAnnotationDate1() {
+		batchCompiler.generateGeneratedAnnotation = true
+		batchCompiler.includeDateInGeneratedAnnotation = true
+		batchCompiler.sourcePath = "./batch-compiler-data/xtendClass"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
+		assertTrue(generated.contains("@Generated"))
+		assertTrue(generated.contains("date ="))
+	}
+	
+	@Test
+	def void testJavaVersion5() {
+		batchCompiler.javaSourceVersion = "1.5"
+		batchCompiler.sourcePath = "./batch-compiler-data/javaVersion"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
+		assertFalse(generated.contains("@Override"))
+		assertTrue(generated.contains("new Function1<Integer, String>"))
+	}
+	
+	@Test
+	def void testJavaVersion6() {
+		batchCompiler.javaSourceVersion = "1.6"
+		batchCompiler.sourcePath = "./batch-compiler-data/javaVersion"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
+		assertTrue(generated.contains("@Override"))
+		assertTrue(generated.contains("new Function1<Integer, String>"))
+	}
+	
+	@Test
+	def void testJavaVersion7() {
+		batchCompiler.javaSourceVersion = "1.7"
+		batchCompiler.sourcePath = "./batch-compiler-data/javaVersion"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
+		assertTrue(generated.contains("@Override"))
+		assertTrue(generated.contains("new Function1<Integer, String>"))
+	}
+	
+	@Test
+	def void testJavaVersion8() {
+		batchCompiler.javaSourceVersion = "1.8"
+		batchCompiler.sourcePath = "./batch-compiler-data/javaVersion"
+		assertTrue(batchCompiler.configureWorkspace)
+		assertTrue(batchCompiler.compile)
+		val generated = (OUTPUT_DIRECTORY + "/XtendA.java").contents
+		assertTrue(generated.contains("@Override"))
+		assertTrue(generated.contains("(Integer it) ->"))
 	}
 }
