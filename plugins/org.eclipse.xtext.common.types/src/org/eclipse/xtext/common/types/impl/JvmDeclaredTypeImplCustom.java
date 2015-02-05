@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import static com.google.common.collect.Sets.*;
-
-import java.sql.BatchUpdateException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,7 +17,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -37,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -51,9 +46,8 @@ import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.RawTypeReferenceComputer;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
 import org.eclipse.xtext.resource.ISynchronizable;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 

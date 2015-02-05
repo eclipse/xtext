@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMemberInitializableResource;
+import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
