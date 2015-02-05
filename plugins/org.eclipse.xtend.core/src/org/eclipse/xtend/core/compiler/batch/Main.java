@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.compiler.batch;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -27,44 +28,60 @@ public class Main {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		Injector injector = XtendInjectorSingleton.INJECTOR;
-		XtendBatchCompiler xtendBatchCompiler = injector.getInstance(XtendBatchCompiler.class);
+		XtendBatchCompiler compiler = injector.getInstance(XtendBatchCompiler.class);
 		if ((args == null) || (args.length == 0)) {
 			printUsage();
 			return;
 		}
 		Iterator<String> arguments = Arrays.asList(args).iterator();
 		while (arguments.hasNext()) {
-			String argument = arguments.next();
-			if ("-d".equals(argument.trim())) {
-				xtendBatchCompiler.setOutputPath(arguments.next().trim());
-			} else if ("-classpath".equals(argument.trim()) || "-cp".equals(argument.trim())) {
-				xtendBatchCompiler.setClassPath(arguments.next().trim());
-			} else if ("-tempdir".equals(argument.trim()) || "-td".equals(argument.trim())) {
-				xtendBatchCompiler.setTempDirectory(arguments.next().trim());
-			} else if ("-encoding".equals(argument.trim())) {
-				xtendBatchCompiler.setFileEncoding(arguments.next().trim());
-			} else if ("-useCurrentClassLoader".equals(argument.trim())) {
-				xtendBatchCompiler.setUseCurrentClassLoaderAsParent(true);
+			String argument = arguments.next().trim();
+			if ("-d".equals(argument)) {
+				compiler.setOutputPath(arguments.next().trim());
+			} else if ("-classpath".equals(argument) || "-cp".equals(argument)) {
+				compiler.setClassPath(arguments.next().trim());
+			} else if ("-tempdir".equals(argument) || "-td".equals(argument)) {
+				compiler.setTempDirectory(arguments.next().trim());
+			} else if ("-encoding".equals(argument)) {
+				compiler.setFileEncoding(arguments.next().trim());
+			} else if ("-javaSourceVersion".equals(argument)) {
+				compiler.setJavaSourceVersion(arguments.next().trim());
+			} else if ("-noSuppressWarningsAnnotation".equals(argument)) {
+				compiler.setGenerateSyntheticSuppressWarnings(false);
+			} else if ("-generateGeneratedAnnotation".equals(argument)) {
+				compiler.setGenerateGeneratedAnnotation(true);
+			} else if ("-includeDateInGeneratedAnnnotation".equals(argument)) {
+				compiler.setIncludeDateInGeneratedAnnotation(true);
+			} else if ("-generateAnnotationComment".equals(argument)) {
+				compiler.setGeneratedAnnotationComment(arguments.next().trim());
+			} else if ("-useCurrentClassLoader".equals(argument)) {
+				compiler.setUseCurrentClassLoaderAsParent(true);
 			} else {
-				List<String> existingDirs = new ArrayList<String>(xtendBatchCompiler.getSourcePathDirectories());
+				List<String> existingDirs = new ArrayList<String>(compiler.getSourcePathDirectories());
 				existingDirs.add(argument);
 				String pathes = Joiner.on(File.pathSeparator).join(existingDirs);
-				xtendBatchCompiler.setSourcePath(pathes);
+				compiler.setSourcePath(pathes);
 			}
 		}
-		if (!xtendBatchCompiler.compile()) {
+		if (!compiler.compile()) {
 			System.exit(1);
 		}
 	}
-	
+
 	private static void printUsage() {
-		System.out.println("Usage: Main <options> <source directories>");
-		System.out.println("where possible options include:");
-		System.out.println("-d <directory>             Specify where to place generated xtend files");
-		System.out.println("-tp <path>                 Temp directory to hold generated stubs and classes");
-		System.out.println("-cp <path>                 Specify where to find user class files");
-		System.out.println("-encoding <encoding>       Specify character encoding used by source files");
-		System.out.println("-useCurrentClassLoader	   Use current classloader as parent classloader");
+		PrintStream out = System.out;
+		out.println("Usage: Main <options> <source directories>");
+		out.println("where possible options include:");
+		out.println("-d <directory>                      Specify where to place generated xtend files");
+		out.println("-tp <path>                          Temp directory to hold generated stubs and classes");
+		out.println("-cp <path>                          Specify where to find user class files");
+		out.println("-encoding <encoding>                Specify character encoding used by source files");
+		out.println("-javaSourceVersion <version>        Create Java Source compatible to this version. Can be: 1.5, 1.6, 1.7 or 1.8");
+		out.println("-noSuppressWarningsAnnotation       Don't put @SuppressWarnings() into generated Java Code");
+		out.println("-generateGeneratedAnnotation        Put @Generated into generated Java Code");
+		out.println("-includeDateInGeneratedAnnnotation  If -generateGeneratedAnnotation is used, add the current date/time.");
+		out.println("-generateAnnotationComment <string> If -generateGeneratedAnnotation is used, add a comment.");
+		out.println("-useCurrentClassLoader              Use current classloader as parent classloader");
 	}
 
 }

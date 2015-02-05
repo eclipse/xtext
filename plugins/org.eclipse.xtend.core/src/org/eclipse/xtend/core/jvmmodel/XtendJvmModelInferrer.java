@@ -606,7 +606,7 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 			operation.getExceptions().add(jvmTypesBuilder.cloneWithProxies(exception));
 		}
 		translateAnnotationsTo(source.getAnnotations(), operation);
-		if (source.isOverride() && generatorConfig.getTargetVersion().isAtLeast(JAVA6)
+		if (source.isOverride() && generatorConfig.getJavaSourceVersion().isAtLeast(JAVA6)
 				&& !containsAnnotation(operation, Override.class)
 				&& typeReferences.findDeclaredType(Override.class, source) != null) {
 			operation.getAnnotations().add(_annotationTypesBuilder.annotationRef(Override.class));

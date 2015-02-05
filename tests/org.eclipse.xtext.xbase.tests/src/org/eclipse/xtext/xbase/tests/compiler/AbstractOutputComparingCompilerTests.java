@@ -50,7 +50,7 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode,
 			JavaVersion javaVersion) throws Exception {
 		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-		generatorConfig.setTargetVersion(javaVersion);
+		generatorConfig.setJavaSourceVersion(javaVersion);
 		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfig);
 	}
 	

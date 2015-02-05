@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.compiler.batch;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.File;
@@ -1107,6 +1108,15 @@ public class TestBatchCompiler {
     }
   }
   
+  private String getContents(final String fileName) {
+    try {
+      File _file = new File(fileName);
+      return com.google.common.io.Files.toString(_file, Charsets.UTF_8);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   @Test
   public void tempDirectory() {
     this.batchCompiler.setDeleteTempDirectory(false);
@@ -1137,5 +1147,123 @@ public class TestBatchCompiler {
     String[] _list = _file.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(0, _size);
+  }
+  
+  @Test
+  public void testNoSuppressWarningsAnnotations() {
+    this.batchCompiler.setGenerateSyntheticSuppressWarnings(false);
+    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    String _contents = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = _contents.contains("@SuppressWarnings");
+    Assert.assertFalse(_contains);
+  }
+  
+  @Test
+  public void testGeneratedAnnotation() {
+    this.batchCompiler.setGenerateGeneratedAnnotation(true);
+    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    String _contents = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = _contents.contains("@Generated");
+    Assert.assertTrue(_contains);
+  }
+  
+  @Test
+  public void testGeneratedAnnotationComment() {
+    this.batchCompiler.setGenerateGeneratedAnnotation(true);
+    this.batchCompiler.setGeneratedAnnotationComment("FooComment");
+    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = generated.contains("@Generated");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = generated.contains("FooComment");
+    Assert.assertTrue(_contains_1);
+  }
+  
+  @Test
+  public void testGeneratedAnnotationDate1() {
+    this.batchCompiler.setGenerateGeneratedAnnotation(true);
+    this.batchCompiler.setIncludeDateInGeneratedAnnotation(true);
+    this.batchCompiler.setSourcePath("./batch-compiler-data/xtendClass");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = generated.contains("@Generated");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = generated.contains("date =");
+    Assert.assertTrue(_contains_1);
+  }
+  
+  @Test
+  public void testJavaVersion5() {
+    this.batchCompiler.setJavaSourceVersion("1.5");
+    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = generated.contains("@Override");
+    Assert.assertFalse(_contains);
+    boolean _contains_1 = generated.contains("new Function1<Integer, String>");
+    Assert.assertTrue(_contains_1);
+  }
+  
+  @Test
+  public void testJavaVersion6() {
+    this.batchCompiler.setJavaSourceVersion("1.6");
+    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = generated.contains("@Override");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = generated.contains("new Function1<Integer, String>");
+    Assert.assertTrue(_contains_1);
+  }
+  
+  @Test
+  public void testJavaVersion7() {
+    this.batchCompiler.setJavaSourceVersion("1.7");
+    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = generated.contains("@Override");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = generated.contains("new Function1<Integer, String>");
+    Assert.assertTrue(_contains_1);
+  }
+  
+  @Test
+  public void testJavaVersion8() {
+    this.batchCompiler.setJavaSourceVersion("1.8");
+    this.batchCompiler.setSourcePath("./batch-compiler-data/javaVersion");
+    boolean _configureWorkspace = this.batchCompiler.configureWorkspace();
+    Assert.assertTrue(_configureWorkspace);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue(_compile);
+    final String generated = this.getContents((TestBatchCompiler.OUTPUT_DIRECTORY + "/XtendA.java"));
+    boolean _contains = generated.contains("@Override");
+    Assert.assertTrue(_contains);
+    boolean _contains_1 = generated.contains("(Integer it) ->");
+    Assert.assertTrue(_contains_1);
   }
 }
