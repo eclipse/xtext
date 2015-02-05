@@ -21,6 +21,8 @@ import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
+import java.util.LinkedHashSet
+import java.util.Set
 
 class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	
@@ -40,18 +42,41 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		return createClassLoaderForJavaProject(project)
 	}
 	
+	/**
+	 * Construct a Classloader with the classpathentries from the provided and all upstream-projects, 
+	 * except the output folders of the local project.
+	 */
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
+		val urls = newLinkedHashSet()
+		collectClasspathURLs(projectToUse, urls, false, newHashSet)
+		return new URLClassLoader(urls, getParentClassLoader())
+	}
+	
+	protected def void collectClasspathURLs(IJavaProject projectToUse, LinkedHashSet<URL> result, boolean includeOutputFolder, Set<IJavaProject> visited) {
+		if(!visited.add(projectToUse)) {
+			return;
+		}
+		if (includeOutputFolder) {
+			var IPath path = projectToUse.getOutputLocation().addTrailingSeparator();
+			var URL url = new URL(URI.createPlatformResourceURI(path.toString(), true).toString());
+			result.add(url);
+		}
 		val resolvedClasspath = projectToUse.getResolvedClasspath(true)
-		val List<URL> urls = newArrayList()
-		urls.addAll(getOutputFolders(projectToUse));
 		for (entry : resolvedClasspath) {
 			var URL url = null
 			switch entry.entryKind {
-				case IClasspathEntry.CPE_SOURCE: {/* do nothing */}
+				case IClasspathEntry.CPE_SOURCE: {
+					if (includeOutputFolder) {
+						val path = entry.getOutputLocation();
+						if (path != null) 
+							url = new URL(URI.createPlatformResourceURI(path.addTrailingSeparator().toString(), true).toString());
+					}
+				}
 				case IClasspathEntry.CPE_PROJECT: {
 					var IPath path = entry.getPath()
 					val IResource project = projectToUse.workspaceRoot.findMember(path)
-					urls.addAll(getOutputFolders(JavaCore.create(project.getProject())))
+					val referencedProject = JavaCore.create(project.getProject())
+					collectClasspathURLs(referencedProject, result, true, visited)
 				}
 				case IClasspathEntry.CPE_LIBRARY: {
 					var IPath path = entry.getPath()
@@ -71,10 +96,9 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 				}
 			}
 			if (url != null) {
-				urls.add(url);
+				result.add(url);
 			}
 		}
-		return new URLClassLoader(urls, getParentClassLoader())
 	}
 	
 	protected def getParentClassLoader() {
@@ -85,25 +109,4 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	def private getWorkspaceRoot(IJavaProject javaProject) {
 		javaProject.project.workspace.root
 	}
-
-	def private List<URL> getOutputFolders(IJavaProject javaProject) {
-		val List<URL> result = newArrayList;
-		var IPath path = javaProject.getOutputLocation().addTrailingSeparator();
-		var URL url = new URL(URI.createPlatformResourceURI(path.toString(), true).toString());
-		result.add(url);
-		for (IClasspathEntry entry : javaProject.getRawClasspath()) {
-			switch (entry.getEntryKind()) {
-				case IClasspathEntry.CPE_SOURCE: {
-					path = entry.getOutputLocation();
-					if (path != null) {
-						url = new URL(URI.createPlatformResourceURI(path.addTrailingSeparator().toString(), true)
-								.toString());
-						result.add(url);
-					}
-				}
-			}
-		}
-		return result;
-	}
-	
 }
