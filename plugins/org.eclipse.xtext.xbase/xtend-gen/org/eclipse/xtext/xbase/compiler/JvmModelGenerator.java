@@ -677,8 +677,8 @@ public class JvmModelGenerator implements IGenerator {
       if (!_and_3) {
         _and_2 = false;
       } else {
-        JavaVersion _targetVersion = config.getTargetVersion();
-        boolean _isAtLeast = _targetVersion.isAtLeast(JavaVersion.JAVA8);
+        JavaVersion _javaSourceVersion = config.getJavaSourceVersion();
+        boolean _isAtLeast = _javaSourceVersion.isAtLeast(JavaVersion.JAVA8);
         _and_2 = _isAtLeast;
       }
       if (!_and_2) {
@@ -1359,8 +1359,8 @@ public class JvmModelGenerator implements IGenerator {
           }
         }
       }
-      JavaVersion _targetVersion = config.getTargetVersion();
-      boolean _isAtLeast = _targetVersion.isAtLeast(JavaVersion.JAVA8);
+      JavaVersion _javaSourceVersion = config.getJavaSourceVersion();
+      boolean _isAtLeast = _javaSourceVersion.isAtLeast(JavaVersion.JAVA8);
       if (_isAtLeast) {
         Iterable<JvmTypeReference> _extendedInterfaces = declaredType.getExtendedInterfaces();
         for (final JvmTypeReference interfaceRef : _extendedInterfaces) {

@@ -48,10 +48,12 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
-import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 import com.google.common.base.Function;
@@ -65,6 +67,7 @@ import com.google.inject.Provider;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @since 2.8
  */
 public class XtendBatchCompiler {
 
@@ -127,7 +130,6 @@ public class XtendBatchCompiler {
 	protected boolean useCurrentClassLoaderAsParent;
 	protected String outputPath;
 	protected String fileEncoding;
-	protected String complianceLevel = "1.6";
 	protected boolean verbose = false;
 	protected String tempDirectory = System.getProperty("java.io.tmpdir");
 	protected boolean deleteTempDirectory = true;
@@ -137,6 +139,7 @@ public class XtendBatchCompiler {
 	 * @since 2.8
 	 */
 	protected boolean writeStorageFiles = false;
+	private GeneratorConfig generatorConfig = new GeneratorConfig();
 	protected ClassLoader currentClassLoader = getClass().getClassLoader();
 
 	private URI baseURI;
@@ -271,15 +274,80 @@ public class XtendBatchCompiler {
 	public void setSourcePath(String sourcePath) {
 		this.sourcePath = sourcePath;
 	}
-
+	
+	@Deprecated // use getJavaSourceVersion()
 	protected String getComplianceLevel() {
-		return complianceLevel;
+		return getJavaSourceVersion();
 	}
+
 	/**
 	 * @since 2.8
 	 */
-	public void setComplianceLevel(String complianceLevel) {
-		this.complianceLevel = complianceLevel;
+	public boolean isGenerateSyntheticSuppressWarnings() {
+		return generatorConfig.isGenerateSyntheticSuppressWarnings();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setGenerateSyntheticSuppressWarnings(final boolean generateSyntheticSuppressWarnings) {
+		generatorConfig.setGenerateSyntheticSuppressWarnings(generateSyntheticSuppressWarnings);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public boolean isGenerateGeneratedAnnotation() {
+		return generatorConfig.isGenerateGeneratedAnnotation();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setGenerateGeneratedAnnotation(final boolean generateGeneratedAnnotation) {
+		generatorConfig.setGenerateGeneratedAnnotation(generateGeneratedAnnotation);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public boolean isIncludeDateInGeneratedAnnotation() {
+		return generatorConfig.isIncludeDateInGeneratedAnnotation();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setIncludeDateInGeneratedAnnotation(final boolean includeDateInGeneratedAnnotation) {
+		generatorConfig.setIncludeDateInGeneratedAnnotation(includeDateInGeneratedAnnotation);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String getGeneratedAnnotationComment() {
+		return generatorConfig.getGeneratedAnnotationComment();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setGeneratedAnnotationComment(final String generatedAnnotationComment) {
+		generatorConfig.setGeneratedAnnotationComment(generatedAnnotationComment);
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public String getJavaSourceVersion() {
+		return generatorConfig.getJavaSourceVersion().getQualifier();
+	}
+
+	/**
+	 * @since 2.8
+	 */
+	public void setJavaSourceVersion(final String javaSourceVersion) {
+		generatorConfig.setJavaSourceVersion(JavaVersion.fromQualifier(javaSourceVersion));
 	}
 
 	public void setVerbose(boolean verbose) {
@@ -437,6 +505,7 @@ public class XtendBatchCompiler {
 			if (!Iterables.isEmpty(errors)) {
 				return false;
 			}
+			GeneratorConfigProvider.install(resourceSet, generatorConfig);
 			generateJavaFiles(resourceSet);
 		} finally {
 			if (isDeleteTempDirectory()) {
