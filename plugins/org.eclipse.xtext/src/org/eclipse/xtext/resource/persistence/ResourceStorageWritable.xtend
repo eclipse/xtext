@@ -117,7 +117,7 @@ import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
 	def protected void convertExternalURIsToPortableURIs(SerializableResourceDescription description, StorageAwareResource resource) {
 		for (ref : description.referenceDescriptions) {
 			if (ref.targetEObjectUri.trimFragment != resource.URI) {
-				(ref as SerializableReferenceDescription).targetEObjectUri = resource.portableURIs.toPortableURI(resource, ref.targetEObjectUri)
+				(ref as SerializableReferenceDescription).targetEObjectUri = resource.portableURIs.toPortableURI(resource, ref.targetEObjectUri) ?: ref.targetEObjectUri
 			}
 		}
 	}
