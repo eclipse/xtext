@@ -12,7 +12,7 @@ import com.google.inject.Provider
 import org.eclipse.xtend.lib.macro.file.FileLocations
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.xbase.file.ProjectConfig
-import org.eclipse.xtext.xbase.file.WorkspaceConfig
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
@@ -20,11 +20,11 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 class FileLocationsImpl implements FileLocations {
 	
-	@Inject @Accessors Provider<WorkspaceConfig> projectInformationProvider
+	@Inject @Accessors Provider<IWorkspaceConfig> projectInformationProvider
 	
 	protected def ProjectConfig getProjectConfig(Path path) {
 		val string = path.getSegments().get(0)
-		val projectConfig = projectInformationProvider.get.projects.get(string)
+		val projectConfig = projectInformationProvider.get.getProject(string)
 		if (projectConfig == null) {
 			throw new IllegalArgumentException("The project '"+string+"' has not been configured.")
 		}
@@ -33,12 +33,7 @@ class FileLocationsImpl implements FileLocations {
 	
 	override Path getSourceFolder(Path path) {
 		val config = getProjectConfig(path)
-		for (Path src : config.sourceFolderMappings.keySet()) {
-			if (path.startsWith(src)) {
-				return src
-			}
-		}
-		return null
+		return config.getContainingSourceFolder(path)
 	}
 
 	override Path getTargetFolder(Path path) {
@@ -58,7 +53,7 @@ class FileLocationsImpl implements FileLocations {
 	
 	override getProjectSourceFolders(Path path) {
 		val config = getProjectConfig(path)
-		return config.sourceFolderMappings.keySet.immutableCopy
+		return config.sourceFolderMappings.keySet.unmodifiableView
 	}
 	
 }

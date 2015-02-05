@@ -17,16 +17,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
  */
 @Singleton
 @Accessors
-class RuntimeWorkspaceConfigProvider implements Provider<WorkspaceConfig> {
+class RuntimeWorkspaceConfigProvider implements Provider<IWorkspaceConfig> {
 	File workspaceRoot = new File(".").absoluteFile.parentFile
-	WorkspaceConfig workspaceConfig
+	IWorkspaceConfig workspaceConfig
 	
 	override get() {
 		if (workspaceConfig == null) {
-			workspaceConfig = new WorkspaceConfig(workspaceRoot.absolutePath) => [
+			workspaceConfig = new SimpleWorkspaceConfig(workspaceRoot.absolutePath) => [
 				for (dir : workspaceRoot.listFiles.filter[isDirectory]) {
-					addProjectConfig(new ProjectConfig(dir.name) => [
-					])
+					addProjectConfig(new ProjectConfig(dir.name))
 				}
 			]
 		}
