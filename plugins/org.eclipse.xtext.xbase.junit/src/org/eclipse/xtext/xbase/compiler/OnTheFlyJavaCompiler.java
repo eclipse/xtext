@@ -472,7 +472,7 @@ public class OnTheFlyJavaCompiler {
 		JavaVersion javaVersion = JavaVersion.JAVA5;
 		if (generatorConfigProvider != null) {
 			GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
-			javaVersion = generatorConfig.getTargetVersion();
+			javaVersion = generatorConfig.getJavaSourceVersion();
 		}
 		switch (javaVersion) {
 			case JAVA8:
