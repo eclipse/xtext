@@ -185,7 +185,8 @@ public class StandaloneBuilderTest {
 		String sourceDir2 = new File(PROJECT_DIR, "src2").getAbsolutePath();
 		builder.setSourceDirs(ImmutableList.of(sourceDir1, sourceDir2));
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(
-				ImmutableList.of(config), getClass().getClassLoader(), PROJECT_DIR);
+				ImmutableList.of(config), getClass().getClassLoader());
+		builder.setBaseDir(PROJECT_DIR.getAbsolutePath());
 		builder.setLanguages(languages);
 		builder.setClassPathEntries(ImmutableList.<String> of());
 		return builder;
