@@ -196,7 +196,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 			}
 		} else {
 			GeneratorConfig config = b.getGeneratorConfig();
-			if (config != null && config.getTargetVersion().isAtLeast(JAVA7)) {
+			if (config != null && config.getJavaSourceVersion().isAtLeast(JAVA7)) {
 				b.append(numberLiterals.toJavaLiteral(expr, false));
 			} else {
 				b.append(numberLiterals.toJavaLiteral(expr, true));
