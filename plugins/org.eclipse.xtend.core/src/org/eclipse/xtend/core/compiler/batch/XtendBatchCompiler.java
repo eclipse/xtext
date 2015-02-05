@@ -50,7 +50,8 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
+import org.eclipse.xtext.xbase.file.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 
 import com.google.common.base.Function;
@@ -317,7 +318,7 @@ public class XtendBatchCompiler {
 			return false;
 		}
 
-		WorkspaceConfig workspaceConfig = new WorkspaceConfig(commonRoot.getParent().toString());
+		SimpleWorkspaceConfig workspaceConfig = new SimpleWorkspaceConfig(commonRoot.getParent().toString());
 		ProjectConfig projectConfig = new ProjectConfig(commonRoot.getName());
 
 		java.net.URI commonURI = commonRoot.toURI();
