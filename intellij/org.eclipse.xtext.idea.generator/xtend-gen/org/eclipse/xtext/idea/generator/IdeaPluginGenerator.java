@@ -633,8 +633,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("String path = PluginManager.getPlugin(PluginId.getId(\"");
-    String _languageID = this._ideaPluginExtension.getLanguageID(grammar);
-    _builder.append(_languageID, "\t\t");
+    String _basePackageName = this._ideaPluginClassNames.getBasePackageName(grammar);
+    _builder.append(_basePackageName, "\t\t");
     _builder.append("\")).getPath().getPath();");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
@@ -644,7 +644,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("path + \"/bin\", ");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("path + \"/../");
+    _builder.append("path + \"/");
     _builder.append(this.runtimeProjectPath, "\t\t\t");
     _builder.append("/bin\"");
     _builder.newLineIfNotEmpty();
