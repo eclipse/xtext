@@ -16,15 +16,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.Arrays;
 import java.util.Properties;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.toolchain.Toolchain;
 import org.apache.maven.toolchain.ToolchainManager;
 import org.apache.maven.toolchain.java.DefaultJavaToolChain;
@@ -40,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
@@ -53,13 +53,15 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 			return new File(filePath).exists();
 		}
 	};
-	
+
 	/**
-	 * JDK compliance level.
+	 * Create Java Source Code that is compatible to this Java version.
+	 * 
+	 * Supported values: 1.5, 1.6, 1.7, and 1.8
 	 *
-	 * @parameter expression="${maven.compiler.target}" default-value="1.6"
+	 * @parameter expression="${maven.compiler.source}" default-value="1.6"
 	 */
-	private String complianceLevel;
+	private String javaSourceVersion;
 
 	/**
 	 * @component
@@ -75,22 +77,19 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 */
 	private MavenSession session;
 
-	@Inject
-	protected Provider<XtendBatchCompiler> xtendBatchCompilerProvider;
-
 	/**
 	 * Xtend-File encoding argument for the compiler.
 	 * 
 	 * @parameter expression="${encoding}" default-value="${project.build.sourceEncoding}"
 	 */
-	protected String encoding;
+	private String encoding;
 
 	/**
 	 * Set this to false to suppress the creation of *._trace files.
 	 * 
 	 * @parameter default-value="true" expression="${writeTraceFiles}"
 	 */
-	protected boolean writeTraceFiles;
+	private boolean writeTraceFiles;
 
 	/**
 	 * Location of the Xtend settings file.
@@ -100,59 +99,91 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 */
 	private String propertiesFileLocation;
 
+	/**
+	 * Whether <code>@SuppressWarnings</code> shall be generated for non-nested types.
+	 * 
+	 * @parameter default-value="true"
+	 */
+	private boolean generateSyntheticSuppressWarnings;
+
+	/**
+	 * Whether <code>@Generated</code> shall be generated for non-nested types.
+	 * 
+	 * @parameter default-value="false"
+	 */
+	private boolean generateGeneratedAnnotation;
+
+	/**
+	 * Whether the current time shall be added to <code>@Generated</code> annotations.
+	 * 
+	 * @parameter default-value="false"
+	 */
+	private boolean includeDateInGeneratedAnnotation;
+
+	/**
+	 * The comment that is added to <code>@Generated</code> annotations, also supports variables:
+	 * <ul>
+	 * <li><code>${sourcefile}</code></li>
+	 * </ul>
+	 * 
+	 * @parameter
+	 */
+	private String generatedAnnotationComment;
+
 	@Inject
 	private RuntimeWorkspaceConfigProvider workspaceConfigProvider;
 
-	@Deprecated
-	protected XtendBatchCompiler createXtendBatchCompiler() {
-		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
-		XtendBatchCompiler instance = injector.getInstance(XtendBatchCompiler.class);
-		instance.setComplianceLevel(complianceLevel);
-		instance.setBasePath(project.getBasedir().getAbsolutePath());
-		return instance;
-	}
-	
-	/**
-	 * @since 2.8
-	 */
-	protected XtendBatchCompiler getConfiguredBatchCompiler() {
-		XtendBatchCompiler xtend2BatchCompiler = xtendBatchCompilerProvider.get();
-		xtend2BatchCompiler.setComplianceLevel(complianceLevel);
-		xtend2BatchCompiler.setBasePath(project.getBasedir().getAbsolutePath());
-		return xtend2BatchCompiler;
+	@Inject
+	private Provider<XtendBatchCompiler> xtendBatchCompilerProvider;
+
+	protected XtendBatchCompiler getBatchCompiler() {
+		return xtendBatchCompilerProvider.get();
 	}
 
-	protected void compile(XtendBatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
-			String outputPath) throws MojoExecutionException {
-		configureWorkspace(sourceDirectories, outputPath);
-		xtend2BatchCompiler.setResourceSetProvider(new MavenProjectResourceSetProvider(project));
-		Iterable<String> filtered = filter(sourceDirectories, FILE_EXISTS);
+	protected void compile(String classPath, List<String> sourcePaths, String outputPath) throws MojoExecutionException {
+		XtendBatchCompiler compiler = getBatchCompiler();
+		Log log = getLog();
+		configureWorkspace(sourcePaths, outputPath);
+		compiler.setResourceSetProvider(new MavenProjectResourceSetProvider(project));
+		Iterable<String> filtered = filter(sourcePaths, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
-			getLog().info(
-					"skip compiling sources because the configured directory '" + Iterables.toString(sourceDirectories)
-							+ "' does not exists.");
+			String dir = Iterables.toString(sourcePaths);
+			log.info("skip compiling sources because the configured directory '" + dir + "' does not exists.");
 			return;
 		}
-		getLog().debug("Set temp directory: " + getTempDirectory());
-		xtend2BatchCompiler.setTempDirectory(getTempDirectory());
-		getLog().debug("Set DeleteTempDirectory: " + false);
-		xtend2BatchCompiler.setDeleteTempDirectory(false);
-		getLog().debug("Set classpath: " + classPath);
-		xtend2BatchCompiler.setClassPath(classPath);
+		String baseDir = project.getBasedir().getAbsolutePath();
+		log.debug("Set Java Compliance Level: " + javaSourceVersion);
+		compiler.setJavaSourceVersion(javaSourceVersion);
+		log.debug("Set generateSyntheticSuppressWarnings: " + generateSyntheticSuppressWarnings);
+		compiler.setGenerateSyntheticSuppressWarnings(generateSyntheticSuppressWarnings);
+		log.debug("Set generateGeneratedAnnotation: " + generateGeneratedAnnotation);
+		compiler.setGenerateGeneratedAnnotation(generateGeneratedAnnotation);
+		log.debug("Set includeDateInGeneratedAnnotation: " + includeDateInGeneratedAnnotation);
+		compiler.setIncludeDateInGeneratedAnnotation(includeDateInGeneratedAnnotation);
+		log.debug("Set generatedAnnotationComment: " + generatedAnnotationComment);
+		compiler.setGeneratedAnnotationComment(generatedAnnotationComment);
+		log.debug("Set baseDir: " + baseDir);
+		compiler.setBasePath(baseDir);
+		log.debug("Set temp directory: " + getTempDirectory());
+		compiler.setTempDirectory(getTempDirectory());
+		log.debug("Set DeleteTempDirectory: " + false);
+		compiler.setDeleteTempDirectory(false);
+		log.debug("Set classpath: " + classPath);
+		compiler.setClassPath(classPath);
 		String bootClassPath = getBootClassPath();
-		getLog().debug("Set bootClasspath: " + bootClassPath);
-		xtend2BatchCompiler.setBootClassPath(bootClassPath);
-		getLog().debug("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
-		xtend2BatchCompiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
-		getLog().debug("Set output path: " + outputPath);
-		xtend2BatchCompiler.setOutputPath(outputPath);
-		getLog().debug("Set encoding: " + encoding);
-		xtend2BatchCompiler.setFileEncoding(encoding);
-		getLog().debug("Set writeTraceFiles: " + writeTraceFiles);
-		xtend2BatchCompiler.setWriteTraceFiles(writeTraceFiles);
-		if (!xtend2BatchCompiler.compile()) {
-			throw new MojoExecutionException("Error compiling xtend sources in '"
-					+ concat(File.pathSeparator, newArrayList(filtered)) + "'.");
+		log.debug("Set bootClasspath: " + bootClassPath);
+		compiler.setBootClassPath(bootClassPath);
+		log.debug("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
+		compiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
+		log.debug("Set output path: " + outputPath);
+		compiler.setOutputPath(outputPath);
+		log.debug("Set encoding: " + encoding);
+		compiler.setFileEncoding(encoding);
+		log.debug("Set writeTraceFiles: " + writeTraceFiles);
+		compiler.setWriteTraceFiles(writeTraceFiles);
+		if (!compiler.compile()) {
+			String dir = concat(File.pathSeparator, newArrayList(filtered));
+			throw new MojoExecutionException("Error compiling xtend sources in '" + dir + "'.");
 		}
 	}
 
@@ -162,7 +193,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 			DefaultJavaToolChain javaToolChain = (DefaultJavaToolChain) toolchain;
 			getLog().info("Using toolchain " + javaToolChain);
 
-			String[] includes = {"jre/lib/*", "jre/lib/ext/*", "jre/lib/endorsed/*"};
+			String[] includes = { "jre/lib/*", "jre/lib/ext/*", "jre/lib/endorsed/*" };
 			String[] excludes = new String[0];
 			Xpp3Dom config = (Xpp3Dom) javaToolChain.getModel().getConfiguration();
 			if (config != null) {
@@ -185,11 +216,9 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	}
 
 	private String scanBootclasspath(String javaHome, String[] includes, String[] excludes) {
-		getLog().debug("Scanning bootClassPath:\n"
-				+"\tjavaHome = " + javaHome + "\n"
-				+"\tincludes = "+ Arrays.toString(includes) + "\n"
-				+"\texcludes = "+ Arrays.toString(excludes)
-		);
+		getLog().debug(
+				"Scanning bootClassPath:\n" + "\tjavaHome = " + javaHome + "\n" + "\tincludes = "
+						+ Arrays.toString(includes) + "\n" + "\texcludes = " + Arrays.toString(excludes));
 		DirectoryScanner scanner = new DirectoryScanner();
 		scanner.setBasedir(new File(javaHome));
 		scanner.setIncludes(includes);
@@ -216,7 +245,8 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	}
 
 	private void configureWorkspace(List<String> sourceDirectories, String outputPath) throws MojoExecutionException {
-		SimpleWorkspaceConfig workspaceConfig = new SimpleWorkspaceConfig(project.getBasedir().getParentFile().getAbsolutePath());
+		SimpleWorkspaceConfig workspaceConfig = new SimpleWorkspaceConfig(project.getBasedir().getParentFile()
+				.getAbsolutePath());
 		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
 		URI absoluteRootPath = project.getBasedir().getAbsoluteFile().toURI();
 		URI relativizedTarget = absoluteRootPath.relativize(new File(outputPath).toURI());

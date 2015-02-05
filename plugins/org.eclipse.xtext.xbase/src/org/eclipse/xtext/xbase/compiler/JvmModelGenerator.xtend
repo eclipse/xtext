@@ -346,7 +346,7 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("abstract ")
 		if (isStatic)
 			appendable.append("static ")
-		if (!isAbstract && !isStatic && config.targetVersion.isAtLeast(JAVA8)
+		if (!isAbstract && !isStatic && config.getJavaSourceVersion.isAtLeast(JAVA8)
 				&& eContainer instanceof JvmGenericType && (eContainer as JvmGenericType).isInterface)
 			appendable.append("default ")
 		if (isFinal)
@@ -663,7 +663,7 @@ class JvmModelGenerator implements IGenerator {
 				}
 			}
 		}
-		if (config.targetVersion.isAtLeast(JAVA8)) {
+		if (config.getJavaSourceVersion.isAtLeast(JAVA8)) {
 			for (JvmTypeReference interfaceRef : declaredType.extendedInterfaces) {
 				val interfaze = interfaceRef.type
 				val simpleVarName = interfaze.simpleName + '.super'

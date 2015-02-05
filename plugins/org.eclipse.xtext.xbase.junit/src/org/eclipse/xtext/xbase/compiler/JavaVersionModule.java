@@ -36,7 +36,7 @@ public class JavaVersionModule implements Module {
 		@Override
 		public GeneratorConfig get(EObject context) {
 			GeneratorConfig config = new GeneratorConfig();
-			config.setTargetVersion(targetVersion);
+			config.setJavaSourceVersion(targetVersion);
 			return config;
 		}
 		
