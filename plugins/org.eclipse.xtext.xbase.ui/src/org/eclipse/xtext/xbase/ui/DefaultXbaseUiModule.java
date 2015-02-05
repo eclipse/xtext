@@ -26,9 +26,11 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.xbase.file.WorkspaceConfig;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseContentProposalPriorities;
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xbase.ui.editor.actions.XbaseFoldingActionContributor;
+import org.eclipse.xtext.xbase.ui.file.EclipseWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDispatchingEObjectTextHover;
@@ -39,6 +41,8 @@ import org.eclipse.xtext.xbase.ui.quickfix.XbaseCrossRefResolutionConverter;
 import org.eclipse.xtext.xbase.ui.validation.ProjectAwareUniqueClassNameValidator;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
 import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator;
+
+import com.google.inject.Binder;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -120,5 +124,9 @@ public class DefaultXbaseUiModule extends DefaultCommonTypesUiModule {
 
 	public Class<? extends FoldingActionContributor> bindFoldingActionContributor() {
 		return XbaseFoldingActionContributor.class;
+	}
+	
+	public void configureWorkspaceConfigContribution(Binder binder) {
+		binder.bind(WorkspaceConfig.class).toProvider(EclipseWorkspaceConfigProvider.class);
 	}
 }
