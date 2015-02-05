@@ -82,7 +82,7 @@ abstract class SourceAttachmentPackageFragmentRootWalker<T> extends PackageFragm
 				IPackageFragmentRoot packageFragmentRoot = root.getJavaProject().getPackageFragmentRoot(
 						sourceAttachmentPath.toOSString());
 				if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
-					// This lets us determine the linked resource for this attachement
+					// This lets us determine the linked resource for this attachment
 					//
 					IResource resource = ((ExternalPackageFragmentRoot) packageFragmentRoot).resource();
 					if (resource instanceof IFolder) {

@@ -101,7 +101,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		
 		if (sourceFolders.length == 0 || indexManager.awaitingJobsCount() > 0) {
 			// still indexing - don't enter a busy wait loop but ask the source folders directly
-			switch doCheckUniqueInProjectSource(packageName, typeName, type, sourceFolders) {
+			switch doCheckUniqueInProjectSource(packageName?:'', typeName, type, sourceFolders) {
 				case DUPLICATE: return false
 				case UNIQUE: return true
 				default: {

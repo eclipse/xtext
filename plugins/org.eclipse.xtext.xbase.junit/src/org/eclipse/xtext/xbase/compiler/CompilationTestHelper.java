@@ -41,7 +41,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -110,7 +110,7 @@ public class CompilationTestHelper {
 	 */
 	public void configureFreshWorkspace() {
 		File tempDir = createFreshTempDir();
-		WorkspaceConfig config = new WorkspaceConfig(tempDir.getAbsolutePath());
+		SimpleWorkspaceConfig config = new SimpleWorkspaceConfig(tempDir.getAbsolutePath());
 		ProjectConfig projectConfig = new ProjectConfig(PROJECT_NAME);
 		// use default output configuration for the FileSystem Access
 		OutputConfiguration outputConfig = null;

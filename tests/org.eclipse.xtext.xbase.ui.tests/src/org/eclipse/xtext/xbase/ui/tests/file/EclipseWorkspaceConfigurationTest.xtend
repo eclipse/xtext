@@ -54,10 +54,14 @@ class EclipseWorkspaceConfigurationTest {
 				]}
 			])
 		]
-		val projectAConfig = provider.get.projects.get("projectA")
+		val projectAConfig = provider.get.getProject("projectA")
+		val sourceBeforeInit = projectAConfig.getContainingSourceFolder(new Path("/projectA/src/com/acme"))
+		assertEquals("/projectA/src", sourceBeforeInit.toString)
 		assertEquals(1, projectAConfig.sourceFolderMappings.size)
 		val target = projectAConfig.sourceFolderMappings.get(new Path("/projectA/src"))
 		assertEquals("/projectA/xtend-gen", target.toString)
+		val sourceAfterInit = projectAConfig.getContainingSourceFolder(new Path("/projectA/src/com/acme"))
+		assertEquals("/projectA/src", sourceAfterInit.toString)
 	}
 }
 
