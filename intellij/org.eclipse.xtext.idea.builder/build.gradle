@@ -1,3 +1,4 @@
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.builder.standalone:${version}"
+	compile "org.eclipse.xtend:org.eclipse.xtend.core:$version"
 }

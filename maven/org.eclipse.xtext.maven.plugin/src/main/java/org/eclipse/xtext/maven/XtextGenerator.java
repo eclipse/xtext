@@ -143,10 +143,11 @@ public class XtextGenerator extends AbstractMojo {
 
 	protected void internalExecute() throws MojoExecutionException, MojoFailureException {
 		Map<String, LanguageAccess> languages = new LanguageAccessFactory().createLanguageAccess(getLanguages(), this
-				.getClass().getClassLoader(), project.getBasedir());
+				.getClass().getClassLoader());
 		Iterable<String> classPathEntries = filter(getClasspathElements(), emptyStringFilter());
 		Injector injector = Guice.createInjector(new MavenStandaloneBuilderModule());
 		StandaloneBuilder builder = injector.getInstance(StandaloneBuilder.class);
+		builder.setBaseDir(project.getBasedir().getAbsolutePath());
 		builder.setLanguages(languages);
 		builder.setEncoding(encoding);
 		builder.setClassPathEntries(classPathEntries);

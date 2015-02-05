@@ -82,6 +82,9 @@ public class StandaloneBuilder {
   private Map<String, LanguageAccess> languages;
   
   @Accessors
+  private String baseDir;
+  
+  @Accessors
   private Iterable<String> sourceDirs;
   
   @Accessors
@@ -121,7 +124,7 @@ public class StandaloneBuilder {
   private AbstractFileSystemAccess commonFileAccess;
   
   @Inject
-  private IIssueHandler issueHandler;
+  protected IIssueHandler issueHandler;
   
   @Inject
   private IEncodingProvider.Runtime encodingProvider;
@@ -146,6 +149,12 @@ public class StandaloneBuilder {
       }
     };
     final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
+    boolean _equals = Objects.equal(this.baseDir, null);
+    if (_equals) {
+      String _property = System.getProperty("user.dir");
+      this.baseDir = _property;
+      StandaloneBuilder.LOG.warn((("Property baseDir not set. Using \'" + this.baseDir) + "\'"));
+    }
     if (needsJava) {
       StandaloneBuilder.LOG.info("Using common types.");
     }
@@ -432,6 +441,7 @@ public class StandaloneBuilder {
         this.registerCurrentSource(_uRI_1);
         URI _uRI_2 = it.getURI();
         final LanguageAccess access = this.languageAccess(_uRI_2);
+        final JavaIoFileSystemAccess fileSystemAccess = this.getFileSystemAccess(access);
         boolean _isWriteStorageResources = this.isWriteStorageResources();
         if (_isWriteStorageResources) {
           boolean _matched = false;
@@ -442,22 +452,20 @@ public class StandaloneBuilder {
               if (_notEquals) {
                 _matched=true;
                 IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)it).getResourceStorageFacade();
-                JavaIoFileSystemAccess _fileSystemAccess = access.getFileSystemAccess();
-                _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), _fileSystemAccess);
+                _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), fileSystemAccess);
               }
             }
           }
         }
         IGenerator _generator = access.getGenerator();
-        JavaIoFileSystemAccess _fileSystemAccess = access.getFileSystemAccess();
-        _generator.doGenerate(it, _fileSystemAccess);
+        _generator.doGenerate(it, fileSystemAccess);
       }
     }
   }
   
   protected void registerCurrentSource(final URI uri) {
     LanguageAccess _languageAccess = this.languageAccess(uri);
-    final JavaIoFileSystemAccess fsa = _languageAccess.getFileSystemAccess();
+    final JavaIoFileSystemAccess fsa = this.getFileSystemAccess(_languageAccess);
     final Function1<String, String> _function = new Function1<String, String>() {
       @Override
       public String apply(final String it) {
@@ -519,6 +527,26 @@ public class StandaloneBuilder {
         }
       }
     }
+  }
+  
+  private Map<LanguageAccess, JavaIoFileSystemAccess> configuredFsas = CollectionLiterals.<LanguageAccess, JavaIoFileSystemAccess>newHashMap();
+  
+  private JavaIoFileSystemAccess getFileSystemAccess(final LanguageAccess language) {
+    JavaIoFileSystemAccess fsa = this.configuredFsas.get(language);
+    boolean _equals = Objects.equal(fsa, null);
+    if (_equals) {
+      File _file = new File(this.baseDir);
+      JavaIoFileSystemAccess _createFileSystemAccess = language.createFileSystemAccess(_file);
+      fsa = _createFileSystemAccess;
+      JavaIoFileSystemAccess _configureFileSystemAccess = this.configureFileSystemAccess(fsa, language);
+      fsa = _configureFileSystemAccess;
+      this.configuredFsas.put(language, fsa);
+    }
+    return fsa;
+  }
+  
+  protected JavaIoFileSystemAccess configureFileSystemAccess(final JavaIoFileSystemAccess fsa, final LanguageAccess language) {
+    return fsa;
   }
   
   private LanguageAccess languageAccess(final URI uri) {
@@ -724,6 +752,15 @@ public class StandaloneBuilder {
   
   public void setLanguages(final Map<String, LanguageAccess> languages) {
     this.languages = languages;
+  }
+  
+  @Pure
+  public String getBaseDir() {
+    return this.baseDir;
+  }
+  
+  public void setBaseDir(final String baseDir) {
+    this.baseDir = baseDir;
   }
   
   @Pure

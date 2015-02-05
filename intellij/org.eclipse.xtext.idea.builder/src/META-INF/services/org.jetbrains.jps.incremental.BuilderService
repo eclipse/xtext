@@ -1,1 +1,2 @@
 org.eclipse.xtext.idea.build.XtextBuildService
+org.eclipse.xtext.idea.build.incremental.XtextIncrementalBuilderService
