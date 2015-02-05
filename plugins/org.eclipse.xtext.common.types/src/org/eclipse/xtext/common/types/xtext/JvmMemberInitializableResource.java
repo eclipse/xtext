@@ -5,12 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types;
+package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmMember;
 
 /**
- * Interface to be implemented by EMF {@link Resource}s that support lazy initialization of JvmMembers.
+ * Interface to be implemented by EMF {@link Resource resources} that support lazy initialization of {@link JvmMember members}.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.8
@@ -21,17 +22,17 @@ import org.eclipse.emf.ecore.resource.Resource;
 public interface JvmMemberInitializableResource {
 
 	/**
-	 * Executes any {@link Runnable}s added through {@link #addRunnableForJvmMembersInitialization(Runnable)}
+	 * Executes any {@link Runnable runnables} added through {@link #addRunnableForJvmMembersInitialization(Runnable)}
 	 */
 	public void ensureJvmMembersInitialized();
 	
 	/**
-	 * register {@link Runnable}s to be executed on JvmMemberInitialization
+	 * register {@link Runnable runnables} to be executed on {@link #ensureJvmMembersInitialized()}.
 	 */
 	public void addRunnableForJvmMembersInitialization(Runnable runnable);
 	
 	/**
-	 * @return whether lazy JvmMember initialization is activated for this resource.
+	 * @return whether lazy {@link JvmMember} initialization is activated for this resource.
 	 */
 	public boolean isLazyJvmMemberInitialization();
 }
