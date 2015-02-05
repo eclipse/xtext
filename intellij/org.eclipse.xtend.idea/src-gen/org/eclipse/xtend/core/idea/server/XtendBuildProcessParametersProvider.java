@@ -14,7 +14,7 @@ public class XtendBuildProcessParametersProvider extends BuildProcessParametersP
 		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtend.idea")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
-			path + "/../../org.eclipse.xtend.core/bin"
+			path + "/../../plugins/org.eclipse.xtend.core/bin"
 		);
 	}
 

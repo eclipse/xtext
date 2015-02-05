@@ -28,11 +28,11 @@ public class XtextBuildProcessParametersProvider extends BuildProcessParametersP
     {
       PluginId _id = PluginId.getId("org.eclipse.xtext.idea");
       final IdeaPluginDescriptor plugin = PluginManager.getPlugin(_id);
-      final File pluginFolder = plugin.getPath();
-      String _path = pluginFolder.getPath();
-      String _plus = (_path + "/../org.eclipse.xtext.idea.builder/bin");
-      final ArrayList<String> result = CollectionLiterals.<String>newArrayList(_plus);
-      File _file = new File(pluginFolder, "lib");
+      File _path = plugin.getPath();
+      final String builderPluginFolder = (_path + "/../org.eclipse.xtext.idea.builder");
+      final ArrayList<String> result = CollectionLiterals.<String>newArrayList((builderPluginFolder + "/bin"));
+      result.add((builderPluginFolder + "/../../plugins/org.eclipse.xtext.builder.standalone/bin"));
+      File _file = new File(builderPluginFolder, "lib");
       File[] _listFiles = _file.listFiles();
       final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
         @Override

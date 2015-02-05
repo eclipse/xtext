@@ -13,7 +13,7 @@ public class EntitiesBuildProcessParametersProvider extends BuildProcessParamete
 		String path = PluginManager.getPlugin(PluginId.getId("org.eclipse.xtext.idea.example.entities.idea")).getPath().getPath();
 		return Arrays.asList(
 			path + "/bin", 
-			path + "/../../org.eclipse.xtext.idea.example.entities/bin"
+			path + "/../org.eclipse.xtext.idea.example.entities/bin"
 		);
 	}
 
