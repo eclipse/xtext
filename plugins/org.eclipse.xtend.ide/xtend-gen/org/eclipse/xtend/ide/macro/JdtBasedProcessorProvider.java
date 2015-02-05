@@ -27,9 +27,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
+import org.eclipse.xtend.ide.macro.Foo;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
@@ -76,7 +78,19 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     return this.createClassLoaderForJavaProject(project);
   }
   
+  private static int i = 0;
+  
   protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
+    JdtBasedProcessorProvider.i = (JdtBasedProcessorProvider.i + 1);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(JdtBasedProcessorProvider.i, "");
+    _builder.append(": createClassLoaderForJavaProject(\"");
+    IProject _project = projectToUse.getProject();
+    String _name = _project.getName();
+    _builder.append(_name, "");
+    _builder.append("\") {");
+    InputOutput.<String>println(_builder.toString());
+    final long t = System.nanoTime();
     final LinkedHashSet<String> classPathEntries = CollectionLiterals.<String>newLinkedHashSet();
     HashSet<IJavaProject> _newHashSet = CollectionLiterals.<IJavaProject>newHashSet();
     this.deepCollectRuntimeClassPath(projectToUse, _newHashSet, classPathEntries);
@@ -95,6 +109,13 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     };
     Iterable<URL> _map = IterableExtensions.<String, URL>map(classPathEntries, _function);
     final List<URL> urls = IterableExtensions.<URL>toList(_map);
+    long _nanoTime = System.nanoTime();
+    final long d = (_nanoTime - t);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("} ---> ");
+    _builder_1.append((((double) d) / 1000000), "");
+    _builder_1.append("ms");
+    InputOutput.<String>println(_builder_1.toString());
     ClassLoader _parentClassLoader = this.getParentClassLoader();
     return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
   }
@@ -143,7 +164,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       if (_not) {
         return;
       }
-      final String[] entries = JavaRuntime.computeDefaultRuntimeClassPath(project);
+      final String[] entries = Foo.computeDefaultRuntimeClassPath(project);
       CollectionExtensions.<String>addAll(allEntries, entries);
       String[] _requiredProjectNames = project.getRequiredProjectNames();
       for (final String requiredProjectName : _requiredProjectNames) {

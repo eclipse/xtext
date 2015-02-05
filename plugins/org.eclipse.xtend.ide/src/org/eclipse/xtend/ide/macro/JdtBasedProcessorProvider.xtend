@@ -18,11 +18,13 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.launching.JavaRuntime
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.jdt.launching.IRuntimeClasspathEntry
+import org.eclipse.core.runtime.CoreException
+import java.util.ArrayList
 
 class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	
@@ -42,12 +44,19 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		return createClassLoaderForJavaProject(project)
 	}
 	
+	static int i =0 
+	
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
+		i = i +1
+		println('''«i»: createClassLoaderForJavaProject("«projectToUse.project.name»") {''')
+		val t = System.nanoTime
 		val classPathEntries = <String>newLinkedHashSet
 		deepCollectRuntimeClassPath(projectToUse, newHashSet, classPathEntries)
 		// remove local output folders, as they are in an inconsistent state
 		removeLocalOutputFolders(projectToUse, classPathEntries)
 		val List<URL> urls = classPathEntries.map[new File(it).toURI.toURL].toList
+		val d = System.nanoTime - t
+		println('''} ---> «(d as double) / 1_000_000»ms''')
 		return new URLClassLoader(urls, getParentClassLoader())
 	}
 	
@@ -69,7 +78,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		if (!visitedProjects.add(project)) {
 			return;
 		}
-		val entries = JavaRuntime.computeDefaultRuntimeClassPath(project)
+		val entries = Foo.computeDefaultRuntimeClassPath(project)
 		allEntries.addAll(entries)
 		for (requiredProjectName : project.requiredProjectNames) {
 			val reqProject = project.project.workspace.root.getProject(requiredProjectName);
@@ -85,4 +94,5 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		return bundleClassLoader
 	}
 	
+		
 }
