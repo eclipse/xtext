@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.validation;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -55,7 +54,7 @@ import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.resource.ResourceSetContext;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -280,20 +279,13 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
   }
   
   private ICompilationUnit[] getWorkingCopies(final JvmDeclaredType type) {
-    boolean _isBuilderScope = this.isBuilderScope(type);
-    if (_isBuilderScope) {
+    ResourceSetContext _get = ResourceSetContext.get(type);
+    boolean _isBuilder = _get.isBuilder();
+    if (_isBuilder) {
       return new ICompilationUnit[] {};
     }
     JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
     return _javaModelManager.getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false);
-  }
-  
-  private boolean isBuilderScope(final JvmDeclaredType type) {
-    Resource _eResource = type.eResource();
-    final ResourceSet resourceSet = _eResource.getResourceSet();
-    Map<Object, Object> _loadOptions = resourceSet.getLoadOptions();
-    final boolean builderScope = _loadOptions.containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
-    return builderScope;
   }
   
   protected boolean isDerived(final IResource resource) {

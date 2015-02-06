@@ -37,6 +37,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.xbase.validation.UniqueClassNameValidator
 import org.eclipse.jdt.core.JavaModelException
 import org.eclipse.core.runtime.CoreException
+import org.eclipse.xtext.resource.ResourceSetContext
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -159,18 +160,12 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 	}
 	
 	def private ICompilationUnit[] getWorkingCopies(JvmDeclaredType type) {
-		if (isBuilderScope(type)) {
+		if (ResourceSetContext.get(type).isBuilder) {
 			return #[]
 		}
 		return JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false);
 	}
 
-	def private boolean isBuilderScope(JvmDeclaredType type) {
-		val resourceSet = type.eResource.resourceSet
-		val builderScope = resourceSet.getLoadOptions().containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
-		return builderScope;
-	}
-	
 	def protected isDerived(IResource resource) {
 		try {
 			if (derivedResourceMarkers.findDerivedResourceMarkers(resource).length >= 1) {

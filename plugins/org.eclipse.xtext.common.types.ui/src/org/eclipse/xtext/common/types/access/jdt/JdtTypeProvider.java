@@ -60,8 +60,8 @@ import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess.ShadowedTypeException;
 import org.eclipse.xtext.common.types.access.impl.TypeResourceServices;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.resource.ResourceSetContext;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
 
@@ -450,15 +450,10 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	}
 
 	private ICompilationUnit[] getWorkingCopies() {
-		if (isBuilderScope()) {
+		if (ResourceSetContext.get(getResourceSet()).isBuilder()) {
 			return new ICompilationUnit[0];
 		}
 		return JavaModelManager.getJavaModelManager().getWorkingCopies(DefaultWorkingCopyOwner.PRIMARY, false/*don't add primary WCs a second time*/);
-	}
-
-	private boolean isBuilderScope() {
-		boolean builderScope = getResourceSet().getLoadOptions().containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE);
-		return builderScope;
 	}
 
 	private IPackageFragmentRoot[] getSourceFolders() throws JavaModelException {
