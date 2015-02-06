@@ -6,6 +6,9 @@
 		<version>2.8.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtext.parent</relativePath>
 	</parent>
+	<properties>
+		<java.runtime.lib>${java.home}/lib/rt.jar</java.runtime.lib>
+	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtext.xbase.lib.slim</artifactId>
 	<packaging>jar</packaging>
@@ -70,7 +73,7 @@
 						<option>-dontwarn javax.annotation.**</option>
 					</options>
 					<libs>
-						<lib>${java.home}/lib/rt.jar</lib>
+						<lib>${java.runtime.lib}</lib>
 					</libs>
 					<assembly>
 						<inclusions>
@@ -88,4 +91,17 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>missing-runtime-lib</id>
+			<activation>
+				<file>
+					<missing>${java.home}/lib/rt.jar</missing>
+				</file>
+			</activation>
+			<properties>
+				<java.runtime.lib>${java.home}/../Classes/classes.jar</java.runtime.lib>
+			</properties>
+		</profile>
+	</profiles>
 </project>
