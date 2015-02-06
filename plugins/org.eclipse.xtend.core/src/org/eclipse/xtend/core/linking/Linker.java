@@ -7,13 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.linking;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
@@ -29,7 +26,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
+import org.eclipse.xtext.resource.ResourceSetContext;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 
@@ -43,7 +40,7 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class Linker extends XbaseLazyLinker {
-
+	
 	@Inject
 	private IValueConverterService valueConverterService;
 	
@@ -58,11 +55,7 @@ public class Linker extends XbaseLazyLinker {
 	
 	@Override
 	protected boolean isClearAllReferencesRequired(Resource resource) {
-		ResourceSet resourceSet = resource.getResourceSet();
-		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
-		boolean notEditor = loadOptions.containsKey(ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)
-				|| loadOptions.containsKey(ResourceDescriptionsProvider.LIVE_SCOPE);
-		return !notEditor;
+		return ResourceSetContext.get(resource).isEditor();
 	}
 	
 	@Override
