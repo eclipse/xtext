@@ -34,7 +34,7 @@ import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.lib.macro.file.Path;
 import org.eclipse.xtext.xbase.file.ProjectConfig;
 import org.eclipse.xtext.xbase.file.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.file.WorkspaceConfig;
+import org.eclipse.xtext.xbase.file.SimpleWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -216,7 +216,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	}
 
 	private void configureWorkspace(List<String> sourceDirectories, String outputPath) throws MojoExecutionException {
-		WorkspaceConfig workspaceConfig = new WorkspaceConfig(project.getBasedir().getParentFile().getAbsolutePath());
+		SimpleWorkspaceConfig workspaceConfig = new SimpleWorkspaceConfig(project.getBasedir().getParentFile().getAbsolutePath());
 		ProjectConfig projectConfig = new ProjectConfig(project.getBasedir().getName());
 		URI absoluteRootPath = project.getBasedir().getAbsoluteFile().toURI();
 		URI relativizedTarget = absoluteRootPath.relativize(new File(outputPath).toURI());
