@@ -9,9 +9,11 @@ package org.eclipse.xtend.ide.macro
 
 import java.net.URL
 import java.net.URLClassLoader
-import java.util.List
+import java.util.LinkedHashSet
+import java.util.Set
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.IPath
+import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.jdt.core.IClasspathEntry
@@ -21,15 +23,19 @@ import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
-import java.util.LinkedHashSet
-import java.util.Set
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.ResourceSetContext
 
 class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	
+	@FinalFieldsConstructor @Accessors public static class ProcessorClassloaderAdapter extends AdapterImpl {
+		val ClassLoader classLoader
+	}
+	
 	override getProcessorInstance(JvmType type) {
 		try {
-			val project = (type.eResource.resourceSet as XtextResourceSet).classpathURIContext as IJavaProject
-			val classLoader = createClassLoaderForJavaProject(project)
+			val classLoader = getClassLoader(type)
 			val result = classLoader.loadClass(type.identifier)
 			return result.newInstance
 		} catch (Exception e) {
@@ -38,8 +44,19 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	}
 	
 	override getClassLoader(EObject ctx) {
-		val project = (ctx.eResource.resourceSet as XtextResourceSet).classpathURIContext as IJavaProject
-		return createClassLoaderForJavaProject(project)
+		val rs = ctx.eResource.resourceSet as XtextResourceSet
+		val isBuilder = ResourceSetContext.get(rs).isBuilder
+		if (isBuilder) {
+			val adapter = rs.eAdapters.filter(ProcessorClassloaderAdapter).head
+			if (adapter != null)
+				return adapter.classLoader
+		}
+		val project = rs.classpathURIContext as IJavaProject
+		val classloader = createClassLoaderForJavaProject(project)
+		if (isBuilder) {
+			rs.eAdapters.add(new ProcessorClassloaderAdapter(classloader))
+		}
+		return classloader
 	}
 	
 	/**
