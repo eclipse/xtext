@@ -1,7 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.formatting2;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -20,7 +19,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
-import org.eclipse.xtext.example.domainmodel.services.DomainmodelGrammarAccess;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
@@ -56,10 +54,6 @@ import org.eclipse.xtext.xtype.XImportSection;
 
 @SuppressWarnings("all")
 public class DomainmodelFormatter extends XbaseFormatter {
-  @Inject
-  @Extension
-  private DomainmodelGrammarAccess _domainmodelGrammarAccess;
-  
   protected void _format(final DomainModel domainmodel, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
       @Override

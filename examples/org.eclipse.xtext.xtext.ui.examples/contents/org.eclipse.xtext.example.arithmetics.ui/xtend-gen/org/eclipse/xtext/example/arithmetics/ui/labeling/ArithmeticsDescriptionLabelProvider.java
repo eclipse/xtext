@@ -24,7 +24,7 @@ public class ArithmeticsDescriptionLabelProvider extends DefaultDescriptionLabel
   public Image getImage(final Object element) {
     Image _xifexpression = null;
     if ((element instanceof IEObjectDescription)) {
-      EObject _eObjectOrProxy = ((IEObjectDescription) element).getEObjectOrProxy();
+      EObject _eObjectOrProxy = ((IEObjectDescription)element).getEObjectOrProxy();
       _xifexpression = this.labelProvider.getImage(_eObjectOrProxy);
     } else {
       _xifexpression = super.getImage(element);

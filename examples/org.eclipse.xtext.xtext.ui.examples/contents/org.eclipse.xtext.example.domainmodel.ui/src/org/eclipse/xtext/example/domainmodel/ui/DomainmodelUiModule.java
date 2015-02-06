@@ -53,11 +53,11 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 		return EclipseOutputConfigurationProvider.class;
 	}
 	
-	@SuppressWarnings("restriction")
 	public Class<? extends AbstractFileSystemSupport> bindAbstractFileSystemSupport() {
 		return EclipseFileSystemSupportImpl.class;
 	}
 	
+	@Override
 	public Class<? extends AbstractFileSystemAccess2> bindAbstractFileSystemAccess2() {
 		return EclipseResourceFileSystemAccess2.class;
 	}
