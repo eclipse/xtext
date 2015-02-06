@@ -1,6 +1,5 @@
 package org.eclipse.xtext.example.domainmodel.formatting2;
 
-import com.google.inject.Inject
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity
@@ -8,7 +7,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Feature
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property
-import org.eclipse.xtext.example.domainmodel.services.DomainmodelGrammarAccess
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatter
 
@@ -16,7 +14,6 @@ import static org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPacka
 
 class DomainmodelFormatter extends XbaseFormatter {
 
-	@Inject extension DomainmodelGrammarAccess
 
 	def dispatch void format(DomainModel domainmodel, extension IFormattableDocument document) {
 		domainmodel.prepend[setNewLines(0, 0, 1); noSpace].append[newLine]
