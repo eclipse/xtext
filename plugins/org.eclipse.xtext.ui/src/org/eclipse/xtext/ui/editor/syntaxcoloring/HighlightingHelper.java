@@ -155,7 +155,8 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		if (fReconciler != null && event.getProperty().contains(".syntaxColorer.tokenStyles")) {
+		if (fReconciler != null
+				&& event.getProperty().startsWith(PreferenceStoreAccessor.tokenTypeTag(fEditor.getLanguageName()))) {
 			textAttributeProvider.propertyChange(event);
 			fReconciler.refresh();
 		}
