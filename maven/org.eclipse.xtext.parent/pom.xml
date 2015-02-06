@@ -60,7 +60,6 @@
 		<mirroring.phase>prepare-package</mirroring.phase>
 		<skipMirroring>false</skipMirroring>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
-		<!-- <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>  -->
 	</properties>
 	<licenses>
 		<license>
@@ -155,6 +154,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<additionalparam>${javadoc.opts}</additionalparam>
+				</configuration>
 			</plugin>
 			<!-- add install and deploy here, otherwise deploying (deployAtEnd) may 
 				be skipped -->
@@ -299,6 +301,28 @@
 			</activation>
 			<properties>
 				<mirroring.phase>never</mirroring.phase>
+			</properties>
+		</profile>
+		<profile>
+			<id>doclint-java8-disable</id>
+			<activation>
+				<jdk>[1.8,)</jdk>
+			</activation>
+			<properties>
+				<javadoc.opts>-Xdoclint:none</javadoc.opts>
+			</properties>
+		</profile>
+		<profile>
+			<!-- Mac OSX Jdk fails to load javadoc -->
+			<id>javadoc-location-mac</id>
+			<activation>
+				<file>
+					<exists>${java.home}/../bin/javadoc</exists>
+					<missing>${java.home}/bin/javadoc</missing>
+				</file>
+			</activation>
+			<properties>
+				<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
 			</properties>
 		</profile>
 	</profiles>
