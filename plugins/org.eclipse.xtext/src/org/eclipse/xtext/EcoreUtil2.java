@@ -742,6 +742,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 	
 	/**
+	 * Same as {@link #getAllNonDerivedContents(EObject, boolean) getAllNonDerivedContents(root, false)}. 
 	 * @since 2.6
 	 */
 	public static TreeIterator<EObject> getAllNonDerivedContents(EObject root) {
