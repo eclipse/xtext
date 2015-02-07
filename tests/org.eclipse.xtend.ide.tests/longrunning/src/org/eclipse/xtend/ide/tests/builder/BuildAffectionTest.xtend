@@ -84,7 +84,9 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -103,7 +105,9 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -121,6 +125,7 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -140,7 +145,9 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -159,7 +166,9 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -182,7 +191,9 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -204,7 +215,9 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -225,9 +238,12 @@ class BuildAffectionTest {
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -246,7 +262,9 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -268,7 +286,9 @@ class BuildAffectionTest {
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -290,9 +310,12 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.project
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -316,7 +339,9 @@ class BuildAffectionTest {
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -338,9 +363,12 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.project
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -361,7 +389,9 @@ class BuildAffectionTest {
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -380,7 +410,9 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -400,7 +432,9 @@ class BuildAffectionTest {
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -418,9 +452,12 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.project
 			indexing platform:/resource/test.project/src/Bar.xtend
+			Build test.project in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 		''')
 	}
 	
@@ -441,10 +478,14 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.client
 			indexing platform:/resource/test.client/src/Client.xtend
+			Build test.client in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.client
+			Build test.client in \d+ ms
 		''')
 	}
 	
@@ -464,11 +505,16 @@ class BuildAffectionTest {
 		''')
 		assertBuildLogs('''
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.client
+			Build test.client in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.client
 			indexing platform:/resource/test.client/src/Client.xtend
+			Build test.client in \d+ ms
 			Building test.client
+			Build test.client in \d+ ms
 		''')
 	}
 	
@@ -509,10 +555,14 @@ class BuildAffectionTest {
 		assertBuildLogs('''
 			Building test.project
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.client
 			indexing platform:/resource/test.client/src/Client.xtend
+			Build test.client in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.client
+			Build test.client in \d+ ms
 		''')
 	}
 	
@@ -551,10 +601,14 @@ class BuildAffectionTest {
 			Building test.project
 			indexing platform:/resource/test.project/src/Bar.xtend
 			indexing platform:/resource/test.project/src/Foo.xtend
+			Build test.project in \d+ ms
 			Building test.client
 			indexing platform:/resource/test.client/src/Client.xtend
+			Build test.client in \d+ ms
 			Building test.project
+			Build test.project in \d+ ms
 			Building test.client
+			Build test.client in \d+ ms
 		''')
 	}
 	
@@ -564,7 +618,7 @@ class BuildAffectionTest {
 			logs.append(toString.trim + '\n')
 		]
 		autoBuild
-		assertEquals(expected.toString.trim, logs.toString.trim)
+		assertTrue(logs.toString.trim, logs.toString.trim.matches(expected.toString.trim))
 	}
 	
 	private def autoBuild() {
