@@ -130,6 +130,36 @@ class Java8CompilerTest1 extends CompilerTest {
 		''', 'test')
 	}
 	
+	@Test def testJava8StreamExample3b() {
+		invokeAndExpect2(#['Carla', 'Brunhild'], '''
+			static class Person {
+			    enum Sex {
+			        MALE, FEMALE
+			    }
+			    String name
+			    int age
+			    Sex gender
+			}
+			
+			def test() {
+				val roster = #[
+					new Person => [name='Carl'     age=19 gender=Person.Sex.MALE],
+					new Person => [name='Carla'    age=37 gender=Person.Sex.FEMALE],
+					new Person => [name='Rocco'    age=12 gender=Person.Sex.MALE],
+					new Person => [name='Frederic' age=50 gender=Person.Sex.MALE],
+					new Person => [name='Brunhild' age=96 gender=Person.Sex.FEMALE]
+				]
+				val namesByGender = roster.stream
+			        .collect(java.util.stream.Collectors.groupingBy(
+			                [gender],
+			                java.util.stream.Collectors.mapping(
+			                    [name],
+			                    java.util.stream.Collectors.toList)))
+			    namesByGender.get(Person.Sex.FEMALE)
+			}
+		''', 'test')
+	}
+	
 	@Test def testJava8StreamExample4() {
 		invokeAndExpect2(133, '''
 			static class Person {
@@ -156,6 +186,37 @@ class Java8CompilerTest1 extends CompilerTest {
 				                    0,
 				                    [Person p | p.age],
 				                    [$0, $1 | Integer.sum($0, $1)])))
+				totalAgeByGender.get(Person.Sex.FEMALE)
+			}
+		''', 'test')
+	}
+	
+	@Test def testJava8StreamExample4b() {
+		invokeAndExpect2(133, '''
+			static class Person {
+			    enum Sex {
+			        MALE, FEMALE
+			    }
+			    String name
+			    int age
+			    Sex gender
+			}
+			
+			def test() {
+				val roster = #[
+					new Person => [name='Carl'     age=19 gender=Person.Sex.MALE],
+					new Person => [name='Carla'    age=37 gender=Person.Sex.FEMALE],
+					new Person => [name='Rocco'    age=12 gender=Person.Sex.MALE],
+					new Person => [name='Frederic' age=50 gender=Person.Sex.MALE],
+					new Person => [name='Brunhild' age=96 gender=Person.Sex.FEMALE]
+				]
+				val totalAgeByGender = roster.stream
+				        .collect(java.util.stream.Collectors.groupingBy(
+				                [gender],
+				                java.util.stream.Collectors.reducing(
+				                    0,
+				                    [age],
+				                    [$0 + $1])))
 				totalAgeByGender.get(Person.Sex.FEMALE)
 			}
 		''', 'test')

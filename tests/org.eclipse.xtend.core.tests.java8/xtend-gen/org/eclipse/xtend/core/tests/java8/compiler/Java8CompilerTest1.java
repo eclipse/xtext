@@ -312,6 +312,85 @@ public class Java8CompilerTest1 extends CompilerTest {
   }
   
   @Test
+  public void testJava8StreamExample3b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("static class Person {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("enum Sex {");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("MALE, FEMALE");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("String name");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("int age");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("Sex gender");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("def test() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val roster = #[");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Carl\'     age=19 gender=Person.Sex.MALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Carla\'    age=37 gender=Person.Sex.FEMALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Rocco\'    age=12 gender=Person.Sex.MALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Frederic\' age=50 gender=Person.Sex.MALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Brunhild\' age=96 gender=Person.Sex.FEMALE]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val namesByGender = roster.stream");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append(".collect(java.util.stream.Collectors.groupingBy(");
+      _builder.newLine();
+      _builder.append("                ");
+      _builder.append("[gender],");
+      _builder.newLine();
+      _builder.append("                ");
+      _builder.append("java.util.stream.Collectors.mapping(");
+      _builder.newLine();
+      _builder.append("                    ");
+      _builder.append("[name],");
+      _builder.newLine();
+      _builder.append("                    ");
+      _builder.append("java.util.stream.Collectors.toList)))");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("namesByGender.get(Person.Sex.FEMALE)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.invokeAndExpect2(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Carla", "Brunhild")), _builder.toString(), "test");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testJava8StreamExample4() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -381,6 +460,88 @@ public class Java8CompilerTest1 extends CompilerTest {
       _builder.newLine();
       _builder.append("\t                    ");
       _builder.append("[$0, $1 | Integer.sum($0, $1)])))");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("totalAgeByGender.get(Person.Sex.FEMALE)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this.invokeAndExpect2(Integer.valueOf(133), _builder.toString(), "test");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJava8StreamExample4b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("static class Person {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("enum Sex {");
+      _builder.newLine();
+      _builder.append("        ");
+      _builder.append("MALE, FEMALE");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("String name");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("int age");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("Sex gender");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("def test() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val roster = #[");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Carl\'     age=19 gender=Person.Sex.MALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Carla\'    age=37 gender=Person.Sex.FEMALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Rocco\'    age=12 gender=Person.Sex.MALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Frederic\' age=50 gender=Person.Sex.MALE],");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Person => [name=\'Brunhild\' age=96 gender=Person.Sex.FEMALE]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val totalAgeByGender = roster.stream");
+      _builder.newLine();
+      _builder.append("\t        ");
+      _builder.append(".collect(java.util.stream.Collectors.groupingBy(");
+      _builder.newLine();
+      _builder.append("\t                ");
+      _builder.append("[gender],");
+      _builder.newLine();
+      _builder.append("\t                ");
+      _builder.append("java.util.stream.Collectors.reducing(");
+      _builder.newLine();
+      _builder.append("\t                    ");
+      _builder.append("0,");
+      _builder.newLine();
+      _builder.append("\t                    ");
+      _builder.append("[age],");
+      _builder.newLine();
+      _builder.append("\t                    ");
+      _builder.append("[$0 + $1])))");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("totalAgeByGender.get(Person.Sex.FEMALE)");

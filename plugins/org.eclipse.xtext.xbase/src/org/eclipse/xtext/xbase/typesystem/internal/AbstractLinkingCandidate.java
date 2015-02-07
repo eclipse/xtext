@@ -177,18 +177,35 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner()) {
 				@Override
 				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
-					if (!typeParameter.internalIsResolved()
-							&& (getExpectedVariance() == VarianceInfo.INVARIANT)
-							&& getExpectedVariance() == getActualVariance()
-							&& reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE
-						) {
-						typeParameter.acceptHint(
-								reference.getWrapperTypeIfPrimitive(),
-								BoundTypeArgumentSource.INFERRED,
-								getOrigin(),
-								getExpectedVariance(),
-								getActualVariance());
+					if (!typeParameter.internalIsResolved() && getExpectedVariance() == VarianceInfo.INVARIANT) {
+						if (getExpectedVariance() == getActualVariance() && reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+							doAddHint(typeParameter, reference);
+						} else if (getActualVariance() == VarianceInfo.IN && !typeParameter.hasSignificantHints()) {
+							if (reference.getKind() != LightweightTypeReference.KIND_UNBOUND_TYPE_REFERENCE) {
+								doAddHint(typeParameter, reference);
+							} else {
+								UnboundTypeReference casted = (UnboundTypeReference)reference;
+								List<LightweightBoundTypeArgument> hints = casted.getAllHints();
+								for(LightweightBoundTypeArgument hint: hints) {
+									// avoid bogus transitive hints, e.g. if a reference was used with another variance
+									// INFERRED_LATER serves as an indicator for these hints
+									if (hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
+										return;
+									}
+								}
+								doAddHint(typeParameter, reference);
+							}
+						}
 					}
+				}
+
+				protected void doAddHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+					typeParameter.acceptHint(
+							reference.getWrapperTypeIfPrimitive(),
+							BoundTypeArgumentSource.INFERRED,
+							getOrigin(),
+							getExpectedVariance(),
+							getActualVariance());
 				}
 			};
 			collector.processPairedReferences(substitutedFeatureType, expectedType);
