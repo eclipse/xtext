@@ -21,6 +21,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags;
@@ -202,5 +203,11 @@ public class RootResolvedTypes extends ResolvedTypes {
 			acceptor.accept(diagnostic);
 		}
 	}
-	
+
+	protected void processDeferredLogic() {
+		for(IAcceptor<? super IResolvedTypes> runnable: getDeferredLogic()) {
+			runnable.accept(this);
+		}
+		clearDeferredLogic();
+	}
 }

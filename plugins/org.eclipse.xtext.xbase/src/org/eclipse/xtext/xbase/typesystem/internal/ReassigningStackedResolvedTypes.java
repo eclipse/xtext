@@ -12,7 +12,9 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -72,6 +74,11 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	@Override
 	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		getParent().addDiagnostic(diagnostic);
+	}
+	
+	@Override
+	protected void addDeferredLogic(IAcceptor<? super IResolvedTypes> code) {
+		getParent().addDeferredLogic(code);
 	}
 	
 	@Override

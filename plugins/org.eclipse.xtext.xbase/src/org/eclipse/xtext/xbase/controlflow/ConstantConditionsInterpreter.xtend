@@ -44,6 +44,8 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard
+import org.eclipse.xtext.resource.persistence.StorageAwareResource
+import org.eclipse.xtext.xbase.validation.ConstantExpressionValidator
 
 /**
  * Interpreter for expressions at development time that uses the static linking
@@ -54,7 +56,7 @@ import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard
 @Accessors(PROTECTED_GETTER)
 class ConstantConditionsInterpreter {
 	
-	@Inject extension ILogicalContainerProvider
+	@Inject ILogicalContainerProvider logicalContainerProvider
 
 	@Inject extension NumberLiterals numberLiterals
 	
@@ -65,9 +67,9 @@ class ConstantConditionsInterpreter {
 
 	def BooleanResult getBooleanConstantOrNull(XExpression it) {
 		try {
-			val evaluationResult = evaluate(newEvaluationContext())
-			if (evaluationResult.value instanceof Boolean) {
-				return new BooleanResult(evaluationResult.value as Boolean, evaluationResult.compileTimeConstant)
+			val evaluationResult = doEvaluate(newEvaluationContext())
+			if (evaluationResult.rawValue instanceof Boolean) {
+				return new BooleanResult(evaluationResult.rawValue as Boolean, evaluationResult.compileTimeConstant)
 			}
 			return null
 		} catch (ConstantExpressionEvaluationException e) {
@@ -77,11 +79,11 @@ class ConstantConditionsInterpreter {
 		}
 	}
 	
-	protected def newEvaluationContext() {
+	def EvaluationContext newEvaluationContext() {
 		evaluationContextProvider.get
 	}
 	
-	def EvaluationResult evaluate(XExpression expression, EvaluationContext context) {
+	protected def EvaluationResult doEvaluate(XExpression expression, EvaluationContext context) {
 		if (context.tryNext(expression)) {
 			try {
 				return internalEvaluate(expression, context)
@@ -91,6 +93,10 @@ class ConstantConditionsInterpreter {
 		} else {
 			return EvaluationResult.NOT_A_CONSTANT
 		}
+	}
+	
+	def IConstantEvaluationResult<Object> evaluate(XExpression expression, EvaluationContext context) {
+		return expression.doEvaluate(context)
 	}
 	
 	def dispatch EvaluationResult internalEvaluate(XExpression expression, EvaluationContext context) {
@@ -126,18 +132,18 @@ class ConstantConditionsInterpreter {
 					}
 				} else if (feature.final) {
 					if (actualReceiver != null) {
-						val receiver = evaluate(actualReceiver, context)
+						val receiver = doEvaluate(actualReceiver, context)
 						if (receiver.notAConstant) {
 							return receiver
 						}
 						val associatedExpression = feature.associatedExpression
 						if (associatedExpression != null) {
 							val result = associatedExpression.evaluateAssociatedExpression(context)
-							if (result.value instanceof ThisReference)
+							if (result.rawValue instanceof ThisReference)
 								return EvaluationResult.NOT_A_CONSTANT
-							return new EvaluationResult(result.value, false)
+							return new EvaluationResult(result.rawValue, false)
 						} else {
-							val list = switch v: receiver.value {
+							val list = switch v: receiver.rawValue {
 								JvmIdentifiableElement,
 								ThisReference: <Object>newArrayList(v)
 								List<Object>: new ArrayList(v)
@@ -149,7 +155,7 @@ class ConstantConditionsInterpreter {
 						val associatedExpression = feature.associatedExpression
 						if (associatedExpression != null) {
 							val result = associatedExpression.evaluateAssociatedExpression(context)
-							return new EvaluationResult(result.value, false)
+							return new EvaluationResult(result.rawValue, false)
 						} else {
 							return new EvaluationResult(newArrayList(feature), false)
 						}
@@ -162,7 +168,7 @@ class ConstantConditionsInterpreter {
 			JvmFormalParameter: {
 				switch container : feature.eContainer {
 					XSwitchExpression case container.^switch != null: {
-						return container.^switch.evaluate(context)
+						return container.^switch.doEvaluate(context)
 					}
 					default: return new EvaluationResult(feature, false)
 				}
@@ -171,13 +177,23 @@ class ConstantConditionsInterpreter {
 		return EvaluationResult.NOT_A_CONSTANT
 	}
 	
+	def XExpression getAssociatedExpression(JvmField field) {
+		val resource = field.eResource
+		if (resource instanceof StorageAwareResource) {
+			if (resource.isLoadedFromStorage) {
+				return null
+			}
+		}
+		return logicalContainerProvider.getAssociatedExpression(field)
+	}
+	
 	def EvaluationResult evaluateAssociatedExpression(XExpression it, EvaluationContext context) {
 		switch it {
 			XAbstractFeatureCall case feature instanceof JvmEnumerationLiteral: {
-				val arg = evaluate(context);
-				return new EvaluationResult(arg.value, false)
+				val arg = doEvaluate(context);
+				return new EvaluationResult(arg.rawValue, false)
 			}
-			default: evaluate(context)
+			default: doEvaluate(context)
 		}
 	}
 	
@@ -198,17 +214,17 @@ class ConstantConditionsInterpreter {
 	
 	def dispatch EvaluationResult internalEvaluate(XUnaryOperation it, EvaluationContext context) {
 		if (isFromXbaseLibrary) {
-			val arg = operand.evaluate(context)
+			val arg = operand.doEvaluate(context)
 			val op = concreteSyntaxFeatureName
 			switch op {
 				case '-': try {
-					val result = constantOperators.minus(arg.value)
+					val result = constantOperators.minus(arg.rawValue)
 					return new EvaluationResult(result, arg.compileTimeConstant)
 				} catch(ConstantExpressionEvaluationException e) {
 					return EvaluationResult.NOT_A_CONSTANT
 				}
-				case op=='!' && arg.value instanceof Boolean: new EvaluationResult(!(arg.value as Boolean), arg.compileTimeConstant)
-				case op=='+' && arg.value instanceof Number: arg
+				case op=='!' && arg.rawValue instanceof Boolean: new EvaluationResult(!(arg.rawValue as Boolean), arg.compileTimeConstant)
+				case op=='+' && arg.rawValue instanceof Number: arg
 				default: EvaluationResult.NOT_A_CONSTANT
 			}
 		} else {
@@ -217,26 +233,26 @@ class ConstantConditionsInterpreter {
 	}
 	
 	def dispatch EvaluationResult internalEvaluate(XBinaryOperation it, EvaluationContext context) {
-		if (isFromXbaseLibrary) {
-			val left = leftOperand.evaluate(context) 
-			val right = rightOperand.evaluate(context)
+		if (isFromXbaseLibrary && rightOperand != null) {
+			val left = leftOperand.doEvaluate(context) 
+			val right = rightOperand.doEvaluate(context)
 			try {
 				val op = concreteSyntaxFeatureName
 				val value = switch op {
-					case '+': constantOperators.plus(left.value, right.value)
-					case '-': constantOperators.minus(left.value, right.value)
-					case '*': constantOperators.multiply(left.value, right.value)
-					case '/': constantOperators.divide(left.value, right.value)
-					case '%': constantOperators.modulo(left.value, right.value)
-					case '<<': constantOperators.shiftLeft(left.value, right.value)
-					case '>>': constantOperators.shiftRight(left.value, right.value)
-					case '>>>': constantOperators.shiftRightUnsigned(left.value, right.value)
-					case '<': constantOperators.lessThan(left.value, right.value)
-					case '>': constantOperators.greaterThan(left.value, right.value)
-					case '<=': constantOperators.lessEquals(left.value, right.value)
-					case '>=': constantOperators.greaterEquals(left.value, right.value)
-					case '&&': return internalLogicalAnd(left.value, right.value, left.compileTimeConstant && right.compileTimeConstant)
-					case '||': return internalLogicalOr(left.value, right.value, left.compileTimeConstant && right.compileTimeConstant)
+					case '+': constantOperators.plus(left.rawValue, right.rawValue)
+					case '-': constantOperators.minus(left.rawValue, right.rawValue)
+					case '*': constantOperators.multiply(left.rawValue, right.rawValue)
+					case '/': constantOperators.divide(left.rawValue, right.rawValue)
+					case '%': constantOperators.modulo(left.rawValue, right.rawValue)
+					case '<<': constantOperators.shiftLeft(left.rawValue, right.rawValue)
+					case '>>': constantOperators.shiftRight(left.rawValue, right.rawValue)
+					case '>>>': constantOperators.shiftRightUnsigned(left.rawValue, right.rawValue)
+					case '<': constantOperators.lessThan(left.rawValue, right.rawValue)
+					case '>': constantOperators.greaterThan(left.rawValue, right.rawValue)
+					case '<=': constantOperators.lessEquals(left.rawValue, right.rawValue)
+					case '>=': constantOperators.greaterEquals(left.rawValue, right.rawValue)
+					case '&&': return internalLogicalAnd(left.rawValue, right.rawValue, left.compileTimeConstant && right.compileTimeConstant)
+					case '||': return internalLogicalOr(left.rawValue, right.rawValue, left.compileTimeConstant && right.compileTimeConstant)
 					case '==',
 					case '===': {
 						if (left.notAConstant || right.notAConstant) {
@@ -333,7 +349,7 @@ class ConstantConditionsInterpreter {
 	}
 	
 	def dispatch EvaluationResult internalEvaluate(XCastedExpression expression, EvaluationContext context) {
-		return evaluate(expression.target, context)
+		return doEvaluate(expression.target, context)
 	}
 
 	def dispatch EvaluationResult internalEvaluate(XStringLiteral it, EvaluationContext context) {
@@ -350,7 +366,9 @@ class ConstantConditionsInterpreter {
 
 }
 
-
+/**
+ * @author Sebastian Zarnekow - Initial API and implementation
+ */
 class EvaluationContext {
 	@Inject IBatchTypeResolver typeResolver
 	RecursionGuard<EObject> visiting = new RecursionGuard
@@ -362,6 +380,9 @@ class EvaluationContext {
 			return true
 		}
 		return false
+	}
+	def void addResolvedTypes(Resource resource, IResolvedTypes resolvedTypes) {
+		resolvedTypesPerResource.put(resource, resolvedTypes)
 	}
 	private def void resolveTypes(XExpression expression) {
 		val resource = expression.eResource
@@ -388,7 +409,7 @@ class ThisReference {
 }
 
 @Data
-package class EvaluationResult {
+package class EvaluationResult implements IConstantEvaluationResult<Object> {
 	
 	protected static final EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
 		override equalValue(EvaluationResult other) {
@@ -396,15 +417,19 @@ package class EvaluationResult {
 		}
 	}
 	
-	Object value
+	Object rawValue
 	boolean compileTimeConstant
 	
 	def boolean isNotAConstant() {
-		return value == NOT_A_CONSTANT.value
+		return rawValue == NOT_A_CONSTANT.rawValue
+	}
+	
+	override Optional<Object> getValue() {
+		return Optional.fromNullable(rawValue)
 	}
 	
 	def Object equalValue(EvaluationResult other) {
-		return equalValue(value, other.value)
+		return equalValue(rawValue, other.rawValue)
 	}
 	
 	private def dispatch Object equalValue(Object myValue, Object otherValue) {
@@ -414,25 +439,25 @@ package class EvaluationResult {
 		return false
 	}
 	private def dispatch Object equalValue(Object myValue, JvmIdentifiableElement otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(Object myValue, ThisReference otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(ThisReference myValue, Object otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(ThisReference myValue, ThisReference otherValue) {
 		return myValue == otherValue
 	}
 	private def dispatch Object equalValue(Void myValue, JvmIdentifiableElement otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(Object myValue, List<?> otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(Void myValue, List<?> otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(Void myValue, JvmType otherValue) {
 		return false
@@ -444,29 +469,29 @@ package class EvaluationResult {
 		return false
 	}
 	private def dispatch Object equalValue(JvmType myValue, JvmIdentifiableElement otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, Void otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmType otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, Object otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(List<?> myValue, Void otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(List<?> myValue, Object otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(List<?> myValue, List<?> otherValue) {
 		val equalLists = myValue == otherValue
 		if (equalLists) {
 			return Boolean.TRUE
 		}
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmIdentifiableElement otherValue) {
 		return myValue == otherValue
@@ -475,13 +500,13 @@ package class EvaluationResult {
 		if (myValue == otherValue) {
 			return Boolean.TRUE
 		}
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmEnumerationLiteral myValue, JvmIdentifiableElement otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmIdentifiableElement myValue, JvmEnumerationLiteral otherValue) {
-		return NOT_A_CONSTANT.value
+		return NOT_A_CONSTANT.rawValue
 	}
 	private def dispatch Object equalValue(JvmEnumerationLiteral myValue, JvmEnumerationLiteral otherValue) {
 		return myValue == otherValue
@@ -512,13 +537,29 @@ package class EvaluationResult {
 	}
 }
 
+/**
+ * Represents a result of the {@link ConstantExpressionValidator}.
+ * It carries the information if the result is a constant expression and 
+ * it may also have information about the computed value of an expression.
+ * The value may be null, which indicates that it could not be computed. Or it may be 
+ * {@link Optional#absent()} if it was computed to be the literal value {@code null}. 
+ */
+interface IConstantEvaluationResult<T> {
+	/**
+	 * Returns the optional computation result. If the result is null, no value could be
+	 * computed.
+	 */
+	def Optional<T> getValue()
+	def boolean isCompileTimeConstant()
+}
+
 @Data
-class BooleanResult {
-	@Accessors(NONE) // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=440625
+class BooleanResult implements IConstantEvaluationResult<Boolean> {
+	@Accessors(NONE)
 	Boolean value
 	boolean compileTimeConstant
 	
-	def Optional<Boolean> getValue() {
+	override Optional<Boolean> getValue() {
 		return Optional.fromNullable(value)
 	}
 }

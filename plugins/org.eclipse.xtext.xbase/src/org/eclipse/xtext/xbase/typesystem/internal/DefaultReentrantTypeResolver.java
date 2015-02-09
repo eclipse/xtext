@@ -166,6 +166,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		result.resolveUnboundTypeParameters();
 		result.resolveProxies();
 		result.addDiagnostics(root.eResource());
+		result.processDeferredLogic();
 		return result;
 	}
 
