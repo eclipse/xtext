@@ -41,7 +41,11 @@ import org.eclipse.xtext.nodemodel.serialization.SerializationConversionContext
 		} catch (IOException e) {
 			LOG.error(e.message, e)
 		} finally {
-			zipOut.close
+			try {
+				zipOut.close
+			} catch(IOException e) {
+				LOG.error(e.message, e)	
+			}
 		}
 	}
 	
