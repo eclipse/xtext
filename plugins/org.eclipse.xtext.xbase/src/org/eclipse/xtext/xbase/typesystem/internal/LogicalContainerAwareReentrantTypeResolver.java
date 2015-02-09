@@ -52,6 +52,9 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.controlflow.ConstantConditionsInterpreter;
+import org.eclipse.xtext.xbase.controlflow.EvaluationContext;
+import org.eclipse.xtext.xbase.controlflow.IConstantEvaluationResult;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -285,6 +288,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private ConstantConditionsInterpreter constantConditionsInterpreter;
 	
 	protected Set<EObject> rootedInstances;
 	
@@ -713,7 +719,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 
 	@SuppressWarnings("unused")
-	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
+	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, final JvmField field) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(field);
 		if (childResolvedTypes == null) {
 			if (preparedResolvedTypes.containsKey(field))
@@ -722,7 +728,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		} else {
 			preparedResolvedTypes.put(field, null);
 		}
-		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, field.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), field);
+		final FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, field.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), field);
 		markComputing(field.getType());
 		try {
 			state.computeTypes();
@@ -731,6 +737,24 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, field);
 		computeLocalTypes(preparedResolvedTypes, childResolvedTypes, featureScopeSession, field);
+		if (field.isStatic() && field.isFinal()) {
+			final XExpression expression = state.getRootExpression();
+			childResolvedTypes.addDeferredLogic(new IAcceptor<IResolvedTypes>() {
+
+				@Override
+				public void accept(IResolvedTypes resolvedTypes) {
+					EvaluationContext context = constantConditionsInterpreter.newEvaluationContext();
+					context.addResolvedTypes(field.eResource(), resolvedTypes);
+					IConstantEvaluationResult<Object> result = expression != null ? constantConditionsInterpreter.evaluate(expression, context) : null;
+					if (result != null && result.isCompileTimeConstant()) {
+						field.setConstantValue(result.getValue().orNull());
+						field.setConstant(true);
+					} else {
+						field.setConstant(false);
+					}
+				}
+			});
+		}
 		mergeChildTypes(childResolvedTypes);
 	}
 	

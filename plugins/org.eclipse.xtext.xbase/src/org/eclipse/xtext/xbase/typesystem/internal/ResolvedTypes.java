@@ -30,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
@@ -177,6 +178,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private final Owner owner;
 	
 	private Set<AbstractDiagnostic> diagnostics;
+	private Set<IAcceptor<? super IResolvedTypes>> deferredLogic;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> reassignedTypes;
 	private Map<XExpression, List<TypeData>> expressionTypes;
@@ -204,6 +206,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	protected void clear() {
 		diagnostics = null;
+		deferredLogic = null;
 		types = null;
 		reassignedTypes = null;
 		expressionTypes = null;
@@ -242,12 +245,31 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return diagnostics;
 	}
 	
+	public Collection<IAcceptor<? super IResolvedTypes>> getDeferredLogic() {
+		if (deferredLogic == null)
+			return Collections.emptyList();
+		return deferredLogic;
+	}
+	
+	protected void clearDeferredLogic() {
+		deferredLogic = null;
+	}
+	
 	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		if (diagnostics == null) {
 			diagnostics = Sets.newLinkedHashSet();
 		}
 		if (!diagnostics.add(diagnostic)) {
 			throw new IllegalStateException("Duplicate diagnostic: " + diagnostic);
+		}
+	}
+	
+	protected void addDeferredLogic(IAcceptor<? super IResolvedTypes> code) {
+		if (deferredLogic == null) {
+			deferredLogic = Sets.newLinkedHashSet();
+		}
+		if (!deferredLogic.add(code)) {
+			throw new IllegalStateException("Duplicate runnable: " + code);
 		}
 	}
 	
@@ -1076,6 +1098,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		appendListMapContent(typeParameterHints, "typeParameterHints", result, indentation);
 		appendContent(declaredTypeParameters, "declaredTypeParameters", result, indentation);
 		appendContent(diagnostics, "diagnostics", result, indentation);
+		appendContent(deferredLogic, "runnables", result, indentation);
 		appendContent(propagatedTypes, "propagatedTypes", result, indentation);
 	}
 

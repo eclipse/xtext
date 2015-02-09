@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.controlflow;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Optional;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -17,13 +18,14 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.controlflow.IConstantEvaluationResult;
 import org.eclipse.xtext.xbase.controlflow.ThisReference;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
-class EvaluationResult {
+class EvaluationResult implements IConstantEvaluationResult<Object> {
   protected final static EvaluationResult NOT_A_CONSTANT = new EvaluationResult(new Object(), false) {
     @Override
     public Object equalValue(final EvaluationResult other) {
@@ -31,16 +33,21 @@ class EvaluationResult {
     }
   };
   
-  private final Object value;
+  private final Object rawValue;
   
   private final boolean compileTimeConstant;
   
   public boolean isNotAConstant() {
-    return Objects.equal(this.value, EvaluationResult.NOT_A_CONSTANT.value);
+    return Objects.equal(this.rawValue, EvaluationResult.NOT_A_CONSTANT.rawValue);
+  }
+  
+  @Override
+  public Optional<Object> getValue() {
+    return Optional.<Object>fromNullable(this.rawValue);
   }
   
   public Object equalValue(final EvaluationResult other) {
-    return this.equalValue(this.value, other.value);
+    return this.equalValue(this.rawValue, other.rawValue);
   }
   
   private Object _equalValue(final Object myValue, final Object otherValue) {
@@ -52,15 +59,15 @@ class EvaluationResult {
   }
   
   private Object _equalValue(final Object myValue, final JvmIdentifiableElement otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final Object myValue, final ThisReference otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final ThisReference myValue, final Object otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final ThisReference myValue, final ThisReference otherValue) {
@@ -68,15 +75,15 @@ class EvaluationResult {
   }
   
   private Object _equalValue(final Void myValue, final JvmIdentifiableElement otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final Object myValue, final List<?> otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final Void myValue, final List<?> otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final Void myValue, final JvmType otherValue) {
@@ -92,27 +99,27 @@ class EvaluationResult {
   }
   
   private Object _equalValue(final JvmType myValue, final JvmIdentifiableElement otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final Void otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmType otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final Object otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final List<?> myValue, final Void otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final List<?> myValue, final Object otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final List<?> myValue, final List<?> otherValue) {
@@ -120,7 +127,7 @@ class EvaluationResult {
     if (equalLists) {
       return Boolean.TRUE;
     }
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmIdentifiableElement otherValue) {
@@ -132,15 +139,15 @@ class EvaluationResult {
     if (_equals) {
       return Boolean.TRUE;
     }
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmIdentifiableElement otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmIdentifiableElement myValue, final JvmEnumerationLiteral otherValue) {
-    return EvaluationResult.NOT_A_CONSTANT.value;
+    return EvaluationResult.NOT_A_CONSTANT.rawValue;
   }
   
   private Object _equalValue(final JvmEnumerationLiteral myValue, final JvmEnumerationLiteral otherValue) {
@@ -314,9 +321,9 @@ class EvaluationResult {
     }
   }
   
-  public EvaluationResult(final Object value, final boolean compileTimeConstant) {
+  public EvaluationResult(final Object rawValue, final boolean compileTimeConstant) {
     super();
-    this.value = value;
+    this.rawValue = rawValue;
     this.compileTimeConstant = compileTimeConstant;
   }
   
@@ -325,7 +332,7 @@ class EvaluationResult {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this.value== null) ? 0 : this.value.hashCode());
+    result = prime * result + ((this.rawValue== null) ? 0 : this.rawValue.hashCode());
     result = prime * result + (this.compileTimeConstant ? 1231 : 1237);
     return result;
   }
@@ -340,10 +347,10 @@ class EvaluationResult {
     if (getClass() != obj.getClass())
       return false;
     EvaluationResult other = (EvaluationResult) obj;
-    if (this.value == null) {
-      if (other.value != null)
+    if (this.rawValue == null) {
+      if (other.rawValue != null)
         return false;
-    } else if (!this.value.equals(other.value))
+    } else if (!this.rawValue.equals(other.rawValue))
       return false;
     if (other.compileTimeConstant != this.compileTimeConstant)
       return false;
@@ -354,14 +361,14 @@ class EvaluationResult {
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
-    b.add("value", this.value);
+    b.add("rawValue", this.rawValue);
     b.add("compileTimeConstant", this.compileTimeConstant);
     return b.toString();
   }
   
   @Pure
-  public Object getValue() {
-    return this.value;
+  public Object getRawValue() {
+    return this.rawValue;
   }
   
   @Pure

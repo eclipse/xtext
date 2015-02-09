@@ -20,8 +20,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.util.InMemoryURIConverter;
@@ -199,6 +201,60 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       }
       boolean _hasNext = originalNodes.hasNext();
       Assert.assertFalse(_hasNext);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testConstantValueIsPersisted() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static val CONSTANT = \'a\' + \'b\' + 0");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final String contents = _builder.toString();
+      final XtendFile file = this.file(contents);
+      final ByteArrayOutputStream bout = new ByteArrayOutputStream();
+      ((ResourceStorageFacade) this.resourceStorageFacade).setStoreNodeModel(true);
+      ResourceStorageWritable _createResourceStorageWritable = this.resourceStorageFacade.createResourceStorageWritable(bout);
+      Resource _eResource = file.eResource();
+      _createResourceStorageWritable.writeResource(((StorageAwareResource) _eResource));
+      byte[] _byteArray = bout.toByteArray();
+      ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
+      final ResourceStorageLoadable in = this.resourceStorageFacade.createResourceStorageLoadable(_byteArrayInputStream);
+      Resource _eResource_1 = file.eResource();
+      ResourceSet _resourceSet = _eResource_1.getResourceSet();
+      URI _createURI = URI.createURI("synthetic:/test/MyClass.xtend");
+      Resource _createResource = _resourceSet.createResource(_createURI);
+      final StorageAwareResource resource = ((StorageAwareResource) _createResource);
+      final InMemoryURIConverter converter = new InMemoryURIConverter();
+      URI _uRI = resource.getURI();
+      String _string = _uRI.toString();
+      converter.addModel(_string, contents);
+      ResourceSet _resourceSet_1 = resource.getResourceSet();
+      _resourceSet_1.setURIConverter(converter);
+      Resource _eResource_2 = file.eResource();
+      ResourceSet _resourceSet_2 = _eResource_2.getResourceSet();
+      EList<Resource> _resources = _resourceSet_2.getResources();
+      _resources.add(resource);
+      resource.load(in);
+      EList<EObject> _contents = resource.getContents();
+      EObject _get = _contents.get(1);
+      final JvmGenericType jvmClass = ((JvmGenericType) _get);
+      EList<JvmMember> _members = jvmClass.getMembers();
+      JvmMember _last = IterableExtensions.<JvmMember>last(_members);
+      final JvmField field = ((JvmField) _last);
+      boolean _isConstant = field.isConstant();
+      Assert.assertTrue(_isConstant);
+      boolean _isSetConstant = field.isSetConstant();
+      Assert.assertTrue(_isSetConstant);
+      Object _constantValue = field.getConstantValue();
+      Assert.assertEquals("ab0", _constantValue);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

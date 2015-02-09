@@ -18,6 +18,9 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.util.RecursionGuard;
 
+/**
+ * @author Sebastian Zarnekow - Initial API and implementation
+ */
 @SuppressWarnings("all")
 public class EvaluationContext {
   @Inject
@@ -36,6 +39,10 @@ public class EvaluationContext {
       return true;
     }
     return false;
+  }
+  
+  public void addResolvedTypes(final Resource resource, final IResolvedTypes resolvedTypes) {
+    this.resolvedTypesPerResource.put(resource, resolvedTypes);
   }
   
   private void resolveTypes(final XExpression expression) {

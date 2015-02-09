@@ -20,6 +20,7 @@ import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.junit.Test
+import org.eclipse.xtext.common.types.JvmField
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -93,5 +94,36 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		}
 		
 		assertFalse(originalNodes.hasNext)
+	}
+	
+	@Test def void testConstantValueIsPersisted() {
+		val contents = '''
+			class C {
+				static val CONSTANT = 'a' + 'b' + 0
+			}
+		'''
+		val file = file(contents)
+		
+		val bout = new ByteArrayOutputStream;
+		(resourceStorageFacade as ResourceStorageFacade).storeNodeModel = true
+		resourceStorageFacade.createResourceStorageWritable(bout).writeResource(file.eResource as StorageAwareResource)
+		
+		val in = resourceStorageFacade.createResourceStorageLoadable(new ByteArrayInputStream(bout.toByteArray))
+		
+		val resource = file.eResource.resourceSet.createResource(URI.createURI("synthetic:/test/MyClass.xtend")) as StorageAwareResource
+		// set a synthetic converter so we can obtain the text by the URI
+		val converter = new InMemoryURIConverter()
+		converter.addModel(resource.URI.toString, contents)
+		resource.resourceSet.URIConverter = converter
+		
+		file.eResource.resourceSet.resources += resource;
+		resource.load(in)
+		
+		// check constant value was written
+		val jvmClass = resource.contents.get(1) as JvmGenericType
+		val field = jvmClass.members.last as JvmField
+		assertTrue(field.constant)
+		assertTrue(field.isSetConstant)
+		assertEquals('ab0', field.constantValue)
 	}
 }

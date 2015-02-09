@@ -311,7 +311,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		IType type = findPrimaryType(packageName, typeName);
 		if (type == null) {
 			// no luck, try again - this time look for secondary types
-			type = findSecondaryType(packageName, typeName);
+			type = findSecondaryType(Strings.emptyIfNull(packageName), typeName);
 		}
 		if (type != null && !canLink(type)) {
 			return null;

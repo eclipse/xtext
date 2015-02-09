@@ -11,17 +11,19 @@ import com.google.common.base.Optional;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.xbase.controlflow.IConstantEvaluationResult;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
-public class BooleanResult {
+public class BooleanResult implements IConstantEvaluationResult<Boolean> {
   @Accessors(AccessorType.NONE)
   private final Boolean value;
   
   private final boolean compileTimeConstant;
   
+  @Override
   public Optional<Boolean> getValue() {
     return Optional.<Boolean>fromNullable(this.value);
   }

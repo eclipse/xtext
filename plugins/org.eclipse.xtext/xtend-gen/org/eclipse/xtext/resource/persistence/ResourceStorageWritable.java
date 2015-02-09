@@ -45,29 +45,35 @@ public class ResourceStorageWritable {
   private final boolean storeNodeModel;
   
   public void writeResource(final StorageAwareResource resource) {
+    boolean _isLoadedFromStorage = resource.isLoadedFromStorage();
+    if (_isLoadedFromStorage) {
+      URI _uRI = resource.getURI();
+      String _plus = ("cannot write resources loaded from storage. URI was " + _uRI);
+      throw new IllegalStateException(_plus);
+    }
+    final ZipOutputStream zipOut = new ZipOutputStream(this.out);
     try {
-      boolean _isLoadedFromStorage = resource.isLoadedFromStorage();
-      if (_isLoadedFromStorage) {
-        URI _uRI = resource.getURI();
-        String _plus = ("cannot write resources loaded from storage. URI was " + _uRI);
-        throw new IllegalStateException(_plus);
+      this.writeEntries(resource, zipOut);
+    } catch (final Throwable _t) {
+      if (_t instanceof IOException) {
+        final IOException e = (IOException)_t;
+        String _message = e.getMessage();
+        ResourceStorageWritable.LOG.error(_message, e);
+      } else {
+        throw Exceptions.sneakyThrow(_t);
       }
-      final ZipOutputStream zipOut = new ZipOutputStream(this.out);
+    } finally {
       try {
-        this.writeEntries(resource, zipOut);
-      } catch (final Throwable _t) {
-        if (_t instanceof IOException) {
-          final IOException e = (IOException)_t;
-          String _message = e.getMessage();
-          ResourceStorageWritable.LOG.error(_message, e);
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      } finally {
         zipOut.close();
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof IOException) {
+          final IOException e_1 = (IOException)_t_1;
+          String _message_1 = e_1.getMessage();
+          ResourceStorageWritable.LOG.error(_message_1, e_1);
+        } else {
+          throw Exceptions.sneakyThrow(_t_1);
+        }
       }
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
     }
   }
   

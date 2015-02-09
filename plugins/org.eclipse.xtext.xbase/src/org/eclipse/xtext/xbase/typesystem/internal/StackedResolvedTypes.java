@@ -16,9 +16,11 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IApplicableCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -79,6 +81,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		mergeTypesIntoParent(parent);
 		mergeLinkingCandidatesIntoParent(parent);
 		mergeQueuedDiagnostics(parent);
+		mergeDeferredRunnables(parent);
 		mergePropagatedTypes(parent);
 		mergeRefinedTypes(parent);
 	}
@@ -115,6 +118,13 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		Collection<AbstractDiagnostic> diagnostics = super.getQueuedDiagnostics();
 		for(AbstractDiagnostic diagnostic: diagnostics) {
 			parent.addDiagnostic(diagnostic);
+		}
+	}
+	
+	protected void mergeDeferredRunnables(ResolvedTypes parent) {
+		Collection<IAcceptor<? super IResolvedTypes>> runnables = super.getDeferredLogic();
+		for(IAcceptor<? super IResolvedTypes> runnable: runnables) {
+			parent.addDeferredLogic(runnable);
 		}
 	}
 
@@ -342,6 +352,13 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	public List<AbstractDiagnostic> getQueuedDiagnostics() {
 		List<AbstractDiagnostic> result = Lists.newArrayList(super.getQueuedDiagnostics());
 		result.addAll(parent.getQueuedDiagnostics());
+		return result;
+	}
+	
+	@Override
+	public Collection<IAcceptor<? super IResolvedTypes>> getDeferredLogic() {
+		List<IAcceptor<? super IResolvedTypes>> result = Lists.newArrayList(super.getDeferredLogic());
+		result.addAll(parent.getDeferredLogic());
 		return result;
 	}
 	
