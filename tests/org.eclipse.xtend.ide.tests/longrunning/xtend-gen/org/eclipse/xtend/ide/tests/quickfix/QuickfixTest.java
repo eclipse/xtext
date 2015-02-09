@@ -1,13 +1,17 @@
 package org.eclipse.xtend.ide.tests.quickfix;
 
 import com.google.inject.Inject;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.quickfix.QuickfixTestBuilder;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
@@ -20,6 +24,14 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Extension
   private QuickfixTestBuilder builder;
   
+  @Inject
+  @Extension
+  private WorkbenchTestHelper _workbenchTestHelper;
+
+  @Inject
+  @Extension
+  private SyncUtil _syncUtil;
+
   private final static String defaultBody = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
   
   @After
@@ -28,6 +40,54 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     this.builder.tearDown();
   }
   
+  @Test
+  public void testBug456803() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package bar");
+      _builder.newLine();
+      _builder.append("class Outer {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static class Inner{}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      this._workbenchTestHelper.createFile("bar/Foo.xtend", _builder.toString());
+      NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+      this._syncUtil.waitForBuild(_nullProgressMonitor);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package bar");
+      _builder_1.newLine();
+      _builder_1.append("class X {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("var Inner| inner");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      QuickfixTestBuilder _create = this.builder.create("bar/Bar.xtend", _builder_1);
+      QuickfixTestBuilder _assertResolutionLabelsSubset = _create.assertResolutionLabelsSubset("Import \'Inner\' (bar.Outer)");
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("package bar");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("import bar.Outer.Inner");
+      _builder_2.newLine();
+      _builder_2.newLine();
+      _builder_2.append("class X {");
+      _builder_2.newLine();
+      _builder_2.append("  ");
+      _builder_2.append("var Inner inner");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      _assertResolutionLabelsSubset.assertModelAfterQuickfix("Import \'Inner\' (bar.Outer)", _builder_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   @Test
   public void obsoletCast() {
     this.builder.setSeverity(IssueCodes.OBSOLETE_CAST, "warning");

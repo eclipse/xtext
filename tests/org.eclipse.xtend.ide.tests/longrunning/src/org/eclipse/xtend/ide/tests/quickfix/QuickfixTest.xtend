@@ -10,16 +10,51 @@ import org.junit.Test
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import org.eclipse.xtext.xbase.compiler.JavaVersion
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
+import org.eclipse.core.runtime.NullProgressMonitor
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Inject extension QuickfixTestBuilder builder
 	
+	@Inject extension WorkbenchTestHelper
+
+	@Inject extension SyncUtil
+
 	static val defaultBody = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
 	
 	@After
 	override tearDown() {
 		builder.tearDown
+	}
+
+	@Test
+	def void testBug456803(){
+		createFile("bar/Foo.xtend",'''
+			package bar
+			class Outer {
+				static class Inner{}
+			}
+		''')
+		waitForBuild(new NullProgressMonitor)
+		create("bar/Bar.xtend",'''
+			package bar
+			class X {
+			  var Inner| inner
+			}
+		''').assertResolutionLabelsSubset("Import 'Inner' (bar.Outer)")
+			.assertModelAfterQuickfix("Import 'Inner' (bar.Outer)",'''
+			package bar
+
+			import bar.Outer.Inner
+
+			class X {
+			  var Inner inner
+			}
+			''')
+
+
 	}
 
 	@Test
