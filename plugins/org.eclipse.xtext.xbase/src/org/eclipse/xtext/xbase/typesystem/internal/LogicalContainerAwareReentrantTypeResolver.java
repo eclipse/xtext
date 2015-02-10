@@ -336,6 +336,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	@Override
 	protected boolean isHandled(XExpression expression) {
+		// short cut - shaves off around 20% of all calls
+		if (rootedInstances.contains(expression)) {
+			return true;
+		}
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expression);
 		if (logicalContainer == null)
 			return false;
