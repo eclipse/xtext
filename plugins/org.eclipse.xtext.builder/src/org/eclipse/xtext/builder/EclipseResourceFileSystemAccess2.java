@@ -625,7 +625,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	public InputStream readBinaryFile(String fileName, String outputCfgName, IProgressMonitor progressMonitor) throws RuntimeIOException {
 		try {
 			IFile file = getFile(fileName, outputCfgName, progressMonitor);
-			return file.getContents();
+			return new BufferedInputStream(file.getContents());
 		} catch (CoreException e) {
 			throw new RuntimeIOException(e);
 		}
@@ -653,7 +653,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		try {
 			IFile file = getFile(fileName, outputCfgName, progressMonitor);
 			String encoding = getEncoding(file);
-			InputStream inputStream = file.getContents();
+			InputStream inputStream = new BufferedInputStream(file.getContents());
 			try {
 				byte[] bytes = ByteStreams.toByteArray(inputStream);
 				return new String(bytes, encoding);
